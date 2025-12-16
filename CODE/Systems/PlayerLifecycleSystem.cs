@@ -1,292 +1,378 @@
 using System;
-using System.Collections.Concurrent;
+using System.Collections.Generic;
+using Caelmor.Runtime.Onboarding;
+using Caelmor.Runtime.Players;
+using Caelmor.Runtime.ZoneResidency;
+using Caelmor.Systems;
 
 namespace Caelmor.Runtime.PlayerLifecycle
 {
     /// <summary>
-    /// Server-side player lifecycle runtime.
-    /// Governs post-onboarding activation/deactivation and safe disconnect handling.
-    /// Runtime infrastructure only: no saves, no gameplay logic, no zone transfers.
+    /// Server-authoritative player lifecycle runtime (Stage 23.4.B).
+    /// Explicit state machine that gates simulation eligibility by lifecycle state
+    /// and enforces ordering with sessions, zone residency, and mid-tick mutation rules.
     /// </summary>
     public sealed class PlayerLifecycleSystem : IPlayerLifecycleSystem
     {
-        private readonly IPlayerIdentitySystem _identity;
-        private readonly IZoneManager _zones;
-        private readonly ITickEligibilityRegistry _tick;
+        private readonly IServerAuthority _authority;
+        private readonly IPlayerZoneResidencyQuery _residency;
+        private readonly IPlayerSimulationEligibility _simulation;
+        private readonly ILifecycleMutationGate _mutationGate;
         private readonly IPlayerLifecycleEvents _events;
 
-        // Keyed by runtime player handle.
-        private readonly ConcurrentDictionary<PlayerHandle, PlayerLifecycleState> _stateByPlayer = new();
-
-        // Keyed by server session id to runtime player handle.
-        private readonly ConcurrentDictionary<SessionId, PlayerHandle> _playerBySession = new();
+        private readonly object _gate = new object();
+        private readonly Dictionary<PlayerHandle, LifecycleRecord> _records = new Dictionary<PlayerHandle, LifecycleRecord>();
+        private readonly Dictionary<SessionId, PlayerHandle> _playerBySession = new Dictionary<SessionId, PlayerHandle>();
 
         public PlayerLifecycleSystem(
-            IPlayerIdentitySystem identity,
-            IZoneManager zones,
-            ITickEligibilityRegistry tick,
+            IServerAuthority authority,
+            IPlayerZoneResidencyQuery residency,
+            IPlayerSimulationEligibility simulation,
+            ILifecycleMutationGate mutationGate,
             IPlayerLifecycleEvents events)
         {
-            _identity = identity ?? throw new ArgumentNullException(nameof(identity));
-            _zones = zones ?? throw new ArgumentNullException(nameof(zones));
-            _tick = tick ?? throw new ArgumentNullException(nameof(tick));
+            _authority = authority ?? throw new ArgumentNullException(nameof(authority));
+            _residency = residency ?? throw new ArgumentNullException(nameof(residency));
+            _simulation = simulation ?? throw new ArgumentNullException(nameof(simulation));
+            _mutationGate = mutationGate ?? throw new ArgumentNullException(nameof(mutationGate));
             _events = events ?? throw new ArgumentNullException(nameof(events));
         }
 
         /// <summary>
-        /// Registers a post-onboarding runtime player with a server session and identity.
-        /// Player is created inactive and not tick-eligible until ActivatePlayer is called.
+        /// Registers a session-bound runtime player for lifecycle tracking.
+        /// Does not create runtime instances or assign zones; idempotent for matching inputs.
         /// </summary>
-        public bool RegisterOnboardedPlayer(IServerSession session, PlayerId playerId, PlayerHandle player)
+        public RegisterLifecycleResult Register(SessionId sessionId, PlayerId playerId, PlayerHandle player)
         {
-            if (session is null) throw new ArgumentNullException(nameof(session));
+            if (!_authority.IsServerAuthoritative)
+                return RegisterLifecycleResult.Failed(RegisterLifecycleFailureReason.NotServerAuthority);
 
-            if (!session.IsServerAuthoritative)
-                return false;
+            if (!IsValid(sessionId))
+                return RegisterLifecycleResult.Failed(RegisterLifecycleFailureReason.InvalidSessionId);
 
-            if (!playerId.HasValue)
-                return false;
+            if (!playerId.IsValid)
+                return RegisterLifecycleResult.Failed(RegisterLifecycleFailureReason.InvalidPlayerId);
 
-            if (player.Value <= 0)
-                return false;
+            if (!player.IsValid)
+                return RegisterLifecycleResult.Failed(RegisterLifecycleFailureReason.InvalidPlayerHandle);
 
-            // Reject duplicate or malformed sessions.
-            if (_playerBySession.ContainsKey(session.Id))
-                return false;
-
-            // Identity must be known server-side.
-            if (!_identity.IsValidPlayerId(playerId))
-                return false;
-
-            var st = new PlayerLifecycleState
+            lock (_gate)
             {
-                SessionId = session.Id,
-                PlayerId = playerId,
-                Player = player,
-                IsActive = false,
-                IsTickEligible = false
-            };
-
-            if (!_stateByPlayer.TryAdd(player, st))
-                return false;
-
-            if (!_playerBySession.TryAdd(session.Id, player))
-            {
-                _stateByPlayer.TryRemove(player, out _);
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Activates a player (onboarded → active).
-        /// Grants tick eligibility. Idempotent.
-        /// Activation is rejected if identity is invalid or zone attachment is missing.
-        /// </summary>
-        public bool ActivatePlayer(PlayerHandle player)
-        {
-            if (player.Value <= 0)
-                return false;
-
-            if (!_stateByPlayer.TryGetValue(player, out var st))
-                return false;
-
-            // Already active: idempotent success.
-            if (st.IsActive)
-                return true;
-
-            // Identity must remain valid.
-            if (!_identity.IsValidPlayerId(st.PlayerId))
-                return false;
-
-            // Must be attached to a zone before activation.
-            if (!_zones.IsPlayerAttachedToAnyZone(player))
-                return false;
-
-            // Safe ordering: grant tick eligibility first, then mark active.
-            if (!_tick.TrySetTickEligible(player, isEligible: true))
-                return false;
-
-            st.IsTickEligible = true;
-            st.IsActive = true;
-            _stateByPlayer[player] = st;
-
-            _events.OnPlayerActivated(st.SessionId, st.PlayerId, player);
-            return true;
-        }
-
-        /// <summary>
-        /// Deactivates a player (active → inactive).
-        /// Revokes tick eligibility. Idempotent.
-        /// Does not save or destroy; preserves runtime state for explicit persistence elsewhere.
-        /// </summary>
-        public bool DeactivatePlayer(PlayerHandle player, DeactivationReason reason)
-        {
-            if (player.Value <= 0)
-                return false;
-
-            if (!_stateByPlayer.TryGetValue(player, out var st))
-                return false;
-
-            // Idempotent: if already inactive, ensure tick is not eligible and return success.
-            if (!st.IsActive)
-            {
-                if (st.IsTickEligible)
+                if (_playerBySession.TryGetValue(sessionId, out var existingPlayer))
                 {
-                    _tick.TrySetTickEligible(player, isEligible: false);
-                    st.IsTickEligible = false;
-                    _stateByPlayer[player] = st;
+                    if (_records.TryGetValue(existingPlayer, out var existing) &&
+                        existing.PlayerId.Equals(playerId) &&
+                        existing.Player.Equals(player))
+                    {
+                        return RegisterLifecycleResult.Success(existing.Player, false);
+                    }
+
+                    return RegisterLifecycleResult.Failed(RegisterLifecycleFailureReason.SessionAlreadyRegistered);
                 }
 
-                _events.OnPlayerDeactivated(st.SessionId, st.PlayerId, player, reason);
-                return true;
-            }
+                if (_records.TryGetValue(player, out var existingRecord))
+                {
+                    if (existingRecord.PlayerId.Equals(playerId) && existingRecord.SessionId.Equals(sessionId))
+                        return RegisterLifecycleResult.Success(existingRecord.Player, false);
 
-            // Safe ordering: revoke tick eligibility first, then mark inactive.
-            if (st.IsTickEligible)
+                    return RegisterLifecycleResult.Failed(RegisterLifecycleFailureReason.PlayerAlreadyRegistered);
+                }
+
+                var record = new LifecycleRecord(sessionId, playerId, player, PlayerLifecycleState.Inactive, isSimulationEligible: false);
+                _records.Add(player, record);
+                _playerBySession.Add(sessionId, player);
+
+                return RegisterLifecycleResult.Success(player, true);
+            }
+        }
+
+        /// <summary>
+        /// Activates an inactive or suspended player.
+        /// Requires residency and mutation gate clearance.
+        /// Grants simulation eligibility before marking the state active.
+        /// </summary>
+        public LifecycleTransitionResult Activate(PlayerHandle player)
+        {
+            return Transition(player, PlayerLifecycleState.Active);
+        }
+
+        /// <summary>
+        /// Suspends an active player. Revokes simulation eligibility before state change.
+        /// </summary>
+        public LifecycleTransitionResult Suspend(PlayerHandle player)
+        {
+            return Transition(player, PlayerLifecycleState.Suspended);
+        }
+
+        /// <summary>
+        /// Deactivates an active or suspended player. Revokes simulation eligibility before state change.
+        /// </summary>
+        public LifecycleTransitionResult Deactivate(PlayerHandle player, LifecycleTerminationReason reason)
+        {
+            return Transition(player, PlayerLifecycleState.Inactive, reason);
+        }
+
+        /// <summary>
+        /// Returns the lifecycle state for the player if registered.
+        /// </summary>
+        public bool TryGetState(PlayerHandle player, out PlayerLifecycleState state)
+        {
+            lock (_gate)
             {
-                _tick.TrySetTickEligible(player, isEligible: false);
-                st.IsTickEligible = false;
+                if (_records.TryGetValue(player, out var record))
+                {
+                    state = record.State;
+                    return true;
+                }
             }
 
-            st.IsActive = false;
-            _stateByPlayer[player] = st;
-
-            _events.OnPlayerDeactivated(st.SessionId, st.PlayerId, player, reason);
-            return true;
+            state = default;
+            return false;
         }
 
         /// <summary>
-        /// Handles session loss/disconnect. Must be safe to call multiple times.
-        /// Ensures no lingering tick participation and no partial lifecycle state.
+        /// Returns true if the player currently has simulation eligibility granted by this lifecycle system.
         /// </summary>
-        public void HandleDisconnect(IServerSession session)
+        public bool IsSimulationEligible(PlayerHandle player)
         {
-            if (session is null) throw new ArgumentNullException(nameof(session));
-
-            if (!_playerBySession.TryGetValue(session.Id, out var player))
+            lock (_gate)
             {
-                // No registered player for this session: idempotent no-op.
-                return;
+                if (_records.TryGetValue(player, out var record))
+                    return record.IsSimulationEligible;
             }
 
-            // Deactivate is idempotent; ensures tick is revoked.
-            DeactivatePlayer(player, DeactivationReason.Disconnect);
+            return false;
         }
 
-        /// <summary>
-        /// Unregisters a player mapping from session. Intended for higher-level teardown.
-        /// Does not destroy runtime entities; only removes lifecycle tracking.
-        /// Call DeactivatePlayer before calling this method.
-        /// </summary>
-        public bool UnregisterPlayer(IServerSession session)
+        private LifecycleTransitionResult Transition(PlayerHandle player, PlayerLifecycleState targetState, LifecycleTerminationReason terminationReason = LifecycleTerminationReason.None)
         {
-            if (session is null) throw new ArgumentNullException(nameof(session));
+            if (!_authority.IsServerAuthoritative)
+                return LifecycleTransitionResult.Failed(PlayerLifecycleFailureReason.NotServerAuthority);
 
-            if (!_playerBySession.TryRemove(session.Id, out var player))
-                return false;
+            if (!_mutationGate.CanMutateLifecycleNow())
+                return LifecycleTransitionResult.Failed(PlayerLifecycleFailureReason.MidTickMutationForbidden);
 
-            _stateByPlayer.TryRemove(player, out _);
-            return true;
+            if (!player.IsValid)
+                return LifecycleTransitionResult.Failed(PlayerLifecycleFailureReason.InvalidPlayerHandle);
+
+            lock (_gate)
+            {
+                if (!_records.TryGetValue(player, out var record))
+                    return LifecycleTransitionResult.Failed(PlayerLifecycleFailureReason.NotRegistered);
+
+                if (targetState == PlayerLifecycleState.Active && !_residency.IsResident(player))
+                    return LifecycleTransitionResult.Failed(PlayerLifecycleFailureReason.MissingZoneResidency);
+
+                if (record.State == targetState)
+                {
+                    // Idempotent: ensure simulation eligibility matches state invariants.
+                    if (targetState == PlayerLifecycleState.Active && !record.IsSimulationEligible)
+                    {
+                        if (!_simulation.TrySetSimulationEligible(player, isEligible: true))
+                            return LifecycleTransitionResult.Failed(PlayerLifecycleFailureReason.SimulationEligibilityMutationFailed);
+
+                        record = record.WithSimulationEligibility(true);
+                        _records[player] = record;
+                    }
+
+                    if (targetState != PlayerLifecycleState.Active && record.IsSimulationEligible)
+                    {
+                        if (!_simulation.TrySetSimulationEligible(player, isEligible: false))
+                            return LifecycleTransitionResult.Failed(PlayerLifecycleFailureReason.SimulationEligibilityMutationFailed);
+
+                        record = record.WithSimulationEligibility(false);
+                        _records[player] = record;
+                    }
+
+                    return LifecycleTransitionResult.Success(record.State, wasStateChanged: false);
+                }
+
+                if (!IsTransitionAllowed(record.State, targetState))
+                    return LifecycleTransitionResult.Failed(PlayerLifecycleFailureReason.InvalidTransition);
+
+                // Enforce ordering: adjust simulation eligibility before state changes.
+                if (targetState == PlayerLifecycleState.Active)
+                {
+                    if (!_simulation.TrySetSimulationEligible(player, isEligible: true))
+                        return LifecycleTransitionResult.Failed(PlayerLifecycleFailureReason.SimulationEligibilityMutationFailed);
+
+                    record = record.WithSimulationEligibility(true);
+                }
+                else if (record.IsSimulationEligible)
+                {
+                    if (!_simulation.TrySetSimulationEligible(player, isEligible: false))
+                        return LifecycleTransitionResult.Failed(PlayerLifecycleFailureReason.SimulationEligibilityMutationFailed);
+
+                    record = record.WithSimulationEligibility(false);
+                }
+
+                var previousState = record.State;
+                record = record.WithState(targetState);
+                _records[player] = record;
+
+                if (targetState == PlayerLifecycleState.Active)
+                {
+                    _events.OnPlayerActivated(record.SessionId, record.PlayerId, record.Player);
+                }
+                else if (targetState == PlayerLifecycleState.Suspended)
+                {
+                    _events.OnPlayerSuspended(record.SessionId, record.PlayerId, record.Player);
+                }
+                else
+                {
+                    _events.OnPlayerDeactivated(record.SessionId, record.PlayerId, record.Player, terminationReason);
+                }
+
+                return LifecycleTransitionResult.Success(record.State, wasStateChanged: !previousState.Equals(record.State));
+            }
         }
 
-        /// <summary>
-        /// Legacy hook used by other runtime systems to flip active state.
-        /// This method enforces lifecycle rules and tick eligibility transitions.
-        /// </summary>
-        bool IPlayerLifecycleSystem.SetActive(PlayerHandle player, bool isActive)
+        private static bool IsTransitionAllowed(PlayerLifecycleState current, PlayerLifecycleState target)
         {
-            return isActive
-                ? ActivatePlayer(player)
-                : DeactivatePlayer(player, DeactivationReason.Explicit);
+            if (current == PlayerLifecycleState.Inactive)
+                return target == PlayerLifecycleState.Active;
+
+            if (current == PlayerLifecycleState.Active)
+                return target == PlayerLifecycleState.Suspended || target == PlayerLifecycleState.Inactive;
+
+            if (current == PlayerLifecycleState.Suspended)
+                return target == PlayerLifecycleState.Active || target == PlayerLifecycleState.Inactive;
+
+            return false;
         }
 
-        private struct PlayerLifecycleState
+        private static bool IsValid(SessionId sessionId) => sessionId.Value != Guid.Empty;
+
+        private readonly struct LifecycleRecord
         {
-            public SessionId SessionId;
-            public PlayerId PlayerId;
-            public PlayerHandle Player;
-            public bool IsActive;
-            public bool IsTickEligible;
+            public LifecycleRecord(SessionId sessionId, PlayerId playerId, PlayerHandle player, PlayerLifecycleState state, bool isSimulationEligible)
+            {
+                SessionId = sessionId;
+                PlayerId = playerId;
+                Player = player;
+                State = state;
+                IsSimulationEligible = isSimulationEligible;
+            }
+
+            public SessionId SessionId { get; }
+            public PlayerId PlayerId { get; }
+            public PlayerHandle Player { get; }
+            public PlayerLifecycleState State { get; }
+            public bool IsSimulationEligible { get; }
+
+            public LifecycleRecord WithState(PlayerLifecycleState state) => new LifecycleRecord(SessionId, PlayerId, Player, state, IsSimulationEligible);
+
+            public LifecycleRecord WithSimulationEligibility(bool isEligible) => new LifecycleRecord(SessionId, PlayerId, Player, State, isEligible);
         }
     }
 
-    /// <summary>Minimal server session abstraction for lifecycle hooks.</summary>
-    public interface IServerSession
+    public interface IPlayerLifecycleSystem
     {
-        SessionId Id { get; }
-        bool IsServerAuthoritative { get; }
+        RegisterLifecycleResult Register(SessionId sessionId, PlayerId playerId, PlayerHandle player);
+        LifecycleTransitionResult Activate(PlayerHandle player);
+        LifecycleTransitionResult Suspend(PlayerHandle player);
+        LifecycleTransitionResult Deactivate(PlayerHandle player, LifecycleTerminationReason reason);
+        bool TryGetState(PlayerHandle player, out PlayerLifecycleState state);
+        bool IsSimulationEligible(PlayerHandle player);
     }
 
-    /// <summary>Identity validation (server-side only).</summary>
-    public interface IPlayerIdentitySystem
+    public interface IPlayerZoneResidencyQuery
     {
-        bool IsValidPlayerId(PlayerId playerId);
+        bool IsResident(PlayerHandle player);
     }
 
-    /// <summary>Zone residency checks only (no transfers).</summary>
-    public interface IZoneManager
+    public interface IPlayerSimulationEligibility
     {
-        bool IsPlayerAttachedToAnyZone(PlayerHandle player);
+        bool TrySetSimulationEligible(PlayerHandle player, bool isEligible);
     }
 
-    /// <summary>Controls whether an entity participates in server ticks (10 Hz).</summary>
-    public interface ITickEligibilityRegistry
+    public interface ILifecycleMutationGate
     {
-        bool TrySetTickEligible(PlayerHandle player, bool isEligible);
+        bool CanMutateLifecycleNow();
     }
 
-    /// <summary>Lifecycle event sink (server-side only).</summary>
     public interface IPlayerLifecycleEvents
     {
         void OnPlayerActivated(SessionId sessionId, PlayerId playerId, PlayerHandle player);
-        void OnPlayerDeactivated(SessionId sessionId, PlayerId playerId, PlayerHandle player, DeactivationReason reason);
+        void OnPlayerSuspended(SessionId sessionId, PlayerId playerId, PlayerHandle player);
+        void OnPlayerDeactivated(SessionId sessionId, PlayerId playerId, PlayerHandle player, LifecycleTerminationReason reason);
     }
 
-    /// <summary>Contract expected by other runtime systems.</summary>
-    public interface IPlayerLifecycleSystem
+    public readonly struct RegisterLifecycleResult
     {
-        bool SetActive(PlayerHandle player, bool isActive);
+        private RegisterLifecycleResult(bool ok, RegisterLifecycleFailureReason failureReason, PlayerHandle? player, bool wasCreated)
+        {
+            Ok = ok;
+            FailureReason = failureReason;
+            Player = player;
+            WasCreated = wasCreated;
+        }
+
+        public bool Ok { get; }
+        public RegisterLifecycleFailureReason FailureReason { get; }
+        public PlayerHandle? Player { get; }
+        public bool WasCreated { get; }
+
+        public static RegisterLifecycleResult Success(PlayerHandle player, bool wasCreated) => new RegisterLifecycleResult(true, RegisterLifecycleFailureReason.None, player, wasCreated);
+
+        public static RegisterLifecycleResult Failed(RegisterLifecycleFailureReason reason) => new RegisterLifecycleResult(false, reason, null, wasCreated: false);
     }
 
-    public enum DeactivationReason
+    public readonly struct LifecycleTransitionResult
     {
+        private LifecycleTransitionResult(bool ok, PlayerLifecycleFailureReason failureReason, PlayerLifecycleState? state, bool wasStateChanged)
+        {
+            Ok = ok;
+            FailureReason = failureReason;
+            State = state;
+            WasStateChanged = wasStateChanged;
+        }
+
+        public bool Ok { get; }
+        public PlayerLifecycleFailureReason FailureReason { get; }
+        public PlayerLifecycleState? State { get; }
+        public bool WasStateChanged { get; }
+
+        public static LifecycleTransitionResult Success(PlayerLifecycleState state, bool wasStateChanged) => new LifecycleTransitionResult(true, PlayerLifecycleFailureReason.None, state, wasStateChanged);
+
+        public static LifecycleTransitionResult Failed(PlayerLifecycleFailureReason reason) => new LifecycleTransitionResult(false, reason, null, wasStateChanged: false);
+    }
+
+    public enum PlayerLifecycleState
+    {
+        Inactive = 0,
+        Active = 1,
+        Suspended = 2
+    }
+
+    public enum PlayerLifecycleFailureReason
+    {
+        None = 0,
+        NotServerAuthority = 1,
+        MidTickMutationForbidden = 2,
+        InvalidPlayerHandle = 3,
+        NotRegistered = 4,
+        MissingZoneResidency = 5,
+        InvalidTransition = 6,
+        SimulationEligibilityMutationFailed = 7
+    }
+
+    public enum RegisterLifecycleFailureReason
+    {
+        None = 0,
+        NotServerAuthority = 1,
+        InvalidSessionId = 2,
+        InvalidPlayerId = 3,
+        InvalidPlayerHandle = 4,
+        SessionAlreadyRegistered = 5,
+        PlayerAlreadyRegistered = 6
+    }
+
+    public enum LifecycleTerminationReason
+    {
+        None = 0,
         Explicit = 1,
-        Disconnect = 2
-    }
-
-    /// <summary>Opaque server-issued session identifier.</summary>
-    public readonly struct SessionId : IEquatable<SessionId>
-    {
-        public readonly Guid Value;
-        public SessionId(Guid value) => Value = value;
-        public bool Equals(SessionId other) => Value.Equals(other.Value);
-        public override bool Equals(object obj) => obj is SessionId other && Equals(other);
-        public override int GetHashCode() => Value.GetHashCode();
-        public override string ToString() => Value.ToString();
-    }
-
-    /// <summary>Opaque server-issued player identifier.</summary>
-    public readonly struct PlayerId : IEquatable<PlayerId>
-    {
-        public readonly Guid Value;
-        public PlayerId(Guid value) => Value = value;
-        public bool HasValue => Value != Guid.Empty;
-        public bool Equals(PlayerId other) => Value.Equals(other.Value);
-        public override bool Equals(object obj) => obj is PlayerId other && Equals(other);
-        public override int GetHashCode() => Value.GetHashCode();
-        public override string ToString() => Value.ToString();
-    }
-
-    /// <summary>Opaque handle for the runtime player entity instance.</summary>
-    public readonly struct PlayerHandle : IEquatable<PlayerHandle>
-    {
-        public readonly int Value;
-        public PlayerHandle(int value) => Value = value;
-        public bool Equals(PlayerHandle other) => Value == other.Value;
-        public override bool Equals(object obj) => obj is PlayerHandle other && Equals(other);
-        public override int GetHashCode() => Value;
-        public override string ToString() => Value.ToString();
+        Disconnect = 2,
+        PersistenceWindow = 3
     }
 }
