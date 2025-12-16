@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Caelmor.Runtime.Onboarding;
+using Caelmor.Systems;
+using Caelmor.Validation;
 
 namespace Caelmor.Validation.Onboarding
 {
@@ -15,14 +17,14 @@ namespace Caelmor.Validation.Onboarding
         /// <summary>
         /// Returns the validation scenarios in deterministic order.
         /// </summary>
-        public static IReadOnlyList<IValidationScenario> GetScenarios()
+        public static IReadOnlyList<Caelmor.Systems.IValidationScenario> GetScenarios()
         {
-            return new IValidationScenario[]
+            return new Caelmor.Systems.IValidationScenario[]
             {
-                new Scenario1_SuccessfulOnboarding(),
-                new Scenario2_IdentityBindingFailure(),
-                new Scenario3_ZoneAttachmentFailure(),
-                new Scenario4_DuplicateInFlightOnboarding()
+                new ValidationScenarioAdapter(new Scenario1_SuccessfulOnboarding()),
+                new ValidationScenarioAdapter(new Scenario2_IdentityBindingFailure()),
+                new ValidationScenarioAdapter(new Scenario3_ZoneAttachmentFailure()),
+                new ValidationScenarioAdapter(new Scenario4_DuplicateInFlightOnboarding())
             };
         }
 
@@ -420,25 +422,5 @@ namespace Caelmor.Validation.Onboarding
                 _handoff.NotifyOnboardingFailure(session);
             }
         }
-    }
-
-    /// <summary>
-    /// Minimal validation scenario contract. Adapter-friendly for existing harnesses.
-    /// </summary>
-    public interface IValidationScenario
-    {
-        string Name { get; }
-        void Run(IAssert assert);
-    }
-
-    /// <summary>
-    /// Minimal assertion surface used by validation scenarios.
-    /// Existing harnesses can adapt by providing an implementation.
-    /// </summary>
-    public interface IAssert
-    {
-        void True(bool condition, string message);
-        void False(bool condition, string message);
-        void Equal<T>(T expected, T actual, string message) where T : IEquatable<T>;
     }
 }

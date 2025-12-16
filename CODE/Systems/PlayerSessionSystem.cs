@@ -335,11 +335,6 @@ namespace Caelmor.Runtime.Sessions
         ReplacedByReconnect = 2
     }
 
-    public interface IServerAuthority
-    {
-        bool IsServerAuthoritative { get; }
-    }
-
     public interface IPlayerSaveBindingQuery
     {
         bool TryGetSaveForPlayer(PlayerId playerId, out SaveId saveId);
