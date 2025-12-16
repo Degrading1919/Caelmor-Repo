@@ -32,6 +32,45 @@
 - **Server Logging & Diagnostics**: Minimal logging/error handling strategy for invariant violations (e.g., mid-tick eligibility changes) with metrics/hooks for operational visibility.
 - **Runtime Loop Entrypoint / Build Script**: A runnable host (console service) that wires authority implementations, validation harness toggles, and starts/stops the tick/simulation threads deterministically.
 
+## 3a) Thread-Boundary Mailbox Plans for Missing Systems
+
+### Networking Transport & Message Routing
+- **Threads**
+  - `NetworkTransportThread`: owns socket I/O, decode/encode, and no gameplay state access. All methods in this thread must only touch transport buffers.
+  - `TickThread`: authoritative simulation; only thread allowed to mutate world state or session routing tables.
+- **Inbound Path (client → server)**
+  - `NetworkTransportThread` decodes raw packets into immutable `DecodedClientMessage` records. No UnityEngine objects are created or mutated.
+  - Each decoded message is enqueued into a bounded `ConcurrentQueue<DecodedClientMessage>` named `InboundMailbox` (capacity tuned to avoid unbounded growth; drop/backpressure strategy to be configured). Enqueue performs no per-tick allocations by reusing pooled records where possible.
+  - The tick boundary drains `InboundMailbox` on `TickThread` into a `FrozenCommandBatch` that plugs into Authoritative Input Command Ingestion. Draining is done once per tick, copying payloads into pooled batch buffers before processing to avoid mid-tick mutations.
+- **Outbound Path (server → client)**
+  - Post-tick, `TickThread` builds replication snapshots and enqueues immutable `OutboundSnapshot` records into a bounded `ConcurrentQueue<OutboundSnapshot>` named `OutboundMailbox`. This queue is the only cross-thread handoff; gameplay state reads happen before enqueuing and are never mutated off-thread.
+  - `NetworkTransportThread` dequeues `OutboundSnapshot` entries and serializes/sends them over the transport. Transport code must not reference UnityEngine objects or simulation state beyond the snapshot payload.
+- **Routing**
+  - `TickThread` owns authoritative routing decisions (session-to-connection mapping). The network thread receives routing tokens within each record (e.g., `SessionId`, `ConnectionId`) and must not modify routing tables; it simply uses the tokens already embedded by the tick pipeline.
+
+### Connection/Session Handshake Pipeline
+- **Threads**
+  - `NetworkTransportThread`: accepts new connections and runs cryptographic/identity validation off the tick thread.
+  - `TickThread`: assigns authoritative `SessionId`, registers onboarding eligibility, and mutates world state.
+- **Handshake Steps**
+  - Transport decodes handshake requests into immutable `HandshakeRequest` records and enqueues them into a bounded `ConcurrentQueue<HandshakeRequest>` (`HandshakeMailbox`). No session/world mutation occurs here.
+  - At tick boundary, `TickThread` drains `HandshakeMailbox`, validates credentials against server authority, issues `SessionId`, and registers the player with onboarding and replication eligibility services. All mutations occur solely on `TickThread`.
+  - The resulting `HandshakeAccepted`/`HandshakeRejected` responses are enqueued by `TickThread` into `OutboundMailbox` (or a dedicated `HandshakeResponseMailbox`) for the transport thread to send. The network thread only serializes/sends; it never mutates session registries.
+- **Backpressure & Safety**
+  - Mailboxes are bounded; overflow triggers explicit logging/metrics and optional connection-level throttling on the network thread. No UnityEngine objects or world references are touched off-thread.
+
+### Persistence IO Hooks
+- **Threads**
+  - `PersistenceIOThread` (or thread pool): performs disk/database operations asynchronously. Must never reference UnityEngine objects or mutate gameplay state.
+  - `TickThread`: applies loaded/committed data to authoritative state during mutation windows.
+- **Load/Save Flow**
+  - `TickThread` requests persistence operations by enqueuing immutable `PersistenceJob` records into a bounded `ConcurrentQueue<PersistenceJob>` consumed by the persistence worker. Jobs reference serialized DTOs or snapshot payloads, not live world objects.
+  - Persistence worker executes I/O and posts `PersistenceResult` records into an `ApplyOnTickQueue` (`ConcurrentQueue<PersistenceResult>`). Completion callbacks do not touch gameplay state.
+  - At tick boundary (or designated post-tick phase), `TickThread` drains `ApplyOnTickQueue`, validates results, and applies state mutations within the authoritative mutation window. Any failures are handled on `TickThread` with diagnostics; off-thread code only logs transport/persistence errors.
+- **Memory & Allocation Discipline**
+  - Use pooled buffers for serialized payloads to avoid per-tick allocations. Queueing uses reused record instances where safe, with clear ownership to prevent cross-thread mutation after enqueue.
+  - All cross-thread DTOs are immutable once enqueued; any mutation requires a new record crafted on `TickThread`.
+
 ## 4) Risks & Next Steps
 - **Highest-Risk Integration Points**
   - Cross-system identifier drift (entity/session/player) could silently desync replication and combat/quest eligibility unless kept centralized.
