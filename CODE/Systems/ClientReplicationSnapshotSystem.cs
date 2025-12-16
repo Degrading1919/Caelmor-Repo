@@ -1,6 +1,7 @@
 using System;
+using System.Buffers;
+using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.Tick;
 using Caelmor.Runtime.WorldSimulation;
@@ -29,6 +30,17 @@ namespace Caelmor.Runtime.Replication
 
         private long? _tickInProgress;
         private bool _postTickPhaseActive;
+
+        private readonly List<ReplicatedEntitySnapshot> _captureBuffer = new List<ReplicatedEntitySnapshot>(64);
+        private readonly ArrayPool<ReplicatedEntitySnapshot> _snapshotPool = ArrayPool<ReplicatedEntitySnapshot>.Shared;
+
+#if DEBUG
+        private long _snapshotsCaptured;
+        private long _entitiesCaptured;
+        private long _arraysRented;
+        private long _arraysReturned;
+        private int _maxEntitiesInSnapshot;
+#endif
 
         public ClientReplicationSnapshotSystem(
             IActiveSessionIndex sessionIndex,
@@ -89,7 +101,8 @@ namespace Caelmor.Runtime.Replication
             if (!_postTickPhaseActive || !_tickInProgress.HasValue || _tickInProgress.Value != authoritativeTick)
                 throw new InvalidOperationException("Snapshots can only be captured during post-tick finalization.");
 
-            var entries = new List<ReplicatedEntitySnapshot>(eligibleEntities.Count);
+            _captureBuffer.Clear();
+
             for (int i = 0; i < eligibleEntities.Count; i++)
             {
                 var entity = eligibleEntities[i];
@@ -97,35 +110,171 @@ namespace Caelmor.Runtime.Replication
                     continue;
 
                 var state = _stateReader.ReadCommittedState(entity);
-                entries.Add(new ReplicatedEntitySnapshot(entity, state));
+                _captureBuffer.Add(new ReplicatedEntitySnapshot(entity, state));
             }
 
-            entries.Sort(static (a, b) => a.Entity.Value.CompareTo(b.Entity.Value));
+            var count = _captureBuffer.Count;
+            if (count == 0)
+            {
+                return new ClientReplicationSnapshot(sessionId, authoritativeTick, Array.Empty<ReplicatedEntitySnapshot>(), 0, _snapshotPool, OnSnapshotDisposed);
+            }
 
-            return new ClientReplicationSnapshot(sessionId, authoritativeTick, entries);
+            var buffer = _snapshotPool.Rent(count);
+
+            for (int i = 0; i < count; i++)
+                buffer[i] = _captureBuffer[i];
+
+            Array.Sort(buffer, 0, count, ReplicatedEntitySnapshotComparer.Instance);
+
+#if DEBUG
+            _snapshotsCaptured++;
+            _entitiesCaptured += count;
+            _arraysRented++;
+            if (count > _maxEntitiesInSnapshot)
+                _maxEntitiesInSnapshot = count;
+#endif
+
+            return new ClientReplicationSnapshot(sessionId, authoritativeTick, buffer, count, _snapshotPool, OnSnapshotDisposed);
+        }
+
+        private void OnSnapshotDisposed()
+        {
+#if DEBUG
+            _arraysReturned++;
+#endif
         }
     }
 
     /// <summary>
     /// Immutable client replication snapshot captured after tick finalization.
     /// </summary>
-    public sealed class ClientReplicationSnapshot
+    public sealed class ClientReplicationSnapshot : IDisposable
     {
+        private ReplicatedEntitySnapshot[] _buffer;
+        private readonly int _count;
+        private readonly ArrayPool<ReplicatedEntitySnapshot> _pool;
+        private readonly Action _onDispose;
+
         public SessionId SessionId { get; }
         public long AuthoritativeTick { get; }
-        public IReadOnlyList<ReplicatedEntitySnapshot> Entities { get; }
+        public int EntityCount => _count;
 
         public ClientReplicationSnapshot(
             SessionId sessionId,
             long authoritativeTick,
-            IReadOnlyList<ReplicatedEntitySnapshot> entities)
+            ReplicatedEntitySnapshot[] buffer,
+            int count,
+            ArrayPool<ReplicatedEntitySnapshot> pool,
+            Action onDispose)
         {
             SessionId = sessionId;
             AuthoritativeTick = authoritativeTick;
-            Entities = new ReadOnlyCollection<ReplicatedEntitySnapshot>(
-                (entities != null)
-                    ? new List<ReplicatedEntitySnapshot>(entities)
-                    : throw new ArgumentNullException(nameof(entities)));
+            _buffer = buffer ?? throw new ArgumentNullException(nameof(buffer));
+            _count = count;
+            _pool = pool ?? ArrayPool<ReplicatedEntitySnapshot>.Shared;
+            _onDispose = onDispose ?? (() => { });
+        }
+
+        public ReadOnlySpan<ReplicatedEntitySnapshot> EntitiesSpan => new ReadOnlySpan<ReplicatedEntitySnapshot>(_buffer, 0, _count);
+        public IReadOnlyList<ReplicatedEntitySnapshot> Entities => new SnapshotEntityList(_buffer, _count);
+
+        public ReplicatedEntitySnapshot this[int index]
+        {
+            get
+            {
+                if ((uint)index >= (uint)_count)
+                    throw new ArgumentOutOfRangeException(nameof(index));
+                return _buffer[index];
+            }
+        }
+
+        /// <summary>
+        /// Returns the rented buffer back to the pool. Ownership: the replication transport/queue must
+        /// call Dispose once delivery is completed to avoid leaks.
+        /// </summary>
+        public void Dispose()
+        {
+            var buffer = _buffer;
+            _buffer = Array.Empty<ReplicatedEntitySnapshot>();
+            if (buffer != null && buffer.Length > 0)
+            {
+                _pool.Return(buffer, clearArray: true);
+            }
+
+            _onDispose();
+        }
+
+        private readonly struct SnapshotEntityList : IReadOnlyList<ReplicatedEntitySnapshot>
+        {
+            private readonly ReplicatedEntitySnapshot[] _buffer;
+            private readonly int _count;
+
+            public SnapshotEntityList(ReplicatedEntitySnapshot[] buffer, int count)
+            {
+                _buffer = buffer ?? Array.Empty<ReplicatedEntitySnapshot>();
+                _count = count;
+            }
+
+            public int Count => _count;
+
+            public ReplicatedEntitySnapshot this[int index]
+            {
+                get
+                {
+                    if ((uint)index >= (uint)_count)
+                        throw new ArgumentOutOfRangeException(nameof(index));
+                    return _buffer[index];
+                }
+            }
+
+            public Enumerator GetEnumerator() => new Enumerator(_buffer, _count);
+
+            IEnumerator<ReplicatedEntitySnapshot> IEnumerable<ReplicatedEntitySnapshot>.GetEnumerator() => GetEnumerator();
+
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+            public struct Enumerator : IEnumerator<ReplicatedEntitySnapshot>
+            {
+                private readonly ReplicatedEntitySnapshot[] _array;
+                private readonly int _count;
+                private int _index;
+
+                public Enumerator(ReplicatedEntitySnapshot[] array, int count)
+                {
+                    _array = array;
+                    _count = count;
+                    _index = -1;
+                }
+
+                public ReplicatedEntitySnapshot Current => _array[_index];
+
+                object IEnumerator.Current => Current;
+
+                public bool MoveNext()
+                {
+                    var next = _index + 1;
+                    if (next >= _count)
+                        return false;
+                    _index = next;
+                    return true;
+                }
+
+                public void Reset() => _index = -1;
+
+                public void Dispose()
+                {
+                }
+            }
+        }
+    }
+
+    internal sealed class ReplicatedEntitySnapshotComparer : IComparer<ReplicatedEntitySnapshot>
+    {
+        public static readonly ReplicatedEntitySnapshotComparer Instance = new ReplicatedEntitySnapshotComparer();
+
+        public int Compare(ReplicatedEntitySnapshot x, ReplicatedEntitySnapshot y)
+        {
+            return x.Entity.Value.CompareTo(y.Entity.Value);
         }
     }
 
