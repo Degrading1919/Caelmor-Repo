@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
@@ -22,6 +23,17 @@ namespace Caelmor.Runtime.WorldSimulation
         private readonly List<ParticipantEntry> _participants = new List<ParticipantEntry>();
         private readonly List<PhaseHookEntry> _phaseHooks = new List<PhaseHookEntry>();
 
+        private ParticipantEntry[] _participantSnapshot = Array.Empty<ParticipantEntry>();
+        private PhaseHookEntry[] _phaseHooksSnapshot = Array.Empty<PhaseHookEntry>();
+        private ISimulationEligibilityGate[] _eligibilityGatesSnapshot = Array.Empty<ISimulationEligibilityGate>();
+
+        private readonly List<EntityHandle> _eligibleBuffer = new List<EntityHandle>(128);
+        private readonly Dictionary<EntityHandle, bool> _eligibilityMap = new Dictionary<EntityHandle, bool>(128);
+        private EntityHandle[] _eligibleArray = Array.Empty<EntityHandle>();
+        private readonly PooledArrayReadOnlyList<EntityHandle> _eligibleView = new PooledArrayReadOnlyList<EntityHandle>();
+
+        private readonly SimulationEffectBuffer _effectBuffer = new SimulationEffectBuffer();
+
         private readonly object _gate = new object();
 
         private long _participantSeq;
@@ -30,6 +42,12 @@ namespace Caelmor.Runtime.WorldSimulation
         private Thread? _thread;
         private CancellationTokenSource? _cts;
         private volatile bool _running;
+
+#if DEBUG
+        private int _maxEligibleEntities;
+        private int _maxParticipants;
+        private int _maxHooks;
+#endif
 
         public WorldSimulationCore(ISimulationEntityIndex entities)
         {
@@ -197,81 +215,111 @@ namespace Caelmor.Runtime.WorldSimulation
         private void ExecuteOneTick(TimeSpan fixedDelta)
         {
             ParticipantEntry[] participants;
+            int participantCount;
             PhaseHookEntry[] hooks;
+            int hookCount;
             ISimulationEligibilityGate[] gates;
+            int gateCount;
             EntityHandle[] entities;
 
             lock (_gate)
             {
-                participants = _participants.ToArray();
-                hooks = _phaseHooks.ToArray();
-                gates = _eligibilityGates.ToArray();
+                participantCount = _participants.Count;
+                EnsureCapacity(ref _participantSnapshot, participantCount);
+                _participants.CopyTo(_participantSnapshot, 0);
+                participants = _participantSnapshot;
+
+                hookCount = _phaseHooks.Count;
+                EnsureCapacity(ref _phaseHooksSnapshot, hookCount);
+                _phaseHooks.CopyTo(_phaseHooksSnapshot, 0);
+                hooks = _phaseHooksSnapshot;
+
+                gateCount = _eligibilityGates.Count;
+                EnsureCapacity(ref _eligibilityGatesSnapshot, gateCount);
+                _eligibilityGates.CopyTo(_eligibilityGatesSnapshot, 0);
+                gates = _eligibilityGatesSnapshot;
             }
+
+#if DEBUG
+            if (participantCount > _maxParticipants)
+                _maxParticipants = participantCount;
+            if (hookCount > _maxHooks)
+                _maxHooks = hookCount;
+#endif
 
             entities = _entities.SnapshotEntitiesDeterministic();
 
             var tickIndex = Interlocked.Increment(ref _tickIndex);
-            var effectBuffer = new SimulationEffectBuffer();
-            var tickContext = new SimulationTickContext(tickIndex, fixedDelta, effectBuffer);
+            var tickContext = new SimulationTickContext(tickIndex, fixedDelta, _effectBuffer);
 
-            var eligibilitySnapshot = EvaluateEligibility(entities, gates);
+            var eligibilitySnapshot = EvaluateEligibility(entities, gateCount);
 
             // Phase 1: Pre-Tick Gate Evaluation completed by EvaluateEligibility above.
-            for (int i = 0; i < hooks.Length; i++)
-                hooks[i].Hook.OnPreTick(tickContext, eligibilitySnapshot.EligibleEntities);
+            for (int i = 0; i < hookCount; i++)
+                hooks[i].Hook.OnPreTick(tickContext, eligibilitySnapshot.EligibleView);
 
             // Phase 2: Simulation Execution.
-            for (int p = 0; p < participants.Length; p++)
+            for (int p = 0; p < participantCount; p++)
             {
                 var participant = participants[p].Participant;
-                for (int e = 0; e < eligibilitySnapshot.EligibleEntities.Length; e++)
+                for (int e = 0; e < eligibilitySnapshot.EligibleCount; e++)
                 {
                     participant.Execute(eligibilitySnapshot.EligibleEntities[e], tickContext);
                 }
             }
 
             // Phase 3: Post-Tick Finalization.
-            EnsureEligibilityStable(entities, gates, eligibilitySnapshot);
-            effectBuffer.Commit();
+            EnsureEligibilityStable(entities, gates, gateCount, eligibilitySnapshot);
+            _effectBuffer.Commit();
 
-            for (int i = 0; i < hooks.Length; i++)
-                hooks[i].Hook.OnPostTick(tickContext, eligibilitySnapshot.EligibleEntities);
+            for (int i = 0; i < hookCount; i++)
+                hooks[i].Hook.OnPostTick(tickContext, eligibilitySnapshot.EligibleView);
         }
 
-        private EligibilitySnapshot EvaluateEligibility(EntityHandle[] entities, ISimulationEligibilityGate[] gates)
+        private EligibilitySnapshot EvaluateEligibility(EntityHandle[] entities, int gateCount)
         {
-            var eligible = new List<EntityHandle>(entities.Length);
-            var map = new Dictionary<EntityHandle, bool>(entities.Length);
+            _eligibleBuffer.Clear();
+            _eligibilityMap.Clear();
 
             for (int i = 0; i < entities.Length; i++)
             {
                 var entity = entities[i];
                 bool allowed = true;
-                for (int g = 0; g < gates.Length; g++)
+                for (int g = 0; g < gateCount; g++)
                 {
-                    if (!gates[g].IsEligible(entity))
+                    if (!_eligibilityGatesSnapshot[g].IsEligible(entity))
                     {
                         allowed = false;
                         break;
                     }
                 }
 
-                map[entity] = allowed;
+                _eligibilityMap[entity] = allowed;
                 if (allowed)
-                    eligible.Add(entity);
+                    _eligibleBuffer.Add(entity);
             }
 
-            return new EligibilitySnapshot(entities, eligible.ToArray(), map);
+            EnsureCapacity(ref _eligibleArray, _eligibleBuffer.Count);
+            for (int i = 0; i < _eligibleBuffer.Count; i++)
+                _eligibleArray[i] = _eligibleBuffer[i];
+
+#if DEBUG
+            if (_eligibleBuffer.Count > _maxEligibleEntities)
+                _maxEligibleEntities = _eligibleBuffer.Count;
+#endif
+            _eligibleView.Set(_eligibleArray, _eligibleBuffer.Count);
+
+            return new EligibilitySnapshot(entities, _eligibleArray, _eligibleBuffer.Count, _eligibilityMap, _eligibleView);
         }
 
-        private void EnsureEligibilityStable(EntityHandle[] entities, ISimulationEligibilityGate[] gates, EligibilitySnapshot snapshot)
+        private void EnsureEligibilityStable(EntityHandle[] entities, ISimulationEligibilityGate[] gates, int gateCount, EligibilitySnapshot snapshot)
         {
             for (int i = 0; i < entities.Length; i++)
             {
                 var entity = entities[i];
                 bool expected = snapshot.EligibilityMap[entity];
                 bool current = true;
-                for (int g = 0; g < gates.Length; g++)
+                for (int g = 0; g < gateCount; g++)
                 {
                     if (!gates[g].IsEligible(entity))
                     {
@@ -292,14 +340,30 @@ namespace Caelmor.Runtime.WorldSimulation
         {
             public readonly EntityHandle[] Entities;
             public readonly EntityHandle[] EligibleEntities;
+            public readonly int EligibleCount;
             public readonly IReadOnlyDictionary<EntityHandle, bool> EligibilityMap;
+            public readonly IReadOnlyList<EntityHandle> EligibleView;
 
-            public EligibilitySnapshot(EntityHandle[] entities, EntityHandle[] eligibleEntities, IReadOnlyDictionary<EntityHandle, bool> map)
+            public EligibilitySnapshot(EntityHandle[] entities, EntityHandle[] eligibleEntities, int eligibleCount, IReadOnlyDictionary<EntityHandle, bool> map, IReadOnlyList<EntityHandle> eligibleView)
             {
                 Entities = entities;
                 EligibleEntities = eligibleEntities;
+                EligibleCount = eligibleCount;
                 EligibilityMap = map;
+                EligibleView = eligibleView;
             }
+        }
+
+        private static void EnsureCapacity<T>(ref T[] array, int required)
+        {
+            if (required <= array.Length)
+                return;
+
+            var nextSize = array.Length == 0 ? required : array.Length;
+            while (nextSize < required)
+                nextSize *= 2;
+
+            array = new T[nextSize];
         }
 
         private readonly struct ParticipantEntry
@@ -351,6 +415,69 @@ namespace Caelmor.Runtime.WorldSimulation
                 var c = x.OrderKey.CompareTo(y.OrderKey);
                 if (c != 0) return c;
                 return x.RegistrationSeq.CompareTo(y.RegistrationSeq);
+            }
+        }
+    }
+
+    internal sealed class PooledArrayReadOnlyList<T> : IReadOnlyList<T>
+    {
+        private T[] _buffer = Array.Empty<T>();
+        private int _count;
+
+        public void Set(T[] buffer, int count)
+        {
+            _buffer = buffer ?? Array.Empty<T>();
+            _count = count;
+        }
+
+        public int Count => _count;
+
+        public T this[int index]
+        {
+            get
+            {
+                if ((uint)index >= (uint)_count)
+                    throw new ArgumentOutOfRangeException(nameof(index));
+                return _buffer[index];
+            }
+        }
+
+        public Enumerator GetEnumerator() => new Enumerator(_buffer, _count);
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public struct Enumerator : IEnumerator<T>
+        {
+            private readonly T[] _array;
+            private readonly int _count;
+            private int _index;
+
+            public Enumerator(T[] array, int count)
+            {
+                _array = array;
+                _count = count;
+                _index = -1;
+            }
+
+            public T Current => _array[_index];
+
+            object IEnumerator.Current => Current!;
+
+            public bool MoveNext()
+            {
+                var next = _index + 1;
+                if (next >= _count)
+                    return false;
+                _index = next;
+                return true;
+            }
+
+            public void Reset() => _index = -1;
+
+            public void Dispose()
+            {
             }
         }
     }
