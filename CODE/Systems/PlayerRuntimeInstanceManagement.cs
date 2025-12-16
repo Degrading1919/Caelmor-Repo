@@ -199,14 +199,6 @@ namespace Caelmor.Runtime.Players
         bool DestroyPlayer(PlayerHandle handle);
     }
 
-    /// <summary>
-    /// Server authority boundary for runtime infrastructure.
-    /// </summary>
-    public interface IServerAuthority
-    {
-        bool IsServerAuthoritative { get; }
-    }
-
     public readonly struct CreatePlayerResult
     {
         public readonly bool Ok;

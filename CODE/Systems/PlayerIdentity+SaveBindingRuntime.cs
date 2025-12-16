@@ -178,14 +178,6 @@ namespace Caelmor.Runtime.Persistence
     }
 
     /// <summary>
-    /// Server authority boundary for runtime infrastructure.
-    /// </summary>
-    public interface IServerAuthority
-    {
-        bool IsServerAuthoritative { get; }
-    }
-
-    /// <summary>
     /// Server-only SaveId allocation source (binding only; no IO).
     /// Implementations may consult an in-memory index, reserved ids, or a later SaveSystem.
     /// </summary>

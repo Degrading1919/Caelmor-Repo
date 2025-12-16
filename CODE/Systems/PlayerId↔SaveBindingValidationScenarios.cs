@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Caelmor.Runtime.Persistence;
+using Caelmor.Systems;
+using Caelmor.Validation;
 
 namespace Caelmor.Validation.Persistence
 {
@@ -14,14 +16,14 @@ namespace Caelmor.Validation.Persistence
         /// <summary>
         /// Returns scenarios in deterministic order.
         /// </summary>
-        public static IReadOnlyList<IValidationScenario> GetScenarios()
+        public static IReadOnlyList<Caelmor.Systems.IValidationScenario> GetScenarios()
         {
-            return new IValidationScenario[]
+            return new Caelmor.Systems.IValidationScenario[]
             {
-                new Scenario1_SuccessfulServerBinding(),
-                new Scenario2_IdempotentRebind(),
-                new Scenario3_ClientProvidedPlayerIdRejection(),
-                new Scenario4_ClientProvidedSaveSelectionRejection()
+                new ValidationScenarioAdapter(new Scenario1_SuccessfulServerBinding()),
+                new ValidationScenarioAdapter(new Scenario2_IdempotentRebind()),
+                new ValidationScenarioAdapter(new Scenario3_ClientProvidedPlayerIdRejection()),
+                new ValidationScenarioAdapter(new Scenario4_ClientProvidedSaveSelectionRejection())
             };
         }
 
@@ -185,25 +187,5 @@ namespace Caelmor.Validation.Persistence
                 return new SaveId(new Guid(bytes));
             }
         }
-    }
-
-    /// <summary>
-    /// Minimal validation scenario contract (validation-only scaffolding).
-    /// </summary>
-    public interface IValidationScenario
-    {
-        string Name { get; }
-        void Run(IAssert assert);
-    }
-
-    /// <summary>
-    /// Minimal assertion surface used by these validation scenarios.
-    /// A harness can supply an implementation matching its conventions.
-    /// </summary>
-    public interface IAssert
-    {
-        void True(bool condition, string message);
-        void False(bool condition, string message);
-        void Equal<T>(T expected, T actual, string message) where T : IEquatable<T>;
     }
 }

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Caelmor.Runtime.Players;
+using Caelmor.Systems;
+using Caelmor.Validation;
 
 namespace Caelmor.Validation.Players
 {
@@ -14,14 +16,14 @@ namespace Caelmor.Validation.Players
         /// <summary>
         /// Returns scenarios in deterministic order.
         /// </summary>
-        public static IReadOnlyList<IValidationScenario> GetScenarios()
+        public static IReadOnlyList<Caelmor.Systems.IValidationScenario> GetScenarios()
         {
-            return new IValidationScenario[]
+            return new Caelmor.Systems.IValidationScenario[]
             {
-                new Scenario1_SuccessfulPlayerCreation(),
-                new Scenario2_IdempotentCreation(),
-                new Scenario3_InvalidPlayerIdRejection(),
-                new Scenario4_DeterministicDestruction()
+                new ValidationScenarioAdapter(new Scenario1_SuccessfulPlayerCreation()),
+                new ValidationScenarioAdapter(new Scenario2_IdempotentCreation()),
+                new ValidationScenarioAdapter(new Scenario3_InvalidPlayerIdRejection()),
+                new ValidationScenarioAdapter(new Scenario4_DeterministicDestruction())
             };
         }
 
@@ -151,25 +153,5 @@ namespace Caelmor.Validation.Players
 
             public bool IsServerAuthoritative { get; }
         }
-    }
-
-    /// <summary>
-    /// Minimal validation scenario contract (validation-only scaffolding).
-    /// </summary>
-    public interface IValidationScenario
-    {
-        string Name { get; }
-        void Run(IAssert assert);
-    }
-
-    /// <summary>
-    /// Minimal assertion surface used by these validation scenarios.
-    /// A harness can supply an implementation matching its conventions.
-    /// </summary>
-    public interface IAssert
-    {
-        void True(bool condition, string message);
-        void False(bool condition, string message);
-        void Equal<T>(T expected, T actual, string message) where T : IEquatable<T>;
     }
 }
