@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Caelmor.Economy.Inventory;
 
 namespace Caelmor.Systems
 {
@@ -12,5 +13,8 @@ namespace Caelmor.Systems
     {
         public static IReadOnlyList<IValidationScenario> CreateStage9Scenarios(ValidationScenarioDeps deps)
             => ValidationScenario_Stage9Matrix.BuildAll(deps);
+
+        public static IReadOnlyList<IValidationScenario> CreateStage26InventoryScenarios()
+            => InventoryRuntimeValidationMatrix.BuildAll();
     }
 }
