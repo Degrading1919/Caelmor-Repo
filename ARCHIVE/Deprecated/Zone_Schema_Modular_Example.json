@@ -1,0 +1,52 @@
+// Zone_Schema_Modular_Example_v2.txt
+{
+  "zoneId": "lowmark_heartlands",
+  "displayName": "Greyharrow Heartlands",
+  "regionId": "lowmark",
+  "isStartingZone": true,
+  "ambientTier": "low",
+  "recommendedLevel": 1,
+
+  "poi": [
+    {
+      "poiId": "greyharrow_gate",
+      "type": "village",
+      "name": "Greyharrow Gate",
+      "description": "Outer farms and watch posts surrounding the city."
+    },
+    {
+      "poiId": "fallen_mill",
+      "type": "ruin",
+      "name": "The Fallen Mill",
+      "description": "A burnt-out mill, its wheel half-submerged in a quiet channel."
+    }
+  ],
+
+  "spawnSets": [
+    {
+      "id": "heartlands_goblins",
+      "enemyFamilyId": "lowmark_goblins",
+      "minLevel": 1,
+      "maxLevel": 3,
+      "weight": 2
+    },
+    {
+      "id": "heartlands_wolves",
+      "enemyFamilyId": "lowmark_wolves",
+      "minLevel": 1,
+      "maxLevel": 2,
+      "weight": 1
+    }
+  ],
+
+  "resourceNodes": [
+    {
+      "nodeId": "heartlands_iron_veins",
+      "density": "low"
+    },
+    {
+      "nodeId": "heartlands_timber_patches",
+      "density": "medium"
+    }
+  ]
+}

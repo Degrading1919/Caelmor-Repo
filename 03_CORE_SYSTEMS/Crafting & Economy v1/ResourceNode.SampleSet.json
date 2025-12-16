@@ -1,0 +1,178 @@
+[
+  {
+    "key": "felled_tree_node",
+    "display_name": "Felled Tree",
+    "description": "A recently cut tree lying on the ground, suitable for breaking down into usable wood.",
+    "resource_category_key": "core_structures",
+    "allowed_gathering_skills": ["woodcutting"],
+    "interaction_model": {
+      "single_use": false,
+      "multi_use": true,
+      "time_based": true,
+      "risk_based": false
+    },
+    "world_behavior": {
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true
+    },
+    "risk_hooks": {
+      "environmental_danger": false,
+      "instability": false
+    }
+  },
+  {
+    "key": "quarry_face_node",
+    "display_name": "Exposed Quarry Face",
+    "description": "A worked stone surface where blocks can be carefully separated from the rock.",
+    "resource_category_key": "core_structures",
+    "allowed_gathering_skills": ["mining"],
+    "interaction_model": {
+      "single_use": false,
+      "multi_use": true,
+      "time_based": true,
+      "risk_based": true
+    },
+    "world_behavior": {
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true
+    },
+    "risk_hooks": {
+      "environmental_danger": true,
+      "instability": true
+    }
+  },
+  {
+    "key": "fiber_reed_patch_node",
+    "display_name": "Fiber Reed Patch",
+    "description": "Dense stands of tough reeds that can be pulled and bundled by hand.",
+    "resource_category_key": "fasteners_bindings",
+    "allowed_gathering_skills": ["foraging"],
+    "interaction_model": {
+      "single_use": false,
+      "multi_use": true,
+      "time_based": false,
+      "risk_based": false
+    },
+    "world_behavior": {
+      "depletable": true,
+      "respawnable": true,
+      "stateful": false
+    },
+    "risk_hooks": {
+      "environmental_danger": false,
+      "instability": false
+    }
+  },
+  {
+    "key": "scrap_iron_deposit_node",
+    "display_name": "Scrap Iron Deposit",
+    "description": "A scatter of old iron fragments and buried metal remnants reclaimed from the ground.",
+    "resource_category_key": "fasteners_bindings",
+    "allowed_gathering_skills": ["mining"],
+    "interaction_model": {
+      "single_use": false,
+      "multi_use": true,
+      "time_based": true,
+      "risk_based": false
+    },
+    "world_behavior": {
+      "depletable": true,
+      "respawnable": false,
+      "stateful": true
+    },
+    "risk_hooks": {
+      "environmental_danger": false,
+      "instability": false
+    }
+  },
+  {
+    "key": "resin_bearing_tree_node",
+    "display_name": "Resin-Bearing Tree",
+    "description": "A mature tree tapped for thick sap that slowly seeps from scored bark.",
+    "resource_category_key": "transmission_media",
+    "allowed_gathering_skills": ["foraging"],
+    "interaction_model": {
+      "single_use": false,
+      "multi_use": true,
+      "time_based": true,
+      "risk_based": false
+    },
+    "world_behavior": {
+      "depletable": false,
+      "respawnable": true,
+      "stateful": true
+    },
+    "risk_hooks": {
+      "environmental_danger": false,
+      "instability": false
+    }
+  },
+  {
+    "key": "emberstone_vein_node",
+    "display_name": "Emberstone Vein",
+    "description": "A mineral seam embedded in rock that reacts subtly to heat and pressure when worked.",
+    "resource_category_key": "reactants",
+    "allowed_gathering_skills": ["mining"],
+    "interaction_model": {
+      "single_use": false,
+      "multi_use": true,
+      "time_based": true,
+      "risk_based": true
+    },
+    "world_behavior": {
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true
+    },
+    "risk_hooks": {
+      "environmental_danger": true,
+      "instability": true
+    }
+  },
+  {
+    "key": "root_cluster_node",
+    "display_name": "Wild Root Cluster",
+    "description": "A tangle of exposed roots dug from firm soil and cleared by hand.",
+    "resource_category_key": "sustenance_sources",
+    "allowed_gathering_skills": ["foraging"],
+    "interaction_model": {
+      "single_use": false,
+      "multi_use": true,
+      "time_based": false,
+      "risk_based": false
+    },
+    "world_behavior": {
+      "depletable": true,
+      "respawnable": true,
+      "stateful": false
+    },
+    "risk_hooks": {
+      "environmental_danger": false,
+      "instability": false
+    }
+  },
+  {
+    "key": "game_carcass_node",
+    "display_name": "Game Carcass",
+    "description": "The remains of a hunted animal prepared for careful processing.",
+    "resource_category_key": "sustenance_sources",
+    "allowed_gathering_skills": ["hunting"],
+    "interaction_model": {
+      "single_use": true,
+      "multi_use": false,
+      "time_based": true,
+      "risk_based": false
+    },
+    "world_behavior": {
+      "depletable": true,
+      "respawnable": false,
+      "stateful": false
+    },
+    "risk_hooks": {
+      "environmental_danger": false,
+      "instability": false
+    }
+  }
+]

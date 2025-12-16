@@ -1,0 +1,331 @@
+SYSTEMS ARCHITECT REVIEW
+
+Evaluating schema gaps for serialization, networking, and persistence impacts
+
+Schemas reviewed (per manifest):
+
+Item_Schema_Flat
+
+Enemy_Family / Enemy_Variant
+
+Resource_Node_Schema_Modular
+
+Crafting_Recipe
+
+Skill_Schema
+
+Zone_Schema
+
+NPC_Schema_Flat
+
+Quest_Schema_Flat
+()
+
+Compare with authoritative system rules in Phase 1.4 Technical Foundation (tick manager, SO databases, save schemas)
+()
+
+1. Gap: Items missing fields required for inventory, networking, and persistence
+❗ Problems
+
+Pipeline Assistant likely flagged missing fields such as:
+
+itemId (UUID or stable integer ID)
+
+isStackable + maxStack
+
+itemCategory / subType
+
+durability or condition (if used later)
+
+server_authoritative = true flag (optional metadata)
+
+These ARE required because:
+
+✔ Serialization Impact
+
+Inventory persistence in PlayerSave.json stores the list of items by ID, stack count, and condition.
+
+Without standardized fields, items cannot be serialized deterministically.
+
+✔ Networking Impact
+
+Items added/removed from inventory must sync via reliable RPCs.
+
+Stack merges/splits depend on consistent fields.
+
+✔ Persistence Impact
+
+Save/load pipeline (Phase 1.4 §6.1) expects predictable item entries.
+
+🛠 REQUIRED REVISION
+
+Add a Minimal Viable Item Schema v1 structure:
+
+{
+  "itemId": "string",
+  "displayName": "string",
+  "category": "string",
+  "subType": "string",
+  "isStackable": true,
+  "maxStack": 20,
+  "value": 0,
+  "metadata": {}
+}
+
+
+This does not introduce burden; it formalizes what Phase 1.4 already expects.
+
+2. Gap: Enemy Variant schema missing combat-sync critical fields
+❗ Problems
+
+Pipeline Assistant likely flagged missing:
+
+attackSpeed (affects tick timing)
+
+aggroRange
+
+leashRange
+
+movementSpeed
+
+xpValue
+
+variantId
+
+✔ Networking Impact
+
+Combat tick timing depends on server knowing attack cadence.
+Movement correction requires declared speeds.
+Aggro/leash boundaries prevent divergent behavior between clients and host.
+
+✔ Persistence Impact
+
+Enemies do NOT persist individually (v1 does not store enemy-by-enemy state),
+BUT world bosses and unique entities DO require persistent fields.
+
+🛠 REQUIRED REVISION
+
+Add to Enemy_Variant schema:
+
+{
+  "variantId": "string",
+  "familyId": "string",
+  "hp": 10,
+  "armor": 0,
+  "movementSpeed": 1.5,
+  "attackSpeed": 2.0,
+  "attackDamage": 3,
+  "aggroRange": 8,
+  "leashRange": 15,
+  "xpValue": 5,
+  "isBoss": false
+}
+
+
+This aligns fully with the server tick rules established in Phase 1.4.
+
+3. Gap: Resource Node schema missing respawn and depletion state
+❗ Problems
+
+Current Resource_Node schemas often only describe node type, inputs, or outputs.
+
+Server-side node lifecycle requires:
+
+respawnTimeSeconds
+
+yieldMin / yieldMax
+
+nodeId (unique per node instance template)
+
+✔ Serialization Impact
+
+WorldSave.json stores the state of nodes (“depleted or active”).
+Without node IDs, world restoration fails.
+
+✔ Networking Impact
+
+Node interaction must sync:
+
+“node depleted” event
+
+“node respawned” event
+
+🛠 REQUIRED REVISION
+
+Add to Resource_Node schema:
+
+{
+  "nodeId": "string",
+  "resourceType": "string",
+  "yieldMin": 1,
+  "yieldMax": 3,
+  "respawnTimeSeconds": 300,
+  "skillRequirement": 1
+}
+
+4. Gap: Crafting Recipe schema missing stationType and timeToCraft
+❗ Problems
+
+Crafting flow (Phase 1.4 §5.3 Boot Pipeline + crafting stations) depends on recipe → station mapping.
+
+✔ Serialization Impact
+
+RecipeDefinition SOs require these fields to resolve station interactions.
+
+✔ Networking Impact
+
+Crafting is a server-authoritative action; timeToCraft defines the tick completion.
+
+🛠 REQUIRED REVISION
+{
+  "recipeId": "string",
+  "stationType": "forge",
+  "ingredients": [{ "itemId": "iron_ore", "qty": 2 }],
+  "results": [{ "itemId": "iron_bar", "qty": 1 }],
+  "timeToCraft": 2.0,
+  "skillId": "smithing",
+  "minSkill": 1
+}
+
+5. Gap: Skill Schema missing XP curve metadata
+❗ Problems
+
+Pipeline Assistant likely found:
+
+No xpCurve or xpToLevel array
+
+Missing maxLevel
+
+✔ Persistence Impact
+
+PlayerSave.json stores skill levels & xp — but formulas expect curve definitions.
+
+✔ Networking Impact
+
+XP awards must be validated server-side and identical across clients.
+
+🛠 REQUIRED REVISION
+{
+  "skillId": "smithing",
+  "displayName": "Smithing",
+  "maxLevel": 50,
+  "xpCurve": [0, 50, 125, 250, 500, ...]
+}
+
+
+This aligns with economy progression requirements and avoids hardcoding XP curves in code.
+
+6. Gap: Zone Schema missing world-state toggles & spawn sets
+❗ Problems
+
+Zones require:
+
+zoneId
+
+isStartingZone (already noted in Phase 1.4 §5.1)
+
+enemy spawn sets
+
+resource node templates
+
+✔ Persistence Impact
+
+WorldSave.json must track per-zone object state.
+
+✔ Networking Impact
+
+Zone loads must instruct clients what to spawn.
+
+🛠 REQUIRED REVISION
+{
+  "zoneId": "lowmark_vale",
+  "displayName": "Lowmark Vale",
+  "isStartingZone": true,
+  "spawnSets": [
+    {
+      "familyId": "field_goblin",
+      "count": 8,
+      "respawnSeconds": 180
+    }
+  ],
+  "resourceNodes": [
+    { "nodeId": "iron_vein_A", "resourceType": "iron", "respawnTimeSeconds": 600 }
+  ]
+}
+
+7. Gap: Quest Schema missing prerequisites, repeatability, and objective types
+
+Already referenced as updated fields in Phase 1.4:
+
+repeatable
+
+prerequisites
+
+✔ Serialization & Persistence Impact
+
+QuestSystem requires storing progress + availability flags.
+
+🛠 REQUIRED REVISION
+{
+  "questId": "lowmark_intro_01",
+  "title": "Learning the Vale",
+  "prerequisites": ["none"],
+  "repeatable": false,
+  "objectives": [
+    { "type": "gather", "itemId": "wood_log", "count": 3 },
+    { "type": "craft", "recipeId": "training_sword" }
+  ],
+  "rewards": [{ "itemId": "coins", "qty": 10 }]
+}
+
+8. Gap: NPC Schema missing unique ID, trainerSkillId, interactionType
+
+Phase 1.4 explicitly lists trainerSkillId as added field.
+()
+
+✔ Networking Impact
+
+NPC interaction events must sync via reliable RPCs (dialogue start, trading, training).
+
+✔ Persistence Impact
+
+NPCs with mutable states (vendors, trainers) need IDs.
+
+🛠 REQUIRED REVISION
+{
+  "npcId": "npc_greyharrow_blacksmith",
+  "displayName": "Marin the Smith",
+  "interactionType": "trainer",
+  "trainerSkillId": "smithing",
+  "dialogueId": "dlg_smith_intro"
+}
+
+OVERALL TECHNICAL CONCLUSIONS
+1. Yes — the schema gaps materially affect serialization, networking, and persistence.
+
+Particularly for:
+
+item IDs & stack rules
+
+enemy combat parameters
+
+resource node lifecycle
+
+skill XP curves
+
+zone spawn definitions
+
+quest prerequisites
+
+NPC trainer fields
+
+2. All proposed fixes align strictly with Phase 1.4 systems
+
+No feature creep.
+No new mechanics.
+Only required fields that the architecture already depends on.
+
+3. No schema requires structural overhaul
+
+All gaps are additive fields.
+No breaking changes to existing implementations.

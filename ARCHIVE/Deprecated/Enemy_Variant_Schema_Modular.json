@@ -1,0 +1,25 @@
+// Enemy_Variant_Schema_Modular_v2.txt
+// Final accepted v1 schema (Enemy Variant) :contentReference[oaicite:0]{index=0}
+{
+  "variantId": "string",              // required, unique
+  "familyId": "string",               // reference to Enemy_Family
+
+  // Core combat stats (driven by tick-based combat, Phase 1.4) :contentReference[oaicite:1]{index=1}
+  "hp": 0,
+  "armor": 0,
+  "movementSpeed": 1.0,
+  "attackSpeed": 1.0,
+  "attackDamage": 0,
+  "attackRange": 1.5,               // NEW — required for VS combat
+
+  // Aggro & leash behavior — supports readable, fair encounters
+  "aggroRange": 5.0,                  // meters
+  "leashRange": 10.0,                 // meters
+  "leashBehavior": "direct|steer",
+  "maxLeashSpeed": 1.5
+
+
+  // Progression hooks
+  "xpValue": 0,
+  "isBoss": false
+}

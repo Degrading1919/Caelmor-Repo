@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "Recipe.schema.json",
+  "title": "Recipe",
+  "description": "Defines a structured transformation of resource items into outputs via a single crafting skill.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "key",
+    "display_name",
+    "crafting_skill_key",
+    "inputs",
+    "outputs",
+    "output_class"
+  ],
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Stable internal identifier for the recipe. Lowercase snake_case, not player-facing."
+    },
+
+    "display_name": {
+      "type": "string",
+      "description": "Player-facing name of the recipe."
+    },
+
+    "description": {
+      "type": "string",
+      "description": "Optional player-facing description of the recipe."
+    },
+
+    "crafting_skill_key": {
+      "$ref": "GatheringSkillKey.schema.json",
+      "description": "The single non-combat crafting skill that owns and performs this recipe."
+    },
+
+    "required_station_key": {
+      "$ref": "CraftingStationKey.schema.json",
+      "description": "Optional reference to a required crafting station type."
+    },
+
+    "inputs": {
+      "type": "array",
+      "description": "Input resource items required by the recipe.",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "resource_item_key",
+          "required_form"
+        ],
+        "properties": {
+          "resource_item_key": {
+            "$ref": "ResourceItemKey.schema.json",
+            "description": "Reference to a valid resource item consumed by the recipe."
+          },
+          "required_form": {
+            "type": "string",
+            "description": "Required processing state of the input resource item.",
+            "enum": [
+              "raw",
+              "processed",
+              "refined"
+            ]
+          }
+        }
+      }
+    },
+
+    "outputs": {
+      "type": "array",
+      "description": "Resource items produced by the recipe.",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "resource_item_key"
+        ],
+        "properties": {
+          "resource_item_key": {
+            "$ref": "ResourceItemKey.schema.json",
+            "description": "Reference to a valid resource item produced by the recipe."
+          }
+        }
+      }
+    },
+
+    "output_class": {
+      "$ref": "CraftingOutputClassKey.schema.json",
+      "description": "Classification of the recipe output, used for design integrity and validation."
+    }
+  }
+}

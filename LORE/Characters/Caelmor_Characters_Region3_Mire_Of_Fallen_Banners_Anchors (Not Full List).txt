@@ -1,0 +1,181 @@
+## I. INFORMAL CARETAKER (MORAL CENTER)
+
+### **Edris Hollowmere**
+**Role:** Groundskeeper of the Fallen Fields  
+**Location:** Banner Flats / peat paths
+
+**Overview:**  
+Edris is not a leader by title, but by endurance. She coordinates burial crews, banner clearing, and soil rest without orders or authority. People listen because she never asks for more than what they can give.
+
+**Personality:**
+- Soft-spoken
+- Patient to the point of exhaustion
+- Refuses to rush anything that involves the dead
+
+**Implied History:**
+- Survived the war by tending wounded rather than fighting
+- Chose to remain when most fled
+- Believes the Mire “knows when it’s being respected”
+
+**Gameplay Hooks:**
+- Burial and recovery tasks
+- Decisions about what should be left undisturbed
+- Player earns trust through restraint, not action
+
+---
+
+## II. BANNER & BONE TENDERS (MEMORY LABOR)
+
+### **Calwen Reed-Binder**
+**Role:** Banner tender and weaver  
+**Location:** Reed sanctuaries
+
+**Overview:**  
+Calwen collects fragments of banners, tabards, and insignia pulled from the peat. He washes, binds, and stores them without sorting by allegiance.
+
+**Beliefs:**
+- “They all bled the same once they hit the mud.”
+
+**Implied Depth:**
+- Knows which fabrics rot slower
+- Refuses requests to identify banners by faction
+- Says the land already knows who they belonged to
+
+**Gameplay Hooks:**
+- Artifact recovery
+- Faction-neutral memory choices
+
+---
+
+### **Mara Fenholt**
+**Role:** Bone-gatherer and marker-setter  
+**Location:** Low peat ridges
+
+**Overview:**  
+Mara locates remains when the ground releases them — never forcing, never digging too deep.
+
+**Personality:**
+- Quiet
+- Methodical
+- Deeply respectful
+
+**Implied Depth:**
+- Claims bones surface when they’re “ready to rest”
+- Marks sites with simple stones, never names
+
+**Gameplay Hooks:**
+- Environmental memory events
+- Player choices about disturbing remains
+
+---
+
+## III. TRAVEL & TRANSITION (QUEST ANCHOR)
+
+### **Rowan Mirewake**
+**Role:** Ferryman of the Blackwater Channels  
+**Location:** Mire crossings / reed docks
+
+**Overview:**  
+Rowan knows the Mire’s waterways better than anyone alive. He refuses night crossings, avoids certain channels, and will not explain why unless pressed gently — and repeatedly.
+
+**Personality:**
+- Reserved
+- Dry-witted
+- Deeply cautious
+
+**Key Function (Locked):**
+Rowan is the **only NPC who knows how to reach the Sunken Church**.
+
+**Implied History:**
+- Learned the routes from someone who never returned
+- Knows when the land will accept passage
+- Treats the church as a place of mourning, not power
+
+**Quest Series:**
+- Gradual trust-building
+- Preparation-focused tasks
+- Passage only granted once the player shows restraint
+
+---
+
+## IV. QUIET ANOMALY WITNESS (ELDER — LOCKED)
+
+### **Old Sennic Vale**
+**Role:** Mire elder and storyteller  
+**Location:** Driftwood rise / peat-edge shelter
+
+**Overview:**  
+Sennic remembers the Mire before it sank. As a child, he heard stories of the **Sunken Church** — a place where mages practiced quietly, drawing memory from the land rather than shaping it.
+
+**Personality:**
+- Gentle
+- Fragmented in speech
+- More lucid when recalling the past than the present
+
+**Memories:**
+- Bells that rang without sound
+- Mages who listened more than they spoke
+- The church sinking slowly, not collapsing
+
+**Canon Boundaries:**
+- Does not explain earth-memory
+- Does not identify spells or rituals
+- Speaks in stories, not systems
+
+**Gameplay Hooks:**
+- Lore through oral memory
+- Emotional foreshadowing
+- Player learns *where*, not *why*
+
+---
+
+## V. THOSE WHO STAYED (CIVILIAN ANCHORS)
+
+### **Lysa Thornettle**
+**Role:** Herbalist and peat healer  
+**Location:** Fenward huts
+
+**Overview:**  
+Lysa treats those affected by the Mire — exhaustion, memory bleed, grief that won’t settle.
+
+**Beliefs:**
+- Healing is about making space, not erasing pain
+
+**Gameplay Hooks:**
+- Recovery mechanics
+- Subtle memory effects
+
+---
+
+### **Bran Hollowstep**
+**Role:** Veteran who never left  
+**Location:** Broken watchpost
+
+**Overview:**  
+Bran survived the Mire’s worst years and stayed. He does not patrol. He watches.
+
+**Personality:**
+- Quiet
+- Watchful
+- Unmoved by heroics
+
+**Implied Depth:**
+- Knows which ground still isn’t safe
+- Leaves offerings for no one in particular
+
+**Gameplay Hooks:**
+- Boundary warnings
+- Player restraint tests
+
+---
+
+## DESIGN SUMMARY
+
+- **Tone:** Gentle, heavy, merciful
+- **Magic:** Memory endured, not wielded
+- **Authority:** Earned through care
+- **Anomaly:** Remembered, not interpreted
+- **Key Site:** Sunken Church (reachable, not solved)
+
+The Mire does not demand remembrance.  
+It carries it — until someone else is ready to listen.

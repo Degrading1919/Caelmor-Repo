@@ -1,0 +1,241 @@
+## I. REGIONAL AUTHORITY (UNITY ANCHOR)
+
+### **Hadrik Stonewake**
+**Role:** Stonewake Speaker of the Thornfell Assembly  
+**Location:** Stonewake Hall (ancient echo-carved chamber)
+
+**Overview:**  
+Hadrik Stonewake is not a ruler. He is a *buffer*. Chosen by the clans for his steadiness rather than ambition, he presides over the Assembly with the understanding that his job is not to decide — but to keep Thornfell from tearing itself apart while it decides.
+
+**Personality:**
+- Calm, deeply patient
+- Carries scars from the War he never speaks of
+- Lets arguments burn themselves out
+
+**Implied Depth:**
+- Knows the Assembly hall amplifies certain voices unnaturally
+- Chooses where people stand during debates
+- Never asks why some words carry farther than others
+
+**Canon Notes:**
+- Authority is cultural, not absolute
+- Represents unity under strain, not dominance
+
+**Gameplay Hooks:**
+- Assembly disputes
+- Mediation quests
+- Consequences based on *who* the player sides with, not outcomes alone
+
+---
+
+## II. CLAN VOICES (THE CRACKS IN THE WALL)
+
+### **Brynjar Korr**
+**Role:** Blood-Oath Clan Voice (War-Ready Faction)
+
+**Tone:**  
+Hot-headed. Loud. Fiercely loyal.
+
+**Beliefs:**
+- Emberholt will betray Thornfell again
+- Readiness is love
+- Rage is honest
+
+**Behavior:**
+- Interrupts others
+- Pounds the stone table
+- Would die for any Thornfell child without hesitation
+
+**Echohewn Tie (Implicit):**
+- His clan maintains the loudest horn towers
+- Brags about “the horn that split the ridge” during the War
+- Treats resonance as tradition, not danger
+
+**Gameplay Hooks:**
+- Patrol escalation
+- Border skirmish prevention
+- Player tested for courage, not diplomacy
+
+---
+
+### **Elira Hearthward**
+**Role:** Hearthguard Clan Voice (Rebuilders)
+
+**Tone:**  
+Exhausted. Practical. Protective.
+
+**Beliefs:**
+- Thornfell is bleeding itself dry
+- Children deserve more than drills
+- Unity requires rest as well as readiness
+
+**Behavior:**
+- Pushes for trade, repair, and relief
+- Argues constantly with Brynjar — and defends him just as fiercely
+
+**Echohewn Tie (Implicit):**
+- Clan occupies rebuilt Echohewn stone terraces
+- Uses acoustic stonework in communal halls
+- Calls it “good old building,” nothing more
+
+**Gameplay Hooks:**
+- Infrastructure quests
+- Civilian-focused outcomes
+- Quiet resistance to militarization
+
+---
+
+### **Old Torvek**
+**Role:** Voice of the Old Stone (Traditionalists)
+
+**Tone:**  
+Quiet. Absolute. Unyielding.
+
+**Beliefs:**
+- Tradition held the wall
+- Change invites collapse
+- The wind remembers vows
+
+**Behavior:**
+- Rarely speaks
+- Ends arguments with a sentence, not a shout
+
+**Echohewn Tie (Implicit):**
+- Maintains cairns built on Echohewn foundations
+- Insists stones must be placed “the old way”
+- Cannot explain why deviation feels *wrong*
+
+**Gameplay Hooks:**
+- Ritual compliance
+- Burial and remembrance
+- Consequences for ignoring tradition
+
+---
+
+## III. DWARVEN ANCHOR — THE THRESHOLD CHARACTER
+
+### **Kaldren Deepdelver**
+**Role:** Dwarven Stone-Speaker; Echohewn Keeper  
+**Status:** Integrated clan elder, respected Assembly voice
+
+**Overview:**  
+Kaldren is a dwarf of the old stock — not a ruler, not a scholar, but a *listener*. His people have lived alongside Thornfell’s stone longer than the clans remember. He understands systems, alignments, and stresses — not origins.
+
+**Personality:**
+- Blunt
+- Dryly amused
+- Deeply cautious
+
+**Canon Boundaries (Critical):**
+- Does NOT explain what the Echohewn are
+- Does NOT name them as a “race” or origin
+- Treats them as dormant kin who chose stillness
+
+**Key Line (V1 Tone):**
+> “They’re asleep.  
+> And waking them all at once would tear the mountain apart.”
+
+**Gameplay Function:**
+- Helps the player align, repair, and stabilize Echohewn systems
+- Explicitly limits how far reactivation can go in V1
+- Serves as the gatekeeper for future awakening arcs
+
+---
+
+## IV. MILITARY & WATCH ANCHORS
+
+### **Ressa Highcrag**
+**Role:** High Ridge Warden
+
+**Overview:**  
+Ressa oversees the high passes, patrols, and horn lines. She has no patience for politics and absolute loyalty from every clan.
+
+**Implied Depth:**
+- Knows which horn tones caused “wrong results” during the War
+- Refuses to allow certain calls
+- Keeps the horns anyway
+
+**Gameplay Hooks:**
+- Pass security
+- Horn-signal quests
+- Moral friction between readiness and restraint
+
+---
+
+### **Dorn Feldhorn**
+**Role:** Veteran Hornbearer
+
+**Overview:**  
+Dorn maintains Thornfell’s long-range horn codes. He treats his work with ritual seriousness and private fear.
+
+**Implied Depth:**
+- Claims echoes sometimes return altered
+- Says some notes should never be played again
+- Calls it “wind tricks,” but never smiles when he says it
+
+**Gameplay Hooks:**
+- Signal relays
+- Storm events
+- Early resonance foreshadowing
+
+---
+
+## V. CIVILIAN & MEMORY ANCHOR
+
+### **Maera Cairnwatch**
+**Role:** Cairn-Keeper of Thornfell
+
+**Overview:**  
+Maera maintains burial cairns, remembrance sites, and name-stones. She is respected by all clans, regardless of argument.
+
+**Tone:**
+- Gentle
+- Unyielding
+- Absolute authority in matters of the dead
+
+**Echohewn Tie (Implicit):**
+- Cairns align with ancient stone patterns
+- Says, “The stones know how to listen”
+
+**Gameplay Hooks:**
+- Grief-centered quests
+- Conflict de-escalation
+- Consequences for dishonoring the dead
+
+---
+
+## VI. QUIET ANOMALY WITNESS (QUEST LEAD)
+
+### **Iven Ridgeborne**
+**Role:** High-path ridge scout
+
+**Overview:**  
+Iven patrols alone, far above the passes. He notices things others don’t because he is often the only one there.
+
+**Experiences:**
+- Echoes that arrive before sound
+- Wind carrying voices uphill
+- Stone faces humming during storms
+
+**Behavior:**
+- Does not think this is magic
+- Believes the mountains are tired
+- Leads the player, step by step, to the Echohewn resting place
+
+**Gameplay Function:**
+- Primary breadcrumb trail to dormant Echohewn
+- Environmental discovery without exposition
+- Player arrives at truth without understanding it yet
+
+---
+
+## DESIGN SUMMARY
+
+- **Tone:** United, proud, argumentative, loyal
+- **Conflict:** Internal, cultural, unresolved
+- **Echohewn:** Dormant systems, maintainable, partially re-alignable
+- **Dwarves:** Living custodians, not historians
+- **V1 Rule:** No full awakening, no full explanation
+
+Thornfell does not ask what the mountain is.  
+It asks whether it will still stand tomorrow.

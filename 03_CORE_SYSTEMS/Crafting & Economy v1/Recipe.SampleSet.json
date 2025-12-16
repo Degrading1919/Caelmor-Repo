@@ -1,0 +1,105 @@
+[
+  {
+    "key": "cut_timbers",
+    "display_name": "Cut Timbers",
+    "description": "Square and trim rough wood into consistent lengths suitable for construction work.",
+    "crafting_skill_key": "woodworking",
+    "required_station_key": "workbench_station",
+    "inputs": [
+      {
+        "resource_item_key": "rough_timbers",
+        "required_form": "raw"
+      }
+    ],
+    "outputs": [
+      {
+        "resource_item_key": "cut_timbers"
+      }
+    ],
+    "output_class": "Structural Components"
+  },
+  {
+    "key": "twist_fiber_cord",
+    "display_name": "Twist Fiber Cord",
+    "description": "Align and twist loose plant fibers into a stronger, more reliable cord.",
+    "crafting_skill_key": "weaving",
+    "required_station_key": "fiber_frame_station",
+    "inputs": [
+      {
+        "resource_item_key": "binding_fiber",
+        "required_form": "raw"
+      }
+    ],
+    "outputs": [
+      {
+        "resource_item_key": "twisted_fiber_cord"
+      }
+    ],
+    "output_class": "Fasteners & Bindings"
+  },
+  {
+    "key": "forge_iron_fasteners",
+    "display_name": "Forge Iron Fasteners",
+    "description": "Heat and shape reclaimed iron into consistent pins and nails for fastening work.",
+    "crafting_skill_key": "smithing",
+    "required_station_key": "forge_station",
+    "inputs": [
+      {
+        "resource_item_key": "iron_fasteners",
+        "required_form": "refined"
+      }
+    ],
+    "outputs": [
+      {
+        "resource_item_key": "iron_fasteners"
+      }
+    ],
+    "output_class": "Fasteners & Bindings"
+  },
+  {
+    "key": "prepare_conductive_resin",
+    "display_name": "Prepare Conductive Resin",
+    "description": "Gently heat and stabilize resin so it carries heat and vibration more consistently.",
+    "crafting_skill_key": "processing",
+    "required_station_key": "hearth_station",
+    "inputs": [
+      {
+        "resource_item_key": "conductive_resin",
+        "required_form": "processed"
+      },
+      {
+        "resource_item_key": "stabilizing_salts",
+        "required_form": "refined"
+      }
+    ],
+    "outputs": [
+      {
+        "resource_item_key": "prepared_conductive_resin"
+      }
+    ],
+    "output_class": "Transmission Media"
+  },
+  {
+    "key": "dry_meat_strips",
+    "display_name": "Dry Meat Strips",
+    "description": "Salt and dry fresh cuts to preserve them for storage and travel.",
+    "crafting_skill_key": "cooking",
+    "required_station_key": "drying_rack_station",
+    "inputs": [
+      {
+        "resource_item_key": "wild_root",
+        "required_form": "raw"
+      },
+      {
+        "resource_item_key": "stabilizing_salts",
+        "required_form": "refined"
+      }
+    ],
+    "outputs": [
+      {
+        "resource_item_key": "dried_meat_strips"
+      }
+    ],
+    "output_class": "Sustenance Processing"
+  }
+]

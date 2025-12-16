@@ -1,0 +1,36 @@
+// Quest_Schema_Flat_v2.txt
+// Final accepted quest schema (no restrictions) 
+{
+  "questId": "string",                // required, unique
+  "title": "string",
+  "summary": "string",
+
+  "regionId": "lowmark|thornfell|mire|emberholt",
+
+  // Dependency graph
+  "prerequisites": ["quest_id"],
+  "repeatable": false,
+
+  // Objectives: small, discrete steps (kill, collect, talk, explore)
+  "objectives": [
+    {
+      "objectiveId": "string",
+      "type": "talk|kill|collect|explore|interact",
+      "targetId": "string",          // npcId, enemyFamilyId, itemId, zoneId/poiId
+      "count": 1,
+      "description": "string"
+    }
+  ],
+
+  // Rewards: economy + items + XP
+  "rewards": {
+    "xp": 0,
+    "gold": 0,
+    "items": [
+      {
+        "itemId": "item_id",
+        "quantity": 1
+      }
+    ]
+  }
+}

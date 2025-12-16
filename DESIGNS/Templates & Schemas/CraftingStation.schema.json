@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "CraftingStation.schema.json",
+  "title": "CraftingStation",
+  "description": "Defines a world or deployable station that enables crafting via specific skills and recipe output classes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "key",
+    "display_name",
+    "allowed_crafting_skills",
+    "allowed_output_classes",
+    "station_characteristics"
+  ],
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Stable internal identifier for the crafting station. Lowercase snake_case, not player-facing."
+    },
+
+    "display_name": {
+      "type": "string",
+      "description": "Player-facing name of the crafting station."
+    },
+
+    "description": {
+      "type": "string",
+      "description": "Optional player-facing description of the crafting station."
+    },
+
+    "allowed_crafting_skills": {
+      "type": "array",
+      "description": "List of crafting skills permitted to use this station.",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "GatheringSkillKey.schema.json"
+      }
+    },
+
+    "allowed_output_classes": {
+      "type": "array",
+      "description": "Recipe output classes that this station can execute.",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "CraftingOutputClassKey.schema.json"
+      }
+    },
+
+    "station_characteristics": {
+      "type": "object",
+      "description": "High-level characteristics describing how the station exists and is used.",
+      "additionalProperties": false,
+      "required": [
+        "permanent",
+        "world_placed",
+        "shared_use"
+      ],
+      "properties": {
+        "permanent": {
+          "type": "boolean",
+          "description": "Whether the station is permanent rather than temporary."
+        },
+        "world_placed": {
+          "type": "boolean",
+          "description": "Whether the station exists as a world-placed object rather than a player-deployed construct."
+        },
+        "shared_use": {
+          "type": "boolean",
+          "description": "Whether the station supports shared use by multiple players."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,209 @@
+{
+  "questChainId": "vs_learning_the_land",
+  "title": "Learning the Land",
+  "regionId": "lowmark",
+  "isRepeatable": false,
+
+  "quests": [
+    {
+      "questId": "vs_q1_ridge_and_road",
+      "title": "The Ridge and the Road",
+      "npcGiverId": "npc_rella_ridgewatch",
+      "npcTurnInId": "npc_rella_ridgewatch",
+      "prerequisites": [],
+      "startType": "talk_or_autostart",
+      "startTriggerId": "trig_overlook_spawn",
+      "description": "Rella wants to know if the path down from the ridge still holds after the last storm. Step down carefully and reach the creek below.",
+
+      "objectives": [
+        {
+          "id": "reach_descent",
+          "type": "location_interact",
+          "targetId": "overlook_descent_trigger",
+          "count": 1,
+          "triggerId": "trig_overlook_descent"
+        },
+        {
+          "id": "reach_creek_crossing",
+          "type": "location",
+          "targetId": "creek_crossing",
+          "count": 1,
+          "triggerId": "trig_creek_crossing_center"
+        },
+        {
+          "id": "inspect_plank",
+          "type": "interact",
+          "targetId": "obj_broken_plank",
+          "count": 1
+        }
+      ],
+
+      "rewards": {
+        "items": [
+          { "id": "dried_banner_thistle", "count": 1 }
+        ],
+        "xp": { "movement": 5 }
+      }
+    },
+
+    {
+      "questId": "vs_q2_first_signs",
+      "title": "First Signs of Trouble",
+      "npcGiverId": "npc_rella_ridgewatch",
+      "npcTurnInId": "npc_rella_ridgewatch",
+      "prerequisites": ["vs_q1_ridge_and_road"],
+      "startType": "auto_or_talk",
+      "startTriggerId": "trig_creek_crossing_center",
+      "description": "Tracks near the broken plank lead along the right bank of the creek. Follow them and deal with whoever has been testing the crossing.",
+
+      "objectives": [
+        {
+          "id": "follow_tracks",
+          "type": "location",
+          "targetId": "creek_right_bank",
+          "count": 1,
+          "triggerId": "trig_creek_right_bank"
+        },
+        {
+          "id": "defeat_goblin",
+          "type": "kill",
+          "targetId": "enemy_field_goblin_v1",
+          "count": 1,
+          "areaTriggerId": "trig_creek_right_bank"
+        },
+        {
+          "id": "loot_scrap",
+          "type": "collect",
+          "targetId": "goblin_scrap",
+          "count": 1
+        }
+      ],
+
+      "rewards": {
+        "items": [
+          { "id": "goblin_scrap", "count": 1 }
+        ],
+        "xp": { "combat": 10 }
+      }
+    },
+
+    {
+      "questId": "vs_q3_tools_of_trade",
+      "title": "Tools of the Trade",
+      "npcGiverId": "npc_rella_ridgewatch",
+      "npcTurnInId": "npc_rella_ridgewatch",
+      "prerequisites": ["vs_q2_first_signs"],
+      "startType": "auto_or_talk",
+      "startTriggerId": "trig_farmstead_outer",
+      "description": "The ruined farmstead ahead still holds shallow iron seams. Gather ore and forge yourself a simple edge before walking deeper into the Vale.",
+
+      "objectives": [
+        {
+          "id": "mine_ore",
+          "type": "gather",
+          "targetId": "node_iron_ore_t1_farmstead",
+          "count": 1,
+          "areaTriggerId": "trig_farmstead_mine"
+        },
+        {
+          "id": "craft_bar",
+          "type": "craft",
+          "targetId": "lowmark_iron_bar",
+          "count": 1,
+          "areaTriggerId": "station_farmstead_fire"
+        },
+        {
+          "id": "craft_blade",
+          "type": "craft",
+          "targetId": "simple_blade",
+          "count": 1,
+          "alternateTargets": ["iron_knife_vs"]
+        },
+        {
+          "id": "equip_blade",
+          "type": "equip",
+          "targetId": "simple_blade",
+          "alternateTargets": ["iron_knife_vs"],
+          "count": 1
+        }
+      ],
+
+      "rewards": {
+        "items": [
+          { "id": "simple_blade", "count": 1 }
+        ],
+        "xp": {
+          "smithing": 10,
+          "mining": 10
+        }
+      }
+    },
+
+    {
+      "questId": "vs_q4_through_the_fields",
+      "title": "Through the Fields",
+      "npcGiverId": "npc_rella_ridgewatch",
+      "npcTurnInId": "npc_rella_ridgewatch",
+      "prerequisites": ["vs_q3_tools_of_trade"],
+      "startType": "auto_or_talk",
+      "startTriggerId": "trig_farmstead_to_fields",
+      "description": "Walk the field edge and see if the old boundary road still holds. Hunt if you like, then clear any trouble near the wall.",
+
+      "objectives": [
+        {
+          "id": "reach_field_edges",
+          "type": "location",
+          "targetId": "field_edges",
+          "count": 1,
+          "triggerId": "trig_field_edges_entry"
+        },
+        {
+          "id": "hunt_boar_optional",
+          "type": "kill",
+          "targetId": "enemy_furrow_boar",
+          "count": 1,
+          "optional": true,
+          "areaTriggerId": "trig_field_edges"
+        },
+        {
+          "id": "reach_boundary_wall",
+          "type": "location",
+          "targetId": "old_boundary_wall",
+          "count": 1,
+          "triggerId": "trig_boundary_wall_entry"
+        },
+        {
+          "id": "defeat_footman",
+          "type": "kill",
+          "targetId": "enemy_lost_footman_vs",
+          "count": 1,
+          "areaTriggerId": "trig_boundary_combat"
+        },
+        {
+          "id": "defeat_lookout",
+          "type": "kill",
+          "targetId": "enemy_goblin_lookout_vs",
+          "count": 1,
+          "areaTriggerId": "trig_boundary_combat"
+        },
+        {
+          "id": "inspect_ashes",
+          "type": "interact",
+          "targetId": "obj_boundary_campfire_ash",
+          "count": 1
+        }
+      ],
+
+      "rewards": {
+        "items": [
+          { "id": "field_checked_token", "count": 1 },
+          { "id": "raw_boar_meat", "count": 1, "conditionalObjectiveId": "hunt_boar_optional" }
+        ],
+        "xp": {
+          "combat": 20,
+          "hunting": 5
+        }
+      }
+    }
+  ]
+}

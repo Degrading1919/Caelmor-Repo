@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "ResourceCategory.schema.json",
+  "title": "ResourceCategory",
+  "description": "Defines the canonical resource categories allowed in Caelmor. Only approved categories may be referenced by game content.",
+  "type": "object",
+  "required": [
+    "key",
+    "id",
+    "role",
+    "description"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Stable internal identifier for the resource category. Lowercase snake_case, not player-facing.",
+      "enum": [
+        "core_structures",
+        "fasteners_bindings",
+        "transmission_media",
+        "reactants",
+        "control_agents",
+        "sustenance_sources"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "description": "Canonical resource category identifier.",
+      "enum": [
+        "Core Structures",
+        "Fasteners & Bindings",
+        "Transmission Media",
+        "Reactants",
+        "Control Agents",
+        "Sustenance Sources"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Short system-facing description of the category."
+    },
+    "role": {
+      "type": "string",
+      "description": "Functional role this category fulfills in crafting and systems.",
+      "enum": [
+        "Structural",
+        "Binding",
+        "Conductive",
+        "Catalytic",
+        "Stabilizing",
+        "Nutritional"
+      ]
+    }
+  }
+}

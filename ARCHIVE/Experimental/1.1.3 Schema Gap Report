@@ -1,0 +1,540 @@
+0. Global Observations
+
+Tech Foundation vs Current Schemas Mismatch
+Tech Foundation states that certain fields were already added:
+
+Items: stackable, maxStack
+
+Enemies: is_boss_family, is_unique
+
+Skills: max_level
+
+Zones: is_starting_zone
+
+Quests: repeatable, prerequisites
+
+NPCs: trainerSkillId
+
+None of these appear in the current schema files.
+➜ Action: Decide whether to treat the Tech Foundation as “source of truth” and update all schemas accordingly (recommended).
+
+Design Vision vs Schema Fields
+The Feature Set document explicitly avoids rarity colors (“no rarity colors like ‘Common/Rare/Epic’”).
+Current Item schema includes a rarity field with those exact values.
+➜ Action: Align Item.rarity with vision (rename or repurpose).
+
+IDs & References
+
+All schemas use plain "id": "string" for primary keys with no standard pattern.
+
+References are consistently strings (item_id, enemy_family_id, zone_id, etc.), but no explicit convention or validation hints.
+➜ Action: Confirm naming convention (e.g., lowmark_goblins, lowmark_outskirts) as informal standard; no schema change required, but worth documenting.
+
+Vertical Slice vs Full v1
+
+Vertical Slice needs a minimal but fully functional subset (movement, combat, crafting, inventory, 1–2 POIs, 1–2 quests).
+
+Many “nice-to-have” fields can be deferred to v1; this report marks VS-critical vs v1-important where relevant.
+
+1. Item_Schema_Flat
+
+Current Schema (Summary)
+
+{
+  "id": "string",
+  "name": "string",
+  "type": "weapon|armor|material|consumable|quest",
+  "tier": 1,
+  "rarity": "common|uncommon|rare|epic",
+  "value": 0,
+  "stats": {
+    "damage": 0,
+    "armor": 0,
+    "speed": 0
+  },
+  "description": "string"
+}
+
+1.1 Gaps vs Tech Foundation & Design
+
+Missing stackable & maxStack (Tech Foundation says these exist).
+
+rarity contradicts the stated desire to avoid “Common/Rare/Epic” style colors in v1.
+
+No way to describe equip slot (helmet, chest, legs, main-hand, off-hand) for armor/weapons.
+
+No field to distinguish food vs potion vs generic consumable despite design emphasis on Cooking for HP recovery.
+
+No explicit is_quest_item flag (quest items vs ordinary).
+
+No way to express set membership (armor sets).
+
+No explicit skill requirements (e.g., required level in Smithing or Melee).
+
+1.2 Proposed Extensions
+
+VS-Critical:
+
+stackable: bool
+
+maxStack: int
+
+equip_slot: "head|chest|legs|hands|weapon|offhand|ring|none" (or similar)
+
+is_quest_item: bool
+
+v1-Important:
+
+Replace or repurpose rarity → e.g. quality: "crude|standard|fine|masterwork" to fit the “no MMO rarity color” vision.
+
+consumable_effects: [{ "type": "heal_hp", "amount": 10 }] (or generic use_effects)
+
+set_id: string | null for armor sets.
+
+requirements: { "skill": "melee", "level": 5 } (optional).
+
+2. Enemy_Family_Schema_Modular
+
+Current Schema
+
+{
+  "id": "string",
+  "region": "lowmark|thornfell|mire|emberholt",
+  "tier": "low|mid|high",
+  "base_stats": {
+    "health": 0,
+    "power": 0,
+    "armor": 0,
+    "speed": 1.0
+  },
+  "behavior": "skirmisher|brute|caster|ambusher",
+  "loot_table": "string"
+}
+
+2.1 Gaps vs Tech Foundation & Content Strategy
+
+Missing is_boss_family, is_unique despite Tech Foundation note.
+
+Family is bound to single region, but content strategy will eventually need multi-region families (post-v1), though v1 is Lowmark-only.
+
+No explicit role tags (e.g., is_ranged, is_swarm, is_elite_capable) beyond a single behavior enum.
+
+No narrative hooks or short description to support lore integration.
+
+2.2 Proposed Extensions
+
+VS-Critical:
+
+is_boss_family: bool
+
+is_unique: bool (for signature enemies, even if rarely used in VS)
+
+v1-Important:
+
+description: string
+
+Possibly allow multi-region via regions: ["lowmark"] instead of single region, while still only using one for v1.
+
+3. Enemy_Variant_Schema_Modular
+
+Current Schema + Example
+
+{
+  "id": "string",
+  "family": "string",
+  "level": 1,
+  "variant_modifiers": {
+    "health": 0,
+    "power": 0
+  },
+  "abilities": ["string"],
+  "spawn_regions": ["string"]
+}
+
+3.1 Gaps
+
+No way to mark boss/miniboss/elite at variant level (is_boss, is_elite).
+
+No control over spawn frequency, group size, respawn rules – important for content density rules and VS encounter tuning.
+
+No XP reward or link to skill XP systems.
+
+No override for loot table per variant (only via family).
+
+No prefab/asset reference for implementation.
+
+3.2 Proposed Extensions
+
+VS-Critical:
+
+is_boss: bool
+
+is_elite: bool
+
+spawn_config: { "zones": ["lowmark_outskirts"], "weight": 1, "group_size": { "min": 1, "max": 3 } }
+
+v1-Important:
+
+xp_reward: int (or derived via table; field may be optional)
+
+loot_table_override: "loot_table_id" | null
+
+prefab_id: string (implementation-facing, optional in design layer).
+
+4. Resource_Node_Schema_Modular
+
+Current Schema
+
+{
+  "id": "string",
+  "type": "ore|herb|wood|special",
+  "resource_item": "item_id",
+  "tier": 1,
+  "respawn_time": 60,
+  "yield": { "min": 1, "max": 3 }
+}
+
+4.1 Gaps vs v1 Needs
+
+No link to skill or required level (Mining, Woodcutting, Hunting, etc.).
+
+No zone or coordinate references (these might be handled in world data, but at design level we at least need zone tags for balancing content density).
+
+No rarity or is_rare flag, though content strategy calls for 3–5 rare nodes.
+
+“Hunting Zones” and “Hunting nodes” are not represented at all (they are behaviorally more like spawn zones than static nodes).
+
+4.2 Proposed Extensions
+
+VS-Critical:
+
+skill: "mining|woodcutting|hunting|foraging"
+
+required_level: int
+
+At least a zone_ids: ["lowmark_outskirts"] tag at design layer.
+
+v1-Important:
+
+is_rare: bool
+
+Future split or new schema: Hunting_Zone_Schema for animal spawn areas (recommended, but can be deferred if we encode hunting purely as enemy spawns).
+
+5. Crafting_Recipe_Schema_Modular
+
+Current Schema
+
+{
+  "id": "string",
+  "skill": "crafting_skill_id",
+  "required_level": 1,
+  "ingredients": [{ "item": "item_id", "qty": 2 }],
+  "result": { "item": "item_id", "qty": 1 },
+  "time": 3
+}
+
+5.1 Gaps
+
+No field for XP gain per craft.
+
+No explicit crafting station (forge, fletching bench, leather rack, cooking fire).
+
+No support for multiple outputs or by-products.
+
+time is ambiguous: ticks vs seconds (tick model uses 10Hz).
+
+5.2 Proposed Extensions
+
+VS-Critical:
+
+xp_gain: int
+
+station_id: "forge|fletching_bench|leather_rack|cooking_fire"
+
+Clarify time as seconds or ticks in comment and consistently use it in TickManager.
+
+v1-Important:
+
+extra_results: [{ "item": "item_id", "qty": 1, "chance": 0.25 }] (optional).
+
+unlocked_by_quest: "quest_id" | null (for special recipes).
+
+6. Skill_Schema_Modular
+
+Current Schema
+
+{
+  "id": "string",
+  "category": "combat|gathering|crafting",
+  "xp_curve": "curve_id",
+  "effects": [
+    { "level": 1, "effect": "string" }
+  ]
+}
+
+6.1 Gaps vs Tech Foundation & Content Strategy
+
+Tech Foundation: Skills: max_level field mentioned but missing.
+
+No name / description for UI and lore.
+
+No explicit is_enabled or is_v1_skill flag; there are long-term planned skills for future phases.
+
+6.2 Proposed Extensions
+
+VS-Critical:
+
+name: string
+
+max_level: int
+
+v1-Important:
+
+description: string
+
+Optional tags: ["ranged_progression", "uses_arrows"] to tie into content design.
+
+7. Zone_Schema_Modular (+ Example)
+
+Current Schema
+
+{
+  "id": "string",
+  "name": "string",
+  "region": "lowmark|thornfell|mire|emberholt",
+  "recommended_level": 1,
+  "poi": [
+    { "id": "string", "type": "shrine|village|ruin|camp|cave", "description": "string" }
+  ],
+  "encounters": ["enemy_family_id"],
+  "resources": ["resource_node_id"]
+}
+
+7.1 Gaps vs Tech Foundation & Content Strategy
+
+Tech Foundation mentions Zones: is_starting_zone (missing).
+
+Content Strategy defines:
+
+Subzones (3–4 per region)
+
+Traversal route plans
+
+Environmental storytelling elements
+None of these are represented.
+
+POIs are very minimal: no coordinates, difficulty, linked NPCs, or quest hooks.
+
+encounters & resources are just ID lists; no densities or spawn weights for tuning content density rules.
+
+7.2 Proposed Extensions
+
+VS-Critical:
+
+is_starting_zone: bool
+
+is_subzone: bool
+
+poi should at least allow position (or implicit use of Unity scene for exact placement but store a “design ID”):
+
+"poi": [
+  {
+    "id": "string",
+    "type": "shrine|village|ruin|camp|cave",
+    "description": "string"
+  }
+]
+
+
+(Position can remain engine-side, so we keep schema light.)
+
+encounter_tables: [{ "family": "enemy_family_id", "weight": 1 }] (or similar) for spawn balancing.
+
+v1-Important:
+
+traversal_routes: [{ "id": "string", "notes": "route from Greyharrow to Brackenford" }]
+
+environmental_story_notes: ["old siege line still visible along the ridge"]
+
+Optional audio_profile_id, weather_profile_id.
+
+8. NPC_Schema_Flat
+
+Current Schema
+
+{
+  "id": "string",
+  "name": "string",
+  "role": "merchant|quest_giver|trainer|civilian",
+  "location": "zone_id",
+  "dialogue_id": "string",
+  "inventory": ["item_id"],
+  "description": "string"
+}
+
+8.1 Gaps
+
+Tech Foundation mentions trainerSkillId for skill trainers; missing.
+
+No race, faction, or profession flavor.
+
+Only one dialogue_id – no way to swap dialogue based on quest state or progression.
+
+No explicit pricing logic (markup, buy/sell modifiers).
+
+location is only zone_id, no granularity for POI or coordinates.
+
+8.2 Proposed Extensions
+
+VS-Critical:
+
+trainerSkillId: "skill_id" | null (align with Tech Foundation).
+
+faction: "lowmark_commoners|guild|none" (optional but cheap).
+
+v1-Important:
+
+race: "human|dwarf|halfling|elf|other"
+
+dialogue_variants: [{ "dialogue_id": "string", "condition": "quest_x_completed" }]
+
+pricing_profile_id: "merchant_standard|black_market".
+
+9. Quest_Schema_Flat
+
+Current Schema
+
+{
+  "id": "string",
+  "name": "string",
+  "summary": "string",
+  "region": "lowmark|thornfell|mire|emberholt",
+  "steps": [
+    {
+      "id": "step_01",
+      "objective": "string",
+      "target": "npc|item|enemy|location",
+      "target_id": "string",
+      "description": "string"
+    }
+  ],
+  "rewards": {
+    "xp": 0,
+    "items": ["item_id"],
+    "gold": 0
+  }
+}
+
+9.1 Gaps vs Tech Foundation & Quest Design
+
+Tech Foundation: Quests: repeatable, prerequisites — both missing.
+
+No type for main quest vs side vs micro-event – Phase 1.5 distinguishes these.
+
+Steps support only a single target per step; no multi-target or “collect 5 wolf pelts” semantics.
+
+No level recommendation or difficulty indicator.
+
+No field to mark co-op safe or “progress shared per player” (though design docs say co-op is independent progression).
+
+9.2 Proposed Extensions
+
+VS-Critical:
+
+type: "main|side|micro"
+
+repeatable: bool
+
+prerequisites: ["quest_id"] (simple list)
+
+v1-Important:
+
+recommended_level: int
+
+More structured steps:
+
+{
+  "id": "step_01",
+  "objective_type": "talk|kill|collect|explore|interact",
+  "target_id": "string",
+  "count": 1
+}
+
+
+flags: { "solo_only": false } (even if we always allow co-op, this makes the schema forward-compatible).
+
+10. Dialogue_Schema_Flat
+
+Current Schema
+
+{
+  "id": "string",
+  "nodes": [
+    {
+      "id": "string",
+      "text": "string",
+      "next": ["node_id"]
+    }
+  ]
+}
+
+10.1 Gaps
+
+No notion of speaker (NPC name vs player, multi-NPC conversations).
+
+No player choices or branching options; next is just simple linear graph.
+
+No conditions (quest state, skill checks, reputation).
+
+No hooks for rewards or script triggers at dialogue completion.
+
+10.2 Proposed Extensions
+
+VS-Critical:
+
+speaker: "npc|player" or speaker_id at node level to support basic persona in VS.
+
+v1-Important:
+
+options: [{ "id": "choice_01", "text": "...", "next": "node_id" }] for branching.
+
+Optional conditions: ["quest_x_started"] and effects: ["start_quest_x"] for simple quest hooks.
+
+11. Summary of Required Changes (By Priority)
+11.1 Vertical Slice–Critical Changes
+
+These are needed to cleanly support the VS goals:
+
+Global: Update schemas to match Tech Foundation fields (stackable, maxStack, is_boss_family, max_level, is_starting_zone, repeatable, prerequisites, trainerSkillId).
+
+Item: stackable, maxStack, is_quest_item, basic equip_slot.
+
+Enemy Family/Variant: boss/elite flags and basic spawn config.
+
+Resource Node: skill + required_level; zone tag.
+
+Recipe: xp_gain, station_id, clarify time unit.
+
+Skill: name, max_level.
+
+Zone: is_starting_zone, is_subzone flags, encounter tables vs plain lists.
+
+NPC: trainerSkillId.
+
+Quest: type, repeatable, prerequisites.
+
+Dialogue: simple speaker at node level.
+
+11.2 v1-Important (Post-VS but Pre-Launch)
+
+Item quality instead of MMO-style rarity.
+
+Resource node is_rare.
+
+Enemy variant xp_reward, loot_table_override, prefab_id.
+
+Zone traversal_routes, environmental_story_notes.
+
+Quest recommended_level, more structured step types.
+
+Dialogue branching (options, conditions, effects).

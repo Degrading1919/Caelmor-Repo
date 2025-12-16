@@ -1,0 +1,131 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "ResourceNode.schema.json",
+  "title": "ResourceNode",
+  "description": "Defines a world-interactable resource node that can be gathered using non-combat skills.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "key",
+    "display_name",
+    "resource_category_key",
+    "gathering_skills",
+    "interaction_model",
+    "world_behavior",
+    "risk_hooks"
+  ],
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Stable internal identifier for the resource node. Lowercase snake_case, not player-facing."
+    },
+
+    "display_name": {
+      "type": "string",
+      "description": "Player-facing name of the resource node."
+    },
+
+    "description": {
+      "type": "string",
+      "description": "Optional player-facing description of the resource node."
+    },
+
+    "resource_category_key": {
+      "type": "string",
+      "description": "Reference to the resource category this node produces, by ResourceCategory key.",
+      "enum": [
+        "core_structures",
+        "fasteners_bindings",
+        "transmission_media",
+        "reactants",
+        "control_agents",
+        "sustenance_sources"
+      ]
+    },
+
+    "gathering_skills": {
+      "type": "array",
+      "description": "List of gathering skills allowed to interact with this node.",
+      "minItems": 1,
+      "items": {
+        "$ref": "GatheringSkillKey.schema.json"
+      },
+      "uniqueItems": true
+    },
+
+    "interaction_model": {
+      "type": "object",
+      "description": "High-level interaction behavior supported by the node.",
+      "additionalProperties": false,
+      "required": [
+        "single_use",
+        "multi_use",
+        "time_based",
+        "risk_based"
+      ],
+      "properties": {
+        "single_use": {
+          "type": "boolean",
+          "description": "Whether the node can be consumed in a single interaction."
+        },
+        "multi_use": {
+          "type": "boolean",
+          "description": "Whether the node supports repeated interactions before depletion."
+        },
+        "time_based": {
+          "type": "boolean",
+          "description": "Whether interaction requires a time commitment."
+        },
+        "risk_based": {
+          "type": "boolean",
+          "description": "Whether interaction may involve abstract risk or failure."
+        }
+      }
+    },
+
+    "world_behavior": {
+      "type": "object",
+      "description": "Defines how the node exists and changes in the world.",
+      "additionalProperties": false,
+      "required": [
+        "depletable",
+        "respawnable",
+        "stateful"
+      ],
+      "properties": {
+        "depletable": {
+          "type": "boolean",
+          "description": "Whether the node can be exhausted."
+        },
+        "respawnable": {
+          "type": "boolean",
+          "description": "Whether the node can return after depletion."
+        },
+        "stateful": {
+          "type": "boolean",
+          "description": "Whether the node can exist in multiple abstract states (e.g., unstable, exhausted)."
+        }
+      }
+    },
+
+    "risk_hooks": {
+      "type": "object",
+      "description": "Abstract flags for danger or instability used by higher-level systems.",
+      "additionalProperties": false,
+      "required": [
+        "environmental_danger",
+        "instability"
+      ],
+      "properties": {
+        "environmental_danger": {
+          "type": "boolean",
+          "description": "Indicates potential environmental danger during interaction."
+        },
+        "instability": {
+          "type": "boolean",
+          "description": "Indicates potential for failure or unstable outcomes."
+        }
+      }
+    }
+  }
+}

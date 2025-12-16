@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "ResourceItem.schema.json",
+  "title": "ResourceItem",
+  "description": "Defines an inventory-form resource obtained from resource nodes. Encodes identity, classification, provenance, and system participation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "key",
+    "display_name",
+    "resource_category_key",
+    "form",
+    "origin_node_keys",
+    "system_flags"
+  ],
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Stable internal identifier for the resource item. Lowercase snake_case, not player-facing."
+    },
+
+    "display_name": {
+      "type": "string",
+      "description": "Player-facing name of the resource item."
+    },
+
+    "description": {
+      "type": "string",
+      "description": "Optional player-facing description of the resource item."
+    },
+
+    "resource_category_key": {
+      "type": "string",
+      "description": "Reference to the resource category this item belongs to, by ResourceCategory key.",
+      "enum": [
+        "core_structures",
+        "fasteners_bindings",
+        "transmission_media",
+        "reactants",
+        "control_agents",
+        "sustenance_sources"
+      ]
+    },
+
+    "form": {
+      "type": "string",
+      "description": "Processing state of the resource item.",
+      "enum": [
+        "raw",
+        "processed",
+        "refined"
+      ]
+    },
+
+    "origin_node_keys": {
+      "type": "array",
+      "description": "Declarative list of resource node types capable of producing this item.",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "ResourceNodeKey.schema.json"
+      }
+    },
+
+    "system_flags": {
+      "type": "object",
+      "description": "High-level system participation flags.",
+      "additionalProperties": false,
+      "required": [
+        "stackable",
+        "tradable",
+        "persistent"
+      ],
+      "properties": {
+        "stackable": {
+          "type": "boolean",
+          "description": "Whether multiple instances of this item can stack in inventory."
+        },
+        "tradable": {
+          "type": "boolean",
+          "description": "Whether this item can be traded between players or systems."
+        },
+        "persistent": {
+          "type": "boolean",
+          "description": "Whether this item persists across sessions and server restarts."
+        }
+      }
+    }
+  }
+}

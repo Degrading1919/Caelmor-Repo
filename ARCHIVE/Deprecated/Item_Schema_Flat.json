@@ -1,0 +1,52 @@
+// Item_Schema_Flat_v2.txt
+{
+  "itemId": "string",                 // required, unique
+  "displayName": "string",            // required, player-facing name
+
+  // Coarse type + subtype — used by inventory UI, equip rules, crafting, etc.
+  "category": "weapon|armor|material|consumable|quest|utility",
+  "subType": "string",                // e.g. "sword", "bow", "helmet", "food", "potion"
+
+  // Stack & value — required by Phase 1.4 inventory/network rules
+  "isStackable": true,
+  "maxStack": 99,
+  "value": 0,                         // base gold value
+
+  // Open-ended metadata for systems & content (keeps schema future-proof)
+  "metadata": {
+    // Optional combat / defense stats (used for weapons/armor)
+    "stats": {
+      "damage": 0,
+      "armor": 0,
+      "attackSpeed": 0,
+      "range": 0
+    },
+
+    // Quality tier (design alternative to MMO-style rarity colors)
+    "quality": "crude|standard|fine|masterwork",
+
+    // Equip slot (none for materials, quest items, many consumables)
+    "equipSlot": "none|head|chest|legs|hands|weapon|offhand|ring|amulet",
+
+    // Quest flag (kept here instead of main body to reduce clutter)
+    "isQuestItem": false,
+
+    // Optional consumable behavior (healing, buff, etc.)
+    "consumableEffects": [
+      {
+        "type": "heal_hp",            // game-defined effect type
+        "amount": 10
+      }
+    ],
+
+    // Optional set membership for armor/weapon sets
+    "setId": "string",
+	
+	"weaponType": "none|melee|ranged",   // NEW — required for XP routing
+	
+	"attackRange": 1.5,                  // NEW — weapon-level range value
+
+    // Free-form lore/tooltip text
+    "description": "string"
+  }
+}

@@ -1,0 +1,336 @@
+﻿CAELMOR_FILE_MANIFEST_v1
+Generated automatically from full Caelmor project root.
+Project root: C:\Users\CK\Documents\Caelmor
+Update timestamp: 12/15/2025 19:02:37
+
+============================================================
+DIRECTORY STRUCTURE (Including Empty Folders)
+============================================================
+
+00_ADMIN/
+01_PRE-PRODUCTION/
+02_VERTICAL_SLICE/
+03_CORE_SYSTEMS/
+04_CONTENT_PRODUCTION/
+05_ALPHA_BETA/
+ARCHIVE/
+CODE/
+DESIGNS/
+LORE/
+MEDIA/
+UNITY/
+00_ADMIN\Milestones/
+    - Stage 13.0 — Player Lifecycle & Authority.md
+    - Stage 14.0 — Onboarding Runtime.md
+    - Stage 15.0 — Quest Runtime Architecture.md
+    - Stage 16.0 — NPC Runtime Architecture.md
+    - Stage 17.0 — Item Runtime Architecture.md
+    - Stage 18.0 — NPC Behavior & Decision Architecture.md
+    - Stage 19.0 — World & Zone Runtime Architecture.md
+    - Stage 20.0 — Networking & Replication Architecture.md
+    - Stage 21.0 — Cross-System Persistence Architecture.md
+    - Stage 22.0 — Implementation Planning Framework.md
+    - Stage 23.0 — Runtime Implementation (Player Lifecycle).md
+    - Stage 4.3 — Economy Snapshot & Implementation Plan.md
+    - Stage 4.4 — Economy Snapshot & Implementation Complete.md
+    - Stage 5.1 — Integration Harness Snapshot.md
+    - Stage 6.1 — Combat Architecture Snapshot.md
+    - Stage 6.3 — Combat Runtime Implementation.md
+00_ADMIN\Reference/
+    - Caelmor_Assistant_Activation_Prompts.md
+    - Caelmor_File_Manifest.txt
+    - Caelmor_File_Manifest_Autogen.ps1
+    - Caelmor_Master_Assistant_Protocol.md
+    - Caelmor_Project_Instructions.txt
+    - CONTINUITY HANDOFF PROMPT.md
+    - Deep_Research_Findings_for_Caelmor_Development.md
+    - Races_Skills_Resources_Deep_Research.txt
+    - RuneScape_Item_Resource_Node_Enemy_and_NPC_Ecosystem_Deep_Research.txt
+    - World_&_Quest_Deep_Research.txt
+00_ADMIN\Roadmaps/
+    - Caelmor_Roadmap.md
+00_ADMIN\Schedules/
+00_ADMIN\Reference\ChatGPT Convos/
+    - Game_Director_and_Producer_v1.txt
+    - Game_Director_and_Producer_v2.txt
+    - Game_Director_and_Producer_v3.txt
+    - SYSTEMS ENGINEER_v1.txt
+    - WORLD & QUEST DESIGNER_dossiers.txt
+01_PRE-PRODUCTION\1.1 Core Vision/
+    - Caelmor_Phase1_1_Core_Vision.md
+01_PRE-PRODUCTION\1.2 Pillars & Tenets/
+    - Caelmor_Phase1_2_Pillars_and_Tenets.md
+01_PRE-PRODUCTION\1.3 Feature Set & Scope/
+    - Caelmor_Phase1_3_FeatureSet_and_Scope_Boundaries.md
+01_PRE-PRODUCTION\1.4 Technical Foundation/
+    - Caelmor_Phase1_4_Technical_Foundation.md
+01_PRE-PRODUCTION\1.5 Content Strategy/
+    - Caelmor_Phase1_5_Content_Strategy.md
+02_VERTICAL_SLICE\Combat Prototype/
+02_VERTICAL_SLICE\Crafting v0/
+02_VERTICAL_SLICE\Design Docs/
+02_VERTICAL_SLICE\Networking v0/
+02_VERTICAL_SLICE\Quest Chain v0/
+02_VERTICAL_SLICE\Zone v0/
+03_CORE_SYSTEMS\Combat & Stats v1/
+03_CORE_SYSTEMS\Crafting & Economy v1/
+    - Recipe.SampleSet.json
+    - ResourceItem.SampleSet.json
+    - ResourceNode.SampleSet.json
+03_CORE_SYSTEMS\Networking Expansion/
+03_CORE_SYSTEMS\Persistence System/
+03_CORE_SYSTEMS\Skills & XP v1/
+    - Stage 3.1 — Non-Combat Skills Overview.md
+    - Stage 3.2 — Crafting Output Classes.md
+    - Stage 3.3 — Orphan Resource Kill Pass.md
+    - Stage 3.4 — Resource Category Derivation.md
+04_CONTENT_PRODUCTION\Dialogue & Narrative/
+04_CONTENT_PRODUCTION\Enemies/
+04_CONTENT_PRODUCTION\Items/
+04_CONTENT_PRODUCTION\Quests/
+04_CONTENT_PRODUCTION\Recipes/
+04_CONTENT_PRODUCTION\ResourceNodes/
+04_CONTENT_PRODUCTION\Zones/
+05_ALPHA_BETA\Balancing/
+05_ALPHA_BETA\Launch Prep/
+05_ALPHA_BETA\Onboarding/
+05_ALPHA_BETA\QA Reports/
+05_ALPHA_BETA\UI Polish/
+ARCHIVE\Deprecated/
+    - AIController.cs
+    - Caelmor_Region1_LowmarkValev3.md
+    - Caelmor_Region1_LowmarkVale_old.md
+    - Caelmor_Region1_LowmarkVale_v2.md
+    - Caelmor_Region2_ThornfellMarchesv3.md
+    - Caelmor_Region2_ThornfellMarches_v1.md
+    - Caelmor_Region2_ThornfellMarches_v2.md
+    - Caelmor_Region3_MireOfFallenBannersv3v.md
+    - Caelmor_Region3_MireOfFallenBanners_v1.md
+    - Caelmor_Region4_EmberholtHeightsv3.md
+    - Caelmor_Region4_EmberholtHeights_v1.md
+    - Caelmor_Region4_EmberholtHeights_v2.md
+    - Caelmor_VerticalSlice_Code_Scaffolds_v1_1.cs
+    - Caelmor_VerticalSlice_Pseudocode_and_Modules.md
+    - Caelmor_VerticalSlice_Technical_Spec_v1.1.md
+    - Caelmor_VerticalSlice_Technical_Spec_v1.md
+    - Caelmor_World_Regions_Bible.md
+    - CameraController.cs
+    - CharacterStats.cs
+    - ClientPlayerController.cs
+    - ClientWorld.cs
+    - CombatSystem.cs
+    - Combat_v0_ArchitectNotes.md
+    - Combat_v0_Design.md
+    - ContentDatabase.cs
+    - CraftingStation.cs
+    - Crafting_Recipe_Schema_Modular.json
+    - Dialogue_Schema_Flat.json
+    - enemy_family.json
+    - Enemy_Family_Schema_Modular.json
+    - enemy_variant.json
+    - Enemy_Variant_Schema_Modular.json
+    - Enemy_Variant_Schema_Modular_Example.json
+    - Entity.cs
+    - EquipmentSystem.cs
+    - GameConstants.cs
+    - InventorySystem.cs
+    - ItemDefinition.cs
+    - ItemInstance.cs
+    - Item_Schema_Flat.json
+    - Item_Schema_Flat_Example.json
+    - Lowmark_VS_EncounterDesign_v1.md
+    - Lowmark_VS_Whitebox.md
+    - Lowmark_VS_Whitebox_v1.1.md
+    - NetworkManager.cs
+    - NetworkMessages.cs
+    - NPC_Schema_Flat.json
+    - PLACEHOLDER_Items_VSQuest.json
+    - PLACEHOLDER_ResourceNodes_VS.json
+    - PlayerController.cs
+    - PlayerSave_Schema.json
+    - QuestChain_Schema.json
+    - QuestSystem.cs
+    - Quest_Schema_Flat.json
+    - ResourceNode.cs
+    - Resource_Node_Schema_Modular.json
+    - response.txt
+    - SaveSystem.cs
+    - Schema_Index_v1.json
+    - Skill_Schema_Modular.json
+    - Stats_and_Skills.cs
+    - temp character architecture.txt
+    - temp tick response.txt
+    - temp timeline and factions documentation.txt
+    - TickManager.cs
+    - TickManager_Design.md
+    - VS_Camera_PolishNotes.md
+    - VS_CraftingLoop_Definition.md
+    - VS_Crafting_Spec.md
+    - VS_Enemy_Spec.md
+    - VS_Items.json
+    - VS_MovementAndCamera_Design_v1.md
+    - VS_Networking_Model.md
+    - VS_Networking_ReviewNotes.md
+    - VS_QuestChain.json
+    - VS_QuestChain_Draft.md
+    - VS_QuestChain_Final.md
+    - VS_QuestChain_ImplementationSpec.md
+    - VS_QuestChain_Refined.md
+    - VS_Recipes.json
+    - VS_Recipes_v2.1_Aligned.json
+    - VS_RecipeValidation_Report.md
+    - VS_ResourceNodes.json
+    - VS_ResourceNode_Balance.md
+    - WorldManager.cs
+    - WorldSave_Schema.json
+    - Zone_Schema_Modular.json
+    - Zone_Schema_Modular_Example.json
+ARCHIVE\Experimental/
+    - 1.1.3 FINAL ACCEPTED SCHEMA CHANGE LIST.txt
+    - 1.1.3 Schema Gap Report
+    - 1.1.3 systems architect review.txt
+    - enemy variant and family.md
+    - VS Enemy Family & Variant — Behavioral + Design Specification.md
+CODE\Prototypes/
+CODE\Scripts/
+CODE\Systems/
+    - CombatIntentQueueSystem.cs
+    - CombatOutcomeApplicationSystem.cs
+    - CombatPresentationHookSystem.cs
+    - CombatReplicationSystem.cs
+    - CombatResolutionEngine.cs
+    - CombatStateAuthoritySystem.cs
+    - ValidationAssert.cs
+    - ValidationDiff_Utilities.cs
+    - ValidationHarness_Bootstrap.cs
+    - ValidationHarness_ConfigAndInterfaces.cs
+    - ValidationHarness_ContextStub.cs
+    - ValidationHarness_Runtime.cs
+    - ValidationScenario_Registration.cs
+    - ValidationScenario_Stage9Matrix.cs
+    - ValidationSnapshot_Capture.cs
+    - ValidationSnapshot_Types.cs
+CODE\Utilities/
+DESIGNS\Combat Design/
+    - Stage 6.1.1 — Combat Action Intents.md
+    - Stage 6.1.2 — Combat State Model.md
+    - Stage 6.1.3 — Combat Resolution Order & Contracts.md
+    - Stage 6.1.4 — Combat Authority & Networking.md
+    - Stage 6.2 —  Combat Implementation Plan.md
+    - Stage 6.3.1 — Combat Runtime System Breakdown.md
+    - Stage 6.3.2 — Combat Schemas.md
+    - Stage 6.3.3 — Tick Phase Wiring Plan.md
+    - Stage 6.4 — Combat Validation Scenarios.md
+DESIGNS\Economy Design/
+DESIGNS\Networking & Persistence/
+    - CraftingExecutionInterfaces.cs
+    - CraftingExecutionSystem.cs
+    - CraftingExecutionTypes.cs
+    - EconomyPersistedDtos.cs
+    - GatheringResolutionInterfaces.cs
+    - GatheringResolutionSystem.cs
+    - GatheringResolutionTypes.cs
+    - InventoryAndResourceGrantSystem.cs
+    - InventoryInterfaces.cs
+    - InventoryPersistenceAdapter.cs
+    - InventoryTypes.cs
+    - ISaveStorageInterfaces.cs
+    - PersistenceEventWiringSinks.cs
+    - PersistenceRestoreOrchestrator.cs
+    - ResourceNodeRuntimeSystem.cs
+    - SaveCheckpointCoordinator.cs
+    - ScaffoldingInterfaces.cs
+    - SimplePlayerInventoryStore.cs
+    - SimplePlayerInventoryStore.Persistence.cs
+    - Stage 3.5.1 — Resource Node Runtime.md
+    - Stage 3.5.2 — Gathering Resolution.md
+    - Stage 3.5.3 — Inventory & Resource Grant.md
+    - Stage 3.5.4 — Crafting Execution System.md
+    - Stage 3.5.5 — Persistence & Save Integration.md
+    - Stage 4.1 — Systems Readiness & Integration Audit.md
+    - Stage 4.2 — Engine Scaffolding Stubs.md
+    - Stage 5.2 — ValidationScenarioMatrix.md
+    - TableResourceGrantMapping.cs
+    - WorldNodePersistenceAdapter.cs
+DESIGNS\Systems Design/
+    - Stage 13.1 — Player Identity Model.md
+    - Stage 13.2 — Player Session Lifecycle.md
+    - Stage 13.3 — World Attachment & Zone Residency.md
+    - Stage 13.4 — Tick Participation Rules.md
+    - Stage 13.5 — Save & Restore Boundaries.md
+    - Stage 13.6 — Player Lifecycle Validation Scenarios.md
+    - Stage 14.1 — Initial Entry Conditions.md
+    - Stage 14.2 — Initial World & Zone Placement.md
+    - Stage 14.3 — Control Handoff & First Tick Eligibility.md
+    - Stage 15.1 — Quest Runtime Model.md
+    - Stage 15.2 — Quest State & Progression Rules.md
+    - Stage 15.3 — Quest Triggers & Events.md
+    - Stage 15.4 — Quest Save, Restore & Validation.md
+    - Stage 16.1 — NPC Runtime Model.md
+    - Stage 16.2 — NPC Tick Participation & Perception.md
+    - Stage 16.3 — NPC Interaction Contracts.md
+    - Stage 16.4 — NPC Save, Restore & Validation.md
+    - Stage 17.1 — Item Runtime Model.md
+    - Stage 17.2 — Item Location & State Transitions.md
+    - Stage 17.3 — Item Persistence & Restore.md
+    - Stage 18.1 — NPC Decision Model.md
+    - Stage 18.2 — Behavior Evaluation & Selection.md
+    - Stage 18.3 — Action Intent Emission.md
+    - Stage 19.1 — Zone Runtime Definition.md
+    - Stage 19.2 — World Runtime Definition.md
+    - Stage 19.3 — World & Zone Authority Boundaries.md
+    - Stage 19.4 — Zone Residency Constraints.md
+    - Stage 19.5 — Spawn & Despawn Semantics.md
+    - Stage 19.6 — World & Zone Persistence Model.md
+    - Stage 19.7 — World & Zone Validation Scenarios.md
+    - Stage 20.1 — Snapshot Model & Authority Rules.md
+    - Stage 20.2 — Join & Leave & Reconnect Semantics.md
+    - Stage 20.3 — Tick ↔ Replication Ordering.md
+    - Stage 20.4 — Networking Validation Scenarios.md
+    - Stage 21.1 — Cross-System Persistence Architecture.md
+    - Stage 21.2 — Persistence Ordering & Dependency Graph.md
+    - Stage 21.3 — Persistence Validation Scenarios.md
+    - Stage 22.1 — Player Lifecycle Implementation Plan.md
+    - Stage 22.2 — Quest Runtime Implementation Plan.md
+    - Stage 22.3 — NPC Runtime Implementation Plan.md
+    - Stage 22.4 — NPC Decision Implementation Plan.md
+    - Stage 22.5 — Item Runtime Implementation Plan.md
+    - Stage 22.6 — World & Zone Implementation Plan.md
+    - Stage 22.7 — Networking Implementation Plan.md
+    - Stage 22.8 — Persistence Implementation Plan.md
+    - Stage 22.9 — Validation Harness Integration Plan.md
+    - Stage 23.1 — Player Identity + Save Binding Runtime.md
+    - Stage 23.2 — Session Activation & Deactivation Runtime.md
+    - Stage 23.3 — Zone Residency Runtime Hooks.md
+    - Stage 23.4 — Tick Participation Runtime Wiring.md
+    - Stage 23.5 — Player Lifecycle Save & Restore Wiring.md
+    - Stage 23.6 — Player Lifecycle Validation Execution.md
+DESIGNS\Templates & Schemas/
+    - CraftingStation.schema.json
+    - GatheringSkillKey.schema.json
+    - Recipe.schema.json
+    - ResourceCategory.schema.json
+    - ResourceItem.schema.json
+DESIGNS\UX UI Design/
+LORE\Characters/
+    - Caelmore_Characters_Region1_Lowmark_Anchors (Not Full List).txt
+    - Caelmor_Characters_Region2_Thornfell_Anchors (Not Full List).txt
+    - Caelmor_Characters_Region3_Mire_Of_Fallen_Banners_Anchors (Not Full List).txt
+    - Caelmor_Characters_Region4_Emberholt.txt
+LORE\Factions/
+    - Caelmor_Factions.md
+LORE\Regions/
+    - Caelmor_Map_Concept.png
+    - Caelmor_Region1_LowmarkVale.md
+    - Caelmor_Region2_ThornfellMarches.md
+    - Caelmor_Region3_MireOfFallenBanners.md
+    - Caelmor_Region4_EmberholtHeights.md
+    - Caelmor_Region_Merged.md
+LORE\Timeline/
+    - Caelmor_Timeline.md
+LORE\Worldbuilding Docs/
+    - Caelmor_War_History.md
+MEDIA\Concept Art/
+MEDIA\Maps/
+MEDIA\Reference Images/
+UNITY\Caelmor_VS/

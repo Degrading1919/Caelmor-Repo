@@ -1,0 +1,158 @@
+[
+  {
+    "key": "rough_timbers",
+    "display_name": "Rough Timbers",
+    "description": "Unfinished wooden lengths cut for basic construction and reinforcement.",
+    "resource_category_key": "core_structures",
+    "form": "raw",
+    "origin_node_keys": ["felled_tree_node"],
+    "system_flags": {
+      "stackable": true,
+      "tradable": true,
+      "persistent": true
+    }
+  },
+  {
+    "key": "cut_timbers",
+    "display_name": "Cut Timbers",
+    "description": "Squared and trimmed wooden lengths prepared for consistent structural use.",
+    "resource_category_key": "core_structures",
+    "form": "processed",
+    "origin_node_keys": ["felled_tree_node"],
+    "system_flags": {
+      "stackable": true,
+      "tradable": true,
+      "persistent": true
+    }
+  },
+  {
+    "key": "stone_blocks",
+    "display_name": "Stone Blocks",
+    "description": "Squared stone pieces suitable for walls, foundations, and heavy supports.",
+    "resource_category_key": "core_structures",
+    "form": "processed",
+    "origin_node_keys": ["quarry_face_node"],
+    "system_flags": {
+      "stackable": true,
+      "tradable": true,
+      "persistent": true
+    }
+  },
+  {
+    "key": "binding_fiber",
+    "display_name": "Binding Fiber",
+    "description": "Loose but tough plant fibers gathered for lashing and tying.",
+    "resource_category_key": "fasteners_bindings",
+    "form": "raw",
+    "origin_node_keys": ["fiber_reed_patch_node"],
+    "system_flags": {
+      "stackable": true,
+      "tradable": true,
+      "persistent": true
+    }
+  },
+  {
+    "key": "twisted_fiber_cord",
+    "display_name": "Twisted Fiber Cord",
+    "description": "Plant fibers aligned and twisted into a stronger, more reliable binding cord.",
+    "resource_category_key": "fasteners_bindings",
+    "form": "processed",
+    "origin_node_keys": ["fiber_reed_patch_node"],
+    "system_flags": {
+      "stackable": true,
+      "tradable": true,
+      "persistent": true
+    }
+  },
+  {
+    "key": "iron_fasteners",
+    "display_name": "Iron Fasteners",
+    "description": "Simple forged pins and nails used to secure wood and stone.",
+    "resource_category_key": "fasteners_bindings",
+    "form": "refined",
+    "origin_node_keys": ["scrap_iron_deposit_node"],
+    "system_flags": {
+      "stackable": true,
+      "tradable": true,
+      "persistent": true
+    }
+  },
+  {
+    "key": "conductive_resin",
+    "display_name": "Conductive Resin",
+    "description": "Sticky sap that carries heat and vibration better than untreated pitch.",
+    "resource_category_key": "transmission_media",
+    "form": "processed",
+    "origin_node_keys": ["resin_bearing_tree_node"],
+    "system_flags": {
+      "stackable": true,
+      "tradable": true,
+      "persistent": true
+    }
+  },
+  {
+    "key": "prepared_conductive_resin",
+    "display_name": "Prepared Conductive Resin",
+    "description": "Carefully heated and stabilized resin with consistent conductive behavior.",
+    "resource_category_key": "transmission_media",
+    "form": "refined",
+    "origin_node_keys": ["resin_bearing_tree_node"],
+    "system_flags": {
+      "stackable": true,
+      "tradable": true,
+      "persistent": true
+    }
+  },
+  {
+    "key": "ground_emberstone",
+    "display_name": "Ground Emberstone",
+    "description": "Crushed mineral that reacts readily when mixed or heated.",
+    "resource_category_key": "reactants",
+    "form": "processed",
+    "origin_node_keys": ["emberstone_vein_node"],
+    "system_flags": {
+      "stackable": true,
+      "tradable": true,
+      "persistent": true
+    }
+  },
+  {
+    "key": "stabilizing_salts",
+    "display_name": "Stabilizing Salts",
+    "description": "Dry crystalline salts used to temper volatile mixtures.",
+    "resource_category_key": "control_agents",
+    "form": "refined",
+    "origin_node_keys": ["salt_flat_node"],
+    "system_flags": {
+      "stackable": true,
+      "tradable": true,
+      "persistent": true
+    }
+  },
+  {
+    "key": "wild_root",
+    "display_name": "Wild Root",
+    "description": "A hardy root pulled from uncultivated ground, valued for sustenance and stock.",
+    "resource_category_key": "sustenance_sources",
+    "form": "raw",
+    "origin_node_keys": ["root_cluster_node"],
+    "system_flags": {
+      "stackable": true,
+      "tradable": true,
+      "persistent": true
+    }
+  },
+  {
+    "key": "dried_meat_strips",
+    "display_name": "Dried Meat Strips",
+    "description": "Thin cuts preserved through salting and drying for long storage.",
+    "resource_category_key": "sustenance_sources",
+    "form": "processed",
+    "origin_node_keys": ["game_carcass_node"],
+    "system_flags": {
+      "stackable": true,
+      "tradable": true,
+      "persistent": true
+    }
+  }
+]
