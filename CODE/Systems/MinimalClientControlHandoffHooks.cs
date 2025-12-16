@@ -101,21 +101,4 @@ namespace Caelmor.Runtime.Onboarding
         bool IsServerAuthoritative { get; }
     }
 
-    /// <summary>
-    /// Opaque server-issued session identifier.
-    /// </summary>
-    public readonly struct SessionId : IEquatable<SessionId>
-    {
-        public readonly Guid Value;
-
-        public SessionId(Guid value)
-        {
-            Value = value;
-        }
-
-        public bool Equals(SessionId other) => Value.Equals(other.Value);
-        public override bool Equals(object obj) => obj is SessionId other && Equals(other);
-        public override int GetHashCode() => Value.GetHashCode();
-        public override string ToString() => Value.ToString();
-    }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Caelmor.Runtime.Tick;
 using Caelmor.Runtime.WorldSimulation;
 
 namespace Caelmor.Combat
