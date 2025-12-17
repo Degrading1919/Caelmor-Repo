@@ -1,14 +1,15 @@
 using System;
+using System.Diagnostics;
 using System.Threading;
 
 namespace Caelmor.Runtime.Diagnostics
 {
     /// <summary>
     /// Lightweight tick diagnostics used by the runtime loop.
-    /// Tracks min/max/avg tick durations plus overrun counters.
-    /// Allocation-free: all state is stored in primitive fields.
+    /// Tracks min/max/avg tick durations, overrun counters, and stall watchdog events.
+    /// Allocation-free steady state: all state is stored in primitive fields or pooled primitives.
     /// </summary>
-    public sealed class TickDiagnostics
+    public sealed class TickDiagnostics : IDisposable
     {
         private long _tickCount;
         private long _totalTicksNanoseconds;
@@ -17,6 +18,7 @@ namespace Caelmor.Runtime.Diagnostics
         private long _overrunCount;
         private long _catchUpClampedCount;
         private long _timeSliceDeferrals;
+        private TickStallWatchdog _stallWatchdog;
 
 #if DEBUG
         private long _participantSnapshotResizes;
@@ -28,6 +30,7 @@ namespace Caelmor.Runtime.Diagnostics
             var nanos = (int)(duration.Ticks * 100); // 1 tick = 100ns
             Interlocked.Increment(ref _tickCount);
             Interlocked.Add(ref _totalTicksNanoseconds, nanos);
+            _stallWatchdog?.NotifyProgress(Stopwatch.GetTimestamp());
 
             int currentMin = _minNanoseconds;
             while (nanos < currentMin)
@@ -79,6 +82,11 @@ namespace Caelmor.Runtime.Diagnostics
             var ticks = Interlocked.Read(ref _tickCount);
             var totalNano = Interlocked.Read(ref _totalTicksNanoseconds);
             var avgNano = ticks == 0 ? 0 : totalNano / ticks;
+            var stallCount = _stallWatchdog?.StallCount ?? 0;
+            var stallDurationTicks = _stallWatchdog?.LastStallStopwatchTicks ?? 0;
+            var stallDurationNanoseconds = stallDurationTicks == 0
+                ? 0
+                : (long)((stallDurationTicks * 1_000_000_000L) / Stopwatch.Frequency);
 
 #if DEBUG
             var participantSnapshotResizes = Interlocked.Read(ref _participantSnapshotResizes);
@@ -92,13 +100,33 @@ namespace Caelmor.Runtime.Diagnostics
                 avgNano,
                 Interlocked.Read(ref _overrunCount),
                 Interlocked.Read(ref _catchUpClampedCount),
-                Interlocked.Read(ref _timeSliceDeferrals)
+                Interlocked.Read(ref _timeSliceDeferrals),
+                stallCount,
+                stallDurationNanoseconds
 #if DEBUG
                 ,
                 participantSnapshotResizes,
                 maxParticipantsObserved
 #endif
                 );
+        }
+
+        public void ConfigureStallWatchdog(TimeSpan stallThreshold, Action<TickStallEvent> onStall)
+        {
+            if (stallThreshold <= TimeSpan.Zero)
+                throw new ArgumentOutOfRangeException(nameof(stallThreshold));
+            if (onStall == null)
+                throw new ArgumentNullException(nameof(onStall));
+
+            var watchdog = new TickStallWatchdog(stallThreshold, onStall);
+            var existing = Interlocked.Exchange(ref _stallWatchdog, watchdog);
+            existing?.Dispose();
+        }
+
+        public void Dispose()
+        {
+            _stallWatchdog?.Dispose();
+            _stallWatchdog = null;
         }
     }
 
@@ -111,6 +139,8 @@ namespace Caelmor.Runtime.Diagnostics
         public readonly long Overruns;
         public readonly long CatchUpClamped;
         public readonly long TimeSliceDeferrals;
+        public readonly long StallDetections;
+        public readonly long LastStallNanoseconds;
 
 #if DEBUG
         public readonly long ParticipantSnapshotResizes;
@@ -124,7 +154,9 @@ namespace Caelmor.Runtime.Diagnostics
             long avgNanoseconds,
             long overruns,
             long catchUpClamped,
-            long timeSliceDeferrals
+            long timeSliceDeferrals,
+            long stallDetections,
+            long lastStallNanoseconds
 #if DEBUG
             ,
             long participantSnapshotResizes,
@@ -139,10 +171,74 @@ namespace Caelmor.Runtime.Diagnostics
             Overruns = overruns;
             CatchUpClamped = catchUpClamped;
             TimeSliceDeferrals = timeSliceDeferrals;
+            StallDetections = stallDetections;
+            LastStallNanoseconds = lastStallNanoseconds;
 #if DEBUG
             ParticipantSnapshotResizes = participantSnapshotResizes;
             MaxParticipantsObserved = maxParticipantsObserved;
 #endif
+        }
+    }
+
+    public readonly struct TickStallEvent
+    {
+        public TickStallEvent(TimeSpan durationSinceLastTick)
+        {
+            DurationSinceLastTick = durationSinceLastTick;
+        }
+
+        public TimeSpan DurationSinceLastTick { get; }
+    }
+
+    internal sealed class TickStallWatchdog : IDisposable
+    {
+        private static readonly TimerCallback TimerCallback = OnTimer;
+
+        private readonly long _thresholdStopwatchTicks;
+        private readonly Action<TickStallEvent> _onStall;
+        private readonly Timer _timer;
+        private long _lastTickTimestamp;
+        private long _stallCount;
+        private long _lastStallDuration;
+        private int _signaled;
+
+        public TickStallWatchdog(TimeSpan threshold, Action<TickStallEvent> onStall)
+        {
+            _thresholdStopwatchTicks = (long)(Stopwatch.Frequency * threshold.TotalSeconds);
+            _onStall = onStall ?? throw new ArgumentNullException(nameof(onStall));
+            _lastTickTimestamp = Stopwatch.GetTimestamp();
+            _timer = new Timer(TimerCallback, this, threshold, threshold);
+        }
+
+        public long StallCount => Interlocked.Read(ref _stallCount);
+        public long LastStallStopwatchTicks => Interlocked.Read(ref _lastStallDuration);
+
+        public void NotifyProgress(long timestamp)
+        {
+            Volatile.Write(ref _lastTickTimestamp, timestamp);
+            Volatile.Write(ref _signaled, 0);
+        }
+
+        public void Dispose()
+        {
+            _timer.Dispose();
+        }
+
+        private static void OnTimer(object state)
+        {
+            var self = (TickStallWatchdog)state;
+            var last = Volatile.Read(ref self._lastTickTimestamp);
+            var now = Stopwatch.GetTimestamp();
+            var elapsed = now - last;
+            if (elapsed <= self._thresholdStopwatchTicks)
+                return;
+
+            if (Interlocked.Exchange(ref self._signaled, 1) == 1)
+                return;
+
+            Interlocked.Increment(ref self._stallCount);
+            Interlocked.Exchange(ref self._lastStallDuration, elapsed);
+            self._onStall(new TickStallEvent(TimeSpan.FromSeconds((double)elapsed / Stopwatch.Frequency)));
         }
     }
 }
