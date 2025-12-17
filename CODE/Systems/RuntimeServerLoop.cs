@@ -1,4 +1,5 @@
 using System;
+using Caelmor.Runtime.Diagnostics;
 using Caelmor.Runtime.Integration;
 using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.Persistence;
@@ -31,6 +32,8 @@ namespace Caelmor.Runtime.Host
         private readonly object _gate = new object();
         private bool _started;
 
+        public event Action<TickStallEvent> TickStallDetected;
+
         public RuntimeServerLoop(
             WorldSimulationCore simulation,
             PooledTransportRouter transport,
@@ -47,6 +50,8 @@ namespace Caelmor.Runtime.Host
             _visibility = visibility ?? throw new ArgumentNullException(nameof(visibility));
             _entities = entities ?? throw new ArgumentNullException(nameof(entities));
             _persistenceCompletions = persistenceCompletions;
+
+            _simulation.StallDetected += OnTickStalled;
         }
 
         /// <summary>
@@ -149,9 +154,18 @@ namespace Caelmor.Runtime.Host
         public void Dispose()
         {
             ShutdownServer();
+            _simulation.StallDetected -= OnTickStalled;
             _transport.Dispose();
             _visibility.Dispose();
             _entities.Dispose();
+        }
+
+        public RuntimeDiagnosticsSnapshot CaptureDiagnostics()
+        {
+            var transport = _transport.CaptureDiagnostics();
+            var tick = _simulation.Diagnostics;
+            var persistenceCompletions = _persistenceCompletions?.SnapshotMetrics();
+            return new RuntimeDiagnosticsSnapshot(tick, transport, persistenceCompletions);
         }
 
         private void ClearTransientState()
@@ -163,5 +177,28 @@ namespace Caelmor.Runtime.Host
             _entities.ClearAll();
             _persistenceCompletions?.Clear();
         }
+
+        private void OnTickStalled(TickStallEvent stall)
+        {
+            TickStallDetected?.Invoke(stall);
+        }
+    }
+
+    public readonly struct RuntimeDiagnosticsSnapshot
+    {
+        public RuntimeDiagnosticsSnapshot(
+            TickDiagnosticsSnapshot tick,
+            TransportBackpressureDiagnostics transport,
+            CompletionQueueMetrics? persistenceCompletionMailbox)
+        {
+            Tick = tick;
+            Transport = transport;
+            PersistenceCompletionMailbox = persistenceCompletionMailbox;
+        }
+
+        public TickDiagnosticsSnapshot Tick { get; }
+        public TransportBackpressureDiagnostics Transport { get; }
+        public CompletionQueueMetrics? PersistenceCompletionMailbox { get; }
+        public bool HasDetectedStall => Tick.StallDetections > 0;
     }
 }

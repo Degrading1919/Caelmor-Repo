@@ -19,6 +19,7 @@ namespace Caelmor.Runtime.WorldSimulation
         public const int TickRateHz = 10;
         public static readonly TimeSpan TickInterval = TimeSpan.FromMilliseconds(100);
         private const int MaxCatchUpTicksPerLoop = 3;
+        private static readonly TimeSpan StallWatchdogThreshold = TimeSpan.FromMilliseconds(500);
 
         private readonly ISimulationEntityIndex _entities;
         private readonly List<ISimulationEligibilityGate> _eligibilityGates = new List<ISimulationEligibilityGate>();
@@ -45,6 +46,8 @@ namespace Caelmor.Runtime.WorldSimulation
         private Thread? _thread;
         private CancellationTokenSource? _cts;
         private volatile bool _running;
+
+        public event Action<TickStallEvent>? StallDetected;
 
 #if DEBUG
         private int _maxEligibleEntities;
@@ -121,6 +124,7 @@ namespace Caelmor.Runtime.WorldSimulation
                     IsBackground = true,
                     Name = "Caelmor.WorldSimulationCore"
                 };
+                _diagnostics.ConfigureStallWatchdog(StallWatchdogThreshold, OnTickStalled);
                 _running = true;
                 _thread.Start();
             }
@@ -156,6 +160,8 @@ namespace Caelmor.Runtime.WorldSimulation
                     thread.Join();
             }
             catch { /* no-op */ }
+
+            _diagnostics.Dispose();
         }
 
         public bool IsRunning => _running;
@@ -177,6 +183,7 @@ namespace Caelmor.Runtime.WorldSimulation
                 _cts?.Dispose();
                 _cts = null;
                 _thread = null;
+                _diagnostics.Dispose();
             }
         }
 
@@ -413,6 +420,11 @@ namespace Caelmor.Runtime.WorldSimulation
                 nextSize *= 2;
 
             array = new T[nextSize];
+        }
+
+        private void OnTickStalled(TickStallEvent stall)
+        {
+            StallDetected?.Invoke(stall);
         }
 
         private readonly struct ParticipantEntry

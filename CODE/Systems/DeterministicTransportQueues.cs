@@ -1,5 +1,6 @@
 using System;
 using System.Buffers;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
@@ -86,6 +87,8 @@ namespace Caelmor.Runtime.Transport
         private readonly Dictionary<SessionId, Queue<CommandEnvelope>> _queues = new Dictionary<SessionId, Queue<CommandEnvelope>>();
         private readonly Dictionary<SessionId, SessionQueueMetrics> _metrics = new Dictionary<SessionId, SessionQueueMetrics>();
         private readonly Dictionary<SessionId, int> _bytesBySession = new Dictionary<SessionId, int>();
+        private SessionId[] _snapshotKeys = Array.Empty<SessionId>();
+        private SessionQueueMetricsSnapshot[] _snapshotBuffer = Array.Empty<SessionQueueMetricsSnapshot>();
         private long _nextSequence;
 
         public AuthoritativeCommandIngress(RuntimeBackpressureConfig config)
@@ -132,6 +135,8 @@ namespace Caelmor.Runtime.Transport
                 metrics.Rejected++;
                 metrics.RejectedBytes += payloadSize;
                 metrics.Peak = Math.Max(metrics.Peak, queue.Count);
+                metrics.CurrentBytes = currentBytes;
+                metrics.PeakBytes = Math.Max(metrics.PeakBytes, currentBytes);
                 _metrics[sessionId] = metrics;
                 payload.Dispose();
                 return CommandIngressResult.Rejected(CommandRejectionReason.BackpressureLimitHit);
@@ -140,10 +145,13 @@ namespace Caelmor.Runtime.Transport
             long sequence = ++_nextSequence;
             var envelope = new CommandEnvelope(sessionId, submitTick, sequence, commandType ?? string.Empty, payload);
             queue.Enqueue(envelope);
-            _bytesBySession[sessionId] = currentBytes + payloadSize;
+            var updatedBytes = currentBytes + payloadSize;
+            _bytesBySession[sessionId] = updatedBytes;
 
             metrics.Peak = Math.Max(metrics.Peak, queue.Count);
             metrics.Current = queue.Count;
+            metrics.CurrentBytes = updatedBytes;
+            metrics.PeakBytes = Math.Max(metrics.PeakBytes, updatedBytes);
             _metrics[sessionId] = metrics;
 
             return CommandIngressResult.Accepted(sequence);
@@ -156,11 +164,16 @@ namespace Caelmor.Runtime.Transport
                 return false;
 
             envelope = queue.Dequeue();
-            _bytesBySession[sessionId] = Math.Max(0, _bytesBySession[sessionId] - envelope.Payload.Length);
+            if (_bytesBySession.TryGetValue(sessionId, out var existingBytes))
+                _bytesBySession[sessionId] = Math.Max(0, existingBytes - envelope.Payload.Length);
+            else
+                _bytesBySession[sessionId] = 0;
 
             if (_metrics.TryGetValue(sessionId, out var metrics))
             {
                 metrics.Current = queue.Count;
+                _bytesBySession.TryGetValue(sessionId, out var bytes);
+                metrics.CurrentBytes = bytes;
                 _metrics[sessionId] = metrics;
             }
 
@@ -188,6 +201,7 @@ namespace Caelmor.Runtime.Transport
             if (_metrics.TryGetValue(sessionId, out var metrics))
             {
                 metrics.Current = 0;
+                metrics.CurrentBytes = 0;
                 metrics.Dropped += droppedCount;
                 metrics.DroppedBytes += droppedBytes;
                 _metrics[sessionId] = metrics;
@@ -197,6 +211,7 @@ namespace Caelmor.Runtime.Transport
                 _metrics[sessionId] = new SessionQueueMetrics
                 {
                     Current = 0,
+                    CurrentBytes = 0,
                     Dropped = droppedCount,
                     DroppedBytes = droppedBytes
                 };
@@ -227,25 +242,53 @@ namespace Caelmor.Runtime.Transport
         {
             int count = _metrics.Count;
             if (count == 0)
-                return new CommandIngressMetrics(Array.Empty<SessionQueueMetricsSnapshot>());
+                return CommandIngressMetrics.Empty;
 
-            var keys = ArrayPool<SessionId>.Shared.Rent(count);
+            EnsureCapacity(ref _snapshotKeys, count);
+            EnsureCapacity(ref _snapshotBuffer, count);
+
             int index = 0;
             foreach (var kvp in _metrics)
-                keys[index++] = kvp.Key;
+                _snapshotKeys[index++] = kvp.Key;
 
-            Array.Sort(keys, 0, count, SessionIdValueComparer.Instance);
+            Array.Sort(_snapshotKeys, 0, count, SessionIdValueComparer.Instance);
 
-            var perSession = new List<SessionQueueMetricsSnapshot>(count);
+            int maxPeak = 0;
+            int maxBytes = 0;
+            int totalDropped = 0;
+            int totalRejected = 0;
+            int totalDroppedBytes = 0;
+            int totalRejectedBytes = 0;
+
             for (int i = 0; i < count; i++)
             {
-                var sessionId = keys[i];
-                _bytesBySession.TryGetValue(sessionId, out int bytes);
-                perSession.Add(new SessionQueueMetricsSnapshot(sessionId, _metrics[sessionId], bytes));
+                var sessionId = _snapshotKeys[i];
+                var metrics = _metrics[sessionId];
+                _snapshotBuffer[i] = new SessionQueueMetricsSnapshot(sessionId, metrics, metrics.CurrentBytes);
+
+                if (metrics.Peak > maxPeak)
+                    maxPeak = metrics.Peak;
+                if (metrics.PeakBytes > maxBytes)
+                    maxBytes = metrics.PeakBytes;
+                totalDropped += metrics.Dropped;
+                totalDroppedBytes += metrics.DroppedBytes;
+                totalRejected += metrics.Rejected;
+                totalRejectedBytes += metrics.RejectedBytes;
             }
 
-            ArrayPool<SessionId>.Shared.Return(keys, clearArray: true);
-            return new CommandIngressMetrics(perSession);
+            var budget = new QueueBudgetSnapshot(maxPeak, maxBytes, totalDropped, totalDroppedBytes, totalRejected, totalRejectedBytes);
+            return new CommandIngressMetrics(_snapshotBuffer, count, budget);
+        }
+
+        private static void EnsureCapacity<T>(ref T[] buffer, int required)
+        {
+            if (buffer.Length >= required)
+                return;
+
+            var next = buffer.Length == 0 ? required : buffer.Length;
+            while (next < required)
+                next *= 2;
+            buffer = new T[next];
         }
     }
 
@@ -300,21 +343,117 @@ namespace Caelmor.Runtime.Transport
     public struct SessionQueueMetrics
     {
         public int Current { get; set; }
+        public int CurrentBytes { get; set; }
         public int Peak { get; set; }
+        public int PeakBytes { get; set; }
         public int Rejected { get; set; }
         public int Dropped { get; set; }
         public int RejectedBytes { get; set; }
         public int DroppedBytes { get; set; }
     }
 
-    public sealed class CommandIngressMetrics
+    public readonly struct QueueBudgetSnapshot
     {
-        public CommandIngressMetrics(IReadOnlyList<SessionQueueMetricsSnapshot> perSession)
+        public QueueBudgetSnapshot(int maxCount, int maxBytes, int totalDropped, int totalDroppedBytes, int totalRejected, int totalRejectedBytes)
         {
-            PerSession = perSession ?? Array.Empty<SessionQueueMetricsSnapshot>();
+            MaxCount = maxCount;
+            MaxBytes = maxBytes;
+            TotalDropped = totalDropped;
+            TotalDroppedBytes = totalDroppedBytes;
+            TotalRejected = totalRejected;
+            TotalRejectedBytes = totalRejectedBytes;
         }
 
-        public IReadOnlyList<SessionQueueMetricsSnapshot> PerSession { get; }
+        public int MaxCount { get; }
+        public int MaxBytes { get; }
+        public int TotalDropped { get; }
+        public int TotalDroppedBytes { get; }
+        public int TotalRejected { get; }
+        public int TotalRejectedBytes { get; }
+    }
+
+    internal readonly struct SessionQueueMetricsReadOnlyList : IReadOnlyList<SessionQueueMetricsSnapshot>
+    {
+        private readonly SessionQueueMetricsSnapshot[] _buffer;
+        private readonly int _count;
+
+        public SessionQueueMetricsReadOnlyList(SessionQueueMetricsSnapshot[] buffer, int count)
+        {
+            _buffer = buffer ?? Array.Empty<SessionQueueMetricsSnapshot>();
+            _count = count;
+        }
+
+        public SessionQueueMetricsSnapshot this[int index]
+        {
+            get
+            {
+                if ((uint)index >= (uint)_count)
+                    throw new ArgumentOutOfRangeException(nameof(index));
+                return _buffer[index];
+            }
+        }
+
+        public int Count => _count;
+
+        public Enumerator GetEnumerator() => new Enumerator(_buffer, _count);
+
+        IEnumerator<SessionQueueMetricsSnapshot> IEnumerable<SessionQueueMetricsSnapshot>.GetEnumerator() => GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        internal struct Enumerator : IEnumerator<SessionQueueMetricsSnapshot>
+        {
+            private readonly SessionQueueMetricsSnapshot[] _buffer;
+            private readonly int _count;
+            private int _index;
+
+            public Enumerator(SessionQueueMetricsSnapshot[] buffer, int count)
+            {
+                _buffer = buffer;
+                _count = count;
+                _index = -1;
+            }
+
+            public SessionQueueMetricsSnapshot Current => _buffer[_index];
+
+            object IEnumerator.Current => Current;
+
+            public bool MoveNext()
+            {
+                var next = _index + 1;
+                if (next >= _count)
+                    return false;
+                _index = next;
+                return true;
+            }
+
+            public void Reset() => _index = -1;
+
+            public void Dispose()
+            {
+            }
+        }
+    }
+
+    public sealed class CommandIngressMetrics
+    {
+        public static CommandIngressMetrics Empty { get; } = new CommandIngressMetrics(Array.Empty<SessionQueueMetricsSnapshot>(), 0, default);
+
+        internal CommandIngressMetrics(SessionQueueMetricsSnapshot[] perSession, int count, QueueBudgetSnapshot budget)
+        {
+            _buffer = perSession ?? Array.Empty<SessionQueueMetricsSnapshot>();
+            _count = count;
+            _view = new SessionQueueMetricsReadOnlyList(_buffer, _count);
+            Budget = budget;
+        }
+
+        private readonly SessionQueueMetricsSnapshot[] _buffer;
+        private readonly int _count;
+        private readonly SessionQueueMetricsReadOnlyList _view;
+
+        public int Count => _count;
+        public QueueBudgetSnapshot Budget { get; }
+        public IReadOnlyList<SessionQueueMetricsSnapshot> PerSession => _view;
     }
 
     /// <summary>
@@ -386,6 +525,19 @@ namespace Caelmor.Runtime.Transport
 
         public CommandIngressMetrics Ingress { get; }
         public SnapshotQueueMetrics Snapshots { get; }
+
+        public QueueBudgetSnapshot IngressBudget => Ingress.Budget;
+        public QueueBudgetSnapshot SnapshotBudget => Snapshots.Budget;
+
+        public bool IsWithinBudgets(RuntimeBackpressureConfig config)
+        {
+            if (config is null) throw new ArgumentNullException(nameof(config));
+
+            return IngressBudget.MaxCount <= config.MaxInboundCommandsPerSession
+                && IngressBudget.MaxBytes <= config.MaxQueuedBytesPerSession
+                && SnapshotBudget.MaxCount <= config.MaxOutboundSnapshotsPerSession
+                && SnapshotBudget.MaxBytes <= config.MaxQueuedBytesPerSession;
+        }
     }
 
     public readonly struct SessionQueueMetricsSnapshot
@@ -414,6 +566,8 @@ namespace Caelmor.Runtime.Transport
         private readonly Dictionary<SessionId, int> _bytesBySession = new Dictionary<SessionId, int>();
         private readonly Dictionary<SessionId, SessionQueueMetrics> _metrics = new Dictionary<SessionId, SessionQueueMetrics>();
         private readonly Dictionary<SessionId, Dictionary<EntityHandle, string>> _fingerprints = new Dictionary<SessionId, Dictionary<EntityHandle, string>>();
+        private SessionId[] _snapshotKeys = Array.Empty<SessionId>();
+        private SessionQueueMetricsSnapshot[] _snapshotBuffer = Array.Empty<SessionQueueMetricsSnapshot>();
 
         public BoundedReplicationSnapshotQueue(RuntimeBackpressureConfig config)
         {
@@ -438,9 +592,12 @@ namespace Caelmor.Runtime.Transport
             _bytesBySession.TryGetValue(sessionId, out int currentBytes);
 
             queue.Enqueue(serialized);
-            _bytesBySession[sessionId] = currentBytes + serialized.ByteLength;
+            var updatedBytes = currentBytes + serialized.ByteLength;
+            _bytesBySession[sessionId] = updatedBytes;
             metrics.Peak = Math.Max(metrics.Peak, queue.Count);
             metrics.Current = queue.Count;
+            metrics.CurrentBytes = updatedBytes;
+            metrics.PeakBytes = Math.Max(metrics.PeakBytes, updatedBytes);
             _metrics[sessionId] = metrics;
 
             EnforceCaps(sessionId, queue);
@@ -474,6 +631,7 @@ namespace Caelmor.Runtime.Transport
 
             _bytesBySession[sessionId] = Math.Max(0, bytes);
             metrics.Current = queue.Count;
+            metrics.CurrentBytes = Math.Max(0, bytes);
             _metrics[sessionId] = metrics;
         }
 
@@ -484,11 +642,16 @@ namespace Caelmor.Runtime.Transport
                 return false;
 
             snapshot = queue.Dequeue();
-            _bytesBySession[sessionId] = Math.Max(0, _bytesBySession[sessionId] - snapshot.ByteLength);
+            if (_bytesBySession.TryGetValue(sessionId, out var existingBytes))
+                _bytesBySession[sessionId] = Math.Max(0, existingBytes - snapshot.ByteLength);
+            else
+                _bytesBySession[sessionId] = 0;
 
             if (_metrics.TryGetValue(sessionId, out var metrics))
             {
                 metrics.Current = queue.Count;
+                _bytesBySession.TryGetValue(sessionId, out var bytes);
+                metrics.CurrentBytes = bytes;
                 _metrics[sessionId] = metrics;
             }
 
@@ -499,25 +662,39 @@ namespace Caelmor.Runtime.Transport
         {
             int count = _metrics.Count;
             if (count == 0)
-                return new SnapshotQueueMetrics(Array.Empty<SessionQueueMetricsSnapshot>());
+                return SnapshotQueueMetrics.Empty;
 
-            var keys = ArrayPool<SessionId>.Shared.Rent(count);
+            EnsureCapacity(ref _snapshotKeys, count);
+            EnsureCapacity(ref _snapshotBuffer, count);
+
             int index = 0;
             foreach (var kvp in _metrics)
-                keys[index++] = kvp.Key;
+                _snapshotKeys[index++] = kvp.Key;
 
-            Array.Sort(keys, 0, count, SessionIdValueComparer.Instance);
+            Array.Sort(_snapshotKeys, 0, count, SessionIdValueComparer.Instance);
 
-            var perSession = new List<SessionQueueMetricsSnapshot>(count);
+            int maxPeak = 0;
+            int maxBytes = 0;
+            int totalDropped = 0;
+            int totalDroppedBytes = 0;
+
             for (int i = 0; i < count; i++)
             {
-                var sessionId = keys[i];
-                _bytesBySession.TryGetValue(sessionId, out int bytes);
-                perSession.Add(new SessionQueueMetricsSnapshot(sessionId, _metrics[sessionId], bytes));
+                var sessionId = _snapshotKeys[i];
+                var metrics = _metrics[sessionId];
+
+                _snapshotBuffer[i] = new SessionQueueMetricsSnapshot(sessionId, metrics, metrics.CurrentBytes);
+
+                if (metrics.Peak > maxPeak)
+                    maxPeak = metrics.Peak;
+                if (metrics.PeakBytes > maxBytes)
+                    maxBytes = metrics.PeakBytes;
+                totalDropped += metrics.Dropped;
+                totalDroppedBytes += metrics.DroppedBytes;
             }
 
-            ArrayPool<SessionId>.Shared.Return(keys, clearArray: true);
-            return new SnapshotQueueMetrics(perSession);
+            var budget = new QueueBudgetSnapshot(maxPeak, maxBytes, totalDropped, totalDroppedBytes, 0, 0);
+            return new SnapshotQueueMetrics(_snapshotBuffer, count, budget);
         }
 
         public void DropSession(SessionId sessionId)
@@ -537,6 +714,7 @@ namespace Caelmor.Runtime.Transport
             if (_metrics.TryGetValue(sessionId, out var metrics))
             {
                 metrics.Current = 0;
+                metrics.CurrentBytes = 0;
                 _metrics[sessionId] = metrics;
             }
 
@@ -559,16 +737,38 @@ namespace Caelmor.Runtime.Transport
             _metrics.Clear();
             _fingerprints.Clear();
         }
+
+        private static void EnsureCapacity<T>(ref T[] buffer, int required)
+        {
+            if (buffer.Length >= required)
+                return;
+
+            var next = buffer.Length == 0 ? required : buffer.Length;
+            while (next < required)
+                next *= 2;
+            buffer = new T[next];
+        }
     }
 
     public sealed class SnapshotQueueMetrics
     {
-        public SnapshotQueueMetrics(IReadOnlyList<SessionQueueMetricsSnapshot> perSession)
+        public static SnapshotQueueMetrics Empty { get; } = new SnapshotQueueMetrics(Array.Empty<SessionQueueMetricsSnapshot>(), 0, default);
+
+        internal SnapshotQueueMetrics(SessionQueueMetricsSnapshot[] perSession, int count, QueueBudgetSnapshot budget)
         {
-            PerSession = perSession ?? Array.Empty<SessionQueueMetricsSnapshot>();
+            _buffer = perSession ?? Array.Empty<SessionQueueMetricsSnapshot>();
+            _count = count;
+            _view = new SessionQueueMetricsReadOnlyList(_buffer, _count);
+            Budget = budget;
         }
 
-        public IReadOnlyList<SessionQueueMetricsSnapshot> PerSession { get; }
+        private readonly SessionQueueMetricsSnapshot[] _buffer;
+        private readonly int _count;
+        private readonly SessionQueueMetricsReadOnlyList _view;
+
+        public QueueBudgetSnapshot Budget { get; }
+        public int Count => _count;
+        public IReadOnlyList<SessionQueueMetricsSnapshot> PerSession => _view;
     }
 
     /// <summary>
@@ -581,6 +781,8 @@ namespace Caelmor.Runtime.Transport
         private readonly Queue<PersistenceWriteRecord> _globalQueue = new Queue<PersistenceWriteRecord>();
         private readonly Dictionary<PlayerId, Queue<PersistenceWriteRecord>> _perPlayer = new Dictionary<PlayerId, Queue<PersistenceWriteRecord>>();
         private readonly Dictionary<PlayerId, SessionQueueMetrics> _metrics = new Dictionary<PlayerId, SessionQueueMetrics>();
+        private PlayerId[] _snapshotKeys = Array.Empty<PlayerId>();
+        private PersistenceQueueMetricsSnapshot[] _snapshotBuffer = Array.Empty<PersistenceQueueMetricsSnapshot>();
 
         public PersistenceWriteQueue(RuntimeBackpressureConfig config)
         {
@@ -685,24 +887,46 @@ namespace Caelmor.Runtime.Transport
         {
             int count = _metrics.Count;
             if (count == 0)
-                return new PersistenceQueueMetrics(Array.Empty<PersistenceQueueMetricsSnapshot>(), _globalQueue.Count);
+                return PersistenceQueueMetrics.Empty;
 
-            var keys = ArrayPool<PlayerId>.Shared.Rent(count);
+            EnsureCapacity(ref _snapshotKeys, count);
+            EnsureCapacity(ref _snapshotBuffer, count);
+
             int index = 0;
             foreach (var kvp in _metrics)
-                keys[index++] = kvp.Key;
+                _snapshotKeys[index++] = kvp.Key;
 
-            Array.Sort(keys, 0, count, PlayerIdValueComparer.Instance);
+            Array.Sort(_snapshotKeys, 0, count, PlayerIdValueComparer.Instance);
 
-            var perPlayer = new List<PersistenceQueueMetricsSnapshot>(count);
+            int maxPeak = 0;
+            int totalDropped = 0;
+            int totalDroppedBytes = 0;
+
             for (int i = 0; i < count; i++)
             {
-                var playerId = keys[i];
-                perPlayer.Add(new PersistenceQueueMetricsSnapshot(playerId, _metrics[playerId]));
+                var playerId = _snapshotKeys[i];
+                var metrics = _metrics[playerId];
+                _snapshotBuffer[i] = new PersistenceQueueMetricsSnapshot(playerId, metrics);
+
+                if (metrics.Peak > maxPeak)
+                    maxPeak = metrics.Peak;
+                totalDropped += metrics.Dropped;
+                totalDroppedBytes += metrics.DroppedBytes;
             }
 
-            ArrayPool<PlayerId>.Shared.Return(keys, clearArray: true);
-            return new PersistenceQueueMetrics(perPlayer, _globalQueue.Count);
+            var budget = new QueueBudgetSnapshot(maxPeak, 0, totalDropped, totalDroppedBytes, 0, 0);
+            return new PersistenceQueueMetrics(_snapshotBuffer, count, budget, _globalQueue.Count);
+        }
+
+        private static void EnsureCapacity<T>(ref T[] buffer, int required)
+        {
+            if (buffer.Length >= required)
+                return;
+
+            var next = buffer.Length == 0 ? required : buffer.Length;
+            while (next < required)
+                next *= 2;
+            buffer = new T[next];
         }
     }
 
@@ -720,14 +944,96 @@ namespace Caelmor.Runtime.Transport
 
     public sealed class PersistenceQueueMetrics
     {
-        public PersistenceQueueMetrics(IReadOnlyList<PersistenceQueueMetricsSnapshot> perPlayer, int globalCount)
+        public static PersistenceQueueMetrics Empty { get; } = new PersistenceQueueMetrics(Array.Empty<PersistenceQueueMetricsSnapshot>(), 0, default, 0);
+
+        internal PersistenceQueueMetrics(PersistenceQueueMetricsSnapshot[] perPlayer, int count, QueueBudgetSnapshot budget, int globalCount)
         {
-            PerPlayer = perPlayer ?? Array.Empty<PersistenceQueueMetricsSnapshot>();
+            _buffer = perPlayer ?? Array.Empty<PersistenceQueueMetricsSnapshot>();
+            _count = count;
+            _view = new PersistenceQueueMetricsReadOnlyList(_buffer, _count);
+            Budget = budget;
             GlobalCount = globalCount;
         }
 
-        public IReadOnlyList<PersistenceQueueMetricsSnapshot> PerPlayer { get; }
+        private readonly PersistenceQueueMetricsSnapshot[] _buffer;
+        private readonly int _count;
+        private readonly PersistenceQueueMetricsReadOnlyList _view;
+
+        public QueueBudgetSnapshot Budget { get; }
         public int GlobalCount { get; }
+        public int Count => _count;
+        public IReadOnlyList<PersistenceQueueMetricsSnapshot> PerPlayer => _view;
+
+        public bool IsWithinBudgets(RuntimeBackpressureConfig config)
+        {
+            if (config is null) throw new ArgumentNullException(nameof(config));
+
+            return Budget.MaxCount <= config.MaxPersistenceWritesPerPlayer
+                && GlobalCount <= config.MaxPersistenceWritesGlobal;
+        }
+    }
+
+    internal readonly struct PersistenceQueueMetricsReadOnlyList : IReadOnlyList<PersistenceQueueMetricsSnapshot>
+    {
+        private readonly PersistenceQueueMetricsSnapshot[] _buffer;
+        private readonly int _count;
+
+        public PersistenceQueueMetricsReadOnlyList(PersistenceQueueMetricsSnapshot[] buffer, int count)
+        {
+            _buffer = buffer ?? Array.Empty<PersistenceQueueMetricsSnapshot>();
+            _count = count;
+        }
+
+        public PersistenceQueueMetricsSnapshot this[int index]
+        {
+            get
+            {
+                if ((uint)index >= (uint)_count)
+                    throw new ArgumentOutOfRangeException(nameof(index));
+                return _buffer[index];
+            }
+        }
+
+        public int Count => _count;
+
+        public Enumerator GetEnumerator() => new Enumerator(_buffer, _count);
+
+        IEnumerator<PersistenceQueueMetricsSnapshot> IEnumerable<PersistenceQueueMetricsSnapshot>.GetEnumerator() => GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        internal struct Enumerator : IEnumerator<PersistenceQueueMetricsSnapshot>
+        {
+            private readonly PersistenceQueueMetricsSnapshot[] _buffer;
+            private readonly int _count;
+            private int _index;
+
+            public Enumerator(PersistenceQueueMetricsSnapshot[] buffer, int count)
+            {
+                _buffer = buffer;
+                _count = count;
+                _index = -1;
+            }
+
+            public PersistenceQueueMetricsSnapshot Current => _buffer[_index];
+
+            object IEnumerator.Current => Current;
+
+            public bool MoveNext()
+            {
+                var next = _index + 1;
+                if (next >= _count)
+                    return false;
+                _index = next;
+                return true;
+            }
+
+            public void Reset() => _index = -1;
+
+            public void Dispose()
+            {
+            }
+        }
     }
 
     public readonly struct PersistenceQueueMetricsSnapshot

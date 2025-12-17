@@ -16,6 +16,7 @@ namespace Caelmor.Runtime.Tick
         public const int TickRateHz = 10;
         public static readonly TimeSpan TickInterval = TimeSpan.FromMilliseconds(100);
         private const int MaxCatchUpTicksPerLoop = 3;
+        private static readonly TimeSpan StallWatchdogThreshold = TimeSpan.FromMilliseconds(500);
 
         private readonly ITickEligibilityRegistry _eligibility;
         private readonly IEntityRegistry _entities;
@@ -30,6 +31,8 @@ namespace Caelmor.Runtime.Tick
         private CancellationTokenSource _cts;
         private volatile bool _running;
         private long _registrationSeq;
+
+        public event Action<TickStallEvent> StallDetected;
 
         public TickSystem(ITickEligibilityRegistry eligibility, IEntityRegistry entities)
         {
@@ -74,6 +77,7 @@ namespace Caelmor.Runtime.Tick
                     IsBackground = true,
                     Name = "Caelmor.TickSystem"
                 };
+                _diagnostics.ConfigureStallWatchdog(StallWatchdogThreshold, OnTickStalled);
                 _running = true;
                 _thread.Start();
             }
@@ -108,6 +112,8 @@ namespace Caelmor.Runtime.Tick
                     thread.Join();
             }
             catch { /* no-op */ }
+
+            _diagnostics.Dispose();
         }
 
         /// <summary>
@@ -125,6 +131,7 @@ namespace Caelmor.Runtime.Tick
                 _cts?.Dispose();
                 _cts = null;
                 _thread = null;
+                _diagnostics.Dispose();
             }
         }
 
@@ -195,6 +202,11 @@ namespace Caelmor.Runtime.Tick
                     _diagnostics.RecordTick(TimeSpan.Zero, overrun: true, catchUpClamped: true);
                 }
             }
+        }
+
+        private void OnTickStalled(TickStallEvent stall)
+        {
+            StallDetected?.Invoke(stall);
         }
 
         private void ExecuteOneTick(long tickIndex, TimeSpan fixedDelta)

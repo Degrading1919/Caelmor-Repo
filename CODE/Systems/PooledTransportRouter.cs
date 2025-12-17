@@ -73,16 +73,21 @@ namespace Caelmor.Runtime.Transport
                     metrics.Rejected++;
                     metrics.RejectedBytes += payloadSize;
                     metrics.Peak = Math.Max(metrics.Peak, queue.Count);
+                    metrics.CurrentBytes = currentBytes;
+                    metrics.PeakBytes = Math.Max(metrics.PeakBytes, currentBytes);
                     _metrics[sessionId] = metrics;
                     payload.Dispose();
                     return false;
                 }
 
                 queue.Enqueue(new InboundEnvelope(sessionId, commandType ?? string.Empty, submitTick, payload));
-                _bytesBySession[sessionId] = currentBytes + payloadSize;
+                var updatedBytes = currentBytes + payloadSize;
+                _bytesBySession[sessionId] = updatedBytes;
 
                 metrics.Peak = Math.Max(metrics.Peak, queue.Count);
                 metrics.Current = queue.Count;
+                metrics.CurrentBytes = updatedBytes;
+                metrics.PeakBytes = Math.Max(metrics.PeakBytes, updatedBytes);
                 _metrics[sessionId] = metrics;
                 return true;
             }
@@ -125,7 +130,8 @@ namespace Caelmor.Runtime.Transport
                         }
                     }
 
-                    UpdateCurrentMetrics(sessionId, queue.Count);
+                    _bytesBySession.TryGetValue(sessionId, out var bytes);
+                    UpdateCurrentMetrics(sessionId, queue.Count, bytes);
                 }
             }
 
@@ -229,16 +235,18 @@ namespace Caelmor.Runtime.Transport
                 if (_metrics.TryGetValue(sessionId, out var metrics))
                 {
                     metrics.Current = 0;
+                    metrics.CurrentBytes = 0;
                     _metrics[sessionId] = metrics;
                 }
             }
         }
 
-        private void UpdateCurrentMetrics(SessionId sessionId, int current)
+        private void UpdateCurrentMetrics(SessionId sessionId, int current, int currentBytes)
         {
             if (_metrics.TryGetValue(sessionId, out var metrics))
             {
                 metrics.Current = current;
+                metrics.CurrentBytes = currentBytes;
                 _metrics[sessionId] = metrics;
             }
         }
