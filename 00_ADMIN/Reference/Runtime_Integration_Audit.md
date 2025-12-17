@@ -37,6 +37,23 @@
 - Introduced `ZoneInterestQuery`/`ZonePosition` to express deterministic AOI queries that avoid N² scans and preserve ordering via `EntityHandle` sorting.
 - Upgraded the replication `VisibilityCullingService` to rely on the spatial index for AOI gating and to expose nearby-target queries for AI/combat surfaces. Visibility buckets now reuse pooled arrays and maintain deterministic ordering for tie-breakers.
 
+### Newly Delivered: Server Logging & Diagnostics (MMO Ops Layer)
+- **Allocation-Free Tick Counters**
+  - Maintain preallocated tick-duration stats (running min/max/avg) using a fixed-size ring buffer of longs (ticks or microseconds). No per-tick allocation or string formatting inside the loop; formatting occurs only when emitting snapshots.
+  - Track queue depths for inbound commands, outbound snapshots, and persistence backlogs via atomic integers updated in place. Sampling is time-sliced (e.g., every N ticks) to bound work on the tick thread.
+  - Capture entity counts per zone and total using pre-sized arrays aligned to the zone registry; counts are refreshed during existing mutation windows to avoid extra traversals.
+  - Record backpressure drops/rejects with increment-only counters, paired with a capped histogram bucket for drop bursts to avoid unbounded growth.
+- **Non-Blocking Watchdog**
+  - A lightweight watchdog thread (or timer) consumes immutable metric snapshots published from the tick thread via a lock-free handoff structure. The tick thread never blocks or waits for the watchdog.
+  - Detects tick stalls by comparing `lastTickSequence` against monotonic time; triggers an alert if no progress occurs beyond the configured threshold without touching gameplay state.
+  - Monitors monotonic queue growth/plateaus by comparing successive depth samples; flags sustained upward trends instead of transient spikes to reduce false positives.
+- **ValidationHarness Integration**
+  - Diagnostics surface exposes read-only views for ValidationHarness scenarios to assert invariants (e.g., "no mid-tick mutation", "queue growth bounded", "no stall"), with zero allocations when queried.
+  - Harness hooks receive structured error records (fault codes + identifiers) rather than formatted strings, enabling deterministic assertions and replay-friendly logging.
+- **Error Reporting Discipline**
+  - Mid-tick mutation attempts and invariant violations emit structured diagnostics that include the offending system/tick index but defer string formatting to off-thread consumers.
+  - All logging/metric emission is bounded and batched; no blocking I/O on the tick thread and no GC-churning allocations inside per-tick hot paths.
+
 ## 3a) Thread-Boundary Mailbox Plans for Missing Systems
 
 ### Networking Transport & Message Routing
