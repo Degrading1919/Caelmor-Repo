@@ -23,6 +23,8 @@ namespace Caelmor.Runtime.Tick
 
         private readonly object _gate = new object();
         private readonly List<ParticipantEntry> _participants = new List<ParticipantEntry>();
+        private ITickEntityParticipant[] _participantSnapshotBuffer = Array.Empty<ITickEntityParticipant>();
+        private int _participantSnapshotCount;
 
         private Thread _thread;
         private CancellationTokenSource _cts;
@@ -197,15 +199,7 @@ namespace Caelmor.Runtime.Tick
 
         private void ExecuteOneTick(long tickIndex, TimeSpan fixedDelta)
         {
-            // Snapshot participants deterministically.
-            ITickEntityParticipant[] participantsSnapshot;
-            lock (_gate)
-            {
-                var count = _participants.Count;
-                participantsSnapshot = new ITickEntityParticipant[count];
-                for (int i = 0; i < count; i++)
-                    participantsSnapshot[i] = _participants[i].Participant;
-            }
+            SnapshotParticipants();
 
             // Snapshot entities deterministically.
             var entitiesSnapshot = _entities.SnapshotEntitiesDeterministic();
@@ -214,7 +208,10 @@ namespace Caelmor.Runtime.Tick
 
             // Deterministic invocation:
             // For each participant (ordered), tick each eligible entity (deterministic entity order).
-            for (int p = 0; p < participantsSnapshot.Length; p++)
+            var participantsSnapshot = _participantSnapshotBuffer;
+            var participantCount = _participantSnapshotCount;
+
+            for (int p = 0; p < participantCount; p++)
             {
                 var participant = participantsSnapshot[p];
                 for (int e = 0; e < entitiesSnapshot.Length; e++)
@@ -253,6 +250,47 @@ namespace Caelmor.Runtime.Tick
                 if (c != 0) return c;
                 return x.RegistrationSeq.CompareTo(y.RegistrationSeq);
             }
+        }
+
+        private void SnapshotParticipants()
+        {
+            lock (_gate)
+            {
+                var count = _participants.Count;
+                EnsureParticipantSnapshotCapacity(count);
+
+                for (int i = 0; i < count; i++)
+                    _participantSnapshotBuffer[i] = _participants[i].Participant;
+
+                _participantSnapshotCount = count;
+
+#if DEBUG
+                _diagnostics.RecordParticipantCountObserved(count);
+#endif
+            }
+        }
+
+        private void EnsureParticipantSnapshotCapacity(int required)
+        {
+            if (_participantSnapshotBuffer.Length >= required)
+                return;
+
+            var newCapacity = _participantSnapshotBuffer.Length == 0
+                ? required
+                : _participantSnapshotBuffer.Length;
+
+            while (newCapacity < required)
+            {
+                newCapacity = newCapacity < 16
+                    ? newCapacity * 2
+                    : newCapacity + (newCapacity >> 1);
+            }
+
+            _participantSnapshotBuffer = new ITickEntityParticipant[newCapacity];
+
+#if DEBUG
+            _diagnostics.RecordParticipantSnapshotResize(newCapacity);
+#endif
         }
     }
 
