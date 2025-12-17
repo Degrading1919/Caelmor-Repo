@@ -1,108 +1,169 @@
 # Runtime Integration Audit
 
-## 1) Integration Summary
-- **Issues Identified**
-  - Duplicate runtime identifier definitions (`EntityHandle` and `SessionId`) in the Tick and Onboarding scopes risked type drift and compilation conflicts.
-  - Combat runtime lacked the Tick namespace import, preventing alignment with the shared entity handle contract.
-  - Diagnostics coverage was incomplete: no authoritative stall watchdog and no allocation-free queue budget surfacing for transport/persistence paths.
-- **Fixes Applied**
-  - Consolidated runtime entity handles under `Caelmor.Runtime.Tick` by removing redundant definitions from the tick eligibility registry and reusing the canonical tick contracts.
-  - Centralized the onboarding `SessionId` definition by removing the duplicate struct from the handoff hooks and relying on the primary onboarding declaration.
-  - Added the missing tick namespace import to the combat runtime to bind it to the authoritative entity handle and tick contracts.
-  - Added a lightweight stall watchdog plus expanded queue/budget diagnostics (inbound commands, outbound snapshots, persistence mailboxes) surfaced through `RuntimeServerLoop` without per-tick allocations.
-- **Commits Made**
-  - `fix(types): unify runtime identifiers`
-  - `chore(audit): add runtime integration audit`
-  - `Add stall watchdog and runtime queue diagnostics`
+## 1) Executive Summary
+- **System Code Complete:** NO — transport/handshake/command ingress are present as components but not wired into the tick lifecycle, and persistence I/O workers are absent.
+- **Top 5 Risks (ordered)**
+  1. **P0 — Command ingestion not integrated with tick freeze** (Authoritative input): `AuthoritativeCommandIngestor` is never drained or bound to tick boundaries, so accepted commands can accumulate or starve the simulation, violating the MMO brief’s deterministic per-tick mutation window. Evidence: the type only exists and is referenced by `RuntimeServerLoop`, but no tick participant or phase hook drains it. 【F:CODE/Systems/RuntimeIntegrationZeroGcHardening.cs†L15-L93】【F:CODE/Systems/RuntimeServerLoop.cs†L17-L117】
+  2. **P0 — Snapshot work contexts never released** (Replication/GC): `ClientReplicationSnapshotSystem` caches per-session `SnapshotWorkContext` entries in a `ConcurrentDictionary` with no removal on disconnect, creating unbounded memory growth over long uptimes. Violates the brief’s GC/pooling and long-uptime stability guardrails. 【F:CODE/Systems/ClientReplicationSnapshotSystem.cs†L25-L170】【F:CODE/Systems/RuntimeServerLoop.cs†L89-L111】
+  3. **P1 — Handshake queue lacks deterministic service loop** (Session lifecycle): `SessionHandshakePipeline` provides bounded enqueue but there is no scheduler hook to process handshakes on the tick thread, so sessions may never activate. This breaks authoritative onboarding and deterministic ordering in the MMO brief. 【F:CODE/Systems/SessionHandshakePipeline.cs†L1-L132】【F:CODE/Systems/RuntimeServerLoop.cs†L17-L117】
+  4. **P1 — Persistence write queue has no byte caps and drops rebuild the queue** (Persistence I/O): `PersistenceWriteQueue` enforces only count-based caps and rebuilds the global queue when trimming, allocating per drop and ignoring payload sizes; risk of GC churn and runaway memory when writes are large, violating zero-GC/backpressure guidance. 【F:CODE/Systems/DeterministicTransportQueues.cs†L620-L771】
+  5. **P1 — Combat intent staging allocates per tick with no caps** (Authoritative commands): `CombatIntentQueueSystem` creates new per-tick staging lists without bounds or pooling; under load this introduces steady allocations and unbounded growth, breaching the brief’s zero/low-GC and bounded-queue requirements. 【F:CODE/Systems/CombatIntentQueueSystem.cs†L23-L145】
 
-## 2) Dependency Map (High Level)
-- **Tick & Simulation Core**: `TickSystem` and `WorldSimulationCore` own deterministic tick driving, eligibility gating, and execution phases. All simulation participants and phase hooks depend on these contexts.
-- **Combat Runtime**: Depends on world simulation participation hooks, combat eligibility services, intent queues/gates, resolution engine, and outcome commit sinks. Uses tick-scoped `EntityHandle`.
-- **Inventory Runtime**: Uses `IServerAuthority` and internal mutation gating; independent of simulation phases but must respect simulation mutation windows.
-- **Quest Runtime**: Depends on `IServerAuthority`, quest mutation gating, player lifecycle query surfaces, and deterministic progression evaluators. Executes outside simulation ticks.
-- **Replication Runtime**: Hooks into post-tick phase via `ITickPhaseHook`, depends on session indices, replication eligibility gates, committed-state readers, and snapshot queues.
-- **Onboarding & Sessions**: Manage session creation, player binding, tick eligibility registration, and client-control handoff hooks; provide canonical `SessionId`.
+## 2) Closure of Prior Missing Systems
+- **Networking Transport & Message Routing**
+  - **Status:** Partially implemented. Inbound/outbound routing, caps, and pooled buffers exist, but no transport thread loop is present to call `RouteQueuedInbound`/`TryDequeueOutbound`.
+  - **Where:** `PooledTransportRouter`, `DeterministicTransportRouter`, `BoundedReplicationSnapshotQueue`. 【F:CODE/Systems/PooledTransportRouter.cs†L1-L203】【F:CODE/Systems/DeterministicTransportQueues.cs†L174-L365】
+  - **Entry points:** `EnqueueInbound`, `RouteQueuedInbound` (tick thread), `RouteSnapshot`, `TryDequeueOutbound`.
+  - **Thread:** Intended network threads enqueue/dequeue; tick thread should drain inbound/outbound via deterministic router, but the caller is absent (UNKNOWN: no loop found under `CODE/Systems`).
+  - **Guardrails:** Per-session caps and pooling present; missing driver risks backlog and determinism because routing is never invoked.
 
-## 3) Missing Systems / Files Needed for “System Code Complete”
-- **Networking Transport & Message Routing**: Required to deliver replication snapshots and receive client intents. Needs transport-agnostic interfaces bound to session management and replication queues; must respect server authority and deterministic ordering.
-- **Connection/Session Handshake Pipeline**: Necessary to validate clients, issue `SessionId`s, and negotiate onboarding start. Should integrate with onboarding system, snapshot eligibility registry, and server authority checks.
-- **World Bootstrap & Zone Startup**: A server entrypoint that initializes tick/simulation cores, registers participants (combat, NPCs, replication), and loads default zones per `IWorldManager`. Ensures deterministic entity indexing before tick start.
-- **Entity Registry / World State Container**: Deterministic entity index implementation that the tick/simulation core can query. Must coordinate with player/NPC runtime instance managers and residency systems.
-- **Authoritative Input Command Ingestion**: A command queueing surface that freezes combat intents (and future gameplay commands) per tick, enforcing “no mid-tick mutation” and server validation.
-- **Interest Management / Visibility Culling**: Eligibility layer for replication to restrict entities per session. Should plug into `IReplicationEligibilityGate` and zone residency/topology data.
-- **Snapshot Serialization & Delta Format**: A serialization contract for `ClientReplicationSnapshot` suitable for transport/diffing; ideally a deterministic binary or compact JSON representation plus hashing for `ReplicatedEntityState` fingerprints.
-- **Persistence IO Hooks**: Persistence adapters for player saves, inventory, and quest states to bridge runtime systems to storage, respecting mutation gates and restore contracts.
-- **Server Logging & Diagnostics**: Minimal logging/error handling strategy for invariant violations (e.g., mid-tick eligibility changes) with metrics/hooks for operational visibility.
-- **Runtime Loop Entrypoint / Build Script**: A runnable host (console service) that wires authority implementations, validation harness toggles, and starts/stops the tick/simulation threads deterministically.
+- **Connection/Session Handshake Pipeline**
+  - **Status:** Partially implemented; bounded ring exists but no tick-thread drain wiring.
+  - **Where:** `SessionHandshakePipeline`. 【F:CODE/Systems/SessionHandshakePipeline.cs†L1-L132】
+  - **Entry points:** `TryEnqueue`, `TryProcessNext`, `Drop`, `Reset`.
+  - **Thread:** Intended enqueue on transport thread; processing must be tick thread but no scheduler calls were found (UNKNOWN caller).
+  - **Guardrails:** Bounded ring satisfies backpressure; lack of processing path violates deterministic activation and mid-tick mutation gating.
 
-### Newly Delivered: Interest Management / Visibility Culling
-- Added a reusable `ZoneSpatialIndex` (grid/hash) that tracks per-zone entity residency and movement without per-tick allocations.
-- Introduced `ZoneInterestQuery`/`ZonePosition` to express deterministic AOI queries that avoid N² scans and preserve ordering via `EntityHandle` sorting.
-- Upgraded the replication `VisibilityCullingService` to rely on the spatial index for AOI gating and to expose nearby-target queries for AI/combat surfaces. Visibility buckets now reuse pooled arrays and maintain deterministic ordering for tie-breakers.
+- **World Bootstrap & Zone Startup**
+  - **Status:** Partially implemented; deterministic registration helper and host start/stop exist, but no zone loading or participant list provided.
+  - **Where:** `WorldBootstrapRegistration`, `ServerRuntimeHost`. 【F:CODE/Systems/WorldBootstrapRegistration.cs†L1-L61】【F:CODE/Systems/RuntimeIntegrationZeroGcHardening.cs†L510-L545】
+  - **Entry points:** `WorldBootstrapRegistration.Apply`, `ServerRuntimeHost.Start/Stop`.
+  - **Thread:** Tick thread created inside `WorldSimulationCore.Start`; host start is manual.
+  - **Guardrails:** Deterministic ordering and no reflection (AOT-safe) satisfied; missing concrete registrations leaves simulation incomplete.
 
-### Newly Delivered: Server Logging & Diagnostics (MMO Ops Layer)
-- **Allocation-Free Tick Counters**
-  - Track running min/max/avg tick durations with atomic primitives only; no per-tick allocations or formatting. Overruns and catch-up clamps are increment-only.
-  - Queue diagnostics expose current/peak counts and bytes plus drop/reject totals for inbound commands, outbound snapshots, and persistence write/completion mailboxes using reusable snapshot buffers (no LINQ/strings).
-  - Budget helper snapshots (max observed counts/bytes, totals dropped/rejected) let ops and validation assert that queues stay within configured caps without scanning unbounded collections.
-- **Non-Blocking Watchdog**
-  - A timer-backed stall watchdog observes monotonic timestamps and fires callbacks when ticks stop progressing beyond the configured threshold. It never blocks the tick thread and performs no formatting in the hot path.
-  - Stall detections and last-stall durations are recorded in diagnostics snapshots for offline inspection/alerting surfaces.
-- **ValidationHarness Integration**
-  - Runtime diagnostics snapshot is exposed from `RuntimeServerLoop` so harnesses can assert “no stalls” and “within queue budgets” deterministically.
-  - Diagnostics remain allocation-free in steady state and avoid tick-thread I/O; any formatting/logging occurs off the tick thread.
-- **Error Reporting Discipline**
-  - Mid-tick mutation attempts and invariant violations emit structured diagnostics that include the offending system/tick index but defer string formatting to off-thread consumers.
-  - All logging/metric emission is bounded and batched; no blocking I/O on the tick thread and no GC-churning allocations inside per-tick hot paths.
+- **Entity Registry / World State Container**
+  - **Status:** Implemented.
+  - **Where:** `DeterministicEntityRegistry` implements `IEntityRegistry`/`ISimulationEntityIndex`. 【F:CODE/Systems/DeterministicEntityRegistry.cs†L1-L110】
+  - **Entry points:** `Register`, `Unregister`, `DespawnZone`, `SnapshotEntitiesDeterministic`.
+  - **Thread:** Tick thread expected (methods are lock-protected); no off-thread mutation in code.
+  - **Guardrails:** Stable ordering via sort, zone cleanup, and ClearAll on shutdown; pooling not required (arrays reused). Meets determinism/duplication guardrail.
 
-## 3a) Thread-Boundary Mailbox Plans for Missing Systems
+- **Authoritative Input Command Ingestion**
+  - **Status:** Partially implemented; ring buffer exists but not connected to transport/tick participants and lacks metrics.
+  - **Where:** `AuthoritativeCommandIngestor`. 【F:CODE/Systems/RuntimeIntegrationZeroGcHardening.cs†L15-L93】
+  - **Entry points:** `TryEnqueue`, `TryDrain`, `DropSession`, `Clear`.
+  - **Thread:** Intended tick-thread drain; enqueue site unknown. No evidence of freeze-per-tick batching.
+  - **Guardrails:** Fixed capacity (32) without configuration or drop reporting breaks backpressure and determinism under load.
 
-### Networking Transport & Message Routing
-- **Threads**
-  - `NetworkTransportThread`: owns socket I/O, decode/encode, and no gameplay state access. All methods in this thread must only touch transport buffers.
-  - `TickThread`: authoritative simulation; only thread allowed to mutate world state or session routing tables.
-- **Inbound Path (client → server)**
-  - `NetworkTransportThread` decodes raw packets into immutable `DecodedClientMessage` records. No UnityEngine objects are created or mutated.
-  - Each decoded message is enqueued into a bounded `ConcurrentQueue<DecodedClientMessage>` named `InboundMailbox` (capacity tuned to avoid unbounded growth; drop/backpressure strategy to be configured). Enqueue performs no per-tick allocations by reusing pooled records where possible.
-  - The tick boundary drains `InboundMailbox` on `TickThread` into a `FrozenCommandBatch` that plugs into Authoritative Input Command Ingestion. Draining is done once per tick, copying payloads into pooled batch buffers before processing to avoid mid-tick mutations.
-- **Outbound Path (server → client)**
-  - Post-tick, `TickThread` builds replication snapshots and enqueues immutable `OutboundSnapshot` records into a bounded `ConcurrentQueue<OutboundSnapshot>` named `OutboundMailbox`. This queue is the only cross-thread handoff; gameplay state reads happen before enqueuing and are never mutated off-thread.
-  - `NetworkTransportThread` dequeues `OutboundSnapshot` entries and serializes/sends them over the transport. Transport code must not reference UnityEngine objects or simulation state beyond the snapshot payload.
-- **Routing**
-  - `TickThread` owns authoritative routing decisions (session-to-connection mapping). The network thread receives routing tokens within each record (e.g., `SessionId`, `ConnectionId`) and must not modify routing tables; it simply uses the tokens already embedded by the tick pipeline.
+- **Interest Management / Visibility Culling**
+  - **Status:** Implemented.
+  - **Where:** `ZoneSpatialIndex`, `VisibilityCullingService`. 【F:CODE/Systems/ZoneSpatialIndex.cs†L1-L156】【F:CODE/Systems/RuntimeIntegrationZeroGcHardening.cs†L95-L226】
+  - **Entry points:** `Upsert`, `Remove`, `Query` (index); `Track`, `RefreshVisibility`, `IsEntityReplicationEligible`, `QueryNearbyTargets` (visibility).
+  - **Thread:** Tick thread only; no thread-safe guards, assumes authoritative simulation thread.
+  - **Guardrails:** Deterministic ordering via sorted handles, pooled buffers, bounded reuse; complies with AOI and zero-GC brief.
 
-### Connection/Session Handshake Pipeline
-- **Threads**
-  - `NetworkTransportThread`: accepts new connections and runs cryptographic/identity validation off the tick thread.
-  - `TickThread`: assigns authoritative `SessionId`, registers onboarding eligibility, and mutates world state.
-- **Handshake Steps**
-  - Transport decodes handshake requests into immutable `HandshakeRequest` records and enqueues them into a bounded `ConcurrentQueue<HandshakeRequest>` (`HandshakeMailbox`). No session/world mutation occurs here.
-  - At tick boundary, `TickThread` drains `HandshakeMailbox`, validates credentials against server authority, issues `SessionId`, and registers the player with onboarding and replication eligibility services. All mutations occur solely on `TickThread`.
-  - The resulting `HandshakeAccepted`/`HandshakeRejected` responses are enqueued by `TickThread` into `OutboundMailbox` (or a dedicated `HandshakeResponseMailbox`) for the transport thread to send. The network thread only serializes/sends; it never mutates session registries.
-- **Backpressure & Safety**
-  - Mailboxes are bounded; overflow triggers explicit logging/metrics and optional connection-level throttling on the network thread. No UnityEngine objects or world references are touched off-thread.
+- **Snapshot Serialization & Delta Format**
+  - **Status:** Implemented (delta + pooled serializer, queued per session).
+  - **Where:** `SnapshotDeltaSerializer`, `SnapshotSerializer`, `BoundedReplicationSnapshotQueue`. 【F:CODE/Systems/DeterministicTransportQueues.cs†L808-L1033】【F:CODE/Systems/RuntimeIntegrationZeroGcHardening.cs†L228-L339】
+  - **Entry points:** `BoundedReplicationSnapshotQueue.Enqueue/TryDequeue`, `SnapshotDeltaSerializer.Serialize`, `SnapshotSerializer.Serialize`.
+  - **Thread:** Tick thread for enqueue/serialize; transport thread for dequeue. Pooled buffers returned via `SerializedSnapshot.Dispose`.
+  - **Guardrails:** Caps enforced on count/bytes; deterministic ordering and pooling present.
 
-### Persistence IO Hooks
-- **Threads**
-  - `PersistenceIOThread` (or thread pool): performs disk/database operations asynchronously. Must never reference UnityEngine objects or mutate gameplay state.
-  - `TickThread`: applies loaded/committed data to authoritative state during mutation windows.
-- **Load/Save Flow**
-  - `TickThread` requests persistence operations by enqueuing immutable `PersistenceJob` records into a bounded `ConcurrentQueue<PersistenceJob>` consumed by the persistence worker. Jobs reference serialized DTOs or snapshot payloads, not live world objects.
-  - Persistence worker executes I/O and posts `PersistenceResult` records into an `ApplyOnTickQueue` (`ConcurrentQueue<PersistenceResult>`). Completion callbacks do not touch gameplay state.
-  - At tick boundary (or designated post-tick phase), `TickThread` drains `ApplyOnTickQueue`, validates results, and applies state mutations within the authoritative mutation window. Any failures are handled on `TickThread` with diagnostics; off-thread code only logs transport/persistence errors.
-- **Memory & Allocation Discipline**
-  - Use pooled buffers for serialized payloads to avoid per-tick allocations. Queueing uses reused record instances where safe, with clear ownership to prevent cross-thread mutation after enqueue.
-  - All cross-thread DTOs are immutable once enqueued; any mutation requires a new record crafted on `TickThread`.
+- **Persistence IO Hooks**
+  - **Status:** Partially implemented; completion mailbox and write queue exist but no I/O worker or apply paths beyond generic interfaces.
+  - **Where:** `PersistenceCompletionQueue`, `PersistenceWriteQueue`, `PersistenceCompletionPhaseHook`. 【F:CODE/Systems/PersistenceCompletionQueue.cs†L1-L147】【F:CODE/Systems/DeterministicTransportQueues.cs†L620-L771】
+  - **Entry points:** `TryEnqueue` (off-thread), `Drain` via phase hook, `Enqueue/TryDequeue` (write queue).
+  - **Thread:** Completion drain must run on tick thread (phase hook provided); persistence worker not present (UNKNOWN).
+  - **Guardrails:** Completion queue has caps/drop-oldest and pooled payload disposal; write queue lacks byte caps and allocates during drops (risk).
 
-## 4) Risks & Next Steps
-- **Highest-Risk Integration Points**
-  - Cross-system identifier drift (entity/session/player) could silently desync replication and combat/quest eligibility unless kept centralized.
-  - Tick-phase misuse (mid-tick mutations, out-of-window snapshotting) may cause nondeterminism; requires stricter guards and diagnostics.
-  - Missing bootstrap/registry layers leave simulation participants unregistered, blocking end-to-end server startup.
-- **Recommended Next Stage**
-  - Implement the deterministic entity registry/world bootstrap plus authoritative command ingestion, then wire replication eligibility and transport stubs.
-- **Suggested Order of Execution**
-  1. Deliver entity registry + world bootstrap/host entrypoint to run the simulation loop.
-  2. Add authoritative input ingestion and intent freezing for combat (and future systems).
-  3. Implement interest management and snapshot serialization to unlock end-to-end replication.
-  4. Introduce logging/diagnostics and persistence adapters to harden runtime stability.
+- **Server Logging & Diagnostics**
+  - **Status:** Implemented.
+  - **Where:** `TickDiagnostics`, stall watchdog, queue diagnostics via `TransportBackpressureDiagnostics` and completion metrics. 【F:CODE/Systems/TickDiagnostics.cs†L1-L210】【F:CODE/Systems/RuntimeServerLoop.cs†L117-L154】【F:CODE/Systems/DeterministicTransportQueues.cs†L365-L456】
+  - **Entry points:** `RecordTick`, `ConfigureStallWatchdog`, `CaptureDiagnostics`.
+  - **Thread:** Tick-thread safe via interlocked; watchdog uses timer thread only for detection.
+  - **Guardrails:** Allocation-free hot path; meets MMO brief for stall detection and queue budgets.
+
+- **Runtime Loop Entrypoint / Build Script**
+  - **Status:** Partially implemented; loop coordinator exists but lacks per-tick orchestration of transport/handshake/commands.
+  - **Where:** `RuntimeServerLoop`, `ServerRuntimeHost`. 【F:CODE/Systems/RuntimeServerLoop.cs†L1-L154】【F:CODE/Systems/RuntimeIntegrationZeroGcHardening.cs†L510-L545】
+  - **Entry points:** `Start/Stop/ShutdownServer`, `OnSessionDisconnected`, `OnZoneUnloaded`, `CaptureDiagnostics`.
+  - **Thread:** Starts simulation threads only; no tick-phase callbacks wiring transport/handshake.
+  - **Guardrails:** Deterministic start/stop and cleanup present; missing orchestration breaks the end-to-end runtime loop.
+
+## 3) Tick Discipline & Determinism
+- **Phases:** `WorldSimulationCore` enforces Pre-Tick eligibility (gates snapshot, `EvaluateEligibility`), Simulation Execution (participants ordered by `OrderKey` then registration seq), and Post-Tick Finalization (eligibility stability check + effect commit + phase hooks). 【F:CODE/Systems/WorldSimulationCore.cs†L94-L223】【F:CODE/Systems/WorldSimulationCore.cs†L270-L343】
+- **Tick rate:** 10 Hz fixed (100 ms). Catch-up capped at 3 ticks; clamping records overruns. 【F:CODE/Systems/WorldSimulationCore.cs†L24-L86】
+- **Mutation windows:** Effect buffering (`SimulationEffectBuffer`) enforces commit only in Post-Tick; mid-tick eligibility mutation throws. 【F:CODE/Systems/WorldSimulationCore.cs†L271-L343】【F:CODE/Systems/WorldSimulationCore.cs†L345-L444】
+- **Deterministic ordering:** Entities sorted in `DeterministicEntityRegistry`; participants/hooks sorted; snapshots sorted by entity handle and fingerprint delta; visibility sorted. 【F:CODE/Systems/DeterministicEntityRegistry.cs†L92-L110】【F:CODE/Systems/WorldSimulationCore.cs†L153-L214】【F:CODE/Systems/DeterministicTransportQueues.cs†L888-L1033】【F:CODE/Systems/RuntimeIntegrationZeroGcHardening.cs†L135-L220】
+- **Nondeterminism sources:**
+  - Ingress/handshake not scheduled => ordering undefined (commands/joins processed opportunistically or never). Evidence: no caller for `RouteQueuedInbound`/`TryProcessNext`.
+  - `PersistenceWriteQueue` drops rebuild global queue using new `Queue`, introducing allocation and potential order changes when caps trigger. 【F:CODE/Systems/DeterministicTransportQueues.cs†L654-L711】
+  - Snapshot work contexts never removed, so ordering of `_workContexts` iteration (ConcurrentDictionary) is unspecified though used only for caching; risk is growth, not ordering.
+
+## 4) Allocation & GC Risk Audit (Zero/Low GC)
+- **Tick loop execution:** `WorldSimulationCore` and `TickSystem` reuse buffers; `SimulationEffectBuffer` preallocates list (512). No LINQ/strings in hot path. Thread.Sleep/SpinWait used for cadence only. 【F:CODE/Systems/WorldSimulationCore.cs†L24-L214】【F:CODE/Systems/TickSystemCore.cs†L24-L214】
+- **Command ingestion/drain:** `AuthoritativeCommandIngestor` uses fixed array ring per session (no pooling but no per-drain allocations). Missing drain path means retained commands can build up. Transport ingress uses pooled payload leases; dictionary allocations only at session creation. 【F:CODE/Systems/RuntimeIntegrationZeroGcHardening.cs†L15-L93】【F:CODE/Systems/DeterministicTransportQueues.cs†L26-L215】
+- **Snapshot building/serialization:** `ClientReplicationSnapshotSystem` rents arrays from pools; per-session scratch arrays cached; `SnapshotDeltaSerializer` uses ArrayPool<byte>. Risk: `_workContexts` never cleared → pooled buffers retained; `SnapshotSerializer.EnsureCapacity` reallocates when fingerprint strings exceed estimate. 【F:CODE/Systems/ClientReplicationSnapshotSystem.cs†L47-L170】【F:CODE/Systems/DeterministicTransportQueues.cs†L888-L1033】【F:CODE/Systems/RuntimeIntegrationZeroGcHardening.cs†L228-L339】
+- **AOI queries/spatial index:** `ZoneSpatialIndex.Query` appends to caller-provided list; `VisibilityCullingService.RefreshVisibility` rents from `ArrayPool` and reuses buckets. Minimal steady allocations. 【F:CODE/Systems/ZoneSpatialIndex.cs†L73-L134】【F:CODE/Systems/RuntimeIntegrationZeroGcHardening.cs†L115-L180】
+- **Queue operations per tick:** Transport queues reuse dictionaries/queues; completion queue reuses Queue with drop-oldest; write queue rebuilds queue when dropping (allocations). Combat intent staging allocates new `List` per submit tick and deep-freezes payload per intent. 【F:CODE/Systems/DeterministicTransportQueues.cs†L365-L520】【F:CODE/Systems/DeterministicTransportQueues.cs†L620-L711】【F:CODE/Systems/CombatIntentQueueSystem.cs†L63-L145】
+- **Warm-up vs. steady-state:**
+  - Warm-up: initial queue/dictionary creation per session, initial ArrayPool rents during first snapshots.
+  - Steady-state allocations: combat intent staging lists; persistence write drops rebuild global queue; snapshot serializer buffer growth on underestimate; absence of work-context cleanup causing heap retention.
+
+## 5) Pooling Ownership & Safety
+- **Payload buffers:** `PooledPayloadLease` and `SerializedSnapshot` are owned by queues; dispose returns ArrayPool buffers and is idempotent. Drop paths call `Dispose` before eviction. 【F:CODE/Systems/DeterministicTransportQueues.cs†L26-L168】【F:CODE/Systems/DeterministicTransportQueues.cs†L965-L1033】
+- **Visibility caches:** `VisibilityBucket.Release` returns rented arrays; `RemoveSession`/`Clear` ensure return. Risk: caller must remember to call `RemoveSession` on disconnect (handled by `RuntimeServerLoop.OnSessionDisconnected`). 【F:CODE/Systems/RuntimeIntegrationZeroGcHardening.cs†L140-L226】【F:CODE/Systems/RuntimeServerLoop.cs†L101-L113】
+- **Snapshot pooling:** `ClientReplicationSnapshot` uses ArrayPool-backed buffers with disposal callback; `_workContexts` retain rented arrays indefinitely without session cleanup (ownership leak).
+- **Persistence completions:** Mailbox disposes payloads on drop/drain; ownership explicit in `PersistenceCompletion.Dispose`. 【F:CODE/Systems/PersistenceCompletionQueue.cs†L1-L109】
+- **Risks:** Double-return protection exists via idempotent disposables; main hazard is leaked ownership when sessions terminate (snapshot work contexts, command rings if `DropSession` not called via runtime loop).
+
+## 6) Bounded Growth & Backpressure
+- **Inbound commands:** `PooledTransportRouter` enforces `MaxInboundCommandsPerSession` and `MaxQueuedBytesPerSession`; rejects overflow with metrics. `AuthoritativeCommandIngestor` ring is fixed-size (implicit cap) but silent drop (TryEnqueue false) and not config-driven. 【F:CODE/Systems/PooledTransportRouter.cs†L29-L140】【F:CODE/Systems/RuntimeIntegrationZeroGcHardening.cs†L15-L93】
+- **Outbound snapshots:** `BoundedReplicationSnapshotQueue` caps per session on count/bytes, drops oldest deterministically. 【F:CODE/Systems/DeterministicTransportQueues.cs†L365-L520】
+- **Persistence writes/completions:** Write queue caps per player/global by count only; no byte cap; drops rebuild queue (allocations). Completion queue caps count/bytes and drops oldest with metrics. 【F:CODE/Systems/DeterministicTransportQueues.cs†L620-L711】【F:CODE/Systems/PersistenceCompletionQueue.cs†L1-L109】
+- **Handshake/session state:** `SessionHandshakePipeline` bounded by fixed capacity; `PlayerSessionSystem` dictionaries guarded but unbounded session count (expected; relies on proper deactivation). 【F:CODE/Systems/SessionHandshakePipeline.cs†L19-L96】【F:CODE/Systems/PlayerSessionSystem.cs†L20-L137】
+- **Metrics:** Ingress/egress and completion queues expose budget snapshots; command ingestor and handshake queues lack drop counters.
+- **Unbounded structures flagged:** `_workContexts` in `ClientReplicationSnapshotSystem` (per session, never removed); combat intent staging dictionary grows with every tick key until pruned (keep last 4 ticks but allocates new lists per tick). 【F:CODE/Systems/ClientReplicationSnapshotSystem.cs†L55-L170】【F:CODE/Systems/CombatIntentQueueSystem.cs†L63-L145】
+
+## 7) Thread Boundary Contract
+- **Tick/Simulation thread:** `WorldSimulationCore` (captures tick thread via `TickThreadAssert`), participants, eligibility, phase hooks, and effect commits run here. `TickSystem` also owns dedicated thread (redundant loop) but not integrated. 【F:CODE/Systems/WorldSimulationCore.cs†L59-L153】【F:CODE/Systems/TickSystemCore.cs†L52-L118】
+- **Transport thread(s):** Expected to enqueue inbound (`PooledTransportRouter.EnqueueInbound`) and dequeue outbound; not present in code.
+- **Persistence worker:** Expected off-thread producer for `PersistenceCompletionQueue.TryEnqueue`; absent.
+- **Safety checks:** `TickThreadAssert` debug-only; transport queues lock-based; completion drain asserts tick thread. No UnityEngine access off-thread.
+- **Violations/Missing wiring:** No authoritative mutation observed off tick thread, but missing orchestration means handshakes/ingress may run on arbitrary threads if callers misuse. Need explicit scheduler binding.
+
+## 8) I/O & Blocking Calls
+- **Blocking waits:** Tick loops use `Thread.Sleep`/`SpinWait` for cadence; acceptable but note potential jitter if host thread preempted. 【F:CODE/Systems/WorldSimulationCore.cs†L57-L111】【F:CODE/Systems/TickSystemCore.cs†L57-L112】
+- **File/Network I/O:** None in codebase; persistence/transport hooks are abstractions only. No synchronous file access found (`rg File.` returned none).
+- **Locks:** Bounded usage in transport router, handshakes, registries; no evidence of long-held locks on tick thread except snapshot enqueue (short critical sections). Monitor usage absent.
+
+## 9) AOT/IL2CPP Safety Audit
+- **Dynamic codegen:** None found; files explicitly warn against Reflection.Emit and use deterministic registration helpers. Searches for `Reflection.Emit/DynamicMethod/Assembly.Load` yielded only comments. 【F:CODE/Systems/DeterministicTransportQueues.cs†L458-L480】【F:CODE/Systems/RuntimeServerLoop.cs†L11-L23】
+- **Reflection-heavy discovery:** None; `WorldBootstrapRegistration` requires explicit registration (AOT-safe). 【F:CODE/Systems/WorldBootstrapRegistration.cs†L1-L61】
+- **Stripping hazards:** Interfaces/classes are concrete and referenced; no reliance on reflection-based activation detected. Snapshot serializer uses `Encoding.UTF8` only.
+
+## 10) Observability & Ops Readiness
+- **Tick metrics:** Min/max/avg tick durations, overruns, catch-up clamps, stall counts tracked allocation-free. Stall watchdog present. 【F:CODE/Systems/TickDiagnostics.cs†L1-L210】
+- **Queue metrics:** Ingress/snapshot budgets, persistence completion metrics exposed via diagnostics snapshots. 【F:CODE/Systems/RuntimeServerLoop.cs†L117-L154】【F:CODE/Systems/DeterministicTransportQueues.cs†L365-L456】【F:CODE/Systems/PersistenceCompletionQueue.cs†L1-L109】
+- **Missing signals:** No metrics for handshake queue saturation, command ring drops, or combat intent rejects. No tick duration publishing to external monitoring; TimeSlicedWorkScheduler only increments deferral counter.
+- **Allocation-free logging:** No per-tick string formatting; diagnostics snapshots avoid allocations.
+
+## 11) Security / Trust Boundaries (Authoritative Server Hygiene)
+- **Identifier issuance:** `PlayerSessionSystem` rejects client-provided IDs via `ClientIdentifierRejectionGuards` and only accepts server-issued `SessionId/PlayerId`. 【F:CODE/Systems/PlayerSessionSystem.cs†L38-L92】
+- **Command validation:** Combat intent ingestion performs structural validation (`CombatIntentStructuralValidator`) before staging; other command channels (generic `AuthoritativeCommandIngestor`) accept raw ints with no schema validation. 【F:CODE/Systems/CombatIntentQueueSystem.cs†L47-L109】【F:CODE/Systems/RuntimeIntegrationZeroGcHardening.cs†L15-L93】
+- **Out-of-window commands:** Combat intents freeze per tick; generic ingress lacks submit-window enforcement (no tie to tick index).
+- **Routing authority:** Transport router rejects invalid SessionId and does not mutate routing tables off-thread; snapshot routing uses authoritative SessionId tokens. 【F:CODE/Systems/PooledTransportRouter.cs†L38-L140】
+- **Gaps:** Handshake queue not processed ⇒ clients may never become authoritative sessions; command ingestor lacks validation/dedupe; persistence completion queue accepts any payload length up to config without schema verification.
+
+## 12) Risk Register & Next Actions
+- **P0 — Wire authoritative ingestion into tick loop:** Add a tick-phase hook or participant that drains `AuthoritativeCommandIngestor` per session each tick (freeze semantics), applies deterministic ordering, and emits drop metrics. Violates MMO brief: deterministic per-tick mutation and backpressure. 【F:CODE/Systems/RuntimeIntegrationZeroGcHardening.cs†L15-L93】【F:CODE/Systems/RuntimeServerLoop.cs†L17-L117】
+- **P0 — Clean up replication work contexts on disconnect:** Track session lifecycle events and remove `_workContexts` entries when sessions end; assert disposal of pooled buffers to prevent long-uptime GC growth. Violates MMO brief: pooling/long-uptime stability. 【F:CODE/Systems/ClientReplicationSnapshotSystem.cs†L55-L170】【F:CODE/Systems/RuntimeServerLoop.cs†L101-L113】
+- **P1 — Provide scheduler for handshake pipeline:** Register a tick-phase hook that drains `SessionHandshakePipeline.TryProcessNext` deterministically each tick; add metrics for queue full drops. Addresses MMO brief: authoritative onboarding and deterministic routing. 【F:CODE/Systems/SessionHandshakePipeline.cs†L19-L96】
+- **P1 — Add byte-aware caps to persistence writes:** Extend `PersistenceWriteQueue` to enforce byte budgets and avoid rebuilding queues during drops (reuse pooled structures). Addresses MMO brief: backpressure and zero/low GC. 【F:CODE/Systems/DeterministicTransportQueues.cs†L620-L711】
+- **P1 — Bound combat intent staging allocations:** Introduce pooled buffers or fixed-cap ring per tick (by actor) and add drop/backpressure policy to avoid unbounded lists. Addresses MMO brief: low-GC authoritative command intake. 【F:CODE/Systems/CombatIntentQueueSystem.cs†L63-L145】
+- **P2 — Expose ops metrics for handshakes/commands:** Emit counters for handshake enqueue/drops and command ring overflows; surface via `RuntimeDiagnosticsSnapshot`. Supports MMO ops readiness.
+
+---
+
+## APPENDIX A — Evidence Table
+| Severity | Subsystem | File | Type/Method | Finding | MMO Brief Principle Violated | Suggested Fix |
+| --- | --- | --- | --- | --- | --- | --- |
+| P0 | Command ingestion | RuntimeIntegrationZeroGcHardening.cs | `AuthoritativeCommandIngestor` | Ring buffer has no tick-thread drain or metrics; commands may queue indefinitely or drop silently | Deterministic tick mutation & backpressure | Add tick-phase drain, deterministic ordering, and overflow counters tied to config |
+| P0 | Replication | ClientReplicationSnapshotSystem.cs | `_workContexts` caching | Per-session work contexts never removed, causing unbounded memory over long uptime | GC/pooling, long-uptime stability | Remove contexts on disconnect; validate disposal of pooled buffers |
+| P1 | Handshake | SessionHandshakePipeline.cs | `TryProcessNext` (unused) | No scheduler calls to process handshake queue deterministically | Session lifecycle determinism | Add tick-phase hook to drain queue each tick with metrics |
+| P1 | Persistence | DeterministicTransportQueues.cs | `PersistenceWriteQueue.EnforceCaps` | Caps ignore bytes; dropping rebuilds queue, allocating per drop | Backpressure, zero/low GC | Track byte budgets and drop without rebuilding queues; reuse pooled buffers |
+| P1 | Combat intents | CombatIntentQueueSystem.cs | `FreezeForTick`/`PruneStaging` | Per-tick staging allocates new lists without caps; no backpressure | Low-GC authoritative ingestion | Use pooled buffers/rings with caps and drop policy |
+
+## APPENDIX B — Search/Review Notes
+- Searched for `System.Linq`, `new List<`, `new Dictionary<`, `new byte[`, `Action`, `ConcurrentQueue`, `lock`, `Monitor`, `File.`, `Stream`, `Thread.Sleep`, `Task.Wait`/`.Result`, `Reflection.Emit`/`DynamicMethod` using `rg` under `CODE/Systems`.
+- Manually reviewed tick/transport/handshake/replication/persistence systems for thread boundaries, pooling, and determinism.
