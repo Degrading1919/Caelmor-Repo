@@ -3,6 +3,7 @@ using Caelmor.Runtime.Diagnostics;
 using Caelmor.Runtime.Integration;
 using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.Persistence;
+using Caelmor.Runtime.Replication;
 using Caelmor.Runtime.Tick;
 using Caelmor.Runtime.Transport;
 using Caelmor.Runtime.WorldSimulation;
@@ -67,26 +68,35 @@ namespace Caelmor.Runtime.Host
             ReadOnlySpan<ISimulationEligibilityGate> eligibilityGates,
             ReadOnlySpan<ParticipantRegistration> participants,
             ReadOnlySpan<PhaseHookRegistration> phaseHooks,
+            IActiveSessionIndex activeSessions = null,
+            int commandFreezeHookOrderKey = int.MinValue,
             PersistenceCompletionQueue persistenceCompletions = null,
             IPersistenceCompletionApplier persistenceCompletionApplier = null,
             int persistenceCompletionHookOrderKey = -1024)
         {
-            ReadOnlySpan<PhaseHookRegistration> hooksSpan = phaseHooks;
-            PhaseHookRegistration[] combinedHooks = null;
+            int hookCount = phaseHooks.Length + 1;
+            bool includePersistence = persistenceCompletions != null && persistenceCompletionApplier != null;
+            if (includePersistence)
+                hookCount++;
 
-            if (persistenceCompletions != null && persistenceCompletionApplier != null)
+            var combinedHooks = new PhaseHookRegistration[hookCount];
+            int index = 0;
+
+            combinedHooks[index++] = new PhaseHookRegistration(
+                new AuthoritativeCommandFreezeHook(commands, activeSessions),
+                commandFreezeHookOrderKey);
+
+            for (int i = 0; i < phaseHooks.Length; i++)
+                combinedHooks[index++] = phaseHooks[i];
+
+            if (includePersistence)
             {
-                combinedHooks = new PhaseHookRegistration[phaseHooks.Length + 1];
-                for (int i = 0; i < phaseHooks.Length; i++)
-                    combinedHooks[i] = phaseHooks[i];
-
-                combinedHooks[^1] = new PhaseHookRegistration(
+                combinedHooks[index++] = new PhaseHookRegistration(
                     new PersistenceCompletionPhaseHook(persistenceCompletions, persistenceCompletionApplier),
                     persistenceCompletionHookOrderKey);
-                hooksSpan = combinedHooks;
             }
 
-            WorldBootstrapRegistration.Apply(simulation, eligibilityGates, participants, hooksSpan);
+            WorldBootstrapRegistration.Apply(simulation, eligibilityGates, participants, combinedHooks);
             return new RuntimeServerLoop(simulation, transport, handshakes, commands, visibility, entities, persistenceCompletions);
         }
 
@@ -164,8 +174,9 @@ namespace Caelmor.Runtime.Host
         {
             var transport = _transport.CaptureDiagnostics();
             var tick = _simulation.Diagnostics;
+            var commands = _commands.SnapshotMetrics();
             var persistenceCompletions = _persistenceCompletions?.SnapshotMetrics();
-            return new RuntimeDiagnosticsSnapshot(tick, transport, persistenceCompletions);
+            return new RuntimeDiagnosticsSnapshot(tick, transport, persistenceCompletions, commands);
         }
 
         private void ClearTransientState()
@@ -189,16 +200,19 @@ namespace Caelmor.Runtime.Host
         public RuntimeDiagnosticsSnapshot(
             TickDiagnosticsSnapshot tick,
             TransportBackpressureDiagnostics transport,
-            CompletionQueueMetrics? persistenceCompletionMailbox)
+            CompletionQueueMetrics? persistenceCompletionMailbox,
+            CommandIngestorDiagnostics commands)
         {
             Tick = tick;
             Transport = transport;
             PersistenceCompletionMailbox = persistenceCompletionMailbox;
+            Commands = commands;
         }
 
         public TickDiagnosticsSnapshot Tick { get; }
         public TransportBackpressureDiagnostics Transport { get; }
         public CompletionQueueMetrics? PersistenceCompletionMailbox { get; }
+        public CommandIngestorDiagnostics Commands { get; }
         public bool HasDetectedStall => Tick.StallDetections > 0;
     }
 }
