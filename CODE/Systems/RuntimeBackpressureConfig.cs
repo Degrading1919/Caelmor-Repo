@@ -15,6 +15,8 @@ namespace Caelmor.Runtime
             maxQueuedBytesPerSession: 256 * 1024,
             maxPersistenceWritesPerPlayer: 16,
             maxPersistenceWritesGlobal: 128,
+            maxPersistenceWriteBytesPerPlayer: 1024 * 1024,
+            maxPersistenceWriteBytesGlobal: 8 * 1024 * 1024,
             maxPersistenceCompletions: 128,
             maxPersistenceCompletionBytes: 512 * 1024);
 
@@ -24,6 +26,8 @@ namespace Caelmor.Runtime
             int maxQueuedBytesPerSession,
             int maxPersistenceWritesPerPlayer,
             int maxPersistenceWritesGlobal,
+            int maxPersistenceWriteBytesPerPlayer,
+            int maxPersistenceWriteBytesGlobal,
             int maxPersistenceCompletions,
             int maxPersistenceCompletionBytes)
             : this(
@@ -32,8 +36,32 @@ namespace Caelmor.Runtime
                 maxQueuedBytesPerSession,
                 maxPersistenceWritesPerPlayer,
                 maxPersistenceWritesGlobal,
+                maxPersistenceWriteBytesPerPlayer,
+                maxPersistenceWriteBytesGlobal,
                 maxPersistenceCompletions,
                 maxPersistenceCompletionBytes,
+                skipValidation: false)
+        {
+        }
+
+        public RuntimeBackpressureConfig(
+            int maxInboundCommandsPerSession,
+            int maxOutboundSnapshotsPerSession,
+            int maxQueuedBytesPerSession,
+            int maxPersistenceWritesPerPlayer,
+            int maxPersistenceWritesGlobal,
+            int maxPersistenceWriteBytesPerPlayer,
+            int maxPersistenceWriteBytesGlobal)
+            : this(
+                maxInboundCommandsPerSession,
+                maxOutboundSnapshotsPerSession,
+                maxQueuedBytesPerSession,
+                maxPersistenceWritesPerPlayer,
+                maxPersistenceWritesGlobal,
+                maxPersistenceWriteBytesPerPlayer,
+                maxPersistenceWriteBytesGlobal,
+                maxPersistenceCompletions: 128,
+                maxPersistenceCompletionBytes: 512 * 1024,
                 skipValidation: false)
         {
         }
@@ -50,6 +78,8 @@ namespace Caelmor.Runtime
                 maxQueuedBytesPerSession,
                 maxPersistenceWritesPerPlayer,
                 maxPersistenceWritesGlobal,
+                maxPersistenceWriteBytesPerPlayer: 1024 * 1024,
+                maxPersistenceWriteBytesGlobal: 8 * 1024 * 1024,
                 maxPersistenceCompletions: 128,
                 maxPersistenceCompletionBytes: 512 * 1024,
                 skipValidation: false)
@@ -62,6 +92,8 @@ namespace Caelmor.Runtime
             int maxQueuedBytesPerSession,
             int maxPersistenceWritesPerPlayer,
             int maxPersistenceWritesGlobal,
+            int maxPersistenceWriteBytesPerPlayer,
+            int maxPersistenceWriteBytesGlobal,
             int maxPersistenceCompletions,
             int maxPersistenceCompletionBytes,
             bool skipValidation)
@@ -73,6 +105,8 @@ namespace Caelmor.Runtime
                 if (maxQueuedBytesPerSession <= 0) throw new ArgumentOutOfRangeException(nameof(maxQueuedBytesPerSession));
                 if (maxPersistenceWritesPerPlayer <= 0) throw new ArgumentOutOfRangeException(nameof(maxPersistenceWritesPerPlayer));
                 if (maxPersistenceWritesGlobal <= 0) throw new ArgumentOutOfRangeException(nameof(maxPersistenceWritesGlobal));
+                if (maxPersistenceWriteBytesPerPlayer <= 0) throw new ArgumentOutOfRangeException(nameof(maxPersistenceWriteBytesPerPlayer));
+                if (maxPersistenceWriteBytesGlobal <= 0) throw new ArgumentOutOfRangeException(nameof(maxPersistenceWriteBytesGlobal));
                 if (maxPersistenceCompletions <= 0) throw new ArgumentOutOfRangeException(nameof(maxPersistenceCompletions));
                 if (maxPersistenceCompletionBytes <= 0) throw new ArgumentOutOfRangeException(nameof(maxPersistenceCompletionBytes));
             }
@@ -82,6 +116,8 @@ namespace Caelmor.Runtime
             MaxQueuedBytesPerSession = maxQueuedBytesPerSession;
             MaxPersistenceWritesPerPlayer = maxPersistenceWritesPerPlayer;
             MaxPersistenceWritesGlobal = maxPersistenceWritesGlobal;
+            MaxPersistenceWriteBytesPerPlayer = maxPersistenceWriteBytesPerPlayer;
+            MaxPersistenceWriteBytesGlobal = maxPersistenceWriteBytesGlobal;
             MaxPersistenceCompletions = maxPersistenceCompletions;
             MaxPersistenceCompletionBytes = maxPersistenceCompletionBytes;
         }
@@ -91,6 +127,8 @@ namespace Caelmor.Runtime
         public int MaxQueuedBytesPerSession { get; }
         public int MaxPersistenceWritesPerPlayer { get; }
         public int MaxPersistenceWritesGlobal { get; }
+        public int MaxPersistenceWriteBytesPerPlayer { get; }
+        public int MaxPersistenceWriteBytesGlobal { get; }
         public int MaxPersistenceCompletions { get; }
         public int MaxPersistenceCompletionBytes { get; }
     }
