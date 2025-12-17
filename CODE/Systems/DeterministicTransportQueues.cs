@@ -276,7 +276,7 @@ namespace Caelmor.Runtime.Transport
                 totalRejectedBytes += metrics.RejectedBytes;
             }
 
-            var budget = new QueueBudgetSnapshot(maxPeak, maxBytes, totalDropped, totalDroppedBytes, totalRejected, totalRejectedBytes);
+            var budget = new QueueBudgetSnapshot(maxPeak, maxBytes, totalDropped, totalDroppedBytes, totalRejected, totalRejectedBytes, totalTrims: 0);
             return new CommandIngressMetrics(_snapshotBuffer, count, budget);
         }
 
@@ -350,11 +350,12 @@ namespace Caelmor.Runtime.Transport
         public int Dropped { get; set; }
         public int RejectedBytes { get; set; }
         public int DroppedBytes { get; set; }
+        public int Trims { get; set; }
     }
 
     public readonly struct QueueBudgetSnapshot
     {
-        public QueueBudgetSnapshot(int maxCount, int maxBytes, int totalDropped, int totalDroppedBytes, int totalRejected, int totalRejectedBytes)
+        public QueueBudgetSnapshot(int maxCount, int maxBytes, int totalDropped, int totalDroppedBytes, int totalRejected, int totalRejectedBytes, int totalTrims)
         {
             MaxCount = maxCount;
             MaxBytes = maxBytes;
@@ -362,6 +363,7 @@ namespace Caelmor.Runtime.Transport
             TotalDroppedBytes = totalDroppedBytes;
             TotalRejected = totalRejected;
             TotalRejectedBytes = totalRejectedBytes;
+            TotalTrims = totalTrims;
         }
 
         public int MaxCount { get; }
@@ -370,6 +372,7 @@ namespace Caelmor.Runtime.Transport
         public int TotalDroppedBytes { get; }
         public int TotalRejected { get; }
         public int TotalRejectedBytes { get; }
+        public int TotalTrims { get; }
     }
 
     internal readonly struct SessionQueueMetricsReadOnlyList : IReadOnlyList<SessionQueueMetricsSnapshot>
@@ -627,6 +630,7 @@ namespace Caelmor.Runtime.Transport
                 dropped.Dispose();
                 metrics.Dropped++;
                 metrics.DroppedBytes += dropped.ByteLength;
+                metrics.Trims++;
             }
 
             _bytesBySession[sessionId] = Math.Max(0, bytes);
@@ -677,6 +681,7 @@ namespace Caelmor.Runtime.Transport
             int maxBytes = 0;
             int totalDropped = 0;
             int totalDroppedBytes = 0;
+            int totalTrims = 0;
 
             for (int i = 0; i < count; i++)
             {
@@ -691,9 +696,10 @@ namespace Caelmor.Runtime.Transport
                     maxBytes = metrics.PeakBytes;
                 totalDropped += metrics.Dropped;
                 totalDroppedBytes += metrics.DroppedBytes;
+                totalTrims += metrics.Trims;
             }
 
-            var budget = new QueueBudgetSnapshot(maxPeak, maxBytes, totalDropped, totalDroppedBytes, 0, 0);
+            var budget = new QueueBudgetSnapshot(maxPeak, maxBytes, totalDropped, totalDroppedBytes, 0, 0, totalTrims);
             return new SnapshotQueueMetrics(_snapshotBuffer, count, budget);
         }
 
@@ -773,14 +779,20 @@ namespace Caelmor.Runtime.Transport
 
     /// <summary>
     /// Persistence write queue with per-player and global caps. Overflow drops the oldest
-    /// pending write deterministically to avoid blocking the tick loop.
+    /// pending write deterministically to avoid blocking the tick loop while respecting
+    /// both count and byte budgets without rebuilding queues.
     /// </summary>
     public sealed class PersistenceWriteQueue
     {
         private readonly RuntimeBackpressureConfig _config;
         private readonly Queue<PersistenceWriteRecord> _globalQueue = new Queue<PersistenceWriteRecord>();
         private readonly Dictionary<PlayerId, Queue<PersistenceWriteRecord>> _perPlayer = new Dictionary<PlayerId, Queue<PersistenceWriteRecord>>();
+        private readonly Dictionary<PlayerId, int> _bytesByPlayer = new Dictionary<PlayerId, int>();
         private readonly Dictionary<PlayerId, SessionQueueMetrics> _metrics = new Dictionary<PlayerId, SessionQueueMetrics>();
+        private int _globalBytes;
+        private int _globalPeakBytes;
+        private int _globalPeakCount;
+        private int _globalTrims;
         private PlayerId[] _snapshotKeys = Array.Empty<PlayerId>();
         private PersistenceQueueMetricsSnapshot[] _snapshotBuffer = Array.Empty<PersistenceQueueMetricsSnapshot>();
 
@@ -791,6 +803,9 @@ namespace Caelmor.Runtime.Transport
 
         public void Enqueue(PlayerId playerId, PersistenceWriteRequest request)
         {
+            int payloadBytes = request.EstimatedBytes;
+            var record = new PersistenceWriteRecord(playerId, request);
+
             if (!_perPlayer.TryGetValue(playerId, out var queue))
             {
                 queue = new Queue<PersistenceWriteRecord>();
@@ -800,11 +815,22 @@ namespace Caelmor.Runtime.Transport
             if (!_metrics.TryGetValue(playerId, out var metrics))
                 metrics = new SessionQueueMetrics();
 
-            queue.Enqueue(new PersistenceWriteRecord(playerId, request));
-            _globalQueue.Enqueue(new PersistenceWriteRecord(playerId, request));
+            _bytesByPlayer.TryGetValue(playerId, out var currentBytes);
+
+            queue.Enqueue(record);
+            _globalQueue.Enqueue(record);
+            currentBytes += payloadBytes;
+            _bytesByPlayer[playerId] = currentBytes;
+            _globalBytes += payloadBytes;
+
             metrics.Peak = Math.Max(metrics.Peak, queue.Count);
             metrics.Current = queue.Count;
+            metrics.CurrentBytes = currentBytes;
+            metrics.PeakBytes = Math.Max(metrics.PeakBytes, currentBytes);
             _metrics[playerId] = metrics;
+
+            _globalPeakCount = Math.Max(_globalPeakCount, _globalQueue.Count);
+            _globalPeakBytes = Math.Max(_globalPeakBytes, _globalBytes);
 
             EnforceCaps(playerId, queue);
             EnforceGlobalCap();
@@ -815,51 +841,101 @@ namespace Caelmor.Runtime.Transport
             if (!_metrics.TryGetValue(playerId, out var metrics))
                 metrics = new SessionQueueMetrics();
 
-            while (queue.Count > _config.MaxPersistenceWritesPerPlayer)
+            _bytesByPlayer.TryGetValue(playerId, out var currentBytes);
+
+            while (queue.Count > _config.MaxPersistenceWritesPerPlayer || currentBytes > _config.MaxPersistenceWriteBytesPerPlayer)
             {
                 var dropped = queue.Dequeue();
+                int droppedBytes = dropped.Request.EstimatedBytes;
+                currentBytes = Math.Max(0, currentBytes - droppedBytes);
                 metrics.Dropped++;
-                metrics.DroppedBytes += dropped.Request.EstimatedBytes;
-                RemoveFromGlobal(dropped);
+                metrics.DroppedBytes += droppedBytes;
+                metrics.Trims++;
+                RemoveFromGlobal(dropped, droppedBytes, countAsTrim: true);
             }
 
             metrics.Current = queue.Count;
+            metrics.CurrentBytes = currentBytes;
+            metrics.Peak = Math.Max(metrics.Peak, metrics.Current);
+            metrics.PeakBytes = Math.Max(metrics.PeakBytes, currentBytes);
             _metrics[playerId] = metrics;
+            _bytesByPlayer[playerId] = currentBytes;
         }
 
         private void EnforceGlobalCap()
         {
-            while (_globalQueue.Count > _config.MaxPersistenceWritesGlobal)
+            while (_globalQueue.Count > _config.MaxPersistenceWritesGlobal || _globalBytes > _config.MaxPersistenceWriteBytesGlobal)
             {
                 var dropped = _globalQueue.Dequeue();
-                if (_metrics.TryGetValue(dropped.PlayerId, out var metrics))
-                {
-                    metrics.Dropped++;
-                    metrics.DroppedBytes += dropped.Request.EstimatedBytes;
-                    metrics.Current = Math.Max(0, metrics.Current - 1);
-                    _metrics[dropped.PlayerId] = metrics;
-                }
+                int droppedBytes = dropped.Request.EstimatedBytes;
+                _globalBytes = Math.Max(0, _globalBytes - droppedBytes);
+                _globalTrims++;
 
-                if (_perPlayer.TryGetValue(dropped.PlayerId, out var queue) && queue.Count > 0 && queue.Peek().Request.Equals(dropped.Request))
-                    queue.Dequeue();
+                DropFromPerPlayer(dropped, droppedBytes);
             }
         }
 
-        private void RemoveFromGlobal(PersistenceWriteRecord dropped)
+        private void DropFromPerPlayer(in PersistenceWriteRecord dropped, int droppedBytes, bool countAsTrim = true)
+        {
+            if (!_perPlayer.TryGetValue(dropped.PlayerId, out var queue) || queue.Count == 0)
+                return;
+
+            int count = queue.Count;
+            bool removed = false;
+            for (int i = 0; i < count; i++)
+            {
+                var candidate = queue.Dequeue();
+                if (!removed && candidate.Request.Equals(dropped.Request))
+                {
+                    removed = true;
+                    continue;
+                }
+
+                queue.Enqueue(candidate);
+            }
+
+            if (!removed)
+                return;
+
+            _bytesByPlayer.TryGetValue(dropped.PlayerId, out var playerBytes);
+            playerBytes = Math.Max(0, playerBytes - droppedBytes);
+            _bytesByPlayer[dropped.PlayerId] = playerBytes;
+
+            if (!_metrics.TryGetValue(dropped.PlayerId, out var metrics))
+                metrics = new SessionQueueMetrics();
+
+            metrics.Dropped++;
+            metrics.DroppedBytes += droppedBytes;
+            if (countAsTrim)
+                metrics.Trims++;
+            metrics.Current = queue.Count;
+            metrics.CurrentBytes = playerBytes;
+            metrics.Peak = Math.Max(metrics.Peak, metrics.Current);
+            metrics.PeakBytes = Math.Max(metrics.PeakBytes, playerBytes);
+            _metrics[dropped.PlayerId] = metrics;
+        }
+
+        private void RemoveFromGlobal(PersistenceWriteRecord dropped, int droppedBytes, bool countAsTrim)
         {
             if (_globalQueue.Count == 0)
                 return;
 
-            var remaining = new Queue<PersistenceWriteRecord>(_globalQueue.Count);
-            while (_globalQueue.Count > 0)
+            int count = _globalQueue.Count;
+            bool removed = false;
+            for (int i = 0; i < count; i++)
             {
                 var record = _globalQueue.Dequeue();
-                if (!(record.PlayerId.Equals(dropped.PlayerId) && record.Request.Equals(dropped.Request)))
-                    remaining.Enqueue(record);
-            }
+                if (!removed && record.PlayerId.Equals(dropped.PlayerId) && record.Request.Equals(dropped.Request))
+                {
+                    removed = true;
+                    _globalBytes = Math.Max(0, _globalBytes - droppedBytes);
+                    if (countAsTrim)
+                        _globalTrims++;
+                    continue;
+                }
 
-            while (remaining.Count > 0)
-                _globalQueue.Enqueue(remaining.Dequeue());
+                _globalQueue.Enqueue(record);
+            }
         }
 
         public bool TryDequeue(out PersistenceWriteRecord record)
@@ -869,15 +945,25 @@ namespace Caelmor.Runtime.Transport
                 return false;
 
             record = _globalQueue.Dequeue();
+            var recordBytes = record.Request.EstimatedBytes;
+            _globalBytes = Math.Max(0, _globalBytes - recordBytes);
 
             if (_perPlayer.TryGetValue(record.PlayerId, out var queue) && queue.Count > 0 && queue.Peek().Request.Equals(record.Request))
             {
                 queue.Dequeue();
+                _bytesByPlayer.TryGetValue(record.PlayerId, out var playerBytes);
+                playerBytes = Math.Max(0, playerBytes - recordBytes);
+                _bytesByPlayer[record.PlayerId] = playerBytes;
                 if (_metrics.TryGetValue(record.PlayerId, out var metrics))
                 {
                     metrics.Current = queue.Count;
+                    metrics.CurrentBytes = playerBytes;
                     _metrics[record.PlayerId] = metrics;
                 }
+            }
+            else
+            {
+                DropFromPerPlayer(record, recordBytes, countAsTrim: false);
             }
 
             return true;
@@ -887,7 +973,7 @@ namespace Caelmor.Runtime.Transport
         {
             int count = _metrics.Count;
             if (count == 0)
-                return PersistenceQueueMetrics.Empty;
+                return new PersistenceQueueMetrics(Array.Empty<PersistenceQueueMetricsSnapshot>(), 0, default, _globalQueue.Count, _globalBytes, _globalPeakBytes, _globalPeakCount, _globalTrims);
 
             EnsureCapacity(ref _snapshotKeys, count);
             EnsureCapacity(ref _snapshotBuffer, count);
@@ -899,8 +985,10 @@ namespace Caelmor.Runtime.Transport
             Array.Sort(_snapshotKeys, 0, count, PlayerIdValueComparer.Instance);
 
             int maxPeak = 0;
+            int maxPeakBytes = 0;
             int totalDropped = 0;
             int totalDroppedBytes = 0;
+            int totalTrims = 0;
 
             for (int i = 0; i < count; i++)
             {
@@ -910,12 +998,15 @@ namespace Caelmor.Runtime.Transport
 
                 if (metrics.Peak > maxPeak)
                     maxPeak = metrics.Peak;
+                if (metrics.PeakBytes > maxPeakBytes)
+                    maxPeakBytes = metrics.PeakBytes;
                 totalDropped += metrics.Dropped;
                 totalDroppedBytes += metrics.DroppedBytes;
+                totalTrims += metrics.Trims;
             }
 
-            var budget = new QueueBudgetSnapshot(maxPeak, 0, totalDropped, totalDroppedBytes, 0, 0);
-            return new PersistenceQueueMetrics(_snapshotBuffer, count, budget, _globalQueue.Count);
+            var budget = new QueueBudgetSnapshot(maxPeak, maxPeakBytes, totalDropped, totalDroppedBytes, 0, 0, totalTrims);
+            return new PersistenceQueueMetrics(_snapshotBuffer, count, budget, _globalQueue.Count, _globalBytes, _globalPeakBytes, _globalPeakCount, _globalTrims);
         }
 
         private static void EnsureCapacity<T>(ref T[] buffer, int required)
@@ -944,15 +1035,19 @@ namespace Caelmor.Runtime.Transport
 
     public sealed class PersistenceQueueMetrics
     {
-        public static PersistenceQueueMetrics Empty { get; } = new PersistenceQueueMetrics(Array.Empty<PersistenceQueueMetricsSnapshot>(), 0, default, 0);
+        public static PersistenceQueueMetrics Empty { get; } = new PersistenceQueueMetrics(Array.Empty<PersistenceQueueMetricsSnapshot>(), 0, default, 0, 0, 0, 0, 0);
 
-        internal PersistenceQueueMetrics(PersistenceQueueMetricsSnapshot[] perPlayer, int count, QueueBudgetSnapshot budget, int globalCount)
+        internal PersistenceQueueMetrics(PersistenceQueueMetricsSnapshot[] perPlayer, int count, QueueBudgetSnapshot budget, int globalCount, int globalBytes, int globalPeakBytes, int globalPeakCount, int globalTrims)
         {
             _buffer = perPlayer ?? Array.Empty<PersistenceQueueMetricsSnapshot>();
             _count = count;
             _view = new PersistenceQueueMetricsReadOnlyList(_buffer, _count);
             Budget = budget;
             GlobalCount = globalCount;
+            GlobalBytes = globalBytes;
+            GlobalPeakBytes = globalPeakBytes;
+            GlobalPeakCount = globalPeakCount;
+            GlobalTrims = globalTrims;
         }
 
         private readonly PersistenceQueueMetricsSnapshot[] _buffer;
@@ -961,6 +1056,10 @@ namespace Caelmor.Runtime.Transport
 
         public QueueBudgetSnapshot Budget { get; }
         public int GlobalCount { get; }
+        public int GlobalBytes { get; }
+        public int GlobalPeakBytes { get; }
+        public int GlobalPeakCount { get; }
+        public int GlobalTrims { get; }
         public int Count => _count;
         public IReadOnlyList<PersistenceQueueMetricsSnapshot> PerPlayer => _view;
 
@@ -969,7 +1068,9 @@ namespace Caelmor.Runtime.Transport
             if (config is null) throw new ArgumentNullException(nameof(config));
 
             return Budget.MaxCount <= config.MaxPersistenceWritesPerPlayer
-                && GlobalCount <= config.MaxPersistenceWritesGlobal;
+                && Budget.MaxBytes <= config.MaxPersistenceWriteBytesPerPlayer
+                && GlobalPeakCount <= config.MaxPersistenceWritesGlobal
+                && Math.Max(GlobalBytes, GlobalPeakBytes) <= config.MaxPersistenceWriteBytesGlobal;
         }
     }
 
