@@ -304,6 +304,9 @@ namespace Caelmor.Runtime.Onboarding
     {
         public readonly Guid Value;
         public SessionId(Guid value) => Value = value;
+
+        public bool IsValid => Value != Guid.Empty;
+
         public bool Equals(SessionId other) => Value.Equals(other.Value);
         public override bool Equals(object obj) => obj is SessionId other && Equals(other);
         public override int GetHashCode() => Value.GetHashCode();
@@ -315,6 +318,9 @@ namespace Caelmor.Runtime.Onboarding
     {
         public readonly Guid Value;
         public PlayerId(Guid value) => Value = value;
+
+        public bool IsValid => Value != Guid.Empty;
+
         public bool Equals(PlayerId other) => Value.Equals(other.Value);
         public override bool Equals(object obj) => obj is PlayerId other && Equals(other);
         public override int GetHashCode() => Value.GetHashCode();

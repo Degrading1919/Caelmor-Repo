@@ -3,8 +3,12 @@ using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Caelmor.Runtime.Diagnostics;
 using Caelmor.Runtime.Persistence;
-using Caelmor.Runtime.Sessions;
+using EntityHandle = global::Caelmor.Runtime.Tick.EntityHandle;
+using PlayerId = global::Caelmor.Runtime.Onboarding.PlayerId;
+using RuntimeBackpressureConfig = global::Caelmor.Runtime.RuntimeBackpressureConfig;
+using SessionId = global::Caelmor.Runtime.Onboarding.SessionId;
 
 namespace Caelmor.Runtime.Transport
 {
@@ -36,13 +40,13 @@ namespace Caelmor.Runtime.Transport
     /// </summary>
     public sealed class AuthoritativeCommandIngress
     {
-        private readonly Runtime.RuntimeBackpressureConfig _config;
+        private readonly RuntimeBackpressureConfig _config;
         private readonly Dictionary<SessionId, Queue<CommandEnvelope>> _queues = new Dictionary<SessionId, Queue<CommandEnvelope>>();
         private readonly Dictionary<SessionId, SessionQueueMetrics> _metrics = new Dictionary<SessionId, SessionQueueMetrics>();
         private readonly Dictionary<SessionId, int> _bytesBySession = new Dictionary<SessionId, int>();
         private long _nextSequence;
 
-        public AuthoritativeCommandIngress(Runtime.RuntimeBackpressureConfig config)
+        public AuthoritativeCommandIngress(RuntimeBackpressureConfig config)
         {
             _config = config ?? throw new ArgumentNullException(nameof(config));
         }
@@ -196,8 +200,11 @@ namespace Caelmor.Runtime.Transport
         private readonly AuthoritativeCommandIngress _ingress;
         private readonly BoundedReplicationSnapshotQueue _snapshotQueue;
 
-        public DeterministicTransportRouter(Runtime.RuntimeBackpressureConfig config)
+        public DeterministicTransportRouter(RuntimeBackpressureConfig config)
         {
+#if DEBUG
+            IdentifierNamespaceGuardrails.AssertCanonicalIdentifierNamespaces();
+#endif
             _ingress = new AuthoritativeCommandIngress(config);
             _snapshotQueue = new BoundedReplicationSnapshotQueue(config);
         }
@@ -255,14 +262,14 @@ namespace Caelmor.Runtime.Transport
     /// </summary>
     public sealed class BoundedReplicationSnapshotQueue : Caelmor.ClientReplication.ISerializedSnapshotQueue
     {
-        private readonly Runtime.RuntimeBackpressureConfig _config;
+        private readonly RuntimeBackpressureConfig _config;
         private readonly SnapshotDeltaSerializer _serializer;
         private readonly Dictionary<SessionId, Queue<SerializedSnapshot>> _queues = new Dictionary<SessionId, Queue<SerializedSnapshot>>();
         private readonly Dictionary<SessionId, int> _bytesBySession = new Dictionary<SessionId, int>();
         private readonly Dictionary<SessionId, SessionQueueMetrics> _metrics = new Dictionary<SessionId, SessionQueueMetrics>();
         private readonly Dictionary<SessionId, Dictionary<EntityHandle, string>> _fingerprints = new Dictionary<SessionId, Dictionary<EntityHandle, string>>();
 
-        public BoundedReplicationSnapshotQueue(Runtime.RuntimeBackpressureConfig config)
+        public BoundedReplicationSnapshotQueue(RuntimeBackpressureConfig config)
         {
             _config = config ?? throw new ArgumentNullException(nameof(config));
             _serializer = new SnapshotDeltaSerializer();
@@ -371,12 +378,12 @@ namespace Caelmor.Runtime.Transport
     /// </summary>
     public sealed class PersistenceWriteQueue
     {
-        private readonly Runtime.RuntimeBackpressureConfig _config;
+        private readonly RuntimeBackpressureConfig _config;
         private readonly Queue<PersistenceWriteRecord> _globalQueue = new Queue<PersistenceWriteRecord>();
         private readonly Dictionary<PlayerId, Queue<PersistenceWriteRecord>> _perPlayer = new Dictionary<PlayerId, Queue<PersistenceWriteRecord>>();
         private readonly Dictionary<PlayerId, SessionQueueMetrics> _metrics = new Dictionary<PlayerId, SessionQueueMetrics>();
 
-        public PersistenceWriteQueue(Runtime.RuntimeBackpressureConfig config)
+        public PersistenceWriteQueue(RuntimeBackpressureConfig config)
         {
             _config = config ?? throw new ArgumentNullException(nameof(config));
         }
@@ -665,7 +672,7 @@ namespace Caelmor.Runtime.Transport
 namespace Caelmor.ClientReplication
 {
     using Caelmor.Runtime.Transport;
-    using Caelmor.Runtime.Sessions;
+    using Caelmor.Runtime.Onboarding;
 
     /// <summary>
     /// Extension interface to enable dequeue of serialized snapshots for transport.

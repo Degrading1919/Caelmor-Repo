@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Caelmor.Runtime.Sessions;
 using Caelmor.Systems;
 
 namespace Caelmor.Runtime.Persistence
