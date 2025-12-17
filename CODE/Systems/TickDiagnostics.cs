@@ -18,6 +18,11 @@ namespace Caelmor.Runtime.Diagnostics
         private long _catchUpClampedCount;
         private long _timeSliceDeferrals;
 
+#if DEBUG
+        private long _participantSnapshotResizes;
+        private long _maxParticipantsObserved;
+#endif
+
         public void RecordTick(TimeSpan duration, bool overrun, bool catchUpClamped)
         {
             var nanos = (int)(duration.Ticks * 100); // 1 tick = 100ns
@@ -50,11 +55,35 @@ namespace Caelmor.Runtime.Diagnostics
 
         public void RecordTimeSliceDeferral() => Interlocked.Increment(ref _timeSliceDeferrals);
 
+#if DEBUG
+        public void RecordParticipantSnapshotResize(int newCapacity)
+        {
+            Interlocked.Increment(ref _participantSnapshotResizes);
+        }
+
+        public void RecordParticipantCountObserved(int count)
+        {
+            var observed = Interlocked.Read(ref _maxParticipantsObserved);
+            while (count > observed)
+            {
+                var prior = Interlocked.CompareExchange(ref _maxParticipantsObserved, count, observed);
+                if (prior == observed)
+                    break;
+                observed = prior;
+            }
+        }
+#endif
+
         public TickDiagnosticsSnapshot Snapshot()
         {
             var ticks = Interlocked.Read(ref _tickCount);
             var totalNano = Interlocked.Read(ref _totalTicksNanoseconds);
             var avgNano = ticks == 0 ? 0 : totalNano / ticks;
+
+#if DEBUG
+            var participantSnapshotResizes = Interlocked.Read(ref _participantSnapshotResizes);
+            var maxParticipantsObserved = Interlocked.Read(ref _maxParticipantsObserved);
+#endif
 
             return new TickDiagnosticsSnapshot(
                 ticks,
@@ -63,7 +92,13 @@ namespace Caelmor.Runtime.Diagnostics
                 avgNano,
                 Interlocked.Read(ref _overrunCount),
                 Interlocked.Read(ref _catchUpClampedCount),
-                Interlocked.Read(ref _timeSliceDeferrals));
+                Interlocked.Read(ref _timeSliceDeferrals)
+#if DEBUG
+                ,
+                participantSnapshotResizes,
+                maxParticipantsObserved
+#endif
+                );
         }
     }
 
@@ -77,6 +112,11 @@ namespace Caelmor.Runtime.Diagnostics
         public readonly long CatchUpClamped;
         public readonly long TimeSliceDeferrals;
 
+#if DEBUG
+        public readonly long ParticipantSnapshotResizes;
+        public readonly long MaxParticipantsObserved;
+#endif
+
         public TickDiagnosticsSnapshot(
             long tickCount,
             long minNanoseconds,
@@ -84,7 +124,13 @@ namespace Caelmor.Runtime.Diagnostics
             long avgNanoseconds,
             long overruns,
             long catchUpClamped,
-            long timeSliceDeferrals)
+            long timeSliceDeferrals
+#if DEBUG
+            ,
+            long participantSnapshotResizes,
+            long maxParticipantsObserved
+#endif
+            )
         {
             TickCount = tickCount;
             MinNanoseconds = minNanoseconds;
@@ -93,6 +139,10 @@ namespace Caelmor.Runtime.Diagnostics
             Overruns = overruns;
             CatchUpClamped = catchUpClamped;
             TimeSliceDeferrals = timeSliceDeferrals;
+#if DEBUG
+            ParticipantSnapshotResizes = participantSnapshotResizes;
+            MaxParticipantsObserved = maxParticipantsObserved;
+#endif
         }
     }
 }
