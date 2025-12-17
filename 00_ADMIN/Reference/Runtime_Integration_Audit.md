@@ -4,13 +4,16 @@
 - **Issues Identified**
   - Duplicate runtime identifier definitions (`EntityHandle` and `SessionId`) in the Tick and Onboarding scopes risked type drift and compilation conflicts.
   - Combat runtime lacked the Tick namespace import, preventing alignment with the shared entity handle contract.
+  - Diagnostics coverage was incomplete: no authoritative stall watchdog and no allocation-free queue budget surfacing for transport/persistence paths.
 - **Fixes Applied**
   - Consolidated runtime entity handles under `Caelmor.Runtime.Tick` by removing redundant definitions from the tick eligibility registry and reusing the canonical tick contracts.
   - Centralized the onboarding `SessionId` definition by removing the duplicate struct from the handoff hooks and relying on the primary onboarding declaration.
   - Added the missing tick namespace import to the combat runtime to bind it to the authoritative entity handle and tick contracts.
+  - Added a lightweight stall watchdog plus expanded queue/budget diagnostics (inbound commands, outbound snapshots, persistence mailboxes) surfaced through `RuntimeServerLoop` without per-tick allocations.
 - **Commits Made**
   - `fix(types): unify runtime identifiers`
   - `chore(audit): add runtime integration audit`
+  - `Add stall watchdog and runtime queue diagnostics`
 
 ## 2) Dependency Map (High Level)
 - **Tick & Simulation Core**: `TickSystem` and `WorldSimulationCore` own deterministic tick driving, eligibility gating, and execution phases. All simulation participants and phase hooks depend on these contexts.
@@ -39,17 +42,15 @@
 
 ### Newly Delivered: Server Logging & Diagnostics (MMO Ops Layer)
 - **Allocation-Free Tick Counters**
-  - Maintain preallocated tick-duration stats (running min/max/avg) using a fixed-size ring buffer of longs (ticks or microseconds). No per-tick allocation or string formatting inside the loop; formatting occurs only when emitting snapshots.
-  - Track queue depths for inbound commands, outbound snapshots, and persistence backlogs via atomic integers updated in place. Sampling is time-sliced (e.g., every N ticks) to bound work on the tick thread.
-  - Capture entity counts per zone and total using pre-sized arrays aligned to the zone registry; counts are refreshed during existing mutation windows to avoid extra traversals.
-  - Record backpressure drops/rejects with increment-only counters, paired with a capped histogram bucket for drop bursts to avoid unbounded growth.
+  - Track running min/max/avg tick durations with atomic primitives only; no per-tick allocations or formatting. Overruns and catch-up clamps are increment-only.
+  - Queue diagnostics expose current/peak counts and bytes plus drop/reject totals for inbound commands, outbound snapshots, and persistence write/completion mailboxes using reusable snapshot buffers (no LINQ/strings).
+  - Budget helper snapshots (max observed counts/bytes, totals dropped/rejected) let ops and validation assert that queues stay within configured caps without scanning unbounded collections.
 - **Non-Blocking Watchdog**
-  - A lightweight watchdog thread (or timer) consumes immutable metric snapshots published from the tick thread via a lock-free handoff structure. The tick thread never blocks or waits for the watchdog.
-  - Detects tick stalls by comparing `lastTickSequence` against monotonic time; triggers an alert if no progress occurs beyond the configured threshold without touching gameplay state.
-  - Monitors monotonic queue growth/plateaus by comparing successive depth samples; flags sustained upward trends instead of transient spikes to reduce false positives.
+  - A timer-backed stall watchdog observes monotonic timestamps and fires callbacks when ticks stop progressing beyond the configured threshold. It never blocks the tick thread and performs no formatting in the hot path.
+  - Stall detections and last-stall durations are recorded in diagnostics snapshots for offline inspection/alerting surfaces.
 - **ValidationHarness Integration**
-  - Diagnostics surface exposes read-only views for ValidationHarness scenarios to assert invariants (e.g., "no mid-tick mutation", "queue growth bounded", "no stall"), with zero allocations when queried.
-  - Harness hooks receive structured error records (fault codes + identifiers) rather than formatted strings, enabling deterministic assertions and replay-friendly logging.
+  - Runtime diagnostics snapshot is exposed from `RuntimeServerLoop` so harnesses can assert “no stalls” and “within queue budgets” deterministically.
+  - Diagnostics remain allocation-free in steady state and avoid tick-thread I/O; any formatting/logging occurs off the tick thread.
 - **Error Reporting Discipline**
   - Mid-tick mutation attempts and invariant violations emit structured diagnostics that include the offending system/tick index but defer string formatting to off-thread consumers.
   - All logging/metric emission is bounded and batched; no blocking I/O on the tick thread and no GC-churning allocations inside per-tick hot paths.
