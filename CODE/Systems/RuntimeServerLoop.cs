@@ -27,6 +27,7 @@ namespace Caelmor.Runtime.Host
         private readonly SessionHandshakePipeline _handshakes;
         private readonly AuthoritativeCommandIngestor _commands;
         private readonly VisibilityCullingService _visibility;
+        private readonly ClientReplicationSnapshotSystem _replication;
         private readonly DeterministicEntityRegistry _entities;
         private readonly PersistenceCompletionQueue _persistenceCompletions;
 
@@ -41,6 +42,7 @@ namespace Caelmor.Runtime.Host
             SessionHandshakePipeline handshakes,
             AuthoritativeCommandIngestor commands,
             VisibilityCullingService visibility,
+            ClientReplicationSnapshotSystem replication,
             DeterministicEntityRegistry entities,
             PersistenceCompletionQueue persistenceCompletions = null)
         {
@@ -49,6 +51,7 @@ namespace Caelmor.Runtime.Host
             _handshakes = handshakes ?? throw new ArgumentNullException(nameof(handshakes));
             _commands = commands ?? throw new ArgumentNullException(nameof(commands));
             _visibility = visibility ?? throw new ArgumentNullException(nameof(visibility));
+            _replication = replication ?? throw new ArgumentNullException(nameof(replication));
             _entities = entities ?? throw new ArgumentNullException(nameof(entities));
             _persistenceCompletions = persistenceCompletions;
 
@@ -64,6 +67,7 @@ namespace Caelmor.Runtime.Host
             SessionHandshakePipeline handshakes,
             AuthoritativeCommandIngestor commands,
             VisibilityCullingService visibility,
+            ClientReplicationSnapshotSystem replication,
             DeterministicEntityRegistry entities,
             ReadOnlySpan<ISimulationEligibilityGate> eligibilityGates,
             ReadOnlySpan<ParticipantRegistration> participants,
@@ -98,12 +102,12 @@ namespace Caelmor.Runtime.Host
             if (includePersistence)
             {
                 combinedHooks[index++] = new PhaseHookRegistration(
-                    new PersistenceCompletionPhaseHook(persistenceCompletions, persistenceCompletionApplier),
+                new PersistenceCompletionPhaseHook(persistenceCompletions, persistenceCompletionApplier),
                     persistenceCompletionHookOrderKey);
             }
 
             WorldBootstrapRegistration.Apply(simulation, eligibilityGates, participants, combinedHooks);
-            return new RuntimeServerLoop(simulation, transport, handshakes, commands, visibility, entities, persistenceCompletions);
+            return new RuntimeServerLoop(simulation, transport, handshakes, commands, visibility, replication, entities, persistenceCompletions);
         }
 
         public void Start()
@@ -139,6 +143,7 @@ namespace Caelmor.Runtime.Host
             _transport.DropAllForSession(sessionId);
             _commands.DropSession(sessionId);
             _visibility.RemoveSession(sessionId);
+            _replication.OnSessionDisconnected(sessionId);
         }
 
         /// <summary>

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Collections.Concurrent;
+using System.Threading;
 using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.Tick;
 using Caelmor.Runtime.WorldSimulation;
@@ -32,6 +33,7 @@ namespace Caelmor.Runtime.Replication
         private readonly IReplicationSnapshotQueue _queue;
         private readonly TimeSlicedWorkScheduler _timeSlicer;
         private readonly SnapshotSerializationBudget _budget;
+        private static readonly Action Noop = () => { };
 
         private long? _tickInProgress;
         private bool _postTickPhaseActive;
@@ -46,6 +48,11 @@ namespace Caelmor.Runtime.Replication
         private long _arraysRented;
         private long _arraysReturned;
         private int _maxEntitiesInSnapshot;
+        private int _workContextCount;
+        private int _maxWorkContexts;
+        private long _workContextRemovals;
+        private long _contextArraysRented;
+        private long _contextArraysReturned;
 #endif
 
         public ClientReplicationSnapshotSystem(
@@ -64,6 +71,21 @@ namespace Caelmor.Runtime.Replication
             _queue = queue ?? throw new ArgumentNullException(nameof(queue));
             _timeSlicer = timeSlicer ?? throw new ArgumentNullException(nameof(timeSlicer));
             _budget = budget ?? SnapshotSerializationBudget.Default;
+        }
+
+        public void OnSessionDisconnected(SessionId sessionId)
+        {
+            if (sessionId.Equals(default))
+                return;
+
+            if (_workContexts.TryRemove(sessionId, out var context))
+            {
+#if DEBUG
+                Interlocked.Increment(ref _workContextRemovals);
+                Interlocked.Decrement(ref _workContextCount);
+#endif
+                context.MarkForRemoval();
+            }
         }
 
         public void OnPreTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
@@ -182,6 +204,24 @@ namespace Caelmor.Runtime.Replication
             if (entityCount > _maxEntitiesInSnapshot)
                 _maxEntitiesInSnapshot = entityCount;
         }
+
+        private void TrackWorkContextAdded()
+        {
+            var count = Interlocked.Increment(ref _workContextCount);
+            while (true)
+            {
+                var currentMax = _maxWorkContexts;
+                if (count <= currentMax)
+                    break;
+
+                if (Interlocked.CompareExchange(ref _maxWorkContexts, count, currentMax) == currentMax)
+                    break;
+            }
+        }
+
+        private void TrackContextArrayRented() => Interlocked.Increment(ref _contextArraysRented);
+
+        private void TrackContextArrayReturned() => Interlocked.Increment(ref _contextArraysReturned);
 #endif
 
         private SnapshotWorkItem? CreateWorkItem(SessionId sessionId, long tick, IReadOnlyList<EntityHandle> eligibleEntities)
@@ -191,7 +231,7 @@ namespace Caelmor.Runtime.Replication
 #else
             Action<int>? onAllocated = null;
 #endif
-            var context = _workContexts.GetOrAdd(sessionId, _ => new SnapshotWorkContext(_eligibilityGate, _stateReader, _queue, _snapshotPool, _entityPool, _budget.EntitiesPerSlice));
+            var context = GetOrCreateContext(sessionId);
 
             if (context.WorkItem.IsInFlight)
                 return null;
@@ -213,6 +253,35 @@ namespace Caelmor.Runtime.Replication
             return null;
         }
 
+        private SnapshotWorkContext GetOrCreateContext(SessionId sessionId)
+        {
+            if (_workContexts.TryGetValue(sessionId, out var existing))
+                return existing;
+
+            var created = new SnapshotWorkContext(
+                _eligibilityGate,
+                _stateReader,
+                _queue,
+                _snapshotPool,
+                _entityPool,
+                _budget.EntitiesPerSlice
+#if DEBUG
+                ,
+                TrackContextArrayRented,
+                TrackContextArrayReturned
+#endif
+                );
+
+            var context = _workContexts.GetOrAdd(sessionId, created);
+
+#if DEBUG
+            if (ReferenceEquals(context, created))
+                TrackWorkContextAdded();
+#endif
+
+            return context;
+        }
+
         private sealed class SnapshotWorkItem : ITimeSlicedWorkItem
         {
             private SessionId _sessionId;
@@ -227,6 +296,7 @@ namespace Caelmor.Runtime.Replication
             private readonly int _entitiesPerSlice;
             private Action<int>? _onAllocated;
             private Action _onDisposed;
+            private readonly Action _onCompleted;
             private int _cursor;
             private int _captureCount;
             private bool _inFlight;
@@ -238,7 +308,8 @@ namespace Caelmor.Runtime.Replication
                 IReplicationStateReader stateReader,
                 IReplicationSnapshotQueue queue,
                 ArrayPool<ReplicatedEntitySnapshot> snapshotPool,
-                int entitiesPerSlice)
+                int entitiesPerSlice,
+                Action onCompleted)
             {
                 _eligibilityGate = eligibilityGate;
                 _stateReader = stateReader;
@@ -247,7 +318,8 @@ namespace Caelmor.Runtime.Replication
                 _entitiesPerSlice = Math.Max(1, entitiesPerSlice);
                 _eligible = Array.Empty<EntityHandle>();
                 _captureBuffer = Array.Empty<ReplicatedEntitySnapshot>();
-                _onDisposed = () => { };
+                _onDisposed = Noop;
+                _onCompleted = onCompleted ?? Noop;
             }
 
             public bool TryBegin(
@@ -269,7 +341,7 @@ namespace Caelmor.Runtime.Replication
                 _captureBuffer = captureBuffer ?? Array.Empty<ReplicatedEntitySnapshot>();
                 _captureCount = 0;
                 _onAllocated = onAllocated;
-                _onDisposed = onDisposed ?? (() => { });
+                _onDisposed = onDisposed ?? Noop;
                 _cursor = 0;
                 _inFlight = true;
                 return true;
@@ -314,6 +386,12 @@ namespace Caelmor.Runtime.Replication
                 finally
                 {
                     _inFlight = false;
+                    _eligible = Array.Empty<EntityHandle>();
+                    _eligibleCount = 0;
+                    _captureBuffer = Array.Empty<ReplicatedEntitySnapshot>();
+                    _captureCount = 0;
+                    _cursor = 0;
+                    _onCompleted();
                 }
                 return true;
             }
@@ -324,7 +402,7 @@ namespace Caelmor.Runtime.Replication
                 if (count == 0)
                 {
                     _captureCount = 0;
-                    return new ClientReplicationSnapshot(_sessionId, _tick, Array.Empty<ReplicatedEntitySnapshot>(), 0, _snapshotPool, () => { });
+                    return new ClientReplicationSnapshot(_sessionId, _tick, Array.Empty<ReplicatedEntitySnapshot>(), 0, _snapshotPool, Noop);
                 }
 
                 var buffer = _snapshotPool.Rent(count);
@@ -339,8 +417,15 @@ namespace Caelmor.Runtime.Replication
 
         private sealed class SnapshotWorkContext
         {
+            private readonly object _disposeGate = new object();
             private readonly ArrayPool<EntityHandle> _entityPool;
             private readonly ArrayPool<ReplicatedEntitySnapshot> _snapshotPool;
+#if DEBUG
+            private readonly Action _onArrayRented;
+            private readonly Action _onArrayReturned;
+#endif
+            private bool _disposeRequested;
+            private bool _disposed;
 
             public SnapshotWorkContext(
                 IReplicationEligibilityGate eligibilityGate,
@@ -348,11 +433,21 @@ namespace Caelmor.Runtime.Replication
                 IReplicationSnapshotQueue queue,
                 ArrayPool<ReplicatedEntitySnapshot> snapshotPool,
                 ArrayPool<EntityHandle> entityPool,
-                int entitiesPerSlice)
+                int entitiesPerSlice
+#if DEBUG
+                ,
+                Action onArrayRented,
+                Action onArrayReturned
+#endif
+                )
             {
                 _entityPool = entityPool;
                 _snapshotPool = snapshotPool;
-                WorkItem = new SnapshotWorkItem(eligibilityGate, stateReader, queue, snapshotPool, entitiesPerSlice);
+#if DEBUG
+                _onArrayRented = onArrayRented ?? Noop;
+                _onArrayReturned = onArrayReturned ?? Noop;
+#endif
+                WorkItem = new SnapshotWorkItem(eligibilityGate, stateReader, queue, snapshotPool, entitiesPerSlice, OnWorkItemCompleted);
                 EligibleScratch = Array.Empty<EntityHandle>();
                 SnapshotScratch = Array.Empty<ReplicatedEntitySnapshot>();
             }
@@ -370,8 +465,16 @@ namespace Caelmor.Runtime.Replication
                     return;
 
                 var rented = _entityPool.Rent(count);
+#if DEBUG
+                _onArrayRented();
+#endif
                 if (EligibleScratch.Length > 0)
+                {
                     _entityPool.Return(EligibleScratch, clearArray: false);
+#if DEBUG
+                    _onArrayReturned();
+#endif
+                }
                 EligibleScratch = rented;
             }
 
@@ -384,9 +487,60 @@ namespace Caelmor.Runtime.Replication
                     return;
 
                 var rented = _snapshotPool.Rent(count);
+#if DEBUG
+                _onArrayRented();
+#endif
                 if (SnapshotScratch.Length > 0)
+                {
                     _snapshotPool.Return(SnapshotScratch, clearArray: false);
+#if DEBUG
+                    _onArrayReturned();
+#endif
+                }
                 SnapshotScratch = rented;
+            }
+
+            public void MarkForRemoval()
+            {
+                _disposeRequested = true;
+
+                if (!WorkItem.IsInFlight)
+                    DisposeBuffers();
+            }
+
+            private void OnWorkItemCompleted()
+            {
+                if (_disposeRequested)
+                    DisposeBuffers();
+            }
+
+            private void DisposeBuffers()
+            {
+                lock (_disposeGate)
+                {
+                    if (_disposed)
+                        return;
+
+                    if (EligibleScratch.Length > 0)
+                    {
+                        _entityPool.Return(EligibleScratch, clearArray: false);
+#if DEBUG
+                        _onArrayReturned();
+#endif
+                        EligibleScratch = Array.Empty<EntityHandle>();
+                    }
+
+                    if (SnapshotScratch.Length > 0)
+                    {
+                        _snapshotPool.Return(SnapshotScratch, clearArray: false);
+#if DEBUG
+                        _onArrayReturned();
+#endif
+                        SnapshotScratch = Array.Empty<ReplicatedEntitySnapshot>();
+                    }
+
+                    _disposed = true;
+                }
             }
         }
     }
@@ -437,7 +591,7 @@ namespace Caelmor.Runtime.Replication
             _buffer = buffer ?? throw new ArgumentNullException(nameof(buffer));
             _count = count;
             _pool = pool ?? ArrayPool<ReplicatedEntitySnapshot>.Shared;
-            _onDispose = onDispose ?? (() => { });
+            _onDispose = onDispose ?? Noop;
         }
 
         public ReadOnlySpan<ReplicatedEntitySnapshot> EntitiesSpan => new ReadOnlySpan<ReplicatedEntitySnapshot>(_buffer, 0, _count);
