@@ -70,11 +70,13 @@ namespace Caelmor.Runtime.Host
             ReadOnlySpan<PhaseHookRegistration> phaseHooks,
             IActiveSessionIndex activeSessions = null,
             int commandFreezeHookOrderKey = int.MinValue,
+            int handshakeProcessingHookOrderKey = int.MinValue + 1,
+            int handshakePerTickBudget = 4,
             PersistenceCompletionQueue persistenceCompletions = null,
             IPersistenceCompletionApplier persistenceCompletionApplier = null,
             int persistenceCompletionHookOrderKey = -1024)
         {
-            int hookCount = phaseHooks.Length + 1;
+            int hookCount = phaseHooks.Length + 2;
             bool includePersistence = persistenceCompletions != null && persistenceCompletionApplier != null;
             if (includePersistence)
                 hookCount++;
@@ -85,6 +87,10 @@ namespace Caelmor.Runtime.Host
             combinedHooks[index++] = new PhaseHookRegistration(
                 new AuthoritativeCommandFreezeHook(commands, activeSessions),
                 commandFreezeHookOrderKey);
+
+            combinedHooks[index++] = new PhaseHookRegistration(
+                new HandshakeProcessingPhaseHook(handshakes, handshakePerTickBudget),
+                handshakeProcessingHookOrderKey);
 
             for (int i = 0; i < phaseHooks.Length; i++)
                 combinedHooks[index++] = phaseHooks[i];
@@ -175,8 +181,9 @@ namespace Caelmor.Runtime.Host
             var transport = _transport.CaptureDiagnostics();
             var tick = _simulation.Diagnostics;
             var commands = _commands.SnapshotMetrics();
+            var handshakes = _handshakes.SnapshotMetrics();
             var persistenceCompletions = _persistenceCompletions?.SnapshotMetrics();
-            return new RuntimeDiagnosticsSnapshot(tick, transport, persistenceCompletions, commands);
+            return new RuntimeDiagnosticsSnapshot(tick, transport, persistenceCompletions, commands, handshakes);
         }
 
         private void ClearTransientState()
@@ -201,18 +208,21 @@ namespace Caelmor.Runtime.Host
             TickDiagnosticsSnapshot tick,
             TransportBackpressureDiagnostics transport,
             CompletionQueueMetrics? persistenceCompletionMailbox,
-            CommandIngestorDiagnostics commands)
+            CommandIngestorDiagnostics commands,
+            HandshakePipelineMetrics handshakes)
         {
             Tick = tick;
             Transport = transport;
             PersistenceCompletionMailbox = persistenceCompletionMailbox;
             Commands = commands;
+            Handshakes = handshakes;
         }
 
         public TickDiagnosticsSnapshot Tick { get; }
         public TransportBackpressureDiagnostics Transport { get; }
         public CompletionQueueMetrics? PersistenceCompletionMailbox { get; }
         public CommandIngestorDiagnostics Commands { get; }
+        public HandshakePipelineMetrics Handshakes { get; }
         public bool HasDetectedStall => Tick.StallDetections > 0;
     }
 }

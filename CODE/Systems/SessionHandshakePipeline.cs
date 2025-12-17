@@ -1,7 +1,11 @@
 using System;
+using System.Collections.Generic;
+using System.Threading;
+using Caelmor.Runtime.Diagnostics;
 using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.Persistence;
 using Caelmor.Runtime.Sessions;
+using Caelmor.Runtime.WorldSimulation;
 
 namespace Caelmor.Runtime.Integration
 {
@@ -18,6 +22,11 @@ namespace Caelmor.Runtime.Integration
 
         private readonly IPlayerSessionSystem _sessions;
         private readonly IOnboardingHandoffService _handoff;
+
+        private long _enqueued;
+        private long _processed;
+        private long _droppedQueueFull;
+        private long _deferredTicks;
 
         private int _head;
         private int _tail;
@@ -42,10 +51,14 @@ namespace Caelmor.Runtime.Integration
             {
                 var nextTail = (_tail + 1) % _requests.Length;
                 if (nextTail == _head)
+                {
+                    Interlocked.Increment(ref _droppedQueueFull);
                     return HandshakeEnqueueResult.Rejected(HandshakeRejectionReason.QueueFull);
+                }
 
                 _requests[_tail] = new HandshakeWorkItem(resolvedSessionId, playerId, clientRequest);
                 _tail = nextTail;
+                Interlocked.Increment(ref _enqueued);
                 return HandshakeEnqueueResult.Accepted(resolvedSessionId);
             }
         }
@@ -64,6 +77,8 @@ namespace Caelmor.Runtime.Integration
                 _requests[_head] = default;
                 _head = (_head + 1) % _requests.Length;
             }
+
+            Interlocked.Increment(ref _processed);
 
             if (!request.PlayerId.IsValid)
             {
@@ -133,6 +148,37 @@ namespace Caelmor.Runtime.Integration
                 _head = 0;
                 _tail = 0;
             }
+
+            Interlocked.Exchange(ref _enqueued, 0);
+            Interlocked.Exchange(ref _processed, 0);
+            Interlocked.Exchange(ref _droppedQueueFull, 0);
+            Interlocked.Exchange(ref _deferredTicks, 0);
+        }
+
+        internal int PendingCount
+        {
+            get
+            {
+                lock (_gate)
+                {
+                    return (_tail - _head + _requests.Length) % _requests.Length;
+                }
+            }
+        }
+
+        internal void RecordDeferredTick()
+        {
+            Interlocked.Increment(ref _deferredTicks);
+        }
+
+        public HandshakePipelineMetrics SnapshotMetrics()
+        {
+            return new HandshakePipelineMetrics(
+                Interlocked.Read(ref _enqueued),
+                Interlocked.Read(ref _processed),
+                Interlocked.Read(ref _droppedQueueFull),
+                Interlocked.Read(ref _deferredTicks),
+                PendingCount);
         }
 
         private readonly struct HandshakeWorkItem
@@ -175,6 +221,63 @@ namespace Caelmor.Runtime.Integration
         None = 0,
         InvalidPlayerId = 1,
         QueueFull = 2
+    }
+
+    /// <summary>
+    /// Tick-phase hook that services pending handshake work deterministically on the tick thread.
+    /// </summary>
+    public sealed class HandshakeProcessingPhaseHook : ITickPhaseHook
+    {
+        private readonly SessionHandshakePipeline _pipeline;
+        private readonly int _maxPerTick;
+
+        public HandshakeProcessingPhaseHook(SessionHandshakePipeline pipeline, int maxPerTick)
+        {
+            if (pipeline is null) throw new ArgumentNullException(nameof(pipeline));
+            if (maxPerTick <= 0) throw new ArgumentOutOfRangeException(nameof(maxPerTick));
+
+            _pipeline = pipeline;
+            _maxPerTick = maxPerTick;
+        }
+
+        public void OnPreTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
+        {
+            TickThreadAssert.AssertTickThread();
+
+            int processedThisTick = 0;
+            SessionActivationResult activationResult;
+            while (processedThisTick < _maxPerTick && _pipeline.TryProcessNext(out activationResult))
+            {
+                processedThisTick++;
+            }
+
+            if (processedThisTick >= _maxPerTick && _pipeline.PendingCount > 0)
+            {
+                _pipeline.RecordDeferredTick();
+            }
+        }
+
+        public void OnPostTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
+        {
+        }
+    }
+
+    public readonly struct HandshakePipelineMetrics
+    {
+        public HandshakePipelineMetrics(long enqueued, long processed, long droppedQueueFull, long deferredTicks, int pending)
+        {
+            Enqueued = enqueued;
+            Processed = processed;
+            DroppedQueueFull = droppedQueueFull;
+            DeferredTicks = deferredTicks;
+            Pending = pending;
+        }
+
+        public long Enqueued { get; }
+        public long Processed { get; }
+        public long DroppedQueueFull { get; }
+        public long DeferredTicks { get; }
+        public int Pending { get; }
     }
 
     /// <summary>Lightweight IServerSession adapter to avoid allocations.</summary>
