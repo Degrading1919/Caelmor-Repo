@@ -1,4 +1,5 @@
 using System;
+using Caelmor.Runtime.Onboarding;
 
 namespace Caelmor.Runtime.Persistence
 {
@@ -117,43 +118,4 @@ namespace Caelmor.Runtime.Persistence
         ClientProvidedBindingToken = 3
     }
 
-    /// <summary>
-    /// Opaque server-issued PlayerId. Client must never supply this.
-    /// </summary>
-    public readonly struct PlayerId : IEquatable<PlayerId>
-    {
-        public readonly Guid Value;
-
-        public PlayerId(Guid value)
-        {
-            Value = value;
-        }
-
-        public bool IsValid => Value != Guid.Empty;
-
-        public bool Equals(PlayerId other) => Value.Equals(other.Value);
-        public override bool Equals(object obj) => obj is PlayerId other && Equals(other);
-        public override int GetHashCode() => Value.GetHashCode();
-        public override string ToString() => Value.ToString();
-    }
-
-    /// <summary>
-    /// Opaque persisted SaveId reference. Client must never supply this.
-    /// </summary>
-    public readonly struct SaveId : IEquatable<SaveId>
-    {
-        public readonly Guid Value;
-
-        public SaveId(Guid value)
-        {
-            Value = value;
-        }
-
-        public bool IsValid => Value != Guid.Empty;
-
-        public bool Equals(SaveId other) => Value.Equals(other.Value);
-        public override bool Equals(object obj) => obj is SaveId other && Equals(other);
-        public override int GetHashCode() => Value.GetHashCode();
-        public override string ToString() => Value.ToString();
-    }
 }

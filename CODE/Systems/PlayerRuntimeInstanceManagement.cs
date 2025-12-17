@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Caelmor.Runtime.Onboarding;
 
 namespace Caelmor.Runtime.Players
 {
@@ -249,26 +250,6 @@ namespace Caelmor.Runtime.Players
         public override bool Equals(object obj) => obj is PlayerRuntimeInstance other && Equals(other);
         public override int GetHashCode() => HashCode.Combine(PlayerId, Handle);
         public override string ToString() => $"PlayerRuntimeInstance(PlayerId={PlayerId}, Handle={Handle})";
-    }
-
-    /// <summary>
-    /// Opaque server-issued PlayerId.
-    /// </summary>
-    public readonly struct PlayerId : IEquatable<PlayerId>
-    {
-        public readonly Guid Value;
-
-        public PlayerId(Guid value)
-        {
-            Value = value;
-        }
-
-        public bool IsValid => Value != Guid.Empty;
-
-        public bool Equals(PlayerId other) => Value.Equals(other.Value);
-        public override bool Equals(object obj) => obj is PlayerId other && Equals(other);
-        public override int GetHashCode() => Value.GetHashCode();
-        public override string ToString() => Value.ToString();
     }
 
     /// <summary>

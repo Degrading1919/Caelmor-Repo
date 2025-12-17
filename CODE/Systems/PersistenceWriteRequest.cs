@@ -1,5 +1,5 @@
 using System;
-using Caelmor.Runtime.Sessions;
+using Caelmor.Runtime.Onboarding;
 
 namespace Caelmor.Runtime.Persistence
 {
