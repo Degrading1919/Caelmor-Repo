@@ -40,6 +40,24 @@ namespace Caelmor.Runtime.Host
             _entities = entities ?? throw new ArgumentNullException(nameof(entities));
         }
 
+        /// <summary>
+        /// Factory helper that applies explicit, deterministic simulation registration before constructing the loop.
+        /// </summary>
+        public static RuntimeServerLoop Create(
+            WorldSimulationCore simulation,
+            PooledTransportRouter transport,
+            SessionHandshakePipeline handshakes,
+            AuthoritativeCommandIngestor commands,
+            VisibilityCullingService visibility,
+            DeterministicEntityRegistry entities,
+            ReadOnlySpan<ISimulationEligibilityGate> eligibilityGates,
+            ReadOnlySpan<ParticipantRegistration> participants,
+            ReadOnlySpan<PhaseHookRegistration> phaseHooks)
+        {
+            WorldBootstrapRegistration.Apply(simulation, eligibilityGates, participants, phaseHooks);
+            return new RuntimeServerLoop(simulation, transport, handshakes, commands, visibility, entities);
+        }
+
         public void Start()
         {
             lock (_gate)
