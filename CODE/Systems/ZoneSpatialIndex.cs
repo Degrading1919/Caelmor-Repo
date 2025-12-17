@@ -108,6 +108,35 @@ namespace Caelmor.Runtime.InterestManagement
         }
 
         /// <summary>
+        /// Removes all entities tracked in the specified zone. Intended for zone unload cleanup.
+        /// </summary>
+        public void RemoveZone(ZoneId zone)
+        {
+            if (zone.Value <= 0)
+                return;
+
+            var toRemove = new List<EntityHandle>();
+
+            foreach (var kvp in _locations)
+            {
+                if (kvp.Value.Zone.Equals(zone))
+                    toRemove.Add(kvp.Key);
+            }
+
+            for (int i = 0; i < toRemove.Count; i++)
+                Remove(toRemove[i]);
+        }
+
+        /// <summary>
+        /// Clears all zones and entities from the spatial index. Used on server shutdown.
+        /// </summary>
+        public void Clear()
+        {
+            _cells.Clear();
+            _locations.Clear();
+        }
+
+        /// <summary>
         /// Queries entities within range of a position in the same zone. Results are appended to the
         /// provided list to avoid per-tick allocations; caller is responsible for clearing when appropriate.
         /// </summary>

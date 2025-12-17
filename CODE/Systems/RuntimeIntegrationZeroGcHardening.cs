@@ -18,8 +18,9 @@ namespace Caelmor.Runtime.Integration
     /// Frames are stored in a fixed ring buffer; payload byte arrays are rented
     /// from ArrayPool and must be returned by the consumer via ReturnPayload.
     /// </summary>
-    public sealed class PooledTransportRouter : ITransportRouter
+    public sealed class PooledTransportRouter : ITransportRouter, IDisposable
     {
+        private readonly object _gate = new object();
         private readonly TransportFrame[] _outgoing;
         private readonly ArrayPool<byte> _payloadPool;
         private int _head;
@@ -43,56 +44,130 @@ namespace Caelmor.Runtime.Integration
 
         public bool EnqueueOutgoing(SessionId sessionId, int messageType, ReadOnlySpan<byte> payload)
         {
-            var nextTail = (_tail + 1) % _outgoing.Length;
-            if (nextTail == _head)
-                return false; // full
-
-            byte[] payloadBuffer;
-            if (payload.Length == 0)
+            lock (_gate)
             {
-                payloadBuffer = Array.Empty<byte>();
-            }
-            else
-            {
-                payloadBuffer = _payloadPool.Rent(payload.Length);
-                payload.CopyTo(new Span<byte>(payloadBuffer, 0, payload.Length));
+                var nextTail = (_tail + 1) % _outgoing.Length;
+                if (nextTail == _head)
+                    return false; // full
+
+                byte[] payloadBuffer;
+                if (payload.Length == 0)
+                {
+                    payloadBuffer = Array.Empty<byte>();
+                }
+                else
+                {
+                    payloadBuffer = _payloadPool.Rent(payload.Length);
+                    payload.CopyTo(new Span<byte>(payloadBuffer, 0, payload.Length));
 #if DEBUG
-                Interlocked.Add(ref _bytesRented, payload.Length);
+                    Interlocked.Add(ref _bytesRented, payload.Length);
 #endif
-            }
+                }
 
-            _outgoing[_tail] = new TransportFrame(sessionId, messageType, payloadBuffer, payload.Length);
-            _tail = nextTail;
+                _outgoing[_tail] = new TransportFrame(sessionId, messageType, payloadBuffer, payload.Length);
+                _tail = nextTail;
 
 #if DEBUG
-            var depth = (_tail - _head + _outgoing.Length) % _outgoing.Length;
-            if (depth > _maxQueueDepth)
-                _maxQueueDepth = depth;
-            Interlocked.Increment(ref _framesEnqueued);
+                var depth = (_tail - _head + _outgoing.Length) % _outgoing.Length;
+                if (depth > _maxQueueDepth)
+                    _maxQueueDepth = depth;
+                Interlocked.Increment(ref _framesEnqueued);
 #endif
 
-            return true;
+                return true;
+            }
         }
 
         public bool TryDequeueOutgoing(out TransportFrame frame)
         {
-            if (_head == _tail)
+            lock (_gate)
             {
-                frame = default;
-                return false;
-            }
+                if (_head == _tail)
+                {
+                    frame = default;
+                    return false;
+                }
 
-            frame = _outgoing[_head];
-            _outgoing[_head] = default;
-            _head = (_head + 1) % _outgoing.Length;
+                frame = _outgoing[_head];
+                _outgoing[_head] = default;
+                _head = (_head + 1) % _outgoing.Length;
 
 #if DEBUG
-            Interlocked.Increment(ref _framesDequeued);
+                Interlocked.Increment(ref _framesDequeued);
 #endif
-            return true;
+                return true;
+            }
         }
 
         public void ReturnPayload(in TransportFrame frame)
+        {
+            if (frame.Payload is null || frame.Payload.Length == 0)
+                return;
+
+            lock (_gate)
+            {
+                ReturnPayloadUnsafe(frame);
+            }
+        }
+
+        /// <summary>
+        /// Drops all queued frames for a session (disconnect). Returns pooled payloads immediately.
+        /// </summary>
+        public void DropAllForSession(SessionId sessionId)
+        {
+            lock (_gate)
+            {
+                var capacity = _outgoing.Length;
+                var newTail = 0;
+                var read = _head;
+
+                while (read != _tail)
+                {
+                    var frame = _outgoing[read];
+                    _outgoing[read] = default;
+                    read = (read + 1) % capacity;
+
+                    if (frame.SessionId.Equals(sessionId))
+                    {
+                        ReturnPayloadUnsafe(frame);
+                        continue;
+                    }
+
+                    _outgoing[newTail] = frame;
+                    newTail = (newTail + 1) % capacity;
+                }
+
+                _head = 0;
+                _tail = newTail;
+            }
+        }
+
+        /// <summary>
+        /// Clears all queued frames and returns pooled payloads. Intended for controlled shutdown.
+        /// </summary>
+        public void Clear()
+        {
+            lock (_gate)
+            {
+                while (_head != _tail)
+                {
+                    var frame = _outgoing[_head];
+                    _outgoing[_head] = default;
+                    _head = (_head + 1) % _outgoing.Length;
+                    ReturnPayloadUnsafe(frame);
+                }
+
+                _head = 0;
+                _tail = 0;
+            }
+        }
+
+        public void Dispose()
+        {
+            Clear();
+        }
+
+        private void ReturnPayloadUnsafe(in TransportFrame frame)
         {
             if (frame.Payload is null || frame.Payload.Length == 0)
                 return;
@@ -191,6 +266,21 @@ namespace Caelmor.Runtime.Integration
             _head = (_head + 1) % _requests.Length;
             return true;
         }
+
+        /// <summary>
+        /// Clears all queued handshake requests. Intended for shutdown to avoid lingering references.
+        /// </summary>
+        public void Reset()
+        {
+            while (_head != _tail)
+            {
+                _requests[_head] = default;
+                _head = (_head + 1) % _requests.Length;
+            }
+
+            _head = 0;
+            _tail = 0;
+        }
     }
 
     public readonly struct HandshakeRequest
@@ -254,6 +344,22 @@ namespace Caelmor.Runtime.Integration
             var drained = ring.TryPopAll(destination);
             _perSession[sessionId] = ring;
             return drained;
+        }
+
+        /// <summary>
+        /// Drops all buffered commands for a session (disconnect/unload).
+        /// </summary>
+        public bool DropSession(SessionId sessionId)
+        {
+            return _perSession.Remove(sessionId);
+        }
+
+        /// <summary>
+        /// Clears all session buffers. Invoked during server shutdown to avoid retention leaks.
+        /// </summary>
+        public void Clear()
+        {
+            _perSession.Clear();
         }
 
         private struct CommandRing
@@ -320,12 +426,14 @@ namespace Caelmor.Runtime.Integration
     {
         bool TryEnqueue(SessionId sessionId, in AuthoritativeCommand command);
         int TryDrain(SessionId sessionId, Span<AuthoritativeCommand> destination);
+        bool DropSession(SessionId sessionId);
+        void Clear();
     }
 
     /// <summary>
     /// Interest management implementation using per-session visibility caches backed by a spatial index.
     /// </summary>
-    public sealed class VisibilityCullingService : IReplicationEligibilityGate
+    public sealed class VisibilityCullingService : IReplicationEligibilityGate, IDisposable
     {
         private readonly ZoneSpatialIndex _spatialIndex;
         private readonly ArrayPool<EntityHandle> _entityPool;
@@ -395,6 +503,54 @@ namespace Caelmor.Runtime.Integration
             return bucket.Contains(entity);
         }
 
+        /// <summary>
+        /// Removes cached visibility for a disconnected session and returns rented buffers.
+        /// </summary>
+        public void RemoveSession(SessionId sessionId)
+        {
+            if (!_visibility.TryGetValue(sessionId, out var bucket))
+                return;
+
+            bucket.Release(_entityPool);
+            _visibility.Remove(sessionId);
+        }
+
+        /// <summary>
+        /// Drops spatial and visibility state for a zone unload.
+        /// </summary>
+        public void RemoveZone(ZoneId zone)
+        {
+            _spatialIndex.RemoveZone(zone);
+
+            var sessionsToDrop = new List<SessionId>();
+            foreach (var kvp in _visibility)
+            {
+                sessionsToDrop.Add(kvp.Key);
+            }
+
+            for (int i = 0; i < sessionsToDrop.Count; i++)
+                RemoveSession(sessionsToDrop[i]);
+        }
+
+        /// <summary>
+        /// Clears all cached visibility and spatial index state for shutdown.
+        /// </summary>
+        public void Clear()
+        {
+            foreach (var kvp in _visibility)
+            {
+                kvp.Value.Release(_entityPool);
+            }
+
+            _visibility.Clear();
+            _spatialIndex.Clear();
+        }
+
+        public void Dispose()
+        {
+            Clear();
+        }
+
         private struct VisibilityBucket
         {
             private EntityHandle[] _entities;
@@ -416,6 +572,15 @@ namespace Caelmor.Runtime.Integration
                     _entities[i] = source[i];
 
                 _count = source.Count;
+            }
+
+            public void Release(ArrayPool<EntityHandle> pool)
+            {
+                if (_entities != null && _entities.Length > 0)
+                    pool.Return(_entities, clearArray: false);
+
+                _entities = Array.Empty<EntityHandle>();
+                _count = 0;
             }
 
             public bool Contains(EntityHandle entity)
