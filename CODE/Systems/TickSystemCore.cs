@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using Caelmor.Runtime.Diagnostics;
 
 namespace Caelmor.Runtime.Tick
 {
@@ -14,9 +15,11 @@ namespace Caelmor.Runtime.Tick
     {
         public const int TickRateHz = 10;
         public static readonly TimeSpan TickInterval = TimeSpan.FromMilliseconds(100);
+        private const int MaxCatchUpTicksPerLoop = 3;
 
         private readonly ITickEligibilityRegistry _eligibility;
         private readonly IEntityRegistry _entities;
+        private readonly TickDiagnostics _diagnostics = new TickDiagnostics();
 
         private readonly object _gate = new object();
         private readonly List<ParticipantEntry> _participants = new List<ParticipantEntry>();
@@ -110,6 +113,8 @@ namespace Caelmor.Runtime.Tick
         /// </summary>
         public bool IsRunning => _running;
 
+        public TickDiagnosticsSnapshot Diagnostics => _diagnostics.Snapshot();
+
         public void Dispose()
         {
             Stop();
@@ -128,6 +133,8 @@ namespace Caelmor.Runtime.Tick
             // Schedule based on absolute time to avoid drift accumulation.
             long tickIndex = 0;
             var nextTickAt = TickInterval;
+
+            var tickStopwatch = new Stopwatch();
 
             while (!token.IsCancellationRequested)
             {
@@ -151,14 +158,39 @@ namespace Caelmor.Runtime.Tick
                     continue;
                 }
 
+                var catchUpExecuted = 0;
+                bool clamped = false;
+
                 // Execute ticks for each elapsed interval, preserving deterministic ordering.
-                while (now >= nextTickAt && !token.IsCancellationRequested)
+                while (now >= nextTickAt && !token.IsCancellationRequested && catchUpExecuted < MaxCatchUpTicksPerLoop)
                 {
                     tickIndex++;
-                    ExecuteOneTick(tickIndex, TickInterval);
 
+                    tickStopwatch.Restart();
+                    ExecuteOneTick(tickIndex, TickInterval);
+                    tickStopwatch.Stop();
+
+                    var duration = tickStopwatch.Elapsed;
+                    var overrun = duration > TickInterval;
+                    _diagnostics.RecordTick(duration, overrun, catchUpClamped: false);
+
+                    catchUpExecuted++;
                     nextTickAt = TimeSpan.FromTicks(TickInterval.Ticks * (tickIndex + 1));
                     now = stopwatch.Elapsed;
+                }
+
+                if (now >= nextTickAt && catchUpExecuted >= MaxCatchUpTicksPerLoop)
+                {
+                    // Clamp the catch-up to avoid unbounded spirals. Advance the schedule deterministically.
+                    var ticksBehind = (long)((now - nextTickAt).Ticks / TickInterval.Ticks) + 1;
+                    tickIndex += ticksBehind;
+                    nextTickAt = TimeSpan.FromTicks(TickInterval.Ticks * (tickIndex + 1));
+                    clamped = true;
+                }
+
+                if (clamped)
+                {
+                    _diagnostics.RecordTick(TimeSpan.Zero, overrun: true, catchUpClamped: true);
                 }
             }
         }

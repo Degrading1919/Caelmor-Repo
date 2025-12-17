@@ -2,9 +2,11 @@ using System;
 using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.Tick;
 using Caelmor.Runtime.WorldSimulation;
+using Caelmor.Runtime.Threading;
 
 namespace Caelmor.Runtime.Replication
 {
@@ -27,12 +29,14 @@ namespace Caelmor.Runtime.Replication
         private readonly IReplicationEligibilityGate _eligibilityGate;
         private readonly IReplicationStateReader _stateReader;
         private readonly IReplicationSnapshotQueue _queue;
+        private readonly TimeSlicedWorkScheduler _timeSlicer;
+        private readonly SnapshotSerializationBudget _budget;
 
         private long? _tickInProgress;
         private bool _postTickPhaseActive;
 
-        private readonly List<ReplicatedEntitySnapshot> _captureBuffer = new List<ReplicatedEntitySnapshot>(64);
         private readonly ArrayPool<ReplicatedEntitySnapshot> _snapshotPool = ArrayPool<ReplicatedEntitySnapshot>.Shared;
+        private readonly ArrayPool<EntityHandle> _entityPool = ArrayPool<EntityHandle>.Shared;
 
 #if DEBUG
         private long _snapshotsCaptured;
@@ -47,13 +51,17 @@ namespace Caelmor.Runtime.Replication
             ISnapshotEligibilityView sessionEligibility,
             IReplicationEligibilityGate eligibilityGate,
             IReplicationStateReader stateReader,
-            IReplicationSnapshotQueue queue)
+            IReplicationSnapshotQueue queue,
+            TimeSlicedWorkScheduler timeSlicer,
+            SnapshotSerializationBudget? budget = null)
         {
             _sessionIndex = sessionIndex ?? throw new ArgumentNullException(nameof(sessionIndex));
             _sessionEligibility = sessionEligibility ?? throw new ArgumentNullException(nameof(sessionEligibility));
             _eligibilityGate = eligibilityGate ?? throw new ArgumentNullException(nameof(eligibilityGate));
             _stateReader = stateReader ?? throw new ArgumentNullException(nameof(stateReader));
             _queue = queue ?? throw new ArgumentNullException(nameof(queue));
+            _timeSlicer = timeSlicer ?? throw new ArgumentNullException(nameof(timeSlicer));
+            _budget = budget ?? SnapshotSerializationBudget.Default;
         }
 
         public void OnPreTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
@@ -79,9 +87,11 @@ namespace Caelmor.Runtime.Replication
                     if (!_sessionEligibility.IsSnapshotEligible(sessionId))
                         continue;
 
-                    var snapshot = CaptureSnapshotForSession(sessionId, context.TickIndex, eligibleEntities);
-                    _queue.Enqueue(sessionId, snapshot);
+                    var workItem = CreateWorkItem(sessionId, context.TickIndex, eligibleEntities);
+                    _timeSlicer.Enqueue(workItem);
                 }
+
+                _timeSlicer.ExecuteSlices(_budget.SliceBudgetPerTick, _budget.MaxSlicesPerTick);
             }
             finally
             {
@@ -101,7 +111,7 @@ namespace Caelmor.Runtime.Replication
             if (!_postTickPhaseActive || !_tickInProgress.HasValue || _tickInProgress.Value != authoritativeTick)
                 throw new InvalidOperationException("Snapshots can only be captured during post-tick finalization.");
 
-            _captureBuffer.Clear();
+            var captureBuffer = new List<ReplicatedEntitySnapshot>(Math.Max(eligibleEntities.Count, _budget.EntitiesPerSlice));
 
             for (int i = 0; i < eligibleEntities.Count; i++)
             {
@@ -110,10 +120,10 @@ namespace Caelmor.Runtime.Replication
                     continue;
 
                 var state = _stateReader.ReadCommittedState(entity);
-                _captureBuffer.Add(new ReplicatedEntitySnapshot(entity, state));
+                captureBuffer.Add(new ReplicatedEntitySnapshot(entity, state));
             }
 
-            var count = _captureBuffer.Count;
+            var count = captureBuffer.Count;
             if (count == 0)
             {
                 return new ClientReplicationSnapshot(sessionId, authoritativeTick, Array.Empty<ReplicatedEntitySnapshot>(), 0, _snapshotPool, OnSnapshotDisposed);
@@ -122,16 +132,12 @@ namespace Caelmor.Runtime.Replication
             var buffer = _snapshotPool.Rent(count);
 
             for (int i = 0; i < count; i++)
-                buffer[i] = _captureBuffer[i];
+                buffer[i] = captureBuffer[i];
 
             Array.Sort(buffer, 0, count, ReplicatedEntitySnapshotComparer.Instance);
 
 #if DEBUG
-            _snapshotsCaptured++;
-            _entitiesCaptured += count;
-            _arraysRented++;
-            if (count > _maxEntitiesInSnapshot)
-                _maxEntitiesInSnapshot = count;
+            TrackSnapshotAllocated(count);
 #endif
 
             return new ClientReplicationSnapshot(sessionId, authoritativeTick, buffer, count, _snapshotPool, OnSnapshotDisposed);
@@ -143,6 +149,154 @@ namespace Caelmor.Runtime.Replication
             _arraysReturned++;
 #endif
         }
+
+#if DEBUG
+        private void TrackSnapshotAllocated(int entityCount)
+        {
+            _snapshotsCaptured++;
+            _entitiesCaptured += entityCount;
+            _arraysRented++;
+            if (entityCount > _maxEntitiesInSnapshot)
+                _maxEntitiesInSnapshot = entityCount;
+        }
+#endif
+
+        private SnapshotWorkItem CreateWorkItem(SessionId sessionId, long tick, IReadOnlyList<EntityHandle> eligibleEntities)
+        {
+#if DEBUG
+            Action<int>? onAllocated = TrackSnapshotAllocated;
+#else
+            Action<int>? onAllocated = null;
+#endif
+            var count = eligibleEntities.Count;
+            if (count == 0)
+            {
+                return new SnapshotWorkItem(sessionId, tick, Array.Empty<EntityHandle>(), 0, _eligibilityGate, _stateReader, _queue, _snapshotPool, _entityPool, _budget.EntitiesPerSlice, new List<ReplicatedEntitySnapshot>(_budget.EntitiesPerSlice), onAllocated, OnSnapshotDisposed);
+            }
+
+            var buffer = _entityPool.Rent(count);
+            for (int i = 0; i < count; i++)
+                buffer[i] = eligibleEntities[i];
+
+            return new SnapshotWorkItem(sessionId, tick, buffer, count, _eligibilityGate, _stateReader, _queue, _snapshotPool, _entityPool, _budget.EntitiesPerSlice, new List<ReplicatedEntitySnapshot>(_budget.EntitiesPerSlice), onAllocated, OnSnapshotDisposed);
+        }
+
+        private sealed class SnapshotWorkItem : ITimeSlicedWorkItem
+        {
+            private readonly SessionId _sessionId;
+            private readonly long _tick;
+            private readonly EntityHandle[] _eligible;
+            private readonly int _eligibleCount;
+            private readonly IReplicationEligibilityGate _eligibilityGate;
+            private readonly IReplicationStateReader _stateReader;
+            private readonly IReplicationSnapshotQueue _queue;
+            private readonly ArrayPool<ReplicatedEntitySnapshot> _snapshotPool;
+            private readonly ArrayPool<EntityHandle> _entityPool;
+            private readonly List<ReplicatedEntitySnapshot> _captureBuffer;
+            private readonly int _entitiesPerSlice;
+            private readonly Action<int>? _onAllocated;
+            private readonly Action _onDisposed;
+            private int _cursor;
+
+            public SnapshotWorkItem(
+                SessionId sessionId,
+                long tick,
+                EntityHandle[] eligible,
+                int eligibleCount,
+                IReplicationEligibilityGate eligibilityGate,
+                IReplicationStateReader stateReader,
+                IReplicationSnapshotQueue queue,
+                ArrayPool<ReplicatedEntitySnapshot> snapshotPool,
+                ArrayPool<EntityHandle> entityPool,
+                int entitiesPerSlice,
+                List<ReplicatedEntitySnapshot> captureBuffer,
+                Action<int>? onAllocated,
+                Action onDisposed)
+            {
+                _sessionId = sessionId;
+                _tick = tick;
+                _eligible = eligible ?? Array.Empty<EntityHandle>();
+                _eligibleCount = eligibleCount;
+                _eligibilityGate = eligibilityGate;
+                _stateReader = stateReader;
+                _queue = queue;
+                _snapshotPool = snapshotPool;
+                _entityPool = entityPool;
+                _entitiesPerSlice = Math.Max(1, entitiesPerSlice);
+                _captureBuffer = captureBuffer;
+                _captureBuffer.Clear();
+                _onAllocated = onAllocated;
+                _onDisposed = onDisposed ?? (() => { });
+                _cursor = 0;
+            }
+
+            public bool ExecuteSlice(TimeSpan budget, out TimeSpan elapsed)
+            {
+                var stopwatch = Stopwatch.StartNew();
+                var processed = 0;
+
+                while (_cursor < _eligibleCount && processed < _entitiesPerSlice)
+                {
+                    if (stopwatch.Elapsed >= budget)
+                        break;
+
+                    var entity = _eligible[_cursor++];
+                    if (_eligibilityGate.IsEntityReplicationEligible(_sessionId, entity))
+                    {
+                        var state = _stateReader.ReadCommittedState(entity);
+                        _captureBuffer.Add(new ReplicatedEntitySnapshot(entity, state));
+                    }
+
+                    processed++;
+                }
+
+                stopwatch.Stop();
+                elapsed = stopwatch.Elapsed;
+
+                if (_cursor < _eligibleCount)
+                    return false;
+
+                var snapshot = BuildSnapshot();
+                _queue.Enqueue(_sessionId, snapshot);
+                _entityPool.Return(_eligible, clearArray: false);
+                return true;
+            }
+
+            private ClientReplicationSnapshot BuildSnapshot()
+            {
+                var count = _captureBuffer.Count;
+                if (count == 0)
+                    return new ClientReplicationSnapshot(_sessionId, _tick, Array.Empty<ReplicatedEntitySnapshot>(), 0, _snapshotPool, () => { });
+
+                var buffer = _snapshotPool.Rent(count);
+                for (int i = 0; i < count; i++)
+                    buffer[i] = _captureBuffer[i];
+
+                Array.Sort(buffer, 0, count, ReplicatedEntitySnapshotComparer.Instance);
+                _captureBuffer.Clear();
+                _onAllocated?.Invoke(count);
+                return new ClientReplicationSnapshot(_sessionId, _tick, buffer, count, _snapshotPool, _onDisposed);
+            }
+        }
+    }
+
+    public readonly struct SnapshotSerializationBudget
+    {
+        public readonly TimeSpan SliceBudgetPerTick;
+        public readonly int MaxSlicesPerTick;
+        public readonly int EntitiesPerSlice;
+
+        public SnapshotSerializationBudget(TimeSpan sliceBudgetPerTick, int maxSlicesPerTick, int entitiesPerSlice)
+        {
+            if (maxSlicesPerTick <= 0) throw new ArgumentOutOfRangeException(nameof(maxSlicesPerTick));
+            if (entitiesPerSlice <= 0) throw new ArgumentOutOfRangeException(nameof(entitiesPerSlice));
+
+            SliceBudgetPerTick = sliceBudgetPerTick;
+            MaxSlicesPerTick = maxSlicesPerTick;
+            EntitiesPerSlice = entitiesPerSlice;
+        }
+
+        public static SnapshotSerializationBudget Default => new SnapshotSerializationBudget(TimeSpan.FromMilliseconds(3), 4, 32);
     }
 
     /// <summary>
