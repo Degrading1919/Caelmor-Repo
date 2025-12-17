@@ -96,11 +96,24 @@ namespace Caelmor.Runtime.Transport
 
         public CommandIngressResult TryEnqueue(SessionId sessionId, ReadOnlySpan<byte> payload, string commandType, long submitTick)
         {
+            var pooled = PooledPayloadLease.Rent(payload);
+            return TryEnqueue(sessionId, pooled, commandType, submitTick);
+        }
+
+        public CommandIngressResult TryEnqueue(SessionId sessionId, PooledPayloadLease payload, string commandType, long submitTick)
+        {
+            return EnqueueInternal(sessionId, payload, commandType, submitTick);
+        }
+
+        private CommandIngressResult EnqueueInternal(SessionId sessionId, PooledPayloadLease payload, string commandType, long submitTick)
+        {
             if (sessionId.Equals(default(SessionId)))
+            {
+                payload.Dispose();
                 return CommandIngressResult.Rejected(CommandRejectionReason.InvalidSession);
+            }
 
             int payloadSize = payload.Length;
-            var pooled = PooledPayloadLease.Rent(payload);
 
             if (!_queues.TryGetValue(sessionId, out var queue))
             {
@@ -121,12 +134,12 @@ namespace Caelmor.Runtime.Transport
                 metrics.RejectedBytes += payloadSize;
                 metrics.Peak = Math.Max(metrics.Peak, queue.Count);
                 _metrics[sessionId] = metrics;
-                pooled.Dispose();
+                payload.Dispose();
                 return CommandIngressResult.Rejected(CommandRejectionReason.BackpressureLimitHit);
             }
 
             long sequence = ++_nextSequence;
-            var envelope = new CommandEnvelope(sessionId, submitTick, sequence, commandType ?? string.Empty, pooled);
+            var envelope = new CommandEnvelope(sessionId, submitTick, sequence, commandType ?? string.Empty, payload);
             queue.Enqueue(envelope);
             _bytesBySession[sessionId] = currentBytes + payloadSize;
 
@@ -153,6 +166,62 @@ namespace Caelmor.Runtime.Transport
             }
 
             return true;
+        }
+
+        public bool DropSession(SessionId sessionId)
+        {
+            if (!_queues.TryGetValue(sessionId, out var queue))
+                return false;
+
+            int droppedBytes = 0;
+            int droppedCount = 0;
+            while (queue.Count > 0)
+            {
+                var entry = queue.Dequeue();
+                droppedBytes += entry.Payload.Length;
+                droppedCount++;
+                entry.Dispose();
+            }
+
+            _queues.Remove(sessionId);
+            _bytesBySession.Remove(sessionId);
+
+            if (_metrics.TryGetValue(sessionId, out var metrics))
+            {
+                metrics.Current = 0;
+                metrics.Dropped += droppedCount;
+                metrics.DroppedBytes += droppedBytes;
+                _metrics[sessionId] = metrics;
+            }
+            else if (droppedCount > 0 || droppedBytes > 0)
+            {
+                _metrics[sessionId] = new SessionQueueMetrics
+                {
+                    Current = 0,
+                    Dropped = droppedCount,
+                    DroppedBytes = droppedBytes
+                };
+            }
+
+            return true;
+        }
+
+        public void Clear()
+        {
+            foreach (var kvp in _queues)
+            {
+                var queue = kvp.Value;
+                while (queue.Count > 0)
+                {
+                    var entry = queue.Dequeue();
+                    entry.Dispose();
+                }
+            }
+
+            _queues.Clear();
+            _metrics.Clear();
+            _bytesBySession.Clear();
+            _nextSequence = 0;
         }
 
         public CommandIngressMetrics SnapshotMetrics()
@@ -259,6 +328,11 @@ namespace Caelmor.Runtime.Transport
             return _ingress.TryEnqueue(sessionId, payload, commandType, submitTick);
         }
 
+        public CommandIngressResult RouteInbound(SessionId sessionId, PooledPayloadLease payload, string commandType, long submitTick)
+        {
+            return _ingress.TryEnqueue(sessionId, payload, commandType, submitTick);
+        }
+
         public void RouteSnapshot(Caelmor.ClientReplication.ClientReplicationSnapshot snapshot)
         {
             _snapshotQueue.Enqueue(snapshot.SessionId, snapshot);
@@ -267,6 +341,18 @@ namespace Caelmor.Runtime.Transport
         public bool TryDequeueSnapshot(SessionId sessionId, out SerializedSnapshot snapshot)
         {
             return _snapshotQueue.TryDequeue(sessionId, out snapshot);
+        }
+
+        public void DropSession(SessionId sessionId)
+        {
+            _ingress.DropSession(sessionId);
+            _snapshotQueue.DropSession(sessionId);
+        }
+
+        public void Clear()
+        {
+            _ingress.Clear();
+            _snapshotQueue.Clear();
         }
 
         public TransportBackpressureDiagnostics CaptureDiagnostics()
@@ -404,6 +490,46 @@ namespace Caelmor.Runtime.Transport
             }
 
             return new SnapshotQueueMetrics(perSession);
+        }
+
+        public void DropSession(SessionId sessionId)
+        {
+            if (_queues.TryGetValue(sessionId, out var queue))
+            {
+                while (queue.Count > 0)
+                {
+                    queue.Dequeue().Dispose();
+                }
+
+                _queues.Remove(sessionId);
+            }
+
+            _bytesBySession.Remove(sessionId);
+
+            if (_metrics.TryGetValue(sessionId, out var metrics))
+            {
+                metrics.Current = 0;
+                _metrics[sessionId] = metrics;
+            }
+
+            _fingerprints.Remove(sessionId);
+        }
+
+        public void Clear()
+        {
+            foreach (var kvp in _queues)
+            {
+                var queue = kvp.Value;
+                while (queue.Count > 0)
+                {
+                    queue.Dequeue().Dispose();
+                }
+            }
+
+            _queues.Clear();
+            _bytesBySession.Clear();
+            _metrics.Clear();
+            _fingerprints.Clear();
         }
     }
 
