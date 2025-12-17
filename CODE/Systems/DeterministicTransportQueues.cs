@@ -3,6 +3,7 @@ using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Caelmor.Runtime.Diagnostics;
 using Caelmor.Runtime.Persistence;
 using EntityHandle = global::Caelmor.Runtime.Tick.EntityHandle;
@@ -13,24 +14,66 @@ using SessionId = global::Caelmor.Runtime.Onboarding.SessionId;
 namespace Caelmor.Runtime.Transport
 {
     /// <summary>
-    /// Lightweight pooled buffer wrapper to avoid LOH allocations when routing network payloads.
-    /// Call Dispose when the payload is no longer needed to return the rented buffer.
+    /// Pooled payload lease with explicit ownership. The queue owns buffer lifetime and returns the
+    /// underlying byte[] via Dispose; Dispose is idempotent to protect against accidental copies.
     /// </summary>
-    public readonly struct PooledBuffer : IDisposable
+    public sealed class PooledPayloadLease : IDisposable
     {
-        public readonly byte[] Buffer;
-        public readonly int Length;
+        private const int MaxPooledLeases = 512;
+        private static readonly Stack<PooledPayloadLease> LeasePool = new Stack<PooledPayloadLease>(MaxPooledLeases);
+        private byte[] _buffer;
+        private int _length;
+        private int _disposed;
 
-        public PooledBuffer(byte[] buffer, int length)
+        private PooledPayloadLease() { }
+
+        public byte[] Buffer => _buffer ?? Array.Empty<byte>();
+        public int Length => _length;
+
+        public static PooledPayloadLease Rent(ReadOnlySpan<byte> payload)
         {
-            Buffer = buffer ?? throw new ArgumentNullException(nameof(buffer));
-            Length = length;
+            var lease = Acquire();
+            var buffer = ArrayPool<byte>.Shared.Rent(payload.Length);
+            payload.CopyTo(buffer.AsSpan(0, payload.Length));
+            lease.Initialize(buffer, payload.Length);
+            return lease;
+        }
+
+        private static PooledPayloadLease Acquire()
+        {
+            lock (LeasePool)
+            {
+                if (LeasePool.Count > 0)
+                    return LeasePool.Pop();
+            }
+
+            return new PooledPayloadLease();
+        }
+
+        private void Initialize(byte[] buffer, int length)
+        {
+            _disposed = 0;
+            _buffer = buffer ?? throw new ArgumentNullException(nameof(buffer));
+            _length = length;
         }
 
         public void Dispose()
         {
-            if (Buffer != null)
-                ArrayPool<byte>.Shared.Return(Buffer, clearArray: true);
+            if (Interlocked.Exchange(ref _disposed, 1) == 1)
+                return;
+
+            var buffer = _buffer;
+            _buffer = null;
+            _length = 0;
+
+            if (buffer != null)
+                ArrayPool<byte>.Shared.Return(buffer, clearArray: true);
+
+            lock (LeasePool)
+            {
+                if (LeasePool.Count < MaxPooledLeases)
+                    LeasePool.Push(this);
+            }
         }
     }
 
@@ -57,9 +100,7 @@ namespace Caelmor.Runtime.Transport
                 return CommandIngressResult.Rejected(CommandRejectionReason.InvalidSession);
 
             int payloadSize = payload.Length;
-            var buffer = ArrayPool<byte>.Shared.Rent(payloadSize);
-            payload.CopyTo(buffer.AsSpan(0, payloadSize));
-            var pooled = new PooledBuffer(buffer, payloadSize);
+            var pooled = PooledPayloadLease.Rent(payload);
 
             if (!_queues.TryGetValue(sessionId, out var queue))
             {
@@ -127,15 +168,19 @@ namespace Caelmor.Runtime.Transport
         }
     }
 
+    /// <summary>
+    /// Command envelope handed to authoritative consumers. Ownership: caller must Dispose to return
+    /// the payload buffer. Dispose is idempotent through the underlying lease.
+    /// </summary>
     public readonly struct CommandEnvelope : IDisposable
     {
         public readonly SessionId SessionId;
         public readonly long SubmitTick;
         public readonly long DeterministicSequence;
         public readonly string CommandType;
-        public readonly PooledBuffer Payload;
+        public readonly PooledPayloadLease Payload;
 
-        public CommandEnvelope(SessionId sessionId, long submitTick, long deterministicSequence, string commandType, PooledBuffer payload)
+        public CommandEnvelope(SessionId sessionId, long submitTick, long deterministicSequence, string commandType, PooledPayloadLease payload)
         {
             SessionId = sessionId;
             SubmitTick = submitTick;
@@ -591,7 +636,7 @@ namespace Caelmor.Runtime.Transport
             foreach (var entry in snapshot.Entities)
                 baseline[entry.Entity] = entry.State.Fingerprint;
 
-            return new SerializedSnapshot(snapshot.SessionId, snapshot.AuthoritativeTick, buffer, offset, _changed.Count, _removed.Count);
+            return SerializedSnapshot.Rent(snapshot.SessionId, snapshot.AuthoritativeTick, buffer, offset, _changed.Count, _removed.Count);
         }
 
         private static int ComputeLength(long tick, List<(EntityHandle entity, string fingerprint)> changed, List<EntityHandle> removed)
@@ -642,29 +687,73 @@ namespace Caelmor.Runtime.Transport
         }
     }
 
-    public readonly struct SerializedSnapshot : IDisposable
+    /// <summary>
+    /// Pooled serialized snapshot lease. Ownership: dequeueing consumer must Dispose after send to
+    /// ensure buffer and lease return to pools. Idempotent to guard against multiple Dispose calls.
+    /// </summary>
+    public sealed class SerializedSnapshot : IDisposable
     {
-        public SerializedSnapshot(SessionId sessionId, long tick, byte[] buffer, int byteLength, int changes, int removals)
+        private const int MaxPooledLeases = 512;
+        private static readonly Stack<SerializedSnapshot> LeasePool = new Stack<SerializedSnapshot>(MaxPooledLeases);
+
+        private int _disposed;
+
+        private SerializedSnapshot() { }
+
+        public SessionId SessionId { get; private set; }
+        public long Tick { get; private set; }
+        public byte[] Buffer { get; private set; }
+        public int ByteLength { get; private set; }
+        public int Changes { get; private set; }
+        public int Removals { get; private set; }
+
+        public static SerializedSnapshot Rent(SessionId sessionId, long tick, byte[] buffer, int byteLength, int changes, int removals)
         {
-            SessionId = sessionId;
-            Tick = tick;
-            Buffer = buffer;
-            ByteLength = byteLength;
-            Changes = changes;
-            Removals = removals;
+            if (buffer == null) throw new ArgumentNullException(nameof(buffer));
+
+            var lease = Acquire();
+            lease.SessionId = sessionId;
+            lease.Tick = tick;
+            lease.Buffer = buffer;
+            lease.ByteLength = byteLength;
+            lease.Changes = changes;
+            lease.Removals = removals;
+            lease._disposed = 0;
+            return lease;
         }
 
-        public SessionId SessionId { get; }
-        public long Tick { get; }
-        public byte[] Buffer { get; }
-        public int ByteLength { get; }
-        public int Changes { get; }
-        public int Removals { get; }
+        private static SerializedSnapshot Acquire()
+        {
+            lock (LeasePool)
+            {
+                if (LeasePool.Count > 0)
+                    return LeasePool.Pop();
+            }
+
+            return new SerializedSnapshot();
+        }
 
         public void Dispose()
         {
-            if (Buffer != null)
-                ArrayPool<byte>.Shared.Return(Buffer, clearArray: true);
+            if (Interlocked.Exchange(ref _disposed, 1) == 1)
+                return;
+
+            var buffer = Buffer;
+            Buffer = null;
+            ByteLength = 0;
+            Changes = 0;
+            Removals = 0;
+            SessionId = default;
+            Tick = 0;
+
+            if (buffer != null)
+                ArrayPool<byte>.Shared.Return(buffer, clearArray: true);
+
+            lock (LeasePool)
+            {
+                if (LeasePool.Count < MaxPooledLeases)
+                    LeasePool.Push(this);
+            }
         }
     }
 }
