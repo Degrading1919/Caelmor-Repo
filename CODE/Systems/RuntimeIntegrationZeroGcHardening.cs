@@ -1,8 +1,10 @@
 using System;
 using System.Buffers;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using Caelmor.Runtime;
 using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.InterestManagement;
 using Caelmor.Runtime.Persistence;
@@ -15,49 +17,140 @@ namespace Caelmor.Runtime.Integration
 {
     /// <summary>
     /// Authoritative input ingestion with fixed per-session command rings.
+    /// - Transport thread enqueues only.
+    /// - Tick thread freezes deterministically at the start of each authoritative tick.
+    /// - No per-tick allocations after warm-up; arrays are rented once per session and reused.
     /// </summary>
     public sealed class AuthoritativeCommandIngestor : IAuthoritativeCommandIngestor
     {
-        private readonly Dictionary<SessionId, CommandRing> _perSession = new Dictionary<SessionId, CommandRing>(64);
+        private readonly RuntimeBackpressureConfig _config;
+        private readonly Dictionary<SessionId, SessionCommandState> _perSession = new Dictionary<SessionId, SessionCommandState>(64);
+        private readonly ArrayPool<AuthoritativeCommand> _commandPool;
+        private readonly Dictionary<SessionId, SessionCommandMetrics> _metrics = new Dictionary<SessionId, SessionCommandMetrics>(64);
+        private readonly object _gate = new object();
+
+        private SessionId[] _sessionKeySnapshot = Array.Empty<SessionId>();
+        private SessionCommandMetricsSnapshot[] _metricsBuffer = Array.Empty<SessionCommandMetricsSnapshot>();
+        private long _nextSequence;
 
 #if DEBUG
         private int _maxCommandsPerSession;
 #endif
 
-        public bool TryEnqueue(SessionId sessionId, in AuthoritativeCommand command)
+        public AuthoritativeCommandIngestor(RuntimeBackpressureConfig? config = null, ArrayPool<AuthoritativeCommand>? commandPool = null)
         {
-            if (!_perSession.TryGetValue(sessionId, out var ring))
-            {
-                ring = new CommandRing(32);
-            }
-
-            var success = ring.TryPush(command);
-            _perSession[sessionId] = ring;
-
-#if DEBUG
-            if (ring.Count > _maxCommandsPerSession)
-                _maxCommandsPerSession = ring.Count;
-#endif
-
-            return success;
+            _config = config ?? RuntimeBackpressureConfig.Default;
+            _commandPool = commandPool ?? ArrayPool<AuthoritativeCommand>.Shared;
         }
 
-        public int TryDrain(SessionId sessionId, Span<AuthoritativeCommand> destination)
+        public bool TryEnqueue(SessionId sessionId, in AuthoritativeCommand command)
         {
-            if (!_perSession.TryGetValue(sessionId, out var ring) || ring.Count == 0)
-                return 0;
+            if (!sessionId.IsValid)
+                return false;
 
-            var drained = ring.TryPopAll(destination);
-            _perSession[sessionId] = ring;
-            return drained;
+            lock (_gate)
+            {
+                if (!_perSession.TryGetValue(sessionId, out var state))
+                {
+                    state = SessionCommandState.Create(_config.MaxInboundCommandsPerSession, _commandPool);
+                }
+
+                if (command.AuthoritativeTick < state.LastFrozenTick)
+                {
+                    state.Metrics.DroppedStale++;
+                    _perSession[sessionId] = state;
+                    _metrics[sessionId] = state.Metrics;
+                    return false;
+                }
+
+                var enriched = command.WithSequence(Interlocked.Increment(ref _nextSequence));
+                // Deterministic overflow policy: reject the newest command when the ring is full.
+                var success = state.Ring.TryPush(enriched);
+
+                if (!success)
+                {
+                    state.Metrics.DroppedOverflow++;
+                    _perSession[sessionId] = state;
+                    _metrics[sessionId] = state.Metrics;
+                    return false;
+                }
+
+                state.Metrics.Accepted++;
+                state.Metrics.PeakBuffered = Math.Max(state.Metrics.PeakBuffered, state.Ring.Count);
+                _perSession[sessionId] = state;
+                _metrics[sessionId] = state.Metrics;
+
+#if DEBUG
+                if (state.Ring.Count > _maxCommandsPerSession)
+                    _maxCommandsPerSession = state.Ring.Count;
+#endif
+
+                return true;
+            }
+        }
+
+        public void FreezeAllSessions(long authoritativeTick)
+        {
+            lock (_gate)
+            {
+                int count = _perSession.Count;
+                EnsureCapacity(ref _sessionKeySnapshot, count);
+
+                int index = 0;
+                foreach (var kvp in _perSession)
+                    _sessionKeySnapshot[index++] = kvp.Key;
+
+                Array.Sort(_sessionKeySnapshot, 0, index, Caelmor.Runtime.Transport.SessionIdValueComparer.Instance);
+
+                for (int i = 0; i < index; i++)
+                    FreezeSessionLocked(_sessionKeySnapshot[i], authoritativeTick);
+            }
+        }
+
+        public void FreezeSessions(long authoritativeTick, IReadOnlyList<SessionId> activeSessions)
+        {
+            if (activeSessions is null) throw new ArgumentNullException(nameof(activeSessions));
+
+            lock (_gate)
+            {
+                EnsureCapacity(ref _sessionKeySnapshot, activeSessions.Count);
+
+                for (int i = 0; i < activeSessions.Count; i++)
+                    _sessionKeySnapshot[i] = activeSessions[i];
+
+                Array.Sort(_sessionKeySnapshot, 0, activeSessions.Count, Caelmor.Runtime.Transport.SessionIdValueComparer.Instance);
+
+                for (int i = 0; i < activeSessions.Count; i++)
+                    FreezeSessionLocked(_sessionKeySnapshot[i], authoritativeTick);
+            }
+        }
+
+        public FrozenCommandBatch GetFrozenBatch(SessionId sessionId)
+        {
+            lock (_gate)
+            {
+                if (_perSession.TryGetValue(sessionId, out var state))
+                    return state.Frozen;
+            }
+
+            return FrozenCommandBatch.Empty(sessionId);
         }
 
         /// <summary>
-        /// Drops all buffered commands for a session (disconnect/unload).
+        /// Drops all buffered commands for a session (disconnect/unload) and returns pooled buffers.
         /// </summary>
         public bool DropSession(SessionId sessionId)
         {
-            return _perSession.Remove(sessionId);
+            lock (_gate)
+            {
+                if (!_perSession.TryGetValue(sessionId, out var state))
+                    return false;
+
+                state.ReturnBuffer(_commandPool);
+                _perSession.Remove(sessionId);
+                _metrics.Remove(sessionId);
+                return true;
+            }
         }
 
         /// <summary>
@@ -65,20 +158,141 @@ namespace Caelmor.Runtime.Integration
         /// </summary>
         public void Clear()
         {
-            _perSession.Clear();
+            lock (_gate)
+            {
+                foreach (var kvp in _perSession)
+                    kvp.Value.ReturnBuffer(_commandPool);
+
+                _perSession.Clear();
+                _metrics.Clear();
+                _nextSequence = 0;
+            }
+        }
+
+        public CommandIngestorDiagnostics SnapshotMetrics()
+        {
+            lock (_gate)
+            {
+                int count = _metrics.Count;
+                if (count == 0)
+                    return CommandIngestorDiagnostics.Empty;
+
+                EnsureCapacity(ref _sessionKeySnapshot, count);
+                EnsureCapacity(ref _metricsBuffer, count);
+
+                int index = 0;
+                foreach (var kvp in _metrics)
+                    _sessionKeySnapshot[index++] = kvp.Key;
+
+                Array.Sort(_sessionKeySnapshot, 0, index, Caelmor.Runtime.Transport.SessionIdValueComparer.Instance);
+
+                int totalDroppedOverflow = 0;
+                int totalDroppedStale = 0;
+                int totalAccepted = 0;
+                int totalFrozen = 0;
+                int maxBuffered = 0;
+
+                for (int i = 0; i < index; i++)
+                {
+                    var sessionId = _sessionKeySnapshot[i];
+                    var metrics = _metrics[sessionId];
+                    _metricsBuffer[i] = new SessionCommandMetricsSnapshot(sessionId, metrics);
+
+                    totalDroppedOverflow += metrics.DroppedOverflow;
+                    totalDroppedStale += metrics.DroppedStale;
+                    totalAccepted += metrics.Accepted;
+                    totalFrozen += metrics.LastFrozenCount;
+                    if (metrics.PeakBuffered > maxBuffered)
+                        maxBuffered = metrics.PeakBuffered;
+                }
+
+                var totals = new CommandIngestorTotals(totalAccepted, totalDroppedOverflow, totalDroppedStale, totalFrozen, maxBuffered);
+                return new CommandIngestorDiagnostics(_metricsBuffer, index, totals);
+            }
+        }
+
+        private void FreezeSessionLocked(SessionId sessionId, long authoritativeTick)
+        {
+            if (!_perSession.TryGetValue(sessionId, out var state))
+                return;
+
+            state.LastFrozenTick = authoritativeTick;
+
+            if (state.Scratch == null || state.Scratch.Length == 0)
+                state.Scratch = _commandPool.Rent(_config.MaxInboundCommandsPerSession);
+
+            var destination = state.Scratch.AsSpan();
+            int drained = state.Ring.TryPopAll(destination);
+
+            if (drained > 1)
+                Array.Sort(state.Scratch, 0, drained, AuthoritativeCommandComparer.Instance);
+
+            state.Frozen = new FrozenCommandBatch(sessionId, authoritativeTick, state.Scratch, drained);
+            state.Metrics.LastFrozenCount = drained;
+            _perSession[sessionId] = state;
+            _metrics[sessionId] = state.Metrics;
+        }
+
+        private static void EnsureCapacity<T>(ref T[] buffer, int required)
+        {
+            if (buffer.Length >= required)
+                return;
+
+            var next = buffer.Length == 0 ? required : buffer.Length;
+            while (next < required)
+                next <<= 1;
+            buffer = new T[next];
+        }
+
+        private struct SessionCommandState
+        {
+            public CommandRing Ring;
+            public AuthoritativeCommand[] Scratch;
+            public FrozenCommandBatch Frozen;
+            public SessionCommandMetrics Metrics;
+            public long LastFrozenTick;
+
+            public static SessionCommandState Create(int capacity, ArrayPool<AuthoritativeCommand> pool)
+            {
+                var buffer = pool.Rent(Math.Max(1, capacity));
+                return new SessionCommandState
+                {
+                    Ring = new CommandRing(capacity),
+                    Scratch = buffer,
+                    Frozen = FrozenCommandBatch.Empty(default),
+                    Metrics = default,
+                    LastFrozenTick = 0
+                };
+            }
+
+            public void ReturnBuffer(ArrayPool<AuthoritativeCommand> pool)
+            {
+                if (Scratch != null && Scratch.Length > 0)
+                    pool.Return(Scratch, clearArray: false);
+
+                Scratch = Array.Empty<AuthoritativeCommand>();
+                var capacity = Ring.Capacity <= 0 ? 1 : Ring.Capacity;
+                Ring = new CommandRing(capacity);
+                Frozen = FrozenCommandBatch.Empty(default);
+                Metrics = default;
+                LastFrozenTick = 0;
+            }
         }
 
         private struct CommandRing
         {
+            private readonly int _capacity;
             private AuthoritativeCommand[] _commands;
             private int _head;
             private int _tail;
 
             public int Count { get; private set; }
+            public int Capacity => _capacity;
 
             public CommandRing(int capacity)
             {
-                _commands = new AuthoritativeCommand[capacity];
+                _capacity = Math.Max(1, capacity);
+                _commands = new AuthoritativeCommand[_capacity + 1];
                 _head = 0;
                 _tail = 0;
                 Count = 0;
@@ -112,28 +326,242 @@ namespace Caelmor.Runtime.Integration
         }
     }
 
+    /// <summary>
+    /// Read-only frozen batch for a session within a single authoritative tick.
+    /// Backed by a pooled buffer owned by the ingestor; callers must not mutate or retain past the tick.
+    /// </summary>
+    public readonly struct FrozenCommandBatch
+    {
+        public readonly SessionId SessionId;
+        public readonly long AuthoritativeTick;
+        public readonly AuthoritativeCommand[] Buffer;
+        public readonly int Count;
+
+        public FrozenCommandBatch(SessionId sessionId, long authoritativeTick, AuthoritativeCommand[] buffer, int count)
+        {
+            SessionId = sessionId;
+            AuthoritativeTick = authoritativeTick;
+            Buffer = buffer ?? Array.Empty<AuthoritativeCommand>();
+            Count = Math.Max(0, count);
+        }
+
+        public static FrozenCommandBatch Empty(SessionId sessionId) => new FrozenCommandBatch(sessionId, authoritativeTick: 0, Array.Empty<AuthoritativeCommand>(), count: 0);
+
+        public ReadOnlySpan<AuthoritativeCommand> AsSpan()
+        {
+            return Buffer.AsSpan(0, Count);
+        }
+    }
+
     public readonly struct AuthoritativeCommand
     {
         public readonly long AuthoritativeTick;
         public readonly int CommandType;
         public readonly int PayloadA;
         public readonly int PayloadB;
+        public readonly long DeterministicSequence;
 
-        public AuthoritativeCommand(long authoritativeTick, int commandType, int payloadA, int payloadB)
+        public AuthoritativeCommand(long authoritativeTick, int commandType, int payloadA, int payloadB, long deterministicSequence = 0)
         {
             AuthoritativeTick = authoritativeTick;
             CommandType = commandType;
             PayloadA = payloadA;
             PayloadB = payloadB;
+            DeterministicSequence = deterministicSequence;
+        }
+
+        public AuthoritativeCommand WithSequence(long sequence)
+        {
+            return new AuthoritativeCommand(AuthoritativeTick, CommandType, PayloadA, PayloadB, sequence);
+        }
+    }
+
+    public sealed class AuthoritativeCommandComparer : IComparer<AuthoritativeCommand>
+    {
+        public static readonly AuthoritativeCommandComparer Instance = new AuthoritativeCommandComparer();
+
+        public int Compare(AuthoritativeCommand x, AuthoritativeCommand y)
+        {
+            var c = x.AuthoritativeTick.CompareTo(y.AuthoritativeTick);
+            if (c != 0) return c;
+
+            c = x.CommandType.CompareTo(y.CommandType);
+            if (c != 0) return c;
+
+            c = x.PayloadA.CompareTo(y.PayloadA);
+            if (c != 0) return c;
+
+            c = x.PayloadB.CompareTo(y.PayloadB);
+            if (c != 0) return c;
+
+            return x.DeterministicSequence.CompareTo(y.DeterministicSequence);
         }
     }
 
     public interface IAuthoritativeCommandIngestor
     {
         bool TryEnqueue(SessionId sessionId, in AuthoritativeCommand command);
-        int TryDrain(SessionId sessionId, Span<AuthoritativeCommand> destination);
+        void FreezeAllSessions(long authoritativeTick);
+        void FreezeSessions(long authoritativeTick, IReadOnlyList<SessionId> activeSessions);
+        FrozenCommandBatch GetFrozenBatch(SessionId sessionId);
         bool DropSession(SessionId sessionId);
         void Clear();
+        CommandIngestorDiagnostics SnapshotMetrics();
+    }
+
+    /// <summary>
+    /// Tick-phase hook that freezes authoritative command ingestion at the start of each authoritative tick.
+    /// Thread contract: invoked on the tick thread only. Transport/network threads enqueue only.
+    /// </summary>
+    public sealed class AuthoritativeCommandFreezeHook : ITickPhaseHook
+    {
+        private readonly IAuthoritativeCommandIngestor _ingestor;
+        private readonly IActiveSessionIndex? _activeSessions;
+
+        public AuthoritativeCommandFreezeHook(IAuthoritativeCommandIngestor ingestor, IActiveSessionIndex? activeSessions = null)
+        {
+            _ingestor = ingestor ?? throw new ArgumentNullException(nameof(ingestor));
+            _activeSessions = activeSessions;
+        }
+
+        public void OnPreTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
+        {
+            if (_activeSessions != null)
+            {
+                _ingestor.FreezeSessions(context.TickIndex, _activeSessions.SnapshotSessionsDeterministic());
+            }
+            else
+            {
+                _ingestor.FreezeAllSessions(context.TickIndex);
+            }
+        }
+
+        public void OnPostTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
+        {
+            // No post-tick work required; freeze occurs at tick start.
+        }
+    }
+
+    public readonly struct CommandIngestorDiagnostics
+    {
+        public static readonly CommandIngestorDiagnostics Empty = new CommandIngestorDiagnostics(Array.Empty<SessionCommandMetricsSnapshot>(), 0, default);
+
+        private readonly SessionCommandMetricsSnapshot[] _buffer;
+        private readonly SessionCommandMetricsReadOnlyList _view;
+
+        public CommandIngestorDiagnostics(SessionCommandMetricsSnapshot[] buffer, int count, CommandIngestorTotals totals)
+        {
+            _buffer = buffer ?? Array.Empty<SessionCommandMetricsSnapshot>();
+            Count = Math.Max(0, count);
+            _view = new SessionCommandMetricsReadOnlyList(_buffer, Count);
+            Totals = totals;
+        }
+
+        public int Count { get; }
+        public CommandIngestorTotals Totals { get; }
+        public IReadOnlyList<SessionCommandMetricsSnapshot> PerSession => _view;
+    }
+
+    public readonly struct CommandIngestorTotals
+    {
+        public CommandIngestorTotals(int accepted, int droppedOverflow, int droppedStale, int frozenLastTick, int peakBuffered)
+        {
+            Accepted = accepted;
+            DroppedOverflow = droppedOverflow;
+            DroppedStale = droppedStale;
+            FrozenLastTick = frozenLastTick;
+            PeakBuffered = peakBuffered;
+        }
+
+        public int Accepted { get; }
+        public int DroppedOverflow { get; }
+        public int DroppedStale { get; }
+        public int FrozenLastTick { get; }
+        public int PeakBuffered { get; }
+    }
+
+    public struct SessionCommandMetrics
+    {
+        public int Accepted;
+        public int DroppedOverflow;
+        public int DroppedStale;
+        public int LastFrozenCount;
+        public int PeakBuffered;
+    }
+
+    public readonly struct SessionCommandMetricsSnapshot
+    {
+        public SessionCommandMetricsSnapshot(SessionId sessionId, SessionCommandMetrics metrics)
+        {
+            SessionId = sessionId;
+            Metrics = metrics;
+        }
+
+        public SessionId SessionId { get; }
+        public SessionCommandMetrics Metrics { get; }
+    }
+
+    internal readonly struct SessionCommandMetricsReadOnlyList : IReadOnlyList<SessionCommandMetricsSnapshot>
+    {
+        private readonly SessionCommandMetricsSnapshot[] _buffer;
+        private readonly int _count;
+
+        public SessionCommandMetricsReadOnlyList(SessionCommandMetricsSnapshot[] buffer, int count)
+        {
+            _buffer = buffer ?? Array.Empty<SessionCommandMetricsSnapshot>();
+            _count = count;
+        }
+
+        public SessionCommandMetricsSnapshot this[int index]
+        {
+            get
+            {
+                if ((uint)index >= (uint)_count)
+                    throw new ArgumentOutOfRangeException(nameof(index));
+                return _buffer[index];
+            }
+        }
+
+        public int Count => _count;
+
+        public Enumerator GetEnumerator() => new Enumerator(_buffer, _count);
+
+        IEnumerator<SessionCommandMetricsSnapshot> IEnumerable<SessionCommandMetricsSnapshot>.GetEnumerator() => GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        internal struct Enumerator : IEnumerator<SessionCommandMetricsSnapshot>
+        {
+            private readonly SessionCommandMetricsSnapshot[] _buffer;
+            private readonly int _count;
+            private int _index;
+
+            public Enumerator(SessionCommandMetricsSnapshot[] buffer, int count)
+            {
+                _buffer = buffer;
+                _count = count;
+                _index = -1;
+            }
+
+            public SessionCommandMetricsSnapshot Current => _buffer[_index];
+
+            object IEnumerator.Current => Current;
+
+            public bool MoveNext()
+            {
+                var next = _index + 1;
+                if (next >= _count)
+                    return false;
+                _index = next;
+                return true;
+            }
+
+            public void Reset() => _index = -1;
+
+            public void Dispose()
+            {
+            }
+        }
     }
 
     /// <summary>
