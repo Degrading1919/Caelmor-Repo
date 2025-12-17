@@ -6,7 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.Buffers;
 
 namespace Caelmor.Combat
 {
@@ -20,6 +20,9 @@ namespace Caelmor.Combat
     /// - Emits observable rejection results for structurally invalid intents (no success outcomes)
     /// - Exposes deterministic snapshots for Stage 9 validation harness
     /// </summary>
+    // IL2CPP/AOT SAFETY: No runtime code generation or Reflection.Emit permitted; all runtime entrypoints must be
+    // explicitly registered and editor-only APIs avoided. Reflection-based paths (none here) require explicit
+    // preservation to survive managed code stripping.
     public sealed class CombatIntentQueueSystem
     {
         private readonly ITickSource _tickSource;
@@ -135,15 +138,13 @@ namespace Caelmor.Combat
             // 2) intent_id (ordinal) -- used as a stable identifier for ordering; no client_nonce involvement
             //
             // NOTE: Ordering must not depend on arrival time or any client-supplied correlation fields.
-            var ordered = staged
-                .OrderBy(s => s.Submission.ActorEntityId, StringComparer.Ordinal)
-                .ThenBy(s => s.Submission.IntentId, StringComparer.Ordinal)
-                .ToList();
+            staged.Sort(StagedSubmissionComparer.Instance);
 
-            var frozenIntents = new List<FrozenIntentRecord>(ordered.Count);
+            var frozenIntents = new List<FrozenIntentRecord>(staged.Count);
 
-            foreach (var s in ordered)
+            for (int i = 0; i < staged.Count; i++)
             {
+                var s = staged[i];
                 int seq = NextSequenceForActor(frozenTick, s.Submission.ActorEntityId!);
 
                 // Freeze payload immutably at tick boundary:
@@ -182,12 +183,22 @@ namespace Caelmor.Combat
 
         private void PruneStaging(int keepFromTickInclusive)
         {
-            var keys = _stagedBySubmitTick.Keys.ToArray();
-            foreach (var k in keys)
+            int count = _stagedBySubmitTick.Count;
+            if (count == 0)
+                return;
+
+            var keys = ArrayPool<int>.Shared.Rent(count);
+            int index = 0;
+            foreach (var kvp in _stagedBySubmitTick)
+                keys[index++] = kvp.Key;
+
+            for (int i = 0; i < index; i++)
             {
-                if (k < keepFromTickInclusive)
-                    _stagedBySubmitTick.Remove(k);
+                if (keys[i] < keepFromTickInclusive)
+                    _stagedBySubmitTick.Remove(keys[i]);
             }
+
+            ArrayPool<int>.Shared.Return(keys, clearArray: true);
         }
 
         private readonly struct StagedSubmission
@@ -199,6 +210,20 @@ namespace Caelmor.Combat
             {
                 Submission = submission;
                 SubmitTick = submitTick;
+            }
+        }
+
+        private sealed class StagedSubmissionComparer : IComparer<StagedSubmission>
+        {
+            public static readonly StagedSubmissionComparer Instance = new StagedSubmissionComparer();
+
+            public int Compare(StagedSubmission x, StagedSubmission y)
+            {
+                int actorCompare = string.CompareOrdinal(x.Submission.ActorEntityId ?? string.Empty, y.Submission.ActorEntityId ?? string.Empty);
+                if (actorCompare != 0)
+                    return actorCompare;
+
+                return string.CompareOrdinal(x.Submission.IntentId ?? string.Empty, y.Submission.IntentId ?? string.Empty);
             }
         }
     }

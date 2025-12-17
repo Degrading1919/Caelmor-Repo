@@ -15,6 +15,9 @@ namespace Caelmor.Runtime.Host
     /// Ensures no lingering registrations across disconnects, zone unloads, or server shutdown.
     /// Persistence completions are staged through a bounded mailbox and drained on the tick thread via phase hooks.
     /// </summary>
+    // IL2CPP/AOT SAFETY: Do not introduce Reflection.Emit, runtime codegen, or implicit reflection-based discovery
+    // in this entry point. Managed stripping must be accounted for via explicit registration; tick-thread paths
+    // must remain deterministic and free of editor-only APIs.
     public sealed class RuntimeServerLoop : IDisposable
     {
         private readonly WorldSimulationCore _simulation;

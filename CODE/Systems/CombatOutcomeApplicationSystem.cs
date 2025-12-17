@@ -4,9 +4,9 @@
 // No intent validation, no intent resolution, no damage/mitigation calculation, no persistence I/O.
 
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace Caelmor.Combat
 {
@@ -29,6 +29,9 @@ namespace Caelmor.Combat
     /// - Does not read from persistence
     /// - Does not auto-repair or silently clamp
     /// </summary>
+    // IL2CPP/AOT SAFETY: No runtime code generation or Reflection.Emit permitted. Any reflection-based access must
+    // be explicitly preserved for managed stripping (none present); keep tick-thread hot paths deterministic and
+    // free of editor-only APIs.
     public sealed class CombatOutcomeApplicationSystem
     {
         private readonly ITickSource _tickSource;
@@ -260,12 +263,22 @@ namespace Caelmor.Combat
 
         private void PruneAppliedSets(int keepFromTickInclusive)
         {
-            var keys = _appliedPayloadIdsByTick.Keys.ToArray();
-            for (int i = 0; i < keys.Length; i++)
+            int count = _appliedPayloadIdsByTick.Count;
+            if (count == 0)
+                return;
+
+            var keys = ArrayPool<int>.Shared.Rent(count);
+            int index = 0;
+            foreach (var kvp in _appliedPayloadIdsByTick)
+                keys[index++] = kvp.Key;
+
+            for (int i = 0; i < index; i++)
             {
                 if (keys[i] < keepFromTickInclusive)
                     _appliedPayloadIdsByTick.Remove(keys[i]);
             }
+
+            ArrayPool<int>.Shared.Return(keys, clearArray: true);
         }
 
         private static void EnsureNoDuplicateIdsInBatchOrThrow(CombatOutcomeBatch batch)
