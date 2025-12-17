@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using Caelmor.Runtime.Onboarding;
+using Caelmor.Runtime.InterestManagement;
 using Caelmor.Runtime.Persistence;
 using Caelmor.Runtime.Replication;
 using Caelmor.Runtime.Sessions;
@@ -322,21 +323,68 @@ namespace Caelmor.Runtime.Integration
     }
 
     /// <summary>
-    /// Interest management implementation using per-session visibility caches.
+    /// Interest management implementation using per-session visibility caches backed by a spatial index.
     /// </summary>
     public sealed class VisibilityCullingService : IReplicationEligibilityGate
     {
+        private readonly ZoneSpatialIndex _spatialIndex;
+        private readonly ArrayPool<EntityHandle> _entityPool;
         private readonly Dictionary<SessionId, VisibilityBucket> _visibility = new Dictionary<SessionId, VisibilityBucket>(64);
+        private readonly List<EntityHandle> _queryBuffer;
 
-        public void SetVisibleEntities(SessionId session, EntityHandle[] entities, int count)
+        public VisibilityCullingService(ZoneSpatialIndex spatialIndex, ArrayPool<EntityHandle>? entityPool = null, int initialQueryCapacity = 64)
         {
-            if (!_visibility.TryGetValue(session, out var bucket))
-            {
-                bucket = new VisibilityBucket(entities.Length);
-            }
+            _spatialIndex = spatialIndex ?? throw new ArgumentNullException(nameof(spatialIndex));
+            _entityPool = entityPool ?? ArrayPool<EntityHandle>.Shared;
+            _queryBuffer = new List<EntityHandle>(Math.Max(4, initialQueryCapacity));
+        }
 
-            bucket.Set(entities, count);
+        /// <summary>
+        /// Tracks or moves an entity within the zone spatial index without allocations.
+        /// </summary>
+        public void Track(EntityHandle entity, ZoneId zone, ZonePosition position)
+        {
+            _spatialIndex.Upsert(entity, zone, position);
+        }
+
+        /// <summary>
+        /// Removes an entity from the spatial index. Safe to call when already absent.
+        /// </summary>
+        public void Remove(EntityHandle entity)
+        {
+            _spatialIndex.Remove(entity);
+        }
+
+        /// <summary>
+        /// Rebuilds the deterministic visibility set for a session using the spatial index.
+        /// </summary>
+        public int RefreshVisibility(SessionId session, ZoneInterestQuery query)
+        {
+            _queryBuffer.Clear();
+            _spatialIndex.Query(query, _queryBuffer);
+            _queryBuffer.Sort(EntityHandleComparer.Instance);
+
+            var bucket = _visibility.TryGetValue(session, out var existing)
+                ? existing
+                : new VisibilityBucket(_entityPool.Rent(_queryBuffer.Count == 0 ? 4 : _queryBuffer.Count));
+
+            bucket.SetSorted(_queryBuffer, _entityPool);
             _visibility[session] = bucket;
+            return bucket.Count;
+        }
+
+        /// <summary>
+        /// Provides nearby entities for AI/target-selection surfaces using the same spatial index.
+        /// Results are sorted deterministically by EntityHandle value.
+        /// </summary>
+        public int QueryNearbyTargets(ZoneInterestQuery query, List<EntityHandle> destination)
+        {
+            if (destination is null) throw new ArgumentNullException(nameof(destination));
+
+            destination.Clear();
+            _spatialIndex.Query(query, destination);
+            destination.Sort(EntityHandleComparer.Instance);
+            return destination.Count;
         }
 
         public bool IsEntityReplicationEligible(SessionId sessionId, EntityHandle entity)
@@ -352,39 +400,63 @@ namespace Caelmor.Runtime.Integration
             private EntityHandle[] _entities;
             private int _count;
 
-            public VisibilityBucket(int capacity)
+            public VisibilityBucket(EntityHandle[] rented)
             {
-                _entities = new EntityHandle[capacity];
+                _entities = rented;
                 _count = 0;
             }
 
-            public void Set(EntityHandle[] source, int count)
+            public int Count => _count;
+
+            public void SetSorted(List<EntityHandle> source, ArrayPool<EntityHandle> pool)
             {
-                EnsureCapacity(count);
-                Array.Copy(source, _entities, count);
-                _count = count;
+                EnsureCapacity(source.Count, pool);
+
+                for (int i = 0; i < source.Count; i++)
+                    _entities[i] = source[i];
+
+                _count = source.Count;
             }
 
             public bool Contains(EntityHandle entity)
             {
-                for (int i = 0; i < _count; i++)
+                int low = 0;
+                int high = _count - 1;
+
+                while (low <= high)
                 {
-                    if (_entities[i].Equals(entity))
+                    var mid = low + ((high - low) >> 1);
+                    var current = _entities[mid].Value;
+                    var target = entity.Value;
+
+                    if (current == target)
                         return true;
+
+                    if (current < target)
+                        low = mid + 1;
+                    else
+                        high = mid - 1;
                 }
 
                 return false;
             }
 
-            private void EnsureCapacity(int required)
+            private void EnsureCapacity(int required, ArrayPool<EntityHandle> pool)
             {
-                if (_entities.Length >= required)
+                if (_entities != null && _entities.Length >= required)
+                {
                     return;
+                }
 
-                var next = _entities.Length == 0 ? required : _entities.Length;
+                var next = _entities == null || _entities.Length == 0 ? Math.Max(4, required) : _entities.Length;
                 while (next < required)
                     next *= 2;
-                Array.Resize(ref _entities, next);
+
+                var rented = pool.Rent(next);
+                if (_entities != null && _entities.Length > 0)
+                    pool.Return(_entities, clearArray: false);
+
+                _entities = rented;
             }
         }
     }
