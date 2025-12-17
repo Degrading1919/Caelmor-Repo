@@ -32,6 +32,11 @@
 - **Server Logging & Diagnostics**: Minimal logging/error handling strategy for invariant violations (e.g., mid-tick eligibility changes) with metrics/hooks for operational visibility.
 - **Runtime Loop Entrypoint / Build Script**: A runnable host (console service) that wires authority implementations, validation harness toggles, and starts/stops the tick/simulation threads deterministically.
 
+### Newly Delivered: Interest Management / Visibility Culling
+- Added a reusable `ZoneSpatialIndex` (grid/hash) that tracks per-zone entity residency and movement without per-tick allocations.
+- Introduced `ZoneInterestQuery`/`ZonePosition` to express deterministic AOI queries that avoid N² scans and preserve ordering via `EntityHandle` sorting.
+- Upgraded the replication `VisibilityCullingService` to rely on the spatial index for AOI gating and to expose nearby-target queries for AI/combat surfaces. Visibility buckets now reuse pooled arrays and maintain deterministic ordering for tie-breakers.
+
 ## 3a) Thread-Boundary Mailbox Plans for Missing Systems
 
 ### Networking Transport & Message Routing
