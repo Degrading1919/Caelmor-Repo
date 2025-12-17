@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using Caelmor.Runtime.Tick;
+using Caelmor.Runtime.Diagnostics;
 
 namespace Caelmor.Runtime.WorldSimulation
 {
@@ -17,6 +18,7 @@ namespace Caelmor.Runtime.WorldSimulation
     {
         public const int TickRateHz = 10;
         public static readonly TimeSpan TickInterval = TimeSpan.FromMilliseconds(100);
+        private const int MaxCatchUpTicksPerLoop = 3;
 
         private readonly ISimulationEntityIndex _entities;
         private readonly List<ISimulationEligibilityGate> _eligibilityGates = new List<ISimulationEligibilityGate>();
@@ -35,6 +37,7 @@ namespace Caelmor.Runtime.WorldSimulation
         private readonly SimulationEffectBuffer _effectBuffer = new SimulationEffectBuffer();
 
         private readonly object _gate = new object();
+        private readonly TickDiagnostics _diagnostics = new TickDiagnostics();
 
         private long _participantSeq;
         private long _hookSeq;
@@ -177,11 +180,14 @@ namespace Caelmor.Runtime.WorldSimulation
             }
         }
 
+        public TickDiagnosticsSnapshot Diagnostics => _diagnostics.Snapshot();
+
         private void RunLoop(CancellationToken token)
         {
             var stopwatch = Stopwatch.StartNew();
             long tickCounter = 0;
             var nextTickAt = TickInterval;
+            var tickStopwatch = new Stopwatch();
 
             while (!token.IsCancellationRequested)
             {
@@ -202,12 +208,36 @@ namespace Caelmor.Runtime.WorldSimulation
                     continue;
                 }
 
-                while (now >= nextTickAt && !token.IsCancellationRequested)
+                var catchUpExecuted = 0;
+                bool clamped = false;
+
+                while (now >= nextTickAt && !token.IsCancellationRequested && catchUpExecuted < MaxCatchUpTicksPerLoop)
                 {
+                    tickStopwatch.Restart();
                     ExecuteOneTick(TickInterval);
+                    tickStopwatch.Stop();
+
+                    var duration = tickStopwatch.Elapsed;
+                    var overrun = duration > TickInterval;
+                    _diagnostics.RecordTick(duration, overrun, catchUpClamped: false);
+
                     tickCounter++;
+                    catchUpExecuted++;
                     nextTickAt = TimeSpan.FromTicks(TickInterval.Ticks * (tickCounter + 1));
                     now = stopwatch.Elapsed;
+                }
+
+                if (now >= nextTickAt && catchUpExecuted >= MaxCatchUpTicksPerLoop)
+                {
+                    var ticksBehind = (long)((now - nextTickAt).Ticks / TickInterval.Ticks) + 1;
+                    tickCounter += ticksBehind;
+                    nextTickAt = TimeSpan.FromTicks(TickInterval.Ticks * (tickCounter + 1));
+                    clamped = true;
+                }
+
+                if (clamped)
+                {
+                    _diagnostics.RecordTick(TimeSpan.Zero, overrun: true, catchUpClamped: true);
                 }
             }
         }
