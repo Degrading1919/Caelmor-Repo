@@ -293,28 +293,36 @@ namespace Caelmor.Runtime.WorldSimulation
             var tickIndex = Interlocked.Increment(ref _tickIndex);
             var tickContext = new SimulationTickContext(tickIndex, fixedDelta, _effectBuffer);
 
-            var eligibilitySnapshot = EvaluateEligibility(entities, gateCount);
-
-            // Phase 1: Pre-Tick Gate Evaluation completed by EvaluateEligibility above.
-            for (int i = 0; i < hookCount; i++)
-                hooks[i].Hook.OnPreTick(tickContext, eligibilitySnapshot.EligibleView);
-
-            // Phase 2: Simulation Execution.
-            for (int p = 0; p < participantCount; p++)
+            _effectBuffer.BeginTick(tickIndex);
+            try
             {
-                var participant = participants[p].Participant;
-                for (int e = 0; e < eligibilitySnapshot.EligibleCount; e++)
+                var eligibilitySnapshot = EvaluateEligibility(entities, gateCount);
+
+                // Phase 1: Pre-Tick Gate Evaluation completed by EvaluateEligibility above.
+                for (int i = 0; i < hookCount; i++)
+                    hooks[i].Hook.OnPreTick(tickContext, eligibilitySnapshot.EligibleView);
+
+                // Phase 2: Simulation Execution.
+                for (int p = 0; p < participantCount; p++)
                 {
-                    participant.Execute(eligibilitySnapshot.EligibleEntities[e], tickContext);
+                    var participant = participants[p].Participant;
+                    for (int e = 0; e < eligibilitySnapshot.EligibleCount; e++)
+                    {
+                        participant.Execute(eligibilitySnapshot.EligibleEntities[e], tickContext);
+                    }
                 }
+
+                // Phase 3: Post-Tick Finalization.
+                EnsureEligibilityStable(entities, gates, gateCount, eligibilitySnapshot);
+                _effectBuffer.Commit();
+
+                for (int i = 0; i < hookCount; i++)
+                    hooks[i].Hook.OnPostTick(tickContext, eligibilitySnapshot.EligibleView);
             }
-
-            // Phase 3: Post-Tick Finalization.
-            EnsureEligibilityStable(entities, gates, gateCount, eligibilitySnapshot);
-            _effectBuffer.Commit();
-
-            for (int i = 0; i < hookCount; i++)
-                hooks[i].Hook.OnPostTick(tickContext, eligibilitySnapshot.EligibleView);
+            finally
+            {
+                _effectBuffer.EndTick();
+            }
         }
 
         private EligibilitySnapshot EvaluateEligibility(EntityHandle[] entities, int gateCount)
@@ -541,30 +549,209 @@ namespace Caelmor.Runtime.WorldSimulation
             _buffer = buffer;
         }
 
-        public void BufferEffect(string label, Action commit)
+        public void BufferEffect(in SimulationEffectCommand command) => _buffer.Buffer(command);
+    }
+
+    internal enum SimulationEffectCommandType : byte
+    {
+        None = 0,
+        CombatOutcomeCommit = 1,
+        FlagSignal = 2,
+        AppendLog = 3
+    }
+
+    /// <summary>
+    /// Effect command recorded during tick execution.
+    /// </summary>
+    public readonly struct SimulationEffectCommand
+    {
+        private readonly SimulationEffectCommandType _type;
+        private readonly string _label;
+        private readonly EntityHandle _entity;
+        private readonly CombatResolutionResult? _combatResolution;
+        private readonly ICombatOutcomeCommitSink? _combatCommitSink;
+        private readonly EffectFlagMarker? _flagMarker;
+        private readonly IList<string>? _logTarget;
+        private readonly string? _logEntry;
+
+        private SimulationEffectCommand(
+            SimulationEffectCommandType type,
+            string label,
+            EntityHandle entity,
+            CombatResolutionResult? combatResolution,
+            ICombatOutcomeCommitSink? combatCommitSink,
+            EffectFlagMarker? flagMarker,
+            IList<string>? logTarget,
+            string? logEntry)
         {
-            _buffer.Buffer(label, commit);
+            _type = type;
+            _label = label ?? string.Empty;
+            _entity = entity;
+            _combatResolution = combatResolution;
+            _combatCommitSink = combatCommitSink;
+            _flagMarker = flagMarker;
+            _logTarget = logTarget;
+            _logEntry = logEntry;
+        }
+
+        internal SimulationEffectCommandType Type => _type;
+        internal string Label => _label;
+        internal EntityHandle Entity => _entity;
+        internal CombatResolutionResult? CombatResolution => _combatResolution;
+        internal ICombatOutcomeCommitSink? CombatCommitSink => _combatCommitSink;
+        internal EffectFlagMarker? FlagMarker => _flagMarker;
+        internal IList<string>? LogTarget => _logTarget;
+        internal string? LogEntry => _logEntry;
+
+        public static SimulationEffectCommand CombatOutcomeCommit(
+            EntityHandle entity,
+            ICombatOutcomeCommitSink commitSink,
+            CombatResolutionResult resolution,
+            string label = "combat_outcome")
+        {
+            if (commitSink is null) throw new ArgumentNullException(nameof(commitSink));
+            if (resolution is null) throw new ArgumentNullException(nameof(resolution));
+            return new SimulationEffectCommand(
+                SimulationEffectCommandType.CombatOutcomeCommit,
+                label,
+                entity,
+                resolution,
+                commitSink,
+                null,
+                null,
+                null);
+        }
+
+        public static SimulationEffectCommand FlagSignal(EffectFlagMarker marker, string label = "flag_signal")
+        {
+            if (marker is null) throw new ArgumentNullException(nameof(marker));
+            return new SimulationEffectCommand(
+                SimulationEffectCommandType.FlagSignal,
+                label,
+                default,
+                null,
+                null,
+                marker,
+                null,
+                null);
+        }
+
+        public static SimulationEffectCommand AppendLog(IList<string> target, string entry, string label = "append_log")
+        {
+            if (target is null) throw new ArgumentNullException(nameof(target));
+            if (entry is null) throw new ArgumentNullException(nameof(entry));
+            return new SimulationEffectCommand(
+                SimulationEffectCommandType.AppendLog,
+                label,
+                default,
+                null,
+                null,
+                null,
+                target,
+                entry);
         }
     }
 
+    /// <summary>
+    /// Effect buffer optimized for zero-allocation steady state usage.
+    /// </summary>
     internal sealed class SimulationEffectBuffer
     {
-        private readonly List<(string label, Action commit)> _effects = new List<(string label, Action commit)>();
+        private const int MaxBufferedEffects = 512;
+        private readonly List<SimulationEffectCommand> _effects = new List<SimulationEffectCommand>(MaxBufferedEffects);
+        private bool _tickWindowOpen;
+        private long _tickIndex;
 
-        public void Buffer(string label, Action commit)
+        public void BeginTick(long tickIndex)
         {
-            if (commit is null) throw new ArgumentNullException(nameof(commit));
-            _effects.Add((label ?? string.Empty, commit));
+            if (_tickWindowOpen)
+                throw new InvalidOperationException("Effect buffering tick window already open.");
+
+#if DEBUG
+            if (_effects.Count != 0)
+                throw new InvalidOperationException("Effect buffer must be empty at tick start.");
+#endif
+
+            _tickWindowOpen = true;
+            _tickIndex = tickIndex;
+        }
+
+        public void Buffer(in SimulationEffectCommand command)
+        {
+            if (!_tickWindowOpen)
+                throw new InvalidOperationException("Effects can only be buffered during tick execution.");
+
+            var nextIndex = _effects.Count + 1;
+#if DEBUG
+            if (nextIndex > MaxBufferedEffects)
+                throw new InvalidOperationException($"Buffered effects exceeded budget ({MaxBufferedEffects}).");
+#endif
+            if (nextIndex > _effects.Capacity)
+                throw new InvalidOperationException("Effect buffer capacity exhausted.");
+
+            _effects.Add(command);
         }
 
         public void Commit()
         {
+            if (!_tickWindowOpen)
+                throw new InvalidOperationException("Commit can only execute during an open tick window.");
+
+#if DEBUG
+            if (_tickIndex == 0)
+                throw new InvalidOperationException("Tick index was not initialized for effect buffer.");
+#endif
+
             for (int i = 0; i < _effects.Count; i++)
             {
-                _effects[i].commit();
+                Apply(in _effects[i]);
             }
+
             _effects.Clear();
         }
+
+        public void EndTick()
+        {
+            if (!_tickWindowOpen)
+                throw new InvalidOperationException("Effect buffering tick window was not open.");
+
+            _effects.Clear();
+            _tickWindowOpen = false;
+            _tickIndex = 0;
+        }
+
+        private static void Apply(in SimulationEffectCommand command)
+        {
+            switch (command.Type)
+            {
+                case SimulationEffectCommandType.CombatOutcomeCommit:
+                    Debug.Assert(command.CombatCommitSink != null, "CombatOutcomeCommit requires sink.");
+                    Debug.Assert(command.CombatResolution != null, "CombatOutcomeCommit requires resolution.");
+                    command.CombatCommitSink!.Commit(command.Entity, command.CombatResolution!);
+                    break;
+                case SimulationEffectCommandType.FlagSignal:
+                    Debug.Assert(command.FlagMarker != null, "FlagSignal requires marker.");
+                    command.FlagMarker!.Mark();
+                    break;
+                case SimulationEffectCommandType.AppendLog:
+                    Debug.Assert(command.LogTarget != null, "AppendLog requires target.");
+                    Debug.Assert(command.LogEntry != null, "AppendLog requires entry.");
+                    command.LogTarget!.Add(command.LogEntry!);
+                    break;
+                default:
+                    throw new InvalidOperationException($"Unknown effect command type {command.Type}.");
+            }
+        }
+    }
+
+    /// <summary>
+    /// Marker used by validation helpers and diagnostics to record effect commits without allocations.
+    /// </summary>
+    public sealed class EffectFlagMarker
+    {
+        public bool IsMarked { get; private set; }
+
+        public void Mark() => IsMarked = true;
     }
 
     /// <summary>

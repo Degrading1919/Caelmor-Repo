@@ -89,12 +89,12 @@ namespace Caelmor.Validation.WorldSimulation
                 var rig = Rig.Create(new[] { new EntityHandle(3) });
                 var mutableGate = new MutableGate(true);
                 rig.Core.RegisterEligibilityGate(mutableGate);
+                var effectMarker = new EffectFlagMarker();
 
-                bool effectCommitted = false;
                 rig.Participant.OnExecute = (entity, ctx) =>
                 {
                     mutableGate.IsAllowed = false; // Attempt to revoke eligibility mid-tick.
-                    ctx.BufferEffect("effect", () => effectCommitted = true);
+                    ctx.BufferEffect(SimulationEffectCommand.FlagSignal(effectMarker, label: "effect"));
                 };
 
                 try
@@ -107,7 +107,7 @@ namespace Caelmor.Validation.WorldSimulation
                     // Expected invariant violation.
                 }
 
-                a.False(effectCommitted, "Buffered effects must not commit when invariants are violated.");
+                a.False(effectMarker.IsMarked, "Buffered effects must not commit when invariants are violated.");
             }
         }
 
@@ -179,7 +179,7 @@ namespace Caelmor.Validation.WorldSimulation
                 rig.Participant.OnExecute = (entity, ctx) =>
                 {
                     log.Add("simulate");
-                    ctx.BufferEffect("commit", () => log.Add("commit"));
+                    ctx.BufferEffect(SimulationEffectCommand.AppendLog(log, entry: "commit", label: "commit"));
                 };
 
                 rig.Core.ExecuteSingleTick();

@@ -93,9 +93,11 @@ namespace Caelmor.Combat
 
             var resolution = _resolutionEngine.Resolve(gated);
 
-            context.BufferEffect(
-                label: $"combat_commit:{entity.Value}",
-                commit: () => _commitSink.Commit(entity, resolution));
+            context.BufferEffect(SimulationEffectCommand.CombatOutcomeCommit(
+                entity: entity,
+                commitSink: _commitSink,
+                resolution: resolution,
+                label: "combat_commit"));
         }
 
         private static List<FrozenIntentRecord> FilterIntentsForEntity(FrozenQueueSnapshot frozen, string entityId)
