@@ -1,6 +1,7 @@
 using System;
 using Caelmor.Runtime.Integration;
 using Caelmor.Runtime.Onboarding;
+using Caelmor.Runtime.Persistence;
 using Caelmor.Runtime.Tick;
 using Caelmor.Runtime.Transport;
 using Caelmor.Runtime.WorldSimulation;
@@ -12,6 +13,7 @@ namespace Caelmor.Runtime.Host
     /// Server-side runtime loop coordinator. Owns deterministic start/stop and cleanup paths
     /// for transport routing, handshakes, command ingestion, visibility caches, and entity registration.
     /// Ensures no lingering registrations across disconnects, zone unloads, or server shutdown.
+    /// Persistence completions are staged through a bounded mailbox and drained on the tick thread via phase hooks.
     /// </summary>
     public sealed class RuntimeServerLoop : IDisposable
     {
@@ -21,6 +23,7 @@ namespace Caelmor.Runtime.Host
         private readonly AuthoritativeCommandIngestor _commands;
         private readonly VisibilityCullingService _visibility;
         private readonly DeterministicEntityRegistry _entities;
+        private readonly PersistenceCompletionQueue _persistenceCompletions;
 
         private readonly object _gate = new object();
         private bool _started;
@@ -31,7 +34,8 @@ namespace Caelmor.Runtime.Host
             SessionHandshakePipeline handshakes,
             AuthoritativeCommandIngestor commands,
             VisibilityCullingService visibility,
-            DeterministicEntityRegistry entities)
+            DeterministicEntityRegistry entities,
+            PersistenceCompletionQueue persistenceCompletions = null)
         {
             _simulation = simulation ?? throw new ArgumentNullException(nameof(simulation));
             _transport = transport ?? throw new ArgumentNullException(nameof(transport));
@@ -39,6 +43,7 @@ namespace Caelmor.Runtime.Host
             _commands = commands ?? throw new ArgumentNullException(nameof(commands));
             _visibility = visibility ?? throw new ArgumentNullException(nameof(visibility));
             _entities = entities ?? throw new ArgumentNullException(nameof(entities));
+            _persistenceCompletions = persistenceCompletions;
         }
 
         /// <summary>
@@ -53,10 +58,28 @@ namespace Caelmor.Runtime.Host
             DeterministicEntityRegistry entities,
             ReadOnlySpan<ISimulationEligibilityGate> eligibilityGates,
             ReadOnlySpan<ParticipantRegistration> participants,
-            ReadOnlySpan<PhaseHookRegistration> phaseHooks)
+            ReadOnlySpan<PhaseHookRegistration> phaseHooks,
+            PersistenceCompletionQueue persistenceCompletions = null,
+            IPersistenceCompletionApplier persistenceCompletionApplier = null,
+            int persistenceCompletionHookOrderKey = -1024)
         {
-            WorldBootstrapRegistration.Apply(simulation, eligibilityGates, participants, phaseHooks);
-            return new RuntimeServerLoop(simulation, transport, handshakes, commands, visibility, entities);
+            ReadOnlySpan<PhaseHookRegistration> hooksSpan = phaseHooks;
+            PhaseHookRegistration[] combinedHooks = null;
+
+            if (persistenceCompletions != null && persistenceCompletionApplier != null)
+            {
+                combinedHooks = new PhaseHookRegistration[phaseHooks.Length + 1];
+                for (int i = 0; i < phaseHooks.Length; i++)
+                    combinedHooks[i] = phaseHooks[i];
+
+                combinedHooks[^1] = new PhaseHookRegistration(
+                    new PersistenceCompletionPhaseHook(persistenceCompletions, persistenceCompletionApplier),
+                    persistenceCompletionHookOrderKey);
+                hooksSpan = combinedHooks;
+            }
+
+            WorldBootstrapRegistration.Apply(simulation, eligibilityGates, participants, hooksSpan);
+            return new RuntimeServerLoop(simulation, transport, handshakes, commands, visibility, entities, persistenceCompletions);
         }
 
         public void Start()
@@ -135,6 +158,7 @@ namespace Caelmor.Runtime.Host
             _commands.Clear();
             _visibility.Clear();
             _entities.ClearAll();
+            _persistenceCompletions?.Clear();
         }
     }
 }

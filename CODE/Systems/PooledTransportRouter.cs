@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Caelmor.ClientReplication;
 using Caelmor.Runtime;
+using Caelmor.Runtime.Diagnostics;
 using Caelmor.Runtime.Onboarding;
 
 namespace Caelmor.Runtime.Transport
@@ -93,6 +94,8 @@ namespace Caelmor.Runtime.Transport
         /// </summary>
         public int RouteQueuedInbound()
         {
+            TickThreadAssert.AssertTickThread();
+
             int processed = 0;
             lock (_inboundGate)
             {
@@ -135,6 +138,8 @@ namespace Caelmor.Runtime.Transport
         public void RouteSnapshot(ClientReplicationSnapshot snapshot)
         {
             if (snapshot == null) throw new ArgumentNullException(nameof(snapshot));
+
+            TickThreadAssert.AssertTickThread();
 
             lock (_snapshotGate)
             {
