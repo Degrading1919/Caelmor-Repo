@@ -1,7 +1,6 @@
 using System;
 using System.Buffers;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using Caelmor.Runtime.Diagnostics;
@@ -226,13 +225,26 @@ namespace Caelmor.Runtime.Transport
 
         public CommandIngressMetrics SnapshotMetrics()
         {
-            var perSession = new List<SessionQueueMetricsSnapshot>(_metrics.Count);
-            foreach (var kvp in _metrics.OrderBy(k => k.Key.Value))
+            int count = _metrics.Count;
+            if (count == 0)
+                return new CommandIngressMetrics(Array.Empty<SessionQueueMetricsSnapshot>());
+
+            var keys = ArrayPool<SessionId>.Shared.Rent(count);
+            int index = 0;
+            foreach (var kvp in _metrics)
+                keys[index++] = kvp.Key;
+
+            Array.Sort(keys, 0, count, SessionIdValueComparer.Instance);
+
+            var perSession = new List<SessionQueueMetricsSnapshot>(count);
+            for (int i = 0; i < count; i++)
             {
-                _bytesBySession.TryGetValue(kvp.Key, out int bytes);
-                perSession.Add(new SessionQueueMetricsSnapshot(kvp.Key, kvp.Value, bytes));
+                var sessionId = keys[i];
+                _bytesBySession.TryGetValue(sessionId, out int bytes);
+                perSession.Add(new SessionQueueMetricsSnapshot(sessionId, _metrics[sessionId], bytes));
             }
 
+            ArrayPool<SessionId>.Shared.Return(keys, clearArray: true);
             return new CommandIngressMetrics(perSession);
         }
     }
@@ -309,6 +321,9 @@ namespace Caelmor.Runtime.Transport
     /// Transport router that ties inbound command ingestion to outbound snapshot delivery.
     /// Policies are deterministic: inbound overflow is rejected, outbound overflow drops oldest snapshots.
     /// </summary>
+    // IL2CPP/AOT SAFETY: Runtime transport routing must never rely on Reflection.Emit or dynamic proxies.
+    // Any reflection-based access must be explicitly preserved (none used here), and managed stripping
+    // assumptions must be guarded by explicit registration in build pipelines.
     public sealed class DeterministicTransportRouter
     {
         private readonly AuthoritativeCommandIngress _ingress;
@@ -482,13 +497,26 @@ namespace Caelmor.Runtime.Transport
 
         public SnapshotQueueMetrics SnapshotMetrics()
         {
-            var perSession = new List<SessionQueueMetricsSnapshot>(_metrics.Count);
-            foreach (var kvp in _metrics.OrderBy(k => k.Key.Value))
+            int count = _metrics.Count;
+            if (count == 0)
+                return new SnapshotQueueMetrics(Array.Empty<SessionQueueMetricsSnapshot>());
+
+            var keys = ArrayPool<SessionId>.Shared.Rent(count);
+            int index = 0;
+            foreach (var kvp in _metrics)
+                keys[index++] = kvp.Key;
+
+            Array.Sort(keys, 0, count, SessionIdValueComparer.Instance);
+
+            var perSession = new List<SessionQueueMetricsSnapshot>(count);
+            for (int i = 0; i < count; i++)
             {
-                _bytesBySession.TryGetValue(kvp.Key, out int bytes);
-                perSession.Add(new SessionQueueMetricsSnapshot(kvp.Key, kvp.Value, bytes));
+                var sessionId = keys[i];
+                _bytesBySession.TryGetValue(sessionId, out int bytes);
+                perSession.Add(new SessionQueueMetricsSnapshot(sessionId, _metrics[sessionId], bytes));
             }
 
+            ArrayPool<SessionId>.Shared.Return(keys, clearArray: true);
             return new SnapshotQueueMetrics(perSession);
         }
 
@@ -655,12 +683,25 @@ namespace Caelmor.Runtime.Transport
 
         public PersistenceQueueMetrics SnapshotMetrics()
         {
-            var perPlayer = new List<PersistenceQueueMetricsSnapshot>(_metrics.Count);
-            foreach (var kvp in _metrics.OrderBy(k => k.Key.Value))
+            int count = _metrics.Count;
+            if (count == 0)
+                return new PersistenceQueueMetrics(Array.Empty<PersistenceQueueMetricsSnapshot>(), _globalQueue.Count);
+
+            var keys = ArrayPool<PlayerId>.Shared.Rent(count);
+            int index = 0;
+            foreach (var kvp in _metrics)
+                keys[index++] = kvp.Key;
+
+            Array.Sort(keys, 0, count, PlayerIdValueComparer.Instance);
+
+            var perPlayer = new List<PersistenceQueueMetricsSnapshot>(count);
+            for (int i = 0; i < count; i++)
             {
-                perPlayer.Add(new PersistenceQueueMetricsSnapshot(kvp.Key, kvp.Value));
+                var playerId = keys[i];
+                perPlayer.Add(new PersistenceQueueMetricsSnapshot(playerId, _metrics[playerId]));
             }
 
+            ArrayPool<PlayerId>.Shared.Return(keys, clearArray: true);
             return new PersistenceQueueMetrics(perPlayer, _globalQueue.Count);
         }
     }
@@ -701,6 +742,20 @@ namespace Caelmor.Runtime.Transport
         public SessionQueueMetrics Metrics { get; }
     }
 
+    internal sealed class SessionIdValueComparer : IComparer<SessionId>
+    {
+        public static readonly SessionIdValueComparer Instance = new SessionIdValueComparer();
+
+        public int Compare(SessionId x, SessionId y) => x.Value.CompareTo(y.Value);
+    }
+
+    internal sealed class PlayerIdValueComparer : IComparer<PlayerId>
+    {
+        public static readonly PlayerIdValueComparer Instance = new PlayerIdValueComparer();
+
+        public int Compare(PlayerId x, PlayerId y) => x.Value.CompareTo(y.Value);
+    }
+
     /// <summary>
     /// Deterministic delta serializer for replication snapshots. Keeps a per-session baseline
     /// of the last fingerprints and emits only changed/removed entries.
@@ -735,8 +790,8 @@ namespace Caelmor.Runtime.Transport
                     _removed.Add(kvp.Key);
             }
 
-            _changed.Sort((a, b) => a.entity.Value.CompareTo(b.entity.Value));
-            _removed.Sort((a, b) => a.Value.CompareTo(b.Value));
+            _changed.Sort(ChangedEntryComparer.Instance);
+            _removed.Sort(EntityHandleComparer.Instance);
 
             int totalBytes = ComputeLength(snapshot.AuthoritativeTick, _changed, _removed);
             var buffer = ArrayPool<byte>.Shared.Rent(totalBytes);
@@ -810,6 +865,23 @@ namespace Caelmor.Runtime.Transport
             int byteCount = Encoding.UTF8.GetBytes(value, 0, value.Length, buffer, offset + sizeof(int));
             WriteInt32(buffer, ref offset, byteCount);
             offset += byteCount;
+        }
+
+        private sealed class ChangedEntryComparer : IComparer<(EntityHandle entity, string fingerprint)>
+        {
+            public static readonly ChangedEntryComparer Instance = new ChangedEntryComparer();
+
+            public int Compare((EntityHandle entity, string fingerprint) x, (EntityHandle entity, string fingerprint) y)
+            {
+                return x.entity.Value.CompareTo(y.entity.Value);
+            }
+        }
+
+        private sealed class EntityHandleComparer : IComparer<EntityHandle>
+        {
+            public static readonly EntityHandleComparer Instance = new EntityHandleComparer();
+
+            public int Compare(EntityHandle x, EntityHandle y) => x.Value.CompareTo(y.Value);
         }
     }
 
