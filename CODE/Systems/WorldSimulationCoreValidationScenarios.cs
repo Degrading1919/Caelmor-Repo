@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Caelmor.Runtime;
+using Caelmor.Runtime.Onboarding;
+using Caelmor.Runtime.Persistence;
 using Caelmor.Runtime.Tick;
 using Caelmor.Runtime.WorldSimulation;
 using Caelmor.Systems;
@@ -23,7 +26,8 @@ namespace Caelmor.Validation.WorldSimulation
                 new ValidationScenarioAdapter(new Scenario3_MidTickEligibilityChangeRejected()),
                 new ValidationScenarioAdapter(new Scenario4_DeterministicExecutionOrder()),
                 new ValidationScenarioAdapter(new Scenario5_NonEligibleEntitiesAreExcluded()),
-                new ValidationScenarioAdapter(new Scenario6_NoSideEffectsEscapeTickBoundary())
+                new ValidationScenarioAdapter(new Scenario6_NoSideEffectsEscapeTickBoundary()),
+                new ValidationScenarioAdapter(new Scenario7_PersistenceCompletionsAppliedOnTick())
             };
         }
 
@@ -189,6 +193,46 @@ namespace Caelmor.Validation.WorldSimulation
                 a.Equal("simulate", log[1], "Simulation must execute after pre.");
                 a.Equal("commit", log[2], "Side effects must commit at tick end only.");
                 a.Equal("post", log[3], "Post-tick finalization must complete after commits.");
+            }
+        }
+
+        private sealed class Scenario7_PersistenceCompletionsAppliedOnTick : Caelmor.Validation.IValidationScenario
+        {
+            public string Name => "Scenario 7 — Persistence completions applied on tick";
+
+            public void Run(IAssert a)
+            {
+                var counters = new PersistencePipelineCounters();
+                var config = RuntimeBackpressureConfig.Default;
+                var completionQueue = new PersistenceCompletionQueue(config, counters);
+                var writeQueue = new PersistenceWriteQueue(config, counters);
+                var writer = new InMemoryPersistenceWriter();
+                var worker = new PersistenceWorkerLoop(writeQueue, completionQueue, writer, counters, maxPerIteration: 4, idleDelayMs: 0);
+                var applyState = new PersistenceApplyState();
+                var applier = new PersistenceCompletionApplier(applyState, counters);
+
+                var core = new WorldSimulationCore(new DeterministicEntityIndex(Array.Empty<EntityHandle>()));
+                core.RegisterPhaseHook(new PersistenceCompletionPhaseHook(completionQueue, applier), orderKey: -10);
+
+                var saveId = new SaveId(Guid.NewGuid());
+                var playerId = new PlayerId(Guid.NewGuid());
+                var request = new PersistenceWriteRequest(saveId, playerId, estimatedBytes: 32, operationLabel: "validation");
+
+                writeQueue.Enqueue(playerId, request);
+
+                worker.PumpOnce();
+                core.ExecuteSingleTick();
+
+                a.True(applyState.TryGetLatest(saveId, out var record), "Completion must be applied to state.");
+                a.Equal(PersistenceCompletionStatus.Succeeded, record.Status, "Persistence write must succeed.");
+                a.Equal(request.OperationLabel, record.Request.OperationLabel, "Applied record must match request.");
+
+                var snapshot = counters.Snapshot();
+                a.True(snapshot.RequestsEnqueued >= 1, "RequestsEnqueued counter must increment.");
+                a.True(snapshot.RequestsDrained >= 1, "RequestsDrained counter must increment.");
+                a.True(snapshot.WritesSucceeded >= 1, "WritesSucceeded counter must increment.");
+                a.True(snapshot.CompletionsApplied >= 1, "CompletionsApplied counter must increment.");
+                a.True(snapshot.WriteBacklogPeakCount >= 1, "Backlog peak should reflect enqueued request.");
             }
         }
 

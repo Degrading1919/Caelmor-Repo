@@ -884,6 +884,8 @@ namespace Caelmor.Runtime.Transport
     public sealed class PersistenceWriteQueue
     {
         private readonly RuntimeBackpressureConfig _config;
+        private readonly object _gate = new object();
+        private readonly PersistencePipelineCounters? _counters;
         private readonly Queue<PersistenceWriteRecord> _globalQueue = new Queue<PersistenceWriteRecord>();
         private readonly Dictionary<PlayerId, Queue<PersistenceWriteRecord>> _perPlayer = new Dictionary<PlayerId, Queue<PersistenceWriteRecord>>();
         private readonly Dictionary<PlayerId, int> _bytesByPlayer = new Dictionary<PlayerId, int>();
@@ -895,44 +897,51 @@ namespace Caelmor.Runtime.Transport
         private PlayerId[] _snapshotKeys = Array.Empty<PlayerId>();
         private PersistenceQueueMetricsSnapshot[] _snapshotBuffer = Array.Empty<PersistenceQueueMetricsSnapshot>();
 
-        public PersistenceWriteQueue(RuntimeBackpressureConfig config)
+        public PersistenceWriteQueue(RuntimeBackpressureConfig config, PersistencePipelineCounters counters = null)
         {
             _config = config ?? throw new ArgumentNullException(nameof(config));
+            _counters = counters;
         }
 
         public void Enqueue(PlayerId playerId, PersistenceWriteRequest request)
         {
-            int payloadBytes = request.EstimatedBytes;
-            var record = new PersistenceWriteRecord(playerId, request);
-
-            if (!_perPlayer.TryGetValue(playerId, out var queue))
+            lock (_gate)
             {
-                queue = new Queue<PersistenceWriteRecord>();
-                _perPlayer[playerId] = queue;
+                int payloadBytes = request.EstimatedBytes;
+                var record = new PersistenceWriteRecord(playerId, request);
+
+                if (!_perPlayer.TryGetValue(playerId, out var queue))
+                {
+                    queue = new Queue<PersistenceWriteRecord>();
+                    _perPlayer[playerId] = queue;
+                }
+
+                if (!_metrics.TryGetValue(playerId, out var metrics))
+                    metrics = new SessionQueueMetrics();
+
+                _bytesByPlayer.TryGetValue(playerId, out var currentBytes);
+
+                queue.Enqueue(record);
+                _globalQueue.Enqueue(record);
+                currentBytes += payloadBytes;
+                _bytesByPlayer[playerId] = currentBytes;
+                _globalBytes += payloadBytes;
+
+                metrics.Peak = Math.Max(metrics.Peak, queue.Count);
+                metrics.Current = queue.Count;
+                metrics.CurrentBytes = currentBytes;
+                metrics.PeakBytes = Math.Max(metrics.PeakBytes, currentBytes);
+                _metrics[playerId] = metrics;
+
+                _globalPeakCount = Math.Max(_globalPeakCount, _globalQueue.Count);
+                _globalPeakBytes = Math.Max(_globalPeakBytes, _globalBytes);
+
+                EnforceCaps(playerId, queue);
+                EnforceGlobalCap();
+
+                _counters?.RecordRequestEnqueued(_globalQueue.Count, _globalBytes);
+                _counters?.RecordWriteBacklog(_globalPeakCount, _globalPeakBytes);
             }
-
-            if (!_metrics.TryGetValue(playerId, out var metrics))
-                metrics = new SessionQueueMetrics();
-
-            _bytesByPlayer.TryGetValue(playerId, out var currentBytes);
-
-            queue.Enqueue(record);
-            _globalQueue.Enqueue(record);
-            currentBytes += payloadBytes;
-            _bytesByPlayer[playerId] = currentBytes;
-            _globalBytes += payloadBytes;
-
-            metrics.Peak = Math.Max(metrics.Peak, queue.Count);
-            metrics.Current = queue.Count;
-            metrics.CurrentBytes = currentBytes;
-            metrics.PeakBytes = Math.Max(metrics.PeakBytes, currentBytes);
-            _metrics[playerId] = metrics;
-
-            _globalPeakCount = Math.Max(_globalPeakCount, _globalQueue.Count);
-            _globalPeakBytes = Math.Max(_globalPeakBytes, _globalBytes);
-
-            EnforceCaps(playerId, queue);
-            EnforceGlobalCap();
         }
 
         private void EnforceCaps(PlayerId playerId, Queue<PersistenceWriteRecord> queue)
@@ -951,6 +960,7 @@ namespace Caelmor.Runtime.Transport
                 metrics.DroppedBytes += droppedBytes;
                 metrics.Trims++;
                 RemoveFromGlobal(dropped, droppedBytes, countAsTrim: true);
+                _counters?.RecordDrop();
             }
 
             metrics.Current = queue.Count;
@@ -970,11 +980,12 @@ namespace Caelmor.Runtime.Transport
                 _globalBytes = Math.Max(0, _globalBytes - droppedBytes);
                 _globalTrims++;
 
-                DropFromPerPlayer(dropped, droppedBytes);
+                DropFromPerPlayer(dropped, droppedBytes, countAsTrim: true, countDrop: false);
+                _counters?.RecordDrop();
             }
         }
 
-        private void DropFromPerPlayer(in PersistenceWriteRecord dropped, int droppedBytes, bool countAsTrim = true)
+        private void DropFromPerPlayer(in PersistenceWriteRecord dropped, int droppedBytes, bool countAsTrim = true, bool countDrop = true)
         {
             if (!_perPlayer.TryGetValue(dropped.PlayerId, out var queue) || queue.Count == 0)
                 return;
@@ -1012,6 +1023,9 @@ namespace Caelmor.Runtime.Transport
             metrics.Peak = Math.Max(metrics.Peak, metrics.Current);
             metrics.PeakBytes = Math.Max(metrics.PeakBytes, playerBytes);
             _metrics[dropped.PlayerId] = metrics;
+
+            if (countDrop)
+                _counters?.RecordDrop();
         }
 
         private void RemoveFromGlobal(PersistenceWriteRecord dropped, int droppedBytes, bool countAsTrim)
@@ -1039,73 +1053,96 @@ namespace Caelmor.Runtime.Transport
 
         public bool TryDequeue(out PersistenceWriteRecord record)
         {
-            record = default;
-            if (_globalQueue.Count == 0)
-                return false;
-
-            record = _globalQueue.Dequeue();
-            var recordBytes = record.Request.EstimatedBytes;
-            _globalBytes = Math.Max(0, _globalBytes - recordBytes);
-
-            if (_perPlayer.TryGetValue(record.PlayerId, out var queue) && queue.Count > 0 && queue.Peek().Request.Equals(record.Request))
+            lock (_gate)
             {
-                queue.Dequeue();
-                _bytesByPlayer.TryGetValue(record.PlayerId, out var playerBytes);
-                playerBytes = Math.Max(0, playerBytes - recordBytes);
-                _bytesByPlayer[record.PlayerId] = playerBytes;
-                if (_metrics.TryGetValue(record.PlayerId, out var metrics))
+                record = default;
+                if (_globalQueue.Count == 0)
+                    return false;
+
+                record = _globalQueue.Dequeue();
+                var recordBytes = record.Request.EstimatedBytes;
+                _globalBytes = Math.Max(0, _globalBytes - recordBytes);
+
+                if (_perPlayer.TryGetValue(record.PlayerId, out var queue) && queue.Count > 0 && queue.Peek().Request.Equals(record.Request))
                 {
-                    metrics.Current = queue.Count;
-                    metrics.CurrentBytes = playerBytes;
-                    _metrics[record.PlayerId] = metrics;
+                    queue.Dequeue();
+                    _bytesByPlayer.TryGetValue(record.PlayerId, out var playerBytes);
+                    playerBytes = Math.Max(0, playerBytes - recordBytes);
+                    _bytesByPlayer[record.PlayerId] = playerBytes;
+                    if (_metrics.TryGetValue(record.PlayerId, out var metrics))
+                    {
+                        metrics.Current = queue.Count;
+                        metrics.CurrentBytes = playerBytes;
+                        _metrics[record.PlayerId] = metrics;
+                    }
                 }
-            }
-            else
-            {
-                DropFromPerPlayer(record, recordBytes, countAsTrim: false);
-            }
+                else
+                {
+                    DropFromPerPlayer(record, recordBytes, countAsTrim: false);
+                }
 
-            return true;
+                _counters?.RecordRequestDrained(_globalQueue.Count, _globalBytes);
+                _counters?.RecordWriteBacklog(_globalQueue.Count, _globalBytes);
+                return true;
+            }
         }
 
         public PersistenceQueueMetrics SnapshotMetrics()
         {
-            int count = _metrics.Count;
-            if (count == 0)
-                return new PersistenceQueueMetrics(Array.Empty<PersistenceQueueMetricsSnapshot>(), 0, default, _globalQueue.Count, _globalBytes, _globalPeakBytes, _globalPeakCount, _globalTrims);
-
-            EnsureCapacity(ref _snapshotKeys, count);
-            EnsureCapacity(ref _snapshotBuffer, count);
-
-            int index = 0;
-            foreach (var kvp in _metrics)
-                _snapshotKeys[index++] = kvp.Key;
-
-            Array.Sort(_snapshotKeys, 0, count, PlayerIdValueComparer.Instance);
-
-            int maxPeak = 0;
-            int maxPeakBytes = 0;
-            int totalDropped = 0;
-            int totalDroppedBytes = 0;
-            int totalTrims = 0;
-
-            for (int i = 0; i < count; i++)
+            lock (_gate)
             {
-                var playerId = _snapshotKeys[i];
-                var metrics = _metrics[playerId];
-                _snapshotBuffer[i] = new PersistenceQueueMetricsSnapshot(playerId, metrics);
+                int count = _metrics.Count;
+                if (count == 0)
+                    return new PersistenceQueueMetrics(Array.Empty<PersistenceQueueMetricsSnapshot>(), 0, default, _globalQueue.Count, _globalBytes, _globalPeakBytes, _globalPeakCount, _globalTrims);
 
-                if (metrics.Peak > maxPeak)
-                    maxPeak = metrics.Peak;
-                if (metrics.PeakBytes > maxPeakBytes)
-                    maxPeakBytes = metrics.PeakBytes;
-                totalDropped += metrics.Dropped;
-                totalDroppedBytes += metrics.DroppedBytes;
-                totalTrims += metrics.Trims;
+                EnsureCapacity(ref _snapshotKeys, count);
+                EnsureCapacity(ref _snapshotBuffer, count);
+
+                int index = 0;
+                foreach (var kvp in _metrics)
+                    _snapshotKeys[index++] = kvp.Key;
+
+                Array.Sort(_snapshotKeys, 0, count, PlayerIdValueComparer.Instance);
+
+                int maxPeak = 0;
+                int maxPeakBytes = 0;
+                int totalDropped = 0;
+                int totalDroppedBytes = 0;
+                int totalTrims = 0;
+
+                for (int i = 0; i < count; i++)
+                {
+                    var playerId = _snapshotKeys[i];
+                    var metrics = _metrics[playerId];
+                    _snapshotBuffer[i] = new PersistenceQueueMetricsSnapshot(playerId, metrics);
+
+                    if (metrics.Peak > maxPeak)
+                        maxPeak = metrics.Peak;
+                    if (metrics.PeakBytes > maxPeakBytes)
+                        maxPeakBytes = metrics.PeakBytes;
+                    totalDropped += metrics.Dropped;
+                    totalDroppedBytes += metrics.DroppedBytes;
+                    totalTrims += metrics.Trims;
+                }
+
+                var budget = new QueueBudgetSnapshot(maxPeak, maxPeakBytes, totalDropped, totalDroppedBytes, 0, 0, totalTrims);
+                return new PersistenceQueueMetrics(_snapshotBuffer, count, budget, _globalQueue.Count, _globalBytes, _globalPeakBytes, _globalPeakCount, _globalTrims);
             }
+        }
 
-            var budget = new QueueBudgetSnapshot(maxPeak, maxPeakBytes, totalDropped, totalDroppedBytes, 0, 0, totalTrims);
-            return new PersistenceQueueMetrics(_snapshotBuffer, count, budget, _globalQueue.Count, _globalBytes, _globalPeakBytes, _globalPeakCount, _globalTrims);
+        public void Clear()
+        {
+            lock (_gate)
+            {
+                _globalQueue.Clear();
+                _perPlayer.Clear();
+                _bytesByPlayer.Clear();
+                _metrics.Clear();
+                _globalBytes = 0;
+                _globalPeakBytes = 0;
+                _globalPeakCount = 0;
+                _globalTrims = 0;
+            }
         }
 
         private static void EnsureCapacity<T>(ref T[] buffer, int required)
