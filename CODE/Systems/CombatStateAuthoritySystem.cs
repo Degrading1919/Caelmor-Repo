@@ -4,6 +4,8 @@
 // No combat resolution, no damage/mitigation, no CombatEvents emission, no persistence.
 
 using System;
+using System.Buffers;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -129,19 +131,20 @@ namespace Caelmor.Combat
         /// - DOES NOT reorder intents
         /// - DOES NOT short-circuit evaluation
         /// </summary>
-        public GatedIntentBatch GateFrozenQueue(FrozenQueueSnapshot frozenQueue)
+        public GatedIntentBatch GateFrozenQueue(FrozenIntentBatch frozenBatch)
         {
-            if (frozenQueue == null) throw new ArgumentNullException(nameof(frozenQueue));
-
             // Pre-gating snapshot (read-only).
             var pre = CombatStateSnapshot.Capture(_statesByEntityId);
 
-            var gateRows = new List<IntentGateRow>(frozenQueue.Intents.Count);
-            var accepted = new List<FrozenIntentRecord>(capacity: frozenQueue.Intents.Count);
+            int capacity = Math.Max(1, frozenBatch.Count);
+            var gateRows = ArrayPool<IntentGateRow>.Shared.Rent(capacity);
+            var accepted = ArrayPool<FrozenIntentRecord>.Shared.Rent(capacity);
+            int gateRowCount = 0;
+            int acceptedCount = 0;
 
-            for (int i = 0; i < frozenQueue.Intents.Count; i++)
+            for (int i = 0; i < frozenBatch.Count; i++)
             {
-                var intent = frozenQueue.Intents[i];
+                var intent = frozenBatch[i];
 
                 // Deterministic evaluation order == frozen queue order.
                 var actorState = GetState(intent.ActorEntityId);
@@ -150,7 +153,7 @@ namespace Caelmor.Combat
                 if (!IsStructurallyValidState(actorState, out var invalidReason))
                 {
                     RejectIntent(intent, GateRejectReasonCodes.InvalidCombatState, invalidReason);
-                    gateRows.Add(IntentGateRow.Rejected(intent, GateRejectReasonCodes.InvalidCombatState));
+                    gateRows[gateRowCount++] = IntentGateRow.Rejected(intent, GateRejectReasonCodes.InvalidCombatState);
                     continue;
                 }
 
@@ -158,7 +161,7 @@ namespace Caelmor.Combat
                 if (!IsIntentAllowedInState(intent.IntentType, actorState.State))
                 {
                     RejectIntent(intent, GateRejectReasonCodes.IntentBlockedByState, actorState.State.ToString());
-                    gateRows.Add(IntentGateRow.Rejected(intent, GateRejectReasonCodes.IntentBlockedByState));
+                    gateRows[gateRowCount++] = IntentGateRow.Rejected(intent, GateRejectReasonCodes.IntentBlockedByState);
                     continue;
                 }
 
@@ -168,22 +171,24 @@ namespace Caelmor.Combat
                 if (actorState.State != CombatState.CombatIdle && string.IsNullOrWhiteSpace(actorState.CombatContextId))
                 {
                     RejectIntent(intent, GateRejectReasonCodes.MissingCombatContext, "combat_context_id missing for non-idle state");
-                    gateRows.Add(IntentGateRow.Rejected(intent, GateRejectReasonCodes.MissingCombatContext));
+                    gateRows[gateRowCount++] = IntentGateRow.Rejected(intent, GateRejectReasonCodes.MissingCombatContext);
                     continue;
                 }
 
                 // Accepted for downstream resolution (still not resolved; no outcomes here).
-                accepted.Add(intent);
-                gateRows.Add(IntentGateRow.Accepted(intent));
+                accepted[acceptedCount++] = intent;
+                gateRows[gateRowCount++] = IntentGateRow.Accepted(intent);
             }
 
             // Post-gating snapshot (still read-only; gating must not mutate state).
             var post = CombatStateSnapshot.Capture(_statesByEntityId);
 
-            var batch = new GatedIntentBatch(
-                authoritativeTick: frozenQueue.AuthoritativeTick,
-                acceptedIntentsInOrder: new ReadOnlyCollection<FrozenIntentRecord>(accepted),
-                gateResultsInOrder: new ReadOnlyCollection<IntentGateRow>(gateRows),
+            var batch = GatedIntentBatch.Create(
+                authoritativeTick: frozenBatch.AuthoritativeTick,
+                acceptedBuffer: accepted,
+                acceptedCount: acceptedCount,
+                gateResultBuffer: gateRows,
+                gateResultCount: gateRowCount,
                 preGatingStateSnapshot: pre,
                 postGatingStateSnapshot: post
             );
@@ -467,30 +472,173 @@ namespace Caelmor.Combat
 
     public sealed class GatedIntentBatch
     {
-        public int AuthoritativeTick { get; }
+        public int AuthoritativeTick { get; private set; }
 
         // Ordered accepted intents (preserves frozen ordering subset).
-        public IReadOnlyList<FrozenIntentRecord> AcceptedIntentsInOrder { get; }
+        public FrozenIntentBatch AcceptedIntentsInOrder { get; private set; }
 
         // Ordered disposition rows for every intent in the frozen queue.
-        public IReadOnlyList<IntentGateRow> GateResultsInOrder { get; }
+        public IntentGateRowListView GateResultsInOrder { get; private set; }
 
         // Validation snapshots
-        public CombatStateSnapshot PreGatingStateSnapshot { get; }
-        public CombatStateSnapshot PostGatingStateSnapshot { get; }
+        public CombatStateSnapshot PreGatingStateSnapshot { get; private set; }
+        public CombatStateSnapshot PostGatingStateSnapshot { get; private set; }
 
-        public GatedIntentBatch(
+        private FrozenIntentRecord[] _acceptedBuffer;
+        private int _acceptedCount;
+        private IntentGateRow[] _gateResultBuffer;
+        private int _gateResultCount;
+        private bool _released;
+
+        private GatedIntentBatch()
+        {
+            _acceptedBuffer = Array.Empty<FrozenIntentRecord>();
+            _gateResultBuffer = Array.Empty<IntentGateRow>();
+            _acceptedCount = 0;
+            _gateResultCount = 0;
+            AcceptedIntentsInOrder = new FrozenIntentBatch(0, Array.Empty<FrozenIntentRecord>(), 0);
+            GateResultsInOrder = new IntentGateRowListView(Array.Empty<IntentGateRow>(), 0);
+            PreGatingStateSnapshot = default!;
+            PostGatingStateSnapshot = default!;
+            _released = false;
+        }
+
+        public static GatedIntentBatch Create(
             int authoritativeTick,
-            IReadOnlyList<FrozenIntentRecord> acceptedIntentsInOrder,
-            IReadOnlyList<IntentGateRow> gateResultsInOrder,
+            FrozenIntentRecord[] acceptedBuffer,
+            int acceptedCount,
+            IntentGateRow[] gateResultBuffer,
+            int gateResultCount,
             CombatStateSnapshot preGatingStateSnapshot,
             CombatStateSnapshot postGatingStateSnapshot)
         {
-            AuthoritativeTick = authoritativeTick;
-            AcceptedIntentsInOrder = acceptedIntentsInOrder ?? throw new ArgumentNullException(nameof(acceptedIntentsInOrder));
-            GateResultsInOrder = gateResultsInOrder ?? throw new ArgumentNullException(nameof(gateResultsInOrder));
-            PreGatingStateSnapshot = preGatingStateSnapshot ?? throw new ArgumentNullException(nameof(preGatingStateSnapshot));
-            PostGatingStateSnapshot = postGatingStateSnapshot ?? throw new ArgumentNullException(nameof(postGatingStateSnapshot));
+            var batch = GatedIntentBatchPool.Rent();
+            batch.AuthoritativeTick = authoritativeTick;
+            batch._acceptedBuffer = acceptedBuffer ?? throw new ArgumentNullException(nameof(acceptedBuffer));
+            batch._acceptedCount = acceptedCount;
+            batch._gateResultBuffer = gateResultBuffer ?? throw new ArgumentNullException(nameof(gateResultBuffer));
+            batch._gateResultCount = gateResultCount;
+            batch.AcceptedIntentsInOrder = new FrozenIntentBatch(authoritativeTick, batch._acceptedBuffer, acceptedCount);
+            batch.GateResultsInOrder = new IntentGateRowListView(batch._gateResultBuffer, gateResultCount);
+            batch.PreGatingStateSnapshot = preGatingStateSnapshot ?? throw new ArgumentNullException(nameof(preGatingStateSnapshot));
+            batch.PostGatingStateSnapshot = postGatingStateSnapshot ?? throw new ArgumentNullException(nameof(postGatingStateSnapshot));
+            batch._released = false;
+            return batch;
+        }
+
+        public void Release()
+        {
+            if (_released)
+                return;
+
+            _released = true;
+
+            if (_acceptedBuffer.Length > 0)
+                ArrayPool<FrozenIntentRecord>.Shared.Return(_acceptedBuffer, clearArray: true);
+
+            if (_gateResultBuffer.Length > 0)
+                ArrayPool<IntentGateRow>.Shared.Return(_gateResultBuffer, clearArray: true);
+
+            AcceptedIntentsInOrder = new FrozenIntentBatch(0, Array.Empty<FrozenIntentRecord>(), 0);
+            GateResultsInOrder = new IntentGateRowListView(Array.Empty<IntentGateRow>(), 0);
+            PreGatingStateSnapshot = default!;
+            PostGatingStateSnapshot = default!;
+            AuthoritativeTick = 0;
+            _acceptedCount = 0;
+            _gateResultCount = 0;
+
+            _acceptedBuffer = Array.Empty<FrozenIntentRecord>();
+            _gateResultBuffer = Array.Empty<IntentGateRow>();
+
+            GatedIntentBatchPool.Return(this);
+        }
+    }
+
+    internal static class GatedIntentBatchPool
+    {
+        private const int MaxPoolSize = 16;
+        private static readonly Stack<GatedIntentBatch> _pool = new Stack<GatedIntentBatch>(MaxPoolSize);
+
+        public static GatedIntentBatch Rent()
+        {
+            if (_pool.Count > 0)
+                return _pool.Pop();
+
+            return new GatedIntentBatch();
+        }
+
+        public static void Return(GatedIntentBatch batch)
+        {
+            if (_pool.Count < MaxPoolSize)
+                _pool.Push(batch);
+        }
+    }
+
+    public readonly struct IntentGateRowListView : IReadOnlyList<IntentGateRow>
+    {
+        private readonly IntentGateRow[] _buffer;
+        private readonly int _count;
+
+        public IntentGateRowListView(IntentGateRow[] buffer, int count)
+        {
+            _buffer = buffer ?? Array.Empty<IntentGateRow>();
+            _count = count;
+        }
+
+        public int Count => _count;
+
+        public IntentGateRow this[int index]
+        {
+            get
+            {
+                if ((uint)index >= (uint)_count)
+                    throw new ArgumentOutOfRangeException(nameof(index));
+
+                return _buffer[index];
+            }
+        }
+
+        public Enumerator GetEnumerator() => new Enumerator(_buffer, _count);
+
+        IEnumerator<IntentGateRow> IEnumerable<IntentGateRow>.GetEnumerator() => GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public struct Enumerator : IEnumerator<IntentGateRow>
+        {
+            private readonly IntentGateRow[] _buffer;
+            private readonly int _count;
+            private int _index;
+
+            public Enumerator(IntentGateRow[] buffer, int count)
+            {
+                _buffer = buffer;
+                _count = count;
+                _index = -1;
+            }
+
+            public IntentGateRow Current => _buffer[_index];
+
+            object IEnumerator.Current => Current;
+
+            public void Dispose()
+            {
+            }
+
+            public bool MoveNext()
+            {
+                int next = _index + 1;
+                if (next >= _count)
+                    return false;
+
+                _index = next;
+                return true;
+            }
+
+            public void Reset()
+            {
+                _index = -1;
+            }
         }
     }
 
@@ -619,67 +767,4 @@ namespace Caelmor.Combat
         }
     }
 
-    // --------------------------------------------------------------------
-    // Dependencies (must be satisfied by existing runtime)
-    // --------------------------------------------------------------------
-
-    public interface ITickSource
-    {
-        int CurrentTick { get; }
-    }
-
-    public interface IEntityIdValidator
-    {
-        bool IsValidEntityId(string entityId);
-    }
-
-    // These types are produced by Stage 12.1 and consumed here.
-    // They are declared here only to make this file self-contained; in-project, reference the existing definitions.
-    public enum CombatIntentType
-    {
-        CombatAttackIntent,
-        CombatDefendIntent,
-        CombatAbilityIntent,
-        CombatMovementIntent,
-        CombatInteractIntent,
-        CombatCancelIntent
-    }
-
-    public sealed class FrozenQueueSnapshot
-    {
-        public int AuthoritativeTick { get; }
-        public IReadOnlyList<FrozenIntentRecord> Intents { get; }
-
-        public FrozenQueueSnapshot(int authoritativeTick, IReadOnlyList<FrozenIntentRecord> intents)
-        {
-            AuthoritativeTick = authoritativeTick;
-            Intents = intents ?? throw new ArgumentNullException(nameof(intents));
-        }
-    }
-
-    public readonly struct FrozenIntentRecord
-    {
-        public readonly string IntentId;
-        public readonly CombatIntentType IntentType;
-        public readonly string ActorEntityId;
-        public readonly int SubmitTick;
-        public readonly int DeterministicSequence;
-        public readonly IReadOnlyDictionary<string, object?> Payload;
-
-        public FrozenIntentRecord(
-            string intentId,
-            CombatIntentType intentType,
-            string actorEntityId,
-            int submitTick,
-            int deterministicSequence,
-            IReadOnlyDictionary<string, object?> payload)
-        {
-            IntentId = intentId;
-            IntentType = intentType;
-            ActorEntityId = actorEntityId;
-            SubmitTick = submitTick;
-            DeterministicSequence = deterministicSequence;
-            Payload = payload;
-        }
-    }
 }
