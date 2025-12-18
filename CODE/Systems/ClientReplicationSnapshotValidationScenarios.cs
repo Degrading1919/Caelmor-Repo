@@ -1,9 +1,15 @@
 using System;
 using System.Collections.Generic;
+using Caelmor.Runtime;
 using Caelmor.Runtime.Onboarding;
+using Caelmor.Runtime.Persistence;
 using Caelmor.Runtime.Replication;
+using Caelmor.Runtime.Sessions;
 using Caelmor.Runtime.Tick;
+using Caelmor.Runtime.Transport;
+using Caelmor.Runtime.Threading;
 using Caelmor.Runtime.WorldSimulation;
+using Caelmor.Systems;
 using Caelmor.Validation;
 
 namespace Caelmor.Validation.Replication
@@ -21,7 +27,8 @@ namespace Caelmor.Validation.Replication
                 new Scenario1_SnapshotsReflectCommittedState(),
                 new Scenario2_NoMidTickSnapshots(),
                 new Scenario3_EligibilityEnforced(),
-                new Scenario4_DeterministicSnapshotContents()
+                new Scenario4_DeterministicSnapshotContents(),
+                new Scenario5_OutboundSendPumpDrainsSnapshots()
             };
         }
 
@@ -152,6 +159,72 @@ namespace Caelmor.Validation.Replication
             }
         }
 
+        private sealed class Scenario5_OutboundSendPumpDrainsSnapshots : IValidationScenario
+        {
+            public string Name => "Scenario 5 — Outbound Send Pump Drains Snapshots";
+
+            public void Run(IAssert assert)
+            {
+                var counters = new ReplicationSnapshotCounters();
+                var config = RuntimeBackpressureConfig.Default;
+                var transport = new PooledTransportRouter(config, counters);
+                var eligibility = new SnapshotEligibilityRegistry();
+
+                var authority = new StubAuthority();
+                var saveBinding = new StubSaveBinding();
+                var restore = new StubRestoreQuery();
+                var mutationGate = new AllowMutationGate();
+                var sessionEvents = new StubSessionEvents();
+
+                var playerId = new PlayerId(Guid.Parse("99999999-9999-9999-9999-999999999999"));
+                var saveId = new SaveId(Guid.Parse("11111111-2222-3333-4444-555555555555"));
+                saveBinding.Bind(playerId, saveId);
+
+                var sessions = new PlayerSessionSystem(authority, saveBinding, restore, eligibility, mutationGate, sessionEvents);
+                var sessionId = new SessionId(Guid.Parse("cccccccc-cccc-cccc-cccc-cccccccccccc"));
+                var activation = sessions.ActivateSession(sessionId, playerId);
+
+                assert.True(activation.Ok, "Session activation must succeed for outbound pump validation.");
+
+                var gate = new ConfigurableGate();
+                var stateReader = new RecordingStateReader();
+                stateReader.SetState(new EntityHandle(12), "serialized_state");
+
+                var diagnostics = new TickDiagnostics();
+                var slicer = new TimeSlicedWorkScheduler(diagnostics);
+
+                var replication = new ClientReplicationSnapshotSystem(
+                    sessions,
+                    eligibility,
+                    gate,
+                    stateReader,
+                    transport,
+                    slicer,
+                    SnapshotSerializationBudget.Default,
+                    counters);
+
+                var tickContext = new SimulationTickContext(5, TimeSpan.Zero, new SimulationEffectBuffer());
+                var eligibleEntities = new[] { new EntityHandle(12) };
+
+                replication.OnPreTick(tickContext, eligibleEntities);
+                replication.OnPostTick(tickContext, eligibleEntities);
+
+                var sender = new RecordingSender();
+                var pump = new OutboundSendPump(transport, sender, sessions, config, counters, config.MaxOutboundSnapshotsPerSession, idleDelayMs: 0);
+                var dispatched = pump.PumpOnce();
+
+                var snapshot = counters.Snapshot();
+
+                assert.Equal(1, dispatched, "Outbound pump must dequeue a serialized snapshot.");
+                assert.Equal(1, sender.Sent.Count, "Outbound sender must receive the snapshot payload.");
+                assert.True(snapshot.SnapshotsBuilt >= 1, "SnapshotsBuilt counter must increment.");
+                assert.True(snapshot.SnapshotsSerialized >= 1, "SnapshotsSerialized counter must increment.");
+                assert.True(snapshot.SnapshotsEnqueued >= 1, "SnapshotsEnqueued counter must increment.");
+                assert.True(snapshot.SnapshotsDequeuedForSend >= 1, "SnapshotsDequeuedForSend counter must increment.");
+                assert.Equal(0, snapshot.SnapshotsDropped, "Happy-path send should not drop snapshots.");
+            }
+        }
+
         private sealed class Rig
         {
             public readonly ClientReplicationSnapshotSystem System;
@@ -256,6 +329,60 @@ namespace Caelmor.Validation.Replication
                     fp = string.Empty;
 
                 return new ReplicatedEntityState(fp);
+            }
+        }
+
+        private sealed class StubAuthority : IServerAuthority
+        {
+            public bool IsServerAuthoritative => true;
+        }
+
+        private sealed class StubSaveBinding : IPlayerSaveBindingQuery
+        {
+            private readonly Dictionary<PlayerId, SaveId> _bindings = new Dictionary<PlayerId, SaveId>();
+
+            public void Bind(PlayerId playerId, SaveId saveId) => _bindings[playerId] = saveId;
+
+            public bool TryGetSaveForPlayer(PlayerId playerId, out SaveId saveId)
+            {
+                return _bindings.TryGetValue(playerId, out saveId);
+            }
+        }
+
+        private sealed class StubRestoreQuery : IPersistenceRestoreQuery
+        {
+            public bool IsRestoreCompleted(SaveId saveId) => true;
+        }
+
+        private sealed class AllowMutationGate : ISessionMutationGate
+        {
+            public bool CanMutateSessionsNow() => true;
+        }
+
+        private sealed class StubSessionEvents : ISessionEvents
+        {
+            public void OnSessionActivated(SessionId sessionId, PlayerId playerId, SaveId saveId)
+            {
+            }
+
+            public void OnSessionParticipationEnded(SessionId sessionId, PlayerId playerId, SaveId saveId, DeactivationReason reason)
+            {
+            }
+
+            public void OnSessionDeactivated(SessionId sessionId, PlayerId playerId, SaveId saveId, DeactivationReason reason)
+            {
+            }
+        }
+
+        private sealed class RecordingSender : IOutboundTransportSender
+        {
+            public readonly List<(SessionId session, long tick, int bytes)> Sent = new List<(SessionId, long, int)>();
+
+            public bool TrySend(SessionId sessionId, SerializedSnapshot snapshot)
+            {
+                Sent.Add((sessionId, snapshot.Tick, snapshot.ByteLength));
+                snapshot.Dispose();
+                return true;
             }
         }
     }

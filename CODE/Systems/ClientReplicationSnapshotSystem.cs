@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Collections.Concurrent;
 using System.Threading;
 using Caelmor.Runtime.Onboarding;
+using Caelmor.Runtime.Diagnostics;
 using Caelmor.Runtime.Tick;
 using Caelmor.Runtime.WorldSimulation;
 using Caelmor.Runtime.Threading;
@@ -33,6 +34,7 @@ namespace Caelmor.Runtime.Replication
         private readonly IReplicationSnapshotQueue _queue;
         private readonly TimeSlicedWorkScheduler _timeSlicer;
         private readonly SnapshotSerializationBudget _budget;
+        private readonly ReplicationSnapshotCounters? _counters;
         private static readonly Action Noop = () => { };
 
         private long? _tickInProgress;
@@ -62,7 +64,8 @@ namespace Caelmor.Runtime.Replication
             IReplicationStateReader stateReader,
             IReplicationSnapshotQueue queue,
             TimeSlicedWorkScheduler timeSlicer,
-            SnapshotSerializationBudget? budget = null)
+            SnapshotSerializationBudget? budget = null,
+            ReplicationSnapshotCounters? counters = null)
         {
             _sessionIndex = sessionIndex ?? throw new ArgumentNullException(nameof(sessionIndex));
             _sessionEligibility = sessionEligibility ?? throw new ArgumentNullException(nameof(sessionEligibility));
@@ -71,6 +74,7 @@ namespace Caelmor.Runtime.Replication
             _queue = queue ?? throw new ArgumentNullException(nameof(queue));
             _timeSlicer = timeSlicer ?? throw new ArgumentNullException(nameof(timeSlicer));
             _budget = budget ?? SnapshotSerializationBudget.Default;
+            _counters = counters;
         }
 
         public void OnSessionDisconnected(SessionId sessionId)
@@ -90,6 +94,8 @@ namespace Caelmor.Runtime.Replication
 
         public void OnPreTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
         {
+            TickThreadAssert.AssertTickThread();
+
             // Guard against mid-tick snapshot generation.
             _tickInProgress = context.TickIndex;
             _postTickPhaseActive = false;
@@ -97,6 +103,8 @@ namespace Caelmor.Runtime.Replication
 
         public void OnPostTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
         {
+            TickThreadAssert.AssertTickThread();
+
             _tickInProgress = context.TickIndex;
             _postTickPhaseActive = true;
 
@@ -133,11 +141,17 @@ namespace Caelmor.Runtime.Replication
             long authoritativeTick,
             IReadOnlyList<EntityHandle> eligibleEntities)
         {
+            TickThreadAssert.AssertTickThread();
+
             if (!_postTickPhaseActive || !_tickInProgress.HasValue || _tickInProgress.Value != authoritativeTick)
                 throw new InvalidOperationException("Snapshots can only be captured during post-tick finalization.");
 
             if (eligibleEntities.Count == 0)
-                return new ClientReplicationSnapshot(sessionId, authoritativeTick, Array.Empty<ReplicatedEntitySnapshot>(), 0, _snapshotPool, OnSnapshotDisposed);
+            {
+                var emptySnapshot = new ClientReplicationSnapshot(sessionId, authoritativeTick, Array.Empty<ReplicatedEntitySnapshot>(), 0, _snapshotPool, OnSnapshotDisposed);
+                _counters?.RecordSnapshotBuilt();
+                return emptySnapshot;
+            }
 
             var scratchLength = Math.Max(eligibleEntities.Count, _budget.EntitiesPerSlice);
             ReplicatedEntitySnapshot[] scratch = null;
@@ -162,7 +176,9 @@ namespace Caelmor.Runtime.Replication
 
                 if (count == 0)
                 {
-                    return new ClientReplicationSnapshot(sessionId, authoritativeTick, Array.Empty<ReplicatedEntitySnapshot>(), 0, _snapshotPool, OnSnapshotDisposed);
+                    var emptySnapshot = new ClientReplicationSnapshot(sessionId, authoritativeTick, Array.Empty<ReplicatedEntitySnapshot>(), 0, _snapshotPool, OnSnapshotDisposed);
+                    _counters?.RecordSnapshotBuilt();
+                    return emptySnapshot;
                 }
 
                 Array.Sort(scratch, 0, count, ReplicatedEntitySnapshotComparer.Instance);
@@ -179,7 +195,9 @@ namespace Caelmor.Runtime.Replication
 #if DEBUG
                 TrackSnapshotAllocated(count);
 #endif
-                return new ClientReplicationSnapshot(sessionId, authoritativeTick, buffer, count, _snapshotPool, OnSnapshotDisposed);
+                var snapshot = new ClientReplicationSnapshot(sessionId, authoritativeTick, buffer, count, _snapshotPool, OnSnapshotDisposed);
+                _counters?.RecordSnapshotBuilt();
+                return snapshot;
             }
             finally
             {
@@ -264,7 +282,8 @@ namespace Caelmor.Runtime.Replication
                 _queue,
                 _snapshotPool,
                 _entityPool,
-                _budget.EntitiesPerSlice
+                _budget.EntitiesPerSlice,
+                _counters
 #if DEBUG
                 ,
                 TrackContextArrayRented,
@@ -297,6 +316,7 @@ namespace Caelmor.Runtime.Replication
             private Action<int>? _onAllocated;
             private Action _onDisposed;
             private readonly Action _onCompleted;
+            private readonly ReplicationSnapshotCounters? _counters;
             private int _cursor;
             private int _captureCount;
             private bool _inFlight;
@@ -309,7 +329,8 @@ namespace Caelmor.Runtime.Replication
                 IReplicationSnapshotQueue queue,
                 ArrayPool<ReplicatedEntitySnapshot> snapshotPool,
                 int entitiesPerSlice,
-                Action onCompleted)
+                Action onCompleted,
+                ReplicationSnapshotCounters? counters)
             {
                 _eligibilityGate = eligibilityGate;
                 _stateReader = stateReader;
@@ -320,6 +341,7 @@ namespace Caelmor.Runtime.Replication
                 _captureBuffer = Array.Empty<ReplicatedEntitySnapshot>();
                 _onDisposed = Noop;
                 _onCompleted = onCompleted ?? Noop;
+                _counters = counters;
             }
 
             public bool TryBegin(
@@ -402,7 +424,9 @@ namespace Caelmor.Runtime.Replication
                 if (count == 0)
                 {
                     _captureCount = 0;
-                    return new ClientReplicationSnapshot(_sessionId, _tick, Array.Empty<ReplicatedEntitySnapshot>(), 0, _snapshotPool, Noop);
+                    var emptySnapshot = new ClientReplicationSnapshot(_sessionId, _tick, Array.Empty<ReplicatedEntitySnapshot>(), 0, _snapshotPool, Noop);
+                    _counters?.RecordSnapshotBuilt();
+                    return emptySnapshot;
                 }
 
                 var buffer = _snapshotPool.Rent(count);
@@ -411,7 +435,9 @@ namespace Caelmor.Runtime.Replication
                 Array.Sort(buffer, 0, count, ReplicatedEntitySnapshotComparer.Instance);
                 _captureCount = 0;
                 _onAllocated?.Invoke(count);
-                return new ClientReplicationSnapshot(_sessionId, _tick, buffer, count, _snapshotPool, _onDisposed);
+                var snapshot = new ClientReplicationSnapshot(_sessionId, _tick, buffer, count, _snapshotPool, _onDisposed);
+                _counters?.RecordSnapshotBuilt();
+                return snapshot;
             }
         }
 
@@ -433,7 +459,8 @@ namespace Caelmor.Runtime.Replication
                 IReplicationSnapshotQueue queue,
                 ArrayPool<ReplicatedEntitySnapshot> snapshotPool,
                 ArrayPool<EntityHandle> entityPool,
-                int entitiesPerSlice
+                int entitiesPerSlice,
+                ReplicationSnapshotCounters? counters
 #if DEBUG
                 ,
                 Action onArrayRented,
@@ -447,7 +474,7 @@ namespace Caelmor.Runtime.Replication
                 _onArrayRented = onArrayRented ?? Noop;
                 _onArrayReturned = onArrayReturned ?? Noop;
 #endif
-                WorkItem = new SnapshotWorkItem(eligibilityGate, stateReader, queue, snapshotPool, entitiesPerSlice, OnWorkItemCompleted);
+                WorkItem = new SnapshotWorkItem(eligibilityGate, stateReader, queue, snapshotPool, entitiesPerSlice, OnWorkItemCompleted, counters);
                 EligibleScratch = Array.Empty<EntityHandle>();
                 SnapshotScratch = Array.Empty<ReplicatedEntitySnapshot>();
             }

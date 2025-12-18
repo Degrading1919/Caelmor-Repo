@@ -31,6 +31,7 @@ namespace Caelmor.Runtime.Host
         private readonly DeterministicEntityRegistry _entities;
         private readonly PersistenceCompletionQueue _persistenceCompletions;
         private readonly InboundPumpTickHook _inboundPump;
+        private readonly OutboundSendPump _outboundPump;
 
         private readonly object _gate = new object();
         private bool _started;
@@ -46,6 +47,7 @@ namespace Caelmor.Runtime.Host
             ClientReplicationSnapshotSystem replication,
             DeterministicEntityRegistry entities,
             InboundPumpTickHook inboundPump,
+            OutboundSendPump outboundPump,
             PersistenceCompletionQueue persistenceCompletions = null)
         {
             _simulation = simulation ?? throw new ArgumentNullException(nameof(simulation));
@@ -56,6 +58,7 @@ namespace Caelmor.Runtime.Host
             _replication = replication ?? throw new ArgumentNullException(nameof(replication));
             _entities = entities ?? throw new ArgumentNullException(nameof(entities));
             _inboundPump = inboundPump ?? throw new ArgumentNullException(nameof(inboundPump));
+            _outboundPump = outboundPump ?? throw new ArgumentNullException(nameof(outboundPump));
             _persistenceCompletions = persistenceCompletions;
 
             _simulation.StallDetected += OnTickStalled;
@@ -83,9 +86,19 @@ namespace Caelmor.Runtime.Host
             IPersistenceCompletionApplier persistenceCompletionApplier = null,
             int persistenceCompletionHookOrderKey = -1024,
             int inboundFramesPerTick = 0,
-            int ingressCommandsPerTick = 0)
+            int ingressCommandsPerTick = 0,
+            IOutboundTransportSender outboundSender = null,
+            int outboundSendPerIteration = 0,
+            int outboundPumpIdleMs = 1,
+            ReplicationSnapshotCounters? replicationCounters = null,
+            int replicationHookOrderKey = int.MaxValue - 512)
         {
-            int hookCount = phaseHooks.Length + 2;
+            if (activeSessions == null)
+                throw new ArgumentNullException(nameof(activeSessions));
+            if (replication == null)
+                throw new ArgumentNullException(nameof(replication));
+
+            int hookCount = phaseHooks.Length + 3;
             bool includePersistence = persistenceCompletions != null && persistenceCompletionApplier != null;
             if (includePersistence)
                 hookCount++;
@@ -110,8 +123,14 @@ namespace Caelmor.Runtime.Host
                     persistenceCompletionHookOrderKey);
             }
 
+            combinedHooks[index++] = new PhaseHookRegistration(replication, replicationHookOrderKey);
+
+            var counters = replicationCounters ?? transport.SnapshotCounters;
+            var sender = outboundSender ?? NullOutboundTransportSender.Instance;
+            var outboundPump = new OutboundSendPump(transport, sender, activeSessions, transport.Config, counters, outboundSendPerIteration, outboundPumpIdleMs);
+
             WorldBootstrapRegistration.Apply(simulation, eligibilityGates, participants, combinedHooks);
-            return new RuntimeServerLoop(simulation, transport, handshakes, commands, visibility, replication, entities, inboundPump, persistenceCompletions);
+            return new RuntimeServerLoop(simulation, transport, handshakes, commands, visibility, replication, entities, inboundPump, outboundPump, persistenceCompletions);
         }
 
         public void Start()
@@ -122,6 +141,7 @@ namespace Caelmor.Runtime.Host
                     return;
 
                 _simulation.Start();
+                _outboundPump.Start();
                 _started = true;
             }
         }
@@ -133,10 +153,12 @@ namespace Caelmor.Runtime.Host
                 if (!_started)
                     return;
 
-                _simulation.Stop();
-                ClearTransientState();
                 _started = false;
             }
+
+            _outboundPump.Stop();
+            _simulation.Stop();
+            ClearTransientState();
         }
 
         /// <summary>
@@ -181,6 +203,7 @@ namespace Caelmor.Runtime.Host
             ShutdownServer();
             _simulation.StallDetected -= OnTickStalled;
             _transport.Dispose();
+            _outboundPump.Dispose();
             _visibility.Dispose();
             _entities.Dispose();
         }
@@ -209,6 +232,21 @@ namespace Caelmor.Runtime.Host
         private void OnTickStalled(TickStallEvent stall)
         {
             TickStallDetected?.Invoke(stall);
+        }
+    }
+
+    internal sealed class NullOutboundTransportSender : IOutboundTransportSender
+    {
+        public static readonly NullOutboundTransportSender Instance = new NullOutboundTransportSender();
+
+        private NullOutboundTransportSender()
+        {
+        }
+
+        public bool TrySend(SessionId sessionId, SerializedSnapshot snapshot)
+        {
+            snapshot?.Dispose();
+            return true;
         }
     }
 

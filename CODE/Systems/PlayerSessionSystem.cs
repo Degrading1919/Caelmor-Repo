@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.Persistence;
+using Caelmor.Runtime.Replication;
 
 namespace Caelmor.Runtime.Sessions
 {
@@ -11,7 +13,7 @@ namespace Caelmor.Runtime.Sessions
     /// Enforces authority boundaries, activation gates, one-active-session-per-player, and reconnect semantics.
     /// No lifecycle transitions, no tick eligibility, no zones/world logic, no saves/IO, no networking implementation.
     /// </summary>
-    public sealed class PlayerSessionSystem : IPlayerSessionSystem
+    public sealed class PlayerSessionSystem : IPlayerSessionSystem, IActiveSessionIndex
     {
         private readonly IServerAuthority _authority;
         private readonly IPlayerSaveBindingQuery _saveBinding;
@@ -24,6 +26,8 @@ namespace Caelmor.Runtime.Sessions
         private readonly object _gate = new object();
         private readonly Dictionary<SessionId, SessionRecord> _sessionsById = new Dictionary<SessionId, SessionRecord>();
         private readonly Dictionary<PlayerId, SessionId> _activeSessionByPlayer = new Dictionary<PlayerId, SessionId>();
+        private SessionId[] _sessionSnapshot = Array.Empty<SessionId>();
+        private readonly SessionIdReadOnlyListView _sessionSnapshotView = new SessionIdReadOnlyListView();
 
         public PlayerSessionSystem(
             IServerAuthority authority,
@@ -206,6 +210,27 @@ namespace Caelmor.Runtime.Sessions
             }
         }
 
+        public IReadOnlyList<SessionId> SnapshotSessionsDeterministic()
+        {
+            lock (_gate)
+            {
+                int count = 0;
+                EnsureCapacity(ref _sessionSnapshot, _sessionsById.Count);
+
+                foreach (var kvp in _sessionsById)
+                {
+                    if (kvp.Value.IsActive)
+                        _sessionSnapshot[count++] = kvp.Key;
+                }
+
+                if (count > 1)
+                    Array.Sort(_sessionSnapshot, 0, count, SessionIdComparer.Instance);
+
+                _sessionSnapshotView.Set(_sessionSnapshot, count);
+                return _sessionSnapshotView;
+            }
+        }
+
         private void InternalDeactivateLocked(SessionId sessionId, DeactivationReason reason)
         {
             _snapshotEligibility.TrySetSnapshotEligible(sessionId, isEligible: false);
@@ -240,6 +265,92 @@ namespace Caelmor.Runtime.Sessions
                 PlayerId = playerId;
                 SaveId = saveId;
                 IsActive = isActive;
+            }
+        }
+
+        private static void EnsureCapacity<T>(ref T[] array, int required)
+        {
+            if (required <= array.Length)
+                return;
+
+            var nextSize = array.Length == 0 ? required : array.Length;
+            while (nextSize < required)
+                nextSize *= 2;
+
+            array = new T[nextSize];
+        }
+
+        private sealed class SessionIdComparer : IComparer<SessionId>
+        {
+            public static readonly SessionIdComparer Instance = new SessionIdComparer();
+
+            public int Compare(SessionId x, SessionId y)
+            {
+                return x.Value.CompareTo(y.Value);
+            }
+        }
+
+        private sealed class SessionIdReadOnlyListView : IReadOnlyList<SessionId>
+        {
+            private SessionId[] _buffer = Array.Empty<SessionId>();
+            private int _count;
+
+            public void Set(SessionId[] buffer, int count)
+            {
+                _buffer = buffer ?? Array.Empty<SessionId>();
+                _count = count;
+            }
+
+            public SessionId this[int index]
+            {
+                get
+                {
+                    if ((uint)index >= (uint)_count)
+                        throw new ArgumentOutOfRangeException(nameof(index));
+                    return _buffer[index];
+                }
+            }
+
+            public int Count => _count;
+
+            public Enumerator GetEnumerator() => new Enumerator(_buffer, _count);
+
+            IEnumerator<SessionId> IEnumerable<SessionId>.GetEnumerator() => GetEnumerator();
+
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+            public struct Enumerator : IEnumerator<SessionId>
+            {
+                private readonly SessionId[] _buffer;
+                private readonly int _count;
+                private int _index;
+
+                public Enumerator(SessionId[] buffer, int count)
+                {
+                    _buffer = buffer ?? Array.Empty<SessionId>();
+                    _count = count;
+                    _index = -1;
+                }
+
+                public SessionId Current => _buffer[_index];
+
+                object IEnumerator.Current => Current;
+
+                public bool MoveNext()
+                {
+                    var next = _index + 1;
+                    if (next >= _count)
+                        return false;
+
+                    _index = next;
+                    return true;
+                }
+
+                public void Reset() => _index = -1;
+
+                public void Dispose()
+                {
+                }
             }
         }
     }
