@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Buffers.Binary;
 using Caelmor.Runtime;
 using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.InterestManagement;
@@ -12,6 +13,7 @@ using Caelmor.Runtime.Replication;
 using Caelmor.Runtime.Sessions;
 using Caelmor.Runtime.Tick;
 using Caelmor.Runtime.WorldSimulation;
+using Caelmor.Runtime.Transport;
 
 namespace Caelmor.Runtime.Integration
 {
@@ -440,6 +442,147 @@ namespace Caelmor.Runtime.Integration
         {
             // No post-tick work required; freeze occurs at tick start.
         }
+    }
+
+    /// <summary>
+    /// Deterministic inbound transport pump that bridges transport ingress into the authoritative command ingestor
+    /// and freezes per-session command batches at tick start.
+    /// </summary>
+    public sealed class InboundPumpTickHook : ITickPhaseHook
+    {
+        private readonly PooledTransportRouter _transport;
+        private readonly AuthoritativeCommandIngestor _ingestor;
+        private readonly IActiveSessionIndex? _activeSessions;
+        private readonly CommandEnvelope[] _ingressBuffer;
+        private readonly int _maxFramesPerTick;
+        private readonly int _maxCommandsPerTick;
+
+        private long _ticksExecuted;
+        private long _framesRouted;
+        private long _commandsEnqueued;
+        private long _commandsRejected;
+
+        public InboundPumpTickHook(
+            PooledTransportRouter transport,
+            AuthoritativeCommandIngestor ingestor,
+            IActiveSessionIndex? activeSessions = null,
+            int maxFramesPerTick = 0,
+            int maxCommandsPerTick = 0)
+        {
+            _transport = transport ?? throw new ArgumentNullException(nameof(transport));
+            _ingestor = ingestor ?? throw new ArgumentNullException(nameof(ingestor));
+            _activeSessions = activeSessions;
+
+            var config = _transport.Config;
+            _maxFramesPerTick = maxFramesPerTick > 0 ? maxFramesPerTick : config.MaxInboundCommandsPerSession;
+            _maxCommandsPerTick = maxCommandsPerTick > 0 ? maxCommandsPerTick : config.MaxInboundCommandsPerSession;
+
+            if (_maxCommandsPerTick <= 0)
+                _maxCommandsPerTick = 1;
+
+            _ingressBuffer = new CommandEnvelope[_maxCommandsPerTick];
+        }
+
+        public InboundPumpDiagnostics Diagnostics => new InboundPumpDiagnostics(_ticksExecuted, _framesRouted, _commandsEnqueued, _commandsRejected);
+
+        public void OnPreTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
+        {
+            TickThreadAssert.AssertTickThread();
+
+            _ticksExecuted++;
+            _framesRouted += _transport.RouteQueuedInbound(_maxFramesPerTick);
+
+            int drained = _transport.DeterministicRouter.DrainIngressDeterministic(_ingressBuffer, _maxCommandsPerTick);
+            for (int i = 0; i < drained; i++)
+            {
+                var envelope = _ingressBuffer[i];
+
+                var command = DecodeCommand(envelope, context.TickIndex);
+                if (_ingestor.TryEnqueue(envelope.SessionId, command))
+                {
+                    _commandsEnqueued++;
+                }
+                else
+                {
+                    _commandsRejected++;
+                }
+
+                envelope.Dispose();
+                _ingressBuffer[i] = default;
+            }
+
+            FreezeCommands(context.TickIndex);
+        }
+
+        public void OnPostTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
+        {
+        }
+
+        public FrozenCommandBatch GetFrozenBatch(SessionId sessionId)
+        {
+            return _ingestor.GetFrozenBatch(sessionId);
+        }
+
+        private void FreezeCommands(long tickIndex)
+        {
+            if (_activeSessions != null)
+            {
+                _ingestor.FreezeSessions(tickIndex, _activeSessions.SnapshotSessionsDeterministic());
+            }
+            else
+            {
+                _ingestor.FreezeAllSessions(tickIndex);
+            }
+        }
+
+        private static AuthoritativeCommand DecodeCommand(in CommandEnvelope envelope, long tickIndex)
+        {
+            var payloadLength = envelope.Payload.Length;
+            var payloadSpan = envelope.Payload.Buffer.AsSpan(0, payloadLength);
+
+            int payloadA = payloadLength >= sizeof(int)
+                ? BinaryPrimitives.ReadInt32LittleEndian(payloadSpan)
+                : payloadLength;
+
+            int payloadB = payloadLength >= sizeof(int) * 2
+                ? BinaryPrimitives.ReadInt32LittleEndian(payloadSpan.Slice(sizeof(int)))
+                : payloadLength;
+
+            long authoritativeTick = envelope.SubmitTick > 0 ? envelope.SubmitTick : tickIndex;
+            int commandType = ComputeStableCommandType(envelope.CommandType);
+
+            return new AuthoritativeCommand(authoritativeTick, commandType, payloadA, payloadB, envelope.DeterministicSequence);
+        }
+
+        private static int ComputeStableCommandType(string commandType)
+        {
+            if (string.IsNullOrEmpty(commandType))
+                return 0;
+
+            unchecked
+            {
+                int hash = 17;
+                for (int i = 0; i < commandType.Length; i++)
+                    hash = (hash * 31) + commandType[i];
+                return hash;
+            }
+        }
+    }
+
+    public readonly struct InboundPumpDiagnostics
+    {
+        public InboundPumpDiagnostics(long ticksExecuted, long framesRouted, long commandsEnqueued, long commandsRejected)
+        {
+            InboundPumpTicksExecuted = ticksExecuted;
+            InboundFramesRouted = framesRouted;
+            CommandsEnqueuedToIngestor = commandsEnqueued;
+            CommandsRejectedByIngestor = commandsRejected;
+        }
+
+        public long InboundPumpTicksExecuted { get; }
+        public long InboundFramesRouted { get; }
+        public long CommandsEnqueuedToIngestor { get; }
+        public long CommandsRejectedByIngestor { get; }
     }
 
     public readonly struct CommandIngestorDiagnostics

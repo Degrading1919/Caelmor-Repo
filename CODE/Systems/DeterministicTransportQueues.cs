@@ -107,6 +107,60 @@ namespace Caelmor.Runtime.Transport
             return EnqueueInternal(sessionId, payload, commandType, submitTick);
         }
 
+        public int DrainDeterministic(Span<CommandEnvelope> destination, int maxCommands)
+        {
+            if (maxCommands <= 0 || destination.Length == 0)
+                return 0;
+
+            int sessionCount = _queues.Count;
+            if (sessionCount == 0)
+                return 0;
+
+            EnsureCapacity(ref _snapshotKeys, sessionCount);
+
+            int index = 0;
+            foreach (var kvp in _queues)
+                _snapshotKeys[index++] = kvp.Key;
+
+            Array.Sort(_snapshotKeys, 0, index, SessionIdValueComparer.Instance);
+
+            int written = 0;
+            while (written < destination.Length && written < maxCommands)
+            {
+                bool found = false;
+                SessionId selectedSession = default;
+                long bestSequence = long.MaxValue;
+
+                for (int i = 0; i < index; i++)
+                {
+                    var sessionId = _snapshotKeys[i];
+                    if (!_queues.TryGetValue(sessionId, out var queue) || queue.Count == 0)
+                        continue;
+
+                    var candidate = queue.Peek();
+                    var sequence = candidate.DeterministicSequence;
+
+                    if (!found || sequence < bestSequence ||
+                        (sequence == bestSequence && SessionIdValueComparer.Instance.Compare(sessionId, selectedSession) < 0))
+                    {
+                        found = true;
+                        bestSequence = sequence;
+                        selectedSession = sessionId;
+                    }
+                }
+
+                if (!found)
+                    break;
+
+                if (!TryDequeue(selectedSession, out var envelope))
+                    break;
+
+                destination[written++] = envelope;
+            }
+
+            return written;
+        }
+
         private CommandIngressResult EnqueueInternal(SessionId sessionId, PooledPayloadLease payload, string commandType, long submitTick)
         {
             if (sessionId.Equals(default(SessionId)))
@@ -493,6 +547,11 @@ namespace Caelmor.Runtime.Transport
         public void RouteSnapshot(Caelmor.ClientReplication.ClientReplicationSnapshot snapshot)
         {
             _snapshotQueue.Enqueue(snapshot.SessionId, snapshot);
+        }
+
+        public int DrainIngressDeterministic(Span<CommandEnvelope> destination, int maxCommands)
+        {
+            return _ingress.DrainDeterministic(destination, maxCommands);
         }
 
         public bool TryDequeueSnapshot(SessionId sessionId, out SerializedSnapshot snapshot)

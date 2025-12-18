@@ -31,6 +31,9 @@ namespace Caelmor.Runtime.Transport
             _deterministic = new DeterministicTransportRouter(config);
         }
 
+        internal RuntimeBackpressureConfig Config => _config;
+        internal DeterministicTransportRouter DeterministicRouter => _deterministic;
+
         /// <summary>
         /// Enqueues an inbound payload from a transport thread. Payload bytes are copied into a pooled
         /// lease to avoid lifetime hazards across threads.
@@ -97,9 +100,12 @@ namespace Caelmor.Runtime.Transport
         /// Drains inbound mailboxes in deterministic session order and routes payloads into the
         /// authoritative ingress. Must be invoked from the tick thread.
         /// </summary>
-        public int RouteQueuedInbound()
+        public int RouteQueuedInbound(int maxFrames = int.MaxValue)
         {
             TickThreadAssert.AssertTickThread();
+
+            if (maxFrames <= 0)
+                return 0;
 
             int processed = 0;
             lock (_inboundGate)
@@ -116,7 +122,7 @@ namespace Caelmor.Runtime.Transport
                     if (!_inboundQueues.TryGetValue(sessionId, out var queue) || queue.Count == 0)
                         continue;
 
-                    while (queue.Count > 0)
+                    while (queue.Count > 0 && processed < maxFrames)
                     {
                         var envelope = queue.Dequeue();
                         processed++;
@@ -132,6 +138,9 @@ namespace Caelmor.Runtime.Transport
 
                     _bytesBySession.TryGetValue(sessionId, out var bytes);
                     UpdateCurrentMetrics(sessionId, queue.Count, bytes);
+
+                    if (processed >= maxFrames)
+                        break;
                 }
             }
 
