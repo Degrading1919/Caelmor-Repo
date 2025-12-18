@@ -4,6 +4,7 @@ using Caelmor.ClientReplication;
 using Caelmor.Runtime;
 using Caelmor.Runtime.Diagnostics;
 using Caelmor.Runtime.Onboarding;
+using Caelmor.Runtime.Replication;
 
 namespace Caelmor.Runtime.Transport
 {
@@ -13,26 +14,29 @@ namespace Caelmor.Runtime.Transport
     /// <see cref="DeterministicTransportRouter"/>. Outbound snapshots are dequeued by transport threads
     /// and emitted without mutating gameplay state.
     /// </summary>
-    public sealed class PooledTransportRouter : IDisposable
+    public sealed class PooledTransportRouter : IDisposable, IReplicationSnapshotQueue
     {
         private readonly object _inboundGate = new object();
         private readonly object _snapshotGate = new object();
 
         private readonly RuntimeBackpressureConfig _config;
         private readonly DeterministicTransportRouter _deterministic;
+        private readonly ReplicationSnapshotCounters _counters;
         private readonly Dictionary<SessionId, Queue<InboundEnvelope>> _inboundQueues = new Dictionary<SessionId, Queue<InboundEnvelope>>(64);
         private readonly Dictionary<SessionId, int> _bytesBySession = new Dictionary<SessionId, int>(64);
         private readonly Dictionary<SessionId, SessionQueueMetrics> _metrics = new Dictionary<SessionId, SessionQueueMetrics>(64);
         private readonly List<SessionId> _sessionOrder = new List<SessionId>(64);
 
-        public PooledTransportRouter(RuntimeBackpressureConfig config)
+        public PooledTransportRouter(RuntimeBackpressureConfig config, ReplicationSnapshotCounters? counters = null)
         {
             _config = config ?? throw new ArgumentNullException(nameof(config));
-            _deterministic = new DeterministicTransportRouter(config);
+            _counters = counters ?? new ReplicationSnapshotCounters();
+            _deterministic = new DeterministicTransportRouter(config, _counters);
         }
 
         internal RuntimeBackpressureConfig Config => _config;
         internal DeterministicTransportRouter DeterministicRouter => _deterministic;
+        internal ReplicationSnapshotCounters SnapshotCounters => _counters;
 
         /// <summary>
         /// Enqueues an inbound payload from a transport thread. Payload bytes are copied into a pooled
@@ -160,6 +164,18 @@ namespace Caelmor.Runtime.Transport
             {
                 _deterministic.RouteSnapshot(snapshot);
             }
+        }
+
+        void IReplicationSnapshotQueue.Enqueue(SessionId sessionId, ClientReplicationSnapshot snapshot)
+        {
+            if (snapshot == null) throw new ArgumentNullException(nameof(snapshot));
+            if (!sessionId.Equals(snapshot.SessionId))
+            {
+                snapshot.Dispose();
+                throw new InvalidOperationException("Replication snapshot session mismatch.");
+            }
+
+            RouteSnapshot(snapshot);
         }
 
         /// <summary>
