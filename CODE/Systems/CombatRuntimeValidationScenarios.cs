@@ -1,4 +1,5 @@
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using Caelmor.Combat;
 using Caelmor.Runtime.WorldSimulation;
@@ -21,7 +22,8 @@ namespace Caelmor.Validation.Combat
                 new ValidationScenarioAdapter(new Scenario1_CombatExecutesOnlyDuringSimulationExecution()),
                 new ValidationScenarioAdapter(new Scenario2_IneligibleEntitiesCannotParticipate()),
                 new ValidationScenarioAdapter(new Scenario3_DeterministicResolutionUnderIdenticalInputs()),
-                new ValidationScenarioAdapter(new Scenario4_NoMidTickEligibilityOrLifecycleMutation())
+                new ValidationScenarioAdapter(new Scenario4_NoMidTickEligibilityOrLifecycleMutation()),
+                new ValidationScenarioAdapter(new Scenario5_BoundedIntentThroughput())
             };
         }
 
@@ -43,7 +45,7 @@ namespace Caelmor.Validation.Combat
                             actorEntityId: "e1",
                             submitTick: 0,
                             deterministicSequence: 1,
-                            payload: new Dictionary<string, object?>())
+                            payload: CombatIntentPayload.ForAttack(new AttackIntentPayload(default, default)))
                     }
                 };
 
@@ -74,8 +76,8 @@ namespace Caelmor.Validation.Combat
                 {
                     [1] = new List<FrozenIntentRecord>
                     {
-                        new FrozenIntentRecord("i-eligible", CombatIntentType.CombatAttackIntent, "eligible", 0, 1, new Dictionary<string, object?>()),
-                        new FrozenIntentRecord("i-ineligible", CombatIntentType.CombatDefendIntent, "ineligible", 0, 1, new Dictionary<string, object?>())
+                        new FrozenIntentRecord("i-eligible", CombatIntentType.CombatAttackIntent, "eligible", 0, 1, CombatIntentPayload.ForAttack(new AttackIntentPayload(default, default))),
+                        new FrozenIntentRecord("i-ineligible", CombatIntentType.CombatDefendIntent, "ineligible", 0, 1, CombatIntentPayload.ForDefend(new DefendIntentPayload(default)))
                     }
                 };
 
@@ -104,8 +106,8 @@ namespace Caelmor.Validation.Combat
                 {
                     [1] = new List<FrozenIntentRecord>
                     {
-                        new FrozenIntentRecord("i1", CombatIntentType.CombatAttackIntent, "deterministic", 0, 1, new Dictionary<string, object?>()),
-                        new FrozenIntentRecord("i2", CombatIntentType.CombatDefendIntent, "deterministic", 0, 2, new Dictionary<string, object?>())
+                        new FrozenIntentRecord("i1", CombatIntentType.CombatAttackIntent, "deterministic", 0, 1, CombatIntentPayload.ForAttack(new AttackIntentPayload(default, default))),
+                        new FrozenIntentRecord("i2", CombatIntentType.CombatDefendIntent, "deterministic", 0, 2, CombatIntentPayload.ForDefend(new DefendIntentPayload(default)))
                     }
                 };
 
@@ -139,7 +141,7 @@ namespace Caelmor.Validation.Combat
                 {
                     [1] = new List<FrozenIntentRecord>
                     {
-                        new FrozenIntentRecord("i-safe", CombatIntentType.CombatAttackIntent, "stable", 0, 1, new Dictionary<string, object?>())
+                        new FrozenIntentRecord("i-safe", CombatIntentType.CombatAttackIntent, "stable", 0, 1, CombatIntentPayload.ForAttack(new AttackIntentPayload(default, default)))
                     }
                 };
 
@@ -151,6 +153,66 @@ namespace Caelmor.Validation.Combat
 
                 a.True(rig.Eligibility.WasStableAcrossTick, "Eligibility state must remain stable throughout the tick.");
                 a.Equal(1, rig.CommitSink.CommitPayloads.Count, "Combat must commit outcomes normally when eligibility is stable.");
+            }
+        }
+
+        private sealed class Scenario5_BoundedIntentThroughput : Caelmor.Validation.IValidationScenario
+        {
+            public string Name => "Scenario 5 — Bounded Intent Throughput And Ordering";
+
+            public void Run(IAssert a)
+            {
+                var handle = new EntityHandle(77);
+                var handles = new[] { handle };
+
+                var intentsByTick = new Dictionary<int, List<FrozenIntentRecord>>
+                {
+                    [1] = BuildIntentWave("a", 5),
+                    [2] = BuildIntentWave("b", 5)
+                };
+
+                var rig = Rig.Create(handles, intentsByTick);
+                rig.Resolver.Map[handle] = "actor-77";
+                rig.Eligibility.SetEligible(handle, true);
+
+                rig.Core.ExecuteSingleTick();
+                var firstWave = rig.CommitSink.CommitPayloads.GetRange(0, rig.CommitSink.CommitPayloads.Count);
+
+                rig.Core.ExecuteSingleTick();
+                var secondWave = rig.CommitSink.CommitPayloads.GetRange(firstWave.Count, rig.CommitSink.CommitPayloads.Count - firstWave.Count);
+
+                a.Equal(5, firstWave.Count, "Tick 1 must process the bounded batch without overflow.");
+                a.Equal(5, secondWave.Count, "Tick 2 must process only the staged batch without accumulation.");
+
+                AssertOrdering(a, firstWave, "a");
+                AssertOrdering(a, secondWave, "b");
+            }
+
+            private static List<FrozenIntentRecord> BuildIntentWave(string label, int count)
+            {
+                var payload = CombatIntentPayload.ForAttack(new AttackIntentPayload(default, default));
+                var intents = new List<FrozenIntentRecord>(count);
+                for (int i = 0; i < count; i++)
+                {
+                    intents.Add(new FrozenIntentRecord(
+                        intentId: $"i-{label}-{i + 1}",
+                        intentType: CombatIntentType.CombatAttackIntent,
+                        actorEntityId: "actor-77",
+                        submitTick: 0,
+                        deterministicSequence: i + 1,
+                        payload: payload));
+                }
+
+                return intents;
+            }
+
+            private static void AssertOrdering(IAssert a, List<string> payloads, string label)
+            {
+                for (int i = 0; i < payloads.Count; i++)
+                {
+                    var expectedId = $"i-{label}-{i + 1}";
+                    a.True(payloads[i].Contains(expectedId, StringComparison.Ordinal), "Commit ordering must remain stable per tick.");
+                }
             }
         }
 
@@ -250,23 +312,24 @@ namespace Caelmor.Validation.Combat
 
         private sealed class DeterministicIntentSource : ICombatIntentSource
         {
-            private readonly Dictionary<int, FrozenQueueSnapshot> _byTick;
+            private readonly Dictionary<int, FrozenIntentBatch> _byTick;
 
             public DeterministicIntentSource(IDictionary<int, List<FrozenIntentRecord>> intentsByTick)
             {
-                _byTick = new Dictionary<int, FrozenQueueSnapshot>();
+                _byTick = new Dictionary<int, FrozenIntentBatch>();
                 foreach (var kv in intentsByTick)
                 {
-                    _byTick[kv.Key] = new FrozenQueueSnapshot(kv.Key, kv.Value);
+                    var buffer = kv.Value.ToArray();
+                    _byTick[kv.Key] = new FrozenIntentBatch(kv.Key, buffer, buffer.Length);
                 }
             }
 
-            public FrozenQueueSnapshot GetFrozenQueue(int authoritativeTick)
+            public FrozenIntentBatch GetFrozenBatch(int authoritativeTick)
             {
                 if (_byTick.TryGetValue(authoritativeTick, out var frozen))
                     return frozen;
 
-                return FrozenQueueSnapshot.Empty(authoritativeTick);
+                return new FrozenIntentBatch(authoritativeTick, Array.Empty<FrozenIntentRecord>(), 0);
             }
         }
 
@@ -274,24 +337,31 @@ namespace Caelmor.Validation.Combat
         {
             public Action? OnGate { get; set; }
 
-            public GatedIntentBatch Gate(FrozenQueueSnapshot frozenQueue)
+            public GatedIntentBatch Gate(FrozenIntentBatch frozenQueue)
             {
                 OnGate?.Invoke();
 
-                var accepted = new List<FrozenIntentRecord>(frozenQueue.Intents);
-                var rows = new List<IntentGateRow>(frozenQueue.Intents.Count);
-                for (int i = 0; i < frozenQueue.Intents.Count; i++)
+                int capacity = Math.Max(1, frozenQueue.Count);
+                var accepted = ArrayPool<FrozenIntentRecord>.Shared.Rent(capacity);
+                var rows = ArrayPool<IntentGateRow>.Shared.Rent(capacity);
+                int acceptedCount = 0;
+                int rowCount = 0;
+                for (int i = 0; i < frozenQueue.Count; i++)
                 {
-                    rows.Add(IntentGateRow.Accepted(frozenQueue.Intents[i]));
+                    var intent = frozenQueue[i];
+                    accepted[acceptedCount++] = intent;
+                    rows[rowCount++] = IntentGateRow.Accepted(intent);
                 }
 
                 var emptyStates = new Dictionary<string, CombatEntityState>(StringComparer.Ordinal);
                 var snapshot = CombatStateSnapshot.Capture(emptyStates);
 
-                return new GatedIntentBatch(
+                return GatedIntentBatch.Create(
                     frozenQueue.AuthoritativeTick,
                     accepted,
+                    acceptedCount,
                     rows,
+                    rowCount,
                     snapshot,
                     snapshot);
             }

@@ -740,6 +740,7 @@ namespace Caelmor.Runtime.WorldSimulation
                     Debug.Assert(command.CombatCommitSink != null, "CombatOutcomeCommit requires sink.");
                     Debug.Assert(command.CombatResolution != null, "CombatOutcomeCommit requires resolution.");
                     command.CombatCommitSink!.Commit(command.Entity, command.CombatResolution!);
+                    command.CombatResolution!.Release();
                     break;
                 case SimulationEffectCommandType.FlagSignal:
                     Debug.Assert(command.FlagMarker != null, "FlagSignal requires marker.");

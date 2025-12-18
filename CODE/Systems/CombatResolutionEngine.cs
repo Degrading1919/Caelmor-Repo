@@ -4,8 +4,9 @@
 // No state mutation, no damage application, no events, no persistence.
 
 using System;
+using System.Buffers;
+using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace Caelmor.Combat
 {
@@ -32,38 +33,40 @@ namespace Caelmor.Combat
         {
             if (gatedBatch == null) throw new ArgumentNullException(nameof(gatedBatch));
 
-            // Pre-resolution snapshot for validation
-            var preSnapshot = CombatResolutionSnapshot.CapturePre(
-                gatedBatch.AuthoritativeTick,
-                gatedBatch.AcceptedIntentsInOrder
-            );
+            int intentCount = gatedBatch.AcceptedIntentsInOrder.Count;
+            var outcomesBuffer = ArrayPool<CombatOutcome>.Shared.Rent(Math.Max(intentCount, 1));
+            var preIntentIds = ArrayPool<string>.Shared.Rent(Math.Max(intentCount, 1));
+            var postOutcomeIds = ArrayPool<string>.Shared.Rent(Math.Max(intentCount, 1));
 
-            var outcomes = new List<CombatOutcome>(capacity: gatedBatch.AcceptedIntentsInOrder.Count);
-
-            // Resolution proceeds strictly in accepted intent order
-            for (int i = 0; i < gatedBatch.AcceptedIntentsInOrder.Count; i++)
+            for (int i = 0; i < intentCount; i++)
             {
                 var intent = gatedBatch.AcceptedIntentsInOrder[i];
+                preIntentIds[i] = intent.IntentId;
 
                 // Resolution must never short-circuit.
                 // Each intent is processed deterministically.
                 var outcome = ResolveSingleIntent(intent, gatedBatch.AuthoritativeTick);
 
-                outcomes.Add(outcome);
+                outcomesBuffer[i] = outcome;
+                postOutcomeIds[i] = outcome.IntentId;
             }
 
-            // Post-resolution snapshot for validation
-            var postSnapshot = CombatResolutionSnapshot.CapturePost(
+            var preSnapshot = CombatResolutionSnapshot.CreatePre(
                 gatedBatch.AuthoritativeTick,
-                outcomes
-            );
+                new PooledStringList(preIntentIds, intentCount));
 
-            return new CombatResolutionResult(
+            var postSnapshot = CombatResolutionSnapshot.CreatePost(
+                gatedBatch.AuthoritativeTick,
+                new PooledStringList(postOutcomeIds, intentCount));
+
+            return CombatResolutionResult.Create(
                 authoritativeTick: gatedBatch.AuthoritativeTick,
-                outcomesInOrder: new ReadOnlyCollection<CombatOutcome>(outcomes),
-                preResolutionSnapshot: preSnapshot,
-                postResolutionSnapshot: postSnapshot
-            );
+                outcomesBuffer: outcomesBuffer,
+                outcomeCount: intentCount,
+                preIntentIds: preIntentIds,
+                postOutcomeIds: postOutcomeIds,
+                preSnapshot: preSnapshot,
+                postSnapshot: postSnapshot);
         }
 
         private static CombatOutcome ResolveSingleIntent(
@@ -175,21 +178,152 @@ namespace Caelmor.Combat
 
     public sealed class CombatResolutionResult
     {
-        public int AuthoritativeTick { get; }
-        public IReadOnlyList<CombatOutcome> OutcomesInOrder { get; }
-        public CombatResolutionSnapshot PreResolutionSnapshot { get; }
-        public CombatResolutionSnapshot PostResolutionSnapshot { get; }
+        private CombatOutcome[] _outcomesBuffer;
+        private string[] _preIntentIds;
+        private string[] _postOutcomeIds;
+        private bool _released;
 
-        public CombatResolutionResult(
+        public int AuthoritativeTick { get; private set; }
+        public OutcomeListView OutcomesInOrder { get; private set; }
+        public CombatResolutionSnapshot PreResolutionSnapshot { get; private set; }
+        public CombatResolutionSnapshot PostResolutionSnapshot { get; private set; }
+
+        private CombatResolutionResult()
+        {
+            _outcomesBuffer = Array.Empty<CombatOutcome>();
+            _preIntentIds = Array.Empty<string>();
+            _postOutcomeIds = Array.Empty<string>();
+            OutcomesInOrder = new OutcomeListView(Array.Empty<CombatOutcome>(), 0);
+            PreResolutionSnapshot = CombatResolutionSnapshot.CreatePre(0, PooledStringList.Empty);
+            PostResolutionSnapshot = CombatResolutionSnapshot.CreatePost(0, PooledStringList.Empty);
+        }
+
+        private void Reset(
             int authoritativeTick,
-            IReadOnlyList<CombatOutcome> outcomesInOrder,
-            CombatResolutionSnapshot preResolutionSnapshot,
-            CombatResolutionSnapshot postResolutionSnapshot)
+            CombatOutcome[] outcomesBuffer,
+            int outcomeCount,
+            string[] preIntentIds,
+            string[] postOutcomeIds,
+            CombatResolutionSnapshot preSnapshot,
+            CombatResolutionSnapshot postSnapshot)
         {
             AuthoritativeTick = authoritativeTick;
-            OutcomesInOrder = outcomesInOrder ?? throw new ArgumentNullException(nameof(outcomesInOrder));
-            PreResolutionSnapshot = preResolutionSnapshot ?? throw new ArgumentNullException(nameof(preResolutionSnapshot));
-            PostResolutionSnapshot = postResolutionSnapshot ?? throw new ArgumentNullException(nameof(postResolutionSnapshot));
+            _outcomesBuffer = outcomesBuffer ?? throw new ArgumentNullException(nameof(outcomesBuffer));
+            _preIntentIds = preIntentIds ?? throw new ArgumentNullException(nameof(preIntentIds));
+            _postOutcomeIds = postOutcomeIds ?? throw new ArgumentNullException(nameof(postOutcomeIds));
+            OutcomesInOrder = new OutcomeListView(outcomesBuffer, outcomeCount);
+            PreResolutionSnapshot = preSnapshot;
+            PostResolutionSnapshot = postSnapshot;
+            _released = false;
+        }
+
+        public static CombatResolutionResult Create(
+            int authoritativeTick,
+            CombatOutcome[] outcomesBuffer,
+            int outcomeCount,
+            string[] preIntentIds,
+            string[] postOutcomeIds,
+            CombatResolutionSnapshot preSnapshot,
+            CombatResolutionSnapshot postSnapshot)
+        {
+            var result = CombatResolutionResultPool.Rent();
+            result.Reset(authoritativeTick, outcomesBuffer, outcomeCount, preIntentIds, postOutcomeIds, preSnapshot, postSnapshot);
+            return result;
+        }
+
+        public void Release()
+        {
+            if (_released)
+                return;
+
+            _released = true;
+
+            if (_outcomesBuffer.Length > 0)
+                ArrayPool<CombatOutcome>.Shared.Return(_outcomesBuffer, clearArray: true);
+
+            if (_preIntentIds.Length > 0)
+                ArrayPool<string>.Shared.Return(_preIntentIds, clearArray: true);
+
+            if (_postOutcomeIds.Length > 0)
+                ArrayPool<string>.Shared.Return(_postOutcomeIds, clearArray: true);
+
+            _outcomesBuffer = Array.Empty<CombatOutcome>();
+            _preIntentIds = Array.Empty<string>();
+            _postOutcomeIds = Array.Empty<string>();
+            OutcomesInOrder = new OutcomeListView(Array.Empty<CombatOutcome>(), 0);
+            PreResolutionSnapshot = CombatResolutionSnapshot.CreatePre(0, PooledStringList.Empty);
+            PostResolutionSnapshot = CombatResolutionSnapshot.CreatePost(0, PooledStringList.Empty);
+            AuthoritativeTick = 0;
+
+            CombatResolutionResultPool.Return(this);
+        }
+    }
+
+    public readonly struct OutcomeListView : IReadOnlyList<CombatOutcome>
+    {
+        private readonly CombatOutcome[] _buffer;
+        private readonly int _count;
+
+        public OutcomeListView(CombatOutcome[] buffer, int count)
+        {
+            _buffer = buffer ?? Array.Empty<CombatOutcome>();
+            _count = count;
+        }
+
+        public int Count => _count;
+
+        public CombatOutcome this[int index]
+        {
+            get
+            {
+                if ((uint)index >= (uint)_count)
+                    throw new ArgumentOutOfRangeException(nameof(index));
+
+                return _buffer[index];
+            }
+        }
+
+        public Enumerator GetEnumerator() => new Enumerator(_buffer, _count);
+
+        IEnumerator<CombatOutcome> IEnumerable<CombatOutcome>.GetEnumerator() => GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public struct Enumerator : IEnumerator<CombatOutcome>
+        {
+            private readonly CombatOutcome[] _buffer;
+            private readonly int _count;
+            private int _index;
+
+            public Enumerator(CombatOutcome[] buffer, int count)
+            {
+                _buffer = buffer;
+                _count = count;
+                _index = -1;
+            }
+
+            public CombatOutcome Current => _buffer[_index];
+
+            object IEnumerator.Current => Current;
+
+            public void Dispose()
+            {
+            }
+
+            public bool MoveNext()
+            {
+                int next = _index + 1;
+                if (next >= _count)
+                    return false;
+
+                _index = next;
+                return true;
+            }
+
+            public void Reset()
+            {
+                _index = -1;
+            }
         }
     }
 
@@ -197,7 +331,7 @@ namespace Caelmor.Combat
     // CombatOutcome (Schema-conformant, no application)
     // ------------------------------------------------------------------
 
-    public sealed class CombatOutcome
+    public readonly struct CombatOutcome
     {
         public string IntentId { get; }
         public CombatIntentType IntentType { get; }
@@ -253,93 +387,121 @@ namespace Caelmor.Combat
     // Validation Snapshots
     // ------------------------------------------------------------------
 
-    public sealed class CombatResolutionSnapshot
+    public readonly struct CombatResolutionSnapshot
     {
         public int AuthoritativeTick { get; }
-        public IReadOnlyList<string> OrderedIntentIds { get; }
-        public IReadOnlyList<string> OrderedOutcomeIntentIds { get; }
+        public PooledStringList OrderedIntentIds { get; }
+        public PooledStringList OrderedOutcomeIntentIds { get; }
 
         private CombatResolutionSnapshot(
             int authoritativeTick,
-            IReadOnlyList<string> orderedIntentIds,
-            IReadOnlyList<string> orderedOutcomeIntentIds)
+            PooledStringList orderedIntentIds,
+            PooledStringList orderedOutcomeIntentIds)
         {
             AuthoritativeTick = authoritativeTick;
             OrderedIntentIds = orderedIntentIds;
             OrderedOutcomeIntentIds = orderedOutcomeIntentIds;
         }
 
-        public static CombatResolutionSnapshot CapturePre(
-            int tick,
-            IReadOnlyList<FrozenIntentRecord> intents)
+        public static CombatResolutionSnapshot CreatePre(int tick, PooledStringList orderedIntentIds)
         {
-            var ids = new List<string>(intents.Count);
-            for (int i = 0; i < intents.Count; i++)
-                ids.Add(intents[i].IntentId);
-
-            return new CombatResolutionSnapshot(
-                tick,
-                new ReadOnlyCollection<string>(ids),
-                Array.Empty<string>()
-            );
+            return new CombatResolutionSnapshot(tick, orderedIntentIds, PooledStringList.Empty);
         }
 
-        public static CombatResolutionSnapshot CapturePost(
-            int tick,
-            IReadOnlyList<CombatOutcome> outcomes)
+        public static CombatResolutionSnapshot CreatePost(int tick, PooledStringList orderedOutcomeIntentIds)
         {
-            var ids = new List<string>(outcomes.Count);
-            for (int i = 0; i < outcomes.Count; i++)
-                ids.Add(outcomes[i].IntentId);
-
-            return new CombatResolutionSnapshot(
-                tick,
-                Array.Empty<string>(),
-                new ReadOnlyCollection<string>(ids)
-            );
+            return new CombatResolutionSnapshot(tick, PooledStringList.Empty, orderedOutcomeIntentIds);
         }
     }
 
-    // ------------------------------------------------------------------
-    // Dependencies (existing runtime definitions)
-    // ------------------------------------------------------------------
-
-    public enum CombatIntentType
+    public readonly struct PooledStringList : IReadOnlyList<string>
     {
-        CombatAttackIntent,
-        CombatDefendIntent,
-        CombatAbilityIntent,
-        CombatMovementIntent,
-        CombatInteractIntent,
-        CombatCancelIntent
-    }
+        private readonly string[] _buffer;
+        private readonly int _count;
 
-    public sealed class FrozenIntentRecord
-    {
-        public string IntentId { get; }
-        public CombatIntentType IntentType { get; }
-        public string ActorEntityId { get; }
-
-        public FrozenIntentRecord(
-            string intentId,
-            CombatIntentType intentType,
-            string actorEntityId)
+        public PooledStringList(string[] buffer, int count)
         {
-            IntentId = intentId;
-            IntentType = intentType;
-            ActorEntityId = actorEntityId;
+            _buffer = buffer ?? Array.Empty<string>();
+            _count = count;
+        }
+
+        public static PooledStringList Empty => new PooledStringList(Array.Empty<string>(), 0);
+
+        public int Count => _count;
+
+        public string this[int index]
+        {
+            get
+            {
+                if ((uint)index >= (uint)_count)
+                    throw new ArgumentOutOfRangeException(nameof(index));
+
+                return _buffer[index];
+            }
+        }
+
+        public Enumerator GetEnumerator() => new Enumerator(_buffer, _count);
+
+        IEnumerator<string> IEnumerable<string>.GetEnumerator() => GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public struct Enumerator : IEnumerator<string>
+        {
+            private readonly string[] _buffer;
+            private readonly int _count;
+            private int _index;
+
+            public Enumerator(string[] buffer, int count)
+            {
+                _buffer = buffer;
+                _count = count;
+                _index = -1;
+            }
+
+            public string Current => _buffer[_index];
+
+            object IEnumerator.Current => Current;
+
+            public void Dispose()
+            {
+            }
+
+            public bool MoveNext()
+            {
+                int next = _index + 1;
+                if (next >= _count)
+                    return false;
+
+                _index = next;
+                return true;
+            }
+
+            public void Reset()
+            {
+                _index = -1;
+            }
         }
     }
 
-    public sealed class GatedIntentBatch
+    internal static class CombatResolutionResultPool
     {
-        public int AuthoritativeTick { get; }
-        public IReadOnlyList<FrozenIntentRecord> AcceptedIntentsInOrder { get; }
+        private const int MaxPoolSize = 16;
+        private static readonly Stack<CombatResolutionResult> _pool = new Stack<CombatResolutionResult>(MaxPoolSize);
 
-        public GatedIntentBatch(int authoritativeTick, IReadOnlyList<FrozenIntentRecord> accepted)
+        public static CombatResolutionResult Rent()
         {
-            AuthoritativeTick = authoritativeTick;
-            AcceptedIntentsInOrder = accepted;
+            if (_pool.Count > 0)
+                return _pool.Pop();
+
+            return new CombatResolutionResult();
+        }
+
+        public static void Return(CombatResolutionResult result)
+        {
+            if (_pool.Count < MaxPoolSize)
+                _pool.Push(result);
         }
     }
+
 }

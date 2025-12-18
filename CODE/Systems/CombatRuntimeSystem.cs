@@ -30,6 +30,9 @@ namespace Caelmor.Combat
         private readonly ICombatOutcomeCommitSink _commitSink;
         private readonly ICombatantResolver _combatantResolver;
 
+        private const int IntentFilterCapacity = 64;
+        private readonly FrozenIntentRecord[] _filteredIntentBuffer = new FrozenIntentRecord[IntentFilterCapacity];
+
         private bool _executionWindowOpen;
         private long _executionWindowTick;
 
@@ -79,19 +82,20 @@ namespace Caelmor.Combat
                 return;
 
             int authoritativeTick = checked((int)context.TickIndex);
-            var frozen = _intentSource.GetFrozenQueue(authoritativeTick);
+            var frozenBatch = _intentSource.GetFrozenBatch(authoritativeTick);
 
-            if (frozen.AuthoritativeTick != authoritativeTick)
-                throw new InvalidOperationException("Frozen intent queue tick does not match simulation tick.");
+            if (frozenBatch.AuthoritativeTick != authoritativeTick)
+                throw new InvalidOperationException("Frozen intent batch tick does not match simulation tick.");
 
-            var filteredIntents = FilterIntentsForEntity(frozen, entityId);
-            if (filteredIntents.Count == 0)
+            int filteredCount = FilterIntentsForEntity(frozenBatch, entityId, _filteredIntentBuffer);
+            if (filteredCount == 0)
                 return;
 
-            var filteredSnapshot = new FrozenQueueSnapshot(authoritativeTick, filteredIntents);
+            var filteredSnapshot = new FrozenIntentBatch(authoritativeTick, _filteredIntentBuffer, filteredCount);
             var gated = _intentGate.Gate(filteredSnapshot);
 
             var resolution = _resolutionEngine.Resolve(gated);
+            gated.Release();
 
             context.BufferEffect(SimulationEffectCommand.CombatOutcomeCommit(
                 entity: entity,
@@ -100,19 +104,22 @@ namespace Caelmor.Combat
                 label: "combat_commit"));
         }
 
-        private static List<FrozenIntentRecord> FilterIntentsForEntity(FrozenQueueSnapshot frozen, string entityId)
+        private static int FilterIntentsForEntity(FrozenIntentBatch frozen, string entityId, FrozenIntentRecord[] buffer)
         {
-            var filtered = new List<FrozenIntentRecord>(capacity: frozen.Intents.Count);
-            for (int i = 0; i < frozen.Intents.Count; i++)
+            int count = 0;
+            for (int i = 0; i < frozen.Count; i++)
             {
-                var intent = frozen.Intents[i];
+                var intent = frozen[i];
                 if (string.Equals(intent.ActorEntityId, entityId, StringComparison.Ordinal))
                 {
-                    filtered.Add(intent);
+                    if (count >= buffer.Length)
+                        throw new InvalidOperationException("Filtered intent buffer capacity exceeded.");
+
+                    buffer[count++] = intent;
                 }
             }
 
-            return filtered;
+            return count;
         }
     }
 
@@ -144,12 +151,12 @@ namespace Caelmor.Combat
 
     public interface ICombatIntentSource
     {
-        FrozenQueueSnapshot GetFrozenQueue(int authoritativeTick);
+        FrozenIntentBatch GetFrozenBatch(int authoritativeTick);
     }
 
     public interface ICombatIntentGate
     {
-        GatedIntentBatch Gate(FrozenQueueSnapshot frozenQueue);
+        GatedIntentBatch Gate(FrozenIntentBatch frozenQueue);
     }
 
     public interface ICombatOutcomeCommitSink
