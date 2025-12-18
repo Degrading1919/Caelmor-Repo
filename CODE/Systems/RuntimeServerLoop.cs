@@ -30,6 +30,9 @@ namespace Caelmor.Runtime.Host
         private readonly ClientReplicationSnapshotSystem _replication;
         private readonly DeterministicEntityRegistry _entities;
         private readonly PersistenceCompletionQueue _persistenceCompletions;
+        private readonly PersistenceWriteQueue _persistenceWrites;
+        private readonly PersistenceWorkerLoop _persistenceWorker;
+        private readonly PersistencePipelineCounters _persistenceCounters;
         private readonly InboundPumpTickHook _inboundPump;
         private readonly OutboundSendPump _outboundPump;
 
@@ -48,7 +51,10 @@ namespace Caelmor.Runtime.Host
             DeterministicEntityRegistry entities,
             InboundPumpTickHook inboundPump,
             OutboundSendPump outboundPump,
-            PersistenceCompletionQueue persistenceCompletions = null)
+            PersistenceCompletionQueue persistenceCompletions = null,
+            PersistenceWriteQueue persistenceWrites = null,
+            PersistenceWorkerLoop persistenceWorker = null,
+            PersistencePipelineCounters persistenceCounters = null)
         {
             _simulation = simulation ?? throw new ArgumentNullException(nameof(simulation));
             _transport = transport ?? throw new ArgumentNullException(nameof(transport));
@@ -60,6 +66,9 @@ namespace Caelmor.Runtime.Host
             _inboundPump = inboundPump ?? throw new ArgumentNullException(nameof(inboundPump));
             _outboundPump = outboundPump ?? throw new ArgumentNullException(nameof(outboundPump));
             _persistenceCompletions = persistenceCompletions;
+            _persistenceWrites = persistenceWrites;
+            _persistenceWorker = persistenceWorker;
+            _persistenceCounters = persistenceCounters;
 
             _simulation.StallDetected += OnTickStalled;
         }
@@ -91,7 +100,10 @@ namespace Caelmor.Runtime.Host
             int outboundSendPerIteration = 0,
             int outboundPumpIdleMs = 1,
             ReplicationSnapshotCounters? replicationCounters = null,
-            int replicationHookOrderKey = int.MaxValue - 512)
+            int replicationHookOrderKey = int.MaxValue - 512,
+            PersistenceWriteQueue persistenceWrites = null,
+            PersistenceWorkerLoop persistenceWorker = null,
+            PersistencePipelineCounters persistenceCounters = null)
         {
             if (activeSessions == null)
                 throw new ArgumentNullException(nameof(activeSessions));
@@ -130,7 +142,20 @@ namespace Caelmor.Runtime.Host
             var outboundPump = new OutboundSendPump(transport, sender, activeSessions, transport.Config, counters, outboundSendPerIteration, outboundPumpIdleMs);
 
             WorldBootstrapRegistration.Apply(simulation, eligibilityGates, participants, combinedHooks);
-            return new RuntimeServerLoop(simulation, transport, handshakes, commands, visibility, replication, entities, inboundPump, outboundPump, persistenceCompletions);
+            return new RuntimeServerLoop(
+                simulation,
+                transport,
+                handshakes,
+                commands,
+                visibility,
+                replication,
+                entities,
+                inboundPump,
+                outboundPump,
+                persistenceCompletions,
+                persistenceWrites,
+                persistenceWorker,
+                persistenceCounters);
         }
 
         public void Start()
@@ -140,6 +165,7 @@ namespace Caelmor.Runtime.Host
                 if (_started)
                     return;
 
+                _persistenceWorker?.Start();
                 _simulation.Start();
                 _outboundPump.Start();
                 _started = true;
@@ -156,6 +182,7 @@ namespace Caelmor.Runtime.Host
                 _started = false;
             }
 
+            _persistenceWorker?.Stop();
             _outboundPump.Stop();
             _simulation.Stop();
             ClearTransientState();
@@ -216,7 +243,9 @@ namespace Caelmor.Runtime.Host
             var handshakes = _handshakes.SnapshotMetrics();
             var inboundPump = _inboundPump.Diagnostics;
             var persistenceCompletions = _persistenceCompletions?.SnapshotMetrics();
-            return new RuntimeDiagnosticsSnapshot(tick, transport, persistenceCompletions, commands, handshakes, inboundPump);
+            var persistenceCounters = _persistenceCounters?.Snapshot();
+            var persistenceQueue = _persistenceWrites?.SnapshotMetrics();
+            return new RuntimeDiagnosticsSnapshot(tick, transport, persistenceCompletions, commands, handshakes, inboundPump, persistenceCounters, persistenceQueue);
         }
 
         private void ClearTransientState()
@@ -227,6 +256,7 @@ namespace Caelmor.Runtime.Host
             _visibility.Clear();
             _entities.ClearAll();
             _persistenceCompletions?.Clear();
+            _persistenceWrites?.Clear();
         }
 
         private void OnTickStalled(TickStallEvent stall)
@@ -258,7 +288,9 @@ namespace Caelmor.Runtime.Host
             CompletionQueueMetrics? persistenceCompletionMailbox,
             CommandIngestorDiagnostics commands,
             HandshakePipelineMetrics handshakes,
-            InboundPumpDiagnostics inboundPump)
+            InboundPumpDiagnostics inboundPump,
+            PersistencePipelineCounterSnapshot? persistencePipelineCounters,
+            PersistenceQueueMetrics? persistenceQueue)
         {
             Tick = tick;
             Transport = transport;
@@ -266,6 +298,8 @@ namespace Caelmor.Runtime.Host
             Commands = commands;
             Handshakes = handshakes;
             InboundPump = inboundPump;
+            PersistencePipelineCounters = persistencePipelineCounters;
+            PersistenceQueue = persistenceQueue;
         }
 
         public TickDiagnosticsSnapshot Tick { get; }
@@ -274,6 +308,8 @@ namespace Caelmor.Runtime.Host
         public CommandIngestorDiagnostics Commands { get; }
         public HandshakePipelineMetrics Handshakes { get; }
         public InboundPumpDiagnostics InboundPump { get; }
+        public PersistencePipelineCounterSnapshot? PersistencePipelineCounters { get; }
+        public PersistenceQueueMetrics? PersistenceQueue { get; }
         public bool HasDetectedStall => Tick.StallDetections > 0;
     }
 }

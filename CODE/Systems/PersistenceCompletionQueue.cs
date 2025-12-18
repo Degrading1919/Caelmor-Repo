@@ -18,14 +18,16 @@ namespace Caelmor.Runtime.Persistence
         private readonly Queue<PersistenceCompletion> _queue;
         private readonly int _maxCompletions;
         private readonly int _maxBytes;
+        private readonly PersistencePipelineCounters? _counters;
         private CompletionQueueMetrics _metrics;
 
-        public PersistenceCompletionQueue(RuntimeBackpressureConfig config)
+        public PersistenceCompletionQueue(RuntimeBackpressureConfig config, PersistencePipelineCounters counters = null)
         {
             if (config is null) throw new ArgumentNullException(nameof(config));
             _maxCompletions = config.MaxPersistenceCompletions;
             _maxBytes = config.MaxPersistenceCompletionBytes;
             _queue = new Queue<PersistenceCompletion>(_maxCompletions);
+            _counters = counters;
         }
 
         /// <summary>
@@ -50,6 +52,7 @@ namespace Caelmor.Runtime.Persistence
                 _metrics.CurrentBytes += payloadBytes;
                 if (_metrics.Peak < _metrics.Current)
                     _metrics.Peak = _metrics.Current;
+                _counters?.RecordCompletionBacklog(_metrics.Current, _metrics.CurrentBytes);
                 return true;
             }
         }
@@ -77,6 +80,7 @@ namespace Caelmor.Runtime.Persistence
                 }
 
                 _metrics.Current = 0;
+                _metrics.CurrentBytes = 0;
             }
 
             return drained;
@@ -126,6 +130,7 @@ namespace Caelmor.Runtime.Persistence
         {
             _metrics.Dropped++;
             _metrics.DroppedBytes += payloadBytes;
+            _counters?.RecordDrop();
         }
     }
 
