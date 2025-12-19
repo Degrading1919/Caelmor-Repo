@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Caelmor.ClientReplication;
 using Caelmor.Runtime;
 using Caelmor.Runtime.Diagnostics;
@@ -22,10 +23,12 @@ namespace Caelmor.Runtime.Transport
         private readonly RuntimeBackpressureConfig _config;
         private readonly DeterministicTransportRouter _deterministic;
         private readonly ReplicationSnapshotCounters _counters;
-        private readonly Dictionary<SessionId, Queue<InboundEnvelope>> _inboundQueues = new Dictionary<SessionId, Queue<InboundEnvelope>>(64);
+        private readonly Dictionary<SessionId, Queue<ServerStampedInboundCommand>> _inboundQueues = new Dictionary<SessionId, Queue<ServerStampedInboundCommand>>(64);
         private readonly Dictionary<SessionId, int> _bytesBySession = new Dictionary<SessionId, int>(64);
         private readonly Dictionary<SessionId, SessionQueueMetrics> _metrics = new Dictionary<SessionId, SessionQueueMetrics>(64);
+        private readonly Dictionary<SessionId, long> _receiveSeqBySession = new Dictionary<SessionId, long>(64);
         private readonly List<SessionId> _sessionOrder = new List<SessionId>(64);
+        private long _currentReceiveTick;
 
         public PooledTransportRouter(RuntimeBackpressureConfig config, ReplicationSnapshotCounters? counters = null)
         {
@@ -66,7 +69,7 @@ namespace Caelmor.Runtime.Transport
             {
                 if (!_inboundQueues.TryGetValue(sessionId, out var queue))
                 {
-                    queue = new Queue<InboundEnvelope>();
+                    queue = new Queue<ServerStampedInboundCommand>();
                     _inboundQueues[sessionId] = queue;
                 }
 
@@ -87,7 +90,12 @@ namespace Caelmor.Runtime.Transport
                     return false;
                 }
 
-                queue.Enqueue(new InboundEnvelope(sessionId, commandType ?? string.Empty, submitTick, payload));
+                _receiveSeqBySession.TryGetValue(sessionId, out var currentSeq);
+                var nextSeq = currentSeq + 1;
+                _receiveSeqBySession[sessionId] = nextSeq;
+                var receiveTick = Volatile.Read(ref _currentReceiveTick);
+                var commandTypeId = ComputeStableCommandType(commandType);
+                queue.Enqueue(new ServerStampedInboundCommand(sessionId, receiveTick, nextSeq, commandTypeId, submitTick, payload));
                 var updatedBytes = currentBytes + payloadSize;
                 _bytesBySession[sessionId] = updatedBytes;
 
@@ -104,7 +112,7 @@ namespace Caelmor.Runtime.Transport
         /// Drains inbound mailboxes in deterministic session order and routes payloads into the
         /// authoritative ingress. Must be invoked from the tick thread.
         /// </summary>
-        public int RouteQueuedInbound(int maxFrames = int.MaxValue)
+        public int RouteQueuedInbound(long serverReceiveTick, int maxFrames = int.MaxValue)
         {
             TickThreadAssert.AssertTickThread();
 
@@ -112,6 +120,7 @@ namespace Caelmor.Runtime.Transport
                 return 0;
 
             int processed = 0;
+            Interlocked.Exchange(ref _currentReceiveTick, serverReceiveTick);
             lock (_inboundGate)
             {
                 _sessionOrder.Clear();
@@ -132,7 +141,7 @@ namespace Caelmor.Runtime.Transport
                         processed++;
                         _bytesBySession[sessionId] = Math.Max(0, _bytesBySession[sessionId] - envelope.Payload.Length);
 
-                        var result = _deterministic.RouteInbound(envelope.SessionId, envelope.Payload, envelope.CommandType, envelope.SubmitTick);
+                        var result = _deterministic.RouteInbound(envelope);
                         if (!result.Ok)
                         {
                             RegisterDrop(sessionId, envelope.Payload.Length);
@@ -225,6 +234,7 @@ namespace Caelmor.Runtime.Transport
                 _inboundQueues.Clear();
                 _bytesBySession.Clear();
                 _metrics.Clear();
+                _receiveSeqBySession.Clear();
                 _sessionOrder.Clear();
             }
 
@@ -256,6 +266,7 @@ namespace Caelmor.Runtime.Transport
                 }
 
                 _bytesBySession.Remove(sessionId);
+                _receiveSeqBySession.Remove(sessionId);
 
                 if (_metrics.TryGetValue(sessionId, out var metrics))
                 {
@@ -286,19 +297,17 @@ namespace Caelmor.Runtime.Transport
             _metrics[sessionId] = metrics;
         }
 
-        private readonly struct InboundEnvelope
+        private static int ComputeStableCommandType(string commandType)
         {
-            public readonly SessionId SessionId;
-            public readonly string CommandType;
-            public readonly long SubmitTick;
-            public readonly PooledPayloadLease Payload;
+            if (string.IsNullOrEmpty(commandType))
+                return 0;
 
-            public InboundEnvelope(SessionId sessionId, string commandType, long submitTick, PooledPayloadLease payload)
+            unchecked
             {
-                SessionId = sessionId;
-                CommandType = commandType;
-                SubmitTick = submitTick;
-                Payload = payload;
+                int hash = 17;
+                for (int i = 0; i < commandType.Length; i++)
+                    hash = (hash * 31) + commandType[i];
+                return hash;
             }
         }
 

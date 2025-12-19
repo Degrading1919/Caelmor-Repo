@@ -11,6 +11,8 @@ namespace Caelmor.Runtime
     {
         public static RuntimeBackpressureConfig Default { get; } = new RuntimeBackpressureConfig(
             maxInboundCommandsPerSession: 64,
+            maxInboundCommandAgeTicks: 4,
+            maxInboundCommandLeadTicks: 0,
             maxOutboundSnapshotsPerSession: 8,
             maxQueuedBytesPerSession: 256 * 1024,
             maxPersistenceWritesPerPlayer: 16,
@@ -22,6 +24,8 @@ namespace Caelmor.Runtime
 
         public RuntimeBackpressureConfig(
             int maxInboundCommandsPerSession,
+            int maxInboundCommandAgeTicks,
+            int maxInboundCommandLeadTicks,
             int maxOutboundSnapshotsPerSession,
             int maxQueuedBytesPerSession,
             int maxPersistenceWritesPerPlayer,
@@ -32,6 +36,8 @@ namespace Caelmor.Runtime
             int maxPersistenceCompletionBytes)
             : this(
                 maxInboundCommandsPerSession,
+                maxInboundCommandAgeTicks,
+                maxInboundCommandLeadTicks,
                 maxOutboundSnapshotsPerSession,
                 maxQueuedBytesPerSession,
                 maxPersistenceWritesPerPlayer,
@@ -46,6 +52,8 @@ namespace Caelmor.Runtime
 
         public RuntimeBackpressureConfig(
             int maxInboundCommandsPerSession,
+            int maxInboundCommandAgeTicks,
+            int maxInboundCommandLeadTicks,
             int maxOutboundSnapshotsPerSession,
             int maxQueuedBytesPerSession,
             int maxPersistenceWritesPerPlayer,
@@ -54,6 +62,8 @@ namespace Caelmor.Runtime
             int maxPersistenceWriteBytesGlobal)
             : this(
                 maxInboundCommandsPerSession,
+                maxInboundCommandAgeTicks,
+                maxInboundCommandLeadTicks,
                 maxOutboundSnapshotsPerSession,
                 maxQueuedBytesPerSession,
                 maxPersistenceWritesPerPlayer,
@@ -68,12 +78,16 @@ namespace Caelmor.Runtime
 
         public RuntimeBackpressureConfig(
             int maxInboundCommandsPerSession,
+            int maxInboundCommandAgeTicks,
+            int maxInboundCommandLeadTicks,
             int maxOutboundSnapshotsPerSession,
             int maxQueuedBytesPerSession,
             int maxPersistenceWritesPerPlayer,
             int maxPersistenceWritesGlobal)
             : this(
                 maxInboundCommandsPerSession,
+                maxInboundCommandAgeTicks,
+                maxInboundCommandLeadTicks,
                 maxOutboundSnapshotsPerSession,
                 maxQueuedBytesPerSession,
                 maxPersistenceWritesPerPlayer,
@@ -88,6 +102,8 @@ namespace Caelmor.Runtime
 
         private RuntimeBackpressureConfig(
             int maxInboundCommandsPerSession,
+            int maxInboundCommandAgeTicks,
+            int maxInboundCommandLeadTicks,
             int maxOutboundSnapshotsPerSession,
             int maxQueuedBytesPerSession,
             int maxPersistenceWritesPerPlayer,
@@ -101,6 +117,8 @@ namespace Caelmor.Runtime
             if (!skipValidation)
             {
                 if (maxInboundCommandsPerSession <= 0) throw new ArgumentOutOfRangeException(nameof(maxInboundCommandsPerSession));
+                if (maxInboundCommandAgeTicks < 0) throw new ArgumentOutOfRangeException(nameof(maxInboundCommandAgeTicks));
+                if (maxInboundCommandLeadTicks < 0) throw new ArgumentOutOfRangeException(nameof(maxInboundCommandLeadTicks));
                 if (maxOutboundSnapshotsPerSession <= 0) throw new ArgumentOutOfRangeException(nameof(maxOutboundSnapshotsPerSession));
                 if (maxQueuedBytesPerSession <= 0) throw new ArgumentOutOfRangeException(nameof(maxQueuedBytesPerSession));
                 if (maxPersistenceWritesPerPlayer <= 0) throw new ArgumentOutOfRangeException(nameof(maxPersistenceWritesPerPlayer));
@@ -112,6 +130,8 @@ namespace Caelmor.Runtime
             }
 
             MaxInboundCommandsPerSession = maxInboundCommandsPerSession;
+            MaxInboundCommandAgeTicks = maxInboundCommandAgeTicks;
+            MaxInboundCommandLeadTicks = maxInboundCommandLeadTicks;
             MaxOutboundSnapshotsPerSession = maxOutboundSnapshotsPerSession;
             MaxQueuedBytesPerSession = maxQueuedBytesPerSession;
             MaxPersistenceWritesPerPlayer = maxPersistenceWritesPerPlayer;
@@ -123,6 +143,8 @@ namespace Caelmor.Runtime
         }
 
         public int MaxInboundCommandsPerSession { get; }
+        public int MaxInboundCommandAgeTicks { get; }
+        public int MaxInboundCommandLeadTicks { get; }
         public int MaxOutboundSnapshotsPerSession { get; }
         public int MaxQueuedBytesPerSession { get; }
         public int MaxPersistenceWritesPerPlayer { get; }
