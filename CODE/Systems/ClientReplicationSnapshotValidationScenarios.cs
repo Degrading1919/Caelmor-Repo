@@ -1,6 +1,12 @@
 using System;
+using System.Buffers;
 using System.Collections.Generic;
+using System.Threading;
 using Caelmor.Runtime;
+using Caelmor.Runtime.Diagnostics;
+using Caelmor.Runtime.Host;
+using Caelmor.Runtime.Integration;
+using Caelmor.Runtime.InterestManagement;
 using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.Persistence;
 using Caelmor.Runtime.Replication;
@@ -9,6 +15,7 @@ using Caelmor.Runtime.Tick;
 using Caelmor.Runtime.Transport;
 using Caelmor.Runtime.Threading;
 using Caelmor.Runtime.WorldSimulation;
+using Caelmor.Runtime.WorldState;
 using Caelmor.Systems;
 using Caelmor.Validation;
 
@@ -28,7 +35,8 @@ namespace Caelmor.Validation.Replication
                 new Scenario2_NoMidTickSnapshots(),
                 new Scenario3_EligibilityEnforced(),
                 new Scenario4_DeterministicSnapshotContents(),
-                new Scenario5_OutboundSendPumpDrainsSnapshots()
+                new Scenario5_OutboundSendPumpDrainsSnapshots(),
+                new Scenario6_LifecycleMailboxAppliesDisconnectOnTick()
             };
         }
 
@@ -225,6 +233,118 @@ namespace Caelmor.Validation.Replication
             }
         }
 
+        private sealed class Scenario6_LifecycleMailboxAppliesDisconnectOnTick : IValidationScenario
+        {
+            public string Name => "Scenario 6 — Lifecycle Mailbox Applies Disconnect On Tick";
+
+            public void Run(IAssert assert)
+            {
+                var config = RuntimeBackpressureConfig.Default;
+                var counters = new ReplicationSnapshotCounters();
+                var transport = new PooledTransportRouter(config, counters);
+                var commands = new AuthoritativeCommandIngestor(config);
+                var authority = new StubAuthority();
+                var saveBinding = new StubSaveBinding();
+                var restore = new StubRestoreQuery();
+                var mutationGate = new AllowMutationGate();
+                var sessionEvents = new StubSessionEvents();
+                var sessionEligibility = new SnapshotEligibilityRegistry();
+                var sessions = new PlayerSessionSystem(authority, saveBinding, restore, sessionEligibility, mutationGate, sessionEvents);
+                var handoff = new StubHandoffService();
+                var handshakes = new SessionHandshakePipeline(capacity: 4, sessions, handoff);
+                var entities = new DeterministicEntityRegistry();
+                var simulation = new WorldSimulationCore(entities);
+                var spatial = new ZoneSpatialIndex(cellSize: 1);
+                var visibility = new VisibilityCullingService(spatial);
+
+                var gate = new ConfigurableGate();
+                var stateReader = new RecordingStateReader();
+                var diagnostics = new TickDiagnostics();
+                var slicer = new TimeSlicedWorkScheduler(diagnostics);
+                var replication = new ClientReplicationSnapshotSystem(
+                    sessions,
+                    sessionEligibility,
+                    gate,
+                    stateReader,
+                    transport,
+                    slicer,
+                    SnapshotSerializationBudget.Default,
+                    counters);
+
+                var commandHandlers = new CommandHandlerRegistry();
+                commandHandlers.Register(1, new NoOpCommandHandler());
+
+                var sessionId = new SessionId(Guid.Parse("dddddddd-1111-2222-3333-444444444444"));
+                var zone = new ZoneId(1);
+                var entity = new EntityHandle(100);
+
+                TickThreadAssert.CaptureTickThread(Thread.CurrentThread);
+                try
+                {
+                    visibility.Track(entity, zone, new ZonePosition(0, 0));
+                    visibility.RefreshVisibility(sessionId, new ZoneInterestQuery(zone, new ZonePosition(0, 0), range: 1));
+
+                    var snapshot = new ClientReplicationSnapshot(
+                        sessionId,
+                        authoritativeTick: 1,
+                        Array.Empty<ReplicatedEntitySnapshot>(),
+                        count: 0,
+                        ArrayPool<ReplicatedEntitySnapshot>.Shared,
+                        () => { });
+                    transport.RouteSnapshot(snapshot);
+                }
+                finally
+                {
+                    TickThreadAssert.ClearTickThread();
+                }
+
+                commands.TryEnqueue(sessionId, new AuthoritativeCommand(authoritativeTick: 1, commandType: 1, payloadA: 7, payloadB: 9));
+                var beforeMetrics = commands.SnapshotMetrics();
+                assert.Equal(1, beforeMetrics.Count, "Command metrics should record the session before disconnect.");
+
+                var runtime = RuntimeServerLoop.Create(
+                    simulation,
+                    transport,
+                    handshakes,
+                    commands,
+                    commandHandlers,
+                    visibility,
+                    replication,
+                    entities,
+                    ReadOnlySpan<ISimulationEligibilityGate>.Empty,
+                    ReadOnlySpan<ParticipantRegistration>.Empty,
+                    ReadOnlySpan<PhaseHookRegistration>.Empty,
+                    sessions);
+
+                runtime.OnSessionDisconnected(sessionId);
+
+                TickThreadAssert.CaptureTickThread(Thread.CurrentThread);
+                try
+                {
+                    simulation.ExecuteSingleTick();
+                }
+                finally
+                {
+                    TickThreadAssert.ClearTickThread();
+                }
+
+                assert.False(visibility.IsEntityReplicationEligible(sessionId, entity), "Visibility cache must be cleared after disconnect.");
+
+                var afterMetrics = commands.SnapshotMetrics();
+                assert.Equal(0, afterMetrics.Count, "Command metrics must drop after disconnect cleanup.");
+
+                bool dequeued = transport.TryDequeueOutbound(sessionId, out var droppedSnapshot);
+                if (dequeued)
+                {
+                    droppedSnapshot.Dispose();
+                }
+
+                assert.False(dequeued, "Outbound snapshots must be dropped after disconnect cleanup.");
+
+                runtime.Dispose();
+            }
+        }
+
         private sealed class Rig
         {
             public readonly ClientReplicationSnapshotSystem System;
@@ -372,6 +492,19 @@ namespace Caelmor.Validation.Replication
             public void OnSessionDeactivated(SessionId sessionId, PlayerId playerId, SaveId saveId, DeactivationReason reason)
             {
             }
+        }
+
+        private sealed class StubHandoffService : IOnboardingHandoffService
+        {
+            public void NotifyOnboardingSuccess(IServerSession session)
+            {
+            }
+
+            public void NotifyOnboardingFailure(IServerSession session)
+            {
+            }
+
+            public bool IsClientAuthorized(SessionId sessionId) => false;
         }
 
         private sealed class RecordingSender : IOutboundTransportSender

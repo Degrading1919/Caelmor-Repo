@@ -79,6 +79,8 @@ namespace Caelmor.Runtime.Replication
 
         public void OnSessionDisconnected(SessionId sessionId)
         {
+            TickThreadAssert.AssertTickThread();
+
             if (sessionId.Equals(default))
                 return;
 

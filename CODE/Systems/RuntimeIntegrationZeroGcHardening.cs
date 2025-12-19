@@ -935,6 +935,7 @@ namespace Caelmor.Runtime.Integration
         /// </summary>
         public void Track(EntityHandle entity, ZoneId zone, ZonePosition position)
         {
+            TickThreadAssert.AssertTickThread();
             _spatialIndex.Upsert(entity, zone, position);
         }
 
@@ -943,6 +944,7 @@ namespace Caelmor.Runtime.Integration
         /// </summary>
         public void Remove(EntityHandle entity)
         {
+            TickThreadAssert.AssertTickThread();
             _spatialIndex.Remove(entity);
         }
 
@@ -951,6 +953,7 @@ namespace Caelmor.Runtime.Integration
         /// </summary>
         public int RefreshVisibility(SessionId session, ZoneInterestQuery query)
         {
+            TickThreadAssert.AssertTickThread();
             _queryBuffer.Clear();
             _spatialIndex.Query(query, _queryBuffer);
             _queryBuffer.Sort(EntityHandleComparer.Instance);
@@ -972,6 +975,7 @@ namespace Caelmor.Runtime.Integration
         {
             if (destination is null) throw new ArgumentNullException(nameof(destination));
 
+            TickThreadAssert.AssertTickThread();
             destination.Clear();
             _spatialIndex.Query(query, destination);
             destination.Sort(EntityHandleComparer.Instance);
@@ -991,6 +995,7 @@ namespace Caelmor.Runtime.Integration
         /// </summary>
         public void RemoveSession(SessionId sessionId)
         {
+            TickThreadAssert.AssertTickThread();
             if (!_visibility.TryGetValue(sessionId, out var bucket))
                 return;
 
@@ -1003,6 +1008,7 @@ namespace Caelmor.Runtime.Integration
         /// </summary>
         public void RemoveZone(ZoneId zone)
         {
+            TickThreadAssert.AssertTickThread();
             _spatialIndex.RemoveZone(zone);
 
             var sessionsToDrop = new List<SessionId>();
@@ -1020,6 +1026,7 @@ namespace Caelmor.Runtime.Integration
         /// </summary>
         public void Clear()
         {
+            TickThreadAssert.AssertTickThread();
             foreach (var kvp in _visibility)
             {
                 kvp.Value.Release(_entityPool);
