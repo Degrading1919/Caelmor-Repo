@@ -20,6 +20,11 @@ namespace Caelmor.Runtime.Host
     /// </summary>
     public static class RuntimeCompositionRoot
     {
+        public static ServerRuntimeHost CreateHost(RuntimeCompositionSettings settings)
+        {
+            return Create(settings);
+        }
+
         public static ServerRuntimeHost CreateAndStart(RuntimeCompositionSettings settings)
         {
             var host = Create(settings);
