@@ -27,13 +27,16 @@ namespace Caelmor.Runtime.Integration
     public sealed class AuthoritativeCommandIngestor : IAuthoritativeCommandIngestor
     {
         private readonly RuntimeBackpressureConfig _config;
-        private readonly Dictionary<SessionId, SessionCommandState> _perSession = new Dictionary<SessionId, SessionCommandState>(64);
         private readonly ArrayPool<AuthoritativeCommand> _commandPool;
-        private readonly Dictionary<SessionId, SessionCommandMetrics> _metrics = new Dictionary<SessionId, SessionCommandMetrics>(64);
+        private readonly Dictionary<SessionId, SessionCommandState> _perSession;
+        private readonly Dictionary<SessionId, SessionCommandMetrics> _metrics;
         private readonly object _gate = new object();
 
         private SessionId[] _sessionKeySnapshot = Array.Empty<SessionId>();
         private SessionCommandMetricsSnapshot[] _metricsBuffer = Array.Empty<SessionCommandMetricsSnapshot>();
+        private long _commandRingGrows;
+        private long _prewarmCompleted;
+        private long _dropPathInvocations;
 #if DEBUG
         private int _maxCommandsPerSession;
 #endif
@@ -42,6 +45,8 @@ namespace Caelmor.Runtime.Integration
         {
             _config = config ?? RuntimeBackpressureConfig.Default;
             _commandPool = commandPool ?? ArrayPool<AuthoritativeCommand>.Shared;
+            _perSession = new Dictionary<SessionId, SessionCommandState>(Math.Max(1, _config.ExpectedMaxSessions));
+            _metrics = new Dictionary<SessionId, SessionCommandMetrics>(Math.Max(1, _config.ExpectedMaxSessions));
         }
 
         public bool TryEnqueue(SessionId sessionId, in AuthoritativeCommand command)
@@ -54,11 +59,13 @@ namespace Caelmor.Runtime.Integration
                 if (!_perSession.TryGetValue(sessionId, out var state))
                 {
                     state = SessionCommandState.Create(_config.MaxInboundCommandsPerSession, _commandPool);
+                    _commandRingGrows++;
                 }
 
                 if (command.AuthoritativeTick < state.LastFrozenTick)
                 {
                     state.Metrics.DroppedStale++;
+                    _dropPathInvocations++;
                     _perSession[sessionId] = state;
                     _metrics[sessionId] = state.Metrics;
                     return false;
@@ -70,6 +77,7 @@ namespace Caelmor.Runtime.Integration
                 if (!success)
                 {
                     state.Metrics.DroppedOverflow++;
+                    _dropPathInvocations++;
                     _perSession[sessionId] = state;
                     _metrics[sessionId] = state.Metrics;
                     return false;
@@ -149,6 +157,7 @@ namespace Caelmor.Runtime.Integration
                 state.ReturnBuffer(_commandPool);
                 _perSession.Remove(sessionId);
                 _metrics.Remove(sessionId);
+                _dropPathInvocations++;
                 return true;
             }
         }
@@ -165,6 +174,37 @@ namespace Caelmor.Runtime.Integration
 
                 _perSession.Clear();
                 _metrics.Clear();
+            }
+        }
+
+        /// <summary>
+        /// Pre-allocates pools and diagnostic buffers. Call once during runtime startup to avoid
+        /// allocating in tick-thread hot paths after warm-up.
+        /// </summary>
+        public void Prewarm()
+        {
+            lock (_gate)
+            {
+                if (_prewarmCompleted > 0)
+                    return;
+
+                int expectedSessions = Math.Max(1, _config.ExpectedMaxSessions);
+                EnsureCapacity(ref _sessionKeySnapshot, expectedSessions);
+                EnsureCapacity(ref _metricsBuffer, expectedSessions);
+
+                int ringStride = Math.Max(1, _config.MaxInboundCommandsPerSession) + 1;
+                int scratchSize = Math.Max(1, _config.ExpectedMaxCommandsPerSessionPerTick);
+
+                for (int i = 0; i < expectedSessions; i++)
+                {
+                    var ringBuffer = _commandPool.Rent(ringStride);
+                    _commandPool.Return(ringBuffer, clearArray: false);
+
+                    var scratchBuffer = _commandPool.Rent(scratchSize);
+                    _commandPool.Return(scratchBuffer, clearArray: false);
+                }
+
+                _prewarmCompleted++;
             }
         }
 
@@ -205,7 +245,15 @@ namespace Caelmor.Runtime.Integration
                         maxBuffered = metrics.PeakBuffered;
                 }
 
-                var totals = new CommandIngestorTotals(totalAccepted, totalDroppedOverflow, totalDroppedStale, totalFrozen, maxBuffered);
+                var totals = new CommandIngestorTotals(
+                    totalAccepted,
+                    totalDroppedOverflow,
+                    totalDroppedStale,
+                    totalFrozen,
+                    maxBuffered,
+                    _commandRingGrows,
+                    _prewarmCompleted,
+                    _dropPathInvocations);
                 return new CommandIngestorDiagnostics(_metricsBuffer, index, totals);
             }
         }
@@ -256,7 +304,7 @@ namespace Caelmor.Runtime.Integration
                 var buffer = pool.Rent(Math.Max(1, capacity));
                 return new SessionCommandState
                 {
-                    Ring = new CommandRing(capacity),
+                    Ring = new CommandRing(capacity, pool),
                     Scratch = buffer,
                     Frozen = FrozenCommandBatch.Empty(default),
                     Metrics = default,
@@ -270,8 +318,7 @@ namespace Caelmor.Runtime.Integration
                     pool.Return(Scratch, clearArray: false);
 
                 Scratch = Array.Empty<AuthoritativeCommand>();
-                var capacity = Ring.Capacity <= 0 ? 1 : Ring.Capacity;
-                Ring = new CommandRing(capacity);
+                Ring.ReturnBuffer(pool);
                 Frozen = FrozenCommandBatch.Empty(default);
                 Metrics = default;
                 LastFrozenTick = 0;
@@ -280,18 +327,20 @@ namespace Caelmor.Runtime.Integration
 
         private struct CommandRing
         {
-            private readonly int _capacity;
             private AuthoritativeCommand[] _commands;
+            private int _capacity;
+            private int _stride;
             private int _head;
             private int _tail;
 
             public int Count { get; private set; }
             public int Capacity => _capacity;
 
-            public CommandRing(int capacity)
+            public CommandRing(int capacity, ArrayPool<AuthoritativeCommand> pool)
             {
                 _capacity = Math.Max(1, capacity);
-                _commands = new AuthoritativeCommand[_capacity + 1];
+                _stride = _capacity + 1;
+                _commands = pool.Rent(_stride);
                 _head = 0;
                 _tail = 0;
                 Count = 0;
@@ -299,7 +348,10 @@ namespace Caelmor.Runtime.Integration
 
             public bool TryPush(in AuthoritativeCommand command)
             {
-                var nextTail = (_tail + 1) % _commands.Length;
+                if (_stride <= 0)
+                    return false;
+
+                var nextTail = (_tail + 1) % _stride;
                 if (nextTail == _head)
                     return false;
 
@@ -316,11 +368,24 @@ namespace Caelmor.Runtime.Integration
                 {
                     destination[written] = _commands[_head];
                     _commands[_head] = default;
-                    _head = (_head + 1) % _commands.Length;
+                    _head = (_head + 1) % _stride;
                     written++;
                     Count--;
                 }
                 return written;
+            }
+
+            public void ReturnBuffer(ArrayPool<AuthoritativeCommand> pool)
+            {
+                if (_commands != null && _commands.Length > 0)
+                    pool.Return(_commands, clearArray: false);
+
+                _commands = Array.Empty<AuthoritativeCommand>();
+                _capacity = 0;
+                _stride = 0;
+                _head = 0;
+                _tail = 0;
+                Count = 0;
             }
         }
     }
@@ -813,13 +878,24 @@ namespace Caelmor.Runtime.Integration
 
     public readonly struct CommandIngestorTotals
     {
-        public CommandIngestorTotals(int accepted, int droppedOverflow, int droppedStale, int frozenLastTick, int peakBuffered)
+        public CommandIngestorTotals(
+            int accepted,
+            int droppedOverflow,
+            int droppedStale,
+            int frozenLastTick,
+            int peakBuffered,
+            long commandRingGrows,
+            long prewarmCompleted,
+            long dropPathInvocations)
         {
             Accepted = accepted;
             DroppedOverflow = droppedOverflow;
             DroppedStale = droppedStale;
             FrozenLastTick = frozenLastTick;
             PeakBuffered = peakBuffered;
+            CommandRingGrows = commandRingGrows;
+            PrewarmCompleted = prewarmCompleted;
+            DropPathInvocations = dropPathInvocations;
         }
 
         public int Accepted { get; }
@@ -827,6 +903,9 @@ namespace Caelmor.Runtime.Integration
         public int DroppedStale { get; }
         public int FrozenLastTick { get; }
         public int PeakBuffered { get; }
+        public long CommandRingGrows { get; }
+        public long PrewarmCompleted { get; }
+        public long DropPathInvocations { get; }
     }
 
     public struct SessionCommandMetrics

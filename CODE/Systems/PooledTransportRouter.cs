@@ -41,6 +41,12 @@ namespace Caelmor.Runtime.Transport
         internal DeterministicTransportRouter DeterministicRouter => _deterministic;
         internal ReplicationSnapshotCounters SnapshotCounters => _counters;
 
+        public void Prewarm()
+        {
+            _sessionOrder.Capacity = Math.Max(_sessionOrder.Capacity, _config.ExpectedMaxSessions);
+            _deterministic.Prewarm();
+        }
+
         /// <summary>
         /// Enqueues an inbound payload from a transport thread. Payload bytes are copied into a pooled
         /// lease to avoid lifetime hazards across threads.

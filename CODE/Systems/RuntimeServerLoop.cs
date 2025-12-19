@@ -196,6 +196,9 @@ namespace Caelmor.Runtime.Host
                     throw new InvalidOperationException("AuthoritativeCommandConsumeTickHook missing handler registration.");
 #endif
 
+                _commands.Prewarm();
+                _transport.Prewarm();
+
                 _persistenceWorker?.Start();
                 _simulation.Start();
                 _outboundPump.Start();

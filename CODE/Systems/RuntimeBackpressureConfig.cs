@@ -22,7 +22,10 @@ namespace Caelmor.Runtime
             maxPersistenceCompletions: 128,
             maxPersistenceCompletionBytes: 512 * 1024,
             maxLifecycleOps: 256,
-            maxLifecycleOpBytes: 64 * 1024);
+            maxLifecycleOpBytes: 64 * 1024,
+            expectedMaxSessions: 128,
+            expectedMaxCommandsPerSessionPerTick: 32,
+            expectedMaxSnapshotsQueuedPerSession: 8);
 
         public RuntimeBackpressureConfig(
             int maxInboundCommandsPerSession,
@@ -35,7 +38,10 @@ namespace Caelmor.Runtime
             int maxPersistenceWriteBytesPerPlayer,
             int maxPersistenceWriteBytesGlobal,
             int maxPersistenceCompletions,
-            int maxPersistenceCompletionBytes)
+            int maxPersistenceCompletionBytes,
+            int expectedMaxSessions,
+            int expectedMaxCommandsPerSessionPerTick,
+            int expectedMaxSnapshotsQueuedPerSession)
             : this(
                 maxInboundCommandsPerSession,
                 maxInboundCommandAgeTicks,
@@ -50,6 +56,9 @@ namespace Caelmor.Runtime
                 maxPersistenceCompletionBytes,
                 maxLifecycleOps: 256,
                 maxLifecycleOpBytes: 64 * 1024,
+                expectedMaxSessions: expectedMaxSessions,
+                expectedMaxCommandsPerSessionPerTick: expectedMaxCommandsPerSessionPerTick,
+                expectedMaxSnapshotsQueuedPerSession: expectedMaxSnapshotsQueuedPerSession,
                 skipValidation: false)
         {
         }
@@ -63,7 +72,10 @@ namespace Caelmor.Runtime
             int maxPersistenceWritesPerPlayer,
             int maxPersistenceWritesGlobal,
             int maxPersistenceWriteBytesPerPlayer,
-            int maxPersistenceWriteBytesGlobal)
+            int maxPersistenceWriteBytesGlobal,
+            int expectedMaxSessions,
+            int expectedMaxCommandsPerSessionPerTick,
+            int expectedMaxSnapshotsQueuedPerSession)
             : this(
                 maxInboundCommandsPerSession,
                 maxInboundCommandAgeTicks,
@@ -78,6 +90,9 @@ namespace Caelmor.Runtime
                 maxPersistenceCompletionBytes: 512 * 1024,
                 maxLifecycleOps: 256,
                 maxLifecycleOpBytes: 64 * 1024,
+                expectedMaxSessions: expectedMaxSessions,
+                expectedMaxCommandsPerSessionPerTick: expectedMaxCommandsPerSessionPerTick,
+                expectedMaxSnapshotsQueuedPerSession: expectedMaxSnapshotsQueuedPerSession,
                 skipValidation: false)
         {
         }
@@ -104,6 +119,9 @@ namespace Caelmor.Runtime
                 maxPersistenceCompletionBytes: 512 * 1024,
                 maxLifecycleOps: 256,
                 maxLifecycleOpBytes: 64 * 1024,
+                expectedMaxSessions: 128,
+                expectedMaxCommandsPerSessionPerTick: 32,
+                expectedMaxSnapshotsQueuedPerSession: 8,
                 skipValidation: false)
         {
         }
@@ -121,7 +139,10 @@ namespace Caelmor.Runtime
             int maxPersistenceCompletions,
             int maxPersistenceCompletionBytes,
             int maxLifecycleOps,
-            int maxLifecycleOpBytes)
+            int maxLifecycleOpBytes,
+            int expectedMaxSessions,
+            int expectedMaxCommandsPerSessionPerTick,
+            int expectedMaxSnapshotsQueuedPerSession)
             : this(
                 maxInboundCommandsPerSession,
                 maxInboundCommandAgeTicks,
@@ -136,6 +157,9 @@ namespace Caelmor.Runtime
                 maxPersistenceCompletionBytes,
                 maxLifecycleOps,
                 maxLifecycleOpBytes,
+                expectedMaxSessions,
+                expectedMaxCommandsPerSessionPerTick,
+                expectedMaxSnapshotsQueuedPerSession,
                 skipValidation: false)
         {
         }
@@ -154,6 +178,9 @@ namespace Caelmor.Runtime
             int maxPersistenceCompletionBytes,
             int maxLifecycleOps,
             int maxLifecycleOpBytes,
+            int expectedMaxSessions,
+            int expectedMaxCommandsPerSessionPerTick,
+            int expectedMaxSnapshotsQueuedPerSession,
             bool skipValidation)
         {
             if (!skipValidation)
@@ -171,6 +198,9 @@ namespace Caelmor.Runtime
                 if (maxPersistenceCompletionBytes <= 0) throw new ArgumentOutOfRangeException(nameof(maxPersistenceCompletionBytes));
                 if (maxLifecycleOps <= 0) throw new ArgumentOutOfRangeException(nameof(maxLifecycleOps));
                 if (maxLifecycleOpBytes <= 0) throw new ArgumentOutOfRangeException(nameof(maxLifecycleOpBytes));
+                if (expectedMaxSessions <= 0) throw new ArgumentOutOfRangeException(nameof(expectedMaxSessions));
+                if (expectedMaxCommandsPerSessionPerTick <= 0) throw new ArgumentOutOfRangeException(nameof(expectedMaxCommandsPerSessionPerTick));
+                if (expectedMaxSnapshotsQueuedPerSession <= 0) throw new ArgumentOutOfRangeException(nameof(expectedMaxSnapshotsQueuedPerSession));
             }
 
             MaxInboundCommandsPerSession = maxInboundCommandsPerSession;
@@ -186,6 +216,9 @@ namespace Caelmor.Runtime
             MaxPersistenceCompletionBytes = maxPersistenceCompletionBytes;
             MaxLifecycleOps = maxLifecycleOps;
             MaxLifecycleOpBytes = maxLifecycleOpBytes;
+            ExpectedMaxSessions = expectedMaxSessions;
+            ExpectedMaxCommandsPerSessionPerTick = expectedMaxCommandsPerSessionPerTick;
+            ExpectedMaxSnapshotsQueuedPerSession = expectedMaxSnapshotsQueuedPerSession;
         }
 
         public int MaxInboundCommandsPerSession { get; }
@@ -201,5 +234,8 @@ namespace Caelmor.Runtime
         public int MaxPersistenceCompletionBytes { get; }
         public int MaxLifecycleOps { get; }
         public int MaxLifecycleOpBytes { get; }
+        public int ExpectedMaxSessions { get; }
+        public int ExpectedMaxCommandsPerSessionPerTick { get; }
+        public int ExpectedMaxSnapshotsQueuedPerSession { get; }
     }
 }
