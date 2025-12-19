@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Caelmor.Runtime.Diagnostics;
 using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.Persistence;
 using Caelmor.Runtime.Replication;
@@ -216,6 +217,49 @@ namespace Caelmor.Runtime.Sessions
             return _activeSessions.SnapshotSessionsDeterministic();
         }
 
+        /// <summary>
+        /// Tick-thread only: records that a command was handled for the session.
+        /// Updates per-session authoritative counters deterministically.
+        /// </summary>
+        public bool TryRecordCommandHandled(SessionId sessionId, long deterministicSequence)
+        {
+            if (!sessionId.IsValid)
+                return false;
+
+            TickThreadAssert.AssertTickThread();
+
+            lock (_gate)
+            {
+                if (!_sessionsById.TryGetValue(sessionId, out var record) || !record.IsActive)
+                    return false;
+
+                record.CommandCount++;
+                record.LastCommandSequence = deterministicSequence;
+                _sessionsById[sessionId] = record;
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Returns per-session authoritative command metrics, if available.
+        /// </summary>
+        public bool TryGetCommandMetrics(SessionId sessionId, out SessionCommandMetrics metrics)
+        {
+            metrics = default;
+
+            if (!sessionId.IsValid)
+                return false;
+
+            lock (_gate)
+            {
+                if (!_sessionsById.TryGetValue(sessionId, out var record) || !record.IsActive)
+                    return false;
+
+                metrics = new SessionCommandMetrics(record.CommandCount, record.LastCommandSequence);
+                return true;
+            }
+        }
+
         private void InternalDeactivateLocked(SessionId sessionId, DeactivationReason reason)
         {
             _snapshotEligibility.TrySetSnapshotEligible(sessionId, isEligible: false);
@@ -238,12 +282,14 @@ namespace Caelmor.Runtime.Sessions
             _events.OnSessionDeactivated(sessionId, rec.PlayerId, rec.SaveId, reason);
         }
 
-        private readonly struct SessionRecord
+        private struct SessionRecord
         {
-            public readonly SessionId SessionId;
-            public readonly PlayerId PlayerId;
-            public readonly SaveId SaveId;
-            public readonly bool IsActive;
+            public SessionId SessionId;
+            public PlayerId PlayerId;
+            public SaveId SaveId;
+            public bool IsActive;
+            public long CommandCount;
+            public long LastCommandSequence;
 
             public SessionRecord(SessionId sessionId, PlayerId playerId, SaveId saveId, bool isActive)
             {
@@ -251,6 +297,8 @@ namespace Caelmor.Runtime.Sessions
                 PlayerId = playerId;
                 SaveId = saveId;
                 IsActive = isActive;
+                CommandCount = 0;
+                LastCommandSequence = 0;
             }
         }
 
@@ -271,6 +319,18 @@ namespace Caelmor.Runtime.Sessions
     {
         Reject = 0,
         Replace = 1
+    }
+
+    public readonly struct SessionCommandMetrics
+    {
+        public SessionCommandMetrics(long commandCount, long lastCommandSequence)
+        {
+            CommandCount = commandCount;
+            LastCommandSequence = lastCommandSequence;
+        }
+
+        public long CommandCount { get; }
+        public long LastCommandSequence { get; }
     }
 
     public readonly struct SessionActivationResult
