@@ -747,11 +747,11 @@ namespace Caelmor.Runtime.Replication
     /// </summary>
     public readonly struct ReplicatedEntityState
     {
-        public string Fingerprint { get; }
+        public ulong Fingerprint { get; }
 
-        public ReplicatedEntityState(string fingerprint)
+        public ReplicatedEntityState(ulong fingerprint)
         {
-            Fingerprint = fingerprint ?? throw new ArgumentNullException(nameof(fingerprint));
+            Fingerprint = fingerprint;
         }
     }
 

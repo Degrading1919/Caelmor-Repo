@@ -3,7 +3,6 @@ using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using System.Threading;
 using System.Buffers.Binary;
 using Caelmor.Runtime;
@@ -1213,7 +1212,7 @@ namespace Caelmor.Runtime.Integration
 
         public PooledTransportPayload Serialize(in ClientReplicationSnapshot snapshot)
         {
-            var estimated = 32 + snapshot.EntityCount * 32;
+            var estimated = 32 + snapshot.EntityCount * (sizeof(int) + sizeof(ulong));
             var buffer = _pool.Rent(estimated);
             var span = buffer.AsSpan();
             var offset = 0;
@@ -1226,9 +1225,8 @@ namespace Caelmor.Runtime.Integration
             for (int i = 0; i < snapshot.EntityCount; i++)
             {
                 WriteInt32(entities[i].Entity.Value, span, ref offset);
-                EnsureCapacity(ref buffer, ref span, offset, entities[i].State.Fingerprint.Length * 4 + offset + 1);
-                offset += Encoding.UTF8.GetBytes(entities[i].State.Fingerprint.AsSpan(), span.Slice(offset));
-                span[offset++] = 0; // delimiter
+                EnsureCapacity(ref buffer, ref span, offset, offset + sizeof(ulong));
+                WriteUInt64(entities[i].State.Fingerprint, span, ref offset);
             }
 
             Interlocked.Add(ref _bytesRented, buffer.Length);
@@ -1246,6 +1244,12 @@ namespace Caelmor.Runtime.Integration
         {
             System.Buffers.Binary.BinaryPrimitives.WriteInt64LittleEndian(destination.Slice(offset, sizeof(long)), value);
             offset += sizeof(long);
+        }
+
+        private static void WriteUInt64(ulong value, Span<byte> destination, ref int offset)
+        {
+            System.Buffers.Binary.BinaryPrimitives.WriteUInt64LittleEndian(destination.Slice(offset, sizeof(ulong)), value);
+            offset += sizeof(ulong);
         }
 
         private static void WriteGuid(Guid value, Span<byte> destination, ref int offset)
