@@ -7,6 +7,7 @@ using System;
 using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
+using Caelmor.Runtime.Tick;
 
 namespace Caelmor.Combat
 {
@@ -110,7 +111,7 @@ namespace Caelmor.Combat
             return CombatOutcome.IntentResolved(
                 intentId: intent.IntentId,
                 intentType: intent.IntentType,
-                actorEntityId: intent.ActorEntityId,
+                actorEntity: intent.ActorEntity,
                 authoritativeTick: tick,
                 outcomeKind: CombatOutcomeKind.AttackProposed
             );
@@ -121,7 +122,7 @@ namespace Caelmor.Combat
             return CombatOutcome.IntentResolved(
                 intentId: intent.IntentId,
                 intentType: intent.IntentType,
-                actorEntityId: intent.ActorEntityId,
+                actorEntity: intent.ActorEntity,
                 authoritativeTick: tick,
                 outcomeKind: CombatOutcomeKind.DefenseProposed
             );
@@ -132,7 +133,7 @@ namespace Caelmor.Combat
             return CombatOutcome.IntentResolved(
                 intentId: intent.IntentId,
                 intentType: intent.IntentType,
-                actorEntityId: intent.ActorEntityId,
+                actorEntity: intent.ActorEntity,
                 authoritativeTick: tick,
                 outcomeKind: CombatOutcomeKind.AbilityProposed
             );
@@ -143,7 +144,7 @@ namespace Caelmor.Combat
             return CombatOutcome.IntentResolved(
                 intentId: intent.IntentId,
                 intentType: intent.IntentType,
-                actorEntityId: intent.ActorEntityId,
+                actorEntity: intent.ActorEntity,
                 authoritativeTick: tick,
                 outcomeKind: CombatOutcomeKind.MovementProposed
             );
@@ -154,7 +155,7 @@ namespace Caelmor.Combat
             return CombatOutcome.IntentResolved(
                 intentId: intent.IntentId,
                 intentType: intent.IntentType,
-                actorEntityId: intent.ActorEntityId,
+                actorEntity: intent.ActorEntity,
                 authoritativeTick: tick,
                 outcomeKind: CombatOutcomeKind.InteractionProposed
             );
@@ -165,7 +166,7 @@ namespace Caelmor.Combat
             return CombatOutcome.IntentResolved(
                 intentId: intent.IntentId,
                 intentType: intent.IntentType,
-                actorEntityId: intent.ActorEntityId,
+                actorEntity: intent.ActorEntity,
                 authoritativeTick: tick,
                 outcomeKind: CombatOutcomeKind.CancellationEvaluated
             );
@@ -335,20 +336,20 @@ namespace Caelmor.Combat
     {
         public string IntentId { get; }
         public CombatIntentType IntentType { get; }
-        public string ActorEntityId { get; }
+        public EntityHandle ActorEntity { get; }
         public int AuthoritativeTick { get; }
         public CombatOutcomeKind OutcomeKind { get; }
 
         private CombatOutcome(
             string intentId,
             CombatIntentType intentType,
-            string actorEntityId,
+            EntityHandle actorEntity,
             int authoritativeTick,
             CombatOutcomeKind outcomeKind)
         {
             IntentId = intentId;
             IntentType = intentType;
-            ActorEntityId = actorEntityId;
+            ActorEntity = actorEntity;
             AuthoritativeTick = authoritativeTick;
             OutcomeKind = outcomeKind;
         }
@@ -356,7 +357,7 @@ namespace Caelmor.Combat
         public static CombatOutcome IntentResolved(
             string intentId,
             CombatIntentType intentType,
-            string actorEntityId,
+            EntityHandle actorEntity,
             int authoritativeTick,
             CombatOutcomeKind outcomeKind)
         {
@@ -366,7 +367,7 @@ namespace Caelmor.Combat
             return new CombatOutcome(
                 intentId,
                 intentType,
-                actorEntityId,
+                actorEntity,
                 authoritativeTick,
                 outcomeKind
             );

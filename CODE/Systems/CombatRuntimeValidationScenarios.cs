@@ -42,7 +42,7 @@ namespace Caelmor.Validation.Combat
                         new FrozenIntentRecord(
                             intentId: "i1",
                             intentType: CombatIntentType.CombatAttackIntent,
-                            actorEntityId: "e1",
+                            actorEntity: new EntityHandle(1),
                             submitTick: 0,
                             deterministicSequence: 1,
                             payload: CombatIntentPayload.ForAttack(new AttackIntentPayload(default, default)))
@@ -76,15 +76,12 @@ namespace Caelmor.Validation.Combat
                 {
                     [1] = new List<FrozenIntentRecord>
                     {
-                        new FrozenIntentRecord("i-eligible", CombatIntentType.CombatAttackIntent, "eligible", 0, 1, CombatIntentPayload.ForAttack(new AttackIntentPayload(default, default))),
-                        new FrozenIntentRecord("i-ineligible", CombatIntentType.CombatDefendIntent, "ineligible", 0, 1, CombatIntentPayload.ForDefend(new DefendIntentPayload(default)))
+                        new FrozenIntentRecord("i-eligible", CombatIntentType.CombatAttackIntent, new EntityHandle(10), 0, 1, CombatIntentPayload.ForAttack(new AttackIntentPayload(default, default))),
+                        new FrozenIntentRecord("i-ineligible", CombatIntentType.CombatDefendIntent, new EntityHandle(20), 0, 1, CombatIntentPayload.ForDefend(new DefendIntentPayload(default)))
                     }
                 };
 
                 var rig = Rig.Create(handles, intentsByTick);
-                rig.Resolver.Map[handles[0]] = "eligible";
-                rig.Resolver.Map[handles[1]] = "ineligible";
-
                 rig.Eligibility.SetEligible(handles[0], true);
                 rig.Eligibility.SetEligible(handles[1], false);
 
@@ -106,17 +103,15 @@ namespace Caelmor.Validation.Combat
                 {
                     [1] = new List<FrozenIntentRecord>
                     {
-                        new FrozenIntentRecord("i1", CombatIntentType.CombatAttackIntent, "deterministic", 0, 1, CombatIntentPayload.ForAttack(new AttackIntentPayload(default, default))),
-                        new FrozenIntentRecord("i2", CombatIntentType.CombatDefendIntent, "deterministic", 0, 2, CombatIntentPayload.ForDefend(new DefendIntentPayload(default)))
+                        new FrozenIntentRecord("i1", CombatIntentType.CombatAttackIntent, new EntityHandle(100), 0, 1, CombatIntentPayload.ForAttack(new AttackIntentPayload(default, default))),
+                        new FrozenIntentRecord("i2", CombatIntentType.CombatDefendIntent, new EntityHandle(100), 0, 2, CombatIntentPayload.ForDefend(new DefendIntentPayload(default)))
                     }
                 };
 
                 var first = Rig.Create(handles, intentsByTick);
-                first.Resolver.Map[handles[0]] = "deterministic";
                 first.Eligibility.SetEligible(handles[0], true);
 
                 var second = Rig.Create(handles, intentsByTick);
-                second.Resolver.Map[handles[0]] = "deterministic";
                 second.Eligibility.SetEligible(handles[0], true);
 
                 first.Core.ExecuteSingleTick();
@@ -141,12 +136,11 @@ namespace Caelmor.Validation.Combat
                 {
                     [1] = new List<FrozenIntentRecord>
                     {
-                        new FrozenIntentRecord("i-safe", CombatIntentType.CombatAttackIntent, "stable", 0, 1, CombatIntentPayload.ForAttack(new AttackIntentPayload(default, default)))
+                        new FrozenIntentRecord("i-safe", CombatIntentType.CombatAttackIntent, new EntityHandle(500), 0, 1, CombatIntentPayload.ForAttack(new AttackIntentPayload(default, default)))
                     }
                 };
 
                 var rig = Rig.Create(handles, intentsByTick);
-                rig.Resolver.Map[handles[0]] = "stable";
                 rig.Eligibility.SetEligible(handles[0], true);
 
                 rig.Core.ExecuteSingleTick();
@@ -164,31 +158,36 @@ namespace Caelmor.Validation.Combat
             {
                 var handle = new EntityHandle(77);
                 var handles = new[] { handle };
+                var labels = new[] { "a", "b", "c", "d" };
+                const int perTick = 5;
 
                 var intentsByTick = new Dictionary<int, List<FrozenIntentRecord>>
                 {
-                    [1] = BuildIntentWave("a", 5),
-                    [2] = BuildIntentWave("b", 5)
+                    [1] = BuildIntentWave(labels[0], perTick, handle),
+                    [2] = BuildIntentWave(labels[1], perTick, handle),
+                    [3] = BuildIntentWave(labels[2], perTick, handle),
+                    [4] = BuildIntentWave(labels[3], perTick, handle)
                 };
 
                 var rig = Rig.Create(handles, intentsByTick);
-                rig.Resolver.Map[handle] = "actor-77";
                 rig.Eligibility.SetEligible(handle, true);
 
-                rig.Core.ExecuteSingleTick();
-                var firstWave = rig.CommitSink.CommitPayloads.GetRange(0, rig.CommitSink.CommitPayloads.Count);
+                int lastCount = 0;
+                for (int i = 0; i < labels.Length; i++)
+                {
+                    rig.Core.ExecuteSingleTick();
+                    int newCount = rig.CommitSink.CommitPayloads.Count;
+                    int waveCount = newCount - lastCount;
+                    var wave = rig.CommitSink.CommitPayloads.GetRange(lastCount, waveCount);
 
-                rig.Core.ExecuteSingleTick();
-                var secondWave = rig.CommitSink.CommitPayloads.GetRange(firstWave.Count, rig.CommitSink.CommitPayloads.Count - firstWave.Count);
+                    a.Equal(perTick, waveCount, $"Tick {i + 1} must process the bounded batch without accumulation.");
+                    AssertOrdering(a, wave, labels[i]);
 
-                a.Equal(5, firstWave.Count, "Tick 1 must process the bounded batch without overflow.");
-                a.Equal(5, secondWave.Count, "Tick 2 must process only the staged batch without accumulation.");
-
-                AssertOrdering(a, firstWave, "a");
-                AssertOrdering(a, secondWave, "b");
+                    lastCount = newCount;
+                }
             }
 
-            private static List<FrozenIntentRecord> BuildIntentWave(string label, int count)
+            private static List<FrozenIntentRecord> BuildIntentWave(string label, int count, EntityHandle actor)
             {
                 var payload = CombatIntentPayload.ForAttack(new AttackIntentPayload(default, default));
                 var intents = new List<FrozenIntentRecord>(count);
@@ -197,7 +196,7 @@ namespace Caelmor.Validation.Combat
                     intents.Add(new FrozenIntentRecord(
                         intentId: $"i-{label}-{i + 1}",
                         intentType: CombatIntentType.CombatAttackIntent,
-                        actorEntityId: "actor-77",
+                        actorEntity: actor,
                         submitTick: 0,
                         deterministicSequence: i + 1,
                         payload: payload));
@@ -223,7 +222,6 @@ namespace Caelmor.Validation.Combat
             public readonly DeterministicIntentSource IntentSource;
             public readonly AcceptAllIntentGate Gate;
             public readonly RecordingCommitSink CommitSink;
-            public readonly DeterministicResolver Resolver;
             public readonly RecordingHook Hook;
 
             private Rig(
@@ -232,7 +230,6 @@ namespace Caelmor.Validation.Combat
                 DeterministicIntentSource intentSource,
                 AcceptAllIntentGate gate,
                 RecordingCommitSink commitSink,
-                DeterministicResolver resolver,
                 RecordingHook hook)
             {
                 Core = core;
@@ -240,7 +237,6 @@ namespace Caelmor.Validation.Combat
                 IntentSource = intentSource;
                 Gate = gate;
                 CommitSink = commitSink;
-                Resolver = resolver;
                 Hook = hook;
             }
 
@@ -253,23 +249,20 @@ namespace Caelmor.Validation.Combat
                 var intentSource = new DeterministicIntentSource(intentsByTick);
                 var gate = new AcceptAllIntentGate();
                 var commitSink = new RecordingCommitSink();
-                var resolver = new DeterministicResolver(entities);
                 var runtime = new CombatRuntimeSystem(
                     eligibility,
                     intentSource,
                     gate,
                     new CombatResolutionEngine(),
-                    commitSink,
-                    resolver);
+                    commitSink);
                 var hook = new RecordingHook();
 
                 core.RegisterEligibilityGate(new CombatEligibilityGate(eligibility));
                 core.RegisterParticipant(runtime, orderKey: 0);
-                core.RegisterParticipant(resolver, orderKey: 1);
                 core.RegisterPhaseHook(runtime, orderKey: 0);
                 core.RegisterPhaseHook(hook, orderKey: 1);
 
-                return new Rig(core, eligibility, intentSource, gate, commitSink, resolver, hook);
+                return new Rig(core, eligibility, intentSource, gate, commitSink, hook);
             }
         }
 
@@ -353,7 +346,7 @@ namespace Caelmor.Validation.Combat
                     rows[rowCount++] = IntentGateRow.Accepted(intent);
                 }
 
-                var emptyStates = new Dictionary<string, CombatEntityState>(StringComparer.Ordinal);
+                var emptyStates = new Dictionary<EntityHandle, CombatEntityState>();
                 var snapshot = CombatStateSnapshot.Capture(emptyStates);
 
                 return GatedIntentBatch.Create(
@@ -381,30 +374,6 @@ namespace Caelmor.Validation.Combat
                     var outcome = resolutionResult.OutcomesInOrder[i];
                     CommitPayloads.Add($"{entity.Value}:{outcome.IntentId}:{outcome.OutcomeKind}");
                 }
-            }
-        }
-
-        private sealed class DeterministicResolver : ICombatantResolver, ISimulationParticipant
-        {
-            public readonly Dictionary<EntityHandle, string> Map = new Dictionary<EntityHandle, string>();
-
-            public DeterministicResolver(IEnumerable<EntityHandle> handles)
-            {
-                foreach (var h in handles)
-                    Map[h] = $"entity-{h.Value}";
-            }
-
-            public string ResolveCombatEntityId(EntityHandle entity)
-            {
-                if (Map.TryGetValue(entity, out var id))
-                    return id;
-
-                return string.Empty;
-            }
-
-            public void Execute(EntityHandle entity, SimulationTickContext context)
-            {
-                // This participant is a no-op placeholder to preserve deterministic ordering with the combat runtime.
             }
         }
 

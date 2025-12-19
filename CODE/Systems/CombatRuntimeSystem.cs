@@ -28,7 +28,6 @@ namespace Caelmor.Combat
         private readonly ICombatIntentGate _intentGate;
         private readonly CombatResolutionEngine _resolutionEngine;
         private readonly ICombatOutcomeCommitSink _commitSink;
-        private readonly ICombatantResolver _combatantResolver;
 
         private const int IntentFilterCapacity = 64;
         private readonly FrozenIntentRecord[] _filteredIntentBuffer = new FrozenIntentRecord[IntentFilterCapacity];
@@ -41,15 +40,13 @@ namespace Caelmor.Combat
             ICombatIntentSource intentSource,
             ICombatIntentGate intentGate,
             CombatResolutionEngine resolutionEngine,
-            ICombatOutcomeCommitSink commitSink,
-            ICombatantResolver combatantResolver)
+            ICombatOutcomeCommitSink commitSink)
         {
             _eligibility = eligibility ?? throw new ArgumentNullException(nameof(eligibility));
             _intentSource = intentSource ?? throw new ArgumentNullException(nameof(intentSource));
             _intentGate = intentGate ?? throw new ArgumentNullException(nameof(intentGate));
             _resolutionEngine = resolutionEngine ?? throw new ArgumentNullException(nameof(resolutionEngine));
             _commitSink = commitSink ?? throw new ArgumentNullException(nameof(commitSink));
-            _combatantResolver = combatantResolver ?? throw new ArgumentNullException(nameof(combatantResolver));
         }
 
         public void OnPreTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
@@ -77,17 +74,13 @@ namespace Caelmor.Combat
             if (!_eligibility.IsCombatEligible(entity))
                 return;
 
-            string entityId = _combatantResolver.ResolveCombatEntityId(entity);
-            if (string.IsNullOrWhiteSpace(entityId))
-                return;
-
             int authoritativeTick = checked((int)context.TickIndex);
             var frozenBatch = _intentSource.GetFrozenBatch(authoritativeTick);
 
             if (frozenBatch.AuthoritativeTick != authoritativeTick)
                 throw new InvalidOperationException("Frozen intent batch tick does not match simulation tick.");
 
-            int filteredCount = FilterIntentsForEntity(frozenBatch, entityId, _filteredIntentBuffer);
+            int filteredCount = FilterIntentsForEntity(frozenBatch, entity, _filteredIntentBuffer);
             if (filteredCount == 0)
                 return;
 
@@ -104,13 +97,13 @@ namespace Caelmor.Combat
                 label: "combat_commit"));
         }
 
-        private static int FilterIntentsForEntity(FrozenIntentBatch frozen, string entityId, FrozenIntentRecord[] buffer)
+        private static int FilterIntentsForEntity(FrozenIntentBatch frozen, EntityHandle entity, FrozenIntentRecord[] buffer)
         {
             int count = 0;
             for (int i = 0; i < frozen.Count; i++)
             {
                 var intent = frozen[i];
-                if (string.Equals(intent.ActorEntityId, entityId, StringComparison.Ordinal))
+                if (intent.ActorEntity.Equals(entity))
                 {
                     if (count >= buffer.Length)
                         throw new InvalidOperationException("Filtered intent buffer capacity exceeded.");
@@ -162,10 +155,5 @@ namespace Caelmor.Combat
     public interface ICombatOutcomeCommitSink
     {
         void Commit(EntityHandle entity, CombatResolutionResult resolutionResult);
-    }
-
-    public interface ICombatantResolver
-    {
-        string ResolveCombatEntityId(EntityHandle entity);
     }
 }

@@ -7,7 +7,7 @@ using System;
 using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using Caelmor.Runtime.Tick;
 
 namespace Caelmor.Combat
 {
@@ -37,8 +37,8 @@ namespace Caelmor.Combat
         private readonly IIntentGateRejectionSink _rejectionSink;
 
         // Authoritative state store (server-only).
-        private readonly Dictionary<string, CombatEntityState> _statesByEntityId =
-            new Dictionary<string, CombatEntityState>(StringComparer.Ordinal);
+        private readonly Dictionary<EntityHandle, CombatEntityState> _statesByEntity =
+            new Dictionary<EntityHandle, CombatEntityState>();
 
         public CombatStateAuthoritySystem(
             ITickSource tickSource,
@@ -54,15 +54,14 @@ namespace Caelmor.Combat
         // State Ownership (Authoritative)
         // -----------------------------
 
-        public CombatEntityState GetState(string entityId)
+        public CombatEntityState GetState(EntityHandle entity)
         {
-            if (string.IsNullOrWhiteSpace(entityId)) throw new ArgumentException("entityId missing.", nameof(entityId));
-            if (!_entityIdValidator.IsValidEntityId(entityId)) throw new ArgumentException("entityId invalid.", nameof(entityId));
+            if (!entity.IsValid) throw new ArgumentException("entity missing.", nameof(entity));
 
-            if (!_statesByEntityId.TryGetValue(entityId, out var state))
+            if (!_statesByEntity.TryGetValue(entity, out var state))
             {
-                state = CombatEntityState.CreateIdle(entityId);
-                _statesByEntityId.Add(entityId, state);
+                state = CombatEntityState.CreateIdle(entity);
+                _statesByEntity.Add(entity, state);
             }
 
             return state;
@@ -79,19 +78,16 @@ namespace Caelmor.Combat
             // This method does not enforce tick-phase; it enforces structural state invariants only.
             if (change == null) throw new ArgumentNullException(nameof(change));
 
-            if (string.IsNullOrWhiteSpace(change.EntityId))
-                throw new InvalidOperationException("CombatStateChange.EntityId missing.");
+            if (!change.Entity.IsValid)
+                throw new InvalidOperationException("CombatStateChange.Entity missing.");
 
-            if (!_entityIdValidator.IsValidEntityId(change.EntityId))
-                throw new InvalidOperationException("CombatStateChange.EntityId invalid.");
-
-            var prior = GetState(change.EntityId);
+            var prior = GetState(change.Entity);
             var next = prior.ApplyChange(change, authoritativeTick: _tickSource.CurrentTick);
 
             // Enforce schema-level state invariants (Stage 11.2).
             ValidateStateInvariantsOrThrow(next);
 
-            _statesByEntityId[change.EntityId] = next;
+            _statesByEntity[change.Entity] = next;
         }
 
         /// <summary>
@@ -99,21 +95,20 @@ namespace Caelmor.Combat
         /// Transitions CombatIdle -> CombatEngaged and assigns combat_context_id.
         /// Must be invoked only when the server authoritatively establishes engagement.
         /// </summary>
-        public void EstablishCombatContext(string entityId, string combatContextId)
+        public void EstablishCombatContext(EntityHandle entity, string combatContextId)
         {
-            if (string.IsNullOrWhiteSpace(entityId)) throw new ArgumentException("entityId missing.", nameof(entityId));
-            if (!_entityIdValidator.IsValidEntityId(entityId)) throw new ArgumentException("entityId invalid.", nameof(entityId));
+            if (!entity.IsValid) throw new ArgumentException("entity missing.", nameof(entity));
             if (string.IsNullOrWhiteSpace(combatContextId)) throw new ArgumentException("combatContextId missing.", nameof(combatContextId));
 
-            var prior = GetState(entityId);
+            var prior = GetState(entity);
 
             // Only assign/transition here; no other gameplay behavior.
-            var change = CombatStateChange.ToEngaged(entityId, combatContextId);
+            var change = CombatStateChange.ToEngaged(entity, combatContextId);
             var next = prior.ApplyChange(change, authoritativeTick: _tickSource.CurrentTick);
 
             ValidateStateInvariantsOrThrow(next);
 
-            _statesByEntityId[entityId] = next;
+            _statesByEntity[entity] = next;
         }
 
         // -----------------------------
@@ -134,7 +129,7 @@ namespace Caelmor.Combat
         public GatedIntentBatch GateFrozenQueue(FrozenIntentBatch frozenBatch)
         {
             // Pre-gating snapshot (read-only).
-            var pre = CombatStateSnapshot.Capture(_statesByEntityId);
+            var pre = CombatStateSnapshot.Capture(_statesByEntity);
 
             int capacity = Math.Max(1, frozenBatch.Count);
             var gateRows = ArrayPool<IntentGateRow>.Shared.Rent(capacity);
@@ -147,7 +142,7 @@ namespace Caelmor.Combat
                 var intent = frozenBatch[i];
 
                 // Deterministic evaluation order == frozen queue order.
-                var actorState = GetState(intent.ActorEntityId);
+                var actorState = GetState(intent.ActorEntity);
 
                 // If state is structurally invalid, fail-loud for that intent (reject, do not auto-repair).
                 if (!IsStructurallyValidState(actorState, out var invalidReason))
@@ -181,7 +176,7 @@ namespace Caelmor.Combat
             }
 
             // Post-gating snapshot (still read-only; gating must not mutate state).
-            var post = CombatStateSnapshot.Capture(_statesByEntityId);
+            var post = CombatStateSnapshot.Capture(_statesByEntity);
 
             var batch = GatedIntentBatch.Create(
                 authoritativeTick: frozenBatch.AuthoritativeTick,
@@ -203,7 +198,7 @@ namespace Caelmor.Combat
             _rejectionSink.OnRejected(new IntentGateRejection(
                 intentId: intent.IntentId,
                 intentType: intent.IntentType,
-                actorEntityId: intent.ActorEntityId,
+                actorEntity: intent.ActorEntity,
                 authoritativeTick: _tickSource.CurrentTick,
                 reasonCode: reasonCode,
                 details: details
@@ -263,9 +258,9 @@ namespace Caelmor.Combat
         {
             reason = string.Empty;
 
-            if (string.IsNullOrWhiteSpace(state.EntityId))
+            if (!state.Entity.IsValid)
             {
-                reason = "entity_id missing";
+                reason = "entity missing";
                 return false;
             }
 
@@ -333,29 +328,29 @@ namespace Caelmor.Combat
 
     public sealed class CombatEntityState
     {
-        public string EntityId { get; }
+        public EntityHandle Entity { get; }
         public CombatState State { get; }
         public string CombatContextId { get; } // may be empty only for Idle
         public string? CommittedIntentId { get; } // required for Acting/Defending; absent for Idle/Engaged
         public int StateChangeTick { get; } // optional in schema; always set here for determinism/validation
 
         private CombatEntityState(
-            string entityId,
+            EntityHandle entity,
             CombatState state,
             string combatContextId,
             string? committedIntentId,
             int stateChangeTick)
         {
-            EntityId = entityId;
+            Entity = entity;
             State = state;
             CombatContextId = combatContextId;
             CommittedIntentId = committedIntentId;
             StateChangeTick = stateChangeTick;
         }
 
-        public static CombatEntityState CreateIdle(string entityId)
+        public static CombatEntityState CreateIdle(EntityHandle entity)
             => new CombatEntityState(
-                entityId: entityId,
+                entity: entity,
                 state: CombatState.CombatIdle,
                 combatContextId: string.Empty,
                 committedIntentId: null,
@@ -363,14 +358,14 @@ namespace Caelmor.Combat
 
         public CombatEntityState ApplyChange(CombatStateChange change, int authoritativeTick)
         {
-            if (!string.Equals(EntityId, change.EntityId, StringComparison.Ordinal))
+            if (!Entity.Equals(change.Entity))
                 throw new InvalidOperationException("CombatStateChange entity mismatch.");
 
             switch (change.Kind)
             {
                 case CombatStateChangeKind.ToIdle:
                     return new CombatEntityState(
-                        entityId: EntityId,
+                        entity: Entity,
                         state: CombatState.CombatIdle,
                         combatContextId: string.Empty,
                         committedIntentId: null,
@@ -378,7 +373,7 @@ namespace Caelmor.Combat
 
                 case CombatStateChangeKind.ToEngaged:
                     return new CombatEntityState(
-                        entityId: EntityId,
+                        entity: Entity,
                         state: CombatState.CombatEngaged,
                         combatContextId: change.CombatContextId ?? string.Empty,
                         committedIntentId: null,
@@ -386,7 +381,7 @@ namespace Caelmor.Combat
 
                 case CombatStateChangeKind.ToActing:
                     return new CombatEntityState(
-                        entityId: EntityId,
+                        entity: Entity,
                         state: CombatState.CombatActing,
                         combatContextId: change.CombatContextId ?? CombatContextId,
                         committedIntentId: change.CommittedIntentId,
@@ -394,7 +389,7 @@ namespace Caelmor.Combat
 
                 case CombatStateChangeKind.ToDefending:
                     return new CombatEntityState(
-                        entityId: EntityId,
+                        entity: Entity,
                         state: CombatState.CombatDefending,
                         combatContextId: change.CombatContextId ?? CombatContextId,
                         committedIntentId: change.CommittedIntentId,
@@ -402,7 +397,7 @@ namespace Caelmor.Combat
 
                 case CombatStateChangeKind.ToRestricted:
                     return new CombatEntityState(
-                        entityId: EntityId,
+                        entity: Entity,
                         state: CombatState.CombatRestricted,
                         combatContextId: change.CombatContextId ?? CombatContextId,
                         committedIntentId: null,
@@ -410,7 +405,7 @@ namespace Caelmor.Combat
 
                 case CombatStateChangeKind.ToIncapacitated:
                     return new CombatEntityState(
-                        entityId: EntityId,
+                        entity: Entity,
                         state: CombatState.CombatIncapacitated,
                         combatContextId: change.CombatContextId ?? CombatContextId,
                         committedIntentId: change.CommittedIntentId ?? CommittedIntentId,
@@ -434,36 +429,36 @@ namespace Caelmor.Combat
 
     public sealed class CombatStateChange
     {
-        public string EntityId { get; }
+        public EntityHandle Entity { get; }
         public CombatStateChangeKind Kind { get; }
         public string? CombatContextId { get; }
         public string? CommittedIntentId { get; }
 
-        private CombatStateChange(string entityId, CombatStateChangeKind kind, string? combatContextId, string? committedIntentId)
+        private CombatStateChange(EntityHandle entity, CombatStateChangeKind kind, string? combatContextId, string? committedIntentId)
         {
-            EntityId = entityId;
+            Entity = entity;
             Kind = kind;
             CombatContextId = combatContextId;
             CommittedIntentId = committedIntentId;
         }
 
-        public static CombatStateChange ToIdle(string entityId)
-            => new CombatStateChange(entityId, CombatStateChangeKind.ToIdle, combatContextId: null, committedIntentId: null);
+        public static CombatStateChange ToIdle(EntityHandle entity)
+            => new CombatStateChange(entity, CombatStateChangeKind.ToIdle, combatContextId: null, committedIntentId: null);
 
-        public static CombatStateChange ToEngaged(string entityId, string combatContextId)
-            => new CombatStateChange(entityId, CombatStateChangeKind.ToEngaged, combatContextId: combatContextId, committedIntentId: null);
+        public static CombatStateChange ToEngaged(EntityHandle entity, string combatContextId)
+            => new CombatStateChange(entity, CombatStateChangeKind.ToEngaged, combatContextId: combatContextId, committedIntentId: null);
 
-        public static CombatStateChange ToActing(string entityId, string combatContextId, string committedIntentId)
-            => new CombatStateChange(entityId, CombatStateChangeKind.ToActing, combatContextId: combatContextId, committedIntentId: committedIntentId);
+        public static CombatStateChange ToActing(EntityHandle entity, string combatContextId, string committedIntentId)
+            => new CombatStateChange(entity, CombatStateChangeKind.ToActing, combatContextId: combatContextId, committedIntentId: committedIntentId);
 
-        public static CombatStateChange ToDefending(string entityId, string combatContextId, string committedIntentId)
-            => new CombatStateChange(entityId, CombatStateChangeKind.ToDefending, combatContextId: combatContextId, committedIntentId: committedIntentId);
+        public static CombatStateChange ToDefending(EntityHandle entity, string combatContextId, string committedIntentId)
+            => new CombatStateChange(entity, CombatStateChangeKind.ToDefending, combatContextId: combatContextId, committedIntentId: committedIntentId);
 
-        public static CombatStateChange ToRestricted(string entityId, string combatContextId)
-            => new CombatStateChange(entityId, CombatStateChangeKind.ToRestricted, combatContextId: combatContextId, committedIntentId: null);
+        public static CombatStateChange ToRestricted(EntityHandle entity, string combatContextId)
+            => new CombatStateChange(entity, CombatStateChangeKind.ToRestricted, combatContextId: combatContextId, committedIntentId: null);
 
-        public static CombatStateChange ToIncapacitated(string entityId, string combatContextId, string? committedIntentId = null)
-            => new CombatStateChange(entityId, CombatStateChangeKind.ToIncapacitated, combatContextId: combatContextId, committedIntentId: committedIntentId);
+        public static CombatStateChange ToIncapacitated(EntityHandle entity, string combatContextId, string? committedIntentId = null)
+            => new CombatStateChange(entity, CombatStateChangeKind.ToIncapacitated, combatContextId: combatContextId, committedIntentId: committedIntentId);
     }
 
     // --------------------------------------------------------------------
@@ -538,6 +533,9 @@ namespace Caelmor.Combat
 
             if (_gateResultBuffer.Length > 0)
                 ArrayPool<IntentGateRow>.Shared.Return(_gateResultBuffer, clearArray: true);
+
+            PreGatingStateSnapshot?.Release();
+            PostGatingStateSnapshot?.Release();
 
             AcceptedIntentsInOrder = new FrozenIntentBatch(0, Array.Empty<FrozenIntentRecord>(), 0);
             GateResultsInOrder = new IntentGateRowListView(Array.Empty<IntentGateRow>(), 0);
@@ -646,24 +644,24 @@ namespace Caelmor.Combat
     {
         public readonly string IntentId;
         public readonly CombatIntentType IntentType;
-        public readonly string ActorEntityId;
+        public readonly EntityHandle ActorEntity;
         public readonly IntentGateStatus Status;
         public readonly string ReasonCode;
 
-        private IntentGateRow(string intentId, CombatIntentType intentType, string actorEntityId, IntentGateStatus status, string reasonCode)
+        private IntentGateRow(string intentId, CombatIntentType intentType, EntityHandle actorEntity, IntentGateStatus status, string reasonCode)
         {
             IntentId = intentId;
             IntentType = intentType;
-            ActorEntityId = actorEntityId;
+            ActorEntity = actorEntity;
             Status = status;
             ReasonCode = reasonCode;
         }
 
         public static IntentGateRow Accepted(FrozenIntentRecord intent)
-            => new IntentGateRow(intent.IntentId, intent.IntentType, intent.ActorEntityId, IntentGateStatus.Accepted, reasonCode: string.Empty);
+            => new IntentGateRow(intent.IntentId, intent.IntentType, intent.ActorEntity, IntentGateStatus.Accepted, reasonCode: string.Empty);
 
         public static IntentGateRow Rejected(FrozenIntentRecord intent, string reasonCode)
-            => new IntentGateRow(intent.IntentId, intent.IntentType, intent.ActorEntityId, IntentGateStatus.Rejected, reasonCode);
+            => new IntentGateRow(intent.IntentId, intent.IntentType, intent.ActorEntity, IntentGateStatus.Rejected, reasonCode);
     }
 
     public enum IntentGateStatus
@@ -687,7 +685,7 @@ namespace Caelmor.Combat
     {
         public string IntentId { get; }
         public CombatIntentType IntentType { get; }
-        public string ActorEntityId { get; }
+        public EntityHandle ActorEntity { get; }
         public int AuthoritativeTick { get; }
         public string ReasonCode { get; }
         public string Details { get; }
@@ -695,14 +693,14 @@ namespace Caelmor.Combat
         public IntentGateRejection(
             string intentId,
             CombatIntentType intentType,
-            string actorEntityId,
+            EntityHandle actorEntity,
             int authoritativeTick,
             string reasonCode,
             string details)
         {
             IntentId = intentId;
             IntentType = intentType;
-            ActorEntityId = actorEntityId;
+            ActorEntity = actorEntity;
             AuthoritativeTick = authoritativeTick;
             ReasonCode = reasonCode;
             Details = details;
@@ -720,50 +718,196 @@ namespace Caelmor.Combat
 
     public sealed class CombatStateSnapshot
     {
-        // Deterministic ordering: keys are stored sorted by entity_id.
-        public IReadOnlyList<CombatStateSnapshotRow> Rows { get; }
+        private CombatStateSnapshotRow[] _buffer;
+        private int _count;
+        private readonly CombatStateSnapshotRowListView _rows;
+        private bool _released;
 
-        private CombatStateSnapshot(IReadOnlyList<CombatStateSnapshotRow> rows)
+        // Deterministic ordering: keys are stored sorted by entity handle.
+        public IReadOnlyList<CombatStateSnapshotRow> Rows => _rows;
+
+        private CombatStateSnapshot()
         {
-            Rows = rows;
+            _buffer = Array.Empty<CombatStateSnapshotRow>();
+            _rows = new CombatStateSnapshotRowListView();
         }
 
-        public static CombatStateSnapshot Capture(Dictionary<string, CombatEntityState> statesByEntityId)
+        public static CombatStateSnapshot Capture(Dictionary<EntityHandle, CombatEntityState> statesByEntityId)
         {
-            var rows = new List<CombatStateSnapshotRow>(statesByEntityId.Count);
+            var snapshot = CombatStateSnapshotPool.Rent();
+            int required = Math.Max(1, statesByEntityId.Count);
+            var buffer = snapshot.AcquireBuffer(required);
 
+            int index = 0;
             foreach (var kv in statesByEntityId)
             {
                 var s = kv.Value;
-                rows.Add(new CombatStateSnapshotRow(
-                    entityId: s.EntityId,
+                buffer[index++] = new CombatStateSnapshotRow(
+                    entity: s.Entity,
                     state: s.State,
                     combatContextId: s.CombatContextId,
                     committedIntentId: s.CommittedIntentId ?? string.Empty,
                     stateChangeTick: s.StateChangeTick
-                ));
+                );
             }
 
-            rows.Sort((a, b) => StringComparer.Ordinal.Compare(a.EntityId, b.EntityId));
-            return new CombatStateSnapshot(new ReadOnlyCollection<CombatStateSnapshotRow>(rows));
+            if (index > 1)
+                Array.Sort(buffer, 0, index, CombatStateSnapshotRowComparer.Instance);
+
+            snapshot.Commit(buffer, index);
+            return snapshot;
+        }
+
+        public void Release()
+        {
+            if (_released)
+                return;
+
+            _released = true;
+
+            if (_buffer.Length > 0)
+                ArrayPool<CombatStateSnapshotRow>.Shared.Return(_buffer, clearArray: true);
+
+            _buffer = Array.Empty<CombatStateSnapshotRow>();
+            _count = 0;
+            _rows.Reset(Array.Empty<CombatStateSnapshotRow>(), 0);
+
+            CombatStateSnapshotPool.Return(this);
+        }
+
+        private CombatStateSnapshotRow[] AcquireBuffer(int required)
+        {
+            if (_buffer.Length < required)
+            {
+                if (_buffer.Length > 0)
+                    ArrayPool<CombatStateSnapshotRow>.Shared.Return(_buffer, clearArray: true);
+
+                _buffer = ArrayPool<CombatStateSnapshotRow>.Shared.Rent(required);
+            }
+
+            return _buffer;
+        }
+
+        private void Commit(CombatStateSnapshotRow[] buffer, int count)
+        {
+            _buffer = buffer;
+            _count = count;
+            _rows.Reset(buffer, count);
+            _released = false;
         }
     }
 
     public readonly struct CombatStateSnapshotRow
     {
-        public readonly string EntityId;
+        public readonly EntityHandle Entity;
         public readonly CombatState State;
         public readonly string CombatContextId;
         public readonly string CommittedIntentId;
         public readonly int StateChangeTick;
 
-        public CombatStateSnapshotRow(string entityId, CombatState state, string combatContextId, string committedIntentId, int stateChangeTick)
+        public CombatStateSnapshotRow(EntityHandle entity, CombatState state, string combatContextId, string committedIntentId, int stateChangeTick)
         {
-            EntityId = entityId;
+            Entity = entity;
             State = state;
             CombatContextId = combatContextId;
             CommittedIntentId = committedIntentId;
             StateChangeTick = stateChangeTick;
+        }
+    }
+
+    public sealed class CombatStateSnapshotRowListView : IReadOnlyList<CombatStateSnapshotRow>
+    {
+        private CombatStateSnapshotRow[] _items = Array.Empty<CombatStateSnapshotRow>();
+        private int _count;
+
+        public CombatStateSnapshotRow this[int index]
+        {
+            get
+            {
+                if ((uint)index >= (uint)_count)
+                    throw new ArgumentOutOfRangeException(nameof(index));
+
+                return _items[index];
+            }
+        }
+
+        public int Count => _count;
+
+        public void Reset(CombatStateSnapshotRow[] items, int count)
+        {
+            _items = items;
+            _count = count;
+        }
+
+        public Enumerator GetEnumerator() => new Enumerator(_items, _count);
+
+        IEnumerator<CombatStateSnapshotRow> IEnumerable<CombatStateSnapshotRow>.GetEnumerator() => GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        public struct Enumerator : IEnumerator<CombatStateSnapshotRow>
+        {
+            private readonly CombatStateSnapshotRow[] _items;
+            private readonly int _count;
+            private int _index;
+
+            public Enumerator(CombatStateSnapshotRow[] items, int count)
+            {
+                _items = items;
+                _count = count;
+                _index = -1;
+            }
+
+            public CombatStateSnapshotRow Current => _items[_index];
+
+            object IEnumerator.Current => Current;
+
+            public void Dispose()
+            {
+            }
+
+            public bool MoveNext()
+            {
+                int next = _index + 1;
+                if (next >= _count)
+                    return false;
+
+                _index = next;
+                return true;
+            }
+
+            public void Reset()
+            {
+                _index = -1;
+            }
+        }
+    }
+
+    internal sealed class CombatStateSnapshotRowComparer : IComparer<CombatStateSnapshotRow>
+    {
+        public static readonly CombatStateSnapshotRowComparer Instance = new CombatStateSnapshotRowComparer();
+
+        public int Compare(CombatStateSnapshotRow x, CombatStateSnapshotRow y)
+            => x.Entity.Value.CompareTo(y.Entity.Value);
+    }
+
+    internal static class CombatStateSnapshotPool
+    {
+        private const int MaxPoolSize = 16;
+        private static readonly Stack<CombatStateSnapshot> _pool = new Stack<CombatStateSnapshot>(MaxPoolSize);
+
+        public static CombatStateSnapshot Rent()
+        {
+            if (_pool.Count > 0)
+                return _pool.Pop();
+
+            return new CombatStateSnapshot();
+        }
+
+        public static void Return(CombatStateSnapshot snapshot)
+        {
+            if (_pool.Count < MaxPoolSize)
+                _pool.Push(snapshot);
         }
     }
 
