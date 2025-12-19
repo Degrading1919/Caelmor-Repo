@@ -36,7 +36,8 @@ namespace Caelmor.Validation.Replication
                 new Scenario3_EligibilityEnforced(),
                 new Scenario4_DeterministicSnapshotContents(),
                 new Scenario5_OutboundSendPumpDrainsSnapshots(),
-                new Scenario6_LifecycleMailboxAppliesDisconnectOnTick()
+                new Scenario6_LifecycleMailboxAppliesDisconnectOnTick(),
+                new Scenario7_FingerprintChangesWithStateMutation()
             };
         }
 
@@ -61,13 +62,13 @@ namespace Caelmor.Validation.Replication
                 var snapshot = rig.Queue.Enqueued[0].snapshot;
                 assert.Equal(1, snapshot.Entities.Count, "Snapshot must include the eligible entity.");
                 assert.Equal(
-                    "committed_state",
+                    ComputeDeterministicFingerprint("committed_state"),
                     snapshot.Entities[0].State.Fingerprint,
                     "Snapshot must reflect committed post-tick state only.");
 
                 rig.StateReader.SetState(entity, "mutated_after_delivery");
                 assert.Equal(
-                    "committed_state",
+                    ComputeDeterministicFingerprint("committed_state"),
                     snapshot.Entities[0].State.Fingerprint,
                     "Snapshots must be immutable once enqueued.");
             }
@@ -345,6 +346,36 @@ namespace Caelmor.Validation.Replication
             }
         }
 
+        private sealed class Scenario7_FingerprintChangesWithStateMutation : IValidationScenario
+        {
+            public string Name => "Scenario 7 — Fingerprints Change With State Mutation";
+
+            public void Run(IAssert assert)
+            {
+                var rig = Rig.Create();
+                var entity = new EntityHandle(21);
+
+                rig.StateReader.SetState(entity, "state_alpha");
+                var firstContext = rig.CreateTickContext(tickIndex: 100);
+                rig.System.OnPreTick(firstContext, new[] { entity });
+                rig.System.OnPostTick(firstContext, new[] { entity });
+
+                rig.StateReader.SetState(entity, "state_beta");
+                var secondContext = rig.CreateTickContext(tickIndex: 101);
+                rig.System.OnPreTick(secondContext, new[] { entity });
+                rig.System.OnPostTick(secondContext, new[] { entity });
+
+                assert.Equal(2, rig.Queue.Enqueued.Count, "Two snapshots must be queued for state mutation validation.");
+
+                var first = rig.Queue.Enqueued[0].snapshot.Entities[0].State.Fingerprint;
+                var second = rig.Queue.Enqueued[1].snapshot.Entities[0].State.Fingerprint;
+
+                assert.True(first != second, "Fingerprint must change when committed state changes.");
+                assert.Equal(ComputeDeterministicFingerprint("state_alpha"), first, "Fingerprint must be deterministic for initial state.");
+                assert.Equal(ComputeDeterministicFingerprint("state_beta"), second, "Fingerprint must be deterministic for mutated state.");
+            }
+        }
+
         private sealed class Rig
         {
             public readonly ClientReplicationSnapshotSystem System;
@@ -436,20 +467,38 @@ namespace Caelmor.Validation.Replication
 
         private sealed class RecordingStateReader : IReplicationStateReader
         {
-            private readonly Dictionary<EntityHandle, string> _states = new Dictionary<EntityHandle, string>();
+            private readonly Dictionary<EntityHandle, ulong> _states = new Dictionary<EntityHandle, ulong>();
 
             public void SetState(EntityHandle entity, string fingerprint)
             {
-                _states[entity] = fingerprint;
+                _states[entity] = ComputeDeterministicFingerprint(fingerprint);
             }
 
             public ReplicatedEntityState ReadCommittedState(EntityHandle entity)
             {
                 if (!_states.TryGetValue(entity, out var fp))
-                    fp = string.Empty;
+                    fp = 0;
 
                 return new ReplicatedEntityState(fp);
             }
+        }
+
+        private static ulong ComputeDeterministicFingerprint(string value)
+        {
+            if (value == null)
+                return 0;
+
+            const ulong offsetBasis = 14695981039346656037UL;
+            const ulong prime = 1099511628211UL;
+            ulong hash = offsetBasis;
+
+            for (int i = 0; i < value.Length; i++)
+            {
+                hash ^= value[i];
+                hash *= prime;
+            }
+
+            return hash;
         }
 
         private sealed class StubAuthority : IServerAuthority

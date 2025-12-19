@@ -2,7 +2,6 @@ using System;
 using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using Caelmor.Runtime.Diagnostics;
 using Caelmor.Runtime.Persistence;
@@ -679,9 +678,9 @@ namespace Caelmor.Runtime.Transport
         private readonly Dictionary<SessionId, Queue<SerializedSnapshot>> _queues;
         private readonly Dictionary<SessionId, int> _bytesBySession;
         private readonly Dictionary<SessionId, SessionQueueMetrics> _metrics;
-        private readonly Dictionary<SessionId, Dictionary<EntityHandle, string>> _fingerprints;
+        private readonly Dictionary<SessionId, Dictionary<EntityHandle, ulong>> _fingerprints;
         private readonly Stack<Queue<SerializedSnapshot>> _queuePool;
-        private readonly Stack<Dictionary<EntityHandle, string>> _fingerprintPool;
+        private readonly Stack<Dictionary<EntityHandle, ulong>> _fingerprintPool;
         private readonly int _queuePoolCapacity;
         private readonly int _expectedMaxSnapshotsPerSession;
         private readonly ReplicationSnapshotCounters? _counters;
@@ -700,9 +699,9 @@ namespace Caelmor.Runtime.Transport
             _queues = new Dictionary<SessionId, Queue<SerializedSnapshot>>(_queuePoolCapacity);
             _bytesBySession = new Dictionary<SessionId, int>(_queuePoolCapacity);
             _metrics = new Dictionary<SessionId, SessionQueueMetrics>(_queuePoolCapacity);
-            _fingerprints = new Dictionary<SessionId, Dictionary<EntityHandle, string>>(_queuePoolCapacity);
+            _fingerprints = new Dictionary<SessionId, Dictionary<EntityHandle, ulong>>(_queuePoolCapacity);
             _queuePool = new Stack<Queue<SerializedSnapshot>>(_queuePoolCapacity);
-            _fingerprintPool = new Stack<Dictionary<EntityHandle, string>>(_queuePoolCapacity);
+            _fingerprintPool = new Stack<Dictionary<EntityHandle, ulong>>(_queuePoolCapacity);
         }
 
         public void Prewarm()
@@ -717,7 +716,7 @@ namespace Caelmor.Runtime.Transport
                 _queuePool.Push(new Queue<SerializedSnapshot>(_expectedMaxSnapshotsPerSession));
 
             while (_fingerprintPool.Count < _queuePoolCapacity)
-                _fingerprintPool.Push(new Dictionary<EntityHandle, string>());
+                _fingerprintPool.Push(new Dictionary<EntityHandle, ulong>());
 
             _prewarmCompleted++;
         }
@@ -755,13 +754,13 @@ namespace Caelmor.Runtime.Transport
             EnforceCaps(sessionId, queue);
         }
 
-        private Dictionary<EntityHandle, string> GetOrCreateFingerprintMap(SessionId sessionId)
+        private Dictionary<EntityHandle, ulong> GetOrCreateFingerprintMap(SessionId sessionId)
         {
             if (!_fingerprints.TryGetValue(sessionId, out var map))
             {
                 map = _fingerprintPool.Count > 0
                     ? _fingerprintPool.Pop()
-                    : new Dictionary<EntityHandle, string>();
+                    : new Dictionary<EntityHandle, ulong>();
                 map.Clear();
                 _fingerprints[sessionId] = map;
             }
@@ -1426,11 +1425,11 @@ namespace Caelmor.Runtime.Transport
     /// </summary>
     internal sealed class SnapshotDeltaSerializer
     {
-        private readonly List<(EntityHandle entity, string fingerprint)> _changed = new List<(EntityHandle, string)>(64);
+        private readonly List<(EntityHandle entity, ulong fingerprint)> _changed = new List<(EntityHandle, ulong)>(64);
         private readonly List<EntityHandle> _removed = new List<EntityHandle>(64);
         private readonly HashSet<EntityHandle> _presentEntities = new HashSet<EntityHandle>();
 
-        public SerializedSnapshot Serialize(Caelmor.ClientReplication.ClientReplicationSnapshot snapshot, Dictionary<EntityHandle, string> baseline)
+        public SerializedSnapshot Serialize(Caelmor.ClientReplication.ClientReplicationSnapshot snapshot, Dictionary<EntityHandle, ulong> baseline)
         {
             if (snapshot == null) throw new ArgumentNullException(nameof(snapshot));
             if (baseline == null) throw new ArgumentNullException(nameof(baseline));
@@ -1443,7 +1442,7 @@ namespace Caelmor.Runtime.Transport
             {
                 _presentEntities.Add(entry.Entity);
                 baseline.TryGetValue(entry.Entity, out var prevFp);
-                if (!string.Equals(prevFp, entry.State.Fingerprint, StringComparison.Ordinal))
+                if (prevFp != entry.State.Fingerprint)
                     _changed.Add((entry.Entity, entry.State.Fingerprint));
             }
 
@@ -1468,7 +1467,7 @@ namespace Caelmor.Runtime.Transport
             foreach (var entry in _changed)
             {
                 WriteInt32(buffer, ref offset, entry.entity.Value);
-                WriteString(buffer, ref offset, entry.fingerprint);
+                WriteUInt64(buffer, ref offset, entry.fingerprint);
             }
 
             foreach (var entity in _removed)
@@ -1484,14 +1483,13 @@ namespace Caelmor.Runtime.Transport
             return SerializedSnapshot.Rent(snapshot.SessionId, snapshot.AuthoritativeTick, buffer, offset, _changed.Count, _removed.Count);
         }
 
-        private static int ComputeLength(long tick, List<(EntityHandle entity, string fingerprint)> changed, List<EntityHandle> removed)
+        private static int ComputeLength(long tick, List<(EntityHandle entity, ulong fingerprint)> changed, List<EntityHandle> removed)
         {
             int length = sizeof(long) + sizeof(int) + sizeof(int);
             foreach (var entry in changed)
             {
                 length += sizeof(int); // entity id
-                length += sizeof(int); // string length
-                length += Encoding.UTF8.GetByteCount(entry.fingerprint);
+                length += sizeof(ulong); // fingerprint
             }
 
             length += removed.Count * sizeof(int);
@@ -1524,18 +1522,26 @@ namespace Caelmor.Runtime.Transport
             }
         }
 
-        private static void WriteString(byte[] buffer, ref int offset, string value)
+        private static void WriteUInt64(byte[] buffer, ref int offset, ulong value)
         {
-            int byteCount = Encoding.UTF8.GetBytes(value, 0, value.Length, buffer, offset + sizeof(int));
-            WriteInt32(buffer, ref offset, byteCount);
-            offset += byteCount;
+            unchecked
+            {
+                buffer[offset++] = (byte)value;
+                buffer[offset++] = (byte)(value >> 8);
+                buffer[offset++] = (byte)(value >> 16);
+                buffer[offset++] = (byte)(value >> 24);
+                buffer[offset++] = (byte)(value >> 32);
+                buffer[offset++] = (byte)(value >> 40);
+                buffer[offset++] = (byte)(value >> 48);
+                buffer[offset++] = (byte)(value >> 56);
+            }
         }
 
-        private sealed class ChangedEntryComparer : IComparer<(EntityHandle entity, string fingerprint)>
+        private sealed class ChangedEntryComparer : IComparer<(EntityHandle entity, ulong fingerprint)>
         {
             public static readonly ChangedEntryComparer Instance = new ChangedEntryComparer();
 
-            public int Compare((EntityHandle entity, string fingerprint) x, (EntityHandle entity, string fingerprint) y)
+            public int Compare((EntityHandle entity, ulong fingerprint) x, (EntityHandle entity, ulong fingerprint) y)
             {
                 return x.entity.Value.CompareTo(y.entity.Value);
             }
