@@ -34,6 +34,7 @@ namespace Caelmor.Runtime.Host
         private readonly PersistenceWriteQueue _persistenceWrites;
         private readonly PersistenceWorkerLoop _persistenceWorker;
         private readonly PersistencePipelineCounters _persistenceCounters;
+        private readonly TickThreadMailbox _lifecycleMailbox;
         private readonly InboundPumpTickHook _inboundPump;
         private readonly OutboundSendPump _outboundPump;
 
@@ -50,6 +51,7 @@ namespace Caelmor.Runtime.Host
             VisibilityCullingService visibility,
             ClientReplicationSnapshotSystem replication,
             DeterministicEntityRegistry entities,
+            TickThreadMailbox lifecycleMailbox,
             InboundPumpTickHook inboundPump,
             AuthoritativeCommandConsumeTickHook commandConsumeHook,
             OutboundSendPump outboundPump,
@@ -66,6 +68,7 @@ namespace Caelmor.Runtime.Host
             _visibility = visibility ?? throw new ArgumentNullException(nameof(visibility));
             _replication = replication ?? throw new ArgumentNullException(nameof(replication));
             _entities = entities ?? throw new ArgumentNullException(nameof(entities));
+            _lifecycleMailbox = lifecycleMailbox ?? throw new ArgumentNullException(nameof(lifecycleMailbox));
             _inboundPump = inboundPump ?? throw new ArgumentNullException(nameof(inboundPump));
             _outboundPump = outboundPump ?? throw new ArgumentNullException(nameof(outboundPump));
             _persistenceCompletions = persistenceCompletions;
@@ -94,6 +97,7 @@ namespace Caelmor.Runtime.Host
             IActiveSessionIndex activeSessions = null,
             int commandFreezeHookOrderKey = int.MinValue,
             int commandConsumeHookOrderKey = int.MinValue + 1,
+            int lifecycleHookOrderKey = int.MinValue,
             int handshakeProcessingHookOrderKey = int.MinValue + 2,
             int handshakePerTickBudget = 4,
             PersistenceCompletionQueue persistenceCompletions = null,
@@ -122,13 +126,18 @@ namespace Caelmor.Runtime.Host
                 throw new InvalidOperationException("AuthoritativeCommandConsumeTickHook must run after the freeze hook.");
 #endif
 
-            int hookCount = phaseHooks.Length + 4;
+            int hookCount = phaseHooks.Length + 5;
             bool includePersistence = persistenceCompletions != null && persistenceCompletionApplier != null;
             if (includePersistence)
                 hookCount++;
 
             var combinedHooks = new PhaseHookRegistration[hookCount];
             int index = 0;
+
+            var lifecycleMailbox = new TickThreadMailbox(transport.Config);
+            var lifecycleApplier = new LifecycleApplier(transport, commands, handshakes, visibility, replication);
+            var lifecycleHook = new LifecycleMailboxPhaseHook(lifecycleMailbox, lifecycleApplier);
+            combinedHooks[index++] = new PhaseHookRegistration(lifecycleHook, lifecycleHookOrderKey);
 
             var inboundPump = new InboundPumpTickHook(transport, commands, activeSessions, inboundFramesPerTick, ingressCommandsPerTick);
             combinedHooks[index++] = new PhaseHookRegistration(inboundPump, commandFreezeHookOrderKey);
@@ -165,6 +174,7 @@ namespace Caelmor.Runtime.Host
                 visibility,
                 replication,
                 entities,
+                lifecycleMailbox,
                 inboundPump,
                 consumeHook,
                 outboundPump,
@@ -214,10 +224,10 @@ namespace Caelmor.Runtime.Host
         /// </summary>
         public void OnSessionDisconnected(SessionId sessionId)
         {
-            _transport.DropAllForSession(sessionId);
-            _commands.DropSession(sessionId);
-            _visibility.RemoveSession(sessionId);
-            _replication.OnSessionDisconnected(sessionId);
+            _lifecycleMailbox.TryEnqueueDisconnect(sessionId);
+            _lifecycleMailbox.TryEnqueueUnregister(sessionId);
+            _lifecycleMailbox.TryEnqueueClearVisibility(sessionId);
+            _lifecycleMailbox.TryEnqueueCleanupReplication(sessionId);
         }
 
         /// <summary>
@@ -266,7 +276,12 @@ namespace Caelmor.Runtime.Host
             var persistenceCompletions = _persistenceCompletions?.SnapshotMetrics();
             var persistenceCounters = _persistenceCounters?.Snapshot();
             var persistenceQueue = _persistenceWrites?.SnapshotMetrics();
-            return new RuntimeDiagnosticsSnapshot(tick, transport, persistenceCompletions, commands, handshakes, inboundPump, persistenceCounters, persistenceQueue);
+            var lifecycle = new LifecycleMailboxCounters(
+                _lifecycleMailbox.LifecycleOpsEnqueued,
+                _lifecycleMailbox.LifecycleOpsApplied,
+                _lifecycleMailbox.DisconnectsApplied,
+                _lifecycleMailbox.LifecycleOpsDropped);
+            return new RuntimeDiagnosticsSnapshot(tick, transport, persistenceCompletions, commands, handshakes, inboundPump, persistenceCounters, persistenceQueue, lifecycle);
         }
 
         private void ClearTransientState()
@@ -276,6 +291,7 @@ namespace Caelmor.Runtime.Host
             _commands.Clear();
             _visibility.Clear();
             _entities.ClearAll();
+            _lifecycleMailbox.Clear();
             _persistenceCompletions?.Clear();
             _persistenceWrites?.Clear();
         }
@@ -283,6 +299,72 @@ namespace Caelmor.Runtime.Host
         private void OnTickStalled(TickStallEvent stall)
         {
             TickStallDetected?.Invoke(stall);
+        }
+    }
+
+    internal sealed class LifecycleMailboxPhaseHook : ITickPhaseHook
+    {
+        private readonly TickThreadMailbox _mailbox;
+        private readonly ILifecycleApplier _applier;
+
+        public LifecycleMailboxPhaseHook(TickThreadMailbox mailbox, ILifecycleApplier applier)
+        {
+            _mailbox = mailbox ?? throw new ArgumentNullException(nameof(mailbox));
+            _applier = applier ?? throw new ArgumentNullException(nameof(applier));
+        }
+
+        public void OnPreTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
+        {
+            _mailbox.Drain(_applier);
+        }
+
+        public void OnPostTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
+        {
+        }
+    }
+
+    internal sealed class LifecycleApplier : ILifecycleApplier
+    {
+        private readonly PooledTransportRouter _transport;
+        private readonly AuthoritativeCommandIngestor _commands;
+        private readonly SessionHandshakePipeline _handshakes;
+        private readonly VisibilityCullingService _visibility;
+        private readonly ClientReplicationSnapshotSystem _replication;
+
+        public LifecycleApplier(
+            PooledTransportRouter transport,
+            AuthoritativeCommandIngestor commands,
+            SessionHandshakePipeline handshakes,
+            VisibilityCullingService visibility,
+            ClientReplicationSnapshotSystem replication)
+        {
+            _transport = transport ?? throw new ArgumentNullException(nameof(transport));
+            _commands = commands ?? throw new ArgumentNullException(nameof(commands));
+            _handshakes = handshakes ?? throw new ArgumentNullException(nameof(handshakes));
+            _visibility = visibility ?? throw new ArgumentNullException(nameof(visibility));
+            _replication = replication ?? throw new ArgumentNullException(nameof(replication));
+        }
+
+        public void Apply(TickThreadMailbox.LifecycleOp op)
+        {
+            TickThreadAssert.AssertTickThread();
+
+            switch (op.Kind)
+            {
+                case TickThreadMailbox.LifecycleOpKind.DisconnectSession:
+                    _transport.DropAllForSession(op.SessionId);
+                    _commands.DropSession(op.SessionId);
+                    break;
+                case TickThreadMailbox.LifecycleOpKind.UnregisterSession:
+                    _handshakes.Drop(op.SessionId);
+                    break;
+                case TickThreadMailbox.LifecycleOpKind.ClearVisibility:
+                    _visibility.RemoveSession(op.SessionId);
+                    break;
+                case TickThreadMailbox.LifecycleOpKind.CleanupReplication:
+                    _replication.OnSessionDisconnected(op.SessionId);
+                    break;
+            }
         }
     }
 
@@ -311,7 +393,8 @@ namespace Caelmor.Runtime.Host
             HandshakePipelineMetrics handshakes,
             InboundPumpDiagnostics inboundPump,
             PersistencePipelineCounterSnapshot? persistencePipelineCounters,
-            PersistenceQueueMetrics? persistenceQueue)
+            PersistenceQueueMetrics? persistenceQueue,
+            LifecycleMailboxCounters lifecycleMailbox)
         {
             Tick = tick;
             Transport = transport;
@@ -321,6 +404,7 @@ namespace Caelmor.Runtime.Host
             InboundPump = inboundPump;
             PersistencePipelineCounters = persistencePipelineCounters;
             PersistenceQueue = persistenceQueue;
+            LifecycleMailbox = lifecycleMailbox;
         }
 
         public TickDiagnosticsSnapshot Tick { get; }
@@ -331,6 +415,23 @@ namespace Caelmor.Runtime.Host
         public InboundPumpDiagnostics InboundPump { get; }
         public PersistencePipelineCounterSnapshot? PersistencePipelineCounters { get; }
         public PersistenceQueueMetrics? PersistenceQueue { get; }
+        public LifecycleMailboxCounters LifecycleMailbox { get; }
         public bool HasDetectedStall => Tick.StallDetections > 0;
+    }
+
+    public readonly struct LifecycleMailboxCounters
+    {
+        public LifecycleMailboxCounters(long enqueued, long applied, long disconnectsApplied, long dropped)
+        {
+            LifecycleOpsEnqueued = enqueued;
+            LifecycleOpsApplied = applied;
+            DisconnectsApplied = disconnectsApplied;
+            LifecycleOpsDropped = dropped;
+        }
+
+        public long LifecycleOpsEnqueued { get; }
+        public long LifecycleOpsApplied { get; }
+        public long DisconnectsApplied { get; }
+        public long LifecycleOpsDropped { get; }
     }
 }

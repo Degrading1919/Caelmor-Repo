@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Caelmor.Runtime.Diagnostics;
 using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.Tick;
 
@@ -64,6 +65,7 @@ namespace Caelmor.Runtime.InterestManagement
         /// </summary>
         public void Upsert(EntityHandle entity, ZoneId zone, ZonePosition position)
         {
+            TickThreadAssert.AssertTickThread();
             if (!entity.IsValid)
                 throw new ArgumentOutOfRangeException(nameof(entity));
             if (zone.Value <= 0)
@@ -95,6 +97,7 @@ namespace Caelmor.Runtime.InterestManagement
         /// </summary>
         public void Remove(EntityHandle entity)
         {
+            TickThreadAssert.AssertTickThread();
             if (!_locations.TryGetValue(entity, out var cell))
                 return;
 
@@ -112,6 +115,7 @@ namespace Caelmor.Runtime.InterestManagement
         /// </summary>
         public void RemoveZone(ZoneId zone)
         {
+            TickThreadAssert.AssertTickThread();
             if (zone.Value <= 0)
                 return;
 
@@ -132,6 +136,7 @@ namespace Caelmor.Runtime.InterestManagement
         /// </summary>
         public void Clear()
         {
+            TickThreadAssert.AssertTickThread();
             _cells.Clear();
             _locations.Clear();
         }

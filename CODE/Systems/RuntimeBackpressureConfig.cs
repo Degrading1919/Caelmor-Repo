@@ -20,7 +20,9 @@ namespace Caelmor.Runtime
             maxPersistenceWriteBytesPerPlayer: 1024 * 1024,
             maxPersistenceWriteBytesGlobal: 8 * 1024 * 1024,
             maxPersistenceCompletions: 128,
-            maxPersistenceCompletionBytes: 512 * 1024);
+            maxPersistenceCompletionBytes: 512 * 1024,
+            maxLifecycleOps: 256,
+            maxLifecycleOpBytes: 64 * 1024);
 
         public RuntimeBackpressureConfig(
             int maxInboundCommandsPerSession,
@@ -46,6 +48,8 @@ namespace Caelmor.Runtime
                 maxPersistenceWriteBytesGlobal,
                 maxPersistenceCompletions,
                 maxPersistenceCompletionBytes,
+                maxLifecycleOps: 256,
+                maxLifecycleOpBytes: 64 * 1024,
                 skipValidation: false)
         {
         }
@@ -72,6 +76,8 @@ namespace Caelmor.Runtime
                 maxPersistenceWriteBytesGlobal,
                 maxPersistenceCompletions: 128,
                 maxPersistenceCompletionBytes: 512 * 1024,
+                maxLifecycleOps: 256,
+                maxLifecycleOpBytes: 64 * 1024,
                 skipValidation: false)
         {
         }
@@ -96,6 +102,40 @@ namespace Caelmor.Runtime
                 maxPersistenceWriteBytesGlobal: 8 * 1024 * 1024,
                 maxPersistenceCompletions: 128,
                 maxPersistenceCompletionBytes: 512 * 1024,
+                maxLifecycleOps: 256,
+                maxLifecycleOpBytes: 64 * 1024,
+                skipValidation: false)
+        {
+        }
+
+        public RuntimeBackpressureConfig(
+            int maxInboundCommandsPerSession,
+            int maxInboundCommandAgeTicks,
+            int maxInboundCommandLeadTicks,
+            int maxOutboundSnapshotsPerSession,
+            int maxQueuedBytesPerSession,
+            int maxPersistenceWritesPerPlayer,
+            int maxPersistenceWritesGlobal,
+            int maxPersistenceWriteBytesPerPlayer,
+            int maxPersistenceWriteBytesGlobal,
+            int maxPersistenceCompletions,
+            int maxPersistenceCompletionBytes,
+            int maxLifecycleOps,
+            int maxLifecycleOpBytes)
+            : this(
+                maxInboundCommandsPerSession,
+                maxInboundCommandAgeTicks,
+                maxInboundCommandLeadTicks,
+                maxOutboundSnapshotsPerSession,
+                maxQueuedBytesPerSession,
+                maxPersistenceWritesPerPlayer,
+                maxPersistenceWritesGlobal,
+                maxPersistenceWriteBytesPerPlayer,
+                maxPersistenceWriteBytesGlobal,
+                maxPersistenceCompletions,
+                maxPersistenceCompletionBytes,
+                maxLifecycleOps,
+                maxLifecycleOpBytes,
                 skipValidation: false)
         {
         }
@@ -112,6 +152,8 @@ namespace Caelmor.Runtime
             int maxPersistenceWriteBytesGlobal,
             int maxPersistenceCompletions,
             int maxPersistenceCompletionBytes,
+            int maxLifecycleOps,
+            int maxLifecycleOpBytes,
             bool skipValidation)
         {
             if (!skipValidation)
@@ -127,6 +169,8 @@ namespace Caelmor.Runtime
                 if (maxPersistenceWriteBytesGlobal <= 0) throw new ArgumentOutOfRangeException(nameof(maxPersistenceWriteBytesGlobal));
                 if (maxPersistenceCompletions <= 0) throw new ArgumentOutOfRangeException(nameof(maxPersistenceCompletions));
                 if (maxPersistenceCompletionBytes <= 0) throw new ArgumentOutOfRangeException(nameof(maxPersistenceCompletionBytes));
+                if (maxLifecycleOps <= 0) throw new ArgumentOutOfRangeException(nameof(maxLifecycleOps));
+                if (maxLifecycleOpBytes <= 0) throw new ArgumentOutOfRangeException(nameof(maxLifecycleOpBytes));
             }
 
             MaxInboundCommandsPerSession = maxInboundCommandsPerSession;
@@ -140,6 +184,8 @@ namespace Caelmor.Runtime
             MaxPersistenceWriteBytesGlobal = maxPersistenceWriteBytesGlobal;
             MaxPersistenceCompletions = maxPersistenceCompletions;
             MaxPersistenceCompletionBytes = maxPersistenceCompletionBytes;
+            MaxLifecycleOps = maxLifecycleOps;
+            MaxLifecycleOpBytes = maxLifecycleOpBytes;
         }
 
         public int MaxInboundCommandsPerSession { get; }
@@ -153,5 +199,7 @@ namespace Caelmor.Runtime
         public int MaxPersistenceWriteBytesGlobal { get; }
         public int MaxPersistenceCompletions { get; }
         public int MaxPersistenceCompletionBytes { get; }
+        public int MaxLifecycleOps { get; }
+        public int MaxLifecycleOpBytes { get; }
     }
 }
