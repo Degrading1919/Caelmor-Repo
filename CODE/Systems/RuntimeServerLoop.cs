@@ -26,6 +26,7 @@ namespace Caelmor.Runtime.Host
         private readonly PooledTransportRouter _transport;
         private readonly SessionHandshakePipeline _handshakes;
         private readonly AuthoritativeCommandIngestor _commands;
+        private readonly AuthoritativeCommandConsumeTickHook _commandConsumeHook;
         private readonly VisibilityCullingService _visibility;
         private readonly ClientReplicationSnapshotSystem _replication;
         private readonly DeterministicEntityRegistry _entities;
@@ -50,6 +51,7 @@ namespace Caelmor.Runtime.Host
             ClientReplicationSnapshotSystem replication,
             DeterministicEntityRegistry entities,
             InboundPumpTickHook inboundPump,
+            AuthoritativeCommandConsumeTickHook commandConsumeHook,
             OutboundSendPump outboundPump,
             PersistenceCompletionQueue persistenceCompletions = null,
             PersistenceWriteQueue persistenceWrites = null,
@@ -60,6 +62,7 @@ namespace Caelmor.Runtime.Host
             _transport = transport ?? throw new ArgumentNullException(nameof(transport));
             _handshakes = handshakes ?? throw new ArgumentNullException(nameof(handshakes));
             _commands = commands ?? throw new ArgumentNullException(nameof(commands));
+            _commandConsumeHook = commandConsumeHook ?? throw new ArgumentNullException(nameof(commandConsumeHook));
             _visibility = visibility ?? throw new ArgumentNullException(nameof(visibility));
             _replication = replication ?? throw new ArgumentNullException(nameof(replication));
             _entities = entities ?? throw new ArgumentNullException(nameof(entities));
@@ -81,6 +84,7 @@ namespace Caelmor.Runtime.Host
             PooledTransportRouter transport,
             SessionHandshakePipeline handshakes,
             AuthoritativeCommandIngestor commands,
+            ICommandHandlerRegistry commandHandlers,
             VisibilityCullingService visibility,
             ClientReplicationSnapshotSystem replication,
             DeterministicEntityRegistry entities,
@@ -89,7 +93,8 @@ namespace Caelmor.Runtime.Host
             ReadOnlySpan<PhaseHookRegistration> phaseHooks,
             IActiveSessionIndex activeSessions = null,
             int commandFreezeHookOrderKey = int.MinValue,
-            int handshakeProcessingHookOrderKey = int.MinValue + 1,
+            int commandConsumeHookOrderKey = int.MinValue + 1,
+            int handshakeProcessingHookOrderKey = int.MinValue + 2,
             int handshakePerTickBudget = 4,
             PersistenceCompletionQueue persistenceCompletions = null,
             IPersistenceCompletionApplier persistenceCompletionApplier = null,
@@ -109,8 +114,15 @@ namespace Caelmor.Runtime.Host
                 throw new ArgumentNullException(nameof(activeSessions));
             if (replication == null)
                 throw new ArgumentNullException(nameof(replication));
+            if (commandHandlers == null)
+                throw new ArgumentNullException(nameof(commandHandlers));
 
-            int hookCount = phaseHooks.Length + 3;
+#if DEBUG
+            if (commandConsumeHookOrderKey <= commandFreezeHookOrderKey)
+                throw new InvalidOperationException("AuthoritativeCommandConsumeTickHook must run after the freeze hook.");
+#endif
+
+            int hookCount = phaseHooks.Length + 4;
             bool includePersistence = persistenceCompletions != null && persistenceCompletionApplier != null;
             if (includePersistence)
                 hookCount++;
@@ -120,6 +132,9 @@ namespace Caelmor.Runtime.Host
 
             var inboundPump = new InboundPumpTickHook(transport, commands, activeSessions, inboundFramesPerTick, ingressCommandsPerTick);
             combinedHooks[index++] = new PhaseHookRegistration(inboundPump, commandFreezeHookOrderKey);
+
+            var consumeHook = new AuthoritativeCommandConsumeTickHook(commands, commandHandlers, activeSessions);
+            combinedHooks[index++] = new PhaseHookRegistration(consumeHook, commandConsumeHookOrderKey);
 
             combinedHooks[index++] = new PhaseHookRegistration(
                 new HandshakeProcessingPhaseHook(handshakes, handshakePerTickBudget),
@@ -151,6 +166,7 @@ namespace Caelmor.Runtime.Host
                 replication,
                 entities,
                 inboundPump,
+                consumeHook,
                 outboundPump,
                 persistenceCompletions,
                 persistenceWrites,
@@ -164,6 +180,11 @@ namespace Caelmor.Runtime.Host
             {
                 if (_started)
                     return;
+
+#if DEBUG
+                if (_commandConsumeHook.HandlerCount <= 0)
+                    throw new InvalidOperationException("AuthoritativeCommandConsumeTickHook missing handler registration.");
+#endif
 
                 _persistenceWorker?.Start();
                 _simulation.Start();

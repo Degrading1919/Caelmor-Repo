@@ -384,16 +384,16 @@ namespace Caelmor.Runtime.Integration
             var c = x.AuthoritativeTick.CompareTo(y.AuthoritativeTick);
             if (c != 0) return c;
 
+            c = x.DeterministicSequence.CompareTo(y.DeterministicSequence);
+            if (c != 0) return c;
+
             c = x.CommandType.CompareTo(y.CommandType);
             if (c != 0) return c;
 
             c = x.PayloadA.CompareTo(y.PayloadA);
             if (c != 0) return c;
 
-            c = x.PayloadB.CompareTo(y.PayloadB);
-            if (c != 0) return c;
-
-            return x.DeterministicSequence.CompareTo(y.DeterministicSequence);
+            return x.PayloadB.CompareTo(y.PayloadB);
         }
     }
 
@@ -439,6 +439,159 @@ namespace Caelmor.Runtime.Integration
         {
             // No post-tick work required; freeze occurs at tick start.
         }
+    }
+
+    public interface IAuthoritativeCommandHandler
+    {
+        void Handle(in AuthoritativeCommand command, SessionId sessionId, SimulationTickContext context);
+    }
+
+    public interface ICommandHandlerRegistry
+    {
+        bool TryGetHandler(int commandType, out IAuthoritativeCommandHandler handler);
+        int HandlerCount { get; }
+    }
+
+    public sealed class CommandHandlerRegistry : ICommandHandlerRegistry
+    {
+        private readonly Dictionary<int, IAuthoritativeCommandHandler> _handlers = new Dictionary<int, IAuthoritativeCommandHandler>(16);
+
+        public int HandlerCount => _handlers.Count;
+
+        public void Register(int commandType, IAuthoritativeCommandHandler handler)
+        {
+            if (commandType == 0)
+                throw new ArgumentOutOfRangeException(nameof(commandType));
+            if (handler is null)
+                throw new ArgumentNullException(nameof(handler));
+
+            if (_handlers.ContainsKey(commandType))
+                throw new InvalidOperationException($"Command handler already registered for type {commandType}.");
+
+            _handlers.Add(commandType, handler);
+        }
+
+        public bool TryGetHandler(int commandType, out IAuthoritativeCommandHandler handler)
+            => _handlers.TryGetValue(commandType, out handler);
+    }
+
+    /// <summary>
+    /// TODO: Replace with real gameplay handlers once authoritative command surfaces are defined.
+    /// No-op handler used for validation and proof-of-life counters only.
+    /// </summary>
+    public sealed class NoOpCommandHandler : IAuthoritativeCommandHandler
+    {
+        private long _handledCount;
+        private long _lastSequence;
+
+        public long HandledCount => _handledCount;
+        public long LastSequence => _lastSequence;
+
+        public void Handle(in AuthoritativeCommand command, SessionId sessionId, SimulationTickContext context)
+        {
+            _handledCount++;
+            _lastSequence = command.DeterministicSequence;
+        }
+    }
+
+    /// <summary>
+    /// Tick-phase hook that consumes frozen authoritative command batches deterministically.
+    /// Runs after the freeze hook and before simulation commit. Tick thread only.
+    /// </summary>
+    public sealed class AuthoritativeCommandConsumeTickHook : ITickPhaseHook
+    {
+        private readonly IAuthoritativeCommandIngestor _ingestor;
+        private readonly ICommandHandlerRegistry _registry;
+        private readonly IActiveSessionIndex _activeSessions;
+
+        private long _frozenBatchesConsumed;
+        private long _commandsDispatched;
+        private long _unknownCommandTypeRejected;
+        private long _handlerErrors;
+
+        public AuthoritativeCommandConsumeTickHook(
+            IAuthoritativeCommandIngestor ingestor,
+            ICommandHandlerRegistry registry,
+            IActiveSessionIndex activeSessions)
+        {
+            _ingestor = ingestor ?? throw new ArgumentNullException(nameof(ingestor));
+            _registry = registry ?? throw new ArgumentNullException(nameof(registry));
+            _activeSessions = activeSessions ?? throw new ArgumentNullException(nameof(activeSessions));
+        }
+
+        public CommandConsumeDiagnostics Diagnostics => new CommandConsumeDiagnostics(
+            _frozenBatchesConsumed,
+            _commandsDispatched,
+            _unknownCommandTypeRejected,
+            _handlerErrors);
+
+        public int HandlerCount => _registry.HandlerCount;
+
+        public void OnPreTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
+        {
+            TickThreadAssert.AssertTickThread();
+
+            // Deterministic ordering:
+            // - Sessions: active session snapshot order.
+            // - Commands: frozen batch order (sorted by server receive sequence).
+            var sessions = _activeSessions.SnapshotSessionsDeterministic();
+            for (int s = 0; s < sessions.Count; s++)
+            {
+                var sessionId = sessions[s];
+                var batch = _ingestor.GetFrozenBatch(sessionId);
+                if (batch.AuthoritativeTick != context.TickIndex)
+                    continue;
+
+                _frozenBatchesConsumed++;
+
+                var commands = batch.AsSpan();
+                for (int i = 0; i < commands.Length; i++)
+                {
+                    ref readonly var command = ref commands[i];
+                    if (_registry.TryGetHandler(command.CommandType, out var handler))
+                    {
+                        try
+                        {
+                            handler.Handle(in command, sessionId, context);
+                        }
+                        catch
+                        {
+                            _handlerErrors++;
+                        }
+
+                        _commandsDispatched++;
+                    }
+                    else
+                    {
+                        _unknownCommandTypeRejected++;
+                    }
+                }
+            }
+        }
+
+        public void OnPostTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
+        {
+        }
+    }
+
+    public readonly struct CommandConsumeDiagnostics
+    {
+        public CommandConsumeDiagnostics(
+            long frozenBatchesConsumed,
+            long commandsDispatched,
+            long unknownCommandTypeRejected,
+            long handlerErrors)
+        {
+            FrozenBatchesConsumed = frozenBatchesConsumed;
+            CommandsDispatched = commandsDispatched;
+            UnknownCommandTypeRejected = unknownCommandTypeRejected;
+            HandlerErrors = handlerErrors;
+        }
+
+        public long FrozenBatchesConsumed { get; }
+        public long CommandsDispatched { get; }
+        public long UnknownCommandTypeRejected { get; }
+        public long HandlerErrors { get; }
     }
 
     /// <summary>

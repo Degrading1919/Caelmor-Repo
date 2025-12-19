@@ -19,7 +19,11 @@ namespace Caelmor.Validation.Transport
     {
         public static IReadOnlyList<IValidationScenario> GetScenarios()
         {
-            return new IValidationScenario[] { new InboundPumpEndToEndScenario() };
+            return new IValidationScenario[]
+            {
+                new InboundPumpEndToEndScenario(),
+                new AuthoritativeCommandConsumeScenario()
+            };
         }
 
         private sealed class InboundPumpEndToEndScenario : IValidationScenario
@@ -60,96 +64,149 @@ namespace Caelmor.Validation.Transport
                 core.Dispose();
                 transport.Dispose();
             }
+        }
 
-            private sealed class EmptyEntityIndex : ISimulationEntityIndex
+        private sealed class AuthoritativeCommandConsumeScenario : IValidationScenario
+        {
+            public string Name => "authoritative_command_consume_tick_hook";
+
+            public void Run(IAssert assert)
             {
-                private static readonly EntityHandle[] Empty = Array.Empty<EntityHandle>();
+                var config = RuntimeBackpressureConfig.Default;
+                var transport = new PooledTransportRouter(config);
+                var ingestor = new AuthoritativeCommandIngestor(config);
+                var sessions = new DeterministicSessionIndex();
+                var pump = new InboundPumpTickHook(transport, ingestor, sessions);
+                var registry = new CommandHandlerRegistry();
+                var handler = new NoOpCommandHandler();
+                var core = new WorldSimulationCore(new EmptyEntityIndex());
 
-                public EntityHandle[] SnapshotEntitiesDeterministic() => Empty;
+                var commandType = PooledTransportRouter.ComputeStableCommandType("validation.noop");
+                registry.Register(commandType, handler);
+
+                var consumeHook = new AuthoritativeCommandConsumeTickHook(ingestor, registry, sessions);
+
+                core.RegisterPhaseHook(pump, orderKey: 0);
+                core.RegisterPhaseHook(consumeHook, orderKey: 1);
+
+                var session = new SessionId(Guid.NewGuid());
+                sessions.Add(session);
+
+                Span<byte> payload = stackalloc byte[8];
+                BinaryPrimitives.WriteInt32LittleEndian(payload.Slice(0, sizeof(int)), 1);
+                BinaryPrimitives.WriteInt32LittleEndian(payload.Slice(sizeof(int)), 2);
+
+                transport.EnqueueInbound(session, payload, commandType: "validation.noop", submitTick: 0);
+                transport.EnqueueInbound(session, payload, commandType: "validation.noop", submitTick: 0);
+
+                core.ExecuteSingleTick();
+
+                var diagnostics = consumeHook.Diagnostics;
+                assert.True(diagnostics.FrozenBatchesConsumed > 0, "Frozen batches must be consumed on tick.");
+                assert.True(diagnostics.CommandsDispatched == 2, "Commands must be dispatched deterministically.");
+                assert.True(handler.HandledCount == 2, "Handler must receive dispatched commands.");
+                assert.True(handler.LastSequence == 2, "Commands must be processed in server receive sequence order.");
+
+                transport.EnqueueInbound(session, payload, commandType: "validation.noop", submitTick: 0);
+                core.ExecuteSingleTick();
+
+                diagnostics = consumeHook.Diagnostics;
+                assert.True(diagnostics.CommandsDispatched == 3, "Commands must dispatch across multiple ticks.");
+                assert.True(handler.HandledCount == 3, "Handler must be invoked across multiple ticks.");
+
+                core.Dispose();
+                transport.Dispose();
+            }
+        }
+
+        private sealed class EmptyEntityIndex : ISimulationEntityIndex
+        {
+            private static readonly EntityHandle[] Empty = Array.Empty<EntityHandle>();
+
+            public EntityHandle[] SnapshotEntitiesDeterministic() => Empty;
+        }
+
+        private sealed class DeterministicSessionIndex : IActiveSessionIndex
+        {
+            private readonly SessionId[] _buffer = new SessionId[8];
+            private int _count;
+
+            public void Add(SessionId sessionId)
+            {
+                if (!sessionId.IsValid || _count >= _buffer.Length)
+                    return;
+
+                _buffer[_count++] = sessionId;
+                Array.Sort(_buffer, 0, _count, SessionIdValueComparer.Instance);
             }
 
-            private sealed class DeterministicSessionIndex : IActiveSessionIndex
+            public IReadOnlyList<SessionId> SnapshotSessionsDeterministic()
             {
-                private readonly SessionId[] _buffer = new SessionId[8];
-                private int _count;
+                return new SessionIdReadOnlyList(_buffer, _count);
+            }
+        }
 
-                public void Add(SessionId sessionId)
+        private readonly struct SessionIdReadOnlyList : IReadOnlyList<SessionId>
+        {
+            private readonly SessionId[] _source;
+            private readonly int _count;
+
+            public SessionIdReadOnlyList(SessionId[] source, int count)
+            {
+                _source = source ?? Array.Empty<SessionId>();
+                _count = count;
+            }
+
+            public SessionId this[int index]
+            {
+                get
                 {
-                    if (!sessionId.IsValid || _count >= _buffer.Length)
-                        return;
+                    if ((uint)index >= (uint)_count)
+                        throw new ArgumentOutOfRangeException(nameof(index));
 
-                    _buffer[_count++] = sessionId;
-                    Array.Sort(_buffer, 0, _count, SessionIdValueComparer.Instance);
-                }
-
-                public IReadOnlyList<SessionId> SnapshotSessionsDeterministic()
-                {
-                    return new SessionIdReadOnlyList(_buffer, _count);
+                    return _source[index];
                 }
             }
 
-            private readonly struct SessionIdReadOnlyList : IReadOnlyList<SessionId>
+            public int Count => _count;
+
+            public Enumerator GetEnumerator() => new Enumerator(_source, _count);
+
+            IEnumerator<SessionId> IEnumerable<SessionId>.GetEnumerator() => GetEnumerator();
+
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+            public struct Enumerator : IEnumerator<SessionId>
             {
                 private readonly SessionId[] _source;
                 private readonly int _count;
+                private int _index;
 
-                public SessionIdReadOnlyList(SessionId[] source, int count)
+                public Enumerator(SessionId[] source, int count)
                 {
-                    _source = source ?? Array.Empty<SessionId>();
+                    _source = source;
                     _count = count;
+                    _index = -1;
                 }
 
-                public SessionId this[int index]
-                {
-                    get
-                    {
-                        if ((uint)index >= (uint)_count)
-                            throw new ArgumentOutOfRangeException(nameof(index));
+                public SessionId Current => _source[_index];
 
-                        return _source[index];
-                    }
+                object IEnumerator.Current => Current;
+
+                public bool MoveNext()
+                {
+                    var next = _index + 1;
+                    if (next >= _count)
+                        return false;
+
+                    _index = next;
+                    return true;
                 }
 
-                public int Count => _count;
+                public void Reset() => _index = -1;
 
-                public Enumerator GetEnumerator() => new Enumerator(_source, _count);
-
-                IEnumerator<SessionId> IEnumerable<SessionId>.GetEnumerator() => GetEnumerator();
-
-                IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-                public struct Enumerator : IEnumerator<SessionId>
+                public void Dispose()
                 {
-                    private readonly SessionId[] _source;
-                    private readonly int _count;
-                    private int _index;
-
-                    public Enumerator(SessionId[] source, int count)
-                    {
-                        _source = source;
-                        _count = count;
-                        _index = -1;
-                    }
-
-                    public SessionId Current => _source[_index];
-
-                    object IEnumerator.Current => Current;
-
-                    public bool MoveNext()
-                    {
-                        var next = _index + 1;
-                        if (next >= _count)
-                            return false;
-
-                        _index = next;
-                        return true;
-                    }
-
-                    public void Reset() => _index = -1;
-
-                    public void Dispose()
-                    {
-                    }
                 }
             }
         }
