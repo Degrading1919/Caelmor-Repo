@@ -6,7 +6,8 @@
 using System;
 using System.Buffers;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Threading;
+using Caelmor.Runtime.Diagnostics;
 using Caelmor.Runtime.Tick;
 
 namespace Caelmor.Combat
@@ -42,7 +43,17 @@ namespace Caelmor.Combat
 
         // Idempotence guard: applied payload IDs are scoped per authoritative tick.
         // Not global across session; not persisted.
-        private readonly Dictionary<int, HashSet<string>> _appliedPayloadIdsByTick = new();
+        private readonly Dictionary<int, AppliedIdSet> _appliedPayloadIdsByTick = new(8);
+        private readonly Stack<AppliedIdSet> _appliedPayloadIdPool = new(8);
+        private readonly HashSet<ulong> _duplicateCheckSet = new();
+
+        private const int MaxTrackedPayloadIdsPerTick = 4096;
+        private const int AppliedIdSetPoolCapacity = 8;
+
+        // Counters (monotonic).
+        private long _combatOutcomesApplied;
+        private long _combatDuplicateOutcomesRejected;
+        private long _combatIdempotenceOverflow;
 
         // Validation support: last resolved intent per entity (snapshot-only; not authoritative gameplay state).
         private readonly Dictionary<EntityHandle, string> _lastResolvedIntentIdByEntity =
@@ -66,6 +77,7 @@ namespace Caelmor.Combat
         /// </summary>
         public CombatApplicationResult Apply(CombatOutcomeBatch batch)
         {
+            TickThreadAssert.AssertTickThread();
             if (batch == null) throw new ArgumentNullException(nameof(batch));
 
             int nowTick = _tickSource.CurrentTick;
@@ -93,8 +105,8 @@ namespace Caelmor.Combat
             {
                 var r = batch.IntentResultsInOrder[i];
 
-                string payloadId = PayloadId.IntentResult(r.IntentId);
-                if (!appliedSet.Add(payloadId))
+                ulong payloadId = PayloadId.IntentResult(r.IntentIdKey);
+                if (!TryRegisterPayloadId(appliedSet, payloadId))
                     continue; // idempotent: already applied this payload for this tick
 
                 ApplyIntentResultStateEffectsOrThrow(r);
@@ -113,8 +125,8 @@ namespace Caelmor.Combat
             {
                 var d = batch.DamageOutcomesInOrder[i];
 
-                string payloadId = PayloadId.DamageOutcome(d.OutcomeId);
-                if (!appliedSet.Add(payloadId))
+                ulong payloadId = PayloadId.DamageOutcome(d.OutcomeId);
+                if (!TryRegisterPayloadId(appliedSet, payloadId))
                     continue;
 
                 EmitEventAfterApply(CombatEvent.CreateDamageOutcomeEvent(
@@ -131,8 +143,8 @@ namespace Caelmor.Combat
             {
                 var m = batch.MitigationOutcomesInOrder[i];
 
-                string payloadId = PayloadId.MitigationOutcome(m.OutcomeId);
-                if (!appliedSet.Add(payloadId))
+                ulong payloadId = PayloadId.MitigationOutcome(m.OutcomeId);
+                if (!TryRegisterPayloadId(appliedSet, payloadId))
                     continue;
 
                 EmitEventAfterApply(CombatEvent.CreateMitigationOutcomeEvent(
@@ -151,8 +163,8 @@ namespace Caelmor.Combat
             {
                 var sc = batch.StateChangesInOrder[i];
 
-                string payloadId = PayloadId.StateChange(sc.Entity.Value, sc.Kind.ToString());
-                if (!appliedSet.Add(payloadId))
+                ulong payloadId = PayloadId.StateChange(sc.Entity.Value, sc.Kind);
+                if (!TryRegisterPayloadId(appliedSet, payloadId))
                     continue;
 
                 _stateWriter.ApplyStateChange(sc);
@@ -173,6 +185,9 @@ namespace Caelmor.Combat
             // Only request if we actually applied something new for this tick.
             if (appliedCount > 0)
                 _checkpointRequester.RequestCheckpoint(nowTick);
+
+            if (appliedCount > 0)
+                Interlocked.Add(ref _combatOutcomesApplied, appliedCount);
 
             // Post-application snapshot (validation harness support)
             var post = _stateWriter.CaptureWorldValidationSnapshot(
@@ -252,14 +267,14 @@ namespace Caelmor.Combat
         // Idempotence + hygiene
         // ---------------------------
 
-        private HashSet<string> GetOrCreateAppliedSetForTick(int tick)
+        private AppliedIdSet GetOrCreateAppliedSetForTick(int tick)
         {
-            if (!_appliedPayloadIdsByTick.TryGetValue(tick, out var set))
-            {
-                set = new HashSet<string>(StringComparer.Ordinal);
-                _appliedPayloadIdsByTick.Add(tick, set);
-            }
-            return set;
+            if (_appliedPayloadIdsByTick.TryGetValue(tick, out var set))
+                return set;
+
+            var rented = RentAppliedIdSet();
+            _appliedPayloadIdsByTick.Add(tick, rented);
+            return rented;
         }
 
         private void PruneAppliedSets(int keepFromTickInclusive)
@@ -275,48 +290,111 @@ namespace Caelmor.Combat
 
             for (int i = 0; i < index; i++)
             {
-                if (keys[i] < keepFromTickInclusive)
+                if (keys[i] < keepFromTickInclusive && _appliedPayloadIdsByTick.TryGetValue(keys[i], out var set))
+                {
                     _appliedPayloadIdsByTick.Remove(keys[i]);
+                    ReturnAppliedIdSet(set);
+                }
             }
 
             ArrayPool<int>.Shared.Return(keys, clearArray: true);
         }
 
-        private static void EnsureNoDuplicateIdsInBatchOrThrow(CombatOutcomeBatch batch)
+        private void EnsureNoDuplicateIdsInBatchOrThrow(CombatOutcomeBatch batch)
         {
-            var seen = new HashSet<string>(StringComparer.Ordinal);
+            _duplicateCheckSet.Clear();
 
             for (int i = 0; i < batch.IntentResultsInOrder.Count; i++)
             {
                 var r = batch.IntentResultsInOrder[i];
-                string id = PayloadId.IntentResult(r.IntentId);
-                if (!seen.Add(id))
+                ulong id = PayloadId.IntentResult(r.IntentIdKey);
+                if (!_duplicateCheckSet.Add(id))
+                {
+                    Interlocked.Increment(ref _combatDuplicateOutcomesRejected);
                     throw new InvalidOperationException($"Duplicate IntentResult payload in batch: {r.IntentId}");
+                }
             }
 
             for (int i = 0; i < batch.DamageOutcomesInOrder.Count; i++)
             {
                 var d = batch.DamageOutcomesInOrder[i];
-                string id = PayloadId.DamageOutcome(d.OutcomeId);
-                if (!seen.Add(id))
+                ulong id = PayloadId.DamageOutcome(d.OutcomeId);
+                if (!_duplicateCheckSet.Add(id))
+                {
+                    Interlocked.Increment(ref _combatDuplicateOutcomesRejected);
                     throw new InvalidOperationException($"Duplicate DamageOutcome payload in batch: {d.OutcomeId}");
+                }
             }
 
             for (int i = 0; i < batch.MitigationOutcomesInOrder.Count; i++)
             {
                 var m = batch.MitigationOutcomesInOrder[i];
-                string id = PayloadId.MitigationOutcome(m.OutcomeId);
-                if (!seen.Add(id))
+                ulong id = PayloadId.MitigationOutcome(m.OutcomeId);
+                if (!_duplicateCheckSet.Add(id))
+                {
+                    Interlocked.Increment(ref _combatDuplicateOutcomesRejected);
                     throw new InvalidOperationException($"Duplicate MitigationOutcome payload in batch: {m.OutcomeId}");
+                }
             }
 
             for (int i = 0; i < batch.StateChangesInOrder.Count; i++)
             {
                 var sc = batch.StateChangesInOrder[i];
-                string id = PayloadId.StateChange(sc.Entity.Value, sc.Kind.ToString());
-                if (!seen.Add(id))
+                ulong id = PayloadId.StateChange(sc.Entity.Value, sc.Kind);
+                if (!_duplicateCheckSet.Add(id))
+                {
+                    Interlocked.Increment(ref _combatDuplicateOutcomesRejected);
                     throw new InvalidOperationException($"Duplicate StateChange payload in batch: {sc.Entity.Value}:{sc.Kind}");
+                }
             }
+        }
+
+        private AppliedIdSet RentAppliedIdSet()
+        {
+            if (_appliedPayloadIdPool.Count > 0)
+            {
+                var set = _appliedPayloadIdPool.Pop();
+                set.Reset();
+                return set;
+            }
+
+            return new AppliedIdSet();
+        }
+
+        private void ReturnAppliedIdSet(AppliedIdSet set)
+        {
+            set.Reset();
+            if (_appliedPayloadIdPool.Count < AppliedIdSetPoolCapacity)
+                _appliedPayloadIdPool.Push(set);
+        }
+
+        private bool TryRegisterPayloadId(AppliedIdSet appliedSet, ulong payloadId)
+        {
+            if (appliedSet.Overflowed)
+                return true;
+
+            if (appliedSet.Set.Count >= MaxTrackedPayloadIdsPerTick)
+            {
+                appliedSet.Overflowed = true;
+                Interlocked.Increment(ref _combatIdempotenceOverflow);
+                return true;
+            }
+
+            if (!appliedSet.Set.Add(payloadId))
+            {
+                Interlocked.Increment(ref _combatDuplicateOutcomesRejected);
+                return false;
+            }
+
+            return true;
+        }
+
+        public CombatOutcomeApplicationCounterSnapshot SnapshotCounters()
+        {
+            return new CombatOutcomeApplicationCounterSnapshot(
+                Interlocked.Read(ref _combatOutcomesApplied),
+                Interlocked.Read(ref _combatDuplicateOutcomesRejected),
+                Interlocked.Read(ref _combatIdempotenceOverflow));
         }
     }
 
@@ -427,7 +505,7 @@ namespace Caelmor.Combat
         {
             if (intentResult == null) throw new ArgumentNullException(nameof(intentResult));
 
-            string eventId = DeterministicEventId(authoritativeTick, CombatEventType.IntentResult.ToString(), intentResult.IntentId);
+            string eventId = DeterministicEventId(authoritativeTick, CombatEventType.IntentResult, intentResult.IntentId);
             return new CombatEvent(
                 eventId,
                 authoritativeTick,
@@ -448,7 +526,7 @@ namespace Caelmor.Combat
         {
             if (damageOutcome == null) throw new ArgumentNullException(nameof(damageOutcome));
 
-            string eventId = DeterministicEventId(authoritativeTick, CombatEventType.DamageOutcome.ToString(), damageOutcome.OutcomeId);
+            string eventId = DeterministicEventId(authoritativeTick, CombatEventType.DamageOutcome, damageOutcome.OutcomeId);
             return new CombatEvent(
                 eventId,
                 authoritativeTick,
@@ -469,7 +547,7 @@ namespace Caelmor.Combat
         {
             if (mitigationOutcome == null) throw new ArgumentNullException(nameof(mitigationOutcome));
 
-            string eventId = DeterministicEventId(authoritativeTick, CombatEventType.MitigationOutcome.ToString(), mitigationOutcome.OutcomeId);
+            string eventId = DeterministicEventId(authoritativeTick, CombatEventType.MitigationOutcome, mitigationOutcome.OutcomeId);
             return new CombatEvent(
                 eventId,
                 authoritativeTick,
@@ -490,7 +568,7 @@ namespace Caelmor.Combat
         {
             if (stateSnapshot == null) throw new ArgumentNullException(nameof(stateSnapshot));
 
-            string eventId = DeterministicEventId(authoritativeTick, CombatEventType.StateChange.ToString(), stateSnapshot.Entity.Value.ToString());
+            string eventId = DeterministicEventId(authoritativeTick, CombatEventType.StateChange, (ulong)stateSnapshot.Entity.Value);
             return new CombatEvent(
                 eventId,
                 authoritativeTick,
@@ -503,11 +581,18 @@ namespace Caelmor.Combat
                 stateSnapshot: stateSnapshot);
         }
 
-        private static string DeterministicEventId(int tick, string type, string payloadId)
+        private static string DeterministicEventId(int tick, CombatEventType type, string payloadId)
         {
             // Deterministic, stable, no RNG, no wall-clock.
             // Collisions are treated as a correctness failure in higher-level validation.
-            return $"ce:{tick}:{type}:{payloadId}";
+            return $"ce:{tick}:{(int)type}:{payloadId}";
+        }
+
+        private static string DeterministicEventId(int tick, CombatEventType type, ulong payloadId)
+        {
+            // Deterministic, stable, no RNG, no wall-clock.
+            // Collisions are treated as a correctness failure in higher-level validation.
+            return $"ce:{tick}:{(int)type}:{payloadId}";
         }
     }
 
@@ -539,10 +624,81 @@ namespace Caelmor.Combat
 
     internal static class PayloadId
     {
-        public static string IntentResult(string intentId) => $"ir:{intentId}";
-        public static string DamageOutcome(string outcomeId) => $"do:{outcomeId}";
-        public static string MitigationOutcome(string outcomeId) => $"mo:{outcomeId}";
-        public static string StateChange(int entityValue, string kind) => $"sc:{entityValue}:{kind}";
+        private const ulong FnvOffset = 14695981039346656037UL;
+        private const ulong FnvPrime = 1099511628211UL;
+
+        public static ulong IntentResult(ulong intentIdKey) => Combine(PayloadKind.IntentResult, intentIdKey, 0);
+        public static ulong DamageOutcome(ulong outcomeId) => Combine(PayloadKind.DamageOutcome, outcomeId, 0);
+        public static ulong MitigationOutcome(ulong outcomeId) => Combine(PayloadKind.MitigationOutcome, outcomeId, 0);
+        public static ulong StateChange(int entityValue, CombatStateChangeKind kind) => Combine(PayloadKind.StateChange, (uint)entityValue, (uint)kind);
+
+        public static ulong HashIntentId(string intentId)
+        {
+            if (intentId == null)
+                return 0;
+
+            ulong hash = FnvOffset;
+            for (int i = 0; i < intentId.Length; i++)
+            {
+                hash ^= intentId[i];
+                hash *= FnvPrime;
+            }
+            return hash;
+        }
+
+        private static ulong Combine(PayloadKind kind, ulong partA, ulong partB)
+        {
+            ulong hash = FnvOffset;
+            hash = Mix(hash, (ulong)kind);
+            hash = Mix(hash, partA);
+            hash = Mix(hash, partB);
+            return hash;
+        }
+
+        private static ulong Mix(ulong hash, ulong data)
+        {
+            hash ^= data;
+            hash *= FnvPrime;
+            return hash;
+        }
+    }
+
+    internal static class OutcomeIdFactory
+    {
+        public static ulong CreateOutcomeId(int authoritativeTick, EntityHandle actor, int sequence)
+        {
+            unchecked
+            {
+                ulong hash = 14695981039346656037UL;
+                hash ^= (uint)authoritativeTick;
+                hash *= 1099511628211UL;
+                hash ^= (uint)actor.Value;
+                hash *= 1099511628211UL;
+                hash ^= (uint)sequence;
+                hash *= 1099511628211UL;
+                return hash;
+            }
+        }
+    }
+
+    internal enum PayloadKind : byte
+    {
+        IntentResult = 1,
+        DamageOutcome = 2,
+        MitigationOutcome = 3,
+        StateChange = 4
+    }
+
+    internal sealed class AppliedIdSet
+    {
+        public readonly HashSet<ulong> Set = new HashSet<ulong>();
+        public bool Overflowed;
+
+        public void Reset()
+        {
+            Set.Clear();
+            Overflowed = false;
+        }
     }
 
     // --------------------------------------------------------------------
@@ -567,13 +723,13 @@ namespace Caelmor.Combat
 
     public sealed class DamageOutcome
     {
-        public string OutcomeId { get; }
+        public ulong OutcomeId { get; }
         public EntityHandle SourceEntity { get; }
         public EntityHandle TargetEntity { get; }
         public string ResolvedIntentId { get; }
         public int DamageAmount { get; }
 
-        public DamageOutcome(string outcomeId, EntityHandle sourceEntity, EntityHandle targetEntity, string resolvedIntentId, int damageAmount)
+        public DamageOutcome(ulong outcomeId, EntityHandle sourceEntity, EntityHandle targetEntity, string resolvedIntentId, int damageAmount)
         {
             OutcomeId = outcomeId;
             SourceEntity = sourceEntity;
@@ -585,13 +741,13 @@ namespace Caelmor.Combat
 
     public sealed class MitigationOutcome
     {
-        public string OutcomeId { get; }
+        public ulong OutcomeId { get; }
         public EntityHandle SourceEntity { get; }
         public EntityHandle TargetEntity { get; }
         public string ResolvedIntentId { get; }
         public int MitigatedAmount { get; }
 
-        public MitigationOutcome(string outcomeId, EntityHandle sourceEntity, EntityHandle targetEntity, string resolvedIntentId, int mitigatedAmount)
+        public MitigationOutcome(ulong outcomeId, EntityHandle sourceEntity, EntityHandle targetEntity, string resolvedIntentId, int mitigatedAmount)
         {
             OutcomeId = outcomeId;
             SourceEntity = sourceEntity;
@@ -604,13 +760,14 @@ namespace Caelmor.Combat
     public sealed class IntentResult
     {
         public string IntentId { get; }
+        public ulong IntentIdKey { get; }
         public CombatIntentType IntentType { get; }
         public EntityHandle ActorEntity { get; }
         public IntentResultStatus ResultStatus { get; }
         public int AuthoritativeTick { get; }
 
         public string? ReasonCode { get; }
-        public IReadOnlyList<string> ProducedOutcomeIds { get; }
+        public IReadOnlyList<ulong> ProducedOutcomeIds { get; }
 
         public IntentResult(
             string intentId,
@@ -619,15 +776,16 @@ namespace Caelmor.Combat
             IntentResultStatus resultStatus,
             int authoritativeTick,
             string? reasonCode = null,
-            IReadOnlyList<string>? producedOutcomeIds = null)
+            IReadOnlyList<ulong>? producedOutcomeIds = null)
         {
             IntentId = intentId;
+            IntentIdKey = PayloadId.HashIntentId(intentId);
             IntentType = intentType;
             ActorEntity = actorEntity;
             ResultStatus = resultStatus;
             AuthoritativeTick = authoritativeTick;
             ReasonCode = reasonCode;
-            ProducedOutcomeIds = producedOutcomeIds ?? Array.Empty<string>();
+            ProducedOutcomeIds = producedOutcomeIds ?? Array.Empty<ulong>();
         }
     }
 
@@ -749,5 +907,25 @@ namespace Caelmor.Combat
             CommittedIntentId = committedIntentId;
             LastResolvedIntentId = lastResolvedIntentId;
         }
+    }
+
+    public readonly struct CombatOutcomeApplicationCounterSnapshot
+    {
+        public CombatOutcomeApplicationCounterSnapshot(
+            long combatOutcomesApplied,
+            long combatDuplicateOutcomesRejected,
+            long combatIdempotenceOverflow)
+        {
+            CombatOutcomesApplied = combatOutcomesApplied;
+            CombatDuplicateOutcomesRejected = combatDuplicateOutcomesRejected;
+            CombatIdempotenceOverflow = combatIdempotenceOverflow;
+        }
+
+        public long CombatOutcomesApplied { get; }
+        public long CombatDuplicateOutcomesRejected { get; }
+        public long CombatIdempotenceOverflow { get; }
+
+        public static CombatOutcomeApplicationCounterSnapshot Empty =>
+            new CombatOutcomeApplicationCounterSnapshot(0, 0, 0);
     }
 }
