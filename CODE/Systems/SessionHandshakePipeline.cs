@@ -230,19 +230,22 @@ namespace Caelmor.Runtime.Integration
     {
         private readonly SessionHandshakePipeline _pipeline;
         private readonly int _maxPerTick;
+        private readonly RuntimePipelineHealth? _pipelineHealth;
 
-        public HandshakeProcessingPhaseHook(SessionHandshakePipeline pipeline, int maxPerTick)
+        public HandshakeProcessingPhaseHook(SessionHandshakePipeline pipeline, int maxPerTick, RuntimePipelineHealth pipelineHealth = null)
         {
             if (pipeline is null) throw new ArgumentNullException(nameof(pipeline));
             if (maxPerTick <= 0) throw new ArgumentOutOfRangeException(nameof(maxPerTick));
 
             _pipeline = pipeline;
             _maxPerTick = maxPerTick;
+            _pipelineHealth = pipelineHealth;
         }
 
         public void OnPreTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
         {
             TickThreadAssert.AssertTickThread();
+            _pipelineHealth?.MarkHandshake(context.TickIndex);
 
             int processedThisTick = 0;
             SessionActivationResult activationResult;

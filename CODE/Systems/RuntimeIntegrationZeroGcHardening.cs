@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Buffers.Binary;
 using Caelmor.Runtime;
+using Caelmor.Runtime.Diagnostics;
 using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.InterestManagement;
 using Caelmor.Runtime.Persistence;
@@ -567,6 +568,7 @@ namespace Caelmor.Runtime.Integration
         private readonly IAuthoritativeCommandIngestor _ingestor;
         private readonly ICommandHandlerRegistry _registry;
         private readonly IActiveSessionIndex _activeSessions;
+        private readonly RuntimePipelineHealth? _pipelineHealth;
 
         private long _frozenBatchesConsumed;
         private long _commandsDispatched;
@@ -576,11 +578,13 @@ namespace Caelmor.Runtime.Integration
         public AuthoritativeCommandConsumeTickHook(
             IAuthoritativeCommandIngestor ingestor,
             ICommandHandlerRegistry registry,
-            IActiveSessionIndex activeSessions)
+            IActiveSessionIndex activeSessions,
+            RuntimePipelineHealth pipelineHealth = null)
         {
             _ingestor = ingestor ?? throw new ArgumentNullException(nameof(ingestor));
             _registry = registry ?? throw new ArgumentNullException(nameof(registry));
             _activeSessions = activeSessions ?? throw new ArgumentNullException(nameof(activeSessions));
+            _pipelineHealth = pipelineHealth;
         }
 
         public CommandConsumeDiagnostics Diagnostics => new CommandConsumeDiagnostics(
@@ -594,6 +598,7 @@ namespace Caelmor.Runtime.Integration
         public void OnPreTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
         {
             TickThreadAssert.AssertTickThread();
+            _pipelineHealth?.MarkCommandConsume(context.TickIndex);
 
             // Deterministic ordering:
             // - Sessions: active session snapshot order.
@@ -670,6 +675,7 @@ namespace Caelmor.Runtime.Integration
         private readonly ServerStampedInboundCommand[] _ingressBuffer;
         private readonly int _maxFramesPerTick;
         private readonly int _maxCommandsPerTick;
+        private readonly RuntimePipelineHealth? _pipelineHealth;
 
         private long _ticksExecuted;
         private long _framesRouted;
@@ -687,11 +693,13 @@ namespace Caelmor.Runtime.Integration
             AuthoritativeCommandIngestor ingestor,
             IActiveSessionIndex? activeSessions = null,
             int maxFramesPerTick = 0,
-            int maxCommandsPerTick = 0)
+            int maxCommandsPerTick = 0,
+            RuntimePipelineHealth pipelineHealth = null)
         {
             _transport = transport ?? throw new ArgumentNullException(nameof(transport));
             _ingestor = ingestor ?? throw new ArgumentNullException(nameof(ingestor));
             _activeSessions = activeSessions;
+            _pipelineHealth = pipelineHealth;
 
             var config = _transport.Config;
             _maxFramesPerTick = maxFramesPerTick > 0 ? maxFramesPerTick : config.MaxInboundCommandsPerSession;
@@ -718,6 +726,7 @@ namespace Caelmor.Runtime.Integration
         public void OnPreTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
         {
             TickThreadAssert.AssertTickThread();
+            _pipelineHealth?.MarkInboundPump(context.TickIndex);
 
             _ticksExecuted++;
             _framesRouted += _transport.RouteQueuedInbound(context.TickIndex, _maxFramesPerTick);

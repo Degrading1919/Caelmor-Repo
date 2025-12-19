@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Caelmor.Runtime.Diagnostics;
 using Caelmor.Runtime.Integration;
 using Caelmor.Runtime.Onboarding;
@@ -37,6 +38,11 @@ namespace Caelmor.Runtime.Host
         private readonly TickThreadMailbox _lifecycleMailbox;
         private readonly InboundPumpTickHook _inboundPump;
         private readonly OutboundSendPump _outboundPump;
+        private readonly LifecycleMailboxPhaseHook _lifecycleHook;
+        private readonly HandshakeProcessingPhaseHook _handshakeHook;
+        private readonly PersistenceCompletionPhaseHook _persistenceHook;
+        private readonly RuntimePipelineHealth _pipelineHealth;
+        private readonly int _pipelineStaleTicks;
 
         private readonly object _gate = new object();
         private bool _started;
@@ -55,6 +61,11 @@ namespace Caelmor.Runtime.Host
             InboundPumpTickHook inboundPump,
             AuthoritativeCommandConsumeTickHook commandConsumeHook,
             OutboundSendPump outboundPump,
+            LifecycleMailboxPhaseHook lifecycleHook = null,
+            HandshakeProcessingPhaseHook handshakeHook = null,
+            PersistenceCompletionPhaseHook persistenceHook = null,
+            RuntimePipelineHealth pipelineHealth = null,
+            int pipelineStaleTicks = RuntimePipelineHealth.DefaultStaleTicks,
             PersistenceCompletionQueue persistenceCompletions = null,
             PersistenceWriteQueue persistenceWrites = null,
             PersistenceWorkerLoop persistenceWorker = null,
@@ -71,6 +82,11 @@ namespace Caelmor.Runtime.Host
             _lifecycleMailbox = lifecycleMailbox ?? throw new ArgumentNullException(nameof(lifecycleMailbox));
             _inboundPump = inboundPump ?? throw new ArgumentNullException(nameof(inboundPump));
             _outboundPump = outboundPump ?? throw new ArgumentNullException(nameof(outboundPump));
+            _lifecycleHook = lifecycleHook;
+            _handshakeHook = handshakeHook;
+            _persistenceHook = persistenceHook;
+            _pipelineHealth = pipelineHealth;
+            _pipelineStaleTicks = Math.Max(1, pipelineStaleTicks);
             _persistenceCompletions = persistenceCompletions;
             _persistenceWrites = persistenceWrites;
             _persistenceWorker = persistenceWorker;
@@ -112,7 +128,9 @@ namespace Caelmor.Runtime.Host
             int replicationHookOrderKey = int.MaxValue - 512,
             PersistenceWriteQueue persistenceWrites = null,
             PersistenceWorkerLoop persistenceWorker = null,
-            PersistencePipelineCounters persistenceCounters = null)
+            PersistencePipelineCounters persistenceCounters = null,
+            bool skipLifecycleHookRegistration = false,
+            int pipelineStaleTicks = RuntimePipelineHealth.DefaultStaleTicks)
         {
             if (activeSessions == null)
                 throw new ArgumentNullException(nameof(activeSessions));
@@ -126,7 +144,8 @@ namespace Caelmor.Runtime.Host
                 throw new InvalidOperationException("AuthoritativeCommandConsumeTickHook must run after the freeze hook.");
 #endif
 
-            int hookCount = phaseHooks.Length + 5;
+            int baseHooks = skipLifecycleHookRegistration ? 4 : 5;
+            int hookCount = phaseHooks.Length + baseHooks;
             bool includePersistence = persistenceCompletions != null && persistenceCompletionApplier != null;
             if (includePersistence)
                 hookCount++;
@@ -136,26 +155,33 @@ namespace Caelmor.Runtime.Host
 
             var lifecycleMailbox = new TickThreadMailbox(transport.Config);
             var lifecycleApplier = new LifecycleApplier(transport, commands, handshakes, visibility, replication);
-            var lifecycleHook = new LifecycleMailboxPhaseHook(lifecycleMailbox, lifecycleApplier);
-            combinedHooks[index++] = new PhaseHookRegistration(lifecycleHook, lifecycleHookOrderKey);
+            bool persistenceEnabled = includePersistence || persistenceWrites != null || persistenceWorker != null || persistenceCounters != null;
+            var pipelineHealth = new RuntimePipelineHealth(handshakeEnabled: true, persistenceEnabled: persistenceEnabled);
+            replication.AttachPipelineHealth(pipelineHealth);
+            var lifecycleHook = new LifecycleMailboxPhaseHook(lifecycleMailbox, lifecycleApplier, pipelineHealth);
+            if (!skipLifecycleHookRegistration)
+                combinedHooks[index++] = new PhaseHookRegistration(lifecycleHook, lifecycleHookOrderKey);
 
-            var inboundPump = new InboundPumpTickHook(transport, commands, activeSessions, inboundFramesPerTick, ingressCommandsPerTick);
+            var inboundPump = new InboundPumpTickHook(transport, commands, activeSessions, inboundFramesPerTick, ingressCommandsPerTick, pipelineHealth);
             combinedHooks[index++] = new PhaseHookRegistration(inboundPump, commandFreezeHookOrderKey);
 
-            var consumeHook = new AuthoritativeCommandConsumeTickHook(commands, commandHandlers, activeSessions);
+            var consumeHook = new AuthoritativeCommandConsumeTickHook(commands, commandHandlers, activeSessions, pipelineHealth);
             combinedHooks[index++] = new PhaseHookRegistration(consumeHook, commandConsumeHookOrderKey);
 
+            var handshakeHook = new HandshakeProcessingPhaseHook(handshakes, handshakePerTickBudget, pipelineHealth);
             combinedHooks[index++] = new PhaseHookRegistration(
-                new HandshakeProcessingPhaseHook(handshakes, handshakePerTickBudget),
+                handshakeHook,
                 handshakeProcessingHookOrderKey);
 
             for (int i = 0; i < phaseHooks.Length; i++)
                 combinedHooks[index++] = phaseHooks[i];
 
+            PersistenceCompletionPhaseHook persistenceHook = null;
             if (includePersistence)
             {
+                persistenceHook = new PersistenceCompletionPhaseHook(persistenceCompletions, persistenceCompletionApplier, pipelineHealth);
                 combinedHooks[index++] = new PhaseHookRegistration(
-                new PersistenceCompletionPhaseHook(persistenceCompletions, persistenceCompletionApplier),
+                    persistenceHook,
                     persistenceCompletionHookOrderKey);
             }
 
@@ -163,7 +189,16 @@ namespace Caelmor.Runtime.Host
 
             var counters = replicationCounters ?? transport.SnapshotCounters;
             var sender = outboundSender ?? NullOutboundTransportSender.Instance;
-            var outboundPump = new OutboundSendPump(transport, sender, activeSessions, transport.Config, counters, outboundSendPerIteration, outboundPumpIdleMs);
+            var outboundPump = new OutboundSendPump(
+                transport,
+                sender,
+                activeSessions,
+                transport.Config,
+                counters,
+                outboundSendPerIteration,
+                outboundPumpIdleMs,
+                pipelineHealth,
+                simulation.GetCurrentTickIndex);
 
             WorldBootstrapRegistration.Apply(simulation, eligibilityGates, participants, combinedHooks);
             return new RuntimeServerLoop(
@@ -178,6 +213,11 @@ namespace Caelmor.Runtime.Host
                 inboundPump,
                 consumeHook,
                 outboundPump,
+                lifecycleHook,
+                handshakeHook,
+                persistenceHook,
+                pipelineHealth,
+                pipelineStaleTicks,
                 persistenceCompletions,
                 persistenceWrites,
                 persistenceWorker,
@@ -195,6 +235,7 @@ namespace Caelmor.Runtime.Host
                 if (_commandConsumeHook.HandlerCount <= 0)
                     throw new InvalidOperationException("AuthoritativeCommandConsumeTickHook missing handler registration.");
 #endif
+                ValidatePipelineWiring();
 
                 _commands.Prewarm();
                 _transport.Prewarm();
@@ -284,7 +325,8 @@ namespace Caelmor.Runtime.Host
                 _lifecycleMailbox.LifecycleOpsApplied,
                 _lifecycleMailbox.DisconnectsApplied,
                 _lifecycleMailbox.LifecycleOpsDropped);
-            return new RuntimeDiagnosticsSnapshot(tick, transport, persistenceCompletions, commands, handshakes, inboundPump, persistenceCounters, persistenceQueue, lifecycle);
+            var pipeline = _pipelineHealth?.Snapshot(_simulation.CurrentTickIndex, _pipelineStaleTicks);
+            return new RuntimeDiagnosticsSnapshot(tick, transport, persistenceCompletions, commands, handshakes, inboundPump, persistenceCounters, persistenceQueue, lifecycle, pipeline);
         }
 
         private void ClearTransientState()
@@ -303,21 +345,69 @@ namespace Caelmor.Runtime.Host
         {
             TickStallDetected?.Invoke(stall);
         }
+
+        private void ValidatePipelineWiring()
+        {
+            var missing = new List<string>(8);
+
+            if (!_simulation.IsPhaseHookRegistered(_inboundPump))
+                missing.Add("inbound_pump_hook");
+            if (!_simulation.IsPhaseHookRegistered(_commandConsumeHook))
+                missing.Add("command_consume_hook");
+
+            if (_handshakes != null)
+            {
+                bool handshakeRegistered = _handshakeHook != null
+                    ? _simulation.IsPhaseHookRegistered(_handshakeHook)
+                    : _simulation.HasPhaseHook<HandshakeProcessingPhaseHook>();
+                if (!handshakeRegistered)
+                    missing.Add("handshake_processing_hook");
+            }
+
+            bool lifecycleRegistered = _lifecycleHook != null
+                ? _simulation.IsPhaseHookRegistered(_lifecycleHook)
+                : _simulation.HasPhaseHook<LifecycleMailboxPhaseHook>();
+            if (!lifecycleRegistered)
+                missing.Add("lifecycle_mailbox_hook");
+
+            if (!_simulation.IsPhaseHookRegistered(_replication))
+                missing.Add("replication_hook");
+            if (_outboundPump == null)
+                missing.Add("outbound_send_pump");
+
+            bool persistenceEnabled = _persistenceCompletions != null || _persistenceWrites != null || _persistenceWorker != null;
+            if (persistenceEnabled)
+            {
+                bool persistenceHookRegistered = _persistenceHook != null
+                    ? _simulation.IsPhaseHookRegistered(_persistenceHook)
+                    : _simulation.HasPhaseHook<PersistenceCompletionPhaseHook>();
+                if (!persistenceHookRegistered)
+                    missing.Add("persistence_completion_hook");
+                if (_persistenceWorker == null)
+                    missing.Add("persistence_worker_loop");
+            }
+
+            if (missing.Count > 0)
+                throw new InvalidOperationException($"RUNTIME_PIPELINE_MISSING_HOOKS: {string.Join(", ", missing)}");
+        }
     }
 
     internal sealed class LifecycleMailboxPhaseHook : ITickPhaseHook
     {
         private readonly TickThreadMailbox _mailbox;
         private readonly ILifecycleApplier _applier;
+        private readonly RuntimePipelineHealth? _pipelineHealth;
 
-        public LifecycleMailboxPhaseHook(TickThreadMailbox mailbox, ILifecycleApplier applier)
+        public LifecycleMailboxPhaseHook(TickThreadMailbox mailbox, ILifecycleApplier applier, RuntimePipelineHealth pipelineHealth = null)
         {
             _mailbox = mailbox ?? throw new ArgumentNullException(nameof(mailbox));
             _applier = applier ?? throw new ArgumentNullException(nameof(applier));
+            _pipelineHealth = pipelineHealth;
         }
 
         public void OnPreTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
         {
+            _pipelineHealth?.MarkLifecycleMailbox(context.TickIndex);
             _mailbox.Drain(_applier);
         }
 
@@ -397,7 +487,8 @@ namespace Caelmor.Runtime.Host
             InboundPumpDiagnostics inboundPump,
             PersistencePipelineCounterSnapshot? persistencePipelineCounters,
             PersistenceQueueMetrics? persistenceQueue,
-            LifecycleMailboxCounters lifecycleMailbox)
+            LifecycleMailboxCounters lifecycleMailbox,
+            RuntimePipelineHealthSnapshot? pipelineHealth)
         {
             Tick = tick;
             Transport = transport;
@@ -408,6 +499,7 @@ namespace Caelmor.Runtime.Host
             PersistencePipelineCounters = persistencePipelineCounters;
             PersistenceQueue = persistenceQueue;
             LifecycleMailbox = lifecycleMailbox;
+            PipelineHealth = pipelineHealth;
         }
 
         public TickDiagnosticsSnapshot Tick { get; }
@@ -419,6 +511,7 @@ namespace Caelmor.Runtime.Host
         public PersistencePipelineCounterSnapshot? PersistencePipelineCounters { get; }
         public PersistenceQueueMetrics? PersistenceQueue { get; }
         public LifecycleMailboxCounters LifecycleMailbox { get; }
+        public RuntimePipelineHealthSnapshot? PipelineHealth { get; }
         public bool HasDetectedStall => Tick.StallDetections > 0;
     }
 

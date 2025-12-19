@@ -179,15 +179,18 @@ namespace Caelmor.Runtime.Persistence
     {
         private readonly PersistenceCompletionQueue _queue;
         private readonly IPersistenceCompletionApplier _applier;
+        private readonly RuntimePipelineHealth? _pipelineHealth;
 
-        public PersistenceCompletionPhaseHook(PersistenceCompletionQueue queue, IPersistenceCompletionApplier applier)
+        public PersistenceCompletionPhaseHook(PersistenceCompletionQueue queue, IPersistenceCompletionApplier applier, RuntimePipelineHealth pipelineHealth = null)
         {
             _queue = queue ?? throw new ArgumentNullException(nameof(queue));
             _applier = applier ?? throw new ArgumentNullException(nameof(applier));
+            _pipelineHealth = pipelineHealth;
         }
 
         public void OnPreTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
         {
+            _pipelineHealth?.MarkPersistenceApply(context.TickIndex);
             _queue.Drain(_applier, context.TickIndex);
         }
 
