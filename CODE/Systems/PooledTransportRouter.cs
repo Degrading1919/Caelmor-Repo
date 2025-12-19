@@ -297,7 +297,7 @@ namespace Caelmor.Runtime.Transport
             _metrics[sessionId] = metrics;
         }
 
-        private static int ComputeStableCommandType(string commandType)
+        internal static int ComputeStableCommandType(string commandType)
         {
             if (string.IsNullOrEmpty(commandType))
                 return 0;
