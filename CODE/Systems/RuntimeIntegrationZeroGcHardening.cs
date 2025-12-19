@@ -597,7 +597,8 @@ namespace Caelmor.Runtime.Integration
 
         public void OnPreTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
         {
-            TickThreadAssert.AssertTickThread();
+            // DEBUG guardrail: command consume dispatch must remain on the authoritative tick thread.
+            RuntimeGuardrailChecks.AssertTickThreadEntry();
             _pipelineHealth?.MarkCommandConsume(context.TickIndex);
 
             // Deterministic ordering:
@@ -619,6 +620,7 @@ namespace Caelmor.Runtime.Integration
                     ref readonly var command = ref commands[i];
                     if (_registry.TryGetHandler(command.CommandType, out var handler))
                     {
+                        // DEBUG guardrail: authoritative command dispatch occurs only within tick-thread windows.
                         try
                         {
                             handler.Handle(in command, sessionId, context);
@@ -725,7 +727,8 @@ namespace Caelmor.Runtime.Integration
 
         public void OnPreTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
         {
-            TickThreadAssert.AssertTickThread();
+            // DEBUG guardrail: inbound command drain must run on the authoritative tick thread.
+            RuntimeGuardrailChecks.AssertTickThreadEntry();
             _pipelineHealth?.MarkInboundPump(context.TickIndex);
 
             _ticksExecuted++;
@@ -741,6 +744,8 @@ namespace Caelmor.Runtime.Integration
 
                 if (envelope.ClientSubmitTick > 0)
                 {
+                    // DEBUG guardrail: client-provided ticks must never be used for authoritative ordering.
+                    RuntimeGuardrailChecks.AssertNoClientTickOrdering(envelope.ClientSubmitTick);
                     _rejectedClientTickProvided++;
                     envelope.Dispose();
                     _ingressBuffer[i] = default;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Caelmor.Runtime.Diagnostics;
 using Caelmor.Runtime.Tick;
 using Caelmor.Runtime.WorldSimulation;
 
@@ -68,6 +69,9 @@ namespace Caelmor.Combat
         /// </summary>
         public void Execute(EntityHandle entity, SimulationTickContext context)
         {
+            // DEBUG guardrail: combat execution must only occur on the authoritative tick thread.
+            RuntimeGuardrailChecks.AssertTickThreadEntry();
+
             if (!_executionWindowOpen || context.TickIndex != _executionWindowTick)
                 throw new InvalidOperationException("Combat must execute only during the Simulation Execution phase.");
 
@@ -83,6 +87,10 @@ namespace Caelmor.Combat
             int filteredCount = FilterIntentsForEntity(frozenBatch, entity, _filteredIntentBuffer);
             if (filteredCount == 0)
                 return;
+
+            // DEBUG guardrail: string-based entity identifiers are forbidden in combat hot loops.
+            for (int i = 0; i < filteredCount; i++)
+                RuntimeGuardrailChecks.AssertNoStringEntityId(_filteredIntentBuffer[i].Payload.Interact.InteractableId);
 
             var filteredSnapshot = new FrozenIntentBatch(authoritativeTick, _filteredIntentBuffer, filteredCount);
             var gated = _intentGate.Gate(filteredSnapshot);

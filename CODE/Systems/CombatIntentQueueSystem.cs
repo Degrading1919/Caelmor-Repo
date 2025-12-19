@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Buffers;
 using System.Diagnostics;
+using Caelmor.Runtime.Diagnostics;
 using Caelmor.Runtime.Tick;
 
 namespace Caelmor.Combat
@@ -88,6 +89,11 @@ namespace Caelmor.Combat
             if (submission == null) throw new ArgumentNullException(nameof(submission));
 
             int submitTick = _tickSource.CurrentTick;
+
+            // DEBUG guardrails: forbid hot-path string entity IDs and dictionary payloads.
+            RuntimeGuardrailChecks.AssertTickThreadEntry();
+            RuntimeGuardrailChecks.AssertNoDictionaryPayload(submission.Payload);
+            RuntimeGuardrailChecks.AssertNoStringEntityId(submission.Payload.Interact.InteractableId);
 
             if (!CombatIntentStructuralValidator.TryValidate(submission, _entityIdValidator, out var reject))
             {
@@ -240,7 +246,10 @@ namespace Caelmor.Combat
         private void NoteAllocWarningIfNeeded(bool allocatedNew)
         {
             if (allocatedNew)
+            {
+                RuntimeGuardrailChecks.MarkHotPathAllocationSuspicion();
                 _combatAllocWarnings++;
+            }
         }
 
         private void HandleTickAdvanced(int newTick)
