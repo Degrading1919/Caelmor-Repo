@@ -511,17 +511,24 @@ namespace Caelmor.Runtime.Integration
         void Handle(in AuthoritativeCommand command, SessionId sessionId, SimulationTickContext context);
     }
 
+    public interface IAuthoritativeStateMutatingCommandHandler : IAuthoritativeCommandHandler
+    {
+    }
+
     public interface ICommandHandlerRegistry
     {
         bool TryGetHandler(int commandType, out IAuthoritativeCommandHandler handler);
         int HandlerCount { get; }
+        int MutatingHandlerCount { get; }
     }
 
     public sealed class CommandHandlerRegistry : ICommandHandlerRegistry
     {
         private readonly Dictionary<int, IAuthoritativeCommandHandler> _handlers = new Dictionary<int, IAuthoritativeCommandHandler>(16);
+        private int _mutatingHandlers;
 
         public int HandlerCount => _handlers.Count;
+        public int MutatingHandlerCount => _mutatingHandlers;
 
         public void Register(int commandType, IAuthoritativeCommandHandler handler)
         {
@@ -534,6 +541,9 @@ namespace Caelmor.Runtime.Integration
                 throw new InvalidOperationException($"Command handler already registered for type {commandType}.");
 
             _handlers.Add(commandType, handler);
+
+            if (handler is IAuthoritativeStateMutatingCommandHandler)
+                _mutatingHandlers++;
         }
 
         public bool TryGetHandler(int commandType, out IAuthoritativeCommandHandler handler)
@@ -572,6 +582,7 @@ namespace Caelmor.Runtime.Integration
 
         private long _frozenBatchesConsumed;
         private long _commandsDispatched;
+        private long _mutatingHandlerInvocations;
         private long _unknownCommandTypeRejected;
         private long _handlerErrors;
 
@@ -590,10 +601,12 @@ namespace Caelmor.Runtime.Integration
         public CommandConsumeDiagnostics Diagnostics => new CommandConsumeDiagnostics(
             _frozenBatchesConsumed,
             _commandsDispatched,
+            _mutatingHandlerInvocations,
             _unknownCommandTypeRejected,
             _handlerErrors);
 
         public int HandlerCount => _registry.HandlerCount;
+        public int MutatingHandlerCount => _registry.MutatingHandlerCount;
 
         public void OnPreTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
         {
@@ -623,6 +636,9 @@ namespace Caelmor.Runtime.Integration
                         // DEBUG guardrail: authoritative command dispatch occurs only within tick-thread windows.
                         try
                         {
+                            if (handler is IAuthoritativeStateMutatingCommandHandler)
+                                _mutatingHandlerInvocations++;
+
                             handler.Handle(in command, sessionId, context);
                         }
                         catch
@@ -650,17 +666,20 @@ namespace Caelmor.Runtime.Integration
         public CommandConsumeDiagnostics(
             long frozenBatchesConsumed,
             long commandsDispatched,
+            long mutatingHandlerInvocations,
             long unknownCommandTypeRejected,
             long handlerErrors)
         {
             FrozenBatchesConsumed = frozenBatchesConsumed;
             CommandsDispatched = commandsDispatched;
+            MutatingHandlerInvocations = mutatingHandlerInvocations;
             UnknownCommandTypeRejected = unknownCommandTypeRejected;
             HandlerErrors = handlerErrors;
         }
 
         public long FrozenBatchesConsumed { get; }
         public long CommandsDispatched { get; }
+        public long MutatingHandlerInvocations { get; }
         public long UnknownCommandTypeRejected { get; }
         public long HandlerErrors { get; }
     }

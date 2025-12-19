@@ -109,6 +109,8 @@ namespace Caelmor.Runtime.Host
                 _counters.TickStartedCount,
                 inbound.InboundPumpTicksExecuted,
                 consume.FrozenBatchesConsumed,
+                consume.CommandsDispatched,
+                consume.MutatingHandlerInvocations,
                 replication.SnapshotsDequeuedForSend,
                 persistence?.CompletionsApplied ?? 0);
         }
@@ -173,6 +175,8 @@ namespace Caelmor.Runtime.Host
             long tickStartedCount,
             long inboundPumpTicksExecuted,
             long frozenBatchesConsumed,
+            long commandsDispatched,
+            long mutatingHandlerInvocations,
             long snapshotsDequeuedForSend,
             long persistenceCompletionsApplied)
         {
@@ -180,6 +184,8 @@ namespace Caelmor.Runtime.Host
             TickStartedCount = tickStartedCount;
             InboundPumpTicksExecuted = inboundPumpTicksExecuted;
             FrozenBatchesConsumed = frozenBatchesConsumed;
+            CommandsDispatched = commandsDispatched;
+            MutatingHandlerInvocations = mutatingHandlerInvocations;
             SnapshotsDequeuedForSend = snapshotsDequeuedForSend;
             PersistenceCompletionsApplied = persistenceCompletionsApplied;
         }
@@ -188,6 +194,8 @@ namespace Caelmor.Runtime.Host
         public long TickStartedCount { get; }
         public long InboundPumpTicksExecuted { get; }
         public long FrozenBatchesConsumed { get; }
+        public long CommandsDispatched { get; }
+        public long MutatingHandlerInvocations { get; }
         public long SnapshotsDequeuedForSend { get; }
         public long PersistenceCompletionsApplied { get; }
     }
