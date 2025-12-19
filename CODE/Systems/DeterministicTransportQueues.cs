@@ -85,20 +85,45 @@ namespace Caelmor.Runtime.Transport
     public sealed class AuthoritativeCommandIngress
     {
         private readonly RuntimeBackpressureConfig _config;
-        private readonly Dictionary<SessionId, Queue<ServerStampedInboundCommand>> _queues = new Dictionary<SessionId, Queue<ServerStampedInboundCommand>>();
-        private readonly Dictionary<SessionId, SessionQueueMetrics> _metrics = new Dictionary<SessionId, SessionQueueMetrics>();
-        private readonly Dictionary<SessionId, int> _bytesBySession = new Dictionary<SessionId, int>();
+        private readonly Dictionary<SessionId, Queue<ServerStampedInboundCommand>> _queues;
+        private readonly Dictionary<SessionId, SessionQueueMetrics> _metrics;
+        private readonly Dictionary<SessionId, int> _bytesBySession;
+        private readonly Stack<Queue<ServerStampedInboundCommand>> _queuePool;
+        private readonly int _queuePoolCapacity;
+        private readonly int _expectedMaxCommandsPerSession;
         private SessionId[] _snapshotKeys = Array.Empty<SessionId>();
         private SessionQueueMetricsSnapshot[] _snapshotBuffer = Array.Empty<SessionQueueMetricsSnapshot>();
+        private int _dropPathInvocations;
+        private int _prewarmCompleted;
 
         public AuthoritativeCommandIngress(RuntimeBackpressureConfig config)
         {
             _config = config ?? throw new ArgumentNullException(nameof(config));
+            _queuePoolCapacity = Math.Max(1, _config.ExpectedMaxSessions);
+            _expectedMaxCommandsPerSession = Math.Max(1, _config.ExpectedMaxCommandsPerSessionPerTick);
+            _queues = new Dictionary<SessionId, Queue<ServerStampedInboundCommand>>(_queuePoolCapacity);
+            _metrics = new Dictionary<SessionId, SessionQueueMetrics>(_queuePoolCapacity);
+            _bytesBySession = new Dictionary<SessionId, int>(_queuePoolCapacity);
+            _queuePool = new Stack<Queue<ServerStampedInboundCommand>>(_queuePoolCapacity);
         }
 
         public CommandIngressResult TryEnqueue(in ServerStampedInboundCommand command)
         {
             return EnqueueInternal(command);
+        }
+
+        public void Prewarm()
+        {
+            if (_prewarmCompleted > 0)
+                return;
+
+            EnsureCapacity(ref _snapshotKeys, _queuePoolCapacity);
+            EnsureCapacity(ref _snapshotBuffer, _queuePoolCapacity);
+
+            while (_queuePool.Count < _queuePoolCapacity)
+                _queuePool.Push(new Queue<ServerStampedInboundCommand>(_expectedMaxCommandsPerSession));
+
+            _prewarmCompleted++;
         }
 
         public int DrainDeterministic(Span<ServerStampedInboundCommand> destination, int maxCommands)
@@ -173,7 +198,9 @@ namespace Caelmor.Runtime.Transport
 
             if (!_queues.TryGetValue(sessionId, out var queue))
             {
-                queue = new Queue<ServerStampedInboundCommand>();
+                queue = _queuePool.Count > 0
+                    ? _queuePool.Pop()
+                    : new Queue<ServerStampedInboundCommand>(_expectedMaxCommandsPerSession);
                 _queues[sessionId] = queue;
             }
 
@@ -192,6 +219,7 @@ namespace Caelmor.Runtime.Transport
                 metrics.CurrentBytes = currentBytes;
                 metrics.PeakBytes = Math.Max(metrics.PeakBytes, currentBytes);
                 _metrics[sessionId] = metrics;
+                _dropPathInvocations++;
                 payload.Dispose();
                 return CommandIngressResult.Rejected(CommandRejectionReason.BackpressureLimitHit);
             }
@@ -249,6 +277,7 @@ namespace Caelmor.Runtime.Transport
 
             _queues.Remove(sessionId);
             _bytesBySession.Remove(sessionId);
+            _dropPathInvocations += droppedCount;
 
             if (_metrics.TryGetValue(sessionId, out var metrics))
             {
@@ -269,6 +298,12 @@ namespace Caelmor.Runtime.Transport
                 };
             }
 
+            if (_queuePool.Count < _queuePoolCapacity)
+            {
+                queue.Clear();
+                _queuePool.Push(queue);
+            }
+
             return true;
         }
 
@@ -281,6 +316,12 @@ namespace Caelmor.Runtime.Transport
                 {
                     var entry = queue.Dequeue();
                     entry.Dispose();
+                }
+
+                if (_queuePool.Count < _queuePoolCapacity)
+                {
+                    queue.Clear();
+                    _queuePool.Push(queue);
                 }
             }
 
@@ -327,7 +368,7 @@ namespace Caelmor.Runtime.Transport
                 totalRejectedBytes += metrics.RejectedBytes;
             }
 
-            var budget = new QueueBudgetSnapshot(maxPeak, maxBytes, totalDropped, totalDroppedBytes, totalRejected, totalRejectedBytes, totalTrims: 0);
+            var budget = new QueueBudgetSnapshot(maxPeak, maxBytes, totalDropped, totalDroppedBytes, totalRejected, totalRejectedBytes, totalTrims: 0, dropPathInvocations: _dropPathInvocations);
             return new CommandIngressMetrics(_snapshotBuffer, count, budget);
         }
 
@@ -408,7 +449,15 @@ namespace Caelmor.Runtime.Transport
 
     public readonly struct QueueBudgetSnapshot
     {
-        public QueueBudgetSnapshot(int maxCount, int maxBytes, int totalDropped, int totalDroppedBytes, int totalRejected, int totalRejectedBytes, int totalTrims)
+        public QueueBudgetSnapshot(
+            int maxCount,
+            int maxBytes,
+            int totalDropped,
+            int totalDroppedBytes,
+            int totalRejected,
+            int totalRejectedBytes,
+            int totalTrims,
+            int dropPathInvocations)
         {
             MaxCount = maxCount;
             MaxBytes = maxBytes;
@@ -417,6 +466,7 @@ namespace Caelmor.Runtime.Transport
             TotalRejected = totalRejected;
             TotalRejectedBytes = totalRejectedBytes;
             TotalTrims = totalTrims;
+            DropPathInvocations = dropPathInvocations;
         }
 
         public int MaxCount { get; }
@@ -426,6 +476,7 @@ namespace Caelmor.Runtime.Transport
         public int TotalRejected { get; }
         public int TotalRejectedBytes { get; }
         public int TotalTrims { get; }
+        public int DropPathInvocations { get; }
     }
 
     internal readonly struct SessionQueueMetricsReadOnlyList : IReadOnlyList<SessionQueueMetricsSnapshot>
@@ -543,6 +594,12 @@ namespace Caelmor.Runtime.Transport
             _snapshotQueue.Enqueue(snapshot.SessionId, snapshot);
         }
 
+        public void Prewarm()
+        {
+            _ingress.Prewarm();
+            _snapshotQueue.Prewarm();
+        }
+
         public int DrainIngressDeterministic(Span<ServerStampedInboundCommand> destination, int maxCommands)
         {
             return _ingress.DrainDeterministic(destination, maxCommands);
@@ -619,26 +676,59 @@ namespace Caelmor.Runtime.Transport
     {
         private readonly RuntimeBackpressureConfig _config;
         private readonly SnapshotDeltaSerializer _serializer;
-        private readonly Dictionary<SessionId, Queue<SerializedSnapshot>> _queues = new Dictionary<SessionId, Queue<SerializedSnapshot>>();
-        private readonly Dictionary<SessionId, int> _bytesBySession = new Dictionary<SessionId, int>();
-        private readonly Dictionary<SessionId, SessionQueueMetrics> _metrics = new Dictionary<SessionId, SessionQueueMetrics>();
-        private readonly Dictionary<SessionId, Dictionary<EntityHandle, string>> _fingerprints = new Dictionary<SessionId, Dictionary<EntityHandle, string>>();
+        private readonly Dictionary<SessionId, Queue<SerializedSnapshot>> _queues;
+        private readonly Dictionary<SessionId, int> _bytesBySession;
+        private readonly Dictionary<SessionId, SessionQueueMetrics> _metrics;
+        private readonly Dictionary<SessionId, Dictionary<EntityHandle, string>> _fingerprints;
+        private readonly Stack<Queue<SerializedSnapshot>> _queuePool;
+        private readonly Stack<Dictionary<EntityHandle, string>> _fingerprintPool;
+        private readonly int _queuePoolCapacity;
+        private readonly int _expectedMaxSnapshotsPerSession;
         private readonly ReplicationSnapshotCounters? _counters;
         private SessionId[] _snapshotKeys = Array.Empty<SessionId>();
         private SessionQueueMetricsSnapshot[] _snapshotBuffer = Array.Empty<SessionQueueMetricsSnapshot>();
+        private int _dropPathInvocations;
+        private int _prewarmCompleted;
 
         public BoundedReplicationSnapshotQueue(RuntimeBackpressureConfig config, ReplicationSnapshotCounters? counters = null)
         {
             _config = config ?? throw new ArgumentNullException(nameof(config));
             _serializer = new SnapshotDeltaSerializer();
             _counters = counters;
+            _queuePoolCapacity = Math.Max(1, _config.ExpectedMaxSessions);
+            _expectedMaxSnapshotsPerSession = Math.Max(1, _config.ExpectedMaxSnapshotsQueuedPerSession);
+            _queues = new Dictionary<SessionId, Queue<SerializedSnapshot>>(_queuePoolCapacity);
+            _bytesBySession = new Dictionary<SessionId, int>(_queuePoolCapacity);
+            _metrics = new Dictionary<SessionId, SessionQueueMetrics>(_queuePoolCapacity);
+            _fingerprints = new Dictionary<SessionId, Dictionary<EntityHandle, string>>(_queuePoolCapacity);
+            _queuePool = new Stack<Queue<SerializedSnapshot>>(_queuePoolCapacity);
+            _fingerprintPool = new Stack<Dictionary<EntityHandle, string>>(_queuePoolCapacity);
+        }
+
+        public void Prewarm()
+        {
+            if (_prewarmCompleted > 0)
+                return;
+
+            EnsureCapacity(ref _snapshotKeys, _queuePoolCapacity);
+            EnsureCapacity(ref _snapshotBuffer, _queuePoolCapacity);
+
+            while (_queuePool.Count < _queuePoolCapacity)
+                _queuePool.Push(new Queue<SerializedSnapshot>(_expectedMaxSnapshotsPerSession));
+
+            while (_fingerprintPool.Count < _queuePoolCapacity)
+                _fingerprintPool.Push(new Dictionary<EntityHandle, string>());
+
+            _prewarmCompleted++;
         }
 
         public void Enqueue(SessionId sessionId, Caelmor.ClientReplication.ClientReplicationSnapshot snapshot)
         {
             if (!_queues.TryGetValue(sessionId, out var queue))
             {
-                queue = new Queue<SerializedSnapshot>();
+                queue = _queuePool.Count > 0
+                    ? _queuePool.Pop()
+                    : new Queue<SerializedSnapshot>(_expectedMaxSnapshotsPerSession);
                 _queues[sessionId] = queue;
             }
 
@@ -669,7 +759,10 @@ namespace Caelmor.Runtime.Transport
         {
             if (!_fingerprints.TryGetValue(sessionId, out var map))
             {
-                map = new Dictionary<EntityHandle, string>();
+                map = _fingerprintPool.Count > 0
+                    ? _fingerprintPool.Pop()
+                    : new Dictionary<EntityHandle, string>();
+                map.Clear();
                 _fingerprints[sessionId] = map;
             }
 
@@ -690,6 +783,7 @@ namespace Caelmor.Runtime.Transport
                 metrics.Dropped++;
                 metrics.DroppedBytes += dropped.ByteLength;
                 metrics.Trims++;
+                _dropPathInvocations++;
                 _counters?.RecordSnapshotDropped();
             }
 
@@ -759,7 +853,7 @@ namespace Caelmor.Runtime.Transport
                 totalTrims += metrics.Trims;
             }
 
-            var budget = new QueueBudgetSnapshot(maxPeak, maxBytes, totalDropped, totalDroppedBytes, 0, 0, totalTrims);
+            var budget = new QueueBudgetSnapshot(maxPeak, maxBytes, totalDropped, totalDroppedBytes, 0, 0, totalTrims, _dropPathInvocations);
             var counters = _counters?.Snapshot() ?? ReplicationSnapshotCounterSnapshot.Empty;
             return new SnapshotQueueMetrics(_snapshotBuffer, count, budget, counters);
         }
@@ -781,6 +875,7 @@ namespace Caelmor.Runtime.Transport
 
                 _queues.Remove(sessionId);
                 _bytesBySession.Remove(sessionId);
+                _dropPathInvocations += droppedCount;
 
                 if (_metrics.TryGetValue(sessionId, out var metrics))
                 {
@@ -802,6 +897,12 @@ namespace Caelmor.Runtime.Transport
                         Trims = droppedCount
                     };
                 }
+
+                if (_queuePool.Count < _queuePoolCapacity)
+                {
+                    queue.Clear();
+                    _queuePool.Push(queue);
+                }
             }
 
             _bytesBySession.Remove(sessionId);
@@ -813,7 +914,15 @@ namespace Caelmor.Runtime.Transport
                 _metrics[sessionId] = existingMetrics;
             }
 
-            _fingerprints.Remove(sessionId);
+            if (_fingerprints.TryGetValue(sessionId, out var map))
+            {
+                _fingerprints.Remove(sessionId);
+                if (_fingerprintPool.Count < _queuePoolCapacity)
+                {
+                    map.Clear();
+                    _fingerprintPool.Push(map);
+                }
+            }
         }
 
         public void Clear()
@@ -826,11 +935,27 @@ namespace Caelmor.Runtime.Transport
                     queue.Dequeue().Dispose();
                     _counters?.RecordSnapshotDropped();
                 }
+
+                if (_queuePool.Count < _queuePoolCapacity)
+                {
+                    queue.Clear();
+                    _queuePool.Push(queue);
+                }
             }
 
             _queues.Clear();
             _bytesBySession.Clear();
             _metrics.Clear();
+            foreach (var kvp in _fingerprints)
+            {
+                var map = kvp.Value;
+                if (_fingerprintPool.Count < _queuePoolCapacity)
+                {
+                    map.Clear();
+                    _fingerprintPool.Push(map);
+                }
+            }
+
             _fingerprints.Clear();
         }
 
@@ -887,6 +1012,7 @@ namespace Caelmor.Runtime.Transport
         private int _globalPeakBytes;
         private int _globalPeakCount;
         private int _globalTrims;
+        private int _dropPathInvocations;
         private PlayerId[] _snapshotKeys = Array.Empty<PlayerId>();
         private PersistenceQueueMetricsSnapshot[] _snapshotBuffer = Array.Empty<PersistenceQueueMetricsSnapshot>();
 
@@ -952,6 +1078,7 @@ namespace Caelmor.Runtime.Transport
                 metrics.Dropped++;
                 metrics.DroppedBytes += droppedBytes;
                 metrics.Trims++;
+                _dropPathInvocations++;
                 RemoveFromGlobal(dropped, droppedBytes, countAsTrim: true);
                 _counters?.RecordDrop();
             }
@@ -972,6 +1099,7 @@ namespace Caelmor.Runtime.Transport
                 int droppedBytes = dropped.Request.EstimatedBytes;
                 _globalBytes = Math.Max(0, _globalBytes - droppedBytes);
                 _globalTrims++;
+                _dropPathInvocations++;
 
                 DropFromPerPlayer(dropped, droppedBytes, countAsTrim: true, countDrop: false);
                 _counters?.RecordDrop();
@@ -1118,7 +1246,7 @@ namespace Caelmor.Runtime.Transport
                     totalTrims += metrics.Trims;
                 }
 
-                var budget = new QueueBudgetSnapshot(maxPeak, maxPeakBytes, totalDropped, totalDroppedBytes, 0, 0, totalTrims);
+                var budget = new QueueBudgetSnapshot(maxPeak, maxPeakBytes, totalDropped, totalDroppedBytes, 0, 0, totalTrims, _dropPathInvocations);
                 return new PersistenceQueueMetrics(_snapshotBuffer, count, budget, _globalQueue.Count, _globalBytes, _globalPeakBytes, _globalPeakCount, _globalTrims);
             }
         }
