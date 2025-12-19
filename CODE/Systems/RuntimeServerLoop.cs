@@ -390,6 +390,9 @@ namespace Caelmor.Runtime.Host
             if (missing.Count > 0)
                 throw new InvalidOperationException($"RUNTIME_PIPELINE_MISSING_HOOKS: {string.Join(", ", missing)}");
         }
+
+        internal PooledTransportRouter Transport => _transport;
+        internal SessionHandshakePipeline Handshakes => _handshakes;
     }
 
     internal sealed class LifecycleMailboxPhaseHook : ITickPhaseHook

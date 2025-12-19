@@ -19,6 +19,9 @@ namespace Caelmor.Runtime.Host
 
         public static int Main(string[] args)
         {
+            if (InProcTransportProofHarness.TryRun(args, out var proofExitCode))
+                return proofExitCode;
+
             var metrics = new HeadlessServerEntryPointMetrics();
             metrics.RecordLaunch();
 
@@ -98,7 +101,7 @@ namespace Caelmor.Runtime.Host
             var mutationGate = new AlwaysAllowSessionMutationGate();
             var sessionEvents = new NoOpSessionEvents();
 
-            var sessionSystem = new HeadlessPlayerSessionSystem(
+            var sessionSystem = new ActiveSessionIndexedPlayerSessionSystem(
                 authority,
                 saveBinding,
                 restore,
@@ -381,66 +384,5 @@ namespace Caelmor.Runtime.Host
             }
         }
 
-        private sealed class HeadlessPlayerSessionSystem : IPlayerSessionSystem
-        {
-            private readonly PlayerSessionSystem _inner;
-            private readonly DeterministicActiveSessionIndex _activeSessions;
-
-            public HeadlessPlayerSessionSystem(
-                IServerAuthority authority,
-                IPlayerSaveBindingQuery saveBinding,
-                IPersistenceRestoreQuery restore,
-                ISnapshotEligibilityRegistry snapshotEligibility,
-                ISessionMutationGate mutationGate,
-                ISessionEvents sessionEvents,
-                DeterministicActiveSessionIndex activeSessions)
-            {
-                if (activeSessions == null) throw new ArgumentNullException(nameof(activeSessions));
-                _activeSessions = activeSessions;
-                _inner = new PlayerSessionSystem(
-                    authority,
-                    saveBinding,
-                    restore,
-                    snapshotEligibility,
-                    mutationGate,
-                    sessionEvents);
-            }
-
-            public SessionActivationResult ActivateSession(SessionId sessionId, PlayerId serverResolvedPlayerId, ClientJoinRequest? clientRequest = null)
-            {
-                var result = _inner.ActivateSession(sessionId, serverResolvedPlayerId, clientRequest);
-                if (result.Ok)
-                    _activeSessions.TryAdd(result.SessionId);
-
-                return result;
-            }
-
-            public SessionDeactivationResult DeactivateSession(SessionId sessionId)
-            {
-                var result = _inner.DeactivateSession(sessionId);
-                if (result.Ok && result.WasRemoved)
-                    _activeSessions.TryRemove(sessionId);
-
-                return result;
-            }
-
-            public SessionActivationResult TryRebindForReconnect(PlayerId serverResolvedPlayerId, SessionId newSessionId, ClientJoinRequest? clientRequest = null)
-            {
-                var result = _inner.TryRebindForReconnect(serverResolvedPlayerId, newSessionId, clientRequest);
-                if (result.Ok)
-                    _activeSessions.TryAdd(result.SessionId);
-
-                return result;
-            }
-
-            public bool TryGetPlayerForSession(SessionId sessionId, out PlayerId playerId)
-                => _inner.TryGetPlayerForSession(sessionId, out playerId);
-
-            public bool TryGetSessionForPlayer(PlayerId playerId, out SessionId sessionId)
-                => _inner.TryGetSessionForPlayer(playerId, out sessionId);
-
-            public bool IsSessionActive(SessionId sessionId)
-                => _inner.IsSessionActive(sessionId);
-        }
     }
 }
