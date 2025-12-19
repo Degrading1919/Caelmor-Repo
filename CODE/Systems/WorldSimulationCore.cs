@@ -48,6 +48,7 @@ namespace Caelmor.Runtime.WorldSimulation
         private volatile bool _running;
 
         public event Action<TickStallEvent>? StallDetected;
+        public event Action? TickLoopStarted;
 
 #if DEBUG
         private int _maxEligibleEntities;
@@ -199,6 +200,7 @@ namespace Caelmor.Runtime.WorldSimulation
             var tickStopwatch = new Stopwatch();
 
             TickThreadAssert.CaptureTickThread(Thread.CurrentThread);
+            TickLoopStarted?.Invoke();
 
             try
             {
