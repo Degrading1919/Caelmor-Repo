@@ -1,7 +1,7 @@
 ﻿CAELMOR_FILE_MANIFEST_v1
 Generated automatically from full Caelmor project root.
 Project root: C:\Users\CK\Documents\Caelmor
-Update timestamp: 12/15/2025 19:02:37
+Update timestamp: 12/17/2025 19:05:55
 
 ============================================================
 DIRECTORY STRUCTURE (Including Empty Folders)
@@ -44,8 +44,11 @@ UNITY/
     - Caelmor_Project_Instructions.txt
     - CONTINUITY HANDOFF PROMPT.md
     - Deep_Research_Findings_for_Caelmor_Development.md
+    - MMO_Runtime_&_Compilation_Technical_Brief.txt
     - Races_Skills_Resources_Deep_Research.txt
     - RuneScape_Item_Resource_Node_Enemy_and_NPC_Ecosystem_Deep_Research.txt
+    - Runtime_Integration_Audit.md
+    - Runtime_System_Map.md
     - World_&_Quest_Deep_Research.txt
 00_ADMIN\Roadmaps/
     - Caelmor_Roadmap.md
@@ -151,6 +154,7 @@ ARCHIVE\Deprecated/
     - QuestChain_Schema.json
     - QuestSystem.cs
     - Quest_Schema_Flat.json
+    - relevant runtime folder.zip
     - ResourceNode.cs
     - Resource_Node_Schema_Modular.json
     - response.txt
@@ -200,6 +204,18 @@ CODE\Systems/
     - CombatReplicationSystem.cs
     - CombatResolutionEngine.cs
     - CombatStateAuthoritySystem.cs
+    - MinimalClientControlHandoffHooks.cs
+    - OnboardingSystem.cs
+    - OnboardingValidationScenarioExecution.cs
+    - PlayerIdentity+SaveBindingRuntime.cs
+    - PlayerId↔SaveBindingValidationScenarios.cs
+    - PlayerLifecycleSystem.cs
+    - PlayerRuntimeInstanceManagement.cs
+    - PlayerRuntimeInstanceValidationScenarios.cs
+    - PlayerSessionSystem.cs
+    - RejectClient-ProvidedIdentifiers.cs
+    - TickEligibilityRegistry.cs
+    - TickSystemCore.cs
     - ValidationAssert.cs
     - ValidationDiff_Utilities.cs
     - ValidationHarness_Bootstrap.cs
@@ -253,6 +269,7 @@ DESIGNS\Networking & Persistence/
     - TableResourceGrantMapping.cs
     - WorldNodePersistenceAdapter.cs
 DESIGNS\Systems Design/
+    - Runtime_File_Scope_and_Interaction_Map.md
     - Stage 13.1 — Player Identity Model.md
     - Stage 13.2 — Player Session Lifecycle.md
     - Stage 13.3 — World Attachment & Zone Residency.md
@@ -301,10 +318,19 @@ DESIGNS\Systems Design/
     - Stage 22.9 — Validation Harness Integration Plan.md
     - Stage 23.1 — Player Identity + Save Binding Runtime.md
     - Stage 23.2 — Session Activation & Deactivation Runtime.md
+    - Stage 23.3 — Player Zone Residency Runtime Definition.md
     - Stage 23.3 — Zone Residency Runtime Hooks.md
+    - Stage 23.4 — Player Lifecycle Integration Runtime Definition.md
     - Stage 23.4 — Tick Participation Runtime Wiring.md
     - Stage 23.5 — Player Lifecycle Save & Restore Wiring.md
+    - Stage 23.5 — Save Restore & Rehydration Runtime Definition.md
     - Stage 23.6 — Player Lifecycle Validation Execution.md
+    - Stage 24 — NPC Runtime Architecture Definition.md
+    - Stage 25 — Combat Runtime Integration Definition.md
+    - Stage 26 — Item & Inventory Runtime Integration Definition.md
+    - Stage 27 — Quest Runtime Integration Definition.md
+    - Stage 28 — World Simulation Core Runtime Definition.md
+    - Stage 29 — Client Replication & Snapshot Runtime Definition.md
 DESIGNS\Templates & Schemas/
     - CraftingStation.schema.json
     - GatheringSkillKey.schema.json
@@ -333,4 +359,3 @@ LORE\Worldbuilding Docs/
 MEDIA\Concept Art/
 MEDIA\Maps/
 MEDIA\Reference Images/
-UNITY\Caelmor_VS/
