@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using Caelmor.Runtime.Tick;
 
 namespace Caelmor.Combat
 {
@@ -158,7 +159,7 @@ namespace Caelmor.Combat
         public string CombatContextId { get; }
         public CombatEventType EventType { get; }
 
-        public string? SubjectEntityId { get; }
+        public EntityHandle SubjectEntity { get; }
 
         public IntentResult? IntentResult { get; }
         public DamageOutcome? DamageOutcome { get; }
@@ -170,7 +171,7 @@ namespace Caelmor.Combat
             int authoritativeTick,
             string combatContextId,
             CombatEventType eventType,
-            string? subjectEntityId,
+            EntityHandle subjectEntity,
             IntentResult? intentResult,
             DamageOutcome? damageOutcome,
             MitigationOutcome? mitigationOutcome,
@@ -180,7 +181,7 @@ namespace Caelmor.Combat
             AuthoritativeTick = authoritativeTick;
             CombatContextId = combatContextId;
             EventType = eventType;
-            SubjectEntityId = subjectEntityId;
+            SubjectEntity = subjectEntity;
             IntentResult = intentResult;
             DamageOutcome = damageOutcome;
             MitigationOutcome = mitigationOutcome;
@@ -196,7 +197,7 @@ namespace Caelmor.Combat
                 e.AuthoritativeTick,
                 e.CombatContextId,
                 e.EventType,
-                e.SubjectEntityId,
+                e.SubjectEntity,
                 e.IntentResult,
                 e.DamageOutcome,
                 e.MitigationOutcome,

@@ -7,6 +7,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Buffers;
+using System.Diagnostics;
+using Caelmor.Runtime.Tick;
 
 namespace Caelmor.Combat
 {
@@ -40,11 +42,14 @@ namespace Caelmor.Combat
 
         // Deterministic per-actor sequence assignment for a given frozen tick.
         // Derived deterministically during FreezeForTick() by sorting, not by arrival order.
-        private readonly Dictionary<(int FrozenTick, string ActorId), int> _sequenceCounters = new();
+        private readonly Dictionary<(int FrozenTick, EntityHandle Actor), int> _sequenceCounters = new();
 
         // Metrics and diagnostics (monotonic counters; deterministic updates).
         private long _structuralRejectCount;
         private long _overflowRejectCount;
+        private long _combatIntentsStaged;
+        private long _combatIntentsDropped;
+        private long _combatAllocWarnings;
         private int _peakStagingUsage;
         private int _lastFrozenCount;
 
@@ -65,7 +70,7 @@ namespace Caelmor.Combat
 
             _tickSource.OnTickAdvanced += HandleTickAdvanced;
 
-            _currentFrozen = _frozenSnapshotPool.Rent();
+            _currentFrozen = RentFrozenSnapshot();
             _currentFrozen.Commit(_tickSource.CurrentTick, 0);
             _frozenSnapshotsByTick[_currentFrozen.AuthoritativeTick] = _currentFrozen;
         }
@@ -88,19 +93,22 @@ namespace Caelmor.Combat
             {
                 var rejection = new IntentRejection(
                     intentId: submission.IntentId ?? string.Empty,
-                    actorEntityId: submission.ActorEntityId ?? string.Empty,
+                    actorEntity: submission.ActorEntity,
                     intentType: submission.IntentType,
                     authoritativeTick: submitTick,
                     reasonCode: reject.ReasonCode);
 
                 _structuralRejectCount++;
+                _combatIntentsDropped++;
                 _rejectionSink.OnRejected(rejection);
                 return IntakeReceipt.Rejected(submission.IntentId ?? string.Empty, submitTick, reject.ReasonCode);
             }
 
             if (!_stagedBySubmitTick.TryGetValue(submitTick, out var bucket))
             {
-                bucket = _stagingBucketPool.Rent();
+                bool allocatedNew;
+                bucket = _stagingBucketPool.Rent(out allocatedNew);
+                NoteAllocWarningIfNeeded(allocatedNew);
                 bucket.Prepare(SessionIntentCapPerTick);
                 _stagedBySubmitTick.Add(submitTick, bucket);
             }
@@ -110,15 +118,16 @@ namespace Caelmor.Combat
                 return RejectOverflow(submission, submitTick, RejectReasonCodes.OverflowSessionIntentCap);
             }
 
-            if (bucket.GetActorCount(submission.ActorEntityId!) >= ActorIntentCapPerTick)
+            if (bucket.GetActorCount(submission.ActorEntity) >= ActorIntentCapPerTick)
             {
                 return RejectOverflow(submission, submitTick, RejectReasonCodes.OverflowActorIntentCap);
             }
 
-            bucket.IncrementActor(submission.ActorEntityId!);
+            bucket.IncrementActor(submission.ActorEntity);
             bucket.AddSubmission(new StagedSubmission(submission, submitTick));
             _peakStagingUsage = Math.Max(_peakStagingUsage, bucket.SubmissionsCount);
 
+            _combatIntentsStaged++;
             // No success emissions here (explicit).
             return IntakeReceipt.Staged(submission.IntentId!, submitTick);
         }
@@ -129,12 +138,13 @@ namespace Caelmor.Combat
                 throw new InvalidOperationException("Unsupported overflow policy.");
 
             _overflowRejectCount++;
+            _combatIntentsDropped++;
 
             if (DeterministicOverflowPolicy == OverflowPolicy.DropNewest)
             {
                 var rejection = new IntentRejection(
                     intentId: submission.IntentId ?? string.Empty,
-                    actorEntityId: submission.ActorEntityId ?? string.Empty,
+                    actorEntity: submission.ActorEntity,
                     intentType: submission.IntentType,
                     authoritativeTick: submitTick,
                     reasonCode: reasonCode);
@@ -161,7 +171,7 @@ namespace Caelmor.Combat
                 return _currentFrozen;
             }
 
-            var emptySnapshot = _frozenSnapshotPool.Rent();
+            var emptySnapshot = RentFrozenSnapshot();
             emptySnapshot.Commit(tick, 0);
             _frozenSnapshotsByTick[tick] = emptySnapshot;
             _currentFrozen = emptySnapshot;
@@ -184,6 +194,9 @@ namespace Caelmor.Combat
             return new CombatIntentQueueDiagnosticsSnapshot(
                 structuralRejectCount: _structuralRejectCount,
                 overflowRejectCount: _overflowRejectCount,
+                combatIntentsStaged: _combatIntentsStaged,
+                combatIntentsDropped: _combatIntentsDropped,
+                combatAllocWarnings: _combatAllocWarnings,
                 peakStagingUsage: _peakStagingUsage,
                 lastFrozenCount: _lastFrozenCount);
         }
@@ -203,13 +216,31 @@ namespace Caelmor.Combat
 
             _structuralRejectCount = 0;
             _overflowRejectCount = 0;
+            _combatIntentsStaged = 0;
+            _combatIntentsDropped = 0;
+            _combatAllocWarnings = 0;
             _peakStagingUsage = 0;
             _lastFrozenCount = 0;
 
-            var resetSnapshot = _frozenSnapshotPool.Rent();
+            var resetSnapshot = RentFrozenSnapshot();
             resetSnapshot.Commit(_tickSource.CurrentTick, 0);
             _currentFrozen = resetSnapshot;
             _frozenSnapshotsByTick[_currentFrozen.AuthoritativeTick] = _currentFrozen;
+        }
+
+        private FrozenQueueSnapshot RentFrozenSnapshot()
+        {
+            bool allocatedNew;
+            var snapshot = _frozenSnapshotPool.Rent(out allocatedNew);
+            NoteAllocWarningIfNeeded(allocatedNew);
+            return snapshot;
+        }
+
+        [Conditional("DEBUG")]
+        private void NoteAllocWarningIfNeeded(bool allocatedNew)
+        {
+            if (allocatedNew)
+                _combatAllocWarnings++;
         }
 
         private void HandleTickAdvanced(int newTick)
@@ -234,7 +265,7 @@ namespace Caelmor.Combat
                     _stagingBucketPool.Return(emptyBucket);
                 }
 
-                var emptySnapshot = _frozenSnapshotPool.Rent();
+                var emptySnapshot = RentFrozenSnapshot();
                 emptySnapshot.Commit(frozenTick, 0);
                 _currentFrozen = emptySnapshot;
                 _frozenSnapshotsByTick[frozenTick] = emptySnapshot;
@@ -249,13 +280,15 @@ namespace Caelmor.Combat
             // NOTE: Ordering must not depend on arrival time or any client-supplied correlation fields.
             staged.Sort(StagedSubmissionComparer.Instance);
 
-            var snapshot = _frozenSnapshotPool.Rent();
+            var snapshot = RentFrozenSnapshot();
+            if (snapshot.BufferCapacity < staged.SubmissionsCount)
+                NoteAllocWarningIfNeeded(true);
             var buffer = snapshot.AcquireBuffer(staged.SubmissionsCount);
 
             for (int i = 0; i < staged.SubmissionsCount; i++)
             {
                 var s = staged[i];
-                int seq = NextSequenceForActor(frozenTick, s.Submission.ActorEntityId!);
+                int seq = NextSequenceForActor(frozenTick, s.Submission.ActorEntity);
 
                 // Payload already fixed-layout struct; copy by value only.
                 var frozenPayload = s.Submission.Payload;
@@ -263,7 +296,7 @@ namespace Caelmor.Combat
                 buffer[i] = new FrozenIntentRecord(
                     intentId: s.Submission.IntentId!,
                     intentType: s.Submission.IntentType,
-                    actorEntityId: s.Submission.ActorEntityId!,
+                    actorEntity: s.Submission.ActorEntity,
                     submitTick: s.SubmitTick,
                     deterministicSequence: seq,
                     payload: frozenPayload
@@ -280,9 +313,9 @@ namespace Caelmor.Combat
             _stagingBucketPool.Return(staged);
         }
 
-        private int NextSequenceForActor(int frozenTick, string actorId)
+        private int NextSequenceForActor(int frozenTick, EntityHandle actor)
         {
-            var key = (frozenTick, actorId);
+            var key = (frozenTick, actor);
             if (!_sequenceCounters.TryGetValue(key, out int current))
                 current = 0;
 
@@ -327,7 +360,7 @@ namespace Caelmor.Combat
             if (count == 0)
                 return;
 
-            var keys = ArrayPool<(int FrozenTick, string ActorId)>.Shared.Rent(count);
+            var keys = ArrayPool<(int FrozenTick, EntityHandle Actor)>.Shared.Rent(count);
             int index = 0;
             foreach (var kvp in _sequenceCounters)
                 keys[index++] = kvp.Key;
@@ -338,7 +371,7 @@ namespace Caelmor.Combat
                     _sequenceCounters.Remove(keys[i]);
             }
 
-            ArrayPool<(int, string)>.Shared.Return(keys, clearArray: true);
+            ArrayPool<(int, EntityHandle)>.Shared.Return(keys, clearArray: true);
         }
 
         private void PruneFrozenSnapshots(int keepFromTickInclusive)
@@ -380,12 +413,12 @@ namespace Caelmor.Combat
         private sealed class StagingBucket
         {
             private readonly List<StagedSubmission> _submissions;
-            private readonly Dictionary<string, int> _actorCounts;
+            private readonly Dictionary<EntityHandle, int> _actorCounts;
 
             public StagingBucket()
             {
                 _submissions = new List<StagedSubmission>(SessionIntentCapPerTick);
-                _actorCounts = new Dictionary<string, int>(ActorCountCapacityHint, StringComparer.Ordinal);
+                _actorCounts = new Dictionary<EntityHandle, int>(ActorCountCapacityHint);
             }
 
             public int SubmissionsCount => _submissions.Count;
@@ -398,24 +431,22 @@ namespace Caelmor.Combat
                 _actorCounts.Clear();
                 _submissions.EnsureCapacity(sessionCap);
 
-                if (_actorCounts.Comparer != StringComparer.Ordinal)
-                    throw new InvalidOperationException("Actor count dictionary comparer changed unexpectedly.");
             }
 
-            public int GetActorCount(string actorId)
+            public int GetActorCount(EntityHandle actor)
             {
-                if (_actorCounts.TryGetValue(actorId, out var count))
+                if (_actorCounts.TryGetValue(actor, out var count))
                     return count;
 
                 return 0;
             }
 
-            public void IncrementActor(string actorId)
+            public void IncrementActor(EntityHandle actor)
             {
-                if (_actorCounts.TryGetValue(actorId, out var count))
-                    _actorCounts[actorId] = count + 1;
+                if (_actorCounts.TryGetValue(actor, out var count))
+                    _actorCounts[actor] = count + 1;
                 else
-                    _actorCounts[actorId] = 1;
+                    _actorCounts[actor] = 1;
             }
 
             public void AddSubmission(StagedSubmission submission)
@@ -445,11 +476,15 @@ namespace Caelmor.Combat
                 _maxSize = maxSize;
             }
 
-            public StagingBucket Rent()
+            public StagingBucket Rent(out bool allocatedNew)
             {
                 if (_pool.Count > 0)
+                {
+                    allocatedNew = false;
                     return _pool.Pop();
+                }
 
+                allocatedNew = true;
                 return new StagingBucket();
             }
 
@@ -468,7 +503,7 @@ namespace Caelmor.Combat
 
             public int Compare(StagedSubmission x, StagedSubmission y)
             {
-                int actorCompare = string.CompareOrdinal(x.Submission.ActorEntityId ?? string.Empty, y.Submission.ActorEntityId ?? string.Empty);
+                int actorCompare = x.Submission.ActorEntity.Value.CompareTo(y.Submission.ActorEntity.Value);
                 if (actorCompare != 0)
                     return actorCompare;
 
@@ -491,7 +526,7 @@ namespace Caelmor.Combat
     {
         public string? IntentId { get; init; }
         public CombatIntentType IntentType { get; init; }
-        public string? ActorEntityId { get; init; }
+        public EntityHandle ActorEntity { get; init; }
 
         // Optional per schema (correlation only; must not affect ordering)
         public string? ClientNonce { get; init; }
@@ -598,14 +633,26 @@ namespace Caelmor.Combat
         public bool HasValue => Value != null;
     }
 
+    public readonly struct OptionalEntityHandle
+    {
+        public readonly EntityHandle Value;
+        public readonly bool HasValue;
+
+        public OptionalEntityHandle(EntityHandle value)
+        {
+            Value = value;
+            HasValue = value.IsValid;
+        }
+    }
+
     public readonly struct AttackIntentPayload
     {
-        public readonly OptionalString TargetEntityId;
+        public readonly OptionalEntityHandle TargetEntity;
         public readonly OptionalString AttackProfileKey;
 
-        public AttackIntentPayload(OptionalString targetEntityId, OptionalString attackProfileKey)
+        public AttackIntentPayload(OptionalEntityHandle targetEntity, OptionalString attackProfileKey)
         {
-            TargetEntityId = targetEntityId;
+            TargetEntity = targetEntity;
             AttackProfileKey = attackProfileKey;
         }
     }
@@ -623,14 +670,14 @@ namespace Caelmor.Combat
     public readonly struct AbilityIntentPayload
     {
         public readonly string AbilityKey;
-        public readonly OptionalString TargetEntityId;
+        public readonly OptionalEntityHandle TargetEntity;
         public readonly IdentifierContext AbilityContext;
         public readonly bool HasAbilityContext;
 
-        public AbilityIntentPayload(string abilityKey, OptionalString targetEntityId, IdentifierContext abilityContext, bool hasAbilityContext)
+        public AbilityIntentPayload(string abilityKey, OptionalEntityHandle targetEntity, IdentifierContext abilityContext, bool hasAbilityContext)
         {
             AbilityKey = abilityKey ?? string.Empty;
-            TargetEntityId = targetEntityId;
+            TargetEntity = targetEntity;
             AbilityContext = abilityContext;
             HasAbilityContext = hasAbilityContext;
         }
@@ -639,14 +686,14 @@ namespace Caelmor.Combat
     public readonly struct MovementIntentPayload
     {
         public readonly CombatMovementMode MovementMode;
-        public readonly OptionalString TargetEntityId;
+        public readonly OptionalEntityHandle TargetEntity;
         public readonly IdentifierContext MovementContext;
         public readonly bool HasMovementContext;
 
-        public MovementIntentPayload(CombatMovementMode movementMode, OptionalString targetEntityId, IdentifierContext movementContext, bool hasMovementContext)
+        public MovementIntentPayload(CombatMovementMode movementMode, OptionalEntityHandle targetEntity, IdentifierContext movementContext, bool hasMovementContext)
         {
             MovementMode = movementMode;
-            TargetEntityId = targetEntityId;
+            TargetEntity = targetEntity;
             MovementContext = movementContext;
             HasMovementContext = hasMovementContext;
         }
@@ -790,6 +837,7 @@ namespace Caelmor.Combat
 
         public int AuthoritativeTick { get; private set; }
         public IReadOnlyList<FrozenIntentRecord> Intents => _intentList;
+        internal int BufferCapacity => _buffer.Length;
 
         private FrozenQueueSnapshot()
         {
@@ -848,11 +896,15 @@ namespace Caelmor.Combat
             _maxSize = maxSize;
         }
 
-        public FrozenQueueSnapshot Rent()
+        public FrozenQueueSnapshot Rent(out bool allocatedNew)
         {
             if (_pool.Count > 0)
+            {
+                allocatedNew = false;
                 return _pool.Pop();
+            }
 
+            allocatedNew = true;
             return new FrozenQueueSnapshot();
         }
 
@@ -868,7 +920,7 @@ namespace Caelmor.Combat
     {
         public readonly string IntentId;
         public readonly CombatIntentType IntentType;
-        public readonly string ActorEntityId;
+        public readonly EntityHandle ActorEntity;
         public readonly int SubmitTick;
 
         // Deterministic tie-breaker for per-actor intent ordering within the frozen tick.
@@ -880,14 +932,14 @@ namespace Caelmor.Combat
         public FrozenIntentRecord(
             string intentId,
             CombatIntentType intentType,
-            string actorEntityId,
+            EntityHandle actorEntity,
             int submitTick,
             int deterministicSequence,
             CombatIntentPayload payload)
         {
             IntentId = intentId;
             IntentType = intentType;
-            ActorEntityId = actorEntityId;
+            ActorEntity = actorEntity;
             SubmitTick = submitTick;
             DeterministicSequence = deterministicSequence;
             Payload = payload;
@@ -1066,7 +1118,7 @@ namespace Caelmor.Combat
                 rows[i] = new CombatIntentQueueValidationRow(
                     intentId: intent.IntentId,
                     intentType: intent.IntentType,
-                    actorEntityId: intent.ActorEntityId,
+                    actorEntity: intent.ActorEntity,
                     submitTick: intent.SubmitTick,
                     deterministicSequence: intent.DeterministicSequence);
             }
@@ -1079,20 +1131,20 @@ namespace Caelmor.Combat
     {
         public readonly string IntentId;
         public readonly CombatIntentType IntentType;
-        public readonly string ActorEntityId;
+        public readonly EntityHandle ActorEntity;
         public readonly int SubmitTick;
         public readonly int DeterministicSequence;
 
         public CombatIntentQueueValidationRow(
             string intentId,
             CombatIntentType intentType,
-            string actorEntityId,
+            EntityHandle actorEntity,
             int submitTick,
             int deterministicSequence)
         {
             IntentId = intentId;
             IntentType = intentType;
-            ActorEntityId = actorEntityId;
+            ActorEntity = actorEntity;
             SubmitTick = submitTick;
             DeterministicSequence = deterministicSequence;
         }
@@ -1105,15 +1157,15 @@ namespace Caelmor.Combat
     public sealed class IntentRejection
     {
         public string IntentId { get; }
-        public string ActorEntityId { get; }
+        public EntityHandle ActorEntity { get; }
         public CombatIntentType IntentType { get; }
         public int AuthoritativeTick { get; }
         public string ReasonCode { get; }
 
-        public IntentRejection(string intentId, string actorEntityId, CombatIntentType intentType, int authoritativeTick, string reasonCode)
+        public IntentRejection(string intentId, EntityHandle actorEntity, CombatIntentType intentType, int authoritativeTick, string reasonCode)
         {
             IntentId = intentId;
-            ActorEntityId = actorEntityId;
+            ActorEntity = actorEntity;
             IntentType = intentType;
             AuthoritativeTick = authoritativeTick;
             ReasonCode = reasonCode;
@@ -1164,13 +1216,26 @@ namespace Caelmor.Combat
     {
         public readonly long StructuralRejectCount;
         public readonly long OverflowRejectCount;
+        public readonly long CombatIntentsStaged;
+        public readonly long CombatIntentsDropped;
+        public readonly long CombatAllocWarnings;
         public readonly int PeakStagingUsage;
         public readonly int LastFrozenCount;
 
-        public CombatIntentQueueDiagnosticsSnapshot(long structuralRejectCount, long overflowRejectCount, int peakStagingUsage, int lastFrozenCount)
+        public CombatIntentQueueDiagnosticsSnapshot(
+            long structuralRejectCount,
+            long overflowRejectCount,
+            long combatIntentsStaged,
+            long combatIntentsDropped,
+            long combatAllocWarnings,
+            int peakStagingUsage,
+            int lastFrozenCount)
         {
             StructuralRejectCount = structuralRejectCount;
             OverflowRejectCount = overflowRejectCount;
+            CombatIntentsStaged = combatIntentsStaged;
+            CombatIntentsDropped = combatIntentsDropped;
+            CombatAllocWarnings = combatAllocWarnings;
             PeakStagingUsage = peakStagingUsage;
             LastFrozenCount = lastFrozenCount;
         }
@@ -1211,15 +1276,9 @@ namespace Caelmor.Combat
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(submission.ActorEntityId))
+            if (!submission.ActorEntity.IsValid)
             {
-                reject = RejectInfo.Of(RejectReasonCodes.MissingRequiredField, "actor_entity_id missing.");
-                return false;
-            }
-
-            if (!entityIdValidator.IsValidEntityId(submission.ActorEntityId!))
-            {
-                reject = RejectInfo.Of(RejectReasonCodes.InvalidEntityId, "actor_entity_id invalid.");
+                reject = RejectInfo.Of(RejectReasonCodes.MissingRequiredField, "actor_entity missing.");
                 return false;
             }
 
@@ -1260,10 +1319,9 @@ namespace Caelmor.Combat
             reject = default;
             var payload = s.Payload.Attack;
 
-            if (payload.TargetEntityId.HasValue)
+            if (payload.TargetEntity.HasValue)
             {
-                var targetStr = payload.TargetEntityId.Value!;
-                if (!v.IsValidEntityId(targetStr))
+                if (!payload.TargetEntity.Value.IsValid)
                 {
                     reject = RejectInfo.Of(RejectReasonCodes.InvalidEntityId, "target_entity_id invalid.");
                     return false;
@@ -1304,10 +1362,9 @@ namespace Caelmor.Combat
                 return false;
             }
 
-            if (payload.TargetEntityId.HasValue)
+            if (payload.TargetEntity.HasValue)
             {
-                var targetStr = payload.TargetEntityId.Value!;
-                if (!v.IsValidEntityId(targetStr))
+                if (!payload.TargetEntity.Value.IsValid)
                 {
                     reject = RejectInfo.Of(RejectReasonCodes.InvalidEntityId, "target_entity_id invalid.");
                     return false;
@@ -1342,10 +1399,9 @@ namespace Caelmor.Combat
                 return false;
             }
 
-            if (payload.TargetEntityId.HasValue)
+            if (payload.TargetEntity.HasValue)
             {
-                var targetStr = payload.TargetEntityId.Value!;
-                if (!v.IsValidEntityId(targetStr))
+                if (!payload.TargetEntity.Value.IsValid)
                 {
                     reject = RejectInfo.Of(RejectReasonCodes.InvalidEntityId, "target_entity_id invalid.");
                     return false;

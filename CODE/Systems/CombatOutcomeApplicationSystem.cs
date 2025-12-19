@@ -7,6 +7,7 @@ using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Caelmor.Runtime.Tick;
 
 namespace Caelmor.Combat
 {
@@ -44,8 +45,8 @@ namespace Caelmor.Combat
         private readonly Dictionary<int, HashSet<string>> _appliedPayloadIdsByTick = new();
 
         // Validation support: last resolved intent per entity (snapshot-only; not authoritative gameplay state).
-        private readonly Dictionary<string, string> _lastResolvedIntentIdByEntity =
-            new Dictionary<string, string>(StringComparer.Ordinal);
+        private readonly Dictionary<EntityHandle, string> _lastResolvedIntentIdByEntity =
+            new Dictionary<EntityHandle, string>();
 
         public CombatOutcomeApplicationSystem(
             ITickSource tickSource,
@@ -101,7 +102,7 @@ namespace Caelmor.Combat
                 EmitEventAfterApply(CombatEvent.CreateIntentResultEvent(
                     authoritativeTick: nowTick,
                     combatContextId: batch.CombatContextId,
-                    subjectEntityId: r.ActorEntityId,
+                    subjectEntity: r.ActorEntity,
                     intentResult: r));
 
                 appliedCount++;
@@ -119,7 +120,7 @@ namespace Caelmor.Combat
                 EmitEventAfterApply(CombatEvent.CreateDamageOutcomeEvent(
                     authoritativeTick: nowTick,
                     combatContextId: batch.CombatContextId,
-                    subjectEntityId: d.TargetEntityId,
+                    subjectEntity: d.TargetEntity,
                     damageOutcome: d));
 
                 appliedCount++;
@@ -137,7 +138,7 @@ namespace Caelmor.Combat
                 EmitEventAfterApply(CombatEvent.CreateMitigationOutcomeEvent(
                     authoritativeTick: nowTick,
                     combatContextId: batch.CombatContextId,
-                    subjectEntityId: m.TargetEntityId,
+                    subjectEntity: m.TargetEntity,
                     mitigationOutcome: m));
 
                 appliedCount++;
@@ -150,19 +151,19 @@ namespace Caelmor.Combat
             {
                 var sc = batch.StateChangesInOrder[i];
 
-                string payloadId = PayloadId.StateChange(sc.EntityId, sc.Kind.ToString());
+                string payloadId = PayloadId.StateChange(sc.Entity.Value, sc.Kind.ToString());
                 if (!appliedSet.Add(payloadId))
                     continue;
 
                 _stateWriter.ApplyStateChange(sc);
 
                 // After mutation, emit state snapshot event reflecting applied state.
-                var state = _stateWriter.GetState(sc.EntityId);
+                var state = _stateWriter.GetState(sc.Entity);
 
                 EmitEventAfterApply(CombatEvent.CreateStateChangeEvent(
                     authoritativeTick: nowTick,
                     combatContextId: batch.CombatContextId,
-                    subjectEntityId: sc.EntityId,
+                    subjectEntity: sc.Entity,
                     stateSnapshot: state));
 
                 appliedCount++;
@@ -196,7 +197,7 @@ namespace Caelmor.Combat
         {
             if (r == null) throw new ArgumentNullException(nameof(r));
             if (string.IsNullOrWhiteSpace(r.IntentId)) throw new InvalidOperationException("IntentResult.intent_id missing.");
-            if (string.IsNullOrWhiteSpace(r.ActorEntityId)) throw new InvalidOperationException("IntentResult.actor_entity_id missing.");
+            if (!r.ActorEntity.IsValid) throw new InvalidOperationException("IntentResult.actor_entity missing.");
 
             // This system applies RESOLVED RESULTS only.
             // "Accepted" at this stage is an upstream contract violation.
@@ -212,19 +213,19 @@ namespace Caelmor.Combat
             // - If entity is CombatActing or CombatDefending AND committed_intent_id matches this intent,
             //   transition back to CombatEngaged (committed cleared).
             // - Otherwise, do not invent transitions; fail-loud if the committed intent mismatches the state.
-            var state = _stateWriter.GetState(r.ActorEntityId);
+            var state = _stateWriter.GetState(r.ActorEntity);
 
             if (state.State == CombatState.CombatActing || state.State == CombatState.CombatDefending)
             {
                 if (!string.Equals(state.CommittedIntentId, r.IntentId, StringComparison.Ordinal))
                     throw new InvalidOperationException(
-                        $"Committed intent mismatch for entity {r.ActorEntityId}. state.committed={state.CommittedIntentId} result.intent={r.IntentId}");
+                        $"Committed intent mismatch for entity {r.ActorEntity.Value}. state.committed={state.CommittedIntentId} result.intent={r.IntentId}");
 
                 // Transition back to engaged (no new combat_context_id invented here).
-                _stateWriter.ApplyStateChange(CombatStateChange.ToEngaged(r.ActorEntityId, state.CombatContextId));
+                _stateWriter.ApplyStateChange(CombatStateChange.ToEngaged(r.ActorEntity, state.CombatContextId));
 
                 // Snapshot-only helper for validation
-                _lastResolvedIntentIdByEntity[r.ActorEntityId] = r.IntentId;
+                _lastResolvedIntentIdByEntity[r.ActorEntity] = r.IntentId;
 
                 return;
             }
@@ -232,7 +233,7 @@ namespace Caelmor.Combat
             // If not Acting/Defending, we do not invent any state mutation here.
             // Resolution may still be meaningful (e.g., movement/interaction outcomes),
             // but those effects are not represented in CombatEntityState schema.
-            _lastResolvedIntentIdByEntity[r.ActorEntityId] = r.IntentId;
+            _lastResolvedIntentIdByEntity[r.ActorEntity] = r.IntentId;
         }
 
         // ---------------------------
@@ -312,9 +313,9 @@ namespace Caelmor.Combat
             for (int i = 0; i < batch.StateChangesInOrder.Count; i++)
             {
                 var sc = batch.StateChangesInOrder[i];
-                string id = PayloadId.StateChange(sc.EntityId, sc.Kind.ToString());
+                string id = PayloadId.StateChange(sc.Entity.Value, sc.Kind.ToString());
                 if (!seen.Add(id))
-                    throw new InvalidOperationException($"Duplicate StateChange payload in batch: {sc.EntityId}:{sc.Kind}");
+                    throw new InvalidOperationException($"Duplicate StateChange payload in batch: {sc.Entity.Value}:{sc.Kind}");
             }
         }
     }
@@ -387,7 +388,7 @@ namespace Caelmor.Combat
         public string CombatContextId { get; }
         public CombatEventType EventType { get; }
 
-        public string? SubjectEntityId { get; }
+        public EntityHandle SubjectEntity { get; }
 
         public IntentResult? IntentResult { get; }
         public DamageOutcome? DamageOutcome { get; }
@@ -399,7 +400,7 @@ namespace Caelmor.Combat
             int authoritativeTick,
             string combatContextId,
             CombatEventType eventType,
-            string? subjectEntityId,
+            EntityHandle subjectEntity,
             IntentResult? intentResult,
             DamageOutcome? damageOutcome,
             MitigationOutcome? mitigationOutcome,
@@ -410,7 +411,7 @@ namespace Caelmor.Combat
             CombatContextId = combatContextId;
             EventType = eventType;
 
-            SubjectEntityId = subjectEntityId;
+            SubjectEntity = subjectEntity;
 
             IntentResult = intentResult;
             DamageOutcome = damageOutcome;
@@ -421,7 +422,7 @@ namespace Caelmor.Combat
         public static CombatEvent CreateIntentResultEvent(
             int authoritativeTick,
             string combatContextId,
-            string? subjectEntityId,
+            EntityHandle subjectEntity,
             IntentResult intentResult)
         {
             if (intentResult == null) throw new ArgumentNullException(nameof(intentResult));
@@ -432,7 +433,7 @@ namespace Caelmor.Combat
                 authoritativeTick,
                 combatContextId,
                 CombatEventType.IntentResult,
-                subjectEntityId,
+                subjectEntity,
                 intentResult,
                 damageOutcome: null,
                 mitigationOutcome: null,
@@ -442,7 +443,7 @@ namespace Caelmor.Combat
         public static CombatEvent CreateDamageOutcomeEvent(
             int authoritativeTick,
             string combatContextId,
-            string? subjectEntityId,
+            EntityHandle subjectEntity,
             DamageOutcome damageOutcome)
         {
             if (damageOutcome == null) throw new ArgumentNullException(nameof(damageOutcome));
@@ -453,7 +454,7 @@ namespace Caelmor.Combat
                 authoritativeTick,
                 combatContextId,
                 CombatEventType.DamageOutcome,
-                subjectEntityId,
+                subjectEntity,
                 intentResult: null,
                 damageOutcome: damageOutcome,
                 mitigationOutcome: null,
@@ -463,7 +464,7 @@ namespace Caelmor.Combat
         public static CombatEvent CreateMitigationOutcomeEvent(
             int authoritativeTick,
             string combatContextId,
-            string? subjectEntityId,
+            EntityHandle subjectEntity,
             MitigationOutcome mitigationOutcome)
         {
             if (mitigationOutcome == null) throw new ArgumentNullException(nameof(mitigationOutcome));
@@ -474,7 +475,7 @@ namespace Caelmor.Combat
                 authoritativeTick,
                 combatContextId,
                 CombatEventType.MitigationOutcome,
-                subjectEntityId,
+                subjectEntity,
                 intentResult: null,
                 damageOutcome: null,
                 mitigationOutcome: mitigationOutcome,
@@ -484,18 +485,18 @@ namespace Caelmor.Combat
         public static CombatEvent CreateStateChangeEvent(
             int authoritativeTick,
             string combatContextId,
-            string? subjectEntityId,
+            EntityHandle subjectEntity,
             CombatEntityState stateSnapshot)
         {
             if (stateSnapshot == null) throw new ArgumentNullException(nameof(stateSnapshot));
 
-            string eventId = DeterministicEventId(authoritativeTick, CombatEventType.StateChange.ToString(), stateSnapshot.EntityId);
+            string eventId = DeterministicEventId(authoritativeTick, CombatEventType.StateChange.ToString(), stateSnapshot.Entity.Value.ToString());
             return new CombatEvent(
                 eventId,
                 authoritativeTick,
                 combatContextId,
                 CombatEventType.StateChange,
-                subjectEntityId,
+                subjectEntity,
                 intentResult: null,
                 damageOutcome: null,
                 mitigationOutcome: null,
@@ -541,7 +542,7 @@ namespace Caelmor.Combat
         public static string IntentResult(string intentId) => $"ir:{intentId}";
         public static string DamageOutcome(string outcomeId) => $"do:{outcomeId}";
         public static string MitigationOutcome(string outcomeId) => $"mo:{outcomeId}";
-        public static string StateChange(string entityId, string kind) => $"sc:{entityId}:{kind}";
+        public static string StateChange(int entityValue, string kind) => $"sc:{entityValue}:{kind}";
     }
 
     // --------------------------------------------------------------------
@@ -555,28 +556,28 @@ namespace Caelmor.Combat
 
     public interface ICombatStateWriter
     {
-        CombatEntityState GetState(string entityId);
+        CombatEntityState GetState(EntityHandle entity);
         void ApplyStateChange(CombatStateChange change);
 
         // Validation hook integration: deterministic world snapshot.
         CombatWorldValidationSnapshot CaptureWorldValidationSnapshot(
             int authoritativeTick,
-            IReadOnlyDictionary<string, string> lastResolvedIntentByEntity);
+            IReadOnlyDictionary<EntityHandle, string> lastResolvedIntentByEntity);
     }
 
     public sealed class DamageOutcome
     {
         public string OutcomeId { get; }
-        public string SourceEntityId { get; }
-        public string TargetEntityId { get; }
+        public EntityHandle SourceEntity { get; }
+        public EntityHandle TargetEntity { get; }
         public string ResolvedIntentId { get; }
         public int DamageAmount { get; }
 
-        public DamageOutcome(string outcomeId, string sourceEntityId, string targetEntityId, string resolvedIntentId, int damageAmount)
+        public DamageOutcome(string outcomeId, EntityHandle sourceEntity, EntityHandle targetEntity, string resolvedIntentId, int damageAmount)
         {
             OutcomeId = outcomeId;
-            SourceEntityId = sourceEntityId;
-            TargetEntityId = targetEntityId;
+            SourceEntity = sourceEntity;
+            TargetEntity = targetEntity;
             ResolvedIntentId = resolvedIntentId;
             DamageAmount = damageAmount;
         }
@@ -585,16 +586,16 @@ namespace Caelmor.Combat
     public sealed class MitigationOutcome
     {
         public string OutcomeId { get; }
-        public string SourceEntityId { get; }
-        public string TargetEntityId { get; }
+        public EntityHandle SourceEntity { get; }
+        public EntityHandle TargetEntity { get; }
         public string ResolvedIntentId { get; }
         public int MitigatedAmount { get; }
 
-        public MitigationOutcome(string outcomeId, string sourceEntityId, string targetEntityId, string resolvedIntentId, int mitigatedAmount)
+        public MitigationOutcome(string outcomeId, EntityHandle sourceEntity, EntityHandle targetEntity, string resolvedIntentId, int mitigatedAmount)
         {
             OutcomeId = outcomeId;
-            SourceEntityId = sourceEntityId;
-            TargetEntityId = targetEntityId;
+            SourceEntity = sourceEntity;
+            TargetEntity = targetEntity;
             ResolvedIntentId = resolvedIntentId;
             MitigatedAmount = mitigatedAmount;
         }
@@ -604,7 +605,7 @@ namespace Caelmor.Combat
     {
         public string IntentId { get; }
         public CombatIntentType IntentType { get; }
-        public string ActorEntityId { get; }
+        public EntityHandle ActorEntity { get; }
         public IntentResultStatus ResultStatus { get; }
         public int AuthoritativeTick { get; }
 
@@ -614,7 +615,7 @@ namespace Caelmor.Combat
         public IntentResult(
             string intentId,
             CombatIntentType intentType,
-            string actorEntityId,
+            EntityHandle actorEntity,
             IntentResultStatus resultStatus,
             int authoritativeTick,
             string? reasonCode = null,
@@ -622,7 +623,7 @@ namespace Caelmor.Combat
         {
             IntentId = intentId;
             IntentType = intentType;
-            ActorEntityId = actorEntityId;
+            ActorEntity = actorEntity;
             ResultStatus = resultStatus;
             AuthoritativeTick = authoritativeTick;
             ReasonCode = reasonCode;
@@ -660,20 +661,20 @@ namespace Caelmor.Combat
 
     public sealed class CombatEntityState
     {
-        public string EntityId { get; }
+        public EntityHandle Entity { get; }
         public CombatState State { get; }
         public string CombatContextId { get; }
         public string? CommittedIntentId { get; }
         public int? StateChangeTick { get; }
 
         public CombatEntityState(
-            string entityId,
+            EntityHandle entity,
             CombatState state,
             string combatContextId,
             string? committedIntentId = null,
             int? stateChangeTick = null)
         {
-            EntityId = entityId;
+            Entity = entity;
             State = state;
             CombatContextId = combatContextId;
             CommittedIntentId = committedIntentId;
@@ -693,21 +694,21 @@ namespace Caelmor.Combat
 
     public sealed class CombatStateChange
     {
-        public string EntityId { get; }
+        public EntityHandle Entity { get; }
         public CombatStateChangeKind Kind { get; }
         public string? CombatContextId { get; }
         public string? CommittedIntentId { get; }
 
-        private CombatStateChange(string entityId, CombatStateChangeKind kind, string? combatContextId, string? committedIntentId)
+        private CombatStateChange(EntityHandle entity, CombatStateChangeKind kind, string? combatContextId, string? committedIntentId)
         {
-            EntityId = entityId;
+            Entity = entity;
             Kind = kind;
             CombatContextId = combatContextId;
             CommittedIntentId = committedIntentId;
         }
 
-        public static CombatStateChange ToEngaged(string entityId, string combatContextId)
-            => new CombatStateChange(entityId, CombatStateChangeKind.ToEngaged, combatContextId, committedIntentId: null);
+        public static CombatStateChange ToEngaged(EntityHandle entity, string combatContextId)
+            => new CombatStateChange(entity, CombatStateChangeKind.ToEngaged, combatContextId, committedIntentId: null);
     }
 
     public sealed class CombatWorldValidationSnapshot
@@ -729,20 +730,20 @@ namespace Caelmor.Combat
 
     public sealed class CombatEntityValidationSnapshot
     {
-        public string EntityId { get; }
+        public EntityHandle Entity { get; }
         public CombatState State { get; }
         public string CombatContextId { get; }
         public string? CommittedIntentId { get; }
         public string? LastResolvedIntentId { get; }
 
         public CombatEntityValidationSnapshot(
-            string entityId,
+            EntityHandle entity,
             CombatState state,
             string combatContextId,
             string? committedIntentId = null,
             string? lastResolvedIntentId = null)
         {
-            EntityId = entityId;
+            Entity = entity;
             State = state;
             CombatContextId = combatContextId;
             CommittedIntentId = committedIntentId;

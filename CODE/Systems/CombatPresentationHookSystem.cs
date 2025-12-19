@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using Caelmor.Runtime.Tick;
 
 namespace Caelmor.Combat.Client
 {
@@ -118,7 +119,7 @@ namespace Caelmor.Combat.Client
                     eventId: payload.EventId,
                     authoritativeTick: payload.AuthoritativeTick,
                     combatContextId: payload.CombatContextId,
-                    actorEntityId: ir.ActorEntityId,
+                    actorEntity: ir.ActorEntity,
                     intentType: ir.IntentType,
                     status: ir.ResultStatus));
             });
@@ -130,7 +131,7 @@ namespace Caelmor.Combat.Client
                     eventId: payload.EventId,
                     authoritativeTick: payload.AuthoritativeTick,
                     combatContextId: payload.CombatContextId,
-                    subjectEntityId: ir.ActorEntityId,
+                    subjectEntity: ir.ActorEntity,
                     trigger: AnimationTrigger.FromIntentResult(ir.IntentType, ir.ResultStatus)));
             });
 
@@ -141,7 +142,7 @@ namespace Caelmor.Combat.Client
                     eventId: payload.EventId,
                     authoritativeTick: payload.AuthoritativeTick,
                     combatContextId: payload.CombatContextId,
-                    subjectEntityId: ir.ActorEntityId,
+                    subjectEntity: ir.ActorEntity,
                     cue: AudioCue.FromIntentResult(ir.IntentType, ir.ResultStatus)));
             });
         }
@@ -162,8 +163,8 @@ namespace Caelmor.Combat.Client
                     eventId: payload.EventId,
                     authoritativeTick: payload.AuthoritativeTick,
                     combatContextId: payload.CombatContextId,
-                    sourceEntityId: d.SourceEntityId,
-                    targetEntityId: d.TargetEntityId,
+                    sourceEntity: d.SourceEntity,
+                    targetEntity: d.TargetEntity,
                     effect: VfxEffect.DamageImpact));
             });
 
@@ -174,7 +175,7 @@ namespace Caelmor.Combat.Client
                     eventId: payload.EventId,
                     authoritativeTick: payload.AuthoritativeTick,
                     combatContextId: payload.CombatContextId,
-                    targetEntityId: d.TargetEntityId));
+                    targetEntity: d.TargetEntity));
             });
 
             // 3) Audio cue (non-blocking)
@@ -184,7 +185,7 @@ namespace Caelmor.Combat.Client
                     eventId: payload.EventId,
                     authoritativeTick: payload.AuthoritativeTick,
                     combatContextId: payload.CombatContextId,
-                    subjectEntityId: d.TargetEntityId,
+                    subjectEntity: d.TargetEntity,
                     cue: AudioCue.DamageHit));
             });
         }
@@ -205,8 +206,8 @@ namespace Caelmor.Combat.Client
                     eventId: payload.EventId,
                     authoritativeTick: payload.AuthoritativeTick,
                     combatContextId: payload.CombatContextId,
-                    sourceEntityId: m.SourceEntityId,
-                    targetEntityId: m.TargetEntityId,
+                    sourceEntity: m.SourceEntity,
+                    targetEntity: m.TargetEntity,
                     effect: VfxEffect.MitigationFlash));
             });
 
@@ -217,7 +218,7 @@ namespace Caelmor.Combat.Client
                     eventId: payload.EventId,
                     authoritativeTick: payload.AuthoritativeTick,
                     combatContextId: payload.CombatContextId,
-                    subjectEntityId: m.TargetEntityId,
+                    subjectEntity: m.TargetEntity,
                     cue: AudioCue.Mitigation));
             });
         }
@@ -238,7 +239,7 @@ namespace Caelmor.Combat.Client
                     eventId: payload.EventId,
                     authoritativeTick: payload.AuthoritativeTick,
                     combatContextId: payload.CombatContextId,
-                    subjectEntityId: s.EntityId,
+                    subjectEntity: s.Entity,
                     state: s.State));
             });
 
@@ -249,7 +250,7 @@ namespace Caelmor.Combat.Client
                     eventId: payload.EventId,
                     authoritativeTick: payload.AuthoritativeTick,
                     combatContextId: payload.CombatContextId,
-                    subjectEntityId: s.EntityId,
+                    subjectEntity: s.Entity,
                     state: s.State));
             });
         }
@@ -326,15 +327,15 @@ namespace Caelmor.Combat.Client
         public string EventId { get; }
         public int AuthoritativeTick { get; }
         public string CombatContextId { get; }
-        public string SubjectEntityId { get; }
+        public EntityHandle SubjectEntity { get; }
         public AnimationTrigger Trigger { get; }
 
-        public AnimationTriggerHook(string eventId, int authoritativeTick, string combatContextId, string subjectEntityId, AnimationTrigger trigger)
+        public AnimationTriggerHook(string eventId, int authoritativeTick, string combatContextId, EntityHandle subjectEntity, AnimationTrigger trigger)
         {
             EventId = eventId;
             AuthoritativeTick = authoritativeTick;
             CombatContextId = combatContextId;
-            SubjectEntityId = subjectEntityId;
+            SubjectEntity = subjectEntity;
             Trigger = trigger;
         }
     }
@@ -344,15 +345,15 @@ namespace Caelmor.Combat.Client
         public string EventId { get; }
         public int AuthoritativeTick { get; }
         public string CombatContextId { get; }
-        public string SubjectEntityId { get; }
+        public EntityHandle SubjectEntity { get; }
         public CombatState State { get; }
 
-        public AnimationStateHook(string eventId, int authoritativeTick, string combatContextId, string subjectEntityId, CombatState state)
+        public AnimationStateHook(string eventId, int authoritativeTick, string combatContextId, EntityHandle subjectEntity, CombatState state)
         {
             EventId = eventId;
             AuthoritativeTick = authoritativeTick;
             CombatContextId = combatContextId;
-            SubjectEntityId = subjectEntityId;
+            SubjectEntity = subjectEntity;
             State = state;
         }
     }
@@ -362,17 +363,17 @@ namespace Caelmor.Combat.Client
         public string EventId { get; }
         public int AuthoritativeTick { get; }
         public string CombatContextId { get; }
-        public string SourceEntityId { get; }
-        public string TargetEntityId { get; }
+        public EntityHandle SourceEntity { get; }
+        public EntityHandle TargetEntity { get; }
         public VfxEffect Effect { get; }
 
-        public VfxSpawnHook(string eventId, int authoritativeTick, string combatContextId, string sourceEntityId, string targetEntityId, VfxEffect effect)
+        public VfxSpawnHook(string eventId, int authoritativeTick, string combatContextId, EntityHandle sourceEntity, EntityHandle targetEntity, VfxEffect effect)
         {
             EventId = eventId;
             AuthoritativeTick = authoritativeTick;
             CombatContextId = combatContextId;
-            SourceEntityId = sourceEntityId;
-            TargetEntityId = targetEntityId;
+            SourceEntity = sourceEntity;
+            TargetEntity = targetEntity;
             Effect = effect;
         }
     }
@@ -382,15 +383,15 @@ namespace Caelmor.Combat.Client
         public string EventId { get; }
         public int AuthoritativeTick { get; }
         public string CombatContextId { get; }
-        public string SubjectEntityId { get; }
+        public EntityHandle SubjectEntity { get; }
         public AudioCue Cue { get; }
 
-        public AudioCueHook(string eventId, int authoritativeTick, string combatContextId, string subjectEntityId, AudioCue cue)
+        public AudioCueHook(string eventId, int authoritativeTick, string combatContextId, EntityHandle subjectEntity, AudioCue cue)
         {
             EventId = eventId;
             AuthoritativeTick = authoritativeTick;
             CombatContextId = combatContextId;
-            SubjectEntityId = subjectEntityId;
+            SubjectEntity = subjectEntity;
             Cue = cue;
         }
     }
@@ -400,16 +401,16 @@ namespace Caelmor.Combat.Client
         public string EventId { get; }
         public int AuthoritativeTick { get; }
         public string CombatContextId { get; }
-        public string ActorEntityId { get; }
+        public EntityHandle ActorEntity { get; }
         public CombatIntentType IntentType { get; }
         public IntentResultStatus Status { get; }
 
-        public UiIntentResultHook(string eventId, int authoritativeTick, string combatContextId, string actorEntityId, CombatIntentType intentType, IntentResultStatus status)
+        public UiIntentResultHook(string eventId, int authoritativeTick, string combatContextId, EntityHandle actorEntity, CombatIntentType intentType, IntentResultStatus status)
         {
             EventId = eventId;
             AuthoritativeTick = authoritativeTick;
             CombatContextId = combatContextId;
-            ActorEntityId = actorEntityId;
+            ActorEntity = actorEntity;
             IntentType = intentType;
             Status = status;
         }
@@ -420,14 +421,14 @@ namespace Caelmor.Combat.Client
         public string EventId { get; }
         public int AuthoritativeTick { get; }
         public string CombatContextId { get; }
-        public string TargetEntityId { get; }
+        public EntityHandle TargetEntity { get; }
 
-        public UiDamageNumberHook(string eventId, int authoritativeTick, string combatContextId, string targetEntityId)
+        public UiDamageNumberHook(string eventId, int authoritativeTick, string combatContextId, EntityHandle targetEntity)
         {
             EventId = eventId;
             AuthoritativeTick = authoritativeTick;
             CombatContextId = combatContextId;
-            TargetEntityId = targetEntityId;
+            TargetEntity = targetEntity;
         }
     }
 
@@ -436,15 +437,15 @@ namespace Caelmor.Combat.Client
         public string EventId { get; }
         public int AuthoritativeTick { get; }
         public string CombatContextId { get; }
-        public string SubjectEntityId { get; }
+        public EntityHandle SubjectEntity { get; }
         public CombatState State { get; }
 
-        public UiCombatStateHook(string eventId, int authoritativeTick, string combatContextId, string subjectEntityId, CombatState state)
+        public UiCombatStateHook(string eventId, int authoritativeTick, string combatContextId, EntityHandle subjectEntity, CombatState state)
         {
             EventId = eventId;
             AuthoritativeTick = authoritativeTick;
             CombatContextId = combatContextId;
-            SubjectEntityId = subjectEntityId;
+            SubjectEntity = subjectEntity;
             State = state;
         }
     }
@@ -528,7 +529,7 @@ namespace Caelmor.Combat.Client
         public string CombatContextId { get; }
         public CombatEventType EventType { get; }
 
-        public string? SubjectEntityId { get; }
+        public EntityHandle SubjectEntity { get; }
 
         public IntentResult? IntentResult { get; }
         public DamageOutcome? DamageOutcome { get; }
@@ -540,7 +541,7 @@ namespace Caelmor.Combat.Client
             int authoritativeTick,
             string combatContextId,
             CombatEventType eventType,
-            string? subjectEntityId,
+            EntityHandle subjectEntity,
             IntentResult? intentResult,
             DamageOutcome? damageOutcome,
             MitigationOutcome? mitigationOutcome,
@@ -550,7 +551,7 @@ namespace Caelmor.Combat.Client
             AuthoritativeTick = authoritativeTick;
             CombatContextId = combatContextId;
             EventType = eventType;
-            SubjectEntityId = subjectEntityId;
+            SubjectEntity = subjectEntity;
             IntentResult = intentResult;
             DamageOutcome = damageOutcome;
             MitigationOutcome = mitigationOutcome;
@@ -570,14 +571,14 @@ namespace Caelmor.Combat.Client
     {
         public string IntentId { get; }
         public CombatIntentType IntentType { get; }
-        public string ActorEntityId { get; }
+        public EntityHandle ActorEntity { get; }
         public IntentResultStatus ResultStatus { get; }
 
-        public IntentResult(string intentId, CombatIntentType intentType, string actorEntityId, IntentResultStatus resultStatus)
+        public IntentResult(string intentId, CombatIntentType intentType, EntityHandle actorEntity, IntentResultStatus resultStatus)
         {
             IntentId = intentId;
             IntentType = intentType;
-            ActorEntityId = actorEntityId;
+            ActorEntity = actorEntity;
             ResultStatus = resultStatus;
         }
     }
@@ -602,36 +603,36 @@ namespace Caelmor.Combat.Client
 
     public sealed class DamageOutcome
     {
-        public string SourceEntityId { get; }
-        public string TargetEntityId { get; }
+        public EntityHandle SourceEntity { get; }
+        public EntityHandle TargetEntity { get; }
 
-        public DamageOutcome(string sourceEntityId, string targetEntityId)
+        public DamageOutcome(EntityHandle sourceEntity, EntityHandle targetEntity)
         {
-            SourceEntityId = sourceEntityId;
-            TargetEntityId = targetEntityId;
+            SourceEntity = sourceEntity;
+            TargetEntity = targetEntity;
         }
     }
 
     public sealed class MitigationOutcome
     {
-        public string SourceEntityId { get; }
-        public string TargetEntityId { get; }
+        public EntityHandle SourceEntity { get; }
+        public EntityHandle TargetEntity { get; }
 
-        public MitigationOutcome(string sourceEntityId, string targetEntityId)
+        public MitigationOutcome(EntityHandle sourceEntity, EntityHandle targetEntity)
         {
-            SourceEntityId = sourceEntityId;
-            TargetEntityId = targetEntityId;
+            SourceEntity = sourceEntity;
+            TargetEntity = targetEntity;
         }
     }
 
     public sealed class CombatEntityState
     {
-        public string EntityId { get; }
+        public EntityHandle Entity { get; }
         public CombatState State { get; }
 
-        public CombatEntityState(string entityId, CombatState state)
+        public CombatEntityState(EntityHandle entity, CombatState state)
         {
-            EntityId = entityId;
+            Entity = entity;
             State = state;
         }
     }
