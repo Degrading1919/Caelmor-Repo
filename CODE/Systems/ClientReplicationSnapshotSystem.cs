@@ -90,7 +90,8 @@ namespace Caelmor.Runtime.Replication
 
         public void OnSessionDisconnected(SessionId sessionId)
         {
-            TickThreadAssert.AssertTickThread();
+            // DEBUG guardrail: snapshot lifecycle management must remain on the authoritative tick thread.
+            RuntimeGuardrailChecks.AssertTickThreadEntry();
 
             if (sessionId.Equals(default))
                 return;
@@ -107,7 +108,8 @@ namespace Caelmor.Runtime.Replication
 
         public void OnPreTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
         {
-            TickThreadAssert.AssertTickThread();
+            // DEBUG guardrail: snapshot build entrypoint must remain on the authoritative tick thread.
+            RuntimeGuardrailChecks.AssertTickThreadEntry();
 
             // Guard against mid-tick snapshot generation.
             _tickInProgress = context.TickIndex;
@@ -116,7 +118,8 @@ namespace Caelmor.Runtime.Replication
 
         public void OnPostTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
         {
-            TickThreadAssert.AssertTickThread();
+            // DEBUG guardrail: snapshot build entrypoint must remain on the authoritative tick thread.
+            RuntimeGuardrailChecks.AssertTickThreadEntry();
 
             _tickInProgress = context.TickIndex;
             _postTickPhaseActive = true;
@@ -155,7 +158,8 @@ namespace Caelmor.Runtime.Replication
             long authoritativeTick,
             IReadOnlyList<EntityHandle> eligibleEntities)
         {
-            TickThreadAssert.AssertTickThread();
+            // DEBUG guardrail: snapshot capture must run on the authoritative tick thread.
+            RuntimeGuardrailChecks.AssertTickThreadEntry();
 
             if (!_postTickPhaseActive || !_tickInProgress.HasValue || _tickInProgress.Value != authoritativeTick)
                 throw new InvalidOperationException("Snapshots can only be captured during post-tick finalization.");
