@@ -9,10 +9,11 @@ namespace Caelmor.Runtime.Sessions
     /// Minimal authoritative command handler that mutates per-session command counters.
     /// Proof-of-life only; no gameplay logic.
     /// </summary>
-    public sealed class SessionCommandCounterHandler : IAuthoritativeCommandHandler
+    public sealed class SessionCommandCounterHandler : IAuthoritativeStateMutatingCommandHandler
     {
         private readonly PlayerSessionSystem _sessions;
         private long _mutationsObserved;
+        private long _invocations;
 
         public SessionCommandCounterHandler(PlayerSessionSystem sessions)
         {
@@ -20,10 +21,12 @@ namespace Caelmor.Runtime.Sessions
         }
 
         public long MutationsObserved => _mutationsObserved;
+        public long Invocations => _invocations;
 
         public void Handle(in AuthoritativeCommand command, SessionId sessionId, SimulationTickContext context)
         {
             TickThreadAssert.AssertTickThread();
+            _invocations++;
 
             if (_sessions.TryRecordCommandHandled(sessionId, command.DeterministicSequence))
                 _mutationsObserved++;

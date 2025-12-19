@@ -5,6 +5,7 @@ using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.Persistence;
 using Caelmor.Runtime.Replication;
 using Caelmor.Runtime.Sessions;
+using Caelmor.Runtime.Transport;
 using Caelmor.Systems;
 
 namespace Caelmor.Runtime.Host
@@ -16,6 +17,7 @@ namespace Caelmor.Runtime.Host
     {
         private const string PersistenceModeEnvKey = "CAELMOR_PERSISTENCE";
         private const string PersistenceWriterEnvKey = "CAELMOR_PERSISTENCE_WRITER";
+        private const string SessionCommandCountCommandTypeName = "validation.session_command_count";
 
         public static int Main(string[] args)
         {
@@ -114,11 +116,13 @@ namespace Caelmor.Runtime.Host
             var handoff = new OnboardingHandoffService(controlChannel);
             var stateReader = new NullReplicationStateReader();
             var outboundSender = NullOutboundTransportSender.Instance;
+            var commandHandlers = new CommandHandlerRegistry();
+            RegisterRuntimeCommandHandlers(commandHandlers, sessionSystem);
 
             settings = new RuntimeCompositionSettings(sessionSystem, handoff, snapshotEligibility, stateReader, outboundSender)
             {
                 ActiveSessions = activeSessions,
-                ConfigureCommandHandlers = RegisterNoOpCommandHandlers
+                CommandHandlers = commandHandlers
             };
 
             var persistenceMode = ResolvePersistenceMode(args);
@@ -131,10 +135,15 @@ namespace Caelmor.Runtime.Host
             return true;
         }
 
-        private static void RegisterNoOpCommandHandlers(CommandHandlerRegistry registry)
+        private static void RegisterRuntimeCommandHandlers(CommandHandlerRegistry registry, ActiveSessionIndexedPlayerSessionSystem sessionSystem)
         {
             if (registry == null) throw new ArgumentNullException(nameof(registry));
+            if (sessionSystem == null) throw new ArgumentNullException(nameof(sessionSystem));
+
             registry.Register(1, new NoOpCommandHandler());
+
+            var commandType = PooledTransportRouter.ComputeStableCommandType(SessionCommandCountCommandTypeName);
+            registry.Register(commandType, new SessionCommandCounterHandler(sessionSystem.Inner));
         }
 
         private static PersistenceMode ResolvePersistenceMode(string[] args)

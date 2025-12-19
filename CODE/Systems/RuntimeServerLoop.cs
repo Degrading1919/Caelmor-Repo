@@ -234,6 +234,8 @@ namespace Caelmor.Runtime.Host
 #if DEBUG
                 if (_commandConsumeHook.HandlerCount <= 0)
                     throw new InvalidOperationException("AuthoritativeCommandConsumeTickHook missing handler registration.");
+                if (_commandConsumeHook.MutatingHandlerCount <= 0)
+                    throw new InvalidOperationException("AuthoritativeCommandConsumeTickHook missing mutating handler registration.");
 #endif
                 ValidatePipelineWiring();
 
