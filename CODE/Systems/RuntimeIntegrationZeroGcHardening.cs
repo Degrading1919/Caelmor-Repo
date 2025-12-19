@@ -2,6 +2,7 @@ using System;
 using System.Buffers;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using System.Buffers.Binary;
@@ -33,8 +34,6 @@ namespace Caelmor.Runtime.Integration
 
         private SessionId[] _sessionKeySnapshot = Array.Empty<SessionId>();
         private SessionCommandMetricsSnapshot[] _metricsBuffer = Array.Empty<SessionCommandMetricsSnapshot>();
-        private long _nextSequence;
-
 #if DEBUG
         private int _maxCommandsPerSession;
 #endif
@@ -65,9 +64,8 @@ namespace Caelmor.Runtime.Integration
                     return false;
                 }
 
-                var enriched = command.WithSequence(Interlocked.Increment(ref _nextSequence));
                 // Deterministic overflow policy: reject the newest command when the ring is full.
-                var success = state.Ring.TryPush(enriched);
+                var success = state.Ring.TryPush(command);
 
                 if (!success)
                 {
@@ -167,7 +165,6 @@ namespace Caelmor.Runtime.Integration
 
                 _perSession.Clear();
                 _metrics.Clear();
-                _nextSequence = 0;
             }
         }
 
@@ -453,7 +450,7 @@ namespace Caelmor.Runtime.Integration
         private readonly PooledTransportRouter _transport;
         private readonly AuthoritativeCommandIngestor _ingestor;
         private readonly IActiveSessionIndex? _activeSessions;
-        private readonly CommandEnvelope[] _ingressBuffer;
+        private readonly ServerStampedInboundCommand[] _ingressBuffer;
         private readonly int _maxFramesPerTick;
         private readonly int _maxCommandsPerTick;
 
@@ -461,6 +458,12 @@ namespace Caelmor.Runtime.Integration
         private long _framesRouted;
         private long _commandsEnqueued;
         private long _commandsRejected;
+        private long _rejectedClientTickProvided;
+        private long _rejectedTooOld;
+        private long _rejectedTooFarFuture;
+        private long _acceptedStampedInbound;
+        private readonly int _maxInboundAgeTicks;
+        private readonly int _maxInboundLeadTicks;
 
         public InboundPumpTickHook(
             PooledTransportRouter transport,
@@ -476,36 +479,71 @@ namespace Caelmor.Runtime.Integration
             var config = _transport.Config;
             _maxFramesPerTick = maxFramesPerTick > 0 ? maxFramesPerTick : config.MaxInboundCommandsPerSession;
             _maxCommandsPerTick = maxCommandsPerTick > 0 ? maxCommandsPerTick : config.MaxInboundCommandsPerSession;
+            _maxInboundAgeTicks = Math.Max(0, config.MaxInboundCommandAgeTicks);
+            _maxInboundLeadTicks = Math.Max(0, config.MaxInboundCommandLeadTicks);
 
             if (_maxCommandsPerTick <= 0)
                 _maxCommandsPerTick = 1;
 
-            _ingressBuffer = new CommandEnvelope[_maxCommandsPerTick];
+            _ingressBuffer = new ServerStampedInboundCommand[_maxCommandsPerTick];
         }
 
-        public InboundPumpDiagnostics Diagnostics => new InboundPumpDiagnostics(_ticksExecuted, _framesRouted, _commandsEnqueued, _commandsRejected);
+        public InboundPumpDiagnostics Diagnostics => new InboundPumpDiagnostics(
+            _ticksExecuted,
+            _framesRouted,
+            _commandsEnqueued,
+            _commandsRejected,
+            _acceptedStampedInbound,
+            _rejectedClientTickProvided,
+            _rejectedTooOld,
+            _rejectedTooFarFuture);
 
         public void OnPreTick(SimulationTickContext context, IReadOnlyList<EntityHandle> eligibleEntities)
         {
             TickThreadAssert.AssertTickThread();
 
             _ticksExecuted++;
-            _framesRouted += _transport.RouteQueuedInbound(_maxFramesPerTick);
+            _framesRouted += _transport.RouteQueuedInbound(context.TickIndex, _maxFramesPerTick);
 
             int drained = _transport.DeterministicRouter.DrainIngressDeterministic(_ingressBuffer, _maxCommandsPerTick);
             for (int i = 0; i < drained; i++)
             {
                 var envelope = _ingressBuffer[i];
 
-                var command = DecodeCommand(envelope, context.TickIndex);
+                Debug.Assert(envelope.ServerReceiveSeq > 0, "Inbound commands must be stamped with a server receive sequence.");
+                Debug.Assert(envelope.ServerReceiveTick >= 0, "Inbound commands must be stamped with a valid server receive tick.");
+
+                if (envelope.ClientSubmitTick > 0)
+                {
+                    _rejectedClientTickProvided++;
+                    envelope.Dispose();
+                    _ingressBuffer[i] = default;
+                    continue;
+                }
+
+                if (IsTooOld(envelope.ServerReceiveTick, context.TickIndex))
+                {
+                    _rejectedTooOld++;
+                    envelope.Dispose();
+                    _ingressBuffer[i] = default;
+                    continue;
+                }
+
+                if (IsTooFarFuture(envelope.ServerReceiveTick, context.TickIndex))
+                {
+                    _rejectedTooFarFuture++;
+                    envelope.Dispose();
+                    _ingressBuffer[i] = default;
+                    continue;
+                }
+
+                _acceptedStampedInbound++;
+
+                var command = DecodeCommand(envelope);
                 if (_ingestor.TryEnqueue(envelope.SessionId, command))
-                {
                     _commandsEnqueued++;
-                }
                 else
-                {
                     _commandsRejected++;
-                }
 
                 envelope.Dispose();
                 _ingressBuffer[i] = default;
@@ -535,7 +573,7 @@ namespace Caelmor.Runtime.Integration
             }
         }
 
-        private static AuthoritativeCommand DecodeCommand(in CommandEnvelope envelope, long tickIndex)
+        private static AuthoritativeCommand DecodeCommand(in ServerStampedInboundCommand envelope)
         {
             var payloadLength = envelope.Payload.Length;
             var payloadSpan = envelope.Payload.Buffer.AsSpan(0, payloadLength);
@@ -548,41 +586,56 @@ namespace Caelmor.Runtime.Integration
                 ? BinaryPrimitives.ReadInt32LittleEndian(payloadSpan.Slice(sizeof(int)))
                 : payloadLength;
 
-            long authoritativeTick = envelope.SubmitTick > 0 ? envelope.SubmitTick : tickIndex;
-            int commandType = ComputeStableCommandType(envelope.CommandType);
-
-            return new AuthoritativeCommand(authoritativeTick, commandType, payloadA, payloadB, envelope.DeterministicSequence);
+            return new AuthoritativeCommand(envelope.ServerReceiveTick, envelope.CommandType, payloadA, payloadB, envelope.ServerReceiveSeq);
         }
 
-        private static int ComputeStableCommandType(string commandType)
+        private bool IsTooOld(long serverReceiveTick, long currentTick)
         {
-            if (string.IsNullOrEmpty(commandType))
-                return 0;
+            if (_maxInboundAgeTicks <= 0)
+                return false;
 
-            unchecked
-            {
-                int hash = 17;
-                for (int i = 0; i < commandType.Length; i++)
-                    hash = (hash * 31) + commandType[i];
-                return hash;
-            }
+            return serverReceiveTick < currentTick - _maxInboundAgeTicks;
+        }
+
+        private bool IsTooFarFuture(long serverReceiveTick, long currentTick)
+        {
+            if (_maxInboundLeadTicks <= 0)
+                return serverReceiveTick > currentTick;
+
+            return serverReceiveTick > currentTick + _maxInboundLeadTicks;
         }
     }
 
     public readonly struct InboundPumpDiagnostics
     {
-        public InboundPumpDiagnostics(long ticksExecuted, long framesRouted, long commandsEnqueued, long commandsRejected)
+        public InboundPumpDiagnostics(
+            long ticksExecuted,
+            long framesRouted,
+            long commandsEnqueued,
+            long commandsRejected,
+            long acceptedStampedInbound,
+            long rejectedClientTickProvided,
+            long rejectedTooOld,
+            long rejectedTooFarFuture)
         {
             InboundPumpTicksExecuted = ticksExecuted;
             InboundFramesRouted = framesRouted;
             CommandsEnqueuedToIngestor = commandsEnqueued;
             CommandsRejectedByIngestor = commandsRejected;
+            AcceptedStampedInbound = acceptedStampedInbound;
+            RejectedClientTickProvided = rejectedClientTickProvided;
+            RejectedTooOld = rejectedTooOld;
+            RejectedTooFarFuture = rejectedTooFarFuture;
         }
 
         public long InboundPumpTicksExecuted { get; }
         public long InboundFramesRouted { get; }
         public long CommandsEnqueuedToIngestor { get; }
         public long CommandsRejectedByIngestor { get; }
+        public long AcceptedStampedInbound { get; }
+        public long RejectedClientTickProvided { get; }
+        public long RejectedTooOld { get; }
+        public long RejectedTooFarFuture { get; }
     }
 
     public readonly struct CommandIngestorDiagnostics

@@ -44,7 +44,7 @@ namespace Caelmor.Validation.Transport
                 BinaryPrimitives.WriteInt32LittleEndian(payload.Slice(0, sizeof(int)), 42);
                 BinaryPrimitives.WriteInt32LittleEndian(payload.Slice(sizeof(int)), 99);
 
-                transport.EnqueueInbound(session, payload, commandType: "validation", submitTick: 1);
+                transport.EnqueueInbound(session, payload, commandType: "validation", submitTick: 0);
 
                 core.ExecuteSingleTick();
                 core.ExecuteSingleTick();

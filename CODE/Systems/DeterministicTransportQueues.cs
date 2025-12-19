@@ -85,30 +85,23 @@ namespace Caelmor.Runtime.Transport
     public sealed class AuthoritativeCommandIngress
     {
         private readonly RuntimeBackpressureConfig _config;
-        private readonly Dictionary<SessionId, Queue<CommandEnvelope>> _queues = new Dictionary<SessionId, Queue<CommandEnvelope>>();
+        private readonly Dictionary<SessionId, Queue<ServerStampedInboundCommand>> _queues = new Dictionary<SessionId, Queue<ServerStampedInboundCommand>>();
         private readonly Dictionary<SessionId, SessionQueueMetrics> _metrics = new Dictionary<SessionId, SessionQueueMetrics>();
         private readonly Dictionary<SessionId, int> _bytesBySession = new Dictionary<SessionId, int>();
         private SessionId[] _snapshotKeys = Array.Empty<SessionId>();
         private SessionQueueMetricsSnapshot[] _snapshotBuffer = Array.Empty<SessionQueueMetricsSnapshot>();
-        private long _nextSequence;
 
         public AuthoritativeCommandIngress(RuntimeBackpressureConfig config)
         {
             _config = config ?? throw new ArgumentNullException(nameof(config));
         }
 
-        public CommandIngressResult TryEnqueue(SessionId sessionId, ReadOnlySpan<byte> payload, string commandType, long submitTick)
+        public CommandIngressResult TryEnqueue(in ServerStampedInboundCommand command)
         {
-            var pooled = PooledPayloadLease.Rent(payload);
-            return TryEnqueue(sessionId, pooled, commandType, submitTick);
+            return EnqueueInternal(command);
         }
 
-        public CommandIngressResult TryEnqueue(SessionId sessionId, PooledPayloadLease payload, string commandType, long submitTick)
-        {
-            return EnqueueInternal(sessionId, payload, commandType, submitTick);
-        }
-
-        public int DrainDeterministic(Span<CommandEnvelope> destination, int maxCommands)
+        public int DrainDeterministic(Span<ServerStampedInboundCommand> destination, int maxCommands)
         {
             if (maxCommands <= 0 || destination.Length == 0)
                 return 0;
@@ -130,6 +123,7 @@ namespace Caelmor.Runtime.Transport
             {
                 bool found = false;
                 SessionId selectedSession = default;
+                long bestTick = long.MaxValue;
                 long bestSequence = long.MaxValue;
 
                 for (int i = 0; i < index; i++)
@@ -139,12 +133,15 @@ namespace Caelmor.Runtime.Transport
                         continue;
 
                     var candidate = queue.Peek();
-                    var sequence = candidate.DeterministicSequence;
+                    var sequence = candidate.ServerReceiveSeq;
+                    var tick = candidate.ServerReceiveTick;
 
-                    if (!found || sequence < bestSequence ||
-                        (sequence == bestSequence && SessionIdValueComparer.Instance.Compare(sessionId, selectedSession) < 0))
+                    if (!found || tick < bestTick ||
+                        (tick == bestTick && (sequence < bestSequence ||
+                        (sequence == bestSequence && SessionIdValueComparer.Instance.Compare(sessionId, selectedSession) < 0))))
                     {
                         found = true;
+                        bestTick = tick;
                         bestSequence = sequence;
                         selectedSession = sessionId;
                     }
@@ -162,8 +159,10 @@ namespace Caelmor.Runtime.Transport
             return written;
         }
 
-        private CommandIngressResult EnqueueInternal(SessionId sessionId, PooledPayloadLease payload, string commandType, long submitTick)
+        private CommandIngressResult EnqueueInternal(in ServerStampedInboundCommand command)
         {
+            var sessionId = command.SessionId;
+            var payload = command.Payload;
             if (sessionId.Equals(default(SessionId)))
             {
                 payload.Dispose();
@@ -174,7 +173,7 @@ namespace Caelmor.Runtime.Transport
 
             if (!_queues.TryGetValue(sessionId, out var queue))
             {
-                queue = new Queue<CommandEnvelope>();
+                queue = new Queue<ServerStampedInboundCommand>();
                 _queues[sessionId] = queue;
             }
 
@@ -197,9 +196,7 @@ namespace Caelmor.Runtime.Transport
                 return CommandIngressResult.Rejected(CommandRejectionReason.BackpressureLimitHit);
             }
 
-            long sequence = ++_nextSequence;
-            var envelope = new CommandEnvelope(sessionId, submitTick, sequence, commandType ?? string.Empty, payload);
-            queue.Enqueue(envelope);
+            queue.Enqueue(command);
             var updatedBytes = currentBytes + payloadSize;
             _bytesBySession[sessionId] = updatedBytes;
 
@@ -209,10 +206,10 @@ namespace Caelmor.Runtime.Transport
             metrics.PeakBytes = Math.Max(metrics.PeakBytes, updatedBytes);
             _metrics[sessionId] = metrics;
 
-            return CommandIngressResult.Accepted(sequence);
+            return CommandIngressResult.Accepted(command.ServerReceiveSeq);
         }
 
-        public bool TryDequeue(SessionId sessionId, out CommandEnvelope envelope)
+        public bool TryDequeue(SessionId sessionId, out ServerStampedInboundCommand envelope)
         {
             envelope = default;
             if (!_queues.TryGetValue(sessionId, out var queue) || queue.Count == 0)
@@ -290,7 +287,6 @@ namespace Caelmor.Runtime.Transport
             _queues.Clear();
             _metrics.Clear();
             _bytesBySession.Clear();
-            _nextSequence = 0;
         }
 
         public CommandIngressMetrics SnapshotMetrics()
@@ -351,20 +347,22 @@ namespace Caelmor.Runtime.Transport
     /// Command envelope handed to authoritative consumers. Ownership: caller must Dispose to return
     /// the payload buffer. Dispose is idempotent through the underlying lease.
     /// </summary>
-    public readonly struct CommandEnvelope : IDisposable
+    public readonly struct ServerStampedInboundCommand : IDisposable
     {
         public readonly SessionId SessionId;
-        public readonly long SubmitTick;
-        public readonly long DeterministicSequence;
-        public readonly string CommandType;
+        public readonly long ServerReceiveTick;
+        public readonly long ServerReceiveSeq;
+        public readonly int CommandType;
+        public readonly long ClientSubmitTick;
         public readonly PooledPayloadLease Payload;
 
-        public CommandEnvelope(SessionId sessionId, long submitTick, long deterministicSequence, string commandType, PooledPayloadLease payload)
+        public ServerStampedInboundCommand(SessionId sessionId, long serverReceiveTick, long serverReceiveSeq, int commandType, long clientSubmitTick, PooledPayloadLease payload)
         {
             SessionId = sessionId;
-            SubmitTick = submitTick;
-            DeterministicSequence = deterministicSequence;
+            ServerReceiveTick = serverReceiveTick;
+            ServerReceiveSeq = serverReceiveSeq;
             CommandType = commandType;
+            ClientSubmitTick = clientSubmitTick;
             Payload = payload;
         }
 
@@ -535,14 +533,9 @@ namespace Caelmor.Runtime.Transport
             _snapshotQueue = new BoundedReplicationSnapshotQueue(config, counters);
         }
 
-        public CommandIngressResult RouteInbound(SessionId sessionId, ReadOnlySpan<byte> payload, string commandType, long submitTick)
+        public CommandIngressResult RouteInbound(in ServerStampedInboundCommand command)
         {
-            return _ingress.TryEnqueue(sessionId, payload, commandType, submitTick);
-        }
-
-        public CommandIngressResult RouteInbound(SessionId sessionId, PooledPayloadLease payload, string commandType, long submitTick)
-        {
-            return _ingress.TryEnqueue(sessionId, payload, commandType, submitTick);
+            return _ingress.TryEnqueue(command);
         }
 
         public void RouteSnapshot(Caelmor.ClientReplication.ClientReplicationSnapshot snapshot)
@@ -550,7 +543,7 @@ namespace Caelmor.Runtime.Transport
             _snapshotQueue.Enqueue(snapshot.SessionId, snapshot);
         }
 
-        public int DrainIngressDeterministic(Span<CommandEnvelope> destination, int maxCommands)
+        public int DrainIngressDeterministic(Span<ServerStampedInboundCommand> destination, int maxCommands)
         {
             return _ingress.DrainDeterministic(destination, maxCommands);
         }
