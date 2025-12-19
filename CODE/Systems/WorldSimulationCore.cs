@@ -188,6 +188,8 @@ namespace Caelmor.Runtime.WorldSimulation
         }
 
         public TickDiagnosticsSnapshot Diagnostics => _diagnostics.Snapshot();
+        public long CurrentTickIndex => Interlocked.Read(ref _tickIndex);
+        public long GetCurrentTickIndex() => Interlocked.Read(ref _tickIndex);
 
         private void RunLoop(CancellationToken token)
         {
@@ -425,6 +427,36 @@ namespace Caelmor.Runtime.WorldSimulation
         private void OnTickStalled(TickStallEvent stall)
         {
             StallDetected?.Invoke(stall);
+        }
+
+        public bool IsPhaseHookRegistered(ITickPhaseHook hook)
+        {
+            if (hook is null) throw new ArgumentNullException(nameof(hook));
+
+            lock (_gate)
+            {
+                for (int i = 0; i < _phaseHooks.Count; i++)
+                {
+                    if (ReferenceEquals(_phaseHooks[i].Hook, hook))
+                        return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool HasPhaseHook<T>() where T : ITickPhaseHook
+        {
+            lock (_gate)
+            {
+                for (int i = 0; i < _phaseHooks.Count; i++)
+                {
+                    if (_phaseHooks[i].Hook is T)
+                        return true;
+                }
+            }
+
+            return false;
         }
 
         private readonly struct ParticipantEntry

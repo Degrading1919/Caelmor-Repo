@@ -35,6 +35,7 @@ namespace Caelmor.Runtime.Replication
         private readonly TimeSlicedWorkScheduler _timeSlicer;
         private readonly SnapshotSerializationBudget _budget;
         private readonly ReplicationSnapshotCounters? _counters;
+        private RuntimePipelineHealth? _pipelineHealth;
         private static readonly Action Noop = () => { };
 
         private long? _tickInProgress;
@@ -65,7 +66,8 @@ namespace Caelmor.Runtime.Replication
             IReplicationSnapshotQueue queue,
             TimeSlicedWorkScheduler timeSlicer,
             SnapshotSerializationBudget? budget = null,
-            ReplicationSnapshotCounters? counters = null)
+            ReplicationSnapshotCounters? counters = null,
+            RuntimePipelineHealth pipelineHealth = null)
         {
             _sessionIndex = sessionIndex ?? throw new ArgumentNullException(nameof(sessionIndex));
             _sessionEligibility = sessionEligibility ?? throw new ArgumentNullException(nameof(sessionEligibility));
@@ -75,6 +77,15 @@ namespace Caelmor.Runtime.Replication
             _timeSlicer = timeSlicer ?? throw new ArgumentNullException(nameof(timeSlicer));
             _budget = budget ?? SnapshotSerializationBudget.Default;
             _counters = counters;
+            _pipelineHealth = pipelineHealth;
+        }
+
+        internal void AttachPipelineHealth(RuntimePipelineHealth pipelineHealth)
+        {
+            if (pipelineHealth == null)
+                return;
+
+            _pipelineHealth ??= pipelineHealth;
         }
 
         public void OnSessionDisconnected(SessionId sessionId)
@@ -109,6 +120,7 @@ namespace Caelmor.Runtime.Replication
 
             _tickInProgress = context.TickIndex;
             _postTickPhaseActive = true;
+            _pipelineHealth?.MarkReplication(context.TickIndex);
 
             try
             {

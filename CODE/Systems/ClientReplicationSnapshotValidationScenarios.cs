@@ -37,7 +37,8 @@ namespace Caelmor.Validation.Replication
                 new Scenario4_DeterministicSnapshotContents(),
                 new Scenario5_OutboundSendPumpDrainsSnapshots(),
                 new Scenario6_LifecycleMailboxAppliesDisconnectOnTick(),
-                new Scenario7_FingerprintChangesWithStateMutation()
+                new Scenario7_RuntimePipelineFailsFastOnMissingHook(),
+                new Scenario8_FingerprintChangesWithStateMutation()
             };
         }
 
@@ -346,9 +347,81 @@ namespace Caelmor.Validation.Replication
             }
         }
 
-        private sealed class Scenario7_FingerprintChangesWithStateMutation : IValidationScenario
+        private sealed class Scenario7_RuntimePipelineFailsFastOnMissingHook : IValidationScenario
         {
-            public string Name => "Scenario 7 — Fingerprints Change With State Mutation";
+            public string Name => "Scenario 7 — Runtime pipeline fails fast when hooks are missing";
+
+            public void Run(IAssert assert)
+            {
+                var config = RuntimeBackpressureConfig.Default;
+                var counters = new ReplicationSnapshotCounters();
+                var transport = new PooledTransportRouter(config, counters);
+                var commands = new AuthoritativeCommandIngestor(config);
+                var authority = new StubAuthority();
+                var saveBinding = new StubSaveBinding();
+                var restore = new StubRestoreQuery();
+                var mutationGate = new AllowMutationGate();
+                var sessionEvents = new StubSessionEvents();
+                var sessionEligibility = new SnapshotEligibilityRegistry();
+                var sessions = new PlayerSessionSystem(authority, saveBinding, restore, sessionEligibility, mutationGate, sessionEvents);
+                var handoff = new StubHandoffService();
+                var handshakes = new SessionHandshakePipeline(capacity: 4, sessions, handoff);
+                var entities = new DeterministicEntityRegistry();
+                var simulation = new WorldSimulationCore(entities);
+                var spatial = new ZoneSpatialIndex(cellSize: 1);
+                var visibility = new VisibilityCullingService(spatial);
+
+                var gate = new ConfigurableGate();
+                var stateReader = new RecordingStateReader();
+                var diagnostics = new TickDiagnostics();
+                var slicer = new TimeSlicedWorkScheduler(diagnostics);
+                var replication = new ClientReplicationSnapshotSystem(
+                    sessions,
+                    sessionEligibility,
+                    gate,
+                    stateReader,
+                    transport,
+                    slicer,
+                    SnapshotSerializationBudget.Default,
+                    counters);
+
+                var commandHandlers = new CommandHandlerRegistry();
+                commandHandlers.Register(1, new NoOpCommandHandler());
+
+                var runtime = RuntimeServerLoop.Create(
+                    simulation,
+                    transport,
+                    handshakes,
+                    commands,
+                    commandHandlers,
+                    visibility,
+                    replication,
+                    entities,
+                    ReadOnlySpan<ISimulationEligibilityGate>.Empty,
+                    ReadOnlySpan<ParticipantRegistration>.Empty,
+                    ReadOnlySpan<PhaseHookRegistration>.Empty,
+                    sessions,
+                    skipLifecycleHookRegistration: true);
+
+                try
+                {
+                    runtime.Start();
+                    assert.True(false, "Runtime server loop must fail fast when a required hook is missing.");
+                }
+                catch (InvalidOperationException)
+                {
+                    assert.True(true, "Expected startup failure when lifecycle hook is missing.");
+                }
+                finally
+                {
+                    runtime.Dispose();
+                }
+            }
+        }
+
+        private sealed class Scenario8_FingerprintChangesWithStateMutation : IValidationScenario
+        {
+            public string Name => "Scenario 8 — Fingerprints Change With State Mutation";
 
             public void Run(IAssert assert)
             {

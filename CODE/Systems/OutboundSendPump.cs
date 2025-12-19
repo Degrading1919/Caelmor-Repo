@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Caelmor.Runtime;
+using Caelmor.Runtime.Diagnostics;
 using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.Replication;
 
@@ -28,6 +29,8 @@ namespace Caelmor.Runtime.Transport
         private readonly int _maxPerSession;
         private readonly int _maxPerIteration;
         private readonly int _idleDelayMs;
+        private readonly RuntimePipelineHealth? _pipelineHealth;
+        private readonly Func<long>? _tickProvider;
         private readonly object _gate = new object();
 
         private Thread? _thread;
@@ -41,17 +44,24 @@ namespace Caelmor.Runtime.Transport
             RuntimeBackpressureConfig config,
             ReplicationSnapshotCounters? counters = null,
             int maxPerIteration = 0,
-            int idleDelayMs = 1)
+            int idleDelayMs = 1,
+            RuntimePipelineHealth pipelineHealth = null,
+            Func<long> tickProvider = null)
         {
             _transport = transport ?? throw new ArgumentNullException(nameof(transport));
             _sender = sender ?? throw new ArgumentNullException(nameof(sender));
             _sessions = sessions ?? throw new ArgumentNullException(nameof(sessions));
             _counters = counters;
+            _pipelineHealth = pipelineHealth;
+            _tickProvider = tickProvider;
 
             if (config == null) throw new ArgumentNullException(nameof(config));
             _maxPerSession = Math.Max(1, config.MaxOutboundSnapshotsPerSession);
             _maxPerIteration = maxPerIteration > 0 ? maxPerIteration : _maxPerSession * 4;
             _idleDelayMs = idleDelayMs < 0 ? 0 : idleDelayMs;
+
+            if (_pipelineHealth != null && _tickProvider == null)
+                throw new ArgumentNullException(nameof(tickProvider));
         }
 
         public void Start()
@@ -103,6 +113,9 @@ namespace Caelmor.Runtime.Transport
             var limit = maxSnapshots > 0 ? maxSnapshots : _maxPerIteration;
             if (limit <= 0)
                 return 0;
+
+            if (_pipelineHealth != null)
+                _pipelineHealth.MarkOutboundSend(_tickProvider!.Invoke());
 
             var sessions = _sessions.SnapshotSessionsDeterministic();
             int dispatched = 0;
