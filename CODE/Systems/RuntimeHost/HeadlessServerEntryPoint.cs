@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using Caelmor.Runtime;
 using Caelmor.Runtime.Integration;
 using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.Persistence;
@@ -94,6 +95,25 @@ namespace Caelmor.Runtime.Host
             persistenceLog = string.Empty;
             errorMessage = string.Empty;
 
+            var backpressure = RuntimeBackpressureConfig.Default;
+
+            var persistenceMode = ResolvePersistenceMode(args);
+            if (!TryConfigurePersistence(persistenceMode, metrics, out var persistenceSettings, out persistenceLog, out errorMessage))
+            {
+                return false;
+            }
+
+            PersistenceWriteQueue persistenceWrites = null;
+            if (persistenceSettings != null)
+            {
+                var persistenceCounters = new PersistencePipelineCounters();
+                persistenceWrites = new PersistenceWriteQueue(backpressure, persistenceCounters);
+                persistenceSettings.Counters = persistenceCounters;
+                persistenceSettings.WriteQueue = persistenceWrites;
+                persistenceSettings.CompletionQueue = new PersistenceCompletionQueue(backpressure, persistenceCounters);
+                persistenceSettings.ApplyState = new PersistenceApplyState(persistenceSettings.ApplyStateCapacity);
+            }
+
             var activeSessions = new DeterministicActiveSessionIndex();
             var snapshotEligibility = new SnapshotEligibilityRegistry();
 
@@ -101,7 +121,9 @@ namespace Caelmor.Runtime.Host
             var saveBinding = new DeterministicSaveBindingQuery();
             var restore = new AlwaysRestoredQuery();
             var mutationGate = new AlwaysAllowSessionMutationGate();
-            var sessionEvents = new NoOpSessionEvents();
+            var sessionEvents = persistenceWrites != null
+                ? new PersistenceSessionEvents(persistenceWrites)
+                : new NoOpSessionEvents();
 
             var sessionSystem = new ActiveSessionIndexedPlayerSessionSystem(
                 authority,
@@ -122,16 +144,10 @@ namespace Caelmor.Runtime.Host
             settings = new RuntimeCompositionSettings(sessionSystem, handoff, snapshotEligibility, stateReader, outboundSender)
             {
                 ActiveSessions = activeSessions,
-                CommandHandlers = commandHandlers
+                CommandHandlers = commandHandlers,
+                BackpressureConfig = backpressure,
+                Persistence = persistenceSettings
             };
-
-            var persistenceMode = ResolvePersistenceMode(args);
-            if (!TryConfigurePersistence(persistenceMode, metrics, out var persistenceSettings, out persistenceLog, out errorMessage))
-            {
-                return false;
-            }
-
-            settings.Persistence = persistenceSettings;
             return true;
         }
 
@@ -375,6 +391,41 @@ namespace Caelmor.Runtime.Host
 
             public void OnSessionDeactivated(SessionId sessionId, PlayerId playerId, SaveId saveId, DeactivationReason reason)
             {
+            }
+        }
+
+        private sealed class PersistenceSessionEvents : ISessionEvents
+        {
+            private const int ActivationEstimatedBytes = 32;
+            private const int DeactivationEstimatedBytes = 32;
+            private const string ActivationOperationLabel = "session.activate";
+            private const string DeactivationOperationLabel = "session.deactivate";
+
+            private readonly PersistenceWriteQueue _writes;
+
+            public PersistenceSessionEvents(PersistenceWriteQueue writes)
+            {
+                _writes = writes ?? throw new ArgumentNullException(nameof(writes));
+            }
+
+            public void OnSessionActivated(SessionId sessionId, PlayerId playerId, SaveId saveId)
+            {
+                if (!playerId.IsValid || !saveId.IsValid)
+                    return;
+
+                _writes.Enqueue(playerId, new PersistenceWriteRequest(saveId, playerId, ActivationEstimatedBytes, ActivationOperationLabel));
+            }
+
+            public void OnSessionParticipationEnded(SessionId sessionId, PlayerId playerId, SaveId saveId, DeactivationReason reason)
+            {
+            }
+
+            public void OnSessionDeactivated(SessionId sessionId, PlayerId playerId, SaveId saveId, DeactivationReason reason)
+            {
+                if (!playerId.IsValid || !saveId.IsValid)
+                    return;
+
+                _writes.Enqueue(playerId, new PersistenceWriteRequest(saveId, playerId, DeactivationEstimatedBytes, DeactivationOperationLabel));
             }
         }
 
