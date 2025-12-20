@@ -259,7 +259,7 @@ namespace Caelmor.Combat.Client
         // Non-blocking safety wrapper + validation mirror
         // ------------------------------------------------------------
 
-        private void SafeInvokeHook(string eventId, string hookId, Action invoke)
+        private void SafeInvokeHook(ulong eventId, string hookId, Action invoke)
         {
             // Validation mirror logs ONLY event_id + hook_id (no gameplay data).
             _validationLogSink.Record(eventId, hookId);
@@ -294,7 +294,7 @@ namespace Caelmor.Combat.Client
     public interface IPresentationValidationLogSink
     {
         // Logs event_id + hook_id only.
-        void Record(string eventId, string hookId);
+        void Record(ulong eventId, string hookId);
     }
 
     // ====================================================================
@@ -324,13 +324,13 @@ namespace Caelmor.Combat.Client
 
     public sealed class AnimationTriggerHook
     {
-        public string EventId { get; }
+        public ulong EventId { get; }
         public int AuthoritativeTick { get; }
         public string CombatContextId { get; }
         public EntityHandle SubjectEntity { get; }
         public AnimationTrigger Trigger { get; }
 
-        public AnimationTriggerHook(string eventId, int authoritativeTick, string combatContextId, EntityHandle subjectEntity, AnimationTrigger trigger)
+        public AnimationTriggerHook(ulong eventId, int authoritativeTick, string combatContextId, EntityHandle subjectEntity, AnimationTrigger trigger)
         {
             EventId = eventId;
             AuthoritativeTick = authoritativeTick;
@@ -342,13 +342,13 @@ namespace Caelmor.Combat.Client
 
     public sealed class AnimationStateHook
     {
-        public string EventId { get; }
+        public ulong EventId { get; }
         public int AuthoritativeTick { get; }
         public string CombatContextId { get; }
         public EntityHandle SubjectEntity { get; }
         public CombatState State { get; }
 
-        public AnimationStateHook(string eventId, int authoritativeTick, string combatContextId, EntityHandle subjectEntity, CombatState state)
+        public AnimationStateHook(ulong eventId, int authoritativeTick, string combatContextId, EntityHandle subjectEntity, CombatState state)
         {
             EventId = eventId;
             AuthoritativeTick = authoritativeTick;
@@ -360,14 +360,14 @@ namespace Caelmor.Combat.Client
 
     public sealed class VfxSpawnHook
     {
-        public string EventId { get; }
+        public ulong EventId { get; }
         public int AuthoritativeTick { get; }
         public string CombatContextId { get; }
         public EntityHandle SourceEntity { get; }
         public EntityHandle TargetEntity { get; }
         public VfxEffect Effect { get; }
 
-        public VfxSpawnHook(string eventId, int authoritativeTick, string combatContextId, EntityHandle sourceEntity, EntityHandle targetEntity, VfxEffect effect)
+        public VfxSpawnHook(ulong eventId, int authoritativeTick, string combatContextId, EntityHandle sourceEntity, EntityHandle targetEntity, VfxEffect effect)
         {
             EventId = eventId;
             AuthoritativeTick = authoritativeTick;
@@ -380,13 +380,13 @@ namespace Caelmor.Combat.Client
 
     public sealed class AudioCueHook
     {
-        public string EventId { get; }
+        public ulong EventId { get; }
         public int AuthoritativeTick { get; }
         public string CombatContextId { get; }
         public EntityHandle SubjectEntity { get; }
         public AudioCue Cue { get; }
 
-        public AudioCueHook(string eventId, int authoritativeTick, string combatContextId, EntityHandle subjectEntity, AudioCue cue)
+        public AudioCueHook(ulong eventId, int authoritativeTick, string combatContextId, EntityHandle subjectEntity, AudioCue cue)
         {
             EventId = eventId;
             AuthoritativeTick = authoritativeTick;
@@ -398,14 +398,14 @@ namespace Caelmor.Combat.Client
 
     public sealed class UiIntentResultHook
     {
-        public string EventId { get; }
+        public ulong EventId { get; }
         public int AuthoritativeTick { get; }
         public string CombatContextId { get; }
         public EntityHandle ActorEntity { get; }
         public CombatIntentType IntentType { get; }
         public IntentResultStatus Status { get; }
 
-        public UiIntentResultHook(string eventId, int authoritativeTick, string combatContextId, EntityHandle actorEntity, CombatIntentType intentType, IntentResultStatus status)
+        public UiIntentResultHook(ulong eventId, int authoritativeTick, string combatContextId, EntityHandle actorEntity, CombatIntentType intentType, IntentResultStatus status)
         {
             EventId = eventId;
             AuthoritativeTick = authoritativeTick;
@@ -418,12 +418,12 @@ namespace Caelmor.Combat.Client
 
     public sealed class UiDamageNumberHook
     {
-        public string EventId { get; }
+        public ulong EventId { get; }
         public int AuthoritativeTick { get; }
         public string CombatContextId { get; }
         public EntityHandle TargetEntity { get; }
 
-        public UiDamageNumberHook(string eventId, int authoritativeTick, string combatContextId, EntityHandle targetEntity)
+        public UiDamageNumberHook(ulong eventId, int authoritativeTick, string combatContextId, EntityHandle targetEntity)
         {
             EventId = eventId;
             AuthoritativeTick = authoritativeTick;
@@ -434,13 +434,13 @@ namespace Caelmor.Combat.Client
 
     public sealed class UiCombatStateHook
     {
-        public string EventId { get; }
+        public ulong EventId { get; }
         public int AuthoritativeTick { get; }
         public string CombatContextId { get; }
         public EntityHandle SubjectEntity { get; }
         public CombatState State { get; }
 
-        public UiCombatStateHook(string eventId, int authoritativeTick, string combatContextId, EntityHandle subjectEntity, CombatState state)
+        public UiCombatStateHook(ulong eventId, int authoritativeTick, string combatContextId, EntityHandle subjectEntity, CombatState state)
         {
             EventId = eventId;
             AuthoritativeTick = authoritativeTick;
@@ -524,7 +524,7 @@ namespace Caelmor.Combat.Client
 
     public sealed class CombatEventPayload
     {
-        public string EventId { get; }
+        public ulong EventId { get; }
         public int AuthoritativeTick { get; }
         public string CombatContextId { get; }
         public CombatEventType EventType { get; }
@@ -537,7 +537,7 @@ namespace Caelmor.Combat.Client
         public CombatEntityState? StateSnapshot { get; }
 
         public CombatEventPayload(
-            string eventId,
+            ulong eventId,
             int authoritativeTick,
             string combatContextId,
             CombatEventType eventType,

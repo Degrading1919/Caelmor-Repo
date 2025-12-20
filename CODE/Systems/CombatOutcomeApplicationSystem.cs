@@ -54,6 +54,7 @@ namespace Caelmor.Combat
         private long _combatOutcomesApplied;
         private long _combatDuplicateOutcomesRejected;
         private long _combatIdempotenceOverflow;
+        private long _combatEventsCreated;
 
         // Validation support: last resolved intent per entity (snapshot-only; not authoritative gameplay state).
         private readonly Dictionary<EntityHandle, string> _lastResolvedIntentIdByEntity =
@@ -111,11 +112,14 @@ namespace Caelmor.Combat
 
                 ApplyIntentResultStateEffectsOrThrow(r);
 
-                EmitEventAfterApply(CombatEvent.CreateIntentResultEvent(
+                var combatEvent = CombatEvent.CreateIntentResultEvent(
                     authoritativeTick: nowTick,
                     combatContextId: batch.CombatContextId,
                     subjectEntity: r.ActorEntity,
-                    intentResult: r));
+                    intentResult: r,
+                    payloadId: payloadId);
+                Interlocked.Increment(ref _combatEventsCreated);
+                EmitEventAfterApply(combatEvent);
 
                 appliedCount++;
             }
@@ -129,11 +133,14 @@ namespace Caelmor.Combat
                 if (!TryRegisterPayloadId(appliedSet, payloadId))
                     continue;
 
-                EmitEventAfterApply(CombatEvent.CreateDamageOutcomeEvent(
+                var combatEvent = CombatEvent.CreateDamageOutcomeEvent(
                     authoritativeTick: nowTick,
                     combatContextId: batch.CombatContextId,
                     subjectEntity: d.TargetEntity,
-                    damageOutcome: d));
+                    damageOutcome: d,
+                    payloadId: payloadId);
+                Interlocked.Increment(ref _combatEventsCreated);
+                EmitEventAfterApply(combatEvent);
 
                 appliedCount++;
             }
@@ -147,11 +154,14 @@ namespace Caelmor.Combat
                 if (!TryRegisterPayloadId(appliedSet, payloadId))
                     continue;
 
-                EmitEventAfterApply(CombatEvent.CreateMitigationOutcomeEvent(
+                var combatEvent = CombatEvent.CreateMitigationOutcomeEvent(
                     authoritativeTick: nowTick,
                     combatContextId: batch.CombatContextId,
                     subjectEntity: m.TargetEntity,
-                    mitigationOutcome: m));
+                    mitigationOutcome: m,
+                    payloadId: payloadId);
+                Interlocked.Increment(ref _combatEventsCreated);
+                EmitEventAfterApply(combatEvent);
 
                 appliedCount++;
             }
@@ -172,11 +182,14 @@ namespace Caelmor.Combat
                 // After mutation, emit state snapshot event reflecting applied state.
                 var state = _stateWriter.GetState(sc.Entity);
 
-                EmitEventAfterApply(CombatEvent.CreateStateChangeEvent(
+                var combatEvent = CombatEvent.CreateStateChangeEvent(
                     authoritativeTick: nowTick,
                     combatContextId: batch.CombatContextId,
                     subjectEntity: sc.Entity,
-                    stateSnapshot: state));
+                    stateSnapshot: state,
+                    payloadId: payloadId);
+                Interlocked.Increment(ref _combatEventsCreated);
+                EmitEventAfterApply(combatEvent);
 
                 appliedCount++;
             }
@@ -394,7 +407,8 @@ namespace Caelmor.Combat
             return new CombatOutcomeApplicationCounterSnapshot(
                 Interlocked.Read(ref _combatOutcomesApplied),
                 Interlocked.Read(ref _combatDuplicateOutcomesRejected),
-                Interlocked.Read(ref _combatIdempotenceOverflow));
+                Interlocked.Read(ref _combatIdempotenceOverflow),
+                Interlocked.Read(ref _combatEventsCreated));
         }
     }
 
@@ -461,7 +475,7 @@ namespace Caelmor.Combat
 
     public sealed class CombatEvent
     {
-        public string EventId { get; }
+        public ulong EventId { get; }
         public int AuthoritativeTick { get; }
         public string CombatContextId { get; }
         public CombatEventType EventType { get; }
@@ -474,7 +488,7 @@ namespace Caelmor.Combat
         public CombatEntityState? StateSnapshot { get; }
 
         private CombatEvent(
-            string eventId,
+            ulong eventId,
             int authoritativeTick,
             string combatContextId,
             CombatEventType eventType,
@@ -501,11 +515,12 @@ namespace Caelmor.Combat
             int authoritativeTick,
             string combatContextId,
             EntityHandle subjectEntity,
-            IntentResult intentResult)
+            IntentResult intentResult,
+            ulong payloadId)
         {
             if (intentResult == null) throw new ArgumentNullException(nameof(intentResult));
 
-            string eventId = DeterministicEventId(authoritativeTick, CombatEventType.IntentResult, intentResult.IntentId);
+            ulong eventId = DeterministicEventId(authoritativeTick, CombatEventType.IntentResult, payloadId);
             return new CombatEvent(
                 eventId,
                 authoritativeTick,
@@ -522,11 +537,12 @@ namespace Caelmor.Combat
             int authoritativeTick,
             string combatContextId,
             EntityHandle subjectEntity,
-            DamageOutcome damageOutcome)
+            DamageOutcome damageOutcome,
+            ulong payloadId)
         {
             if (damageOutcome == null) throw new ArgumentNullException(nameof(damageOutcome));
 
-            string eventId = DeterministicEventId(authoritativeTick, CombatEventType.DamageOutcome, damageOutcome.OutcomeId);
+            ulong eventId = DeterministicEventId(authoritativeTick, CombatEventType.DamageOutcome, payloadId);
             return new CombatEvent(
                 eventId,
                 authoritativeTick,
@@ -543,11 +559,12 @@ namespace Caelmor.Combat
             int authoritativeTick,
             string combatContextId,
             EntityHandle subjectEntity,
-            MitigationOutcome mitigationOutcome)
+            MitigationOutcome mitigationOutcome,
+            ulong payloadId)
         {
             if (mitigationOutcome == null) throw new ArgumentNullException(nameof(mitigationOutcome));
 
-            string eventId = DeterministicEventId(authoritativeTick, CombatEventType.MitigationOutcome, mitigationOutcome.OutcomeId);
+            ulong eventId = DeterministicEventId(authoritativeTick, CombatEventType.MitigationOutcome, payloadId);
             return new CombatEvent(
                 eventId,
                 authoritativeTick,
@@ -564,11 +581,12 @@ namespace Caelmor.Combat
             int authoritativeTick,
             string combatContextId,
             EntityHandle subjectEntity,
-            CombatEntityState stateSnapshot)
+            CombatEntityState stateSnapshot,
+            ulong payloadId)
         {
             if (stateSnapshot == null) throw new ArgumentNullException(nameof(stateSnapshot));
 
-            string eventId = DeterministicEventId(authoritativeTick, CombatEventType.StateChange, (ulong)stateSnapshot.Entity.Value);
+            ulong eventId = DeterministicEventId(authoritativeTick, CombatEventType.StateChange, payloadId);
             return new CombatEvent(
                 eventId,
                 authoritativeTick,
@@ -581,18 +599,26 @@ namespace Caelmor.Combat
                 stateSnapshot: stateSnapshot);
         }
 
-        private static string DeterministicEventId(int tick, CombatEventType type, string payloadId)
+        private static ulong DeterministicEventId(int tick, CombatEventType type, ulong payloadId)
         {
             // Deterministic, stable, no RNG, no wall-clock.
+            // Mixes tick + event type + payload id to guarantee stable ids across replays.
             // Collisions are treated as a correctness failure in higher-level validation.
-            return $"ce:{tick}:{(int)type}:{payloadId}";
+            unchecked
+            {
+                ulong hash = 14695981039346656037UL;
+                hash = Mix(hash, (uint)tick);
+                hash = Mix(hash, (uint)type);
+                hash = Mix(hash, payloadId);
+                return hash;
+            }
         }
 
-        private static string DeterministicEventId(int tick, CombatEventType type, ulong payloadId)
+        private static ulong Mix(ulong hash, ulong data)
         {
-            // Deterministic, stable, no RNG, no wall-clock.
-            // Collisions are treated as a correctness failure in higher-level validation.
-            return $"ce:{tick}:{(int)type}:{payloadId}";
+            hash ^= data;
+            hash *= 1099511628211UL;
+            return hash;
         }
     }
 
@@ -914,18 +940,21 @@ namespace Caelmor.Combat
         public CombatOutcomeApplicationCounterSnapshot(
             long combatOutcomesApplied,
             long combatDuplicateOutcomesRejected,
-            long combatIdempotenceOverflow)
+            long combatIdempotenceOverflow,
+            long combatEventsCreated)
         {
             CombatOutcomesApplied = combatOutcomesApplied;
             CombatDuplicateOutcomesRejected = combatDuplicateOutcomesRejected;
             CombatIdempotenceOverflow = combatIdempotenceOverflow;
+            CombatEventsCreated = combatEventsCreated;
         }
 
         public long CombatOutcomesApplied { get; }
         public long CombatDuplicateOutcomesRejected { get; }
         public long CombatIdempotenceOverflow { get; }
+        public long CombatEventsCreated { get; }
 
         public static CombatOutcomeApplicationCounterSnapshot Empty =>
-            new CombatOutcomeApplicationCounterSnapshot(0, 0, 0);
+            new CombatOutcomeApplicationCounterSnapshot(0, 0, 0, 0);
     }
 }
