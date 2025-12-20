@@ -31,10 +31,11 @@ namespace Caelmor.Combat
 
         // Delivery guard scoped PER TICK:
         // authoritativeTick -> (client -> delivered event ids)
-        private readonly Dictionary<int, Dictionary<ClientId, HashSet<string>>> _deliveredByTick =
-            new Dictionary<int, Dictionary<ClientId, HashSet<string>>>();
+        private readonly Dictionary<int, Dictionary<ClientId, HashSet<ulong>>> _deliveredByTick =
+            new Dictionary<int, Dictionary<ClientId, HashSet<ulong>>>();
 
         private int? _currentTick;
+        private long _combatEventsReplicated;
 
         public CombatReplicationSystem(
             IClientRegistry clientRegistry,
@@ -75,7 +76,7 @@ namespace Caelmor.Combat
             // Hard reset delivery guards for new tick
             _deliveredByTick.Clear();
             _deliveredByTick[authoritativeTick] =
-                new Dictionary<ClientId, HashSet<string>>();
+                new Dictionary<ClientId, HashSet<ulong>>();
         }
 
         private void ReplicateSingleEvent(int authoritativeTick, CombatEvent combatEvent)
@@ -99,6 +100,7 @@ namespace Caelmor.Combat
                     payload,
                     authoritativeTick);
 
+                System.Threading.Interlocked.Increment(ref _combatEventsReplicated);
                 MarkDelivered(authoritativeTick, clientId, combatEvent.EventId);
 
                 _validationSink.RecordReplicatedPayload(
@@ -108,7 +110,7 @@ namespace Caelmor.Combat
             }
         }
 
-        private bool AlreadyDelivered(int tick, ClientId clientId, string eventId)
+        private bool AlreadyDelivered(int tick, ClientId clientId, ulong eventId)
         {
             var perTick = _deliveredByTick[tick];
 
@@ -118,18 +120,20 @@ namespace Caelmor.Combat
             return set.Contains(eventId);
         }
 
-        private void MarkDelivered(int tick, ClientId clientId, string eventId)
+        private void MarkDelivered(int tick, ClientId clientId, ulong eventId)
         {
             var perTick = _deliveredByTick[tick];
 
             if (!perTick.TryGetValue(clientId, out var set))
             {
-                set = new HashSet<string>(StringComparer.Ordinal);
+                set = new HashSet<ulong>();
                 perTick.Add(clientId, set);
             }
 
             set.Add(eventId);
         }
+
+        public long CombatEventsReplicated => System.Threading.Interlocked.Read(ref _combatEventsReplicated);
     }
 
     // --------------------------------------------------------------------
@@ -154,7 +158,7 @@ namespace Caelmor.Combat
 
     public sealed class CombatEventPayload
     {
-        public string EventId { get; }
+        public ulong EventId { get; }
         public int AuthoritativeTick { get; }
         public string CombatContextId { get; }
         public CombatEventType EventType { get; }
@@ -167,7 +171,7 @@ namespace Caelmor.Combat
         public CombatEntityState? StateSnapshot { get; }
 
         private CombatEventPayload(
-            string eventId,
+            ulong eventId,
             int authoritativeTick,
             string combatContextId,
             CombatEventType eventType,
