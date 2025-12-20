@@ -98,6 +98,30 @@ namespace Caelmor.Runtime.Host
                 settings.CombatDeliveryGuardInitialCapacity,
                 settings.CombatDeliveryGuardMaxCount);
             var combatReplicationHook = new CombatReplicationTickHook(combatEventBuffer, combatReplication);
+            var combatOutcomeApplication = settings.CombatOutcomeApplicationSystem;
+
+            if (combatOutcomeApplication == null
+                && settings.CombatTickSource != null
+                && settings.CombatStateWriter != null
+                && settings.CombatCheckpointRequester != null)
+            {
+                combatOutcomeApplication = new CombatOutcomeApplicationSystem(
+                    settings.CombatTickSource,
+                    settings.CombatStateWriter,
+                    combatEventBuffer,
+                    settings.CombatCheckpointRequester);
+            }
+
+#if DEBUG
+            if (combatReplicationHook != null && combatOutcomeApplication == null)
+                throw new InvalidOperationException("Combat replication hook is registered but combat outcome application system is not wired to an ICombatEventSink.");
+
+            if (combatOutcomeApplication != null && !ReferenceEquals(combatOutcomeApplication.EventSink, combatEventBuffer))
+                throw new InvalidOperationException("Combat outcome application system must be wired to the CombatEventBuffer used by the replication hook.");
+
+            if (combatOutcomeApplication != null && combatReplicationHook == null)
+                throw new InvalidOperationException("Combat outcome application system is wired but combat replication hook is not registered.");
+#endif
 
             var lifecycleMailbox = new TickThreadMailbox(backpressure);
             var lifecycleApplier = new LifecycleApplier(transport, commands, handshakes, visibility, replication, combatReplication);
@@ -262,6 +286,10 @@ namespace Caelmor.Runtime.Host
         public PersistenceSettings Persistence { get; set; }
         public CombatEventBuffer CombatEventBuffer { get; set; }
         public CombatReplicationSystem CombatReplicationSystem { get; set; }
+        public CombatOutcomeApplicationSystem CombatOutcomeApplicationSystem { get; set; }
+        public ITickSource CombatTickSource { get; set; }
+        public ICombatStateWriter CombatStateWriter { get; set; }
+        public ICheckpointRequester CombatCheckpointRequester { get; set; }
         public IClientRegistry CombatClientRegistry { get; set; }
         public IVisibilityPolicy CombatVisibilityPolicy { get; set; }
         public INetworkSender CombatNetworkSender { get; set; }

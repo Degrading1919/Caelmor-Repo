@@ -35,7 +35,7 @@ namespace Caelmor.Combat
             _maxCount = maxEventsPerTick;
         }
 
-        public void Emit(CombatEvent combatEvent)
+        public bool TryEmit(in CombatEvent combatEvent)
         {
             TickThreadAssert.AssertTickThread();
             if (combatEvent == null) throw new ArgumentNullException(nameof(combatEvent));
@@ -49,7 +49,7 @@ namespace Caelmor.Combat
             else if (_currentTick != tick && _count > 0)
             {
                 Interlocked.Increment(ref _eventsDroppedTickMismatch);
-                return;
+                return false;
             }
             else if (_currentTick != tick)
             {
@@ -59,11 +59,12 @@ namespace Caelmor.Combat
             if (_count >= _maxCount)
             {
                 Interlocked.Increment(ref _eventsDroppedOverflow);
-                return;
+                return false;
             }
 
             _buffer[_count++] = combatEvent;
             Interlocked.Increment(ref _eventsBuffered);
+            return true;
         }
 
         public CombatEventBatch Drain(int authoritativeTick)
@@ -92,6 +93,7 @@ namespace Caelmor.Combat
     {
         private readonly CombatEventBuffer _buffer;
         private readonly CombatReplicationSystem _replication;
+        private long _combatEventsDrained;
 
         public CombatReplicationTickHook(CombatEventBuffer buffer, CombatReplicationSystem replication)
         {
@@ -107,8 +109,12 @@ namespace Caelmor.Combat
         {
             TickThreadAssert.AssertTickThread();
             var batch = _buffer.Drain(checked((int)context.TickIndex));
+            if (batch.Count > 0)
+                Interlocked.Add(ref _combatEventsDrained, batch.Count);
             _replication.Replicate(in batch);
         }
+
+        public long CombatEventsDrained => Interlocked.Read(ref _combatEventsDrained);
     }
 
     public sealed class ActiveSessionCombatClientRegistry : IClientRegistry
