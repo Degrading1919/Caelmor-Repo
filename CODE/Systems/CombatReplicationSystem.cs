@@ -19,8 +19,8 @@ namespace Caelmor.Combat
     /// - Ensure exactly-once delivery per event per client PER TICK
     ///
     /// Restore-safety guarantee:
-    /// - Delivery guards are scoped per authoritative tick
-    /// - No cross-session or cross-tick memory is retained
+    /// - Delivery guards are scoped per session and cleared per authoritative tick
+    /// - No cross-tick event ids are retained
     /// </summary>
     public sealed class CombatReplicationSystem
     {
@@ -29,24 +29,36 @@ namespace Caelmor.Combat
         private readonly INetworkSender _networkSender;
         private readonly IReplicationValidationSink _validationSink;
 
-        // Delivery guard scoped PER TICK:
-        // authoritativeTick -> (client -> delivered event ids)
-        private readonly Dictionary<int, Dictionary<ClientId, HashSet<ulong>>> _deliveredByTick =
-            new Dictionary<int, Dictionary<ClientId, HashSet<ulong>>>();
+        // Delivery guard is reused; no per-tick allocations.
+        private readonly Dictionary<ClientId, DeliveryGuard> _deliveryGuards =
+            new Dictionary<ClientId, DeliveryGuard>();
 
         private int? _currentTick;
         private long _combatEventsReplicated;
+        private long _deliveryGuardHits;
+        private long _deliveryGuardMisses;
+        private long _deliveryGuardOverflow;
+        private readonly int _deliveryGuardInitialCapacity;
+        private readonly int _deliveryGuardMaxCount;
 
         public CombatReplicationSystem(
             IClientRegistry clientRegistry,
             IVisibilityPolicy visibilityPolicy,
             INetworkSender networkSender,
-            IReplicationValidationSink validationSink)
+            IReplicationValidationSink validationSink,
+            int deliveryGuardInitialCapacity = 256,
+            int deliveryGuardMaxCount = 512)
         {
             _clientRegistry = clientRegistry ?? throw new ArgumentNullException(nameof(clientRegistry));
             _visibilityPolicy = visibilityPolicy ?? throw new ArgumentNullException(nameof(visibilityPolicy));
             _networkSender = networkSender ?? throw new ArgumentNullException(nameof(networkSender));
             _validationSink = validationSink ?? throw new ArgumentNullException(nameof(validationSink));
+            if (deliveryGuardInitialCapacity <= 0) throw new ArgumentOutOfRangeException(nameof(deliveryGuardInitialCapacity));
+            if (deliveryGuardMaxCount <= 0) throw new ArgumentOutOfRangeException(nameof(deliveryGuardMaxCount));
+            if (deliveryGuardMaxCount < deliveryGuardInitialCapacity)
+                throw new ArgumentOutOfRangeException(nameof(deliveryGuardMaxCount));
+            _deliveryGuardInitialCapacity = deliveryGuardInitialCapacity;
+            _deliveryGuardMaxCount = deliveryGuardMaxCount;
         }
 
         /// <summary>
@@ -73,10 +85,7 @@ namespace Caelmor.Combat
 
             _currentTick = authoritativeTick;
 
-            // Hard reset delivery guards for new tick
-            _deliveredByTick.Clear();
-            _deliveredByTick[authoritativeTick] =
-                new Dictionary<ClientId, HashSet<ulong>>();
+            // Delivery guards are reused per session; tick reset is per-client on first use.
         }
 
         private void ReplicateSingleEvent(int authoritativeTick, CombatEvent combatEvent)
@@ -90,7 +99,7 @@ namespace Caelmor.Combat
                 if (!_visibilityPolicy.IsEventVisibleToClient(combatEvent, clientId))
                     continue;
 
-                if (AlreadyDelivered(authoritativeTick, clientId, combatEvent.EventId))
+                if (TryMarkDelivered(authoritativeTick, clientId, combatEvent.EventId))
                     continue;
 
                 var payload = CombatEventPayload.FromCombatEvent(combatEvent);
@@ -101,8 +110,6 @@ namespace Caelmor.Combat
                     authoritativeTick);
 
                 System.Threading.Interlocked.Increment(ref _combatEventsReplicated);
-                MarkDelivered(authoritativeTick, clientId, combatEvent.EventId);
-
                 _validationSink.RecordReplicatedPayload(
                     clientId,
                     authoritativeTick,
@@ -110,30 +117,87 @@ namespace Caelmor.Combat
             }
         }
 
-        private bool AlreadyDelivered(int tick, ClientId clientId, ulong eventId)
+        private bool TryMarkDelivered(int tick, ClientId clientId, ulong eventId)
         {
-            var perTick = _deliveredByTick[tick];
-
-            if (!perTick.TryGetValue(clientId, out var set))
-                return false;
-
-            return set.Contains(eventId);
-        }
-
-        private void MarkDelivered(int tick, ClientId clientId, ulong eventId)
-        {
-            var perTick = _deliveredByTick[tick];
-
-            if (!perTick.TryGetValue(clientId, out var set))
+            if (!_deliveryGuards.TryGetValue(clientId, out var guard))
             {
-                set = new HashSet<ulong>();
-                perTick.Add(clientId, set);
+                guard = new DeliveryGuard(_deliveryGuardInitialCapacity, _deliveryGuardMaxCount);
+                _deliveryGuards.Add(clientId, guard);
             }
 
-            set.Add(eventId);
+            return guard.TryMarkDelivered(
+                tick,
+                eventId,
+                ref _deliveryGuardHits,
+                ref _deliveryGuardMisses,
+                ref _deliveryGuardOverflow);
         }
 
         public long CombatEventsReplicated => System.Threading.Interlocked.Read(ref _combatEventsReplicated);
+        public long CombatDeliveryGuardHits => System.Threading.Interlocked.Read(ref _deliveryGuardHits);
+        public long CombatDeliveryGuardMisses => System.Threading.Interlocked.Read(ref _deliveryGuardMisses);
+        public long CombatDeliveryGuardOverflow => System.Threading.Interlocked.Read(ref _deliveryGuardOverflow);
+
+        public void ReleaseClient(ClientId clientId)
+        {
+            if (_deliveryGuards.TryGetValue(clientId, out var guard))
+            {
+                guard.ClearAll();
+                _deliveryGuards.Remove(clientId);
+            }
+        }
+
+        private sealed class DeliveryGuard
+        {
+            private readonly HashSet<ulong> _deliveredThisWindow;
+            private readonly int _maxCount;
+            private int _tick;
+            private bool _hasTick;
+
+            public DeliveryGuard(int initialCapacity, int maxCount)
+            {
+                _deliveredThisWindow = new HashSet<ulong>(initialCapacity);
+                _maxCount = maxCount;
+            }
+
+            public bool TryMarkDelivered(
+                int tick,
+                ulong eventId,
+                ref long hits,
+                ref long misses,
+                ref long overflow)
+            {
+                if (!_hasTick || _tick != tick)
+                {
+                    _deliveredThisWindow.Clear();
+                    _tick = tick;
+                    _hasTick = true;
+                }
+
+                if (_deliveredThisWindow.Contains(eventId))
+                {
+                    System.Threading.Interlocked.Increment(ref hits);
+                    return true;
+                }
+
+                System.Threading.Interlocked.Increment(ref misses);
+                if (_deliveredThisWindow.Count >= _maxCount)
+                {
+                    _deliveredThisWindow.Clear();
+                    System.Threading.Interlocked.Increment(ref overflow);
+                }
+
+                _deliveredThisWindow.Add(eventId);
+                return false;
+            }
+
+            public void ClearAll()
+            {
+                _deliveredThisWindow.Clear();
+                _hasTick = false;
+                _tick = 0;
+            }
+        }
     }
 
     // --------------------------------------------------------------------
