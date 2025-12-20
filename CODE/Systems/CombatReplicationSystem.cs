@@ -1,3 +1,11 @@
+// - Active runtime code only.
+// - Fixed 10 Hz authoritative tick. No tick-thread blocking I/O.
+// - Zero/low GC steady state after warm-up: no per-tick allocations in hot paths (do not introduce any).
+// - Bounded growth/backpressure with deterministic overflow + metrics.
+// - Deterministic ordering. No Dictionary iteration order reliance.
+// - Thread ownership must be explicit and enforced: tick-thread asserts OR mailbox marshalling.
+// - Deterministic cleanup on disconnect/shutdown; no leaks.
+// - AOT/IL2CPP safe patterns only.
 // CombatReplicationSystem.cs
 // NOTE: Save location must follow existing project structure.
 // Implements CombatReplicationSystem only.
@@ -5,6 +13,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.Tick;
 
 namespace Caelmor.Combat
@@ -30,14 +40,17 @@ namespace Caelmor.Combat
         private readonly IReplicationValidationSink _validationSink;
 
         // Delivery guard is reused; no per-tick allocations.
-        private readonly Dictionary<ClientId, DeliveryGuard> _deliveryGuards =
-            new Dictionary<ClientId, DeliveryGuard>();
+        private readonly Dictionary<SessionId, DeliveryGuard> _deliveryGuards =
+            new Dictionary<SessionId, DeliveryGuard>();
 
         private int? _currentTick;
         private long _combatEventsReplicated;
         private long _deliveryGuardHits;
         private long _deliveryGuardMisses;
         private long _deliveryGuardOverflow;
+        private long _combatReplicationTickCalls;
+        private long _combatClientsReleased;
+        private long _combatReleaseUnknownClientCount;
         private readonly int _deliveryGuardInitialCapacity;
         private readonly int _deliveryGuardMaxCount;
 
@@ -65,21 +78,23 @@ namespace Caelmor.Combat
         /// Replicates a batch of CombatEvents for a single authoritative tick.
         /// Events MUST be provided in the exact emission order.
         /// </summary>
-        public void Replicate(CombatEventBatch batch)
+        public void Replicate(in CombatEventBatch batch)
         {
-            if (batch == null) throw new ArgumentNullException(nameof(batch));
+            TickThreadAssert.AssertTickThread();
+            Interlocked.Increment(ref _combatReplicationTickCalls);
 
             BeginTick(batch.AuthoritativeTick);
 
-            for (int i = 0; i < batch.EventsInOrder.Count; i++)
+            for (int i = 0; i < batch.Count; i++)
             {
-                var combatEvent = batch.EventsInOrder[i];
+                var combatEvent = batch[i];
                 ReplicateSingleEvent(batch.AuthoritativeTick, combatEvent);
             }
         }
 
         private void BeginTick(int authoritativeTick)
         {
+            TickThreadAssert.AssertTickThread();
             if (_currentTick == authoritativeTick)
                 return;
 
@@ -90,6 +105,7 @@ namespace Caelmor.Combat
 
         private void ReplicateSingleEvent(int authoritativeTick, CombatEvent combatEvent)
         {
+            TickThreadAssert.AssertTickThread();
             var subscribers = _clientRegistry.GetSubscribers(combatEvent.CombatContextId);
 
             for (int i = 0; i < subscribers.Count; i++)
@@ -117,8 +133,9 @@ namespace Caelmor.Combat
             }
         }
 
-        private bool TryMarkDelivered(int tick, ClientId clientId, ulong eventId)
+        private bool TryMarkDelivered(int tick, SessionId clientId, ulong eventId)
         {
+            TickThreadAssert.AssertTickThread();
             if (!_deliveryGuards.TryGetValue(clientId, out var guard))
             {
                 guard = new DeliveryGuard(_deliveryGuardInitialCapacity, _deliveryGuardMaxCount);
@@ -137,13 +154,22 @@ namespace Caelmor.Combat
         public long CombatDeliveryGuardHits => System.Threading.Interlocked.Read(ref _deliveryGuardHits);
         public long CombatDeliveryGuardMisses => System.Threading.Interlocked.Read(ref _deliveryGuardMisses);
         public long CombatDeliveryGuardOverflow => System.Threading.Interlocked.Read(ref _deliveryGuardOverflow);
+        public long CombatReplicationTickCalls => System.Threading.Interlocked.Read(ref _combatReplicationTickCalls);
+        public long CombatClientsReleased => System.Threading.Interlocked.Read(ref _combatClientsReleased);
+        public long CombatReleaseUnknownClientCount => System.Threading.Interlocked.Read(ref _combatReleaseUnknownClientCount);
 
-        public void ReleaseClient(ClientId clientId)
+        public void ReleaseClient(SessionId clientId)
         {
+            TickThreadAssert.AssertTickThread();
             if (_deliveryGuards.TryGetValue(clientId, out var guard))
             {
                 guard.ClearAll();
                 _deliveryGuards.Remove(clientId);
+                System.Threading.Interlocked.Increment(ref _combatClientsReleased);
+            }
+            else
+            {
+                System.Threading.Interlocked.Increment(ref _combatReleaseUnknownClientCount);
             }
         }
 
@@ -204,15 +230,31 @@ namespace Caelmor.Combat
     // Batch Input
     // --------------------------------------------------------------------
 
-    public sealed class CombatEventBatch
+    public readonly struct CombatEventBatch
     {
+        private readonly CombatEvent[] _events;
+        private readonly int _count;
         public int AuthoritativeTick { get; }
-        public IReadOnlyList<CombatEvent> EventsInOrder { get; }
 
-        public CombatEventBatch(int authoritativeTick, IReadOnlyList<CombatEvent> eventsInOrder)
+        public CombatEventBatch(int authoritativeTick, CombatEvent[] eventsInOrder, int count)
         {
             AuthoritativeTick = authoritativeTick;
-            EventsInOrder = eventsInOrder ?? throw new ArgumentNullException(nameof(eventsInOrder));
+            _events = eventsInOrder ?? throw new ArgumentNullException(nameof(eventsInOrder));
+            if (count < 0 || count > eventsInOrder.Length)
+                throw new ArgumentOutOfRangeException(nameof(count));
+            _count = count;
+        }
+
+        public int Count => _count;
+
+        public CombatEvent this[int index]
+        {
+            get
+            {
+                if ((uint)index >= (uint)_count)
+                    throw new ArgumentOutOfRangeException(nameof(index));
+                return _events[index];
+            }
         }
     }
 
@@ -278,29 +320,23 @@ namespace Caelmor.Combat
     // Dependencies / Interfaces
     // --------------------------------------------------------------------
 
-    public readonly struct ClientId
-    {
-        public readonly string Value;
-        public ClientId(string value) { Value = value; }
-    }
-
     public interface IClientRegistry
     {
-        IReadOnlyList<ClientId> GetSubscribers(string combatContextId);
+        IReadOnlyList<SessionId> GetSubscribers(string combatContextId);
     }
 
     public interface IVisibilityPolicy
     {
-        bool IsEventVisibleToClient(CombatEvent combatEvent, ClientId clientId);
+        bool IsEventVisibleToClient(CombatEvent combatEvent, SessionId clientId);
     }
 
     public interface INetworkSender
     {
-        void SendReliable(ClientId clientId, CombatEventPayload payload, int authoritativeTick);
+        void SendReliable(SessionId clientId, CombatEventPayload payload, int authoritativeTick);
     }
 
     public interface IReplicationValidationSink
     {
-        void RecordReplicatedPayload(ClientId clientId, int authoritativeTick, CombatEventPayload payload);
+        void RecordReplicatedPayload(SessionId clientId, int authoritativeTick, CombatEventPayload payload);
     }
 }

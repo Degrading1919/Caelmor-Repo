@@ -1,5 +1,14 @@
+// - Active runtime code only.
+// - Fixed 10 Hz authoritative tick. No tick-thread blocking I/O.
+// - Zero/low GC steady state after warm-up: no per-tick allocations in hot paths (do not introduce any).
+// - Bounded growth/backpressure with deterministic overflow + metrics.
+// - Deterministic ordering. No Dictionary iteration order reliance.
+// - Thread ownership must be explicit and enforced: tick-thread asserts OR mailbox marshalling.
+// - Deterministic cleanup on disconnect/shutdown; no leaks.
+// - AOT/IL2CPP safe patterns only.
 using System;
 using System.Collections.Generic;
+using Caelmor.Combat;
 using Caelmor.Runtime.Diagnostics;
 using Caelmor.Runtime.Integration;
 using Caelmor.Runtime.Onboarding;
@@ -126,6 +135,16 @@ namespace Caelmor.Runtime.Host
             int outboundPumpIdleMs = 1,
             ReplicationSnapshotCounters? replicationCounters = null,
             int replicationHookOrderKey = int.MaxValue - 512,
+            CombatEventBuffer combatEventBuffer = null,
+            CombatReplicationSystem combatReplication = null,
+            IClientRegistry combatClientRegistry = null,
+            IVisibilityPolicy combatVisibilityPolicy = null,
+            INetworkSender combatNetworkSender = null,
+            IReplicationValidationSink combatReplicationValidationSink = null,
+            int combatMaxEventsPerTick = 512,
+            int combatDeliveryGuardInitialCapacity = 256,
+            int combatDeliveryGuardMaxCount = 512,
+            int combatReplicationHookOrderKey = int.MaxValue - 640,
             PersistenceWriteQueue persistenceWrites = null,
             PersistenceWorkerLoop persistenceWorker = null,
             PersistencePipelineCounters persistenceCounters = null,
@@ -144,7 +163,17 @@ namespace Caelmor.Runtime.Host
                 throw new InvalidOperationException("AuthoritativeCommandConsumeTickHook must run after the freeze hook.");
 #endif
 
-            int baseHooks = skipLifecycleHookRegistration ? 4 : 5;
+            combatEventBuffer ??= new CombatEventBuffer(combatMaxEventsPerTick);
+            combatReplication ??= new CombatReplicationSystem(
+                combatClientRegistry ?? new ActiveSessionCombatClientRegistry(activeSessions),
+                combatVisibilityPolicy ?? new AlwaysVisibleCombatVisibilityPolicy(),
+                combatNetworkSender ?? new NullCombatNetworkSender(),
+                combatReplicationValidationSink ?? new NullCombatReplicationValidationSink(),
+                combatDeliveryGuardInitialCapacity,
+                combatDeliveryGuardMaxCount);
+            var combatReplicationHook = new CombatReplicationTickHook(combatEventBuffer, combatReplication);
+
+            int baseHooks = skipLifecycleHookRegistration ? 5 : 6;
             int hookCount = phaseHooks.Length + baseHooks;
             bool includePersistence = persistenceCompletions != null && persistenceCompletionApplier != null;
             if (includePersistence)
@@ -154,7 +183,7 @@ namespace Caelmor.Runtime.Host
             int index = 0;
 
             var lifecycleMailbox = new TickThreadMailbox(transport.Config);
-            var lifecycleApplier = new LifecycleApplier(transport, commands, handshakes, visibility, replication);
+            var lifecycleApplier = new LifecycleApplier(transport, commands, handshakes, visibility, replication, combatReplication);
             bool persistenceEnabled = includePersistence || persistenceWrites != null || persistenceWorker != null || persistenceCounters != null;
             var pipelineHealth = new RuntimePipelineHealth(handshakeEnabled: true, persistenceEnabled: persistenceEnabled);
             replication.AttachPipelineHealth(pipelineHealth);
@@ -172,6 +201,7 @@ namespace Caelmor.Runtime.Host
             combinedHooks[index++] = new PhaseHookRegistration(
                 handshakeHook,
                 handshakeProcessingHookOrderKey);
+            combinedHooks[index++] = new PhaseHookRegistration(combatReplicationHook, combatReplicationHookOrderKey);
 
             for (int i = 0; i < phaseHooks.Length; i++)
                 combinedHooks[index++] = phaseHooks[i];
@@ -428,19 +458,22 @@ namespace Caelmor.Runtime.Host
         private readonly SessionHandshakePipeline _handshakes;
         private readonly VisibilityCullingService _visibility;
         private readonly ClientReplicationSnapshotSystem _replication;
+        private readonly CombatReplicationSystem _combatReplication;
 
         public LifecycleApplier(
             PooledTransportRouter transport,
             AuthoritativeCommandIngestor commands,
             SessionHandshakePipeline handshakes,
             VisibilityCullingService visibility,
-            ClientReplicationSnapshotSystem replication)
+            ClientReplicationSnapshotSystem replication,
+            CombatReplicationSystem combatReplication)
         {
             _transport = transport ?? throw new ArgumentNullException(nameof(transport));
             _commands = commands ?? throw new ArgumentNullException(nameof(commands));
             _handshakes = handshakes ?? throw new ArgumentNullException(nameof(handshakes));
             _visibility = visibility ?? throw new ArgumentNullException(nameof(visibility));
             _replication = replication ?? throw new ArgumentNullException(nameof(replication));
+            _combatReplication = combatReplication ?? throw new ArgumentNullException(nameof(combatReplication));
         }
 
         public void Apply(TickThreadMailbox.LifecycleOp op)
@@ -461,6 +494,7 @@ namespace Caelmor.Runtime.Host
                     break;
                 case TickThreadMailbox.LifecycleOpKind.CleanupReplication:
                     _replication.OnSessionDisconnected(op.SessionId);
+                    _combatReplication.ReleaseClient(op.SessionId);
                     break;
             }
         }

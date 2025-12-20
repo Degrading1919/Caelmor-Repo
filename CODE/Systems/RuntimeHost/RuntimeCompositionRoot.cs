@@ -1,4 +1,13 @@
+// - Active runtime code only.
+// - Fixed 10 Hz authoritative tick. No tick-thread blocking I/O.
+// - Zero/low GC steady state after warm-up: no per-tick allocations in hot paths (do not introduce any).
+// - Bounded growth/backpressure with deterministic overflow + metrics.
+// - Deterministic ordering. No Dictionary iteration order reliance.
+// - Thread ownership must be explicit and enforced: tick-thread asserts OR mailbox marshalling.
+// - Deterministic cleanup on disconnect/shutdown; no leaks.
+// - AOT/IL2CPP safe patterns only.
 using System;
+using Caelmor.Combat;
 using Caelmor.Runtime;
 using Caelmor.Runtime.Diagnostics;
 using Caelmor.Runtime.Integration;
@@ -80,8 +89,18 @@ namespace Caelmor.Runtime.Host
                 settings.SnapshotBudget,
                 replicationCounters);
 
+            var combatEventBuffer = settings.CombatEventBuffer ?? new CombatEventBuffer(settings.CombatMaxEventsPerTick);
+            var combatReplication = settings.CombatReplicationSystem ?? new CombatReplicationSystem(
+                settings.CombatClientRegistry ?? new ActiveSessionCombatClientRegistry(activeSessions),
+                settings.CombatVisibilityPolicy ?? new AlwaysVisibleCombatVisibilityPolicy(),
+                settings.CombatNetworkSender ?? new NullCombatNetworkSender(),
+                settings.CombatReplicationValidationSink ?? new NullCombatReplicationValidationSink(),
+                settings.CombatDeliveryGuardInitialCapacity,
+                settings.CombatDeliveryGuardMaxCount);
+            var combatReplicationHook = new CombatReplicationTickHook(combatEventBuffer, combatReplication);
+
             var lifecycleMailbox = new TickThreadMailbox(backpressure);
-            var lifecycleApplier = new LifecycleApplier(transport, commands, handshakes, visibility, replication);
+            var lifecycleApplier = new LifecycleApplier(transport, commands, handshakes, visibility, replication, combatReplication);
             var persistenceEnabled = settings.Persistence != null && settings.Persistence.Writer != null;
             var pipelineHealth = new RuntimePipelineHealth(handshakeEnabled: true, persistenceEnabled: persistenceEnabled);
             replication.AttachPipelineHealth(pipelineHealth);
@@ -123,7 +142,7 @@ namespace Caelmor.Runtime.Host
                 persistenceHook = new PersistenceCompletionPhaseHook(persistenceCompletions, completionApplier, pipelineHealth);
             }
 
-            int baseHooks = 5;
+            int baseHooks = 6;
             int hookCount = settings.PhaseHooks.Length + baseHooks + (persistenceHook != null ? 1 : 0);
             var combinedHooks = new PhaseHookRegistration[hookCount];
             int index = 0;
@@ -132,6 +151,7 @@ namespace Caelmor.Runtime.Host
             combinedHooks[index++] = new PhaseHookRegistration(inboundPump, settings.CommandFreezeHookOrderKey);
             combinedHooks[index++] = new PhaseHookRegistration(commandConsumeHook, settings.CommandConsumeHookOrderKey);
             combinedHooks[index++] = new PhaseHookRegistration(handshakeHook, settings.HandshakeProcessingHookOrderKey);
+            combinedHooks[index++] = new PhaseHookRegistration(combatReplicationHook, settings.CombatReplicationHookOrderKey);
 
             for (int i = 0; i < settings.PhaseHooks.Length; i++)
                 combinedHooks[index++] = settings.PhaseHooks[i];
@@ -240,6 +260,15 @@ namespace Caelmor.Runtime.Host
         public int PipelineStaleTicks { get; set; } = RuntimePipelineHealth.DefaultStaleTicks;
         public ReplicationSnapshotCounters ReplicationCounters { get; set; }
         public PersistenceSettings Persistence { get; set; }
+        public CombatEventBuffer CombatEventBuffer { get; set; }
+        public CombatReplicationSystem CombatReplicationSystem { get; set; }
+        public IClientRegistry CombatClientRegistry { get; set; }
+        public IVisibilityPolicy CombatVisibilityPolicy { get; set; }
+        public INetworkSender CombatNetworkSender { get; set; }
+        public IReplicationValidationSink CombatReplicationValidationSink { get; set; }
+        public int CombatMaxEventsPerTick { get; set; } = 512;
+        public int CombatDeliveryGuardInitialCapacity { get; set; } = 256;
+        public int CombatDeliveryGuardMaxCount { get; set; } = 512;
         public ISimulationEligibilityGate[] EligibilityGates { get; set; } = Array.Empty<ISimulationEligibilityGate>();
         public ParticipantRegistration[] Participants { get; set; } = Array.Empty<ParticipantRegistration>();
         public PhaseHookRegistration[] PhaseHooks { get; set; } = Array.Empty<PhaseHookRegistration>();
@@ -248,6 +277,7 @@ namespace Caelmor.Runtime.Host
         public int CommandConsumeHookOrderKey { get; set; } = int.MinValue + 1;
         public int HandshakeProcessingHookOrderKey { get; set; } = int.MinValue + 2;
         public int PersistenceCompletionHookOrderKey { get; set; } = -1024;
+        public int CombatReplicationHookOrderKey { get; set; } = int.MaxValue - 640;
         public int ReplicationHookOrderKey { get; set; } = int.MaxValue - 512;
     }
 
