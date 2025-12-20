@@ -54,7 +54,8 @@ namespace Caelmor.Combat
         private long _combatOutcomesApplied;
         private long _combatDuplicateOutcomesRejected;
         private long _combatIdempotenceOverflow;
-        private long _combatEventsCreated;
+        private long _combatEventsEmitted;
+        private long _combatEventsDropped;
 
         // Validation support: last resolved intent per entity (snapshot-only; not authoritative gameplay state).
         private readonly Dictionary<EntityHandle, string> _lastResolvedIntentIdByEntity =
@@ -118,7 +119,6 @@ namespace Caelmor.Combat
                     subjectEntity: r.ActorEntity,
                     intentResult: r,
                     payloadId: payloadId);
-                Interlocked.Increment(ref _combatEventsCreated);
                 EmitEventAfterApply(combatEvent);
 
                 appliedCount++;
@@ -139,7 +139,6 @@ namespace Caelmor.Combat
                     subjectEntity: d.TargetEntity,
                     damageOutcome: d,
                     payloadId: payloadId);
-                Interlocked.Increment(ref _combatEventsCreated);
                 EmitEventAfterApply(combatEvent);
 
                 appliedCount++;
@@ -160,7 +159,6 @@ namespace Caelmor.Combat
                     subjectEntity: m.TargetEntity,
                     mitigationOutcome: m,
                     payloadId: payloadId);
-                Interlocked.Increment(ref _combatEventsCreated);
                 EmitEventAfterApply(combatEvent);
 
                 appliedCount++;
@@ -188,7 +186,6 @@ namespace Caelmor.Combat
                     subjectEntity: sc.Entity,
                     stateSnapshot: state,
                     payloadId: payloadId);
-                Interlocked.Increment(ref _combatEventsCreated);
                 EmitEventAfterApply(combatEvent);
 
                 appliedCount++;
@@ -273,7 +270,13 @@ namespace Caelmor.Combat
             if (e == null) throw new ArgumentNullException(nameof(e));
 
             // Event emission occurs strictly after application in this method.
-            _eventSink.Emit(e);
+            if (_eventSink.TryEmit(in e))
+            {
+                Interlocked.Increment(ref _combatEventsEmitted);
+                return;
+            }
+
+            Interlocked.Increment(ref _combatEventsDropped);
         }
 
         // ---------------------------
@@ -408,8 +411,11 @@ namespace Caelmor.Combat
                 Interlocked.Read(ref _combatOutcomesApplied),
                 Interlocked.Read(ref _combatDuplicateOutcomesRejected),
                 Interlocked.Read(ref _combatIdempotenceOverflow),
-                Interlocked.Read(ref _combatEventsCreated));
+                Interlocked.Read(ref _combatEventsEmitted),
+                Interlocked.Read(ref _combatEventsDropped));
         }
+
+        internal ICombatEventSink EventSink => _eventSink;
     }
 
     // --------------------------------------------------------------------
@@ -632,7 +638,7 @@ namespace Caelmor.Combat
 
     public interface ICombatEventSink
     {
-        void Emit(CombatEvent combatEvent);
+        bool TryEmit(in CombatEvent combatEvent);
     }
 
     // --------------------------------------------------------------------
@@ -941,20 +947,23 @@ namespace Caelmor.Combat
             long combatOutcomesApplied,
             long combatDuplicateOutcomesRejected,
             long combatIdempotenceOverflow,
-            long combatEventsCreated)
+            long combatEventsEmitted,
+            long combatEventsDropped)
         {
             CombatOutcomesApplied = combatOutcomesApplied;
             CombatDuplicateOutcomesRejected = combatDuplicateOutcomesRejected;
             CombatIdempotenceOverflow = combatIdempotenceOverflow;
-            CombatEventsCreated = combatEventsCreated;
+            CombatEventsEmitted = combatEventsEmitted;
+            CombatEventsDropped = combatEventsDropped;
         }
 
         public long CombatOutcomesApplied { get; }
         public long CombatDuplicateOutcomesRejected { get; }
         public long CombatIdempotenceOverflow { get; }
-        public long CombatEventsCreated { get; }
+        public long CombatEventsEmitted { get; }
+        public long CombatEventsDropped { get; }
 
         public static CombatOutcomeApplicationCounterSnapshot Empty =>
-            new CombatOutcomeApplicationCounterSnapshot(0, 0, 0, 0);
+            new CombatOutcomeApplicationCounterSnapshot(0, 0, 0, 0, 0);
     }
 }
