@@ -1,0 +1,1405 @@
+Blender 5.0 Game Asset UV Unwrapping and Texturing Workflow Guide
+1. Glossary of Key Terms
+
+UV (Texture Coordinates): A 2D coordinate system (U and V axes) that maps a 3D surface to a flat image. UV mapping is the process of “unwrapping” a 3D mesh onto a 2D plane, similar to peeling an orange or unwrapping gift paper, so that textures can be painted onto it
+learn.foundry.com
+. Each vertex on the mesh gets a UV coordinate that tells which pixel (texel) of the image is applied to that point on the surface.
+
+UV Seam: A user-defined cut in the mesh that tells the unwrap algorithm where to split the UV map. At seams, the UV mapping is discontinuous (like cutting a paper model)
+learn.foundry.com
+. Good seam placement is analogous to cutting along edges of a paper craft model – it helps flatten the mesh with minimal distortion. Seams should be placed where they are least visible or where the mesh can naturally be separated (e.g. along hidden edges like the inside of limbs or back of a character).
+
+UV Island (Shell): A contiguous cluster of faces in the UV map that are connected to each other (no seams between them). In other words, each UV island is a section of the mesh unfolded as one piece in 2D
+learn.foundry.com
+. Islands are separated by seams. For example, a character’s arm, head, and torso might each be separate islands after unwrapping. Islands can be moved, rotated, and scaled independently in the UV space.
+
+Texel Density: The ratio of texture resolution to real-world size on the model, measured in texels (texture pixels) per unit of surface area. It indicates how much texture detail is packed onto a model’s surface
+rebusfarm.net
+. Maintaining consistent texel density ensures that all parts of a model have uniform texture sharpness (e.g. one part doesn’t appear blurrier than another). For example, if the face and the body have very different texel densities, one might look much sharper (higher detail per area) while the other is blurry
+rebusfarm.net
+. Artists often use a checker pattern to verify consistent texel density across all UV islands.
+
+UDIM: Stands for “U-Dimension.” UDIM is a tiled UV layout system where multiple texture images (tiles) represent different sections of a model’s UVs
+docs.blender.org
+. Instead of all UVs being confined to the 0–1 UV space, they can spread across numbered tiles (1001, 1002, 1003, etc.), allowing a model to use an array of texture files. This is common in high-resolution texturing workflows (e.g. VFX) to get more detail by using multiple smaller textures rather than one huge map. (Note: UDIMs are supported in Blender and Substance Painter, but game engines like Unity have limited support, often preferring atlases or multiple materials.)
+
+Packing Margin (Bleed): The padding space left between UV islands when arranging (packing) them in the UV map. A margin (also called bleed or gutter) prevents texture bleeding at edges due to mipmapping or sampling
+reddit.com
+. For example, if two islands are too close, at lower mipmap levels their texels can bleed into each other causing a seam or color leak. Blender’s UV pack tools allow specifying a margin (often expressed as a fraction of image size or a pixel count) to ensure islands have a safety border of extra pixels. Painters also extend (bleed) texture colors past island borders to avoid seams showing.
+
+Mipmaps: Pre-calculated downscaled versions of a texture used for rendering at a distance
+en.wikipedia.org
+en.wikipedia.org
+. A mipmap chain might include a full-size texture (e.g. 4096×4096), then half-size (2048×2048), quarter-size, and so on down to a few pixels. When an object is far away or very small on screen, the GPU will sample from a smaller mipmap level. This improves rendering performance and reduces aliasing (moire or jagged patterns) by avoiding undersampling of a high-res texture
+en.wikipedia.org
+en.wikipedia.org
+. Mipmapping slightly increases memory use (about 33% more memory per texture) but vastly improves visual quality and speed.
+
+Normal Map (and Spaces): A texture that stores surface normals (direction vectors) per texel, used to fake high-resolution detail lighting on a low-poly mesh. Tangent-space normal maps (the most common type) are encoded relative to the surface’s tangent basis (its orientation)
+daneresearchpractice.wordpress.com
+. This means the normal map stays valid even if the object moves, rotates, or deforms, since it’s tied to each face’s local axes. Object-space normal maps store normals in fixed object coordinates (often displayed in psychedelic colors). They can produce slightly sharper detail but do not deform correctly with animation – the “bump” on a bending elbow would not rotate with the arm (object-space maps “stick” to the original orientation of the mesh)
+docs.blender.org
+. Tangent-space maps are used for skinned characters because they support transformations and skeletal deformations
+docs.blender.org
+. (Note: World-space normal maps also exist, tied to world coordinates, but are mainly for static objects or special cases.) In practice, use tangent-space normals for game assets. Ensure your baking and engine use the same tangent basis (Blender and Unity use the MikkTSpace standard) to avoid seams or lighting errors.
+
+Roughness (Microsurface Roughness): In PBR shading, roughness defines how “blurry” or “sharp” reflections are on a surface. It represents the micro-roughness of the material: a roughness of 0.0 means a surface is perfectly smooth/mirror-like, yielding sharp reflections, whereas 1.0 means it’s extremely rough or matte, scattering light and giving diffuse, blurry reflections
+khronos.org
+. Artists often use a roughness map (grayscale texture) where dark areas are shiny (low roughness) and bright areas are matte (high roughness). For example, skin or plastic might have a mid-high roughness (soft sheen), while polished metal or wet surfaces have low roughness (sharp highlights)
+khronos.org
+. (In Unity’s standard shader, “Smoothness” is the inverse of roughness – a smoothness of 1 is shiny, 0 is rough. So you may need to invert a roughness map when using it as a smoothness map
+gamedev.stackexchange.com
+.)
+
+Metallic (Metalness): A property defining whether a material is a metal or a dielectric (non-metal). In metallic/roughness workflows, the metallic value is 0 for non-metals like wood, cloth, skin (these use a fixed diffuse color and non-colored reflections), and 1 for metals like iron, gold, etc. (metals use the Base Color as the reflective tint and have no diffuse component)
+khronos.org
+. Metals reflect light in a colored manner and their base color is essentially the reflectance tint (e.g. gold has a yellow base color which actually tints its reflections)
+khronos.org
+. A metallic map is a grayscale texture where 1 (white) indicates metal and 0 (black) indicates non-metal; gray values are sometimes used for partial metal content (rare in reality, except for rust or dirt on metal). Non-metals have diffuse color and typically use a neutral specular color (around 4% reflective). Metals have no diffuse, and all reflection comes from their specular tinted by base color. In Unity and glTF, metallic and roughness are often stored together in different channels of one texture for efficiency.
+
+Ambient Occlusion (AO): (Not explicitly in the question list, but implied in texture exports) AO is a baked shading map that darkens crevices and areas where light is occluded (like armpits or where a belt touches cloth). It’s usually a grayscale multiply layer over the albedo. In workflows, AO is sometimes packed in the blue or red channel of a texture along with roughness/metallic (often called an ORM or Occlusion-Roughness-Metallic map). AO adds contact shadowing and depth, especially in engines that don’t do real-time GI. It should be applied as a static shadow factor – pure white means fully lit, black means fully occluded.
+
+Vertex Colors: Per-vertex color data stored in the mesh. Each vertex can have an RGBA color that gets interpolated across faces. Vertex colors can be used to add detail or masks without using a texture. For example, one could paint vertex colors to represent damage, team colors, or material masks (and use them in shaders). In games, vertex colors might be used for baking AO or lighting information for stylized looks. In Blender, vertex colors are now referred to as Color Attributes on the mesh data. A simple way to understand them: vertex colors let you color a model without textures
+gamedev.stackexchange.com
+, though with less detail since it’s limited by mesh resolution.
+
+Bake Cage: A separate mesh (usually a modified copy of the low-poly) used as a control volume for baking. The cage is a version of the low-poly pushed outward along face normals to envelop the high-poly model
+polycount.com
+. During baking (especially normals and AO), rays are cast from the low-poly surface to find the high-poly detail. A cage ensures the rays intersect the correct high-poly parts without clipping through or missing details. Using a cage can result in cleaner normal maps at tricky areas like hard edges or deep recesses, because it prevents rays from accidentally hitting the wrong part of the high-poly or shooting through the model. If no cage is provided, Blender can use a ray distance setting (a simple numeric offset) or auto-compute an inner cage, but a custom cage often yields better control. Essentially, a cage “inflates” the low-poly to fully enclose the high-poly, guiding the bake for more accurate results
+polycount.com
+.
+
+Tangent Basis: The per-vertex orthogonal vectors (tangent and bitangent) that, together with the vertex normal, form the coordinate space for tangent-space normal maps
+daneresearchpractice.wordpress.com
+. The tangent basis is like a custom orientation on the surface that tells the shader how to interpret the RGB directions of a normal map. Different software calculate tangents differently, which is why a normal map baked in one program can look wrong in another if their tangent basis doesn’t match
+daneresearchpractice.wordpress.com
+. Blender and Unity (and most modern tools) use the MikkT tangent space (Mikktspace) by default, which is a widely adopted standard to minimize these issues. The key point is: always use the same tangent basis for baking and rendering. If you bake in Blender and view in Unity, stick to Mikktspace in both (Blender’s Cycles uses Mikkt by default for normal baking). Tangent basis differences primarily affect the smoothness of normal map results across UV seams and smoothing splits. If a normal map shows odd seams or lighting, a tangent basis mismatch is often the culprit. Staying with one standard ensures the normal’s X (red), Y (green) are interpreted consistently (note: +X typically points “right” on the UV, +Y “up” on the UV in tangent space). This also ties into normal map Y-axis orientation: some engines (like Unreal) expect the green channel flipped relative to others. Unity, however, uses +Y (same as Blender) by default
+discussions.unity.com
+, so you generally do not flip the green when exporting from Blender to Unity. Always double-check your normals in engine and invert the Y (green) channel only if the lighting looks inverted (e.g. bumps appear like dents).
+
+2. Blender 5.0 UI and Key Panels for UV/Texturing
+
+Blender 5.0’s interface is divided into editor areas which can be configured into preset workspaces. The following editors and settings are used in the UV unwrapping and texturing workflow:
+
+UV Editor: This is where you view and edit the 2D UV layout. In Blender’s default UV Editing workspace, the interface is split – typically the left side is the UV Editor, and the right side is the 3D Viewport
+katsbits.com
+katsbits.com
+. The UV Editor shows outlines of UV islands over an image grid. You can select, move, scale, and pack UV islands here. Common UI elements: a header with menus (UV, Select, Image, etc.), a toolbar (tools like selection, move, rotate, sculpt, etc.), and an overlay toggle. Turn on UV Stretch overlay (in the UV Editor’s overlay dropdown) to visualize distortion – Blender can color UV faces by how stretched they are relative to 3D
+blenderartists.org
+. The UV Editor also has options for displaying a checker or grid texture as background to help see stretching. How to access: Switch to the “UV Editing” workspace from the top bar, or change any area’s Editor Type to UV Editor. Ensure Sync Selection is on (diagonal arrows icon) if you want UV selection to follow 3D mesh selection and vice versa.
+
+Image Editor: A 2D image view/editor. In Blender 5.0, the UV Editor and Image Editor are separate editors (since Blender 2.8+)
+katsbits.com
+. The Image Editor is used to view and edit images (and also for texture painting in 2D). In the Texture Paint workspace, Blender often has the Image Editor on one side (showing the active texture) and the 3D Paint viewport on the other. The Image Editor can show your painted texture updates in real time. You can also create new images here via Image > New, or open existing textures. When painting, you might toggle the Image Editor to Paint mode (there’s a mode drop-down) to directly paint on the 2D canvas. Key concept: Only the Image Editor shows actual pixel data and allows editing pixels; the UV Editor is for UV layouts and will not display texture paint unless you switch it to image mode. To see UVs over an image, use the UV Editor and ensure an image is loaded; to paint that image in 2D, use the Image Editor in paint mode.
+
+3D Viewport – Edit Mode & Texture Paint Mode: The 3D View is where you mark seams and preview textures on your model. In Edit Mode, you select edges to mark seams and faces to unwrap. Blender 5.0 provides a specialized UV Editing workspace that automatically puts the 3D view into Edit Mode when activated
+katsbits.com
+. You can also unwrap directly from here using the UV menu (hotkey U in Edit Mode brings up unwrap options). In Texture Paint Mode (accessible via the mode drop-down in the 3D View header, or by using the Texture Paint workspace preset), the 3D View becomes an interactive painting canvas. You’ll see a toolbar with brushes and paint settings on the left, and tool options on the right (in the Active Tool tab or N sidebar under Tool). You can paint color directly on the model in the viewport. Use the viewport shading set to “Material Preview” or “Texture” to see your painting in real time (in Solid mode you might not see the texture unless you enable textured solid). The 3D Paint mode has symmetry options (on the top Paint header or Tool Settings, e.g. X Mirror), stroke methods, etc., similar to sculpt mode but for textures.
+
+Shader Editor (Material Editor): This is Blender’s node-based material editor, found in the Shading workspace or by switching any area to Shader Editor. Here you set up your material’s nodes (Principled BSDF, image texture nodes, normal map nodes, etc.). It’s crucial for texture painting because you must have an Image Texture node in your material to paint onto, and it should be the active node (selected) for Blender to know which image to paint
+docs.blender.org
+. In practice, when you create a new texture for painting (say a skin_basecolor), you add an Image Texture node, click “New” to create an image, then connect it to the Principled BSDF (e.g. into Base Color). Select that Image Texture node (it gets an orange outline) – this marks it as the target for painting and baking. The Shader Editor is also where you’ll set up multiple texture slots if simulating layers (stacking nodes), and where you configure non-color data vs sRGB for each texture node (via the color space setting).
+
+Bake Settings (Render Properties): Baking in Blender 5.0 is done through the Render Properties tab (the panel with the camera icon in Properties Editor) when using Cycles render engine. First, set the renderer to Cycles (Eevee in Blender 3.x does not support baking; by 5.x check if baking is supported in real-time engine or still only in Cycles). In Render Properties, scroll down to find the Bake section. Here you choose the type of bake (Normal, Diffuse, Roughness, Ambient Occlusion, etc.), and set options: Selected to Active (for high-to-low poly baking), Extrusion (cage ray distance if using cage), Max Ray Distance (if not using a cage, how far to search for high-poly detail)
+docs.blender.org
+docs.blender.org
+, and output settings. Important: before clicking Bake, make sure the target object has an active Image Texture node to bake into (selected in Shader Editor) and that the target image is loaded/created. If you forget this, you often get a black result or an error (no active image to bake to). The Bake panel also has a cage checkbox: if you want to use a custom cage object, enable “Cage” and specify the cage mesh, or set the cage extrusion distance. Location in UI: Properties Editor (usually on the right side of the interface) > Render tab > Bake section (you may need to scroll). Also ensure output image file format and color depth are set in the Output section if you plan to save renders (for baking, just having the image node is enough; you’ll save the image from the Image Editor after baking).
+
+Concept Map Summary: In practice, you might use the UV Editing workspace to do seams and unwrap (3D View + UV Editor side by side). Then switch to Texture Paint workspace to do painting (3D Paint view + Image Editor). Use the Shading workspace to set up materials and see the Shader Editor + 3D preview simultaneously. And use Properties for any baking. Blender’s workspaces are just combinations of these editors; you can always customize the layout as needed (for example, some artists tile their screen with 3D View, UV Editor, Shader Editor, and Image Editor all visible when doing texturing). Knowing where each piece lives (UV Editor for UVs, Shader Editor for material and texture node setup, Image Editor for 2D texture view/creation, 3D View for actual painting and mesh editing) will help you navigate the UV and texturing process smoothly.
+
+3. UV Unwrapping Workflow for a Humanoid Character
+
+UV unwrapping a humanoid (low to mid poly, rigged model) requires strategic seam placement and careful island management to get an efficient, distortion-free layout. Here’s a step-by-step approach and tips:
+
+3.1 Planning Seams and Islands
+
+Seam Placement Strategies: Plan seams where they will be least visible to the player and where they make sense for flattening the geometry. For a human character with clothing:
+
+Head: Typically cut a seam around the base of the head (hidden by the jawline or under hair) and possibly down the back of the skull. One common method is a “head cap” – a seam circling the hairline (or where a helmet edge would be), then one seam from that circle down the back of the head to the neck. This way, the face is one continuous island (with the seam at back where it’s less seen). Inside of the ears can be cut as needed to flatten them.
+
+Torso: Often split the torso along the sides or back. For example, a seam down the center of the back (spine) from neck to lower back can open the torso like a jacket. The front chest would then be seamless. Alternatively, if the character has a shirt, you might seam the side of the torso under the arm. The armpit and inner side seams are hidden when arms are down. Also place a seam around the neckline (where head/neck connects) and around the waist if it’s a separate piece or where the shirt meets pants.
+
+Arms: A common seam is along the inner arm (inside of the bicep, through the armpit down to inner wrist). This hides the seam when the character’s arms are at rest (seam faces inward toward the body). Additionally, cut a seam around the wrist to separate the hand if needed. For hands/fingers, seams often run along less-seen sides of each finger (e.g., along the sides between fingers, not on top). Each finger might be an island, or fingers can sometimes be connected to hand if carefully placed seams between them.
+
+Legs: Similar principle: seam along the inner thigh down through the inner leg to the ankle. The seam inside the leg is less visible (as characters often have legs close or pants covering). Another seam around the top of the thigh or at the belt line may separate the legs from the torso (if pants are same material as torso, maybe not; but usually characters have separate material for pants). For something like shorts, a seam can go along the inner thigh and another along the back of the short, so the front of the leg is continuous.
+
+Clothing seams: If the character wears shorts, you can hide seams on the inside or back of the shorts. For boots or shoes, a seam along the sole (bottom) and up the inner back of the boot works (like how a shoe’s leather might have a back seam). Also a seam around the sole separating it from the upper shoe can flatten the bottom tread separately.
+
+Mirrored parts: If arms or legs are symmetric and you plan to mirror UVs (see below about mirroring), you’d place identical seams on both left and right in a symmetric fashion, so their UV layouts overlap perfectly. Generally, keep symmetry in mind: even if not mirroring UVs, symmetrical seam placement makes it easier to paint and ensures consistent distortion.
+
+In general, place seams where geometry naturally has breaks (clothing edges, hard creases) or hidden areas (inner limbs, back of body). Avoid placing a seam right across a highly visible area (e.g., across the front of the face or down the center of a chest) unless absolutely necessary.
+
+Also avoid seams in areas that deform a lot if you can – for example, a seam exactly at an elbow or knee crease might sometimes become visible during animation if textures misalign during bending. It’s often better to offset it just behind the joint or use the inside area for the seam.
+
+Results of Good Seam Placement: Fewer, larger UV islands (but not too large to cause distortion) and islands that correspond logically to body parts. For example, you might end up with islands like: head, torso (front/back combined in one piece if unfolded from back seam), each arm, each hand, each leg, each foot, plus separate islands for accessories. Fewer seams means less chance of visible texture mismatches, but too few seams can cause excessive distortion. It’s a balance: add seams until each island can lay flat without major stretching (like flattening an orange peel – too few cuts and it can’t lie flat without tearing).
+
+3.2 Marking Seams in Blender (Tools & Keybinds)
+
+In Blender’s Edit Mode, seams are marked on edges:
+
+Mark Seam: Select edges (in Edge select mode) and use the Mark Seam command. The quickest way is to select the edge(s) and press Ctrl+E to open the Edge menu, then choose “Mark Seam”. (Alternatively, in the 3D View’s header menus: Edge > Mark Seam.) Marked seam edges will turn red in the 3D view (when in UV Editing workspace or with UV overlay visible), indicating the cut. You can also use the right-click context menu in Edit Mode; by default it has a “Mark Seam” option as well for quick access
+cgcookie.com
+.
+
+Clear Seam: If you marked a seam by mistake, select the edge and use “Clear Seam” (also in the Ctrl+E Edge menu or context menu). That will remove the seam (red highlight goes away).
+
+Select Linked (UV): A handy selection aid: if you have one face selected, pressing Ctrl+L (Select Linked) in Face select mode will select all faces connected until a seam boundary. This helps to verify islands: e.g., after marking seams, pick a face on a supposed island and Ctrl+L will spread selection to the whole island. If it bleeds past where you expected a seam, you may have missed marking a seam there.
+
+Seams from Islands: Blender has a function UV > Seams from Islands (in the UV Editor or via search) that does the inverse: if you already have a UV unwrap, it will mark seams on the mesh corresponding to the current UV island borders
+wiki.blender.jp
+. This is useful if, for example, you unwrapped using another method and want to finalize those seams on the mesh for later re-unwrapping.
+
+Edge Tag Seam (Edge Shortest Path tool): Blender has a feature to speed up seam marking on long stretches: you can select an edge, then Ctrl-select another edge, and Blender will select the shortest path between them. In the tool’s redo panel, you can set it to “Tag Seam” which marks all those edges as seams immediately
+cgcookie.com
+. This is great for quickly cutting along cylindrical limbs: select one edge at wrist, one at armpit, shortest path wraps inside arm, then tag seam.
+
+Shortcut Recap: Ctrl+E > Mark Seam, and Ctrl+E > Clear Seam are your basic tools. Use edge loops (Alt+click an edge to select a loop) to quickly mark long seams if topology permits (e.g., around a wrist or waist if loops are present).
+
+After marking seams, select all faces (A) and unwrap (U > Unwrap). If using the UV Editing workspace, you’ll see the UV result in the UV Editor on the left. You can also unwrap just a selection of faces. The unwrap will cut along seams and pack separate islands.
+
+3.3 Unwrap Methods: Angle-Based vs Conformal
+
+Blender’s Unwrap has two main algorithms selectable in the Tool Settings (after unwrap, in the Adjust Last Operation panel or Operator panel, or in the UV menu options):
+
+Angle Based (ABF): This is the default method (ABF++ algorithm). It tends to minimize overall distortion, doing a least-squares solution that balances angle and area errors. Angle-Based works well for complex, organic shapes (like characters)
+blenderartists.org
+. It preserves the relative scale of UV islands better across various shapes, but might skew angles slightly to reduce area stretching.
+
+Conformal (LSCM): This method (Least Squares Conformal Mapping) prioritizes preserving angles (shapes) at the expense of more area distortion
+blender.stackexchange.com
+docs.blender.org
+. It often works nicely for simpler, mostly flat objects (boxes, architectural pieces, or cylindrical shapes) where maintaining 90° corners is important. For organics with lots of curved surfaces, conformal can produce more stretch in areas to keep angles accurate
+blenderartists.org
+, meaning fleshier parts might get warped UV scaling.
+
+In practice, Angle-Based is recommended for most organics (like our humanoid) because it gives a more balanced unwrap with fewer stretched areas. Conformal might be tried on specific parts if needed, say a very cylindrical limb or something, but nowadays ABF is generally superior for characters.
+
+Tip: You can experiment by unwrapping with one, then undo and switch method and unwrap with the other to see the difference. The difference may be subtle in many cases. Blender’s last operation panel will let you toggle the method quickly after unwrapping to compare results.
+
+3.4 Checking and Correcting UV Distortion
+
+After unwrapping, it’s crucial to evaluate distortion and stretching:
+
+Checker Texture: Apply a test grid or checkerboard texture to the model to visually inspect stretching. In Blender, you can create a built-in test grid: in the UV Editor or Image Editor, go to Image > New, and for Generated Type choose “UV Grid” (a colored grid) or “Color Grid”
+cgcookie.com
+. This will produce a checkerboard image with letters/numbers. Assign this image to your material (create an Image Texture node with this new image connected to Base Color). In Material Preview mode, you’ll see a checkered pattern on your model. Look for places where squares are very stretched or squashed – that indicates UV distortion. Ideally, the checkers should appear roughly square and uniform size on all parts of the model
+cgcookie.com
+. If one island’s checkers are much larger than another’s, you have inconsistent texel density (see next sub-section on fixing that). If checkers are rectangular or warped on a single island, that island has internal distortion – consider adding a seam or using the relax tools.
+
+UV Stretch Overlay: In the UV Editor, enable Display Stretch (from the Overlays popover). Blender can show stretch either by Angle or Area. In angle mode, it colors faces from blue (no distortion) to green/red (distorted angles). Area mode colors by UV area vs 3D area. This is a technical view that can highlight problem spots quickly
+blenderartists.org
+. Blue or light colors mean good, red means that face is significantly stretched or compressed. Use this in combination with the checker pattern.
+
+Relaxing and Pinning: Blender’s UV Editor has a Relax brush and an operator UV > Minimize Stretch which attempt to even out distortions. For a humanoid, you might manually tweak. Example: If the chest area looks stretched, you can in UV Editor enable Proportional Editing and move UV verts to even spacing. Or select faces and run Minimize Stretch (which iteratively adjusts UVs to reduce stretching energy
+blenderartists.org
+). Pinning (select some UVs and press P to pin) allows you to lock certain UV points (like keep face features in place) while unwrapping or relaxing others around.
+
+Stitching: The Stitch tool (UV menu > Stitch) can weld together UV islands along selected edges if you realize you want to join islands. For instance, if you cut a seam that you decide isn’t needed (two islands could be one), you can clear the seam and then stitch UVs to reconnect them. Use with caution on a complex model to avoid messing up other parts.
+
+Re-Unwrap vs Manual tweaks: Often after marking seams, one unwrap doesn’t perfectly pack or orient islands. You may manually rotate islands to better align texture grain (e.g., rotate an arm island so that its length aligns vertically in UV space for painting ease), or scale certain islands relative to others for texel density (we address that below). It’s normal to do some manual UV editing after the initial unwrap. Blender’s UV gizmos (move/rotate/scale) and aligning tools (UV > Align X/Y, or shortcut SX0 to straighten horizontally, etc.) help neaten islands. For example, for a character, you might straighten the UVs along a seam line (to make a straight edge in the UV for a cleaner clothing pattern). Just be mindful: any manual change that significantly distorts the UV might reintroduce stretching, so check distortion again after tweaks.
+
+If an area is highly stretched even after adding seams (blue to red in overlay or severely skewed checker), consider additional seams. Example: The armpit region on a torso might still be distorted if the torso island is too complex; you could add a seam that goes from underarm to the bottom of the torso (essentially splitting off a piece) to relieve that stress. Use as few seams as possible, but enough to eliminate extreme distortion.
+
+3.5 Managing UV Islands: Layout and Texel Density
+
+Consistent Texel Density: After unwrapping, ensure all islands have roughly the same texel density so texture detail resolution is uniform. Use the checkerboard to judge – the checkers should appear the same size on the arm, torso, face, etc.
+cgcookie.com
+. If, say, the head’s UV island is huge in UV space compared to the body, its checkers will be smaller (higher detail), which might be desirable (more detail for face) but it should be intentional. You can measure texel density by scripts or add-ons, but in vanilla Blender: one trick is to use UV > Average Islands Scale which uniformly scales all selected islands to the same relative density
+cgcookie.com
+. Select all islands, run Average Islands Scale – now all the checker squares will be the same size across islands (Blender equalizes their area proportions)
+cgcookie.com
+. After doing that, you usually want to Pack Islands to re-pack them efficiently.
+
+Packing UV Islands: Packing means arranging islands to efficiently fill the 0–1 UV space (or UDIM tiles). In Blender, select all UVs and use UV > Pack Islands. There are options for rotation, margin, etc. Set a margin (e.g. 0.02 or so, which is 2% of UV space, or enter a pixel margin if using the new pixel margin option in 5.0). Packing tries to prevent overlap and maximize usage of the square. Blender’s default packer treats islands with their bounding boxes (doesn’t pack concave shapes as tightly)
+cgcookie.com
+, but it’s improved over time. For even better packing, you could use add-ons like UVPackmaster or UV-Packer
+cgcookie.com
+, but with a moderate number of islands, manual tweaks might suffice. After packing, check that no islands are flipped backwards (Blender shouldn’t flip them by default unless allowed, except 90-degree rotations). A packed UV for a humanoid might allocate bigger space to critical islands (face, torso) and smaller space to less visible ones (underfoot, inner mouth, etc.), depending on your manual weighting.
+
+Adjusting Specific Island Scales: Sometimes uniform texel density isn’t ideal – you might intentionally give more resolution to the face or hands (areas players see up close)
+cgcookie.com
+, and less to, say, the bottom of the feet. You can scale individual islands up or down before final packing (this is called texel density adjustment)
+cgcookie.com
+. For example, scale the head UV 1.5× so the face gets more pixels (it will have smaller checker squares, indicating higher texel density). Then pack. This ensures important details aren’t resolution-starved. Just be cautious not to create too large discrepancies, as that can be noticeable if one part of the model looks ultra-sharp and another is blurry
+rebusfarm.net
+. Often artists strike a balance: e.g., give the face and hands maybe 2× the texel density of the torso if needed, etc.
+
+Island Orientation and Symmetry: Align islands logically. It can help during painting if, for instance, both arms are oriented similarly and, if space permits, placed near each other in the UV layout (especially if they will share texture details or you plan to paint across them). If you plan to mirror UVs for symmetry, you will literally overlay one half over the other (more on mirrored UVs below). If not mirroring, you could still place left and right parts adjacent to make it easier to copy UV shells or ensure symmetrical painting (by using symmetry painting in 3D).
+
+Mirrored UVs vs. Unique UVs: Decide if you will mirror any parts. Mirrored UVs means left and right sides share the same UV texture space (overlapping islands). For example, the two arms could be one on top of the other in the UV, using one texture area for both. The advantage is effectively doubling resolution for those parts (since one texture detail is reused on both sides) and consistent symmetrical detail. The disadvantage is you cannot have unique asymmetrical details on those parts (a tattoo on the left arm would also appear on the right, since it’s the same texture). Many low-poly games mirror limbs, shoes, etc., to save UV space, especially if the design is symmetric. If you mirror, ensure the corresponding geometry is exactly symmetrical and seams are placed identically. In Blender, you can lay out one side, then overlay the other: select one island, move it to overlap the other perfectly (utilize vertex snapping in UV editor if needed). Mirrored UVs should generally not be flipped (don’t scale -1 in UVs) – keep the orientation the same for both sides. Flipping an island (e.g. a mirror that results in inverted UV orientation) can cause shading issues with normal maps (a flipped UV shell will invert the normal’s Y or X channel)
+forums.unrealengine.com
+. Instead, mirror the geometry in object space but let the UV be a direct overlay, or if you must flip UV, you might need to invert a channel of the normal map later. Modern engines using MikkT can handle symmetrical UVs where one side’s UV is mirrored by position but not inverted – typically if you use a Mirror Modifier in Blender with “Mirror UVs” it keeps tangent basis consistent. When exporting to Unity, symmetric UV overlaps are generally fine; Unity will only bake lighting on one side though (since the other is identical UV).
+
+If you choose unique UVs (no overlap) for everything, you avoid the normal map mirroring hassle and can paint different details on each side. Unique UVs are necessary if your character’s left and right sides differ (like an asymmetric costume or different arm tattoos). Often a hybrid approach is used: mirror the arms and legs if they’re identical, but keep the face unique (since faces are rarely perfectly symmetric in texture detail, especially with lighting baked or subtle features). Note that overlapping UVs can confuse some automated baking or texture operations – you typically need to split them or bake one side at a time. For example, when baking an AO map in Blender, if arms are overlapping in UV, the baker will write the same pixels for both arms, essentially layering two AO results and often that doesn’t work. The workaround is to temporarily offset one island out of 0-1 (move by 1 UV unit) so they don’t overlap during bake, or bake with just half, then duplicate in texture. So, while mirroring is great for texture memory, it adds complexity in baking and painting workflow. Decide based on the importance of unique details vs. resolution gain.
+
+Multiple Materials vs. Single UV Atlas: A humanoid might be split into multiple materials (e.g., one material for skin, one for clothing, one for armor). Each material has its own UV layout (often all still in 0-1 space per material). Using a single UV atlas means packing the entire character’s UVs into one image and using one material for the whole character. The single atlas approach reduces draw calls in-game (one material = one draw call, versus many materials = multiple draw calls, each ~1 draw call)
+forums.unrealengine.com
+, but it can be challenging if the character has very different material properties (skin vs metal) or if you want very high detail in one area without giant textures. Multiple materials allow different shader settings (e.g., subsurface for skin, standard for clothes) and potentially better use of texture resolution for each part (you could have a 2K for skin and separate 2K for clothes, effectively 2K detail on both). But multiple materials mean more overhead when rendering (each material slot requires an extra draw call and can be ~3× slower if 3 materials, as one engine dev said
+forums.unrealengine.com
+). For game-ready optimization, try to minimize materials where feasible. For example, you could atlas the skin and clothing together if using the same shader. If combining, you might include a mask map to differentiate regions (skin vs fabric) in the shader if they need different properties (see Section 5 on using masks vs. separate material slots). Many game characters use 2-3 materials (like: Body, Head (if higher detail or if swap-able), and maybe Accessories). Plan your UVs accordingly: you might keep head UV separate if it’s on a different material or atlas.
+
+Troubleshooting Common UV Issues:
+
+Overlapping UVs Error: If you see that islands unintentionally overlap each other (Blender will highlight overlaps in red in the UV Editor if UV overlay option “Show Overlaps” is on), you need to separate or pack them properly. Overlaps (unless deliberate) will cause texture painting to affect multiple faces or cause bake errors. Use Pack with sufficient margin, or manually move islands apart.
+
+Non-uniform Scale (Apply Scale): If your mesh had non-applied object scale when unwrapping (say the object was scaled in Object Mode), the UV result may look skewed. For instance, if the object is scaled 2× in X but you unwrap without applying scale, UV islands will be squashed in X to compensate. Always Apply Scale (Ctrl+A > Scale in Object Mode) before unwrapping so that the algorithm operates on true dimensions. If you forgot, you can apply scale after the fact and then unwrap again (or use the Correct Aspect option to preserve UVs, but generally better to apply transforms first). Unapplied rotations can also mirror UVs unexpectedly, etc.
+
+Non-Manifold or Bad Geometry: Extremely thin or non-manifold parts (edges with no thickness, or internal faces) can confuse the unwrap. Non-manifold geometry might not unwrap in a meaningful way or could cause tiny islands. Check for doubles (Merge by Distance to weld any duplicate vertices) and delete any stray faces inside the mesh. Also ensure normals are consistent (all faces normals outward). Inconsistent normals (some flipped) might produce weird UV orientations – you can recalc normals (Shift+N) if needed.
+
+Seam in a High-Deform Area: If a seam must be in a spot that deforms (like a knee), the texture might “swim” a little there or the normal map seam might show as lighting changes across the moving seam. Mitigation: ensure the seam is also a sharp edge if normal mapping (see Section 5 on normals and seams), and consider hiding it just behind the knee instead of right on front. Also, painting across that seam with careful bleed or using 3D painting helps hide any color mismatch when bent.
+
+In summary, unwrap systematically: mark logical seams, unwrap, check distortion, adjust as needed, equalize texel density, and pack efficiently with margins. A well-unwrapped humanoid will use texture space effectively (occupying most of the 0-1 area without too much blank space), have consistent detail density, minimal visible seams, and islands shaped for easy painting (not overly skinny or awkward shapes if possible). Take your time at this stage; a good UV map sets the foundation for all texturing and baking steps to come.
+
+4. Texture Painting Workflow (PBR Texture Creation in Blender)
+
+Once UVs are ready, you can create textures for your model. We’ll focus on using Blender’s Texture Paint mode for a PBR workflow (creating Base Color, Roughness, Metallic maps, etc.) and how to manage images, paint settings, and troubleshooting.
+
+4.1 Creating and Assigning Texture Images
+
+Before painting, you need to have image textures to paint on:
+
+Adding an Image Texture Node: In the Shader Editor, add an Image Texture node for each map you plan to paint (e.g., one for Base Color, one for Roughness, etc.). For example, select the character’s material, click Add > Texture > Image Texture. With the new node selected, click New to create a blank image. Set the resolution (e.g., 2048×2048 for a mid-detail asset, or 4096×4096 if you need higher detail). Choose a name (like “Character_BaseColor”). Select a color depth: 8-bit is usually fine for color maps, but if you want more precision or HDR (for special maps like normal or displacement), use 16-bit (half-float) for normal maps to avoid banding. For base color, 8-bit sRGB is standard. If creating a roughness or metallic map image, choose 8-bit and you can specify Color Space: None (Non-Color) on the node because these are data maps (see below).
+
+Color Space Settings: It’s important to set the correct color space on each image texture node:
+
+Base Color, Albedo, Emission, any color textures: set to sRGB (the default). Blender will then gamma-correct when sampling and preserve color fidelity for display. These textures carry perceptual color data.
+
+Roughness, Metallic, Normal, Ambient Occlusion, Masks (non-color data): set to Non-Color. This tells Blender not to do any color space conversions (treat the values as linear data). For example, a roughness map is just a float value per pixel; if it were read as sRGB, it would be gamma distorted. Same with normal maps – they are essentially vectors packed in RGB, and should not be gamma-corrected on import/export.
+
+Blender’s Principled BSDF expects roughness/metallic inputs in linear space (since they’re numeric properties), and normal maps through the Normal Map node are also treated as linear data. So be sure to set those image nodes to Non-Color to avoid unexpected results (like your roughness appearing off – e.g., a mid-gray roughness might not be 0.5 if read incorrectly under sRGB).
+
+Unity engine tip: Unity similarly requires marking texture assets: color maps as sRGB and rough/metal maps as Linear (unchecked sRGB). If you do it correctly in Blender, the exported texture images will be correct, then just ensure Unity imports them with the right flag (Unity usually auto-detects “_BaseColor” as sRGB, “_normal” as normal map type (linear), etc., but double-check). Normal maps in Unity are flagged as “Texture Type: Normal map” which implicitly uses a special format (and expects the image in DirectX format unless told otherwise, see Section 5.2 for green channel topic).
+
+Assigning the Image to Material: Ensure the Image Texture node is actually connected to the material so you can see it while painting:
+
+For BaseColor, connect the Image Texture’s color output to the Base Color input of Principled BSDF.
+
+For metallic or roughness, often these are single-channel maps. You can still paint them as grayscale images. In the material, you might plug the roughness image node’s color (which will be gray) to the Roughness input of the Principled. (Even though the node has R,G,B, if it’s Non-Color, Blender will treat it like a single value. Alternatively, you could paint in just one channel or set the image to BW mode.)
+
+Normal maps: typically you wouldn’t freehand paint a normal map in Blender (that’s extremely hard to do manually). You’d either bake it or paint height and convert to normal. Blender does allow painting on normal maps but that’s advanced. We’ll focus on BaseColor and maybe roughness/metallic/AO which are easier to paint or at least visualize.
+
+Multiple Image Slots: If you want to simulate painting in layers (since Blender’s texture paint is single-layer by default), you can create multiple image nodes and mix them. For example, you could have “BaseColor_main” and then a “DirtOverlay” image. In Shader Editor, you’d use a MixRGB node to blend DirtOverlay on top of BaseColor (perhaps using the alpha of DirtOverlay or a mask image). To actually paint on the overlay separately, you’d select the overlay’s image node before painting so you don’t accidentally paint the base. This is Blender’s workaround for layer painting without an add-on: treat each layer as a separate image texture and combine them with nodes. It’s a bit cumbersome but works for simple layer needs (like adding a decal or dirt).
+
+Saving Images: Newly created images in Blender exist only in memory until saved. After painting, remember to save them to files (Image > Save or Save As in the Image Editor for each image). You’ll want to save as PNG, TGA, etc. depending on needs (PNG is lossless and fine for color maps; use 16-bit PNG if you need higher precision for roughness to avoid banding, or use TGA if you prefer an older but widely-supported format). For normal maps, 8-bit per channel is typically okay if the normal map is baked (since it’s vector data quantized to 256 levels per component, which is standard). If you were to hand-paint a height then convert to normal, 16-bit would give smoother results.
+
+4.2 Texture Paint Mode Setup in Blender
+
+Switch to Texture Paint mode (either via the mode dropdown in the 3D viewport or by using the Texture Paint workspace). The 3D view will now allow painting on the model. Set up the following for an optimal painting experience:
+
+Materials and Slots: In the Properties editor, Material tab, you’ll see a “Texture Slots” panel in Texture Paint mode (if using Blender 2.8+ the concept changed slightly: you primarily select the image via nodes rather than old texture slots, but Blender still shows “Color” and “Mask” slots). If you have multiple image textures in the material, Blender needs to know which one you’re painting to. The active Image Texture node in the Shader Editor is usually the target. For clarity, in the 3D View’s tool settings (usually in the top header when in Texture Paint mode, or in the Active Tool tab in Properties), there is a Texture Slot selector – you can pick the image you want to paint on. If only one image is in the material, it’s auto-selected. Ensure, for example, “Character_BaseColor” is selected if you want to paint the base color. If you accidentally have the normal map node selected/active, you might be painting on the normal map by mistake and see odd results (like black/purple strokes appearing).
+
+Viewport Shading for Painting: Set the 3D viewport to Material Preview mode (so it shows the actual material with lighting) or Solid mode with Textured option. In Material Preview, by default Blender uses an HDRI lit environment which is great for seeing PBR materials. You can change the lighting or enable a flat lighting if needed via the viewport shading options. Some painters prefer a flat light or a matcap while painting base color so that the material’s lighting doesn’t throw them off. For roughness painting, it helps to rotate the HDRI to see how highlights respond.
+
+Symmetry: In the top bar of Texture Paint mode, expand the symmetry options. You can enable symmetry on X, Y, and/or Z axes. For a humanoid modeled facing forward on X=0 plane, turning on X symmetry allows you to paint on one side of the model and have the stroke mirrored on the other side in real time. This works if the mesh is perfectly symmetric across that axis and its topology mirrors. It’s very handy for painting symmetrical patterns or base skin tones so both arms, etc., get the same strokes (if UVs are unique per side). Note: if you are using overlapping mirrored UVs, you might not need symmetry because painting one will inherently paint the other since they share UV. But if UVs are separate (unique), symmetry can save time. Only use it for perfectly mirrored parts; otherwise, keep it off when doing unique detail.
+
+Masking: There are multiple ways to mask in texture paint:
+
+You can mask by face selection. In Texture Paint mode, you can click the “Paint Mask” toggle (looks like a checkerboard icon) to restrict painting to selected faces. Then you tab to Edit Mode (or use face selection in Paint mode) to choose specific faces, and only those will be affected by painting. For example, you might mask out everything except the face when painting skin detail there.
+
+You can also add a Paint Mask (Image) using an external stencil or an image texture as a mask, but that’s more complex.
+
+Alternatively, some use separate materials as masks (not as common here).
+
+Also consider using Automasking by material or by normal orientation (features more in sculpt mode; in texture paint, face selection masking is primary).
+
+For complex masking (say you want to paint dirt only on the clothing and not skin but both are in one UV), a trick is to assign a temporary solid color to skin in an ID map and then use that as a mask in post, or simply mask by face as described.
+
+Brush Settings: Blender provides various brush types:
+
+Draw Brush: Standard painting brush. You can choose the color, alpha, radius, strength, etc. Use F in the viewport to resize brush, Shift+F to adjust strength.
+
+Mix, Add, Subtract, Multiply modes: The draw brush can operate in different blend modes (like a layer blend but per stroke). For example, you can set brush to “Multiply” to darken areas, or “Lighten” to bleach areas softly, useful for shading.
+
+Color picker: Press S while painting to sample a color from the texture on the model.
+
+Symmetry (again): Ensure it’s on/off as needed per brush. It’s typically a global paint setting.
+
+Texture Brush / Stencil: You can attach a texture to the brush to make it stamp or stencil. For instance, if you have a logo or a specific skin detail pattern, you can use the Stencil mapping. In the Active Tool settings, under Texture, choose a texture (you can create one from an image). Set brush mapping to Stencil. In the 3D view, you’ll see the stencil image appear as an overlay. You can move it with Right-Click drag (or Shift+RMB), scale with Shift+Right-Click drag, and rotate with Ctrl+Right-Click drag. Then painting will project that stencil. This is great for adding details like fabric patterns or tattoos from an image.
+
+Clone Brush: Blender’s clone brush allows you to sample from the texture itself or from an external image and paint it. In 3D view, you’ll define a clone source (hold Ctrl and click to set the clone source point on the model), then painting will copy texture from the source to the destination. This can be used to fix seams (clone from just inside the seam to the other side) or to tile skin detail.
+
+Falloff and softness: Adjust brush falloff to control hardness of edges (for face makeup vs a hard line, etc.).
+
+Normal/Height Painting: Not directly in Blender’s simple paint, but note: you can’t directly “paint” a normal map like a height painting – Blender doesn’t have a height-to-normal live brush in default. If doing hand-painted normals, you might do it in an external app or use sculpt + bake. However, Blender can paint bump map (grayscale height) if you set up a material with a Bump node and paint that height image – but that’s more advanced.
+
+Bleed (Margin) in Painting: Blender automatically extends your brush strokes past UV island borders to help avoid unpainted pixels at edges. The default bleed is a few pixels. You can find this in the Options panel of Texture Paint (look for “Bleed” and a pixel value, default 2px). If you see a seam line when texturing, you might not have enough bleed. Increase the bleed value (e.g., to 4 px) so strokes extend further beyond UV edges
+reddit.com
+. This only works if you actually paint over the border; it won’t fill entire gaps if islands are far apart, but usually seams get enough coverage with bleed.
+
+Layering Simulations: If you want to paint multiple maps (like base color and an AO or dirt map separately), you will be toggling between image texture nodes. One approach: paint all base colors first on one image. Then later, maybe create a new image for AO or shading and paint that in grayscale. Another approach is painting everything onto one “diffuse” map including shadows and details (common in hand-painted workflows). For PBR, usually you keep things separate (paint pure flat base color, not baked shadows into it, then separately handle AO or roughness). You might not do much direct painting for roughness – often roughness is done by procedural means or by painting an approximate mask of shiny vs dull areas. But you can paint roughness in Blender: e.g. set the material so you can see roughness effect (you may temporarily plug your roughness image into base color just to visualize grayscale while painting, or visually infer it via specular highlight in material preview). An alternate trick: while painting roughness, crank metal to 1 and base color black for the material temporarily – then the model appears as pure mirror, and your roughness painting will visibly show how blurry or sharp areas are. Or use a very reflective matcap.
+
+Opacity and Blending: Use lower strength or opacity on brush to build up gradual changes. For example, painting blush on cheeks, you might pick a red color, very low strength, and slowly layer it so it’s subtle.
+
+Canvas External Editing (Projection): Blender has a “Quick Edit” (in Texture Paint mode toolbar) which opens the UV layout in an external 2D editor (like Photoshop or Krita) for painting and then re-projects it, but that’s advanced usage and requires setup (setting external image editor in prefs). For a beginner, staying within Blender or exporting UVs to paint in another program manually might be more straightforward.
+
+4.3 Painting Base Color and Other Maps
+
+Base Color (Albedo) Painting: This is where you create the texture that gives your model its color detail (skin tone, cloth color, etc.). Start with broad strokes:
+
+Block out basic colors for different regions: e.g., fill skin areas with base skin tone, cloth with its base color, boots with brown, etc. You can do this quickly by selecting faces and using Fill tool (there’s a Fill brush that fills faces with a color instantly).
+
+Work with symmetry on for symmetric parts to save time (or paint one side then mirror UVs or copy over in 2D if not using symmetry in Blender).
+
+Once blocked, add detail gradually: for skin, maybe blush, lips, dirt, etc.; for clothing, patterns or highlights where folds are.
+
+Since we are PBR-first, note that some shading will come from lighting and normal maps, so you don’t have to paint strong shadows into the base color (unlike in pure hand-painted style). Keep albedo fairly flat in terms of value range; use AO map later to add self-shadowing. But subtle variations in color add realism (e.g., slight redness on knees, fabric wear at edges with a lighter tone, etc.).
+
+If you have a concept or photo reference, color pick from it to match intended colors.
+
+Roughness Map Painting: Roughness maps define shiny vs dull areas. You can paint this in grayscale. Typically:
+
+Decide the materials: skin usually has a slightly oily sheen (low roughness on T-zone of face, etc., and higher roughness on cloth which is very matte).
+
+One approach is to paint a grayscale roughness map by hand: black = glossy, white = matte. For example, paint slightly darker (glossier) on sweaty areas, slightly lighter (rougher) on cloth or dusty surfaces.
+
+In Blender, it’s tricky to see the roughness as you paint unless you observe the material’s actual specular response. So have the material show it: ensure your Principled BSDF roughness is hooked to the roughness image you are painting, and view it under good lighting. If you paint pure white vs pure black you’ll immediately see the difference: white roughness = very diffused highlights, black = sharp mirror. Use moderate values; pure black is like a mirror. Skin might be around 0.4–0.6 roughness (moderately shiny), cloth near 0.8–1.0 (very rough), leather boots maybe 0.3 (if polished tips) to 0.6 (if dull leather). You can paint variation: e.g., a character’s elbows might be a bit more worn (shinier cloth from rubbing) or opposite, depending.
+
+If you find painting roughness too abstract, you can do it in a 2D app or simply assign values via filling faces with grey values. For instance, select all skin faces, fill with a certain gray (roughness value), cloth faces fill with another, then blur or blend transitions by painting lightly at boundaries.
+
+Metallic Map Painting: This is usually very simple because a pixel is either metal or not in PBR. Most of the time, you won’t “paint” metallic gradients; instead you assign metallic regions. E.g., for a humanoid with armor pieces, you’d fill those armor UV areas with white (1.0 metallic) and everything else with black (0.0 metallic). If something is partially metal (like dusty metal showing some dielectric dust), that’s typically handled via a roughness or base color variation rather than making pixels 0.5 metal (since that’s not physically common). So you can use face masks to fill metallic parts. If the entire model is mostly non-metal except specific objects (like a sword blade, belt buckle), you might even separate those as different materials or just ensure to paint them in the metallic map.
+
+Confirm in Blender by plugging metallic map and looking: metals will reflect environment tinted by base color (if any base color for them), non-metals will have normal diffuse. In the viewport, metallic parts will appear very dark if roughness is high (because metals have no diffuse, and if rough, they scatter light a lot). So sometimes to check metallic map, set roughness low temporarily to see the metal region shine.
+
+Ambient Occlusion Map (AO) Painting: If you need an AO map and can’t bake it easily or want to hand-enhance it, you could paint it. Typically AO is baked (we cover baking AO in Section 6). Hand-painting AO is tedious because it’s essentially painting shadows. But you could paint some dirt in crevices or emphasize deeper areas by darkening them on the base color or an AO layer.
+
+One manual method: after you have base color, you could duplicate it and paint it as an AO where you darken in cracks and corners. However, it’s usually more efficient to bake AO from geometry and then tweak it by painting if needed (like to remove unwanted shadows or add extra stylized darkening).
+
+If doing in Blender, you might consider vertex paint AO (if high poly) and then bake to texture, or simply rely on baking (which we’ll do in baking section).
+
+In any case, if you create an AO map, you will multiply it over the base color in the engine or in the material. In Blender, you could simulate that by mixing the base color with dark version based on AO, but it’s often not necessary to preview.
+
+Special Maps (Normals, etc.): As mentioned, you likely get normals from baking a high poly. If for some reason you need to paint a normal detail (like a wrinkle or a small scale) and you don’t have a high poly, you could use Blender’s sculpt with a bump and then bake, or use an external normal painting tool. There’s also an Add-on (Bump Map brushes or tools) to paint bump maps in Blender. For a beginner, it’s recommended to rely on high-poly sculpt & bake or use Substance Painter for fine normal detail painting if needed. But ensure if you do any such, the UVs are finalized and consistent.
+
+Mirrored UV Painting Considerations: If you overlapped UVs for symmetrical parts, painting in Blender will apply to both sides simultaneously if those faces are truly sharing the same UV space. For example, if left arm and right arm UVs are on top of each other, a stroke on one arm’s face affects the same UV coordinates, thus both arms get the stroke. This is great for efficiency (no need for symmetry painting, and you inherently get perfectly mirrored texture). However, a couple of things:
+
+Make sure to disable X symmetry in painting in this case because you don’t want Blender to mirror the stroke a second time (that could lead to double application on the same spot).
+
+Sometimes, due to how Blender updates the viewport, you might only see the paint updating on one side until you refresh – but generally it updates both since the texture is shared. If one side appears unpainted, check if those faces were in a different material or not selected for painting mask.
+
+Seam Cloning: With mirrored UVs, the seam along the mirror line in UV is actually the same pixels so there’s technically no discontinuity in the texture (which is nice). But on the model, there will be a seam in the geometry (if the mesh is split or normals mirrored). Usually, keep that central mirror seam as a perfectly vertical line in UV if possible so that any horizontal pattern aligns. If a mismatch appears, you may need to smooth the normals or ensure vertices along the mirror line are welded (in final, you’d likely apply mirror modifier so no actual seam remains in geometry normals).
+
+If you want to add an asymmetrical detail later to a mirrored UV area, you can’t unless you break the symmetry (e.g. detach UVs or make a unique texture for one side). Keep that in mind if design might change (like adding a scar on one side of face – if face UVs were mirrored, that’s impossible without redoing UVs or using decals).
+
+Edge Seams while Painting: One common frustration is seeing the UV seams in the painted texture (like slight color differences or visible lines). To avoid this:
+
+Ensure you paint a bit beyond the seam on each side. Use the clone brush to blend colors across the seam. You can paint in the 3D view across the seam and Blender will put the colors on the respective islands. Because of bleed, if you go over a seam, Blender should handle putting the stroke on both sides as long as both faces are visible/accessible. If you have trouble hitting both sides in one stroke (maybe the seam is at a sharp angle and one face is occluded), rotate view or temporarily hide other geometry to reach it.
+
+For very tricky seams (like inside mouth or between fingers), consider painting in the 2D UV view. Select the faces around the seam and isolate their UVs in the Image Editor, then paint directly on the flat UV. This way you can paint continuously across the seam line (because in UV space they’re separate islands, but you can at least color-match by eye or even copy-paste pixels if using an external editor).
+
+After painting, always do a test by applying a slight blur or smear along seam edges in an image editor to ensure no nearly-white pixel next to nearly-black causing a line when MIPmapped. This is more for perfectionists; usually if bleed margins are fine (e.g. 4+ pixels) and colors match, you’re good.
+
+Troubleshooting Painting Issues:
+
+Paint not appearing on model: If you draw and see nothing, check the following:
+
+Is the viewport in Material/Texture mode? In solid mode with default lighting, texture paint might not show (unless you enable the textured solid option or switch to material preview).
+
+Did you select the correct texture node? If the wrong image is active, you might be painting on an image that isn’t visible in the material (e.g., painting the roughness image while looking for color changes). Verify the active paint slot in the top bar – it should be your color map (for painting color)
+docs.blender.org
+.
+
+Does the object have a material with that image applied? If you somehow are painting on an image that’s not actually used by the material on that part of the mesh, you won’t see it on the model. Ensure your material slots and assignments are correct (especially if multiple materials).
+
+UVs present? If the mesh has no UV map (unlikely since we unwrapped already) or if you duplicated faces and forgot to unwrap them, paint might not map correctly.
+
+If using face selection masking, maybe you have only some faces selected (or hidden) and so the paint is going to masked areas. Toggle off mask or select all faces.
+
+Paint appears but looks transparent or wrong: Check if your brush alpha is 100% and Blend mode is Mix (for normal painting). If strength is low or you have an odd blend mode, you might be painting very subtly. Also, if your image has an alpha channel and you’re painting with alpha <1, you might be inadvertently painting transparency. For color textures, it’s often best to disable alpha channel (unless you need it). When you created the image, if you don’t need alpha, uncheck “Alpha” to avoid confusion. If the image does have alpha, painting with a partially transparent brush can alter the alpha values (leading to see-through parts if that image’s alpha is used in material). If you see checkerboard or transparency on the model where you didn’t expect, check the image alpha channel or paint in the Image Editor with RGBA channels visible. One solution is to lock alpha (there’s an option “Alpha Lock” in brush settings) if you only want to affect color, or simply fill alpha to 1 everywhere if you’re not using it.
+
+Colors on seam don’t match (visible seam line): This could be due to sRGB interpolation differences if painting in 8-bit. But most likely you didn’t paint far enough to cover the seam or the texture filtering is revealing a gap. Solution: increase bleed, repaint seam area with a generous overlap, and ensure the colors on both sides of the seam island are the same or very close. Also, after finalizing, generate mipmaps in an external tool (or just view it zoomed out in Blender) to see if seams appear. If yes, manually clone a bit more or extend the bleed margin in an image editor by smudging the colors outward beyond UV shell (some texture packing tools allow a post process “margin” fill which extends pixels outward, do this if needed).
+
+Artifacts or Lag while painting: High-res textures (4K+) can be slow to paint depending on system. You might experience a slight lag in stroke updates. If it’s too slow, you can paint on a lower res image then scale up later or use an external painter. But usually 4K is okay on modern hardware in Blender 5.0. Also, disable any modifiers like Subsurf while painting to lighten the viewport load. Use X-ray mode or isolate parts if painting interior parts so Blender doesn’t also render lots of other stuff.
+
+Accidentally painted normal map or roughness with color: If you realize you painted on the wrong texture (e.g., your color appeared weird because you were painting the normal map image with red pixels), you’ll need to fix that. Always double-check which slot is active before painting big areas. If it happens, reload a backup of that image if you had one, or try to undo (Blender’s texture paint undo can be separate from object undo, but by 5.0 it should be unified – in older versions it was separate stack). If you can’t undo, you might have to re-bake or re-import the normal map to restore it.
+
+To summarize, Blender’s texture painting is powerful but requires careful slot management. For a PBR workflow, you’ll likely paint mostly the Base Color and maybe a mask for roughness/metallic, rather than painting every map from scratch (since rough/metal for realistic characters often come from material values or baking). An alternative workflow is to use Substance Painter or similar: export mesh with UVs, paint all PBR channels there (it excels at that) using its brushes and smart materials, then import textures back. However, if sticking to Blender only, the above steps will let you hand-paint the essentials.
+
+4.4 Seam Bleeding and Fixes
+
+We touched on bleeding but here’s a consolidated approach:
+
+Always paint past the UV edges of an island. Blender’s bleed setting helps automatically. After finishing painting, you can do a manual bleed by:
+
+In UV Editor, for each island, use UV > Export UV Layout to get a wireframe overlay image (just for reference, if needed).
+
+Open the texture in an image editor (like Krita/GIMP/Photoshop) and expand the contents of each island outward by a few pixels. A quick way is to select the transparent empty areas and use a Dilate/Expand filter or content-aware fill with nearest pixel. Or simply blur the texture a tiny bit then sharpen – often the blur will fill the gaps.
+
+If using Substance or PS, you can also create a solid dilation: e.g., duplicate the layer, Gaussian blur by 2-3px, then put it below the original – that often fills the gap with similar colors. The goal is that when mipmaps shrink the texture, the colors at each island border blend into themselves, not into unrelated pixels (which might be black background).
+
+When baking in Blender (for normals/AO), you can set a Bake Margin (in Bake settings) which extrudes the baked result at UV edges by a certain pixel count – do use that, typically 8 px or more for 4K maps is common to avoid seams
+blenderartists.org
+.
+
+If despite all that a seam shows in-engine:
+
+Check if it’s a normal map seam (lighting discontinuity) rather than color. If color seems fine but you see a line, it could be normal. That’s addressed by proper smoothing and tangent syncing (see Shading section).
+
+If it’s actually the color, maybe the engine’s texture compression caused a slight shift at edges (block compression artifacts). To mitigate, increase padding further and keep colors similar across seam so compression doesn’t introduce a contrast line.
+
+Some engines have an “edge padding” setting on import for textures (Unity does padding automatically when generating mipmaps). Ensure it’s on.
+
+4.5 Exporting Painted Textures
+
+When you’re happy with the painted maps, export them from Blender:
+
+In the Image Editor, load each image (e.g., select it from the dropdown if not already showing), then Image > Save As. Choose PNG or TGA. For engine use:
+
+BaseColor: PNG (24-bit or 32-bit if you have alpha for transparency). Or TGA if you prefer uncompressed (some like TGA for crisp normal maps or if alpha needed because older systems).
+
+Normal: PNG or TGA, but ensure no sRGB conversion. If using Blender’s default, it’s Non-Color, so saving to PNG will keep raw values. Unity will import it and convert to DXT5 or BC5 internally. If you see slight shade difference on normals when imported, check sRGB toggle (should be off since Unity knows it’s a normal if the filename contains “normal” or you tick “Normal map”).
+
+Metallic/Roughness: If you made separate grayscale images for these, you can combine them into one in an image editor if needed (like pack R=AO, G=Rough, B=Metal for a Unity HDRP mask or similar). Otherwise, save them individually as PNG. Remember to mark them as Linear in engine.
+
+AO: Save as PNG (linear).
+
+It’s wise to name files clearly: e.g., HeroCharacter_BaseColor.png, HeroCharacter_Rough.png, etc., so when you get to engine, you know which is which. Also helps Unity auto-assign sometimes (for example, Unity might automatically assign *_BaseColor to Albedo if using HDRP material importer, etc.).
+
+We will cover export of the mesh and material in Section 7, but from the painting perspective, ensure all these images are saved and backed up (Blender will warn you if you have unsaved changes on an image by showing an asterisk next to its name in UV/Image Editor).
+
+Recap: Texture painting in Blender allows you to handcraft the look of your asset. By systematically creating the necessary image maps, using appropriate settings (color space, resolution), and leveraging painting tools (symmetry, stencil, clone), you can produce all the textures needed for a game-ready humanoid. Always test the textures on the model under different lighting to ensure they hold up (e.g., put some bright point lights in Blender or switch HDRIs to see that your roughness/spec look good). This will preempt surprises when you bring the asset into Unity.
+
+Finally, don’t be afraid to use external tools in tandem: for example, export your UV layout and do some paint-overs in Photoshop, then re-import the image into Blender to continue painting. Blender will live-update the texture if you reload it. The goal is to get high-quality textures that make your model look great in the game engine.
+
+5. Game Shading Setup (Materials for Unity PBR and Blender Preview)
+
+With UVs unwrapped and textures created, the next step is setting up a proper PBR material. In Blender, you’ll configure the Principled BSDF shader to preview your asset. In Unity (or other engines like Unreal), you’ll ensure the maps plug into the standard shader correctly. This section covers best practices for PBR material setup, dealing with normal maps, and addressing common shading issues like seams or channel mismatches.
+
+5.1 Using Principled BSDF in Blender for Preview
+
+Blender’s Principled BSDF shader is a universal PBR shader that is compatible in look with Unity’s Standard shader (metallic workflow) and glTF 2.0. It has inputs for Base Color, Metallic, Roughness, Normal, Emission, etc., just like game engines expect. Setting up your Blender material correctly not only gives a good preview, but if you use glTF export or similar, the material can transfer to engines fairly well.
+
+Base Color: Connect your albedo/base color texture to the Base Color input. Make sure the Image Texture node is set to sRGB (which it should be by default). Keep in mind any lighting in Blender will affect how you perceive this color; use a neutral HDRI to judge the true color and value. Also, Blender’s color management (Filmic vs Standard) can make the viewport look less contrasty; Filmic is good for realistic lighting range. You might temporarily set view transform to Standard if you want the exact color values as output (especially if comparing to Unity, which roughly corresponds to a standard gamma display with maybe ACES tonemapping in HDRP but not quite filmic).
+
+Metallic: Plug in your metallic map (or set a value if using single material). Principled takes a value 0-1. If your character is largely dielectric (flesh, fabric), metallic will be 0 for those areas. Only areas that are actual metals (armor, jewelry) should be 1. If you didn’t paint a metallic map, you can leave Metallic at 0 and manually keyframe it to 1 for metallic objects or separate materials. But ideally, you have one material per distinct metallic grouping if needed. In Blender, if only small parts are metal, you might mask them out instead of complicating with multiple materials. For preview, Principled is fine with a mix: e.g., you can use a grayscale metallic texture: black for non-metal regions, white for metal regions. If you have no texture, you can set the Metallic slider to 0 and then in edit mode assign those metal parts to a different material slot with metallic 1 (or use a mask in nodes, which is advanced). However, most likely you have or can easily make a metallic texture (even a simple one).
+
+Color Space: Metallic map should be Non-Color in Blender, since it’s not color data but a mask
+khronos.org
+.
+
+If nothing is metallic in your model (like a pure organic character with no metal), ensure Metallic = 0 everywhere (and you could skip having a metallic map at all).
+
+Roughness: Connect your roughness texture to Roughness input (Non-Color). Principled uses roughness where 0 = perfectly smooth, 1 = very rough. Check that the effect in Blender matches expectation: shiny areas should have tight highlights. If something looks off (too glossy or too dull), you might need to invert if you accidentally made a glossiness map instead. But if you followed correctly, white on texture = rough (diffusey) = matte look on model, black = shiny = reflective. In Unity’s Standard, you’ll have “Smoothness”, which is opposite, but in Blender Principled it’s roughness. So no inversion inside Blender, just be aware when moving to Unity if needed (Unity’s metallic shader actually lets you supply roughness in the alpha of metallic by choosing appropriate option, or you invert externally).
+
+If you don’t have a roughness map, you can use the Principled’s slider (it’s uniform then). But most realistic assets benefit from at least some variation in roughness (skin vs cloth etc.). You could set a mid value like 0.5 and call it a day for everything, but it will look flat. If you are not painting one, consider doing a quick bake or procedural generation for roughness (e.g., derive from color map or cavity – often darker crevices can be a bit shinier if oily, or sometimes opposite with dust).
+
+Also ensure specular level: Principled has a “Specular” slider (for dielectric reflectance). Leave that at default ~0.5 which corresponds to ~4% specular (most dielectrics have 2-5% reflectance). Only adjust if you have unusual material (like one that is non-metal but very high index of refraction giving stronger spec).
+
+Normal Map: This one is critical. Add a Normal Map node (Add > Vector > Normal Map). Set it to Tangent Space (default). Plug your normal texture into this Normal Map node’s Color input (set the image to Non-Color data!). Then connect the Normal output of the Normal Map node to the Normal input of Principled BSDF. This ensures the normal is interpreted correctly. Do not plug a normal map image directly into Principled; it will look bizarre (as it tries to treat it as height or something). The Normal Map node also has a Strength slider (1.0 by default). You can lower or increase it for effect, but generally leave at 1 for accurate results.
+
+Check that the normal map is giving expected results: light hitting the model should show the bumps. If something looks inverted (like bumps appear as dents), it could mean the normal’s green channel orientation is wrong relative to Blender’s expectation. Blender expects +Y = up (OpenGL style). If your normal map was baked in DirectX style or another convention, you might need to flip the green. You can do that by adding an Invert node on the Green channel, or easier: in the Image Texture node, there’s no direct flip option, so you might re-bake with correct setting or invert externally. A quick hack: open the normal map in an image editor, invert the G channel, save, reload in Blender. If using Mikkt and Blender baked it, it should already be correct.
+
+Pay attention at UV seams: The normal map might show seems if something’s wrong (like if UV seam had mismatched smoothing splits, see Section 5.3).
+
+Also ensure the shading is set to smooth on the mesh (except places you want sharp). Hard edges combined with normal maps require that the normal map was baked with those edges split; if not, you might see shading errors. This is more in the baking section, but for shading: ideally, your low-poly mesh has custom normals or auto-smooth to go with the normal map. Blender’s auto-smooth (set an angle or mark edges sharp + use auto-smooth in Object Data properties) should be enabled if you have any hard edges and you baked accordingly. In Unity, you’ll also set it to import custom normals or calculate with same angle to match.
+
+Ambient Occlusion (AO): Blender’s Principled BSDF doesn’t have an AO input, because AO is typically a separate multiply on the color in shaders or handled in lighting. To preview AO texture in Blender, you can simulate it: multiply your base color by the AO map. E.g., add a MixRGB node, set to Multiply, plug Base Color texture in Color1, AO texture in Color2 (set AO texture to Non-Color, and you might even duplicate it to all RGB channels), and factor 1 (full multiply). That will darken the crevices. Alternatively, in the Shader Editor’s world, you could use AO node with light, but simpler is just multiply in material. Remember to remove or disable this when exporting if your engine will handle AO separately (most game engines do AO as an optional map in the material that multiplies diffuse). In Unity’s Standard shader, you supply AO map separately and it will multiply it in the lighting pass. So you wouldn’t actually pre-multiply it into the albedo texture file. That means in Blender preview you might not see AO unless you do the multiply trick. It’s optional for preview but helps to get a closer look of final.
+
+Emission and Others: If your character has emissive parts (glowing eyes, etc.), use an Emission shader or the Emission input of Principled (though Principled’s emission is just a color add-on, it works). Provide an emission map or color as needed. In Unity, you’ll have an emission texture and checkbox. So similarly, you can set that up in Blender to test glow (use Eevee or Cycles with Bloom to really see glow).
+
+Now, using this Principled setup, in Material Preview mode, you should get a fairly accurate representation of the final asset. Cycles render will show it even more accurately if you test render.
+
+One note: Blender’s viewport might not use the exact same tone mapping or reflectance as Unity, but it’s close enough for work. Unity’s linear space rendering with either no tonemap or ACES tonemap (in HDRP) can make highlights slightly different. But generally, if it looks good in Blender’s Material Preview with an HDRI, it’ll look good in Unity.
+
+5.2 Unity Material Setup and Engine Specifics
+
+When exporting to Unity (assuming Unity URP or HDRP or Standard pipeline), you will either:
+
+Export the mesh as FBX (with materials assigned by name, Unity can create materials)
+
+Or use a direct pipeline like glTF export or Unity’s Blender importer. Regardless, you’ll be recreating or tweaking the material in Unity.
+
+Unity Standard/URP (built-in and Universal Render Pipeline): They use a Metallic workflow PBR very similar to Blender’s Principled:
+
+Albedo map (sRGB): Assign your BaseColor texture to the Albedo slot. Check the color in Unity matches expectation (Unity might slightly darken it if lighting is not set up – ensure environment lighting is on).
+
+Metallic map: Unity by default uses a single Metallic texture where the R channel = Metallic and Alpha channel = Smoothness by default (or you can choose RGBA, but typically metallic map’s alpha is smoothness). If you exported separate roughness, you’ll need to invert it to get smoothness (unless using a shader that expects roughness).
+
+If you have a combined map already (some workflows pack roughness into alpha of metallic), import that and tick the “Alpha is smoothness” if using built-in. In URP Lit shader, similarly, there's a option for smoothness source (either metallic alpha or albedo alpha).
+
+If you have separate metallic.png (grayscale) and roughness.png, you have choices:
+
+Easiest: Use metallic.png as Metallic input, set Smoothness slider manually to a constant (not ideal, loses roughness variation).
+
+Better: combine roughness and metallic into one. For example, use an image editor: put roughness into the alpha channel of metallic image, then save as RGBA PNG. Then in Unity, assign that RGBA as metallic map and set material to take smoothness from alpha. Unity will then read Metallic from RGB and Smoothness from A. This is the proper way so that your roughness variations come through. Remember to invert roughness -> smoothness. Actually Unity expects smoothness in alpha, which is inverted roughness typically. So if your roughness map is what you painted (white = rough), you should invert it when putting into alpha channel. Some workflows call this an “RMA” or “ORM” map (Occlusion, Roughness, Metal often combined). In standard Unity, occlusion is separate so you often do Metallic(R) + Smoothness(A) only.
+
+URP also by default does metallic+smoothness in one. HDRP is different (see below).
+
+Mark the metallic texture as Linear (uncheck sRGB) in import settings. Unity usually does, because it knows metallic/smoothness are not color data.
+
+Smoothness vs Roughness in Unity: Unity’s Standard shader uses Smoothness (which is inverse of roughness). If you find your material in Unity looks opposite in glossiness, you may have a roughness map applied as smoothness without inversion. The result would be a very shiny model if you meant it to be rough, or vice versa. The fix is to invert the texture’s values. If you used the metallic alpha approach above, ensure you put (1 - roughness) into alpha (i.e., white roughness becomes black smoothness). If you realize later, you can even invert it in Unity by using a small script or a material node (in Shader Graph for URP/HDRP) or simply re-export the map inverted
+gamedev.stackexchange.com
+. A quick manual check: If your skin looked dry in Blender (rough) but in Unity it’s super glossy, likely you forgot to invert.
+
+Normal map: Import the normal map into Unity. In the import settings, check “Texture Type: Normal Map” (Unity might auto-detect by name if “_Normal” is in file name). This will cause Unity to treat it properly (it’ll pack it into two-channel format and reconstruct Z in shader). Unity assumes normal maps are in DirectX format (Y-). However, as per Unity docs, Unity actually expects imported normal maps to be with +Y (OpenGL)
+discussions.unity.com
+ and it handles conversion if needed behind the scenes. There’s an “Flip Green Channel” checkbox in import for normal maps if needed. Since Blender’s bake was OpenGL style, and Unity expects OpenGL style by default, you usually do not flip the green on import (the default is unchecked). You can test by looking at a bump: if it looks inverted, tick/untick that box to fix.
+
+Another note: ensure your model’s tangents are set up. When importing the FBX to Unity, in the Model import settings, you have options for Normals and Tangents. If you have a normal map, choose Calculate Tangents (or “Import Tangents” if you exported from Blender with custom tangents) with Mikkt. Unity by default will calculate Mikkt tangents on import which should align with Blender. That’s important for the normal map to look correct. If this is wrong, normal maps show seams or shading oddities.
+
+Ambient Occlusion in Unity: There’s an Occlusion slot in the standard material. Unity expects a grayscale AO map (often they pack it in the G or R of a combined map, but in Standard pipeline, it’s separate). Import your AO (sRGB off, linear). Assign it to Occlusion. There is an “Occlusion Strength” slider in material to control intensity. Typically 1 (full effect) is fine. If you notice overly dark areas, you can reduce the strength. Also note, AO in Unity multiplies only the indirect lighting, not direct lights, by default in standard pipeline. That means under direct light the AO might not be as visible, which is a physically-based approach. Just be aware in preview differences: Blender’s multiply in color will darken even under direct light whereas Unity might not darken highlights with AO.
+
+Specular Color (for dielectrics): Unity’s metallic workflow has a default specular color for non-metals (usually around 4% reflective white). Blender’s Principled has a “Specular” slider which basically controls the IOR or intensity of that. If you want to exactly match, leave Blender’s Specular at 0.5, which corresponds to IOR 1.5 (4% reflectance) which Unity uses internally. If you altered it, note Unity by default uses 0.02 reflectance at normal incidence for non-metals (which is like specularLevel=1 in Unity’s Standard means 4% by energy conservation logic). Most of the time you won’t adjust this in Unity, except via a “Specular Highlights” checkbox maybe, but just something to know if the material looks too shiny or too dull on dielectrics – check that specular isn’t off. In URP Lit, there is a similar concept but usually not exposed.
+
+Unity HDRP (High Definition Render Pipeline): HDRP uses a different shader called Lit, which is also metallic/roughness but with more options:
+
+It expects a Mask Map (an RGBA packed texture) by default. The mask map in HDRP Lit is:
+
+Red = Metallic
+
+Green = Occlusion (AO)
+
+Blue = Detail Map Mask (for secondary details usage; if not used, can be white or black, doesn’t matter unless using detail maps)
+
+Alpha = Smoothness (note: smoothness, not roughness, same convention as Unity standard).
+So you likely need to pack your metallic, AO, and roughness into one MaskMap for HDRP. This can be done easily once you have each component:
+
+Metallic (R): you have as grayscale.
+
+AO (G): you have as grayscale.
+
+Blue (B): if you’re not using a detail mask, just fill this channel with 1 (white) so it doesn’t mask out detail (or 0, depends but I think white = allow detail everywhere, anyway if you have no detail maps in use it probably doesn’t matter).
+
+Smoothness (A): you need smoothness = 1 - roughness. So invert your roughness and place into alpha.
+Then export this as a RGBA PNG/TGA etc. In Unity HDRP, assign that as the Mask Map (there’s a slot for it). Then set the Surface Type to Opaque (for a character usually), and assign your Base Map (Albedo) and Normal Map similarly. There’s also a separate channel for AO strength if needed.
+
+Alternatively, if you don’t want to combine these yourself, you can fill them after import: Unity HDRP’s material inspector allows you to assign AO map separately and such and it will combine behind scenes if you don’t provide a mask, but it’s best to just provide the mask map for efficiency.
+
+Check “Material > Smoothness Remapping” if there’s one (HDRP has min/max smoothness sliders; by default 0-1 means use full range). Usually leave these default 0 and 1.
+
+Specular in HDRP: By default, non-metals use 0.02 reflectance. If you want colored specular for some reason (shouldn’t for dielectrics, always near-gray), HDRP does have an option if using specular color mode (another workflow, but stick to metallic mode for simplicity).
+
+Subsurface scattering (SSS): If your character is skin and you want to leverage subsurface scattering in HDRP, you can. HDRP Lit shader can enable Subsurface Scattering or Transmission. You’d need to enable SSS in the HDRP asset and assign a profile. This is advanced, but for completeness: you might decide to use “Subsurface Scattering” material type for skin to get that light bleed on ears, etc. That requires a SSS profile asset and maybe a thickness map. If not, you can fake SSS (see next sub-section).
+
+Double-Sided: If your model has any single-sided planes (like hair cards or cloth), in Unity you’d tick the material as double-sided. But for a humanoid typically everything is closed volume so keep it single-sided (for performance).
+
+glTF PBR: If exporting via glTF to Unity or other engines, glTF expects:
+
+BaseColor (sRGB)
+
+MetallicRoughness texture (Metal in B, Roughness in G, typically R unused or sometimes Occlusion is separate map)
+
+Normal (GL format)
+
+Occlusion (separate)
+
+glTF spec is very similar to Unity Standard. So to share knowledge: it basically does the same as above but just differently packed. If needed, just note glTF uses roughness in green and metal in blue by convention. Some Blender glTF exporters will do this packing for you if you set up your Blender material nodes accordingly.
+
+The key across all engines: ensure maps are correctly assigned and color space set. Common mistakes:
+
+Forgetting to set Normal map as Normal type in Unity (result: lighting looks wrong).
+
+Using Roughness map directly as Smoothness in Unity without inversion (result: opposite glossiness).
+
+Not packing metallic/smoothness as Unity expects (result: losing roughness detail because slider overrides or something).
+
+Overlooking sRGB flags (e.g., accidentally leaving AO as sRGB which could lighten it incorrectly – always set AO as linear).
+
+5.3 Material Tweaks and Special Considerations (Skin, Cloth, etc.)
+
+Skin Material – SSS or Fake SSS: Real skin has subsurface scattering (light penetrating and scattering in flesh). In Blender’s Principled BSDF, you can simulate this by using the Subsurface slider and a Subsurface Color (often a reddish tint for skin). For example, set Subsurface ~0.1 and Subsurface Color to a reddish or orangey version of the skin. This will make thin parts (ears, nose) glow more under light. In Eevee, subsurface is approximated, in Cycles it’s real. If you do this, note that when exporting, Unity Standard shader does not have SSS. Only HDRP does (with a separate setup). So this is purely for Blender realism preview unless you intend to use it in the engine (like if using HDRP).
+
+If you are going to Unity URP or standard which doesn’t support SSS, you might “fake” it: e.g., in your base color texture, make ears slightly brighter and more saturated (to simulate light through them). Or use a two-sided shader with a red backface tint (some games do that for ears). Or simply rely on ambient light and slight translucency (not available in Standard though).
+
+There are toon shaders or custom skin shaders that do SSS-like effects if needed, but for a general pipeline: if skin needs that softness, either use HDRP with SSS or fudge it with texture.
+
+When painting skin, avoid pure flat color; subtle hue shifts (redder in cheeks, blue in veins areas, etc.) help give a feeling of depth which partially compensates lack of SSS.
+
+Material separation (skin vs cloth): You have two choices mentioned: separate materials, or one material with a mask:
+
+Separate materials: e.g., one material for body skin, one for clothing. This means you will have separate texture sets and you can tune each independently (maybe skin uses subsurface shading, cloth doesn’t). The cost is extra draw calls. Many game characters do have multiple materials (especially if they have different shader needs like transparent hair vs opaque body). If you can afford 2-3 materials, that’s absolutely fine. It simplifies authoring as well because you can have separate UV and texture for each (maybe higher res for face, lower for boots, etc.). But it might complicate blending at edges (like neck of body vs shirt – you need a clean seam).
+
+Single material with mask: This approach packs everything in one UV and uses a mask to control different properties. For example, you could create a black-white mask where white = skin, black = clothes. Then in a shader use that mask to lerp between two sets of values (like one roughness value for skin, another for cloth, or even two different normal maps). In Blender, you could approximate by mixing two Principled BSDF using that mask. In Unity, doing this would require a custom shader (Shader Graph or similar), as the standard Lit doesn’t allow two different sets of PBR properties via a mask except via detail maps which is not quite the same.
+
+It's often simpler to just use two materials unless you are heavily optimizing draw calls and are comfortable making a custom shader to handle two material types in one.
+
+Given the user uses Unity (which is fine with multiple materials per mesh), splitting materials is acceptable. For instance, assign one material slot to the body mesh, another to clothing objects. Then each can have its own textures.
+
+If, however, your character must be one material (maybe for mobile optimization), then consider that in texturing: for example, the face and armor share one texture sheet. In that case, you might compromise some quality or use bigger textures.
+
+Hard Surface vs Soft Edge Normals: A typical issue: At sharp edges (like a belt buckle or a hard crease on boots), if you keep the normals smooth and rely on the normal map to simulate the edge, you might see a weird outline or shine. Often, for very sharp edges (> 90 degrees), it’s better to actually split the normals (make it a hard edge in shading and in UV). This ensures the lighting breaks cleanly and the normal map doesn’t have to contain a huge gradient. When you baked the high poly, if you had those edges marked sharp and UV-separated, the normal map encodes them properly. If you inadvertently left them smooth, you might see smoothing artifacts.
+
+So check your model in engine: if a supposedly sharp corner looks rounded or has odd shading, you likely need either a stronger normal map detail or to actually split that edge.
+
+A rule of thumb: if an angle is >= the “auto smooth” angle (often ~60°), consider making it a hard edge + UV seam and thus separate normal map island. This will produce a visible seam in the normal map if not handled, but it’s usually fine if aligned with a UV seam that was also a texture seam (like between two different materials or hidden edges).
+
+If an edge is not super sharp and you want it smooth, then the normal map should take care of it (like muscles blending smoothly).
+
+Inverted Green Channel (Normal Map): Already addressed, but reiterate: Unity (except maybe older versions on DirectX platforms) doesn’t need you to flip G if coming from Blender. Unreal does (since Unreal expects DirectX normals by default). If you ever see your normal details popping outward instead of inwards (like pores bumping out), that’s the sign to flip Y. In Blender viewport, if you saw it correct and in Unity it’s opposite, then definitely flip (or re-bake with different setting).
+Also ensure “Calculate tangents Mikkt” in both Blender (bake) and Unity (import) to avoid subtle mismatches in tangent basis which cause seams
+daneresearchpractice.wordpress.com
+.
+
+Seams and Shading: Sometimes you’ll notice at UV seams, the normal map might produce a slight shading seam if the vertex normals weren’t perfectly synced or the bake had an issue. Solutions:
+
+Make sure you exported custom normals from Blender (Blender’s FBX has an option “Face” vs “Angle” vs “None” – choose “Face” or “Normals Only” to export the smoothed normals you set). Unity can import them. If Unity recalculates differently than Blender did at a seam, normal map might not match 100%. So ideally, import normals (from Blender) into Unity for best match. But if that fails, let Unity calculate with same angle and hope it matches (Mikkt helps ensure normal map itself is okay).
+
+Or, hide the seam (which we attempted by seam placement).
+
+Also ensure no texture filtering weirdness at seam: the normal map pixels on either side of seam should represent correct normals. If you see a hard seam, maybe the bake margin wasn’t enough and mipmapping is pulling background color (like purple) from outside UV. Always have a margin on normal bake too (8px+).
+
+In summary: matched tangent basis, consistent normals at seams, and enough padding usually solves visible seams.
+
+Specular aliasing (shimmer on fine details): If your model has very shiny tiny details (like chainmail, or stubble with high spec contrast), at distance the specular might flicker. Mipmaps and a good roughness map help. If it’s still an issue, consider increasing roughness a bit on those micro-details to reduce aliasing (basically, very small geometric details can cause high-frequency highlights; making them slightly rougher or using anisotropic filtering helps).
+Unity HDRP has a setting for specular anti-aliasing (it can pre-filter normal maps over distance), but in URP/Standard, not so much.
+
+Viewport Lighting & Tone: In Blender, you might be using Filmic, which compresses highlights nicely. In Unity, if using URP default (no tonemapping) you might see more contrasty images (like bright reflections clip to white). If using HDRP default (ACES tonemapping), it may be similar to filmic. Just be prepared to adjust your texture values if necessary after seeing in engine. Example: metal might look too dark because of environment lighting differences; you might then adjust reflection intensity via lighting rather than texture. So sometimes it's lighting differences rather than texture fault.
+
+MatCaps and Visualizing Normals: In Blender, switching viewport to a MatCap (especially a normal-check matcap or a simple clay) can show if your normal map is doing what you think. Unity doesn’t have matcap mode but you can temporarily put a simple material. This is just a debug tip: if a certain area looks odd, try viewing it with a known environment or matcap to isolate if it’s geometry or texture.
+
+Using Vertex Colors or Masks in Shaders: If you had vertex colors (like for blending or for detail masks), Unity can read them in shader. For instance, some artists paint a vertex color map to blend two materials (mud vs dry dirt). If you did that, in Unity you’d need a custom shader to use vertex color as mask. Not used in this specific pipeline unless you purposely did that.
+
+Channel Packing (ORM) pitfalls: If you pack channels, ensure no compression artifact due to mixing disparate data:
+
+Usually, you want AO, rough, metal in one. AO and roughness can vary smoothly, metallic is usually binary-ish. If you compress them with DXT1 (which is 4bpp block compression), you can see blocky artifacts especially in AO if subtle gradients. In HDRP, MaskMap likely uses BC7 if on high settings or at least no sRGB so not gamma-error.
+
+It’s often beneficial to compress textures appropriately: e.g., normal maps in BC5 format (two-channel), MaskMap in BC7 (especially if using console/PC, BC7 retains quality but Unity free version might not default to it).
+
+In Unity, set the texture type properly (normal as Normal, mask map as default with no sRGB, etc.). Check the preview for banding or color shifts.
+
+Lighting Setups: When you bring into Unity, test under various lighting:
+
+A bright sun directional + ambient, a dim indoor light, etc. This ensures your roughness range is good (too high roughness everything looks chalky under bright light, too low roughness everything is plasticky).
+
+Use reflection probes in Unity for accurate reflections on metallic surfaces.
+
+Troubleshooting Shading Issues Quick Reference:
+
+If normal seams visible (lighting discontinuity): likely tangent or smoothing mismatch – ensure same tangent basis and that seam edges either both smooth or appropriately split as baked
+polycount.com
+.
+
+If weird shading on whole model (like too shiny or too dull): check roughness vs smoothness invert issue, and specular level. Possibly the roughness map is mis-read (wrong color space or not assigned).
+
+If texture colors off: check sRGB toggles. If a grayscale map looks off, maybe it’s being gamma corrected incorrectly.
+
+If model looks different in Unity than Blender: compare a reference neutral environment. Possibly Blender's environment light vs Unity's default sky differ. Unity by default might apply auto-exposure (HDRP) or have no sky vs Blender had one. Try to use similar HDRI in Unity to compare. Also disable post-effects when comparing initial look.
+
+If metal looks black in Unity: Could be that there’s no reflection probe and sky is black (so metal which only shows reflections appears black if environment is black). Always ensure there’s some ambient or sky in scene to see metals. In Blender, the HDRI is always giving something, but if you import to an empty Unity scene with no skybox or lights, metals will indeed appear black. Solution: add a skybox material or reflection probes or a default environment.
+
+If roughness looks reversed: most likely needing invert. Already covered.
+
+If nasty jaggies on shiny edges: increase anisotropic filtering in quality settings (to 8x or 16x) so that glancing angles on textures are sharper, that can reduce shimmering. Also ensure Mip Map bias isn’t too high.
+
+If there’s a weird bright outline on some edges when using normal map: that can happen if the normal map’s MIP maps weren’t properly generated (like if using Simple instead of Kaiser filter). Unity by default does a decent job. But a bright halo on edges of low-poly can be normal map artifact at low MIP. You might try enabling “Double-sampling” or “MIP map preserve borders” if available. It’s rare though unless extreme normal differences at seams.
+
+Fake Outlines or Stylization: Not asked, but if one wanted an outline shader or stylized shading, that’s a separate topic. We focus on PBR realistic.
+
+5.4 Shorts/Cloth vs Skin Shading Differences
+
+Cloth usually is very rough (almost no specular highlight except broad diffuse reflection), whereas skin has a slight sheen and SSS. So in practice:
+
+Your roughness map should reflect that: cloth areas bright (rough), skin moderately gray, perhaps lips slightly darker (a bit more glossy).
+
+Your metallic should be 0 on both (unless cloth has metallic threads, unlikely).
+
+In Unity, the cloth and skin both are dielectrics, so no metallic. But you might want skin to have some gloss separate from cloth. If one material, you achieve that via roughness texture differences. If separate materials, you can just set skin material smoothness a bit lower than cloth material’s.
+
+If needed, in the same material you could use that mask (skin vs cloth) to drive a secondary gloss or spec color (with custom shader).
+
+Lighting wise, skin might also benefit from a subtle rim lighting or half-lambert to brighten it, some stylized pipelines do that.
+
+Using Unity’s HDRI or Sky: Unity default sky might be bright blue. If you want to replicate Blender’s lookdev, you can set Unity’s skybox to a similar HDRI. There are free HDRI skyboxes or you can import Blender’s environment if you have it. This helps for consistency.
+
+Precision in Roughness: Sometimes 8-bit roughness might show banding if there are very subtle gradients (like on a large smooth surface going from 128 to 129 in value). If banding is an issue in engine (rarely unless in low light with reflection, you see “steps”), using a 16-bit texture for roughness or dithering can solve it. But that’s usually overkill for mid-range assets.
+
+Emissive and Night Scenes: If your character has emissive (glowing eyes or gadgets), test them in a dark scene. Unity requires enabling bloom (via Post Processing) to see glow beyond just bright surface. In Blender, you can use bloom in Eevee for preview (makes emissive surfaces glow).
+
+Transparency (if applicable): Not for this char likely, but hair or glass parts would require turning material to Transparent and using alpha map. That’s a whole other set of settings (sorting, alpha clip vs blend, etc.). If the character had, say, transparent glasses, you’d use a separate material for that set to transparent and maybe not write to depth etc. But I digress because it's not in prompt.
+
+Anisotropy and Sheen: Principled has advanced features like Sheen (for fabrics) and Anisotropic (for brushed metals). Unity Standard doesn’t have those (HDRP does: sheen in fabric shader, anisotropy in Lit if enabled). In Blender, if you used sheen for velvet cloth effect (sheen is a slight fuzzy reflection at glancing angles, e.g. velvet has bright edges), that won't directly translate to Unity Standard. HDRP’s lit shader has a “Fabric” option for sheen or a separate Fabric shader. So careful: if you rely on Principled’s sheen slider to get a nice cloth look in Blender, in Unity Standard/URP that effect will be lost unless you approximate it by adjusting base color or roughness at edges (which is not trivial without a custom shader). For consistency, you might avoid heavy use of sheen in Blender preview unless you know how to mimic it.
+
+If you want a velvet look in Unity URP, you might do a trick with ramp or a toon ramp. But that’s beyond standard PBR.
+
+Smoothness Map alpha in Unity being not 1 for metals: Unity’s metallic texture alpha = smoothness. If you left some parts alpha = 0 by mistake (maybe outside UV or in channels), it could cause those areas to be fully rough. Always fill the entire texture’s alpha channel with a reasonable default (like 255 for desired smoothness of metals if not using those areas). If not, you might get unintended rough spots.
+
+5.5 Common Shading Issues and Solutions
+
+Let's break down the specific ones mentioned:
+
+Inverted green channel: Already covered. If normal map lighting looks wrong, flip the Y. Confirm orientation: Unity uses OpenGL convention (so if you followed Blender, should be fine)
+discussions.unity.com
+.
+
+Wrong glossiness (smoothness): If everything looks inside-out in terms of shiny vs dull, invert the roughness map to get smoothness
+gamedev.stackexchange.com
+. Also ensure you're not double-inverting (don’t invert if you already prepared smoothness correctly).
+
+Visible Seams in lighting: Possibly due to normal map mismatches or a specular break. This often happens if an edge was smooth-shaded in Blender but split in Unity or vice versa. Check that your import settings for normals are correct. A tactic: in Blender, mark seams that are also sharp edges (so the vertex normals are split). Bake the normal map with those edges sharp. Then in Unity, those edges are inherently sharp and the normal map will line up. If you kept them smooth in Blender but still cut UV, the baker tries to average normals across seam, which can produce slight differences. Usually, best practice is: any UV seam on a hard surface piece, set as a sharp edge for baking
+polycount.com
+. On organic parts, keep them smooth and the normal map will be continuous (except minor differences due to tangent basis, which Mikkt solves).
+
+If you see a seam only from certain angles or reflection, it might be because the tangent bases aren’t synced. Ensure Mikk in both. Unity print “tangent basis not matching” if something’s off sometimes. If needed, choose “Import Tangents” in Unity if you trust Blender’s (only do that if Blender's tangents are Mikkt and you exported them – not sure if default FBX includes tangents; it can if you triangulate and check tangent export).
+
+If seam is in color or roughness (like color mismatch, probably painting issue), fix texture as in Section 4.
+
+Hard edge vs smooth split: If you have a very sharp edge but tried to keep it smooth to avoid a UV seam, you might get shading weirdness. The normal map can only approximate a certain range of angle difference. If the angle is too extreme (> about 120°), the normal map might look painfully gradient or cause black halo at glancing angles. It's recommended to actually split such an edge (hard edge + UV seam). You will then have two separate normals surfaces, and the normal map doesn't have to encode a huge jump. The downside is a physical seam in model shading, but if it's a natural place (like edge of a boot sole or a sharp armor plate corner), that’s fine. So re-evaluate your model: any place that should look like a crisp 90° corner, ensure it’s a hard edge in shading. Many artists mark UV seams exactly where they put hard edges, to kill two birds. Because note: if you have a hard edge (split normal) but you didn't seam the UV, the baker will likely create a messy normal map artifact because one face's UV shares with another but their normals differ. So always seam where hard edges are.
+
+For organic, you rarely want hard edges, except maybe inside mouth or something unseen.
+
+For mechanical parts (buckles, etc.), definitely have them split at corners.
+
+Smooth shading on low poly with normal map: If your low poly was extremely faceted and you rely entirely on normal map to smooth it, you might see polygon gradients in reflections because the normal map cannot fully hide the low poly silhouette or reflection warping. The solution is often to have enough geometry for critical curves or use weighted normals. Weighted normals (or face-weighted normals) can improve how low poly surfaces shade by biasing normals to flatter on broad faces, then the normal map does fine details. Blender has a Weighted Normals modifier or you can set face influence. Unity can also compute weighted normals on import if chosen. This is beyond basic, but just a mention if shading looks faceted even with normal map.
+
+Texture resolution vs shading issues: If your textures (especially normal or roughness) are too low-res, you might see blocky shading or noisy specular. Ensure appropriate resolution for the asset size. E.g., a character that fills the screen might need 2048 or 4096 maps to hold fine detail. If you downsize to 512, the normal map might blur out causing lighting to look flatter or roughness gets blotchy. Unity might auto-resize based on import settings (check max texture size on import and override if needed).
+
+Specular color or reflection issues on metals: If a metal looks oddly colored or dark, check base color of metal region. PBR rule: metals derive their color from base color (reflectance tinted). If you made a metal but left base color as, say, gray, it’ll reflect as gray metal (like dull steel). If you wanted a bright silver, base should be bright almost white. If gold, base color is yellowish. If something looked off, confirm you set base color correctly for metals. Non-metals, base color is their diffuse and should be less saturated typically for physically correct (because very saturated dielectrics are rare). But small stylization is fine.
+
+Environment and reflections: Sometimes a seam might show in reflections if environment reflection is sampled differently across seam (because of normal differences). But if normal map and tangents are correct, environment reflections should align. If not, suspect tangent mismatch or a bug.
+
+Normal Map compression artifacts: Using DXT5 for normals can sometimes create slight artifacts (since it compresses RG channels). BC5 is better (Unity will use BC5 if platform supports it and if you mark as normal map type - it discards blue, uses two channels). If extremely picky, you can choose high quality in import or uncompressed, but that’s memory heavy. Usually normal map artifacts are minor and hidden by lighting complexity.
+
+To conclude this shading section, the keys are consistency and correctness: consistent normal and tangent basis from bake to engine, correct color space and channel usage for all maps, and leveraging the engine’s material options to emulate what you saw in Blender. Once set, your game asset should appear in Unity as intended: with proper UV mapping (no weird stretching), nice texture detail from painting, and physically plausible material response (skin slightly shiny, cloth matte, etc.). Always test in engine early and adjust as needed, since ultimately it has to look good there, not just in Blender. This ensures the assistant (the one being trained by this document) can confidently guide users through diagnosing any issues that arise in the shading stage.
+
+6. Baking Techniques for Game Maps
+
+Baking is the process of capturing details or information (often from a high-poly model or from lighting calculations) into texture maps applied on the low-poly game asset. For a game-ready humanoid, common bakes include normal maps (from a detailed sculpt to the low poly), ambient occlusion, curvature, and sometimes special maps like thickness for subsurface scattering or a combined map for wear and tear. Baking can also be used to consolidate multiple materials into one (e.g., baking procedural textures or multiple tile textures into one atlas). In Blender and other tools, careful setup is required to get a clean bake without artifacts. Let’s cover the why, when, and how of key bake types, and address typical problems.
+
+6.1 When and Why to Bake Textures
+
+Why bake? Baking allows you to:
+
+Transfer high-resolution detail to low-resolution mesh (Normal Maps): If you sculpted fine muscles, wrinkles, pores on a high-poly character (say in ZBrush or Blender sculpt), you cannot afford that polycount in-game. By baking a normal map, you encode the high poly’s surface detail into a texture that fakes the lighting of that detail on the low poly
+blender.stackexchange.com
+. Normal maps dramatically improve the visual complexity without adding geometry. Similarly, you might bake a displacement or height map for use in some engines or a cavity/curvature map from the high poly for texturing uses.
+
+Bake Ambient Occlusion (AO): AO is basically self-shadowing of static ambient light. It adds realism in creases and corners. You can compute AO from the model’s geometry (either high or low poly). Baking AO onto a texture (either as a separate map or multiplied into vertex colors or diffuse) gives a sense of depth. Games often use AO maps in shaders to darken areas that global lighting might not reach well
+khronos.org
+.
+
+Bake Material IDs or Color Maps: If you plan to texture in another program or even in Blender, you might assign simple colors to different parts on a high poly (like red for metal, green for skin, blue for cloth) and bake that as an ID map. This helps in masking for painting (e.g., in Substance, you can easily select by color to fill areas). It’s not needed if you already have separate materials or well-separated UV islands by material.
+
+Bake Lighting or Cavity for stylization: In a more stylized pipeline, sometimes artists bake out the lighting or curvature and use it to hand-paint textures (e.g., use curvature map to highlight edges in a stylized texture, or use a combined AO+curvature to guide where to hand-paint grime). Baking curvature (essentially where the geometry is convex or concave) can be done (some tools can derive from normal map or from geometry). Curvature maps are great for edge wear (white on edges, dark in cavities, for procedural masks).
+
+Bake Translucency/Thickness: For subsurface scattering or two-sided shading, a thickness map (each texel measuring how thick the object is at that point, often by baking rays from one side to see where they exit the other) can be used. This is advanced: e.g., Unity HDRP skin shader can use a thickness map to modulate SSS (ears thinner so more light passes). You can bake thickness in Blender by an emission-from-backfaces method or in tools like Substance (called thickness or transmission map). It’s not always used, but that's a use-case.
+
+Combine multiple textures into one (Atlasing via baking): If your humanoid was textured with multiple tiling materials (say one for skin detail, one for cloth pattern), you might bake the final look into one set of maps. Or if using procedural materials (noise-based shaders in Blender for pores or coloration), baking them to images ensures the game engine can use them. Essentially any procedural or multi-material detail that can’t be directly used in engine might need to be baked into the texture.
+
+When to bake?:
+
+After high poly modeling/sculpting and low poly UV unwrapping are done. You need a finished low-poly UV layout and an aligned high-poly model (they should occupy the same space, e.g., the high poly is not offset incorrectly).
+
+If using normal maps: you need to have set up smoothing and splits on low poly according to how you want it ingame before baking. Because changing smoothing later will invalidate the bake.
+
+If using modifiers (like a Mirror mod on low poly or array): either apply them or use “Selected to Active” properly. Often one applies Mirror on low poly and duplicates the high poly for the other side or uses matching naming convention (some bakers can bake symmetry).
+
+Bake when lighting or environment is not distracting (for AO, ideally isolate the model and cast rays).
+
+Typically, you’ll do test bakes early (small resolution quick bake) to see if cage issues appear, then final full-res bakes once all is good.
+
+6.2 Baking Normal Maps (High to Low Workflow)
+
+Setup in Blender:
+
+You should have both the high-poly and low-poly models available. Usually, they occupy the same space (the low poly is inside the high poly). If they’re separate objects, ensure they align.
+
+Give the low-poly a proper UV unwrap with no overlaps (unless intentionally overlapping UVs, then handle separately).
+
+Create a new image for the normal map on the low poly material, and select it in an Image Texture node (as discussed).
+
+In Render properties, choose Cycles engine (since baking normals needs Cycles in Blender 2.9+/5.0, as Eevee doesn't bake).
+
+In Bake settings:
+
+Bake type: Normal.
+
+If doing high-to-low, enable Selected to Active. This tells Blender to cast rays from the active object (low poly) towards selected object(s) (high poly)
+blender.stackexchange.com
+.
+
+You need to select the high-poly AND the low-poly. The active object (last selected, highlighted in lighter outline) should be the low-poly recipient, and other selected objects are treated as high-poly sources.
+
+Cage: Decide whether to use a cage object or ray distance:
+
+Without Cage: You provide a Ray Distance (Extrusion) value
+blenderartists.org
+. Blender will cast rays in both directions (inward and outward from the surface) up to that distance to find the high poly. If set too low, some details won't be captured (missed rays -> black areas where it finds nothing, or inside out details). If too high, rays might hit the wrong part of the mesh (project through and catch something on the far side -> weird projection artifacts).
+
+With Cage: You provide a separate cage mesh that envelops the low poly and slightly beyond the high poly surface. You tick “Cage” and either let Blender auto-inflate (by Cage Extrusion distance) or specify an object as cage
+docs.blender.org
+. The cage method often yields better control. To get a cage, you can duplicate the low poly, then in Edit Mode scale along normals (there’s a “select all, Alt+S to shrink/fatten” or use a displace modifier) so it fully covers the high. That duplicate is your cage object. Then in bake settings, check Cage and pick that object. Blender will then cast rays from the cage inward to find intersections on high poly.
+
+If uncertain, start with ray distance method for simplicity: e.g., put Ray Distance = a small number like 0.1 (depending on your model scale). Bake, see if any areas missing (black) or artifacts. If black missing detail, increase ray distance a bit. If weird errors (like fingertips capturing parts of other fingers), maybe reduce ray or switch to cage to be more controlled.
+
+Output: The active image texture on low poly should be the new blank normal map. (If you forget to have an image selected, Blender will throw error "No active image found" or similar. Always have that node selected with the image.)
+
+Sampling/Quality: For normal bake, 1 sample is enough (it’s not like AO which might need many samples to reduce noise). So it’s fast.
+
+Make sure Low poly normals are set how you want them (usually Auto Smooth on, with appropriate sharp edges). Under Object Data properties for low poly, enable Auto Smooth at say 180° if you want all smooth except those marked sharp. Actually, when using Selected to Active, Blender by default uses the normals from the low poly (unless you check an option to use something else). That means if low poly has a hard edge, it’ll treat that appropriately. If you find seams in normal map, sometimes it’s because you didn’t mark edges sharp that should be, as previously discussed.
+
+High-poly and Low-poly naming or layers: It's wise to put high poly on a separate collection and hide it for general work. For baking, both must be visible and selectable. You can also move high poly to a different scene or file and use an external baker. But Blender can do it internally fine for moderate poly counts (if extremely high poly millions, you might want to use something like xNormal or Substance for efficiency).
+
+Projection issues to watch:
+
+Intersections: If your high poly has parts that intersect or float (like straps on top of cloth), rays might hit the wrong order. Ideally, ensure high poly is a single combined surface if possible. If not, sometimes separate bakes per sub-object is done then combine textures. Or push straps slightly out in high poly to ensure proper bake layering.
+
+Smoothing mismatch: On a hard surface if you keep low poly smooth but high has a defined edge, the normal bake might show a gradient because low was smooth. If you want a sharp edge on low, mark it sharp so that the normal map will actually show a seam (which is fine if meant to be sharp physically). There's an argument of whether to bake across UV seams or not. Usually, if an edge is > 90°, you don't average normals across it (mark sharp, split UV). Bake will produce a discontinuous but correct shading.
+
+Mirrored/Overlapping UVs: If you have mirrored UVs (like left and right arm overlapping), do NOT bake both at same time in Blender - they will overwrite each other in the same texture space causing artifacts (the rays from both arms write to same pixels). Solutions:
+
+Temporarily separate them: e.g., move one arm's UVs off to +1 UDIM space, bake one side, then duplicate that in image for the other or simply mirror the texture after. Blender currently can't bake one side and automatically copy to overlapped unless you offset or separate objects.
+
+Or bake one half at a time (hide one half’s faces and bake, then vice versa) to separate images and combine, but that’s complicated.
+
+Easiest: If you plan on mirrored UV, often artists will only include one side in the low poly for baking, then after baking, duplicate geometry and flip UVs. But duplicating geometry after means in Unity it will also mirror the normals properly (if symmetric and using tangent basis, it should be okay but sometimes mirrored UV across X can invert normals unless shader accounts for it – Mikkt does account for mirrored UVs by storing a bit).
+
+Honestly, a safer approach: don't mirror UVs for normal maps if you can avoid; or if do, be prepared for finicky pipeline. Many games do mirror, but they often either ensure that the mirrored part is symmetric in mesh so tangent basis doesn't break (like both sides of symmetrical object share vertex normals across mirror, which can be done if the mesh is actually mirrored instance).
+
+If you did mirror half the body UV, a robust plan: bake the full high on a full body low (non-mirrored UV version) so you get a full normal map. Then, in an image editor copy the half to the other (since it should be symmetrical, just copy pixels from one half of texture to the overlapped area).
+
+Another approach: offset one side by 1 in UV (so they don't overlap in 0-1), bake with both present (one will write into 0-1, the other into 1-2 range). Then open the image, copy the tile 1-2 back onto 0-1 overlapping region. This way you got both bakes separately. Requires editing the image though.
+
+Selected to Active errors: If you see a completely messed up bake (weird colors or objects shape), check that you had "Normalized" checked (Blender normal bake by default should output in tangent space which is normalized to purple-ish map). If you accidentally set object/world space, it would look different. Usually you want Tangent space (the default for normal bake).
+
+Blender outputs normal map in OpenGL convention (Y+). If you need a DirectX version, you can invert green after or in nodes.
+
+After baking, save the normal map (and use it in your material). Check it on the model with a neutral light – it should bring out the details from high poly. In Blender, you can plug it in and see instantly if it matches high poly shading (by toggling between high and low with normal map).
+
+Ray Distance vs Cage Fine-tuning:
+
+A trick to find a starting ray distance: In Blender, in edit mode for low poly, measure approximate max distance between low and high surfaces. Or trial: if some areas appear black (meaning ray didn’t hit anything), increase a bit. If you start getting “bleeding” (like seeing unrelated details on surfaces, e.g., inner mouth detail showing on face), ray distance is too high (rays went through the gap and caught inside surfaces).
+
+Using a cage often yields cleaner results with less trial. However, making a cage for a complex character can be time-consuming. For something like a humanoid, it might be okay to use ray distance for outside and also check "Selected to Active" uses by default inside/outside hits. Actually Blender's ray distance is only outward by that distance (for inward, it always goes until it hits something up to some limit or uses cage extrusion negative for inward).
+
+If ears or fingers have artifacts, sometimes it’s because those areas are thin and rays might catch the opposite side (common in fingers where rays from the back of finger hit the front of the same finger on the other side because it's within distance). A cage that is properly pushed out around each finger prevents that (rays start from cage outward, skipping near internal hits).
+
+If using the cage object, ensure the cage does not self-intersect weirdly or diverge far from the high shape – the projection will follow cage normals exactly.
+
+High Poly Material for Baking: Typically, for normal you don’t need any special material on high poly, Blender uses geometry normals. But for AO or curvature, sometimes you give the high poly a pure white material etc. For normal, just ensure high poly’s modifiers (like subdivision) are applied or visible at render.
+
+6.3 Baking Ambient Occlusion (AO)
+
+AO is view-independent shadowing. In Blender Cycles:
+
+Set Bake type to Ambient Occlusion.
+
+You don’t need Selected to Active (AO is usually baked on the low poly itself, not needing high poly – unless you want high poly AO specifically, but usually low is fine since difference is minor for AO. If the high has very detailed cavities smaller than low, you might want to AO from high though).
+
+Typically, you just bake AO from the low poly, because it’s cheaper and since AO is broad, the low poly approximates the big shapes fine. For fine wrinkles, a curvature map or bent normal might be more appropriate to capture that.
+
+If you do want to include micro-occlusion from high detail (like pores making tiny AO, which is often negligible), you could do Selected to Active AO: rays from low hit high. But results differences are subtle unless high has drastically different form (like clothing folds present in high but low is smooth).
+
+In AO bake settings:
+
+There’s Samples – AO needs enough samples to reduce noise because it’s basically sampling environment occlusion. Start with maybe 64 or 128 samples. Higher for cleaner (or use denoise after).
+
+Distance: There is a distance parameter for AO in Blender (Max Occlusion Distance). If set to 0, it considers infinite. If you want more realistic small-scale AO, you might set a distance (like only consider occlusion within, say, 5cm). But generally for bake, 0 (infinite) is used to get full occlusion effect from all geometry.
+
+If parts of the model shouldn’t occlude each other because in game they might move (like arms against body?), if you bake AO with arms down, you get dark armpit. In game, if arms raise, that baked shadow is “stuck” in texture. It's fine for static characters but for animated, sometimes AO is kept subtle to avoid weird artifacts in extreme poses. Some workflows exclude limbs from occluding torso by splitting bakes or using a shorter distance so only very close surfaces occlude. For example, you could hide the arms and bake torso AO separately, to avoid a big dark spot under resting arm that looks odd when arm moves. Up to art direction.
+
+Use a cage or not: Not really needed for AO if doing on low poly itself. If doing high to low AO, could just do Selected to Active = high, and a cage if needed. But because AO rays scatter everywhere, cage vs not isn't as critical as with normals. Usually, just do low poly AO for stable result.
+
+After bake, you get a grayscale AO map (white where open, dark in crevices). Save it and use as needed (multiply with diffuse in engine, or feed into shader AO slot).
+
+If result is noisy, increase samples or apply a blur in image editor. Or use Blender’s Denoise node on image if needed.
+
+You can also do AO bakes in external tools (Substance can do it from high and low easily, as can xNormal). Blender’s AO is okay if samples high enough.
+
+6.4 Baking Curvature, Thickness, etc.
+
+Curvature Map:
+
+Blender doesn’t have a direct curvature bake option in the UI. But you can get creative: a curvature map often is derived from the normal map (convex vs concave detection).
+
+External tools: Substance Painter, xNormal plugin can bake curvature from mesh or from normal map. For Blender-only: you could use cycles material nodes trick: e.g., use Pointiness attribute (geometry node) in cycles which gives a per-vertex curvature (0 to 1, not very high quality for high poly but okay for approximation)
+learn.foundry.com
+. If you apply that to emission and bake Diffuse (with emit), you can get a kind of curvature. But Blender's pointiness isn't super accurate on low poly, better on dense high poly.
+
+A simpler approach: since we have normal map from high, you can feed that normal map into a tool or script to compute curvature (some algorithms examine changes in normal in neighborhood).
+
+80 Level or others have tips for curvature map generation. But let's say we skip details here: if needed, likely use Substance or xNormal.
+
+Use of curvature: If you have it, it’s nice for texturing, highlighting edges (convex usually white in curvature map, concave dark).
+
+Thickness (Translucency) Map:
+
+In Blender, one way: Put an emission shader on backside of model, then bake how much “light” transmits to front.
+
+There's an addon or method: position some lights or use diffuse from both sides and invert normals. Honestly easier: use Substance's thickness baker which casts rays from each side.
+
+If doing in Blender manually:
+
+Duplicate the object, flip normals, give it a pure white emission. The original low poly, give a black diffuse. Bake diffuse (or emit) from the flipped one onto original to get how much emission came through at each pixel (with some max distance). But that might require a cage as well. There’s community posts on thickness map in Cycles.
+
+Use-case: thickness for ears and such. If you can’t get this, one can fake by painting an approximate mask (like make ears brighter manually).
+
+Unity HDRP might ask for thickness map for skin. If none provided, it uses some default or radius.
+
+Cage for Baking Selected to Active:
+
+When baking high to low for anything beyond normal (like AO or diffuse), the concept of cage still matters for ray intersection. e.g., AO selected to active from high, if cage is not used and ray distance, same issues of capturing wrong areas can happen.
+
+But for AO, usually you can just not do selected to active, just use low poly because high poly doesn't change AO drastically at macro scale. So you circumvent the need.
+
+Edge Padding (Bake Margin): Always set a margin for bakes in Blender's Bake settings (called "Max Ray Distance" is different, margin is under output I think?). Actually in Blender Bake panel there's a "Margin" option (in pixels) for the baked result
+blenderartists.org
+. Set it e.g., 8 px so that the bake extends color/normal beyond UV island border. This helps avoid seams (the bakery will fill beyond edges similarly to how texture bleed works, by extending the hit color outward).
+
+If you notice a thin unbaked line at UV edges, margin was too low. Increase and rebake (or manually smudge).
+
+A note: margin doesn't wrap across UV 0-1 boundaries, so if islands at edge of UV space can bleed beyond 0-1, but since nothing is there it's fine unless tiling texture scenario (not our case, UVs not tiling).
+
+6.5 Dealing with Baking Failures
+
+Common bake issues and how to fix:
+
+Black areas in bake: Means rays didn’t hit anything (in normal bake, black signifies a missed projection, often appears as pure black or background in those texels).
+
+For normal map: black (0,0,0) or weird bright colors indicate trouble. Could be:
+
+The ray missed the high poly (increase Ray Distance or check cage coverage).
+
+The faces might be flipped or have wrong normals on low poly (if low poly normal is flipped, bake might not find high cause it’s casting wrong way).
+
+If using Selected to Active, ensure you actually selected high poly as well. If not, you'll just bake low onto low, which for normal gives essentially a flat normal (which is actually a purple flat, not black). If you got black/pink etc, something’s off. Possibly you had auto-smooth and some normals not normalized? Typically missed rays cause 100% black normal which is bad (a correct "no detail" normal should be flat purple [128,128,255]).
+
+Solution: double-check selection, normals, increase ray or use cage to catch it.
+
+For AO: black spots could mean heavy occlusion (which is correct, e.g., deep hole fully occluded = black). But if entire area is black unexpectedly, maybe rays considered environment as occluder incorrectly. Or if you left environment as black background (shouldn't matter for AO).
+
+If AO is extremely noisy black/white splotches: not enough samples.
+
+If AO missing (pure white everywhere): perhaps the ray distance was too short, not occluding far objects. Increase distance to see larger scale occlusion.
+
+Bleeding/Skewed details: Example: in normal map, you see what looks like an imprint of one part on another (like strap detail appearing on arm).
+
+Means the ray caught something it shouldn’t. Lower ray distance to not reach that far, or better, split the bake: e.g., hide the strap when baking base body normal, then separately bake strap onto body if needed or composite. Or use a cage that closely hugs the body so it doesn't "see" the strap above because strap is outside cage in that area.
+
+Could also fudge by moving the offending high poly piece away for the bake, then back.
+
+If multiple high poly objects present, sometimes you need to bake them separately to avoid them casting onto each other incorrectly (like one piece of armor projecting onto skin).
+
+There is also the concept of "bake groups" or "by mesh name" filters in some bakers: so each low-high pair bake ignoring others. Blender doesn't have that built-in, but you can manage by isolating in layers and baking individually.
+
+Low poly edges appearing in normal map (faceting): If you see actual polygon edges in the baked normal (shouldn't if high is smooth, but sometimes if low has a facet and high didn’t cover it enough).
+
+Possibly the high poly didn't have enough coverage or you left an angle unsmoothed on low.
+
+Usually marking low edges sharp when appropriate solves it (then that edge is a UV seam in normal map anyway, so you won't see weird gradient).
+
+Or subdivide low a bit more if silhouette issues (though silhouette won't fix with normal, for that you need more geo or an opacity trick).
+
+Or, if the issue is the normal map smoothing, ensure you baked with “averaged normals” (blender does by default, unlike older xNormal that had explicit tick).
+
+Seams in normal map lighting when viewed: If you see seams in Unity, check the imported tangents vs the baked ones. Possibly unify by letting Unity calculate or import depending on consistency. If the seam is due to how normal map was stitched, maybe the margin was small and you see a slight color difference at extreme angle because of filtering. Increase margin or make sure smoothing on either side of seam was correct in bake.
+
+Noise in AO or bent map: Increase samples or run a blur. Another trick: after baking AO, you can blur it a bit to soften (AO usually looks better a bit blurred so it doesn’t appear as hard shadow lines).
+
+Bake output wrong colors: If you accidentally baked normal in object space but meant tangent, you'll see lots of rainbow colors relative to world orientation. Tangent space normal should mostly be purplish overall. If it's multicolor (like green and blue showing surface orientation relative to world axes), you likely chose wrong space. For normal maps, always use Tangent space for skinned mesh.
+
+Baking high-frequency detail causing aliasing: e.g., a fine grill pattern on high poly casts lines that when baked at resolution cause moire or alias. Solutions:
+
+Increase bake resolution (bigger textures).
+
+Or use supersample: not built-in easily except by rendering bigger and downscale.
+
+Some use xNormal's 2x AA feature or so. In Blender, you could bake at 4K and downscale to 2K to antialias some detail. Also adding a tiny blur to normal map can help if detail too crisp causing shimmer.
+
+Memory issues: If high poly is extremely dense, Blender might struggle or crash. Consider decimating high poly moderately or use external bake. Or split the model into parts (like head, torso separate bakes). Then recombine textures or keep separate materials for those parts.
+
+Smoothing vs flat shading for bake: If an area of low poly is meant to be flat (no interpolation), one should mark it sharp and separate UV. The normal map then will just fill that face with whatever lighting difference if any. If left smooth, the baker will average across it and might produce a weird gradient.
+
+Lighting baked into maps unintentionally: If you accidentally baked with "Diffuse" and lights on, you might have gotten lighting/shadows in the map. Make sure for color baking, ideally set up shadeless materials (or emit). For example, if you want to bake a material color or ID, give high poly an emission material of the ID color, and bake Emit (so no light needed).
+
+People sometimes confuse baking textures vs lighting. If you want a combined look (like you textured in Blender with procedural and want that in map), you would bake diffuse (with lights off or using emission to capture pure albedo).
+
+If you baked AO or lights by accident into albedo, might need to rebake properly.
+
+Gamma on baked maps: Normal, AO, etc. should be treated as linear. When saving from Blender, it might apply color management (Blender might preview them as srgb but if saved as OpenEXR or non-color, it’s linear). If using PNG8 for normal, ensure it's not color corrected. Usually if you set image to Non-Color before baking, Blender will tag it as such and not do gamma. But to be safe, one can set render color management to Raw when baking non-color maps. Check resulting values; normal map 128 mid should stay 128 not altered.
+
+Finally, once all maps (normal, AO, etc.) are baked and saved, apply them in your material and test. The baking process often requires some iteration and cleanup, but it's crucial for getting that high-res detail and realistic shading onto your real-time model.
+
+7. Exporting from Blender to Unity (or other Engines)
+
+Now that modeling, UVs, textures, and materials are set up, we prepare the asset for export and ensure it arrives in the game engine correctly. Export involves both the mesh (and its armature for a humanoid) and the textures. We must also consider engine-specific format and compression.
+
+7.1 Mesh Export (FBX or glTF)
+
+For Unity, the most common format is FBX. Blender can export FBX (preferably using Blender’s built-in exporter). Steps:
+
+Apply any transformations on the mesh. That means ensure your object’s scale is (1,1,1), rotation (0,0,0 ideally or apply rot too if not meaningfully needed), and location appropriate (maybe centered at origin on ground). In Object Mode, select the character, Ctrl+A > “Apply Scale” (and rotation if needed). This prevents issues like non-uniform scale affecting how normals or animations transfer.
+
+Apply Modifiers: Typically apply all modifiers that are not needed runtime. Mirror, Subsurf (you likely won't keep subd for game except maybe applied moderate level), Solidify, etc. Do not apply the Armature modifier (that's needed for skinning, keep it).
+
+If the character is rigged: ensure the Armature and mesh export together. In FBX export, there's an option "Selected Objects". So select both the mesh and the armature (and any other relevant objects like helper empties if needed).
+
+Smoothing: FBX has an option to export face smoothing. I recommend enabling “Apply Edge Split” or similar if using sharp edges, or making sure the normals get exported properly:
+
+In Blender FBX export settings, check “Mesh > Smooth Shading” and “Apply Modifiers”.
+
+If using custom normals (like via Weighted Normals or manually adjusted), check "Custom Normals" or "Tangent Space" to ensure they go.
+
+Blender's FBX will export the normals as they are if auto-smooth is on (face smoothing groups). Unity can import those (set Normals: Import).
+
+Materials: If you want Unity to automatically create materials, ensure "Export Materials" is on. It will create a material slot for each Blender material on the mesh. Usually, name your materials distinctly (like "HeroBody_Mat", "HeroCloth_Mat"). Unity will import with those names. It's fine if you plan to assign your own materials later though.
+
+Units: Unity uses meters by default, Blender default is metric (1 unit = 1m). Just ensure in FBX exporter, unit scale = automatic or 1.0. Typically 1:1 works. Test if needed with a known measurement (e.g., character 1.8 units tall in Blender should be ~1.8m in Unity).
+
+Armature export: In FBX export settings, enable "Add Leaf Bones" = off (Blender by default could add extra end bones; turning it off avoids those extra unnecessary bones in Unity). Also check "Primary Bone Axis" and "Secondary Bone Axis" to ensure bones oriented correctly in Unity (usually Blender and Unity both default to same coordinate system in newer versions, so it's often fine).
+
+Shape Keys: If had any (facial, etc.), ensure they are exported (FBX can export shape keys, Unity supports them as blendshapes). Usually works out of box, but test if needed.
+
+Animation: If you had animations, ensure "Bake Animations" or NLA on as needed. For static model, no need to export animation.
+
+Triangulate: Many artists triangulate the mesh before export to guarantee the exact triangle splits used in baking are kept. If you let Unity triangulate on import (which it does automatically), it might choose a different diagonal on a long quad than Blender did when baking normal map. This could cause a subtle shading difference along that diagonal. To avoid that, you can manually triangulate the model in Blender (either by applying a Triangulate modifier or selecting all faces > Ctrl+T) before baking the normal map. If you did bake with quads, it might not be a big problem or it might be. It's safer to bake on a triangulated mesh or ensure the same algorithm is used. Unity likely uses similar logic but not guaranteed identical. So best practice: either triangulate before final export or ensure the normal map looks fine after Unity import (if an artifact, try triangulating and re-export).
+
+If you don't want to permanently triangulate in Blender (to keep editability), you can tick "Apply Modifiers" and have a Triangulate modifier on during export and not apply permanently. There's also an option in FBX "Apply Triangulate" (in newer Blender, there's an export option to triangulate on export).
+
+File scale: If Unity import makes the model 100x smaller or bigger, likely unit mismatch. Blender FBX exporter might multiply by 100 if units set differently. To avoid, either set unit scale to 1 and unit to None (some use that) or just adjust import scale in Unity. But ideally, get it correct: 1 Blender unit = 1 Unity meter, so they match.
+
+Exporting Textures:
+
+Unity won’t automatically get images from the FBX (except it may copy references). So you need to separately bring the texture image files (PNG, TGA, etc.) into Unity’s project (usually in Assets/Textures or so).
+
+If using glTF (like via Unity's importer or third-party), glTF can embed or reference textures, but it's often easier to drag-drop images.
+
+Ensure texture filenames in Blender material match the actual files you will import (for your own clarity).
+
+If you embed textures in FBX (there's an option "Embed Media"), Unity might extract them as separate files, but that often results in .fbm folder and can be cumbersome. It's actually recommended to uncheck "Embed" and instead manually place textures in Unity project and assign to material.
+
+Checking Export:
+
+After exporting FBX, test by re-importing it into Blender or using FBX viewer to ensure it looks right (optionally).
+
+In Unity: drag the FBX into Assets, select it. In the Inspector, under Model, set scale factor (if needed, often 0.01 if Blender used centimeters by default, but if unit was set to meter it should come as 1). You can tell by looking at size info that Unity shows.
+
+Under Rig, set it to Humanoid if you plan to retarget animations (for a humanoid, Unity’s Mecanim can use Humanoid rig; if it's custom usage only, Generic rig is fine).
+
+Under Import settings, Normals: pick Import. Tangents: pick Import or Calculate Mikkt (for normal maps, Mikkt calculation in Unity should reproduce if you didn't import tangents).
+
+If you find seams in normal, try toggling these: sometimes "Calculate tangents" with Mikkt might fix if Import was wrong, or vice versa if Blender's exported tangents are good, use them.
+
+Unity Material: It may show "Materials: Extract Materials" button if you had materials. You can hit that to create .mat files. Or you can manually create materials and assign the maps.
+
+Assign textures to the appropriate material slots in Unity (Albedo, Metallic (with smoothness), Normal, AO, etc. as discussed in Section 5).
+
+7.2 Texture Formats and Compression
+
+Choose proper formats for final textures:
+
+PNG: Good for lossless compression, widely used. Supports alpha. For most color maps (albedo, AO, rough, etc.), PNG is fine. Unity will compress it into its own format (DXT etc.) anyway on build, but it stores source as PNG (or any common format).
+
+TGA: Larger files but also lossless or RLE compressed. Historically used for normal maps (because of its straightforward nature and 8-bit channels, and support for alpha). Not much difference in Unity end – Unity will read either and compress.
+
+JPEG: Avoid for anything requiring crisp detail (normal, roughness) due to lossy artifacts. Could be acceptable for a large diffuse with no alpha if memory is a concern, but generally PNG is better (Engine will compress to DXT which is also lossy but controllable).
+
+EXR: Use for HDR stuff or if you needed 16-bit half for extremely high precision maps (like a displacement or a HDR emissive). Not needed for typical PBR textures (they are 8-bit fine). EXR particularly might be used for environment maps, not for character maps.
+
+TIFF/BMP: Rarely used in game pipeline as source; no advantage over PNG for our uses.
+
+When importing into Unity:
+
+Unity will compress them according to platform:
+
+By default, e.g., Albedo PNG (sRGB) might be compressed to DXT1 (if no alpha) which is 4bpp, or DXT5 (if alpha) which is 8bpp. On PC these are fine. On mobile, it might use ETC/ASTC if set accordingly.
+
+Normal maps flagged as such might compress to BC5 (two-channel) which is good for quality.
+
+You can override in inspector per texture: e.g., set Normal map to "High Quality" if needed, which might use BC7 or at least finer mip.
+
+Channel-packed maps (like the MaskMap in HDRP or your metallic+smoothness) usually are best as BC7 on PC for fewer artifacts (set Compression to High Quality/none).
+
+But remember that increasing quality means larger GPU memory usage. Strive for a balance.
+
+Channel Packing (ORM or RGBA):
+
+As discussed, you might combine metallic+smoothness+AO etc. For Standard pipeline:
+
+If combining metallic(R) and smoothness(A) in one texture, save as 32-bit PNG (so it keeps the alpha). Or TGA 32-bit. Or even PSD works.
+
+Then import, you'll get metallic map with alpha, set that in material and specify alpha is smoothness.
+
+For HDRP mask map, do RGBA as needed and Unity expects that arrangement by default.
+
+Always double-check the channel alignment after import (you can view texture in Unity with channel isolation if needed by making it readable and writing small debug, or trust pipeline).
+
+Keep AO separate if using Standard pipeline? If so, it's grayscale; might as well pack it too with others if possible to reduce draw calls (in Standard, AO is separate input but you could also multiply in shader or so).
+
+Unity URP uses Metallic map with smoothness in alpha by default like Standard.
+
+Naming Convention:
+
+Suffix your textures clearly: e.g., _Albedo, _Normal, _Mask or _Metal, _Rough, _AO. Unity doesn’t auto-link them except for some like _Normal might be detected as normal if you put "Normal" in name. But mostly for human clarity.
+
+If using Unity’s Standard (built-in) shader and you have the word "MaskMap" or something Unity might not auto assign; you'll do manually.
+
+LOD and Mipmaps:
+
+Unity generates mipmaps by default for each texture (unless you turn off). Mips help performance and reduce aliasing.
+
+Mipmaps can cause seam darkening on normal maps or AO if not enough padding. We ensured we baked with margin, but if some seam still shows a faint line at certain distance (mip bleed), you can increase mipmap padding in import (there's "Border Mipmaps" or "Mipmaps Preserve Border" options for some textures).
+
+Also possibly check "sRGB sampling" for roughness/AO maps (should be off). If accidentally on, the mipmaps for those (if they are grayscale) might blur incorrectly (though maybe minor).
+
+If the character is often close to camera, you might consider setting "Aniso Level" to maybe 2 or 4 for normal map and maybe albedo to improve angle sharpness of details (cost is small on PC, bigger on mobile).
+
+Final Prep on Mesh:
+
+Make sure to Apply Rotation if your model facing wrong direction. Unity's forward is Z, Blender's forward is -Y in some cases depending. If your model appears rotated 90° on import, you might have not applied rotation or chosen wrong axis conversion (in FBX export set Forward to -Z forward, Up to Y up often works for Unity).
+
+Ensure the Armature is at (0,0,0) rotation and scale 1. The bones local orientations may differ but as long as in Unity it animates correct it's fine. For a humanoid rig, if using Humanoid, Unity retargeting will handle orientation differences through T-pose mapping.
+
+Collapsing modifiers: If you had any non-applied (like say you left a Mirror mod not applied and exported, it might only export applied version anyway if you checked "Apply Modifiers"). Typically, no unapplied geometry modifiers remain at export.
+
+Check in Unity: Drag prefab to scene, apply a basic light, see if textures look right. Tweak material settings if needed as mentioned before.
+
+Engine Specifics:
+
+For Substance Painter users reading: they often do the entire bake and texturing there, then export ready-made textures for Unity with the right channels (like they can directly output metallicSmoothness, etc.). In our context, we've done manual which is fine.
+
+If occasionally exporting to Marmoset Toolbag (perhaps to bake or preview), know that Marmoset’s standard uses metal/rough. It would take our textures as is, just need to assign accordingly. It's also a good tool to preview how asset looks in a PBR environment quickly.
+
+If using glTF as intermediate (some pipelines do for certain cases): glTF will expect MetallicRoughness texture combined, and might not carry all maps (like Unity's smoothness).
+
+The user specifically said "prefers PBR-first workflow, exports to Unity Standard/URP/HDRP, occasionally Substance or Marmoset." We've covered Standard/URP/HDRP. For Marmoset, it's straightforward to drag-drop model and textures in it to present, not much overhead.
+
+7.3 Channel Packing and Format Recap
+
+Let's explicitly mention some typical format choices:
+
+Albedo/BaseColor: PNG 8-bit sRGB. (If very large and concerned about memory, could compress to JPEG, but normally not needed).
+
+Normal: PNG 8-bit (since normal's detail rarely needs >256 levels per channel; if extremely fine detail and you see banding, you could use 16-bit PNG or TIFF, but in the end, it's going to a compressed 8-bit format on GPU anyway normally).
+
+Roughness, Metallic, AO: Each can be PNG 8-bit grayscale (Non-Color). But combining them is more efficient: e.g., create one RGB where R=AO, G=Rough, B=Metal (common for engines like Unreal uses this arrangement called ORM). Unity not default, but you can still do it if writing custom or just storing it. Or as Unity expects: metal in R, AO separate, and roughness in alpha of metal or in separate.
+
+We did: metallic & smoothness combine recommended, and AO separate or in mask map for HDRP.
+
+Alpha for transparency: if any part has transparency (cutout or fade), then the alpha is usually in Albedo texture’s alpha. So if your character had opacity (like see-through cloth), you'd supply an RGBA albedo with alpha, and set material to Cutout or Fade and Unity uses that alpha. So preserve that in PNG/TGA. (Remember if using JPG, no alpha support).
+
+EXR for special maps: e.g., if making a lightmap or something, but not relevant to character typically.
+
+7.4 Final Model Cleanup
+
+Before exporting:
+
+Remove any helper objects not needed (cameras, empties used for modeling).
+
+Delete hidden mesh parts (like internal faces that won't be seen and only waste UV space / cause AO artifacts).
+
+Ensure vertex color layers are either removed or named properly if you intend to use them (Unity can import vertex colors, it will do so automatically if present).
+
+Check for non-manifold or stray verts: those can cause weird shading or bigger file. Clean up with Blender's Merge by Distance, or manually remove very tiny unseen bits (like inside of mouth, if there's a double surface and you only needed one for mouth interior).
+
+If your humanoid is rigged, ensure weights normalized, no vertex unskinned (Unity might warn if some vertex has no weight, it will assign to root by default).
+
+If you have LODs, you'd export them as separate meshes or as one FBX with multiple LOD sub-meshes and handle in Unity (since user didn't mention LOD, skip).
+
+Finally, in Unity, create a Prefab: drag model to scene, assign materials (with textures), then drag the object from scene back into project to create a Prefab which holds those links. That way you can instantiate the character with all materials ready next time.
+
+8. Coaching Appendix – Step-by-Step Guides & Troubleshooting
+
+This appendix provides checklists and decision trees that an assistant (or user) can follow for various tasks and for diagnosing issues. These are structured as “if-then” to help resolve common problems, as well as stepwise instructions for key workflows:
+
+8.1 UV Unwrapping Checklist (Assistant’s Step-by-Step)
+
+Prepare Mesh for UVs: Apply any transformations (scale/rotation). Ensure no duplicate faces or unnecessary high-poly data. Decide on seam plan (refer to concept or hide seams on back/inner areas).
+
+Mark Seams Methodically: In Edit Mode, select edges for each logical cut. Use tools (Edge loops, shortest path selection) to quickly mark long seams. After marking, use Select Linked (Ctrl+L) on faces to verify islands (does selection stop where expected? If not, add seam).
+
+Unwrap UVs: Select all faces, press U > Unwrap. Wait for result. Switch to UV Editor to see islands. If an island is oddly distorted or gigantic relative to others, consider adding more seams or pin and unwrap again.
+
+Organize Islands: Move/rotate islands to avoid overlap. Use UV > Average Islands Scale to unify texel density once the layout is stable
+cgcookie.com
+. Then UV > Pack Islands to arrange them in 0-1 space with margin. Manually adjust rotations for better fit (e.g., align long islands horizontally/vertically for packing).
+
+Check Distortion: Apply a checker texture on model (or enable UV Stretch overlay). Look for stretched or squashed checkers:
+
+If found, try adding a seam through that region to relieve distortion or use Minimize Stretch on that island.
+
+For minor stretch, consider letting it be if seam would be in a bad visible spot (some stretch is acceptable if it avoids a visible seam).
+
+Set Texel Density Goals: Decide resolution needed. E.g., character gets 2K map. Ensure important parts (face) aren’t too small an island compared to others. If needed, scale up that island (with others locked) and repack. Use consistent scale for symmetrical parts (arms equal size).
+
+Final UV Layout Review: No overlaps (unless intentionally mirrored)? Sufficient margins (at least ~4 pixels at target texture resolution, e.g., 0.5% UV space)? Islands not too close to boundary (some engines might sample slightly outside 0-1 on edges)? All good, proceed to texture stage.
+
+(Optional: Save an image of UV layout for reference or external painting: UV Editor > UV > Export UV Layout.)
+
+8.2 Texture Painting Workflow Checklist
+
+Material & Image Setup: In Shader Editor, ensure a Principled BSDF is set up. Add Image Texture nodes for each map you plan to paint (Base Color, etc.). Click New on each, set resolution (e.g., 2048²), name them clearly, and set color space (sRGB for base color, Non-Color for metallic/roughness).
+
+Assign Images: Plug the images into the shader (BaseColor image -> Base Color input, etc.). Select the Base Color image node (so it’s active for painting).
+
+Switch to Texture Paint mode: Use the dedicated workspace or mode dropdown. In 3D view, ensure you’re in Material Preview shading to see results.
+
+Select Target Texture Slot: In top Paint Mode settings, verify the color texture is the one being painted (look at “Color” or “Texture Slot” panel). If not, choose it from the list.
+
+Brush Setup: Choose a brush (Draw for basic). Pick color. Set radius (F) and strength (Shift+F). Enable symmetry X if needed (for symmetrical painting on a symmetric model).
+
+Block Out Colors: Paint broad areas first (or use Fill tool on selected faces). For precision, you can use face selection masking: toggle mask, select certain faces, then paint only on them (e.g., select all shirt faces, fill with base cloth color).
+
+Refine Details: Switch to smaller brush, add variation, highlights, etc. Use tools like:
+
+Eyedropper (S) to match an existing color on model.
+
+Eraser or color erase (set brush mode to Erase Alpha or use white color on a multiply layer approach).
+
+Clone to fix seams: set clone source with Ctrl+LMB on a reference area, then paint on seam area to copy pattern.
+
+Stencil if using a reference texture: add brush texture, switch to Stencil mapping, then position it and paint through.
+
+Seam Work: Frequently rotate model to view UV seam areas. Paint across seams in 3D view if possible (with bleed). If a seam is obvious, use clone or blur brush across it. In 2D UV view, inspect edges of islands – color should match neighboring island edge.
+
+Other Maps Painting: If doing roughness/metallic by hand:
+
+Possibly switch viewport to a helpful matcap or lighting that shows gloss (for roughness, use a strong light reflection).
+
+Activate the roughness image node for painting. Use grayscale values (white = rough/dull, black = shiny). Paint materials: e.g., cloth -> lighter gray, leather boots -> darker gray where shiny).
+
+If a mistake, remember to set that image to Non-Color and preview by plugging into a viewer or roughness input.
+
+Save Work Frequently: Texture paint in Blender does not auto-save strokes. After a major section, go to Image Editor, save each edited image to file (PNG/TGA). Do this before closing Blender or you risk losing the painting progress (the file icon next to image name will have * if unsaved).
+
+Export Textures: Once done, ensure all images are saved externally. Typically use 8-bit PNGs for color (and maybe for data as well unless needing high precision).
+
+Review in Engine-like Lighting: Add an HDRI or lights in Blender to simulate game lighting. Alternatively, do a quick import in Unity/Marmoset to verify appearance. Adjust in Blender if needed (it's easier to tweak painting then re-export than adjusting in Unity).
+
+8.3 Material Setup Checklist (for Unity)
+
+Import Mesh and Textures: In Unity, drag FBX and all PNG textures into the project. Select the FBX, in Model tab set scale/normals as needed. Hit Apply.
+
+Configure Textures:
+
+Select each texture and verify import settings:
+
+BaseColor: Texture Type = Default, sRGB (Color) enabled.
+
+NormalMap: Texture Type = Normal Map (Unity will auto-check if named properly). This ensures it's not sRGB and uses normal decoding.
+
+Metallic/Roughness combined: set sRGB off (because these are data). If Metallic map has smoothness in alpha, Unity might auto-assign if material is standard. If not, you'll assign manually.
+
+AO: set sRGB off (linear).
+
+If HDRP Mask Map: set sRGB off.
+
+Ensure resolution and compression are acceptable (e.g., for a hero character, maybe set Import Max Size to 2048 or 4096 based on your detail needs).
+
+Create Materials: For each distinct material (e.g., Body, Clothing), create a Material in Unity (Assets > Create > Material). Choose the appropriate Shader:
+
+For Standard pipeline: use "Standard" shader (set Rendering Mode Opaque for opaque parts).
+
+For URP: use "Lit" shader.
+
+For HDRP: use "HDRP/Lit" shader (or the Skin shader for skin if using SSS).
+
+Assign Textures to Material:
+
+Albedo: Drag BaseColor to Albedo slot. If it has alpha for transparency or smoothness, Unity might automatically link alpha to smoothness depending on shader (Standard pipeline: there's a dropdown if smoothness comes from albedo alpha or metallic alpha).
+
+Metallic & Smoothness: If you packed smoothness in metallic's alpha, drag Metallic texture into Metallic slot. Then in material settings, ensure smoothness source is set to Albedo Alpha or Metallic Alpha accordingly (Standard shader has a checkbox "Alpha is Smoothness"). In URP Lit, there's a similar option drop-down. In HDRP Lit, you will likely use Mask Map where smoothness is already in alpha.
+
+If not packed: assign Metallic (as gray texture or value) and Roughness inversely. For example, if you only have a Roughness map: invert it outside or use a simple one minus node in a shader (Unity standard doesn’t have that, so better to invert beforehand or via material smoothness slider by eyeballing).
+
+Normal: Drag Normal map to Normal slot. Unity will ask "is this a normal map?" if not already marked, click Fix.
+
+AO: For Standard/URP, drag AO map to Occlusion slot. Set strength as needed.
+
+Emission: (if used) Check Emission enabled, assign emission map or color.
+
+Tweak tiling or offset if needed (should be 1,1 offset 0 if UV is correct).
+
+Apply Materials to Mesh: Drag the material(s) onto the corresponding mesh in the hierarchy (or via SkinnedMeshRenderer component’s material list). If the FBX had materials with same names, you can also click the mesh in Unity and assign materials in the Inspector one by one in the list of materials.
+
+Verify Appearance: In Unity Scene view with lighting on:
+
+Check that colors look as expected (not too dark or bright).
+
+Rotate a directional light around the model to see that normal map is reacting right (bumps pop correctly, not inverted).
+
+Check roughness vs gloss by observing highlight size on different parts. Adjust material’s Smoothness slider (which is a multiplier if map is provided) if globally it needs to be tweaked.
+
+If using HDRP and SSS for skin: assign a diffusion profile and check that ears get light through if desired. If not using, ensure skin doesn’t look too waxy (reduce smoothness or spec).
+
+Fix Issues if Any:
+
+Seam visible? If a texture seam is showing, perhaps the normal map’s green needs flip: go to normal texture import, tick “Flip Green”. Or the albedo seam might be due to sRGB difference; ensure no mismatch. Or the lighting seam due to smoothing split; maybe import normals differently.
+
+Too shiny/dull? Tweak smoothness or double-check roughness map import (maybe it was treated as sRGB incorrectly).
+
+Metallic part looking wrong color? Remember metallic area base color should be near black for dielectric parts of metal (just the reflectance tinted). If something like gold looks gray, likely base color is wrong. But if base color is right and it looks off, maybe lighting environment is too dim. Check reflection probes or skybox.
+
+Set up Unity Lighting (for test): Add a Skybox or HDRI in Lighting settings, or place a Reflection Probe and bake it so that metal surfaces show something. Add a key light (Directional Light) and maybe fill light.
+
+Final Prefab: Put the model (with materials assigned) into a Prefab so you can reuse it. Drag the model from Hierarchy into Project window to create a Prefab variant if needed.
+
+Testing Animations (if rigged): If humanoid, configure Avatar in Rig tab of model import. Then apply an animation to see if textures hold up in motion (especially check AO placement under moving limbs).
+
+If AO looks too baked (like armpit stays dark even when arm raised), you might consider making AO more subtle or using dynamic AO (screen-space) in engine to complement rather than a strong baked AO.
+
+8.4 Troubleshooting Guide (Decision Tree Style)
+
+Issue: "I see obvious seams on my model."
+
+Check texture seam vs normal seam:
+
+Is the color discontinuity? (e.g., pattern misaligned or dark line) -> Likely diffuse texture seam. Solutions: In Blender, paint more bleed over seam. In Unity, ensure texture import has high enough Aniso if it’s at grazing angle, and compression isn’t causing color shift. If it’s a slight dark outline, could be mipmap sampling background color – ensure UV margin in texture. Try enabling “Wrap U/V = Repeat” instead of clamp, with similar edge pixels (Unity has no easy clamp toggle for regular textures, so margin in painting is key).
+
+Is it a lighting seam (same color but light breaks)? -> Normal map or smoothing issue. Solutions: Ensure the vertices on either side of seam have the appropriate normals. If using custom normals, import them. If using calculated, maybe the seam should be a hard edge: mark edge as sharp and split UV, re-bake normal so each side lit correctly. Also verify tangent basis match; use MikktSpace in both bake and engine. If one side of seam appears a bit brighter, try toggling “Calculate tangents” on import.
+
+Is it both color and lighting? Possibly UV mis-match. Solution: Possibly the UV islands have a slight misalignment in texture painting; fix by clone painting across seam in Blender.
+
+Issue: "My normal map detail looks inverted (bumps are dents)."
+
+In Unity, inspect the normal map texture settings:
+
+Is “Flip Green” checked appropriately? Unity expects +Y by default. If your normal is from Blender (OpenGL +Y) and it's looking inverted (e.g., what should bump out is bumping in), try toggling Flip Green
+discussions.unity.com
+.
+
+Also check if the normal map might have been generated in DirectX mode by another tool. The fix is the same: invert green.
+
+Example: The face wrinkles look like valleys instead of ridges: definitely inverted green or red. Most often green. Flip it.
+
+If flipping green fixed some but not all (rare), possibly red channel might need flip if coordinate system differs (less common between Blender and Unity because they both use left-handed with X+ right). In most cases it's just the Y.
+
+If still off, ensure Normals import setting is correct (if you imported your own normals vs letting Unity recompute). If Unity recalculated normals on import, it might have messed up how the normal map is applied. Set Mesh import Normals to Import (if you have good normals from Blender) and Tangents to Calculate Mikkt. See if that helps.
+
+Double-check your bake: view the normal map in an image editor with channels. Typically, a tangent-space normal of a mostly smooth area will be purple (~128,128,255). If one of your channels is inverted (like green is 128 for valleys and -128 for peaks rather than vice versa), you might spot it. But easier to just test flip in Unity.
+
+Issue: "The whole model looks too shiny/plastic."
+
+Likely the roughness/smoothness is not applied correctly:
+
+Did you perhaps use a roughness map but Unity expecting smoothness? That means you effectively gave the inverse of what it expects, making everything very smooth (shiny). Solution: If you have the grayscale roughness map, either invert it in an image editor and use as smoothness, or in Unity material set smoothness slider to 0 (to override) and see if it becomes rough. If yes, you confirm the invert issue.
+
+If using metallic alpha for smoothness, ensure "Alpha is Smoothness" is checked and that alpha channel indeed has the right values (maybe your alpha is mostly 0 if roughness was high, making smoothness 0? That would be very rough though, the opposite of shiny).
+
+Or possibly everything is metal = 1 inadvertently, which combined with low roughness can look plasticky or weird. Check your Metallic map: non-metals should be black. If your metallic map is blank (white) or not assigned, Unity might default metallic to 0 but check slider. Ensure metallic slider is 0 for skin/clothes if they are non-metal.
+
+The specular level for dielectrics in PBR is fixed ~4%. Unity’s Standard shader handles that internally. But if you used the Specular workflow shader and set something wrong, it could cause odd shine. Standard/Metallic is simpler, stick to that.
+
+Also check lighting: If using a simple Unity scene with default sky, sometimes objects appear shiny because the default environment is a bright sky reflection. Try adding an actual Skybox or adjusting ambient intensity.
+
+If using HDRP, check if you accidentally enabled clear coat or something on material that adds shine.
+
+Issue: "The model looks very dull and flat."
+
+Possibly the normal map isn’t applied or isn’t strong:
+
+Did you assign the normal map texture to the material? And is the material using the correct shader? If you see no difference toggling the normal map on/off, maybe the normal intensity is too low or the normal map imported incorrectly (like Unity didn't mark it as normal, so it's treating it as a plain texture and not doing normal decode).
+
+Check Normal Map import: it should say "Texture Type: Normal Map". If not, fix that. If it is, perhaps your normal map was too subtle (maybe high poly didn’t have much detail).
+
+Ensure your material’s normal scale is 1 (in Standard shader, under normal map slot there's a slider for bumpiness; if set to 0 by accident, it nullifies effect).
+
+Possibly roughness too high:
+
+If everything is extremely rough (like roughness map was all white or smoothness = 0), then under all lighting it’ll look flat and diffused. Realistic, but maybe too much. Check your roughness values; skin for example shouldn’t be pure white rough (should have some shine). Adjust smoothness slider up slightly to introduce some specular.
+
+Also ensure there's proper lighting: a model under purely ambient light with high roughness will look very flat because no visible highlights or shadows much. Add a stronger key light to see form.
+
+If colors look washed out:
+
+Could be using Filmic tonemapping in HDRP or camera, but likely not an issue unless post effects. Or possibly your Base Color is too uniform with no AO or variation. Baked AO can help bring out forms. Ensure AO map is assigned and its strength at default 1.
+
+If using URP/Standard with no AO, the model can look flatter because ambient light is not shadowed. Consider adding SSAO post effect or using the AO map.
+
+Also verify texture color space: If you accidentally set your albedo as Linear (sRGB off), it will appear darker or oddly lit. Make sure base color is flagged sRGB.
+
+Issue: "Normal map has weird artifacts / pixelation."
+
+Check texture compression:
+
+Unity might compress normal map to 8-bit BC5 or DXT5 which is generally fine but if you have very fine detail, maybe it introduced blocky artifacts. Try setting the Normal map’s Compression to High Quality or even none (as a test). See if artifacts go away.
+
+If the normal map had a lot of small-scale noise (like pores), D

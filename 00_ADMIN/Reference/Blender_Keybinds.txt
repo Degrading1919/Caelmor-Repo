@@ -1,0 +1,53 @@
+Alt+A - Deselect all | A - Select all/toggle
+B - Box select | C - Circle select
+L - Select linked (under mouse) | Ctrl+L - Select linked (by data)
+H - Hide selected | Alt+H - Unhide all
+Shift+H - Hide unselected | / - Local view (isolate)
+Numpad . - Frame selected | Home - Frame all
+Numpad 5 - Ortho/Persp toggle | N - Sidebar toggle
+T - Toolbar toggle | F3 - Search (Operator Search)
+Ctrl+Space - Maximize area | Ctrl+Alt+Space - Quad view toggle
+Shift+Tab - Toggle snapping | Ctrl+Shift+Tab - Snap menu
+` (tilde) - View pie menu | Z - Shading pie menu
+G - Move/Grab | G then X/Y/Z - Constrain axis
+R - Rotate | R then X/Y/Z - Constrain axis
+S - Scale | S then X/Y/Z - Constrain axis
+Shift (while transform) - Fine adjust | Ctrl (while transform) - Snap increment
+Ctrl+A - Apply transforms (Object Mode) | Ctrl+M - Mirror (Object Mode)
+Shift+D - Duplicate | Alt+D - Duplicate linked
+Ctrl+J - Join objects | P - Separate (Edit Mode)
+Ctrl+P - Parent | Alt+P - Clear parent
+Tab - Toggle Object/Edit mode | Ctrl+Tab - Mode pie (Pose/Weight/etc)
+1/2/3 - Vertex/Edge/Face select (Edit Mode) | Ctrl+1/2/3 - Subdivision level (view)
+Alt+Click - Select loop | Ctrl+Alt+Click - Select ring
+Ctrl+R - Loop cut | GG - Edge slide
+E - Extrude | Alt+E - Extrude menu
+I - Inset | Ctrl+B - Bevel
+K - Knife | J - Connect verts (vertex path)
+F - Make face/Fill | Alt+F - Beautify fill
+X - Delete menu | Ctrl+X - Dissolve (via delete menu options)
+M - Merge menu | M → By Distance - Remove doubles
+V - Rip | Alt+V - Rip fill
+O - Proportional editing toggle | Shift+O - Proportional falloff type
+Shift+N - Recalculate normals | Alt+N - Normals menu
+Ctrl+T - Triangulate faces | Alt+J - Convert tris to quads
+Ctrl+E - Edge menu | Ctrl+F - Face menu
+Ctrl+V - Vertex menu | Ctrl+Shift+B - Vertex bevel
+
+Ctrl+Z - Undo | Shift+Ctrl+Z - Redo
+Ctrl+S - Save | Shift+Ctrl+S - Save As
+Ctrl+O - Open | Ctrl+N - New file
+
+Shift+A - Add menu (create object) | Shift+S - Snap menu (Cursor/Selection)
+Shift+C - Reset cursor + frame view | Cursor tool: Shift+RMB (place 3D cursor, if enabled)
+Pose Mode: Ctrl+Tab - Switch to Pose Mode (from Object) | A - Select all bones
+Pose Mode: R - Rotate bone | G - Move bone (if allowed)
+Pose Mode: Alt+R - Clear rotation | Alt+G - Clear location | Alt+S - Clear scale
+Pose Mode: I - Insert keyframe | Alt+I - Delete keyframe
+
+Weight Paint: Ctrl+Tab - Switch modes | F - Brush size (hold/drag)
+Weight Paint: Shift (while brushing) - Smooth | Ctrl (while brushing) - Invert (varies by brush)
+Weight Paint: W - Brush tool menu (varies) | N - Sidebar (brush settings)
+
+UV Editor: U - Unwrap menu (3D View) | L - Select linked (UV island)
+UV Editor: G/R/S - Move/Rotate/Scale UVs | P - Pin UVs (in UV Editor)
