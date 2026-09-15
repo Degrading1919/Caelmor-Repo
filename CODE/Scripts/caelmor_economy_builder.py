@@ -11,6 +11,7 @@ design QA findings. It does not modify Caelmor runtime C#.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sqlite3
@@ -56,6 +57,20 @@ SKILLS = (
 )
 RARITIES = ("common", "uncommon", "rare", "special")
 TERMINAL_ROLES = {"consumable", "equipment", "tool", "ammunition", "trade_good"}
+CATEGORIES = {
+    "core_structures", "fasteners_bindings", "transmission_media",
+    "reactants", "control_agents", "sustenance_sources",
+}
+FORMS = {"raw", "processed", "refined", "finished"}
+ECONOMIC_ROLES = {
+    "raw_material", "component", "consumable", "equipment", "tool",
+    "ammunition", "catalyst", "trade_good",
+}
+CROSS_TIER_ROLES = {"none", "limited", "persistent"}
+EXTERNAL_RELATION_TYPES = {
+    "enemy_drop", "shop", "starter", "world_spawn", "salvage",
+    "consumption", "equipment_use", "tool_use", "trade", "system_use",
+}
 
 
 class ContentError(ValueError):
@@ -84,7 +99,7 @@ def load_batches(input_dir: Path, schema_path: Optional[Path]) -> List[Tuple[Pat
             jsonschema.validate(data, schema)
 
         semantic_validate_batch(data, path)
-        batches.append((path, data))
+        batches.append((path.relative_to(input_dir), data))
 
     return batches
 
@@ -93,6 +108,12 @@ def _require_key(value: Any, field: str, path: Path) -> str:
     if not isinstance(value, str) or not KEY_RE.fullmatch(value):
         raise ContentError(f"{path}: {field} must be lowercase snake_case key")
     return value
+
+
+def _reject_extras(record: Dict[str, Any], allowed: Set[str], entity: str, path: Path) -> None:
+    extras = set(record) - allowed
+    if extras:
+        raise ContentError(f"{path}: {entity} has unsupported keys: {sorted(extras)}")
 
 
 def semantic_validate_batch(batch: Dict[str, Any], path: Path) -> None:
@@ -112,6 +133,16 @@ def semantic_validate_batch(batch: Dict[str, Any], path: Path) -> None:
             raise ContentError(f"{path}: {collection} must be an array")
 
     for item in batch["items"]:
+        _reject_extras(
+            item,
+            {
+                "slot_id", "key", "display_name", "description", "category", "form",
+                "economic_role", "purpose", "region_keys", "tags", "cross_tier_role",
+                "rarity_role", "external_sources", "external_sinks", "notes",
+            },
+            "item",
+            path,
+        )
         for field in (
             "slot_id", "key", "display_name", "description", "category", "form",
             "economic_role", "purpose", "region_keys", "tags", "cross_tier_role",
@@ -129,11 +160,43 @@ def semantic_validate_batch(batch: Dict[str, Any], path: Path) -> None:
             raise ContentError(f"{path}: item has invalid region")
         if item["rarity_role"] not in RARITIES:
             raise ContentError(f"{path}: item has invalid rarity_role")
+        if item["category"] not in CATEGORIES or item["form"] not in FORMS:
+            raise ContentError(f"{path}: item has invalid category or form")
+        if item["economic_role"] not in ECONOMIC_ROLES:
+            raise ContentError(f"{path}: item has invalid economic_role")
+        if item["cross_tier_role"] not in CROSS_TIER_ROLES:
+            raise ContentError(f"{path}: item has invalid cross_tier_role")
+        if not isinstance(item["tags"], list) or len(item["tags"]) != len(set(item["tags"])):
+            raise ContentError(f"{path}: item.tags must be a unique array")
+        for tag in item["tags"]:
+            _require_key(tag, "item.tags", path)
+        for relation_group in ("external_sources", "external_sinks"):
+            if not isinstance(item[relation_group], list):
+                raise ContentError(f"{path}: item.{relation_group} must be an array")
+            for relation in item[relation_group]:
+                if not isinstance(relation, dict):
+                    raise ContentError(f"{path}: item.{relation_group} entries must be objects")
+                _reject_extras(relation, {"relation_type", "detail"}, "external_relation", path)
+                if relation.get("relation_type") not in EXTERNAL_RELATION_TYPES:
+                    raise ContentError(f"{path}: invalid external relation_type")
+                if not isinstance(relation.get("detail"), str) or not relation["detail"].strip():
+                    raise ContentError(f"{path}: external relation detail must be non-empty")
 
     for action in batch["gathering_actions"]:
+        _reject_extras(
+            action,
+            {
+                "slot_id", "key", "display_name", "description", "skill_key",
+                "level_band", "required_level", "purpose", "region_keys", "outputs",
+                "tool_tags", "tool_item_keys", "notes",
+            },
+            "gathering_action",
+            path,
+        )
         for field in (
             "slot_id", "key", "display_name", "skill_key", "level_band",
-            "purpose", "region_keys", "outputs", "tool_tags",
+            "required_level", "purpose", "region_keys", "outputs", "tool_tags",
+            "tool_item_keys",
         ):
             if field not in action:
                 raise ContentError(f"{path}: gathering action missing {field}")
@@ -143,10 +206,24 @@ def semantic_validate_batch(batch: Dict[str, Any], path: Path) -> None:
             raise ContentError(f"{path}: invalid gathering action skill")
         if not isinstance(action["level_band"], int) or action["level_band"] < 1:
             raise ContentError(f"{path}: action level_band must be positive integer")
+        if not isinstance(action["required_level"], int) or action["required_level"] < 1:
+            raise ContentError(f"{path}: action required_level must be positive integer")
+        if not isinstance(action["region_keys"], list) or not action["region_keys"]:
+            raise ContentError(f"{path}: gathering action region_keys must be non-empty")
+        if any(r not in REGIONS for r in action["region_keys"]):
+            raise ContentError(f"{path}: gathering action has invalid region")
+        if not isinstance(action["tool_item_keys"], list) or not action["tool_item_keys"]:
+            raise ContentError(f"{path}: gathering action tool_item_keys must be non-empty")
         if not isinstance(action["outputs"], list) or not action["outputs"]:
             raise ContentError(f"{path}: gathering action must have outputs")
         for out in action["outputs"]:
-            for field in ("item_key", "quantity", "mode", "rarity_role"):
+            _reject_extras(
+                out,
+                {"item_key", "quantity", "mode", "rarity_role", "condition_tag", "rng_rationale"},
+                "gathering_output",
+                path,
+            )
+            for field in ("item_key", "quantity", "mode", "rarity_role", "rng_rationale"):
                 if field not in out:
                     raise ContentError(f"{path}: gathering output missing {field}")
             _require_key(out["item_key"], "gathering_output.item_key", path)
@@ -154,8 +231,30 @@ def semantic_validate_batch(batch: Dict[str, Any], path: Path) -> None:
                 raise ContentError(f"{path}: invalid gathering output mode")
             if out["rarity_role"] not in RARITIES:
                 raise ContentError(f"{path}: invalid gathering output rarity")
+            if not isinstance(out["quantity"], int) or out["quantity"] < 1:
+                raise ContentError(f"{path}: gathering output quantity must be positive integer")
+            if out["mode"] == "guaranteed" and out["rng_rationale"] is not None:
+                raise ContentError(f"{path}: guaranteed output may not carry rng_rationale")
+            if out["mode"] != "guaranteed" and not out["rng_rationale"]:
+                raise ContentError(f"{path}: random/conditional output requires rng_rationale")
+            if out["mode"] == "conditional" and not out.get("condition_tag"):
+                raise ContentError(f"{path}: conditional output requires condition_tag")
+
+        weighted_count = sum(1 for out in action["outputs"] if out["mode"] == "weighted")
+        if weighted_count == 1:
+            raise ContentError(f"{path}: weighted output pools require at least two alternatives")
 
     for node in batch["gathering_nodes"]:
+        _reject_extras(
+            node,
+            {
+                "slot_id", "key", "display_name", "description", "action_key",
+                "region_key", "world_context", "interaction_verb", "depletable",
+                "respawnable", "stateful", "notes",
+            },
+            "gathering_node",
+            path,
+        )
         for field in (
             "slot_id", "key", "display_name", "action_key", "region_key",
             "world_context", "interaction_verb", "depletable", "respawnable", "stateful",
@@ -167,11 +266,25 @@ def semantic_validate_batch(batch: Dict[str, Any], path: Path) -> None:
         _require_key(node["action_key"], "gathering_node.action_key", path)
         if node["region_key"] not in REGIONS:
             raise ContentError(f"{path}: gathering node has invalid region")
+        for flag in ("depletable", "respawnable", "stateful"):
+            if not isinstance(node[flag], bool):
+                raise ContentError(f"{path}: gathering node {flag} must be boolean")
 
     for recipe in batch["recipes"]:
+        _reject_extras(
+            recipe,
+            {
+                "slot_id", "key", "display_name", "description", "skill_key",
+                "level_band", "required_level", "purpose", "region_keys", "inputs",
+                "outputs", "station_tag", "cross_skill_links", "notes",
+            },
+            "recipe",
+            path,
+        )
         for field in (
             "slot_id", "key", "display_name", "skill_key", "level_band",
-            "purpose", "region_keys", "inputs", "outputs", "cross_skill_links",
+            "required_level", "purpose", "region_keys", "inputs", "outputs",
+            "cross_skill_links",
         ):
             if field not in recipe:
                 raise ContentError(f"{path}: recipe missing {field}")
@@ -179,6 +292,16 @@ def semantic_validate_batch(batch: Dict[str, Any], path: Path) -> None:
         _require_key(recipe["key"], "recipe.key", path)
         if recipe["skill_key"] not in SKILLS:
             raise ContentError(f"{path}: invalid recipe skill")
+        if not isinstance(recipe["level_band"], int) or recipe["level_band"] < 1:
+            raise ContentError(f"{path}: recipe level_band must be positive integer")
+        if not isinstance(recipe["required_level"], int) or recipe["required_level"] < 1:
+            raise ContentError(f"{path}: recipe required_level must be positive integer")
+        if not isinstance(recipe["region_keys"], list) or not recipe["region_keys"]:
+            raise ContentError(f"{path}: recipe region_keys must be non-empty")
+        if any(r not in REGIONS for r in recipe["region_keys"]):
+            raise ContentError(f"{path}: recipe has invalid region")
+        if any(s not in SKILLS for s in recipe["cross_skill_links"]):
+            raise ContentError(f"{path}: recipe has invalid cross_skill_links")
         if not isinstance(recipe["inputs"], list) or not recipe["inputs"]:
             raise ContentError(f"{path}: recipe must have inputs")
         if not isinstance(recipe["outputs"], list) or not recipe["outputs"]:
@@ -221,6 +344,7 @@ def merge_batches(batches: List[Tuple[Path, Dict[str, Any]]]) -> Dict[str, List[
 
 def cross_reference_validate(data: Dict[str, List[Dict[str, Any]]]) -> None:
     items = {r["key"] for r in data["items"]}
+    item_roles = {r["key"]: r["economic_role"] for r in data["items"]}
     actions = {r["key"] for r in data["gathering_actions"]}
 
     errors = []
@@ -229,10 +353,24 @@ def cross_reference_validate(data: Dict[str, List[Dict[str, Any]]]) -> None:
         for out in action["outputs"]:
             if out["item_key"] not in items:
                 errors.append(f"Action {action['key']} references missing item {out['item_key']}")
+        for tool_item_key in action["tool_item_keys"]:
+            if tool_item_key not in items:
+                errors.append(f"Action {action['key']} references missing tool item {tool_item_key}")
+            elif item_roles[tool_item_key] != "tool":
+                errors.append(
+                    f"Action {action['key']} tool {tool_item_key} is not economic_role=tool"
+                )
 
     for node in data["gathering_nodes"]:
         if node["action_key"] not in actions:
             errors.append(f"Node {node['key']} references missing action {node['action_key']}")
+        else:
+            action = next(a for a in data["gathering_actions"] if a["key"] == node["action_key"])
+            if node["region_key"] not in action["region_keys"]:
+                errors.append(
+                    f"Node {node['key']} region {node['region_key']} is not declared by "
+                    f"action {node['action_key']}"
+                )
 
     for recipe in data["recipes"]:
         for io_group in ("inputs", "outputs"):
@@ -320,6 +458,7 @@ def create_schema(conn: sqlite3.Connection) -> None:
             description TEXT,
             skill_key TEXT NOT NULL REFERENCES skills(skill_key),
             level_band INTEGER NOT NULL,
+            required_level INTEGER NOT NULL,
             purpose TEXT NOT NULL,
             action_seconds REAL,
             success_chance REAL,
@@ -343,6 +482,12 @@ def create_schema(conn: sqlite3.Connection) -> None:
             PRIMARY KEY (action_key, tool_tag)
         );
 
+        CREATE TABLE gathering_action_tool_items (
+            action_key TEXT NOT NULL REFERENCES gathering_actions(action_key),
+            item_key TEXT NOT NULL REFERENCES items(item_key),
+            PRIMARY KEY (action_key, item_key)
+        );
+
         CREATE TABLE gathering_action_outputs (
             action_key TEXT NOT NULL REFERENCES gathering_actions(action_key),
             item_key TEXT NOT NULL REFERENCES items(item_key),
@@ -350,6 +495,7 @@ def create_schema(conn: sqlite3.Connection) -> None:
             mode TEXT NOT NULL,
             rarity_role TEXT NOT NULL,
             condition_tag TEXT,
+            rng_rationale TEXT,
             relative_weight REAL,
             output_probability REAL,
             expected_quantity_per_hour REAL,
@@ -380,6 +526,7 @@ def create_schema(conn: sqlite3.Connection) -> None:
             description TEXT,
             skill_key TEXT NOT NULL REFERENCES skills(skill_key),
             level_band INTEGER NOT NULL,
+            required_level INTEGER NOT NULL,
             purpose TEXT NOT NULL,
             station_tag TEXT,
             action_seconds REAL,
@@ -472,8 +619,155 @@ def create_schema(conn: sqlite3.Connection) -> None:
         CREATE INDEX idx_sources_item ON item_sources(item_key);
         CREATE INDEX idx_sinks_item ON item_sinks(item_key);
         CREATE INDEX idx_actions_skill_band ON gathering_actions(skill_key, level_band);
+        CREATE INDEX idx_actions_skill_level ON gathering_actions(skill_key, required_level);
         CREATE INDEX idx_recipes_skill_band ON recipes(skill_key, level_band);
+        CREATE INDEX idx_recipes_skill_level ON recipes(skill_key, required_level);
         CREATE INDEX idx_nodes_action ON gathering_nodes(action_key);
+
+        CREATE VIEW v_item_origins AS
+        SELECT gao.item_key,
+               'world_node' AS origin_type,
+               gn.node_key AS origin_key,
+               gn.display_name AS origin_name,
+               ga.action_key,
+               ga.skill_key,
+               gn.region_key,
+               ga.required_level
+        FROM gathering_action_outputs gao
+        JOIN gathering_actions ga ON ga.action_key = gao.action_key
+        JOIN gathering_nodes gn ON gn.action_key = ga.action_key
+        UNION ALL
+        SELECT ro.item_key,
+               'recipe' AS origin_type,
+               r.recipe_key AS origin_key,
+               r.display_name AS origin_name,
+               NULL AS action_key,
+               r.skill_key,
+               rr.region_key,
+               r.required_level
+        FROM recipe_outputs ro
+        JOIN recipes r ON r.recipe_key = ro.recipe_key
+        JOIN recipe_regions rr ON rr.recipe_key = r.recipe_key
+        UNION ALL
+        SELECT s.item_key,
+               s.source_type AS origin_type,
+               s.source_key AS origin_key,
+               COALESCE(s.detail, s.source_key) AS origin_name,
+               NULL AS action_key,
+               s.skill_key,
+               NULL AS region_key,
+               NULL AS required_level
+        FROM item_sources s
+        WHERE s.source_type NOT IN ('gathering', 'recipe');
+
+        CREATE VIEW v_item_transformations AS
+        SELECT ri.item_key AS input_item_key,
+               r.recipe_key,
+               r.display_name AS recipe_name,
+               r.skill_key,
+               r.required_level,
+               ri.quantity AS input_quantity,
+               ro.item_key AS output_item_key,
+               ro.quantity AS output_quantity
+        FROM recipe_inputs ri
+        JOIN recipes r ON r.recipe_key = ri.recipe_key
+        JOIN recipe_outputs ro ON ro.recipe_key = r.recipe_key;
+
+        CREATE VIEW v_level_unlocks AS
+        SELECT required_level,
+               skill_key,
+               'gathering_action' AS unlock_type,
+               action_key AS unlock_key,
+               display_name,
+               level_band
+        FROM gathering_actions
+        UNION ALL
+        SELECT required_level,
+               skill_key,
+               'recipe' AS unlock_type,
+               recipe_key AS unlock_key,
+               display_name,
+               level_band
+        FROM recipes;
+
+        CREATE VIEW v_activity_rates AS
+        SELECT 'gathering' AS activity_type,
+               ga.action_key AS activity_key,
+               ga.display_name,
+               ga.skill_key,
+               ga.required_level,
+               ga.target_xp_per_hour,
+               gao.item_key AS output_item_key,
+               gao.mode AS output_mode,
+               gao.output_probability,
+               gao.expected_quantity_per_hour
+        FROM gathering_actions ga
+        JOIN gathering_action_outputs gao ON gao.action_key = ga.action_key
+        UNION ALL
+        SELECT 'crafting' AS activity_type,
+               r.recipe_key AS activity_key,
+               r.display_name,
+               r.skill_key,
+               r.required_level,
+               r.target_xp_per_hour,
+               ro.item_key AS output_item_key,
+               'guaranteed' AS output_mode,
+               1.0 AS output_probability,
+               ROUND(r.attempts_per_hour * ro.quantity, 6) AS expected_quantity_per_hour
+        FROM recipes r
+        JOIN recipe_outputs ro ON ro.recipe_key = r.recipe_key;
+
+        CREATE VIEW v_item_connections AS
+        SELECT i.item_key,
+               i.display_name,
+               (SELECT GROUP_CONCAT(skill_key, ',') FROM (
+                    SELECT DISTINCT skill_key
+                    FROM (
+                        SELECT skill_key FROM item_sources
+                        WHERE item_key = i.item_key AND skill_key IS NOT NULL
+                        UNION
+                        SELECT skill_key FROM item_sinks
+                        WHERE item_key = i.item_key AND skill_key IS NOT NULL
+                    ) ORDER BY skill_key
+                )) AS skills,
+               (SELECT GROUP_CONCAT(region_key, ',') FROM (
+                    SELECT DISTINCT region_key
+                    FROM v_item_origins
+                    WHERE item_key = i.item_key AND region_key IS NOT NULL
+                    ORDER BY region_key
+                )) AS source_regions,
+               m.source_count,
+               m.sink_count,
+               m.progression_band_span,
+               m.cross_tier_reuse_count
+        FROM items i
+        JOIN item_metrics m ON m.item_key = i.item_key;
+
+        CREATE VIEW v_item_health AS
+        SELECT i.item_key,
+               i.display_name,
+               i.economic_role,
+               m.source_count,
+               m.sink_count,
+               CASE WHEN m.source_count = 0 THEN 1 ELSE 0 END AS lacks_source,
+               CASE WHEN m.sink_count = 0 THEN 1 ELSE 0 END AS lacks_sink,
+               m.earliest_source_band,
+               m.latest_sink_band,
+               m.progression_band_span,
+               m.dependency_depth
+        FROM items i
+        JOIN item_metrics m ON m.item_key = i.item_key;
+
+        CREATE VIEW v_tool_progression AS
+        SELECT ti.item_key AS tool_item_key,
+               ti.display_name AS tool_name,
+               ga.action_key,
+               ga.display_name AS action_name,
+               ga.skill_key,
+               ga.required_level
+        FROM gathering_action_tool_items gat
+        JOIN items ti ON ti.item_key = gat.item_key
+        JOIN gathering_actions ga ON ga.action_key = gat.action_key;
         """
     )
 
@@ -488,6 +782,10 @@ def insert_progression(conn: sqlite3.Connection, cfg: Optional[Dict[str, Any]]) 
         return
 
     conn.execute("INSERT INTO metadata(key, value) VALUES (?, ?)", ("balance_status", str(cfg["status"])))
+    conn.execute(
+        "INSERT INTO metadata(key, value) VALUES (?, ?)",
+        ("balance_config_json", json.dumps(cfg, sort_keys=True, separators=(",", ":"))),
+    )
 
     for band in cfg["bands"]:
         conn.execute(
@@ -542,14 +840,16 @@ def insert_content(
         conn.execute(
             """
             INSERT INTO gathering_actions(
-                action_key, slot_id, display_name, description, skill_key, level_band, purpose,
+                action_key, slot_id, display_name, description, skill_key, level_band,
+                required_level, purpose,
                 action_seconds, success_chance, target_xp_per_hour, xp_per_action,
                 attempts_per_hour, notes, source_batch, source_file
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 action["key"], action["slot_id"], action["display_name"], action.get("description"),
-                action["skill_key"], action["level_band"], action["purpose"],
+                action["skill_key"], action["level_band"], action["required_level"],
+                action["purpose"],
                 None if math is None else math["action_seconds"],
                 None if math is None else math["success_chance"],
                 None if math is None else math["target_xp_per_hour"],
@@ -563,6 +863,11 @@ def insert_content(
             conn.execute("INSERT INTO gathering_action_regions VALUES (?, ?)", (action["key"], region))
         for tool in sorted(set(action.get("tool_tags", []))):
             conn.execute("INSERT INTO gathering_action_tools VALUES (?, ?)", (action["key"], tool))
+        for tool_item_key in sorted(set(action["tool_item_keys"])):
+            conn.execute(
+                "INSERT INTO gathering_action_tool_items VALUES (?, ?)",
+                (action["key"], tool_item_key),
+            )
 
         weighted = [o for o in action["outputs"] if o["mode"] == "weighted"]
         for out in action["outputs"]:
@@ -587,19 +892,21 @@ def insert_content(
                 if probability is not None:
                     expected_per_hour = (
                         math["attempts_per_hour"] * probability * int(out["quantity"])
+                        * math["yield_multiplier"]
                     )
 
             conn.execute(
                 """
                 INSERT INTO gathering_action_outputs(
                     action_key, item_key, quantity, mode, rarity_role, condition_tag,
-                    relative_weight, output_probability, expected_quantity_per_hour
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    rng_rationale, relative_weight, output_probability,
+                    expected_quantity_per_hour
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     action["key"], out["item_key"], out["quantity"], out["mode"],
-                    out["rarity_role"], out.get("condition_tag"), relative_weight,
-                    probability, expected_per_hour,
+                    out["rarity_role"], out.get("condition_tag"), out["rng_rationale"],
+                    relative_weight, probability, expected_per_hour,
                 ),
             )
 
@@ -625,14 +932,16 @@ def insert_content(
         conn.execute(
             """
             INSERT INTO recipes(
-                recipe_key, slot_id, display_name, description, skill_key, level_band, purpose,
+                recipe_key, slot_id, display_name, description, skill_key, level_band,
+                required_level, purpose,
                 station_tag, action_seconds, target_xp_per_hour, xp_per_action,
                 attempts_per_hour, notes, source_batch, source_file
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 recipe["key"], recipe["slot_id"], recipe["display_name"], recipe.get("description"),
-                recipe["skill_key"], recipe["level_band"], recipe["purpose"],
+                recipe["skill_key"], recipe["level_band"], recipe["required_level"],
+                recipe["purpose"],
                 recipe.get("station_tag"),
                 None if math is None else math["action_seconds"],
                 None if math is None else math["target_xp_per_hour"],
@@ -690,6 +999,21 @@ def build_sources_and_sinks(
             VALUES (?, 'recipe', ?, NULL, ?, ?)
             """,
             (item_key, recipe_key, level_band, skill_key),
+        )
+
+    for action_key, item_key, level_band, skill_key in conn.execute(
+        """
+        SELECT ga.action_key, gati.item_key, ga.level_band, ga.skill_key
+        FROM gathering_action_tool_items gati
+        JOIN gathering_actions ga ON ga.action_key = gati.action_key
+        """
+    ):
+        conn.execute(
+            """
+            INSERT INTO item_sinks(item_key, sink_type, sink_key, detail, level_band, skill_key)
+            VALUES (?, 'tool_use', ?, 'Required by gathering action', ?, ?)
+            """,
+            (item_key, action_key, level_band, skill_key),
         )
 
     for recipe_key, item_key, level_band, skill_key in conn.execute(
@@ -770,6 +1094,23 @@ def calculate_metrics_and_findings(
 ) -> None:
     item_map = {r["key"]: r for r in data["items"]}
     depth, cyclic = recipe_dependency_depths(conn)
+    successors: Dict[str, Set[str]] = defaultdict(set)
+    for input_item, output_item in conn.execute(
+        "SELECT input_item_key, output_item_key FROM v_item_transformations"
+    ):
+        if input_item != output_item:
+            successors[input_item].add(output_item)
+
+    def reachable_items(start: str) -> Set[str]:
+        reached = {start}
+        pending = [start]
+        while pending:
+            current = pending.pop()
+            for nxt in successors[current]:
+                if nxt not in reached:
+                    reached.add(nxt)
+                    pending.append(nxt)
+        return reached
 
     for item_key in sorted(item_map):
         source_count = conn.execute(
@@ -795,13 +1136,29 @@ def calculate_metrics_and_findings(
             (item_key, item_key),
         ).fetchone()[0]
         regions_connected = conn.execute(
-            "SELECT COUNT(*) FROM item_regions WHERE item_key = ?", (item_key,)
+            """
+            SELECT COUNT(DISTINCT region_key)
+            FROM v_item_origins
+            WHERE item_key = ? AND region_key IS NOT NULL
+            """,
+            (item_key,),
         ).fetchone()[0]
         earliest_source_band = conn.execute(
-            "SELECT MIN(level_band) FROM item_sources WHERE item_key = ?", (item_key,)
+            """
+            SELECT MIN(CASE
+                           WHEN source_type IN ('starter', 'shop') THEN 0
+                           ELSE level_band
+                       END)
+            FROM item_sources
+            WHERE item_key = ?
+            """,
+            (item_key,),
         ).fetchone()[0]
+        reachable = sorted(reachable_items(item_key))
+        placeholders = ",".join("?" for _ in reachable)
         latest_sink_band = conn.execute(
-            "SELECT MAX(level_band) FROM item_sinks WHERE item_key = ?", (item_key,)
+            f"SELECT MAX(level_band) FROM item_sinks WHERE item_key IN ({placeholders})",
+            reachable,
         ).fetchone()[0]
 
         span = None
@@ -809,14 +1166,14 @@ def calculate_metrics_and_findings(
         if earliest_source_band is not None and latest_sink_band is not None:
             span = int(latest_sink_band) - int(earliest_source_band)
             cross_tier_reuse = conn.execute(
-                """
+                f"""
                 SELECT COUNT(*)
                 FROM item_sinks
-                WHERE item_key = ?
+                WHERE item_key IN ({placeholders})
                   AND level_band IS NOT NULL
                   AND level_band >= ?
                 """,
-                (item_key, int(earliest_source_band) + 2),
+                (*reachable, int(earliest_source_band) + 2),
             ).fetchone()[0]
 
         conn.execute(
@@ -841,6 +1198,16 @@ def calculate_metrics_and_findings(
             add_finding(
                 conn, "error", "dead_end_item", "item", item_key,
                 f"Non-terminal {item['economic_role']} has no modeled sink."
+            )
+
+        if (
+            sink_count == 1
+            and item["economic_role"] not in TERMINAL_ROLES
+            and item["cross_tier_role"] == "persistent"
+        ):
+            add_finding(
+                conn, "warning", "weak_sink", "item", item_key,
+                "Persistent non-terminal item has only one modeled sink."
             )
 
         if item["cross_tier_role"] == "persistent" and cross_tier_reuse == 0:
@@ -926,6 +1293,75 @@ def calculate_metrics_and_findings(
                         f"No gathering action or recipe is modeled in progression band {band_id}."
                     )
 
+    for action_key in (
+        row[0] for row in conn.execute(
+            """
+            SELECT ga.action_key
+            FROM gathering_actions ga
+            LEFT JOIN gathering_nodes gn ON gn.action_key = ga.action_key
+            GROUP BY ga.action_key
+            HAVING COUNT(gn.node_key) = 0
+            ORDER BY ga.action_key
+            """
+        )
+    ):
+        add_finding(
+            conn, "error", "action_without_node", "gathering_action", action_key,
+            "Gathering action has no world node."
+        )
+
+    for action_key, action_band, earliest_compatible_tool_band in conn.execute(
+        """
+        SELECT ga.action_key, ga.level_band,
+               MIN(CASE
+                       WHEN s.source_type IN ('starter', 'shop') THEN 0
+                       WHEN s.level_band IS NULL THEN 999
+                       ELSE s.level_band
+                   END)
+        FROM gathering_actions ga
+        JOIN gathering_action_tool_items gati ON gati.action_key = ga.action_key
+        LEFT JOIN item_sources s ON s.item_key = gati.item_key
+        GROUP BY ga.action_key, ga.level_band
+        ORDER BY ga.action_key
+        """
+    ):
+        if earliest_compatible_tool_band == 999:
+            add_finding(
+                conn, "error", "unavailable_tool", "gathering_action", action_key,
+                "No compatible tool has a modeled source."
+            )
+        elif earliest_compatible_tool_band > action_band:
+            add_finding(
+                conn, "error", "tool_progression_block", "gathering_action", action_key,
+                f"Every compatible tool first appears after the action's band {action_band}."
+            )
+
+    for recipe_key, item_key, recipe_band, source_band in conn.execute(
+        """
+        SELECT r.recipe_key, ri.item_key, r.level_band,
+               MIN(CASE
+                       WHEN s.source_type IN ('starter', 'shop') THEN 0
+                       WHEN s.level_band IS NULL THEN 999
+                       ELSE s.level_band
+                   END)
+        FROM recipes r
+        JOIN recipe_inputs ri ON ri.recipe_key = r.recipe_key
+        LEFT JOIN item_sources s ON s.item_key = ri.item_key
+        GROUP BY r.recipe_key, ri.item_key, r.level_band
+        ORDER BY r.recipe_key, ri.item_key
+        """
+    ):
+        if source_band == 999:
+            add_finding(
+                conn, "error", "unavailable_recipe_input", "recipe", recipe_key,
+                f"Input {item_key} has no modeled source."
+            )
+        elif source_band > recipe_band:
+            add_finding(
+                conn, "error", "recipe_progression_block", "recipe", recipe_key,
+                f"Input {item_key} first appears in band {source_band}, after recipe band {recipe_band}."
+            )
+
     # Potential redundancy: same role/category/form with same earliest band and no distinct tags.
     signatures: Dict[Tuple[Any, ...], List[str]] = defaultdict(list)
     for item in data["items"]:
@@ -994,31 +1430,70 @@ def report(conn: sqlite3.Connection) -> str:
     ).fetchall()
 
     lines = [
-        "Caelmor Economy Database Audit",
-        "==============================",
+        "# Caelmor Economy Database Audit",
         "",
-        "Row counts",
-        "----------",
+        "## Row counts",
+        "",
+        "| Relation | Rows |",
+        "|---|---:|",
     ]
     for table, count in counts.items():
-        lines.append(f"{table:<28} {count:,}")
+        lines.append(f"| `{table}` | {count:,} |")
 
     lines += [
         "",
-        "Validation findings",
-        "-------------------",
-        f"errors   {severities.get('error', 0):,}",
-        f"warnings {severities.get('warning', 0):,}",
-        f"info     {severities.get('info', 0):,}",
+        "## Validation findings",
         "",
-        "Most connected items",
-        "--------------------",
+        f"- Errors: {severities.get('error', 0):,}",
+        f"- Warnings: {severities.get('warning', 0):,}",
+        f"- Informational: {severities.get('info', 0):,}",
+        "",
+        "## Most connected items",
+        "",
+        "| Item | Sources | Sinks | Skills | Band span |",
+        "|---|---:|---:|---:|---:|",
     ]
     for row in top_connected:
-        lines.append(
-            f"{row[0]} | {row[1]} | sources={row[2]} sinks={row[3]} "
-            f"skills={row[4]} band_span={row[5]}"
-        )
+        lines.append(f"| `{row[0]}` | {row[2]} | {row[3]} | {row[4]} | {row[5]} |")
+
+    lines += ["", "## Detailed findings", ""]
+    findings = conn.execute(
+        """
+        SELECT severity, finding_type, entity_type, entity_key, detail
+        FROM validation_findings
+        ORDER BY CASE severity WHEN 'error' THEN 0 WHEN 'warning' THEN 1 ELSE 2 END,
+                 finding_type, entity_key
+        """
+    ).fetchall()
+    if not findings:
+        lines.append("No validation findings.")
+    else:
+        for severity, finding_type, entity_type, entity_key, detail in findings:
+            lines.append(
+                f"- **{severity.upper()} `{finding_type}`** — {entity_type} "
+                f"`{entity_key}`: {detail}"
+            )
+
+    lines += ["", "## Skill coverage", "", "| Skill | Actions | Recipes | Items | Bands |", "|---|---:|---:|---:|---:|"]
+    for row in conn.execute(
+        """
+        SELECT skill_key, gathering_action_count, recipe_count,
+               distinct_item_count, covered_band_count
+        FROM skill_metrics
+        WHERE gathering_action_count + recipe_count > 0
+        ORDER BY skill_key
+        """
+    ):
+        lines.append(f"| `{row[0]}` | {row[1]} | {row[2]} | {row[3]} | {row[4]} |")
+
+    lines += [
+        "",
+        "## Analytical entry points",
+        "",
+        "Use `v_item_origins`, `v_item_transformations`, `v_item_connections`, "
+        "`v_item_health`, `v_level_unlocks`, `v_activity_rates`, and "
+        "`v_tool_progression` for the primary design questions.",
+    ]
 
     return "\n".join(lines)
 
@@ -1039,6 +1514,7 @@ def build(
         cfg = load_config(progression_config)
 
         valid_band_ids = set(band_map(cfg))
+        bands = band_map(cfg)
         for collection in ("gathering_actions", "recipes"):
             for record in data[collection]:
                 if record["level_band"] not in valid_band_ids:
@@ -1046,15 +1522,33 @@ def build(
                         f"{collection} {record['key']} uses level_band {record['level_band']} "
                         "which does not exist in the progression config"
                     )
+                band = bands[record["level_band"]]
+                if not band["level_min"] <= record["required_level"] <= band["level_max"]:
+                    raise ContentError(
+                        f"{collection} {record['key']} required_level "
+                        f"{record['required_level']} is outside band {record['level_band']} "
+                        f"({band['level_min']}..{band['level_max']})"
+                    )
 
     output_db.parent.mkdir(parents=True, exist_ok=True)
-    if output_db.exists():
-        output_db.unlink()
+    temp_db = output_db.with_suffix(output_db.suffix + ".tmp")
+    if temp_db.exists():
+        temp_db.unlink()
 
-    conn = connect(output_db)
+    conn = connect(temp_db)
     try:
         create_schema(conn)
         seed_reference_tables(conn)
+        canonical_content = json.dumps(data, sort_keys=True, separators=(",", ":"))
+        conn.executemany(
+            "INSERT INTO metadata(key, value) VALUES (?, ?)",
+            [
+                ("schema_version", "2"),
+                ("interchange_schema_sha256", hashlib.sha256(schema_path.read_bytes()).hexdigest() if schema_path else "none"),
+                ("content_sha256", hashlib.sha256(canonical_content.encode("utf-8")).hexdigest()),
+                ("progression_config_sha256", hashlib.sha256(progression_config.read_bytes()).hexdigest() if progression_config else "none"),
+            ],
+        )
         insert_progression(conn, cfg)
         insert_content(conn, data, cfg)
         build_sources_and_sinks(conn, data)
@@ -1069,14 +1563,16 @@ def build(
     except Exception:
         conn.rollback()
         conn.close()
-        if output_db.exists():
-            output_db.unlink()
+        if temp_db.exists():
+            temp_db.unlink()
         raise
     finally:
         try:
             conn.close()
         except Exception:
             pass
+
+    temp_db.replace(output_db)
 
     if audit_path:
         audit_path.write_text(text, encoding="utf-8")
@@ -1139,7 +1635,9 @@ def write_self_test_batch(path: Path) -> None:
                 "tags": ["metal", "tool"],
                 "cross_tier_role": "limited",
                 "rarity_role": "common",
-                "external_sources": [],
+                "external_sources": [
+                    {"relation_type": "starter", "detail": "Self-test starter tool."}
+                ],
                 "external_sinks": [
                     {"relation_type": "tool_use", "detail": "Used as a field cutting tool."}
                 ],
@@ -1154,6 +1652,7 @@ def write_self_test_batch(path: Path) -> None:
                 "description": "Extract iron-bearing stone.",
                 "skill_key": "mining",
                 "level_band": 1,
+                "required_level": 1,
                 "purpose": "Core early Mining progression.",
                 "region_keys": ["lowmark"],
                 "outputs": [
@@ -1162,10 +1661,12 @@ def write_self_test_batch(path: Path) -> None:
                         "quantity": 1,
                         "mode": "guaranteed",
                         "rarity_role": "common",
-                        "condition_tag": None
+                        "condition_tag": None,
+                        "rng_rationale": None
                     }
                 ],
                 "tool_tags": ["pick"],
+                "tool_item_keys": ["iron_knife"],
                 "notes": None
             }
         ],
@@ -1193,6 +1694,7 @@ def write_self_test_batch(path: Path) -> None:
                 "description": "Refine ore into workable iron.",
                 "skill_key": "smithing",
                 "level_band": 1,
+                "required_level": 1,
                 "purpose": "Primary iron refinement step.",
                 "region_keys": ["lowmark"],
                 "inputs": [{"item_key": "iron_ore", "quantity": 1}],
@@ -1208,6 +1710,7 @@ def write_self_test_batch(path: Path) -> None:
                 "description": "Forge a practical iron knife.",
                 "skill_key": "smithing",
                 "level_band": 3,
+                "required_level": 21,
                 "purpose": "Keeps early iron relevant beyond its first band.",
                 "region_keys": ["lowmark"],
                 "inputs": [{"item_key": "iron_bar", "quantity": 1}],

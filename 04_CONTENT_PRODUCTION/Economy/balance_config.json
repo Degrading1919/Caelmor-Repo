@@ -1,0 +1,88 @@
+{
+  "status": "PROVISIONAL_ANALYTICAL_BASELINE_NOT_RUNTIME_CANON",
+  "max_level": 60,
+  "curve": {
+    "kind": "power",
+    "total_xp_at_max": 1000000,
+    "exponent": 2.4
+  },
+  "gather_xp_award_mode": "success",
+  "craft_xp_award_mode": "attempt",
+  "bands": [
+    {
+      "id": 1,
+      "level_min": 1,
+      "level_max": 10,
+      "target_xp_per_hour": 1412,
+      "gather_action_seconds": 4.0,
+      "craft_action_seconds": 3.0,
+      "gather_success_chance": 1.0,
+      "weighted_bonus_roll_chance": 0.0
+    },
+    {
+      "id": 2,
+      "level_min": 11,
+      "level_max": 20,
+      "target_xp_per_hour": 6042,
+      "gather_action_seconds": 5.0,
+      "craft_action_seconds": 3.5,
+      "gather_success_chance": 1.0,
+      "weighted_bonus_roll_chance": 0.0
+    },
+    {
+      "id": 3,
+      "level_min": 21,
+      "level_max": 30,
+      "target_xp_per_hour": 12272,
+      "gather_action_seconds": 6.0,
+      "craft_action_seconds": 4.0,
+      "gather_success_chance": 1.0,
+      "weighted_bonus_roll_chance": 0.0
+    },
+    {
+      "id": 4,
+      "level_min": 31,
+      "level_max": 40,
+      "target_xp_per_hour": 19620,
+      "gather_action_seconds": 7.0,
+      "craft_action_seconds": 4.5,
+      "gather_success_chance": 1.0,
+      "weighted_bonus_roll_chance": 0.0
+    },
+    {
+      "id": 5,
+      "level_min": 41,
+      "level_max": 50,
+      "target_xp_per_hour": 27872,
+      "gather_action_seconds": 8.0,
+      "craft_action_seconds": 5.0,
+      "gather_success_chance": 1.0,
+      "weighted_bonus_roll_chance": 0.0
+    },
+    {
+      "id": 6,
+      "level_min": 51,
+      "level_max": 60,
+      "target_xp_per_hour": 32782,
+      "gather_action_seconds": 9.0,
+      "craft_action_seconds": 5.5,
+      "gather_success_chance": 1.0,
+      "weighted_bonus_roll_chance": 0.0
+    }
+  ],
+  "rarity_weights": {
+    "common": 1,
+    "uncommon": 1,
+    "rare": 1,
+    "special": 1
+  },
+  "skill_profiles": {
+    "mining": {},
+    "woodcutting": {},
+    "hunting": {},
+    "smithing": {},
+    "fletching": {},
+    "cooking": {},
+    "leatherworking": {}
+  }
+}

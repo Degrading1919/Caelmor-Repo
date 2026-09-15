@@ -175,7 +175,7 @@
     "action_output": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["item_key", "quantity", "mode", "rarity_role"],
+      "required": ["item_key", "quantity", "mode", "rarity_role", "rng_rationale"],
       "properties": {
         "item_key": { "$ref": "#/definitions/key" },
         "quantity": { "type": "integer", "minimum": 1 },
@@ -189,6 +189,9 @@
             { "$ref": "#/definitions/key" },
             { "type": "null" }
           ]
+        },
+        "rng_rationale": {
+          "type": ["string", "null"]
         }
       }
     },
@@ -201,10 +204,12 @@
         "display_name",
         "skill_key",
         "level_band",
+        "required_level",
         "purpose",
         "region_keys",
         "outputs",
-        "tool_tags"
+        "tool_tags",
+        "tool_item_keys"
       ],
       "properties": {
         "slot_id": { "$ref": "#/definitions/key" },
@@ -213,6 +218,7 @@
         "description": { "type": "string" },
         "skill_key": { "$ref": "#/definitions/skill_key" },
         "level_band": { "type": "integer", "minimum": 1 },
+        "required_level": { "type": "integer", "minimum": 1 },
         "purpose": { "type": "string", "minLength": 1 },
         "region_keys": {
           "type": "array",
@@ -227,6 +233,12 @@
         },
         "tool_tags": {
           "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/key" }
+        },
+        "tool_item_keys": {
+          "type": "array",
+          "minItems": 1,
           "uniqueItems": true,
           "items": { "$ref": "#/definitions/key" }
         },
@@ -281,6 +293,7 @@
         "display_name",
         "skill_key",
         "level_band",
+        "required_level",
         "purpose",
         "region_keys",
         "inputs",
@@ -294,6 +307,7 @@
         "description": { "type": "string" },
         "skill_key": { "$ref": "#/definitions/skill_key" },
         "level_band": { "type": "integer", "minimum": 1 },
+        "required_level": { "type": "integer", "minimum": 1 },
         "purpose": { "type": "string", "minLength": 1 },
         "region_keys": {
           "type": "array",

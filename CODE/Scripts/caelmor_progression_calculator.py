@@ -20,6 +20,44 @@ class BalanceConfigError(ValueError):
     pass
 
 
+SKILL_KEYS = frozenset(
+    {
+        "foraging",
+        "hunting",
+        "angling",
+        "mining",
+        "woodcutting",
+        "scavenging",
+        "smithing",
+        "leatherworking",
+        "fletching",
+        "alchemy",
+        "cooking",
+        "adornment",
+        "mechanisms",
+        "fabrication",
+    }
+)
+SKILL_PROFILE_FIELDS = frozenset(
+    {"xp_rate_multiplier", "action_time_multiplier", "yield_multiplier"}
+)
+XP_AWARD_MODES = frozenset({"attempt", "success"})
+
+
+def _is_finite_number(value: Any) -> bool:
+    """Return True for finite int/float values, excluding booleans."""
+    return (
+        isinstance(value, (int, float))
+        and not isinstance(value, bool)
+        and math.isfinite(float(value))
+    )
+
+
+def _require_positive_number(value: Any, field: str) -> None:
+    if not _is_finite_number(value) or value <= 0:
+        raise BalanceConfigError(f"{field} must be a finite number > 0")
+
+
 def load_config(path: Path) -> Dict[str, Any]:
     with path.open("r", encoding="utf-8") as f:
         cfg = json.load(f)
@@ -28,23 +66,38 @@ def load_config(path: Path) -> Dict[str, Any]:
 
 
 def validate_config(cfg: Dict[str, Any]) -> None:
+    if not isinstance(cfg, dict):
+        raise BalanceConfigError("config must be an object")
+
     required = ["status", "max_level", "curve", "bands", "rarity_weights", "skill_profiles"]
     missing = [k for k in required if k not in cfg]
     if missing:
         raise BalanceConfigError(f"Missing config keys: {missing}")
 
     max_level = cfg["max_level"]
-    if not isinstance(max_level, int) or max_level < 2:
+    if isinstance(max_level, bool) or not isinstance(max_level, int) or max_level < 2:
         raise BalanceConfigError("max_level must be an integer >= 2")
 
     curve = cfg["curve"]
+    if not isinstance(curve, dict):
+        raise BalanceConfigError("curve must be an object")
     if curve.get("kind") not in {"power", "osrs_shape"}:
         raise BalanceConfigError("curve.kind must be 'power' or 'osrs_shape'")
 
     if curve["kind"] == "power":
         for key in ("total_xp_at_max", "exponent"):
-            if not isinstance(curve.get(key), (int, float)) or curve[key] <= 0:
-                raise BalanceConfigError(f"curve.{key} must be > 0")
+            _require_positive_number(curve.get(key), f"curve.{key}")
+    elif "total_xp_at_max" in curve:
+        _require_positive_number(curve["total_xp_at_max"], "curve.total_xp_at_max")
+
+    for field, default in (
+        ("gather_xp_award_mode", "success"),
+        ("craft_xp_award_mode", "attempt"),
+    ):
+        if cfg.get(field, default) not in XP_AWARD_MODES:
+            raise BalanceConfigError(
+                f"{field} must be one of: {', '.join(sorted(XP_AWARD_MODES))}"
+            )
 
     bands = cfg["bands"]
     if not isinstance(bands, list) or not bands:
@@ -53,28 +106,38 @@ def validate_config(cfg: Dict[str, Any]) -> None:
     seen = set()
     expected_start = 1
     for band in bands:
+        if not isinstance(band, dict):
+            raise BalanceConfigError("each band must be an object")
         band_id = band.get("id")
-        if not isinstance(band_id, int) or band_id < 1 or band_id in seen:
+        if (
+            isinstance(band_id, bool)
+            or not isinstance(band_id, int)
+            or band_id < 1
+            or band_id in seen
+        ):
             raise BalanceConfigError("band ids must be unique positive integers")
         seen.add(band_id)
 
         lo = band.get("level_min")
         hi = band.get("level_max")
-        if not isinstance(lo, int) or not isinstance(hi, int) or lo > hi:
+        if (
+            isinstance(lo, bool)
+            or isinstance(hi, bool)
+            or not isinstance(lo, int)
+            or not isinstance(hi, int)
+            or lo > hi
+        ):
             raise BalanceConfigError(f"Invalid level range for band {band_id}")
         if lo != expected_start:
             raise BalanceConfigError("bands must be contiguous and start at level 1")
         expected_start = hi + 1
 
-        for key in (
-            "target_xp_per_hour",
-            "gather_action_seconds",
-            "craft_action_seconds",
-            "gather_success_chance",
-            "weighted_bonus_roll_chance",
-        ):
-            if not isinstance(band.get(key), (int, float)):
-                raise BalanceConfigError(f"band {band_id} missing numeric {key}")
+        for key in ("target_xp_per_hour", "gather_action_seconds", "craft_action_seconds"):
+            _require_positive_number(band.get(key), f"band {band_id} {key}")
+
+        for key in ("gather_success_chance", "weighted_bonus_roll_chance"):
+            if not _is_finite_number(band.get(key)):
+                raise BalanceConfigError(f"band {band_id} {key} must be a finite number")
 
         if not 0 < band["gather_success_chance"] <= 1:
             raise BalanceConfigError("gather_success_chance must be in (0, 1]")
@@ -85,12 +148,38 @@ def validate_config(cfg: Dict[str, Any]) -> None:
         raise BalanceConfigError("bands must cover exactly levels 1..max_level")
 
     rarity = cfg["rarity_weights"]
+    if not isinstance(rarity, dict):
+        raise BalanceConfigError("rarity_weights must be an object")
     for role in ("common", "uncommon", "rare", "special"):
-        if not isinstance(rarity.get(role), (int, float)) or rarity[role] <= 0:
-            raise BalanceConfigError(f"rarity_weights.{role} must be > 0")
+        _require_positive_number(rarity.get(role), f"rarity_weights.{role}")
 
     if not isinstance(cfg["skill_profiles"], dict):
         raise BalanceConfigError("skill_profiles must be an object")
+
+    unknown_skills = sorted(set(cfg["skill_profiles"]) - SKILL_KEYS)
+    if unknown_skills:
+        raise BalanceConfigError(f"Unknown skill_profiles keys: {unknown_skills}")
+
+    for skill_key, profile in cfg["skill_profiles"].items():
+        if not isinstance(profile, dict):
+            raise BalanceConfigError(f"skill_profiles.{skill_key} must be an object")
+        unknown_fields = sorted(set(profile) - SKILL_PROFILE_FIELDS)
+        if unknown_fields:
+            raise BalanceConfigError(
+                f"skill_profiles.{skill_key} has unsupported keys: {unknown_fields}"
+            )
+        for field in SKILL_PROFILE_FIELDS:
+            if field in profile:
+                _require_positive_number(profile[field], f"skill_profiles.{skill_key}.{field}")
+
+    levels = xp_table(cfg)
+    for previous, current in zip(levels, levels[1:]):
+        if current["total_xp"] <= previous["total_xp"]:
+            raise BalanceConfigError(
+                "XP curve must increase at every level; "
+                f"levels {previous['level']} and {current['level']} have totals "
+                f"{previous['total_xp']} and {current['total_xp']}"
+            )
 
 
 def xp_table(cfg: Dict[str, Any]) -> List[Dict[str, Optional[int]]]:
@@ -143,6 +232,8 @@ def band_map(cfg: Dict[str, Any]) -> Dict[int, Dict[str, Any]]:
 
 
 def skill_profile(cfg: Dict[str, Any], skill_key: str) -> Dict[str, float]:
+    if skill_key not in SKILL_KEYS:
+        raise BalanceConfigError(f"Unknown skill_key {skill_key!r}")
     raw = cfg["skill_profiles"].get(skill_key, {})
     return {
         "xp_rate_multiplier": float(raw.get("xp_rate_multiplier", 1.0)),
@@ -197,6 +288,7 @@ def derive_action_math(
         "target_xp_per_hour": round(target_xph, 6),
         "attempts_per_hour": round(attempts_per_hour, 6),
         "xp_per_action": round(xp_per_action, 6),
+        "yield_multiplier": round(profile["yield_multiplier"], 6),
     }
 
 
@@ -209,9 +301,10 @@ def derive_output_math(
     weighted = [o for o in outputs if o["mode"] == "weighted"]
     total_weight = sum(float(rarity_weights[o["rarity_role"]]) for o in weighted)
 
-    bonus_roll_chance = None
     # output math is called after action math; callers should add the band-specific
     # bonus roll chance if they need exact weighted probabilities.
+    yield_multiplier = float(action_math.get("yield_multiplier", 1.0))
+    _require_positive_number(yield_multiplier, "action_math.yield_multiplier")
     result = []
     for o in outputs:
         entry = dict(o)
@@ -229,7 +322,8 @@ def derive_output_math(
             entry["expected_quantity_per_hour"] = round(
                 action_math["attempts_per_hour"]
                 * output_probability
-                * int(o["quantity"]),
+                * int(o["quantity"])
+                * yield_multiplier,
                 6,
             )
         else:
