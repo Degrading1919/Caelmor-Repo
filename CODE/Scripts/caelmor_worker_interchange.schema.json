@@ -1,0 +1,329 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "caelmor_worker_interchange.schema.json",
+  "title": "Caelmor Economy Worker Interchange Batch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["batch_id", "items", "gathering_actions", "gathering_nodes", "recipes"],
+  "properties": {
+    "batch_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "notes": {
+      "type": ["string", "null"]
+    },
+    "items": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/item" }
+    },
+    "gathering_actions": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/gathering_action" }
+    },
+    "gathering_nodes": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/gathering_node" }
+    },
+    "recipes": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/recipe" }
+    }
+  },
+  "definitions": {
+    "key": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "region_key": {
+      "type": "string",
+      "enum": ["lowmark", "thornfell", "mire", "emberholt", "cross_region"]
+    },
+    "skill_key": {
+      "type": "string",
+      "enum": [
+        "foraging",
+        "hunting",
+        "angling",
+        "mining",
+        "woodcutting",
+        "scavenging",
+        "smithing",
+        "leatherworking",
+        "fletching",
+        "alchemy",
+        "cooking",
+        "adornment",
+        "mechanisms",
+        "fabrication"
+      ]
+    },
+    "rarity_role": {
+      "type": "string",
+      "enum": ["common", "uncommon", "rare", "special"]
+    },
+    "cross_tier_role": {
+      "type": "string",
+      "enum": ["none", "limited", "persistent"]
+    },
+    "economic_role": {
+      "type": "string",
+      "enum": [
+        "raw_material",
+        "component",
+        "consumable",
+        "equipment",
+        "tool",
+        "ammunition",
+        "catalyst",
+        "trade_good"
+      ]
+    },
+    "external_relation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relation_type", "detail"],
+      "properties": {
+        "relation_type": {
+          "type": "string",
+          "enum": [
+            "enemy_drop",
+            "shop",
+            "starter",
+            "world_spawn",
+            "salvage",
+            "consumption",
+            "equipment_use",
+            "tool_use",
+            "trade",
+            "system_use"
+          ]
+        },
+        "detail": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slot_id",
+        "key",
+        "display_name",
+        "description",
+        "category",
+        "form",
+        "economic_role",
+        "purpose",
+        "region_keys",
+        "tags",
+        "cross_tier_role",
+        "rarity_role",
+        "external_sources",
+        "external_sinks"
+      ],
+      "properties": {
+        "slot_id": { "$ref": "#/definitions/key" },
+        "key": { "$ref": "#/definitions/key" },
+        "display_name": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "category": {
+          "type": "string",
+          "enum": [
+            "core_structures",
+            "fasteners_bindings",
+            "transmission_media",
+            "reactants",
+            "control_agents",
+            "sustenance_sources"
+          ]
+        },
+        "form": {
+          "type": "string",
+          "enum": ["raw", "processed", "refined", "finished"]
+        },
+        "economic_role": { "$ref": "#/definitions/economic_role" },
+        "purpose": { "type": "string", "minLength": 1 },
+        "region_keys": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/region_key" }
+        },
+        "tags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/key" }
+        },
+        "cross_tier_role": { "$ref": "#/definitions/cross_tier_role" },
+        "rarity_role": { "$ref": "#/definitions/rarity_role" },
+        "external_sources": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/external_relation" }
+        },
+        "external_sinks": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/external_relation" }
+        },
+        "notes": { "type": ["string", "null"] }
+      }
+    },
+    "action_output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["item_key", "quantity", "mode", "rarity_role"],
+      "properties": {
+        "item_key": { "$ref": "#/definitions/key" },
+        "quantity": { "type": "integer", "minimum": 1 },
+        "mode": {
+          "type": "string",
+          "enum": ["guaranteed", "weighted", "conditional"]
+        },
+        "rarity_role": { "$ref": "#/definitions/rarity_role" },
+        "condition_tag": {
+          "oneOf": [
+            { "$ref": "#/definitions/key" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "gathering_action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slot_id",
+        "key",
+        "display_name",
+        "skill_key",
+        "level_band",
+        "purpose",
+        "region_keys",
+        "outputs",
+        "tool_tags"
+      ],
+      "properties": {
+        "slot_id": { "$ref": "#/definitions/key" },
+        "key": { "$ref": "#/definitions/key" },
+        "display_name": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "skill_key": { "$ref": "#/definitions/skill_key" },
+        "level_band": { "type": "integer", "minimum": 1 },
+        "purpose": { "type": "string", "minLength": 1 },
+        "region_keys": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/region_key" }
+        },
+        "outputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/action_output" }
+        },
+        "tool_tags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/key" }
+        },
+        "notes": { "type": ["string", "null"] }
+      }
+    },
+    "gathering_node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slot_id",
+        "key",
+        "display_name",
+        "action_key",
+        "region_key",
+        "world_context",
+        "interaction_verb",
+        "depletable",
+        "respawnable",
+        "stateful"
+      ],
+      "properties": {
+        "slot_id": { "$ref": "#/definitions/key" },
+        "key": { "$ref": "#/definitions/key" },
+        "display_name": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "action_key": { "$ref": "#/definitions/key" },
+        "region_key": { "$ref": "#/definitions/region_key" },
+        "world_context": { "type": "string", "minLength": 1 },
+        "interaction_verb": { "type": "string", "minLength": 1 },
+        "depletable": { "type": "boolean" },
+        "respawnable": { "type": "boolean" },
+        "stateful": { "type": "boolean" },
+        "notes": { "type": ["string", "null"] }
+      }
+    },
+    "recipe_io": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["item_key", "quantity"],
+      "properties": {
+        "item_key": { "$ref": "#/definitions/key" },
+        "quantity": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "recipe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slot_id",
+        "key",
+        "display_name",
+        "skill_key",
+        "level_band",
+        "purpose",
+        "region_keys",
+        "inputs",
+        "outputs",
+        "cross_skill_links"
+      ],
+      "properties": {
+        "slot_id": { "$ref": "#/definitions/key" },
+        "key": { "$ref": "#/definitions/key" },
+        "display_name": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "skill_key": { "$ref": "#/definitions/skill_key" },
+        "level_band": { "type": "integer", "minimum": 1 },
+        "purpose": { "type": "string", "minLength": 1 },
+        "region_keys": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/region_key" }
+        },
+        "inputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/recipe_io" }
+        },
+        "outputs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/recipe_io" }
+        },
+        "station_tag": {
+          "oneOf": [
+            { "$ref": "#/definitions/key" },
+            { "type": "null" }
+          ]
+        },
+        "cross_skill_links": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/skill_key" }
+        },
+        "notes": { "type": ["string", "null"] }
+      }
+    }
+  }
+}
