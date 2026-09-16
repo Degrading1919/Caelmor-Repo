@@ -17,6 +17,14 @@ Phase 1.5 establishes exact content quantities required for Caelmor v1 — enoug
 
 This is not a content catalog; it defines counts, types, and purpose so downstream roles can produce consistent, feasible deliverables.
 
+## 0.1 RuneScape-Inspired Depth, Caelmor-Sized Content
+
+OSRS and RS3 are references for **systemic density and player motivation**, not content-volume targets. Caelmor should capture the satisfaction of interconnected skills, useful resources, recognizable unlocks, self-directed goals, route knowledge, and materials that can remain relevant beyond their first tier.
+
+Content depth should come from relationships rather than imitation or raw quantity. A smaller Caelmor catalog should extract more gameplay meaning from each item, resource node, recipe, enemy, quest, and location. Where appropriate, skills should feed one another, resources should have multiple meaningful uses or sources, and early content should retain selective later relevance.
+
+Do not chase RuneScape parity in item counts, recipe counts, quest counts, skills, level caps, drop tables, grind duration, market structure, or world size. The quantity targets in this document are Caelmor production constraints, not RuneScape comparison targets. Every piece of content must still satisfy Caelmor’s purpose, tone, progression, and solo-development requirements.
+
 ---
 
 # 1. High-Level v1 Content Model
@@ -191,6 +199,8 @@ POIs support discovery, mastery paths, and quest integration.
 4. All content must reinforce progression or atmosphere  
 5. No skill or quest should require repetitive grinding of a single node  
 6. Travel must feel scenic, not padded  
+7. Prefer RuneScape-like relationship density over RuneScape-like catalog size: fewer things, more meaningful connections  
+8. Do not add content solely to mimic a RuneScape skill, item tier, activity, or volume benchmark
 
 ---
 

@@ -50,6 +50,12 @@ All core content is solo-completable, with co-op as an optional enhancement.
 
 Exploration, lore discovery, and systemic mastery define the long-term experience.
 
+RuneScape Inspiration Boundary
+
+OSRS and RS3 are reference points for long-term progression feel, systemic interconnection, self-directed goals, knowledge-based efficiency, and satisfying skill mastery. They are not templates for Caelmor.
+
+Do not assume Caelmor should copy RuneScape skill lists, 99/120 caps, XP curves, action timings, combat formulas, drop tables, item catalogs, market structures, UI, quest formats, world structure, naming, or content volume. RuneScape-inspired ideas must be translated through Caelmor's Phase 1 canon, grounded mythic tone, solo-dev scope, deliberate combat, environmental storytelling, and low-friction philosophy. When RuneScape precedent conflicts with Caelmor, Caelmor wins.
+
 World Fantasy Statement
 
 (From Phase 1.1 Core Vision)
@@ -76,7 +82,7 @@ Long-term skilling
 
 Exploration and world discovery
 
-OSRS-like progression pacing
+OSRS/RS3-like progression feel and systemic depth without exact mechanical imitation
 
 TES-like narrative immersion
 

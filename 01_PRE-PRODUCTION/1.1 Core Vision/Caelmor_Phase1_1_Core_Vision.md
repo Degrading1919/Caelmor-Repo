@@ -43,6 +43,14 @@ C. Grounded, Transparent Combat Based on Timing & Spacing
 These pillars focus on removing unintentional friction while preserving challenge,  
 mystery, and meaningful decisions.
 
+### RuneScape Inspiration Boundary
+
+Old School RuneScape and RuneScape 3 are reference points for **feel, systemic depth, and progression readability**, not templates to reproduce. Caelmor should feel familiar to players who enjoy long-term skilling, self-directed goals, interconnected gathering and crafting, useful low-level resources, knowledge-driven efficiency, readable unlock milestones, and a world where systems connect to one another.
+
+Caelmor must not become a RuneScape clone. No RuneScape skill list, level cap, XP curve, action timing, tick length, combat formula, drop table, item name, currency, market structure, UI layout, quest format, world structure, or content volume is canonical merely because OSRS or RS3 uses it. Every borrowed pattern must be reinterpreted through Caelmor’s grounded mythic tone, solo-developer scope, deliberate combat, environmental storytelling, technical foundation, and low-friction design principles.
+
+When RuneScape precedent conflicts with Caelmor’s identity or constraints, **Caelmor wins**.
+
 ---
 
 ## 5. Progression Philosophy

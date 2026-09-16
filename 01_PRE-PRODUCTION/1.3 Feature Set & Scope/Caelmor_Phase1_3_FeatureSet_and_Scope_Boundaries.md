@@ -7,6 +7,16 @@ Project: Caelmor – Mythic Medieval Online RPG
 
 ---
 
+# REFERENCE IDENTITY — RUNESCAPE INSPIRATION BOUNDARY
+
+Caelmor should feel recognizably appealing to players who enjoy Old School RuneScape and RuneScape 3 because of **long-term skill mastery, self-directed goals, interconnected gathering and crafting, useful early resources, readable unlock milestones, knowledge-based efficiency, and authored world discovery**.
+
+This is an inspiration target, not a replication target. RuneScape mechanics and content are comparative references only. Caelmor does **not** automatically inherit RuneScape’s skill list, 99/120 level caps, XP curves, action timings, 0.6-second tick, combat formulas, drop tables, item names, currencies, Grand Exchange structure, UI layouts, quest formats, world structure, or content volume.
+
+Every RuneScape-inspired pattern must be independently justified for Caelmor and translated through the Phase 1 vision, grounded mythic tone, solo-developer scope, deliberate combat, environmental storytelling, low-friction inventory philosophy, and the Technical Foundation. When RuneScape precedent and Caelmor canon differ, **Caelmor canon wins**.
+
+---
+
 # SECTION A — CORE V1 SYSTEMS (Deep-Dive)
 
 ---
@@ -134,7 +144,7 @@ Each material tier creates visible progression without introducing rarity colors
 Progression Philosophy:
 
 • Progress tied to mastering skills and crafting.  
-• Strongly influenced by OSRS-style resource progression, not KCD-style item quality.  
+• Strongly influenced by OSRS/RS3-style systemic resource progression and self-directed mastery, while intentionally not copying their exact caps, curves, skill lists, or grind expectations.  
 • Encourages exploration and material acquisition as primary advancement.  
 
 ---
@@ -155,7 +165,7 @@ Advantages for Players:
 
 • Fast mental parsing.  
 • Encourages collecting resources without friction.  
-• Aligns with OSRS-inspired design while avoiding UI clutter.  
+• Uses RuneScape-inspired inventory legibility while retaining Caelmor-specific friction, scope, and UI decisions.  
 
 Advantages for Development:
 
@@ -332,4 +342,3 @@ Long-term planned expansions include:
 • Caravan trade routes.  
 • Procedural encounters and regional mutations.  
 • Large-scale PvP (opt-in only).  
-

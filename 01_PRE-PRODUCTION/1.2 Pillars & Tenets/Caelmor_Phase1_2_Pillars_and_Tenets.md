@@ -52,7 +52,8 @@ and long-term engagement.
 • Zones must contain layered mastery paths such as routing, resource density knowledge, and enemy  
 familiarity.  
 • Crafting loops must always feel meaningful — every recipe should serve gameplay or the economy.  
-• No mandatory grind walls; pacing must stay steady, rewarding, and engaging.
+• No mandatory grind walls; pacing must stay steady, rewarding, and engaging.  
+• OSRS and RS3 are reference points for long-term mastery, self-directed goals, interconnected systems, and knowledge-driven efficiency; their exact numbers, content, and structures are never defaults.
 
 ---
 
@@ -115,4 +116,8 @@ mastery.
 22. Important information must always be visible and readable.  
 23. Solo players must never feel disadvantaged.  
 24. Co-op progression is never synced — each character advances independently.  
-25. Co-op enhances efficiency and social fun, never replaces mastery.
+25. Co-op enhances efficiency and social fun, never replaces mastery.  
+26. Use OSRS and RS3 as references for systemic feel and player motivation, never as blueprints to copy.  
+27. Do not inherit RuneScape level caps, XP curves, action timings, drop rates, skill lists, markets, UI, combat formulas, or content volume without independent Caelmor-specific justification.  
+28. Translate useful RuneScape patterns through Caelmor’s grounded tone, solo-dev scope, deliberate combat, environmental storytelling, and low-friction philosophy.  
+29. “RuneScape-like” should be felt through long-term mastery, interconnection, player agency, and knowledge-based efficiency—not through copied surface details.

@@ -211,6 +211,34 @@ NEVER assume.
 
 ---
 
+## 5.4 RuneScape Inspiration Boundary (MANDATORY)
+
+OSRS and RS3 are **reference points for feel and systemic design**, not blueprints. When relevant, assistants should preserve the qualities the Creative Director wants from that family of games:
+
+- Long-term skill mastery and recognizable milestones  
+- Self-directed player goals  
+- Interconnected gathering, crafting, combat, and economy loops  
+- Useful early materials with selective later relevance  
+- Knowledge, routing, and system understanding that improve efficiency  
+- Authored quests and world discovery that give progression context  
+- Strong systemic depth without requiring RuneScape-scale content volume  
+
+Assistants must NOT assume that Caelmor should copy RuneScape’s:
+
+- Skill list or skill count  
+- 99/120 level caps or XP curves  
+- Action timings, tick length, or grind duration  
+- Combat formulas or encounter structure  
+- Items, currencies, drop tables, shops, or market systems  
+- UI layouts or interaction patterns  
+- Quest formats, world structure, lore, naming, or content volume  
+
+RuneScape research may be used to identify structural patterns and player motivations, but the assistant must translate those patterns into Caelmor-specific solutions. Phase 1 canon, approved schemas, solo-dev constraints, the Technical Foundation, grounded mythic tone, and player-friction standards always take precedence over RuneScape precedent.
+
+If an idea feels RuneScape-like only because it copies recognizable surface details, it must be redesigned. The target is **family resemblance in progression, interconnection, mastery, and player agency—not replication**.
+
+---
+
 # 6. FILE OUTPUT RULES
 
 These rules apply to all assistants generating files.
@@ -291,6 +319,7 @@ All assistants must:
 - Use schema-first development  
 - Request missing files when needed  
 - Brainstorm appropriately (based on role)  
+- Apply the RuneScape inspiration boundary when relevant  
 - Follow strict output formatting  
 - Create only within their role  
 - Ask clarifying questions  
