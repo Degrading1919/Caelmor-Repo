@@ -1,3 +1,42 @@
+# Skill Level & Mastery Philosophy
+
+**Creative Director status:** approved for skill progression design. This defines the numerical cap and milestone identities only. It does not set XP/hour, time-to-level, action timing, RNG, individual unlock positions, or runtime behavior.
+
+## Skill Cap
+
+- Skill cap: **99**.
+- Ordinary levels are satisfying progress pulses; they do not each require an authored unlock.
+- Governing rule: **A level does not require an unlock. A milestone requires meaning.**
+- The 99-level horizon is intended to support long-term attachment, personal goals, and remembered progression while avoiding filler content.
+
+## Progression Identities
+
+| Levels | Identity | Meaning |
+|---|---|---|
+| 1–30 | **Novice** | Learn the discipline, basic loop, places, materials, tools, and routines. |
+| 31–50 | **Competent** | Useful independence and meaningful choices. |
+| 51–70 | **Advanced** | Knowledge, routing, preparation, cross-skill understanding, and efficiency distinguish the player. |
+| 71–98 | **Masterful** | Substantial command; refinement and specialization. |
+| ~80 | **Practical mastery point** | The player should feel almost mastered; most core practical functionality is available. |
+| 99 | **Cap / Completion** | Primarily identity and commemoration. |
+
+## Upper-Level Philosophy
+
+- Around level 80, the player should feel practically mastered.
+- Levels 80–98 emphasize refinement, specialization, exceptional opportunities, personal goals, and dedication.
+- A small number of post-80 functions may be extremely rewarding, but they are specialist capabilities rather than missing essentials.
+- Level 99 should feel memorable and personally significant without requiring a mandatory final power spike.
+
+## Expansion Rule
+
+Future skill-cap increases remain legitimate. If a skill rises beyond 99 later, 99 remains a historical mastery landmark and should not be retroactively treated as false mastery.
+
+## Content-Density Guardrail
+
+The level count must never force filler resources, recipes, tools, tiers, or catalog bloat. A skill's identity should come from meaningful mechanics, world memories, useful cross-skill connections, knowledge-based efficiency, and selected authored landmarks.
+
+---
+
 ## GATHERING / WORLD INTERACTION SKILLS
 
 ---
