@@ -14,12 +14,12 @@
 | `item_sources` | 148 |
 | `item_sinks` | 197 |
 | `item_uses` | 75 |
-| `canon_skill_scope` | 14 |
+| `economy_skill_scope` | 14 |
 | `validation_findings` | 0 |
 
 ## Coverage and graph health
 
-- Canon skills covered: 14/14; uncovered: 0.
+- Included analytical economy skills covered: 14/14; uncovered: 0.
 - Items without a modeled source: 0.
 - Items without a consuming sink: 25 (reusable equipment/tools may intentionally have none).
 - Non-guaranteed gathering outputs: 0; unresolved yield rates: 0.
@@ -57,26 +57,26 @@ Consuming sinks count recipe-input removal and explicit item `consumption` only.
 
 No validation findings.
 
-## Canon skill scope
+## Economy skill scope
 
-All 14 canonical non-combat skills are represented. `primary` is the original seven-skill request; `extension` is the full-economy continuation. `uncovered` is a validation warning, not an omitted row.
+Phase 1.3 defines seven `v1_core` skills. The seven `economy_extension` skills come from later Stage 3.1 analytical planning; they are post-v1 economy content, not automatically authorized v1 runtime scope. All 14 included skills are validated for coverage; `uncovered` is a warning, not an omitted row.
 
 | Skill | Kind | Target | Status | Actions | Recipes | Items | Bands |
 |---|---|---|---|---:|---:|---:|---:|
-| `adornment` | crafting | extension | covered | 0 | 6 | 16 | 6 |
-| `alchemy` | crafting | extension | covered | 0 | 9 | 18 | 6 |
-| `angling` | gathering | extension | covered | 6 | 0 | 2 | 6 |
-| `cooking` | crafting | primary | covered | 0 | 8 | 10 | 6 |
-| `fabrication` | crafting | extension | covered | 0 | 6 | 19 | 6 |
-| `fletching` | crafting | primary | covered | 0 | 14 | 24 | 6 |
-| `foraging` | gathering | extension | covered | 6 | 0 | 6 | 6 |
-| `hunting` | gathering | primary | covered | 6 | 0 | 8 | 6 |
-| `leatherworking` | crafting | primary | covered | 0 | 11 | 17 | 6 |
-| `mechanisms` | crafting | extension | covered | 0 | 6 | 13 | 6 |
-| `mining` | gathering | primary | covered | 6 | 0 | 3 | 6 |
-| `scavenging` | gathering | extension | covered | 6 | 0 | 2 | 6 |
-| `smithing` | crafting | primary | covered | 0 | 17 | 21 | 6 |
-| `woodcutting` | gathering | primary | covered | 6 | 0 | 3 | 6 |
+| `adornment` | crafting | economy_extension | covered | 0 | 6 | 16 | 6 |
+| `alchemy` | crafting | economy_extension | covered | 0 | 9 | 18 | 6 |
+| `angling` | gathering | economy_extension | covered | 6 | 0 | 2 | 6 |
+| `cooking` | crafting | v1_core | covered | 0 | 8 | 10 | 6 |
+| `fabrication` | crafting | economy_extension | covered | 0 | 6 | 19 | 6 |
+| `fletching` | crafting | v1_core | covered | 0 | 14 | 24 | 6 |
+| `foraging` | gathering | economy_extension | covered | 6 | 0 | 6 | 6 |
+| `hunting` | gathering | v1_core | covered | 6 | 0 | 8 | 6 |
+| `leatherworking` | crafting | v1_core | covered | 0 | 11 | 17 | 6 |
+| `mechanisms` | crafting | economy_extension | covered | 0 | 6 | 13 | 6 |
+| `mining` | gathering | v1_core | covered | 6 | 0 | 3 | 6 |
+| `scavenging` | gathering | economy_extension | covered | 6 | 0 | 2 | 6 |
+| `smithing` | crafting | v1_core | covered | 0 | 17 | 21 | 6 |
+| `woodcutting` | gathering | v1_core | covered | 6 | 0 | 3 | 6 |
 
 ## Analytical entry points
 

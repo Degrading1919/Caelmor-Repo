@@ -8,7 +8,7 @@ The SQLite file is an analytical design artifact, not a runtime replacement. Its
 
 `item_uses` is deliberately separate. Equipping, trading, tool requirements, tool use, and other non-consuming demand never increase sink counts. A recipe input is a modeled removal; an authored `external_sinks` `consumption` relation represents removal on use. Authored `external_uses` are non-consuming. `item_metrics.sink_count` therefore means consuming pathways, while `use_count` means non-consuming demand. Terminal equipment and tools may have zero true sinks without being orphaned; consumables and ammunition carry explicit consumption sinks. No generic external-use entry should duplicate a concrete recipe input.
 
-`canon_skill_scope` contains all 14 canonical non-combat skills, their gathering/crafting classification, primary/extension target, and covered/uncovered status. `skill_metrics` contains action/recipe/item/band counts for every skill, including fully absent skills. Uncovered skills produce validation warnings; they are never omitted from the audit.
+`economy_skill_scope` separates the seven Phase 1.3 v1 skills (`v1_core`) from seven later Stage 3.1 skills (`economy_extension`). Phase 1.3 is the higher-authority v1 scope source. Extension rows are post-v1 analytical economy planning, not automatically authorized v1 runtime content. All 14 included skills retain gathering/crafting classification and covered/uncovered status. `skill_metrics` contains action/recipe/item/band counts for every included skill, including fully absent ones. Uncovered skills produce validation warnings; they are never omitted from the audit.
 
 `progression_bands` and `xp_levels` are derived from the provisional `balance_config.json` using `CODE/Scripts/caelmor_progression_calculator.py`. Exact unlocks are `required_level` on actions/recipes and must lie in their bands. Gathering expected output/hour is deterministic attempts/hour × success × output quantity × skill yield multiplier; crafting output/hour is attempts/hour × recipe output quantity. Weighted output pools require an explicit rationale; conditional outputs without a calculable condition remain unresolved rather than guessed. The current authored catalog uses no RNG.
 
@@ -24,7 +24,7 @@ The SQLite file is an analytical design artifact, not a runtime replacement. Its
 | Which items lack sources/consuming sinks? | `v_item_health` |
 | Which materials may be redundant? | `validation_findings` plus source/sink neighborhoods |
 | Expected XP/hour and yield/hour? | `v_activity_rates`, `gathering_action_outputs`, `recipes` |
-| Which skills are uncovered? | `canon_skill_scope`, `skill_metrics`, `validation_findings` |
+| Which skills are uncovered? | `economy_skill_scope`, `skill_metrics`, `validation_findings` |
 
 `validation_findings` records design-quality checks (orphans, dead ends, weak sinks, redundant signatures, progression gaps, tool/input gating, cycles). Schema/reference violations fail before a DB is published. The builder writes to a temporary sibling file, checks foreign keys and integrity, and replaces the canonical SQLite file only after a successful build.
 
