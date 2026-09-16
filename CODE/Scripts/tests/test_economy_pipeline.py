@@ -1,4 +1,4 @@
-"""Acceptance coverage for the schema-v2 Caelmor economy pipeline.
+"""Acceptance coverage for the schema-v4 Caelmor economy pipeline.
 
 The suite uses only the Python standard library.  Every build targets a
 TemporaryDirectory; it never opens or replaces the repository's canonical DB.
@@ -24,7 +24,7 @@ if str(SCRIPTS_DIR) not in sys.path:
 from caelmor_economy_builder import (  # noqa: E402
     ContentError,
     GATHERING_SKILLS,
-    PRIMARY_SKILLS,
+    V1_CORE_SKILLS,
     SKILLS,
     build,
     connect,
@@ -39,14 +39,14 @@ from caelmor_progression_calculator import (  # noqa: E402
 
 
 SCHEMA_PATH = SCRIPTS_DIR / "caelmor_worker_interchange.schema.json"
-CANON_SKILL_SCOPE = frozenset(
+ECONOMY_SKILL_SCOPE = frozenset(
     {
         "foraging", "hunting", "angling", "mining", "woodcutting",
         "scavenging", "smithing", "leatherworking", "fletching",
         "alchemy", "cooking", "adornment", "mechanisms", "fabrication",
     }
 )
-PRIMARY_SCOPE = frozenset(
+V1_CORE_SCOPE = frozenset(
     {
         "mining", "woodcutting", "hunting", "smithing", "fletching",
         "cooking", "leatherworking",
@@ -186,7 +186,7 @@ def valid_batch() -> dict:
 
     return {
         "batch_id": "acceptance_fixture",
-        "notes": "Purpose-built schema-v2 acceptance content.",
+        "notes": "Purpose-built schema-v4 acceptance content.",
         "items": items,
         "gathering_actions": [
             {
@@ -348,7 +348,7 @@ class EconomyPipelineAcceptanceTests(unittest.TestCase):
                 conn.execute(
                     "SELECT value FROM metadata WHERE key = 'schema_version'"
                 ).fetchone()[0],
-            "3",
+            "4",
             )
             self.assertEqual(conn.execute("PRAGMA foreign_key_check").fetchall(), [])
             nodes = conn.execute(
@@ -366,20 +366,31 @@ class EconomyPipelineAcceptanceTests(unittest.TestCase):
             self.assertEqual(len(outputs), 3)
             self.assertEqual({row[1] for row in outputs}, {"guaranteed", "weighted"})
 
-    def test_all_14_canon_skills_are_explicitly_in_scope(self) -> None:
-        self.assertEqual(frozenset(SKILLS), CANON_SKILL_SCOPE)
-        self.assertEqual(PRIMARY_SKILLS, PRIMARY_SCOPE)
+    def test_v1_and_extension_skills_are_explicitly_separated(self) -> None:
+        self.assertEqual(frozenset(SKILLS), ECONOMY_SKILL_SCOPE)
+        self.assertEqual(V1_CORE_SKILLS, V1_CORE_SCOPE)
         with self.database() as conn:
             scope_rows = conn.execute(
                 "SELECT skill_key, skill_kind, target_scope, coverage_status "
-                "FROM canon_skill_scope ORDER BY skill_key"
+                "FROM economy_skill_scope ORDER BY skill_key"
             ).fetchall()
             metric_rows = conn.execute(
                 "SELECT skill_key, coverage_status FROM skill_metrics ORDER BY skill_key"
             ).fetchall()
-        self.assertEqual({row[0] for row in scope_rows}, CANON_SKILL_SCOPE)
+            metadata = dict(conn.execute("SELECT key, value FROM metadata"))
+            self.assertIsNone(
+                conn.execute(
+                    "SELECT name FROM sqlite_master WHERE type = 'table' "
+                    "AND name = 'canon_skill_scope'"
+                ).fetchone()
+            )
+        self.assertEqual({row[0] for row in scope_rows}, ECONOMY_SKILL_SCOPE)
         self.assertEqual(
-            {row[0] for row in scope_rows if row[2] == "primary"}, PRIMARY_SCOPE
+            {row[0] for row in scope_rows if row[2] == "v1_core"}, V1_CORE_SCOPE
+        )
+        self.assertEqual(
+            {row[0] for row in scope_rows if row[2] == "economy_extension"},
+            ECONOMY_SKILL_SCOPE - V1_CORE_SCOPE,
         )
         self.assertEqual(
             {row[0] for row in scope_rows if row[1] == "gathering"},
@@ -390,14 +401,19 @@ class EconomyPipelineAcceptanceTests(unittest.TestCase):
             {"mining", "smithing"},
         )
         self.assertEqual(len(metric_rows), 14)
-        self.assertEqual({row[0] for row in metric_rows}, CANON_SKILL_SCOPE)
+        self.assertEqual({row[0] for row in metric_rows}, ECONOMY_SKILL_SCOPE)
+        self.assertEqual(
+            metadata["v1_scope_authority"],
+            "Phase 1.3 Feature Set & Scope Boundaries",
+        )
+        self.assertIn("not authorized v1 runtime scope", metadata["economy_extension_status"])
         self.assertEqual(
             {row[0] for row in metric_rows if row[1] == "covered"},
             {"mining", "smithing"},
         )
         self.assertEqual(
             {row[0] for row in metric_rows if row[1] == "uncovered"},
-            CANON_SKILL_SCOPE - {"mining", "smithing"},
+            ECONOMY_SKILL_SCOPE - {"mining", "smithing"},
         )
 
     def test_where_does_item_come_from(self) -> None:

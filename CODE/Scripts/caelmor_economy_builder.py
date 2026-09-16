@@ -57,7 +57,7 @@ SKILLS = (
 )
 RARITIES = ("common", "uncommon", "rare", "special")
 TERMINAL_ROLES = {"consumable", "equipment", "tool", "ammunition", "trade_good"}
-PRIMARY_SKILLS = frozenset(
+V1_CORE_SKILLS = frozenset(
     {"mining", "woodcutting", "hunting", "smithing", "fletching", "cooking", "leatherworking"}
 )
 GATHERING_SKILLS = frozenset(
@@ -449,10 +449,10 @@ def create_schema(conn: sqlite3.Connection) -> None:
             skill_key TEXT PRIMARY KEY
         );
 
-        CREATE TABLE canon_skill_scope (
+        CREATE TABLE economy_skill_scope (
             skill_key TEXT PRIMARY KEY REFERENCES skills(skill_key),
             skill_kind TEXT NOT NULL CHECK(skill_kind IN ('gathering', 'crafting')),
-            target_scope TEXT NOT NULL CHECK(target_scope IN ('primary', 'extension')),
+            target_scope TEXT NOT NULL CHECK(target_scope IN ('v1_core', 'economy_extension')),
             coverage_status TEXT NOT NULL CHECK(coverage_status IN ('covered', 'uncovered'))
         );
 
@@ -868,12 +868,12 @@ def seed_reference_tables(conn: sqlite3.Connection) -> None:
     conn.executemany("INSERT INTO regions(region_key) VALUES (?)", [(r,) for r in REGIONS])
     conn.executemany("INSERT INTO skills(skill_key) VALUES (?)", [(s,) for s in SKILLS])
     conn.executemany(
-        "INSERT INTO canon_skill_scope VALUES (?, ?, ?, 'uncovered')",
+        "INSERT INTO economy_skill_scope VALUES (?, ?, ?, 'uncovered')",
         [
             (
                 skill,
                 "gathering" if skill in GATHERING_SKILLS else "crafting",
-                "primary" if skill in PRIMARY_SKILLS else "extension",
+                "v1_core" if skill in V1_CORE_SKILLS else "economy_extension",
             )
             for skill in SKILLS
         ],
@@ -1431,13 +1431,13 @@ def calculate_metrics_and_findings(
             ),
         )
         conn.execute(
-            "UPDATE canon_skill_scope SET coverage_status = ? WHERE skill_key = ?",
+            "UPDATE economy_skill_scope SET coverage_status = ? WHERE skill_key = ?",
             (coverage_status, skill),
         )
         if coverage_status == "uncovered":
             add_finding(
-                conn, "warning", "uncovered_canon_skill", "skill", skill,
-                "Canon non-combat skill has no modeled gathering action or recipe."
+                conn, "warning", "uncovered_economy_skill", "skill", skill,
+                "Included analytical economy skill has no modeled gathering action or recipe."
             )
 
     if cfg is not None:
@@ -1582,7 +1582,7 @@ def report(conn: sqlite3.Connection) -> str:
     for table in (
         "items", "gathering_actions", "gathering_nodes", "gathering_action_outputs",
         "recipes", "recipe_inputs", "recipe_outputs", "item_sources", "item_sinks",
-        "item_uses", "canon_skill_scope",
+        "item_uses", "economy_skill_scope",
         "validation_findings",
     ):
         counts[table] = conn.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0]
@@ -1599,7 +1599,7 @@ def report(conn: sqlite3.Connection) -> str:
         "SELECT COUNT(*) FROM item_metrics WHERE sink_count = 0"
     ).fetchone()[0]
     uncovered_skills = conn.execute(
-        "SELECT COUNT(*) FROM canon_skill_scope WHERE coverage_status = 'uncovered'"
+        "SELECT COUNT(*) FROM economy_skill_scope WHERE coverage_status = 'uncovered'"
     ).fetchone()[0]
     random_outputs = conn.execute(
         "SELECT COUNT(*) FROM gathering_action_outputs WHERE mode != 'guaranteed'"
@@ -1633,7 +1633,7 @@ def report(conn: sqlite3.Connection) -> str:
 
     lines += [
         "", "## Coverage and graph health", "",
-        f"- Canon skills covered: {len(SKILLS) - uncovered_skills}/{len(SKILLS)}; "
+        f"- Included analytical economy skills covered: {len(SKILLS) - uncovered_skills}/{len(SKILLS)}; "
         f"uncovered: {uncovered_skills}.",
         f"- Items without a modeled source: {missing_sources}.",
         f"- Items without a consuming sink: {missing_consuming_sinks} "
@@ -1687,10 +1687,11 @@ def report(conn: sqlite3.Connection) -> str:
             )
 
     lines += [
-        "", "## Canon skill scope", "",
-        "All 14 canonical non-combat skills are represented. `primary` is the original "
-        "seven-skill request; `extension` is the full-economy continuation. "
-        "`uncovered` is a validation warning, not an omitted row.",
+        "", "## Economy skill scope", "",
+        "Phase 1.3 defines seven `v1_core` skills. The seven `economy_extension` skills "
+        "come from later Stage 3.1 analytical planning; they are post-v1 economy content, "
+        "not automatically authorized v1 runtime scope. All 14 included skills are "
+        "validated for coverage; `uncovered` is a warning, not an omitted row.",
         "", "| Skill | Kind | Target | Status | Actions | Recipes | Items | Bands |",
         "|---|---|---|---|---:|---:|---:|---:|",
     ]
@@ -1699,7 +1700,7 @@ def report(conn: sqlite3.Connection) -> str:
         SELECT s.skill_key, s.skill_kind, s.target_scope, s.coverage_status,
                m.gathering_action_count, m.recipe_count,
                m.distinct_item_count, m.covered_band_count
-        FROM canon_skill_scope s
+        FROM economy_skill_scope s
         JOIN skill_metrics m ON m.skill_key = s.skill_key
         ORDER BY s.skill_key
         """
@@ -1766,7 +1767,9 @@ def build(
         conn.executemany(
             "INSERT INTO metadata(key, value) VALUES (?, ?)",
             [
-                ("schema_version", "3"),
+                ("schema_version", "4"),
+                ("v1_scope_authority", "Phase 1.3 Feature Set & Scope Boundaries"),
+                ("economy_extension_status", "post-v1 analytical planning; not authorized v1 runtime scope"),
                 ("interchange_schema_sha256", hashlib.sha256(schema_path.read_bytes()).hexdigest() if schema_path else "none"),
                 ("content_sha256", hashlib.sha256(canonical_content.encode("utf-8")).hexdigest()),
                 ("progression_config_sha256", hashlib.sha256(progression_config.read_bytes()).hexdigest() if progression_config else "none"),
