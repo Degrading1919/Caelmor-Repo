@@ -1,0 +1,1196 @@
+{
+  "batch_id": "scavenging_mechanisms_fabrication",
+  "notes": "Six-band compact repair and infrastructure branch. Scavenging recovers mundane structural ironwork from war-damaged sites and broken industrial conduit from Emberholt's dross; Mechanisms makes reusable fittings; Fabrication assembles single-use repair kits. No relics, quest items, supernatural power, or random drops are implied.",
+  "items": [
+    {
+      "slot_id": "smf_item_salvaged_ironwork",
+      "key": "salvaged_ironwork",
+      "display_name": "Salvaged Ironwork",
+      "description": "Sound, irregular iron braces and plates reclaimed from collapsed wagons, bridgework, and wartime structures.",
+      "category": "core_structures",
+      "form": "raw",
+      "economic_role": "raw_material",
+      "purpose": "A common structural salvage input with multiple regional sources and later infrastructure sinks, distinct from standardized iron fasteners.",
+      "region_keys": [
+        "mire",
+        "thornfell",
+        "emberholt"
+      ],
+      "tags": [
+        "salvage",
+        "iron",
+        "structural"
+      ],
+      "cross_tier_role": "persistent",
+      "rarity_role": "common",
+      "external_sources": [],
+      "external_sinks": [],
+      "notes": "Mire has broken wagons and sinking watchtowers; Thornfell has damaged bridges and broken siege engines. This is practical salvage, not ancient Echohewn relic material.",
+      "external_uses": []
+    },
+    {
+      "slot_id": "smf_item_recovered_conduit",
+      "key": "recovered_conduit",
+      "display_name": "Recovered Conduit",
+      "description": "A length of discarded Emberholt industrial conduit stripped of unstable residue and kept for ordinary repair work.",
+      "category": "transmission_media",
+      "form": "raw",
+      "economic_role": "raw_material",
+      "purpose": "Supplies a narrow but connected industrial salvage path into safe mounts and recurring conduit repair.",
+      "region_keys": [
+        "emberholt"
+      ],
+      "tags": [
+        "salvage",
+        "conduit",
+        "industrial"
+      ],
+      "cross_tier_role": "persistent",
+      "rarity_role": "uncommon",
+      "external_sources": [],
+      "external_sinks": [],
+      "notes": "The Emberfall Dross canon explicitly has broken conduits. Recovered conduit is mundane reusable hardware, not a relic, magic storage device, or free energy source.",
+      "external_uses": []
+    },
+    {
+      "slot_id": "smf_item_reclaimed_brace",
+      "key": "reclaimed_brace",
+      "display_name": "Reclaimed Brace",
+      "description": "A salvaged iron brace straightened and keyed to a replaceable timber support.",
+      "category": "core_structures",
+      "form": "processed",
+      "economic_role": "component",
+      "purpose": "Turns irregular salvage into a dependable structural fitting used in crossing and later reinforced repair kits.",
+      "region_keys": [
+        "mire",
+        "thornfell",
+        "cross_region"
+      ],
+      "tags": [
+        "mechanism",
+        "brace",
+        "structural"
+      ],
+      "cross_tier_role": "persistent",
+      "rarity_role": "common",
+      "external_sources": [],
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": []
+    },
+    {
+      "slot_id": "smf_item_gate_hinge",
+      "key": "gate_hinge",
+      "display_name": "Gate Hinge",
+      "description": "A replaceable hinge assembly made from recovered ironwork and standardized fasteners.",
+      "category": "fasteners_bindings",
+      "form": "processed",
+      "economic_role": "component",
+      "purpose": "Connects low-tier salvage and iron fasteners to Lowmark dike and sluice maintenance.",
+      "region_keys": [
+        "lowmark",
+        "mire",
+        "cross_region"
+      ],
+      "tags": [
+        "mechanism",
+        "hinge",
+        "binding"
+      ],
+      "cross_tier_role": "limited",
+      "rarity_role": "common",
+      "external_sources": [],
+      "external_sinks": [],
+      "notes": "Lowmark canon includes old dike lines and sluice gates; the part is ordinary repair hardware.",
+      "external_uses": []
+    },
+    {
+      "slot_id": "smf_item_ridge_anchor",
+      "key": "ridge_anchor",
+      "display_name": "Ridge Anchor",
+      "description": "A standardized iron anchor with multiple fastening points for cliff ladders and bridge lines.",
+      "category": "fasteners_bindings",
+      "form": "processed",
+      "economic_role": "component",
+      "purpose": "Uses early salvaged ironwork and fasteners to support Thornfell's recurring bridge and ladder upkeep.",
+      "region_keys": [
+        "thornfell",
+        "cross_region"
+      ],
+      "tags": [
+        "mechanism",
+        "anchor",
+        "binding"
+      ],
+      "cross_tier_role": "persistent",
+      "rarity_role": "uncommon",
+      "external_sources": [],
+      "external_sinks": [],
+      "notes": "Thornfell Bridgewrights maintain rope bridges, chain bridges, and cliff ladders.",
+      "external_uses": []
+    },
+    {
+      "slot_id": "smf_item_conduit_mount",
+      "key": "conduit_mount",
+      "display_name": "Conduit Mount",
+      "description": "A steel-backed bracket that holds a cleaned industrial conduit in a stable position.",
+      "category": "control_agents",
+      "form": "processed",
+      "economic_role": "component",
+      "purpose": "Makes recovered conduit practical for controlled industrial repair without granting it a magical effect.",
+      "region_keys": [
+        "emberholt"
+      ],
+      "tags": [
+        "mechanism",
+        "conduit",
+        "mount",
+        "industrial"
+      ],
+      "cross_tier_role": "limited",
+      "rarity_role": "uncommon",
+      "external_sources": [],
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": []
+    },
+    {
+      "slot_id": "smf_item_storm_brace",
+      "key": "storm_brace",
+      "display_name": "Storm Brace",
+      "description": "A Stormwood-and-iron brace that flexes under sustained bridge movement instead of failing at the joint.",
+      "category": "control_agents",
+      "form": "processed",
+      "economic_role": "component",
+      "purpose": "Brings canon Stormwood's durability and flexibility into late Thornfell infrastructure while retaining basic salvage.",
+      "region_keys": [
+        "thornfell"
+      ],
+      "tags": [
+        "mechanism",
+        "brace",
+        "stormwood",
+        "stabilizing"
+      ],
+      "cross_tier_role": "limited",
+      "rarity_role": "uncommon",
+      "external_sources": [],
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": []
+    },
+    {
+      "slot_id": "smf_item_heatproof_mount",
+      "key": "heatproof_mount",
+      "display_name": "Heatproof Mount",
+      "description": "An Ashsteel-backed industrial mount built to replace stressed conduit supports near Emberholt's forges.",
+      "category": "control_agents",
+      "form": "processed",
+      "economic_role": "component",
+      "purpose": "Creates a capstone practical Ashsteel and recovered-conduit repair path.",
+      "region_keys": [
+        "emberholt"
+      ],
+      "tags": [
+        "mechanism",
+        "conduit",
+        "ashsteel",
+        "stabilizing"
+      ],
+      "cross_tier_role": "limited",
+      "rarity_role": "rare",
+      "external_sources": [],
+      "external_sinks": [],
+      "notes": "Heat resistance is an industrial material consequence of forged Ashsteel, not a new embercraft spell.",
+      "external_uses": []
+    },
+    {
+      "slot_id": "smf_item_crossing_repair_kit",
+      "key": "crossing_repair_kit",
+      "display_name": "Crossing Repair Kit",
+      "description": "A bundled brace, timber support, and lashings for one practical walkway or bridge repair.",
+      "category": "core_structures",
+      "form": "finished",
+      "economic_role": "trade_good",
+      "purpose": "Provides a recurring, non-quest sink for early salvage, timber, and binding in Mire and Thornfell crossings.",
+      "region_keys": [
+        "mire",
+        "thornfell",
+        "cross_region"
+      ],
+      "tags": [
+        "repair",
+        "crossing",
+        "infrastructure"
+      ],
+      "cross_tier_role": "limited",
+      "rarity_role": "common",
+      "external_sources": [],
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "One kit is consumed for each ordinary damaged walkway or small bridge repair; it is not a quest turn-in."
+        }
+      ],
+      "notes": null,
+      "external_uses": []
+    },
+    {
+      "slot_id": "smf_item_dike_repair_kit",
+      "key": "dike_repair_kit",
+      "display_name": "Dike Repair Kit",
+      "description": "A hinge, timber support, and absorbent moss packed for one dike or sluice gate repair.",
+      "category": "control_agents",
+      "form": "finished",
+      "economic_role": "trade_good",
+      "purpose": "Connects Lowmark irrigation identity to salvaged ironwork and canon Softmoss in a repeatable upkeep sink.",
+      "region_keys": [
+        "lowmark",
+        "cross_region"
+      ],
+      "tags": [
+        "repair",
+        "dike",
+        "infrastructure"
+      ],
+      "cross_tier_role": "limited",
+      "rarity_role": "common",
+      "external_sources": [],
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "One kit is consumed for each ordinary dike or sluice gate maintenance action."
+        }
+      ],
+      "notes": null,
+      "external_uses": []
+    },
+    {
+      "slot_id": "smf_item_ridge_anchor_kit",
+      "key": "ridge_anchor_kit",
+      "display_name": "Ridge Anchor Kit",
+      "description": "Ridge anchors, timber backing, and strong cord bundled for one cliff ladder or bridge-line installation.",
+      "category": "fasteners_bindings",
+      "form": "finished",
+      "economic_role": "trade_good",
+      "purpose": "Makes Thornfell's Bridgewright economy relational through Scavenging, Mechanisms, Smithing, Woodcutting, and Leatherworking.",
+      "region_keys": [
+        "thornfell",
+        "cross_region"
+      ],
+      "tags": [
+        "repair",
+        "anchor",
+        "infrastructure"
+      ],
+      "cross_tier_role": "limited",
+      "rarity_role": "uncommon",
+      "external_sources": [],
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "One kit is consumed when installing a practical cliff ladder anchor or replacing a failed bridge line."
+        }
+      ],
+      "notes": null,
+      "external_uses": []
+    },
+    {
+      "slot_id": "smf_item_conduit_repair_kit",
+      "key": "conduit_repair_kit",
+      "display_name": "Conduit Repair Kit",
+      "description": "A clean conduit mount, fittings, and protective straps prepared for one industrial conduit replacement.",
+      "category": "control_agents",
+      "form": "finished",
+      "economic_role": "trade_good",
+      "purpose": "Gives mundane Emberholt conduit salvage a recurring industrial sink rather than a magical or quest-only use.",
+      "region_keys": [
+        "emberholt"
+      ],
+      "tags": [
+        "repair",
+        "conduit",
+        "industrial"
+      ],
+      "cross_tier_role": "limited",
+      "rarity_role": "uncommon",
+      "external_sources": [],
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "One kit is consumed for each ordinary damaged industrial conduit replacement."
+        }
+      ],
+      "notes": null,
+      "external_uses": []
+    },
+    {
+      "slot_id": "smf_item_storm_crossing_kit",
+      "key": "storm_crossing_kit",
+      "display_name": "Storm Crossing Kit",
+      "description": "A flexible Stormwood brace, ridge anchor, and cord bundle prepared for a heavily stressed crossing.",
+      "category": "control_agents",
+      "form": "finished",
+      "economic_role": "trade_good",
+      "purpose": "Extends early salvaged hardware into Thornfell's high-pressure bridge maintenance without introducing rare relic filler.",
+      "region_keys": [
+        "thornfell"
+      ],
+      "tags": [
+        "repair",
+        "crossing",
+        "stormwood",
+        "infrastructure"
+      ],
+      "cross_tier_role": "limited",
+      "rarity_role": "uncommon",
+      "external_sources": [],
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "One kit is consumed when reinforcing a wind-stressed ridge bridge or cliff walkway."
+        }
+      ],
+      "notes": null,
+      "external_uses": []
+    },
+    {
+      "slot_id": "smf_item_heatproof_conduit_kit",
+      "key": "heatproof_conduit_kit",
+      "display_name": "Heatproof Conduit Kit",
+      "description": "Ashsteel-backed mounts and clean fittings bundled for one high-heat industrial support replacement.",
+      "category": "control_agents",
+      "form": "finished",
+      "economic_role": "trade_good",
+      "purpose": "Provides a repeatable capstone sink for early iron, salvaged conduit, and canon Ashsteel in Emberholt's working forges.",
+      "region_keys": [
+        "emberholt"
+      ],
+      "tags": [
+        "repair",
+        "conduit",
+        "ashsteel",
+        "industrial"
+      ],
+      "cross_tier_role": "limited",
+      "rarity_role": "rare",
+      "external_sources": [],
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "One kit is consumed for each high-heat forge conduit support replacement."
+        }
+      ],
+      "notes": "Ordinary industrial maintenance only; no Glassed Hollow, Remnant, or spellcasting access.",
+      "external_uses": []
+    }
+  ],
+  "gathering_actions": [
+    {
+      "slot_id": "smf_action_loose_wreckage",
+      "key": "recover_loose_wreckage",
+      "display_name": "Recover Loose Wreckage",
+      "description": "Sort accessible war-damaged timbers and iron supports for reusable hardware.",
+      "skill_key": "scavenging",
+      "level_band": 1,
+      "required_level": 1,
+      "purpose": "Opens common salvage from multiple world identities with one shared action.",
+      "region_keys": [
+        "mire",
+        "thornfell"
+      ],
+      "outputs": [
+        {
+          "item_key": "salvaged_ironwork",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [],
+      "tool_item_keys": [],
+      "notes": "Loose material can be retrieved by hand; unstable buried wreckage is reserved for later actions."
+    },
+    {
+      "slot_id": "smf_action_sunk_wreckage",
+      "key": "recover_sunk_wreckage",
+      "display_name": "Recover Sunk Wreckage",
+      "description": "Extract sound iron braces from deeper war wagons and collapsed supports.",
+      "skill_key": "scavenging",
+      "level_band": 2,
+      "required_level": 11,
+      "purpose": "Raises deterministic structural salvage throughput without inventing a second scrap type.",
+      "region_keys": [
+        "mire",
+        "thornfell"
+      ],
+      "outputs": [
+        {
+          "item_key": "salvaged_ironwork",
+          "quantity": 2,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [],
+      "tool_item_keys": [],
+      "notes": "Unstable and buried material is represented by an exact level gate and separate node contexts, not RNG."
+    },
+    {
+      "slot_id": "smf_action_reinforced_wreckage",
+      "key": "recover_reinforced_wreckage",
+      "display_name": "Recover Reinforced Wreckage",
+      "description": "Cut fastenings and separate reusable iron members from larger ruined structures.",
+      "skill_key": "scavenging",
+      "level_band": 3,
+      "required_level": 21,
+      "purpose": "Supplies later anchor and brace construction while bringing Smithing's iron knife into Scavenging.",
+      "region_keys": [
+        "mire",
+        "thornfell"
+      ],
+      "outputs": [
+        {
+          "item_key": "salvaged_ironwork",
+          "quantity": 3,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "knife"
+      ],
+      "tool_item_keys": [
+        "iron_knife",
+        "steel_knife",
+        "ashsteel_knife"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "smf_action_discarded_conduit",
+      "key": "recover_discarded_conduit",
+      "display_name": "Recover Discarded Conduit",
+      "description": "Separate clean, reusable conduit from Emberholt's discarded industrial fittings.",
+      "skill_key": "scavenging",
+      "level_band": 4,
+      "required_level": 31,
+      "purpose": "Introduces a canon industrial salvage source and shared action for multiple Emberfall Dross placements.",
+      "region_keys": [
+        "emberholt"
+      ],
+      "outputs": [
+        {
+          "item_key": "recovered_conduit",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "uncommon",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "pickaxe"
+      ],
+      "tool_item_keys": [
+        "steel_pickaxe",
+        "ashsteel_pickaxe"
+      ],
+      "notes": "Cleaning and sorting are implicit in the Scavenging action; unstable residue is rejected rather than turned into a random bonus."
+    },
+    {
+      "slot_id": "smf_action_mixed_ironwork",
+      "key": "recover_mixed_ironwork",
+      "display_name": "Recover Mixed Ironwork",
+      "description": "Extract reusable iron supports and fixed industrial conduit from a larger collapsed worksite.",
+      "skill_key": "scavenging",
+      "level_band": 5,
+      "required_level": 41,
+      "purpose": "Keeps early structural salvage relevant while demonstrating a deterministic multi-output action.",
+      "region_keys": [
+        "emberholt"
+      ],
+      "outputs": [
+        {
+          "item_key": "salvaged_ironwork",
+          "quantity": 2,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "recovered_conduit",
+          "quantity": 2,
+          "mode": "guaranteed",
+          "rarity_role": "uncommon",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "pickaxe"
+      ],
+      "tool_item_keys": [
+        "steel_pickaxe",
+        "ashsteel_pickaxe"
+      ],
+      "notes": "The output pair is an authored worksite composition, not a probability pool."
+    },
+    {
+      "slot_id": "smf_action_deep_ironwork",
+      "key": "recover_deep_ironwork",
+      "display_name": "Recover Deep Ironwork",
+      "description": "Carefully dismantle heavy, heat-stressed industrial supports and conduit from Emberdeep workings.",
+      "skill_key": "scavenging",
+      "level_band": 6,
+      "required_level": 51,
+      "purpose": "Supplies the capstone Ashsteel repair loop with greater deterministic throughput and a forged tool gate.",
+      "region_keys": [
+        "emberholt"
+      ],
+      "outputs": [
+        {
+          "item_key": "salvaged_ironwork",
+          "quantity": 3,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "recovered_conduit",
+          "quantity": 3,
+          "mode": "guaranteed",
+          "rarity_role": "uncommon",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "pickaxe"
+      ],
+      "tool_item_keys": [
+        "ashsteel_pickaxe"
+      ],
+      "notes": "Public industrial salvage in Emberdeep, not the Glassed Hollow or a hidden quest area."
+    }
+  ],
+  "gathering_nodes": [
+    {
+      "slot_id": "smf_node_mire_wagon_scatter",
+      "key": "mire_sunk_wagon_scatter",
+      "display_name": "Sunk Wagon Scatter",
+      "description": "Broken wagon remains protruding from the Mire's peat and trench ground.",
+      "action_key": "recover_loose_wreckage",
+      "region_key": "mire",
+      "world_context": "War-damaged drowned trench margin",
+      "interaction_verb": "Recover",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": "Only ordinary ironwork is recovered, not banner cloth or Memorywarden shards."
+    },
+    {
+      "slot_id": "smf_node_thornfell_bridge_debris",
+      "key": "thornfell_bridge_debris",
+      "display_name": "Bridge Debris",
+      "description": "Loose iron supports below a damaged Thornfell rope crossing.",
+      "action_key": "recover_loose_wreckage",
+      "region_key": "thornfell",
+      "world_context": "Shatterfall Gorge maintained crossing margin",
+      "interaction_verb": "Recover",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    },
+    {
+      "slot_id": "smf_node_mire_deep_wagon",
+      "key": "mire_deep_wagon_wreck",
+      "display_name": "Deep Wagon Wreck",
+      "description": "A larger war wagon frame slowly sinking into the Mire's peat.",
+      "action_key": "recover_sunk_wreckage",
+      "region_key": "mire",
+      "world_context": "Old drowned trench near a navigable crossing",
+      "interaction_verb": "Extract",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    },
+    {
+      "slot_id": "smf_node_thornfell_siege_scrap",
+      "key": "thornfell_siege_scrap",
+      "display_name": "Broken Siege Ironwork",
+      "description": "Ordinary iron supports from a broken siege engine embedded in the cliff.",
+      "action_key": "recover_sunk_wreckage",
+      "region_key": "thornfell",
+      "world_context": "Shatterfall Gorge cliff wall",
+      "interaction_verb": "Extract",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": "No Echohewn relic fragments or rune-bearing parts are gathered."
+    },
+    {
+      "slot_id": "smf_node_mire_watchtower_frame",
+      "key": "mire_watchtower_frame",
+      "display_name": "Collapsed Watchtower Frame",
+      "description": "A reinforced watchtower frame half swallowed by saturated soil.",
+      "action_key": "recover_reinforced_wreckage",
+      "region_key": "mire",
+      "world_context": "War-damaged watchtower at a settled Mire route",
+      "interaction_verb": "Dismantle",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    },
+    {
+      "slot_id": "smf_node_emberfall_conduit_pile",
+      "key": "emberfall_conduit_pile",
+      "display_name": "Discarded Conduit Pile",
+      "description": "Broken industrial conduit discarded beside a sorted dross heap.",
+      "action_key": "recover_discarded_conduit",
+      "region_key": "emberholt",
+      "world_context": "Emberfall Dross industrial discard area",
+      "interaction_verb": "Recover",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    },
+    {
+      "slot_id": "smf_node_emberfall_conduit_rack",
+      "key": "emberfall_conduit_rack",
+      "display_name": "Spent Conduit Rack",
+      "description": "A rusting rack of retired conduit sections awaiting recycling.",
+      "action_key": "recover_discarded_conduit",
+      "region_key": "emberholt",
+      "world_context": "Emberfall Dross industrial recycling margin",
+      "interaction_verb": "Recover",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    },
+    {
+      "slot_id": "smf_node_emberholt_worksite",
+      "key": "emberholt_collapsed_worksite",
+      "display_name": "Collapsed Industrial Worksite",
+      "description": "A damaged forge-side utility frame with ordinary iron supports and retired conduits.",
+      "action_key": "recover_mixed_ironwork",
+      "region_key": "emberholt",
+      "world_context": "Forge-side worksite outside restricted districts",
+      "interaction_verb": "Dismantle",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    },
+    {
+      "slot_id": "smf_node_emberdeep_supports",
+      "key": "emberdeep_retired_supports",
+      "display_name": "Retired Emberdeep Supports",
+      "description": "Heat-stressed support frame and conduit retired from a sanctioned mine gallery.",
+      "action_key": "recover_deep_ironwork",
+      "region_key": "emberholt",
+      "world_context": "Sanctioned lower industrial gallery in the Emberdeep Warrens",
+      "interaction_verb": "Dismantle",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    }
+  ],
+  "recipes": [
+    {
+      "slot_id": "smf_recipe_make_reclaimed_brace",
+      "key": "make_reclaimed_brace",
+      "display_name": "Make Reclaimed Brace",
+      "description": "Straighten irregular salvage and key it to a timber support.",
+      "skill_key": "mechanisms",
+      "level_band": 1,
+      "required_level": 1,
+      "purpose": "First structural salvage transform shared by several fabrication endpoints.",
+      "region_keys": [
+        "mire",
+        "thornfell",
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "salvaged_ironwork",
+          "quantity": 1
+        },
+        {
+          "item_key": "common_timber",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "reclaimed_brace",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "mechanisms_bench",
+      "cross_skill_links": [
+        "scavenging",
+        "woodcutting"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "smf_recipe_assemble_crossing_repair_kit",
+      "key": "assemble_crossing_repair_kit",
+      "display_name": "Assemble Crossing Repair Kit",
+      "description": "Bundle a reclaimed brace with timber and field binding for a small crossing repair.",
+      "skill_key": "fabrication",
+      "level_band": 1,
+      "required_level": 1,
+      "purpose": "Creates a recurring early repair sink shared by Mire walkways and Thornfell crossings.",
+      "region_keys": [
+        "mire",
+        "thornfell",
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "reclaimed_brace",
+          "quantity": 1
+        },
+        {
+          "item_key": "common_timber",
+          "quantity": 1
+        },
+        {
+          "item_key": "sinew",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "crossing_repair_kit",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "assembly_bench",
+      "cross_skill_links": [
+        "scavenging",
+        "mechanisms",
+        "woodcutting",
+        "hunting"
+      ],
+      "notes": "Sinew is a common Hunting output; no cord-only early progression gate is assumed."
+    },
+    {
+      "slot_id": "smf_recipe_make_gate_hinge",
+      "key": "make_gate_hinge",
+      "display_name": "Make Gate Hinge",
+      "description": "Fit salvaged ironwork with standardized iron pins for a replaceable gate hinge.",
+      "skill_key": "mechanisms",
+      "level_band": 2,
+      "required_level": 11,
+      "purpose": "Connects salvaged ironwork to Lowmark's dikes and sluice gates.",
+      "region_keys": [
+        "lowmark",
+        "mire",
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "salvaged_ironwork",
+          "quantity": 1
+        },
+        {
+          "item_key": "iron_fasteners",
+          "quantity": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "gate_hinge",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "mechanisms_bench",
+      "cross_skill_links": [
+        "scavenging",
+        "smithing"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "smf_recipe_assemble_dike_repair_kit",
+      "key": "assemble_dike_repair_kit",
+      "display_name": "Assemble Dike Repair Kit",
+      "description": "Bundle a gate hinge with absorbent moss and timber for irrigation maintenance.",
+      "skill_key": "fabrication",
+      "level_band": 2,
+      "required_level": 11,
+      "purpose": "Makes Softmoss and iron salvage relevant to ordinary Lowmark dike upkeep.",
+      "region_keys": [
+        "lowmark",
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "gate_hinge",
+          "quantity": 1
+        },
+        {
+          "item_key": "softmoss",
+          "quantity": 1
+        },
+        {
+          "item_key": "common_timber",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "dike_repair_kit",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "assembly_bench",
+      "cross_skill_links": [
+        "scavenging",
+        "mechanisms",
+        "foraging",
+        "woodcutting"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "smf_recipe_make_ridge_anchor",
+      "key": "make_ridge_anchor",
+      "display_name": "Make Ridge Anchor",
+      "description": "Lay out salvage and fasteners into a multi-point cliff anchor.",
+      "skill_key": "mechanisms",
+      "level_band": 3,
+      "required_level": 21,
+      "purpose": "Provides a repeatable Thornfell bridge and ladder component using ordinary recovered hardware.",
+      "region_keys": [
+        "thornfell"
+      ],
+      "inputs": [
+        {
+          "item_key": "salvaged_ironwork",
+          "quantity": 2
+        },
+        {
+          "item_key": "iron_fasteners",
+          "quantity": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "ridge_anchor",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "mechanisms_bench",
+      "cross_skill_links": [
+        "scavenging",
+        "smithing"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "smf_recipe_assemble_ridge_anchor_kit",
+      "key": "assemble_ridge_anchor_kit",
+      "display_name": "Assemble Ridge Anchor Kit",
+      "description": "Bundle ridge anchors, timber backing, and strong cord for one cliff installation.",
+      "skill_key": "fabrication",
+      "level_band": 3,
+      "required_level": 21,
+      "purpose": "Connects Thornfell bridge maintenance across five primary economy skills.",
+      "region_keys": [
+        "thornfell",
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "ridge_anchor",
+          "quantity": 2
+        },
+        {
+          "item_key": "common_timber",
+          "quantity": 1
+        },
+        {
+          "item_key": "sinew_cord",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "ridge_anchor_kit",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "assembly_bench",
+      "cross_skill_links": [
+        "scavenging",
+        "mechanisms",
+        "smithing",
+        "woodcutting",
+        "leatherworking"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "smf_recipe_make_conduit_mount",
+      "key": "make_conduit_mount",
+      "display_name": "Make Conduit Mount",
+      "description": "Back a cleaned conduit with steel and fix its position with standardized fasteners.",
+      "skill_key": "mechanisms",
+      "level_band": 4,
+      "required_level": 31,
+      "purpose": "Provides mundane controlled industrial repair use for Emberfall Dross conduit salvage.",
+      "region_keys": [
+        "emberholt"
+      ],
+      "inputs": [
+        {
+          "item_key": "recovered_conduit",
+          "quantity": 1
+        },
+        {
+          "item_key": "steel_bar",
+          "quantity": 1
+        },
+        {
+          "item_key": "iron_fasteners",
+          "quantity": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "conduit_mount",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "mechanisms_bench",
+      "cross_skill_links": [
+        "scavenging",
+        "smithing"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "smf_recipe_assemble_conduit_repair_kit",
+      "key": "assemble_conduit_repair_kit",
+      "display_name": "Assemble Conduit Repair Kit",
+      "description": "Bundle a clean conduit mount with protective straps and common replacement fittings.",
+      "skill_key": "fabrication",
+      "level_band": 4,
+      "required_level": 31,
+      "purpose": "Creates a repeatable industrial maintenance sink instead of relic or quest use.",
+      "region_keys": [
+        "emberholt"
+      ],
+      "inputs": [
+        {
+          "item_key": "conduit_mount",
+          "quantity": 1
+        },
+        {
+          "item_key": "leather_strap",
+          "quantity": 1
+        },
+        {
+          "item_key": "iron_fasteners",
+          "quantity": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "conduit_repair_kit",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "assembly_bench",
+      "cross_skill_links": [
+        "scavenging",
+        "mechanisms",
+        "leatherworking",
+        "smithing"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "smf_recipe_make_storm_brace",
+      "key": "make_storm_brace",
+      "display_name": "Make Storm Brace",
+      "description": "Integrate flexible Stormwood with a reclaimed brace and iron fastenings.",
+      "skill_key": "mechanisms",
+      "level_band": 5,
+      "required_level": 41,
+      "purpose": "Keeps common salvage relevant in Thornfell's later wind-stressed crossing economy.",
+      "region_keys": [
+        "thornfell"
+      ],
+      "inputs": [
+        {
+          "item_key": "reclaimed_brace",
+          "quantity": 1
+        },
+        {
+          "item_key": "stormwood",
+          "quantity": 1
+        },
+        {
+          "item_key": "iron_fasteners",
+          "quantity": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "storm_brace",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "mechanisms_bench",
+      "cross_skill_links": [
+        "scavenging",
+        "woodcutting",
+        "smithing"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "smf_recipe_assemble_storm_crossing_kit",
+      "key": "assemble_storm_crossing_kit",
+      "display_name": "Assemble Storm Crossing Kit",
+      "description": "Bundle a flexible Stormwood brace, ridge anchor, and cord for a stressed crossing.",
+      "skill_key": "fabrication",
+      "level_band": 5,
+      "required_level": 41,
+      "purpose": "Creates a late Thornfell sink without replacing early ridge anchors or iron fasteners.",
+      "region_keys": [
+        "thornfell"
+      ],
+      "inputs": [
+        {
+          "item_key": "storm_brace",
+          "quantity": 1
+        },
+        {
+          "item_key": "ridge_anchor",
+          "quantity": 1
+        },
+        {
+          "item_key": "sinew_cord",
+          "quantity": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "storm_crossing_kit",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "assembly_bench",
+      "cross_skill_links": [
+        "scavenging",
+        "mechanisms",
+        "woodcutting",
+        "smithing",
+        "leatherworking"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "smf_recipe_make_heatproof_mount",
+      "key": "make_heatproof_mount",
+      "display_name": "Make Heatproof Mount",
+      "description": "Key cleaned industrial conduit to an Ashsteel backing and common replacement pins.",
+      "skill_key": "mechanisms",
+      "level_band": 6,
+      "required_level": 51,
+      "purpose": "Carries ordinary conduit salvage and standardized early iron into high-heat forge repair.",
+      "region_keys": [
+        "emberholt"
+      ],
+      "inputs": [
+        {
+          "item_key": "recovered_conduit",
+          "quantity": 2
+        },
+        {
+          "item_key": "ashsteel_bar",
+          "quantity": 1
+        },
+        {
+          "item_key": "iron_fasteners",
+          "quantity": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "heatproof_mount",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "mechanisms_bench",
+      "cross_skill_links": [
+        "scavenging",
+        "mining",
+        "smithing"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "smf_recipe_assemble_heatproof_conduit_kit",
+      "key": "assemble_heatproof_conduit_kit",
+      "display_name": "Assemble Heatproof Conduit Kit",
+      "description": "Bundle heatproof mounts with a clean conduit replacement and protective leather wrapping.",
+      "skill_key": "fabrication",
+      "level_band": 6,
+      "required_level": 51,
+      "purpose": "Creates recurring high-level maintenance demand for canon Ashsteel, common iron, and ordinary salvage.",
+      "region_keys": [
+        "emberholt"
+      ],
+      "inputs": [
+        {
+          "item_key": "heatproof_mount",
+          "quantity": 1
+        },
+        {
+          "item_key": "recovered_conduit",
+          "quantity": 1
+        },
+        {
+          "item_key": "leather_strap",
+          "quantity": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "heatproof_conduit_kit",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "assembly_bench",
+      "cross_skill_links": [
+        "scavenging",
+        "mechanisms",
+        "mining",
+        "smithing",
+        "leatherworking"
+      ],
+      "notes": null
+    }
+  ]
+}

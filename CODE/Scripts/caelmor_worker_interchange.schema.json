@@ -94,17 +94,34 @@
             "starter",
             "world_spawn",
             "salvage",
-            "consumption",
-            "equipment_use",
-            "tool_use",
-            "trade",
-            "system_use"
+            "trade"
           ]
         },
         "detail": {
           "type": "string",
           "minLength": 1
         }
+      }
+    },
+    "external_consumption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relation_type", "detail"],
+      "properties": {
+        "relation_type": { "type": "string", "enum": ["consumption"] },
+        "detail": { "type": "string", "minLength": 1 }
+      }
+    },
+    "external_use": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relation_type", "detail"],
+      "properties": {
+        "relation_type": {
+          "type": "string",
+          "enum": ["equipment_use", "tool_use", "trade", "system_use"]
+        },
+        "detail": { "type": "string", "minLength": 1 }
       }
     },
     "item": {
@@ -124,7 +141,8 @@
         "cross_tier_role",
         "rarity_role",
         "external_sources",
-        "external_sinks"
+        "external_sinks",
+        "external_uses"
       ],
       "properties": {
         "slot_id": { "$ref": "#/definitions/key" },
@@ -167,7 +185,11 @@
         },
         "external_sinks": {
           "type": "array",
-          "items": { "$ref": "#/definitions/external_relation" }
+          "items": { "$ref": "#/definitions/external_consumption" }
+        },
+        "external_uses": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/external_use" }
         },
         "notes": { "type": ["string", "null"] }
       }
@@ -238,7 +260,6 @@
         },
         "tool_item_keys": {
           "type": "array",
-          "minItems": 1,
           "uniqueItems": true,
           "items": { "$ref": "#/definitions/key" }
         },

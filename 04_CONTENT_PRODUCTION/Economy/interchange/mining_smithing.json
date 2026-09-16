@@ -11,15 +11,26 @@
       "form": "raw",
       "economic_role": "raw_material",
       "purpose": "Shared foundation for iron, steel, tools, arrowheads, and later Ashsteel progression.",
-      "region_keys": ["lowmark", "thornfell"],
-      "tags": ["metal", "iron", "ore"],
+      "region_keys": [
+        "lowmark",
+        "thornfell"
+      ],
+      "tags": [
+        "metal",
+        "iron",
+        "ore"
+      ],
       "cross_tier_role": "persistent",
       "rarity_role": "common",
       "external_sources": [],
-      "external_sinks": [
-        {"relation_type": "trade", "detail": "Lowmark and Thornfell trade workable iron into regional forge economies."}
-      ],
-      "notes": "The regional identities remain on the world nodes: Lowmark Iron is shallow and accessible; Ridge Iron is cliff-seam iron used for fortified tools."
+      "external_sinks": [],
+      "notes": "The regional identities remain on the world nodes: Lowmark Iron is shallow and accessible; Ridge Iron is cliff-seam iron used for fortified tools.",
+      "external_uses": [
+        {
+          "relation_type": "trade",
+          "detail": "Lowmark and Thornfell trade workable iron into regional forge economies."
+        }
+      ]
     },
     {
       "slot_id": "ms_item_iron_bar",
@@ -30,13 +41,22 @@
       "form": "refined",
       "economic_role": "component",
       "purpose": "Concentrates the common iron supply into a reusable cross-skill component.",
-      "region_keys": ["lowmark", "thornfell", "cross_region"],
-      "tags": ["metal", "iron", "bar"],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "cross_region"
+      ],
+      "tags": [
+        "metal",
+        "iron",
+        "bar"
+      ],
       "cross_tier_role": "persistent",
       "rarity_role": "common",
       "external_sources": [],
       "external_sinks": [],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "ms_item_steel_bar",
@@ -47,15 +67,27 @@
       "form": "refined",
       "economic_role": "component",
       "purpose": "Provides the durable middle progression tier and the structural base for Ashsteel.",
-      "region_keys": ["thornfell", "emberholt", "cross_region"],
-      "tags": ["metal", "steel", "bar"],
+      "region_keys": [
+        "thornfell",
+        "emberholt",
+        "cross_region"
+      ],
+      "tags": [
+        "metal",
+        "steel",
+        "bar"
+      ],
       "cross_tier_role": "persistent",
       "rarity_role": "uncommon",
       "external_sources": [],
-      "external_sinks": [
-        {"relation_type": "trade", "detail": "Emberholt steel and Thornfell metalwork circulate as practical regional trade goods."}
-      ],
-      "notes": "Carbon treatment and forge fuel are accounted for by the forge station process, avoiding a single-purpose fuel item."
+      "external_sinks": [],
+      "notes": "Carbon treatment and forge fuel are accounted for by the forge station process, avoiding a single-purpose fuel item.",
+      "external_uses": [
+        {
+          "relation_type": "trade",
+          "detail": "Emberholt steel and Thornfell metalwork circulate as practical regional trade goods."
+        }
+      ]
     },
     {
       "slot_id": "ms_item_emberstone",
@@ -66,13 +98,20 @@
       "form": "raw",
       "economic_role": "raw_material",
       "purpose": "Connects Emberholt mining to advanced weapon components and Ashsteel production.",
-      "region_keys": ["emberholt"],
-      "tags": ["mineral", "emberstone", "conductive"],
+      "region_keys": [
+        "emberholt"
+      ],
+      "tags": [
+        "mineral",
+        "emberstone",
+        "conductive"
+      ],
       "cross_tier_role": "persistent",
       "rarity_role": "uncommon",
       "external_sources": [],
       "external_sinks": [],
-      "notes": "Canon describes ember veins, emberstone conduction, and its use in tools and blades."
+      "notes": "Canon describes ember veins, emberstone conduction, and its use in tools and blades.",
+      "external_uses": []
     },
     {
       "slot_id": "ms_item_emberstone_shard",
@@ -83,13 +122,21 @@
       "form": "processed",
       "economic_role": "catalyst",
       "purpose": "Adds a scarce Emberholt input to advanced arrowheads and Ashsteel without creating quest-only material bloat.",
-      "region_keys": ["emberholt"],
-      "tags": ["mineral", "emberstone", "shard", "conductive"],
+      "region_keys": [
+        "emberholt"
+      ],
+      "tags": [
+        "mineral",
+        "emberstone",
+        "shard",
+        "conductive"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "rare",
       "external_sources": [],
       "external_sinks": [],
-      "notes": "Matches the canon Ember Shards used in weaponry, forging, conduits, and ritual plates."
+      "notes": "Matches the canon Ember Shards used in weaponry, forging, conduits, and ritual plates.",
+      "external_uses": []
     },
     {
       "slot_id": "ms_item_ashsteel_bar",
@@ -100,15 +147,26 @@
       "form": "refined",
       "economic_role": "component",
       "purpose": "Caps the compact metal chain with a canon material that still depends on early iron.",
-      "region_keys": ["emberholt", "cross_region"],
-      "tags": ["metal", "ashsteel", "bar"],
+      "region_keys": [
+        "emberholt",
+        "cross_region"
+      ],
+      "tags": [
+        "metal",
+        "ashsteel",
+        "bar"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "rare",
       "external_sources": [],
-      "external_sinks": [
-        {"relation_type": "trade", "detail": "Finished Ashsteel is a controlled Emberholt export rather than a freely gathered material."}
-      ],
-      "notes": "Canon identifies Ashsteel as an alloy created during ember surges and used for elite armor."
+      "external_sinks": [],
+      "notes": "Canon identifies Ashsteel as an alloy created during ember surges and used for elite armor.",
+      "external_uses": [
+        {
+          "relation_type": "trade",
+          "detail": "Finished Ashsteel is a controlled Emberholt export rather than a freely gathered material."
+        }
+      ]
     },
     {
       "slot_id": "ms_item_iron_fasteners",
@@ -119,15 +177,20 @@
       "form": "processed",
       "economic_role": "component",
       "purpose": "Creates an enduring construction and assembly sink for early iron.",
-      "region_keys": ["cross_region"],
-      "tags": ["metal", "iron", "fastener"],
+      "region_keys": [
+        "cross_region"
+      ],
+      "tags": [
+        "metal",
+        "iron",
+        "fastener"
+      ],
       "cross_tier_role": "persistent",
       "rarity_role": "common",
       "external_sources": [],
-      "external_sinks": [
-        {"relation_type": "system_use", "detail": "Mechanisms, fabrication, and regional repair systems consume standardized fasteners."}
-      ],
-      "notes": "Repairs the legacy self-loop by consuming iron bar and producing a distinct quantity of fasteners."
+      "external_sinks": [],
+      "notes": "Repairs the legacy self-loop by consuming iron bar and producing a distinct quantity of fasteners.",
+      "external_uses": []
     },
     {
       "slot_id": "ms_item_iron_knife",
@@ -138,15 +201,30 @@
       "form": "finished",
       "economic_role": "tool",
       "purpose": "Provides the early Hunting and Leatherworking cutting tool.",
-      "region_keys": ["cross_region"],
-      "tags": ["tool", "knife", "iron"],
+      "region_keys": [
+        "cross_region"
+      ],
+      "tags": [
+        "tool",
+        "knife",
+        "iron"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "common",
-      "external_sources": [{"relation_type": "shop", "detail": "Ordinary field knives are stocked by general tool merchants, including before a player can forge one."}],
-      "external_sinks": [
-        {"relation_type": "tool_use", "detail": "Used by Hunting and Leatherworking actions that require a field knife."}
+      "external_sources": [
+        {
+          "relation_type": "shop",
+          "detail": "Ordinary field knives are stocked by general tool merchants, including before a player can forge one."
+        }
       ],
-      "notes": null
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
+        {
+          "relation_type": "tool_use",
+          "detail": "Used by Hunting and Leatherworking actions that require a field knife."
+        }
+      ]
     },
     {
       "slot_id": "ms_item_iron_axe",
@@ -157,15 +235,25 @@
       "form": "finished",
       "economic_role": "tool",
       "purpose": "Provides the first forged Woodcutting tool and a sink for iron and common timber.",
-      "region_keys": ["cross_region"],
-      "tags": ["tool", "axe", "iron"],
+      "region_keys": [
+        "cross_region"
+      ],
+      "tags": [
+        "tool",
+        "axe",
+        "iron"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "common",
       "external_sources": [],
-      "external_sinks": [
-        {"relation_type": "tool_use", "detail": "Used by entry and low-band Woodcutting actions."}
-      ],
-      "notes": null
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
+        {
+          "relation_type": "tool_use",
+          "detail": "Used by entry and low-band Woodcutting actions."
+        }
+      ]
     },
     {
       "slot_id": "ms_item_iron_pickaxe",
@@ -176,15 +264,30 @@
       "form": "finished",
       "economic_role": "tool",
       "purpose": "Closes the early mining-to-smithing tool feedback loop.",
-      "region_keys": ["cross_region"],
-      "tags": ["tool", "pickaxe", "iron"],
+      "region_keys": [
+        "cross_region"
+      ],
+      "tags": [
+        "tool",
+        "pickaxe",
+        "iron"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "common",
-      "external_sources": [{"relation_type": "shop", "detail": "Basic iron pickaxes are stocked by ordinary tool merchants to bootstrap Mining."}],
-      "external_sinks": [
-        {"relation_type": "tool_use", "detail": "Used by low-band Mining actions."}
+      "external_sources": [
+        {
+          "relation_type": "shop",
+          "detail": "Basic iron pickaxes are stocked by ordinary tool merchants to bootstrap Mining."
+        }
       ],
-      "notes": null
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
+        {
+          "relation_type": "tool_use",
+          "detail": "Used by low-band Mining actions."
+        }
+      ]
     },
     {
       "slot_id": "ms_item_iron_arrowheads",
@@ -195,15 +298,20 @@
       "form": "processed",
       "economic_role": "component",
       "purpose": "Connects early Smithing output to recurring Fletching ammunition sinks.",
-      "region_keys": ["cross_region"],
-      "tags": ["metal", "iron", "arrowhead"],
+      "region_keys": [
+        "cross_region"
+      ],
+      "tags": [
+        "metal",
+        "iron",
+        "arrowhead"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "common",
       "external_sources": [],
-      "external_sinks": [
-        {"relation_type": "system_use", "detail": "Consumed by Fletching recipes for common ammunition."}
-      ],
-      "notes": null
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "ms_item_steel_knife",
@@ -214,15 +322,25 @@
       "form": "finished",
       "economic_role": "tool",
       "purpose": "Provides the middle-tier Hunting and Leatherworking cutting tool.",
-      "region_keys": ["cross_region"],
-      "tags": ["tool", "knife", "steel"],
+      "region_keys": [
+        "cross_region"
+      ],
+      "tags": [
+        "tool",
+        "knife",
+        "steel"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "uncommon",
       "external_sources": [],
-      "external_sinks": [
-        {"relation_type": "tool_use", "detail": "Used by intermediate Hunting and Leatherworking actions."}
-      ],
-      "notes": null
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
+        {
+          "relation_type": "tool_use",
+          "detail": "Used by intermediate Hunting and Leatherworking actions."
+        }
+      ]
     },
     {
       "slot_id": "ms_item_steel_axe",
@@ -233,15 +351,25 @@
       "form": "finished",
       "economic_role": "tool",
       "purpose": "Carries Woodcutting through the middle progression bands without multiplying regional tool variants.",
-      "region_keys": ["cross_region"],
-      "tags": ["tool", "axe", "steel"],
+      "region_keys": [
+        "cross_region"
+      ],
+      "tags": [
+        "tool",
+        "axe",
+        "steel"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "uncommon",
       "external_sources": [],
-      "external_sinks": [
-        {"relation_type": "tool_use", "detail": "Used by intermediate and advanced Woodcutting actions."}
-      ],
-      "notes": null
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
+        {
+          "relation_type": "tool_use",
+          "detail": "Used by intermediate and advanced Woodcutting actions."
+        }
+      ]
     },
     {
       "slot_id": "ms_item_steel_pickaxe",
@@ -252,15 +380,27 @@
       "form": "finished",
       "economic_role": "tool",
       "purpose": "Supports the middle mining bands and provides a durable sink for steel and timber.",
-      "region_keys": ["thornfell", "emberholt", "cross_region"],
-      "tags": ["tool", "pickaxe", "steel"],
+      "region_keys": [
+        "thornfell",
+        "emberholt",
+        "cross_region"
+      ],
+      "tags": [
+        "tool",
+        "pickaxe",
+        "steel"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "uncommon",
       "external_sources": [],
-      "external_sinks": [
-        {"relation_type": "tool_use", "detail": "Used by dense iron and non-deep emberstone Mining actions."}
-      ],
-      "notes": null
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
+        {
+          "relation_type": "tool_use",
+          "detail": "Used by dense iron and non-deep emberstone Mining actions."
+        }
+      ]
     },
     {
       "slot_id": "ms_item_steel_arrowheads",
@@ -271,15 +411,20 @@
       "form": "processed",
       "economic_role": "component",
       "purpose": "Extends the recurring Smithing-to-Fletching ammunition loop into middle progression.",
-      "region_keys": ["cross_region"],
-      "tags": ["metal", "steel", "arrowhead"],
+      "region_keys": [
+        "cross_region"
+      ],
+      "tags": [
+        "metal",
+        "steel",
+        "arrowhead"
+      ],
       "cross_tier_role": "persistent",
       "rarity_role": "uncommon",
       "external_sources": [],
-      "external_sinks": [
-        {"relation_type": "system_use", "detail": "Consumed by Fletching recipes for durable ammunition."}
-      ],
-      "notes": null
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "ms_item_emberstone_arrowheads",
@@ -290,15 +435,22 @@
       "form": "finished",
       "economic_role": "component",
       "purpose": "Gives Ember Shards a focused weapon use while retaining Fletching as the ammunition-finishing skill.",
-      "region_keys": ["emberholt", "cross_region"],
-      "tags": ["metal", "emberstone", "arrowhead", "conductive"],
+      "region_keys": [
+        "emberholt",
+        "cross_region"
+      ],
+      "tags": [
+        "metal",
+        "emberstone",
+        "arrowhead",
+        "conductive"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "rare",
       "external_sources": [],
-      "external_sinks": [
-        {"relation_type": "system_use", "detail": "Consumed by Fletching recipes for specialized Emberholt ammunition."}
-      ],
-      "notes": "A mundane forged component with a canon conductive material; no quest or spellcasting prerequisite is implied."
+      "external_sinks": [],
+      "notes": "A mundane forged component with a canon conductive material; no quest or spellcasting prerequisite is implied.",
+      "external_uses": []
     },
     {
       "slot_id": "ms_item_ashsteel_knife",
@@ -309,15 +461,26 @@
       "form": "finished",
       "economic_role": "tool",
       "purpose": "Provides the capstone Hunting and Leatherworking knife without introducing a niche beast-specific tool.",
-      "region_keys": ["emberholt", "cross_region"],
-      "tags": ["tool", "knife", "ashsteel"],
+      "region_keys": [
+        "emberholt",
+        "cross_region"
+      ],
+      "tags": [
+        "tool",
+        "knife",
+        "ashsteel"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "rare",
       "external_sources": [],
-      "external_sinks": [
-        {"relation_type": "tool_use", "detail": "Used by high-band Hunting and Leatherworking actions."}
-      ],
-      "notes": null
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
+        {
+          "relation_type": "tool_use",
+          "detail": "Used by high-band Hunting and Leatherworking actions."
+        }
+      ]
     },
     {
       "slot_id": "ms_item_ashsteel_axe",
@@ -328,15 +491,26 @@
       "form": "finished",
       "economic_role": "tool",
       "purpose": "Provides a compact capstone Woodcutting tool and a final sink for the full metal chain.",
-      "region_keys": ["emberholt", "cross_region"],
-      "tags": ["tool", "axe", "ashsteel"],
+      "region_keys": [
+        "emberholt",
+        "cross_region"
+      ],
+      "tags": [
+        "tool",
+        "axe",
+        "ashsteel"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "rare",
       "external_sources": [],
-      "external_sinks": [
-        {"relation_type": "tool_use", "detail": "Used by high-band Woodcutting actions."}
-      ],
-      "notes": null
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
+        {
+          "relation_type": "tool_use",
+          "detail": "Used by high-band Woodcutting actions."
+        }
+      ]
     },
     {
       "slot_id": "ms_item_ashsteel_pickaxe",
@@ -347,15 +521,26 @@
       "form": "finished",
       "economic_role": "tool",
       "purpose": "Closes the capstone mining tool loop and gates only the deepest Emberholt action.",
-      "region_keys": ["emberholt", "cross_region"],
-      "tags": ["tool", "pickaxe", "ashsteel"],
+      "region_keys": [
+        "emberholt",
+        "cross_region"
+      ],
+      "tags": [
+        "tool",
+        "pickaxe",
+        "ashsteel"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "rare",
       "external_sources": [],
-      "external_sinks": [
-        {"relation_type": "tool_use", "detail": "Required by the deepest high-band Emberholt Mining action."}
-      ],
-      "notes": null
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
+        {
+          "relation_type": "tool_use",
+          "detail": "Required by the deepest high-band Emberholt Mining action."
+        }
+      ]
     },
     {
       "slot_id": "ms_item_ashsteel_arrowheads",
@@ -366,15 +551,21 @@
       "form": "processed",
       "economic_role": "component",
       "purpose": "Provides a recurring high-level Smithing sink through Fletching rather than a one-time equipment endpoint.",
-      "region_keys": ["emberholt", "cross_region"],
-      "tags": ["metal", "ashsteel", "arrowhead"],
+      "region_keys": [
+        "emberholt",
+        "cross_region"
+      ],
+      "tags": [
+        "metal",
+        "ashsteel",
+        "arrowhead"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "rare",
       "external_sources": [],
-      "external_sinks": [
-        {"relation_type": "system_use", "detail": "Consumed by Fletching recipes for capstone ammunition."}
-      ],
-      "notes": null
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": []
     }
   ],
   "gathering_actions": [
@@ -387,12 +578,28 @@
       "level_band": 1,
       "required_level": 1,
       "purpose": "Opens the shared Lowmark and Thornfell iron economy with one reusable action definition.",
-      "region_keys": ["lowmark", "thornfell"],
-      "outputs": [
-        {"item_key": "iron_ore", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null}
+      "region_keys": [
+        "lowmark",
+        "thornfell"
       ],
-      "tool_tags": ["pickaxe"],
-      "tool_item_keys": ["iron_pickaxe", "steel_pickaxe", "ashsteel_pickaxe"],
+      "outputs": [
+        {
+          "item_key": "iron_ore",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "pickaxe"
+      ],
+      "tool_item_keys": [
+        "iron_pickaxe",
+        "steel_pickaxe",
+        "ashsteel_pickaxe"
+      ],
       "notes": "Lowmark and Thornfell nodes preserve world identity while sharing the same progression mechanic."
     },
     {
@@ -404,12 +611,27 @@
       "level_band": 2,
       "required_level": 11,
       "purpose": "Improves iron yield without adding a redundant second ore item.",
-      "region_keys": ["thornfell"],
-      "outputs": [
-        {"item_key": "iron_ore", "quantity": 2, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null}
+      "region_keys": [
+        "thornfell"
       ],
-      "tool_tags": ["pickaxe"],
-      "tool_item_keys": ["iron_pickaxe", "steel_pickaxe", "ashsteel_pickaxe"],
+      "outputs": [
+        {
+          "item_key": "iron_ore",
+          "quantity": 2,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "pickaxe"
+      ],
+      "tool_item_keys": [
+        "iron_pickaxe",
+        "steel_pickaxe",
+        "ashsteel_pickaxe"
+      ],
       "notes": null
     },
     {
@@ -421,12 +643,26 @@
       "level_band": 3,
       "required_level": 21,
       "purpose": "Introduces Emberholt's conductive mineral as a later input while keeping the output deterministic.",
-      "region_keys": ["emberholt"],
-      "outputs": [
-        {"item_key": "emberstone", "quantity": 1, "mode": "guaranteed", "rarity_role": "uncommon", "condition_tag": null, "rng_rationale": null}
+      "region_keys": [
+        "emberholt"
       ],
-      "tool_tags": ["pickaxe"],
-      "tool_item_keys": ["steel_pickaxe", "ashsteel_pickaxe"],
+      "outputs": [
+        {
+          "item_key": "emberstone",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "uncommon",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "pickaxe"
+      ],
+      "tool_item_keys": [
+        "steel_pickaxe",
+        "ashsteel_pickaxe"
+      ],
       "notes": "Separate Emberholt nodes can reuse this action without duplicating yield logic."
     },
     {
@@ -438,12 +674,26 @@
       "level_band": 4,
       "required_level": 31,
       "purpose": "Supplies a focused rare component for advanced weapon fittings and Ashsteel.",
-      "region_keys": ["emberholt"],
-      "outputs": [
-        {"item_key": "emberstone_shard", "quantity": 1, "mode": "guaranteed", "rarity_role": "rare", "condition_tag": null, "rng_rationale": null}
+      "region_keys": [
+        "emberholt"
       ],
-      "tool_tags": ["pickaxe"],
-      "tool_item_keys": ["steel_pickaxe", "ashsteel_pickaxe"],
+      "outputs": [
+        {
+          "item_key": "emberstone_shard",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "rare",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "pickaxe"
+      ],
+      "tool_item_keys": [
+        "steel_pickaxe",
+        "ashsteel_pickaxe"
+      ],
       "notes": "Rarity is expressed through access and progression, not a random drop roll."
     },
     {
@@ -455,13 +705,34 @@
       "level_band": 5,
       "required_level": 41,
       "purpose": "Raises deterministic throughput and demonstrates one action with multiple guaranteed outputs.",
-      "region_keys": ["emberholt"],
-      "outputs": [
-        {"item_key": "emberstone", "quantity": 2, "mode": "guaranteed", "rarity_role": "uncommon", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "emberstone_shard", "quantity": 1, "mode": "guaranteed", "rarity_role": "rare", "condition_tag": null, "rng_rationale": null}
+      "region_keys": [
+        "emberholt"
       ],
-      "tool_tags": ["pickaxe"],
-      "tool_item_keys": ["steel_pickaxe", "ashsteel_pickaxe"],
+      "outputs": [
+        {
+          "item_key": "emberstone",
+          "quantity": 2,
+          "mode": "guaranteed",
+          "rarity_role": "uncommon",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "emberstone_shard",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "rare",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "pickaxe"
+      ],
+      "tool_item_keys": [
+        "steel_pickaxe",
+        "ashsteel_pickaxe"
+      ],
       "notes": null
     },
     {
@@ -473,13 +744,33 @@
       "level_band": 6,
       "required_level": 51,
       "purpose": "Provides the capstone deterministic source for the recurring Ashsteel chain.",
-      "region_keys": ["emberholt"],
-      "outputs": [
-        {"item_key": "emberstone", "quantity": 3, "mode": "guaranteed", "rarity_role": "uncommon", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "emberstone_shard", "quantity": 2, "mode": "guaranteed", "rarity_role": "rare", "condition_tag": null, "rng_rationale": null}
+      "region_keys": [
+        "emberholt"
       ],
-      "tool_tags": ["pickaxe"],
-      "tool_item_keys": ["ashsteel_pickaxe"],
+      "outputs": [
+        {
+          "item_key": "emberstone",
+          "quantity": 3,
+          "mode": "guaranteed",
+          "rarity_role": "uncommon",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "emberstone_shard",
+          "quantity": 2,
+          "mode": "guaranteed",
+          "rarity_role": "rare",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "pickaxe"
+      ],
+      "tool_item_keys": [
+        "ashsteel_pickaxe"
+      ],
       "notes": "No Glassed Hollow or quest access is assumed."
     }
   ],
@@ -607,11 +898,26 @@
       "level_band": 1,
       "required_level": 1,
       "purpose": "Establishes the base metal transformation shared by every later Smithing branch.",
-      "region_keys": ["lowmark", "thornfell"],
-      "inputs": [{"item_key": "iron_ore", "quantity": 1}],
-      "outputs": [{"item_key": "iron_bar", "quantity": 1}],
+      "region_keys": [
+        "lowmark",
+        "thornfell"
+      ],
+      "inputs": [
+        {
+          "item_key": "iron_ore",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "iron_bar",
+          "quantity": 1
+        }
+      ],
       "station_tag": "furnace",
-      "cross_skill_links": ["mining"],
+      "cross_skill_links": [
+        "mining"
+      ],
       "notes": null
     },
     {
@@ -623,11 +929,27 @@
       "level_band": 1,
       "required_level": 2,
       "purpose": "Supplies an early tool used by Hunting and Leatherworking.",
-      "region_keys": ["cross_region"],
-      "inputs": [{"item_key": "iron_bar", "quantity": 1}],
-      "outputs": [{"item_key": "iron_knife", "quantity": 1}],
+      "region_keys": [
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "iron_bar",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "iron_knife",
+          "quantity": 1
+        }
+      ],
       "station_tag": "anvil",
-      "cross_skill_links": ["mining", "hunting", "leatherworking"],
+      "cross_skill_links": [
+        "mining",
+        "hunting",
+        "leatherworking"
+      ],
       "notes": null
     },
     {
@@ -639,11 +961,30 @@
       "level_band": 1,
       "required_level": 4,
       "purpose": "Creates the first Smithing-to-Woodcutting tool connection.",
-      "region_keys": ["cross_region"],
-      "inputs": [{"item_key": "iron_bar", "quantity": 1}, {"item_key": "common_timber", "quantity": 1}],
-      "outputs": [{"item_key": "iron_axe", "quantity": 1}],
+      "region_keys": [
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "iron_bar",
+          "quantity": 1
+        },
+        {
+          "item_key": "common_timber",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "iron_axe",
+          "quantity": 1
+        }
+      ],
       "station_tag": "anvil",
-      "cross_skill_links": ["mining", "woodcutting"],
+      "cross_skill_links": [
+        "mining",
+        "woodcutting"
+      ],
       "notes": null
     },
     {
@@ -655,11 +996,30 @@
       "level_band": 1,
       "required_level": 6,
       "purpose": "Closes the early Mining-to-Smithing feedback loop.",
-      "region_keys": ["cross_region"],
-      "inputs": [{"item_key": "iron_bar", "quantity": 2}, {"item_key": "common_timber", "quantity": 1}],
-      "outputs": [{"item_key": "iron_pickaxe", "quantity": 1}],
+      "region_keys": [
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "iron_bar",
+          "quantity": 2
+        },
+        {
+          "item_key": "common_timber",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "iron_pickaxe",
+          "quantity": 1
+        }
+      ],
       "station_tag": "anvil",
-      "cross_skill_links": ["mining", "woodcutting"],
+      "cross_skill_links": [
+        "mining",
+        "woodcutting"
+      ],
       "notes": null
     },
     {
@@ -671,11 +1031,26 @@
       "level_band": 1,
       "required_level": 8,
       "purpose": "Creates a repeatable early Smithing sink through Fletching ammunition.",
-      "region_keys": ["cross_region"],
-      "inputs": [{"item_key": "iron_bar", "quantity": 1}],
-      "outputs": [{"item_key": "iron_arrowheads", "quantity": 15}],
+      "region_keys": [
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "iron_bar",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "iron_arrowheads",
+          "quantity": 15
+        }
+      ],
       "station_tag": "anvil",
-      "cross_skill_links": ["mining", "fletching"],
+      "cross_skill_links": [
+        "mining",
+        "fletching"
+      ],
       "notes": null
     },
     {
@@ -687,11 +1062,26 @@
       "level_band": 2,
       "required_level": 11,
       "purpose": "Extends common iron into the durable middle tier without adding a single-purpose fuel item.",
-      "region_keys": ["thornfell", "emberholt"],
-      "inputs": [{"item_key": "iron_bar", "quantity": 2}],
-      "outputs": [{"item_key": "steel_bar", "quantity": 1}],
+      "region_keys": [
+        "thornfell",
+        "emberholt"
+      ],
+      "inputs": [
+        {
+          "item_key": "iron_bar",
+          "quantity": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "steel_bar",
+          "quantity": 1
+        }
+      ],
       "station_tag": "forge",
-      "cross_skill_links": ["mining"],
+      "cross_skill_links": [
+        "mining"
+      ],
       "notes": "Forge fuel and carbon treatment are station-supplied process costs rather than inventory items."
     },
     {
@@ -703,11 +1093,29 @@
       "level_band": 2,
       "required_level": 14,
       "purpose": "Upgrades the shared Hunting and Leatherworking cutting tool.",
-      "region_keys": ["thornfell", "emberholt", "cross_region"],
-      "inputs": [{"item_key": "steel_bar", "quantity": 1}],
-      "outputs": [{"item_key": "steel_knife", "quantity": 1}],
+      "region_keys": [
+        "thornfell",
+        "emberholt",
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "steel_bar",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "steel_knife",
+          "quantity": 1
+        }
+      ],
       "station_tag": "anvil",
-      "cross_skill_links": ["mining", "hunting", "leatherworking"],
+      "cross_skill_links": [
+        "mining",
+        "hunting",
+        "leatherworking"
+      ],
       "notes": null
     },
     {
@@ -719,11 +1127,26 @@
       "level_band": 2,
       "required_level": 18,
       "purpose": "Maintains a recurring middle-tier metal sink through Fletching.",
-      "region_keys": ["cross_region"],
-      "inputs": [{"item_key": "steel_bar", "quantity": 1}],
-      "outputs": [{"item_key": "steel_arrowheads", "quantity": 15}],
+      "region_keys": [
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "steel_bar",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "steel_arrowheads",
+          "quantity": 15
+        }
+      ],
       "station_tag": "anvil",
-      "cross_skill_links": ["mining", "fletching"],
+      "cross_skill_links": [
+        "mining",
+        "fletching"
+      ],
       "notes": null
     },
     {
@@ -735,11 +1158,32 @@
       "level_band": 3,
       "required_level": 21,
       "purpose": "Carries the Smithing-to-Woodcutting tool connection into middle progression.",
-      "region_keys": ["thornfell", "emberholt", "cross_region"],
-      "inputs": [{"item_key": "steel_bar", "quantity": 1}, {"item_key": "common_timber", "quantity": 1}],
-      "outputs": [{"item_key": "steel_axe", "quantity": 1}],
+      "region_keys": [
+        "thornfell",
+        "emberholt",
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "steel_bar",
+          "quantity": 1
+        },
+        {
+          "item_key": "common_timber",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "steel_axe",
+          "quantity": 1
+        }
+      ],
       "station_tag": "anvil",
-      "cross_skill_links": ["mining", "woodcutting"],
+      "cross_skill_links": [
+        "mining",
+        "woodcutting"
+      ],
       "notes": null
     },
     {
@@ -751,11 +1195,32 @@
       "level_band": 3,
       "required_level": 25,
       "purpose": "Unlocks the durable Mining tool needed for Emberholt progression.",
-      "region_keys": ["thornfell", "emberholt", "cross_region"],
-      "inputs": [{"item_key": "steel_bar", "quantity": 2}, {"item_key": "common_timber", "quantity": 1}],
-      "outputs": [{"item_key": "steel_pickaxe", "quantity": 1}],
+      "region_keys": [
+        "thornfell",
+        "emberholt",
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "steel_bar",
+          "quantity": 2
+        },
+        {
+          "item_key": "common_timber",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "steel_pickaxe",
+          "quantity": 1
+        }
+      ],
       "station_tag": "anvil",
-      "cross_skill_links": ["mining", "woodcutting"],
+      "cross_skill_links": [
+        "mining",
+        "woodcutting"
+      ],
       "notes": null
     },
     {
@@ -767,11 +1232,27 @@
       "level_band": 1,
       "required_level": 9,
       "purpose": "Keeps basic iron relevant in later repair, mechanisms, and fabrication economies.",
-      "region_keys": ["cross_region"],
-      "inputs": [{"item_key": "iron_bar", "quantity": 1}],
-      "outputs": [{"item_key": "iron_fasteners", "quantity": 10}],
+      "region_keys": [
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "iron_bar",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "iron_fasteners",
+          "quantity": 10
+        }
+      ],
       "station_tag": "anvil",
-      "cross_skill_links": ["mining", "mechanisms", "fabrication"],
+      "cross_skill_links": [
+        "mining",
+        "mechanisms",
+        "fabrication"
+      ],
       "notes": null
     },
     {
@@ -783,11 +1264,30 @@
       "level_band": 4,
       "required_level": 31,
       "purpose": "Creates a focused recurring sink for Ember Shards while leaving final ammunition to Fletching.",
-      "region_keys": ["emberholt"],
-      "inputs": [{"item_key": "steel_arrowheads", "quantity": 15}, {"item_key": "emberstone", "quantity": 1}],
-      "outputs": [{"item_key": "emberstone_arrowheads", "quantity": 15}],
+      "region_keys": [
+        "emberholt"
+      ],
+      "inputs": [
+        {
+          "item_key": "steel_arrowheads",
+          "quantity": 15
+        },
+        {
+          "item_key": "emberstone",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "emberstone_arrowheads",
+          "quantity": 15
+        }
+      ],
       "station_tag": "emberforge",
-      "cross_skill_links": ["mining", "fletching"],
+      "cross_skill_links": [
+        "mining",
+        "fletching"
+      ],
       "notes": null
     },
     {
@@ -799,11 +1299,33 @@
       "level_band": 5,
       "required_level": 41,
       "purpose": "Connects early iron, middle steel, and Emberholt mining into one canon capstone material.",
-      "region_keys": ["emberholt"],
-      "inputs": [{"item_key": "steel_bar", "quantity": 2}, {"item_key": "emberstone", "quantity": 1}, {"item_key": "emberstone_shard", "quantity": 1}],
-      "outputs": [{"item_key": "ashsteel_bar", "quantity": 1}],
+      "region_keys": [
+        "emberholt"
+      ],
+      "inputs": [
+        {
+          "item_key": "steel_bar",
+          "quantity": 2
+        },
+        {
+          "item_key": "emberstone",
+          "quantity": 1
+        },
+        {
+          "item_key": "emberstone_shard",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "ashsteel_bar",
+          "quantity": 1
+        }
+      ],
       "station_tag": "emberforge",
-      "cross_skill_links": ["mining"],
+      "cross_skill_links": [
+        "mining"
+      ],
       "notes": "The recipe expresses the canon alloy relationship without making Ashsteel directly gatherable."
     },
     {
@@ -815,11 +1337,27 @@
       "level_band": 6,
       "required_level": 51,
       "purpose": "Provides the capstone shared Hunting and Leatherworking knife.",
-      "region_keys": ["emberholt"],
-      "inputs": [{"item_key": "ashsteel_bar", "quantity": 1}],
-      "outputs": [{"item_key": "ashsteel_knife", "quantity": 1}],
+      "region_keys": [
+        "emberholt"
+      ],
+      "inputs": [
+        {
+          "item_key": "ashsteel_bar",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "ashsteel_knife",
+          "quantity": 1
+        }
+      ],
       "station_tag": "emberforge",
-      "cross_skill_links": ["mining", "hunting", "leatherworking"],
+      "cross_skill_links": [
+        "mining",
+        "hunting",
+        "leatherworking"
+      ],
       "notes": null
     },
     {
@@ -831,11 +1369,31 @@
       "level_band": 6,
       "required_level": 53,
       "purpose": "Provides the capstone Smithing-to-Woodcutting tool and retains common timber demand.",
-      "region_keys": ["emberholt", "cross_region"],
-      "inputs": [{"item_key": "ashsteel_bar", "quantity": 1}, {"item_key": "common_timber", "quantity": 1}],
-      "outputs": [{"item_key": "ashsteel_axe", "quantity": 1}],
+      "region_keys": [
+        "emberholt",
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "ashsteel_bar",
+          "quantity": 1
+        },
+        {
+          "item_key": "common_timber",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "ashsteel_axe",
+          "quantity": 1
+        }
+      ],
       "station_tag": "emberforge",
-      "cross_skill_links": ["mining", "woodcutting"],
+      "cross_skill_links": [
+        "mining",
+        "woodcutting"
+      ],
       "notes": null
     },
     {
@@ -847,11 +1405,31 @@
       "level_band": 6,
       "required_level": 51,
       "purpose": "Closes the capstone Mining tool loop without requiring a quest material.",
-      "region_keys": ["emberholt", "cross_region"],
-      "inputs": [{"item_key": "ashsteel_bar", "quantity": 2}, {"item_key": "common_timber", "quantity": 1}],
-      "outputs": [{"item_key": "ashsteel_pickaxe", "quantity": 1}],
+      "region_keys": [
+        "emberholt",
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "ashsteel_bar",
+          "quantity": 2
+        },
+        {
+          "item_key": "common_timber",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "ashsteel_pickaxe",
+          "quantity": 1
+        }
+      ],
       "station_tag": "emberforge",
-      "cross_skill_links": ["mining", "woodcutting"],
+      "cross_skill_links": [
+        "mining",
+        "woodcutting"
+      ],
       "notes": null
     },
     {
@@ -863,11 +1441,27 @@
       "level_band": 6,
       "required_level": 57,
       "purpose": "Creates a recurring high-level Ashsteel sink through Fletching ammunition.",
-      "region_keys": ["emberholt", "cross_region"],
-      "inputs": [{"item_key": "ashsteel_bar", "quantity": 1}],
-      "outputs": [{"item_key": "ashsteel_arrowheads", "quantity": 15}],
+      "region_keys": [
+        "emberholt",
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "ashsteel_bar",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "ashsteel_arrowheads",
+          "quantity": 15
+        }
+      ],
       "station_tag": "emberforge",
-      "cross_skill_links": ["mining", "fletching"],
+      "cross_skill_links": [
+        "mining",
+        "fletching"
+      ],
       "notes": null
     }
   ]

@@ -11,13 +11,23 @@
       "form": "raw",
       "economic_role": "raw_material",
       "purpose": "Persistent Hunting output that supports Cooking from first lessons through master provisions.",
-      "region_keys": ["lowmark", "thornfell", "mire", "emberholt"],
-      "tags": ["biological", "meat", "food"],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "tags": [
+        "biological",
+        "meat",
+        "food"
+      ],
       "cross_tier_role": "persistent",
       "rarity_role": "common",
       "external_sources": [],
       "external_sinks": [],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "raw_hide_item",
@@ -28,13 +38,22 @@
       "form": "raw",
       "economic_role": "raw_material",
       "purpose": "The common structural input for Caelmor's grounded leather progression.",
-      "region_keys": ["lowmark", "thornfell", "mire"],
-      "tags": ["biological", "hide", "leather"],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire"
+      ],
+      "tags": [
+        "biological",
+        "hide",
+        "leather"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "common",
       "external_sources": [],
       "external_sinks": [],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "sinew_item",
@@ -45,13 +64,23 @@
       "form": "raw",
       "economic_role": "raw_material",
       "purpose": "A common Hunting input processed promptly into durable biological cord.",
-      "region_keys": ["lowmark", "thornfell", "mire", "emberholt"],
-      "tags": ["biological", "binding", "fletching"],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "tags": [
+        "biological",
+        "binding",
+        "fletching"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "common",
       "external_sources": [],
       "external_sinks": [],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "animal_fat_item",
@@ -62,13 +91,23 @@
       "form": "raw",
       "economic_role": "raw_material",
       "purpose": "A cross-skill Hunting output consumed by both Cooking and Leatherworking across progression.",
-      "region_keys": ["lowmark", "thornfell", "mire", "emberholt"],
-      "tags": ["biological", "cooking", "leather"],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "tags": [
+        "biological",
+        "cooking",
+        "leather"
+      ],
       "cross_tier_role": "persistent",
       "rarity_role": "common",
       "external_sources": [],
       "external_sinks": [],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "dense_bone_item",
@@ -79,13 +118,23 @@
       "form": "raw",
       "economic_role": "raw_material",
       "purpose": "Supports a compact tool-making link inside Leatherworking and Mire's grounded bonecraft tradition.",
-      "region_keys": ["lowmark", "thornfell", "mire", "emberholt"],
-      "tags": ["biological", "bone", "tool_material"],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "tags": [
+        "biological",
+        "bone",
+        "tool_material"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "common",
       "external_sources": [],
       "external_sinks": [],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "ridge_wool_item",
@@ -96,13 +145,20 @@
       "form": "raw",
       "economic_role": "raw_material",
       "purpose": "Carries Thornfell's canon goat-wool economy into protective Leatherworking.",
-      "region_keys": ["thornfell"],
-      "tags": ["biological", "wool", "insulation"],
+      "region_keys": [
+        "thornfell"
+      ],
+      "tags": [
+        "biological",
+        "wool",
+        "insulation"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "uncommon",
       "external_sources": [],
       "external_sinks": [],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "fletching_feathers_item",
@@ -113,18 +169,28 @@
       "form": "raw",
       "economic_role": "raw_material",
       "purpose": "A Hunting output that supplies the canon Hunting-to-Fletching ammunition loop without species-specific clutter.",
-      "region_keys": ["lowmark", "thornfell", "mire", "emberholt"],
-      "tags": ["biological", "feather", "fletching"],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "tags": [
+        "biological",
+        "feather",
+        "fletching"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "common",
-      "external_sources": [{"relation_type": "shop", "detail": "Ordinary game-bird feathers enter early trade before hunters can reliably pursue highland birds."}],
-      "external_sinks": [
+      "external_sources": [
         {
-          "relation_type": "system_use",
-          "detail": "Consumed as stable fletching for arrows and bolts."
+          "relation_type": "shop",
+          "detail": "Ordinary game-bird feathers enter early trade before hunters can reliably pursue highland birds."
         }
       ],
-      "notes": null
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "sinew_cord_item",
@@ -135,18 +201,23 @@
       "form": "processed",
       "economic_role": "component",
       "purpose": "A persistent processed Hunting component shared by Leatherworking and Fletching.",
-      "region_keys": ["lowmark", "thornfell", "mire", "emberholt"],
-      "tags": ["biological", "binding", "fletching"],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "tags": [
+        "biological",
+        "binding",
+        "fletching"
+      ],
       "cross_tier_role": "persistent",
       "rarity_role": "common",
       "external_sources": [],
-      "external_sinks": [
-        {
-          "relation_type": "system_use",
-          "detail": "Consumed by Fletching recipes that require flexible biological bindings."
-        }
-      ],
-      "notes": null
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "ember_hardened_hide_item",
@@ -157,13 +228,20 @@
       "form": "raw",
       "economic_role": "raw_material",
       "purpose": "A focused late Leatherworking material grounded in Emberholt's canon fauna.",
-      "region_keys": ["emberholt"],
-      "tags": ["biological", "hide", "heat_resistant"],
+      "region_keys": [
+        "emberholt"
+      ],
+      "tags": [
+        "biological",
+        "hide",
+        "heat_resistant"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "rare",
       "external_sources": [],
       "external_sinks": [],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "seared_game_meat_item",
@@ -174,8 +252,15 @@
       "form": "finished",
       "economic_role": "consumable",
       "purpose": "The first dependable Cooking recovery food.",
-      "region_keys": ["lowmark", "thornfell"],
-      "tags": ["food", "recovery", "basic"],
+      "region_keys": [
+        "lowmark",
+        "thornfell"
+      ],
+      "tags": [
+        "food",
+        "recovery",
+        "basic"
+      ],
       "cross_tier_role": "none",
       "rarity_role": "common",
       "external_sources": [],
@@ -185,7 +270,8 @@
           "detail": "Consumed for basic post-encounter recovery."
         }
       ],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "dried_game_strips_item",
@@ -196,8 +282,16 @@
       "form": "finished",
       "economic_role": "consumable",
       "purpose": "An early preserved food that also remains an input to later trail provisions.",
-      "region_keys": ["lowmark", "thornfell", "mire"],
-      "tags": ["food", "preserved", "travel"],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire"
+      ],
+      "tags": [
+        "food",
+        "preserved",
+        "travel"
+      ],
       "cross_tier_role": "persistent",
       "rarity_role": "common",
       "external_sources": [],
@@ -207,7 +301,8 @@
           "detail": "Consumed as a durable travel ration."
         }
       ],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "hunter_roast_item",
@@ -218,8 +313,15 @@
       "form": "finished",
       "economic_role": "consumable",
       "purpose": "A more substantial mid-progression recovery meal using two Hunting outputs.",
-      "region_keys": ["lowmark", "mire"],
-      "tags": ["food", "recovery", "meal"],
+      "region_keys": [
+        "lowmark",
+        "mire"
+      ],
+      "tags": [
+        "food",
+        "recovery",
+        "meal"
+      ],
       "cross_tier_role": "none",
       "rarity_role": "uncommon",
       "external_sources": [],
@@ -229,7 +331,8 @@
           "detail": "Consumed as a substantial recovery meal."
         }
       ],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "crisp_game_portion_item",
@@ -240,8 +343,17 @@
       "form": "finished",
       "economic_role": "consumable",
       "purpose": "A portable mid-to-late Cooking preparation that works with meat from any region.",
-      "region_keys": ["lowmark", "thornfell", "mire", "emberholt"],
-      "tags": ["food", "portable", "meal"],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "tags": [
+        "food",
+        "portable",
+        "meal"
+      ],
       "cross_tier_role": "none",
       "rarity_role": "uncommon",
       "external_sources": [],
@@ -251,7 +363,8 @@
           "detail": "Consumed as a portable prepared meal."
         }
       ],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "trail_pemmican_item",
@@ -262,8 +375,14 @@
       "form": "finished",
       "economic_role": "consumable",
       "purpose": "A late expedition ration that deliberately reuses early salted meat.",
-      "region_keys": ["cross_region"],
-      "tags": ["food", "preserved", "expedition"],
+      "region_keys": [
+        "cross_region"
+      ],
+      "tags": [
+        "food",
+        "preserved",
+        "expedition"
+      ],
       "cross_tier_role": "none",
       "rarity_role": "uncommon",
       "external_sources": [],
@@ -273,7 +392,8 @@
           "detail": "Consumed to support long expeditions with little food preparation."
         }
       ],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "master_hunter_feast_item",
@@ -284,8 +404,14 @@
       "form": "finished",
       "economic_role": "consumable",
       "purpose": "The capstone Cooking sink for common game meat and fat rather than a disconnected rare ingredient.",
-      "region_keys": ["cross_region"],
-      "tags": ["food", "preparation", "feast"],
+      "region_keys": [
+        "cross_region"
+      ],
+      "tags": [
+        "food",
+        "preparation",
+        "feast"
+      ],
       "cross_tier_role": "none",
       "rarity_role": "rare",
       "external_sources": [],
@@ -295,7 +421,8 @@
           "detail": "Consumed as a high-preparation meal before difficult activity."
         }
       ],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "cured_leather_item",
@@ -306,13 +433,23 @@
       "form": "processed",
       "economic_role": "component",
       "purpose": "The persistent common framework for light protection, quivers, straps, and field gear.",
-      "region_keys": ["lowmark", "thornfell", "mire", "emberholt"],
-      "tags": ["leather", "armor", "fletching"],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "tags": [
+        "leather",
+        "armor",
+        "fletching"
+      ],
       "cross_tier_role": "persistent",
       "rarity_role": "common",
       "external_sources": [],
       "external_sinks": [],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "leather_strap_item",
@@ -323,18 +460,23 @@
       "form": "processed",
       "economic_role": "component",
       "purpose": "A persistent low-level component reused throughout Leatherworking progression.",
-      "region_keys": ["lowmark", "thornfell", "mire", "emberholt"],
-      "tags": ["leather", "binding", "strap"],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "tags": [
+        "leather",
+        "binding",
+        "strap"
+      ],
       "cross_tier_role": "persistent",
       "rarity_role": "common",
       "external_sources": [],
-      "external_sinks": [
-        {
-          "relation_type": "system_use",
-          "detail": "Used by equipment repair and practical field fastening outside modeled recipes."
-        }
-      ],
-      "notes": null
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "bone_leatherworking_awl_item",
@@ -345,18 +487,27 @@
       "form": "finished",
       "economic_role": "tool",
       "purpose": "A grounded craft tool that gives common bone and sinew a practical early sink.",
-      "region_keys": ["lowmark", "thornfell", "mire"],
-      "tags": ["tool", "leatherworking", "bone"],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire"
+      ],
+      "tags": [
+        "tool",
+        "leatherworking",
+        "bone"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "common",
       "external_sources": [],
-      "external_sinks": [
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
         {
           "relation_type": "tool_use",
           "detail": "Used for piercing, stitching, and repairing leather goods."
         }
-      ],
-      "notes": null
+      ]
     },
     {
       "slot_id": "hide_jerkin_item",
@@ -367,18 +518,26 @@
       "form": "finished",
       "economic_role": "equipment",
       "purpose": "The first complete light-armor output in the canon crude-hide-to-leather path.",
-      "region_keys": ["lowmark", "thornfell"],
-      "tags": ["armor", "light_armor", "leather"],
+      "region_keys": [
+        "lowmark",
+        "thornfell"
+      ],
+      "tags": [
+        "armor",
+        "light_armor",
+        "leather"
+      ],
       "cross_tier_role": "none",
       "rarity_role": "common",
       "external_sources": [],
-      "external_sinks": [
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
         {
           "relation_type": "equipment_use",
           "detail": "Equipped as basic flexible body protection."
         }
-      ],
-      "notes": null
+      ]
     },
     {
       "slot_id": "field_quiver_item",
@@ -389,18 +548,26 @@
       "form": "finished",
       "economic_role": "equipment",
       "purpose": "A direct Leatherworking connection to the ranged progression loop.",
-      "region_keys": ["lowmark", "thornfell"],
-      "tags": ["equipment", "quiver", "ranged"],
+      "region_keys": [
+        "lowmark",
+        "thornfell"
+      ],
+      "tags": [
+        "equipment",
+        "quiver",
+        "ranged"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "common",
       "external_sources": [],
-      "external_sinks": [
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
         {
           "relation_type": "equipment_use",
           "detail": "Equipped to carry ranged ammunition."
         }
-      ],
-      "notes": null
+      ]
     },
     {
       "slot_id": "ridge_wool_lining_item",
@@ -411,13 +578,20 @@
       "form": "processed",
       "economic_role": "component",
       "purpose": "Converts a regional raw material into a later environmental-resistance equipment input.",
-      "region_keys": ["thornfell"],
-      "tags": ["wool", "insulation", "armor_component"],
+      "region_keys": [
+        "thornfell"
+      ],
+      "tags": [
+        "wool",
+        "insulation",
+        "armor_component"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "uncommon",
       "external_sources": [],
       "external_sinks": [],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "fletchers_bracer_item",
@@ -428,18 +602,25 @@
       "form": "finished",
       "economic_role": "equipment",
       "purpose": "Supports the canon Leatherworking-to-Fletching relationship with a reusable ranged accessory.",
-      "region_keys": ["thornfell"],
-      "tags": ["equipment", "bracer", "ranged"],
+      "region_keys": [
+        "thornfell"
+      ],
+      "tags": [
+        "equipment",
+        "bracer",
+        "ranged"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "uncommon",
       "external_sources": [],
-      "external_sinks": [
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
         {
           "relation_type": "equipment_use",
           "detail": "Equipped to protect the bow arm and steady repeated ranged preparation."
         }
-      ],
-      "notes": null
+      ]
     },
     {
       "slot_id": "weatherproof_leathers_item",
@@ -450,18 +631,26 @@
       "form": "finished",
       "economic_role": "equipment",
       "purpose": "A mid-progression environmental-resistance set grounded in Thornfell craft and regional travel.",
-      "region_keys": ["thornfell", "mire"],
-      "tags": ["armor", "light_armor", "weatherproof"],
+      "region_keys": [
+        "thornfell",
+        "mire"
+      ],
+      "tags": [
+        "armor",
+        "light_armor",
+        "weatherproof"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "uncommon",
       "external_sources": [],
-      "external_sinks": [
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
         {
           "relation_type": "equipment_use",
           "detail": "Equipped for practical protection in cold, wet, or exposed terrain."
         }
-      ],
-      "notes": null
+      ]
     },
     {
       "slot_id": "reinforced_field_harness_item",
@@ -472,18 +661,56 @@
       "form": "finished",
       "economic_role": "equipment",
       "purpose": "A cross-region utility equipment sink for persistent early Leatherworking materials.",
-      "region_keys": ["cross_region"],
-      "tags": ["equipment", "harness", "gathering"],
+      "region_keys": [
+        "cross_region"
+      ],
+      "tags": [
+        "equipment",
+        "harness",
+        "gathering"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "uncommon",
       "external_sources": [],
-      "external_sinks": [
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
         {
           "relation_type": "equipment_use",
           "detail": "Equipped to organize and secure practical gathering gear."
         }
+      ]
+    },
+    {
+      "slot_id": "cooked_fish_item",
+      "key": "cooked_fish",
+      "display_name": "Cooked Fish",
+      "description": "Fresh catch prepared thoroughly over a cooking fire for dependable recovery food.",
+      "category": "sustenance_sources",
+      "form": "finished",
+      "economic_role": "consumable",
+      "purpose": "Provides Angling's canonical Cooking link without species-specific dish clutter.",
+      "region_keys": [
+        "lowmark",
+        "mire",
+        "cross_region"
       ],
-      "notes": null
+      "tags": [
+        "food",
+        "fish",
+        "recovery"
+      ],
+      "cross_tier_role": "limited",
+      "rarity_role": "common",
+      "external_sources": [],
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "Consumed as prepared recovery food."
+        }
+      ],
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "emberplate_leathers_item",
@@ -494,18 +721,25 @@
       "form": "finished",
       "economic_role": "equipment",
       "purpose": "The late Leatherworking capstone and principal sink for Emberholt's emberback-boar hide.",
-      "region_keys": ["emberholt"],
-      "tags": ["armor", "light_armor", "heat_resistant"],
+      "region_keys": [
+        "emberholt"
+      ],
+      "tags": [
+        "armor",
+        "light_armor",
+        "heat_resistant"
+      ],
       "cross_tier_role": "none",
       "rarity_role": "rare",
       "external_sources": [],
-      "external_sinks": [
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
         {
           "relation_type": "equipment_use",
           "detail": "Equipped as flexible protection for Emberholt's severe heat and industrial hazards."
         }
-      ],
-      "notes": null
+      ]
     }
   ],
   "gathering_actions": [
@@ -518,16 +752,59 @@
       "level_band": 1,
       "required_level": 1,
       "purpose": "Introduces the complete meat, hide, sinew, fat, and bone loop with predictable output.",
-      "region_keys": ["lowmark", "thornfell"],
-      "outputs": [
-        {"item_key": "game_meat", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "raw_hide", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "sinew", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "animal_fat", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "dense_bone", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null}
+      "region_keys": [
+        "lowmark",
+        "thornfell"
       ],
-      "tool_tags": ["knife", "field_dressing"],
-      "tool_item_keys": ["iron_knife"],
+      "outputs": [
+        {
+          "item_key": "game_meat",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "raw_hide",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "sinew",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "animal_fat",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "dense_bone",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "knife",
+        "field_dressing"
+      ],
+      "tool_item_keys": [
+        "iron_knife"
+      ],
       "notes": "The concrete animal remains a world-node identity; the gathered materials stay compact and reusable."
     },
     {
@@ -539,17 +816,67 @@
       "level_band": 2,
       "required_level": 11,
       "purpose": "Adds Thornfell's canon goat wool without splitting common meat and hide into regional duplicates.",
-      "region_keys": ["thornfell"],
-      "outputs": [
-        {"item_key": "game_meat", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "raw_hide", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "sinew", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "animal_fat", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "dense_bone", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "ridge_wool", "quantity": 1, "mode": "guaranteed", "rarity_role": "uncommon", "condition_tag": null, "rng_rationale": null}
+      "region_keys": [
+        "thornfell"
       ],
-      "tool_tags": ["knife", "field_dressing"],
-      "tool_item_keys": ["iron_knife", "steel_knife"],
+      "outputs": [
+        {
+          "item_key": "game_meat",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "raw_hide",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "sinew",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "animal_fat",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "dense_bone",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "ridge_wool",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "uncommon",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "knife",
+        "field_dressing"
+      ],
+      "tool_item_keys": [
+        "iron_knife",
+        "steel_knife"
+      ],
       "notes": null
     },
     {
@@ -561,16 +888,58 @@
       "level_band": 3,
       "required_level": 21,
       "purpose": "Extends common biological supply through a region where Hunting canonically thrives.",
-      "region_keys": ["mire"],
-      "outputs": [
-        {"item_key": "game_meat", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "raw_hide", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "sinew", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "animal_fat", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "dense_bone", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null}
+      "region_keys": [
+        "mire"
       ],
-      "tool_tags": ["knife", "field_dressing"],
-      "tool_item_keys": ["steel_knife"],
+      "outputs": [
+        {
+          "item_key": "game_meat",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "raw_hide",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "sinew",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "animal_fat",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "dense_bone",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "knife",
+        "field_dressing"
+      ],
+      "tool_item_keys": [
+        "steel_knife"
+      ],
       "notes": null
     },
     {
@@ -582,14 +951,45 @@
       "level_band": 4,
       "required_level": 31,
       "purpose": "Creates a shared Hunting-to-Fletching feather source across distinct regional bird nodes.",
-      "region_keys": ["lowmark", "thornfell", "mire", "emberholt"],
-      "outputs": [
-        {"item_key": "game_meat", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "fletching_feathers", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "sinew", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null}
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
       ],
-      "tool_tags": ["knife", "field_dressing"],
-      "tool_item_keys": ["steel_knife"],
+      "outputs": [
+        {
+          "item_key": "game_meat",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "fletching_feathers",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "sinew",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "knife",
+        "field_dressing"
+      ],
+      "tool_item_keys": [
+        "steel_knife"
+      ],
       "notes": "Guaranteed feathers model deliberate selection from a successfully hunted bird, not a random bonus roll."
     },
     {
@@ -601,16 +1001,61 @@
       "level_band": 5,
       "required_level": 41,
       "purpose": "Raises deterministic yields while retaining the common materials needed by later recipes.",
-      "region_keys": ["lowmark", "thornfell", "mire"],
-      "outputs": [
-        {"item_key": "game_meat", "quantity": 2, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "raw_hide", "quantity": 2, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "sinew", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "animal_fat", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "dense_bone", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null}
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire"
       ],
-      "tool_tags": ["knife", "field_dressing"],
-      "tool_item_keys": ["steel_knife", "ashsteel_knife"],
+      "outputs": [
+        {
+          "item_key": "game_meat",
+          "quantity": 2,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "raw_hide",
+          "quantity": 2,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "sinew",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "animal_fat",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "dense_bone",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "knife",
+        "field_dressing"
+      ],
+      "tool_item_keys": [
+        "steel_knife",
+        "ashsteel_knife"
+      ],
       "notes": null
     },
     {
@@ -622,16 +1067,58 @@
       "level_band": 6,
       "required_level": 51,
       "purpose": "Provides a narrow late-game regional material while preserving ordinary meat, sinew, fat, and bone value.",
-      "region_keys": ["emberholt"],
-      "outputs": [
-        {"item_key": "game_meat", "quantity": 2, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "ember_hardened_hide", "quantity": 1, "mode": "guaranteed", "rarity_role": "rare", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "sinew", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "animal_fat", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null},
-        {"item_key": "dense_bone", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null}
+      "region_keys": [
+        "emberholt"
       ],
-      "tool_tags": ["knife", "field_dressing"],
-      "tool_item_keys": ["ashsteel_knife"],
+      "outputs": [
+        {
+          "item_key": "game_meat",
+          "quantity": 2,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "ember_hardened_hide",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "rare",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "sinew",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "animal_fat",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        },
+        {
+          "item_key": "dense_bone",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "knife",
+        "field_dressing"
+      ],
+      "tool_item_keys": [
+        "ashsteel_knife"
+      ],
       "notes": "The rare role marks progression position; output remains guaranteed after a successful hunt."
     }
   ],
@@ -829,11 +1316,26 @@
       "level_band": 1,
       "required_level": 1,
       "purpose": "Provides the earliest reliable sink for Hunting meat.",
-      "region_keys": ["lowmark", "thornfell"],
-      "inputs": [{"item_key": "game_meat", "quantity": 1}],
-      "outputs": [{"item_key": "seared_game_meat", "quantity": 1}],
+      "region_keys": [
+        "lowmark",
+        "thornfell"
+      ],
+      "inputs": [
+        {
+          "item_key": "game_meat",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "seared_game_meat",
+          "quantity": 1
+        }
+      ],
       "station_tag": "cooking_fire",
-      "cross_skill_links": ["hunting"],
+      "cross_skill_links": [
+        "hunting"
+      ],
       "notes": null
     },
     {
@@ -845,11 +1347,27 @@
       "level_band": 2,
       "required_level": 11,
       "purpose": "Creates a storable food and an early component reused by a later ration.",
-      "region_keys": ["lowmark", "thornfell", "mire"],
-      "inputs": [{"item_key": "game_meat", "quantity": 2}],
-      "outputs": [{"item_key": "dried_game_strips", "quantity": 2}],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire"
+      ],
+      "inputs": [
+        {
+          "item_key": "game_meat",
+          "quantity": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "dried_game_strips",
+          "quantity": 2
+        }
+      ],
       "station_tag": "drying_rack",
-      "cross_skill_links": ["hunting"],
+      "cross_skill_links": [
+        "hunting"
+      ],
       "notes": null
     },
     {
@@ -861,11 +1379,30 @@
       "level_band": 3,
       "required_level": 21,
       "purpose": "Connects two guaranteed Hunting outputs to mid-progression Cooking.",
-      "region_keys": ["lowmark", "mire"],
-      "inputs": [{"item_key": "game_meat", "quantity": 2}, {"item_key": "animal_fat", "quantity": 1}],
-      "outputs": [{"item_key": "hunter_roast", "quantity": 1}],
+      "region_keys": [
+        "lowmark",
+        "mire"
+      ],
+      "inputs": [
+        {
+          "item_key": "game_meat",
+          "quantity": 2
+        },
+        {
+          "item_key": "animal_fat",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "hunter_roast",
+          "quantity": 1
+        }
+      ],
       "station_tag": "cooking_fire",
-      "cross_skill_links": ["hunting"],
+      "cross_skill_links": [
+        "hunting"
+      ],
       "notes": null
     },
     {
@@ -877,11 +1414,32 @@
       "level_band": 4,
       "required_level": 31,
       "purpose": "Maintains the common meat-and-fat loop while Cooking expands across all four regions.",
-      "region_keys": ["lowmark", "thornfell", "mire", "emberholt"],
-      "inputs": [{"item_key": "game_meat", "quantity": 1}, {"item_key": "animal_fat", "quantity": 1}],
-      "outputs": [{"item_key": "crisp_game_portion", "quantity": 1}],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "inputs": [
+        {
+          "item_key": "game_meat",
+          "quantity": 1
+        },
+        {
+          "item_key": "animal_fat",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "crisp_game_portion",
+          "quantity": 1
+        }
+      ],
       "station_tag": "cooking_fire",
-      "cross_skill_links": ["hunting"],
+      "cross_skill_links": [
+        "hunting"
+      ],
       "notes": null
     },
     {
@@ -893,11 +1451,29 @@
       "level_band": 5,
       "required_level": 41,
       "purpose": "Keeps an early preserved food relevant three bands after its unlock.",
-      "region_keys": ["cross_region"],
-      "inputs": [{"item_key": "dried_game_strips", "quantity": 2}, {"item_key": "animal_fat", "quantity": 1}],
-      "outputs": [{"item_key": "trail_pemmican", "quantity": 2}],
+      "region_keys": [
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "dried_game_strips",
+          "quantity": 2
+        },
+        {
+          "item_key": "animal_fat",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "trail_pemmican",
+          "quantity": 2
+        }
+      ],
       "station_tag": null,
-      "cross_skill_links": ["hunting"],
+      "cross_skill_links": [
+        "hunting"
+      ],
       "notes": null
     },
     {
@@ -909,27 +1485,128 @@
       "level_band": 6,
       "required_level": 51,
       "purpose": "Provides a late, high-volume sink for the common materials Hunting still produces.",
-      "region_keys": ["cross_region"],
-      "inputs": [{"item_key": "game_meat", "quantity": 3}, {"item_key": "animal_fat", "quantity": 1}],
-      "outputs": [{"item_key": "master_hunter_feast", "quantity": 1}],
+      "region_keys": [
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "game_meat",
+          "quantity": 3
+        },
+        {
+          "item_key": "animal_fat",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "master_hunter_feast",
+          "quantity": 1
+        }
+      ],
       "station_tag": "cooking_fire",
-      "cross_skill_links": ["hunting"],
+      "cross_skill_links": [
+        "hunting"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "cook_fresh_fish_recipe",
+      "key": "cook_fresh_fish",
+      "display_name": "Cook Fresh Fish",
+      "description": "Prepare fresh regional catch over a cooking fire.",
+      "skill_key": "cooking",
+      "level_band": 1,
+      "required_level": 3,
+      "purpose": "Connects Angling to early Cooking and recovery food.",
+      "region_keys": [
+        "lowmark",
+        "mire"
+      ],
+      "inputs": [
+        {
+          "item_key": "fresh_fish",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "cooked_fish",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "cooking_fire",
+      "cross_skill_links": [
+        "angling"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "cook_fish_provisions_recipe",
+      "key": "cook_fish_provisions",
+      "display_name": "Cook Fish Provisions",
+      "description": "Prepare several fresh catches at once with controlled heat and practiced timing.",
+      "skill_key": "cooking",
+      "level_band": 5,
+      "required_level": 45,
+      "purpose": "Retains the early Angling catch as later high-volume expedition food.",
+      "region_keys": [
+        "lowmark",
+        "mire",
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "fresh_fish",
+          "quantity": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "cooked_fish",
+          "quantity": 3
+        }
+      ],
+      "station_tag": "cooking_fire",
+      "cross_skill_links": [
+        "angling"
+      ],
       "notes": null
     },
     {
       "slot_id": "tan_cured_leather_recipe",
       "key": "tan_cured_leather",
       "display_name": "Tan Cured Leather",
-      "description": "Clean and work raw hide with salt and fat until it becomes durable leather.",
+      "description": "Clean and work raw hide with fat until it becomes durable leather.",
       "skill_key": "leatherworking",
       "level_band": 1,
       "required_level": 1,
       "purpose": "Creates the principal processed material for the full Leatherworking chain.",
-      "region_keys": ["lowmark", "thornfell", "mire"],
-      "inputs": [{"item_key": "raw_hide", "quantity": 1}, {"item_key": "animal_fat", "quantity": 1}],
-      "outputs": [{"item_key": "cured_leather", "quantity": 1}],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire"
+      ],
+      "inputs": [
+        {
+          "item_key": "raw_hide",
+          "quantity": 1
+        },
+        {
+          "item_key": "animal_fat",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "cured_leather",
+          "quantity": 1
+        }
+      ],
       "station_tag": "leather_rack",
-      "cross_skill_links": ["hunting"],
+      "cross_skill_links": [
+        "hunting"
+      ],
       "notes": null
     },
     {
@@ -941,11 +1618,27 @@
       "level_band": 1,
       "required_level": 4,
       "purpose": "Creates a persistent binding used by light armor and field equipment.",
-      "region_keys": ["lowmark", "thornfell", "mire"],
-      "inputs": [{"item_key": "cured_leather", "quantity": 1}],
-      "outputs": [{"item_key": "leather_strap", "quantity": 2}],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire"
+      ],
+      "inputs": [
+        {
+          "item_key": "cured_leather",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "leather_strap",
+          "quantity": 2
+        }
+      ],
       "station_tag": "leather_rack",
-      "cross_skill_links": ["hunting"],
+      "cross_skill_links": [
+        "hunting"
+      ],
       "notes": null
     },
     {
@@ -957,11 +1650,31 @@
       "level_band": 1,
       "required_level": 7,
       "purpose": "Turns common carcass structure into a durable Leatherworking tool.",
-      "region_keys": ["lowmark", "thornfell", "mire"],
-      "inputs": [{"item_key": "dense_bone", "quantity": 1}, {"item_key": "sinew", "quantity": 1}],
-      "outputs": [{"item_key": "bone_leatherworking_awl", "quantity": 1}],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire"
+      ],
+      "inputs": [
+        {
+          "item_key": "dense_bone",
+          "quantity": 1
+        },
+        {
+          "item_key": "sinew",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "bone_leatherworking_awl",
+          "quantity": 1
+        }
+      ],
       "station_tag": "leather_rack",
-      "cross_skill_links": ["hunting"],
+      "cross_skill_links": [
+        "hunting"
+      ],
       "notes": null
     },
     {
@@ -973,11 +1686,28 @@
       "level_band": 1,
       "required_level": 9,
       "purpose": "Processes a common Hunting output into a binding shared with Fletching and later Leatherworking.",
-      "region_keys": ["lowmark", "thornfell", "mire"],
-      "inputs": [{"item_key": "sinew", "quantity": 1}],
-      "outputs": [{"item_key": "sinew_cord", "quantity": 1}],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire"
+      ],
+      "inputs": [
+        {
+          "item_key": "sinew",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "sinew_cord",
+          "quantity": 1
+        }
+      ],
       "station_tag": "leather_rack",
-      "cross_skill_links": ["hunting", "fletching"],
+      "cross_skill_links": [
+        "hunting",
+        "fletching"
+      ],
       "notes": null
     },
     {
@@ -989,11 +1719,30 @@
       "level_band": 2,
       "required_level": 11,
       "purpose": "Delivers the first complete light-armor output.",
-      "region_keys": ["lowmark", "thornfell"],
-      "inputs": [{"item_key": "cured_leather", "quantity": 3}, {"item_key": "leather_strap", "quantity": 2}],
-      "outputs": [{"item_key": "hide_jerkin", "quantity": 1}],
+      "region_keys": [
+        "lowmark",
+        "thornfell"
+      ],
+      "inputs": [
+        {
+          "item_key": "cured_leather",
+          "quantity": 3
+        },
+        {
+          "item_key": "leather_strap",
+          "quantity": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "hide_jerkin",
+          "quantity": 1
+        }
+      ],
       "station_tag": "leather_rack",
-      "cross_skill_links": ["hunting"],
+      "cross_skill_links": [
+        "hunting"
+      ],
       "notes": null
     },
     {
@@ -1005,11 +1754,35 @@
       "level_band": 2,
       "required_level": 16,
       "purpose": "Connects Leatherworking directly to Fletching and ranged equipment.",
-      "region_keys": ["lowmark", "thornfell"],
-      "inputs": [{"item_key": "cured_leather", "quantity": 2}, {"item_key": "leather_strap", "quantity": 1}, {"item_key": "sinew_cord", "quantity": 1}],
-      "outputs": [{"item_key": "field_quiver", "quantity": 1}],
+      "region_keys": [
+        "lowmark",
+        "thornfell"
+      ],
+      "inputs": [
+        {
+          "item_key": "cured_leather",
+          "quantity": 2
+        },
+        {
+          "item_key": "leather_strap",
+          "quantity": 1
+        },
+        {
+          "item_key": "sinew_cord",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "field_quiver",
+          "quantity": 1
+        }
+      ],
       "station_tag": "leather_rack",
-      "cross_skill_links": ["hunting", "fletching"],
+      "cross_skill_links": [
+        "hunting",
+        "fletching"
+      ],
       "notes": null
     },
     {
@@ -1021,11 +1794,30 @@
       "level_band": 3,
       "required_level": 21,
       "purpose": "Processes Thornfell wool into a specific later equipment input.",
-      "region_keys": ["thornfell"],
-      "inputs": [{"item_key": "ridge_wool", "quantity": 2}, {"item_key": "sinew_cord", "quantity": 1}],
-      "outputs": [{"item_key": "ridge_wool_lining", "quantity": 1}],
+      "region_keys": [
+        "thornfell"
+      ],
+      "inputs": [
+        {
+          "item_key": "ridge_wool",
+          "quantity": 2
+        },
+        {
+          "item_key": "sinew_cord",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "ridge_wool_lining",
+          "quantity": 1
+        }
+      ],
       "station_tag": "leather_rack",
-      "cross_skill_links": ["hunting", "fletching"],
+      "cross_skill_links": [
+        "hunting",
+        "fletching"
+      ],
       "notes": null
     },
     {
@@ -1037,11 +1829,34 @@
       "level_band": 3,
       "required_level": 27,
       "purpose": "Creates a durable ranged accessory and preserves Hunting-to-Fletching connectivity.",
-      "region_keys": ["thornfell"],
-      "inputs": [{"item_key": "cured_leather", "quantity": 1}, {"item_key": "leather_strap", "quantity": 1}, {"item_key": "sinew_cord", "quantity": 1}],
-      "outputs": [{"item_key": "fletchers_bracer", "quantity": 1}],
+      "region_keys": [
+        "thornfell"
+      ],
+      "inputs": [
+        {
+          "item_key": "cured_leather",
+          "quantity": 1
+        },
+        {
+          "item_key": "leather_strap",
+          "quantity": 1
+        },
+        {
+          "item_key": "sinew_cord",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "fletchers_bracer",
+          "quantity": 1
+        }
+      ],
       "station_tag": "leather_rack",
-      "cross_skill_links": ["hunting", "fletching"],
+      "cross_skill_links": [
+        "hunting",
+        "fletching"
+      ],
       "notes": null
     },
     {
@@ -1053,11 +1868,38 @@
       "level_band": 4,
       "required_level": 31,
       "purpose": "Builds environmental-resistance gear from common leather and a regional intermediate.",
-      "region_keys": ["thornfell", "mire"],
-      "inputs": [{"item_key": "cured_leather", "quantity": 3}, {"item_key": "ridge_wool_lining", "quantity": 1}, {"item_key": "leather_strap", "quantity": 2}, {"item_key": "animal_fat", "quantity": 1}],
-      "outputs": [{"item_key": "weatherproof_leathers", "quantity": 1}],
+      "region_keys": [
+        "thornfell",
+        "mire"
+      ],
+      "inputs": [
+        {
+          "item_key": "cured_leather",
+          "quantity": 3
+        },
+        {
+          "item_key": "ridge_wool_lining",
+          "quantity": 1
+        },
+        {
+          "item_key": "leather_strap",
+          "quantity": 2
+        },
+        {
+          "item_key": "animal_fat",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "weatherproof_leathers",
+          "quantity": 1
+        }
+      ],
       "station_tag": "leather_rack",
-      "cross_skill_links": ["hunting"],
+      "cross_skill_links": [
+        "hunting"
+      ],
       "notes": null
     },
     {
@@ -1069,11 +1911,34 @@
       "level_band": 5,
       "required_level": 41,
       "purpose": "Provides a late utility sink for persistent early materials without adding a new hide tier.",
-      "region_keys": ["cross_region"],
-      "inputs": [{"item_key": "cured_leather", "quantity": 3}, {"item_key": "leather_strap", "quantity": 3}, {"item_key": "sinew_cord", "quantity": 3}],
-      "outputs": [{"item_key": "reinforced_field_harness", "quantity": 1}],
+      "region_keys": [
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "cured_leather",
+          "quantity": 3
+        },
+        {
+          "item_key": "leather_strap",
+          "quantity": 3
+        },
+        {
+          "item_key": "sinew_cord",
+          "quantity": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "reinforced_field_harness",
+          "quantity": 1
+        }
+      ],
       "station_tag": "leather_rack",
-      "cross_skill_links": ["hunting", "fletching"],
+      "cross_skill_links": [
+        "hunting",
+        "fletching"
+      ],
       "notes": null
     },
     {
@@ -1085,11 +1950,37 @@
       "level_band": 6,
       "required_level": 51,
       "purpose": "Completes the regional Emberholt hide chain while retaining common leather, strap, and sinew demand.",
-      "region_keys": ["emberholt"],
-      "inputs": [{"item_key": "ember_hardened_hide", "quantity": 2}, {"item_key": "cured_leather", "quantity": 2}, {"item_key": "leather_strap", "quantity": 2}, {"item_key": "sinew_cord", "quantity": 1}],
-      "outputs": [{"item_key": "emberplate_leathers", "quantity": 1}],
+      "region_keys": [
+        "emberholt"
+      ],
+      "inputs": [
+        {
+          "item_key": "ember_hardened_hide",
+          "quantity": 2
+        },
+        {
+          "item_key": "cured_leather",
+          "quantity": 2
+        },
+        {
+          "item_key": "leather_strap",
+          "quantity": 2
+        },
+        {
+          "item_key": "sinew_cord",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "emberplate_leathers",
+          "quantity": 1
+        }
+      ],
       "station_tag": "leather_rack",
-      "cross_skill_links": ["hunting"],
+      "cross_skill_links": [
+        "hunting"
+      ],
       "notes": null
     }
   ]

@@ -1,0 +1,1401 @@
+{
+  "batch_id": "foraging_angling_alchemy",
+  "notes": "Foraging and Angling use named dossier terrain and fauna while Alchemy makes mundane salves, tinctures, low-light paste, and a miner's heat assay. The six Angling bands improve water access and deterministic throughput using only fish and crustacean shell; no Oasis Carp, spell fuel, quest resource, or unsupported RNG is modeled. Fish is intended for cross-batch Cooking recipes.",
+  "items": [
+    {
+      "slot_id": "foraging_basket_item",
+      "key": "foraging_basket",
+      "display_name": "Foraging Basket",
+      "description": "A simple woven carrier for collecting delicate plants without crushing them.",
+      "category": "fasteners_bindings",
+      "form": "finished",
+      "economic_role": "tool",
+      "purpose": "Practical carrier required for careful lantern-moss collection but not ordinary hand-foraging.",
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire"
+      ],
+      "tags": [
+        "tool",
+        "foraging",
+        "basket"
+      ],
+      "cross_tier_role": "limited",
+      "rarity_role": "common",
+      "external_sources": [
+        {
+          "relation_type": "starter",
+          "detail": "Ordinary starting field kit supplied by a local settlement."
+        },
+        {
+          "relation_type": "shop",
+          "detail": "Woven field baskets sold at regional markets."
+        }
+      ],
+      "external_sinks": [],
+      "notes": "Foraging remains possible without this tool on appropriate actions.",
+      "external_uses": [
+        {
+          "relation_type": "tool_use",
+          "detail": "Carries gathered plants during field work."
+        }
+      ]
+    },
+    {
+      "slot_id": "angling_rod_item",
+      "key": "angling_rod",
+      "display_name": "Angling Rod",
+      "description": "A plain freshwater rod with line and hook for patient river fishing.",
+      "category": "core_structures",
+      "form": "finished",
+      "economic_role": "tool",
+      "purpose": "Required tool for freshwater fish actions but not hand-collection of shoreline shells.",
+      "region_keys": [
+        "lowmark",
+        "mire"
+      ],
+      "tags": [
+        "tool",
+        "angling",
+        "rod"
+      ],
+      "cross_tier_role": "limited",
+      "rarity_role": "common",
+      "external_sources": [
+        {
+          "relation_type": "starter",
+          "detail": "Ordinary starting angling kit available in Lowmark."
+        },
+        {
+          "relation_type": "shop",
+          "detail": "Freshwater rods sold in river settlements."
+        }
+      ],
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
+        {
+          "relation_type": "tool_use",
+          "detail": "Used to angle fish from accessible freshwater."
+        }
+      ]
+    },
+    {
+      "slot_id": "softmoss_item",
+      "key": "softmoss",
+      "display_name": "Softmoss",
+      "description": "Lowmark's thick moss gathered near old stones and shrines, useful for packing wounds and practical mixtures.",
+      "category": "control_agents",
+      "form": "raw",
+      "economic_role": "raw_material",
+      "purpose": "Persistent stabilizing plant input for early poultices and late heat assays.",
+      "region_keys": [
+        "lowmark"
+      ],
+      "tags": [
+        "plant",
+        "moss",
+        "healing"
+      ],
+      "cross_tier_role": "persistent",
+      "rarity_role": "common",
+      "external_sources": [],
+      "external_sinks": [],
+      "notes": "A mundane material; it does not store emotion or spell charges.",
+      "external_uses": []
+    },
+    {
+      "slot_id": "banner_thistle_item",
+      "key": "banner_thistle",
+      "display_name": "Banner-Thistle",
+      "description": "Lowmark thistle dried for pain-dulling tinctures and calming preparation.",
+      "category": "reactants",
+      "form": "raw",
+      "economic_role": "raw_material",
+      "purpose": "Named Lowmark botanical with a focused, canon-backed tincture sink.",
+      "region_keys": [
+        "lowmark"
+      ],
+      "tags": [
+        "plant",
+        "herb",
+        "pain_relief"
+      ],
+      "cross_tier_role": "limited",
+      "rarity_role": "common",
+      "external_sources": [],
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": []
+    },
+    {
+      "slot_id": "ridge_heather_item",
+      "key": "ridge_heather",
+      "display_name": "Ridge Heather",
+      "description": "A hardy Thornfell shrub with blooms traditionally brewed into calming teas.",
+      "category": "control_agents",
+      "form": "raw",
+      "economic_role": "raw_material",
+      "purpose": "Regional stabilizing input for practical Alchemy tonics.",
+      "region_keys": [
+        "thornfell"
+      ],
+      "tags": [
+        "plant",
+        "heather",
+        "calming"
+      ],
+      "cross_tier_role": "limited",
+      "rarity_role": "common",
+      "external_sources": [],
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": []
+    },
+    {
+      "slot_id": "griefroot_item",
+      "key": "griefroot",
+      "display_name": "Griefroot",
+      "description": "A thick Mire tuber valued for medicinal preparation, without literal emotion-absorbing power.",
+      "category": "reactants",
+      "form": "raw",
+      "economic_role": "raw_material",
+      "purpose": "Mire botanical precursor to the canon griefroot-resin balm chain.",
+      "region_keys": [
+        "mire"
+      ],
+      "tags": [
+        "plant",
+        "root",
+        "medicinal"
+      ],
+      "cross_tier_role": "limited",
+      "rarity_role": "uncommon",
+      "external_sources": [],
+      "external_sinks": [],
+      "notes": "The belief that it absorbs grief is cultural rather than a modeled game mechanic.",
+      "external_uses": []
+    },
+    {
+      "slot_id": "lantern_moss_item",
+      "key": "lantern_moss",
+      "display_name": "Lantern Moss",
+      "description": "The Mire's damp moss that gives a faint natural glow and is used on night walkways.",
+      "category": "transmission_media",
+      "form": "raw",
+      "economic_role": "raw_material",
+      "purpose": "Grounded low-light ingredient with a practical field-paste sink.",
+      "region_keys": [
+        "mire"
+      ],
+      "tags": [
+        "plant",
+        "moss",
+        "low_light"
+      ],
+      "cross_tier_role": "limited",
+      "rarity_role": "uncommon",
+      "external_sources": [],
+      "external_sinks": [],
+      "notes": "Natural light only; no active earth magic is attributed to the item.",
+      "external_uses": []
+    },
+    {
+      "slot_id": "flarecap_fungus_item",
+      "key": "flarecap_fungus",
+      "display_name": "Flarecap Fungus",
+      "description": "A heat-reactive Emberholt fungus used by miners to locate unstable pockets.",
+      "category": "reactants",
+      "form": "raw",
+      "economic_role": "raw_material",
+      "purpose": "Late Alchemy assay input connecting foraging to Emberholt Mining safety.",
+      "region_keys": [
+        "emberholt"
+      ],
+      "tags": [
+        "fungus",
+        "heat_reactive",
+        "mining"
+      ],
+      "cross_tier_role": "limited",
+      "rarity_role": "uncommon",
+      "external_sources": [],
+      "external_sinks": [],
+      "notes": "Its heat response is biological, not a spell effect.",
+      "external_uses": []
+    },
+    {
+      "slot_id": "fresh_fish_item",
+      "key": "fresh_fish",
+      "display_name": "Fresh Fish",
+      "description": "Ordinary freshwater fish caught from Lowmark and Mire channels and kept for food or oil rendering.",
+      "category": "sustenance_sources",
+      "form": "raw",
+      "economic_role": "raw_material",
+      "purpose": "Compact Angling output shared by Cooking's endurance loop and Alchemy's fluid media.",
+      "region_keys": [
+        "lowmark",
+        "mire"
+      ],
+      "tags": [
+        "fish",
+        "food",
+        "angling"
+      ],
+      "cross_tier_role": "persistent",
+      "rarity_role": "common",
+      "external_sources": [],
+      "external_sinks": [],
+      "notes": "Cooking recipes should be cross-batch additions; no quest-gated Oasis Carp is included.",
+      "external_uses": []
+    },
+    {
+      "slot_id": "silt_shell_item",
+      "key": "silt_shell",
+      "display_name": "Silt Shell",
+      "description": "Clean hard shell collected from ordinary river skitters or Mire silt crawlers.",
+      "category": "control_agents",
+      "form": "raw",
+      "economic_role": "raw_material",
+      "purpose": "A second Angling output that becomes a persistent stabilizing powder in Alchemy.",
+      "region_keys": [
+        "lowmark",
+        "mire"
+      ],
+      "tags": [
+        "shell",
+        "crustacean",
+        "stabilizing"
+      ],
+      "cross_tier_role": "persistent",
+      "rarity_role": "common",
+      "external_sources": [],
+      "external_sinks": [],
+      "notes": "The meat is not separately inventoried, avoiding a shallow crustacean-food duplicate.",
+      "external_uses": []
+    },
+    {
+      "slot_id": "fish_oil_item",
+      "key": "fish_oil",
+      "display_name": "Fish Oil",
+      "description": "Oil carefully rendered from ordinary freshwater fish for spreading herbal preparations.",
+      "category": "transmission_media",
+      "form": "processed",
+      "economic_role": "component",
+      "purpose": "Persistent Angling-to-Alchemy medium reused through the final assay band.",
+      "region_keys": [
+        "lowmark",
+        "mire",
+        "cross_region"
+      ],
+      "tags": [
+        "fish",
+        "oil",
+        "alchemy"
+      ],
+      "cross_tier_role": "persistent",
+      "rarity_role": "common",
+      "external_sources": [],
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": []
+    },
+    {
+      "slot_id": "shell_powder_item",
+      "key": "shell_powder",
+      "display_name": "Shell Powder",
+      "description": "Fine crushed silt shell used to thicken and steady field mixtures.",
+      "category": "control_agents",
+      "form": "processed",
+      "economic_role": "component",
+      "purpose": "Persistent stabilizer tying early crustacean shells to late balms and assays.",
+      "region_keys": [
+        "lowmark",
+        "mire",
+        "cross_region"
+      ],
+      "tags": [
+        "shell",
+        "powder",
+        "stabilizing"
+      ],
+      "cross_tier_role": "persistent",
+      "rarity_role": "common",
+      "external_sources": [],
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": []
+    },
+    {
+      "slot_id": "griefroot_resin_item",
+      "key": "griefroot_resin",
+      "display_name": "Griefroot Resin",
+      "description": "Thick resin refined from Mire griefroot for calming balm preparation.",
+      "category": "reactants",
+      "form": "processed",
+      "economic_role": "component",
+      "purpose": "Canon-named Mire processed material with a direct balm sink.",
+      "region_keys": [
+        "mire"
+      ],
+      "tags": [
+        "root",
+        "resin",
+        "balm"
+      ],
+      "cross_tier_role": "limited",
+      "rarity_role": "uncommon",
+      "external_sources": [],
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": []
+    },
+    {
+      "slot_id": "softmoss_poultice_item",
+      "key": "softmoss_poultice",
+      "display_name": "Softmoss Poultice",
+      "description": "Softmoss bound with animal fat into a clean, practical wound packing.",
+      "category": "control_agents",
+      "form": "finished",
+      "economic_role": "consumable",
+      "purpose": "Early Alchemy recovery consumable grounded in Lowmark Flow-Mender practice.",
+      "region_keys": [
+        "lowmark"
+      ],
+      "tags": [
+        "poultice",
+        "recovery",
+        "herbal"
+      ],
+      "cross_tier_role": "none",
+      "rarity_role": "common",
+      "external_sources": [],
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "Applied and consumed during ordinary wound care."
+        }
+      ],
+      "notes": null,
+      "external_uses": []
+    },
+    {
+      "slot_id": "banner_thistle_tincture_item",
+      "key": "banner_thistle_tincture",
+      "display_name": "Banner-Thistle Tincture",
+      "description": "A measured Lowmark herbal preparation traditionally used to dull pain and settle panic.",
+      "category": "reactants",
+      "form": "finished",
+      "economic_role": "consumable",
+      "purpose": "Canon-backed Alchemy consumable with a concrete botanical source.",
+      "region_keys": [
+        "lowmark"
+      ],
+      "tags": [
+        "tincture",
+        "pain_relief",
+        "herbal"
+      ],
+      "cross_tier_role": "none",
+      "rarity_role": "common",
+      "external_sources": [],
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "Measured doses are consumed for mundane pain relief and calming."
+        }
+      ],
+      "notes": "No wraith-specific effect is modeled.",
+      "external_uses": []
+    },
+    {
+      "slot_id": "ridge_heather_tonic_item",
+      "key": "ridge_heather_tonic",
+      "display_name": "Ridge Heather Tonic",
+      "description": "A calming Thornfell herbal infusion carried in a small field vessel.",
+      "category": "control_agents",
+      "form": "finished",
+      "economic_role": "consumable",
+      "purpose": "Thornfell's practical tea tradition adapted into an Alchemy field tonic.",
+      "region_keys": [
+        "thornfell"
+      ],
+      "tags": [
+        "tonic",
+        "calming",
+        "herbal"
+      ],
+      "cross_tier_role": "none",
+      "rarity_role": "uncommon",
+      "external_sources": [],
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "Consumed as a calming field infusion."
+        }
+      ],
+      "notes": "This does not grant air magic or a stamina-bar effect.",
+      "external_uses": []
+    },
+    {
+      "slot_id": "griefroot_balm_item",
+      "key": "griefroot_balm",
+      "display_name": "Griefroot Balm",
+      "description": "A thick Mire root-based balm stabilized with animal fat and shell powder.",
+      "category": "control_agents",
+      "form": "finished",
+      "economic_role": "consumable",
+      "purpose": "A mid-to-late medicinal output using Mire resin and Angling shell.",
+      "region_keys": [
+        "mire"
+      ],
+      "tags": [
+        "balm",
+        "calming",
+        "medicinal"
+      ],
+      "cross_tier_role": "none",
+      "rarity_role": "uncommon",
+      "external_sources": [],
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "Applied and consumed as a calming topical balm."
+        }
+      ],
+      "notes": "No literal grief extraction is modeled.",
+      "external_uses": []
+    },
+    {
+      "slot_id": "lantern_moss_paste_item",
+      "key": "lantern_moss_paste",
+      "display_name": "Lantern Moss Paste",
+      "description": "A spreadable low-light marking paste made from damp lantern moss and fish oil.",
+      "category": "transmission_media",
+      "form": "finished",
+      "economic_role": "consumable",
+      "purpose": "A practical expedition supply rather than a magical light source.",
+      "region_keys": [
+        "mire",
+        "cross_region"
+      ],
+      "tags": [
+        "low_light",
+        "paste",
+        "expedition"
+      ],
+      "cross_tier_role": "none",
+      "rarity_role": "uncommon",
+      "external_sources": [],
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "Spread and consumed to mark paths or equipment in low light."
+        }
+      ],
+      "notes": "Moss remains naturally faintly luminous and earth magic remains dormant.",
+      "external_uses": []
+    },
+    {
+      "slot_id": "flarecap_assay_paste_item",
+      "key": "flarecap_assay_paste",
+      "display_name": "Flarecap Assay Paste",
+      "description": "A heat-responsive paste of Emberholt flarecap stabilized for marking suspect mineral pockets.",
+      "category": "control_agents",
+      "form": "finished",
+      "economic_role": "consumable",
+      "purpose": "A late practical Alchemy-to-Mining safety sink for a canon miner's indicator fungus.",
+      "region_keys": [
+        "emberholt"
+      ],
+      "tags": [
+        "heat_reactive",
+        "assay",
+        "mining"
+      ],
+      "cross_tier_role": "none",
+      "rarity_role": "rare",
+      "external_sources": [],
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "Applied and consumed during mundane heat-pocket surveying."
+        }
+      ],
+      "notes": "It diagnoses visible heat response; it does not cast, amplify, or store fire magic.",
+      "external_uses": []
+    }
+  ],
+  "gathering_actions": [
+    {
+      "slot_id": "forage_softmoss_action",
+      "key": "forage_softmoss",
+      "display_name": "Forage Softmoss",
+      "description": "Lift thick moss by hand from sheltered Lowmark stones.",
+      "skill_key": "foraging",
+      "level_band": 1,
+      "required_level": 1,
+      "purpose": "Introduces a safe, tool-less stabilizing plant source.",
+      "region_keys": [
+        "lowmark"
+      ],
+      "outputs": [
+        {
+          "item_key": "softmoss",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [],
+      "tool_item_keys": [],
+      "notes": null
+    },
+    {
+      "slot_id": "forage_banner_thistle_action",
+      "key": "forage_banner_thistle",
+      "display_name": "Forage Banner-Thistle",
+      "description": "Collect and dry hardy Lowmark thistle from recovering ground.",
+      "skill_key": "foraging",
+      "level_band": 2,
+      "required_level": 11,
+      "purpose": "Opens Lowmark's canon tincture botanical without a required tool.",
+      "region_keys": [
+        "lowmark"
+      ],
+      "outputs": [
+        {
+          "item_key": "banner_thistle",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [],
+      "tool_item_keys": [],
+      "notes": null
+    },
+    {
+      "slot_id": "forage_ridge_heather_action",
+      "key": "forage_ridge_heather",
+      "display_name": "Forage Ridge Heather",
+      "description": "Select hardy Thornfell heather from wind-brushed stone margins.",
+      "skill_key": "foraging",
+      "level_band": 3,
+      "required_level": 21,
+      "purpose": "Adds a named regional stabilizer for calming preparations.",
+      "region_keys": [
+        "thornfell"
+      ],
+      "outputs": [
+        {
+          "item_key": "ridge_heather",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [],
+      "tool_item_keys": [],
+      "notes": null
+    },
+    {
+      "slot_id": "forage_griefroot_action",
+      "key": "forage_griefroot",
+      "display_name": "Forage Griefroot",
+      "description": "Cut and lift medicinal Mire tubers from firm ground near Rootrest.",
+      "skill_key": "foraging",
+      "level_band": 4,
+      "required_level": 31,
+      "purpose": "Sources the canon Mire resin and balm chain.",
+      "region_keys": [
+        "mire"
+      ],
+      "outputs": [
+        {
+          "item_key": "griefroot",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "uncommon",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "knife"
+      ],
+      "tool_item_keys": [
+        "iron_knife",
+        "steel_knife"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "forage_lantern_moss_action",
+      "key": "forage_lantern_moss",
+      "display_name": "Forage Lantern Moss",
+      "description": "Collect faintly luminous moss from damp Mire walkways and banks without crushing it.",
+      "skill_key": "foraging",
+      "level_band": 5,
+      "required_level": 41,
+      "purpose": "Provides a grounded night-route ingredient and a practical basket-tool use.",
+      "region_keys": [
+        "mire"
+      ],
+      "outputs": [
+        {
+          "item_key": "lantern_moss",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "uncommon",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "basket"
+      ],
+      "tool_item_keys": [
+        "foraging_basket"
+      ],
+      "notes": "Basket protects damp moss during field collection; no magical behavior is inferred."
+    },
+    {
+      "slot_id": "forage_flarecap_action",
+      "key": "forage_flarecap",
+      "display_name": "Forage Flarecap Fungus",
+      "description": "Cut heat-reactive fungus near Emberholt's exposed but accessible vents.",
+      "skill_key": "foraging",
+      "level_band": 6,
+      "required_level": 51,
+      "purpose": "Connects late Foraging to practical Emberholt Mining assays.",
+      "region_keys": [
+        "emberholt"
+      ],
+      "outputs": [
+        {
+          "item_key": "flarecap_fungus",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "uncommon",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "knife"
+      ],
+      "tool_item_keys": [
+        "steel_knife",
+        "ashsteel_knife"
+      ],
+      "notes": "Avoid sealed Emberdeep or the forbidden Glassed Hollow."
+    },
+    {
+      "slot_id": "angle_whisperflow_fish_action",
+      "key": "angle_whisperflow_fish",
+      "display_name": "Angle Whisperflow Fish",
+      "description": "Patiently catch ordinary fish from Lowmark's gentle river banks.",
+      "skill_key": "angling",
+      "level_band": 1,
+      "required_level": 1,
+      "purpose": "Starts the Angling food and fish-oil chain.",
+      "region_keys": [
+        "lowmark"
+      ],
+      "outputs": [
+        {
+          "item_key": "fresh_fish",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "rod"
+      ],
+      "tool_item_keys": [
+        "angling_rod"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "collect_river_skitter_shells_action",
+      "key": "collect_river_skitter_shells",
+      "display_name": "Collect River Skitter Shells",
+      "description": "Hand-collect intact shells from Lowmark river skitters in safe shallows.",
+      "skill_key": "angling",
+      "level_band": 2,
+      "required_level": 11,
+      "purpose": "Introduces a tool-less crustacean stabilizer rather than a new food duplicate.",
+      "region_keys": [
+        "lowmark"
+      ],
+      "outputs": [
+        {
+          "item_key": "silt_shell",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [],
+      "tool_item_keys": [],
+      "notes": null
+    },
+    {
+      "slot_id": "angle_mire_channel_fish_action",
+      "key": "angle_mire_channel_fish",
+      "display_name": "Angle Mire Channel Fish",
+      "description": "Fish the ordinary channels at Marshfall while choosing firm footing.",
+      "skill_key": "angling",
+      "level_band": 3,
+      "required_level": 21,
+      "purpose": "Extends compact fish supply into a more hazardous region.",
+      "region_keys": [
+        "mire"
+      ],
+      "outputs": [
+        {
+          "item_key": "fresh_fish",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "rod"
+      ],
+      "tool_item_keys": [
+        "angling_rod"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "collect_silt_crawler_shells_action",
+      "key": "collect_silt_crawler_shells",
+      "display_name": "Collect Silt Crawler Shells",
+      "description": "Recover hard shell from Mire silt crawlers near old channels.",
+      "skill_key": "angling",
+      "level_band": 4,
+      "required_level": 31,
+      "purpose": "A harder regional shell source with deterministic higher throughput.",
+      "region_keys": [
+        "mire"
+      ],
+      "outputs": [
+        {
+          "item_key": "silt_shell",
+          "quantity": 2,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [],
+      "tool_item_keys": [],
+      "notes": null
+    },
+    {
+      "slot_id": "angle_outer_fen_fish_action",
+      "key": "angle_outer_fen_fish",
+      "display_name": "Angle Outer-Fen Fish",
+      "description": "Angle ordinary fish from deeper but open fen water, avoiding quest-sealed pools.",
+      "skill_key": "angling",
+      "level_band": 5,
+      "required_level": 41,
+      "purpose": "Unlocks higher-yield fishing in canon marsh and fen terrain without a new fish item.",
+      "region_keys": [
+        "lowmark",
+        "mire"
+      ],
+      "outputs": [
+        {
+          "item_key": "fresh_fish",
+          "quantity": 2,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "rod"
+      ],
+      "tool_item_keys": [
+        "angling_rod"
+      ],
+      "notes": "World-node danger is environmental; no probabilistic rare-fish roll is implied."
+    },
+    {
+      "slot_id": "angle_master_channel_fish_action",
+      "key": "angle_master_channel_fish",
+      "display_name": "Angle Master Channel Fish",
+      "description": "Work difficult but publicly accessible river channels with practiced timing and placement.",
+      "skill_key": "angling",
+      "level_band": 6,
+      "required_level": 51,
+      "purpose": "A mastery throughput unlock on existing fish rather than an invented elite species.",
+      "region_keys": [
+        "lowmark",
+        "mire"
+      ],
+      "outputs": [
+        {
+          "item_key": "fresh_fish",
+          "quantity": 3,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "rod"
+      ],
+      "tool_item_keys": [
+        "angling_rod"
+      ],
+      "notes": "Excludes the hidden Riverwarden Oasis and its quest-gated carp."
+    }
+  ],
+  "gathering_nodes": [
+    {
+      "slot_id": "lowmark_softmoss_stones_node",
+      "key": "lowmark_softmoss_stones",
+      "display_name": "Softmoss Stones",
+      "description": "Shaded Lowmark stones cushioned by thick moss.",
+      "action_key": "forage_softmoss",
+      "region_key": "lowmark",
+      "world_context": "Whisperflow Run old stone markers",
+      "interaction_verb": "Gather",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": false,
+      "notes": null
+    },
+    {
+      "slot_id": "lowmark_banner_thistle_beds_node",
+      "key": "lowmark_banner_thistle_beds",
+      "display_name": "Banner-Thistle Beds",
+      "description": "Hardy thistle in slowly recovering pale soil.",
+      "action_key": "forage_banner_thistle",
+      "region_key": "lowmark",
+      "world_context": "Ashen Flats field margins",
+      "interaction_verb": "Gather",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": false,
+      "notes": null
+    },
+    {
+      "slot_id": "thornfell_ridge_heather_patch_node",
+      "key": "thornfell_ridge_heather_patch",
+      "display_name": "Ridge Heather Patch",
+      "description": "Pale heather anchored between highland stones.",
+      "action_key": "forage_ridge_heather",
+      "region_key": "thornfell",
+      "world_context": "Ridgewall Heights lower shelves",
+      "interaction_verb": "Gather",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": false,
+      "notes": null
+    },
+    {
+      "slot_id": "mire_griefroot_bed_node",
+      "key": "mire_griefroot_bed",
+      "display_name": "Griefroot Bed",
+      "description": "Firm-ground tubers used in Mire medicine.",
+      "action_key": "forage_griefroot",
+      "region_key": "mire",
+      "world_context": "Rootrest surviving-root margins",
+      "interaction_verb": "Lift",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    },
+    {
+      "slot_id": "mire_lantern_moss_bank_node",
+      "key": "mire_lantern_moss_bank",
+      "display_name": "Lantern Moss Bank",
+      "description": "Damp banks whose moss provides faint low light.",
+      "action_key": "forage_lantern_moss",
+      "region_key": "mire",
+      "world_context": "Marshfall walkway banks",
+      "interaction_verb": "Gather",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": false,
+      "notes": null
+    },
+    {
+      "slot_id": "emberholt_flarecap_vent_node",
+      "key": "emberholt_flarecap_vent",
+      "display_name": "Flarecap Vent Growth",
+      "description": "Fungus growing where accessible vent heat is strongest.",
+      "action_key": "forage_flarecap",
+      "region_key": "emberholt",
+      "world_context": "Outer heat vents below the Ash Terraces",
+      "interaction_verb": "Cut",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    },
+    {
+      "slot_id": "lowmark_whisperflow_fish_bank_node",
+      "key": "lowmark_whisperflow_fish_bank",
+      "display_name": "Whisperflow Fish Bank",
+      "description": "Gentle bank used by Lowmark's ordinary fisher families.",
+      "action_key": "angle_whisperflow_fish",
+      "region_key": "lowmark",
+      "world_context": "Whisperflow Run soft banks",
+      "interaction_verb": "Fish",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": false,
+      "notes": null
+    },
+    {
+      "slot_id": "lowmark_river_skitter_shallows_node",
+      "key": "lowmark_river_skitter_shallows",
+      "display_name": "River Skitter Shallows",
+      "description": "Accessible shallows frequented by small shelled river skitters.",
+      "action_key": "collect_river_skitter_shells",
+      "region_key": "lowmark",
+      "world_context": "Whisperflow Run reed shallows",
+      "interaction_verb": "Collect",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": false,
+      "notes": null
+    },
+    {
+      "slot_id": "mire_marshfall_fish_channel_node",
+      "key": "mire_marshfall_fish_channel",
+      "display_name": "Marshfall Fish Channel",
+      "description": "A narrow fishable channel beside the Mire's hunter-and-gatherer settlement.",
+      "action_key": "angle_mire_channel_fish",
+      "region_key": "mire",
+      "world_context": "Marshfall firm-ground channels",
+      "interaction_verb": "Fish",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    },
+    {
+      "slot_id": "mire_silt_crawler_bed_node",
+      "key": "mire_silt_crawler_bed",
+      "display_name": "Silt Crawler Bed",
+      "description": "Mire crustaceans sheltering among ordinary channel silt.",
+      "action_key": "collect_silt_crawler_shells",
+      "region_key": "mire",
+      "world_context": "Marshfall outer channels",
+      "interaction_verb": "Collect",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    },
+    {
+      "slot_id": "lowmark_stillwater_outer_shoal_node",
+      "key": "lowmark_stillwater_outer_shoal",
+      "display_name": "Stillwater Outer Shoal",
+      "description": "An open fen shoal outside the most stagnant, wraith-heavy pools.",
+      "action_key": "angle_outer_fen_fish",
+      "region_key": "lowmark",
+      "world_context": "Stillwater Fen outer channels",
+      "interaction_verb": "Fish",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    },
+    {
+      "slot_id": "mire_drowned_outer_shoal_node",
+      "key": "mire_drowned_outer_shoal",
+      "display_name": "Drowned Outer Shoal",
+      "description": "A fishable Mire channel outside the ruined encampment's deepest debris.",
+      "action_key": "angle_outer_fen_fish",
+      "region_key": "mire",
+      "world_context": "Drowned Encampment outer water",
+      "interaction_verb": "Fish",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    },
+    {
+      "slot_id": "lowmark_floodchannel_fish_reach_node",
+      "key": "lowmark_floodchannel_fish_reach",
+      "display_name": "Floodchannel Fish Reach",
+      "description": "A difficult but open river channel requiring practiced cast placement.",
+      "action_key": "angle_master_channel_fish",
+      "region_key": "lowmark",
+      "world_context": "Floodplain Orchards seasonal channels",
+      "interaction_verb": "Fish",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    },
+    {
+      "slot_id": "mire_stillgrave_outer_fish_reach_node",
+      "key": "mire_stillgrave_outer_fish_reach",
+      "display_name": "Stillgrave Outer Fish Reach",
+      "description": "A public but treacherous approach to the Mire's stagnant basin.",
+      "action_key": "angle_master_channel_fish",
+      "region_key": "mire",
+      "world_context": "Stillgrave Hollow outer water",
+      "interaction_verb": "Fish",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": "Does not access any chapel relic or narrative-only fish."
+    }
+  ],
+  "recipes": [
+    {
+      "slot_id": "render_fish_oil_recipe",
+      "key": "render_fish_oil",
+      "display_name": "Render Fish Oil",
+      "description": "Render ordinary fish into a measured oil suitable for carrying herbs across a surface.",
+      "skill_key": "alchemy",
+      "level_band": 1,
+      "required_level": 1,
+      "purpose": "Creates the common Angling-to-Alchemy fluid medium.",
+      "region_keys": [
+        "lowmark",
+        "mire"
+      ],
+      "inputs": [
+        {
+          "item_key": "fresh_fish",
+          "quantity": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "fish_oil",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "alchemy_bench",
+      "cross_skill_links": [
+        "angling"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "prepare_softmoss_poultice_recipe",
+      "key": "prepare_softmoss_poultice",
+      "display_name": "Prepare Softmoss Poultice",
+      "description": "Bind clean softmoss with animal fat for a practical wound packing.",
+      "skill_key": "alchemy",
+      "level_band": 1,
+      "required_level": 5,
+      "purpose": "Connects Foraging and Hunting through grounded recovery preparation.",
+      "region_keys": [
+        "lowmark"
+      ],
+      "inputs": [
+        {
+          "item_key": "softmoss",
+          "quantity": 2
+        },
+        {
+          "item_key": "animal_fat",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "softmoss_poultice",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "alchemy_bench",
+      "cross_skill_links": [
+        "foraging",
+        "hunting"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "prepare_banner_thistle_tincture_recipe",
+      "key": "prepare_banner_thistle_tincture",
+      "display_name": "Prepare Banner-Thistle Tincture",
+      "description": "Measure dried thistle into a small fish-oil herbal preparation.",
+      "skill_key": "alchemy",
+      "level_band": 2,
+      "required_level": 11,
+      "purpose": "Models Lowmark's explicitly attested pain-dulling tincture tradition.",
+      "region_keys": [
+        "lowmark"
+      ],
+      "inputs": [
+        {
+          "item_key": "banner_thistle",
+          "quantity": 2
+        },
+        {
+          "item_key": "fish_oil",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "banner_thistle_tincture",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "alchemy_bench",
+      "cross_skill_links": [
+        "foraging",
+        "angling"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "prepare_ridge_heather_tonic_recipe",
+      "key": "prepare_ridge_heather_tonic",
+      "display_name": "Prepare Ridge Heather Tonic",
+      "description": "Steep Thornfell heather with a small amount of stable oil for a field vessel.",
+      "skill_key": "alchemy",
+      "level_band": 3,
+      "required_level": 21,
+      "purpose": "Adapts canon heather-tea use into portable Alchemy without magic.",
+      "region_keys": [
+        "thornfell"
+      ],
+      "inputs": [
+        {
+          "item_key": "ridge_heather",
+          "quantity": 2
+        },
+        {
+          "item_key": "fish_oil",
+          "quantity": 1
+        },
+        {
+          "item_key": "softmoss",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "ridge_heather_tonic",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "alchemy_bench",
+      "cross_skill_links": [
+        "foraging",
+        "angling"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "crush_shell_powder_recipe",
+      "key": "crush_shell_powder",
+      "display_name": "Crush Shell Powder",
+      "description": "Reduce cleaned silt shells to fine powder for stabilizing mixtures.",
+      "skill_key": "alchemy",
+      "level_band": 3,
+      "required_level": 25,
+      "purpose": "Makes both River Skitter and Silt Crawler shells persistent Alchemy inputs.",
+      "region_keys": [
+        "lowmark",
+        "mire"
+      ],
+      "inputs": [
+        {
+          "item_key": "silt_shell",
+          "quantity": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "shell_powder",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "alchemy_bench",
+      "cross_skill_links": [
+        "angling"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "refine_griefroot_resin_recipe",
+      "key": "refine_griefroot_resin",
+      "display_name": "Refine Griefroot Resin",
+      "description": "Work Mire griefroot into a thick resin suitable for topical balm.",
+      "skill_key": "alchemy",
+      "level_band": 4,
+      "required_level": 31,
+      "purpose": "Creates the processed Mire material explicitly named in the region dossier.",
+      "region_keys": [
+        "mire"
+      ],
+      "inputs": [
+        {
+          "item_key": "griefroot",
+          "quantity": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "griefroot_resin",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "alchemy_bench",
+      "cross_skill_links": [
+        "foraging"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "prepare_griefroot_balm_recipe",
+      "key": "prepare_griefroot_balm",
+      "display_name": "Prepare Griefroot Balm",
+      "description": "Stabilize griefroot resin with animal fat and fine shell powder.",
+      "skill_key": "alchemy",
+      "level_band": 4,
+      "required_level": 36,
+      "purpose": "A fully sourced Mire medicine chain linking Foraging, Angling, and Hunting.",
+      "region_keys": [
+        "mire"
+      ],
+      "inputs": [
+        {
+          "item_key": "griefroot_resin",
+          "quantity": 1
+        },
+        {
+          "item_key": "animal_fat",
+          "quantity": 1
+        },
+        {
+          "item_key": "shell_powder",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "griefroot_balm",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "alchemy_bench",
+      "cross_skill_links": [
+        "foraging",
+        "angling",
+        "hunting"
+      ],
+      "notes": "It calms and protects physically; it does not remove grief as magic."
+    },
+    {
+      "slot_id": "prepare_lantern_moss_paste_recipe",
+      "key": "prepare_lantern_moss_paste",
+      "display_name": "Prepare Lantern Moss Paste",
+      "description": "Spread damp naturally luminous moss into a stable field marking paste.",
+      "skill_key": "alchemy",
+      "level_band": 5,
+      "required_level": 41,
+      "purpose": "Turns Mire's everyday low-light resource into an expedition consumable.",
+      "region_keys": [
+        "mire",
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "lantern_moss",
+          "quantity": 2
+        },
+        {
+          "item_key": "fish_oil",
+          "quantity": 1
+        },
+        {
+          "item_key": "shell_powder",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "lantern_moss_paste",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "alchemy_bench",
+      "cross_skill_links": [
+        "foraging",
+        "angling"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "prepare_flarecap_assay_paste_recipe",
+      "key": "prepare_flarecap_assay_paste",
+      "display_name": "Prepare Flarecap Assay Paste",
+      "description": "Stabilize heat-reactive fungus in a spreadable medium for ordinary mineral-pocket surveying.",
+      "skill_key": "alchemy",
+      "level_band": 6,
+      "required_level": 51,
+      "purpose": "Provides a late Foraging/Angling-to-Mining safety loop without a magical reagent.",
+      "region_keys": [
+        "emberholt"
+      ],
+      "inputs": [
+        {
+          "item_key": "flarecap_fungus",
+          "quantity": 2
+        },
+        {
+          "item_key": "fish_oil",
+          "quantity": 1
+        },
+        {
+          "item_key": "softmoss",
+          "quantity": 1
+        },
+        {
+          "item_key": "shell_powder",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "flarecap_assay_paste",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "alchemy_bench",
+      "cross_skill_links": [
+        "foraging",
+        "angling",
+        "mining"
+      ],
+      "notes": "Represents a visible heat assay, not fire spellcasting or emotional conduction."
+    }
+  ]
+}

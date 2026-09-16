@@ -23,7 +23,11 @@ if str(SCRIPTS_DIR) not in sys.path:
 
 from caelmor_economy_builder import (  # noqa: E402
     ContentError,
+    GATHERING_SKILLS,
+    PRIMARY_SKILLS,
+    SKILLS,
     build,
+    connect,
     cross_reference_validate,
     merge_batches,
     semantic_validate_batch,
@@ -35,6 +39,19 @@ from caelmor_progression_calculator import (  # noqa: E402
 
 
 SCHEMA_PATH = SCRIPTS_DIR / "caelmor_worker_interchange.schema.json"
+CANON_SKILL_SCOPE = frozenset(
+    {
+        "foraging", "hunting", "angling", "mining", "woodcutting",
+        "scavenging", "smithing", "leatherworking", "fletching",
+        "alchemy", "cooking", "adornment", "mechanisms", "fabrication",
+    }
+)
+PRIMARY_SCOPE = frozenset(
+    {
+        "mining", "woodcutting", "hunting", "smithing", "fletching",
+        "cooking", "leatherworking",
+    }
+)
 
 
 def make_item(
@@ -47,6 +64,7 @@ def make_item(
     cross_tier_role: str = "limited",
     sources: list[dict] | None = None,
     sinks: list[dict] | None = None,
+    uses: list[dict] | None = None,
 ) -> dict:
     return {
         "slot_id": f"{key}_slot",
@@ -63,6 +81,7 @@ def make_item(
         "rarity_role": "common",
         "external_sources": sources or [],
         "external_sinks": sinks or [],
+        "external_uses": uses or [],
         "notes": None,
     }
 
@@ -130,7 +149,7 @@ def valid_batch() -> dict:
             role="tool",
             form="finished",
             sources=[{"relation_type": "starter", "detail": "Starter mining tool."}],
-            sinks=[{"relation_type": "equipment_use", "detail": "Equipped as a pick."}],
+            uses=[{"relation_type": "equipment_use", "detail": "Equipped as a pick."}],
         ),
         make_item(
             "iron_ore",
@@ -153,14 +172,15 @@ def valid_batch() -> dict:
             role="component",
             form="processed",
             sources=[{"relation_type": "salvage", "detail": "Recovered from scrap."}],
-            sinks=[{"relation_type": "system_use", "detail": "Repair-system material."}],
+            sinks=[{"relation_type": "consumption", "detail": "Consumed by repair work."}],
+            uses=[{"relation_type": "system_use", "detail": "Repair-system material."}],
         ),
         make_item("iron_hook", role="equipment", form="finished"),
         make_item(
             "orphan_reagent",
             role="component",
             form="refined",
-            sinks=[{"relation_type": "system_use", "detail": "Used by a future system."}],
+            sinks=[{"relation_type": "consumption", "detail": "Consumed by a system."}],
         ),
     ]
 
@@ -328,7 +348,7 @@ class EconomyPipelineAcceptanceTests(unittest.TestCase):
                 conn.execute(
                     "SELECT value FROM metadata WHERE key = 'schema_version'"
                 ).fetchone()[0],
-                "2",
+            "3",
             )
             self.assertEqual(conn.execute("PRAGMA foreign_key_check").fetchall(), [])
             nodes = conn.execute(
@@ -345,6 +365,40 @@ class EconomyPipelineAcceptanceTests(unittest.TestCase):
             ).fetchall()
             self.assertEqual(len(outputs), 3)
             self.assertEqual({row[1] for row in outputs}, {"guaranteed", "weighted"})
+
+    def test_all_14_canon_skills_are_explicitly_in_scope(self) -> None:
+        self.assertEqual(frozenset(SKILLS), CANON_SKILL_SCOPE)
+        self.assertEqual(PRIMARY_SKILLS, PRIMARY_SCOPE)
+        with self.database() as conn:
+            scope_rows = conn.execute(
+                "SELECT skill_key, skill_kind, target_scope, coverage_status "
+                "FROM canon_skill_scope ORDER BY skill_key"
+            ).fetchall()
+            metric_rows = conn.execute(
+                "SELECT skill_key, coverage_status FROM skill_metrics ORDER BY skill_key"
+            ).fetchall()
+        self.assertEqual({row[0] for row in scope_rows}, CANON_SKILL_SCOPE)
+        self.assertEqual(
+            {row[0] for row in scope_rows if row[2] == "primary"}, PRIMARY_SCOPE
+        )
+        self.assertEqual(
+            {row[0] for row in scope_rows if row[1] == "gathering"},
+            GATHERING_SKILLS,
+        )
+        self.assertEqual(
+            {row[0] for row in scope_rows if row[3] == "covered"},
+            {"mining", "smithing"},
+        )
+        self.assertEqual(len(metric_rows), 14)
+        self.assertEqual({row[0] for row in metric_rows}, CANON_SKILL_SCOPE)
+        self.assertEqual(
+            {row[0] for row in metric_rows if row[1] == "covered"},
+            {"mining", "smithing"},
+        )
+        self.assertEqual(
+            {row[0] for row in metric_rows if row[1] == "uncovered"},
+            CANON_SKILL_SCOPE - {"mining", "smithing"},
+        )
 
     def test_where_does_item_come_from(self) -> None:
         with self.database() as conn:
@@ -385,7 +439,9 @@ class EconomyPipelineAcceptanceTests(unittest.TestCase):
                 "SELECT earliest_source_band, latest_sink_band, progression_band_span, "
                 "cross_tier_reuse_count FROM item_metrics WHERE item_key = 'iron_ore'"
             ).fetchone()
-        self.assertEqual(tuple(row), (1, 3, 2, 1))
+        # A late direct sink and a late sink of the resulting iron bar both
+        # retain the ore's downstream relevance.
+        self.assertEqual(tuple(row), (1, 3, 2, 2))
 
     def test_what_unlocks_at_exact_level(self) -> None:
         with self.database() as conn:
@@ -468,21 +524,52 @@ class EconomyPipelineAcceptanceTests(unittest.TestCase):
         self.assertAlmostEqual(rates["quartz_fleck"][1], 9.0)
         self.assertEqual(tuple(crafting), (7_200.0, 180.0))
 
-    def test_tools_are_queryable_and_are_modeled_as_sinks(self) -> None:
+    def test_tools_are_queryable_as_uses_not_consumptive_sinks(self) -> None:
         with self.database() as conn:
             tool_row = conn.execute(
                 "SELECT tool_item_key, action_key, required_level "
                 "FROM v_tool_progression WHERE action_key = 'mine_iron_vein'"
             ).fetchone()
-            sink_types = {
+            use_types = {
                 row[0]
                 for row in conn.execute(
-                    "SELECT sink_type FROM item_sinks WHERE item_key = 'bronze_pick'"
+                    "SELECT use_type FROM item_uses WHERE item_key = 'bronze_pick'"
                 )
             }
+            sink_count = conn.execute(
+                "SELECT COUNT(*) FROM item_sinks WHERE item_key = 'bronze_pick'"
+            ).fetchone()[0]
+            health = conn.execute(
+                "SELECT sink_count, use_count, lacks_sink FROM v_item_health "
+                "WHERE item_key = 'bronze_pick'"
+            ).fetchone()
         self.assertEqual(tuple(tool_row), ("bronze_pick", "mine_iron_vein", 5))
-        self.assertIn("tool_use", sink_types)
-        self.assertIn("equipment_use", sink_types)
+        self.assertIn("tool_requirement", use_types)
+        self.assertIn("equipment_use", use_types)
+        self.assertEqual(sink_count, 0)
+        self.assertEqual(tuple(health), (0, 2, 1))
+
+    def test_external_system_use_is_not_a_consumptive_sink(self) -> None:
+        with self.database() as conn:
+            types = {
+                row[0]
+                for row in conn.execute(
+                    "SELECT sink_type FROM item_sinks WHERE item_key = 'iron_bar'"
+                )
+            }
+            uses = {
+                row[0]
+                for row in conn.execute(
+                    "SELECT use_type FROM item_uses WHERE item_key = 'iron_bar'"
+                )
+            }
+            metric = conn.execute(
+                "SELECT sink_count, use_count FROM item_metrics "
+                "WHERE item_key = 'iron_bar'"
+            ).fetchone()
+        self.assertEqual(types, {"recipe", "consumption"})
+        self.assertEqual(uses, {"system_use"})
+        self.assertEqual(tuple(metric), (2, 1))
 
     def test_item_can_have_multiple_sources_and_sinks(self) -> None:
         with self.database() as conn:
@@ -509,7 +596,9 @@ class EconomyPipelineAcceptanceTests(unittest.TestCase):
             for table, order_by in (
                 ("metadata", "key"),
                 ("gathering_action_outputs", "action_key, item_key, mode"),
+                ("item_uses", "item_key, use_type, use_key"),
                 ("item_metrics", "item_key"),
+                ("skill_metrics", "skill_key"),
                 ("validation_findings", "finding_id"),
             ):
                 left_rows = [
@@ -534,6 +623,78 @@ class EconomyPipelineAcceptanceTests(unittest.TestCase):
         batch["gathering_actions"][0]["outputs"][1]["rng_rationale"] = None
         with self.assertRaisesRegex(ContentError, "requires rng_rationale"):
             semantic_validate_batch(batch, Path("unjustified_rng.json"))
+
+    def test_empty_gathering_tool_arrays_are_valid(self) -> None:
+        batch = valid_batch()
+        action = batch["gathering_actions"][0]
+        action["tool_tags"] = []
+        action["tool_item_keys"] = []
+        semantic_validate_batch(batch, Path("tool_free_action.json"))
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            input_dir = root / "batches"
+            input_dir.mkdir()
+            (input_dir / "batch.json").write_text(json.dumps(batch), encoding="utf-8")
+            config_path = root / "config.json"
+            config_path.write_text(json.dumps(balance_config()), encoding="utf-8")
+            db_path = root / "tool_free.sqlite"
+            with contextlib.redirect_stdout(io.StringIO()):
+                build(input_dir, db_path, SCHEMA_PATH, config_path, None)
+            with contextlib.closing(connect(db_path)) as conn:
+                self.assertEqual(
+                    conn.execute(
+                        "SELECT COUNT(*) FROM gathering_action_tool_items "
+                        "WHERE action_key = 'mine_iron_vein'"
+                    ).fetchone()[0],
+                    0,
+                )
+                self.assertEqual(
+                    conn.execute(
+                        "SELECT COUNT(*) FROM validation_findings "
+                        "WHERE entity_key = 'mine_iron_vein' "
+                        "AND finding_type IN ('unavailable_tool', 'tool_progression_block')"
+                    ).fetchone()[0],
+                    0,
+                )
+
+    def test_duplicate_recipe_input_reference_is_rejected(self) -> None:
+        batch = valid_batch()
+        batch["recipes"][0]["inputs"].append(
+            copy.deepcopy(batch["recipes"][0]["inputs"][0])
+        )
+        with self.assertRaisesRegex(ContentError, "[Dd]uplicate"):
+            semantic_validate_batch(batch, Path("duplicate_recipe_input.json"))
+
+    def test_duplicate_recipe_output_reference_is_rejected(self) -> None:
+        batch = valid_batch()
+        batch["recipes"][0]["outputs"].append(
+            copy.deepcopy(batch["recipes"][0]["outputs"][0])
+        )
+        with self.assertRaisesRegex(ContentError, "[Dd]uplicate"):
+            semantic_validate_batch(batch, Path("duplicate_recipe_output.json"))
+
+    def test_duplicate_gathering_output_reference_is_rejected(self) -> None:
+        batch = valid_batch()
+        batch["gathering_actions"][0]["outputs"].append(
+            copy.deepcopy(batch["gathering_actions"][0]["outputs"][0])
+        )
+        with self.assertRaisesRegex(ContentError, "[Dd]uplicate"):
+            semantic_validate_batch(batch, Path("duplicate_gather_output.json"))
+
+    def test_sqlite_foreign_key_enforcement_rejects_invalid_reference(self) -> None:
+        with self.database() as existing:
+            self.assertEqual(existing.execute("PRAGMA foreign_key_check").fetchall(), [])
+        with tempfile.TemporaryDirectory() as temp_dir:
+            copied_db = Path(temp_dir) / "fk_probe.sqlite"
+            with self.database() as source, contextlib.closing(connect(copied_db)) as target:
+                source.backup(target)
+            with contextlib.closing(connect(copied_db)) as conn:
+                self.assertEqual(conn.execute("PRAGMA foreign_keys").fetchone()[0], 1)
+                with self.assertRaises(sqlite3.IntegrityError):
+                    conn.execute(
+                        "INSERT INTO recipe_inputs(recipe_key, item_key, quantity) "
+                        "VALUES ('missing_recipe', 'iron_ore', 1)"
+                    )
 
 
 if __name__ == "__main__":

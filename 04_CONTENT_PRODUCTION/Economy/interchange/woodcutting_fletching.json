@@ -11,13 +11,30 @@
       "form": "finished",
       "economic_role": "tool",
       "purpose": "Bootstraps Woodcutting before the forged axe loop is available.",
-      "region_keys": ["lowmark"],
-      "tags": ["axe", "tool", "woodcutting"],
+      "region_keys": [
+        "lowmark"
+      ],
+      "tags": [
+        "axe",
+        "tool",
+        "woodcutting"
+      ],
       "cross_tier_role": "none",
       "rarity_role": "common",
-      "external_sources": [{"relation_type": "starter", "detail": "Issued as a basic Woodcutting tool or sold by ordinary tool merchants."}],
-      "external_sinks": [{"relation_type": "tool_use", "detail": "Used for entry-level selective timber cutting."}],
-      "notes": null
+      "external_sources": [
+        {
+          "relation_type": "starter",
+          "detail": "Issued as a basic Woodcutting tool or sold by ordinary tool merchants."
+        }
+      ],
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
+        {
+          "relation_type": "tool_use",
+          "detail": "Used for entry-level selective timber cutting."
+        }
+      ]
     },
     {
       "slot_id": "common_timber_slot",
@@ -28,13 +45,22 @@
       "form": "raw",
       "economic_role": "raw_material",
       "purpose": "Shared early structural input for bows, ammunition shafts, and forged tool handles.",
-      "region_keys": ["lowmark", "thornfell", "mire"],
-      "tags": ["timber", "wood", "structural"],
+      "region_keys": [
+        "lowmark",
+        "thornfell",
+        "mire"
+      ],
+      "tags": [
+        "timber",
+        "wood",
+        "structural"
+      ],
       "cross_tier_role": "persistent",
       "rarity_role": "common",
       "external_sources": [],
       "external_sinks": [],
-      "notes": "Keeps early Woodcutting relevant through ammunition and tool production."
+      "notes": "Keeps early Woodcutting relevant through ammunition and tool production.",
+      "external_uses": []
     },
     {
       "slot_id": "goatwillow_wood_slot",
@@ -45,13 +71,20 @@
       "form": "raw",
       "economic_role": "raw_material",
       "purpose": "A light mid-early frame material for compact ranged weapons.",
-      "region_keys": ["thornfell"],
-      "tags": ["timber", "wood", "flexible"],
+      "region_keys": [
+        "thornfell"
+      ],
+      "tags": [
+        "timber",
+        "wood",
+        "flexible"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "common",
       "external_sources": [],
       "external_sinks": [],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "stormwood_slot",
@@ -62,13 +95,21 @@
       "form": "raw",
       "economic_role": "raw_material",
       "purpose": "Supports high-control bows and crossbows without adding a separate wood tier for every band.",
-      "region_keys": ["thornfell"],
-      "tags": ["timber", "wood", "flexible", "kinetic"],
+      "region_keys": [
+        "thornfell"
+      ],
+      "tags": [
+        "timber",
+        "wood",
+        "flexible",
+        "kinetic"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "uncommon",
       "external_sources": [],
       "external_sinks": [],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "common_shafts_slot",
@@ -79,13 +120,20 @@
       "form": "processed",
       "economic_role": "component",
       "purpose": "A persistent high-volume sink for common timber across all ammunition tiers.",
-      "region_keys": ["cross_region"],
-      "tags": ["wood", "ammunition_component", "shaft"],
+      "region_keys": [
+        "cross_region"
+      ],
+      "tags": [
+        "wood",
+        "ammunition_component",
+        "shaft"
+      ],
       "cross_tier_role": "persistent",
       "rarity_role": "common",
       "external_sources": [],
       "external_sinks": [],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "goatwillow_stave_slot",
@@ -96,13 +144,20 @@
       "form": "processed",
       "economic_role": "component",
       "purpose": "Connects Thornfell Goatwillow to early crossbow production.",
-      "region_keys": ["thornfell"],
-      "tags": ["wood", "ranged_component", "stave"],
+      "region_keys": [
+        "thornfell"
+      ],
+      "tags": [
+        "wood",
+        "ranged_component",
+        "stave"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "common",
       "external_sources": [],
       "external_sinks": [],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "stormwood_stave_slot",
@@ -113,13 +168,22 @@
       "form": "refined",
       "economic_role": "component",
       "purpose": "Shared frame component for advanced bow and crossbow paths.",
-      "region_keys": ["thornfell", "cross_region"],
-      "tags": ["wood", "ranged_component", "stave", "kinetic"],
+      "region_keys": [
+        "thornfell",
+        "cross_region"
+      ],
+      "tags": [
+        "wood",
+        "ranged_component",
+        "stave",
+        "kinetic"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "uncommon",
       "external_sources": [],
       "external_sinks": [],
-      "notes": null
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "hunting_bow_slot",
@@ -130,13 +194,25 @@
       "form": "finished",
       "economic_role": "equipment",
       "purpose": "Establishes the basic ranged weapon loop from Woodcutting and Hunting inputs.",
-      "region_keys": ["lowmark", "thornfell"],
-      "tags": ["bow", "ranged_weapon"],
+      "region_keys": [
+        "lowmark",
+        "thornfell"
+      ],
+      "tags": [
+        "bow",
+        "ranged_weapon"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "common",
       "external_sources": [],
-      "external_sinks": [{"relation_type": "equipment_use", "detail": "Equipped as an entry-level ranged weapon."}],
-      "notes": null
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
+        {
+          "relation_type": "equipment_use",
+          "detail": "Equipped as an entry-level ranged weapon."
+        }
+      ]
     },
     {
       "slot_id": "light_crossbow_slot",
@@ -147,13 +223,25 @@
       "form": "finished",
       "economic_role": "equipment",
       "purpose": "Adds a deliberate second ranged cadence without a separate shallow resource family.",
-      "region_keys": ["thornfell", "cross_region"],
-      "tags": ["crossbow", "ranged_weapon"],
+      "region_keys": [
+        "thornfell",
+        "cross_region"
+      ],
+      "tags": [
+        "crossbow",
+        "ranged_weapon"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "common",
       "external_sources": [],
-      "external_sinks": [{"relation_type": "equipment_use", "detail": "Equipped as a compact ranged weapon."}],
-      "notes": null
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
+        {
+          "relation_type": "equipment_use",
+          "detail": "Equipped as a compact ranged weapon."
+        }
+      ]
     },
     {
       "slot_id": "storm_bow_slot",
@@ -164,13 +252,25 @@
       "form": "finished",
       "economic_role": "equipment",
       "purpose": "Realizes Stormwood's canonical bow identity as a durable advanced weapon core.",
-      "region_keys": ["thornfell"],
-      "tags": ["bow", "ranged_weapon", "stormwood"],
+      "region_keys": [
+        "thornfell"
+      ],
+      "tags": [
+        "bow",
+        "ranged_weapon",
+        "stormwood"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "uncommon",
       "external_sources": [],
-      "external_sinks": [{"relation_type": "equipment_use", "detail": "Equipped as an advanced ranged weapon."}],
-      "notes": null
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
+        {
+          "relation_type": "equipment_use",
+          "detail": "Equipped as an advanced ranged weapon."
+        }
+      ]
     },
     {
       "slot_id": "storm_crossbow_slot",
@@ -181,13 +281,26 @@
       "form": "finished",
       "economic_role": "equipment",
       "purpose": "Creates a later sink for Stormwood, steel fittings, and prepared sinew.",
-      "region_keys": ["thornfell", "cross_region"],
-      "tags": ["crossbow", "ranged_weapon", "stormwood"],
+      "region_keys": [
+        "thornfell",
+        "cross_region"
+      ],
+      "tags": [
+        "crossbow",
+        "ranged_weapon",
+        "stormwood"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "uncommon",
       "external_sources": [],
-      "external_sinks": [{"relation_type": "equipment_use", "detail": "Equipped as a heavy controlled ranged weapon."}],
-      "notes": null
+      "external_sinks": [],
+      "notes": null,
+      "external_uses": [
+        {
+          "relation_type": "equipment_use",
+          "detail": "Equipped as a heavy controlled ranged weapon."
+        }
+      ]
     },
     {
       "slot_id": "iron_arrows_slot",
@@ -198,13 +311,25 @@
       "form": "finished",
       "economic_role": "ammunition",
       "purpose": "Early renewable combat sink spanning Mining, Smithing, Woodcutting, Hunting, and Fletching.",
-      "region_keys": ["cross_region"],
-      "tags": ["arrow", "ammunition", "iron"],
+      "region_keys": [
+        "cross_region"
+      ],
+      "tags": [
+        "arrow",
+        "ammunition",
+        "iron"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "common",
       "external_sources": [],
-      "external_sinks": [{"relation_type": "consumption", "detail": "Consumed when fired from bows."}],
-      "notes": null
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "Consumed when fired from bows."
+        }
+      ],
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "iron_bolts_slot",
@@ -215,13 +340,25 @@
       "form": "finished",
       "economic_role": "ammunition",
       "purpose": "Sustains the light crossbow loop with common early materials.",
-      "region_keys": ["cross_region"],
-      "tags": ["bolt", "ammunition", "iron"],
+      "region_keys": [
+        "cross_region"
+      ],
+      "tags": [
+        "bolt",
+        "ammunition",
+        "iron"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "common",
       "external_sources": [],
-      "external_sinks": [{"relation_type": "consumption", "detail": "Consumed when fired from crossbows."}],
-      "notes": null
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "Consumed when fired from crossbows."
+        }
+      ],
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "steel_arrows_slot",
@@ -232,13 +369,25 @@
       "form": "finished",
       "economic_role": "ammunition",
       "purpose": "Extends early timber and hunting materials into mid progression.",
-      "region_keys": ["cross_region"],
-      "tags": ["arrow", "ammunition", "steel"],
+      "region_keys": [
+        "cross_region"
+      ],
+      "tags": [
+        "arrow",
+        "ammunition",
+        "steel"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "common",
       "external_sources": [],
-      "external_sinks": [{"relation_type": "consumption", "detail": "Consumed when fired from bows."}],
-      "notes": null
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "Consumed when fired from bows."
+        }
+      ],
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "steel_bolts_slot",
@@ -249,13 +398,25 @@
       "form": "finished",
       "economic_role": "ammunition",
       "purpose": "Maintains the crossbow ammunition sink through mid progression.",
-      "region_keys": ["cross_region"],
-      "tags": ["bolt", "ammunition", "steel"],
+      "region_keys": [
+        "cross_region"
+      ],
+      "tags": [
+        "bolt",
+        "ammunition",
+        "steel"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "common",
       "external_sources": [],
-      "external_sinks": [{"relation_type": "consumption", "detail": "Consumed when fired from crossbows."}],
-      "notes": null
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "Consumed when fired from crossbows."
+        }
+      ],
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "emberstone_arrows_slot",
@@ -266,13 +427,26 @@
       "form": "finished",
       "economic_role": "ammunition",
       "purpose": "A controlled Emberholt-linked ammunition sink without introducing random rare drops.",
-      "region_keys": ["emberholt", "cross_region"],
-      "tags": ["arrow", "ammunition", "emberstone"],
+      "region_keys": [
+        "emberholt",
+        "cross_region"
+      ],
+      "tags": [
+        "arrow",
+        "ammunition",
+        "emberstone"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "uncommon",
       "external_sources": [],
-      "external_sinks": [{"relation_type": "consumption", "detail": "Consumed when fired; treated as regulated Emberholt ammunition."}],
-      "notes": "No claim is made that the item stores charges or free-casts magic."
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "Consumed when fired; treated as regulated Emberholt ammunition."
+        }
+      ],
+      "notes": "No claim is made that the item stores charges or free-casts magic.",
+      "external_uses": []
     },
     {
       "slot_id": "ashsteel_arrows_slot",
@@ -283,13 +457,26 @@
       "form": "finished",
       "economic_role": "ammunition",
       "purpose": "A late ammunition sink that still consumes common shafts and hunting feathers.",
-      "region_keys": ["emberholt", "cross_region"],
-      "tags": ["arrow", "ammunition", "ashsteel"],
+      "region_keys": [
+        "emberholt",
+        "cross_region"
+      ],
+      "tags": [
+        "arrow",
+        "ammunition",
+        "ashsteel"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "rare",
       "external_sources": [],
-      "external_sinks": [{"relation_type": "consumption", "detail": "Consumed when fired from bows."}],
-      "notes": null
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "Consumed when fired from bows."
+        }
+      ],
+      "notes": null,
+      "external_uses": []
     },
     {
       "slot_id": "ashsteel_bolts_slot",
@@ -300,13 +487,26 @@
       "form": "finished",
       "economic_role": "ammunition",
       "purpose": "Closes the late crossbow ammunition loop while retaining early material demand.",
-      "region_keys": ["emberholt", "cross_region"],
-      "tags": ["bolt", "ammunition", "ashsteel"],
+      "region_keys": [
+        "emberholt",
+        "cross_region"
+      ],
+      "tags": [
+        "bolt",
+        "ammunition",
+        "ashsteel"
+      ],
       "cross_tier_role": "limited",
       "rarity_role": "rare",
       "external_sources": [],
-      "external_sinks": [{"relation_type": "consumption", "detail": "Consumed when fired from crossbows."}],
-      "notes": null
+      "external_sinks": [
+        {
+          "relation_type": "consumption",
+          "detail": "Consumed when fired from crossbows."
+        }
+      ],
+      "notes": null,
+      "external_uses": []
     }
   ],
   "gathering_actions": [
@@ -319,10 +519,26 @@
       "level_band": 1,
       "required_level": 1,
       "purpose": "Provides the shared timber base for early tools, bows, and ammunition.",
-      "region_keys": ["lowmark", "thornfell"],
-      "outputs": [{"item_key": "common_timber", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null}],
-      "tool_tags": ["axe"],
-      "tool_item_keys": ["starter_hatchet"],
+      "region_keys": [
+        "lowmark",
+        "thornfell"
+      ],
+      "outputs": [
+        {
+          "item_key": "common_timber",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "axe"
+      ],
+      "tool_item_keys": [
+        "starter_hatchet"
+      ],
       "notes": null
     },
     {
@@ -334,10 +550,25 @@
       "level_band": 2,
       "required_level": 11,
       "purpose": "Introduces a light specialized bow-frame material without replacing common timber.",
-      "region_keys": ["thornfell"],
-      "outputs": [{"item_key": "goatwillow_wood", "quantity": 1, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null}],
-      "tool_tags": ["axe"],
-      "tool_item_keys": ["iron_axe"],
+      "region_keys": [
+        "thornfell"
+      ],
+      "outputs": [
+        {
+          "item_key": "goatwillow_wood",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "axe"
+      ],
+      "tool_item_keys": [
+        "iron_axe"
+      ],
       "notes": null
     },
     {
@@ -349,10 +580,26 @@
       "level_band": 4,
       "required_level": 31,
       "purpose": "Improves common timber yield rather than creating a redundant third ordinary wood.",
-      "region_keys": ["lowmark", "thornfell"],
-      "outputs": [{"item_key": "common_timber", "quantity": 2, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null}],
-      "tool_tags": ["axe"],
-      "tool_item_keys": ["steel_axe"],
+      "region_keys": [
+        "lowmark",
+        "thornfell"
+      ],
+      "outputs": [
+        {
+          "item_key": "common_timber",
+          "quantity": 2,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "axe"
+      ],
+      "tool_item_keys": [
+        "steel_axe"
+      ],
       "notes": null
     },
     {
@@ -364,10 +611,25 @@
       "level_band": 3,
       "required_level": 21,
       "purpose": "Unlocks the canonical Stormwood ranged progression path.",
-      "region_keys": ["thornfell"],
-      "outputs": [{"item_key": "stormwood", "quantity": 1, "mode": "guaranteed", "rarity_role": "uncommon", "condition_tag": null, "rng_rationale": null}],
-      "tool_tags": ["axe"],
-      "tool_item_keys": ["steel_axe"],
+      "region_keys": [
+        "thornfell"
+      ],
+      "outputs": [
+        {
+          "item_key": "stormwood",
+          "quantity": 1,
+          "mode": "guaranteed",
+          "rarity_role": "uncommon",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "axe"
+      ],
+      "tool_item_keys": [
+        "steel_axe"
+      ],
       "notes": null
     },
     {
@@ -379,10 +641,25 @@
       "level_band": 5,
       "required_level": 41,
       "purpose": "Raises Stormwood throughput for later weapon-frame demand.",
-      "region_keys": ["thornfell"],
-      "outputs": [{"item_key": "stormwood", "quantity": 2, "mode": "guaranteed", "rarity_role": "uncommon", "condition_tag": null, "rng_rationale": null}],
-      "tool_tags": ["axe"],
-      "tool_item_keys": ["steel_axe"],
+      "region_keys": [
+        "thornfell"
+      ],
+      "outputs": [
+        {
+          "item_key": "stormwood",
+          "quantity": 2,
+          "mode": "guaranteed",
+          "rarity_role": "uncommon",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "axe"
+      ],
+      "tool_item_keys": [
+        "steel_axe"
+      ],
       "notes": null
     },
     {
@@ -394,37 +671,666 @@
       "level_band": 6,
       "required_level": 51,
       "purpose": "Creates a difficult Mire source of common structural timber while preserving regional identity on the node.",
-      "region_keys": ["mire"],
-      "outputs": [{"item_key": "common_timber", "quantity": 3, "mode": "guaranteed", "rarity_role": "common", "condition_tag": null, "rng_rationale": null}],
-      "tool_tags": ["axe"],
-      "tool_item_keys": ["ashsteel_axe"],
+      "region_keys": [
+        "mire"
+      ],
+      "outputs": [
+        {
+          "item_key": "common_timber",
+          "quantity": 3,
+          "mode": "guaranteed",
+          "rarity_role": "common",
+          "condition_tag": null,
+          "rng_rationale": null
+        }
+      ],
+      "tool_tags": [
+        "axe"
+      ],
+      "tool_item_keys": [
+        "ashsteel_axe"
+      ],
       "notes": "Woodcutting is intentionally difficult in the Mire; this is a high-level reclamation action."
     }
   ],
   "gathering_nodes": [
-    {"slot_id": "whisperflow_driftroot_slot", "key": "whisperflow_driftroot_stand", "display_name": "Driftroot Stand", "description": "A managed stand along the Whisperflow's firm banks.", "action_key": "fell_common_timber", "region_key": "lowmark", "world_context": "Whisperflow Run riverbank", "interaction_verb": "Fell", "depletable": true, "respawnable": true, "stateful": true, "notes": null},
-    {"slot_id": "ridgewall_crag_pine_slot", "key": "ridgewall_crag_pine_stand", "display_name": "Crag Pine Stand", "description": "Straight pines established below Thornfell's exposed ridges.", "action_key": "fell_common_timber", "region_key": "thornfell", "world_context": "Ridgewall Heights sheltered slope", "interaction_verb": "Fell", "depletable": true, "respawnable": true, "stateful": true, "notes": null},
-    {"slot_id": "windscar_goatwillow_slot", "key": "windscar_goatwillow_patch", "display_name": "Goatwillow Patch", "description": "Dense resilient shrubs rooted against the base of a cliff.", "action_key": "cut_goatwillow", "region_key": "thornfell", "world_context": "Windscar Pass cliff base", "interaction_verb": "Cut", "depletable": true, "respawnable": true, "stateful": true, "notes": null},
-    {"slot_id": "bracken_mature_timber_slot", "key": "lowmark_mature_timber_stand", "display_name": "Mature Timber Stand", "description": "A carefully tended Lowmark stand ready for selective harvest.", "action_key": "cut_mature_timber", "region_key": "lowmark", "world_context": "Floodplain orchard boundary", "interaction_verb": "Fell", "depletable": true, "respawnable": true, "stateful": true, "notes": null},
-    {"slot_id": "stormwake_stormwood_slot", "key": "stormwake_stormwood_stand", "display_name": "Stormwood Stand", "description": "Wind-shaped trees holding fast on the Stormwake Plateau.", "action_key": "harvest_stormwood", "region_key": "thornfell", "world_context": "Stormwake Plateau lee slope", "interaction_verb": "Harvest", "depletable": true, "respawnable": true, "stateful": true, "notes": null},
-    {"slot_id": "old_stormwood_slot", "key": "old_stormwood_trunk", "display_name": "Old Stormwood Trunk", "description": "A thick weathered Stormwood trunk above the high trail.", "action_key": "cut_old_stormwood", "region_key": "thornfell", "world_context": "High trail above Shatterfall Gorge", "interaction_verb": "Cut", "depletable": true, "respawnable": true, "stateful": true, "notes": null},
-    {"slot_id": "rootrest_twisted_wood_slot", "key": "rootrest_twisted_wood", "display_name": "Twisted Mire Growth", "description": "Interlocked woody growth surrounding older Rootrest structures.", "action_key": "reclaim_twisted_mirewood", "region_key": "mire", "world_context": "Rootrest settlement margin", "interaction_verb": "Reclaim", "depletable": true, "respawnable": true, "stateful": true, "notes": null}
+    {
+      "slot_id": "whisperflow_driftroot_slot",
+      "key": "whisperflow_driftroot_stand",
+      "display_name": "Driftroot Stand",
+      "description": "A managed stand along the Whisperflow's firm banks.",
+      "action_key": "fell_common_timber",
+      "region_key": "lowmark",
+      "world_context": "Whisperflow Run riverbank",
+      "interaction_verb": "Fell",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    },
+    {
+      "slot_id": "ridgewall_crag_pine_slot",
+      "key": "ridgewall_crag_pine_stand",
+      "display_name": "Crag Pine Stand",
+      "description": "Straight pines established below Thornfell's exposed ridges.",
+      "action_key": "fell_common_timber",
+      "region_key": "thornfell",
+      "world_context": "Ridgewall Heights sheltered slope",
+      "interaction_verb": "Fell",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    },
+    {
+      "slot_id": "windscar_goatwillow_slot",
+      "key": "windscar_goatwillow_patch",
+      "display_name": "Goatwillow Patch",
+      "description": "Dense resilient shrubs rooted against the base of a cliff.",
+      "action_key": "cut_goatwillow",
+      "region_key": "thornfell",
+      "world_context": "Windscar Pass cliff base",
+      "interaction_verb": "Cut",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    },
+    {
+      "slot_id": "bracken_mature_timber_slot",
+      "key": "lowmark_mature_timber_stand",
+      "display_name": "Mature Timber Stand",
+      "description": "A carefully tended Lowmark stand ready for selective harvest.",
+      "action_key": "cut_mature_timber",
+      "region_key": "lowmark",
+      "world_context": "Floodplain orchard boundary",
+      "interaction_verb": "Fell",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    },
+    {
+      "slot_id": "stormwake_stormwood_slot",
+      "key": "stormwake_stormwood_stand",
+      "display_name": "Stormwood Stand",
+      "description": "Wind-shaped trees holding fast on the Stormwake Plateau.",
+      "action_key": "harvest_stormwood",
+      "region_key": "thornfell",
+      "world_context": "Stormwake Plateau lee slope",
+      "interaction_verb": "Harvest",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    },
+    {
+      "slot_id": "old_stormwood_slot",
+      "key": "old_stormwood_trunk",
+      "display_name": "Old Stormwood Trunk",
+      "description": "A thick weathered Stormwood trunk above the high trail.",
+      "action_key": "cut_old_stormwood",
+      "region_key": "thornfell",
+      "world_context": "High trail above Shatterfall Gorge",
+      "interaction_verb": "Cut",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    },
+    {
+      "slot_id": "rootrest_twisted_wood_slot",
+      "key": "rootrest_twisted_wood",
+      "display_name": "Twisted Mire Growth",
+      "description": "Interlocked woody growth surrounding older Rootrest structures.",
+      "action_key": "reclaim_twisted_mirewood",
+      "region_key": "mire",
+      "world_context": "Rootrest settlement margin",
+      "interaction_verb": "Reclaim",
+      "depletable": true,
+      "respawnable": true,
+      "stateful": true,
+      "notes": null
+    }
   ],
   "recipes": [
-    {"slot_id": "split_common_shafts_slot", "key": "split_common_shafts", "display_name": "Split Common Shafts", "description": "Split and straighten common timber into matched ammunition shafts.", "skill_key": "fletching", "level_band": 1, "required_level": 1, "purpose": "Creates the durable early-material sink used by every ammunition tier.", "region_keys": ["cross_region"], "inputs": [{"item_key": "common_timber", "quantity": 1}], "outputs": [{"item_key": "common_shafts", "quantity": 12}], "station_tag": "fletching_bench", "cross_skill_links": ["woodcutting"], "notes": null},
-    {"slot_id": "craft_hunting_bow_slot", "key": "craft_hunting_bow", "display_name": "Craft Hunting Bow", "description": "Shape common timber and bind it with prepared sinew.", "skill_key": "fletching", "level_band": 1, "required_level": 3, "purpose": "Completes the first Woodcutting-Hunting-Fletching weapon loop.", "region_keys": ["lowmark", "thornfell"], "inputs": [{"item_key": "common_timber", "quantity": 2}, {"item_key": "sinew_cord", "quantity": 1}], "outputs": [{"item_key": "hunting_bow", "quantity": 1}], "station_tag": "fletching_bench", "cross_skill_links": ["woodcutting", "hunting", "leatherworking"], "notes": null},
-    {"slot_id": "fletch_iron_arrows_slot", "key": "fletch_iron_arrows", "display_name": "Fletch Iron Arrows", "description": "Fit iron heads and feathers to a matched batch of shafts.", "skill_key": "fletching", "level_band": 1, "required_level": 5, "purpose": "Establishes the renewable cross-skill ammunition sink.", "region_keys": ["cross_region"], "inputs": [{"item_key": "common_shafts", "quantity": 12}, {"item_key": "iron_arrowheads", "quantity": 12}, {"item_key": "fletching_feathers", "quantity": 1}], "outputs": [{"item_key": "iron_arrows", "quantity": 12}], "station_tag": "fletching_bench", "cross_skill_links": ["woodcutting", "hunting", "smithing"], "notes": null},
-    {"slot_id": "shape_goatwillow_stave_slot", "key": "shape_goatwillow_stave", "display_name": "Shape Goatwillow Stave", "description": "Season and shape Goatwillow into a light ranged-weapon stave.", "skill_key": "fletching", "level_band": 2, "required_level": 11, "purpose": "Processes a canonical Thornfell wood into a distinct compact frame.", "region_keys": ["thornfell"], "inputs": [{"item_key": "goatwillow_wood", "quantity": 2}], "outputs": [{"item_key": "goatwillow_stave", "quantity": 1}], "station_tag": "fletching_bench", "cross_skill_links": ["woodcutting"], "notes": null},
-    {"slot_id": "craft_light_crossbow_slot", "key": "craft_light_crossbow", "display_name": "Craft Light Crossbow", "description": "Assemble a Goatwillow stave, iron mechanism, common stock, and sinew binding.", "skill_key": "fletching", "level_band": 2, "required_level": 15, "purpose": "Opens the crossbow path from existing connected materials.", "region_keys": ["thornfell", "cross_region"], "inputs": [{"item_key": "goatwillow_stave", "quantity": 1}, {"item_key": "iron_fasteners", "quantity": 1}, {"item_key": "common_timber", "quantity": 1}, {"item_key": "sinew_cord", "quantity": 1}], "outputs": [{"item_key": "light_crossbow", "quantity": 1}], "station_tag": "fletching_bench", "cross_skill_links": ["woodcutting", "hunting", "leatherworking", "smithing"], "notes": null},
-    {"slot_id": "fletch_iron_bolts_slot", "key": "fletch_iron_bolts", "display_name": "Fletch Iron Bolts", "description": "Fit iron bolt heads and feathers to short common shafts.", "skill_key": "fletching", "level_band": 2, "required_level": 18, "purpose": "Supplies the early crossbow consumption loop.", "region_keys": ["cross_region"], "inputs": [{"item_key": "common_shafts", "quantity": 12}, {"item_key": "iron_arrowheads", "quantity": 12}, {"item_key": "fletching_feathers", "quantity": 1}], "outputs": [{"item_key": "iron_bolts", "quantity": 12}], "station_tag": "fletching_bench", "cross_skill_links": ["woodcutting", "hunting", "smithing"], "notes": "Iron arrowhead blanks are compact enough to finish as either arrow or bolt heads."
+    {
+      "slot_id": "split_common_shafts_slot",
+      "key": "split_common_shafts",
+      "display_name": "Split Common Shafts",
+      "description": "Split and straighten common timber into matched ammunition shafts.",
+      "skill_key": "fletching",
+      "level_band": 1,
+      "required_level": 1,
+      "purpose": "Creates the durable early-material sink used by every ammunition tier.",
+      "region_keys": [
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "common_timber",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "common_shafts",
+          "quantity": 12
+        }
+      ],
+      "station_tag": "fletching_bench",
+      "cross_skill_links": [
+        "woodcutting"
+      ],
+      "notes": null
     },
-    {"slot_id": "shape_stormwood_stave_slot", "key": "shape_stormwood_stave", "display_name": "Shape Stormwood Stave", "description": "Season and shape Stormwood without cutting away its useful flex.", "skill_key": "fletching", "level_band": 3, "required_level": 21, "purpose": "Creates one shared advanced frame instead of separate bow and crossbow woods.", "region_keys": ["thornfell"], "inputs": [{"item_key": "stormwood", "quantity": 2}], "outputs": [{"item_key": "stormwood_stave", "quantity": 1}], "station_tag": "fletching_bench", "cross_skill_links": ["woodcutting"], "notes": null},
-    {"slot_id": "craft_storm_bow_slot", "key": "craft_storm_bow", "display_name": "Craft Stormwood Bow", "description": "Bind a shaped Stormwood stave with prepared sinew cord.", "skill_key": "fletching", "level_band": 3, "required_level": 25, "purpose": "Turns canonical Stormwood into its intended durable bow output.", "region_keys": ["thornfell"], "inputs": [{"item_key": "stormwood_stave", "quantity": 1}, {"item_key": "sinew_cord", "quantity": 2}], "outputs": [{"item_key": "storm_bow", "quantity": 1}], "station_tag": "fletching_bench", "cross_skill_links": ["woodcutting", "hunting", "leatherworking"], "notes": null},
-    {"slot_id": "fletch_steel_arrows_slot", "key": "fletch_steel_arrows", "display_name": "Fletch Steel Arrows", "description": "Fit steel heads and selected feathers to common shafts.", "skill_key": "fletching", "level_band": 3, "required_level": 28, "purpose": "Carries entry-level timber and feathers into mid-tier ammunition.", "region_keys": ["cross_region"], "inputs": [{"item_key": "common_shafts", "quantity": 12}, {"item_key": "steel_arrowheads", "quantity": 12}, {"item_key": "fletching_feathers", "quantity": 1}], "outputs": [{"item_key": "steel_arrows", "quantity": 12}], "station_tag": "fletching_bench", "cross_skill_links": ["woodcutting", "hunting", "smithing"], "notes": null},
-    {"slot_id": "craft_storm_crossbow_slot", "key": "craft_storm_crossbow", "display_name": "Craft Stormwood Crossbow", "description": "Assemble a Stormwood stave with iron fittings, timber stock, and sinew binding.", "skill_key": "fletching", "level_band": 4, "required_level": 34, "purpose": "Provides a durable late-mid crossbow sink shared across four skills while retaining iron relevance.", "region_keys": ["thornfell", "cross_region"], "inputs": [{"item_key": "stormwood_stave", "quantity": 1}, {"item_key": "iron_fasteners", "quantity": 2}, {"item_key": "common_timber", "quantity": 1}, {"item_key": "sinew_cord", "quantity": 2}], "outputs": [{"item_key": "storm_crossbow", "quantity": 1}], "station_tag": "fletching_bench", "cross_skill_links": ["woodcutting", "hunting", "leatherworking", "smithing"], "notes": null},
-    {"slot_id": "fletch_steel_bolts_slot", "key": "fletch_steel_bolts", "display_name": "Fletch Steel Bolts", "description": "Fit steel heads and compact feathering to short shafts.", "skill_key": "fletching", "level_band": 4, "required_level": 38, "purpose": "Maintains a repeatable steel and common-timber sink for crossbows.", "region_keys": ["cross_region"], "inputs": [{"item_key": "common_shafts", "quantity": 12}, {"item_key": "steel_arrowheads", "quantity": 12}, {"item_key": "fletching_feathers", "quantity": 1}], "outputs": [{"item_key": "steel_bolts", "quantity": 12}], "station_tag": "fletching_bench", "cross_skill_links": ["woodcutting", "hunting", "smithing"], "notes": null},
-    {"slot_id": "fletch_emberstone_arrows_slot", "key": "fletch_emberstone_arrows", "display_name": "Fletch Emberstone Arrows", "description": "Balance stabilized Emberstone heads against selected shafts and feathers.", "skill_key": "fletching", "level_band": 5, "required_level": 44, "purpose": "Connects controlled Emberholt material work to a consumptive ranged sink.", "region_keys": ["emberholt", "cross_region"], "inputs": [{"item_key": "common_shafts", "quantity": 12}, {"item_key": "emberstone_arrowheads", "quantity": 12}, {"item_key": "fletching_feathers", "quantity": 1}], "outputs": [{"item_key": "emberstone_arrows", "quantity": 12}], "station_tag": "fletching_bench", "cross_skill_links": ["woodcutting", "hunting", "smithing"], "notes": null},
-    {"slot_id": "fletch_ashsteel_arrows_slot", "key": "fletch_ashsteel_arrows", "display_name": "Fletch Ashsteel Arrows", "description": "Fit precise Ashsteel heads to carefully matched common shafts.", "skill_key": "fletching", "level_band": 6, "required_level": 52, "purpose": "Retains low-tier timber and feather demand at the elite metal tier.", "region_keys": ["emberholt", "cross_region"], "inputs": [{"item_key": "common_shafts", "quantity": 12}, {"item_key": "ashsteel_arrowheads", "quantity": 12}, {"item_key": "fletching_feathers", "quantity": 2}], "outputs": [{"item_key": "ashsteel_arrows", "quantity": 12}], "station_tag": "fletching_bench", "cross_skill_links": ["woodcutting", "hunting", "smithing"], "notes": null},
-    {"slot_id": "fletch_ashsteel_bolts_slot", "key": "fletch_ashsteel_bolts", "display_name": "Fletch Ashsteel Bolts", "description": "Fit Ashsteel heads and robust feathering to short matched shafts.", "skill_key": "fletching", "level_band": 6, "required_level": 56, "purpose": "Completes the elite crossbow ammunition sink with no new filler ingredients.", "region_keys": ["emberholt", "cross_region"], "inputs": [{"item_key": "common_shafts", "quantity": 12}, {"item_key": "ashsteel_arrowheads", "quantity": 12}, {"item_key": "fletching_feathers", "quantity": 2}], "outputs": [{"item_key": "ashsteel_bolts", "quantity": 12}], "station_tag": "fletching_bench", "cross_skill_links": ["woodcutting", "hunting", "smithing"], "notes": null}
+    {
+      "slot_id": "craft_hunting_bow_slot",
+      "key": "craft_hunting_bow",
+      "display_name": "Craft Hunting Bow",
+      "description": "Shape common timber and bind it with prepared sinew.",
+      "skill_key": "fletching",
+      "level_band": 1,
+      "required_level": 3,
+      "purpose": "Completes the first Woodcutting-Hunting-Fletching weapon loop.",
+      "region_keys": [
+        "lowmark",
+        "thornfell"
+      ],
+      "inputs": [
+        {
+          "item_key": "common_timber",
+          "quantity": 2
+        },
+        {
+          "item_key": "sinew_cord",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "hunting_bow",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "fletching_bench",
+      "cross_skill_links": [
+        "woodcutting",
+        "hunting",
+        "leatherworking"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "fletch_iron_arrows_slot",
+      "key": "fletch_iron_arrows",
+      "display_name": "Fletch Iron Arrows",
+      "description": "Fit iron heads and feathers to a matched batch of shafts.",
+      "skill_key": "fletching",
+      "level_band": 1,
+      "required_level": 5,
+      "purpose": "Establishes the renewable cross-skill ammunition sink.",
+      "region_keys": [
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "common_shafts",
+          "quantity": 12
+        },
+        {
+          "item_key": "iron_arrowheads",
+          "quantity": 12
+        },
+        {
+          "item_key": "fletching_feathers",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "iron_arrows",
+          "quantity": 12
+        }
+      ],
+      "station_tag": "fletching_bench",
+      "cross_skill_links": [
+        "woodcutting",
+        "hunting",
+        "smithing"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "shape_goatwillow_stave_slot",
+      "key": "shape_goatwillow_stave",
+      "display_name": "Shape Goatwillow Stave",
+      "description": "Season and shape Goatwillow into a light ranged-weapon stave.",
+      "skill_key": "fletching",
+      "level_band": 2,
+      "required_level": 11,
+      "purpose": "Processes a canonical Thornfell wood into a distinct compact frame.",
+      "region_keys": [
+        "thornfell"
+      ],
+      "inputs": [
+        {
+          "item_key": "goatwillow_wood",
+          "quantity": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "goatwillow_stave",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "fletching_bench",
+      "cross_skill_links": [
+        "woodcutting"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "craft_light_crossbow_slot",
+      "key": "craft_light_crossbow",
+      "display_name": "Craft Light Crossbow",
+      "description": "Assemble a Goatwillow stave, iron mechanism, common stock, and sinew binding.",
+      "skill_key": "fletching",
+      "level_band": 2,
+      "required_level": 15,
+      "purpose": "Opens the crossbow path from existing connected materials.",
+      "region_keys": [
+        "thornfell",
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "goatwillow_stave",
+          "quantity": 1
+        },
+        {
+          "item_key": "iron_fasteners",
+          "quantity": 1
+        },
+        {
+          "item_key": "common_timber",
+          "quantity": 1
+        },
+        {
+          "item_key": "sinew_cord",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "light_crossbow",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "fletching_bench",
+      "cross_skill_links": [
+        "woodcutting",
+        "hunting",
+        "leatherworking",
+        "smithing"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "fletch_iron_bolts_slot",
+      "key": "fletch_iron_bolts",
+      "display_name": "Fletch Iron Bolts",
+      "description": "Fit iron bolt heads and feathers to short common shafts.",
+      "skill_key": "fletching",
+      "level_band": 2,
+      "required_level": 18,
+      "purpose": "Supplies the early crossbow consumption loop.",
+      "region_keys": [
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "common_shafts",
+          "quantity": 12
+        },
+        {
+          "item_key": "iron_arrowheads",
+          "quantity": 12
+        },
+        {
+          "item_key": "fletching_feathers",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "iron_bolts",
+          "quantity": 12
+        }
+      ],
+      "station_tag": "fletching_bench",
+      "cross_skill_links": [
+        "woodcutting",
+        "hunting",
+        "smithing"
+      ],
+      "notes": "Iron arrowhead blanks are compact enough to finish as either arrow or bolt heads."
+    },
+    {
+      "slot_id": "shape_stormwood_stave_slot",
+      "key": "shape_stormwood_stave",
+      "display_name": "Shape Stormwood Stave",
+      "description": "Season and shape Stormwood without cutting away its useful flex.",
+      "skill_key": "fletching",
+      "level_band": 3,
+      "required_level": 21,
+      "purpose": "Creates one shared advanced frame instead of separate bow and crossbow woods.",
+      "region_keys": [
+        "thornfell"
+      ],
+      "inputs": [
+        {
+          "item_key": "stormwood",
+          "quantity": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "stormwood_stave",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "fletching_bench",
+      "cross_skill_links": [
+        "woodcutting"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "craft_storm_bow_slot",
+      "key": "craft_storm_bow",
+      "display_name": "Craft Stormwood Bow",
+      "description": "Bind a shaped Stormwood stave with prepared sinew cord.",
+      "skill_key": "fletching",
+      "level_band": 3,
+      "required_level": 25,
+      "purpose": "Turns canonical Stormwood into its intended durable bow output.",
+      "region_keys": [
+        "thornfell"
+      ],
+      "inputs": [
+        {
+          "item_key": "stormwood_stave",
+          "quantity": 1
+        },
+        {
+          "item_key": "sinew_cord",
+          "quantity": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "storm_bow",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "fletching_bench",
+      "cross_skill_links": [
+        "woodcutting",
+        "hunting",
+        "leatherworking"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "fletch_steel_arrows_slot",
+      "key": "fletch_steel_arrows",
+      "display_name": "Fletch Steel Arrows",
+      "description": "Fit steel heads and selected feathers to common shafts.",
+      "skill_key": "fletching",
+      "level_band": 3,
+      "required_level": 28,
+      "purpose": "Carries entry-level timber and feathers into mid-tier ammunition.",
+      "region_keys": [
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "common_shafts",
+          "quantity": 12
+        },
+        {
+          "item_key": "steel_arrowheads",
+          "quantity": 12
+        },
+        {
+          "item_key": "fletching_feathers",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "steel_arrows",
+          "quantity": 12
+        }
+      ],
+      "station_tag": "fletching_bench",
+      "cross_skill_links": [
+        "woodcutting",
+        "hunting",
+        "smithing"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "craft_storm_crossbow_slot",
+      "key": "craft_storm_crossbow",
+      "display_name": "Craft Stormwood Crossbow",
+      "description": "Assemble a Stormwood stave with iron fittings, timber stock, and sinew binding.",
+      "skill_key": "fletching",
+      "level_band": 4,
+      "required_level": 34,
+      "purpose": "Provides a durable late-mid crossbow sink shared across four skills while retaining iron relevance.",
+      "region_keys": [
+        "thornfell",
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "stormwood_stave",
+          "quantity": 1
+        },
+        {
+          "item_key": "iron_fasteners",
+          "quantity": 2
+        },
+        {
+          "item_key": "common_timber",
+          "quantity": 1
+        },
+        {
+          "item_key": "sinew_cord",
+          "quantity": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "storm_crossbow",
+          "quantity": 1
+        }
+      ],
+      "station_tag": "fletching_bench",
+      "cross_skill_links": [
+        "woodcutting",
+        "hunting",
+        "leatherworking",
+        "smithing"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "fletch_steel_bolts_slot",
+      "key": "fletch_steel_bolts",
+      "display_name": "Fletch Steel Bolts",
+      "description": "Fit steel heads and compact feathering to short shafts.",
+      "skill_key": "fletching",
+      "level_band": 4,
+      "required_level": 38,
+      "purpose": "Maintains a repeatable steel and common-timber sink for crossbows.",
+      "region_keys": [
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "common_shafts",
+          "quantity": 12
+        },
+        {
+          "item_key": "steel_arrowheads",
+          "quantity": 12
+        },
+        {
+          "item_key": "fletching_feathers",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "steel_bolts",
+          "quantity": 12
+        }
+      ],
+      "station_tag": "fletching_bench",
+      "cross_skill_links": [
+        "woodcutting",
+        "hunting",
+        "smithing"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "fletch_emberstone_arrows_slot",
+      "key": "fletch_emberstone_arrows",
+      "display_name": "Fletch Emberstone Arrows",
+      "description": "Balance stabilized Emberstone heads against selected shafts and feathers.",
+      "skill_key": "fletching",
+      "level_band": 5,
+      "required_level": 44,
+      "purpose": "Connects controlled Emberholt material work to a consumptive ranged sink.",
+      "region_keys": [
+        "emberholt",
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "common_shafts",
+          "quantity": 12
+        },
+        {
+          "item_key": "emberstone_arrowheads",
+          "quantity": 12
+        },
+        {
+          "item_key": "fletching_feathers",
+          "quantity": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "emberstone_arrows",
+          "quantity": 12
+        }
+      ],
+      "station_tag": "fletching_bench",
+      "cross_skill_links": [
+        "woodcutting",
+        "hunting",
+        "smithing"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "fletch_ashsteel_arrows_slot",
+      "key": "fletch_ashsteel_arrows",
+      "display_name": "Fletch Ashsteel Arrows",
+      "description": "Fit precise Ashsteel heads to carefully matched common shafts.",
+      "skill_key": "fletching",
+      "level_band": 6,
+      "required_level": 52,
+      "purpose": "Retains low-tier timber and feather demand at the elite metal tier.",
+      "region_keys": [
+        "emberholt",
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "common_shafts",
+          "quantity": 12
+        },
+        {
+          "item_key": "ashsteel_arrowheads",
+          "quantity": 12
+        },
+        {
+          "item_key": "fletching_feathers",
+          "quantity": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "ashsteel_arrows",
+          "quantity": 12
+        }
+      ],
+      "station_tag": "fletching_bench",
+      "cross_skill_links": [
+        "woodcutting",
+        "hunting",
+        "smithing"
+      ],
+      "notes": null
+    },
+    {
+      "slot_id": "fletch_ashsteel_bolts_slot",
+      "key": "fletch_ashsteel_bolts",
+      "display_name": "Fletch Ashsteel Bolts",
+      "description": "Fit Ashsteel heads and robust feathering to short matched shafts.",
+      "skill_key": "fletching",
+      "level_band": 6,
+      "required_level": 56,
+      "purpose": "Completes the elite crossbow ammunition sink with no new filler ingredients.",
+      "region_keys": [
+        "emberholt",
+        "cross_region"
+      ],
+      "inputs": [
+        {
+          "item_key": "common_shafts",
+          "quantity": 12
+        },
+        {
+          "item_key": "ashsteel_arrowheads",
+          "quantity": 12
+        },
+        {
+          "item_key": "fletching_feathers",
+          "quantity": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item_key": "ashsteel_bolts",
+          "quantity": 12
+        }
+      ],
+      "station_tag": "fletching_bench",
+      "cross_skill_links": [
+        "woodcutting",
+        "hunting",
+        "smithing"
+      ],
+      "notes": null
+    }
   ]
 }
