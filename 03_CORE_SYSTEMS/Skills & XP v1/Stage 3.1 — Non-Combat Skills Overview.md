@@ -1,6 +1,6 @@
 # Skill Level & Mastery Philosophy
 
-**Creative Director status:** approved for skill progression design. This defines the numerical cap and milestone identities only. It does not set XP/hour, time-to-level, action timing, RNG, individual unlock positions, or runtime behavior.
+**Creative Director status:** approved for skill progression design. This document defines the numerical cap, milestone identities, and closed XP-progression philosophy. It does not set exact XP totals, per-level XP thresholds, XP/hour, action timing, RNG, individual unlock positions, or runtime behavior.
 
 ## Skill Cap
 
@@ -27,6 +27,52 @@
 - A small number of post-80 functions may be extremely rewarding, but they are specialist capabilities rather than missing essentials.
 - Level 99 should feel memorable and personally significant without requiring a mandatory final power spike.
 
+## XP Progression Philosophy
+
+Caelmor uses a **smooth milestone-shaped accelerating progression curve** rather than copying the RuneScape XP formula or forcing all 99 levels through one mathematically neat exponent.
+
+The progression target is a **long-form level-99 journey of approximately 135–150 engaged skill hours**, using **145 hours as the nominal analytical target**.
+
+"Engaged skill hours" means ideal time actively progressing that discipline. It does not represent elapsed account time and excludes travel, downtime, market activity, inventory friction, quests, combat interruptions, social play, and other non-training activity.
+
+### Nominal milestone targets
+
+| Milestone | Identity | Nominal engaged time from level 1 | Early tuning envelope |
+|---|---|---:|---:|
+| 30 | Novice complete | **~11 h** | ~10–12 h |
+| 50 | Competent complete | **~31 h** | ~28–34 h |
+| 70 | Advanced complete | **~63 h** | ~58–68 h |
+| 80 | Practical mastery | **~90 h** | ~85–92 h |
+| 99 | Cap / Completion | **~145 h** | ~135–150 h |
+
+Practical mastery therefore occurs at roughly **62% of the nominal journey**, leaving roughly **38%** of the commitment after level 80 for refinement, specialization, prestige, identity, and long-term personal goals.
+
+### Intended pacing feel
+
+- **1–10:** rapid orientation; early progress should feel dependable and welcoming.
+- **11–30:** steady apprenticeship; progress remains energetic while levels gain personal weight.
+- **31–50:** established competence; the skill becomes a dependable part of the character.
+- **51–70:** serious investment; knowledge and efficiency increasingly matter.
+- **71–80:** mastery approach; the player should feel visibly close to practical mastery.
+- **81–90:** refinement; progression becomes more deliberate and identity-driven.
+- **91–98:** dedication; each level is meaningful without becoming an artificial punishment wall.
+- **99:** culmination; the achievement supplies the emotional spike, so 98→99 should not be grotesquely disproportionate to surrounding late levels.
+
+### Method-discovery principle
+
+The nominal time targets are not fixed-rate promises. A player who learns better routes, preparation, resource relationships, tool choices, processing chains, or other legitimate skill-specific efficiencies should be able to progress faster than a less-informed player.
+
+Future XP/hour tuning should therefore support a **baseline method plus a meaningful but controlled efficiency ceiling**, preserving knowledge-based mastery without allowing optimal methods to trivialize the journey.
+
+### Practical-mastery boundary
+
+By approximately level 80:
+
+- most core practical functionality should be available;
+- the skill should feel complete enough for confident ordinary high-level use;
+- remaining unlocks should be specialist, prestigious, unusually efficient, or otherwise exceptional;
+- no fundamental feature necessary to understand or enjoy the discipline should be withheld simply to populate levels 81–98.
+
 ## Expansion Rule
 
 Future skill-cap increases remain legitimate. If a skill rises beyond 99 later, 99 remains a historical mastery landmark and should not be retroactively treated as false mastery.
@@ -34,6 +80,22 @@ Future skill-cap increases remain legitimate. If a skill rises beyond 99 later, 
 ## Content-Density Guardrail
 
 The level count must never force filler resources, recipes, tools, tiers, or catalog bloat. A skill's identity should come from meaningful mechanics, world memories, useful cross-skill connections, knowledge-based efficiency, and selected authored landmarks.
+
+## Balance Boundary
+
+The closed philosophy above does **not** yet define:
+
+- total XP at level 99;
+- exact XP required for individual levels;
+- baseline or optimal XP/hour;
+- action durations;
+- XP per gather/craft/completion;
+- success or failure probabilities;
+- resource yield rates;
+- exact unlock levels inside each identity band;
+- runtime formulas or implementation.
+
+Those values should be derived later from the milestone targets and validated against actual world friction, input supply, economy throughput, skill-specific activity structure, and playtest results.
 
 ---
 
