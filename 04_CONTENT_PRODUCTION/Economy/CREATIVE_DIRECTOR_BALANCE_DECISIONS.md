@@ -1,6 +1,6 @@
 # Creative Director balance decision package
 
-**Decision status:** the **skill-cap and progression-milestone philosophy is Creative Director approved and closed**. Decisions about XP curve shape, XP/hour, action cadence, RNG, cross-tier reuse, and catalog expansion remain open. The checked-in `balance_config.json`, generated XP curve, SQLite progression bands, and all 60-level calculations below remain a **legacy provisional analytical baseline**, not approved balance and not runtime canon. No runtime, schema, JSON, or C# cutover is authorized by this document.
+**Decision status:** the **skill-cap, progression-milestone, and XP-progression philosophies are closed for analytical design**. The Creative Director established the 99-cap/mastery direction and instructed the Gameplay Designer to resolve remaining level-progression gaps without unnecessary escalation. Exact XP totals, XP/hour, action cadence, RNG, cross-tier reuse, catalog expansion, and runtime implementation remain open. The checked-in `balance_config.json`, generated XP curve, SQLite progression bands, and all 60-level calculations below remain a **legacy provisional analytical baseline**, not approved balance and not runtime canon. No runtime, schema, JSON, or C# cutover is authorized by this document.
 
 Phase 1.3's seven `v1_core` skills and Lowmark-only v1 geography remain distinct from the seven `economy_extension` skills and later-region analytical planning.
 
@@ -65,11 +65,95 @@ Ordinary levels are allowed to function as **satisfying progress pulses**. Selec
 
 Future skill-cap increases remain a legitimate expansion tool. If a skill later rises beyond 99, reaching 99 must retain its historical and emotional significance rather than being retroactively treated as "not actually mastery." A later increase should read as a **new chapter beyond an established mastery landmark**, not as invalidation of the player's previous completion.
 
-### Downstream balance consequence
+---
 
-The next progression decision pass must rebuild XP-curve and time-to-milestone analysis around this approved structure. No approved conclusions about hours-to-30, hours-to-50, hours-to-70, hours-to-80, or hours-to-99 exist yet.
+## Closed progression design — XP curve and time-to-milestone philosophy
 
-Do **not** remap content, regenerate XP tables, alter `max_level`, change action timing, tune XP/hour, change RNG, or alter runtime systems solely from this decision. Those are separate downstream tasks.
+This section closes the remaining **level-progression design gaps**. It establishes tuning targets, not runtime rates. "Engaged skill hours" means ideal time actively progressing that discipline; it is not elapsed account time and excludes travel, downtime, market activity, inventory friction, quests, combat interruptions, social play, and other non-training activity.
+
+### Mastery horizon
+
+Caelmor targets a **long-form 99 journey of approximately 135–150 engaged skill hours**, with **145 hours as the nominal analytical target**.
+
+The purpose is not to reproduce RuneScape's XP table or grind length. The purpose is to preserve the emotional qualities that make long-term skill progression memorable: recurring personal goals, attachment to training places and methods, visible permanent progress, knowledge-driven efficiency, and a final achievement that can become part of the character's identity.
+
+The 99 journey must feel like a long relationship with a discipline rather than a mandatory wall blocking normal play.
+
+### Nominal milestone timing targets
+
+| Milestone | Identity | Nominal engaged time from level 1 | Acceptable early tuning envelope | Design meaning |
+|---|---|---:|---:|---|
+| **30** | Novice complete | **~11 h** | ~10–12 h | Basic loop learned; player is a confident apprentice rather than a beginner. |
+| **50** | Competent complete | **~31 h** | ~28–34 h | Skill is dependable; player has meaningful personal routines and choices. |
+| **70** | Advanced complete | **~63 h** | ~58–68 h | Knowledge and efficiency clearly distinguish experienced players. |
+| **80** | Practical mastery | **~90 h** | ~85–92 h | Most practical functionality is available; the player should feel almost mastered. |
+| **99** | Cap / Completion | **~145 h** | ~135–150 h | Long-term dedication, identity, and commemoration. |
+
+Nominal incremental commitment is therefore approximately:
+
+- levels 1–30: **11 h**
+- levels 31–50: **20 h**
+- levels 51–70: **32 h**
+- levels 71–80: **27 h**
+- levels 81–99: **55 h**
+
+This places practical mastery at roughly **62% of the full nominal journey**, leaving about **38%** after level 80. That late tail is intentional: practical mastery and numerical completion are different achievements.
+
+### Curve shape
+
+Use a **smooth milestone-shaped accelerating curve**, not a copied RuneScape formula and not a single exponent chosen only for mathematical neatness.
+
+The intended pacing is:
+
+- **1–10 — rapid orientation:** level gains are frequent enough to teach that progress is dependable.
+- **11–30 — steady apprenticeship:** progress remains energetic while levels begin to carry more personal weight.
+- **31–50 — established competence:** level-ups remain visible but require deliberate engagement.
+- **51–70 — serious investment:** individual levels increasingly feel earned; efficiency and method knowledge matter more.
+- **71–80 — mastery approach:** progression should create visible anticipation toward practical mastery.
+- **81–90 — refinement:** levels are slower and primarily support specialization, goals, prestige, and identity.
+- **91–98 — dedication:** each level represents significant commitment without becoming an artificial punishment wall.
+- **99 — culmination:** the achievement itself supplies the emotional spike; 98→99 should not be grotesquely disproportionate to the surrounding late levels.
+
+The curve may change acceleration across these broad regions, but transitions should remain smooth enough that players do not encounter unexplained pacing cliffs.
+
+### Progress-pulse rule
+
+Ordinary level-ups are valid rewards even when they unlock no new object or action. The permanent number increase, visible approach to a self-selected goal, and increasing mastery are themselves part of the progression loop.
+
+Authored unlock density should therefore be **lower than numerical level density**. Selected milestone levels should carry mechanical, world, efficiency, or identity meaning; intervening levels may exist primarily as satisfying progress pulses.
+
+### Method-discovery rule
+
+The 135–150 hour completion target is **not** permission to force every player to progress at one fixed rate. Caelmor should preserve room for knowledge-driven efficiency.
+
+A player who learns better routes, preparation, resource relationships, tool choices, processing chains, or other legitimate skill-specific efficiencies should be able to outperform a less-informed player without bypassing the identity of the journey. Future XP/hour tuning should therefore define a reasonable baseline method and a meaningful but controlled efficiency ceiling rather than one universal rate.
+
+### Practical-mastery boundary
+
+By approximately level 80:
+
+- the player should possess most core practical functionality;
+- the skill should feel complete enough to use confidently across ordinary high-level play;
+- remaining unlocks should be specialist, prestigious, unusually efficient, or otherwise exceptional;
+- no fundamental feature necessary to understand or enjoy the discipline should be withheld merely to populate levels 81–98.
+
+This protects the 80–99 tail from becoming compulsory grind while preserving a strong voluntary long-term goal.
+
+### What remains deliberately unresolved
+
+This closed design direction does **not** yet define:
+
+- total XP at level 99;
+- exact XP required for each individual level;
+- baseline or optimal XP/hour;
+- action durations;
+- XP per gather/craft/completion;
+- success or failure probabilities;
+- resource yield rates;
+- exact unlock levels inside each identity band;
+- runtime formulas or implementation.
+
+Those values must be derived later from the approved milestone timing targets and playtested against actual travel, input supply, world friction, economy throughput, and skill-specific activity structure.
 
 ---
 
@@ -115,9 +199,9 @@ The old 60-level shorthand of "competent = entering band 3; advanced = entering 
 
 1. **Skill cap and milestone philosophy — CLOSED.** Cap 99. Novice 1–30; Competent 31–50; Advanced 51–70; Masterful 71–98; practical mastery around 80; Cap/Completion 99. Most practical functionality is available by practical mastery. Post-80 rewards are specialist opportunities. Cap is primarily identity/commemoration. Future cap increases remain permissible while preserving 99 as a historical mastery landmark. Ordinary levels are satisfying progress pulses and do not each require authored unlocks.
 
-2. **XP curve / hours to competence, advancement, practical mastery, and cap — OPEN.** The former 60-level scenarios (15/30/45 h focused, 20/40/60 h current, 30/60/90 h deliberate at old band boundaries) are now historical comparison points only. The next pass must decide curve shape and desired active time to levels 30, 50, 70, ~80, and 99 before deriving XP/hour targets.
+2. **XP curve / hours to competence, advancement, practical mastery, and cap — CLOSED FOR DESIGN TARGETS.** Use a smooth milestone-shaped accelerating curve. Nominal cumulative engaged-time targets are approximately level 30 = 11 h, level 50 = 31 h, level 70 = 63 h, level 80 = 90 h, and level 99 = 145 h. The acceptable early tuning envelope is approximately 135–150 h to 99, with practical mastery around 85–92 h. Exact XP totals, per-level thresholds, baseline XP/hour, and optimal XP/hour remain future derived balance values rather than independent Creative Director decisions.
 
-3. **Band / unlock-spacing philosophy — PARTIALLY CLOSED.** Broad identity bands are now fixed by the approved milestone structure, but exact authored unlock spacing inside those bands remains open. The governing rule is that ordinary levels may be progress pulses; not every level needs an action, recipe, or item unlock. Existing six 10-level analytical bands are not approved progression bands for the 99-level model.
+3. **Band / unlock-spacing philosophy — PARTIALLY CLOSED.** Broad identity bands are fixed by the approved milestone structure. Ordinary levels may be progress pulses and do not require an action, recipe, or item unlock. Exact authored unlock positions remain open and should be determined skill-by-skill from mechanical purpose, world logic, cross-skill dependencies, and memorable milestone density rather than a requirement to populate every numerical level. Existing six 10-level analytical bands are not approved progression bands for the 99-level model.
 
 4. **Gather/craft cadence — OPEN.** Hold XP/hour fixed and multiply all current legacy action durations: **responsive 0.75×** gives band-1/6 gathering 3/6.75 s (1,200/533 one-unit yields/h) and crafting 2.25/4.125 s (1,600/873 completions/h); **current 1×** gives 4/9 s (900/400) and 3/5.5 s (1,200/655); **deliberate 1.25×** gives 5/11.25 s (720/320) and 3.75/6.875 s (960/524). **Data:** adjust action XP inversely and recheck source/sink throughput; this does not decide animation timings. **Later runtime:** interaction feel, animation lock, latency, and resource depletion must be tested separately.
 
@@ -127,6 +211,6 @@ The old 60-level shorthand of "competent = entering band 3; advanced = entering 
 
 7. **Catalog size versus RuneScape-style depth — OPEN.** **Hold 102 items** and seek depth from the existing 77 transformations and many-to-many sources/sinks; **modest +25% planning envelope** is 128 items (+26), about 96 recipes/185 sources/246 consuming sinks if today's densities are maintained; **broader +50% envelope** is 153 items (+51), about 116 recipes/222 sources/296 sinks. These are arithmetic workload envelopes, *not* an authorization to add items and not a claim of volume parity with RuneScape. **Data:** any expansion must pass purpose, source, sink, overlap, and redundancy audits. **Later runtime:** every new item also carries asset, inventory, crafting, persistence, localization, and QA cost.
 
-**Next decision order:** (1) XP curve shape and desired time to 30/50/70/~80/99; (2) exact unlock spacing inside the approved identity bands; (3) action cadence and sustainable throughput; (4) randomness; (5) cross-tier direct reuse; (6) catalog-volume ceiling. Recalculate only after the relevant Creative Director choice, then playtest before promoting derived rates to runtime.
+**Next decision order:** (1) exact unlock-spacing and milestone placement inside each skill's approved progression bands; (2) baseline-versus-efficient XP/hour philosophy derived from the closed milestone timing targets; (3) action cadence and sustainable throughput; (4) randomness; (5) cross-tier direct reuse; (6) catalog-volume ceiling. Recalculate only after the relevant design choice, then playtest before promoting derived rates to runtime.
 
-*Method:* Counts and region/connection facts are SQL queries against `caelmor_economy.sqlite`; current legacy XP thresholds, scenario curves, expected action rates, and weighted-bonus examples use `CODE/Scripts/caelmor_progression_calculator.py` and the checked-in provisional configuration. The approved 99-level cap and milestone identities are Creative Director design decisions; no replacement XP table or rate model has yet been authored.
+*Method:* Counts and region/connection facts are SQL queries against `caelmor_economy.sqlite`; current legacy XP thresholds, scenario curves, expected action rates, and weighted-bonus examples use `CODE/Scripts/caelmor_progression_calculator.py` and the checked-in provisional configuration. The approved 99-level cap and milestone identities are Creative Director design decisions. The 145-hour nominal mastery horizon and milestone timing targets are Gameplay Designer resolutions made under the Creative Director's established RuneScape-influenced long-term-progression direction; they are analytical tuning targets, not a runtime XP table.
