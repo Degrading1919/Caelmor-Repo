@@ -18,21 +18,9 @@ When the task is complete, publish using only:
 
 If `git commit` reports nothing to commit, continue with the push.
 
-If any normal direct-to-main publish command fails, report that exact failure and stop. Do not investigate unrelated repository configuration or diagnostics unless explicitly asked.
+If any publish command fails, report that exact failure and stop. Do not investigate alternate GitHub integrations, APIs, authentication methods, repository configuration, or unrelated diagnostics unless explicitly asked.
 
-### Pull-request delivery (only when explicitly requested)
-
-If the user explicitly requests a PR, that request overrides the normal direct-to-main delivery flow for that task.
-
-- Start from the current `main` branch state before making task changes.
-- Create a clean task branch containing only the requested work.
-- Commit and push the task branch.
-- Create the pull request against `main` using the available connected GitHub integration/API when one is available.
-- The GitHub CLI (`gh`) is optional, not required. A missing `gh` executable is not a delivery failure when the connected GitHub integration can create the PR.
-- Do not stop after pushing a branch when a PR was requested. The task is not complete until the PR exists.
-- If neither the connected GitHub integration nor another authorized PR-creation mechanism is available, report that exact limitation after the branch is pushed.
-- Do not open a PR from a stale branch with unrelated ancestry or unrelated commits. Recreate/rebase the task branch from current `main` first.
-- Return the PR number and URL when complete.
+If the user explicitly requests a PR, follow that request for that task only.
 
 ## Design Identity Guardrail
 
