@@ -1,9 +1,9 @@
 # Progression Formula Proposal
 
 **Status:** CREATIVE DIRECTOR DECISIONS LOCKED; DRAFT PR FOR REPOSITORY REVIEW  
-**Authority:** The Creative Director has approved the non-combat fixed-base-XP architecture, the RuneScape-like generalized exponential threshold family, the closed milestone-time envelopes, and a 5,000,000 XP level-99 display scale. Exact curve coefficients, final per-level thresholds, and final activity XP values remain calibration work.  
-**Scope:** Non-combat skilling/economy XP architecture, chosen level-threshold family, XP display scale, emergent XP/hour, and progression-calibration rules.  
-**Out of scope:** Combat XP, quest XP, encounter XP, other future XP sources, final curve coefficients, exact final per-level XP table, exact action XP values, action timings, RNG, resource yields, schemas, JSON, SQLite, calculator code, C#, and runtime implementation.
+**Authority:** The Creative Director has approved the non-combat fixed-base-XP architecture, the RuneScape-like generalized exponential threshold family, the closed milestone-time envelopes, the 5,000,000 XP level-99 display scale, and the final curve coefficients A = 8 and K = 15. The resulting 1–99 cumulative XP threshold table is authoritative for progression design. Final activity XP values remain calibration work.  
+**Scope:** Non-combat skilling/economy XP architecture, authoritative level-threshold mathematics and table, XP display scale, emergent XP/hour, and progression-calibration rules.  
+**Out of scope:** Combat XP, quest XP, encounter XP, other future XP sources, exact action XP values, action timings, RNG, resource yields, schemas, JSON, SQLite, calculator code, C#, and runtime implementation.
 
 ---
 
@@ -41,7 +41,7 @@ Explicit XP modifiers may be designed later if they have a separately authored a
 
 The non-combat skilling/economy XP model should separate four concerns.
 
-### Layer A — Candidate cumulative level thresholds
+### Layer A — Authoritative cumulative level thresholds
 
 A 1–99 threshold architecture determines how much accumulated XP is required to reach each level.
 
@@ -224,69 +224,86 @@ This preserves early-content viability and supports self-directed training rathe
 
 Early methods do not need to remain optimal forever. They should remain mechanically honest and mathematically stable.
 
+### Anti-monotony progression guardrail
+
+**REPETITION MAY BE FAMILIAR, BUT PROGRESSION MUST NOT BE MERELY RESKINNED REPETITION.**
+
+Caelmor may use comfortable, repeated skilling loops. Repetition is desirable when it is purposeful, familiar, and connected to the player's goals, world knowledge, and growing mastery. A higher-level activity is not sufficiently novel merely because it has a different resource name, higher level requirement, more XP, longer action time, better yield, new visual model, or higher-tier tool requirement.
+
+A major progression beat should materially deepen at least some combination of what the player learns, chooses, routes around, prepares for, connects to, risks, values, gathers, makes, keeps, processes, or sells. Appropriate sources of progression variety include different locations and resource distributions, route knowledge, preparation, tool or station choices, multi-resource and processing relationships, cross-skill dependencies, economic purpose, world or quest context, environmental constraints, risk/reward tradeoffs, alternate training methods, efficiency discoveries, and occasional changes in interaction structure where justified.
+
+This rule does **not** require a new mechanic every level, prohibit relaxing repetitive skilling, or authorize complexity for novelty's sake. Caelmor should prefer fewer, deeper systems; no filler resources or recipes; knowledge-driven efficiency; meaningful world attachment; and RuneScape-inspired long-term familiarity without copying RuneScape implementation.
+
+**Validation question:** Does this progression band materially change what the player learns, chooses, routes around, prepares for, connects to, or values — or is it primarily the same action with a different unlock?
+
+If the answer is primarily the latter, revise the content or method structure rather than adding another resource tier.
+
 ---
 
-## 6. Chosen level-threshold family and XP scale
+## 6. Authoritative level-threshold formula, coefficients, and XP scale
 
 The 1–99 cumulative XP threshold curve remains mathematically separate from activity rewards.
 
-The Creative Director has selected a **RuneScape-like generalized exponential family** for Caelmor. This is a structural choice, not a decision to copy OSRS or RS3 XP totals.
+The Creative Director selected a **RuneScape-like generalized exponential family** for Caelmor. This is a structural influence only; Caelmor does not copy OSRS or RS3 XP totals.
 
-The chosen family is:
+The authoritative formula is:
 
 ```text
-Weight(L) = L + A × 2^(L / K)
+Weight(L) = L + 8 × 2^(L / 15)
 
 RawXP(L) = Σ Weight(i), for i = 1 to L-1
 
 RequiredXP(L)
     = round(
-        XP99 × RawXP(L) / RawXP(99)
+        5,000,000 × RawXP(L) / RawXP(99)
       )
 ```
 
-Where:
-
-- `L` is the target level.
-- `A` controls the strength of the exponential component.
-- `K` controls how sharply progression back-loads.
-- `XP99` controls numeric scale and reward granularity.
-
-### Closed XP display scale
-
-The Creative Director has selected:
+Closed parameters:
 
 ```text
+A = 8
+K = 15
 XP99 = 5,000,000
 ```
 
-This is the absolute display scale for the working 1–99 progression model. It does **not** change the normalized curve shape or the closed time-to-milestone targets.
-
-The 5,000,000 scale was selected because it provides enough integer granularity for stable authored non-combat activity rewards without pushing ordinary actions into unnecessarily inflated numbers.
-
-### Curve-coefficient status
-
-The exact generalized-exponential coefficients are **not yet closed**.
-
-Current analytical work indicates that a back-loading parameter around:
+The exact cumulative threshold table generated from this formula is stored at:
 
 ```text
-K ≈ 17
+03_CORE_SYSTEMS/Skills & XP v1/Caelmor_XP_Threshold_Table.csv
 ```
 
-is a strong working calibration anchor because it can reconcile the closed milestone-time envelopes with believable growth in method efficiency under fixed activity XP.
+### Key authoritative thresholds
 
-Treat approximately `K = 17` as the current analytical anchor, not as final canon. The coefficient should be finalized only after representative fixed-XP activities and believable training methods are tested.
+| Level | Cumulative XP | Share of level-99 XP |
+|---:|---:|---:|
+| 10 | 32,339 | 0.64678% |
+| 20 | 104,134 | 2.08268% |
+| 30 | 221,617 | 4.43234% |
+| 40 | 397,696 | 7.95392% |
+| 50 | 652,858 | 13.05716% |
+| 60 | 1,019,626 | 20.39252% |
+| 70 | 1,549,627 | 30.99254% |
+| 80 | 2,324,814 | 46.49628% |
+| 90 | 3,475,278 | 69.50556% |
+| 95 | 4,251,710 | 85.03420% |
+| 98 | 4,801,022 | 96.02044% |
+| 99 | 5,000,000 | 100.00000% |
 
-The coefficient `A` also remains open for calibration. It must not be copied from RuneScape by default.
+Practical mastery at level 80 therefore occurs at **46.49628% of total level-99 XP**, leaving **53.50372%** of the raw XP journey for levels 80–99. This does not imply 53.5% of engaged time remains, because later methods are expected to become more productive through different activities, tools, routes, access, preparation, and player knowledge.
 
-Any coefficient set must be tested against the closed milestone-time envelopes using representative fixed-XP non-combat activities and believable methods.
+### Threshold validation
 
-The curve does not get to override the approved pacing philosophy.
+The generated 1–99 table has been checked for structural progression issues.
 
-The pacing targets do not get to directly manufacture every action's XP value.
+- XP-to-next-level increases monotonically at every level.
+- Level 1→2 requires 2,224 XP.
+- Level 98→99 requires 198,978 XP.
+- There are no flat or reversed level-cost jumps.
+- There is no special final-level multiplier or artificial 98→99 wall.
+- The curve retains strong late-level prestige while preserving rapid early orientation.
 
-Both must be reconciled through coherent design.
+The curve does not override the closed milestone-time envelopes. Representative fixed-XP activities and believable methods must still reproduce those pacing constraints without hidden player-level XP scaling.
 
 ---
 
@@ -315,17 +332,11 @@ The approved milestone envelopes determine whether the combined system is paced 
 
 The progression model should be tuned in this order.
 
-### Step 1 — Calibrate the selected generalized-exponential 1–99 curve
+### Step 1 — Use the authoritative 1–99 threshold table
 
-The curve family and 5,000,000 XP level-99 scale are already selected.
+The curve family, coefficients, 5,000,000 XP level-99 scale, and exact per-level thresholds are closed.
 
-Calibration must determine:
-
-- the final generalized-exponential coefficients;
-- cumulative XP at key levels;
-- XP-to-next-level progression.
-
-Use `K ≈ 17` as the current analytical anchor while testing representative methods. Do not promote a coefficient merely because it resembles RuneScape numerically.
+Use `Caelmor_XP_Threshold_Table.csv` as the threshold authority for all subsequent non-combat progression calibration. Do not regenerate thresholds from the retired K ≈ 17 analytical anchor.
 
 ### Step 2 — Author representative fixed non-combat activity XP values
 
@@ -355,9 +366,9 @@ Calculate actual progression time to:
 - practical mastery around level 80
 - level 99
 
-### Step 5 — Compare derived times against the CLOSED Creative Director milestone envelopes
+### Step 5 — Validate BOTH numerical pacing and experiential progression
 
-Validate against:
+First validate the representative methods against the CLOSED Creative Director milestone envelopes:
 
 - level 30: ~10–12 h
 - level 50: ~28–34 h
@@ -367,13 +378,18 @@ Validate against:
 
 The nominal targets remain approximately 11 / 31 / 63 / 90 / 145 engaged hours.
 
+Then validate the same method set for **experiential progression**. Ask:
+
+> Does this progression band materially change what the player learns, chooses, routes around, prepares for, connects to, or values — or is it primarily the same action with a different unlock?
+
+A method set fails calibration even if it perfectly hits the milestone-hour targets when long progression stretches are dominated by mechanically interchangeable tier replacements. Revise the content, method, routing, preparation, risk/reward, economic, world, or system connections instead of solving the problem by adding another resource tier.
+
 ### Step 6 — Tune the correct variables
 
 If the derived journey falls outside the approved envelopes, tune the appropriate variables while preserving stable activity identity and believable gameplay.
 
 Possible tuning levers include:
 
-- threshold-curve shape or total XP scale
 - a particular non-combat action's authored XP if it is incorrectly valued relative to comparable actions
 - access timing to methods
 - tool efficiency
@@ -393,8 +409,9 @@ Reject any solution that reaches the approved pacing envelopes only by:
 - implausible resource availability
 - arbitrary reward inflation disconnected from activity identity
 - direct mechanical back-solving of every action reward from a target XP/hour
+- long progression stretches dominated by mechanically interchangeable tier replacements that differ mainly in name, requirement, XP, timing, yield, visuals, or tool tier
 
-The acceptance target and the activity-reward model must both remain intact.
+The acceptance target, activity-reward model, and experiential-progression guardrail must all remain intact.
 
 ---
 
@@ -468,6 +485,8 @@ If approved, the non-combat skilling/economy XP architecture should adopt these 
 10. **Any XP modifier must have an explicit gameplay source and must not be inferred solely from player level.**
 11. **This PR does not define combat XP, quest XP, encounter XP, or every future XP source in the game.**
 12. **RuneScape remains an emotional and structural reference, not a numeric blueprint.**
+13. **Repetition may be familiar, but progression must not be merely reskinned repetition.**
+14. **Representative method calibration must pass both numerical pacing and experiential progression acceptance.**
 
 ---
 
@@ -482,11 +501,11 @@ Follow-up work should:
 - correct remaining progression documentation that implies a level-derived XP/hour target should determine non-combat activity XP;
 - preserve the closed milestone-time targets as calibration and acceptance constraints;
 - retain the selected RuneScape-like generalized exponential family;
+- retain the closed coefficients `A = 8` and `K = 15`;
 - retain the 5,000,000 XP level-99 display scale;
-- use `K ≈ 17` as a working analytical anchor while testing coefficients;
+- use `Caelmor_XP_Threshold_Table.csv` as the authoritative 1–99 threshold table;
 - build representative fixed-XP non-combat activity samples;
 - model believable representative methods;
-- validate derived milestone times against the approved envelopes;
-- finalize curve coefficients only after that calibration;
+- validate representative methods against both the approved milestone-time envelopes and the anti-monotony experiential-progression criterion;
 - update the analytical calculator only after the design model is accepted;
 - leave combat XP, quest XP, encounter XP, schemas, JSON content, SQLite, and runtime C# unchanged until their appropriate downstream design or implementation handoffs.
