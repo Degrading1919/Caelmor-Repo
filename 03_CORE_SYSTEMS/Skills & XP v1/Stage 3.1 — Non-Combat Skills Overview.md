@@ -134,6 +134,20 @@ The nominal time targets are not fixed-rate promises. A player who learns better
 
 Future XP/hour tuning should therefore support a **baseline method plus a meaningful but controlled efficiency ceiling**, preserving knowledge-based mastery without allowing optimal methods to trivialize the journey.
 
+### Anti-monotony progression guardrail
+
+**REPETITION MAY BE FAMILIAR, BUT PROGRESSION MUST NOT BE MERELY RESKINNED REPETITION.**
+
+Comfortable repetition is desirable when it is purposeful. Higher-level progression is not sufficiently distinct merely because an activity has a different resource name, higher level requirement, more XP, longer action time, better yield, new visual model, or higher-tier tool requirement.
+
+Across meaningful progression bands, the player's relationship with the skill should deepen through appropriate combinations of route and location knowledge, changing resource distributions, preparation, tool or station choices, processing relationships, cross-skill dependencies, economic purpose, world or quest context, environmental constraints, risk/reward decisions, alternate methods, efficiency discoveries, and meaningful decisions about what to gather, make, keep, process, or sell. Occasional interaction-structure changes are welcome where justified, but are not required for novelty's sake.
+
+This does not require a new mechanic every level, prohibit relaxing repetitive skilling, or justify filler resources, filler recipes, or needless complexity. Caelmor remains governed by **slow but rewarding, never slow and empty**, fewer/deeper systems, knowledge-driven efficiency, meaningful world attachment, and RuneScape-inspired familiarity without copying implementation.
+
+**Acceptance question:** Does this progression band materially change what the player learns, chooses, routes around, prepares for, connects to, or values — or is it primarily the same action with a different unlock?
+
+If it is primarily the latter, revise the content or method structure rather than adding another resource tier.
+
 ### Practical-mastery boundary
 
 By approximately level 80:
