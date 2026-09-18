@@ -1,0 +1,95 @@
+# Caelmor Part 2 — historical gap audit and Part 3 briefs
+
+**Status:** proposal-stage review aid, not a canon lock. This is the second historical gap audit after a first pass on ancient culture, magic, the Great War, and postwar history, followed by targeted passes on prewar institutions, war turning points, and civilian evidence chains. Read with the two Part 2 proposal files in this manifest-approved folder and the approved Stage A documents. No canon file, equipment/resource catalog, quest, or runtime design is changed.
+
+## Historical decision gate resolved
+
+The Stage A contradiction register was reviewed before the Part 2 workers expanded history. The Director's earlier decisions give the necessary timing, identity, and succession direction for C01–C05, C07, C09–C10, and C13. The two Part 2 historical blockers were subsequently put to the Creative Director, who resolved them:
+
+1. **C08 — “spirit” status, resolved.** Spirit is not an element or separate magical discipline. It is the old term for the living/emotional imprint people leave on the world and for the interaction of memory, grief, intention, and identity with elemental resonance. The four-tradition framework remains. Lowmark's five-figure Founder origin and War History's “earth/spirit” wording require later source correction; they do not establish a fifth tradition or Founder.
+2. **C12 — postwar magic law, resolved at historical level.** Surviving authorities broadly agreed to stop wartime magical practices, especially weaponization, amplification, uncontrolled ritual experimentation, and dangerous research. Later records compressed this into “magic was outlawed,” but no durable central authority could enforce a universal ban. Each region interpreted the restriction differently, leaving room for public Emberholt firecraft and Lowmark farm water spells. Exact local decrees and enforcement remain Part 3 detail.
+
+These rulings now govern the dependent chronology, magic-history framework, and postwar transition in the two companion proposals. C08 and C12 are no longer unresolved Part 2 blockers. Their old conflicting source lines still need a future Director-approved canon pass; this PR does not edit those sources.
+
+## Second-pass test: did the historical gaps close at proposal level?
+
+`Developed` means there is a substantial connected proposal available for Director review, **not** that the facts are canon. `Partial` means this Part 2 scope deliberately retains a significant unanswered question or source-verification task. The current canon corpus remains contradictory until approved source edits are made.
+
+| Historical dimension | Stage A baseline | After first pass | Second-pass action and present finding |
+| --- | --- | --- | --- |
+| Ancient strata and supported peoples | Partial; Volkhari/Stonebound and three regional lineages existed as isolated anchors. | Partial: relative eras and separate lineages established, but prewar social ties thin. | **Developed as proposal.** Ancient traces, settlements, learned versus inherited magic, and distinct present consequences now connect. Stonebound network identity C11 and Volkhari count C06 remain open, so those details are withheld. |
+| Early settlements and political relationships | Thin: current governments and trade named, origins missing. | Thin: “routes connect regions” lacked institutional cause. | **Developed as proposal.** Settled routes, local commons, repeated passage bargains, and each government's practical legitimacy now explain how regions became interdependent without inventing an empire. Exact map links and whether an old crown held any of these places remain **partial**. |
+| First rediscoverers, Founders, four traditions | Contradictory / thin. | Partial: roles separated, four traditions given distinct trajectories. | **Developed as a framework.** C08 now defines spirit as living/emotional imprint interacting with elemental resonance, not a fifth tradition. The Founder roster remains open C07; no Dreamer is placed in rediscovery. |
+| War cause and escalation | Partial: atmospheric distrust and battle roles, poor causal sequence. | Partial: inquiry, pass pressure, supply, Mire attrition, Glassed Hollow. | **Developed as proposal.** Targeted pass adds strategic choice, local betrayal, civilian costs, and physical/record consequences to each turning point. The exact border incident and command identities remain intentionally unassigned. |
+| Great War operational history | Contradictory date; scattered named scars. | Partial: seven-year outline. | **Developed as proposal.** Six linked turning points across a 5–10-year bound connect Windscar/Shatterfall, Lowmark supply and Ashen Flats, Mire relief/cessation, and Glassed Hollow. Route geometry remains **partial** and must be checked before geographic canonization. |
+| Wartime precursor and Titan | Contradictory in sources, but Director direction set. | Developed core: precursor → failed ritual → initiate Titan → postwar Remnant. | **Developed within directed truth.** No prewar formal Remnant hierarchy or Volkhari Titan is asserted. Precursor name/personnel and Remnant founding year remain open C03. |
+| Immediate recovery and modern institutions | Thin; aftermath spanned a stale century. | Partial: thirty-year periodization and regional service origins. | **Developed as proposal.** Local repair → legitimacy → managed memory → living disputes now has duties and evidence in every region. C12 now supplies the shared restraint on dangerous wartime practice and regionally divergent interpretation; exact local statutes remain Part 3 detail. |
+| Dreamers and manipulated dreams | Chronologically contradictory. | Partial: after-war placement and evidence rule. | **Developed as proposal.** True, induced, and ordinary grief dreams have distinct proposed evidentiary roles. Their metaphysical origin and first exact year are not selected. |
+| Living historical figures | Partial; existing anchors contained direct war memories under old dates. | Partial: modern custodians named, some witness roles uncertain. | **Developed as continuity constraints.** Hadrik, Edris, Bran, Maelin and others can be used only where their anchor supports direct experience; younger record keepers inherit evidence. Exact ages and wartime dates remain a future character ledger task. |
+| Cross-region delayed understanding | Thin: many motifs, few shared causal events. | Partial: shared route and archive ideas. | **Developed as proposal.** Five civilian event dossiers and six relationship edges specify first reading, corroborating evidence, present custodian, and changed meaning. The record objects themselves remain unapproved proposals. |
+| Material culture as history | Partial in Stage A, but catalogs unassessed. | Not evaluated for derivation. | **Out of scope.** The proposals mention records, labor, and repair as social history. They design no equipment or resource catalog and make no readiness claim. |
+
+### Why the second pass stopped here
+
+The first pass still had major gaps in prewar institutional cause, operational choices during war, and evidence that survives across regions. Separate targeted Terra workers addressed those exact gaps; the two companion proposals now contain multiple linked eras and cross-region consequences, not a two- or three-entry patch. The two Part 2 blockers, spirit and postwar magic law, have since been resolved by the Director. Remaining thin areas are **later Director choices** (Founder roster, Stonebound, chapel/threat identity), **verification against an actual map and character ages**, or **Part 3 regional depth** outside this task. Inventing precise routes, kings, or battle commanders now would convert source absence into false certainty. This does not declare Lore Foundation Lock complete.
+
+## Historical figures, institutions, and what remains unapproved
+
+The best surviving historical actors are institutions with different records: Riverwardens and early human settlers; Echohewn builders and later clan speakers; Memorywardens and present care keepers; Volkhari custodians and Emberholt civic authorities; the wartime precursor and later formal Remnant. The Part 2 documents propose their transitions. They do **not** approve named ancient monarchs, a Founder roster, or a cast of newly invented generals.
+
+Existing character anchors give carefully bounded living continuity. Lowmark's Aldric Fenmere holds inherited charters and war ledgers; Maelin Rowe knows wartime river work; Corvin Tath handles grain memory; Annelise Reed tends names. Thornfell's Hadrik Stonewake carries war scars, while Ressa Highcrag and Dorn Feldhorn preserve horn knowledge; cairn keepers may inherit rather than personally remember an event. Mire's Edris Hollowmere and Bran Hollowstep explicitly survived the war, while Calwen Reed-Binder and other caretakers preserve losses through work. Emberholt's current Speaker, archivists, guild figures, Kaelith, and Thalan carry different positions in the Hollow's aftermath; do not assign all of them direct wartime participation without an age check. See the four `LORE/Characters/` regional anchor files and Stage A C01, C05–C06, C13.
+
+## Cross-region evidence map for future reconciliation
+
+Each row is **proposed** and needs source/route selection before canon. The first observation should be meaningful locally even if the later re-reading never ships in the same release.
+
+| Shared question | First reasonable reading | Later corroboration and changed understanding | Truth boundary / custodian |
+| --- | --- | --- | --- |
+| Who failed to warn of Emberholt risk? | A Thornfell horn taboo seems clan superstition; a Lowmark inspection note seems trade bureaucracy. | A Mire warning and altered Emberholt safety copy reveal that each office saw a different portion of the hazard. | No single office is made omniscient. Horn keepers, Fenmere/Lensemaster records, Mire testimony, and Red-Lit archives have different incentives. |
+| Why was a route closed during war? | Shatterfall's cairn presents a heroic defense; a stranded household calls it abandonment. | Recall intervals and a Mire arrival list show who crossed, who waited, and that a missing signal mattered. | Motive—panic, sabotage, sacrifice—stays open until evidence is approved. Thornfell route keepers and Mire caretakers hold pieces. |
+| Who was Lowmark feeding? | A Crestbridge grain tally appears to prove one house aided an army. | A river roster and Mire infirmary list show a civilian and wounded convoy moved under the same mark. | One document can change classification without absolving every requisition. Fenmere, Maelin, and Mire care records hold pieces. |
+| Did the Mire “swallow” an army? | Sunk standards and unmarked ground suggest a single supernatural disaster. | Household testimony and practical route records show staged retreat, illness, burial, and changing peat; exceptional earth-memory may still exist. | No literal ghosts or new major-threat roster. Memorykeepers and survivors retain different evidence. |
+| Was Glassed Hollow merely a forge collapse? | Emberholt's civic safety account explains glass and missing workers as industrial loss. | Restricted archive gaps, Volkhari testimony, and the physical chamber disclose coercive ritual and an initiate Titan. | The Director-set Titan/Kaelith/Thalan facts govern. Public citizens can sincerely believe the false account. |
+
+The method is derived from the approved Stage A RuneScape **structural** research: revisiting a place should change an earlier interpretation through multiple evidence channels, while a local story still has its own resolution. No RuneScape content, names, quest format, or volume has been copied. `Caelmor_Stage_A_Reference_Research.md`.
+
+## Resolved Part 2 blockers, remaining decisions, and scope boundaries
+
+| Stage A ID | Does it block Part 2 factual history? | Recommended disposition before canon or Part 3 use |
+| --- | --- | --- |
+| **C01–C05** | Direction set; old files conflict. | Preserve Director's short war, postwar Dreamers, precursor/formal succession, initiate Titan, and free Kaelith in a coordinated future canon pass. |
+| **C06** | Exact Volkhari demographic history only. | Director confirms surviving population before enclave migration or political stories. No number is used here. |
+| **C07** | Named Founder and rediscoverer biographies. | Keep roles distinct now; decide roster and teacher links before naming individual ancient figures. |
+| **C08** | **Resolved for Part 2.** | Spirit means living/emotional imprint and its interaction with elemental resonance; four traditions remain. Correct conflicting five-figure and “earth/spirit” source wording in a later approved canon pass. |
+| **C09** | Visibility and teaching of farm practice remain Part 3 local detail. | Preserve Director-set simple water farming and sole combat Field-Mage; define local teaching norms without reviving a universal ban. |
+| **C10** | No: Director has set natural majority/rare magic. | Label each Thornfell exception in the later dossier pass. |
+| **C11** | Stonebound network history and agency only. | Decide whether the summit event is a network node or local resonance, and what Stonebound can do, before making a reveal. Neither is used as testimony here. |
+| **C12** | **Resolved for Part 2.** | Broad agreement stopped dangerous wartime practice; no durable central authority enforced a universal ban; regions interpreted the restraint differently. Exact local decrees, enforcement, and teaching rules are Part 3 questions. |
+| **C13** | No: present Speaker male directed. | Correct pronouns later; do not infer the office's exact founding age from the present character. |
+| **C14–C15** | A named Mire final-site/threat history only. | Set chapel identity and the two major threat roster before Part 3 site or supernatural stories. This proposal uses generic Mire care places and memory-imprints. |
+| **C16** | No. | Use Great War as working term; decide whether Long War is an epithet or retired wording in a future editorial pass. |
+| **S01–S06** | Not a historical fact decision. | Keep v1 Lowmark-only, no inferred player spell system, no gear/resources here. Phase 1 ranged conflict remains for gameplay scope, not this lore pass. |
+
+### Proposed canon-update sequence for a later approved pass
+
+This is a **recommendation**, not an edit or request to approve all proposals at once.
+
+1. Record the Director's C08/C12 rulings and later C03/C06/C07/C11/C14–C16 decisions in a claim-status ledger: directed truth, proposal, public belief, erroneous old line, or unresolved mystery.
+2. Rewrite `LORE/Timeline/Caelmor_Timeline.md` as one short Great War ending about 30 years ago, with Dreamers only afterward and the unnamed wartime precursor separated from formal Remnant history. Do not scale-shift every prewar event automatically.
+3. Reconcile `LORE/Worldbuilding Docs/Caelmor_War_History.md` with the initiate Titan, Kaelith's freedom, C08's spirit meaning, C12's shared restraint and regional legal history, and the new date, while preserving any useful war memory as explicitly marked in-world account.
+4. Correct `LORE/Factions/Caelmor_Factions.md` and the detailed region/character files on Founder versus rediscoverer, Lowmark farm magic, Thornfell exceptions, present Speaker identity, Volkhari captivity, and selected Mire ontology. Prefer a coordinated pass so no file alone appears to settle a still-open decision.
+5. Only after Director approval, choose which **proposed** campaigns, records, civic origins, and Dreamer rules become canon; reject or revise the remainder. This Part 2 PR makes none of those source edits.
+
+## Recommended Part 3 regional worker briefs
+
+Each worker should receive this Part 2 proposal, the Stage A register, the relevant detailed dossier, corrected Factions, Timeline, War History, and existing character anchors. Workers produce **additive options**, not direct canon rewrites. They must distinguish author truth, public belief, and player-observable evidence; give every major addition an older cause and a present consequence. Part 3 can then run another gap audit before any canon promotion.
+
+| Worker | Bounded brief and required connections | Gates and exclusions |
+| --- | --- | --- |
+| **Lowmark: river, houses, and ordinary life** | Build several generations of flood/field work, Fenmere and rival charter authority, farm-water teaching, ferry households, Ashen Flats recovery, and a compact set of local side-story and environmental clue options. Trace at least one person/record to Thornfell and one to the Mire. Preserve a local resolution before any wider Hollow clue. | Apply resolved C12 and develop C09 local teaching/oversight; Lowmark-only v1 budget. No player spell system, item/resource design, or automatic import of the old Seven Reaches Compact. |
+| **Thornfell: clans, passes, and truthful acoustics** | Develop assembly obligations beyond Blood-Oath/Hearthguard labels, highstead households, bridge/horn labor, refugee and rear-guard disputes, Echohewn continuity, and specific natural versus rare magical site classifications. Link an escort debt to Lowmark and a displaced household to the Mire. | C11 before Stonebound summit truth; verify route geometry. No universal magic horns or generalized anti-magic culture. |
+| **Mire: living communities after the battlefield** | Develop settlement cooperation, non-mourning family work, witness/burial process, Memorywarden-to-modern forms, safe-channel knowledge, and several ordinary side stories. Link names and transfers to Lowmark/Thornfell and a disputed war date to Emberholt. | Apply resolved C08; settle C14 and C15 before site/threat truth. Two major threats maximum, minor anomalies allowed, no literal undead, no equipment/resources. |
+| **Emberholt: civic life and controlled history** | Develop non-elite households, guild/council limits, public safety practice, Volkhari erasure, archive control, and the postwar precursor-to-Remnant transition. Show how sincere repair culture can coexist with hidden capture. Link trade/inspection records to all three other regions. | Apply resolved C12; C03/C06 and Speaker identity source corrections remain. No automatic promotion of old Hearth Tally/Cooling House seeds; no citywide magical escalation beyond canon. |
+| **Cross-region continuity editor** | Verify actual map and travel times; choose a small shared-event ledger. For each event require original observation, local stake, later evidence, changed understanding, custodians, and release scope. Reject motif-only links and anything dependent on a still-open decision. | Work after regional options, before quest scripting or canon update. One main Lowmark arc in v1 remains the Phase 1 boundary. |
+
+The old `4d2d6b6` seeds may be reviewed as retain/revise/reject options in Part 3, with a source and scope reason for each. They are not imported into canon by this proposal. **Lore Foundation Lock and material-culture readiness are not claimed.**
