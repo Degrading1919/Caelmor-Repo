@@ -239,6 +239,23 @@ If an idea feels RuneScape-like only because it copies recognizable surface deta
 
 ---
 
+## 5.5 Creative Director Re-entry and Freeze Semantics (MANDATORY)
+
+Roadmap labels such as **LOCKED**, **Frozen**, **Snapshot**, or **Implementation Freeze** protect approved work from silent assistant drift. They do **not** prevent the Creative Director from explicitly reopening a design area.
+
+When the Creative Director reopens a previously frozen area:
+
+- The explicit Creative Director directive controls the reopened scope.
+- Earlier frozen design/data becomes historical baseline, migration input, and reference material within that scope unless the Creative Director says otherwise.
+- Assistants may brainstorm and redesign only the reopened design surface.
+- Runtime C#, approved schemas, persistence contracts, networking contracts, and other implemented systems must not be silently changed merely because content/design has reopened.
+- Any required downstream schema/runtime migration must be identified and handed off explicitly to the responsible role.
+- Phase 1 canon remains binding unless the Creative Director explicitly changes it; contradictions must be flagged rather than silently resolved.
+
+A freeze therefore means **do not change this without authority**, not **the Creative Director can never revisit this**.
+
+---
+
 # 6. FILE OUTPUT RULES
 
 These rules apply to all assistants generating files.

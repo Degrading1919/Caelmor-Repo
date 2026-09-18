@@ -56,6 +56,33 @@ OSRS and RS3 are reference points for long-term progression feel, systemic inter
 
 Do not assume Caelmor should copy RuneScape skill lists, 99/120 caps, XP curves, action timings, combat formulas, drop tables, item catalogs, market structures, UI, quest formats, world structure, naming, or content volume. RuneScape-inspired ideas must be translated through Caelmor's Phase 1 canon, grounded mythic tone, solo-dev scope, deliberate combat, environmental storytelling, and low-friction philosophy. When RuneScape precedent conflicts with Caelmor, Caelmor wins.
 
+Current Creative Director Re-entry — Equipment, Economy, and Gathering Design
+
+The Creative Director has explicitly reopened the equipment/economy/gathering **design** surface. Earlier Stage 3/4 economy architecture, sample data, and analytical economy data remain useful migration/reference inputs, but they are not immutable content canon for this redesign.
+
+The current dependency order is:
+
+Desired v1 BIS / aspirational equipment
+→ meaningful gear milestones worked backward from 99 toward 1
+→ recipes and components
+→ smallest coherent material/resource catalog
+→ gathering actions
+→ world nodes
+
+Do not invent a resource merely because a skill needs another level unlock. A new material must be justified by downstream demand first.
+
+This re-entry does NOT silently authorize changes to runtime C#, approved schemas, persistence/networking contracts, or other implementation. Any downstream migration must be identified and handed off explicitly after the design is approved.
+
+Current approved references for this equipment-progression pass:
+
+- Phase 1.1–1.5 remain the highest design canon.
+- Combat system contracts: `00_ADMIN/Milestones/Stage 6.1 — Combat Architecture Snapshot.md` and `DESIGNS/Combat Design/Stage 6.1.1 — Combat Action Intents.md` through `Stage 6.1.4 — Combat Authority & Networking.md`. These constrain combat architecture; they explicitly do not define weapon/armor content or balance.
+- Current non-combat progression direction: `03_CORE_SYSTEMS/Skills & XP v1/Stage 3.1 — Non-Combat Skills Overview.md`, `03_CORE_SYSTEMS/Skills & XP v1/Progression Formula Proposal.md`, and `04_CONTENT_PRODUCTION/Economy/CREATIVE_DIRECTOR_BALANCE_DECISIONS.md`.
+- There is currently no newer approved post-Phase-1 BIS/equipment-progression document. The present backward-design brainstorm is intended to establish that direction before item/resource production.
+
+If the Phase 1 documents disagree about v1 combat/equipment scope, flag the conflict for the Creative Director. Do not use later combat runtime architecture to silently resolve a Phase 1 scope contradiction.
+
+
 World Fantasy Statement
 
 (From Phase 1.1 Core Vision)

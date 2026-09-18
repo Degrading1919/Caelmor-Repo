@@ -12,6 +12,35 @@ Subtask suffixes:
 
 ---
 
+## Current Creative Director Re-entry Directive — Equipment / Economy / Gathering
+
+The earlier **Frozen / Implementation Freeze** labels below describe protected historical baselines. The Creative Director has explicitly reopened the **equipment, economy, and gathering design surface**.
+
+Current design order:
+
+**v1 BIS / aspirational equipment → meaningful gear milestones from 99 back to 1 → recipes/components → minimum justified resource catalog → gathering actions → world nodes**
+
+Rules for this re-entry:
+
+- Existing Stage 3/4 economy documents, sample data, SQLite content, and prior resource assumptions are migration/reference inputs, not immutable content canon for the reopened design surface.
+- Do not invent a material merely to fill a skill-level unlock. Resource demand must be justified downstream by approved gear, recipes, utility, or another meaningful system need.
+- Reopened design does not silently authorize runtime C#, schema, persistence, networking, or other implementation changes.
+- Any downstream migration required by approved redesign must be explicitly handed off to the responsible role.
+- Phase 1 canon remains binding; conflicts must be surfaced to the Creative Director.
+- Combat architecture documents constrain runtime contracts but do not define weapon/armor content or balance.
+- No post-Phase-1 BIS/equipment-progression catalog is currently authoritative; the current backward-design pass is intended to establish it.
+
+For current non-combat progression decisions, use:
+- `03_CORE_SYSTEMS/Skills & XP v1/Stage 3.1 — Non-Combat Skills Overview.md`
+- `03_CORE_SYSTEMS/Skills & XP v1/Progression Formula Proposal.md`
+- `04_CONTENT_PRODUCTION/Economy/CREATIVE_DIRECTOR_BALANCE_DECISIONS.md`
+
+For combat architecture constraints, use:
+- `00_ADMIN/Milestones/Stage 6.1 — Combat Architecture Snapshot.md`
+- `DESIGNS/Combat Design/Stage 6.1.1 — Combat Action Intents.md` through `Stage 6.1.4 — Combat Authority & Networking.md`
+
+---
+
 [ X ] Stage 1 — Pre-Production Canon Lock
     [ X ] Task 1.1 — Core Vision Lock
         [ X ] 1.1.A — Vision Authoring
@@ -36,7 +65,7 @@ Subtask suffixes:
 
 ---
 
-[ X ] Stage 3 — Economy & Gathering Architecture (Frozen)
+[ X ] Stage 3 — Economy & Gathering Architecture (Historical Baseline; Design Re-entry Authorized)
     [ X ] Task 3.1 — Non-Combat Skills Overview Lock
         [ X ] 3.1.A — Skill Model Authoring
     [ X ] Task 3.2 — Crafting Output Classes Lock
@@ -94,7 +123,7 @@ Subtask suffixes:
 
 ---
 
-[ X ] Stage 8 — Systems Snapshot & Implementation Freeze (Economy Non-Combat)
+[ X ] Stage 8 — Systems Snapshot & Implementation Freeze (Economy Runtime Baseline; Design Re-entry Authorized)
     [ X ] Task 8.1 — Freeze Statement + Guarantees
         [ X ] 8.1.A — Snapshot Authoring
     [ X ] Task 8.2 — Approved Implementation Order
