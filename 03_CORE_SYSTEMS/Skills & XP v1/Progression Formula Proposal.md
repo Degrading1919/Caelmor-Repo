@@ -1,9 +1,9 @@
 # Progression Formula Proposal
 
-**Status:** DRAFT FOR CREATIVE DIRECTOR REVIEW  
-**Authority:** Gameplay design proposal only. This document is not canonical until reviewed and approved.  
-**Scope:** Non-combat skilling/economy XP architecture, candidate level-threshold mathematics, emergent XP/hour, and progression-calibration rules.  
-**Out of scope:** Combat XP, quest XP, encounter XP, other future XP sources, exact final XP table, exact action XP values, action timings, RNG, resource yields, schemas, JSON, SQLite, calculator code, C#, and runtime implementation.
+**Status:** CREATIVE DIRECTOR DECISIONS LOCKED; DRAFT PR FOR REPOSITORY REVIEW  
+**Authority:** The Creative Director has approved the non-combat fixed-base-XP architecture, the RuneScape-like generalized exponential threshold family, the closed milestone-time envelopes, and a 5,000,000 XP level-99 display scale. Exact curve coefficients, final per-level thresholds, and final activity XP values remain calibration work.  
+**Scope:** Non-combat skilling/economy XP architecture, chosen level-threshold family, XP display scale, emergent XP/hour, and progression-calibration rules.  
+**Out of scope:** Combat XP, quest XP, encounter XP, other future XP sources, final curve coefficients, exact final per-level XP table, exact action XP values, action timings, RNG, resource yields, schemas, JSON, SQLite, calculator code, C#, and runtime implementation.
 
 ---
 
@@ -226,13 +226,13 @@ Early methods do not need to remain optimal forever. They should remain mechanic
 
 ---
 
-## 6. Candidate level-threshold architecture
+## 6. Chosen level-threshold family and XP scale
 
-The 1–99 cumulative XP threshold curve remains a separate design problem from activity rewards.
+The 1–99 cumulative XP threshold curve remains mathematically separate from activity rewards.
 
-A RuneScape-influenced exponential family remains a useful candidate because it produces increasingly meaningful levels while supporting a long-term mastery horizon.
+The Creative Director has selected a **RuneScape-like generalized exponential family** for Caelmor. This is a structural choice, not a decision to copy OSRS or RS3 XP totals.
 
-A generalized candidate form is:
+The chosen family is:
 
 ```text
 Weight(L) = L + A × 2^(L / K)
@@ -252,11 +252,35 @@ Where:
 - `K` controls how sharply progression back-loads.
 - `XP99` controls numeric scale and reward granularity.
 
-The exact values are **not approved by this draft**.
+### Closed XP display scale
 
-The purpose of using this family is structural, not to copy OSRS or RS3 numbers.
+The Creative Director has selected:
 
-Any candidate threshold curve must be tested against the closed milestone-time envelopes using representative fixed-XP non-combat activities and believable methods.
+```text
+XP99 = 5,000,000
+```
+
+This is the absolute display scale for the working 1–99 progression model. It does **not** change the normalized curve shape or the closed time-to-milestone targets.
+
+The 5,000,000 scale was selected because it provides enough integer granularity for stable authored non-combat activity rewards without pushing ordinary actions into unnecessarily inflated numbers.
+
+### Curve-coefficient status
+
+The exact generalized-exponential coefficients are **not yet closed**.
+
+Current analytical work indicates that a back-loading parameter around:
+
+```text
+K ≈ 17
+```
+
+is a strong working calibration anchor because it can reconcile the closed milestone-time envelopes with believable growth in method efficiency under fixed activity XP.
+
+Treat approximately `K = 17` as the current analytical anchor, not as final canon. The coefficient should be finalized only after representative fixed-XP activities and believable training methods are tested.
+
+The coefficient `A` also remains open for calibration. It must not be copied from RuneScape by default.
+
+Any coefficient set must be tested against the closed milestone-time envelopes using representative fixed-XP non-combat activities and believable methods.
 
 The curve does not get to override the approved pacing philosophy.
 
@@ -291,16 +315,17 @@ The approved milestone envelopes determine whether the combined system is paced 
 
 The progression model should be tuned in this order.
 
-### Step 1 — Select candidate 1–99 threshold curve(s)
+### Step 1 — Calibrate the selected generalized-exponential 1–99 curve
 
-For each candidate, define:
+The curve family and 5,000,000 XP level-99 scale are already selected.
 
-- total XP scale
-- curve parameters
-- cumulative XP at key levels
-- XP-to-next-level progression
+Calibration must determine:
 
-Do not promote a candidate merely because it resembles RuneScape numerically.
+- the final generalized-exponential coefficients;
+- cumulative XP at key levels;
+- XP-to-next-level progression.
+
+Use `K ≈ 17` as the current analytical anchor while testing representative methods. Do not promote a coefficient merely because it resembles RuneScape numerically.
 
 ### Step 2 — Author representative fixed non-combat activity XP values
 
@@ -448,15 +473,20 @@ If approved, the non-combat skilling/economy XP architecture should adopt these 
 
 ## 12. Review outcome requested
 
-Creative Director review should determine whether this fixed-base-XP architecture becomes the governing model for non-combat skilling/economy XP.
+The Creative Director has approved the governing direction captured by this document.
 
-If approved, follow-up work should:
+This PR should be reviewed for repository consistency and then, if accepted, used as the authority for the next calibration pass.
 
-- correct existing progression documentation that currently implies a level-derived XP/hour target should determine non-combat activity XP;
+Follow-up work should:
+
+- correct remaining progression documentation that implies a level-derived XP/hour target should determine non-combat activity XP;
 - preserve the closed milestone-time targets as calibration and acceptance constraints;
-- derive and compare candidate 1–99 threshold formulas;
+- retain the selected RuneScape-like generalized exponential family;
+- retain the 5,000,000 XP level-99 display scale;
+- use `K ≈ 17` as a working analytical anchor while testing coefficients;
 - build representative fixed-XP non-combat activity samples;
 - model believable representative methods;
 - validate derived milestone times against the approved envelopes;
-- update the analytical calculator only after the design model is approved;
+- finalize curve coefficients only after that calibration;
+- update the analytical calculator only after the design model is accepted;
 - leave combat XP, quest XP, encounter XP, schemas, JSON content, SQLite, and runtime C# unchanged until their appropriate downstream design or implementation handoffs.
