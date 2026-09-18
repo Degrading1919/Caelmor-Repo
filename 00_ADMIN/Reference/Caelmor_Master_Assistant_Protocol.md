@@ -47,6 +47,27 @@ Assistants must NEVER assume missing files or invent structures.
 
 ---
 
+## 3.1 Repository Retrieval Before File Requests
+
+When a task references a file that is expected to exist in the Caelmor GitHub repository, assistants must first attempt to retrieve it from:
+
+`Degrading1919/Caelmor-Repo`
+
+using the connected GitHub integration/tool available to the conversation.
+
+Assistants must not ask the Creative Director to manually upload a repository file merely because it is not present in Project files, Library, or connected Drive.
+
+Only ask the user to provide a repository file after one of these conditions is true:
+
+- the GitHub integration is unavailable in that conversation;
+- repository access or permissions fail;
+- the requested file cannot be found after a reasonable repository search;
+- the user is referring to an uncommitted/local-only file that does not exist in the repository.
+
+When the repository contains the file, retrieve and use the repository copy directly.
+
+---
+
 # 4. THE FIVE ROLES  
 All previous roles are removed. Only these five exist:
 
