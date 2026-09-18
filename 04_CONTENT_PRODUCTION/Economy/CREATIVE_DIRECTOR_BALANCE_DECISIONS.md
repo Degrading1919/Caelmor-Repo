@@ -1,6 +1,6 @@
 # Creative Director balance decision package
 
-**Decision status:** the **skill-cap, progression-milestone, non-combat fixed-base-XP architecture, generalized-exponential curve family, milestone-time targets, and 5,000,000 XP level-99 display scale are closed for analytical design**. Exact curve coefficients, exact per-level thresholds, final non-combat activity XP values, XP/hour, action cadence, RNG, cross-tier reuse, catalog expansion, and runtime implementation remain open. The checked-in `balance_config.json`, generated XP curve, SQLite progression bands, and all 60-level calculations below remain a **legacy provisional analytical baseline**, not approved balance and not runtime canon. No runtime, schema, JSON, SQLite, calculator-code, or C# cutover is authorized by this document.
+**Decision status:** the **skill-cap, progression-milestone, non-combat fixed-base-XP architecture, generalized-exponential curve family, final curve coefficients A = 8 and K = 15, milestone-time targets, 5,000,000 XP level-99 display scale, and resulting 1–99 cumulative threshold table are closed for analytical design**. Final non-combat activity XP values, XP/hour, action cadence, RNG, cross-tier reuse, catalog expansion, and runtime implementation remain open. The checked-in `balance_config.json`, generated legacy XP curve, SQLite progression bands, and all 60-level calculations below remain a **legacy provisional analytical baseline**, not approved balance and not runtime canon. No runtime, schema, JSON, SQLite, calculator-code, or C# cutover is authorized by this document.
 
 Phase 1.3's seven `v1_core` skills and Lowmark-only v1 geography remain distinct from the seven `economy_extension` skills and later-region analytical planning.
 
@@ -99,14 +99,14 @@ Nominal incremental commitment is therefore approximately:
 
 This places practical mastery at roughly **62% of the full nominal journey**, leaving about **38%** after level 80. That late tail is intentional: practical mastery and numerical completion are different achievements.
 
-### Closed curve family and XP scale
+### Closed curve formula, coefficients, XP scale, and threshold table
 
-Use a **RuneScape-like generalized exponential curve family**, independently tuned for Caelmor rather than copying OSRS or RS3 XP totals.
+Use the **RuneScape-like generalized exponential curve family**, independently tuned for Caelmor rather than copying OSRS or RS3 XP totals.
 
-The selected family is:
+The authoritative formula is:
 
 ```text
-Weight(L) = L + A × 2^(L / K)
+Weight(L) = L + 8 × 2^(L / 15)
 
 RawXP(L) = Σ Weight(i), for i = 1 to L-1
 
@@ -116,24 +116,34 @@ RequiredXP(L)
       )
 ```
 
-The **curve family is closed**.
+Closed parameters:
 
-The **level-99 display scale is closed at 5,000,000 XP**. This scale controls numeric granularity and player-facing values; it does not independently set pacing.
+```text
+A = 8
+K = 15
+XP99 = 5,000,000
+```
 
-The exact generalized-exponential coefficients remain open for calibration. Current analysis uses approximately **K ≈ 17** as a working anchor because it appears capable of reconciling the closed milestone-time targets with believable growth in method efficiency under fixed non-combat activity XP. This is not yet the final canonical coefficient, and `A` remains open.
+The authoritative threshold table is:
 
-The intended pacing is:
+```text
+03_CORE_SYSTEMS/Skills & XP v1/Caelmor_XP_Threshold_Table.csv
+```
 
-- **1–10 — rapid orientation:** level gains are frequent enough to teach that progress is dependable.
-- **11–30 — steady apprenticeship:** progress remains energetic while levels begin to carry more personal weight.
-- **31–50 — established competence:** level-ups remain visible but require deliberate engagement.
-- **51–70 — serious investment:** individual levels increasingly feel earned; efficiency and method knowledge matter more.
-- **71–80 — mastery approach:** progression should create visible anticipation toward practical mastery.
-- **81–90 — refinement:** levels are slower and primarily support specialization, goals, prestige, and identity.
-- **91–98 — dedication:** each level represents significant commitment without becoming an artificial punishment wall.
-- **99 — culmination:** the achievement itself supplies the emotional spike; 98→99 should not be grotesquely disproportionate to the surrounding late levels.
+Selected closed thresholds:
 
-The curve may change acceleration across these broad regions, but transitions should remain smooth enough that players do not encounter unexplained pacing cliffs.
+| Level | Cumulative XP | Share of level-99 XP |
+|---:|---:|---:|
+| 30 | 221,617 | 4.43234% |
+| 50 | 652,858 | 13.05716% |
+| 70 | 1,549,627 | 30.99254% |
+| 80 | 2,324,814 | 46.49628% |
+| 90 | 3,475,278 | 69.50556% |
+| 99 | 5,000,000 | 100.00000% |
+
+The table has monotonic XP-to-next-level growth from **2,224 XP for level 1→2** to **198,978 XP for level 98→99**. There are no flat or reversed level-cost jumps and no special final-level multiplier.
+
+The curve remains subordinate to the already-closed pacing philosophy: representative fixed-XP activities and believable methods must still reproduce the approved milestone-time envelopes without hidden player-level XP scaling.
 
 ### Closed non-combat fixed-base-XP architecture
 
@@ -178,8 +188,6 @@ This protects the 80–99 tail from becoming compulsory grind while preserving a
 
 This closed design direction does **not** yet define:
 
-- final generalized-exponential coefficients;
-- exact XP required for each individual level;
 - baseline or optimal XP/hour;
 - action durations;
 - final XP per gather/craft/completion;
@@ -234,7 +242,7 @@ The old 60-level shorthand of "competent = entering band 3; advanced = entering 
 
 1. **Skill cap and milestone philosophy — CLOSED.** Cap 99. Novice 1–30; Competent 31–50; Advanced 51–70; Masterful 71–98; practical mastery around 80; Cap/Completion 99. Most practical functionality is available by practical mastery. Post-80 rewards are specialist opportunities. Cap is primarily identity/commemoration. Future cap increases remain permissible while preserving 99 as a historical mastery landmark. Ordinary levels are satisfying progress pulses and do not each require authored unlocks.
 
-2. **XP curve family / scale / milestone pacing — CLOSED; exact coefficients remain CALIBRATION.** Use the selected RuneScape-like generalized exponential family, independently tuned for Caelmor. Level-99 display scale is **5,000,000 XP**. Nominal cumulative engaged-time targets are approximately level 30 = 11 h, level 50 = 31 h, level 70 = 63 h, level 80 = 90 h, and level 99 = 145 h, with the approved envelopes retained. Current analysis uses **K ≈ 17** as a working calibration anchor, not final canon; `A` and final coefficients remain open. Exact per-level thresholds, baseline XP/hour, and optimal XP/hour must be derived through representative fixed-XP activities and believable methods.
+2. **XP curve / coefficients / scale / threshold table / milestone pacing — CLOSED.** Use the selected RuneScape-like generalized exponential family with **A = 8**, **K = 15**, and **5,000,000 XP at level 99**. `Caelmor_XP_Threshold_Table.csv` is the authoritative 1–99 threshold table. Nominal cumulative engaged-time targets remain approximately level 30 = 11 h, level 50 = 31 h, level 70 = 63 h, level 80 = 90 h, and level 99 = 145 h, with the approved envelopes retained. Final per-action XP, baseline XP/hour, and optimal XP/hour remain downstream calibration values derived from representative fixed-XP activities and believable methods.
 
 3. **Band / unlock-spacing philosophy — PARTIALLY CLOSED.** Broad identity bands are fixed by the approved milestone structure. Ordinary levels may be progress pulses and do not require an action, recipe, or item unlock. Exact authored unlock positions remain open and should be determined skill-by-skill from mechanical purpose, world logic, cross-skill dependencies, and memorable milestone density rather than a requirement to populate every numerical level. Existing six 10-level analytical bands are not approved progression bands for the 99-level model.
 
@@ -246,6 +254,6 @@ The old 60-level shorthand of "competent = entering band 3; advanced = entering 
 
 7. **Catalog size versus RuneScape-style depth — OPEN.** **Hold 102 items** and seek depth from the existing 77 transformations and many-to-many sources/sinks; **modest +25% planning envelope** is 128 items (+26), about 96 recipes/185 sources/246 consuming sinks if today's densities are maintained; **broader +50% envelope** is 153 items (+51), about 116 recipes/222 sources/296 sinks. These are arithmetic workload envelopes, *not* an authorization to add items and not a claim of volume parity with RuneScape. **Data:** any expansion must pass purpose, source, sink, overlap, and redundancy audits. **Later runtime:** every new item also carries asset, inventory, crafting, persistence, localization, and QA cost.
 
-**Next decision order:** (1) calibrate the selected generalized-exponential coefficients using representative fixed-XP non-combat activities and believable methods; (2) exact unlock-spacing and milestone placement inside each skill's approved progression bands; (3) baseline-versus-efficient XP/hour analysis as an output of those methods; (4) action cadence and sustainable throughput; (5) randomness; (6) cross-tier direct reuse; (7) catalog-volume ceiling. Recalculate only after the relevant design choice, then playtest before promoting derived rates to runtime.
+**Next decision order:** (1) representative fixed-XP non-combat activity calibration against the authoritative threshold table; (2) exact unlock-spacing and milestone placement inside each skill's approved progression bands; (3) baseline-versus-efficient XP/hour analysis as an output of those methods; (4) action cadence and sustainable throughput; (5) randomness; (6) cross-tier direct reuse; (7) catalog-volume ceiling. Recalculate only after the relevant design choice, then playtest before promoting derived rates to runtime.
 
-*Method:* Counts and region/connection facts are SQL queries against `caelmor_economy.sqlite`; current legacy XP thresholds, scenario curves, expected action rates, and weighted-bonus examples use `CODE/Scripts/caelmor_progression_calculator.py` and the checked-in provisional configuration. The approved 99-level cap and milestone identities are Creative Director design decisions. The 145-hour nominal mastery horizon and milestone timing targets are Gameplay Designer resolutions made under the Creative Director's established RuneScape-influenced long-term-progression direction; they are analytical tuning targets, not a runtime XP table.
+*Method:* Counts and region/connection facts are SQL queries against `caelmor_economy.sqlite`; legacy 60-level XP thresholds, scenario curves, expected action rates, and weighted-bonus examples use `CODE/Scripts/caelmor_progression_calculator.py` and the checked-in provisional configuration. The approved 99-level cap, milestone identities, fixed-base-XP architecture, generalized-exponential family, coefficients `A = 8` / `K = 15`, 5,000,000 XP scale, and authoritative 1–99 threshold table are Creative Director progression decisions. The 145-hour nominal mastery horizon and milestone timing targets remain analytical acceptance constraints rather than a per-action reward formula.
