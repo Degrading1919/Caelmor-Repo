@@ -224,6 +224,20 @@ This preserves early-content viability and supports self-directed training rathe
 
 Early methods do not need to remain optimal forever. They should remain mechanically honest and mathematically stable.
 
+### Anti-monotony progression guardrail
+
+**REPETITION MAY BE FAMILIAR, BUT PROGRESSION MUST NOT BE MERELY RESKINNED REPETITION.**
+
+Caelmor may use comfortable, repeated skilling loops. Repetition is desirable when it is purposeful, familiar, and connected to the player's goals, world knowledge, and growing mastery. A higher-level activity is not sufficiently novel merely because it has a different resource name, higher level requirement, more XP, longer action time, better yield, new visual model, or higher-tier tool requirement.
+
+A major progression beat should materially deepen at least some combination of what the player learns, chooses, routes around, prepares for, connects to, risks, values, gathers, makes, keeps, processes, or sells. Appropriate sources of progression variety include different locations and resource distributions, route knowledge, preparation, tool or station choices, multi-resource and processing relationships, cross-skill dependencies, economic purpose, world or quest context, environmental constraints, risk/reward tradeoffs, alternate training methods, efficiency discoveries, and occasional changes in interaction structure where justified.
+
+This rule does **not** require a new mechanic every level, prohibit relaxing repetitive skilling, or authorize complexity for novelty's sake. Caelmor should prefer fewer, deeper systems; no filler resources or recipes; knowledge-driven efficiency; meaningful world attachment; and RuneScape-inspired long-term familiarity without copying RuneScape implementation.
+
+**Validation question:** Does this progression band materially change what the player learns, chooses, routes around, prepares for, connects to, or values — or is it primarily the same action with a different unlock?
+
+If the answer is primarily the latter, revise the content or method structure rather than adding another resource tier.
+
 ---
 
 ## 6. Authoritative level-threshold formula, coefficients, and XP scale
@@ -352,9 +366,9 @@ Calculate actual progression time to:
 - practical mastery around level 80
 - level 99
 
-### Step 5 — Compare derived times against the CLOSED Creative Director milestone envelopes
+### Step 5 — Validate BOTH numerical pacing and experiential progression
 
-Validate against:
+First validate the representative methods against the CLOSED Creative Director milestone envelopes:
 
 - level 30: ~10–12 h
 - level 50: ~28–34 h
@@ -363,6 +377,12 @@ Validate against:
 - level 99: ~135–150 h
 
 The nominal targets remain approximately 11 / 31 / 63 / 90 / 145 engaged hours.
+
+Then validate the same method set for **experiential progression**. Ask:
+
+> Does this progression band materially change what the player learns, chooses, routes around, prepares for, connects to, or values — or is it primarily the same action with a different unlock?
+
+A method set fails calibration even if it perfectly hits the milestone-hour targets when long progression stretches are dominated by mechanically interchangeable tier replacements. Revise the content, method, routing, preparation, risk/reward, economic, world, or system connections instead of solving the problem by adding another resource tier.
 
 ### Step 6 — Tune the correct variables
 
@@ -389,8 +409,9 @@ Reject any solution that reaches the approved pacing envelopes only by:
 - implausible resource availability
 - arbitrary reward inflation disconnected from activity identity
 - direct mechanical back-solving of every action reward from a target XP/hour
+- long progression stretches dominated by mechanically interchangeable tier replacements that differ mainly in name, requirement, XP, timing, yield, visuals, or tool tier
 
-The acceptance target and the activity-reward model must both remain intact.
+The acceptance target, activity-reward model, and experiential-progression guardrail must all remain intact.
 
 ---
 
@@ -464,6 +485,8 @@ If approved, the non-combat skilling/economy XP architecture should adopt these 
 10. **Any XP modifier must have an explicit gameplay source and must not be inferred solely from player level.**
 11. **This PR does not define combat XP, quest XP, encounter XP, or every future XP source in the game.**
 12. **RuneScape remains an emotional and structural reference, not a numeric blueprint.**
+13. **Repetition may be familiar, but progression must not be merely reskinned repetition.**
+14. **Representative method calibration must pass both numerical pacing and experiential progression acceptance.**
 
 ---
 
@@ -483,6 +506,6 @@ Follow-up work should:
 - use `Caelmor_XP_Threshold_Table.csv` as the authoritative 1–99 threshold table;
 - build representative fixed-XP non-combat activity samples;
 - model believable representative methods;
-- validate derived milestone times against the approved envelopes;
+- validate representative methods against both the approved milestone-time envelopes and the anti-monotony experiential-progression criterion;
 - update the analytical calculator only after the design model is accepted;
 - leave combat XP, quest XP, encounter XP, schemas, JSON content, SQLite, and runtime C# unchanged until their appropriate downstream design or implementation handoffs.
