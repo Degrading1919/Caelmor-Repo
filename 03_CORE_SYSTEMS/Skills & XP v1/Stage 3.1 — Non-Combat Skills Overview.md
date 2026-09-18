@@ -1,6 +1,6 @@
 # Skill Level & Mastery Philosophy
 
-**Creative Director status:** approved for skill progression design. This document defines the numerical cap, milestone identities, closed time-to-milestone targets, the non-combat fixed-base-XP architecture, the selected generalized-exponential curve family, and the 5,000,000 XP level-99 display scale. It does not set final curve coefficients, exact per-level XP thresholds, final activity XP values, XP/hour, action timing, RNG, individual unlock positions, or runtime behavior.
+**Creative Director status:** approved for skill progression design. This document defines the numerical cap, milestone identities, closed time-to-milestone targets, the non-combat fixed-base-XP architecture, the selected generalized-exponential curve family, the final coefficients A = 8 and K = 15, the 5,000,000 XP level-99 display scale, and the resulting authoritative 1–99 threshold table. It does not set final activity XP values, XP/hour, action timing, RNG, individual unlock positions, or runtime behavior.
 
 ## Skill Cap
 
@@ -59,12 +59,12 @@ This is an **absolute XP scale**, not a pacing formula. Changing the numeric sca
 
 The 5,000,000 scale is intended to provide enough integer granularity for stable authored activity rewards without pushing ordinary non-combat actions into unnecessarily inflated numbers.
 
-### Curve-family formula and coefficient status
+### Closed curve formula, coefficients, and threshold table
 
-The selected family is represented as:
+The authoritative progression formula is:
 
 ```text
-Weight(L) = L + A × 2^(L / K)
+Weight(L) = L + 8 × 2^(L / 15)
 
 RawXP(L) = Σ Weight(i), for i = 1 to L-1
 
@@ -74,11 +74,34 @@ RequiredXP(L)
       )
 ```
 
-The **family is closed**. The exact coefficients are not.
+Closed parameters:
 
-Current analysis uses approximately `K ≈ 17` as a working calibration anchor because it appears capable of reproducing the closed milestone-time envelopes while allowing believable knowledge-, access-, tool-, route-, and method-driven efficiency growth.
+```text
+A = 8
+K = 15
+XP99 = 5,000,000
+```
 
-`K ≈ 17` is not yet the final canonical coefficient. `A` also remains open. Final coefficients must be validated with representative fixed-XP activities and believable training methods.
+The exact 1–99 cumulative thresholds are authoritative in:
+
+```text
+03_CORE_SYSTEMS/Skills & XP v1/Caelmor_XP_Threshold_Table.csv
+```
+
+Key thresholds are:
+
+| Level | Cumulative XP |
+|---:|---:|
+| 30 | 221,617 |
+| 50 | 652,858 |
+| 70 | 1,549,627 |
+| 80 | 2,324,814 |
+| 90 | 3,475,278 |
+| 99 | 5,000,000 |
+
+Level 80 sits at **46.49628%** of total level-99 XP. The remaining raw XP after practical mastery is intentional and is reconciled with the closed engaged-time targets through more productive later methods rather than hidden player-level XP scaling.
+
+The generated table has monotonic XP-to-next-level growth from **2,224 XP for 1→2** to **198,978 XP for 98→99**, with no flat/reversed level costs and no artificial final-level multiplier.
 
 ### Fixed non-combat activity XP architecture
 
@@ -132,8 +155,6 @@ The level count must never force filler resources, recipes, tools, tiers, or cat
 
 The closed philosophy above does **not** yet define:
 
-- final generalized-exponential coefficients;
-- exact XP required for individual levels;
 - baseline or optimal XP/hour;
 - action durations;
 - final XP per gather/craft/completion;
