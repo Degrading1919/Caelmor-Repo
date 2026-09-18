@@ -1,6 +1,6 @@
 # Skill Level & Mastery Philosophy
 
-**Creative Director status:** approved for skill progression design. This document defines the numerical cap, milestone identities, and closed XP-progression philosophy. It does not set exact XP totals, per-level XP thresholds, XP/hour, action timing, RNG, individual unlock positions, or runtime behavior.
+**Creative Director status:** approved for skill progression design. This document defines the numerical cap, milestone identities, closed time-to-milestone targets, the non-combat fixed-base-XP architecture, the selected generalized-exponential curve family, and the 5,000,000 XP level-99 display scale. It does not set final curve coefficients, exact per-level XP thresholds, final activity XP values, XP/hour, action timing, RNG, individual unlock positions, or runtime behavior.
 
 ## Skill Cap
 
@@ -29,7 +29,7 @@
 
 ## XP Progression Philosophy
 
-Caelmor uses a **smooth milestone-shaped accelerating progression curve** rather than copying the RuneScape XP formula or forcing all 99 levels through one mathematically neat exponent.
+Caelmor uses a **RuneScape-like generalized exponential progression family**, independently tuned for Caelmor rather than copying the OSRS or RS3 XP table. The selected family is intended to preserve increasingly meaningful levels and a prestigious late journey while still supporting practical mastery around level 80.
 
 The progression target is a **long-form level-99 journey of approximately 135–150 engaged skill hours**, using **145 hours as the nominal analytical target**.
 
@@ -46,6 +46,53 @@ The progression target is a **long-form level-99 journey of approximately 135–
 | 99 | Cap / Completion | **~145 h** | ~135–150 h |
 
 Practical mastery therefore occurs at roughly **62% of the nominal journey**, leaving roughly **38%** of the commitment after level 80 for refinement, specialization, prestige, identity, and long-term personal goals.
+
+### Closed XP display scale
+
+The working 1–99 progression uses:
+
+```text
+XP at level 99 = 5,000,000
+```
+
+This is an **absolute XP scale**, not a pacing formula. Changing the numeric scale alone does not change the normalized curve shape or the closed time targets.
+
+The 5,000,000 scale is intended to provide enough integer granularity for stable authored activity rewards without pushing ordinary non-combat actions into unnecessarily inflated numbers.
+
+### Curve-family formula and coefficient status
+
+The selected family is represented as:
+
+```text
+Weight(L) = L + A × 2^(L / K)
+
+RawXP(L) = Σ Weight(i), for i = 1 to L-1
+
+RequiredXP(L)
+    = round(
+        5,000,000 × RawXP(L) / RawXP(99)
+      )
+```
+
+The **family is closed**. The exact coefficients are not.
+
+Current analysis uses approximately `K ≈ 17` as a working calibration anchor because it appears capable of reproducing the closed milestone-time envelopes while allowing believable knowledge-, access-, tool-, route-, and method-driven efficiency growth.
+
+`K ≈ 17` is not yet the final canonical coefficient. `A` also remains open. Final coefficients must be validated with representative fixed-XP activities and believable training methods.
+
+### Fixed non-combat activity XP architecture
+
+For authored non-combat skilling/economy activities:
+
+- the same authored action under the same conditions has the same base XP regardless of player level;
+- player level itself does not invisibly multiply base XP;
+- different activities may legitimately award different fixed base XP because they are genuinely different activities;
+- higher-level methods can improve XP/hour through better resources, tools, routes, access, preparation, knowledge, or explicitly authorized modifiers;
+- target XP/hour is an analytical result or diagnostic, not the automatic source of per-action XP.
+
+For example, mining the same iron deposit under the same conditions should retain the same base XP at level 20 and level 90. A level-90 player may progress faster because of better tools, routes, access, or superior alternative activities—not because iron silently becomes worth more XP.
+
+This rule applies to non-combat skilling/economy XP. It does not define combat XP, quest XP, encounter XP, or other future reward models.
 
 ### Intended pacing feel
 
@@ -85,11 +132,11 @@ The level count must never force filler resources, recipes, tools, tiers, or cat
 
 The closed philosophy above does **not** yet define:
 
-- total XP at level 99;
+- final generalized-exponential coefficients;
 - exact XP required for individual levels;
 - baseline or optimal XP/hour;
 - action durations;
-- XP per gather/craft/completion;
+- final XP per gather/craft/completion;
 - success or failure probabilities;
 - resource yield rates;
 - exact unlock levels inside each identity band;
