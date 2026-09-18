@@ -1,6 +1,6 @@
 # Caelmor Part 3 — Thornfell regional expansion
 
-**Status:** proposal-status document for Creative Director review. It is additive only: it changes no canonical source, does not select C11, and does not design equipment, resources, routes, or quest scripts. It builds from the directed Part 2 backbone and the detailed Thornfell dossier, which remains the primary regional source pending a coordinated canon pass.
+**Status:** proposal-status document for Creative Director review. It is additive only: it changes no canonical source and does not design equipment, resources, routes, or quest scripts. It builds from the directed Part 2 backbone, the resolved C11 ruling, and the detailed Thornfell dossier, which remains the primary regional source pending a coordinated canon pass.
 
 ## Reading key and constraints
 
@@ -12,7 +12,7 @@
 
 **Directed framework.** The Great War lasted 5–10 years and ended about thirty years ago. Most Thornfell acoustics are natural; rare dormant air resonance exists. “Spirit” is an old term for living/emotional imprints and their interaction with elemental resonance, not an element or discipline. Postwar authorities rejected weaponization, amplification, uncontrolled experimentation, and dangerous research, but no lasting continent-wide ban existed. `Caelmor_Part2_Historical_Backbone_Proposal.md`, “Magic-history framework”; `Caelmor_Part2_War_and_Postwar_Proposal.md`, “Thirty years of recovery.”
 
-**Open C11.** Echochamber Summit’s event is not assigned a Stonebound identity, network connection, voice, intention, or agency here. Any summit clue below is limited to observed architecture, weather, and disputed human interpretation. `Caelmor_Part2_Historical_Gap_Audit.md`, C11.
+**Directed C11.** Echochamber Summit intersects an ancient Stonebound node. Rare Echohewn resonance can couple with it, producing the physical or resonant phenomenon historically called the “Stonebound guardian.” Stonebound are passive and place-bound: they respond to imbalance, pressure, intrusion, or disturbance, without speech, prophecy, visions, answers, historical identification, champion-selection, or creature-like action. Most summit acoustics remain natural. `Caelmor_Part2_Historical_Gap_Audit.md`, C11; Creative Director ruling.
 
 ## The Marches as a lived inheritance
 
@@ -81,7 +81,7 @@ Older people retain authority through memory of repairs, weather patterns, marri
 | **Natural / commonplace** | wind through fluted faces, delayed echoes, carrying calls, unsafe storm acoustics | can guide labor and misunderstanding; does not establish a spell. |
 | **Human historical practice** | horn codes, bridge placement, cairn alignment, safe-stone knowledge | inherited craft may preserve a lost rationale without becoming magical. |
 | **Rare dormant phenomenon** | a storm-linked pressure response at a damaged Echohewn site; an echo arriving impossibly out of sequence | local, witnessed imperfectly, and never a general-purpose weapon. |
-| **Open C11 summit matter** | any apparent guardian, network, or agency at Echochamber Summit | no identity, intention, speech, or causal claim until the Director decides. |
+| **Rare summit coupling** | Echohewn resonance coupling with the ancient Stonebound node, historically interpreted as the “Stonebound guardian” | a passive, place-bound response to imbalance, pressure, intrusion, or disturbance; it may produce physical or resonant effects but cannot speak, prophesy, show visions, answer questions, identify history, choose champions, or act as a creature. |
 
 Religion is primarily domestic and civic: windward toasts, cairn tending, promises made where others can hear them, and a reluctance to speak lightly over a burial stone. Dwarven and clan households need not share every explanation to share the duty of repair. A skeptic can keep a stormflower at a doorway because it recalls a grandparent, not because it wards anything.
 
@@ -121,7 +121,7 @@ The existing anchors remain the center; these **proposed relationship pressures*
 - **Ressa** holds a list of calls she will not authorize after wartime “wrong results.” Her casework concerns accountable warning practice, never new horn weaponry.
 - **Dorn** maintains code continuity and worries that a missing reply will be mistaken for a supernatural omen rather than human error.
 - **Maera** can require testimony before assigning a permanent stone, while making room for temporary names. Her work makes absence visible without pretending it can be resolved.
-- **Kaldren** mediates structural questions and resists turning the Echohewn into a clan possession. He can establish safe repair limits without explaining C11.
+- **Kaldren** mediates structural questions and resists turning the Echohewn into a clan possession. He can establish safe repair limits without mistaking the Summit’s Stonebound response for a solvable voice or creature.
 - **Iven** is a scout whose observations are useful precisely because he reports direction, weather, and timing before interpreting them.
 
 ## Folklore, places, and disputed history
@@ -136,7 +136,7 @@ The following proposals give folklore a record, rival reading, and present conse
 | **The stone with no shadow** | A children’s dare and Torvek’s warning against boasting. | Tool marks show an old surveying purpose; a later record may explain why a route changed. | remains natural unless evidence supports more. |
 | **Shatterfall’s broken engine** | proof that Thornfell held the gorge. | a repair ledger shows locals collapsed a shelf to prevent encirclement, stranding some travelers. | motive remains disputed. |
 | **Cairn moss out of season** | a sign that someone has been tending a grave secretly. | a household identifies a departed Mire relative through the care pattern. | grief evidence, not a magical message. |
-| **Echochamber storm hum** | weather in old stone. | it may prove only that maintenance cutoffs were ignored; C11 keeps larger truth bracketed. | no Stonebound conclusion. |
+| **Echochamber storm hum** | weather in old stone. | unsafe maintenance can explain an immediate hazard; rare Echohewn resonance may also couple with the ancient Stonebound node. | the resulting “guardian” is a passive response, never a speaking oracle or conventional being. |
 
 ## Side-story network: local resolutions, later meanings
 
@@ -153,7 +153,7 @@ Each seed is **proposed**. It resolves a present human dispute before offering a
 
 **Lowmark.** Anchored trade and mutual respect make a proposed *escort debt* viable: during recovery, Lowmark provisions and Thornfell route labor were exchanged without a lasting central treaty. A current toll or convoy dispute can therefore descend from different memories of the same emergency. `Caelmor_Region2_ThornfellMarches.md`, XIV; Part 2 backbone, “Repair Bargains.” Thornfell migrants in Lowmark learn that calm administration can still exclude people missing the right papers; Lowmark visitors learn that an open pass has a household cost.
 
-**Mire.** A displaced Thornfell household can remain connected to a Mire name or repair practice after wartime passage, giving both regions a civilian history beyond battlefield symbolism. Thornfell respects Mire care work but can mistake its grief vocabulary for supernatural certainty; Mire visitors can mistake Marcher reserve for lack of mourning. A shared name case corrects both assumptions without resolving Mire’s separate open site and threat questions.
+**Mire.** A displaced Thornfell household can remain connected to a Mire name or repair practice after wartime passage, giving both regions a civilian history beyond battlefield symbolism. Thornfell respects Mire care work but can mistake its grief vocabulary for supernatural certainty; Mire visitors can mistake Marcher reserve for lack of mourning. A shared name case corrects both assumptions without treating the Sunken Chapel or either major earth-memory threat as a witness to that household's history.
 
 **Emberholt.** Mistrust follows wartime route pressure and fire devastation, but Black Glass Hostel and individual records prevent a totalizing “enemy” story. Emberholt travelers may seek trade or safety sincerely while Marchers demand accountable paperwork. No commerce, rumor, or summit anomaly proves Remnant responsibility. `LORE/Regions/Caelmor_Region2_ThornfellMarches.md`, II, XIV; Part 2 war proposal.
 
@@ -165,7 +165,7 @@ Each seed is **proposed**. It resolves a present human dispute before offering a
 | A Lowmark-style stitch inside a Hushfold shutter | repair by a traveler | a Lowmark departure copy and Mire caretaker’s pattern | one family changed names at crossings while surviving, complicating a clan-deserter accusation. |
 | Black Glass Hostel’s erased snow-height mark | damaged maintenance record | a neutral care account from another region | an Emberholt medic helped people in one crisis; this revises a specific family story, not the war’s moral ledger. |
 | A Shatterfall cairn’s heroic wording | proof that a clan saved the pass | a bridgewright ledger and delayed-escort testimony | the collapse protected one route while abandoning another; descendants inherit both grief and gratitude. |
-| A storm hum at a sealed Echochamber threshold | old stone and bad weather | Kaldren identifies unsafe prior repair work | first payoff is human negligence and repair; all summit agency remains C11-open. |
+| A storm hum at a sealed Echochamber threshold | old stone and bad weather | Kaldren identifies unsafe prior repair work; a rare resonance response follows renewed intrusion or pressure | human negligence remains the immediate safety issue; the historically named “guardian” is a passive Stonebound response, not a source of explanation. |
 
 ## Review of old proposal seeds from `4d2d6b6`
 
@@ -176,12 +176,10 @@ Each seed is **proposed**. It resolves a present human dispute before offering a
 | Unclaimed Names Shelf | **RETAIN AS OPTION** | It cleanly connects cairn work, migration, and contested belonging; its witness threshold remains proposed, not canon procedure. |
 | Hushfold and mixed-clan household stories | **REVISE** | Useful for ordinary life and postwar displacement, but map placement, Assembly representation, and exact origin remain unapproved. |
 | Black Glass Hostel / Emberholt medic clue | **RETAIN AS OPTION** | Supports a bounded individual act of care without erasing regional violence or creating a single cross-region conspiracy. |
-| Third Horn and resonance stories | **REVISE** | Reframed around human warning failure and rare, local phenomenon; no universal magical horn practice or C11 conclusion. |
+| Third Horn and resonance stories | **REVISE** | Reframed around human warning failure and rare, local phenomenon; the Summit’s resolved Stonebound coupling does not create a universal magical horn practice. |
 | Quiet Survey-style shared route theory | **REJECT AS THORNFELL FACT** | Cross-region editor must verify map, records, and evidence ownership; motif similarity cannot establish a continent-wide hidden survey. |
 
 ## Remaining decisions and recommended next work
-
-**C11 remains the sole unresolved Director decision that blocks factual claims about the summit:** decide whether its event is local resonance or a Stonebound-network matter, and what agency, if any, is permissible. This proposal does not pre-answer it.
 
 The following are Part 3 development tasks, not new factual blockers: approve or revise Assembly procedure; place proposed settlements on an actual map; check character ages before direct war testimony; choose a bounded set of side stories; and decide which local records become canon. Founder biography and exact route geometry remain outside this regional proposal’s authority.
 

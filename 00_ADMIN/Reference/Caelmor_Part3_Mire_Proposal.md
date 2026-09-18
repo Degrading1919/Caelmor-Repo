@@ -9,7 +9,7 @@
 - **Proposed** — a connected addition for approval, never a silent canon change.
 - **Open** — withheld pending a Director choice.
 
-Two choices genuinely block the region's central supernatural presentation and are therefore bracketed throughout: **C14**, the identity/name/presentation of the central flooded chapel site; and **C15**, the identity and roster of the Mire's two major supernatural threats. The Director has directed only two major threats, allows minor place-bound anomalies, and excludes literal undead. This proposal does not select chapel terminology, threat names, identities, or ontology. `Caelmor_Stage_A_Contradiction_Register.md`, C14–C15; Part 2 historical gap audit.
+**Directed C14:** the region's central flooded chapel is one location with three names: the formal and historical **Chapel of the Sinking Star**, the common modern **Sunken Chapel**, and the riverfolk and ferrymen's **Sunken Church**. Rowan Mirewake is the only known living guide who reliably knows the safe approach through its shifting channels. The origin of “Sinking Star” is not established here. **Directed C15:** the Mire has exactly two major supernatural threats: the General Who Wouldn't Fall and the Sorrowback. Neither is undead. Other rare, place-bound memory phenomena remain local. `Caelmor_Stage_A_Contradiction_Register.md`, C14–C15; Creative Director rulings.
 
 **Directed C08:** “spirit” is an older term for the living and emotional imprint people leave in the world, and for the interaction of memory, grief, intention, and identity with elemental resonance. It is neither a fifth element nor a separate magical discipline. **Directed C12:** postwar authorities broadly rejected wartime weaponization, amplification, uncontrolled ritual experimentation, and dangerous research, but no durable authority imposed a universal magical ban. `Caelmor_Part2_Historical_Backbone_Proposal.md` (8c8bb9d), Reading key and Magic-history framework.
 
@@ -87,11 +87,19 @@ Two choices genuinely block the region's central supernatural presentation and a
 
 **Directed C08 applied:** older people may call an unusually heavy place “full of spirit,” but mean the imprint of lives and intention meeting earth resonance. A banner shifting, a trench humming, or animals avoiding a ford can be a local anomaly, practical warning, grief response, or more than one of these. It never establishes a spirit element, a soul economy, or a person literally returned from death.
 
-**Open C14/C15 boundary:** the flooded chapel's identity and presentation, and the two major threats, are held for Director ruling. Minor anomalies may remain rare, environmental, and non-personal: a reflection that appears too clear, a soil tremor during testimony, a banner moved by no felt wind. No anomaly should answer a case cleanly.
+### The Sunken Chapel and the Mire's two major threats
+
+**Directed C14:** the Chapel of the Sinking Star is the Sunken Chapel in common modern speech and the Sunken Church to riverfolk and ferrymen; all three names identify the same flooded site. Rowan Mirewake is the only known living guide who reliably knows its safe approach through shifting channels. The name's origin remains unasserted.
+
+**Directed C15:** the General Who Wouldn't Fall is a singular, unusually coherent earth-memory manifestation concentrated from battlefield command, fear, obedience, death, and trauma. It is not the surviving ghost of any historical general. The Sorrowback is the Mire's other major threat: a massive earth-memory creature formed from soil, violence, broken weapons, banners, and accumulated emotional residue. Neither is undead, and neither makes the dead literally walk.
+
+**Directed C15 applied:** Earthen Echoes, Banner Wraiths, Chapel Shades, and other rare place-bound memory manifestations are minor or local phenomena. Chapel Shades are memory impressions, not souls. A reflection that appears too clear, a soil tremor during testimony, or a banner moved by no felt wind can remain an environmental or resonant warning, but no anomaly should answer a case cleanly. Caelmor's world can remember without its dead literally walking around.
+
+**Proposed consequence chain:** because the Sunken Chapel's approach shifts, route safety depends on Rowan's judgment rather than a route anyone can certify once and treat as permanent. A ferryman may rely on Rowan's warning and still refuse passage; a Silt hearing can record that refusal, its weather and safety evidence, and the effects on affected households without making chapel access a private right. When the General or the Sorrowback disturbs ground or crossings, Griefwatch may call a closure and Memorykeepers may separate observed effects from claims about what happened there. The General, the Sorrowback, and a Chapel Shade cannot identify a historical event, settle testimony, or decide whose loss carries civic authority.
 
 ## Existing people, families, and recurring story potential
 
-**Anchored:** Edris Hollowmere, Calwen Reed-Binder, Mara Fenholt, Rowan Mirewake, Old Sennic Vale, Lysa Thornettle, and Bran Hollowstep are existing Mire anchors. Rowan alone knows how to reach the site called the Sunken Church in the character file; this conflicts with the dossier's Chapel of the Sinking Star and remains C14. `LORE/Characters/Caelmor_Characters_Region3_Mire_Of_Fallen_Banners_Anchors (Not Full List).txt`; Stage A C14.
+**Anchored / Directed C14:** Edris Hollowmere, Calwen Reed-Binder, Mara Fenholt, Rowan Mirewake, Old Sennic Vale, Lysa Thornettle, and Bran Hollowstep are existing Mire anchors. Rowan Mirewake is the only known living guide who reliably knows the safe approach through shifting channels to the Chapel of the Sinking Star, commonly the Sunken Chapel and in riverfolk and ferrymen's speech the Sunken Church. `LORE/Characters/Caelmor_Characters_Region3_Mire_Of_Fallen_Banners_Anchors (Not Full List).txt`; Creative Director ruling C14.
 
 **Proposed connective use:**
 
@@ -109,7 +117,7 @@ No ages, hidden kinships, or new biographies are asserted. The proposal gives ex
 
 ## Folklore, disputed history, and layered places
 
-**Anchored:** Fallen Standards, the Drowned Encampment, Mirebone Crossing, Stillgrave Hollow, Bannerline Ridge, and the contested chapel site already exist as landscape anchors; existing folklore includes the Banner That Sank Twice, the Father at the Ford, the Singing Trench, the persistent lantern, and the Last Root of Sorrow. `LORE/Regions/Caelmor_Region3_MireOfFallenBanners.md`, VI, XII.
+**Anchored / Directed C14:** Fallen Standards, the Drowned Encampment, Mirebone Crossing, Stillgrave Hollow, Bannerline Ridge, and the Chapel of the Sinking Star already exist as landscape anchors; existing folklore includes the Banner That Sank Twice, the Father at the Ford, the Singing Trench, the persistent lantern, and the Last Root of Sorrow. `LORE/Regions/Caelmor_Region3_MireOfFallenBanners.md`, VI, XII; Creative Director ruling C14.
 
 **Proposed layers:**
 
@@ -119,7 +127,7 @@ No ages, hidden kinships, or new biographies are asserted. The proposal gives ex
 | **Nine Stakes** | Nine attempts to mark a safe crossing show incompetence. | Depth marks show one diversion protected a fleeing group while making later travel harder. | Ferriers argue whether safety knowledge can remain private. |
 | **Hushed Granary** | A shared emergency store is an ordinary local institution. | Its missing key may be theft, a flood bypass, or an ill custodian's fear of replacement. | Sorrowmere, Marshfall, and Rootrest contest custody and apprenticeship. |
 | **Unfired Kiln** | A Rootrest children's rain shelter. | Promise marks in its wall connect abandoned marker work to a wartime retreat. | A grown child wants the promises recorded; an elder fears reopening a family failure. |
-| **The Father at the Ford** | A ghost story for travellers. | A ferry list and a family naming habit may identify a real man who kept asking after evacuees. | His descendants disagree whether an uncertain answer offers comfort. |
+| **The Father at the Ford** | A travellers' haunting story. | A ferry list and a family naming habit may identify a real man who kept asking after evacuees. | His descendants disagree whether an uncertain answer offers comfort. |
 
 These sites should support environmental observation and civilian evidence before any central supernatural revelation. None requires every discrepancy to be Remnant work; shame, ordinary error, deliberate protection, and political convenience remain distinct possible causes.
 
@@ -147,15 +155,15 @@ These sites should support environmental observation and civilian evidence befor
 
 | Seed | Finding | Reason |
 | --- | --- | --- |
-| Names Below Compact | **REVISE** | Retain its non-allegiance-first recovery ethic, but present it as a proposed local register and hearing practice, not settled law. It needs C14/C15-independent legal limits and a Director decision on appeal custom. |
+| Names Below Compact | **REVISE** | Retain its non-allegiance-first recovery ethic, but present it as a proposed local register and hearing practice, not settled law. It needs legal limits independent of chapel access or threat response, and a Director decision on appeal custom. |
 | Reedsward | **RETAIN AS PROPOSED** | It connects flood risk, civic legitimacy, households, and ordinary work without creating a new armed faction or resource design. |
 | Silt Courts | **REVISE** | Rename as a modest “silt hearing” procedure so it does not imply a formal regional court. Its coercive limits and appeal path remain open. |
 | Lantern Debt | **RETAIN AS PROPOSED** | It gives rescue, shelter, and care an enduring social consequence, provided it cannot become hereditary bondage or a universal ledger. |
 | Dry Muster, Nine Stakes, Hushed Granary, Unfired Kiln | **RETAIN AS PROPOSED** | These add layered mundane evidence and settlement conflict; map placement and production scope remain later work. |
-| Central chapel and threat material | **REJECT FOR NOW** | Old proposal wording cannot settle C14 or C15. It must remain bracketed until the Director selects presentation and the two-threat model. |
+| Central chapel and threat material | **REVISE** | Apply the directed single-site naming and Rowan's limited route role. Retain exactly two major threats: the General Who Wouldn't Fall and the Sorrowback; label all other place-bound manifestations minor or local, with Chapel Shades as impressions rather than souls. |
 
-## Remaining gates after this regional pass
+## Remaining questions after this regional pass
 
-- **Open, Director:** C14 central chapel identity/presentation and C15 two-major-threat model. These block its central supernatural chain but do not block household, civic, or cross-region writing.
-- **Open, Director or future polity pass:** whether a Silt hearing has appeal, what outside authority can enforce a route ruling, and map placement/travel time for proposed sites.
-- **Future audit:** check the proposal against the other three regional briefs for duplicated institutions, incompatible dates, overuse of wartime mysteries, and reciprocal civilian relationships. Do not claim Lore Foundation Lock or material-culture readiness.
+- **Future-detail, Director or polity pass:** whether a Silt hearing has appeal, what outside authority can enforce a route ruling, and map placement and travel time for proposed sites.
+- **Future-detail:** the origin of the Chapel of the Sinking Star's formal name remains unasserted pending canon support; it is not a Part 3 blocker.
+- **Part 3 audit:** the companion regional gap audit and cross-region map check duplicated institutions, dates, mystery limits, and reciprocal civilian relationships. Do not claim Lore Foundation Lock or material-culture readiness.
