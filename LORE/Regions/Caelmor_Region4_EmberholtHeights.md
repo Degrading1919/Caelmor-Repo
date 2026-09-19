@@ -33,7 +33,7 @@ and every bright flame casts deep shadows.
 
 ## II. HISTORICAL ROLE IN THE GREAT WAR
 
-Emberholt was both architect and victim of devastation during the Great War. Its mastery of embercraft made it the most feared combat force in Caelmor’s final century of conflict.
+Emberholt was both architect and victim of devastation during the 5–10-year Great War, which ended about thirty years ago. Its mastery of embercraft made it one of the conflict's most feared forces.
 
 ### Emberholt’s Wartime Influence
 
@@ -49,12 +49,13 @@ One of the worst magical disasters in Caelmor’s history began deep within Embe
 
 The event:
 
-- A Remnant-backed experiment attempted to “harmonize” Volkhari fire-blood with ember veins  
+- The unnamed wartime precursor to the later Remnant exploited Volkhari knowledge and captives in an amplification experiment
 - The ritual spiraled out of control when emotional overload triggered an ember surge  
 - Heat flash-melted chamber walls into obsidian-like glass  
-- Most of the Volkhari enclave perished instantly  
-- One Volkhari child fled the collapse—later known as **the Unburnt Boy**  
-- One surviving Volkhari was captured during the chaos and taken into Remnant ritual chambers  
+- A precursor initiate, not a Volkhari, became the **Fire Titan**
+- Kaelith Veyr’un, the **Unburnt Boy**, escaped and remains free
+- Thalan Veyr is the sole known current captive
+- Other Volkhari survivors exist, but their exact population and community form remain unresolved
 - The event was covered up, renamed a “forge collapse,” and erased from public record  
 
 The Glassed Hollow remains buried, but its impact shapes everything that followed.
@@ -62,7 +63,7 @@ The Glassed Hollow remains buried, but its impact shapes everything that followe
 ### Aftermath
 
 - Emberholt doubled down on fire control doctrines  
-- The Remnant began reorganizing embercraft training to produce emotionally stable vessels  
+- The later formal Remnant emerged from the wartime precursor and began influencing embercraft training; its exact transition and personnel continuity remain unresolved
 - The Flameward Speaker rose to power by promising discipline, progress, and unity  
 - Public schools began teaching “safe embercraft” to children  
 - Entire social systems formed around controlled emotional expression  
@@ -122,7 +123,7 @@ Magic is practical:
 
 The Flameward Speaker claims fire is the “birthright of the disciplined.”
 
-Most believe her.
+Most believe him.
 
 ---
 
@@ -153,8 +154,8 @@ To insiders, the truth is far more complex:
 Fire magic attracts the ambitious, the angry, the passionate, and the wounded.  
 The Flameward Speaker knows this.
 
-Publicly, she praises discipline.  
-Privately, she fans the flame.
+Publicly, he praises discipline.
+Privately, he fans the flame.
 
 Emberholt is a forge for magic, yes—  
 but also a forge for war.
@@ -188,18 +189,18 @@ but also a forge for war.
 
 - Operate through tunnels beneath Emberholt  
 - Conduct ritual experiments on fire-based emotion thresholds  
-- Hold a captured Volkhari deep within ritual chambers  
+- Hold Thalan Veyr, the sole known current captive, deep within ritual chambers
 - Seek to create “Perfect Flame-Bearers”  
 - Patrol no public spaces  
 - Influence Emberholt’s leadership through the Flameward Speaker  
 
-### **5. The Volkhari (Survivors & Exiles)**
+### **5. Volkhari survivors**
 
-- Once a proud enclave with ancient fire lineage  
-- Nearly annihilated in the Glassed Hollow incident  
-- Now fragmented, hunted, or hiding  
-- One child survived—**Kaelith Veyr’un, the Unburnt Boy**  
-- Another is held in Remnant custody  
+- A distinct fire-attuned people with an inherited discipline separate from human embercraft
+- Devastated and dispersed by the Glassed Hollow incident
+- Their exact population and community form remain unresolved
+- **Kaelith Veyr’un, the Unburnt Boy**, escaped and remains free
+- **Thalan Veyr** is the sole known current captive
 
 Emberholt publicly claims the Volkhari “abandoned the city.”  
 The truth is darker.
@@ -248,8 +249,8 @@ The Hollow is sealed, forbidden, and patrolled by Emberguard.
 Official record:  
 “A collapsed forge chamber.”
 
-True record:  
-“Where an entire people burned.”
+Hidden record:
+“Where Volkhari captives were exploited and a precursor initiate became the Fire Titan.”
 
 ### **5. Emberdeep Warrens**
 
@@ -460,11 +461,11 @@ A secretive fire-attuned race that once lived in Emberholt’s lower caverns.
 - Extremely rare  
 - Feared and misunderstood  
 
-They were nearly wiped out in the Glassed Hollow disaster.
+They were devastated and dispersed by the Glassed Hollow disaster. Their exact surviving population and community form remain unresolved.
 
 ### **The Unburnt Boy (Kaelith Veyr’un)**
 
-- Only surviving free Volkhari from the collapse  
+- A known free Volkhari survivor of the collapse
 - Escaped before the Remnant sealed the Hollow  
 - Immune to mortal burns  
 - Trails faint emberlight when emotionally distressed  
@@ -472,9 +473,9 @@ They were nearly wiped out in the Glassed Hollow disaster.
 
 Rumors say he appears near the outskirts of Emberholt during cold nights.
 
-### **The Captured Volkhari**
+### **Thalan Veyr — the sole current captive**
 
-One Volkhari adult was seized during the chaos and is now held in Remnant ritual chambers.
+Thalan Veyr is the sole known current Volkhari captive and is held in Remnant ritual chambers.
 
 - Used for ember-blood resonance testing  
 - Bound with embersteel shackles  
@@ -506,14 +507,14 @@ Lessons include:
 
 ### **2. The Flameward Speaker’s Doctrine**
 
-Her core beliefs:
+His core beliefs:
 
 - “Fire is our inheritance.”  
 - “Emotion is strength—if forged.”  
 - “Every citizen must master their flame.”  
 - “Control creates peace.”  
 
-Her hidden beliefs:
+His hidden beliefs:
 
 - “A disciplined army of embercrafters will reshape Caelmor.”  
 - “The world fears fire. Let it.”  
@@ -632,6 +633,8 @@ Emberholt’s dangers emerge from heat, corruption, and magical instability—no
 ---
 
 ## XIV. UNIQUE RESOURCES
+
+**Status:** Legacy reference concepts, not an approved resource, gathering, crafting, recipe, node, or equipment catalog. Future material work must derive each selected concept from an approved cultural function, processing/gathering method, and world source.
 
 **1. Ember Shards**  
 - Concentrated fragments of emberstone  
@@ -819,8 +822,8 @@ Quest elements:
 - Attend public speeches  
 - Discover hidden Remnant correspondences  
 - Witness emotional manipulation in rallies  
-- Uncover her personal ambition  
-- Decide whether to publicly challenge her  
+- Uncover his personal ambition
+- Decide whether to publicly challenge him
 
 ---
 
@@ -832,7 +835,7 @@ Quest elements:
 - Investigate coordinated ember surges  
 - Battle resonance constructs  
 - Uncover ritual plans for a city-wide ignition  
-- Confront the Speaker and her Remnant allies  
+- Confront the Speaker and his Remnant allies
 - Determine Emberholt’s future path  
 
 Outcomes drastically change regional politics.
@@ -863,7 +866,7 @@ A reminder of Emberholt’s uncontrolled past.
 
 ---
 
-## XXI. PLAYER EXPERIENCE INTENT (V1)
+## XXI. FUTURE EMBERHOLT PLAYER EXPERIENCE INTENT
 
 Players should feel:
 
@@ -899,7 +902,7 @@ and the most dangerous.
 - Ashfall revenants  
 - Embermind echoes  
 
-### **V1 Spellcasting:**  
-**Yes — fire magic is used by citizens daily**, encouraged and subtly weaponized.
+### **Player spellcasting:**
+Emberholt citizens use public civic embercraft under regional rules. Lowmark remains the sole full v1 region, and v1 has no player spellcasting system. Any later player fire-magic system requires separate approval.
 
 ---

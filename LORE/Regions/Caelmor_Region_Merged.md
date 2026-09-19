@@ -1,344 +1,181 @@
-# I. THE WORLD OF CAELMOR — CONTINENT OVERVIEW
+# Caelmor Regional Overview
 
-Caelmor is a land shaped by the echoes of a war it barely survived. Across the continent, people rebuild with quiet humility or fierce pride, while deeper currents of fear, unresolved grief, and buried ambition simmer beneath the surface.
+This overview summarizes the four detailed regional dossiers after canon reconciliation. The detailed dossiers govern local facts. Exact routes, travel times, populations, constitutional powers, and unresolved Founder/Remnant histories are not supplied here.
 
-Magic exists, but only as:
-- a **subtle force** in three regions  
-- a **dangerously cultivated weapon** in one  
+The **Great War** lasted roughly 5–10 years and ended about thirty years before the present. All four regions remain shaped by it, but none is defined only by the war.
 
-Most people live ordinary lives, unaware that the remnants of the old powers — the Founders’ philosophies and the remnants of ancient magic orders — still breathe through land, memory, and politics.
+## I. Lowmark Vale
 
-Caelmor’s story is one of:
-- **quiet decay and ancient echoes**  
-- **grounded myth** rather than spectacle  
-- **deliberate pacing**, where every discovery matters  
-- **elemental identities** that shape cultures but do not dominate everyday life  
+### Regional identity
 
-The four regions below form a continent held together by necessity, memory, trade, and unspoken guilt.
+Lowmark is Caelmor's agricultural and river-trade heartland. Its civic life grows from shared water, food, crossings, mills, ferries, and repair. Patience and restraint are valued because one household's neglected bank or withheld store can harm another community downstream.
 
+The region is governed through overlapping practical claims: noble and charter interests, village councils, crossing authorities, mill and river labor, scholars, caretakers, and local stewards. Exact office boundaries remain unsettled.
 
-# II. REGION ONE — LOWMARK VALE  
-## “The River That Remembers”
+### Great War inheritance
 
-Lowmark is a quiet, pastoral region defined by rivers, reeds, and a culture built around humility and emotional stillness. People believe water reflects not only the sky above but the heart within. Magic is not openly practiced and is all but forgotten among the population, save for the remnants kept deep within the isolated Riverwarden Oasis — a place the common folk do not know exists.
+Lowmark fed and moved people across several fronts while refusing large-scale destructive water warcraft. Fields, mills, bridges, depots, ferries, and barges became military targets. Present disputes over charters, tolls, priority, and repair preserve the war through work and records rather than distant legend.
 
-### Core Identity
-Lowmark emphasizes:
-- restraint  
-- gentleness  
-- emotional discipline  
-- respect for memory and caution  
+### Water practice and magic
 
-Its people do not speak loudly nor act rashly. Their cultural strength lies in their **ability to endure without hardening**.
+- Simple farming water practice is openly taught within households and among neighbors.
+- Experienced community stewards oversee shared water works.
+- Formal charter oversight applies only to larger irrigation works.
+- Combat water magic remains exclusive to the Last Field-Mage.
+- V1 does not give the player a spellcasting system.
 
-### Social Structure
-Lowmark’s professions form a stable, healing-oriented society:
-- **Flow-Menders** use riverglass bowls for salves and tonics, never realizing the subtle magic they channel.  
-- **Glasswrights** shape riverglass into household goods without knowledge of its past significance.  
-- **Crestbridge Keepers** manage trade, bureaucratic duty, and the rare Ferrystone Writ needed for legal staff acquisition.  
-- **Wraithwatchers** deal with the few wraith incursions near Stillness Zones.  
+Water-memory manifestations may appear at places where grief, conflict, and stagnant water coincide. Local names such as “Wraith” or “haunting” describe bounded impressions, not returning souls or an independent spirit element.
 
-### Magic & Mystique
-Magic is:
-- nearly absent  
-- subtle and quiet  
-- recognized only by elders in folk tales  
+### Historical tradition
 
-Stillness pools remain a mystery — places where memories linger lightly, but never in gameplay-intensive ways.
+Riverwarden tradition attributes patient water teaching to the **First Listener**. Regional stories sometimes combine an early rediscoverer, a later Founder, and the First Listener into one person. Canon distinguishes first rediscoverers from later iconic teachers; the roster, names, dates, and teaching links remain unresolved.
 
-### Trade Identity
-Lowmark exports:
-- rivergrain  
-- fish  
-- glass goods  
-- herbal medicine  
+### Established places and institutions
 
-It imports:
-- Thornfell stone and metals  
-- Emberholt tools and structural materials  
+Brookhollow, Crestbridge, Ashenstead, Greyharrow, Whisperflow Run, the Floodplain Orchards, Ashen Flats, Stillwater Fen, and the hidden Veilwater areas remain Lowmark's principal anchors. Crestbridge Keepers, village councils, Wraithwatchers, Flow-Menders, Glasswrights, Watergarden Keepers, Lensemasters, river workers, and farm communities hold different kinds of practical authority.
 
-### Perception by Others
-- Thornfell respects Lowmark’s compassion but sees it as overly cautious.  
-- The Mire finds Lowmark softened by its distance from the worst of the war.  
-- Emberholt views Lowmark as passive and sentimental, useful but unambitious.
+### Present pressure
 
-### Lowmark’s Quiet Burden
-Few realize that Lowmark’s gentleness is a deliberate survival mechanism: a refusal to let the past’s grief poison the present.  
+Lowmark must keep food and movement reliable while deciding who pays for repair, whose record counts, and when restraint protects people or merely delays a claim. Its future stories begin with local obligations and can connect outward without making Lowmark a passive supply region.
 
+## II. Thornfell Marches
 
-# III. REGION TWO — THORNFELL MARCHES  
-## “The Wind-Carved Frontier”
+### Regional identity
 
-Thornfell is a rugged highland frontier, shaped by sharp ridges, narrow passes, creaking bridges, and stoic, proud people. It is the region that never truly fell — but came close enough to remember how it felt.
+Thornfell is a highland region organized around access, shelter, pass safety, repair, and collective survival. Clan identity matters, but no clan endures without bridge workers, guides, shelter keepers, wardens, traders, and households willing to honor difficult obligations.
 
-Magic is nearly nonexistent here; wind oddities are environmental, not supernatural.
+Most acoustic and wind phenomena arise naturally from cliffs, channels, halls, and weather. Rare dormant air resonance is real at specific old works and sites. Thornfell does not treat every echo as magic.
 
-### Core Identity
-Thornfell embodies:
-- **pride in community**  
-- **hardship forged into unity**  
-- **a readiness to defend what remains**  
+### Great War inheritance
 
-Everything here leans into endurance. Thornfell stands because its people refuse to be moved.
+Passes became defensive lines, shelters, and barriers during the Great War. Route closures saved some communities and stranded others. Rare resonance was forced toward destructive use, while ordinary acoustic craft, horn codes, bridge work, and terrain knowledge carried most of the region's burden.
 
-### Clan Politics
-The region is split into two major blocs:
-- **Blood-Oath Clans** want to rearm and prepare for renewed conflict with Emberholt.  
-- **Hearthguard Clans** seek peace, trade, and recovery.  
+Postwar Thornfell restricted, forgot, or disputed dangerous wartime techniques under its own local customs. This was not enforcement of a universal continental ban.
 
-Neither side is wrong; both are shaped by memories of siege, hunger, and betrayal.
+### Echohewn and Founder tradition
 
-### Geography & Culture
-- Ridge terraces  
-- sway bridges  
-- cairn fields bearing generations of names  
-- cliff-side villages connected by precarious walkways  
+The Echohewn combined exceptional acoustic engineering with rare resonant practice. Later tradition associates their inheritance with a Dwarven Founder, but early rediscoverers and later Founders were distinct people or roles. Exact identities and teaching links remain unresolved.
 
-Acoustic oddities — long echoes, drifting horn calls — are natural quirks of the stone, not magic.
+### Echochamber Summit and the Stonebound
 
-### Ancient Influence — The Echohewn
-High atop Thornfell lies the ruin of the Echohewn:
-- ancient dwarven stoneworkers  
-- masters of architecture, not magic  
-- builders of Echochambers where sound traveled strangely  
+Echochamber Summit intersects an ancient Stonebound node. Rare Echohewn resonance can couple with it and produce the phenomenon historically interpreted as a “Stonebound guardian.”
 
-Their relics serve as narrative anchors, not power sources.
+Stonebound are passive, place-bound responders to imbalance, pressure, intrusion, or disturbance. They may produce physical or resonant effects. They do not speak, provide prophecy or visions, answer questions, identify historical events, choose champions, or act as creatures or soldiers.
 
-### Supernatural Threats
-Thornfell has **one to two major supernatural events**, not ecosystems:
-- The **Horn-Echo of Shatterfall**  
-- The **Stonebound** at Echochamber Summit  
+### Established places and institutions
 
-These shape quests rather than daily gameplay.
+Highridge Hold, Passwatch, Redbanner Camp, Echochamber Summit, clan halls, high passes, shelters, cairns, and repair sites anchor Thornfell. Clan assemblies, wardens, sentinels, guides, smiths, bridgewrights, keepers, and working households share authority. Exact Assembly procedure remains unresolved.
 
-### Perception by Others
-- Lowmark sees Thornfell as noble but stubborn.  
-- The Mire sees honor-bound allies who bear their dead with dignity.  
-- Emberholt views Thornfell as predictably reactionary and easy to manipulate.
+### Present pressure
 
-### Thornfell’s Burden
-Thornfell has not let go of the war — and the war has not let go of Thornfell.
+Thornfell must balance safety, hospitality, trade, clan honor, and historical accountability. A pass may be closed for good reason and still create a debt elsewhere. Its strongest mysteries depend on records, workmanship, and living custodians rather than a speaking mountain.
 
+## III. Mire of Fallen Banners
 
-# IV. REGION THREE — THE MIRE OF FALLEN BANNERS  
-## “The Land Where Memory Sinks Slowly”
+### Regional identity
 
-The Mire is Caelmor’s quiet grave, where fog drapes over drowned trenches and broken banners. Unlike fantasy clichés, this swamp is not a magical quagmire — it is a **somber, deeply human landscape** built over mass death.
+The Mire is a wetland of uncertain ground, accumulated battlefield trauma, route care, testimony, remembrance, and practical mutual aid. Its households often form through work, fosterage, loss, migration, and care as much as blood.
 
-Magic manifests only at a handful of highly specific, landmark-heavy fog zones.
+Memorykeepers preserve accounts. Chapel-Tenders maintain spiritual and communal spaces without claiming active magic. Guides, ferrymen, wardens, caretakers, and local hearings manage risk and testimony. Exact hearing and appeal authority remain unresolved.
 
-### Core Identity
-The Mire holds:
-- **grief without despair**  
-- **truth without cruelty**  
-- **memory without embellishment**  
+### Great War inheritance
 
-Its people move through life gently, quietly acknowledging the dead rather than glorifying them.
+The Mire bore concentrated campaigns, camps, command, death, fear, and retreat. The land holds living and emotional imprint interacting with earth resonance. This is sometimes called “spirit” in old or local language, but spirit is not an element, soul economy, or separate discipline.
 
-### Social Roles
-Life in the Mire is shaped by:
-- **Relic Divers** salvaging war debris  
-- **Lantern-Bearers** walking fog routes  
-- **Banner-Finders** recovering or burning fallen standards  
-- **Chapel-Tenders** guarding old sacred sites  
-- **Memory-Keeps** preserving names and oral histories  
-- a **single Ferryman** who begins the Sunken Chapel questline  
+No manifestation is an omniscient witness. Ground, banners, sound, or impressions may preserve effects while still requiring testimony, records, and physical corroboration.
 
-These roles keep the region grounded, immersive, and emotionally resonant.
+### The Chapel of the Sinking Star
 
-### The Chapel & Shades
-The Sunken Chapel is the spiritual center:
-- **hostile shades** outside (mages who failed to reach shelter)  
-- **benevolent shades** inside (mages buried alive during the ritual collapse)  
+These three names refer to one site:
 
-Shade presence is:
-- rare  
-- landmark-bound  
-- narrative-heavy  
+- **Chapel of the Sinking Star** — formal and historical name;
+- **Sunken Chapel** — common modern name;
+- **Sunken Church** — riverfolk and ferryman vernacular.
 
-### Supernatural Threats
-Two only:
-1. **The General Who Wouldn’t Fall**  
-2. **Chapel Shades** (hostile outside, guiding inside)
+Rowan Mirewake is the only known living guide who reliably knows the safe approach through shifting channels. The origin of “Sinking Star” remains unasserted.
 
-### Perception by Others
-- Lowmark respects the Mire’s honesty.  
-- Thornfell respects its dignity.  
-- Emberholt treats it as a convenient reminder of why “fire must be responsibly guided.”
+### Supernatural hierarchy
 
-### The Mire’s Burden
-The land is peaceful, but peace here is won from tragedy, not luck. The Mire quietly reminds Caelmor of the cost of forgetting.
+The Mire has exactly two major supernatural threats:
 
+1. **The General Who Wouldn't Fall** — a singular, coherent earth-memory manifestation formed from concentrated command, fear, obedience, death, and trauma. It is not a historical general's surviving ghost.
+2. **The Sorrowback** — a massive earth-memory creature formed from soil, violence, broken weapons, banners, and accumulated emotional residue. It is not undead.
 
-# V. REGION FOUR — EMBERHOLT HEIGHTS  
-## “The City Preparing for a War It Hasn’t Announced Yet”
+Earthen Echoes, Banner Wraiths, Chapel Shades, and other rare place-bound memory manifestations are minor or local. Chapel Shades are impressions, not souls.
 
-Emberholt is the only region with active, visible magic — but the truth behind it is sinister. Outwardly, Emberholt appears as a thriving volcanic metropolis celebrating disciplined embercraft. Inwardly, it is a **machine for cultivating fire magic as a weapon**.
+### Established places and institutions
 
-### Public Identity
-Citizens believe Emberholt is:
-- enlightened  
-- responsible  
-- disciplined  
-- a cultural beacon  
+Sorrowmere, Marshfall, Reedsward, Fallen Standards, the Drowned Encampment, Mirebone Crossing, Stillgrave Hollow, Bannerline Ridge, and the Chapel anchor the region. Memorykeepers, Chapel-Tenders, Marshwardens, ferrymen, guides, caretakers, and working households preserve its daily life.
 
-Their pride is sincere — and carefully curated.
+### Present pressure
 
-### Hidden Truth
-The region is run by **the Remnant**, a secret organization that:
-- survived the war's collapse  
-- infiltrated Emberholt’s leadership  
-- weaponizes fire magic through emotional manipulation  
-- conducts ritual experiments in subterranean chambers  
-- prepares for a second, more devastating conflict  
+The Mire must keep people safe without turning uncertainty into silence. Remembrance can support care or become a claim to authority. War remains visible, but ordinary work, family change, celebration, humor, food, shelter, and chosen belonging prevent the region from becoming only a grave.
 
-The Remnant encourages fire magic publicly to create:
-**“A continent of potential casters who will side with Emberholt when the time comes.”**
+## IV. Emberholt Heights
 
-### The Flameward Speaker
-The city’s charismatic leader:
-- personally teaches the player fire magic  
-- presents it as a high honor and cultural gift  
-- secretly sees the player as a potential fire weapon  
-- uses charm and kindness to disguise manipulation  
+### Regional identity
 
-He is the perfect mask for Emberholt’s rot.
+Emberholt is a volcanic craft city organized around useful heat, dangerous terrain, public embercraft, guild labor, safety, class, and accountability. Fire is ordinary civic infrastructure as well as a source of risk.
 
-### Magic Identity
-Fire is:
-- fueled by **negative emotion**  
-- unstable when amplified  
-- most dangerous when suppressed  
+The male Flameward Speaker and Civic Council form the public government. Guilds, merchants, workers, the Emberguard, the Covenant, neighborhood networks, schools, and covert Remnant actors exert different pressures. Exact constitutional powers, appointment, and succession remain unresolved.
 
-Early embercraft appears controlled.  
-Later quests reveal its true volatility.
+### Great War inheritance
 
-### Ancient Influences
-Fire magic stems from:
-- **Fire Founder teachings** (twisted by the Remnant)  
-- **Volkhari rituals** (stolen, misunderstood, exploited)  
+Emberholt weaponized and amplified fire practice during the Great War. The city's useful craft, households, workers, civic offices, and dangerous hidden programs were not one undifferentiated institution. The war's inheritance survives through burns, lost workers, sealed sites, safety rules, public memorials, contested records, and distrust of who defines “controlled.”
 
-One Volkhari descendant remains alive — a captive.
+### Glassed Hollow and the Fire Titan
 
-### Supernatural Threats
-Two absolute pillars:
-1. **The Captured Volkhari**, exploited as a ritual power source  
-2. **The Fire Titan**, a catastrophic failed mage-binding beneath the mountain  
+At the Glassed Hollow, an unnamed wartime precursor to the later formal Remnant exploited Volkhari knowledge and captives in an amplification ritual.
 
-These define Emberholt’s deepest horror.
+- A precursor initiate, not a Volkhari, became the **Fire Titan**.
+- Kaelith Veyr'un escaped and remains free.
+- Thalan Veyr is the sole known current captive.
+- Other Volkhari survivors exist, but their exact number and community form remain unresolved.
+- Public accounts concealed or reduced the catastrophe as a forge collapse.
 
-### Perception by Others
-- Lowmark distrusts Emberholt’s ambition.  
-- Thornfell suspects another war is inevitable.  
-- The Mire quietly blames Emberholt for its dead.
+The precursor's name, exact transition into the formal Remnant, and personnel continuity remain unresolved.
 
-### Emberholt’s Burden
-The entire region is a moral paradox: brilliant, beautiful, and quietly monstrous.
+### Postwar fire practice
 
+Surviving authorities rejected weaponization, amplification, uncontrolled ritual experimentation, and dangerous research. No durable central authority imposed a universal ban. Emberholt retained public civic embercraft under regional discipline while dangerous work continued covertly.
 
-# VI. CROSS-REGIONAL RELATIONSHIPS & PERCEPTIONS  
-## “The Continent’s Unspoken Tension Web”
+Citizens may learn ordinary embercraft. Lowmark remains the sole full v1 region, and v1 has no player spellcasting system.
 
-### Lowmark → Others
-- **Thornfell**: Respect for strength and honor, if a bit rigid.  
-- **Mire**: A shared understanding of emotional depth; quiet kinship.  
-- **Emberholt**: Deep caution; sees Emberholt as overconfident and dangerous.
+### Volkhari and Stonebound limits
 
-### Thornfell → Others
-- **Lowmark**: Respect, but views their caution as passivity.  
-- **Mire**: Strong mutual respect; both bear heavy memories.  
-- **Emberholt**: Distrust and suspicion; many Thornfell clans want retribution.
+Volkhari fire attunement is an inherited tradition distinct from human embercraft. Their exact present population and political/community form remain unresolved; their knowledge cannot be absorbed into Emberholt as an ownerless craft lineage.
 
-### The Mire → Others
-- **Lowmark**: Gentle kinship; sees them as distant but well-meaning.  
-- **Thornfell**: Respects their pride and grief.  
-- **Emberholt**: Quiet condemnation; sees them as the architects of destruction.
+Stonebound works beneath the volcanic region are passive, place-bound, and nonverbal. Their effects cannot disclose the Glassed Hollow, validate an archive, or choose a person.
 
-### Emberholt → Others
-- **Lowmark**: Useful, sentimental, impressionable.  
-- **Thornfell**: Predictable; easy to provoke politically.  
-- **Mire**: A reminder of “why the world needs Emberholt’s control.”  
+### Established places and institutions
 
-These perceptions are the emotional engine of Caelmor’s politics.
+Emberhold District, Ash Terraces, Emberforges, Glassed Hollow, Emberdeep Warrens, Cinderweave Quarter, Molten Stair, Ashspire Ward, Emberfall Dross, Embergate, and Cinderreach Spire anchor the city. The Flameward Speaker, Council, Emberguard, Covenant, forgeguilds, schools, merchants, workers, and neighborhood networks compete over safety, labor, memory, and access.
 
----
+### Present pressure
 
-# VII. CONTINENTAL THEMES  
-## “What Caelmor Is About”
+Emberholt must preserve useful heat and craft dignity while confronting the exploitation hidden beneath its public story. The formal Remnant is a serious covert force, not the explanation for every accident, unequal contract, missing record, dream, or civic failure.
 
-### 1. **Memory**
-Each region manifests memory differently:
-- Lowmark reflects  
-- Thornfell honors  
-- The Mire mourns  
-- Emberholt rewrites  
+## V. Cross-region continuity
 
-### 2. **Emotion**
-Caelmor treats emotion as:
-- water in Lowmark  
-- wind in Thornfell  
-- weight in the Mire  
-- fire in Emberholt  
+Every regional pair has ordinary reasons for contact through food, work, passage, shelter, care, migration, household change, trade, and repair. The Great War intensified those connections without creating all of them.
 
-### 3. **Pacing**
-The world unfolds slowly, deliberately:
-- mysteries discovered through travel, not exposition  
-- supernatural events rare and localized  
-- magic shown only when it matters  
+Shared events and cultural borrowing require:
 
-### 4. **Moral Ambiguity**
-No region is purely good or evil, except:
-- Emberholt’s Remnant, who is manipulating the future  
+1. a local event or relationship;
+2. a person or institution that experienced or recorded it;
+3. an independent account or evidence holder elsewhere;
+4. a reason the accounts differ;
+5. evidence capable of changing interpretation;
+6. a regional owner for the eventual civic or emotional resolution.
 
-Caelmor is a continent holding its breath.
+A repeated symbol, phrase, mark, or custom is a lead, not proof of a hidden common origin. Exact routes, hydrology, travel times, and cargo volumes require later map verification.
 
----
+## VI. Present narrative and release boundary
 
-# VIII. Great War SUMMARY & CONTINENTAL WOUNDS
-
-The Great War left:
-- ruined battlefields  
-- drowned trenches  
-- fractured alliances  
-- generational grief  
-
-Each region processes trauma differently:
-- **Lowmark** learned stillness  
-- **Thornfell** learned vigilance  
-- **The Mire** learned acceptance  
-- **Emberholt** learned nothing  
-
-This is the heart of Caelmor’s narrative future.
-
----
-
-# IX. FUTURE CONTINENTAL ARC POTENTIAL  
-## (Non-Commitment Hooks)
-
-- Emberholt’s second war plan  
-- Volkhari legacy recovering  
-- Thornfell’s political fracture reshaping alliances  
-- Mire’s forgotten dead influencing future peace  
-- Lowmark’s ancient Riverwardens re-emerging  
-- Elemental balance shifting continent-wide  
-
-Caelmor is built for long-form storytelling where every region matters.
-
----
-
-# X. SYNTHESIS CONCLUSION
-
-This merged dossier unites all four regions into a world defined by:
-
-- depth without confusion  
-- grounded magic  
-- emotional authenticity  
-- subtle supernatural moments  
-- political tension  
-- quiet decay  
-- strong thematic identity  
-
-Caelmor is a mythic, decaying, emotionally resonant world where nothing is forgotten — except by the people who most need to remember.
-
-It is a world waiting for a catalyst.  
-And the player is that catalyst.
+- Lowmark is the sole full v1 region.
+- V1 has one Lowmark main arc and no player spellcasting system.
+- Other regions remain valid world canon and future-region foundations, not playable-v1 commitments.
+- Recurring characters may know only what their experience and evidence access support.
+- Dreamers first appeared after the Great War. Dreams may be true, mistaken, ordinary, or manipulated and require independent evidence.
+- No supernatural phenomenon replaces human testimony, records, provenance, or material evidence.
+- Optional Parts 2–5 events, families, customs, mysteries, and callbacks are not automatically canon.

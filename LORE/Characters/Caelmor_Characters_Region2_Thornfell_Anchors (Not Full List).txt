@@ -129,15 +129,15 @@ Kaldren is a dwarf of the old stock — not a ruler, not a scholar, but a *liste
 **Canon Boundaries (Critical):**
 - Does NOT explain what the Echohewn are
 - Does NOT name them as a “race” or origin
-- Treats them as dormant kin who chose stillness
+- Treats dormant Echohewn systems as a cultural inheritance, not as speaking beings or historical witnesses
 
-**Key Line (V1 Tone):**
+**Key Line (Kaldren's Metaphor):**
 > “They’re asleep.  
 > And waking them all at once would tear the mountain apart.”
 
 **Gameplay Function:**
 - Helps the player align, repair, and stabilize Echohewn systems
-- Explicitly limits how far reactivation can go in V1
+- Explicitly limits how far reactivation can go in future Thornfell content
 - Serves as the gatekeeper for future awakening arcs
 
 ---
@@ -235,7 +235,7 @@ Iven patrols alone, far above the passes. He notices things others don’t becau
 - **Conflict:** Internal, cultural, unresolved
 - **Echohewn:** Dormant systems, maintainable, partially re-alignable
 - **Dwarves:** Living custodians, not historians
-- **V1 Rule:** No full awakening, no full explanation
+- **Future Thornfell Rule:** No full awakening, no full explanation; Lowmark remains the sole full v1 region
 
 Thornfell does not ask what the mountain is.  
 It asks whether it will still stand tomorrow.

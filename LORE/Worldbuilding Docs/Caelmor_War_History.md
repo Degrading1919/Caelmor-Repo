@@ -1,322 +1,170 @@
-## *“The Great War and the Age of Fading Magic”*
-A Narrative & Legendary Chronicle of the Continent’s Past
+# The Great War and Its Thirty-Year Inheritance
 
-> *“The war did not truly end. It merely grew quiet enough for the wounded to hear themselves think.”*  
-> — Memory-Keep Sera of the Mire
+> “The war did not truly end. It grew quiet enough for the wounded to hear themselves think.”
+> — a saying preserved by Mire Memorykeepers
 
+The **Great War** lasted roughly 5–10 years and ended about thirty years before the present. It was brief enough for living adults to remember and destructive enough to reshape every region. No single grievance, element, faction, or secret organization caused it.
 
-# I. THE AGE BEFORE MAGIC  
-In the beginning, Caelmor’s people lived by craft, instinct, and the slow inheritance of their ancestors. The world’s elements—water, stone, wind, flame—were treated with reverence but not understanding.
+## I. Before learned magic
 
-Though the land held quiet power, no one could yet hear it.
+Caelmor's communities first lived by craft, local custom, and inherited knowledge of difficult land. River settlements, highland clans, wetland communities, and people of the volcanic heights traded, sheltered travelers, disputed access, and depended on one another before learned elemental practice emerged.
 
-This era was marked by:
-- simple barter between early clans  
-- territorial disputes but no continent-shaping wars  
-- the rise of the first proto-cultures: riverfolk, highland tribes, marsh clans, and the volcanic people of the eastern heights  
+The oldest surviving evidence is practical rather than imperial: deep Stonebound works, ridge hazard marks, water channels, pass shelters, burial ground, and repair traditions. It does not establish a vanished continent-wide kingdom or one ancient school.
 
-Across distant lands beyond Caelmor’s borders, other races and cultures existed—ice tribes in the far north, caravan kingdoms in the sun-scorched south, seafaring archipelagos—but contact was rare, more rumor than fact.
+Stonebound are passive, place-bound responders to imbalance, pressure, intrusion, or disturbance. They may produce physical or resonant effects. They do not speak, offer prophecy or visions, answer questions, identify historical events, choose champions, or act as conventional creatures or soldiers.
 
+Volkhari communities lived near the volcanic ridges and preserved an inherited fire attunement distinct from learned human embercraft. Their exact surviving population and present community form remain unresolved.
 
-# II. THE FIRST TEACHINGS  
-Magic entered Caelmor quietly.
+## II. Rediscoverers and Founders
 
-It began when early wanderers—individuals later mythologized as **the First Mages**—learned to listen to the world’s elements. They were not “Founders” yet, only gifted listeners whose hearts aligned naturally with the land.
+Early local rediscoverers learned repeatable relationships with water, air, earth, and fire. They were not the same people or roles as the later iconic teachers remembered as **Founders**.
 
-Through them:
+- Rediscoverers demonstrated that a relationship with an element could be repeated.
+- Later teachers made practices bounded and portable through cautions, demonstrations, and apprenticeships.
+- No single continent-wide school controlled the traditions.
+- The Founder roster, count, names, dates, and teaching links remain unresolved.
 
-- Water taught stillness and reflection  
-- Stone taught memory and endurance  
-- Wind taught clarity and vigilance  
-- Fire taught passion and transformation  
+“Spirit” was an old term for the living and emotional imprint people leave upon the world and for the interaction of memory, grief, intention, and identity with elemental resonance. It was not a fifth element or separate discipline.
 
-These first mages shared what they learned freely, traveling from settlement to settlement.
+The regional traditions developed differently:
 
-They did not build schools.  
-They did not seek armies.  
-They considered magic a **gift meant to lift burdens, never inflict wounds.**
+- **Lowmark** treated water practice as attention, restraint, flow, and shared duty.
+- **Thornfell** preserved mostly natural traditions of echo, pressure, and vigilance around rare dormant air resonance.
+- **The Mire** treated earth-memory as burden, endurance, remembrance, and a demand for careful testimony.
+- **Emberholt** developed fire practice around useful heat, emotion, craft, discipline, and public safety.
 
-This era—known as the **Age of Shared Teachings**—lasted generations.
+Dreamers did not belong to this era. They first appeared after the Great War.
 
-Magic was:
-- gentle  
-- communal  
-- used for healing, building, rituals, and small wonders  
-- integrated into the early traditions of all races  
+## III. The pressure before war
 
-The first tension seeds were sown here: those who learned fire’s gifts found themselves changed by passion and ambition far more often than the others understood.
+The regions had become interdependent through food, passage, labor, shelter, trade, care, and migration. That interdependence created obligations without creating a central authority able to enforce them.
 
+Dangerous magical experimentation sharpened the problem:
 
-# III. THE EARLY DISCIPLINES & REGIONAL IDENTITIES  
-As the Shared Teachings spread, each region adopted the elemental philosophies differently.
+- Emberholt had reason to protect useful public embercraft, but concealed experiments made its assurances less credible.
+- Thornfell could close a pass to contain danger, but a closure could strand civilians and trade.
+- Lowmark could feed and transport people, but supplies and crossings could not remain politically neutral under pressure.
+- Mire witnesses could document harm without making distant leaders accept their accounts.
 
-### **Lowmark Vale (Water)**
-Lowmark absorbed water’s lessons of emotional stillness and reflection. Their rituals calmed the mind, eased grief, and allowed communities to share burdens without letting sorrow overflow.
+Weaponization followed. Fire practice was amplified beyond civic use. Rare Thornfell resonance was forced toward destructive ends although most echoes remained natural. Earth-memory was pressed into battlefield service. Lowmark refused large-scale destructive water warcraft while its food, ferries, mills, and bridges became strategic assets.
 
-Magic remained subtle—half craft, half intuition.
+A wartime precursor to the later formal Remnant exploited these failures and pursued dangerous research. Its name, exact transition into the Remnant, and continuity of personnel remain unresolved. It did not cause every grievance, betrayal, or military decision.
 
-### **Thornfell Marches (Wind/Stone)**
-Thornfell blended rugged stonecraft traditions with wind’s lessons in vigilance. Echohewn stoneworkers built halls that carried sound, not magic, and Thornfell’s clans learned to treat the land as both shield and teacher.
+## IV. The Great War
 
-Magic never became formalized; practical craft always came first.
+The conflict grew from distrust, border pressure, scarcity, inspection disputes, failed duties, concealed experimentation, and fear. It lasted roughly 5–10 years.
 
-### **Mire of Fallen Banners (Earth/Spirit)**
-Early Memorykeepers used earth to anchor stories and spirit to soothe hearts. Their ceremonies helped communities endure sorrow and transition through loss without fear of emotional collapse.
+### Lowmark: the contested breadbasket
 
-Magic here was gentle and contemplative.
+Lowmark supplied food and movement across several fronts. Grain allotments displaced household stores; ferries and bridges carried soldiers, refugees, wounded people, orders, and civilian goods. Raids and coerced requisitions struck mills, piers, fields, and depots.
 
-### **Emberholt Heights (Fire)**
-Fire’s teachings resonated most strongly in Emberholt’s volcanic homeland. Its people embraced fire’s warmth, artistry, and transformative nature. They built shrines, forged gleaming works, and held seasonal flame rites.
+Lowmark's refusal to unleash destructive water practice spared some crossings and communities from one form of devastation. It did not keep Lowmark outside the war. Decisions about whose load moved first or which bank received repair became matters of survival and later grievance.
 
-At first, Emberholt used magic responsibly.  
-But even then, a seed of ambition was forming.
+### Thornfell: passes, shelters, and forced resonance
 
----
+Thornfell's heights became barriers, shelters, and military approaches. Clans and wardens defended crossings, closed dangerous routes, repaired bridges, and sheltered displaced people under scarce conditions.
 
-### **Peripheral Races & Cultures**
-Beyond Caelmor’s borders, other races observed this magical blossoming:
+Most Thornfell acoustics were natural. Rare dormant resonance was real, and wartime attempts to force or weaponize it caused harm. Later stories often exaggerate this into a mountain filled with conscious magic; that is not the historical truth.
 
-- **Northern Ice Tribes**: marveled at water rites but remained distant.  
-- **Southern Caravan Kingdoms**: traded with early firewrights, intrigued by their forge secrets.  
-- **Archipelago Seafarers**: reported strange lights when Emberholt’s flame rites aligned with certain stars.  
-- **Desert Nomad Clans**: warned that fire’s gift could someday swallow its own source.  
+### The Mire: concentrated campaigns and memory in the ground
 
-These cultures play no major role yet, but their threads will return.
+The Mire bore repeated movement, encampment, command, fear, death, and retreat. Its earth accumulated an unusually dense living and emotional imprint.
 
-Magic grew.  
-Knowledge spread.  
-People forgot how fragile peace could be.
+The region's two major present threats arose from that inheritance:
 
+1. **The General Who Wouldn't Fall** is a singular, coherent earth-memory manifestation formed from concentrated command, fear, obedience, death, and trauma. It is not a returned general or undead soul.
+2. **The Sorrowback** is a massive earth-memory creature formed from soil, violence, broken weapons, banners, and accumulated emotional residue. It is not undead.
 
-# IV. THE SHADOW OVER EMBERHOLT  
-Generations later, Emberholt’s flame traditions deepened into formal study. A group of scholars, ritualists, and ideologues began exploring forgotten writings attributed to the **Fire Founder**.
+Earthen Echoes, Banner Wraiths, Chapel Shades, and other rare place-bound impressions remain minor or local phenomena. Chapel Shades are memory impressions, not souls. None can identify an event or settle testimony.
 
-He had warned:
-- that fire draws strength from **emotion**, not discipline  
-- that negative emotions—anger, ambition, jealousy, grief—created devastating surges  
-- that fire should never be scaled to communal or military levels  
+The Chapel of the Sinking Star, commonly the **Sunken Chapel** and called the **Sunken Church** by riverfolk and ferrymen, is one site. Rowan Mirewake is the only known living guide who reliably knows the safe approach through its shifting channels. The origin of “Sinking Star” remains unasserted.
 
-But these warnings were interpreted instead as *potential*.
+### Emberholt: escalation and civic fracture
 
-A new faction emerged:  
-**the Remnant** — concealed, ambitious, hungry for power that fire promised.
-
-They began subtly altering Emberholt’s rites, teaching methods that:
-- induced heat through emotional intensity  
-- amplified fire through group resonance  
-- pushed test subjects to their emotional breaking point  
+Emberholt's public firecraft continued to provide heat, light, work, and safety even as military and hidden programs pursued amplification. Workers, civic officials, guilds, ritualists, and households did not act as one body. Useful craft and dangerous research existed beside one another, often under contested records and unequal power.
 
-Most Emberholt citizens never knew.  
-They only saw more impressive fire displays and believed their nation was becoming a beacon of progress.
-
-
-# V. THE RISE OF FEAR  
-Whispers spread across Caelmor:
+The wartime precursor used secrecy, coercion, and stolen knowledge to push fire practice beyond safe limits.
 
-- strange scorch marks found on treaty caravans  
-- unnatural blazes that burned stone  
-- shards of volatile emberglass appearing far from Emberholt  
-- rumors of people “burning from the inside” after learning forbidden techniques  
+## V. The Glassed Hollow
 
-Thornfell’s ridgewardens reported lights on distant horizons that did not match storms.  
-Lowmark noticed rising emotional unrest among its people—a warning sign in a land of reflection.  
-The Mire’s Memorykeepers recorded dreams of fire consuming banners, fields, and names.
+At the Glassed Hollow, the wartime precursor exploited Volkhari knowledge and captives in an amplification ritual.
 
-Emberholt dismissed all accusations as:
-- accidents  
-- outdated techniques  
-- unfortunate side effects of experimentation  
-- lies spread by jealous neighbors  
-
-Those who questioned Emberholt too loudly sometimes vanished.
+- A precursor initiate, not a Volkhari, became the **Fire Titan**.
+- Kaelith Veyr'un escaped and remains free.
+- Thalan Veyr is the sole known current captive.
+- Other Volkhari survivors exist, but their exact number and community form remain unresolved.
+- Public accounts concealed or reduced the catastrophe as a forge collapse.
 
+The catastrophe was an extreme result of human coercion and unsafe practice. It does not make every Emberholt fire, guild, civic office, or bereaved household part of the same hidden plan.
 
-# VI. THE DIPLOMATIC COLLAPSE  
-The war did not begin with armies. It began with **distrust**.
+## VI. The end of the war
 
-Over years, Caelmor’s leaders:
-- attempted negotiations  
-- sent inspectors  
-- demanded transparency  
-- requested that Emberholt halt certain rituals  
-
-Emberholt’s Flameward Speaker at the time—silver-tongued, brilliant—assured the world that everything was safe, necessary, and deeply misunderstood.
+No side won cleanly. Magical escalation, broken supply, civilian loss, fractured command, and ruined trust made continued war unbearable. Fighting ended without a single explanation that every region accepted.
 
-Trade tensions rose.  
-Border patrols increased.  
-More incidents were reported.  
-Each side accused the other of provocations.
+Different records preserve different truths:
 
-Eventually, Thornfell mobilized defensive forces.  
-Lowmark began escorting caravans armed with reluctance.  
-The Mire issued warnings that “memory is bending.”
+- an administrative record may describe a completed delivery while a household remembers the people it displaced;
+- a route closure may have saved one settlement and abandoned another;
+- a memorial may preserve a name omitted from a military account;
+- physical damage may confirm that an event occurred without proving why it happened.
 
-The Remnant saw this not as a crisis—  
-but as an opportunity.
+No dream, Stonebound response, earth-memory manifestation, or other supernatural effect acts as an omniscient witness. Historical claims require human testimony, records, physical evidence, and provenance.
 
+## VII. Postwar magical restraint
 
-# VII. THE Great War BEGINS (SLOW PHASE)  
-### *Phase One: The Sparks*
-Skirmishes flared between border patrols.  
-Fire flares appeared where they shouldn’t.  
-Thornfell’s ridge forts repelled small probing assaults.  
-Lowmark’s supply routes suffered “accidents.”  
-Diplomacy bent under the weight of suspicion.
+Surviving authorities broadly agreed that wartime magical practices had to stop, especially:
 
-### *Phase Two: Magical Escalation*
-Emberholt unleashed controlled fire squads—elite pyroclasts trained in emotion-amplified techniques.  
-Opposing forces struggled, unprepared for magical warfare.
+- weaponization;
+- amplification;
+- uncontrolled ritual experimentation;
+- dangerous research.
 
-In desperation:
-- Thornfell’s mages attempted to shift wind to scatter fire, sometimes fanning flames instead.  
-- Lowmark’s healers tried experimental water-cooling rituals, which cracked stone and destabilized terrain.  
-- Mire spirit-seers attempted grounding rites to calm terrified soldiers, but emotional overload caused collapse.
+Some later accounts summarized this as “magic was outlawed.” No durable central authority existed to enforce a universal prohibition. Each region interpreted restraint differently.
 
-Fire provoked counter-magic.  
-Counter-magic fed instability.  
-Instability created catastrophe.
+### Lowmark
 
-### *Phase Three: The Wildfire War*
-Battles dissolved into:
-- rolling flame surges  
-- collapsing trenches  
-- smoke-choked skies  
-- windstorms carrying embers for miles  
-- warped earth where grounding rites destabilized  
-- entire supply lines incinerated in hours  
+Simple farming water practice is openly taught within households and among neighbors. Experienced community stewards oversee shared water works. Formal charter oversight applies only to larger irrigation works. Combat water magic remains exclusive to the Last Field-Mage. This does not create a player spellcasting system.
 
-Magic, once gentle, became a weapon of mass failure.
+### Thornfell
 
-Peripheral regions felt the impact:
-- southern caravans disrupted by firestorms  
-- northern tribes fleeing unnatural heat waves  
-- seafarers turning away from Caelmor’s shores  
-- desert emissaries warning that Caelmor had “broken its sky”  
+Most acoustics and wind behavior are treated as natural. Rare dormant resonance remains real, dangerous when forced, and culturally constrained.
 
+At Echochamber Summit, rare Echohewn resonance may couple with an ancient Stonebound node. The resulting “guardian” phenomenon is a passive, place-bound response to disturbance or imbalance, never an oracle or conventional creature.
 
-# VIII. THE CATASTROPHIC END  
-### **The Binding Ritual Collapse**
-Emberholt attempted a final ritual to stabilize and weaponize fire on a large scale, using:
-- shard arrays  
-- emotionally tormented volunteers  
-- stolen Volkhari practices  
-- forbidden Founder sigils  
+### The Mire
 
-It failed catastrophically.
+Active Memorywarden practice did not survive as a public discipline. Chapel-Tenders, Memorykeepers, guides, wardens, and households preserve care, testimony, routes, and local warning without claiming magical authority over the dead.
 
-The burst of magical backlash:
-- wiped out entire battalions  
-- cracked caldera stone  
-- melted armor into the earth  
-- sent shockwaves into neighboring lands  
+### Emberholt
 
-The surviving Volkhari mage—driven by anguish, rage, and grief—lost control entirely and became the entity now known as the **Fire Titan**.
+Public civic embercraft remains legal and ordinary under regional safety practice. Weaponization, amplification, uncontrolled experimentation, and dangerous hidden research remain the postwar fault lines.
 
-This collapse signaled to the continent that Emberholt had crossed a line from dangerous to apocalyptic.
+## VIII. Dreamers and manipulated visions
 
-### **The Final Convergence**
-The last days of the war drove all sides toward the Mire.
+Dreamers first appeared after the Great War.
 
-There:
-- armies drowned in fog  
-- banners fell into silt  
-- spirit rites failed due to emotional saturation  
-- the Sunken Chapel collapsed with its mages inside  
-- silhouettes froze in poses of retreat or charge  
-- horn calls echoed from nowhere  
+- A true Dreamer may experience a fragment associated with a person, place, or unresolved event.
+- A fragment may be true and still be misread.
+- Ordinary nightmares and grief dreams require no supernatural cause.
+- Hearthveil methods can seed or shape visions for influence.
+- Independent evidence is required before any dream supports a historical conclusion.
 
-No final treaty was signed.  
-No victor emerged.  
-The war simply **died** under its own weight.
+## IX. The formal Remnant
 
+The wartime precursor was followed by the later formal Remnant. The exact transition, name, date, and personnel continuity remain unresolved.
 
-# IX. THE AFTERMATH — “THE AGE OF FADING MAGIC”  
-Caelmor’s leaders declared:
-- magic outlawed  
-- staffs surrendered or destroyed  
-- rituals banned  
-- all magical research forbidden  
+The formal Remnant preserves dangerous research and seeks control over magical mastery. It is a consequential hidden faction, but it is not the universal cause of political greed, class conflict, bad records, ordinary cruelty, or every supernatural event.
 
-Regions rebuilt in silence.  
-Magic faded from memory.  
-Most disciplines were forgotten within decades.
+## X. Thirty years later
 
-Only Emberholt kept the flame alive.  
-Only the Remnant remembered the old ambitions.  
-Only a handful of surviving mages—Riverwardens, Chapel-Tenders, Volkhari—held fragments of truth.
+The Great War remains within living memory. Its inheritance survives through:
 
+- damaged land and altered public works;
+- old injuries and lost livelihoods;
+- families divided by refuge, service, migration, and return;
+- records that disagree because their makers had different duties or interests;
+- institutions whose legitimacy comes from repair, safety, care, and access;
+- memorials, customs, grudges, debts, and disputed acts of courage;
+- magical and resonant wounds that cannot speak for the dead.
 
-# X. THE REMNANT SURVIVES  
-The Remnant went underground, literally and politically.
-
-Deep in Emberholt:
-- fire rituals continued  
-- shard experiments refined  
-- emotional weaponization perfected  
-- a child who survived the flames—the Unburnt Boy—became an object of study  
-- the captured Volkhari became a living conduit  
-
-Above ground, Emberholt performed civic pride:
-- controlled fire ceremonies  
-- disciplined public behavior  
-- rhetoric of responsibility  
-
-Below ground, Emberholt forged the seeds of the next war.
-
-
-# XI. RETELLINGS ACROSS THE REGIONS  
-Each region remembers the war differently.
-
-### **Lowmark**
-A tragedy caused by unchecked emotion.  
-A reminder to reflect and restrain.
-
-### **Thornfell**
-A failure of vigilance and deceit.  
-A wound that demands watchfulness.
-
-### **The Mire**
-A grave that must be honored.  
-A history that must be told truthfully.
-
-### **Emberholt**
-A misunderstood era.  
-A narrative rewritten to preserve pride.  
-
-
-# XII. FUTURE HOOKS — “THE UNFINISHED STORY”  
-The War History v3 seeds numerous arcs for future expansions.
-
-### **Peripheral Regions**
-- Northern ice tribes whisper about the “southern flame.”  
-- Desert kingdoms prepare for Caelmor refugees.  
-- Seafarers track strange heatlights miles offshore.  
-- A southern beastfolk confederacy debates intervening if Caelmor collapses again.  
-
-### **Racial Hooks**
-- Volkhari survivors searching for their lost kin.  
-- Dwarven lineages seeking Echohewn truth.  
-- Elven circles reconstructing lost Memorykeeper rites.  
-
-### **Continent-Wide Mysteries**
-- What became of the other first mages?  
-- Why did Founder-era magic destabilize so easily on a large scale?  
-- What is buried beneath Emberholt’s depths besides the Titan?  
-- Who recorded the earliest warnings—and who destroyed those records?  
-
-### **Seeds of the Next Crisis**
-- The Remnant grows bold.  
-- Emberholt expands embercraft teaching under the guise of peace.  
-- Thornfell prepares for a war it believes inevitable.  
-- The Mire’s fog grows thicker in certain places, as if listening.  
-- Lowmark’s Riverwardens stir, sensing water remembering too much.  
-
-
-# XIII. CLOSING LEGEND  
-*“The Great War never ended.  
-It only sleeps in silence,  
-waiting for hands bold enough —  
-or foolish enough —  
-to wake it again.”*  
-
-— From the recovered fragments of the Memorykeeper Chronicles
+Lowmark, Thornfell, the Mire, and Emberholt remain distinct but historically entangled. The war's deepest truths are recovered through people, records, places, and consequences rather than a single revelation.

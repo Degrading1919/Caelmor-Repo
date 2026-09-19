@@ -115,7 +115,7 @@ Long before the Great War, the Mire was home to an order of earth-attuned practi
 - The land holds memory  
 - Burden shared is burden lightened  
 - Emotion and soil intertwine  
-- The earth can be a witness, a teacher, or a warning  
+- The earth can preserve an imprint, teach caution, or give warning without becoming an omniscient witness
 
 They practiced grounded, subtle earth-magic:
 
@@ -179,13 +179,13 @@ The magic twisted:
 - Soil became saturated with fear, rage, and despair  
 - Distortions appeared where feelings overwhelmed stability  
 
-### Present-Day (V1 Gameplay)
+### Present Day
 
 Magic is **forgotten** and **unusable**:
 
 - No Mire NPC practices active magic  
-- Environmental effects appear as natural or spiritual phenomena  
-- Players experience magic **only as atmosphere**, not as a system  
+- Environmental effects appear as natural phenomena or as living and emotional imprint interacting with earth resonance
+- These effects provide atmosphere and clues, never complete historical testimony
 
 The earth still remembers — but people don’t.
 
@@ -234,6 +234,8 @@ One of the rare elevation points in the region:
 - Soil contains high concentrations of iron from bloodshed  
 
 ### **6. Chapel of the Sinking Star**
+
+This is the site's formal and historical name. Most people call it the **Sunken Chapel**; riverfolk and ferrymen call it the **Sunken Church**. All three names refer to this one place. Rowan Mirewake is the only known living guide who reliably knows the safe approach through the shifting channels. The origin of “Sinking Star” remains unknown.
 
 An almost fully submerged war-chapel:
 
@@ -356,9 +358,9 @@ A small settlement built around tree roots that survived repeated burnings.
 
 ---
 
-### HIGH-TIER SUPERNATURAL (Rare)
+### SUPERNATURAL HIERARCHY (Rare)
 
-#### **1. Earthen Echoes**
+#### **Minor/local: Earthen Echoes**
 
 Not undead — but shaped from soil, memory, and emotional residue.
 
@@ -367,7 +369,7 @@ Not undead — but shaped from soil, memory, and emotional residue.
 - Collapse into formless mud when struck  
 - Appear near sites of intense grief or betrayal  
 
-#### **2. Banner Wraiths (Memory-Forms)**
+#### **Minor/local: Banner Wraiths (Memory-Forms)**
 
 Not true wraiths — but echoes tied to banners left behind.
 
@@ -375,7 +377,15 @@ Not true wraiths — but echoes tied to banners left behind.
 - Drawn to strong emotions, not life force  
 - Dissipate if the associated banner is properly honored or retired  
 
-#### **3. The Sorrowback**
+#### **Major threat 1: The General Who Wouldn't Fall**
+
+A singular, unusually coherent earth-memory manifestation formed from concentrated battlefield command, fear, obedience, death, and trauma.
+
+- It is not the surviving ghost of a historical general.
+- It repeats the pressure and form of command without possessing reliable identity or testimony.
+- It cannot identify a battle, answer questions, or settle a record.
+
+#### **Major threat 2: The Sorrowback**
 
 A massive creature born of accumulated earth-memory:
 
@@ -383,6 +393,8 @@ A massive creature born of accumulated earth-memory:
 - Covered in broken weapons and banner fragments  
 - Drawn to violent conflict  
 - Symbolizes the Mire’s refusal to let go of the past  
+
+The General Who Wouldn't Fall and the Sorrowback are the Mire's only two major supernatural threats. Chapel Shades and other rare place-bound manifestations are minor/local memory impressions, not souls.
 
 ---
 ## X. FLORA & FAUNA
@@ -442,6 +454,8 @@ The Mire’s fauna is not inherently magical, but it behaves unpredictably aroun
 ---
 
 ## XI. UNIQUE RESOURCES
+
+**Status:** Legacy reference concepts, not an approved resource, gathering, crafting, recipe, node, or equipment catalog. Future material work must derive each selected concept from an approved cultural function, processing/gathering method, and world source.
 
 **1. Griefroot Resin**  
 - Collected from refined griefroot  
@@ -782,7 +796,7 @@ The Mire’s faction identity revolves around:
 
 ---
 
-## XX. PLAYER EXPERIENCE INTENT (V1)
+## XX. FUTURE MIRE PLAYER EXPERIENCE INTENT
 
 Players exploring the Mire should feel:
 
@@ -825,8 +839,8 @@ This keeps gameplay grounded, narrative-rich, and tonally aligned with Caelmor.
 - Banner echoes  
 - Emotional resonance fields  
 
-### **V1 Spellcasting:**  
-- **None** — all magic remains subtle and narrative-driven  
+### **Player spellcasting:**
+- V1 is Lowmark-only and has no player spellcasting system. Any later Mire system requires separate approval; current earth resonance remains subtle and narrative-driven.
 
 ### **Regional Identity:**  
 Quiet, heavy, honest, wounded, enduring.

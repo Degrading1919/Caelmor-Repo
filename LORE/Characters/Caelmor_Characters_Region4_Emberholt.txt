@@ -170,7 +170,7 @@
 **History:**
 - Descendant of earliest ember families
 - Sheltered in lower sanctums during the War
-- Orchestrated Remnant survival and consolidation
+- Helped preserve and consolidate the wartime precursor network that later became the formal Remnant; the exact transition and personnel continuity remain unresolved
 
 **Motivations:**
 - Establish stable magical order with Emberholt at its core
@@ -180,11 +180,11 @@
 **Secrets:**
 - Engineers the Speaker’s public narrative
 - Mistakes Hearthveil-induced dreams for divine communion
-- Fears Stonebound mechanisms may oppose her
+- Fears passive Stonebound responses to Ashfall disturbance may disrupt her work
 
 **Quest Hooks:**
 - Her directives underpin the most dangerous projects
-- Records may reveal war-era atrocities
+- Records may reveal atrocities committed by the wartime precursor
 
 ---
 
@@ -224,7 +224,7 @@
 
 **History (Canon Correction):**
 - Refined binding formulae used in Fire Titan containment
-- The Titan originated from a Remnant initiate, not a Volkhari
+- The Titan originated from an initiate of the wartime precursor that later became the Remnant, not a Volkhari
 
 **Secrets (Canon Correction):**
 - Knows the Titan is unstable
@@ -313,11 +313,11 @@
 - Speaks in rapid fragments of translation and metaphor  
 
 **History:**  
-- Discovered a Stonebound “memory wall” deep under Ashfall that began showing him visions  
+- Discovered a Stonebound-adjacent “memory wall” deep under Ashfall whose physical and resonant patterns he interprets as visions
 - Has spent years trying to reconcile old Stonebound geometries with modern glyph systems  
 
 **Motivations:**  
-- Decode what the Stonebound warned about ember-veins and “heart machines”  
+- Decode whether the patterns record material stress around ember-veins and “heart machines”
 - Achieve an almost religious understanding of fire-geometry  
 
 **Secrets:**  
@@ -478,12 +478,12 @@
 - Understand what lies beneath all ember veins  
 
 **Secrets:**  
-- Claims to hear voices in the deepest vents—uncertain if Stonebound, Volkhari echoes, or something else  
+- Claims to hear voice-like resonance in the deepest vents; its natural or human cause remains unresolved, and it is not direct Stonebound speech
 - Sometimes emerges from dives with blank periods in her memory  
 
 **Quest Hooks:**  
 - Can lead the player into uniquely dangerous molten tunnels  
-- May serve as a medium for something older trying to speak to the surface  
+- May help trace an older resonant or mechanical disturbance without turning it into testimony
 
 ---
 
@@ -1083,7 +1083,7 @@
 - Found days later wandering miles from the site with no memory of how he got there  
 
 **Abilities:**  
-- Occasionally hears whispers from Stonebound structures  
+- Perceives resonant effects from Stonebound structures that he describes metaphorically as whispers; they are not direct speech
 - Can instinctively sense directions toward “places the world remembers”  
 
 **Secrets:**  
@@ -1178,14 +1178,14 @@
 
 **Abilities:**  
 - Sees visions that do not follow Hearthveil patterns  
-- Can distinguish between artificially seeded dreams and genuine prophecy  
+- Can sometimes distinguish Hearthveil-seeded patterns from unmanipulated dream fragments; neither supplies historical proof without corroboration
 
 **Secrets:**  
 - Has seen visions of the Speaker burning while weeping  
 - Feels a looming sense that something “older than ember” is stirring  
 
 **Quest Hooks:**  
-- Warns the player of manipulated prophecies across Caelmor  
+- Warns the player about manipulated visions and overconfident interpretations across Caelmor
 - Later unveils explicit hints of the Ashfall Authority’s existence  
 
 ---
@@ -1268,14 +1268,14 @@
 
 **History:**  
 - Once an apprentice in emberglass work  
-- Developed the ability to “hear” whispers or impressions from certain shards during a resonance surge  
+- Developed a sensitivity to impressions and resonance patterns in certain shards; he describes them metaphorically as whispers
 
 **Abilities:**  
 - Can sense whether emberstone carries altered or natural resonance  
 - Detects when embercraft is under Remnant influence vs. older patterns  
 
 **Secrets:**  
-- Has heard fragments of a Stonebound “song” buried under newer uses  
+- Has detected a repeating resonant pattern he calls a Stonebound “song”; it is not speech, prophecy, or historical testimony
 - Knows of a Stonebound heart-chamber pulsing beneath the Speaker’s Hall  
 
 **Quest Hooks:**  
@@ -1284,7 +1284,9 @@
 
 ---
 
-## VI. VOLKHARI & RELATED (HIDDEN DRAGONKIN ENCLAVE + UNBURNT BOY)
+## VI. VOLKHARI & RELATED (KNOWN AND REPORTED SURVIVORS)
+
+The following are individual anchors and reported relationships, not a complete census or an approved political/community structure. The exact number, location, and community form of surviving Volkhari remain unresolved.
 
 ---
 
@@ -1316,14 +1318,14 @@
 
 **Secrets:**  
 - Feels the distant presence of both the captive Volkhari and the Fire Titan  
-- Dreams occasionally contain fragmented images of the hidden enclave he barely remembers  
+- Dreams occasionally contain fragmented images of other survivors or refuge he barely remembers; the images are not reliable evidence
 
 **Quest Hooks:**  
-- Meeting and aiding Kaelith can become the pivotal route to discovering his family and the Volkhari enclave  
-- Rescuing him or leaving him in Ashfall dramatically alters the future of Emberholt and Volkhari arcs  
+- Meeting and aiding the free but hunted Kaelith may lead toward other survivors without establishing their number or community form
+- Aiding him or exposing him to Ashfall pursuit could alter later Emberholt and Volkhari stories
 
 **Quest Impact:**
-- His survival destabilizes Remnant prophecy
+- His survival destabilizes Remnant doctrine and prediction
 
 ---
 
@@ -1344,7 +1346,7 @@
 **History:**  
 - Fled with her family to Emberholt under assumed names years ago  
 - Survived the Glassfire catastrophe that took many lives and her partner  
-- Lost Kaelith to Remnant custody afterward, despite “official” reports claiming no survivors  
+- Lost sight of Kaelith during the Glassed Hollow chaos; he escaped and remains free despite pursuit
 
 **Abilities:**  
 - Embersense: can feel lies and emotional agitation as subtle heat shifts  
@@ -1352,11 +1354,11 @@
 
 **Secrets:**  
 - Holds partial knowledge of a Volkhari calming rite used during the War  
-- Knows her lineage’s true name, connecting directly back to the Aerie  
+- Knows her lineage's true name and may hold contact with other survivors; their community form remains unresolved
 
 **Quest Hooks:**  
 - Confides in the player about her missing son if trust is earned  
-- Helps guide the player toward the high volcanic slopes and the hidden enclave  
+- May guide the player toward a survivor contact or refuge without establishing a fixed enclave
 
 ---
 
@@ -1375,7 +1377,7 @@
 - Loyal to family before doctrine  
 
 **History:**  
-- Present for the Glassfire Event and watched Kaelith disappear into Ashfall’s grasp  
+- Present for the Glassed Hollow event and lost sight of Kaelith during his escape
 - Manifested stronger ember traits afterward, making concealment harder  
 - Forced to spend more time in the outskirts to avoid detection  
 
@@ -1388,13 +1390,13 @@
 - Fears he is somehow tied to the same chain of fate  
 
 **Quest Hooks:**  
-- Leads or drags the player toward volcanic paths and ultimately the Aerie of Silent Embers  
+- Leads or drags the player toward volcanic paths and possible survivor contacts
 - Could lash out or lose control in critical scenes, requiring player intervention  
 
 ---
 
-### 44. Matron Vaelyra of the Cooling Flame  
-**Role:** Elder and spiritual leader of the Volkhari enclave  
+### 44. Vaelyra of the Cooling Flame
+**Role:** Reported Volkhari elder; the wider survivor community's political form remains unresolved
 
 **Appearance:**  
 - Appears late 50s–60s, true age well over 150  
@@ -1409,20 +1411,20 @@
 
 **History:**  
 - Witnessed Emberholt’s betrayal and the Volkhari’s near-annihilation  
-- Led the survivors to the Aerie of Silent Embers  
-- Maintained their spiritual traditions in secrecy through the Silence Years  
+- Helped other survivors find refuge
+- Maintained Volkhari traditions in secrecy during the postwar decades
 
 **Abilities:**  
 - Mastery of Volkhari memory-flame rituals  
 - Can weave communal recollection into shared ember visions  
 
 **Secrets:**  
-- Knows that the Volkhari once worked alongside Stonebound constructs to stabilize ember veins  
+- Preserves an account that Volkhari once worked around passive Stonebound nodes while stabilizing ember veins; the account requires material corroboration
 - Fears that whatever the Authority is awakening may be beyond anyone’s control  
 
 **Quest Hooks:**  
 - Tests the player with fire-listening rites before accepting them  
-- Can teach the player rare flame disciplines if trust is truly earned  
+- May share cultural knowledge if trust is earned; this does not authorize a player spellcasting system
 
 ---
 
@@ -1440,20 +1442,20 @@
 - Slow to trust outsiders, but unshakable once he does  
 
 **History:**  
-- Carved memory-stones telling the Volkhari’s true history of the War and Emberholt’s betrayal  
+- Carved memory-stones preserving a Volkhari account of the Great War and Emberholt's betrayal
 - Hid many of these stones in scattered volcanic caverns to protect their memory  
 
 **Abilities:**  
 - Can embed memories and impressions into stone through ritualized carving  
-- Capable of recreating partial past events for those attuned to his work  
+- Can preserve maker-imprinted recollection and interpretation; the stones cannot recreate objective past events without corroboration
 
 **Secrets:**  
-- One hidden carving contains a prophecy he refuses to speak aloud, involving an ember-child and stone-walker  
+- One hidden carving contains a warning he interprets as involving an ember-child and stone-walker; it is not accepted prophecy
 - Knows exactly where a memory-stone implicating the early Remnant lies  
 
 **Quest Hooks:**  
 - Asks the player to retrieve a stolen carving now in Remnant hands  
-- Offers access to powerful, immersive historical visions once his work is recovered  
+- Offers access to powerful maker-imprinted recollections once his work is recovered; they remain one account rather than omniscient history
 
 ---
 
@@ -1489,7 +1491,7 @@
 ---
 
 ### 47. Thennek “Stone-Quiet” Vorren  
-**Role:** Volkhari guardian and volcanic pathfinder  
+**Role:** Volkhari guardian and volcanic pathfinder; any wider community role remains unresolved
 
 **Appearance:**  
 - Appears mid-20s, but is older  
@@ -1499,12 +1501,12 @@
 **Personality:**  
 - Speaks rarely and only when necessary  
 - Keenly observant of terrain and people alike  
-- Quietly attached to the enclave’s children  
+- Quietly protective of younger survivors
 
 **History:**  
-- Grew into his role as the enclave’s primary external scout  
+- Grew into a role scouting for other survivors
 - Watched Remnant survey teams from a distance for years  
-- Has prevented multiple accidental tunnel breaches that could reveal the Aerie  
+- Has prevented tunnel breaches that could expose survivor refuges
 
 **Abilities:**  
 - Tremor-sense attuned to magma movement and structural weaknesses  
@@ -1586,7 +1588,7 @@
 
 ---
 
-### 50. Thalan Veyr of the High Smoke
+### 50. Thalan Veyr
 **Role:** Captured Volkhari elder held in Ashfall Depths; “living conduit” for Remnant experiments  
 
 **Appearance:**  
@@ -1610,8 +1612,8 @@
 - Sensitive to the presence of other Volkhari and ember anomalies  
 
 **Secrets:**  
-- Feels the Fire Titan’s lingering mind and recognizes it as a corrupted kin  
-- Knows a prophecy concerning an ember-child and stone-walker that could reshape Caelmor’s fate  
+- Senses the Fire Titan's distorted ember resonance and recognizes suffering rather than Volkhari kinship; the Titan was a precursor initiate
+- Preserves a warning concerning an ember-child and stone-walker; it is belief, not accepted prophecy
 
 **Quest Hooks:**  
 - Central figure in any “Harrow of the Volkhari” style questline  

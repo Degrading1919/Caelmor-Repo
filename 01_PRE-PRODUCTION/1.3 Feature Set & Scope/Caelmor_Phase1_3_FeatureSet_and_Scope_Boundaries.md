@@ -217,7 +217,7 @@ naturally.
 Biome Composition:
 
 • Rolling lowlands, forest edges, shallow rivers, marshy borders.  
-• Farmland ruins and remnants of the long war.  
+• Farmland ruins and remnants of the Great War.
 • Wildlife essential for Hunting skill loops.  
 • Caves and early-level mines to support Mining and Smithing.  
 
@@ -251,19 +251,19 @@ The v1 narrative is structured around a three-act progression:
 • Player becomes familiar with Lowmark culture and war aftermath.  
 
 ### Act II — Rising Tension  
-• Bandits, corrupted fauna, and whispers of forbidden magic.  
+• Bandits, corrupted fauna, and fear surrounding dangerous or restricted magical practice.
 • Players learn fragments of history about elemental schools.  
 
 ### Act III — Revelation  
-• Final quests lead to the discovery of the Water Wizard.  
-• Magic is revealed as outlawed, misunderstood, and returning.  
-• Player receives symbolic magical artifact (non-functional).  
+• Final quests reveal the Last Field-Mage and Riverwarden layer behind Lowmark's bounded water tradition.
+• The player learns that postwar authorities restricted weaponization, amplification, uncontrolled ritual experimentation, and dangerous research differently by region; there was no durable universal ban.
+• The player earns civic trust and responsibility. Any physical symbolic artifact remains a later reward-design decision. V1 has no player spellcasting system.
 
 Quest Types:
 
 • Skill introduction quests (Mining, Woodcutting, Hunting, Crafting).  
 • Regional subplots involving local disputes.  
-• Lore breadcrumbs referencing the Long War.  
+• Lore breadcrumbs referencing the Great War.
 
 ---
 
@@ -322,11 +322,11 @@ Because the v1 architecture obeys server-authority principles, no rewrites are n
 # SECTION B — V1.5 FEATURE EXPANSION
 
 • Thornfell Marches becomes the first major new region.  
-• Introduction of Water Magic skill in minimal form.  
+• Possible player Water Magic remains unapproved future scope; Lowmark's household farming practice and the Last Field-Mage's combat knowledge do not themselves authorize a player spellcasting system.
 • Leatherworking expansions: pouches, bags, component satchels.  
 • Optional Foraging or Fishing skill.  
 • New enemies, recipes, and item tiers.  
-• Expanded storylines tied to the Water Wizard arc.  
+• Expanded storylines may revisit the Last Field-Mage and Riverwarden history without presuming a player magic system.
 
 ---
 
