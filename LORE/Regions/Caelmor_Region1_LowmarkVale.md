@@ -292,7 +292,7 @@ They believe:
 - Gradually withdrew as human wars intensified and demands for power grew  
 - Allowed their oasis to become a myth, known only through scraps of story
 
-### Connection to the Human Founder
+### Connection to the First Listener and Later Founder Tradition
 
 Riverwarden lore attributes its teachings to a figure called **The First Listener**. Regional tradition sometimes combines this figure with both an early rediscoverer and a later Founder, but those are distinct roles and the exact identity, date, and teaching chain remain unresolved. “Spirit” in the old sayings means the living and emotional imprint people leave upon the world and its interaction with elemental resonance, not a fifth element.
 
@@ -471,7 +471,7 @@ These are environmental hooks, not all mandatory questlines.
 - **The Uphill Canal** – a small side channel where water seems to “forget” gravity when unobserved.  
 - **The Whispering Door** – a cellar door in a farmhouse that creaks oddly just before Wraith attacks.  
 - **Flood Calendar Stones** – ancient stones that seem to match modern flood-timing better than any recent charts.  
-- **The First Listener** – stories of a wanderer who could “hear the river thinking”; in canon, the Human Founder.
+- **The First Listener** – stories of a wanderer who could “hear the river thinking”; Riverwarden tradition does not establish whether this figure was an early rediscoverer, a later Founder, or another remembered teacher.
 
 These hooks can anchor micro-quests, exploration rewards, and achievement-style secrets.
 
@@ -553,7 +553,7 @@ Focus: Wraith activity, grief-soaked waters, and Wraithwatchers.
 
 ### 2. Lessons of the First Listener
 
-Focus: Human Founder legacy, Riverwarden philosophy, and ethics of magic.
+Focus: First Listener tradition, later Founder tradition, Riverwarden philosophy, and ethics of magic.
 
 - The player slowly proves themselves to the Last Field-Mage via grounded tasks (listening to villagers, resolving disputes, stabilizing Wraith zones with non-magical means).  
 - Only in late steps do they meet Riverwardens at Veilwater Oasis.  
