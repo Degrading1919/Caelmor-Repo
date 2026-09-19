@@ -136,6 +136,6 @@ No one character needs to appear in every movement. The main arc should share na
 - Combat or danger may protect people and enable repair; it cannot extract historical truth.
 - No player spellcasting progression, magic school, gear, item, resource, recipe, or reward is designed.
 - No quest script, dialogue, state machine, JSON, exact route, POI order, or implementation requirement is specified.
-- C03, C06, C07, C09, and C16 remain narrower future decisions. C09 affects the presentation of movement 7, not whether the arc works.
+- C03, C06, C07, and C09 remain narrower future decisions. C09 affects the presentation of movement 7, not whether the arc works. C16 concerns whether **Long War** is an in-world epithet for the Great War or retired wording; it has no bearing on this Lowmark main arc.
 
 **Proposed v1 result:** the player understands Lowmark as a society of distributed practical authority, discovers that magic is real but constrained by responsibility and evidence, helps stop one present exploitation and one dangerous water crisis, and leaves the Vale with meaningful trust rather than new combat power. That is a complete Lowmark story even if no callback ever ships.

@@ -57,7 +57,12 @@ No additional expansion was required after these controls. The remaining questio
 | **C06 — Volkhari survivor truth** | Population, community status, and individual testimony determine later Emberholt scope. | V1 uses no Volkhari encounter or demographic claim. Any Glassed Hollow callback remains a disputed public fragment. |
 | **C07 — Founder roster and rediscoverer identities** | Required before definitive biographies, dates, or teacher-student links. | Part 5 uses the approved distinction and withholds exact identities. |
 | **C09 — Lowmark farm-water visibility and governance** | Determines whether practice is household custom, commons stewardship, charter oversight, or a selected combination. | The main movement and side candidates work under each model and make no policy selection. |
-| **C16 — present constitutions and office succession** | Needed for final legal authority, appointment, and jurisdiction language. | Current offices can act within their established practical remit without a constitutional ruling. |
+| **C16 — “Long War” versus “Great War” terminology** | The Director must decide whether **Long War** is an in-world epithet for the same Great War or retired/stale wording. | Part 5 can consistently use **Great War** without deciding whether the alternate phrase remains valid in-world. |
+| **Emberholt Speaker/Council constitutional powers** *(no contradiction ID)* | Needed before final claims about authority shared between the Speaker and Council. | Part 5 assigns no new constitutional power. |
+| **Thornfell Assembly procedure** *(no contradiction ID)* | Needed before final procedural or jurisdictional claims about the Assembly. | Part 5 relies only on established practical institutional roles. |
+| **Mire hearing and appeal authority** *(no contradiction ID)* | Needed before final legal process or appellate authority is specified. | No Part 5 architecture depends on a selected procedure. |
+| **Lowmark office boundaries** *(no contradiction ID)* | Needed before final jurisdiction is assigned among Lowmark offices and local institutions. | Current actors can perform established practical duties without a constitutional ruling. |
+| **Office succession and appointment rules generally** *(no contradiction ID)* | Needed before final succession, election, or appointment language is written for any region. | Recurring-character and story functions do not depend on a chosen rule. |
 | **Present-day local exploiters in the main arc** | The Director should later choose whether the responsible interest is a contractor, office faction, landholder compact, or another already-supported civic actor. | The causal architecture requires accountable present decisions but no named culprit at proposal stage. |
 | **Riverwarden presentation and access** | Exact meeting form, site access, and public visibility need production and map review. | The arc supports mediated contact, a bounded outer site, or another evidence-safe presentation without changing the outcome. |
 | **Selected households and side-story slate** | Role-based families, names, and the final 16–20 candidates should be selected against cast density and POI capacity. | The lattice already proves category coverage and continuity-safe functions. |
@@ -91,12 +96,13 @@ This pass does **not** declare Lore Foundation Lock or material-culture readines
 
 Part 6 should be a controlled **selection and canon-integration pass**, subject to a separate brief and Creative Director approval:
 
-1. decide C03, C06, C07, C09, and C16 where the selected content needs them;
-2. select the exact twelve main-arc movements, participating anchors, and Lowmark locations without scripting dialogue;
-3. select a balanced v1 side-story and micro-event slate from the candidate pools;
-4. assign claim cards for every chosen fact: authority, evidence owner, reveal owner, map dependency, and canon destination;
-5. reconcile outdated canon wording and the known name slip through a reviewed source-by-source change plan;
-6. verify selected narrative placements against the map and character custody ledgers;
-7. establish a production mystery bible that preserves author truth and controls later reveals.
+1. decide C03, C06, C07, and C09 where the selected content needs them, and resolve C16 only as the **Long War / Great War** terminology question;
+2. resolve any needed regional government details without assigning them contradiction-register IDs: Emberholt Speaker/Council powers, Thornfell Assembly procedure, Mire hearing/appeal authority, Lowmark office boundaries, and general succession/appointment rules;
+3. select the exact twelve main-arc movements, participating anchors, and Lowmark locations without scripting dialogue;
+4. select a balanced v1 side-story and micro-event slate from the candidate pools;
+5. assign claim cards for every chosen fact: authority, evidence owner, reveal owner, map dependency, and canon destination;
+6. reconcile outdated canon wording and the known name slip through a reviewed source-by-source change plan;
+7. verify selected narrative placements against the map and character custody ledgers;
+8. establish a production mystery bible that preserves author truth and controls later reveals.
 
 Reward, equipment, resource, recipe, and final quest implementation work should remain outside that selection pass unless separately authorized.
