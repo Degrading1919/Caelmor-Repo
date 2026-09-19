@@ -14,7 +14,7 @@ Aldric Fenmere governs Lowmark not as a lord who commands, but as a steward who 
 
 **Private Weight:**  
 - House Fenmere signed multiple wartime supply compacts  
-- Aldric personally approved river movements that fed armies on all sides  
+- House records document river movements that fed armies on several sides; Aldric's own approvals belong to later postwar administration
 - Keeps ledgers older than the war — and refuses to destroy them  
 
 **Canon Notes:**  
@@ -189,8 +189,8 @@ This is not a character yet — only a pressure point.
 
 ### DESIGN SUMMARY
 - **Tone:** Quietly ashamed  
-- **Magic:** Aftermath only  
-- **Authority:** Feudal, logistical, restrained  
+- **Magic:** Openly taught simple farming water practice; experienced community stewardship for shared works; charter oversight for larger irrigation; combat water magic exclusive to the Last Field-Mage
+- **Authority:** Layered, logistical, restrained; exact office boundaries remain unsettled
 - **Purpose:** Onboarding, grounding, micro-narratives  
 
 Lowmark’s power is not what it does.  

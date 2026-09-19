@@ -14,9 +14,9 @@ Beneath the surface, it is defined by:
 - A culture that prizes endurance and shared hardship  
 - An unresolved argument about whether the Great War is truly over  
 
-Most Marchers speak of the wind as if it has moods—“the hard wind,” “the forgiving wind”—but they do not treat that instinct as magic. Thornfell’s “oddness” comes from its cliffs: how sound carries farther than it should, how horn calls echo in uncanny ways, how gusts hiss through carved stones. These phenomena are accepted as quirks of the land, not remnants of ancient resonance arts.
+Most Marchers speak of the wind as if it has moods—“the hard wind,” “the forgiving wind”—but they do not treat that instinct as magic. Thornfell’s “oddness” usually comes from its cliffs: how sound carries farther than expected, how horn calls echo, and how gusts hiss through carved stones. Most effects are natural, although rare dormant resonance persists at specific old works and nodes.
 
-The long-vanished Echohewn—an ancient dwarven-influenced people—once carved halls and chambers high atop Thornfell’s tallest mountain. Their Echochambers are famed for eerie acoustics. Most believe this was architectural genius, not magic. In truth, the Echohewn once wielded subtle air-resonance taught by the Dwarven Founder, but this truth has been lost from Thornfell memory after centuries of war and cultural fragmentation.
+The long-vanished Echohewn—an ancient dwarven-influenced people—once carved halls and chambers high atop Thornfell’s tallest mountain. Their Echochambers are famed for eerie acoustics. Most of their achievement was architectural, though rare dormant air resonance survives in particular works. Thornfell tradition links this knowledge to a later teacher remembered as a Dwarven Founder, but the earliest rediscoverers and exact teaching chain remain unresolved after generations of conflict and cultural fragmentation.
 
 For the Marchers, the wind is simply an old companion. Only the Echochamber stones remember otherwise.
 
@@ -56,14 +56,14 @@ Thornfell did not fall, but:
 
 ### Weaponization of Resonance (Forgotten by the People)
 
-Records and scattered artifacts reveal that, during the worst years of the war, Thornfell unwittingly rediscovered fragments of air-magic through its Echohewn ruins:
+Records and scattered artifacts suggest that, during the worst years of the Great War, Thornfell forced or stumbled into fragments of rare dormant resonance through some Echohewn ruins:
 
 - Horns enhanced by resonance plates to create staggering concussive blasts  
 - Pressure pockets forming around narrow passes  
 - Controlled echoes masking troop movement  
 - Sudden gusts amplified by carved air channels  
 
-But after the war, these techniques were forbidden, dismissed, or forgotten. Today:
+After the war, Thornfell locally restricted, dismissed, or forgot these dangerous techniques. Today:
 
 - Marchers tell stories of “the horn that split the ridge,”  
 - but they insist it was exaggerated or the result of strange weather.
@@ -265,7 +265,7 @@ Smugglers and political agitators often move through Passwatch.
 
 ## VII. ANCIENT CULTURE — THE ECHOHEWN
 
-The Echohewn were an ancient people shaped heavily by dwarven teaching—especially that of the **Dwarven Founder**, the legendary First Air Mage.
+The Echohewn were an ancient people shaped by dwarven teaching and by their own architectural practice. Later tradition associates them with a **Dwarven Founder**, but that teacher was distinct from the earliest rediscoverers.
 
 ### What Thornfell Believes
 
@@ -275,14 +275,14 @@ The Echohewn were an ancient people shaped heavily by dwarven teaching—especia
 
 ### What Is Actually True (Unknown to Thornfell)
 
-- The Echohewn learned **resonance and subtle air-magic** directly from the Dwarven Founder  
-- Their halls were **air-channeled structures**, carved to guide pressure, echo, and vibration  
-- Their bodies, armor, and instruments bore faint air-runes enabling subtle manipulation  
-- Their acoustic feats were both engineering and arcane craft  
+- Most Echohewn acoustics arose from sophisticated engineering.
+- Rare works also interacted with dormant air resonance.
+- Their halls guided pressure, echo, and vibration through carved channels.
+- The exact rediscoverers, later teachers, and transmission chain remain unresolved.
 
 ### The Lost Legacy
 
-Centuries of war erased the magical understanding:
+Generations of conflict, the Great War, and cultural fragmentation erased much of the resonant understanding:
 
 - Clans kept the horn codes  
 - Builders mimicked old stone motifs  
@@ -325,9 +325,9 @@ Thornfell chalked this up to:
 
 In reality, these were echoes of the air tradition being forced into conflict.
 
-### Present Day (V1 Gameplay)
+### Present Day
 
-Air magic is:
+Rare dormant air resonance is:
 
 - Dormant  
 - Subtle  
@@ -405,16 +405,16 @@ Combat with this event is dangerous and unpredictable.
 
 ---
 
-#### **2. The Stonebound of Echochamber Summit**
+#### **2. Echochamber Summit's Stonebound node**
 
-A guardian phenomenon manifesting from centuries of layered resonance.
+Echochamber Summit intersects an ancient Stonebound node. Rare Echohewn resonance can couple with it and produce the phenomenon historically interpreted as a “Stonebound guardian.”
 
 - The air hums in certain halls  
 - Dust spirals into roughly humanoid shapes  
 - Pressure pulses strike intruders  
 - The phenomenon recedes when wind patterns shift  
 
-The Stonebound are **rare and place-bound**, never leaving Echochamber Summit. Thornfell interprets these events as “the stones remembering.”
+The node is passive and place-bound. It may respond to imbalance, pressure, intrusion, or disturbance with physical or resonant effects. It does not speak, prophesy, provide visions, answer questions, identify historical events, choose champions, or act as a creature or soldier. Thornfell interprets these events as “the stones remembering.”
 
 ---
 
@@ -460,6 +460,8 @@ The wildlife reinforces the danger of Thornfell’s elevations.
 ---
 
 ## XI. UNIQUE RESOURCES
+
+**Status:** Legacy reference concepts, not an approved resource, gathering, crafting, recipe, node, or equipment catalog. Future material work must derive each selected concept from an approved cultural function, processing/gathering method, and world source.
 
 **1. Ridge Iron**  
 - Scraped from cliff seams  
@@ -571,18 +573,17 @@ Thornfell remains Caelmor’s frontier shield.
 
 According to Thornfell’s fragmented oral tradition:
 
-- The Dwarven Founder was a master of stone and wind  
-- He taught the Echohewn how to shape halls that carried sound  
-- Wind was his ally and comfort, but not a force he controlled  
+- A Dwarven Founder was a master teacher associated with stone, wind, and sound.
+- Tradition credits this teacher with helping the Echohewn shape halls that carried sound.
+- These accounts are inherited teaching stories rather than a settled biography.
 
 This is the **folk version**.
 
-The **truth**, unknown to the clans:
+The **bounded truth**, unknown to the clans:
 
-- The Dwarven Founder was the First Air Mage  
-- He taught resonance shaping, echo-guiding, and subtle pressure manipulation  
-- Echohewn structures were early air-magic constructs  
-- Thornfell’s own traditions descend from this heritage  
+- Early rediscoverers and later Founders were distinct people or roles.
+- Echohewn builders combined exceptional acoustic engineering with rare resonant practice.
+- Thornfell traditions preserve parts of that heritage without proving a specific Founder identity or teaching chain.
 
 But because knowledge was shattered by the Great War, clan fractures, and Emberholt pressure, Thornfell views magic as superstition—  
 even as it lives beneath their feet.
@@ -600,11 +601,11 @@ Thornfell maintains heirloom staves:
 
 Their redesign for Caelmor:
 
-- **In v1:** these staves provide **narrative flavor only**  
-- **Later expansions:** they become conduits for rediscovered air magic  
+- In present Thornfell lore, these staves provide cultural and historical evidence only.
+- Any future player use remains a separate equipment and spell-system decision.
 - **Deep Echochamber relics** may hint at dormant resonance patterns  
 
-This futureproofs Thornfell’s magical role while keeping v1 grounded.
+This preserves Thornfell’s magical history while keeping Lowmark the sole full v1 region and v1 free of player spellcasting.
 
 ---
 
@@ -808,7 +809,7 @@ This section ensures that all future Thornfell quests and NPCs remain aligned wi
 - Relics from wartime resonance weaponization should appear as clues, not tools  
 
 ### **4. The Echohewn Should Remain Mysterious**
-- Only fragments should be found in v1  
+- Only fragments should be found when Thornfell becomes playable
 - Their disappearance should never be fully explained  
 - Magical explanations must remain hidden beneath grounded interpretation  
 
@@ -819,7 +820,7 @@ This section ensures that all future Thornfell quests and NPCs remain aligned wi
 
 ---
 
-## XXII. PLAYER EXPERIENCE INTENT (V1)
+## XXII. FUTURE THORNFELL PLAYER EXPERIENCE INTENT
 
 Players exploring Thornfell should feel:
 
@@ -848,12 +849,12 @@ Thornfell’s finalized elemental and magical canon:
 
 - **Element:** Air  
 - **Expression:** Resonance first, airflow second  
-- **Founder:** Dwarven Founder (First Air Mage)  
-- **Ancient People:** Echohewn (air-rune–empowered stoneworkers)  
-- **Modern Understanding:** Entirely lost — people do *not* know they had air magic  
+- **Founder tradition:** a later Dwarven teacher distinct from the unresolved first rediscoverer
+- **Ancient People:** Echohewn builders whose mostly natural acoustic works sometimes interact with dormant resonance
+- **Modern Understanding:** Fragmented; most effects are understood as craft and terrain
 - **Supernatural Events:** Rare resonance scars, not spellcasting  
 - **Weaponization:** Occurred during the Great War, now denied or forgotten  
-- **V1 Magic Availability:** None — all magic remains subtle and narrative  
+- **Player Magic Availability:** No v1 player spellcasting; any later system requires separate approval
 
 This keeps Thornfell grounded, mythic, and perfectly aligned with Caelmor’s tone.
 

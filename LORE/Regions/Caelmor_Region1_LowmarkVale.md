@@ -8,7 +8,7 @@ On the surface, Lowmark is about:
 - Farmers, millers, traders, and caravan guards
 - Quiet memorials and unspoken grief
 
-Beneath that surface, the land still carries emotional weight. People remember. Water remembers. But most Lowmarkers have no language for “magic.” They speak instead of strange still mornings, of wells that never run dry, of fog that feels heavier after certain arguments.
+Beneath that surface, the land still carries emotional weight. People remember. Water remembers. Lowmarkers openly recognize simple farming water practice, but distinguish it from dangerous wartime use and the Last Field-Mage's isolated combat knowledge. They also speak of strange still mornings, wells that never run dry, and fog that feels heavier after certain arguments.
 
 Unknown to almost everyone, an ancient culture called the Riverwardens withdrew to a hidden oasis behind Veilwater Falls generations ago. From that oasis, they trained one of the last true practitioners of water-magic in the region — the “Last Field-Mage” — who now lives in seclusion and only rarely touches Lowmark’s affairs.
 
@@ -80,9 +80,10 @@ Lowmark’s people are steady, practical, and slow to trust spectacle of any kin
 
 To most Lowmarkers:
 
-- Magic is **forbidden, far-off, or something from old stories**.  
-- Wraiths and strange river events are treated as **curses or hauntings**, not something that can be studied.  
-- Rumors of a “water wizard” are tavern ghost stories, not a known fact.
+- Simple farming water practice is ordinary, openly taught within households and among neighbors.
+- Experienced community stewards oversee shared water works; formal charter oversight applies only to larger irrigation works.
+- Combat water magic is feared, rare, and retained only by the Last Field-Mage.
+- Wraiths and strange river events are often called **curses or hauntings**, though they are place-bound water-memory manifestations rather than returning souls.
 
 Any lingering magical influence shows up as:
 
@@ -90,7 +91,7 @@ Any lingering magical influence shows up as:
 - Mist that refuses to disperse over certain fields  
 - Wells that always taste faintly sweet
 
-Players begin in a culture where **magic is not openly practiced**, and any sign of it is unsettling and taboo.
+Players begin in a culture where bounded farm practice is familiar but weaponization, uncontrolled ritual experimentation, and overt combat magic remain unsettling and taboo. V1 does not give the player a spellcasting system.
 
 ### Social Roles (Grounded & Implementable)
 
@@ -293,7 +294,7 @@ They believe:
 
 ### Connection to the Human Founder
 
-Riverwarden lore claims descent from the teachings of a figure they call **The First Listener** — the Human Founder who first learned to listen to the world’s natural voices (water, wind, stone, flame, and spirit).
+Riverwarden lore attributes its teachings to a figure called **The First Listener**. Regional tradition sometimes combines this figure with both an early rediscoverer and a later Founder, but those are distinct roles and the exact identity, date, and teaching chain remain unresolved. “Spirit” in the old sayings means the living and emotional imprint people leave upon the world and its interaction with elemental resonance, not a fifth element.
 
 His teachings:
 
@@ -304,7 +305,7 @@ His teachings:
 ### Current State
 
 - A small remnant keeps the oasis and its lore alive  
-- Some Riverwardens, twisted by grief and war memories, have become Wraith-like entities bound to certain pools  
+- Rare place-bound water-memory impressions are associated with lost Riverwardens, but they are not surviving souls
 - The rest avoid direct involvement with Lowmark’s daily affairs, fearing the return of war-level misuse of magic
 
 They do **not** patrol the main rivers or towns. Their influence is indirect, channeled through the Last Field-Mage and rare, carefully chosen interventions.
@@ -313,16 +314,18 @@ They do **not** patrol the main rivers or towns. Their influence is indirect, ch
 
 ## VII. ELEMENTAL MAGIC — WATER IN LOWMARK
 
-Water magic in Lowmark is:
+Water practice in Lowmark is:
 
 - Quiet  
 - Restorative  
 - Memory-tinged  
-- Rare and dangerous  
+- Bounded in ordinary farming and dangerous when forced toward combat or large-scale ritual
 
-There is **no public spellcasting** in Lowmark. Magic shows up as:
+Simple farm practice is publicly known. Other manifestations include:
 
-- Rare ritual moments with the Last Field-Mage  
+- Rare ritual or combat interventions by the Last Field-Mage
+- Household and neighbor-taught adjustments to field water
+- Community-stewarded shared water works and charter oversight of larger irrigation works
 - Environmental anomalies (mist, stillness, Wraiths)  
 - Subtle support to healing, if the practitioner is calm and attentive
 
@@ -422,6 +425,8 @@ These creatures provide hunting targets, crafting inputs, and ambient life witho
 
 ## X. UNIQUE RESOURCES
 
+**Status:** Legacy reference concepts, not an approved resource, gathering, crafting, recipe, node, or equipment catalog. Future material work must derive each selected concept from an approved cultural function, processing/gathering method, and world source.
+
 Each resource is meant to feel useful in the early game and easy to support in systems.
 
 1. **Lowmark Iron (common)**  
@@ -501,15 +506,9 @@ Lowmark acts as a **moral and logistical hinge** between more extreme regions.
 
 ## XIV. ORIGIN OF MAGIC (GLOBAL CONTEXT, LOCAL ANGLE)
 
-Canon-wide, magic originated when five early figures (the Founders) learned to listen to the world:
+Canon-wide, four elemental traditions emerged through early local rediscoveries and were later made more teachable by distinct figures remembered as Founders. The Founder roster, names, dates, count, and teaching links remain unresolved.
 
-- Human Founder (water/emotion)  
-- Others focused on wind, stone, flame, and spirit
-
-Lowmark’s connection is via the Human Founder:
-
-- His listening rites evolved into Riverwarden practice  
-- His teachings about patience and empathy shaped Lowmark’s cultural values, even after magic withdrew
+Lowmark traditions connect water rediscovery, later teaching, and the First Listener in several simplified stories. Those stories preserve values of patience and empathy without proving that one person performed every role.
 
 Locals do not know this history in detail; they feel its influence through sayings, rituals, and the rare intervention of the Last Field-Mage.
 
@@ -533,25 +532,15 @@ From the Riverwarden perspective:
 - It does not store spell charges or act as consumable fuel.  
 - It works best when the user is emotionally steady.
 
-### The Founder’s Staff
+### The attributed First Listener staff
 
-Canonically:
-
-- The Human Founder’s original staff ended up in Lowmark, passed down through Riverwarden and Field-Mage hands.  
-- It incorporates a single, large riverglass focus and simple, sturdy wood.
-
-For the game:
-
-- In **v1**, the Founder's Staff can appear as a **symbolic, non-functional artifact** granted at the climax of the main arc (matching the “symbolic magical artifact” plan).  
-- In later expansions, it can become the **defining late-game water staff**, representing mastery of water magic.
-
-This keeps future-proofing in place without contradicting a non-spellcasting v1.
+Riverwarden tradition preserves accounts of a simple staff associated with the First Listener. Its original maker, date, and relationship to a rediscoverer or Founder remain unresolved. It is not an approved v1 reward, player spellcasting implement, or future equipment commitment.
 
 ---
 
 ## XVI. REGIONAL QUEST FRAMEWORK (CANONICAL ARC ANCHORS)
 
-This section defines how future quests will tie into the above canon. It is not player-facing text.
+Lowmark has one v1 main arc. The five anchors below contribute functions, evidence, places, and side-story possibilities to that single arc; they are not five separately approved launch arcs. Exact actors, locations, encounters, and rewards remain later production selections. The approved causal foundation is that present local decisions concentrate an older bounded water/resonance problem, which the player resolves locally through evidence, repair, and accountability.
 
 ### 1. The River That Remembers
 
@@ -569,7 +558,7 @@ Focus: Human Founder legacy, Riverwarden philosophy, and ethics of magic.
 - The player slowly proves themselves to the Last Field-Mage via grounded tasks (listening to villagers, resolving disputes, stabilizing Wraith zones with non-magical means).  
 - Only in late steps do they meet Riverwardens at Veilwater Oasis.  
 - Emphasizes restraint and support; magic is framed as **responsibility**, not power fantasy.  
-- Ends with a symbolic blessing and possibly the non-functional Founder's Staff artifact in v1.
+- Ends with earned trust and responsibility; any physical symbol remains a later reward-design decision.
 
 ### 3. Crestbridge Oaths
 

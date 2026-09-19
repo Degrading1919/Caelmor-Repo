@@ -1,6 +1,6 @@
 # I. THE REMNANT (GLOBAL SHADOW FACTION)
 ### **Nature:** Secretive, authoritarian magical order  
-### **Origin:** Formed 1–2 generations after the Great War  
+### **Origin:** Formed after the Great War from an unnamed wartime precursor; the exact transition date and personnel continuity remain unresolved
 ### **Base:** Emberholt (Ashfall Depths, lower sanctums)  
 ### **Philosophy:** “Fire is power, but only disciplined flame should shape the world.”
 
@@ -88,7 +88,7 @@ Among lower Emberholt:
 ---
 
 ## 4. THE HEARTHVEIL INITIATES  
-**Status:** Remnant psychological & spiritual influence division  
+**Status:** Remnant psychological and dream-influence division
 **Primary Duty:** Dream manipulation, emotional engineering, compliance shaping  
 
 ### **Capabilities**
@@ -231,7 +231,7 @@ Syndicates rise to protect their own, for better or worse.
 # III. VOLKHARI FACTIONS (DRAGONKIN HYBRIDS)
 
 ### **Status:** The world believes them extinct  
-### **Truth:** A hidden People, not a political faction  
+### **Truth:** Surviving Volkhari exist, but their exact number, location, and community form remain unresolved
 ### **Canon Fix:**  
 - “High Smoke” terminology removed.  
 - Volkhari are **one race**, not divided by sub-tribes or proto-lineages.  
@@ -239,10 +239,10 @@ Syndicates rise to protect their own, for better or worse.
 
 ---
 
-## 12. THE AERIE OF SILENT EMBERS  
-**Nature:** Hidden enclave of surviving Volkhari dragonkin  
-**Population:** ~8–12 (not counting the captive or the Titan)  
-**Location:** High volcanic ridges outside Emberholt  
+## 12. VOLKHARI SURVIVORS
+**Nature:** Known and reported survivors of a distinct fire-attuned people; this is not a complete political or demographic account
+**Population:** Unresolved
+**Location and community form:** Unresolved
 
 ### **Practices**
 - Memory-flame rituals (emotionally anchored, not spellcasting)  
@@ -253,7 +253,7 @@ Syndicates rise to protect their own, for better or worse.
 > **Correction:**  
 Their doctrine must not oppose public magic — their fear is specifically **unrestrained, emotionally unstable firecraft**, not magic itself.
 
-### **Key Members**
+### **Known or reported individuals**
 - Matron Vaelyra (Elder)  
 - Seredh Embercarver (Historian)  
 - Asera of the Three Breaths (Ritualist)  
@@ -268,7 +268,7 @@ Their doctrine must not oppose public magic — their fear is specifically **unr
 Kaelith escaped the Glassed Hollow.  
 ONE other Volkhari — now identified below — *was* captured.
 
-### **Faction Position**
+### **Common survival pressures**
 Survival above all else.  
 Prevent another magical catastrophe.  
 Avoid Emberholt at all costs.  
@@ -277,9 +277,9 @@ Observe the Remnant from afar without intervening unless forced.
 ---
 
 ## 13. THE FIRE TITAN (NOT VOLKHARI)  
-**Nature:** A Remnant-made magical tragedy, NOT a Volkhari evolution  
+**Nature:** A wartime-precursor-made magical tragedy, NOT a Volkhari evolution
 **Origin (Corrected):**  
-A **Remnant initiate** overwhelmed by embercraft emotional overload during an early ritual experiment.  
+A **wartime precursor initiate** overwhelmed by embercraft emotional overload during the Glassed Hollow ritual.
 They lost themselves to fire resonance and became an uncontrollable, molten creature.
 
 ### **Why this correction matters**
@@ -334,23 +334,20 @@ All corrected below.
 - Maintaining shadow channels with Emberholt merchants  
 
 > **Canon Fix:**  
-Removed references to “shadow magic residue” — magic is not practiced in Lowmark.  
-They exploit **fog, acoustics, and river routes**, not arcane techniques.
+Removed references to “shadow magic residue.” Shadeweavers exploit **fog, acoustics, and river routes**, not arcane techniques. Lowmark's bounded farm-water practice is separate from their work.
 
 ---
 
 ### B. THE LOWMARK LENSEMASTERS  
 **Nature:** Scholars, water-ritual archivists  
 **Role (Corrected):**  
-They preserve **pre-War water-magic theory**, not active spellcraft.
+They preserve hazardous pre-War water-magic theory while Lowmark households and neighbors openly teach simple farming water practice.
 
 ### **Goal**
 Prevent misuse of pre-War ritual arrays or water-memory artifacts that persist in rare places.
 
 > **Canon Fix:**  
-Lowmark does NOT currently practice water magic.  
-They study theory only.  
-All magical behavior is environmental, not deliberate casting.
+Simple farming practice is openly household- and neighbor-taught. Experienced community stewards oversee shared water works, and formal charter oversight applies only to larger irrigation works. Combat water magic remains exclusive to the Last Field-Mage. This does not create a player spellcasting system. Lensemasters study theory and dangerous historical applications rather than governing every ordinary practice.
 
 ---
 
@@ -360,8 +357,7 @@ All magical behavior is environmental, not deliberate casting.
 **Nature:** Clans shaped by post-War trauma  
 **Original Description:** Anti-magic doctrine  
 **Correction:**  
-Thornfell’s people **do not know air-magic exists**.  
-Their aversion is to *magical misuse*, not air itself.
+Thornfell treats most acoustic and wind behavior as natural. Rare dormant air resonance is real at specific old works and sites, but it is poorly understood. Their aversion is to *magical misuse*, not air itself.
 
 ### **Philosophy (Corrected)**  
 “Stone is truth; the wind speaks only in echoes of the past.”  
@@ -380,7 +376,7 @@ Their aversion is to *magical misuse*, not air itself.
 
 ### **Correction:**  
 They are NOT anti-magic zealots.  
-They interpret resonance and wind anomalies as natural terrain effects.
+They interpret most resonance and wind anomalies as natural terrain effects while treating rare exceptional effects as dangerous and uncertain.
 
 Their duties:
 - Guard high passes  
@@ -398,7 +394,7 @@ Their duties:
 Misttide Traditions are the **remnants of pre-War earth-attuned, emotional practitioners**, not water-mages.
 
 ### **Nature:**  
-Folkloric spiritual lineage retaining fragments of Memorywarden philosophy.
+Folkloric cultural lineage retaining fragments of Memorywarden philosophy.
 
 ### **Traits (Corrected):**
 - Emotional reading  
@@ -439,12 +435,12 @@ Removed references to mystic shadowcraft; all abilities grounded and non-magical
 ## 18. THE STONEBOUND (ANCIENT)
 
 ### **Nature:**  
-Ancient, semi-sentient constructs of the Mythic Age, created long before the First Mages rediscovered the primal elements.
+Ancient, place-bound works of the Mythic Age, created long before elemental practice was rediscovered.
 
 ### **Purpose (Corrected):**
 - Maintain **volcanic stability**, resonance balance, and subterranean flows.  
-- Store **emotional memory** impressions over centuries.  
-- Function as **passive guardians**, not soldiers or spellcasters.
+- Respond passively to imbalance, pressure, intrusion, or disturbance with physical or resonant effects.
+- Remain place-bound; they are not soldiers, spellcasters, or conventional creatures.
 
 ### **Status (Corrected):**  
 - Mostly dormant.  
@@ -453,18 +449,19 @@ Ancient, semi-sentient constructs of the Mythic Age, created long before the Fir
 
 ### **Relevance (Aligned to Canon):**
 - Remnant disturbances are beginning to wake isolated Stonebound nodes.  
-- The “Stonebound guardian” phenomena in Thornfell and Emberholt are the same ancient network manifesting differently.  
-- The Stonebound **do not communicate** directly—modern people interpret their activity symbolically, often incorrectly.
+- Echochamber Summit intersects an ancient Stonebound node. Rare Echohewn resonance can couple with that node, producing the phenomenon historically interpreted as a “Stonebound guardian.”
+- Stonebound do not speak, prophesy, provide visions, answer questions, identify historical events, choose champions, or act as soldiers. Modern people interpret their activity symbolically, often incorrectly.
 
 ---
 
 ## 19. THE ELEMENTAL TRADITIONS (HISTORICAL)
 
 ### **Nature:**  
-Early rediscovery schools founded by the **First Mages**, prior to the Great War.
+Regional traditions that grew from early local rediscoveries and were later bounded and transmitted by distinct teachers remembered as **Founders**.
 
 > **Canon Fix:**  
-- “First Mages” is NOT a formal title — it refers to the early rediscoverers of each element.  
+- “First Mages” is NOT a formal title — it refers retrospectively to early rediscoverers of each element.
+- First rediscoverers and later Founders are distinct people or roles. The Founder roster, names, dates, count, and teaching links remain unresolved.
 - They are NOT related to Dreamers.  
 - Their schools were philosophical + proto-magical, NOT modern spellcasting academies.
 
@@ -474,13 +471,13 @@ Mostly dissolved, fragmented, or absorbed into later cultural traditions.
 ### **Influence (Corrected):**
 
 **Water Tradition → Lowmark**  
-- Influence survives in reflective rites and water-memory metaphors.  
-- No active water magic remains.
+- Influence survives in reflective rites, water-memory language, and simple farming water practice.
+- Households and neighbors teach ordinary farm practice; experienced community stewards oversee shared water works; formal charter oversight applies only to larger irrigation works. Combat practice remains exclusive to the Last Field-Mage.
 
 **Air Tradition → Thornfell**  
-- Founded by the **Dwarven First Air Mage**.  
-- Survives as echo-sensitive architecture and horn code culture.  
-- Thornfell does not recognize this as magic.
+- Early rediscoverers and later teachers are not identified with certainty.
+- Mostly natural echo-sensitive architecture and horn-code culture exist alongside rare dormant resonance at specific old works.
+- Thornfell does not treat every echo or wind effect as magic.
 
 **Earth Tradition → The Mire**  
 - Pre-War grounding and remembrance rites linked to Memorywarden origins.  
@@ -501,9 +498,9 @@ Elemental Traditions are about **early rediscovery of magic**, not powerful anci
 ---
 
 ## 20. EMBERHOLT CITY-STATE  
-### **Nature:** Dual governance  
-- **Public:** Flameward Speaker’s Civic Council (legitimate government)  
-- **Hidden:** Ashfall Authority (Remnant Core)
+### **Nature:** Public government under covert pressure
+- **Public:** the male Flameward Speaker and Civic Council
+- **Hidden influence:** the Ashfall Authority and other Remnant operations
 
 ### **Correction:**  
 Public governance appears stable, prosperous, and magically advanced.  
@@ -519,7 +516,7 @@ Secret governance aims to weaponize the population through mass embercraft educa
 ---
 
 ## 21. THE LOWMARK MARCHES  
-### **Government:** Noble lineages + Lensemasters’ scholastic counsel  
+### **Government:** Overlapping noble, village, crossing, work, and scholastic authorities; exact office boundaries remain unsettled
 ### **Values:**  
 - Reflection  
 - Water-based cultural metaphors  
@@ -527,7 +524,7 @@ Secret governance aims to weaponize the population through mass embercraft educa
 - Preservation of knowledge  
 
 > **Canon Fix:**  
-Lowmark *does not* practice magic; water-magic remnants are environmental.
+Lowmark openly retains simple farming water practice under the layered household, community-steward, and large-charter-work model. Combat water magic remains exclusive to the Last Field-Mage.
 
 ---
 
@@ -539,7 +536,7 @@ Lowmark *does not* practice magic; water-magic remnants are environmental.
 - Honor  
 - Practical, terrain-based wisdom  
 - Respect for stone, skepticism of visible magic  
-- Unrecognized air-magic ancestry embedded in architecture and acoustics  
+- Mostly natural architecture and acoustics with rare dormant resonance at specific old works
 
 > **Key Fix:**  
 They are NOT consciously anti-magic zealots — they simply distrust spectacle and overt magic after the Great War.
@@ -582,10 +579,10 @@ Rituals mimic Memorywarden rites, but are not active spellcraft.
 
 ## B. REMNANT ↔ VOLKHARI (Corrected)
 - The Remnant desire Volkhari fire-attunement for magical research.  
-- They caused the Glassed Hollow disaster accidentally through ritual overreach.  
+- The unnamed wartime precursor caused the Glassed Hollow disaster through ritual overreach.
 - Kaelith (Unburnt Boy) escaped — **not captured**.  
 - Thalan Veyr is the **only captive Volkhari**, used in ritual studies.  
-- The Fire Titan is **a failed Remnant initiate**, not Volkhari.
+- The Fire Titan is **a failed initiate of the wartime precursor**, not Volkhari.
 
 **Volkhari Position:**  
 - Remnant represents the greatest threat to their survival.  
@@ -620,6 +617,10 @@ Rituals mimic Memorywarden rites, but are not active spellcraft.
 - Strong sympathy and shared grief.  
 - Rituals occasionally blend during remembrance events.
 
+### **Lowmark ↔ Emberholt**
+- Ordinary food, trade, contract, and repair needs connect them despite political distrust.
+- Exact cargos, routes, and volumes remain subject to later map and material-culture review.
+
 ### **Thornfell ↔ The Mire**
 - Cautious respect.  
 - Thornfell distrusts environmental anomalies, though they misinterpret them.
@@ -642,14 +643,14 @@ This section ensures the *entire Factions file* matches **Phase 1 Canon**, **reg
 ### ✔ Magic System Corrections
 - Embercraft = fire magic (NOT all magic).  
 - Emberwork = industrial fire-tech (NOT magic).  
-- Lowmark magic is dormant.  
-- Thornfell magic is forgotten air resonance.  
+- Lowmark openly retains bounded farming water practice; combat water magic remains exclusive to the Last Field-Mage.
+- Thornfell acoustics are mostly natural, with rare dormant air resonance at specific old works.
 - Mire magic is earth-memory resonance (dormant).  
-- No factions practice open spellcraft except Emberholt citizens.
+- Emberholt citizens openly practice civic embercraft under regional rules. This does not create a v1 player spellcasting system.
 
 ### ✔ Volkhari Corrections
 - Volkhari are one race, not subdivided.  
-- They were nearly annihilated in the Glassed Hollow.  
+- They were devastated and dispersed by the Glassed Hollow; exact surviving population and community form remain unresolved.
 - Kaelith escaped; Thalan is the captive.  
 - Fire Titan is NOT Volkhari.
 
@@ -666,6 +667,7 @@ This section ensures the *entire Factions file* matches **Phase 1 Canon**, **reg
 - Founders = iconic teachers, not titles.
 
 ### ✔ Remnant Canon Fix
+- An unnamed wartime precursor conducted war-era operations; the formal Remnant followed after the war. Exact transition and personnel continuity remain unresolved.
 - They **do not suppress magic**.  
 - They **scale fire magic publicly** while keeping advanced forms restricted.  
 - They aim for continent-spanning magical dominance.

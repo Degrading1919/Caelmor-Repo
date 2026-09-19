@@ -1,244 +1,184 @@
-# I. THE MYTHIC AGE (PREHISTORY → ~3,000+ YEARS AGO)
+# Caelmor Timeline
 
-### • The Forgotten God Walks the Living World
-- The world is young, quiet, and spiritually awake.  
-- Humans and early peoples experience direct communion with the divine.  
-- Magic does not exist as a system—only *divine interaction* and *living intuition*.
+This timeline records the accepted relative sequence. Ancient dates remain uncertain. The **Great War** lasted roughly 5–10 years and ended about thirty years before the present.
 
-### • The Stonebound Are Forged
-- Stonebound constructs—sentient mechanisms of stone and ember—are shaped by divine command.  
-- Their purpose:  
-  • maintain volcanic harmony  
-  • regulate ember-veins  
-  • preserve ancient memory  
-- They do **not** teach magic; they maintain *balance*.  
-- They build deep structures beneath what will one day become Emberholt.
+## I. The Mythic Age — prehistory
 
-### • The Volkhari Appear (Dragonkin Hybrids)
-- A fire-attuned people arise near the first volcanic ridges.  
-- Not beasts, not dragons—*a distinct people* carrying innate ember resonance.  
-- Fire affinity is biological, emotional, and spiritual—not learned.  
-- Longevity and discipline become their hallmarks.  
-- They guard volcanic sites and ember-veins for centuries.
+### The Forgotten God walks the living world
 
-### • Divine Connection Is Strong
-- Humanity lives in spiritual alignment.  
-- No magic, no rituals, no runes—only instinctive communion.
+- The world is young, quiet, and spiritually awake.
+- Humans and older peoples experience direct communion with the divine.
+- Learned elemental magic does not yet exist as a system.
 
----
+### The Stonebound are made
 
-# II. THE AGE OF QUIET WITHDRAWAL (~3,000 → ~500 YEARS AGO)
+- Stonebound works of stone and ember are shaped beneath what will later become Emberholt.
+- They maintain deep balance, pressure, and volcanic harmony.
+- They do not teach magic, speak, prophesy, answer questions, identify history, choose champions, or act as soldiers.
+- Most eventually become dormant. When disturbed, a Stonebound node may produce a passive, place-bound physical or resonant response.
 
-### • Humanity Grows in Desire and Forgetfulness
-- Populations expand.  
-- Mortal ambition overshadows reverence.  
-- The Forgotten God withdraws gradually—not in wrath, but sorrow.  
-- Divine communication fades into silence.
+### The Volkhari arise
 
-### • A Spiritual Vacuum
-- Humanity senses *absence*, not loss.  
-- Intuition dulls into superstition.  
-- The Volkhari continue their traditions in isolation, maintaining ember discipline.  
-- The Stonebound go dormant in sealed depths.
+- A distinct fire-attuned people live near the volcanic ridges.
+- Their inherited ember affinity is not learned human embercraft.
+- They preserve discipline and hazard knowledge tied to the volcanic land.
 
-### • The Precursor to Magic
-- People begin to notice patterns:
-  • heat and emotion  
-  • breath and pressure  
-  • stone and memory  
-  • water and stillness  
-- These observations remain cultural, not magical.
+## II. The Age of Quiet Withdrawal
 
----
+### Divine contact fades
 
-# III. THE AGE OF REDISCOVERY (~250 YEARS AGO)
-*(~50–100 years before the Great War)*
+- Mortal societies grow while direct communion with the Forgotten God recedes.
+- Old intuition survives unevenly as faith, custom, warning, and superstition.
+- Volkhari communities continue their own traditions.
+- Most Stonebound works remain sealed or dormant.
 
-### • The Dreamers Arise
-Across Caelmor, rare individuals begin receiving:
-- visions  
-- dreams  
-- ancestral echoes  
-- impressions of the world-before-withdrawal  
+### Regional knowledge develops
 
-These are **not divine commands**, but *residual spiritual memory*.
+People across Caelmor notice relationships between:
 
-### • Regional Magical Traditions Emerge
-Each region rediscovers magic independently, shaped by land and culture:
-- **Emberholt:** Fire — embercraft tied to emotion and discipline  
-- **Lowmark:** Water — calm, clarity, memory, and flow (Riverwarden legacy)  
-- **Thornfell:** Air — resonance, echo, pressure, and sound (Echohewn legacy, unrecognized as magic)  
-- **The Mire:** Earth — memory, grief, endurance, and burden (Memorywarden legacy)
+- water, stillness, and attention;
+- air, pressure, echo, and sound;
+- earth, burden, memory, and endurance;
+- fire, emotion, heat, and discipline.
 
-Magic is a **listening discipline**, not a weapon.
+These observations begin as local knowledge rather than a unified magical system. “Spirit” is an old term for the living and emotional imprint people leave upon the world, and for the way memory, grief, intention, and identity interact with elemental resonance. It is not a fifth element or separate discipline.
 
-### • Magic Spreads Quietly (3–4 Generations)
-- Minor rituals  
-- Environmental harmonies  
-- Healing and stabilization practices  
-- No standing armies, no mass destruction
+### Settled regions become interdependent
 
-### • Diverging Philosophies
-Interpretations fracture:
-- Emberholt embraces mastery and progress  
-- Lowmark emphasizes restraint and balance  
-- Thornfell folds strange effects into tradition  
-- The Mire treats magic as remembrance, not power  
+- Lowmark communities organize around food, water, crossings, and shared repair.
+- Thornfell communities organize around access, shelter, pass safety, and collective survival.
+- Mire communities organize around uncertain ground, testimony, route care, and remembrance.
+- Emberholt communities organize around useful heat, dangerous terrain, craft labor, and public safety.
+- Passage, subsistence, labor, refuge, and exchange connect the regions long before the Great War.
 
-The seeds of future conflict are sown.
+Exact ancient dates, routes, and political compacts are not securely known.
 
----
+## III. The Age of Rediscovery — generations before the Great War
 
-# IV. THE AGE OF ARROGANCE (~200 → ~160 YEARS AGO)
+### Four elemental traditions emerge
 
-### • Nations Grow Competitive
-Magic becomes a tool of:
-- prestige  
-- industrial efficiency  
-- political leverage  
+Early local rediscoverers demonstrate repeatable relationships with the elements:
 
-### • Early Weaponization
-- **Emberholt** pioneers embercraft forging and amplification.  
-- **Thornfell** unknowingly weaponizes air-resonance through horns, echoes, and pressure effects.  
-- **The Mire** bends earth-memory to stabilize trenches and bear grief—until strain corrupts it.  
-- **Lowmark refuses large-scale magic**, insisting its duty is to feed, not to devastate.
+- **Lowmark:** water, stillness, flow, and careful intervention;
+- **Thornfell:** air, pressure, echo, and rare resonance;
+- **The Mire:** earth, burden, memory, and endurance;
+- **Emberholt:** fire, emotion, heat, and discipline.
 
-### • Volkhari Warnings
-- Volkhari elders sense ember imbalance.  
-- They warn Emberholt:
-  > “Fire must be disciplined, or it will remember wrongly.”
+The first rediscoverers are distinct from the later iconic teachers remembered as **Founders**. The Founder roster, names, dates, count, and teaching links remain unresolved. Regional stories that combine a rediscoverer and Founder into one heroic figure are simplified traditions, not established history.
 
-They are ignored.
+### Teaching becomes portable
 
-### • First Embercraft Disaster
-- A volcanic chapel near Emberholt collapses due to emotional overload.  
-- Dozens die.  
-- Emberholt conceals the cause.
+- Later teachers turn situational discoveries into bounded cautions, demonstrations, and apprenticeships.
+- Practices remain regional rather than forming one continent-wide school.
+- Magic is most stable when treated as disciplined interaction with element, place, and emotion.
 
-### • Volkhari Begin to Withdraw
-- Early enclaves retreat into secrecy.  
-- The foundations of the **Aerie of Silent Embers** are laid.
+### Regional philosophies diverge
 
----
+- Emberholt increasingly values mastery, civic usefulness, and controlled progress.
+- Lowmark values restraint, shared duty, and observation before force.
+- Thornfell preserves mostly natural acoustic traditions around rare dormant resonance.
+- The Mire treats elemental memory as a burden requiring care and truthful witness.
 
-# V. THE GREAT WAR (~160 → ~150 YEARS AGO)
+Dreamers do **not** exist in this era and do not cause magical rediscovery.
 
-**Duration:** ~5–10 years  
-**Outcome:** Catastrophic magical escalation.
+## IV. The Road to the Great War
 
-### • Spark of War
-- A border dispute, inflamed by magical pride, ignites open conflict.
+### Interdependence becomes political pressure
 
-### • Rapid Escalation
-- Emberholt industrializes fire magic.  
-- Thornfell’s resonance effects collapse passes and shatter formations.  
-- The Mire becomes the central battlefield, absorbing grief into soil and peat.  
-- Lowmark serves as Caelmor’s breadbasket, supply artery, and moral holdout.
+- Dangerous magical experiments raise the question of who may inspect or restrain another region's practice.
+- Emberholt protects useful civic embercraft while concealing increasingly hazardous work.
+- Thornfell closes or controls passes when safety demands it, sometimes harming civilians who rely on them.
+- Lowmark's food and crossings become political even when its communities seek neutrality.
+- Mire warnings and testimony struggle to influence distant commanders.
 
-### • The Glassed Hollow Catastrophe
-- A Remnant-backed ritual attempts to push embercraft beyond human limits.  
-- Emotional overload triggers a massive ember surge.  
-- A **Remnant initiate**, not a Volkhari, is transformed into the **Fire Titan**.  
-- Volkhari captives and ritual chambers are annihilated.  
-- One Volkhari child escapes — **Kaelith Veyr’un, the Unburnt Boy**.  
-- One Volkhari survivor is captured in the aftermath — **Thalan Veyr**.  
-- The event is erased from public record and renamed a “forge collapse.”
+### Weaponization and distrust grow
 
-### • The Volkhari Purge
-- Emberholt hunts remaining Volkhari to:
-  • remove witnesses  
-  • study fire affinity  
-  • consolidate embercraft dominance  
+- Fire practice is amplified for industrial and military use.
+- Rare Thornfell resonance is forced toward destructive ends even though most local acoustics remain natural.
+- Earth-memory is pressed into battlefield service in the Mire.
+- Lowmark refuses destructive large-scale water warcraft while continuing to feed and move people.
+- A wartime precursor to the later Remnant exploits these failures without causing every grievance or decision.
 
-The world believes the Volkhari extinct.
+The precursor's name, exact transition into the formal Remnant, and personnel continuity remain unresolved.
 
-### • The War Ends in Horror
-- Embercraft detonations tear through Emberholt’s lower districts.  
-- Magical fallout poisons land and memory.  
-- No side claims victory.  
-- The war simply stops.
+## V. The Great War — 5–10 years, ending about thirty years ago
 
----
+### Open conflict and escalation
 
-# VI. THE AFTERMATH ERA (~150 YEARS AGO)
+- Failed duties, dangerous experimentation, border pressures, scarcity, pride, and mistrust drive the regions into war.
+- Lowmark becomes a contested food and transport artery.
+- Thornfell's passes become defensive positions, shelters, and barriers.
+- The Mire bears concentrated campaigns and civilian displacement.
+- Emberholt's weaponized fire practice escalates beyond civic control.
 
-### • A Broken World
-- Cities burned  
-- Fields scarred  
-- Passes collapsed  
-- Magic feared
+### Civilian systems become targets
 
-### • Regional Retrenchment
-- **Thornfell** rejects magic, calling it wind and stone.  
-- **Lowmark** restricts magic to rare, quiet rites.  
-- **The Mire** buries magic in superstition and grief.  
-- **Emberholt** becomes the only openly magical city—under discipline.
+- Grain, bridges, ferries, shelters, clinics, records, and evacuation routes shape survival.
+- Refuge, separation, care, coerced requisition, and repair create relationships that persist into the present.
+- No supernatural phenomenon provides a complete or reliable record of an event.
 
-### • Rise of the Ashfall Authority
-- Emberholt’s elite ritualists consolidate power.  
-- Archives are sealed.  
-- Deep chambers reopened.  
-- Public truth is rewritten.
+### The Glassed Hollow catastrophe
 
----
+- The wartime precursor exploits Volkhari knowledge and captives in an attempt to amplify embercraft beyond safe limits.
+- A precursor initiate, not a Volkhari, becomes the **Fire Titan**.
+- Kaelith Veyr'un escapes and remains free.
+- Thalan Veyr is the sole known current captive.
+- Other Volkhari survivors exist, but their number and community form remain unresolved.
+- Public accounts reduce or conceal the catastrophe as a forge collapse.
 
-# VII. THE SILENCE YEARS (~150 → ~80 YEARS AGO)
+### The war ends without victory
 
-### • Recovery and Fear
-- Regions rebuild slowly.  
-- Emberholt reframes history as foreign recklessness.
+- Magical escalation, broken supply, civilian loss, and failed command make continuation unbearable.
+- No region achieves a clean victory.
+- The fighting stops, leaving damaged land, institutions, families, and public records.
 
-### • The Remnant Coalesces (~100 Years Ago)
-- Former ritualists, zealots, and scholars unite.  
-- Their doctrine evolves:
-  > Magic must belong to everyone—  
-  > **but true mastery must remain controlled.**
+## VI. Immediate Postwar Recovery
 
-### • Dream Manipulation Begins
-- Hearthveil Initiates refine dream seeding.  
-- Civic leaders are subtly guided.
+### Dangerous wartime practice is rejected
 
-### • The Aerie of Silent Embers Seals Itself
-- Surviving Volkhari vanish into the high ridges.  
-- Their existence becomes myth.
+Surviving authorities broadly agree that weaponization, amplification, uncontrolled ritual experimentation, and dangerous research must stop. Later accounts sometimes compress this into “magic was outlawed,” but no durable central authority can enforce a universal ban.
 
----
+Regional responses diverge:
 
-# VIII. THE AGE OF CONSOLIDATION (~80 YEARS AGO → Present)
+- **Lowmark** permits openly household- and neighbor-taught farming water practice. Experienced community stewards oversee shared water works, while formal charter oversight applies only to larger irrigation works. Combat water magic survives only with the Last Field-Mage. This does not create a player spell system.
+- **Thornfell** treats most echo and wind behavior as natural while rare dormant resonance remains real and approached cautiously.
+- **The Mire** loses active Memorywarden practice while local memory manifestations and earth-resonance remain.
+- **Emberholt** keeps public civic embercraft under regional discipline while restricting wartime methods and dangerous research.
 
-### • The Remnant Fully Forms
-- Unified, patient, long-term focused.
+### Dreamers appear
 
-### • Emberholt’s Modern Order
-- Flameward Speaker lineage established.  
-- Embercraft taught publicly as civic discipline.  
-- Advanced mastery restricted.
+- The first Dreamers emerge only after the Great War.
+- A Dreamer may experience a fragment tied to a person, place, or unresolved event, but the fragment can be misread.
+- Ordinary grief dreams require no supernatural cause.
+- Hearthveil methods can seed or shape visions.
+- No dream is accepted as historical proof without independent human, material, or documentary evidence.
 
-### • Deep Experiments Continue
-- Ember-vein excavation  
-- Emotional amplification trials  
-- The captive Volkhari endures in Ashfall chambers.
+### The formal Remnant develops
 
-### • Signs of Instability
-- Ember-veins resonate again.  
-- Wraiths stir in Lowmark and the Mire.  
-- Resonance scars awaken in Thornfell.  
-- Stonebound mechanisms hum beneath Emberholt.
+- The wartime precursor is followed by the later formal Remnant.
+- Its exact name before formation, transition date, and personnel continuity remain unresolved.
+- It preserves and pursues dangerous lines of research behind public recovery.
 
----
+## VII. Thirty Years of Recovery
 
-# IX. THE PRESENT ERA (YEAR 0)
+- Lowmark restores fields, crossings, mills, ferries, and water works while arguing over obligation and access.
+- Thornfell restores passes, bridges, shelters, and clan relationships while keeping rare resonance bounded.
+- Mire communities maintain routes, testimony, burial and memorial duties, and care on land that still bears concentrated trauma.
+- Emberholt separates useful public heat from wartime practice while workers, families, civic offices, guilds, and hidden actors contest responsibility.
+- Migration, hosting, return, adoption, fosterage, trade, care, and repair bind the regions beyond the war itself.
+- The formal Remnant becomes a patient hidden pressure, but it does not explain every institutional failure, missing record, dream, or grievance.
 
-### **Key Conditions**
-- Ember-veins awakening  
-- The Fire Titan stirring  
-- Thalan Veyr imprisoned  
-- Kaelith Veyr’un alive and hunted  
-- The Volkhari enclave watching from hiding  
-- The Remnant advancing toward its “Perfect Flame”  
-- Regional tensions rising  
-- Dreams converging into prophecy  
+## VIII. The Present Era — Year 0
 
-### • The Player Arrives
-At the precise moment when:
-> **The world is one spark away from ignition.**
+### Key conditions
+
+- The Great War remains within living memory.
+- Its effects persist through people, injuries, households, institutions, ruins, landscapes, customs, and disputed records.
+- Kaelith remains free; Thalan remains the sole known current captive.
+- Exact Volkhari population and community form remain unknown.
+- The Fire Titan remains a consequence of the precursor initiate's transformation.
+- Dreamers, induced visions, ordinary dreams, and public belief remain difficult to distinguish without evidence.
+- Stonebound nodes may respond passively to disturbance but cannot reveal history.
+- Lowmark is the sole full v1 region, and v1 has no player spellcasting system.
+
+The player enters a world whose oldest meanings are often understood only after later evidence changes the reading of an earlier place, record, or act.
