@@ -236,19 +236,27 @@ The reference is a plausible mixed path, not an unlock schedule:
 | 80 | 775,187 | 24.47 h | 87.94 h | 85–92 h | Within |
 | 99 | 2,675,186 | 59.45 h | 147.39 h | 135–150 h | Within |
 
-### Knowledge-efficient sensitivity
+### Sustainable knowledge-efficient path
 
-The same method allocation using the knowledgeable loop assumptions produces:
+Knowledgeable execution does not make every high-rate opportunity continuously available. HM6 requires an actual hazard-complicated recovery, HM7 requires a bounded authored inquiry, and HM8 requires all three constituent opportunities to be simultaneously valid along a credible route. A sustainable expert therefore uses those methods when their real conditions exist and returns to durable HM4/HM5 supply routes between them.
 
-| Milestone | Cumulative time |
-|---:|---:|
-| 30 | 10.61 h |
-| 50 | 28.18 h |
-| 70 | 57.74 h |
-| 80 | 79.76 h |
-| 99 | 135.50 h |
+The modeled XP shares are analytical portfolio shares, not exact unlocks or scheduled throttles:
 
-The efficient cap time remains inside the approved overall 135–150 hour envelope, but the efficient path reaches 70 and 80 earlier than the nominal milestone envelopes. This is a playtest risk, not a hidden correction opportunity. Exact unlock placement, real route geometry, failed approaches, closures, banking, tools, and interaction cadence must determine whether this theoretical fully efficient sequence is actually sustainable.
+- Novice: the same 30% HM1 / 70% HM2 mix at knowledgeable cadence;
+- Competent: HM3 at knowledgeable cadence;
+- Advanced: 82% HM4 and 18% HM5;
+- Masterful approach to 80: 25% HM6, 65% HM5, and 10% HM7;
+- post-80: 80% HM8, 10% HM6, 5% HM5, and 5% HM7.
+
+| Milestone | Segment effective XP/h | Segment time | Cumulative time | Closed envelope | Result |
+|---:|---:|---:|---:|---:|---|
+| 30 | 20,881 | 10.61 h | 10.61 h | 10–12 h | Within |
+| 50 | 24,545 | 17.57 h | 28.18 h | 28–34 h | Within |
+| 70 | 29,476 | 30.42 h | 58.61 h | 58–68 h | Within |
+| 80 | 28,570 | 27.13 h | 85.74 h | 85–92 h | Within |
+| 99 | 43,629 | 61.32 h | 147.06 h | 135–150 h | Within |
+
+This mix preserves knowledge benefits inside every closed envelope. It uses no waiting, random closure, fake travel, downtime, or XP scaling. The slower segment averages follow from the methods' actual purpose and availability: focused grazer supply remains repeatable, while hazards, inquiries, and complete mixed circuits are conditional opportunities.
 
 ## 7. Player-strategy tests
 
@@ -273,7 +281,7 @@ No method wins XP, profit, self-supply, convenience, low attention, safety, and 
 
 ## 9. Risks and playtest assumptions
 
-1. **Efficient midgame pacing:** theoretical knowledgeable execution reaches 70/80 early. Real access, invalid sign, route geometry, and banking may close part of the gap; if not, cadence or unlock placement needs revision.
+1. **Sustainable method shares:** playtesting must verify that ordinary HM4/HM5 availability and conditional HM6/HM7/HM8 access resemble the modeled portfolio without becoming authored throttles.
 2. **HM8 geography:** the circuit works only if map verification supports a credible three-opportunity route. It must be replaced or split if it depends on invented adjacency.
 3. **Hide oversupply:** final fauna eligibility and item yields must keep HM2/HM5 useful without flooding Leatherworking and market sinks.
 4. **HM6 combat boundary:** prototypes must confirm that Hunting ownership remains clear when normal combat resolves danger.
@@ -283,6 +291,6 @@ No method wins XP, profit, self-supply, convenience, low attention, safety, and 
 
 ## 10. Hunting calibration result
 
-Eight methods cover the five progression identities. Fixed authored actions in the provisional **100–850 XP/action** range produce a baseline range of **16,800–45,000 XP/hour** and a knowledgeable range of **18,667–48,000 XP/hour**. The reference path reaches the authoritative milestones in approximately **11.79 / 31.09 / 63.48 / 87.94 / 147.39 hours**.
+Eight methods cover the five progression identities. Fixed authored actions in the provisional **100–850 XP/action** range produce a baseline method range of **16,800–45,000 XP/hour** and a knowledgeable method range of **18,667–48,000 XP/hour**. The reference path reaches the authoritative milestones in approximately **11.79 / 31.09 / 63.48 / 87.94 / 147.39 hours**; the sustainable knowledgeable path reaches them in **10.61 / 28.18 / 58.61 / 85.74 / 147.06 hours**.
 
 The portfolio supports XP, output, self-supply, low-attention, knowledge-efficient, and post-mastery play without adding fauna, materials, hidden level multipliers, or a universal dominant method.

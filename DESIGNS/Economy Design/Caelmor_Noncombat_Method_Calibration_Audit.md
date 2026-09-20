@@ -61,25 +61,36 @@ The milestone targets are acceptance tests on the resulting portfolios. They are
 
 ### Hunting
 
-| Milestone | Calibration reference | Knowledge-efficient sensitivity | Approved nominal/envelope |
+| Milestone | Calibration reference | Sustainable knowledgeable path | Closed nominal/envelope |
 |---:|---:|---:|---:|
 | 30 | 11.79 h | 10.61 h | ~11 h / 10–12 h |
 | 50 | 31.09 h | 28.18 h | ~31 h / 28–34 h |
-| 70 | 63.48 h | 57.74 h | ~63 h / 58–68 h |
-| 80 | 87.94 h | 79.76 h | ~90 h / 85–92 h |
-| 99 | 147.39 h | 135.50 h | ~145 h / 135–150 h |
+| 70 | 63.48 h | 58.61 h | ~63 h / 58–68 h |
+| 80 | 87.94 h | 85.74 h | ~90 h / 85–92 h |
+| 99 | 147.39 h | 147.06 h | ~145 h / 135–150 h |
 
 ### Woodcutting
 
-| Milestone | Calibration reference | Knowledge-efficient sensitivity | Approved nominal/envelope |
+| Milestone | Calibration reference | Sustainable knowledgeable path | Closed nominal/envelope |
 |---:|---:|---:|---:|
 | 30 | 11.29 h | 10.18 h | ~11 h / 10–12 h |
 | 50 | 31.92 h | 28.81 h | ~31 h / 28–34 h |
-| 70 | 64.21 h | 57.87 h | ~63 h / 58–68 h |
-| 80 | 88.32 h | 79.84 h | ~90 h / 85–92 h |
-| 99 | 147.77 h | 135.57 h | ~145 h / 135–150 h |
+| 70 | 64.21 h | 58.62 h | ~63 h / 58–68 h |
+| 80 | 88.32 h | 85.58 h | ~90 h / 85–92 h |
+| 99 | 147.77 h | 146.45 h | ~145 h / 135–150 h |
 
-Both calibration reference paths land inside every approved envelope. Fully knowledgeable uninterrupted sensitivity lands at the lower edge of the cap envelope but reaches 70 and 80 earlier than the nominal intermediate envelopes. This is the primary balance question for playtesting and Creative Director interpretation.
+Both calibration reference paths and both sustainable knowledgeable paths land inside every closed envelope. The knowledgeable paths model believable method availability rather than assuming that conditional hazards, commissions, repair demands, damage states, or complete mixed routes can be repeated continuously for an entire progression segment.
+
+| Skill / segment | Sustainable knowledgeable method mix | Effective segment XP/h | Why the mix is structurally credible |
+|---|---|---:|---|
+| Hunting 51–70 | 82% HM4; 18% HM5 | 29,476 | Movement windows support XP focus, while the durable grazer route remains part of real output-led practice |
+| Hunting 71–80 | 25% HM6; 65% HM5; 10% HM7 | 28,570 | Hazard recoveries and inquiries are conditional; grazer supply is the durable high-skill routine |
+| Hunting 81–99 | 80% HM8; 10% HM6; 5% HM5; 5% HM7 | 43,629 | Mixed circuits lead when valid but do not erase focused supply, danger, or inquiry work |
+| Woodcutting 51–70 | 82% WM4; 18% WM5 | 30,083 | Renewal circuits are durable; damage recovery remains authored and conditional |
+| Woodcutting 71–80 | 20% WM7; 30% WM4; 30% WM6; 20% WM3 | 28,755 | Constraint and reserve work require real conditions; renewal and bank work remain dependable |
+| Woodcutting 81–99 | 80% WM8; 10% WM7; 5% WM4; 5% WM6 | 43,952 | Mixed circuits lead without becoming the only valid source or purpose |
+
+These shares are calibration assumptions, not exact unlocks, quotas, random closures, or scheduled downtime. Playtesting must confirm sustainable opportunity availability.
 
 ## 5. Required strategy coverage
 
@@ -183,11 +194,7 @@ The portfolios change decision structure at each identity without requiring an u
 
 ## 10. Creative Director decisions required before calibration lock
 
-### CD-M01 — Intermediate envelope interpretation
-
-**Recommendation:** treat the published milestone envelopes as calibration targets for a normal well-played reference path. Permit an uninterrupted fully knowledgeable sensitivity path to beat intermediate milestones when its gains come from real method, route, and execution differences, provided level 99 remains within the 135–150 hour envelope and practical completeness is not withheld.
-
-**Consequence:** preserves meaningful knowledge efficiency. Requiring even the theoretical expert path to stay inside every intermediate envelope would require narrower efficiency gains, later access, or lower action XP.
+The closed milestone envelopes govern both reference and sustainable knowledgeable progression. No interpretation decision remains.
 
 ### CD-M02 — Post-80 mixed-route model
 
@@ -204,8 +211,8 @@ No other Creative Director decision is required before the next refinement pass.
 | Hunting method coverage | **STRONG** | Eight methods cover all identities and six player strategies |
 | Woodcutting method coverage | **STRONG** | Eight methods cover all identities and six player strategies |
 | Fixed action XP rule | **STRONG** | Every modeled rate derives from fixed authored actions and loop assumptions |
-| Reference milestone pacing | **STRONG** | Both skills land inside every approved envelope |
-| Efficient milestone pacing | **PARTIAL FOR DIRECTOR CHOICE** | Cap remains in range; theoretical intermediate milestones are earlier than nominal envelopes |
+| Reference milestone pacing | **STRONG** | Both skills land inside every closed milestone envelope |
+| Sustainable knowledgeable pacing | **STRONG** | Both skills remain inside every closed milestone envelope through credible method mixes |
 | Non-reskinned progression | **STRONG** | Methods change behavior, evidence, stewardship, routes, recovery, and destinations |
 | Economic alternatives | **STRONG** | HM5, WM3, and WM6 are useful without leading XP |
 | Early-method relevance | **STRONG** | HM1/HM3 and WM1/WM2 retain convenience, outputs, or circuit roles |
@@ -215,10 +222,10 @@ No other Creative Director decision is required before the next refinement pass.
 | Solo-development scope | **STRONG** | Sixteen representative methods reuse existing opportunities and interfaces |
 | New catalog dependency | **NONE** | No new resource, skill, fauna function, or woodland relationship is required |
 
-No category is **MISSING** or **CONTRADICTORY**. The two Creative Director choices and named playtest risks are bounded and do not require redesigning the economy architecture.
+No category is **MISSING** or **CONTRADICTORY**. CD-M02 and the named playtest risks are bounded and do not require redesigning the economy architecture.
 
 ## 12. Final readiness
 
-Both skills have coherent long-form portfolios. The reference paths reproduce the authoritative milestone envelopes, fixed action XP remains independent of player level, several legitimate strategies survive, and the next pass can place exact unlocks and refine real baseline-versus-efficient cadence through prototypes and map verification.
+Both skills have coherent long-form portfolios. Reference and sustainable knowledgeable paths satisfy every closed milestone envelope, fixed action XP remains independent of player level, several legitimate strategies survive, and the next pass can place exact unlocks and refine real baseline-versus-efficient cadence through prototypes and map verification.
 
 HUNTING & WOODCUTTING METHOD CALIBRATION: READY FOR CREATIVE DIRECTOR AUDIT

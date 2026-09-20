@@ -230,19 +230,27 @@ The reference path uses:
 | 80 | 775,187 | 24.12 h | 88.32 h | 85–92 h | Within |
 | 99 | 2,675,186 | 59.45 h | 147.77 h | 135–150 h | Within |
 
-### Knowledge-efficient sensitivity
+### Sustainable knowledge-efficient path
 
-The same allocation using knowledgeable loop assumptions produces:
+Knowledgeable execution improves every selected loop, but it does not turn purpose-bound or compound work into an indefinitely available source. WM5 needs actual bounded damage, WM6 needs a real repair demand, WM7 needs a valid combination of constraints, and WM8 needs three compatible works along a verified route. Sustainable expert progression therefore mixes those opportunities with durable WM3/WM4 work.
 
-| Milestone | Cumulative time |
-|---:|---:|
-| 30 | 10.18 h |
-| 50 | 28.81 h |
-| 70 | 57.87 h |
-| 80 | 79.84 h |
-| 99 | 135.57 h |
+The modeled XP shares are analytical portfolio shares, not exact unlocks or rotating schedules:
 
-The cap remains inside the approved overall range. As with Hunting, theoretical continuous efficient execution reaches 70/80 earlier than the nominal milestone envelopes. Real map routes, source access, closure, banking, bark destination, tool behavior, and invalid selections require playtesting before adjusting action XP.
+- Novice: the same 40% WM1 / 60% WM2 mix at knowledgeable cadence;
+- Competent: WM2 at knowledgeable cadence;
+- Advanced: 82% WM4 and 18% WM5;
+- Masterful approach to 80: 20% WM7, 30% WM4, 30% WM6, and 20% WM3;
+- post-80: 80% WM8, 10% WM7, 5% WM4, and 5% WM6.
+
+| Milestone | Segment effective XP/h | Segment time | Cumulative time | Closed envelope | Result |
+|---:|---:|---:|---:|---:|---|
+| 30 | 21,774 | 10.18 h | 10.18 h | 10–12 h | Within |
+| 50 | 23,143 | 18.63 h | 28.81 h | 28–34 h | Within |
+| 70 | 30,083 | 29.81 h | 58.62 h | 58–68 h | Within |
+| 80 | 28,755 | 26.96 h | 85.58 h | 85–92 h | Within |
+| 99 | 43,952 | 60.87 h | 146.45 h | 135–150 h | Within |
+
+This mix keeps sustainable expert progression inside every closed envelope without lowering the XP of skilled execution. It reflects the actual opportunity structure: renewal and bank work remain durable, while damage recovery, repair reserves, multi-constraint extraction, and complete mixed circuits require their authored conditions.
 
 ## 7. Player-strategy tests
 
@@ -269,7 +277,7 @@ No method simultaneously leads XP, bark supply, public purpose, convenience, saf
 ## 9. Risks and playtest assumptions
 
 1. **WM8 route density:** 208–195 seconds for three completed works is only plausible if the map supports a compact but credible mixed route. **MAP VERIFICATION REQUIRED.**
-2. **Efficient midgame pacing:** theoretical expert execution reaches 70/80 early. Exact access and sustained availability must be measured before changing XP.
+2. **Sustainable method shares:** prototypes must verify that durable WM3/WM4 work and conditional WM5–WM8 opportunities produce the modeled mix without arbitrary throttling.
 3. **Ordinary-wood oversupply:** the tangible state needs sufficient repair, fuel, trade, and later approved use without an unlimited premium buyer.
 4. **Bark pressure:** qualifying bark events must support Leatherworking without turning renewal work into a disguised bark farm.
 5. **Authored disruptions:** closures can vary routes occasionally but cannot be used as a hidden throttle or rotating chore system.
@@ -278,6 +286,6 @@ No method simultaneously leads XP, bark supply, public purpose, convenience, saf
 
 ## 10. Woodcutting calibration result
 
-Eight methods cover the five progression identities. Fixed authored actions produce a baseline range of **18,000–45,000 XP/hour** and a knowledgeable range of **20,000–48,000 XP/hour**. The reference path reaches the authoritative milestones in approximately **11.29 / 31.92 / 64.21 / 88.32 / 147.77 hours**.
+Eight methods cover the five progression identities. Fixed authored actions produce a baseline method range of **18,000–45,000 XP/hour** and a knowledgeable method range of **20,000–48,000 XP/hour**. The reference path reaches the authoritative milestones in approximately **11.29 / 31.92 / 64.21 / 88.32 / 147.77 hours**; the sustainable knowledgeable path reaches them in **10.18 / 28.81 / 58.62 / 85.58 / 146.45 hours**.
 
 The portfolio provides XP, output, self-supply, low-attention, knowledge-efficient, civic, and post-mastery choices without species tiers, wood grades, new materials, or hidden level scaling.
