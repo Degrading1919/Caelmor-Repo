@@ -81,7 +81,7 @@ The minimum recommended portfolio is **four functional fauna candidates**. These
 
 ### F3 — Reed-margin flocking game
 
-**Classification:** PROVISIONAL ordinary fauna candidate. It may later be reconciled with canon-supported Lowmark waterfowl.
+**Classification:** PROVISIONAL ordinary fauna candidate. It may later be reconciled with an approved Lowmark waterfowl concept if ecology and Creative Director review support one.
 
 | Requirement | Provisional definition |
 |---|---|
