@@ -56,10 +56,10 @@ All eight methods per skill have coherent access timing. HM8 and WM8 remain appr
 
 | Skill | Longest intentional quiet span | Why it is quiet | Why it remains active |
 |---|---|---|---|
-| Hunting | Levels 86–91, six levels | No new method is needed after HM8 and the 86 specialization beat | The player refines food/hide focus, route order, evidence handling, and custody |
-| Woodcutting | Levels 86–91, six levels | No new source family is needed after WM8 and the 86 specialization beat | The player refines repair, bark, bank, renewal, and mixed-route choices |
+| Hunting | Levels 81–98, eighteen levels | No new authored access or capability is justified between HM8 and completion | The player refines food/hide focus, route order, evidence handling, custody, trust, and personal specialization |
+| Woodcutting | Levels 81–98, eighteen levels | No new authored access or capability is justified between WM8 and completion | The player refines repair, bark, bank, renewal, mixed-route choices, custody, and personal stewardship |
 
-The longest spans do not represent abandoned progression. They are deliberate practice windows before the late recombination beats at 92 and 97. The major unlocks are separated across the bands rather than clustered at one level.
+The longest spans do not represent abandoned progression. They are deliberate practice ranges in which specialization, recombination, route familiarity, and identity develop through existing methods. Level 92 does not survive as an exact milestone because neither map establishes a newly authored capability or access relationship there; combined situations remain valid post-80 mastery content whenever their approved conditions exist.
 
 ## Filler and fake-unlock audit
 
@@ -69,7 +69,7 @@ The longest spans do not represent abandoned progression. They are deliberate pr
 | Every method is an isolated level unlock | No; several methods require prior familiarity, route, trust, or a valid condition | **PASS** |
 | Progression uses species/tree tiers | No | **PASS** |
 | Supporting beats add real work | Yes: recovery, hide eligibility, destination planning, bark recognition, bank stability, routing, and custody | **PASS** |
-| Post-80 is empty | No; specialization, recombination, personal routes, and completion identity remain | **PASS** |
+| Post-80 is empty | No; specialization, recombination, and personal routes remain ongoing goals without artificial level anchors, followed by completion identity at 99 | **PASS** |
 | Civic commissions are mandatory | No; HM7 and WM6 are optional access/value paths | **PASS** |
 | Tools form an invented tier ladder | No tool tier is finalized or required by this map | **PASS** |
 | Level 99 adds power creep | No; completion is commemorative and identity-focused | **PASS** |
@@ -115,7 +115,7 @@ This keeps level requirements readable while preventing the level number from re
 |---|---|---|
 | HM8/WM8 become the only rational methods | Focused hide, bark, repair, food, civic, and low-attention alternatives remain explicitly useful | Test market values, output quantities, route density, and attention burden |
 | Trust gates feel arbitrary | Each trust gate has a disclosed household, bank, reserve, or repair purpose | Prototype the evidence and access explanation |
-| Quiet 86–91 ranges feel empty | Specialization and personal route refinement provide goals without fake unlocks | Verify feedback, route readability, and visible mastery progress |
+| Authored quiet span from 81–98 feels empty | Specialization, recombination, and personal route refinement provide goals without fake unlocks | Verify feedback, route readability, and visible mastery progress |
 | Method access arrives before the player understands prerequisites | Each major method follows a supporting beat or prior method familiarity | Playtest tutorialization and access messaging |
 | Tool capability becomes a hidden tier ladder | No tool stats, materials, or item IDs are finalized | Only add a capability when a concrete friction is demonstrated |
 | Civic work overtakes ordinary gathering | HM7/WM6 are optional and conditional; ordinary market/household routes remain | Verify availability and demand cadence |
