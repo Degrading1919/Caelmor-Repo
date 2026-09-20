@@ -192,17 +192,17 @@ The portfolios change decision structure at each identity without requiring an u
 9. HM7/WM6 civic content stays optional and occasional rather than becoming mandatory rotating work.
 10. Fixed action values feel proportionate in play; the 80–850 XP range must be tested against perceived effort, not only time targets.
 
-## 10. Creative Director decisions required before calibration lock
+## 10. Creative Director decision status
 
-The closed milestone envelopes govern both reference and sustainable knowledgeable progression. No interpretation decision remains.
+The closed milestone envelopes govern both reference and sustainable knowledgeable progression. CD-M02 is approved; no Creative Director decision remains open for this calibration package.
 
 ### CD-M02 — Post-80 mixed-route model
 
-**Recommendation:** approve HM8 and WM8 as representative post-80 method structures with no circuit bonus XP, subject to map verification and playtesting. Their advantage comes from constituent-action density and shared returns.
+**Ruling: APPROVED**
 
-**Consequence:** supplies the roughly 45–48k XP/h late methods that keep the whole modeled journey inside the 135–150 hour envelope without new species, trees, materials, or hidden scaling. If rejected, another genuinely denser post-80 activity must be designed or the 145-hour target will be missed.
+HM8 and WM8 are valid representative post-80 method structures with no circuit bonus XP. Their advantage comes from constituent-action density, shared returns, route knowledge, and player familiarity. Map verification and playtesting remain production checks, not approval blockers.
 
-No other Creative Director decision is required before the next refinement pass. Exact unlocks, timings, tools, output quantities, prices, source counts, and market values remain playtest and balance work.
+Exact unlocks, timings, tools, output quantities, prices, source counts, and market values remain playtest and balance work.
 
 ## 11. Second-pass classification
 
