@@ -77,6 +77,26 @@ The overnight pass used provisional recommendations so the architecture could be
 
 **Consequence:** the recommendation shows the economy in the landscape without imposing excessive travel or asset burden. Exact assignments remain subject to map verification.
 
+## Second-stage new decisions
+
+The concrete content proof added only the following consequential decisions. Public-repair cadence, buyer acceptance, textile commission, tannery boundaries, altered states, Hunting encounter ownership, and recovery presentation remain covered by D02–D09 and are not repeated under new IDs.
+
+## D10 — Compact content portfolio
+
+**Provisional recommendation:** approve four Hunting fauna functions and four managed-woodland source relationships as the v1 content foundation. The eleven Hunting and ten Woodcutting compositions are coverage proofs that production may combine; they are not launch quotas or demands for separate sites.
+
+**Alternative:** add more fauna or woodland families before ecology and map verification.
+
+**Consequence:** approval gives node production enough behavioral and ecological variety while keeping shared systems and assets credible for a solo developer. Additional candidates must replace or materially outperform one of the eight selected functions.
+
+## D11 — Ordinary-wood custody
+
+**Provisional recommendation:** keep ordinary wood destination-bound in this pass. Each valid Woodcutting opportunity discloses an accepting household/general, public-repair, or fuel-worker destination before commitment, and successful work routes the flow there without creating an inventory item.
+
+**Alternative:** approve a minimal non-equipment ordinary-wood inventory representation in a later broader economy pass if trade, storage, or reuse cannot be expressed through destination-bound custody.
+
+**Consequence:** the recommendation lets node design proceed now without inventing species, grades, logs, or stockpiles. It also requires authored opportunities to preserve one declared destination through successful resolution.
+
 ## Safe to defer
 
 - final species, wood species, edible item, and ordinary wood catalogs;
