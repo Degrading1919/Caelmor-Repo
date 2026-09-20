@@ -25,7 +25,7 @@ It uses the approved Woodcutting archetypes:
 
 The following remain binding:
 
-- Ordinary wood is still a relationship placeholder, not a new inventory catalog.
+- Ordinary wood is one broad provisional tangible inventory state outside the nine equipment-chain states. It is not a species catalog or progression tier.
 - Tannin-rich bark is guaranteed when a valid source/action is eligible. It is never a random bonus, separate action, bark-only route, or bark-only node.
 - Fuel workers make charcoal. Woodcutting may provide acceptable wood flow but does not gain a charcoal recipe or skill.
 - No source exists only for XP, bark, fuel, or progression-band labeling.
@@ -46,9 +46,9 @@ The portfolio separates three layers that later content production must not coll
 
 Progression is created by changing the relationship among all three layers. A mature source does not become high-level merely because it is large, and a differently named tree does not constitute a new method.
 
-### Destination-bound custody rule
+### Tangible ordinary-wood rule
 
-This portfolio uses ordinary wood as a destination-bound flow, not a new inventory state. Each authored opportunity discloses at least one accepting household/general, public-repair, or fuel-worker destination before commitment. When more than one is valid, the player makes at most one meaningful main-destination choice; acceptance persists through successful resolution. Eligible bark follows its fixed tannery relationship separately. No opportunity creates logs, grades, stockpile tokens, or a hidden wood claim.
+Valid Woodcutting produces tangible ordinary wood that the player may keep, bank, trade through a dependable baseline outlet, supply to household or civic repair demand, or offer to fuel workers when suitable. Purpose-bound work still preserves its disclosed special destination through successful completion, but ordinary wood is not locked to that destination. Eligible bark follows its tanning relationship separately. No opportunity creates species-specific logs, grades, repair-stock items, fuelwood items, offcut inventories, or multiple wood tiers.
 
 ## Selected compact source portfolio
 
@@ -134,9 +134,9 @@ These four relationships do not imply four wood items, four tool requirements, o
 | Ecological role | Mature retained growth provides canopy, habitat, and long-term woodland continuity while held against future need. No exceptional biology or magical property is assumed. |
 | Plausible setting | A protected part of managed working woodland with credible extraction and custody links to public repair. **MAP VERIFICATION REQUIRED.** |
 | W-pattern support | W5 as the defining pattern; W6 when difficult access, neighboring growth, damage, fire risk, or competing claims constrain extraction. |
-| Ordinary wood-use relationships | Broad structural and public repair relationships. The document does not establish grades, beams, hull pieces, or separate inventory stock. |
+| Ordinary wood-use relationships | Broad structural and public repair relationships. The document does not split ordinary wood into grades, beams, hull pieces, or separate inventory states. |
 | Bark eligibility | Eligible on a valid harvested source where bark is suitable. It remains a secondary co-output and never justifies opening the reserve. |
-| Charcoal suitability | Reserved wood is not fuel feed. Only rejected offcuts or unusable portions may be accepted after public custody decisions. |
+| Charcoal suitability | Reserved wood is not fuel feed. Only ordinary wood released from repair custody and physically suitable for fuel work may be accepted. |
 | Stewardship and access | Purpose-limited opening, visible reservation, source matching, future-stock protection, and direct custody to the repair need. No permit item or contract-management system is created. |
 | Public and household repair | Strong public relationship. Household demand normally uses other supply unless an ordinary custodian releases surplus or rejects. |
 | Progression contribution | Teaches matching source to need, minimizing collateral removal, preserving future capacity, and maintaining custody through delivery. |
@@ -328,7 +328,7 @@ Ten provisional compositions prove five-band coverage with two distinct patterns
 | Source condition | A supply disruption coincides with bounded damage in the open renewal section while healthy reserve stock remains closed |
 | Access and purpose | One recovery brief authorizes a defined intervention in the damaged section; the reserve is context, not a second allocation problem |
 | Preparation | Inspect the bounded section, identify the minimum responsible work, and select one valid main destination before extraction |
-| Recovery | Destination-bound ordinary wood plus eligible bark from qualifying stems; no emergency material or multi-stock allocation is added |
+| Recovery | Tangible ordinary wood plus eligible bark from qualifying stems; no emergency material or multi-stock allocation is added |
 | Risk | Treating the disruption as permission to open the reserve, leaving a damaged hazard, or overharvesting healthy renewal growth |
 | Logistics | One constrained recovery path to the declared main intake; eligible bark follows its established tannery relationship |
 | Destination and economy | Choose one valid main flow—household/market, active repair, or fuel-worker intake—while other claims remain visible context rather than player allocations |
@@ -428,11 +428,11 @@ Post-mastery engagement should arise from changing authored conditions, public r
 
 **Alternative:** treat all ten as required standalone nodes. Rejected because several are authored conditions or compound briefs that can reuse sources, sites, and interaction logic.
 
-### P-WCP04 — Ordinary wood destination remains contextual
+### P-WCP04 — Ordinary wood remains tangible and broadly useful
 
-**Recommendation:** later content exposes at most one clear choice among general intake, active repair, or fuel-worker delivery when the distinction matters. The selected destination remains valid through successful resolution. Do not create a wood inventory state or grade-sorting inventory in this pass.
+**Recommendation:** valid work produces the single broad ordinary-wood inventory state. The player may keep, bank, use baseline trade, or supply a specialist destination. Purpose-bound work preserves its disclosed destination, and content exposes at most one special destination choice when the distinction matters. Do not create species or grade sorting.
 
-**Alternative:** route all wood automatically to one store. This is cheaper but erases public-repair and fuel-allocation knowledge.
+**Alternative:** route all wood automatically to one store or destination. Rejected by D11 because it removes accumulation, banking, trade, and later-use choice.
 
 ## Scope and anti-reskin audit
 
@@ -456,7 +456,7 @@ Post-mastery engagement should arise from changing authored conditions, public r
 1. **Creative Director review of D01 and P-WCP01:** confirm six Woodcutting archetypes as the maximum vocabulary and four source relationships as the provisional content base.
 2. **Final ecology pass:** select or reject actual species and prove that each supports the assigned management form, source condition, bark eligibility, and Lowmark setting.
 3. **Map verification:** confirm plausible working woodland, agricultural edge, bank, reserve, recovery, and delivery contexts without inventing routes or site counts.
-4. **Ordinary wood representation:** this proof uses the selected destination-bound custody model and adds no wood inventory state. A broader future catalog may revisit representation only if another approved system demonstrates the need.
+4. **Ordinary wood representation:** this proof uses one broad tangible inventory state. A later split requires an approved downstream system demonstrating a real physical or economic need.
 5. **Interaction pass:** decide how selection, preparation, recovery, and one bounded destination choice are exposed without turning every responsibility into a click.
 6. **Authored-state implementation choice:** confirm how open, purpose-limited, reserved, recovery, and unsafe conditions are represented.
 7. **Supply-interface integration:** ordinary cutters, markets, fuel workers, tanners, workshops, storage, and public repair must remain credible parallel actors.

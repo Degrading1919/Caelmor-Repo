@@ -9,7 +9,7 @@ Lowmark is an inhabited repair economy shaped by managed water, agricultural hou
 This proposal preserves:
 
 - Hunting as hunt-and-field-dress work on eligible game, with an edible relationship, conditional guaranteed raw hide, and optional fat flow to ordinary renderers;
-- Woodcutting as stewardship-approved selective harvest, with ordinary wood primary, eligible bark as a guaranteed co-output, and suitable wood optionally entering ordinary charcoal supply;
+- Woodcutting as stewardship-approved selective harvest, with one broad tangible ordinary-wood state as the primary output, eligible bark as a guaranteed co-output, and suitable ordinary wood optionally entering charcoal supply;
 - imported conventional steel stock;
 - household flax production and ordinary textile conversion;
 - husbandry, tannery, fuel-worker, and renderer labor outside the player skill list;
@@ -96,11 +96,12 @@ Supports ordinary conversion of suitable wood flow into charcoal.
 
 ### P6 — Market and receiving area
 
-Supports imported steel receipt, mixed household goods, ordinary leather, flax, linen, tow, bark, charcoal, tallow, and player buying or selling.
+Supports imported steel receipt, mixed household goods, ordinary leather, flax, linen, tow, bark, charcoal, tallow, ordinary wood, and player buying or selling.
 
 - Imported steel must visibly arrive through trade and inspection rather than appear at an ore source.
 - Bulk, dirty, flammable, food-adjacent, and high-value goods may share market administration while using different storage or handling spaces.
 - One receiving function can serve several materials. Separate stalls for all nine states are unnecessary.
+- Normal lawful transferable goods have a dependable baseline market outlet. Specialist, civic, household, and processor demand remains contextual and may pay or accept differently; the baseline outlet is not an unlimited high-value deletion sink.
 - Route disruption, rejected condition, public requisition, storage damage, or delayed carriers can explain supply variation.
 - The interface should expose provenance and current availability clearly enough to support choices without simulating wholesale logistics.
 
@@ -136,7 +137,7 @@ Supports reserve stock, covered storage, public-repair staging, shortage respons
 | Family | Purpose and custodian | Logical player-facing relationship | Outputs or flow | Access and ecological/civic requirement | Broad placement | Disruption or closure | Why the player cares | Must not represent |
 |---|---|---|---|---|---|---|---|---|
 | **Hunting opportunity** | Eligible habitat under household, community, land, or neutral stewardship | Track or approach, hunt, and field-dress eligible game | Edible relationship; conditional raw hide; suitable fat routed to renderers | Target eligibility, pressure, custody, safe recovery, and habitat condition | P2, sometimes at P3 margins | Pressure, unsafe conditions, land use, flood, or local restriction | Food relationship, leather supply, trade, route knowledge | Universal hides, stationary livestock harvesting, trophy catalog, supernatural source |
-| **Managed Woodcutting opportunity** | Working woodland overseen by households, public crews, landholders, or other neutral custodians | Inspect, select, harvest, recover, and route useful wood | Ordinary wood; eligible bark; possible fuel-worker feed | Source health, bank stability, renewal, public repair, fire, and active closure | P1, with links to P5, P7, and P8 | Fire risk, unsafe damage, regeneration, bank risk, or repair reservation | Wood economy, leather tanning input, public work, trade | Bark-only node, clear-cutting, species ladder, direct charcoal output |
+| **Managed Woodcutting opportunity** | Working woodland overseen by households, public crews, landholders, or other neutral custodians | Inspect, select, harvest, recover, and route useful wood | One broad tangible ordinary-wood inventory state; eligible bark; possible fuel-worker feed | Source health, bank stability, renewal, public repair, fire, and active closure | P1, with links to P5, P7, and P8 | Fire risk, unsafe damage, regeneration, bank risk, or repair reservation | Keep, bank, baseline market trade, leather tanning input, public work, and fuel conversion | Bark-only node, clear-cutting, species ladder, direct charcoal output |
 | **Imported-steel receiving** | Merchants, carriers, receivers, markets, and workshops | Purchase, sell where later valid, deliver, inspect, or respond to interruption | Plain carbon steel stock | Lawful consignment, condition, provenance, storage, public demand | P6 linked to P7 and P8 | Route delay, rejected stock, custody issue, emergency demand | Smithing construction and hard repair | Lowmark ore node, routine war salvage, Mining substitute |
 | **Husbandry and animal-processing supply** | Agricultural households and ordinary animal workers | Purchase, sell or deliver legitimate flows; no player Husbandry skill | Raw hide; suitable fat to rendering; food relationships outside this pass | Legitimate animal use, cleanliness, storage, household need | P3 linked to P4 and P6 | Herd loss, feed pressure, disease response, flood, spoilage | Alternate hide source and plausible tallow flow | Gather-tallow action, universal animal outputs, management simulation |
 | **Household flax production** | Farm households | Purchase, sell, or respond to shortage; no player Farming action | Flax bundle | Suitable agricultural ground, labor, water scheduling, drying, food-versus-fiber pressure | P3 linked to P6 and textile work | Flood, poor storage, labor shortage, crop pressure | Source of linen and tow | Wild-flax grind, Farming skill, textile node |
@@ -144,7 +145,7 @@ Supports reserve stock, covered storage, public-repair staging, shortage respons
 | **Ordinary tannery** | Tanning households or specialists | Purchase leather, sell accepted hides or bark, or use a later-approved bounded service | Vegetable-tanned leather | Water access, waste separation, odor, drying, legitimate inputs | P4 linked to P6/P7 | Contamination, flood, waste closure, drying failure, input shortage | Alternate leather supply; player Leatherworking retains transformation identity | Gathering node, magical process, sole player-dependent tannery, assumed universal conversion |
 | **Fuel-worker conversion** | Ordinary fuel workers | Sell or deliver accepted wood; purchase charcoal; respond to shortage | Wood charcoal | Feed suitability, drying, firebreak, smoke control, storage, structural-stock priority | P5 linked to P1/P6/P7 | Fire danger, wet feed, civic restriction, smoke or storage failure | Smithing fuel and a real wood sink | Player charcoal skill, charcoal tree, acceptance of all wood |
 | **Renderer conversion** | Ordinary renderers | Route suitable animal flow; purchase tallow; respond to interruption | Rendered tallow | Legitimate feedstock, cleanliness, heat, fire safety, spoilage control | P4 linked to P3/P6/P7 | Spoilage, contamination, fire restriction, feed shortage | Leather care, repair, thread preparation, bounded steel care | Gather-tallow action, required fat inventory, Cooking dependency |
-| **Market/storage/workshop receiving network** | Merchants, storekeepers, craftspeople, repair workers, and neutral civic custodians | Buy, sell, store, craft, repair, commission, or deliver | Circulation and sinks for all nine represented states | Safe handling, provenance, fire/flood protection, workshop acceptance, public need | P6–P8 | Route loss, emergency requisition, storage damage, workshop closure | Makes source-to-sink flow understandable and crafting from storage feasible | One stall per item, auction-house assumptions, full logistics simulation |
+| **Market/storage/workshop receiving network** | Merchants, storekeepers, craftspeople, repair workers, and neutral civic custodians | Buy, sell, store, craft, repair, commission, or deliver | Circulation and sinks for all nine equipment-chain states plus the broader ordinary-wood state | Safe handling, provenance, fire/flood protection, workshop acceptance, public need | P6–P8 | Route loss, emergency requisition, storage damage, workshop closure | Makes source-to-sink flow understandable, gives normal lawful transferable goods a baseline outlet, and keeps crafting from storage feasible | One stall per item, auction-house assumptions, unlimited premium deletion, full logistics simulation |
 
 ## Placement relationships, not fixed routes
 
@@ -158,7 +159,8 @@ plausible hunting habitat
 
 managed working woodland
 → wood recovery and sorting
-→ public repair / household or market use / eligible bark / accepted fuel feed
+→ ordinary wood inventory plus eligible bark
+→ keep / bank / baseline market trade / public repair / accepted fuel feed
 → workshops and storage / tannery / fuel workers
 
 agricultural households

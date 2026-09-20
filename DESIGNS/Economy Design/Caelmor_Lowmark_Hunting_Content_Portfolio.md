@@ -319,7 +319,7 @@ These payoffs prevent mastery from becoming a sequence of visually different ani
 
 ## Output and destination discipline
 
-Every purpose-bound opportunity must disclose at least one valid destination before the player commits to gathering. That destination cannot disappear during successful resolution. Contextual buyers may refuse unrelated surplus, but an authored opportunity may not strand the output it explicitly asked the player to recover. Hunting recovery routes eligible game through the chosen animal-processing relationship without creating a carcass, fat, or hidden-token inventory state.
+Every purpose-bound opportunity must disclose at least one valid destination before the player commits to gathering. That destination cannot disappear during successful resolution. Normal lawful transferable goods have a dependable baseline market outlet; specialist, civic, household, tannery, and processor demand remains contextual and may value only relevant goods. The baseline outlet is not an unlimited high-value deletion sink. Hunting recovery routes eligible game through the chosen animal-processing relationship without creating a carcass, fat, or hidden-token inventory state.
 
 | Candidate | Personal use | Household or market | Tannery / Leatherworking | Renderer | Civic value |
 |---|---:|---:|---:|---:|---:|

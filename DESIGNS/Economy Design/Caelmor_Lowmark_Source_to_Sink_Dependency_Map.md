@@ -15,7 +15,9 @@ Every represented state and supporting relationship must answer:
 7. what prevents infinite reuse or artificial scarcity; and
 8. whether the activity remains worthwhile without XP.
 
-The nine approved equipment-chain states remain the complete represented set for this dependency map. Ordinary wood, edible Hunting output, suitable fat, and other world goods appear only as relationship placeholders outside that set.
+The nine approved equipment-chain states remain unchanged. D11 adds one broader v1 economy inventory state, ordinary wood. Edible Hunting output, suitable fat, and other unapproved goods remain relationship placeholders outside the represented catalog.
+
+Normal lawful transferable goods have a dependable baseline market outlet under D07. Specialist, processor, and civic destinations remain contextual and may differ in value or purpose; no outlet is an unlimited high-value deletion sink.
 
 ## End-to-end chain map
 
@@ -44,7 +46,7 @@ HUSBANDRY ──────────────────┼─┼─→ 
   suitable-fat route ───────┘ │             │
                               │             ├─→ Leatherworking / tannery ─→ leather
 MANAGED WOODCUTTING ──────────┼─→ bark ─────┘                                │
-  ordinary wood ──────────────┼─→ wider wood economy                         │
+  ordinary wood [inventory] ──┼─→ bank / baseline trade / repair supply       │
   suitable wood route ────────┴─→ fuel workers ─→ charcoal                   │
                                                                               ├─→ flexible equipment
 HOUSEHOLD FLAX ─→ flax bundle ─→ textile labor ─→ linen + tow ───────────────┤
@@ -131,6 +133,16 @@ markets + storage + workshops connect self-supply, ordinary supply, crafting, an
 - **Oversupply outlet:** leather production; no bark-burning or bark-only XP recipe is added.
 - **Reuse boundary:** consumed in tanning; spent bark has no approved equipment sink.
 - **Without-XP value:** directly enables a valuable processed material.
+
+### Ordinary wood — broader v1 economy state
+
+- **Supply reason:** gives valid Woodcutting tangible accumulation and connects managed woodland work to trade, ordinary repair, and fuel conversion without species tiers.
+- **Player interaction:** keep, bank, buy, sell through a dependable baseline outlet, supply household or civic repair demand, or deliver suitable stock to fuel workers.
+- **Primary sinks:** ordinary household and civic repair relationships plus conversion into charcoal where suitable. Later uses require separate approval.
+- **Scarcity controls:** legitimate work, source health, stewardship, closures, ordinary forestry supply, repair demand, and fuel-worker acceptance.
+- **Oversupply outlet:** dependable baseline trade at later-tuned value. Specialist demand may be more useful or valuable but is contextual.
+- **Reuse boundary:** one broad state only; no species logs, grades, repair stock, fuelwood, offcuts, or multiple tiers.
+- **Without-XP value:** supports accumulation, banking, trade, self-supply, repair supply, and indirect Smithing fuel.
 
 ### Wood charcoal
 

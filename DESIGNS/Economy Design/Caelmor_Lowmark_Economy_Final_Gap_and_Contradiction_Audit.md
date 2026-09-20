@@ -58,11 +58,11 @@ The hostile review found no resource bloat, hidden skill, lore breach, supernatu
 | Woodcutting progression identity | **STRONG** | Six patterns change cutting purpose, source condition, stewardship, recovery, public demand, and logistics without species tiers. W6 is a mastery recombination. |
 | Ordinary supply coexistence | **STRONG** | Every represented state has an ordinary or trade path; player gathering and craft add control, knowledge, and transformation without becoming the world’s sole supply. |
 | Processing and custody clarity | **STRONG** | Direct textile commission, bounded tannery supply, market-facing fuel/rendering, imported steel receiving, storage, workshops, and repair have distinct roles. |
-| Source-to-sink completeness | **STRONG** | All nine states reach equipment, construction, repair, finishing, trade, or storage sinks. Edible, ordinary wood, and suitable fat remain explicit relationships rather than accidental inventory bloat. |
+| Source-to-sink completeness | **STRONG** | All nine equipment-chain states reach equipment, construction, repair, finishing, trade, or storage sinks. One broader tangible ordinary-wood state reaches storage, baseline trade, repair, and accepted fuel conversion. Edible output and suitable fat remain explicit relationships rather than accidental inventory bloat. |
 | Repair scarcity | **STRONG** | Repair consumes physically relevant represented materials, does not restore unsafe primary structures cheaply, and coexists with new construction. |
 | Player-choice viability | **STRONG** | Never-Hunt, never-Woodcut, buying-heavy, and self-supply-heavy play remain viable through ordinary supply and lawful exchange. |
 | Discovery and mastery payoff | **STRONG** | Advanced content must satisfy the nonnumeric payoff contract; practical mastery recombines constraints instead of substituting materials. |
-| Resource restraint | **STRONG** | No new equipment material, biological byproduct catalog, generic repair kit, capstone ingredient, or XP-only sink is needed. |
+| Resource restraint | **STRONG** | No new equipment material, biological byproduct catalog, generic repair kit, capstone ingredient, or XP-only sink is needed. Ordinary wood is one broad v1 economy state outside the unchanged nine-state equipment chain. |
 | Skill restraint | **STRONG** | No Farming, Textile, Rendering, Charcoal-making, Fabrication, Adornment, Tracking, or Trapping skill is introduced. Cooking and Fletching are not forced into this chain. |
 | Content burden | **STRONG** | Twelve gathering patterns reuse two compact grammars; six ordinary interfaces reuse custody verbs; five condition patterns are capped per instance. |
 | Environmental integration | **STRONG** | Eight placement classes connect habitat, agriculture, dirty work, fuel work, receiving, workshops, storage, water, fire, and repair. |
@@ -85,7 +85,7 @@ No category is **THIN**, **MISSING**, **CONTRADICTORY**, or fixably **PARTIAL** 
 | Does any processor become a hidden skill or minigame? | No. Ordinary conversions are labor, service, routing, or exchange relationships. |
 | Does the architecture require a global market or other players? | No. Interfaces and stock are local, authored, and solo viable. |
 | Does practical mastery require superior materials? | No. It deepens diagnosis, purpose, constraints, fitting, repair, custody, and route knowledge. |
-| Does disruption become continuous simulation? | No. The selected model uses bounded authored states; cadence remains a Creative Director review item. |
+| Does disruption become continuous simulation? | No. D04 permits only occasional authored, legible local disruptions within a stable and learnable Lowmark. |
 | Is exact geography invented? | No. All dependent placement remains marked for map verification. |
 | Is ranged content used as a sink? | No. S01 remains deferred and no ranged demand supports the architecture. |
 

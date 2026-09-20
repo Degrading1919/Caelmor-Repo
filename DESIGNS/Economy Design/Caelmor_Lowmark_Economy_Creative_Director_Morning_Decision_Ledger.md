@@ -1,115 +1,128 @@
-# Caelmor — Lowmark Economy Creative Director Morning Decision Ledger
+# Caelmor — Lowmark Economy Creative Director Decision Ledger
 
-**Status:** Proposal decision sheet
-**Scope:** Only consequential choices raised by the integrated Lowmark v1 gathering and supply architecture
+**Status:** D01–D11 resolved by Creative Director
 
-The overnight pass used provisional recommendations so the architecture could be completed and tested. The items below require Creative Director review before content production. Species, exact sites, quantities, rates, levels, prices, interfaces, and other production details are intentionally absent because they do not require direction at this stage.
+This ledger records the locked proposal direction for Lowmark v1 gathering, ordinary supply, and world-node content. These rulings approve design foundations, not final species, map placement, balance, schemas, or implementation.
 
-## D01 — Opportunity portfolio size
+## D01 — Opportunity vocabulary
 
-**Provisional recommendation:** approve six reusable Hunting archetypes and six reusable managed Woodcutting archetypes as the maximum proposal vocabulary. H5, H6, and W6 are compound or mastery wrappers rather than demands for standalone sites or mechanics. Later production may combine or omit an archetype if it cannot earn a distinct decision, but should not add patterns merely to fill progression bands.
+**Ruling: APPROVED**
 
-**Alternative:** start with fewer patterns and discover gaps during node production.
-
-**Consequence:** approval gives production a bounded target and protects against species/tree tier ladders. The alternative reduces initial scope but risks inventing economic logic during implementation.
+Use six reusable Hunting archetypes and six reusable Woodcutting archetypes as the maximum design vocabulary. They are patterns that content may combine, not required node counts.
 
 ## D02 — Hunting encounter ownership
 
-**Provisional recommendation:** Hunting owns reading, preparation, approach, eligibility, and recovery. An approved normal combat encounter may resolve dangerous contact, but combat alone never grants Hunting recovery.
+**Ruling: APPROVED**
 
-**Alternative:** resolve every hunt through a dedicated noncombat interaction.
+Hunting owns reading, preparation, approach, eligibility, and recovery. Normal combat may resolve dangerous contact when appropriate, but combat alone never grants Hunting recovery.
 
-**Consequence:** the recommendation reuses combat where physically appropriate while preserving Hunting's identity. The alternative produces a cleaner standalone loop at greater interaction and content cost.
+## D03 — Hunting recovery
 
-## D03 — Hunting recovery granularity
+**Ruling: APPROVED**
 
-**Provisional recommendation:** make field dressing a meaningful recovery phase that can be compressed into the opportunity. Do not create a separate repeatable carcass station or generic work-in-progress items.
+Field dressing is a meaningful Hunting recovery phase. Compress it when no meaningful choice exists. Do not create a detached carcass-processing grind or automatic combat-loot model.
 
-**Alternative:** award all eligible outputs automatically when a valid hunt resolves.
+## D04 — Authored opportunity states
 
-**Consequence:** the recommendation lets preparation and recovery conditions affect edible, hide, and renderer relationships. Automatic recovery is simpler but removes much of the distinction between a successful encounter and useful gathering.
+**Ruling: APPROVED WITH RESTRAINT**
 
-## D04 — Authored opportunity and disruption states
+Keep the shared authored-state vocabulary. Lowmark should normally be stable, learnable, and familiar. Disruptions and closures are occasional, authored, legible, and locally meaningful. Do not use random continuous churn, dynamic population simulation, or rotating chore content.
 
-**Provisional recommendation:** use a small shared vocabulary of open, guided/purpose-limited, reserved/commissioned, disrupted/recovery, and unsafe/closed states. Each ordinary instance receives at most one altered state unless story-critical. Allow occasional bounded non-story disruptions where they create a readable alternate response; do not simulate populations, household inventories, or continuous regional prices.
+## D05 — Ordinary conversion boundaries
 
-**Alternative:** restrict all shortages and closures to fixed story moments.
+**Ruling: APPROVED**
 
-**Consequence:** the recommendation makes stewardship and ordinary dependency recur in play at modest state cost. Story-only disruption is cheaper but makes the economy more static after authored events resolve.
+- Player Leatherworking owns the player-facing hide-to-leather transformation.
+- Ordinary society may produce and sell leather.
+- Flax processing remains ordinary labor.
+- Fuel workers produce charcoal.
+- Renderers produce tallow.
 
-## D05 — Ordinary conversion and tanning boundary
-
-**Provisional recommendation:** allow direct commission of the combined flax-to-linen-and-tow conversion. Present fuel and rendering primarily through delivery/sale and market purchase. Let ordinary tanners buy suitable inputs and sell bounded finished leather without assuming unrestricted on-demand hide conversion.
-
-**Alternative:** make all ordinary conversion wholly market-mediated; or make every processor a universal conversion service.
-
-**Consequence:** the recommendation keeps textile source relationships legible, avoids pseudo-skills, and preserves player Leatherworking while allowing Lowmark to function without the player.
+No additional player production skill is created.
 
 ## D06 — Storage crafting and workshop context
 
-**Provisional recommendation:** let an appropriate workshop draw transferable inputs from accessible storage while still requiring Smithing, Leatherworking, repair, or commission work to occur through the relevant workshop context.
+**Ruling: APPROVED**
 
-**Alternative:** allow crafting directly from any storage interface.
+Crafting may draw transferable inputs from accessible storage. Smithing, Leatherworking, repair, and commission work still require the appropriate workshop context.
 
-**Consequence:** the recommendation removes inventory shuffling while keeping production grounded in places and workers. The alternative is simpler to access but makes workshop placement and environmental integration largely cosmetic.
+## D07 — Baseline market plus contextual demand
 
-## D07 — Supplier acceptance and output destination
+**Ruling: MODIFIED AND RESOLVED**
 
-**Provisional recommendation:** ordinary buyers and processors accept player goods only when source eligibility, condition, capacity, and current use support them. Selected Woodcutting work may offer one clear destination choice among ordinary market intake, active public repair, or fuel-worker demand; no universal buyer deletes unlimited surplus.
+Normal lawful transferable goods have a dependable baseline market or trade outlet. Contextual specialists, processors, and civic demands provide additional destinations that may differ in value, convenience, usefulness, or purpose.
 
-**Alternative:** let standard vendors purchase all valid goods without contextual limits.
-
-**Consequence:** the recommendation protects scarcity, makes custody meaningful, and prevents high-volume gathering from becoming consequence-free dumping. It requires clear feedback when an outlet is unavailable.
+The baseline outlet is not an unlimited high-value deletion sink. Purpose-bound work always preserves its disclosed destination through successful completion. Specialized buyers may still reject unsuitable goods or goods outside their role, but legitimate transferable output is not routinely stranded.
 
 ## D08 — Post-mastery participation
 
-**Provisional recommendation:** sustain Hunting and Woodcutting after Practical Mastery through recurring civic repair demand, changing authored opportunity conditions, personal maintenance, and knowledge-based route efficiency. Do not add superior material tiers or mandatory daily work.
+**Ruling: APPROVED WITH RESTRAINT**
 
-**Alternative:** rely almost entirely on market sale and personal equipment upkeep after mastery.
+Post-Practical-Mastery participation emphasizes:
 
-**Consequence:** the recommendation gives mastery a continuing relationship with Lowmark and supports discovery without adding resources. The alternative is cheaper but offers a thinner non-volume reason to revisit gathering content.
+- knowledge-based efficiency;
+- route mastery;
+- familiar profitable or useful routines;
+- self-supply;
+- repair and maintenance;
+- optional commissions;
+- occasional civic demand;
+- changing authored conditions where useful.
 
-## D09 — Distributed placement with shared hubs
+Do not rely on daily tasks, mandatory rotating events, superior material tiers, or constant world-state churn.
 
-**Provisional recommendation:** distribute sources, households, and risk-bearing work across plausible placement classes, while concentrating receiving, market, storage, and repair into a few legible multifunctional hubs. Keep tanning/rendering and fuel work physically distinct where water, odor, smoke, or fire require it.
+## D09 — Distributed sources and memorable hubs
 
-**Alternative:** centralize all production in one hub, or distribute every specialist interface separately.
+**Ruling: APPROVED**
 
-**Consequence:** the recommendation shows the economy in the landscape without imposing excessive travel or asset burden. Exact assignments remain subject to map verification.
+Distribute gathering and source locations while using a small number of memorable multifunctional trade, storage, processing, and repair hubs. Dirty or hazardous processes remain physically plausible instead of being centralized solely for convenience.
 
-## Second-stage new decisions
+Exact locations remain **MAP VERIFICATION REQUIRED**.
 
-The concrete content proof added only the following consequential decisions. Public-repair cadence, buyer acceptance, textile commission, tannery boundaries, altered states, Hunting encounter ownership, and recovery presentation remain covered by D02–D09 and are not repeated under new IDs.
+## D10 — Functional content portfolios
 
-## D10 — Compact content portfolio
+**Ruling: APPROVED PROVISIONALLY**
 
-**Provisional recommendation:** approve four Hunting fauna functions and four managed-woodland source relationships as the v1 content foundation. The eleven Hunting and ten Woodcutting compositions are coverage proofs that production may combine; they are not launch quotas or demands for separate sites.
+Carry forward four functional Hunting fauna relationships and four functional managed-woodland source relationships. These are minimum functional portfolios, not final species catalogs. Final ecology may rename, merge, or replace candidates while preserving required gameplay functions. A new candidate must provide genuinely new gameplay meaning.
 
-**Alternative:** add more fauna or woodland families before ecology and map verification.
+The Hunting and Woodcutting opportunity compositions remain coverage proofs, not launch quotas.
 
-**Consequence:** approval gives node production enough behavioral and ecological variety while keeping shared systems and assets credible for a solo developer. Additional candidates must replace or materially outperform one of the eight selected functions.
+## D11 — Tangible ordinary wood
 
-## D11 — Ordinary-wood custody
+**Ruling: REJECTED AND REPLACED**
 
-**Provisional recommendation:** keep ordinary wood destination-bound in this pass. Each valid Woodcutting opportunity discloses an accepting household/general, public-repair, or fuel-worker destination before commitment, and successful work routes the flow there without creating an inventory item.
+Destination-bound custody is not the sole ordinary-wood representation. Valid Woodcutting produces one broad provisional **ordinary wood** inventory family/state.
 
-**Alternative:** approve a minimal non-equipment ordinary-wood inventory representation in a later broader economy pass if trade, storage, or reuse cannot be expressed through destination-bound custody.
+```text
+valid Woodcutting
+→ ordinary wood inventory output
+→ keep / bank / trade / supply / later-use choice
+```
 
-**Consequence:** the recommendation lets node design proceed now without inventing species, grades, logs, or stockpiles. It also requires authored opportunities to preserve one declared destination through successful resolution.
+Ordinary wood is transferable, bankable, tradeable, and usable by multiple downstream relationships. It may enter baseline market trade, household or civic repair supply, or accepted fuel-worker conversion into charcoal.
 
-## Safe to defer
+Do not create:
 
-- final species, wood species, edible item, and ordinary wood catalogs;
-- exact eligibility, tool, failure, recovery, preservation, and output rules;
-- exact site counts, coordinates, routes, river links, and travel times;
-- exact custodian titles, governance powers, fees, tariffs, and legal procedure;
-- prices, stock quantities, acceptance limits, yields, rates, XP, timings, and level placement;
-- final interface presentation and implementation data;
-- S01 and all ranged demand;
-- Cooking content beyond the already approved edible-output relationship.
+- species-specific log tiers;
+- wood grades;
+- repair-stock items;
+- fuelwood items;
+- offcut inventories;
+- multiple wood tiers.
 
-## Recommended review order
+Only an approved downstream system demonstrating a real physical or economic need may justify a later split. The nine approved equipment-chain states remain unchanged because they were never the complete v1 economy catalog. S01 remains deferred, and no ranged or Fletching demand justifies ordinary wood.
 
-Review D01 first because it bounds content production; D02–D03 next because they define Hunting implementation; D04, D07, and D08 together because they control recurring world state and sinks; D05–D06 because they define custody and services; and D09 when verified map material is available.
+## Decisions safe to defer
 
-None of these decisions requires a new material, skill, canon change, exact map fact, or multiplayer economy.
+- final fauna and tree species names, appearance, animation, and sound;
+- exact sites, routes, river links, distances, and opportunity counts;
+- exact custodian titles and governance powers;
+- exact eligibility, recovery, failure, preservation, and tool handling;
+- edible-output and broader ordinary-wood use catalogs beyond approved functions;
+- prices, stock quantities, buyer values, yields, rates, timings, XP, and level placement;
+- schemas, data migration, and final interface presentation;
+- S01 and all ranged content.
+
+## Decision-lock result
+
+D01–D11 are resolved for proposal-stage world-node design. No remaining Creative Director decision blocks the Lowmark node and opportunity catalog. Ecology, map, balance, and implementation verification remain later gates.

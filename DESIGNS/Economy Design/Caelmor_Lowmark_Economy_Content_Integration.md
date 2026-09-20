@@ -9,7 +9,7 @@ This proposal integrates the approved material, inventory, processing, gathering
 - The nine represented equipment-chain states remain plain carbon steel stock, raw hide, vegetable-tanned leather, flax bundle, flax tow, linen textile, tannin-rich bark, wood charcoal, and rendered tallow.
 - Hunting, Woodcutting, Smithing, and Leatherworking retain their approved responsibilities. No new skill is introduced.
 - Household flax, textile work, husbandry, ordinary tanning, charcoal work, rendering, and steel receiving remain ordinary labor or trade.
-- Ordinary wood and edible Hunting output remain useful relationships rather than prematurely finalized catalogs.
+- Ordinary wood is one broad provisional tangible inventory state outside the nine equipment-chain states. Edible Hunting output remains a functional relationship pending its later catalog.
 - All exact species, wood forms, food items, quantities, values, levels, timings, locations, routes, stock rates, and implementation behavior remain open.
 - S01 remains deferred. This document contains no ranged dependency.
 
@@ -29,17 +29,17 @@ source or ordinary supplier
 
 The player may enter this chain at several points. They may gather, buy, supply, commission ordinary conversion, craft, repair, store, or sell. Background workers remain credible because production does not wait for the player. The design stays comprehensible because no interaction requires managing workers, prices, transport schedules, or businesses.
 
-### Provisional ordinary-wood custody contract
+### Tangible ordinary-wood contract
 
-Ordinary wood remains a useful world relationship rather than a tenth equipment-chain inventory state in this pass.
+Ordinary wood is a tangible player-owned v1 economy state while remaining outside the nine equipment-chain states.
 
-1. Before legitimate Woodcutting begins, the opportunity discloses at least one valid destination: household/general intake, an active public-repair intake, or an accepting fuel-worker intake.
-2. The player selects at most one meaningful main destination when more than one is valid. The authored demand cannot disappear during successful resolution.
-3. Completion creates a **destination-bound ordinary-wood flow** delivered through the opportunity's declared custody relationship. It does not create a generic wood token, hidden claim item, dimensional grade, or player-managed stockpile.
-4. Eligible bark remains its existing inventory co-output and follows the tanning relationship separately; it does not turn the wood flow into two destination-management decisions.
-5. Contextual buyers may reject unrelated surplus before commitment. A purpose-bound opportunity may not strand output it explicitly asked the player to recover.
+1. Valid Woodcutting produces one broad provisional **ordinary wood** inventory state.
+2. The player may keep, bank, trade, or supply it to an approved downstream relationship.
+3. Normal lawful ordinary wood has a dependable baseline market outlet. Specialist, civic, and processor demand may provide different value, convenience, usefulness, or purpose without becoming unlimited high-value deletion sinks.
+4. Purpose-bound work preserves its disclosed special destination through successful completion, but the resulting wood remains player owned until the player chooses to supply it.
+5. Eligible bark remains its existing inventory co-output and follows the tanning relationship separately.
 
-This provisional selection lets node and content design proceed without inventing a wood catalog. A later broader economy pass may approve a minimal ordinary-wood inventory representation only if another real system demonstrates trade, storage, or reuse that destination-bound custody cannot support.
+This selection supports accumulation, familiar bank routes, trade versus self-supply, and later-use choice without species-specific logs, grades, fuelwood, repair stock, offcuts, or multiple tiers. A later split requires an approved downstream system demonstrating a real need.
 
 ## 2. Provisional ordinary-economy content set
 
@@ -255,7 +255,7 @@ Thread, cut panels, and padding packages remain workshop-only.
 ```text
 eligible stewardship-approved Woodcutting opportunity
 → selective harvest or pruning for a legitimate primary purpose
-→ destination-bound ordinary-wood flow
+→ ordinary wood [inventory/trade/storage]
 + conditional guaranteed tannin-rich bark [inventory]
 → player Leatherworking or ordinary tannery
 → vegetable-tanned leather
@@ -268,7 +268,7 @@ Bark remains a co-output. If the ordinary wood has no legitimate destination, th
 
 ```text
 approved Woodcutting or ordinary forestry
-→ suitable destination-bound ordinary-wood flow
+→ suitable ordinary wood [inventory/trade/storage]
 → accepted fuel-worker intake
 → ordinary conversion
 → wood charcoal [inventory/trade]
@@ -297,14 +297,14 @@ Later milestones deepen workmanship, geometry, fitting, inspection, repairabilit
 ```text
 bounded civic maintenance need
 → W5 public-repair reserve selection or accepted ordinary supply
-→ destination-bound ordinary wood directed to its declared use
+→ player-owned ordinary wood supplied to the declared public intake
 + accepted conventional hard inputs and fuel where physically needed
 → ordinary repair crews and their appropriate specialist workshop labor
 → restored civic function
 → future maintenance remains possible
 ```
 
-Ordinary wood remains relationship-level pending its own catalog. Public repair consumes useful supply without inventing a repair-token item.
+Ordinary wood remains one broad inventory family. Public repair consumes useful supply without inventing a repair-token or repair-stock item.
 
 ### Trace 9 — Personal equipment repair through accessible storage
 
@@ -325,21 +325,21 @@ No generic repair kit or per-component durability simulation is required. Unsafe
 
 1. Each opportunity communicates whether edible use, hide eligibility, and possible rendering feed are physically supported; those facts are related but not identical.
 2. The player chooses custody after recovery: keep a represented hide, deliver eligible game, sell to an accepting intake, or use another approved destination.
-3. No ordinary buyer accepts unlimited output. Capacity, household priority, preservation, and current need can matter without dynamic prices.
+3. Normal lawful transferable outputs have a dependable baseline market outlet. Specialist processors may apply capacity, preservation, and role requirements, and no outlet provides unlimited premium value.
 4. Husbandry protects non-Hunting viability. Hunting protects player control and gives ecology, route knowledge, recovery, and multi-output judgment a direct economic payoff.
 5. Advanced and later Hunting content earns value through condition preservation, routing, and purpose, not superior hide names.
 
 ### Woodcutting integration rules
 
-1. Every opportunity begins with a legitimate ordinary-wood purpose and at least one disclosed valid destination. Bark may appear only when the chosen source and action physically produce it.
-2. The player's meaningful destination choices are household/general intake, public repair, or fuel-worker intake where the wood is suitable and accepted. The selected main destination remains valid through successful completion.
+1. Every opportunity begins with a legitimate ordinary-wood purpose. Bark may appear only when the chosen source and action physically produce it.
+2. Valid work produces player-owned ordinary wood that may be kept, banked, sold through the baseline market, or supplied to household, public-repair, or fuel-worker demand where suitable.
 3. Bark enters tanning directly; it never receives a bark-only node, action, or opportunity.
 4. Ordinary forestry protects non-Woodcutting viability. Player Woodcutting provides direct custody, source judgment, civic participation, and route efficiency.
 5. Advanced and later Woodcutting content earns value through selecting the smallest responsible intervention and matching condition to destination, not higher-tier trees.
 
 ### Shared anti-management pattern
 
-Before or during commitment, the player makes at most one bounded destination decision for a recovered relationship. Workers perform ordinary conversion. The player does not allocate labor, operate production calendars, negotiate freight, maintain processor inventories, or balance several civic claims at once.
+Workers perform ordinary conversion. The player may accumulate and route transferable goods, but does not allocate labor, operate production calendars, negotiate freight, maintain processor inventories, or balance several civic claims at once. Purpose-bound work may expose at most one special destination choice.
 
 ## 5. Playstyle stress tests and revisions
 
@@ -349,17 +349,17 @@ Before or during commitment, the player makes at most one bounded destination de
 
 **Risk found:** raw hide could outpace tannery demand, and repeating the easiest target could become a hide grind.
 
-**Revision:** buyers and processors accept supply according to credible capacity and need; higher progression requires different behavior, habitat, recovery, stewardship, and routing. Edible use and rendering feed preserve value outside Leatherworking. No extra animal outputs are added as surplus sinks.
+**Revision:** lawful transferable goods retain a dependable baseline market outlet while processors offer contextual destinations; higher progression requires different behavior, habitat, recovery, stewardship, and routing. Edible use and rendering feed preserve value outside Leatherworking. No extra animal outputs are added as surplus sinks.
 
 **Result:** **STRONG**, subject to later content proving the six Hunting archetypes feel materially different.
 
 ### Woodcutting-heavy player
 
-**Concrete route:** complete W1–W6 purpose-bound work with a disclosed receiving relationship → direct destination-bound ordinary wood toward public repair, household/general intake, or accepted fuel intake → keep or sell qualified bark → buy other equipment inputs.
+**Concrete route:** complete W1–W6 legitimate work → receive ordinary wood inventory plus qualified bark where applicable → keep or bank wood, use baseline trade, or supply public repair or accepted fuel intake → keep or sell bark → buy other equipment inputs.
 
 **Risk found:** fuel work could become the automatic destination, while bark could dominate the reason to cut.
 
-**Revision:** ordinary wood remains the primary purpose; structural and public repair claims can outrank fuel; bark occurs only from a qualified cut and cannot justify an otherwise pointless opportunity. Destination matching becomes part of mastery, and accepted custody is guaranteed for the declared flow through successful resolution.
+**Revision:** ordinary wood remains the primary purpose; structural and public repair claims can outrank fuel; bark occurs only from a qualified cut and cannot justify an otherwise pointless opportunity. The baseline market prevents routine stranding, while specialist destination matching remains part of mastery.
 
 **Result:** **STRONG**, subject to later ordinary-wood design preserving several real uses without item bloat.
 
@@ -397,12 +397,12 @@ Before or during commitment, the player makes at most one bounded destination de
 
 | Fault tested | Concrete symptom | Applied architecture fix | Result |
 |---|---|---|---|
-| Surplus hides | Hunting-heavy player produces more than immediate Leatherworking need | Mixed food/hide/rendering relationship; contextual buyer acceptance; husbandry and Hunting supply can respond differently | **FIXED architecturally** |
+| Surplus hides | Hunting-heavy player produces more than immediate Leatherworking need | Dependable baseline market outlet plus contextual tannery/processor demand; edible and renderer relationships remain distinct | **FIXED architecturally** |
 | Surplus bark | Player chooses every eligible cut for tannery sales | Bark remains co-output of legitimate wood work; acceptance and hide demand constrain sink; no bark-only opportunity | **FIXED** |
 | Linen/tow imbalance | One sibling output has lower current equipment demand | Both retain several construction and repair functions; conversion remains joint; later tuning validates proportions rather than inventing a disposal recipe | **BOUND FOR BALANCE** |
 | Missing hard-material supply | Steel disruption halts all hard construction | Lawful trade, accessible storage, conservation, and refurbishment remain; flexible work continues; no local ore patch | **FIXED** |
-| Repetitive routing | Every gathered output travels to the same market counter | Hunting has keep, processor, tannery, and market custody; destination-bound wood has repair, general intake, and fuel destinations; dirty work remains separate | **FIXED** |
-| Stranded ordinary wood | Contextual buyer refuses the main output after a purpose-bound action | Disclose one valid destination before commitment and preserve its acceptance through successful resolution; add no wood item | **FIXED** |
+| Repetitive routing | Every gathered output travels to the same market counter | Hunting has keep, processor, tannery, and market custody; ordinary wood supports bank, baseline trade, repair, and fuel destinations; dirty work remains separate | **FIXED** |
+| Stranded lawful goods | Contextual specialists refuse normal transferable output | Provide a dependable baseline market outlet while preserving specialist/civic/processor destinations; purpose-bound demand remains valid through completion | **FIXED** |
 | Forced processing chores | Player must run every ordinary conversion before crafting | Ordinary workers sell output and accept bounded commissions; buying remains viable | **FIXED** |
 | Hidden professions | Textile, fuel, or rendering service gains XP-like repeated input loop | Ordinary commission or market handoff only; no new progression track or player production minigame | **FIXED** |
 | Weak gathering progression | Later play repeats the same interaction for more output | Six archetypes per skill change behavior, context, stewardship, recovery, and purpose; knowledge payoff contract applies | **FIXED architecturally** |
@@ -429,16 +429,16 @@ No new material or skill is required to correct these faults.
 | Rare animal byproducts added as overflow sinks | Creates catalog bloat and gathering incentives before uses exist. |
 | Public repair that accepts any wood | Removes stewardship and source-condition judgment. |
 
-## 8. Genuine provisional decisions for Creative Director review
+## 8. Resolved Creative Director direction applied
 
-1. **Public repair as recurring economy content:** use bounded, visible maintenance needs as an occasional ordinary-wood, fuel, stock, and workshop sink. It remains optional and leaves ordinary crews active. Alternative: reserve public repair for authored story moments, reducing systemic recurrence and post-mastery civic participation.
-2. **Ordinary buyer acceptance:** allow households, processors, and yards to refuse or limit unsuitable or currently unneeded player supply instead of acting as infinite buyers. The interface should explain the reason. Alternative: universal purchasing is simpler but weakens stewardship and surplus control.
-3. **Textile commission:** allow the player to submit accepted flax bundles and receive the established linen-plus-tow conversion through ordinary labor. Alternative: make linen and tow purchase-only, which simplifies service handling but reduces the purpose of flax bundle as a player-held state.
-4. **Tannery service boundary:** ordinary tanners sell leather and buy appropriate inputs, while unrestricted on-demand conversion remains unavailable unless later play proves a need. Alternative: a bounded delayed conversion service could be added later, but it must not make player Leatherworking redundant.
-5. **Disruption use:** permit at most one clear altered condition on an ordinary content instance outside story-critical cases. Alternative: story-only disruptions lower implementation burden but reduce the architecture's visible responsiveness.
-6. **Ordinary-wood custody:** keep ordinary wood destination-bound for this proposal, with one disclosed valid intake before commitment and no new inventory state. Alternative: revisit a minimal non-equipment representation only if a later broader economy demonstrates a real storage, trade, or reuse need.
+- Public repair is occasional, optional, and left active through ordinary crews.
+- Normal lawful transferable goods have a dependable baseline market outlet; specialist demand remains contextual and role-specific.
+- Textile conversion remains commissionable ordinary labor.
+- Ordinary tanners sell leather and buy appropriate inputs without erasing player Leatherworking.
+- Disruptions are occasional, authored, stable enough to learn, and never rotating chores.
+- Ordinary wood is tangible, bankable, tradeable, and broadly reusable as one provisional state.
 
-These decisions affect content presentation and recurrence. They do not alter the approved material foundation or canon.
+These rulings affect content presentation and recurrence without changing the six-material equipment foundation, nine equipment-chain states, or canon.
 
 ## 9. Content-integration result
 
@@ -449,7 +449,7 @@ The remaining risks belong to later content and balance validation:
 - demonstrate that six Hunting and six Woodcutting archetypes produce distinct decisions with shared systems;
 - verify that linen and tow demand remains healthy when quantities are designed;
 - set a bounded cadence for disruption and public repair;
-- decide only in a later broader economy pass whether ordinary wood or edible output ever needs additional inventory representation; the present destination and use relationships are complete; and
-- validate that contextual buyer acceptance is clear rather than punitive.
+- decide only if a later approved downstream system genuinely requires splitting ordinary wood or representing edible output more precisely; and
+- tune baseline market value against specialist and civic value without creating an unlimited high-value sink.
 
 No missing supply relationship or fixable content-architecture gap remains in this integration pass.

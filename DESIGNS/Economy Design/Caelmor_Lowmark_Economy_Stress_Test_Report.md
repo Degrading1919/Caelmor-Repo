@@ -7,10 +7,10 @@
 The tested economy uses:
 
 - player Hunting for eligible game, edible-output relationships, conditional guaranteed raw hide, and routed rendering feedstock;
-- player Woodcutting for ordinary wood relationships, conditional guaranteed bark co-output, and optional fuel-worker supply;
+- player Woodcutting for tangible ordinary wood inventory, conditional guaranteed bark co-output, and optional fuel-worker supply;
 - ordinary household, textile, husbandry, tannery, fuel-worker, renderer, carrier, market, workshop, and storage relationships;
 - imported conventional steel stock;
-- the approved nine equipment-chain inventory states and four player-facing recipe families;
+- the approved nine equipment-chain inventory states, one broader ordinary-wood state, and four player-facing recipe families;
 - increasing workmanship, fitting, integration, repairability, access, and provenance rather than material-tier replacement.
 
 A scenario is healthy when it preserves:
@@ -55,7 +55,7 @@ Ratings:
 
 ### Scenario C — The player gathers heavily
 
-**Supply behavior:** repeated Hunting yields useful bundles only from eligible targets and successful recovery. Repeated Woodcutting yields ordinary wood, with bark only from qualified sources and actions. The player may sell, store, process, or route outputs into ordinary conversion.
+**Supply behavior:** repeated Hunting yields useful bundles only from eligible targets and successful recovery. Repeated Woodcutting yields tangible ordinary wood, with bark only from qualified sources and actions. The player may keep, bank, trade, or supply outputs into ordinary conversion and repair relationships.
 
 **Pressure revealed:** unconstrained access could turn stewardship into decoration, oversupply bark or hides, and reward repeating the easiest opportunity rather than learning varied contexts.
 
@@ -81,13 +81,13 @@ Ratings:
 
 **Example pressures:** many raw hides can exceed tanning capacity; bark can exceed current hide flow; flax bundles can exceed textile labor; tow can accumulate if lining demand dominates padding demand; charcoal can accumulate when Smithing demand is low.
 
-**Healthy behavior:** materials have multiple legitimate sinks or may be sold and stored, but not every surplus receives an invented recipe. Ordinary processors and markets need not accept unlimited volumes.
+**Healthy behavior:** normal lawful transferable goods have a dependable baseline market outlet and may be stored. Specialist and civic destinations remain contextual, and not every surplus receives an invented recipe or premium sink.
 
-**Intervention levers:** processor acceptance, competing household and civic uses already supported by lore, repair demand, trade outflow, bounded storage rules if later justified, and slower ordinary restocking when local surplus exists. No disposal recipe or XP-only sink is added.
+**Intervention levers:** baseline market value, processor acceptance, competing household and civic uses already supported by lore, repair demand, trade outflow, storage, and slower ordinary restocking when local surplus exists. No disposal recipe or XP-only sink is added.
 
-**Revision applied:** the proposal distinguishes **accepted supply** from unconditional vendor purchase. This permits capacity and stewardship to matter without a live commodity simulation.
+**Revision applied:** the proposal distinguishes dependable baseline trade from contextual specialist demand. This prevents routine stranding without creating a live commodity simulation or unlimited premium buyer.
 
-**Result:** **PARTIAL.** Later balance must ensure linen and tow each have sufficient real use and that ordinary buyers do not function as limitless deletion sinks.
+**Result:** **PARTIAL.** Later balance must ensure linen and tow each have sufficient real use and set baseline versus specialist values without creating limitless deletion sinks.
 
 ### Scenario F — Repair demand becomes high
 
@@ -137,7 +137,7 @@ Ratings:
 
 ### Scenario J — The player prefers buying instead of gathering
 
-**Supply behavior:** all nine represented equipment-chain states have ordinary or trade access at some stage. A buyer can obtain raw hide or leather, linen and tow, bark, charcoal, tallow, and imported steel without training Hunting or Woodcutting.
+**Supply behavior:** all nine represented equipment-chain states plus ordinary wood have ordinary or trade access at some stage. A buyer can obtain raw hide or leather, linen and tow, bark, charcoal, tallow, steel, and ordinary wood without training Hunting or Woodcutting.
 
 **Pressure revealed:** purchasing everything could reduce contact with world opportunities, while forced self-supply would violate player choice.
 
@@ -147,7 +147,7 @@ Ratings:
 
 ### Scenario K — The player prefers self-supply instead of buying
 
-**Supply behavior:** Hunting can provide eligible hides; Woodcutting can provide qualified bark and ordinary wood relationships; Leatherworking can convert hide to leather; Smithing and Leatherworking can construct and repair. Ordinary labor still converts flax, charcoal, and tallow, and steel remains imported.
+**Supply behavior:** Hunting can provide eligible hides; Woodcutting provides tangible ordinary wood and qualified bark; Leatherworking can convert hide to leather; Smithing and Leatherworking can construct and repair. Ordinary labor still converts flax, charcoal, and tallow, and steel remains imported.
 
 **Pressure revealed:** complete isolation is neither physically grounded nor compatible with the approved economy. Requiring all ordinary goods to be personally producible would create hidden skills.
 
@@ -166,10 +166,10 @@ Ratings:
 | Flax tow | Textile co-output | Damping, filling, padding repair | Uneven sibling-output demand | Multiple functional sinks; later balance must validate demand |
 | Linen textile | Textile output | Lining, joining, wrapping, repair | Uneven sibling-output demand | Multiple construction and maintenance sinks |
 | Tannin-rich bark | Qualified Woodcutting plus forestry | Leather preparation | No Woodcutting; heavy gathering | Mixed supply, deterministic qualification, stewardship access |
+| Ordinary wood | Managed Woodcutting plus ordinary forestry | Baseline trade, household/civic repair supply, fuel-worker conversion, later approved uses | Heavy gathering; no Woodcutting; bark dominates action | One tangible state, mixed supply, several destinations, no species tiers |
 | Wood charcoal | Ordinary conversion and trade | Smithing construction/refurbishment | Fuel disruption; post-mastery demand | Competing uses, lawful wood delivery, recurring repair sink |
 | Rendered tallow | Ordinary rendering and trade | Conditioning, finishing, maintenance | No Hunting; oversupply | Husbandry baseline, eligible-game contribution, bounded recurring sinks |
 | Edible Hunting relationship | Eligible Hunting recovery | Future Cooking design | Hunting becomes hide-only | Relationship retained without premature food catalog |
-| Ordinary wood relationship | Managed Woodcutting/forestry | Future repair, construction, fuel, and separately approved ordinary-wood uses | Bark dominates action | Wood remains primary; bark only qualified co-output; no S01 demand is assumed |
 
 No represented equipment state is source-less or sink-less. Tow and linen demand balance remains the clearest later tuning risk, not an architectural blocker.
 
@@ -191,7 +191,7 @@ This order prevents balance problems from becoming excuses for resource bloat or
 | Finding | Initial classification | Revision in the integrated architecture | Final classification |
 |---|---|---|---|
 | Heavy gathering could ignore stewardship | **PARTIAL** | Require visible source/action eligibility, a maximum of one altered state per ordinary instance, bounded closures, and no low random bark chance as restraint | **STRONG architecturally; validate in content** |
-| Ordinary buyers could become infinite deletion sinks | **PARTIAL** | Distinguish accepted supply from unconditional purchase; allow capacity and competing claims without continuous simulation | **STRONG architecturally** |
+| Baseline buyers could become infinite premium deletion sinks | **PARTIAL** | Guarantee a normal outlet while tuning its value below or beside contextual specialist and civic demand; no continuous simulation | **STRONG architecturally** |
 | NPC tanning could erase Leatherworking | **PARTIAL** | Keep market leather, reject assumed unrestricted conversion service, reserve player construction/mastery | **STRONG** |
 | Ordinary conversion could become hidden skills | **PARTIAL** | Use simple custody handoffs with no XP or player production minigame | **STRONG** |
 | Trade disruption could force local Mining or salvage farming | **CONTRADICTORY if adopted** | Preserve stock conservation, repair, alternate lawful trade, and flexible-path continuity | **STRONG** |
@@ -201,22 +201,16 @@ This order prevents balance problems from becoming excuses for resource bloat or
 
 No **THIN**, **MISSING**, active **CONTRADICTORY**, or fixable **PARTIAL** source-to-sink relationship remains after revision. Content and balance must still validate stewardship readability, payoff cadence, and sibling-output demand, but those tests do not require missing economic logic.
 
-## 6. Provisional decisions and Creative Director review
+## 6. Resolved Creative Director direction
 
 ### Provisional decisions
 
 1. Ordinary supply establishes viable baseline access; player gathering adds control, discovery, and useful output bundles.
-2. Supply disruptions affect bounded relationships rather than running as a continuous region simulation.
-3. Ordinary suppliers can decline or limit accepted inputs according to capacity, stewardship, and civic demand; markets are not infinite deletion sinks.
+2. Supply disruptions are occasional, authored, legible, and local rather than continuous churn.
+3. Normal lawful transferable goods have a dependable baseline market outlet. Specialist demand remains contextual; no outlet supplies unlimited premium value.
 4. Player self-supply includes lawful ordinary conversion and exchange rather than personal ownership of every production step.
 5. Repair remains a recurring sink but must reflect actual failure and safe refurbishment limits.
-6. No new material, skill, generic repair kit, or capstone ingredient is required.
-
-### Genuine morning review items
-
-1. **Systemic disruption scope:** approve occasional bounded economy states outside authored stories, or keep shortages entirely story-triggered. Both preserve the architecture; the choice controls implementation and content burden.
-2. **Post-mastery recurrence:** approve civic repair demand and changing opportunity conditions as recurring reasons to participate, subject to later bounded content design. The alternative is to keep recurrence mostly market and personal-maintenance driven, with less systemic world response.
-3. **Ordinary-supplier acceptance:** approve finite/contextual acceptance of player surplus rather than universal vendor purchasing. This is recommended to prevent gathering from becoming consequence-free output dumping.
+6. Ordinary wood is one tangible broader v1 state; no species tiers, wood grades, generic repair kit, or capstone ingredient is required.
 
 ## 7. Stress-test conclusion
 

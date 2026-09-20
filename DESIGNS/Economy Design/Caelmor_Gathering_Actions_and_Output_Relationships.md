@@ -22,7 +22,7 @@ WORLD SOURCE
 - Flax processing, charcoal production, and tallow rendering remain ordinary-labor conversions rather than player skills.
 - Raw hide and tannin-rich bark are source-conditional guaranteed outputs, never weighted random drops.
 - Hunting must have an edible-output relationship as well as a hide relationship. This pass does not create a meat catalog.
-- Ordinary wood is a relationship placeholder outside the current equipment-chain state list. This pass does not select wood species, lumber items, Fletching materials, fuel quantities, or nodes.
+- Ordinary wood is one broad provisional tangible inventory family/state outside the nine equipment-chain states. Valid Woodcutting produces it as a transferable, bankable, tradeable output. This pass does not select wood species, log tiers, grades, Fletching materials, fuel quantities, or nodes.
 - S01 remains deferred. No ranged gathering demand is inferred.
 
 ## Output relationship vocabulary
@@ -49,10 +49,11 @@ No weighted random relationship is required for the nine equipment-chain states.
 | **Flax tow** | Flax-bundle processing | Ordinary-labor conversion | None | Household or specialist fiber preparation | Deterministic co-output with linen from the same source flow; proportions deferred |
 | **Linen textile** | Flax-bundle processing | Ordinary-labor conversion | None | Household or specialist spinning and weaving | Deterministic output from the same conversion flow that also yields useful tow |
 | **Tannin-rich bark** | Eligible managed woodland work | Mixed supply | Woodcutting for player source | Stewardship-approved selective harvest, pruning, or yard recovery; ordinary forestry may also supply it | Source-conditional guaranteed co-output when the selected source and action yield usable bark |
+| **Ordinary wood (broader v1 state)** | Eligible managed woodland work | Mixed supply | Woodcutting for player source | Stewardship-approved selective harvest or recovery; ordinary forestry also supplies it | Guaranteed tangible output from valid work; one broad state with no species or grade tiers |
 | **Wood charcoal** | Suitable wood flows converted by fuel workers | Ordinary-labor conversion and trade | None for conversion | Fuel workers dry and convert suitable wood supplied by player, household, civic, or trade flows | Guaranteed conversion output from accepted feedstock; no player Charcoal-making recipe |
 | **Rendered tallow** | Legitimate animal-processing flows | Ordinary-labor conversion and trade | None for conversion | Renderers process suitable fat from husbandry, ordinary animal processing, and eligible delivered game | Guaranteed conversion output from accepted feedstock; never gathered directly |
 
-This matrix governs the equipment chain only. It neither approves nor prohibits other future goods from Hunting, Woodcutting, husbandry, food production, or trade.
+The nine equipment-chain states remain unchanged. Ordinary wood is added here as one broader v1 economy state required by D11; this does not approve other future goods from Hunting, husbandry, food production, or trade.
 
 ## 2. Logical gathering and supply actions
 
@@ -82,13 +83,13 @@ This matrix governs the equipment chain only. It neither approves nor prohibits 
 | Supply classification | Player-gathered Woodcutting plus ordinary forestry supply. |
 | Responsible skill | Woodcutting. |
 | Logical action | Carry out an approved selective harvest that produces usable wood while respecting bank stability, future repair stock, source health, fire risk, and community claims. |
-| Primary output relationship | Ordinary wood outside the current equipment-chain catalog. Its later forms and uses require their own design pass. |
+| Primary output relationship | One broad provisional ordinary-wood inventory state. It is tangible, transferable, bankable, tradeable, and guaranteed from valid work. |
 | Equipment-chain co-output | Tannin-rich bark is source-conditionally guaranteed when the eligible source and approved action physically produce usable bark. |
-| Secondary routed relationship | Suitable player-supplied wood may be sold or delivered into the ordinary fuel-worker flow that produces charcoal. The player does not convert it directly in this pass. |
+| Secondary routed relationship | The player may keep, bank, sell through a dependable baseline market outlet, supply household or civic repair demand, or deliver suitable wood into the ordinary fuel-worker flow that produces charcoal. The player does not convert it directly in this pass. |
 | Output classification | Wood is the guaranteed primary relationship of valid harvest. Bark is a deterministic co-output only for qualifying source/action combinations. It is never a weighted bonus. |
 | Stewardship and access | Bank protection, woodland health, public repair needs, land or household custody, fire conditions, and closure decisions can permit, restrict, or redirect harvest. Exact jurisdiction and sites remain open. |
-| Economic purpose | Supplies later wood uses, sustains tanning input without a bark-only grind, and can feed the ordinary charcoal economy through trade. |
-| Processing destination | Ordinary wood enters future woodworking, fuel, repair, or trade relationships; bark enters Leatherworking; accepted wood flow reaches fuel workers. |
+| Economic purpose | Supplies household and civic repair relationships, sustains tanning input without a bark-only grind, provides tangible bank/trade value, and can feed the ordinary charcoal economy. |
+| Processing destination | Ordinary wood enters baseline trade, household or civic repair supply, storage, or accepted fuel-worker conversion; bark enters Leatherworking. |
 | Meaning without XP | Yes. Wood has wider future uses and trade value, bark sustains leather production, and stewardship changes which work is responsible or available. |
 | Why separate | Selective Woodcutting is an approved skill relationship with broad physical value. Bark remains attached to legitimate woodland work rather than becoming an artificial standalone resource. |
 
@@ -459,7 +460,7 @@ Weighted random outputs are not used for the nine core equipment-chain states.
 - Exact huntable animals, ecology, and which are eligible for edible, hide, or suitable-fat relationships.
 - Exact recovery conditions and whether field dressing is one interaction or a linked step after the hunt.
 - Final edible inventory outputs and Cooking relationships.
-- Exact ordinary wood inventory states, species, processing, and uses outside this equipment-chain pass.
+- Exact ordinary wood species, visual forms, later-use catalog, and whether an approved downstream system ever justifies splitting the single broad state.
 - Exact managed woodland source eligibility for usable tanning bark.
 - Exact ordinary-labor interfaces for flax, textile, charcoal, tallow, husbandry, tannery, and steel supply.
 - Exact ownership, permissions, closures, seasonal constraints, and stewardship authorities.

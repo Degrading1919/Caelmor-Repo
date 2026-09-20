@@ -37,12 +37,12 @@ The portfolio uses one shared parameterized alert-and-movement framework for flo
 
 | Relationship | Distinct content job | Ordinary-wood role | Why it survives pruning |
 |---|---|---|---|
-| Household managed tree | Preserve living household value through pollard, boundary, orchard, or productive-tree maintenance | Destination-bound household/general or accepted fuel flow | Owns the living-source lesson and agricultural integration. Productive trees remain a variant, not a fifth family. |
+| Household managed tree | Preserve living household value through pollard, boundary, orchard, or productive-tree maintenance | Tangible ordinary wood for keep/bank/trade, household supply, or accepted fuel flow | Owns the living-source lesson and agricultural integration. Productive trees remain a variant, not a fifth family. |
 | Managed renewal coppice | Repeated selective harvest with protected regrowth | Dependable household/general, repair, or accepted fuel flow; strong baseline bark relation | Owns renewable selection and the clearest responsible bark supply. |
-| Bank-binding riparian tree | Cut only where obstruction, failure, and bank function justify intervention | Destination-bound repair/general flow; bark conditional on final ecology | Owns Lowmark water-edge restraint and awkward recovery. |
-| Public repair reserve standard | Retain sound growth for future public need, then match source to a bounded repair demand | Destination-bound public-repair flow; bark conditional on final ecology | Owns future-stock custody and mastery selection without a superior timber material. |
+| Bank-binding riparian tree | Cut only where obstruction, failure, and bank function justify intervention | Tangible ordinary wood; bark conditional on final ecology; public or market supply choice | Owns Lowmark water-edge restraint and awkward recovery. |
+| Public repair reserve standard | Retain sound growth for future public need, then match source to a bounded repair demand | Tangible ordinary wood with a preserved public-repair destination; bark conditional on final ecology | Owns future-stock custody and mastery selection without a superior timber material. |
 
-Ordinary wood is provisionally destination bound. A valid intake is disclosed before commitment and remains available through successful resolution. No log, grade, stockpile, or hidden claim item is added.
+Ordinary wood is one broad provisional tangible inventory state. It is transferable, bankable, tradeable, and usable by household repair, civic repair, fuel-worker conversion, and later approved relationships. No species-specific logs, grades, repair stock, fuelwood, offcuts, or multiple tiers are added.
 
 **Result: ARCHITECTURE VALIDATED.** Four relationships prove every W pattern. The fifth productive-tree family was **CONTENT REDUNDANT** and was merged into household managed trees without losing its lesson.
 
@@ -100,25 +100,25 @@ These situations expose custody and physical work without creating Farming, Text
 | Food and renderer hunt | Eligible hunt → recovery routing → edible relationship plus qualified internal fat flow → ordinary rendering → tallow → bounded finishing/maintenance | **ARCHITECTURE VALIDATED** |
 | Husbandry leather | Ordinary husbandry/processing → raw hide → ordinary tanning → leather → buyer/crafter construction and repair | **ARCHITECTURE VALIDATED** |
 | Household flax | Cultivation → flax bundle → textile workroom → linen plus tow → lining/damping/joining → later repair | **ARCHITECTURE VALIDATED** |
-| Woodland tanning | Legitimate selective work → destination-bound ordinary wood plus eligible bark → player/ordinary tanning → leather → construction/repair | **ARCHITECTURE VALIDATED** |
-| Woodland fuel | Legitimate work → suitable destination-bound wood → fuel worker → charcoal → Smithing construction/refurbishment | **ARCHITECTURE VALIDATED** |
+| Woodland tanning | Legitimate selective work → ordinary wood inventory plus eligible bark → keep/bank/trade wood; player/ordinary tanning consumes bark → leather → construction/repair | **ARCHITECTURE VALIDATED** |
+| Woodland fuel | Legitimate work → ordinary wood inventory → accepted fuel worker → charcoal → Smithing construction/refurbishment | **ARCHITECTURE VALIDATED** |
 | Imported steel | Lawful consignment → inspection → steel stock → Smithing with charcoal → hard equipment → refurbishment | **ARCHITECTURE VALIDATED** |
-| Public repair | Bounded need → accepted destination-bound wood and other ordinary inputs → ordinary crews/workshops → restored function → continuing maintenance sink | **ARCHITECTURE VALIDATED** |
+| Public repair | Bounded need → player supplies ordinary wood inventory and other accepted inputs → ordinary crews/workshops → restored function → continuing maintenance sink | **ARCHITECTURE VALIDATED** |
 | Personal equipment repair | Condition need → accessible storage → approved Smithing/Leatherworking repair family → physically appropriate represented inputs → restored safe use | **ARCHITECTURE VALIDATED** |
 
-All nine equipment-chain states have a source, processor or trade interface, equipment function, and repair or continuing-use sink. Ordinary wood, edible output, and suitable fat remain explicit functional relationships without being forced into this inventory catalog.
+All nine equipment-chain states have a source, processor or trade interface, equipment function, and repair or continuing-use sink. Ordinary wood is an additional broader v1 economy state; edible output and suitable fat remain explicit functional relationships pending later catalog decisions.
 
 ## 5. Required playstyle stress tests
 
 ### Hunting-heavy player
 
-The player rotates behaviorally distinct opportunities, retains eligible hides for Leatherworking, routes food and qualified renderer value through ordinary processing, and trades accepted surplus for other inputs. Contextual acceptance prevents infinite dumping; a disclosed destination prevents authored work from stranding output.
+The player rotates behaviorally distinct opportunities, retains eligible hides for Leatherworking, routes food and qualified renderer value through ordinary processing, and trades surplus through a dependable baseline outlet or contextual specialist demand. Specialist demand does not become unlimited premium disposal.
 
 **Result: ARCHITECTURE VALIDATED.** Exact demand and value remain **FUTURE BALANCE ONLY**.
 
 ### Woodcutting-heavy player
 
-The player chooses legitimate household, renewal, bank, reserve, and recovery work. Ordinary wood travels through one declared main intake; eligible bark remains secondary; fuel does not override repair or stewardship. Ordinary cutters provide background supply.
+The player chooses legitimate household, renewal, bank, reserve, and recovery work. Ordinary wood accumulates as one tangible state for keep, bank, trade, repair supply, or fuel-worker supply; eligible bark remains secondary. Ordinary cutters provide background supply.
 
 **Result: ARCHITECTURE VALIDATED.** Frequency of public repair, fuel demand, and general intake remains **FUTURE BALANCE ONLY**.
 
@@ -146,18 +146,18 @@ The player applies H6/W6 judgment to changing authored conditions, combines gath
 |---|---|---|---|
 | Productive trees duplicated household managed growth | **CONTENT REDUNDANT** | Merged orchard/productive presentation into the S-WD1 household relationship | **ARCHITECTURE VALIDATED** |
 | Public repair language implied a player infrastructure recipe | **ARCHITECTURE NEEDS REVISION** | Ordinary crews own civic repair; the player supplies inputs or uses only existing equipment recipe families | **ARCHITECTURE VALIDATED** |
-| Ordinary wood lacked a complete custody contract | **CONTENT THIN** | Selected destination-bound custody with visible precommit acceptance and no new item | **ARCHITECTURE VALIDATED** |
+| Ordinary wood lacked tangible accumulation and player ownership | **ARCHITECTURE NEEDS REVISION** | D11 replaced destination-only custody with one broad transferable, bankable, tradeable ordinary-wood state | **ARCHITECTURE VALIDATED** |
 | Hunting M2/P1/P2 could be read as separate required nodes | **CONTENT REDUNDANT** | Marked the chain and mastery examples as variants/compound wrappers | **ARCHITECTURE VALIDATED** |
 | Woodland shortage mastery approached allocation management | **ARCHITECTURE NEEDS REVISION** | Narrowed it to one site, one intervention, and at most one main destination | **ARCHITECTURE VALIDATED** |
 | H5 implied several bespoke hazard systems | **ARCHITECTURE NEEDS REVISION** | V1 proof now uses existing terrain/access states and optional approved combat handoff | **ARCHITECTURE VALIDATED** |
-| Buyer refusal could strand gathered output | **CONTENT THIN** | Purpose-bound work discloses one valid destination whose acceptance persists through resolution | **ARCHITECTURE VALIDATED** |
+| Buyer refusal could strand lawful gathered output | **CONTENT THIN** | D07 establishes a dependable baseline market outlet plus contextual specialist demand; purpose-bound demand persists through resolution | **ARCHITECTURE VALIDATED** |
 | F3/F4 could imply separate group AI | **CONTENT THIN** | Required one parameterized alert-and-movement framework | **ARCHITECTURE VALIDATED** |
 
 ## 7. Second-pass classification
 
 | Category | Classification | Finding |
 |---|---|---|
-| Approved material/state/recipe foundation | **ARCHITECTURE VALIDATED** | No change or hidden extension was required. |
+| Approved material/state/recipe foundation | **ARCHITECTURE VALIDATED** | The nine equipment-chain states and four recipe families remain unchanged; ordinary wood is one approved broader v1 inventory state. |
 | Hunting content depth | **ARCHITECTURE VALIDATED** | Four fauna functions and eleven compositions prove all six archetypes and five bands. |
 | Woodcutting content depth | **ARCHITECTURE VALIDATED** | Four source relationships and ten compositions prove all six archetypes and five bands. |
 | Ordinary supply interlock | **ARCHITECTURE VALIDATED** | Nine situations and nine traces preserve ordinary production and player choice. |
@@ -177,11 +177,10 @@ There is no remaining **ARCHITECTURE NEEDS REVISION**, **CONTENT THIN**, **CONTE
 
 Before implementation data, the project must still:
 
-- receive Creative Director decisions recorded in the morning ledger, including D10 and D11;
 - reconcile final fauna and woodland species against ecology and canon;
 - verify exact sites and movement relationships against the map;
-- resolve D02 Hunting encounter ownership and D03 recovery presentation;
-- choose quantities, acceptance capacity, cadence, prices, levels, XP, timing, and yields through later balance work.
+- prototype the approved D02 combat handoff boundary and D03 compressible field-dressing presentation;
+- choose quantities, market values, specialist demand, cadence, prices, levels, XP, timing, and yields through later balance work.
 
 These gates do not require invention of the fauna portfolio, woodland portfolio, gathering progression, ordinary supply model, or major source-to-sink relationships. Node placement and data design can begin from the proposal once the Creative Director audits it.
 

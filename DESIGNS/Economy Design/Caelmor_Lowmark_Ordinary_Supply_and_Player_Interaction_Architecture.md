@@ -4,7 +4,7 @@
 
 ## Authority and boundaries
 
-This proposal preserves the approved six-material foundation, nine equipment-chain inventory states, four player-facing recipe families, and gathering/output relationships.
+This proposal preserves the approved six-material foundation, nine equipment-chain inventory states, one broader ordinary-wood inventory state, four player-facing recipe families, and gathering/output relationships.
 
 - Player skills remain Smithing, Leatherworking, Hunting, and Woodcutting where already assigned. Cooking and Fletching receive no artificial dependency.
 - Flax cultivation and textile work, husbandry, charcoal burning, rendering, and steel receiving remain ordinary labor rather than player skills.
@@ -32,7 +32,7 @@ The selected model exposes a small number of **custody handoffs**. A player brin
 | **Gather** | Perform an approved Hunting or Woodcutting action in the world. | No ordinary profession becomes a gathering skill. |
 | **Supply** | Deliver a valid good or routed output relationship to a worker, store, or market that can use it. | Supplying does not make the player manage production. |
 | **Commission conversion** | Hand an accepted input to ordinary labor and receive or later collect the established output relationship. | No XP, minigame, or hidden crafting skill is implied. |
-| **Purchase / sell** | Exchange represented goods through a suitable merchant or workshop. | Exact price and stock behavior remain later tuning. |
+| **Purchase / sell** | Exchange normal lawful transferable goods through a dependable baseline market, with additional specialist destinations where relevant. | Exact price and stock behavior remain later tuning; no outlet supplies unlimited premium value. |
 | **Store** | Place represented inventory states in accessible custody compatible with crafting from storage. | No new warehouse-management system. |
 | **Craft / repair** | Use Smithing or Leatherworking through the four approved recipe families. | Workshop-only states remain internal. |
 | **Respond** | Use another approved source, conserve supply, deliver an accepted input, or complete bounded civic work when a disruption affects access. | The player does not become regional production manager. |
@@ -93,7 +93,7 @@ Household supply is background-stable rather than infinite. It supports baseline
 | Question | Provisional design |
 |---|---|
 | Operators | Fuel workers responsible for feedstock acceptance, drying, controlled conversion, fire safety, cooling, and storage. |
-| Player interaction | Sell or deliver later-approved suitable wood relationships; purchase charcoal; respond to fuel shortage through lawful supply or conservation. |
+| Player interaction | Keep, bank, or sell tangible ordinary wood; deliver suitable wood to fuel workers; purchase charcoal; respond to fuel shortage through lawful supply or conservation. |
 | Output relationship | Accepted feedstock enters ordinary conversion and charcoal returns to market or workshop stores. Exact settlement and proportions are deferred. |
 | Constraints | Stewardship permissions, structural-timber priority, drying, smoke, fire risk, household fuel competition, and secure dry storage. |
 | Why it matters | Smithing fuel has visible labor and scarcity without adding Charcoal-making. Woodcutting can support the economy without becoming a charcoal recipe. |
@@ -133,7 +133,7 @@ Great War remains, memorial objects, and evidentiary material never enter routin
 
 ### Market and receiving area
 
-The market aggregates household output, imported stock, and finished ordinary goods. It supports buying and selling; it does not perform every conversion. Steel consignments may be received near this area, while dirty or fire-risk processes remain physically separate.
+The market aggregates household output, imported stock, tangible ordinary wood, and finished ordinary goods. It provides a dependable baseline outlet for normal lawful transferable goods; contextual specialists and civic demand may offer different value or purpose. It does not perform every conversion or provide unlimited premium purchasing. Steel consignments may be received near this area, while dirty or fire-risk processes remain physically separate.
 
 The market should show dependence through signs of custody: bundled household goods, inspected consignments, repair demand, posted shortages, and carriers waiting on work. These are presentation cues, not a commodity simulation.
 
@@ -153,7 +153,7 @@ Commission fitting, inspection, custody, and provenance remain qualifications an
 
 ### Storage and custody
 
-All nine equipment-chain inventory states can pass through ordinary storage suited to their broad condition. Crafting from accessible storage remains required. The architecture does not yet impose spoilage, bulk, warehouse fees, or separate container simulation.
+All nine equipment-chain inventory states plus ordinary wood can pass through ordinary storage suited to their broad condition. Crafting from accessible storage remains required. The architecture does not yet impose spoilage, bulk, warehouse fees, or separate container simulation.
 
 Storage has three design purposes:
 
@@ -171,7 +171,7 @@ Raw-hide condition and fuel dryness are physically relevant, but their exact mec
 | Household husbandry | No player skill | Via accepted market flow | No | Yes | Raw hide where represented | Leatherworking may use purchased hide | Shift between ordinary and hunted supply |
 | Flax and textile work | No Farming | Flax bundle | Yes, bundle to linen plus tow | Yes | Yes | Leatherworking integrates outputs | Use held goods, alternate ordinary supply, or await recovery |
 | Tanning | Bark/hide come from approved sources | Yes | Not universal; decision deferred | Yes | Yes | Leatherworking owns player conversion and flexible repair | Craft personally, buy leather, or conserve |
-| Fuel work | Woodcutting may feed accepted wood | Yes | Ordinary service/exchange form deferred | Buy charcoal; sell accepted wood | Charcoal | Smithing consumes charcoal | Deliver eligible wood, use trade supply, prioritize repairs |
+| Fuel work | Woodcutting supplies tangible ordinary wood | Ordinary wood is bankable and tradeable | Ordinary workers convert accepted wood | Buy charcoal; sell wood through baseline market or supply fuel workers | Charcoal | Smithing consumes charcoal | Keep/bank/trade wood, deliver eligible wood, use trade supply, prioritize repairs |
 | Rendering | No direct gathering | Eligible animal delivery routes fat | Internal ordinary conversion | Buy tallow | Tallow | Justified maintenance only | Rely on husbandry, eligible game, or trade |
 | Imported steel | No Lowmark gathering | Accepted trade stock only | No | Yes | Yes | Smithing construction/refurbishment | Repair, conserve, or wait for lawful supply |
 | Finished equipment | No | No | Aspirational commission is craft service | Later trade rules deferred | Equipment storage | Smithing or Leatherworking | Maintain existing equipment instead of requiring new stock |
@@ -199,7 +199,7 @@ Shortages should create understandable choices, local stories, and temporary val
 ### Ordinary supply must not invalidate player activity
 
 - Player Hunting offers direct control over an eligible hide source and contributes to future food and rendering relationships.
-- Player Woodcutting offers direct access to ordinary wood relationships and qualified bark co-output under stewardship.
+- Player Woodcutting produces tangible ordinary wood for keep, bank, trade, repair supply, or fuel-worker supply, plus qualified bark under stewardship.
 - Player Leatherworking controls personal hide preparation, equipment construction, and flexible repair.
 - Player Smithing controls hard equipment construction and refurbishment.
 - Ordinary suppliers provide continuity and convenience, but they do not perform player mastery, aspirational qualification, or all construction on demand.
@@ -220,7 +220,7 @@ No path requires the player to gather every input personally. Buying, ordinary c
 
 The architecture needs a small set of reusable interaction patterns:
 
-1. buy or sell represented goods;
+1. buy or sell normal lawful transferable goods through the baseline market or use a contextual specialist destination;
 2. deliver an accepted source relationship;
 3. commission one established ordinary conversion;
 4. craft or repair at the correct workshop;
@@ -247,22 +247,15 @@ The same patterns can serve multiple workers and settlements through context and
 
 No additional material, skill, or equipment-chain inventory state is required by this architecture.
 
-## 9. Provisional decisions and morning review
-
-### Provisional selections
+## 9. Resolved Creative Director direction
 
 1. Use a distributed civic economy with a few reusable custody-handoff interactions.
 2. Allow ordinary textile conversion to be commissioned because both linen and tow are represented and useful.
 3. Let ordinary tanners supply finished leather, but do not assume a universal on-demand conversion service.
 4. Settle suitable game byproducts inside the animal-processing handoff; do not create a fat item or hidden token.
-5. Use bounded authored supply disruptions rather than continuous simulation.
-6. Keep storage mechanically simple while preserving crafting from accessible storage.
-
-### Genuine Creative Director review items
-
-1. **Disruption cadence:** approve bounded authored/state-based shortages as occasional world texture and player opportunity, or restrict disruptions to explicitly authored story moments. This affects systemic content burden, not lore truth.
-2. **Ordinary conversion presentation:** approve direct service commissions for textile conversion and a simple sale/delivery relationship for fuel and rendering, or keep every ordinary conversion wholly market-mediated. The recommendation preserves textile clarity while avoiding pseudo-skills for charcoal and tallow.
-3. **NPC tanning boundary:** confirm that ordinary tanners sell finished leather without providing unrestricted player-input conversion. This preserves Leatherworking's transformation identity while keeping the world self-sufficient.
+5. Use occasional, authored, legible disruptions rather than continuous simulation or rotating chores.
+6. Keep storage mechanically simple while preserving crafting from accessible storage and adding ordinary wood to normal storage/trade.
+7. Provide a dependable baseline market outlet for normal lawful transferable goods while keeping specialist and civic demand contextual.
 
 All exact exchange values, settlement methods, stock behavior, and interfaces remain later production and balance decisions.
 

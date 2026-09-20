@@ -34,11 +34,11 @@ The six-family model is a content architecture, not a demand for six prefabs or 
 | Family | Primary role | Player relationship | Approved outputs or services |
 |---|---|---|---|
 | 1. Hunting opportunities | Ecological, multi-output player gathering | Hunt, approach, recover, keep/process/sell | Edible-output relationship; conditional raw hide; routed suitable fat |
-| 2. Managed woodland work | Stewardship-bound player gathering | Selective harvest, assess access, allocate outputs | Ordinary wood relationship; conditional tanning bark; fuel-worker feed possibility |
+| 2. Managed woodland work | Stewardship-bound player gathering | Selective harvest, assess access, recover and route outputs | Tangible ordinary wood inventory; conditional tanning bark; fuel-worker feed possibility |
 | 3. Household production network | Makes ordinary agriculture and husbandry visible | Supply, purchase, sell, respond to disruption | Flax bundles; ordinary raw-hide supply; legitimate rendering feed |
 | 4. Textile conversion network | Turns flax household output into two useful goods | Commission conversion, purchase, sell, store | Linen textile plus flax tow |
 | 5. Settlement-edge process yards | Handles water-, odor-, smoke-, heat-, and waste-bearing conversion | Supply eligible inputs, perform player Leatherworking where supported, or buy outputs through a yard or market | Leather, charcoal, tallow |
-| 6. Market, receiving, storage, and craft network | Connects imports, ordinary supply, storage crafting, equipment production, and repair | Receive, trade, store, commission, craft, repair | Steel stock and all approved transferable equipment-chain states |
+| 6. Market, receiving, storage, and craft network | Connects imports, ordinary supply, baseline trade, storage crafting, equipment production, and repair | Receive, trade, store, commission, craft, repair | Steel stock, ordinary wood, and all approved transferable equipment-chain states |
 
 ## Family 1 — Hunting opportunities
 
@@ -62,12 +62,12 @@ The six-family model is a content architecture, not a demand for six prefabs or 
 | Purpose | Represent Woodcutting as selective work performed for household, bank, crossing, repair, access, and long-term woodland needs. |
 | Operator or custodian | Woodland stewards, households, landholders, repair crews, and local councils may authorize or contest work. No exact jurisdiction is selected. |
 | Logical actions | Inspect source and purpose, accept or obtain access, prepare the work area, perform selective harvest, recover ordinary wood, identify eligible bark, and route suitable wood toward repair, trade, or fuel workers. |
-| Outputs | Ordinary wood relationship as primary; tannin-rich bark as a source-conditional guaranteed co-output; suitable wood may enter ordinary charcoal supply. |
+| Outputs | One broad tangible ordinary-wood inventory state as primary; tannin-rich bark as a source-conditional guaranteed co-output; suitable wood may enter ordinary charcoal supply. |
 | Access and stewardship | Bank stability, woodland health, future repair stock, fire conditions, household claims, public repair priorities, and temporary closures shape what work is responsible. |
 | Ecological or civic requirements | A legitimate cutting purpose, safe access, a source whose removal or pruning will not create greater harm, and an accountable destination for the wood. |
 | Broad placement logic | Managed working woodland, orchard or hedgerow maintenance contexts, floodplain edges, repair corridors, yards receiving legitimate cut material, and bounded recovery sites. **MAP VERIFICATION REQUIRED.** |
 | Disruption or closure | Flood damage, fire risk, erosion, source stress, repair reservation, unsafe windfall, contamination, competing civic demand, or access disputes. |
-| Why the player cares | Wood has broad future value; bark sustains tanning; fuel-worker delivery creates an indirect charcoal relationship; better judgment improves route and output choices. |
+| Why the player cares | Ordinary wood can be kept, banked, traded through a dependable baseline outlet, or supplied to household, civic, and fuel-worker relationships; bark sustains tanning; better judgment improves route and use choices. |
 | Must not represent | Bark-only actions or nodes, clear-cutting, final species, automatic charcoal production, magic-enhanced timber, war-remain harvesting, or a disguised stationary tree-tier ladder. |
 
 ## Family 3 — Household production network
@@ -124,7 +124,7 @@ This is one interaction family with three physically distinct variants. The vari
 | Purpose | Join imported steel, ordinary supply, player goods, accessible storage, primary crafting, repair, and commission work through understandable civic and commercial interfaces. |
 | Operator or custodian | Merchants, carriers, receiving clerks, market sellers, storekeepers, Smithing and Leatherworking workshops, crossing staff, and commission witnesses where later selected. |
 | Logical actions | Receive and inspect consignments; buy and sell; deposit and withdraw; route appropriate textile commissions; craft from accessible storage; repair or refurbish equipment; inspect commission eligibility; respond to shortage notices. |
-| Outputs or services | Plain carbon steel stock; circulation of all nine represented states; Smithing and Leatherworking work; item-level repair; aspirational commission access when earned. |
+| Outputs or services | Plain carbon steel stock; circulation of all nine equipment-chain states plus ordinary wood; dependable baseline trade for normal lawful transferable goods; Smithing and Leatherworking work; item-level repair; aspirational commission access when earned. |
 | Access and stewardship | Provenance, condition, household and civic priority, market access, storage capacity, trade disruption, workshop qualification, and story legitimacy. Exact tariffs and governance remain open. |
 | Ecological or civic requirements | Safe receiving space, dry stores, fire separation, access to workshops and ordinary transport, visible accountability, and separation of suspicious war remains from routine stock. |
 | Broad placement logic | Crestbridge-class receiving and trade contexts, Brookhollow-class markets, town or village repair clusters, household or civic stores, and other reconciled settlement classes. Exact assignments require map and content verification. **MAP VERIFICATION REQUIRED.** |
@@ -143,12 +143,13 @@ Managed woodland ─── tannin-rich bark ────────────
 
 Household flax ─→ textile conversion ─→ linen + tow ────────────────────────────────→ equipment + repair
 
-Managed/ordinary wood flow ─→ fuel yard ─→ charcoal ─┐
+Managed woodland ─→ ordinary wood [inventory] ─→ bank / baseline trade / repair supply
+                                             └─→ fuel yard ─→ charcoal ─┐
 Imported steel receiving ────────────────→ steel ─────┴─→ Smithing + refurbishment
 
 Hunting/husbandry suitable-fat flow ─→ rendering yard ─→ tallow ─→ finishing + maintenance
 
-markets + storage + workshops connect every transferable state
+markets + storage + workshops connect every transferable state through baseline trade plus contextual specialist demand
 ```
 
 The diagram shows relationships, not exact routes, quantities, or required co-location.
@@ -193,7 +194,7 @@ Exact levels and unlocks remain unselected.
 | ID | Provisional recommendation | Alternative | Consequence |
 |---|---|---|---|
 | E01 | Use six world-facing families with variants | Separate every profession or material into a family | Six families preserve world logic with fewer bespoke interactions and assets. |
-| E02 | Use direct commission for textile conversion; make tannery, fuel, and rendering output reliably available through their responsible workers or market while keeping input acceptance contextual | Make every conversion universally commissionable, or make all output market-only | This keeps ordinary labor legible and supply dependable without turning each profession into a player service or an infinite input sink. |
+| E02 | Use direct commission for textile conversion; give normal lawful transferable goods a dependable baseline market outlet; keep tannery, fuel, rendering, and civic demand contextual | Make every conversion universally commissionable, or make all output specialist-only | This keeps ordinary labor legible and supply dependable without turning specialists into infinite premium sinks. |
 | E03 | Express disruptions as authored availability states and visible local conditions | Continuous simulation | Authored states preserve consequence without building a management economy. |
 | E04 | Let storage crafting draw transferable inputs while requiring the relevant workshop/service context | Allow all crafting from any storage screen | Workshop context keeps production grounded while avoiding inventory shuffling. Exact UI remains later design. |
 | E05 | Treat processor variants as one service architecture but physically separate them where risks differ | Build a combined universal processing hall | Shared logic saves scope; distinct placement preserves water, fire, odor, and civic meaning. |
@@ -204,7 +205,7 @@ E02 and E04 have the largest implementation and player-experience consequences a
 
 | Check | Result | Finding |
 |---|---|---|
-| Approved materials and states | **STRONG** | Six foundations and nine inventory states remain unchanged. |
+| Approved materials and states | **STRONG** | Six equipment foundations and nine equipment-chain states remain unchanged; ordinary wood is one broader v1 inventory state. |
 | Player actions | **STRONG** | Only approved Hunting and Woodcutting relationships gather equipment-chain inputs. |
 | Ordinary-world credibility | **STRONG** | Households, processors, carriers, markets, stores, and workshops provide parallel supply without making the player irrelevant. |
 | Interface count | **STRONG** | Six families and three process-yard variants cover all needs without one station per item. |

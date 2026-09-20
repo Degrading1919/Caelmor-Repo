@@ -15,7 +15,7 @@ stewardship-approved selective harvest
 ```
 
 - Woodcutting is selective work in an inhabited, repaired landscape. It is not clear-cutting.
-- Ordinary wood remains a relationship placeholder. No species, lumber item, tool tier, or Fletching input is selected here.
+- Ordinary wood is one broad provisional tangible inventory state outside the nine equipment-chain states. It is transferable, bankable, tradeable, and reusable across approved destinations. No species tier, wood grade, separate log family, tool tier, or Fletching demand is selected here.
 - Tannin-rich bark is a source-conditional guaranteed co-output of legitimate wood work. There is no bark-only action, route, or node.
 - Fuel workers produce charcoal. Woodcutting may supply acceptable feedstock but does not gain a charcoal recipe or a new skill.
 - A player is not Lowmark's sole cutter. Households, public crews, yard workers, and traders remain active suppliers.
@@ -156,7 +156,7 @@ Not every opportunity needs six separate clicks. These are design responsibiliti
 
 | Output relationship | Legitimate origin | Downstream relationship | Guardrail |
 |---|---|---|---|
-| **Ordinary wood** | Every successfully completed eligible harvest | Household work, civic repair, market, future separately approved ordinary-wood uses, or accepted fuel flow | Remains undefined as an item catalog; cannot exist only for XP. No S01 demand is assumed. |
+| **Ordinary wood** | Every successfully completed eligible harvest | Keep, bank, dependable baseline market trade, household or civic repair supply, accepted fuel-worker conversion, or future separately approved uses | One broad provisional inventory state; no species or grade tiers. It cannot exist only for XP, and no S01 demand is assumed. |
 | **Tannin-rich bark** | Only an eligible source/action that physically provides usable bark | Player Leatherworking or ordinary tannery | Guaranteed when eligible; no separate action, node, route, or rarity roll. |
 | **Suitable fuel-worker feed** | A subset of ordinary wood accepted by ordinary labor | Charcoal conversion and later Smithing demand | Structural or protected repair stock is not automatically fuel. Player does not make charcoal. |
 
