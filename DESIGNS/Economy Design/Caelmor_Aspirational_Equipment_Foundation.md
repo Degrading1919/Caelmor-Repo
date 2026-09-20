@@ -34,7 +34,7 @@ The portfolio is intentionally compact. The Blade and Guard define combat-action
 | Combat or utility niche | General-purpose deliberate melee. It should remain useful across mixed enemy behaviors without erasing specialist weapons that may exist later. |
 | Tradeoff or limitation | It does not own exceptional reach, concentrated offense, maximum mitigation, or a supernatural answer to enemy mechanics. Reliability is its specialization. |
 | Lore and regional grounding | Lowmark crossing duty, militia service, repair-oriented smithing, market access to conventional metal, and cultural respect for work that remains useful under pressure. |
-| Likely progression role | The practical-mastery destination for the balanced one-handed melee path. It should be earned late enough to summarize the player's learned habits without being withheld solely as a level-99 trophy. |
+| Likely progression role | The practical-mastery destination for the balanced generalist melee path. It should be earned late enough to summarize the player's learned habits without being withheld solely as a level-99 trophy. |
 | What earlier equipment must teach | Attack commitment, recovery windows, target choice, basic maintenance, positional discipline, and when to interrupt offense with defense. |
 
 ## 2. Crestbridge Guard — provisional name
