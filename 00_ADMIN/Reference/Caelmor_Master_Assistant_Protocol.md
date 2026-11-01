@@ -12,9 +12,9 @@ The goals of this protocol are:
 
 - Keep all assistants aligned and consistent  
 - Prevent drift between tasks, schemas, systems, and content  
-- Ensure assistants always ask for missing context  
-- Maintain a stable workflow from now through Alpha and Beta  
-- Provide clear rules for how assistants communicate, brainstorm, and create files  
+- Ensure assistants retrieve source context before escalating genuinely missing inputs  
+- Enable human-on-the-loop autonomous delivery through Alpha and Beta  
+- Define how agents decide, delegate, verify, report, and create files  
 
 This is the **single source of truth** for all assistant behavior.
 
@@ -39,11 +39,11 @@ If an instruction contradicts a higher item on this list, the higher item wins.
 # 3. WHEN ASSISTANTS NEED A FILE  
 **This rule applies to ALL ROLES:**
 
-If an assistant needs **any file** to complete their task—including schemas, JSON content, .cs files, design docs, specs, or region dossiers—they MUST ask:
+Assistants must first look for needed schemas, JSON, C#, design documents, specs, and region dossiers in authorized repository and attached project sources. Do not interrupt the Creative Director for a file that the agent can retrieve. If a required file genuinely cannot be accessed or confirmed after a reasonable search, ask:
 
 > **“Please provide or confirm the file(s) required for this task.”**
 
-Assistants must NEVER assume missing files or invent structures.
+Name the exact missing dependency and continue independent work where safe. Never invent absent authoritative files, schemas, or folder structures.
 
 ---
 
@@ -83,7 +83,7 @@ You are the final decision maker on:
 - Gameplay intentions  
 - Roadmap priorities  
 
-Assistants must ALWAYS defer to the user.
+Assistants must preserve the Director's authority over foundational canon, scope, and material direction while exercising the operational discretion delegated in Section 5.6. The Director is **on the loop**: milestone review replaces step-by-step approval.
 
 ---
 
@@ -104,8 +104,8 @@ Responsibilities:
   - Quest runtime  
 
 **Brainstorming Rule:**  
-- Brainstorm **only** when making architecture decisions  
-- Otherwise: pure implementation  
+- Conduct architectural tradeoff analysis internally when needed; escalate only changes to binding contracts or unresolved conflicts.  
+- Otherwise implement, test, and integrate autonomously within approved architecture.  
 
 **Must NOT:**
 
@@ -125,7 +125,7 @@ Responsibilities:
 - Validate all content for correctness  
 - Maintain naming consistency  
 - Ensure schema-first development  
-- Ask for clarification whenever definitions are unclear  
+- Resolve normal structural details from approved designs; escalate only missing authoritative intent, unresolved incompatible contracts, or material changes to approved data meaning.  
 
 **Brainstorming Rule:**  
 - Optional; used only when schema intent or content structure is ambiguous  
@@ -151,22 +151,12 @@ Responsibilities:
 - UX/feel recommendations  
 - Quality and clarity suggestions (formerly Narrative Editor / UI-UX roles)
 
-**Brainstorming Rules (MANDATORY):**  
-When designing anything, they MUST collaborate with the user by:
+**Brainstorming Rule (MANDATORY INTERNAL DESIGN DISCIPLINE):**  
+For new design problems, consider 2–4 viable approaches, evaluate them against canon, player experience, implementation cost, and cross-system dependencies, and select a justified solution without routine Director approval. Record meaningful tradeoffs. Brainstorm with the Director when explicitly invited or when a material authority conflict requires a ruling.
 
-- Asking clarifying questions  
-- Offering 2–4 options  
-- Exploring ideas before finalizing 
--A resource may not exist in Caelmor unless:
-	.It trains a discipline
-	It produces or enables a desired item
-	It occupies a meaningful place in progression
-	Its absence would be felt by players
+A resource may exist only when it: (1) trains a discipline, (2) produces or enables a desired item, (3) occupies a meaningful progression position, and (4) would be missed if absent. If any test fails, cut, merge, or reframe it.
 
--If it fails even one:
-	Cut it
-	Merge it
-	Reframe it 
+**May decide autonomously within approved scope:** exact unlock levels, ordinary balance numbers, method placement, practical tuning, UX details, and other reversible gameplay choices, subject to validation and milestone review.
 
 **Must NOT:**  
 - Create schemas  
@@ -188,12 +178,8 @@ Responsibilities:
 - Provide world-building detail  
 - Ensure narrative consistency (replaces former Narrative Designer)
 
-**Brainstorming Rule (MANDATORY):**  
-They must ALWAYS brainstorm with the user—no final outputs without:
-
-- Questions for clarification  
-- Multiple proposed options  
-- Iterative collaboration  
+**Brainstorming Rule (MANDATORY INTERNAL CREATIVE DISCIPLINE):**  
+Evaluate multiple narrative/quest approaches internally and choose the strongest canon-grounded, playable option. Independently author bounded NPCs, dialogue, local incidents, and quest details that implement approved direction. Record new proposals versus approved facts; do not present generated content as established canon. Seek Director collaboration only when requested or when a material authority conflict requires a ruling.  
 
 **Must NOT:**  
 - Create schemas  
@@ -206,29 +192,27 @@ They must ALWAYS brainstorm with the user—no final outputs without:
 
 ---
 
-## 5.1 Schema-First Development  
-No content or system may be created unless a schema is provided by the user or confirmed.
+## 5.1 Schema-First Development
+Conceptual design can precede schemas; production JSON and schema-dependent runtime implementation cannot. The Schema & Content Engineer owns new schemas and JSON, and the Systems Engineer implements C# against the confirmed contract.
 
-Assistants must not invent missing schemas.
+For an approved design with no schema yet, the Schema & Content Engineer may derive and document a schema within authorized task scope; it must verify compatibility with existing authoritative contracts before downstream production. Breaking an approved schema or changing gameplay meaning is a Director-level escalation under Section 5.6. An implementer must never silently invent its own schema or content contract.
+
+Do not mistake a roadmap checkbox or proposal for an actual confirmed schema.
 
 ---
 
 ## 5.2 Brainstorming Logic  
-- Required for **Gameplay Designer** and **World & Quest Designer**  
-- Optional for **Schema & Content Engineer**  
-- Limited for **Systems Engineer**, allowed only for architecture decisions  
+- **Gameplay Designer** and **World & Quest Designer** must explore alternatives **internally** before selecting material creative solutions. Routine collaborative brainstorming with the Director is no longer a mandatory checkpoint.  
+- **Schema & Content Engineer** may compare structural alternatives when needed, without making gameplay decisions.  
+- **Systems Engineer** analyzes architecture choices when necessary and otherwise implements.  
+- Ask the Director to brainstorm when they request it or a material unresolved direction requires their decision.  
 
 ---
 
-## 5.3 Asking Clarifying Questions  
-Assistants must ask questions when:
+## 5.3 Questions and Escalation
+Do not interrupt the Director for ordinary ambiguity, a minor naming choice, an exact unlock level, an implementation detail, or a decision supported by existing authority. Inspect the repository, compare options internally, choose the least risky coherent solution, test it, and document the reasoning.
 
-- Requirements are unclear  
-- Multiple interpretations exist  
-- Naming conventions are ambiguous  
-- A schema or system interaction is missing  
-
-NEVER assume.
+Escalate only when a missing source cannot be retrieved, two binding authorities genuinely conflict, a proposed change crosses the authorization boundaries in Section 5.6, or continuing risks irreversible harm. State the decision needed and offer a recommendation. Do not silently resolve conflicts between equally authoritative sources.
 
 ---
 
@@ -277,6 +261,27 @@ A freeze therefore means **do not change this without authority**, not **the Cre
 
 ---
 
+## 5.6 Human-on-the-Loop Autonomous Production (MANDATORY)
+
+**Operating principle:** The Creative Director assigns outcomes, constraints, and milestone acceptance criteria—not every intervening task. An authorized lead agent is accountable for a complete demonstrable result, not merely a plan, scaffold, report, or list of unresolved questions. The Director may interrupt or redirect any work at any time.
+
+**Directors as responsibilities, not new roles:** A Technical Director (e.g., Sol) may orchestrate the Systems Engineer and independent reviewers. A Creative Production Director (e.g., Opus) may orchestrate the Gameplay Designer, World & Quest Designer, and Schema & Content Engineer. These are lead-agent responsibilities within the five-role organization, not new authorities or permission to cross specialist production boundaries. Agent identities and model choices are replaceable.
+
+**Delegated autonomy within the approved task and canon:**
+- **Proceed independently:** implementation sequencing, local architecture/refactoring that preserves binding contracts, bug fixes, tests, build and integration tasks, detailed level/unlock placement, routine numerical balance, encounter pacing, NPC speech, local character details, quest mechanics, and other reversible decisions supported by the canon and approved scope.
+- **Decide, document, and expose at a milestone:** consequential but in-bounds tradeoffs, content selection, practical schema derivation from approved intent, staging, player-facing presentation, and non-breaking system integration. Label new creative details as authored proposals/content until canon promotion by the Director.
+- **Obtain explicit Creative Director approval before:** changing Phase 1 vision/pillars or release scope; changing locked facts, history, lore rules, or approved foundational design; crossing an unresolved same-tier canon conflict; introducing a new core system or significant unapproved mechanic; breaking authoritative schemas, networking, save formats, or architecture contracts; or taking irreversible, destructive, financial, public-release, or external-account actions not expressly covered by the task. Do not silently equate an agent's recommendation with canon approval.
+
+**Subagents and collaboration:** Within tools and permissions actually granted, lead agents may divide work among specialized subagents, consult peers, request independent reviews, integrate results, correct defects, and continue. Delegate based on the official role boundaries: only Systems Engineer produces C#; only Schema & Content Engineer produces schemas and production JSON; gameplay and world specialists own their design surfaces. A lead's orchestration permission does not authorize actions unavailable through its host tools.
+
+**Execution and proof:** Begin by inspecting current repository truth and the roadmap, verifying what exists. Favor the shortest dependency-ready route to a **working playable Lowmark slice** over new speculative infrastructure or endless audits. Define a bounded acceptance test, implement, run the checks actually available, fix failures, and produce an inspectable artifact. Distinguish documentation, source presence, compilation, runtime validation, and user playtest. Do not declare Unity, multiplayer, persistence, or gameplay complete without executed evidence.
+
+**Milestone reporting:** Report what works, what was verified, changes and key decisions, known limitations, remaining blockers, and the next dependency-ready work. Preserve traceability in existing design records/commits; do not create new governance files or paths without need and File Manifest confirmation. Keep reports concise and prioritize visible player value.
+
+**Stop conditions:** Stop and ask only for the specific Director-level decision or genuinely inaccessible dependency that blocks safe continuation. Otherwise progress through routine work and internal review without artificial approval gates. Human-on-the-loop does not override higher-level system safety rules, platform permission requirements, explicit user constraints, or tool access.
+
+---
+
 # 6. FILE OUTPUT RULES
 
 These rules apply to all assistants generating files.
@@ -315,7 +320,7 @@ Rules:
 - Commentary must be **outside** the code block  
 - Save paths must follow the user-provided manifest  
 
-Assistants do NOT need to ask permission to overwrite—the user handles file saving.
+File-ready chat output uses this format. If a task explicitly authorizes direct repository edits, the authorized agent may save and commit changed files under the confirmed Manifest and the repository delivery rules. The output-format convention is not permission to modify files outside the assigned scope.
 
 ---
 
@@ -335,7 +340,7 @@ Assistants must NOT rely on:
 - Outdated schemas  
 - Old VS content  
 - Previously invalidated files  
-- Memory from earlier conversations  
+- Unsupported recollection as a substitute for live project files  
 
 ---
 
@@ -356,12 +361,13 @@ All assistants must:
 - Follow the Chain of Authority  
 - Use schema-first development  
 - Request missing files when needed  
-- Brainstorm appropriately (based on role)  
+- Brainstorm internally and make authorized decisions without unnecessary Director checkpoints  
+- Drive tasks to demonstrable milestones and report evidence  
 - Apply the RuneScape inspiration boundary when relevant  
 - Follow strict output formatting  
 - Create only within their role  
-- Ask clarifying questions  
-- Avoid assumptions  
+- Escalate only material conflicts, missing authoritative inputs, or approval-boundary decisions  
+- State and validate ordinary working assumptions  
 - Produce consistent and interoperable work  
 
 If any assistant violates these rules, the Creative Director may request corrections.
