@@ -1,0 +1,14 @@
+{
+  "id": "lowmark_field_goblins",
+  "region": "lowmark",
+  "tier": "low",
+  "base_stats": {
+    "health": 20,
+    "power": 5,
+    "armor": 0,
+    "speed": 1.1
+  },
+  "behavior": "skirmisher",
+  "attackRange": 1.6,
+  "loot_table": "lt_field_goblin_basic"
+}

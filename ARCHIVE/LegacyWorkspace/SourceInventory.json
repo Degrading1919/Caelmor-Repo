@@ -1,0 +1,1171 @@
+{
+  "status": "historical preservation only; not current canon, schema, or runtime authority",
+  "inspection_date": "2026-11-01",
+  "legacy_root": "C:\\Users\\CK\\Documents\\Caelmor",
+  "authoritative_repository": "C:\\Users\\CK\\Documents\\Caelmor-Repo",
+  "copied_file_count": 152,
+  "copied_bytes": 2190822,
+  "files": [
+    {
+      "path": "00_ADMIN/Reference/AI_Usage_in_Game_Design.txt",
+      "size": 46753,
+      "sha256": "9cf5f5e71d430f9e23f77701036b6b91a4a0c9029ff4ff4932ea217320b2e34a",
+      "archive_path": "ARCHIVE/LegacyWorkspace/00_ADMIN/Reference/AI_Usage_in_Game_Design.txt",
+      "classification": "distinct legacy reference/test"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/AIController.cs",
+      "size": 3544,
+      "sha256": "eab4b45e6436fb0047792a800b7256a8d05273cb5a252ea5d15dc17b6490442a",
+      "archive_path": "ARCHIVE/Deprecated/AIController.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Audit_v3.zip",
+      "size": 187862,
+      "sha256": "78d5a1909b5dd80db8404d43ae975ae4d18f91d85a87e475ae95a048cc39e89f",
+      "archive_path": "ARCHIVE/Deprecated/Audit_v3.zip",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Audit_v4.zip",
+      "size": 54096,
+      "sha256": "3b08b1ecc91883019818c021e57c322c39614fb5d8e976b18272b02676cb6f41",
+      "archive_path": "ARCHIVE/Deprecated/Audit_v4.zip",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Audit_v5.zip",
+      "size": 22,
+      "sha256": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85",
+      "archive_path": "ARCHIVE/Deprecated/Audit_v5.zip",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Caelmor_Region1_LowmarkValev3.md",
+      "size": 29522,
+      "sha256": "183ed4493d5ffc85a2375e003b83785480f6c06bc70aa73b2af2c3d725a3de87",
+      "archive_path": "ARCHIVE/Deprecated/Caelmor_Region1_LowmarkValev3.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Caelmor_Region1_LowmarkVale_old.md",
+      "size": 11771,
+      "sha256": "252a37b7e72b4df3881c913b971bbb11f601dd2048eb3534c31a07f69b20e036",
+      "archive_path": "ARCHIVE/Deprecated/Caelmor_Region1_LowmarkVale_old.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Caelmor_Region1_LowmarkVale_v2.md",
+      "size": 11857,
+      "sha256": "663a1eacead74ab08198bac1911bd9b818e4c68f9d8ae7b3dba5fb273caa7c60",
+      "archive_path": "ARCHIVE/Deprecated/Caelmor_Region1_LowmarkVale_v2.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Caelmor_Region2_ThornfellMarchesv3.md",
+      "size": 12377,
+      "sha256": "489103b6cf98f3a0ccdca720069ba93f1ff1e1120ae3f31dd3ff10787d5112bc",
+      "archive_path": "ARCHIVE/Deprecated/Caelmor_Region2_ThornfellMarchesv3.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Caelmor_Region2_ThornfellMarches_v1.md",
+      "size": 10734,
+      "sha256": "a3d6079dbf1952c8a7cdb707a4d7b11f47012c83b49e49908caad772457fc750",
+      "archive_path": "ARCHIVE/Deprecated/Caelmor_Region2_ThornfellMarches_v1.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Caelmor_Region2_ThornfellMarches_v2.md",
+      "size": 11297,
+      "sha256": "edc4fcdbca0f9243bc6a56340abf87df17b90329ac0414e5d3d69f54206de5ea",
+      "archive_path": "ARCHIVE/Deprecated/Caelmor_Region2_ThornfellMarches_v2.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Caelmor_Region3_MireOfFallenBannersv3v.md",
+      "size": 14810,
+      "sha256": "c057e83c1e1f5fc47d9c01955edcb75539d761404d4a73b511c113ed18649c81",
+      "archive_path": "ARCHIVE/Deprecated/Caelmor_Region3_MireOfFallenBannersv3v.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Caelmor_Region3_MireOfFallenBanners_v1.md",
+      "size": 10340,
+      "sha256": "1816c824090044f89e3da733cd7fb33e74ab0b580c4fe6e27300b95034bb8351",
+      "archive_path": "ARCHIVE/Deprecated/Caelmor_Region3_MireOfFallenBanners_v1.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Caelmor_Region4_EmberholtHeightsv3.md",
+      "size": 13149,
+      "sha256": "23aa91126cf7ce72f5c677311398c42ff9b88a311e5f54515c197335b28e442b",
+      "archive_path": "ARCHIVE/Deprecated/Caelmor_Region4_EmberholtHeightsv3.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Caelmor_Region4_EmberholtHeights_v1.md",
+      "size": 18017,
+      "sha256": "043297f359f71f5f76241c9121b7a31b284bad19ea7ec982dda3d2e889720b42",
+      "archive_path": "ARCHIVE/Deprecated/Caelmor_Region4_EmberholtHeights_v1.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Caelmor_Region4_EmberholtHeights_v2.md",
+      "size": 12485,
+      "sha256": "c918705128d355cfcc2f0bd7bf8cca0218558a3429266c62011e316e71b24093",
+      "archive_path": "ARCHIVE/Deprecated/Caelmor_Region4_EmberholtHeights_v2.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Caelmor_VerticalSlice_Code_Scaffolds_v1_1.cs",
+      "size": 24899,
+      "sha256": "89c51c8bf3a46f1d8761d7504171766155d153487045eda41ec49d7fd4d31f11",
+      "archive_path": "ARCHIVE/Deprecated/Caelmor_VerticalSlice_Code_Scaffolds_v1_1.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Caelmor_VerticalSlice_Pseudocode_and_Modules.md",
+      "size": 31616,
+      "sha256": "1bb35511085a83a5bd994a1238f725a209583aa71081a4cd6606317b044730e1",
+      "archive_path": "ARCHIVE/Deprecated/Caelmor_VerticalSlice_Pseudocode_and_Modules.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Caelmor_VerticalSlice_Technical_Spec_v1.1.md",
+      "size": 92,
+      "sha256": "76e69f0534dbc11683fb73d43ada6d639f3bac5d3ece7f10f62a0da4f6011fc6",
+      "archive_path": "ARCHIVE/Deprecated/Caelmor_VerticalSlice_Technical_Spec_v1.1.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Caelmor_VerticalSlice_Technical_Spec_v1.md",
+      "size": 17196,
+      "sha256": "a9121a8e532185857aac569e64abbd70ec255988e2d9c7a982b69d1921e9b1f2",
+      "archive_path": "ARCHIVE/Deprecated/Caelmor_VerticalSlice_Technical_Spec_v1.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Caelmor_World_Regions_Bible.md",
+      "size": 4984,
+      "sha256": "5afd520e55a3d328734c87c10e53cc2e0765381832d853164562e4a814def337",
+      "archive_path": "ARCHIVE/Deprecated/Caelmor_World_Regions_Bible.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/CameraController.cs",
+      "size": 3088,
+      "sha256": "a2e4d4a18554d24d483682fd675d5d77d5b5ae1ef0a5cff1c6ef03391928f947",
+      "archive_path": "ARCHIVE/Deprecated/CameraController.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/CharacterStats.cs",
+      "size": 517,
+      "sha256": "9df19213553cd54076fabab79626ea2a965cc8515a29e64009596c02987a6d7b",
+      "archive_path": "ARCHIVE/Deprecated/CharacterStats.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/ClientPlayerController.cs",
+      "size": 1180,
+      "sha256": "439b56f7f2fb286ff1d8499eb9356ae29886ee28696bf38386479c2cace26ea4",
+      "archive_path": "ARCHIVE/Deprecated/ClientPlayerController.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/ClientWorld.cs",
+      "size": 2135,
+      "sha256": "9c925086ab95dc016664d227bded3ebba69f00a0905c8787f08795cc9983b025",
+      "archive_path": "ARCHIVE/Deprecated/ClientWorld.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/CombatSystem.cs",
+      "size": 5916,
+      "sha256": "7e54113237eadec4ae602009af79f7ae6c3c17a3cf4a55d9a4a6444281158652",
+      "archive_path": "ARCHIVE/Deprecated/CombatSystem.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Combat_v0_ArchitectNotes.md",
+      "size": 10409,
+      "sha256": "237b2eafbb4b68b1d41e1e98b3974ec8801eaf0bb9a13178e8b7efd9025bafd2",
+      "archive_path": "ARCHIVE/Deprecated/Combat_v0_ArchitectNotes.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Combat_v0_Design.md",
+      "size": 7226,
+      "sha256": "5174281f35895dab2678292866cd1c5ce7ef510ca2f24a6015f69c8f2fe1fdcd",
+      "archive_path": "ARCHIVE/Deprecated/Combat_v0_Design.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/ContentDatabase.cs",
+      "size": 563,
+      "sha256": "c14464e50c7570a0dae27b466423a0ac9932265874b7d4ee4469c4d23d2834ae",
+      "archive_path": "ARCHIVE/Deprecated/ContentDatabase.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/CraftingStation.cs",
+      "size": 10196,
+      "sha256": "4b3bf6a86631058c86e4ab8b5dc2abccc438ddddfcbb1375738336199df8579c",
+      "archive_path": "ARCHIVE/Deprecated/CraftingStation.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Crafting_Recipe_Schema_Modular.json",
+      "size": 2425,
+      "sha256": "cae1c96e96de76dd612c9ecc43cfbc5ab400d79a683e643551404b518db7ff9b",
+      "archive_path": "ARCHIVE/Deprecated/Crafting_Recipe_Schema_Modular.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Dialogue_Schema_Flat.json",
+      "size": 312,
+      "sha256": "d1b3591b9371612ff0cccb5821abf60d746cde418ee8f4415f71af5f28917702",
+      "archive_path": "ARCHIVE/Deprecated/Dialogue_Schema_Flat.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/enemy_family.json",
+      "size": 271,
+      "sha256": "df571fb4227768200075643767d810cc6fad1924b23a7b4786308e4f72d1bdff",
+      "archive_path": "ARCHIVE/Deprecated/enemy_family.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Enemy_Family_Schema_Modular.json",
+      "size": 467,
+      "sha256": "47ba1fc2074887a69e9414cbbb5d576a5ab1827e2e46c0bcbb3c4fd980b6512c",
+      "archive_path": "ARCHIVE/Deprecated/Enemy_Family_Schema_Modular.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/enemy_variant.json",
+      "size": 2577,
+      "sha256": "88c48c91d321b9649416dda274f12943dbe0c8dbac4c9ba7b6bfc7f7707a5a5d",
+      "archive_path": "ARCHIVE/Deprecated/enemy_variant.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Enemy_Variant_Schema_Modular.json",
+      "size": 821,
+      "sha256": "81a33c7023e87b41e04e7684c221a80300d8d11d4e358e705bf36204f358ac21",
+      "archive_path": "ARCHIVE/Deprecated/Enemy_Variant_Schema_Modular.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Enemy_Variant_Schema_Modular_Example.json",
+      "size": 305,
+      "sha256": "ca1f9d493d9ca67d361373091055a38df9dc36a4e0500ee46a6a2c4f0d0e0c5b",
+      "archive_path": "ARCHIVE/Deprecated/Enemy_Variant_Schema_Modular_Example.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Entity.cs",
+      "size": 1465,
+      "sha256": "4f80a1fc73a99423d0bcd2b657c29f56e94ed4d856ce7030ab70ebf2873ede8c",
+      "archive_path": "ARCHIVE/Deprecated/Entity.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/EquipmentSystem.cs",
+      "size": 9337,
+      "sha256": "17cad993470175a5d528b54423e107d6b291ccb14163945d598b177901a02502",
+      "archive_path": "ARCHIVE/Deprecated/EquipmentSystem.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/GameConstants.cs",
+      "size": 702,
+      "sha256": "7c1b5298c0cec017f6d4db66efb71299f12a5f50b8a8498ba0cb3bd280b31ce1",
+      "archive_path": "ARCHIVE/Deprecated/GameConstants.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/InventorySystem.cs",
+      "size": 20574,
+      "sha256": "4921f37b8253f54444408a3a63051fee1a8bc5261678ee5e87b31f1f05cc0d56",
+      "archive_path": "ARCHIVE/Deprecated/InventorySystem.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/ItemDefinition.cs",
+      "size": 4593,
+      "sha256": "dd66522fe4f58100e5f49f32d248a042330ed63a3fb4e2808029642828deae70",
+      "archive_path": "ARCHIVE/Deprecated/ItemDefinition.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/ItemInstance.cs",
+      "size": 1725,
+      "sha256": "522b0135c81d93b84ec79c8702c994d2842628b468a5b47ab10f112f7fda7aff",
+      "archive_path": "ARCHIVE/Deprecated/ItemInstance.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Item_Schema_Flat.json",
+      "size": 1721,
+      "sha256": "2490ed976fd35278caca4ec3665ea31dfde7ecd2995bdd6296f5f15b2574f3a7",
+      "archive_path": "ARCHIVE/Deprecated/Item_Schema_Flat.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Item_Schema_Flat_Example.json",
+      "size": 551,
+      "sha256": "1b2c18ce578f1ce28b65c081990f2b7560dda88e91252ea8b51b9f4e186d9aa8",
+      "archive_path": "ARCHIVE/Deprecated/Item_Schema_Flat_Example.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Lowmark_VS_EncounterDesign_v1.md",
+      "size": 8230,
+      "sha256": "33c9ddff40b082895e697f290f128ba88a8310ede343dcf8a975cb302004fa8b",
+      "archive_path": "ARCHIVE/Deprecated/Lowmark_VS_EncounterDesign_v1.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Lowmark_VS_Whitebox.md",
+      "size": 6967,
+      "sha256": "0987d63677fcd010b3f1ce19ab7020c7f72ac3d823b2bb1b7646334a78f8ec29",
+      "archive_path": "ARCHIVE/Deprecated/Lowmark_VS_Whitebox.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Lowmark_VS_Whitebox_v1.1.md",
+      "size": 9575,
+      "sha256": "a0f2f19eacc51bcb76ba9ae78b929ec1de763c2c237586cc1e5e6a1794731264",
+      "archive_path": "ARCHIVE/Deprecated/Lowmark_VS_Whitebox_v1.1.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/NetworkManager.cs",
+      "size": 21710,
+      "sha256": "fa99fcf4aff1c2fb05a5d06ad0be6c4ea6fba110c6bc0cbedeb427213b84da9e",
+      "archive_path": "ARCHIVE/Deprecated/NetworkManager.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/NetworkMessages.cs",
+      "size": 1833,
+      "sha256": "0381c1e04bd7dcf9d12e34398e270c690e90abf68165f691f5703d9d8adbefeb",
+      "archive_path": "ARCHIVE/Deprecated/NetworkMessages.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/NPC_Schema_Flat.json",
+      "size": 830,
+      "sha256": "fd6dbdbc14d7864e5a4e4d126a8b0ac05eda65b0019f08312dd6ea2ff3f07693",
+      "archive_path": "ARCHIVE/Deprecated/NPC_Schema_Flat.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/PLACEHOLDER_Items_VSQuest.json",
+      "size": 1784,
+      "sha256": "3f5fb46eb03fc2c66da6ab91eb73645b91a6771525216739d63c66238bcb885e",
+      "archive_path": "ARCHIVE/Deprecated/PLACEHOLDER_Items_VSQuest.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/PLACEHOLDER_ResourceNodes_VS.json",
+      "size": 286,
+      "sha256": "f589c3087c55bd55a06f6df97e7cfb2efa1c2bc34248b1b68fda1f16d3986381",
+      "archive_path": "ARCHIVE/Deprecated/PLACEHOLDER_ResourceNodes_VS.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/PlayerController.cs",
+      "size": 4170,
+      "sha256": "0a20ae7affb58da858e31300d6128fc45abd8b5d3e73c4a870a5cab6300651cb",
+      "archive_path": "ARCHIVE/Deprecated/PlayerController.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/PlayerSave_Schema.json",
+      "size": 3203,
+      "sha256": "ab0b6dc867f1ef46fe7c896edae47a70b104bfa16ca38260c06648be054dc442",
+      "archive_path": "ARCHIVE/Deprecated/PlayerSave_Schema.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/QuestChain_Schema.json",
+      "size": 3265,
+      "sha256": "0ee732d1dd7eceebd0693011325912d27b6a9b1e73f19d18549b2f3bf9e07868",
+      "archive_path": "ARCHIVE/Deprecated/QuestChain_Schema.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/QuestSystem.cs",
+      "size": 12107,
+      "sha256": "edc6359dffbea7b30f30c2cce39bf7c0c99dc020548ceb475548e251ffbc233a",
+      "archive_path": "ARCHIVE/Deprecated/QuestSystem.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Quest_Schema_Flat.json",
+      "size": 841,
+      "sha256": "92617faaea743914820ac9cd7ef5d29a8288d7745fb6ca8fafe97cb5e387b59e",
+      "archive_path": "ARCHIVE/Deprecated/Quest_Schema_Flat.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/relevant runtime folder.zip",
+      "size": 25195,
+      "sha256": "1ae310e0383d3fb98243edc262d9e46a5aa8b282edb3c457c7b633b838592e5b",
+      "archive_path": "ARCHIVE/Deprecated/relevant runtime folder.zip",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/ResourceNode.cs",
+      "size": 8353,
+      "sha256": "248f0c517d20a01e1fdbe8ae231acee483c272da01adc28052ee5f742cd5a4c4",
+      "archive_path": "ARCHIVE/Deprecated/ResourceNode.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Resource_Node_Schema_Modular.json",
+      "size": 643,
+      "sha256": "758cac06a7c84cd3ff48769cb3e19b9d4dba2d7d31c6d8f03ae5864719562948",
+      "archive_path": "ARCHIVE/Deprecated/Resource_Node_Schema_Modular.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/response.txt",
+      "size": 32387,
+      "sha256": "7416f908e0d2a0b7b50e1002772bc15c2ed23b9f0c98dd6c689b1ad4215666cf",
+      "archive_path": "ARCHIVE/Deprecated/response.txt",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/SaveSystem.cs",
+      "size": 17441,
+      "sha256": "c95e66987123b119d3ce047235e9da60496d11241a9460242cbf91b4a834f97b",
+      "archive_path": "ARCHIVE/Deprecated/SaveSystem.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Schema_Index_v1.json",
+      "size": 678,
+      "sha256": "7fdb1b4615c60093ef39a068b5d87baab276f77e34ea461330e5f494937787b9",
+      "archive_path": "ARCHIVE/Deprecated/Schema_Index_v1.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Skill_Schema_Modular.json",
+      "size": 863,
+      "sha256": "0dbdd868264842a27c0160803a8887bf981c2604c0d9863e550b0b79a4ecd552",
+      "archive_path": "ARCHIVE/Deprecated/Skill_Schema_Modular.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Stats_and_Skills.cs",
+      "size": 651,
+      "sha256": "32cfa37527959478d8fd5f4ca837e849ee7ec49bc30e999503a9c71df032763b",
+      "archive_path": "ARCHIVE/Deprecated/Stats_and_Skills.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/temp character architecture.txt",
+      "size": 4803,
+      "sha256": "f9a301b0a5e4e28481008d20d8e9f90bcbdc67777d2502e775c1606b67e0830c",
+      "archive_path": "ARCHIVE/Deprecated/temp character architecture.txt",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/temp substance painter assistant.txt",
+      "size": 200245,
+      "sha256": "0416b5fdf8ceeb4a8644e571dd42903a0e4f1cb855a75c6e5a03c6b59a70f4d2",
+      "archive_path": "ARCHIVE/Deprecated/temp substance painter assistant.txt",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/temp tick response.txt",
+      "size": 8721,
+      "sha256": "b00129d3f3bcfd61a42fa9f0ebdb25be74b35f7fe23d39ec7dfe2a49926dc93f",
+      "archive_path": "ARCHIVE/Deprecated/temp tick response.txt",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/temp timeline and factions documentation.txt",
+      "size": 320116,
+      "sha256": "8c1ddec338f137dc03ebe68d8e0502137002c661484b5584e6740b019f3381ed",
+      "archive_path": "ARCHIVE/Deprecated/temp timeline and factions documentation.txt",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/TickManager.cs",
+      "size": 6647,
+      "sha256": "bb8f4e212e6f3ed5dd10453307f975e8032b8149307597a826842e02d175a795",
+      "archive_path": "ARCHIVE/Deprecated/TickManager.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/TickManager_Design.md",
+      "size": 10249,
+      "sha256": "9528bf3231ca283fc0c1dfa6811c0b5c25943476215698dc8ad9916f05ea18e3",
+      "archive_path": "ARCHIVE/Deprecated/TickManager_Design.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/VS_Camera_PolishNotes.md",
+      "size": 5708,
+      "sha256": "2b3490e1866de4bc80fb6271d88cc2c06fc247458c9e60b642b4ef426c6338a9",
+      "archive_path": "ARCHIVE/Deprecated/VS_Camera_PolishNotes.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/VS_CraftingLoop_Definition.md",
+      "size": 6002,
+      "sha256": "f0f739421d0ec2302caba80d2e80940ea5ebfcc5da630f5a970506f19d6d54dd",
+      "archive_path": "ARCHIVE/Deprecated/VS_CraftingLoop_Definition.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/VS_Crafting_Spec.md",
+      "size": 5017,
+      "sha256": "4014ca0d1967aa0b15e6be9c2606973fe563908a803b76470a04769152f502a4",
+      "archive_path": "ARCHIVE/Deprecated/VS_Crafting_Spec.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/VS_Enemy_Spec.md",
+      "size": 4858,
+      "sha256": "5044b4b16af02c1b55eca1b066b2d22ee49e82dd1c513c959305ef41606d9819",
+      "archive_path": "ARCHIVE/Deprecated/VS_Enemy_Spec.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/VS_Items.json",
+      "size": 3813,
+      "sha256": "6fa1d79135ed8b3fbf617699ca703bbceb58e9139fc230965630cf5789123bc0",
+      "archive_path": "ARCHIVE/Deprecated/VS_Items.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/VS_MovementAndCamera_Design_v1.md",
+      "size": 6793,
+      "sha256": "a817e9c2208faa406a033d40b738bd50a777be92e651143be03a103c40474565",
+      "archive_path": "ARCHIVE/Deprecated/VS_MovementAndCamera_Design_v1.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/VS_Networking_Model.md",
+      "size": 12052,
+      "sha256": "0054a6db8c87de4a3e14b3f9e16e0de213de7400d357f505f13de6dd649c1659",
+      "archive_path": "ARCHIVE/Deprecated/VS_Networking_Model.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/VS_Networking_ReviewNotes.md",
+      "size": 12499,
+      "sha256": "6d5269aaf398038af277ac5703166d86df8da76365e51b446f2406aaf7d7d3d1",
+      "archive_path": "ARCHIVE/Deprecated/VS_Networking_ReviewNotes.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/VS_QuestChain.json",
+      "size": 6143,
+      "sha256": "8f46738e3c41e04ffe5d2c18a1f5957605dbadb8734568d282070a83976ae94e",
+      "archive_path": "ARCHIVE/Deprecated/VS_QuestChain.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/VS_QuestChain_Draft.md",
+      "size": 3752,
+      "sha256": "d2eda54fd953a2032ef2d78854a07c5c3c2f21c44079a11cba2b385a059510da",
+      "archive_path": "ARCHIVE/Deprecated/VS_QuestChain_Draft.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/VS_QuestChain_Final.md",
+      "size": 10283,
+      "sha256": "3fe42a29f56f63fcc504714d576e4902323dc47e1d8ee013369922aa1dd500d0",
+      "archive_path": "ARCHIVE/Deprecated/VS_QuestChain_Final.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/VS_QuestChain_ImplementationSpec.md",
+      "size": 3429,
+      "sha256": "f3ac5c4f7ae54e3ddf5fbcc1c3d767957c97ab5ff7cbbe9d708e6f21d20fbb31",
+      "archive_path": "ARCHIVE/Deprecated/VS_QuestChain_ImplementationSpec.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/VS_QuestChain_Refined.md",
+      "size": 4404,
+      "sha256": "56438dc2d63e97210b28ad3bb8782f26270aa6d740a9d8760bc32a2ae2e72310",
+      "archive_path": "ARCHIVE/Deprecated/VS_QuestChain_Refined.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/VS_Recipes.json",
+      "size": 1415,
+      "sha256": "1d50b6709765d16d44842221be97c3bfb2695aaaff9fc5c7e239ad62d59f0f97",
+      "archive_path": "ARCHIVE/Deprecated/VS_Recipes.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/VS_Recipes_v2.1_Aligned.json",
+      "size": 1459,
+      "sha256": "f672e6ab4e34de9da5c825f05cc2427c45641198c531ec697cd971267ed11c99",
+      "archive_path": "ARCHIVE/Deprecated/VS_Recipes_v2.1_Aligned.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/VS_RecipeValidation_Report.md",
+      "size": 1418,
+      "sha256": "dafe40de4422ae868553df70bd93d7eef5ea8ea82e5d966e6bf8f1acf2ec9f3b",
+      "archive_path": "ARCHIVE/Deprecated/VS_RecipeValidation_Report.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/VS_ResourceNodes.json",
+      "size": 806,
+      "sha256": "f72cae67e664c929b2cfebfc16af60d3b70a55ed45d4932d00c73eb41b061f2c",
+      "archive_path": "ARCHIVE/Deprecated/VS_ResourceNodes.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/VS_ResourceNode_Balance.md",
+      "size": 6297,
+      "sha256": "74d7aed0eeb8c7c2915a634736ddf481e44b3ba92bb53b8846ee63572e440160",
+      "archive_path": "ARCHIVE/Deprecated/VS_ResourceNode_Balance.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/WorldManager.cs",
+      "size": 4450,
+      "sha256": "d0087cfd8bdfb836d78a624c55fb2104c9be36580ca72c620796dc4a7b8d5282",
+      "archive_path": "ARCHIVE/Deprecated/WorldManager.cs",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/WorldSave_Schema.json",
+      "size": 3295,
+      "sha256": "f473c262cfb981dbc2e8cf1576cf508119e4fb4afaf1f944d10a13f3618bf65a",
+      "archive_path": "ARCHIVE/Deprecated/WorldSave_Schema.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Zone_Schema_Modular.json",
+      "size": 1028,
+      "sha256": "b8895d9dd8323f7bcc5774115c866dacd244f193937e3703b82188d852342c7c",
+      "archive_path": "ARCHIVE/Deprecated/Zone_Schema_Modular.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Deprecated/Zone_Schema_Modular_Example.json",
+      "size": 1152,
+      "sha256": "1a4a653a6e7f2e4bd7996b0fa348515cef46d415848166824fc10e29ed7cd6d8",
+      "archive_path": "ARCHIVE/Deprecated/Zone_Schema_Modular_Example.json",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Experimental/1.1.3 FINAL ACCEPTED SCHEMA CHANGE LIST.txt",
+      "size": 5189,
+      "sha256": "de1539b798a58d902747a8d35c31a6cd9279c55819897d98515ae61b528d76d3",
+      "archive_path": "ARCHIVE/Experimental/1.1.3 FINAL ACCEPTED SCHEMA CHANGE LIST.txt",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Experimental/1.1.3 Schema Gap Report",
+      "size": 13309,
+      "sha256": "b742cf5269db6b9b2d3feacd079705bb151d19e1d10289057fa3679f7d788188",
+      "archive_path": "ARCHIVE/Experimental/1.1.3 Schema Gap Report",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Experimental/1.1.3 systems architect review.txt",
+      "size": 7138,
+      "sha256": "c6810e1d964bbf0495d76d2ad2bc882823a7fb3ea7b64ad3125bb2290095f65e",
+      "archive_path": "ARCHIVE/Experimental/1.1.3 systems architect review.txt",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Experimental/enemy variant and family.md",
+      "size": 3029,
+      "sha256": "22e9b1b3d1c5779172d5ddc0917fec45b4ed4570cad618f82181d87969484eec",
+      "archive_path": "ARCHIVE/Experimental/enemy variant and family.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "ARCHIVE/Experimental/VS Enemy Family & Variant — Behavioral + Design Specification.md",
+      "size": 7431,
+      "sha256": "2f4124891e8894ea6ca267abfb746c56a2b8314a4052cabfcd984bc4a2092cd1",
+      "archive_path": "ARCHIVE/Experimental/VS Enemy Family & Variant — Behavioral + Design Specification.md",
+      "classification": "missing historical archive"
+    },
+    {
+      "path": "CODE/Systems/PlayerId↔SaveBindingValidationScenarios.cs",
+      "size": 9635,
+      "sha256": "ab6280b7a1e58697a1bb3d9dcda77100d810dc1eda5e875965dbfb6d04445328",
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/PlayerId↔SaveBindingValidationScenarios.cs",
+      "classification": "distinct legacy reference/test"
+    },
+    {
+      "path": "DESIGNS/Systems Design/Runtime_File_Scope_and_Interaction_Map.md",
+      "size": 35197,
+      "sha256": "6405543024fe6a717178a1ab40c8bdf1db69acf0b07163440fd70df489f12ad1",
+      "archive_path": "ARCHIVE/LegacyWorkspace/DESIGNS/Systems Design/Runtime_File_Scope_and_Interaction_Map.md",
+      "classification": "distinct legacy reference/test"
+    },
+    {
+      "path": "DESIGNS/Systems Design/Stage 23.3 — Player Zone Residency Runtime Definition.md",
+      "size": 5072,
+      "sha256": "a02d0bf67859f0a30dbf917590bfdea95a7145c2530d1f71e25675abf94bbf18",
+      "archive_path": "ARCHIVE/LegacyWorkspace/DESIGNS/Systems Design/Stage 23.3 — Player Zone Residency Runtime Definition.md",
+      "classification": "distinct legacy reference/test"
+    },
+    {
+      "path": "DESIGNS/Systems Design/Stage 23.4 — Player Lifecycle Integration Runtime Definition.md",
+      "size": 5373,
+      "sha256": "381dfdb7104fc4d30e7fa42cdcdc4e903bd045af5317cad34f06f960e4f4093e",
+      "archive_path": "ARCHIVE/LegacyWorkspace/DESIGNS/Systems Design/Stage 23.4 — Player Lifecycle Integration Runtime Definition.md",
+      "classification": "distinct legacy reference/test"
+    },
+    {
+      "path": "DESIGNS/Systems Design/Stage 23.5 — Save Restore & Rehydration Runtime Definition.md",
+      "size": 4573,
+      "sha256": "25264fbf47f66aaa61ecc7d96fa1ffd7aceae58c3bda539662a1ff39e282ee03",
+      "archive_path": "ARCHIVE/LegacyWorkspace/DESIGNS/Systems Design/Stage 23.5 — Save Restore & Rehydration Runtime Definition.md",
+      "classification": "distinct legacy reference/test"
+    },
+    {
+      "path": "00_ADMIN/Reference/Caelmor_Assistant_Activation_Prompts.md",
+      "size": 3151,
+      "sha256": "8e6d886af8b7d0c3b3f1624272c3f2787a32e8a2f7b730e42f53cb56d6f89f6b",
+      "repo_sha256": "ba881c7c8d9f51c8fe2e4309d4aa60fea80a755a11440c24219158d0adf7d576",
+      "repo_size": 3549,
+      "archive_path": "ARCHIVE/LegacyWorkspace/00_ADMIN/Reference/Caelmor_Assistant_Activation_Prompts.md",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "00_ADMIN/Reference/Caelmor_File_Manifest.txt",
+      "size": 12890,
+      "sha256": "3b33cdbb9feb5e759be1d265ed49d7a2b5d7fd6ab95eb40975fa2397978a1f7e",
+      "repo_sha256": "93ea9934ced9894c9e283253aaae85677c0557d40329b1b0dea67477b7cccbf9",
+      "repo_size": 14116,
+      "archive_path": "ARCHIVE/LegacyWorkspace/00_ADMIN/Reference/Caelmor_File_Manifest.txt",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "00_ADMIN/Reference/Caelmor_Master_Assistant_Protocol.md",
+      "size": 7285,
+      "sha256": "6a8fe7a1eea385113b5d642025047dc5b850dec63ce3093cd8518c0e598d8c56",
+      "repo_sha256": "c9877d2a5fb199b5c801b90ae346d843501c72095a2514d614749a02d0bbf8e5",
+      "repo_size": 19026,
+      "archive_path": "ARCHIVE/LegacyWorkspace/00_ADMIN/Reference/Caelmor_Master_Assistant_Protocol.md",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "00_ADMIN/Reference/Caelmor_Project_Instructions.txt",
+      "size": 6862,
+      "sha256": "4ae7ad9a928d3f4e389afd5a213c26f7a97b996a095618f91d994aa681d46977",
+      "repo_sha256": "88e26b75b755ba85de4516a66dfff00654168261039339010e44e696d301a2fb",
+      "repo_size": 5546,
+      "archive_path": "ARCHIVE/LegacyWorkspace/00_ADMIN/Reference/Caelmor_Project_Instructions.txt",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "00_ADMIN/Reference/Runtime_Integration_Audit.md",
+      "size": 24807,
+      "sha256": "77cda111929f8b08a7b2969bd098fce636a50ca47f22407e4f33891c0523f018",
+      "repo_sha256": "07a8f8ac1f077146f1aa309be2ef21936623198a7f9f529384e83d628f39be84",
+      "repo_size": 11518,
+      "archive_path": "ARCHIVE/LegacyWorkspace/00_ADMIN/Reference/Runtime_Integration_Audit.md",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "00_ADMIN/Roadmaps/Caelmor_Roadmap.md",
+      "size": 26041,
+      "sha256": "c3ec54276f665400f6c42bd4f46aa639fff2fcc36cd4138eb0d3989edda3bfdd",
+      "repo_sha256": "259f4a1e070e515565a4d3e6581cedb6c938146464ea3912a9eb232cf31a0d74",
+      "repo_size": 28809,
+      "archive_path": "ARCHIVE/LegacyWorkspace/00_ADMIN/Roadmaps/Caelmor_Roadmap.md",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "01_PRE-PRODUCTION/1.1 Core Vision/Caelmor_Phase1_1_Core_Vision.md",
+      "size": 3506,
+      "sha256": "47e338b32de4ff1c040920517962240c6ad642e4d34ed6ae929b267b8998d89d",
+      "repo_sha256": "988e11bb73fbde1a1cf8f5455fe721cf55e6b584643f714433dcb1f0656c35f4",
+      "repo_size": 4671,
+      "archive_path": "ARCHIVE/LegacyWorkspace/01_PRE-PRODUCTION/1.1 Core Vision/Caelmor_Phase1_1_Core_Vision.md",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "01_PRE-PRODUCTION/1.2 Pillars & Tenets/Caelmor_Phase1_2_Pillars_and_Tenets.md",
+      "size": 5332,
+      "sha256": "e20e1a622658b3a79fdf06286e52ed43f8f611e16f95769413aee0bbb90c02ce",
+      "repo_sha256": "0945066ccbad664094cd77f998d674f1cc6bbe576fc07b52860e17d78ec4cb3a",
+      "repo_size": 6302,
+      "archive_path": "ARCHIVE/LegacyWorkspace/01_PRE-PRODUCTION/1.2 Pillars & Tenets/Caelmor_Phase1_2_Pillars_and_Tenets.md",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "01_PRE-PRODUCTION/1.3 Feature Set & Scope/Caelmor_Phase1_3_FeatureSet_and_Scope_Boundaries.md",
+      "size": 10858,
+      "sha256": "6afcb7d9cf9b8b5dc24bc504dac549522a25f1e90867af29b7562682f3e677a0",
+      "repo_sha256": "df9631b63018c787950ad5115b978d3eb4517611f35e7ee5e717678712dd2d39",
+      "repo_size": 13002,
+      "archive_path": "ARCHIVE/LegacyWorkspace/01_PRE-PRODUCTION/1.3 Feature Set & Scope/Caelmor_Phase1_3_FeatureSet_and_Scope_Boundaries.md",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "01_PRE-PRODUCTION/1.5 Content Strategy/Caelmor_Phase1_5_Content_Strategy.md",
+      "size": 5255,
+      "sha256": "c911040b22cce11f9f4ff09b5cdb936b4d980bb857505e0e75c2fa2b64644e7f",
+      "repo_sha256": "9b26b698d804fbbfaf9568ccb26b362caa059f72474ed5f4ecd105e71e52151d",
+      "repo_size": 6623,
+      "archive_path": "ARCHIVE/LegacyWorkspace/01_PRE-PRODUCTION/1.5 Content Strategy/Caelmor_Phase1_5_Content_Strategy.md",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "03_CORE_SYSTEMS/Skills & XP v1/Stage 3.1 — Non-Combat Skills Overview.md",
+      "size": 8412,
+      "sha256": "ce531f80edce852740962012b12a2a0877bb79baf12d36bc8ae23c82541803b5",
+      "repo_sha256": "32ec99bd7503935d6787627cfa097e6fe5c890600656f460031794a86f6f7aab",
+      "repo_size": 19128,
+      "archive_path": "ARCHIVE/LegacyWorkspace/03_CORE_SYSTEMS/Skills & XP v1/Stage 3.1 — Non-Combat Skills Overview.md",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/CombatIntentQueueSystem.cs",
+      "size": 31382,
+      "sha256": "3cfda0dc907cbb8af9f29331ac57e759dd082295f9433fe6dc061a8672faff56",
+      "repo_sha256": "d43e306c1194640dd17dbe04b59e9b6b4562436662c793b3e00c9aa6bb8a2f79",
+      "repo_size": 54455,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/CombatIntentQueueSystem.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/CombatOutcomeApplicationSystem.cs",
+      "size": 30551,
+      "sha256": "56e346cbd1c693a43e33037d78479aaebb7f629ec427d8e575e1f45231de6866",
+      "repo_sha256": "e3c186c22e69fa446efead8e26bbdcb40719c1d3d809d15e869a3f44db784ef6",
+      "repo_size": 36473,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/CombatOutcomeApplicationSystem.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/CombatPresentationHookSystem.cs",
+      "size": 24273,
+      "sha256": "c8ba60022005fc7cea2c9cbc8cbf323fe53a6126bf126fb4ca858bfbb5a25849",
+      "repo_sha256": "963f44da2d245803c746c1a7d91c57818108ec48aca6344d15811b23f48aa069",
+      "repo_size": 20556,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/CombatPresentationHookSystem.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/CombatReplicationSystem.cs",
+      "size": 8633,
+      "sha256": "78690ea9595938aa4649eb707529e428e9cb4ff904aa28113f6dbdabb47dccee",
+      "repo_sha256": "8675aecd96af654143a59e3e74ca2278541e6aceec18f37ee42c18a74d307d8b",
+      "repo_size": 13635,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/CombatReplicationSystem.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/CombatResolutionEngine.cs",
+      "size": 12860,
+      "sha256": "e1b75ae8c862286f0d0d470226acdde8e2d99aad9fbf94a798642eb09c347be7",
+      "repo_sha256": "57c9d374994241e1382e6dfea367538e37bd8a51b13933cc2ec06282047586df",
+      "repo_size": 18263,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/CombatResolutionEngine.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/CombatStateAuthoritySystem.cs",
+      "size": 29650,
+      "sha256": "e16cd95b9f7918205005b23fb61109b0bcc24ca057ebdd72ec4706ac777069ce",
+      "repo_sha256": "9d286380ae6910a4ab590c0c16d81fdfb16bd9e3511defaae81581efec41b4e7",
+      "repo_size": 36336,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/CombatStateAuthoritySystem.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/MinimalClientControlHandoffHooks.cs",
+      "size": 4239,
+      "sha256": "d629de02267f8cdb5bf9e885019b452d40588c4bf3c999ba0cc4badc3b4c9b35",
+      "repo_sha256": "7c622769502d58ff4ccb625401a553811e3f1df30e9099c2e1dd43e85a4cb84d",
+      "repo_size": 4115,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/MinimalClientControlHandoffHooks.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/OnboardingSystem.cs",
+      "size": 15610,
+      "sha256": "facd03a1973081042676d382c19d0ff66ae35dbe85edd8cc0dc9eb43cc02ef41",
+      "repo_sha256": "321a89d4ad9ed1bd60be17c3dde357c193ec638742264abed48466527ab3f968",
+      "repo_size": 16067,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/OnboardingSystem.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/OnboardingValidationScenarioExecution.cs",
+      "size": 19444,
+      "sha256": "727f1c538a6d6a2c678a1c35af988067515801e896c5a949921c0a79bfcea3ee",
+      "repo_sha256": "1faae0bedd75bcbaacc75a107d69834aa6ebc0f54b736791e59d07ca428d410a",
+      "repo_size": 22796,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/OnboardingValidationScenarioExecution.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/PlayerIdentity+SaveBindingRuntime.cs",
+      "size": 9958,
+      "sha256": "25555333aeaab180ec0ae4eb579e9aecc0232a5bf163cae70e0c935bcea26b76",
+      "repo_sha256": "2a76e91d64091da4380bb61b2a643054ec299734f72807aa3dbbdcc9a394e0c7",
+      "repo_size": 9216,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/PlayerIdentity+SaveBindingRuntime.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/PlayerLifecycleSystem.cs",
+      "size": 11096,
+      "sha256": "6e218f2acb78c1c590c47cd44aa00d872b7b22deb910ad694eda4047b42baa24",
+      "repo_sha256": "69a5384749c1ce69e64f5c585fcfce292c39c7c0cb4f649339fe7b3f07590071",
+      "repo_size": 16593,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/PlayerLifecycleSystem.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/PlayerRuntimeInstanceManagement.cs",
+      "size": 10700,
+      "sha256": "b59b4207da2f69385b0713b0693f950a9f7bf2e0e71e331c67f9d49a48eefffd",
+      "repo_sha256": "56a1b4659871f2c9c142c9e153e0991a23846478c0a5c5f18b1264ca392bf8cd",
+      "repo_size": 9922,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/PlayerRuntimeInstanceManagement.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/PlayerRuntimeInstanceValidationScenarios.cs",
+      "size": 7942,
+      "sha256": "d19fddc8e654ad7d20e66aca0e0fe82314d2a50835abbb2c6bb6218683afc7af",
+      "repo_sha256": "6ab09109d2de97dfa3558ab5e98b448fc68d250934c71939e69a4283b9da18a4",
+      "repo_size": 7524,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/PlayerRuntimeInstanceValidationScenarios.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/PlayerSessionSystem.cs",
+      "size": 15707,
+      "sha256": "18ca53ead08944214e07798c61eb0562606115e6c763879a0259d65bb8cc83d6",
+      "repo_sha256": "a17703e0e3247a5c542591b6e6a4a103e190d70bb8183f98ae8b148522c9f834",
+      "repo_size": 18181,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/PlayerSessionSystem.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/RejectClient-ProvidedIdentifiers.cs",
+      "size": 6188,
+      "sha256": "1bd79c47dfc1a3363ed8336f6a8ff7c9ab0a83dff3255afd4fa9d0bc1a440805",
+      "repo_sha256": "dca6d3e86f905143bee24c25ec8b4831cc60ea9adcd6bb6cc0b5ba2020ec185d",
+      "repo_size": 4935,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/RejectClient-ProvidedIdentifiers.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/TickEligibilityRegistry.cs",
+      "size": 2768,
+      "sha256": "f0923d4f20d4d4f9fdb1201572807b8e052351b6738871969dd052871a1f93c1",
+      "repo_sha256": "d4e2179430076bbdda022fa8204ee3abfc5da14cdbd5ee56c0e2f9c9a48d2ee6",
+      "repo_size": 1823,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/TickEligibilityRegistry.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/TickSystemCore.cs",
+      "size": 9938,
+      "sha256": "2d2d59d9a9c9fadf2c860db5c419baeb6a416f367185ca7ed4711b777377ab38",
+      "repo_sha256": "d616151d93e0d19a7b100337908b23b2732c4050f93b37a65c07b40827458a66",
+      "repo_size": 13016,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/TickSystemCore.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/ValidationDiff_Utilities.cs",
+      "size": 6677,
+      "sha256": "9588fd96af6543f21e70cf2840fd914825a9b51cd26257cc3495f43df4c1f115",
+      "repo_sha256": "05ca838539bc49403cafe9a61b865c7e690ef7871ebbd937049f6e89a320a902",
+      "repo_size": 6712,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/ValidationDiff_Utilities.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/ValidationHarness_ConfigAndInterfaces.cs",
+      "size": 4408,
+      "sha256": "9a83c0d53084006a2f8bb837e8b931cd5e495b7e06f9ecb0e1e1d7a348ef89cc",
+      "repo_sha256": "fb6d7dac87e24eacfe9604ff69f1e30004103a85255942a16b2753c7eadb7a78",
+      "repo_size": 4443,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/ValidationHarness_ConfigAndInterfaces.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/ValidationScenario_Registration.cs",
+      "size": 546,
+      "sha256": "a9b75c8a47c51abbacbf1ddd0da0e240cfffdd32f27c43897ef43bd7a97d2eeb",
+      "repo_sha256": "5bade95f0e754a0e40fdd62f37bf9604ed5aca1fe602e58dc0e2177974832f16",
+      "repo_size": 735,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/ValidationScenario_Registration.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/ValidationScenario_Stage9Matrix.cs",
+      "size": 30796,
+      "sha256": "503940a065a5bcc505f9adbc2fdf92f7aad2d62757852ae92eacbcc63411410b",
+      "repo_sha256": "a7b513d46caa7ad4e4cbfaf033c4e4faf36039fc68131d7fc50477db90074ba2",
+      "repo_size": 30915,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/ValidationScenario_Stage9Matrix.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/ValidationSnapshot_Capture.cs",
+      "size": 5722,
+      "sha256": "905b04ca0404635fd4743c0874835c9de4e3d31dc99a5854b74b2cf6b0ea4c07",
+      "repo_sha256": "c46ac6f0142b0ece869497f6877eb48a0f486869509dbe3226f101a499773f3d",
+      "repo_size": 5757,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/ValidationSnapshot_Capture.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "CODE/Systems/ValidationSnapshot_Types.cs",
+      "size": 4441,
+      "sha256": "26d90f692711068eff7495be153f2254d6c395d87b3a9ddcf20c21a2ab430a23",
+      "repo_sha256": "5ef9048829e8ef2b50d25c379d4d42b4bfac3211b77f8fd92fc5ae7963e55d54",
+      "repo_size": 4476,
+      "archive_path": "ARCHIVE/LegacyWorkspace/CODE/Systems/ValidationSnapshot_Types.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "DESIGNS/Networking & Persistence/SimplePlayerInventoryStore.cs",
+      "size": 3001,
+      "sha256": "69c3e0f4409871b2527d5d139ecefca4b5577cf956007bd1d74cc7b402001baf",
+      "repo_sha256": "bc1d9edb81a36cdefa7015084594679fa97a905463f0fbcb1849f3e864010a4e",
+      "repo_size": 3134,
+      "archive_path": "ARCHIVE/LegacyWorkspace/DESIGNS/Networking & Persistence/SimplePlayerInventoryStore.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "DESIGNS/Networking & Persistence/SimplePlayerInventoryStore.Persistence.cs",
+      "size": 1729,
+      "sha256": "02ea1ddb6c546dccbc701fe9f8cbc72ebdff5ba65d03be4dc9550ddc928de171",
+      "repo_sha256": "1b2e8eb721f8c37bd3aeb2e5b1aa88d6c7f9109cdca9501e8f24f448521723f0",
+      "repo_size": 1927,
+      "archive_path": "ARCHIVE/LegacyWorkspace/DESIGNS/Networking & Persistence/SimplePlayerInventoryStore.Persistence.cs",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "LORE/Characters/Caelmore_Characters_Region1_Lowmark_Anchors (Not Full List).txt",
+      "size": 5665,
+      "sha256": "f5147482f80301b20e7dbe3e8b27857477da4b38cd65daaecb1a3d47596407c0",
+      "repo_sha256": "7ba0ee352e0d12594a8eab8a586ddf1d6752de07320f688c17ac48b6896d1292",
+      "repo_size": 5942,
+      "archive_path": "ARCHIVE/LegacyWorkspace/LORE/Characters/Caelmore_Characters_Region1_Lowmark_Anchors (Not Full List).txt",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "LORE/Characters/Caelmor_Characters_Region2_Thornfell_Anchors (Not Full List).txt",
+      "size": 6658,
+      "sha256": "831954ceb01431a641b2bf288a8a434f6bc80d62b3fc3d0a4bdd7b4963e52e75",
+      "repo_sha256": "b327dcc148b04f687bdc725cbb04125663ed32ecd8082e7463f6f0be9c8a4e63",
+      "repo_size": 6807,
+      "archive_path": "ARCHIVE/LegacyWorkspace/LORE/Characters/Caelmor_Characters_Region2_Thornfell_Anchors (Not Full List).txt",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "LORE/Characters/Caelmor_Characters_Region3_Mire_Of_Fallen_Banners_Anchors (Not Full List).txt",
+      "size": 4899,
+      "sha256": "bd9bce994ac4ebe7347c8f37322587d6267b660f890ec41ec5793209736a7ffb",
+      "repo_sha256": "c42dc8d0dd46f54af84d897ee374b67de50d635bda9d41de1450588b36dc7265",
+      "repo_size": 5147,
+      "archive_path": "ARCHIVE/LegacyWorkspace/LORE/Characters/Caelmor_Characters_Region3_Mire_Of_Fallen_Banners_Anchors (Not Full List).txt",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "LORE/Characters/Caelmor_Characters_Region4_Emberholt.txt",
+      "size": 59894,
+      "sha256": "61e76154a12a40f122563be83b470f4b40abbc6cfb8e40f90c3879b0a998462a",
+      "repo_sha256": "1552da472f400a5eb53001762f89b47639d8e2562558c837a13e6b72ff0e9d7d",
+      "repo_size": 61066,
+      "archive_path": "ARCHIVE/LegacyWorkspace/LORE/Characters/Caelmor_Characters_Region4_Emberholt.txt",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "LORE/Factions/Caelmor_Factions.md",
+      "size": 24366,
+      "sha256": "7d5ce158bd2a29daf6bbcb7f35eec05e34877c5303876966e6b2d06a5466ab23",
+      "repo_sha256": "eacd0f6c2dcef1baa6d14d24ed5b615f64b3b95edef5e089eb0ecac2fef36b07",
+      "repo_size": 26782,
+      "archive_path": "ARCHIVE/LegacyWorkspace/LORE/Factions/Caelmor_Factions.md",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+      "size": 26969,
+      "sha256": "2e9e4ed29b90060fb0749680dad1bd77d817537279cd2f1503305221fde426ab",
+      "repo_sha256": "da8f52a7665e90014ed5bcaf29e7545f90c1d21830d112b41424efbe6204ceae",
+      "repo_size": 29022,
+      "archive_path": "ARCHIVE/LegacyWorkspace/LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+      "size": 26517,
+      "sha256": "fd24ae0a0b50997f4d2e3b9b5c9e3d49400278359b43dac705ca59ce2d1d8900",
+      "repo_sha256": "edd4a6a50eaa50e9ae9bb8599c0036270661ab64e24e15ae2186f8218e7075fc",
+      "repo_size": 28522,
+      "archive_path": "ARCHIVE/LegacyWorkspace/LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "LORE/Regions/Caelmor_Region3_MireOfFallenBanners.md",
+      "size": 24828,
+      "sha256": "38dbe302c7921dde81e3cfe3f4a656bb92c1075058f28ea21c8c1f35544717b0",
+      "repo_sha256": "8373ff7b49877d8b8f483fcfd60f2bb278d28807efab2de12bf4fa17ff7c1d93",
+      "repo_size": 27164,
+      "archive_path": "ARCHIVE/LegacyWorkspace/LORE/Regions/Caelmor_Region3_MireOfFallenBanners.md",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "LORE/Regions/Caelmor_Region4_EmberholtHeights.md",
+      "size": 25047,
+      "sha256": "f2264d484e0b727c2431000d05ba90cf2eee1aca9f735dfc7154319c2e410fd9",
+      "repo_sha256": "18b45ea614629d1b1f09ca59203a08e042ee32bc7eef0d1c61393bc3a80201d3",
+      "repo_size": 26777,
+      "archive_path": "ARCHIVE/LegacyWorkspace/LORE/Regions/Caelmor_Region4_EmberholtHeights.md",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "LORE/Regions/Caelmor_Region_Merged.md",
+      "size": 12292,
+      "sha256": "ec211f04bcd02fb67501dda135ed6ee3e89fbcd7089f1b958aa9ebf255626a6f",
+      "repo_sha256": "8e187c7c2dc29040e415dc6a7f2929b7c6c9148ffd843f440b5cdda603e12c79",
+      "repo_size": 13098,
+      "archive_path": "ARCHIVE/LegacyWorkspace/LORE/Regions/Caelmor_Region_Merged.md",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "LORE/Timeline/Caelmor_Timeline.md",
+      "size": 8368,
+      "sha256": "6fd066012782f28db5f85f9acea775695a7eaadcc8cac877c857cdd1c9a22ff0",
+      "repo_sha256": "9b2cad76f2eb260a9462738fcfd1ef56c5b1741cc49c87992fc595464a0fcaa4",
+      "repo_size": 10398,
+      "archive_path": "ARCHIVE/LegacyWorkspace/LORE/Timeline/Caelmor_Timeline.md",
+      "classification": "same-path historical variant"
+    },
+    {
+      "path": "LORE/Worldbuilding Docs/Caelmor_War_History.md",
+      "size": 12350,
+      "sha256": "482cfa4fa74cc06389337fe8fe998f6252941c8f96b2603d84358a40b2825a3e",
+      "repo_sha256": "43a34d0f91b7beea223a2ee3ed008c20735a2ac2ab5ffd7bfa87656eeb6235a5",
+      "repo_size": 12120,
+      "archive_path": "ARCHIVE/LegacyWorkspace/LORE/Worldbuilding Docs/Caelmor_War_History.md",
+      "classification": "same-path historical variant"
+    }
+  ],
+  "excluded": "Legacy Unity stock template, generated caches, VCS metadata, desktop.ini, exact duplicates, and whitespace-equivalent renamed MMO brief. Legacy original files remain untouched."
+}

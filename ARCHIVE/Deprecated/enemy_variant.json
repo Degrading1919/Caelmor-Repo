@@ -1,0 +1,134 @@
+[
+  {
+    "variantId": "field_goblin_bridge_sentry",
+    "familyId": "lowmark_field_goblins",
+
+    "hp": 24,
+    "armor": 0,
+    "movementSpeed": 1.1,
+    "attackSpeed": 1.0,
+    "attackDamage": 6,
+    "attackRange": 1.6,
+
+    "aggroRange": 6.0,
+    "leashRange": 14.0,
+    "leashBehavior": "direct",
+    "maxLeashSpeed": 1.25,
+
+    "xpValue": 6,
+    "isBoss": false,
+
+    "abilities": [
+      "simple_poke"
+    ],
+    "spawn_regions": [
+      "lowmark_creek_crossing"
+    ]
+  },
+  {
+    "variantId": "enemy_field_goblin_v1",
+    "familyId": "lowmark_field_goblins",
+
+    "hp": 20,
+    "armor": 0,
+    "movementSpeed": 1.1,
+    "attackSpeed": 1.0,
+    "attackDamage": 4,
+    "attackRange": 1.6,
+
+    "aggroRange": 6.0,
+    "leashRange": 12.0,
+    "leashBehavior": "direct",
+    "maxLeashSpeed": 1.2,
+
+    "xpValue": 4,
+    "isBoss": false,
+
+    "abilities": [
+      "simple_poke"
+    ],
+    "spawn_regions": [
+      "lowmark_creek_crossing",
+      "lowmark_farmstead"
+    ]
+  },
+  {
+    "variantId": "enemy_furrow_boar",
+    "familyId": "lowmark_furrow_boars",
+
+    "hp": 30,
+    "armor": 2,
+    "movementSpeed": 1.0,
+    "attackSpeed": 0.9,
+    "attackDamage": 5,
+    "attackRange": 1.6,
+
+    "aggroRange": 4.0,
+    "leashRange": 10.0,
+    "leashBehavior": "direct",
+    "maxLeashSpeed": 1.2,
+
+    "xpValue": 5,
+    "isBoss": false,
+
+    "abilities": [
+      "boar_tusk_gore_light"
+    ],
+    "spawn_regions": [
+      "lowmark_field_edges",
+      "lowmark_creekbanks"
+    ]
+  },
+  {
+    "variantId": "enemy_goblin_lookout_vs",
+    "familyId": "lowmark_field_goblins",
+
+    "hp": 20,
+    "armor": 0,
+    "movementSpeed": 1.0,
+    "attackSpeed": 1.0,
+    "attackDamage": 5,
+    "attackRange": 8.0,
+
+    "aggroRange": 10.0,
+    "leashRange": 18.0,
+    "leashBehavior": "direct",
+    "maxLeashSpeed": 1.25,
+
+    "xpValue": 7,
+    "isBoss": false,
+
+    "abilities": [
+      "throw_rock_light"
+    ],
+    "spawn_regions": [
+      "lowmark_boundary_wall"
+    ]
+  },
+  {
+    "variantId": "enemy_lost_footman_vs",
+    "familyId": "lowmark_lost_footmen",
+
+    "hp": 40,
+    "armor": 4,
+    "movementSpeed": 0.9,
+    "attackSpeed": 0.8,
+    "attackDamage": 8,
+    "attackRange": 1.8,
+
+    "aggroRange": 6.0,
+    "leashRange": 14.0,
+    "leashBehavior": "direct",
+    "maxLeashSpeed": 1.1,
+
+    "xpValue": 10,
+    "isBoss": false,
+
+    "abilities": [
+      "lost_blade_heavy_swing"
+    ],
+    "spawn_regions": [
+      "lowmark_boundary_wall"
+    ]
+  }
+]

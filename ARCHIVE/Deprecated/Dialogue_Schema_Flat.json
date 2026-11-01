@@ -1,0 +1,12 @@
+// Dialogue_Schema_Flat_v2.txt
+// No explicit v1 changes approved — kept minimal & compatible
+{
+  "id": "string",                     // dialogue tree ID
+  "nodes": [
+    {
+      "id": "string",
+      "text": "string",
+      "next": ["node_id"]             // empty array ends dialogue
+    }
+  ]
+}

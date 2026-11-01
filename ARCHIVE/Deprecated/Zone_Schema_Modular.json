@@ -1,0 +1,45 @@
+// Zone_Schema_Modular_v2.txt
+// Final accepted zone fields + retained POI & region info 
+{
+  "zoneId": "string",                 // required, unique
+  "displayName": "string",
+
+  "regionId": "lowmark|thornfell|mire|emberholt",
+
+  "isStartingZone": false,
+
+  // Ambient intensity for audio/FX tuning (low/mid/high)
+  "ambientTier": "low|mid|high",
+
+  // Soft level recommendation for players
+  "recommendedLevel": 1,
+
+  // POIs used for content placement & routing
+  "poi": [
+    {
+      "poiId": "string",
+      "type": "shrine|village|ruin|camp|cave|landmark",
+      "name": "string",
+      "description": "string"
+    }
+  ],
+
+  // Spawn sets drive encounter density and composition
+  "spawnSets": [
+    {
+      "id": "string",
+      "enemyFamilyId": "string",
+      "minLevel": 1,
+      "maxLevel": 3,
+      "weight": 1
+    }
+  ],
+
+  // Resource node distribution at design level
+  "resourceNodes": [
+    {
+      "nodeId": "string",
+      "density": "low|medium|high"
+    }
+  ]
+}

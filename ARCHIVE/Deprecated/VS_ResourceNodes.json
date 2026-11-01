@@ -1,0 +1,38 @@
+[
+  {
+    "nodeId": "vs_iron_vein_01",
+    "resourceType": "ore",
+    "resourceItemId": "lowmark_iron_ore",
+    "yieldMin": 1,
+    "yieldMax": 3,
+    "respawnTimeSeconds": 90,
+    "skillRequirement": {
+      "skillId": "mining",
+      "minLevel": 1
+    }
+  },
+  {
+    "nodeId": "vs_tree_01",
+    "resourceType": "wood",
+    "resourceItemId": "lowmark_log",
+    "yieldMin": 1,
+    "yieldMax": 2,
+    "respawnTimeSeconds": 60,
+    "skillRequirement": {
+      "skillId": "woodcutting",
+      "minLevel": 1
+    }
+  },
+  {
+    "nodeId": "vs_small_game_01",
+    "resourceType": "game",
+    "resourceItemId": "raw_meat",
+    "yieldMin": 1,
+    "yieldMax": 1,
+    "respawnTimeSeconds": 45,
+    "skillRequirement": {
+      "skillId": "hunting",
+      "minLevel": 1
+    }
+  }
+]

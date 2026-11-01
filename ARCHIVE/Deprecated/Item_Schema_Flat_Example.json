@@ -1,0 +1,24 @@
+// Item_Schema_Flat_Example_v2.txt
+{
+  "itemId": "iron_sword",
+  "displayName": "Iron Sword",
+  "category": "weapon",
+  "subType": "sword",
+  "isStackable": false,
+  "maxStack": 1,
+  "value": 15,
+  "metadata": {
+    "stats": {
+      "damage": 12,
+      "armor": 0,
+      "attackSpeed": 1.8,
+      "range": 1.5
+    },
+    "quality": "standard",
+    "equipSlot": "weapon",
+    "isQuestItem": false,
+    "consumableEffects": [],
+    "setId": null,
+    "description": "A dependable sword forged in Greyharrow's lower wards."
+  }
+}

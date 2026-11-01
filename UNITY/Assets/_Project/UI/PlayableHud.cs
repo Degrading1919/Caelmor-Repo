@@ -7,6 +7,20 @@ namespace Caelmor.Unity.Playable
         public PlayableBootstrap game;
         GUIStyle title, label, small, value;
         Texture2D dark, accent;
+        internal static bool BlocksPointer(PlayableBootstrap game, Vector2 screen)
+        {
+            if (game.HelpOpen) return true;
+            float scale = Mathf.Min(Screen.width / 1280f, Screen.height / 720f);
+            var point = new Vector2((screen.x - (Screen.width - 1280 * scale) / 2) / scale,
+                (Screen.height - screen.y - (Screen.height - 720 * scale) / 2) / scale);
+            if (new Rect(24, 24, 418, 110).Contains(point) || new Rect(946, 24, 310, 172).Contains(point) ||
+                new Rect(24, 584, 1232, 112).Contains(point)) return true;
+            var target = game.playerCamera.WorldToScreenPoint(game.interactionAnchor.transform.position + Vector3.up * 2.1f);
+            if (target.z <= 0) return false;
+            var labelPoint = new Vector2((target.x - (Screen.width - 1280 * scale) / 2) / scale,
+                (Screen.height - target.y - (Screen.height - 720 * scale) / 2) / scale);
+            return new Rect(labelPoint.x - 135, labelPoint.y - 18, 270, 54).Contains(point);
+        }
         void OnGUI()
         {
             EnsureStyles();
@@ -42,14 +56,14 @@ namespace Caelmor.Unity.Playable
             }
             GUI.DrawTexture(new Rect(24, 584, 1232, 112), dark);
             GUI.Label(new Rect(44, 599, 1180, 25), state.Feedback, label);
-            GUI.Label(new Rect(44, 635, 1180, 25), "WASD   Move       SHIFT   Sprint       E   Interact       RMB + mouse   Orbit       Wheel   Zoom       ESC   Help", small);
+            GUI.Label(new Rect(44, 635, 1180, 25), "LEFT CLICK   Move       SHIFT   Sprint       E   Interact       RMB   Orbit       Wheel   Zoom       ESC   Help       F3   Debug WASD", small);
             GUI.Label(new Rect(44, 666, 1180, 22), "Scene fixtures only. No narrative, rewards, or production world content is loaded. Session resets on exit.", small);
             if (game.HelpOpen)
             {
                 GUI.DrawTexture(new Rect(290, 184, 700, 330), dark);
                 GUI.Label(new Rect(320, 210, 640, 36), "Explore the runtime", title);
-                GUI.Label(new Rect(320, 266, 640, 130), "Walk toward the amber marker, then press E.\nThe host validates your session, zone, reach and line of sight.\nA successful interaction switches the marker's visible state.\nMovement and interactions commit on the 10 Hz host tick.", label);
-                GUI.Label(new Rect(320, 402, 640, 44), "Camera: hold right mouse to orbit; wheel to zoom.\nPress Escape to resume movement.", small);
+                GUI.Label(new Rect(320, 266, 640, 130), "Left-click terrain to walk; click again to change destination.\nThe host finds a route around obstacles. Hold Shift to sprint.\nApproach the amber marker, then press E to interact.\nMovement and interactions commit on the 10 Hz host tick.", label);
+                GUI.Label(new Rect(320, 402, 640, 44), "RMB: orbit. Wheel: zoom. F3: optional WASD debug controls.\nEscape stops your route and opens or closes this panel.", small);
                 if (GUI.Button(new Rect(320, 460, 145, 32), "Quit application")) Application.Quit();
             }
         }

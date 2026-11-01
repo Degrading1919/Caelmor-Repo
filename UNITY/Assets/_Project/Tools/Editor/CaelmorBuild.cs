@@ -1,5 +1,7 @@
 using System;
 using System.IO;
+using System.Collections.Generic;
+using UnityEngine.AI;
 using Caelmor.Unity.Playable;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
@@ -34,7 +36,7 @@ namespace Caelmor.Unity.Editor
             var wood = Material("FixtureAmber", new Color(.85f, .65f, .28f));
             var playerMat = Material("Player", new Color(.29f, .49f, .57f));
             var trim = Material("Trim", new Color(.65f, .60f, .45f));
-            Cube("Ground / technical 28m square", new Vector3(0, -.25f, 0), new Vector3(28, .5f, 28), ground, true);
+            Cube("Ground / technical 28m square", new Vector3(0, -.25f, 0), new Vector3(28, .5f, 28), ground, true).AddComponent<NavigableTerrain>();
             Cube("Central route", new Vector3(0, .006f, 0), new Vector3(3, .01f, 26), path, false);
             Cube("Cross route", new Vector3(0, .008f, 1), new Vector3(26, .01f, 2.2f), path, false);
             Cube("North bound", new Vector3(0, .75f, 13.75f), new Vector3(28, 1.5f, .5f), stone, true);
@@ -77,7 +79,16 @@ namespace Caelmor.Unity.Editor
             RenderSettings.ambientLight = new Color(.55f, .60f, .64f);
             RenderSettings.fog = true; RenderSettings.fogColor = camera.backgroundColor; RenderSettings.fogMode = FogMode.Linear;
             RenderSettings.fogStartDistance = 24; RenderSettings.fogEndDistance = 65;
+            var nav = new GameObject("Host navigation / baked terrain mesh").AddComponent<TerrainNavigation>();
+            nav.data = BakeNavigation(); nav.Bind();
+            var destinationView = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            destinationView.name = "Destination / committed host presentation";
+            destinationView.transform.localScale = new Vector3(.65f, .012f, .65f);
+            UnityEngine.Object.DestroyImmediate(destinationView.GetComponent<Collider>());
+            destinationView.GetComponent<Renderer>().sharedMaterial = trim;
+            destinationView.SetActive(false);
             var game = new GameObject("Caelmor / playable composition").AddComponent<PlayableBootstrap>();
+            game.navigation = nav; game.destinationView = destinationView.transform;
             game.spawn = spawn.transform; game.playerView = avatar.transform; game.playerCamera = camera; game.interactionAnchor = anchor;
             game.gameObject.AddComponent<PlayableHud>().game = game;
             var reserved = new GameObject("Narrative entry / reserved for approved Lowmark content");
@@ -98,7 +109,7 @@ namespace Caelmor.Unity.Editor
         {
             EditorSceneManager.OpenScene(ScenePath);
             var anchor = UnityEngine.Object.FindAnyObjectByType<InteractionAnchor>();
-            PlayableValidation.Run(anchor, 1 << 8);
+            PlayableValidation.Run(anchor, 1 << 8, UnityEngine.Object.FindAnyObjectByType<TerrainNavigation>());
         }
         public static void BuildWindows()
         {
@@ -114,6 +125,24 @@ namespace Caelmor.Unity.Editor
             if (report.summary.result != BuildResult.Succeeded)
                 throw new InvalidOperationException("CAELMOR_BUILD_FAILED: " + report.summary.result + " errors=" + report.summary.totalErrors);
             Debug.Log("CAELMOR_BUILD_SUCCEEDED: " + output);
+        }
+        static NavMeshData BakeNavigation()
+        {
+            Physics.SyncTransforms();
+            var settings = NavMesh.GetSettingsCount() > 0 ? NavMesh.GetSettingsByIndex(0) : NavMesh.CreateSettings();
+            settings.agentRadius = .43f; settings.agentHeight = 1.8f; settings.agentClimb = .2f; settings.agentSlope = 40f;
+            settings.overrideVoxelSize = true; settings.voxelSize = .08f; settings.minRegionArea = .1f;
+            var sources = new List<NavMeshBuildSource>();
+            UnityEngine.AI.NavMeshBuilder.CollectSources(new Bounds(Vector3.up, new Vector3(30, 6, 30)),
+                1 << 8, NavMeshCollectGeometry.PhysicsColliders, 0, new List<NavMeshBuildMarkup>(), sources);
+            var baked = UnityEngine.AI.NavMeshBuilder.BuildNavMeshData(settings, sources,
+                new Bounds(Vector3.up, new Vector3(30, 6, 30)), Vector3.zero, Quaternion.identity);
+            if (baked == null) throw new InvalidOperationException("CAELMOR_NAVIGATION_BAKE_FAILED");
+            const string assetPath = "Assets/_Project/World/PlayableNavigation.asset";
+            var existing = AssetDatabase.LoadAssetAtPath<NavMeshData>(assetPath);
+            if (existing == null) { AssetDatabase.CreateAsset(baked, assetPath); return baked; }
+            EditorUtility.CopySerialized(baked, existing); UnityEngine.Object.DestroyImmediate(baked);
+            EditorUtility.SetDirty(existing); return existing;
         }
         static Material Material(string name, Color color)
         {

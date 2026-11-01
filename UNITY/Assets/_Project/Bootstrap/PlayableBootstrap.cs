@@ -11,6 +11,9 @@ namespace Caelmor.Unity.Playable
         public Camera playerCamera;
         public InteractionAnchor interactionAnchor;
         public Transform spawn;
+        public TerrainNavigation navigation;
+        public Transform destinationView;
+        public bool DebugMovementEnabled { get; private set; }
         public int solidLayerMask = 1 << 8;
         public PlayableHost Host { get; private set; }
         public bool HelpOpen { get; private set; }
@@ -29,7 +32,7 @@ namespace Caelmor.Unity.Playable
                 Application.targetFrameRate = 120;
                 QualitySettings.vSyncCount = 1;
                 Physics.SyncTransforms();
-                Host = new PlayableHost(spawn.position, interactionAnchor, solidLayerMask);
+                Host = new PlayableHost(spawn.position, interactionAnchor, solidLayerMask, navigation);
                 previous = Host.Snapshot;
                 lastSnapshotTime = Time.realtimeSinceStartupAsDouble;
                 Host.SnapshotCommitted += OnSnapshot;
@@ -57,7 +60,12 @@ namespace Caelmor.Unity.Playable
                 HelpOpen = !HelpOpen;
                 Host.ClearPendingInput(); accumulator = 0;
             }
-            if (!smoke && !HelpOpen && Application.isFocused && Input.GetKeyDown(KeyCode.E)) Host.SubmitInteraction(interactionAnchor.fixtureId);
+            if (!smoke && !HelpOpen && Application.isFocused)
+            {
+                if (Input.GetKeyDown(KeyCode.F3)) { DebugMovementEnabled = !DebugMovementEnabled; Host.ClearPendingInput(); }
+                if (Input.GetKeyDown(KeyCode.E)) Host.SubmitInteraction(interactionAnchor.fixtureId);
+                if (Input.GetMouseButtonDown(0)) TryClickDestination(Input.mousePosition);
+            }
             accumulator += Math.Min(Time.unscaledDeltaTime, .3f);
             int catchUp = 0;
             while (accumulator >= WorldTickSeconds && catchUp++ < 3)
@@ -66,20 +74,29 @@ namespace Caelmor.Unity.Playable
                 bool sprint = false;
                 if (!smoke && !HelpOpen && Application.isFocused)
                 {
-                    float x = (Input.GetKey(KeyCode.D) ? 1 : 0) - (Input.GetKey(KeyCode.A) ? 1 : 0);
-                    float z = (Input.GetKey(KeyCode.W) ? 1 : 0) - (Input.GetKey(KeyCode.S) ? 1 : 0);
+                    float x = DebugMovementEnabled ? (Input.GetKey(KeyCode.D) ? 1 : 0) - (Input.GetKey(KeyCode.A) ? 1 : 0) : 0;
+                    float z = DebugMovementEnabled ? (Input.GetKey(KeyCode.W) ? 1 : 0) - (Input.GetKey(KeyCode.S) ? 1 : 0) : 0;
                     var local = new Vector3(x, 0, z);
                     var world = Quaternion.Euler(0, yaw, 0) * local;
                     direction = new Vector2(world.x, world.z);
                     sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
                 }
-                Host.SubmitMove(direction, sprint);
+                if (direction.sqrMagnitude > .0001f) Host.SubmitMove(direction, sprint);
+                else Host.SubmitSprint(sprint);
                 previous = Host.Snapshot;
                 Host.Step();
                 accumulator -= WorldTickSeconds;
             }
             // Drop excessive accumulated wall time instead of speeding up the simulation after a stall.
             if (catchUp >= 3 && accumulator >= WorldTickSeconds) accumulator = 0;
+        }
+        internal bool TryClickDestination(Vector2 screenPoint)
+        {
+            if (Host == null || HelpOpen || !Application.isFocused || PlayableHud.BlocksPointer(this, screenPoint)) return false;
+            var ray = playerCamera.ScreenPointToRay(screenPoint);
+            if (!Physics.Raycast(ray, out var hit, 250f, solidLayerMask, QueryTriggerInteraction.Ignore) ||
+                hit.collider.GetComponent<NavigableTerrain>() == null || hit.normal.y < .7f) return false;
+            return Host.SubmitDestination(hit.point);
         }
         static readonly double WorldTickSeconds = WorldSimulationCore.TickInterval.TotalSeconds;
         void OnApplicationFocus(bool focused)
@@ -90,6 +107,11 @@ namespace Caelmor.Unity.Playable
         {
             if (Host == null) return;
             var state = Host.Snapshot;
+            if (destinationView != null)
+            {
+                destinationView.gameObject.SetActive(state.HasDestination);
+                destinationView.position = new Vector3(state.Destination.x, .025f, state.Destination.z);
+            }
             float alpha = Mathf.Clamp01((float)((Time.realtimeSinceStartupAsDouble - lastSnapshotTime) / WorldTickSeconds));
             playerView.position = Vector3.Lerp(previous.Position, state.Position, alpha);
             if (state.Facing.sqrMagnitude > .001f)
@@ -115,7 +137,7 @@ namespace Caelmor.Unity.Playable
             yield return null;
             try
             {
-                PlayableValidation.Run(interactionAnchor, solidLayerMask);
+                PlayableValidation.Run(interactionAnchor, solidLayerMask, navigation);
             }
             catch (Exception error)
             {

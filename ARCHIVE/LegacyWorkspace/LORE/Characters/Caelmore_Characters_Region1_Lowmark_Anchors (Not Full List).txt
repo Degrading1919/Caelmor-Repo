@@ -1,0 +1,197 @@
+## I. REGIONAL AUTHORITY
+
+### **Steward Aldric Fenmere**
+**Role:** Acting Steward of Lowmark Vale; scion of House Fenmere  
+**Location:** Crestbridge Hall / grain ledgers / toll offices  
+
+**Overview:**  
+Aldric Fenmere governs Lowmark not as a lord who commands, but as a steward who *administers*. House Fenmere owns much of the grain land, the largest mills, and the oldest river charters. Through inheritance rather than decree, Aldric became the quiet axis around which Lowmark turns.
+
+**Public Perception:**  
+- Polite, reserved, impeccably fair  
+- Rarely raises his voice  
+- Treats decisions as matters of necessity, not power  
+
+**Private Weight:**  
+- House Fenmere signed multiple wartime supply compacts  
+- Aldric personally approved river movements that fed armies on all sides  
+- Keeps ledgers older than the war — and refuses to destroy them  
+
+**Canon Notes:**  
+- Not a king, duke, or grand lord  
+- Power derives from land, mills, and logistics  
+- Embodies Lowmark’s “quietly ashamed” posture  
+
+**Gameplay Hooks:**  
+- Trade permissions  
+- Tariff disputes  
+- Old supply records that do not align with official war narratives  
+
+---
+
+## II. TRADE & TRAVEL FIGURES
+
+### **Maelin Rowe**
+**Role:** Long-route river barge master  
+**Location:** Brookhollow docks / Whisperflow Run  
+
+**Overview:**  
+Maelin has run Lowmark’s rivers since before the armistice. She knows currents the maps don’t show and avoids certain bends without explanation.
+
+**Traits:**  
+- Calm, efficient, observant  
+- Never asks what she’s hauling  
+- Refuses night passage through specific stretches  
+
+**Implied History:**  
+- Transported sealed cargo during the war  
+- Has seen barges return lighter than they should  
+
+**Gameplay Hooks:**  
+- River travel  
+- Restricted routes  
+- Early hints of water anomalies  
+
+---
+
+### **Corvin Tath**
+**Role:** Grain factor and storehouse overseer  
+**Location:** Crestbridge granaries  
+
+**Overview:**  
+Corvin manages grain flow for House Fenmere. He speaks in numbers, weights, and losses — never in opinions.
+
+**Traits:**  
+- Methodical, unsentimental  
+- Keeps duplicate tallies “just in case”  
+- Refuses direct Emberholt priority contracts  
+
+**Implied History:**  
+- Knows exactly how much Lowmark fed the war  
+- Burned one ledger after the armistice — and regrets it  
+
+**Gameplay Hooks:**  
+- Supply chain quests  
+- Trade pressure from other regions  
+
+---
+
+### **Lessa Mirepath**
+**Role:** Fen-edge guide and marsh-road pathfinder  
+**Location:** Stillwater Fen approaches  
+
+**Overview:**  
+Lessa guides caravans through Lowmark’s marsh edges and floodplains. She treats certain paths as permanently closed, regardless of payment.
+
+**Traits:**  
+- Quiet, practical  
+- Speaks to the land as if it listens  
+- Refuses to explain why some routes are “done”  
+
+**Gameplay Hooks:**  
+- Optional travel access  
+- Fen anomaly proximity  
+- Mire-border foreshadowing  
+
+---
+
+## III. GRIEF & MEMORY LOCALS
+
+### **Joric Fen**
+**Role:** Field laborer and net-mender  
+**Location:** Ashen Flats  
+
+**Overview:**  
+Joric’s land was burned during the war. He never replanted it. Instead, he works neighboring fields and mends nets at dusk.
+
+**Traits:**  
+- Soft-spoken  
+- Never complains  
+- Avoids standing water  
+
+**Implied History:**  
+- Lost family during a river incident that was never recorded  
+- Claims the water “gives things back slowly”  
+
+**Gameplay Hooks:**  
+- Ashen Flats micro-quests  
+- Environmental storytelling  
+
+---
+
+### **Annelise Reed**
+**Role:** Watergarden and memorial caretaker  
+**Location:** Ashenstead / reflection pools  
+
+**Overview:**  
+Annelise tends Lowmark’s quiet memorials. She removes offerings before they rot and keeps the water clear.
+
+**Traits:**  
+- Gentle, deliberate  
+- Speaks softly to the water while working  
+- Dislikes unattended candles  
+
+**Implied History:**  
+- Knows which names never appear on public memorials  
+- Believes remembrance should be “light enough to carry”  
+
+**Gameplay Hooks:**  
+- Grief-centered quests  
+- Wraith-adjacent atmosphere  
+
+---
+
+## IV. QUIET ANOMALY WITNESS
+
+### **Tovin Pell**
+**Role:** Dock laborer and mill runner  
+**Location:** Brookhollow / Crestbridge  
+
+**Overview:**  
+Tovin works repetitive, physical jobs — hauling sacks, turning wheels, loading barges. He is not educated, magical, or important.
+
+He notices patterns.
+
+**Experiences:**  
+- Reflections that lag behind movement  
+- Tools found where he didn’t leave them  
+- Sounds of water when no current flows  
+
+**Behavior:**  
+- Assumes something is wrong with him  
+- Has started sketching river bends and mill floors  
+- Never talks about it unless asked directly  
+
+**Canon Rule:**  
+Tovin does not understand what he’s witnessing.  
+He does not name it.  
+He does not seek answers.
+
+**Gameplay Hooks:**  
+- First anomaly breadcrumb  
+- Player trust-building  
+- Early proof that the world remembers  
+
+---
+
+## V. RUMORED FIGURE (UNCONFIRMED)
+
+### **“The Riverwarden”**
+**Status:** Whispered, not seen  
+
+- Spoken of in taverns and by children  
+- Described inconsistently  
+- Never confirmed  
+
+This is not a character yet — only a pressure point.
+
+---
+
+### DESIGN SUMMARY
+- **Tone:** Quietly ashamed  
+- **Magic:** Aftermath only  
+- **Authority:** Feudal, logistical, restrained  
+- **Purpose:** Onboarding, grounding, micro-narratives  
+
+Lowmark’s power is not what it does.  
+It is what it refuses to become.

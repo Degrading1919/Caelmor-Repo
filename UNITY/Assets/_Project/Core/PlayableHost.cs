@@ -25,11 +25,14 @@ namespace Caelmor.Unity.Playable
         public readonly bool MarkerActive;
         public readonly int InteractionCount;
         public readonly string Feedback;
+        public readonly bool HasDestination;
+        public readonly Vector3 Destination;
         public PlayableSnapshot(long tick, Vector3 position, Vector3 facing, bool sprinting,
-            bool markerActive, int interactionCount, string feedback)
+            bool markerActive, int interactionCount, string feedback, bool hasDestination = false, Vector3 destination = default)
         {
             Tick = tick; Position = position; Facing = facing; Sprinting = sprinting;
             MarkerActive = markerActive; InteractionCount = interactionCount; Feedback = feedback;
+            HasDestination = hasDestination; Destination = destination;
         }
     }
 
@@ -41,7 +44,8 @@ namespace Caelmor.Unity.Playable
     public sealed class PlayableHost : IDisposable, ITickPhaseHook, ISimulationParticipant,
         ISimulationEligibilityGate, IAuthoritativeStateMutatingCommandHandler
     {
-        const int MoveCommand = 101, SprintCommand = 102, InteractCommand = 103;
+        const int MoveCommand = 101, SprintCommand = 102, InteractCommand = 103, DestinationCommand = 104;
+        const float ArrivalTolerance = .025f;
         const float WalkSpeed = 3f, SprintSpeed = 5.5f, Radius = .38f, Skin = .025f;
         readonly int ownerThread = Thread.CurrentThread.ManagedThreadId;
         readonly DeterministicEntityRegistry entities = new DeterministicEntityRegistry();
@@ -59,6 +63,12 @@ namespace Caelmor.Unity.Playable
         readonly ZoneId zone;
         readonly InteractionAnchor anchor;
         readonly int collisionMask;
+        readonly TerrainNavigation navigation;
+        Vector3[] route = Array.Empty<Vector3>();
+        int routeIndex;
+        Vector3 destination;
+        bool hasDestination, destinationRequested, debugMoveRequested;
+        Vector3 requestedDestination;
         long inputSequence, lastConsumedSequence;
         Vector2 input;
         bool sprint, interact, inTick, disposed;
@@ -80,10 +90,12 @@ namespace Caelmor.Unity.Playable
         public event Action<SessionId, int, long> InteractionCommitted;
         public event Action<PlayableSnapshot> SnapshotCommitted;
 
-        public PlayableHost(Vector3 spawn, InteractionAnchor interactionAnchor, int solidMask)
+        public PlayableHost(Vector3 spawn, InteractionAnchor interactionAnchor, int solidMask, TerrainNavigation terrainNavigation = null)
         {
             anchor = interactionAnchor ?? throw new ArgumentNullException(nameof(interactionAnchor));
             collisionMask = solidMask;
+            navigation = terrainNavigation;
+            navigation?.Bind();
             zone = new ZoneId(anchor.zoneId);
             Session = new SessionId(Guid.NewGuid());
             playerId = new PlayerId(Guid.NewGuid());
@@ -114,6 +126,7 @@ namespace Caelmor.Unity.Playable
             Simulation.RegisterEligibilityGate(this);
             var registry = new CommandHandlerRegistry();
             registry.Register(MoveCommand, this); registry.Register(SprintCommand, this); registry.Register(InteractCommand, this);
+            registry.Register(DestinationCommand, this);
             Simulation.RegisterPhaseHook(this, -100);
             Simulation.RegisterPhaseHook(new AuthoritativeCommandFreezeHook(commands, sessions), -90);
             Simulation.RegisterPhaseHook(new AuthoritativeCommandConsumeTickHook(commands, registry, sessions), -80);
@@ -138,6 +151,18 @@ namespace Caelmor.Unity.Playable
             bool b = Enqueue(SprintCommand, wantsSprint ? 1 : 0, 0);
             return a && b;
         }
+        /// <summary>Destination intent only: reachability is evaluated by the host during simulation.</summary>
+        public bool SubmitDestination(Vector3 point)
+        {
+            AssertOwner();
+            if (!IsReady || !Finite(point.x) || !Finite(point.y) || !Finite(point.z) ||
+                Mathf.Abs(point.y - Snapshot.Position.y) > .08f || Mathf.Abs(point.x) > 1000 || Mathf.Abs(point.z) > 1000) return false;
+            return Enqueue(DestinationCommand, Mathf.RoundToInt(point.x * 1000f), Mathf.RoundToInt(point.z * 1000f));
+        }
+        public bool SubmitSprint(bool wantsSprint)
+        {
+            AssertOwner(); return IsReady && Enqueue(SprintCommand, wantsSprint ? 1 : 0, 0);
+        }
         public bool SubmitInteraction(int targetId)
         {
             AssertOwner();
@@ -147,6 +172,8 @@ namespace Caelmor.Unity.Playable
         {
             AssertOwner(); Require(!inTick, "input_clear_mid_tick");
             commands.DropSession(Session); input = Vector2.zero; sprint = false; interact = false;
+            destinationRequested = false; debugMoveRequested = false;
+            hasDestination = false; route = Array.Empty<Vector3>(); routeIndex = 0;
         }
         bool Enqueue(int type, int a, int b) => commands.TryEnqueue(Session,
             new AuthoritativeCommand(Simulation.CurrentTickIndex + 1, type, a, b, ++inputSequence));
@@ -166,8 +193,9 @@ namespace Caelmor.Unity.Playable
             pendingPosition = Snapshot.Position; pendingFacing = Snapshot.Facing;
             pendingMarker = Snapshot.MarkerActive; pendingCount = Snapshot.InteractionCount;
             pendingFeedback = Snapshot.Feedback; pendingSprint = false;
-            // Missing input stops movement; a lost/stalled client never leaves a moving avatar.
+            // Debug direction is per-tick input; a validated destination persists until arrival or explicit cancellation.
             input = Vector2.zero; sprint = false; interact = false;
+            destinationRequested = false; debugMoveRequested = false;
         }
         public void Handle(in AuthoritativeCommand command, SessionId session, SimulationTickContext tick)
         {
@@ -176,7 +204,16 @@ namespace Caelmor.Unity.Playable
                 command.DeterministicSequence <= lastConsumedSequence) return;
             lastConsumedSequence = command.DeterministicSequence;
             if (command.CommandType == MoveCommand)
+            {
                 input = Vector2.ClampMagnitude(new Vector2(command.PayloadA / 10000f, command.PayloadB / 10000f), 1f);
+                debugMoveRequested = input.sqrMagnitude > .0001f;
+                if (debugMoveRequested) destinationRequested = false;
+            }
+            else if (command.CommandType == DestinationCommand)
+            {
+                requestedDestination = new Vector3(command.PayloadA / 1000f, Snapshot.Position.y, command.PayloadB / 1000f);
+                destinationRequested = true; debugMoveRequested = false;
+            }
             else if (command.CommandType == SprintCommand) sprint = command.PayloadA == 1;
             else if (command.CommandType == InteractCommand) { interact = true; requestedTarget = command.PayloadA; }
         }
@@ -184,13 +221,51 @@ namespace Caelmor.Unity.Playable
         {
             AssertOwner();
             if (!inTick || !IsEligible(candidate)) return;
-            var direction = new Vector3(input.x, 0, input.y);
-            pendingSprint = sprint && direction.sqrMagnitude > .0001f;
-            if (direction.sqrMagnitude > .0001f)
+            if (destinationRequested)
             {
+                if (navigation != null && navigation.TryPath(Snapshot.Position, requestedDestination, collisionMask, out var nextRoute))
+                {
+                    route = nextRoute; routeIndex = 0; destination = route[route.Length - 1]; hasDestination = true;
+                    pendingFeedback = "Following host-validated path.";
+                }
+                else pendingFeedback = "That destination is not reachable. Existing route retained.";
+            }
+            if (debugMoveRequested)
+            {
+                hasDestination = false; route = Array.Empty<Vector3>();
+                var direction = new Vector3(input.x, 0, input.y);
+                pendingSprint = sprint;
                 pendingFacing = direction.normalized;
                 pendingPosition = MoveWithCollision(Snapshot.Position,
-                    direction * (pendingSprint ? SprintSpeed : WalkSpeed) * (float)tick.FixedDelta.TotalSeconds);
+                    direction * (sprint ? SprintSpeed : WalkSpeed) * (float)tick.FixedDelta.TotalSeconds);
+            }
+            else if (hasDestination)
+            {
+                float remaining = (sprint ? SprintSpeed : WalkSpeed) * (float)tick.FixedDelta.TotalSeconds;
+                pendingSprint = sprint;
+                // Consume the same tick's distance across corners; retargeting never inserts an idle tick.
+                while (hasDestination && remaining > .0001f)
+                {
+                    if (routeIndex >= route.Length)
+                    { hasDestination = false; pendingFeedback = "Destination reached."; break; }
+                    var delta = route[routeIndex] - pendingPosition; delta.y = 0;
+                    float distance = delta.magnitude;
+                    if (distance <= ArrivalTolerance) { routeIndex++; continue; }
+                    var direction = delta / distance;
+                    float travel = Mathf.Min(remaining, distance);
+                    var moved = MoveWithCollision(pendingPosition, direction * travel);
+                    float actual = Vector3.Distance(moved, pendingPosition);
+                    pendingFacing = direction; pendingPosition = moved; remaining -= travel;
+                    if (actual + .004f < travel)
+                    {
+                        hasDestination = false; route = Array.Empty<Vector3>();
+                        pendingFeedback = "Path blocked. Choose a new destination."; break;
+                    }
+                    if (distance - travel <= ArrivalTolerance) routeIndex++;
+                    if (routeIndex >= route.Length)
+                    { hasDestination = false; pendingFeedback = "Destination reached."; }
+                }
+                if (!hasDestination) pendingSprint = false;
             }
             if (!interact) return;
             if (anchor == null || !anchor.isActiveAndEnabled || requestedTarget != anchor.fixtureId)
@@ -233,7 +308,7 @@ namespace Caelmor.Unity.Playable
             bool committedInteraction = pendingCount > Snapshot.InteractionCount;
             // Single finalization boundary: presentation never reads partially simulated state.
             Snapshot = new PlayableSnapshot(tick.TickIndex, pendingPosition, pendingFacing, pendingSprint,
-                pendingMarker, pendingCount, pendingFeedback);
+                pendingMarker, pendingCount, pendingFeedback, hasDestination, destination);
             if (!IsReady) return;
             SnapshotCommitted?.Invoke(Snapshot);
             if (committedInteraction) InteractionCommitted?.Invoke(Session, anchor.fixtureId, tick.TickIndex);
@@ -243,10 +318,10 @@ namespace Caelmor.Unity.Playable
         {
             AssertOwner();
             Require(!inTick, "lifecycle_mutation_mid_tick");
-            if (suspend) Require(lifecycle.Suspend(player).Ok, "suspend_failed");
+            if (suspend) { ClearPendingInput(); Require(lifecycle.Suspend(player).Ok, "suspend_failed"); }
             else Require(lifecycle.Activate(player).Ok, "resume_failed");
         }
-        internal void DetachForValidation() { AssertOwner(); Require(!inTick, "detach_mid_tick"); residency.DetachPlayerFromZone(player, zone); }
+        internal void DetachForValidation() { AssertOwner(); Require(!inTick, "detach_mid_tick"); ClearPendingInput(); residency.DetachPlayerFromZone(player, zone); }
         public void Dispose()
         {
             AssertOwner();

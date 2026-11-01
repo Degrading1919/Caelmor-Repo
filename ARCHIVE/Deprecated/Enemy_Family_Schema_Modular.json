@@ -1,0 +1,17 @@
+// Enemy_Family_Schema_Modular_v2.txt
+// (No approved v1 changes — kept structurally identical for now)
+{
+  "id": "string",                     // enemy family ID
+  "region": "lowmark|thornfell|mire|emberholt",
+  "tier": "low|mid|high",
+
+  "base_stats": {
+    "health": 0,
+    "power": 0,
+    "armor": 0,
+    "speed": 1.0
+  },
+
+  "behavior": "skirmisher|brute|caster|ambusher",
+  "loot_table": "string"              // reference to loot table ID
+}

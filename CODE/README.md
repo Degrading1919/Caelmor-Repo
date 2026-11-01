@@ -1,5 +1,13 @@
 # Runtime build and validation
 
+## Workspace locations
+
+`C:\Users\CK\Documents\Caelmor-Repo` is the authoritative local checkout of `Degrading1919/Caelmor-Repo`. Edit runtime source here and open its `UNITY/` folder in Unity Hub. `C:\Users\CK\Documents\Caelmor-Build` contains generated executables, logs, and audit outputs; regenerate these with `UNITY/Build.ps1` rather than editing them.
+
+`C:\Users\CK\Documents\Caelmor` is the retained legacy workspace. Its unique historical material has been copied into repository archives without changing the originals. Do not open its old Unity project for current development or treat its older protocols, schemas, and runtime code as current authority. See the [workspace reconciliation](../00_ADMIN/Reference/Caelmor_Workspace_Reconciliation.md) and [preserved-file inventory](../ARCHIVE/LegacyWorkspace/SourceInventory.json). Legacy deletion or relocation requires explicit Director approval.
+
+## Validation command
+
 From the repository root in PowerShell:
 
 ```powershell

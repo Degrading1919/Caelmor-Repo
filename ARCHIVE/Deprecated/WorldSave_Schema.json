@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WorldSave",
+  "description": "World instance save used by the host for Caelmor v1/VS.",
+  "type": "object",
+
+  "properties": {
+    "schemaVersion": { "type": "integer", "minimum": 1 },
+
+    "worldId": { "type": "string" },
+    "zoneId": { "type": "string" },
+
+    "resourceNodes": {
+      "type": "array",
+      "description": "State of mining nodes, trees, herbs, wildlife carcasses, etc.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "nodeInstanceId": { "type": "string" },
+          "definitionId": { "type": "string" },
+          "isDepleted": { "type": "boolean" },
+          "respawnTick": { "type": "integer", "minimum": 0 }
+        },
+        "required": ["nodeInstanceId", "definitionId", "isDepleted"]
+      }
+    },
+
+    "worldObjects": {
+      "type": "array",
+      "description": "Campfires, doors, chests, destructibles, etc.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "objectId": { "type": "string" },
+          "state": { "type": "string" },
+          "flags": {
+            "type": "object",
+            "additionalProperties": { "type": "boolean" }
+          }
+        },
+        "required": ["objectId", "state"]
+      }
+    },
+
+    "chests": {
+      "type": "array",
+      "description": "Chest state including loot tables + remaining contents.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "chestId": { "type": "string" },
+          "opened": { "type": "boolean" },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "itemId": { "type": "string" },
+                "quantity": { "type": "integer", "minimum": 1 }
+              },
+              "required": ["itemId", "quantity"]
+            }
+          }
+        },
+        "required": ["chestId", "opened"]
+      }
+    },
+
+    "activeSpawns": {
+      "type": "array",
+      "description": "Optional: spawned enemies/NPC instances persisted across sessions (v1 minimal).",
+      "items": {
+        "type": "object",
+        "properties": {
+          "spawnId": { "type": "string" },
+          "entityTypeId": { "type": "string" },
+          "position": {
+            "type": "object",
+            "properties": {
+              "x": { "type": "number" },
+              "y": { "type": "number" },
+              "z": { "type": "number" }
+            },
+            "required": ["x", "y", "z"]
+          },
+          "alive": { "type": "boolean" }
+        },
+        "required": ["spawnId", "entityTypeId", "position", "alive"]
+      }
+    },
+
+    "worldFlags": {
+      "type": "object",
+      "description": "Global booleans used by quests, zone states, event triggers.",
+      "additionalProperties": { "type": "boolean" }
+    },
+
+    "timers": {
+      "type": "object",
+      "description": "High-level world timers (season ticks, event loops, shrine cooldowns, etc.).",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    }
+  },
+
+  "required": ["schemaVersion", "worldId", "zoneId", "resourceNodes"]
+}
