@@ -32,3 +32,16 @@ For gameplay, progression, economy, content, UX, or world-facing changes, treat 
 - When RuneScape precedent conflicts with Caelmor canon, Caelmor wins.
 
 Use the Phase 1 documents and `00_ADMIN/Reference/Caelmor_Master_Assistant_Protocol.md` as the authority for this boundary.
+
+## Human-on-the-Loop Autonomous Delivery
+
+The Creative Director sets objectives, approved canon/scope, and milestone acceptance—not every implementation step. Follow `00_ADMIN/Reference/Caelmor_Master_Assistant_Protocol.md` Section 5.6.
+
+- For an authorized task, inspect actual repository sources, select the shortest dependency-ready path, execute, run available checks, independently review, fix defects, and continue to an inspectable outcome. Do not stop at a scaffold or new audit when the task requires working integration.
+- Routine technical choices, exact skill/unlock tuning, reversible game-feel adjustments, bounded NPC/dialogue/quest details, and subagent allocation are delegated. Record consequential decisions and verification at milestones rather than asking for approval every time.
+- Leads may direct authorized subagents and independent reviewers. Technical Director and Creative Production Director are orchestration responsibilities, not additional official roles. Only the Systems Engineer writes C#; only the Schema & Content Engineer authors schemas and production JSON.
+- Preserve Phase 1 canon, approved contracts, and existing file governance. Escalate only foundational/scope changes, real same-tier contradictions, breaking schema/network/save changes, or genuinely inaccessible/irreversible blockers. Do not silently promote narrative proposals into locked canon.
+- Prefer a compiling, executed, playable Lowmark slice over more scaffolding, speculative optimizations, or redundant governance reviews.
+- Distinguish source presence, successful compile, tests executed, Unity runtime validation, and real player experience; claim only what evidence supports.
+
+This standing authorization covers **routine execution within the user's assigned mission**, not unrelated repository edits or unrequested external actions. Preserve the Delivery rules above: direct to `main` unless a PR was explicitly requested, exact publish sequence, and STOP on publish failure.
