@@ -289,13 +289,12 @@ GL-D8.02 JORIC: [circle or dike] "Field's dry." (beat) "Good."
   > "What was this ground, before?"               → GL-D8.05
 GL-D8.03 ANNELISE: "Thank the foreman. He'll pretend he didn't hear."   → GL-D8.10
 GL-D8.04 JORIC: (long silence) "Water gives things back slowly."
-GL-D8.05 JORIC: (beat) "Same ground." (goes back to his net) → GL-D8.10
-GL-D8.05 ANNELISE: "Somewhere people were looked after, for a while. That's all the stones say. It's enough to be careful with." → GL-D8.10
+GL-D8.05 JORIC: (beat) "Same ground." (goes back to his net)
+GL-D8.06 ANNELISE: "Somewhere people were looked after, for a while. That's all the stones say. It's enough to be careful with." → GL-D8.10
 GL-D8.10 ANNELISE: "River keep you."
        {event: GL-D8 end → quest Completed}
 ```
 
-(GL-D8.05 plays Joric's line, then Annelise's.)
 
 ### GL inspect texts
 
@@ -541,7 +540,7 @@ TF-D9.06 IMBER: "River keep you. And if you ever want a runner's job, there isn'
 | Shift board | "Chalk strokes in fives. Seventy-four. Today's makes seventy-five." |
 | Tail-door step | "Damp on the lower step, and the one above. Not from the race. From the tail." |
 | Pond (post-quest) | "Still. Your reflection keeps up." |
-| Each sheet | Its name plus the visible features in §TF.6 table of the quest file, e.g. "Long bar gone: the fresh wet line, and three older stain lines under it. The gate is whole. The tail door is dry. In the corner, thirty-nine strokes." |
+| Each sheet | Its name plus the visible features in the sheet table of the quest file (§TF.5 Beat 6), e.g. "Long bar gone: the fresh wet line, and three older stain lines under it. The gate is whole. The tail door is dry. In the corner, thirty-nine strokes." |
 
 **Row validator texts** (first contradiction only):
 
@@ -563,7 +562,7 @@ DK-D1.01 BRYN: "You. Good. You've got hands." (taps the notice) "Read that? Over
 DK-D1.02 BRYN: "I'll hold it. My mam held it, her mam held it. But my bowl cracked this spring. Cold snap. Stupid."
 DK-D1.03 BRYN: "So. A bowl from Penner in Brookhollow. Fresh moss from the shrine stones. Stakes off a dead driftroot, a dead one, mind."
   > "Hold it how?"                                → DK-D1.10
-  > [MQ3 site known] "Is this like the sluice in the spring?"   → DK-D1.20
+  > "Is this like the jammed sluice before?"   → DK-D1.20
   > "I'll get them."                              → DK-D1.30
 
 DK-D1.10 BRYN: "Like you hold a bank. Kneel on it and mean it." (glares) "And don't call it anything. It's ditch work."   → DK-D1 options
