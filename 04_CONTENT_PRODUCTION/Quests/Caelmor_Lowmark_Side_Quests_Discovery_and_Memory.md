@@ -36,7 +36,7 @@ None of these quests is required by the main line, by `LM_CIVIC_STANDING`, or by
 
 - **Steps** are scoped by quest id (`SB` `S00_offer` is distinct from `UC` `S00_offer`). **Flags** use the quest code prefix. No new `LM_` flags; region flags are only read.
 - **Quest items: none.** All seven quests use carry-state objects (TB fruit, FC tin case, CN offering boat, UC gate paddle) or placed props. This file adds **0** to the v1 quest-item budget (bible §11.6).
-- **Dialogue** uses the True Line format with `<CODE>-D<n>.<nn>` ids. `[condition]`, `{effect}`, *(repeatable)* as in the cast file. Nodes with Sedge are tagged **`[D-7]`** so the Field-Mage decision can be swapped by search. No node in this file names the antagonist.
+- **Dialogue** uses the True Line format with `<CODE>-D<n>.<nn>` ids. `[condition]`, `{effect}`, *(repeatable)* as in the cast file. Nodes with Sedge are tagged **`[D-7]`** and the one optional Oriel node **`[D-8]`**, so those Director decisions can be swapped by search. No node in this file names the antagonist.
 - **Death** in any encounter: respawn at the quest's named safe point with step, flags and carried state restored to the last deposit (carried objects return to their pickup point). No quest here can fail.
 - **Co-op:** independent instances; shared world creatures give step credit to every participant on that step; step-conditioned props and strange moments are presented per player from their own state.
 
@@ -355,7 +355,7 @@ Hints, in order of escalation (no tracker text): the seat's inspect ("You can't 
 | What it shows | Water lifting from the foot pool into the first step as a smooth, clear sheet, the way cloth lifts when pulled from one corner. It climbs step over step, pausing at each lip for a heartbeat before going over, the reed float riding it. At the top it fills the cistern, which spills down the side spillway back into the pool: a loop going nowhere. |
 | Audio | The water sound, normally a babble from uphill, softens to a steady pour that moves slowly upslope. Nothing else changes. No music. |
 | The direct world | If the player turns the camera inside the alcove, they see the alcove walls and the brow. Nothing else moves. |
-| Ripple | Leaning nothing, touching nothing: if the player stands up, the reflection breaks with a single ripple across the basin and the channel (now observed) is still. |
+| Standing up | If the player stands up, the reflection breaks with a single ripple across the basin and the channel (now observed) is still. |
 | UI | None. |
 | Camera | Player-controlled. The alcove constrains the camera physically, not by script. |
 | After | Seat inspect: *"A seat facing the wrong way. Built that way on purpose."* |
@@ -650,7 +650,7 @@ TB-D3.03 SEDGE: "No. It doesn't show you people. People you have to go and find.
        {event: TB-D3 end → S05 complete; quest Completed if S06 not started}
 
 (household variant if LM_SEDGE_TRUST unset)
-TB-D3.H1 HOUSEHOLD: "You're up early. Or late." (looks at the player's boots, dusted gold to the shin; then not) "Oh. You ate one."   → end
+TB-D3.H1 HOUSEHOLD: "You're up early. Or late." (looks at the player's face for a while) "Oh. You ate one."   → end
 ```
 
 ```
@@ -680,7 +680,7 @@ Joric bark after `TB_GIFT_JORIC`, on the gatepost prop: "Still there. Going soft
 | **The dream** | The tree grew on ground soaked in the Flats' grief before and after two fires; its fruit carries the place's imprint, not any person's (C08). It shows land, never people or events. | "You see the fields." Some say you see the dead (you don't). | The dream itself. | It's a vision of the burning (it isn't); it shows Joric's family (it shows no one). | Why the tree, why a decade. | None in v1. |
 | **The two burnings** | Two separate fires; the older char is smoother. | War, and "the second time." | Char texture; household talk. | Both were the war. | What the second fire was. | None in v1 (local colour; do not build on it without a record). |
 
-**Review log:** first draft showed one figure at the end of a lane; cut (the brief forbids any person). First draft let Joric recognise his field in the dream; cut, his plot is indistinguishable and he is never told it was "his" field. The dream once lit inspect texts in the fields; cut (no text explaining). The goblins originally fled at low HP; changed to a group scatter after defeat, per combat rules.
+**Review log:** a household line once showed gold dust on the player's boots after waking; cut (no physical trace of the dream). First draft showed one figure at the end of a lane; cut (the brief forbids any person). First draft let Joric recognise his field in the dream; cut, his plot is indistinguishable and he is never told it was "his" field. The dream once lit inspect texts in the fields; cut (no text explaining). The goblins originally fled at low HP; changed to a group scatter after defeat, per combat rules.
 
 ---
 ## 4. WD — The Whispering Door
@@ -1104,3 +1104,540 @@ Post-quest barks:
 **Review log:** first draft had Annelise keep a register of boats; cut (record custody). First draft let the boat drift to Widow's Step and be launched at once; revised so the boat stays in the garden's care, matching Act III's "Annelise brings the recovered offering boat." Board-setting reuses the rope-wear reading idea rather than Braid-gate ordering, to stay distinct from MQ11 Phase 2. The drift no longer "lead" the player to the boat; the boat is visible from the start.
 
 ---
+## 6. VK — A Verse Kept Back
+
+### 6.1 In one paragraph
+
+Greyharrow will not open its winter boom until the thaw song is sung, and this year it cannot be sung. The song has four verses. The third has always been hummed. The Sayers say it once had words for the river's dead, dropped in the war out of shame, and want them back. The Coombes say it was always hummed, and that putting words to it at the water is an insult to the people it is hummed for. Each family says the other is dishonouring the dead. The player collects versions: the Sayers' song-book, where the words are written in a later hand; the Coombe elder's hum, which they will only give while working the ice-poles; Merrin's memory that it was hummed "before the bell went quiet"; Tamsin's version, which is rude about Sergeant Teague; and Nan Ferrin's listeners' tune at the Brookhollow water, which is the same melody. Nobody knows where it began. After MQ9, at the Listening Steps, the player hears water running over a carved channel make that same rising phrase, beside cut count-marks: four, held, four. It was a work count for opening water before it was anyone's mourning. That is context, not a translation, and it gives no version the whole past. Greyharrow sings, the boom opens, and the ice goes out.
+
+**What the player should remember:** a melody they first heard by a fire in the True Line, running in stone behind a waterfall. **What they might want next:** Nan to sing it once more (MQ12).
+
+### 6.2 Summary card
+
+| Field | Value |
+|---|---|
+| Type | Memory/lore. Lattice L-S17; dossier §XI "The Riverwarden Lullaby" [CANON hook]; Nan's tune (True Line). |
+| Unlock | MQ3 Completed. Steps S05 onward require **MQ9 Completed**. |
+| Length | 30–40 minutes in total, split across the act break. |
+| Combat | None. |
+| Skills | None. The pole-work and boom pins are plain interactions. |
+| NPCs | Sayer elder, Coombe elder (Greyharrow households [NEW], shared with SB); Merrin, Tamsin, Sergeant Teague; Nan Ferrin (True Line); Oriel (optional, D-8). |
+| Choice | How the verse is performed (3 options). |
+| Feeds | MQ11 after-hold hum and MQ12 Nan scene (Act III reads "completed VK"; §6.9). |
+
+### 6.3 Places
+
+| Place | Purpose | Environmental storytelling |
+|---|---|---|
+| **Greyharrow winter boom** | Hook; performance. | A chain of lashed logs across the side-branch dock mouth, holding back a raft of rotten ice and winter debris. Pin-posts at each end. Poles racked on the bank. Nobody touching them. |
+| **Sayer house** | Version A. | A song-book on a shelf, its cover mended with sacking. If `SB_TO_FAMILIES`, the ringers' slate on the mantel. |
+| **Coombe ice-poles** | Version B. | A side channel where the Coombe elder works floes off the jetty legs alone, in silence, until someone picks up a second pole. |
+| **Bell tower foot** | Merrin, Tamsin (versions C, D). | As SB. |
+| **Brookhollow docks edge** | Version E. | Nan sings only "at the water." The step where she stands is worn. |
+| **The Listening Steps: the count channel** (P29, after MQ9) | Context. | A narrow carved channel off the main Steps where water drops over a run of shaped riffles. Cut into the lip beside it: groups of strokes, four, a long bar, four. Moss everywhere except on the strokes, which have been kept clear. |
+
+**MAP VERIFICATION REQUIRED:** the count channel must sit inside the area MQ9 opens. If Act II places Oriel at the Steps after MQ9, VK-D6 is used; if not, the channel and its marks carry the beat alone.
+
+### 6.4 Beats
+
+**Beat 0 — The boom stays shut (`S00_offer`).** *Objective: Find out why the thaw song won't be sung.* At the boom: the quarrel (VK-D1).
+
+**Beat 1 — Versions (`S01_versions`).** *Objective: Hear the thaw song's third verse, as many ways as you can.* Required: **A**, **B** and **E**. Optional: **C**, **D**. Any order.
+- **A. The Sayers' book.** Inspect the song-book: verses one, two and four in one faded hand; the third verse in a different, later hand, words "for the ones the water kept." (VK-D2.)
+- **B. The Coombe hum.** The elder will not talk; pick up a pole and **Work the floes** (3 interactions, 3 s each, pushing debris off the jetty legs). On the second push the elder starts to hum; on the third, VK-D3.
+- **C. Merrin.** "Before the bell went quiet, we hummed it then too." (VK-D4a.) Quietly undermines the Sayers' claim that words were dropped in the war.
+- **D. Tamsin.** The children's words, which rhyme Teague with "fatigue" (VK-D4b). Undermines everyone's solemnity.
+- **E. Nan.** At Brookhollow, walk with Nan to the dock edge (she will not sing indoors). She hums it at the water: the listeners' tune. Same melody (VK-D5).
+
+**Beat 2 — The trail goes quiet (`S02_wait`).** *Objective: Learn where the tune began.* Tracker sub-line: *(Nobody in the villages knows. The trail continues later.)* If MQ9 is already Completed, the sub-line is skipped.
+
+**Beat 3 — The count channel (`S03_steps`).** *Objective: Listen at the Listening Steps.* Requires MQ9 Completed. Enter the count-channel volume. See §6.6. Inspect the strokes. Optional VK-D6 with Oriel.
+
+**Beat 4 — Back to the boom (`S04_choose`).** *Objective: Bring what you heard back to Greyharrow.* The families, Merrin, Teague at the boom (VK-D7, the choice).
+
+**Beat 5 — The thaw song (`S05_perform`).** *Objective: Open the boom.* The performance event (§6.7). Completed on the last pin.
+
+### 6.5 Encounters
+
+None. This is the slate's quiet quest (bible §7: combat in VK is absent by design). Ambient Silt Swimmers in the debris raft do not engage.
+
+### 6.6 The strange moment: the count channel (presentation spec)
+
+| Element | Spec |
+|---|---|
+| Trigger | Enter the count-channel volume (server event `verse.channel`), any time after MQ9. |
+| Sound | Ordinary Steps ambience, then, as the player nears the riffles, the water's sound resolves into a rising phrase of four notes, a held note, four notes, repeating with the falling water. It is the listeners' tune's third-verse phrase, played by water, not voice. It is quiet; the player must be close. Moving away dissolves it back into water noise. |
+| The marks | Strokes cut beside the channel: four, a long bar, four. Kept clear of moss. |
+| What does not happen | No voice, no words, no figure, no light, no inscription in any language. |
+| UI | None. |
+| Camera | Player-controlled. |
+| After | Strokes inspect: *"Four, held, four. Cut where a hand would rest while it counted. Someone kept these clear."* |
+| What it means | The tune fits a count for working water. It does not say whose dead the verse is for, or whether words ever belonged to it. |
+
+### 6.7 The performance (presentation spec)
+
+| Element | Spec |
+|---|---|
+| Trigger | VK-D7 choice → `S05_perform`. |
+| Crowd | Greyharrow at the boom: both families, Teague's militia on the poles, children, Merrin. If `SB_COMPLETE`, Tamsin pulls the silent bell rope to start (no sound; everyone starts singing on the swing). Else Merrin raises a hand. |
+| Song | Verses one and two sung by everyone (full-crowd vocal loop). Verse three per the choice (§6.9). Verse four sung by everyone. |
+| The player | At the east pin-post. Each verse, a **Pull the pin** interaction (3 s) is offered; pulling it during the verse frees one log section. No timing test: the song waits on the player if they are slow, and the crowd hums the last line again until they pull. |
+| The ice | With the last pin, the boom swings open and the debris raft goes out down the side branch in one slow, grinding mass. The crowd cheers, stops singing, and argues about lunch. |
+| Camera / UI | Player-controlled; no UI during the song. |
+| After | The boom stays open (prop). At night, near reeds anywhere in Lowmark, the player may now hear the Riverwarden Lullaby (dossier §XI): a soft hum of the tune, no voice located, once per night at most, ambient only. |
+
+### 6.8 Steps
+
+| Step | Objective | Completes on | Required |
+|---|---|---|---|
+| `S00_offer` | Find out why the thaw song won't be sung. | VK-D1 end node | Yes |
+| `S01_versions` | Hear the third verse, as many ways as you can. | A (inspect song-book + VK-D2), B (3 `work_floe` + VK-D3), E (VK-D5 end) | Yes |
+| `S01c`, `S01d` | (Optional) Merrin's and Tamsin's versions. | VK-D4a / VK-D4b end | No |
+| `S02_wait` | Learn where the tune began. | Auto-passes when MQ9 Completed | Yes |
+| `S03_steps` | Listen at the Listening Steps. | Enter count-channel volume + inspect strokes | Yes |
+| `S04_choose` | Bring what you heard back to Greyharrow. | VK-D7 choice node | Yes |
+| `S05_perform` | Open the boom. | 4 `pull_pin` interactions → Completed | Yes |
+
+### 6.9 Flags and choices
+
+| Flag | Set by | Read by |
+|---|---|---|
+| `VK_HEARD_MERRIN`, `VK_HEARD_TAMSIN` | Optional versions | VK-D7 lines |
+| `VK_PERF_BOTH` / `VK_PERF_COUNT` / `VK_PERF_HUM` | VK-D7 (exactly one) | Performance verse three; MQ12 Nan (request to Act III) |
+| `VK_COMPLETE` | Completion | Lullaby ambience; Act III "completed VK" |
+
+Reads `FK_NAN_TUNE` (Nan's opening variant) and `SB_COMPLETE`, `SB_TO_FAMILIES`.
+
+| Option | Verse three becomes | Cost | MQ12 request (Act III owns wording) |
+|---|---|---|---|
+| **Both stand** — *"Sing the words over the hum."* | Sayers sing their words; Coombes hum beneath. | Neither family gets its whole way. Coombe elder: "Loud. But under it, it's ours." | Nan sings the verse with the Sayer words, humming between lines. |
+| **The count** — *"Hum it as a count, the way it started. Say the words at the bell after."* | Everyone hums verse three as the pin count (four, held, four); the Sayer words are spoken at the tower after the boom opens. | The words leave the water. Sayer elder: "At the bell, then. Where they'll be heard." | Nan hums it as a count, tapping four, held, four on the rail. |
+| **The hum alone** — *"Hum it. Keep the words in the book."* | Hum only, as Greyharrow always has. | The Sayers' words stay private. Sayer elder takes the book home. | Nan hums the verse; no words. |
+
+No option is wrong; the Steps did not choose one.
+
+### 6.10 Rewards
+
+The boom opens (Greyharrow dock trade and side-route boats resume: ambient). The Lullaby ambience. Small payment from Teague's militia fund ("thaw wages, for the pin"). No lump quest XP.
+
+### 6.11 Failure, recovery, co-op
+
+No failure path. The pause at S02 is explicit in the tracker. If the player reaches MQ9 first, S02 passes on accept. Logout during the performance restarts it from verse one. Co-op: each player's performance is their own; partners present hear the crowd sing for whoever is on S05 (crowd audio is local to the performer; fallback: the performance is a world event that any partner's S05 completes on).
+
+### 6.12 Dialogue
+
+```
+VK-D1 (the boom; both elders, Teague between them)
+VK-D1.01 TEAGUE: "No song, no boom. No boom, no boats. No boats, I get the complaints."
+VK-D1.02 SAYER ELDER: "There were words. They stopped singing them in the war, and we let them."
+VK-D1.03 COOMBE ELDER: "There were never words. You hum it for them. You don't shout at the water."
+VK-D1.04 [SB_COMPLETE] TEAGUE: "Didn't we just do this? With a wall?"
+VK-D1.04 [else]        TEAGUE: "Every thaw. Every single thaw."
+  > "Let me hear all the versions."                   → VK-D1.05
+VK-D1.05 TEAGUE: "Please. Somebody. Before the ice rots the jetty."   {event: S00 complete} → end
+```
+
+```
+VK-D2 (Sayer house, after inspecting the song-book)
+VK-D2.01 SAYER ELDER: "My gran wrote that. After. She said she knew the words and nobody else would sing them."
+  > "The third verse is in a different hand."         → VK-D2.02
+VK-D2.02 SAYER ELDER: "Hers." (beat) "So the words came after. Doesn't make them wrong."   → end
+```
+
+```
+VK-D3 (Coombe jetty, during the third floe push; the elder has been humming)
+VK-D3.01 COOMBE ELDER: (stops humming) "You push like a Sayer."
+VK-D3.02 COOMBE ELDER: "We hum it working. You don't put words on work. The work's the words."
+  > "Who taught you?"                                 → VK-D3.03
+VK-D3.03 COOMBE ELDER: "My mam. Hers. Nobody taught it. It was just there, like the river."   → end
+```
+
+```
+VK-D4a (Merrin, at the rope)
+VK-D4a.01 MERRIN: "We hummed it before the bell went quiet. I was small. I remember the hum."
+VK-D4a.02 MERRIN: "Never heard words. Doesn't mean there weren't any. Means I never heard them."   {set VK_HEARD_MERRIN} → end
+
+VK-D4b (Tamsin)
+VK-D4b.01 TAMSIN: "There are words. We have them. 'Old Teague, old Teague, with his fatigue —'"
+VK-D4b.02 TAMSIN: "There's more but you'd tell."   {set VK_HEARD_TAMSIN} → end
+```
+
+```
+VK-D5 (Nan, Brookhollow; she walks to the dock edge first)
+VK-D5.01 [FK_NAN_TUNE] NAN: "The listeners' tune again? You'll have me singing it in my sleep. Duchess already does."
+VK-D5.01 [else]        NAN: "Not in here. At the water. My mam only sang it at the water."
+VK-D5.02 NAN: (at the dock edge, hums the third-verse phrase; stops) "That one?"
+  > "That's the thaw song's third verse. In Greyharrow."   → VK-D5.03
+VK-D5.03 NAN: "Is it?" (beat) "Mam sang it before crossings. Never a word. Like counting, she said."
+VK-D5.04 NAN: "Maybe it's everyone's. Maybe nobody's." (beat) "That's the best kind of tune."   → end
+```
+
+```
+VK-D6 (optional; Oriel at the count channel, only if Act II places Oriel at the Steps after MQ9)  [D-8]
+VK-D6.01 ORIEL: "You hum it." (beat) "Downriver they still hum it."
+VK-D6.02 ORIEL: "It is a gate count. Four, hold, four. Hands on the paddles, so the water goes over together."
+  > "In Greyharrow they sing it for their dead."         → VK-D6.03
+VK-D6.03 ORIEL: "Then that is what it is for, there." (beat) "We only used it to open water."   → end
+```
+
+```
+VK-D7 (the boom)
+VK-D7.01 SAYER ELDER: "Well? Was it ours?"
+  > "It was a count for opening water, long before anyone's dead."   → VK-D7.02
+VK-D7.02 COOMBE ELDER: "Work. Told you."
+VK-D7.03 SAYER ELDER: "And then people put their dead into it. My gran did. That happened too."
+VK-D7.04 [VK_HEARD_MERRIN] MERRIN: "Hummed before the war. Worded after. Both true."
+VK-D7.05 TEAGUE: "Lovely. Pick one. The jetty's going soft."
+  > "Sing the words over the hum."                                      → VK-D7.10 {set VK_PERF_BOTH}
+  > "Hum it as a count, the way it started. Say the words at the bell after."  → VK-D7.11 {set VK_PERF_COUNT}
+  > "Hum it. Keep the words in the book."                               → VK-D7.12 {set VK_PERF_HUM}
+VK-D7.10 COOMBE ELDER: "Loud." (beat) "But under it, it's ours."       → VK-D7.20
+VK-D7.11 SAYER ELDER: "At the bell, then. Where they'll be heard."     → VK-D7.20
+VK-D7.12 SAYER ELDER: (holds the book closer) "Then it stays in the house. Where she wrote it."   → VK-D7.20
+VK-D7.20 TEAGUE: "Poles! East pin's yours. Pull when the verse turns."   {event: S04 complete}
+```
+
+Performance barks: TAMSIN (on the rope) "Now! Now now now!" · HOUSEHOLD (after) "Every thaw, the same song, and every thaw I cry. Pass the bread." · TEAGUE "Boom's open. Complaints are closed."
+
+### 6.13 Mystery ledger
+
+| Mystery | Author truth [PROPOSAL — DIRECTOR] | Public belief | Evidence | Wrong reading | Withheld | Reveal owner |
+|---|---|---|---|---|---|---|
+| **The missing verse** | The melody began as a Riverwarden gate count; Lowmark folk kept it as a work hum; after the war some households set words to it for their dead. | Words were dropped in shame / there were never words. | Sayer book's later hand; Merrin's prewar hum; Nan's "like counting"; the count channel. | One family is right. | Who first set words; whose dead. | VK (context only). |
+| **The Riverwarden Lullaby** | The same tune, heard near reeds at night. **Its source is never stated.** | For lost Riverwarden children. | The hum after VK. | It's ghosts; it's Sedge. | Everything. | None in v1. |
+
+**Review log:** first draft had Oriel translate words; cut (context, never translation). The pause before MQ9 now has explicit tracker text so it cannot read as a bug. The performance was a rhythm test in draft; replaced with untimed pin pulls (no twitch mechanics).
+
+---
+## 7. FC — What the Flood Carried
+
+### 7.1 In one paragraph
+
+The flood went down off the Lark low field and left a raft of driftwood, hurdles and reed across the furrows, and in the middle of it a sealed tin case the size of a bread loaf. Hester Lark will not plant until somebody tells her what it is. Her father Amos says it is a wartime fire-tin and will take the barn with it. Her son Jem wants to keep it. The player clears the raft (Woodcutting through the jammed logs, vermin in the standing pools), and the case sits in the sun on the bare furrow, ticking. The ticking is the sun warming the metal. Nobody believes that until the player has looked: hand-soldered seam, no fuse or vent, no smell of tar, a dry shift inside like seed, a silt line in the lid groove that says it lay a long time under water still sealed, and a scratched household mark that matches no gatepost, tool or hurdle on this side of the field. That is all the evidence can say: it arrived, and it frightened people. Then the Larks decide. Opened, it holds a twist of dry seed, a note whose ink has run but for a few words, and an inner oilcloth packet sealed with wax that nobody will break. Unopened, it goes to the keepers or into the hedge-bank for whoever comes. Either way, Hester plants.
+
+**What the player should remember:** a family standing well back from a ticking tin in a bare field. **What they might want next:** to come back and see whether the old seed comes up.
+
+### 7.2 Summary card
+
+| Field | Value |
+|---|---|
+| Type | Memory/lore. Lattice L-S12; dossier §XII "What the Flood Carried" (war remnants drift into Lowmark) [CANON hook]. |
+| Unlock | MQ4 Completed. |
+| Length | 20–30 minutes. |
+| Combat | ~20%: standing-pool vermin; an optional boar. |
+| Skills | Woodcutting (entry level, required), Melee; Smithing optional insight. |
+| NPCs | Hester Lark (farmer) [NEW], Amos Lark (her father) [NEW], Jem Lark (her son, about nine) [NEW]; a road-patrol keeper (role). Names checked: no collisions. |
+| Choice | What the household does with the case (3 options). |
+| Cross-region callback | **Optional and removable** (§7.9). |
+
+### 7.3 The place: the Lark low field (Heartlands field edge)
+
+| Area | Purpose | Environmental storytelling |
+|---|---|---|
+| **A. Field gate** | Hook. | Seed sacks stacked unopened under a tarp. A plough left mid-furrow. The family on the gate, not in the field. |
+| **B. The raft** | Clearing. | A tangle across six furrows: two jammed driftwood logs, the Larks' own broken hurdles, a neighbour's hurdle with a different weave, reed mats, a cart wheel. The flood line on the hedge is chest high. |
+| **C. Standing pools** | Danger. | Two pools left in the low corner, milky with silt. Movement under the surface. |
+| **D. The case** | Discovery. | A soldered tin case, dented, a scratched mark on the lid. Once the raft is cleared, it sits alone on bare earth. |
+| **E. Hedge-bank niche** | Option. | An old stone-lined hollow in the bank where the Larks leave things for collection: a mended pail, a lost glove. |
+
+### 7.4 Beats
+
+**Beat 0 — Nobody's planting (`S00_offer`).** *Objective: Find out why the field isn't being planted.* FC-D1 at the gate.
+
+**Beat 1 — Clear the raft (`S01_clear`).** *Objective: Clear the flood debris.* Two jammed logs (Woodcutting gather interaction at entry level, standard; a loaned hatchet from Amos if the player has none, returned at the end), then **Drag the hurdles** clear (3 carries to the hedge). Entering the low corner starts E1. The case is exposed when the last log is cut.
+
+**Beat 2 — It ticks (`S02_case`).** *Objective: Look at the case.* The family will not come closer than the gate. The case ticks softly and irregularly. Five inspects; any four complete the step (texts in §7.11): **seam**, **weight** (lift and set down: a dry shift), **smell**, **silt line**, **mark**. Optional: the player with Smithing gets an added line on the seam. Optional: inspect the **ticking** (*"It ticks faster when the sun comes out from the cloud. Warm metal."*).
+
+**Beat 3 — Whose mark (`S03_mark`).** *Objective: Look for the mark on the farm.* Compare the lid mark against three local marks: **gatepost**, **Amos's tool handles** at the gate, **the neighbour's hurdle** in the raft. None match. Completes on the third comparison. (The mark cannot be traced from here; the step proves only that it isn't local.)
+
+**Beat 4 — The household decides (`S04_choose`).** *Objective: Tell the Larks what you found.* Carry the case to the gate (carry state; the family steps back as the player comes). FC-D3: the choice.
+
+**Beat 5 — Planting (`S05_plant`).** *Objective: Help start the planting.* Lift the tarp, carry one seed sack to the field (carry), Hester sows the first furrow (ambient). If opened, Jem plants the tin's seed in a short row by the hedge. FC-D4. Completed.
+
+### 7.5 Encounters
+
+| Id | Enemies | Placement | Role | Telegraph | Solo target |
+|---|---|---|---|---|---|
+| **E1** | 2 × Silt Swimmer, 1 × River Leech | Standing pools in the low corner | Leashed to the pools | Ripple line (~0.8 s); leech rears (~1.2 s) | Required (the second log lies across a pool). Short. |
+| **E2** | 1 × Furrow Boar | Rooting in the reed mats | Wildlife, neutral until provoked; aggressive if the player drags a hurdle within 5 m | Paws and lowers head (~1.5 s) before charge | Optional. Hunting harvest afterwards (entry level). |
+
+### 7.6 The strange moment: the tin (presentation spec)
+
+FC's moment is unease, then something ordinary that feels like wonder.
+
+| Element | Spec |
+|---|---|
+| Unease (Beat 2) | From when the last log is cut, the case ticks: small, uneven metallic clicks, faster when sun is on it (tie to cloud cover or a simple timer). The Larks flinch at each one. No music. The ticking is real physics; its inspect says so. |
+| Opening (only if `FC_OPENED`) | Server event `flood_carried.open` on the **Prise the lid** interaction (4 s, at the gate). The lid comes off with a small breath of dry air. The family leans in. For a moment nobody speaks. Inside, everything is bone dry after its years in the water. Amos: "Dry." That is the only line until the player inspects. |
+| UI / camera | None; player-controlled. |
+| What it means | Someone sealed this well. Nothing else. |
+
+### 7.7 Steps
+
+| Step | Objective | Completes on | Required |
+|---|---|---|---|
+| `S00_offer` | Find out why the field isn't being planted. | FC-D1 end node | Yes |
+| `S01_clear` | Clear the flood debris. | 2 log-gather events + 3 hurdle deposits + E1 defeated | Yes |
+| `S02_case` | Look at the case. | 4 of 5 inspects on the case | Yes |
+| `S03_mark` | Look for the mark on the farm. | 3 comparison inspects | Yes |
+| `S04_choose` | Tell the Larks what you found. | Carry deposit at gate + FC-D3 choice node | Yes |
+| `S05_plant` | Help start the planting. | Seed-sack carry deposit → FC-D4 end → Completed | Yes |
+
+### 7.8 Flags
+
+| Flag | Set by | Read by |
+|---|---|---|
+| `FC_OPENED` / `FC_TO_KEEPERS` / `FC_TO_HEDGE` | FC-D3 (exactly one) | Props; barks |
+| `FC_SEED_ROW` | `S05` if `FC_OPENED` | Hedge-row prop; later sprout state |
+| `FC_SEAL_NOTED` | Inspect of the inner packet (only if opened) | **Removable callback hook** (§7.9). Nothing in v1 reads it. |
+| `FC_COMPLETE` | Completion | Lark barks |
+
+### 7.9 Choices, consequences and the removable callback
+
+| Option | Immediate | Cost | Later |
+|---|---|---|---|
+| **Open it here** — *"Open it. Then you'll know."* | Seed twist, run-ink note (*"...keep these dry till the spring after..."*, no names), inner oilcloth packet with an unbroken wax seal. Jem plants the seed by the hedge; the packet goes on the Lark mantel, unopened. | Amos: "Now it's ours to worry about." | Hedge row: nothing after one return visit ("Beans are stubborn"); after MQ11 Completed, three thin shoots (prop). No meaning is assigned. |
+| **Give it to the keepers** — *"Hand it to the keepers. It's a thing someone lost."* | The road-patrol keeper (passing at the gate on a schedule) logs it in the lost-goods book and takes it, unopened. | The Larks never learn what was inside. Jem sulks. | Keeper bark at Crestbridge: "Lost-goods has your tin. Nobody's asked." |
+| **Set it aside** — *"Put it in the hedge-bank. Whoever it belongs to can find it."* | Into the niche, unopened. Amos marks the niche stone with the same scratched mark. | It may never be claimed. | The niche keeps the tin (prop). Hester: "If they come, they'll see their mark." |
+
+In all three, planting starts. The household decides; the player only reports what the case shows.
+
+**Removable cross-region callback [PROPOSAL — DIRECTOR].** The wax seal on the inner packet carries a pressed mark (art: a simple stamped device, deliberately unassigned to any region). Inspect: *"A wax seal, pressed with a mark nobody here knows. The Larks won't break it."* It sets `FC_SEAL_NOTED`. Per lattice L-S12 and the framework's long-delay rules:
+- **Owner:** a later region's independent archive or household record must identify the device. Until that owner exists, nothing reads the flag.
+- **Never sole proof:** a later scene must restate the context and treat the seal as corroboration only.
+- **Removal:** delete the inner packet prop, its inspect and `FC_SEAL_NOTED`. The opened tin then holds only the seed and the note. No step, choice, line or reward changes.
+- **No route is inferred.** Nothing here says where the case came from or which way the water ran.
+
+### 7.10 Rewards
+
+Planting resumes (field prop changes to sown). Small payment from Hester "in seed-money, which is to say not much." Amos's hatchet loan, if taken, is returned (not a reward). Action XP: Woodcutting, Melee, optional Hunting. No lump quest XP.
+
+### 7.11 Inspects and dialogue
+
+| Object | Text | Condition |
+|---|---|---|
+| Seam | "Soldered by hand. The bead wanders. Somebody did this at a kitchen table." | — |
+| Seam (Smithing) | "Tin and lead, cheap and careful. No fuse port, no vent. It was made to keep water out, not to do anything." | Smithing skill ≥ entry |
+| Weight | "Lighter than it looks. Something inside shifts like dry seed. Nothing sloshes." | — |
+| Smell | "Mud. River. No tar, no oil, nothing sharp." | — |
+| Silt line | "Fine silt packed into the lid groove, all the way round. It lay under still water a long time, sealed." | — |
+| Mark | "A household mark scratched into the lid: a ring with a bar through it." | — |
+| Gatepost / tools / neighbour's hurdle | "The Lark mark is a forked line." / "Amos's handles: the forked line again." / "The neighbour's weave, and their mark: three notches. Not this." | — |
+| Note (if opened) | "Paper, the ink run to grey. A few words hold: *keep these dry till the spring after.* No name. No date." | `FC_OPENED` |
+
+```
+FC-D1 (the field gate)
+FC-D1.01 HESTER: "Seed's ready. Field's ready. That isn't."   (nods at the raft and the glint in it)
+FC-D1.02 AMOS: "Fire-tin. Saw one go up in a barn. You don't touch fire-tins."
+FC-D1.03 JEM: "It's treasure. Obviously."
+FC-D1.04 HESTER: "Clear that lot and tell me what it is. Then I'll decide if I'm planting round it."
+  > "I'll take a look."                         → end {event: S00 complete}
+  > [no cutting tool] "I've no blade."          → FC-D1.05
+FC-D1.05 AMOS: (hands over a hatchet) "Mine. I want it back. Sharp."   → end {event: S00 complete}
+```
+
+```
+FC-D2 (barks while the case ticks)
+JEM:   "It's ticking! Mam, it's ticking!"
+AMOS:  "Told you. Told you."
+HESTER:"Stand back from it and look at it. Both. At the same time, if you can."
+```
+
+```
+FC-D3 (at the gate; the player sets the case down; the family takes one step back, then one forward)
+FC-D3.01 HESTER: "Well?"
+  > "It's hand-soldered. No fuse, no vent. It ticks because the sun's on it."   → FC-D3.02
+FC-D3.02 AMOS: "Ticks because the sun's on it." (beat) "I knew that."
+FC-D3.03 HESTER: "Whose is it?"
+  > "Not anyone's on this farm. The mark doesn't match. That's all I can tell."   → FC-D3.04
+FC-D3.04 JEM: "So it's ours."
+FC-D3.05 HESTER: "It isn't anybody's yet." (to the player) "What would you do?"
+  > "Open it. Then you'll know."                                     → FC-D3.10
+  > "Hand it to the keepers. It's a thing someone lost."             → FC-D3.20
+  > "Put it in the hedge-bank. Whoever it belongs to can find it."   → FC-D3.30
+FC-D3.10 AMOS: (prises the lid himself, slowly, at arm's length) ...
+       {event: flood_carried.open → §7.6}
+FC-D3.11 AMOS: "Dry."
+FC-D3.12 JEM: "It's seeds. It's just seeds." (beat) "Can I plant them?"
+FC-D3.13 HESTER: "By the hedge. Not in my good furrow."  {set FC_OPENED} → end
+FC-D3.20 HESTER: "Keeper comes past at noon. He can write it in his book."
+FC-D3.21 JEM: "We'll never know." (beat) "That's the worst."   {set FC_TO_KEEPERS} → end
+FC-D3.30 AMOS: "I'll scratch their mark on the niche stone. So they know it's waiting."
+FC-D3.31 HESTER: "Then it's not ours to worry about. Good."   {set FC_TO_HEDGE} → end
+       {all: event S04 complete}
+```
+
+```
+FC-D4 (after the first furrow)
+FC-D4.01 HESTER: "First furrow. Late, but in."
+FC-D4.02 [FC_OPENED] JEM: (patting the hedge row flat) "They'll come up. They've been waiting ages."
+FC-D4.02 [else]      AMOS: "Well. It frightened us for a day. Plenty of things do worse."
+FC-D4.03 HESTER: "River keep you. Come back at harvest and see if I was right to bother."
+       {small payment; event: FC-D4 end → quest Completed}
+```
+
+### 7.12 Failure, recovery, co-op, integration
+
+Dropped carry: the case returns to where it lay. Death: respawn at the field gate. Logout: steps persist. Co-op: per-player case, raft and field props; shared vermin. Fallback without per-player props: the raft stays cleared world-wide after the first player; later players' S01 completes on entering the cleared field, and the case is a per-player interactable at the gate. **Needs:** carry state; a scheduled role NPC (road keeper) at the gate; field-state props; a ticking audio loop tied to time or weather.
+
+### 7.13 Mystery ledger
+
+| Mystery | Author truth | Public belief | Evidence | Wrong reading | Withheld | Reveal owner |
+|---|---|---|---|---|---|---|
+| **The tin case** | A household's sealed seed store from the war years, lost in some flood and carried here in this one. Origin **deliberately unselected**. | Fire-tin; treasure. | Seam, weight, smell, silt line, unmatched mark. | It's a weapon; it came from a specific region (nothing shows that). | Who sealed it; where; the wax mark. | Optional later archive (removable; §7.9). |
+
+**Review log:** first draft let the mark match a vanished Lowmark household; cut, because that would invent a history and imply a river route. The callback is isolated to one prop and one flag that nothing reads. The ticking was originally supernatural; made ordinary so the evidence teaches looking, not fear.
+
+---
+
+## 8. Micro-events ME01–ME10
+
+Each micro-event follows the discovery framework's optional-discovery card: a place, a visible invitation, one ordinary interaction, an immediate meaning, what it cannot prove. None is required for anything. Flags use the `ME0n_` prefix and are read only by the micro-event itself unless stated. No quest items, no rewards beyond a line, a smile or the odd food item from the item pass.
+
+### ME01 — Safe-bank game
+
+| Field | Spec |
+|---|---|
+| Trigger | After MQ1 Completed. Daytime, Whisperflow shallows below the landing. Enter a 20 m volume. |
+| What the player sees | Three children racing ankle-deep along the stretch between two of the grey marker posts, and nowhere else. A stick lies across the water at each end as a line. If `BW` is Completed, Tamsin is with them (down on a market cart), refereeing with her measuring cord. |
+| Interaction | Watch (stand within 8 m for 15 s) → they stop and appeal to the player to settle a rule. Two options. |
+| Lines | KID A: "You have to touch the post before you turn. Everyone knows." · KID B: "You have to touch the post *and* say 'notch'. Because of the shoe." · KID A: "The shoe was ages ago." · KID B: "The shoe is *why*." · *(Tamsin variant: "I've measured it. The shoe went in there. That's out of bounds forever.")* |
+| Options | > "Touch the post and say 'notch'." → KID B: "Ha." · > "Just touch the post." → KID A: "Ha." Either: KID C: "Can we go again?" |
+| Persistence | `ME01_RULE` = notch / post. On later visits the winning rule is shouted in their game bark. |
+| Repeatable | Settle once; the game loops ambiently thereafter. |
+| Cannot prove | Anything about routes. It shows flood knowledge as play. |
+
+### ME02 — Dock lunch tally
+
+| Field | Spec |
+|---|---|
+| Trigger | Brookhollow docks, midday window, after MQ1. Rain-shortened shift (if weather exists; else always at midday). |
+| What the player sees | Four dock workers under a beam out of the wet, arguing. Knife marks in groups on the beam: who forgot food, by season. One worker has no food. |
+| Interaction | Give any food item to the worker without (item-given), **or** inspect the beam and **Add a mark** (2 s). |
+| Lines | WORKER 1: "Third time this month." · WORKER 2: "It's on the beam. The beam doesn't lie." · WORKER 3: "The beam lies all the time. Ossie cuts extra marks for me." · *(on food given)* WORKER WITHOUT: "Oh. I'll — the beam's going to say I owe you now." · *(on mark added)* WORKER 1: "That's a stranger's mark. Now we owe the beam a stranger." |
+| Persistence | `ME02_SHARED` / `ME02_MARKED`. A small extra mark appears on the beam (marked) or the worker nods to the player in later barks (shared). |
+| Repeatable | Once per character; the argument loops ambiently. |
+| Cannot prove | Nothing. The marks are not a cipher or ledger (framework). |
+
+### ME03 — The old knot
+
+| Field | Spec |
+|---|---|
+| Trigger | Ashen Flats work edge, dusk window, after MQ1. Joric Fen [CANON ANCHOR] mending a net beside a young worker (role). |
+| What the player sees | The young worker ties a net knot. Joric watches, then without a word unpicks it and re-ties it a different, older way. |
+| Interaction | **Wait.** If the player stands within 6 m without talking to either of them for 20 s, Joric speaks once. If the player talks first, Joric nods and goes back to work (no line; the moment is gone until the next dusk). |
+| Lines | JORIC: (to the young worker, not the player) "My hands learned that one before I did. Pull till it bites. Then once more." · YOUNG WORKER: (tries; it holds) "...Oh." |
+| Persistence | `ME03_SEEN`. Afterwards, the young worker's nets on the Flats use the older knot (inspect: *"An old knot. Pulled till it bit, then once more."*). |
+| Repeatable | Once. |
+| Cannot prove | Anything about Joric's past. Canon guard: no kinship, event or loss is mentioned. |
+
+### ME04 — Offering sweep
+
+| Field | Spec |
+|---|---|
+| Trigger | Ashenstead watergarden, before rain (weather state; fallback: a fixed afternoon window), after MQ3. |
+| What the player sees | Annelise Reed [CANON ANCHOR] and a second caretaker (role) clearing spoiled offerings into a basket: browned flower crowns, a sodden ribbon, a bread crust. |
+| Interaction | Help (**Clear an offering**, 2 s, up to 3 offerings at the pool rim), or watch. |
+| Lines | ANNELISE: (to the water, lifting a crown) "You've done your job. Off you go." · CARETAKER: "That one was fresh yesterday." · ANNELISE: "Yesterday it was." · *(if helped)* ANNELISE: (to the water, of the player) "Careful hands. Good." · *(if `CN_COMPLETE`)* ANNELISE: "The bottom pool's moving now. They don't rot down there any more." |
+| Persistence | `ME04_HELPED`. None visible: the pool is simply clear when the rain comes. |
+| Repeatable | Every rain window (ambient); the helped line plays once. |
+| Cannot prove | No name or death is revealed (lattice M04). |
+
+### ME05 — Three water cups
+
+| Field | Spec |
+|---|---|
+| Trigger | A Heartlands farmhouse threshold (the Lark farm, any time after MQ1; independent of FC). Enter the doorway volume. |
+| What the player sees | Three cups set out on the step before a tense family talk inside (overheard: who gets the second cow): one chipped clay, one wooden, one riverglass. |
+| Interaction | Drink one (interaction on any cup). |
+| Lines | *(clay)* AMOS: "The chipped one. That's the guest cup. Chipped so you know it's not ours." · *(wooden)* HESTER: "Wood. Doesn't break when someone slams it down. Which someone will." · *(glass)* JEM: "The glass one. So you can see there's only water in it. Gran said." · then, from inside: "Right. The cow." |
+| Persistence | `ME05_CUP` = clay/wood/glass. Each later visit, the cup the player chose is set first. |
+| Repeatable | Once; the cups stay set out. |
+| Cannot prove | It's a courtesy, not a test (lattice M05). All cups are right. |
+
+### ME06 — The reed dare
+
+| Field | Spec |
+|---|---|
+| Trigger | Circle of Unburnt Reeds (P26), dusk window, after MQ3. |
+| What the player sees | Child-height footprints stop at a warning stake ("KEEP OUT — THIS MEANS YOU, PIP" in two adult hands). One set goes on, into the ring. A child (Pip, role) is sitting inside the circle, arms folded. Two others at the stake. The reeds show careful cutting at the edge: the ring is maintained, not wild. |
+| Interaction | Talk. The player cannot pull or carry the child out; only talk. Three options; any one works, eventually. |
+| Lines | PIP: "I'm not coming out. I'm being brave." · > "Brave's done. Come and tell them about it." → PIP: "...It *was* brave." (comes out) · > "What's it like in there?" → PIP: "Quiet. Too quiet. I'm coming out because I want to, not because you said." (comes out) · > "Your mam's coming." → PIP: "She's *not*." (beat) "Is she?" (comes out) · then KID AT STAKE: "You were in for ages." PIP: "Ages and ages." |
+| Persistence | `ME06_DONE`. On later dusks, footprints stop at the stake; none go in. |
+| Repeatable | Once. |
+| Cannot prove | Why the reeds never burned stays unexplained; not part of MQ8's use of the circle. |
+
+### ME07 — The sweet well
+
+| Field | Spec |
+|---|---|
+| Trigger | A Heartlands farm well (the Hobb farm yard pump-well, independent of WD; available after MQ1). |
+| What the player sees | A bucket on a rope, a cup chained to the windlass. A child (Col Hobb) watching to see if the player will try it. |
+| Interaction | **Drink** (cup), then optional **Inspect** the well. |
+| Lines | *(drink)* — inspect text: *"Faintly sweet. Not unpleasant."* · COL: "It's always sweet. Mam says it's the clay. Gran said the old orchard's roots go down there. I think somebody dropped honey in it once and it never came out." · *(inspect well)* *"Old stone, good water. The rope's newer than the windlass."* · RHODA (if near): "It's the clay." |
+| Persistence | `ME07_DRUNK`. Col's later bark: "Sweet today?" |
+| Repeatable | Drink any time; lines once. |
+| Cannot prove | Which explanation is right. None is. This is not Ember-Well (whose water tastes sharper to the grieving); the contrast is deliberate and never pointed out. |
+
+### ME08 — The lagging pool
+
+| Field | Spec |
+|---|---|
+| Trigger | A still pool in a Whisperflow acoustic dead spot (dossier §IV.1), upstream of the True Line footing; after MQ1. Enter the pool-edge volume. |
+| What the player sees | A small, round, perfectly still pool among reeds. The river is audibly quieter here. |
+| Interaction | Look. If the player stands still at the edge for 5 s and then moves, their reflection follows a breath late (client-side, local player only). Nothing else happens. Leaving ends it. |
+| Lines | None. No inspect text describes the lag. Pool inspect: *"Still water. Very quiet here."* If `TL_TOVIN_TRUSTED`, Tovin Pell sits on a stone nearby on some visits, sketching. TOVIN (only if spoken to): "It does that. I come here to draw it doing nothing." He does not name it, ask about it or explain it (canon). |
+| Persistence | None. |
+| Repeatable | Always. |
+| Cannot prove | Anything. It is a quiet echo of the True Line's lag and MQ6's mill pond; nothing builds on it. |
+
+### ME09 — The mantle at dawn
+
+| Field | Spec |
+|---|---|
+| Trigger | The Mantle Shrine (P24), dawn window, **after MQ8 Completed**. First dawn approach within 30 m. |
+| What the player sees | Mist lying over the shrine stone like a cloak over a chair. As the player comes within 10 m, it lifts and thins away over ~6 s, as mist does with the sun. Fresh softmoss pressed onto the stone, still damp. Nobody there. |
+| Interaction | Inspect the stone. Then **Leave something** (give any small food or common item: item-given to the shrine) or leave nothing. |
+| Lines | Stone inspect: *"Fresh softmoss, pressed down by a hand. Still damp."* No NPC lines. If the player leaves something, on the next dawn visit it is gone and the softmoss is fresh again. If they leave nothing, nothing changes. |
+| Persistence | `ME09_LEFT`. |
+| Repeatable | The mist plays on every dawn approach; the offering exchange once. |
+| Cannot prove | Who presses the moss. Players who know Sedge will think so; nothing confirms it `[D-7]`. |
+
+### ME10 — Walk a leg with the Watchers
+
+| Field | Spec |
+|---|---|
+| Trigger | Watchers' Lantern Post (P21), dusk window, after MQ3. Two Watchers (role; one older, one new) prepare to walk to Widow's Step. |
+| What the player sees | Lanterns lit, banner-thistle bundles, rope, the patrol book open on a barrel. |
+| Interaction | Talk → **Carry a lantern** (carry state, lights the path) → walk with them (escort-style; they wait if the player lags). At a heavy bend halfway, one optional drift forms; the player may disperse it or let the Watchers smoke it back (they light banner-thistle; it sinks). At Widow's Step the older Watcher writes in the book; the player may read the entry. |
+| Lines | OLD WATCHER: "Walk. Watch. Write it down. Mostly walk." · NEW WATCHER: "Do we always go this slowly?" · OLD WATCHER: "Only when we want to get there." · *(at the bend)* OLD WATCHER: "Heavy. Smoke, not steel, if you can help it." · *(book entry, inspect)* *"Bend below the Post. Heavy at dusk. One drift, smoked. Lantern held. Three walking."* · *(after MQ11, `LM_FEN_ENDING` tend/shared)* OLD WATCHER: "Tended bend now. We still walk it. That's the deal." · *(after MQ11, seal)* "Nothing heavy past the boundary. We walk to the boundary and back." |
+| Persistence | `ME10_WALKED`. The player's "three walking" entry stays in the book (inspectable). |
+| Repeatable | Repeatable at any dusk; the book entry once. |
+| Cannot prove | Combat and smoke here identify nothing. It shows how Ansel's book (MQ3) is made. |
+
+---
+
+## 9. File-level integration summary
+
+| Need | Used by | Notes / fallback |
+|---|---|---|
+| Time-of-day windows and wait interactions | TB, WD, CN, VK (none), ME03/04/06/09/10 | One contract shared with MQ4 keep-watch (§0.4). |
+| Carry state | UC paddle, TB fruit, CN boat, FC case and sack, ME10 lantern, WD hurdles | True Line fallback (lift-and-stack interactions). |
+| Per-player props | All seven | Each package lists its shared-world fallback. |
+| Drift-site state | WD (farmhouse cellar), CN (watergarden outlet) | Bible §9.2 site ids. |
+| Observation volume with per-player timer | UC | Load-bearing level-art requirement (§2.3). |
+| Planar reflection on one basin | UC | Fallback: state-driven pre-baked reflection. |
+| Dream presentation layer | TB | Fallback: 60 m ring. |
+| Agility triggers | SB, UC, TB | All have walkable fallbacks. |
+| View-dependent local effects | SB river ring, ME08 lag | Same pattern as True Line far-bank figure. |
+
+## 10. Flags other packages read
+
+| Flag | Owner | Reader |
+|---|---|---|
+| `CN_COMPLETE`, `CN_FORM_WATCH` / `CN_FORM_CARRY` | CN | Act III MQ11 Annelise Tend argument and launched-boat prop (suggested lines in §5.9). |
+| `VK_COMPLETE`, `VK_PERF_BOTH` / `_COUNT` / `_HUM` | VK | Act III MQ11 after-hold hum; MQ12 Nan verse (§6.9). |
+| `UC_COMPLETE` | UC | Optional Act II MQ9 flow-table inspect (§2.11). |
+| `SB_COMPLETE`, `SB_TO_FAMILIES` | SB | VK (this file). |
+| `FK_NAN_TUNE` | FK (Work and Skills) | VK-D5 (read here). |
+| `FC_SEAL_NOTED` | FC | No v1 reader (removable callback). |

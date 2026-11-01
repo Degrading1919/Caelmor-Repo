@@ -172,7 +172,7 @@ The lead-in depends on `LM_TL_EVIDENCE`. All three variants end with the player 
 - **The hill gate:** the chalk loading line runs to the HILL GATE, not to the yard doors. "Draws go out the hill gate to the hill road yard. Carts load there."
 
 Corvin's case: 120 went out of the hill gate and only 40 reached Wynn's cart in the hill road yard, so something is eating sacks in the passage between them. The goblin hole proves it to him.
-**Optional lead (`SM_LEAD_WYNN`):** Wynn Tarrow is in the hill road yard waiting for her next load (`SM-L-WYNN`). She counted her 40 twice, and the yard porter tried to hand her 42. "Gave two back. Somebody's counting worse than me." No other line in the quest depends on this lead, so Wynn's honesty is shown in play rather than asserted (it changes `SM-D8` and seeds MQ12).
+**Optional lead (`SM_LEAD_WYNN`):** Wynn Tarrow is in the hill road yard waiting for her next load (`SM-L-WYNN`). She counted her 40 twice, and the yard porter tried to hand her 42. "Gave two back. Somebody's counting worse than me." The lead is never required. It shows Wynn's honesty in play rather than asserting it, adds her to the escort option (`SM-D7.11`), changes `SM-D8.04`, and seeds MQ12.
 **Verbs:** count, investigate.
 
 ### Beat 2 — The Hill Passage (`S02_descend`)
@@ -321,7 +321,7 @@ A quiet, unsettling moment in the middle of a dungeon. It must not look like a m
 | `SM_LEAD_WYNN` | `SM-L-WYNN` | `SM-D8` variant | MQ12 Wynn-paid scene (suggested line in dialogue file) |
 | `SM_HEAPS_COUNTED` | S06b | `SM-D6` subtraction line | — |
 | `SM_LEAD_STENCIL` | Stencil inspect (area K) | `SM-D6.30` option | MQ4 Cut-mouth inspect variant (`NF`); MQ9 flow-table line (optional) |
-| `SM_LEAD_CUT_NAMED` | `SM-D6.31` | `NF-D1` Ansel variant | MQ10 (Aldric's archive line) |
+| `SM_LEAD_CUT_NAMED` | `SM-D6.31` | `NF-D1` Maelin option (`NF-D1.30`) | MQ10 (Aldric's archive line) |
 | `SM_STONE_SEEN` | Stone inspect | `SM-D6` option | MQ4 counterweight-stone inspect; MQ8/MQ9 stone-reading lines |
 | `SM_CORVIN_TRUST` | `SM-D8` | — | MQ10 (Corvin's tallies chip is offered without a request) |
 | `LM_GRAIN_ROUTE` | `SM-D7` | `SM-D8` variant, post-quest barks | MQ10 terms; MQ12 far-bank scene |

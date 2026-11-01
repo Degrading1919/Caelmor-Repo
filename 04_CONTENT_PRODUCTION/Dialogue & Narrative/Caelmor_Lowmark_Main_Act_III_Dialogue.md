@@ -376,6 +376,7 @@ CR-D8.90 ALDRIC: "The Provision Board's emergency draws were moved by the Provis
 CR-D8.91 [CR_TERMS = bare] ALDRIC: "That is what this table shows. What the Board does with it is the Board's to say."
 CR-D8.91 [firm/full]       ALDRIC: "House Marrick's seat is vacated. Its claim on the stewardship is withdrawn." [full: "Struck."]
 CR-D8.92 MARRICK: (rises, unhurried, collects her gloves) "Write that I came. That I sat at this table and heard it all."
+CR-D8.92b [CR_TERMS = bare] MARRICK: "And write that I resigned my seat. For the households' peace. Before anyone asked."
 CR-D8.93 [CR_TERMS = full] MARRICK: "And open my granaries. The households shouldn't wait on anyone's pride. Least of all mine."
 CR-D8.93 [else]            MARRICK: "My granaries are open to the vigil, of course. No one needs to order it. I'm offering."
 CR-D8.94 MARRICK: (to the player, warmly, on her way past) "You did that very well. I meant it. I would have hired you."
@@ -558,8 +559,8 @@ SV-D4.01 ELSPETH: "Seven blankets. Five softmoss packs. Two kettles. One very ru
 SV-D4.02 ELSPETH: "They come out of it cold and ashamed. The cold I can fix."
   > [CR_MARRICK_STORES] "Is there food?"                          → SV-D4.03
   > "What do you tell them?"                                    → SV-D4.04
-SV-D4.03 [ordered] ELSPETH: "Crestbridge sacks. Marrick's. The keepers made sure we knew they were owed."
-SV-D4.03 [offered] ELSPETH: "Crestbridge sacks. A gift, the label says. Very large letters."   → SV-D4 options
+SV-D4.03 [ordered] [ANTAGONIST] ELSPETH: "Crestbridge sacks. Marrick's. The keepers made sure we knew they were owed."
+SV-D4.03 [offered] [ANTAGONIST] ELSPETH: "Crestbridge sacks. A gift, the label says. Very large letters."   → SV-D4 options
 SV-D4.04 ELSPETH: "That they heard something, and walked towards it, and came back. That's all that happened."   → end
 ```
 
@@ -1002,7 +1003,7 @@ The table collects every MQ12 line keyed to an input flag, so the Schema & Conte
 | HOLLIS | "Do you still have that post? The hall would hang it. Beside Pell's sheets." (option: give it) | player |
 | SALLOW | "Smashed my winding floor, you did. Still had dreams about it." / "Cut that chain myself. Should've left it." | `LM_LOCK_STATE` smashed / chained |
 | ANSEL / ANNELISE / LESSA (fen edge) | "My patrol, my edge." / "My baskets, my edge." / "Our edge. We live on it." | `LM_PLAN_MEMORIAL` watchers / gardens / reedmere |
-| HOUSEHOLD (Crestbridge) | "Marrick's gift, they're calling it." / "Marrick's debt, it says on the sacks." | `CR_MARRICK_STORES` offered / ordered |
+| HOUSEHOLD (Crestbridge) `[ANTAGONIST]` | "Marrick's gift, they're calling it." / "Marrick's debt, it says on the sacks." | `CR_MARRICK_STORES` offered / ordered |
 | HOUSEHOLD (far bank) | "We were hungry a while. Then we weren't." | `LM_GRAIN_ROUTE = hold` |
 
 ---
@@ -1030,7 +1031,7 @@ Spoken once, on first meeting with the flag set. Each opens the commission packa
 |---|---|
 | Line length and six-line rule | Checked every node; Hesketh's CR-D9.01–.04 and Marrick's CR-D8 chip answers come in at or under six NPC lines before control returns. Maelin's RR-D6 is her one long line of the act. |
 | Marrick never names anyone | Verified across CR-D2, CR-D8, RR-D2. She says "Factor," "my factor," "dear," "the households." |
-| `[ANTAGONIST]` tags | Every node naming or voicing Marrick or Sallow: CR-D1.10, CR-D2, CR-D5, CR-D6, CR-D7.04, CR-D8, RR-D2, RR-D12. |
+| `[ANTAGONIST]` tags | Every node naming or voicing Marrick or Sallow: CR-D1.10, CR-D2, CR-D5, CR-D6, CR-D7.04, CR-D8, SV-D4.03, RR-D2, RR-D12, the Crestbridge household bark. |
 | Tovin canon guard | CR-D8.51–.52 and RR-D11 describe only; no name for the phenomenon; he solves nothing. |
 | Anchors | Corvin's ledger regret spoken once (CR-D8.23), content unrevealed. Aldric's shame institutional only. Annelise names no one. Lessa explains the reopening, never the closure. No ages, kinship, service or travel added. |
 | Evidence rule | Rejected-object lines (CR-D8.R1–R3); CR-D8.70 mocks the silence; Sedge's lines describe what the water did, never what it means. |

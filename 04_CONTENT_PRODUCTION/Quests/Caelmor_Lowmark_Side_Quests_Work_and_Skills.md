@@ -47,10 +47,10 @@ HS  outside production ──► lawful consignment ──► receiving inspecti
 | Milestone 1 teaching outcome | Where it is met here |
 |---|---|
 | Basic melee weapon (commitment and recovery) | HS: the player forges their own first dependable blade from sound stock |
-| Basic heavy protection | HS: Brigid opens heavy-protection work at her forge (definition belongs to the item pass) |
+| Basic heavy protection | HS: Brigid opens heavy-protection work at the forge (definition belongs to the item pass) |
 | Basic light protection | BP: the player makes their first light protection from leather they tanned |
 | Repair and upkeep visible | BP (tallow conditioning, the yard's repair pegs) and HS (the rejects rack, Brigid's refurbish queue) |
-| Basic guard-capable setup | **Not covered by these five.** Flagged for the item/encounter pass (Section 6). |
+| Basic guard-capable setup | **Not covered by these five.** Flagged for the item/encounter pass (Open questions, item 1). |
 
 BP and HS end by establishing **Kell Ashby** (Riverpath Leathers, with Maelin's crews) and **Brigid Corliss** (Keeper's Blade, Bridgewarden Harness) as the people who will one day take a commission from the player (bible §8). The commissions themselves are not designed here; MQ12's `LM_CIVIC_STANDING` gates them.
 
@@ -59,10 +59,10 @@ BP and HS end by establishing **Kell Ashby** (Riverpath Leathers, with Maelin's 
 | Quest | Core verb | Physical problem | Strange or wonderful touch | Human choice with a cost |
 |---|---|---|---|---|
 | WC | track and judge | Read a ruined field; follow a trail; clear a raiders' barn | Goblins have replanted the stolen roots in rows of ash, with a notched plough-blade for a marker | Take the sow with farrow for a hungry household, or leave her |
-| BW | cut selectively | Free a driftroot jam; fell a failing tree; decide which tree stays | Under the jam, an old knotted cord tied the way the child ties hers | Keep the tree that holds the bank, cut it for the poorer household's landing, or give up your wood to build them one |
+| BW | cut selectively | Free a driftroot jam; fell a failing tree; decide which tree stays | Under the jam, an old knotted cord tied the way the child ties theirs | Keep the tree that holds the bank, cut it for the poorer household's landing, or give up your wood to build them one |
 | FK | hunt, cook, feed | Light a dead kitchen; take fowl without scattering the flock; cook and serve | The geese go silent a breath before the water climbs a step with no rain | Who eats from the last pot |
 | BP | gather, process, make | Clear fouled drawing-water; cut bark the honest way; charge a pit; tan; make | Tea-dark water has kept a strap with the yard's own old mark | What the yard does with bark stripped from living trees |
-| HS | inspect, forge, decide | Ring-test a consignment; forge a blade; watch a bad bar crack | The bridge's old iron ties hum back when sound steel is struck | Hand the salvage to the Keepers (the carrier loses his cart for a season) or refuse it back marked (it stays in circulation) |
+| HS | inspect, forge, decide | Ring-test a consignment; forge a blade; watch a bad bar crack | The bridge's old iron ties hum back when sound steel is struck | Hand the salvage to the Keepers (the carrier loses their cart for a season) or refuse it back marked (it stays in circulation) |
 
 None repeats The True Line's investigate-and-repair loop or a §6 main-quest verb.
 
@@ -166,7 +166,7 @@ No option is wrong. The quest never tells the player which is right; the smallho
 |---|---|---|
 | **Reading damage** | Knowledge | Authored crop-damage props across Lowmark become inspectable and return a cause line: *"Rooted. Fresh."* / *"Rooted, but days old."* / *"Cut, not rooted."* / *"Drowned. Water did this."* Same inspect interaction as marker reading. |
 | Margin rooter opportunity | Access | Open now (`WC_SOW_SPARED*`) or after MQ5 (`WC_SOW_TAKEN`). |
-| Hunter's field knife | Tool | Given by the smallholder at `WC-D6` if the player lacks a recovery tool. Item pass defines it. |
+| Hunter's field knife | Tool | Given by the eldest at `WC-D6` if the player lacks a recovery tool. Item pass defines it. |
 | Small payment | Currency / kind | A meal at the gate plus a few coins (amount at economy tuning); fewer coins on *Leave her*, since the household is short. |
 | Hunting, Melee XP | Action XP only | No lump quest XP. |
 
@@ -294,7 +294,7 @@ WC-D7.50 HOLDER: "Eat before you go. That's not a question."
 | Choice | Which bank-binding tree stays: keep it, cut it, or give up your wood to build the poorer household a landing |
 | Unlocks | Bank reading; the lower bank path; persistent bank state |
 
-**In one paragraph.** On Greyharrow's side branch, a child called Tamsin has tied a knotted measuring cord to a stake and chalked a cross on it: this bank is unsafe. Two households who share the bank disagree about whether a child's cord should stop spring work. Tamsin walks the bank with the player and makes them measure properly. The cord goes in an arm's length under the turf: the bank is hollow, scoured by a driftroot jam wedged at the bend. The player wades into the scour pool, cuts the jam's key limb, stands clear as it swings, and watches it let go. Snagged under it, on an old repair stake, is another knotted cord, rotten and green, tied exactly the way Tamsin ties hers. Then the trees: one driftroot is failing and has to come down; one is healthy and its roots span the hollow, but it blocks the lower household's boat landing. The player chooses what the bank keeps.
+**In one paragraph.** On Greyharrow's side branch, a child called Tamsin has tied a knotted measuring cord to a stake and chalked a cross on it: this bank is unsafe. Two households who share the bank disagree about whether a child's cord should stop spring work. Tamsin walks the bank with the player and makes them measure properly. The cord goes in an arm's length under the turf: the bank is hollow, scoured by a driftroot jam wedged at the bend. The player wades into the scour pool, cuts the jam's key limb, stands clear as it swings, and watches it let go. Snagged under it, on an old repair stake, is another knotted cord, rotten and green, tied exactly the way Tamsin ties theirs. Then the trees: one driftroot is failing and has to come down; one is healthy and its roots span the hollow, but it blocks the lower household's boat landing. The player chooses what the bank keeps.
 
 ### BW.2 The place [NEW; MAP VERIFICATION REQUIRED]
 
@@ -314,7 +314,7 @@ A stretch of the Greyharrow side-branch bank downstream of the town docks.
 
 **Beat 0 — A Child's Cross (`S00_stake`).** *Objective: Find out why the bank is staked.* Dialogue `BW-D1` with Tamsin and both households (UPPER, LOWER; role-based).
 
-**Beat 1 — Measure It Properly (`S01_walk`).** *Objective: Walk the bank with Tamsin's cord.* Tamsin leads. Three **Measure** interactions (2 s channel) at her knot points: the cord goes in a hand, then a forearm, then an arm's length under the turf. Plus one inspect on the wrack line. The old repair face is an optional inspect (`S01b_repair_face`). Tamsin comments on every measurement and corrects the player's grip once.
+**Beat 1 — Measure It Properly (`S01_walk`).** *Objective: Walk the bank with Tamsin's cord.* Tamsin leads. Three **Measure** interactions (2 s channel) at their knot points: the cord goes in a hand, then a forearm, then an arm's length under the turf. Plus one inspect on the wrack line. The old repair face is an optional inspect (`S01b_repair_face`). Tamsin comments on every measurement and corrects the player's grip once.
 
 **Beat 2 — The Jam (`S02_free_jam`).** *Objective: Cut the driftroot jam free.* Reach the jam by an agility step down the root shelf, or walk the fallback cut-steps the upper household dug last year (slightly longer). Wading in starts E1 (River Skitters). Then the cut: one Woodcutting channel on the key limb. The jam **groans and shudders** (~1.5 s); a ripple ring on the water marks its swing arc. The player steps out of the arc. The jam swings, catches, and lets go down the branch. The trapped water drops away from the bank with one long sigh. Sound wood from the cut limb is ordinary wood; the flood trash is not an output.
 
@@ -324,7 +324,7 @@ A stretch of the Greyharrow side-branch bank downstream of the town docks.
 
 **Beat 5 — The Holder (`S05_choose`).** *Objective: Decide which trees stay.* Dialogue `BW-D5` at the holder, both households present. Three options (BW.6). Option *Build the landing* adds two channelled **Seat the stage** interactions at area G after the player gives ordinary wood to the lower household.
 
-**Beat 6 — Heard (`S06_heard`).** *Objective: Tell the households what the bank needs.* Short closing `BW-D6`: the upper household agrees to re-stake the repair face; Tamsin is given the cord each spring because she is careful, not because she is special (L-S01 payoff). Quest Completed.
+**Beat 6 — Heard (`S06_heard`).** *Objective: Tell the households what the bank needs.* Short closing `BW-D6`: the upper household agrees to re-stake the repair face; Tamsin is given the cord each spring because they are careful, not because they are special (L-S01 payoff). Quest Completed.
 
 ### BW.4 Encounters and hazards
 
@@ -339,7 +339,7 @@ A stretch of the Greyharrow side-branch bank downstream of the town docks.
 | Step | Objective | Completes on | Required | Notes |
 |---|---|---|---|---|
 | `S00_stake` | Find out why the bank is staked. | Dialogue `BW-D1` end node | Yes | |
-| `S01_walk` | Walk the bank with Tamsin's cord. | 3 `measure` interactions + wrack-line inspect | Yes | Tamsin follows the player (NPC escort-lite; she cannot be harmed) |
+| `S01_walk` | Walk the bank with Tamsin's cord. | 3 `measure` interactions + wrack-line inspect | Yes | Tamsin follows the player (NPC escort-lite; cannot be harmed) |
 | `S01b_repair_face` | (Optional) Look at the old repair face. | Inspect event | No | Unlocks a `BW-D6` line |
 | `S02_free_jam` | Cut the driftroot jam free. | Interaction `cut_jam` complete | Yes | Disabled while any E1 creature is engaged |
 | `S03_old_cord` | (Optional) Look at what the jam was hiding. | Inspect event on old cord | No | Sets `BW_OLD_CORD_SEEN`; triggers `BW-D3` |
@@ -391,7 +391,7 @@ Tamsin is bossy and precise and wants to be taken seriously. They are never cute
 
 ```
 BW-D1.01 TAMSIN: "Don't stand there. That's the bad bit. I measured."
-BW-D1.02 UPPER: "She's been out with that cord all week. We've stakes to set before the planting."
+BW-D1.02 UPPER: "That child's been out with that cord all week. We've stakes to set before the planting."
 BW-D1.03 LOWER: "And I've a boat that won't get past that tree. Every day it's 'wait'."
 BW-D1.04 TAMSIN: "It's hollow underneath. I put the cord in and it went in."
 BW-D1.05 UPPER: "Cords go in mud, love. That's what mud does."
@@ -468,7 +468,7 @@ BW-D6.01 UPPER: "Well. The cord was right."
 BW-D6.02 [S01b_repair_face] UPPER: "Those old stakes. I'll re-set them where the old ones stood. Same marks."
 BW-D6.03 LOWER: "And who measures it next spring?"
 BW-D6.04 TAMSIN: (says nothing, very loudly)
-  > "Tamsin. She's careful."                                   → BW-D6.05
+  > "Tamsin. Tamsin's careful."                                   → BW-D6.05
   > "Whoever's careful. Today that was Tamsin."                → BW-D6.05
 BW-D6.05 UPPER: "Tamsin, then. Every spring. And you tell us, and we listen, and that's that."
 BW-D6.06 [BW_OLD_CORD_SEEN] TAMSIN: "I'm keeping the old cord. Not to use. Just keeping it."
@@ -489,7 +489,7 @@ BW-D6.07 TAMSIN: "You held it nearly right, by the end."
 
 | Finding | Revision |
 |---|---|
-| L-S01 warns against making the child a secret expert. | Tamsin is right because she measured, and gets the job because she is careful. The old cord is wonder, not a lineage. |
+| L-S01 warns against making the child a secret expert. | Tamsin is right because they measured, and gets the job because they are careful. The old cord is wonder, not a lineage. |
 | A "cut everything that's in the way" path would teach clearing. | Only the failing tree must come down; the healthy one is a choice with a cost either way (economy W3). |
 | Bark could have appeared from every cut. | Only the authorized intact removals (leaner, holder) give bark; the jam limb gives wood only (S-WD3 conditional eligibility). |
 | Original slump was immediate, which felt punitive. | Delayed to after MQ3 (a season later), so the consequence arrives as a changed place, not a scolding. |
@@ -983,13 +983,13 @@ BP-D7.06 KELL: "Yard's open to you. Bring hides clean and bark honest."
 | Choice | What happens to the salvage: Keepers' custody, or refused back to the carrier, marked |
 | Unlocks | Forge workspace; lawful steel stock from the receiving bench; first dependable blade (Milestone 1); heavy-protection work opened; Brigid Corliss as future commission giver |
 
-**In one paragraph.** Brigid Corliss's forge is built into the Crestbridge abutment, under the span, where the dwarven iron ties run through the stone. A consignment of "sound stock" has come in, plain carbon steel bars under an importer's tag, and one of them rang wrong under Brigid's hammer. She teaches the player to ring-test: sound bars ring clear, and the old ties in the bridge hum back. Two bars ring dull and get no answer. Their ends are cut, not sheared; their sides carry plugged bolt-holes at even spacing; on one, a stencil has been ground nearly away, leaving a broad arrow and two letters. The player forges their first dependable blade from a sound bar, then heats and quenches a suspect one at Brigid's insistence, and steps clear when it cracks. Corvin Tath arrives with the crossing scale's tally and the carrier, who is frightened. The numbers say three bars were swapped after the bill was written. Nobody can say where the salvage came from. The player decides where it goes.
+**In one paragraph.** Brigid Corliss's forge is built into the Crestbridge abutment, under the span, where the dwarven iron ties run through the stone. A consignment of "sound stock" has come in, plain carbon steel bars under an importer's tag, and one of them rang wrong under Brigid's hammer. Brigid teaches the player to ring-test: sound bars ring clear, and the old ties in the bridge hum back. Two bars ring dull and get no answer. Their ends are cut, not sheared; their sides carry plugged bolt-holes at even spacing; on one, a stencil has been ground nearly away, leaving a broad arrow and two letters. The player forges their first dependable blade from a sound bar, then heats and quenches a suspect one at Brigid's insistence, and steps clear when it cracks. Corvin Tath arrives with the crossing scale's tally and the carrier, who is frightened. The numbers say three bars were swapped after the bill was written. Nobody can say where the salvage came from. The player decides where it goes.
 
 ### HS.2 The place [NEW; MAP VERIFICATION REQUIRED]
 
 | Area | Purpose | Environmental storytelling |
 |---|---|---|
-| A. Forge mouth | Hub | Under the first arch of the span. Hearth, anvil, bellows, a quench trough fed by a cut from the river. Charcoal sacks with the fuel workers' mark. Iron tie-ends, dark and old, set into the abutment stone at head height. |
+| A. Forge mouth | Hub | Under the first arch of the span. Hearth, anvil, bellows, a quench trough fed by a channel from the river. Charcoal sacks with the fuel workers' mark. Iron tie-ends, dark and old, set into the abutment stone at head height. |
 | B. Receiving bench | Inspection | The consignment bundle, its importer's tag retied with newer cord. The carrier's bill nailed beside it. A testing horn bolted to the bench. |
 | C. Rejects rack | Contrast | Sorted civilian scrap: cart tyres, hinges, a broken plough-share, each chalked KEEP or NO. Sound civilian scrap gets assessed; some gets used for small repairs. |
 | D. Refurbish queue | Upkeep | Keepers' blades and harness plates on hooks, tagged with names and "regrind", "re-rivet", "strap". Brigid's real work. |
@@ -1001,7 +1001,7 @@ BP-D7.06 KELL: "Yard's open to you. Bring hides clean and bark honest."
 
 **Beat 1 — Ring Them (`S01_inspect`).** *Objective: Test the consignment.* Brigid has pulled six bars from the bundle. The player strikes each on the testing horn (six short interactions). Four ring clear and a low hum answers from the ties in the stone (HS.4). Two ring dull and nothing answers. Then three inspects on the dull bars: ends, bolt-holes, stencil. Required: all six rings and all three inspects.
 
-**Beat 2 — Your Own Blade (`S02_blade`).** *Objective: Forge a blade from sound stock.* Brigid hands over one sound bar ("Your wage is in that"). Smithing interactions at the forge using her charcoal: heat, draw out, shape, quench, finish at the wheel (each a channel; exact sequence and outcome belong to the Smithing interaction pass). The result is the player's Milestone 1 basic melee weapon (item pass defines it).
+**Beat 2 — Your Own Blade (`S02_blade`).** *Objective: Forge a blade from sound stock.* Brigid hands over one sound bar ("Your wage is in that"). Smithing interactions at the forge using the forge's charcoal: heat, draw out, shape, quench, finish at the wheel (each a channel; exact sequence and outcome belong to the Smithing interaction pass). The result is the player's Milestone 1 basic melee weapon (item pass defines it).
 
 **Beat 3 — Why Not (`S03_crack`).** *Objective: Heat and quench a suspect bar.* Same heat and quench interactions on a dull bar. In the trough it **ticks twice** (~1.5 s) and a shard spits along the trough's line; the player steps aside. The bar cracks every time (authored outcome, not skill-based). Inspecting the break: *"Coarse and grey inside, with rust deep in the grain. It was wet for a long time."* This is why war salvage stays out of routine supply: unknown history, hidden flaws.
 
@@ -1009,7 +1009,7 @@ BP-D7.06 KELL: "Yard's open to you. Bring hides clean and bark honest."
 
 **Beat 5 — Where It Goes (`S05_choose`).** *Objective: Decide what happens to the salvage.* `HS-D5`; HS.6.
 
-**Beat 6 — The Queue (`S06_queue`).** *Objective: Hear what Brigid has to say.* `HS-D6` at the refurbish queue. Brigid names what keepers bring her and what they will one day ask for. Quest Completed.
+**Beat 6 — The Queue (`S06_queue`).** *Objective: Hear what Brigid has to say.* `HS-D6` at the refurbish queue. Brigid names what keepers bring to the forge and what they will one day ask for. Quest Completed.
 
 ### HS.4 The ties (wonder, and what it is not)
 
@@ -1025,8 +1025,8 @@ When sound plain carbon steel is struck on the testing horn, the iron ties in th
 
 | Option | Immediate result | Cost | Later |
 |---|---|---|---|
-| **Keepers' custody** — *"Give it to the Keepers. Let them find out where it came from."* | A Keeper (role) tags the three bars and takes them to Crest Hall's store. The carrier's cart is held pending inquiry. | The carrier loses a season's hauling. Brigid's stock is three bars short and the refurbish queue waits; she pays the player only the bar and a few coins. | The bars sit tagged in the Keepers' store (prop, if Crest Hall's store is visited). Brigid: "Honest and slow. Like me." |
-| **Refuse it back, marked** — *"Stamp it refused and send it back with him."* | Brigid stamps her refusal mark into each salvage bar. The carrier takes them back and repays the difference. His cart is his. | The salvage goes back into circulation, marked but not stopped. Somebody will buy it. | Optional, removable hook: a refusal-stamped bar can appear in the Drowned Lamb cellar (UL). It proves nothing there either. |
+| **Keepers' custody** — *"Give it to the Keepers. Let them find out where it came from."* | A Keeper (role) tags the three bars and takes them to Crest Hall's store. The carrier's cart is held pending inquiry. | The carrier loses a season's hauling. Brigid's stock is three bars short and the refurbish queue waits; Brigid pays the player only the bar and a few coins. | The bars sit tagged in the Keepers' store (prop, if Crest Hall's store is visited). Brigid: "Honest and slow. Like me." |
+| **Refuse it back, marked** — *"Stamp it refused and send it back with the carrier."* | Brigid stamps the forge's refusal mark into each salvage bar. The carrier takes them back and repays the difference. The cart stays with its owner. | The salvage goes back into circulation, marked but not stopped. Somebody will buy it. | Optional, removable hook: a refusal-stamped bar can appear in the Drowned Lamb cellar (UL). It proves nothing there either. |
 
 Neither option tells the player who swapped the bars. That stays open (HS.10).
 
@@ -1053,7 +1053,7 @@ Neither option tells the player who swapped the bars. That stays open (HS.10).
 
 | Reward | Type | Notes |
 |---|---|---|
-| Forge workspace | Access | The player may use Brigid's forge (D06 workshop context) and buy lawful plain carbon steel stock from her receiving bench. Charcoal is bought from her fuel-worker supply. |
+| Forge workspace | Access | The player may use Brigid's forge (D06 workshop context) and buy lawful plain carbon steel stock from the receiving bench. Charcoal is bought from the forge's fuel-worker supply. |
 | Heavy protection | Access | Brigid's forge offers the Milestone 1 heavy-protection work (item pass defines it). |
 | **Receiving inspection** | Knowledge | Steel stock and suspicious metal anywhere can be ring-tested: *"Rings clear."* / *"Rings dull. Don't trust it."* Inspect lines on cut ends and plugged holes become available on authored salvage props. |
 | First dependable blade | Made by the player | Milestone 1. |
@@ -1152,12 +1152,12 @@ HS-D5.01 BRIGID: "I'm not putting that on a keeper. And I'm not keeping it under
 HS-D5.02 CARRIER: "If the Keepers take it, they take my cart with it. That's my season."
 HS-D5.03 BRIGID: (to the player) "You rang them. You choose."
   > "Give it to the Keepers. Let them find out where it came from."   → HS-D5.10
-  > "Stamp it refused and send it back with him."                   → HS-D5.20
+  > "Stamp it refused and send it back with the carrier."                   → HS-D5.20
 HS-D5.10 KEEPER (role): (tags the bars) "Crest Hall store. And the cart, till it's looked into."
 HS-D5.11 CARRIER: (sits down on the cart step) "...Right."
 HS-D5.12 BRIGID: "Honest and slow. Like me." (beat) "I'm three bars short now. You'll get the bar and not much else."
       {set HS_SALVAGE_KEEPERS; event: S05_choose complete}  → end
-HS-D5.20 BRIGID: (stamps her refusal mark into each bar; three heavy strokes) "Anyone who buys these knows what I thought of them."
+HS-D5.20 BRIGID: (stamps the forge's refusal mark into each bar; three heavy strokes) "Anyone who buys these knows what I thought of them."
 HS-D5.21 CARRIER: "I'll pay back the difference. I'll find the yard." (beat) "Thank you."
 HS-D5.22 CORVIN: "Three bars, back into circulation. I'll note the weight."
       {set HS_SALVAGE_REFUSED; event: S05_choose complete}  → end
@@ -1183,7 +1183,7 @@ HS-D6.06 BRIGID: "Forge is yours when it's free. Buy honest stock off my bench. 
 |---|---|---|
 | BRIGID (forge) | "RING IT FIRST." | — |
 | BRIGID (outside the forge) | "Hm." (nods) | — |
-| CARRIER (Crestbridge) | "Got the cart back. Lost the season. Still hauling for her." | `HS_SALVAGE_KEEPERS`, after MQ3 |
+| CARRIER (Crestbridge) | "Got the cart back. Lost the season. Still hauling for the forge." | `HS_SALVAGE_KEEPERS`, after MQ3 |
 | CORVIN | "Three bars short at the forge. Three bars long somewhere else." | `HS_SALVAGE_REFUSED` |
 
 ### HS.13 Review log
@@ -1198,7 +1198,7 @@ HS-D6.06 BRIGID: "Forge is yours when it's free. Buy honest stock off my bench. 
 
 ---
 
-## 5. Cross-quest integration summary
+## Cross-quest integration summary
 
 | Need | Quests | Owner | Note |
 |---|---|---|---|
@@ -1211,7 +1211,7 @@ HS-D6.06 BRIGID: "Forge is yours when it's free. Buy honest stock off my bench. 
 | Per-player persistent props | BW bank, BP lane/coppice, HS bundle, FK shelter | 33.1.B2 | Fallbacks listed in each package. |
 | Vendors with bounded intake | BP (hide, bark, leather), HS (steel stock, charcoal) | Economy pass | P-O4, P-O5, P-O7; no unlimited conversion. |
 
-## 6. Open questions for the Director and other passes
+## Open questions for the Director and other passes
 
 1. **Guard-capable setup (Milestone 1)** is not taught by any of these five. Recommendation: let the item/encounter pass attach it to HS's opened heavy-protection work or to MQ2–4 encounters; do not add a sixth skill quest.
 2. **FK's hush is a flush.** It foreshadows MQ4 at Brookhollow. If the Act I package changes the flush schedule, FK's hush should still fall on a flush night (it is unlock-gated after MQ1, before MQ4 in most playthroughs). If a player completes MQ4 first, play the hush anyway; Nan's line still works, and Ansel's optional MQ3 line is skipped.

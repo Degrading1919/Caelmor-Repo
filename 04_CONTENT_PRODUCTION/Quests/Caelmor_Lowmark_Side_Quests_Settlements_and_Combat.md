@@ -12,7 +12,7 @@
 
 | Code | Quest | Type | Unlock gate | Where | Core verb (primary first) | Main-arc link | Feeds |
 |---|---|---|---|---|---|---|---|
-| **UL** | Under the Lamb | Settlement (Brookhollow) | MQ4 *The Night Flush* Completed (`LM_LOCK_STATE` set) | P01, P18 | **infiltrate**, read, choose | Sallow's crew lies low after the Lock; their pay book is under the Lamb. | **MQ10 evidence chip** (`UL_LEDGER`); optional MQ10 witness (`UL_RHOSYN_WITNESS`); MQ7 Ottilie variant |
+| **UL** | Under the Lamb | Settlement (Brookhollow) | MQ4 *The Night Flush* Completed (`LM_LOCK_STATE` set) | P01, P18 | **infiltrate**, read, choose | Sallow's crew lies low after the Lock; their pay book is under the Lamb `[ANTAGONIST]`. | **MQ10 evidence chip** (`UL_LEDGER`); optional MQ10 witness (`UL_RHOSYN_WITNESS`); MQ7 Ottilie variant |
 | **NB** | Night Bridge | Settlement (Crestbridge) | MQ2 *Short Measure* Completed (`LM_GRAIN_ROUTE` set) | P02 underside | **climb**, inspect, fight | Toll enforcement after the grain shortage; Aldric's useful-but-blind authority. | Underside route (`NB_UNDERSIDE_OPEN`) as an optional MQ10 approach to the water-gate |
 | **UR** | Unreplanted | Settlement (Ashenstead) | MQ3 *Heavy Water* Completed | Joric's plot beside P20 | **clear**, uncover, listen | Seeds the ground MQ5 may cut through. | **MQ5** "cut through Joric's plot" option (`UR_GATE_RUN` / `UR_LINE_STAKED` / `UR_LEFT`); epilogue reads `LM_FIELD_FIX` |
 | **NT** | Night Ferry | Combat challenge | MQ2 Completed | P19 Greyharrow Reach | **defend** a crowd through the night | Maelin's refusal of night passage, understood. | MQ12 night-crossing echo (`NT_DAWN_SEEN`) |
@@ -44,7 +44,7 @@ No new region-level `LM_` flags are created. All quest-local flags use the quest
 - **Steps** use `S00_…` ids scoped to the quest. **Completion events** are the True Line set: enter-volume, inspect, interaction-complete, item-given/carry-deposit, creature-defeated, dialogue-node-reached, plus *watch interaction* (advance the hour, as in MQ4).
 - **No quest can fail.** Losses are consequences (flags, props, lines), never a failed state. Death respawns at the quest's named safe point with step and flags intact. Logout restores the last persisted step; channels and carries are discarded and a dropped carry-state object returns to its source.
 - **Co-op:** independent instances; shared world creatures give step credit to every participant on that step; quest-state props are presented per player (True Line §12 fallback applies).
-- **Human enemies in settlements** (Smugglers family) are *downed* at 0 HP: they stay down and out of the fight, presented as beaten rather than killed. Joss Garrow yields. This matches MQ10, where Sallow yields. **[PROPOSAL — DIRECTOR]** presentation rule; no AI flees at low HP.
+- **Human enemies in settlements** (Smugglers family) are *downed* at 0 HP: they stay down and out of the fight, presented as beaten rather than killed. Joss Garrow yields. This matches MQ10, where Sallow yields `[ANTAGONIST]`. **[PROPOSAL — DIRECTOR]** presentation rule; no AI flees at low HP.
 - **Evidence rule:** every fact in these quests is carried by a record, an object, a place or a person. Drift, lagging water and a lantern that burns dry never identify anyone. Combat drops nothing that advances an investigation.
 - **Agility triggers** are used in NB, UL and OL. Each has a walkable fallback named in its place table.
 - **Skills:** Melee, Woodcutting, Hunting, Cooking only (no Ranged, Fletching or Mining). Exact levels belong to the Gameplay Designer.
@@ -59,7 +59,7 @@ No new region-level `LM_` flags are created. All quest-local flags use the quest
 | UR | Clears scrub, nests and a den with their hands; uncovers a buried gate | MQ5 (excavates a culvert); WC (tracks, does not clear) |
 | NT | Holds a lantern ring around a crowd for a night; walks people back from a bad boat | TL (investigation and a single boar); MQ10 (siege of a building) |
 | FW | Re-sets a boundary line, pulls people back across it, holds it against an apex predator | MQ11 (holds channel gates under Wraith pressure) |
-| OL | Tracks one man's patrol, fights him without killing him, brings him or his light home | MQ10 Sallow (crew boss in a building); MQ11 Muster (Wraith Lord) |
+| OL | Tracks one man's patrol, fights him without killing him, brings him or his light home | MQ10 Sallow `[ANTAGONIST]` (crew boss in a building); MQ11 Muster (Wraith Lord) |
 
 ---
 
@@ -204,7 +204,7 @@ No option is wrong. None of them makes Rhosyn safe and keeps her work going and 
 ### UL.11 Ledger, decisions, review
 
 **Mystery ledger.** *What the ledger proves:* that a named crew was paid for "Lock work" on the wrong nights and moved on borrowed hauler names. It does not show who paid Sallow; that stays MQ10's work `[ANTAGONIST]`. *Wrong reading:* Rhosyn is the crew's brain. Her nook says otherwise.
-**Open decision.** Bible §6.1 lists "Rhosyn's forged papers" as the MQ10 chip; this package makes the chip **the crew ledger, including her chit pages**, so the antagonist swap layer (§3.1) still finds Sallow only in this quest's tagged nodes. The Act III author should use `UL_LEDGER` (+ `UL_LEDGER_CUT`, `UL_RHOSYN_WITNESS`).
+**Open decision.** Bible §6.1 lists "Rhosyn's forged papers" as the MQ10 chip; this package makes the chip **the crew ledger, including her chit pages**, so the antagonist swap layer (§3.1) still finds Sallow `[ANTAGONIST]` only in this quest's tagged nodes. The Act III author should use `UL_LEDGER` (+ `UL_LEDGER_CUT`, `UL_RHOSYN_WITNESS`).
 
 | Review finding | Revision |
 |---|---|
@@ -492,7 +492,8 @@ NB-D3.43 ALDRIC: "...So it does." (to the player) "You went under. What should t
 NB-D3.50 KEEPER: "Repair credit, Wickett, second arch. Repair credit, the wheel, third pier." (writes) "Hesketh will hate it."
 NB-D3.51 ORLA: (to Varley) "You can sit at the end. Far end."   {set NB_BOTH_CREDIT}  → NB-D4.01
 NB-D3.60 ORLA: "Three generations." (pays, slowly, coin by coin) "Fine. Fine. Mend it properly next time."
-NB-D3.61 VARLEY: "Fair's fair."   ORLA: "Don't."   {set NB_ALL_PAY}  → NB-D4.01
+NB-D3.61 VARLEY: "Fair's fair."
+NB-D3.62 ORLA: "Don't."   {set NB_ALL_PAY}  → NB-D4.01
 NB-D3.70 KEEPER: "Courtesy, Wickett household, for the arch. First time it's ever been written." 
 NB-D3.71 VARLEY: (counting coin) "He'll take it out of my wages. He takes everything out of my wages."   {set NB_WICKETT_CREDIT}  → NB-D4.01
 ```
@@ -698,7 +699,7 @@ UR-D7.03 JORIC: (back at the net; to nobody in particular) "Mind the goblins don
 |---|---|
 | Rye shoots visible | "Came up on its own. Seed sat in the ash all this while." (beat) "Gives things back slowly." |
 | `LM_FIELD_FIX = plot` | "Ditch through my ground. Water goes where it's told now. I watch it, some evenings." |
-| `LM_FIELD_FIX = circle` | "They lifted the circle stones. Annelise put them back. Better than before, she says." |
+| `LM_FIELD_FIX = circle` | "They lifted the circle stones and put them back after. Took care over it." |
 | `LM_FIELD_FIX = dike` | "Long dike. Long season. Everyone dug." (beat) "I dug." |
 
 ---
@@ -1024,6 +1025,7 @@ No fail. Death respawns at the warning post with withies, cutters and waves kept
 | Draft had the serpent knock players into the deep pool. | Timber kerb; no instant loss; drag only damages. |
 | Draft let the boundary fail and the quest branch on it. | Waves repeat with fewer stalkers; it cannot be lost. |
 | Draft had Lessa explain the done stretch after the fight. | Two words, no account. |
+| An Ivo line credited "her mother" with the withies, which gave Lessa invented kin. | Changed to "Nobody ever said." |
 
 ### FW.12 Dialogue
 
@@ -1046,12 +1048,6 @@ FW-D2.02 IVO: "That reed's worth a season. My lot haven't had a season since the
   > "Why does she say it's done?"                           → FW-D2.30
 FW-D2.10 IVO: "Stalkers are in all the reeds." (looks round anyway) "...Fine. Bundles first."   → end {group 2 follows}
 FW-D2.20 IVO: "Who made you warden?" (spits) "Fine."   {set FW_IVO_ANGRY}  → end {group 2 follows}
-FW-D2.30 IVO: "Never says. Her mother never said either, my mam told me. They just put sticks in the water."   → FW-D2 options
-```
-
-> **Canon check on FW-D2.30:** Ivo repeats hearsay about "her mother" putting withies in the water. **Revised:** this gives Lessa invented kin. Line changed to: *"Never says. Nobody ever said. They just put sticks in the water."* (see review log; the node above is superseded by the corrected text below)
-
-```
 FW-D2.30 IVO: "Never says. Nobody ever said. Just sticks in the water, as long as anyone remembers."   → FW-D2 options
 ```
 
@@ -1086,3 +1082,212 @@ FW-D5.20 LESSA: (to the reeds) "This one's all right." (to the player) "Go on. R
 ```
 
 ---
+
+## OL — Old Lantern
+
+### OL.1 Summary card
+
+| Field | Value |
+|---|---|
+| Suggested content id | `lowmark.side.old_lantern` |
+| Type | Combat challenge, **miniboss** (bible §7, §10; dossier "Wraithwatchers Gone Wrong") |
+| Unlock | MQ3 Completed (the player has seen Ansel's patrol book). Offered by Ansel Corrie at the Watchers' Lantern Post (P21). |
+| Length | 30–40 minutes |
+| Combat share | ~45% |
+| Skills | Melee; tracking by inspection (no skill gate) |
+| Choice | Bring Joss in alive to Elspeth Quill's care, or bring back only his lantern (both honoured) |
+| Outputs | `OL_JOSS_IN` / `OL_LANTERN_ONLY`; drift site **Old Lantern's bend** → quieted (bible §9.2) |
+| Canon used | Wraithwatchers: patrol bands with oil lanterns, blessed rope and banner-thistle smoke, no spellcasting; overwhelmed and without real understanding (dossier §III, §XVI). "Wraithwatchers Gone Wrong": former patrol members corrupted by long exposure to Wraith-haunted zones; human-scale minibosses (§VIII). Water Wraiths as place-bound manifestations, not souls. |
+| New | Joss Garrow (bible §5.3), his history with Ansel, the far leg, the reed shelter, lantern-drift behaviour around his light. |
+
+**Evidence guard (binding).** Joss's state is shown and never explained. Nothing he says, carries or wrote names, counts or describes any dead person. His calls are the ordinary patrol calls every Watcher uses. His book holds places, times and tally strokes. Being near drift for years did this to a man, and that is all the quest says. Combat reveals nothing.
+
+**One paragraph.** Since MQ3 the player has seen one line repeat in Ansel's patrol book: *"Lantern on the far leg. Not ours."* Ansel knows whose it is. Joss Garrow walked the Whisperflow-to-fen leg with him for years. Joss wanted to know *why* the water went wrong when Ansel was content with where and when, and one winter he walked into the fen to find out and didn't come back. The Watchers wrote him "lost on patrol". His lantern still walks the far leg every second night. The player tracks Joss's patrol by his notches on the posts, his dropped thistle stubs and a reed shelter full of drying pages, then waits at his bend for the light. Joss treats the player as drift. The fight is a Watcher's whole craft turned the wrong way (lantern, rope, the count), and when he goes down to one knee he says "End of leg." Then the player brings him in, or carries his lantern home and leaves him to the patrol he won't stop walking.
+
+**Remember:** a lantern with a dry oil well that keeps burning. **Want next:** to know what the count Joss kept is counting (MQ11, the Muster's stroke-calls).
+
+### OL.2 The place: the far leg and Old Lantern's bend
+
+| Area | Purpose | Environmental storytelling |
+|---|---|---|
+| **A. Lantern Post** (P21) | Hook, return | The patrol book on its shelf. A row of lantern hooks with one empty, rusted rather than worn. Under it, scratched in the wood: *J.G.* |
+| **B. The far leg** | Tracking | A path along the fen edge past old patrol posts. Each post has a Watcher's waymark notch, and Joss's are fresh: cut clean, cut again over old cuts. Stubs of burned banner-thistle in the mud where someone lit smoke and stamped it out. |
+| **C. Reed shelter** | Joss's camp | A reed lean-to with a patrol coat gone green. Pages pinned to dry on a cord, every page the same entry in the same hand: *Far leg. Heavy at the willow. Lantern lit.* Later pages hold only tally strokes in fives, hundreds of them. A coil of rope worn smooth. No food. |
+| **D. The willow bend** (Old Lantern's bend) | Miniboss arena | A slow bend under a dead willow. Four old patrol posts on raised footings (stone, knee-high). A shallow ford of heavy water across the middle; the deep side beyond a line of reeds. Ansel's waypoint stone at the landward edge. |
+| **E. Return path** | Escort or carry | The far leg back to the Post, with two drift pockets that wake if a lantern passes lit (see OL.4). |
+
+**Traversal:** one agility step-up onto each post footing (Phase 1.3). **Fallback:** each footing also has a stone ramp on its landward side.
+
+**Unease (C, D):** inspect Joss's lantern after the fight: *"The oil well is dry. Has been for a long time. The flame doesn't care."* That is the whole explanation the game gives.
+
+### OL.3 Player-facing sequence
+
+**Beat 0 — Not ours (`S00_hook`).** *Objective: Ask Ansel about the lantern on the far leg.* `OL-D1`. Ansel lends a bundle of banner-thistle smoke (carried Watcher tool, as in MQ3; reusable for this quest).
+**Beat 1 — His notches (`S01_track`).** *Objective: Follow the far leg.* Inspect three fresh notched posts in order (each inspect points to the next). Optional: two thistle stubs (`S01b_stubs`; one extra line from Ansel later).
+**Beat 2 — The shelter (`S02_shelter`).** *Objective: Search the reed shelter.* Inspect the pages, the tally pages and the rope. The last page carries the Watchers' leg-closing call written out in full: *"Lantern in. Leg closed."* (`OL_CALL_KNOWN`).
+**Beat 3 — The bend at dusk (`S03_watch`).** *Objective: Wait at the willow bend for the lantern.* Watch interaction at Ansel's waypoint stone, advancing to nightfall. The light comes along the leg; a voice calls *"Lantern coming in! Wraithwatch."*, Ansel's call, in someone else's voice. Approaching within 15 m starts the fight (`OL-D3` bark).
+**Beat 4 — Old Lantern (`S04_joss`).** *Objective: Stop Joss Garrow.* Miniboss (E2, spec OL.4.1). At 0 HP he yields: down on one knee, lantern set on the ground, still burning.
+**Beat 5 — End of leg (`S05_choice`).** *Objective: Decide how Joss comes home.* `OL-D5`. Lucid fragments. The choice.
+**Beat 6 — Home (`S06_home`).** *Objective: Return to the Lantern Post.* **Brought in:** Joss follows the player, but only once the player has spoken the closing call (`OL_CALL_KNOWN`, always learnable at C) and he puts out his own lantern. Escort along E; the drift pockets stay asleep with no lit lantern passing. **Lantern only:** the player carries the lantern (carry-state, lit; it won't go out). The two drift pockets on E wake as it passes (E3). Joss stays on the bend and walks on into the dark.
+**Beat 7 — The book (`S07_book`).** *Objective: Speak with Ansel.* `OL-D7`. Ansel writes the entry. Quest Completed; Old Lantern's bend → **quieted**.
+
+### OL.4 Encounters
+
+| Id | Enemies | Where | Role | Telegraph | Solo target |
+|---|---|---|---|---|---|
+| **E1** | 2 lantern-drift | Near the shelter, once | Water Wraith (lantern-drift): place-bound, Aggressive near water; disperse on defeat | Drift brightens and leans (~1.2 s) before a cold lash | Required on first pass. 30–45 s. |
+| **E2** | **Joss Garrow, "Old Lantern"** | The willow bend | Miniboss; spec below | — | Required. 3–4 minutes. |
+| **E3** | 2 drift (one per pocket) | Return path | Wake only for a lit lantern passing (lantern-only branch) | Pocket surface shivers (~1.5 s) before the drift rises | Lantern-only branch. 30–45 s each. |
+
+#### OL.4.1 Miniboss spec — Joss Garrow, "Old Lantern"
+
+| Field | Spec |
+|---|---|
+| Family | Listed under Water Wraiths as their elite (bible §10), but **Joss is a living man**. He is never "dispersed"; at 0 HP he yields. |
+| Read | A Watcher's coat gone green, beard to the chest, hands blue-grey with cold. A lantern on a hooked pole, burning steadily. A coil of blessed rope at his hip. He moves at a patrol walk, never a run. He speaks only patrol calls during the fight. |
+| Arena | The bend (D). **Post footings** (4, raised stone): the count's pulse and the rope's drag do not reach a player standing on one. **The ford:** heavy water, slows movement. **Deep side:** behind reeds; not reachable during the fight. |
+| Health target | Solo, Milestone 1 dependable to early Competent equipment: 3–4 minutes. Values belong to the Gameplay Designer. |
+| **Lantern sweep** (all phases) | He raises the lantern high; a cone of light settles on the ground in front of him (**1.5 s**). Cold sweep through the cone: moderate damage. **If the cone touches the ford**, a lantern-drift forms where the light lay, 3 s later (max 2 alive). Fight him on the bank to stop the drift spawning. Cadence ~9 s. |
+| **Rope cast** (all phases) | Bark *"Hold the line!"*; the rope uncoils and a pale line is drawn on the ground from him to the player (**1.5 s**). If the player is still on the line, the rope snares and drags them 3 m toward him. Break it by stepping onto a post footing or landing two hits (the True Line leech-latch rule). Cadence ~14 s. |
+| **Count the stroke** (P2–P3) | He plants the pole and counts aloud, *"One... two... three"*, one count per second (**3 s**, the count is the tell). On "three" a cold pulse rings out from the ford, radius 7 m: heavy damage unless the player is on a post footing. Cadence ~18 s. *(Foreshadows the Muster's stroke-calls; it carries no information.)* |
+| **Wade** (P3, below 25%) | Bark *"End of leg."*; he turns and walks toward the deep side across the ford. A ring marks a spot ahead of him on his path (**shown for the whole wade**). If the player stands in the ring, he stops, turns and fights on. If he reaches the reeds, he stands knee-deep at the edge and fights from there: sweeps always touch water, so drift keep forming until he is beaten. Never a fail; it only makes the end harder. Once per fight. |
+| **Banner-thistle smoke** (player tool) | Once per phase the player can light Ansel's smoke at any post footing (2 s channel). For 10 s inside the cloud: lantern-drift take extra damage and Joss's sweep and rope are slower (+0.5 s on each tell). While he is in the cloud he speaks one lucid fragment (`OL-D4`). |
+| Phases | P1 100–60%: sweep, rope. P2 60–25%: + count. P3 below 25%: + wade, count cadence ~14 s. No enrage. Never flees. |
+| Yield | At 0 HP: down on one knee, lantern set down, still lit. Combat ends; `OL-D5` opens when the player approaches. |
+| Reset | If the player leaves the bend or dies, Joss returns to his patrol walk at full health; drift spawned by him disperse. Step progress kept. |
+
+### OL.5 Steps and completion events
+
+| Step | Objective | Completes on | Req. |
+|---|---|---|---|
+| `S00_hook` | Ask Ansel about the lantern on the far leg. | `OL-D1` end node | Yes |
+| `S01_track` | Follow the far leg. | 3 inspect events on notched posts, in order | Yes |
+| `S01b_stubs` | (Optional) Look at the burned stubs. | 2 inspect events | No |
+| `S02_shelter` | Search the reed shelter. | E1 defeated + inspect pages, tally pages, rope (sets `OL_CALL_KNOWN`) | Yes |
+| `S03_watch` | Wait at the willow bend for the lantern. | Watch interaction to nightfall; enter 15 m volume around Joss | Yes |
+| `S04_joss` | Stop Joss Garrow. | E2 yield event | Yes |
+| `S05_choice` | Decide how Joss comes home. | `OL-D5` choice resolved | Yes |
+| `S06_home` | Return to the Lantern Post. | Brought in: escort-arrival of Joss at the Post. Lantern only: carry-deposit of the lantern on the empty hook. | Yes |
+| `S07_book` | Speak with Ansel. | `OL-D7` end node | Yes (→ Completed; drift site quieted) |
+
+### OL.6 Flags
+
+| Flag | Set by | Read by |
+|---|---|---|
+| `OL_STUBS_SEEN` | `S01b_stubs` | `OL-D7` line |
+| `OL_CALL_KNOWN` | Shelter last page | `OL-D5` bring-in option |
+| `OL_JOSS_IN` / `OL_LANTERN_ONLY` | `OL-D5` (exactly one) | `OL-D7`; MQ11 (Joss among Reedmere evacuees with Elspeth, or the hung lantern at the Post); MQ12 Ansel line |
+| drift site `old_lantern_bend` | Completion | → quieted |
+
+### OL.7 Choices and consequences
+
+| Option | Immediate | Cost | Honoured how |
+|---|---|---|---|
+| **Bring him in** — *"Lantern in. Leg closed."* (requires `OL_CALL_KNOWN`) | Joss puts out his lantern and follows the player. Elspeth Quill comes to the Post and takes him into her care. | Joss is frightened indoors and may never be well. Ansel has to sit with the man he wrote off, every night he isn't walking. | Ansel strikes "lost on patrol" from the book and writes *"Joss Garrow. Came in."* Joss's hook stays empty because he is home. |
+| **Bring back the lantern** — *"Keep walking. I'll carry the light in."* | Joss lets the pole go and walks on along the leg, unlit. The player carries the lantern home through two waking pockets. | Joss stays out there. On some dusks the player can see a man walking the far leg without a light. He never engages and never speaks. | The lantern is hung, still burning, on the empty hook above *J.G.* Ansel writes *"Joss Garrow. On patrol."* Watchers greet it at every change. |
+
+The bend is quieted either way: the drift was gathering to the lantern, and it is no longer there.
+
+### OL.8 Rewards
+
+Watcher standing in dialogue (Ansel and Watcher barks change; no reputation system). Ansel gives the player Joss's patrol book pages to keep or burn (flavour inspect only; no item). Small payment from the Post's box. Melee XP from actions. No lump XP.
+
+### OL.9 Failure, recovery, co-op
+
+No fail. Death respawns at the Lantern Post with steps and flags kept; Joss resets to full and his patrol. On the bring-in escort, Joss waits if the player stops and cannot be harmed. Logout during the escort restarts `S06` with Joss back at the bend, already yielded. In co-op, Joss is a shared world creature for the fight; each player's choice is their own, and a partner who chose differently sees their own outcome at the Post (per-player prop: lantern hung or hook empty; fallback: both presented by barks).
+
+### OL.10 Integration needs
+
+| Need | Minimum form | Fallback |
+|---|---|---|
+| Non-lethal yield for a boss | Defeat event → yield animation, no despawn | Joss "sits" on defeat, same event |
+| Ground telegraphs (cone, line, ring) | Decal telegraphs with fixed durations | Bark plus a simple circle |
+| Drift spawned from lit water | Spawn rule: cone overlapping ford volume | Fixed drift spawns at P2 start (2) |
+| Path-blocking ring during wade | Volume check stops NPC path | Wade removed; P3 just adds faster count |
+| Prop-conditioned drift pockets on return | Pocket wakes on lit-lantern carry state | Pockets always wake once |
+
+### OL.11 Ledger, decisions, review
+
+**Mystery ledger.** *What happened to Joss:* long exposure (canon). *Public belief:* "lost on patrol"; Brookhollow says "a drift took him". *Player-observable:* the pages, the tallies, a lantern that burns dry, the count. *Wrong reading:* Joss knows what the drift is or who it was. He doesn't; he went in for the why and came back with a count. *Withheld:* what the count is counting (MQ11 owns the Muster; it identifies nobody).
+**Open decision:** whether Joss can ever speak a full sentence again after `OL_JOSS_IN` is left to MQ12; recommend no recovery beyond fragments.
+
+| Review finding | Revision |
+|---|---|
+| Draft's tally pages had "one for each of them". | Cut: implied counted dead. Tallies are unexplained strokes. |
+| Draft let the player kill Joss. | He yields; both endings bring him or his light home. |
+| Bring-in had no physical requirement. | The closing call is learned at the shelter and spoken to him. Always learnable, so there is no soft-lock. |
+
+### OL.12 Dialogue
+
+```
+OL-D1.01 ANSEL: (open book) "You've seen it. 'Lantern on the far leg. Not ours.' Every second night."
+OL-D1.02 ANSEL: "It's Joss. Joss Garrow. We walked that leg together, years. He wanted the why. I wanted my supper."
+OL-D1.03 ANSEL: "One winter he went in after it. We wrote him 'lost on patrol'. It's what you write."
+OL-D1.04 ANSEL: "Lantern still walks the leg. Same pace. Same stops."
+  > "You never went after him?"                             → OL-D1.10
+  > "I'll find him."                                         → OL-D1.20
+OL-D1.10 ANSEL: "Twice. Got close enough to hear him call. My call." (beat) "Came back. I'm not proud of it."   → OL-D1 options
+OL-D1.20 ANSEL: (hands over a thistle bundle) "Smoke. If he's what I think, it'll help." (beat) "If he's Joss, bring him in. If he isn't, bring the light."
+      {event: S00_hook}
+```
+
+**Inspect texts:** *Notched post:* "A waymark notch, cut fresh over an old one. Same height, same angle as the Post's." / *Thistle stub:* "Banner-thistle, lit and stamped out. Recent." / *Pages:* "'Far leg. Heavy at the willow. Lantern lit.' The same words on every page." / *Tally pages:* "Strokes in fives. Pages of them. Nothing else." / *Last page:* "Written out in full, pressed hard: 'Lantern in. Leg closed.'" / *Rope:* "Blessed rope, worn smooth as a handrail." / *Lantern (after yield):* "The oil well is dry. Has been for a long time. The flame doesn't care."
+
+```
+OL-D3 — Approach bark (starts E2)
+JOSS: "Lantern coming in! Wraithwatch." (raises the lantern toward the player) "Heavy at the willow. Hold the line."
+```
+
+```
+OL-D4 — Lucid fragments (once each, while Joss is in the smoke)
+OL-D4.01 JOSS: "...Ansel? No. Ansel's taller."
+OL-D4.02 JOSS: "Don't stand in the water. I told him that. Don't stand in it."
+OL-D4.03 JOSS: "Where and when. I wrote where and when."
+```
+
+```
+OL-D5.01 JOSS: (on one knee, lantern on the ground) "End of leg." (beat) "End of leg?"
+OL-D5.02 JOSS: "I went in for the why. There isn't one. There's a count. I kept it."
+  > "Who taught you the count?"                             → OL-D5.10
+  > "Ansel sent me."                                         → OL-D5.20
+  > [OL_CALL_KNOWN] "Lantern in. Leg closed."               → OL-D5.30
+  > "Keep walking. I'll carry the light in."                → OL-D5.40
+OL-D5.10 JOSS: "Nobody. It's in the water. One, two, three." (looks at the ford) "It doesn't mean anyone. I listened."   → OL-D5 options
+OL-D5.20 JOSS: "Ansel." (long pause) "He wanted his supper."   → OL-D5 options
+OL-D5.30 JOSS: (repeats it, slowly, the way it's meant to be said) "Lantern in. Leg closed."
+OL-D5.31 JOSS: (opens the lantern and pinches the flame; it goes out) (stands) "Which way's the Post. I forget, in the dark."
+      {set OL_JOSS_IN}  {event: S05_choice; Joss follows}
+OL-D5.40 JOSS: (lets the pole go into the player's hands) "Mind it. It's heavy at the willow."
+OL-D5.41 JOSS: (turns and walks on along the leg, unlit) "Far leg. Lantern... out."
+      {set OL_LANTERN_ONLY}  {event: S05_choice; give lantern (carry-state, lit)}
+```
+
+```
+OL-D7.01 [OL_JOSS_IN] ELSPETH: (at the Post door, blanket ready) "Inside. Slowly. No, leave the coat, I'll wash it. Or burn it."
+OL-D7.02 [OL_JOSS_IN] ANSEL: (looks at Joss for a long time) "...You're late."
+OL-D7.03 [OL_JOSS_IN] JOSS: (sitting, not looking up) "Heavy at the willow."
+OL-D7.04 [OL_JOSS_IN] ANSEL: (to the player, quietly, writing) "'Joss Garrow. Came in.'" (beat) "I've never been so glad of a line."
+OL-D7.01 [OL_LANTERN_ONLY] ANSEL: (takes the pole; hangs the burning lantern on the empty hook, above J.G.) "It won't go out, will it."
+OL-D7.02 [OL_LANTERN_ONLY] ANSEL: "Then it hangs here, and he walks the leg, and I'll walk it with him. From a little way off."
+OL-D7.03 [OL_LANTERN_ONLY] ANSEL: (writing) "'Joss Garrow. On patrol.'" (beat) "It was always true. Now it's written right."
+OL-D7.05 [OL_STUBS_SEEN] ANSEL: "Still lighting smoke out there. Still stamping it out after. Tidy man."
+OL-D7.06 ANSEL: "The willow bend's quiet tonight. First time I've ever written that." (closes the book) "River keep you."
+      {event: S07_book → quest Completed; drift site old_lantern_bend → quieted}
+```
+
+**Post-quest barks:** WATCHER [`OL_LANTERN_ONLY`], at the change: *"Lantern's in."* (to the hook) / ANSEL [`OL_JOSS_IN`]: *"He counts in his sleep. Elspeth says let him."* / (MQ11 hook) ANSEL during the Muster's stroke-calls: *"Joss counted like that. Don't listen to it. Watch your feet."*
+
+---
+
+## Package review summary
+
+| Check | Result |
+|---|---|
+| Canon anchors | Maelin (NT), Aldric (NB), Lessa (FW) and Joric (UR) get no invented age, service, kin, travel or record custody. Joric's loss stays "a river incident never recorded". An Ivo line that gave Lessa a mother was cut. Tovin, Corvin and Annelise do not appear. |
+| Evidence rule | Facts come only from records (ledger, toll book, Joss's pages), objects (repair faces, gatepost, bowls' maker's dot) and testimony. The drift, the level beads, the leaning reeds, the dry-burning lantern and Joss's count explain nothing and name no one. |
+| Soft-locks | Every required step has a guaranteed path: four UL routes, a platform fallback in NB, a repeatable hold in FW, the closing call always learnable in OL, and no fail state anywhere. |
+| Antagonist tagging | Sallow is absent and appears only in UL nodes and prose tagged `[ANTAGONIST]`. Marrick is not named. |
+| Quest items | **0.** All carried things are carry-state objects. |
+| Flags | Quest-local prefixes only; no new `LM_` flags. Cross-package reads are listed in §0.2. |
+| Duplicates | §0.4. NT has no investigation; NB and SB are distinct climbs. |
+| Known conflict | Reed Stalkers are "first seen MQ5" in bible §10, but NB (after MQ2) and FW (after MQ3) use them. Handled with low-density first encounters; flagged to the Encounters package. |
