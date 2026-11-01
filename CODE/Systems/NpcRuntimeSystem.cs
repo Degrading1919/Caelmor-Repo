@@ -1,3 +1,5 @@
+using Caelmor.Runtime.Onboarding;
+using Caelmor.Runtime.Tick;
 using System;
 using System.Collections.Generic;
 using Caelmor.Runtime.WorldSimulation;
@@ -281,7 +283,7 @@ namespace Caelmor.Runtime.Npcs
             return new EntityHandle(value);
         }
 
-        private readonly struct NpcRecord
+        internal readonly struct NpcRecord
         {
             public readonly NpcId NpcId;
             public readonly EntityHandle Handle;

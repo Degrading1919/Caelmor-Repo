@@ -1,3 +1,5 @@
+using Caelmor.Runtime.Onboarding;
+using Caelmor.Runtime.Tick;
 using System;
 using System.Collections.Generic;
 using Caelmor.Runtime.Npcs;
@@ -14,9 +16,9 @@ namespace Caelmor.Validation.Npcs
     /// </summary>
     public static class NpcRuntimeValidationScenarios
     {
-        public static IReadOnlyList<IValidationScenario> GetScenarios()
+        public static IReadOnlyList<Caelmor.Systems.IValidationScenario> GetScenarios()
         {
-            return new IValidationScenario[]
+            return new Caelmor.Systems.IValidationScenario[]
             {
                 new ValidationScenarioAdapter(new Scenario1_NpcsOnlySimulatedWhenActive()),
                 new ValidationScenarioAdapter(new Scenario2_ActivationRequiresZoneResidency()),

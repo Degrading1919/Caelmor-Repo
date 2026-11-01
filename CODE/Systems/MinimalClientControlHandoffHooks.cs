@@ -1,3 +1,4 @@
+using Caelmor.Runtime.Onboarding;
 using System;
 using System.Collections.Concurrent;
 
@@ -20,26 +21,39 @@ namespace Caelmor.Runtime.Onboarding
         }
 
         /// <summary>
-        /// Records a successful onboarding completion and emits a client-consumable
-        /// authorization signal. Idempotent.
+        /// Records authoritative completion, superseding any earlier failed attempt,
+        /// and emits authorization only for the caller that wins that transition.
         /// </summary>
         public void NotifyOnboardingSuccess(IServerSession session)
         {
             if (session is null) throw new ArgumentNullException(nameof(session));
             if (!session.IsServerAuthoritative) return;
 
-            var result = _results.GetOrAdd(session.Id, OnboardingResult.Success);
-
-            if (result == OnboardingResult.Success)
+            // A rejected duplicate or an earlier failed attempt must not suppress
+            // the authoritative completion of the successful attempt. Only the
+            // caller that wins the transition emits the authorization signal.
+            while (true)
             {
-                // Idempotent: repeated calls re-emit the same authorization safely.
+                if (_results.TryGetValue(session.Id, out var result))
+                {
+                    if (result == OnboardingResult.Success)
+                        return;
+                    if (!_results.TryUpdate(session.Id, OnboardingResult.Success, result))
+                        continue;
+                }
+                else if (!_results.TryAdd(session.Id, OnboardingResult.Success))
+                {
+                    continue;
+                }
+
                 _clientChannel.AuthorizeClientControl(session.Id);
+                return;
             }
         }
 
         /// <summary>
-        /// Records an onboarding failure. Client control remains disabled.
-        /// Idempotent.
+        /// Records an attempt failure while no successful completion exists.
+        /// A rejected duplicate cannot overwrite successful authorization.
         /// </summary>
         public void NotifyOnboardingFailure(IServerSession session)
         {
@@ -90,15 +104,6 @@ namespace Caelmor.Runtime.Onboarding
     {
         Failure = 0,
         Success = 1
-    }
-
-    /// <summary>
-    /// Minimal server session abstraction.
-    /// </summary>
-    public interface IServerSession
-    {
-        SessionId Id { get; }
-        bool IsServerAuthoritative { get; }
     }
 
 }

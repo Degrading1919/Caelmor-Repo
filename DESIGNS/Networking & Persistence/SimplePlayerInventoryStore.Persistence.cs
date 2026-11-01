@@ -23,10 +23,8 @@ namespace Caelmor.Economy.Inventory
         // Set exact snapshot (hydration only). Clears existing keys first.
         internal void DebugSetExact(int playerId, List<PersistedInventoryEntry> entries)
         {
-            if (!_byPlayer.TryGetValue(playerId, out var inv))
-                _byPlayer[playerId] = inv = new Dictionary<string, int>(64);
-
-            inv.Clear();
+            if (entries == null) throw new ArgumentNullException(nameof(entries));
+            var restored = new Dictionary<string, int>(StringComparer.Ordinal);
 
             for (int i = 0; i < entries.Count; i++)
             {
@@ -38,8 +36,11 @@ namespace Caelmor.Economy.Inventory
                 if (e.Count <= 0)
                     throw new InvalidOperationException($"Corrupt PlayerSave: non-positive count for key='{e.ResourceItemKey}', PlayerId={playerId}.");
 
-                inv[e.ResourceItemKey] = e.Count;
+                if (!restored.TryAdd(e.ResourceItemKey, e.Count))
+                    throw new InvalidOperationException($"Corrupt PlayerSave: duplicate key='{e.ResourceItemKey}', PlayerId={playerId}.");
             }
+
+            _byPlayer[playerId] = restored;
         }
     }
 }

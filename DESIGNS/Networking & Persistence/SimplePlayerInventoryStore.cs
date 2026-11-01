@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Caelmor.Economy.Inventory
 {
-    public sealed class SimplePlayerInventoryStore : IPlayerInventoryStore
+    public sealed partial class SimplePlayerInventoryStore : IPlayerInventoryStore
     {
         private readonly Dictionary<int, Dictionary<string, int>> _byPlayer =
             new Dictionary<int, Dictionary<string, int>>(128);
@@ -47,7 +47,9 @@ namespace Caelmor.Economy.Inventory
                 return false;
             }
 
-            // Pre-validate (no mutation) to preserve atomicity.
+            // Stage sequential totals for repeated keys before committing any mutation.
+            if (deltas == null) throw new ArgumentNullException(nameof(deltas));
+            var staged = new Dictionary<string, int>(StringComparer.Ordinal);
             for (int i = 0; i < deltas.Count; i++)
             {
                 var (key, delta) = deltas[i];
@@ -63,7 +65,8 @@ namespace Caelmor.Economy.Inventory
                     return false;
                 }
 
-                inv.TryGetValue(key, out int current);
+                if (!staged.TryGetValue(key, out int current))
+                    inv.TryGetValue(key, out current);
                 long next = (long)current + delta;
                 if (next < 0)
                 {
@@ -75,19 +78,14 @@ namespace Caelmor.Economy.Inventory
                     failureReason = "count_overflow";
                     return false;
                 }
+                staged[key] = checked((int)next);
             }
 
             // Apply after validation.
-            for (int i = 0; i < deltas.Count; i++)
+            foreach (var entry in staged)
             {
-                var (key, delta) = deltas[i];
-                inv.TryGetValue(key, out int current);
-                int next = current + delta;
-
-                if (next == 0)
-                    inv.Remove(key);
-                else
-                    inv[key] = next;
+                if (entry.Value == 0) inv.Remove(entry.Key);
+                else inv[entry.Key] = entry.Value;
             }
 
             return true;

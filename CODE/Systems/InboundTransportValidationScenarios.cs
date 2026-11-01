@@ -1,3 +1,4 @@
+using Caelmor.Runtime.Replication;
 using System;
 using System.Buffers.Binary;
 using System.Collections;
@@ -17,7 +18,7 @@ namespace Caelmor.Validation.Transport
     /// </summary>
     public static class InboundTransportValidationScenarios
     {
-        public static IReadOnlyList<IValidationScenario> GetScenarios()
+        public static IReadOnlyList<Caelmor.Validation.IValidationScenario> GetScenarios()
         {
             return new IValidationScenario[]
             {
@@ -51,15 +52,16 @@ namespace Caelmor.Validation.Transport
                 transport.EnqueueInbound(session, payload, commandType: "validation", submitTick: 0);
 
                 core.ExecuteSingleTick();
+                var frozen = pump.GetFrozenBatch(session);
+                assert.True(frozen.Count > 0, "First tick must freeze the inbound command batch.");
                 core.ExecuteSingleTick();
+                assert.Equal(0, pump.GetFrozenBatch(session).Count, "Consumed tick batch must not replay on the next tick.");
 
                 var diagnostics = pump.Diagnostics;
                 assert.True(diagnostics.InboundPumpTicksExecuted >= 2, "Inbound pump must execute each tick.");
                 assert.True(diagnostics.InboundFramesRouted > 0, "Inbound frames must be routed from transport mailboxes.");
                 assert.True(diagnostics.CommandsEnqueuedToIngestor > 0, "Commands must be bridged into the ingestor.");
 
-                var frozen = pump.GetFrozenBatch(session);
-                assert.True(frozen.Count > 0, "Frozen command batch must be populated after the pump runs.");
 
                 core.Dispose();
                 transport.Dispose();

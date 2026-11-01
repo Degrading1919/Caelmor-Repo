@@ -189,7 +189,7 @@ namespace Caelmor.Combat
         public CombatResolutionSnapshot PreResolutionSnapshot { get; private set; }
         public CombatResolutionSnapshot PostResolutionSnapshot { get; private set; }
 
-        private CombatResolutionResult()
+        internal CombatResolutionResult()
         {
             _outcomesBuffer = Array.Empty<CombatOutcome>();
             _preIntentIds = Array.Empty<string>();

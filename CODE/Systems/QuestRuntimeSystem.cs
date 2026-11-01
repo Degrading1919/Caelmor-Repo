@@ -191,11 +191,11 @@ namespace Caelmor.Runtime.Quests
                 if (!_lifecycle.IsPlayerActive(record.Owner))
                     return QuestStateTransitionResult.Failed(QuestStateTransitionFailureReason.LifecycleNotEligible);
 
-                if (!IsTransitionAllowed(record.State, targetState))
-                    return QuestStateTransitionResult.Failed(QuestStateTransitionFailureReason.InvalidTransition);
-
                 if (record.State == targetState)
                     return QuestStateTransitionResult.Success(record.State, wasStateChanged: false);
+
+                if (!IsTransitionAllowed(record.State, targetState))
+                    return QuestStateTransitionResult.Failed(QuestStateTransitionFailureReason.InvalidTransition);
 
                 record = record.WithState(targetState);
                 _records[questId] = record;

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <UnityEditorRoot Condition="'$(UnityEditorRoot)' == ''">C:/Program Files/Unity/Hub/Editor/6000.5.5f1/Editor</UnityEditorRoot>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Systems/**/*.cs" />
+    <Compile Include="../DESIGNS/Networking &amp; Persistence/*.cs" />
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(UnityEditorRoot)/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

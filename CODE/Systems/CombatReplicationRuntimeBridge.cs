@@ -9,6 +9,8 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Caelmor.Runtime.Diagnostics;
+using Caelmor.Runtime.Replication;
 using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.Sessions;
 using Caelmor.Runtime.Tick;
@@ -18,7 +20,9 @@ namespace Caelmor.Combat
 {
     public sealed class CombatEventBuffer : ICombatEventSink
     {
-        private readonly CombatEvent[] _buffer;
+        private CombatEvent[] _buffer;
+        private CombatEvent[] _drainedBuffer;
+        private int _drainedCount;
         private readonly int _maxCount;
         private int _count;
         private int _currentTick;
@@ -32,6 +36,7 @@ namespace Caelmor.Combat
         {
             if (maxEventsPerTick <= 0) throw new ArgumentOutOfRangeException(nameof(maxEventsPerTick));
             _buffer = new CombatEvent[maxEventsPerTick];
+            _drainedBuffer = new CombatEvent[maxEventsPerTick];
             _maxCount = maxEventsPerTick;
         }
 
@@ -67,15 +72,22 @@ namespace Caelmor.Combat
             return true;
         }
 
+        /// <summary>
+        /// Returns a view valid until the next Drain call. Consumers must finish
+        /// synchronously before that call. New emissions use a separate buffer.
+        /// </summary>
         public CombatEventBatch Drain(int authoritativeTick)
         {
             TickThreadAssert.AssertTickThread();
             int batchTick = _hasTick ? _currentTick : authoritativeTick;
 
-            var batch = new CombatEventBatch(batchTick, _buffer, _count);
-
-            for (int i = 0; i < _count; i++)
-                _buffer[i] = null;
+            // Recycle the preceding batch only after its consumption window.
+            Array.Clear(_drainedBuffer, 0, _drainedCount);
+            var nextWriteBuffer = _drainedBuffer;
+            _drainedBuffer = _buffer;
+            _drainedCount = _count;
+            _buffer = nextWriteBuffer;
+            var batch = new CombatEventBatch(batchTick, _drainedBuffer, _drainedCount);
 
             _count = 0;
             _currentTick = 0;

@@ -438,7 +438,8 @@ namespace Caelmor.Combat
             {
                 _submissions.Clear();
                 _actorCounts.Clear();
-                _submissions.EnsureCapacity(sessionCap);
+                if (_submissions.Capacity < sessionCap)
+                    _submissions.Capacity = sessionCap;
 
             }
 
@@ -782,7 +783,7 @@ namespace Caelmor.Combat
             return builder;
         }
 
-        public readonly struct IdentifierContextBuilder
+        public struct IdentifierContextBuilder
         {
             private ContextEntry _builderEntry0;
             private ContextEntry _builderEntry1;
@@ -848,7 +849,7 @@ namespace Caelmor.Combat
         public IReadOnlyList<FrozenIntentRecord> Intents => _intentList;
         internal int BufferCapacity => _buffer.Length;
 
-        private FrozenQueueSnapshot()
+        internal FrozenQueueSnapshot()
         {
             _buffer = Array.Empty<FrozenIntentRecord>();
             _intentList = new FrozenIntentList();

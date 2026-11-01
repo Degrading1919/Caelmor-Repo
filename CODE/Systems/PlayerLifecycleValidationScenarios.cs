@@ -1,3 +1,4 @@
+using PlayerHandle = Caelmor.Runtime.Players.PlayerHandle;
 using System.Collections.Generic;
 using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.PlayerLifecycle;
@@ -14,9 +15,9 @@ namespace Caelmor.Validation.PlayerLifecycle
     /// </summary>
     public static class PlayerLifecycleValidationScenarios
     {
-        public static IReadOnlyList<IValidationScenario> GetScenarios()
+        public static IReadOnlyList<Caelmor.Systems.IValidationScenario> GetScenarios()
         {
-            return new IValidationScenario[]
+            return new Caelmor.Systems.IValidationScenario[]
             {
                 new ValidationScenarioAdapter(new Scenario1_ActivationRequiresResidency()),
                 new ValidationScenarioAdapter(new Scenario2_SimulationEligibilityOnlyWhileActive()),
@@ -35,8 +36,8 @@ namespace Caelmor.Validation.PlayerLifecycle
             {
                 var rig = Rig.Create();
                 var player = new PlayerHandle(1);
-                var sessionId = new SessionId(System.Guid.NewGuid());
-                var playerId = new PlayerId(System.Guid.NewGuid());
+                var sessionId = new SessionId(global::System.Guid.NewGuid());
+                var playerId = new PlayerId(global::System.Guid.NewGuid());
 
                 a.True(rig.System.Register(sessionId, playerId, player).Ok, "Registration must succeed under server authority.");
 
@@ -209,8 +210,8 @@ namespace Caelmor.Validation.PlayerLifecycle
 
             public void RegisterWithResidency(PlayerHandle player)
             {
-                var sessionId = new SessionId(System.Guid.NewGuid());
-                var playerId = new PlayerId(System.Guid.NewGuid());
+                var sessionId = new SessionId(global::System.Guid.NewGuid());
+                var playerId = new PlayerId(global::System.Guid.NewGuid());
 
                 System.Register(sessionId, playerId, player);
                 Residency.Attach(player, new ZoneId(99));

@@ -1,3 +1,6 @@
+using Caelmor.Runtime.Persistence;
+using Caelmor.Systems;
+using Caelmor.Runtime.Tick;
 using System;
 using System.Diagnostics;
 using System.Threading;
@@ -96,7 +99,7 @@ namespace Caelmor.Runtime.Host
                 host.Start();
 
                 var spawnHelper = new InProcSessionSpawnHelper(host.RuntimeLoop.Handshakes, sessionSystem);
-                if (!spawnHelper.TryEnqueueSpawn(new PlayerId(1), out var sessionId))
+                if (!spawnHelper.TryEnqueueSpawn(new PlayerId(Guid.Parse("11111111-1111-1111-1111-111111111111")), out var sessionId))
                     throw new InvalidOperationException("TRANSPORT_PROOF_SESSION_ENQUEUE_FAILED");
 
                 WaitForSessionActivation(spawnHelper, sessionId);

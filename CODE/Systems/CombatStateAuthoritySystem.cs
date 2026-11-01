@@ -485,7 +485,7 @@ namespace Caelmor.Combat
         private int _gateResultCount;
         private bool _released;
 
-        private GatedIntentBatch()
+        internal GatedIntentBatch()
         {
             _acceptedBuffer = Array.Empty<FrozenIntentRecord>();
             _gateResultBuffer = Array.Empty<IntentGateRow>();
@@ -726,7 +726,7 @@ namespace Caelmor.Combat
         // Deterministic ordering: keys are stored sorted by entity handle.
         public IReadOnlyList<CombatStateSnapshotRow> Rows => _rows;
 
-        private CombatStateSnapshot()
+        internal CombatStateSnapshot()
         {
             _buffer = Array.Empty<CombatStateSnapshotRow>();
             _rows = new CombatStateSnapshotRowListView();

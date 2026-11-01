@@ -1,3 +1,4 @@
+using PlayerHandle = Caelmor.Runtime.Players.PlayerHandle;
 using System.Collections.Generic;
 using Caelmor.Runtime.Onboarding;
 using Caelmor.Runtime.Players;
@@ -16,9 +17,9 @@ namespace Caelmor.Validation.ZoneResidency
         /// <summary>
         /// Returns scenarios in deterministic order.
         /// </summary>
-        public static IReadOnlyList<IValidationScenario> GetScenarios()
+        public static IReadOnlyList<Caelmor.Systems.IValidationScenario> GetScenarios()
         {
-            return new IValidationScenario[]
+            return new Caelmor.Systems.IValidationScenario[]
             {
                 new ValidationScenarioAdapter(new Scenario1_AttachmentsAreAcceptedOnce()),
                 new ValidationScenarioAdapter(new Scenario2_AttachRejectedWhenAlreadyResident()),

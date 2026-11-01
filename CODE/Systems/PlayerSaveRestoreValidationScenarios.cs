@@ -1,3 +1,4 @@
+using Caelmor.Runtime.Sessions;
 using System;
 using System.Collections.Generic;
 using Caelmor.Runtime.Persistence;
@@ -14,9 +15,9 @@ namespace Caelmor.Validation.PersistenceRestore
     /// </summary>
     public static class PlayerSaveRestoreValidationScenarios
     {
-        public static IReadOnlyList<IValidationScenario> GetScenarios()
+        public static IReadOnlyList<Caelmor.Systems.IValidationScenario> GetScenarios()
         {
-            return new IValidationScenario[]
+            return new Caelmor.Systems.IValidationScenario[]
             {
                 new ValidationScenarioAdapter(new Scenario1_RestoreGatesActivationResidencyAndSimulation()),
                 new ValidationScenarioAdapter(new Scenario2_RestoreRejectedMidTick()),

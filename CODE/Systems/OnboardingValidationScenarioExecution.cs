@@ -1,3 +1,4 @@
+using Caelmor.Runtime.Tick;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -24,8 +25,61 @@ namespace Caelmor.Validation.Onboarding
                 new ValidationScenarioAdapter(new Scenario1_SuccessfulOnboarding()),
                 new ValidationScenarioAdapter(new Scenario2_IdentityBindingFailure()),
                 new ValidationScenarioAdapter(new Scenario3_ZoneAttachmentFailure()),
-                new ValidationScenarioAdapter(new Scenario4_DuplicateInFlightOnboarding())
+                new ValidationScenarioAdapter(new Scenario4_DuplicateInFlightOnboarding()),
+                new ValidationScenarioAdapter(new Scenario5_DuplicateFailurePrecedesSuccessfulCompletion()),
+                new ValidationScenarioAdapter(new Scenario6_ConcurrentHandoffSuccessIsIdempotent())
             };
+        }
+
+        private sealed class Scenario5_DuplicateFailurePrecedesSuccessfulCompletion : IValidationScenario
+        {
+            public string Name => "Scenario 5 — Duplicate Rejection Cannot Poison Successful Onboarding";
+
+            public void Run(IAssert a)
+            {
+                var rig = Rig.Create();
+                using var enteredIdentity = new ManualResetEventSlim(false);
+                using var resumeIdentity = new ManualResetEventSlim(false);
+                rig.Identity.BeforeBind = () =>
+                {
+                    enteredIdentity.Set();
+                    if (!resumeIdentity.Wait(TimeSpan.FromSeconds(5)))
+                        throw new TimeoutException("Validation did not release the winning onboarding attempt.");
+                };
+                var winner = Task.Run(() => rig.Onboarding.HandleClientJoin(rig.Session));
+                try
+                {
+                    if (!enteredIdentity.Wait(TimeSpan.FromSeconds(5)))
+                        throw new TimeoutException("Winning onboarding attempt did not reach identity binding.");
+                    // The first attempt owns the guard and cannot finish until after
+                    // this duplicate has delivered its failure notification.
+                    rig.Onboarding.HandleClientJoin(rig.Session);
+                    a.Equal(1, rig.Events.FailureCount, "The duplicate must be rejected while the winner is blocked.");
+                    a.Equal(0, rig.Events.SuccessCount, "The winner must still be blocked before completion.");
+                    a.False(rig.Handoff.IsClientAuthorized(rig.Session.Id), "A rejected duplicate must not authorize control.");
+                }
+                finally { resumeIdentity.Set(); }
+                winner.GetAwaiter().GetResult();
+                a.Equal(1, rig.Events.SuccessCount, "The winning attempt must complete exactly once.");
+                a.Equal(1, rig.Lifecycle.CreateCalls, "Only the winner may create a runtime player.");
+                a.Equal(1, rig.ClientChannel.AuthorizeCalls, "The winner must authorize control exactly once after the duplicate rejection.");
+                a.True(rig.Handoff.IsClientAuthorized(rig.Session.Id), "Successful completion must determine the final authorization state.");
+            }
+        }
+
+        private sealed class Scenario6_ConcurrentHandoffSuccessIsIdempotent : IValidationScenario
+        {
+            public string Name => "Scenario 6 — Concurrent Handoff Success Authorizes Exactly Once";
+
+            public void Run(IAssert a)
+            {
+                var rig = Rig.Create();
+                rig.Handoff.NotifyOnboardingFailure(rig.Session);
+                Parallel.For(0, 64, _ => rig.Handoff.NotifyOnboardingSuccess(rig.Session));
+                rig.Handoff.NotifyOnboardingFailure(rig.Session);
+                a.Equal(1, rig.ClientChannel.AuthorizeCalls, "Concurrent successful completion notifications must emit exactly one authorization signal.");
+                a.True(rig.Handoff.IsClientAuthorized(rig.Session.Id), "A subsequent duplicate failure must not revoke successful completion.");
+            }
         }
 
         private sealed class Scenario1_SuccessfulOnboarding : IValidationScenario
@@ -228,6 +282,7 @@ namespace Caelmor.Validation.Onboarding
 
         private sealed class FakeIdentitySystem : IPlayerIdentitySystem
         {
+            public Action? BeforeBind;
             public bool ForceBindFailure;
             public int BindOrCreateCalls;
             public int UnbindCalls;
@@ -247,6 +302,7 @@ namespace Caelmor.Validation.Onboarding
 
             public PlayerId? BindOrCreateIdentity(IServerSession session)
             {
+                BeforeBind?.Invoke();
                 BindOrCreateCalls++;
 
                 if (ForceBindFailure)
@@ -365,7 +421,7 @@ namespace Caelmor.Validation.Onboarding
             }
         }
 
-        private sealed class FakeTickEligibilityRegistry : ITickEligibilityRegistry
+        private sealed class FakeTickEligibilityRegistry : Caelmor.Runtime.Onboarding.ITickEligibilityRegistry
         {
             private readonly FakeZoneManager _zones;
             private readonly Dictionary<int, bool> _eligible = new Dictionary<int, bool>();
@@ -376,7 +432,12 @@ namespace Caelmor.Validation.Onboarding
                 _zones = zones;
             }
 
-            public bool TrySetTickEligible(EntityHandle entity, bool isEligible)
+            public bool TrySetTickEligible(PlayerHandle player, bool isEligible)
+            {
+                return TrySetTickEligible(new EntityHandle(player.Value), isEligible);
+            }
+
+            private bool TrySetTickEligible(EntityHandle entity, bool isEligible)
             {
                 if (entity.Value <= 0) return false;
 
@@ -394,7 +455,7 @@ namespace Caelmor.Validation.Onboarding
 
             public void AuthorizeClientControl(SessionId sessionId)
             {
-                AuthorizeCalls++;
+                Interlocked.Increment(ref AuthorizeCalls);
             }
         }
 

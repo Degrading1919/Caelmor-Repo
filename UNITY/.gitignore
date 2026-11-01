@@ -1,0 +1,16 @@
+/Library/
+/Temp/
+/Obj/
+**/obj/
+**/bin/
+/Logs/
+/UserSettings/
+/Builds/
+/.vs/
+/*.csproj
+/*.sln
+/*.slnx
+/Assets/_Project/Core/Plugins/*.dll
+/Assets/_Project/Core/Plugins/*.pdb
+/Assets/_Project/Core/Plugins/*.dll.meta
+/Assets/_Project/Core/Plugins/*.pdb.meta

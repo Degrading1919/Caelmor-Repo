@@ -1,3 +1,4 @@
+using Caelmor.Combat;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -750,7 +751,8 @@ namespace Caelmor.Runtime.WorldSimulation
 
             for (int i = 0; i < _effects.Count; i++)
             {
-                Apply(in _effects[i]);
+                var effect = _effects[i];
+                Apply(in effect);
             }
 
             _effects.Clear();

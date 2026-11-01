@@ -97,7 +97,15 @@ namespace Caelmor.Runtime.Host
                 settings.CombatReplicationValidationSink ?? new NullCombatReplicationValidationSink(),
                 settings.CombatDeliveryGuardInitialCapacity,
                 settings.CombatDeliveryGuardMaxCount);
-            var combatReplicationHook = new CombatReplicationTickHook(combatEventBuffer, combatReplication);
+            // A host may run transport/world systems before combat is configured.
+            // Explicit partial combat configuration must still trigger the wiring guards.
+            bool combatConfigured = settings.CombatEventBuffer != null
+                || settings.CombatReplicationSystem != null || settings.CombatOutcomeApplicationSystem != null
+                || settings.CombatTickSource != null || settings.CombatStateWriter != null
+                || settings.CombatCheckpointRequester != null || settings.CombatClientRegistry != null
+                || settings.CombatVisibilityPolicy != null || settings.CombatNetworkSender != null
+                || settings.CombatReplicationValidationSink != null;
+            var combatReplicationHook = combatConfigured ? new CombatReplicationTickHook(combatEventBuffer, combatReplication) : null;
             var combatOutcomeApplication = settings.CombatOutcomeApplicationSystem;
 
             if (combatOutcomeApplication == null
@@ -166,7 +174,7 @@ namespace Caelmor.Runtime.Host
                 persistenceHook = new PersistenceCompletionPhaseHook(persistenceCompletions, completionApplier, pipelineHealth);
             }
 
-            int baseHooks = 6;
+            int baseHooks = 5 + (combatReplicationHook != null ? 1 : 0);
             int hookCount = settings.PhaseHooks.Length + baseHooks + (persistenceHook != null ? 1 : 0);
             var combinedHooks = new PhaseHookRegistration[hookCount];
             int index = 0;
@@ -175,7 +183,8 @@ namespace Caelmor.Runtime.Host
             combinedHooks[index++] = new PhaseHookRegistration(inboundPump, settings.CommandFreezeHookOrderKey);
             combinedHooks[index++] = new PhaseHookRegistration(commandConsumeHook, settings.CommandConsumeHookOrderKey);
             combinedHooks[index++] = new PhaseHookRegistration(handshakeHook, settings.HandshakeProcessingHookOrderKey);
-            combinedHooks[index++] = new PhaseHookRegistration(combatReplicationHook, settings.CombatReplicationHookOrderKey);
+            if (combatReplicationHook != null)
+                combinedHooks[index++] = new PhaseHookRegistration(combatReplicationHook, settings.CombatReplicationHookOrderKey);
 
             for (int i = 0; i < settings.PhaseHooks.Length; i++)
                 combinedHooks[index++] = settings.PhaseHooks[i];

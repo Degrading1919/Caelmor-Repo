@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Caelmor.Validation
 {
@@ -20,6 +21,26 @@ namespace Caelmor.Validation
     {
         void True(bool condition, string message);
         void False(bool condition, string message);
-        void Equal<T>(T expected, T actual, string message) where T : IEquatable<T>;
+        void Equal<T>(T expected, T actual, string message);
+    }
+
+    public static class AssertExtensions
+    {
+        public static void SequenceEqual<T>(this IAssert assert, IEnumerable<T> expected, IEnumerable<T> actual, string message)
+        {
+            using (var left = expected.GetEnumerator())
+            using (var right = actual.GetEnumerator())
+            {
+                while (left.MoveNext())
+                {
+                    if (!right.MoveNext() || !EqualityComparer<T>.Default.Equals(left.Current, right.Current))
+                    {
+                        assert.True(false, message);
+                        return;
+                    }
+                }
+                assert.False(right.MoveNext(), message);
+            }
+        }
     }
 }

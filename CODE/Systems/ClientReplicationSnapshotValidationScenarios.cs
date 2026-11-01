@@ -27,7 +27,7 @@ namespace Caelmor.Validation.Replication
     /// </summary>
     public static class ClientReplicationSnapshotValidationScenarios
     {
-        public static IReadOnlyList<IValidationScenario> GetScenarios()
+        public static IReadOnlyList<Caelmor.Validation.IValidationScenario> GetScenarios()
         {
             return new IValidationScenario[]
             {
@@ -38,8 +38,64 @@ namespace Caelmor.Validation.Replication
                 new Scenario5_OutboundSendPumpDrainsSnapshots(),
                 new Scenario6_LifecycleMailboxAppliesDisconnectOnTick(),
                 new Scenario7_RuntimePipelineFailsFastOnMissingHook(),
-                new Scenario8_FingerprintChangesWithStateMutation()
+                new Scenario8_FingerprintChangesWithStateMutation(),
+                new Scenario9_DeferredDeliveryKeepsCommittedState(),
+                new Scenario10_OptionalCombatCompositionKeepsGuards()
             };
+        }
+
+        private sealed class Scenario10_OptionalCombatCompositionKeepsGuards : IValidationScenario
+        {
+            public string Name => "Scenario 10 — Optional Combat Composition Keeps Configured Wiring Guards";
+
+            public void Run(IAssert assert)
+            {
+                var eligibility = new SnapshotEligibilityRegistry();
+                var sessions = new PlayerSessionSystem(new StubAuthority(), new StubSaveBinding(),
+                    new StubRestoreQuery(), eligibility, new AllowMutationGate(), new StubSessionEvents());
+                var settings = new RuntimeCompositionSettings(sessions, new StubHandoffService(), eligibility,
+                    new RecordingStateReader(), new RecordingSender());
+                using (RuntimeCompositionRoot.CreateHost(settings)) { }
+#if DEBUG
+                settings.CombatEventBuffer = new Caelmor.Combat.CombatEventBuffer(8);
+                bool rejected = false;
+                try { using var invalidHost = RuntimeCompositionRoot.CreateHost(settings); }
+                catch (InvalidOperationException) { rejected = true; }
+                assert.True(rejected, "Explicit combat wiring without an outcome sink must still fail in DEBUG.");
+#endif
+            }
+        }
+
+        private sealed class Scenario9_DeferredDeliveryKeepsCommittedState : IValidationScenario
+        {
+            public string Name => "Scenario 9 — Deferred Delivery Keeps Its Stamped Committed State";
+
+            public void Run(IAssert assert)
+            {
+                var rig = Rig.Create();
+                using var diagnostics = new TickDiagnostics();
+                var system = new ClientReplicationSnapshotSystem(rig.Sessions, rig.SessionEligibility,
+                    rig.Gate, rig.StateReader, rig.Queue, new TimeSlicedWorkScheduler(diagnostics),
+                    new SnapshotSerializationBudget(TimeSpan.FromSeconds(1), 1, 1));
+                var entities = new[] { new EntityHandle(1), new EntityHandle(2) };
+                foreach (var entity in entities) rig.StateReader.SetState(entity, "tick_one");
+                system.OnPreTick(rig.CreateTickContext(1), entities);
+                system.OnPostTick(rig.CreateTickContext(1), entities);
+                assert.Equal(0, rig.Queue.Enqueued.Count, "Two entities must span two slices under this budget.");
+
+                foreach (var entity in entities) rig.StateReader.SetState(entity, "tick_two");
+                rig.Gate.AllowedPredicate = (_, __) => false;
+                system.OnPreTick(rig.CreateTickContext(2), entities);
+                system.OnPostTick(rig.CreateTickContext(2), entities);
+                assert.Equal(1, rig.Queue.Enqueued.Count, "Deferred delivery must finish on the following tick.");
+                var snapshot = rig.Queue.Enqueued[0].snapshot;
+                assert.Equal(1L, snapshot.AuthoritativeTick, "Snapshot must retain its capture tick.");
+                assert.Equal(2, snapshot.Entities.Count, "Eligibility must be frozen with the capture tick.");
+                foreach (var entry in snapshot.Entities)
+                    assert.Equal(ComputeDeterministicFingerprint("tick_one"), entry.State.Fingerprint, "All values must come from the same committed tick.");
+                snapshot.Dispose();
+                system.OnSessionDisconnected(rig.Sessions.Ordered[0]);
+            }
         }
 
         private sealed class Scenario1_SnapshotsReflectCommittedState : IValidationScenario
@@ -481,8 +537,7 @@ namespace Caelmor.Validation.Replication
                     new SessionId(Guid.Parse("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb")));
 
                 var sessionEligibility = new SnapshotEligibilityRegistry();
-                foreach (var s in sessions.Ordered)
-                    sessionEligibility.TrySetSnapshotEligible(s, isEligible: true);
+                sessionEligibility.TrySetSnapshotEligible(sessions.Ordered[0], isEligible: true);
 
                 var gate = new ConfigurableGate();
                 var stateReader = new RecordingStateReader();
@@ -493,7 +548,8 @@ namespace Caelmor.Validation.Replication
                     sessionEligibility,
                     gate,
                     stateReader,
-                    queue);
+                    queue, new Caelmor.Runtime.Threading.TimeSlicedWorkScheduler(new Caelmor.Runtime.Diagnostics.TickDiagnostics()),
+                    new SnapshotSerializationBudget(TimeSpan.FromSeconds(1), 4, 32));
 
                 return new Rig(system, queue, sessions, sessionEligibility, gate, stateReader);
             }

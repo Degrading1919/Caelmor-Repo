@@ -737,11 +737,6 @@ namespace Caelmor.Combat
     // Dependencies / Schemas (Stage 11.2-aligned minimal shapes)
     // --------------------------------------------------------------------
 
-    public interface ITickSource
-    {
-        int CurrentTick { get; }
-    }
-
     public interface ICombatStateWriter
     {
         CombatEntityState GetState(EntityHandle entity);
@@ -827,78 +822,6 @@ namespace Caelmor.Combat
         Rejected,
         Resolved,
         Canceled
-    }
-
-    public enum CombatIntentType
-    {
-        CombatAttackIntent,
-        CombatDefendIntent,
-        CombatAbilityIntent,
-        CombatMovementIntent,
-        CombatInteractIntent,
-        CombatCancelIntent
-    }
-
-    public enum CombatState
-    {
-        CombatIdle,
-        CombatEngaged,
-        CombatActing,
-        CombatDefending,
-        CombatRestricted,
-        CombatIncapacitated
-    }
-
-    public sealed class CombatEntityState
-    {
-        public EntityHandle Entity { get; }
-        public CombatState State { get; }
-        public string CombatContextId { get; }
-        public string? CommittedIntentId { get; }
-        public int? StateChangeTick { get; }
-
-        public CombatEntityState(
-            EntityHandle entity,
-            CombatState state,
-            string combatContextId,
-            string? committedIntentId = null,
-            int? stateChangeTick = null)
-        {
-            Entity = entity;
-            State = state;
-            CombatContextId = combatContextId;
-            CommittedIntentId = committedIntentId;
-            StateChangeTick = stateChangeTick;
-        }
-    }
-
-    public enum CombatStateChangeKind
-    {
-        ToIdle,
-        ToEngaged,
-        ToActing,
-        ToDefending,
-        ToRestricted,
-        ToIncapacitated
-    }
-
-    public sealed class CombatStateChange
-    {
-        public EntityHandle Entity { get; }
-        public CombatStateChangeKind Kind { get; }
-        public string? CombatContextId { get; }
-        public string? CommittedIntentId { get; }
-
-        private CombatStateChange(EntityHandle entity, CombatStateChangeKind kind, string? combatContextId, string? committedIntentId)
-        {
-            Entity = entity;
-            Kind = kind;
-            CombatContextId = combatContextId;
-            CommittedIntentId = committedIntentId;
-        }
-
-        public static CombatStateChange ToEngaged(EntityHandle entity, string combatContextId)
-            => new CombatStateChange(entity, CombatStateChangeKind.ToEngaged, combatContextId, committedIntentId: null);
     }
 
     public sealed class CombatWorldValidationSnapshot

@@ -14,9 +14,9 @@ namespace Caelmor.Validation.Quests
     /// </summary>
     public static class QuestRuntimeValidationScenarios
     {
-        public static IReadOnlyList<IValidationScenario> GetScenarios()
+        public static IReadOnlyList<Caelmor.Systems.IValidationScenario> GetScenarios()
         {
-            return new IValidationScenario[]
+            return new Caelmor.Systems.IValidationScenario[]
             {
                 new ValidationScenarioAdapter(new Scenario1_DeterministicProgression()),
                 new ValidationScenarioAdapter(new Scenario2_InvalidTransitionsRejected()),

@@ -141,7 +141,7 @@ namespace Caelmor.Runtime.WorldState
 
         private void RebuildSnapshot()
         {
-            _ordered.Sort(EntityHandleComparer.Instance);
+            _ordered.Sort((left, right) => left.Value.CompareTo(right.Value));
             if (_snapshot.Length != _ordered.Count)
                 _snapshot = new EntityHandle[_ordered.Count];
 

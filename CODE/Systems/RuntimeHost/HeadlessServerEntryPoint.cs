@@ -1,3 +1,4 @@
+using Caelmor.Runtime.Tick;
 using System;
 using System.Threading;
 using Caelmor.Runtime;
@@ -121,7 +122,7 @@ namespace Caelmor.Runtime.Host
             var saveBinding = new DeterministicSaveBindingQuery();
             var restore = new AlwaysRestoredQuery();
             var mutationGate = new AlwaysAllowSessionMutationGate();
-            var sessionEvents = persistenceWrites != null
+            ISessionEvents sessionEvents = persistenceWrites != null
                 ? new PersistenceSessionEvents(persistenceWrites)
                 : new NoOpSessionEvents();
 

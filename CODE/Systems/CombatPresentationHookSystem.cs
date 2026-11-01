@@ -132,7 +132,7 @@ namespace Caelmor.Combat.Client
                     authoritativeTick: payload.AuthoritativeTick,
                     combatContextId: payload.CombatContextId,
                     subjectEntity: ir.ActorEntity,
-                    trigger: AnimationTrigger.FromIntentResult(ir.IntentType, ir.ResultStatus)));
+                    trigger: AnimationTriggerExtensions.FromIntentResult(ir.IntentType, ir.ResultStatus)));
             });
 
             // 3) Audio cue hook (non-blocking)
@@ -143,7 +143,7 @@ namespace Caelmor.Combat.Client
                     authoritativeTick: payload.AuthoritativeTick,
                     combatContextId: payload.CombatContextId,
                     subjectEntity: ir.ActorEntity,
-                    cue: AudioCue.FromIntentResult(ir.IntentType, ir.ResultStatus)));
+                    cue: AudioCueExtensions.FromIntentResult(ir.IntentType, ir.ResultStatus)));
             });
         }
 
@@ -518,132 +518,5 @@ namespace Caelmor.Combat.Client
         }
     }
 
-    // ====================================================================
-    // Replicated event payload shapes (from Stage 12.5)
-    // ====================================================================
-
-    public sealed class CombatEventPayload
-    {
-        public ulong EventId { get; }
-        public int AuthoritativeTick { get; }
-        public string CombatContextId { get; }
-        public CombatEventType EventType { get; }
-
-        public EntityHandle SubjectEntity { get; }
-
-        public IntentResult? IntentResult { get; }
-        public DamageOutcome? DamageOutcome { get; }
-        public MitigationOutcome? MitigationOutcome { get; }
-        public CombatEntityState? StateSnapshot { get; }
-
-        public CombatEventPayload(
-            ulong eventId,
-            int authoritativeTick,
-            string combatContextId,
-            CombatEventType eventType,
-            EntityHandle subjectEntity,
-            IntentResult? intentResult,
-            DamageOutcome? damageOutcome,
-            MitigationOutcome? mitigationOutcome,
-            CombatEntityState? stateSnapshot)
-        {
-            EventId = eventId;
-            AuthoritativeTick = authoritativeTick;
-            CombatContextId = combatContextId;
-            EventType = eventType;
-            SubjectEntity = subjectEntity;
-            IntentResult = intentResult;
-            DamageOutcome = damageOutcome;
-            MitigationOutcome = mitigationOutcome;
-            StateSnapshot = stateSnapshot;
-        }
-    }
-
-    public enum CombatEventType
-    {
-        IntentResult,
-        DamageOutcome,
-        MitigationOutcome,
-        StateChange
-    }
-
-    public sealed class IntentResult
-    {
-        public string IntentId { get; }
-        public CombatIntentType IntentType { get; }
-        public EntityHandle ActorEntity { get; }
-        public IntentResultStatus ResultStatus { get; }
-
-        public IntentResult(string intentId, CombatIntentType intentType, EntityHandle actorEntity, IntentResultStatus resultStatus)
-        {
-            IntentId = intentId;
-            IntentType = intentType;
-            ActorEntity = actorEntity;
-            ResultStatus = resultStatus;
-        }
-    }
-
-    public enum IntentResultStatus
-    {
-        Accepted,
-        Rejected,
-        Resolved,
-        Canceled
-    }
-
-    public enum CombatIntentType
-    {
-        CombatAttackIntent,
-        CombatDefendIntent,
-        CombatAbilityIntent,
-        CombatMovementIntent,
-        CombatInteractIntent,
-        CombatCancelIntent
-    }
-
-    public sealed class DamageOutcome
-    {
-        public EntityHandle SourceEntity { get; }
-        public EntityHandle TargetEntity { get; }
-
-        public DamageOutcome(EntityHandle sourceEntity, EntityHandle targetEntity)
-        {
-            SourceEntity = sourceEntity;
-            TargetEntity = targetEntity;
-        }
-    }
-
-    public sealed class MitigationOutcome
-    {
-        public EntityHandle SourceEntity { get; }
-        public EntityHandle TargetEntity { get; }
-
-        public MitigationOutcome(EntityHandle sourceEntity, EntityHandle targetEntity)
-        {
-            SourceEntity = sourceEntity;
-            TargetEntity = targetEntity;
-        }
-    }
-
-    public sealed class CombatEntityState
-    {
-        public EntityHandle Entity { get; }
-        public CombatState State { get; }
-
-        public CombatEntityState(EntityHandle entity, CombatState state)
-        {
-            Entity = entity;
-            State = state;
-        }
-    }
-
-    public enum CombatState
-    {
-        CombatIdle,
-        CombatEngaged,
-        CombatActing,
-        CombatDefending,
-        CombatRestricted,
-        CombatIncapacitated
-    }
+    // Replicated events use the canonical Caelmor.Combat contracts.
 }

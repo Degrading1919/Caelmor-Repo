@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UnityEditorRoot Condition="'$(UnityEditorRoot)' == ''">C:/Program Files/Unity/Hub/Editor/6000.5.5f1/Editor</UnityEditorRoot>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Caelmor.Runtime.csproj" />
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(UnityEditorRoot)/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+</Project>

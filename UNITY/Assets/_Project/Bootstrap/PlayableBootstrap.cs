@@ -1,0 +1,142 @@
+using System;
+using System.Collections;
+using Caelmor.Runtime.WorldSimulation;
+using UnityEngine;
+
+namespace Caelmor.Unity.Playable
+{
+    public sealed class PlayableBootstrap : MonoBehaviour
+    {
+        public Transform playerView;
+        public Camera playerCamera;
+        public InteractionAnchor interactionAnchor;
+        public Transform spawn;
+        public int solidLayerMask = 1 << 8;
+        public PlayableHost Host { get; private set; }
+        public bool HelpOpen { get; private set; }
+        public string StartupFailure { get; private set; }
+        public event Action<PlayableHost> HostInitialized;
+        double accumulator;
+        double lastSnapshotTime;
+        PlayableSnapshot previous;
+        float yaw, pitch = 32f, zoom = 7.5f;
+        bool smoke;
+
+        void Start()
+        {
+            try
+            {
+                Application.targetFrameRate = 120;
+                QualitySettings.vSyncCount = 1;
+                Physics.SyncTransforms();
+                Host = new PlayableHost(spawn.position, interactionAnchor, solidLayerMask);
+                previous = Host.Snapshot;
+                lastSnapshotTime = Time.realtimeSinceStartupAsDouble;
+                Host.SnapshotCommitted += OnSnapshot;
+                playerView.position = Host.Snapshot.Position;
+                HostInitialized?.Invoke(Host);
+                smoke = Array.IndexOf(Environment.GetCommandLineArgs(), "--caelmor-smoke") >= 0;
+                if (smoke) StartCoroutine(RunSmoke());
+            }
+            catch (Exception error)
+            {
+                StartupFailure = error.ToString();
+                Debug.LogException(error);
+                if (Array.IndexOf(Environment.GetCommandLineArgs(), "--caelmor-smoke") >= 0) Application.Quit(1);
+            }
+        }
+        void OnSnapshot(PlayableSnapshot snapshot)
+        {
+            lastSnapshotTime = Time.realtimeSinceStartupAsDouble;
+        }
+        void Update()
+        {
+            if (Host == null) return;
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                HelpOpen = !HelpOpen;
+                Host.ClearPendingInput(); accumulator = 0;
+            }
+            if (!smoke && !HelpOpen && Application.isFocused && Input.GetKeyDown(KeyCode.E)) Host.SubmitInteraction(interactionAnchor.fixtureId);
+            accumulator += Math.Min(Time.unscaledDeltaTime, .3f);
+            int catchUp = 0;
+            while (accumulator >= WorldTickSeconds && catchUp++ < 3)
+            {
+                Vector2 direction = Vector2.zero;
+                bool sprint = false;
+                if (!smoke && !HelpOpen && Application.isFocused)
+                {
+                    float x = (Input.GetKey(KeyCode.D) ? 1 : 0) - (Input.GetKey(KeyCode.A) ? 1 : 0);
+                    float z = (Input.GetKey(KeyCode.W) ? 1 : 0) - (Input.GetKey(KeyCode.S) ? 1 : 0);
+                    var local = new Vector3(x, 0, z);
+                    var world = Quaternion.Euler(0, yaw, 0) * local;
+                    direction = new Vector2(world.x, world.z);
+                    sprint = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+                }
+                Host.SubmitMove(direction, sprint);
+                previous = Host.Snapshot;
+                Host.Step();
+                accumulator -= WorldTickSeconds;
+            }
+            // Drop excessive accumulated wall time instead of speeding up the simulation after a stall.
+            if (catchUp >= 3 && accumulator >= WorldTickSeconds) accumulator = 0;
+        }
+        static readonly double WorldTickSeconds = WorldSimulationCore.TickInterval.TotalSeconds;
+        void OnApplicationFocus(bool focused)
+        { if (Host != null) { Host.ClearPendingInput(); accumulator = 0; } }
+        void OnApplicationPause(bool paused)
+        { if (Host != null) { Host.ClearPendingInput(); accumulator = 0; } }
+        void LateUpdate()
+        {
+            if (Host == null) return;
+            var state = Host.Snapshot;
+            float alpha = Mathf.Clamp01((float)((Time.realtimeSinceStartupAsDouble - lastSnapshotTime) / WorldTickSeconds));
+            playerView.position = Vector3.Lerp(previous.Position, state.Position, alpha);
+            if (state.Facing.sqrMagnitude > .001f)
+                playerView.rotation = Quaternion.Slerp(playerView.rotation, Quaternion.LookRotation(state.Facing), Time.unscaledDeltaTime * 14f);
+            if (!HelpOpen && Input.GetMouseButton(1))
+            {
+                yaw += Input.GetAxis("Mouse X") * 3f;
+                pitch = Mathf.Clamp(pitch - Input.GetAxis("Mouse Y") * 2.5f, 15, 70);
+            }
+            zoom = Mathf.Clamp(zoom - Input.mouseScrollDelta.y * .7f, 3f, 12f);
+            var focus = playerView.position + Vector3.up * 1.25f;
+            var rotation = Quaternion.Euler(pitch, yaw, 0);
+            var offset = rotation * Vector3.back;
+            float distance = zoom;
+            if (Physics.SphereCast(focus, .2f, offset, out var hit, zoom, solidLayerMask, QueryTriggerInteraction.Ignore))
+                distance = Mathf.Max(.3f, hit.distance - .15f);
+            playerCamera.transform.SetPositionAndRotation(focus + offset * distance, rotation);
+            if (interactionAnchor.markerRenderer != null)
+                interactionAnchor.markerRenderer.material.color = state.MarkerActive ? new Color(.27f, .85f, .68f) : new Color(.85f, .65f, .28f);
+        }
+        IEnumerator RunSmoke()
+        {
+            yield return null;
+            try
+            {
+                PlayableValidation.Run(interactionAnchor, solidLayerMask);
+            }
+            catch (Exception error)
+            {
+                Debug.LogError("CAELMOR_SMOKE_FAILED: " + error);
+                Application.Quit(1);
+                yield break;
+            }
+            long before = Host.Snapshot.Tick;
+            yield return new WaitForSecondsRealtime(1.15f);
+            long ticks = Host.Snapshot.Tick - before;
+            if (ticks < 10 || ticks > 13)
+            {
+                Debug.LogError("CAELMOR_SMOKE_FAILED: live 10Hz scheduler advanced " + ticks + " ticks in 1.15 seconds");
+                Application.Quit(1); yield break;
+            }
+            Debug.Log("CAELMOR_SMOKE_PASSED: deterministic gameplay assertions and live 10Hz scheduler (" + ticks + " ticks)");
+            Application.Quit(0);
+        }
+        void OnDestroy()
+        {
+            if (Host != null) { Host.SnapshotCommitted -= OnSnapshot; Host.Dispose(); Host = null; }
+        }
+    }
+}

@@ -96,7 +96,7 @@ namespace Caelmor.Systems
                 }
             }
 
-            public void Equal<T>(T expected, T actual, string message) where T : IEquatable<T>
+            public void Equal<T>(T expected, T actual, string message)
             {
                 if (!Equals(expected, actual))
                 {

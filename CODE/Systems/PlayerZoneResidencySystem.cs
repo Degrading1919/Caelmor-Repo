@@ -1,3 +1,4 @@
+using PlayerHandle = Caelmor.Runtime.Players.PlayerHandle;
 using System;
 using System.Collections.Generic;
 using Caelmor.Runtime.Players;

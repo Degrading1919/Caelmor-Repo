@@ -1,3 +1,4 @@
+using Caelmor.Runtime.Onboarding;
 using System;
 using System.Collections.Concurrent;
 
@@ -125,16 +126,18 @@ namespace Caelmor.Runtime.Onboarding
             }
             finally
             {
-                // Always cleanup in-flight guard.
-                _inFlight.TryRemove(session.Id, out _);
-
-                // Ensure rollback on any failure path.
+                // Keep successful sessions guarded until disconnect; retries after completion
+                // must not create a second runtime player. Roll back before accepting a retry.
                 if (!txn.Succeeded)
                 {
                     Rollback(txn);
+                    _inFlight.TryRemove(session.Id, out _);
                 }
             }
         }
+
+        /// <summary>Release the duplicate guard after the session owner completes disconnect cleanup.</summary>
+        public void OnSessionDisconnected(SessionId sessionId) => _inFlight.TryRemove(sessionId, out _);
 
         private ZoneId? DetermineInitialZoneId(OnboardingTransaction txn)
         {

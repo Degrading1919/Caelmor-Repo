@@ -1,3 +1,5 @@
+using Caelmor.Runtime.Sessions;
+using Caelmor.Runtime.Replication;
 using System;
 using System.Buffers;
 using System.Collections;
@@ -383,6 +385,14 @@ namespace Caelmor.Runtime.Replication
                 _onAllocated = onAllocated;
                 _onDisposed = onDisposed ?? Noop;
                 _cursor = 0;
+                // Freeze the committed state at the stamped tick. Deferred slices may
+                // serialize/deliver this buffer but must never read later live state.
+                for (int i = 0; i < _eligibleCount; i++)
+                {
+                    var entity = _eligible[i];
+                    if (_eligibilityGate.IsEntityReplicationEligible(_sessionId, entity))
+                        _captureBuffer[_captureCount++] = new ReplicatedEntitySnapshot(entity, _stateReader.ReadCommittedState(entity));
+                }
                 _inFlight = true;
                 return true;
             }
@@ -397,13 +407,7 @@ namespace Caelmor.Runtime.Replication
                     if (stopwatch.Elapsed >= budget)
                         break;
 
-                    var entity = _eligible[_cursor++];
-                    if (_eligibilityGate.IsEntityReplicationEligible(_sessionId, entity))
-                    {
-                        var state = _stateReader.ReadCommittedState(entity);
-                        _captureBuffer[_captureCount++] = new ReplicatedEntitySnapshot(entity, state);
-                    }
-
+                    _cursor++;
                     processed++;
                 }
 
@@ -636,7 +640,7 @@ namespace Caelmor.Runtime.Replication
             _buffer = buffer ?? throw new ArgumentNullException(nameof(buffer));
             _count = count;
             _pool = pool ?? ArrayPool<ReplicatedEntitySnapshot>.Shared;
-            _onDispose = onDispose ?? Noop;
+            _onDispose = onDispose ?? (() => { });
         }
 
         public ReadOnlySpan<ReplicatedEntitySnapshot> EntitiesSpan => new ReadOnlySpan<ReplicatedEntitySnapshot>(_buffer, 0, _count);

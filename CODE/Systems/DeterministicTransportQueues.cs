@@ -1,3 +1,4 @@
+using Caelmor.Runtime.Tick;
 using System;
 using System.Buffers;
 using System.Collections;
@@ -588,7 +589,7 @@ namespace Caelmor.Runtime.Transport
             return _ingress.TryEnqueue(command);
         }
 
-        public void RouteSnapshot(Caelmor.ClientReplication.ClientReplicationSnapshot snapshot)
+        public void RouteSnapshot(Caelmor.Runtime.Replication.ClientReplicationSnapshot snapshot)
         {
             _snapshotQueue.Enqueue(snapshot.SessionId, snapshot);
         }
@@ -721,7 +722,7 @@ namespace Caelmor.Runtime.Transport
             _prewarmCompleted++;
         }
 
-        public void Enqueue(SessionId sessionId, Caelmor.ClientReplication.ClientReplicationSnapshot snapshot)
+        public void Enqueue(SessionId sessionId, Caelmor.Runtime.Replication.ClientReplicationSnapshot snapshot)
         {
             if (!_queues.TryGetValue(sessionId, out var queue))
             {
@@ -1429,7 +1430,7 @@ namespace Caelmor.Runtime.Transport
         private readonly List<EntityHandle> _removed = new List<EntityHandle>(64);
         private readonly HashSet<EntityHandle> _presentEntities = new HashSet<EntityHandle>();
 
-        public SerializedSnapshot Serialize(Caelmor.ClientReplication.ClientReplicationSnapshot snapshot, Dictionary<EntityHandle, ulong> baseline)
+        public SerializedSnapshot Serialize(Caelmor.Runtime.Replication.ClientReplicationSnapshot snapshot, Dictionary<EntityHandle, ulong> baseline)
         {
             if (snapshot == null) throw new ArgumentNullException(nameof(snapshot));
             if (baseline == null) throw new ArgumentNullException(nameof(baseline));

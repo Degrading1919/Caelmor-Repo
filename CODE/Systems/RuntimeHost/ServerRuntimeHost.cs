@@ -1,3 +1,4 @@
+using Caelmor.Runtime.Transport;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -126,7 +127,7 @@ namespace Caelmor.Runtime.Host
             _runtimeLoop.Dispose();
             _simulation.Dispose();
             _persistenceWorker?.Dispose();
-            _persistenceWrites?.Dispose();
+            _persistenceWrites?.Clear();
             _persistenceCompletions?.Dispose();
             _timeSliceDiagnostics?.Dispose();
         }

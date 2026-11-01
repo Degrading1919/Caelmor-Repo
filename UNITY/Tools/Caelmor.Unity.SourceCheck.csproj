@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <UnityEditorRoot Condition="'$(UnityEditorRoot)' == ''">C:/Program Files/Unity/Hub/Editor/6000.5.5f1/Editor</UnityEditorRoot>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../Assets/_Project/**/*.cs" />
+    <Reference Include="Caelmor.Runtime">
+      <HintPath>../../CODE/bin/Release/netstandard2.1/Caelmor.Runtime.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="$(UnityEditorRoot)/Data/Managed/UnityEngine/UnityEngine*.dll"><Private>false</Private></Reference>
+    <Reference Include="$(UnityEditorRoot)/Data/Managed/UnityEngine/UnityEditor*.dll"><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>

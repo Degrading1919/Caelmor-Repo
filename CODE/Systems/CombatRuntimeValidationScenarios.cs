@@ -2,6 +2,7 @@ using System;
 using System.Buffers;
 using System.Collections.Generic;
 using Caelmor.Combat;
+using Caelmor.Runtime.Tick;
 using Caelmor.Runtime.WorldSimulation;
 using Caelmor.Systems;
 using Caelmor.Validation;
@@ -15,15 +16,17 @@ namespace Caelmor.Validation.Combat
     /// </summary>
     public static class CombatRuntimeValidationScenarios
     {
-        public static IReadOnlyList<IValidationScenario> GetScenarios()
+        public static IReadOnlyList<Caelmor.Systems.IValidationScenario> GetScenarios()
         {
-            return new IValidationScenario[]
+            return new Caelmor.Systems.IValidationScenario[]
             {
                 new ValidationScenarioAdapter(new Scenario1_CombatExecutesOnlyDuringSimulationExecution()),
                 new ValidationScenarioAdapter(new Scenario2_IneligibleEntitiesCannotParticipate()),
                 new ValidationScenarioAdapter(new Scenario3_DeterministicResolutionUnderIdenticalInputs()),
                 new ValidationScenarioAdapter(new Scenario4_NoMidTickEligibilityOrLifecycleMutation()),
-                new ValidationScenarioAdapter(new Scenario5_BoundedIntentThroughput())
+                new ValidationScenarioAdapter(new Scenario5_BoundedIntentThroughput()),
+                new ValidationScenarioAdapter(new Scenario6_DrainedEventsSurviveUntilNextDrain()),
+                new ValidationScenarioAdapter(new Scenario7_SharedPayloadReachesPresentation())
             };
         }
 
@@ -50,6 +53,7 @@ namespace Caelmor.Validation.Combat
                 };
 
                 var rig = Rig.Create(handles, intentsByTick);
+                rig.Eligibility.SetEligible(handles[0], true);
                 rig.Gate.OnGate = () => timeline.Add("execute");
                 rig.Hook.OnPre = (ctx, eligible) => timeline.Add("pre");
                 rig.Hook.OnPost = (ctx, eligible) => timeline.Add("post");
@@ -213,6 +217,85 @@ namespace Caelmor.Validation.Combat
                     a.True(payloads[i].Contains(expectedId, StringComparison.Ordinal), "Commit ordering must remain stable per tick.");
                 }
             }
+        }
+
+        private sealed class Scenario6_DrainedEventsSurviveUntilNextDrain : Caelmor.Validation.IValidationScenario
+        {
+            public string Name => "Scenario 6 — Drained Combat Events Preserve Payload And Bounds";
+
+            public void Run(IAssert a)
+            {
+                var buffer = new CombatEventBuffer(1);
+                var firstEvent = CreateEvent(10, "first");
+                var nextEvent = CreateEvent(11, "next");
+                a.True(buffer.TryEmit(in firstEvent), "The first event must fit.");
+                a.True(!buffer.TryEmit(in firstEvent), "Capacity overflow must reject deterministically.");
+                a.True(!buffer.TryEmit(in nextEvent), "A different tick must not overwrite pending events.");
+                var first = buffer.Drain(10);
+                a.Equal(1, first.Count, "Drain must retain the pending count.");
+                a.True(ReferenceEquals(firstEvent, first[0]), "Drain must preserve the event reference for its consumer.");
+                a.True(buffer.TryEmit(in nextEvent), "The next tick must use the other buffer.");
+                a.True(ReferenceEquals(firstEvent, first[0]), "New emissions must not overwrite a drained batch.");
+                var next = buffer.Drain(11);
+                a.Equal(11, next.AuthoritativeTick, "The next batch must retain its tick.");
+                a.True(ReferenceEquals(nextEvent, next[0]), "The next batch must preserve its event.");
+                var empty = buffer.Drain(12);
+                a.Equal(0, empty.Count, "An empty drain must not replay preceding events.");
+                a.Equal(12, empty.AuthoritativeTick, "An empty batch must use the requested tick.");
+                a.Equal(1L, buffer.CombatEventsDroppedOverflow, "Overflow must be observable.");
+                a.Equal(1L, buffer.CombatEventsDroppedTickMismatch, "Tick mismatch must be observable.");
+            }
+        }
+
+        private sealed class Scenario7_SharedPayloadReachesPresentation : Caelmor.Validation.IValidationScenario
+        {
+            public string Name => "Scenario 7 — Canonical Replication Payload Reaches Presentation";
+
+            public void Run(IAssert a)
+            {
+                var stream = new PresentationStream();
+                var bus = new PresentationBus();
+                var log = new PresentationLog();
+                using (var presentation = new Caelmor.Combat.Client.CombatPresentationHookSystem(stream, bus, log))
+                {
+                    presentation.Start();
+                    presentation.Start();
+                    var payload = CombatEventPayload.FromCombatEvent(CreateEvent(20, "presentation"));
+                    stream.Emit(payload);
+                    a.Equal(3, bus.Messages.Count, "One intent result must publish UI, animation, and audio hooks once.");
+                    a.Equal(3, log.HookIds.Count, "All presentation hooks must be observable.");
+                    a.True(bus.Messages[0] is Caelmor.Combat.Client.UiIntentResultHook, "Shared payload must reach the UI hook.");
+                    var animation = (Caelmor.Combat.Client.AnimationTriggerHook)bus.Messages[1];
+                    a.Equal(payload.SubjectEntity, animation.SubjectEntity, "Presentation must preserve the authoritative subject.");
+                }
+                stream.Emit(CombatEventPayload.FromCombatEvent(CreateEvent(21, "disposed")));
+                a.Equal(3, bus.Messages.Count, "Disposal must unsubscribe presentation.");
+            }
+        }
+
+        private static CombatEvent CreateEvent(int tick, string intentId)
+        {
+            var entity = new EntityHandle(900);
+            var result = new IntentResult(intentId, CombatIntentType.CombatAttackIntent, entity, IntentResultStatus.Resolved, tick);
+            return CombatEvent.CreateIntentResultEvent(tick, "validation_context", entity, result, result.IntentIdKey);
+        }
+
+        private sealed class PresentationStream : Caelmor.Combat.Client.IReplicatedCombatEventStream
+        {
+            public event Action<CombatEventPayload>? OnEventReceived;
+            public void Emit(CombatEventPayload payload) => OnEventReceived?.Invoke(payload);
+        }
+
+        private sealed class PresentationBus : Caelmor.Combat.Client.IPresentationHookBus
+        {
+            public readonly List<object> Messages = new List<object>();
+            public void Publish<T>(T hookMessage) where T : class => Messages.Add(hookMessage);
+        }
+
+        private sealed class PresentationLog : Caelmor.Combat.Client.IPresentationValidationLogSink
+        {
+            public readonly List<string> HookIds = new List<string>();
+            public void Record(ulong eventId, string hookId) => HookIds.Add(hookId);
         }
 
         private sealed class Rig

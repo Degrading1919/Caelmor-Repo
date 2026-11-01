@@ -1,3 +1,4 @@
+using Caelmor.Runtime.Onboarding;
 using System;
 using System.Collections.Generic;
 using Caelmor.Persistence;
@@ -97,6 +98,7 @@ namespace Caelmor.Systems
         protected Stage9ScenarioBase(ValidationScenarioDeps deps) => Deps = deps;
 
         public abstract string ScenarioId { get; }
+        public abstract ScenarioStepResult OnTick(IScenarioContext ctx, int tick);
 
         public virtual void Reset(IScenarioContext ctx)
         {

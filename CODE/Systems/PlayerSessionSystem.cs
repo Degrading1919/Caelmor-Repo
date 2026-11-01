@@ -1,3 +1,5 @@
+using Caelmor.Runtime.Sessions;
+using Caelmor.Systems;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -73,7 +75,7 @@ namespace Caelmor.Runtime.Sessions
 
             if (clientRequest.HasValue)
             {
-                var guard = ClientIdentifierRejectionGuards.RejectIfClientProvidedIdentifiersPresent(in clientRequest.Value);
+                var guard = ClientIdentifierRejectionGuards.RejectIfClientProvidedIdentifiersPresent(clientRequest.Value);
                 if (!guard.Ok)
                     return SessionActivationResult.Failed(SessionActivationFailureReason.ClientProvidedIdentifiersRejected);
             }

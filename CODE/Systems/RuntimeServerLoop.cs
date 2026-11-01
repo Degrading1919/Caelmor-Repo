@@ -427,7 +427,7 @@ namespace Caelmor.Runtime.Host
         internal SessionHandshakePipeline Handshakes => _handshakes;
     }
 
-    internal sealed class LifecycleMailboxPhaseHook : ITickPhaseHook
+    public sealed class LifecycleMailboxPhaseHook : ITickPhaseHook
     {
         private readonly TickThreadMailbox _mailbox;
         private readonly ILifecycleApplier _applier;

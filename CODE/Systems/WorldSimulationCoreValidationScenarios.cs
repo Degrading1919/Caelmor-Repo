@@ -1,3 +1,4 @@
+using Caelmor.Runtime.Transport;
 using System;
 using System.Collections.Generic;
 using Caelmor.Runtime;
@@ -17,9 +18,9 @@ namespace Caelmor.Validation.WorldSimulation
     /// </summary>
     public static class WorldSimulationCoreValidationScenarios
     {
-        public static IReadOnlyList<IValidationScenario> GetScenarios()
+        public static IReadOnlyList<Caelmor.Systems.IValidationScenario> GetScenarios()
         {
-            return new IValidationScenario[]
+            return new Caelmor.Systems.IValidationScenario[]
             {
                 new ValidationScenarioAdapter(new Scenario1_TickPhasesExecuteInOrder()),
                 new ValidationScenarioAdapter(new Scenario2_EligibilityEvaluatedPreTickOnly()),
