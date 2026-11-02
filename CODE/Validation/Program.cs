@@ -98,6 +98,13 @@ Run("true_line_carry_reload_recovery", () => new GameplayIntegrationFixture().Ca
 Run("bank_walk_keep_bank_and_hazard_restore", () => new GameplayIntegrationFixture().BankWalk("keep"));
 Run("bank_walk_cut_bank_branch", () => new GameplayIntegrationFixture().BankWalk("cut"));
 Run("bank_walk_build_landing_branch", () => new GameplayIntegrationFixture().BankWalk("build"));
+Run("flood_kitchen_crew_crate_route", () => new GameplayIntegrationFixture().FloodKitchen("crew",true));
+Run("flood_kitchen_family_wood_route", () => new GameplayIntegrationFixture().FloodKitchen("family",false));
+Run("flood_kitchen_own_food_accepts_other_cooked_item", () => new GameplayIntegrationFixture().FloodKitchen("own",true));
+Run("flock_warning_closed_ground_and_recovery_authority", () => new GameplayIntegrationFixture().FlockAuthorityAndRecovery());
+Run("kitchen_missing_inputs_and_replenishment", () => new GameplayIntegrationFixture().KitchenFailureRecovery());
+Run("tagged_recipe_overlap_is_one_atomic_transaction", () => new GameplayIntegrationFixture().TaggedInputAtomicity());
+Run("kitchen_generic_production_progress_and_atomic_overflow", () => new GameplayIntegrationFixture().KitchenProductionCounters());
 Console.WriteLine($"Validation: {passed} passed, {failures.Count} failed.");
 Console.WriteLine($"Executed {originalScenarios} registered scenarios in {suites.Count} suites plus focused regressions and the threaded transport proof.");
 Console.WriteLine($"Also executed all {injectedEconomyScenarios} injected Stage 9 economy/save/restore scenarios using cloned in-memory storage. The gameplay integration checks additionally execute real atomic disk checkpoint writes and validated reads.");

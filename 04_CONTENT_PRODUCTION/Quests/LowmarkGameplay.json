@@ -14,55 +14,84 @@
       "id": "weathered_marker_post",
       "name": "Weathered marker post",
       "heal": 0,
-      "quest": true
+      "quest": true,
+      "tags": []
     },
     {
       "id": "dispatch_order",
       "name": "Dispatch order",
       "heal": 0,
-      "quest": true
+      "quest": true,
+      "tags": []
     },
     {
       "id": "marker_stem",
       "name": "Marker stem",
       "heal": 0,
-      "quest": true
+      "quest": true,
+      "tags": []
     },
     {
       "id": "crew_hatchet",
       "name": "Crew hatchet",
       "heal": 0,
-      "quest": false
+      "quest": false,
+      "tags": []
     },
     {
       "id": "common_timber",
       "name": "Coppice timber",
       "heal": 0,
-      "quest": false
+      "quest": false,
+      "tags": []
     },
     {
       "id": "game_meat",
       "name": "Game meat",
       "heal": 0,
-      "quest": false
+      "quest": false,
+      "tags": []
     },
     {
       "id": "dried_game_strips",
       "name": "Dried game strips",
       "heal": 25,
-      "quest": false
+      "quest": false,
+      "tags": [
+        "cooked_food"
+      ]
     },
     {
       "id": "payment",
       "name": "Payment",
       "heal": 0,
-      "quest": false
+      "quest": false,
+      "tags": []
     },
     {
       "id": "tannin_rich_bark",
       "name": "Tannin-rich bark",
       "heal": 0,
-      "quest": false
+      "quest": false,
+      "tags": []
+    },
+    {
+      "id": "raw_fowl",
+      "name": "Raw fowl",
+      "heal": 0,
+      "quest": false,
+      "tags": [
+        "raw_food"
+      ]
+    },
+    {
+      "id": "fowl_stew",
+      "name": "Fowl stew",
+      "heal": 20,
+      "quest": false,
+      "tags": [
+        "cooked_food"
+      ]
     }
   ],
   "skills": [
@@ -722,7 +751,9 @@
       "all": [
         "people_uphill"
       ],
-      "none": [],
+      "none": [
+        "FK_entered"
+      ],
       "nodeInstanceId": 0
     },
     {
@@ -1258,6 +1289,441 @@
         "BW_JAM_SWUNG"
       ],
       "nodeInstanceId": 0
+    },
+    {
+      "id": "fk_shelter",
+      "name": "Brookhollow shelter",
+      "kind": "area",
+      "x": 22,
+      "z": -6,
+      "nodeInstanceId": 0,
+      "all": [
+        "quest_done"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_nan",
+      "name": "Nan Ferrin",
+      "kind": "npc",
+      "x": 22,
+      "z": -7,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_entered"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_hearth",
+      "name": "Shelter kitchen hearth",
+      "kind": "fire",
+      "x": 23,
+      "z": -5,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_entered"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_loft_crates",
+      "name": "Dry slat crates",
+      "kind": "cart",
+      "x": 19,
+      "z": -3,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_entered"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_flood_wall",
+      "name": "Old chalk flood lines",
+      "kind": "stone",
+      "x": 20,
+      "z": -5,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_entered"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_wet_wood",
+      "name": "Wet woodpile",
+      "kind": "wood",
+      "x": 24,
+      "z": -4,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_entered"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_stores",
+      "name": "Nan's kitchen stores",
+      "kind": "cart",
+      "x": 24,
+      "z": -6,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_entered"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_water_step",
+      "name": "Shelter bottom step",
+      "kind": "water",
+      "x": 21,
+      "z": -4,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_entered"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_household1",
+      "name": "Dock family",
+      "kind": "npc",
+      "x": 19,
+      "z": -8,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_entered"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_household2",
+      "name": "Old couple",
+      "kind": "npc",
+      "x": 21,
+      "z": -10,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_entered"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_household3",
+      "name": "Carters",
+      "kind": "npc",
+      "x": 23,
+      "z": -10,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_entered"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_household4",
+      "name": "Mother and child",
+      "kind": "npc",
+      "x": 25,
+      "z": -10,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_entered"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_crew",
+      "name": "Lane crew",
+      "kind": "npc",
+      "x": 26,
+      "z": -8,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_entered"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_family",
+      "name": "Lane-end family",
+      "kind": "npc",
+      "x": 28,
+      "z": -8,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_entered"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_feeding_traces",
+      "name": "Fresh feeding traces",
+      "kind": "stone",
+      "x": 25,
+      "z": 4,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_fire_lit"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_cover",
+      "name": "Reed cover",
+      "kind": "tree",
+      "x": 24,
+      "z": 5,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_fire_lit"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_sentinel",
+      "name": "Reed-margin flock",
+      "kind": "flock",
+      "x": 28,
+      "z": 5,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_fire_lit"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_flock_far",
+      "name": "Far open margin",
+      "kind": "area",
+      "x": 32,
+      "z": 7,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_fire_lit"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_recovery",
+      "name": "Downed fowl / recovery shallows",
+      "kind": "recovery",
+      "x": 29,
+      "z": 1,
+      "nodeInstanceId": 1009,
+      "all": [
+        "FK_fire_lit"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_nesting",
+      "name": "Closed nesting ground",
+      "kind": "area",
+      "x": 34,
+      "z": 4,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_fire_lit"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_stakes",
+      "name": "Rag-tied nesting stakes",
+      "kind": "post",
+      "x": 33,
+      "z": 3,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_fire_lit"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_deep_water",
+      "name": "Deep recovery water",
+      "kind": "area",
+      "x": 32,
+      "z": 0,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_fire_lit"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_lanes_clearing",
+      "name": "Lane crew ready to clear at dawn",
+      "kind": "post",
+      "x": 27,
+      "z": -10,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_done",
+        "FK_POT_CREW"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_extra_night",
+      "name": "Families staying another night",
+      "kind": "cart",
+      "x": 20,
+      "z": -10,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_done",
+        "FK_POT_FAMILY"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_all_fed",
+      "name": "Extra bowls / everyone fed",
+      "kind": "cart",
+      "x": 27,
+      "z": -10,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_done",
+        "FK_POT_OWN"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_shelter_post1",
+      "name": "Shelter warehouse post",
+      "kind": "post",
+      "x": 18,
+      "z": -2,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_entered"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_shelter_post2",
+      "name": "Shelter warehouse post",
+      "kind": "post",
+      "x": 27,
+      "z": -2,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_entered"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_shelter_post3",
+      "name": "Shelter warehouse post",
+      "kind": "post",
+      "x": 18,
+      "z": -11,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_entered"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_shelter_post4",
+      "name": "Shelter warehouse post",
+      "kind": "post",
+      "x": 27,
+      "z": -11,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_entered"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_nest_north",
+      "name": "Rag-tied nesting stake",
+      "kind": "post",
+      "x": 34,
+      "z": 6.2,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_fire_lit"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_nest_east",
+      "name": "Rag-tied nesting stake",
+      "kind": "post",
+      "x": 36.2,
+      "z": 4,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_fire_lit"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_nest_south",
+      "name": "Rag-tied nesting stake",
+      "kind": "post",
+      "x": 34,
+      "z": 1.8,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_fire_lit"
+      ],
+      "none": []
+    },
+    {
+      "id": "fk_nest_west",
+      "name": "Rag-tied nesting stake",
+      "kind": "post",
+      "x": 31.8,
+      "z": 4,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_fire_lit"
+      ],
+      "none": []
+    },
+    {
+      "id": "FK_goose1",
+      "name": "Marsh Fen Goose",
+      "kind": "enemy",
+      "x": 33.5,
+      "z": 3.6,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_closed_entered"
+      ],
+      "none": []
+    },
+    {
+      "id": "FK_goose2",
+      "name": "Marsh Fen Goose",
+      "kind": "enemy",
+      "x": 34.5,
+      "z": 4.5,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_closed_entered"
+      ],
+      "none": []
+    },
+    {
+      "id": "FK_leech",
+      "name": "River Leech",
+      "kind": "enemy",
+      "x": 32,
+      "z": 0,
+      "nodeInstanceId": 0,
+      "all": [
+        "FK_fire_lit"
+      ],
+      "none": []
     }
   ],
   "actions": [
@@ -1288,7 +1754,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "hear_order",
@@ -1317,7 +1787,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "hear_river",
@@ -1346,7 +1820,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "settle",
@@ -1378,7 +1856,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "nan_lead",
@@ -1407,7 +1889,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "nan_alibi",
@@ -1436,7 +1922,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "dace_lead",
@@ -1465,7 +1955,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "order_lead",
@@ -1494,7 +1988,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "tovin_start",
@@ -1523,7 +2021,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "tovin_odd",
@@ -1554,7 +2056,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "tovin_lead",
@@ -1585,7 +2091,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "notch",
@@ -1614,7 +2124,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "earth",
@@ -1643,7 +2157,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "drag",
@@ -1672,7 +2190,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "post_found",
@@ -1706,7 +2228,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "shallows",
@@ -1735,7 +2261,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "clear",
@@ -1769,7 +2299,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "hatchet",
@@ -1803,7 +2337,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "stem",
@@ -1837,7 +2375,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "notch_cut",
@@ -1866,7 +2408,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "seat",
@@ -1902,7 +2448,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "discovery_end",
@@ -1933,7 +2483,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "maelin_after",
@@ -1964,7 +2518,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "proof_notches",
@@ -1993,7 +2551,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "proof_walk",
@@ -2022,7 +2584,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "proof_nan",
@@ -2053,7 +2619,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "proof_order",
@@ -2086,7 +2656,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "proof_tovin",
@@ -2117,7 +2691,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "proof_pier",
@@ -2149,7 +2727,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "close_crossing",
@@ -2194,7 +2776,11 @@
           ],
           "none": []
         }
-      ]
+      ],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "order_transfer",
@@ -2224,7 +2810,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "lift1",
@@ -2255,7 +2845,11 @@
       "carry": "sack1",
       "requiresCarry": "-",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "deliver1",
@@ -2284,7 +2878,11 @@
       "carry": "-",
       "requiresCarry": "sack1",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "lift2",
@@ -2317,7 +2915,11 @@
       "carry": "sack2",
       "requiresCarry": "-",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "deliver2",
@@ -2346,7 +2948,11 @@
       "carry": "-",
       "requiresCarry": "sack2",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "lift3",
@@ -2379,7 +2985,11 @@
       "carry": "sack3",
       "requiresCarry": "-",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "deliver3",
@@ -2408,7 +3018,11 @@
       "carry": "-",
       "requiresCarry": "sack3",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "trunk_lift",
@@ -2439,7 +3053,11 @@
       "carry": "nan_trunk",
       "requiresCarry": "-",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "trunk_set",
@@ -2468,7 +3086,11 @@
       "carry": "-",
       "requiresCarry": "nan_trunk",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "uphill_done",
@@ -2503,7 +3125,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "TL_EVIDENCE_KEEPERS",
@@ -2538,7 +3164,11 @@
         "weathered_marker_post",
         "dispatch_order"
       ],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "TL_EVIDENCE_RIVERFOLK",
@@ -2573,7 +3203,11 @@
         "weathered_marker_post",
         "dispatch_order"
       ],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "TL_EVIDENCE_PLAYER",
@@ -2605,7 +3239,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "TL_STONE_PUBLIC",
@@ -2637,7 +3275,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "TL_STONE_KEPT",
@@ -2669,7 +3311,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "quest_finish",
@@ -2703,7 +3349,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "ansel_hook",
@@ -2730,7 +3380,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "tovin_trust",
@@ -2761,7 +3415,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "marker_read",
@@ -2790,7 +3448,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "timber_cut",
@@ -2822,7 +3484,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "cook_meat",
@@ -2863,7 +3529,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "feed_camp",
@@ -2899,7 +3569,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "boar_harvest",
@@ -2933,7 +3607,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "wild_boar_harvest",
@@ -2967,7 +3645,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "eat_food",
@@ -2999,7 +3681,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "wreck_enter",
@@ -3028,7 +3714,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "wreck_inspect",
@@ -3061,7 +3751,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "stone_dry",
@@ -3090,7 +3784,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "stone_sketch",
@@ -3120,7 +3818,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "true_marker_read",
@@ -3149,7 +3851,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "epilogue_keepers",
@@ -3178,7 +3884,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "epilogue_riverfolk",
@@ -3207,7 +3917,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "epilogue_player",
@@ -3236,7 +3950,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "maelin_who",
@@ -3263,7 +3981,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "maelin_across",
@@ -3290,7 +4012,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "hollis_keepers",
@@ -3319,7 +4045,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "hollis_riverfolk",
@@ -3348,7 +4078,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "hollis_player",
@@ -3377,7 +4111,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "nan_tune",
@@ -3404,7 +4142,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "dace_fed",
@@ -3433,7 +4175,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "dace_unfed",
@@ -3462,7 +4208,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "wynn_camp_line",
@@ -3489,7 +4239,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_start",
@@ -3518,7 +4272,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_axe",
@@ -3556,7 +4314,11 @@
             "tool_loaned"
           ]
         }
-      ]
+      ],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_measure1",
@@ -3585,7 +4347,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_grip",
@@ -3612,7 +4378,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_measure2",
@@ -3641,7 +4411,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_measure3",
@@ -3670,7 +4444,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_wrack",
@@ -3699,7 +4477,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_repair",
@@ -3728,7 +4510,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_wade",
@@ -3757,7 +4543,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_cut_jam",
@@ -3797,7 +4587,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_cord",
@@ -3828,7 +4622,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_leaner_read",
@@ -3857,7 +4655,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_holder_read",
@@ -3886,7 +4688,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_old_read",
@@ -3915,7 +4721,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_leaner_notch",
@@ -3948,7 +4758,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_leaner_back",
@@ -3988,7 +4802,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_keep",
@@ -4021,7 +4839,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_cut",
@@ -4053,7 +4875,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_build",
@@ -4085,7 +4911,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_holder_notch",
@@ -4116,7 +4946,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_holder_back",
@@ -4157,7 +4991,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_spare_limbs",
@@ -4191,7 +5029,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_give_wood",
@@ -4227,7 +5069,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_stage1",
@@ -4258,7 +5104,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_stage2",
@@ -4290,7 +5140,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_finish",
@@ -4324,7 +5178,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_kept_bark",
@@ -4354,7 +5212,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_built_bark",
@@ -4384,7 +5246,11 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     },
     {
       "id": "BW_tamsin_bark",
@@ -4413,7 +5279,1393 @@
       "carry": "",
       "requiresCarry": "",
       "removeItems": [],
-      "conditionalOutputs": []
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_enter",
+      "target": "fk_shelter",
+      "label": "Enter the shelter",
+      "text": "Nan: Oh good. Hands. Are those hands? Come here with them.\nI got as far as my own front door. Heard the low lanes had gone under. Turned straight round.\nMy bed will keep. Their supper won't.\nFire's dead. Wood's wet. Pot's empty. Duchess is no help at all.",
+      "kind": "enter",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 0,
+      "maxStage": 0,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_enter",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "FK_entered"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_start",
+      "target": "fk_nan",
+      "label": "Where do I start?",
+      "text": "Nan: Dry wood. The loft has old crates if you've none. Then fowl. The geese below the docks are fat and rude.\nStay off the nesting stakes or the children will skin you before the geese do.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 0,
+      "maxStage": 0,
+      "all": [
+        "FK_entered"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_start",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "FK_started"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_lanes",
+      "target": "fk_nan",
+      "label": "What happened to the lanes?",
+      "text": "Nan: Water came up in the night. No rain, no wind. Just up.\nEveryone says the river's in a mood. Rivers don't have moods. People do.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 0,
+      "maxStage": -1,
+      "all": [
+        "FK_entered"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_lanes",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_whisperflow",
+      "target": "fk_nan",
+      "label": "You were at Whisperflow.",
+      "text": "Nan: And you carried my trunk. I remember. Carry something else.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 0,
+      "maxStage": -1,
+      "all": [
+        "FK_entered"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_whisperflow",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_flood_lines",
+      "target": "fk_flood_wall",
+      "label": "Inspect the chalk flood lines",
+      "text": "Chalked lines, each with a season. The oldest are highest. Tonight's is lower than most.",
+      "kind": "inspect",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 0,
+      "maxStage": -1,
+      "all": [
+        "FK_entered"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_wet_wood",
+      "target": "fk_wet_wood",
+      "label": "Inspect the wet wood",
+      "text": "Soaked through. It'll smoke and sulk.",
+      "kind": "inspect",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 0,
+      "maxStage": -1,
+      "all": [
+        "FK_entered"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_wood",
+      "target": "fk_hearth",
+      "label": "Give two dry timber for the hearth",
+      "text": "Dry wood set by the hearth.",
+      "kind": "inspect",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [],
+      "none": [
+        "FK_fuel_ready"
+      ],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_wood",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [
+        {
+          "id": "common_timber",
+          "count": 2
+        }
+      ],
+      "outputs": [],
+      "flags": [
+        "FK_fuel_ready"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_lift1",
+      "target": "fk_loft_crates",
+      "label": "Carry dry slat crate 1",
+      "text": "Dry slats from the loft. Nan is waiting by the hearth.",
+      "kind": "lift",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [],
+      "none": [
+        "FK_crate1_done",
+        "FK_fuel_ready"
+      ],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "FK_crate1",
+      "requiresCarry": "-",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_deposit1",
+      "target": "fk_hearth",
+      "label": "Set down dry slat crate 1",
+      "text": "Dry slats stacked at the hearth.",
+      "kind": "deliver",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_deposit1",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "FK_crate1_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "-",
+      "requiresCarry": "FK_crate1",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_lift2",
+      "target": "fk_loft_crates",
+      "label": "Carry dry slat crate 2",
+      "text": "Dry slats from the loft. Nan is waiting by the hearth.",
+      "kind": "lift",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [
+        "FK_crate1_done"
+      ],
+      "none": [
+        "FK_crate2_done",
+        "FK_fuel_ready"
+      ],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "FK_crate2",
+      "requiresCarry": "-",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_deposit2",
+      "target": "fk_hearth",
+      "label": "Set down dry slat crate 2",
+      "text": "Dry slats stacked at the hearth.",
+      "kind": "deliver",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_deposit2",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "FK_crate2_done",
+        "FK_fuel_ready"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "-",
+      "requiresCarry": "FK_crate2",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_light_fire",
+      "target": "fk_hearth",
+      "label": "Light the kitchen fire",
+      "text": "The kitchen hearth catches. Nan sets the pot over it.",
+      "kind": "channel",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [
+        "FK_fuel_ready"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_light_fire",
+      "ticks": 30,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "FK_fire_lit"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_tracks",
+      "target": "fk_feeding_traces",
+      "label": "Read the feeding traces",
+      "text": "Fresh droppings and torn weed at the soft edge. They've been here all day.",
+      "kind": "inspect",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 2,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "FK_traces_read"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_sentinel",
+      "target": "fk_sentinel",
+      "label": "Read the sentinel bird",
+      "text": "One goose with its head up while the others feed. Watching.",
+      "kind": "inspect",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 2,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "FK_sentinel_read"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_nesting",
+      "target": "fk_stakes",
+      "label": "Read the rag stakes",
+      "text": "Stakes with rags tied on. The nesting ground. Closed.",
+      "kind": "inspect",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 2,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_closed",
+      "target": "fk_nesting",
+      "label": "Enter the nesting ground",
+      "text": "Child: Not there! That's the nesting stakes! I'm telling Nan!",
+      "kind": "enter",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 2,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_closed",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "FK_closed_entered"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_prepare",
+      "target": "fk_cover",
+      "label": "Prepare in reed cover",
+      "text": "You settle into the reed cover and prepare a quiet approach.",
+      "kind": "channel",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 2,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 10,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "reed_margin_flock",
+      "flockOperation": "prepare",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_resolve",
+      "target": "fk_sentinel",
+      "label": "Take fowl from the open margin",
+      "text": "A fowl drops into the recovery shallows.",
+      "kind": "channel",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 2,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "reed_margin_flock",
+      "flockOperation": "resolve",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_recover1",
+      "target": "fk_recovery",
+      "label": "Recover the first fowl",
+      "text": "A cleanly recovered fowl, fit for the pot.",
+      "kind": "gather",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 2,
+      "maxStage": 2,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_recover1",
+      "ticks": 50,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "raw_fowl",
+          "count": 1
+        }
+      ],
+      "flags": [
+        "FK_fowl1_recovered"
+      ],
+      "skill": "hunting",
+      "xp": 28,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "reed_margin_flock",
+      "flockOperation": "recover",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_recover2",
+      "target": "fk_recovery",
+      "label": "Recover the second fowl",
+      "text": "Two fowl for Nan's kitchen.",
+      "kind": "gather",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 2,
+      "maxStage": 2,
+      "all": [
+        "FK_fowl1_recovered"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_recover2",
+      "ticks": 50,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "raw_fowl",
+          "count": 1
+        }
+      ],
+      "flags": [
+        "FK_fowl2_recovered"
+      ],
+      "skill": "hunting",
+      "xp": 28,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "reed_margin_flock",
+      "flockOperation": "recover",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_recover_repeat",
+      "target": "fk_recovery",
+      "label": "Recover fowl",
+      "text": "A cleanly recovered fowl, fit for the pot.",
+      "kind": "gather",
+      "quest": "",
+      "minStage": 0,
+      "maxStage": -1,
+      "all": [
+        "FK_fire_lit",
+        "FK_fowl2_recovered"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 50,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "raw_fowl",
+          "count": 1
+        }
+      ],
+      "flags": [],
+      "skill": "hunting",
+      "xp": 28,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "reed_margin_flock",
+      "flockOperation": "recover",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_cook_batch",
+      "target": "fk_hearth",
+      "label": "Cook four shelter portions",
+      "text": "Four hot portions for the shelter.",
+      "kind": "craft",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 3,
+      "maxStage": 3,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_cook_batch",
+      "ticks": 50,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [
+        {
+          "id": "raw_fowl",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "id": "fowl_stew",
+          "count": 4
+        }
+      ],
+      "flags": [
+        "FK_meal_cooked",
+        "FK_HUSH_SEEN"
+      ],
+      "skill": "cooking",
+      "xp": 28,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [
+        {
+          "id": "fk_portions_cooked",
+          "amount": 4
+        }
+      ]
+    },
+    {
+      "id": "FK_cook_repeat",
+      "target": "fk_hearth",
+      "label": "Cook fowl stew (fowl + timber)",
+      "text": "Fowl stew prepared at the shelter kitchen.",
+      "kind": "craft",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 3,
+      "maxStage": -1,
+      "all": [
+        "FK_fire_lit"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 50,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [
+        {
+          "id": "raw_fowl",
+          "count": 1
+        },
+        {
+          "id": "common_timber",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "fowl_stew",
+          "count": 2
+        }
+      ],
+      "flags": [
+        "FK_HUSH_SEEN"
+      ],
+      "skill": "cooking",
+      "xp": 28,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [
+        {
+          "id": "fk_portions_cooked",
+          "amount": 2
+        }
+      ]
+    },
+    {
+      "id": "FK_hush",
+      "target": "fk_nan",
+      "label": "The geese went quiet first.",
+      "text": "Nan: ...Did that last night too.\nNo rain.\nThey would. They live on it. Pot's catching.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 0,
+      "maxStage": -1,
+      "all": [
+        "FK_HUSH_SEEN"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_hush",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_feed1",
+      "target": "fk_household1",
+      "label": "Give a cooked portion",
+      "text": "Dock family: Hot. Something hot. You've no idea.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 4,
+      "maxStage": 4,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_feed1",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "FK_household1_fed"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [
+        {
+          "tag": "cooked_food",
+          "count": 1
+        }
+      ],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_feed2",
+      "target": "fk_household2",
+      "label": "Give a cooked portion",
+      "text": "Old couple: He won't say thank you. Thank you.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 4,
+      "maxStage": 4,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_feed2",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "FK_household2_fed"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [
+        {
+          "tag": "cooked_food",
+          "count": 1
+        }
+      ],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_feed3",
+      "target": "fk_household3",
+      "label": "Give a cooked portion",
+      "text": "Carter: If you ever need anything carted. Anything. Not uphill.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 4,
+      "maxStage": 4,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_feed3",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "FK_household3_fed"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [
+        {
+          "tag": "cooked_food",
+          "count": 1
+        }
+      ],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_feed4",
+      "target": "fk_household4",
+      "label": "Give a cooked portion",
+      "text": "Mother: Say thank you.\nChild: It's got a bone in.\nMother: Say thank you.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 4,
+      "maxStage": 4,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_feed4",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "FK_household4_fed"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [
+        {
+          "tag": "cooked_food",
+          "count": 1
+        }
+      ],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_crew",
+      "target": "fk_nan",
+      "label": "The crew. They're clearing the lanes at first light.",
+      "text": "Nan: Crew, then.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 5,
+      "maxStage": 5,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_crew",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "FK_POT_CREW",
+        "FK_choice_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_family",
+      "target": "fk_nan",
+      "label": "The family. The children first.",
+      "text": "Nan: Children, then. Crew can work up an appetite.\nCrew lead: We'll be a day slower. Fair enough.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 5,
+      "maxStage": 5,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_family",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "FK_POT_FAMILY",
+        "FK_choice_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_own",
+      "target": "fk_nan",
+      "label": "Both. Put this in as well.",
+      "text": "Nan: Both, then. You'll go hungry yourself, mind.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 5,
+      "maxStage": 5,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_own",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "FK_POT_OWN",
+        "FK_choice_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [
+        {
+          "tag": "cooked_food",
+          "count": 1
+        }
+      ],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_tune",
+      "target": "fk_nan",
+      "label": "What's that you're humming?",
+      "text": "Nan: Same as at the crossing. The listeners' tune. Shelters always want it.\nNobody knows the words. I think there were words.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 6,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_tune",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "FK_NAN_TUNE"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_finish_crew",
+      "target": "fk_nan",
+      "label": "Thank you, Nan.",
+      "text": "Nan: Eat that. Not later. Now.\nYou'll go walking into worse than geese one day. Eat first. Always eat first.\nDon't thank me. Thank Duchess. She supervised.\nCrew'll have the lanes clear by noon. Then I'll try for my own bed again.\nRiver keep you.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 6,
+      "maxStage": 6,
+      "all": [
+        "FK_POT_CREW"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_finish",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "fowl_stew",
+          "count": 1
+        },
+        {
+          "id": "payment",
+          "count": 4
+        }
+      ],
+      "flags": [
+        "FK_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_finish_family",
+      "target": "fk_nan",
+      "label": "Thank you, Nan.",
+      "text": "Nan: Eat that. Not later. Now.\nYou'll go walking into worse than geese one day. Eat first. Always eat first.\nDon't thank me. Thank Duchess. She supervised.\nAnother night here, then. I've slept worse. Mostly on that trunk.\nRiver keep you.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 6,
+      "maxStage": 6,
+      "all": [
+        "FK_POT_FAMILY"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_finish",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "fowl_stew",
+          "count": 1
+        },
+        {
+          "id": "payment",
+          "count": 4
+        }
+      ],
+      "flags": [
+        "FK_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_finish_own",
+      "target": "fk_nan",
+      "label": "Thank you, Nan.",
+      "text": "Nan: Eat that. Not later. Now.\nYou'll go walking into worse than geese one day. Eat first. Always eat first.\nDon't thank me. Thank Duchess. She supervised.\nYou fed everyone and you've nothing in your pack. Eat that, then, at least.\nRiver keep you.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 6,
+      "maxStage": 6,
+      "all": [
+        "FK_POT_OWN"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "FK_finish",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "fowl_stew",
+          "count": 1
+        },
+        {
+          "id": "payment",
+          "count": 4
+        }
+      ],
+      "flags": [
+        "FK_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_crew_after",
+      "target": "fk_crew",
+      "label": "How are the lanes?",
+      "text": "Crew lead: Lanes are clear. Your goose did that. Partly.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 0,
+      "maxStage": -1,
+      "all": [
+        "FK_done",
+        "FK_POT_CREW"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_family_after",
+      "target": "fk_family",
+      "label": "How are the children?",
+      "text": "Lane-end child: You're the goose one.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 0,
+      "maxStage": -1,
+      "all": [
+        "FK_done",
+        "FK_POT_FAMILY"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
+    },
+    {
+      "id": "FK_nan_after",
+      "target": "fk_nan",
+      "label": "How is Duchess?",
+      "text": "Nan: Duchess has laid. In the pot crate. I've decided it's a compliment.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.flood_kitchen",
+      "minStage": 0,
+      "maxStage": -1,
+      "all": [
+        "FK_done"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     }
   ],
   "quests": [
@@ -4428,7 +6680,8 @@
             "arrived"
           ],
           "any": [],
-          "anyCount": 0
+          "anyCount": 0,
+          "counterRequirements": []
         },
         {
           "id": "S01_hear_both",
@@ -4437,7 +6690,8 @@
             "heard_both"
           ],
           "any": [],
-          "anyCount": 0
+          "anyCount": 0,
+          "counterRequirements": []
         },
         {
           "id": "S02_read_post",
@@ -4448,7 +6702,8 @@
             "drag"
           ],
           "any": [],
-          "anyCount": 0
+          "anyCount": 0,
+          "counterRequirements": []
         },
         {
           "id": "S03_find_old_post",
@@ -4457,7 +6712,8 @@
             "post_found"
           ],
           "any": [],
-          "anyCount": 0
+          "anyCount": 0,
+          "counterRequirements": []
         },
         {
           "id": "S04_clear_footing",
@@ -4466,7 +6722,8 @@
             "silt_clear"
           ],
           "any": [],
-          "anyCount": 0
+          "anyCount": 0,
+          "counterRequirements": []
         },
         {
           "id": "S05_cut_post",
@@ -4475,7 +6732,8 @@
             "stem_cut"
           ],
           "any": [],
-          "anyCount": 0
+          "anyCount": 0,
+          "counterRequirements": []
         },
         {
           "id": "S06_seat_post",
@@ -4484,7 +6742,8 @@
             "river_read"
           ],
           "any": [],
-          "anyCount": 0
+          "anyCount": 0,
+          "counterRequirements": []
         },
         {
           "id": "S07_prove",
@@ -4493,7 +6752,8 @@
             "crossing_closed"
           ],
           "any": [],
-          "anyCount": 0
+          "anyCount": 0,
+          "counterRequirements": []
         },
         {
           "id": "S08_high_ground",
@@ -4502,7 +6762,8 @@
             "people_uphill"
           ],
           "any": [],
-          "anyCount": 0
+          "anyCount": 0,
+          "counterRequirements": []
         },
         {
           "id": "S09_choose",
@@ -4511,7 +6772,8 @@
             "choices_done"
           ],
           "any": [],
-          "anyCount": 0
+          "anyCount": 0,
+          "counterRequirements": []
         },
         {
           "id": "S10_night",
@@ -4520,7 +6782,8 @@
             "quest_done"
           ],
           "any": [],
-          "anyCount": 0
+          "anyCount": 0,
+          "counterRequirements": []
         }
       ],
       "all": []
@@ -4539,7 +6802,8 @@
             "BW_started"
           ],
           "any": [],
-          "anyCount": 0
+          "anyCount": 0,
+          "counterRequirements": []
         },
         {
           "id": "S01_walk",
@@ -4551,7 +6815,8 @@
             "BW_wrack_seen"
           ],
           "any": [],
-          "anyCount": 0
+          "anyCount": 0,
+          "counterRequirements": []
         },
         {
           "id": "S02_free_jam",
@@ -4560,7 +6825,8 @@
             "BW_JAM_SWUNG"
           ],
           "any": [],
-          "anyCount": 0
+          "anyCount": 0,
+          "counterRequirements": []
         },
         {
           "id": "S04_leaner",
@@ -4569,7 +6835,8 @@
             "BW_LEANER_FALLEN"
           ],
           "any": [],
-          "anyCount": 0
+          "anyCount": 0,
+          "counterRequirements": []
         },
         {
           "id": "S05_choose",
@@ -4578,7 +6845,8 @@
             "BW_choice_done"
           ],
           "any": [],
-          "anyCount": 0
+          "anyCount": 0,
+          "counterRequirements": []
         },
         {
           "id": "S06_heard",
@@ -4587,7 +6855,93 @@
             "BW_TAMSIN_HEARD"
           ],
           "any": [],
-          "anyCount": 0
+          "anyCount": 0,
+          "counterRequirements": []
+        }
+      ]
+    },
+    {
+      "id": "lowmark.side.flood_kitchen",
+      "name": "The Flood Kitchen",
+      "all": [
+        "quest_done"
+      ],
+      "stages": [
+        {
+          "id": "S00_shelter",
+          "objective": "Find out who's running the shelter.",
+          "all": [
+            "FK_started"
+          ],
+          "any": [],
+          "anyCount": 0,
+          "counterRequirements": []
+        },
+        {
+          "id": "S01_fire",
+          "objective": "Get the kitchen fire going.",
+          "all": [
+            "FK_fire_lit"
+          ],
+          "any": [],
+          "anyCount": 0,
+          "counterRequirements": []
+        },
+        {
+          "id": "S02_fowl",
+          "objective": "Bring back fowl from the open margin.",
+          "all": [
+            "FK_fowl2_recovered"
+          ],
+          "any": [],
+          "anyCount": 0,
+          "counterRequirements": []
+        },
+        {
+          "id": "S03_cook",
+          "objective": "Cook for the shelter.",
+          "all": [],
+          "any": [],
+          "anyCount": 0,
+          "counterRequirements": [
+            {
+              "id": "fk_portions_cooked",
+              "min": 4
+            }
+          ]
+        },
+        {
+          "id": "S04_feed",
+          "objective": "Feed the shelter.",
+          "all": [
+            "FK_household1_fed",
+            "FK_household2_fed",
+            "FK_household3_fed",
+            "FK_household4_fed"
+          ],
+          "any": [],
+          "anyCount": 0,
+          "counterRequirements": []
+        },
+        {
+          "id": "S05_choose",
+          "objective": "Decide who eats from the last pot.",
+          "all": [
+            "FK_choice_done"
+          ],
+          "any": [],
+          "anyCount": 0,
+          "counterRequirements": []
+        },
+        {
+          "id": "S06_eat",
+          "objective": "Eat something yourself.",
+          "all": [
+            "FK_done"
+          ],
+          "any": [],
+          "anyCount": 0,
+          "counterRequirements": []
         }
       ]
     }
@@ -4610,7 +6964,9 @@
       "leash": 4,
       "killFlag": "silt1_dead",
       "respawn": 0,
-      "lootAction": ""
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0
     },
     {
       "id": "silt2",
@@ -4629,7 +6985,9 @@
       "leash": 4,
       "killFlag": "silt2_dead",
       "respawn": 0,
-      "lootAction": ""
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0
     },
     {
       "id": "silt3",
@@ -4648,7 +7006,9 @@
       "leash": 4,
       "killFlag": "silt3_dead",
       "respawn": 0,
-      "lootAction": ""
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0
     },
     {
       "id": "leech",
@@ -4667,7 +7027,9 @@
       "leash": 4,
       "killFlag": "leech_dead",
       "respawn": 0,
-      "lootAction": ""
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0
     },
     {
       "id": "goose1",
@@ -4686,7 +7048,9 @@
       "leash": 4,
       "killFlag": "goose1_dead",
       "respawn": 0,
-      "lootAction": ""
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0
     },
     {
       "id": "goose2",
@@ -4705,7 +7069,9 @@
       "leash": 4,
       "killFlag": "goose2_dead",
       "respawn": 0,
-      "lootAction": ""
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0
     },
     {
       "id": "boar",
@@ -4722,7 +7088,9 @@
       "leash": 4,
       "killFlag": "boar_dead",
       "respawn": 0,
-      "lootAction": "boar_harvest"
+      "lootAction": "boar_harvest",
+      "boundaryTarget": "",
+      "boundaryRadius": 0
     },
     {
       "id": "wild_boar",
@@ -4739,7 +7107,9 @@
       "leash": 4,
       "killFlag": "wild_boar_dead",
       "respawn": 300,
-      "lootAction": "wild_boar_harvest"
+      "lootAction": "wild_boar_harvest",
+      "boundaryTarget": "",
+      "boundaryRadius": 0
     },
     {
       "id": "wreck1",
@@ -4756,7 +7126,9 @@
       "leash": 4,
       "killFlag": "wreck1_dead",
       "respawn": 0,
-      "lootAction": ""
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0
     },
     {
       "id": "wreck2",
@@ -4773,7 +7145,9 @@
       "leash": 4,
       "killFlag": "wreck2_dead",
       "respawn": 0,
-      "lootAction": ""
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0
     },
     {
       "id": "wreck3",
@@ -4790,7 +7164,9 @@
       "leash": 4,
       "killFlag": "wreck3_dead",
       "respawn": 0,
-      "lootAction": ""
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0
     },
     {
       "id": "BW_skitter1",
@@ -4809,7 +7185,9 @@
       "leash": 3.5,
       "killFlag": "BW_skitter1_dead",
       "respawn": 0,
-      "lootAction": ""
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0
     },
     {
       "id": "BW_skitter2",
@@ -4828,7 +7206,9 @@
       "leash": 3.5,
       "killFlag": "BW_skitter2_dead",
       "respawn": 0,
-      "lootAction": ""
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0
     },
     {
       "id": "BW_skitter3",
@@ -4847,7 +7227,9 @@
       "leash": 3.5,
       "killFlag": "BW_skitter3_dead",
       "respawn": 0,
-      "lootAction": ""
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0
     },
     {
       "id": "BW_skitter4",
@@ -4866,7 +7248,9 @@
       "leash": 3.5,
       "killFlag": "BW_skitter4_dead",
       "respawn": 0,
-      "lootAction": ""
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0
     },
     {
       "id": "BW_skitter5",
@@ -4885,7 +7269,66 @@
       "leash": 3.5,
       "killFlag": "BW_skitter5_dead",
       "respawn": 0,
-      "lootAction": ""
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0
+    },
+    {
+      "id": "FK_goose1",
+      "target": "FK_goose1",
+      "all": [
+        "FK_closed_entered"
+      ],
+      "none": [],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 3,
+      "killFlag": "FK_goose1_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "fk_nesting",
+      "boundaryRadius": 2.2
+    },
+    {
+      "id": "FK_goose2",
+      "target": "FK_goose2",
+      "all": [
+        "FK_closed_entered"
+      ],
+      "none": [],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 3,
+      "killFlag": "FK_goose2_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "fk_nesting",
+      "boundaryRadius": 2.2
+    },
+    {
+      "id": "FK_leech",
+      "target": "FK_leech",
+      "all": [
+        "FK_fire_lit"
+      ],
+      "none": [],
+      "health": 18,
+      "damage": 2,
+      "windup": 12,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 3,
+      "killFlag": "FK_leech_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "fk_deep_water",
+      "boundaryRadius": 1.6
     }
   ],
   "exclusiveFlags": [
@@ -4907,6 +7350,13 @@
         "BW_BANK_KEPT",
         "BW_BANK_CUT",
         "BW_LANDING_BUILT"
+      ]
+    },
+    {
+      "flags": [
+        "FK_POT_CREW",
+        "FK_POT_FAMILY",
+        "FK_POT_OWN"
       ]
     }
   ],
@@ -4936,6 +7386,57 @@
       "damage": 4,
       "radius": 1.2,
       "pushDistance": 1
+    }
+  ],
+  "flocks": [
+    {
+      "id": "reed_margin_flock",
+      "target": "fk_sentinel",
+      "alternateTarget": "fk_flock_far",
+      "coverTarget": "fk_cover",
+      "recoveryTarget": "fk_recovery",
+      "closedTarget": "fk_nesting",
+      "all": [
+        "FK_fire_lit"
+      ],
+      "none": [],
+      "alertRadius": 3,
+      "coverRadius": 1.2,
+      "closedRadius": 2.2,
+      "warningTicks": 15
+    }
+  ],
+  "respawnRegions": [
+    {
+      "id": "brookhollow_shelter_recovery",
+      "target": "fk_shelter",
+      "x": 22,
+      "z": -6,
+      "radius": 17,
+      "all": [
+        "FK_entered"
+      ],
+      "none": []
+    }
+  ],
+  "presentationEvents": [
+    {
+      "id": "marking_stone_water",
+      "target": "footing",
+      "triggerFlag": "discovery",
+      "kind": "waterRise",
+      "ticks": 100,
+      "rise": 1,
+      "persistRise": false
+    },
+    {
+      "id": "shelter_water_hush",
+      "target": "fk_water_step",
+      "triggerFlag": "FK_HUSH_SEEN",
+      "kind": "waterRise",
+      "ticks": 80,
+      "rise": 0.3,
+      "persistRise": true
     }
   ]
 }

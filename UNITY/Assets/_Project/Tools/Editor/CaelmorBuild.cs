@@ -37,12 +37,20 @@ namespace Caelmor.Unity.Editor
             var playerMat = Material("Player", new Color(.29f, .49f, .57f));
             var trim = Material("Trim", new Color(.65f, .60f, .45f));
             Cube("Ground / technical 28m square", new Vector3(0, -.25f, 0), new Vector3(28, .5f, 28), ground, true).AddComponent<NavigableTerrain>();
+            Cube("Shelter and margin / connected technical hub", new Vector3(26, -.25f, 0), new Vector3(24, .5f, 28), ground, true).AddComponent<NavigableTerrain>();
             Cube("Central route", new Vector3(0, .006f, 0), new Vector3(3, .01f, 26), path, false);
             Cube("Cross route", new Vector3(0, .008f, 1), new Vector3(26, .01f, 2.2f), path, false);
             Cube("North bound", new Vector3(0, .75f, 13.75f), new Vector3(28, 1.5f, .5f), stone, true);
             Cube("South bound", new Vector3(0, .75f, -13.75f), new Vector3(28, 1.5f, .5f), stone, true);
-            Cube("East bound", new Vector3(13.75f, .75f, 0), new Vector3(.5f, 1.5f, 28), stone, true);
+            Cube("East bound / north of connecting road", new Vector3(13.75f, .75f, 8.5f), new Vector3(.5f, 1.5f, 11), stone, true);
+            Cube("East bound / south of connecting road", new Vector3(13.75f, .75f, -8.5f), new Vector3(.5f, 1.5f, 11), stone, true);
             Cube("West bound", new Vector3(-13.75f, .75f, 0), new Vector3(.5f, 1.5f, 28), stone, true);
+            Cube("Shelter hub north bound", new Vector3(26, .75f, 13.75f), new Vector3(24, 1.5f, .5f), stone, true);
+            Cube("Shelter hub south bound", new Vector3(26, .75f, -13.75f), new Vector3(24, 1.5f, .5f), stone, true);
+            Cube("Shelter hub east bound", new Vector3(37.75f, .75f, 0), new Vector3(.5f, 1.5f, 28), stone, true);
+            Cube("Connecting shelter road", new Vector3(18, .008f, 0), new Vector3(22, .01f, 3), path, false);
+            AddSign("Shelter and reed margin →", new Vector3(11.7f, 2.2f, 1.8f));
+            AddSign("← Landing and bank", new Vector3(17, 2.2f, 1.8f));
             Cube("Collision test wall", new Vector3(-5, 1, 1), new Vector3(5, 2, .8f), stone, true);
             Cube("Collision test block", new Vector3(6, .9f, 5), new Vector3(2.5f, 1.8f, 2.5f), stone, true);
             for (int z = -10; z <= 10; z += 5)
@@ -91,8 +99,6 @@ namespace Caelmor.Unity.Editor
             game.navigation = nav; game.destinationView = destinationView.transform;
             game.spawn = spawn.transform; game.playerView = avatar.transform; game.playerCamera = camera; game.interactionAnchor = anchor;
             game.gameObject.AddComponent<PlayableHud>().game = game;
-            var reserved = new GameObject("Narrative entry / reserved for approved Lowmark content");
-            reserved.transform.position = new Vector3(4, 0, 2);
             EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), ScenePath);
             EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
             PlayerSettings.companyName = "Caelmor"; PlayerSettings.productName = "Caelmor Playable Foundation";
@@ -133,10 +139,11 @@ namespace Caelmor.Unity.Editor
             settings.agentRadius = .43f; settings.agentHeight = 1.8f; settings.agentClimb = .2f; settings.agentSlope = 40f;
             settings.overrideVoxelSize = true; settings.voxelSize = .08f; settings.minRegionArea = .1f;
             var sources = new List<NavMeshBuildSource>();
-            UnityEngine.AI.NavMeshBuilder.CollectSources(new Bounds(Vector3.up, new Vector3(30, 6, 30)),
+            var navigationBounds=new Bounds(new Vector3(12,1,0),new Vector3(56,6,30));
+            UnityEngine.AI.NavMeshBuilder.CollectSources(navigationBounds,
                 1 << 8, NavMeshCollectGeometry.PhysicsColliders, 0, new List<NavMeshBuildMarkup>(), sources);
             var baked = UnityEngine.AI.NavMeshBuilder.BuildNavMeshData(settings, sources,
-                new Bounds(Vector3.up, new Vector3(30, 6, 30)), Vector3.zero, Quaternion.identity);
+                navigationBounds, Vector3.zero, Quaternion.identity);
             if (baked == null) throw new InvalidOperationException("CAELMOR_NAVIGATION_BAKE_FAILED");
             const string assetPath = "Assets/_Project/World/PlayableNavigation.asset";
             var existing = AssetDatabase.LoadAssetAtPath<NavMeshData>(assetPath);
@@ -150,6 +157,12 @@ namespace Caelmor.Unity.Editor
             var material = AssetDatabase.LoadAssetAtPath<Material>(path);
             if (material == null) { material = new Material(Shader.Find("Standard")); AssetDatabase.CreateAsset(material, path); }
             material.color = color; return material;
+        }
+        static void AddSign(string text,Vector3 position)
+        {
+            var sign=new GameObject(text).AddComponent<TextMesh>();sign.text=text;sign.transform.position=position;
+            sign.fontSize=48;sign.characterSize=.12f;sign.anchor=TextAnchor.MiddleCenter;sign.color=new Color(.92f,.86f,.7f);
+            sign.transform.rotation=Quaternion.Euler(0,0,0);
         }
         static GameObject Cube(string name, Vector3 position, Vector3 scale, Material material, bool solid)
         {

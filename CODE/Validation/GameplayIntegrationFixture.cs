@@ -139,6 +139,160 @@ internal sealed class GameplayIntegrationFixture
         var save=session.Capture();var restored=New();restored.Restore(save);Check(restored.Stage(1)==6,"Second quest choices and hazards survive hydration.");
         save.hazards[0].remaining=1;Throws(()=>New().Restore(save),"A resolved hazard cannot restore a permanent active tell.");
     }
+    public void FloodKitchen(string choice,bool crates)
+    {
+        FullQuest(false);StartKitchen(crates);
+        // Reading is a prompt rather than a mandatory hunt unlock.
+        Check(!session.Has("FK_traces_read") && !session.Has("FK_sentinel_read"),"Reading remains optional.");
+        RecoverFowl("FK_recover1");RecoverFowl("FK_recover2");
+        Check(session.Quantity("raw_fowl")==2 && session.Stage(2)==3,"Two recoveries, not kills, advance the Hunting objective.");
+        Act("FK_cook_batch");Check(session.Quantity("fowl_stew")==4 && session.Quantity("raw_fowl")==0,"Nan's once-only batch yields four shelter portions.");
+        int hush=Array.FindIndex(content.presentationEvents,p=>p.triggerFlag=="FK_HUSH_SEEN");
+        Check(session.Presentation(hush).seen && session.Presentation(hush).remaining>0,"First Cooking completion starts one committed hush.");
+        var save=session.Capture();var restored=New();restored.Restore(save);
+        Check(restored.Presentation(hush).seen && restored.Presentation(hush).remaining==0,"Hydration retains the raised waterline without replaying the hush.");
+        for(int i=1;i<=4;i++)Act("FK_feed"+i);
+        Check(session.Quantity("fowl_stew")==0 && session.Stage(2)==5,"Four unique household receipts consume exactly four tagged portions.");
+        Check(!session.Available(Index("FK_own")),"Own-food choice is unavailable without cooked food.");
+        if(choice=="own")
+        {
+            Act("timber_cut");Fight("wild_boar");Act("wild_boar_harvest");Act("cook_meat");
+            Check(session.Quantity("dried_game_strips")==1,"Alternative cooked item prepared by pre-existing economy loop.");
+        }
+        Act("FK_"+choice);
+        Check(!session.Available(Index("FK_crew")) && !session.Available(Index("FK_family")) && !session.Available(Index("FK_own")),"Last-pot choice is exclusive.");
+        if(choice=="own")Check(session.Quantity("dried_game_strips")==0,"Any-cooked-food input accepts and consumes an unrelated cooked item.");
+        Act("FK_tune");Act("FK_finish_"+choice);
+        Check(session.Stage(2)==7 && session.CoarseState(2)==QuestState.Completed && session.Quantity("payment")==12 && session.Quantity("fowl_stew")==1,"Kitchen completes, pays once and gives Nan's bowl.");
+        Check(!session.Available(Index("FK_finish_"+choice)),"Completion reward cannot repeat.");
+        RecoverFowl("FK_recover_repeat");Act("timber_cut");Act("FK_cook_repeat");
+        Check(session.Quantity("fowl_stew")==3 && session.Presentation(hush).seen,"Public station remains useful after the quest without replaying first-cook wonder.");
+        save=session.Capture();restored=New();restored.Restore(save);Check(restored.Stage(2)==7 && restored.Quantity("fowl_stew")==3,"Completed kitchen and repeatable inventory survive restore.");
+    }
+    void StartKitchen(bool crates)
+    {
+        Move("fk_shelter");Step();Act("FK_start");
+        if(crates)
+        {
+            Act("FK_lift1");var save=session.Capture();session=New();session.Restore(save);tick=0;
+            Check(session.Carry=="" && session.Available(Index("FK_lift1")),"Dry-slat carry can be recollected after disconnect.");
+            Act("FK_lift1");Act("FK_deposit1");Act("FK_lift2");Act("FK_deposit2");
+        }
+        else {Act("timber_cut");while(!session.Available(Index("timber_cut")))Step();Act("timber_cut");Act("FK_wood");}
+        Act("FK_light_fire");Check(session.Stage(2)==2 && session.Has("FK_fire_lit"),"Either fuel route activates shelter Cooking.");
+    }
+    void RecoverFowl(string action)
+    {
+        Act("FK_prepare");int ti=Array.FindIndex(content.targets,t=>t.id==content.flocks[0].target);var point=session.CurrentTargetPosition(ti);
+        x=point.X;z=point.Z;Step(new(GameplayRequestKind.Action,Index("FK_resolve")));
+        Check(session.Flock(0).recoveryPending,"Non-combat resolution creates a recoverable bird.");
+        Act(action);Check(!session.Flock(0).recoveryPending && !session.Flock(0).prepared,"Recovery consumes one corpse and preparation.");
+    }
+    public void FlockAuthorityAndRecovery()
+    {
+        FullQuest(false);StartKitchen(true);
+        var definition=content.flocks[0];int sentinel=Array.FindIndex(content.targets,t=>t.id==definition.target);var point=session.CurrentTargetPosition(sentinel);
+        x=point.X;z=point.Z;Step();Check(session.Flock(0).warning==15,"Unprepared approach warns before scatter.");
+        int firstPosition=session.Flock(0).positionIndex;for(int i=0;i<15;i++)Step();
+        Check(session.Flock(0).positionIndex!=firstPosition && session.Flock(0).warning==0,"Warning expires and relocates without a wait timer.");
+        Act("FK_prepare");point=session.CurrentTargetPosition(sentinel);x=point.X;z=point.Z;
+        Step(new(GameplayRequestKind.Action,Index("FK_resolve")),true,true);
+        Check(!session.Flock(0).prepared && !session.Flock(0).recoveryPending && session.Flock(0).warning>0,"Rushing invalidates preparation before a take can resolve.");
+        int warning=session.Flock(0).warning;Step();Check(session.Flock(0).warning==warning-1,"Stopping does not reset the running warning.");
+        Move(definition.coverTarget);Step();Check(session.Flock(0).warning==0,"Withdrawal into cover cancels warning.");
+        Act("FK_prepare");point=session.CurrentTargetPosition(sentinel);x=point.X;z=point.Z;
+        int items=session.Quantity("raw_fowl"),xp=session.Capture().xp.Single(v=>v.id=="hunting").count;
+        Step(new(GameplayRequestKind.Action,Index("FK_resolve")));
+        Check(session.Flock(0).recoveryPending && session.Quantity("raw_fowl")==items && session.Capture().xp.Single(v=>v.id=="hunting").count==xp,"Take grants neither item nor XP.");
+        Check(!session.TargetVisible(sentinel),"Live sentinel is hidden while a recovery is pending.");
+        Step(new(GameplayRequestKind.Action,Index("FK_sentinel")));Check(!session.Has("FK_sentinel_read"),"Stale numeric interaction cannot inspect a hidden sentinel.");
+        for(int i=0;i<20;i++)Step(null,true,true);
+        Check(session.Flock(0).warning==0,"Pending recovery cannot create a hidden warning/scatter cycle.");
+        var save=session.Capture();session=New();session.Restore(save);tick=0;
+        Check(session.Flock(0).recoveryPending && !session.Available(Index("FK_resolve")),"Pending corpse survives reload and blocks a second take.");
+        Act("FK_recover1");Check(session.Quantity("raw_fowl")==items+1 && session.Capture().xp.Single(v=>v.id=="hunting").count==xp+28,"Recovery grants one fowl and fixed action XP.");
+        Check(!session.Available(Index("FK_recover2")),"A different recovery action cannot reuse the same consumed corpse.");
+        Move(definition.closedTarget);Step();int goose=Array.FindIndex(content.enemies,e=>!string.IsNullOrEmpty(e.boundaryTarget));var enemy=content.enemies[goose];var t=content.targets.Single(v=>v.id==enemy.target);var center=content.targets.Single(v=>v.id==enemy.boundaryTarget);
+        float dx=t.x-center.x,dz=t.z-center.z;float length=MathF.Sqrt(dx*dx+dz*dz);if(length<.001f){dx=1;dz=0;length=1;}
+        x=center.x+dx/length*(enemy.boundaryRadius+.05f);z=center.z+dz/length*(enemy.boundaryRadius+.05f);
+        int hp=session.Enemy(goose).health;Step(new(GameplayRequestKind.Attack,goose));for(int i=0;i<30;i++)Step();
+        Check(session.Enemy(goose).health==hp && session.Enemy(goose).windup==0,"Outside closure boundary neither side can exploit one-way melee.");
+        // Select the authored far endpoint, whose take range overlaps the nesting boundary.
+        if(session.Flock(0).positionIndex==0)
+        {
+            point=session.CurrentTargetPosition(sentinel);x=point.X;z=point.Z;Step();for(int n=0;n<15;n++)Step();
+        }
+        Act("FK_prepare");point=session.CurrentTargetPosition(sentinel);var closed=content.targets.Single(t=>t.id==definition.closedTarget);
+        x=(point.X+closed.x)/2;z=(point.Z+closed.z)/2;
+        Check(MathF.Sqrt((x-point.X)*(x-point.X)+(z-point.Z)*(z-point.Z))<2.3f && MathF.Sqrt((x-closed.x)*(x-closed.x)+(z-closed.z)*(z-closed.z))<definition.closedRadius,"Closed-ground regression is within otherwise valid take reach.");
+        Step(new(GameplayRequestKind.Action,Index("FK_resolve")));
+        Check(!session.Flock(0).recoveryPending,"Closed nesting ground cannot produce fowl.");
+        save=session.Capture();save.flocks[0].warning=1;save.flocks[0].prepared=true;Throws(()=>New().Restore(save),"Impossible prepared-warning saves are rejected.");
+    }
+    public void KitchenFailureRecovery()
+    {
+        FullQuest(false);StartKitchen(true);RecoverFowl("FK_recover1");RecoverFowl("FK_recover2");
+        int before=session.Quantity("raw_fowl"),xp=session.Capture().xp.Single(v=>v.id=="cooking").count;
+        Act("FK_cook_repeat");Check(session.Quantity("raw_fowl")==before && session.Capture().xp.Single(v=>v.id=="cooking").count==xp && !session.Has("FK_HUSH_SEEN"),"Missing fuel craft consumes nothing and emits no XP/hush.");
+        Act("FK_cook_batch");
+        // Model an already-consumed ordinary inventory snapshot without changing quest progress.
+        var save=session.Capture();save.items=save.items.Where(v=>v.id!="fowl_stew").ToArray();session=New();session.Restore(save);tick=0;
+        Check(!session.Available(Index("FK_feed1")),"No tagged food cannot feed a household.");
+        for(int n=0;n<2;n++){RecoverFowl("FK_recover_repeat");Act("timber_cut");Act("FK_cook_repeat");}
+        for(int i=1;i<=4;i++)Act("FK_feed"+i);
+        Check(session.Stage(2)==5,"Repeatable hunt/cook replenishes an active quest after its batch was spent.");
+    }
+    public void KitchenProductionCounters()
+    {
+        FullQuest(false);StartKitchen(true);RecoverFowl("FK_recover1");RecoverFowl("FK_recover2");
+        const string counter="fk_portions_cooked";
+        Check(session.Counter(counter)==0 && session.Counter("unknown")==0,"Production totals begin at zero.");
+        int xp=session.Capture().xp.Single(v=>v.id=="cooking").count;Act("FK_cook_repeat");
+        Check(session.Counter(counter)==0 && session.Quantity("raw_fowl")==2 && session.Capture().xp.Single(v=>v.id=="cooking").count==xp,"Rejected craft cannot advance production or spend ingredients.");
+        Act("timber_cut");while(!session.Available(Index("timber_cut")))Step();Act("timber_cut");
+        Act("FK_cook_repeat");
+        Check(session.Counter(counter)==2 && session.Stage(2)==3 && !session.Has("FK_meal_cooked"),"First public recipe records two portions without the batch receipt.");
+        var save=session.Capture();session=New();session.Restore(save);tick=0;
+        Check(session.Counter(counter)==2 && session.Stage(2)==3,"Partial production total survives checkpoint hydration.");
+        Act("FK_cook_repeat");
+        Check(session.Counter(counter)==4 && session.Stage(2)==4 && session.Quantity("fowl_stew")==4 && !session.Has("FK_meal_cooked"),"Two public cooks satisfy generic stage production requirements.");
+        RecoverFowl("FK_recover_repeat");Act("timber_cut");save=session.Capture();
+        save.counters.Single(c=>c.id==counter).count=int.MaxValue;session=New();session.Restore(save);tick=0;
+        int raw=session.Quantity("raw_fowl"),wood=session.Quantity("common_timber");xp=session.Capture().xp.Single(v=>v.id=="cooking").count;
+        Act("FK_cook_repeat");
+        Check(session.Counter(counter)==int.MaxValue && session.Quantity("raw_fowl")==raw && session.Quantity("common_timber")==wood && session.Capture().xp.Single(v=>v.id=="cooking").count==xp,"Counter overflow rejects the entire action before inventory mutation.");
+        save=session.Capture();save.counters[0].id="unknown_counter";Throws(()=>New().Restore(save),"Unknown saved production keys are rejected.");
+        var stage=content.quests[2].stages[3];var requirements=stage.counterRequirements;
+        try {stage.counterRequirements=new[]{new CounterRequirement{id="no_producer",min=1}};Throws(()=>content.Validate(),"Unproducible requirements fail content validation.");}
+        finally {stage.counterRequirements=requirements;}
+    }
+    public void TaggedInputAtomicity()
+    {
+        FullQuest(false);
+        void CookExistingFood()
+        {
+            Move("timber");while(!session.Available(Index("timber_cut")))Step();Act("timber_cut");
+            int wild=Array.FindIndex(content.enemies,e=>e.id=="wild_boar");while(session.Enemy(wild).health==0)Step();
+            Fight("wild_boar");Act("wild_boar_harvest");Act("cook_meat");
+        }
+        CookExistingFood();
+        var recipe=content.actions[Index("cook_meat")];var originalInputs=recipe.inputs;var originalOutputs=recipe.outputs;int originalTicks=recipe.ticks;
+        try
+        {
+            // Valid temporary policy uses the confirmed generic contract, not new production data.
+            recipe.inputs=new[]{new ItemAmount("dried_game_strips",1)};recipe.tagInputs=new[]{new TagAmount{tag="cooked_food",count=1}};
+            recipe.outputs=new[]{new ItemAmount("fowl_stew",1)};recipe.ticks=0;content.Validate();
+            int xp=session.Capture().xp.Single(v=>v.id=="cooking").count;Act("cook_meat");
+            Check(session.Quantity("dried_game_strips")==1 && session.Quantity("fowl_stew")==0 && session.Capture().xp.Single(v=>v.id=="cooking").count==xp,"Explicit and tagged inputs cannot reserve the same single item.");
+            recipe.inputs=originalInputs;recipe.outputs=originalOutputs;recipe.tagInputs=Array.Empty<TagAmount>();recipe.ticks=originalTicks;CookExistingFood();
+            recipe.inputs=new[]{new ItemAmount("dried_game_strips",1)};recipe.outputs=new[]{new ItemAmount("fowl_stew",1)};recipe.ticks=0;
+            recipe.tagInputs=new[]{new TagAmount{tag="cooked_food",count=1},new TagAmount{tag="cooked_food",count=1}};content.Validate();
+            Act("cook_meat");Check(session.Quantity("dried_game_strips")==2 && session.Quantity("fowl_stew")==0,"Overlapping tag requirements preserve all inputs on failure.");
+            recipe.tagInputs=new[]{new TagAmount{tag="cooked_food",count=1}};content.Validate();Act("cook_meat");
+            Check(session.Quantity("dried_game_strips")==0 && session.Quantity("fowl_stew")==1,"Existing craft executor consumes concrete fixed/tag inputs in one transaction.");
+        }
+        finally{recipe.inputs=originalInputs;recipe.outputs=originalOutputs;recipe.tagInputs=Array.Empty<TagAmount>();recipe.ticks=originalTicks;}
+    }
     void Fight(string id)
     {
         int index=Array.FindIndex(content.enemies,e=>e.id==id);var target=content.targets.Single(t=>t.id==content.enemies[index].target);
@@ -181,9 +335,9 @@ internal sealed class GameplayIntegrationFixture
         for(int n=0;n<1000 && session.ChannelAction>=0;n++)Step();
     }
     int Index(string id)=>Array.FindIndex(content.actions,a=>a.id==id);
-    void Step(GameplayRequest? request=null,bool sight=true)
+    void Step(GameplayRequest? request=null,bool sight=true,bool rushing=false)
     {
-        session.PrepareTick(++tick,x,z,request.HasValue?new[]{request.Value}:Array.Empty<GameplayRequest>(),_=>sight);
+        session.PrepareTick(++tick,x,z,request.HasValue?new[]{request.Value}:Array.Empty<GameplayRequest>(),_=>sight,rushing);
         session.CommitTick(tick);
     }
     static void Check(bool ok,string message){if(!ok)throw new Exception(message);}

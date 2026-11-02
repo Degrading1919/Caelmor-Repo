@@ -19,12 +19,12 @@ namespace Caelmor.Runtime.Gameplay
         const int LocalPlayer = 1;
 
         public static bool TryCraft(ActionDefinition action, GameplayContent content,
-            SimplePlayerInventoryStore inventory, IReadOnlyList<ItemAmount> outputs, bool stationUsable, out string failureReason)
+            SimplePlayerInventoryStore inventory, IReadOnlyList<ItemAmount> outputs, bool stationUsable, out string failureReason,IReadOnlyList<ItemAmount> inputs=null)
         {
             failureReason=null;
             if(!IsDefined(action,content,"craft") || inventory==null || outputs==null)
             { failureReason="invalid_craft_projection";return false; }
-            var context=new CraftContext(action,content,outputs,stationUsable);
+            var context=new CraftContext(action,content,inputs??action.inputs,outputs,stationUsable);
             var executor=new CraftingExecutionSystem(inventory,context,context,context,context,context,context);
             var result=executor.ExecuteCraft(new CraftingRequest(LocalPlayer,action.id,action.target));
             failureReason=result.FailureReason;
@@ -56,10 +56,10 @@ namespace Caelmor.Runtime.Gameplay
             readonly ActionDefinition action;
             readonly GameplayContent content;
             readonly bool stationUsable;
-            public CraftContext(ActionDefinition action,GameplayContent content,IReadOnlyList<ItemAmount> outputs,bool stationUsable)
+            public CraftContext(ActionDefinition action,GameplayContent content,IReadOnlyList<ItemAmount> inputs,IReadOnlyList<ItemAmount> outputs,bool stationUsable)
             {
                 this.action=action;this.content=content;this.stationUsable=stationUsable;
-                Inputs=action.inputs.Select(v=>new CraftItemDelta(v.id,v.count)).ToArray();
+                Inputs=inputs.Select(v=>new CraftItemDelta(v.id,v.count)).ToArray();
                 Outputs=outputs.Select(v=>new CraftItemDelta(v.id,v.count)).ToArray();
             }
             public string RecipeKey=>action.id;

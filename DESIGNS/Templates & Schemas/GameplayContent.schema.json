@@ -16,7 +16,10 @@
     "quests",
     "enemies",
     "exclusiveFlags",
-    "hazards"
+    "hazards",
+    "flocks",
+    "respawnRegions",
+    "presentationEvents"
   ],
   "properties": {
     "version": {
@@ -129,6 +132,24 @@
       "items": {
         "$ref": "#/$defs/hazard"
       }
+    },
+    "flocks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/flock"
+      }
+    },
+    "respawnRegions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/respawnRegion"
+      }
+    },
+    "presentationEvents": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/presentationEvent"
+      }
     }
   },
   "$defs": {
@@ -139,7 +160,8 @@
         "id",
         "name",
         "heal",
-        "quest"
+        "quest",
+        "tags"
       ],
       "properties": {
         "id": {
@@ -156,6 +178,14 @@
         },
         "quest": {
           "type": "boolean"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
         }
       }
     },
@@ -267,7 +297,8 @@
         "objective",
         "all",
         "any",
-        "anyCount"
+        "anyCount",
+        "counterRequirements"
       ],
       "properties": {
         "id": {
@@ -297,6 +328,12 @@
         "anyCount": {
           "type": "integer",
           "minimum": 0
+        },
+        "counterRequirements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/counterRequirement"
+          }
         }
       }
     },
@@ -363,7 +400,11 @@
         "carry",
         "requiresCarry",
         "removeItems",
-        "conditionalOutputs"
+        "conditionalOutputs",
+        "tagInputs",
+        "flock",
+        "flockOperation",
+        "counterEffects"
       ],
       "properties": {
         "id": {
@@ -491,6 +532,29 @@
           "items": {
             "$ref": "#/$defs/conditionalAmount"
           }
+        },
+        "tagInputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tagAmount"
+          }
+        },
+        "flock": {
+          "type": "string"
+        },
+        "flockOperation": {
+          "enum": [
+            "",
+            "prepare",
+            "resolve",
+            "recover"
+          ]
+        },
+        "counterEffects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/counterEffect"
+          }
         }
       }
     },
@@ -510,7 +574,9 @@
         "leash",
         "killFlag",
         "respawn",
-        "lootAction"
+        "lootAction",
+        "boundaryTarget",
+        "boundaryRadius"
       ],
       "properties": {
         "id": {
@@ -569,6 +635,13 @@
         },
         "lootAction": {
           "type": "string"
+        },
+        "boundaryTarget": {
+          "type": "string"
+        },
+        "boundaryRadius": {
+          "type": "number",
+          "minimum": 0
         }
       }
     },
@@ -666,6 +739,228 @@
         "pushDistance": {
           "type": "number",
           "minimum": 0
+        }
+      }
+    },
+    "tagAmount": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tag",
+        "count"
+      ],
+      "properties": {
+        "tag": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "flock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "target",
+        "alternateTarget",
+        "coverTarget",
+        "recoveryTarget",
+        "closedTarget",
+        "all",
+        "none",
+        "alertRadius",
+        "coverRadius",
+        "closedRadius",
+        "warningTicks"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "target": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "alternateTarget": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "coverTarget": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "recoveryTarget": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "closedTarget": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "all": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "none": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "alertRadius": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "coverRadius": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "closedRadius": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "warningTicks": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "respawnRegion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "target",
+        "x",
+        "z",
+        "radius",
+        "all",
+        "none"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "target": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "x": {
+          "type": "number"
+        },
+        "z": {
+          "type": "number"
+        },
+        "radius": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "all": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "none": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "presentationEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "target",
+        "triggerFlag",
+        "kind",
+        "ticks",
+        "rise",
+        "persistRise"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "target": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "triggerFlag": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "kind": {
+          "enum": [
+            "waterRise"
+          ]
+        },
+        "ticks": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "rise": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "persistRise": {
+          "type": "boolean"
+        }
+      }
+    },
+    "counterEffect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "amount"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "amount": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "counterRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "min"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "min": {
+          "type": "integer",
+          "minimum": 1
         }
       }
     }

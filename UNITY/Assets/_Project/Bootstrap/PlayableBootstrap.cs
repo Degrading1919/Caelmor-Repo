@@ -32,17 +32,17 @@ namespace Caelmor.Unity.Playable
             {
                 Application.targetFrameRate = 120;
                 QualitySettings.vSyncCount = 1;
+                smoke = Array.IndexOf(Environment.GetCommandLineArgs(), "--caelmor-smoke") >= 0;
                 Physics.SyncTransforms();
                 Host = new PlayableHost(spawn.position, interactionAnchor, solidLayerMask, navigation);
                 Lowmark = gameObject.AddComponent<LowmarkGame>();
                 Lowmark.Initialize(this);
-                Lowmark.ApplyRequestedCheckpoint();
+                if(!Application.isBatchMode)Lowmark.ApplyRequestedCheckpoint();
                 previous = Host.Snapshot;
                 lastSnapshotTime = Time.realtimeSinceStartupAsDouble;
                 Host.SnapshotCommitted += OnSnapshot;
                 playerView.position = Host.Snapshot.Position;
                 HostInitialized?.Invoke(Host);
-                smoke = Array.IndexOf(Environment.GetCommandLineArgs(), "--caelmor-smoke") >= 0;
                 if (smoke) StartCoroutine(RunSmoke());
             }
             catch (Exception error)
@@ -59,7 +59,7 @@ namespace Caelmor.Unity.Playable
         void Update()
         {
             if (Host == null || StartupFailure != null) return;
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (!Application.isBatchMode && Input.GetKeyDown(KeyCode.Escape))
             {
                 HelpOpen = !HelpOpen;
                 Host.ClearPendingInput(); accumulator = 0;

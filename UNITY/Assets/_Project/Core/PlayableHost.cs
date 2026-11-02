@@ -94,7 +94,7 @@ namespace Caelmor.Unity.Playable
         // Generic activity bridge. Content identifiers are resolved by the authoritative
         // adapter after consumption; they never mutate state from a UI callback.
         internal event Action<int, int, int> GameplayCommandConsumed;
-        internal event Action<long, Vector3> GameplayPreparing;
+        internal event Action<long, Vector3, bool> GameplayPreparing;
         internal event Action<long> GameplayCommitting;
         internal event Action GameplayAborted;
         internal event Action InputCleared;
@@ -287,7 +287,10 @@ namespace Caelmor.Unity.Playable
                 }
                 if (!hasDestination) pendingSprint = false;
             }
-            GameplayPreparing?.Invoke(tick.TickIndex, pendingPosition);
+            // Noise describes actual movement during this tick; final presentation may
+            // already be idle when a short sprint route finishes in the same step.
+            bool movementRushing=sprint && Vector3.Distance(pendingPosition,Snapshot.Position)>.0001f;
+            GameplayPreparing?.Invoke(tick.TickIndex, pendingPosition, movementRushing);
             if (!interact) return;
             if (anchor == null || !anchor.isActiveAndEnabled || requestedTarget != anchor.fixtureId)
                 pendingFeedback = "Interaction rejected: target is unavailable.";

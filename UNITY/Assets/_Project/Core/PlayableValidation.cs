@@ -117,7 +117,7 @@ namespace Caelmor.Unity.Playable
                 host.SubmitDestination(new Vector3(6, 0, 5)); host.Step();
                 Check(host.Snapshot.HasDestination && host.Snapshot.Destination.x > 5.9f && host.Snapshot.Destination.z < -3.9f,
                     "obstacle destination rejected while valid existing route continues");
-                host.SubmitDestination(new Vector3(25, 0, 0)); host.Step();
+                host.SubmitDestination(new Vector3(50, 0, 0)); host.Step();
                 Check(host.Snapshot.HasDestination && host.Snapshot.Destination.x > 5.9f, "off-terrain destination cannot replace valid route");
                 Check(!host.SubmitDestination(new Vector3(float.NaN, 0, 0)) && !host.SubmitDestination(new Vector3(0, 2, 0)),
                     "nonfinite and elevated forged destinations rejected");
@@ -153,19 +153,19 @@ namespace Caelmor.Unity.Playable
             finally { obstruction.SetActive(false); UnityEngine.Object.DestroyImmediate(obstruction); Physics.SyncTransforms(); }
             // A separate native NavMesh island is navigable but cannot be reached from the player mesh.
             var island = GameObject.CreatePrimitive(PrimitiveType.Cube); island.layer = 8;
-            island.transform.position = new Vector3(40, -.25f, 0); island.transform.localScale = new Vector3(4, .5f, 4);
+            island.transform.position = new Vector3(60, -.25f, 0); island.transform.localScale = new Vector3(4, .5f, 4);
             island.AddComponent<NavigableTerrain>(); Physics.SyncTransforms();
             var sources = new List<NavMeshBuildSource>();
-            NavMeshBuilder.CollectSources(new Bounds(new Vector3(40, 0, 0), new Vector3(5, 3, 5)), mask,
+            NavMeshBuilder.CollectSources(new Bounds(new Vector3(60, 0, 0), new Vector3(5, 3, 5)), mask,
                 NavMeshCollectGeometry.PhysicsColliders, 0, new List<NavMeshBuildMarkup>(), sources);
             var islandData = NavMeshBuilder.BuildNavMeshData(NavMesh.GetSettingsByIndex(0), sources,
-                new Bounds(new Vector3(40, 0, 0), new Vector3(5, 3, 5)), Vector3.zero, Quaternion.identity);
+                new Bounds(new Vector3(60, 0, 0), new Vector3(5, 3, 5)), Vector3.zero, Quaternion.identity);
             var islandInstance = NavMesh.AddNavMeshData(islandData);
             try
             {
                 using (var host = new PlayableHost(new Vector3(0, 0, -4), anchor, mask, navigation))
                 {
-                    host.SubmitDestination(new Vector3(40, 0, 0)); host.Step();
+                    host.SubmitDestination(new Vector3(60, 0, 0)); host.Step();
                     Check(!host.Snapshot.HasDestination && host.Snapshot.Position == new Vector3(0, 0, -4),
                         "complete path required; unreachable navigable island rejected");
                 }

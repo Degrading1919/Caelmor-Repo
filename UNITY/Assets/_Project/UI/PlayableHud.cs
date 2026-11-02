@@ -12,15 +12,15 @@ namespace Caelmor.Unity.Playable
         internal static bool BlocksPointer(PlayableBootstrap game,Vector2 screen)
         {
             if(game.HelpOpen)return true;
-            if(game.Lowmark!=null && game.Lowmark.DiscoveryQuiet)return false;
+            if(game.Lowmark!=null && game.Lowmark.QuietPresentation)return false;
             float scale=Mathf.Min(Screen.width/1280f,Screen.height/720f);
             var p=new Vector2((screen.x-(Screen.width-1280*scale)/2)/scale,(Screen.height-screen.y-(Screen.height-720*scale)/2)/scale);
             return new Rect(24,24,405,108).Contains(p)||new Rect(946,24,310,648).Contains(p)||new Rect(24,480,902,192).Contains(p)||new Rect(24,680,1232,32).Contains(p);
         }
-        void Update(){if(Input.GetKeyDown(KeyCode.I))inventory=!inventory;}
+        void Update(){if(!Application.isBatchMode && Input.GetKeyDown(KeyCode.I))inventory=!inventory;}
         void OnGUI()
         {
-            if(game?.Lowmark!=null && game.Lowmark.DiscoveryQuiet)return;
+            if(game?.Lowmark!=null && game.Lowmark.QuietPresentation)return;
             Styles();float scale=Mathf.Min(Screen.width/1280f,Screen.height/720f);
             GUI.matrix=Matrix4x4.TRS(new Vector3((Screen.width-1280*scale)/2,(Screen.height-720*scale)/2),Quaternion.identity,Vector3.one*scale);
             if(game?.Host==null || game.StartupFailure!=null || game.Lowmark?.Session==null){GUI.Label(new Rect(30,30,1200,600),"Could not start Caelmor.\n"+game?.StartupFailure,label);return;}
@@ -28,7 +28,7 @@ namespace Caelmor.Unity.Playable
             GUI.Box(new Rect(24,24,405,108),"");
             GUI.Label(new Rect(38,31,380,30),"CAELMOR  /  LOWMARK",title);
             GUI.Label(new Rect(38,65,380,24),"Health "+session.Health+" / "+content.tuning.health+(session.Carry.Length>0?"    Carrying: "+session.Carry:""),label);
-            GUI.Label(new Rect(38,95,380,24),session.ChannelAction>=0?content.actions[session.ChannelAction].label+"  "+(session.ChannelRemaining/10f).ToString("F1")+"s":"Whisperflow Landing",small);
+            GUI.Label(new Rect(38,95,380,24),session.ChannelAction>=0?content.actions[session.ChannelAction].label+"  "+(session.ChannelRemaining/10f).ToString("F1")+"s":rpg.LocationLabel,small);
             GUI.Box(new Rect(946,24,310,210),"");
             GUI.Label(new Rect(962,38,280,30),inventory?"PACK & SKILLS":"JOURNAL",title);
             if(GUI.Button(new Rect(962,190,135,30),inventory?"Journal [I]":"Pack [I]"))inventory=!inventory;
@@ -36,16 +36,19 @@ namespace Caelmor.Unity.Playable
             if(!inventory)
             {
                 GUILayout.BeginArea(new Rect(962,75,278,110));journalScroll=GUILayout.BeginScrollView(journalScroll);
-                for(int i=0;i<content.quests.Length;i++)
+                for(int pass=0;pass<2;pass++)for(int i=0;i<content.quests.Length;i++)
                 {
                     if(!session.QuestAvailable(i))continue;
-                    int stage=session.Stage(i);GUILayout.Label(content.quests[i].name,label);
-                    GUILayout.Label(stage>=content.quests[i].stages.Length?"Completed. Explore and prepare for the next crossing.":content.quests[i].stages[stage].objective,small);
+                    int stage=session.Stage(i);bool completed=stage>=content.quests[i].stages.Length;
+                    if(completed!=(pass==1))continue;
+                    GUILayout.Label(content.quests[i].name,label);
+                    GUILayout.Label(completed?"Completed.":content.quests[i].stages[stage].objective,small);
+                    if(!completed)foreach(var requirement in content.quests[i].stages[stage].counterRequirements)GUILayout.Label(Mathf.Min(session.Counter(requirement.id),requirement.min)+" / "+requirement.min,small);
                     GUILayout.Space(5);
                 }
                 GUILayout.EndScrollView();GUILayout.EndArea();
             }
-            else GUI.Label(new Rect(962,80,278,95),"Collect timber at the coppice. Harvest defeated game. Cook meat with timber at the fire. Eat strips from your pack to restore health.",small);
+            else GUI.Label(new Rect(962,80,278,95),"Gather, hunt and cook useful supplies. Prepare in reed cover, then walk toward the flock. Recover downed fowl separately. Eat cooked food from your pack to restore health.",small);
             GUI.Box(new Rect(946,244,310,428),"");
             GUILayout.BeginArea(new Rect(960,255,282,404));
             if(inventory)
@@ -72,6 +75,12 @@ namespace Caelmor.Unity.Playable
                 {
                     var target=content.targets[selected];GUILayout.Label(target.name,title);
                     actionScroll=GUILayout.BeginScrollView(actionScroll);
+                    int flock=Array.FindIndex(content.flocks,f=>f.target==target.id||f.coverTarget==target.id||f.recoveryTarget==target.id);
+                    if(flock>=0)
+                    {
+                        var state=session.Flock(flock);
+                        GUILayout.Label(state.recoveryPending?"A bird is down. Recovery gives food and Hunting XP.":state.warning>0?"Heads up! Withdraw from the flock to avoid scattering it.":state.prepared?"Prepared. Walk calmly toward the feeding flock.":"Prepare in reed cover. Walking keeps the approach quiet; sprinting alarms the sentinel.",small);
+                    }
                     int enemy=Array.FindIndex(content.enemies,e=>e.target==target.id);
                     if(enemy>=0 && session.TargetVisible(selected) && session.Enemy(enemy).health>0 && GUILayout.Button("Attack"))rpg.Attack(enemy);
                     bool any=false;
