@@ -115,6 +115,126 @@ def _line_span(poly,axis,value):
     return (min(result),max(result)) if len(result)>=2 else None
 
 
+def roof_join_kind(points,patches,users):
+    if len(users)!=2:
+        return 'edge'
+    p,q=(patches[u[0]] for u in users)
+    if sum(abs(x-y) for x,y in zip(p.plane,q.plane))<1e-6:
+        return 'coplanar'
+    slope_sum=0.
+    for patch,(_,a,b) in zip((p,q),users):
+        dx,dy=points[b][0]-points[a][0],points[b][1]-points[a][1]
+        slope_sum+=(-dy*patch.plane[0]+dx*patch.plane[1])/math.hypot(dx,dy)
+    return 'ridge' if slope_sum<0 else 'valley'
+
+
+def _valley_clearances(points,patches,edges):
+    clearances=defaultdict(list)
+    for users in edges.values():
+        if roof_join_kind(points,patches,users)!='valley':
+            continue
+        for fi,a,b in users:
+            p,q=points[a],points[b]
+            dx,dy=q[0]-p[0],q[1]-p[1]
+            clearances[fi].append((-dy,dx,dy*p[0]-dx*p[1]-.065*math.hypot(dx,dy)))
+    return clearances
+
+
+@dataclass
+class Shingle:
+    poly: list
+    plane: tuple
+    source: int
+    row: int
+    bay: int
+    axis: int
+    direction: int
+    eave_coord: float
+    course_start: float
+    course_end: float
+    u0: float
+    u1: float
+    material: str
+    repair: bool
+    butt: float
+    tilt: float
+
+    def height(self,x,y):
+        t=self.direction*((x,y)[self.axis]-self.eave_coord)
+        lip=1-(t-self.course_start)/(self.course_end-self.course_start)
+        u=(x,y)[1-self.axis]
+        a,b,c=self.plane
+        return a*x+b*y+c+.033+self.butt*lip+self.tilt*(u-(self.u0+self.u1)*.5)
+
+
+def shingle_layout(plan,patches=None,topology=None):
+    """Variable-width, lapped courses on resolved slopes; bounded eave repairs.
+
+    The course stream is keyed to the original roof slope, not its clipped
+    fragments, so valleys and coplanar partition edges cannot scramble the rows.
+    """
+    patches=roof_faces(plan) if patches is None else patches
+    points,faces,edges=roof_topology(patches) if topology is None else topology
+    clearances=_valley_clearances(points,patches,edges)
+    detail=plan.settings.detail
+    exposure={'HIGH':.30,'MEDIUM':.44,'LOW':.85}[detail]
+    width={'HIGH':.205,'MEDIUM':.32,'LOW':.67}[detail]
+    step=exposure/math.sqrt(1+plan.slope**2)
+    # Shingles need headlap, not separated rectangular plates on a bare deck.
+    # Three-course coverage keeps the lower courses behind each open side joint.
+    overlap=step*2.2
+    output=[]
+    for pi,patch in enumerate(patches):
+        axis=1 if abs(patch.plane[1])>1e-8 else 0
+        across=1-axis
+        direction=1 if patch.plane[axis]>0 else -1
+        rect=plan.rects[patch.source]
+        eave=(rect[axis]-plan.settings.overhang if direction>0 else rect[axis+2]+plan.settings.overhang)
+        source_lo=rect[across]-plan.settings.overhang
+        source_hi=rect[across+2]+plan.settings.overhang
+        max_t=max(direction*(p[axis]-eave) for p in patch.poly)
+        min_t=min(direction*(p[axis]-eave) for p in patch.poly)
+        cohort=plan.rng(f'roof.eave_repair.{patch.source}.{direction}')
+        # A short failed eave board can require replacing nearby shingle butts.
+        repaired=cohort.random()<.34
+        repair_u=cohort.uniform(source_lo+.2,source_hi-.2)
+        row=-2
+        t=-2*step
+        course_rng=plan.rng(f'roof.courses.{patch.source}.{direction}')
+        while t<=max_t+1e-7:
+            advance=step*course_rng.uniform(.96,1.04)
+            end=t+advance+overlap
+            if end>=min_t:
+                rng=plan.rng(f'roof.shingles.{patch.source}.{direction}.{row}')
+                u=source_lo-width*(.35 if row%2 else .85)-rng.uniform(0,.12)*width
+                bay=0
+                while u<source_hi:
+                    span=width*rng.uniform(.76,1.24)
+                    u0,u1=u+.002,u+span-.002
+                    upper_taper=min(.012,span*.045)
+                    # Split shingles narrow towards their concealed heads.
+                    local=[(u0,t),(u1,t),(u1-upper_taper,end),(u0+upper_taper,end)]
+                    poly=[((u,eave+direction*v) if axis==1 else (eave+direction*v,u)) for u,v in local]
+                    if area(poly)<0:
+                        poly.reverse()
+                    for a,b,c in inequalities(patch.poly)+clearances[pi]:
+                        poly=clip(poly,a,b,c)
+                        if not poly:
+                            break
+                    repair=repaired and 0<=row<3 and abs((u0+u1)*.5-repair_u)<(.46-row*.10)
+                    shade=rng.random()
+                    material='roof_patch' if repair else 'roof_dark' if shade<.17 else 'roof_worn' if shade>.86 else 'roof'
+                    butt,tilt=rng.uniform(.019,.021),rng.uniform(-.004,.004)
+                    if poly and area(poly)>.0002:
+                        output.append(Shingle(poly,patch.plane,patch.source,row,bay,axis,direction,eave,t,end,u0,u1,material,repair,
+                                              butt,tilt))
+                    u+=span
+                    bay+=1
+            t+=advance
+            row+=1
+    return output
+
+
 def build_roof(plan):
     patches=roof_faces(plan)
     points,faces,edges=roof_topology(patches)
@@ -127,46 +247,20 @@ def build_roof(plan):
             _,a,b=users[0]
             solids.append((a,a+n,b+n,b))
     deck.indexed(verts,solids)
-    tiles=MeshBuffer('Split oak shingle courses','roof','roof')
-    repair=MeshBuffer('Replacement shingle cohort','roof_patch','roof')
-    ridge=MeshBuffer('Overlapping ridge caps','roof','roof')
+    tiles={key:MeshBuffer(name,key,'roof') for key,name in [
+        ('roof','Split oak shingle courses'),('roof_dark','Seasoned shingle cohorts'),
+        ('roof_worn','Exposed shingle butts'),('roof_patch','Replacement shingle cohort')]}
+    for shingle in shingle_layout(plan,patches,(points,faces,edges)):
+        tiles[shingle.material].extrude([(x,y,shingle.height(x,y)) for x,y in shingle.poly],(0,0,-.023))
+    ridge=MeshBuffer('Overlapping ridge caps','roof_dark','roof')
     trim=MeshBuffer('Ridge caps and valley flashing','iron','roof')
-    fascia=MeshBuffer('Roof edge fascia','timber_light','roof')
+    fascia=MeshBuffer('Roof edge fascia','timber','roof')
     rafters=MeshBuffer('Supported roof rafters','timber','roof')
-    rng=plan.rng('roof.repair')
-    repair_center=(rng.uniform(.15,.85)*plan.settings.width,rng.uniform(.1,.35)*plan.settings.depth)
     detail=plan.settings.detail
-    step=.29 if detail=='HIGH' else .45 if detail=='MEDIUM' else .9
-    width=.23 if detail=='HIGH' else .36 if detail=='MEDIUM' else .7
-    for pi,patch in enumerate(patches):
-        # Rows perpendicular to downhill direction, laid on the roof plane.
+    for patch in patches:
         axis=1 if abs(patch.plane[1])>1e-8 else 0
         across=1-axis
-        lo,hi=min(p[axis] for p in patch.poly),max(p[axis] for p in patch.poly)
         amin,amax=min(p[across] for p in patch.poly),max(p[across] for p in patch.poly)
-        for row in range(math.floor(lo/step),math.ceil(hi/step)):
-            v0,v1=row*step,(row+1)*step-.009
-            for col in range(math.floor(amin/width)-1,math.ceil(amax/width)+1):
-                u0=col*width+(row%2)*width*.5
-                u1=u0+width-.008
-                if axis==1:
-                    poly=[(u0,v0),(u1,v0),(u1,v1),(u0,v1)]
-                else:
-                    poly=[(v0,u0),(v1,u0),(v1,u1),(v0,u1)]
-                for a,b,c in inequalities(patch.poly):
-                    poly=clip(poly,a,b,c)
-                    if not poly:
-                        break
-                if not poly or area(poly)<.0004:
-                    continue
-                cx,cy=sum(p[0] for p in poly)/len(poly),sum(p[1] for p in poly)/len(poly)
-                replacement=((cx-repair_center[0])**2/2.0+(cy-repair_center[1])**2/.7<1)
-                out=repair if replacement else tiles
-                # A small consistent raised butt gives courses real relief.
-                sign=1 if patch.plane[axis]>0 else -1
-                top=[(x,y,patch.height(x,y)+.052+.018*((((x,y)[axis]-v0)/step) if sign<0 else (v1-(x,y)[axis])/step)) for x,y in poly]
-                out.extrude(top,(0,0,-.028))
-        # Structural rafters follow each visible slope and stop at resolved valleys.
         spacing=.64 if detail=='HIGH' else 1.0
         for col in range(math.ceil(amin/spacing),math.floor(amax/spacing)+1):
             u=col*spacing
@@ -183,24 +277,35 @@ def build_roof(plan):
         length=math.dist(a,b)
         if length<.05:
             continue
-        if len(users)==1:
-            fascia.beam((a[0],a[1],a[2]-.09),(b[0],b[1],b[2]-.09),.13,.22)
-        elif len(users)==2:
-            p,q=(patches[u[0]] for u in users)
-            if sum(abs(x-y) for x,y in zip(p.plane,q.plane))<1e-6:
-                continue
-            # Convex slope joins get rounded ridge tiles; concave joins metal valleys.
-            slope_sum=0
-            for patch,(_,ea,eb) in zip((p,q),users):
-                va,vb=points[ea],points[eb]
-                dx,dy=vb[0]-va[0],vb[1]-va[1]
+        kind=roof_join_kind(points,patches,users)
+        if kind=='edge':
+            method=fascia.chamfered_beam if detail!='LOW' else fascia.beam
+            # The roof falls across the complete board section, not just its
+            # centreline. Keep even the outer top arris below the supporting
+            # roof plane; a fixed centre offset let brown timber breach tiles.
+            fascia_drop=.02+.11*math.sqrt(1+plan.slope**2)+.065*plan.slope
+            method((a[0],a[1],a[2]-fascia_drop),(b[0],b[1],b[2]-fascia_drop),.13,.22)
+        elif kind=='ridge':
+            dx,dy=b[0]-a[0],b[1]-a[1]
+            xy_length=math.hypot(dx,dy)
+            across=(-dy/xy_length,dx/xy_length)
+            pieces=max(1,math.ceil(length/.39))
+            for i in range(pieces):
+                start=lerp(a,b,i/pieces)
+                finish=lerp(a,b,min(1,(i+1)/pieces+.012/length))
+                # Two pitched cap boards lap across the ridge, rather than a round pipe.
+                for side in (-1,1):
+                    poly=[]
+                    for p,d in ((start,0),(finish,0),(finish,side*.145),(start,side*.145)):
+                        poly.append((p[0]+across[0]*d,p[1]+across[1]*d,p[2]+.083-abs(d)*plan.slope))
+                    ridge.extrude(poly,(0,0,-.025))
+        elif kind=='valley':
+            # Folded valley aprons lie beneath cut shingle margins on both slopes.
+            for fi,ea,eb in users:
+                p,q=points[ea],points[eb]
+                dx,dy=q[0]-p[0],q[1]-p[1]
                 l=math.hypot(dx,dy)
-                slope_sum+=(-dy*patch.plane[0]+dx*patch.plane[1])/l
-            aa,bb=(a[0],a[1],a[2]+.085),(b[0],b[1],b[2]+.085)
-            if slope_sum<0:
-                pieces=max(1,math.ceil(length/.38))
-                for i in range(pieces):
-                    ridge.cylinder(lerp(aa,bb,i/pieces),lerp(aa,bb,(i+1)/pieces),.105,8)
-            else:
-                trim.beam(aa,bb,.19,.028)
-    return [b for b in (deck,tiles,repair,ridge,trim,fascia,rafters) if b.faces]
+                inward=(-dy/l*.13,dx/l*.13)
+                xy=[p[:2],q[:2],(q[0]+inward[0],q[1]+inward[1]),(p[0]+inward[0],p[1]+inward[1])]
+                trim.extrude([(x,y,patches[fi].height(x,y)+.013) for x,y in xy],(0,0,-.007))
+    return [b for b in (deck,*tiles.values(),ridge,trim,fascia,rafters) if b.faces]

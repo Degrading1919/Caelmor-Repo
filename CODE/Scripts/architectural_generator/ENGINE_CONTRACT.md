@@ -46,3 +46,28 @@ Root package imports bpy lazily so pure unittest imports work outside Blender.
 
 Tests agent owns tests/, evidence render driver, README.md, THIRD_PARTY.md.
 Do not publish git from subagents. Do not modify other agents' files.
+
+## Exterior quality and roof clearance
+
+`MeshBuffer.chamfered_beam(a,b,width,depth=None,chamfer=.008)` emits a closed
+octagonal section for visible frame arrises. `facade.frame_layout` exposes
+principal posts, local jambs, plates, knee/bay braces, gable rakes/kingpost/collar,
+opening constraints, recorded unsupported spans, and roof-safety datums.
+Opening-column intervals already include full post-width clearance; candidate
+post centre intervals must not apply that clearance a second time.
+
+Roof safety considers the full timber section, external projection, slope and
+120mm deck thickness. `engine.validate` checks vertices, edge midpoints and face
+centroids against the roof underside for framing and timber details. Posts,
+plates, pegs, gable members, headers and signs must not breach the weather roof.
+Roof fascia uses its supporting plane extension and must remain below that plane.
+Wall infill can contact the deck; independent tests allow at most 10mm of adaptive
+gable-cap interpolation residual beneath shingle cover.
+
+`roof.shingle_layout` exposes original-slope/course/bay identity, actual tapered
+footprint, plane, butt lift, material cohort and bounded eave repair status.
+Three-course headlap and starter courses back side joints with shingles.
+Valley margins leave room for folded aprons; ridge caps are pitched boards.
+Material revision 2 preserves legacy/user-edited datablocks and packs original
+color, normal and roughness maps. Exported corner weather colors must match
+Blender and stay in the glTF `[0,1]` component range.

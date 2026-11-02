@@ -8,7 +8,7 @@ from .facade import build_facades
 from .roof import build_roof, roof_faces, roof_topology
 from .geometry import area, cross, sub, dot
 
-TOOL_REVISION='0.1.0'
+TOOL_REVISION='0.2.0'
 
 
 def generate(settings):
@@ -71,6 +71,18 @@ def validate(plan,buffers):
             component_volumes[root(v)]+=volume
         if any(v<=1e-10 for v in component_volumes.values()):
             errors.append(f'{b.name}: inward or zero-volume solid component')
+        # Section-aware construction must remain below the roof underside. A
+        # centreline-only eave check missed posts/pegs outside the wall face.
+        is_frame=(b.material.startswith('timber') and b.layer in ('structure','details'))
+        if is_frame:
+            samples=list(b.vertices)
+            samples.extend(tuple((x+y)*.5 for x,y in zip(b.vertices[a],b.vertices[c]))
+                           for a,c in edge_counts)
+            samples.extend(tuple(sum(b.vertices[i][axis] for i in face)/len(face) for axis in range(3))
+                           for face in b.faces)
+            excess=max((z-(plan.roof_height(x,y)-.12) for x,y,z in samples),default=0.)
+            if excess>1e-5:
+                errors.append(f'{b.name}: timber crosses roof underside by {excess:.6f}m')
     patches=roof_faces(plan)
     roof_topology(patches)
     # Every convex patch vertex and centroid must lie on the analytic envelope.

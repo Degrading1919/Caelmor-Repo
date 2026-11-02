@@ -10,6 +10,8 @@ individual frames are combined into one contact sheet and removed afterward.
 import sys
 import json
 import subprocess
+import time
+import hashlib
 from dataclasses import asdict
 from pathlib import Path
 
@@ -19,8 +21,8 @@ from mathutils import Vector
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import caelmor_architecture as addon
-from caelmor_architecture.model import Settings
-from caelmor_architecture.blender_backend import TAG, build
+from caelmor_architecture.model import Settings, make_plan
+from caelmor_architecture.blender_backend import COLLECTION_TAG, SETTINGS_KEY, TAG, build
 from caelmor_architecture.engine import generate, validate
 
 
@@ -112,9 +114,13 @@ def create_buildings():
 
     records = []
     for index, settings in enumerate(configurations):
+        build_started = time.perf_counter()
         collection, metrics = build(settings)
+        blender_build_seconds = time.perf_counter() - build_started
+        validation_started = time.perf_counter()
         plan, buffers = generate(settings)
         validation = validate(plan, buffers)
+        pure_generation_seconds = time.perf_counter() - validation_started
         if not validation["valid"]:
             raise ValueError(f"Evidence geometry failed validation: {validation['errors']}")
         col, row = index % 5, index // 5
@@ -128,16 +134,25 @@ def create_buildings():
                                   metrics["height"] * 0.47))
         records.append({"settings": settings, "collection": collection, "objects": objects,
                         "anchor": anchor, "offset": offset, "center": center,
-                        "metrics": metrics, "validation": validation})
+                        "metrics": metrics, "validation": validation, "plan": plan,
+                        "blender_build_seconds": blender_build_seconds,
+                        "pure_generation_validation_seconds": pure_generation_seconds})
+    source_hashes = {}
+    for source in sorted((ROOT / "caelmor_architecture").glob("*.py")):
+        source_hashes[source.name] = hashlib.sha256(source.read_bytes()).hexdigest()
     report = {
         "blender_version": bpy.app.version_string,
         "renderer": "BLENDER_EEVEE",
         "contact_sheet_views_per_building": len(VIEWS),
+        "source_sha256": source_hashes,
+        "timing_note": "Per-building Blender object construction and independent pure generation/validation wall times measured with time.perf_counter; rendering times recorded by render entry below.",
         "buildings": [
             {"function": r["settings"].function, "seed": r["settings"].seed,
              "footprint": r["settings"].footprint, "width": r["settings"].width,
              "depth": r["settings"].depth, "floors": r["settings"].floors,
              "settings": asdict(r["settings"]), "validation": r["validation"],
+             "blender_build_seconds": round(r["blender_build_seconds"], 4),
+             "pure_generation_validation_seconds": round(r["pure_generation_validation_seconds"], 4),
              "mesh_objects": r["metrics"]["objects"], "vertices": r["metrics"]["vertices"],
              "bounds_m": [r["metrics"]["width"], r["metrics"]["depth"], r["metrics"]["height"]],
              "geometry_hash": r["collection"].get("caelm_geometry_hash")}
@@ -172,9 +187,13 @@ def render_contact_sheet(scene, camera, sun, light, ground, records):
     scene.render.resolution_x = 1200
     scene.render.resolution_y = 1200
     scene.render.filepath = str(OUT / "hero.png")
+    hero_started = time.perf_counter()
     bpy.ops.render.render(write_still=True)
-    print(f"HERO_READY={OUT / 'hero.png'}", flush=True)
+    hero_seconds = round(time.perf_counter() - hero_started, 3)
+    closeup_times = render_closeups(scene, camera, sun, light, ground, hero)
+    print(f"HERO_READY={OUT / 'hero.png'} seconds={hero_seconds}", flush=True)
 
+    contact_started = time.perf_counter()
     FRAMES.mkdir(parents=True, exist_ok=True)
     scene.render.resolution_x = WIDTH
     scene.render.resolution_y = HEIGHT
@@ -195,6 +214,7 @@ def render_contact_sheet(scene, camera, sun, light, ground, records):
             _set_light(sun, light, c, distance, 1200, max(width, depth) * 1.4)
             scene.render.filepath = str(FRAMES / f"building_{record_index:02d}_{view}.png")
             bpy.ops.render.render(write_still=True)
+    contact_seconds = round(time.perf_counter() - contact_started, 3)
 
     # Render a settlement overview of the complete, editable set.
     for record in records:
@@ -212,7 +232,19 @@ def render_contact_sheet(scene, camera, sun, light, ground, records):
     scene.render.resolution_x = 1800
     scene.render.resolution_y = 1100
     scene.render.filepath = str(OUT / "overview.png")
+    overview_started = time.perf_counter()
+    manifest_path = OUT / "evidence_manifest.json"
+    report = json.loads(manifest_path.read_text(encoding="utf-8"))
+    report["renders"] = {
+        "hero": {"file": "hero.png", "resolution": [1200, 1200], "seconds": hero_seconds},
+        "closeups": closeup_times,
+        "contact_sheet": {"views": len(records) * len(VIEWS), "resolution_per_view": [WIDTH, HEIGHT],
+                          "seconds": contact_seconds},
+        "overview": {"file": "overview.png", "resolution": [1800, 1100]},
+    }
     bpy.ops.render.render(write_still=True)
+    report["renders"]["overview"]["seconds"] = round(time.perf_counter() - overview_started, 3)
+    manifest_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
     bpy.ops.wm.save_as_mainfile(filepath=str(OUT / "ten_buildings.blend"), compress=True)
     print(f"BLEND_READY={OUT / 'ten_buildings.blend'}", flush=True)
 
@@ -227,10 +259,130 @@ def render_contact_sheet(scene, camera, sun, light, ground, records):
     scene.render.filepath = str(OUT / "overview.png")
 
 
+def render_closeups(scene, camera, sun, light, ground, hero):
+    """Capture timber joinery, roof/eave, shingle valley, and material crops."""
+    c = hero["center"]
+    plan = hero.get("plan")
+    if plan is None:
+        row = json.loads((OUT / "evidence_manifest.json").read_text(encoding="utf-8"))["buildings"][0]
+        plan = make_plan(Settings(**row["settings"]))
+    width = hero["metrics"]["width"]
+    depth = hero["metrics"]["depth"]
+    height = hero["metrics"]["height"]
+    # The farmhouse is the L-footprint seed-17 hero. Target its front corner,
+    # valley junction, and uninterrupted plaster/shingle surfaces separately.
+    views = (
+        ("closeup_timber.png", c + Vector((2.0, -depth * .34, height * .30)),
+         c + Vector((-8.0, -12.0, 8.0)), 7.5),
+        ("closeup_valley.png", Vector((3.4, .8, plan.roof_height(3.4, .8)+.15)),
+         Vector((8.0, -10.0, 8.0)), 4.5),
+        ("closeup_surfaces.png", Vector((9.0, 0.0, 2.2)),
+         Vector((5.0, -9.0, 3.5)), 4.3),
+        ("closeup_eave.png", Vector((9.0, -.1, plan.eave + .1)),
+         Vector((5.0, -7.0, 5.0)), 3.6),
+    )
+    scene.render.resolution_x = scene.render.resolution_y = 900
+    results = []
+    for filename, target, offset, scale in views:
+        point_camera(camera, target + offset, target)
+        camera.data.ortho_scale = scale
+        ground.location = (target.x, target.y, -0.08)
+        _set_light(sun, light, target, 20, 1200, 11)
+        scene.render.filepath = str(OUT / filename)
+        started = time.perf_counter()
+        bpy.ops.render.render(write_still=True)
+        results.append({"file": filename, "resolution": [900, 900],
+                        "seconds": round(time.perf_counter() - started, 3)})
+    return results
+
+
+def render_hero_only(scene, camera, sun, light, ground, records):
+    hero = records[0]
+    for record in records:
+        for obj in record["objects"]:
+            obj.hide_render = record is not hero
+    c = hero["center"]
+    ground.location = (c.x, c.y, -0.08)
+    point_camera(camera, c + Vector((-17, -23, 21)), c)
+    camera.data.ortho_scale = max(hero["metrics"]["width"], hero["metrics"]["depth"],
+                                  hero["metrics"]["height"]) * 1.35 + 2.5
+    _set_light(sun, light, c, 30, 1500, 20)
+    scene.render.resolution_x = scene.render.resolution_y = 1200
+    scene.render.filepath = str(OUT / "hero.png")
+    started = time.perf_counter()
+    bpy.ops.render.render(write_still=True)
+    seconds = round(time.perf_counter() - started, 3)
+    closeup_times = render_closeups(scene, camera, sun, light, ground, hero)
+    point_camera(camera, c + Vector((-17, -23, 21)), c)
+    camera.data.ortho_scale = max(hero["metrics"]["width"], hero["metrics"]["depth"],
+                                  hero["metrics"]["height"]) * 1.35 + 2.5
+    scene.render.resolution_x = scene.render.resolution_y = 1200
+    print(f"HERO_READY={OUT / 'hero.png'} seconds={seconds}", flush=True)
+    for record in records:
+        for obj in record["objects"]:
+            obj.hide_render = False
+    scene.render.filepath = str(OUT / "hero.png")
+    bpy.ops.wm.save_as_mainfile(filepath=str(OUT / "ten_buildings.blend"), compress=True)
+    manifest_path = OUT / "evidence_manifest.json"
+    report = json.loads(manifest_path.read_text(encoding="utf-8"))
+    report["renders"] = {
+        "hero": {"file": "hero.png", "resolution": [1200, 1200], "seconds": seconds},
+        "closeups": closeup_times,
+    }
+    manifest_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+
+
+def render_saved_closeups():
+    """Reframe detail crops from the hero-only scene without rebuilding geometry."""
+    blend = OUT / "ten_buildings.blend"
+    bpy.ops.wm.open_mainfile(filepath=str(blend))
+    scene = bpy.context.scene
+    report_path = OUT / "evidence_manifest.json"
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    row = report["buildings"][0]
+    settings = row["settings"]
+    bounds = row["bounds_m"]
+    center_y = settings["depth"] * .5 if settings["footprint"] == "RECT" else (settings["depth"]-settings["wing_depth"])*.5
+    hero = {"center": Vector((bounds[0]*.5, center_y, bounds[2]*.47)),
+            "metrics": {"width": bounds[0], "depth": bounds[1], "height": bounds[2]},
+            "plan": make_plan(Settings(**settings))}
+    collection = next(c for c in bpy.data.collections
+                      if c.get(COLLECTION_TAG) and json.loads(c.get(SETTINGS_KEY, "{}" )).get("seed") == settings["seed"]
+                      and json.loads(c.get(SETTINGS_KEY, "{}" )).get("function") == settings["function"])
+    hero_objects = [obj for obj in collection.objects if obj.get(TAG) and not obj.get("caelm_collider")]
+    hero_set = set(hero_objects)
+    for obj in bpy.data.objects:
+        if obj.get(TAG) and not obj.get("caelm_collider"):
+            obj.hide_render = obj not in hero_set
+    camera = scene.camera
+    sun = bpy.data.objects.get("Evidence Sun")
+    light = bpy.data.objects.get("Evidence Fill")
+    ground = bpy.data.objects.get("Neutral Evidence Ground")
+    closeup_times = render_closeups(scene, camera, sun, light, ground, hero)
+    c = hero["center"]
+    point_camera(camera, c + Vector((-17, -23, 21)), c)
+    camera.data.ortho_scale = max(hero["metrics"]["width"], hero["metrics"]["depth"],
+                                  hero["metrics"]["height"]) * 1.35 + 2.5
+    scene.render.resolution_x = scene.render.resolution_y = 1200
+    scene.render.filepath = str(OUT / "hero.png")
+    for obj in hero_objects:
+        obj.hide_render = False
+    report.setdefault("renders", {})["closeups"] = closeup_times
+    report_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    bpy.ops.wm.save_as_mainfile(filepath=str(blend), compress=True)
+    print(f"CLOSEUPS_READY={OUT}", flush=True)
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
+    if "--closeups-only" in sys.argv:
+        render_saved_closeups()
+        return
     scene, camera, sun, light, ground = setup_scene()
     records = create_buildings()
+    if "--hero-only" in sys.argv:
+        render_hero_only(scene, camera, sun, light, ground, records)
+        return
     render_contact_sheet(scene, camera, sun, light, ground, records)
     print(f"Evidence generated: {OUT}")
     print(f"Buildings: {len(records)}; views per building: {len(VIEWS)}; hero: {OUT / 'hero.png'}")

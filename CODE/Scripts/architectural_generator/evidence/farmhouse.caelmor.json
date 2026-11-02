@@ -1,7 +1,7 @@
 {
   "format": "CaelmorBuildingExport",
   "version": 1,
-  "generator_version": "0.1.0",
+  "generator_version": "0.2.0",
   "settings": {
     "depth": 7.0,
     "detail": "HIGH",
@@ -17,7 +17,7 @@
     "wing_depth": 4.5,
     "wing_width": 4.199999809265137
   },
-  "source_geometry_hash": "2cdb9a271f863c66cdba0ec5ff46e132f9b58bfab3dfbc8c5f03c4514ca1def7",
+  "source_geometry_hash": "2fa41345a029c84abb1ea4559096fe7d70cd06e747dfc0fe6c2df4dde3e61aaf",
   "has_protected_buffers": false,
   "protected_buffer_count": 0,
   "units": "metres",
@@ -100,16 +100,16 @@
       "protected": false
     },
     {
-      "name": "facade_patches",
-      "layer": "walls",
-      "material": "plaster_patch",
-      "semantic": "walls",
-      "protected": false
-    },
-    {
       "name": "facade_timber",
       "layer": "structure",
       "material": "timber",
+      "semantic": "structure",
+      "protected": false
+    },
+    {
+      "name": "facade_pegs",
+      "layer": "structure",
+      "material": "timber_light",
       "semantic": "structure",
       "protected": false
     },
@@ -177,6 +177,20 @@
       "protected": false
     },
     {
+      "name": "Seasoned shingle cohorts",
+      "layer": "roof",
+      "material": "roof_dark",
+      "semantic": "roof",
+      "protected": false
+    },
+    {
+      "name": "Exposed shingle butts",
+      "layer": "roof",
+      "material": "roof_worn",
+      "semantic": "roof",
+      "protected": false
+    },
+    {
       "name": "Replacement shingle cohort",
       "layer": "roof",
       "material": "roof_patch",
@@ -186,7 +200,7 @@
     {
       "name": "Overlapping ridge caps",
       "layer": "roof",
-      "material": "roof",
+      "material": "roof_dark",
       "semantic": "roof",
       "protected": false
     },
@@ -200,7 +214,7 @@
     {
       "name": "Roof edge fascia",
       "layer": "roof",
-      "material": "timber_light",
+      "material": "timber",
       "semantic": "roof",
       "protected": false
     },

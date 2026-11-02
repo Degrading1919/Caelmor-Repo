@@ -116,7 +116,10 @@ class BlenderIntegration(unittest.TestCase):
             self.assertIn("UV0_Metric", obj.data.uv_layers)
             self.assertIn("UV1_Lightmap", obj.data.uv_layers)
             self.assertEqual(obj.data.uv_layers.active.name, "UV0_Metric")
-            self.assertTrue(obj.data.uv_layers["UV0_Metric"].active_render)
+            self.assertTrue(obj.data.uv_layers["UV0_Metric"].active_render,
+                            f"{obj.name}: UV0 active_render={obj.data.uv_layers['UV0_Metric'].active_render}, "
+                            f"active_index={obj.data.uv_layers.active_index}, "
+                            f"layers={[(uv.name, uv.active_render) for uv in obj.data.uv_layers]}")
             metric_uv = obj.data.uv_layers["UV0_Metric"]
             lightmap_uv = obj.data.uv_layers["UV1_Lightmap"]
             self.assertTrue(all(all(math.isfinite(coord) for coord in loop.uv) for loop in metric_uv.data))

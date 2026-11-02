@@ -2,8 +2,6 @@
 from __future__ import annotations
 
 import math
-from collections import defaultdict
-
 from .geometry import MeshBuffer, area
 
 
@@ -121,7 +119,11 @@ def _openings_for_edge(plan, edge_index, edge):
     for o in openings:
         o["s0"] = max(0.32, o["s0"])
         o["s1"] = min(length-0.32, o["s1"])
-        o["z1"] = min(o["z1"], plan.eave - (0.18 if o["kind"]=="door" else 0.48))
+        # A tall door header also projects outside the wall. Its full section
+        # must fit below a steep, low eave, not just below the wall datum.
+        head_limit=(plan.eave-(.12+.14*plan.slope+.15+.003)
+                    if o["kind"]=="door" else plan.eave-.48)
+        o["z1"] = min(o["z1"], head_limit)
         if o["s1"] - o["s0"] >= 0.38 and o["z1"] - o["z0"] >= 0.35:
             clean.append(o)
     # Resolve accidental overlaps in deterministic order, keeping a margin between cuts.
@@ -158,14 +160,23 @@ def _wall_panels(buf, a, b, normal, length, openings, top):
                 _wall_solid(buf, a, b, normal, s0, s1, z0, z1)
 
 
-def _beam_edge(buf, a, b, s0, s1, z, thickness, depth, material=None, normal=None, normal_offset=0.0):
+def _beam_edge(buf, a, b, s0, s1, z, thickness, depth, material=None, normal=None, normal_offset=0.0, chamfer=0.0):
     tx, ty = _unit(a,b)[0]
     nx,ny=normal or (0.0,0.0)
     p = (a[0]+tx*s0+nx*normal_offset, a[1]+ty*s0+ny*normal_offset, z)
     q = (a[0]+tx*s1+nx*normal_offset, a[1]+ty*s1+ny*normal_offset, z)
     # MeshBuffer.beam uses its width axis normal to a horizontal wall edge and its
     # depth axis vertical. Swap the intuitive (height, wall-depth) arguments here.
-    buf.beam(p, q, depth, thickness)
+    _frame_beam(buf,p,q,depth,thickness,chamfer)
+
+
+def _frame_beam(buf, a, b, width, depth, chamfer=0.0):
+    """Use the engine's bevelled beam primitive when available at the requested tier."""
+    beveled = getattr(buf, "chamfered_beam", None)
+    if chamfer > 0 and callable(beveled):
+        beveled(a, b, width, depth, chamfer=chamfer)
+    else:
+        buf.beam(a, b, width, depth)
 
 
 def _xy_opening_slab(a,b,normal,s0,s1,outward,depth):
@@ -190,11 +201,239 @@ def _step_prism(buf,a,b,n,s0,s1,depth,z0,z1):
     buf.prism(poly,z0,z1)
 
 
-def _post(buf, a, b, s, z0, z1, face_width=0.16, depth=0.20):
+def _post(buf, a, b, s, z0, z1, face_width=0.16, depth=0.20, chamfer=0.0):
     tx, ty = _unit(a,b)[0]
     # beam vertical; width/depth are the two horizontal cross-section dimensions.
     x, y = a[0]+tx*s, a[1]+ty*s
-    buf.beam((x,y,z0), (x,y,z1), face_width, depth)
+    _frame_beam(buf,(x,y,z0),(x,y,z1),face_width,depth,chamfer)
+
+
+def _segment_hits_opening(brace, opening, clearance):
+    """Conservative segment-vs-expanded-opening test in wall (s,z) space."""
+    x0, z0, x1, z1 = brace["s0"], brace["z0"], brace["s1"], brace["z1"]
+    left, right = opening["s0"] - clearance, opening["s1"] + clearance
+    low, high = opening["z0"] - clearance, opening["z1"] + clearance
+    # Clip the full centerline against the opening rectangle. Expanding by the
+    # brace half-width guarantees that neither its centerline nor its solid body
+    # can cross the aperture.
+    t0, t1 = 0.0, 1.0
+    for p, q, lo, hi in ((x0, x1-x0, left, right), (z0, z1-z0, low, high)):
+        if abs(q) < 1e-10:
+            if p < lo or p > hi:
+                return False
+            continue
+        a, b = (lo-p)/q, (hi-p)/q
+        if a > b:
+            a, b = b, a
+        t0, t1 = max(t0, a), min(t1, b)
+        if t0 > t1:
+            return False
+    return True
+
+
+def _gable_profile(plan, edge):
+    """Return a compact set of true roof-envelope stations along an exterior edge."""
+    a, b = edge
+    (tx, ty), length = _unit(a, b)
+
+    def height_at(s):
+        h = float(plan.roof_height(a[0] + tx*s, a[1] + ty*s))
+        return max(float(plan.eave), h) if math.isfinite(h) else float(plan.eave)
+
+    cuts = {0.0, length}
+    def refine(s0, s1, h0, h1, depth=0):
+        sm = (s0+s1)*.5
+        hm = height_at(sm)
+        if depth < 9 and abs(hm-max(float(plan.eave), (h0+h1)*.5)) > .012:
+            cuts.add(sm)
+            refine(s0, sm, h0, hm, depth+1)
+            refine(sm, s1, hm, h1, depth+1)
+    refine(0.0, length, height_at(0.0), height_at(length))
+    return [(s, height_at(s)) for s in sorted(cuts)]
+
+
+def frame_layout(plan, edge_index, edge):
+    """Semantic, deterministic frame schedule for review and clearance checks.
+
+    Distances are measured along the wall from its first endpoint. Brace endpoints
+    are post/plate intersections in (s,z), and widths are the full visible face
+    width used by the mesh builder.
+    """
+    a, b, tx, ty, normal, length = _edge_frame(plan, edge_index, edge)
+    top = float(plan.eave)
+    slope=float(plan.slope)
+    structural_top=top-(.14+.145*slope)
+    upper_plate=structural_top-.10
+    rake_drop=.14+.5*.21*math.sqrt(1+slope*slope)+.5*.19*slope
+    kingpost_drop=.14+.5*.19*slope
+    openings = [dict(o) for o in _openings_for_edge(plan, edge_index, edge)]
+    fn = str(plan.settings.function).upper()
+    spacing = 3.7 if fn in ("BARN", "GRAIN_STORE") else 4.1
+    post_width = .22 if fn in ("BARN", "GRAIN_STORE") else .19
+    # Principal posts span all storeys, so use the union of every aperture column
+    # to keep their full width clear from the lower jamb through the upper floors.
+    blocked=[]
+    post_clearance=post_width*.5+.11
+    for o in openings:
+        blocked.append((max(0.0,o["s0"]-post_clearance),
+                        min(length,o["s1"]+post_clearance)))
+    merged=[]
+    for lo,hi in sorted(blocked):
+        if merged and lo<=merged[-1][1]:
+            merged[-1]=(merged[-1][0],max(merged[-1][1],hi))
+        else:
+            merged.append((lo,hi))
+
+    def legal_principal(s):
+        return all(s<=lo or s>=hi for lo,hi in merged)
+
+    minimum_post_spacing=.66  # small rounding allowance above the .65m contract
+    posts = [s for s in (.10,length-.10) if legal_principal(s)]
+    candidate = spacing
+    while candidate < length-0.35:
+        # Grid stations remain stable across storeys; skip any station in the
+        # merged aperture columns because opening casings provide local jambs.
+        if (legal_principal(candidate) and
+                all(abs(candidate-p)>=minimum_post_spacing for p in posts)):
+            posts.append(candidate)
+        candidate += spacing
+    posts = sorted(set(round(p, 4) for p in posts))
+    # Recover a blocked grid bay only where a legal, well-separated post can fit.
+    # This caps long unsupported solid wall spans without placing posts against
+    # aperture casings or crowding an adjacent principal member.
+    max_bay=4.3
+    while len(posts)>=2 and any(q-p>max_bay for p,q in zip(posts,posts[1:])):
+        inserted=False
+        for left,right in zip(posts,posts[1:]):
+            if right-left<=max_bay:
+                continue
+            lo,hi=left+minimum_post_spacing,right-minimum_post_spacing
+            regions=[]
+            cursor=lo
+            for blocked_lo,blocked_hi in merged:
+                if blocked_hi<=cursor or blocked_lo>=hi:
+                    continue
+                if blocked_lo>cursor:
+                    regions.append((cursor,min(blocked_lo,hi)))
+                cursor=max(cursor,blocked_hi)
+            if cursor<hi:
+                regions.append((cursor,hi))
+            # The .66m exclusion is already applied at both neighboring posts;
+            # any remaining legal center interval can host one new station.
+            regions=[(r[0]+.001,r[1]-.001) for r in regions
+                     if r[1]-r[0]>=.002]
+            if not regions:
+                continue
+            target=(left+right)*.5
+            lo2,hi2=min(regions,key=lambda r: 0 if r[0]<=target<=r[1] else min(abs(target-r[0]),abs(target-r[1])))
+            station=round(max(lo2,min(hi2,target)),4)
+            if (legal_principal(station) and
+                    min(abs(station-p) for p in posts)>=minimum_post_spacing):
+                posts.append(station)
+                posts.sort()
+                inserted=True
+                break
+        if not inserted:
+            break
+    unsupported_spans=[{"s0":left,"s1":right,"length":right-left}
+                       for left,right in zip(posts,posts[1:])
+                       if right-left>max_bay+1e-6]
+    jambs=[{"opening_index":i,"kind":o["kind"],"s0":o["s0"],"s1":o["s1"],
+            "z0":o["z0"],"z1":o["z1"]} for i,o in enumerate(openings)]
+
+    plates = [FOUNDATION_HEIGHT+.025, upper_plate]
+    plates.extend(FOUNDATION_HEIGHT+level*float(plan.settings.floor_height)
+                  for level in range(1, int(plan.settings.floors)))
+    plates = sorted(set(round(z, 4) for z in plates))
+
+    braces = []
+    upper_plate=plates[-1]
+    # A restrained knee brace at each usable exterior corner post ties the post
+    # shaft to the continuous top plate. The complete member section is checked
+    # against every aperture before it enters the schedule.
+    for end_index,post_s in enumerate((.10,length-.10)):
+        if not legal_principal(post_s) or not any(abs(post_s-p)<1e-4 for p in posts):
+            continue
+        if len(posts)<2:
+            continue
+        neighbor=posts[1] if end_index==0 else posts[-2]
+        bay_width=abs(neighbor-post_s)
+        if bay_width<1.2:
+            continue
+        direction=1 if end_index==0 else -1
+        inward_s=post_s+direction*.85
+        if abs(inward_s-post_s)>.85+1e-8 or not (0<=inward_s<=length):
+            continue
+        brace={"s0":post_s,"z0":upper_plate-.85,
+               "s1":inward_s,"z1":upper_plate,"width":.15,
+               "support":"knee","post_s":post_s,"plate_z":upper_plate}
+        if not any(_segment_hits_opening(brace,o,brace["width"]*.5+.035) for o in openings):
+            braces.append(brace)
+
+    # Full-bay diagonals remain only at a credible pitch (35-65 degrees).
+    # Their entire visible width must clear every opening.
+    width = .19  # visible in-wall face width; beam's wall-normal depth is .14m
+    for bay, (left, right) in enumerate(zip(posts, posts[1:])):
+        if right-left < 1.05:
+            continue
+        for lower, upper in zip(plates, plates[1:]):
+            if upper-lower < .72:
+                continue
+            # Restrict to a compact knee brace inside the bay. It joins the
+            # lower post/plate joint to the adjacent post at the next plate.
+            brace = {"s0": left, "s1": right,
+                     "z0": upper if bay % 2 else lower,
+                     "z1": lower if bay % 2 else upper,
+                     "width": width,"support":"bay"}
+            if brace["s1"]-brace["s0"] < .55 or abs(brace["z1"]-brace["z0"]) < .40:
+                continue
+            slope=abs(brace["z1"]-brace["z0"])/(brace["s1"]-brace["s0"])
+            if not .70<=slope<=2.15:
+                continue
+            if any(_segment_hits_opening(brace, o, width*.5+.035) for o in openings):
+                continue
+            # One selected brace per bay, in the first storey band with clearance.
+            braces.append(brace)
+            break
+
+    profile=_gable_profile(plan, edge)
+    peak=max(profile,key=lambda p:p[1])
+    rakes=[]
+    for (s0,z0),(s1,z1) in zip(profile,profile[1:]):
+        if max(z0,z1)>top+.10:
+            rakes.append({"s0":s0,"z0":z0-rake_drop,
+                          "s1":s1,"z1":z1-rake_drop,"width":.19})
+
+    def profile_crossings(height):
+        hits=[]
+        for (s0,z0),(s1,z1) in zip(profile,profile[1:]):
+            if (z0-height)*(z1-height)<=0 and abs(z1-z0)>1e-9:
+                t=(height-z0)/(z1-z0)
+                if -1e-8<=t<=1+1e-8:
+                    hits.append(s0+(s1-s0)*t)
+        return sorted(set(round(x,8) for x in hits))
+
+    kingpost=None
+    collar=None
+    if peak[1]>top+.35:
+        kingpost={"s":peak[0],"z0":upper_plate,
+                  "z1":peak[1]-kingpost_drop,"width":.15}
+        collar_raw=top+(peak[1]-top)*.43
+        crossings=profile_crossings(collar_raw)
+        if len(crossings)>=2 and crossings[-1]-crossings[0]>.35:
+            collar={"s0":crossings[0],"s1":crossings[-1],
+                    "z":collar_raw-rake_drop,"width":.15}
+    gable={"rakes":rakes,"kingpost":kingpost,"collar":collar}
+    return {"edge_index": edge_index, "length": length, "openings": openings,
+            "posts": posts, "principal_posts": posts, "jambs": jambs,
+            "unsupported_spans": unsupported_spans,
+            "plates": plates, "braces": braces,
+            "gable_profile": profile,"gable":gable,
+            "roof_safety":{"eave":top,"slope":slope,
+                           "structural_top":structural_top,
+                           "upper_plate":upper_plate,
+                           "rake_drop":rake_drop,
+                           "kingpost_drop":kingpost_drop}}
 
 
 def _add_foundation(buffers, plan, edge_index, edge):
@@ -295,65 +534,67 @@ def _opening_frame(buffers, a,b,n,o, function):
         # Three simple horizontal rails indicate board joinery without clutter.
         for frac in (0.25,0.75):
             _beam_edge(buffers["shutters"],a,b,ss-leaf/2,ss+leaf/2,z0+(z1-z0)*frac,0.045,0.085,normal=n,normal_offset=.065)
+        # Two short iron straps terminate at the shutter edge and pin into the
+        # adjacent casing, making the hanging side legible at normal viewing scale.
+        hinge_zs=(z0+(z1-z0)*.24,z0+(z1-z0)*.76)
+        for hinge_z in hinge_zs:
+            outer=ss-leaf/2 if side<0 else ss+leaf/2
+            jamb=s0+.035 if side<0 else s1-.035
+            _beam_edge(buffers["iron"],a,b,min(outer,jamb),max(outer,jamb),
+                       hinge_z,.035,.028,normal=n,normal_offset=.092)
 
 
 def _timber_frame(buffers, plan, edge_index, edge, openings, top):
     a,b,tx,ty,n,length=_edge_frame(plan,edge_index,edge)
     timber=buffers["timber"]
-    # Heavy corners and intermediate posts; move a post away from each aperture.
-    post_positions=[0.10,length-0.10]
-    spacing=2.9 if str(plan.settings.function).upper() in ("BARN","GRAIN_STORE") else 3.3
-    candidate=spacing
-    while candidate < length-0.35:
-        if all(not (o["s0"]-0.12 < candidate < o["s1"]+0.12 and o["z0"] < top-0.1) for o in openings):
-            post_positions.append(candidate)
-        candidate += spacing
-    for o in openings:
-        # Window/door jambs are strong posts, with a timber head and sill.
-        post_positions.extend((max(0.05,o["s0"]-0.045), min(length-0.05,o["s1"]+0.045)))
-    for ss in sorted(set(round(p,4) for p in post_positions)):
-        _post(timber,a,b,ss,FOUNDATION_HEIGHT,top,0.19,0.24)
-    # Continuous floor plates / wall plates with a small break around large door openings.
-    plates=[(FOUNDATION_HEIGHT+0.025,0.16),(top-0.10,0.19)]
-    plates.extend((FOUNDATION_HEIGHT+level*float(plan.settings.floor_height),0.15)
-                  for level in range(1,int(plan.settings.floors)))
-    for z,thick in plates:
-        gaps=[(o["s0"]-0.04,o["s1"]+0.04) for o in openings if o["kind"]=="door" and z<o["z1"]+0.05]
+    layout = frame_layout(plan, edge_index, edge)
+    detail=str(plan.settings.detail).upper()
+    chamfer=.012 if detail=="HIGH" else (.008 if detail=="MEDIUM" else 0.0)
+    post_width = .22 if str(plan.settings.function).upper() in ("BARN", "GRAIN_STORE") else .19
+    structural_top=layout["roof_safety"]["structural_top"]
+    for ss in layout["principal_posts"]:
+        _post(timber,a,b,ss,FOUNDATION_HEIGHT,structural_top,post_width,.25,chamfer)
+    # Storey plates are continuous through ordinary bays and interrupted only
+    # where a tall door removes the wall below that level.
+    for plate_index, z in enumerate(layout["plates"]):
+        thick = .19 if plate_index == len(layout["plates"])-1 else .16
+        gaps=[(o["s0"]-.04,o["s1"]+.04) for o in openings
+              if o["kind"]=="door" and z<o["z1"]+.05]
         cursor=0.0
         for g0,g1 in sorted(gaps):
-            if g0>cursor: _beam_edge(timber,a,b,cursor,g0,z,thick,0.25)
+            if g0>cursor:
+                _beam_edge(timber,a,b,cursor,g0,z,thick,.25,chamfer=chamfer)
             cursor=max(cursor,g1)
-        if cursor<length: _beam_edge(timber,a,b,cursor,length,z,thick,0.25)
-    # Short braces run only through solid corner/post spans and stop below opening heads.
-    anchors=sorted(set((0.14,length-0.14)+tuple(p for p in post_positions if 0.18<p<length-0.18)))
-    for left,right in zip(anchors,anchors[1:]):
-        if right-left<0.45 or any(o["s0"]<right-0.08 and o["s1"]>left+0.08 and o["z0"]<FOUNDATION_HEIGHT+1.05 for o in openings):
-            continue
-        span=min(0.46,(right-left)*0.22)
-        for side in (0,1):
-            ss0,ss1=(left+0.10,left+0.10+span) if side==0 else (right-0.10-span,right-0.10)
-            rise=0.42
-            p0=(a[0]+tx*ss0,a[1]+ty*ss0,FOUNDATION_HEIGHT+0.15)
-            p1=(a[0]+tx*ss1,a[1]+ty*ss1,FOUNDATION_HEIGHT+0.15+rise)
-            timber.beam(p0,p1,0.13,0.19)
-    # Rake members and restrained gable studs continue the timber frame above eaves.
-    stations=sorted(set([0.0,length]+[length*k/max(1,int(math.ceil(length/.48)))
-                                      for k in range(1,int(math.ceil(length/.48)))]))
-    heights=[]
-    for ss in stations:
-        xx,yy=a[0]+tx*ss,a[1]+ty*ss
-        hh=max(float(plan.eave),float(plan.roof_height(xx,yy)))
-        heights.append(hh)
-    for (s0,z0),(s1,z1) in zip(zip(stations,heights),zip(stations[1:],heights[1:])):
-        if max(z0,z1)>float(plan.eave)+0.08:
-            timber.beam((a[0]+tx*s0,a[1]+ty*s0,z0-0.06),
-                        (a[0]+tx*s1,a[1]+ty*s1,z1-0.06),0.16,0.20)
-    for ss,hh in zip(stations[1:-1],heights[1:-1]):
-        if hh<=float(plan.eave)+0.25:
-            continue
-        if any(o["s0"]-0.12<ss<o["s1"]+0.12 and o["z1"]>float(plan.eave) for o in openings):
-            continue
-        _post(timber,a,b,ss,float(plan.eave)+0.06,hh-0.12,0.13,0.18)
+        if cursor<length:
+            _beam_edge(timber,a,b,cursor,length,z,thick,.25,chamfer=chamfer)
+
+    for brace in layout["braces"]:
+        p0=(a[0]+tx*brace["s0"],a[1]+ty*brace["s0"],brace["z0"])
+        p1=(a[0]+tx*brace["s1"],a[1]+ty*brace["s1"],brace["z1"])
+        _frame_beam(timber,p0,p1,.14,brace["width"],chamfer)
+        if brace.get("support")=="knee":
+            for ss,zz in ((brace["s0"],brace["z0"]),(brace["s1"],brace["z1"])):
+                for tangent_offset in (-.035,.035):
+                    x=a[0]+tx*(ss+tangent_offset)
+                    y=a[1]+ty*(ss+tangent_offset)
+                    buffers["pegs"].cylinder((x+n[0]*.105,y+n[1]*.105,zz),
+                                             (x+n[0]*.145,y+n[1]*.145,zz),.016,6)
+
+    # The semantic gable schedule follows every rake segment in the actual roof
+    # profile, including a simple two-slope triangle represented by one peak.
+    for rake in layout["gable"]["rakes"]:
+        _frame_beam(timber,
+            (a[0]+tx*rake["s0"],a[1]+ty*rake["s0"],rake["z0"]),
+            (a[0]+tx*rake["s1"],a[1]+ty*rake["s1"],rake["z1"]),
+            rake["width"],.21,chamfer)
+    kingpost=layout["gable"]["kingpost"]
+    if kingpost:
+        _post(timber,a,b,kingpost["s"],kingpost["z0"],kingpost["z1"],
+              kingpost["width"],.19,chamfer)
+    collar=layout["gable"]["collar"]
+    if collar:
+        _beam_edge(timber,a,b,collar["s0"],collar["s1"],collar["z"],
+                   collar["width"],.19,chamfer=chamfer)
 
 
 def _add_quoins(buffers, plan):
@@ -383,6 +624,25 @@ def _add_chimney(buffers, plan):
     stone.box((x+size/2,y, (bottom+ztop)/2),(0.13,size,height))
     stone.box((x,y-size/2,(bottom+ztop)/2),(size,0.13,height))
     stone.box((x,y+size/2,(bottom+ztop)/2),(size,0.13,height))
+    # Recessed horizontal beds and alternating short perp joints read as courses
+    # while remaining shallow cuts in the solid flue walls.
+    mortar=buffers["mortar"]
+    course=.34
+    row=1
+    z=bottom+course
+    while z<ztop-.12:
+        for cx,cy,sx,sy in (
+                (x,y-size/2-.008,size,.014), (x,y+size/2+.008,size,.014),
+                (x-size/2-.008,y,.014,size), (x+size/2+.008,y,.014,size)):
+            mortar.box((cx,cy,z),(sx,sy,.018))
+        joint_x=x+(-.12 if row%2 else .12)
+        joint_y=y+(.12 if row%2 else -.12)
+        mortar.box((joint_x,y-size/2-.009,z+course*.48),(.014,.016,.30))
+        mortar.box((joint_x,y+size/2+.009,z+course*.48),(.014,.016,.30))
+        mortar.box((x-size/2-.009,joint_y,z+course*.48),(.016,.014,.30))
+        mortar.box((x+size/2+.009,joint_y,z+course*.48),(.016,.014,.30))
+        z+=course
+        row+=1
     # Cap ledge and four small corner capstones preserve the flue opening.
     # Four cap stones form an open ring around the flue.
     cap=0.14
@@ -393,9 +653,6 @@ def _add_chimney(buffers, plan):
     # Soot tint is localized at the upper flue; patch pieces imply later repair, not ruin.
     details=buffers["details"]
     details.box((x-size*0.30,y-size/2-0.01,ztop-0.38),(0.12,0.025,0.34))
-    for dx,dz in ((-0.13,0.62),(0.15,1.44),(0.07,2.08)):
-        if dz < height-0.22:
-            buffers["patches"].box((x+dx,y-size/2-0.025,bottom+dz),(0.13,0.028,0.11))
     # Four planar lead aprons sit over the shingle course at the stack penetration.
     # The selected stack lies on one analytic slope; finite differences recover that
     # plane while plan.roof_height keeps the flashing aligned with crossed roofs.
@@ -422,15 +679,8 @@ def _add_chimney(buffers, plan):
 
 def _add_house_details(buffers, plan):
     fn=str(plan.settings.function).upper()
-    # Limited repairs and material variation are deterministic and functionally restrained.
     for i,edge in enumerate(plan.edges):
         a,b,tx,ty,n,length=_edge_frame(plan,i,edge)
-        rng=plan.rng(f"facade.repair.edge.{i}")
-        if fn in ("BARN","GRAIN_STORE"):
-            # Occasional vertical weather boards and broad sliding-door strap hints.
-            if length>4.0:
-                ss=length*0.84
-                _beam_edge(buffers["timber_light"],a,b,ss-0.11,ss+0.11,FOUNDATION_HEIGHT+0.9,1.45,0.04)
         if fn=="MILLER" and i==0:
             # A visible miller's tally board beside the entry reads as practical signage.
             ss=min(length-0.35,0.7)
@@ -440,19 +690,12 @@ def _add_house_details(buffers, plan):
                     _beam_edge(buffers["iron"],a,b,ss-.08,ss+.08,zz,.018,.018,normal=n,normal_offset=.085)
         if fn=="INN" and i==0:
             ss=length*0.78
-            buffers["signage"].prism(_xy_opening_slab(a,b,n,ss-.29,ss+.29,.075,.06),2.62,3.02)
+            sign_top=min(3.02,plan.eave-(.14+.13*plan.slope+.03))
+            sign_bottom=sign_top-.40
+            buffers["signage"].prism(_xy_opening_slab(a,b,n,ss-.29,ss+.29,.075,.06),sign_bottom,sign_top)
             for edge_s in (ss-.32,ss+.32):
-                _beam_edge(buffers["timber_light"],a,b,edge_s-.025,edge_s+.025,2.82,.42,.075,normal=n,normal_offset=.09)
-            _beam_edge(buffers["timber_light"],a,b,ss-.28,ss+.28,2.96,.04,.065,normal=n,normal_offset=.09)
-        # A few settled plaster patches stay comfortably away from openings and frame timbers.
-        if fn in ("FARMHOUSE","MILLER","INN") and rng.random()<0.28 and length>3.0:
-            ss=rng.uniform(0.9,length-0.9)
-            z=rng.uniform(0.68,max(0.8,plan.eave-0.8))
-            w=rng.uniform(0.24,0.42); h=rng.uniform(0.13,0.25)
-            poly=_xy_opening_slab(a,b,n,ss-w/2,ss+w/2,.025,.025)
-            # Avoid the openings by testing the patch centre against stored opening cuts.
-            if all(not (o["s0"]<ss<o["s1"] and o["z0"]-h<z<o["z1"]+h) for o in _openings_for_edge(plan,i,edge)):
-                buffers["patches"].prism(poly,z-h/2,z+h/2)
+                _beam_edge(buffers["timber_light"],a,b,edge_s-.025,edge_s+.025,(sign_top+sign_bottom)*.5,.42,.075,normal=n,normal_offset=.09)
+            _beam_edge(buffers["timber_light"],a,b,ss-.28,ss+.28,sign_top-.06,.04,.065,normal=n,normal_offset=.09)
 
 
 def _gable_infill(buf, plan, edge):
@@ -501,6 +744,7 @@ def build_facades(plan):
     add("patches","plaster_patch","walls")
     add("timber","timber","structure")
     add("timber_light","timber_light","structure")
+    add("pegs","timber_light","structure")
     add("windows","glass","windows")
     add("shutters","timber_light","windows")
     add("doors","timber","doors")
@@ -519,6 +763,24 @@ def build_facades(plan):
         _add_foundation(buffers,plan,i,edge)
         _wall_panels(buffers["walls"],a,b,n,length,openings,wall_top)
         _timber_frame(buffers,plan,i,edge,openings,wall_top)
+        # Small exposed pegs indicate the principal post/plate joints. Pegs follow
+        # the semantic frame schedule and sit flush to the outward face of timber.
+        layout=frame_layout(plan,i,edge)
+        peg_positions=layout["principal_posts"]
+        peg_levels=layout["plates"][1:-1]
+        if not peg_levels and len(layout["plates"])>1:
+            peg_levels=[layout["plates"][-1]]
+        for ss in peg_positions:
+            for z in peg_levels:
+                # Paired oak pegs enter the joint across the post face. Their
+                # centers stay within the member width and their outer caps only
+                # protrude a few millimetres beyond the timber plane.
+                for tangent_offset in (-.052,.052):
+                    x=a[0]+tx*(ss+tangent_offset)
+                    y=a[1]+ty*(ss+tangent_offset)
+                    start=(x+n[0]*.105,y+n[1]*.105,z)
+                    end=(x+n[0]*.145,y+n[1]*.145,z)
+                    buffers["pegs"].cylinder(start,end,.018,6)
         for o in openings:
             _opening_frame(buffers,a,b,n,o,str(plan.settings.function).upper())
         # Foundation joints are represented by very shallow mortar reveals between courses.

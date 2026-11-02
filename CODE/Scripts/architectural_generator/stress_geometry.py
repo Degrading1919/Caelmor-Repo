@@ -6,6 +6,39 @@ from caelmor_architecture.engine import generate, validate
 from caelmor_architecture.model import Settings
 from caelmor_architecture.roof import roof_faces, roof_sources
 from caelmor_architecture.geometry import area, clip, inequalities
+from caelmor_architecture.facade import frame_layout
+
+
+def structural_gate(plan):
+    """Independent semantic sweep in addition to closed-mesh validation."""
+    post_width=.22 if plan.settings.function in ('BARN','GRAIN_STORE') else .19
+    for index,edge in enumerate(plan.edges):
+        schedule=frame_layout(plan,index,edge)
+        posts=schedule['principal_posts']
+        if any(b-a<.65-1e-6 for a,b in zip(posts,posts[1:])):
+            raise AssertionError(('principal post spacing',index,posts))
+        for post in posts:
+            if any(post+post_width*.5>o['s0']+1e-6 and post-post_width*.5<o['s1']-1e-6
+                   for o in schedule['openings']):
+                raise AssertionError(('post cuts opening',index,post))
+        for brace in schedule['braces']:
+            # Independent interval/slab clipping of the full brace body in (s,z).
+            for opening in schedule['openings']:
+                half=brace['width']*.5
+                lower,upper=0.,1.
+                for a,b,lo,hi in [
+                    (brace['s0'],brace['s1'],opening['s0']-half,opening['s1']+half),
+                    (brace['z0'],brace['z1'],opening['z0']-half,opening['z1']+half)]:
+                    delta=b-a
+                    if abs(delta)<1e-10:
+                        if not lo<=a<=hi:
+                            lower,upper=1.,0.
+                            break
+                    else:
+                        ts=sorted(((lo-a)/delta,(hi-a)/delta))
+                        lower,upper=max(lower,ts[0]),min(upper,ts[1])
+                if lower<=upper:
+                    raise AssertionError(('brace cuts opening',index,brace,opening))
 
 
 def run(count=80):
@@ -23,6 +56,7 @@ def run(count=80):
         report=validate(plan,buffers)
         if not report['valid']:
             raise AssertionError((n,settings,report['errors']))
+        structural_gate(plan)
         patches=roof_faces(plan)
         # Independent rectangle-union projected area, separate from patch clipping.
         sources=roof_sources(plan)

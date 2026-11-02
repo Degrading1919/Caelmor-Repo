@@ -3,7 +3,7 @@ import json, math, os, uuid
 import bpy
 from mathutils import Vector, Matrix
 from .engine import generate, validate, geometry_hash, TOOL_REVISION
-from .materials import get_material
+from .materials import get_material, surface_tint
 
 TAG = "caelm_generated"
 COLLECTION_TAG = "caelm_build"
@@ -31,7 +31,7 @@ def _project(p, axis):
 
 def _metric_uv(mesh, material):
     layer = mesh.uv_layers.new(name="UV0_Metric")
-    follow_edge = material in {"timber", "timber_light", "roof", "roof_patch"}
+    follow_edge = material in {"timber", "timber_light"} or material.startswith('roof')
     for poly in mesh.polygons:
         vertices = [mesh.vertices[mesh.loops[i].vertex_index].co.copy() for i in poly.loop_indices]
         if follow_edge and len(vertices) >= 3:
@@ -74,7 +74,7 @@ def _layer_for(buffer):
     return layer if layer in LAYER_ORDER else "structure"
 
 
-def _mesh_object(buffer, cache, build_id):
+def _mesh_object(buffer, cache, build_id, plan=None):
     mesh = bpy.data.meshes.new(buffer.name + "Mesh")
     mesh.from_pydata(buffer.vertices, [], buffer.faces); mesh.update(calc_edges=True)
     if not mesh.polygons:
@@ -84,9 +84,18 @@ def _mesh_object(buffer, cache, build_id):
     mesh.materials.append(get_material(material, cache))
     uv0 = _metric_uv(mesh, material)
     _lightmap_uv(mesh)
+    # COLOR_0 carries deterministic environmental weathering into glTF/GLB.
+    # Corner colors let adjacent faces retain their own exposure without changing geometry.
+    tint_layer = mesh.color_attributes.new(name="CaelmorTint", type='FLOAT_COLOR', domain='CORNER')
+    for poly in mesh.polygons:
+        normal = tuple(poly.normal)
+        for loop_index in poly.loop_indices:
+            vertex = mesh.vertices[mesh.loops[loop_index].vertex_index].co
+            tint_layer.data[loop_index].color = surface_tint(tuple(vertex), normal, material, plan)
     mesh.uv_layers.active_index = 0
-    uv0.active_render = True
-    for uv in mesh.uv_layers[1:]: uv.active_render = False
+    # Set the single render-layer index last, using a fresh RNA reference after
+    # adding UV1. Clearing another layer can clear the shared render flag.
+    mesh.uv_layers[0].active_render = True
     obj = bpy.data.objects.new(buffer.name, mesh)
     obj[TAG] = True; obj["caelm_layer"] = _layer_for(buffer)
     obj["caelm_buffer_id"] = buffer.name
@@ -205,7 +214,7 @@ def build(settings, collection=None, layers=None, origin=None):
         cache = {}
         for buffer in buffers:
             if buffer.name not in protected_ids and (scope is None or _layer_for(buffer) in scope):
-                obj = _mesh_object(buffer, cache, build_id)
+                obj = _mesh_object(buffer, cache, build_id, plan)
                 if obj: stage.objects.link(obj)
         if scope is None:
             for obj in _colliders(plan, build_id):

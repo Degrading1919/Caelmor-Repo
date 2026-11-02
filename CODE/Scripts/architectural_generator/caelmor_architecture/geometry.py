@@ -152,3 +152,18 @@ class MeshBuffer:
         poly = [add(a,add(mul(u,radius*math.cos(2*math.pi*i/segments)),
                          mul(v,radius*math.sin(2*math.pi*i/segments)))) for i in range(segments)]
         self.extrude(poly,sub(b,a))
+
+    def chamfered_beam(self,a,b,width,depth=None,chamfer=.008):
+        """Closed hewn member with restrained, physical edge arrises."""
+        depth=width if depth is None else depth
+        axis=unit(sub(b,a))
+        ref=(0,0,1) if abs(axis[2])<.95 else (0,1,0)
+        u=unit(cross(axis,ref))
+        v=cross(axis,u)
+        hw,hd=width*.5,depth*.5
+        cut=max(0.,min(chamfer,min(width,depth)*.2))
+        if cut<1e-6:
+            return self.beam(a,b,width,depth)
+        section=[(-hw+cut,-hd),(hw-cut,-hd),(hw,-hd+cut),(hw,hd-cut),
+                 (hw-cut,hd),(-hw+cut,hd),(-hw,hd-cut),(-hw,-hd+cut)]
+        self.extrude([add(a,add(mul(u,x),mul(v,y))) for x,y in section],sub(b,a))

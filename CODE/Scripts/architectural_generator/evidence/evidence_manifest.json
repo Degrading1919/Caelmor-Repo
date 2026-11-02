@@ -2,6 +2,17 @@
   "blender_version": "5.0.1",
   "renderer": "BLENDER_EEVEE",
   "contact_sheet_views_per_building": 4,
+  "source_sha256": {
+    "__init__.py": "7233db254364f625cf93fe9893eb13efaf72dd23fbaf777ed9078b8247a30936",
+    "blender_backend.py": "59357a05b6bd0cf1fba71c5bb8a33d11895c16e7dbf2f94e2e876425915c1cc1",
+    "engine.py": "3d38a306072e4faca9482d3d1e1b9995955664d4b6d581a15089276c829fb916",
+    "facade.py": "d536e26a2a6f4fe50666c479a171fd9e06714e16ae0c2af0bce9bce13d607621",
+    "geometry.py": "ef00eca8616686de17405b8e6f54ee314bf8aee8930a63c09f041089195eab51",
+    "materials.py": "ee4d4d02c54837843a0a53092da285d035686415f3512b08fe59a52b978d448a",
+    "model.py": "697a246576c11e1c78fd310435829b05bb0b5952a3979e27b1f11d734ff93217",
+    "roof.py": "b2727d7810e63e734900705f0a68985d6b3fc27fd3357257114325a7d6587254"
+  },
+  "timing_note": "Per-building Blender object construction and independent pure generation/validation wall times measured with time.perf_counter; rendering times recorded by render entry below.",
   "buildings": [
     {
       "function": "FARMHOUSE",
@@ -10,14 +21,6 @@
       "width": 11.0,
       "depth": 7.0,
       "floors": 2,
-      "mesh_objects": 22,
-      "vertices": 24134,
-      "bounds_m": [
-        12.046746253967285,
-        12.546745777130127,
-        9.827143669128418
-      ],
-      "geometry_hash": "76fb678180b480763590942b5b3cda72c353fe1d3fd36dab058d97e72b4ee8f6",
       "settings": {
         "seed": 17,
         "function": "FARMHOUSE",
@@ -36,15 +39,25 @@
       "validation": {
         "valid": true,
         "errors": [],
-        "objects": 22,
-        "vertices": 24134,
-        "triangles": 36412,
-        "materials": 11,
+        "objects": 24,
+        "vertices": 37362,
+        "triangles": 56576,
+        "materials": 12,
         "footprint_area": 95.9,
         "roof_projected_area": 116.96,
-        "geometry_hash": "76fb678180b480763590942b5b3cda72c353fe1d3fd36dab058d97e72b4ee8f6",
-        "tool_revision": "0.1.0"
-      }
+        "geometry_hash": "a484f8b647e104198be5919ff9a52cc4521df3341c698ef142539fe15aa571f6",
+        "tool_revision": "0.2.0"
+      },
+      "blender_build_seconds": 4.1056,
+      "pure_generation_validation_seconds": 0.8238,
+      "mesh_objects": 24,
+      "vertices": 37362,
+      "bounds_m": [
+        12.056924223899841,
+        12.546745777130127,
+        9.720144271850586
+      ],
+      "geometry_hash": "a484f8b647e104198be5919ff9a52cc4521df3341c698ef142539fe15aa571f6"
     },
     {
       "function": "FARMHOUSE",
@@ -53,14 +66,6 @@
       "width": 13.5,
       "depth": 8.5,
       "floors": 1,
-      "mesh_objects": 22,
-      "vertices": 34484,
-      "bounds_m": [
-        14.563491821289062,
-        14.952964782714844,
-        8.010103225708008
-      ],
-      "geometry_hash": "7c96691a897172d70581b1ea5ad9eb3b71eb0cf35904aeaff11f71f3a6752c3c",
       "settings": {
         "seed": 43,
         "function": "FARMHOUSE",
@@ -79,15 +84,25 @@
       "validation": {
         "valid": true,
         "errors": [],
-        "objects": 22,
-        "vertices": 34484,
-        "triangles": 52092,
-        "materials": 11,
+        "objects": 24,
+        "vertices": 56074,
+        "triangles": 84848,
+        "materials": 12,
         "footprint_area": 156.35,
         "roof_projected_area": 186.32,
-        "geometry_hash": "7c96691a897172d70581b1ea5ad9eb3b71eb0cf35904aeaff11f71f3a6752c3c",
-        "tool_revision": "0.1.0"
-      }
+        "geometry_hash": "04e01b7dc471997c7e4e9026b5213be42e5a3f4be05f7b71d42c9c62cec9e0d7",
+        "tool_revision": "0.2.0"
+      },
+      "blender_build_seconds": 4.1731,
+      "pure_generation_validation_seconds": 1.4361,
+      "mesh_objects": 24,
+      "vertices": 56074,
+      "bounds_m": [
+        14.583847403526306,
+        14.952964782714844,
+        7.903103351593018
+      ],
+      "geometry_hash": "04e01b7dc471997c7e4e9026b5213be42e5a3f4be05f7b71d42c9c62cec9e0d7"
     },
     {
       "function": "BARN",
@@ -96,14 +111,6 @@
       "width": 16.0,
       "depth": 10.0,
       "floors": 1,
-      "mesh_objects": 13,
-      "vertices": 29572,
-      "bounds_m": [
-        17.029999375343323,
-        11.047208786010742,
-        7.792020320892334
-      ],
-      "geometry_hash": "95fa58cf08c892f48aa60d2054b4169332954bb10d0a6e5f9573be2f825b4d0e",
       "settings": {
         "seed": 17,
         "function": "BARN",
@@ -122,15 +129,25 @@
       "validation": {
         "valid": true,
         "errors": [],
-        "objects": 13,
-        "vertices": 29572,
-        "triangles": 44536,
-        "materials": 8,
+        "objects": 14,
+        "vertices": 41664,
+        "triangles": 62832,
+        "materials": 9,
         "footprint_area": 160.0,
         "roof_projected_area": 184.21,
-        "geometry_hash": "95fa58cf08c892f48aa60d2054b4169332954bb10d0a6e5f9573be2f825b4d0e",
-        "tool_revision": "0.1.0"
-      }
+        "geometry_hash": "ed7f086e8c51da34150677b2e09d3198544d15d8d018b6f43dae315919bcb18a",
+        "tool_revision": "0.2.0"
+      },
+      "blender_build_seconds": 2.5951,
+      "pure_generation_validation_seconds": 0.8566,
+      "mesh_objects": 14,
+      "vertices": 41664,
+      "bounds_m": [
+        17.029999375343323,
+        11.047208786010742,
+        7.685020446777344
+      ],
+      "geometry_hash": "ed7f086e8c51da34150677b2e09d3198544d15d8d018b6f43dae315919bcb18a"
     },
     {
       "function": "BARN",
@@ -139,14 +156,6 @@
       "width": 16.5,
       "depth": 10.3,
       "floors": 1,
-      "mesh_objects": 13,
-      "vertices": 31204,
-      "bounds_m": [
-        17.529999375343323,
-        11.347208976745605,
-        7.9270806312561035
-      ],
-      "geometry_hash": "4a313ce68d51cddcc387706994e8639811c8d1b41dbe287b785858a4358af2ad",
       "settings": {
         "seed": 43,
         "function": "BARN",
@@ -165,15 +174,25 @@
       "validation": {
         "valid": true,
         "errors": [],
-        "objects": 13,
-        "vertices": 31204,
-        "triangles": 46988,
-        "materials": 8,
+        "objects": 15,
+        "vertices": 43758,
+        "triangles": 66008,
+        "materials": 10,
         "footprint_area": 169.95,
         "roof_projected_area": 194.88,
-        "geometry_hash": "4a313ce68d51cddcc387706994e8639811c8d1b41dbe287b785858a4358af2ad",
-        "tool_revision": "0.1.0"
-      }
+        "geometry_hash": "89ae62210f0c34326544520d86c13856747c6527ac357a28d6e7e20ff918c371",
+        "tool_revision": "0.2.0"
+      },
+      "blender_build_seconds": 2.748,
+      "pure_generation_validation_seconds": 0.8806,
+      "mesh_objects": 15,
+      "vertices": 43758,
+      "bounds_m": [
+        17.529999375343323,
+        11.347208976745605,
+        7.820080757141113
+      ],
+      "geometry_hash": "89ae62210f0c34326544520d86c13856747c6527ac357a28d6e7e20ff918c371"
     },
     {
       "function": "GRAIN_STORE",
@@ -182,14 +201,6 @@
       "width": 8.5,
       "depth": 5.5,
       "floors": 1,
-      "mesh_objects": 16,
-      "vertices": 11348,
-      "bounds_m": [
-        9.53000032901764,
-        6.951745927333832,
-        6.344184398651123
-      ],
-      "geometry_hash": "49432aa018633059361a4308a0b810eb456300990582230dff121f5f1e1257ca",
       "settings": {
         "seed": 17,
         "function": "GRAIN_STORE",
@@ -208,15 +219,25 @@
       "validation": {
         "valid": true,
         "errors": [],
-        "objects": 16,
-        "vertices": 11348,
-        "triangles": 17120,
-        "materials": 9,
+        "objects": 17,
+        "vertices": 17720,
+        "triangles": 26880,
+        "materials": 10,
         "footprint_area": 46.75,
         "roof_projected_area": 60.16,
-        "geometry_hash": "49432aa018633059361a4308a0b810eb456300990582230dff121f5f1e1257ca",
-        "tool_revision": "0.1.0"
-      }
+        "geometry_hash": "c76971b92d1c0726676f35eed28d2800580a697089349fd66ec836a398998e90",
+        "tool_revision": "0.2.0"
+      },
+      "blender_build_seconds": 1.1388,
+      "pure_generation_validation_seconds": 0.3696,
+      "mesh_objects": 17,
+      "vertices": 17720,
+      "bounds_m": [
+        9.53000032901764,
+        6.951745927333832,
+        6.237184524536133
+      ],
+      "geometry_hash": "c76971b92d1c0726676f35eed28d2800580a697089349fd66ec836a398998e90"
     },
     {
       "function": "GRAIN_STORE",
@@ -225,14 +246,6 @@
       "width": 9.0,
       "depth": 5.8,
       "floors": 1,
-      "mesh_objects": 16,
-      "vertices": 11948,
-      "bounds_m": [
-        10.03000032901764,
-        7.251746118068695,
-        6.510776519775391
-      ],
-      "geometry_hash": "2e7923a0636ede350a9abaca6d6a56ae3b4f67b7c49e6f927c082b2462f100b1",
       "settings": {
         "seed": 43,
         "function": "GRAIN_STORE",
@@ -251,15 +264,25 @@
       "validation": {
         "valid": true,
         "errors": [],
-        "objects": 16,
-        "vertices": 11948,
-        "triangles": 18028,
-        "materials": 9,
+        "objects": 18,
+        "vertices": 19102,
+        "triangles": 28984,
+        "materials": 11,
         "footprint_area": 52.2,
         "roof_projected_area": 66.33,
-        "geometry_hash": "2e7923a0636ede350a9abaca6d6a56ae3b4f67b7c49e6f927c082b2462f100b1",
-        "tool_revision": "0.1.0"
-      }
+        "geometry_hash": "08c93ecc51d3dd1b5467be5b318c37985f66eda9bafc50edded8b0ce6899233b",
+        "tool_revision": "0.2.0"
+      },
+      "blender_build_seconds": 1.2606,
+      "pure_generation_validation_seconds": 0.398,
+      "mesh_objects": 18,
+      "vertices": 19102,
+      "bounds_m": [
+        10.03000032901764,
+        7.251746118068695,
+        6.403776168823242
+      ],
+      "geometry_hash": "08c93ecc51d3dd1b5467be5b318c37985f66eda9bafc50edded8b0ce6899233b"
     },
     {
       "function": "MILLER",
@@ -268,14 +291,6 @@
       "width": 12.0,
       "depth": 8.0,
       "floors": 2,
-      "mesh_objects": 23,
-      "vertices": 27818,
-      "bounds_m": [
-        13.03000032901764,
-        13.546745777130127,
-        10.382450103759766
-      ],
-      "geometry_hash": "a053e8189331d322994253ab8ef6690b9d8ac13dd1dcd3c6ac539592314882bc",
       "settings": {
         "seed": 17,
         "function": "MILLER",
@@ -294,15 +309,25 @@
       "validation": {
         "valid": true,
         "errors": [],
-        "objects": 23,
-        "vertices": 27818,
-        "triangles": 41960,
-        "materials": 11,
+        "objects": 25,
+        "vertices": 43216,
+        "triangles": 65428,
+        "materials": 12,
         "footprint_area": 114.9,
         "roof_projected_area": 137.76,
-        "geometry_hash": "a053e8189331d322994253ab8ef6690b9d8ac13dd1dcd3c6ac539592314882bc",
-        "tool_revision": "0.1.0"
-      }
+        "geometry_hash": "52a232a2bdef19660c0446e3e98665a97f73017aa7f4597e5284b41f7ed5fafd",
+        "tool_revision": "0.2.0"
+      },
+      "blender_build_seconds": 3.0418,
+      "pure_generation_validation_seconds": 1.0792,
+      "mesh_objects": 25,
+      "vertices": 43216,
+      "bounds_m": [
+        13.03000032901764,
+        13.546745777130127,
+        10.275449752807617
+      ],
+      "geometry_hash": "52a232a2bdef19660c0446e3e98665a97f73017aa7f4597e5284b41f7ed5fafd"
     },
     {
       "function": "MILLER",
@@ -311,14 +336,6 @@
       "width": 12.5,
       "depth": 8.3,
       "floors": 2,
-      "mesh_objects": 23,
-      "vertices": 29494,
-      "bounds_m": [
-        13.53000032901764,
-        13.84674596786499,
-        10.549041748046875
-      ],
-      "geometry_hash": "969e602ec9de8110e29b44315dee6ec5c33934ea0aea098aea188cbfa6a4352f",
       "settings": {
         "seed": 43,
         "function": "MILLER",
@@ -337,15 +354,25 @@
       "validation": {
         "valid": true,
         "errors": [],
-        "objects": 23,
-        "vertices": 29494,
-        "triangles": 44472,
-        "materials": 11,
+        "objects": 25,
+        "vertices": 45458,
+        "triangles": 68808,
+        "materials": 12,
         "footprint_area": 122.65,
         "roof_projected_area": 146.23,
-        "geometry_hash": "969e602ec9de8110e29b44315dee6ec5c33934ea0aea098aea188cbfa6a4352f",
-        "tool_revision": "0.1.0"
-      }
+        "geometry_hash": "bb689aa4d47e2b9af380e459fab66a75ae1c8225e164e2d0abe4c13656948e01",
+        "tool_revision": "0.2.0"
+      },
+      "blender_build_seconds": 3.29,
+      "pure_generation_validation_seconds": 1.1579,
+      "mesh_objects": 25,
+      "vertices": 45458,
+      "bounds_m": [
+        13.53000032901764,
+        13.84674596786499,
+        10.442042350769043
+      ],
+      "geometry_hash": "bb689aa4d47e2b9af380e459fab66a75ae1c8225e164e2d0abe4c13656948e01"
     },
     {
       "function": "INN",
@@ -354,14 +381,6 @@
       "width": 15.0,
       "depth": 10.0,
       "floors": 2,
-      "mesh_objects": 24,
-      "vertices": 47640,
-      "bounds_m": [
-        16.063491821289062,
-        17.850999355316162,
-        11.493062973022461
-      ],
-      "geometry_hash": "345278aa8ac7477df0d1996151e3f6563d8882d098fc3e859a8dc47af772afae",
       "settings": {
         "seed": 17,
         "function": "INN",
@@ -380,15 +399,25 @@
       "validation": {
         "valid": true,
         "errors": [],
-        "objects": 24,
-        "vertices": 47640,
-        "triangles": 71856,
-        "materials": 11,
+        "objects": 26,
+        "vertices": 73932,
+        "triangles": 111704,
+        "materials": 12,
         "footprint_area": 204.0,
         "roof_projected_area": 238.11,
-        "geometry_hash": "345278aa8ac7477df0d1996151e3f6563d8882d098fc3e859a8dc47af772afae",
-        "tool_revision": "0.1.0"
-      }
+        "geometry_hash": "8e4e5dfa81fc206d5eddb86aae10cd38c4f00fd6f98507685d652351a4c4d245",
+        "tool_revision": "0.2.0"
+      },
+      "blender_build_seconds": 5.4426,
+      "pure_generation_validation_seconds": 1.8926,
+      "mesh_objects": 26,
+      "vertices": 73932,
+      "bounds_m": [
+        16.083847403526306,
+        17.850999355316162,
+        11.386062622070312
+      ],
+      "geometry_hash": "8e4e5dfa81fc206d5eddb86aae10cd38c4f00fd6f98507685d652351a4c4d245"
     },
     {
       "function": "INN",
@@ -397,14 +426,6 @@
       "width": 15.5,
       "depth": 10.3,
       "floors": 2,
-      "mesh_objects": 24,
-      "vertices": 48576,
-      "bounds_m": [
-        16.563491821289062,
-        17.584691047668457,
-        11.65965461730957
-      ],
-      "geometry_hash": "c16877f6efe372f44a33f2f79c7a9c6efd5c743c124aa6b53a535b6e8d90612a",
       "settings": {
         "seed": 43,
         "function": "INN",
@@ -423,15 +444,85 @@
       "validation": {
         "valid": true,
         "errors": [],
-        "objects": 24,
-        "vertices": 48576,
-        "triangles": 73276,
-        "materials": 11,
+        "objects": 26,
+        "vertices": 74800,
+        "triangles": 113044,
+        "materials": 12,
         "footprint_area": 213.65,
         "roof_projected_area": 248.48,
-        "geometry_hash": "c16877f6efe372f44a33f2f79c7a9c6efd5c743c124aa6b53a535b6e8d90612a",
-        "tool_revision": "0.1.0"
-      }
+        "geometry_hash": "e2b65fc51badc7a2f471215f0d78ce2d9e15ee56b95e85a99a94170b6fcdca8d",
+        "tool_revision": "0.2.0"
+      },
+      "blender_build_seconds": 5.5175,
+      "pure_generation_validation_seconds": 1.9207,
+      "mesh_objects": 26,
+      "vertices": 74800,
+      "bounds_m": [
+        16.583847403526306,
+        17.584691047668457,
+        11.552654266357422
+      ],
+      "geometry_hash": "e2b65fc51badc7a2f471215f0d78ce2d9e15ee56b95e85a99a94170b6fcdca8d"
     }
-  ]
+  ],
+  "renders": {
+    "hero": {
+      "file": "hero.png",
+      "resolution": [
+        1200,
+        1200
+      ],
+      "seconds": 2.362
+    },
+    "closeups": [
+      {
+        "file": "closeup_timber.png",
+        "resolution": [
+          900,
+          900
+        ],
+        "seconds": 0.273
+      },
+      {
+        "file": "closeup_valley.png",
+        "resolution": [
+          900,
+          900
+        ],
+        "seconds": 0.276
+      },
+      {
+        "file": "closeup_surfaces.png",
+        "resolution": [
+          900,
+          900
+        ],
+        "seconds": 0.257
+      },
+      {
+        "file": "closeup_eave.png",
+        "resolution": [
+          900,
+          900
+        ],
+        "seconds": 0.258
+      }
+    ],
+    "contact_sheet": {
+      "views": 40,
+      "resolution_per_view": [
+        360,
+        360
+      ],
+      "seconds": 7.148
+    },
+    "overview": {
+      "file": "overview.png",
+      "resolution": [
+        1800,
+        1100
+      ],
+      "seconds": 0.793
+    }
+  }
 }
