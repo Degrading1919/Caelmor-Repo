@@ -26,13 +26,14 @@ Act I ends with the barges stopped and Stillwater's fog thicker than ever (MQ4).
 
 ### A2.2 The Act II through-line: the backwater [PROPOSAL — DIRECTOR]
 
-**Author truth.** Closing the Hollow Lock in MQ4 stopped the flushes. It did not empty the fen. The pressure the flushes used to draw off now builds behind the Lock and finds the older ways the war engineers cut through when they dug the Cut: culverts, spurs and severed Braid channels. Every few nights the fen pushes water back out through those ways in a slow surge. Crews call these **backwater nights** [NEW term; "backwater" is the bible's own word in the MQ5 brief]. The surges are getting stronger. The heavy water rides them, so drift turns up wherever they reach.
+**Author truth.** Closing the Hollow Lock in MQ4 stopped the flushes. It did not empty the fen. **One water story after MQ4:** the crew's pulses go only through the Drowsebank mill race (via the wartime Drowse spur); everything else is the fen's own backwater. The slack gate at the Hollow Lock (MQ4, L6), silted and bulging wet from behind, is the first place the backwater shows; it is never a crew route. The pressure the flushes used to draw off now builds behind the Lock and finds the older ways the war engineers cut through when they dug the Cut: culverts, spurs and severed Braid channels. On the fen's own swell nights (the same fifth nights the war engineers flushed on) the fen pushes water back out through those ways in a slow surge. Crews call these **backwater nights** [NEW term; "backwater" is the bible's own word in the MQ5 brief]. The surges are getting stronger. The heavy water rides them, so drift turns up wherever they reach.
 
 This is how Act II proves "stopping the barges does not stop the drift" (bible §1.2) without a lecture:
 - **MQ5:** the Rebirth Fields still flood from below after the Lock was shut.
-- **MQ6:** Tovin's floor sketches show two kinds of wet line. Sharp lines on the race side are the crew's pulses, which are human and run on a schedule. A slow, growing patch at the tail-race door is the backwater, which is not human.
-- **MQ7:** the keepers project the backwater from Tovin's dates. The next surge tops the orchard dikes.
+- **MQ6:** Tovin's floor sketches show two kinds of wet line. Sharp lines on the race side are the crew's pulses, which are human and run on a schedule (the race has been the Lock's overflow run for weeks; since MQ4 it is the crew's only one). A slow, growing patch at the tail-race door, only on the sheets since the Lock was shut, is the backwater, which is not human. The keeper reads it aloud (`TF_KEEPERS_READ_BACKWATER`).
+- **MQ7:** the keepers project the backwater from Tovin's fifth-night dates and their own tail-door reading. The next surge tops the orchard dikes.
 - **MQ9:** the flow-table shows why. The Cut ties the fen to everything; only sealing it and spreading the pressure through the Braids ends it (MQ11).
+- **MQ10:** the seal plan also closes the Cut-side culverts the backwater has been using, so in MQ11 the fen has no way out at all and "holds its breath".
 
 The backwater is physical and patterned. It is pressure, not intent. It never "targets" anyone. If the Director replaces it, MQ5's flooding cause, the tail-door lines in MQ6 and MQ7's lead-in change. Nothing else depends on it.
 
@@ -71,7 +72,7 @@ Act II relies on nothing else from Act I.
 | `LM_BRYN_ROLL` | commons / household | MQ7 `S06_council` | MQ12 |
 | `LM_ORCHARD_LOSS` | none / partial | MQ7 `S05_defend` | MQ12; orchard props |
 | `LM_SEDGE_TRUST` | warm / cool | MQ8 `S08_close` | MQ9; MQ11; MQ12 |
-| `LM_ORIEL_PROMISE` | aloud / many_hands / return | MQ9 `S07_promise` | MQ12 (quoted back) |
+| `LM_ORIEL_PROMISE` | aloud / many_hands / return | MQ9 `S08_promise` | MQ12 (quoted back) |
 
 No other region flags are created. Quest-local flags use the quest code. The local flags that other packages read are listed in §A2.8.
 
@@ -113,7 +114,7 @@ MQ5 and MQ9 have no drift site. The culvert's trouble in MQ5 is flooding, vermin
 | MN | Show restraint | The only quest where the player is judged on what they *don't* do. The single "fight" exists to prove fighting is the wrong tool. |
 | BF | Pilgrimage and understanding | No investigation and no enemy pressure. The wonder is a model the player operates. |
 
-Combat share by quest: GL ~20%, TF ~25%, DK ~35% (set-piece defense), MN ~5%, BF ~0–5%. That gives the act a combat valley at MN–BF before Act III.
+Combat share by quest: GL ~20%, TF ~25%, DK ~35% (set-piece defense), MN ~5–10% (one optional Reed Stalker ambush on the Path of Unburnt Reeds), BF ~0–5%. That gives the act a combat valley at MN–BF before Act III, with one pulse of danger in it.
 
 ### A2.10 Shared rules for all five packages
 
@@ -156,7 +157,7 @@ On backwater nights the Rebirth Fields at Ashenstead flood from below. Seedlings
 | Offered | On entering Ashenstead (area A) |
 | Target length | 30–40 minutes |
 | Combat share | ~20% |
-| Skills touched | Melee (required); Woodcutting (dike option); Hunting (optional, Ash Hound pelts if the plot option draws them) |
+| Skills touched | Melee (required); Woodcutting (dike option); Hunting (optional, Ash Hound pelts if the plot option draws a reformed den) |
 | Choice | The fix: circle / plot / dike → `LM_FIELD_FIX` |
 | Quest items | None |
 | Unlocks | Dry Rebirth Fields; field guide-lines readable; Sedge seeded; *The Twice-Burned Tree* (bible §7: after MQ5) |
@@ -255,7 +256,7 @@ The choice sets `LM_FIELD_FIX` and is final for this quest.
 
 **Circle.** Annelise chalks each stone's outline and an arrow for which face is up. The player lifts three stones (carry state; set down on the chalked cloth Annelise spreads). Open the cap (3 s channel ×2: rust and turf). Below, the grate chamber is half full and sunlight comes straight down the shaft for the first time. Clear the grate: three 3 s channels with the crew's **pry bar** (interaction prop), pulling out rotted sacking, a tangle of wire and the broken top of a boundary marker. **GL-E4a**: Skitters stirred up from the silt. On the third clear, the backed water drops away with a long sigh down the main channel. Carry the three stones back. Each must be set on its chalk outline, and the set-down interaction checks the facing. Set wrong, Annelise says *"Other way up"* and the player turns it (one extra interaction; no fail).
 
-**Plot.** Joric runs a net cord along the line he wants. It is not the shortest: it avoids the corner he never walks. Three ditch lengths (3 s channel ×2 each) through burned ground; one charred post must come out (Joric: *"Leave the next one."*). Clearing the scrub at the second length disturbs a den: **GL-E4b**, Ash Hounds. The last length breaks into the side culvert. Water runs out into the new ditch, dark, then clearing.
+**Plot.** Joric runs a net cord along the line he wants. It is not the shortest: it avoids the corner he never walks. Three ditch lengths (3 s channel ×2 each) through burned ground; one charred post must come out (Joric: *"Leave the next one."*). Clearing the scrub at the second length disturbs something (**GL-E4b**). It is **not** MQ3's culvert den, which the player already fought. If *Unreplanted* is Completed, the scrub was already cleared there and the hound/stalker fight does **not** run; instead the Field Goblins Joric warned about (`UR-D7.03`, "Mind the goblins don't come back") raid the spade pile at the second length. If UR is not Completed and `HW_DEN_CLEARED` is false (the Den Mother was left in MQ3), her surviving pack has **reformed a den** in the burned scrub: Ash Hounds. If `HW_DEN_CLEARED` is true, the scrub is empty of hounds and the threat is the wet ground instead: the side culvert has backed up under the plot and a **Reed Stalker** waits in the reed-choked drain mouth at the third length. The last length breaks into the side culvert. Water runs out into the new ditch, dark, then clearing.
 
 **Dike.** The field crew foreman marks the course with stakes from the hut. The player cuts **four stakes** from the ribboned hedge stools (Woodcutting, entry level, managed stools only, as in MQ1) and carries **four turf sods** from the stack (carry state). Raising four dike sections takes a 3 s tamp channel ×2 each. Between sections three and four, night falls (scripted keep-watch prompt). **GL-E4c**: Field Goblins come for the tool pile, and a trapper sets rake traps (visible, avoidable). The last section is tamped at first light.
 
@@ -303,7 +304,9 @@ The crawl must feel **tight, wet and listened-to**. Its tension comes from sound
 | **GL-E2** | 3 Skitter swarms + 1 latcher | I2 long run, water volume | Leashed to water; latcher grabs the ankle | Latcher rears from the water (~1.2 s); latch breaks on stepping to the ledge or two hits | Spacing in a corridor; the ledge as safety | Required. Ends at 60–80% HP |
 | **GL-E3** | 1 Reed Stalker (stalker) + 1 Reed Stalker (lurker) | I5 reed shaft | Stalker: ambush from the reed curtain, then melee. Lurker: submerged; surfaces to bite when the player stands in deep water | Stalker: the reed curtain parts and its throat bulges with a low croak (~1.2 s) before a leap. Lurker: a line of bubbles toward the player (~1.5 s) | **First Reed Stalkers** (bible §10). Teaches that reeds hide things and that the dry stones are the safe footing | Required. 45–70 s. The player who reads the croak takes one hit, not three |
 | **GL-E4a** | 2 Skitter swarms | Grate chamber (circle fix) | As E2 | As E2 | Keeps the work physical | Required on the path |
-| **GL-E4b** | 2 Ash Hound runners + 1 ash-shaker | Joric's plot scrub (plot fix) | Pack: runners flank; shaker hangs back | Shaker shakes its coat (~1.5 s) and an ash cloud forms; standing in it chokes (minor DoT); step out | Burned-ground danger on burned ground | Required on the path. ~60 s |
+| **GL-E4b** (UR Completed) | 2 Field Goblin scrappers + 1 trapper | Spade pile at the second ditch length (plot fix) | Raiders go for the spades, then the player | Trapper sets rake traps (~2 s set animation); scrappers wind up overhead (~1 s) | Joric's warning in UR comes true; the scrub is already clear | Required on the path. ~45 s |
+| **GL-E4b** (UR not Completed, not `HW_DEN_CLEARED`) | Reformed den: 2 Ash Hound runners + 1 ash-shaker | Joric's plot scrub (plot fix) | Pack: runners flank; shaker hangs back | Shaker shakes its coat (~1.5 s) and an ash cloud forms; standing in it chokes (minor DoT); step out | Burned-ground danger; the cost of leaving MQ3's Den Mother | Required on the path. ~60 s |
+| **GL-E4b** (UR not Completed, `HW_DEN_CLEARED`) | 1 Reed Stalker (stalker) + 1 Skitter swarm | Reed-choked drain mouth at the third ditch length | Stalker: ambush from the reeds; Skitters harass in the backed-up water | Reeds part and the throat bulges with a low croak (~1.2 s) before a leap | Wet-ground danger where the ditch meets the culvert | Required on the path. ~50 s |
 | **GL-E4c** | 2 Field Goblin scrappers + 1 trapper | Field-hut tool pile at night (dike fix) | Raiders target the tool pile, then the player | Trapper sets rake traps (visible rake heads in the grass, ~2 s set animation); scrappers wind up overhead swings (~1 s) | The extra labour costs a night | Required on the path. ~50 s |
 
 Combat never reveals evidence. Nothing a creature drops advances the quest.
@@ -342,7 +345,7 @@ Combat never reveals evidence. Nothing a creature drops advances the quest.
 |---|---|---|---|
 | **Circle** — *"Lift the stones and clear it from underneath."* | Fields dry this season; grate clear; shaft capped with a new lid and the stones reset on chalk. | The circle has been moved, even if only for a day. This season's remembrance circle is held on ground that was opened. Some households are uneasy (barks). Annelise carries the weight of having agreed. | MQ12: the circle stands, and Annelise has scratched a tiny chalk arrow under each stone "so the next person knows which way up." Ashenstead barks treat the lifting as something done properly. |
 | **Plot** — *"Run a ditch through Joric's ground."* | Fields dry this season; water runs in a new ditch across the burned plot to the Flats drain. | Joric's unworked ground now does work, whether or not he ever plants it. Water runs through the place he avoids, though not the corner he never walks. | MQ12 and *Unreplanted* epilogue: the ditch is lined with stones Joric chose; the net rail stands beside it. Joric still never walks the far corner. |
-| **Dike** — *"Build round both. Touch nobody's ground."* | Circle and plot untouched; water led round to the drain. | A night's extra labour and a goblin raid; the re-sown low strips are lost for a season; households go short of a planting (barks; Ashenstead buys in seed). | MQ12: the low strips are back in crop, and the dike has a path worn along its top. Both Joric and Annelise say the same short thing about it. |
+| **Dike** — *"Build round both. Touch nobody's ground."* | Circle and plot untouched; water led round to the drain. | A night's extra labour and a goblin raid; the re-sown low strips are lost for a season; households go short of a planting (barks; Ashenstead buys in seed from a Provision Board cart "at the relief price", `GL-B8.1` `[ANTAGONIST]`). | MQ12: the low strips are back in crop, and the dike has a path worn along its top. Both Joric and Annelise say the same short thing about it. |
 
 No option is wrong. Each touches a value: Annelise's belief that remembrance should be **light enough to carry** (stones carried here can be carried again, and put back), Joric's right to **decide about his field himself**, and the community's willingness to **pay in time** rather than ask either of them.
 
@@ -402,6 +405,8 @@ No option is wrong. Each touches a value: Annelise's belief that remembrance sho
 | The dike option was free of cost, so it dominated. | It now costs a night, a raid and a season's planting, stated by the crew before the choice. |
 | The culvert had a rising-water damage timer. | Replaced with telegraphed, non-damaging rises that change spacing. Tense without punishment. |
 | Sedge had three lines. | One sentence, then a gesture. Players may miss him entirely. |
+| Independent review pass: the plot option refought MQ3's culvert den, and ignored *Unreplanted*. | GL-E4b: UR Completed → returning Field Goblins (scrub already cleared); UR not Completed → a **reformed den** only when `HW_DEN_CLEARED` is false, otherwise a Reed Stalker at the drain mouth. `GL-D5.31` lines now follow UR §8.2 for each UR outcome. |
+| Independent review pass: Marrick needs a middle. | Dike option: Ashenstead buys seed from a Provision Board cart; one household bark (`GL-B8.1`) seeds her motive ("Her house fed us in the war, she says. Says it a lot."). `[ANTAGONIST]`. |
 
 ---
 
@@ -409,7 +414,7 @@ No option is wrong. Each touches a value: Annelise's belief that remembrance sho
 
 ## TF.1 The quest in one paragraph
 
-Miller Imber Cobb has chalked a notice on the Brookhollow dock post: **MILL RUNNER WANTED — DROWSEBANK — STEADY HANDS.** The runner he means to replace is Tovin Pell. Tools move overnight, the floor is wet in the mornings, and Tovin "sees things." The player turns up about the job and finds Tovin packing. First the demonstrable hazard: the mill-race gate's paddle is cracked and its strap bent. The player lowers a seasoned beam on the mill hoist, cuts a new board, re-forges the strap or straightens it with Imber, and seats it. A night watch from the beam loft explains the tools. Two of Sallow's crew come in by the tail door, use the hoist, borrow the long bar, try the gate and swear at the new pin. Then Tovin, asked directly, hands over seven loose sheets: the floor, drawn on the mornings it was wet. The player lays them on the mill floor in order using the wet-line evidence and works out the crew's pulse cadence from Tovin's shift tallies. The next pulse is tonight. The set piece is holding the race gate shut while the crew winds from the far bank and pries the pawl from this side, with drift rising out of whatever water gets through. Afterward, in the quiet, the mill-pond reflections lag behind the lanterns. Tovin sees it too and doesn't name it. At dawn a keeper writes the calendar into the record, with Tovin's name on it or without.
+Miller Imber Cobb has chalked a notice on the Brookhollow dock post: **MILL RUNNER WANTED — DROWSEBANK — STEADY HANDS.** The runner he means to replace is Tovin Pell. Tools move overnight, the floor is wet in the mornings, and Tovin "sees things." The player turns up about the job and finds Tovin packing. First the demonstrable hazard: the mill-race gate's paddle is cracked and its strap bent. The player lowers a seasoned beam on the mill hoist, cuts a new board, re-forges the strap or straightens it with Imber, and seats it. A night watch from the beam loft explains the tools. Two of Sallow's crew come in by the tail door, use the hoist, borrow the long bar, try the gate and swear at the new pin. Then Tovin, asked directly, hands over seven loose sheets: the floor, drawn on the mornings it was wet. The player lays them on the mill floor in order using the wet-line evidence and works out the crew's pulse cadence from Tovin's shift tallies. The next pulse is tonight. The set piece is bracing the race gate: carrying stop-planks to the old wartime grooves and wedging them home between the pulse's three swells, while the crew pries at the pin and the wedges and winds the paddle from the far bank, and drift rises out of whatever water gets through. Afterward, in the quiet, the mill-pond reflections lag behind the lanterns. Tovin sees it too and doesn't name it. At dawn a keeper writes the calendar into the record, with Tovin's name on it or without.
 
 **Remember:** seven sheets on the floor in a row, each with one more stain line than the last. **Want next:** what the second set of lines, the ones coming up from below, means for the orchards.
 
@@ -445,7 +450,7 @@ Miller Imber Cobb has chalked a notice on the Brookhollow dock post: **MILL RUNN
 |---|---|---|
 | **A. Mill yard and pond bank** | Arrival; the strange moment | A broad, still pond behind the mill. Ducks avoid the corner by the race gate. A bench where Tovin eats alone, facing the water. |
 | **B. Ground floor** | Puzzle floor | Two millstones; a hoist trap with chain; seven **sack bays** chalk-numbered 1–7 along the race-side wall. A **tool rack with painted outlines** (Imber painted them so he could see what goes missing); three outlines are empty. Faint **stain lines** on the race-side boards, one above another, like tide marks. A **shift board** by the door: chalk strokes in fives. |
-| **C. Race and race gate** | Repair; hold | A wooden paddle gate in an iron frame between pond and race, raised by a **rack and two cranks**: a near crank on the mill side and a far crank across a narrow footbridge on the pond bank. Painted bands on the paddle post (Imber's height marks). The bottom board is split; one strap is bent; the pawl has **bright fresh scars** where something pried it. |
+| **C. Race and race gate** | Repair; hold | A wooden paddle gate in an iron frame between pond and race, raised by a **rack and two cranks**: a near crank on the mill side and a far crank across a narrow footbridge on the pond bank. Painted bands on the paddle post (Imber's height marks). On the pond side, three empty **stop-plank grooves** in the old wartime frame, and a stack of oak stop-planks by the hoist. The bottom board is split; one strap is bent; the pawl has **bright fresh scars** where something pried it. |
 | **D. Tail race and tail door** | Crew entry; backwater | The tail race runs out under the mill into an older channel of dressed stone with iron rings, much better built than the mill. The tail door's lower step has a **damp patch** that isn't from the race side. |
 | **E. Beam loft** | Watch point; timber | Seasoned beams on trestles. A gap between floorboards gives a clear view of the floor and the gate. Tovin's sheets were drawn from here. |
 | **F. Mill-smith's corner** | Smithing | A small hearth and anvil for pins and straps. Mills keep one. (**POI VERIFICATION:** confirm with the Zones package.) |
@@ -482,7 +487,7 @@ Imber fits a new **lock pin** through the pawl and pockets the key. *"Gate's sou
 ### Beat 4 — Night in the Loft (`S04_watch`)
 **Objective:** *Watch the mill tonight.*
 Imber goes home. Tovin goes home. The player climbs to the loft gap and uses **Keep watch** → night. Under player control:
-1. The tail door opens. Two crew with hooded lanterns come in talking (`TF-D3`, positional, `[ANTAGONIST]`). Their talk plays **before** they reach the gate, so no player action can cut it short. They name their master, say why they've come to the mill (an `LM_LOCK_STATE` variant), and say they'll pull the gate *tomorrow night* "pin or no pin."
+1. The tail door opens. Two crew with hooded lanterns come in talking (`TF-D3`, positional, `[ANTAGONIST]`). Their talk plays **before** they reach the gate, so no player action can cut it short. They name their master, say the mill is now their **only** run (they have used it for weeks as the Lock's overflow run; an `LM_LOCK_STATE` variant says why the Lock is out), and say they'll pull the gate *tomorrow night* "pin or no pin."
 2. They take the long bar from the rack, drop the hoist hook to haul a line from the tail race, try the near crank, find the pin, and swear.
 3. They leave the bar by the trap and go out the way they came.
 
@@ -506,10 +511,10 @@ The player lays the seven sheets in the seven chalked **sack bays** along the ra
 | "Sacks by the door" | 0 | Whole | Dry | 12 strokes |
 | "The cat on the stone" | 1 | Whole | Dry | — |
 | "Hook down" | 2 | Whole | Dry | — |
-| "Long bar gone" | 3 | Whole | Dry | 39 strokes |
+| "Long bar gone" | 3 | Whole | Dry | 42 strokes |
 | "Gate side only" | 3 *visible*: Tovin drew only the gate half; the 4th line runs off the edge of the sheet | **Small crack** | Damp patch on the step | — |
 | "Rain at the window" | 5 | Crack longer | Damp patch larger | — |
-| "Imber's boots" | 6 | Crack longest | Damp up to the second step | 66 strokes |
+| "Imber's boots" | 6 | Crack longest | Damp up to the second step | 72 strokes |
 
 **How the player solves it.** The **stain count** orders most of the sheets: each wet morning leaves one more line. "Gate side only" ties with "Long bar gone" at three lines, and the **crack** breaks the tie: a crack can't heal. The tail-door patch confirms the order of the last three. Players can check against the **real floor**: kneeling at the race wall (inspect) shows seven stain lines and today's damp.
 
@@ -519,59 +524,62 @@ The player lays the seven sheets in the seven chalked **sack bays** along the ra
 
 If the player checks wrongly three times, **Imber** (not Tovin) offers one practical nudge: *"Count the lines first. Same as rings in a stump."* Tovin watches and never corrects. He describes his drawings if asked (`TF-D5` sheet lines), and that is all.
 
-**Then the cadence** (`S06b_cadence`). With the sheets in order, the three tallies read 12, 39 and 66: nine shifts between each wet morning. The **shift board** by the door (inspect): *"Seventy-four strokes. Today's makes seventy-five."* 66 + 9 = 75. In `TF-D5`, Imber asks when the next one comes: **tonight** / in nine days / can't tell. A wrong answer gets *"Count it again,"* and the player can re-inspect the board and the sheets.
+**Then the cadence** (`S06b_cadence`). With the sheets in order, the three tallies read 12, 42 and 72: ten shifts between each wet morning. Tovin works two shifts a day, so that is **every fifth night**, the same rhythm as the Watcher's book in MQ3. The **shift board** by the door (inspect): *"Eighty-one strokes. Today's makes eighty-two."* 72 + 10 = 82. In `TF-D5`, Imber asks when the next one comes: **tonight** / in ten days / can't tell. An optional player line (`TF-D5.21`) ties it to MQ3: *"Every fifth night. Same as the Watcher's book."* The sheets span about five weeks: the crew used the race as the Lock's **overflow run** long before MQ4; since MQ4 it is their only route. A wrong answer gets *"Count it again,"* and the player can re-inspect the board and the sheets.
 
-**And the other lines.** Once the cadence is settled, Imber crouches at the tail-door step (`TF-D5.30`): *"That's not from the pond. That came up from below."* The tail-door patches on the last three sheets are growing. Nobody knows what they mean yet. Tovin says only, *"It's been wetter there. I drew it how it was."*
+**And the other lines.** Once the cadence is settled, Imber crouches at the tail-door step (`TF-D5.30`): *"That's not from the pond. That came up from below."* The tail-door patches appear only on the last three sheets (the weeks since the Lock was shut) and are growing. Nobody knows what they mean yet. Tovin says only, *"It's been wetter there. I drew it how it was."*
 **Verbs:** reconstruct, deduce.
 
 ### Beat 7 — Before Dark (`S07_prepare`)
 **Objective:** *Be at the race gate by dark.*
 Imber sends Tovin running for the keepers at the Cut watch. He is a mill runner, after all. *"Go on. You're faster than me and you know the path in the dark."* Tovin goes. That matters: he isn't in the fight, and he arrives with the keepers.
 Optional preparations (each gives a small advantage; none is required):
-- **Brace the gate** with the spare beam (carry + set): the far crank needs one extra wind per band.
+- **Stage the planks:** carry two of the three stop-planks down to the gate frame before dark (`TF_BRACED`). They start the hold beside the grooves, so the first swell needs no long carry.
 - **Hang the lantern** on the footbridge post: drift telegraphs read more clearly in the race (presentation).
-- **Cook** at the mill hearth and give a meal to Imber: one warm line, and Imber stays at the near crank for the first band (holds the pawl for ~10 s at the start).
+- **Cook** at the mill hearth and give a meal to Imber: one warm line, and Imber sits on the pin through the first swell (it cannot be pried until the first swell has passed).
 Keep watch at the gate → the pulse hour.
 
-### Beat 8 — Hold the Gate (`S08_hold`) — *set piece*
-**Objective:** *Keep the race gate shut.*
-See §TF.6. Completes when the pulse has passed, the crew is defeated, the drift in the race is dispersed and the spill boards are pulled.
+### Beat 8 — Brace the Gate (`S08_hold`) — *set piece*
+**Objective:** *Brace the race gate.*
+See §TF.6. Completes when the third swell has passed, the crew is defeated, the drift in the race is dispersed and the spill boards are pulled.
 
 ### Beat 9 — Into the Record (`S09_record`)
 **Objective:** *Give the keeper Tovin's sheets.*
-At dawn the keepers bind the crew. A **Keeper** (role-based, from the Cut watch) reads the sheets on the mill floor where they still lie in order (`TF-D8`). They see the cadence, and they see the tail-door lines and go quiet. *"If that keeps growing like this, the next big one comes over the orchard dikes."* (Sets `TF_KEEPERS_READ_BACKWATER`.) Then the choice: **credit Tovin by name** in the Keepers' record, or **submit the sheets unsigned**. Tovin is standing right there. Item `tovin_floor_sheets` goes to the keeper either way. Sets `LM_TOVIN_CREDITED` and `LM_FLUSH_CALENDAR`.
+At dawn the keepers bind the crew. A **Keeper** (role-based, from the Cut watch) reads the sheets on the mill floor where they still lie in order (`TF-D8`). They see the cadence, and they see the tail-door lines and go quiet. The keeper reads them as a second pattern: *"Tail-door wet comes up on the pulse nights too, and higher each time. Crew or no crew."* and *"If that keeps growing like this, the next big one comes over the orchard dikes."* (Sets `TF_KEEPERS_READ_BACKWATER`.) This is the on-screen basis for MQ7's forecast: the backwater keeps the fen's own swell nights, the same fifth nights the war engineers flushed on, so Tovin's calendar dates it and the tail-door lines size it. Then the choice: **credit Tovin by name** in the Keepers' record, or **submit the sheets unsigned**. Tovin is standing right there. Item `tovin_floor_sheets` goes to the keeper either way. Sets `LM_TOVIN_CREDITED` and `LM_FLUSH_CALENDAR`.
 **Verbs:** choose.
 
 ### Beat 10 — Steady Hands (`S10_close`)
 **Objective:** *Speak with Imber and Tovin.*
 `TF-D9`. Imber rubs out his notice himself. Tovin's last line varies by the choice. Completes the quest.
 
-## TF.6 The gate hold: set-piece spec
+## TF.6 Bracing the gate: set-piece spec
 
-**State.** The paddle has a height band of **0** (shut) to **3** (wide). Water through the race scales with the band. The pond is high (the crew's extra spill boards) and the leat head upstream has been opened: the **pulse** is the pond surging against the gate for ~3 minutes.
+**Why this is not a crank hold.** MQ4 (crank) and MQ11 (gate winches) are the arc's two "hold a channel under attack" set pieces. MQ6 is a different loop: **timed carries and wedging while fighting**. The player never stands at a progress bar.
+
+**State.** The paddle has a height band of **0** (shut) to **3** (wide), wound up by the crew's far crank once Imber's pin is pried. On the pond side of the paddle the old wartime frame has **three stop-plank grooves**. Each plank the player sets **and wedges** cancels one band. **Water through = band − wedged planks** (minimum 0). The pond is high (the crew's extra spill boards) and the leat head upstream has been opened: the **pulse** arrives as **three swells** about 60 s apart, each heralded by a rising rumble from the leat (~5 s) and a visible lift of the pond against the gate.
 
 **The crew's plan, readable at a glance:**
-- **Far-crank man** (pole-man variant) on the pond bank across the footbridge. While the near pawl is **free**, he winds the paddle up **one band every 8 s** (the crank clacks loudly on each tooth; a band rise has a heavy *thunk* and a gush).
-- **Pry-men** (2 × pole-man) come at the near crank from the tail door. Their special is **Pry the pawl**: crouch at the crank with the long bar, ~2.5 s, bar glinting in the lantern light (the telegraph). If it completes, the pawl is free.
-- **Cutter** (1) hangs back and harries whoever is at the near crank.
+- **Pry-men** (2 × pole-man) come in by the tail door. Their special is **Pry**: crouch at the gate with the long bar, ~2.5 s, bar glinting in the lantern light (the telegraph). On the pin, a completed pry frees the paddle. On a wedged plank, it knocks the wedge out.
+- **Far-crank man** (pole-man variant) on the pond bank across the footbridge. While the pin is free he winds the paddle up **one band every 8 s** (loud clack per tooth; a heavy *thunk* and a gush on each band).
+- **Cutter** (1) harries whoever is carrying. A hit on a player carrying a plank makes them drop it where they stand (pick it up again: instant).
 - When the far-crank man is defeated, **the cutter takes his place** once, after crossing the footbridge (~6 s; readable). When both are down, winding stops for good.
 
-**The player's tools:**
-- **Re-seat the pawl** at the near crank: 2 s channel. While seated, the paddle cannot rise.
-- **Wind down** at the near crank: 3 s channel per band, pawl seated.
-- **Interrupt** a pry by hitting the prying crewman: any hit cancels the channel.
+**The player's tools (all instant or short, none channelled at a fixed spot):**
+- **Carry a stop-plank** (carry state) from the stack by the hoist (~10 m from the gate; slower movement while carrying).
+- **Drop it in a groove** (instant, at the gate frame).
+- **Drive the wedge** (one maul strike at the frame, instant). A plank that is set but **not wedged** when a swell hits **lifts out** and washes onto the race edge, nearer than the stack, to be carried back.
+- **Interrupt** a pry by hitting the prying crewman (any hit cancels it).
 - **Cross the footbridge** to stop the far crank. It's narrow; while on it, the player is exposed to the cutter.
 
 **Phases (~4–6 minutes):**
-1. **The roar** (0:00): the pulse arrives as a rising rumble from the leat; the pond lifts visibly against the gate. Crew enter. *"Bar! Get the bar on it!"*
-2. **The hold** (~0:15–3:00): the juggle above. A focused player keeps the band at 0–1. A struggling player sees it reach 2 or 3, never more. No outcome is a fail.
-3. **The race turns** (as soon as the band has ever been ≥ 1, and in any case at ~2:30): the water that got through churns in the race. **Drift rises out of the churn** (§TF.7, TF-E3b), one more for each band reached, minimum one so the moment always plays. It climbs onto the footbridge and the floor's race edge.
+1. **The roar** (0:00): the first rumble from the leat; the crew enter. *"Bar! Get the bar on it!"*
+2. **Three swells** (~0:15–3:00): between swells the player carries and wedges; at each swell, water through is counted from the current band and wedged planks, and unwedged planks lift. A focused player keeps water through at 0–1. A struggling player sees 2 or 3, never more. No outcome is a fail.
+3. **The race turns** (as soon as water through has ever been ≥ 1, and in any case at the third swell): the water that got through churns in the race. **Drift rises out of the churn** (§TF.7, TF-E3b), one more for each band of water through, minimum one so the moment always plays. It climbs onto the footbridge and the floor's race edge; fighting it while carrying is the late-game juggle.
 4. **Spill the pond** (after the crew is down): Imber shouts *"Spill boards!"* The player crosses to the far bank and pulls the crew's two extra boards (2 × 3 s channel). The pond drops over the old spill weir with a long rush, the safe way. The pulse dies.
 5. **Keepers** arrive with Tovin as the last drift disperses.
 
 **The strange moment** (after phase 5, unprompted): see §TF.8.
 
-**Outcome counter.** `TF_MAX_BAND` (0–3) feeds only presentation: the race-edge flood decal inside the mill and one Imber line. It is never a failure or a flag other quests read.
+**Outcome counter.** `TF_MAX_BAND` (0–3) records the **highest water-through** reached at any swell. It feeds only presentation: the race-edge flood decal inside the mill and one Imber line. It is never a failure or a flag other quests read.
 
 ## TF.7 Encounters
 
@@ -579,7 +587,7 @@ At dawn the keepers bind the crew. A **Keeper** (role-based, from the Cut watch)
 |---|---|---|---|---|---|---|
 | **TF-E1** | 2 Skitter swarms | Race shallows at the footbridge | Leashed to water | Ripple line (~0.8 s) | Keeps the repair physical | Required, light |
 | **TF-E2** | 1 pole-man, 1 cutter (smugglers) | Mill floor, night | Pole-man: reach sweeps; cutter: quick, close | Pole-man plants feet and draws the pole back (~1.2 s) before a wide sweep; cutter's lunge has a shoulder dip (~0.8 s) | Optional; lets players act on anger without costing evidence | Optional. ~45 s |
-| **TF-E3a** | 2 pole-men (pry), 1 pole-man (far crank), 1 cutter | Gate, footbridge, far bank | See §TF.6 | Pry: crouch + bar glint ~2.5 s. Sweep: as E2. Far crank: audible clack per tooth | The gate juggle: priorities over damage | Required. A first-time player reaches band 1–2 |
+| **TF-E3a** | 2 pole-men (pry), 1 pole-man (far crank), 1 cutter | Gate, footbridge, far bank, plank stack | See §TF.6 | Pry (pin or wedge): crouch + bar glint ~2.5 s. Sweep: as E2. Far crank: audible clack per tooth. Cutter: shoulder dip (~0.8 s) at the carrier | Carry, wedge and fight: priorities over damage | Required. A first-time player lets 1–2 bands through |
 | **TF-E3b** | 1–4 drift (Water Wraith, standard) | Race and race edge | Place-bound to race volume; lash when approached | The water surface goes glassy and still around the drift (~1.5 s) before an arm-lash; a cold mist ring on the ground marks reach | Drift forms from churned water: conditions, not souls | Required. Disperse all; they won't re-form after the race is quieted |
 
 Crew who are defeated stay down and are bound by the keepers. They are not killed on screen. Nothing they carry is evidence; the keepers' record names the crew's employer from the MQ4 evidence, not from these men (`[ANTAGONIST]` swap layer unaffected).
@@ -609,8 +617,8 @@ Crew who are defeated stay down and are bound by the keepers. They are not kille
 | `S05_sheets` | Tell the miller what you saw. | `TF-D4` end node; `tovin_floor_sheets` acquired | Yes | |
 | `S06_calendar` | Lay Tovin's sheets on the floor in order. | `walk_the_row` validates order | Yes | Three wrong checks → Imber hint |
 | `S06b_cadence` | Work out when the next one comes. | `TF-D5` "tonight" node | Yes | |
-| `S07_prepare` | Be at the race gate by dark. | `keep_watch` at gate → pulse window starts | Yes | Optional preps: `brace_gate`, `hang_lantern`, cooked food given to Imber |
-| `S08_hold` | Keep the race gate shut. | Pulse window ends + TF-E3a all defeated + TF-E3b all dispersed + 2 `pull_spill_board` | Yes | Fires `tf.pond_lag` |
+| `S07_prepare` | Be at the race gate by dark. | `keep_watch` at gate → pulse window starts | Yes | Optional preps: `stage_planks` (×2 carries), `hang_lantern`, cooked food given to Imber |
+| `S08_hold` | Brace the race gate. | Third swell passed + TF-E3a all defeated + TF-E3b all dispersed + 2 `pull_spill_board` | Yes | Interactions: `carry_plank`, `set_plank`, `drive_wedge`. Fires `tf.pond_lag` |
 | `S09_record` | Give the keeper Tovin's sheets. | `TF-D8` choice node; item given | Yes | Sets `LM_TOVIN_CREDITED`, `LM_FLUSH_CALENDAR`, `TF_KEEPERS_READ_BACKWATER` |
 | `S10_close` | Speak with Imber and Tovin. | `TF-D9` end node | Yes | Quest → Completed; `drift.drowsebank_race` → quieted |
 
@@ -622,8 +630,8 @@ Crew who are defeated stay down and are bound by the keepers. They are not kille
 | `LM_FLUSH_CALENDAR` = true | `TF-D8` | MQ7; MQ10 |
 | `TF_KEEPERS_READ_BACKWATER` | `TF-D8` | MQ7 notice; Act III |
 | `TF_FOUGHT_IN_LOFT` | `S04b_fight` | `TF-D4` Imber variant |
-| `TF_FED_IMBER`, `TF_BRACED`, `TF_LANTERN_HUNG` | Optional preps | `TF-D7` barks; hold modifiers |
-| `TF_MAX_BAND` (0–3) | `S08_hold` | Presentation; one `TF-D7` line |
+| `TF_FED_IMBER`, `TF_BRACED` (planks staged), `TF_LANTERN_HUNG` | Optional preps | `TF-D7` barks; hold modifiers |
+| `TF_MAX_BAND` (0–3) | `S08_hold` (highest water-through at any swell) | Presentation; one `TF-D7` line |
 
 ## TF.11 Choices and consequences
 
@@ -648,7 +656,7 @@ Neither option is wrong. One honors Tovin publicly at his expense. The other pro
 
 | Situation | Handling |
 |---|---|
-| Death during the hold | Respawn in the mill yard; the hold **resumes at its current state** (band and crew positions kept; pulse timer paused while the player is dead) |
+| Death during the hold | Respawn in the mill yard; the hold **resumes at its current state** (band, wedged planks and crew positions kept; swell timer paused while the player is dead; a carried plank returns to the race edge) |
 | Logout during the hold | On return the pulse window restarts from phase 1 with full crew; repairs and sheets kept |
 | Logout mid-puzzle | Sheets return to inventory; bays clear; nothing lost |
 | Player sells or drops the sheets | Not droppable or sellable |
@@ -659,8 +667,9 @@ Neither option is wrong. One honors Tovin publicly at his expense. The other pro
 | Need | Minimum form |
 |---|---|
 | Ordered-slot placement puzzle | Seven slot interactions accepting one of seven item "pages" from a single quest item (or seven sub-items under one quest-item id); a validate interaction returning the first contradiction's text key |
-| Gate band state machine | Integer 0–3; inputs: pawl seated/free, far-crank alive, wind-down channel; tick timer per §TF.6 |
-| NPC special "pry the pawl" | Channelled NPC interaction on a world object, interruptible by damage |
+| Gate band state machine | Integer 0–3 band; three plank slots (empty / set / wedged); inputs: pin free, far-crank alive; three timed swell events that lift unwedged planks and record water-through per §TF.6 |
+| Carry-state plank | As MQ1 carry state; drop-on-hit; three slot interactions plus an instant `drive_wedge` |
+| NPC special "pry" | Channelled NPC interaction on a world object (pin or wedge), interruptible by damage |
 | Hoist-lower interaction | One channel that moves a prop from loft to floor |
 | Pond reflection lag | Client-side planar reflection delay, local only, time-limited |
 
@@ -668,8 +677,8 @@ Neither option is wrong. One honors Tovin publicly at his expense. The other pro
 
 | Mystery | Author truth | Public belief | Evidence | Wrong reading | Withheld | Reveal owner |
 |---|---|---|---|---|---|---|
-| Tovin's moved tools and wet floors | The crew uses the mill at night as their route since the Lock was closed; their pulses wet the race side. | Tovin is losing his mind. | The night scene; the pawl scars; empty outlines; the sheets. | Tovin did it. | — | This quest. |
-| The tail-door lines | The backwater (§A2.2) arriving up the Drowse spur. | — | The sheets; the step. | The crew again. | Why it grows. | MQ7 (projection), MQ9 (flow-table). |
+| Tovin's moved tools and wet floors | For weeks the crew has used the mill race at night as the Lock's overflow run, on the same fifth nights; since MQ4 it is their only route, through the wartime Drowse spur. Their pulses wet the race side. | Tovin is losing his mind. | The night scene; the pawl scars; empty outlines; the sheets. | Tovin did it. | — | This quest. |
+| The tail-door lines | The backwater (§A2.2) arriving up the Drowse spur; they start only after MQ4 and rise on the same fifth nights. | — | The sheets; the step; the keeper's reading (`TF_KEEPERS_READ_BACKWATER`). | The crew again. | Why it grows. | MQ7 (projection), MQ9 (flow-table). |
 | The lagging pond | Unexplained bounded resonance. | Tovin "sees things." | Seen by the player and Tovin. | It's a ghost; it's Tovin's fault. | Everything. | Not revealed in v1. |
 
 ## TF.16 Open decisions
@@ -688,6 +697,9 @@ Neither option is wrong. One honors Tovin publicly at his expense. The other pro
 | The puzzle could be brute-forced with no reasoning. | The validator names a physical contradiction, so even brute force teaches the rule. Three wrong checks bring Imber's practical nudge. |
 | "Salvage timber" risked endless war-salvage gathering (Woodland portfolio rejects renewable war salvage). | The beam is Imber's own seasoned stock: one beam, one board, no node. |
 | Credit choice implied unsigned was cowardly. | Both options are written with a cost borne by someone. Tovin's fear is respected in both. |
+| Independent review pass: chronology contradicted itself (crew "moved because the Lock is gone" vs "same as always"; sheets showing weeks of earlier use; a 9-shift cadence matching nothing). | The race is the Lock's long-standing **overflow run**; since MQ4 it is the crew's only route. Tallies retimed to 12/42/72 with the board at 81→82: ten shifts, every fifth night, matching MQ3. Optional `TF-D5.21` ties it to the Watcher's book. The keeper's backwater reading (`TF-D8.03b`) gives MQ7's forecast an on-screen basis. |
+| Independent review pass: third "hold a channel under attack" in a row. | The hold is now a **brace**: stop-plank carries and wedges between three timed swells while fighting. No fixed-spot channel. The crank set pieces stay in MQ4 and MQ11. |
+| Independent review pass: Marrick has no middle. | One added crew line (`TF-D3.05`): Sallow says "the lady" wants the pond through. `[ANTAGONIST]`. Her on-stage Act II appearance is MQ7 (`DK-D9`). |
 
 ---
 
@@ -695,7 +707,7 @@ Neither option is wrong. One honors Tovin publicly at his expense. The other pro
 
 ## DK.1 The quest in one paragraph
 
-A keepers' notice is nailed to the Sluice Shelter post: from Tovin's floor, the next backwater comes in three nights and stands a hand over the Long Bank, the lowest run of the orchard dikes. Bryn Ruddock means to hold her section of it the way her household always has: kneeling on the dike crown with a riverglass bowl of ditch water, a rim of fresh softmoss and a line of driftroot stakes to show the water where to go. Her bowl cracked this spring. The player fetches a new one from Ottilie Penner (who makes them ring before she'll sell one), cuts softmoss at the shrine stones (moss near drift rots black, and Elspeth Quill won't let a scrap be wasted), and cuts stakes from storm-thrown driftroot, never the living roots that hold the bank. A Fenmere charter officer arrives with a measuring chain to say a dike this size is charter business. On the night, the player guards Bryn while she works. The water climbs the Long Bank and, at her section, folds aside around the bowl like cloth smoothed by a hand, then runs along the stakes back into the ditch. Drift rises in the overtopping water. Mud Pipers in the reeds call for help in Bryn's voice. A flood-mad elk comes down the rows. If anything reaches her, the hold slips and the old pear rows flood. The orchard is saved, wholly or mostly. The fen is not. In the morning the orchard households decide what Bryn's work is, with the player's word deciding it.
+A keepers' notice is nailed to the Sluice Shelter post: from Tovin's floor, the next backwater comes in three nights and stands a hand over the Long Bank, the lowest run of the orchard dikes. Bryn Ruddock means to hold her section of it the way her household always has: kneeling on the dike crown with a riverglass bowl of ditch water, a rim of fresh softmoss and a line of driftroot stakes to show the water where to go. Her bowl cracked this spring. The player fetches a new one from Ottilie Penner (who makes them ring before she'll sell one), cuts softmoss at the shrine stones (moss near drift rots black, and Elspeth Quill won't let a scrap be wasted), and cuts stakes from storm-thrown driftroot, never the living roots that hold the bank. A Fenmere charter officer arrives with a measuring chain to say a dike this size is charter business. On the night, the player guards Bryn while she works her section stake to stake. The water climbs the Long Bank and, wherever she kneels, folds aside around the bowl like cloth smoothed by a hand, then runs along the stakes back into the ditch. Drift rises in the overtopping water. Mud Pipers in the reeds call for help in Bryn's voice. A flood-mad elk comes down the rows. If anything reaches her, the hold slips and the old pear rows flood. The orchard is saved, wholly or mostly. The fen is not. In the morning, among the pear rows, the orchard households decide what Bryn's work is, with the player's word deciding it. On the dike road a Provision Board relief cart goes by, and the Provisioner herself thanks the player for their work.
 
 **Remember:** water folding aside around a bowl. **Want next:** who has been quieting the ditches since, without signing anyone's book.
 
@@ -733,7 +745,8 @@ A keepers' notice is nailed to the Sluice Shelter post: from Tovin's floor, the 
 | **A. Bryn's ditch head** | A sluice gate with a hand-carved board: *RUDDOCK — TURN AT FIRST FROST, NOT BEFORE.* A cracked riverglass bowl on the gatepost, cleaned and kept anyway. |
 | **B. The old pear rows** | The lowest rows, gnarled and propped. Windfall in the grass. The section that floods if the hold slips. |
 | **C. The Long Bank** | A dike run a little lower than the rest, with a dip in its crown worn by feet. Bryn's boundary stones at either end, and a neighbour's beyond. |
-| **D. The Sluice Shelter (P15)** | Roofless; child-height names scratched on the inside walls in more than one hand; a bench for council talk. The keepers' notice on the post. |
+| **D. The Sluice Shelter (P15)** | Roofless; child-height names scratched on the inside walls in more than one hand; a bench. The keepers' notice on the post. |
+| **I. The dike road** | The cart track along the top of the outer dikes, between the orchards and Brookhollow. Relief carts use it. |
 | **E. Shrine stones** | Three wayside stones along the orchard track, each thick with softmoss. The one nearest the reed margin has moss blackening at the edges. |
 | **F. The river edge** | Living driftroots binding the bank, and a storm-thrown driftroot lying across the shingle, roots in the air. |
 | **G. Reed margin** | Dense reeds between orchard and river. Reed sounds that are almost words. |
@@ -743,7 +756,7 @@ A keepers' notice is nailed to the Sluice Shelter post: from Tovin's floor, the 
 
 ### Beat 0 — The Notice (`S00_notice`)
 **Objective:** *Find Bryn Ruddock at the orchard ditches.*
-Inspecting the notice or approaching Bryn starts the quest. Notice text (keepers' hand): *"By the Drowsebank reckoning: backwater three nights hence. Height over the Long Bank by a hand. Orchard households, make ready."*
+Inspecting the notice or approaching Bryn starts the quest. Notice text (keepers' hand): *"By the Drowsebank reckoning: backwater on the fifth night, three nights hence. Tail-door wet rising each time, crew or no crew. Height over the Long Bank by a hand. Orchard households, make ready."* Its basis is on screen in MQ6: Tovin's calendar dates the fifth nights (`LM_FLUSH_CALENDAR`) and the keeper's tail-door reading sizes the rise (`TF_KEEPERS_READ_BACKWATER`). Bryn's first line repeats it in her own words.
 
 ### Beat 1 — Bryn's Plan (`S01_bryn`)
 **Objective:** *Hear Bryn out.*
@@ -758,46 +771,46 @@ Inspecting the notice or approaching Bryn starts the quest. Notice text (keepers
 
 ### Beat 3 — Set the Bank (`S03_set`)
 **Objective:** *Set the stakes and moss along Bryn's section.*
-Bryn shows the line: three stake points (3 s channel each) slanting along the crown toward the ditch, and two moss points (3 s channel each) packed into the crown's dip. The bowl is handed over (`item-given`).
-At the second stake the **charter officer** arrives with a measuring chain and a ledger (`DK-D4`): a dike this size falls under Fenmere charter oversight, and who authorised this? Bryn bristles. The officer will measure: *"Hold the end."* The player holds the chain's end at Bryn's west boundary stone (3 s channel) and then at the east stone (3 s channel) while the officer reads it. The section is **one holding's length, on Bryn's own stones**. On its face the officer allows it as household practice below the charter line, but the Long Bank as a whole is a shared work, so the commons roll is the council's business. *"If it fails, it floods four holdings. I'll be watching."* They stay to watch.
+Bryn shows the line: three stake points (3 s channel each) slanting along the crown toward the ditch, and two moss points (3 s channel each) packed into the crown's dip. Each stake point is one of the **three stations** Bryn will work on the night (west, middle, east). The bowl is handed over (`item-given`).
+At the second stake the **charter officer** arrives with a measuring chain and a ledger (`DK-D4`): a dike this size falls under Fenmere charter oversight, and who authorised this? Bryn bristles. The officer **paces the bank alone**, chain over one shoulder, from Bryn's west boundary stone to the east one, while the player keeps working. Their verdict: *"One holding. Your stones. Household, then, below the line. The bank's another matter."* The Long Bank as a whole is a shared work, so the commons roll is the households' business. *"If it fails, it floods four holdings. I'll be watching."* They stay to watch.
 
 ### Beat 4 — Waiting (`S04_wait`)
 **Objective:** *Wait for the backwater at the Sluice Shelter.*
-Keep watch → night. Before the water comes, Bryn says the quest's key instruction (`DK-D5`): *"I won't shout. Whatever happens, I won't. If you hear me shouting, it isn't me."*
+Keep watch → night. Before the water comes, Bryn says the quest's key instruction (`DK-D5`): *"I won't shout. Whatever happens, I won't. If you hear me shouting, it isn't me."* She also says she'll be moving: *"I work it stake to stake. West, middle, east. Keep up."*
 
 ### Beat 5 — The Hold (`S05_defend`) — *set piece*
-**Objective:** *Keep everything off Bryn until the water falls.*
-See §DK.6.
+**Objective:** *Keep everything off Bryn while she works the bank.*
+See §DK.6. This is the arc's **escort-a-working-NPC** set piece: Bryn moves along the bank at her own pace, and the player's job is to be where she is going.
 
-### Beat 6 — The Council at the Shelter (`S06_council`)
-**Objective:** *Speak for Bryn at the Sluice Shelter.*
-At first light the orchard households gather, along with the charter officer, Elspeth, Bryn and the **roll-keeper** (the eldest ditch-turner on the orchard commons roll, role-based). `DK-D7`. The practice was seen by everyone. Now the households decide what it was. Bryn won't argue for herself: *"You saw it. You tell them."* The player chooses (§DK.9). Sets `LM_BRYN_ROLL`.
+### Beat 6 — The Pear Rows (`S06_council`)
+**Objective:** *Walk the pear rows with Bryn.*
+At first light Bryn walks her rows, and the **roll-keeper** (the eldest ditch-turner on the orchard commons roll, role-based) and the charter officer catch up with her among the pear trees, with Elspeth and two households behind. If `LM_ORCHARD_LOSS` = partial, the talk happens knee-deep in brown water under the propped trees; if none, under trees that are still dry. `DK-D7`. The practice was seen by everyone. Now the households decide what it was. Bryn won't argue for herself: *"You saw it. You tell them."* The player chooses (§DK.9). Sets `LM_BRYN_ROLL`.
 
-### Beat 7 — The Pear Rows (`S07_close`)
-**Objective:** *Walk the orchard with Bryn.*
-`DK-D8` among the rows. If `LM_ORCHARD_LOSS` = partial, the old pear rows stand in brown water to the knee and Bryn is already propping the worst tree. Either way she says the thing the quest is about: *"That's one night. It'll come again, and it's not mine to stop."* Completes the quest.
+### Beat 7 — The Relief Cart (`S07_close`)
+**Objective:** *Finish the walk with Bryn.*
+`DK-D8`. Bryn says the thing the quest is about: *"That's one night. It'll come again, and it's not mine to stop."* As she and the player reach the dike road, a **Provision Board relief cart** comes along it, sacking and seed for the flooded holdings, with **Edda Marrick** `[ANTAGONIST]` walking beside it in a good cloak, handing out sacking herself (`DK-D9`). She is warm, quick and generous. She has heard about Drowsebank and the Lock, and she praises the player's work by name of the place, never by the player's name. She thanks Bryn for "saving the Board a great many sacks". She does not linger and nothing she says is evidence. The scene is short (four lines, player in control) and plays for every player. Then Bryn, watching the cart go, gives the player fruit. Completes the quest.
 
 ## DK.6 The hold: set-piece spec
 
-**Bryn's state.** Bryn kneels at the centre of the Long Bank's dip with the bowl in both hands. The hold runs **~3 minutes** across three waves while the backwater is over the bank. The player can't help with the working, only keep things off her.
+**Bryn's state.** Bryn works the Long Bank **stake to stake**: she kneels at the **west** station with the bowl in both hands, then rises and walks the crown (slowly, ~8 s, bowl held level) to the **middle** station, then to the **east**. The hold runs **~3 minutes**, about a minute per station, while the backwater is over the bank. She sets her own pace and never waits for the player. The player can't help with the working, only keep things off her, which means reading where she is going next.
 
 **Showing the practice plainly** (presentation, from the first second of the hold):
 - The backwater tops the Long Bank along its whole length. Along the rest of the dike it pours over in a thin, ugly sheet.
-- At Bryn's section the water reaches the bowl's reach (~4 m) and **folds aside**: the surface bends around her in a smooth, slow curve **like cloth smoothed flat by a hand**, then runs along the line of stakes and pours back into the ditch. Softmoss darkens as it soaks.
+- Around Bryn, within the bowl's reach (~4 m), the water **folds aside**: the surface bends around her in a smooth, slow curve **like cloth smoothed flat by a hand**, then runs along the line of stakes and pours back into the ditch. Behind her, the stations she has worked **stay turned** along their stakes; the fold travels with her. Softmoss darkens as it soaks.
 - Bryn's hands are steady. Her breath is audible and even. No light, no glow, no particles, no sound sting. Just water doing something water doesn't do, slowly.
-- The charter officer, lantern raised, says nothing at all through the hold.
+- The charter officer, lantern raised, walks a few paces behind her on the far side of the crown and says nothing at all through the hold.
 
-**The slip rule.** If any hostile creature **reaches Bryn** (lands a hit on her or ends a lunge inside 2 m), she flinches and the hold **slips**: the curve breaks at the west end and water pours through into the old pear rows (one section; the cap). After ~5 s she has it back. `DK_SLIPS` counts slips. One or more sets `LM_ORCHARD_LOSS` = partial; the flooded section doesn't get worse with more slips. Bryn can't be killed and doesn't take lasting harm. No outcome fails the quest.
+**The slip rule.** If any hostile creature **reaches Bryn** (lands a hit on her or ends a lunge inside 2 m), while she is kneeling or walking, she flinches and the hold **slips**: the curve breaks at her current station and water pours through into the old pear rows (one section; the cap). After ~5 s she has it back and carries on. `DK_SLIPS` counts slips. One or more sets `LM_ORCHARD_LOSS` = partial; the flooded section doesn't get worse with more slips. Bryn can't be killed and doesn't take lasting harm. No outcome fails the quest.
 
-**Waves:**
+**Waves (keyed to Bryn's stations):**
 
-| Wave | Time | Threat | Readability |
+| Wave | Bryn | Threat | Readability |
 |---|---|---|---|
-| **1 — The overtop** | 0:00–1:00 | **2 drift** rise out of the sheet of water pouring over the bank's far end and drift along the crown toward Bryn | The overtop water goes glassy and still before each forms; a cold mist ring marks their reach |
-| **2 — Her own voice** | 1:00–2:00 | **Mud Pipers**: 2 pipers in the reed margin and 1 bog-diver in the ditch. The pipers **call in Bryn's voice** from the reeds: *"Here! Help me — here!"*, *"I've slipped, I'm in, quick!"*. Positional audio, deliberately away from her. If the player goes to the voice, the pipers ambush there, and the bog-diver comes up the ditch at the real Bryn. | Bryn's real position never moves and **she never shouts** (set up in `DK-D5`). The diver's approach shows as a V of ripples up the ditch (~2 s) |
-| **3 — The elk** | 2:00–3:00 | **1 Bog-Touched Elk**, flood-driven, comes down the orchard rows at a run with **1 drift** behind it | Head lowered and stamping (~1.5 s), then a straight charge along the dike crown at Bryn. Hitting it once draws it onto the player; sidestepping its charge makes it overrun and stand exposed (~2 s), the same language as the MQ1 boar |
+| **1 — The overtop** | Kneeling at the west station | **2 drift** rise out of the sheet of water pouring over the bank's far end and drift along the crown toward her | The overtop water goes glassy and still before each forms; a cold mist ring marks their reach |
+| **2 — Her own voice** | Walking to, then kneeling at, the middle station | **Mud Pipers**: 2 pipers in the reed margin and 1 bog-diver in the ditch. The pipers **call in Bryn's voice** from the reeds: *"Here! Help me — here!"*, *"I've slipped, I'm in, quick!"*. Positional audio, deliberately away from her. If the player goes to the voice, the pipers ambush there, and the bog-diver comes up the ditch at the real Bryn **while she is walking**. | Bryn is always visible on the crown and **she never shouts** (set up in `DK-D5`). The diver's approach shows as a V of ripples up the ditch (~2 s) toward the point she is walking to |
+| **3 — The elk** | Walking to, then kneeling at, the east station | **1 Bog-Touched Elk**, flood-driven, comes down the orchard rows at a run with **1 drift** behind it | Head lowered and stamping (~1.5 s), then a straight charge along the dike crown at Bryn. Hitting it once draws it onto the player; sidestepping its charge makes it overrun and stand exposed (~2 s), the same language as the MQ1 boar |
 
-**The end.** The backwater crests and falls. The curve relaxes back into ordinary water. Bryn sits back on her heels and doesn't get up for a while. Elspeth tends her: *"Hands."* Downstream, in the far ditches, cold mist still hangs over two pools. The orchard is saved; the drift site is still **active** (§A2.7).
+**The end.** The backwater crests and falls. The curve relaxes back into ordinary water. Bryn sits back on her heels at the east stone and doesn't get up for a while. Elspeth tends her: *"Hands."* Downstream, in the far ditches, cold mist still hangs over two pools. The orchard is saved; the drift site is still **active** (§A2.7).
 
 ## DK.7 Encounters
 
@@ -815,11 +828,11 @@ At first light the orchard households gather, along with the charter officer, El
 | `S02a_bowl` | Fetch a riverglass bowl. | `riverglass_bowl` acquired (`DK-D2`) | Yes |
 | `S02b_moss` | Cut fresh softmoss. | Fresh softmoss bundle deposited at the Long Bank basket | Yes |
 | `S02c_stakes` | Cut driftroot stakes. | Stake bundle deposited at the Long Bank + DK-E1 defeated | Yes |
-| `S03_set` | Set the stakes and moss. | 3 `set_stake` + 2 `pack_moss` + bowl given + 2 `hold_chain` (`DK-D4` end) | Yes |
+| `S03_set` | Set the stakes and moss. | 3 `set_stake` + 2 `pack_moss` + bowl given + `DK-D4` end (officer's pacing is an NPC walk, no player channel) | Yes |
 | `S04_wait` | Wait for the backwater. | `keep_watch` at the shelter → `DK-D5` end → hold window starts | Yes |
-| `S05_defend` | Keep everything off Bryn. | Hold window ends + all DK-E2 defeated | Yes | 
-| `S06_council` | Speak for Bryn at the Sluice Shelter. | `DK-D7` choice node | Yes |
-| `S07_close` | Walk the orchard with Bryn. | `DK-D8` end | Yes |
+| `S05_defend` | Keep everything off Bryn while she works the bank. | Bryn reaches and completes the east station + hold window ends + all DK-E2 defeated | Yes |
+| `S06_council` | Walk the pear rows with Bryn. | `DK-D7` choice node (in the pear rows) | Yes |
+| `S07_close` | Finish the walk with Bryn. | Enter dike-road volume → `DK-D9` (Marrick, `[ANTAGONIST]`) end → `DK-D8` end | Yes |
 
 ## DK.9 Flags, choices and consequences
 
@@ -853,7 +866,7 @@ No option is wrong. It's the C09 threshold question made personal: **protection 
 
 | Situation | Handling |
 |---|---|
-| Death during the hold | Respawn at the Sluice Shelter; the hold **pauses** (the water stays high; Bryn holds) until the player re-enters the dike volume |
+| Death during the hold | Respawn at the Sluice Shelter; the hold **pauses** (the water stays high; Bryn kneels at her current station and does not move on) until the player re-enters the dike volume |
 | Logout during the hold | The hold window restarts at wave 1; `DK_SLIPS` resets to the value at the last completed wave |
 | Rotten moss brought | Refused at the basket; the player cuts again (`DK-D3.20`) |
 | Co-op | Each player's Bryn, slips and orchard state are their own. Partners' fights clear shared creatures for both, which is a real benefit of grouping |
@@ -863,7 +876,8 @@ No option is wrong. It's the C09 threshold question made personal: **protection 
 | Need | Minimum form |
 |---|---|
 | Water "fold" presentation | Local water-surface deformation around an NPC within ~4 m while a hold state is true; flow decal along the stake line |
-| NPC hold state with slip trigger | NPC flag `holding`; any hostile hit or lunge-end inside 2 m triggers the slip event, a 5 s recovery and the west-section flood decal |
+| NPC hold state with slip trigger | NPC flag `holding`; scripted path through three stations (kneel ~50 s, walk ~8 s); any hostile hit or lunge-end inside 2 m, kneeling or walking, triggers the slip event, a 5 s recovery and the flood decal at the current station |
+| Ambient NPC scene with a cart | Marrick and a relief cart on a spline along the dike road; `DK-D9` plays on volume entry with the player in control |
 | Positional voice-mimic barks | Mud Piper barks using Bryn's voice lines, emitted from the piper's position |
 | Carry-state bundles | As in MQ1 (moss, stakes) |
 
@@ -886,6 +900,11 @@ No option is wrong. It's the C09 threshold question made personal: **protection 
 | The officer was a strawman. | The officer measures honestly, concedes on the measure and keeps a fair concern (four holdings). They watch and say nothing during the hold. |
 | Stakes from living driftroots would teach stripping. | Living roots are inspect-only; the storm-thrown root is the only target. |
 | The commons option read as the "good" answer. | Bryn's dislike of being watched is voiced, and the household option's risk is real. |
+| Independent review pass: the hold repeated MQ6's "stand at the bar and fight" loop. | Bryn now works the bank **stake to stake** (west, middle, east); the player escorts a moving, working NPC and reads where she is going. Waves are keyed to her stations. |
+| Independent review pass: chain-holding and a bench council made three civic endings in a row. | The officer paces the bank alone (no channels). The council happens among the pear rows, in the flooded or saved orchard. |
+| Independent review pass: the forecast had no on-screen basis. | The notice cites Tovin's fifth-night calendar and the keepers' tail-door reading (MQ6, `TF_KEEPERS_READ_BACKWATER`). |
+| Independent review pass: Marrick absent MQ3–MQ9. | `DK-D9`: a short, warm, unsettling relief-cart appearance on the dike road, praising the player's work. `[ANTAGONIST]`; no reveal, no evidence. |
+| Independent review pass: elk back to back with MQ8. | Kept deliberately; MQ8 adds a Sedge line contrasting the two elk (`MN-D3.04`). |
 
 ---
 
@@ -944,7 +963,7 @@ Ansel Corrie's patrol book has a new kind of entry: *quiet by morning, no repair
 
 ### Beat 1 — The Signs (`S01_signs`)
 **Objective:** *Look at the quieted sites.*
-Visit **any two** of the three sites. At each, three inspects: **pressed moss** ("pressed into the bank by a thumb, recently. Somebody packed this by hand."), **cut reeds** ("cut low and clean, at a slant"; if `GL_SEDGE_SPOKEN`: "like the stems at the Rebirth Fields' edge"), **the water** ("clear to the bottom. Not cold."). At dawn, a fourth: **the mist** lying low over the water and lifting as the player comes near.
+Visit **any two** of the three sites. The walk to the Circle of Unburnt Reeds runs along the Path of Unburnt Reeds, where a **Reed Stalker** pair (**MN-E0**, optional, 1 stalker + 1 lurker) ambushes from the tall reeds on first passage; it gives the MQ7–MQ10 stretch one pulse of danger and is never required. At each site, three inspects: **pressed moss** ("pressed into the bank by a thumb, recently. Somebody packed this by hand."), **cut reeds** ("cut low and clean, at a slant"; if `GL_SEDGE_SPOKEN`: "like the stems at the Rebirth Fields' edge"), **the water** ("clear to the bottom. Not cold."). At dawn, a fourth: **the mist** lying low over the water and lifting as the player comes near.
 **Verbs:** investigate.
 
 ### Beat 2 — The Bundles (`S02_trail`)
@@ -961,7 +980,7 @@ A **Bog-Touched Elk** stands chest-deep in the heavy pool, panicked, wheeling, e
 - Approached from the dry east bank, it flees **west into deeper water**, where it struggles and calms only after the player backs off (it resets to the start).
 - The solution is to **wade round through the shallows to the west side** (slow, cold, quiet) and step into its radius from there. It flees **east**, onto the causeway, and climbs out on dry ground, shakes, and trots off into the reeds.
 - Old stakes on the west shallows mark where people have stood before (a hint, not a sign).
-- Sedge's only help, if the player waits by him: *"Stand where you'd want it not to go."*
+- Sedge's only help, if the player waits by him: *"Stand where you'd want it not to go."* On first sight of the elk he says one line that sets it against MQ7's (`MN-D3.04`): *"Not like the one in Ruddock's rows. This one's only frightened."*
 - Attacking the elk **provokes** it (wildlife). It fights to defeat with a lowered-head charge (~1.5 s telegraph). If it dies, the task ends: `MN_ELK_KILLED`. Sedge says one quiet line (`MN-D3.10`) and moves on. This is not a failure. It cools Sedge (§MN.8).
 **Verbs:** herd, wade, restraint.
 
@@ -975,7 +994,7 @@ A **Bog-Touched Elk** stands chest-deep in the heavy pool, panicked, wheeling, e
 | **2** | Grooves water-rounded, older notches below. But the **moss is on its upstream face** and its silt line **slants**: the stone has been tipped. Its notch no longer sits level with the high-water stain on the reed stems. | Moved. A true stone in a false place. |
 | **3** | Grooves rounded; older notches below; the notch **level with the old high-water stain** on the reed stems and with stone 2's oldest notch. Silt line level. | True. |
 
-The player names a stone. A wrong pick gets *"What did you see on it?"* and the player can look again with no penalty. After the right pick, Sedge asks *"Why?"* An observational reason is accepted; an interpretive one is gently corrected (*"You felt it. What did you see?"*), and the player picks again from observations. Completing the task unlocks **Braid-stone reading** (§MN.9).
+The player names a stone. A wrong pick gets *"What did you see on it?"* and the player can look again with no penalty. The right pick is enough: Sedge says *"Yes"* and his one line about re-cut and moved stones. (The observation-versus-interpretation lesson is taught in MQ3 and in test 3; it is not repeated here.) Completing the task unlocks **Braid-stone reading** (§MN.9).
 **Verbs:** read stones.
 
 ### Beat 6 — What You've Seen (`S06_seen`) — *test 3*
@@ -999,6 +1018,7 @@ Sedge can barely stand. The player walks beside him (walk-with: he moves at a sl
 
 | Id | Enemy | Role | Telegraph | Solo target |
 |---|---|---|---|---|
+| **MN-E0** (optional) | 1 Reed Stalker (stalker) + 1 lurker | Ambush from the reeds on the Path of Unburnt Reeds | Reeds part in a line and the throat bulges (~1.2 s) before a leap; lurker: bubbles toward the player (~1.5 s) | Optional. ~50 s |
 | — | Bog-Touched Elk (wildlife) | Not hostile unless provoked; alert/flight framework | Head snap + ears flat at alert; lowered-head charge (~1.5 s) if provoked | Avoidable by design |
 | **MN-E1** | 1 drift (standard) | Place-bound; lashes when approached | Glassy stillness (~1.5 s) before an arm-lash; mist ring | Required. ~30 s |
 | **MN-E2** | 2 small drifts (60%) → wisps | Small drifts lash weakly; wisps don't engage | As E1, faster and fainter | Optional |
@@ -1028,7 +1048,7 @@ Sedge can barely stand. The player walks beside him (walk-with: he moves at a sl
 | `S02_trail` | Follow the cut reeds. | Enter shrine volume at dawn (keep watch if needed) | Yes |
 | `S03_meet` | Speak with the reed-cutter. | `MN-D2` end | Yes |
 | `S04_elk` | Get the elk out of the heavy water. | Elk enters the causeway exit volume **or** elk killed | Yes |
-| `S05_stones` | Find the stone that reads true. | `MN-D4` correct-reason node | Yes |
+| `S05_stones` | Find the stone that reads true. | `MN-D4` correct-stone node (`MN-D4.30`) | Yes |
 | `S06_seen` | Answer the cutter. | `MN-D5` end | Yes |
 | `S07_demo` | Do what the cutter asks. | MN-E1 dispersed → split event → quieting presentation completes | Yes |
 | `S08_close` | Help the cutter back to the shrine. | Walk-with arrives + `MN-D7` choice node | Yes |
@@ -1088,6 +1108,7 @@ Sedge can barely stand. The player walks beside him (walk-with: he moves at a sl
 | The stone test had one obviously wrong stone and two coin-flips. | Each stone has a distinct physical tell (re-cut, moved, true), all readable with the True Line habits. |
 | Test 3 scored the player. | It no longer does. Only the closing answer, after the demonstration, matters, and every answer is accepted. |
 | The demonstration risked a free combat loop (split forever). | Capped at drift → two small drifts → wisps. |
+| Independent review pass. | Cut the "Why?" follow-up in test 2 (lesson taught enough elsewhere). Added Sedge's elk-contrast line (`MN-D3.04`) and one optional Reed Stalker ambush on the Path (MN-E0) so MQ7–MQ10 keeps a pulse of danger. `LM_SEDGE_TRUST` rule confirmed: cool if `MN_ELK_KILLED` or `MN_SAW` = mage; otherwise warm. |
 
 ---
 
@@ -1141,8 +1162,8 @@ At dawn Sedge walks the player to the end of the Path of Unburnt Reeds and up th
 ## BF.5 Player-facing sequence
 
 ### Beat 0 — Dawn at the Shrine (`S00_set_out`)
-**Objective:** *Meet the cutter at the shrine at dawn.*
-`BF-D1` `[D-7]`. Short. Variants by `LM_SEDGE_TRUST`. Warm: *"Eaten? Good. It's a climb."* Cool: *"Keep up."* He sets off.
+**Objective:** *Meet the cutter at the shrine.*
+Sedge is waiting at the shrine step whenever the player arrives; there is no wait. `BF-D1` `[D-7]`. Short. Variants by `LM_SEDGE_TRUST`. Warm: *"Eaten? Good. It's a climb."* Cool: *"Keep up."* He sets off.
 
 ### Beat 1 — The Path (`S01_path`)
 **Objective:** *Follow the cutter.*
@@ -1209,6 +1230,7 @@ The quest's centrepiece. It must feel like **looking at the whole Vale from abov
 | Form | A round basin carved from one limestone floor, ~8 m across, waist-high rim, walkable around its full circumference. The player can lean on the rim anywhere. |
 | Terrain | The Vale in low relief (**MAP VERIFICATION REQUIRED**: the table must match the final POI map; it is the map). The river and its branches are carved channels a finger wide. Raised berms, the orchard dikes and the Crestbridge span are tiny carved lines. Settlements are small flat stones with a single cut mark each. No words, no names, no labels anywhere. |
 | The Braids | Dozens of hair-fine carved channels that split from the main river at bends and rejoin it lower down: a braided pattern visible everywhere once seen. Each split has a tiny **stone gate** in a slot, smaller than a fingernail. Most are set; some are choked with silt. |
+| The wreck scar | At the fen's deep pools, beside the Cut's head: a curve of tiny carved barge ribs, fourteen marks with the last cut deeper. The table's makers marked where the water's way changed; it is a carving, not a vision. Delivery 2 of 3 of the Fourteenth Lot (after MQ4's blank stone, before MQ11's Lessa line). |
 | Marking Stones | At every crossing, a pin-sized notch stone. Whisperflow's has a single bright scratch beside it: someone here noticed the post was re-seated. |
 | Water | Fed from the Steps' channels at the table's "upstream" edge. Water a few millimetres deep runs the real channels at a visible, slow pace. Tiny reed fragments drift on it, showing flow direction. |
 | The fen | Where the river spreads: a shallow, many-channelled basin carved finer than anywhere else. The water there is clouded with a fine grey **silt** that settles slowly. |
@@ -1218,14 +1240,15 @@ The quest's centrepiece. It must feel like **looking at the whole Vale from abov
 
 ### BF.7.2 Find (`S06a_find`)
 
-The player walks around the rim. Inspect points glint faintly in the water (standard inspect highlight). Three of four are required, and every one gets a reaction from someone:
+The player walks around the rim. Inspect points glint faintly in the water (standard inspect highlight). Three of the four place points are required, and the Cut and the wreck scar are always required. Every one gets a reaction from someone:
 
 | Point | Inspect text | Reaction |
 |---|---|---|
-| **Whisperflow's bend** | "A wide bend. A notch stone at the crossing, and a fresh scratch beside it." | `TL_STONE_PUBLIC`: Oriel: *"Your keepers wrote one down. We heard."* `TL_STONE_KEPT`: *"Your crews keep one quietly. Good."* |
+| **Whisperflow's bend** | "A wide bend. A notch stone at the crossing, and a fresh scratch beside it." | `TL_STONE_PUBLIC`: Oriel (to Sedge): *"You told me their keepers wrote one down."* `TL_STONE_KEPT`: Oriel (to Sedge): *"You told me their crews keep one quietly. Good."* |
 | **The orchards** | "Raised lines along a flood route. One run of dike is cut a hair lower than the rest." | Sedge: *"Ruddock's bank."* |
 | **Ashenstead** | "A ring of tiny stones on a field, and a channel carved round it, not through it." | If done MQ5: player-recognition text, *"The guide-line. It goes round."* Sedge (warm only): *"Told you."* |
 | **The fen** | "Fine channels, fine as hair, clouded grey. The cloud never quite settles." | Oriel: *"That is weight. Not a thing. Weight."* |
+| **The wreck scar** (always required) | "By the deep pools, where the Cut begins, a curve of tiny broken ribs is carved into the stone. A line of barges, sunk. Fourteen marks, and the last one cut deeper." | Oriel: *"Your war put a line of grain barges down there. Crews too. We carved where the water changed, and it went round them after."* Sedge (any trust): *"That's the lot they don't count."* |
 | **The Cut** (always required) | "Straight. Hacked, not carved. It cuts through the fine lines as if they weren't there." | Oriel: *"That is yours."* (said without blame: a fact) |
 
 ### BF.7.3 The pulse (`S06b_pulse`)
@@ -1243,9 +1266,9 @@ Oriel lifts a gate at the Cut's head on the fen's edge (Oriel's interaction; the
 
 Oriel hands the player the clay plug (prop interaction): *"Shut it."*
 1. **Plug the Cut** at its mouth (3 s channel). The fen basin's water stops falling. It **rises**, slowly, with no way out (the fen "holding its breath," readable at miniature scale).
-2. Oriel indicates three fen-edge Braid gates, choked stubs the Cut once severed, now reconnected by fresh carved channels Oriel has cut into the table. *"The furthest from the Cut first. Each gate takes what the last one gives. The nearest last."* The three gates are distinguishable by position only (far, middle, near), never by name. **Act III names the real gates; this table teaches the rule.**
+2. Oriel indicates three fen Braid gates, choked stubs the Cut once severed, now reconnected by fresh carved channels Oriel has cut into the table. They lie in a line from the fen's landward edge in toward the deep pools at the Cut's head. *"The furthest from the Cut's head first. Each gate takes what the last one gives. The nearest last."* Sedge gives each the name the crews use as Oriel touches it (Oriel does not know present names, bible §2.4): **Reedmere Weir** (furthest), **the Long Sill** (middle), **the Lantern Sluice** (nearest, beside the deep pools). These three names and this order rule are identical in MQ11 (Act III §11.3, Beat 3).
 3. The player lifts the gates (3 s channel each).
-   - **Correct order** (far → middle → near): each gate takes a share; the pressure **divides** into three braids, then into the finer braids below them. The silt thins as it spreads and **settles** in the old channels' pools. The notes return one by one until the whole table is sounding, a quiet chord. The fen basin clears from the edge inward.
+   - **Correct order** (Reedmere Weir → the Long Sill → the Lantern Sluice): each gate takes a share; the pressure **divides** into three braids, then into the finer braids below them. The silt thins as it spreads and **settles** in the old channels' pools. The notes return one by one until the whole table is sounding, a quiet chord. The fen basin clears from the edge inward.
    - **Wrong order:** the near gate takes everything at once; the silt bunches, overtops a tiny fen-edge stone (Reedmere's mark), and clogs the next gate. Oriel resets it (closes the gates; the silt slowly settles back): *"Again. Slower. The far one first."* No limit, no fail.
 4. When the table is sounding, Oriel says nothing for a moment. Then: *"That is all we ever did. Gates, in order, by many hands, every season."*
 
@@ -1271,13 +1294,13 @@ No other combat. Nothing behind the falls is hostile. Drawing a weapon at the St
 
 | Step | Objective | Completes on | Req. |
 |---|---|---|---|
-| `S00_set_out` | Meet the cutter at the shrine at dawn. | `BF-D1` end (keep watch to dawn if needed) | Yes |
+| `S00_set_out` | Meet the cutter at the shrine. | `BF-D1` end (Sedge is present whenever the player arrives; no keep watch) | Yes |
 | `S01_path` | Follow the cutter. | Walk-with reaches area A | Yes |
 | `S02_climb` | Climb the falls path. | Enter curtain-ledge volume (any route) | Yes |
 | `S03_curtain` | Go behind the falls. | Cross threshold volume (`bf.curtain_hush`) | Yes |
 | `S04_steps` | Look around. | 3 of 5 inspects | Yes |
 | `S05_oriel` | Speak with the Riverwarden. | `BF-D3` end | Yes |
-| `S06_table` | Study the flow-table. | 3 of 4 find-inspects + Cut inspect; `bf.pulse` ends; `plug_cut` + 3 gates in valid order → `bf.braids_sound` | Yes |
+| `S06_table` | Study the flow-table. | 3 of 4 place inspects + Cut inspect + wreck-scar inspect; `bf.pulse` ends; `plug_cut` + 3 gates in valid order → `bf.braids_sound` | Yes |
 | `S07_condition` | Hear Oriel's condition. | `BF-D5` end | Yes |
 | `S08_promise` | Give Oriel your answer. | `BF-D6` choice node | Yes |
 | `S09_down` | Go back down. | `BF-D7` end at the plunge pool | Yes |
@@ -1332,6 +1355,7 @@ No other combat. Nothing behind the falls is hostile. Drawing a weapon at the St
 | The table's gate order was a hidden puzzle. | Oriel states the rule plainly. The learning is in the hands, not in guessing. |
 | An Oriel line quoted the First Listener. | Cut. Oriel uses the canon saying in a work sense only and attributes it to nobody (C07 stays open). |
 | The promise options included a "no." | All three are yes, and differ in what the player commits to. Refusing would make MQ10 impossible, and the arc doesn't need a fake exit. |
+| Independent review pass. | Braid gates now named (via Sedge) and ordered exactly as in MQ11: Reedmere Weir, the Long Sill, the Lantern Sluice; "furthest from the Cut's head first, nearest last". "Fen-edge" → "fen". Added the required **wreck scar** inspect (Fourteenth Lot delivery 2 of 3; a carving, not testimony from the water). Oriel's Whisperflow line no longer implies she follows present affairs (`BF-D4.10` is now Sedge's report to her). Removed the dawn wait: Sedge is at the shrine whenever the player arrives. `LM_ORIEL_PROMISE` set at `S08_promise` (header table corrected). |
 
 ---
 
@@ -1344,7 +1368,7 @@ These extend the True Line's §12 table. None is a new core system.
 | **Keep-watch time windows** | GL, TF, DK, MN, BF | Systems | One interaction that advances the player's local quest clock to a named window (`dusk`, `night`, `pulse`, `dawn`) and fires the window's scripted presentation. Per player. |
 | **Per-player prop/terrain state** | GL fixes, TF floor bays, DK orchard flood, BF table | Systems (33.1.B2) | Client presentation keyed on local quest state. Fallbacks are in each package. |
 | **Carry state** | GL stones/turf, TF beam, DK bundles | Systems | As MQ1. GL adds a rotation check on set-down. |
-| **Channelled holds on NPCs and props** | TF gate, DK Bryn, MN Sedge | Systems | NPC/world-object state flags with interrupt-on-damage and timed recovery. |
+| **NPC working states and plank slots** | TF gate (carry + wedge slots, timed swells), DK Bryn (pathed working NPC), MN Sedge | Systems | NPC/world-object state flags with interrupt-on-damage and timed recovery; DK adds a three-station NPC path. |
 | **Ordered-slot puzzle** | TF | Schema + Systems | §TF.14 |
 | **Walk-with NPC** | MN, BF | Systems (35.x NPC behaviour) | Follow-path NPC that matches a slow pace and waits at checkpoints. Fallback: NPC waits at checkpoints only. |
 | **Alert/flight wildlife behaviour** | MN elk (and DK elk charge) | Gameplay (Hunting F4) | Reuse the traveling-grazer framework; one quest-spawned instance per player. |
@@ -1375,10 +1399,11 @@ Playtest questions (the real bar): *What did the water do that water doesn't do?
 | **Evidence rule** | Warm well, pond lag, water fold, inward rings, flow-table silt: none identifies a person, proves guilt or names the dead. The scratched marks stay unread. Combat carries no information (TF crew lines play before engagement). |
 | **Soft-locks** | Every required proof has a guaranteed path: the TF validator plus Imber's hint; MN wrong stones re-inspectable; BF gate retries unlimited; GL Joric's agreement re-askable; DK rotten moss refused but re-cuttable. |
 | **No fail** | DK slips cap at one section; TF bands cap at 3; elk death and the "mage" answer cool trust only. |
-| **Duplicate structures** | Five distinct primary verbs (§A2.9). Two night-watches (GL dusk, TF loft) differ: one watches water, one watches people. The two holds (TF gate, DK Bryn) differ: one is the player's hands, the other is guarding someone else's. |
+| **Duplicate structures** | Five distinct primary verbs (§A2.9). Two night-watches (GL dusk, TF loft) differ: one watches water, one watches people. The two set pieces differ from each other and from the crank holds of MQ4 and MQ11: TF is timed plank carries and wedges while fighting; DK escorts a working NPC who moves stake to stake. |
 | **Flags** | Region flags set exactly as §A2.5. The quest-local flags other packages read are listed in §A2.8. No new `LM_` flags. |
 | **Quest items** | 2 (`tovin_floor_sheets`, `riverglass_bowl`); within budget. |
 | **Spellcasting** | None by the player. Bryn's and Sedge's practice is shown without light or words. Oriel's gates are stone and clay. |
-| **Antagonist tags** | Sallow is named only in `TF-D3` and `TF-D8`, both tagged. Marrick is not named in Act II. |
+| **Antagonist tags** | Sallow is named only in `TF-D3` and `TF-D8`, both tagged. Marrick appears once on stage (`DK-D9`, relief cart, MQ7) and is referred to in `TF-D3.05` ("the lady") and `GL-B8.1`; all tagged. No reveal: nothing she says or does there is evidence. |
+| **Independent review pass** | Applied: one post-MQ4 water story (mill race for the crew, backwater for the fen, slack gate as its first sign); MQ6 chronology and fifth-night cadence; MQ7 forecast basis; Braid gate names and order matched to MQ11; Fourteenth Lot wreck scar; Marrick's Act II appearance; MQ6 brace and MQ7 escort replace two more channel holds; MQ5 den not refought; MQ8 optional ambush and elk line; MQ9 dawn wait removed; promise step id corrected. |
 | **Skills** | Melee, Woodcutting, Hunting, Cooking, Smithing (optional path). No Ranged, Fletching or Mining. |
 | **Size discipline** | MQ7–9 packages are shorter than MQ5–6 by design; MQ8–9 are low-combat quests whose substance is in their presentation specs. |

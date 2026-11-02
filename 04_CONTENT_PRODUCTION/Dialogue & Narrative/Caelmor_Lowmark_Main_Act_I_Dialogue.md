@@ -145,6 +145,26 @@ SM-W.11 WYNN: "He tried to hand me forty-two. I gave two back."
 SM-W.12 WYNN: "Somebody's counting worse than me. That's hard."   {set SM_LEAD_WYNN}  → end
 ```
 
+### SM-L-DRILL: the keepers' bridge drill (waiting wall, optional, step `S01c_drill`)
+
+The sergeant is role-based (one of Captain Hesketh's keepers). The practice staff is padded and deals no damage. Each swing is met by **guard** (if equipped) or **step off the line** (always available).
+
+```
+SM-DR.01 SERGEANT: (two recruits rubbing their shoulders) "You. You've the look of someone who goes into holes. Want a turn?"
+  > "Show me."                                  → SM-DR.10
+  > "Another time."                             → end
+SM-DR.10 SERGEANT: "Watch the staff, not my face. When it goes up and back, it's coming down. Brace for it, or get off the line."
+      {event: practice swing ×3; each swing: staff raised and drawn back, boots set (~1.4 s), overhead blow}
+SM-DR.11 [swing met by guard]      SERGEANT: "Took it on the guard. Good. Now hit back while my arms are high."
+SM-DR.11 [swing met by step-aside] SERGEANT: "Off the line. Good. Nothing wrong with being somewhere else."
+SM-DR.11 [swing taken]             SERGEANT: (the player is knocked back a step) "That's what it feels like. Again."
+SM-DR.20 SERGEANT: "Goblins swing like that. So do river crews with a pole. Read the wind-up and you'll keep your teeth."
+SM-DR.21 [no guard equipped] SERGEANT: "Get yourself a guard. Corliss's forge under the span does honest work. Or ask our quartermaster at the bridge house."
+SM-DR.21 [guard equipped]    SERGEANT: "That guard's doing its job. Corliss under the span will see to it when it stops."
+      {set SM_DRILL_DONE}  → end
+SM-DR.30 [SM_DRILL_DONE] SERGEANT: "Back for more bruises? Staff's on the wall."   → SM-DR.10
+```
+
 ### SM-B3/B4/B6: depot barks (goblin chatter, positional audio)
 
 | Id | Trigger | Speaker | Line |
@@ -166,7 +186,7 @@ Goblins speak in a few loud words of trade speech. They are comic and dangerous,
 | Heap 1 (throne) | "Sacks with Crestbridge tally marks, stacked into a throne. Seven." | — |
 | Heap 2 | "A goblin nest of sacks. Three." | — |
 | Heap 3 | "Two sacks, one chewed. Twelve, then." | Third heap inspected |
-| Heaps (summary, log line) | "Twelve. Corvin is missing eighty." | `SM_HEAPS_COUNTED` |
+| Heaps (summary, log line) | "Twelve. That leaves sixty-eight nobody can find." | `SM_HEAPS_COUNTED` |
 | Barred door | "Barred from the other side. The goblins came in beside it, not through it." | — |
 | Rope burns | "Fresh rope burns on the gantry beam. Pale wood, fibres still in them." | — |
 | Pulley | "New tallow, still soft. It smells of a chandler's shop, not of the war." | — |
@@ -519,7 +539,7 @@ HW-D10.05 [not HW_DRIFT_TAUGHT] ANSEL: "First, the rule, since nobody's told you
 
 HW-D10.10 ANSEL: (writes, then stops writing) "...So it is." (writes again)   → options
 HW-D10.20 ANSEL: (counts on his fingers, twice) "Every fifth. I've been writing them down for a month and never once counted."   → options
-HW-D10.30 ANSEL: (finds the entry; his own words) "'Wood liar.'" (beat) "Same night."   → options
+HW-D10.30 ANSEL: (finds the entry; his own words) "'Wood liar.'" (beat) "Same night." (beat) "Fourteenth. Watchers don't like that number."   → options
 HW-D10.40 ANSEL: "Second fill. Exactly." (underlines it)   → options
 HW-D10.41 ANSEL: "Second fill-ish. I'll take ish."   → options
 HW-D10.50 ANSEL: (flips back and forth) "Fen side first. Then down the Vale." (writes an arrow)   {set HW_FEN_FIRST}  → options
@@ -571,7 +591,11 @@ NF-D1.40 [else]          MAELIN: "Bench is there. Lantern's on the hook. I'll fi
 ```
 
 **Inspect: weir-pool marker (TL skill)** "Water's under the notch. The crossing reads open."
-**Inspect: convoy stones (optional)** "Squared stones along the weir wall, each cut with a lot number. Eleven, twelve, thirteen... then a blank stone in newer mortar. Then fifteen." {set `NF_LEAD_CONVOY`}
+**Inspect: convoy stones (required, `S00_weir`)** "Squared stones along the weir wall, each cut with a lot number. Eleven, twelve, thirteen... then a blank stone in newer mortar. Then fifteen." {set `NF_LEAD_CONVOY`}
+
+| Id | Trigger | Speaker | Line |
+|---|---|---|---|
+| NF-B0.1 | Convoy-stone inspect (plays whether or not `NF-D1` has run) | MAELIN (from the weir wall, not looking up) | "Fourteen's missing. Always has been." |
 
 ### NF-B1: watch barks
 
@@ -650,13 +674,13 @@ NF-D5.04 RUSK: "Gently, he says."
 | Beam above strongbox | "Scratches on the beam, in fives. Somebody counting flushes like a prisoner counts days." | — |
 | Counterweight stone | "A carved stone, grooved to a notch. It's been used as a weight." | not `SM_STONE_SEEN` |
 | Counterweight stone | "Another one. Like the depot wall. They built the war out of these." | `SM_STONE_SEEN` |
-| Slack gate | "A second, smaller gate in the chamber's flank. Silted shut. Fresh spade marks in the silt." | — |
+| Slack gate | "A second, smaller gate in the chamber's flank, silted shut. The silt bulges outward and is wet on this side, as if pushed from behind. Someone dug at it and gave up." | — |
 | Pre-notched post (lifted, carry state) | "Light. Dry. Made to be carried in the dark." | — |
 
 **Document: `NF_bill_of_lading`** (antagonist swap layer: seal text)
 
 > BILL OF LADING
-> Relief grain, sixty measures, by the Cut. Consigned to the bearer at the lower reach for the account of *[outside buyer: placeholder pending Director]*.
+> Relief grain, sixty-eight measures, by the Cut. Consigned to the bearer at the lower reach for the account of *[outside buyer: placeholder pending Director]*.
 > Priority rate, paid in advance.
 > *[Provision Board seal: the wheatsheaf in a ring; placeholder pending D-1]*
 > Received for the Lock: *G.S.*
@@ -761,3 +785,4 @@ NF-D9.41 is the act's last line. It is an observation, and it is the bible's Act
 | Flags | Every flag set here (`SM_LEAD_WYNN`, `SM_LEAD_STENCIL`, `SM_LEAD_CUT_NAMED`, `SM_STONE_SEEN`, `SM_HEAPS_COUNTED`, `SM_CORVIN_TRUST`, `LM_GRAIN_ROUTE`, `HW_NIGHTS_*`, `HW_DRIFT_TAUGHT`, `HW_LEAD_TALLY`, `HW_LEAD_SCRAP`, `HW_BRYN_MOSS`, `HW_FEN_FIRST`, `NF_LEAD_CONVOY`, `NF_POSTS_SEEN`, `NF_LEAD_LAMB`, `LM_LOCK_STATE`) matches the quest file's tables. |
 | Address-neutral | No name, gender, title or origin for the player. "Friend" is used only by Wynn and Sallow. |
 | Night numbers | Book, chalk, notches and Orrin's night all use 4/9/14/19, and the Whisperflow entry is the 14th. Next: the 24th. |
+| Independent review pass | Grain: heap line and bill now say sixty-eight (slip keeps "eighty", the order). Slack-gate inspect rewritten as the first sign of the backwater (no crew spade marks). Convoy stones are a required inspect with Maelin's bark `NF-B0.1` (Fourteenth Lot delivery 1 of 3). Ansel's "Fourteenth. Watchers don't like that number." makes the 14th-night echo deliberate. Added `SM-L-DRILL` (optional keepers' drill; guard or step-aside; points to Corliss's forge or the quartermaster; no item stats). New flag `SM_DRILL_DONE`. |

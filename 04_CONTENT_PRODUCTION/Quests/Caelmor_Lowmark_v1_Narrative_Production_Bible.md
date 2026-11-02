@@ -1,6 +1,6 @@
 # Lowmark v1 — Narrative Production Bible
 
-**Status:** Authored production direction for Creative Director milestone review. This is the controlling document for every Lowmark v1 quest, NPC, dialogue, encounter, and discovery package. It turns the approved Part 5 architecture (D05) into a concrete, playable slate. Everything marked **[NEW]** is authored and not canon until the Director promotes it. Everything marked **[PROPOSAL — DIRECTOR]** is a consequential story choice that the content is built on but that Collin may replace; Section 3 lists exactly which content changes if he does.
+**Status (updated after the independent review pass, 2026-11-02):** Authored production direction for Creative Director milestone review. This is the controlling document for every Lowmark v1 quest, NPC, dialogue, encounter, and discovery package. It turns the approved Part 5 architecture (D05) into a concrete, playable slate. Everything marked **[NEW]** is authored and not canon until the Director promotes it. Everything marked **[PROPOSAL — DIRECTOR]** is a consequential story choice that the content is built on but that Collin may replace; Section 3 lists exactly which content changes if he does.
 
 **Builds on:** `04_CONTENT_PRODUCTION/Quests/Caelmor_Lowmark_Quest_The_True_Line.md` (main quest 1) and its cast/dialogue file. The True Line's structure, voice rules, evidence rule, and conventions are binding here.
 
@@ -43,9 +43,11 @@ This section is the private truth behind the arc. Players learn it gradually and
 
 ### 2.3 The resonance
 
+- **How every player learns of the Fourteenth Lot before the boss,** through main quests only and never from a manifestation: Bramblelock's numbered convoy stones with the missing lot (a required inspect in MQ4), the flow-table's wreck scar in MQ9, and convoy lore spoken at the start of MQ11.
 - Stillwater Fen holds the war's grief: wreckage, the Fourteenth Lot, decades of people mourning at its edge. Water there is "heavy" (Wraithwatcher jargon).
 - Each flush drags heavy water out of the deep pools and down the Cut and the river, so drift gathers in new places: orchard pools, mill ponds, ditches, bends. Manifestations are imprints, not souls. They repeat, they react to conditions, and they never identify anyone (evidence rule; C08).
-- When the Hollow Lock is finally sealed for good, the pressure has nowhere to go. The fen "holds its breath" until it releases on its own in the **Hollowed Current** (canon high-tier event). The grief around the sunken convoy has coalesced into a **Wraith Lord**, called **the Muster** by Watchers because of the lantern-lines and stroke-calls it repeats.
+- **The backwater [PROPOSAL — DIRECTOR].** The flushes also emptied the fen's deep pools faster than the old works could refill them. Once MQ4 closes the Lock, the fen's pressure pushes back through the wartime works on its own: through the Lock's silted **slack gate** (the first visible sign, seen in MQ4), under the Rebirth Fields along the guide-line (MQ5), and into the orchard dikes (MQ7). Sallow's crew still runs barges after MQ4, but only through Drowsebank's mill race and a wartime spur to the Cut, which they had used for weeks as an overflow run (MQ6). In MQ10's plan the crews plank the Cut-side culverts, closing the backwater's last outlets.
+- When the Hollow Lock and its culverts are finally sealed for good, the pressure has nowhere to go. The fen "holds its breath" until it releases on its own in the **Hollowed Current** (canon high-tier event). The grief around the sunken convoy has coalesced into a **Wraith Lord**, called **the Muster** by Watchers because of the lantern-lines and stroke-calls it repeats.
 
 ### 2.4 Who knows what
 
@@ -93,11 +95,14 @@ Each decision below is open. The content is built on the recommendation so it is
 | D-8 | **Riverwarden contact in v1** | Oriel at the Listening Steps only (§2.7). | Main quests 9, 10 (condition), 12. |
 | D-9 | **Subzone naming** | Map Phase 1.5's four subzone names onto dossier places (§4.1) rather than renaming either. | Zone file names and loading-screen text only. |
 | D-10 | **Mining in Lowmark** | No authored quest depends on Mining. The Minimum Coherent Material Set makes steel imported; Phase 1.5 still lists ore veins. This conflict belongs to the economy pass. | None in narrative. Flagged for the Gameplay Designer. |
+| D-12 | **The backwater** (§2.3) | Fen pressure pushes back through the old works after MQ4. | MQ5–7 flooding causes; MQ10 culvert planking. |
+| D-13 | **Human enemies yield instead of dying** | Smugglers are "downed" at 0 health; Gideon Sallow yields at about 20%; Joss Garrow (Old Lantern) can be brought in alive. Needs a runtime yield/downed state. | MQ4, MQ6, MQ10, *Under the Lamb*, *Night Ferry*, *Old Lantern*. A "humans die" ruling changes defeat lines only. |
+| D-14 | **Maelin's night crossing in MQ12** | She crosses at night once, on a stretch now proven safe. This stretches her canon trait ("refuses night passage through specific stretches") without breaking it. | MQ12 final beat. |
 | D-11 | **Canon promotion** | Promote nothing yet. All new places, people, the Braids, the Relief Cut, the Fourteenth Lot and House Marrick stay [NEW] until reviewed. | None. |
 
 ### 3.1 Antagonist swap layer
 
-If D-1 changes, edit only these: Marrick's name and house in main quests 2, 4, 10, 12; Sallow's name in main quests 4, 6, 10 and side quest *Under the Lamb*; the Board-seal text on three documents (`SM_requisition`, `NF_bill_of_lading`, `CR_board_minute`). Every package that mentions the antagonist does so in a node tagged `[ANTAGONIST]` so the swap can be found by search.
+If D-1 changes, edit only these: Marrick in main quests 2, 7, 10, 11, 12; Sallow in main quests 4, 6, 10, 11, 12 and side quest *Under the Lamb*; the Board-seal text on `SM_requisition`, `NF_bill_of_lading`, `CR_board_minute` and the *Under the Lamb* crew pay chits. Every package that mentions the antagonist does so in a node tagged `[ANTAGONIST]` so the swap can be found by search.
 
 ---
 
@@ -194,6 +199,8 @@ Hollis Avery (keeper; MQ2 cameo, MQ10, MQ12), Wynn Tarrow (MQ2 lead, MQ12), Nan 
 | **Rhosyn Lyle** | Paper-forger in the Drowned Lamb cellar | Brookhollow | Under the Lamb, MQ10 witness | Wants displaced workers to have papers. Fears Sallow. | Charming, careful, lies only about herself. |
 | **Imber Cobb** | Drowsebank miller | Drowsebank | MQ6 | Wants the wheel turning. Fears Tovin being right. | Gruff, kinder than he admits. |
 | **Joss Garrow** | Wraithwatcher gone wrong ("Old Lantern") | Stillwater edge | Old Lantern (miniboss) | Wanted to understand the drift. | Repeats patrol calls; lucid in fragments. |
+| **Rhoda and Col Dunnock** | Farm household with the creaking cellar door | Heartlands farmhouse | *The Whispering Door*, ME07 | Want the door to keep warning them. | Practical; three explanations for everything. |
+| **Tansy Marl** | Ashenstead householder whose house filled up with far-bank kin during the shortages | Ashenstead | *Unreplanted* | Wants ground of her own. Fears another hungry winter. | Direct, tired, fair. |
 
 Role-based NPCs (unnamed): keepers, crews, Watchers, fen-cutters, orchard hands, households, children. Use them generously so Lowmark is inhabited (Main Arc recurring-character guidance).
 
@@ -214,7 +221,7 @@ All main quests use the True Line package format. Quest codes prefix their step 
 | 7 | **What the Ditch Knows** | DK | II | Floodplain Orchards | **gather and defend a working**, carry | Defending Bryn while she turns the flood with a riverglass bowl | Household water practice, seen up close | Enrol Bryn on the commons roll or vouch for her as household practice | Orchard saved (or partly lost); practice debate settled locally |
 | 8 | **The Mantle** | MN | II | Path of Unburnt Reeds, Mantle Shrine, fen channels | **tests of restraint**, herd, read stones | Walking a panicked bog-touched elk out of heavy water | Sedge quiets a pool; the player sees force split drift in two | How the player answers Sedge's question about what they saw | Sedge's trust; marker reading extends to Braid stones |
 | 9 | **Behind the Falls** | BF | II (turn) | Veilwater Falls, the Listening Steps | **pilgrimage, explore** | Walking behind the falls; the carved flow-table of the whole Vale | Water runs the Vale's real channels in miniature; the Cut shows as a scar | What the player promises Oriel | Braid knowledge; the public-tending condition |
-| 10 | **The Crest Hall Reckoning** | CR | III | Crest Hall | **defend** (night siege), then present evidence | Sallow's crew fires the record room and the evidence barge; miniboss | The hall's water-gate stills when the true record is read aloud (sound-duck only; nothing is "proved" by it) | Who closes routes, who tends memorial ground, what happens to Hesketh | Marrick exposed; the Braid plan; `LM_PLAN_*` |
+| 10 | **The Crest Hall Reckoning** | CR | III | Crest Hall | **defend** (night siege), then present evidence | Sallow's crew fires the record room and the evidence barge; miniboss | The hall's water-gate stills at the moment the hall says "Aye" to the Braid plan, never when a record is read | Who closes routes, who tends memorial ground, what happens to Hesketh | Marrick exposed; the Braid plan; `LM_PLAN_*` |
 | 11 | **Stillwater's Vigil** | SV | III | Stillwater Fen, Reedmere | **escort, hold gates, boss** | The Hollowed Current; the Muster | Every Marking Stone in the fen holds a line at once | Seal, Tend, or Shared fen | `LM_FEN_ENDING`; drift sites become tended or closed |
 | 12 | **The River Remains** | RR | III | The Vale, ending at Whisperflow | **journey, deliver truth, celebrate** | Maelin's first night crossing with lanterns | The water lies quiet at the notch | Small farewells | `LM_CIVIC_STANDING` (commission legitimacy); epilogue states |
 
@@ -256,8 +263,8 @@ Selected and redesigned from the Part 5 lattice. The audit's concern was adminis
 
 | Code | Quest | Phase 1.5 type | Lattice source | Unlock | Where | Core verb | One-line pitch | Systems link |
 |---|---|---|---|---|---|---|---|---|
-| WC | **The Wrong Culprit** | Skill intro (Hunting) | Hunting portfolio C1 | After MQ1 | Ashenstead margins, P20 | track and judge | An Ashenstead household blames the furrow boars for a ruined field; the sign says goblins. Hunt the right culprit or refuse the wrong hunt. | Hunting H1/H2 evidence reading; food and raw hide; opens rooter opportunities |
-| BW | **The Bank Walk** | Skill intro (Woodcutting) | L-S01, C-WD2 | After MQ1 | Greyharrow bank | cut selectively | Tamsin's measuring cord marked a bank as unsafe and nobody believes her. Clear a driftroot jam and choose which bank-binding trees to keep. | Riparian woodcutting stewardship; bank state persists |
+| WC | **The Wrong Culprit** | Skill intro (Hunting) | Hunting portfolio C1 | After MQ2 | Heartlands–Ashenstead edge, P20 | track and judge | An Ashenstead household blames the furrow boars for a ruined field; the sign says goblins. Hunt the right culprit or refuse the wrong hunt. | Hunting H1/H2 evidence reading; food and raw hide; opens rooter opportunities |
+| BW | **The Bank Walk** | Skill intro (Woodcutting) | L-S01, C-WD2 | After MQ1 | Greyharrow bank | cut selectively | Tamsin's measuring cord marked a bank as unsafe and nobody believes the child. Clear a driftroot jam and choose which bank-binding trees to keep. | Riparian woodcutting stewardship; bank state persists |
 | FK | **The Flood Kitchen** | Skill intro (Cooking) | new; Nan Ferrin | After MQ1 | Brookhollow flood shelter | hunt, cook, feed | A flush flooded the low lanes; Nan runs a kitchen for the displaced and needs a hunter-cook. | Cooking station intro; reed-margin fowl; food as recovery before MQ3 |
 | BP | **Bark for the Pits** | Skill intro (Leatherworking) | new; woodland bark co-output | After MQ2 | Brookhollow tan-yard, coppice | gather, process, make | Kell Ashby's tan pits are starving for bark since the flood took the bark stack. Supply bark, learn the yard, make your first light protection. | Woodcutting bark → tannery → Leatherworking; Milestone 1 light protection; Riverpath Leathers commission giver |
 | HS | **Honest Steel** | Skill intro (Smithing) | new; imported steel rule | After MQ2 | Crestbridge forge | inspect, forge, decide | A shipment of "sound stock" rings wrong under Brigid Corliss's hammer. It is war salvage. Learn the forge by proving it, then decide what happens to it. | Smithing intro; Milestone 1 blade and heavy protection; Keeper's Blade/Bridgewarden Harness commission giver |
@@ -269,7 +276,7 @@ Selected and redesigned from the Part 5 lattice. The audit's concern was adminis
 | TB | **The Twice-Burned Tree** | Environmental | dossier §XI | After MQ5 | P27 | gather, dream | The tree fruits this year. Eating its fruit brings a dream of the fields before they burned, walked at night in the real Flats. | Night vignette; Sedge cameo; optional gift to Joric |
 | WD | **The Whispering Door** | Environmental | dossier §XI | After MQ4 | A Heartlands farmhouse | defend, descend | A cellar door creaks before drift comes. The family treats it as a warning bell. Defend the night, then find out why the door hears it. | Drift-site quieting; wartime drain lore |
 | NT | **Night Ferry** | Combat challenge | L-S15 | After MQ2 | P19 | defend | Greyharrow's ferry is stranded after dark and opportunists are working the crowd. Dace and Sergeant Teague need a third pair of hands until Maelin's safe crossing at dawn. | Smuggler/bandit family; Maelin's refusal understood |
-| FW | **Fen Watch** | Combat challenge | L-S16 | After MQ3 | Reedmere approaches | hold a boundary | Lessa's warning crew is being run off its own boundary by reckless cutters and something big in the deep pool. Elite: a Stillwater Serpent. | Lessa's guide route (optional Act III approach); high-tier family preview |
+| FW | **Fen Watch** | Combat challenge | L-S16 | After MQ5 (soft warning from Lessa before) | Reedmere approaches | hold a boundary | Lessa's warning crew is being run off its own boundary by reckless cutters and something big in the deep pool. Elite: a Stillwater Serpent. | Lessa's guide route (optional Act III approach); high-tier family preview |
 | OL | **Old Lantern** | Combat challenge (miniboss) | dossier "Wraithwatchers Gone Wrong" | After MQ3 | Stillwater edge | track, fight, recover | Ansel's old partner Joss Garrow walked into the fen years ago and still walks the patrol. Bring him in, or bring his lantern back. | Miniboss; Ansel's arc; drift-exposure lore |
 | CN | **The Candle Rule** | Memory/lore | L-S09, L-S18 | After MQ3 | P23, P22 | retrieve, tend | A family's offering boat drifted from the watergarden into heavy water, and Annelise is accused of erasing a missing son. Get the boat back and find a way to remember him that the water can carry. | Tend-option argument for MQ11 |
 | VK | **A Verse Kept Back** | Memory/lore | L-S17; Nan's tune | After MQ3; complete after MQ9 | Greyharrow, Brookhollow, the Steps | collect, perform | Two families will not sing the thaw song because of a missing verse. Nan's "listeners' tune" is the same melody. | Riverwarden Lullaby payoff; performance event |
@@ -335,17 +342,26 @@ Solo-first (Pillar D): all state is per player. Co-op partners see world present
 | `LM_FLUSH_CALENDAR` | bool | MQ6 | MQ7, MQ10 |
 | `LM_BRYN_ROLL` | commons / household | MQ7 | MQ12 |
 | `LM_ORCHARD_LOSS` | none / partial | MQ7 | MQ12, orchard props |
-| `LM_SEDGE_TRUST` | warm / cool | MQ8 | MQ9, 11, 12 lines |
-| `LM_ORIEL_PROMISE` | 3 values | MQ9 | MQ12 |
+| `LM_SEDGE_TRUST` | warm / cool (cool if the elk is killed or the player names Sedge as the Field-Mage aloud) | MQ8 | MQ9, 11, 12 lines |
+| `LM_ORIEL_PROMISE` | aloud / many_hands / return | MQ9 | MQ12 |
 | `LM_MARRICK_EXPOSED` | bool | MQ10 | MQ12 |
 | `LM_HESKETH` | kept / stood-down | MQ10 | MQ12, Crestbridge Guard commission giver |
-| `LM_PLAN_*` | route keeper, memorial keeper | MQ10 | MQ11 roles, MQ12 |
+| `LM_PLAN_ROUTES` | crews / keepers / shared | MQ10 | MQ11 roles, MQ12 |
+| `LM_PLAN_MEMORIAL` | watchers / gardens / reedmere | MQ10 | MQ11 roles, MQ12 |
 | `LM_FEN_ENDING` | seal / tend / shared | MQ11 | Drift-site states, MQ12, Stillwater presentation |
 | `LM_CIVIC_STANDING` | bool | MQ12 | Aspirational commission availability |
 
 ### 9.2 Drift-site state (D-6)
 
-Each authored drift site has a site id and state. **Active:** drift pocket spawns on its conditions (dusk, after rain, flush nights before MQ4). **Quieted:** no spawn. **Tended** (only after MQ11 Tend/Shared): rare passive drift that does not engage unless the player attacks it; Watchers patrol. **Closed** (MQ11 Seal): the deep-fen area is blocked by a Keeper boundary; outside it, heavy water is gone. Sites: orchard pool (MQ3), ditch (MQ3), Widow's Step (MQ3, MQ11), Bramblelock pool (MQ4), Drowsebank race (MQ6), orchard dike (MQ7), Mantle channel (MQ8), Stillwater deep pools (MQ11), farmhouse cellar (WD), watergarden outlet (CN), Old Lantern's bend (OL). After MQ11, a small set of heavy-water sites remains active by design so Wraith combat stays available for progression.
+Each authored drift site has a site id and state. **Active:** drift pocket spawns on its conditions (dusk, after rain, flush nights before MQ4). **Quieted:** no spawn. **Tended** (only after MQ11 Tend/Shared): rare passive drift that does not engage unless the player attacks it; Watchers patrol. **Closed** (MQ11 Seal): the deep-fen area is blocked by a Keeper boundary; outside it, heavy water is gone. Sites: orchard pool (MQ3), ditch (MQ3), Widow's Step (MQ3, MQ11), Bramblelock pool (MQ4), Drowsebank race (MQ6), orchard dike (MQ7), Mantle channel (MQ8), Stillwater deep pools (MQ11), farmhouse cellar (WD), watergarden outlet (CN), Old Lantern's bend (OL). After MQ11, a small set of heavy-water sites remains active by design so Wraith combat stays available for progression. The canonical drift-site register (18 site ids, conditions, owners and post-MQ11 states per ending) is in `04_CONTENT_PRODUCTION/Enemies/Caelmor_Lowmark_Encounter_and_Enemy_Requirements.md`; completing *Old Lantern* quiets its bend permanently, and the Dunnock farm cellar (*The Whispering Door*) stays as the player left it.
+
+### 9.3 Shared conventions settled in review
+
+- **Keep watch** is one interaction everywhere: a per-player quest clock that advances to the step's target hour (MQ4, MQ6, *Night Ferry*, *The Whispering Door*). It never changes world time for co-op partners.
+- **Banner-thistle smoke-pot** is one carry-state Watcher tool, refilled at any Lantern Post or Watcher NPC; it is not an inventory item.
+- **Defeated humans** follow D-13.
+- **Region flag `LM_TL_EVIDENCE`** is set at the end of The True Line from whichever `TL_EVIDENCE_*` flag is true.
+- **Quest items in v1:** 8 (The True Line 3; Act I `SM_requisition`, `NF_bill_of_lading`; Act II `tovin_floor_sheets`, `riverglass_bowl`; Act III `CR_board_minute`). Side quests use none. The player holds the Act I items until MQ10.
 
 ---
 
@@ -360,7 +376,7 @@ Nine families (Phase 1.5 §4.1), from dossier ecology. Wildlife (furrow boar, ma
 | Low | Ash Hounds | Burned-ground pack | runner, ash-shaker (lung-irritant cloud telegraph) | Den Mother | MQ3 |
 | Low | Mud Pipers | Reed mimics that lure | piper, bog-diver | Chorus-Piper | MQ7 |
 | Mid | Smugglers (Sallow's crews, opportunists) | Human melee | pole-man, cutter | Gideon Sallow (miniboss) | MQ4 |
-| Mid | Reed Stalkers | Ambush predators in reeds | stalker, lurker | Old Mud | MQ5 |
+| Mid | Reed Stalkers | Ambush predators in reeds | stalker, lurker | Old Mud | *Night Bridge* (max 2 at once), then MQ5 |
 | Mid | Water Wraiths (drift) | Place-bound manifestations; disperse, re-form | drift, lantern-drift | Joss Garrow, "Old Lantern" (miniboss; a Watcher gone wrong) | MQ3 |
 | High | Stillwater Serpents | Deep-pool apex | serpent | Deep-Pool Serpent | FW, MQ11 |
 | High | Wraith Lords | Coalesced manifestations | — | **The Muster** (Act III boss) | MQ11 |
@@ -390,11 +406,11 @@ Bosses: 1 Act III boss (the Muster) and 2 minibosses (Gideon Sallow, Old Lantern
 | Batch | Content | Files |
 |---|---|---|
 | 0 (done) | Main quest 1 | `Quests/Caelmor_Lowmark_Quest_The_True_Line.md`; `Dialogue & Narrative/Caelmor_Lowmark_The_True_Line_Cast_and_Dialogue.md` |
-| 1 | This bible | `Quests/Caelmor_Lowmark_v1_Narrative_Production_Bible.md` |
-| 2 | Main quests 2–4, 5–9, 10–12 | `Quests/Caelmor_Lowmark_Main_Act_I.md`, `_Act_II.md`, `_Act_III.md` and matching `Dialogue & Narrative/Caelmor_Lowmark_Main_Act_<n>_Dialogue.md` |
-| 3 | Side quests and micro-events | `Quests/Caelmor_Lowmark_Side_Quests_Work_and_Skills.md` (WC, BW, FK, BP, HS); `…_Settlements_and_Combat.md` (UL, NB, UR, NT, FW, OL); `…_Discovery_and_Memory.md` (SB, UC, TB, WD, CN, VK, FC, ME01–ME10) |
-| 4 | Encounters and POIs | `Enemies/Caelmor_Lowmark_Encounter_and_Enemy_Requirements.md`; `Zones/Caelmor_Lowmark_POI_and_Zone_Requirements.md` |
-| 5 | Technical handoff | `Quests/Caelmor_Lowmark_v1_Integration_Requirements.md` |
-| 6 | Independent review and fix pass | Revisions in place; review log in each package |
+| 1 (done) | This bible | `Quests/Caelmor_Lowmark_v1_Narrative_Production_Bible.md` |
+| 2 (done) | Main quests 2–4, 5–9, 10–12 | `Quests/Caelmor_Lowmark_Main_Act_I.md`, `_Act_II.md`, `_Act_III.md` and matching `Dialogue & Narrative/Caelmor_Lowmark_Main_Act_<n>_Dialogue.md` |
+| 3 (done) | Side quests and micro-events | `Quests/Caelmor_Lowmark_Side_Quests_Work_and_Skills.md` (WC, BW, FK, BP, HS); `…_Settlements_and_Combat.md` (UL, NB, UR, NT, FW, OL); `…_Discovery_and_Memory.md` (SB, UC, TB, WD, CN, VK, FC, ME01–ME10) |
+| 4 | Encounters and POIs (done) | `Enemies/Caelmor_Lowmark_Encounter_and_Enemy_Requirements.md`; `Zones/Caelmor_Lowmark_POI_and_Zone_Requirements.md` |
+| 5 (done) | Technical handoff | `Quests/Caelmor_Lowmark_v1_Integration_Requirements.md` |
+| 6 (done) | Independent review and fix pass | Revisions in place; review log in each package |
 
 **Remaining production dependencies (not narrative work):** quest step/flag schema (Roadmap 31.3), dialogue schema (31.5), NPC schema (31.2), zone and encounter data (31.4, 33.7), and runtime step tracking (24.1). Until those exist, packages stay schema-ready markdown and no production JSON is written (Master Protocol §5.1).

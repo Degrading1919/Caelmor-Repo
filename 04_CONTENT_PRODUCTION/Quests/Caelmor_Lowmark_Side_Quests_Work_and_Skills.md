@@ -12,7 +12,7 @@ These five quests are where a player first learns what a Lowmark skill is *for*.
 
 | Code | Quest | Skill introduced | Core verb | Unlock (quest state, not spawn location; bible D-4) | Where | Length |
 |---|---|---|---|---|---|---|
-| WC | The Wrong Culprit | Hunting | track and judge | `lowmark.main.01_true_line` Completed | Ashenstead field margin and P20 burned barns | 20–30 min |
+| WC | The Wrong Culprit | Hunting | track and judge | `lowmark.main.02_short_measure` Completed | Heartlands–Ashenstead edge field margin and P20 burned barns | 20–30 min |
 | BW | The Bank Walk | Woodcutting | cut selectively | `lowmark.main.01_true_line` Completed | Greyharrow side-branch bank (P05) | 20–30 min |
 | FK | The Flood Kitchen | Cooking | hunt, cook, feed | `lowmark.main.01_true_line` Completed | Brookhollow low lanes and shelter (P01) | 20–30 min |
 | BP | Bark for the Pits | Leatherworking | gather, process, make | `lowmark.main.02_short_measure` Completed | Brookhollow tan-yard (settlement edge), renewal coppice (P17) | 30–40 min |
@@ -50,7 +50,9 @@ HS  outside production ──► lawful consignment ──► receiving inspecti
 | Basic heavy protection | HS: Brigid opens heavy-protection work at the forge (definition belongs to the item pass) |
 | Basic light protection | BP: the player makes their first light protection from leather they tanned |
 | Repair and upkeep visible | BP (tallow conditioning, the yard's repair pegs) and HS (the rejects rack, Brigid's refurbish queue) |
-| Basic guard-capable setup | **Not covered by these five.** Flagged for the item/encounter pass (Open questions, item 1). |
+| Basic guard-capable setup | **Taught in the main line:** Act I MQ2's optional keepers' drill (`S01c_drill`, `SM_DRILL_DONE`) teaches bracing against a telegraphed blow and points to a basic guard. **HS** adds one line in which Brigid offers a basic guard repair and forging lesson (`HS-D6.07`). No item stats here; the item pass owns the guard. |
+
+No main quest assumes BP or HS: Kell's yard and Brigid's bench also sell or refurbish basic Milestone 1 pieces for players who skip them (economy pass to confirm).
 
 BP and HS end by establishing **Kell Ashby** (Riverpath Leathers, with Maelin's crews) and **Brigid Corliss** (Keeper's Blade, Bridgewarden Harness) as the people who will one day take a commission from the player (bible §8). The commissions themselves are not designed here; MQ12's `LM_CIVIC_STANDING` gates them.
 
@@ -66,6 +68,23 @@ BP and HS end by establishing **Kell Ashby** (Riverpath Leathers, with Maelin's 
 
 None repeats The True Line's investigate-and-repair loop or a §6 main-quest verb.
 
+### 0.5 Flags other packages read
+
+| Flag | Set by | Read by | Effect |
+|---|---|---|---|
+| `WC_BARNS_CLEARED` | WC `S03_barns` | UR (Settlements and Combat) | `UR-B3`: one line that the raiders came back to the P20 barns. |
+| `WC_SAW_ROWS` | WC `S03b_field` | UR (optional) | Camp line only. |
+| `WC_SOW_TAKEN` / `WC_SOW_SPARED` / `WC_SOW_SPARED_FED` | WC `WC-D6` | BP `BP-D4.03` | Kell's line about the hide. |
+| `FK_HUSH_SEEN` | FK hush | MQ3 (request) | Ansel's optional "Brookhollow too?", only if MQ3 has not started. |
+| `FK_POT_CREW` / `FK_POT_FAMILY` / `FK_POT_OWN` | FK `FK-D5` | MQ12 Nan scene (request); VK | Nan's later lines. |
+| `FK_NAN_TUNE` | FK `FK-D6` | VK (Discovery and Memory) | Nan's opening variant. |
+| `HS_SALVAGE_KEEPERS` / `HS_SALVAGE_REFUSED` | HS `HS-D5` | UL (optional, removable hook) | A refusal-stamped bar may sit in the Lamb cellar. |
+| `BP_KELL_PEG`, `HS_BRIGID_QUEUE` | BP / HS completion | Commission packages (Milestone 4, `LM_CIVIC_STANDING`); MQ12 (request) | Commission givers established. |
+| *(read)* `SM_DRILL_DONE` | Act I MQ2 keepers' drill | HS `HS-D6.07` | One Brigid line; the guard lesson is offered either way. |
+| *(read)* MQ4 Completed | Act I | FK hush | Selects the flush or backwater bottom-step inspect. |
+
+"(request)" marks a line asked of another package that nothing depends on. No `LM_` flags are created.
+
 ---
 
 ## WC — The Wrong Culprit
@@ -76,7 +95,7 @@ None repeats The True Line's investigate-and-repair loop or a §6 main-quest ver
 |---|---|
 | Content id (suggested) | `lowmark.side.wrong_culprit` |
 | Type | Skill introduction (Hunting). Source: Hunting portfolio C1 *The wrong culprit*, presented at entry level with N2's guided structure. |
-| Unlock | TL Completed. Offered by the smallholder at the field edge on approach. |
+| Unlock | MQ2 *Short Measure* Completed (after the Hill Depot's goblin introduction). Offered by the smallholder at the field edge on approach. |
 | Skills | Hunting (required: reading and tracking; optional: take and recover), Melee (required), Cooking (optional) |
 | Combat share | ~20% (one required barn fight; one optional dangerous-contact hunt) |
 | Choice | The sow with farrow: take her, leave her, or leave her and feed the household yourself |
@@ -86,7 +105,7 @@ None repeats The True Line's investigate-and-repair loop or a §6 main-quest ver
 
 ### WC.2 The place [NEW; MAP VERIFICATION REQUIRED]
 
-A smallholding on the near margin of Ashenstead Fields, a short walk from the P20 burned barn row.
+A smallholding on the **Heartlands–Ashenstead edge**, the Heartlands-facing margin of P20, a short walk from the burned barn row (MAP VERIFICATION REQUIRED: the margin must read as Heartlands-tier ground, with P20's barns at its far side).
 
 | Area | Purpose | Environmental storytelling |
 |---|---|---|
@@ -124,7 +143,7 @@ In the end barn, under the fallen roof, the stolen roots stand replanted in thre
 
 | Id | Enemies | Placement | AI role | Telegraph | Purpose | Solo target |
 |---|---|---|---|---|---|---|
-| **E1** | 3 × Field Goblin scrapper, 1 × Field Goblin trapper | Barn row, in two barns | Scrappers: Aggressive in the barn volume. Trapper: keeps distance, lays rake traps | Scrapper: hoe raised overhead (~1 s) then a short chop. Trapper: crouches and sets a rake (~1 s); the tines stay visible; stepping on one staggers the player briefly | First goblin fight; reading traps on the ground (MQ2 builds on it) | Required. 60–90 s; player ends at 50–70% HP |
+| **E1** | 3 × Field Goblin scrapper, 1 × Field Goblin trapper | Barn row, in two barns | Scrappers: Aggressive in the barn volume. Trapper: keeps distance, lays rake traps | Scrapper: hoe raised overhead (~1 s) then a short chop. Trapper: crouches and sets a rake (~1 s); the tines stay visible; stepping on one staggers the player briefly | Goblins on open farm ground after MQ2's warren: reading traps outside a dungeon | Required. 60–90 s; player ends at 50–70% HP |
 | **E2** | 1 × Furrow Boar sow (only if `WC_SOW_TAKEN` is chosen) | Scrub margin bed | Hunting approach target. If alerted at close range she turns territorial | Bristles and snorts (~1.2 s), then a short straight charge; sidestepping makes her overrun and pause (~1.5 s) | Dangerous contact handed to combat (economy D02); recovery still needs field dressing | Optional. A careful approach resolves without a charge; a careless one is a 30–45 s fight |
 
 The farrow are ambient wildlife, not targets: they scatter into the brambles and are never harvestable in this quest. Goblin heaps hold no evidence (the trail and field did the proving). Death: respawn at the field gate with step and carried-sack state reset to the heap.
@@ -277,6 +296,7 @@ WC-D7.50 HOLDER: "Eat before you go. That's not a question."
 | Taking the sow risked reading as the "wrong" answer. | It feeds the household and supplies BP's hide; its cost is a closed margin, not a scolding. |
 | Goblin field could read as comic relief only. | Kept small and inspect-only; the notched blade quietly echoes TL's markers and tells the player raiders watch farms. |
 | Combat could have looked like it gave Hunting output. | Barn combat gives none; the sow's output comes only from field dressing (D02/D03). |
+| Independent review pass: after MQ1, WC took MQ2's first goblin fight and pulled the player into a mid-tier subzone. | Director ruling: WC unlocks after MQ2; its field margin sits on the Heartlands–Ashenstead edge. BP's hide supply is unaffected (BP also unlocks at MQ2, and the yard sells hide). |
 
 ---
 
@@ -493,6 +513,7 @@ BW-D6.07 TAMSIN: "You held it nearly right, by the end."
 | A "cut everything that's in the way" path would teach clearing. | Only the failing tree must come down; the healthy one is a choice with a cost either way (economy W3). |
 | Bark could have appeared from every cut. | Only the authorized intact removals (leaner, holder) give bark; the jam limb gives wood only (S-WD3 conditional eligibility). |
 | Original slump was immediate, which felt punitive. | Delayed to after MQ3 (a season later), so the consequence arrives as a changed place, not a scolding. |
+| Independent review pass: Tamsin's pronoun was inconsistent across files ("they" here, "her" in ME01 and the bible). | **Pronoun-neutral wording is deliberate:** the bible gives Tamsin no pronoun, so every side package refers to Tamsin as "they" or by name. ME01 is fixed to match. The bible's §7 "her" is an open item for the bible owner (§5.3 should record the choice). |
 
 ---
 
@@ -549,8 +570,9 @@ BW-D6.07 TAMSIN: "You held it nearly right, by the end."
 | Trigger | Server event on first completion of the Cooking interaction in `S03_cook`. |
 | Sequence | ~8 s. The geese on the river, audible all quest, stop at once. The shelter goes quiet a beat later. The flood water at the shelter's bottom step climbs one step-height, smoothly, with no wave and no wind (~3 s), holds, and stays. Talk resumes. |
 | Camera / UI | Player-controlled; no UI, no music. |
-| Meaning | None stated. Author truth: this is a Hollow Lock flush (bible §2.2), a human act; the geese hear the river change first. Nan: "Did that last night too. No rain." It identifies nobody and proves nothing. It plants the question MQ3 and MQ4 answer. |
-| Repeat | Once per player. Afterward the step's waterline stays one step higher. |
+| Meaning | None stated to the player. **Author truth is keyed to world state [PROPOSAL — DIRECTOR]:** before MQ4 is Completed, the step rises on a Hollow Lock flush pulse (bible §2.2), a human act; from MQ4 Completed on, the same rise is the **fen backwater** pushing back up the river (bible MQ5 brief; Act II §A2.2), which is pressure, not intent. The geese hear the river change first in both cases. Nan's lines never name a cause, so they stand unchanged. It identifies nobody and proves nothing. It plants the question MQ3–MQ5 answer. |
+| Bottom-step inspect | Before MQ4: *"A step higher than it was, all at once. No rain fell. The water came down the river from somewhere."* / MQ4 Completed: *"A step higher, slowly, from below. No rain fell. The river isn't coming down; something is pushing it back up."* |
+| Repeat | Once per player, in either world state. Afterward the step's waterline stays one step higher. |
 
 ### FK.5 Encounters
 
@@ -583,8 +605,8 @@ Taking fowl is a Hunting resolution, not a combat kill; recovery is the Hunting 
 
 | Flag | Set by | Read by |
 |---|---|---|
-| `FK_HUSH_SEEN` | Hush event | `FK-D3` line; Ansel's MQ3 opening (optional line: "Brookhollow too?") |
-| `FK_POT_CREW` / `FK_POT_FAMILY` / `FK_POT_OWN` | `FK-D5` (exactly one) | Shelter props; MQ12 Nan scene; VK Nan lines |
+| `FK_HUSH_SEEN` | Hush event | `FK-D3` line; Ansel's MQ3 opening (request; optional line "Brookhollow too?", played only if MQ3 has not yet started when the hush is seen) |
+| `FK_POT_CREW` / `FK_POT_FAMILY` / `FK_POT_OWN` | `FK-D5` (exactly one) | Shelter props; MQ12 Nan scene (request); VK Nan lines |
 | `FK_NAN_TUNE` | `FK-D6` tune exchange | VK (*A Verse Kept Back*) Nan opening variant |
 
 ### FK.8 Rewards
@@ -722,6 +744,7 @@ FK-D6.07 NAN: "River keep you."
 | The hush risked revealing the flush early. | Nothing names it. It reads as water doing something water doesn't do; MQ3–4 own the answer. |
 | Nan's MQ12 "own bed" payoff could be spent here. | She reached her door and turned back; the bed is still waiting for MQ12. |
 | "Who eats" could feel like a trolley problem. | Both groups are ordinary and both costs are small and visible; a third option costs the player's own food. |
+| Independent review pass: the hush said "flush" even when played after MQ4, when no flushes run. | Director ruling: before MQ4 it is a flush pulse; after MQ4 it is the fen backwater. It plays in both states, with a state-keyed bottom-step inspect. Ansel's MQ3 line is dropped once MQ3 has started. |
 
 ---
 
@@ -761,9 +784,9 @@ FK-D6.07 NAN: "River keep you."
 
 **Beat 2 — Honest Bark (`S02_coppice`).** *Objective: Cut this year's stems in the coppice.* Standard Woodcutting gather on ribboned stools only (unribboned stools are not interactable). Each valid stem gives ordinary wood and tannin-rich bark together (guaranteed co-output, S-WD2). The quest needs a minimum bark amount (Gameplay Designer). On the route, the lane (G) is passable and its ringed trees are inspectable (`S02b_lane`, optional).
 
-**Beat 3 — Break and Charge (`S03_brake`).** *Objective: Break the bark and charge a pit.* Give the bark to the yard's store (item-given; any tannin-rich bark counts; Kell pays the yard rate). Two **Break bark** channels at the block, then **Charge the pit** (3 s). The yard hands take it from there: leaching is ordinary labour (D05). The pale pit darkens a shade.
+**Beat 3 — Break and Charge (`S03_brake`).** *Objective: Break the bark and charge a pit.* Give the bark to the yard's store (item-given; any tannin-rich bark counts). Kell chalks it at the yard rate and **holds the payment until the peg** (`S07_peg`): "You'll be paid when you're done, not when you're tired." Two **Break bark** channels at the block, then **Charge the pit** (3 s). The yard hands take it from there: leaching is ordinary labour (D05). The pale pit darkens a shade.
 
-**Beat 4 — The Hide (`S04_hide`).** *Objective: Tan a hide at the yard.* The player needs one raw hide: their own (WC sow, MQ1 boar, any eligible hunt) or one from the yard's husbandry stock, sold at cost (if the player cannot pay, Kell advances it against the bark payment). The player performs the Leatherworking tanning interaction at the yard workspace: raw hide → vegetable-tanned hide leather. The pits do the slow part; the player's step is the player-facing transformation (D05). Exact interaction and timing belong to the Leatherworking pass.
+**Beat 4 — The Hide (`S04_hide`).** *Objective: Tan a hide at the yard.* The player needs one raw hide: their own (WC sow, MQ1 boar, any eligible hunt) or one from the yard's husbandry stock, **always on sale at cost** so Hunting is never required (if the player cannot pay, Kell takes it off the held bark payment). The player performs the Leatherworking tanning interaction at the yard workspace: raw hide → vegetable-tanned hide leather. The pits do the slow part; the player's step is the player-facing transformation (D05). Exact interaction and timing belong to the Leatherworking pass.
 
 **Beat 5 — First Piece (`S05_make`).** *Objective: Make your first light protection.* At Kell's bench, a Leatherworking make interaction produces a Milestone 1 basic light protection piece (item pass defines form and inputs). The yard supplies flax thread and rendered tallow for this one piece. Kell shows the player how to condition it with tallow (upkeep is visible from the start).
 
@@ -773,7 +796,7 @@ FK-D6.07 NAN: "River keep you."
 
 ### BP.4 The strap (discovery)
 
-Under the third armful, in the tea-dark shallows, lies a leather strap: supple, uncracked, its buckle rusted to lace, stamped with a mark of crossed scrapers. Inspect text: *"A strap, still supple. Tannin water keeps things. The stamp is two crossed scrapers."* Kell recognises the stamp: it is the yard's own mark, from before the board at the gate was painted. Nobody knows who made it or when. Kell hangs it on a nail by the gate (persistent prop). It proves only that the yard has been here a long time.
+Under the third armful, in the tea-dark shallows, lies a leather strap: supple, uncracked, its buckle rusted to lace, stamped with a mark of crossed scrapers. Before it is lifted it hangs in the tea-dark water at a perfectly level depth, a hand under the surface, though the bottom slopes away beneath it; nothing is said about it. Inspect text: *"A strap, still supple. Tannin water keeps things. The stamp is two crossed scrapers."* Second inspect, before lifting: *"It hangs level in the water. The bottom doesn't."* Kell recognises the stamp: it is the yard's own mark, from before the board at the gate was painted. Nobody knows who made it or when. Kell hangs it on a nail by the gate (persistent prop). It proves only that the yard has been here a long time.
 
 ### BP.5 Encounter
 
@@ -789,7 +812,7 @@ Kell's framing: "Bark's no use to those trees now. The question is the next tree
 |---|---|---|---|
 | **Buy it, once** — *"Buy it. Tell them never again."* | Kell pays the household at half rate and tells them so in front of the yard hands. The pits fill faster this week. | Word gets round that the yard took stripped bark: after MQ3 is Completed, one more ringed tree appears on another lane (prop). | Kell, later: "Someone else tried it. I sent them off. Once was once." |
 | **Turn it away** — *"No. The yard doesn't buy it."* | Kell refuses. The household leaves. | They sell it to a passing trader on the docks instead (bark line); the trees are dead either way and the family is no better off for trying the honest door. | The stripped bark rots by the lane gate (prop). |
-| **Take it, pay from my share** — *"Take it. Pay them out of what you owe me, and send them to the coppice crew."* | Kell puts the stripped bark in the pits, pays the household from the player's bark payment, and sends them to the crew with a word. | The player's payment for this quest's bark. | The household appears working in the coppice crew (prop and bark). |
+| **Take it, pay from my share** — *"Take it. Pay them out of what you owe me, and send them to the coppice crew."* | Kell puts the stripped bark in the pits, pays the household out of the bark payment Kell is still holding for the player, and sends them to the crew with a word. | The player's payment for this quest's bark. | The household appears working in the coppice crew (prop and bark). |
 
 ### BP.7 Steps and flags
 
@@ -800,7 +823,7 @@ Kell's framing: "Bark's no use to those trees now. The question is the next tree
 | `S01b_strap` | (Optional) Look at what the water kept. | Inspect event on the strap | No | Sets `BP_STRAP_FOUND` |
 | `S02_coppice` | Cut this year's stems in the coppice. | Required amount of tannin-rich bark held | Yes | Any valid bark source counts |
 | `S02b_lane` | (Optional) Look at the lane trees. | Inspect event on a ringed tree | No | Sets `BP_SAW_RINGS` |
-| `S03_brake` | Break the bark and charge a pit. | item-given (bark) + 2 `break_bark` + `charge_pit` complete | Yes | Kell pays yard rate on item-given |
+| `S03_brake` | Break the bark and charge a pit. | item-given (bark) + 2 `break_bark` + `charge_pit` complete | Yes | Kell tallies the yard rate; payment held until `S07` |
 | `S04_hide` | Tan a hide at the yard. | Leatherworking tanning interaction complete (vegetable-tanned hide leather created) | Yes | Hide from inventory or yard stock |
 | `S05_make` | Make your first light protection. | Leatherworking make interaction complete at the yard bench | Yes | Thread and tallow supplied |
 | `S06_choose` | Decide what the yard does with the stripped bark. | Dialogue `BP-D6` choice node | Yes | |
@@ -818,11 +841,11 @@ Kell's framing: "Bark's no use to those trees now. The question is the next tree
 
 | Reward | Type | Notes |
 |---|---|---|
-| Tan-yard workspace | Access | The player may use the yard's Leatherworking workspace (D06 workshop context). Kell buys accepted raw hide and tannin-rich bark and sells bounded finished leather (P-O4; no unlimited conversion service). |
+| Tan-yard workspace | Access | The player may use the yard's Leatherworking workspace (D06 workshop context). Kell buys accepted raw hide and tannin-rich bark and sells bounded finished leather (P-O4; no unlimited conversion service). **Raw hide stays purchasable at the yard** after the quest, so Hunting is never required for Leatherworking, and the yard sells or re-conditions basic Milestone 1 light protection for players who skip BP. **Economy pass to confirm** (husbandry as baseline hide supply; prices). |
 | **Reading bark** | Knowledge | Trees and stems across Lowmark show one line: *"A cut stem. Bark's good for the pits."* / *"Standing tree. Leave its bark on it."* (economy bark eligibility; S-WD1 ineligible by default). |
 | Yard knife | Tool | Lent at `BP-D4` if the player lacks a Leatherworking tool; kept. Item pass defines it. |
 | First light protection | Made by the player | Milestone 1. Not a reward drop: the player made it. |
-| Bark payment | Currency | Yard rate for delivered bark (transferred to the household on *Take it, pay from my share*). |
+| Bark payment | Currency | Yard rate for delivered bark, paid at `S07_peg` less any hide advance (transferred to the household on *Take it, pay from my share*). |
 | Woodcutting, Leatherworking XP | Action XP only | No lump quest XP. |
 
 ### BP.9 Failure, recovery, co-op
@@ -864,6 +887,7 @@ BP-D1.10 KELL: "Good. Then bark. Real bark. I'll tell you what real means when y
 BP-D1b.01 KELL: (turns it over) "Crossed scrapers."
 BP-D1b.02 KELL: "That's the yard's mark. Before the sign. Before my teacher's teacher, maybe."
 BP-D1b.03 KELL: "Tannin keeps things. Hides, mostly. Apparently straps." (hangs it on the gate nail)   → end
+BP-D1b.04 [player inspected it hanging level] KELL: "Hung level, did it." (beat) "Backwater does odd things. I don't ask it."   → end
 ```
 
 **Real bark** (`BP-D2`, after `S01_backwater`)
@@ -944,8 +968,8 @@ BP-D7.02 KELL: "That board's for people the yard'll want back. Most pegs have a 
 BP-D7.03 KELL: "Maelin Rowe's crews. River eats leather. They wear mine and they complain about it, which means they wear it."
 BP-D7.04 KELL: "One day they'll want better than I can make alone. Keep working, and it might be you and me and them."   → BP-D7 options
 BP-D7.05 KELL: "Stays on the nail. Somebody made it to last. I'd like to know who. I won't."    → BP-D7 options
-BP-D7.06 KELL: "Yard's open to you. Bring hides clean and bark honest."
-      {set BP_KELL_PEG; event: BP-D7 end → quest Completed}
+BP-D7.06 KELL: "Yard's open to you. Bring hides clean and bark honest." (counts out coin) "Your bark money. What's left of it."
+      {pay held bark payment (none if BP_STRIPPED_HIRED; less any hide advance); set BP_KELL_PEG; event: BP-D7 end → quest Completed}
 ```
 
 **Post-quest barks**
@@ -965,6 +989,9 @@ BP-D7.06 KELL: "Yard's open to you. Bring hides clean and bark honest."
 | The yard looked like a vending machine for leather. | Yard hands work the rounds without the player; Kell buys and sells within bounds; the player's own Leatherworking does the transformation (D05, P-O4). |
 | Dirty work beside drinking water for convenience. | The yard is downstream at the settlement edge; the first job is to undo exactly that harm (D09, P-O4 "must not become"). |
 | Commission giver risked designing the commission. | Kell names Maelin's crews and a "maybe one day"; no form, inputs or steps. |
+| Independent review pass: BP-D6.30 paid the household "from what you owe me" after Kell had already paid at `S03_brake`. | Kell now holds the bark payment until `S07_peg`; the hide advance and option C both draw on it. |
+| Independent review pass: the strap was ordinary by design, short of bible §11.7's strange moment. | The strap hangs at a perfectly level depth over a sloping bottom: shown, never explained. |
+| Director ruling 10. | Raw hide stays purchasable at the yard so Hunting is never required; economy pass to confirm. |
 
 ---
 
@@ -979,11 +1006,11 @@ BP-D7.06 KELL: "Yard's open to you. Bring hides clean and bark honest."
 | Unlock | MQ2 *Short Measure* Completed. Offered at the Crestbridge forge. |
 | Skills | Smithing (required) |
 | Combat share | None. Danger is the forge itself (one readable hazard). |
-| Cameo | Corvin Tath [CANON ANCHOR], numbers only |
+| Cameo | Corvin Tath [CANON ANCHOR], arithmetic only (a role-based toll-scale keeper brings the tally) |
 | Choice | What happens to the salvage: Keepers' custody, or refused back to the carrier, marked |
 | Unlocks | Forge workspace; lawful steel stock from the receiving bench; first dependable blade (Milestone 1); heavy-protection work opened; Brigid Corliss as future commission giver |
 
-**In one paragraph.** Brigid Corliss's forge is built into the Crestbridge abutment, under the span, where the dwarven iron ties run through the stone. A consignment of "sound stock" has come in, plain carbon steel bars under an importer's tag, and one of them rang wrong under Brigid's hammer. Brigid teaches the player to ring-test: sound bars ring clear, and the old ties in the bridge hum back. Two bars ring dull and get no answer. Their ends are cut, not sheared; their sides carry plugged bolt-holes at even spacing; on one, a stencil has been ground nearly away, leaving a broad arrow and two letters. The player forges their first dependable blade from a sound bar, then heats and quenches a suspect one at Brigid's insistence, and steps clear when it cracks. Corvin Tath arrives with the crossing scale's tally and the carrier, who is frightened. The numbers say three bars were swapped after the bill was written. Nobody can say where the salvage came from. The player decides where it goes.
+**In one paragraph.** Brigid Corliss's forge is built into the Crestbridge abutment, under the span, where the dwarven iron ties run through the stone. A consignment of "sound stock" has come in, plain carbon steel bars under an importer's tag, and one of them rang wrong under Brigid's hammer. Brigid teaches the player to ring-test: sound bars ring clear, and the old ties in the bridge hum back. Two more bars ring dull and get no answer, which makes three with the one already on Brigid's anvil. Their ends are cut, not sheared; their sides carry plugged bolt-holes at even spacing; on one, a stencil has been ground nearly away, leaving a broad arrow and a number. The player forges their first dependable blade from a sound bar, then heats and quenches a suspect one at Brigid's insistence, and steps clear when it cracks. The toll-scale keeper arrives with the crossing scale's tally and the carrier, who is frightened; Corvin Tath, at the forge on grain business, does the sum aloud. The numbers say three bars were swapped after the bill was written. Nobody can say where the salvage came from. The player decides where it goes.
 
 ### HS.2 The place [NEW; MAP VERIFICATION REQUIRED]
 
@@ -999,13 +1026,13 @@ BP-D7.06 KELL: "Yard's open to you. Bring hides clean and bark honest."
 
 **Beat 0 — Wrong Note (`S00_ring`).** *Objective: Find out what's wrong at the forge.* Entering the forge volume: Brigid is hammering, stops mid-stroke, strikes again, swears. `HS-D1`.
 
-**Beat 1 — Ring Them (`S01_inspect`).** *Objective: Test the consignment.* Brigid has pulled six bars from the bundle. The player strikes each on the testing horn (six short interactions). Four ring clear and a low hum answers from the ties in the stone (HS.4). Two ring dull and nothing answers. Then three inspects on the dull bars: ends, bolt-holes, stencil. Required: all six rings and all three inspects.
+**Beat 1 — Ring Them (`S01_inspect`).** *Objective: Test the consignment.* Brigid has pulled six bars from the bundle; the first wrong bar is already on her anvil. The player strikes each of the six on the testing horn (six short interactions). Four ring clear and a low hum answers from the ties in the stone (HS.4). Two ring dull and nothing answers; with the anvil bar, that is three. The remaining five in the bundle ring clear if struck (optional, same interaction). Then three inspects on the dull bars: ends, bolt-holes, stencil. Required: all six rings and all three inspects.
 
 **Beat 2 — Your Own Blade (`S02_blade`).** *Objective: Forge a blade from sound stock.* Brigid hands over one sound bar ("Your wage is in that"). Smithing interactions at the forge using the forge's charcoal: heat, draw out, shape, quench, finish at the wheel (each a channel; exact sequence and outcome belong to the Smithing interaction pass). The result is the player's Milestone 1 basic melee weapon (item pass defines it).
 
 **Beat 3 — Why Not (`S03_crack`).** *Objective: Heat and quench a suspect bar.* Same heat and quench interactions on a dull bar. In the trough it **ticks twice** (~1.5 s) and a shard spits along the trough's line; the player steps aside. The bar cracks every time (authored outcome, not skill-based). Inspecting the break: *"Coarse and grey inside, with rust deep in the grain. It was wet for a long time."* This is why war salvage stays out of routine supply: unknown history, hidden flaws.
 
-**Beat 4 — The Count (`S04_count`).** *Objective: Hear what the crossing tally says.* Corvin Tath arrives with his tally and the carrier (role: CARRIER). `HS-D4`. The bill says twelve bars at one weight; the crossing scale weighed twelve bars at another. Swapped, not added. Records do the proving; the bridge's hum proved nothing.
+**Beat 4 — The Count (`S04_count`).** *Objective: Hear what the crossing tally says.* The toll-scale keeper (role: SCALE-KEEPER) brings the crossing scale's tally and the carrier (role: CARRIER); Corvin Tath, collecting a cart-tyre from the rejects rack, reads the figures and does the arithmetic aloud. `HS-D4`. The bill says twelve bars at one weight; the crossing scale weighed twelve bars at another. Swapped, not added. Records do the proving; the bridge's hum proved nothing.
 
 **Beat 5 — Where It Goes (`S05_choose`).** *Objective: Decide what happens to the salvage.* `HS-D5`; HS.6.
 
@@ -1039,7 +1066,7 @@ Neither option tells the player who swapped the bars. That stays open (HS.10).
 | `S01b_ties` | (Optional) Walk out to the bridge ties. | Enter tie-ledge volume | No | Sets `HS_TIES_SEEN`; agility step or ladder fallback |
 | `S02_blade` | Forge a blade from sound stock. | Smithing interaction chain complete (weapon created) | Yes | Brigid supplies the bar and charcoal |
 | `S03_crack` | Heat and quench a suspect bar. | Interaction `quench_suspect` complete | Yes | Outcome authored: always cracks |
-| `S04_count` | Hear what the crossing tally says. | Dialogue `HS-D4` end node | Yes | Corvin and carrier spawn on `S03` complete |
+| `S04_count` | Hear what the crossing tally says. | Dialogue `HS-D4` end node | Yes | Scale-keeper, Corvin and carrier spawn on `S03` complete |
 | `S05_choose` | Decide what happens to the salvage. | Dialogue `HS-D5` choice node | Yes | |
 | `S06_queue` | Hear what Brigid has to say. | Dialogue `HS-D6` end node | Yes | Quest Completed |
 
@@ -1055,6 +1082,7 @@ Neither option tells the player who swapped the bars. That stays open (HS.10).
 |---|---|---|
 | Forge workspace | Access | The player may use Brigid's forge (D06 workshop context) and buy lawful plain carbon steel stock from the receiving bench. Charcoal is bought from the forge's fuel-worker supply. |
 | Heavy protection | Access | Brigid's forge offers the Milestone 1 heavy-protection work (item pass defines it). |
+| Guard lesson | Access | A basic guard repair and forging lesson at the forge (`HS-D6.07`), linked to Act I MQ2's optional keepers' drill. No item stats here. Brigid's bench also refurbishes basic Milestone 1 pieces for players who skip HS (economy pass to confirm). |
 | **Receiving inspection** | Knowledge | Steel stock and suspicious metal anywhere can be ring-tested: *"Rings clear."* / *"Rings dull. Don't trust it."* Inspect lines on cut ends and plugged holes become available on authored salvage props. |
 | First dependable blade | Made by the player | Milestone 1. |
 | Forge tongs | Tool | Lent at `HS-D1` if the player lacks Smithing tools; kept. Item pass defines them. |
@@ -1075,7 +1103,7 @@ Neither option tells the player who swapped the bars. That stays open (HS.10).
 
 | Mystery | Author truth (proposal) | Public belief | Evidence | Plausible wrong reading | Withheld | Reveal owner |
 |---|---|---|---|---|---|---|
-| **Who swapped the bars** | Deliberately unselected. Compatible with the Brookhollow black-market trade in steel (dossier) and with wartime ironwork being pulled from old sites. **No canon anchor's history is implied.** | The carrier cheated; or the importer did. | Retied tag; cut ends; plugged bolt-holes; a broad arrow and two letters; Corvin's weight difference. | The carrier did it (he is frightened, which looks like guilt); the stencil "proves" which wartime site it came from (it proves only that it was once marked). | Origin; who swapped it; what it was bolted to. | None in v1. UL may echo it. |
+| **Who swapped the bars** | Deliberately unselected. Compatible with the Brookhollow black-market trade in steel (dossier) and with wartime ironwork being pulled from old sites. **No canon anchor's history is implied.** | The carrier cheated; or the importer did. | Retied tag; cut ends; plugged bolt-holes; a broad arrow and a number; the scale-keeper's tally and Corvin's weight difference. | The carrier did it (he is frightened, which looks like guilt); the stencil "proves" which wartime site it came from (it proves only that it was once marked). | Origin; who swapped it; what it was bolted to. | None in v1. UL may echo it. |
 
 ### HS.11 Integration needs
 
@@ -1107,7 +1135,7 @@ HS-D1.07 BRIGID: "Six on the bench. Strike each one on the horn. And listen past
 | Dull bar (ring) | "A flat thud. Nothing answers." | 2 of 6 |
 | Dull bar, ends | "Cut, not sheared. The importer's bars are sheared clean. These were cut from something longer." | — |
 | Dull bar, holes | "Holes drilled at even spacing and plugged with soft iron. It was bolted to something big." | — |
-| Dull bar, stencil | "Most of a stencil has been ground off. A broad arrow survives, and two letters: E, F." | — |
+| Dull bar, stencil | "Most of a stencil has been ground off. A broad arrow survives, and a number: 41." | — |
 | Importer's tag | "Tied on with newer cord than the bundle's." | — |
 | Tie-ends (stone) | "Old iron, set right through the stone. Warm to the hand when the hammer's going." | — |
 
@@ -1131,8 +1159,8 @@ HS-D3.03 BRIGID: "Out on the bridge, it breaks in a keeper's hand."   → end
 **The count** (`HS-D4`, Corvin and the carrier arrive)
 
 ```
-HS-D4.01 CORVIN: "Twelve bars crossed my scale yesterday with your consignment. I keep the scale tallies."
-HS-D4.02 CORVIN: "The bill says twelve bars at one weight. My tally says twelve bars at another. Three bars' difference."
+HS-D4.01 SCALE-KEEPER: (holding out a tally board) "Twelve bars crossed the toll scale yesterday with this consignment. That's the scale's tally."
+HS-D4.02 CORVIN: (reads the board and the bill side by side) "The bill says twelve bars at one weight. The scale says twelve at another." (beat) "Three bars' difference."
 HS-D4.03 CARRIER: "I didn't touch them. Bought the bundle tied, tag on, off a yard downriver."
   > "Swapped or added, Corvin?"                         → HS-D4.04
   > "Where did they come from?"                         → HS-D4.05
@@ -1141,7 +1169,7 @@ HS-D4.04 CORVIN: "Swapped. The count is right. The weight is not."              
 HS-D4.05 CORVIN: "I don't know where they came from. I know what they weigh."
 HS-D4.06 BRIGID: (quiet) "Somewhere that put an arrow on its iron."                    → HS-D4 options
 HS-D4.07 CARRIER: (looks at it) "...That's not my knot." (beat) "That's not my knot."
-HS-D4.08 CORVIN: "Then it was retied between the yard and my scale. That narrows the distance. Not the person."
+HS-D4.08 CORVIN: "Then it was retied between the yard and the toll scale. That narrows the distance. Not the person."
       {event: HS-D4 end → completes S04_count}
 ```
 
@@ -1172,6 +1200,8 @@ HS-D6.02 BRIGID: "Every keeper's blade on this bridge has been on my anvil, and 
   > [HS_TIES_SEEN] "The bridge hums at sound steel."     → HS-D6.05
   > "I'll be back."                                      → HS-D6.06
 HS-D6.03 BRIGID: "Ask the keepers. Ask the bridge. Mostly ask yourself."                    → HS-D6 options
+  > "What about a guard?"                                → HS-D6.07
+HS-D6.07 BRIGID: "Keepers drill guard on the yard. Take a turn with their sergeant." (beat) "Then bring me whatever you blocked with, bent, and I'll show you how it's mended. After that, how it's made."   {forge offers the basic guard repair and forging lesson (item pass defines it); reads SM_DRILL_DONE for the line "You've had the sergeant's drill. Good. Bring me the bent one."}   → HS-D6 options
 HS-D6.05 BRIGID: "It's old iron in old stone. My teacher said it was showing off." (beat) "I like it."   → HS-D6 options
 HS-D6.06 BRIGID: "Forge is yours when it's free. Buy honest stock off my bench. Ring everything."
       {set HS_BRIGID_QUEUE; small payment per HS.8; event: HS-D6 end → quest Completed}
@@ -1191,10 +1221,13 @@ HS-D6.06 BRIGID: "Forge is yours when it's free. Buy honest stock off my bench. 
 | Finding | Revision |
 |---|---|
 | The bridge hum could read as the steel "knowing" its past (memory-bearing material, rejected by the Woodland and Material Set designs). | Framed as acoustics in old ironwork that answers sound steel; dull bars are simply flawed. No grief, no memory, no identification. |
-| The stencil risked proving a wartime origin or an anchor's history. | A broad arrow and two letters only. Corvin says he doesn't know; his line is about weight. No anchor is tied to the bars. |
+| The stencil risked proving a wartime origin or an anchor's history. | A broad arrow and a number only. Corvin says he doesn't know; his line is about weight. No anchor is tied to the bars. |
 | Using the salvage for "non-load-bearing" work was considered. | Removed: war remains are excluded from routine supply. Both options keep it out of Brigid's work. |
 | The forge lacked readable danger without combat. | The cracking bar is a telegraphed lane hazard that cannot kill. |
-| Corvin's cameo could become a talk-to-X errand. | He walks to the forge himself, speaks four lines of numbers, and leaves. |
+| Corvin's cameo could become a talk-to-X errand. | He is at the forge on his own business, speaks a few lines of numbers, and leaves. |
+| Independent review pass: "I keep the scale tallies" invented record custody for Corvin (canon: granaries, grain flow, duplicate tallies). | A role-based toll-scale keeper brings the tally; Corvin only does the arithmetic aloud. |
+| Independent review pass: six bars tested, two dull, but "three swapped"; stencil "E, F" read as Edda or Fenmere. | The third bar is the one already on Brigid's anvil (`HS-D1`). The stencil is a broad arrow and a number, as in NB. |
+| Director ruling 9 (guard-capable setup). | Brigid offers a basic guard repair and forging lesson (`HS-D6.07`), linked to Act I's optional keepers' drill; no item stats. |
 
 ---
 
@@ -1213,7 +1246,20 @@ HS-D6.06 BRIGID: "Forge is yours when it's free. Buy honest stock off my bench. 
 
 ## Open questions for the Director and other passes
 
-1. **Guard-capable setup (Milestone 1)** is not taught by any of these five. Recommendation: let the item/encounter pass attach it to HS's opened heavy-protection work or to MQ2–4 encounters; do not add a sixth skill quest.
-2. **FK's hush is a flush.** It foreshadows MQ4 at Brookhollow. If the Act I package changes the flush schedule, FK's hush should still fall on a flush night (it is unlock-gated after MQ1, before MQ4 in most playthroughs). If a player completes MQ4 first, play the hush anyway; Nan's line still works, and Ansel's optional MQ3 line is skipped.
-3. **WC location tier.** Bible §4.1 places Ashenstead Fields at mid tier; WC uses its near margin right after MQ1. Confirm the margin sits at the Heartlands edge (MAP VERIFICATION REQUIRED).
-4. **Hide flow for BP.** BP never requires Hunting; the yard always sells a raw hide at cost. Confirm with the economy pass that this matches husbandry as baseline hide supply.
+1. **Guard-capable setup (Milestone 1)**: *resolved.* Act I MQ2's optional keepers' drill teaches it; HS adds Brigid's guard repair and forging lesson (`HS-D6.07`). No sixth skill quest.
+2. **FK's hush**: *resolved.* Before MQ4 it is a flush pulse; after MQ4 it is the fen backwater ([PROPOSAL — DIRECTOR]). It plays in both states, with a state-keyed inspect (FK.4).
+3. **WC location tier**: *resolved.* WC unlocks after MQ2, and its margin is on the Heartlands–Ashenstead edge. MAP VERIFICATION REQUIRED still applies.
+4. **Hide flow for BP**: raw hide stays purchasable at the yard, so Hunting is never required. **Economy pass to confirm** this matches husbandry as the baseline hide supply.
+5. **Main line without BP/HS**: Kell and Brigid sell or refurbish basic Milestone 1 pieces, so MQ3–4 never assume a side quest. Economy pass to confirm.
+
+## Independent review pass
+
+Applied the independent side-content review and Director rulings 8, 9, 10 and 11. Entries are in WC.12, BW.11, FK.12, BP.12 and HS.13.
+
+- **WC:** unlocks after MQ2, on the Heartlands–Ashenstead edge.
+- **FK:** the hush author truth is keyed to state.
+- **BP:** the bark payment is held until the peg (fixing the double-pay); the strap gets its strange moment; raw hide stays purchasable.
+- **HS:** corrected Corvin's custody, the three-bar count and the stencil; added the guard lesson.
+- **BW:** recorded the pronoun-neutral wording note.
+- **Rejected:** finding 20's "fold the close into the last action" for BW and HS. Their closing nodes carry choice variants and set the commission flags (`HS_BRIGID_QUEUE`), so they stay as dialogue.
+- **No flag renames in this file.**

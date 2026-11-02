@@ -17,7 +17,7 @@ Act I found the scheme. Act II found what the scheme broke and who can mend it. 
 | Quest | Code | Core verbs (primary first) | Distinct from |
 |---|---|---|---|
 | MQ10 The Crest Hall Reckoning | CR | **defend a building** (fire, carry, gate, miniboss), then **lay evidence** | TL proof is talk at a tollpost; MQ10 proof is objects carried to a table. MQ4's assault is attacking a site; MQ10 is defending one. |
-| MQ11 Stillwater's Vigil | SV | **escort, hold gates, boss**, then **seat a post** | MQ3's single rescue becomes a mass evacuation with a mechanic; MQ6's single gate hold becomes three sequenced gates; TL's seat-the-post returns as the climax. |
+| MQ11 Stillwater's Vigil | SV | **escort, hold gates, boss**, then **seat a post** | MQ3's single rescue becomes a mass evacuation with a mechanic; MQ4's single crank becomes three sequenced gates (the arc's culminating channel set piece; MQ6 and MQ7 deliberately use other loops); TL's seat-the-post returns as the climax. |
 | MQ12 The River Remains | RR | **journey, light, cross** | The only quest whose core is travel and witness. Combat-free by design. |
 
 **Length:** MQ10 40–45 min; MQ11 45–55 min (longest main quest; it is the Act III climax); MQ12 15–20 min required, up to 40 min with every optional station.
@@ -37,18 +37,20 @@ Act III never asks how an earlier flag was set; it reads only the §9.1 values. 
 | `LM_FLUSH_CALENDAR` | bool | MQ10 chip C6 exists | Always true after MQ6; authored false fallback in §10.5. |
 | `LM_BRYN_ROLL` | commons / household | MQ10 plan roll wording; MQ12 orchard | How Bryn is named on the Braid roll. |
 | `LM_ORCHARD_LOSS` | none / partial | MQ12 orchard | Orchard props and Bryn's line. |
-| `LM_SEDGE_TRUST` | warm / cool | MQ10 Sedge's one line; MQ11 Sedge lines; MQ12 refusal | Warmth of Sedge's words; never changes mechanics. |
-| `LM_ORIEL_PROMISE` | 3 values (authored in Act II) | MQ12 Oriel | Oriel quotes the player's promise back. This package keys her reply to `promise_1/2/3` (§12.11 open item). |
+| `LM_SEDGE_TRUST` | warm / cool | MQ10 Sedge's dusk lines; MQ11 Sedge lines; MQ12 refusal | Warmth of Sedge's words; never changes mechanics. Rule (Act II §MN.8): **cool** if `MN_ELK_KILLED` or the player named him the Field-Mage aloud (`MN_SAW = mage`); otherwise **warm**. No Act III line refers to either cause. |
+| `LM_ORIEL_PROMISE` | aloud / many_hands / return | MQ12 Oriel | Oriel quotes the player's exact MQ9 words back (`RR-D4.02`). |
 
 ### 0.3 Side-quest conditions read (never required)
 
 | Condition | Read in | Effect |
 |---|---|---|
-| completed side quest UL (*Under the Lamb*) | MQ10 | Rhosyn Lyle attends as witness; chip C8 (her forged papers) is available. |
+| `UL_LEDGER` (side quest UL, *Under the Lamb*) | MQ10 | Chip C8, the **crew ledger** (Rhosyn's pages included): pay drawn on "the Provisioner's purse", Board seal stamped on the pay chits. Weaker if `UL_LEDGER_CUT` (chit pages cut out). |
+| `UL_RHOSYN_WITNESS` | MQ10; MQ12 | Rhosyn attends under keeper protection and attests the ledger hand (+1 weight to C8; not a chip by itself). Without it she is absent from the hearing. Nothing requires her. |
+| `UL_RHOSYN_WITNESS` / `UL_RHOSYN_STAYS` / `UL_RHOSYN_FLED` | MQ12 Brookhollow | Rhosyn's MQ12 scene branches on the UL outcome, with a default for players who never did UL (`RR-D19`). |
 | completed side quest FW (*Fen Watch*) | MQ11 | Lessa's guide route opens as a second, faster evacuation lane. |
 | completed side quest CN (*The Candle Rule*) | MQ11 choice; ending | Annelise brings the recovered offering boat to the dawn choice; the Tend option gets its strongest argument and a launched-boat prop in the Tend/Shared ending. |
-| completed side quest OL (*Old Lantern*) | MQ11 choice; MQ12 | Ansel speaks for Shared from a settled place and hangs Joss Garrow's lantern at the edge; his MQ12 patrol book opens differently. |
-| completed side quest VK (*A Verse Kept Back*) | MQ11 after-hold; MQ12 far bank | A cutter hums the listeners' tune after the fen exhales; Nan sings the full verse on the far bank. |
+| `OL_JOSS_IN` / `OL_LANTERN_ONLY` (side quest OL, *Old Lantern*) | MQ11 arrival and choice; MQ12; Ending matrix | `OL_LANTERN_ONLY`: Ansel speaks for Shared and hangs Joss Garrow's dark lantern at the edge. `OL_JOSS_IN`: Joss is among the Reedmere evacuees in Elspeth's care; Ansel speaks with Joss sitting by the stove. Not done: Ansel speaks raw. If OL is complete, drift site `old_lantern_bend` stays **quieted** in every fen ending. His MQ12 patrol book opens differently per value. |
+| `VK_COMPLETE`; `VK_PERF_BOTH` / `VK_PERF_COUNT` / `VK_PERF_HUM` (side quest VK, *A Verse Kept Back*) | MQ11 after-hold; MQ12 far bank | A cutter hums the listeners' tune after the fen exhales. Nan's MQ12 song follows the performance the player chose in VK; without VK she hums the listeners' tune with its verse missing (`RR-D7.04`). |
 | completed side quest UR (*Unreplanted*) | MQ12 Ashenstead | Joric's line reflects what he decided about the ground. |
 | completed side quest NT (*Night Ferry*) | MQ12 Whisperflow | Dace is in the crossing crew and says one line. |
 | completed side quest BP / HS | MQ12 hand-off | Kell Ashby / Brigid Corliss deliver their commission line in person at the end. |
@@ -73,7 +75,7 @@ Act III never asks how an earlier flag was set; it reads only the §9.1 values. 
 | `CR_TERMS` | bare / firm / full | MQ10 | MQ11 vigil supplies line; MQ12 Marrick, Crestbridge, far bank |
 | `CR_MARRICK_STORES` | offered / ordered | MQ10 | MQ11 (food at Reedmere); MQ12 households' wording |
 | `CR_CREW_LENIENCY` | bool | MQ10 | MQ11 (Lock crew at gate 1); MQ12 Sallow |
-| `CR_RHOSYN_LAID` | bool | MQ10 | MQ12 Brookhollow; Side-quest package (UL epilogue) |
+| `CR_RHOSYN_LAID` | bool | MQ10 (C8 laid with `UL_RHOSYN_WITNESS`: she attested) | Side-quest package (UL epilogue). MQ12 reads the UL flags directly. |
 | `RR_MARK` | notch / ring / hatch | MQ12 | Whisperflow stone prop, post-game |
 
 ### 0.6 Quest items (bible §11.6: at most 2 per act package)
@@ -110,7 +112,7 @@ Everything else in Act III is carry state (record bundles, soaked sacks, a pre-n
 
 ## 10.1 The quest in one paragraph
 
-Aldric Fenmere has called the Vale to Crest Hall in the morning to agree a plan for the Braids, which is what Oriel asked for. The night before, Gideon Sallow's crew pours lamp oil down the Tally Stair, sets the keepers' record room alight and cuts the evidence barge loose at the hall's water-gate. The player wakes to the bell, cuts the fire-lines, carries the records out through the smoke, drags a scorched Keeper-Captain Hesketh into the yard with the Board's minute book under his arm, and fights Sallow on the gate landing in the dark while he cuts the lantern ropes. Sallow yields. In the morning the hearing takes ten minutes and happens with the player's hands: every proof they earned since Whisperflow is carried to the long table and set down in front of Provisioner Edda Marrick, who answers each one kindly and reasonably until there are too many to answer. The hall decides what happens to Hesketh, and the player names who will close the routes and who will tend the fen's memorial ground. The plan passes with roles and no rulers. At dusk Ansel walks in from the fen road: Stillwater has gone quiet, and not the good kind.
+Aldric Fenmere has called the Vale to Crest Hall in the morning to agree a plan for the Braids, which is what Oriel asked for. The night before, Gideon Sallow's crew pours lamp oil down the Tally Stair, sets the keepers' record room alight and cuts the evidence barge loose at the hall's water-gate. The player wakes to the bell, cuts the fire-lines, carries the keepers' records out through the smoke, drags a scorched Keeper-Captain Hesketh into the yard with the Board's minute book under his arm, runs the basin stage to make the drifting barge fast, and fights Sallow on the gate landing in the dark while he cuts the lantern ropes. Sallow yields. In the morning the hearing takes ten minutes and happens with the player's hands: every proof they earned since Whisperflow is carried to the long table and set down in front of Provisioner Edda Marrick, who answers each one kindly and reasonably until there are too many to answer. The hall decides what happens to Hesketh, and the player names who will close the routes and who will tend the fen's memorial ground. The plan passes with roles and no rulers. The player walks out with the plank crews to seal the Cut mouth, and at dusk Ansel comes up the towpath: Stillwater has gone quiet, and not the good kind.
 
 **What the player should remember:** carrying an armful of smouldering ledgers up a stair they had to cut open, and setting a pre-notched post on a table in front of the woman who paid for it. **What the player should want next:** to be at the fen when it lets go.
 
@@ -172,28 +174,28 @@ Fire-line 1 is on the stair. Fire-line 2 crosses the undercroft aisle; two crew 
 **Objective:** *Carry the records out to the yard (0/2).* → *Get the Keeper-Captain out.*
 Inside the record room two crew torch-bearers are lighting the piled records (E2). When they are engaged, they stop lighting. Two **record bundles** (carry state) wait on the shelves:
 
-- **Bundle 1, the keepers' crossing record:** whatever the keepers hold from Acts I–II. Always the depot requisition slip (`SM_requisition`) if Act I left it with the keepers; Hollis's Whisperflow report and the weathered post if `LM_TL_EVIDENCE = keepers`.
-- **Bundle 2, the Lock seizures box:** the Hollow Lock bill of lading (`NF_bill_of_lading`) if the keepers hold it; the keepers' Lock inspection report if `LM_LOCK_STATE = chained`; Tovin's calendar sheets if `LM_TOVIN_CREDITED = unsigned`.
+- **Bundle 1, the keepers' crossing record:** Hollis's Whisperflow report and the weathered post (if `LM_TL_EVIDENCE = keepers`); the keepers' Act I closure log.
+- **Bundle 2, the Lock seizures box:** the keepers' Lock inspection report (if `LM_LOCK_STATE = chained`); Tovin's floor sheets (`tovin_floor_sheets`, both `LM_TOVIN_CREDITED` values: Act II left them in the record room). If `UL_LEDGER`, the keepers' locked iron box from Brookhollow (the crew ledger) sits beside it; iron does not singe.
 
-(If Act I made any of these a player-held quest item, it is already safe in the player's inventory and simply is not in the bundle. The chip is identical either way.)
+**Custody rule.** The player has carried `SM_requisition` and `NF_bill_of_lading` since MQ2 and MQ4 (Act I item budget). They are never in the record room and the fire never threatens them. The player lays them on the table in the morning (C3, C4).
 
 Each bundle **smoulders** from the moment the player enters the record room. A bundle not carried out within about 90 seconds of entry is pulled out by keepers, singed: it stays a valid chip but loses 1 weight (minimum 1). Nothing can burn completely. The player can sprint while carrying, the route up the stair is the one they cut open, and a keeper at the top takes the bundle if the player hands it off there.
 
-Behind the Board press the player finds **Bram Hesketh**, hands burned, trying to drag the press cabinet away from the fire. He is not destroying anything. He is saving the book with his own signature in it (`CR-D4`). He gives the player **the Board's minute book** (`CR_board_minute`) and follows the player out (escort; he walks at sprint pace and never needs defending; crew ignore him). In the yard, Elspeth's absence is noted by a keeper ("Flow-Mender's in Ashenstead"); a keeper wraps his hands in wet sacking.
+Behind the Board press the player finds **Bram Hesketh**, hands burned, trying to drag the press cabinet away from the fire. He is not destroying anything. He is saving the book with his own signature in it (`CR-D4`). He gives the player **the Board's minute book** (`CR_board_minute`) and follows the player out (escort; he walks at sprint pace and never needs defending; crew ignore him). In the yard, Elspeth's absence is noted by a keeper ("Flow-Mender's in Ashenstead"); a keeper wraps his hands in wet sacking. **Named only:** if `LM_TOVIN_CREDITED = named`, Hollis takes Tovin's sheets off the cart and hands them to Tovin at the yard door, so that he can lay them himself in the morning.
 **Verbs:** carry, fight, rescue.
 
 ### Beat 4 — The Water-Gate (`S05_water_gate`)
-**Objective:** *Stop them sinking the barge.* → *Drop the water-gate.*
-A keeper runs up from below: the crew are at the barge. The player goes down through the Granary Passage into the Water-Gate Hall. Three crew pole-men and two cutters are cutting the barge's scuttling lines and poling it toward the open gate (E3). The player must:
-1. **Re-make the scuttling lines** (3 interactions, 2 s each, on the gate rail): the barge's plugs stay in.
-2. **Drop the water-gate** (5 s channelled crank on the chain winch): the barge cannot drift out.
+**Objective:** *Make the barge fast.* → *Drop the water-gate.*
+A keeper runs up from below: the crew are at the barge. The player goes down through the Granary Passage into the Water-Gate Hall. The crew have pulled the barge's plugs' lines and cut it loose; three pole-men and two cutters (E3) are **poling it along the basin toward the open gate**. This is a chase on the stage, not a channel:
+1. **Throw two mooring lines.** The barge drifts past two bollards on the stage. At each, a coiled line lies ready; the player runs to the bollard and **throws** (instant interaction) onto the barge's cleat as it comes level. The barge is a moving target that waits for the player: while the player is within 6 m of the next bollard, the pole-men struggle with the current and the barge slows to a crawl beside it. Crew on the stage try to shove the player off the line (pole-men's trip, E3).
+2. **Drop the water-gate.** Once both lines hold, the barge is fast against the stage and keepers re-seat its plugs. The gate's chain winch is released with a **single lever pull**; the iron gate drops with a crash.
 
-When the gate begins to drop, the basin surges and one young pole-man is swept off the stage and pinned against the gate bars by the current, clinging to the chain. **Optional (`S05b_haul`):** the player can haul him out (3 s channel at the basin edge) before the step ends. If they don't, keepers fish him out afterwards. Nobody drowns in Crest Hall tonight.
-**Verbs:** fight, interact, optional rescue.
+When the gate drops, the basin surges and one young pole-man is swept off the stage and pinned against the gate bars by the current, clinging to the chain. **Optional (`S05b_haul`):** the player can haul him out (3 s channel at the basin edge) before the step ends. If they don't, keepers fish him out afterwards. Nobody drowns in Crest Hall tonight.
+**Verbs:** chase, throw, fight, optional rescue.
 
 ### Beat 5 — Sallow (`S06_sallow`) `[ANTAGONIST]`
 **Objective:** *Stop Gideon Sallow.*
-Sallow comes up the far steps from his skiff, cheerful and soaked, and touches the gate chain before he says a word (`CR-D5`). He wants the barge gone and then he wants to be gone. The miniboss fight on the Gate Landing is specified in §10.6. At 20% health he yields: he drops the boat-hook into the basin and holds the gate chain with both hands. He is not killed. Enemies in Caelmor never flee; Sallow surrenders, which is a scripted end to the encounter, not a retreat.
+Sallow comes up the far steps from his skiff, cheerful and soaked, and touches the gate chain before he says a word (`CR-D5`). He wants the barge gone and then he wants to be gone. The miniboss fight on the Gate Landing is specified in §10.6. At 20% health he yields: he drops the boat-hook into the basin and holds the gate chain with both hands. He is not killed. Enemies in Caelmor never flee; Sallow surrenders, which is a scripted end to the encounter, not a retreat. **[PROPOSAL — DIRECTOR]** (yield at a health threshold; runtime need in §10.13). His crew in E1–E3 are **downed** at 0 HP: they yield and stay down, presented as beaten, never killed (shared rule with the side-quest packages).
 The yield conversation (`CR-D6`) offers the player his account. There are two ways in, and both are always available:
 - **If `CR_HAULED_CREWMAN`:** "You pulled the lad out." He gives the **full account**: the Lock, the posts, the buyer's name as written on the bill, and that "the lady said there should be nothing to read in the morning." (Chip C9, weight 2.)
 - **Otherwise, or as well:** the player tells him what the flushes did to the fen. He fears the fen more than the keepers. He gives the **Lock account** only: how the flushes were run, which posts were moved. He will not speak about tonight. (Chip C9, weight 1.)
@@ -201,18 +203,18 @@ Either way he asks one thing in return: that his crew work the Cut seal instead 
 **Verbs:** fight, judge.
 
 ### Beat 6 — Dawn in the Yard (`S07_dawn`)
-**Objective:** *Wait for the morning bell.*
-The yard at first light: soot, a kettle, a cart bed of rescued records, keepers asleep sitting up. Hesketh with bandaged hands. Aldric arrives, looks at everything, says very little (`CR-D7`). Optional: cook at the keepers' fire and hand food round (`S07b_feed`; unlocks a keeper bark at the hearing and a warmer Hesketh line). The player uses the yard bell-rope ("Wait for the bell", a watch interaction) to advance to the hearing.
+**Objective:** *Go into the hall.*
+The yard at first light: soot, a kettle, a cart bed of rescued records, keepers asleep sitting up. Hesketh with bandaged hands. Aldric arrives, looks at everything, says very little (`CR-D7`). Optional: cook at the keepers' fire and hand food round (`S07b_feed`; unlocks a keeper bark at the hearing and a warmer Hesketh line). There is no wait: when the player walks into the Long Hall, the morning bell rings and the hearing begins.
 
 ### Beat 7 — The Long Table (`S08_table`) `[ANTAGONIST]`
 **Objective:** *Lay what you found on the table.*
 The hall is full. Board members on their bench. Households in the gallery. Aldric at the table, not at its head. Marrick at the Board's end, gloves folded beside her.
 
-The hearing is short and physical. Every chip is an object. Its **holder** stands along the hall wall with it (Corvin with his tallies, Maelin with the old post, the record cart by the door, Hollis with the barge post, Rhosyn if present, Sallow in keepers' custody by the floor-grate). The player takes each chip from its holder (carry state; a one-line exchange with the holder) and **sets it on the table** (deposit volume on the table's cloth). When it lands, the holder or Hesketh says what it is in one line, and Marrick answers it, warmly and reasonably, in one or two lines (`CR-D8`). Then the player chooses the next chip.
+The hearing is short and physical. Every chip is an object. Its **holder** stands along the hall wall with it (Corvin with his tallies, Maelin with the old post, the record cart by the door, Hollis with the barge post and, if `UL_LEDGER`, the keepers' locked box, Tovin with his sheets if named, Rhosyn between two keepers only if `UL_RHOSYN_WITNESS`, Sallow in keepers' custody by the floor-grate). The player's own items (`SM_requisition`, `NF_bill_of_lading`, and the post if `LM_TL_EVIDENCE = player`) are laid straight from inventory. A holder's hand-over and the reading play as **one line combined**; Marrick's answer follows. The player takes each chip from its holder (carry state; a one-line exchange with the holder) and **sets it on the table** (deposit volume on the table's cloth). When it lands, the holder or Hesketh says what it is in one line, and Marrick answers it, warmly and reasonably, in one or two lines (`CR-D8`). Then the player chooses the next chip.
 
 After the **third valid chip**, Aldric stands: "That's enough to answer." The player may stop there or keep laying chips for better terms (§10.5). Rejected objects (§10.5.3) can be laid; the table refuses them in one line, they don't count and there is no penalty. When the player says "That's all of it," or lays the last chip they have, Aldric reads the finding and Marrick gives her last answer.
 
-The **strange moment** happens here (§10.7): when the Board's minute book is read aloud, the water-gate under the floor goes silent.
+The **strange moment** does **not** happen during the reading of any record. It belongs to the plan's agreement (Beat 9, §10.7).
 **Verbs:** carry, present, judge.
 
 ### Beat 8 — The Keeper-Captain (`S09_hesketh`)
@@ -224,7 +226,7 @@ Hesketh stands and says he signed every blanket order in the minute book without
 
 ### Beat 9 — The Braid Plan (`S10_plan`)
 **Objective:** *Name who keeps the routes and the memorial ground.*
-Aldric does not propose the plan. He says Fenmere convenes and does not keep, and asks the player to speak first, since Oriel's condition was given to them (`CR-D10`). Sedge stands at the back by the door, says one sentence about risk when asked, and leaves. The plan has fixed roles and two the player names:
+Aldric does not propose the plan. He says Fenmere convenes and does not keep, and asks the player to speak first, since Oriel's condition was given to them (`CR-D10`). Sedge is not in the hall: he would not stand in front of the whole Vale (he speaks to the player alone at dusk, Beat 10). The plan has fixed roles and two the player names:
 
 | Role | Who | Chosen? |
 |---|---|---|
@@ -234,14 +236,16 @@ Aldric does not propose the plan. He says Fenmere convenes and does not keep, an
 | Patrol heavy water, log it, carry smoke | Wraithwatchers | Fixed |
 | Turn field and orchard Braid ditches | Farm workers, Bryn Ruddock named (wording by `LM_BRYN_ROLL`) | Fixed |
 | Keep a trance-care station at every vigil | Flow-Menders, Elspeth Quill named | Fixed |
-| Seal the Relief Cut today, at both ends | Crews and keepers together; Lock crew if `CR_CREW_LENIENCY` | Fixed |
+| Seal the Relief Cut today, at both ends, **and plank the Cut-side culverts** the backwater has been using | Crews and keepers together; Lock crew if `CR_CREW_LENIENCY` | Fixed |
 | Grain for the vigil and the far bank | House Marrick's stores (`CR_MARRICK_STORES`) | Set by terms |
 
-**No new government:** the roll is not a council and has no chair. Each role-holder says "Aye" aloud in the hall (barks), and the roll is written three times, in the keepers' record, the crews' book and the Watchers' patrol book, so that no one office holds the only copy. Crews will cut the tenders' marks into each Braid stone they tend (pays off in MQ12). Oriel's condition is met in the only form Lowmark has: everyone heard it at once.
+**No new government:** the roll is not a council and has no chair. Each role-holder says "Aye" aloud in the hall (barks), and the roll is written three times, in the keepers' record, the crews' book and the Watchers' patrol book, so that no one office holds the only copy. Crews will cut the tenders' marks into each Braid stone they tend (pays off in MQ12). Oriel's condition is met in the only form Lowmark has: everyone heard it at once. When Aldric asks *"Is it agreed?"* and the hall answers *"Aye"*, the **strange moment** plays (§10.7). Marrick, already at the door, has one parting bark.
 
 ### Beat 10 — Dusk (`S11_dusk`)
-**Objective:** *Speak with Ansel.*
-The crews and keepers leave with stop-planks for both ends of the Cut. The day passes on a short "Wait until dusk" interaction in the yard or by entering the Waiting Wall volume after the plan. At dusk Ansel walks in off the fen road with his lantern unlit (`CR-D11`): since noon, when the crews dropped the last plank, Stillwater has gone still. No birds. Fog lying flat. "Like it's holding its breath. I've never been scared of quiet before." The quest completes; MQ11 is offered.
+**Objective:** *Go with the plank crews to the Cut mouth.* → *Speak with Ansel.*
+The crews and keepers leave with stop-planks. The fen end and the culverts along the straight are planked by early afternoon; the river-end crews carry the last planks to the Cut mouth. The player **walks with them** down the towpath (walk-with; no wait interaction). **Dusk falls during the walk.** At the mouth the player may carry and drop the last plank into its groove (optional; carry state). **The planks close the Cut-side culverts the backwater has been using; for the first time since MQ4 the fen has no way out at all.**
+Ansel comes up the towpath with his lantern unlit (`CR-D11`): since the fen-end planks went in, Stillwater has gone still. No birds. Fog lying flat. "Like it's holding its breath. I've never been scared of quiet before." **Sedge** is sitting on the mouth's silt sill, beside Ansel, out of sight of any hall. He speaks to the player only (`CR-D11.10–.12`) `[D-7]`. The quest completes; MQ11 is offered.
+**MAP VERIFICATION REQUIRED:** the Cut mouth is a short towpath walk from Crest Hall's bank.
 
 ## 10.5 Evidence chips
 
@@ -251,20 +255,20 @@ The crews and keepers leave with stop-planks for both ends of the Cut. The day p
 - **Exposure:** any **three valid chips** expose Marrick (`LM_MARRICK_EXPOSED = true`).
 - **Terms:** the total **weight** of laid chips sets `CR_TERMS`: **bare** (under 8), **firm** (8–11), **full** (12 or more). Some chips also add a specific **clause** to the plan whatever the tier.
 - **Singeing:** chips in record bundles lose 1 weight if the bundle was singed (minimum 1). Singeing never invalidates a chip.
-- **Costs:** three chips cost something to lay (C6 named, C8, C9). The player can always leave them on the wall.
+- **Costs:** two chips cost something to lay (C6 named, C9). C8's cost was paid inside *Under the Lamb*. The player can always leave a costed chip on the wall.
 
 ### 10.5.2 Chip table
 
 | # | Chip (what goes on the table) | Source quest / flag | Holder at the hearing | Weight | What it shows | Clause it adds | Cost of laying | Marrick's answer (`CR-D8`) → what beats it |
 |---|---|---|---|---|---|---|---|---|
-| **C1** | **The Whisperflow proof:** the weathered post (and dispatch order, if obtained). | MQ1 · `LM_TL_EVIDENCE` | keepers → record cart (bundle 1); riverfolk → Maelin, with a second pre-notched post her crews pulled from another bend; player → the player's own inventory | 1 (riverfolk: 2) | A crossing post was swapped to read open on a flush night; the order presumed it. | All crossing posts re-seated on their stones by crews within the season. | — | "Anyone can move a post on a dark bank." → beaten by C5. |
-| **C2** | **Corvin's duplicate tallies:** 120 sacks drawn, 40 carried by road. | MQ2 complete | Corvin Tath | 2 | The draw and the delivery don't match. | The 80 sacks are owed, by count, to the far-bank households. | — | "Grain is lost every season, to damp, to rats, to goblins under the depot." → beaten by C3 or C4. |
-| **C3** | **The depot slip** (`SM_requisition`). | MQ2 complete | record cart (bundle 1), or the player | 1 | A night draw under Board seal, lowered by rope, not carried by goblins. | — | — | "The Board's seal goes on a hundred slips a season. I can't account for every clerk." → beaten by C7. |
-| **C4** | **The Hollow Lock bill of lading** (`NF_bill_of_lading`). | MQ4 complete | record cart (bundle 2), or the player | 2 | Board-sealed grain sold to an outside buyer at priority rates. | The buyer's priority contracts are voided in the keepers' record. | — | "A buyer downriver paid what we could not refuse. The far bank ate because of it." → beaten by C2 (the far bank got 40 of 120). |
-| **C5** | **The Hollow Lock posts:** one pre-notched yellow post from the barge's stock (the player carries it from the barge); plus the keepers' in-place Lock inspection report if chained. | MQ4 · `LM_LOCK_STATE` | Hollis (post); record cart (report) | chained: 2 · smashed: 1 | The posts were cut a hand high in advance, at the Lock, by the Lock crew. | Keepers' countersign is required before any marker is replaced. | — | "Smugglers. My factor hired badly, I grant you." → beaten by C4 (her seal) or C9. |
-| **C6** | **Tovin's flush calendar.** | MQ6 · `LM_FLUSH_CALENDAR`, `LM_TOVIN_CREDITED` | named → Tovin, in person; unsigned → record cart (bundle 2) | named: 2 · unsigned: 1 | Every flush night falls a day after an emergency draw. | Tovin's sheets are pinned in the keepers' hall (MQ12). | Named: Tovin must stand up in front of the hall and answer one question. He does. | "Pretty drawings. Whose?" → beaten by C7 (dates in her own book line up). |
+| **C1** | **The Whisperflow proof:** the weathered post (and dispatch order, if obtained). | MQ1 · `LM_TL_EVIDENCE` | keepers → record cart (bundle 1, singeable); riverfolk → Maelin, with a second pre-notched post her crews pulled from another bend; player → the player's own inventory | 1 (riverfolk: 2) | A crossing post was swapped to read open on a flush night; the order presumed it. | All crossing posts re-seated on their stones by crews within the season. | — | "Anyone can move a post on a dark bank." → beaten by C5. |
+| **C2** | **Corvin's duplicate tallies:** 120 sacks drawn, 40 carried by road. | MQ2 complete | Corvin Tath | 2 | The draw and the delivery don't match. | Every sack the far bank never got is owed, by count. | — | "Grain is lost every season, to damp, to rats, to goblins under the depot." → beaten by C3 or C4. |
+| **C3** | **The depot slip** (`SM_requisition`). | MQ2 complete | the player (quest item since MQ2; never in the fire) | 1 | A night draw under Board seal, lowered by rope, not carried by goblins. | — | — | "The Board's seal goes on a hundred slips a season. I can't account for every clerk." → beaten by C7. |
+| **C4** | **The Hollow Lock bill of lading** (`NF_bill_of_lading`). | MQ4 complete | the player (quest item since MQ4; never in the fire) | 2 | Board-sealed grain sold to an outside buyer at priority rates. | The buyer's priority contracts are voided in the keepers' record. | — | "A buyer downriver paid what we could not refuse. The far bank ate because of it." → beaten by C2 (the far bank got 40 of 120). |
+| **C5** | **The Hollow Lock posts:** one pre-notched yellow post from the barge's stock (Hollis brings it up from the barge); plus the keepers' in-place Lock inspection report if chained. | MQ4 · `LM_LOCK_STATE` | Hollis (post); record cart (report, bundle 2, singeable) | chained: 2 · smashed: 1 | The posts were cut a hand high in advance, at the Lock, by the Lock crew. | Keepers' countersign is required before any marker is replaced. | — | "Smugglers. My factor hired badly, I grant you." → beaten by C4 (her seal) or C9. |
+| **C6** | **Tovin's flush calendar.** | MQ6 · `LM_FLUSH_CALENDAR`, `LM_TOVIN_CREDITED` | named → Tovin, in person (Hollis hands him the sheets at the yard door after the fire); unsigned → record cart (bundle 2) | named: 2 · unsigned: 1 (singeable either way: the sheets were in bundle 2) | Every flush night falls a day after an emergency draw. | Tovin's sheets are pinned in the keepers' hall (MQ12). | Named: Tovin must stand up in front of the hall and answer one question. He does. | "Pretty drawings. Whose?" → beaten by C7 (dates in her own book line up). |
 | **C7** | **The Board's minute book** (`CR_board_minute`). | MQ10 Beat 3 (guaranteed) | the player | 2 | Every emergency was moved by the Provisioner and carried on her motion; Hesketh signed the blanket orders that followed. | Board emergency powers need a crossing keeper's countersign. | Hesketh's name is read aloud with hers. | "I moved them because the households were hungry. Read the minute: I said so every time." → beaten by any two of C2/C4/C6. |
-| **C8** | **Rhosyn's forged papers:** keeper-passes she made for Sallow's hires, paid from House Marrick's purse. | completed side quest UL | Rhosyn Lyle, in person | 2 | The Lock crew were hired under false passes with Marrick money. | Crew hired on false passes may work the seal instead of the lock-up. | Rhosyn's cellar trade ends; the workers she papered must register (MQ12). Sets `CR_RHOSYN_LAID`. | "A forger. In my hall. Bless you." → beaten by the purse ledger page Rhosyn shows. |
+| **C8** | **The crew ledger** from under the Lamb, Rhosyn's pages included: crew pay drawn on "the Provisioner's purse", the Board seal stamped on the pay chits. | `UL_LEDGER` (side quest UL); weaker if `UL_LEDGER_CUT`; testimony if `UL_RHOSYN_WITNESS` | Hollis, with the keepers' locked iron box (UL-D6.04); Rhosyn between two keepers only if `UL_RHOSYN_WITNESS` | 2 · `UL_LEDGER_CUT`: 1 · +1 if `UL_RHOSYN_WITNESS` attests the hand | Who paid the crew: the Provisioner's purse, under Board seal. | Full ledger only: the licensed haulers whose passes the crew used answer to the keepers before they haul again (`UL_LEDGER_CUT` cannot name them). | None at the table (UL already settled Rhosyn's fate). `UL_RHOSYN_WITNESS` + laid sets `CR_RHOSYN_LAID`. | "A cellar book. Anyone can write 'the Provisioner' in a cellar." → full: beaten by the seal stamped on the chits; cut: beaten by C4 (the same seal on the bill). |
 | **C9** | **Sallow's account.** | MQ10 Beat 5 (optional; always reachable) | Sallow, in keepers' custody | full: 2 · Lock only: 1 | Full: the Lock, the posts, the buyer, and that she wanted "nothing to read in the morning." Lock only: how the flushes were run. | Lock crew work the seal under keeper watch. | Requires the player's word (`CR_CREW_LENIENCY`). Maelin's crews dislike working beside the Lock crew (MQ11 bark). | "My factor will say anything to stay dry." → beaten by C5 + C4 together. |
 
 ### 10.5.3 Not chips (the table refuses them)
@@ -274,12 +278,12 @@ Players may try to lay these. Each draws one line (`CR-D8.R*`), counts for nothi
 | Object | Refusal (speaker) |
 |---|---|
 | Ansel's patrol book, drift entries | ALDRIC: "It tells us when the water went wrong. It doesn't tell us who." |
-| Joss Garrow's lantern (OL) | ANSEL: "That's a man's lantern, not a witness. Put it down gently." |
-| Any account of the stone holding a line, the flow-table, or drift | MARRICK: "The river has opinions now? How flattering for all of us." |
+| Joss Garrow's lantern (`OL_LANTERN_ONLY`; lifted from the Lantern Post hook) | ANSEL: "That's a man's lantern, not a witness. Put it down gently." |
+| Any account of the stone holding a line, the flow-table, or drift | MARRICK: "The river has opinions now?" |
 
 ### 10.5.4 Guaranteed path
 
-From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: seven valid chips. The minimum main-only weight with every bundle singed is 9 (**firm**). The maximum main-only weight is 13 (**full**), with riverfolk, chained, named and no singeing. C7 is earned inside MQ10 and cannot be missed, because Beat 3 cannot complete without Hesketh. **Fallback:** if `LM_FLUSH_CALENDAR` were somehow false, C6 is absent and six chips remain. No combination of earlier flags leaves fewer than three.
+From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: seven valid chips. C3 and C4 are always in the player's hands and can never singe. The minimum main-only weight with every bundle singed is 10 (**firm**). The maximum main-only weight is 13 (**full**), with riverfolk, chained, named and no singeing. C7 is earned inside MQ10 and cannot be missed, because Beat 3 cannot complete without Hesketh. **Fallback:** if `LM_FLUSH_CALENDAR` were somehow false, C6 is absent and six chips remain. No combination of earlier flags leaves fewer than three.
 
 ### 10.5.5 Terms
 
@@ -320,12 +324,12 @@ From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: 
 
 | Element | Spec |
 |---|---|
-| Trigger | Server event `cr.minute_read` when `CR_board_minute` is laid and Hesketh reads its first entry aloud. If the player never lays C7, it fires instead when Aldric reads the finding. |
+| Trigger | Server event `cr.plan_agreed` when the hall answers **"Aye"** to Aldric's *"Is it agreed?"* (`CR-D10.33`). It never fires during the reading of any record, chip or finding. |
 | Duration | ~6 s. |
-| Audio | The water-gate's lap and gurgle, audible through the floor-grates all morning, ducks to silence over 1 s. The hall's own sounds (a cough, a bench, Hesketh's voice) stay. The water returns as a single lap. |
+| Audio | The water-gate's lap and gurgle, audible through the floor-grates all morning, ducks to silence over 1 s under the overlapping "Aye"s. The hall's own sounds stay. The water returns as a single lap. |
 | Visual | The thin ripple-light that plays across the ceiling from the grates stops moving. Nothing else. |
-| NPCs | A few gallery households look down at the grates. Hollis looks at the player. Nobody remarks except Marrick, who says one line after the sound returns (`CR-D8.70`). |
-| Meaning | **Nothing is proved by it.** The finding rests on the chips. In author truth, the water-gate sits on an old Braid outfall and the Cut's sealing that afternoon is foreshadowed; no one in the hall knows that. |
+| NPCs | A few gallery households look down at the grates. Hollis looks at the player. Marrick, already at the hall door, has one parting bark as she goes (`CR-D10.40`): *"Even the river came to the meeting. How flattering for all of us."* `[ANTAGONIST]` |
+| Meaning | **Nothing is proved by it, and nobody is accused by it.** It is tied to the many hands agreeing (Oriel's condition), not to any person or record. In author truth, the water-gate sits on an old Braid outfall that the afternoon's sealing will change; no one in the hall knows that. |
 | UI | None. |
 
 ## 10.8 Steps and completion events
@@ -337,15 +341,15 @@ From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: 
 | `S02_alarm` | Find the fire. | Enter Tally Stair volume | Yes | Night state begins on `S01` completion |
 | `S03_firelines` | Cut the fire-lines (0/3). | 3 × (interaction `cut_hoarding` complete OR soaked-sack deposit on oil trail) | Yes | E1 at line 2 |
 | `S04_records` | Carry the records out (0/2). Get the Keeper-Captain out. | 2 bundle-deposit events (or keeper hand-off) + Hesketh escort enters yard volume + `CR_board_minute` acquired (`CR-D4`) | Yes | Bundle smoulder timers start on record-room entry; singe sets `CR_SINGED_B1/B2` |
-| `S05_water_gate` | Stop them sinking the barge. Drop the water-gate. | 3 × `remake_line` + `drop_gate` channel complete + E3 defeated | Yes | |
+| `S05_water_gate` | Make the barge fast. Drop the water-gate. | 2 × `throw_mooring_line` (instant, at the moving barge beside each bollard) + `drop_gate_lever` (single pull) + E3 downed | Yes | Barge slows beside the next bollard while the player is within 6 m |
 | `S05b_haul` | (Optional) Haul the crewman out. | Interaction `haul_crewman` complete before `S05` completes | No | Sets `CR_HAULED_CREWMAN` |
 | `S06_sallow` | Stop Gideon Sallow. | Event `cr.sallow_yield` + `CR-D6` end node | Yes | |
-| `S07_dawn` | Wait for the morning bell. | `CR-D7` end + watch interaction `wait_for_bell` | Yes | |
+| `S07_dawn` | Go into the hall. | `CR-D7` end + enter Long Hall volume (the bell rings on entry) | Yes | No wait interaction |
 | `S07b_feed` | (Optional) Feed the keepers. | Item-given: cooked food to a keeper | No | `CR_FED_KEEPERS` |
 | `S08_table` | Lay what you found on the table. | ≥3 valid chip deposits + `CR-D8.90` (finding) end node | Yes | Sets `LM_MARRICK_EXPOSED`, `CR_TERMS`, `CR_MARRICK_STORES` |
 | `S09_hesketh` | Decide whether to speak for Hesketh. | `CR-D9` choice resolved | Yes | Sets `LM_HESKETH` |
-| `S10_plan` | Name who keeps the routes and the memorial ground. | `CR-D10` both choices resolved | Yes | Sets `LM_PLAN_ROUTES`, `LM_PLAN_MEMORIAL` |
-| `S11_dusk` | Speak with Ansel. | `CR-D11` end node | Yes | Quest → Completed; MQ11 offered |
+| `S10_plan` | Name who keeps the routes and the memorial ground. | `CR-D10` both choices resolved + `CR-D10.33` "Aye" | Yes | Sets `LM_PLAN_ROUTES`, `LM_PLAN_MEMORIAL`; fires `cr.plan_agreed` (§10.7) |
+| `S11_dusk` | Go with the plank crews to the Cut mouth. Speak with Ansel. | Walk-with arrives at the Cut-mouth volume (dusk falls during the walk) + `CR-D11` end node | Yes | Optional `drop_last_plank` carry. Quest → Completed; MQ11 offered |
 
 ## 10.9 Flags (quest-local)
 
@@ -356,7 +360,7 @@ From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: 
 | `CR_SALLOW_ACCOUNT` (none / lock / full) | `CR-D6` | C9 weight |
 | `CR_CREW_LENIENCY` | `CR-D6` | C9 validity; plan clause; MQ11 gate-1 crew; MQ12 |
 | `CR_TOVIN_STOOD` | C6 laid with named | MQ12 Tovin line |
-| `CR_RHOSYN_LAID` | C8 laid | MQ12; UL epilogue |
+| `CR_RHOSYN_LAID` | C8 laid with `UL_RHOSYN_WITNESS` (she attested) | UL epilogue |
 | `CR_CHIPS_LAID` (count), `CR_WEIGHT` (sum) | `S08` | `CR_TERMS` |
 | `CR_TERMS`, `CR_MARRICK_STORES` | `S08` | MQ11, MQ12 |
 | `CR_HESKETH_SELF` | `CR-D9` | MQ12 Hesketh line |
@@ -367,7 +371,7 @@ From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: 
 | Choice | Options | Immediate | Later |
 |---|---|---|---|
 | **Sallow's terms** | Give your word (crew work the seal) / Refuse | Word: C9 is valid; the Lock crew go up the Cut with the seal crews. Refuse: C9 unavailable; crew to the lock-up. | MQ11: Lock crew on gate 1 under keeper watch (word). MQ12: Sallow at the Cut mouth with a shovel (word) or behind the lock-up grille (refuse). |
-| **Which chips** | Any subset ≥3 | Terms tier and clauses (§10.5). | C6 named → Tovin stood (MQ12). C8 → Rhosyn's cellar closes, her workers registered as gate hands (MQ12). |
+| **Which chips** | Any subset ≥3 | Terms tier and clauses (§10.5). | C6 named → Tovin stood (MQ12). C8 (full) → licensed haulers answer to the keepers. Rhosyn's MQ12 fate follows the UL outcome, not the table. |
 | **Hesketh** | Speak for him / Say nothing / Let him speak for himself | kept: he stays Keeper-Captain, under the new countersign rule. stood-down: Aldric stands him down, and he asks to be put on the Cut seal crew. Self: he stands himself down before anyone can. | MQ12 Crestbridge scene. The Crestbridge Guard commission is given by Hesketh (kept) or by the Keeper-Lieutenant with Hesketh's word behind it (stood-down). |
 | **Route keeper** | Crews / Keepers / Shared | Who calls crossings during a pulse. | MQ11: who marshals the evacuation lanes. MQ12: who lights the Whisperflow posts with the player (crews: Maelin's hands; keepers: Hollis; shared: both). |
 | **Memorial keeper** | Watchers / Gardens / Reedmere | Who tends the fen's memorial ground. | MQ11: who stands the Widow's Step station through the vigil. Ending: who keeps the Tend channel or the Seal boundary's remembrance post. |
@@ -390,6 +394,7 @@ From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: 
 | Slow siege | Bundles singe (−1 weight, never invalid). No other timer exists. |
 | Player has no cutting tool | Smother method on every fire-line. |
 | Player refuses Sallow's terms | Six or more valid chips remain. |
+| Player never did *Under the Lamb* | No C8 and no Rhosyn; nothing else changes. |
 | Player lays only rejected objects | The table refuses them; the holders keep offering the real chips. |
 | Fail state | None. |
 | Co-op | Each partner's chips are their own (a partner cannot lay your C8). Siege creatures are shared on matching steps. The hearing runs per player; partners present see their own table state (per-player props). **Fallback** if per-player table props are not ready: chips are laid by dialogue with the holder ("Lay it on the table") and only the speaking holder's prop appears. |
@@ -402,9 +407,10 @@ From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: 
 | Smoulder timer on carry objects | Systems | Per-object timer started by enter-volume; on expiry sets a flag and teleports the object to the yard. |
 | Carry state (bundles, sacks, chips, barge post) | Systems | Same as MQ1. |
 | Table deposit volume with per-chip validity and weight | Schema & Content | A list of chip ids with conditions, weight and singe flag; deposit event increments `CR_CHIPS_LAID`/`CR_WEIGHT`. |
-| Miniboss yield at health threshold | Systems + Gameplay | Health-threshold event that ends combat and switches the creature to a non-hostile NPC. Same mechanism used by no other v1 creature; flagged as new. |
+| Miniboss yield at health threshold **[PROPOSAL — DIRECTOR]** | Systems + Gameplay | Health-threshold event (20%) that ends combat and switches the creature to a non-hostile NPC. **Runtime need:** the same mechanism serves Joss Garrow's yield in *Old Lantern*; flagged as new for the runtime. Human crew use the shared "downed at 0 HP" presentation (yield and stay down). |
+| Moving barge with bollard wait points | Systems | Pathed prop (as MQ4's barge) that slows beside the next bollard while the player is near; two instant line-throw interactions. |
 | Lantern-rope prop (drop + relight) | Systems + art | Breakable light with a relight interaction. Reused for MQ11 lantern racks. |
-| Audio duck on `cr.minute_read` | Audio | Local duck of the water-gate emitter. |
+| Audio duck on `cr.plan_agreed` | Audio | Local duck of the water-gate emitter and ceiling ripple-light pause. |
 
 ## 10.14 Mystery ledger entries
 
@@ -412,7 +418,7 @@ From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: 
 |---|---|---|---|---|---|---|
 | Who ordered the fire | Marrick, by implication, to Sallow. | "Her factor's crew did it." | Only C9 full ("nothing to read in the morning"). | Marrick lit it herself; Hesketh tried to burn his orders. | Whether she meant fire. She never says. | MQ10 (testimony only). |
 | Who the buyer was | A name on a bill; outside Lowmark. | "Someone downriver." | C4. | Emberholt; a rival Lowmark house. | Everything beyond the name. **No v1 content names a region.** | Future region (not v1). |
-| Why the water-gate stilled | The gate sits on an old Braid outfall. | "The river was listening." | The silence; Marrick's joke. | The river judged her. | All of it. | Never. |
+| Why the water-gate stilled | The gate sits on an old Braid outfall. | "The river came to the meeting." | The silence at the "Aye"; Marrick's parting joke. | The river approved the plan. | All of it. | Never. |
 
 ## 10.15 Open decisions
 
@@ -429,7 +435,12 @@ From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: 
 | Marrick's answers read as denials. | Rewrote every answer as a reasonable, partly true explanation, each beaten by a *different* chip, so the order the player lays them matters to the conversation. |
 | Hesketh was a passive victim. | He is found saving his own signed orders from the fire. |
 | Sallow's account was gated on an optional rescue only. | Two ways in; both always available; only the weight differs. |
-| The water-gate silence risked reading as proof. | Fires on the read, not on exposure; Marrick mocks it; the finding cites only chips. |
+| The water-gate silence risked reading as proof. | Independent review pass: it no longer coincides with any record. It fires when the hall says "Aye" to the plan, tied to many hands and no person; Marrick mocks it on her way out; the finding cites only chips. |
+| Independent review pass: item custody. | `SM_requisition` and `NF_bill_of_lading` are always player-held and laid from inventory; bundles hold only keepers' records and Tovin's sheets (both values). Minimum main-only weight 10. |
+| Independent review pass: C8. | C8 is now the UL crew ledger (`UL_LEDGER`, weaker if `UL_LEDGER_CUT`), with Rhosyn present only if `UL_RHOSYN_WITNESS`. |
+| Independent review pass: fourth channel hold in a row. | The water-gate is a chase on the stage (two thrown lines at a moving barge, one lever). |
+| Independent review pass: waits and public Sedge. | The hearing starts on entering the hall; dusk falls on the walk to the Cut mouth. Sedge speaks to the player alone at the Cut mouth, not to the hall. |
+| Independent review pass: backwater. | The plan planks the Cut-side culverts too, so MQ11's fen has no way out at all. |
 | The plan risked becoming a new council. | No chair, no seat; three copies; tenders' marks on stones. |
 
 ---
@@ -477,11 +488,11 @@ With the Relief Cut sealed at both ends, Stillwater Fen has nowhere to send its 
 
 ### Beat 0 — Reedmere at Dusk (`S00_arrive`)
 **Objective:** *Go to Reedmere.*
-The fen road is silent. At Reedmere the plan is visible in people: Maelin's crews coiling rope on the plank walks; Watchers filling the lantern store's hooks; Elspeth laying out softmoss and blankets in the loft; whoever `LM_PLAN_ROUTES` named marshalling the lanes (crews in oilskins, keepers in Crestbridge blue, or both arguing politely); and food from House Marrick's stores (`CR_MARRICK_STORES`) being unloaded by keepers. Sedge sits on the steps of the lantern store, mending nothing.
+The fen road is silent. At Reedmere the plan is visible in people: Maelin's crews coiling rope on the plank walks; Watchers filling the lantern store's hooks; Elspeth laying out softmoss and blankets in the loft; whoever `LM_PLAN_ROUTES` named marshalling the lanes (crews in oilskins, keepers in Crestbridge blue, or both arguing politely); and food from House Marrick's stores (`CR_MARRICK_STORES`) being unloaded by keepers. Sedge sits on the steps of the lantern store, mending nothing. **`OL_JOSS_IN`:** Joss Garrow sits wrapped in a blanket by the loft stove in Elspeth's care, among the first evacuees, saying nothing; Ansel checks on him between tasks.
 
 ### Beat 1 — The Vigil (`S01_vigil`)
 **Objective:** *Stand the vigil.*
-The player speaks to Sedge (`SV-D1`): "It's going to let go tonight. Bring people in first. Then the gates. Then the middle." Ansel hands the player a **Watcher smoke-pot** (loaned tool, refilled at lantern racks; if Act I already gave the player a smoke tool, he refills that instead) (`SV-D2`). Interacting with the Reedmere vigil fire ("Stand the vigil") advances to full dark. The fen's sound returns all at once as a low rushing from everywhere: the Hollowed Current has begun. Lessa walks to the mouth of the Cutters' Causeway and pulls up her own stake (`SV-D3`).
+The player speaks to Sedge (`SV-D1`): "It's going to let go tonight. Bring people in first. Then the gates. Then the middle." Ansel hands the player a **Watcher smoke-pot** (loaned tool, refilled at lantern racks; if Act I already gave the player a smoke tool, he refills that instead) (`SV-D2`). Interacting with the Reedmere vigil fire ("Stand the vigil") advances to full dark. The fen's sound returns all at once as a low rushing from everywhere: the Hollowed Current has begun. Lessa walks to the mouth of the Cutters' Causeway and pulls up her own stake (`SV-D3`). As she does, she says the one thing she has never explained (`SV-D3.02b`): *"Grain lot went down out there in the war. Barges, crews, all of it. Nobody wrote it. That's why this path's done."* This is Fourteenth Lot delivery 3 of 3, before the boss, and it is testimony from a living guide, never from the water.
 
 ### Beat 2 — Bring Them In (`S02_evacuate`)
 **Objective:** *Bring the cutters in from the far huts (0/7).*
@@ -503,7 +514,7 @@ Arrivals: each cutter delivered to the Reedmere tally board is crossed off by a 
 
 ### Beat 3 — The Braid Gates (`S03_gate1`, `S04_gate2`, `S05_gate3`)
 **Objective:** *Open the Braid gates in Oriel's order (0/3).*
-Oriel's order (MQ9's flow-table: outer, then the sill, then the centre) is chalked on every gate-board by the crews, so the player who forgets it is never lost. At each gate the player **reads the gate's Marking Stone** (inspect; the True Line skill): *"Water's stuck under the notch. It wants to move."* That confirms the gate is the next one. A gate opens by **holding the channel**: two crew hands work the gate-board winch (progress fills slowly while they are not attacked; the player can add a crank channel to double the rate). Enemies go for the crew; a harassed crew stops cranking. Progress never decays except at gate 2 (below). When a gate opens, a Braid channel visibly runs: water starts moving through reeds that have been still since the war, and a Watcher hangs a lantern at that gate's stone.
+Oriel's order (MQ9: **furthest from the Cut's head first, nearest last**): **Reedmere Weir** is furthest, **the Long Sill** is next, **the Lantern Sluice** beside the deep pools is nearest. The same three names and the same rule as MQ9 (Act II §BF.7.4). The order is chalked on every gate-board by the crews, so the player who forgets it is never lost. At each gate the player **reads the gate's Marking Stone** (inspect; the True Line skill): *"Water's stuck under the notch. It wants to move."* At Reedmere Weir the stone adds: *"The Cut's old head is that way. This one's furthest."* That confirms the gate is the next one. A gate opens by **holding the channel**: two crew hands work the gate-board winch (progress fills slowly while they are not attacked; the player can add a crank channel to double the rate). Enemies go for the crew; a harassed crew stops cranking. Progress never decays except at gate 2 (below). When a gate opens, a Braid channel visibly runs: water starts moving through reeds that have been still since the war, and a Watcher hangs a lantern at that gate's stone.
 
 | Gate | Pressure | Encounter |
 |---|---|---|
@@ -600,7 +611,7 @@ This is the echo of The True Line's discovery (TL §8), at the scale of the whol
 | 3–6 s, climb | At the heart stone, a thin sheet of water climbs the groove against the slack water and stands in the notch, as at Whisperflow. **At the same instant**, at every Marking Stone in the fen, the same. The player sees near stones clearly; distant ones read as each lantern catching a sudden bright line of water beside it: a constellation across the whole fen, all together. Not a wave travelling outward. Everything at once. |
 | 6–14 s, hold | The whole fen surface goes flat as glass. Reflections within ~15 m lag the player by a fraction of a second (TL echo). The fog lies down on the water. Nothing else moves. |
 | 14–18 s, release | Every sheet lets go at once. The fen **exhales**: one long low sound from every direction, like wind through all the reeds at the same time, though there is no wind. Visible on every nearby stone: the water level drops by a hand and stays down. The fog rolls outward from the centre and thins. |
-| 18–24 s, return | Sound comes back in order: water first, then reeds, then insects, then one human voice far off: a Watcher calling "Lantern holds!" and another answering. **If completed side quest VK:** a cutter on the Reedmere walks begins to hum the listeners' tune, badly. |
+| 18–24 s, return | Sound comes back in order: water first, then reeds, then insects, then one human voice far off: a Watcher calling "Lantern holds!" and another answering. **If `VK_COMPLETE`:** a cutter on the Reedmere walks begins to hum the listeners' tune, badly. |
 | UI | None. No objective popup until sound has returned. No music. |
 | Camera | Never taken. The player may turn to look at the constellation; designers should place the heart stone so the Reedmere side's lantern line is in a natural sightline. |
 | Sedge | Kneeling, both hands flat in the water. Visibly exhausted after; he sits on the heart stone's plinth. One line (`SV-D7`). |
@@ -615,7 +626,7 @@ The voices are chosen for who would really argue each, and who would pay for it.
 |---|---|---|---|---|
 | **Seal** — close the deep fen for a generation. | **Lessa Mirepath**, supported by the keepers (Hesketh if kept; the Keeper-Lieutenant if stood down) who would post the boundary. | Lessa's whole life is "some paths are done." Tonight she reopened one, and she knows what it cost. She is the only voice with standing to say *close it*. | Keepers post a boundary of stakes and rope around the deep fen. Inside, the heart pool is left alone. Outside, heavy water is gone (D-6 **closed**). | The harshest. Mourners lose the fen: the families who still come for the Lot have nowhere near it to come. Reedmere's best cutting grounds are inside the line, so the cutters lose work. Annelise: "You've shut the door on people who still knock." |
 | **Tend** — a guided remembrance channel at the fen edge. | **Annelise Reed.** Strongest if completed side quest CN (she brings the recovered offering boat and launches it as her argument). | "Light enough to carry" is her life's rule. Tending is her work. | A channel is cut at the near edge from Widow's Step: lantern-lined, with a landing for offering boats. Watchers and the memorial keeper tend it. The deep fen stays open to guided cutters. Quiet drift remains at the channel and in the margins (**tended**). | Forever-work. Someone must walk it every night. Drift never fully goes; some households will never let their children near it. Lessa: "You'll be walking people out of the water every winter." |
-| **Shared** — seal the deep pools, tend the edge. | **Ansel Corrie.** Settled if completed side quest OL (he hangs Joss Garrow's lantern at the edge as he speaks); raw if not. | He is the one who walks it. He knows the deep takes Watchers (Joss) and the edge is where people need to be. | Boundary around the heart pool and deep holes; a tended channel at the near edge. | The most labour, split two ways: keepers *and* Watchers, every season. The Lot is closed for good; the wreck is never raised and no one can go to it. The cutters lose the deep grounds *and* live beside the tended edge. Maelin: "That's two jobs. Plan's got hands for one and a half." |
+| **Shared** — seal the deep pools, tend the edge. | **Ansel Corrie.** `OL_LANTERN_ONLY`: settled; he hangs Joss Garrow's dark lantern at the edge as he speaks. `OL_JOSS_IN`: settled; Joss sits by Elspeth's stove behind him and Ansel nods to him as he speaks. OL not done: raw. | He is the one who walks it. He knows the deep takes Watchers (Joss) and the edge is where people need to be. | Boundary around the heart pool and deep holes; a tended channel at the near edge. | The most labour, split two ways: keepers *and* Watchers, every season. The Lot is closed for good; the wreck is never raised and no one can go to it. The cutters lose the deep grounds *and* live beside the tended edge. Maelin: "That's two jobs. Plan's got hands for one and a half." |
 
 **Sedge** (`SV-D8.50`) refuses to choose, every time: "Not mine." If asked, he tells one truth about each: Seal holds "as long as someone keeps the rope"; Tend "keeps it heavy, a little, where people can see it"; Shared "is the most work, and work is what holds." Warm or cool by `LM_SEDGE_TRUST`; never a recommendation.
 
@@ -690,7 +701,7 @@ The voices are chosen for who would really argue each, and who would pay for it.
 |---|---|---|---|---|---|---|
 | What the Muster was | Coalesced grief over the Lot, stirred by the flushes. | "The convoy's dead stood up." | Lantern-lines, oar counts; the Lot's barge ribs. | The convoy's crews were in it; defeating it freed them. | Who was aboard. Who ordered the flush. | Never in v1. |
 | Why every stone held at once | The Braids carried the pressure to every calibration stone together. | "The fen let go." / "The Field-Mage did it." | The constellation; Sedge exhausted. | Sedge did it alone; the player did. | The Riverwarden method. | Oriel (MQ12, briefly). |
-| The Fourteenth Lot | Sank in a wartime flush; hushed. | Known now to be "a lot that went down in the fen," from Bramblelock and the ribs. | Ribs, missing convoy stone. | Marrick's house did it. | Who gave the order. | Not v1. |
+| The Fourteenth Lot | Sank in a wartime flush; hushed. | Known now to be "a lot that went down in the fen." | Guaranteed to every player before the boss by main-quest content only: MQ4's blank convoy stone (required inspect, Maelin), MQ9's carved wreck scar on the flow-table (required inspect), and Lessa's line as she pulls her stake (`SV-D3.02b`). Then the ribs in the heart pool. Never supernatural testimony. | Marrick's house did it. | Who gave the order. | Not v1. |
 
 ## 11.15 Open decisions
 
@@ -709,6 +720,10 @@ The voices are chosen for who would really argue each, and who would pay for it.
 | Shared looked like the obvious best ending. | It carries the most labour, closes the Lot for good, and splits the cutters' loss. |
 | Sedge risked recommending. | He refuses; tells one truth about each. |
 | Evacuee count risked a fetch chore. | 7 people, 3 huts, max 2 trips; trances are scripted and readable. |
+| Independent review pass: most players met the boss without knowing a convoy sank. | Three guaranteed main-only deliveries (MQ4 stone, MQ9 wreck scar, Lessa `SV-D3.02b`). |
+| Independent review pass: gate names and order differed from MQ9. | Reedmere Weir → the Long Sill → the Lantern Sluice, "furthest from the Cut's head first", identical in both acts; furthest-stone inspect added. |
+| Independent review pass: Sedge re-taught observation vs interpretation. | `SV-D1.02`'s question cut. |
+| Independent review pass: OL branches. | Joss present (`OL_JOSS_IN`) or his lantern hung (`OL_LANTERN_ONLY`) or neither, at arrival and in Ansel's Shared argument. |
 
 ---
 
@@ -765,7 +780,7 @@ Optional here: Corvin (one line), Aldric (one line), Sallow at the Cut mouth or 
 
 ### Beat 2 — The Mantle Shrine (`S02_sedge`)
 **Objective:** *Find Sedge.*
-Sedge is cutting reeds as if nothing happened. The player can help (a Woodcutting-style cut on two reed stands; optional). The player asks him to teach them. He refuses, and says why (`RR-D3`). He asks them one question about what they saw at the heart stone; the player's answer is accepted as an observation or gently corrected, as in MQ8.
+Sedge is cutting reeds as if nothing happened. The player can help (a Woodcutting-style cut on two reed stands; optional). The player asks him to teach them. He refuses, and says why (`RR-D3`). He asks them one question about what they saw at the heart stone, and accepts whatever the player says without correcting it (the lesson was taught in MQ3 and MQ8).
 
 ### Beat 3 — Behind the Falls (`S03_oriel`)
 **Objective:** *Go behind the falls.*
@@ -776,13 +791,14 @@ At the flow-table, the miniature Vale has changed: the Cut is a dark dry line; t
 Unlocks when Beats 1–3 are done; if it isn't dusk, "Wait until dusk" at the high landing advances the hour. At the landing the crews have cut their tender-marks beside the stone's notch, as the plan said: a row of small marks. **The player's mark is among them.** Inspect: *"The crews' marks, cut fresh. And yours, the same depth, the same hand as theirs. Nobody here saw it cut."* Maelin: "Wasn't there this morning." Nobody explains it.
 The player walks the bank and **lights a lantern on each of the five marker posts** (5 interactions, 2 s each), with whoever `LM_PLAN_ROUTES` named: Maelin's hands (crews), Hollis (keepers) or both. A lantern line, made by people, where the Muster made one of cold water.
 
-### Beat 5 — The Night Crossing (`S05_crossing`)
+### Beat 5 — The Night Crossing (`S05_crossing`) **[PROPOSAL — DIRECTOR]**
 **Objective:** *Cross with Maelin.*
+*Canon flag:* the anchor says Maelin "refuses night passage through specific stretches". This beat ends that refusal **for Whisperflow only**; every other refused stretch stays refused. It is a change to anchor behaviour and needs the Director's sign-off.
 Maelin reads the post herself (inspect: "Water's under the notch. The crossing reads open."). She takes the bow lantern and the player boards (the Whisperflow crossing interaction from MQ1, in its night variant: the player stands free on deck, camera theirs). **The strange moment:** passing the stone, the water lies quiet at the notch: no wake against the stone, though the ferry's wash runs everywhere else, for as long as the stone is in view. Mid-river, Maelin speaks once (`RR-D6`). Lanterns on both banks.
 
 ### Beat 6 — The Far Bank (`S06_far_bank`)
 **Objective:** *Step ashore.*
-The far-bank households are on the landing with lanterns (`LM_GRAIN_ROUTE`: escort, many; split, some; hold, a few, though they came). Nan Ferrin, in her own shawl from her own house, with Duchess (`RR-D7`). **If completed side quest VK:** she sings the full verse. The last conversation is Maelin's at the boat (`RR-D8`). On its end node: **`LM_CIVIC_STANDING = true`**. The quest completes. No fanfare; Maelin pushes off to cross back by lantern, alone, which is the last thing the player sees her do.
+The far-bank households are on the landing with lanterns (`LM_GRAIN_ROUTE`: escort, many; split, some; hold, a few, though they came). Nan Ferrin, in her own shawl from her own house, with Duchess (`RR-D7`). Nan's song follows *A Verse Kept Back*: `VK_PERF_BOTH` → she sings the words over the hum; `VK_PERF_COUNT` → she hums it as a count and says the words after; `VK_PERF_HUM` → she hums it and keeps the words; VK not done → she hums the listeners' tune with its verse missing (`RR-D7.04`). The last conversation is Maelin's at the boat (`RR-D8`). On its end node: **`LM_CIVIC_STANDING = true`**. The quest completes. No fanfare; Maelin pushes off to cross back by lantern, alone, which is the last thing the player sees her do.
 
 ### Optional stations (any time during Beats 0–4)
 
@@ -791,7 +807,7 @@ The far-bank households are on the landing with lanterns (`LM_GRAIN_ROUTE`: esco
 | Ashenstead | Joric, Annelise | Help Annelise clear one offering basket (ME04 echo) | `LM_FIELD_FIX`; UR; `LM_FEN_ENDING` |
 | Floodplain Orchards | Bryn | Turn one ditch-gate with her | `LM_BRYN_ROLL`, `LM_ORCHARD_LOSS` |
 | Watchers' Lantern Post | Ansel | He gives the player the first page of his new patrol book to write the date on | OL; `LM_FEN_ENDING` |
-| Brookhollow | Rhosyn (UL), Kell (BP), Ottilie | — | `CR_RHOSYN_LAID` |
+| Brookhollow | Rhosyn (UL), Kell (BP), Ottilie | — | `UL_RHOSYN_WITNESS` / `UL_RHOSYN_STAYS` / `UL_RHOSYN_FLED`; default if UL not done (`RR-D19`) |
 | Reedmere | Lessa, Elspeth | — | `LM_FEN_ENDING`, `SV_FED_EVACUEES` |
 
 ## 12.5 Steps and completion events
@@ -820,7 +836,7 @@ The far-bank households are on the landing with lanterns (`LM_GRAIN_ROUTE`: esco
 | Reward | Type | Notes |
 |---|---|---|
 | The player's mark on the Whisperflow stone | Sign of trust | **Non-mechanical** (Main Arc movement 12). No stat, no ability, no item. |
-| Night crossing at Whisperflow | Access | Maelin's crossing interaction is available at night from now on (only here; her other refused stretches stay refused). |
+| Night crossing at Whisperflow **[PROPOSAL — DIRECTOR]** | Access | Maelin's crossing interaction is available at night from now on (only here; her other refused stretches stay refused). |
 | `LM_CIVIC_STANDING` | Legitimacy | Step 1 of the commission acquisition model. |
 | Wynn's coin | Currency | Small, from her first wage ("Told you, when I'm paid."). |
 
@@ -857,7 +873,8 @@ None of the four depends on any other Act III choice. Every player who completes
 
 ## 12.11 Open decisions
 
-1. **`LM_ORIEL_PROMISE` value names.** Act II owns the three promise texts. This package keys Oriel's reply to `promise_1/2/3`; the Schema & Content Engineer maps them to Act II's values.
+1. ~~`LM_ORIEL_PROMISE` value names.~~ Resolved: `RR-D4.02` is keyed to `aloud` / `many_hands` / `return` and quotes Act II's exact words.
+4. **Maelin's Whisperflow night refusal ends** **[PROPOSAL — DIRECTOR]**: all her other refused stretches stay refused. This changes anchor behaviour and is listed for the Director.
 2. **Who cut the player's mark.** Deliberately unanswered. Compatible with Oriel, with the crews, with Sedge. *Recommendation: never answer it in v1.*
 3. **Far-bank settlement identity** (TL §14 item 4) affects only travel lines.
 
@@ -870,6 +887,7 @@ None of the four depends on any other Act III choice. Every player who completes
 | Sedge's refusal risked a lecture. | Three lines, and he asks the player a question instead (his voice rule). |
 | Commission hand-off risked a reward dump. | Offer lines only; the commissions open, they don't grant. |
 | Marrick's last scene risked gloating. | She is gracious and asks the player one question; the player decides how to answer. |
+| Independent review pass. | Promise keys fixed (blocker). Maelin's night crossing tagged **[PROPOSAL — DIRECTOR]**. Nan's song keyed to `VK_PERF_*`. Rhosyn's station branches on `UL_RHOSYN_WITNESS` / `STAYS` / `FLED` with a default. Sedge's heart-stone question no longer corrects. Debt lines no longer say "eighty". Sallow's chained line no longer cuts the chain. |
 
 ---
 
@@ -888,7 +906,7 @@ This section is the single reference for how Act III's inputs and outputs change
 | Fog | Thin; gone by mid-morning. | Lies on the channel at dusk; thin elsewhere. | As Tend at the channel; thin at the boundary. |
 | Heart pool | Unseen (inside boundary). | Visible from the Lantern Sluice: still water, barge ribs, the player's post on the heart stone. | Visible from the boundary: the post, far off. |
 | Offering boats | Moved to Widow's Step's scraps (households leave them at the top of the embankment). | Launched on the channel; Annelise clears them each morning. **CN completed:** the recovered boat is moored at the landing, kept. | Launched on the channel. |
-| Joss Garrow's lantern (OL completed) | Hung on the boundary post nearest the Lantern Post. | Hung at the head of the channel. | Hung where the channel meets the rope. |
+| Joss Garrow (OL) | `OL_LANTERN_ONLY`: his dark lantern hung on the boundary post nearest the Lantern Post. `OL_JOSS_IN`: no lantern; Joss sits on the Lantern Post bench at dusk, Ansel beside him. OL not done: nothing. | `OL_LANTERN_ONLY`: hung at the head of the channel. `OL_JOSS_IN`: Joss sits at Elspeth's station at the channel head at dusk. Not done: nothing. | `OL_LANTERN_ONLY`: hung where the channel meets the rope. `OL_JOSS_IN`: Joss at the channel head with Elspeth. Not done: nothing. |
 
 ### E.1.2 Drift-site states (bible §9.2) after MQ11
 
@@ -900,12 +918,12 @@ Sites quieted in Acts I–II stay quieted. "As left" means the state the player'
 | Stillwater margins and remembrance channel | quieted | **tended** | **tended** |
 | Widow's Step | quieted | **tended** | **tended** |
 | Orchard pool (MQ3), ditch (MQ3), Bramblelock pool (MQ4), Drowsebank race (MQ6), orchard dike (MQ7), Mantle channel (MQ8) | quieted | quieted | quieted |
-| Farmhouse cellar (WD) | as left; if active, quieted | as left; if active, quieted | as left; if active, quieted |
+| Dunnock farm cellar (*The Whispering Door*) | as left | as left | as left |
 | Watergarden outlet (CN) | as left | as left; if CN completed, **tended** | as left; if CN completed, **tended** |
-| Old Lantern's bend (OL) | **active** by design (residual) | **active** (residual) | **active** (residual) |
-| Residual pockets for progression | Two **active** pockets at the Seal boundary's outer reed-pools (where pressure frays at the rope) | Two **active** pockets in the far margins beyond the channel | One **active** pocket at the boundary, one in the far margins |
+| Old Lantern's bend (OL) | OL completed: **quieted** (stays so). Not completed: as left (active until OL is done). Not a residual site. | same | same |
+| Residual pockets for progression | Two **active** pockets at the Seal boundary's outer reed-pools (where pressure frays at the rope), plus the **Stillwater far-leg pockets** | Two **active** pockets in the far margins beyond the channel, plus the **Stillwater far-leg pockets** | One **active** pocket at the boundary, one in the far margins, plus the **Stillwater far-leg pockets** |
 
-**Why residual sites:** bible §9.2 requires a small set of heavy-water sites to stay active so Wraith combat stays available for progression. Every ending keeps the same count (three: Old Lantern's bend plus two pockets) at different places, so no ending is "easier" for progression.
+**Why residual sites:** bible §9.2 requires a small set of heavy-water sites to stay active so Wraith combat stays available for progression. Every ending keeps the same count (three: two ending-specific pockets plus the Stillwater far-leg pockets along the old Watchers' far leg) at different places, so no ending is "easier" for progression. Old Lantern's bend is never a residual site: completing *Old Lantern* quiets it for good.
 
 ### E.1.3 NPC positions after MQ11
 
@@ -929,7 +947,7 @@ Sites quieted in Acts I–II stay quieted. "As left" means the state the player'
 | `LM_GRAIN_ROUTE` | escort | Far bank: many lanterns; a householder thanks the keepers by name of office. | Far-bank households greet the player. |
 | | hold | Far bank: a few lanterns; "We were hungry a while. Then we weren't." | Neutral barks. |
 | | split | Far bank: some lanterns; mixed barks. | Mixed barks. |
-| `LM_LOCK_STATE` | smashed / chained | Sallow's line names the broken or the cut chain. | Hollow Lock: winding floor broken (smashed) or chain-cut and stop-planked (chained); sealed either way. |
+| `LM_LOCK_STATE` | smashed / chained | Sallow's line names the broken gear or the keepers on his chain. | Hollow Lock: winding floor broken (smashed) or still chained and stop-planked (chained); sealed either way. |
 | `LM_FIELD_FIX` | circle | Annelise: the circle stones were relaid "a hand to the left. Nobody minded." | Circle relaid over the cleared grate. |
 | | plot | Joric: the relief ditch through his plot runs clear; he's planted the banks. | Ditch with planted banks. |
 | | dike | Joric and Annelise: the fields came in a season late; both fields are whole. | Dike around both. |
@@ -939,7 +957,7 @@ Sites quieted in Acts I–II stay quieted. "As left" means the state the player'
 | | household | Bryn: "Still household. Still mine. Still nobody's business." | Bryn alone at the ditches, faster than anyone. |
 | `LM_ORCHARD_LOSS` | none / partial | Orchard whole; or one section replanted with whips, Bryn swearing at each one. | Orchard props. |
 | `LM_SEDGE_TRUST` | warm / cool | Sedge's refusal wording (dialogue file). | Sedge barks at the shrine: a nod (warm) or nothing (cool). |
-| `LM_ORIEL_PROMISE` | 1/2/3 | Oriel quotes it. | — |
+| `LM_ORIEL_PROMISE` | aloud / many_hands / return | Oriel quotes the player's words (`RR-D4.02`). | — |
 | `LM_MARRICK_EXPOSED` | true | Marrick's scene. | House Marrick's banner off the Board bench. |
 | `CR_TERMS` | bare | Marrick at her own door, still a householder of standing, off the Board. | Marrick in Crestbridge with households, warmly received by some. |
 | | firm | Granary under keepers' seal; she sits on her own step. | Seal on her door; fewer callers. |
@@ -949,11 +967,11 @@ Sites quieted in Acts I–II stay quieted. "As left" means the state the player'
 | | stood-down | At the Cut mouth with a shovel. `CR_HESKETH_SELF`: "I did it myself. That's the only part I'm proud of." | Works the Cut seal and later the Crestbridge Braid gate. The Keeper-Lieutenant gives the commission. |
 | `CR_CREW_LENIENCY` | true / false | Sallow at the Cut mouth (true) or behind the grille (false). | Lock crew on seal and Braid work (true). |
 | `CR_HAULED_CREWMAN` | true | The young pole-man, now on the seal crew, nods to the player. | — |
-| `CR_RHOSYN_LAID` | true / false (UL) | True: Rhosyn at a keepers' table registering her workers as gate hands; "Real papers. Terribly dull." False: she's in the cellar, winks. | As MQ12. |
+| `UL_RHOSYN_WITNESS` / `UL_RHOSYN_STAYS` / `UL_RHOSYN_FLED` / UL not done | | Witness: clerking for the keepers, wry. Stays: a stall writing letters. Fled: absent; Ottilie's line about the dark cellar. Not done: no Rhosyn; a dock bark about the Lamb's shut back room. (`RR-D19`) | As MQ12. |
 | `LM_PLAN_ROUTES` | crews / keepers / shared | Who lights the Whisperflow lanterns with the player. | Who calls crossings on flood nights (barks; crossing-closed notices signed by crews, keepers, or both). |
 | `LM_PLAN_MEMORIAL` | watchers / gardens / reedmere | Who stands at the fen's memorial ground in E.1.3. | Same. |
-| completed side quest OL | | Ansel's new book: first entry "Joss's lantern hung." | Lantern at the fen. |
-| completed side quest VK | | Nan sings the full verse on the far bank. | The thaw song sung at Greyharrow at season change. |
+| `OL_LANTERN_ONLY` / `OL_JOSS_IN` | | Ansel's new book, first entry: "Joss's lantern hung." / "Joss sat with me. Ate. Didn't speak." | Lantern at the fen, or Joss at the Post bench (E.1.1). `old_lantern_bend` quieted. |
+| `VK_PERF_BOTH` / `VK_PERF_COUNT` / `VK_PERF_HUM` / VK not done | | Nan's far-bank song per performance; hum with a missing verse by default (`RR-D7.04`). | The thaw song sung at Greyharrow at season change (VK done). |
 | completed side quest NT | | Dace in the crossing crew: "Night crossing. Don't tell my mam." | Dace at the landing. |
 
 ## E.3 Combined Crestbridge states (terms × Hesketh)
@@ -977,7 +995,8 @@ Crossings reopen under accountable rules (crews' marks on stones, keepers' count
 | Canon anchors | Maelin: no new history; her night crossing is a choice about one stretch, consistent with "refuses night passage through specific stretches." Corvin: regrets the ledger aloud once (MQ10). Aldric: convenes, does not rule; no wartime service. Lessa: reopens one done path; no Mire kinship. Annelise: no names spoken. Tovin: never names it, never solves; his one line in the hall describes ("I drew what the floor did"). Joric: decides about his field (Act II); MQ12 only reflects it. No ages, kinship, travel or record custody invented. |
 | Evidence rule | Exposure rests on chips only; supernatural items refused at the table; the water-gate stilling is mocked and proves nothing; the Muster names no one; the fen-wide hold proves nothing; Sallow's account is words after surrender, not a combat drop. |
 | Soft-locks | Seven main-only chips; singe never invalidates; every trance resolves; gate order chalked; boss phase checkpoints; MQ12 has no combat or timers. |
-| Duplicate structures | MQ10 defence ≠ MQ4 assault; table-laying ≠ TL testimony; three-gate hold ≠ MQ6's one gate; seat-the-post deliberately echoes TL as the climax. |
+| Duplicate structures | MQ10 defence ≠ MQ4 assault; table-laying ≠ TL testimony; MQ10's water-gate is a chase, not a channel; the three-gate hold is the arc's culminating channel set piece (MQ4's crank is the other); seat-the-post deliberately echoes TL as the climax. |
+| Independent review pass | Applied: promise keys; item custody; C8 = `UL_LEDGER` (+`UL_LEDGER_CUT`, `UL_RHOSYN_WITNESS`); water-gate stilling tied to the plan's "Aye"; water-gate chase; Sedge off the public floor; waits replaced by walks; culverts planked so the fen holds its breath; Fourteenth Lot delivery before the boss; Braid gate names/order; OL, VK and UL branches with defaults; residual drift sites; Sallow yield and crew "downed" tagged; Maelin's night crossing tagged. |
 | Quest items | 1 new (`CR_board_minute`) of 2 allowed. |
 | Flags | `LM_PLAN_ROUTES`/`LM_PLAN_MEMORIAL` documented as the `LM_PLAN_*` family. No other new `LM_` flags. Quest-local flags use CR/SV/RR. Dialogue file checked against §0.4–0.5 and each quest's flag table. |
 | Player address | Origin- and address-neutral; they/them in prose; the mark choice is three plain cuts. |

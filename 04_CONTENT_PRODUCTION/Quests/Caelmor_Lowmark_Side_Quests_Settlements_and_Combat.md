@@ -12,31 +12,37 @@
 
 | Code | Quest | Type | Unlock gate | Where | Core verb (primary first) | Main-arc link | Feeds |
 |---|---|---|---|---|---|---|---|
-| **UL** | Under the Lamb | Settlement (Brookhollow) | MQ4 *The Night Flush* Completed (`LM_LOCK_STATE` set) | P01, P18 | **infiltrate**, read, choose | Sallow's crew lies low after the Lock; their pay book is under the Lamb `[ANTAGONIST]`. | **MQ10 evidence chip** (`UL_LEDGER`); optional MQ10 witness (`UL_RHOSYN_WITNESS`); MQ7 Ottilie variant |
-| **NB** | Night Bridge | Settlement (Crestbridge) | MQ2 *Short Measure* Completed (`LM_GRAIN_ROUTE` set) | P02 underside | **climb**, inspect, fight | Toll enforcement after the grain shortage; Aldric's useful-but-blind authority. | Underside route (`NB_UNDERSIDE_OPEN`) as an optional MQ10 approach to the water-gate |
-| **UR** | Unreplanted | Settlement (Ashenstead) | MQ3 *Heavy Water* Completed | Joric's plot beside P20 | **clear**, uncover, listen | Seeds the ground MQ5 may cut through. | **MQ5** "cut through Joric's plot" option (`UR_GATE_RUN` / `UR_LINE_STAKED` / `UR_LEFT`); epilogue reads `LM_FIELD_FIX` |
-| **NT** | Night Ferry | Combat challenge | MQ2 Completed | P19 Greyharrow Reach | **defend** a crowd through the night | Maelin's refusal of night passage, understood. | MQ12 night-crossing echo (`NT_DAWN_SEEN`) |
-| **FW** | Fen Watch | Combat challenge | MQ3 Completed | Reedmere approaches (P06) | **hold a boundary**, elite fight | Lessa's "done" paths; high-tier family preview. | **MQ11 option:** Lessa's guide route as an optional approach (`FW_GUIDE_ROUTE`) |
-| **OL** | Old Lantern | Combat challenge (miniboss) | MQ3 Completed (Ansel's patrol book) | Old Lantern's bend, Stillwater edge (P21 start) | **track**, fight, recover | Ansel's arc; what long exposure does. | Drift site "Old Lantern's bend" → quieted; MQ11/MQ12 Ansel and Watcher lines (`OL_JOSS_IN` / `OL_LANTERN_ONLY`) |
+| **UL** | Under the Lamb | Settlement (Brookhollow) | MQ4 *The Night Flush* Completed (`LM_LOCK_STATE` set); offer window closes when MQ10 starts (UL.1) | P01, P18 | **infiltrate**, read, choose | Sallow's crew lies low after the Lock; their pay book is under the Lamb, and its pay is drawn on the Provisioner's purse under the Board seal `[ANTAGONIST]`. | **MQ10 evidence chip** (`UL_LEDGER`, weaker with `UL_LEDGER_CUT`); Rhosyn's outcome for MQ10 and MQ12 (`UL_RHOSYN_WITNESS` / `UL_RHOSYN_FLED` / `UL_RHOSYN_STAYS`); MQ7 Ottilie variant (request) |
+| **NB** | Night Bridge | Settlement (Crestbridge) | MQ2 *Short Measure* Completed (`LM_GRAIN_ROUTE` set) | P02 underside | **climb**, inspect, fight | Toll enforcement after the grain shortage; Aldric's useful-but-blind authority. Reed Stalkers' first appearance for most players. | Underside route (`NB_UNDERSIDE_OPEN`); optional MQ10 approach to the water-gate (request) |
+| **UR** | Unreplanted | Settlement (Ashenstead) | MQ3 *Heavy Water* Completed | Joric's plot beside P20 | **clear**, uncover, listen (drives off returning goblin raiders; MQ3's culvert den is not refought) | Seeds the ground MQ5 may cut through. | **MQ5** "cut through Joric's plot" option (`UR_GATE_RUN` / `UR_LINE_STAKED` / `UR_LEFT`); epilogue reads `LM_FIELD_FIX` |
+| **NT** | Night Ferry | Combat challenge | MQ2 Completed | P19 Greyharrow Reach | **defend** a crowd through the night | Maelin's refusal of night passage, understood. | MQ12 night-crossing echo (`NT_DAWN_SEEN`, request) |
+| **FW** | Fen Watch | Combat challenge | MQ5 *The Guide-Line* Completed (after MQ3, Lessa gives a soft "Not yet") | Reedmere approaches (P06) | **hold a boundary**, elite fight | Lessa's "done" paths; high-tier family preview. | **MQ11 option:** Lessa's guide route as an optional approach (`FW_GUIDE_ROUTE`) |
+| **OL** | Old Lantern | Combat challenge (miniboss) | MQ3 Completed (Ansel's patrol book) | Old Lantern's bend, Stillwater edge (P21 start) | **track**, fight, recover | Ansel's arc; what long exposure does. | Drift site `old_lantern_bend` → quieted **permanently, in every fen ending**; MQ11/MQ12 Ansel and Watcher lines (`OL_JOSS_IN` / `OL_LANTERN_ONLY`) |
 
-**Recommended order of discovery** (not enforced): NB and NT open after MQ2 and sit in Heartlands towns the player already visits; UR, FW and OL open after MQ3, when Ansel, Lessa and Ashenstead are known; UL opens after MQ4. UR should be *offered* before MQ5 (Joric's bark appears on MQ3 completion), but it stays playable after MQ5 and reads the result.
+**Recommended order of discovery** (not enforced): NB and NT open after MQ2 and sit in Heartlands towns the player already visits; UR and OL open after MQ3, when Ansel and Ashenstead are known; UL opens after MQ4; FW opens after MQ5, when the player has Milestone 2 equipment (a player who visits the warning post after MQ3 gets Lessa's soft warning, `FW-B0`, and no offer). UR should be *offered* before MQ5 (Joric's bark appears on MQ3 completion), but it stays playable after MQ5 and reads the result.
 
 ### 0.2 Flags other packages read
 
 | Flag | Values | Set by | Read by | Effect |
 |---|---|---|---|---|
-| `UL_LEDGER` | bool | UL `S06_deposit` | MQ10 hearing | Adds the **crew ledger** chip to the long table. Valid as one of the "any three" items. |
-| `UL_LEDGER_CUT` | bool | UL choice C | MQ10 | The ledger lacks its chit pages: still a valid chip, but MQ10 cannot name the licensed haulers whose passes the crew used (one fewer term). |
-| `UL_RHOSYN_WITNESS` | bool | UL choice A | MQ10 | Rhosyn Lyle attends under keeper protection and attests the ledger hand (bible §5.3 "MQ10 witness"). Strengthens terms; is not itself one of the three required chips. |
-| `UL_OTTILIE_TOLD` | bool | UL optional step | MQ7 | Ottilie has the riverglass bowl ready without a wait; one warmer line. |
-| `NB_UNDERSIDE_OPEN` | bool | NB completion | MQ10, world | Underside traversal route between the south abutment and the Crest Hall water-gate side. MQ10 may offer it as an optional approach to the water-gate (MAP VERIFICATION REQUIRED). |
+| `UL_LEDGER` | bool | UL `S06_deposit` | MQ10 hearing | Adds the **crew ledger** chip to the long table. It shows Lock work paid to "G.S." on the wrong nights, pay **drawn on the Provisioner's purse** with the **Board seal stamped on the pay chits** `[ANTAGONIST]`, and twelve crew passes in borrowed hauler names. Full strength: it shows who paid (recommended weight 2; Act III owns weights). Holder at the table: Rhosyn if `UL_RHOSYN_WITNESS`, otherwise the keepers' locked record box from `UL-D6`. |
+| `UL_LEDGER_CUT` | bool | UL choice C (always with `UL_RHOSYN_STAYS`) | MQ10 | The chit and pass pages are **torn out**. Still a valid chip but weaker (recommended weight 1): the purse line survives in the book-keeper's hand, but without the Board-sealed chits it is the crew's word only, and MQ10 cannot name the licensed haulers. |
+| `UL_RHOSYN_WITNESS` | exactly one of the three `UL_RHOSYN_*` | UL choice A | MQ10, MQ12 | Rhosyn agrees to testify. She attends MQ10 under keeper protection and attests the ledger hand (bible §5.3 "MQ10 witness"); this strengthens terms but is not itself a chip. MQ12: she is clerking for the keepers. |
+| `UL_RHOSYN_FLED` | (as above) | UL choice B | MQ10, MQ12 | Rhosyn fled downriver on the dawn barge. She is **absent** from MQ10 and MQ12: nobody can say who wrote the book. The chip is full strength. MQ12: her nook is empty; Ottilie's bark only. |
+| `UL_RHOSYN_STAYS` | (as above) | UL choice C | MQ10, MQ12 | Rhosyn stays in Brookhollow on Ottilie's label bench; she is not a witness and does not attend MQ10. The cellar stays open. MQ12: she has a letter-writing stall. |
+| `UL_OTTILIE_TOLD` | bool | UL optional step | MQ7 (request) | Ottilie has the riverglass bowl ready without a wait; one warmer line. Nothing breaks if unread. |
+| `NB_UNDERSIDE_OPEN` | bool | NB completion | World; MQ10 (request) | Underside traversal route between the south abutment and the Crest Hall water-gate side. MQ10 may offer it as an optional approach to the water-gate (MAP VERIFICATION REQUIRED); nothing depends on it. |
 | `UR_GATE_RUN` / `UR_LINE_STAKED` / `UR_LEFT` | exactly one | UR `D6` | MQ5 | Changes the "cut through Joric's plot" option (see UR §8.2). Never removes it. |
-| `NT_DAWN_SEEN` | bool | NT completion | MQ12 | One Maelin line at the night crossing. |
+| `NT_DAWN_SEEN` | bool | NT completion | MQ12 (request) | One Maelin line at the night crossing. |
 | `FW_GUIDE_ROUTE` | bool | FW completion | MQ11 | Lessa's kept path becomes an optional Phase 1 approach. |
-| `FW_BED_SHARED` / `FW_ROUTE_KEPT` | exactly one | FW choice | MQ11 | Whether cutters' skiffs use the route (variant only). |
-| `OL_JOSS_IN` / `OL_LANTERN_ONLY` | exactly one | OL choice | MQ11, MQ12 | Ansel and Watcher lines; Joss present among Reedmere evacuees (OL_JOSS_IN) or an unlit lantern hung at the Lantern Post. |
+| `FW_BED_SHARED` / `FW_ROUTE_KEPT` | exactly one | FW choice | MQ11 (request) | Whether cutters' skiffs use the route (variant only). |
+| `OL_JOSS_IN` / `OL_LANTERN_ONLY` | exactly one | OL choice | MQ11, MQ12 | Drive Ansel and Watcher lines. `OL_JOSS_IN`: Joss is among the Reedmere evacuees in Elspeth Quill's care; his hook at the Post stays empty and no lantern is hung. `OL_LANTERN_ONLY`: Joss's lantern hangs on the Post hook **still burning** (it never goes out); Joss is never in a crowd. |
+| drift site `old_lantern_bend` | quieted | OL `S07_book` | MQ11, MQ12, Act III ending matrix | **Contract:** completing OL quiets the bend **permanently, under every `LM_FEN_ENDING` value and either OL choice**. Act III must not list it as active or residual for a player who completed OL. If OL is not completed, the bend is whatever Act III authors. |
+| *(read)* `HW_DEN_CLEARED` | bool | MQ3 (Act I) | UR | One callback line only. MQ3 owns the burned-culvert den; UR never refights it. |
+| *(read)* `WC_BARNS_CLEARED` | bool | WC (Work and Skills) | UR | One line that the raiders came back to the P20 barns. |
+| *(read)* `LM_FIELD_FIX` | enum | MQ5 | UR | Dig count and epilogue. |
 
-No new region-level `LM_` flags are created. All quest-local flags use the quest code prefix.
+"(request)" marks a line asked of another package that nothing depends on. No new region-level `LM_` flags are created. All quest-local flags use the quest code prefix.
 
 ### 0.3 Shared rules for all six packages
 
@@ -56,7 +62,7 @@ No new region-level `LM_` flags are created. All quest-local flags use the quest
 | The True Line | Reads a bank, wades, cuts and seats a post, proves a lie | — |
 | UL | Gets into a guarded cellar by errand, pass or river door; carries a book out | TL (no investigation of a site); MQ10 (no hearing) |
 | NB | Climbs the underside of a bridge at night, reads cut marks by raking lantern light | SB (tower climb reads a wall indoors; NB is exterior traversal with predators) |
-| UR | Clears scrub, nests and a den with their hands; uncovers a buried gate | MQ5 (excavates a culvert); WC (tracks, does not clear) |
+| UR | Clears scrub and a nest with their hands, drives raiders off a threshing floor; uncovers a buried gate | MQ5 (excavates a culvert); WC (tracks, does not clear) |
 | NT | Holds a lantern ring around a crowd for a night; walks people back from a bad boat | TL (investigation and a single boar); MQ10 (siege of a building) |
 | FW | Re-sets a boundary line, pulls people back across it, holds it against an apex predator | MQ11 (holds channel gates under Wraith pressure) |
 | OL | Tracks one man's patrol, fights him without killing him, brings him or his light home | MQ10 Sallow `[ANTAGONIST]` (crew boss in a building); MQ11 Muster (Wraith Lord) |
@@ -71,16 +77,16 @@ No new region-level `LM_` flags are created. All quest-local flags use the quest
 |---|---|
 | Suggested content id | `lowmark.side.under_the_lamb` |
 | Type | Settlement story, Brookhollow (bible §7) |
-| Unlock | MQ4 Completed. Offered by Ottilie Penner at her glass shop, or by entering the Drowned Lamb taproom with the quest available (crew bark). |
+| Unlock | MQ4 Completed. Offered by Ottilie Penner at her glass shop, or by entering the Drowned Lamb taproom with the quest available (crew bark). **Offer window:** MQ4 Completed until MQ10 becomes Active. If UL has not been accepted by then it is withdrawn (Ottilie bark: *"Keepers emptied the Lamb's cellar. My hens' bowls are evidence now."*). If UL is Active when MQ10 starts, it continues; completed after the MQ10 hearing, the ledger goes to the keepers' archive (`UL-D6.05`) and lays no chip. **After MQ6** (the keepers bind the crew at Drowsebank, Act II `TF-D8`): the taproom holds only the remnant hands and the door-man, and Rhosyn is packing (variants in UL.2, UL.4, UL.12). |
 | Length | 25–35 minutes |
 | Combat share | 0–30%, chosen by the player. Every route into and out of the cellar can be taken without a fight. |
 | Skills | Melee (optional), Cooking (optional: a meal for the hungry crewman) |
 | Choice | What happens to Rhosyn Lyle (3 options; each costs something) |
-| Outputs | `UL_LEDGER` (MQ10 chip), `UL_LEDGER_CUT`, `UL_RHOSYN_*`, `UL_OTTILIE_TOLD` |
+| Outputs | `UL_LEDGER` (MQ10 chip), `UL_LEDGER_CUT`, exactly one of `UL_RHOSYN_WITNESS` / `UL_RHOSYN_FLED` / `UL_RHOSYN_STAYS`, `UL_OTTILIE_TOLD` |
 | Canon used | Brookhollow's concealed smugglers' cellar under a riverside tavern, reached by a back-room trapdoor; contraband riverglass, forbidden texts and Emberholt steel traded there (dossier §V.1, [CANON]). Riverglass as very good glass for bowls (§X). Smugglers family (§VIII). |
 | New | The Drowned Lamb by name (bible P01/P18), Ottilie's seconds, Rhosyn Lyle, Mott Pask the landlord, Fitch the hungry crewman, the river door, the ledger. |
 
-**One paragraph.** Since the Hollow Lock was shut, Gideon Sallow's crew has been drinking at the Drowned Lamb and waiting for word `[ANTAGONIST]`. Ottilie Penner's seconds (bowls she sets aside as flawed) keep vanishing from her yard and turning up in the cellar under the Lamb as "contraband riverglass". She went down to buy them back, was turned away at the stair, and heard the crew argue about pay "in the book". The player gets into the cellar without a stealth system: carrying Ottilie's crate down as the expected glass delivery, showing a crew pass bought from a hungry crewman, coming up the old river door from the docks, or simply walking down and fighting. The book is kept by Rhosyn Lyle, a charming forger who writes crew passes for Sallow so that she can afford to write work papers for displaced workers. She hands it over, or the player takes it. The ledger goes to the keepers. Rhosyn cannot stay hidden once it is gone, and what happens to her costs somebody something.
+**One paragraph.** Since the Hollow Lock was shut, Gideon Sallow's crew has been drinking at the Drowned Lamb and waiting for word `[ANTAGONIST]`. Ottilie Penner's seconds (bowls she sets aside as flawed) keep vanishing from her yard and turning up in the cellar under the Lamb as "contraband riverglass". She went down to buy them back, was turned away at the stair, and heard the crew argue about pay "in the book". The player gets into the cellar without a stealth system: carrying Ottilie's crate down as the expected glass delivery, showing a crew pass bought from a hungry crewman, coming up the old river door from the docks, or simply walking down and fighting. The book records the crew's pay as drawn on "the Provisioner's purse", and the pay chits tipped in at the back carry the Provision Board's seal `[ANTAGONIST]`: it shows who paid. It is kept by Rhosyn Lyle, a charming forger who writes crew passes for Sallow so that she can afford to write work papers for displaced workers. She hands it over, or the player takes it. The ledger goes to the keepers. Rhosyn cannot stay hidden once it is gone, and what happens to her costs somebody something.
 
 **Remember:** the bowls on the rack, each holding a bead of water at exactly the same height. **Want next:** the hearing where the ledger is laid on the table.
 
@@ -88,11 +94,11 @@ No new region-level `LM_` flags are created. All quest-local flags use the quest
 
 | Area | Purpose | Environmental storytelling |
 |---|---|---|
-| **A. Taproom** | Hook, crew, hungry crewman | Five crew at the river-side table, palms rope-burned. An empty chair at the head of it that nobody takes; one man touches the table edge before every drink, a habit copied from someone who isn't here `[ANTAGONIST]`. The landlord, Mott Pask, polishes one tankard all evening. |
+| **A. Taproom** | Hook, crew, hungry crewman | Five crew at the river-side table, palms rope-burned. An empty chair at the head of it that nobody takes; one man touches the table edge before every drink, a habit copied from someone who isn't here `[ANTAGONIST]`. The landlord, Mott Pask, polishes one tankard all evening. **After MQ6:** two remnant hands and empty chairs; the head chair has been taken away. |
 | **B. Back room** | Errand and force routes | Barrels, a trapdoor with a bell-pull beside it. Chalked tallies on the doorframe: deliveries, in a carter's strokes. A sack of sawdust at the trapdoor for wet boots. |
 | **C. Stair and door-man's alcove** | The challenge point | A stool, half a pie, a charcoal list on the wall of who may be let down. One line reads only "glass — market day". |
 | **D. Cellar market** | The trade | Racks of riverglass; crates of steel with the stamps chiselled off; wrapped bundles of books tied shut (not readable; canon contraband, contents left to later content). A buyer's mark in red wax on every bowl. |
-| **E. Rhosyn's nook** | The forger and the book | A seal press, eleven inks, references in a dozen different hands, all hers. A blanket folded on a crate: she sleeps here. Pinned list of names, each with a place: "Hand, Greyharrow ferry — placed." "Drying racks, Brookhollow — placed." The crew ledger, open, a pen across it. |
+| **E. Rhosyn's nook** | The forger and the book | A seal press, eleven inks, references in a dozen different hands, all hers. A blanket folded on a crate: she sleeps here. Pinned list of names, each with a place: "Hand, Greyharrow ferry — placed." "Drying racks, Brookhollow — placed." The crew ledger, open, a pen across it; pay chits pinned in at the back, each with a red seal. **After MQ6:** half the inks are already in a crate. |
 | **F. River door and tunnel** | Back route in and out | A brick culvert from the cellar down to an iron grate under the docks, on a winch. A small crossing marker inside the tunnel mouth (the True Line reading works here). The delivery skiff ties up at the grate at the evening bell. |
 | **G. Keepers' river post** | Deposit | A keepers' hut on the Brookhollow docks with a lamp and a ledger shelf of its own. |
 
@@ -115,7 +121,7 @@ There is no line-of-sight detection. Challenges are fixed volumes that start a s
 
 **Beat 2 — The forger (`S02_find_rhosyn`).** *Objective: Find the crew's book.* In the cellar the crew (if not fought) are busy and ignore anyone the door-man let down. Errand players first set the crate on the racks (`S01a_set_crate`), which is where they can find Ottilie's maker's dot under the red wax (optional `S02b_dot`). The book is on Rhosyn's desk. `UL-D4`: she knows at once the player is not crew, because she wrote every crew pass in Brookhollow.
 
-**Beat 3 — The book (`S03_read_ledger`).** *Objective: Read the ledger.* Three inspect pages (all required): **nights and sums** (pay entries on specific nights; with MQ3 done, *"The nights are the wrong nights in Ansel's book"*), **the Lock line** (*"Lock work, G.S., paid in full, four nights running"* `[ANTAGONIST]`), and **the chits** (*"Crew passes for the Crestbridge toll, twelve, in the names of licensed haulers"*). Rhosyn gives it up (`UL-D4.30`) or the player takes it (`UL-D4.40`); either way it becomes a carry-state object.
+**Beat 3 — The book (`S03_read_ledger`).** *Objective: Read the ledger.* Three inspect pages (all required): **the Lock line** (*"Lock work, G.S., paid in full, four nights running"*; with MQ3 done, *"The nights are the wrong nights in Ansel's book"* `[ANTAGONIST]`), **the purse** (*"Drawn on the Provisioner's purse"*, with pay chits pinned in at the back, each stamped with the Provision Board's seal and signed "received" in Rhosyn's hand `[ANTAGONIST]`), and **the passes** (*"Crew passes for the Crestbridge toll, twelve, in the names of licensed haulers"*). Rhosyn gives it up (`UL-D4.30`) or the player takes it (`UL-D4.40`); either way it becomes a carry-state object.
 
 **Beat 4 — Out (`S04_out`).** *Objective: Carry the ledger out of the cellar.* Rhosyn says the stair is counted; the river door isn't. Both exits work. The stair exit with the ledger in hand starts E2 unless the crew is already down; the river door exit has only E3 (and none if the player came in that way and the leeches are already dispersed). Rhosyn follows the player out by whichever exit they take: once the book is gone she can't be found sitting beside the empty desk.
 
@@ -130,7 +136,7 @@ There is no line-of-sight detection. Challenges are fixed volumes that start a s
 | Id | Enemies | Where | Role | Telegraph | Solo target |
 |---|---|---|---|---|---|
 | **E1** | Smuggler pole-man (door-man) + Smuggler cutter | Stair alcove | Aggressive once force is chosen; leashed to the stair and back room | Pole-man plants the pole and leans back (~1.2 s), then a sweep that knocks the player back 2 m. Cutter drops a shoulder, blade low (~0.9 s), then two quick cuts. | Optional. 30–45 s. Player at 60–80% HP. |
-| **E2** | Smuggler pole-man + 2 cutters | Cellar market | Aggressive if force was used, if the player attacks in the cellar, or if the ledger goes up the stair with the crew standing | As E1. Racks are cover: a pole sweep that hits a rack stops short. | Optional. 45–75 s. Fair for Milestone 1 dependable equipment. |
+| **E2** | Smuggler pole-man + 2 cutters (after MQ6: pole-man + 1 cutter) | Cellar market | Aggressive if force was used, if the player attacks in the cellar, or if the ledger goes up the stair with the crew standing | As E1. Racks are cover: a pole sweep that hits a rack stops short. | Optional. 45–75 s. Fair for Milestone 1 dependable equipment. |
 | **E3** | 2 River Leeches, 1 River Skitter swarm | River tunnel water | Aggressive in the water volume only | Leech rears (~1.2 s) before latching; latch breaks on stepping onto the brick ledge or two hits. Skitters: ripple fan (~0.8 s). | Only if the grate is cranked outside the skiff window. Low threat by design. |
 
 Downed crew stay down until the player leaves the building. Nothing they carry advances the quest.
@@ -157,8 +163,8 @@ Downed crew stay down until the player leaves the building. Nothing they carry a
 | `UL_ENTRY_ERRAND` / `_PASS` / `_RIVER` / `_FORCE` | Route events | `UL-D4` opener variant, `UL-D7` variant |
 | `UL_DOT_FOUND` | `S02b_dot` | `UL-D7` → `UL_OTTILIE_TOLD` |
 | `UL_LEDGER_GIVEN` / `UL_LEDGER_TAKEN` | `UL-D4.30` / `UL-D4.40` | `UL-D5` opener |
-| `UL_RHOSYN_WITNESS` / `UL_RHOSYN_GONE` / `UL_RHOSYN_STAYS` | `UL-D5` (exactly one) | MQ10, Brookhollow barks, `UL-D7` |
-| `UL_LEDGER_CUT` | `UL_RHOSYN_STAYS` | MQ10 |
+| `UL_RHOSYN_WITNESS` / `UL_RHOSYN_FLED` / `UL_RHOSYN_STAYS` | `UL-D5` (exactly one) | MQ10 (presence at the hearing), MQ12 (Brookhollow variant), Brookhollow barks, `UL-D7` |
+| `UL_LEDGER_CUT` | `UL_RHOSYN_STAYS` (torn chit and pass pages) | MQ10 (weaker chip) |
 | `UL_LEDGER` | `S06_deposit` | MQ10 chip |
 | `UL_OTTILIE_TOLD` | `UL-D7` with `UL_DOT_FOUND` | MQ7 |
 
@@ -166,9 +172,9 @@ Downed crew stay down until the player leaves the building. Nothing they carry a
 
 | Option | Immediate | Cost | Later |
 |---|---|---|---|
-| **A. Witness** — *"Come to the keepers with me. Say what you wrote."* | She gives a statement at the river post and goes to Crestbridge under keeper protection. `UL_RHOSYN_WITNESS`. | Her work papers are seized as forgeries. The people on her pinned list lose their places; two dock barks change (a worker gone from the drying racks; ME02 has one fewer mark on the beam). | MQ10: she attests the ledger hand; better terms. MQ12: she is clerking for the keepers, wry about it. |
-| **B. Gone** — *"Go downriver tonight. Take your press."* | A dawn barge (role-based crew) takes her. `UL_RHOSYN_GONE`. | No witness: at MQ10 the keepers ask who wrote the book and nobody can say. Brookhollow loses the only person writing papers for displaced workers. The cellar closes for a season when the crew find her nook empty. | The ledger is a full chip. Ottilie's glass stops vanishing (barks). |
-| **C. Stays** — *"Stay. Write for the workers. Not for them."* | Rhosyn cuts the chit pages, the ones in her own careful crew-pass hand, out of the ledger before it goes to the keepers. `UL_RHOSYN_STAYS`, `UL_LEDGER_CUT`. Ottilie offers her a bench writing labels. | The player has kept a forger's secret, and Ottilie knows it. The ledger is weaker: MQ10 cannot name which licensed haulers lent their names. The cellar stays open. | MQ10 chip still valid. Placed workers keep their places. In MQ12 she has a stall writing letters. |
+| **A. Witness** — *"Come to the keepers with me. Say what you wrote."* | She gives a statement at the river post and goes to Crestbridge under keeper protection. `UL_RHOSYN_WITNESS`. | Her work papers are seized as forgeries. The people on her pinned list lose their places; two dock barks change (a worker gone from the drying racks; ME02 has one fewer mark on the beam). | MQ10: she is present and attests the ledger hand; better terms. MQ12: she is clerking for the keepers, wry about it. |
+| **B. Flee** — *"Go downriver tonight. Take your press."* | A dawn barge (role-based crew) takes her. `UL_RHOSYN_FLED`. | No witness: at MQ10 the keepers ask who wrote the book and nobody can say. Brookhollow loses the only person writing papers for displaced workers. The cellar closes for a season when the crew find her nook empty. | The ledger is a full chip, held in the keepers' box. Rhosyn is absent from MQ10 and MQ12. Ottilie's glass stops vanishing (barks). |
+| **C. Stays** — *"Stay. Write for the workers. Not for them."* | Rhosyn tears out the chit and pass pages, the ones carrying her own careful hand, before the ledger goes to the keepers. `UL_RHOSYN_STAYS`, `UL_LEDGER_CUT`. Ottilie offers her a bench writing labels. | The player has kept a forger's secret, and Ottilie knows it. The ledger is weaker: the Board-sealed chits are gone, so the purse line is only the crew's word, and MQ10 cannot name which licensed haulers lent their names. The cellar stays open. | MQ10 chip still valid but weaker; she does not attend. Placed workers keep their places. In MQ12 she has a stall writing letters. |
 
 No option is wrong. None of them makes Rhosyn safe and keeps her work going and leaves the book whole.
 
@@ -203,8 +209,8 @@ No option is wrong. None of them makes Rhosyn safe and keeps her work going and 
 
 ### UL.11 Ledger, decisions, review
 
-**Mystery ledger.** *What the ledger proves:* that a named crew was paid for "Lock work" on the wrong nights and moved on borrowed hauler names. It does not show who paid Sallow; that stays MQ10's work `[ANTAGONIST]`. *Wrong reading:* Rhosyn is the crew's brain. Her nook says otherwise.
-**Open decision.** Bible §6.1 lists "Rhosyn's forged papers" as the MQ10 chip; this package makes the chip **the crew ledger, including her chit pages**, so the antagonist swap layer (§3.1) still finds Sallow `[ANTAGONIST]` only in this quest's tagged nodes. The Act III author should use `UL_LEDGER` (+ `UL_LEDGER_CUT`, `UL_RHOSYN_WITNESS`).
+**Mystery ledger.** *What the ledger proves:* that a named crew was paid for "Lock work" on the wrong nights, that the pay was **drawn on the Provisioner's purse** and chitted under the **Board seal**, and that the crew moved on borrowed hauler names `[ANTAGONIST]`. It shows who paid; it does not show what the Board knew or why, which stays MQ10's work. *Wrong reading:* Rhosyn is the crew's brain. Her nook says otherwise.
+**Contract (Director ruling, independent review pass).** The MQ10 chip is **the crew ledger** (`UL_LEDGER`), not "Rhosyn's forged papers". `UL_LEDGER_CUT` (torn chit and pass pages) is the weaker chip. Rhosyn's three outcomes are `UL_RHOSYN_WITNESS` (testifies; present), `UL_RHOSYN_FLED` (absent) and `UL_RHOSYN_STAYS` (in Brookhollow, not a witness), read by MQ10 and MQ12 as listed in §0.2. Antagonist swap: the purse line and the Board-seal text on the pay chits are tagged `[ANTAGONIST]`; bible §3.1's list of Board-seal documents should add the UL pay chits (open item for the bible owner).
 
 | Review finding | Revision |
 |---|---|
@@ -212,10 +218,12 @@ No option is wrong. None of them makes Rhosyn safe and keeps her work going and 
 | Option C first let Rhosyn stay at no cost. | She cuts her chit pages; the chip weakens and the player keeps a secret. |
 | Sallow was quoted in the cellar. | He is absent; every mention is tagged `[ANTAGONIST]`. |
 | Ledger as a quest item. | Carry-state object, deposited; flag-only chip. 0 quest items. |
+| Independent review pass: UL and Act III's chip C8 disagreed (forged papers vs ledger; impossible Rhosyn states). | Director ruling applied: the ledger is the chip and shows who paid (Provisioner's purse, Board-sealed chits). Option C tears the pages. `UL_RHOSYN_GONE` renamed `UL_RHOSYN_FLED`; all three outcomes listed in §0.2 for MQ10/MQ12. |
+| Independent review pass: no state for after MQ6 or MQ10. | Post-MQ6 variants (remnant crew, Rhosyn packing, smaller E2). Offer window closes when MQ10 starts; a late completion archives the ledger with no chip. |
 
 ### UL.12 Dialogue
 
-**UL-B1 — Crew bark (taproom, quest available):** CREWMAN: *"Book says we're paid through the month. Book says. Ask her downstairs what the book says."* → objective `S00_hook`.
+**UL-B1 — Crew bark (taproom, quest available):** CREWMAN: *"Book says we're paid through the month. Book says. Ask her downstairs what the book says."* / [MQ6 Completed] CREWMAN: *"Half the crew's in keeper rope since the mill. Book still says we're owed."* → objective `S00_hook`.
 
 ```
 UL-D1.01 OTTILIE: (holding a bowl to the window) "Not you. I'm talking to the bowl. It's got a seed in the glass."
@@ -257,6 +265,7 @@ UL-D3.30 CREWMAN: "Show it to the stair. Don't tell her where you got it. She'll
 ```
 
 ```
+UL-D4.00 [MQ6 Completed] RHOSYN: (packing inks into a crate) "Half of them are in keeper rope. I'm between lives. Be quick."   → UL-D4.01
 UL-D4.01 [UL_ENTRY_FORCE] RHOSYN: (pen still moving) "That was loud. I'd have let you in for a smile."
 UL-D4.01 [UL_ENTRY_PASS]  RHOSYN: "That's Fitch's pass. I wrote Fitch's pass. You're not Fitch."
 UL-D4.01 [UL_ENTRY_RIVER] RHOSYN: (not turning) "Nobody uses the river door but me. Come in, then. Wipe your feet."
@@ -288,16 +297,18 @@ UL-D5.03 RHOSYN: "If I'm in Brookhollow when they find the shelf empty, I'm in t
 UL-D5.10 RHOSYN: "Keepers will take my papers along with me. Every name on that wall loses their place."
 UL-D5.11 RHOSYN: (long breath) "All right. I'll say it in a nice clear hand."   {set UL_RHOSYN_WITNESS}  {event: S05_rhosyn}
 UL-D5.20 RHOSYN: "There's a grain barge at first light. They never ask what they're carrying. I'm very light."
-UL-D5.21 RHOSYN: "Nobody will be able to say who wrote your book. I hope it's enough without me."   {set UL_RHOSYN_GONE}  {event: S05_rhosyn}
+UL-D5.21 RHOSYN: "Nobody will be able to say who wrote your book. I hope it's enough without me."   {set UL_RHOSYN_FLED}  {event: S05_rhosyn}
 UL-D5.30 RHOSYN: "Then I'll need those pages back. The chits. They're my hand, every stroke."
-UL-D5.31 RHOSYN: (cuts them out with a penknife, neatly) "Your book's thinner. My neck's thicker. Don't tell anyone which."   {set UL_RHOSYN_STAYS, UL_LEDGER_CUT}  {event: S05_rhosyn}
+UL-D5.31 RHOSYN: (tears them out along the stitching, quickly) "Your book's thinner. My neck's thicker. Don't tell anyone which."   {set UL_RHOSYN_STAYS, UL_LEDGER_CUT}  {event: S05_rhosyn}
 ```
 
 ```
 UL-D6.01 KEEPER: (river post, lamp lit) "We're shut. Unless that's a book I've been hoping someone would bring me."
 UL-D6.02 KEEPER: (reads two pages; reads them again) "Lock work. Paid in full." [ANTAGONIST]
-UL-D6.03 [UL_LEDGER_CUT] KEEPER: "Pages gone at the back. Cut clean." (looks at the player) "I'll write 'as found'."
+UL-D6.03 [UL_LEDGER_CUT] KEEPER: "Pages torn out at the back. 'Drawn on the Provisioner's purse', and nothing pinned to prove it." (looks at the player) "I'll write 'as found'." [ANTAGONIST]
+UL-D6.03 [else] KEEPER: (turns to the back; stops) "That's a Board seal. On a crew's pay chit." (closes the book carefully) [ANTAGONIST]
 UL-D6.04 KEEPER: "This goes to Crest Hall with the morning rider. In a box. With a lock on it."   {set UL_LEDGER}  {event: S06_deposit}
+UL-D6.05 [MQ10 hearing already held] KEEPER: "Hearing's been and gone. It goes in the archive, then. Late's still written down."   {set UL_LEDGER; no MQ10 chip}  {event: S06_deposit}
 ```
 
 ```
@@ -309,11 +320,11 @@ UL-D7.10 OTTILIE: "My dot. Under their wax." (to the bowl in her hand) "You hear
 UL-D7.11 OTTILIE: "When someone wants a proper bowl from me, I'll have it ready. No waiting."   {set UL_OTTILIE_TOLD}  → UL-D7.20
 UL-D7.20 [UL_RHOSYN_STAYS] OTTILIE: "And the forger's on my bench writing labels. Lovely hand. Don't look at me like that."
 UL-D7.20 [UL_RHOSYN_WITNESS] OTTILIE: "Half the drying racks are short a pair of hands this morning. I suppose that's justice."
-UL-D7.20 [UL_RHOSYN_GONE] OTTILIE: "Cellar's dark. No wax on anything. I'll miss being outraged."
+UL-D7.20 [UL_RHOSYN_FLED] OTTILIE: "Cellar's dark. No wax on anything. I'll miss being outraged."
 UL-D7.21 OTTILIE: (pays) "For the trouble. Not for the glass. The glass was mine."   {event: S07_close → quest Completed}
 ```
 
-**Ledger inspect texts:** *Nights and sums:* "Pay in a neat hand: a night, a name, a sum. The same five names every time." / [MQ3 Completed] "The nights are the wrong nights in Ansel's book." *The Lock line:* "'Lock work. G.S. Paid in full.' Four nights running." `[ANTAGONIST]` *The chits:* "'Crew passes, Crestbridge toll: twelve.' Each beside a licensed hauler's name and a sum." *Rack bowl (under wax):* "Under the red wax, a tiny raised dot in the glass. Ottilie's mark." *Bowls on the rack:* "A bead of water in every bowl. Every bead the same height, though the shelf leans."
+**Ledger inspect texts:** *The Lock line:* "'Lock work. G.S. Paid in full.' Four nights running. The same five names every time." / [MQ3 Completed] "The nights are the wrong nights in Ansel's book." `[ANTAGONIST]` *The purse:* "'Drawn on the Provisioner's purse.' Pay chits pinned behind it, each stamped with the Provision Board's seal and signed 'received'." `[ANTAGONIST]` *The passes:* "'Crew passes, Crestbridge toll: twelve.' Each beside a licensed hauler's name and a sum." *Rack bowl (under wax):* "Under the red wax, a tiny raised dot in the glass. Ottilie's mark." *Bowls on the rack:* "A bead of water in every bowl. Every bead the same height, though the shelf leans."
 
 ---
 
@@ -371,11 +382,13 @@ UL-D7.21 OTTILIE: (pays) "For the trouble. Not for the glass. The glass was mine
 
 | Id | Enemies | Where | Role | Telegraph | Solo target |
 |---|---|---|---|---|---|
-| **E1** | 2 Reed Stalker (stalker), 1 Reed Stalker (lurker) | Pier 2 reed island | Stalkers: ambush, Aggressive within the reeds, leashed to the island. Lurker: Defensive in the water at the island's edge. | Stalker: reeds part in a straight line toward the player (~1.2 s), then a leap. Throat swells with a gurgle (~1.0 s) before a tongue-lash that pulls the player 3 m toward the water; stepping onto the stone footing breaks it. Lurker: ring of bubbles at the edge (~1.5 s), then a surfacing grab. | Required. 45–60 s. Player at 55–75% HP. |
-| **E2** | 3 stalkers + nest | Pier 3 | The nest wakes one more stalker every 20 s, at most two extra, until `cut_nest` completes. | As E1. The nest pulses (mats shiver) 2 s before a stalker drops out. | Required. 60–90 s. Cutting the nest early is the readable answer. |
-| **E3** | 2 stalkers | Platform (fallback route only) | Climb onto the platform at the pier 2→3 ride | Wet hands on the platform rail (~1.5 s) before each climbs on | Only on the fallback route. 30–45 s. |
+| **E1** | 1 Reed Stalker (stalker), 1 Reed Stalker (lurker) | Pier 2 reed island | Stalker: ambush, Aggressive within the reeds, leashed to the island. Lurker: Defensive in the water at the island's edge. | **Long first-appearance telegraphs.** Stalker: reeds part in a straight line toward the player (~1.6 s), then a leap. Throat swells with a gurgle (~1.4 s) before a tongue-lash that pulls the player 3 m toward the water; stepping onto the stone footing breaks it. Lurker: ring of bubbles at the edge (~2.0 s), then a surfacing grab. | Required. 40–55 s. Player at 60–80% HP. |
+| **E2** | 1 stalker + nest | Pier 3 | The nest wakes **one** more stalker after 30 s if `cut_nest` is not complete (at most 1 extra, never more than 2 stalkers at once). | As E1. The nest pulses (mats shiver) 3 s before a stalker drops out. | Required. 45–70 s. Cutting the nest early is the readable answer. |
+| **E3** | 2 stalkers, one at a time | Platform (fallback route only) | Climb onto the platform at the pier 2→3 ride; the second climbs only after the first is down | Wet hands on the platform rail (~2.0 s) before each climbs on | Only on the fallback route. 30–45 s. |
 
-**Family note:** bible §10 lists Reed Stalkers as first seen in MQ5. NB (after MQ2) and FW (after MQ3) may be a player's first stalkers, so E1 has the fewest bodies and the longest telegraphs in the family. Flagged to the Encounters package.
+**Cap:** no NB encounter ever has more than **2 Reed Stalkers active at once**, and all NB stalker telegraphs are longer than the family's standard.
+
+**Family note:** bible §10 lists Reed Stalkers as first seen in MQ5. NB unlocks after MQ2, so **NB is the Reed Stalkers' first appearance** for any player who takes it before MQ5; the counts and telegraphs above are tuned for that. FW now unlocks after MQ5 and is not a first appearance. Flagged to the Encounters package and to the bible §10 owner.
 
 ### NB.5 Steps and completion events
 
@@ -399,7 +412,7 @@ Faces may be read in any order once the player is underneath (S02–S04 run in p
 | `NB_FACE_WAR` / `NB_FACE_PATCH` / `NB_FACE_CRAMP` | Rubbing channels | `NB-D3` options, cloth inspect |
 | `NB_PLATFORM_USED` | Fallback route | Winch-hand bark |
 | `NB_BOTH_CREDIT` / `NB_ALL_PAY` / `NB_WICKETT_CREDIT` | `NB-D3` (exactly one) | Toll barks, Orla/Varley post-quest lines |
-| `NB_UNDERSIDE_OPEN` | Completion | World route; MQ10 optional approach |
+| `NB_UNDERSIDE_OPEN` | Completion | World route; MQ10 optional approach (request) |
 
 ### NB.7 Choices and consequences
 
@@ -443,6 +456,7 @@ Death underneath respawns the player at the crew stair (B), with faces already r
 | First draft had Aldric settle the feud. | He reads, asks one question and lets the player's account stand. He convenes; he does not rule. |
 | Fallback route had no danger. | E3 on the platform. |
 | The arch tally strokes risked implying named dead. | Strokes only, unattributed, no names in any inspect. |
+| Independent review pass: E2 could field five stalkers on a ledge at night, the hardest fight of Act I for many players. | Director ruling: max 2 stalkers at once, longer telegraphs, nest wakes at most one extra after 30 s; noted as the family's first appearance. |
 
 ### NB.12 Dialogue
 
@@ -521,18 +535,18 @@ NB-D4.30 ALDRIC: "Go and eat something at that feast. You've earned the bread, a
 |---|---|
 | Suggested content id | `lowmark.side.unreplanted` |
 | Type | Settlement story, Ashenstead (bible §7; lattice L-S08) |
-| Unlock | MQ3 Completed. Offered on entering the plot-edge volume while Wenna Hale and the row-warden argue. Best before MQ5; playable after. |
+| Unlock | MQ3 Completed. Offered on entering the plot-edge volume while Tansy Marl and the row-warden argue. Best before MQ5; playable after. |
 | Length | 20–30 minutes |
-| Combat share | ~30% (Field Goblins, Ash Hounds) |
+| Combat share | ~30% (Field Goblins: the nest, then its returning raiders) |
 | Skills | Woodcutting (scrub clearing, entry level), Melee |
 | Choice | **Joric's**, not the player's. The player decides what to offer; Joric decides what the ground becomes (3 outcomes). |
 | Outputs | `UR_GATE_RUN` / `UR_LINE_STAKED` / `UR_LEFT` (read by MQ5) |
-| Canon used | Joric Fen: field labourer and net-mender on the Ashen Flats; his land burned in the war and was never replanted; soft-spoken, never complains, avoids standing water; lost family in a river incident that was never recorded; says the water "gives things back slowly" ([CANON ANCHOR]). Ashen Flats: scorched rye, charred fence posts "like black teeth" (dossier §IV.3). Field Goblins nesting in old pits with broken farm tools; Ash Hounds with lung-irritant ash (§VIII). |
-| New | Wenna Hale, the row-warden, the buried field gate, the goblin nest in the plot. |
+| Canon used | Joric Fen: field labourer and net-mender on the Ashen Flats; his land burned in the war and was never replanted; soft-spoken, never complains, avoids standing water; lost family in a river incident that was never recorded; says the water "gives things back slowly" ([CANON ANCHOR]). Ashen Flats: scorched rye, charred fence posts "like black teeth" (dossier §IV.3). Field Goblins nesting in old pits with broken farm tools (§VIII). |
+| New | Tansy Marl, the row-warden, the buried field gate, the goblin nest in the plot, the raiders' threshing floor. |
 
 **Canon guard (binding for this package).** Joric receives no age, service, kin names, number of dead, or account of the incident. Other people may say only what canon allows: he lost people; it was a river incident; nobody wrote it down. Nothing in the plot (no object, imprint or inspect) refers to his family. The plot is grief's ground because he says so by not planting it, not because the game shows why.
 
-**One paragraph.** Joric Fen's plot on the edge of the Flats has stood unplanted since the war. The row-warden of the Rebirth Fields wants it folded into communal work. Wenna Hale, whose house has been full since the far-bank shortages, wants ground of her own and says something is stealing her seed. Joric mends nets on the plot edge and says nothing. The player clears the scrub and finds a Field Goblin nest under a fallen barn wall (Wenna's seed basket inside it) and an Ash Hound den in the burned culvert at the corner. With the vermin gone, the ash comes off a low corner where rainwater always stands. Under it is a buried field gate: a timber-and-iron paddle at the head of a dead ditch, its post cut with the plot's old boundary. The player can offer Joric three things: the gate turns, so the standing water could run; the post shows where his line ends; or nothing at all. Joric decides.
+**One paragraph.** Joric Fen's plot on the edge of the Flats has stood unplanted since the war. The row-warden of the Rebirth Fields wants it folded into communal work. Tansy Marl, whose house has been full since the far-bank shortages, wants ground of her own and says something is stealing her seed. Joric mends nets on the plot edge and says nothing. The player clears the scrub and finds a Field Goblin nest under a fallen barn wall (Tansy's seed basket inside it); the nest's raiders come back across the burned barns' threshing floor with a fresh haul, and the player drives them off. With the vermin gone, the ash comes off a low corner where rainwater always stands. Under it is a buried field gate: a timber-and-iron paddle at the head of a dead ditch, its post cut with the plot's old boundary. The player can offer Joric three things: the gate turns, so the standing water could run; the post shows where his line ends; or nothing at all. Joric decides.
 
 **Remember:** Joric turning the paddle himself, or Joric not turning it. **Want next:** what happens to this ground when the fields start flooding from below (MQ5).
 
@@ -543,8 +557,8 @@ NB-D4.30 ALDRIC: "Go and eat something at that feast. You've earned the bread, a
 | **A. Net bench** | Joric's place | An upturned crate and a net over a charred post. He sits with his back to the plot's low corner. Mended knots in the net are neat; one row is a beginner's, re-tied over. |
 | **B. Scrub** | Woodcutting | Burned scrub and driftroot suckers grown head-high. Three clumps block the plot's back. |
 | **C. Fence line** | Read the plot | Charred posts like black teeth, a gap where a gate once hung. Wire rusted to lace. |
-| **D. Goblin nest** | E1 | Under a fallen wall of the burned barn row next door (P20): a burrow lined with broken rakes, a cart-wheel rim, a child's tin cup, and a woven seed basket with Hale's knot on the handle. |
-| **E. Burned culvert** | E2 | A collapsed stone culvert at the plot corner, full of grey ash and hound tracks. Bones of a hare. |
+| **D. Goblin nest** | E1 | Under a fallen wall of the burned barn row next door (P20): a burrow lined with broken rakes, a cart-wheel rim, a child's tin cup, and a woven seed basket with Marl's knot on the handle. |
+| **E. Threshing floor** | E2 | The open threshing floor of the burned barn row next door (P20): split seed sacks, drag marks in the ash running toward the plot, a lookout's perch on a fallen beam. Across the Flats, in sight but not entered, is the trench culvert where MQ3's Ash Hounds denned; UR does not use it. |
 | **F. The low corner** | Unease | Rainwater stands here after every shower. It lies dead-flat even when the wind moves the scrub around it. Joric does not look at it. |
 | **G. The field gate** | Discovery | At the low corner's lip, under a hand of ash and silt: a timber paddle in an iron frame at the head of a dry ditch. The gatepost is cut with a row of notches and a holding mark. Beyond the paddle the old ditch runs, silted, toward the communal headland. |
 
@@ -552,21 +566,21 @@ NB-D4.30 ALDRIC: "Go and eat something at that feast. You've earned the bread, a
 
 ### UR.3 Player-facing sequence
 
-**Beat 0 — Whose ground (`S00_hook`).** *Objective: Find out what's wrong with the unplanted plot.* `UR-D1`: the row-warden and Wenna argue; Joric mends. If asked, Joric says one thing: "Ask what's eating the seed."
+**Beat 0 — Whose ground (`S00_hook`).** *Objective: Find out what's wrong with the unplanted plot.* `UR-D1`: the row-warden and Tansy argue; Joric mends. If asked, Joric says one thing: "Ask what's eating the seed."
 **Beat 1 — Clear it (`S01_clear`).** *Objective: Clear the scrub from the back of the plot.* Three Woodcutting gather interactions (scrub clumps; entry level). The row-warden lends a crew hatchet if the player has no blade (kept on completion). Clearing the third clump shows the burrow mouth.
-**Beat 2 — The nest (`S02_nest`).** *Objective: Deal with whatever is in the burrow.* E1. Then inspect the nest. Optional `S02b_basket`: carry Wenna's seed basket (carry-state) to her (`UR-D2`).
-**Beat 3 — The den (`S03_den`).** *Objective: Clear the den in the old culvert.* E2 starts when the player enters the culvert volume.
-**Beat 4 — Under the ash (`S04_gate`).** *Objective: Find out why the corner floods.* With the den gone, the row-warden notices the low corner never drains and hands over a spade. Three dig points (3 s channel each) at the corner's lip expose the paddle; inspect the gatepost (the boundary). If `LM_FIELD_FIX = plot` (MQ5 done first), the new relief ditch has already cut the gate half-free and there is one dig point, not three.
+**Beat 2 — The nest (`S02_nest`).** *Objective: Deal with whatever is in the burrow.* E1. Then inspect the nest. Optional `S02b_basket`: carry Tansy's seed basket (carry-state) to her (`UR-D2`).
+**Beat 3 — The raiders (`S03_raiders`).** *Objective: Drive the raiders off the threshing floor.* After the nest is cleared, a goblin raiding party comes back across the burned barns with seed. E2 starts when the player enters the threshing-floor volume. Callback barks (`UR-B3`) read `WC_BARNS_CLEARED` and `HW_DEN_CLEARED`.
+**Beat 4 — Under the ash (`S04_gate`).** *Objective: Find out why the corner floods.* With the raiders gone, the row-warden notices the low corner never drains and hands over a spade. Three dig points (3 s channel each) at the corner's lip expose the paddle; inspect the gatepost (the boundary). If `LM_FIELD_FIX = plot` (MQ5 done first), the new relief ditch has already cut the gate half-free and there is one dig point, not three.
 **Beat 5 — Tell him (`S05_joric`).** *Objective: Tell Joric what's under the ash.* `UR-D5`.
 **Beat 6 — His ground (`S06_decision`).** *Objective: Hear what Joric decides.* `UR-D6`. The player offers; Joric answers. If he chooses the gate, he walks to the corner and turns the paddle himself (NPC action, ~6 s, under player camera). The standing water shivers for the first time, then runs off down the old ditch.
-**Beat 7 — Neighbours (`S07_close`).** *Objective: Let the neighbours know.* `UR-D7` with Wenna and the row-warden. Quest Completed.
+**Beat 7 — Neighbours (`S07_close`).** *Objective: Let the neighbours know.* `UR-D7` with Tansy and the row-warden. Quest Completed.
 
 ### UR.4 Encounters
 
 | Id | Enemies | Where | Role | Telegraph | Solo target |
 |---|---|---|---|---|---|
 | **E1** | 3 Field Goblin scrappers, 1 trapper | Burrow mouth and nest | Scrappers Aggressive within the plot; trapper Defensive, keeps two scrappers between itself and the player | Scrapper raises a broken tool overhead (~1.0 s), then an overhand blow. Trapper sets rake-tine traps in the ash: a glint and a small mound appear (~2 s to arm); stepping on one roots the player 2 s with a small hit. Traps stay visible. | Required. 45–60 s. Player at 55–75% HP. |
-| **E2** | 2 Ash Hound runners, 1 ash-shaker | Burned culvert | Aggressive pack; runners circle before lunging | Runner crouches low (~0.8 s), then lunges. Ash-shaker plants its feet and shakes its coat (~1.5 s): a grey cloud (radius 3 m, lasts 4 s) that hurts while the player stands in it. Leave the cloud. | Required. 45–75 s. Fair for Novice-to-Milestone-1 equipment. |
+| **E2** | 2 Field Goblin scrappers, 1 Field Goblin hauler | Threshing floor (P20) | Scrappers Aggressive, screen the hauler. Hauler carries a seed sack along the drag marks toward the nest hole; if it reaches the hole it drops the sack in and turns to fight (no flee at low HP). | Hauler hunches and sets off (~1.0 s) along the visible drag marks; a hit makes it drop the sack. Scrappers: broken tool raised overhead (~1.0 s), then an overhand blow. No traps in this fight. | Required. 40–60 s. Fair for Novice-to-Milestone-1 equipment. |
 
 Goblin loot is ordinary. The seed basket is a world object in the nest, not a drop.
 
@@ -577,14 +591,14 @@ Goblin loot is ordinary. The seed basket is a world object in the nest, not a dr
 | `S00_hook` | Find out what's wrong with the unplanted plot. | `UR-D1` end node | Yes |
 | `S01_clear` | Clear the scrub from the back of the plot. | 3 scrub-clump gather events | Yes |
 | `S02_nest` | Deal with whatever is in the burrow. | E1 defeated + inspect nest | Yes |
-| `S02b_basket` | (Optional) Return the seed basket. | Carry-deposit to Wenna; `UR-D2` end | No |
-| `S03_den` | Clear the den in the old culvert. | E2 defeated | Yes |
+| `S02b_basket` | (Optional) Return the seed basket. | Carry-deposit to Tansy; `UR-D2` end | No |
+| `S03_raiders` | Drive the raiders off the threshing floor. | E2 defeated | Yes |
 | `S04_gate` | Find out why the corner floods. | 3 (or 1) `dig_ash` interactions + inspect gatepost | Yes |
 | `S05_joric` | Tell Joric what's under the ash. | `UR-D5` end node | Yes |
 | `S06_decision` | Hear what Joric decides. | `UR-D6` resolution node (sets exactly one `UR_*` outcome) | Yes |
 | `S07_close` | Let the neighbours know. | `UR-D7` end node | Yes (→ Completed) |
 
-S02 and S03 may be done in either order.
+S03 opens when S02 completes (the raiders are the nest's).
 
 ### UR.6 Flags
 
@@ -593,6 +607,8 @@ S02 and S03 may be done in either order.
 | `UR_BASKET_RETURNED` | `S02b_basket` | `UR-D7` variant |
 | `UR_GATE_RUN` / `UR_LINE_STAKED` / `UR_LEFT` | `UR-D6` (exactly one) | MQ5, plot props, `UR-D8` epilogue |
 | reads `LM_FIELD_FIX` | — | `S04` dig count; `UR-D8` epilogue |
+| reads `WC_BARNS_CLEARED` | — | `UR-B3` raider line |
+| reads `HW_DEN_CLEARED` | — | `UR-B3` callback line only (MQ3 owns the culvert den) |
 
 ### UR.7 The decision (Joric's) and its consequences
 
@@ -601,21 +617,23 @@ The player's options in `UR-D6` are offers. Joric accepts one or none. An option
 | Player offers | Joric decides | Cost | Plot afterwards |
 |---|---|---|---|
 | *"The gate still turns. The water could run."* | He turns the paddle himself. `UR_GATE_RUN`. | The old ditch dumps water on the communal headland; the row-warden has to dig a soak-pit and says so. | The low corner drains. Joric's bench moves to face the plot. The ground stays unplanted. |
-| *"The post shows where your line stops. I can stake it."* | He walks the line with the player and drives the last stake himself. The headland strip outside his line was never his; Wenna may plant it. `UR_LINE_STAKED`. | The row-warden's communal plan is refused in front of everyone, by a line in the ground. | A staked line, Wenna's first rows on the strip, Joric's ground unchanged. |
-| *"Nothing. It's yours. The pests are gone."* | He says thank you, and means it. `UR_LEFT`. | Wenna still has no ground of her own; her seed is safe now, and that is all. | Cleared, unplanted, quiet. The water still stands in the corner. |
+| *"The post shows where your line stops. I can stake it."* | He walks the line with the player and drives the last stake himself. The headland strip outside his line was never his; Tansy may plant it. `UR_LINE_STAKED`. | The row-warden's communal plan is refused in front of everyone, by a line in the ground. | A staked line, Tansy's first rows on the strip, Joric's ground unchanged. |
+| *"Nothing. It's yours. The pests are gone."* | He says thank you, and means it. `UR_LEFT`. | Tansy still has no ground of her own; her seed is safe now, and that is all. | Cleared, unplanted, quiet. The water still stands in the corner. |
 
 ### UR.8 Rewards and the MQ5 link
 
-**Rewards:** crew hatchet if loaned (tool); a small payment from Wenna if the basket came back; the self-sown rye moment; Woodcutting and Melee XP from actions. No lump XP.
+**Rewards:** crew hatchet if loaned (tool); a small payment from Tansy if the basket came back; the self-sown rye moment; Woodcutting and Melee XP from actions. No lump XP.
 
 **UR.8.2 What MQ5 should do with each outcome** (recommendation to the Act II package; MQ5 owns its own mechanics). The "cut through Joric's plot" option is **never removed**, and Joric's MQ5 consent remains his.
 
 | UR state | MQ5 "cut through Joric's plot" |
 |---|---|
 | `UR_GATE_RUN` | The relief ditch can follow the reopened field ditch from the gate: one dig point fewer. Joric's consent line: *"It's running already. Let it run further."* |
-| `UR_LINE_STAKED` | The cut must go inside Joric's line (his consent, as MQ5 writes it) or along the staked headland, which crosses Wenna's new rows and costs her a season's planting. |
+| `UR_LINE_STAKED` | The cut must go inside Joric's line (his consent, as MQ5 writes it) or along the staked headland, which crosses Tansy's new rows and costs her a season's planting. |
 | `UR_LEFT` | As MQ5 writes it, plus one Joric line: *"You cleared it and asked for nothing. Ask now, if you need to."* |
 | UR not played | MQ5 default. Recommend MQ5 requires clearing scrub at the cut line (the plot is overgrown). |
+
+**Request to Act II (independent review):** MQ5's plot-scrub fight (GL-E4b, Ash Hounds) should run only if UR is not Completed; when UR is Completed, the scrub is already cleared, and the goblins Joric warns about in `UR-D7.03` ("Mind the goblins don't come back") are the natural substitute. `GL-D5.31 [UR_LEFT]` should use UR.8.2's line (the player asked for nothing).
 
 ### UR.9 Failure, recovery, co-op
 
@@ -639,25 +657,29 @@ Death respawns at the net bench. Traps disarm on respawn. A dropped basket retur
 | Draft had a child's boot print preserved under the ash. | Cut. It implied Joric's lost family. Replaced with a goblin-scavenged tin cup with no owner. |
 | Draft let the player choose the outcome directly. | Offers only; directive options are refused; Joric decides. |
 | MQ5 option could be locked by `UR_LEFT`. | No outcome removes it; table rewritten as variants. |
+| Independent review pass: E2 refought MQ3's burned-culvert Ash Hound den (same composition, same ground). | Director ruling: MQ3 owns the den. E2 is now a goblin raiding party on the P20 threshing floor (no traps, a hauler to intercept); `HW_DEN_CLEARED` is read for one callback line only. |
+| Independent review pass: "Wenna Hale" collided with Wenna Tull (Act I) and the Watcher pair Hale & Pim. | Renamed **Tansy Marl** (no hits in any 04_CONTENT_PRODUCTION file). |
 
 ### UR.12 Dialogue
 
 ```
 UR-D1.01 ROW-WARDEN: "It's good ground going to waste. The Fields could feed six houses off it."
-UR-D1.02 WENNA: "I'd settle for feeding mine. And something's had my seed twice this month."
+UR-D1.02 TANSY: "I'd settle for feeding mine. And something's had my seed twice this month."
 UR-D1.03 ROW-WARDEN: "He won't plant it. He won't let it be planted. That's two answers I can't use."
-UR-D1.04 WENNA: (lower) "He lost people. River business. Nobody ever wrote it down." (beat) "I still need ground."
+UR-D1.04 TANSY: (lower) "He lost people. River business. Nobody ever wrote it down." (beat) "I still need ground."
   > (Ask Joric.)                                          → UR-D1.10
   > "What's been eating the seed?"                         → UR-D1.20
 UR-D1.10 JORIC: (doesn't look up from the net) "Ask what's eating the seed."   → UR-D1.20
-UR-D1.20 WENNA: "Something small with hands. Comes from the back of his plot. Nobody goes back there."
+UR-D1.20 TANSY: "Something small with hands. Comes from the back of his plot. Nobody goes back there."
 UR-D1.21 ROW-WARDEN: "Clear it, then, if you're offering. There's a hatchet on my cart."   {if no blade: give crew hatchet}  {event: S00_hook}
 ```
 
 ```
-UR-D2.01 WENNA: (takes the basket, checks the knot) "Mine. Half full. They ate the rest, or planted it."
-UR-D2.02 WENNA: "So it wasn't him. I never thought it was him." (beat) "I thought it a bit."   {set UR_BASKET_RETURNED}  → end
+UR-D2.01 TANSY: (takes the basket, checks the knot) "Mine. Half full. They ate the rest, or planted it."
+UR-D2.02 TANSY: "So it wasn't him. I never thought it was him." (beat) "I thought it a bit."   {set UR_BASKET_RETURNED}  → end
 ```
+
+**UR-B3 — Raider barks (threshing floor, on E2 start):** [`WC_BARNS_CLEARED`] TANSY: *"Somebody cleared those barns after the root raid. They came back anyway."* / [else] TANSY: *"There. That's my seed going."* / [`HW_DEN_CLEARED`, after E2] ROW-WARDEN: *"Hounds are gone from the trench culvert, at least. Somebody went in after the mother."* / [`HW_DEN_CLEARED` not set, after E2] ROW-WARDEN: *"Keep clear of the trench culvert. Hounds still use the back of it."*
 
 **Inspect texts:** *Nest:* "Broken rakes, a wheel rim, a tin cup. A seed basket with a knotted handle." / *Low corner:* "Wind on the scrub. Not a ripple on the water." / *Paddle:* "A timber paddle in an iron frame, swollen shut. Beyond it a dry ditch runs toward the headland." / *Gatepost:* "Notches down the post and a holding mark. A boundary, cut where the ditch starts. The headland strip lies outside it." / [`LM_FIELD_FIX = plot`] *Paddle:* "The new relief ditch has cut the bank open beside it."
 
@@ -688,8 +710,8 @@ UR-D6.40 JORIC: "No."   → UR-D6.01 options (UR-D6.40 hidden afterwards)
 UR-D7.01 [UR_GATE_RUN] ROW-WARDEN: "That's my headland flooding now." (beat) "I'll dig a soak. Don't thank me."
 UR-D7.01 [UR_LINE_STAKED] ROW-WARDEN: "A line in the ground. Can't argue with a line in the ground." (he tries anyway, under his breath)
 UR-D7.01 [UR_LEFT] ROW-WARDEN: "Well. It's cleared, anyway. That's something I can tell the Fields."
-UR-D7.02 [UR_LINE_STAKED] WENNA: "A strip of my own. I'll have rows in by the thaw."
-UR-D7.02 [else] WENNA: "Seed's safe, at least. That's more than last month."
+UR-D7.02 [UR_LINE_STAKED] TANSY: "A strip of my own. I'll have rows in by the thaw."
+UR-D7.02 [else] TANSY: "Seed's safe, at least. That's more than last month."
 UR-D7.03 JORIC: (back at the net; to nobody in particular) "Mind the goblins don't come back."   {event: S07_close → quest Completed}
 ```
 
@@ -906,7 +928,7 @@ NT-D6.30 MAELIN: "Go and sleep. River keep you."   {event: S06_crossing → ques
 |---|---|
 | Suggested content id | `lowmark.side.fen_watch` |
 | Type | Combat challenge: hold a boundary, elite (bible §7; lattice L-S16) |
-| Unlock | MQ3 Completed. Offered by Lessa Mirepath at the Reedmere warning post. **Recommended** after MQ5 equipment (Competent); gated only by MQ3. The elite is a high-tier preview and should feel like it. |
+| Unlock | **MQ5 *The Guide-Line* Completed** (Milestone 2 equipment expected). Offered by Lessa Mirepath at the Reedmere warning post. Between MQ3 and MQ5, visiting the post plays Lessa's soft warning (`FW-B0`) and offers nothing. The elite is a high-tier preview and should feel like it. |
 | Length | 30–40 minutes |
 | Combat share | ~55% |
 | Skills | Woodcutting (withies, entry level), Melee |
@@ -939,7 +961,7 @@ NT-D6.30 MAELIN: "Go and sleep. River keep you."   {event: S06_crossing → ques
 **Beat 1 — Re-set it (`S01_withies`).** *Objective: Cut withies and re-set the line.* Cut 5 withies from knotted osier stools (Woodcutting gather), set each in a hole (2 s channel). Lessa sets the first and says something to it.
 **Beat 2 — Pull them back (`S02_cutters`).** *Objective: Bring the cutters back behind the line.* Three groups beyond the withies, any order. Group 1: a bark and they come. Group 2: Ivo Teasel (`FW-D2`) argues, then comes. Group 3: Reed Stalkers hit them as the player arrives (E1); after the fight one cutter is limping and follows the player out slowly (escort). Each group's return is an escort-arrival behind the line.
 **Beat 3 — Hold (`S03_hold`).** *Objective: Hold the withy line until dark.* Two stalker waves (E2). Stalkers target withies (they pull them over and drag them into the water; telegraph: a stalker grips a withy and throat-swells, ~1.5 s). A pulled withy is re-set with a 2 s channel. The line holds if, at the end of each wave, at least three withies stand; if not, the wave repeats with one fewer stalker. It cannot be lost.
-**Beat 4 — The pool (`S04_serpent`).** *Objective: Survive what's in the deep pool.* As the second wave ends the horn sounds from the post: the cutters' staging is shaking. The Deep-Pool Serpent (E3). Lessa stands at the landward edge calling the water.
+**Beat 4 — The pool (`S04_serpent`).** *Objective: Survive what's in the deep pool.* As the second wave ends the horn sounds from the post: the cutters' staging is shaking. The Deep-Pool Serpent (E3). Lessa stands at the landward edge calling the tells.
 **Beat 5 — The last withy (`S05_last_withy`).** *Objective: Set the last withy.* At the staging's edge. Lessa sets it with the player. The moment of unease. `FW-D4`: the choice.
 **Beat 6 — The kept path (`S06_route`).** *Objective: Follow Lessa.* She walks the kept path to its first three knots (follow-the-NPC; she waits if the player stops). `FW-D5`. Quest Completed; `FW_GUIDE_ROUTE`.
 
@@ -958,8 +980,8 @@ NT-D6.30 MAELIN: "Go and sleep. River keep you."   {event: S06_crossing → ques
 | Family / tier | Stillwater Serpents, high tier, elite (bible §10). First appearance of the family; MQ11's breaching serpent at the second gate is a different individual. |
 | Read | A body thicker than a barrel, mostly under water. Only the head and forebody are ever fully visible. Pale underside, dark back; it never makes a sound above water. Its movement is shown by the water and the reeds before the body. |
 | Arena rules | **Stakes** (4 timber discs, 2 m across): firm ground. Coil-slam does no damage there, and tail-sweep and drag cannot move a player standing on one. **Soft mat:** everything hits. **Shallows** (landward strip): slows movement; no extra damage. **Kerb:** the pool edge has a timber kerb. Nothing throws the player into deep water. |
-| Health target | Solo, Competent (Milestone 2) equipment: 3–4 minutes. Novice/Milestone 1: possible but punishing. Exact values belong to the Gameplay Designer. |
-| **Strike** (all phases) | The water humps and a V-wake runs at the player; reeds flatten along a 6 m × 1.5 m line on the mat (**1.5 s**). Lunge along the line: heavy damage (~30% of a Milestone 1 player's HP). Step off the line. **Punish:** the head rests on the mat for 2 s. Cadence ~8 s (P1–P2), ~6 s (P3). |
+| Health target | Solo, Competent (Milestone 2) equipment, which the MQ5 unlock assumes: 3–4 minutes. Exact values belong to the Gameplay Designer. |
+| **Strike** (all phases) | The water humps and a V-wake runs at the player; reeds flatten along a 6 m × 1.5 m line on the mat (**1.5 s**). Lunge along the line: heavy damage (about a quarter of a Milestone 2 player's health). Step off the line. **Punish:** the head rests on the mat for 2 s. Cadence ~8 s (P1–P2), ~6 s (P3). |
 | **Tail sweep** (all phases) | The tail breaks the surface on the pool side and the reeds rustle along a 120° arc toward the landward edge (**1.5 s**). Moderate damage and a 3 m knockback into the shallows. Move inside the arc's end or onto a stake. Cadence ~12 s. |
 | **Coil-slam** (P2–P3) | The body rises in an arch over the mat; a 4 m circle of shadow settles on the player's position and the mat sags (**2.0 s**). Heavy damage on soft mat; none on a stake. Leaves the circle flooded (slow) for 5 s. Cadence ~15 s. |
 | **Sound and breach** (at 66% and 33%) | It submerges; 6 s with no attacks; then **one** ring of bubbles widens at one of three breach points on the staging edge, and the reeds there bend away (**2.5 s**). Breach: damage in a 3 m radius. **Punish:** it lies across the staging for 4 s and takes increased damage. |
@@ -1018,7 +1040,7 @@ No fail. Death respawns at the warning post with withies, cutters and waves kept
 ### FW.11 Ledger, decisions, review
 
 **Mystery ledger.** *Why the stretch is done:* withheld (Lessa never says). *Player-observable:* deep clear water, no birds, a serpent, reeds that lean. *Wrong reading:* the serpent is the reason. It is one reason Lessa will admit to with "That's why," and the leaning reeds suggest it isn't the only one. Nothing settles it.
-**Open decision:** the recommended equipment (Competent) against the MQ3 gate. Recommend the quest is offered after MQ3, with Lessa warning "Not yet" in a bark until MQ5 is complete; no hard gate.
+**Resolved (Director ruling, independent review pass):** FW unlocks after MQ5. Before that Lessa gives the soft warning `FW-B0`. MQ11 still only needs FW done before MQ11.
 
 | Review finding | Revision |
 |---|---|
@@ -1026,8 +1048,11 @@ No fail. Death respawns at the warning post with withies, cutters and waves kept
 | Draft let the boundary fail and the quest branch on it. | Waves repeat with fewer stalkers; it cannot be lost. |
 | Draft had Lessa explain the done stretch after the fight. | Two words, no account. |
 | An Ivo line credited "her mother" with the withies, which gave Lessa invented kin. | Changed to "Nobody ever said." |
+| Independent review pass: the elite was a difficulty spike at the MQ3 gate; "calling the water" edged toward supernatural access. | Unlock moved to MQ5 with soft warning `FW-B0`; tuning restated for Milestone 2; "calling the tells". |
 
 ### FW.12 Dialogue
+
+**FW-B0 — Soft warning (warning post, MQ3 Completed, MQ5 not Completed):** LESSA: *(looks at the player's kit, then at the deep pool)* "Not yet. Come back when the fields are seen to." No objective is given.
 
 ```
 FW-D1.01 LESSA: (setting a snapped withy on the slate) "They pulled the line again. Third time."
@@ -1176,8 +1201,8 @@ FW-D5.20 LESSA: (to the reeds) "This one's all right." (to the player) "Go on. R
 |---|---|---|
 | `OL_STUBS_SEEN` | `S01b_stubs` | `OL-D7` line |
 | `OL_CALL_KNOWN` | Shelter last page | `OL-D5` bring-in option |
-| `OL_JOSS_IN` / `OL_LANTERN_ONLY` | `OL-D5` (exactly one) | `OL-D7`; MQ11 (Joss among Reedmere evacuees with Elspeth, or the hung lantern at the Post); MQ12 Ansel line |
-| drift site `old_lantern_bend` | Completion | → quieted |
+| `OL_JOSS_IN` / `OL_LANTERN_ONLY` | `OL-D5` (exactly one) | `OL-D7`; MQ11 (Joss among Reedmere evacuees with Elspeth and no lantern hung, or the still-burning lantern on the Post hook); MQ12 Ansel line |
+| drift site `old_lantern_bend` | Completion | → quieted **permanently, in every fen ending** (§0.2 contract) |
 
 ### OL.7 Choices and consequences
 
@@ -1186,7 +1211,7 @@ FW-D5.20 LESSA: (to the reeds) "This one's all right." (to the player) "Go on. R
 | **Bring him in** — *"Lantern in. Leg closed."* (requires `OL_CALL_KNOWN`) | Joss puts out his lantern and follows the player. Elspeth Quill comes to the Post and takes him into her care. | Joss is frightened indoors and may never be well. Ansel has to sit with the man he wrote off, every night he isn't walking. | Ansel strikes "lost on patrol" from the book and writes *"Joss Garrow. Came in."* Joss's hook stays empty because he is home. |
 | **Bring back the lantern** — *"Keep walking. I'll carry the light in."* | Joss lets the pole go and walks on along the leg, unlit. The player carries the lantern home through two waking pockets. | Joss stays out there. On some dusks the player can see a man walking the far leg without a light. He never engages and never speaks. | The lantern is hung, still burning, on the empty hook above *J.G.* Ansel writes *"Joss Garrow. On patrol."* Watchers greet it at every change. |
 
-The bend is quieted either way: the drift was gathering to the lantern, and it is no longer there.
+The bend is quieted either way: the drift was gathering to the lantern, and it is no longer there. It **stays** quieted through MQ11 and under every fen ending (§0.2 contract); the two flags change only lines and props.
 
 ### OL.8 Rewards
 
@@ -1216,6 +1241,7 @@ No fail. Death respawns at the Lantern Post with steps and flags kept; Joss rese
 | Draft's tally pages had "one for each of them". | Cut: implied counted dead. Tallies are unexplained strokes. |
 | Draft let the player kill Joss. | He yields; both endings bring him or his light home. |
 | Bring-in had no physical requirement. | The closing call is learned at the shelter and spoken to him. Always learnable, so there is no soft-lock. |
+| Independent review pass: Act III kept the bend residual and hung a lantern regardless of choice. | Director ruling: completing OL quiets the bend permanently in all fen endings; contract and the lit/unlit lantern states made explicit in §0.2 (the old "unlit lantern" wording there was wrong). |
 
 ### OL.12 Dialogue
 
@@ -1286,8 +1312,9 @@ OL-D7.06 ANSEL: "The willow bend's quiet tonight. First time I've ever written t
 | Canon anchors | Maelin (NT), Aldric (NB), Lessa (FW) and Joric (UR) get no invented age, service, kin, travel or record custody. Joric's loss stays "a river incident never recorded". An Ivo line that gave Lessa a mother was cut. Tovin, Corvin and Annelise do not appear. |
 | Evidence rule | Facts come only from records (ledger, toll book, Joss's pages), objects (repair faces, gatepost, bowls' maker's dot) and testimony. The drift, the level beads, the leaning reeds, the dry-burning lantern and Joss's count explain nothing and name no one. |
 | Soft-locks | Every required step has a guaranteed path: four UL routes, a platform fallback in NB, a repeatable hold in FW, the closing call always learnable in OL, and no fail state anywhere. |
-| Antagonist tagging | Sallow is absent and appears only in UL nodes and prose tagged `[ANTAGONIST]`. Marrick is not named. |
+| Antagonist tagging | Sallow is absent and appears only in UL nodes and prose tagged `[ANTAGONIST]`. The ledger's "Provisioner's purse" line and the Board seal on its pay chits are tagged `[ANTAGONIST]`. Marrick is not named. |
 | Quest items | **0.** All carried things are carry-state objects. |
 | Flags | Quest-local prefixes only; no new `LM_` flags. Cross-package reads are listed in §0.2. |
 | Duplicates | §0.4. NT has no investigation; NB and SB are distinct climbs. |
-| Known conflict | Reed Stalkers are "first seen MQ5" in bible §10, but NB (after MQ2) and FW (after MQ3) use them. Handled with low-density first encounters; flagged to the Encounters package. |
+| Known conflict | Reed Stalkers are "first seen MQ5" in bible §10, but NB (after MQ2) is their first appearance for most players. NB caps them at 2 at once with long telegraphs; FW now unlocks after MQ5. Flagged to the Encounters package and the bible owner. |
+| Independent review pass | Applied the independent side-content review and Director rulings 1, 2, 3, 4, 5 (see the entries in UL.11, NB.11, UR.11, FW.11 and OL.11). **UL:** the crew ledger is the MQ10 chip and shows who paid (the Provisioner's purse, Board-sealed pay chits `[ANTAGONIST]`); `UL_LEDGER_CUT` means torn pages; `UL_RHOSYN_GONE` is renamed **`UL_RHOSYN_FLED`**; post-MQ6 variants added; the offer window closes when MQ10 starts. **OL:** permanent quieting is now a contract in §0.2. **UR:** "Wenna Hale" is renamed **Tansy Marl**; E2 is now a goblin raiding party, not MQ3's den. **FW:** unlocks after MQ5, with a soft warning. **NB:** at most 2 stalkers at once and longer telegraphs, noted as the stalkers' first appearance. Flags with no reader in Act II or III are marked "(request)". **Rejected:** none of the review's findings for this file. Act III-side fixes (C8 re-key, the residual-pocket choice, the GL-E4b condition) belong to the main-act packages. |
