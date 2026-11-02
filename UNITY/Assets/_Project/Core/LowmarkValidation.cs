@@ -125,6 +125,7 @@ namespace Caelmor.Unity.Playable
                     restored.Check(restored.Session.Presentation(hush).seen && restored.Session.Presentation(hush).remaining==0,"mid-hush restoration preserves risen water without replay");
                 }
                 for(int i=0;i<85;i++)Step();
+                Act("FK_bottom_step");Check(Session.Feedback.Contains("No rain fell"),"latest authored early-world-state bottom-step inspect is bound");
                 for(int i=1;i<=4;i++)Act("FK_feed"+i);
                 Check(Session.Quantity("dried_game_strips")==0 && Session.Quantity("fowl_stew")==1,"households accept food from the earlier hunting/cooking loop");
                 Act("FK_own");Act("FK_tune");Act("FK_finish_own");

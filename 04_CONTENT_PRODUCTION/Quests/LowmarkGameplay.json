@@ -6666,6 +6666,39 @@
       "flock": "",
       "flockOperation": "",
       "counterEffects": []
+    },
+    {
+      "id": "FK_bottom_step",
+      "target": "fk_water_step",
+      "label": "Inspect the bottom step",
+      "text": "A step higher than it was, all at once. No rain fell. The water came down the river from somewhere.",
+      "kind": "inspect",
+      "quest": "",
+      "minStage": 0,
+      "maxStage": -1,
+      "all": [
+        "FK_HUSH_SEEN"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": []
     }
   ],
   "quests": [
