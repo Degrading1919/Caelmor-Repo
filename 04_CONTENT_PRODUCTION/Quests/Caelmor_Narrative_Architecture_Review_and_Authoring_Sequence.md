@@ -1,0 +1,172 @@
+# Caelmor Narrative Architecture — Consistency Review, Director Decisions, and Authoring Sequence
+
+**Status:** Proposal package for Creative Director milestone review (2026-11-02). Part of the package indexed in `Caelmor_Narrative_Architecture.md`. This file covers **deliverable 6** (consistency review: contradictions, missing causal links, excessive dependencies, gameplay opportunities) and **deliverable 7** (recommended sequence for later detailed quest authoring). §5 consolidates every decision reserved for the Creative Director. §6 records the independent review.
+
+---
+
+## 1. Scope of the review
+
+Reviewed against the package: Phase 1.1–1.5; the reconciled `LORE/` Timeline, War History, Factions, four regional dossiers, merged overview, and character anchors; the Part 2–6 proposals and ledgers, the Director decision sheet, the canon reconciliation audit, and the final lore lock review in `00_ADMIN/Reference/`; the complete Lowmark v1 package; Stage 15/27 quest runtime documents and `CODE/Systems/QuestRuntimeSystem.cs`; and the RuneScape structural study.
+
+---
+
+## 2. Contradictions found in existing sources
+
+None of these were silently fixed. Each has a recommendation.
+
+| # | Contradiction | Sources | Effect on narrative | Recommendation | Owner |
+|---|---|---|---|---|---|
+| 1 | **Quest failure states.** The Creative Director's rule is three states (Inactive, Active, Completed). Stage 27 and `QuestRuntimeSystem.cs` define `Failed`; Stage 15.2 defines `Uninitialized` and terminal `Abandoned`. | Director instruction (this mission); Stage 15.2, Stage 27; `QuestRuntimeSystem.cs`; `Caelmor_Lowmark_v1_Integration_Requirements.md` §1.1, G04, I-13, D-INT-7, and the re-offer section (which plans to adopt 15.2's `Abandoned` and states "All Lowmark quests may be abandoned") | No authored quest can fail, but the Lowmark integration handoff currently recommends the opposite of the Director's rule. | Retire `Failed` and `Abandoned` from the narrative contract; revise G04, I-13, D-INT-7 and the re-offer rule so a dropped quest simply stays Active (or returns to Inactive before any step is taken, if the Director prefers); Systems Engineer change with Director sign-off before Stage 24.1 runtime work. | Director → Systems Engineer |
+| 2 | **The Flameward Speaker's knowledge.** The Emberholt dossier makes him secretly aligned with personal ambition and hidden beliefs. Factions §5 says several Council members act under Hearthveil dream influence, and §VII.A calls him a "compliant Remnant instrument". | `Caelmor_Region4_EmberholtHeights.md` §IV, §XVII; `Caelmor_Factions.md` §5, §VII.A | Decides whether EH-M5 exposes a villain or a victim. | He is a **knowing** ally for his own ambition **and** dream-seeded: his anchor says he receives Hearthveil visions "sincerely believing them divine" and believes he guides a renaissance. The wrong readings are "wholly puppet" and "wholly mastermind". "Compliant" describes his relationship to the Ashfall Authority. Some councillors are dream-influenced. The character ledger's limit stands: he lacks the Ashfall endgame. | Director (light ruling) |
+| 3 | **"Invading forces" from the east.** Thornfell is "the eastern barrier against invading forces"; the Mire "buffered Lowmark and Thornfell from eastern incursions". The war was among Caelmor's four regions; no fifth power exists in canon. | Thornfell dossier §II; Mire dossier §II; Timeline §V | Players could infer an outside invader. | Do not pick an invasion vector here (Part 4 map audit: it "cannot silently pick one"); add no fifth power and give the precursor no military command while C03 is open. Resolve in the map and canon pass. | Director (canon pass) |
+| 4 | **Thornfell institution names.** Factions has "Cliffward Sentinels"; the dossier has "Ridge Wardens". The Assembly appears as Stonewake Assembly, March-Assembly Hall, and Thornfell Assembly. The merged overview lists Highridge Hold and Redbanner Camp, absent from the dossier (which lists Stonewake and Highsteads). | Factions §16; Thornfell dossier §III, §VI; merged overview §II | Naming drift when Thornfell production starts. | Treat Cliffward Sentinels as a ridge-patrol corps within the Ridge Wardens; use "Stonewake Assembly" for the body and "Assembly Hall at Stonewake" for the place; treat Highridge Hold and Redbanner Camp as unplaced names until the map pass. | Thornfell bible |
+| 5 | **Mire place names.** The merged overview lists Reedsward; the dossier's settlements are Sorrowmere, Marshfall, Griefwatch, Rootrest. | Merged overview §III; Mire dossier §VII | Minor. | Treat Reedsward as an unplaced name until the map pass. | Mire bible |
+| 6 | **Character-creation origins.** Each dossier has "starting faction flavor" for characters originating there; the v1 recommendation (D-3) is an origin-neutral wanderer. | Regional dossiers §XII/§XIII; bible §3 D-3 | Affects how future regions greet a player. | Keep the origin-neutral wanderer (the architecture assumes it). If origins are added later, each regional arc gets one optional line per origin, never a branch. | Director (already open as D-3) |
+| 7 | **"End their suffering."** The Emberholt dossier's *Ash-Stained Chains* offers to free, aid, or end the suffering of the captive Volkhari. | Emberholt dossier §XIX.3 | Killing Thalan would reduce a Volkhari person to a plot outcome and close Volkhari threads. | Offer free or aid-in-place only (decision D-E2). | Director |
+| 8 | **Perfect Flame as spectacle.** The dossier's capstone uncovers "ritual plans for a city-wide ignition" and the Remnant's goal of a "Fire Titan–class vessel". | Emberholt dossier §IX, §XIX.5 | Risk of high-fantasy spectacle. | Ground it (FT-04): a transmissible-mastery attempt that depends on a conditioned crowd, whose failure mode is a second Glassed Hollow under a district. Move its climax to the convergence. | Director (FT-04) |
+| 9 | **Part 2 spine and the "Stopping".** Part 2 places Shatterfall in Year 2 and uses "the Stopping" for the first three postwar years. | `Caelmor_Part2_War_and_Postwar_Proposal.md` | FT-02 uses "the Stopping" for the end of the war and puts Thornfell's stop in the final year. | FT-02b is written to fit either a Year-2 Shatterfall or no spine. "The Stopping" names the cessation season and the first postwar years together. Both remain optional proposals. | Director (with FT-02) |
+| 10 | **"Kaldren Stone-Echo".** A stale name in the Part 3 cross-region custodians table. | `Caelmor_Part3_Cross_Region_Continuity_Proposal.md` | Minor. | Use Kaldren Deepdelver everywhere. | Next canon pass |
+
+---
+
+## 3. Missing causal links (and how the package closes them)
+
+| Gap in existing canon | Why it matters | Closure | Status |
+|---|---|---|---|
+| **How the war ended.** Canon says no clean victory and no explanation every region accepts, but not what stopped it. | Without it, the peace has no shape and the endgame has no question. | Four regional stops in one season; no treaty (FT-02). | Foundational — Director |
+| **Why prewar interdependence failed.** Canon describes the inspection problem but no institution. | Gives the endgame something to remake. | The Crossing Concord (FT-01). | Foundational — Director |
+| **Who bought Lowmark's stolen grain.** v1 leaves a placeholder for "the cross-region pass". | The first cross-region thread. | A Thornfell Blood-Oath splinter's unsanctioned reserve (FT-03). | Foundational — Director |
+| **Why the Remnant has waited thirty years.** | Prevents an idle-villain problem. | It needs a conditioned generation, it lost its Titan template, and Thalan's research is slow (C.1). | Proposal |
+| **Why the Fire Titan has not destroyed anything since.** | Canon says Deepbrand fears its re-emergence. | Dormant in the deep works; stirred by excavation; contained when the works return to balance (FT-05). | Foundational — Director |
+| **Why a wanderer is trusted across four regions.** | Avoids a chosen-one premise. | Earned standing per region; the convergence requires all four, because only someone who has seen each region's hidden cost can carry it to the others. | Proposal |
+| **Why the player leaves Lowmark.** | Organic travel motive. | Being sent with a caravan once trusted; optional pursuit of the bill's buyer. | Proposal |
+| **What the Riverwardens do after v1.** | They should not vanish or rule. | They teach Braid tending to many hands; Long Horizon. | Proposal |
+| **Why Thornfell and Emberholt tension is rising now.** | Canon gives the history but not the trigger. | Mutual misreading: Emberholt's dense-city food stockpiles and drills, Thornfell's splinter stores and horn, and rumors Durell seeds in both (FT-04 for Durell's role). | Proposal + FT-04 |
+
+---
+
+## 4. Dependency, scope, and gameplay review
+
+### 4.1 Excessive dependencies
+
+| Risk | Finding | Mitigation adopted |
+|---|---|---|
+| Convergence breadth | Four regional standings are required (3 direct parents: LR-M1, MR-M5, EH-M6; 29 transitive milestones, all regional main arcs plus LR-M1). This is the single breadth gate. | No side quest or optional series is ever required; regional order is free after Lowmark; each region's spine stays inside its region (RuneScape study: deep spines plus bounded convergence, rejecting quest-point walls and flat 30-plus lists). |
+| Emberholt gate | One extra standing (Thornfell or Mire). | Either satisfies it, so release order stays flexible. |
+| Hidden gates | None. Every prerequisite is a visible milestone in the three-state model (study: no hidden partial-progress gates). | — |
+| Skill walls | None on main milestones. | Hard skill gates only on optional shortcuts, master commissions, and Long Horizon content. |
+| Lowmark return | Requires Thornfell; required before the convergence because it owns Lowmark's stop. | Lowmark v1 remains complete without it; it is optional for all regional play. |
+
+### 4.2 Canon and tone risks
+
+| Risk | Guardrail |
+|---|---|
+| Conspiracy creep (everything becomes the Remnant). | Faction C.1 bounded-reach clause; rule 4 in arcs §1.3; R15 recontextualizes the Remnant as feeding existing fears. |
+| Spectacle creep in the endgame. | Arcs §5.2 "must never become" rule; FT-04 grounding; the decisive acts are refusal, testimony, tending, and a careful descent. |
+| Anchor biography creep. | All shared-character edges must pass the Part 4 character ledger; Brynjar is not made the splinter's leader; Maelin is not made a refusing crew member; Kaldren is not made the log's author. |
+| Supernatural witnesses. | Rule B.3.4; every revelation has two human or material custodians. |
+| Lowmark resolution undermined. | The return arc adds Lowmark's wartime responsibility; it does not reverse v1's present-day truths (Part 5 Thread 1 owner rule). |
+| Magic power fantasy. | No milestone requires player spellcasting; any future system sits under the Concord's witness rules. |
+
+### 4.3 Opportunities for more memorable gameplay
+
+1. **One readable system per region.** Lowmark reads water and marker stones; Thornfell reads sound (horn codes, echo timing, null-points); the Mire reads shifting ground and channel states; Emberholt reads heat. Each is learned knowledge (Pillar A), and the convergence asks the player to use all four in one descent.
+2. **The hearing as a signature mechanic.** Lowmark MQ10's evidence-chip hearing recurs at TF-M5, EH-M6, and CV-M3, growing from a hall to a four-region table. Chips are earned in play, never found in dialogue.
+3. **Post-story access.** Each capstone turns its climax site into revisitable content (study principle 13): Shatterfall in storms, Bannerline at night, the Emberdeep after EH-M6.
+4. **Regional deeds layer.** A per-region, non-failing completion lattice (quests, places, encounters) that pays out traversal or utility, following the diary pattern in the study. Gameplay Designer proposal; no schema assumed.
+5. **The Sorrowback as the world's alarm.** A large, readable earth-memory encounter that rises when the regions mobilize and recedes when the player calms the Second Road; its presence is a visible world-state signal.
+6. **The four tools as party-free co-op texture.** In co-op, partners with different regional standings unlock different evidence lines in shared hearings, without syncing progression (Pillar D).
+
+---
+
+## 5. Decisions reserved for the Creative Director
+
+Each decision has a recommendation. Content can be authored on the recommendation and swapped later where the "if replaced" column says so.
+
+### 5.1 Foundational truths
+
+| Id | Decision | Recommendation | Alternatives | If replaced | Blocks |
+|---|---|---|---|---|---|
+| **FT-01** | Adopt the **Crossing Concord**, a prewar custom of mutual witness at crossings and passes that failed on the Road to War. | Approve. | No named institution (the endgame then creates something wholly new); a formal treaty body (more governmental, less grounded). | CV-M1 and CV-M3 framing; R16 seeds. | Convergence outline |
+| **FT-02** | Adopt **four regional stops, no treaty**, as how the war ended, with sub-truths 02a Lowmark crews' refusal after the Fourteenth Lot, 02b Thornfell's horns and final-year sealing, 02c the Memorywardens' last grounding forming the General, 02d the Glassed Hollow as the end of Emberholt's war. | Approve the frame; approve 02a–02d individually. | Approve the frame with different regional stops; keep "no single explanation" without specifying. | Each region's capstone revelation; R06, R08, R09, R13, R17. | Each regional bible (its own sub-truth); convergence |
+| **FT-03** | The **outside buyer** on the Lowmark bill is a Thornfell store-house supplying a Blood-Oath splinter's unsanctioned war reserve. | Approve; fill the v1 placeholder with a neutral store-house name once approved. | An Emberholt merchant house (risks the "Emberholt is always the villain" read the Part 3 caution warns against); a rival Lowmark house (keeps it local). | TF-M2 hook; v1 bill name only. | Thornfell bible |
+| **FT-04** | **Perfect Flame** defined as transmissible mastery depending on a conditioned crowd, with Durell's interregional operations bounded and discoverable. | Approve. | The dossier's city-wide ignition (spectacle risk). | EH-M5, CV-M2, CV-M4. | Emberholt bible; convergence |
+| **FT-05** | The **Fire Titan** lies dormant in the deep works, is stirred by excavation, and is its chamber cools when excavation stops and heat and pressure settle. This expands C11 (passive place-bound response) to a deep-works chamber, so it is a canon expansion, not only a plot choice. The convergence has no Titan fight. | Approve. | The Titan roams freely (raises threat level and conflicts with no reported attacks); the Titan is destroyed by force (contradicts the "force spreads it" lesson). | CV-M4 only. | Convergence |
+
+### 5.2 Other decisions
+
+| Id | Decision | Recommendation | Blocks |
+|---|---|---|---|
+| **D-C03** | Precursor name and continuity (canon C03). | Options: (a) partial continuity, a wartime fire-research cadre whose few survivors helped found the formal Remnant; (b) no personnel continuity, the formal Remnant inherited only records; (c) continuity of records and one patron family. Selvara stays bounded by her ledger row (sheltered during the war; no war role) in every option. Recommendation (a), name chosen in the Emberholt bible. | EH-M3 outline |
+| **D-C06** | Volkhari population (canon C06). | Keep unnumbered; depict individuals only. | Nothing; recommended before EH-M4 |
+| **D-E2** | Thalan's possible fates in EH-M4. | Free, or aid in place; no option to end his life. | EH-M4 |
+| **D-CV1** | The Fire Titan's end in CV-M4. | Contained and at rest in the works, still a person lost rather than a monster slain; the player chooses whether its name is restored to the public record. | CV-M4 |
+| **D-R1** | Release order after Thornfell. | Mire before Emberholt: the Mire teaches testimony before Emberholt tests it, and Glassed Hollow's displaced civilians reach Mire care first. Either order works structurally. | Production planning |
+| **D-Q1** | Retire `Failed`/`Abandoned` from the quest contract (contradiction 1), which also reverses the Lowmark integration handoff's D-INT-7 recommendation. | Approve and hand to the Systems Engineer before Stage 24.1. | Quest runtime |
+| **D-S1** | Speaker's knowledge (contradiction 2). | Knowing ally who is also dream-seeded. | EH-M5 |
+| **D-L1** | Existing Lowmark open decisions (bible §3: antagonist, Field-Mage, Riverwarden contact, backwater, yield state, and the rest). | Unchanged; the architecture assumes the current recommendations but does not depend on any of them except that the bill has a buyer and the Fourteenth Lot exists. | — |
+| **D-P1** | Canon promotion. | Promote nothing from this package until the FT rulings; then promote approved FTs into `LORE/` in a separate canon pass. | — |
+
+---
+
+## 6. Independent review log
+
+An independent reviewer read all six package files against `AGENTS.md`, the Master Protocol, `LORE/`, the Part 4–6 ledgers, the decision sheet, the reconciliation audit, the lore lock review, and the Lowmark bible (2026-11-02). It reported 20 findings (2 high, 9 medium, 9 low). All were accepted and fixed in this revision.
+
+| # | Severity | Finding | Fix applied |
+|---|---|---|---|
+| 1 | High | Lowmark's stop (FT-02a) was owned by optional LR-M1, yet CV-M1 assembled all four stops with only standings as gates: either a hidden gate or a reveal out of order. | LR-M1 is now a hard parent of CV-M1 (`LR_STANDING`), optional for regional play. Longest chain 33. Arcs §1.2, §5, §6.2–6.3; Ledger R13, R17; §4.1 updated. |
+| 2 | High | CV-M4 gave Kaldren travel to Emberholt, which the character ledger forbids. | Allies replaced by the player's learned practice and unnamed local hands. |
+| 3 | Medium | Kaldren listed as a Summit custodian (ledger: cannot validate a Summit account). | R07 custodians are now the horn-trial record and a Ridge Warden log. |
+| 4 | Medium | FT-05 gave the Stonebound a purpose ("made for") and active containment. | Rewritten as a physical settling of heat and pressure; flagged as a C11 expansion in FT-05. |
+| 5 | Medium | Spectacle drift: Crest Hall siege repeating MQ10, a Titan fight, a fail-worded stake. | One act of sabotage; environmental survival sequence with no Titan fight; stake reworded under the three-state rule. |
+| 6 | Medium | Speaker reading ignored his dream-seeded anchor. | Knowing ally **and** dream-seeded; wrong readings are "wholly puppet / wholly mastermind". |
+| 7 | Medium | D-C03 gave Selvara a war role. | D-C03 now offers three options; Selvara bounded by her ledger row in each. |
+| 8 | Medium | Darven Mott used as the guaranteed witness to the wartime ritual. | Guaranteed path is site evidence plus a provenanced record; Darven only guides. |
+| 9 | Medium | Index and graph misstated the Emberholt gate. | Index corrected; gate drawn solid. |
+| 10 | Medium | Several revelations lacked guaranteed paths; optional owners unacknowledged; R05 omitted the Lowmark link. | Paths added for R05, R10–R13, R15, R18, R19; optional-series owners exempted explicitly (R14). |
+| 11 | Medium | Hearthveil reach beyond Emberholt not flagged. | Kept to Emberholt delegates and travellers; any direct reach folded into FT-04. |
+| 12–20 | Low | E-M3/E-M4 codes; "Four causes" listing three; this placeholder; Contradiction 3 picking an invasion vector; "controlling plan" before approval; study edge vocabulary reading as a schema; contradiction 1 missing the Lowmark integration handoff's `Abandoned` plan (G04, I-13, D-INT-7); Kaelith "freed by accident"; FT-03 route assuming a map link. | All corrected; the integration-handoff conflict is now part of contradiction 1 and D-Q1. |
+
+The reviewer confirmed clean: status labels, the Mire's two non-undead major threats, one chapel with three names, postwar Dreamers, the precursor kept distinct from the formal Remnant with C03, C06 and C07 open, no player spellcasting, no quest that can fail or be abandoned, and no reproduced RuneScape content.
+
+---
+
+## 7. Recommended sequence for detailed quest authoring
+
+The order follows dependency, not release dates. Each step names its output and what it waits on.
+
+| Step | Work | Output (proposed location) | Waits on |
+|---|---|---|---|
+| 0 | Director rulings on FT-01–05, D-Q1, and D-R1. | Rulings recorded in this file §5 and project memory. | This package |
+| 1 | Lowmark v1 follow-through: fill the bill's buyer name (after FT-03); no other v1 change. Runtime and schema work continues independently (Roadmap 24, 31). | Edit to the Act I package placeholder. | FT-03 |
+| 2 | **Thornfell bible** in the Lowmark bible's format: author truth, cast, five milestones, side slate (at least half self-contained), POIs, flags, encounter families. Then milestone packages before side quests. | `04_CONTENT_PRODUCTION/Quests/Caelmor_Thornfell_Narrative_Production_Bible.md` (proposed; confirm against the Manifest) | Steps 0–1; map pass for Thornfell |
+| 3 | **Shared civilian ledger** for the Register of the Unreturned: choose three to five cases, their custodians, and which region owns each resolution. Writing this before the Mire prevents later continuity drift. | A section in the Mire bible, or an appendix to this package | Step 2 |
+| 4 | **Mire bible** (if D-R1 recommendation is accepted). | `…/Caelmor_Mire_Narrative_Production_Bible.md` (proposed) | Steps 2–3 |
+| 5 | **C03 and C06 rulings**, then the **Emberholt bible**. | `…/Caelmor_Emberholt_Narrative_Production_Bible.md` (proposed) | D-C03, D-E2, D-S1 |
+| 6 | **Lowmark return** (*The Fourteenth Lot*): one milestone and two or three side stories. | Addendum to the Lowmark bible | Thornfell bible (the second custodian) |
+| 7 | **Convergence bible**: CV-M1–M4, world-event structures, the four-seat hearing's chip table drawn from all arcs. | `…/Caelmor_Convergence_Narrative_Production_Bible.md` (proposed) | All four regional bibles |
+| 8 | **Long Horizon** stewardship structures and deep-works exploration briefs. | Brief in the convergence bible | Step 7; any approved practice or faction system |
+
+**Within every regional bible, author in this order** (working backward from revelations, then forward through discovery):
+
+1. The region's owned revelations from the ledger, each with its two custodians.
+2. The capstone, then the act turn, then the entry milestone.
+3. Seeds and evidence placement across the remaining milestones.
+4. Side stories that carry seeds, then self-contained side stories (at least half of the slate).
+5. Micro-events and environmental discoveries (three-layer framework).
+6. Independent review against this package, the character ledger, and the map audit.
+
+### 7.1 The quest contribution contract
+
+Every future quest, however small, declares five things in its summary card. This is how a self-contained quest still contributes to a larger, consistent world.
+
+| Field | Question | Example answer |
+|---|---|---|
+| **Anchor** | Which faction, place, or community does it deepen? | Thornfell Cairn-Keepers |
+| **World-truth row** | Which history row (H01–H25) or present pressure does it touch, if any? | H16, or "none (present-day only)" |
+| **Revelation role** | Does it plant, support, or own a revelation (R01–R20), or is it self-contained? | Plants R06 (a cairn with no body) |
+| **Recurring evidence** | Does any object, record, or person recur, and with which independent custodian? | None |
+| **State compliance** | How does it stay within Inactive/Active/Completed? | Choice recorded in `TF_…` outcome flag; no fail path |
+
+A quest that answers "self-contained" to the revelation field is welcome. Part 5's rule stands: Caelmor needs many stories that end where they begin.
