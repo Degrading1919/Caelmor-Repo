@@ -1,6 +1,6 @@
 # I. THE REMNANT (GLOBAL SHADOW FACTION)
 ### **Nature:** Secretive, authoritarian magical order  
-### **Origin:** Formed after the Great War from an unnamed wartime precursor; the exact transition date and personnel continuity remain unresolved
+### **Origin:** Formed after the Great War from an unnamed wartime precursor; some precursor personnel survived into it (limited continuity, approved D-C03, 2026-11-02); the precursor's name, the transition date, and who those survivors were remain unresolved
 ### **Base:** Emberholt (Ashfall Depths, lower sanctums)  
 ### **Philosophy:** “Fire is power, but only disciplined flame should shape the world.”
 
@@ -47,6 +47,8 @@ Volkhari “High Smoke” terminology removed; use “Volkhari” only.
 
 ### **Long-Term Goal**
 A continent where **fire magic is universal**, but *true mastery* belongs only to the Remnant.
+
+**Perfect Flame** *(approved FT-04, 2026-11-02)*: the Remnant's attempt to make advanced embercraft **reproducible** through conditioning and controlled knowledge, so that advanced practice can be produced on demand while its knowledge stays under Remnant control. It depends on a conditioned population and on knowledge the Remnant restricts. Its influence beyond Emberholt is specific and bounded: discrete, discoverable acts that exploit existing fears and crises; it is not their root cause.
 
 ---
 
@@ -292,6 +294,12 @@ They lost themselves to fire resonance and became an uncontrollable, molten crea
 - Volkhari recognize it as a desecration, not kin  
 - Remnant study it as a failed template for “Perfect Flame”
 
+### **Approved narrative direction (FT-05, D-CV1, 2026-11-02)**
+- The Titan is the transformed initiate: still a **suffering person** inside the fire, not a monster to be slain.
+- Its story resolves in a dangerous, earned confrontation that ends in **containment** (a binding to rest), not a conventional kill.
+- Whether an eventual release is possible is an open late-game question.
+- The precise magical mechanics of its bindings and any new binding remain subject to later consistency review (Stonebound canon in §18 is unchanged).
+
 ---
 
 ## 14. ASHFALL CAPTIVE VOLKHARI  
@@ -367,6 +375,11 @@ Thornfell treats most acoustic and wind behavior as natural. Rare dormant air re
 - Maintain defensive culture  
 - Oppose Emberholt magical expansion (correct)  
 - Preserve traditions without recognizing magical roots
+
+---
+
+### **Approved (FT-03, 2026-11-02): the independent Blood-Oath splinter**
+A Blood-Oath splinter, acting without the sanction of its clans or the Stonewake Assembly, keeps unsanctioned war stores against a feared Emberholt attack. It bought relief grain stolen during Lowmark's present crisis. Its route for that grain is not established. Blood-Oath clans as a whole are not the splinter, and no anchor character leads it.
 
 ---
 
@@ -667,7 +680,8 @@ This section ensures the *entire Factions file* matches **Phase 1 Canon**, **reg
 - Founders = iconic teachers, not titles.
 
 ### ✔ Remnant Canon Fix
-- An unnamed wartime precursor conducted war-era operations; the formal Remnant followed after the war. Exact transition and personnel continuity remain unresolved.
+- An unnamed wartime precursor conducted war-era operations; the formal Remnant followed after the war, with limited personnel continuity (D-C03). Name, transition date, and survivor identities remain unresolved.
+- **Perfect Flame** (FT-04): the Remnant's attempt to make advanced embercraft reproducible through conditioning and controlled knowledge. Its influence outside Emberholt is specific and bounded: discrete, discoverable acts that exploit existing fears and crises; it is not their root cause.
 - They **do not suppress magic**.  
 - They **scale fire magic publicly** while keeping advanced forms restricted.  
 - They aim for continent-spanning magical dominance.

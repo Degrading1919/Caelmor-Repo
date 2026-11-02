@@ -1,6 +1,6 @@
 # Caelmor Narrative Architecture — Revelation and Foreshadowing Ledger
 
-**Status:** Proposal package for Creative Director milestone review (2026-11-02). Part of the package indexed in `Caelmor_Narrative_Architecture.md`. This file covers **deliverable 5**: how each important discovery is earned. It extends the method of `00_ADMIN/Reference/Caelmor_Part5_Long_Form_Mystery_and_Reveal_Ledger.md` (author truth, public belief, evidence, wrong reading, withheld truth, owner, payoff) from Lowmark to the whole journey. Thread numbers T1–T6 refer to that ledger. FT-nn ids refer to the foundational truths in `Caelmor_Narrative_Architecture_Factions_and_World_Truth.md`.
+**Status (updated 2026-11-02):** Controlling plan after the Creative Director's rulings (Review §5.0). Revelations whose FT was approved (R05, R06, R08, R09, R13, R16, R17, R18) now rest on approved truth; R19 rests on FT-05's approved narrative direction, with mechanics subject to later review. Ownership, seeds and paths remain the production rules. Part of the package indexed in `Caelmor_Narrative_Architecture.md`. This file covers **deliverable 5**: how each important discovery is earned. It extends the method of `00_ADMIN/Reference/Caelmor_Part5_Long_Form_Mystery_and_Reveal_Ledger.md` (author truth, public belief, evidence, wrong reading, withheld truth, owner, payoff) from Lowmark to the whole journey. Thread numbers T1–T6 refer to that ledger. FT-nn ids refer to the foundational truths in `Caelmor_Narrative_Architecture_Factions_and_World_Truth.md`.
 
 ## 1. How revelations are earned
 
@@ -34,7 +34,7 @@ Tier 1 is Lowmark v1 (authored, listed for completeness). Tiers 2–4 are propos
 |---|---|
 | Revelation | The Board-sealed grain went to a Thornfell store-house supplying a Blood-Oath splinter's unsanctioned war reserve. |
 | Owner | Thornfell TF-M2. |
-| Seeds | Lowmark MQ4 bill of lading (placeholder name, to be filled after the ruling); Lowmark MQ10 chip C4 line "a buyer downriver"; Lowmark grain stencils on sacks at Passwatch (TF-M1). |
+| Seeds | Lowmark MQ4 bill of lading (reads "the Whinstone Store"; no region named in v1); Lowmark MQ10 chip C4 line "a buyer downriver"; Lowmark grain stencils on sacks at Passwatch (TF-M1). |
 | Custodians | The Lowmark bill (if the player kept it into TF-M2, or the Keepers' copy); the store-house inventory and pay chits in Thornfell. |
 | Wrong reading | Emberholt bought it to prepare for war; the Remnant is behind it. |
 | Withheld | Who in the splinter authorized purchase beyond the factor. |
@@ -89,7 +89,7 @@ Tier 1 is Lowmark v1 (authored, listed for completeness). Tiers 2–4 are propos
 | Seeds | Volkhari symbols erased from the Ash Roads [CANON]; the Ash-Clad Giant legend [CANON]; Deepbrand's fear [CANON]; Mire arrivals with burns (register series); Darven Mott's lost crew. |
 | Custodians | Glassed Hollow site evidence; restricted records with provenance; Seredh Embercarver's memory-stones. Darven Mott guides the player to the site; he saw a present-day collapse, not the wartime ritual, and his "breathing walls" are never evidence. |
 | Wrong reading | The Titan is a corrupted Volkhari; Kaelith needs rescue; all of Emberholt is guilty. |
-| Withheld | C03 precursor continuity until ruled; C06 population. |
+| Withheld | Precursor name and survivor identities (C03); C06 population. |
 | Recontextualizes | Emberholt's "discipline" doctrine was built on top of the disaster it hides. |
 | Guaranteed path | Site evidence plus a restricted record with provenance in EH-M3. |
 
@@ -145,7 +145,7 @@ Tier 1 is Lowmark v1 (authored, listed for completeness). Tiers 2–4 are propos
 
 **R18 — Perfect Flame needs the crowd (FT-04)**: owner CV-M4; seeds: EH-M2 volatility tests, EH-M5 rallies, Hearthveil chambers, the festival calendar; custodians: Meryndis's ritual plan and the curriculum ledgers; wrong reading: it is a single weapon to be destroyed; payoff: citizens' refusal decides it; guaranteed path: Meryndis's plan in CV-M4.
 
-**R19 — The Titan is a person the war made (FT-05)**: owner CV-M4; seeds: the Ash-Clad Giant legend [CANON]; Kaelen Veyr'un's dreams of something calling from below [CANON; never evidence]; Thennek's suspicion that it is not fully dormant [CANON]; Varos Keln's knowledge that the bindings are degrading [CANON]; the precursor rolls in EH-M3; custodians: the precursor rolls naming the initiate (recovered in EH-M3, subject to the C03 ruling) plus Meryndis's binding formulae; Thalan's recognition of suffering corroborates but is not a custodian; wrong reading: a monster to slay, or a weapon to master; payoff: the player binds it to rest and decides whether its name returns to the record; guaranteed path: the rolls in EH-M3 and the seized plan in CV-M4.
+**R19 — The Titan is a person the war made (FT-05)**: owner CV-M4; seeds: the Ash-Clad Giant legend [CANON]; Kaelen Veyr'un's dreams of something calling from below [CANON; never evidence]; Thennek's suspicion that it is not fully dormant [CANON]; Varos Keln's knowledge that the bindings are degrading [CANON]; the precursor rolls in EH-M3; custodians: the precursor rolls naming the initiate (recovered in EH-M3) plus Meryndis's binding formulae; Thalan's recognition of suffering corroborates but is not a custodian; wrong reading: a monster to slay, or a weapon to master; payoff: the player binds it to rest and decides whether its name returns to the record; guaranteed path: the rolls in EH-M3 and the seized plan in CV-M4.
 
 **R20 — The Forgotten God**: **withheld permanently** [PROPOSAL]. Long Horizon content may deepen the question, never answer it.
 
@@ -170,7 +170,7 @@ Which seeds exist now and which later authoring must place. "Exists" means the s
 
 | Seed | Where | Status | Pays off |
 |---|---|---|---|
-| Bill of lading to an outside buyer | Lowmark MQ4 | Exists (name is a placeholder) | R05 |
+| Bill of lading to an outside buyer | Lowmark MQ4 | Exists (names the Whinstone Store) | R05 |
 | Missing Fourteenth Lot stone | Lowmark MQ4, MQ9, MQ11 | Exists | R13 |
 | Oriel: rulers asked for floods on command | Lowmark MQ9 | Exists | R16 |
 | Evidence chips | Lowmark MQ10 | Exists (pattern) | CV-M3 terms scene |

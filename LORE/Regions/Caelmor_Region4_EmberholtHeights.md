@@ -63,7 +63,7 @@ The Glassed Hollow remains buried, but its impact shapes everything that followe
 ### Aftermath
 
 - Emberholt doubled down on fire control doctrines  
-- The later formal Remnant emerged from the wartime precursor and began influencing embercraft training; its exact transition and personnel continuity remain unresolved
+- The later formal Remnant emerged from the wartime precursor and began influencing embercraft training; its exact transition remains unresolved; some of its personnel survived into the formal Remnant (limited continuity, approved D-C03, 2026-11-02)
 - The Flameward Speaker rose to power by promising discipline, progress, and unity  
 - Public schools began teaching “safe embercraft” to children  
 - Entire social systems formed around controlled emotional expression  

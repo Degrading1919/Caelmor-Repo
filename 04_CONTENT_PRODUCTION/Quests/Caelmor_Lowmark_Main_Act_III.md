@@ -417,14 +417,14 @@ From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: 
 | Mystery | Author truth | Public belief after MQ10 | Evidence | Wrong reading | Withheld | Reveal owner |
 |---|---|---|---|---|---|---|
 | Who ordered the fire | Marrick, by implication, to Sallow. | "Her factor's crew did it." | Only C9 full ("nothing to read in the morning"). | Marrick lit it herself; Hesketh tried to burn his orders. | Whether she meant fire. She never says. | MQ10 (testimony only). |
-| Who the buyer was | A name on a bill; outside Lowmark. | "Someone downriver." | C4. | Emberholt; a rival Lowmark house. | Everything beyond the name. **No v1 content names a region.** | Future region (not v1). |
+| Who the buyer was | A name on a bill ("the Whinstone Store"); outside Lowmark. Author truth (FT-03): a Thornfell store-house used by an independent Blood-Oath splinter. | "Someone downriver." | C4. | Emberholt; a rival Lowmark house. | Everything beyond the name. **No v1 content names a region.** | Future region (not v1). |
 | Why the water-gate stilled | The gate sits on an old Braid outfall. | "The river came to the meeting." | The silence at the "Aye"; Marrick's parting joke. | The river approved the plan. | All of it. | Never. |
 
 ## 10.15 Open decisions
 
 1. **Miniboss yield** is the only v1 creature that surrenders. *Recommendation: keep; it is the clearest way to show the antagonists are people.*
 2. **Who succeeds Hesketh if stood down.** This package uses a role-based **Keeper-Lieutenant**. Hollis is the emotional choice, but he is junior and born after the armistice. *Recommendation: role-based; revisit if Hollis gets a Keeper-Captain arc later.*
-3. **The outside buyer's name** on `NF_bill_of_lading` is a placeholder until the cross-region pass.
+3. **The outside buyer's name** on `NF_bill_of_lading` is now "the Whinstone Store" (FT-03 approved 2026-11-02). v1 still names no region; Thornfell TF-M2 owns the reveal (R05).
 
 ## 10.16 Internal review log
 

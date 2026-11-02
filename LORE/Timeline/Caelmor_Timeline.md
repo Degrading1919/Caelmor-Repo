@@ -99,7 +99,16 @@ Dreamers do **not** exist in this era and do not cause magical rediscovery.
 - Lowmark refuses destructive large-scale water warcraft while continuing to feed and move people.
 - A wartime precursor to the later Remnant exploits these failures without causing every grievance or decision.
 
-The precursor's name, exact transition into the formal Remnant, and personnel continuity remain unresolved.
+The precursor's name and exact transition into the formal Remnant remain unresolved. Some of its people survived the war and helped form the formal Remnant (limited personnel continuity); beyond what character canon already states, who they were is not established. *[Approved D-C03, 2026-11-02]*
+
+### The Crossing Concord fails
+
+*[Approved FT-01, 2026-11-02]*
+
+- Before the war, the regions kept an informal custom of **mutual witness** at major crossings and passes, later remembered (where it is remembered at all) as the **Crossing Concord**.
+- A host region admitted another region's witnesses to see dangerous practice and to settle duties of passage. It had no army, no court, no seat, and no ruler: only access, testimony, and the shame of refusal.
+- It was never a central government. It failed on the Road to War as regions refused, ignored, or bypassed one another's witness.
+- Today it survives only as scattered customs whose meaning has been forgotten. Which refusal came first, and each region's exact part in the failure, are not established.
 
 ## V. The Great War — 5–10 years, ending about thirty years ago
 
@@ -132,6 +141,19 @@ The precursor's name, exact transition into the formal Remnant, and personnel co
 - No region achieves a clean victory.
 - The fighting stops, leaving damaged land, institutions, families, and public records.
 
+### How the war wore out
+
+*[Approved FT-02, 2026-11-02. Relative order only; no year numbers are established.]*
+
+The war did not end on a day and no treaty was made. Over its last years, exhaustion, hunger, sickness, desertion, and local truces did most of the work. Inside that ragged collapse each region made one withdrawal, at a different time and for its own reasons, and some fed others:
+
+1. **Thornfell (earliest and slowest).** Forced resonance horns had already brought passes down on attackers and on Thornfell's own people; Shatterfall Gorge is the remembered instance. Over the last years the Assembly pulled its forces home and sealed the high passes one by one. People on the wrong side were stranded. The sealings put more weight on Lowmark's river convoys.
+2. **Lowmark (late, over a season or more).** After a relief convoy and its crews were lost in Stillwater Fen to a supply flush (the Fourteenth Lot), river crews began refusing flushes and night convoys. The refusal spread unevenly; supply to every front thinned. Who gave the flush order is not established.
+3. **Emberholt (sudden, final year).** Hungry and cut off, the wartime precursor gambled on the Glassed Hollow ritual to end the war in Emberholt's favour. It destroyed Emberholt's capacity to continue in a night.
+4. **The Mire (the last great battle).** Retreating columns and their pursuers collided on the Field of Fallen Standards. The last Memorywardens grounded the battlefield so the armies could not keep fighting. The overload killed most of them and concentrated the imprint later called the General Who Wouldn't Fall.
+
+Raids and skirmishes continued for some time after the last great battle. Where regional speech says "the armistice", it names this cessation, not a signed agreement. Each region's public history credits its own stop with ending the war and hides its cost; nobody signed anything.
+
 ## VI. Immediate Postwar Recovery
 
 ### Dangerous wartime practice is rejected
@@ -156,7 +178,7 @@ Regional responses diverge:
 ### The formal Remnant develops
 
 - The wartime precursor is followed by the later formal Remnant.
-- Its exact name before formation, transition date, and personnel continuity remain unresolved.
+- Some precursor personnel survived into the formal Remnant (limited continuity, approved D-C03). The precursor's name and the transition date remain unresolved; beyond what character canon already states, the identities of those survivors remain unresolved.
 - It preserves and pursues dangerous lines of research behind public recovery.
 
 ## VII. Thirty Years of Recovery
@@ -180,5 +202,6 @@ Regional responses diverge:
 - Dreamers, induced visions, ordinary dreams, and public belief remain difficult to distinguish without evidence.
 - Stonebound nodes may respond passively to disturbance but cannot reveal history.
 - Lowmark is the sole full v1 region, and v1 has no player spellcasting system.
+- In Thornfell, a Blood-Oath **splinter** acting independently of its clans and the Assembly keeps unsanctioned war stores. It is the buyer of relief grain stolen during Lowmark's present crisis. How that grain travelled is not established. *[Approved FT-03, 2026-11-02]*
 
 The player enters a world whose oldest meanings are often understood only after later evidence changes the reading of an earlier place, record, or act.

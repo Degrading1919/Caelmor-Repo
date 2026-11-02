@@ -680,7 +680,7 @@ NF-D5.04 RUSK: "Gently, he says."
 **Document: `NF_bill_of_lading`** (antagonist swap layer: seal text)
 
 > BILL OF LADING
-> Relief grain, sixty-eight measures, by the Cut. Consigned to the bearer at the lower reach for the account of *[outside buyer: placeholder pending Director]*.
+> Relief grain, sixty-eight measures, by the Cut. Consigned to the bearer at the lower reach for the account of the Whinstone Store.
 > Priority rate, paid in advance.
 > *[Provision Board seal: the wheatsheaf in a ring; placeholder pending D-1]*
 > Received for the Lock: *G.S.*

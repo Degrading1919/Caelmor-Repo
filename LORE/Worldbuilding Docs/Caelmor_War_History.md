@@ -48,7 +48,11 @@ Dangerous magical experimentation sharpened the problem:
 
 Weaponization followed. Fire practice was amplified beyond civic use. Rare Thornfell resonance was forced toward destructive ends although most echoes remained natural. Earth-memory was pressed into battlefield service. Lowmark refused large-scale destructive water warcraft while its food, ferries, mills, and bridges became strategic assets.
 
-A wartime precursor to the later formal Remnant exploited these failures and pursued dangerous research. Its name, exact transition into the Remnant, and continuity of personnel remain unresolved. It did not cause every grievance, betrayal, or military decision.
+A wartime precursor to the later formal Remnant exploited these failures and pursued dangerous research. Its name and exact transition into the Remnant remain unresolved; some of its personnel survived into the formal Remnant (limited continuity, approved D-C03, 2026-11-02). It did not cause every grievance, betrayal, or military decision.
+
+### The Crossing Concord
+
+*[Approved FT-01, 2026-11-02]* Before the war the regions kept an informal custom of mutual witness at major crossings and passes: a host admitted another region's witnesses to see dangerous practice and to settle duties of passage. It was never a government. It had no army, court, or ruler, only access, testimony, and the shame of refusal, and it failed as the pressures above hardened. Its customs survive in scattered, half-understood forms.
 
 ## IV. The Great War
 
@@ -95,11 +99,15 @@ At the Glassed Hollow, the wartime precursor exploited Volkhari knowledge and ca
 - Other Volkhari survivors exist, but their exact number and community form remain unresolved.
 - Public accounts concealed or reduced the catastrophe as a forge collapse.
 
+*[Approved FT-02d, 2026-11-02]* The ritual was the precursor's gamble to end the war quickly in Emberholt's favour after sealed passes and thinning grain had cut the city off. Instead it ended Emberholt's capacity to fight in a night.
+
 The catastrophe was an extreme result of human coercion and unsafe practice. It does not make every Emberholt fire, guild, civic office, or bereaved household part of the same hidden plan.
 
 ## VI. The end of the war
 
 No side won cleanly. Magical escalation, broken supply, civilian loss, fractured command, and ruined trust made continued war unbearable. Fighting ended without a single explanation that every region accepted.
+
+*[Approved FT-02, 2026-11-02]* The historical shape behind that public uncertainty: the war **wore out**. Exhaustion, hunger, desertion, and local truces did most of the work over its last years, and no treaty was ever made. Inside that collapse came four staggered regional withdrawals, each for its own reasons: Thornfell's slow sealing of the high passes (earliest, after its forced horns had already killed its own at Shatterfall); Lowmark's river crews' spreading refusal after the Fourteenth Lot convoy was lost; the Glassed Hollow, which ended Emberholt's war in a night; and the Mire's last Memorywardens grounding the last great battle at the cost of their lives. Some fed others. Raids continued for a time after. Each region believes its own stop ended the war; none of them knows the whole.
 
 Different records preserve different truths:
 
@@ -151,7 +159,7 @@ Dreamers first appeared after the Great War.
 
 ## IX. The formal Remnant
 
-The wartime precursor was followed by the later formal Remnant. The exact transition, name, date, and personnel continuity remain unresolved.
+The wartime precursor was followed by the later formal Remnant. Some precursor personnel survived into it (limited continuity, approved D-C03). The precursor's name and the transition date remain unresolved, and beyond what character canon already states, who those survivors were remains unresolved.
 
 The formal Remnant preserves dangerous research and seeks control over magical mastery. It is a consequential hidden faction, but it is not the universal cause of political greed, class conflict, bad records, ordinary cruelty, or every supernatural event.
 

@@ -1,6 +1,6 @@
 # Caelmor Narrative Architecture
 
-**Status:** Proposal package for Creative Director milestone review, 2026-11-02. On approval it becomes the controlling plan for narrative work **after** Lowmark v1; until then it is a proposal. It sets the major history, faction motives, linked arcs, pivotal quests, revelations, and payoffs that later quests build toward. It does not replace the Lowmark v1 package, does not change `LORE/` canon, does not commit future regions to production or release, and creates no schemas, JSON, or C#. New foundational truths are listed for approval as FT-01 to FT-05.
+**Status (updated 2026-11-02 after Creative Director rulings):** The Creative Director approved the direction of this package and ruled on FT-01 to FT-05 and D-C03, D-C06, D-CV1, D-R1 and the convergence-location concept (Review §5.0). It is now the **controlling plan for narrative work after Lowmark v1**, and the quest contribution contract (Review §7.1) is mandatory. Approved foundational truths have been promoted into `LORE/` by a controlled canon pass (Review §5.3); everything not named in a ruling remains a proposal. It sets the major history, faction motives, linked arcs, pivotal quests, revelations, and payoffs that later quests build toward. It does not replace the Lowmark v1 package, changes `LORE/` only through the logged canon pass in Review §5.3, does not commit future regions to production or release, and creates no schemas, JSON, or C#. Foundational truths FT-01 to FT-05 are now ruled (Review §5.0); the precise magical mechanics of FT-05 remain subject to a later consistency review.
 
 **Authority used:** Phase 1.1–1.5; `00_ADMIN/Reference/Caelmor_Master_Assistant_Protocol.md` §5.4–5.6; the reconciled `LORE/` Timeline, War History, Factions, regional dossiers, merged overview, and character anchors; the Part 2–6 proposals, ledgers, decision sheet, reconciliation audit, and lore lock review in `00_ADMIN/Reference/`; `Caelmor_Lowmark_v1_Narrative_Production_Bible.md` and its packages; `00_ADMIN/Roadmaps/Caelmor_Roadmap.md`; the File Manifest.
 
@@ -49,7 +49,7 @@ All five architecture files sit beside the Lowmark bible in `04_CONTENT_PRODUCTI
 
 ### 3.2 Unresolved, and kept unresolved
 
-C03 precursor continuity, C06 Volkhari population, C07 Founder roster, the Forgotten God, the Echohewn disappearance, the origin of "Sinking Star", map geometry, and constitutional powers. The architecture uses neutral wording for each and names the milestone, if any, that will need a ruling (World Truth §B.2).
+C03 precursor name, transition and survivor identities (limited continuity approved), C06 Volkhari population (kept unnumbered), C07 Founder roster, the Forgotten God, the Echohewn disappearance, the origin of "Sinking Star", map geometry, and constitutional powers. The architecture uses neutral wording for each and names the milestone, if any, that will need a ruling (World Truth §B.2).
 
 ### 3.3 Threads that can carry long-term questlines
 
@@ -57,7 +57,7 @@ C03 precursor continuity, C06 Volkhari population, C07 Founder roster, the Forgo
 |---|---|---|
 | How the war ended | "No single explanation" (War History §VI); Part 2 "Cessation without settlement". | The convergence question (FT-02). |
 | The inspection gap | Timeline §IV; Part 4 event 5. | The Crossing Concord (FT-01). |
-| Lowmark's stolen grain and the Fourteenth Lot | v1 bill placeholder; Bramblelock stones; Fenmere ledgers. | Thornfell entry (FT-03); Lowmark return. |
+| Lowmark's stolen grain and the Fourteenth Lot | v1 bill ("the Whinstone Store"); Bramblelock stones; Fenmere ledgers. | Thornfell entry (FT-03); Lowmark return. |
 | Thornfell's forced resonance | Shatterfall scar; Ressa's forbidden calls; Brynjar's boast. | Thornfell arc. |
 | Memorywardens' downfall | Mire dossier §IV; Sennic's memories; chapel relic rumor. | Mire arc (FT-02c). |
 | Glassed Hollow and Volkhari | Directed core. | Emberholt arc. |
@@ -96,14 +96,14 @@ Mythic Age → Quiet Withdrawal → Rediscovery (Riverwardens, Echohewn, Memoryw
 
 Lowmark v1 (12 main quests) → Thornfell (5) → Lowmark return (1; optional for regional play, required before the convergence) → Mire (5) → Emberholt (6) → convergence (4) → Long Horizon. Optional series run alongside. Players meet history out of chronological order by design: they learn the war's end (each region's stop) before they learn the prewar Concord, and Lowmark's own wartime shame last among the regions.
 
-### 5.3 Future release order (recommendation only; not a commitment)
+### 5.3 Future production and release (only Lowmark is approved for release)
 
-v1 Lowmark → v1.5 Thornfell (the Phase 1.3 direction) → Mire → Emberholt (recommendation D-R1) → Lowmark return as an update alongside Thornfell or later → convergence once all four regions exist → Long Horizon. Only Lowmark is approved for release; Phase 1.3 names Thornfell as the v1.5 direction.
+v1 Lowmark → v1.5 Thornfell (the Phase 1.3 direction) → Mire → Emberholt (D-R1 ruled: preferred **production** order, not a player order or release schedule) → Lowmark return as an update alongside Thornfell or later → convergence once all four regions exist → Long Horizon. Only Lowmark is approved for release; Phase 1.3 names Thornfell as the v1.5 direction.
 
 ---
 
 ## 6. Using this package
 
-- **Before writing any future quest:** check the World Truth rows it touches, the revelation it plants or owns (or declare it self-contained), the character ledger, and the quest contribution contract (Review §7.1). The contract becomes mandatory once the Director approves the package.
-- **Before starting a regional bible:** obtain the FT rulings it depends on (Review §5) and follow the authoring order (Review §7).
-- **When the Director rules:** record the ruling in Review §5 and project memory; then run a separate canon pass to promote approved truths into `LORE/`.
+- **Before writing any future quest:** check the World Truth rows it touches, the revelation it plants or owns (or declare it self-contained), the character ledger, and the quest contribution contract (Review §7.1). The contract is mandatory for Thornfell and later regional content (the Director directed production "using the approved narrative architecture", 2026-11-02).
+- **Before starting a regional bible:** check the FT rulings it depends on (Review §5.0) and follow the authoring order (Review §7). The Thornfell bible is the first regional bible under this plan (`Caelmor_Thornfell_Narrative_Production_Bible.md`, in production).
+- **When the Director rules:** record the ruling in Review §5.0 and project memory; then run a controlled canon pass (Review §5.3 is the first) to promote only what was approved into `LORE/`.

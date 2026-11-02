@@ -1007,7 +1007,7 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 
 1. **D-2** is answered here as a proposal (posts and chalk board). If the Director chooses otherwise, edit only the post-store inspect texts and `NF-D7.10`.
 2. **D-1** — Sallow's name appears in `NF-D5`, `NF-D6`, `NF-D7` (tagged) and on nothing physical. The bill carries the Board seal (swap layer).
-3. **Bill of lading buyer.** The bill names an outside buyer by a placeholder. *Recommendation: a house name outside Lowmark with no regional motive assigned* (Part 3 caution against assuming Emberholt).
+3. **Bill of lading buyer.** *Resolved 2026-11-02 (FT-03 approved):* the bill reads "for the account of the Whinstone Store". In v1 it is only a name; nothing in Lowmark says where the Whinstone Store is. Thornfell's TF-M2 reveals it as a Thornfell store-house used by an independent Blood-Oath splinter. No route for the grain is stated anywhere (ruling: do not invent unverified trade routes).
 4. **Map and hydrology** of the Cut route (MAP VERIFICATION REQUIRED, §C5.3).
 
 ## C15. Internal review log

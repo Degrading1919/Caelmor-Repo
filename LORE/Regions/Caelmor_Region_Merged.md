@@ -133,7 +133,7 @@ At the Glassed Hollow, an unnamed wartime precursor to the later formal Remnant 
 - Other Volkhari survivors exist, but their exact number and community form remain unresolved.
 - Public accounts concealed or reduced the catastrophe as a forge collapse.
 
-The precursor's name, exact transition into the formal Remnant, and personnel continuity remain unresolved.
+The precursor's name and exact transition into the formal Remnant remain unresolved; some of its personnel survived into the formal Remnant (limited continuity, approved D-C03, 2026-11-02).
 
 ### Postwar fire practice
 

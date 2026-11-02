@@ -160,6 +160,13 @@ This political friction shapes:
 No clan seeks open conflict with Emberholt—  
 but many believe it inevitable.
 
+### An Independent Splinter *(approved FT-03, 2026-11-02)*
+
+- A Blood-Oath splinter acts on its own authority, without its clans or the Stonewake Assembly.
+- It keeps unsanctioned war stores against a feared Emberholt attack, and it bought relief grain stolen during Lowmark's present crisis.
+- How that grain reached it is not established.
+- Blood-Oath clans as a whole are not the splinter.
+
 ---
 
 ## V. TOPOGRAPHY & SUBREGIONS
