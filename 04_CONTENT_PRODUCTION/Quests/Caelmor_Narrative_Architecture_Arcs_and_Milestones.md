@@ -15,7 +15,7 @@ Milestone codes below (`TF-M1`, `MR-M2`, `CV-M1` and so on) are planning labels 
 | **2. Regional arcs** | Thornfell, the Mire, Emberholt. Each has a local present crisis, a local resolution, one hidden cost of the war, and one tool for the peace. | Proposal; Thornfell is the Phase 1.3 v1.5 direction, Mire and Emberholt unscheduled | Trusted in that region. |
 | **3. Faction and civilian storylines** | Optional series that cross regions through ordinary work, records, and care: the unreturned register, the Watchers' book, horn and silence, guild ledgers, river intelligence, the unburnt. | Proposal | A carrier others rely on. |
 | **4. Lowmark return: *The Fourteenth Lot*** | Lowmark's own hidden stop, discoverable only once another region holds the second custodian. | Proposal | The outsider Lowmark now trusts with its shame. |
-| **5. Convergence: *The Peace Nobody Made*** | The four stops are assembled; the Second Road is halted; the four seats meet at Crestbridge; the Remnant's Perfect Flame is broken beneath Emberholt. | Proposal; requires all four regions | The one person each region will accept evidence from. |
+| **5. Convergence: *The Peace Nobody Made*** | The four stops are assembled; the Second Road is halted; the four seats meet at an old Concord crossing (Mirebone, pending the map pass); the Remnant's Perfect Flame is broken beneath Emberholt. | Proposal; requires all four regions | The one person each region will accept evidence from. |
 | **6. Long Horizon** | Mastery-era stewardship of the new peace and optional deep-works exploration. The Forgotten God is never met. | Proposal | A steward among stewards. |
 
 ### 1.1 The central question
@@ -38,7 +38,7 @@ Each region's arc ends by giving the player a civic practice the convergence nee
 ### 1.3 Arc design rules
 
 1. **Local first.** Every arc opens with a present, ordinary pressure (food, passage, care, heat) and resolves it locally. The war's hidden cost is discovered while solving it, never as the reason the arc exists.
-2. **Stand alone.** Each regional arc must be completable and understandable by a player who did only the required Lowmark main arc and skipped every optional callback (Part 5 continuation principle).
+2. **Stand alone.** Each regional arc's entry milestone has no quest prerequisite, and the arc must be completable and understandable by a player who has done no other region's content (Part 5 continuation principle; RuneScape-style independent access). Cross-region prerequisites are reserved for consequential intersections (EH-M3, LR-M1) and the convergence.
 3. **One owner per revelation.** Each major truth has exactly one owning arc. Other arcs may plant evidence for it but cannot reveal it first (see the revelation ledger).
 4. **Antagonists are local.** House Marrick, the Thornfell splinter, the Mire's own unresolved care disputes, and Emberholt's hidden order each have their own motive. Only the convergence connects them, and only through the shared structural wound and the Remnant's bounded exploitation.
 5. **Grounded scale.** The largest stakes in the game are a second war and a district-scale fire disaster. No world-ending threat, no god, no army of the dead (Phase 1.1 §3; Tenet 17).
@@ -59,8 +59,8 @@ Authority: `Caelmor_Lowmark_v1_Narrative_Production_Bible.md` and the act packag
 | MQ4 *The Night Flush* | `NF_bill_of_lading` to an outside buyer, name a placeholder | Recommended payoff: the buyer is a Thornfell store-house serving an unsanctioned Blood-Oath reserve (FT-03). Opens an optional route into TF-M2. |
 | MQ4 / MQ9 / MQ11 | The Fourteenth Lot; missing convoy stone; flow-table scar | The Lowmark return arc identifies the office behind the order and Lowmark's stop (FT-02a). |
 | MQ9 *Behind the Falls* | Oriel: the Riverwardens withdrew because rulers asked for floods on command | Recontextualized in the convergence as part of the Concord's failure (H08). |
-| MQ10 *The Crest Hall Reckoning* | The evidence-chip hearing | The convergence's four-seat hearing reuses the same play pattern at continental scale (CV-M3). |
-| MQ12 *The River Remains* | `LM_CIVIC_STANDING`; the player's mark on the Whisperflow stone | The first of four regional standings the convergence requires. |
+| MQ10 *The Crest Hall Reckoning* | The evidence-chip hearing | The game's one full hearing climax. Later arcs reuse evidence chips only to shape short aftermath scenes (CV-M3 terms). |
+| MQ12 *The River Remains* | `LM_CIVIC_STANDING`; the player's mark on the Whisperflow stone | Required for LR-M1 and so for the convergence; not required to start any other region. |
 | Side quest *What the Flood Carried* | A sealed tin case, removable cross-region callback | Can carry one Thornfell or Mire record into the civilian storylines. |
 | Side quest *A Verse Kept Back* | A missing verse in a thaw song | Compatible with a crew refusal song (FT-02a), never required. |
 | Canon anchors | Aldric's ledgers older than the war; Corvin refuses Emberholt priority contracts; Lessa's "Mire-border foreshadowing"; Maelin's refused stretches | Aldric's ledgers become a convergence custodian; Corvin's caution feeds the Emberholt contract callback; Lessa can speak of the Mire border without kin or travel claims. |
@@ -75,7 +75,7 @@ Each arc lists: entry, premise, what the player learns and misreads, milestone q
 
 ### 3.1 Thornfell Marches — *The Wall That Was Kept* [PROPOSAL]
 
-**Entry.** Requires Lowmark MQ12 (the only hard prerequisite; it is also the natural point at which the player has standing to be sent with a caravan). Optional alternate hook: following the buyer named on `NF_bill_of_lading` to Passwatch.
+**Entry.** No quest prerequisite. Reaching Thornfell is a travel matter (route availability and recommended levels are Gameplay Designer calls); TF-M1 is written for a player who has seen nothing of Lowmark. Strongest hooks, all optional: Lowmark MQ12's caravan offer, or following the buyer named on `NF_bill_of_lading` to Passwatch.
 
 **Premise.** Winter is coming early to the high passes. A Blood-Oath splinter is hoarding stores and quietly rebuilding a forbidden war-horn from Echohewn plates as a deterrent against Emberholt. The Assembly does not know. A closure decision at Passwatch is about to strand a highstead again, and the cairn-keepers are fighting over a name.
 
@@ -86,10 +86,10 @@ Each arc lists: entry, premise, what the player learns and misreads, milestone q
 | Milestone | Narrative purpose | Stakes | Revelation | Gameplay identity | Consequences (flags) | Relationships |
 |---|---|---|---|---|---|---|
 | **TF-M1 *The Closing of Passwatch*** (entry) | Teach Thornfell's obligations: who may close a pass, whose labor counts. | A highstead's winter supply on the wrong side of a closure. | Closures save some and strand others; Thornfell keeps no record of the stranded. | Escort and repair in a closing weather window; first horn codes. | `TF_PASSWATCH_ROUTE` (who gets through first). | Ressa Highcrag, Hadrik Stonewake; optional Lowmark grain stencil (buyer thread). |
-| **TF-M2 *The Iron Winter Stores*** (Act I turn) | Expose present rearmament without a villain from outside. | Hidden stores bought with stolen relief grain; an Assembly that does not know. | A Blood-Oath splinter is preparing for war on its own authority, and Lowmark's stolen relief grain fed it (FT-03). | Infiltration of a cliff store-house; inventory as evidence; a fight that stops at surrender. | `TF_STORES` (reported / seized / left as leverage). | Brynjar Korr must defend or disown it; Elira Hearthward; Lowmark callback C4 if held. |
+| **TF-M2 *The Iron Winter Stores*** (Act I turn) | Expose present rearmament without a villain from outside. | Hidden stores filled partly with Lowmark grain; an Assembly that does not know. | A Blood-Oath splinter is preparing for war on its own authority, and Lowmark grain fills its stores (FT-03). That the grain was **stolen relief** is a two-halves connection with Lowmark MQ4, landing in whichever quest the player does second (exempt from the guaranteed-path rule, like R14). | Infiltration of a cliff store-house; inventory as evidence; a fight that stops at surrender. | `TF_STORES` (reported / seized / left as leverage). | Brynjar Korr must defend or disown it; Elira Hearthward; Lowmark callback C4 if held. |
 | **TF-M3 *The Echo of Shatterfall*** | Separate weather, engineering, resonance, and myth. | Miners and a salvage crew caught by storm horn-echoes. | The horn that split the ridge was real; it killed Thornfell's own rear guard. Two honest records disagree: a cairn's last sighting and a later service entry. | Storm-timed traversal; enduring the Horn-Echo phenomenon (positioning against telegraphed charges); reading plates. | `TF_SHATTERFALL_ACCOUNT`. | Dorn Feldhorn, Maera Cairnwatch; cairn name dispute seeds the Mire register. |
 | **TF-M4 *The Summit Hall*** | Show ancient power as passive and dangerous, and Thornfell's own misuse as the trigger. | The splinter tests the rebuilt horn in the Summit halls; the node responds. | The Summit "guardian" is a passive Stonebound response to disturbance; it has no message. The splinter's horn, not Emberholt, woke it (C11 canon boundary kept). | Ascent with Kaldren and Iven; pressure-pulse hazards; silencing the horn plates in the right order using null-points. | `TF_HORN` (silenced / broken / surrendered to the Assembly). | Kaldren Deepdelver ("waking them all at once would tear the mountain apart"); Iven Ridgeborne. |
-| **TF-M5 *Stonewake*** (capstone) | Return every finding to the Assembly; decide readiness versus peace without a ruler. | Whether Thornfell answers Emberholt's drills by closing every pass, as in the final war year. | Thornfell's stop: the final-year sealing stranded refugees, some of whom reached the Mire (FT-02b). The player brings the closure record to the hall. | Assembly hearing with evidence chips, as in Lowmark MQ10; where people stand in the hall matters (Hadrik's canon trait). | `TF_ASSEMBLY_POSTURE` (watchful / open / sealed-with-terms). Sets `TF_STANDING`. | All Thornfell anchors; Thornfell's posture is read by the convergence. |
+| **TF-M5 *Stonewake*** (capstone) | Turn every Thornfell finding into one decisive act at the pass. | Cornered after TF-M4, the splinter fires the old sealing works at the high pass in an early blizzard to force the Assembly's hand, while a highstead column and a Ridge Warden patrol are still outside. | Thornfell's stop is found **in place**: the late-war closure roster cut into the sealing gatehouse, names of those left outside beside the dates the passes fell (FT-02b). | A storm-window ascent; reading horn codes to tell live collapse charges from dead ones; disarming the closure mechanisms in the right order under Horn-Echo surges and armed holdouts who stop at surrender; bringing the column through before the last gate drops. Afterward, a short Assembly scene in which where people stand reflects who the player brought through (Hadrik's canon trait); no evidence hearing. | `TF_ASSEMBLY_POSTURE` (watchful / open / sealed-with-terms), shaped by who came through. Sets `TF_STANDING`. | All Thornfell anchors; the splinter's fate; Thornfell's posture is read by the convergence. |
 
 **Side-story pools.** The highstead labor and shelter duties; the lost banner of Thornfell [CANON myth]; cairn ethics; Oathkeeper's Step; the Silent Gorge null-point; repair credit owed to a Lowmark crossing (Part 4 braid 2); joint repair with Emberholt workers strained by restrictions (braid 9).
 
@@ -97,7 +97,7 @@ Each arc lists: entry, premise, what the player learns and misreads, milestone q
 
 ### 3.2 The Mire of Fallen Banners — *What the Earth Refuses to Forget* [PROPOSAL]
 
-**Entry.** Requires Lowmark MQ12. No Thornfell requirement. Optional alternate hook: carrying a Thornfell cairn name (TF-M3) or a Lowmark half-name (*The Candle Rule* or *What the Flood Carried*) to Sorrowmere.
+**Entry.** No quest prerequisite; travel only. Optional hooks: carrying a Thornfell cairn name (TF-M3) or a Lowmark half-name (*The Candle Rule* or *What the Flood Carried*) to Sorrowmere.
 
 **Premise.** A route closure and a recovered name put survival beside dangerous earth-memory. Banners at the Field of Fallen Standards are rising in the mud. Two families claim one fostered person. Rowan will not cross to the Chapel. Something large is moving under Bannerline Ridge.
 
@@ -121,7 +121,7 @@ Each arc lists: entry, premise, what the player learns and misreads, milestone q
 
 ### 3.3 Emberholt Heights — *The Brightest Flame* [PROPOSAL]
 
-**Entry.** Requires Lowmark MQ12 **and** either `TF_STANDING` or `MR_STANDING`. Emberholt's archives and civic manipulations need a player who has already learned that records and testimony can be wrong (§6.3 explains why this is the one regional gate beyond Lowmark).
+**Entry.** No quest prerequisite for EH-M1 and EH-M2, which are local civic stories. **EH-M3 is the one consequential intersection:** it requires TF-M3 *or* MR-M2, because uncovering the Hollow needs a player who has already seen a proud record proved partial (Shatterfall) or a manifestation proved to be an impression rather than a witness (the banner field). §6.3 gives the rationale. EH-M3 is also where the precursor rolls (naming the initiate) are recovered, which is part of why it needs the C03 ruling.
 
 **Premise.** A heat-allocation dispute in Cinderwall leaves a ward cold while the Ash Terraces rehearse a festival. Academies are testing children harder. Deepbrand has lost a crew near the old Hollow. A Volkhari seamstress is afraid of a new neighbour.
 
@@ -133,10 +133,10 @@ Each arc lists: entry, premise, what the player learns and misreads, milestone q
 |---|---|---|---|---|---|---|
 | **EH-M1 *Cold Ward*** (entry) | Show embercraft as ordinary civic infrastructure and class pressure. | A ward without heat; a fire warden blamed for it. | Allocation follows influence; the warden is honest. No Remnant required. | Heat-network repair with a fire warden crew; Cinderwall streets. | `EH_COLD_WARD`. | Yorven Khelt, a [NEW] fire warden; the Cinder Rat glimpsed. |
 | **EH-M2 *The Ember in Every Hand*** | Reveal curricula as conditioning without condemning teachers. | Children pushed past safe volatility in tests. | Exams double as compatibility assessments; some ceremonies are mass emotional tests (CANON). | Assisting a class; observing a volatility test; recovering assessment ledgers from Theryn Dalewright's school. | `EH_CURRICULUM` (exposed to guild / kept as evidence). | Theryn Dalewright, Selice Morra; Maeryn Vall (Volkhari, hidden). |
-| **EH-M3 *The Hollow That Should Not Burn*** (Act I turn) | Establish the directed Glassed Hollow core through evidence. | A lost Deepbrand crew; a sealed site the Emberguard will not open. | Precursor abuse, an initiate Titan, Kaelith free, Thalan captive; "forge collapse" is false. The Hollow was meant to end the war (FT-02d). Requires a C03 ruling. | Descent past Emberguard seals; glassed-cavern traversal; Darven Mott's testimony; restricted records with provenance. | `EH_HOLLOW_TRUTH`. | Darven Mott, Marenya Silvertide (custodian, not a truth source), Seredh Embercarver. |
+| **EH-M3 *The Hollow That Should Not Burn*** (Act I turn) | Establish the directed Glassed Hollow core through evidence. | A lost Deepbrand crew; a sealed site the Emberguard will not open. | Precursor abuse, an initiate Titan, Kaelith free, Thalan captive; "forge collapse" is false. The Hollow was meant to end the war (FT-02d). Requires a C03 ruling. | Descent past Emberguard seals; glassed-cavern traversal; Darven Mott as guide to the site; restricted records with provenance. | `EH_HOLLOW_TRUTH`. | Darven Mott, Marenya Silvertide (custodian, not a truth source), Seredh Embercarver. |
 | **EH-M4 *Ash-Stained Chains*** | Find Thalan, and treat Volkhari as people, not plot keys. | Thalan's life; the exposure of every hidden Volkhari. | Thalan is alive and used for Perfect Flame research. | Emberdeep infiltration, heat-pressure traps, sigil reading; Volkhari allies decide how far they will go. | `EH_THALAN` (freed / aided-in-place; see Director decision D-E2). | Asera of the Three Breaths, Thennek Vorren, Dahrin Vosk; Kaelith seen, never rescued. |
 | **EH-M5 *The Speaker's Smile*** | Expose the Speaker's double nature in public view. | The festival rehearsal is a mass conditioning event. | The Speaker knowingly serves Remnant aims for his own ambition; several councillors are dream-influenced (Review §2 contradiction 2). | Rally attendance, intercepted correspondence, Hearthveil sleep chambers. | `EH_SPEAKER` (challenged publicly / exposed to the Council). | Seralynd Hearthveil, Serix Arden, Vael Trossen, Kaevren Thalos. |
-| **EH-M6 *Embergate Accounting*** (capstone) | Separate useful fire from hidden harm in a civic account. | Whether Emberholt blames the Volkhari, the guilds, or itself. | Emberholt's stop and the Remnant's existence enter the civic record through provenance-safe evidence; the Remnant retreats into the deep works rather than being destroyed. | A civic hearing with evidence chips; a defended archive under Deepbrand attack. | `EH_ACCOUNT`. Sets `EH_STANDING`. | Council, forgeguilds, Covenant, Volkhari witnesses. |
+| **EH-M6 *Embergate Accounting*** (capstone) | Find where the city's fire is really going, and decide who it serves. | The Remnant's deep preparations for Perfect Flame have been quietly tapping the civic heat main; in a hard frost the main fails under Cinderwall, the cold ward from EH-M1 freezes above while pressure builds below. No one set a fire; the failure is the cost of a hidden draw. | Following the main down, the player finds the Remnant's draw lines spliced into civic infrastructure: Emberholt's stop and the Remnant's existence enter the civic record through what is found in the works, with provenance. The Remnant withdraws deeper rather than being destroyed. | An exploration descent through the failing heat main with a fire-warden crew: heat as terrain at its hardest, timing vents, choosing where to bleed the pressure (into the terraces, the ward, or the forges), and getting the cold ward through the night. A short Council scene afterward reads what was found. | `EH_HEAT_MAIN` (where the heat went); `EH_ACCOUNT` (draw lines exposed to guilds / Council). Sets `EH_STANDING`. | Council, forgeguilds, Covenant, Volkhari witnesses, the EH-M1 fire warden. |
 
 **Why Perfect Flame is not Emberholt's capstone.** The dossier proposes *Perfect Flame* as the regional capstone. This package moves its climax to the convergence (CV-M4) so that Emberholt's regional arc resolves locally (a civic account) and the Remnant's final attempt draws on the whole world's state. Emberholt players still see the plan; they do not yet stop it.
 
@@ -182,12 +182,12 @@ This is short on purpose: a single strong milestone and two or three side storie
 
 | Milestone | Narrative purpose | Stakes | Revelation | Gameplay identity | Consequences | Prerequisites |
 |---|---|---|---|---|---|---|
-| **CV-M1 *Witness at the Gate*** | Discover the Crossing Concord and assemble the four stops. | Without the whole truth, each region will act on its own war story again. | The prewar Concord existed and failed (FT-01). The war ended in four separate stops; no peace was made (FT-02). | Cross-region evidence gathering: Fenmere ledgers, horn rosters, the Memorywarden record, the Hollow account. Uses the four tools. | `CV_FOUR_STOPS`. | `LR_STANDING` (implies `LM_CIVIC_STANDING` and `TF_STANDING`), `MR_STANDING`, `EH_STANDING`. |
+| **CV-M1 *Witness at the Gate*** | Discover the Crossing Concord and assemble the four stops. | Without the whole truth, each region will act on its own war story again. | The prewar Concord existed and failed (FT-01). The war wore out over its last years, and four hidden withdrawals at different times, several feeding one another, made it stop; no peace was made (FT-02). | Cross-region evidence gathering: Fenmere ledgers, horn rosters, the Memorywarden record, the Hollow account; an old Concord witness-post found in each region. Uses the four tools. | `CV_FOUR_STOPS`. | `LR_STANDING` (implies `LM_CIVIC_STANDING` and `TF_STANDING`), `MR_STANDING`, `EH_STANDING`. |
 | **CV-M2 *The Second Road*** | Hold the world together long enough to meet. | A pass incident between Thornfell and Emberholt could become a battle; refugees move; the Sorrowback rises. | Durell's bounded operations: forged inspection notices, seeded rumors, informants (FT-04). The Remnant did not make the fear; it is feeding it. | World events (Phase 1.3 future scope), grounded: defend a crossing, escort refugees, quiet a skirmish before it becomes a battle, and the **Sorrowback** as a readable, large earth-memory encounter in the Mire that recedes when the mobilization stops. Repeatable, never failing. | `CV_ROAD_HELD` (set when the player completes the event chain; world-event intensity reads regional postures). | CV-M1. |
-| **CV-M3 *Four Seats at Crestbridge*** | Make the peace that was never made. | Delegates from four regions meet at Crest Hall; dream-influenced Emberholt delegates and one act of Deepbrand sabotage try to break it. | Each region hears its own hidden cost from another region's custodian. A new Concord is possible: witness at every crossing, no ruler, shared tending. | Finding and stopping one act of sabotage at Crest Hall (no siege; Lowmark MQ10 already owns that beat) and a four-region evidence-chip hearing. Chips come from every arc and optional series; any sufficient set works. | `CV_CONCORD_TERMS` (scope of witness and inspection). | CV-M2. |
-| **CV-M4 *The Cooling*** (convergence climax) | Break Perfect Flame without spectacle. | The Remnant's final attempt beneath Emberholt during the festival: synchronized amplification through ember veins, Thalan's research, and a conditioned crowd. Left unchecked, it would be a second Glassed Hollow under the city (the quest itself cannot fail; it stays Active until completed). | Perfect Flame needs the crowd's conditioned emotion; citizens who know the truth (EH-M5, CV-M3) refuse it. Once the excavation stops, heat and pressure in the deep works settle and the stirring Fire Titan's chamber cools (FT-05; a physical, place-bound response, never a choice). | Deep descent through the deep works, applying what each region taught (Thornfell's sound reading, the Watchers' patience learned in the Mire, testimony that turns the crowd, Asera's discipline if offered, all carried by the player or by unnamed local hands, never by anchors given new travel); heat and pressure as terrain; an environmental survival and protection sequence around the Titan's chamber. **There is no Titan fight.** The Titan's fate is a Director decision (D-CV1). | `CV_COOLING` (Titan contained / Titan at rest). Unlocks the Long Horizon. | CV-M3. |
+| **CV-M3 *Four Seats at Mirebone*** | Make the peace that was never made, at a crossing, as the Concord did. | The delegates agree to meet only at an old Concord crossing that no region owns. The likeliest candidate is Mirebone Crossing, unused since the war [route to be confirmed in the map pass]. Autumn storms are flooding its approaches; dream-influenced Emberholt delegates argue for walking away. | Each region hears its own hidden cost from another region's custodian. A new Concord is possible: witness at every crossing, no ruler, shared tending. | **Rebuilding the crossing** under storm and spate with a four-region work crew. Each region's readable system is used: markers for the water (Lowmark), horn codes to pace crews across the gap (Thornfell), channel reading for the shifting footings (the Mire), and heat for curing and sealing (Emberholt). The weather is the only enemy. The delegates meet on the finished span. Evidence chips widen the terms in a short scene afterward and never decide them. | `CV_CROSSING` (which region's methods hold the span); `CV_CONCORD_TERMS` (scope of witness and inspection). | CV-M2. |
+| **CV-M4 *The Last Binding*** (convergence climax) | Break Perfect Flame, and face the Fire Titan as a person the war made. | During the festival, the Remnant tries to draw Perfect Flame through the Titan's degrading bindings [CANON] using Thalan's research and a conditioned crowd. The draw will break the bindings and loose the Titan under the city: a second Glassed Hollow. | Perfect Flame needs the crowd's conditioned emotion; citizens who know the truth (EH-M5, CV-M3) refuse it. The Titan is the precursor initiate, still suffering inside a fire that cannot go out; it cannot be killed without spreading that fire, or freed without burning the city (FT-05). | **Earned in the quest:** the player carries what a new binding needs, as testimony and objects rather than people: Dahrin Vosk's opening phrase [CANON], Meryndis's seized ritual plan, what Thalan can tell of the suffering (whether freed or aided in place), and the initiate's name from the precursor rolls recovered in EH-M3. **Climax:** a multi-phase descent into the glassed deep works as the bindings fail: cut the Remnant's draw conduits under heat surges; then the Titan wakes and turns on the player and the binders. These are Emberholt fire wardens working from Meryndis's formulae, joined only by individual Volkhari who have consented (Asera, if the player kept faith in EH-M4 and the Unburnt series). Protect them, break its ember-fused offshoots, and drive it back into the old circle by opening the precursor's quench cisterns and reading heat. Wounding it only drives it back; the fire re-forms. The binding closes when the initiate's name is spoken; for a moment it is a person, then it rests. Anchors gain no new travel. A forced retreat sends the player back to the cistern gate; the quest stays Active. | `CV_BINDING` (rest-binding held; who keeps it); the Titan's name in or out of the public record (D-CV1). Unlocks the Long Horizon. | CV-M3. |
 
-**What the convergence must never become** [PROPOSAL rule]: a battle of mages, a march of the dead, an awakened god, or the Remnant as the cause of everything the player saw earlier. The decisive acts are refusal, testimony, shared tending, and a careful descent.
+**What the convergence must never become** [PROPOSAL rule]: a battle of mages, a march of the dead, an awakened god, a slain monster, or the Remnant as the cause of everything the player saw earlier. The decisive acts are refusal, testimony, shared work, and a dangerous descent that ends in a binding rather than a kill.
 
 ### 5.3 Long Horizon [PROPOSAL]
 
@@ -209,7 +209,7 @@ Post-convergence, mastery-era content:
 | **Hard prerequisite** | Quest B cannot become Active until quest A is Completed. | Used only between milestones, never from a side quest to a milestone. Maximum two hard prerequisites per milestone except convergence entry. |
 | **Standing gate** | A region standing flag (`LM_CIVIC_STANDING`, `TF_STANDING`, `MR_STANDING`, `EH_STANDING`) unlocks content. | Follows the existing `LM_*` region-flag precedent; flag schema belongs to the Schema & Content Engineer. |
 | **Skill or access gate** | A skill threshold or a traversal route unlocks a step or an optional reward. | Main milestones use **recommendations** only, or a crew alternative. Hard skill gates are reserved for optional shortcuts, master commissions, and Long Horizon content. Exact levels belong to the Gameplay Designer. |
-| **Evidence chip (alternative)** | A completed quest contributes one item to a later hearing. | Any sufficient set passes (Lowmark MQ10 pattern). No single optional quest is ever required. |
+| **Evidence chip (alternative)** | A completed quest contributes one item to a later evidence scene (Lowmark MQ10's hearing; CV-M3's terms scene). | Any sufficient set passes (Lowmark MQ10 pattern). No single optional quest is ever required. |
 | **Optional callback** | An earlier outcome changes lines, a hook, or a chip in a later quest. | The later quest is complete without it. |
 | **Shared character** | The same person appears in both. | Must respect the Part 4 character ledger: no new age, war service, travel, kinship, or record custody. |
 | **Recurring evidence** | The same object, record, or place matters again. | The second appearance must come with an independent custodian. |
@@ -217,7 +217,7 @@ Post-convergence, mastery-era content:
 
 ### 6.2 Dependency graph
 
-Solid arrows are hard prerequisites or standing gates. Dotted arrows are optional callbacks or alternative evidence chips. The graph shows milestones only.
+Solid arrows are hard prerequisites or standing gates. Dotted arrows are optional callbacks or alternative evidence chips, except that the two dotted arrows into the hexagon are alternatives: either one opens the solid gate into EH-M3. The graph shows milestones only.
 
 ```mermaid
 flowchart TD
@@ -234,16 +234,16 @@ flowchart TD
     E1[EH-M1 Cold Ward] --> E2[EH-M2 Ember in Every Hand] --> E3[EH-M3 Hollow That Should Not Burn] --> E4[EH-M4 Ash-Stained Chains] --> E5[EH-M5 Speaker's Smile] --> E6[EH-M6 Embergate Accounting]
   end
   subgraph CV["Convergence (proposal)"]
-    C1[CV-M1 Witness at the Gate] --> C2[CV-M2 The Second Road] --> C3[CV-M3 Four Seats at Crestbridge] --> C4[CV-M4 The Cooling]
+    C1[CV-M1 Witness at the Gate] --> C2[CV-M2 The Second Road] --> C3[CV-M3 Four Seats at Mirebone] --> C4[CV-M4 The Last Binding]
   end
   LR1[LR-M1 The Second Custodian]
   H[Long Horizon]
 
-  L12 --> T1
-  L12 --> M1
-  L12 --> E1
-  T5 -- "TF or MR standing" --> E1
-  M5 -- "TF or MR standing" --> E1
+  G1{{"TF-M3 or MR-M2"}}
+  T3 -.-> G1
+  M2 -.-> G1
+  G1 --> E3
+  L12 -. "caravan hook" .-> T1
   L12 --> LR1
   T5 --> LR1
   LR1 --> C1
@@ -255,7 +255,7 @@ flowchart TD
   T3 -. "cairn name (register)" .-> M1
   T5 -. "stranded refugees chip" .-> C3
   M4 -. "Memorywarden record" .-> C1
-  L10 -. "hearing pattern" .-> C3
+  L10 -. "evidence chips" .-> C3
   LR1 -. "Lowmark's stop chip" .-> C3
   E5 -. "conditioning truth" .-> C4
   E4 -. "Asera's discipline if earned" .-> C4
@@ -265,11 +265,11 @@ flowchart TD
 
 | Unlock | Hard requirement | Why | Alternatives |
 |---|---|---|---|
-| Any future region | Lowmark MQ12 | Lowmark is the start and teaches the evidence rule; MQ12 gives standing to be sent onward. | None needed; Lowmark is the only release region and its main arc is required. |
-| Emberholt (EH-M1) | Lowmark MQ12 and **one** of `TF_STANDING` / `MR_STANDING` | Emberholt's archives and civic manipulations need a player who has seen a proud record proved partial. Allows either release order for Thornfell and the Mire. | Either region. |
+| Any future region's entry milestone | None (travel only) | RuneScape-style independent access: each region's story stands alone. Lowmark stays the starting region and its MQ12 caravan offer is the strongest hook. | — |
+| Emberholt's Hollow (EH-M3) | TF-M3 **or** MR-M2 | A consequential intersection: the Hollow's truth must be read through evidence, and the player needs to have seen a proud record proved partial or a manifestation proved not to be a witness. Asks two or three quests elsewhere, not a whole arc. | Either region. |
 | Lowmark return (LR-M1) | `LM_CIVIC_STANDING`, `TF_STANDING` | The second custodian for the Fourteenth Lot order lives in Thornfell. | None. Optional for regional play; required before CV-M1 because it owns Lowmark's stop. |
 | Convergence (CV-M1) | `LR_STANDING`, `MR_STANDING`, `EH_STANDING` (all four regions, with Lowmark's stop earned in LR-M1) | The premise is assembling four stops, each revealed first by its own owner. This is the single breadth gate in the game. | None; mitigated by allowing any regional order and by the Long Horizon not requiring optional series. |
-| CV-M3 hearing | CV-M2 complete; any sufficient chip set | Same as Lowmark MQ10: more evidence gives better terms, never a failure. | Many chip sources. |
+| CV-M3 terms scene | The rebuilt crossing (CV-M3's climax); chips optional | More evidence gives wider terms, never a failure. | Many chip sources. |
 
 **Longest required chain** from character creation to the convergence climax: 12 (Lowmark) + 5 (Thornfell) + 5 (Mire) + 6 (Emberholt) + 1 (Lowmark return) + 4 (convergence) = **33 milestone quests**, in any regional order after Lowmark. No optional quest is ever required.
 
@@ -291,7 +291,7 @@ flowchart TD
 The Creative Director's rule: quests are **Inactive, Active, or Completed**; they never permanently fail or become abandoned.
 
 - **Choices are outcomes, not failures.** Every milestone above records its choice in an outcome flag. A worse outcome changes later lines and terms; it never closes content.
-- **Hearings cannot be lost.** CV-M3, TF-M5, EH-M6, and Lowmark MQ10 accept any sufficient evidence set and always have a guaranteed path.
+- **Climaxes cannot be lost.** Lowmark MQ10's hearing accepts any sufficient evidence set. The physical capstones (TF-M5, MR-M5, EH-M6, CV-M3, CV-M4) record outcomes (who came through, what survived, what terms) and send a beaten player back to a safe point with the quest still Active.
 - **World events never fail.** CV-M2 events and Long Horizon duties are repeatable structures. A crossing that falls tonight can be held tomorrow.
 - **No missable revelations.** Every revelation in the ledger has a guaranteed source inside its owning arc. Optional sources add depth only.
 - **Contract mismatch to hand off.** `DESIGNS/Systems Design/Stage 27 — Quest Runtime Integration Definition.md` and `CODE/Systems/QuestRuntimeSystem.cs` still define a `Failed` state, and Stage 15.2 defines `Abandoned`. Narrative content will not use either. Removing or retiring them is a Systems Engineer change that needs the Director's sign-off (Review §2, contradiction 1).

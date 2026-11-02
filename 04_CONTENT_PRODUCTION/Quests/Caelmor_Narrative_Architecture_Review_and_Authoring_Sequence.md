@@ -33,11 +33,11 @@ None of these were silently fixed. Each has a recommendation.
 
 | Gap in existing canon | Why it matters | Closure | Status |
 |---|---|---|---|
-| **How the war ended.** Canon says no clean victory and no explanation every region accepts, but not what stopped it. | Without it, the peace has no shape and the endgame has no question. | Four regional stops in one season; no treaty (FT-02). | Foundational — Director |
+| **How the war ended.** Canon says no clean victory and no explanation every region accepts, but not what stopped it. | Without it, the peace has no shape and the endgame has no question. | It wore out; inside that, four uncoordinated withdrawals at different times, some feeding others; no treaty (FT-02). | Foundational — Director |
 | **Why prewar interdependence failed.** Canon describes the inspection problem but no institution. | Gives the endgame something to remake. | The Crossing Concord (FT-01). | Foundational — Director |
 | **Who bought Lowmark's stolen grain.** v1 leaves a placeholder for "the cross-region pass". | The first cross-region thread. | A Thornfell Blood-Oath splinter's unsanctioned reserve (FT-03). | Foundational — Director |
-| **Why the Remnant has waited thirty years.** | Prevents an idle-villain problem. | It needs a conditioned generation, it lost its Titan template, and Thalan's research is slow (C.1). | Proposal |
-| **Why the Fire Titan has not destroyed anything since.** | Canon says Deepbrand fears its re-emergence. | Dormant in the deep works; stirred by excavation; contained when the works return to balance (FT-05). | Foundational — Director |
+| **Why the Remnant has waited thirty years.** | Prevents an idle-villain problem. | It needs a conditioned generation, its Titan template is bound and unstable, and Thalan's research is slow (C.1). | Proposal |
+| **Why the Fire Titan has not destroyed anything since.** | Canon says Deepbrand fears its re-emergence. | Canon already answers it: Remnant bindings hold it, and they are degrading. The Remnant keeps it bound because it is the template it studies (FT-05). | Canon plus proposal |
 | **Why a wanderer is trusted across four regions.** | Avoids a chosen-one premise. | Earned standing per region; the convergence requires all four, because only someone who has seen each region's hidden cost can carry it to the others. | Proposal |
 | **Why the player leaves Lowmark.** | Organic travel motive. | Being sent with a caravan once trusted; optional pursuit of the bill's buyer. | Proposal |
 | **What the Riverwardens do after v1.** | They should not vanish or rule. | They teach Braid tending to many hands; Long Horizon. | Proposal |
@@ -51,8 +51,8 @@ None of these were silently fixed. Each has a recommendation.
 
 | Risk | Finding | Mitigation adopted |
 |---|---|---|
-| Convergence breadth | Four regional standings are required (3 direct parents: LR-M1, MR-M5, EH-M6; 29 transitive milestones, all regional main arcs plus LR-M1). This is the single breadth gate. | No side quest or optional series is ever required; regional order is free after Lowmark; each region's spine stays inside its region (RuneScape study: deep spines plus bounded convergence, rejecting quest-point walls and flat 30-plus lists). |
-| Emberholt gate | One extra standing (Thornfell or Mire). | Either satisfies it, so release order stays flexible. |
+| Convergence breadth | Four regional standings are required (3 direct parents: LR-M1, MR-M5, EH-M6; 29 transitive milestones, all regional main arcs plus LR-M1). This is the single breadth gate. | No side quest or optional series is ever required; regional order is free and no region's entry needs another region; each region's spine stays inside its region (RuneScape study: deep spines plus bounded convergence, rejecting quest-point walls and flat 30-plus lists). |
+| Emberholt Hollow gate | EH-M3 asks for TF-M3 or MR-M2 (two or three quests elsewhere). | Either satisfies it; EH-M1–M2 are open to any player, so release order stays flexible. |
 | Hidden gates | None. Every prerequisite is a visible milestone in the three-state model (study: no hidden partial-progress gates). | — |
 | Skill walls | None on main milestones. | Hard skill gates only on optional shortcuts, master commissions, and Long Horizon content. |
 | Lowmark return | Requires Thornfell; required before the convergence because it owns Lowmark's stop. | Lowmark v1 remains complete without it; it is optional for all regional play. |
@@ -62,7 +62,7 @@ None of these were silently fixed. Each has a recommendation.
 | Risk | Guardrail |
 |---|---|
 | Conspiracy creep (everything becomes the Remnant). | Faction C.1 bounded-reach clause; rule 4 in arcs §1.3; R15 recontextualizes the Remnant as feeding existing fears. |
-| Spectacle creep in the endgame. | Arcs §5.2 "must never become" rule; FT-04 grounding; the decisive acts are refusal, testimony, tending, and a careful descent. |
+| Spectacle creep in the endgame. | Arcs §5.2 "must never become" rule; FT-04 grounding; the decisive acts are refusal, testimony, shared work, and a binding rather than a kill. |
 | Anchor biography creep. | All shared-character edges must pass the Part 4 character ledger; Brynjar is not made the splinter's leader; Maelin is not made a refusing crew member; Kaldren is not made the log's author. |
 | Supernatural witnesses. | Rule B.3.4; every revelation has two human or material custodians. |
 | Lowmark resolution undermined. | The return arc adds Lowmark's wartime responsibility; it does not reverse v1's present-day truths (Part 5 Thread 1 owner rule). |
@@ -71,11 +71,11 @@ None of these were silently fixed. Each has a recommendation.
 ### 4.3 Opportunities for more memorable gameplay
 
 1. **One readable system per region.** Lowmark reads water and marker stones; Thornfell reads sound (horn codes, echo timing, null-points); the Mire reads shifting ground and channel states; Emberholt reads heat. Each is learned knowledge (Pillar A), and the convergence asks the player to use all four in one descent.
-2. **The hearing as a signature mechanic.** Lowmark MQ10's evidence-chip hearing recurs at TF-M5, EH-M6, and CV-M3, growing from a hall to a four-region table. Chips are earned in play, never found in dialogue.
+2. **Distinct climaxes.** The evidence-chip hearing is the climax only once, in Lowmark MQ10. Every later capstone is physical and dangerous: holding a closing pass in a blizzard (TF-M5), facing the General on Bannerline (MR-M5), a diving descent to the drowned convoy (LR-M1), a descent through a failing heat main (EH-M6), rebuilding an old Concord crossing in storm (CV-M3), and the Last Binding (CV-M4). Only TF-M5 and CV-M4 have a human trigger; EH-M6's cause is systemic and CV-M3's is weather. Evidence chips shape only short aftermath scenes.
 3. **Post-story access.** Each capstone turns its climax site into revisitable content (study principle 13): Shatterfall in storms, Bannerline at night, the Emberdeep after EH-M6.
 4. **Regional deeds layer.** A per-region, non-failing completion lattice (quests, places, encounters) that pays out traversal or utility, following the diary pattern in the study. Gameplay Designer proposal; no schema assumed.
 5. **The Sorrowback as the world's alarm.** A large, readable earth-memory encounter that rises when the regions mobilize and recedes when the player calms the Second Road; its presence is a visible world-state signal.
-6. **The four tools as party-free co-op texture.** In co-op, partners with different regional standings unlock different evidence lines in shared hearings, without syncing progression (Pillar D).
+6. **The four tools as party-free co-op texture.** In co-op, partners with different regional standings read different systems at the Mirebone crossing and in the Last Binding, without syncing progression (Pillar D).
 
 ---
 
@@ -88,10 +88,10 @@ Each decision has a recommendation. Content can be authored on the recommendatio
 | Id | Decision | Recommendation | Alternatives | If replaced | Blocks |
 |---|---|---|---|---|---|
 | **FT-01** | Adopt the **Crossing Concord**, a prewar custom of mutual witness at crossings and passes that failed on the Road to War. | Approve. | No named institution (the endgame then creates something wholly new); a formal treaty body (more governmental, less grounded). | CV-M1 and CV-M3 framing; R16 seeds. | Convergence outline |
-| **FT-02** | Adopt **four regional stops, no treaty**, as how the war ended, with sub-truths 02a Lowmark crews' refusal after the Fourteenth Lot, 02b Thornfell's horns and final-year sealing, 02c the Memorywardens' last grounding forming the General, 02d the Glassed Hollow as the end of Emberholt's war. | Approve the frame; approve 02a–02d individually. | Approve the frame with different regional stops; keep "no single explanation" without specifying. | Each region's capstone revelation; R06, R08, R09, R13, R17. | Each regional bible (its own sub-truth); convergence |
+| **FT-02** | Adopt **a war that wore out, with four hidden withdrawals and no treaty**. Exhaustion, hunger, desertion, and local truces did most of the work over the last years; inside that collapse each region made one uncoordinated withdrawal at a different time, for its own reasons, some feeding others: 02b Thornfell's slow sealing of the passes (earliest), 02a Lowmark crews' spreading refusal after the Fourteenth Lot, 02d the Glassed Hollow as Emberholt's sudden collapse, 02c the Memorywardens' grounding of the last great battle (forming the General). Raids continued for a time after (Part 2's "the Stopping"). | Approve the frame; approve 02a–02d individually, and the relative order. | Keep the frame but change the order or a regional withdrawal; keep "no single explanation" without specifying. | Each region's capstone revelation; R06, R08, R09, R13, R17. | Each regional bible (its own sub-truth); convergence |
 | **FT-03** | The **outside buyer** on the Lowmark bill is a Thornfell store-house supplying a Blood-Oath splinter's unsanctioned war reserve. | Approve; fill the v1 placeholder with a neutral store-house name once approved. | An Emberholt merchant house (risks the "Emberholt is always the villain" read the Part 3 caution warns against); a rival Lowmark house (keeps it local). | TF-M2 hook; v1 bill name only. | Thornfell bible |
 | **FT-04** | **Perfect Flame** defined as transmissible mastery depending on a conditioned crowd, with Durell's interregional operations bounded and discoverable. | Approve. | The dossier's city-wide ignition (spectacle risk). | EH-M5, CV-M2, CV-M4. | Emberholt bible; convergence |
-| **FT-05** | The **Fire Titan** lies dormant in the deep works, is stirred by excavation, and is its chamber cools when excavation stops and heat and pressure settle. This expands C11 (passive place-bound response) to a deep-works chamber, so it is a canon expansion, not only a plot choice. The convergence has no Titan fight. | Approve. | The Titan roams freely (raises threat level and conflicts with no reported attacks); the Titan is destroyed by force (contradicts the "force spreads it" lesson). | CV-M4 only. | Convergence |
+| **FT-05** | The **Fire Titan** is the transformed precursor initiate: a person still suffering inside a fire that cannot go out [Thalan's canon sense of suffering], held beneath Emberholt by Remnant bindings that are degrading [CANON]. It cannot be killed by force without spreading its fire, or freed without burning the city. In CV-M4 the Remnant's draw breaks the old bindings; the player earns a new **rest-binding**, made by Emberholt fire wardens and individual consenting Volkhari from pieces the player gathers as testimony and objects, that holds the Titan without using it. A dangerous multi-phase encounter, but no kill. The Stonebound play no part (the earlier C11 expansion is withdrawn). | Approve. | A conventional boss kill (loses the tragedy; contradicts the spreading-fire lesson); the Titan freed (city burns); containment by the deep works (withdrawn: it stretched C11 and made the ending passive). | CV-M4; R19. | Convergence |
 
 ### 5.2 Other decisions
 
@@ -100,7 +100,7 @@ Each decision has a recommendation. Content can be authored on the recommendatio
 | **D-C03** | Precursor name and continuity (canon C03). | Options: (a) partial continuity, a wartime fire-research cadre whose few survivors helped found the formal Remnant; (b) no personnel continuity, the formal Remnant inherited only records; (c) continuity of records and one patron family. Selvara stays bounded by her ledger row (sheltered during the war; no war role) in every option. Recommendation (a), name chosen in the Emberholt bible. | EH-M3 outline |
 | **D-C06** | Volkhari population (canon C06). | Keep unnumbered; depict individuals only. | Nothing; recommended before EH-M4 |
 | **D-E2** | Thalan's possible fates in EH-M4. | Free, or aid in place; no option to end his life. | EH-M4 |
-| **D-CV1** | The Fire Titan's end in CV-M4. | Contained and at rest in the works, still a person lost rather than a monster slain; the player chooses whether its name is restored to the public record. | CV-M4 |
+| **D-CV1** | The Titan after CV-M4. | Bound to rest, still a person lost rather than a monster slain; the player chooses whether its name is restored to the public record. Option for the Long Horizon: a slow, tended release over years until the fire is spent and the initiate can die, kept by Emberholt wardens, with any Volkhari involvement limited to consenting individuals (C06 stays open). | CV-M4; Long Horizon |
 | **D-R1** | Release order after Thornfell. | Mire before Emberholt: the Mire teaches testimony before Emberholt tests it, and Glassed Hollow's displaced civilians reach Mire care first. Either order works structurally. | Production planning |
 | **D-Q1** | Retire `Failed`/`Abandoned` from the quest contract (contradiction 1), which also reverses the Lowmark integration handoff's D-INT-7 recommendation. | Approve and hand to the Systems Engineer before Stage 24.1. | Quest runtime |
 | **D-S1** | Speaker's knowledge (contradiction 2). | Knowing ally who is also dream-seeded. | EH-M5 |
@@ -130,6 +130,21 @@ An independent reviewer read all six package files against `AGENTS.md`, the Mast
 
 The reviewer confirmed clean: status labels, the Mire's two non-undead major threats, one chapel with three names, postwar Dreamers, the precursor kept distinct from the formal Remnant with C03, C06 and C07 open, no player spellcasting, no quest that can fail or be abandoned, and no reproduced RuneScape content.
 
+### 6.1 Director refinement pass (2026-11-02)
+
+The Creative Director reviewed the package, kept the overall direction, and asked for five targeted corrections before canon promotion. Changes made, without rewriting the architecture or starting regional quests:
+
+| Request | Change |
+|---|---|
+| Fewer repeated civic-hearing finales; distinct climaxes with exploration, danger, discovery, action. | The hearing is the climax only in Lowmark MQ10. TF-M5 is now holding a closing pass in a blizzard, with Thornfell's stop found cut into the sealing works. EH-M6 is a descent through a failing heat main that exposes the Remnant's draw lines. CV-M3 is rebuilding an old Concord crossing in storm with a four-region crew, away from MQ10's Crestbridge. A second review pass removed early drafts that repeated MQ10's archive fire and location. CV-M4 is the Last Binding. MR-M5 and LR-M1 were already physical. Chips now shape short aftermath scenes only. |
+| Reevaluate Lowmark MQ12 before every regional arc. | No region's entry milestone has a quest prerequisite. Cross-region gates remain only at consequential intersections: EH-M3 (TF-M3 or MR-M2), LR-M1 (Lowmark and Thornfell), and the convergence (all four regions). The FT-03 grain link became a non-ordered connection. |
+| FT-02 believable, not four synchronized stops. | The war wore out over its last years through exhaustion, hunger, desertion, and local truces; the four withdrawals happen at different times, in a causal chain (Thornfell's slow sealing → Lowmark's spreading refusal → Emberholt's gamble → the last battle in the Mire), and raids continue for a time after. |
+| FT-05 must keep the Titan a transformed person and a dangerous tragedy, with an earned resolution. | The Stonebound containment is withdrawn. The Titan is the initiate, suffering, held by canon Remnant bindings that are degrading. CV-M4 has the player gather the pieces of a new rest-binding from the people who hold them, then survive a multi-phase encounter in which the Titan can only be driven back, never killed, until it is bound to rest by name. Binders are Emberholt fire wardens and individual consenting Volkhari only (C06 kept open). |
+| Keep FT-01, FT-03, FT-04 as preferred candidates. | Unchanged; still pending formal rulings. |
+
+An independent review of this pass confirmed requests 2–4 were met and found blocking issues, all fixed: Volkhari had been written as a group institution (now individual, consenting binders only, C06 kept open); EH-M6 and the first CV-M3 draft repeated Lowmark MQ10's archive fire and Crestbridge location (replaced as above); three capstones shared one sabotage template (EH-M6 now systemic, CV-M3 weather-driven); the FT-02 chain was too neat (now "some fed others", with canon's fractured command and escalation); the FT-03 "stolen" link had become missable (now an exempt two-halves connection); plus stale Stonebound, "final-year", hearing, Thalan-capture, Asera, and graph references.
+
+
 ---
 
 ## 7. Recommended sequence for detailed quest authoring
@@ -145,7 +160,7 @@ The order follows dependency, not release dates. Each step names its output and 
 | 4 | **Mire bible** (if D-R1 recommendation is accepted). | `…/Caelmor_Mire_Narrative_Production_Bible.md` (proposed) | Steps 2–3 |
 | 5 | **C03 and C06 rulings**, then the **Emberholt bible**. | `…/Caelmor_Emberholt_Narrative_Production_Bible.md` (proposed) | D-C03, D-E2, D-S1 |
 | 6 | **Lowmark return** (*The Fourteenth Lot*): one milestone and two or three side stories. | Addendum to the Lowmark bible | Thornfell bible (the second custodian) |
-| 7 | **Convergence bible**: CV-M1–M4, world-event structures, the four-seat hearing's chip table drawn from all arcs. | `…/Caelmor_Convergence_Narrative_Production_Bible.md` (proposed) | All four regional bibles |
+| 7 | **Convergence bible**: CV-M1–M4, world-event structures, the CV-M3 terms-scene chip table drawn from all arcs. | `…/Caelmor_Convergence_Narrative_Production_Bible.md` (proposed) | All four regional bibles |
 | 8 | **Long Horizon** stewardship structures and deep-works exploration briefs. | Brief in the convergence bible | Step 7; any approved practice or faction system |
 
 **Within every regional bible, author in this order** (working backward from revelations, then forward through discovery):

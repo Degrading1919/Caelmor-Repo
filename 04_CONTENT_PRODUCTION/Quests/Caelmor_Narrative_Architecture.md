@@ -25,9 +25,9 @@ All five architecture files sit beside the Lowmark bible in `04_CONTENT_PRODUCTI
 
 **The central question.** Thirty years after a war nobody ended, can Caelmor's four regions make the peace they never made, before the same pressures start the next war?
 
-**Historical truth.** Before the Great War, the regions depended on one another without any shared way to inspect dangerous practice or accept one another's witness; the custom that tried, the Crossing Concord, failed (FT-01). The war ended without a treaty: each region stopped for its own reasons, at its own cost, and hid that cost behind a proud story (FT-02). Lowmark fed every side and its crews refused to run after a convoy was drowned; Thornfell's horns killed its own and its sealing stranded refugees; the Mire's last Memorywardens broke themselves to ground the battlefield and left the General behind; Emberholt's war ended in the Glassed Hollow, hidden as a forge collapse. Today hoarding, closures, drills, and a patient hidden faction are reproducing the road to war.
+**Historical truth.** Before the Great War, the regions depended on one another without any shared way to inspect dangerous practice or accept one another's witness; the custom that tried, the Crossing Concord, failed (FT-01). The war wore out without a treaty: exhaustion did most of the work, and inside that collapse each region made one withdrawal, at a different time and for its own reasons, and hid its cost behind a proud story (FT-02). Lowmark fed every side and its crews refused to run after a convoy was drowned; Thornfell's horns killed its own and its sealing stranded refugees; the Mire's last Memorywardens broke themselves to ground the battlefield and left the General behind; Emberholt's war ended in the Glassed Hollow, hidden as a forge collapse. Today hoarding, closures, drills, and a patient hidden faction are reproducing the road to war.
 
-**Player discovery.** The player arrives as an ordinary wanderer and saves Lowmark's water (v1, complete). In each later region they solve a present local crisis and, while doing so, discover that region's hidden cost of the war and earn one civic tool: many hands (Lowmark), an honest closure (Thornfell), testimony that holds (the Mire), accountable power (Emberholt). With standing in all four, the player assembles the four stops, holds the Second Road, brings four regions to one table at Crestbridge, and breaks the Remnant's Perfect Flame beneath Emberholt without spectacle. The Long Horizon follows: keeping the peace, and deep places that explain much and never the Forgotten God.
+**Player discovery.** The player arrives as an ordinary wanderer and saves Lowmark's water (v1, complete). In each later region they solve a present local crisis and, while doing so, discover that region's hidden cost of the war and earn one civic tool: many hands (Lowmark), an honest closure (Thornfell), testimony that holds (the Mire), accountable power (Emberholt). With standing in all four, the player assembles the four stops, holds the Second Road, brings four regions to one table at an old Concord crossing, and breaks the Remnant's Perfect Flame beneath Emberholt, where they must bind the Fire Titan, a person the war made, to rest rather than kill it. The Long Horizon follows: keeping the peace, and deep places that explain much and never the Forgotten God.
 
 **Not one conspiracy.** Every regional crisis has its own human cause. The Remnant is central only in Emberholt and in the convergence, where its operations are specific and bounded. What links the regions is a shared wound, not a shared villain.
 
@@ -63,7 +63,7 @@ C03 precursor continuity, C06 Volkhari population, C07 Founder roster, the Forgo
 | Glassed Hollow and Volkhari | Directed core. | Emberholt arc. |
 | One person in several records | Part 4 braids 4, 8, 12; Part 5 Thread 2. | Register of the Unreturned series. |
 | Remnant's Perfect Flame | Emberholt dossier §IX–X. | Convergence climax (FT-04). |
-| The Fire Titan and the deep works | Factions §13, §18. | Convergence climax (FT-05). |
+| The Fire Titan and its degrading bindings | Factions §13, §18; Emberholt anchors (Varos Keln, Meryndis, Dahrin, Thalan). | Convergence climax (FT-05). |
 
 ---
 
@@ -73,7 +73,7 @@ The study verified that the public `parsed-osrs` extraction holds quest requirem
 
 | RuneScape pattern (structural) | Caelmor decision |
 |---|---|
-| Low-requirement entry quest per region; many standalone quests. | **Adopted.** Thornfell's and the Mire's entry milestones need only Lowmark MQ12; Emberholt's also needs one of those two standings; at least half of each side slate is self-contained. |
+| Low-requirement entry quest per region; many standalone quests. | **Adopted.** No region's entry milestone has a quest prerequisite; the only mid-arc cross-region gate is EH-M3 (TF-M3 or MR-M2); at least half of each side slate is self-contained. |
 | Keystone quests that many later quests reuse. | **Adopted.** Each regional entry milestone teaches its readable system and is reused by later content. |
 | Series membership separate from thematic "related" links. | **Adopted** as typed edges (arcs §6.1). |
 | Deep spines for series finales; wide convergence for grandmaster capstones. | **Adapted.** Regional spines stay inside their region; the one convergence gate has three direct parents (Lowmark return, Mire capstone, Emberholt capstone) covering all four regions, and no side-quest or point requirements. |
@@ -92,7 +92,7 @@ The study verified that the public `parsed-osrs` extraction holds quest requirem
 
 Mythic Age → Quiet Withdrawal → Rediscovery (Riverwardens, Echohewn, Memorywardens, Emberholt fire, Volkhari inheritance) → Road to War (the Crossing Concord fails) → Great War (Lowmark breadbasket and Relief Cut; Thornfell forced horns; Mire battlefield; Emberholt weaponization) → late war (the Fourteenth Lot) → final year (four stops: crews' refusal, Thornfell sealing, Memorywarden grounding, Glassed Hollow) → the Stopping (no treaty) → postwar restraint, Dreamers, formal Remnant → thirty years of recovery → present (Lowmark's water; the Second Road). Full table: World Truth §B.1.
 
-### 5.2 Player quest order (one plausible path; any regional order is allowed after Lowmark, subject to the Emberholt gate)
+### 5.2 Player quest order (one plausible path; any regional order is allowed; Lowmark is the starting region, and EH-M3 asking for TF-M3 or MR-M2)
 
 Lowmark v1 (12 main quests) → Thornfell (5) → Lowmark return (1; optional for regional play, required before the convergence) → Mire (5) → Emberholt (6) → convergence (4) → Long Horizon. Optional series run alongside. Players meet history out of chronological order by design: they learn the war's end (each region's stop) before they learn the prewar Concord, and Lowmark's own wartime shame last among the regions.
 

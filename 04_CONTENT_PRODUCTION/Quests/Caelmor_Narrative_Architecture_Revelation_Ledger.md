@@ -39,13 +39,13 @@ Tier 1 is Lowmark v1 (authored, listed for completeness). Tiers 2–4 are propos
 | Wrong reading | Emberholt bought it to prepare for war; the Remnant is behind it. |
 | Withheld | Who in the splinter authorized purchase beyond the factor. |
 | Recontextualizes | Lowmark's stolen relief: it did not vanish into profit alone; it fed fear. |
-| Guaranteed path | TF-M2: the store-house inventory establishes the reserve, and Lowmark grain stencils on its sacks plus the Keepers' copy of the bill (always available in TF-M2 if the player did not keep theirs) establish the Lowmark link. |
+| Guaranteed path | TF-M2: the store-house inventory establishes the reserve, and Lowmark grain stencils on its sacks establish that it is Lowmark grain. That it was **stolen relief** is a two-halves connection (TF-M2 and Lowmark MQ4, in either order), exempt from the guaranteed-path rule like R14 and never a gate. |
 
 **R06 — Thornfell's stop (FT-02b)**
 
 | Field | Entry |
 |---|---|
-| Revelation | Thornfell's forced horns killed its own at Shatterfall; the final-year sealing stranded refugees. |
+| Revelation | Thornfell's forced horns killed its own at Shatterfall; the late-war sealings stranded refugees. |
 | Owner | Thornfell TF-M3 (horn) and TF-M5 (sealing). |
 | Seeds | Brynjar's boast about "the horn that split the ridge" [CANON]; Ressa refuses certain calls [CANON]; Dorn's altered echoes [CANON]; cairns with names but no bodies; the Horn-Echo's charging figures running both ways. |
 | Custodians | Shatterfall horn plates and collapse strata; horn rosters; a cairn-keeper's last-sighting list against a later service entry. |
@@ -135,17 +135,17 @@ Tier 1 is Lowmark v1 (authored, listed for completeness). Tiers 2–4 are propos
 
 | Field | Entry |
 |---|---|
-| Revelation | The war ended in four separate stops within one season; no treaty was signed; each region credits itself. |
+| Revelation | The war wore out over its last years; inside that collapse, four uncoordinated withdrawals at different times, several feeding one another, made it stop. No treaty was signed; each region credits itself. |
 | Owner | CV-M1. |
 | Seeds | R06, R08, R09, R13 (each region's stop, owned regionally); Part 2's "Cessation without settlement"; the saying "The war did not truly end. It grew quiet enough for the wounded to hear themselves think" [CANON War History epigraph]. |
 | Custodians | Four regional accounts, each owned by its arc. |
-| Wrong reading | There was an armistice that someone is now breaking. |
+| Wrong reading | There was an armistice that someone is now breaking; or one region's stop ended the war. |
 | Recontextualizes | Every regional capstone becomes one quarter of the war's ending. |
 | Guaranteed path | CV-M1 requires `LR_STANDING`, `MR_STANDING`, and `EH_STANDING` (which imply Lowmark and Thornfell), so every player has earned all four stops from their owners before CV-M1 assembles them. |
 
 **R18 — Perfect Flame needs the crowd (FT-04)**: owner CV-M4; seeds: EH-M2 volatility tests, EH-M5 rallies, Hearthveil chambers, the festival calendar; custodians: Meryndis's ritual plan and the curriculum ledgers; wrong reading: it is a single weapon to be destroyed; payoff: citizens' refusal decides it; guaranteed path: Meryndis's plan in CV-M4.
 
-**R19 — The deep works settle when left alone (FT-05)**: owner CV-M4; seeds: Stonebound activity correlating with excavation [CANON], Deepbrand's fear, Kaldren's limits, heat that eases when digging stops; wrong reading: the Stonebound chose to help; payoff: the player stops the disturbance, heat and pressure settle, and the Titan's chamber cools. Nothing is said about what the works were for (H02 stays open); guaranteed path: the cooling itself in CV-M4, corroborated by Deepbrand excavation logs.
+**R19 — The Titan is a person the war made (FT-05)**: owner CV-M4; seeds: the Ash-Clad Giant legend [CANON]; Kaelen Veyr'un's dreams of something calling from below [CANON; never evidence]; Thennek's suspicion that it is not fully dormant [CANON]; Varos Keln's knowledge that the bindings are degrading [CANON]; the precursor rolls in EH-M3; custodians: the precursor rolls naming the initiate (recovered in EH-M3, subject to the C03 ruling) plus Meryndis's binding formulae; Thalan's recognition of suffering corroborates but is not a custodian; wrong reading: a monster to slay, or a weapon to master; payoff: the player binds it to rest and decides whether its name returns to the record; guaranteed path: the rolls in EH-M3 and the seized plan in CV-M4.
 
 **R20 — The Forgotten God**: **withheld permanently** [PROPOSAL]. Long Horizon content may deepen the question, never answer it.
 
@@ -162,7 +162,7 @@ What a typical player believes at each stage, and what replaces it.
 | The war's end | An armistice. | Each region "ended" it. | Four stops; no peace. |
 | The Remnant | (Unknown in Lowmark.) | Emberholt's hidden order. | A patient exploiter of a gap everyone left open. |
 | Wraiths and imprints | Ghosts. | Imprints that repeat and react. | Consequences that need tending, never witnesses. |
-| Stonebound | Guardians. | Passive responders. | Works that keep balance when people stop disturbing them. |
+| Stonebound | Guardians. | Passive responders. | Passive works that respond to disturbance and play no part in the Titan's binding. |
 
 ## 4. Seed placement map
 
@@ -173,7 +173,7 @@ Which seeds exist now and which later authoring must place. "Exists" means the s
 | Bill of lading to an outside buyer | Lowmark MQ4 | Exists (name is a placeholder) | R05 |
 | Missing Fourteenth Lot stone | Lowmark MQ4, MQ9, MQ11 | Exists | R13 |
 | Oriel: rulers asked for floods on command | Lowmark MQ9 | Exists | R16 |
-| Hearing with evidence chips | Lowmark MQ10 | Exists (pattern) | CV-M3 |
+| Evidence chips | Lowmark MQ10 | Exists (pattern) | CV-M3 terms scene |
 | Aldric's prewar ledgers; Corvin's caution | Canon anchors | Exists (canon) | R13, R16 |
 | Thornfell grain stencils | TF-M1 | To place | R05 |
 | Horn boasts, refused calls, cairn mismatch | TF-M1–M3, Horn and Silence | To place (canon traits exist) | R06 |
