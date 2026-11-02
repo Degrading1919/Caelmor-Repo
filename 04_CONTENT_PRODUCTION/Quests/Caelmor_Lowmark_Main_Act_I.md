@@ -361,7 +361,7 @@ The far bank is hungry and the Board's order says "delivered". Corvin has twelve
 | No cutting tool | Bin route (Beat 4). |
 | Skipped optional inspects | All three proofs of human use are required inspects and are on the critical path. The slip is guaranteed: it does not despawn and cannot be looted by anyone else. |
 | Rushed past the glimpse | Hesketh and Aldric stand where the glimpse leaves them. Marrick's lines are not required. |
-| Abandon | Re-offered on next granary-yard entry (fresh instance; see TL §12 re-offer rule). |
+| Walking away | Stays Active; next granary-yard entry re-prompts at the current step (no abandon; see TL §12 resume hook). |
 | Fail state | None. |
 | Co-op | Independent instances. The glimpse plays per player from their own step. `SM_requisition` is granted to each participant. The choice is per player, so two partners may route the grain differently. Each sees their own carts (per-player props). Fallback: the carts are a bark-only result. |
 
@@ -656,7 +656,7 @@ HW's choices are **how** rather than **what**: the order of sites (changes who t
 | Death | Respawn at the site anchor; progress persists. |
 | Logout | Restore step and flags. Orrin restores to his last ring position. Chops persist. |
 | Synthesis with no optional leads | The three core observations are always available once the three sites are done. |
-| Abandon | Re-offered at the Lantern Post. |
+| Walking away | Stays Active; resume prompt at the Lantern Post. |
 | Fail state | None. |
 
 ## B12. Integration needs
@@ -975,7 +975,7 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 | Player leaves the weir mid-quest before the flush | No failure. The watch can be resumed any night. |
 | Logout during pursuit | Restore to `S03`; the player spawns at the weir and the barge is waiting at the sill (trail clues pre-revealed). |
 | Death in the Lock | Respawn at the Cut mouth; groups defeated stay defeated; crank segments persist. |
-| Abandon | Re-offered at the Lantern Post (Ansel). |
+| Walking away | Stays Active; resume prompt at the Lantern Post (Ansel). |
 | Fail state | None. |
 | Co-op | §C7 note. Each player makes their own smash/chain choice in their own state. The prop presentation follows their own `LM_LOCK_STATE`; fallback: the first choice in the shard sets the visible prop, and the other player's choice is stored and reflected in dialogue only. |
 

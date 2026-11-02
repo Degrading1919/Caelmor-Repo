@@ -145,7 +145,7 @@ Downed crew stay down until the player leaves the building. Nothing they carry a
 
 | Step | Objective | Completes on | Req. | Notes |
 |---|---|---|---|---|
-| `S00_hook` | Find out where Ottilie's glass is going. | `UL-D1` end node, **or** enter taproom volume A with quest available (bark `UL-B1`) | Yes | Quest Uninitialized → Active |
+| `S00_hook` | Find out where Ottilie's glass is going. | `UL-D1` end node, **or** enter taproom volume A with quest available (bark `UL-B1`) | Yes | Quest Inactive → Active |
 | `S01_way_in` | Get into the cellar under the Lamb. | Enter cellar-market volume D **with** any `UL_ENTRY_*` flag set | Yes | Flags set by route events (dialogue node, tunnel volume, E1 defeated) |
 | `S01a_set_crate` | Set the glass on the racks. | Carry-deposit at rack volume | Errand only | Ottilie's crate stays on the racks |
 | `S02_find_rhosyn` | Find the crew's book. | `UL-D4` reaches node `UL-D4.20` | Yes | |

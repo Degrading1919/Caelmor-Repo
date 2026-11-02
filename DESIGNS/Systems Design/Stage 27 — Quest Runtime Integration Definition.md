@@ -48,7 +48,7 @@ Quest state represents the player’s progress through a quest.
 
 ## Quest Runtime States
 
-Quests may exist in one of the following runtime states:
+Quests may exist in exactly one of the following runtime states (canonical model: Stage 15.2):
 
 1. **Inactive**
    - Quest is not yet started
@@ -61,10 +61,9 @@ Quests may exist in one of the following runtime states:
 3. **Completed**
    - Quest objectives satisfied
    - Completion effects may be granted
+   - Terminal; no further transitions
 
-4. **Failed**
-   - Quest permanently failed
-   - No further progression allowed
+There is no `Failed` or `Abandoned` state. Quests never permanently fail and are never abandoned; choices and losses are recorded as outcome flags. A quest the player leaves stays `Active` and resumable. Legal transitions are `Inactive → Active` and `Active → Completed` only.
 
 ---
 

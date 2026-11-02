@@ -7,7 +7,8 @@ namespace Caelmor.Runtime.Quests
 {
     /// <summary>
     /// Server-authoritative quest runtime (Stage 27.B).
-    /// Manages quest instances as deterministic state machines, enforces explicit transitions,
+    /// Manages quest instances as deterministic state machines with exactly three states
+    /// (Inactive → Active → Completed; Stage 15.2), enforces explicit transitions,
     /// and processes progression outside simulation ticks without mutating other systems.
     /// </summary>
     public sealed class QuestRuntimeSystem : IQuestRuntimeSystem
@@ -84,14 +85,6 @@ namespace Caelmor.Runtime.Quests
         }
 
         /// <summary>
-        /// Explicitly marks a quest instance as failed.
-        /// </summary>
-        public QuestStateTransitionResult FailQuest(QuestInstanceId questId)
-        {
-            return Transition(questId, QuestState.Failed);
-        }
-
-        /// <summary>
         /// Processes progression for an active quest using read-only gameplay signals.
         /// Execution is deterministic, occurs outside simulation ticks, and never mutates other systems.
         /// </summary>
@@ -123,7 +116,11 @@ namespace Caelmor.Runtime.Quests
                 if (decision == QuestProgressionDecision.NoChange)
                     return QuestProgressionResult.Success(record.State, wasStateChanged: false);
 
-                var targetState = decision == QuestProgressionDecision.Complete ? QuestState.Completed : QuestState.Failed;
+                // Quests never fail or abandon (Stage 15.2): Complete is the only state-changing decision.
+                if (decision != QuestProgressionDecision.Complete)
+                    return QuestProgressionResult.Failed(QuestProgressionFailureReason.InvalidTransition);
+
+                var targetState = QuestState.Completed;
 
                 if (!IsTransitionAllowed(record.State, targetState))
                     return QuestProgressionResult.Failed(QuestProgressionFailureReason.InvalidTransition);
@@ -210,7 +207,7 @@ namespace Caelmor.Runtime.Quests
                 return target == QuestState.Active;
 
             if (current == QuestState.Active)
-                return target == QuestState.Completed || target == QuestState.Failed;
+                return target == QuestState.Completed;
 
             return false;
         }
@@ -240,7 +237,6 @@ namespace Caelmor.Runtime.Quests
 
         QuestStateTransitionResult ActivateQuest(QuestInstanceId questId);
         QuestStateTransitionResult CompleteQuest(QuestInstanceId questId);
-        QuestStateTransitionResult FailQuest(QuestInstanceId questId);
 
         QuestProgressionResult ProcessProgression(QuestInstanceId questId, QuestProgressionEvents eventsSnapshot);
 
@@ -426,16 +422,18 @@ namespace Caelmor.Runtime.Quests
     public enum QuestProgressionDecision
     {
         NoChange = 0,
-        Complete = 1,
-        Fail = 2
+        Complete = 1
     }
 
+    /// <summary>
+    /// The complete quest lifecycle (Stage 15.2). Quests never fail and are never abandoned;
+    /// choices and losses are recorded as outcome flags, not as states.
+    /// </summary>
     public enum QuestState
     {
         Inactive = 0,
         Active = 1,
-        Completed = 2,
-        Failed = 3
+        Completed = 2
     }
 
     public enum QuestRegistrationFailureReason

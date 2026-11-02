@@ -21,7 +21,8 @@ namespace Caelmor.Validation.Quests
                 new ValidationScenarioAdapter(new Scenario1_DeterministicProgression()),
                 new ValidationScenarioAdapter(new Scenario2_InvalidTransitionsRejected()),
                 new ValidationScenarioAdapter(new Scenario3_MidTickMutationBlocked()),
-                new ValidationScenarioAdapter(new Scenario4_LifecycleEligibilityRequired())
+                new ValidationScenarioAdapter(new Scenario4_LifecycleEligibilityRequired()),
+                new ValidationScenarioAdapter(new Scenario5_ThreeStateLifecycleOnly())
             };
         }
 
@@ -81,9 +82,9 @@ namespace Caelmor.Validation.Quests
                 a.True(complete.Ok, "Completion must succeed from active state.");
                 a.Equal(QuestState.Completed, complete.State!.Value, "Quest must become Completed after explicit completion.");
 
-                var failAfterComplete = rig.System.FailQuest(questId);
-                a.False(failAfterComplete.Ok, "Failure transition must be rejected from terminal state.");
-                a.Equal(QuestStateTransitionFailureReason.InvalidTransition, failAfterComplete.FailureReason, "Invalid transition must be reported when attempting to fail a completed quest.");
+                var reactivateAfterComplete = rig.System.ActivateQuest(questId);
+                a.False(reactivateAfterComplete.Ok, "Completed is terminal; re-activation must be rejected.");
+                a.Equal(QuestStateTransitionFailureReason.InvalidTransition, reactivateAfterComplete.FailureReason, "Invalid transition must be reported when attempting to leave Completed.");
             }
         }
 
@@ -138,6 +139,37 @@ namespace Caelmor.Validation.Quests
                 a.False(progression.Ok, "Progression must be rejected for non-active lifecycle state.");
                 a.Equal(QuestProgressionFailureReason.LifecycleNotEligible, progression.FailureReason, "Lifecycle gate must block progression when player is not active.");
                 a.Equal(0, rig.Evaluator.Contexts.Count, "Evaluator must not be invoked when lifecycle eligibility fails.");
+            }
+        }
+
+        private sealed class Scenario5_ThreeStateLifecycleOnly : IValidationScenario
+        {
+            public string Name => "Scenario 5 — Three-State Lifecycle Only (Inactive, Active, Completed)";
+
+            public void Run(IAssert a)
+            {
+                var defined = Enum.GetValues(typeof(QuestState));
+                a.Equal(3, defined.Length, "Quest lifecycle must define exactly three states.");
+
+                var rig = Rig.Create();
+                var questId = new QuestInstanceId(Guid.Parse("eeeeeeee-5555-5555-5555-eeeeeeeeeeee"));
+
+                rig.Lifecycle.SetActive(rig.Player, true);
+                rig.System.RegisterQuest(questId, rig.Player, "quest_def_epsilon");
+                rig.System.ActivateQuest(questId);
+
+                // A decision outside NoChange/Complete (e.g. a stale "fail" value) must never move the quest.
+                rig.Evaluator.EnqueueDecision((QuestProgressionDecision)2);
+                var undefined = rig.System.ProcessProgression(questId, Rig.EmptyEvents);
+                a.False(undefined.Ok, "Undefined progression decisions must be rejected.");
+                a.Equal(QuestProgressionFailureReason.InvalidTransition, undefined.FailureReason, "Undefined decision must cite invalid transition.");
+                a.True(rig.System.TryGetState(questId, out var afterUndefined), "Quest must remain tracked.");
+                a.Equal(QuestState.Active, afterUndefined, "Quest must stay Active; there is no failed or abandoned state.");
+
+                rig.Evaluator.EnqueueDecision(QuestProgressionDecision.Complete);
+                var complete = rig.System.ProcessProgression(questId, Rig.EmptyEvents);
+                a.True(complete.Ok && complete.WasStateChanged, "The still-Active quest must remain completable.");
+                a.Equal(QuestState.Completed, complete.State!.Value, "Quest must reach Completed.");
             }
         }
 

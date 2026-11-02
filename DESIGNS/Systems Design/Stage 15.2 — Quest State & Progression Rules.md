@@ -6,6 +6,8 @@ This document defines the authoritative **quest state model** and the **rules go
 It specifies the complete set of legal quest states, the allowed transitions between those states, and the structural model by which quest progress is evaluated.
 This document introduces no content, narrative, triggers, rewards, or UI behavior.
 
+**Revision (2026-11-02):** the state model is reduced to the Creative Director's approved three-state lifecycle, **Inactive, Active, Completed**. The earlier `Uninitialized` state is renamed `Inactive` to match Stage 27 and the runtime; the `Failed` and `Abandoned` states are removed.
+
 ## 2. Quest State Definitions
 
 Each quest instance **must** exist in **exactly one** of the following states at any time.
@@ -13,46 +15,36 @@ No other states are permitted.
 
 **Defined States**
 
-1. **Uninitialized**
-   - The quest instance exists but has not yet been accepted by the player.
+1. **Inactive**
+   - The quest instance exists but has not yet been started by the player.
    - This is the initial state for all newly created quest instances.
 
 2. **Active**
-   - The quest has been accepted and is eligible for progress evaluation.
+   - The quest has been started and is eligible for progress evaluation.
 
 3. **Completed**
-   - The quest has reached a successful terminal condition.
-   - This is a terminal state.
-
-4. **Failed**
-   - The quest has reached a failure terminal condition.
-   - This is a terminal state.
-
-5. **Abandoned**
-   - The quest has been explicitly terminated without completion.
-   - This is a terminal state.
+   - The quest has reached its completion condition.
+   - This is the only terminal state.
 
 **State Rules**
 - A quest instance **must** be in exactly one state at all times.
 - Illegal or undefined states **are forbidden**.
 - Terminal states **must not** transition to any other state.
+- There is **no** failed or abandoned state. Quests never permanently fail and are never abandoned (Creative Director ruling, 2026-11-02). Player choices, losses and missed moments are recorded as outcome flags on the quest instance or character, never as a quest state.
+- A quest the player walks away from **must** remain `Active` with its persisted progress intact, and **must** stay resumable. Content may provide a resume hook (for example, the original offer point re-prompting the player); a resume hook never creates a new quest instance.
 
 ## 3. Legal State Transitions
 
 **Permitted Transitions**
 
-- `Uninitialized → Active`
+- `Inactive → Active`
 - `Active → Completed`
-- `Active → Failed`
-- `Active → Abandoned`
 
 **Forbidden Transitions**
 
-- Any transition **into** `Uninitialized`
+- Any transition **into** `Inactive`
 - Any transition **out of** `Completed`
-- Any transition **out of** `Failed`
-- Any transition **out of** `Abandoned`
-- Direct transitions from `Uninitialized` to any terminal state
+- Direct transitions from `Inactive` to `Completed`
 - Any transition not explicitly listed as permitted
 
 **Transition Rules**
@@ -69,7 +61,7 @@ Progress evaluation is the server-authoritative assessment of whether a quest in
 
 **Rules**
 - Progress evaluation **must** operate only on the current quest state.
-- Progress evaluation **must not** occur if the quest state is `Uninitialized`.
+- Progress evaluation **must not** occur if the quest state is `Inactive`.
 - Progress evaluation **must not** occur for any terminal state.
 - Progress evaluation **must** be structurally defined and content-agnostic.
 - Progress evaluation **must not** embed:
