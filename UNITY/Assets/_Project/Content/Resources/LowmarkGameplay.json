@@ -1,0 +1,4941 @@
+{
+  "version": 1,
+  "id": "lowmark_playable",
+  "title": "Whisperflow Landing",
+  "tuning": {
+    "health": 100,
+    "damage": 6,
+    "attackTicks": 20,
+    "respawnX": -3,
+    "respawnZ": -3
+  },
+  "items": [
+    {
+      "id": "weathered_marker_post",
+      "name": "Weathered marker post",
+      "heal": 0,
+      "quest": true
+    },
+    {
+      "id": "dispatch_order",
+      "name": "Dispatch order",
+      "heal": 0,
+      "quest": true
+    },
+    {
+      "id": "marker_stem",
+      "name": "Marker stem",
+      "heal": 0,
+      "quest": true
+    },
+    {
+      "id": "crew_hatchet",
+      "name": "Crew hatchet",
+      "heal": 0,
+      "quest": false
+    },
+    {
+      "id": "common_timber",
+      "name": "Coppice timber",
+      "heal": 0,
+      "quest": false
+    },
+    {
+      "id": "game_meat",
+      "name": "Game meat",
+      "heal": 0,
+      "quest": false
+    },
+    {
+      "id": "dried_game_strips",
+      "name": "Dried game strips",
+      "heal": 25,
+      "quest": false
+    },
+    {
+      "id": "payment",
+      "name": "Payment",
+      "heal": 0,
+      "quest": false
+    },
+    {
+      "id": "tannin_rich_bark",
+      "name": "Tannin-rich bark",
+      "heal": 0,
+      "quest": false
+    }
+  ],
+  "skills": [
+    {
+      "id": "woodcutting",
+      "name": "Woodcutting",
+      "thresholds": [
+        0,
+        2224,
+        4779,
+        7670,
+        10901,
+        14478,
+        18404,
+        22686,
+        27329,
+        32339,
+        37723,
+        43486,
+        49635,
+        56178,
+        63121,
+        70473,
+        78242,
+        86435,
+        95063,
+        104134,
+        113658,
+        123645,
+        134107,
+        145053,
+        156497,
+        168449,
+        180924,
+        193934,
+        207493,
+        221617,
+        236321,
+        251621,
+        267534,
+        284078,
+        301272,
+        319134,
+        337686,
+        356948,
+        376944,
+        397696,
+        419229,
+        441570,
+        464744,
+        488780,
+        513708,
+        539558,
+        566364,
+        594158,
+        622977,
+        652858,
+        683839,
+        715962,
+        749270,
+        783806,
+        819619,
+        856756,
+        895271,
+        935216,
+        976648,
+        1019626,
+        1064212,
+        1110471,
+        1158471,
+        1208282,
+        1259980,
+        1313642,
+        1369351,
+        1427190,
+        1487251,
+        1549627,
+        1614416,
+        1681722,
+        1751651,
+        1824317,
+        1899838,
+        1978338,
+        2059947,
+        2144800,
+        2233039,
+        2324814,
+        2420281,
+        2519602,
+        2622949,
+        2730501,
+        2842447,
+        2958981,
+        3080311,
+        3206651,
+        3338228,
+        3475278,
+        3618048,
+        3766799,
+        3921801,
+        4083338,
+        4251710,
+        4427227,
+        4610217,
+        4801022,
+        5000000
+      ]
+    },
+    {
+      "id": "hunting",
+      "name": "Hunting",
+      "thresholds": [
+        0,
+        2224,
+        4779,
+        7670,
+        10901,
+        14478,
+        18404,
+        22686,
+        27329,
+        32339,
+        37723,
+        43486,
+        49635,
+        56178,
+        63121,
+        70473,
+        78242,
+        86435,
+        95063,
+        104134,
+        113658,
+        123645,
+        134107,
+        145053,
+        156497,
+        168449,
+        180924,
+        193934,
+        207493,
+        221617,
+        236321,
+        251621,
+        267534,
+        284078,
+        301272,
+        319134,
+        337686,
+        356948,
+        376944,
+        397696,
+        419229,
+        441570,
+        464744,
+        488780,
+        513708,
+        539558,
+        566364,
+        594158,
+        622977,
+        652858,
+        683839,
+        715962,
+        749270,
+        783806,
+        819619,
+        856756,
+        895271,
+        935216,
+        976648,
+        1019626,
+        1064212,
+        1110471,
+        1158471,
+        1208282,
+        1259980,
+        1313642,
+        1369351,
+        1427190,
+        1487251,
+        1549627,
+        1614416,
+        1681722,
+        1751651,
+        1824317,
+        1899838,
+        1978338,
+        2059947,
+        2144800,
+        2233039,
+        2324814,
+        2420281,
+        2519602,
+        2622949,
+        2730501,
+        2842447,
+        2958981,
+        3080311,
+        3206651,
+        3338228,
+        3475278,
+        3618048,
+        3766799,
+        3921801,
+        4083338,
+        4251710,
+        4427227,
+        4610217,
+        4801022,
+        5000000
+      ]
+    },
+    {
+      "id": "cooking",
+      "name": "Cooking",
+      "thresholds": [
+        0,
+        2224,
+        4779,
+        7670,
+        10901,
+        14478,
+        18404,
+        22686,
+        27329,
+        32339,
+        37723,
+        43486,
+        49635,
+        56178,
+        63121,
+        70473,
+        78242,
+        86435,
+        95063,
+        104134,
+        113658,
+        123645,
+        134107,
+        145053,
+        156497,
+        168449,
+        180924,
+        193934,
+        207493,
+        221617,
+        236321,
+        251621,
+        267534,
+        284078,
+        301272,
+        319134,
+        337686,
+        356948,
+        376944,
+        397696,
+        419229,
+        441570,
+        464744,
+        488780,
+        513708,
+        539558,
+        566364,
+        594158,
+        622977,
+        652858,
+        683839,
+        715962,
+        749270,
+        783806,
+        819619,
+        856756,
+        895271,
+        935216,
+        976648,
+        1019626,
+        1064212,
+        1110471,
+        1158471,
+        1208282,
+        1259980,
+        1313642,
+        1369351,
+        1427190,
+        1487251,
+        1549627,
+        1614416,
+        1681722,
+        1751651,
+        1824317,
+        1899838,
+        1978338,
+        2059947,
+        2144800,
+        2233039,
+        2324814,
+        2420281,
+        2519602,
+        2622949,
+        2730501,
+        2842447,
+        2958981,
+        3080311,
+        3206651,
+        3338228,
+        3475278,
+        3618048,
+        3766799,
+        3921801,
+        4083338,
+        4251710,
+        4427227,
+        4610217,
+        4801022,
+        5000000
+      ]
+    },
+    {
+      "id": "melee",
+      "name": "Melee",
+      "thresholds": [
+        0,
+        2224,
+        4779,
+        7670,
+        10901,
+        14478,
+        18404,
+        22686,
+        27329,
+        32339,
+        37723,
+        43486,
+        49635,
+        56178,
+        63121,
+        70473,
+        78242,
+        86435,
+        95063,
+        104134,
+        113658,
+        123645,
+        134107,
+        145053,
+        156497,
+        168449,
+        180924,
+        193934,
+        207493,
+        221617,
+        236321,
+        251621,
+        267534,
+        284078,
+        301272,
+        319134,
+        337686,
+        356948,
+        376944,
+        397696,
+        419229,
+        441570,
+        464744,
+        488780,
+        513708,
+        539558,
+        566364,
+        594158,
+        622977,
+        652858,
+        683839,
+        715962,
+        749270,
+        783806,
+        819619,
+        856756,
+        895271,
+        935216,
+        976648,
+        1019626,
+        1064212,
+        1110471,
+        1158471,
+        1208282,
+        1259980,
+        1313642,
+        1369351,
+        1427190,
+        1487251,
+        1549627,
+        1614416,
+        1681722,
+        1751651,
+        1824317,
+        1899838,
+        1978338,
+        2059947,
+        2144800,
+        2233039,
+        2324814,
+        2420281,
+        2519602,
+        2622949,
+        2730501,
+        2842447,
+        2958981,
+        3080311,
+        3206651,
+        3338228,
+        3475278,
+        3618048,
+        3766799,
+        3921801,
+        4083338,
+        4251710,
+        4427227,
+        4610217,
+        4801022,
+        5000000
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "id": "arrival",
+      "name": "Brookhollow road",
+      "kind": "area",
+      "x": 0,
+      "z": -4,
+      "all": [],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "maelin",
+      "name": "Maelin Rowe",
+      "kind": "npc",
+      "x": 0,
+      "z": -0.5,
+      "all": [],
+      "none": [
+        "silt_clear",
+        "people_uphill"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "hollis",
+      "name": "Hollis Avery",
+      "kind": "npc",
+      "x": 2,
+      "z": -0.5,
+      "all": [],
+      "none": [
+        "people_uphill"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "nan",
+      "name": "Nan Ferrin",
+      "kind": "npc",
+      "x": 5,
+      "z": -3,
+      "all": [],
+      "none": [
+        "people_uphill"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "wynn",
+      "name": "Wynn Tarrow",
+      "kind": "npc",
+      "x": 7,
+      "z": -3,
+      "all": [],
+      "none": [
+        "people_uphill"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "tovin",
+      "name": "Tovin Pell",
+      "kind": "npc",
+      "x": 8,
+      "z": -1,
+      "all": [],
+      "none": [
+        "people_uphill"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "dace",
+      "name": "Dace",
+      "kind": "npc",
+      "x": -3,
+      "z": -3,
+      "all": [],
+      "none": [
+        "people_uphill"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "false_post",
+      "name": "Yellow marker post",
+      "kind": "post",
+      "x": 0,
+      "z": 4,
+      "all": [],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "old_post",
+      "name": "Weathered post in the reeds",
+      "kind": "post",
+      "x": -9,
+      "z": 7,
+      "all": [],
+      "none": [
+        "post_found"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "footing",
+      "name": "Old footing / Marking Stone",
+      "kind": "stone",
+      "x": -9,
+      "z": 10,
+      "all": [],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "maelin_footing",
+      "name": "Maelin Rowe",
+      "kind": "npc",
+      "x": -7,
+      "z": 10,
+      "all": [
+        "silt_clear"
+      ],
+      "none": [
+        "river_read"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "coppice",
+      "name": "Ribboned coppice stool",
+      "kind": "tree",
+      "x": -10,
+      "z": 2,
+      "all": [],
+      "none": [],
+      "nodeInstanceId": 1001
+    },
+    {
+      "id": "timber",
+      "name": "Renewal coppice",
+      "kind": "tree",
+      "x": -11,
+      "z": -1,
+      "all": [],
+      "none": [],
+      "nodeInstanceId": 1002
+    },
+    {
+      "id": "skiff",
+      "name": "Drowned pier and skiff",
+      "kind": "stone",
+      "x": 10,
+      "z": 10,
+      "all": [],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "grain",
+      "name": "Wynn's grain cart",
+      "kind": "cart",
+      "x": 8,
+      "z": -4,
+      "all": [],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "trunk",
+      "name": "Nan's trunk",
+      "kind": "cart",
+      "x": 5,
+      "z": -4,
+      "all": [],
+      "none": [
+        "trunk_done"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "camp",
+      "name": "High landing / stores",
+      "kind": "camp",
+      "x": 9,
+      "z": -10,
+      "all": [],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "fire",
+      "name": "High landing fire",
+      "kind": "fire",
+      "x": 6,
+      "z": -10,
+      "all": [],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "maelin_camp",
+      "name": "Maelin Rowe",
+      "kind": "npc",
+      "x": 4,
+      "z": -9,
+      "all": [
+        "people_uphill"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "hollis_camp",
+      "name": "Hollis Avery",
+      "kind": "npc",
+      "x": 3,
+      "z": -11,
+      "all": [
+        "people_uphill"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "nan_camp",
+      "name": "Nan Ferrin",
+      "kind": "npc",
+      "x": 10,
+      "z": -11,
+      "all": [
+        "people_uphill"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "tovin_camp",
+      "name": "Tovin Pell",
+      "kind": "npc",
+      "x": 11,
+      "z": -9,
+      "all": [
+        "people_uphill"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "ansel",
+      "name": "Ansel Corrie",
+      "kind": "npc",
+      "x": 1,
+      "z": -11,
+      "all": [
+        "choices_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "chalk_ring",
+      "name": "Reference mark / public stone",
+      "kind": "mark",
+      "x": -9,
+      "z": 10,
+      "all": [
+        "TL_STONE_PUBLIC"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "crossing",
+      "name": "Whisperflow crossing",
+      "kind": "post",
+      "x": -1,
+      "z": 5,
+      "all": [
+        "quest_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "silt1",
+      "name": "Silt Swimmer",
+      "kind": "enemy",
+      "x": -11,
+      "z": 10,
+      "all": [
+        "shallows_entered"
+      ],
+      "none": [
+        "silt_clear"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "silt2",
+      "name": "Silt Swimmer",
+      "kind": "enemy",
+      "x": -10,
+      "z": 12,
+      "all": [
+        "shallows_entered"
+      ],
+      "none": [
+        "silt_clear"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "silt3",
+      "name": "Silt Swimmer",
+      "kind": "enemy",
+      "x": -7,
+      "z": 12,
+      "all": [
+        "shallows_entered"
+      ],
+      "none": [
+        "silt_clear"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "leech",
+      "name": "River Leech",
+      "kind": "enemy",
+      "x": -7,
+      "z": 9,
+      "all": [
+        "shallows_entered"
+      ],
+      "none": [
+        "silt_clear"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "goose1",
+      "name": "Marsh Fen Goose",
+      "kind": "enemy",
+      "x": -9,
+      "z": 5,
+      "all": [
+        "notch"
+      ],
+      "none": [
+        "post_found"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "goose2",
+      "name": "Marsh Fen Goose",
+      "kind": "enemy",
+      "x": -11,
+      "z": 6,
+      "all": [
+        "notch"
+      ],
+      "none": [
+        "post_found"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "boar",
+      "name": "Furrow Boar",
+      "kind": "enemy",
+      "x": 8,
+      "z": -7,
+      "all": [
+        "sack3_lifted"
+      ],
+      "none": [],
+      "nodeInstanceId": 1003
+    },
+    {
+      "id": "wild_boar",
+      "name": "Furrow Boar",
+      "kind": "enemy",
+      "x": 11,
+      "z": 2,
+      "all": [
+        "quest_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 1004
+    },
+    {
+      "id": "wreck1",
+      "name": "Silt Swimmer",
+      "kind": "enemy",
+      "x": 9,
+      "z": 12,
+      "all": [
+        "wreck_entered"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "wreck2",
+      "name": "Silt Swimmer",
+      "kind": "enemy",
+      "x": 10,
+      "z": 10,
+      "all": [
+        "wreck_entered"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "wreck3",
+      "name": "River Leech",
+      "kind": "enemy",
+      "x": 11,
+      "z": 12,
+      "all": [
+        "wreck_entered"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "maelin_return",
+      "name": "Maelin Rowe",
+      "kind": "npc",
+      "x": 0,
+      "z": -0.5,
+      "all": [
+        "river_read"
+      ],
+      "none": [
+        "people_uphill"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "dace_camp",
+      "name": "Dace",
+      "kind": "npc",
+      "x": 7,
+      "z": -12,
+      "all": [
+        "people_uphill"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "wynn_camp",
+      "name": "Wynn Tarrow",
+      "kind": "npc",
+      "x": 9,
+      "z": -12,
+      "all": [
+        "people_uphill"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "true_post",
+      "name": "True marker post",
+      "kind": "post",
+      "x": -8.8,
+      "z": 10.6,
+      "all": [
+        "discovery"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "bw_tamsin",
+      "name": "Tamsin",
+      "kind": "npc",
+      "x": -8,
+      "z": -8,
+      "all": [
+        "quest_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "bw_upper",
+      "name": "Upper household",
+      "kind": "npc",
+      "x": -11,
+      "z": -8,
+      "all": [
+        "quest_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "bw_lower",
+      "name": "Lower household",
+      "kind": "npc",
+      "x": -9,
+      "z": -11,
+      "all": [
+        "quest_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "bw_stake",
+      "name": "Chalked bank stake",
+      "kind": "post",
+      "x": -9,
+      "z": -7,
+      "all": [
+        "quest_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "bw_measure1",
+      "name": "First cord mark",
+      "kind": "stone",
+      "x": -11,
+      "z": -5,
+      "all": [
+        "BW_started"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "bw_measure2",
+      "name": "Second cord mark",
+      "kind": "stone",
+      "x": -11,
+      "z": -7,
+      "all": [
+        "BW_started"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "bw_measure3",
+      "name": "Third cord mark",
+      "kind": "stone",
+      "x": -11,
+      "z": -10,
+      "all": [
+        "BW_started"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "bw_wrack",
+      "name": "High wrack line",
+      "kind": "tree",
+      "x": -12,
+      "z": -4,
+      "all": [
+        "BW_started"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "bw_repair",
+      "name": "Old repair face",
+      "kind": "stone",
+      "x": -12,
+      "z": -6,
+      "all": [
+        "BW_started"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "bw_jam",
+      "name": "Driftroot jam",
+      "kind": "tree",
+      "x": -11,
+      "z": -2.5,
+      "all": [
+        "BW_started"
+      ],
+      "none": [
+        "BW_JAM_SWUNG"
+      ],
+      "nodeInstanceId": 1005
+    },
+    {
+      "id": "bw_old_cord",
+      "name": "Old repair stake and cord",
+      "kind": "post",
+      "x": -11,
+      "z": -2.5,
+      "all": [
+        "BW_JAM_SWUNG"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "bw_leaner",
+      "name": "The leaner / failing driftroot",
+      "kind": "tree",
+      "x": -6,
+      "z": -9,
+      "all": [
+        "BW_started"
+      ],
+      "none": [
+        "BW_LEANER_FALLEN"
+      ],
+      "nodeInstanceId": 1006
+    },
+    {
+      "id": "bw_leaner_fallen",
+      "name": "Fallen leaner / sound wood",
+      "kind": "wood",
+      "x": -6,
+      "z": -9,
+      "all": [
+        "BW_LEANER_FALLEN"
+      ],
+      "none": [],
+      "nodeInstanceId": 1007
+    },
+    {
+      "id": "bw_holder",
+      "name": "The holder / bank-binding roots",
+      "kind": "tree",
+      "x": -7,
+      "z": -11,
+      "all": [
+        "BW_started"
+      ],
+      "none": [
+        "BW_BANK_CUT"
+      ],
+      "nodeInstanceId": 1008
+    },
+    {
+      "id": "bw_holder_stump",
+      "name": "Cut holder / landing opening",
+      "kind": "wood",
+      "x": -7,
+      "z": -11,
+      "all": [
+        "BW_BANK_CUT"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "bw_old_tree",
+      "name": "The old driftroot / nesting holes",
+      "kind": "tree",
+      "x": -4,
+      "z": -12,
+      "all": [
+        "BW_started"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "bw_stage",
+      "name": "Lower household's landing stage",
+      "kind": "wood",
+      "x": -10,
+      "z": -11,
+      "all": [
+        "BW_LANDING_BUILT"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "bw_restaked",
+      "name": "Re-staked repair face",
+      "kind": "post",
+      "x": -12,
+      "z": -6,
+      "all": [
+        "BW_TAMSIN_HEARD"
+      ],
+      "none": [],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "BW_skitter1",
+      "name": "River Skitter",
+      "kind": "enemy",
+      "x": -10,
+      "z": -2,
+      "all": [
+        "BW_waded"
+      ],
+      "none": [
+        "BW_JAM_SWUNG"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "BW_skitter2",
+      "name": "River Skitter",
+      "kind": "enemy",
+      "x": -12,
+      "z": -2,
+      "all": [
+        "BW_waded"
+      ],
+      "none": [
+        "BW_JAM_SWUNG"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "BW_skitter3",
+      "name": "River Skitter",
+      "kind": "enemy",
+      "x": -10,
+      "z": -3.5,
+      "all": [
+        "BW_waded"
+      ],
+      "none": [
+        "BW_JAM_SWUNG"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "BW_skitter4",
+      "name": "River Skitter",
+      "kind": "enemy",
+      "x": -12,
+      "z": -4,
+      "all": [
+        "BW_waded"
+      ],
+      "none": [
+        "BW_JAM_SWUNG"
+      ],
+      "nodeInstanceId": 0
+    },
+    {
+      "id": "BW_skitter5",
+      "name": "River Skitter",
+      "kind": "enemy",
+      "x": -11,
+      "z": -4.5,
+      "all": [
+        "BW_waded"
+      ],
+      "none": [
+        "BW_JAM_SWUNG"
+      ],
+      "nodeInstanceId": 0
+    }
+  ],
+  "actions": [
+    {
+      "id": "arrive",
+      "target": "arrival",
+      "label": "Approach the landing",
+      "text": "",
+      "kind": "enter",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 0,
+      "maxStage": 0,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "arrive",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "arrived"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "hear_order",
+      "target": "hollis",
+      "label": "What does the order say?",
+      "text": "Hollis: Grain for the far-bank households, sent under emergency provision. They were promised it three days ago.\nUnder the provision, the crossing counts as open when the marker reads open. The marker reads open.\nMaelin: Marker's wrong.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "hear_order",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "heard_order"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "hear_river",
+      "target": "maelin",
+      "label": "Why won't you cross?",
+      "text": "Maelin: See the posts down the bank? Grey ones. Same notch, same height on every one.\nWater over the notch, boots on the bank. That's the rule. Has been since before him.\nNow look at the yellow one. That post wasn't there yesterday.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "hear_river",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "heard_river"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "settle",
+      "target": "hollis",
+      "label": "So how do we settle this?",
+      "text": "Hollis: If the marker's false, prove it. Show me, and I'll write it down and shut the crossing myself.\nMaelin: Go and look at that post. Properly. Then talk to whoever's been on this bank longest.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [
+        "heard_order",
+        "heard_river"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "settle",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "heard_both"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "nan_lead",
+      "target": "nan",
+      "label": "Did you see anything last night?",
+      "text": "Nan: At dusk the posts were all grey, all the same. Water over every notch, so I sat down.\nAt first light there's a yellow one. Like a new tooth.\nMy mam had a rhyme for crossings. 'Mind the stone and not the stake; the stake is only what men make.'",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 1,
+      "maxStage": 7,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "nan_lead",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "TL_LEAD_NAN"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "nan_alibi",
+      "target": "nan",
+      "label": "Could the carter have moved the post?",
+      "text": "Nan: Wynn? She snored under that cart from dark to dawn. I'd swear to it. I'd rather not have had to hear it.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 1,
+      "maxStage": 7,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "nan_alibi",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "TL_NAN_ALIBI"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "dace_lead",
+      "target": "dace",
+      "label": "What happened?",
+      "text": "Dace: Carter offered a coin to whoever proved the line. Marker said open. So I took the skiff out at first light, straight down the line.\nHalfway over, something tore the bottom out of her. Like running onto a row of teeth. Under the water. Never saw it.\nWaded back. She's still out there, stuck on whatever it was.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 1,
+      "maxStage": 7,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "dace_lead",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "TL_LEAD_DACE"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "order_lead",
+      "target": "wynn",
+      "label": "Can I see the order?",
+      "text": "Wynn: Here. Read it yourself. Avery's read it to me four times.\nTo the keeper at Whisperflow. Grain under emergency provision, for the households of the far bank. The Whisperflow marker reads open. The load is to cross on arrival, without delay.\nWynn: Handed to me at Crestbridge yesterday noon. Why?",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 1,
+      "maxStage": 7,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "order_lead",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "TL_LEAD_ORDER"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "tovin_start",
+      "target": "tovin",
+      "label": "Do you work this bank often?",
+      "text": "Tovin: Brookhollow docks, mostly. Here when there's loading. Years now.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 1,
+      "maxStage": 7,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "tovin_start",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "tovin_asked"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "tovin_odd",
+      "target": "tovin",
+      "label": "Have you noticed anything odd about the markers?",
+      "text": "Tovin: ...No. Why would I?",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 1,
+      "maxStage": 7,
+      "all": [
+        "tovin_asked"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "tovin_odd",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "tovin_hesitated"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "tovin_lead",
+      "target": "tovin",
+      "label": "You hesitated. What is it?",
+      "text": "Tovin: It's nothing. It's me. I draw things. Bends. Floors. It keeps my head straight.\nThis is here. Years back. The old post stood further up, by the bend. There's a mark under it.\nI drew it because it looked like the notch. Like it was copying the notch.\nWater used to sit funny there. Don't tell Maelin I said that.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 1,
+      "maxStage": 7,
+      "all": [
+        "tovin_hesitated"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "tovin_lead",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "TL_LEAD_TOVIN"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "notch",
+      "target": "false_post",
+      "label": "Inspect the notch",
+      "text": "The notch is cut a hand higher than on the grey posts. The water sits just under it.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 2,
+      "maxStage": 2,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "notch",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "notch"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "earth",
+      "target": "false_post",
+      "label": "Inspect the footing",
+      "text": "The earth at the base is fresh and boot-tamped. No silt line on the wood. This went in overnight.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 2,
+      "maxStage": 2,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "earth",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "earth"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "drag",
+      "target": "false_post",
+      "label": "Inspect drag marks",
+      "text": "Two furrows run upstream into the reeds. Something heavy was dragged.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 2,
+      "maxStage": 2,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "drag",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "drag"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "post_found",
+      "target": "old_post",
+      "label": "Pick up the weathered post",
+      "text": "A grey marker post, snapped at the base. Its notch matches the others on the bank.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 3,
+      "maxStage": 3,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "post_found",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "weathered_marker_post",
+          "count": 1
+        }
+      ],
+      "flags": [
+        "post_found"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "shallows",
+      "target": "footing",
+      "label": "Wade into the shallows",
+      "text": "",
+      "kind": "enter",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 4,
+      "maxStage": 4,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "shallows",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "shallows_entered"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "clear",
+      "target": "footing",
+      "label": "Clear the silt",
+      "text": "Older than the post. Older than the pier. The notch sits exactly where the grey posts' notches sit.",
+      "kind": "channel",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 4,
+      "maxStage": 4,
+      "all": [
+        "silt1_dead",
+        "silt2_dead",
+        "silt3_dead",
+        "leech_dead"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "clear",
+      "ticks": 30,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "silt_clear"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "hatchet",
+      "target": "maelin_footing",
+      "label": "Someone snapped the old post.",
+      "text": "Maelin: Pulled out and snapped. Somebody wanted it gone, not moved. That one's finished.\nCoppice is up the bank. Cut me a straight stem, a wrist and a half thick. Only the ribboned stools. The rest are growing.\nNo blade? Here. Crew hatchet. Bring it back sharp.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 5,
+      "maxStage": 5,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "hatchet",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "crew_hatchet",
+          "count": 1
+        }
+      ],
+      "flags": [
+        "tool_loaned"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "stem",
+      "target": "coppice",
+      "label": "Cut a marker stem",
+      "text": "A straight marker stem, cut from a ribboned stool.",
+      "kind": "gather",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 5,
+      "maxStage": 5,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "stem",
+      "ticks": 40,
+      "cooldown": 0,
+      "tool": "crew_hatchet",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "marker_stem",
+          "count": 1
+        }
+      ],
+      "flags": [
+        "stem_cut"
+      ],
+      "skill": "woodcutting",
+      "xp": 22,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "notch_cut",
+      "target": "footing",
+      "label": "Cut the notch",
+      "text": "The stone's notch is the guide.",
+      "kind": "channel",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 6,
+      "maxStage": 6,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "notch_cut",
+      "ticks": 30,
+      "cooldown": 0,
+      "tool": "crew_hatchet",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "notch_cut"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "seat",
+      "target": "footing",
+      "label": "Seat the post",
+      "text": "",
+      "kind": "channel",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 6,
+      "maxStage": 6,
+      "all": [
+        "notch_cut"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "seat",
+      "ticks": 30,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [
+        {
+          "id": "marker_stem",
+          "count": 1
+        }
+      ],
+      "outputs": [],
+      "flags": [
+        "discovery"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "discovery_end",
+      "target": "footing",
+      "label": "Witness the river",
+      "text": "",
+      "kind": "enter",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 6,
+      "maxStage": 6,
+      "all": [
+        "discovery"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "discovery_end",
+      "ticks": 100,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "discovery_finished"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "maelin_after",
+      "target": "maelin_footing",
+      "label": "What was that?",
+      "text": "Maelin: ...It's done that before. Never where anyone was looking.\nThe river reading its mark.\nWater's at the notch. Crossing's shut. Same as I've said since dawn. Go and show Avery his notch.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 6,
+      "maxStage": 6,
+      "all": [
+        "discovery_finished"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "maelin_after",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "river_read"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "proof_notches",
+      "target": "hollis",
+      "label": "Here's the old post. Compare the notches.",
+      "text": "Hollis: That's... a hand. That's a whole hand.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 7,
+      "maxStage": 7,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "proof_notches",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "proof_notches"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "proof_walk",
+      "target": "hollis",
+      "label": "Walk down to the bank and look for yourself.",
+      "text": "Hollis: The earth's fresh. No silt line. Fine. Fine.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 7,
+      "maxStage": 7,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "proof_walk",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "proof_walk"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "proof_nan",
+      "target": "hollis",
+      "label": "The post was grey at dusk and yellow at dawn.",
+      "text": "Hollis: Mistress Ferrin doesn't sleep?\nNan: Not since before you were born, young man.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 7,
+      "maxStage": 7,
+      "all": [
+        "TL_LEAD_NAN"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "proof_nan",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "proof_nan"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "proof_order",
+      "target": "hollis",
+      "label": "The order was written before it was true.",
+      "text": "Hollis: Written before it was true. Someone knew what the post would say before the post said it.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 7,
+      "maxStage": 7,
+      "all": [
+        "TL_LEAD_ORDER",
+        "TL_LEAD_NAN"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "proof_order",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "proof_order",
+        "TL_HOLLIS_SAW_ORDER"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "proof_tovin",
+      "target": "hollis",
+      "label": "Tovin's sketch shows the old position.",
+      "text": "Hollis: Pell? He's never said three words to me.\nTovin: You never asked.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 7,
+      "maxStage": 7,
+      "all": [
+        "TL_LEAD_TOVIN"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "proof_tovin",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "proof_tovin"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "proof_pier",
+      "target": "hollis",
+      "label": "The marked line runs over a drowned pier.",
+      "text": "Hollis: There's a pier there? It isn't on my sheet.\nMaelin: It's on mine.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 7,
+      "maxStage": 7,
+      "all": [],
+      "none": [],
+      "any": [
+        "TL_LEAD_DACE",
+        "TL_EVIDENCE_PILINGS"
+      ],
+      "anyCount": 1,
+      "once": "proof_pier",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "proof_pier"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "close_crossing",
+      "target": "hollis",
+      "label": "Show the two proofs",
+      "text": "Hollis: Whisperflow crossing is shut. By the keepers, by the river. Until the true post reads clear.\nMaelin: Go up. River's rising. Everyone to the high landing before dark, and the grain with us.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 7,
+      "maxStage": 7,
+      "all": [],
+      "none": [],
+      "any": [
+        "proof_notches",
+        "proof_walk",
+        "proof_nan",
+        "proof_order",
+        "proof_tovin",
+        "proof_pier"
+      ],
+      "anyCount": 2,
+      "once": "close_crossing",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "crossing_closed"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [
+        {
+          "id": "dispatch_order",
+          "count": 1,
+          "all": [
+            "TL_LEAD_ORDER"
+          ],
+          "none": []
+        }
+      ]
+    },
+    {
+      "id": "order_transfer",
+      "target": "hollis",
+      "label": "Take the dispatch order",
+      "text": "Wynn hands over the dispatch order.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 8,
+      "maxStage": 8,
+      "all": [
+        "TL_LEAD_ORDER",
+        "crossing_closed"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "order_transfer",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "lift1",
+      "target": "grain",
+      "label": "Lift grain sack 1",
+      "text": "Wynn: Mind that one, it's split. No, the other. Fine, it's both.",
+      "kind": "lift",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 8,
+      "maxStage": 8,
+      "all": [],
+      "none": [
+        "sack1_done"
+      ],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "sack1_lifted"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "sack1",
+      "requiresCarry": "-",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "deliver1",
+      "target": "camp",
+      "label": "Set down grain sack 1",
+      "text": "Grain moved above the flood line.",
+      "kind": "deliver",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 8,
+      "maxStage": 8,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "deliver1",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "sack1_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "-",
+      "requiresCarry": "sack1",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "lift2",
+      "target": "grain",
+      "label": "Lift grain sack 2",
+      "text": "Wynn: Mind that one, it's split. No, the other. Fine, it's both.",
+      "kind": "lift",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 8,
+      "maxStage": 8,
+      "all": [
+        "sack1_done"
+      ],
+      "none": [
+        "sack2_done"
+      ],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "sack2_lifted"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "sack2",
+      "requiresCarry": "-",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "deliver2",
+      "target": "camp",
+      "label": "Set down grain sack 2",
+      "text": "Grain moved above the flood line.",
+      "kind": "deliver",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 8,
+      "maxStage": 8,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "deliver2",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "sack2_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "-",
+      "requiresCarry": "sack2",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "lift3",
+      "target": "grain",
+      "label": "Lift grain sack 3",
+      "text": "Wynn: Boar! It's in the sacks!",
+      "kind": "lift",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 8,
+      "maxStage": 8,
+      "all": [
+        "sack2_done"
+      ],
+      "none": [
+        "sack3_done"
+      ],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "sack3_lifted"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "sack3",
+      "requiresCarry": "-",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "deliver3",
+      "target": "camp",
+      "label": "Set down grain sack 3",
+      "text": "Grain moved above the flood line.",
+      "kind": "deliver",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 8,
+      "maxStage": 8,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "deliver3",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "sack3_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "-",
+      "requiresCarry": "sack3",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "trunk_lift",
+      "target": "trunk",
+      "label": "Help carry Nan's trunk",
+      "text": "Nan: Slowly. My mother's good plates are in there. Plate.",
+      "kind": "lift",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 8,
+      "maxStage": 8,
+      "all": [],
+      "none": [
+        "trunk_done"
+      ],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "trunk_lifted"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "nan_trunk",
+      "requiresCarry": "-",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "trunk_set",
+      "target": "camp",
+      "label": "Set down Nan's trunk",
+      "text": "Nan and Duchess are above the flood line.",
+      "kind": "deliver",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 8,
+      "maxStage": 8,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "trunk_set",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "trunk_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "-",
+      "requiresCarry": "nan_trunk",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "uphill_done",
+      "target": "camp",
+      "label": "Check people and stores",
+      "text": "Maelin: Nobody stays on the low bank tonight.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 8,
+      "maxStage": 8,
+      "all": [
+        "sack1_done",
+        "sack2_done",
+        "sack3_done",
+        "trunk_done",
+        "boar_dead"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "uphill_done",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "people_uphill"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "TL_EVIDENCE_KEEPERS",
+      "target": "maelin_camp",
+      "label": "Put it in the keepers' record, Hollis.",
+      "text": "Hollis: Thank you. It goes to Crest Hall at first light, with your name in it.\nMaelin: Paper's slow. Hope it's honest.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 9,
+      "maxStage": 9,
+      "all": [],
+      "none": [
+        "evidence_chosen"
+      ],
+      "any": [],
+      "anyCount": 0,
+      "once": "TL_EVIDENCE_KEEPERS",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "TL_EVIDENCE_KEEPERS",
+        "evidence_chosen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [
+        "weathered_marker_post",
+        "dispatch_order"
+      ],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "TL_EVIDENCE_RIVERFOLK",
+      "target": "maelin_camp",
+      "label": "Take it, Maelin. Check the other markers.",
+      "text": "Maelin: Every one, before the week's out.\nHollis: Then I'll log the closure. Not the cause. As far as Crest Hall knows, it never happened.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 9,
+      "maxStage": 9,
+      "all": [],
+      "none": [
+        "evidence_chosen"
+      ],
+      "any": [],
+      "anyCount": 0,
+      "once": "TL_EVIDENCE_RIVERFOLK",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "TL_EVIDENCE_RIVERFOLK",
+        "evidence_chosen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [
+        "weathered_marker_post",
+        "dispatch_order"
+      ],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "TL_EVIDENCE_PLAYER",
+      "target": "maelin_camp",
+      "label": "I'll keep it until someone can tell me who wrote that order.",
+      "text": "Maelin: Then don't lose it.\nHollis: You're not a keeper. ...But I suppose you're not wrong, either.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 9,
+      "maxStage": 9,
+      "all": [],
+      "none": [
+        "evidence_chosen"
+      ],
+      "any": [],
+      "anyCount": 0,
+      "once": "TL_EVIDENCE_PLAYER",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "TL_EVIDENCE_PLAYER",
+        "evidence_chosen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "TL_STONE_PUBLIC",
+      "target": "maelin_camp",
+      "label": "Everyone who crosses here should know it's there.",
+      "text": "Maelin: All right. It's a good stone. People should know where the river keeps its mark.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 9,
+      "maxStage": 9,
+      "all": [
+        "evidence_chosen"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "TL_STONE_PUBLIC",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "TL_STONE_PUBLIC",
+        "choices_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "TL_STONE_KEPT",
+      "target": "maelin_camp",
+      "label": "Leave it under the post. The post does the job.",
+      "text": "Maelin: That's what my teacher said. I'll have the crews look under the other old posts. Quietly.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 9,
+      "maxStage": 9,
+      "all": [
+        "evidence_chosen"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "TL_STONE_KEPT",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "TL_STONE_KEPT",
+        "choices_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "quest_finish",
+      "target": "maelin_camp",
+      "label": "Good night, Maelin.",
+      "text": "Maelin: River'll fall by morning. When the true post reads clear, I'll take you across. First, before the grain.\nYou read the bank before you read the paper. Most don't.\nSleep. I'll wake you when it reads clear. River keep you.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 10,
+      "maxStage": 10,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "quest_finish",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "payment",
+          "count": 8
+        }
+      ],
+      "flags": [
+        "quest_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "ansel_hook",
+      "target": "ansel",
+      "label": "Has the water been heavy lately?",
+      "text": "Ansel: Stillwater's been thick as wool all week. Some nights I can't see my own lantern.\nTwo bends ran wrong this month. Water turning back on itself, like it forgot which way it was going.\nNot here, mind. Here's always been a good bend.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 10,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "ansel_hook",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "tovin_trust",
+      "target": "tovin_camp",
+      "label": "It was real. It wasn't you.",
+      "text": "Tovin: ...Oh. All right.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 10,
+      "maxStage": -1,
+      "all": [
+        "TL_LEAD_TOVIN"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "tovin_trust",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "TL_TOVIN_TRUSTED"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "marker_read",
+      "target": "crossing",
+      "label": "Read the crossing marker",
+      "text": "Water's under the notch. The crossing reads open.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 0,
+      "maxStage": -1,
+      "all": [
+        "quest_done"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "timber_cut",
+      "target": "timber",
+      "label": "Gather coppice timber",
+      "text": "Coppice timber gathered.",
+      "kind": "gather",
+      "quest": "",
+      "minStage": 0,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 40,
+      "cooldown": 80,
+      "tool": "crew_hatchet",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "common_timber",
+          "count": 1
+        }
+      ],
+      "flags": [],
+      "skill": "woodcutting",
+      "xp": 22,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "cook_meat",
+      "target": "fire",
+      "label": "Cook dried game strips",
+      "text": "Dried game strips prepared.",
+      "kind": "craft",
+      "quest": "",
+      "minStage": 0,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 50,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [
+        {
+          "id": "game_meat",
+          "count": 1
+        },
+        {
+          "id": "common_timber",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "id": "dried_game_strips",
+          "count": 1
+        }
+      ],
+      "flags": [],
+      "skill": "cooking",
+      "xp": 28,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "feed_camp",
+      "target": "nan_camp",
+      "label": "Offer cooked food to the crowd",
+      "text": "Nan: Oh, you've done it properly. Duchess, look, someone's done it properly.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 9,
+      "maxStage": -1,
+      "all": [
+        "boar_dead"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "feed_camp",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [
+        {
+          "id": "dried_game_strips",
+          "count": 1
+        }
+      ],
+      "outputs": [],
+      "flags": [
+        "TL_FED_CAMP"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "boar_harvest",
+      "target": "boar",
+      "label": "Harvest game meat",
+      "text": "Game meat harvested.",
+      "kind": "gather",
+      "quest": "",
+      "minStage": 0,
+      "maxStage": -1,
+      "all": [
+        "boar_dead"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 50,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "game_meat",
+          "count": 1
+        }
+      ],
+      "flags": [],
+      "skill": "hunting",
+      "xp": 28,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "wild_boar_harvest",
+      "target": "wild_boar",
+      "label": "Harvest game meat",
+      "text": "Game meat harvested.",
+      "kind": "gather",
+      "quest": "",
+      "minStage": 0,
+      "maxStage": -1,
+      "all": [
+        "wild_boar_dead"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 50,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "game_meat",
+          "count": 1
+        }
+      ],
+      "flags": [],
+      "skill": "hunting",
+      "xp": 28,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "eat_food",
+      "target": "fire",
+      "label": "Eat dried game strips",
+      "text": "You eat dried game strips.",
+      "kind": "consume",
+      "quest": "",
+      "minStage": 0,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [
+        {
+          "id": "dried_game_strips",
+          "count": 1
+        }
+      ],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "wreck_enter",
+      "target": "skiff",
+      "label": "Wade to the wreck",
+      "text": "",
+      "kind": "enter",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 2,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "wreck_enter",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "wreck_entered"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "wreck_inspect",
+      "target": "skiff",
+      "label": "Inspect drowned pilings",
+      "text": "Black pilings just under the surface. An old pier. The yellow post's line runs straight across them.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 2,
+      "maxStage": -1,
+      "all": [
+        "wreck1_dead",
+        "wreck2_dead",
+        "wreck3_dead"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "wreck_inspect",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "TL_EVIDENCE_PILINGS"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "stone_dry",
+      "target": "footing",
+      "label": "Inspect the dry groove",
+      "text": "The groove is dry. The notch is level with the post's.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 6,
+      "maxStage": -1,
+      "all": [
+        "discovery_finished"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "stone_sketch",
+      "target": "footing",
+      "label": "Compare Tovin's sketch",
+      "text": "It's the mark from Tovin's sketch.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 5,
+      "maxStage": -1,
+      "all": [
+        "silt_clear",
+        "TL_LEAD_TOVIN"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "true_marker_read",
+      "target": "true_post",
+      "label": "Read the true marker",
+      "text": "Water's over the notch. The crossing reads shut.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 6,
+      "maxStage": 10,
+      "all": [
+        "discovery_finished"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "epilogue_keepers",
+      "target": "maelin_camp",
+      "label": "What happens to the keepers' report?",
+      "text": "Maelin: Avery's rider goes at first light. We'll see what Crest Hall does with honesty.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 10,
+      "maxStage": -1,
+      "all": [
+        "TL_EVIDENCE_KEEPERS"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "epilogue_riverfolk",
+      "target": "maelin_camp",
+      "label": "Will the crews check the other bends?",
+      "text": "Maelin: Crews start at the next bend tomorrow. Come along if you like. You've got the eye.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 10,
+      "maxStage": -1,
+      "all": [
+        "TL_EVIDENCE_RIVERFOLK"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "epilogue_player",
+      "target": "maelin_camp",
+      "label": "I'm still holding the proof.",
+      "text": "Maelin: You've still got that post. Don't burn it for warmth.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 10,
+      "maxStage": -1,
+      "all": [
+        "TL_EVIDENCE_PLAYER"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "maelin_who",
+      "target": "maelin_camp",
+      "label": "Who moved the post, Maelin?",
+      "text": "Maelin: Somebody who knew the rule. That's what bothers me.\nAnyone can lie with paper. You have to know a river to lie with a post.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 10,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "maelin_across",
+      "target": "maelin_camp",
+      "label": "What's across the river?",
+      "text": "Maelin: Fields. People waiting on grain. More river. More posts.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 10,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "hollis_keepers",
+      "target": "hollis_camp",
+      "label": "How did you record it?",
+      "text": "Hollis: I've written it down. All of it. I've never written anything that mattered before.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 10,
+      "maxStage": -1,
+      "all": [
+        "TL_EVIDENCE_KEEPERS"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "hollis_riverfolk",
+      "target": "hollis_camp",
+      "label": "What does the closure record say?",
+      "text": "Hollis: Closure logged. Cause: river. Which is true, I suppose.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 10,
+      "maxStage": -1,
+      "all": [
+        "TL_EVIDENCE_RIVERFOLK"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "hollis_player",
+      "target": "hollis_camp",
+      "label": "I'll keep the post safe.",
+      "text": "Hollis: If you lose that post, I'll have to pretend I never saw it. I'm bad at pretending.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 10,
+      "maxStage": -1,
+      "all": [
+        "TL_EVIDENCE_PLAYER"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "nan_tune",
+      "target": "nan_camp",
+      "label": "What's that tune?",
+      "text": "Nan: My mam's. She called it the listeners' tune. Sang it at the water before a crossing, with the rhyme.\nNever asked who the listeners were. You don't, when you're small. And then they're gone and you can't.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 10,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "dace_fed",
+      "target": "dace_camp",
+      "label": "Sit by the fire.",
+      "text": "Dace: ...I'm sorry about the skiff.\nMaelin: I know. Eat.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 10,
+      "maxStage": -1,
+      "all": [
+        "TL_FED_CAMP"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "dace_unfed",
+      "target": "dace_camp",
+      "label": "How are you, Dace?",
+      "text": "Dace: Don't. I know.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 10,
+      "maxStage": -1,
+      "all": [],
+      "none": [
+        "TL_FED_CAMP"
+      ],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "wynn_camp_line",
+      "target": "wynn_camp",
+      "label": "The grain is safe.",
+      "text": "Wynn: Forty sacks. Dry. Uphill. Not one eaten by a pig. I'll take it.",
+      "kind": "inspect",
+      "quest": "lowmark.main.01_true_line",
+      "minStage": 10,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_start",
+      "target": "bw_tamsin",
+      "label": "Show me where you measured, Tamsin.",
+      "text": "Tamsin: Don't stand there. That's the bad bit. I measured.\nUpper household: That child's been out with that cord all week. We've stakes to set before the planting.\nLower household: And I've a boat that won't get past that tree. Every day it's 'wait'.\nTamsin: Fine. But you hold it how I say.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 0,
+      "maxStage": 0,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_start",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "BW_started"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_axe",
+      "target": "bw_upper",
+      "label": "I'll need an axe if there's cutting.",
+      "text": "Upper household: There's the bank axe. Bring it back. Or don't. It's older than me.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 0,
+      "maxStage": 4,
+      "all": [],
+      "none": [
+        "tool_loaned"
+      ],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_axe",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [
+        {
+          "id": "crew_hatchet",
+          "count": 1,
+          "all": [],
+          "none": [
+            "tool_loaned"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BW_measure1",
+      "target": "bw_measure1",
+      "label": "Measure at the first knot",
+      "text": "Tamsin: Flat to the bank. Flat. Now push. See?\nThe cord goes in a hand.",
+      "kind": "channel",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_measure1",
+      "ticks": 20,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "BW_measure1_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_grip",
+      "target": "bw_measure1",
+      "label": "Check your grip",
+      "text": "Tamsin: Not like that. Like you're holding a bird.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_grip",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_measure2",
+      "target": "bw_measure2",
+      "label": "Measure at the second knot",
+      "text": "Tamsin: That's a forearm. Banks aren't supposed to have forearms in them.",
+      "kind": "channel",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_measure2",
+      "ticks": 20,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "BW_measure2_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_measure3",
+      "target": "bw_measure3",
+      "label": "Measure at the third knot",
+      "text": "Tamsin: Arm. Whole arm. I didn't tell them it was a whole arm. They'd have said I made it up.",
+      "kind": "channel",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_measure3",
+      "ticks": 20,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "BW_measure3_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_wrack",
+      "target": "bw_wrack",
+      "label": "Inspect the wrack line",
+      "text": "Reed and flood trash in the branches, above head height.\nTamsin: That's where the water got to. Higher than anyone says. I checked twice.",
+      "kind": "inspect",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_wrack",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "BW_wrack_seen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_repair",
+      "target": "bw_repair",
+      "label": "Inspect the old repair face",
+      "text": "Weathered stakes, each with the same cut-mark. Wattle rotted between them. Somebody kept this bank once.",
+      "kind": "inspect",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 1,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_repair",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "BW_REPAIR_SEEN"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_wade",
+      "target": "bw_jam",
+      "label": "Wade to the jam",
+      "text": "",
+      "kind": "enter",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 2,
+      "maxStage": 2,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_wade",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "BW_waded"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_cut_jam",
+      "target": "bw_jam",
+      "label": "Cut the jam's key limb",
+      "text": "The jam groans and shudders. Stand clear of its swing.",
+      "kind": "gather",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 2,
+      "maxStage": 2,
+      "all": [
+        "BW_skitter1_dead",
+        "BW_skitter2_dead",
+        "BW_skitter3_dead",
+        "BW_skitter4_dead",
+        "BW_skitter5_dead"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_cut_jam",
+      "ticks": 40,
+      "cooldown": 0,
+      "tool": "crew_hatchet",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "common_timber",
+          "count": 1
+        }
+      ],
+      "flags": [
+        "BW_jam_cut"
+      ],
+      "skill": "woodcutting",
+      "xp": 22,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_cord",
+      "target": "bw_old_cord",
+      "label": "Inspect the old cord",
+      "text": "A measuring cord, green with age, tied off at the same marks as Tamsin's. Someone measured this bank the same way, a long time ago.\nTamsin: That's my knots. That's how I tie it. Every arm-span, double, then the hitch.\nSomebody else worked it out too, then.",
+      "kind": "inspect",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 3,
+      "maxStage": -1,
+      "all": [
+        "BW_JAM_SWUNG"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_cord",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "BW_OLD_CORD_SEEN"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_leaner_read",
+      "target": "bw_leaner",
+      "label": "Inspect the leaner",
+      "text": "Root plate cracked through. It's leaning further than it was.",
+      "kind": "inspect",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 3,
+      "maxStage": 3,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_leaner_read",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "BW_leaner_read"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_holder_read",
+      "target": "bw_holder",
+      "label": "Inspect the holder",
+      "text": "Healthy. Its roots run straight across the hollow, like ribs.",
+      "kind": "inspect",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 3,
+      "maxStage": 3,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_holder_read",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "BW_holder_read"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_old_read",
+      "target": "bw_old_tree",
+      "label": "Inspect the old one",
+      "text": "Hollow, full of nesting holes. Holding nothing up but birds.",
+      "kind": "inspect",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 3,
+      "maxStage": 3,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_old_read",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "BW_old_read"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_leaner_notch",
+      "target": "bw_leaner",
+      "label": "Cut the leaner's notch",
+      "text": "A chalk line marks the fall.",
+      "kind": "channel",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 3,
+      "maxStage": 3,
+      "all": [
+        "BW_leaner_read",
+        "BW_holder_read",
+        "BW_old_read"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_leaner_notch",
+      "ticks": 30,
+      "cooldown": 0,
+      "tool": "crew_hatchet",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "BW_leaner_notched"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_leaner_back",
+      "target": "bw_leaner",
+      "label": "Back-cut the failing tree",
+      "text": "The crown sways. Stand clear of the chalked fall line.",
+      "kind": "gather",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 3,
+      "maxStage": 3,
+      "all": [
+        "BW_leaner_notched"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_leaner_back",
+      "ticks": 40,
+      "cooldown": 0,
+      "tool": "crew_hatchet",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "common_timber",
+          "count": 2
+        },
+        {
+          "id": "tannin_rich_bark",
+          "count": 1
+        }
+      ],
+      "flags": [
+        "BW_leaner_backcut"
+      ],
+      "skill": "woodcutting",
+      "xp": 22,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_keep",
+      "target": "bw_tamsin",
+      "label": "Leave it. Its roots are the bank.",
+      "text": "Lower household: So we carry it. Again. Fine. Fine.\nUpper household: I'll help you carry it. Some mornings.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 4,
+      "maxStage": 4,
+      "all": [],
+      "none": [
+        "BW_choice_locked"
+      ],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_keep",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "BW_BANK_KEPT",
+        "BW_choice_locked",
+        "BW_choice_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_cut",
+      "target": "bw_tamsin",
+      "label": "Take it down. They need the landing.",
+      "text": "Upper household: Then I'll move my fence back before it moves itself.\nTamsin: It'll slump. Not today. When the water's next high. I'm only saying.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 4,
+      "maxStage": 4,
+      "all": [],
+      "none": [
+        "BW_choice_locked"
+      ],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_cut",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "BW_cut_chosen",
+        "BW_choice_locked"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_build",
+      "target": "bw_tamsin",
+      "label": "Keep it. I'll build them a landing from the leaner.",
+      "text": "Lower household: A landing. Below the tree. That'd do. That would actually do.\nTamsin: Put it on the downstream side. The upstream side's where it scours.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 4,
+      "maxStage": 4,
+      "all": [],
+      "none": [
+        "BW_choice_locked"
+      ],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_build",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "BW_build_chosen",
+        "BW_choice_locked"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_holder_notch",
+      "target": "bw_holder",
+      "label": "Cut the holder's notch",
+      "text": "The roots span the hollow.",
+      "kind": "channel",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 4,
+      "maxStage": 4,
+      "all": [
+        "BW_cut_chosen"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_holder_notch",
+      "ticks": 30,
+      "cooldown": 0,
+      "tool": "crew_hatchet",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "BW_holder_notched"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_holder_back",
+      "target": "bw_holder",
+      "label": "Back-cut the holder",
+      "text": "The lower landing is clear.",
+      "kind": "gather",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 4,
+      "maxStage": 4,
+      "all": [
+        "BW_holder_notched"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_holder_back",
+      "ticks": 40,
+      "cooldown": 0,
+      "tool": "crew_hatchet",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "common_timber",
+          "count": 2
+        },
+        {
+          "id": "tannin_rich_bark",
+          "count": 1
+        }
+      ],
+      "flags": [
+        "BW_BANK_CUT",
+        "BW_choice_done"
+      ],
+      "skill": "woodcutting",
+      "xp": 22,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_spare_limbs",
+      "target": "bw_leaner_fallen",
+      "label": "Cut the leaner's remaining limbs",
+      "text": "Sound wood for a landing stage.",
+      "kind": "gather",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 4,
+      "maxStage": 4,
+      "all": [
+        "BW_build_chosen"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_spare_limbs",
+      "ticks": 40,
+      "cooldown": 0,
+      "tool": "crew_hatchet",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "common_timber",
+          "count": 2
+        }
+      ],
+      "flags": [],
+      "skill": "woodcutting",
+      "xp": 22,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_give_wood",
+      "target": "bw_lower",
+      "label": "Give wood for the landing",
+      "text": "The wood is set beside the holder.",
+      "kind": "inspect",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 4,
+      "maxStage": 4,
+      "all": [
+        "BW_build_chosen"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_give_wood",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [
+        {
+          "id": "common_timber",
+          "count": 2
+        }
+      ],
+      "outputs": [],
+      "flags": [
+        "BW_wood_given"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_stage1",
+      "target": "bw_lower",
+      "label": "Seat the first stage support",
+      "text": "The downstream support is seated.",
+      "kind": "channel",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 4,
+      "maxStage": 4,
+      "all": [
+        "BW_wood_given"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_stage1",
+      "ticks": 30,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "BW_stage1_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_stage2",
+      "target": "bw_lower",
+      "label": "Seat the second stage support",
+      "text": "The landing stage sits below the holder.",
+      "kind": "channel",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 4,
+      "maxStage": 4,
+      "all": [
+        "BW_stage1_done"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_stage2",
+      "ticks": 30,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "BW_LANDING_BUILT",
+        "BW_choice_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_finish",
+      "target": "bw_tamsin",
+      "label": "Tamsin. Tamsin's careful.",
+      "text": "Upper household: Well. The cord was right.\nLower household: And who measures it next spring?\nUpper household: Tamsin, then. Every spring. And you tell us, and we listen, and that's that.\nTamsin: You held it nearly right, by the end.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 5,
+      "maxStage": 5,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "BW_finish",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "payment",
+          "count": 4
+        }
+      ],
+      "flags": [
+        "BW_TAMSIN_HEARD"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_kept_bark",
+      "target": "bw_lower",
+      "label": "How is the landing?",
+      "text": "Lower household: Still carrying the boat. Still here.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 0,
+      "maxStage": -1,
+      "all": [
+        "BW_BANK_KEPT",
+        "BW_TAMSIN_HEARD"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_built_bark",
+      "target": "bw_lower",
+      "label": "How is the new stage?",
+      "text": "Lower household: Landing's good. Tamsin inspects it. Weekly.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 0,
+      "maxStage": -1,
+      "all": [
+        "BW_LANDING_BUILT",
+        "BW_TAMSIN_HEARD"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    },
+    {
+      "id": "BW_tamsin_bark",
+      "target": "bw_tamsin",
+      "label": "Have you measured anything else?",
+      "text": "Tamsin: I measured the docks. Don't stand on the third plank.",
+      "kind": "dialogue",
+      "quest": "lowmark.side.bank_walk",
+      "minStage": 0,
+      "maxStage": -1,
+      "all": [
+        "BW_TAMSIN_HEARD"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": []
+    }
+  ],
+  "quests": [
+    {
+      "id": "lowmark.main.01_true_line",
+      "name": "The True Line",
+      "stages": [
+        {
+          "id": "S00_arrive",
+          "objective": "Find out why the crossing has stopped.",
+          "all": [
+            "arrived"
+          ],
+          "any": [],
+          "anyCount": 0
+        },
+        {
+          "id": "S01_hear_both",
+          "objective": "Hear both sides at the tollpost.",
+          "all": [
+            "heard_both"
+          ],
+          "any": [],
+          "anyCount": 0
+        },
+        {
+          "id": "S02_read_post",
+          "objective": "Examine the new marker post.",
+          "all": [
+            "notch",
+            "earth",
+            "drag"
+          ],
+          "any": [],
+          "anyCount": 0
+        },
+        {
+          "id": "S03_find_old_post",
+          "objective": "Follow the drag marks upstream.",
+          "all": [
+            "post_found"
+          ],
+          "any": [],
+          "anyCount": 0
+        },
+        {
+          "id": "S04_clear_footing",
+          "objective": "Clear the silt from the old footing.",
+          "all": [
+            "silt_clear"
+          ],
+          "any": [],
+          "anyCount": 0
+        },
+        {
+          "id": "S05_cut_post",
+          "objective": "Cut a new marker post from the coppice.",
+          "all": [
+            "stem_cut"
+          ],
+          "any": [],
+          "anyCount": 0
+        },
+        {
+          "id": "S06_seat_post",
+          "objective": "Set the new post on the old stone.",
+          "all": [
+            "river_read"
+          ],
+          "any": [],
+          "anyCount": 0
+        },
+        {
+          "id": "S07_prove",
+          "objective": "Show Hollis what the river says.",
+          "all": [
+            "crossing_closed"
+          ],
+          "any": [],
+          "anyCount": 0
+        },
+        {
+          "id": "S08_high_ground",
+          "objective": "Help move the waiting people and grain to the high landing.",
+          "all": [
+            "people_uphill"
+          ],
+          "any": [],
+          "anyCount": 0
+        },
+        {
+          "id": "S09_choose",
+          "objective": "Decide who keeps the evidence.",
+          "all": [
+            "choices_done"
+          ],
+          "any": [],
+          "anyCount": 0
+        },
+        {
+          "id": "S10_night",
+          "objective": "Speak with Maelin by the fire.",
+          "all": [
+            "quest_done"
+          ],
+          "any": [],
+          "anyCount": 0
+        }
+      ],
+      "all": []
+    },
+    {
+      "id": "lowmark.side.bank_walk",
+      "name": "The Bank Walk",
+      "all": [
+        "quest_done"
+      ],
+      "stages": [
+        {
+          "id": "S00_stake",
+          "objective": "Find out why the bank is staked.",
+          "all": [
+            "BW_started"
+          ],
+          "any": [],
+          "anyCount": 0
+        },
+        {
+          "id": "S01_walk",
+          "objective": "Walk the bank with Tamsin's cord.",
+          "all": [
+            "BW_measure1_done",
+            "BW_measure2_done",
+            "BW_measure3_done",
+            "BW_wrack_seen"
+          ],
+          "any": [],
+          "anyCount": 0
+        },
+        {
+          "id": "S02_free_jam",
+          "objective": "Cut the driftroot jam free. Stand clear as it swings.",
+          "all": [
+            "BW_JAM_SWUNG"
+          ],
+          "any": [],
+          "anyCount": 0
+        },
+        {
+          "id": "S04_leaner",
+          "objective": "Inspect the three driftroots, then bring down the failing tree.",
+          "all": [
+            "BW_LEANER_FALLEN"
+          ],
+          "any": [],
+          "anyCount": 0
+        },
+        {
+          "id": "S05_choose",
+          "objective": "Decide which trees stay. Finish any cutting or landing work.",
+          "all": [
+            "BW_choice_done"
+          ],
+          "any": [],
+          "anyCount": 0
+        },
+        {
+          "id": "S06_heard",
+          "objective": "Tell the households what the bank needs.",
+          "all": [
+            "BW_TAMSIN_HEARD"
+          ],
+          "any": [],
+          "anyCount": 0
+        }
+      ]
+    }
+  ],
+  "enemies": [
+    {
+      "id": "silt1",
+      "target": "silt1",
+      "all": [
+        "shallows_entered"
+      ],
+      "none": [
+        "silt_clear"
+      ],
+      "health": 24,
+      "damage": 3,
+      "windup": 8,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 4,
+      "killFlag": "silt1_dead",
+      "respawn": 0,
+      "lootAction": ""
+    },
+    {
+      "id": "silt2",
+      "target": "silt2",
+      "all": [
+        "shallows_entered"
+      ],
+      "none": [
+        "silt_clear"
+      ],
+      "health": 24,
+      "damage": 3,
+      "windup": 8,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 4,
+      "killFlag": "silt2_dead",
+      "respawn": 0,
+      "lootAction": ""
+    },
+    {
+      "id": "silt3",
+      "target": "silt3",
+      "all": [
+        "shallows_entered"
+      ],
+      "none": [
+        "silt_clear"
+      ],
+      "health": 24,
+      "damage": 3,
+      "windup": 8,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 4,
+      "killFlag": "silt3_dead",
+      "respawn": 0,
+      "lootAction": ""
+    },
+    {
+      "id": "leech",
+      "target": "leech",
+      "all": [
+        "shallows_entered"
+      ],
+      "none": [
+        "silt_clear"
+      ],
+      "health": 18,
+      "damage": 2,
+      "windup": 12,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 4,
+      "killFlag": "leech_dead",
+      "respawn": 0,
+      "lootAction": ""
+    },
+    {
+      "id": "goose1",
+      "target": "goose1",
+      "all": [
+        "notch"
+      ],
+      "none": [
+        "post_found"
+      ],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 4,
+      "killFlag": "goose1_dead",
+      "respawn": 0,
+      "lootAction": ""
+    },
+    {
+      "id": "goose2",
+      "target": "goose2",
+      "all": [
+        "notch"
+      ],
+      "none": [
+        "post_found"
+      ],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 4,
+      "killFlag": "goose2_dead",
+      "respawn": 0,
+      "lootAction": ""
+    },
+    {
+      "id": "boar",
+      "target": "boar",
+      "all": [
+        "sack3_lifted"
+      ],
+      "none": [],
+      "health": 150,
+      "damage": 6,
+      "windup": 15,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 4,
+      "killFlag": "boar_dead",
+      "respawn": 0,
+      "lootAction": "boar_harvest"
+    },
+    {
+      "id": "wild_boar",
+      "target": "wild_boar",
+      "all": [
+        "quest_done"
+      ],
+      "none": [],
+      "health": 150,
+      "damage": 6,
+      "windup": 15,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 4,
+      "killFlag": "wild_boar_dead",
+      "respawn": 300,
+      "lootAction": "wild_boar_harvest"
+    },
+    {
+      "id": "wreck1",
+      "target": "wreck1",
+      "all": [
+        "wreck_entered"
+      ],
+      "none": [],
+      "health": 24,
+      "damage": 3,
+      "windup": 8,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 4,
+      "killFlag": "wreck1_dead",
+      "respawn": 0,
+      "lootAction": ""
+    },
+    {
+      "id": "wreck2",
+      "target": "wreck2",
+      "all": [
+        "wreck_entered"
+      ],
+      "none": [],
+      "health": 24,
+      "damage": 3,
+      "windup": 8,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 4,
+      "killFlag": "wreck2_dead",
+      "respawn": 0,
+      "lootAction": ""
+    },
+    {
+      "id": "wreck3",
+      "target": "wreck3",
+      "all": [
+        "wreck_entered"
+      ],
+      "none": [],
+      "health": 18,
+      "damage": 2,
+      "windup": 12,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 4,
+      "killFlag": "wreck3_dead",
+      "respawn": 0,
+      "lootAction": ""
+    },
+    {
+      "id": "BW_skitter1",
+      "target": "BW_skitter1",
+      "all": [
+        "BW_waded"
+      ],
+      "none": [
+        "BW_JAM_SWUNG"
+      ],
+      "health": 12,
+      "damage": 1,
+      "windup": 8,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 3.5,
+      "killFlag": "BW_skitter1_dead",
+      "respawn": 0,
+      "lootAction": ""
+    },
+    {
+      "id": "BW_skitter2",
+      "target": "BW_skitter2",
+      "all": [
+        "BW_waded"
+      ],
+      "none": [
+        "BW_JAM_SWUNG"
+      ],
+      "health": 12,
+      "damage": 1,
+      "windup": 8,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 3.5,
+      "killFlag": "BW_skitter2_dead",
+      "respawn": 0,
+      "lootAction": ""
+    },
+    {
+      "id": "BW_skitter3",
+      "target": "BW_skitter3",
+      "all": [
+        "BW_waded"
+      ],
+      "none": [
+        "BW_JAM_SWUNG"
+      ],
+      "health": 12,
+      "damage": 1,
+      "windup": 8,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 3.5,
+      "killFlag": "BW_skitter3_dead",
+      "respawn": 0,
+      "lootAction": ""
+    },
+    {
+      "id": "BW_skitter4",
+      "target": "BW_skitter4",
+      "all": [
+        "BW_waded"
+      ],
+      "none": [
+        "BW_JAM_SWUNG"
+      ],
+      "health": 12,
+      "damage": 1,
+      "windup": 8,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 3.5,
+      "killFlag": "BW_skitter4_dead",
+      "respawn": 0,
+      "lootAction": ""
+    },
+    {
+      "id": "BW_skitter5",
+      "target": "BW_skitter5",
+      "all": [
+        "BW_waded"
+      ],
+      "none": [
+        "BW_JAM_SWUNG"
+      ],
+      "health": 12,
+      "damage": 1,
+      "windup": 8,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 3.5,
+      "killFlag": "BW_skitter5_dead",
+      "respawn": 0,
+      "lootAction": ""
+    }
+  ],
+  "exclusiveFlags": [
+    {
+      "flags": [
+        "TL_EVIDENCE_KEEPERS",
+        "TL_EVIDENCE_RIVERFOLK",
+        "TL_EVIDENCE_PLAYER"
+      ]
+    },
+    {
+      "flags": [
+        "TL_STONE_PUBLIC",
+        "TL_STONE_KEPT"
+      ]
+    },
+    {
+      "flags": [
+        "BW_BANK_KEPT",
+        "BW_BANK_CUT",
+        "BW_LANDING_BUILT"
+      ]
+    }
+  ],
+  "hazards": [
+    {
+      "id": "BW_jam_swing",
+      "target": "bw_jam",
+      "all": [
+        "BW_jam_cut"
+      ],
+      "none": [],
+      "once": "BW_JAM_SWUNG",
+      "windup": 15,
+      "damage": 4,
+      "radius": 1.2,
+      "pushDistance": 1
+    },
+    {
+      "id": "BW_leaner_fall",
+      "target": "bw_leaner",
+      "all": [
+        "BW_leaner_backcut"
+      ],
+      "none": [],
+      "once": "BW_LEANER_FALLEN",
+      "windup": 20,
+      "damage": 4,
+      "radius": 1.2,
+      "pushDistance": 1
+    }
+  ]
+}

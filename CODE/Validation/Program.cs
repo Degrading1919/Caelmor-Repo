@@ -89,9 +89,18 @@ Run("inventory_invalid_restore_preserves_state", () =>
     Require(store.DebugEnumerate(1).Single().Key == "ore" && store.DebugEnumerate(1).Single().Value == 5, "Invalid snapshot must preserve original state.");
 });
 
+Run("gameplay_phase_authority_and_visibility", () => new GameplayIntegrationFixture().Boundaries());
+Run("true_line_full_optional_evidence_and_repeatable_economy", () => new GameplayIntegrationFixture().FullQuest(true));
+Run("true_line_guaranteed_proof_without_optional_leads", () => new GameplayIntegrationFixture().FullQuest(false));
+Run("true_line_rivercrew_evidence_choice", () => new GameplayIntegrationFixture().FullQuest(true,true));
+Run("gameplay_interruptions_and_corrupt_restore", () => new GameplayIntegrationFixture().Interruptions());
+Run("true_line_carry_reload_recovery", () => new GameplayIntegrationFixture().CarryRecovery());
+Run("bank_walk_keep_bank_and_hazard_restore", () => new GameplayIntegrationFixture().BankWalk("keep"));
+Run("bank_walk_cut_bank_branch", () => new GameplayIntegrationFixture().BankWalk("cut"));
+Run("bank_walk_build_landing_branch", () => new GameplayIntegrationFixture().BankWalk("build"));
 Console.WriteLine($"Validation: {passed} passed, {failures.Count} failed.");
 Console.WriteLine($"Executed {originalScenarios} registered scenarios in {suites.Count} suites plus focused regressions and the threaded transport proof.");
-Console.WriteLine($"Also executed all {injectedEconomyScenarios} injected Stage 9 economy/save/restore scenarios and a mutation/hydration regression using cloned in-memory storage; this does not prove durable disk saves.");
+Console.WriteLine($"Also executed all {injectedEconomyScenarios} injected Stage 9 economy/save/restore scenarios using cloned in-memory storage. The gameplay integration checks additionally execute real atomic disk checkpoint writes and validated reads.");
 return failures.Count == 0 ? 0 : 1;
 
 void Run(string name, Action action)

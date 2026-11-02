@@ -16,6 +16,7 @@ namespace Caelmor.Unity.Playable
         public bool DebugMovementEnabled { get; private set; }
         public int solidLayerMask = 1 << 8;
         public PlayableHost Host { get; private set; }
+        public LowmarkGame Lowmark { get; private set; }
         public bool HelpOpen { get; private set; }
         public string StartupFailure { get; private set; }
         public event Action<PlayableHost> HostInitialized;
@@ -33,6 +34,9 @@ namespace Caelmor.Unity.Playable
                 QualitySettings.vSyncCount = 1;
                 Physics.SyncTransforms();
                 Host = new PlayableHost(spawn.position, interactionAnchor, solidLayerMask, navigation);
+                Lowmark = gameObject.AddComponent<LowmarkGame>();
+                Lowmark.Initialize(this);
+                Lowmark.ApplyRequestedCheckpoint();
                 previous = Host.Snapshot;
                 lastSnapshotTime = Time.realtimeSinceStartupAsDouble;
                 Host.SnapshotCommitted += OnSnapshot;
@@ -54,7 +58,7 @@ namespace Caelmor.Unity.Playable
         }
         void Update()
         {
-            if (Host == null) return;
+            if (Host == null || StartupFailure != null) return;
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 HelpOpen = !HelpOpen;
@@ -63,7 +67,7 @@ namespace Caelmor.Unity.Playable
             if (!smoke && !HelpOpen && Application.isFocused)
             {
                 if (Input.GetKeyDown(KeyCode.F3)) { DebugMovementEnabled = !DebugMovementEnabled; Host.ClearPendingInput(); }
-                if (Input.GetKeyDown(KeyCode.E)) Host.SubmitInteraction(interactionAnchor.fixtureId);
+                if (Input.GetKeyDown(KeyCode.E)) Lowmark.InteractNearest();
                 if (Input.GetMouseButtonDown(0)) TryClickDestination(Input.mousePosition);
             }
             accumulator += Math.Min(Time.unscaledDeltaTime, .3f);
@@ -94,18 +98,21 @@ namespace Caelmor.Unity.Playable
         {
             if (Host == null || HelpOpen || !Application.isFocused || PlayableHud.BlocksPointer(this, screenPoint)) return false;
             var ray = playerCamera.ScreenPointToRay(screenPoint);
+            if (Lowmark != null && Lowmark.TrySelect(ray)) return true;
             if (!Physics.Raycast(ray, out var hit, 250f, solidLayerMask, QueryTriggerInteraction.Ignore) ||
                 hit.collider.GetComponent<NavigableTerrain>() == null || hit.normal.y < .7f) return false;
+            Lowmark?.CancelApproach();
             return Host.SubmitDestination(hit.point);
         }
         static readonly double WorldTickSeconds = WorldSimulationCore.TickInterval.TotalSeconds;
+        void ToggleHelpFromHud(){HelpOpen=!HelpOpen;Host.ClearPendingInput();accumulator=0;}
         void OnApplicationFocus(bool focused)
         { if (Host != null) { Host.ClearPendingInput(); accumulator = 0; } }
         void OnApplicationPause(bool paused)
         { if (Host != null) { Host.ClearPendingInput(); accumulator = 0; } }
         void LateUpdate()
         {
-            if (Host == null) return;
+            if (Host == null || StartupFailure != null) return;
             var state = Host.Snapshot;
             if (destinationView != null)
             {
@@ -138,6 +145,7 @@ namespace Caelmor.Unity.Playable
             try
             {
                 PlayableValidation.Run(interactionAnchor, solidLayerMask, navigation);
+                LowmarkValidation.Run(interactionAnchor, solidLayerMask, navigation);
             }
             catch (Exception error)
             {
@@ -145,15 +153,22 @@ namespace Caelmor.Unity.Playable
                 Application.Quit(1);
                 yield break;
             }
+            // Synchronous validation can stall one frame. Drain that frame before sampling
+            // the live scheduler so its legitimate catch-up is not charged to this interval.
+            accumulator=0;
+            yield return null;
+            accumulator=0;
             long before = Host.Snapshot.Tick;
+            double sampleStart=Time.realtimeSinceStartupAsDouble;
             yield return new WaitForSecondsRealtime(1.15f);
             long ticks = Host.Snapshot.Tick - before;
-            if (ticks < 10 || ticks > 13)
+            double elapsed=Time.realtimeSinceStartupAsDouble-sampleStart;
+            if (ticks < Math.Floor(elapsed/WorldTickSeconds)-1 || ticks > Math.Ceiling(elapsed/WorldTickSeconds)+1)
             {
-                Debug.LogError("CAELMOR_SMOKE_FAILED: live 10Hz scheduler advanced " + ticks + " ticks in 1.15 seconds");
+                Debug.LogError("CAELMOR_SMOKE_FAILED: live 10Hz scheduler advanced " + ticks + " ticks in " + elapsed.ToString("F3") + " seconds");
                 Application.Quit(1); yield break;
             }
-            Debug.Log("CAELMOR_SMOKE_PASSED: deterministic gameplay assertions and live 10Hz scheduler (" + ticks + " ticks)");
+            Debug.Log("CAELMOR_SMOKE_PASSED: deterministic gameplay assertions and live 10Hz scheduler (" + ticks + " ticks in " + elapsed.ToString("F3") + " seconds)");
             Application.Quit(0);
         }
         void OnDestroy()

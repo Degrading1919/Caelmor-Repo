@@ -9,6 +9,12 @@ $projectDirectory = $PSScriptRoot
 $repositoryDirectory = Split-Path -Parent $projectDirectory
 $editorDirectory = Split-Path -Parent $UnityEditor
 $dotnet = Join-Path $editorDirectory 'Data\DotNetSdk\dotnet.exe'
+$contentPath = Join-Path $repositoryDirectory '04_CONTENT_PRODUCTION\Quests\LowmarkGameplay.json'
+$schemaPath = Join-Path $repositoryDirectory 'DESIGNS\Templates & Schemas\GameplayContent.schema.json'
+if (!(Test-Json -LiteralPath $contentPath -SchemaFile $schemaPath -ErrorAction Stop)) { throw 'Gameplay content schema validation failed' }
+$resourceDirectory = Join-Path $projectDirectory 'Assets\_Project\Content\Resources'
+New-Item -ItemType Directory -Force -Path $resourceDirectory | Out-Null
+Copy-Item -LiteralPath $contentPath -Destination (Join-Path $resourceDirectory 'LowmarkGameplay.json') -Force
 if (!(Test-Path -LiteralPath $UnityEditor)) { throw "Unity editor missing: $UnityEditor" }
 & $dotnet build (Join-Path $repositoryDirectory 'CODE\Caelmor.Runtime.csproj') --configuration Release --nologo --verbosity quiet '-clp:ErrorsOnly;Summary'
 if ($LASTEXITCODE -ne 0) { throw "Runtime assembly build failed with exit code $LASTEXITCODE" }

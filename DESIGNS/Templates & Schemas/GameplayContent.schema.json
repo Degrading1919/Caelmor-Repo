@@ -1,0 +1,673 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://caelmor.invalid/schemas/gameplay-content",
+  "title": "Additive playable content projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "id",
+    "title",
+    "tuning",
+    "items",
+    "skills",
+    "targets",
+    "actions",
+    "quests",
+    "enemies",
+    "exclusiveFlags",
+    "hazards"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_.-]+$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tuning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "health",
+        "damage",
+        "attackTicks",
+        "respawnX",
+        "respawnZ"
+      ],
+      "properties": {
+        "health": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "damage": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "attackTicks": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "respawnX": {
+          "type": "number"
+        },
+        "respawnZ": {
+          "type": "number"
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/item"
+      }
+    },
+    "skills": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/skill"
+      }
+    },
+    "targets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/target"
+      }
+    },
+    "actions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/action"
+      }
+    },
+    "quests": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/quest"
+      }
+    },
+    "enemies": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "$ref": "#/$defs/enemy"
+      }
+    },
+    "exclusiveFlags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "flags"
+        ],
+        "properties": {
+          "flags": {
+            "type": "array",
+            "minItems": 2,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "hazards": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/hazard"
+      }
+    }
+  },
+  "$defs": {
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "heal",
+        "quest"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "heal": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "quest": {
+          "type": "boolean"
+        }
+      }
+    },
+    "skill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "thresholds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "thresholds": {
+          "type": "array",
+          "minItems": 99,
+          "maxItems": 99,
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "kind",
+        "x",
+        "z",
+        "all",
+        "none",
+        "nodeInstanceId"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "x": {
+          "type": "number"
+        },
+        "z": {
+          "type": "number"
+        },
+        "all": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "none": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "nodeInstanceId": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "amount": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "count"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "stage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "objective",
+        "all",
+        "any",
+        "anyCount"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "objective": {
+          "type": "string",
+          "minLength": 1
+        },
+        "all": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "any": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "anyCount": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "quest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "stages",
+        "all"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stages": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/stage"
+          }
+        },
+        "all": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "target",
+        "label",
+        "text",
+        "kind",
+        "quest",
+        "minStage",
+        "maxStage",
+        "all",
+        "none",
+        "any",
+        "anyCount",
+        "once",
+        "ticks",
+        "cooldown",
+        "tool",
+        "inputs",
+        "outputs",
+        "flags",
+        "skill",
+        "xp",
+        "carry",
+        "requiresCarry",
+        "removeItems",
+        "conditionalOutputs"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "target": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "enter",
+            "dialogue",
+            "inspect",
+            "channel",
+            "gather",
+            "craft",
+            "lift",
+            "deliver",
+            "consume"
+          ]
+        },
+        "quest": {
+          "type": "string"
+        },
+        "minStage": {
+          "type": "integer"
+        },
+        "maxStage": {
+          "type": "integer"
+        },
+        "all": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "none": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "any": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "anyCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "once": {
+          "type": "string"
+        },
+        "ticks": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cooldown": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tool": {
+          "type": "string"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/amount"
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/amount"
+          }
+        },
+        "flags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "skill": {
+          "type": "string"
+        },
+        "xp": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "carry": {
+          "type": "string"
+        },
+        "requiresCarry": {
+          "type": "string"
+        },
+        "removeItems": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "conditionalOutputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/conditionalAmount"
+          }
+        }
+      }
+    },
+    "enemy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "target",
+        "all",
+        "none",
+        "health",
+        "damage",
+        "windup",
+        "cooldown",
+        "range",
+        "leash",
+        "killFlag",
+        "respawn",
+        "lootAction"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "target": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "all": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "none": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "health": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "damage": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "windup": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "cooldown": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "range": {
+          "type": "number"
+        },
+        "leash": {
+          "type": "number"
+        },
+        "killFlag": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "respawn": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "lootAction": {
+          "type": "string"
+        }
+      }
+    },
+    "conditionalAmount": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "count",
+        "all",
+        "none"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "all": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "none": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "hazard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "target",
+        "all",
+        "none",
+        "once",
+        "windup",
+        "damage",
+        "radius",
+        "pushDistance"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "all": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "none": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "once": {
+          "type": "string",
+          "minLength": 1
+        },
+        "windup": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "damage": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "radius": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "pushDistance": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

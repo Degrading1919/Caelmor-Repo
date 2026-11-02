@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Caelmor.Unity.Playable
@@ -5,79 +6,103 @@ namespace Caelmor.Unity.Playable
     public sealed class PlayableHud : MonoBehaviour
     {
         public PlayableBootstrap game;
-        GUIStyle title, label, small, value;
-        Texture2D dark, accent;
-        internal static bool BlocksPointer(PlayableBootstrap game, Vector2 screen)
+        GUIStyle title,label,small;
+        bool inventory;
+        Vector2 dialogueScroll,actionScroll,inventoryScroll,journalScroll;
+        internal static bool BlocksPointer(PlayableBootstrap game,Vector2 screen)
         {
-            if (game.HelpOpen) return true;
-            float scale = Mathf.Min(Screen.width / 1280f, Screen.height / 720f);
-            var point = new Vector2((screen.x - (Screen.width - 1280 * scale) / 2) / scale,
-                (Screen.height - screen.y - (Screen.height - 720 * scale) / 2) / scale);
-            if (new Rect(24, 24, 418, 110).Contains(point) || new Rect(946, 24, 310, 172).Contains(point) ||
-                new Rect(24, 584, 1232, 112).Contains(point)) return true;
-            var target = game.playerCamera.WorldToScreenPoint(game.interactionAnchor.transform.position + Vector3.up * 2.1f);
-            if (target.z <= 0) return false;
-            var labelPoint = new Vector2((target.x - (Screen.width - 1280 * scale) / 2) / scale,
-                (Screen.height - target.y - (Screen.height - 720 * scale) / 2) / scale);
-            return new Rect(labelPoint.x - 135, labelPoint.y - 18, 270, 54).Contains(point);
+            if(game.HelpOpen)return true;
+            if(game.Lowmark!=null && game.Lowmark.DiscoveryQuiet)return false;
+            float scale=Mathf.Min(Screen.width/1280f,Screen.height/720f);
+            var p=new Vector2((screen.x-(Screen.width-1280*scale)/2)/scale,(Screen.height-screen.y-(Screen.height-720*scale)/2)/scale);
+            return new Rect(24,24,405,108).Contains(p)||new Rect(946,24,310,648).Contains(p)||new Rect(24,480,902,192).Contains(p)||new Rect(24,680,1232,32).Contains(p);
         }
+        void Update(){if(Input.GetKeyDown(KeyCode.I))inventory=!inventory;}
         void OnGUI()
         {
-            EnsureStyles();
-            float scale = Mathf.Min(Screen.width / 1280f, Screen.height / 720f);
-            GUI.matrix = Matrix4x4.TRS(new Vector3((Screen.width - 1280 * scale) / 2, (Screen.height - 720 * scale) / 2), Quaternion.identity, Vector3.one * scale);
-            GUI.DrawTexture(new Rect(24, 24, 418, 110), dark);
-            GUI.DrawTexture(new Rect(24, 24, 4, 110), accent);
-            GUI.Label(new Rect(44, 36, 380, 32), "CAELMOR", title);
-            GUI.Label(new Rect(44, 75, 380, 24), "PLAYABLE RUNTIME  /  TECHNICAL GREYBOX", small);
-            GUI.Label(new Rect(44, 102, 380, 24), "A foundation for the first Lowmark narrative.", small);
-            if (game == null || game.Host == null)
+            if(game?.Lowmark!=null && game.Lowmark.DiscoveryQuiet)return;
+            Styles();float scale=Mathf.Min(Screen.width/1280f,Screen.height/720f);
+            GUI.matrix=Matrix4x4.TRS(new Vector3((Screen.width-1280*scale)/2,(Screen.height-720*scale)/2),Quaternion.identity,Vector3.one*scale);
+            if(game?.Host==null || game.StartupFailure!=null || game.Lowmark?.Session==null){GUI.Label(new Rect(30,30,1200,600),"Could not start Caelmor.\n"+game?.StartupFailure,label);return;}
+            var rpg=game.Lowmark;var session=rpg.Session;var content=rpg.Content;
+            GUI.Box(new Rect(24,24,405,108),"");
+            GUI.Label(new Rect(38,31,380,30),"CAELMOR  /  LOWMARK",title);
+            GUI.Label(new Rect(38,65,380,24),"Health "+session.Health+" / "+content.tuning.health+(session.Carry.Length>0?"    Carrying: "+session.Carry:""),label);
+            GUI.Label(new Rect(38,95,380,24),session.ChannelAction>=0?content.actions[session.ChannelAction].label+"  "+(session.ChannelRemaining/10f).ToString("F1")+"s":"Whisperflow Landing",small);
+            GUI.Box(new Rect(946,24,310,210),"");
+            GUI.Label(new Rect(962,38,280,30),inventory?"PACK & SKILLS":"JOURNAL",title);
+            if(GUI.Button(new Rect(962,190,135,30),inventory?"Journal [I]":"Pack [I]"))inventory=!inventory;
+            if(GUI.Button(new Rect(1104,190,132,30),"Controls")){game.Host.ClearPendingInput();ToggleHelp();}
+            if(!inventory)
             {
-                GUI.Label(new Rect(40, 180, 1160, 450), "Runtime could not start.\n" + game?.StartupFailure, label);
-                return;
+                GUILayout.BeginArea(new Rect(962,75,278,110));journalScroll=GUILayout.BeginScrollView(journalScroll);
+                for(int i=0;i<content.quests.Length;i++)
+                {
+                    if(!session.QuestAvailable(i))continue;
+                    int stage=session.Stage(i);GUILayout.Label(content.quests[i].name,label);
+                    GUILayout.Label(stage>=content.quests[i].stages.Length?"Completed. Explore and prepare for the next crossing.":content.quests[i].stages[stage].objective,small);
+                    GUILayout.Space(5);
+                }
+                GUILayout.EndScrollView();GUILayout.EndArea();
             }
-            var state = game.Host.Snapshot;
-            GUI.DrawTexture(new Rect(946, 24, 310, 172), dark);
-            GUI.Label(new Rect(968, 38, 270, 25), "HOST AUTHORITY", label);
-            GUI.Label(new Rect(968, 72, 270, 25), "10 Hz  ·  tick " + state.Tick.ToString("D6"), value);
-            GUI.Label(new Rect(968, 106, 270, 24), "Position  " + state.Position.x.ToString("F1") + " / " + state.Position.z.ToString("F1"), small);
-            GUI.Label(new Rect(968, 130, 270, 24), (state.Sprinting ? "SPRINTING" : "WALK / IDLE") + "  ·  session active", small);
-            GUI.Label(new Rect(968, 154, 270, 24), "Committed interactions  " + state.InteractionCount, small);
-            var anchor = game.interactionAnchor;
-            float distance = Vector3.Distance(state.Position, anchor.transform.position);
-            Vector3 target = game.playerCamera.WorldToScreenPoint(anchor.transform.position + Vector3.up * 2.1f);
-            if (target.z > 0)
+            else GUI.Label(new Rect(962,80,278,95),"Collect timber at the coppice. Harvest defeated game. Cook meat with timber at the fire. Eat strips from your pack to restore health.",small);
+            GUI.Box(new Rect(946,244,310,428),"");
+            GUILayout.BeginArea(new Rect(960,255,282,404));
+            if(inventory)
             {
-                float x = (target.x - (Screen.width - 1280 * scale) / 2) / scale;
-                float y = (Screen.height - target.y - (Screen.height - 720 * scale) / 2) / scale;
-                GUI.DrawTexture(new Rect(x - 135, y - 18, 270, 54), dark);
-                GUI.Label(new Rect(x - 124, y - 13, 250, 25), anchor.displayName, label);
-                GUI.Label(new Rect(x - 124, y + 11, 250, 24), distance <= anchor.interactionRange ? "[ E ]  Interact" : distance.ToString("F1") + " m  ·  approach to interact", small);
+                inventoryScroll=GUILayout.BeginScrollView(inventoryScroll);
+                foreach(var item in content.items)
+                {
+                    int count=session.Quantity(item.id);if(count==0)continue;
+                    GUILayout.Label(item.name+"  ×"+count,label);
+                    if(item.heal>0 && GUILayout.Button("Eat (+"+item.heal+" health)"))game.Host.SubmitGameplayAction(2,Array.IndexOf(content.items,item));
+                }
+                var save=session.Capture();GUILayout.Space(12);
+                for(int i=0;i<content.skills.Length;i++)GUILayout.Label(content.skills[i].name+"  Lv "+session.Level(i)+"  /  "+save.xp[i].count+" XP",small);
+                GUILayout.Space(12);GUILayout.Label(rpg.CheckpointStatus,small);
+                if(GUILayout.Button("Save checkpoint [F5]"))rpg.SaveCheckpoint();
+                if(GUILayout.Button("Reload checkpoint [F9]"))rpg.ReloadCheckpoint();
+                GUILayout.EndScrollView();
             }
-            GUI.DrawTexture(new Rect(24, 584, 1232, 112), dark);
-            GUI.Label(new Rect(44, 599, 1180, 25), state.Feedback, label);
-            GUI.Label(new Rect(44, 635, 1180, 25), "LEFT CLICK   Move       SHIFT   Sprint       E   Interact       RMB   Orbit       Wheel   Zoom       ESC   Help       F3   Debug WASD", small);
-            GUI.Label(new Rect(44, 666, 1180, 22), "Scene fixtures only. No narrative, rewards, or production world content is loaded. Session resets on exit.", small);
-            if (game.HelpOpen)
+            else
             {
-                GUI.DrawTexture(new Rect(290, 184, 700, 330), dark);
-                GUI.Label(new Rect(320, 210, 640, 36), "Explore the runtime", title);
-                GUI.Label(new Rect(320, 266, 640, 130), "Left-click terrain to walk; click again to change destination.\nThe host finds a route around obstacles. Hold Shift to sprint.\nApproach the amber marker, then press E to interact.\nMovement and interactions commit on the 10 Hz host tick.", label);
-                GUI.Label(new Rect(320, 402, 640, 44), "RMB: orbit. Wheel: zoom. F3: optional WASD debug controls.\nEscape stops your route and opens or closes this panel.", small);
-                if (GUI.Button(new Rect(320, 460, 145, 32), "Quit application")) Application.Quit();
+                int selected=rpg.Selected;
+                if(selected<0)GUILayout.Label("Click a person or object to see interactions. E selects something within reach.",label);
+                else
+                {
+                    var target=content.targets[selected];GUILayout.Label(target.name,title);
+                    actionScroll=GUILayout.BeginScrollView(actionScroll);
+                    int enemy=Array.FindIndex(content.enemies,e=>e.target==target.id);
+                    if(enemy>=0 && session.TargetVisible(selected) && session.Enemy(enemy).health>0 && GUILayout.Button("Attack"))rpg.Attack(enemy);
+                    bool any=false;
+                    for(int i=0;i<content.actions.Length;i++)
+                    {
+                        var action=content.actions[i];if(action.target!=target.id||action.kind=="enter"||!session.Available(i))continue;
+                        any=true;if(GUILayout.Button(action.label,GUILayout.MinHeight(38)))rpg.ChooseAction(i);
+                    }
+                    if(!any && enemy<0)GUILayout.Label("No action available. Follow the journal or investigate elsewhere.",small);
+                    GUILayout.EndScrollView();
+                }
+            }
+            GUILayout.EndArea();
+            GUI.Box(new Rect(24,480,902,192),"");
+            GUILayout.BeginArea(new Rect(40,492,870,165));dialogueScroll=GUILayout.BeginScrollView(dialogueScroll);GUILayout.Label(rpg.Dialogue.Length>0?rpg.Dialogue:session.Feedback,label);GUILayout.EndScrollView();GUILayout.EndArea();
+            GUI.Label(new Rect(24,680,1230,30),"LMB: move / select    E: nearby interaction    Shift: sprint    RMB: orbit    Wheel: zoom    I: pack    F5/F9: checkpoint    Esc: stop / help",small);
+            if(game.HelpOpen)
+            {
+                GUI.Box(new Rect(280,150,650,310),"");GUI.Label(new Rect(300,170,610,34),"Whisperflow Landing",title);
+                GUI.Label(new Rect(300,215,610,180),"Click terrain to walk around obstacles. Click an actor or prop, then choose an action; you approach automatically.\nMove away from orange ground tells to dodge attacks. Move during a channel to cancel it without spending resources.\nUse your pack to eat. F5 saves an explicit checkpoint; F9 reloads at the road head. Channels and carries are cleared.\nF3 enables optional WASD debugging. Host simulation: 10 Hz.",label);
+                if(GUI.Button(new Rect(300,410,180,32),"Quit application"))Application.Quit();
             }
         }
-        void EnsureStyles()
+        void ToggleHelp(){game.SendMessage("ToggleHelpFromHud",SendMessageOptions.RequireReceiver);}
+        void Styles()
         {
-            if (title != null) return;
-            title = new GUIStyle(GUI.skin.label) { fontSize = 25, fontStyle = FontStyle.Bold, normal = { textColor = new Color(.91f, .86f, .70f) } };
-            label = new GUIStyle(GUI.skin.label) { fontSize = 17, normal = { textColor = new Color(.94f, .94f, .90f) } };
-            small = new GUIStyle(GUI.skin.label) { fontSize = 13, normal = { textColor = new Color(.70f, .76f, .75f) } };
-            value = new GUIStyle(label) { fontSize = 21, normal = { textColor = new Color(.37f, .85f, .70f) } };
-            dark = Texture(new Color(.035f, .065f, .075f, .94f)); accent = Texture(new Color(.67f, .51f, .26f));
+            if(title!=null)return;
+            title=new GUIStyle(GUI.skin.label){fontSize=20,fontStyle=FontStyle.Bold,wordWrap=true,normal={textColor=new Color(.92f,.86f,.7f)}};
+            label=new GUIStyle(GUI.skin.label){fontSize=16,wordWrap=true,normal={textColor=new Color(.94f,.94f,.9f)}};
+            small=new GUIStyle(label){fontSize=13,normal={textColor=new Color(.74f,.8f,.78f)}};
+            GUI.skin.button.wordWrap=true;GUI.skin.button.fontSize=14;
         }
-        static Texture2D Texture(Color color)
-        { var texture = new Texture2D(1, 1); texture.SetPixel(0, 0, color); texture.Apply(); return texture; }
-        void OnDestroy() { if (dark != null) Destroy(dark); if (accent != null) Destroy(accent); }
     }
 }

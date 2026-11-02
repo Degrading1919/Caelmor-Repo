@@ -45,6 +45,7 @@ namespace Caelmor.Unity.Playable
         ISimulationEligibilityGate, IAuthoritativeStateMutatingCommandHandler
     {
         const int MoveCommand = 101, SprintCommand = 102, InteractCommand = 103, DestinationCommand = 104;
+        const int GameplayCommandBase = 200, GameplayActionCount = 16;
         const float ArrivalTolerance = .025f;
         const float WalkSpeed = 3f, SprintSpeed = 5.5f, Radius = .38f, Skin = .025f;
         readonly int ownerThread = Thread.CurrentThread.ManagedThreadId;
@@ -81,6 +82,7 @@ namespace Caelmor.Unity.Playable
         internal WorldSimulationCore Simulation { get; }
         public PlayableSnapshot Snapshot { get; private set; }
         public bool IsReady => !disposed && IsEligible(entity);
+        internal PlayerHandle GameplayPlayer => player;
         public string Name => "Playable session / restore / lifecycle / zone gate";
 
         /// <summary>
@@ -89,6 +91,13 @@ namespace Caelmor.Unity.Playable
         /// </summary>
         public event Action<SessionId, int, long> InteractionCommitted;
         public event Action<PlayableSnapshot> SnapshotCommitted;
+        // Generic activity bridge. Content identifiers are resolved by the authoritative
+        // adapter after consumption; they never mutate state from a UI callback.
+        internal event Action<int, int, int> GameplayCommandConsumed;
+        internal event Action<long, Vector3> GameplayPreparing;
+        internal event Action<long> GameplayCommitting;
+        internal event Action GameplayAborted;
+        internal event Action InputCleared;
 
         public PlayableHost(Vector3 spawn, InteractionAnchor interactionAnchor, int solidMask, TerrainNavigation terrainNavigation = null)
         {
@@ -127,6 +136,7 @@ namespace Caelmor.Unity.Playable
             var registry = new CommandHandlerRegistry();
             registry.Register(MoveCommand, this); registry.Register(SprintCommand, this); registry.Register(InteractCommand, this);
             registry.Register(DestinationCommand, this);
+            for (int action = 0; action < GameplayActionCount; action++) registry.Register(GameplayCommandBase + action, this);
             Simulation.RegisterPhaseHook(this, -100);
             Simulation.RegisterPhaseHook(new AuthoritativeCommandFreezeHook(commands, sessions), -90);
             Simulation.RegisterPhaseHook(new AuthoritativeCommandConsumeTickHook(commands, registry, sessions), -80);
@@ -168,12 +178,19 @@ namespace Caelmor.Unity.Playable
             AssertOwner();
             return IsReady && Enqueue(InteractCommand, targetId, 0);
         }
+        public bool SubmitGameplayAction(int action, int targetIndex, int optionIndex = -1)
+        {
+            AssertOwner();
+            return IsReady && action >= 0 && action < GameplayActionCount &&
+                Enqueue(GameplayCommandBase + action, targetIndex, optionIndex);
+        }
         public void ClearPendingInput()
         {
             AssertOwner(); Require(!inTick, "input_clear_mid_tick");
             commands.DropSession(Session); input = Vector2.zero; sprint = false; interact = false;
             destinationRequested = false; debugMoveRequested = false;
             hasDestination = false; route = Array.Empty<Vector3>(); routeIndex = 0;
+            InputCleared?.Invoke();
         }
         bool Enqueue(int type, int a, int b) => commands.TryEnqueue(Session,
             new AuthoritativeCommand(Simulation.CurrentTickIndex + 1, type, a, b, ++inputSequence));
@@ -185,6 +202,7 @@ namespace Caelmor.Unity.Playable
             Require(!inTick, "reentrant_tick_forbidden");
             inTick = true;
             try { Simulation.ExecuteSingleTick(); }
+            catch { GameplayAborted?.Invoke(); throw; }
             finally { inTick = false; }
         }
         public void OnPreTick(SimulationTickContext tick, IReadOnlyList<EntityHandle> eligible)
@@ -216,6 +234,8 @@ namespace Caelmor.Unity.Playable
             }
             else if (command.CommandType == SprintCommand) sprint = command.PayloadA == 1;
             else if (command.CommandType == InteractCommand) { interact = true; requestedTarget = command.PayloadA; }
+            else if (command.CommandType >= GameplayCommandBase && command.CommandType < GameplayCommandBase + GameplayActionCount)
+                GameplayCommandConsumed?.Invoke(command.CommandType - GameplayCommandBase, command.PayloadA, command.PayloadB);
         }
         public void Execute(EntityHandle candidate, SimulationTickContext tick)
         {
@@ -267,6 +287,7 @@ namespace Caelmor.Unity.Playable
                 }
                 if (!hasDestination) pendingSprint = false;
             }
+            GameplayPreparing?.Invoke(tick.TickIndex, pendingPosition);
             if (!interact) return;
             if (anchor == null || !anchor.isActiveAndEnabled || requestedTarget != anchor.fixtureId)
                 pendingFeedback = "Interaction rejected: target is unavailable.";
@@ -302,9 +323,27 @@ namespace Caelmor.Unity.Playable
             position.y = start.y;
             return position;
         }
+        internal void RespawnDuringExecution(Vector3? requestedSpawn = null)
+        {
+            AssertOwner(); Require(inTick, "respawn_outside_tick");
+            var target = requestedSpawn ?? context.RestoredSpawn;
+            Require(Finite(target.x) && Finite(target.y) && Finite(target.z) && Mathf.Abs(target.y-context.RestoredSpawn.y)<.01f,"invalid_respawn");
+            if(navigation!=null) Require(navigation.TryPath(pendingPosition,target,collisionMask,out _),"unreachable_respawn");
+            pendingPosition = target; hasDestination = false; route = Array.Empty<Vector3>();
+            pendingSprint = false;
+        }
+        internal void DisplaceDuringExecution(Vector3 displacement)
+        {
+            AssertOwner(); Require(inTick && Finite(displacement.x) && Finite(displacement.z),"invalid_gameplay_displacement");
+            displacement.y=0;
+            var next=MoveWithCollision(pendingPosition,Vector3.ClampMagnitude(displacement,2f));
+            if(navigation==null || navigation.TryPath(pendingPosition,next,collisionMask,out _))pendingPosition=next;
+            hasDestination=false;route=Array.Empty<Vector3>();pendingSprint=false;
+        }
         public void OnPostTick(SimulationTickContext tick, IReadOnlyList<EntityHandle> eligible)
         {
             AssertOwner();
+            if (IsReady) GameplayCommitting?.Invoke(tick.TickIndex);
             bool committedInteraction = pendingCount > Snapshot.InteractionCount;
             // Single finalization boundary: presentation never reads partially simulated state.
             Snapshot = new PlayableSnapshot(tick.TickIndex, pendingPosition, pendingFacing, pendingSprint,
