@@ -200,7 +200,7 @@ Hollis Avery (keeper; MQ2 cameo, MQ10, MQ12), Wynn Tarrow (MQ2 lead, MQ12), Nan 
 | **Imber Cobb** | Drowsebank miller | Drowsebank | MQ6 | Wants the wheel turning. Fears Tovin being right. | Gruff, kinder than he admits. |
 | **Joss Garrow** | Wraithwatcher gone wrong ("Old Lantern") | Stillwater edge | Old Lantern (miniboss) | Wanted to understand the drift. | Repeats patrol calls; lucid in fragments. |
 | **Rhoda and Col Dunnock** | Farm household with the creaking cellar door | Heartlands farmhouse | *The Whispering Door*, ME07 | Want the door to keep warning them. | Practical; three explanations for everything. |
-| **Tansy Marl** | Role from *Settlements and Combat* (renamed in review from a colliding name) | See that file | See that file | | |
+| **Tansy Marl** | Ashenstead householder whose house filled up with far-bank kin during the shortages | Ashenstead | *Unreplanted* | Wants ground of her own. Fears another hungry winter. | Direct, tired, fair. |
 
 Role-based NPCs (unnamed): keepers, crews, Watchers, fen-cutters, orchard hands, households, children. Use them generously so Lowmark is inhabited (Main Arc recurring-character guidance).
 
