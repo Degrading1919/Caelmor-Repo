@@ -17,9 +17,9 @@
 | SB | `lowmark.side.silent_bell` | MQ1 Completed | Enter the Greyharrow tower square: Teague and Merrin are arguing at the roster wall. | — |
 | UC | `lowmark.side.uphill_canal` | MQ3 Completed | Enter the canal foot volume (P28), or Bryn Ruddock's bark at the orchards ("The canal up the hazel cut's running backwards again"). | Richer payoff after MQ9 Completed (§2.11). |
 | TB | `lowmark.side.twice_burned_tree` | MQ5 Completed | Ashenstead household bark at the remembrance circle ("It's fruiting. First time since my lad was small."), or approach P27 at dusk. | Fruit and dream need dusk/night (§0.4). |
-| WD | `lowmark.side.whispering_door` | MQ4 Completed | Ansel Corrie's patrol book entry (bark at the Lantern Post: "Hobb farm. Door went again."), or approach the Hobb farm gate. | Defence needs night (§0.4). |
+| WD | `lowmark.side.whispering_door` | MQ4 Completed | Ansel Corrie's patrol book entry (bark at the Lantern Post: "Dunnock farm. Door went again."), or approach the Dunnock farm gate. | Defence needs night (§0.4). |
 | CN | `lowmark.side.candle_rule` | MQ3 Completed | Enter the Ashenstead watergarden: the Holt family's accusation is in progress. | — |
-| VK | `lowmark.side.verse_kept_back` | MQ3 Completed | Greyharrow dock notice and the Sayer–Coombe quarrel. | Steps S06 onward require MQ9 Completed (§6). |
+| VK | `lowmark.side.verse_kept_back` | MQ3 Completed | Greyharrow dock notice and the Sayer–Coombe quarrel. | Steps S03 onward require MQ9 Completed (§6). |
 | FC | `lowmark.side.what_the_flood_carried` | MQ4 Completed | Approach the Lark low field: debris across the furrows, nobody working. | — |
 
 None of these quests is required by the main line, by `LM_CIVIC_STANDING`, or by any commission. CN sets one quest-local flag that adds a line to MQ11's Tend argument; MQ11's Tend option exists without it (§5.9).
@@ -303,7 +303,7 @@ Up a hazel cut in Brackenford Woods, a narrow stone channel climbs a slope in sh
 |---|---|---|
 | **A. Hazel cut** | Approach. | A sunken lane between coppiced hazel, banks taller than a person. The sound of water is wrong in a way that is hard to name: it comes from uphill. |
 | **B. Foot pool** | Start; Sedge. | Reed-choked, high, flat. A stone arch with a carved lintel stands half drowned at the back: the culvert mouth. Moss on the channel's first steps grows on the *downhill* faces, as if water usually comes from above. |
-| **C. The channel** | The canal. | Twenty-odd short stone steps up the slope, each with a lip. Sunk a body-height into the bank and screened by hazel, so its water can be seen only from the lip path beside it. A damp line runs up the inside walls to the top step. A leaf is stuck to the top lip. |
+| **C. The channel** | The canal. | Twenty-odd short stone steps up the slope, each with a lip. Sunk a body-height into the bank and **roofed along its length with stone lintel slabs** (Riverwarden work, Braid-like), with a hazel screen over the joints, so its water cannot be seen from above or from a distance at all. The only gaps in the roof run beside the flagged lip path, and those gaps lie inside the observation volume. A damp line runs up the inside walls to the top step. A leaf is stuck to the top lip. |
 | **D. The listening seat** | The watching place. | Beside the foot pool, a stone seat in an alcove under a heavy carved brow, facing a small round basin ringed with stone. The seat faces away from the channel. The basin is mirror-still; a lip of stone keeps the wind off it. |
 | **E. Head cistern** | The stall. | A square stone tank at the top of the slope, full to the brim and spilling down a side spillway back into the pool. Its outlet gate is an empty slot a hand wide, carved with three rings. Chisel scars on the slot edges. |
 | **F. Cutter's hut** | The paddle. | A collapsed coppice-cutter's shelter in the hazel. Its doorstep is a flat stone a hand thick with three carved rings on its edge and a groove worn by boots across the middle. |
@@ -312,7 +312,7 @@ Up a hazel cut in Brackenford Woods, a narrow stone channel climbs a slope in sh
 
 **MAP VERIFICATION REQUIRED:** the culvert's far mouth should open somewhere the long road does not reach quickly (recommendation: the Ashenstead Fields edge, bypassing the orchard berms). If geometry does not allow, any useful lower path works; quest logic does not depend on the destination.
 
-**LEVEL-ART REQUIREMENT (load-bearing):** the channel's water surface must be **directly visible only from inside the observation volume** (the lip path and the pool's channel-side bank) at every reachable player position and every camera orbit and zoom. The listening-seat alcove must keep the camera inside its walls (collision radius) and its brow must occlude the channel at all orbit angles. Verify with the real camera rig.
+**LEVEL-ART REQUIREMENT (now supporting, not load-bearing):** the roof slabs and screen make the channel's water surface directly visible only from inside the observation volume at ordinary positions and zooms. The volume's edge is marked in the world: the lip path and channel-side bank are **flagged stone**, and everything outside is earth. The listening-seat brow and alcove walls are tagged **non-fading occluders** (exempt from the camera's occluder fade). Verify on the real rig, including with co-op partners in view. The **render rule in §2.4 is what guarantees honesty**, so a geometry miss can never show the water moving.
 
 ### 2.4 The observation rule [NEW]
 
@@ -320,12 +320,12 @@ The canal climbs only while **no one is watching it**. The game expresses "watch
 
 | Layer | Rule |
 |---|---|
-| **Server (progress)** | For each player, the canal is *unobserved* while that player's character is **outside the observation volume** (lip path, channel-side bank, head-cistern rim). Progress (float position, cistern drain, foot-pool level) advances only while unobserved. No camera data is used. |
-| **Geometry (honesty)** | Because of the art requirement above, any place from which the channel surface can be seen directly is inside the volume. So the server rule and what the player can see always agree. Walking away, turning the camera, or zooming out cannot catch it; the cut is too deep. |
-| **Client (presentation)** | Inside the volume, the channel renders at rest: a thin skin of still water on each step. Outside it, the channel animates climbing, which the player can only ever see **reflected in the listening basin**. |
-| **Optional flourish** | If a client's camera frustum ever does include the channel surface directly while the local player is unobserving (a geometry miss), the water renders at rest for that frame. The canal is shy, not broken. This hides art bugs; it is not the rule. |
+| **Server (progress)** | The rule is: **no player inside the observation volume watching the channel.** For each player, the canal is *unobserved* while that player's character is **outside the observation volume** (the flagged lip path, channel-side bank and head-cistern rim; the listening seat is outside it). Progress (float position, cistern drain, foot-pool level) advances only while unobserved. No camera data is used on the server. |
+| **Client (render rule, binding)** | **Whenever the channel's water surface is directly in a camera view, it renders still.** Every client checks, every frame, whether any part of the channel surface is in its camera frustum and unoccluded. If it is, that part renders at rest (a thin skin of still water on each step), and the float shows at its last-seen step. This holds at any orbit, pitch or zoom, with occluder fade, from any position, and for a partner's camera too. The climbing animation is drawn **only in the listening basin's reflection**, seen from the seat. |
+| **Geometry (support)** | The roof slabs, screen and non-fading brow keep direct views rare, so the render rule seldom has to act and the effect never looks like popping. |
+| **The seat** | The **Sit** interaction applies a soft camera limit while seated: an orbit cone facing the basin and a zoom clamp. There is no cutscene and the player keeps control. Standing up releases it. |
 
-How the player learns it, in order, without text: (1) the float moves while they are away; (2) it never moves while they watch; (3) the seat faces the wrong way, and its basin shows what the lip cannot.
+How the player learns it, in order, without text: (1) the float moves while they are away; (2) it never moves while they watch, from anywhere, at any zoom; (3) the seat faces the wrong way, and its basin shows what the lip cannot.
 
 ### 2.5 Beats
 
@@ -351,20 +351,20 @@ Hints, in order of escalation (no tracker text): the seat's inspect ("You can't 
 |---|---|
 | Trigger | Player sits on the listening seat while unobserving (server event `uphill_canal.seat`). Repeatable every time they sit; required once. |
 | Duration | ~20 s for the first full climb; afterwards continuous while seated. |
-| The basin | A planar reflection (or a state-driven pre-baked reflection texture, §2.12) of the slope beyond and above the basin, which the seat's brow hides from direct view. |
+| The basin | A planar reflection (or a state-driven pre-baked reflection texture, §2.12) of the slope beyond and above the basin, which the seat's brow hides from direct view. The climb is seen **only** here. |
 | What it shows | Water lifting from the foot pool into the first step as a smooth, clear sheet, the way cloth lifts when pulled from one corner. It climbs step over step, pausing at each lip for a heartbeat before going over, the reed float riding it. At the top it fills the cistern, which spills down the side spillway back into the pool: a loop going nowhere. |
 | Audio | The water sound, normally a babble from uphill, softens to a steady pour that moves slowly upslope. Nothing else changes. No music. |
 | The direct world | If the player turns the camera inside the alcove, they see the alcove walls and the brow. Nothing else moves. |
 | Standing up | If the player stands up, the reflection breaks with a single ripple across the basin and the channel (now observed) is still. |
 | UI | None. |
-| Camera | Player-controlled. The alcove constrains the camera physically, not by script. |
+| Camera | Player-controlled within the seat's soft limit (orbit cone toward the basin, zoom clamp; no cutscene). If any direct view of the channel still occurs, the §2.4 render rule shows it still. |
 | After | Seat inspect: *"A seat facing the wrong way. Built that way on purpose."* |
 
 ### 2.7 Encounters
 
 | Id | Enemies | Placement | Role | Telegraph | Solo target |
 |---|---|---|---|---|---|
-| **E1** | 4 × River Skitter, 1 × River Leech | Last puddles in the drained culvert | Skitters: swarm, leashed to puddles. Leech: slow latcher | Skitters: chitter and bunch (~0.8 s) before a rush. Leech: rears (~1.2 s) | Required. Ends at 60–80% HP on a Competent-tier character. Step onto dry stone to break the latch. |
+| **E1** | 4 × River Skitter, 1 × River Leech | Last puddles in the drained culvert | Skitters: swarm, leashed to puddles. Leech: slow latcher | Skitters: chitter and bunch (~0.8 s) before a rush. Leech: rears (~1.2 s) | Required. Ends at 60–80% HP on a Milestone 1 character. Step onto dry stone to break the latch. |
 
 Rule: nothing dropped advances the quest. Respawn point: the listening seat.
 
@@ -499,7 +499,7 @@ UC-D5.04 SEDGE: "Water doesn't stop because people do."      → end
 | **Why it stops when watched** | Riverwarden works were made by listeners; a watcher's attention is a living imprint the water answers by holding still (C08 resonance). **Never stated in v1.** | "It's shy." | Only the behaviour. | Watching "breaks" it. | Everything. | None in v1. |
 | **Who pulled the paddle** | Wartime work crews pulled Braid paddles when the Relief Cut was dug; this one ended up as a hut step. | — | Chisel scars, the doorstep, brick patches in the culvert. | Children stole it. | Who, when, by whose order. | None (local colour). |
 
-**Review log:** first draft used camera direction as the server rule; replaced with a server-checkable volume plus a geometry requirement so the free camera can never "catch" the canal and server and client always agree. The head-gate fix originally repeated MQ3's woodcutting-and-lever; replaced with finding and carrying a reused stone. Co-op griefing risk (a partner standing on the lip) removed by making observation per player.
+**Review log:** independent review pass (Director ruling 6): the geometry-only honesty layer would break under a free, fading, zooming camera. The channel is now roofed and screened; the server rule is "no player inside the observation volume watching the channel"; the client render rule (the channel always renders still when directly in a camera view) is binding; the climb is shown only in the basin reflection from the seat, which applies a soft camera limit; the volume edge is flagged stone; E1 is restated as Milestone 1. Earlier: first draft used camera direction as the server rule; replaced with a server-checkable volume plus a geometry requirement so the free camera can never "catch" the canal and server and client always agree. The head-gate fix originally repeated MQ3's woodcutting-and-lever; replaced with finding and carrying a reused stone. Co-op griefing risk (a partner standing on the lip) removed by making observation per player.
 
 ---
 ## 3. TB — The Twice-Burned Tree
@@ -687,9 +687,9 @@ Joric bark after `TB_GIFT_JORIC`, on the gatepost prop: "Still there. Going soft
 
 ### 4.1 In one paragraph
 
-The Hobb farm sits on the Heartlands edge where the fields start to run toward Ashenstead. Its cellar door creaks before drift comes: a long, slow, rising creak, like someone breathing in. The Hobbs treat it as a warning bell. When the door goes, the lanterns are lit, the children go upstairs and Rhoda Hobb sits on the stair with a hay fork. Since the flushes stopped, the door has gone more often, not less. The player arrives on a night it is going to go. They help the household ready the yard, wait, hear the door, and hold the house through the night while drift rises from the yard drain. At first light the door is quiet, and the player goes down. Under the cellar floor is a brick wartime drain, stencilled for a treatment boundary, running toward the guide-line under the Rebirth Fields. Its iron flap valve has rusted open, so heavy water backs up the drain whenever the fields' water rises, and the air it pushes ahead of it climbs the cellar stair and works the door. The player follows the drain to the valve, fights what lives in it, and decides with the Hobbs how to close it. The site goes quiet. The door is mostly explained. Mostly.
+The Dunnock farm sits on the Heartlands edge where the fields start to run toward Ashenstead. Its cellar door creaks before drift comes: a long, slow, rising creak, like someone breathing in. The Dunnocks treat it as a warning bell. When the door goes, the children go upstairs and Rhoda Dunnock sits on the stair with a hay fork, listening for which way it creaked. Since the flushes stopped, the door has gone more often, not less. The player arrives on a night it is going to go. They help the household ready the yard, wait, and learn to listen: before each rise the door creaks, and the length and pitch of the creak tell which of the yard's three outlets the water will come up through next. The player gets there first and holds the lid while drift rises around them. At first light the door is quiet, and the player goes down. Under the cellar floor is a brick wartime drain stencilled KEEP CLEAR, running toward the fields (after MQ5, its stencils and debris show what that ground was used for). Its iron flap valve has rusted open, so heavy water backs up the drain whenever the fields' water rises, and the air it pushes ahead of it climbs the cellar stair and works the door. The player follows the drain to the valve, fights what lives in it, and decides with the Dunnocks how to close it. The site goes quiet. The door is mostly explained. Mostly.
 
-**What the player should remember:** the creak in the dark before anything happens. **What they might want next:** nothing required; the drain's stencils echo MQ5.
+**What the player should remember:** the creak in the dark before anything happens, and knowing where to run because of it. **What they might want next:** nothing required; after MQ5 the drain's stencils echo it.
 
 ### 4.2 Summary card
 
@@ -698,36 +698,36 @@ The Hobb farm sits on the Heartlands edge where the fields start to run toward A
 | Type | Environmental discovery. Dossier §XI "The Whispering Door" [CANON hook]. Drift site **farmhouse cellar** (bible §9.2). |
 | Unlock | MQ4 Completed. |
 | Length | 30–40 minutes. |
-| Combat | ~35%: night defence (3 waves) and the drain. |
+| Combat | ~35%: a listening defence (3 waves) and the drain. |
 | Skills | Melee. Smithing optional (rehang the flap); Woodcutting optional (bar timber). |
-| NPCs | Rhoda Hobb (farmer) [NEW], Col Hobb (her son, about twelve) [NEW]; Ansel Corrie (bark). |
+| NPCs | Rhoda Dunnock (farmer) [NEW], Col Dunnock (her son, about twelve) [NEW]; Ansel Corrie (bark). |
 | Choice | How to close the drain (rehang the flap / brick it shut). |
-| Unlocks | Farmhouse cellar drift site → **quieted**. The Hobb farm as a friendly waypoint (hearth, a meal). |
+| Unlocks | Farmhouse cellar drift site → **quieted**. The Dunnock farm as a friendly waypoint (hearth, a meal). |
 
-New names checked against `LORE/` and reference files: Hobb, Rhoda, Col (no matches).
+New names checked against `LORE/` and every `04_CONTENT_PRODUCTION` file: Dunnock, Rhoda, Col (no matches; independent review pass). The household was renamed from "Hobb", which collided with Act I's far-bank Hobb household.
 
-### 4.3 The place: the Hobb farm
+### 4.3 The place: the Dunnock farm
 
 | Area | Purpose | Environmental storytelling |
 |---|---|---|
-| **A. Yard** | Defence ground. | Muddy yard, a pump, a stone-lidded yard drain in the middle that nobody walks over. A lantern pole at each corner, two missing their lanterns. Hurdles stacked to make a pen. |
-| **B. Kitchen** | Hearth; family. | Low beams; tally marks on the doorframe by the cellar door, one per creak, in seasons. The marks are thicker this year. A hay fork leaning by the stair. |
+| **A. Yard** | Defence ground. | Muddy yard with **three outlets** where the water comes up: a stone-lidded yard drain in the middle that nobody walks over, the pump trough by the wall, and the cellar light-well grate under the kitchen window. Each has a worn plank lid beside it. Hurdles stacked to make a pen. Lanterns burn on the corner poles (ambience only). |
+| **B. Kitchen** | Hearth; family. | Low beams; tally marks on the doorframe by the cellar door, one per creak, in seasons, each with a small sign beside it (a line, a cup, a square) for which outlet rose. The marks are thicker this year. A hay fork leaning by the stair. |
 | **C. The cellar door** | The door. | Old oak, iron-strapped, warped at the top corner. Its latch is tied with twine. Light shows under it. |
-| **D. Cellar** | Descent. | Shelves of crocks and apples, a damp floor, and in the corner a square iron grate in the floor that the Hobbs have covered with a board and two flour sacks. A tide line on the wall at knee height. |
-| **E. The drain** | Lore and danger. | Brick-lined, stooping height, stencilled at intervals: **TREATMENT BOUNDARY — KEEP CLEAR** and a direction arrow. Silt, old bandage tins (no names), a rotted stretcher pole. |
+| **D. Cellar** | Descent. | Shelves of crocks and apples, a damp floor, and in the corner a square iron grate in the floor that the Dunnocks have covered with a board and two flour sacks. A tide line on the wall at knee height. |
+| **E. The drain** | Lore and danger. | Brick-lined, stooping height. **Before MQ5 Completed:** stencilled at intervals **DRAIN — KEEP CLEAR** and a direction arrow; silt and broken crocks only. **After MQ5 Completed** (an echo, never a first reveal): the stencils read **TREATMENT BOUNDARY — KEEP CLEAR**, and old bandage tins (no names) and a rotted stretcher pole lie in the silt. |
 | **F. The valve chamber** | Fix. | Where the drain meets a larger stone channel (the guide-line's outfall branch). A hinged iron flap valve rusted fully open, a wedge of debris jammed in its hinge. |
 
 **MAP VERIFICATION REQUIRED:** the farm must lie on the Heartlands edge nearest Ashenstead Fields so that a drain toward the guide-line is plausible. The drain section authored here is short; it ends at the valve chamber and does not connect to MQ5's culvert for traversal.
 
 ### 4.4 Beats
 
-**Beat 0 — The farm gate (`S00_offer`).** *Objective: Find out what the Hobbs are afraid of.* Rhoda is hauling hurdles across the yard at dusk (WD-D1).
+**Beat 0 — The farm gate (`S00_offer`).** *Objective: Find out what the Dunnocks are afraid of.* Rhoda is hauling hurdles across the yard at dusk (WD-D1).
 
-**Beat 1 — Ready the yard (`S01_ready`).** *Objective: Help the Hobbs get ready for the night.* Three tasks, any order: **Hang the two lanterns** on the empty poles (interaction ×2), **Pen the hurdles** around the yard drain (one carry ×2: hurdle to drain), **Bar the kitchen door** (interaction; the bar is short a length; a Woodcutting stem from the hedge ash makes a longer bar, optional `S01b_bar`, which reduces wave 3 pressure on the door). Col follows the player and narrates.
+**Beat 1 — Ready the yard (`S01_ready`).** *Objective: Help the Dunnocks get ready for the night.* Three tasks, any order: **Lay the lids** on the three outlets (interaction ×3; Col names each one and the creak that goes with it), **Pen the hurdles** around the yard drain (one carry ×2: hurdle to drain), **Bar the kitchen door** (interaction; the bar is short a length; a Woodcutting stem from the hedge ash makes a longer bar, optional `S01b_bar`, which reduces wave 3 pressure on the door). Col follows the player and narrates.
 
-**Beat 2 — Wait (`S02_wait`).** *Objective: Wait with the Hobbs.* Sit at the kitchen hearth (wait interaction, §0.4). Rhoda and Col talk (WD-D2) while the night comes in. Then the door (§4.6).
+**Beat 2 — Wait (`S02_wait`).** *Objective: Wait with the Dunnocks.* Sit at the kitchen hearth (wait interaction, §0.4). Rhoda and Col talk (WD-D2) while the night comes in. Then the door (§4.6).
 
-**Beat 3 — Hold the house (`S03_defend`).** *Objective: Keep the drift away from the house.* Three waves rise from the yard drain (E1–E3). Between waves, the lanterns can be relit if drift put them out (interaction; a dark corner lets drift reach the kitchen door faster). If drift reaches the kitchen door it batters it; the door holds (it cannot break) but Col's barks escalate and the wave timer extends. Nothing is lost if the player is slow.
+**Beat 3 — Hold the house (`S03_defend`).** *Objective: Keep the drift away from the house.* **The listening loop.** About 12 s before each wave the cellar door creaks, and the creak says where the water will rise: **long and low** = the yard drain; **short and high** = the pump trough; **two quick catches** = the light-well grate. The player goes to that outlet and **Holds the lid** (stand on it; a 3 s channel that completes if they arrive before the rise). A held outlet lets up one drift fewer, and those that do rise form slowly (+1 s on their telegraph). A wrong or late guess costs nothing but a fuller wave. Col calls his guess from the stair, and he is right only for the first wave. If drift reaches the kitchen door it batters it; the door holds (it cannot break), but Col's barks escalate and the wave timer extends. Nothing is lost if the player is slow. Before wave 3 a second creak follows the first and matches no outlet; nothing rises where it might point (§4.6).
 
 **Beat 4 — First light (`S04_down`).** *Objective: Go down to the cellar.* The door is quiet. Rhoda unties the latch (WD-D3). In the cellar: inspect **tide line**, **grate**; **Lift the grate** (3 s).
 
@@ -737,51 +737,53 @@ New names checked against `LORE/` and reference files: Hobb, Rhoda, Col (no matc
 - **Rehang the flap** (Smithing entry level at a portable anvil-stone in the chamber: 3 s channel ×2; or, without Smithing, a crew repair channel taking longer, 6 s ×2). Water can leave the cellar but not come back up.
 - **Brick it shut.** Old bricks are stacked in the chamber (left by whoever patched the drain). Three **Lay bricks** channels.
 
-**Beat 7 — The quiet (`S07_quiet`).** *Objective: Tell the Hobbs it's done.* Back in the kitchen, Col makes one more tally mark on the doorframe and crosses it through (WD-D5). Drift site: farmhouse cellar → quieted. Quest Completed.
+**Beat 7 — The quiet (`S07_quiet`).** *Objective: Tell the Dunnocks it's done.* Back in the kitchen, Col makes one more tally mark on the doorframe and crosses it through (WD-D5). Drift site: farmhouse cellar → quieted. Quest Completed.
 
 ### 4.5 Encounters
 
 | Id | Enemies | Placement | Role | Telegraph | Solo target |
 |---|---|---|---|---|---|
-| **E1** | 2 × drift | Rise from the yard drain | Place-bound; drift toward the nearest lantern, then the kitchen door | Water in the drain pen "stands up" (~1.5 s) before each forms; a cold-mist lunge with ~1 s windup | Disperse both. ~30 s. |
-| **E2** | 3 × drift | As E1, one from the pump trough | As E1; one targets a lantern pole | As E1; a lantern gutters (~2 s) before it goes out | ~45 s. Relight between waves. |
-| **E3** | 2 × drift, 1 × lantern-drift | As E1 | Lantern-drift carries a cold light; its pulse is a ring on the ground (~1.5 s) that the player steps out of | Ring telegraph | 60–90 s. Ends at 50–70% HP on a Competent-tier character. Dispersed drift does not re-form tonight (the night's water has gone back down). |
+| **E1** | 2 × drift (1 if the outlet is held) | The outlet the creak named (wave 1: always the yard drain, long and low) | Place-bound; drift toward the player at the lid, then the kitchen door | Water at the outlet "stands up" (~1.5 s; ~2.5 s at a held outlet) before each forms; a cold-mist lunge with ~1 s windup | Disperse all. ~30 s. |
+| **E2** | 3 × drift (2 if held) | The outlet the creak named (pump trough or light-well grate, varied per night) | As E1 | As E1 | ~45 s. |
+| **E3** | 2 × drift, 1 × lantern-drift (1 drift fewer if held) | The outlet the first creak named; nothing rises at the second creak's | Lantern-drift carries a cold light; its pulse is a ring on the ground (~1.5 s) that the player steps out of | Ring telegraph | 60–90 s. Ends at 50–70% HP on a Milestone 1 character. Dispersed drift does not re-form tonight (the night's water has gone back down). |
 | **E4** | 3 × River Skitter, 1 × River Leech | Drain silt pools; leech at the valve | As UC E1 | As UC E1 | Required. Short. |
 
-Drift re-forms on later nights until S07 (site **active**). After S07 the farm spawns no drift. Respawn point: the Hobb kitchen hearth.
+Drift re-forms on later nights until S07 (site **active**). After S07 the farm spawns no drift. Respawn point: the Dunnock kitchen hearth.
 
 ### 4.6 The strange moment: the door (presentation spec)
 
 | Element | Spec |
 |---|---|
-| Trigger | End of WD-D2 (server event `whispering_door.creak`), ~20 s before wave 1. |
+| Trigger | End of WD-D2 (server event `whispering_door.creak`), ~20 s before wave 1; then before waves 2 and 3 (`whispering_door.creak_wave`, carrying the outlet id that selects the creak sound). |
 | The sound | A long, slow creak rising in pitch over ~4 s, like a breath drawn in through the teeth, from the cellar door. Positional; loud enough to be heard in the yard. Then a pause. Then a second, shorter one. |
 | The door | Moves inward a finger's width against its twine, holds, settles back. The light under it flickers as air moves past. The candle on the kitchen table leans toward the door and straightens. |
 | The household | Rhoda stands, takes the fork, sits on the stair. Col goes up two steps and stops. Nobody speaks for the length of the creak. Then Rhoda: "That's it, then." |
 | UI | None until wave 1 forms. |
 | Camera | Player-controlled. |
 | Repeat | Plays on every active night the player is present before S07. After S07 rehang: the door creaks only on wet-season nights (air, no drift), a shorter, plainer sound. After S07 brick: it never creaks again. |
-| The unexplained half | The second, shorter creak comes **before** the drain water rises (the tide in the cellar only begins after it). The air explanation covers the first creak. Nobody comments on the second. |
+| The three creaks | Long and low (yard drain), short and high (pump trough), two quick catches (light-well grate). Each is distinct by length and pitch, so it reads without subtitles; Col's WD-D2 lines teach the set once. |
+| The unexplained half | At the first creak, and again before wave 3, a second, shorter creak comes **before** the drain water rises (the tide in the cellar only begins after it) and matches no outlet. The air explanation covers the first creak. Nobody comments on the second. |
 
 ### 4.7 Steps
 
 | Step | Objective | Completes on | Required |
 |---|---|---|---|
-| `S00_offer` | Find out what the Hobbs are afraid of. | WD-D1 end node | Yes |
-| `S01_ready` | Help the Hobbs get ready for the night. | 2 lantern interactions + 2 hurdle deposits + bar interaction | Yes |
+| `S00_offer` | Find out what the Dunnocks are afraid of. | WD-D1 end node | Yes |
+| `S01_ready` | Help the Dunnocks get ready for the night. | 3 `lay_lid` interactions + 2 hurdle deposits + bar interaction | Yes |
 | `S01b_bar` | (Optional) Cut a longer bar. | Woodcutting stem acquired + `fit_bar` | No |
-| `S02_wait` | Wait with the Hobbs. | Wait interaction (night window) → WD-D2 end (fires creak) | Yes |
+| `S02_wait` | Wait with the Dunnocks. | Wait interaction (night window) → WD-D2 end (fires creak) | Yes |
 | `S03_defend` | Keep the drift away from the house. | E1, E2, E3 dispersed | Yes |
 | `S04_down` | Go down to the cellar. | Dawn window + `lift_grate` complete | Yes |
 | `S05_drain` | Follow the drain. | Enter valve-chamber volume + E4 defeated | Yes |
 | `S06_fix` | Close the drain. | `clear_hinge` + WD-D4 choice + repair channels complete | Yes |
-| `S07_quiet` | Tell the Hobbs it's done. | WD-D5 end node → Completed; site → quieted | Yes |
+| `S07_quiet` | Tell the Dunnocks it's done. | WD-D5 end node → Completed; site → quieted | Yes |
 
 ### 4.8 Flags
 
 | Flag | Set by | Read by |
 |---|---|---|
 | `WD_BAR_LONG` | `S01b_bar` | E3 door pressure |
+| `WD_LIDS_HELD` (0–3) | `hold_lid` before each rise | Rhoda's dawn line (`WD-D3.00`) |
 | `WD_FLAP` / `WD_BRICKED` | WD-D4 (exactly one) | Door behaviour (§4.6); Rhoda and Col barks |
 | `WD_QUIETED` | `S07` | Drift-site state for farmhouse cellar |
 
@@ -799,15 +801,15 @@ Reads `LM_FEN_ENDING`: after MQ11 the site stays quieted under every ending (the
 | Reward | Type | Notes |
 |---|---|---|
 | Quieted drift site | World change | No more drift at the farm. |
-| Hobb hearth | Place | A friendly waypoint: the player can rest and is given a cooked meal once per visit (existing food item; item pass). |
-| Small payment | Currency | Rhoda, "for the lanterns." |
+| Dunnock hearth | Place | A friendly waypoint: the player can rest and is given a cooked meal once per visit (existing food item; item pass). |
+| Small payment | Currency | Rhoda, "for the listening." |
 | Skill XP | Action only | Melee; Smithing (rehang) or none; Woodcutting (optional bar). No lump quest XP. |
 
 ### 4.11 Failure, recovery, co-op, integration
 
 Death during the defence: respawn at the hearth; the current wave restarts; dispersed waves stay dispersed. Logout during the night: on return, the night restarts from S02 (the wait). Logout in the drain: restart at the cellar grate. Co-op: shared world drift; each player's wave progress is credited from shared kills; the door creak plays for every player in the kitchen whose own step is S02; per-player valve state (fallback: first player's fix is world-wide; later players' S06 completes on inspecting the closed valve and making the same choice in dialogue, which sets their flags only).
 
-**Needs:** night and dawn windows (§0.4); drift-site state with per-player quieting (bible §9.2); wave spawner bound to a yard volume; extinguishable/relightable lantern props; a door that "holds" (damage target that cannot break, drives barks); stooping crawl animation or simply a low-ceiling walk; Smithing station-less channel (portable anvil-stone) or route the rehang through a crew-repair channel only if a field Smithing interaction is out of scope.
+**Needs:** night and dawn windows (§0.4); drift-site state with per-player quieting (bible §9.2); wave spawner bound to three outlet points, chosen per wave and announced by a creak sound keyed to the outlet; a `hold_lid` channel at each outlet that reduces that wave's count; a door that "holds" (damage target that cannot break, drives barks); stooping crawl animation or simply a low-ceiling walk; Smithing station-less channel (portable anvil-stone) or route the rehang through a crew-repair channel only if a field Smithing interaction is out of scope.
 
 ### 4.12 Dialogue
 
@@ -819,7 +821,7 @@ WD-D1.01 RHODA: "If you're lost, the road's that way. If you're not, grab the ot
 WD-D1.02 RHODA: "Good. Over the drain. Nobody steps on that drain."   → WD-D1.03
 WD-D1.03 RHODA: "Door's going to go tonight. Cellar door. It creaks before they come up."
 WD-D1.04 COL: (from the kitchen step) "It's a warning bell. It's better than a bell. Bells you have to ring."
-WD-D1.05 RHODA: "Lanterns on the poles. Hurdles round the drain. Bar on the door. Then we sit."
+WD-D1.05 RHODA: "Lids on the drain, the trough and the window grate. Hurdles round the drain. Bar on the door. Then we sit, and we listen."
        {event: WD-D1 end → S00 complete}
 ```
 
@@ -831,7 +833,9 @@ WD-D2.02 RHODA: "Since they stopped the barges. You'd think it'd go the other wa
   > "Have you ever opened it when it creaks?"      → WD-D2.05
 WD-D2.03 RHODA: "Longer than me. Gran said it was a draught. Then she said it was a warning. Then she stopped saying."   → WD-D2.06
 WD-D2.05 RHODA: "Once." (beat) "Water on the stair. Cold. I shut it."     → WD-D2.06
-WD-D2.06 COL: (very quietly) "Shh."
+WD-D2.06 COL: "Long and low's the drain. Short and squeaky's the trough. Two little ones is the window grate." (beat) "I worked it out. Mam says I made it up."
+WD-D2.07 RHODA: "He didn't make it up."
+WD-D2.08 COL: (very quietly) "Shh."
        {event: whispering_door.creak → §4.6; S02 complete}
 ```
 
@@ -840,13 +844,15 @@ Defence barks:
 | Trigger | Speaker | Line |
 |---|---|---|
 | Wave 1 forms | RHODA | "Out of the drain. Same as ever." |
-| A lantern goes out | COL | "The far one's out! The far one!" |
+| Creak before a wave | COL | (his guess, from the stair) "Drain!" / "Trough!" / "Window!" |
+| Player holds the right lid | RHODA | "That's the one. Stand on it." |
 | Drift at the kitchen door | COL | "It's at the door. It's at the *door*." |
 | Drift at the door, `WD_BAR_LONG` | RHODA | "Bar's holding. Good bar." |
 | Wave 3 dispersed | RHODA | "That's it. That's always it, the third lot." |
 
 ```
 WD-D3 (first light, at the cellar door)
+WD-D3.00 [WD_LIDS_HELD ≥ 2] RHODA: "You were on the lids before Col was." (beat) "Don't tell him."
 WD-D3.01 RHODA: (unties the twine) "Quiet now. It's always quiet by morning."
 WD-D3.02 RHODA: "There's a grate in the corner. We put sacks on it. That's where the water comes."
   > "I'll go down."                                → WD-D3.03
@@ -860,9 +866,10 @@ Drain inspects:
 |---|---|
 | Tide line | "A damp line at knee height on every wall. The cellar has filled to here, and drained, many times." |
 | Grate | "Iron, old, square. Cold air comes up through it. It smells of river, not of cellar." |
-| Stencil | "TREATMENT BOUNDARY — KEEP CLEAR. An arrow points down the drain." |
-| Bandage tins | "Empty tins, rusted. Wartime issue. No names." |
-| Stretcher pole | "Half a stretcher pole, rotted. Somebody carried people along here once." |
+| Stencil (before MQ5) | "DRAIN — KEEP CLEAR. An arrow points down the drain." |
+| Stencil (after MQ5) | "TREATMENT BOUNDARY — KEEP CLEAR. An arrow points down the drain." |
+| Bandage tins (after MQ5 only) | "Empty tins, rusted. Wartime issue. No names." |
+| Stretcher pole (after MQ5 only) | "Half a stretcher pole, rotted. Somebody carried people along here once." |
 | Flap valve | "A hinged iron flap meant to let water out and not back in. Rusted wide open. Something is wedged in the hinge." |
 | Valve chamber channel | "A bigger stone channel runs past, toward the fields. When it rises, all of it can come up the drain." |
 
@@ -889,7 +896,7 @@ WD-D5.05 RHODA: "River keep you. Come back when you're passing. The door won't m
        {set WD_QUIETED; event: WD-D5 end → quest Completed}
 ```
 
-Ansel Corrie bark at the Lantern Post after completion: "Hobb farm's off my list. Never had a door taken off my list before."
+Ansel Corrie bark at the Lantern Post after completion: "Dunnock farm's off my list. Never had a door taken off my list before."
 
 ### 4.13 Mystery ledger
 
@@ -897,9 +904,9 @@ Ansel Corrie bark at the Lantern Post after completion: "Hobb farm's off my list
 |---|---|---|---|---|---|---|
 | **Why the door creaks** | Mostly air: water backing up a wartime drain pushes air up the cellar stair (resolved here). | A warning from the dead; a draught. | Tide line, open flap, the channel, the cold air through the grate. | The door is haunted. | — | WD (resolved). |
 | **The second creak** | **Left open [PROPOSAL — DIRECTOR].** It comes before the water rises. Compatible with resonance; never stated. | — | Timing only, for a player who notices. | It proves the dead knock first. | Everything. | None in v1. |
-| **Why drift got worse after the flushes stopped** | After MQ4 the fen is holding pressure (bible §2.3); fields' water rises more often. Consistent with Act II; not explained here. | — | Col's tally. | The Hobbs did something wrong. | The fen. | MQ5, MQ8, MQ11. |
+| **Why drift got worse after the flushes stopped** | After MQ4 the fen is holding pressure (bible §2.3); fields' water rises more often. Consistent with Act II; not explained here. | — | Col's tally. | The Dunnocks did something wrong. | The fen. | MQ5, MQ8, MQ11. |
 
-**Review log:** first draft had the drain lead the player into MQ5's culvert; cut to avoid spoiling MQ5 and to keep this quest local. The door originally broke in wave 3; changed to an unbreakable door that drives barks (no fail state). The rusted flap originally needed a forge visit at Crestbridge; replaced with an in-place repair so the fix stays physical and close.
+**Review log:** independent review pass: (1) the lantern-relight defence repeated NT's verb set, so it was replaced with the listening loop (the creak tells which outlet rises; hold the lid), and the lanterns are now ambience; (2) the treatment-boundary dressing gave away MQ5's reveal when WD was played between MQ4 and MQ5, so it is now conditional on MQ5 Completed; (3) E3 was restated as Milestone 1; (4) the household was renamed Hobb → **Dunnock** (name collision with Act I). Earlier: first draft had the drain lead the player into MQ5's culvert; cut to avoid spoiling MQ5 and to keep this quest local. The door originally broke in wave 3; changed to an unbreakable door that drives barks (no fail state). The rusted flap originally needed a forge visit at Crestbridge; replaced with an in-place repair so the fix stays physical and close.
 
 ---
 ## 5. CN — The Candle Rule
@@ -1072,7 +1079,7 @@ CN-D4.11 ANNELISE: "And pinch it when you go." (beat) "Light enough to carry. Th
 CN-D4.20 MAUD: "Water that carries." (beat) "Not this water. Not yet."
 CN-D4.21 ANNELISE: (takes the boat in both hands) "I'll keep it dry. The first night the water runs clean to the fen, we'll go down together."
        {set CN_FORM_CARRY} → CN-D4.30
-CN-D4.30 ANNELISE: "The bottom of the stone stays blank. For whoever brings me something I can carve."
+CN-D4.30 ANNELISE: "The bottom of the stone stays blank. Bring the stone-cutters something they can carve. I'll keep the water clear for it."
 CN-D4.31 BET: "That's not nothing." (beat) "That's not nothing."
        {event: S05 complete}
 ```
@@ -1101,7 +1108,7 @@ Post-quest barks:
 | **What happened to Ewan Holt** | **Deliberately unselected.** No v1 content knows. | Unreturned. | None. | The drift at the pool was Ewan (nothing identifies anyone). | Everything. | None in v1; any later answer needs an independent record (L-S18). |
 | **Why still water goes heavy** | Grief left to rot in still water gathers (bible §2.3). Moving water carries it. | "Bad water." | The pool unwinding; drift sinking. | The boards are magic. | The fen-scale version. | MQ8, MQ11. |
 
-**Review log:** first draft had Annelise keep a register of boats; cut (record custody). First draft let the boat drift to Widow's Step and be launched at once; revised so the boat stays in the garden's care, matching Act III's "Annelise brings the recovered offering boat." Board-setting reuses the rope-wear reading idea rather than Braid-gate ordering, to stay distinct from MQ11 Phase 2. The drift no longer "lead" the player to the boat; the boat is visible from the start.
+**Review log:** independent review pass: CN-D4.30 made Annelise custodian of the memorial stone; reworded so the stone-cutters carve and she only keeps the water. Earlier: first draft had Annelise keep a register of boats; cut (record custody). First draft let the boat drift to Widow's Step and be launched at once; revised so the boat stays in the garden's care, matching Act III's "Annelise brings the recovered offering boat." Board-setting reuses the rope-wear reading idea rather than Braid-gate ordering, to stay distinct from MQ11 Phase 2. The drift no longer "lead" the player to the boat; the boat is visible from the start.
 
 ---
 ## 6. VK — A Verse Kept Back
@@ -1117,7 +1124,7 @@ Greyharrow will not open its winter boom until the thaw song is sung, and this y
 | Field | Value |
 |---|---|
 | Type | Memory/lore. Lattice L-S17; dossier §XI "The Riverwarden Lullaby" [CANON hook]; Nan's tune (True Line). |
-| Unlock | MQ3 Completed. Steps S05 onward require **MQ9 Completed**. |
+| Unlock | MQ3 Completed. Steps S03 onward require **MQ9 Completed**. |
 | Length | 30–40 minutes in total, split across the act break. |
 | Combat | None. |
 | Skills | None. The pole-work and boom pins are plain interactions. |
@@ -1313,7 +1320,7 @@ Performance barks: TAMSIN (on the rope) "Now! Now now now!" · HOUSEHOLD (after)
 
 ### 7.1 In one paragraph
 
-The flood went down off the Lark low field and left a raft of driftwood, hurdles and reed across the furrows, and in the middle of it a sealed tin case the size of a bread loaf. Hester Lark will not plant until somebody tells her what it is. Her father Amos says it is a wartime fire-tin and will take the barn with it. Her son Jem wants to keep it. The player clears the raft (Woodcutting through the jammed logs, vermin in the standing pools), and the case sits in the sun on the bare furrow, ticking. The ticking is the sun warming the metal. Nobody believes that until the player has looked: hand-soldered seam, no fuse or vent, no smell of tar, a dry shift inside like seed, a silt line in the lid groove that says it lay a long time under water still sealed, and a scratched household mark that matches no gatepost, tool or hurdle on this side of the field. That is all the evidence can say: it arrived, and it frightened people. Then the Larks decide. Opened, it holds a twist of dry seed, a note whose ink has run but for a few words, and an inner oilcloth packet sealed with wax that nobody will break. Unopened, it goes to the keepers or into the hedge-bank for whoever comes. Either way, Hester plants.
+The flood went down off the Lark low field and left a raft of driftwood, hurdles and reed across the furrows, and in the middle of it a sealed tin case the size of a bread loaf. Hester Lark will not plant until somebody tells her what it is. Her father Amos says it is a wartime fire-tin and will take the barn with it. Her son Jem wants to keep it. The case sits on top of the raft in plain view of the gate, ticking in the sun from the first minute, while the player clears the raft around it (Woodcutting through one jammed log, hurdles to drag, vermin in the standing pools); then it sits alone on the bare furrow, still ticking. The ticking is the sun warming the metal. Nobody believes that until the player has looked: hand-soldered seam, no fuse or vent, no smell of tar, a dry shift inside like seed, a silt line in the lid groove that says it lay a long time under water still sealed, and a scratched household mark that matches no gatepost, tool or hurdle on this side of the field. That is all the evidence can say: it arrived, and it frightened people. Then the Larks decide. Opened, it holds a twist of dry seed, a note whose ink has run but for a few words, and an inner oilcloth packet sealed with wax that nobody will break. Unopened, it goes to the keepers or into the hedge-bank for whoever comes. Either way, Hester plants.
 
 **What the player should remember:** a family standing well back from a ticking tin in a bare field. **What they might want next:** to come back and see whether the old seed comes up.
 
@@ -1335,16 +1342,16 @@ The flood went down off the Lark low field and left a raft of driftwood, hurdles
 | Area | Purpose | Environmental storytelling |
 |---|---|---|
 | **A. Field gate** | Hook. | Seed sacks stacked unopened under a tarp. A plough left mid-furrow. The family on the gate, not in the field. |
-| **B. The raft** | Clearing. | A tangle across six furrows: two jammed driftwood logs, the Larks' own broken hurdles, a neighbour's hurdle with a different weave, reed mats, a cart wheel. The flood line on the hedge is chest high. |
+| **B. The raft** | Clearing. | A tangle across six furrows: one jammed driftwood log, the Larks' own broken hurdles, a neighbour's hurdle with a different weave, reed mats, a cart wheel. The flood line on the hedge is chest high. |
 | **C. Standing pools** | Danger. | Two pools left in the low corner, milky with silt. Movement under the surface. |
-| **D. The case** | Discovery. | A soldered tin case, dented, a scratched mark on the lid. Once the raft is cleared, it sits alone on bare earth. |
+| **D. The case** | Discovery. | A soldered tin case, dented, a scratched mark on the lid, lodged on top of the raft where the gate can see it. Once the raft is cleared, it sits alone on bare earth. |
 | **E. Hedge-bank niche** | Option. | An old stone-lined hollow in the bank where the Larks leave things for collection: a mended pail, a lost glove. |
 
 ### 7.4 Beats
 
 **Beat 0 — Nobody's planting (`S00_offer`).** *Objective: Find out why the field isn't being planted.* FC-D1 at the gate.
 
-**Beat 1 — Clear the raft (`S01_clear`).** *Objective: Clear the flood debris.* Two jammed logs (Woodcutting gather interaction at entry level, standard; a loaned hatchet from Amos if the player has none, returned at the end), then **Drag the hurdles** clear (3 carries to the hedge). Entering the low corner starts E1. The case is exposed when the last log is cut.
+**Beat 1 — Clear the raft (`S01_clear`).** *Objective: Clear the flood debris.* One jammed log (Woodcutting gather interaction at entry level, standard; a loaned hatchet from Amos if the player has none, returned at the end), then **Drag the hurdles** clear (3 carries to the hedge). Entering the low corner starts E1. The case is visible and ticking from the gate throughout; every hurdle dragged past it makes the Larks call out.
 
 **Beat 2 — It ticks (`S02_case`).** *Objective: Look at the case.* The family will not come closer than the gate. The case ticks softly and irregularly. Five inspects; any four complete the step (texts in §7.11): **seam**, **weight** (lift and set down: a dry shift), **smell**, **silt line**, **mark**. Optional: the player with Smithing gets an added line on the seam. Optional: inspect the **ticking** (*"It ticks faster when the sun comes out from the cloud. Warm metal."*).
 
@@ -1358,7 +1365,7 @@ The flood went down off the Lark low field and left a raft of driftwood, hurdles
 
 | Id | Enemies | Placement | Role | Telegraph | Solo target |
 |---|---|---|---|---|---|
-| **E1** | 2 × Silt Swimmer, 1 × River Leech | Standing pools in the low corner | Leashed to the pools | Ripple line (~0.8 s); leech rears (~1.2 s) | Required (the second log lies across a pool). Short. |
+| **E1** | 2 × Silt Swimmer, 1 × River Leech | Standing pools in the low corner | Leashed to the pools | Ripple line (~0.8 s); leech rears (~1.2 s) | Required (the log lies across a pool). Short. |
 | **E2** | 1 × Furrow Boar | Rooting in the reed mats | Wildlife, neutral until provoked; aggressive if the player drags a hurdle within 5 m | Paws and lowers head (~1.5 s) before charge | Optional. Hunting harvest afterwards (entry level). |
 
 ### 7.6 The strange moment: the tin (presentation spec)
@@ -1367,8 +1374,8 @@ FC's moment is unease, then something ordinary that feels like wonder.
 
 | Element | Spec |
 |---|---|
-| Unease (Beat 2) | From when the last log is cut, the case ticks: small, uneven metallic clicks, faster when sun is on it (tie to cloud cover or a simple timer). The Larks flinch at each one. No music. The ticking is real physics; its inspect says so. |
-| Opening (only if `FC_OPENED`) | Server event `flood_carried.open` on the **Prise the lid** interaction (4 s, at the gate). The lid comes off with a small breath of dry air. The family leans in. For a moment nobody speaks. Inside, everything is bone dry after its years in the water. Amos: "Dry." That is the only line until the player inspects. |
+| Unease (from minute one) | From the player's arrival at the gate, the case ticks on top of the raft: small, uneven metallic clicks, faster when sun is on it (tie to cloud cover or a simple timer). The Larks flinch at each one. No music. The ticking is real physics; its inspect says so. |
+| Opening (only if `FC_OPENED`) | Server event `flood_carried.open` on the **Prise the lid** interaction (4 s, at the gate). The lid comes off with a small breath of dry air. The family leans in. For a moment nobody speaks. Inside, everything is bone dry after its years in the water, and for one breath the air from it smells of **fresh bread**, warm, before it goes stale like any old tin. Nothing explains it and nothing comes of it. Amos: "Dry." That is the only line until the player inspects. |
 | UI / camera | None; player-controlled. |
 | What it means | Someone sealed this well. Nothing else. |
 
@@ -1377,7 +1384,7 @@ FC's moment is unease, then something ordinary that feels like wonder.
 | Step | Objective | Completes on | Required |
 |---|---|---|---|
 | `S00_offer` | Find out why the field isn't being planted. | FC-D1 end node | Yes |
-| `S01_clear` | Clear the flood debris. | 2 log-gather events + 3 hurdle deposits + E1 defeated | Yes |
+| `S01_clear` | Clear the flood debris. | 1 log-gather event + 3 hurdle deposits + E1 defeated | Yes |
 | `S02_case` | Look at the case. | 4 of 5 inspects on the case | Yes |
 | `S03_mark` | Look for the mark on the farm. | 3 comparison inspects | Yes |
 | `S04_choose` | Tell the Larks what you found. | Carry deposit at gate + FC-D3 choice node | Yes |
@@ -1486,7 +1493,7 @@ Dropped carry: the case returns to where it lay. Death: respawn at the field gat
 |---|---|---|---|---|---|---|
 | **The tin case** | A household's sealed seed store from the war years, lost in some flood and carried here in this one. Origin **deliberately unselected**. | Fire-tin; treasure. | Seam, weight, smell, silt line, unmatched mark. | It's a weapon; it came from a specific region (nothing shows that). | Who sealed it; where; the wax mark. | Optional later archive (removable; §7.9). |
 
-**Review log:** first draft let the mark match a vanished Lowmark household; cut, because that would invent a history and imply a river route. The callback is isolated to one prop and one flag that nothing reads. The ticking was originally supernatural; made ordinary so the evidence teaches looking, not fear.
+**Review log:** first draft let the mark match a vanished Lowmark household; cut, because that would invent a history and imply a river route. The callback is isolated to one prop and one flag that nothing reads. The ticking was originally supernatural; made ordinary so the evidence teaches looking, not fear. Independent review pass: the opening repeated the woodcut-a-jam pattern of BW and UR and its unease came late, so the case is now visible and ticking from the gate at once, the raft is one log plus hurdles, and the opened tin smells of fresh bread for one unexplained breath.
 
 ---
 
@@ -1499,7 +1506,7 @@ Each micro-event follows the discovery framework's optional-discovery card: a pl
 | Field | Spec |
 |---|---|
 | Trigger | After MQ1 Completed. Daytime, Whisperflow shallows below the landing. Enter a 20 m volume. |
-| What the player sees | Three children racing ankle-deep along the stretch between two of the grey marker posts, and nowhere else. A stick lies across the water at each end as a line. If `BW` is Completed, Tamsin is with them (down on a market cart), refereeing with her measuring cord. |
+| What the player sees | Three children racing ankle-deep along the stretch between two of the grey marker posts, and nowhere else. A stick lies across the water at each end as a line. If `BW` is Completed, Tamsin is with them (down on a market cart), refereeing with the measuring cord. |
 | Interaction | Watch (stand within 8 m for 15 s) → they stop and appeal to the player to settle a rule. Two options. |
 | Lines | KID A: "You have to touch the post before you turn. Everyone knows." · KID B: "You have to touch the post *and* say 'notch'. Because of the shoe." · KID A: "The shoe was ages ago." · KID B: "The shoe is *why*." · *(Tamsin variant: "I've measured it. The shoe went in there. That's out of bounds forever.")* |
 | Options | > "Touch the post and say 'notch'." → KID B: "Ha." · > "Just touch the post." → KID A: "Ha." Either: KID C: "Can we go again?" |
@@ -1571,8 +1578,8 @@ Each micro-event follows the discovery framework's optional-discovery card: a pl
 
 | Field | Spec |
 |---|---|
-| Trigger | A Heartlands farm well (the Hobb farm yard pump-well, independent of WD; available after MQ1). |
-| What the player sees | A bucket on a rope, a cup chained to the windlass. A child (Col Hobb) watching to see if the player will try it. |
+| Trigger | A Heartlands farm well (the Dunnock farm yard pump-well, independent of WD; available after MQ1). |
+| What the player sees | A bucket on a rope, a cup chained to the windlass. A child (Col Dunnock) watching to see if the player will try it. |
 | Interaction | **Drink** (cup), then optional **Inspect** the well. |
 | Lines | *(drink)* — inspect text: *"Faintly sweet. Not unpleasant."* · COL: "It's always sweet. Mam says it's the clay. Gran said the old orchard's roots go down there. I think somebody dropped honey in it once and it never came out." · *(inspect well)* *"Old stone, good water. The rope's newer than the windlass."* · RHODA (if near): "It's the clay." |
 | Persistence | `ME07_DRUNK`. Col's later bark: "Sweet today?" |
@@ -1586,7 +1593,7 @@ Each micro-event follows the discovery framework's optional-discovery card: a pl
 | Trigger | A still pool in a Whisperflow acoustic dead spot (dossier §IV.1), upstream of the True Line footing; after MQ1. Enter the pool-edge volume. |
 | What the player sees | A small, round, perfectly still pool among reeds. The river is audibly quieter here. |
 | Interaction | Look. If the player stands still at the edge for 5 s and then moves, their reflection follows a breath late (client-side, local player only). Nothing else happens. Leaving ends it. |
-| Lines | None. No inspect text describes the lag. Pool inspect: *"Still water. Very quiet here."* If `TL_TOVIN_TRUSTED`, Tovin Pell sits on a stone nearby on some visits, sketching. TOVIN (only if spoken to): "It does that. I come here to draw it doing nothing." He does not name it, ask about it or explain it (canon). |
+| Lines | None. No inspect text describes the lag. Pool inspect: *"Still water. Very quiet here."* If `TL_TOVIN_TRUSTED`, Tovin Pell sits on a stone nearby on some visits, sketching. TOVIN (only if spoken to): "I come here to draw the bend." He does not name it, ask about it or explain it (canon). |
 | Persistence | None. |
 | Repeatable | Always. |
 | Cannot prove | Anything. It is a quiet echo of the True Line's lag and MQ6's mill pond; nothing builds on it. |
@@ -1635,9 +1642,35 @@ Each micro-event follows the discovery framework's optional-discovery card: a pl
 
 | Flag | Owner | Reader |
 |---|---|---|
-| `CN_COMPLETE`, `CN_FORM_WATCH` / `CN_FORM_CARRY` | CN | Act III MQ11 Annelise Tend argument and launched-boat prop (suggested lines in §5.9). |
-| `VK_COMPLETE`, `VK_PERF_BOTH` / `_COUNT` / `_HUM` | VK | Act III MQ11 after-hold hum; MQ12 Nan verse (§6.9). |
-| `UC_COMPLETE` | UC | Optional Act II MQ9 flow-table inspect (§2.11). |
+| `CN_COMPLETE`, `CN_FORM_WATCH` / `CN_FORM_CARRY` | CN | Act III MQ11 Annelise Tend argument and launched-boat prop (suggested lines in §5.9). `CN_FORM_*` is a request: nothing breaks if unread. |
+| `VK_COMPLETE`, `VK_PERF_BOTH` / `VK_PERF_COUNT` / `VK_PERF_HUM` | VK | Act III MQ11 after-hold hum; **MQ12 Nan verse must be keyed to the performance flag**, never to `VK_COMPLETE` alone: `VK_PERF_BOTH` = she sings the Sayer words over the hum; `VK_PERF_COUNT` = she hums it as a count, tapping four, held, four; `VK_PERF_HUM` = hum only, no words (§6.9). |
+| `UC_COMPLETE` | UC | Optional Act II MQ9 flow-table inspect (§2.11; request). |
+| `WD_QUIETED`, `WD_FLAP` / `WD_BRICKED` | WD | Drift-site state for the farmhouse cellar (stays quieted in every fen ending); Dunnock barks. |
+| *(read)* MQ5 Completed | Act II | WD drain dressing (§4.3): the treatment-boundary stencils and props appear only after MQ5. |
+| *(read)* `LM_SEDGE_TRUST`, MQ9 Completed | Act II | UC-D5; VK `S03` onward. |
 | `SB_COMPLETE`, `SB_TO_FAMILIES` | SB | VK (this file). |
 | `FK_NAN_TUNE` | FK (Work and Skills) | VK-D5 (read here). |
 | `FC_SEAL_NOTED` | FC | No v1 reader (removable callback). |
+
+## 11. Independent review pass
+
+Applied the independent side-content review and Director rulings 3 and 6. Entries are in each package's review log.
+
+| Finding | Action |
+|---|---|
+| UC camera honesty (major) | **Applied.** Ruling 6: the channel is roofed and screened. The server rule is "no player inside the observation volume watching the channel". The binding client rule is that the channel renders still whenever it is directly in a camera view. The climb is seen only in the basin reflection from the seat (with a soft camera limit). The volume edge is marked with flagged stone, and the brow does not fade. |
+| WD repeats NT's lantern loop (major) | **Applied.** The defence is now a listening loop: the creak tells which outlet rises, and the player holds that lid. The unexplained second creak matches no outlet. |
+| WD spoils MQ5 between MQ4 and MQ5 (major) | **Applied.** WD keeps its MQ4 unlock. The drain shows its treatment-boundary dressing only after MQ5 Completed. |
+| Name collision (major) | **Applied.** Ruling 3: the Hobb household is renamed **Dunnock** (Rhoda Dunnock, Col Dunnock), including in ME07. It has no hits in any `04_CONTENT_PRODUCTION` file. |
+| VK verse in MQ12 (major, Act III side) | The MQ12 keying is stated in §10. The Act III edit is owned by the main-act designer. |
+| CN-D4.30 record custody (major) | **Applied.** The stone-cutters carve; Annelise keeps the water. |
+| ME08 Tovin seeking the anomaly (minor) | **Applied** the line: "I come here to draw the bend." The location stays at Whisperflow, because Tovin appears there in MQ1 (`TL_TOVIN_TRUSTED`). |
+| UC E1 / WD E3 tier labels (minor) | **Applied.** Both are now Milestone 1. |
+| VK gate stated three ways (minor) | **Applied.** Every mention now reads "S03 onward". |
+| Tamsin pronoun (minor) | **Applied.** ME01 is now pronoun-neutral, matching BW (note in the Work and Skills BW.11 log). The bible's "her" is an open item for the bible owner. |
+| FC repetition and weak strange moment (minor) | **Applied.** The case is visible and ticking from minute one, the raft is one log plus hurdles, and the opened tin gives a fresh-bread breath. |
+| TB goblins → Mud Pipers (minor) | **Rejected.** Mud Pipers are first seen in MQ7, and TB unlocks after MQ5, so the swap would take MQ7's family introduction. |
+| Sedge cameo count (minor, bible D-7) | **No change here.** UC-D1.04 keeps Sedge's plain self-introduction. The bible owner should update D-7/§5.3 to "first met in MQ5 or UC". |
+| Flags with no reader (minor) | Unread promises are marked "(request)" in §10. |
+
+No flag renames in this file. Renamed: Hobb farm/household → Dunnock (Rhoda Hobb → Rhoda Dunnock, Col Hobb → Col Dunnock).

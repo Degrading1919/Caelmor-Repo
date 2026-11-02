@@ -272,6 +272,7 @@ This is the quest's centerpiece. It must feel strange and quiet, never like a sp
 | `TL_TOVIN_TRUSTED` | `D10` Tovin exchange | Movement 6 (Tovin's pattern), later Tovin barks |
 | `TL_EVIDENCE_KEEPERS` / `TL_EVIDENCE_RIVERFOLK` / `TL_EVIDENCE_PLAYER` | `D9` (exactly one) | Movement 2 opening variant; Hollis/Maelin later barks |
 | `TL_STONE_PUBLIC` / `TL_STONE_KEPT` | `D9` (exactly one) | Landing prop state; movement 9 (Riverwarden works) |
+| `LM_TL_EVIDENCE` (region flag: keepers / riverfolk / player) | Quest completion, copied from whichever `TL_EVIDENCE_*` is set | Main quest 2 lead-in; main quest 10 evidence chip (see the v1 production bible §9) |
 
 ### 9.3 Choices and consequences
 

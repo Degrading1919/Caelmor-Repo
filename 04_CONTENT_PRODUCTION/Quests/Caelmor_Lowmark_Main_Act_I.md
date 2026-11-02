@@ -173,7 +173,8 @@ The lead-in depends on `LM_TL_EVIDENCE`. All three variants end with the player 
 
 Corvin's case: 120 went out of the hill gate and only 40 reached Wynn's cart in the hill road yard, so something is eating sacks in the passage between them. The goblin hole proves it to him.
 **Optional lead (`SM_LEAD_WYNN`):** Wynn Tarrow is in the hill road yard waiting for her next load (`SM-L-WYNN`). She counted her 40 twice, and the yard porter tried to hand her 42. "Gave two back. Somebody's counting worse than me." The lead is never required. It shows Wynn's honesty in play rather than asserting it, adds her to the escort option (`SM-D7.11`), changes `SM-D8.04`, and seeds MQ12.
-**Verbs:** count, investigate.
+**Optional drill (`S01c_drill`, `SM_DRILL_DONE`):** at the waiting wall, one of Captain Hesketh's keepers (role-based **Keeper drill-sergeant**) is running two recruits through the bridge drill and offers the player a turn (`SM-L-DRILL`). The sergeant swings a padded practice staff with a long, readable telegraph: staff raised high and drawn back, boots set (~1.4 s), then a heavy overhead blow. Three swings. The player can meet each one by **guarding** (if they carry a guard-capable off-hand or weapon) or by **stepping off the line** (always available). Either answer counts; a swing taken full on knocks the player back a step and the sergeant says so, no damage. The lesson is the one the Sack-King's flail and MQ4's pole sweeps will test: *read the wind-up, brace or move, then hit back*. At the end the sergeant points the player to a basic guard: **Brigid Corliss's forge under the span** (*Honest Steel*) or **the keepers' quartermaster** at the bridge house. No item is granted and no stats are named here; the item pass owns the guard's definition (Equipment Milestone 1). Skipping the drill costs nothing.
+**Verbs:** count, investigate; optional drill.
 
 ### Beat 2 — The Hill Passage (`S02_descend`)
 **Objective:** *Go down the hill passage.*
@@ -210,7 +211,7 @@ A trapper on a ledge holds the harrow rope. When the player walks under, the rop
 ### Beat 6 — The Sack-King (`S06_sack_king`)
 **Objective:** *Deal with the Sack-King.*
 The throne room (area J). The **Sack-King** (Field Goblin elite, **SM-E4**) wears a grain sack as a cloak and a bushel hoop as a crown and fights with a threshing flail. Two scrappers attend him. Full kit in §A7.
-After the fight the room is quiet, and the player can **count the heaps** (`S06b_count_heaps`, required; three heap inspects). Total: **twelve sacks**, all with Crestbridge tally marks. The inspect text does the arithmetic the player is already doing: *"Twelve. Corvin is missing eighty."* This is the moment the wrong reading ("goblins took it") fails, and the player has done the counting themselves.
+After the fight the room is quiet, and the player can **count the heaps** (`S06b_count_heaps`, required; three heap inspects). Total: **twelve sacks**, all with Crestbridge tally marks. The inspect text does the arithmetic the player is already doing: *"Twelve. That leaves sixty-eight nobody can find."* This is the moment the wrong reading ("goblins took it") fails, and the player has done the counting themselves.
 **Verbs:** fight, count.
 
 ### Beat 7 — The Chute (`S07_chute`) — *the discovery*
@@ -302,6 +303,7 @@ A quiet, unsettling moment in the middle of a dungeon. It must not look like a m
 |---|---|---|---|---|
 | `S00_arrive` | Find the grain factor at the Crestbridge granaries. | Enter granary-yard volume (area A) with TL Completed | Yes | Quest → Active. Lead-in variant by `LM_TL_EVIDENCE`. |
 | `S01_count` | Check the granary's count. | `SM-D1` end node + 3 inspects (tally racks, swept bays, hill gate) | Yes | `SM-L-WYNN` available S01–S08 |
+| `S01c_drill` | (Optional) Take a turn at the keepers' drill. | `SM-L-DRILL` end node after 3 practice swings met (guard or step-aside) | No | Sets `SM_DRILL_DONE`. Available S01–S10 and after completion. Practice staff deals no damage. |
 | `S02_descend` | Go down the hill passage. | SM-E1 defeated + inspect goblin hole | Yes | Corvin unlocks HILL GATE at `SM-D1` end |
 | `S03_sorting_hall` | Get through the Sorting Hall. | Enter warren volume (area G) | Yes | Agility shortcut or twine door; SM-E2 need not be cleared to pass, but it is in the way |
 | `S04_warren` | Find where the goblins took the grain. | Enter Harrow Run volume (area I) | Yes | Root route: Woodcutting gather on `driftroot_choke` node (optional) |
@@ -320,6 +322,7 @@ A quiet, unsettling moment in the middle of a dungeon. It must not look like a m
 |---|---|---|---|
 | `SM_LEAD_WYNN` | `SM-L-WYNN` | `SM-D8` variant | MQ12 Wynn-paid scene (suggested line in dialogue file) |
 | `SM_HEAPS_COUNTED` | S06b | `SM-D6` subtraction line | — |
+| `SM_DRILL_DONE` | `SM-L-DRILL` | Sergeant's repeat line | — (no later reads; points to the HS forge and the quartermaster only) |
 | `SM_LEAD_STENCIL` | Stencil inspect (area K) | `SM-D6.30` option | MQ4 Cut-mouth inspect variant (`NF`); MQ9 flow-table line (optional) |
 | `SM_LEAD_CUT_NAMED` | `SM-D6.31` | `NF-D1` Maelin option (`NF-D1.30`) | MQ10 (Aldric's archive line) |
 | `SM_STONE_SEEN` | Stone inspect | `SM-D6` option | MQ4 counterweight-stone inspect; MQ8/MQ9 stone-reading lines |
@@ -403,6 +406,7 @@ The far bank is hungry and the Board's order says "delivered". Corvin has twelve
 | Corvin's burned-ledger regret was used here. | Removed. The bible gives him one aloud regret, and it belongs to MQ10. Here he shows only the bare shelf (environmental) and his duplicate racks. |
 | Aldric risked knowing the Cut was open. | He knows only the wartime name from old compacts ("closed, not filled"), within the canon "ledgers older than the war" and bible §2.4. |
 | Quest-item count. | One item (`SM_requisition`). The twelve sacks are carry-free (porters haul them). |
+| Independent review pass. | Grain counts reconciled: the slip's "eighty" is the order; twelve were stolen by goblins; the heap line and the MQ4 bill now both say **sixty-eight**. Added the optional keepers' drill (`S01c_drill`) to teach bracing against a telegraphed blow and point to a basic guard (Equipment Milestone 1), with no item stats. |
 
 ---
 ---
@@ -693,6 +697,7 @@ HW's choices are **how** rather than **what**: the order of sites (changes who t
 | Orrin's grief risked naming a dead person. | Nobody names whom he mourns. The scrap at the bank is unnamed. |
 | Mabry's crossed notches risked being supernatural evidence. | They are her record of what she saw: testimony and an object. |
 | Ditch site risked being quieted by clearing hounds. | It stays active. Hounds were the ordinary cause; the backflow is the surviving anomaly. |
+| Independent review pass: "the fourteenth" read as an accidental Fourteenth Lot clue. | Made deliberate and non-supernatural: Ansel adds *"Fourteenth. Watchers don't like that number."* (`HW-D10.30`). Watcher folk-dislike only; nothing explains it until MQ11. The culvert den is cleared here (`HW_DEN_CLEARED`, optional elite); MQ5 does not refight it. |
 
 ---
 ---
@@ -747,7 +752,7 @@ On the next fifth night the player sits on Bramblelock Weir, where everything of
 | Area | Storytelling |
 |---|---|
 | **W1. The weir** | An overgrown wartime sluice and weir near the orchard ground. Its top is a broken stone walkway. A **weir-pool marker** with a notch stands on the near bank (readable by the TL skill). |
-| **W2. The convoy stones** | Squared stones set along the weir wall, each cut with a lot number. Count along them and **one number is missing**: the stone between thirteen and fifteen is blank and newer, set in plain mortar (optional, `NF_LEAD_CONVOY`). |
+| **W2. The convoy stones** | Squared stones set along the weir wall, each cut with a lot number. Count along them and **one number is missing**: the stone between thirteen and fifteen is blank and newer, set in plain mortar. **Required inspect** in `S00_weir` (sets `NF_LEAD_CONVOY`); Maelin says, as the player passes it, *"Fourteen's missing. Always has been."* This is the first of three main-quest-only deliveries of the Fourteenth Lot (MQ4 stone, MQ9 flow-table wreck scar, MQ11 Lessa). |
 | **W3. The watch bench** | A weir-keeper's stone bench with a lantern hook: the "keep watch" interaction. |
 
 ### C5.2 The towpath and the Relief Cut [P10]
@@ -766,7 +771,7 @@ On the next fifth night the player sits on Bramblelock Weir, where everything of
 | **L3. The winding floor** | The sluice-house's upper floor: a great timber-and-iron winding gear, the crank on a platform over the chamber. The gear is **greased fresh**, black and shining. The counterweight is a carved stone (§C8; `SM_STONE_SEEN` variant). |
 | **L4. The post store** | A side room off the winding floor: a stack of **new yellow marker posts**, notches already cut, every one a hand high (D-2). A chalk board on the wall lists crossings with ticks (D-2). |
 | **L5. The tally room** | A clerk's corner with a strongbox: the **bill of lading** under Board seal (`NF_bill_of_lading`). Flush nights scratched into the beam above it. |
-| **L6. The slack gate** | A second, smaller gate on the chamber's flank, silted shut, with fresh spade marks (an Act II seed; inspect only). |
+| **L6. The slack gate** | A second, smaller gate in the chamber's flank, silted shut. The silt **bulges outward and is wet on this side**, as if pushed from behind. Someone dug at it and gave up. It is not a crew route. It is the **first visible sign of the fen backwater** (Act II §A2.2): the pressure the Lock used to draw off is already leaning on the old works. Inspect only. |
 | **L7. The roof walk** | A parapet over the winding floor, reached by stair after the Lock is closed. At dawn it gives a long view toward Stillwater (§C8.3). |
 
 **MAP VERIFICATION REQUIRED:** the narrative needs only these: the barge passes Bramblelock on the pulse; the Cut's mouth is reachable along the towpath from the weir; the Hollow Lock stands up the Cut toward the fen. How the Cut's route bypasses Crestbridge's tolls (bible §1) is for the zone package to make physically consistent.
@@ -776,7 +781,7 @@ On the next fifth night the player sits on Bramblelock Weir, where everything of
 ### Beat 0 — The Fifth Night (`S00_weir`)
 **Objective:** *Keep watch at Bramblelock Weir.*
 The player reaches the weir at dusk (any time; the watch interaction handles the hour). **Maelin** is sitting on the weir wall (`NF-D1`), because Ansel sent word to the crews and she wanted to see what kind of water lifts a post's lie. With `LM_TL_EVIDENCE = riverfolk` she has news: her crews found a second wrong yellow post at Greyharrow Reach. She will watch, and she will not take a boat out on this stretch at night (canon). Ansel is not here; he is walking the fen edge, "where I'm paid to be".
-Optional before the watch: read the **weir-pool marker** (TL skill: *"Water's under the notch. The crossing reads open."*) and count the **convoy stones** (`NF_LEAD_CONVOY`).
+Required before the watch: count the **convoy stones** (W2; `NF_LEAD_CONVOY`; Maelin's pass-by bark `NF-B0.1`). Optional: read the **weir-pool marker** (TL skill: *"Water's under the notch. The crossing reads open."*).
 
 ### Beat 1 — Watch (`S01_watch`)
 **Objective:** *Keep watch at Bramblelock Weir.*
@@ -824,7 +829,7 @@ After the fight the player may explore the floor before closing it:
 - **The post store** (inspect, required, D-2): the yellow posts with pre-cut notches and the chalk crossings board.
 - **The bill of lading** (pickup, required, `NF_bill_of_lading`, quest item 2).
 - **The counterweight stone** (optional; §C8.2).
-- **The slack gate** (optional; Act II seed).
+- **The slack gate** (optional; the first visible sign of the backwater, Act II §A2.2).
 
 ### Beat 8 — Close the Lock (`S08_crank`)
 **Objective:** *Wind the Lock shut.*
@@ -918,7 +923,7 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 
 | Step | Objective | Completes on | Req. | Notes |
 |---|---|---|---|---|
-| `S00_weir` | Keep watch at Bramblelock Weir. | Enter weir volume + `NF-D1` end | Yes | Quest Active from `HW-D10` end |
+| `S00_weir` | Keep watch at Bramblelock Weir. | Enter weir volume + `NF-D1` end + convoy-stone inspect | Yes | Quest Active from `HW-D10` end. Convoy stones are required (Fourteenth Lot delivery 1 of 3) |
 | `S01_watch` | (same) | Watch interaction × 1 (`HW_LEAD_TALLY`) or × 2 | Yes | Cancellable; each step advances the client-side hour |
 | `S02_flush` | — (UI suppressed) | Flush presentation complete + `NF-D2` end | Yes | Server event `night_flush.surge`. Barge path starts |
 | `S03_pursuit` | Follow the barge. | Enter Cut-mouth volume (T3) | Yes | Trail-clue volumes re-pin objective. The barge waits at the sill until the player arrives |
@@ -935,7 +940,7 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 
 | Flag | Set by | Read by (here) | Read by (later) |
 |---|---|---|---|
-| `NF_LEAD_CONVOY` | Convoy-stone inspect | `NF-D9.20` option | **MQ11** (Fourteenth Lot evidence line) |
+| `NF_LEAD_CONVOY` | Convoy-stone inspect (required in `S00`; always set) | `NF-D9.20` option | **MQ11** (Fourteenth Lot line; kept as a flag for variant text, never as a gate) |
 | `NF_HOODS_PULLED` | Yard interaction | Barks | — |
 | `NF_POSTS_SEEN` | Post-store inspect (required) | `NF-D9` | **MQ10** evidence chip (posts impounded by keepers at dawn in both outcomes) |
 | `NF_LEAD_LAMB` | `NF-D7.20` | — | ***Under the Lamb*** opening line |
@@ -945,8 +950,8 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 
 | Option | Immediate result | Cost | Later |
 |---|---|---|---|
-| **Smash** (`LM_LOCK_STATE = smashed`): *break the pawl and the drive teeth* | The Lock can never flush again without a new gear. The noise carries down the Cut. | The **mechanism evidence is gone**. The keepers at dawn see a broken machine, not a working one. Maelin: "Good. Now it's only a story." | **MQ6:** Sallow's crew needs another route (the mill race; the slack gate is an available seed). **MQ10:** the gear chip is the player's word and the keepers' record of "a broken gear, greased" (weaker). The posts and the bill stand regardless. |
-| **Chain** (`= chained`): *wrap the crank and drum with the crew's chain and drive the wedge* | The gear stays intact as evidence. At dawn the keepers inspect a **working, greased mechanism** and log it. | The crew later cuts the chain and strips the fresh parts (between MQ4 and MQ6). The Lock is watched by keepers after, so the crew moves to the mill race anyway. Ansel: "Chains get cut." | **MQ6:** the crew-route line mentions the cut chain. **MQ10:** strong chip: a keeper-signed inspection of the working gear. |
+| **Smash** (`LM_LOCK_STATE = smashed`): *break the pawl and the drive teeth* | The Lock can never flush again without a new gear. The noise carries down the Cut. | The **mechanism evidence is gone**. The keepers at dawn see a broken machine, not a working one. Maelin: "Good. Now it's only a story." | **MQ6:** Sallow's crew falls back on its only other route (the Drowsebank mill race). **MQ10:** the gear chip is the player's word and the keepers' record of "a broken gear, greased" (weaker). The posts and the bill stand regardless. |
+| **Chain** (`= chained`): *wrap the crank and drum with the crew's chain and drive the wedge* | The gear stays intact as evidence. At dawn the keepers inspect a **working, greased mechanism** and log it. | The keepers sit on the chained Lock day and night after dawn, so the crew moves wholly to the mill race. Ansel: "Chains get cut." (a worry; nobody cuts this one). | **MQ6:** the crew-route line mentions the keepers on the chain. **MQ10:** strong chip: a keeper-signed inspection of the working gear. |
 
 **Both** outcomes: flushes stop through the Lock now; Bramblelock pool is quieted; posts and bill are evidence; Stillwater worsens at dawn. Neither is wrong.
 
@@ -987,7 +992,7 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 | **Yield presentation** for human enemies | Gameplay / animation | Defeated humans kneel and are tied (prop swap). |
 | Creatures | Schema / Gameplay | Smuggler pole-man, cutter, crew boss (Rusk); lantern-drift. |
 | Quest item `NF_bill_of_lading` | Schema | Non-droppable document with inspect text. |
-| **Act II seed** | Act II author | The slack gate (L6) is available as Sallow's later pulse route for MQ6, which needs a pulse source after either `LM_LOCK_STATE`. |
+| **Act II seed** | Act II author | The slack gate (L6) is the first visible sign of the backwater (Act II §A2.2). It is not a crew route: after MQ4 the crew's pulses go only through the Drowsebank mill race (MQ6). |
 
 ## C13. Mystery ledger entries
 
@@ -995,8 +1000,8 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 |---|---|---|---|---|---|---|
 | **Who moved the Whisperflow post** (D-2) | Sallow's Lock crew, on Marrick's scheme, to hide a scheduled flush. | Unknown. | Pre-notched posts, the chalk crossings board, the flush timing. | Wynn; the keepers; the river. | Who stood at Whisperflow that night. | MQ10 (Rhosyn, Sallow). |
 | **Who Sallow answers to** | Edda Marrick `[ANTAGONIST]`. | — | A Board seal on the bill; "a name on a bill" (Rusk). | The whole Board; Hesketh; Aldric. | The name. | MQ10. |
-| **Why the fen got worse** | The last flush dragged heavy water out of the deep pools; with the Lock shut, the pressure has nowhere to go (bible §2.3). | The Watchers' bad luck; the dead are angry. | Fog wall at dawn; Ansel's book. | Closing the Lock was a mistake; the Lock was holding something in. | The Braids; the Fourteenth Lot. | MQ8, MQ9, MQ11. |
-| **The missing convoy stone** | The Fourteenth Lot (bible §2.1). | Nothing. | A blank stone between thirteen and fifteen. | A broken stone replaced. | Everything. | MQ11. |
+| **Why the fen got worse** | The last flush dragged heavy water out of the deep pools; with the Lock shut, the pressure has nowhere to go but the old works, and it starts leaking out as the backwater (bible §2.3; Act II §A2.2). | The Watchers' bad luck; the dead are angry. | Fog wall at dawn; Ansel's book; the slack gate's wet, bulging silt. | Closing the Lock was a mistake; the Lock was holding something in. | The Braids; the Fourteenth Lot. | MQ8, MQ9, MQ11. |
+| **The missing convoy stone** | The Fourteenth Lot (bible §2.1). | Nothing. | A blank stone between thirteen and fifteen (required inspect); Maelin: "Fourteen's missing. Always has been." | A broken stone replaced. | That a convoy sank. | MQ9 (flow-table wreck scar), MQ11 (Lessa, before the boss). |
 
 ## C14. Open decisions
 
@@ -1013,11 +1018,12 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 | Sallow was fought on the winding floor. | Removed. He is MQ10's miniboss; here he is seen across an unbridgeable chamber, and his escape is scripted. |
 | Rusk naming Sallow risked being "combat reveals evidence". | Rusk yields, then answers questions. It is testimony, and the bill and posts stand without it. |
 | The flush risked reading as a spell. | No glow, no music. It is the water, a thump and a barge. The weir going silent carries it. |
-| The smash/chain choice originally made "smash" the clearly better option. | Chain now gives MQ10's stronger mechanism chip; smash ends Lock flushes beyond doubt. Both converge on MQ6 via the slack gate / mill race. |
+| The smash/chain choice originally made "smash" the clearly better option. | Chain now gives MQ10's stronger mechanism chip; smash ends Lock flushes beyond doubt. Both converge on MQ6 via the mill race. |
 | Bramblelock pool and Stillwater both changed with no explanation. | Ansel reports both, as observations. Nothing explains them. |
 | Maelin might have joined the pursuit on the water. | Canon: she refuses night passage on specific stretches. She stays and arrives at dawn. |
 | Act item budget. | `NF_bill_of_lading` is item 2 of 2. The posts are carry-state flavour; the evidence is a flag and an impound. |
 | Agility triggers not yet built. | Each has a walkable fallback (footbridge, dike top). |
+| Independent review pass. | The slack gate is no longer a crew route: its silt bulges wet from behind, the first visible sign of the backwater; after MQ4 the crew uses only the mill race. The chained Lock is watched by keepers and its chain is never cut. The convoy stones are a required inspect with Maelin's line, so every player meets the Fourteenth Lot's blank stone. The bill reads sixty-eight measures. |
 
 ---
 

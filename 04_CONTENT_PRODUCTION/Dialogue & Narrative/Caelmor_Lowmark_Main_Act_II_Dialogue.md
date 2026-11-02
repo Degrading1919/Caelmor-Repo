@@ -224,9 +224,9 @@ GL-D5.23 ANNELISE: "Then let's do it before anyone has time to be upset."
       {set LM_FIELD_FIX = circle} {event: S06 complete → S07_fix_circle}
 
 GL-D5.30 JORIC: (sets the net down, which he has not done before) "Through the plot."
-GL-D5.31 [UR_GATE_RUN] JORIC: "You found that old gate in it. The water'd go the same road the gate did."
-GL-D5.31 [UR_LINE_STAKED] JORIC: "We staked a line across it already. I know where it'd run."
-GL-D5.31 [UR_LEFT] JORIC: "I said leave it. I meant it. I'm deciding again now, that's all."
+GL-D5.31 [UR_GATE_RUN] JORIC: "It's running already. Let it run further."
+GL-D5.31 [UR_LINE_STAKED] JORIC: "We staked my line. The cut goes inside it, or along the headland, and the headland's Tansy's rows now."
+GL-D5.31 [UR_LEFT] JORIC: "You cleared it and asked for nothing. Ask now, if you need to."
 GL-D5.32 JORIC: (a long silence) "...My ground. I'll say." (beat) "Yes. But I mark the line. Not you."
   > "Your line, Joric."                           → GL-D5.33
   > "Let me think about the others."              → GL-D5 options
@@ -259,12 +259,15 @@ GL-D5.53 FOREMAN: "Ribboned stools only for the stakes. Same as anywhere."
 | GL-D6.20 | Plot: Joric lays the net cord | JORIC | "Here. Not straight. It doesn't need to be straight." |
 | GL-D6.21 | Plot: player near the far corner | JORIC | "Not there." |
 | GL-D6.22 | Plot: the charred post | JORIC | "That one can come out." (beat) "Leave the next one." |
-| GL-D6.23 | Plot: Ash Hounds break cover | FOREMAN | "Den! Mind the ash, it's in your throat before you know it!" |
+| GL-D6.23 | Plot: goblins at the spade pile (UR Completed) | FOREMAN | "Goblins! Joric said they'd be back. Mind the rakes!" |
+| GL-D6.23 | Plot: Ash Hounds break cover (UR not Completed, not `HW_DEN_CLEARED`; reformed den) | FOREMAN | "Den! They've come down from the trench. Mind the ash, it's in your throat before you know it!" |
+| GL-D6.23 | Plot: Reed Stalker at the drain mouth (UR not Completed, `HW_DEN_CLEARED`) | FOREMAN | "Reeds! Something in the drain reeds — back off the wet!" |
 | GL-D6.24 | Plot: the ditch breaks into the culvert | JORIC | (watching the water run across his ground) "..." |
 | GL-D6.30 | Dike: stakes cut | FOREMAN | "Good straight stems. You've done this." |
 | GL-D6.31 | Dike: night falls between sections | FOREMAN | "Light's gone. Finish in the morning. Somebody watch the tools." |
 | GL-D6.32 | Dike: goblins at the tool pile | HOUSEHOLD | "They've got the spades! Who steals a spade?" |
 | GL-D6.33 | Dike: last section tamped | FOREMAN | "That'll stand. Ugly, but it'll stand." |
+| GL-B8.1 | Dike: after GL, a Provision Board seed cart on the green `[ANTAGONIST]` | HOUSEHOLD | "Marrick seed again. At the relief price, for the households. Her house fed us in the war, she says." (beat) "Says it a lot." |
 
 ### GL-D7 — The test dusk (`S08_test`, barks)
 
@@ -372,11 +375,12 @@ Plays as the crew enter by the tail door, **before** engagement is possible.
 
 ```
 TF-D3.01 CREW A: "Hood that lantern. Miller's gone, but the runner lives on the bank."
-TF-D3.02 [LM_LOCK_STATE = smashed] CREW B: "Gear's scrap up at the Lock. So it's the mill or nothing, says Sallow."
-TF-D3.02 [LM_LOCK_STATE = chained] CREW B: "Keepers sit on that chain day and night. Mill's quieter, says Sallow."
+TF-D3.02 [LM_LOCK_STATE = smashed] CREW B: "Lock's scrap. So it's only the mill now, says Sallow."
+TF-D3.02 [LM_LOCK_STATE = chained] CREW B: "Keepers sit on that chain. So it's only the mill now."
+TF-D3.02b CREW A: "Mill's always took the overflow. Now it takes the lot."
 TF-D3.03 CREW A: "Get the bar. And the hook. Line's in the tail."
 TF-D3.04 CREW B: (at the near crank) "—it's pinned. Somebody's pinned it."
-TF-D3.05 CREW A: "Then tomorrow we bring the big bar and pull it, pin or no pin. He wants the pond through on the night, same as always."
+TF-D3.05 CREW A: "Then tomorrow we bring the big bar and pull it, pin or no pin. Sallow says the lady wants the pond through on the night, same as always."
 TF-D3.06 CREW B: "I don't like this pond. Water sits wrong in it."
 TF-D3.07 CREW A: "Then don't look at it."
        (they leave the long bar by the trap and go out the way they came) {event: tf.crew_scene end}
@@ -429,11 +433,14 @@ TF-D5.11 IMBER: "Those strokes in the corners. What are they?"
 TF-D5.12 TOVIN: "Shifts. One for each. I count them. So I know I've been."
 TF-D5.13 IMBER: "So when's the next one?"
   > "Tonight."                                    → TF-D5.20
-  > "In nine days."                               → TF-D5.14
+  > "In ten days."                                → TF-D5.14
   > "I can't tell."                               → TF-D5.14
 TF-D5.14 IMBER: "Count it again. Board's by the door."   → TF-D5.13 options
-TF-D5.20 IMBER: "Twelve. Thirty-nine. Sixty-six. Nine shifts between. Board says seventy-five today." (looks at the gate) "Tonight."
-       {event: S06b complete} → TF-D5.30
+TF-D5.20 IMBER: "Twelve. Forty-two. Seventy-two. Ten shifts between. Board says eighty-two today." (looks at the gate) "Tonight."
+       {event: S06b complete}
+  > "Every fifth night. Same as the Watcher's book."   → TF-D5.21
+  > (Look at the tail door.)                           → TF-D5.30
+TF-D5.21 IMBER: "Two shifts a day, ten shifts. Fifth nights." (beat) "So Pell's sheets and the Watcher's book say the same thing. Weeks of it."   → TF-D5.30
 
 TF-D5.30 IMBER: (stops at the tail-door step, crouches) "Hold on. That's not from the pond."
 TF-D5.31 IMBER: "That came up from below. From the tail." (taps the last three sheets) "Bigger every time."
@@ -449,10 +456,10 @@ TF-D6.01 IMBER: "Pell. Keepers keep a watch on the Cut path. Fetch them."
 TF-D6.02 TOVIN: "Now?"
 TF-D6.03 IMBER: "Go on. You're faster than me and you know the path in the dark."
 TF-D6.04 TOVIN: (already going; stops; to the player) "...Mind the race edge. It goes from under you." (goes)
-TF-D6.05 IMBER: "Spare beam'll brace the gate, if you've the back for it. Lantern on the footbridge, so we can see what's coming."
+TF-D6.05 IMBER: "Frame's got stop-plank grooves, pond side. War fitting. Planks are on the stack by the hoist. Get a couple down there before dark, if you've the back for it. Lantern on the footbridge, so we can see what's coming."
   > "What about you?"                             → TF-D6.06
   > "I'll get ready."                             → end
-TF-D6.06 IMBER: "I'll be at the near crank till my arms go. Then it's yours."   → end
+TF-D6.06 IMBER: "I'll sit on the pin while I can. You plank her and wedge her. A plank with no wedge floats."   → end
 ```
 
 Cooked food given to Imber: *"Hm."* (eats) *"...That's better than my wife's. Don't tell her."* `{set TF_FED_IMBER}`
@@ -463,8 +470,11 @@ Cooked food given to Imber: *"Hm."* (eats) *"...That's better than my wife's. Do
 |---|---|---|---|
 | TF-D7.01 | Pulse arrives | IMBER | "Hear that? They've opened the leat. Pond's coming." |
 | TF-D7.02 | Crew enter | CREW | "Bar! Get the bar on it!" |
-| TF-D7.03 | Pry begins (first time) | IMBER | "He's at the pawl! Knock him off it!" |
-| TF-D7.04 | Band rises | IMBER | "She's lifting! Wind her down!" |
+| TF-D7.03 | Pry begins (first time) | IMBER | "He's at the pin! Knock him off it!" |
+| TF-D7.03b | Pry on a wedge | IMBER | "He's knocking your wedge out!" |
+| TF-D7.04 | Band rises | IMBER | "She's lifting! Plank! Get a plank in!" |
+| TF-D7.04b | Swell rumble (each) | IMBER | "Here's the next one coming. Wedge what you've set!" |
+| TF-D7.04c | Unwedged plank lifts out | IMBER | "Floated. Told you. It's on the edge, fetch it." |
 | TF-D7.05 | Far-crank man defeated | IMBER | "That's the far crank quiet." |
 | TF-D7.06 | Cutter crosses to the far crank | IMBER | "Other one's going for it—the bridge!" |
 | TF-D7.07 | Drift rises in the race | CREW (any still standing) | "What's that in the race? What's—" |
@@ -472,7 +482,7 @@ Cooked food given to Imber: *"Hm."* (eats) *"...That's better than my wife's. Do
 | TF-D7.09 | Crew down | IMBER | "Spill boards! Pull their boards, let her over the weir!" |
 | TF-D7.10 | Boards pulled | IMBER | "There. That's how a pond's meant to empty." |
 | TF-D7.11 | `TF_FED_IMBER`, at start | IMBER | "I've got her. Go." |
-| TF-D7.12 | `TF_BRACED`, far crank winding | CREW | "It's braced! It won't—put your back in!" |
+| TF-D7.12 | `TF_BRACED`, first swell | CREW | "They've planked it! Get the wedges out!" |
 | TF-D7.13 | End, `TF_MAX_BAND` = 0 | IMBER | "Not a drop past her. Not one." |
 | TF-D7.14 | End, `TF_MAX_BAND` ≥ 2 | IMBER | "Floor's wet again. Pell can draw it." |
 | TF-D7.15 | Keepers arrive | KEEPER | "Keepers! Nobody move. Well. Nobody else move." |
@@ -489,9 +499,10 @@ TF-D7.21 TOVIN: "I don't know. I just see it." (beat) "You see it too." → end
 ### TF-D8 — Into the record (`S09_record`) `[ANTAGONIST]`
 
 ```
-TF-D8.01 KEEPER: (kneeling over the row of sheets on the floor) "These are dated by shifts. Every ninth. Sharp lines, race side."
+TF-D8.01 KEEPER: (kneeling over the row of sheets on the floor) "These are dated by shifts. Every tenth. Fifth nights. Sharp lines, race side."
 TF-D8.02 [LM_TL_EVIDENCE = player or keepers] KEEPER: "Your name's in our book already. Whisperflow." (beat) "You do get about."
 TF-D8.03 KEEPER: "That's Sallow's crew. Their pulses, regular as bells." (moves to the last three sheets; stops) "And this isn't."
+TF-D8.03b KEEPER: "Tail-door wet comes up on the pulse nights too, and higher each time. Crew or no crew."
 TF-D8.04 KEEPER: "Coming up from below, and growing. If that keeps on like this, the next big one comes over the orchard dikes."
        {set TF_KEEPERS_READ_BACKWATER}
 TF-D8.05 KEEPER: (takes out the record book) "I'll enter it. Whose drawings do I say they are?"
@@ -537,10 +548,10 @@ TF-D9.06 IMBER: "River keep you. And if you ever want a runner's job, there isn'
 | Pawl | "Bright scars where something pried it. Metal on metal. Days old, not years." |
 | Tool rack | "Painted outlines for every tool. Three are empty: the long bar, the race key, a hoist hook. The hook is on the floor by the trap, not where anyone works." |
 | Floor stain lines | "Faint tide-lines on the race-side boards, one above another. Seven old ones, and today's damp." |
-| Shift board | "Chalk strokes in fives. Seventy-four. Today's makes seventy-five." |
+| Shift board | "Chalk strokes in fives. Eighty-one. Today's makes eighty-two." |
 | Tail-door step | "Damp on the lower step, and the one above. Not from the race. From the tail." |
 | Pond (post-quest) | "Still. Your reflection keeps up." |
-| Each sheet | Its name plus the visible features in the sheet table of the quest file (§TF.5 Beat 6), e.g. "Long bar gone: the fresh wet line, and three older stain lines under it. The gate is whole. The tail door is dry. In the corner, thirty-nine strokes." |
+| Each sheet | Its name plus the visible features in the sheet table of the quest file (§TF.5 Beat 6), e.g. "Long bar gone: the fresh wet line, and three older stain lines under it. The gate is whole. The tail door is dry. In the corner, forty-two strokes." |
 
 **Row validator texts** (first contradiction only):
 
@@ -558,7 +569,7 @@ TF-D9.06 IMBER: "River keep you. And if you ever want a runner's job, there isn'
 ### DK-D1 — Bryn at the ditch head (`S01_bryn`)
 
 ```
-DK-D1.01 BRYN: "You. Good. You've got hands." (taps the notice) "Read that? Over the Long Bank by a hand. My section's the low run."
+DK-D1.01 BRYN: "You. Good. You've got hands." (taps the notice) "Read that? Pell's fifth nights and the keepers' wet line. Over the Long Bank by a hand. My section's the low run."
 DK-D1.02 BRYN: "I'll hold it. My mam held it, her mam held it. But my bowl cracked this spring. Cold snap. Stupid."
 DK-D1.03 BRYN: "So. A bowl from Penner in Brookhollow. Fresh moss from the shrine stones. Stakes off a dead driftroot, a dead one, mind."
   > "Hold it how?"                                → DK-D1.10
@@ -615,14 +626,13 @@ DK-D4.01 OFFICER: (arriving with a measuring chain and a ledger) "Good afternoon
 DK-D4.02 BRYN: "It's my bank, if that's what you're asking."
 DK-D4.03 OFFICER: "A dike works of this size may fall under Fenmere charter oversight. I'd like to know who authorised the practice planned here."
 DK-D4.04 BRYN: (under her breath, unprintable) "My mam."
-DK-D4.05 OFFICER: "Then I'll measure. That's fairer than arguing." (holds out the chain's end to the player) "Hold the end, please. At her stone."
-  > "All right."                                  → DK-D4.10 {event: hold_chain enabled}
+DK-D4.05 OFFICER: "Then I'll measure. That's fairer than arguing. Carry on, I'll pace it myself."
   > "Why does the size matter?"                   → DK-D4.06
-DK-D4.06 OFFICER: "Small works stay with the household. Shared works go on the commons roll. Large works are the charter's. It's a measure, not a judgment." → DK-D4.05 options
+  > (Carry on working.)                           → DK-D4.10 {event: officer paces the bank, NPC walk}
+DK-D4.06 OFFICER: "Small works stay with the household. Shared works go on the commons roll. Large works are the charter's. It's a measure, not a judgment." → DK-D4.10 {event: officer paces the bank}
 
-DK-D4.10 OFFICER: (after both pegs, reading the chain) "One holding's length. Between her own stones."
-DK-D4.11 OFFICER: "On its face, household practice, below the charter line. I'll note that."
-DK-D4.12 OFFICER: "But the Long Bank is a shared work. If this fails, four holdings flood. That's a roll matter for the council." (closes the ledger) "I'll be watching."
+DK-D4.10 OFFICER: (back from the east stone, chain over one shoulder) "One holding. Your stones. Household, then, below the line."
+DK-D4.12 OFFICER: "The bank's another matter. If this fails, four holdings flood. That's a roll matter for the households." (closes the ledger) "I'll be watching."
 DK-D4.13 BRYN: "Watch, then. Bring a lantern. It's dark when it comes."
        {event: S03 measure complete}
 ```
@@ -632,7 +642,7 @@ DK-D4.13 BRYN: "Watch, then. Bring a lantern. It's dark when it comes."
 ```
 DK-D5.01 BRYN: (kneeling on the crown, bowl in her lap, not looking up) "When it comes, you keep things off me. That's all. You can't help with the rest."
 DK-D5.02 BRYN: "And listen. I won't shout. Whatever happens, I won't."
-DK-D5.03 BRYN: "If you hear me shouting, it isn't me."
+DK-D5.03 BRYN: "If you hear me shouting, it isn't me." (beat) "And I'll be moving. Stake to stake. West, middle, east. Keep up."
   > "Understood."                                 → DK-D5.04
   > "What would be shouting, then?"               → DK-D5.05
 DK-D5.04 BRYN: "Good. Now hush. I'm listening for it." → end {event: hold window starts}
@@ -648,7 +658,8 @@ DK-D5.05 BRYN: "Reeds. Something in the reeds that learned my voice." (beat) "Hu
 | Hold begins | BRYN | (very low, steady, not to anyone) "Come on. Round. Round you go." |
 | Officer during hold | OFFICER | (nothing, lantern raised, through the whole hold) |
 | Wave 2, pipers (mimic, positional) | MUD PIPER (Bryn's voice) | "Here! Help me—here!" / "I've slipped, I'm in, quick!" / "Oi! Over here!" |
-| Player reaches the voice | BRYN | (no line; she is still kneeling, silent, where she always was) |
+| Player reaches the voice | BRYN | (no line; she is on the crown, silent, working toward the next stake) |
+| Bryn rises to move on (×2) | BRYN | (low) "Next." |
 | Hold slips | ORCHARD HAND | "West end's going! The pears!" |
 | Bryn recovers | BRYN | (breath; nothing else) |
 | Elk appears | ORCHARD HAND | "Elk! It's mad with it, it's coming down the rows!" |
@@ -656,9 +667,10 @@ DK-D5.05 BRYN: "Reeds. Something in the reeds that learned my voice." (beat) "Hu
 | Elspeth tends Bryn | ELSPETH | "Hands." (takes them) "Cold as stone. You're done for the night." |
 | After | OFFICER | (opening the ledger, writing nothing) "..." |
 
-### DK-D7 — The council at the Sluice Shelter (`S06_council`)
+### DK-D7 — In the pear rows (`S06_council`)
 
 ```
+DK-D7.00 [LM_ORCHARD_LOSS = partial] ROLL-KEEPER: (wading up between the propped trees) "Wet feet for a council. Suits it."
 DK-D7.01 ROLL-KEEPER: "Well. We all saw it, which makes a change. Question is what we call it."
 DK-D7.02 OFFICER: "The measure says household. The bank says shared. I've written both down and decided neither."
 DK-D7.03 ELSPETH: "Whatever you call it, she can't do it every night. Look at her hands."
@@ -684,17 +696,31 @@ DK-D7.50 BRYN: "What I want is nobody calling it anything." (beat) "I don't get 
 ### DK-D8 — The pear rows (`S07_close`)
 
 ```
-DK-D8.01 [LM_ORCHARD_LOSS = none]    BRYN: "Not a pear in the water. Not one." (pats a trunk) "Hear that? Not one."
-DK-D8.01 [LM_ORCHARD_LOSS = partial] BRYN: (propping the worst tree in knee-deep brown water) "Old pears took it. They've taken it before. Some'll come back."
+DK-D8.01 [LM_ORCHARD_LOSS = none]    BRYN: (on the dike road, looking back at the rows) "Not a pear in the water. Not one."
+DK-D8.01 [LM_ORCHARD_LOSS = partial] BRYN: (on the dike road, looking back at the propped trees) "Old pears took it. They've taken it before. Some'll come back."
 DK-D8.02 [DK_FOLLOWED_VOICE] BRYN: "Told you I wouldn't shout." (almost a smile) "Thing had my voice better than my mam does."
 DK-D8.03 BRYN: "That's one night. It'll come again, and it's not mine to stop."
   > "What would stop it?"                         → DK-D8.04
   > "You did well, Bryn."                         → DK-D8.05
 DK-D8.04 BRYN: "Not a bowl. Something bigger, from further up. Ask the Watchers. Ask anyone but me." → DK-D8.06
 DK-D8.05 BRYN: "I did ditch work." (beat) "Well. Thank you." → DK-D8.06
-DK-D8.06 BRYN: "Take some fruit. The good ones, not the windfalls. River keep you."
+DK-D8.06 BRYN: (watching the relief cart go) "Take some fruit. The good ones, not the windfalls. Not hers. Mine." (beat) "River keep you."
        {event: DK-D8 end → quest Completed}
 ```
+
+### DK-D9 — The relief cart on the dike road (`S07_close`) `[ANTAGONIST]`
+
+Plays on entering the dike-road volume, between DK-D8.01 and DK-D8.02, with the player in control. Short; Marrick never stops walking for long and never says the player's name.
+
+```
+DK-D9.01 MARRICK [ANTAGONIST]: (beside a Provision Board cart, handing a bale of sacking down to a household) "Sacking for the low rows. Seed follows on Thursday. No, don't thank me, thank the Board."
+DK-D9.02 MARRICK [ANTAGONIST]: (seeing the player; warmly) "Ah. You're the one who mended Drowsebank's gate. And the business at the Lock, of course. The Vale's very lucky in you."
+DK-D9.03 MARRICK [ANTAGONIST]: (to Bryn) "And you saved the Board a great many sacks last night, I hear. We'll remember it."
+DK-D9.04 MARRICK [ANTAGONIST]: (already moving on with the cart; over her shoulder) "Do get some sleep, both of you. Somebody has to keep all this standing."
+       {event: DK-D9 end → DK-D8.02}
+```
+
+Bryn's only reaction is to wait until the cart has gone before speaking again.
 
 ### DK inspect texts
 
@@ -755,6 +781,7 @@ MN-D2.31 SEDGE: "There's an elk in the channel below. Panicked. Get it out." (be
 | MN-D3.01 | Elk flees deeper (first time) | SEDGE | (from the bank) "Hm." |
 | MN-D3.02 | Player waits by Sedge 10 s, or second deep flight | SEDGE | "Stand where you'd want it not to go." |
 | MN-D3.03 | Elk exits by the causeway | SEDGE | (watches it trot into the reeds) "Good." |
+| MN-D3.04 | First sight of the elk | SEDGE | "Not like the one in Ruddock's rows. This one's only frightened." |
 | MN-D3.10 | Elk killed | SEDGE | (a long look at it) "That's out of the water too." (turns away) "Come on." |
 
 ### MN-D4 — The stones (`S05_stones`) `[D-7]`
@@ -766,11 +793,7 @@ MN-D4.01 SEDGE: "One of these reads true. Which?"
   > "The third."                                  → MN-D4.20
 MN-D4.10 SEDGE: "What did you see on it?" → (control returns; player may re-inspect) → MN-D4.01 options
 
-MN-D4.20 SEDGE: "Why?"
-  > "Grooves rounded by water. Old notches below. The notch sits level with the old stain on the reeds."   → MN-D4.30
-  > "The first one's been re-cut: square tool marks. The second's been tipped: moss on the upstream side."   → MN-D4.30
-  > "It feels right."                             → MN-D4.21
-MN-D4.21 SEDGE: "You felt it. What did you see?"   → MN-D4.20 options (without this option)
+MN-D4.20 → MN-D4.30 (the right pick is enough; no "Why?" follow-up)
 MN-D4.30 SEDGE: "Yes."
 MN-D4.31 SEDGE: "Somebody cut a new notch where they wanted the water. Somebody moved one where they wanted a stone. The water doesn't care what anyone wants."
        {event: S05 complete; Braid-stone reading enabled}
@@ -877,7 +900,7 @@ MN-D7.42 [LM_SEDGE_TRUST = cool] SEDGE: "I'll take you. Dawn."
 ### BF-D1 — Dawn at the shrine (`S00_set_out`) `[D-7]`
 
 ```
-BF-D1.01 [warm] SEDGE: "Eaten? Good. It's a climb."
+BF-D1.01 [warm] SEDGE: (already on the step, whenever the player arrives) "Eaten? Good. It's a climb."
 BF-D1.01 [cool] SEDGE: "Keep up."
   > "Where are we going?"                         → BF-D1.02
   > "Lead on."                                    → end {event: walk-with starts}
@@ -924,13 +947,15 @@ BF-D4.01 ORIEL: (at the rim) "The Vale. As it is cut, and as it was meant to run
 
 | Id | Trigger | Speaker | Line | Condition |
 |---|---|---|---|---|
-| BF-D4.10 | Whisperflow inspected | ORIEL | "Your keepers wrote one down. We heard." | `TL_STONE_PUBLIC` |
-| BF-D4.10 | Whisperflow inspected | ORIEL | "Your crews keep one quietly. Good." | `TL_STONE_KEPT` |
+| BF-D4.10 | Whisperflow inspected | ORIEL | (to Sedge) "You told me their keepers wrote one down." | `TL_STONE_PUBLIC` |
+| BF-D4.10 | Whisperflow inspected | ORIEL | (to Sedge) "You told me their crews keep one quietly. Good." | `TL_STONE_KEPT` |
 | BF-D4.11 | Orchards inspected | SEDGE | "Ruddock's bank." | — |
 | BF-D4.12 | Ashenstead inspected | SEDGE | "Told you." | MQ5 done and warm |
 | BF-D4.13 | Fen inspected | ORIEL | "That is weight. Not a thing. Weight." | — |
 | BF-D4.14 | Cut inspected | ORIEL | "That is yours." | — |
 | BF-D4.15 | Player: *"Who dug it?"* (option after the Cut) | ORIEL | "I do not know your houses. I know the scar." | — |
+| BF-D4.16 | Wreck scar inspected (required) | ORIEL | "Your war put a line of grain barges down there. Crews too. We carved where the water changed, and it went round them after." | — |
+| BF-D4.17 | After BF-D4.16 | SEDGE | "That's the lot they don't count." | — |
 
 **The pulse:**
 
@@ -948,10 +973,11 @@ BF-D4.24 ORIEL: (hands over the clay plug) "Shut it."
 
 ```
 BF-D4.30 ORIEL: (as the fen basin rises behind the plug) "Now it has nowhere to go at all. That is worse, for a while."
-BF-D4.31 ORIEL: "Three gates. The furthest from the Cut first. Each gate takes what the last one gives. The nearest last."
+BF-D4.31 ORIEL: (touching three stubs in turn, from the fen's landward edge in toward the deep pools) "Three gates. The furthest from the Cut's head first. Each gate takes what the last one gives. The nearest last."
+BF-D4.31b SEDGE: (naming each as Oriel's finger rests on it) "Reedmere Weir. The Long Sill. The Lantern Sluice, by the deep pools."
        {event: gate interactions enabled}
 BF-D4.32 [wrong order] ORIEL: (resetting the gates) "Again. Slower. The far one first."
-BF-D4.33 [BF_WRONG_ORDER ≥ 2] ORIEL: "It is not a lock to be picked. Far, middle, near. As the water would choose, if it were let."
+BF-D4.33 [BF_WRONG_ORDER ≥ 2] ORIEL: "It is not a lock to be picked. Furthest, middle, nearest. As the water would choose, if it were let." (Sedge, if asked: "Weir, sill, sluice.")
 BF-D4.40 [table sounding] ORIEL: (a silence) "That is all we ever did. Gates, in order, by many hands, every season."
 ```
 
@@ -1058,11 +1084,12 @@ BF-D7.05 SEDGE: "River keep you." (goes back toward the reeds; doesn't look back
 
 | Check | Result |
 |---|---|
+| Independent review pass | MQ6 crew lines now say the race was always the overflow run and is now the only one; tallies 12/42/72, board 82, optional `TF-D5.21` (fifth nights, Watcher's book); keeper backwater reading `TF-D8.03b`; brace-the-gate barks replace crank barks. MQ7: notice and Bryn cite the fifth-night calendar and tail-door reading; officer paces alone (no chain-holding); council in the pear rows; Bryn moves stake to stake; new `DK-D9` Marrick relief-cart scene `[ANTAGONIST]`. MQ5: `GL-D6.23` branches on `HW_DEN_CLEARED`; `GL-B8.1` seed bark `[ANTAGONIST]`. MQ8: `MN-D3.04` elk contrast; "Why?" cut from MN-D4. MQ9: Oriel's Whisperflow line goes via Sedge; wreck-scar lines `BF-D4.16–.17`; gate names `BF-D4.31b` (Reedmere Weir, the Long Sill, the Lantern Sluice) match MQ11. Antagonist tags: add `TF-D3.05`, `GL-B8.1`, `DK-D9.01–.04`. |
 | Every node the quest file references exists | GL-D1–D8 (incl. D5.40, D6.12), TF-D0–D9 (incl. D5.30, D7.20, D8.20), DK-D1–D8 (incl. D3.20, D7.20), MN-D1–D7 (incl. D3.10), BF-D1–D7 (incl. D3.40) |
 | ≤6 NPC lines before a choice or control | Checked for every node; BF-D5 is split by player options at .04 and .13 |
 | Tovin never names, seeks or solves | His lines describe drawings only; the solver is the player; Imber gives the hint |
 | Joric / Annelise limits | No kin, age, service or incident detail. Annelise names no omitted name. |
 | Sedge never confirms | No denial, no admission. "I cut reeds." / "You saw an old man in a pool." |
 | Oriel: work, never spirit | Every line uses carry / scour / rest / weight / gate / season. No "feel", "remember" or "grieve". |
-| Antagonist tags | Sallow named only in TF-D3 and TF-D8, both tagged |
+| Antagonist tags | Sallow named only in TF-D3 and TF-D8, both tagged; Marrick in `DK-D9` (on stage), `TF-D3.05` ("the lady") and `GL-B8.1`, all tagged |
 | Flags consistent with the quest file | `LM_FIELD_FIX`, `LM_TOVIN_CREDITED`, `LM_FLUSH_CALENDAR`, `LM_BRYN_ROLL`, `LM_ORCHARD_LOSS` (set by hold, not dialogue), `LM_SEDGE_TRUST`, `LM_ORIEL_PROMISE`; local flags match §A2.8 and each package's flag table |

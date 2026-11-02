@@ -90,7 +90,7 @@ Conditions use flags from the quest file §0.2–0.5 and each quest's flag table
 ### Ansel Corrie — Wraithwatcher [NEW, TL]
 - **Act III function:** brings the news (MQ10 close); arms the player with smoke; voices **Shared**.
 - **Voice:** gentle gallows humor, writes everything down. In Act III the jokes get shorter.
-- **OL completed:** Joss Garrow is home in the only way he can be; Ansel speaks more steadily and hangs Joss's lantern.
+- **OL completed:** Joss Garrow is home in the only way he can be; Ansel speaks more steadily. `OL_LANTERN_ONLY`: he hangs Joss's dark lantern. `OL_JOSS_IN`: Joss sits by Elspeth's stove and Ansel checks on him. Not done: Ansel is raw about the Watchers the deep has taken.
 
 ### Annelise Reed — watergarden caretaker [CANON ANCHOR]
 - **Canon:** tends quiet memorials; removes offerings before they rot; speaks softly to the water; dislikes unattended candles; "light enough to carry"; knows which names never appear on public memorials.
@@ -268,8 +268,8 @@ CR-D7.03 [CR_FED_KEEPERS] HESKETH: "And fed my keepers. They'll follow you into 
 CR-D7.03 [else]           HESKETH: "My keepers did well. All of them. Write that down somewhere, someone."
 CR-D7.04 ALDRIC: "We meet at the bell. The Provisioner sent word she'll attend." [ANTAGONIST] (beat) "She asked if anyone was hurt."
   > "Was anyone?"                       → CR-D7.05
-  > "Ring the bell."                    → end {event: wait_for_bell enabled}
-CR-D7.05 HESKETH: "Hands. Mine. And one Lock lad who swallowed half the basin." (beat) "Nobody drowned in my hall."   → end {event: wait_for_bell enabled}
+  > "Let's go in."                      → end {event: hall doors open; bell rings on entry}
+CR-D7.05 HESKETH: "Hands. Mine. And one Lock lad who swallowed half the basin." (beat) "Nobody drowned in my hall."   → end {event: hall doors open; bell rings on entry}
 ```
 
 ### CR-D8 — The long table (`S08_table`) `[ANTAGONIST]`
@@ -282,29 +282,29 @@ CR-D8.02 MARRICK: "Of course. Let's have everything out. The households deserve 
       {event: chip holders become interactable}
 ```
 
-**Chip lines.** Taking a chip from its holder plays the holder's line; laying it plays the reading and Marrick's answer. After her answer, control returns.
+**Chip lines.** Taking a chip from its holder and laying it plays **one** combined holder/reading line, then Marrick's answer. After her answer, control returns. The player's own items (C3, C4, and C1 if `player`) are laid straight from inventory.
 
 ```
 — C1, Whisperflow proof —
 CR-D8.10 [LM_TL_EVIDENCE = keepers] HOLLIS: (from the record cart) "My report. And the post. Singed, but you can see the notch."
 CR-D8.10 [LM_TL_EVIDENCE = riverfolk] MAELIN: "The Whisperflow post. And one more off the Greyharrow bend. Same notch, same hand."
 CR-D8.10 [LM_TL_EVIDENCE = player] (player lays the post they have carried since Whisperflow; no line)
-CR-D8.11 HESKETH: "A crossing post. Moved overnight, on a flush night, to read open."
+CR-D8.11 [LM_TL_EVIDENCE = player] HESKETH: "A crossing post. Moved overnight, on a flush night, to read open."
 CR-D8.12 MARRICK: "On a dark bank? Anyone can move a post. Children do it for dares."
 CR-D8.13 [C5 already laid] MARRICK: (glancing at the yellow post already on the table) "...Though not usually with a matching set."
 
 — C2, Corvin's tallies —
-CR-D8.20 CORVIN: "One hundred and twenty sacks drawn under the emergency. Forty carried by road. Eighty are not anywhere."
+CR-D8.20 CORVIN: "One hundred and twenty sacks drawn under the emergency. Forty carried by road. Twelve the goblins had. Sixty-eight are not anywhere."
 CR-D8.21 MARRICK: "Grain is lost every season, Factor. To damp, to rats. To goblins under your own depot, I heard."
 CR-D8.22 CORVIN: "Twelve sacks to goblins. I counted them too."
 CR-D8.23 CORVIN: (to the table, not to anyone) "I burned a ledger once, after the war. I've wished every year I hadn't. Not this one."
 
 — C3, depot slip —
-CR-D8.30 HESKETH: "A requisition slip. Board seal. A night draw, lowered down the depot chute by rope."
+CR-D8.30 HESKETH: (as the player lays the slip from their own pack) "A requisition slip. Board seal. A night draw, lowered down the depot chute by rope."
 CR-D8.31 MARRICK: "The Board's seal goes on a hundred slips a season. I can't answer for every clerk with a stamp."
 
 — C4, Hollow Lock bill —
-CR-D8.35 HESKETH: "Bill of lading from the Hollow Lock. Relief grain. Board seal. Sold downriver at priority rate."
+CR-D8.35 HESKETH: (as the player lays the bill) "Bill of lading from the Hollow Lock. Sixty-eight measures of relief grain. Board seal. Sold downriver at priority rate."
 CR-D8.36 MARRICK: "A buyer paid what we could not refuse. And the far bank ate because of it."
 CR-D8.37 [C2 already laid] CORVIN: "Forty sacks' worth of eating."
 
@@ -316,12 +316,12 @@ CR-D8.40 [LM_GRAIN_ROUTE = split]  HOUSEHOLDER: "Half came by road. Half didn't 
 
 — C5, Lock posts —
 CR-D8.45 HOLLIS: (sets the yellow post down; it is the same as the one at Whisperflow) "From the Lock. There's a barge full."
-CR-D8.46 [LM_LOCK_STATE = chained] HESKETH: "My keepers inspected the Lock before the chain was cut. Stock of posts, notches pre-cut, a hand high."
+CR-D8.46 [LM_LOCK_STATE = chained] HESKETH: "My keepers inspected the Lock the dawn it was chained. Gear greased and working. Stock of posts, notches pre-cut, a hand high."
 CR-D8.47 MARRICK: "Smugglers, then. My factor hired badly. I grant you that freely."
 
 — C6, Tovin's calendar —
 CR-D8.50 [LM_TOVIN_CREDITED = named] ALDRIC: "Master Pell. Would you tell the hall what these are?"
-CR-D8.51 [named] TOVIN: (standing, holding the sheets against his chest) "The mill floor. Mornings. I drew where it was wet."
+CR-D8.51 [named] TOVIN: (standing, holding the sheets Hollis gave back to him at the yard door; the edges are singed if `CR_SINGED_B2`) "The mill floor. Mornings. I drew where it was wet."
 CR-D8.52 [named] TOVIN: "It was wet on the same mornings. Every time. I drew what the floor did. That's all."   {set CR_TOVIN_STOOD}
 CR-D8.50 [unsigned] HESKETH: "Sheets. Unsigned. Wet-lines on the Drowsebank floor, dated. Each a day after a draw."
 CR-D8.53 MARRICK: "Pretty drawings." (kindly) "Whose?"
@@ -329,14 +329,18 @@ CR-D8.54 [named] MARRICK: "...Well. You were very brave to stand up. Sit down, d
 
 — C7, the Board's minute book —
 CR-D8.60 HESKETH: (opens the book; reads the first entry aloud) "Emergency declared, far bank. Moved by the Provisioner. Carried. Blanket order signed: B. Hesketh."
-      {event: cr.minute_read → water-gate stills (quest file §10.7)}
 CR-D8.61 HESKETH: (keeps reading; three more entries, same shape; his voice does not change)
 CR-D8.62 MARRICK: "I moved them because the households were hungry. Read it: I said so every time. I meant it every time."
 
-— C8, Rhosyn's papers (completed side quest UL) —
-CR-D8.65 RHOSYN: "Keeper-passes. My work, I'm afraid, and very good. Paid for from this purse." (lays a purse-ledger page beside them)
-CR-D8.66 MARRICK: "A forger. In Crest Hall." (smiles) "Bless you. You'll be very popular after this."
-CR-D8.67 RHOSYN: "I usually am."   {set CR_RHOSYN_LAID}
+— C8, the crew ledger (`UL_LEDGER`) —
+CR-D8.65 HOLLIS: (unlocking the keepers' iron box from Brookhollow) "Crew ledger from under the Lamb. Pay drawn on 'the Provisioner's purse', every week."
+CR-D8.65b [not UL_LEDGER_CUT] HESKETH: "And the pay chits in the back. Every one stamped with the Board seal."
+CR-D8.65b [UL_LEDGER_CUT] HESKETH: "Pages cut out at the back. Clean. The river post wrote 'as found'."
+CR-D8.66 MARRICK: "A cellar book. Anyone can write 'the Provisioner' in a cellar."
+CR-D8.66b [not UL_LEDGER_CUT] ALDRIC: "Not the seal, Provisioner. That's stamped, not written."
+CR-D8.66b [UL_LEDGER_CUT, C4 laid] ALDRIC: "The bill carries the same seal, Provisioner."
+CR-D8.67 [UL_RHOSYN_WITNESS] RHOSYN: (between two keepers) "I kept that book's hand for them. I know whose purse paid it. I'll say so as often as you like."   {set CR_RHOSYN_LAID}
+CR-D8.67b [UL_RHOSYN_WITNESS] MARRICK: "A forger. In Crest Hall." (smiles) "Bless you."
 
 — C9, Sallow's account —
 CR-D8.68 [CR_SALLOW_ACCOUNT = full] SALLOW: (from custody, by the floor-grate) "The Lock, the posts, the buyer. And last night: 'nothing to read in the morning.' Her words."
@@ -345,18 +349,12 @@ CR-D8.69 MARRICK: (not looking at him) "My factor will say anything to stay out 
 CR-D8.69b [C4 and C5 laid] ALDRIC: "He's saying what the bill and the posts already said, Provisioner."
 ```
 
-**The silence (after `cr.minute_read`, when sound returns)**
-
-```
-CR-D8.70 MARRICK: (glancing at the floor-grates) "Even the river is listening. How flattering for all of us."
-```
-
 **Rejected objects (not chips; quest file §10.5.3)**
 
 ```
 CR-D8.R1 [Ansel's patrol book] ALDRIC: "It tells us when the water went wrong. It doesn't tell us who."
-CR-D8.R2 [Joss's lantern]      ANSEL: (from the wall) "That's a man's lantern, not a witness. Put it down gently."
-CR-D8.R3 [any account of the stone, the flow-table, drift] MARRICK: "The river has opinions now? How flattering for all of us."
+CR-D8.R2 [Joss's lantern, OL_LANTERN_ONLY] ANSEL: (from the wall) "That's a man's lantern, not a witness. Put it down gently."
+CR-D8.R3 [any account of the stone, the flow-table, drift] MARRICK: "The river has opinions now?"
 ```
 
 **Three valid chips laid**
@@ -412,10 +410,6 @@ CR-D9.31 ALDRIC: "...So recorded." (quietly) "That was well done, Captain."
 ```
 CR-D10.01 ALDRIC: "Now the plan. Fenmere convenes it. Fenmere doesn't keep it." (to the player) "The condition was given to you. Speak first."
 CR-D10.02 ALDRIC: "Crews open and close the Braid gates. Watchers walk the heavy water. That much everyone agrees."
-CR-D10.03 [first time] ALDRIC: "Before we go on. You, at the back. You know the fen."
-CR-D10.04 SEDGE: (by the door, not moving forward) "When the Cut's shut for good, the fen holds its breath. Then it lets go."
-CR-D10.05 [LM_SEDGE_TRUST = warm] SEDGE: "Be there. All of you. Not just the one." (nods at the player; leaves)
-CR-D10.05 [cool]                  SEDGE: "Be there." (leaves)
 CR-D10.06 ALDRIC: "Who calls the crossings shut when the water rises?"
   > "The crews. They read the river."                                 → CR-D10.10
   > "The keepers. They hold the posts and the record."               → CR-D10.11
@@ -433,22 +427,28 @@ CR-D10.22 ALDRIC: "I'll send to Ashenstead. Mistress Reed will want it light eno
 CR-D10.23 LESSA: (from the gallery steps) "Aye. Some of it." (beat) "We'll see which."   {set LM_PLAN_MEMORIAL = reedmere} → CR-D10.30
 
 CR-D10.30 ALDRIC: "Farm ditches to the orchard hands." [LM_BRYN_ROLL = commons: "Bryn Ruddock named, on the commons roll."] [household: "Bryn Ruddock named, as household, by her own word."]
-CR-D10.31 ALDRIC: "A trance-care station at every vigil, Mistress Quill named. The Cut sealed today, both ends, by crews and keepers."
+CR-D10.31 ALDRIC: "A trance-care station at every vigil, Mistress Quill named. The Cut sealed today, both ends and every culvert along it, by crews and keepers."
 CR-D10.32 [CR_CREW_LENIENCY] ALDRIC: "With the Lock men carrying the planks, under watch."
 CR-D10.33 ALDRIC: "Written three times. Keepers' record, crews' book, Watchers' book. No chair. No seal." (beat) "Is it agreed?"
       (gallery barks: "Aye." ×6, overlapping; one household: "Is there lunch?")
-      {event: S10 complete}
+      {event: cr.plan_agreed → water-gate stills (quest file §10.7); S10 complete}
+CR-D10.40 MARRICK [ANTAGONIST]: (at the hall door, gloves on, glancing down at the floor-grates as the water comes back) "Even the river came to the meeting. How flattering for all of us." (goes)
 ```
 
-### CR-D11 — Ansel at dusk (`S11_dusk`)
+### CR-D11 — Ansel at the Cut mouth (`S11_dusk`)
+
+Plays at the Cut mouth at dusk, after the walk with the plank crews. Sedge is sitting on the silt sill beside Ansel; nobody else is near.
 
 ```
-CR-D11.01 ANSEL: (walking in off the fen road, lantern unlit) "They dropped the last plank at noon. I was on the fen road by one."
+CR-D11.01 ANSEL: (coming up the towpath, lantern unlit) "Fen end went in at noon. Culverts by two. I was on the fen road by three."
 CR-D11.02 ANSEL: "It's gone still. No birds. Fog lying flat on the water like a sheet on a bed."
 CR-D11.03 ANSEL: "Like it's holding its breath." (beat) "I've never been scared of quiet before."
-  > "Sedge said this would happen."           → CR-D11.04
-  > "Then we go."                             → CR-D11.05
-CR-D11.04 ANSEL: "He said it to a whole hall. That's the most I've ever heard him say." → CR-D11.05
+CR-D11.10 [D-7] SEDGE: (to the player only, not getting up) "Now it's shut for good, the fen holds its breath. Then it lets go."
+CR-D11.11 [LM_SEDGE_TRUST = warm] SEDGE: "Be there. All of you. Not just the one."
+CR-D11.11 [cool]                  SEDGE: "Be there."
+  > "We'll be there."                         → CR-D11.05
+  > "How long?"                               → CR-D11.12
+CR-D11.12 SEDGE: "A day. Less." (goes back along the towpath toward the reeds)   → CR-D11.05
 CR-D11.05 ANSEL: "Reedmere, then. Before dusk tomorrow. Bring food. Bring your boots." (lights his lantern) "Bring everyone."
       {event: CR-D11 end → quest Completed; MQ11 offered}
 ```
@@ -464,7 +464,10 @@ CR-D11.05 ANSEL: "Reedmere, then. Before dusk tomorrow. Bring food. Bring your b
 | Sack smother | KEEPER | "That's old fire practice. My gran would kiss you." | — |
 | Bundle singed | KEEPER | "Got it out! It's warm. It's — it's fine, it's readable." | singe |
 | Bundle delivered | HOLLIS | "On the cart. Go back for the other." | — |
-| Barge lines | POLE-MAN | "Cut it! Cut it and push!" | — |
+| Barge loose | POLE-MAN | "Cut it! Cut it and push!" | — |
+| Mooring line thrown | KEEPER | "That's one fast! Next bollard!" | — |
+| Gate lever | KEEPER | "Drop it!" | — |
+| Crew downed | POLE-MAN | "All right! All right, I'm down!" | — |
 | Crewman swept | POLE-MAN (young) | "I can't — the gate — I can't swim!" | — |
 | Haul complete | POLE-MAN (young) | (coughing) "...Thanks. Don't tell him." | `CR_HAULED_CREWMAN` |
 | Hearing, gallery, after C2 | HOUSEHOLD | "Eighty sacks. That's our winter." | — |
@@ -480,12 +483,7 @@ CR-D11.05 ANSEL: "Reedmere, then. Before dusk tomorrow. Bring food. Bring your b
 
 ```
 SV-D1.01 SEDGE: "Tonight. Maybe sooner."
-SV-D1.02 SEDGE: "People in first. Then the gates. Then the middle." (beat) "What did the water do when you walked in?"
-  > "Nothing. That's what bothered me."       → SV-D1.03
-  > "It was still. Too still."                → SV-D1.03
-  > "It felt like it was waiting."            → SV-D1.04
-SV-D1.03 SEDGE: "Good. That's what it did."                            → SV-D1.05
-SV-D1.04 SEDGE: "It was still. Waiting's yours." (not unkindly)         → SV-D1.05
+SV-D1.02 SEDGE: "People in first. Then the gates. Then the middle."   → SV-D1.05
 SV-D1.05 [LM_SEDGE_TRUST = warm] SEDGE: "I'll be in the middle when you get there. Don't hurry. Don't be late."
 SV-D1.05 [cool]                  SEDGE: "I'll be in the middle."
       {event: SV-D1 end}
@@ -507,6 +505,7 @@ SV-D2.04 ANSEL: "They say they hear a count. Four knocks. Then they want to go a
 ```
 SV-D3.01 LESSA: (to the stake, hand on its wound cloth) "I said you were done."
 SV-D3.02 LESSA: (pulls it up, lays it on the bank) "People are out there. That's the only reason."
+SV-D3.02b LESSA: (still looking at the stake) "Grain lot went down out there in the war. Barges, crews, all of it. Nobody wrote it. That's why this path's done."
 SV-D3.03 [completed side quest FW] LESSA: (to the player) "My knots are on the ridge too. Faster. Narrower. Don't run on it."
 SV-D3.04 LESSA: "Bring them in by the stones. The causeway remembers carts. It can remember feet."
       {event: Causeway lane open; FW → Lessa's route open}
@@ -569,7 +568,7 @@ Cooked food given (`S02b_feed`): ELSPETH: "Oh, warm. Warm is the medicine. Give 
 ### Gate lines
 
 ```
-SV-D5.01 [gate 1] CREW: "Board's chalked one. Read your stone and we'll crank."
+SV-D5.01 [gate 1] CREW: "Reedmere Weir. Furthest from the Cut's head, so it's first. Board's chalked one. Read your stone and we'll crank."
 SV-D5.02 [gate 1, CR_CREW_LENIENCY] LOCK MAN: "Didn't think I'd be opening one of these." KEEPER: "Crank."
 SV-D5.03 [gate 1 open] MAELIN: "Running. Next."
 SV-D5.10 [gate 2] CREW: "Something's under the sill. Something big's under the sill —"
@@ -579,7 +578,7 @@ SV-D5.20 [gate 3, 50%] WATCHER: (from the sluice pier) "Lights! In the middle! T
 SV-D5.21 [gate 3 open] MAELIN: (looking towards the heart pool, quiet) "Go on. We'll hold these."
 ```
 
-**Gate stone inspect texts:** before opening: *"Water's stuck under the notch. It wants to move."* After: *"Water's moving past the notch. A Watcher's lantern hangs beside it."*
+**Gate stone inspect texts:** before opening: *"Water's stuck under the notch. It wants to move."* Reedmere Weir only, added: *"The Cut's old head is that way. This one's furthest."* After: *"Water's moving past the notch. A Watcher's lantern hangs beside it."*
 
 **Watchers' call-and-answer (ambient, Beat 3 onwards):** "Lantern on the weir!" / "Lantern holds!" · "Lantern on the sill stone!" / "Holds!" · "Every stone, Ansel said, every one —" / "I'm doing every one!"
 
@@ -644,7 +643,8 @@ SV-D8.24 ANNELISE: "Then I'll walk them out. I've done harder walks."    → SV-
 **Shared — Ansel**
 
 ```
-SV-D8.30 [completed side quest OL] ANSEL: (hangs a dented lantern on a reed-stake at the edge) "Joss walked the deep for years. The deep doesn't give back Watchers."
+SV-D8.30 [OL_LANTERN_ONLY] ANSEL: (hangs Joss's dark lantern on a reed-stake at the edge) "Joss walked the deep for years. You carried his light home, not him. The deep doesn't give back Watchers."
+SV-D8.30 [OL_JOSS_IN] ANSEL: (glances up at the loft, where Joss sits by Elspeth's stove) "Joss walked the deep for years. He came back as far as he could. The deep doesn't give Watchers back whole."
 SV-D8.30 [else]                    ANSEL: "The deep takes Watchers. I've known two it took. I'd rather not know three."
 SV-D8.31 ANSEL: "Shut the deep pools. Keep the edge. People need somewhere to stand that isn't a rope."
 SV-D8.32 ANSEL: "I'll walk both. I'll need help. I'll need a lot of help."
@@ -712,7 +712,8 @@ SV-D9.03 MAELIN: "You'll see."           → end {event: quest Completed; MQ12 b
 | Serpent killed | CUTTER (post-quest) | "They found it on the sill at dawn. Big as a barge. Nobody's eating it." | `SV_SERPENT_KILLED` |
 | Serpent driven | CUTTER (post-quest) | "It went back down. It'll stay down, if it's sensible." | `SV_SERPENT_DRIVEN` |
 | After the hold | WATCHER | "Lantern holds!" / "Holds!" | — |
-| After the hold | CUTTER (humming) | (the listeners' tune, badly) | completed side quest VK |
+| After the hold | CUTTER (humming) | (the listeners' tune, badly) | `VK_COMPLETE` |
+| Arrival, loft | ELSPETH | (to Joss, wrapping a second blanket round him) "Stove side. You know the stove side." | `OL_JOSS_IN` |
 | Memorial station | ANSEL / ANNELISE / LESSA at Widow's Step | "Watch your feet on the Step. Watch the water." / "Light enough." / "Stay off the edge." | `LM_PLAN_MEMORIAL` |
 
 ---
@@ -722,9 +723,9 @@ SV-D9.03 MAELIN: "You'll see."           → end {event: quest Completed; MQ12 b
 ### RR-D1 — Wynn and the last sack (`S01_crestbridge`)
 
 ```
-RR-D1.01 WYNN: "Friend! One more. Last of the eighty. Put it on the top, it's the only one that isn't split."
+RR-D1.01 WYNN: "Friend! One more. Last of what's owed. Put it on the top, it's the only one that isn't split."
       (player carries the sack to the cart)
-RR-D1.02 WYNN: "Eighty sacks. Dry. Over a bridge. Not one eaten by a pig. I'll take it." (beat) "Again."
+RR-D1.02 WYNN: "Every sack they never got. Dry. Over a bridge. Not one eaten by a pig. I'll take it." (beat) "Again."
 RR-D1.03 WYNN: (to DACE, if present; else to the air) "Here. For the skiff. Told you. When I'm paid."
 RR-D1.04 [completed side quest NT] DACE: "...That's too much." WYNN: "It's interest. Take it before I count it."
 RR-D1.05 WYNN: (to the player, a coin) "And yours. Don't argue, I've had a week."
@@ -736,7 +737,7 @@ RR-D1.05 WYNN: (to the player, a coin) "And yours. Don't argue, I've had a week.
 ```
 RR-D2.01 [CR_TERMS = bare] MARRICK: (on her step, a teapot beside her) "Come and sit. I'm a householder now. We're allowed to have visitors."
 RR-D2.01 [firm]            MARRICK: (beside the keepers' seal on her door) "Mind the seal. Very official. I had them make it straight."
-RR-D2.01 [full]            MARRICK: (watching keepers count sacks out) "Eighty-one, eighty-two. They're very thorough. I trained half of them."
+RR-D2.01 [full]            MARRICK: (watching keepers count sacks out) "Sixty-one, sixty-two. They're very thorough. I trained half of them."
 RR-D2.02 MARRICK: "Tea? It's my own. Nobody's ordered that yet."
   > "Why did you do it?"                    → RR-D2.10
   > "Are you all right?"                    → RR-D2.20
@@ -769,8 +770,8 @@ RR-D3.12 SEDGE: (nods towards the Vale, the crews, the roll) "It has a hundred o
 RR-D3.20 SEDGE: "At the stone. Before it held. What did you see?"
   > "The water stood still in every notch."     → RR-D3.21
   > "Something let go."                         → RR-D3.22
-RR-D3.21 SEDGE: "Yes. Remember that, not the rest."            → RR-D3.23
-RR-D3.22 SEDGE: "The water went down a hand. Remember that."   → RR-D3.23
+RR-D3.21 SEDGE: "Yes. Remember it."                             → RR-D3.23
+RR-D3.22 SEDGE: (a nod) "Remember it."                           → RR-D3.23
 RR-D3.23 [warm] SEDGE: "Go on. They're lighting the posts at Whisperflow tonight. I heard." (beat) "I hear most things."
 RR-D3.23 [cool] SEDGE: "Go on."
       {event: S02 complete}
@@ -780,9 +781,9 @@ RR-D3.23 [cool] SEDGE: "Go on."
 
 ```
 RR-D4.01 ORIEL: (at the flow-table; the Cut's scar runs dark and dry) "The Vale said it aloud, in a hall, all at once. I heard of it."
-RR-D4.02 [LM_ORIEL_PROMISE = promise_1] ORIEL: "You said to me: '<promise_1 text, Act II>'. You did that."
-RR-D4.02 [promise_2] ORIEL: "You said to me: '<promise_2 text, Act II>'. It was done in front of everyone. That counts."
-RR-D4.02 [promise_3] ORIEL: "You said to me: '<promise_3 text, Act II>'. Others carried it with you. That was the point."
+RR-D4.02 [LM_ORIEL_PROMISE = aloud]      ORIEL: "You said to me: 'I'll say it in front of the whole Vale. Out loud, where everyone hears it.' It was said in front of everyone. That counts."
+RR-D4.02 [LM_ORIEL_PROMISE = many_hands] ORIEL: "You said to me: 'Nobody will hold those gates alone. Not a steward, not a house. Not me.' Others carried it with you. That was the point."
+RR-D4.02 [LM_ORIEL_PROMISE = return]     ORIEL: "You said to me: 'I'll come back and tell you whether they kept it.' You came back. Tell me, then."
 RR-D4.03 [LM_FEN_ENDING = seal]   ORIEL: (touching the miniature fen, still and dark) "Closed. Kept closed is a kind of work."
 RR-D4.03 [tend]                   ORIEL: (a small bright eddy turns at the fen's edge) "Kept open, a little. Someone must walk it."
 RR-D4.03 [shared]                 ORIEL: (the deep still; the edge turning) "Both. The hardest to keep. The Vale chose it."
@@ -798,7 +799,7 @@ RR-D4.07 ORIEL: "Go carefully on the falls path. The stone is wet. It always is.
       {event: S03 complete}
 ```
 
-*Writers:* `<promise_n text>` is quoted verbatim from Act II's MQ9 options. If Act II's phrasing makes RR-D4.02's second sentence redundant, cut the sentence, not the quote.
+*Writers:* the quoted words in `RR-D4.02` are verbatim from Act II's `BF-D6` options. Any change to `BF-D6` must be copied here.
 
 ### RR-D5 — Whisperflow at dusk (`S04_lanterns`)
 
@@ -850,9 +851,11 @@ RR-D7.03 NAN: "Duchess has laid four. She'd like you to know."
   > "Sing the tune, Nan."                           → RR-D7.04
   > "Was it worth the wait?"                        → RR-D7.06
   > "River keep you, Nan."                          → RR-D7.07
-RR-D7.04 [completed side quest VK] NAN: "The whole of it? With the verse back in?" (sings: the listeners' tune, with its missing verse)
-RR-D7.05 [completed side quest VK] NAN: (after) "My mam'd be cross it took this long."    → RR-D7.07
-RR-D7.04 [else] NAN: (hums it, slow and rising) "There's a verse missing. Always has been. Never mind."  → RR-D7.07
+RR-D7.04 [VK_PERF_BOTH]  NAN: "The whole of it? Words over the hum, like you had them do it?" (sings the words over the listeners' tune, the missing verse back in)
+RR-D7.04 [VK_PERF_COUNT] NAN: "As a count first. Then the words, after." (hums it as a count, slow; then says the verse plainly)
+RR-D7.04 [VK_PERF_HUM]   NAN: "Hum it. Words stay in the book, you said. I agree." (hums it, the verse's place left quiet)
+RR-D7.05 [VK_PERF_BOTH or VK_PERF_COUNT or VK_PERF_HUM] NAN: (after) "My mam'd be cross it took this long."    → RR-D7.07
+RR-D7.04 [else] NAN: (hums the listeners' tune, slow and rising) "There's a verse missing. Always has been. Never mind."  → RR-D7.07
 RR-D7.06 NAN: "The bed? Yes." (beat) "The rest? Ask me in spring."   → RR-D7.07
 RR-D7.07 NAN: "Go on. She's waiting on you, that one. She never waits on anyone."
 ```
@@ -913,8 +916,8 @@ RR-D12.05 [CR_HAULED_CREWMAN] SALLOW: "The lad's on the planks. Learning to swim
 
 | Speaker | Line | Condition |
 |---|---|---|
-| CORVIN | "Eighty owed. Eighty paid. First tally I've closed this year that came out even." | `CR_TERMS` full |
-| CORVIN | "Eighty owed. She's paying it. Calls it a gift. My tally calls it eighty." | offered |
+| CORVIN | "Owed by count. Paid by count. First tally I've closed this year that came out even." | `CR_TERMS` full |
+| CORVIN | "Owed by count. She's paying it. Calls it a gift. My tally calls it a debt." | offered |
 | ALDRIC | "Fenmere convened. That's all. I'm told it went well." (beat) "I'm told that by everyone except Fenmere." | — |
 
 **RR-D14 — Lessa (Reedmere, morning)**
@@ -951,7 +954,8 @@ RR-D12.05 [CR_HAULED_CREWMAN] SALLOW: "The lad's on the planks. Learning to swim
 
 ```
 RR-D17.01 ANSEL: "New book. First page." (holds it out with a pencil) "You write the date. Your hand's steadier than mine today."
-RR-D17.02 [completed side quest OL] ANSEL: "First entry's already in: 'Joss's lantern hung.' I wrote that one myself."
+RR-D17.02 [OL_LANTERN_ONLY] ANSEL: "First entry's already in: 'Joss's lantern hung.' I wrote that one myself."
+RR-D17.02 [OL_JOSS_IN]      ANSEL: "First entry's already in: 'Joss sat with me. Ate. Didn't speak.' I wrote that one myself."
 RR-D17.03 [LM_FEN_ENDING = seal] ANSEL: "Boundary walk every night. It's very quiet. I'm not used to quiet being good."
 RR-D17.03 [tend/shared]          ANSEL: "Channel walk at dusk. Drift drifts. It doesn't do anything. I write it down anyway."
 ```
@@ -963,12 +967,14 @@ RR-D17.03 [tend/shared]          ANSEL: "Channel walk at dusk. Drift drifts. It 
 | "Seven came in cold. Seven went home warm. That's a good night's count." | — |
 | "Someone cooked. They still talk about it." | `SV_FED_EVACUEES` |
 
-**RR-D19 — Rhosyn (Brookhollow, completed side quest UL)**
+**RR-D19 — Rhosyn (Brookhollow; branches on the *Under the Lamb* outcome)**
 
-| Line | Condition |
-|---|---|
-| (at a keepers' table with a queue of workers) "Real papers. Stamped. Countersigned. Terribly dull. They're all gate hands now." | `CR_RHOSYN_LAID` |
-| (in the cellar, a wink) "Still here. Still good at it. Don't tell anyone you saw me." | not laid |
+| Speaker | Line | Condition |
+|---|---|---|
+| RHOSYN | (clerking at the keepers' river-post table, sleeves inked) "Real passes now. Stamped, countersigned, terribly dull. The pay's worse and nobody's frightened of me." | `UL_RHOSYN_WITNESS` |
+| RHOSYN | (at a stall on the dock, writing letters for a queue) "Letters, a penny. Love letters, two. Passes, never. Ask anyone." | `UL_RHOSYN_STAYS` |
+| OTTILIE | (no Rhosyn; tapping a bottle label) "Cellar's still dark. I've started writing my own labels. Badly." | `UL_RHOSYN_FLED` |
+| DOCK WORKER | "Lamb's quiet. Back room's shut. Nobody says why." | UL not done (default) |
 
 ### MQ12 variant line index
 
@@ -983,16 +989,18 @@ The table collects every MQ12 line keyed to an input flag, so the Schema & Conte
 | `LM_TOVIN_CREDITED` | named / unsigned | RR-D11 |
 | `LM_BRYN_ROLL`, `LM_ORCHARD_LOSS` | all | RR-D16 |
 | `LM_SEDGE_TRUST` | warm / cool | RR-D3.11, RR-D3.23 |
-| `LM_ORIEL_PROMISE` | 1 / 2 / 3 | RR-D4.02 |
+| `LM_ORIEL_PROMISE` | aloud / many_hands / return | RR-D4.02 |
 | `LM_FEN_ENDING` | seal / tend / shared | RR-D4.03, RR-D12, RR-D14, RR-D15, RR-D17 |
 | `LM_HESKETH` (+ `CR_HESKETH_SELF`) | kept / stood-down | RR-D10 |
 | `LM_PLAN_ROUTES` | crews / keepers / shared | RR-D5.06 |
 | `LM_PLAN_MEMORIAL` | watchers / gardens / reedmere | Memorial bark below |
 | `CR_TERMS`, `CR_MARRICK_STORES` | all | RR-D2.01, RR-D13 |
 | `CR_CREW_LENIENCY`, `CR_HAULED_CREWMAN` | | RR-D12 |
-| `CR_RHOSYN_LAID` | | RR-D19 |
+| `UL_RHOSYN_WITNESS` / `UL_RHOSYN_STAYS` / `UL_RHOSYN_FLED` / default | | RR-D19 |
 | `RR_MARK` | notch / ring / hatch | Stone inspect |
-| completed side quests NT, VK, OL, UR | | RR-D1.04, RR-D7.04, RR-D17.02, RR-D15 |
+| `VK_PERF_BOTH` / `VK_PERF_COUNT` / `VK_PERF_HUM` / default | | RR-D7.04 |
+| `OL_LANTERN_ONLY` / `OL_JOSS_IN` | | RR-D17.02 |
+| completed side quests NT, UR | | RR-D1.04, RR-D15 |
 
 **Remaining variant barks**
 
@@ -1001,7 +1009,7 @@ The table collects every MQ12 line keyed to an input flag, so the Schema & Conte
 | HOLLIS (Whisperflow) | "I wrote that one down too. The night crossing. First one in the record." | `LM_TL_EVIDENCE = keepers` |
 | HOLLIS | "Mistress Rowe's crews found the second false post too. It's leaning on the crew fire. Nobody'll burn it." | riverfolk |
 | HOLLIS | "Do you still have that post? The hall would hang it. Beside Pell's sheets." (option: give it) | player |
-| SALLOW | "Smashed my winding floor, you did. Still had dreams about it." / "Cut that chain myself. Should've left it." | `LM_LOCK_STATE` smashed / chained |
+| SALLOW `[ANTAGONIST]` | "Smashed my winding floor, you did. Still had dreams about it." / "Keepers sat on my chain a month. Rude." | `LM_LOCK_STATE` smashed / chained |
 | ANSEL / ANNELISE / LESSA (fen edge) | "My patrol, my edge." / "My baskets, my edge." / "Our edge. We live on it." | `LM_PLAN_MEMORIAL` watchers / gardens / reedmere |
 | HOUSEHOLD (Crestbridge) `[ANTAGONIST]` | "Marrick's gift, they're calling it." / "Marrick's debt, it says on the sacks." | `CR_MARRICK_STORES` offered / ordered |
 | HOUSEHOLD (far bank) | "We were hungry a while. Then we weren't." | `LM_GRAIN_ROUTE = hold` |
@@ -1031,9 +1039,10 @@ Spoken once, on first meeting with the flag set. Each opens the commission packa
 |---|---|
 | Line length and six-line rule | Checked every node; Hesketh's CR-D9.01–.04 and Marrick's CR-D8 chip answers come in at or under six NPC lines before control returns. Maelin's RR-D6 is her one long line of the act. |
 | Marrick never names anyone | Verified across CR-D2, CR-D8, RR-D2. She says "Factor," "my factor," "dear," "the households." |
-| `[ANTAGONIST]` tags | Every node naming or voicing Marrick or Sallow: CR-D1.10, CR-D2, CR-D5, CR-D6, CR-D7.04, CR-D8, SV-D4.03, RR-D2, RR-D12, the Crestbridge household bark. |
+| `[ANTAGONIST]` tags | Every node naming or voicing Marrick or Sallow: CR-D1.10, CR-D2, CR-D5, CR-D6, CR-D7.04, CR-D8, CR-D10.40, SV-D4.03, RR-D2, RR-D12, the Sallow MQ12 bark, the Crestbridge household bark. |
+| Independent review pass | `RR-D4.02` keyed to `aloud` / `many_hands` / `return` with Act II's exact words (blocker). C8 rewritten as the UL crew ledger (`UL_LEDGER`, `UL_LEDGER_CUT`, `UL_RHOSYN_WITNESS`). Silence moved from the minute-book read to the plan's "Aye" (`CR-D10.40` replaces CR-D8.70; R3 reworded). Sedge's lines moved from the hall to the Cut mouth (`CR-D11.10–.12`). Lessa's Fourteenth Lot line `SV-D3.02b`. Gate 1 named and ordered. OL, VK, UL branches with defaults. `SV-D1.02` question cut; `RR-D3.21–.22` no longer correct. Grain lines say sixty-eight / "what's owed". Hearing chip lines combined to one holder/reading line. |
 | Tovin canon guard | CR-D8.51–.52 and RR-D11 describe only; no name for the phenomenon; he solves nothing. |
 | Anchors | Corvin's ledger regret spoken once (CR-D8.23), content unrevealed. Aldric's shame institutional only. Annelise names no one. Lessa explains the reopening, never the closure. No ages, kinship, service or travel added. |
-| Evidence rule | Rejected-object lines (CR-D8.R1–R3); CR-D8.70 mocks the silence; Sedge's lines describe what the water did, never what it means. |
+| Evidence rule | Rejected-object lines (CR-D8.R1–R3); CR-D10.40 mocks the silence, which is tied to the plan's "Aye", never to a record; Sedge's lines describe what the water did, never what it means. |
 | Address-neutral | No gendered or origin terms for the player. "Friend" (Wynn, Sallow) and "my dear" (Marrick) are character habits used for anyone. |
 | Flags match quest file | `CR_*`, `SV_*`, `RR_*`, `LM_PLAN_ROUTES/MEMORIAL`, `LM_FEN_ENDING`, `LM_CIVIC_STANDING`, `LM_HESKETH`, `LM_MARRICK_EXPOSED` cross-checked. |
