@@ -315,7 +315,7 @@ Combat never reveals evidence. Nothing a creature drops advances the quest.
 
 | Step | Objective | Completes on | Req. | Notes |
 |---|---|---|---|---|
-| `S00_arrive` | Find out what's wrong with Ashenstead's water. | Enter area-A volume | Yes | Quest Uninitialized → Active (auto-accept) |
+| `S00_arrive` | Find out what's wrong with Ashenstead's water. | Enter area-A volume | Yes | Quest Inactive → Active (explicit authored auto-accept event) |
 | `S01_ask` | Ask the watergarden keeper and the net-mender. | `GL-D1` and `GL-D2` end nodes reached | Yes | Any order |
 | `S02_dusk` | Watch the fields at dusk. | `keep_watch` at field-hut bench → dusk window event `gl.backwater_dusk` ends | Yes | Fires the steam/warm-well presentation |
 | `S02b_well` | (Optional) Touch the well water. | Inspect `ember_well_bucket` during the dusk window | No | Sets `GL_WELL_WARM` |

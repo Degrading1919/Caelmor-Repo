@@ -24,6 +24,9 @@ namespace Caelmor.Runtime.Gameplay
         State current, draft;
         long preparedTick, lastHostTick;
         bool restored;
+        float executingY;
+        Func<GameplayPoint,GameplayPoint,bool> executingSight;
+        public long DurableRevision { get; private set; }
         public string Feedback { get; private set; } = "Explore the landing. Select a person or object, then approach to interact.";
         string draftFeedback;
         public string Carry => current.carry;
@@ -34,6 +37,8 @@ namespace Caelmor.Runtime.Gameplay
         public float PendingPushZ { get; private set; }
         public float PendingRespawnX { get; private set; }
         public float PendingRespawnZ { get; private set; }
+        public float PendingRespawnY { get; private set; }
+        public int MovementPermille => current.stagger>0?0:current.movement;
         public bool Has(string flag) => current.flags.Contains(flag);
         public int Quantity(string item) => Count(current,item);
         public int Health => current.data.health;
@@ -55,8 +60,8 @@ namespace Caelmor.Runtime.Gameplay
         {
             var save=new GameplaySave { version=1,contentId=identity,tick=0,health=content.tuning.health,flags=Array.Empty<string>(),items=Array.Empty<ItemAmount>(),
                 xp=content.skills.Select(s=>new ItemAmount(s.id,0)).ToArray(),quests=content.quests.Select(q=>new QuestProgress{id=q.id,stage=0}).ToArray(),
-                enemies=content.enemies.Select(e=>new EnemyProgress{id=e.id,health=e.health}).ToArray(),actions=content.actions.Select(a=>new ActionProgress{id=a.id}).ToArray(),hazards=content.hazards.Select(h=>new HazardProgress{id=h.id}).ToArray(),
-                flocks=content.flocks.Select(f=>new FlockProgress{id=f.id}).ToArray(),presentations=content.presentationEvents.Select(p=>new PresentationProgress{id=p.id}).ToArray(),counters=counterIds.Select(id=>new ItemAmount(id,0)).ToArray() };
+                enemies=content.enemies.Select(NewEnemy).ToArray(),actions=content.actions.Select(a=>new ActionProgress{id=a.id}).ToArray(),hazards=content.hazards.Select(h=>new HazardProgress{id=h.id}).ToArray(),
+                flocks=content.flocks.Select(f=>new FlockProgress{id=f.id}).ToArray(),presentations=content.presentationEvents.Select(p=>new PresentationProgress{id=p.id}).ToArray(),counters=counterIds.Select(id=>new ItemAmount(id,0)).ToArray(),traps=content.traps.Select(t=>new TrapProgress{id=t.id}).ToArray(),arenas=content.arenas.Select(a=>new ArenaProgress{id=a.id}).ToArray() };
             return new State(save);
         }
         public GameplaySave Capture() { GameplayContent.Need(draft==null,"save_during_prepare"); return Copy(current); }
@@ -65,7 +70,7 @@ namespace Caelmor.Runtime.Gameplay
             GameplayContent.Need(draft==null && lastHostTick==0 && !this.restored && participating(),"restore_requires_fresh_session");
             ValidateSave(save); var restored=new State(Clone(save));
             foreach(var presentation in restored.data.presentations)presentation.remaining=0;
-            current=restored; this.restored=true; Feedback="Checkpoint restored. Interrupted channels, combat and carries were cleared.";
+            current=restored; this.restored=true;DurableRevision++; Feedback="Checkpoint restored. Interrupted channels, combat and carries were cleared.";
             SynchronizeQuests();
         }
         public void ValidateSave(GameplaySave s)
@@ -76,7 +81,7 @@ namespace Caelmor.Runtime.Gameplay
             for(int i=0;i<s.counters.Length;i++) GameplayContent.Need(s.counters[i]!=null && s.counters[i].id==counterIds[i] && s.counters[i].count>=0,"save_counter");
             var knownItems=new HashSet<string>(content.items.Select(i=>i.id)); var seen=new HashSet<string>();
             foreach(var i in s.items) GameplayContent.Need(i!=null && knownItems.Contains(i.id) && i.count>0 && seen.Add(i.id),"save_inventory");
-            var knownFlags=new HashSet<string>(content.actions.SelectMany(a=>a.flags).Concat(content.actions.Select(a=>a.once).Where(x=>!string.IsNullOrEmpty(x))).Concat(content.enemies.Select(e=>e.killFlag)).Concat(content.hazards.Select(h=>h.once)));
+            var knownFlags=new HashSet<string>(content.actions.SelectMany(a=>a.flags).Concat(content.actions.Select(a=>a.once).Where(x=>!string.IsNullOrEmpty(x))).Concat(content.enemies.Select(e=>e.killFlag)).Concat(content.hazards.Select(h=>h.once)).Concat(content.traps.Select(t=>t.alarmFlag).Where(f=>!string.IsNullOrEmpty(f))));
             GameplayContent.Need(s.flags.Distinct().Count()==s.flags.Length && s.flags.All(knownFlags.Contains),"save_flags");
             GameplayContent.Need(s.xp.Length==content.skills.Length && s.quests.Length==content.quests.Length && s.enemies.Length==content.enemies.Length && s.actions.Length==content.actions.Length && s.hazards.Length==content.hazards.Length && s.flocks.Length==content.flocks.Length && s.presentations.Length==content.presentationEvents.Length,"save_shape");
             for(int i=0;i<s.xp.Length;i++) GameplayContent.Need(s.xp[i]!=null && s.xp[i].id==content.skills[i].id && s.xp[i].count>=0 && s.xp[i].count<=5000000,"save_xp");
@@ -86,20 +91,23 @@ namespace Caelmor.Runtime.Gameplay
             {
                 var q=s.quests[i]; var def=content.quests[i]; GameplayContent.Need(q!=null && q.id==def.id && q.stage>=0 && q.stage<=def.stages.Length,"save_quest");
                 GameplayContent.Need(q.stage==0 || def.all.All(flags.Contains),"save_quest_prerequisite");
+                GameplayContent.Need(q.stage==0 || def.startAll.All(flags.Contains),"save_quest_acceptance");
                 for(int j=0;j<q.stage;j++) GameplayContent.Need(StageSatisfied(flags,s.counters,def.stages[j]),"save_quest_history");
             }
             for(int i=0;i<s.enemies.Length;i++) { var e=s.enemies[i]; var d=content.enemies[i]; GameplayContent.Need(e!=null && e.id==d.id && e.health>=0 && e.health<=d.health && e.windup>=0 && e.windup<=d.windup && e.cooldown>=0 && e.cooldown<=d.cooldown && e.respawn>=0 && e.respawn<=d.respawn && GameplayContent.Finite(e.aimX) && GameplayContent.Finite(e.aimZ) && (!e.loot || e.health==0) && (e.health!=0 || flags.Contains(d.killFlag)),"save_enemy"); }
             for(int i=0;i<s.actions.Length;i++) GameplayContent.Need(s.actions[i]!=null && s.actions[i].id==content.actions[i].id && s.actions[i].cooldown>=0 && s.actions[i].cooldown<=content.actions[i].cooldown,"save_action");
             for(int i=0;i<s.hazards.Length;i++) GameplayContent.Need(s.hazards[i]!=null && s.hazards[i].id==content.hazards[i].id && s.hazards[i].remaining>=0 && s.hazards[i].remaining<=content.hazards[i].windup && (!flags.Contains(content.hazards[i].once) || s.hazards[i].remaining==0),"save_hazard");
             ValidateOpportunitySave(s,flags);
+            ValidateDungeonSave(s);
         }
-        public void PrepareTick(long tick,float x,float z,IReadOnlyList<GameplayRequest> requests,Func<int,bool> visible,bool rushing=false)
+        public void PrepareTick(long tick,float x,float z,IReadOnlyList<GameplayRequest> requests,Func<int,bool> visible,bool rushing=false,float playerY=0,Func<GameplayPoint,GameplayPoint,float,GameplayPoint> moveEnemy=null,Func<GameplayPoint,GameplayPoint,bool> pointSight=null)
         {
             GameplayContent.Need(draft==null && tick>lastHostTick && GameplayContent.Finite(x) && GameplayContent.Finite(z),"tick_boundary");
             GameplayContent.Need(participating(),"not_participating");
-            draft=new State(Copy(current)){carry=current.carry,channel=current.channel,remaining=current.remaining,attack=current.attack,attackWait=current.attackWait,originX=current.originX,originZ=current.originZ};
+            GameplayContent.Need(GameplayContent.Finite(playerY),"player_height");executingY=playerY;executingSight=pointSight;
+            draft=new State(Copy(current)){carry=current.carry,channel=current.channel,remaining=current.remaining,attack=current.attack,attackWait=current.attackWait,originX=current.originX,originY=current.originY,originZ=current.originZ,stagger=Math.Max(0,current.stagger-1)};
             preparedTick=tick; draft.data.tick=tick; draftFeedback=Feedback; PendingRespawn=false;PendingPushX=PendingPushZ=0;
-            PendingRespawnX=content.tuning.respawnX;PendingRespawnZ=content.tuning.respawnZ;
+            PendingRespawnX=content.tuning.respawnX;PendingRespawnY=0;PendingRespawnZ=content.tuning.respawnZ;
             foreach(var a in draft.data.actions) if(a.cooldown>0)a.cooldown--;
             for(int i=0;i<draft.data.enemies.Length;i++)
             {
@@ -107,6 +115,7 @@ namespace Caelmor.Runtime.Gameplay
                 if(e.health==0 && d.respawn>0 && --e.respawn<=0) { e.health=d.health;e.loot=false;e.cooldown=0;e.windup=0; }
             }
             TickFlocks(x,z,rushing);
+            BeginDungeon(x,playerY,z,moveEnemy);
             // One actionable request per tick; duplicates cannot multiply zero-duration rewards.
             if(requests!=null && requests.Count>0)
             {
@@ -119,11 +128,13 @@ namespace Caelmor.Runtime.Gameplay
             // Incoming combat resolves before a channel's final tick so a hit cannot
             // both interrupt the action and let its resource/XP transaction escape.
             Combat(x,z,visible);
+            FinishDefeatedArenas();
+            TickTraps(x,playerY,z);
             Hazards(x,z);
             if(draft.channel>=0)
             {
                 int i=draft.channel;
-                if(Distance(x,z,draft.originX,draft.originZ)>.15f || !CanUse(draft,i,x,z,visible)) {draft.channel=-1;Say("Action interrupted. No resources consumed.");}
+                if(Distance3(x,playerY,z,draft.originX,draft.originY,draft.originZ)>.15f || !CanUse(draft,i,x,z,visible)) {draft.channel=-1;Say("Action interrupted. No resources consumed.");}
                 else if(--draft.remaining<=0) { draft.channel=-1;Apply(i); }
             }
             // Content-authored enter volumes use the same condition and finalization path.
@@ -131,26 +142,28 @@ namespace Caelmor.Runtime.Gameplay
             if(draft.data.health<=0)
             {
                 draft.data.health=content.tuning.health;draft.channel=-1;draft.attack=-1;draft.carry="";PendingRespawn=true;
+                ResetActiveArenas();draft.stagger=0;draft.movement=1000;
                 foreach(var e in draft.data.enemies){e.windup=0;e.cooldown=0;}
                 Say("You recovered at the crew fire. Quest progress and inventory retained.");
                 foreach(var region in content.respawnRegions)
                 {
                     var center=content.targets.First(t=>t.id==region.target);
-                    if(Meets(draft.flags,region.all,region.none,Array.Empty<string>(),0) && Distance(x,z,center.x,center.z)<=region.radius)
-                    {PendingRespawnX=region.x;PendingRespawnZ=region.z;Say("You recovered at "+center.name+". Quest progress and inventory retained.");break;}
+                    if(Meets(draft.flags,region.all,region.none,Array.Empty<string>(),0) && Distance3(x,playerY,z,center.x,center.y,center.z)<=region.radius)
+                    {PendingRespawnX=region.x;PendingRespawnY=region.y;PendingRespawnZ=region.z;Say("You recovered at "+center.name+". Quest progress and inventory retained.");break;}
                 }
             }
             TickPresentations();
             for(int i=0;i<content.quests.Length;i++)
             {
                 var def=content.quests[i];var q=draft.data.quests[i];
-                if(!def.all.All(draft.flags.Contains))continue;
+                if(!def.all.All(draft.flags.Contains)||!def.startAll.All(draft.flags.Contains))continue;
                 while(q.stage<def.stages.Length && StageSatisfied(draft.flags,draft.data.counters,def.stages[q.stage])) q.stage++;
             }
         }
         public void CommitTick(long tick)
         {
             GameplayContent.Need(draft!=null && preparedTick==tick && participating(),"commit_boundary");
+            if(DurableChanged(current,draft))DurableRevision++;
             current=draft;draft=null;lastHostTick=tick;Feedback=draftFeedback;SynchronizeQuests();
         }
         public void AbortTick(){draft=null;PendingRespawn=false;PendingPushX=PendingPushZ=0;}
@@ -158,13 +171,13 @@ namespace Caelmor.Runtime.Gameplay
         void SynchronizeQuests()
         {
             bridge.committing=true;
-            try { for(int i=0;i<questIds.Length;i++) { if(!content.quests[i].all.All(current.flags.Contains))continue; quests.TryGetState(questIds[i],out var state); if(state==QuestState.Inactive) GameplayContent.Need(quests.ActivateQuest(questIds[i]).Ok,"quest_activate"); if(current.data.quests[i].stage==content.quests[i].stages.Length) GameplayContent.Need(quests.CompleteQuest(questIds[i]).Ok,"quest_complete"); } }
+            try { for(int i=0;i<questIds.Length;i++) { if(!content.quests[i].all.All(current.flags.Contains)||!content.quests[i].startAll.All(current.flags.Contains))continue; quests.TryGetState(questIds[i],out var state); if(state==QuestState.Inactive) GameplayContent.Need(quests.ActivateQuest(questIds[i]).Ok,"quest_activate"); if(current.data.quests[i].stage==content.quests[i].stages.Length) GameplayContent.Need(quests.CompleteQuest(questIds[i]).Ok,"quest_complete"); } }
             finally {bridge.committing=false;}
         }
         public bool Available(int action) => action>=0 && action<content.actions.Length && Enabled(current,action);
         public bool QuestAvailable(int quest)=>content.quests[quest].all.All(current.flags.Contains);
         public int HazardRemaining(int hazard)=>current.data.hazards[hazard].remaining;
-        public bool TargetVisible(int target) => target>=0 && target<content.targets.Length && Meets(current.flags,content.targets[target].all,content.targets[target].none,Array.Empty<string>(),0) && OpportunityTargetVisible(current,target);
+        public bool TargetVisible(int target) => target>=0 && target<content.targets.Length && Meets(current.flags,content.targets[target].all,content.targets[target].none,Array.Empty<string>(),0) && OpportunityTargetVisible(current,target) && DungeonTargetVisible(current,target);
         public EnemyProgress Enemy(int i) => CloneEnemy(current.data.enemies[i]);
         bool Enabled(State s,int i)
         {
@@ -175,20 +188,20 @@ namespace Caelmor.Runtime.Gameplay
             if(qi>=0 && (s.data.quests[qi].stage<a.minStage || a.maxStage>=0 && s.data.quests[qi].stage>a.maxStage))return false;
             if(!string.IsNullOrEmpty(a.requiresCarry) && (a.requiresCarry=="-" ? s.carry.Length>0 : s.carry!=a.requiresCarry))return false;
             int ei=Array.FindIndex(content.enemies,e=>e.lootAction==a.id);
-            return (ei<0 || s.data.enemies[ei].health==0 && s.data.enemies[ei].loot) && OpportunityEnabled(s,a) && (a.tagInputs.Length==0 || TryInputs(s,a,out _));
+            return (ei<0 || s.data.enemies[ei].health==0 && s.data.enemies[ei].loot) && OpportunityEnabled(s,a) && TrapActionEnabled(s,a) && (a.tagInputs.Length==0 || TryInputs(s,a,out _));
         }
         bool CanUse(State s,int i,float x,float z,Func<int,bool> visible)
         {
             if(i<0||i>=content.actions.Length||!Enabled(s,i))return false;
             var a=content.actions[i]; int ti=Array.FindIndex(content.targets,t=>t.id==a.target); var t=content.targets[ti];var point=TargetPoint(s,ti);
-            return Meets(s.flags,t.all,t.none,Array.Empty<string>(),0) && OpportunityTargetVisible(s,ti) && Distance(x,z,point.X,point.Z)<=2.3f && (visible==null||visible(ti)) &&
+            return Meets(s.flags,t.all,t.none,Array.Empty<string>(),0) && OpportunityTargetVisible(s,ti) && DungeonTargetVisible(s,ti) && Distance3(x,executingY,z,point.X,point.Y,point.Z)<=2.3f && (visible==null||visible(ti)) &&
                 (string.IsNullOrEmpty(a.tool)||Count(s,a.tool)>0) && TryInputs(s,a,out _) && OpportunityCanUse(s,a,x,z);
         }
         void StartAction(int i,float x,float z,Func<int,bool> visible)
         {
             if(!CanUse(draft,i,x,z,visible)) {Say("Cannot do that here yet. Check the objective, reach, tool and materials.");return;}
             var a=content.actions[i];draft.attack=-1;
-            if(a.ticks==0) {draft.channel=-1;Apply(i);} else {draft.channel=i;draft.remaining=a.ticks;draft.originX=x;draft.originZ=z; if(a.kind!="enter")Say(a.label+"...");}
+            if(a.ticks==0) {draft.channel=-1;Apply(i);} else {draft.channel=i;draft.remaining=a.ticks;draft.originX=x;draft.originY=executingY;draft.originZ=z; if(a.kind!="enter")Say(a.label+"...");}
         }
         void Apply(int i)
         {
@@ -216,6 +229,7 @@ namespace Caelmor.Runtime.Gameplay
             if(!changed) {Say("Action rejected: "+reason);return;}
             foreach(var change in counterChanges)draft.data.counters.First(c=>c.id==change.Key).count=change.Value;
             ApplyOpportunity(a);
+            ApplyTrapAction(a);
             foreach(var f in a.flags)draft.flags.Add(f);if(!string.IsNullOrEmpty(a.once))draft.flags.Add(a.once);
             if(!string.IsNullOrEmpty(a.carry))draft.carry=a.carry=="-"?"":a.carry;
             if(a.xp>0){var xp=draft.data.xp.First(v=>v.id==a.skill);xp.count=(int)Math.Min(5000000L,(long)xp.count+a.xp);}
@@ -238,7 +252,7 @@ namespace Caelmor.Runtime.Gameplay
                 if(e.health<=0||!EnemyActive(draft,i))draft.attack=-1;
                 // Attack reach must stay inside enemy initiation range: an anchored
                 // encounter must never expose a safe player-only damage annulus.
-                else if(draft.attackWait<=0 && EnemyWithinBoundary(def,x,z) && Distance(x,z,target.x,target.z)<=Math.Min(1.65f,def.range) && (visible==null||visible(ti)) && GameplayCombatAdapter.ResolveAttack(preparedTick,1,i+2))
+                else if(draft.attackWait<=0 && EnemyWithinBoundary(def,x,z) && Distance3(x,executingY,z,e.x,e.y,e.z)<=Math.Min(1.65f,def.range) && CombatVisible(x,z,e,ti,visible) && GameplayCombatAdapter.ResolveAttack(preparedTick,1,i+2))
                 {
                     int damage=Math.Min(e.health,content.tuning.damage);e.health-=damage;draft.attackWait=content.tuning.attackTicks;
                     var xp=draft.data.xp.FirstOrDefault(v=>v.id=="melee");if(xp!=null)xp.count=Math.Min(5000000,xp.count+damage);
@@ -250,19 +264,19 @@ namespace Caelmor.Runtime.Gameplay
             {
                 var def=content.enemies[i];var e=draft.data.enemies[i];if(e.health<=0||!EnemyActive(draft,i))continue;
                 if(!EnemyWithinBoundary(def,x,z)){e.windup=0;continue;}
-                int ti=Array.FindIndex(content.targets,t=>t.id==def.target);var t=content.targets[ti];float distance=Distance(x,z,t.x,t.z);
+                int ti=Array.FindIndex(content.targets,t=>t.id==def.target);var t=content.targets[ti];float distance=Distance3(x,executingY,z,e.x,e.y,e.z);
                 if(distance>def.leash){e.windup=0;continue;}
                 if(e.cooldown>0)e.cooldown--;
                 if(e.windup>0)
                 {
                     if(--e.windup==0)
                     {
-                        bool hit=Distance(x,z,e.aimX,e.aimZ)<=.75f && distance<=def.range+.8f && (visible==null||visible(ti));
+                        bool hit=Distance3(x,executingY,z,e.aimX,e.aimY,e.aimZ)<=.75f && distance<=def.range+.8f && CombatVisible(x,z,e,ti,visible);
                         if(hit && GameplayCombatAdapter.ResolveAttack(preparedTick,i+2,1)){draft.data.health-=def.damage;draft.channel=-1;Say(t.name+" hits for "+def.damage+".");} else Say(t.name+" misses. The ground strike is exposed.");
                         e.cooldown=def.cooldown;
                     }
                 }
-                else if(e.cooldown==0 && distance<=def.range && (visible==null||visible(ti))) {e.windup=def.windup;e.aimX=x;e.aimZ=z;}
+                else if(e.cooldown==0 && distance<=def.range && CombatVisible(x,z,e,ti,visible)) {e.windup=def.windup;e.aimX=x;e.aimY=executingY;e.aimZ=z;}
             }
         }
         void Hazards(float x,float z)
@@ -290,19 +304,19 @@ namespace Caelmor.Runtime.Gameplay
                 else if(Meets(draft.flags,h.all,h.none,Array.Empty<string>(),0))state.remaining=h.windup;
             }
         }
-        bool EnemyActive(State s,int i)=>Meets(s.flags,content.enemies[i].all,content.enemies[i].none,Array.Empty<string>(),0);
+        bool EnemyActive(State s,int i)=>s.data.enemies[i].activated && Meets(s.flags,content.enemies[i].all,content.enemies[i].none,Array.Empty<string>(),0);
         static bool Meets(HashSet<string> flags,string[] all,string[] none,string[] any,int count)=>all.All(flags.Contains)&&!none.Any(flags.Contains)&&any.Count(flags.Contains)>=count;
         static bool StageSatisfied(HashSet<string> flags,ItemAmount[] counters,StageDefinition stage)=>Meets(flags,stage.all,Array.Empty<string>(),stage.any,stage.anyCount) && stage.counterRequirements.All(r=>counters.First(c=>c.id==r.id).count>=r.min);
         static float Distance(float x,float z,float xx,float zz)=>(float)Math.Sqrt((x-xx)*(x-xx)+(z-zz)*(z-zz));
         static int Count(State s,string id) {foreach(var i in s.inventory.DebugEnumerate(1))if(i.Key==id)return i.Value;return 0;}
         void Say(string text){draftFeedback=text;}
         GameplaySave Copy(State s) {var copy=Clone(s.data);copy.flags=s.flags.OrderBy(f=>f,StringComparer.Ordinal).ToArray();copy.items=s.inventory.DebugEnumerate(1).OrderBy(v=>v.Key,StringComparer.Ordinal).Select(v=>new ItemAmount(v.Key,v.Value)).ToArray();return copy;}
-        static EnemyProgress CloneEnemy(EnemyProgress e)=>new EnemyProgress{id=e.id,health=e.health,windup=e.windup,cooldown=e.cooldown,respawn=e.respawn,loot=e.loot,aimX=e.aimX,aimZ=e.aimZ};
-        static GameplaySave Clone(GameplaySave s)=>new GameplaySave {version=s.version,contentId=s.contentId,tick=s.tick,health=s.health,flags=(string[])s.flags.Clone(),items=s.items.Select(v=>new ItemAmount(v.id,v.count)).ToArray(),xp=s.xp.Select(v=>new ItemAmount(v.id,v.count)).ToArray(),quests=s.quests.Select(q=>new QuestProgress{id=q.id,stage=q.stage}).ToArray(),enemies=s.enemies.Select(CloneEnemy).ToArray(),actions=s.actions.Select(a=>new ActionProgress{id=a.id,cooldown=a.cooldown}).ToArray(),hazards=s.hazards.Select(h=>new HazardProgress{id=h.id,remaining=h.remaining}).ToArray(),flocks=s.flocks.Select(CloneFlock).ToArray(),presentations=s.presentations.Select(ClonePresentation).ToArray(),counters=s.counters.Select(c=>new ItemAmount(c.id,c.count)).ToArray()};
+        static EnemyProgress CloneEnemy(EnemyProgress e)=>new EnemyProgress{id=e.id,health=e.health,windup=e.windup,cooldown=e.cooldown,respawn=e.respawn,loot=e.loot,aimX=e.aimX,aimY=e.aimY,aimZ=e.aimZ,x=e.x,y=e.y,z=e.z,activated=e.activated,spawnWarning=e.spawnWarning};
+        static GameplaySave Clone(GameplaySave s)=>new GameplaySave {version=s.version,contentId=s.contentId,tick=s.tick,health=s.health,flags=(string[])s.flags.Clone(),items=s.items.Select(v=>new ItemAmount(v.id,v.count)).ToArray(),xp=s.xp.Select(v=>new ItemAmount(v.id,v.count)).ToArray(),quests=s.quests.Select(q=>new QuestProgress{id=q.id,stage=q.stage}).ToArray(),enemies=s.enemies.Select(CloneEnemy).ToArray(),actions=s.actions.Select(a=>new ActionProgress{id=a.id,cooldown=a.cooldown}).ToArray(),hazards=s.hazards.Select(h=>new HazardProgress{id=h.id,remaining=h.remaining}).ToArray(),flocks=s.flocks.Select(CloneFlock).ToArray(),presentations=s.presentations.Select(ClonePresentation).ToArray(),counters=s.counters.Select(c=>new ItemAmount(c.id,c.count)).ToArray(),traps=s.traps.Select(CloneTrap).ToArray(),arenas=s.arenas.Select(a=>new ArenaProgress{id=a.id,engaged=a.engaged}).ToArray()};
         sealed class State
         {
             public GameplaySave data; public HashSet<string> flags; public SimplePlayerInventoryStore inventory=new SimplePlayerInventoryStore();
-            public string carry=""; public int channel=-1,remaining,attack=-1,attackWait;public float originX,originZ;
+            public string carry=""; public int channel=-1,remaining,attack=-1,attackWait,stagger,movement=1000;public float originX,originY,originZ;
             public State(GameplaySave data) {this.data=data;flags=new HashSet<string>(data.flags,StringComparer.Ordinal);inventory.MarkWritable(1);inventory.DebugSetExact(1,data.items.Select(v=>new PersistedInventoryEntry(v.id,v.count)).ToList());}
         }
         sealed class QuestBridge : IServerAuthority,IQuestMutationGate,IPlayerLifecycleQuery,IQuestProgressionEvaluator

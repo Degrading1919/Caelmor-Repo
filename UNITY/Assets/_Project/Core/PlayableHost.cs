@@ -45,6 +45,7 @@ namespace Caelmor.Unity.Playable
         ISimulationEligibilityGate, IAuthoritativeStateMutatingCommandHandler
     {
         const int MoveCommand = 101, SprintCommand = 102, InteractCommand = 103, DestinationCommand = 104;
+        const int Destination3DCommand = 105;
         const int GameplayCommandBase = 200, GameplayActionCount = 16;
         const float ArrivalTolerance = .025f;
         const float WalkSpeed = 3f, SprintSpeed = 5.5f, Radius = .38f, Skin = .025f;
@@ -98,6 +99,7 @@ namespace Caelmor.Unity.Playable
         internal event Action<long> GameplayCommitting;
         internal event Action GameplayAborted;
         internal event Action InputCleared;
+        internal Func<int> GameplayMovementPermille;
 
         public PlayableHost(Vector3 spawn, InteractionAnchor interactionAnchor, int solidMask, TerrainNavigation terrainNavigation = null)
         {
@@ -136,6 +138,7 @@ namespace Caelmor.Unity.Playable
             var registry = new CommandHandlerRegistry();
             registry.Register(MoveCommand, this); registry.Register(SprintCommand, this); registry.Register(InteractCommand, this);
             registry.Register(DestinationCommand, this);
+            registry.Register(Destination3DCommand, this);
             for (int action = 0; action < GameplayActionCount; action++) registry.Register(GameplayCommandBase + action, this);
             Simulation.RegisterPhaseHook(this, -100);
             Simulation.RegisterPhaseHook(new AuthoritativeCommandFreezeHook(commands, sessions), -90);
@@ -166,8 +169,15 @@ namespace Caelmor.Unity.Playable
         {
             AssertOwner();
             if (!IsReady || !Finite(point.x) || !Finite(point.y) || !Finite(point.z) ||
-                Mathf.Abs(point.y - Snapshot.Position.y) > .08f || Mathf.Abs(point.x) > 1000 || Mathf.Abs(point.z) > 1000) return false;
-            return Enqueue(DestinationCommand, Mathf.RoundToInt(point.x * 1000f), Mathf.RoundToInt(point.z * 1000f));
+                Mathf.Abs(point.y) > 1000 || Mathf.Abs(point.x) > 1000 || Mathf.Abs(point.z) > 1000) return false;
+            // Additive command105 packs three signed21-bit millimetre coordinates into
+            // the existing two integer payload fields. Legacy104 remains supported.
+            // This is destination intent only; host geometry still decides reachability.
+            const uint mask=0x1fffff;
+            ulong packed=((uint)Mathf.RoundToInt(point.x*1000)&mask) |
+                ((ulong)((uint)Mathf.RoundToInt(point.y*1000)&mask)<<21) |
+                ((ulong)((uint)Mathf.RoundToInt(point.z*1000)&mask)<<42);
+            return Enqueue(Destination3DCommand,unchecked((int)(uint)packed),(int)(packed>>32));
         }
         public bool SubmitSprint(bool wantsSprint)
         {
@@ -232,6 +242,15 @@ namespace Caelmor.Unity.Playable
                 requestedDestination = new Vector3(command.PayloadA / 1000f, Snapshot.Position.y, command.PayloadB / 1000f);
                 destinationRequested = true; debugMoveRequested = false;
             }
+            else if(command.CommandType==Destination3DCommand)
+            {
+                if(command.PayloadB<0)return;
+                ulong packed=(uint)command.PayloadA|((ulong)(uint)command.PayloadB<<32);
+                int Signed21(ulong bits){int n=(int)(bits&0x1fffff);return (n&0x100000)!=0?n-0x200000:n;}
+                var point=new Vector3(Signed21(packed)/1000f,Signed21(packed>>21)/1000f,Signed21(packed>>42)/1000f);
+                if(Mathf.Abs(point.x)>1000||Mathf.Abs(point.y)>1000||Mathf.Abs(point.z)>1000)return;
+                requestedDestination=point;destinationRequested=true;debugMoveRequested=false;
+            }
             else if (command.CommandType == SprintCommand) sprint = command.PayloadA == 1;
             else if (command.CommandType == InteractCommand) { interact = true; requestedTarget = command.PayloadA; }
             else if (command.CommandType >= GameplayCommandBase && command.CommandType < GameplayCommandBase + GameplayActionCount)
@@ -241,6 +260,7 @@ namespace Caelmor.Unity.Playable
         {
             AssertOwner();
             if (!inTick || !IsEligible(candidate)) return;
+            float movementScale=Mathf.Clamp(GameplayMovementPermille?.Invoke()??1000,0,1000)/1000f;
             if (destinationRequested)
             {
                 if (navigation != null && navigation.TryPath(Snapshot.Position, requestedDestination, collisionMask, out var nextRoute))
@@ -257,25 +277,27 @@ namespace Caelmor.Unity.Playable
                 pendingSprint = sprint;
                 pendingFacing = direction.normalized;
                 pendingPosition = MoveWithCollision(Snapshot.Position,
-                    direction * (sprint ? SprintSpeed : WalkSpeed) * (float)tick.FixedDelta.TotalSeconds);
+                    direction * (sprint ? SprintSpeed : WalkSpeed) * movementScale * (float)tick.FixedDelta.TotalSeconds);
             }
             else if (hasDestination)
             {
-                float remaining = (sprint ? SprintSpeed : WalkSpeed) * (float)tick.FixedDelta.TotalSeconds;
+                float remaining = (sprint ? SprintSpeed : WalkSpeed) * movementScale * (float)tick.FixedDelta.TotalSeconds;
                 pendingSprint = sprint;
                 // Consume the same tick's distance across corners; retargeting never inserts an idle tick.
                 while (hasDestination && remaining > .0001f)
                 {
                     if (routeIndex >= route.Length)
                     { hasDestination = false; pendingFeedback = "Destination reached."; break; }
-                    var delta = route[routeIndex] - pendingPosition; delta.y = 0;
+                    var delta = route[routeIndex] - pendingPosition;
                     float distance = delta.magnitude;
                     if (distance <= ArrivalTolerance) { routeIndex++; continue; }
                     var direction = delta / distance;
                     float travel = Mathf.Min(remaining, distance);
-                    var moved = MoveWithCollision(pendingPosition, direction * travel);
+                    var moved = MoveWithCollision(pendingPosition, direction * travel,true);
                     float actual = Vector3.Distance(moved, pendingPosition);
-                    pendingFacing = direction; pendingPosition = moved; remaining -= travel;
+                    var horizontal=Vector3.ProjectOnPlane(direction,Vector3.up);
+                    if(horizontal.sqrMagnitude>.0001f)pendingFacing=horizontal.normalized;
+                    pendingPosition = moved; remaining -= travel;
                     if (actual + .004f < travel)
                     {
                         hasDestination = false; route = Array.Empty<Vector3>();
@@ -307,7 +329,7 @@ namespace Caelmor.Unity.Playable
                 pendingFeedback = "Host acknowledged interaction at tick " + tick.TickIndex + ".";
             }
         }
-        Vector3 MoveWithCollision(Vector3 start, Vector3 displacement)
+        Vector3 MoveWithCollision(Vector3 start, Vector3 displacement,bool followElevation=false)
         {
             // Swept capsule prevents tunnelling at sprint speed. A second sweep slides along walls.
             var position = start;
@@ -321,16 +343,36 @@ namespace Caelmor.Unity.Playable
                 float travelled = Mathf.Max(0, hit.distance - Skin);
                 position += direction * travelled;
                 displacement = Vector3.ProjectOnPlane(displacement - direction * travelled, hit.normal);
-                displacement.y = 0;
+                if(!followElevation)displacement.y = 0;
             }
-            position.y = start.y;
+            if(followElevation && navigation!=null)
+            {
+                if(!navigation.TryGroundPoint(position,collisionMask,out var grounded))return start;
+                position=grounded;
+            }
+            else position.y = start.y;
+            return position;
+        }
+        internal Vector3 MoveEnemyDuringExecution(Vector3 start,Vector3 desired,float budget)
+        {
+            AssertOwner();Require(inTick,"enemy_movement_outside_tick");
+            if(navigation==null || !navigation.TryPath(start,desired,collisionMask,out var corners))return start;
+            Require(Finite(budget) && budget>=0 && budget<=1,"invalid_enemy_step_budget");
+            var position=start;
+            for(int i=0;i<corners.Length && budget>.0001f;i++)
+            {
+                var delta=corners[i]-position;float distance=delta.magnitude;if(distance<.01f)continue;
+                float travel=Mathf.Min(budget,distance);var moved=MoveWithCollision(position,delta/distance*travel,true);
+                float actual=Vector3.Distance(position,moved);position=moved;budget-=travel;
+                if(actual+.004f<travel)break;
+            }
             return position;
         }
         internal void RespawnDuringExecution(Vector3? requestedSpawn = null)
         {
             AssertOwner(); Require(inTick, "respawn_outside_tick");
             var target = requestedSpawn ?? context.RestoredSpawn;
-            Require(Finite(target.x) && Finite(target.y) && Finite(target.z) && Mathf.Abs(target.y-context.RestoredSpawn.y)<.01f,"invalid_respawn");
+            Require(Finite(target.x) && Finite(target.y) && Finite(target.z),"invalid_respawn");
             if(navigation!=null) Require(navigation.TryPath(pendingPosition,target,collisionMask,out _),"unreachable_respawn");
             pendingPosition = target; hasDestination = false; route = Array.Empty<Vector3>();
             pendingSprint = false;

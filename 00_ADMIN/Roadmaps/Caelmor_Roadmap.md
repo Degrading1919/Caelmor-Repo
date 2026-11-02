@@ -522,7 +522,7 @@ For combat architecture constraints, use:
         [ ] 34.3.A — Quest Data
     [ ] Task 34.4 — Quest Trigger Coverage Audit
         [ ] 34.4.A — Audit
-    [ ] Task 34.5 — Quest Fail States & Recovery
+    [ ] Task 34.5 — Quest Persistence, Recovery & Softlock Prevention
         [ ] 34.5.A — Rules
 
 ---

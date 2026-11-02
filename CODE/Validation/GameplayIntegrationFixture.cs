@@ -5,14 +5,14 @@ using Caelmor.Runtime.Gameplay;
 using Caelmor.Runtime.Players;
 using Caelmor.Runtime.Quests;
 
-internal sealed class GameplayIntegrationFixture
+internal sealed partial class GameplayIntegrationFixture
 {
     static readonly JsonSerializerOptions Json = new() { IncludeFields=true };
     readonly GameplayContent content;
     readonly string identity;
     GameplaySession session;
     long tick;
-    float x,z;
+    float x,y,z;
     bool active=true;
     public GameplayIntegrationFixture()
     {
@@ -117,6 +117,30 @@ internal sealed class GameplayIntegrationFixture
         var save=session.Capture();session=New();session.Restore(save);tick=0;
         Check(session.Carry=="" && session.Available(Index("lift1")),"Interrupted carry can be collected after reload.");Act("lift1");Act("deliver1");Check(session.Has("sack1_done"),"Recovered carry still advances.");
         Act("lift2");session.ClearTransient();Check(session.Carry=="sack2","Input cancellation preserves a carried load.");Act("deliver2");
+    }
+    public void ActiveQuestRecoveryPolicy()
+    {
+        CarryRecovery();
+        Check(session.Stage(0)==8 && session.CoarseState(0)==QuestState.Active,"Required carry work leaves the accepted quest Active.");
+        var progress=session.Capture();
+        active=false;
+        Throws(()=>Step(),"Disconnected participation cannot advance the quest.");
+        session.AbortTick();
+        Check(session.Stage(0)==8 && session.Has("sack1_done") && session.Has("sack2_done") && session.CoarseState(0)==QuestState.Active,"Participation loss keeps objective receipts and lifecycle Active.");
+        active=true;
+        session=New();session.Restore(progress);tick=0;
+        Check(session.Stage(0)==8 && session.Has("sack2_done") && session.CoarseState(0)==QuestState.Active,"Restoration resumes accepted work without re-offer or replaying earlier objectives.");
+        Act("lift3");Move("boar");
+        int payment=session.Quantity("payment");bool recovered=false;
+        for(int i=0;i<10000 && !recovered;i++){Step();recovered=session.PendingRespawn;}
+        Check(recovered && session.Health==content.tuning.health && session.Carry=="","Actual enemy damage reaches death recovery and returns the transient carry.");
+        Check(session.Stage(0)==8 && session.Has("sack1_done") && session.Has("sack2_done") && session.Quantity("weathered_marker_post")==1 && session.CoarseState(0)==QuestState.Active,"Death retains active progress, evidence and meaningful receipts.");
+        Act("lift3");Act("deliver3");Act("trunk_lift");Act("trunk_set");Fight("boar");Act("uphill_done");
+        Act("TL_EVIDENCE_PLAYER");Act("TL_STONE_KEPT");
+        var choice=session.Capture();session=New();session.Restore(choice);tick=0;
+        Check(session.CoarseState(0)==QuestState.Active && session.Has("TL_EVIDENCE_PLAYER") && session.Has("TL_STONE_KEPT") && !session.Available(Index("TL_EVIDENCE_KEEPERS")),"Recoverable lifecycle retains exclusive choices rather than reopening their consequences.");
+        Act("quest_finish");
+        Check(session.CoarseState(0)==QuestState.Completed && session.Quantity("payment")==payment+8,"Every remaining required objective still leads to one successful completion after recovery.");
     }
     public void BankWalk(string choice)
     {
@@ -297,7 +321,7 @@ internal sealed class GameplayIntegrationFixture
     {
         int index=Array.FindIndex(content.enemies,e=>e.id==id);var target=content.targets.Single(t=>t.id==content.enemies[index].target);
         float side=target.x>10?-1:1;float origin=target.x+side*1.55f;
-        x=origin;z=target.z;
+        x=origin;y=target.y;z=target.z;
         // The former 1.8–2.3 m safe annulus must not deal player damage.
         if(id=="boar")
         {
@@ -327,7 +351,7 @@ internal sealed class GameplayIntegrationFixture
         if(id=="boar")Check(damaged && dodged,"Required boar fight executes a real hit and an intentional dodge.");
         Check(session.Enemy(index).health==0,"Enemy defeated: "+id);
     }
-    void Move(string id){var t=content.targets.Single(t=>t.id==id);x=t.x;z=t.z;}
+    void Move(string id){var i=Array.FindIndex(content.targets,t=>t.id==id);var t=session.CurrentTargetPosition(i);x=t.X;y=t.Y;z=t.Z;}
     void Act(string id,bool move=true)
     {
         int i=Index(id);if(move)Move(content.actions[i].target);
@@ -337,7 +361,7 @@ internal sealed class GameplayIntegrationFixture
     int Index(string id)=>Array.FindIndex(content.actions,a=>a.id==id);
     void Step(GameplayRequest? request=null,bool sight=true,bool rushing=false)
     {
-        session.PrepareTick(++tick,x,z,request.HasValue?new[]{request.Value}:Array.Empty<GameplayRequest>(),_=>sight,rushing);
+        session.PrepareTick(++tick,x,z,request.HasValue?new[]{request.Value}:Array.Empty<GameplayRequest>(),_=>sight,rushing,y);
         session.CommitTick(tick);
     }
     static void Check(bool ok,string message){if(!ok)throw new Exception(message);}

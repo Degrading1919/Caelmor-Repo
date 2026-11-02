@@ -1,5 +1,7 @@
 # Stage 15.2 — Quest State & Progression Rules
 
+**Creative Director ruling — 2026-11-02:** This contract has exactly three quest lifecycle states: **Inactive, Active, Completed**. It supersedes the earlier five-state model. Failed and Abandoned are not lifecycle states, and quests cannot be permanently failed or voluntarily abandoned.
+
 ## 1. Purpose
 
 This document defines the authoritative **quest state model** and the **rules governing quest progression** at runtime.
@@ -13,7 +15,7 @@ No other states are permitted.
 
 **Defined States**
 
-1. **Uninitialized**
+1. **Inactive**
    - The quest instance exists but has not yet been accepted by the player.
    - This is the initial state for all newly created quest instances.
 
@@ -24,35 +26,26 @@ No other states are permitted.
    - The quest has reached a successful terminal condition.
    - This is a terminal state.
 
-4. **Failed**
-   - The quest has reached a failure terminal condition.
-   - This is a terminal state.
-
-5. **Abandoned**
-   - The quest has been explicitly terminated without completion.
-   - This is a terminal state.
-
 **State Rules**
 - A quest instance **must** be in exactly one state at all times.
 - Illegal or undefined states **are forbidden**.
-- Terminal states **must not** transition to any other state.
+- Completed is the only terminal state and **must not** transition to any other state.
+- Leaving an area, death, disconnect, encounter retry, or an interrupted action **must not** close or reset an Active quest.
+- Required objectives **must** retain a valid completion path. Recovery may reset transient encounter/action state, but must preserve committed quest progress, choices, consequences and required evidence.
 
 ## 3. Legal State Transitions
 
 **Permitted Transitions**
 
-- `Uninitialized → Active`
+- `Inactive → Active`
 - `Active → Completed`
-- `Active → Failed`
-- `Active → Abandoned`
 
 **Forbidden Transitions**
 
-- Any transition **into** `Uninitialized`
+- Any transition **into** `Inactive`
 - Any transition **out of** `Completed`
-- Any transition **out of** `Failed`
-- Any transition **out of** `Abandoned`
-- Direct transitions from `Uninitialized` to any terminal state
+- Direct transitions from `Inactive` to `Completed`
+- Quest failure, voluntary abandonment, or replacement of an Active instance to restart its progress
 - Any transition not explicitly listed as permitted
 
 **Transition Rules**
@@ -65,11 +58,11 @@ No other states are permitted.
 
 **Definition**
 
-Progress evaluation is the server-authoritative assessment of whether a quest instance satisfies the conditions required to advance or terminate its state.
+Progress evaluation is the server-authoritative assessment of whether an Active quest instance satisfies its completion conditions.
 
 **Rules**
 - Progress evaluation **must** operate only on the current quest state.
-- Progress evaluation **must not** occur if the quest state is `Uninitialized`.
+- Progress evaluation **must not** occur if the quest state is `Inactive`.
 - Progress evaluation **must not** occur for any terminal state.
 - Progress evaluation **must** be structurally defined and content-agnostic.
 - Progress evaluation **must not** embed:
@@ -84,6 +77,7 @@ Progress evaluation is the server-authoritative assessment of whether a quest in
   2. A single legal state transition occurs.
 - No other outcomes are permitted.
 - Partial progress application **is forbidden**.
+- Unknown evaluator decisions are rejected without changing the Active state or any committed progress.
 
 ## 5. Tick vs Event Evaluation (Structural Only)
 
@@ -156,6 +150,12 @@ The following cases **must** be handled deterministically:
 **Server Crash During State Transition**
 - The transition **must** be treated as non-existent unless fully persisted.
 - Restore **must** reflect the last valid persisted quest state only.
+
+**Recovery and Retry**
+- An encounter defeat is an encounter result, not a quest lifecycle state.
+- Death, leaving, disconnect and retry preserve the Active instance and its committed objectives, counters, evidence, choice records and consequences.
+- Interrupted carries/channels may return to their authored recovery points; they must remain reacquirable when required. No recovery path may duplicate a completed reward or erase an established choice.
+- Validation must demonstrate that every required objective remains completable after each supported interruption.
 
 ## 8. Explicit Non-Goals
 

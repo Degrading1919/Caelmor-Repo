@@ -174,7 +174,7 @@ No option is wrong. The proof is the same in all three: the ringers came.
 
 ### 1.11 Failure, recovery, co-op
 
-Falls through H1 drop the player one landing; never fatal. Death (from unrelated causes) respawns at the tower square. Logout restores the last step; a lowered slate stays lowered. Abandon: re-offered at the square. Co-op: each player climbs and pulls in their own instance; when Tamsin pulls for one player, partners in the chamber see the bell swing (the swing is a world animation) but only the requester's client plays the river ring. Props (whitewash, threads, slate) are per player; fallback if per-player props are not ready: the wall shows the slate hung beside a half-whitewashed roster for everyone, and the choice is carried in dialogue.
+Falls through H1 drop the player one landing; never fatal. Death (from unrelated causes) respawns at the tower square. Logout restores the last step; a lowered slate stays lowered. Leave and return: the quest stays Active with committed progress and choice props intact; resume from the current objective at the square. Co-op: each player climbs and pulls in their own instance; when Tamsin pulls for one player, partners in the chamber see the bell swing (the swing is a world animation) but only the requester's client plays the river ring. Props (whitewash, threads, slate) are per player; fallback if per-player props are not ready: the wall shows the slate hung beside a half-whitewashed roster for everyone, and the choice is carried in dialogue.
 
 ### 1.12 Dialogue
 

@@ -95,6 +95,7 @@ Run("true_line_guaranteed_proof_without_optional_leads", () => new GameplayInteg
 Run("true_line_rivercrew_evidence_choice", () => new GameplayIntegrationFixture().FullQuest(true,true));
 Run("gameplay_interruptions_and_corrupt_restore", () => new GameplayIntegrationFixture().Interruptions());
 Run("true_line_carry_reload_recovery", () => new GameplayIntegrationFixture().CarryRecovery());
+Run("active_quest_persists_through_disconnect_death_and_retry", () => new GameplayIntegrationFixture().ActiveQuestRecoveryPolicy());
 Run("bank_walk_keep_bank_and_hazard_restore", () => new GameplayIntegrationFixture().BankWalk("keep"));
 Run("bank_walk_cut_bank_branch", () => new GameplayIntegrationFixture().BankWalk("cut"));
 Run("bank_walk_build_landing_branch", () => new GameplayIntegrationFixture().BankWalk("build"));

@@ -1,5 +1,7 @@
 # Stage 27 — Quest Runtime Integration Definition
 
+**Creative Director ruling — 2026-11-02:** The approved lifecycle is exactly **Inactive, Active, Completed**, aligned with Stage 15.2. The former Failed state and proposals for Abandoned/re-offer are superseded. Players may leave, die, disconnect and retry without losing an Active quest.
+
 ## Purpose
 Define the **authoritative runtime contract** for quests as deterministic, server-authoritative state machines that integrate with player lifecycle, inventory, combat, and world simulation without violating Phase 1.4 constraints.
 
@@ -52,7 +54,7 @@ Quests may exist in one of the following runtime states:
 
 1. **Inactive**
    - Quest is not yet started
-   - No state mutations allowed
+   - Progression checks are not eligible; explicit authoritative activation is allowed
 
 2. **Active**
    - Quest is in progress
@@ -62,9 +64,7 @@ Quests may exist in one of the following runtime states:
    - Quest objectives satisfied
    - Completion effects may be granted
 
-4. **Failed**
-   - Quest permanently failed
-   - No further progression allowed
+Only `Inactive → Active` and `Active → Completed` change lifecycle state. Completed is terminal. Repeated acknowledgement of an already-applied legal transition may be idempotent; it must never replay rewards or reset progress. Runtime enum values remain Inactive = 0, Active = 1, Completed = 2.
 
 ---
 
@@ -78,6 +78,8 @@ The following invariants MUST always hold:
 4. Quest state transitions are deterministic.
 5. Quest state is stable during simulation execution.
 6. A quest may not be both Active and Completed.
+7. Exactly the three listed lifecycle states are legal; no failure or abandonment transition exists.
+8. Leaving, death, disconnect or encounter retry preserves the Active instance and committed progress. No replacement instance is created to restart a quest.
 
 Violation of any invariant is a fatal runtime error.
 
@@ -96,6 +98,7 @@ Quest progression may be triggered by:
 - Progression checks must validate eligibility
 - Progression must not mutate unrelated systems
 - Progression must leave no partial state on failure
+- Rejected operations and unsuccessful encounter/action attempts do not permanently fail quests
 
 ---
 
@@ -124,6 +127,8 @@ Quest progression may be triggered by:
 ### With Persistence
 - Quest state changes may be marked dirty for save
 - Quest systems do not perform IO directly
+- Active state, committed objective progress, evidence, counters and meaningful choice records survive supported recovery/restore boundaries
+- Transient carries, channels and encounters use authored retry/reacquisition paths without removing the Active quest or undoing persistent consequences
 
 ---
 
@@ -149,6 +154,8 @@ The following are explicitly forbidden:
 - Quest logic mutating lifecycle, residency, or simulation state
 - Non-deterministic quest progression
 - Quest progression during simulation execution
+- Permanent quest failure, voluntary abandonment, or resetting an Active quest to Inactive
+- Recovery that makes a required objective permanently inaccessible
 
 Any implementation exhibiting these behaviors is invalid.
 
@@ -161,5 +168,9 @@ Future validation stages must prove:
 - Enforcement of eligibility gates
 - No mid-tick quest state mutation
 - Correct interaction with simulation, combat, and inventory
+- Exactly Inactive, Active and Completed; invalid evaluator results leave Active state unchanged
+- Leaving, death, disconnect and encounter retry retain Active progress and meaningful choices
+- Required carries/items can be recovered without duplicate grants and every required objective retains a valid completion path
+- Completed state and reward receipts remain stable across duplicate events and restore
 
 This document is the sole authority for quest runtime correctness.

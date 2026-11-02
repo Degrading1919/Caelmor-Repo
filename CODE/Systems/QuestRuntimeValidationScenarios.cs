@@ -21,7 +21,11 @@ namespace Caelmor.Validation.Quests
                 new ValidationScenarioAdapter(new Scenario1_DeterministicProgression()),
                 new ValidationScenarioAdapter(new Scenario2_InvalidTransitionsRejected()),
                 new ValidationScenarioAdapter(new Scenario3_MidTickMutationBlocked()),
-                new ValidationScenarioAdapter(new Scenario4_LifecycleEligibilityRequired())
+                new ValidationScenarioAdapter(new Scenario4_LifecycleEligibilityRequired()),
+                new ValidationScenarioAdapter(new Scenario5_ExactLifecycleContract()),
+                new ValidationScenarioAdapter(new Scenario6_InvalidDecisionPreservesRecovery()),
+                new ValidationScenarioAdapter(new Scenario7_InterruptedEvaluationPreservesActive()),
+                new ValidationScenarioAdapter(new Scenario8_IneligiblePeriodsPreserveInstance())
             };
         }
 
@@ -81,9 +85,12 @@ namespace Caelmor.Validation.Quests
                 a.True(complete.Ok, "Completion must succeed from active state.");
                 a.Equal(QuestState.Completed, complete.State!.Value, "Quest must become Completed after explicit completion.");
 
-                var failAfterComplete = rig.System.FailQuest(questId);
-                a.False(failAfterComplete.Ok, "Failure transition must be rejected from terminal state.");
-                a.Equal(QuestStateTransitionFailureReason.InvalidTransition, failAfterComplete.FailureReason, "Invalid transition must be reported when attempting to fail a completed quest.");
+                var restartAfterComplete = rig.System.ActivateQuest(questId);
+                a.False(restartAfterComplete.Ok, "Completed quests must not be restarted or reset.");
+                a.Equal(QuestStateTransitionFailureReason.InvalidTransition, restartAfterComplete.FailureReason, "Completed-to-active is invalid.");
+
+                var duplicateComplete = rig.System.CompleteQuest(questId);
+                a.True(duplicateComplete.Ok && !duplicateComplete.WasStateChanged, "Repeated completion acknowledges existing completion without another transition.");
             }
         }
 
@@ -141,6 +148,121 @@ namespace Caelmor.Validation.Quests
             }
         }
 
+        private sealed class Scenario5_ExactLifecycleContract : IValidationScenario
+        {
+            public string Name => "Scenario 5 — Exactly Three Quest Lifecycle States";
+
+            public void Run(IAssert a)
+            {
+                var names = Enum.GetNames(typeof(QuestState));
+                a.Equal(3, names.Length, "Only the Director-approved lifecycle states may exist.");
+                a.Equal("Inactive", names[0], "Initial state name is stable.");
+                a.Equal("Active", names[1], "In-progress state name is stable.");
+                a.Equal("Completed", names[2], "Completion is the only terminal state.");
+                a.Equal(0, (int)QuestState.Inactive, "Inactive keeps its established numeric identity.");
+                a.Equal(1, (int)QuestState.Active, "Active keeps its established numeric identity.");
+                a.Equal(2, (int)QuestState.Completed, "Completed keeps its established numeric identity.");
+                a.Equal(2, Enum.GetNames(typeof(QuestProgressionDecision)).Length, "Evaluation can only preserve or complete the quest.");
+            }
+        }
+
+        private sealed class Scenario6_InvalidDecisionPreservesRecovery : IValidationScenario
+        {
+            public string Name => "Scenario 6 — Invalid Decisions Preserve Required Completion Path";
+
+            public void Run(IAssert a)
+            {
+                var rig = Rig.Create();
+                var id = new QuestInstanceId(Guid.Parse("eeeeeeee-5555-5555-5555-eeeeeeeeeeee"));
+                rig.Lifecycle.SetActive(rig.Player, true);
+                rig.System.RegisterQuest(id, rig.Player, "quest_recoverable");
+                rig.System.ActivateQuest(id);
+                foreach (int value in new[] { 2, -1, 99 })
+                {
+                    rig.Evaluator.EnqueueDecision((QuestProgressionDecision)value);
+                    var rejected = rig.System.ProcessProgression(id, Rig.EmptyEvents);
+                    a.False(rejected.Ok, "Removed/undefined evaluator values cannot close an active quest.");
+                    a.Equal(QuestProgressionFailureReason.InvalidDecision, rejected.FailureReason, "Invalid evaluator decisions are observable.");
+                    a.True(rig.System.TryGetState(id, out var state), "The same instance remains present.");
+                    a.Equal(QuestState.Active, state, "Rejected progression preserves Active.");
+                }
+                var incomplete = rig.System.ProcessProgression(id, Rig.EmptyEvents);
+                a.True(incomplete.Ok && !incomplete.WasStateChanged, "Incomplete objectives remain recoverably active.");
+                rig.Evaluator.EnqueueDecision(QuestProgressionDecision.Complete);
+                var retry = rig.System.ProcessProgression(id, Rig.EmptyEvents);
+                a.True(retry.Ok && retry.WasStateChanged, "A later valid required objective still completes the same instance.");
+                a.Equal(QuestState.Completed, retry.State!.Value, "Recovery reaches successful completion.");
+            }
+        }
+
+        private sealed class Scenario7_InterruptedEvaluationPreservesActive : IValidationScenario
+        {
+            public string Name => "Scenario 7 — Interrupted Evaluation Retains Active Quest";
+
+            public void Run(IAssert a)
+            {
+                var rig = Rig.Create();
+                rig.Lifecycle.SetActive(rig.Player, true);
+                for (int interruption = 0; interruption < 3; interruption++)
+                {
+                    var id = new QuestInstanceId(Guid.NewGuid());
+                    rig.System.RegisterQuest(id, rig.Player, "quest_interrupted_" + interruption);
+                    rig.System.ActivateQuest(id);
+                    int kind = interruption;
+                    rig.Evaluator.OnEvaluate = () =>
+                    {
+                        if (kind == 0) rig.Lifecycle.SetActive(rig.Player, false);
+                        else if (kind == 1) rig.MutationGate.Allow = false;
+                        else rig.Authority.IsServerAuthoritative = false;
+                    };
+                    rig.Evaluator.EnqueueDecision(QuestProgressionDecision.Complete);
+                    var stopped = rig.System.ProcessProgression(id, Rig.EmptyEvents);
+                    a.False(stopped.Ok, "Loss of eligibility during evaluation discards its completion.");
+                    a.True(rig.System.TryGetState(id, out var state), "Interrupted quest remains registered.");
+                    a.Equal(QuestState.Active, state, "Interrupted evaluation never closes or resets the quest.");
+                    rig.Evaluator.OnEvaluate = null;
+                    rig.Lifecycle.SetActive(rig.Player, true);
+                    rig.MutationGate.Allow = true;
+                    rig.Authority.IsServerAuthoritative = true;
+                    rig.Evaluator.EnqueueDecision(QuestProgressionDecision.Complete);
+                    a.True(rig.System.ProcessProgression(id, Rig.EmptyEvents).Ok, "A retry after participation recovers remains valid.");
+                }
+            }
+        }
+
+        private sealed class Scenario8_IneligiblePeriodsPreserveInstance : IValidationScenario
+        {
+            public string Name => "Scenario 8 — Participation Gaps Preserve Quest Instance";
+
+            public void Run(IAssert a)
+            {
+                var rig = Rig.Create();
+                var id = new QuestInstanceId(Guid.Parse("ffffffff-6666-6666-6666-ffffffffffff"));
+                rig.Lifecycle.SetActive(rig.Player, true);
+                rig.System.RegisterQuest(id, rig.Player, "quest_resume");
+                rig.System.ActivateQuest(id);
+                for (int gap = 0; gap < 3; gap++)
+                {
+                    // The core receives lifecycle eligibility, not a death/disconnect event;
+                    // this models those participation gaps without claiming a session test.
+                    rig.Lifecycle.SetActive(rig.Player, false);
+                    var blocked = rig.System.ProcessProgression(id, Rig.EmptyEvents);
+                    a.Equal(QuestProgressionFailureReason.LifecycleNotEligible, blocked.FailureReason, "Inactive participation blocks evaluation.");
+                    a.True(rig.System.TryGetState(id, out var state), "Leaving never removes the accepted quest.");
+                    a.Equal(QuestState.Active, state, "Active survives the participation gap.");
+                    rig.Lifecycle.SetActive(rig.Player, true);
+                    var registration = rig.System.RegisterQuest(id, rig.Player, "quest_resume");
+                    a.True(registration.Ok && !registration.WasCreated, "Resume retains the existing instance rather than re-offering/resetting it.");
+                    var replacement = rig.System.RegisterQuest(new QuestInstanceId(Guid.NewGuid()), rig.Player, "quest_resume");
+                    a.False(replacement.Ok, "A new identifier cannot replace the accepted quest with an empty instance.");
+                    a.Equal(QuestRegistrationFailureReason.AlreadyRegistered, replacement.FailureReason, "Existing player/definition history prevents re-offer.");
+                }
+                rig.Evaluator.EnqueueDecision(QuestProgressionDecision.Complete);
+                a.Equal(QuestState.Completed, rig.System.ProcessProgression(id, Rig.EmptyEvents).State!.Value, "The original accepted instance remains completable.");
+                a.False(rig.System.RegisterQuest(new QuestInstanceId(Guid.NewGuid()), rig.Player, "quest_resume").Ok, "A completed quest cannot be recreated to erase its choices or replay completion.");
+            }
+        }
+
         private sealed class Rig
         {
             public FakeAuthority Authority { get; private set; }
@@ -175,7 +297,7 @@ namespace Caelmor.Validation.Quests
                 IsServerAuthoritative = isServerAuthoritative;
             }
 
-            public bool IsServerAuthoritative { get; }
+            public bool IsServerAuthoritative { get; set; }
         }
 
         private sealed class FakeLifecycle : IPlayerLifecycleQuery
@@ -210,6 +332,7 @@ namespace Caelmor.Validation.Quests
             private readonly Queue<QuestProgressionDecision> _decisions = new Queue<QuestProgressionDecision>();
 
             public List<QuestProgressionContext> Contexts { get; } = new List<QuestProgressionContext>();
+            public Action? OnEvaluate { get; set; }
 
             public void EnqueueDecision(QuestProgressionDecision decision)
             {
@@ -219,6 +342,7 @@ namespace Caelmor.Validation.Quests
             public QuestProgressionDecision Evaluate(QuestProgressionContext context)
             {
                 Contexts.Add(context);
+                OnEvaluate?.Invoke();
                 if (_decisions.Count == 0)
                     return QuestProgressionDecision.NoChange;
 

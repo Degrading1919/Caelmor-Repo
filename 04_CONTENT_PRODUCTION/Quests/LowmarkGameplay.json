@@ -92,6 +92,15 @@
       "tags": [
         "cooked_food"
       ]
+    },
+    {
+      "id": "SM_requisition",
+      "name": "Board requisition slip",
+      "heal": 0,
+      "quest": true,
+      "tags": [
+        "document"
+      ]
     }
   ],
   "skills": [
@@ -525,7 +534,8 @@
       "z": -4,
       "all": [],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "maelin",
@@ -538,7 +548,8 @@
         "silt_clear",
         "people_uphill"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "hollis",
@@ -550,7 +561,8 @@
       "none": [
         "people_uphill"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "nan",
@@ -562,7 +574,8 @@
       "none": [
         "people_uphill"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "wynn",
@@ -574,7 +587,8 @@
       "none": [
         "people_uphill"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "tovin",
@@ -586,7 +600,8 @@
       "none": [
         "people_uphill"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "dace",
@@ -598,7 +613,8 @@
       "none": [
         "people_uphill"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "false_post",
@@ -608,7 +624,8 @@
       "z": 4,
       "all": [],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "old_post",
@@ -620,7 +637,8 @@
       "none": [
         "post_found"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "footing",
@@ -630,7 +648,8 @@
       "z": 10,
       "all": [],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "maelin_footing",
@@ -644,7 +663,8 @@
       "none": [
         "river_read"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "coppice",
@@ -654,7 +674,8 @@
       "z": 2,
       "all": [],
       "none": [],
-      "nodeInstanceId": 1001
+      "nodeInstanceId": 1001,
+      "y": 0
     },
     {
       "id": "timber",
@@ -664,7 +685,8 @@
       "z": -1,
       "all": [],
       "none": [],
-      "nodeInstanceId": 1002
+      "nodeInstanceId": 1002,
+      "y": 0
     },
     {
       "id": "skiff",
@@ -674,7 +696,8 @@
       "z": 10,
       "all": [],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "grain",
@@ -684,7 +707,8 @@
       "z": -4,
       "all": [],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "trunk",
@@ -696,7 +720,8 @@
       "none": [
         "trunk_done"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "camp",
@@ -706,7 +731,8 @@
       "z": -10,
       "all": [],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "fire",
@@ -716,7 +742,8 @@
       "z": -10,
       "all": [],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "maelin_camp",
@@ -728,7 +755,8 @@
         "people_uphill"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "hollis_camp",
@@ -740,7 +768,8 @@
         "people_uphill"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "nan_camp",
@@ -754,7 +783,8 @@
       "none": [
         "FK_entered"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "tovin_camp",
@@ -766,7 +796,8 @@
         "people_uphill"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "ansel",
@@ -778,7 +809,8 @@
         "choices_done"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "chalk_ring",
@@ -790,7 +822,8 @@
         "TL_STONE_PUBLIC"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "crossing",
@@ -802,7 +835,8 @@
         "quest_done"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "silt1",
@@ -816,7 +850,8 @@
       "none": [
         "silt_clear"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "silt2",
@@ -830,7 +865,8 @@
       "none": [
         "silt_clear"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "silt3",
@@ -844,7 +880,8 @@
       "none": [
         "silt_clear"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "leech",
@@ -858,7 +895,8 @@
       "none": [
         "silt_clear"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "goose1",
@@ -872,7 +910,8 @@
       "none": [
         "post_found"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "goose2",
@@ -886,7 +925,8 @@
       "none": [
         "post_found"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "boar",
@@ -898,7 +938,8 @@
         "sack3_lifted"
       ],
       "none": [],
-      "nodeInstanceId": 1003
+      "nodeInstanceId": 1003,
+      "y": 0
     },
     {
       "id": "wild_boar",
@@ -910,7 +951,8 @@
         "quest_done"
       ],
       "none": [],
-      "nodeInstanceId": 1004
+      "nodeInstanceId": 1004,
+      "y": 0
     },
     {
       "id": "wreck1",
@@ -922,7 +964,8 @@
         "wreck_entered"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "wreck2",
@@ -934,7 +977,8 @@
         "wreck_entered"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "wreck3",
@@ -946,7 +990,8 @@
         "wreck_entered"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "maelin_return",
@@ -960,7 +1005,8 @@
       "none": [
         "people_uphill"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "dace_camp",
@@ -972,7 +1018,8 @@
         "people_uphill"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "wynn_camp",
@@ -984,7 +1031,8 @@
         "people_uphill"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "true_post",
@@ -996,7 +1044,8 @@
         "discovery"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "bw_tamsin",
@@ -1008,7 +1057,8 @@
         "quest_done"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "bw_upper",
@@ -1020,7 +1070,8 @@
         "quest_done"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "bw_lower",
@@ -1032,7 +1083,8 @@
         "quest_done"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "bw_stake",
@@ -1044,7 +1096,8 @@
         "quest_done"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "bw_measure1",
@@ -1056,7 +1109,8 @@
         "BW_started"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "bw_measure2",
@@ -1068,7 +1122,8 @@
         "BW_started"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "bw_measure3",
@@ -1080,7 +1135,8 @@
         "BW_started"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "bw_wrack",
@@ -1092,7 +1148,8 @@
         "BW_started"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "bw_repair",
@@ -1104,7 +1161,8 @@
         "BW_started"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "bw_jam",
@@ -1118,7 +1176,8 @@
       "none": [
         "BW_JAM_SWUNG"
       ],
-      "nodeInstanceId": 1005
+      "nodeInstanceId": 1005,
+      "y": 0
     },
     {
       "id": "bw_old_cord",
@@ -1130,7 +1189,8 @@
         "BW_JAM_SWUNG"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "bw_leaner",
@@ -1144,7 +1204,8 @@
       "none": [
         "BW_LEANER_FALLEN"
       ],
-      "nodeInstanceId": 1006
+      "nodeInstanceId": 1006,
+      "y": 0
     },
     {
       "id": "bw_leaner_fallen",
@@ -1156,7 +1217,8 @@
         "BW_LEANER_FALLEN"
       ],
       "none": [],
-      "nodeInstanceId": 1007
+      "nodeInstanceId": 1007,
+      "y": 0
     },
     {
       "id": "bw_holder",
@@ -1170,7 +1232,8 @@
       "none": [
         "BW_BANK_CUT"
       ],
-      "nodeInstanceId": 1008
+      "nodeInstanceId": 1008,
+      "y": 0
     },
     {
       "id": "bw_holder_stump",
@@ -1182,7 +1245,8 @@
         "BW_BANK_CUT"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "bw_old_tree",
@@ -1194,7 +1258,8 @@
         "BW_started"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "bw_stage",
@@ -1206,7 +1271,8 @@
         "BW_LANDING_BUILT"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "bw_restaked",
@@ -1218,7 +1284,8 @@
         "BW_TAMSIN_HEARD"
       ],
       "none": [],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "BW_skitter1",
@@ -1232,7 +1299,8 @@
       "none": [
         "BW_JAM_SWUNG"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "BW_skitter2",
@@ -1246,7 +1314,8 @@
       "none": [
         "BW_JAM_SWUNG"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "BW_skitter3",
@@ -1260,7 +1329,8 @@
       "none": [
         "BW_JAM_SWUNG"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "BW_skitter4",
@@ -1274,7 +1344,8 @@
       "none": [
         "BW_JAM_SWUNG"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "BW_skitter5",
@@ -1288,7 +1359,8 @@
       "none": [
         "BW_JAM_SWUNG"
       ],
-      "nodeInstanceId": 0
+      "nodeInstanceId": 0,
+      "y": 0
     },
     {
       "id": "fk_shelter",
@@ -1300,7 +1372,8 @@
       "all": [
         "quest_done"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_nan",
@@ -1312,7 +1385,8 @@
       "all": [
         "FK_entered"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_hearth",
@@ -1324,7 +1398,8 @@
       "all": [
         "FK_entered"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_loft_crates",
@@ -1336,7 +1411,8 @@
       "all": [
         "FK_entered"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_flood_wall",
@@ -1348,7 +1424,8 @@
       "all": [
         "FK_entered"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_wet_wood",
@@ -1360,7 +1437,8 @@
       "all": [
         "FK_entered"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_stores",
@@ -1372,7 +1450,8 @@
       "all": [
         "FK_entered"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_water_step",
@@ -1384,7 +1463,8 @@
       "all": [
         "FK_entered"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_household1",
@@ -1396,7 +1476,8 @@
       "all": [
         "FK_entered"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_household2",
@@ -1408,7 +1489,8 @@
       "all": [
         "FK_entered"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_household3",
@@ -1420,7 +1502,8 @@
       "all": [
         "FK_entered"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_household4",
@@ -1432,7 +1515,8 @@
       "all": [
         "FK_entered"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_crew",
@@ -1444,7 +1528,8 @@
       "all": [
         "FK_entered"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_family",
@@ -1456,7 +1541,8 @@
       "all": [
         "FK_entered"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_feeding_traces",
@@ -1468,7 +1554,8 @@
       "all": [
         "FK_fire_lit"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_cover",
@@ -1480,7 +1567,8 @@
       "all": [
         "FK_fire_lit"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_sentinel",
@@ -1492,7 +1580,8 @@
       "all": [
         "FK_fire_lit"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_flock_far",
@@ -1504,7 +1593,8 @@
       "all": [
         "FK_fire_lit"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_recovery",
@@ -1516,7 +1606,8 @@
       "all": [
         "FK_fire_lit"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_nesting",
@@ -1528,7 +1619,8 @@
       "all": [
         "FK_fire_lit"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_stakes",
@@ -1540,7 +1632,8 @@
       "all": [
         "FK_fire_lit"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_deep_water",
@@ -1552,7 +1645,8 @@
       "all": [
         "FK_fire_lit"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_lanes_clearing",
@@ -1565,7 +1659,8 @@
         "FK_done",
         "FK_POT_CREW"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_extra_night",
@@ -1578,7 +1673,8 @@
         "FK_done",
         "FK_POT_FAMILY"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_all_fed",
@@ -1591,7 +1687,8 @@
         "FK_done",
         "FK_POT_OWN"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_shelter_post1",
@@ -1603,7 +1700,8 @@
       "all": [
         "FK_entered"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_shelter_post2",
@@ -1615,7 +1713,8 @@
       "all": [
         "FK_entered"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_shelter_post3",
@@ -1627,7 +1726,8 @@
       "all": [
         "FK_entered"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_shelter_post4",
@@ -1639,7 +1739,8 @@
       "all": [
         "FK_entered"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_nest_north",
@@ -1651,7 +1752,8 @@
       "all": [
         "FK_fire_lit"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_nest_east",
@@ -1663,7 +1765,8 @@
       "all": [
         "FK_fire_lit"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_nest_south",
@@ -1675,7 +1778,8 @@
       "all": [
         "FK_fire_lit"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "fk_nest_west",
@@ -1687,7 +1791,8 @@
       "all": [
         "FK_fire_lit"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "FK_goose1",
@@ -1699,7 +1804,8 @@
       "all": [
         "FK_closed_entered"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "FK_goose2",
@@ -1711,7 +1817,8 @@
       "all": [
         "FK_closed_entered"
       ],
-      "none": []
+      "none": [],
+      "y": 0
     },
     {
       "id": "FK_leech",
@@ -1723,7 +1830,852 @@
       "all": [
         "FK_fire_lit"
       ],
-      "none": []
+      "none": [],
+      "y": 0
+    },
+    {
+      "id": "sm_yard",
+      "name": "Crestbridge granary yard",
+      "kind": "area",
+      "x": 42,
+      "z": -6,
+      "all": [
+        "quest_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": 0
+    },
+    {
+      "id": "sm_corvin",
+      "name": "Corvin Tath",
+      "kind": "npc",
+      "x": 44,
+      "z": -7,
+      "all": [
+        "quest_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": 0
+    },
+    {
+      "id": "sm_tallies",
+      "name": "Two tally racks",
+      "kind": "stone",
+      "x": 46,
+      "z": -7,
+      "all": [
+        "quest_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": 0
+    },
+    {
+      "id": "sm_shelf",
+      "name": "Bare ledger shelf",
+      "kind": "stone",
+      "x": 46,
+      "z": -9,
+      "all": [
+        "quest_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": 0
+    },
+    {
+      "id": "sm_bays",
+      "name": "Undercroft grain bays",
+      "kind": "cart",
+      "x": 50,
+      "z": -5,
+      "all": [
+        "quest_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": 0
+    },
+    {
+      "id": "sm_hill_line",
+      "name": "Hill gate loading line",
+      "kind": "stone",
+      "x": 52,
+      "z": 0,
+      "all": [
+        "quest_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": 0
+    },
+    {
+      "id": "sm_hill_gate",
+      "name": "HILL GATE",
+      "kind": "gate",
+      "x": 54,
+      "z": 0,
+      "all": [
+        "quest_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": 0
+    },
+    {
+      "id": "sm_wynn",
+      "name": "Wynn Tarrow",
+      "kind": "npc",
+      "x": 48,
+      "z": 7,
+      "all": [
+        "quest_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": 0
+    },
+    {
+      "id": "sm_waiting_wall",
+      "name": "Waiting wall",
+      "kind": "stone",
+      "x": 42,
+      "z": 4,
+      "all": [
+        "quest_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": 0
+    },
+    {
+      "id": "sm_ruts",
+      "name": "Fresh cart ruts",
+      "kind": "stone",
+      "x": 64,
+      "z": 0,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -2.5
+    },
+    {
+      "id": "sm_goblin_hole",
+      "name": "Goblin hole and spilled grain",
+      "kind": "stone",
+      "x": 68,
+      "z": -2,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_sorting",
+      "name": "Sorting Hall",
+      "kind": "area",
+      "x": 72,
+      "z": 0,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_rake",
+      "name": "Rake bed under even straw",
+      "kind": "trap",
+      "x": 73,
+      "z": 0,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_twine",
+      "name": "Twine scythe arch",
+      "kind": "trap",
+      "x": 76,
+      "z": 0,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_warren",
+      "name": "Low tunnels",
+      "kind": "area",
+      "x": 79,
+      "z": 0,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_pan",
+      "name": "Pans and cups on twine",
+      "kind": "trap",
+      "x": 81,
+      "z": -4,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_root_gate",
+      "name": "Root-choked route",
+      "kind": "gate",
+      "x": 82,
+      "z": 6,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_larder",
+      "name": "The Larder",
+      "kind": "cart",
+      "x": 83,
+      "z": -11,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_harrow",
+      "name": "Hanging harrow",
+      "kind": "trap",
+      "x": 90,
+      "z": 0,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_harrow_ledge",
+      "name": "Trapper ledge ramp",
+      "kind": "area",
+      "x": 90,
+      "z": 6,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_throne",
+      "name": "The Heaps and the Throne",
+      "kind": "area",
+      "x": 98,
+      "z": 0,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_root",
+      "name": "Driftroot-choked side tunnel",
+      "kind": "tree",
+      "x": 81,
+      "z": 6,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [
+        "SM_root_cut"
+      ],
+      "nodeInstanceId": 1010,
+      "y": -3
+    },
+    {
+      "id": "sm_heap1",
+      "name": "The grain throne",
+      "kind": "cart",
+      "x": 99,
+      "z": -4,
+      "all": [
+        "SM_throne_entered"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_heap2",
+      "name": "Goblin sack nest",
+      "kind": "cart",
+      "x": 96,
+      "z": 5,
+      "all": [
+        "SM_throne_entered"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_heap3",
+      "name": "Two chewed grain sacks",
+      "kind": "cart",
+      "x": 100,
+      "z": 5,
+      "all": [
+        "SM_throne_entered"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_bin",
+      "name": "Grain bin on a jack",
+      "kind": "trap",
+      "x": 98,
+      "z": -1,
+      "all": [
+        "SM_throne_entered"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_gallery_door",
+      "name": "Door barred from the chute side",
+      "kind": "gate",
+      "x": 102,
+      "z": 0,
+      "all": [
+        "SM_sack_king_dead"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_unbar",
+      "name": "Gallery door bar",
+      "kind": "post",
+      "x": 103.9,
+      "z": 0,
+      "all": [
+        "SM_sack_king_dead"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_rope",
+      "name": "Chute gantry rope burns",
+      "kind": "stone",
+      "x": 104,
+      "z": 5,
+      "all": [
+        "SM_sack_king_dead"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_pulley",
+      "name": "Freshly greased pulley",
+      "kind": "stone",
+      "x": 104,
+      "z": 7,
+      "all": [
+        "SM_sack_king_dead"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_prints",
+      "name": "Hobnailed boot prints",
+      "kind": "stone",
+      "x": 103,
+      "z": 9,
+      "all": [
+        "SM_sack_king_dead"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_stencil",
+      "name": "RELIEF CUT stencil",
+      "kind": "stone",
+      "x": 102,
+      "z": 12,
+      "all": [
+        "SM_sack_king_dead"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_stone",
+      "name": "Marking Stone in the dry wall",
+      "kind": "stone",
+      "x": 104,
+      "z": 13,
+      "all": [
+        "SM_sack_king_dead"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_slip",
+      "name": "Dropped requisition slip",
+      "kind": "stone",
+      "x": 104,
+      "z": 10,
+      "all": [
+        "SM_sack_king_dead"
+      ],
+      "none": [
+        "SM_slip_acquired"
+      ],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_mooring",
+      "name": "Bright mooring ring",
+      "kind": "stone",
+      "x": 104,
+      "z": 16,
+      "all": [
+        "SM_gallery_unbarred"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "sm_aldric",
+      "name": "Aldric Fenmere",
+      "kind": "npc",
+      "x": 45,
+      "z": -9,
+      "all": [
+        "SM_chute_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": 0
+    },
+    {
+      "id": "sm_hesketh",
+      "name": "Captain Hesketh",
+      "kind": "npc",
+      "x": 47,
+      "z": -7,
+      "all": [
+        "SM_chute_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": 0
+    },
+    {
+      "id": "sm_marrick",
+      "name": "Provisioner Marrick",
+      "kind": "npc",
+      "x": 49,
+      "z": -9,
+      "all": [
+        "SM_chute_done"
+      ],
+      "none": [
+        "SM_reported"
+      ],
+      "nodeInstanceId": 0,
+      "y": 0
+    },
+    {
+      "id": "sm_sealed_bays",
+      "name": "Bays under Corvin's tally ribbon",
+      "kind": "cart",
+      "x": 50,
+      "z": -8,
+      "all": [
+        "SM_ROUTE_HOLD"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": 0
+    },
+    {
+      "id": "sm_escort_cart",
+      "name": "Relief carts ready for keeper escort",
+      "kind": "cart",
+      "x": 49,
+      "z": 5,
+      "all": [
+        "SM_ROUTE_ESCORT"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": 0
+    },
+    {
+      "id": "sm_split_cart",
+      "name": "Half the relief grain by road",
+      "kind": "cart",
+      "x": 51,
+      "z": 5,
+      "all": [
+        "SM_ROUTE_SPLIT"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": 0
+    },
+    {
+      "id": "sm_lantern_tag",
+      "name": "Watcher lantern-tag",
+      "kind": "post",
+      "x": 43,
+      "z": -9,
+      "all": [
+        "SM_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": 0
+    },
+    {
+      "id": "SM_passage1",
+      "name": "Field Goblin scrapper",
+      "kind": "enemy",
+      "x": 66.8,
+      "z": -1,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "SM_passage2",
+      "name": "Field Goblin scrapper",
+      "kind": "enemy",
+      "x": 68.2,
+      "z": 1,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "SM_sort_scrapper1",
+      "name": "Field Goblin scrapper",
+      "kind": "enemy",
+      "x": 72,
+      "z": -2,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "SM_sort_scrapper2",
+      "name": "Field Goblin scrapper",
+      "kind": "enemy",
+      "x": 74,
+      "z": 2,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "SM_sort_trapper",
+      "name": "Field Goblin trapper",
+      "kind": "enemy",
+      "x": 74,
+      "z": -5,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "SM_bin1",
+      "name": "Field Goblin scrapper",
+      "kind": "enemy",
+      "x": 81,
+      "z": -4,
+      "all": [
+        "SM_warren_entered"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "SM_bin2",
+      "name": "Field Goblin scrapper",
+      "kind": "enemy",
+      "x": 83,
+      "z": -5,
+      "all": [
+        "SM_warren_entered"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "SM_bin3",
+      "name": "Field Goblin scrapper",
+      "kind": "enemy",
+      "x": 85,
+      "z": -3,
+      "all": [
+        "SM_warren_entered"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "SM_bin4",
+      "name": "Field Goblin scrapper",
+      "kind": "enemy",
+      "x": 86,
+      "z": -5,
+      "all": [
+        "SM_warren_entered"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "SM_larder_trapper",
+      "name": "Field Goblin trapper",
+      "kind": "enemy",
+      "x": 82,
+      "z": -12,
+      "all": [
+        "SM_warren_entered"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "SM_larder_scrapper",
+      "name": "Field Goblin scrapper",
+      "kind": "enemy",
+      "x": 84,
+      "z": -11,
+      "all": [
+        "SM_warren_entered"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "SM_harrow_trapper",
+      "name": "Field Goblin trapper",
+      "kind": "enemy",
+      "x": 90,
+      "z": 6,
+      "all": [
+        "SM_harrow_reached"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "SM_sack_king",
+      "name": "The Sack-King",
+      "kind": "enemy",
+      "x": 98,
+      "z": 0,
+      "all": [
+        "SM_throne_entered"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "SM_throne1",
+      "name": "Heap scrapper",
+      "kind": "enemy",
+      "x": 96,
+      "z": -2,
+      "all": [
+        "SM_throne_entered"
+      ],
+      "none": [
+        "SM_sack_king_dead"
+      ],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "SM_throne2",
+      "name": "Heap scrapper",
+      "kind": "enemy",
+      "x": 99,
+      "z": 3,
+      "all": [
+        "SM_throne_entered"
+      ],
+      "none": [
+        "SM_sack_king_dead"
+      ],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "SM_called75",
+      "name": "Called heap scrapper",
+      "kind": "enemy",
+      "x": 95,
+      "z": 4,
+      "all": [
+        "SM_throne_entered"
+      ],
+      "none": [
+        "SM_sack_king_dead"
+      ],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "SM_called40",
+      "name": "Called heap scrapper",
+      "kind": "enemy",
+      "x": 101,
+      "z": -4,
+      "all": [
+        "SM_throne_entered"
+      ],
+      "none": [
+        "SM_sack_king_dead"
+      ],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "SM_heap_boss",
+      "name": "Heap-boss scrapper",
+      "kind": "enemy",
+      "x": 98,
+      "z": 0,
+      "all": [
+        "SM_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "SM_world1",
+      "name": "Field Goblin scrapper",
+      "kind": "enemy",
+      "x": 72,
+      "z": -2,
+      "all": [
+        "SM_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
+    },
+    {
+      "id": "SM_world2",
+      "name": "Field Goblin scrapper",
+      "kind": "enemy",
+      "x": 84,
+      "z": -5,
+      "all": [
+        "SM_done"
+      ],
+      "none": [],
+      "nodeInstanceId": 0,
+      "y": -3
     }
   ],
   "actions": [
@@ -1758,7 +2710,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "hear_order",
@@ -1791,7 +2745,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "hear_river",
@@ -1824,7 +2780,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "settle",
@@ -1860,7 +2818,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "nan_lead",
@@ -1893,7 +2853,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "nan_alibi",
@@ -1926,7 +2888,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "dace_lead",
@@ -1959,7 +2923,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "order_lead",
@@ -1992,7 +2958,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "tovin_start",
@@ -2025,7 +2993,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "tovin_odd",
@@ -2060,7 +3030,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "tovin_lead",
@@ -2095,7 +3067,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "notch",
@@ -2128,7 +3102,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "earth",
@@ -2161,7 +3137,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "drag",
@@ -2194,7 +3172,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "post_found",
@@ -2232,7 +3212,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "shallows",
@@ -2265,7 +3247,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "clear",
@@ -2303,7 +3287,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "hatchet",
@@ -2341,7 +3327,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "stem",
@@ -2379,7 +3367,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "notch_cut",
@@ -2412,7 +3402,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "seat",
@@ -2452,7 +3444,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "discovery_end",
@@ -2487,7 +3481,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "maelin_after",
@@ -2522,7 +3518,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "proof_notches",
@@ -2555,7 +3553,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "proof_walk",
@@ -2588,7 +3588,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "proof_nan",
@@ -2623,7 +3625,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "proof_order",
@@ -2660,7 +3664,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "proof_tovin",
@@ -2695,7 +3701,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "proof_pier",
@@ -2731,7 +3739,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "close_crossing",
@@ -2780,7 +3790,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "order_transfer",
@@ -2814,7 +3826,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "lift1",
@@ -2849,7 +3863,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "deliver1",
@@ -2882,7 +3898,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "lift2",
@@ -2919,7 +3937,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "deliver2",
@@ -2952,7 +3972,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "lift3",
@@ -2989,7 +4011,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "deliver3",
@@ -3022,7 +4046,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "trunk_lift",
@@ -3057,7 +4083,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "trunk_set",
@@ -3090,7 +4118,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "uphill_done",
@@ -3129,7 +4159,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "TL_EVIDENCE_KEEPERS",
@@ -3168,7 +4200,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "TL_EVIDENCE_RIVERFOLK",
@@ -3207,7 +4241,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "TL_EVIDENCE_PLAYER",
@@ -3243,7 +4279,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "TL_STONE_PUBLIC",
@@ -3279,7 +4317,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "TL_STONE_KEPT",
@@ -3315,7 +4355,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "quest_finish",
@@ -3353,7 +4395,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "ansel_hook",
@@ -3384,7 +4428,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "tovin_trust",
@@ -3419,7 +4465,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "marker_read",
@@ -3452,7 +4500,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "timber_cut",
@@ -3488,7 +4538,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "cook_meat",
@@ -3533,7 +4585,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "feed_camp",
@@ -3573,7 +4627,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "boar_harvest",
@@ -3611,7 +4667,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "wild_boar_harvest",
@@ -3649,7 +4707,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "eat_food",
@@ -3685,7 +4745,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "wreck_enter",
@@ -3718,7 +4780,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "wreck_inspect",
@@ -3755,7 +4819,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "stone_dry",
@@ -3788,7 +4854,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "stone_sketch",
@@ -3822,7 +4890,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "true_marker_read",
@@ -3855,7 +4925,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "epilogue_keepers",
@@ -3888,7 +4960,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "epilogue_riverfolk",
@@ -3921,7 +4995,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "epilogue_player",
@@ -3954,7 +5030,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "maelin_who",
@@ -3985,7 +5063,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "maelin_across",
@@ -4016,7 +5096,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "hollis_keepers",
@@ -4049,7 +5131,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "hollis_riverfolk",
@@ -4082,7 +5166,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "hollis_player",
@@ -4115,7 +5201,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "nan_tune",
@@ -4146,7 +5234,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "dace_fed",
@@ -4179,7 +5269,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "dace_unfed",
@@ -4212,7 +5304,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "wynn_camp_line",
@@ -4243,7 +5337,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_start",
@@ -4276,7 +5372,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_axe",
@@ -4318,7 +5416,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_measure1",
@@ -4351,7 +5451,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_grip",
@@ -4382,7 +5484,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_measure2",
@@ -4415,7 +5519,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_measure3",
@@ -4448,7 +5554,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_wrack",
@@ -4481,7 +5589,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_repair",
@@ -4514,7 +5624,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_wade",
@@ -4547,7 +5659,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_cut_jam",
@@ -4591,7 +5705,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_cord",
@@ -4626,7 +5742,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_leaner_read",
@@ -4659,7 +5777,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_holder_read",
@@ -4692,7 +5812,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_old_read",
@@ -4725,7 +5847,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_leaner_notch",
@@ -4762,7 +5886,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_leaner_back",
@@ -4806,7 +5932,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_keep",
@@ -4843,7 +5971,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_cut",
@@ -4879,7 +6009,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_build",
@@ -4915,7 +6047,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_holder_notch",
@@ -4950,7 +6084,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_holder_back",
@@ -4995,7 +6131,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_spare_limbs",
@@ -5033,7 +6171,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_give_wood",
@@ -5073,7 +6213,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_stage1",
@@ -5108,7 +6250,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_stage2",
@@ -5144,7 +6288,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_finish",
@@ -5182,7 +6328,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_kept_bark",
@@ -5216,7 +6364,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_built_bark",
@@ -5250,7 +6400,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "BW_tamsin_bark",
@@ -5283,7 +6435,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_enter",
@@ -5316,7 +6470,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_start",
@@ -5351,7 +6507,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_lanes",
@@ -5384,7 +6542,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_whisperflow",
@@ -5417,7 +6577,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_flood_lines",
@@ -5450,7 +6612,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_wet_wood",
@@ -5483,7 +6647,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_wood",
@@ -5523,7 +6689,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_lift1",
@@ -5557,7 +6725,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_deposit1",
@@ -5590,7 +6760,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_lift2",
@@ -5626,7 +6798,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_deposit2",
@@ -5660,7 +6834,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_light_fire",
@@ -5695,7 +6871,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_tracks",
@@ -5728,7 +6906,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_sentinel",
@@ -5761,7 +6941,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_nesting",
@@ -5792,7 +6974,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_closed",
@@ -5825,7 +7009,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_prepare",
@@ -5856,7 +7042,9 @@
       "tagInputs": [],
       "flock": "reed_margin_flock",
       "flockOperation": "prepare",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_resolve",
@@ -5887,7 +7075,9 @@
       "tagInputs": [],
       "flock": "reed_margin_flock",
       "flockOperation": "resolve",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_recover1",
@@ -5925,7 +7115,9 @@
       "tagInputs": [],
       "flock": "reed_margin_flock",
       "flockOperation": "recover",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_recover2",
@@ -5965,7 +7157,9 @@
       "tagInputs": [],
       "flock": "reed_margin_flock",
       "flockOperation": "recover",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_recover_repeat",
@@ -6004,7 +7198,9 @@
       "tagInputs": [],
       "flock": "reed_margin_flock",
       "flockOperation": "recover",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_cook_batch",
@@ -6053,7 +7249,9 @@
           "id": "fk_portions_cooked",
           "amount": 4
         }
-      ]
+      ],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_cook_repeat",
@@ -6107,7 +7305,9 @@
           "id": "fk_portions_cooked",
           "amount": 2
         }
-      ]
+      ],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_hush",
@@ -6140,7 +7340,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_feed1",
@@ -6178,7 +7380,9 @@
       ],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_feed2",
@@ -6216,7 +7420,9 @@
       ],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_feed3",
@@ -6254,7 +7460,9 @@
       ],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_feed4",
@@ -6292,7 +7500,9 @@
       ],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_crew",
@@ -6326,7 +7536,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_family",
@@ -6360,7 +7572,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_own",
@@ -6399,7 +7613,9 @@
       ],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_tune",
@@ -6432,7 +7648,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_finish_crew",
@@ -6476,7 +7694,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_finish_family",
@@ -6520,7 +7740,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_finish_own",
@@ -6564,7 +7786,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_crew_after",
@@ -6598,7 +7822,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_family_after",
@@ -6632,7 +7858,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_nan_after",
@@ -6665,7 +7893,9 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     },
     {
       "id": "FK_bottom_step",
@@ -6698,7 +7928,1753 @@
       "tagInputs": [],
       "flock": "",
       "flockOperation": "",
-      "counterEffects": []
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_arrive",
+      "target": "sm_yard",
+      "label": "Enter the granary yard",
+      "text": "",
+      "kind": "enter",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 0,
+      "maxStage": 0,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_arrive",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_started"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_open_keepers",
+      "target": "sm_corvin",
+      "label": "Avery sent a report.",
+      "text": "Corvin: You're the one in Avery's report. Three pages. He writes a great deal.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [
+        "TL_EVIDENCE_KEEPERS"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_opening",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_open_riverfolk",
+      "target": "sm_corvin",
+      "label": "Maelin's crews found another wrong post.",
+      "text": "Corvin: Crest Hall has no report of any marker. You'll forgive me if I count you before I trust you.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [
+        "TL_EVIDENCE_RIVERFOLK"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_opening",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_open_player",
+      "target": "sm_corvin",
+      "label": "This order came from Whisperflow.",
+      "text": "Corvin: That's my dispatch paper. It left this room blank.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [
+        "TL_EVIDENCE_PLAYER"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_opening",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_brief",
+      "target": "sm_corvin",
+      "label": "Where could eighty sacks go?",
+      "text": "Corvin: One hundred and twenty sacks out under the Board's emergency order. Forty reached the carter. That's eighty sacks short between my hill gate and the yard. I'm eighty sacks of worried. Goblins. The hill passage runs past the old depot. They've dug in. Count it yourself if you like. I'd rather you did. Hill gate. Bring me a number. Any number. I'll take it from there.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_brief",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_briefed"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_tallies",
+      "target": "sm_tallies",
+      "label": "Read both tally racks",
+      "text": "Two racks of notched sticks, one ribboned for the Board, one plain. Both say a hundred and twenty.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_tallies",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_tallies_seen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_bays",
+      "target": "sm_bays",
+      "label": "Count the swept bays",
+      "text": "Dust outlines where sacks stood. Count them: a hundred and twenty. Three bays are still full.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_bays",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_bays_seen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_gate_line",
+      "target": "sm_hill_line",
+      "label": "Read the loading line",
+      "text": "A chalk loading line runs to the HILL GATE, not to the yard doors.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 1,
+      "maxStage": 1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_gate_line",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_gate_seen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_shelf",
+      "target": "sm_shelf",
+      "label": "Inspect the bare shelf",
+      "text": "A clean shelf, sized for a big ledger. Nothing on it. No dust either.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 1,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_wynn",
+      "target": "sm_wynn",
+      "label": "How many did you carry last time?",
+      "text": "Wynn: Forty. Counted them twice, the second time out loud so the porter could hear. He tried to hand me forty-two. I gave two back. Somebody's counting worse than me. That's hard.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 1,
+      "maxStage": 8,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_wynn",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_LEAD_WYNN"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_ruts",
+      "target": "sm_ruts",
+      "label": "Inspect the cart ruts",
+      "text": "Cart ruts in old stone. No dust in them. Something's used these lately, and often.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 2,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_ruts",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_ruts_seen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_hole",
+      "target": "sm_goblin_hole",
+      "label": "Inspect the goblin hole",
+      "text": "Clawed through the wall, not dug with tools. Grain spilt round it like a dropped necklace.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 2,
+      "maxStage": 2,
+      "all": [
+        "SM_passage1_dead",
+        "SM_passage2_dead"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_hole",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_hole_seen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_rake_inspect",
+      "target": "sm_rake",
+      "label": "Inspect the rake trap",
+      "text": "Rake tines glint through unnaturally even straw.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 2,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_rake_seen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "SM_rake",
+      "trapOperation": "inspect"
+    },
+    {
+      "id": "SM_rake_disarm",
+      "target": "sm_rake",
+      "label": "Kick the rakes over",
+      "text": "The trap is disarmed.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 2,
+      "maxStage": -1,
+      "all": [
+        "SM_rake_seen"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "SM_rake",
+      "trapOperation": "disarm"
+    },
+    {
+      "id": "SM_twine_inspect",
+      "target": "sm_twine",
+      "label": "Inspect the twine trap",
+      "text": "Baling twine runs across the arch at ankle height. A bent sapling creaks under a scythe blade.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 2,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_twine_seen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "SM_twine",
+      "trapOperation": "inspect"
+    },
+    {
+      "id": "SM_twine_disarm",
+      "target": "sm_twine",
+      "label": "Cut the twine",
+      "text": "The trap is disarmed.",
+      "kind": "channel",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 2,
+      "maxStage": -1,
+      "all": [
+        "SM_twine_seen"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 15,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "SM_twine",
+      "trapOperation": "disarm"
+    },
+    {
+      "id": "SM_pan_inspect",
+      "target": "sm_pan",
+      "label": "Inspect the pan trap",
+      "text": "Pans and cups hang from twine. A quiet clink carries down the tunnel.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 2,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_pan_seen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "SM_pan",
+      "trapOperation": "inspect"
+    },
+    {
+      "id": "SM_pan_disarm",
+      "target": "sm_pan",
+      "label": "Lift the twine",
+      "text": "The trap is disarmed.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 2,
+      "maxStage": -1,
+      "all": [
+        "SM_pan_seen"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "SM_pan",
+      "trapOperation": "disarm"
+    },
+    {
+      "id": "SM_warren",
+      "target": "sm_warren",
+      "label": "Enter the low tunnels",
+      "text": "",
+      "kind": "enter",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 3,
+      "maxStage": 3,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_warren",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_warren_entered"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_root_cut",
+      "target": "sm_root",
+      "label": "Cut through the driftroot",
+      "text": "The shorter root route is clear.",
+      "kind": "gather",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 4,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_root_cut",
+      "ticks": 40,
+      "cooldown": 0,
+      "tool": "crew_hatchet",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_root_cut"
+      ],
+      "skill": "woodcutting",
+      "xp": 22,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_larder",
+      "target": "sm_larder",
+      "label": "Search the goblin shinies",
+      "text": "Spoons, a keeper's button, a cracked lantern lens. Nothing here is evidence.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 4,
+      "maxStage": -1,
+      "all": [
+        "SM_larder_trapper_dead",
+        "SM_larder_scrapper_dead"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_larder",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "payment",
+          "count": 2
+        }
+      ],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_harrow_enter",
+      "target": "sm_harrow",
+      "label": "Follow the grain trail to the harrow",
+      "text": "",
+      "kind": "enter",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 4,
+      "maxStage": 4,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_harrow_enter",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_harrow_reached"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_harrow_inspect",
+      "target": "sm_harrow",
+      "label": "Inspect the hanging harrow",
+      "text": "A harrow hangs over the corridor. A rope leads up to the trapper's ledge. Dust falls as it creaks.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 4,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "SM_harrow",
+      "trapOperation": "inspect"
+    },
+    {
+      "id": "SM_throne_enter",
+      "target": "sm_throne",
+      "label": "Enter the heaps and throne room",
+      "text": "Sack-King: Who comes to the KING of SACKS?",
+      "kind": "enter",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 5,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_throne_enter",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_throne_entered"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_heap1",
+      "target": "sm_heap1",
+      "label": "Count the throne sacks",
+      "text": "Sacks with Crestbridge tally marks, stacked into a throne. Seven.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 6,
+      "maxStage": 6,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_heap1",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_heap1_seen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_heap2",
+      "target": "sm_heap2",
+      "label": "Count the sack nest",
+      "text": "A goblin nest of sacks. Three.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 6,
+      "maxStage": 6,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_heap2",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_heap2_seen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_heap3",
+      "target": "sm_heap3",
+      "label": "Count the last sacks",
+      "text": "Two sacks, one chewed. Twelve, then. That leaves sixty-eight nobody can find.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 6,
+      "maxStage": 6,
+      "all": [
+        "SM_heap1_seen",
+        "SM_heap2_seen"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_heap3",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_heap3_seen",
+        "SM_HEAPS_COUNTED"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_rope",
+      "target": "sm_rope",
+      "label": "Inspect the gantry rope burns",
+      "text": "Fresh rope burns on the gantry beam. Pale wood, fibres still in them.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 7,
+      "maxStage": 7,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_rope",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_rope_seen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_pulley",
+      "target": "sm_pulley",
+      "label": "Inspect the pulley",
+      "text": "New tallow, still soft. It smells of a chandler's shop, not of the war.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 7,
+      "maxStage": 7,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_pulley",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_pulley_seen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_prints",
+      "target": "sm_prints",
+      "label": "Inspect the boot prints",
+      "text": "Hobnailed boots. Many of them, coming up from the chute and going back. No goblin prints at all.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 7,
+      "maxStage": 7,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_prints",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_prints_seen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_slip",
+      "target": "sm_slip",
+      "label": "Pick up the requisition slip",
+      "text": "PROVISION BOARD: EMERGENCY DRAW. Lower at the hill chute: eighty measures. Under the Board's order of emergency relief. No signature. No name.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 7,
+      "maxStage": 7,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_slip",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "SM_requisition",
+          "count": 1
+        }
+      ],
+      "flags": [
+        "SM_slip_acquired"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_unbar",
+      "target": "sm_unbar",
+      "label": "Unbar the gallery door",
+      "text": "Porter: Eleven, twelve. That's it? That's not eighty. That's not anything.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 7,
+      "maxStage": 7,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_unbar",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_gallery_unbarred"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_chute_complete",
+      "target": "sm_unbar",
+      "label": "Check the chute evidence",
+      "text": "The chute is no goblin passage. The requisition stays in your pocket.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 7,
+      "maxStage": 7,
+      "all": [
+        "SM_rope_seen",
+        "SM_pulley_seen",
+        "SM_prints_seen",
+        "SM_slip_acquired",
+        "SM_gallery_unbarred"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_chute_complete",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_chute_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_stencil",
+      "target": "sm_stencil",
+      "label": "Read the wartime stencil",
+      "text": "A sheaf over a wave, stencilled in wartime paint. RELIEF CUT. The arrow points down the chute.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 7,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_stencil",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_LEAD_STENCIL"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_stone_enter",
+      "target": "sm_stone",
+      "label": "Approach the old stone",
+      "text": "",
+      "kind": "enter",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 7,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_stone_enter",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_stone_wonder"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_stone",
+      "target": "sm_stone",
+      "label": "Inspect the dry-wall stone",
+      "text": "A carved slab mortared into the wall sideways. A groove runs up to one crisp notch, fainter notches below. The groove is dark and damp to the notch. The wall around it is dry as bread.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 7,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_stone",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_STONE_SEEN"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_stone_public",
+      "target": "sm_stone",
+      "label": "Compare the reference mark",
+      "text": "Like the Whisperflow stone. Like the one in the keepers' record.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 7,
+      "maxStage": -1,
+      "all": [
+        "TL_STONE_PUBLIC"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_stone_kept",
+      "target": "sm_stone",
+      "label": "Compare the hidden mark",
+      "text": "Like the Whisperflow stone. Only you and Maelin know about that one.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 7,
+      "maxStage": -1,
+      "all": [
+        "TL_STONE_KEPT"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_stone_touch",
+      "target": "sm_stone",
+      "label": "Put a hand on the stone",
+      "text": "Cold. Colder than the wall around it.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 7,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_mooring",
+      "target": "sm_mooring",
+      "label": "Inspect the mooring ring",
+      "text": "An iron ring in the rock above the backwater. Rust rubbed bright on one side.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 7,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_glimpse",
+      "target": "sm_yard",
+      "label": "Return to the granary yard",
+      "text": "Hesketh: Second draw. Same terms. Keepers to the hill gate at dusk. Provisioner: Thank you, Captain. The households won't know your name, but they'll eat because of it.",
+      "kind": "enter",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 8,
+      "maxStage": 8,
+      "all": [
+        "SM_chute_done"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_glimpse",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_returned"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_hesketh",
+      "target": "sm_hesketh",
+      "label": "What did you just sign?",
+      "text": "Hesketh: Second emergency draw. Far bank's short. Board says if they go without, they'll come over the bridge for it. Twelve keepers on that bridge. Good ones. I'd rather they weren't fighting farmers.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 8,
+      "maxStage": -1,
+      "all": [
+        "SM_returned"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_hesketh",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_report",
+      "target": "sm_corvin",
+      "label": "Twelve sacks. The rest went down a chute.",
+      "text": "Corvin: A hundred and twenty less forty, less twelve. Sixty-eight. That's not goblins. Aldric: Lower at the hill chute. Eighty measures. Under the Board's order. This accuses all of them, which means it accuses none. Corvin: I don't load the chute again. What's in my bays answers to my tally. Aldric: Keep the slip. Paper in your pocket cannot be called for by the Board.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 8,
+      "maxStage": 8,
+      "all": [
+        "SM_returned"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_report",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_reported"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_cut_named",
+      "target": "sm_aldric",
+      "label": "There was a stencil: RELIEF CUT.",
+      "text": "Aldric: That name is in the old compacts. A channel dug for the war. It was closed after the armistice. Closed. Not filled.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 8,
+      "maxStage": -1,
+      "all": [
+        "SM_LEAD_STENCIL"
+      ],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_cut_named",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_LEAD_CUT_NAMED"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_route_escort",
+      "target": "sm_corvin",
+      "label": "Send it by road, with keepers, to households we can name.",
+      "text": "Hesketh: Escort to the far bank. Six keepers. That leaves six on the bridge.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 9,
+      "maxStage": 9,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_route_escort",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_ROUTE_ESCORT",
+        "SM_route_chosen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_route_hold",
+      "target": "sm_corvin",
+      "label": "Hold it here under your tally until the Board explains.",
+      "text": "Corvin: Under my tally. Nobody draws these without asking me why. Aldric: The Board will explain itself, and the far bank will wait for it.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 9,
+      "maxStage": 9,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_route_hold",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_ROUTE_HOLD",
+        "SM_route_chosen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_route_split",
+      "target": "sm_corvin",
+      "label": "Send half by road now. Hold the rest as proof.",
+      "text": "Hesketh: Three keepers on the road. I can spare three. Corvin: Half by road. The rest under my ribbon.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 9,
+      "maxStage": 9,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_route_split",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [
+        "SM_ROUTE_SPLIT",
+        "SM_route_chosen"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_finish",
+      "target": "sm_corvin",
+      "label": "Speak with Corvin about the third tally",
+      "text": "Corvin: Twelve recovered. Sixty-eight down a chute. That's a third tally. Only you and I know it's there. Tally room's open to you. Twelve sacks is twelve parts of a porter's day.",
+      "kind": "dialogue",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 10,
+      "maxStage": 10,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "SM_finish",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [
+        {
+          "id": "payment",
+          "count": 12
+        }
+      ],
+      "flags": [
+        "SM_CORVIN_TRUST",
+        "SM_done"
+      ],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
+    },
+    {
+      "id": "SM_lantern",
+      "target": "sm_lantern_tag",
+      "label": "Inspect the Watcher's lantern-tag",
+      "text": "Corvin: A Watcher left that on my door. Didn't want to come in. They never do.",
+      "kind": "inspect",
+      "quest": "lowmark.main.02_short_measure",
+      "minStage": 11,
+      "maxStage": -1,
+      "all": [],
+      "none": [],
+      "any": [],
+      "anyCount": 0,
+      "once": "",
+      "ticks": 0,
+      "cooldown": 0,
+      "tool": "",
+      "inputs": [],
+      "outputs": [],
+      "flags": [],
+      "skill": "",
+      "xp": 0,
+      "carry": "",
+      "requiresCarry": "",
+      "removeItems": [],
+      "conditionalOutputs": [],
+      "tagInputs": [],
+      "flock": "",
+      "flockOperation": "",
+      "counterEffects": [],
+      "trap": "",
+      "trapOperation": ""
     }
   ],
   "quests": [
@@ -6819,7 +9795,10 @@
           "counterRequirements": []
         }
       ],
-      "all": []
+      "all": [],
+      "startAll": [
+        "arrived"
+      ]
     },
     {
       "id": "lowmark.side.bank_walk",
@@ -6891,6 +9870,9 @@
           "anyCount": 0,
           "counterRequirements": []
         }
+      ],
+      "startAll": [
+        "BW_started"
       ]
     },
     {
@@ -6976,6 +9958,137 @@
           "anyCount": 0,
           "counterRequirements": []
         }
+      ],
+      "startAll": [
+        "FK_entered"
+      ]
+    },
+    {
+      "id": "lowmark.main.02_short_measure",
+      "name": "Short Measure",
+      "all": [
+        "quest_done"
+      ],
+      "startAll": [
+        "SM_started"
+      ],
+      "stages": [
+        {
+          "id": "S00_arrive",
+          "objective": "Find the grain factor at the Crestbridge granaries.",
+          "all": [
+            "SM_started"
+          ],
+          "any": [],
+          "anyCount": 0,
+          "counterRequirements": []
+        },
+        {
+          "id": "S01_count",
+          "objective": "Check the granary's count.",
+          "all": [
+            "SM_briefed",
+            "SM_tallies_seen",
+            "SM_bays_seen",
+            "SM_gate_seen"
+          ],
+          "any": [],
+          "anyCount": 0,
+          "counterRequirements": []
+        },
+        {
+          "id": "S02_descend",
+          "objective": "Go down the hill passage.",
+          "all": [
+            "SM_passage1_dead",
+            "SM_passage2_dead",
+            "SM_hole_seen"
+          ],
+          "any": [],
+          "anyCount": 0,
+          "counterRequirements": []
+        },
+        {
+          "id": "S03_sorting_hall",
+          "objective": "Get through the Sorting Hall.",
+          "all": [
+            "SM_warren_entered"
+          ],
+          "any": [],
+          "anyCount": 0,
+          "counterRequirements": []
+        },
+        {
+          "id": "S04_warren",
+          "objective": "Find where the goblins took the grain.",
+          "all": [
+            "SM_harrow_reached"
+          ],
+          "any": [],
+          "anyCount": 0,
+          "counterRequirements": []
+        },
+        {
+          "id": "S05_harrow",
+          "objective": "Get past the harrow.",
+          "all": [
+            "SM_throne_entered"
+          ],
+          "any": [],
+          "anyCount": 0,
+          "counterRequirements": []
+        },
+        {
+          "id": "S06_sack_king",
+          "objective": "Deal with the Sack-King and count the heaps.",
+          "all": [
+            "SM_sack_king_dead",
+            "SM_HEAPS_COUNTED"
+          ],
+          "any": [],
+          "anyCount": 0,
+          "counterRequirements": []
+        },
+        {
+          "id": "S07_chute",
+          "objective": "Find where the rest went.",
+          "all": [
+            "SM_chute_done"
+          ],
+          "any": [],
+          "anyCount": 0,
+          "counterRequirements": []
+        },
+        {
+          "id": "S08_yard",
+          "objective": "Take the slip to Corvin.",
+          "all": [
+            "SM_reported"
+          ],
+          "any": [],
+          "anyCount": 0,
+          "counterRequirements": []
+        },
+        {
+          "id": "S09_choose",
+          "objective": "Decide where the remaining relief grain goes.",
+          "all": [
+            "SM_route_chosen"
+          ],
+          "any": [],
+          "anyCount": 0,
+          "counterRequirements": []
+        },
+        {
+          "id": "S10_close",
+          "objective": "Speak with Corvin.",
+          "all": [
+            "SM_done"
+          ],
+          "any": [],
+          "anyCount": 0,
+          "counterRequirements": []
+        }
       ]
     }
   ],
@@ -6999,7 +10112,11 @@
       "respawn": 0,
       "lootAction": "",
       "boundaryTarget": "",
-      "boundaryRadius": 0
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
     },
     {
       "id": "silt2",
@@ -7020,7 +10137,11 @@
       "respawn": 0,
       "lootAction": "",
       "boundaryTarget": "",
-      "boundaryRadius": 0
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
     },
     {
       "id": "silt3",
@@ -7041,7 +10162,11 @@
       "respawn": 0,
       "lootAction": "",
       "boundaryTarget": "",
-      "boundaryRadius": 0
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
     },
     {
       "id": "leech",
@@ -7062,7 +10187,11 @@
       "respawn": 0,
       "lootAction": "",
       "boundaryTarget": "",
-      "boundaryRadius": 0
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
     },
     {
       "id": "goose1",
@@ -7083,7 +10212,11 @@
       "respawn": 0,
       "lootAction": "",
       "boundaryTarget": "",
-      "boundaryRadius": 0
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
     },
     {
       "id": "goose2",
@@ -7104,7 +10237,11 @@
       "respawn": 0,
       "lootAction": "",
       "boundaryTarget": "",
-      "boundaryRadius": 0
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
     },
     {
       "id": "boar",
@@ -7123,7 +10260,11 @@
       "respawn": 0,
       "lootAction": "boar_harvest",
       "boundaryTarget": "",
-      "boundaryRadius": 0
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
     },
     {
       "id": "wild_boar",
@@ -7142,7 +10283,11 @@
       "respawn": 300,
       "lootAction": "wild_boar_harvest",
       "boundaryTarget": "",
-      "boundaryRadius": 0
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
     },
     {
       "id": "wreck1",
@@ -7161,7 +10306,11 @@
       "respawn": 0,
       "lootAction": "",
       "boundaryTarget": "",
-      "boundaryRadius": 0
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
     },
     {
       "id": "wreck2",
@@ -7180,7 +10329,11 @@
       "respawn": 0,
       "lootAction": "",
       "boundaryTarget": "",
-      "boundaryRadius": 0
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
     },
     {
       "id": "wreck3",
@@ -7199,7 +10352,11 @@
       "respawn": 0,
       "lootAction": "",
       "boundaryTarget": "",
-      "boundaryRadius": 0
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
     },
     {
       "id": "BW_skitter1",
@@ -7220,7 +10377,11 @@
       "respawn": 0,
       "lootAction": "",
       "boundaryTarget": "",
-      "boundaryRadius": 0
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
     },
     {
       "id": "BW_skitter2",
@@ -7241,7 +10402,11 @@
       "respawn": 0,
       "lootAction": "",
       "boundaryTarget": "",
-      "boundaryRadius": 0
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
     },
     {
       "id": "BW_skitter3",
@@ -7262,7 +10427,11 @@
       "respawn": 0,
       "lootAction": "",
       "boundaryTarget": "",
-      "boundaryRadius": 0
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
     },
     {
       "id": "BW_skitter4",
@@ -7283,7 +10452,11 @@
       "respawn": 0,
       "lootAction": "",
       "boundaryTarget": "",
-      "boundaryRadius": 0
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
     },
     {
       "id": "BW_skitter5",
@@ -7304,7 +10477,11 @@
       "respawn": 0,
       "lootAction": "",
       "boundaryTarget": "",
-      "boundaryRadius": 0
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
     },
     {
       "id": "FK_goose1",
@@ -7323,7 +10500,11 @@
       "respawn": 0,
       "lootAction": "",
       "boundaryTarget": "fk_nesting",
-      "boundaryRadius": 2.2
+      "boundaryRadius": 2.2,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
     },
     {
       "id": "FK_goose2",
@@ -7342,7 +10523,11 @@
       "respawn": 0,
       "lootAction": "",
       "boundaryTarget": "fk_nesting",
-      "boundaryRadius": 2.2
+      "boundaryRadius": 2.2,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
     },
     {
       "id": "FK_leech",
@@ -7361,7 +10546,503 @@
       "respawn": 0,
       "lootAction": "",
       "boundaryTarget": "fk_deep_water",
-      "boundaryRadius": 1.6
+      "boundaryRadius": 1.6,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
+    },
+    {
+      "id": "SM_passage1",
+      "target": "SM_passage1",
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 7,
+      "killFlag": "SM_passage1_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 1.8
+    },
+    {
+      "id": "SM_passage2",
+      "target": "SM_passage2",
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 7,
+      "killFlag": "SM_passage2_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 1.8
+    },
+    {
+      "id": "SM_sort_scrapper1",
+      "target": "SM_sort_scrapper1",
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 7,
+      "killFlag": "SM_sort_scrapper1_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 1.8
+    },
+    {
+      "id": "SM_sort_scrapper2",
+      "target": "SM_sort_scrapper2",
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 7,
+      "killFlag": "SM_sort_scrapper2_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 1.8
+    },
+    {
+      "id": "SM_sort_trapper",
+      "target": "SM_sort_trapper",
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "health": 24,
+      "damage": 1,
+      "windup": 20,
+      "cooldown": 30,
+      "range": 4,
+      "leash": 6,
+      "killFlag": "SM_sort_trapper_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
+    },
+    {
+      "id": "SM_bin1",
+      "target": "SM_bin1",
+      "all": [
+        "SM_warren_entered"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 7,
+      "killFlag": "SM_bin1_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 1.8
+    },
+    {
+      "id": "SM_bin2",
+      "target": "SM_bin2",
+      "all": [
+        "SM_warren_entered"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 7,
+      "killFlag": "SM_bin2_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 1.8
+    },
+    {
+      "id": "SM_bin3",
+      "target": "SM_bin3",
+      "all": [
+        "SM_warren_entered"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 7,
+      "killFlag": "SM_bin3_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 1.8
+    },
+    {
+      "id": "SM_bin4",
+      "target": "SM_bin4",
+      "all": [
+        "SM_warren_entered"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 7,
+      "killFlag": "SM_bin4_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 1.8
+    },
+    {
+      "id": "SM_larder_trapper",
+      "target": "SM_larder_trapper",
+      "all": [
+        "SM_warren_entered"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "health": 24,
+      "damage": 1,
+      "windup": 20,
+      "cooldown": 30,
+      "range": 4,
+      "leash": 5,
+      "killFlag": "SM_larder_trapper_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
+    },
+    {
+      "id": "SM_larder_scrapper",
+      "target": "SM_larder_scrapper",
+      "all": [
+        "SM_warren_entered"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 7,
+      "killFlag": "SM_larder_scrapper_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 1.8
+    },
+    {
+      "id": "SM_harrow_trapper",
+      "target": "SM_harrow_trapper",
+      "all": [
+        "SM_harrow_reached"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "health": 24,
+      "damage": 1,
+      "windup": 20,
+      "cooldown": 30,
+      "range": 4,
+      "leash": 5,
+      "killFlag": "SM_harrow_trapper_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
+    },
+    {
+      "id": "SM_sack_king",
+      "target": "SM_sack_king",
+      "all": [
+        "SM_throne_entered"
+      ],
+      "none": [],
+      "health": 240,
+      "damage": 6,
+      "windup": 15,
+      "cooldown": 35,
+      "range": 1.8,
+      "leash": 8,
+      "killFlag": "SM_sack_king_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 0
+    },
+    {
+      "id": "SM_throne1",
+      "target": "SM_throne1",
+      "all": [
+        "SM_throne_entered"
+      ],
+      "none": [
+        "SM_sack_king_dead"
+      ],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 7,
+      "killFlag": "SM_throne1_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 1.8
+    },
+    {
+      "id": "SM_throne2",
+      "target": "SM_throne2",
+      "all": [
+        "SM_throne_entered"
+      ],
+      "none": [
+        "SM_sack_king_dead"
+      ],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 7,
+      "killFlag": "SM_throne2_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 1.8
+    },
+    {
+      "id": "SM_called75",
+      "target": "SM_called75",
+      "all": [
+        "SM_throne_entered"
+      ],
+      "none": [
+        "SM_sack_king_dead"
+      ],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 7,
+      "killFlag": "SM_called75_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "SM_sack_king",
+      "spawnHealthPercent": 75,
+      "spawnWindupTicks": 10,
+      "moveSpeed": 1.8
+    },
+    {
+      "id": "SM_called40",
+      "target": "SM_called40",
+      "all": [
+        "SM_throne_entered"
+      ],
+      "none": [
+        "SM_sack_king_dead"
+      ],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 7,
+      "killFlag": "SM_called40_dead",
+      "respawn": 0,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "SM_sack_king",
+      "spawnHealthPercent": 40,
+      "spawnWindupTicks": 10,
+      "moveSpeed": 1.8
+    },
+    {
+      "id": "SM_heap_boss",
+      "target": "SM_heap_boss",
+      "all": [
+        "SM_done"
+      ],
+      "none": [],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 7,
+      "killFlag": "SM_heap_boss_dead",
+      "respawn": 300,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 1.8
+    },
+    {
+      "id": "SM_world1",
+      "target": "SM_world1",
+      "all": [
+        "SM_done"
+      ],
+      "none": [],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 7,
+      "killFlag": "SM_world1_dead",
+      "respawn": 300,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 1.8
+    },
+    {
+      "id": "SM_world2",
+      "target": "SM_world2",
+      "all": [
+        "SM_done"
+      ],
+      "none": [],
+      "health": 30,
+      "damage": 2,
+      "windup": 10,
+      "cooldown": 30,
+      "range": 1.8,
+      "leash": 7,
+      "killFlag": "SM_world2_dead",
+      "respawn": 300,
+      "lootAction": "",
+      "boundaryTarget": "",
+      "boundaryRadius": 0,
+      "spawnFrom": "",
+      "spawnHealthPercent": 0,
+      "spawnWindupTicks": 0,
+      "moveSpeed": 1.8
     }
   ],
   "exclusiveFlags": [
@@ -7390,6 +11071,13 @@
         "FK_POT_CREW",
         "FK_POT_FAMILY",
         "FK_POT_OWN"
+      ]
+    },
+    {
+      "flags": [
+        "SM_ROUTE_ESCORT",
+        "SM_ROUTE_HOLD",
+        "SM_ROUTE_SPLIT"
       ]
     }
   ],
@@ -7449,6 +11137,19 @@
       "all": [
         "FK_entered"
       ],
+      "none": [],
+      "y": 0
+    },
+    {
+      "id": "SM_depot_recovery",
+      "target": "sm_throne",
+      "x": 52,
+      "y": 0,
+      "z": -2,
+      "radius": 34,
+      "all": [
+        "SM_started"
+      ],
       "none": []
     }
   ],
@@ -7470,6 +11171,201 @@
       "ticks": 80,
       "rise": 0.3,
       "persistRise": true
+    },
+    {
+      "id": "SM_dry_wall_quiet",
+      "target": "sm_stone",
+      "triggerFlag": "SM_stone_wonder",
+      "kind": "quiet",
+      "ticks": 60,
+      "rise": 0,
+      "persistRise": false
+    }
+  ],
+  "gates": [
+    {
+      "id": "SM_hill_gate",
+      "target": "sm_hill_gate",
+      "yaw": 0,
+      "width": 0.35,
+      "height": 3,
+      "depth": 4,
+      "openAll": [
+        "SM_briefed"
+      ],
+      "openNone": []
+    },
+    {
+      "id": "SM_root_gate",
+      "target": "sm_root_gate",
+      "yaw": 0,
+      "width": 0.35,
+      "height": 2.5,
+      "depth": 4,
+      "openAll": [
+        "SM_root_cut"
+      ],
+      "openNone": []
+    },
+    {
+      "id": "SM_gallery_shortcut",
+      "target": "sm_gallery_door",
+      "yaw": 0,
+      "width": 0.35,
+      "height": 3,
+      "depth": 4,
+      "openAll": [
+        "SM_gallery_unbarred"
+      ],
+      "openNone": []
+    }
+  ],
+  "traps": [
+    {
+      "id": "SM_rake",
+      "target": "sm_rake",
+      "yaw": 0,
+      "width": 2.4,
+      "depth": 3,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "warningTicks": 0,
+      "damage": 4,
+      "staggerTicks": 10,
+      "rearmTicks": 20,
+      "activeTicks": 1,
+      "slowPermille": 1000,
+      "nonlethal": true,
+      "alarmFlag": "",
+      "rearmEnemy": "SM_sort_trapper",
+      "disableEnemy": "",
+      "triggerEnemy": "",
+      "triggerHealthPercent": 0
+    },
+    {
+      "id": "SM_twine",
+      "target": "sm_twine",
+      "yaw": 0,
+      "width": 1,
+      "depth": 4,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "warningTicks": 12,
+      "damage": 8,
+      "staggerTicks": 0,
+      "rearmTicks": 0,
+      "activeTicks": 1,
+      "slowPermille": 1000,
+      "nonlethal": true,
+      "alarmFlag": "",
+      "rearmEnemy": "",
+      "disableEnemy": "",
+      "triggerEnemy": "",
+      "triggerHealthPercent": 0
+    },
+    {
+      "id": "SM_pan",
+      "target": "sm_pan",
+      "yaw": 0,
+      "width": 2,
+      "depth": 2,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "warningTicks": 0,
+      "damage": 0,
+      "staggerTicks": 0,
+      "rearmTicks": 0,
+      "activeTicks": 1,
+      "slowPermille": 1000,
+      "nonlethal": true,
+      "alarmFlag": "SM_pan_alarm",
+      "rearmEnemy": "",
+      "disableEnemy": "",
+      "triggerEnemy": "",
+      "triggerHealthPercent": 0
+    },
+    {
+      "id": "SM_harrow",
+      "target": "sm_harrow",
+      "yaw": 0,
+      "width": 2,
+      "depth": 3,
+      "all": [
+        "SM_briefed"
+      ],
+      "none": [
+        "SM_done"
+      ],
+      "warningTicks": 15,
+      "damage": 16,
+      "staggerTicks": 0,
+      "rearmTicks": 60,
+      "activeTicks": 1,
+      "slowPermille": 1000,
+      "nonlethal": true,
+      "alarmFlag": "",
+      "rearmEnemy": "",
+      "disableEnemy": "SM_harrow_trapper",
+      "triggerEnemy": "",
+      "triggerHealthPercent": 0
+    },
+    {
+      "id": "SM_bin",
+      "target": "sm_bin",
+      "yaw": 0,
+      "width": 4,
+      "depth": 4,
+      "all": [
+        "SM_throne_entered"
+      ],
+      "none": [
+        "SM_sack_king_dead"
+      ],
+      "warningTicks": 20,
+      "damage": 2,
+      "staggerTicks": 0,
+      "rearmTicks": 0,
+      "activeTicks": 60,
+      "slowPermille": 500,
+      "nonlethal": true,
+      "alarmFlag": "",
+      "rearmEnemy": "",
+      "disableEnemy": "",
+      "triggerEnemy": "SM_sack_king",
+      "triggerHealthPercent": 50
+    }
+  ],
+  "arenas": [
+    {
+      "id": "SM_throne_arena",
+      "target": "sm_throne",
+      "radius": 8,
+      "boss": "SM_sack_king",
+      "enemies": [
+        "SM_sack_king",
+        "SM_throne1",
+        "SM_throne2",
+        "SM_called75",
+        "SM_called40"
+      ],
+      "all": [
+        "SM_throne_entered"
+      ],
+      "none": [
+        "SM_sack_king_dead"
+      ]
     }
   ]
 }

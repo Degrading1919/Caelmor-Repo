@@ -19,6 +19,7 @@ namespace Caelmor.Unity.Playable
         public LowmarkGame Lowmark { get; private set; }
         public bool HelpOpen { get; private set; }
         public string StartupFailure { get; private set; }
+        internal bool PersistenceWriteBlocked { get; private set; }
         public event Action<PlayableHost> HostInitialized;
         double accumulator;
         double lastSnapshotTime;
@@ -55,6 +56,16 @@ namespace Caelmor.Unity.Playable
         void OnSnapshot(PlayableSnapshot snapshot)
         {
             lastSnapshotTime = Time.realtimeSinceStartupAsDouble;
+        }
+        internal void BlockForPersistenceError(string message)
+        {
+            PersistenceWriteBlocked=true;StartupFailure="Progress could not be saved. Gameplay stopped to preserve your active quests.\n"+message;
+            Host?.ClearPendingInput();accumulator=0;
+        }
+        internal void ClearPersistenceError()
+        {
+            if(!PersistenceWriteBlocked)return;
+            PersistenceWriteBlocked=false;StartupFailure=null;Host?.ClearPendingInput();accumulator=0;
         }
         void Update()
         {
@@ -117,7 +128,7 @@ namespace Caelmor.Unity.Playable
             if (destinationView != null)
             {
                 destinationView.gameObject.SetActive(state.HasDestination);
-                destinationView.position = new Vector3(state.Destination.x, .025f, state.Destination.z);
+                destinationView.position = state.Destination+Vector3.up*.025f;
             }
             float alpha = Mathf.Clamp01((float)((Time.realtimeSinceStartupAsDouble - lastSnapshotTime) / WorldTickSeconds));
             playerView.position = Vector3.Lerp(previous.Position, state.Position, alpha);

@@ -19,10 +19,12 @@ namespace Caelmor.Runtime.Gameplay
         GameplayPoint TargetPoint(State state,int target)
         {
             var t=content.targets[target];
+            int enemy=Array.FindIndex(content.enemies,e=>e.target==t.id);
+            if(enemy>=0){var position=state.data.enemies[enemy];return new GameplayPoint(position.x,position.y,position.z);}
             for(int i=0;i<content.flocks.Length;i++)
                 if(content.flocks[i].target==t.id && state.data.flocks[i].positionIndex==1)
                 {t=content.targets.First(v=>v.id==content.flocks[i].alternateTarget);break;}
-            return new GameplayPoint(t.x,t.z);
+            return new GameplayPoint(t.x,t.y,t.z);
         }
         bool OpportunityTargetVisible(State state,int target)
         {

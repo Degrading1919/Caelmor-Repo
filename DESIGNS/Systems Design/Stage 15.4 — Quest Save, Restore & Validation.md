@@ -1,5 +1,7 @@
 # Stage 15.4 — Quest Save, Restore & Validation
 
+**Lifecycle alignment — Creative Director ruling, 2026-11-02:** Persist exactly Inactive, Active or Completed under Stage 15.2. Quests cannot be permanently failed or voluntarily abandoned. Recovery acceptance replaces the former abandonment/re-offer requirements.
+
 ## 1. Purpose
 
 This document defines the authoritative rules governing **quest persistence**, **quest restore semantics**, and **quest validation**.
@@ -51,6 +53,7 @@ Quest state **must not** be persisted:
 - Every restored quest instance **must** be in exactly one defined quest state.
 - Restored quest state **must not** violate legal state transition rules.
 - Terminal quest states **must** remain terminal on restore.
+- Completed is the only terminal lifecycle state. Active quests remain Active after leaving, death, disconnect and encounter retry; committed steps, counters, evidence and choices are retained.
 
 **Runtime Reset**
 
@@ -116,6 +119,16 @@ The following validation scenarios are mandatory and must fail loudly if violate
 - **Exercises:** Stage 15.2 Forbidden Transitions
 - **Expected Outcome:** Illegal quest states are rejected.
 - **Must Never Observe:** Undefined or multiple quest states.
+
+**Scenario: Active Quest Recovery**
+- **Exercises:** Leave/return, death, disconnect/reconnect and encounter retry at supported save boundaries.
+- **Expected Outcome:** The same player-owned Active quest retains committed steps, sub-counters, required evidence and meaningful choices. Only authored transient encounter/action state resets.
+- **Must Never Observe:** A permanent quest failure, voluntary abandonment, return to Inactive, duplicate reward, or replacement quest instance that erases progress.
+
+**Scenario: Required Objective Remains Reachable**
+- **Exercises:** Interrupted carry/channel, defeat during a required encounter, spent ordinary supplies and repeated recovery.
+- **Expected Outcome:** Required objects return or can be reacquired, repeatable supplies remain available, and at least one valid completion path remains.
+- **Must Never Observe:** A destroyed sole quest item, inaccessible required interaction, irrevocable choice reset or softlock after an otherwise supported recovery.
 
 ## 7. Quest Invariants
 

@@ -1,5 +1,7 @@
 # Lowmark v1 — Narrative Production Bible
 
+**Quest lifecycle ruling — Creative Director, 2026-11-02:** All Lowmark quests use exactly **Inactive, Active, Completed**. Quests cannot be permanently failed or voluntarily abandoned. Leaving, death, disconnect and encounter retry preserve the Active quest and committed progress; every required objective retains a valid completion path. Meaningful choices and their consequences remain persistent. This supersedes older failure/abandonment/re-offer requirements; recovery resets only authored transient action/encounter state, not the quest or its choices.
+
 **Status (updated after the independent review pass, 2026-11-02):** Authored production direction for Creative Director milestone review. This is the controlling document for every Lowmark v1 quest, NPC, dialogue, encounter, and discovery package. It turns the approved Part 5 architecture (D05) into a concrete, playable slate. Everything marked **[NEW]** is authored and not canon until the Director promotes it. Everything marked **[PROPOSAL — DIRECTOR]** is a consequential story choice that the content is built on but that Collin may replace; Section 3 lists exactly which content changes if he does.
 
 **Builds on:** `04_CONTENT_PRODUCTION/Quests/Caelmor_Lowmark_Quest_The_True_Line.md` (main quest 1) and its cast/dialogue file. The True Line's structure, voice rules, evidence rule, and conventions are binding here.

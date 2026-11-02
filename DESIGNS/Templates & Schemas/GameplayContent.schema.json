@@ -19,7 +19,10 @@
     "hazards",
     "flocks",
     "respawnRegions",
-    "presentationEvents"
+    "presentationEvents",
+    "gates",
+    "traps",
+    "arenas"
   ],
   "properties": {
     "version": {
@@ -150,6 +153,24 @@
       "items": {
         "$ref": "#/$defs/presentationEvent"
       }
+    },
+    "gates": {
+      "items": {
+        "$ref": "#/$defs/gate"
+      },
+      "type": "array"
+    },
+    "traps": {
+      "items": {
+        "$ref": "#/$defs/trap"
+      },
+      "type": "array"
+    },
+    "arenas": {
+      "items": {
+        "$ref": "#/$defs/arena"
+      },
+      "type": "array"
     }
   },
   "$defs": {
@@ -228,7 +249,8 @@
         "z",
         "all",
         "none",
-        "nodeInstanceId"
+        "nodeInstanceId",
+        "y"
       ],
       "properties": {
         "id": {
@@ -268,6 +290,9 @@
         "nodeInstanceId": {
           "type": "integer",
           "minimum": 0
+        },
+        "y": {
+          "type": "number"
         }
       }
     },
@@ -344,7 +369,8 @@
         "id",
         "name",
         "stages",
-        "all"
+        "all",
+        "startAll"
       ],
       "properties": {
         "id": {
@@ -369,6 +395,14 @@
             "type": "string",
             "minLength": 1
           }
+        },
+        "startAll": {
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": "array"
         }
       }
     },
@@ -404,7 +438,9 @@
         "tagInputs",
         "flock",
         "flockOperation",
-        "counterEffects"
+        "counterEffects",
+        "trap",
+        "trapOperation"
       ],
       "properties": {
         "id": {
@@ -555,6 +591,16 @@
           "items": {
             "$ref": "#/$defs/counterEffect"
           }
+        },
+        "trap": {
+          "type": "string"
+        },
+        "trapOperation": {
+          "enum": [
+            "",
+            "inspect",
+            "disarm"
+          ]
         }
       }
     },
@@ -576,7 +622,11 @@
         "respawn",
         "lootAction",
         "boundaryTarget",
-        "boundaryRadius"
+        "boundaryRadius",
+        "spawnFrom",
+        "spawnHealthPercent",
+        "spawnWindupTicks",
+        "moveSpeed"
       ],
       "properties": {
         "id": {
@@ -640,6 +690,22 @@
           "type": "string"
         },
         "boundaryRadius": {
+          "type": "number",
+          "minimum": 0
+        },
+        "spawnFrom": {
+          "type": "string"
+        },
+        "spawnHealthPercent": {
+          "minimum": 0,
+          "type": "integer",
+          "maximum": 100
+        },
+        "spawnWindupTicks": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "moveSpeed": {
           "type": "number",
           "minimum": 0
         }
@@ -846,7 +912,8 @@
         "z",
         "radius",
         "all",
-        "none"
+        "none",
+        "y"
       ],
       "properties": {
         "id": {
@@ -882,6 +949,9 @@
             "minLength": 1
           },
           "uniqueItems": true
+        },
+        "y": {
+          "type": "number"
         }
       }
     },
@@ -910,21 +980,22 @@
           "type": "string",
           "pattern": "^[a-zA-Z0-9_.-]+$"
         },
-        "kind": {
-          "enum": [
-            "waterRise"
-          ]
-        },
         "ticks": {
           "type": "integer",
           "minimum": 1
         },
-        "rise": {
-          "type": "number",
-          "exclusiveMinimum": 0
-        },
         "persistRise": {
           "type": "boolean"
+        },
+        "kind": {
+          "enum": [
+            "waterRise",
+            "quiet"
+          ]
+        },
+        "rise": {
+          "type": "number",
+          "minimum": 0
         }
       }
     },
@@ -961,6 +1032,223 @@
         "min": {
           "type": "integer",
           "minimum": 1
+        }
+      }
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "target",
+        "yaw",
+        "width",
+        "height",
+        "depth",
+        "openAll",
+        "openNone"
+      ],
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9_.-]+$",
+          "type": "string"
+        },
+        "target": {
+          "pattern": "^[a-zA-Z0-9_.-]+$",
+          "type": "string"
+        },
+        "yaw": {
+          "type": "number"
+        },
+        "width": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "depth": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "openAll": {
+          "uniqueItems": true,
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "openNone": {
+          "uniqueItems": true,
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "trap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "target",
+        "yaw",
+        "width",
+        "depth",
+        "all",
+        "none",
+        "warningTicks",
+        "damage",
+        "staggerTicks",
+        "rearmTicks",
+        "activeTicks",
+        "slowPermille",
+        "nonlethal",
+        "alarmFlag",
+        "rearmEnemy",
+        "disableEnemy",
+        "triggerEnemy",
+        "triggerHealthPercent"
+      ],
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9_.-]+$",
+          "type": "string"
+        },
+        "target": {
+          "pattern": "^[a-zA-Z0-9_.-]+$",
+          "type": "string"
+        },
+        "yaw": {
+          "type": "number"
+        },
+        "width": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "depth": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "all": {
+          "uniqueItems": true,
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "none": {
+          "uniqueItems": true,
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "warningTicks": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "damage": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "staggerTicks": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "rearmTicks": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "activeTicks": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "slowPermille": {
+          "minimum": 1,
+          "type": "integer",
+          "maximum": 1000
+        },
+        "nonlethal": {
+          "type": "boolean"
+        },
+        "alarmFlag": {
+          "type": "string"
+        },
+        "rearmEnemy": {
+          "type": "string"
+        },
+        "disableEnemy": {
+          "type": "string"
+        },
+        "triggerEnemy": {
+          "type": "string"
+        },
+        "triggerHealthPercent": {
+          "minimum": 0,
+          "type": "integer",
+          "maximum": 100
+        }
+      }
+    },
+    "arena": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "target",
+        "radius",
+        "boss",
+        "enemies",
+        "all",
+        "none"
+      ],
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9_.-]+$",
+          "type": "string"
+        },
+        "target": {
+          "pattern": "^[a-zA-Z0-9_.-]+$",
+          "type": "string"
+        },
+        "radius": {
+          "exclusiveMinimum": 0,
+          "type": "number"
+        },
+        "boss": {
+          "pattern": "^[a-zA-Z0-9_.-]+$",
+          "type": "string"
+        },
+        "enemies": {
+          "uniqueItems": true,
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "all": {
+          "uniqueItems": true,
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "none": {
+          "uniqueItems": true,
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array"
         }
       }
     }

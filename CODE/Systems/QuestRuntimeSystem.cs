@@ -19,6 +19,8 @@ namespace Caelmor.Runtime.Quests
 
         private readonly object _gate = new object();
         private readonly Dictionary<QuestInstanceId, QuestRecord> _records = new Dictionary<QuestInstanceId, QuestRecord>();
+        private readonly Dictionary<(PlayerHandle Owner, string Definition), QuestInstanceId> _instancesByOwnerAndDefinition =
+            new Dictionary<(PlayerHandle Owner, string Definition), QuestInstanceId>();
 
         public QuestRuntimeSystem(
             IServerAuthority authority,
@@ -60,8 +62,15 @@ namespace Caelmor.Runtime.Quests
                     return QuestRegistrationResult.Failed(QuestRegistrationFailureReason.AlreadyRegistered);
                 }
 
+                // A fresh identifier must not recreate an accepted or completed quest.
+                // Reconnection restores its progress; it is never a re-offer/reset.
+                var ownerDefinition = (owner, questDefinitionId);
+                if (_instancesByOwnerAndDefinition.ContainsKey(ownerDefinition))
+                    return QuestRegistrationResult.Failed(QuestRegistrationFailureReason.AlreadyRegistered);
+
                 var record = new QuestRecord(questId, owner, questDefinitionId, QuestState.Inactive);
                 _records.Add(questId, record);
+                _instancesByOwnerAndDefinition.Add(ownerDefinition, questId);
 
                 return QuestRegistrationResult.Success(questId, true);
             }
@@ -81,14 +90,6 @@ namespace Caelmor.Runtime.Quests
         public QuestStateTransitionResult CompleteQuest(QuestInstanceId questId)
         {
             return Transition(questId, QuestState.Completed);
-        }
-
-        /// <summary>
-        /// Explicitly marks a quest instance as failed.
-        /// </summary>
-        public QuestStateTransitionResult FailQuest(QuestInstanceId questId)
-        {
-            return Transition(questId, QuestState.Failed);
         }
 
         /// <summary>
@@ -120,10 +121,26 @@ namespace Caelmor.Runtime.Quests
                 var context = new QuestProgressionContext(record.QuestId, record.Owner, record.State, eventsSnapshot);
                 var decision = _progressionEvaluator.Evaluate(context);
 
+                // An evaluator may only preserve an active quest or complete it. Old or
+                // undefined enum values are rejected, never translated into a terminal state.
+                if (decision != QuestProgressionDecision.NoChange && decision != QuestProgressionDecision.Complete)
+                    return QuestProgressionResult.Failed(QuestProgressionFailureReason.InvalidDecision);
+
+                // Eligibility can end while the read-only evaluator is running. Recheck
+                // before reporting/committing its result so interrupted work stays active.
+                if (!_authority.IsServerAuthoritative)
+                    return QuestProgressionResult.Failed(QuestProgressionFailureReason.NotServerAuthority);
+                if (!_mutationGate.CanMutateQuestsNow())
+                    return QuestProgressionResult.Failed(QuestProgressionFailureReason.MidTickMutationForbidden);
+                if (!_lifecycle.IsPlayerActive(record.Owner))
+                    return QuestProgressionResult.Failed(QuestProgressionFailureReason.LifecycleNotEligible);
+                if (_records[questId].State != QuestState.Active)
+                    return QuestProgressionResult.Failed(QuestProgressionFailureReason.InvalidState);
+
                 if (decision == QuestProgressionDecision.NoChange)
                     return QuestProgressionResult.Success(record.State, wasStateChanged: false);
 
-                var targetState = decision == QuestProgressionDecision.Complete ? QuestState.Completed : QuestState.Failed;
+                var targetState = QuestState.Completed;
 
                 if (!IsTransitionAllowed(record.State, targetState))
                     return QuestProgressionResult.Failed(QuestProgressionFailureReason.InvalidTransition);
@@ -210,7 +227,7 @@ namespace Caelmor.Runtime.Quests
                 return target == QuestState.Active;
 
             if (current == QuestState.Active)
-                return target == QuestState.Completed || target == QuestState.Failed;
+                return target == QuestState.Completed;
 
             return false;
         }
@@ -240,7 +257,6 @@ namespace Caelmor.Runtime.Quests
 
         QuestStateTransitionResult ActivateQuest(QuestInstanceId questId);
         QuestStateTransitionResult CompleteQuest(QuestInstanceId questId);
-        QuestStateTransitionResult FailQuest(QuestInstanceId questId);
 
         QuestProgressionResult ProcessProgression(QuestInstanceId questId, QuestProgressionEvents eventsSnapshot);
 
@@ -426,16 +442,14 @@ namespace Caelmor.Runtime.Quests
     public enum QuestProgressionDecision
     {
         NoChange = 0,
-        Complete = 1,
-        Fail = 2
+        Complete = 1
     }
 
     public enum QuestState
     {
         Inactive = 0,
         Active = 1,
-        Completed = 2,
-        Failed = 3
+        Completed = 2
     }
 
     public enum QuestRegistrationFailureReason
@@ -468,6 +482,7 @@ namespace Caelmor.Runtime.Quests
         QuestNotRegistered = 4,
         InvalidState = 5,
         LifecycleNotEligible = 6,
-        InvalidTransition = 7
+        InvalidTransition = 7,
+        InvalidDecision = 8
     }
 }

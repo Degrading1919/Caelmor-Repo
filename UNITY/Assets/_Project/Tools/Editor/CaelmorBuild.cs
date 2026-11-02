@@ -47,10 +47,12 @@ namespace Caelmor.Unity.Editor
             Cube("West bound", new Vector3(-13.75f, .75f, 0), new Vector3(.5f, 1.5f, 28), stone, true);
             Cube("Shelter hub north bound", new Vector3(26, .75f, 13.75f), new Vector3(24, 1.5f, .5f), stone, true);
             Cube("Shelter hub south bound", new Vector3(26, .75f, -13.75f), new Vector3(24, 1.5f, .5f), stone, true);
-            Cube("Shelter hub east bound", new Vector3(37.75f, .75f, 0), new Vector3(.5f, 1.5f, 28), stone, true);
+            Cube("Shelter east / north road edge",new Vector3(37.75f,.75f,8.5f),new Vector3(.5f,1.5f,11),stone,true);
+            Cube("Shelter east / south road edge",new Vector3(37.75f,.75f,-8.5f),new Vector3(.5f,1.5f,11),stone,true);
             Cube("Connecting shelter road", new Vector3(18, .008f, 0), new Vector3(22, .01f, 3), path, false);
             AddSign("Shelter and reed margin →", new Vector3(11.7f, 2.2f, 1.8f));
             AddSign("← Landing and bank", new Vector3(17, 2.2f, 1.8f));
+            CreateDepotGeometry(ground,stone,path);
             Cube("Collision test wall", new Vector3(-5, 1, 1), new Vector3(5, 2, .8f), stone, true);
             Cube("Collision test block", new Vector3(6, .9f, 5), new Vector3(2.5f, 1.8f, 2.5f), stone, true);
             for (int z = -10; z <= 10; z += 5)
@@ -139,7 +141,7 @@ namespace Caelmor.Unity.Editor
             settings.agentRadius = .43f; settings.agentHeight = 1.8f; settings.agentClimb = .2f; settings.agentSlope = 40f;
             settings.overrideVoxelSize = true; settings.voxelSize = .08f; settings.minRegionArea = .1f;
             var sources = new List<NavMeshBuildSource>();
-            var navigationBounds=new Bounds(new Vector3(12,1,0),new Vector3(56,6,30));
+            var navigationBounds=new Bounds(new Vector3(46,0,0),new Vector3(124,24,42));
             UnityEngine.AI.NavMeshBuilder.CollectSources(navigationBounds,
                 1 << 8, NavMeshCollectGeometry.PhysicsColliders, 0, new List<NavMeshBuildMarkup>(), sources);
             var baked = UnityEngine.AI.NavMeshBuilder.BuildNavMeshData(settings, sources,
@@ -163,6 +165,50 @@ namespace Caelmor.Unity.Editor
             var sign=new GameObject(text).AddComponent<TextMesh>();sign.text=text;sign.transform.position=position;
             sign.fontSize=48;sign.characterSize=.12f;sign.anchor=TextAnchor.MiddleCenter;sign.color=new Color(.92f,.86f,.7f);
             sign.transform.rotation=Quaternion.Euler(0,0,0);
+        }
+        static void CreateDepotGeometry(Material ground,Material stone,Material path)
+        {
+            Cube("Granary yard / technical projection",new Vector3(46,-.25f,0),new Vector3(16,.5f,28),ground,true).AddComponent<NavigableTerrain>();
+            Cube("Hill Depot / lower floor",new Vector3(86,-3.25f,0),new Vector3(40,.5f,36),stone,true).AddComponent<NavigableTerrain>();
+            Ramp("Hill passage descent",54,66,-3,3,0,-3,stone);
+            Cube("Granary north bound",new Vector3(46,1,13.75f),new Vector3(16,2,.5f),stone,true);
+            Cube("Granary south bound",new Vector3(46,1,-13.75f),new Vector3(16,2,.5f),stone,true);
+            Cube("Granary east north wall",new Vector3(54,1,8.5f),new Vector3(.5f,2,11),stone,true);
+            Cube("Granary east south wall",new Vector3(54,1,-8.5f),new Vector3(.5f,2,11),stone,true);
+            Cube("Passage north retaining wall",new Vector3(60,-.5f,3.25f),new Vector3(12,5,.5f),stone,true);
+            Cube("Passage south retaining wall",new Vector3(60,-.5f,-3.25f),new Vector3(12,5,.5f),stone,true);
+            Cube("Depot north bound",new Vector3(86,-1,17.75f),new Vector3(40,4,.5f),stone,true);
+            Cube("Depot south bound",new Vector3(86,-1,-17.75f),new Vector3(40,4,.5f),stone,true);
+            Cube("Depot east bound",new Vector3(105.75f,-1,0),new Vector3(.5f,4,36),stone,true);
+            Cube("Depot west north bound",new Vector3(66,-1,10.5f),new Vector3(.5f,4,15),stone,true);
+            Cube("Depot west south bound",new Vector3(66,-1,-10.5f),new Vector3(.5f,4,15),stone,true);
+            // Real raised gallery bypasses the twine door, with walkable ramps on both ends.
+            Ramp("Collapsed rack / gallery ascent",68,72,10,14,-3,-1.5f,stone);
+            Cube("Sorting hall gallery",new Vector3(76,-1.75f,12),new Vector3(8,.5f,4),stone,true).AddComponent<NavigableTerrain>();
+            Ramp("Gallery return ramp",80,84,10,14,-1.5f,-3,stone);
+            Wall("Sorting south partition",78,-18,-2,stone);Wall("Sorting central partition",78,2,10,stone);Wall("Sorting north partition",78,14,18,stone);
+            Wall("Harrow south partition",90,-18,-3,stone);Wall("Harrow north partition",90,12,18,stone);
+            Ramp("Harrow trapper ledge ramp",88,92,3,8,-3,-1.5f,stone,true);
+            Cube("Harrow trapper ledge",new Vector3(90,-1.75f,10),new Vector3(4,.5f,4),stone,true).AddComponent<NavigableTerrain>();
+            Wall("Chute south partition",102,-18,-2,stone);Wall("Chute middle partition",102,2,5,stone);Wall("Chute north partition",102,7,18,stone);
+            Cube("Granary road",new Vector3(46,.008f,0),new Vector3(16,.01f,3),path,false);
+            AddSign("Crestbridge granary and Hill Depot →",new Vector3(34,2.2f,1.8f));
+            AddSign("Hill Depot / passage descends",new Vector3(52,2.2f,2));
+        }
+        static void Wall(string name,float x,float fromZ,float toZ,Material material)=>Cube(name,new Vector3(x,-1,(fromZ+toZ)/2),new Vector3(.5f,4,toZ-fromZ),material,true);
+        static void Ramp(string name,float fromX,float toX,float fromZ,float toZ,float fromY,float toY,Material material,bool alongZ=false)
+        {
+            var mesh=new Mesh();mesh.name=name;
+            var a=new Vector3(fromX,fromY,fromZ);var b=new Vector3(toX,alongZ?fromY:toY,fromZ);var c=new Vector3(toX,toY,toZ);var d=new Vector3(fromX,alongZ?toY:fromY,toZ);
+            mesh.vertices=new[]{a,b,c,d,a-Vector3.up*.4f,b-Vector3.up*.4f,c-Vector3.up*.4f,d-Vector3.up*.4f};
+            mesh.triangles=new[]{0,2,1,0,3,2,4,5,6,4,6,7,0,1,5,0,5,4,1,2,6,1,6,5,2,3,7,2,7,6,3,0,4,3,4,7};
+            mesh.RecalculateNormals();mesh.RecalculateBounds();
+            // Store the mesh as a source asset so the player loads the actual authored collider.
+            string assetPath="Assets/_Project/World/"+name.Replace(" / ","_").Replace(" ","_")+".asset";
+            var existing=AssetDatabase.LoadAssetAtPath<Mesh>(assetPath);
+            if(existing==null)AssetDatabase.CreateAsset(mesh,assetPath);else{EditorUtility.CopySerialized(mesh,existing);UnityEngine.Object.DestroyImmediate(mesh);mesh=existing;EditorUtility.SetDirty(mesh);}
+            var go=new GameObject(name);go.layer=8;go.AddComponent<MeshFilter>().sharedMesh=mesh;go.AddComponent<MeshRenderer>().sharedMaterial=material;
+            go.AddComponent<MeshCollider>().sharedMesh=mesh;go.AddComponent<NavigableTerrain>();
         }
         static GameObject Cube(string name, Vector3 position, Vector3 scale, Material material, bool solid)
         {

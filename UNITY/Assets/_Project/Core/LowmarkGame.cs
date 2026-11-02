@@ -17,7 +17,7 @@ namespace Caelmor.Unity.Playable
         public GameplaySession Session { get; private set; }
         public string ContentIdentity { get; private set; }
         public int Selected { get; private set; } = -1;
-        public string CheckpointStatus { get; private set; } = "F5: save checkpoint. F9: reload checkpoint (restarts at road head).";
+        public string CheckpointStatus { get; private set; } = "Progress saves automatically. F5 saves now; F9 reconnects without resetting quests.";
         readonly List<GameplayRequest> requests = new List<GameplayRequest>();
         readonly List<GameObject> views = new List<GameObject>();
         readonly List<GameObject> warnings = new List<GameObject>();
@@ -28,7 +28,8 @@ namespace Caelmor.Unity.Playable
         readonly List<GameObject> boundaryViews = new List<GameObject>();
         int pendingAction=-1, pendingEnemy=-1;
         Vector3 pendingApproachTarget;
-        AtomicTextCheckpoint checkpoint;
+        GameplayCheckpointService checkpoint;
+        bool reconnecting;
         Vector3 preparingPosition;
         public bool QuietPresentation
         {
@@ -66,8 +67,8 @@ namespace Caelmor.Unity.Playable
         public void Initialize(PlayableBootstrap game)
         {
             Game=game;Content=LoadContent(out var identity);ContentIdentity=identity;
-            checkpoint=new AtomicTextCheckpoint(CheckpointPath);
             Session=NewSession();
+            if(!Application.isBatchMode)checkpoint=new GameplayCheckpointService(CheckpointPath,ContentIdentity,Session.Capture,Session.PrepareRestore,Session.IsCompatibleSaveIdentity);
             game.Host.GameplayCommandConsumed+=Consume;
             game.Host.GameplayPreparing+=Prepare;
             game.Host.GameplayCommitting+=Commit;
@@ -96,6 +97,7 @@ namespace Caelmor.Unity.Playable
         void Commit(long tick)
         {
             Session.CommitTick(tick);
+            checkpoint?.MarkCommitted(Session.DurableRevision);
             if(!string.IsNullOrEmpty(Session.Feedback)) Dialogue=Session.Feedback;
         }
         void Abort(){requests.Clear();Session.AbortTick();}
@@ -145,6 +147,9 @@ namespace Caelmor.Unity.Playable
         void Update()
         {
             if(Session==null || Application.isBatchMode)return;
+            if(Game.StartupFailure!=null)return;
+            try {if(checkpoint!=null && checkpoint.Pump(Time.realtimeSinceStartupAsDouble))CheckpointStatus=checkpoint.Status;}
+            catch(Exception error){BlockPersistence(error);return;}
             if(Input.GetKeyDown(KeyCode.F5))SaveCheckpoint();
             if(Input.GetKeyDown(KeyCode.F9))ReloadCheckpoint();
             if(Game.HelpOpen || QuietPresentation || !Game.Host.IsReady)return;
@@ -166,34 +171,56 @@ namespace Caelmor.Unity.Playable
         }
         public void SaveCheckpoint()
         {
+            if(Application.isBatchMode || checkpoint==null || Game.StartupFailure!=null)return;
             try
             {
                 if(!Game.Host.IsReady)throw new InvalidOperationException("Host is not ready.");
-                var text=JsonUtility.ToJson(Session.Capture(),true);
-                checkpoint.Write(text,ValidateCheckpoint);CheckpointStatus="Checkpoint saved: "+CheckpointPath;
+                checkpoint.SaveExplicit(Time.realtimeSinceStartupAsDouble);CheckpointStatus=checkpoint.Status;
             }
-            catch(Exception e){CheckpointStatus="Save failed: "+e.Message;Debug.LogError(CheckpointStatus);}
+            catch(Exception error){BlockPersistence(error);}
         }
-        void ValidateCheckpoint(string text)=>Session.ValidateSave(JsonUtility.FromJson<GameplaySave>(text));
         public void ReloadCheckpoint()
         {
+            if(Application.isBatchMode || checkpoint==null || Game.StartupFailure!=null)return;
             try
             {
-                if(!checkpoint.Exists)throw new InvalidOperationException("No checkpoint exists.");
-                var text=checkpoint.Read(ValidateCheckpoint);
-                // A fresh runtime composition prevents stale coarse quest states or commands.
-                PlayerPrefs.SetInt("Caelmor.LoadGameplayCheckpoint",1);PlayerPrefs.Save();
+                // Reconnect means retaining the current active instance and choices, not
+                // rolling the campaign back to an older manual save.
+                checkpoint.Flush(Time.realtimeSinceStartupAsDouble);
+                checkpoint.ValidateLatestForReconnect();
+                reconnecting=true;
                 Game.Host.ClearPendingInput();UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
             }
-            catch(Exception e){CheckpointStatus="Load failed; current game retained: "+e.Message;Debug.LogError(CheckpointStatus);}
+            catch(Exception error){BlockPersistence(error);}
         }
         public void ApplyRequestedCheckpoint()
         {
-            if(PlayerPrefs.GetInt("Caelmor.LoadGameplayCheckpoint",0)!=1)return;
-            PlayerPrefs.DeleteKey("Caelmor.LoadGameplayCheckpoint");
-            try {var text=checkpoint.Read(ValidateCheckpoint);Session.Restore(JsonUtility.FromJson<GameplaySave>(text));Dialogue=Session.Feedback;CheckpointStatus="Checkpoint restored at road head.";}
-            catch(Exception e){CheckpointStatus="Checkpoint rejected; fresh game started: "+e.Message;Debug.LogError(CheckpointStatus);}
+            if(Application.isBatchMode || checkpoint==null)return;
+            // Bootstrap catches failure and blocks simulation. Never substitute a new
+            // campaign for an existing profile that could not safely be restored.
+            var save=checkpoint.LoadLatest();
+            if(save!=null){Session.Restore(save);Dialogue=Session.Feedback;}
+            CheckpointStatus=checkpoint.Status;
         }
+        public void RetryPersistence()
+        {
+            if(Application.isBatchMode || checkpoint==null)return;
+            try {checkpoint.RetryFlush(Time.realtimeSinceStartupAsDouble);CheckpointStatus=checkpoint.Status;Game.ClearPersistenceError();}
+            catch(Exception error){BlockPersistence(error);}
+        }
+        void BlockPersistence(Exception error)
+        {
+            CheckpointStatus=checkpoint?.Status??("Progress persistence failed: "+error.Message);
+            Game.BlockForPersistenceError(CheckpointStatus);Debug.LogError(CheckpointStatus);
+        }
+        void FlushForLifecycle()
+        {
+            if(Application.isBatchMode || checkpoint==null || reconnecting || Session==null || Game==null || Game.StartupFailure!=null)return;
+            try {checkpoint.Flush(Time.realtimeSinceStartupAsDouble);CheckpointStatus=checkpoint.Status;}
+            catch(Exception error){BlockPersistence(error);}
+        }
+        void OnApplicationPause(bool paused){if(paused)FlushForLifecycle();}
+        void OnApplicationQuit()=>FlushForLifecycle();
         void CreateViews()
         {
             foreach(var t in Content.targets)
@@ -272,6 +299,7 @@ namespace Caelmor.Unity.Playable
         }
         void OnDestroy()
         {
+            FlushForLifecycle();
             if(Game!=null && Game.Host!=null){Game.Host.GameplayCommandConsumed-=Consume;Game.Host.GameplayPreparing-=Prepare;Game.Host.GameplayCommitting-=Commit;Game.Host.GameplayAborted-=Abort;Game.Host.InputCleared-=Clear;}
             foreach(var mat in materials)if(mat!=null)Destroy(mat);
             for(int i=0;i<views.Count;i++){if(views[i]!=null)Destroy(views[i]);if(warnings[i]!=null)Destroy(warnings[i]);if(labels[i]!=null)Destroy(labels[i].gameObject);}

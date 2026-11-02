@@ -246,7 +246,7 @@ This is the quest's centerpiece. It must feel strange and quiet, never like a sp
 
 | Step | Player objective | Completes on (server-recognized event) | Required | Notes |
 |---|---|---|---|---|
-| `S00_arrive` | Find out why the crossing has stopped. | Player enters area-A volume | Yes | Quest moves Uninitialized → Active on this event (auto-accept; Stage 15.2 permits) |
+| `S00_arrive` | Find out why the crossing has stopped. | Player enters area-A volume | Yes | Quest moves Inactive → Active on this explicit authored event (auto-accept; Stage 15.2 permits) |
 | `S01_hear_both` | Hear both sides at the tollpost. | Dialogue `D1` reaches end node | Yes | Leads (Nan, Dace, Wynn, Tovin) available from here until `S07` completes |
 | `S02_read_post` | Examine the new marker post. | 3 inspect events on post (notch, footing, drag) | Yes | Any order |
 | `S03_find_old_post` | Follow the drag marks upstream. | Player picks up `weathered_marker_post` | Yes | |
@@ -332,8 +332,8 @@ That is 3 quest items against the Phase 1.5 budget of 8–12 for all of v1. The 
 | Player sells or drops a quest item | Quest items are not droppable or sellable. |
 | Player has no cutting tool | Hatchet loan (Beat 5). |
 | Player skips optional leads | Notch evidence plus Hollis's own inspection guarantee the two proofs (Beat 7). |
-| Abandon | Allowed (Stage 15.2 Abandoned state). Re-offer on next approach to the landing; this is Lowmark's first main-arc quest, so it must always be re-obtainable. Requires a re-offer rule from the Schema/Systems pass (Section 12). |
-| Failed state | None. This quest cannot fail. |
+| Leave and return | The same quest remains Active with committed progress, evidence and choices intact. Returning to the landing exposes the current objective; no fresh instance or re-offer is created. |
+| Quest lifecycle | Exactly Inactive, Active, Completed. This quest cannot permanently fail or be voluntarily abandoned. |
 | Co-op | Each player has their own quest instance (Stage 15.1). Shared world creatures give step credit to every participant on that step. Step-conditioned props (post, notice, chalk ring) are presented per player from their own quest state (Section 12). The discovery plays for each player on their own seat event; partners present see the water for their own seat only. |
 
 ---
@@ -342,7 +342,7 @@ That is 3 quest items against the Phase 1.5 budget of 8–12 for all of v1. The 
 
 ### 12.1 What already exists
 
-- `CODE/Systems/QuestRuntimeSystem.cs` implements quest-level state (Uninitialized/Active/Completed/Failed/Abandoned) with server-authoritative transitions, a progression evaluator interface and a mutation gate (Stages 15, 22.2, 27).
+- `CODE/Systems/QuestRuntimeSystem.cs` implements exactly three quest lifecycle states (Inactive/Active/Completed) under the Director ruling of 2026-11-02 with server-authoritative transitions, a progression evaluator interface and a mutation gate (Stages 15, 22.2, 27).
 - Combat runtime, inventory runtime and NPC runtime systems exist in `CODE/Systems/` with validation scenarios.
 - Gathering resolution and inventory grant designs exist in `DESIGNS/Networking & Persistence/`.
 - Movement agility triggers are approved in Phase 1.3 §1.
@@ -362,7 +362,7 @@ None of these is a new core system. Each is a field or contract the roadmap alre
 | **Quest-state-conditioned props** (yellow post vs. new post, notice on/off, chalk ring) | Systems Engineer | 33.1.B2 zone binding | Client presentation keyed on the local player's quest state. **Fallback** if per-player presentation is not ready: leave the yellow post in place permanently as "the old false post the keepers left as a warning," add the new post beside it, and carry all state through dialogue. |
 | **Discovery event presentation** | Systems Engineer + art | — | One server event (`true_line.stone_holds`) that clients play as a local, time-limited water-sheet and audio-duck effect. No gameplay state depends on it. |
 | **Encounter pockets** E1–E4 with step-gated spawns | Schema & Content Engineer (data), Systems Engineer (spawn rules) | 33.7 Encounter Pockets | Spawn on step entry; despawn/normal wildlife after step passes. |
-| **Quest re-offer after abandon** | Schema & Content Engineer, Systems Engineer | 34.5 Quest Fail States & Recovery | Abandoned instance is replaced by a fresh Uninitialized instance on next area-A entry. Stage 15.2 forbids transitions *out of* Abandoned, so this must be a new instance, not a state change. |
+| **Quest persistence, recovery and softlock prevention** | Schema & Content Engineer, Systems Engineer | 34.5 Quest Persistence, Recovery & Softlock Prevention | Keep the Active instance through leaving, death, disconnect and retry; retain committed progress/choices/evidence, return interrupted carries to their sources and prove every required objective remains completable without duplicate rewards. |
 | **Creature definitions** for Silt Swimmer, River Leech, Marsh Fen Goose, Furrow Boar | Schema & Content Engineer, Gameplay Designer | 33.7, enemy family pass | Roles and telegraphs per Section 7. |
 
 ### 12.3 Recommended build order (shortest path to a playable slice)
@@ -415,7 +415,7 @@ These need the Creative Director. The quest is built to work with any answer to 
 
 Two related decisions remain open but are **not needed** by this quest: what defeating a Wraith means (the quest has no Wraith fight by design; the Wraithwatcher only foreshadows), and the Last Field-Mage's characterization (the far-bank figure is pronoun-free and never confirmed).
 
-Decided here under delegated authority and recorded for review: no lump quest XP; the quest cannot fail; abandon re-offers; reward is access, knowledge and a tool.
+Decided here under delegated authority and recorded for review: no lump quest XP; the quest cannot fail or be abandoned; Active progress remains recoverable; reward is access, knowledge and a tool.
 
 ---
 
