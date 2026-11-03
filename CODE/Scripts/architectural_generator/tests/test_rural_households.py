@@ -114,7 +114,12 @@ class RuralHouseholdConstructionTests(unittest.TestCase):
                 world_aware=True)
             plan, buffers = generate(settings)
             self.assertTrue(validate(plan, buffers)["valid"])
-            self.assertIn("thornfell_signal_tower", _masses(plan))
+            if function=='GATEHOUSE':
+                self.assertEqual(plan.functional_program['function'],'GATEHOUSE')
+                self.assertEqual(sum(m.plan.settings.function=='WATCHTOWER' for m in plan.world_zones),2)
+                self.assertTrue(plan.world_zones[0].plan.passage_geometry['valid'])
+            else:
+                self.assertIn("thornfell_signal_tower", _masses(plan))
 
     def test_ordinary_homes_do_not_gain_towers_from_public_context_alone(self):
         for context in ("PASSWATCH", "STONEWAKE"):

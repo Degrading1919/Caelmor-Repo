@@ -39,9 +39,16 @@ def archetype_gallery(args):
     from render_world_evidence import _bounds
     import traceback
 
-    out=ROOT/'evidence'/'archetypes_v05'
+    if Path(args.gallery_output).name!=args.gallery_output:
+        raise ValueError('Gallery output must be a single evidence folder name')
+    out=ROOT/'evidence'/args.gallery_output
     (out/'manifests').mkdir(parents=True,exist_ok=True)
     files=list((ROOT/'caelmor_architecture').glob('*.py'))
+    selected_functions=set(args.gallery_functions or TYPE_SPECS)
+    unused=set()
+    if not selected_functions.intersection(('SMITHY','MARKET_HALL')):unused.add('function_work.py')
+    if not selected_functions.intersection(('STABLE','GATEHOUSE')):unused.add('function_yard.py')
+    files=[p for p in files if p.name not in unused]
     files += [ROOT/'caelmor_architecture'/'blender_manifest.toml']
     def source_hashes():
         return {p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(files)}
@@ -61,7 +68,7 @@ def archetype_gallery(args):
             if (old['source_sha256']!=source or old['render_source_sha256']!=render_source
                     or old['source_revision']!=args.source_revision or old['settings_contract']!=contract):
                 raise RuntimeError('Resume source/settings mismatch: '+function)
-            if len(old['records'])==4 and all(r['status']=='rendered' and len(r['views'])==4
+            if {r['region'] for r in old['records']}==set(args.regions) and all(r['status']=='rendered' and len(r['views'])==4
                     and all((out/v['image']).exists() and hashlib.sha256((out/v['image']).read_bytes()).hexdigest()==v['image_sha256']
                             for v in r['views']) for r in old['records']):
                 print('ARCHETYPE_GALLERY_REUSED',function,flush=True)
@@ -71,7 +78,7 @@ def archetype_gallery(args):
         scene.eevee.taa_render_samples=32
         bpy.data.objects['Neutral ground'].location.z=0.
         records=[];cases=[]
-        for region in REGIONS:
+        for region in args.regions:
             settings=Settings(function=function,region=region,**contract)
             row={'function':function,'region':region,'label':TYPE_SPECS[function].label,
                  'settings':asdict(settings),'resolved_context':resolve_settings(settings).context,
@@ -85,6 +92,7 @@ def archetype_gallery(args):
                 row['geometry_hash']=collection['caelm_geometry_hash']
                 row['validation']=json.loads(collection['caelm_validation'])
                 row['backend']=metrics
+                row['functional_program']=json.loads(collection.get('caelm_functional_program','null'))
                 if not row['validation']['valid']:raise RuntimeError('Backend accepted invalid geometry')
                 bounds=_bounds(collection)
                 center=Vector(tuple((a+b)*.5 for a,b in bounds))
@@ -163,6 +171,7 @@ def main():
     parser.add_argument('--archetype-gallery',action='store_true',help='Current 20-type/four-region reference gallery; no generator changes')
     parser.add_argument('--gallery-functions',nargs='+',help='Optional bounded subset of archetype IDs')
     parser.add_argument('--gallery-resume',action='store_true',help='Reuse complete image/hash/source-verified archetypes')
+    parser.add_argument('--gallery-output',default='archetypes_v05',help='Separate evidence folder; preserve historical galleries')
     parser.add_argument('--source-revision',help='Pinned generator commit for the archetype gallery')
     args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
     if args.archetype_gallery:

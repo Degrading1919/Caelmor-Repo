@@ -1,6 +1,15 @@
 # Caelmor Architectural Generator
 
-Version 0.5.0 is an offline Blender add-on for editable, metre-scale exterior buildings. It combines twenty purpose-led building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
+Version 0.6.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
+
+In World mode, Smithy, Market Hall, Stable and Gatehouse now allocate functional
+spaces before their regional construction shell. Integral work equipment,
+trading bays, animal stalls and guarding/access arrangements are limited to
+those programs; this is not a general interior generator. Program rooms,
+stations, clearances and approaches are included in the export sidecar. Other
+functions retain their existing regional builders, and legacy/manual mode
+remains available. See [FUNCTIONAL_PROGRAMS.md](FUNCTIONAL_PROGRAMS.md) for the
+construction contract, inference boundaries and small visual acceptance set.
 
 The regional mappings and exact architectural choices are reversible visual interpretations of the four regional dossiers, not new canon. See [REGIONAL_GRAMMAR.md](REGIONAL_GRAMMAR.md) for the source cues, context IDs, type grammar, and boundaries of those interpretations. [WORLD_ARCHITECTURAL_LANGUAGES.md](WORLD_ARCHITECTURAL_LANGUAGES.md) records the broader structural art direction; its proposals are visual interpretations, not canon or approved material catalogs.
 

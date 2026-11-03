@@ -123,6 +123,7 @@ def _mesh_object(buffer, cache, build_id, plan=None):
     topology = str(getattr(buffer, "topology", "SOLID")).upper()
     obj["caelm_topology"] = topology if topology in ("SOLID", "SURFACE") else "SOLID"
     obj["caelm_structural_role"] = str(getattr(buffer, "structural_role", "framing"))
+    obj["caelm_functional_role"] = str(getattr(buffer, "functional_role", ""))
     for attr, tag in (("roof_envelope", "caelm_roof_envelope"),
                       ("support_surface", "caelm_support_surface")):
         value = getattr(buffer, attr, None)
@@ -153,6 +154,20 @@ def _colliders(plan, build_id):
         # collision proxy attached to its actual zone bounds and base height.
         for zone_index, mass in enumerate(zones, 1):
             for index, edge in enumerate(mass.plan.edges, 1):
+                if getattr(plan,'functional_program',None):
+                    if index-1 in getattr(mass.plan,'open_edges',()):continue
+                    from .geometry import MeshBuffer
+                    from .facade import _wall_panels
+                    a,b=edge;length=math.dist(a,b)
+                    if length<1e-5:continue
+                    normal=((b[1]-a[1])/length,-(b[0]-a[0])/length)
+                    record=mass.plan.facade_records[index-1]
+                    wall=MeshBuffer('functional_collision_wall','stone')
+                    _wall_panels(wall,a,b,normal,length,record['openings'],mass.eave,mass.base,.18)
+                    if wall.faces:
+                        out.append(_collider_object(f"Collider Wall {zone_index:02d}-{index:02d}",
+                                   wall.vertices,wall.faces,build_id,mass.key))
+                    continue
                 a, b = Vector((edge[0][0], edge[0][1], mass.base)), Vector((edge[1][0], edge[1][1], mass.base))
                 direction = b - a
                 length = math.hypot(direction.x, direction.y)
@@ -307,6 +322,7 @@ def build(settings, collection=None, layers=None, origin=None):
             "construction_zones": construction_zones,
         }, sort_keys=True)
         collection["caelm_generator_version"] = TOOL_REVISION; collection["caelm_units"] = "metres"
+        collection["caelm_functional_program"] = json.dumps(getattr(plan,'functional_program',None),sort_keys=True)
         collection["caelm_validation"] = json.dumps({
             "valid": bool(validation.get("valid", False)) if isinstance(validation, dict) else True,
             "errors": list(validation.get("errors", ())) if isinstance(validation, dict) else [],
@@ -375,6 +391,7 @@ def export_building(collection, filepath):
         collider_path = os.path.splitext(filepath)[0] + ".collision.glb"
         _export_selection(collider_path, colliders, anchor, 'GLB')
     manifest = {"format": "CaelmorBuildingExport", "version": 1, "generator_version": TOOL_REVISION,
+                "functional_program": json.loads(collection.get('caelm_functional_program','null')),
                 "settings": load_settings(collection),
                 "architecture": collection.get("caelm_architecture", "LEGACY"),
                 "construction_zones": json.loads(collection.get("caelm_construction_zones", "[]")),
@@ -396,6 +413,7 @@ def export_building(collection, filepath):
                              "semantic": o.get("caelm_semantic"), "protected": bool(o.get("caelm_protected")),
                              "topology": o.get("caelm_topology", "SOLID"),
                              "structural_role": o.get("caelm_structural_role", "framing"),
+                             "functional_role": o.get("caelm_functional_role", ""),
                              "roof_envelope": json.loads(o["caelm_roof_envelope"]) if o.get("caelm_roof_envelope") else None,
                              "support_surface": json.loads(o["caelm_support_surface"]) if o.get("caelm_support_surface") else None}
                             for o in objects]}

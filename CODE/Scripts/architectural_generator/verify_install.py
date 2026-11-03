@@ -46,6 +46,13 @@ assert len(meshes)>=15,len(meshes)
 assert all(len(o.data.uv_layers)==2 for o in meshes)
 print('ISOLATED_EXTENSION_INSTALL_AND_GENERATE_PASS',len(meshes))
 """
+        if world_aware and function in ('SMITHY','MARKET_HALL','STABLE','GATEHOUSE'):
+            expression+=f"""import json
+program=json.loads(collection['caelm_functional_program'])
+assert program['function']=={function!r},program
+assert program['routes'] and program['rooms']
+print('ISOLATED_FUNCTIONAL_PROGRAM_PASS',program['function'])
+"""
         if export is not None:
             export=Path(export).resolve()
             export.parent.mkdir(parents=True,exist_ok=True)

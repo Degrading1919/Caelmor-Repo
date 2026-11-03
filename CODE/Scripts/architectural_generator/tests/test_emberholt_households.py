@@ -84,12 +84,17 @@ class EmberholtHouseholdTests(unittest.TestCase):
                                  ("SMITHY", "ESTABLISHED")):
             with self.subTest(function=function, wealth=wealth):
                 plan, _buffers = self._build(function, wealth)
-                main = self._zone(plan, "emberholt_main_block")
+                main = plan.world_zones[0]
+                self.assertEqual(plan.functional_program['function'],function)
                 if function == "GATEHOUSE":
                     front = next(r for r in main.plan.facade_records
                                  if r["edge_index"] == 0)
                     self.assertTrue(any(o.get("role") == "passage_entry"
                                         for o in front["openings"]))
+                    self.assertTrue(main.plan.passage_geometry['valid'])
+                else:
+                    self.assertIn(0,main.plan.open_edges)
+                    self.assertTrue(any('hearth' in b.name for b in _buffers))
 
 
 if __name__ == "__main__":

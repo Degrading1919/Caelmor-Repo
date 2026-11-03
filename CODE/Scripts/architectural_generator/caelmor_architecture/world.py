@@ -109,7 +109,7 @@ class Context:
     def mass(self,key,*,x=0.,y=0.,width,depth,floors=1,floor_height=None,
              base=None,roof='GABLE',pitch=None,overhang=None,openings='DOMESTIC',
              entrance_edge=0,blocked_edges=(),steps=True,foundation='PLINTH',access_edges=(),
-             function=None,gallery_edges=(),open_edges=()):
+             function=None,gallery_edges=(),open_edges=(),open_access=()):
         if any(m.key==key for m in self.masses):
             raise ValueError('Duplicate construction zone: '+key)
         if not all(math.isfinite(v) for v in (x,y,width,depth)) or min(width,depth)<1.4:
@@ -161,6 +161,7 @@ class Context:
         plan.secondary_entrance_edges=tuple(access_edges)
         plan.gallery_edges=tuple(gallery_edges)
         plan.open_edges=set(open_edges)
+        plan.functional_access=tuple(dict(r) for r in open_access)
         plan.blocked_edges=set(blocked_edges)
         plan.entry_steps=steps
         plan.world_mass=True
@@ -275,6 +276,7 @@ class WorldPlan:
         self.outline=primary.outline
         self.edges=[e for m in ctx.masses for e in m.plan.edges]
         self.facade_records=[]
+        self.functional_program=getattr(ctx,'functional_program',None)
         offset=0
         for mass in ctx.masses:
             for record in mass.plan.facade_records:
@@ -377,7 +379,10 @@ def _working_apparatus(ctx):
 def generate(settings):
     effective=resolve_settings(settings)
     ctx=Context(effective)
-    if settings.region=='LOWMARK':
+    from .functional import build as build_function
+    if build_function(ctx):
+        pass
+    elif settings.region=='LOWMARK':
         from .world_lowmark_thornfell import build_lowmark
         build_lowmark(ctx)
     elif settings.region=='THORNFELL':
@@ -422,6 +427,16 @@ def weather_crossings(masses):
 
 def validate(plan,buffers,legacy_validator):
     errors=[]; rows=[]
+    program=getattr(plan,'functional_program',None)
+    if program:
+        for route in program['routes']:
+            if route['kind'] not in ('human','public','animal','service','material'):continue
+            a=route['bounds']
+            for station in program['stations']:
+                b=station['bounds']
+                overlap=[min(a[i+3],b[i+3])-max(a[i],b[i]) for i in range(3)]
+                if min(overlap)>.005:
+                    errors.append('Functional clearance blocked: '+route['key']+' / '+station['key'])
     errors.extend(f'Weather roofs cross: {a} / {b}'
                   for a,b,_,_ in weather_crossings(plan.world_zones))
     zones={m.key:m for m in plan.world_zones}
@@ -435,6 +450,13 @@ def validate(plan,buffers,legacy_validator):
                 errors.append(f'Occupied volumes overlap: {mass.key} / {other.key}')
     for key,mass in zones.items():
         local=[b for b in buffers if getattr(b,'world_zone',None)==key]
+        if program:
+            for buffer in local:
+                if buffer.layer!='structure':continue
+                excess=max((z-mass.roof_height(x,y) for x,y,z in buffer.vertices
+                            if math.isfinite(mass.roof_height(x,y))),default=0.)
+                if excess>1e-5:
+                    errors.append(buffer.name+': functional structure crosses weather roof')
         report=legacy_validator(mass.plan,local)
         if mass.plan.settings.function=='GATEHOUSE' and not getattr(mass.plan,'passage_geometry',{}).get('valid'):
             errors.append(f'{key}: gate passage is not aligned through the occupied volume')

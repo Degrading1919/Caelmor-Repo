@@ -559,8 +559,10 @@ def frame_layout(plan, edge_index, edge):
     rake_drop=.14+.5*.21*math.sqrt(1+slope*slope)+.5*.19*slope
     kingpost_drop=.14+.5*.19*slope
     openings = [dict(o) for o in _openings_for_edge(plan, edge_index, edge)]
-    access_clearances=[]
-    if edge_index in getattr(plan,'open_edges',()) and edge_index==getattr(plan,'entrance_edge_override',0):
+    access_clearances=[{'s0':r['s0'],'s1':r['s1'],'z0':_foundation(plan),
+                        'z1':_foundation(plan)+r.get('height',2.4)}
+                       for r in getattr(plan,'functional_access',()) if r['edge_index']==edge_index]
+    if not access_clearances and edge_index in getattr(plan,'open_edges',()) and edge_index==getattr(plan,'entrance_edge_override',0):
         # A roofed open working bay still has an approach. Reserve the center
         # stairs/handling route without inventing a door leaf or window hole.
         center=length*.5
