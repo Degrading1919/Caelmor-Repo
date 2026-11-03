@@ -1,0 +1,903 @@
+{
+  "source_revision": "809300bcfddf67601fa6719ebf4e91aef9135098",
+  "generator_version": "0.5.0",
+  "source_sha256": {
+    "__init__.py": "57f662977d12340c1c4b91864c6655335854bdf196de143b3448ee154b18c2e0",
+    "blender_backend.py": "ccd4ce109d97eb98df309fcad795398f96eb55c02a1b012fc969a45deca6bdcc",
+    "blender_manifest.toml": "f9ec85f7be7b8fd2b6210d783d60f4402a97a912b27897ac6ba41e2fb509a452",
+    "engine.py": "11d4a8b1868afc1170a34a03d0b294b85d09f7c344153cb24074f5d2acce0ed7",
+    "facade.py": "f989e3a56624f89a034701e275beb6e10d7bfd52bb7a14b0ffad23a235708f4d",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "8da06e3a1242be8c2ac21bca994d1805a36f399425ab585befdaf386346b65ce",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+  },
+  "render_source_sha256": {
+    "render_household_review.py": "08bc6f0ac312f457e341cbf44163eb1276a203282074f67bb1952f899264ba78",
+    "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+  },
+  "settings_contract": {
+    "seed": 91,
+    "footprint": "L",
+    "width": 11.0,
+    "depth": 7.0,
+    "wing_width": 4.2,
+    "wing_depth": 4.5,
+    "floors": 2,
+    "floor_height": 2.65,
+    "pitch": 48.0,
+    "overhang": 0.45,
+    "detail": "MEDIUM",
+    "window_density": 1.0,
+    "context": "AUTO",
+    "wealth": "ESTABLISHED",
+    "craftsmanship": "STANDARD",
+    "maintenance": 0.7,
+    "age": 35,
+    "use_grammar": true,
+    "roof_style": "AUTO",
+    "geometry_mode": "EFFICIENT",
+    "world_aware": true
+  },
+  "renderer": "5.0.1",
+  "engine": "BLENDER_EEVEE",
+  "samples": 32,
+  "studio": "render_world_evidence._reset_scene, ground at grade",
+  "scale_policy": "Common projected orthographic scale per archetype across four regions and both views; different archetypes fitted independently.",
+  "geometry_generation": "One native backend build/validation per configuration; same objects reused for clay and material.",
+  "records": [
+    {
+      "function": "MERCHANT_HOUSE",
+      "region": "LOWMARK",
+      "label": "Merchant House",
+      "settings": {
+        "seed": 91,
+        "function": "MERCHANT_HOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RURAL",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/merchant_house/lowmark_clay_0.png",
+          "image_sha256": "5c822754fbe810a3aa5ca44a20e9dfd31e1cf108b547f2e4cb61c5dac6ffc767",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            57.43272018432617,
+            -62.83781814575195,
+            42.05955123901367
+          ],
+          "camera_target": [
+            10.21500015258789,
+            3.8224997520446777,
+            4.285373687744141
+          ],
+          "ortho_scale": 29.81714782714844,
+          "elapsed_seconds": 0.4939
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/merchant_house/lowmark_clay_1.png",
+          "image_sha256": "e1237ddcdf7ee6cebc50b81d72c693b3fc56a87a3cf6123455390c8085e2adbe",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -37.00271987915039,
+            70.48281860351562,
+            42.05955123901367
+          ],
+          "camera_target": [
+            10.21500015258789,
+            3.8224997520446777,
+            4.285373687744141
+          ],
+          "ortho_scale": 29.81714782714844,
+          "elapsed_seconds": 0.3487
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/merchant_house/lowmark_material_0.png",
+          "image_sha256": "e54baea31119c67c42e0b64b3fed4d21880dda653818dee57db002238bc711b1",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            57.43272018432617,
+            -62.83781814575195,
+            42.05955123901367
+          ],
+          "camera_target": [
+            10.21500015258789,
+            3.8224997520446777,
+            4.285373687744141
+          ],
+          "ortho_scale": 29.81714782714844,
+          "elapsed_seconds": 0.3757
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/merchant_house/lowmark_material_1.png",
+          "image_sha256": "1f4eb9f89cfbc99889560c9aa37fab8951bceaa411f2aa7c285306f06fced3a5",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -37.00271987915039,
+            70.48281860351562,
+            42.05955123901367
+          ],
+          "camera_target": [
+            10.21500015258789,
+            3.8224997520446777,
+            4.285373687744141
+          ],
+          "ortho_scale": 29.81714782714844,
+          "elapsed_seconds": 0.2835
+        }
+      ],
+      "build_seconds": 3.2456,
+      "geometry_hash": "2971fe3657987eed37afc85fb536f8f796f568b8487f3cf5145322bd299a1738",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.45,
+            "bounds": [
+              0,
+              0,
+              11.0,
+              8.0
+            ],
+            "eave": 6.05,
+            "function": "MERCHANT_HOUSE",
+            "key": "lowmark_main_hall",
+            "roof": "GABLE",
+            "triangles": 13788,
+            "valid": true,
+            "vertices": 12108,
+            "wall_thickness": 0.28
+          },
+          {
+            "base": 0.45,
+            "bounds": [
+              11.85,
+              0.64,
+              16.65,
+              5.64
+            ],
+            "eave": 2.95,
+            "function": "COTTAGE",
+            "key": "lowmark_service_wing",
+            "roof": "SHED",
+            "triangles": 3954,
+            "valid": true,
+            "vertices": 3392,
+            "wall_thickness": 0.28
+          },
+          {
+            "base": 0.45,
+            "bounds": [
+              17.549999999999997,
+              1.44,
+              20.549999999999997,
+              4.84
+            ],
+            "eave": 2.634,
+            "function": "WAREHOUSE",
+            "key": "lowmark_household_store",
+            "roof": "GABLE",
+            "triangles": 3992,
+            "valid": true,
+            "vertices": 3054,
+            "wall_thickness": 0.28
+          }
+        ],
+        "errors": [],
+        "objects": 58,
+        "source_objects": 58,
+        "source_triangles": 21794,
+        "source_vertices": 18594,
+        "triangles": 21794,
+        "valid": true
+      },
+      "backend": {
+        "objects": 58,
+        "vertices": 18594,
+        "width": 21.40000092983246,
+        "depth": 9.324999630451202,
+        "height": 8.694208353757858,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.48500001430511475,
+          20.915000915527344
+        ],
+        [
+          -0.8399999737739563,
+          8.484999656677246
+        ],
+        [
+          -0.06173059344291687,
+          8.632477760314941
+        ]
+      ]
+    },
+    {
+      "function": "MERCHANT_HOUSE",
+      "region": "THORNFELL",
+      "label": "Merchant House",
+      "settings": {
+        "seed": 91,
+        "function": "MERCHANT_HOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RIDGE",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/merchant_house/thornfell_clay_0.png",
+          "image_sha256": "d41cdb371ad538f9456c76c0fe9fc00def690667f8d88c213218f237eed913aa",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            53.9044189453125,
+            -62.81751251220703,
+            42.55971145629883
+          ],
+          "camera_target": [
+            6.686699867248535,
+            3.842802047729492,
+            4.7855353355407715
+          ],
+          "ortho_scale": 29.81714782714844,
+          "elapsed_seconds": 0.2547
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/merchant_house/thornfell_clay_1.png",
+          "image_sha256": "ac9cc9f4a77f379f5e125aa77ddb3754ac5075d9fd10e83c0eacef5fcb1d6121",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -40.53102111816406,
+            70.50312042236328,
+            42.55971145629883
+          ],
+          "camera_target": [
+            6.686699867248535,
+            3.842802047729492,
+            4.7855353355407715
+          ],
+          "ortho_scale": 29.81714782714844,
+          "elapsed_seconds": 0.2544
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/merchant_house/thornfell_material_0.png",
+          "image_sha256": "dce85221bd4d7e5b91cf7657c4e92cb7341847997c1b4944a80a0c3b9598dd57",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            53.9044189453125,
+            -62.81751251220703,
+            42.55971145629883
+          ],
+          "camera_target": [
+            6.686699867248535,
+            3.842802047729492,
+            4.7855353355407715
+          ],
+          "ortho_scale": 29.81714782714844,
+          "elapsed_seconds": 0.3139
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/merchant_house/thornfell_material_1.png",
+          "image_sha256": "11cafb300e3e6410c37848876b743fc2f15da513dd3d9386049aaacfe2e4f863",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -40.53102111816406,
+            70.50312042236328,
+            42.55971145629883
+          ],
+          "camera_target": [
+            6.686699867248535,
+            3.842802047729492,
+            4.7855353355407715
+          ],
+          "ortho_scale": 29.81714782714844,
+          "elapsed_seconds": 0.3214
+        }
+      ],
+      "build_seconds": 1.4474,
+      "geometry_hash": "e387092ec0ddbe6b6df2b2ca941294899ad6642a02886fc5cc714e3bb5efdf01",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.5,
+            "bounds": [
+              0,
+              0,
+              10.01,
+              8.272
+            ],
+            "eave": 5.763999999999999,
+            "function": "MERCHANT_HOUSE",
+            "key": "thornfell_stone_hall",
+            "roof": "GABLE",
+            "triangles": 16674,
+            "valid": true,
+            "vertices": 14538,
+            "wall_thickness": 0.5
+          },
+          {
+            "base": 0.9199999999999999,
+            "bounds": [
+              10.01,
+              1.98528,
+              13.4134,
+              5.78528
+            ],
+            "eave": 2.9729599999999996,
+            "function": "COTTAGE",
+            "key": "thornfell_lower_stone_range",
+            "roof": "GABLE",
+            "triangles": 4131,
+            "valid": true,
+            "vertices": 3372,
+            "wall_thickness": 0.5
+          }
+        ],
+        "errors": [],
+        "objects": 47,
+        "source_objects": 47,
+        "source_triangles": 20805,
+        "source_vertices": 17910,
+        "triangles": 20805,
+        "valid": true
+      },
+      "backend": {
+        "objects": 47,
+        "vertices": 17910,
+        "width": 13.863399624824524,
+        "depth": 9.365604221820831,
+        "height": 9.571070671081543,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.24500000476837158,
+          13.618399620056152
+        ],
+        [
+          -0.8399999737739563,
+          8.525604248046875
+        ],
+        [
+          0.0,
+          9.571070671081543
+        ]
+      ]
+    },
+    {
+      "function": "MERCHANT_HOUSE",
+      "region": "MIRE",
+      "label": "Merchant House",
+      "settings": {
+        "seed": 91,
+        "function": "MERCHANT_HOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "SORROWMERE",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/merchant_house/mire_clay_0.png",
+          "image_sha256": "b5e951365b750ce823368dd9a8d74dfac8af515fb472957d2f60842e151f01a1",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            52.387718200683594,
+            -65.13526153564453,
+            43.92430877685547
+          ],
+          "camera_target": [
+            5.170000076293945,
+            1.5250537395477295,
+            6.150131702423096
+          ],
+          "ortho_scale": 29.81714782714844,
+          "elapsed_seconds": 0.3114
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/merchant_house/mire_clay_1.png",
+          "image_sha256": "0b104153867034c351a7058d6ae36a28baa69c618fef9ba0d0dc56091569f42a",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -42.04772186279297,
+            68.18537139892578,
+            43.92430877685547
+          ],
+          "camera_target": [
+            5.170000076293945,
+            1.5250537395477295,
+            6.150131702423096
+          ],
+          "ortho_scale": 29.81714782714844,
+          "elapsed_seconds": 0.3112
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/merchant_house/mire_material_0.png",
+          "image_sha256": "bf3d3ae920a0a9fcfd175c998018eceffbef0b91534bf3f258584510f3607f03",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            52.387718200683594,
+            -65.13526153564453,
+            43.92430877685547
+          ],
+          "camera_target": [
+            5.170000076293945,
+            1.5250537395477295,
+            6.150131702423096
+          ],
+          "ortho_scale": 29.81714782714844,
+          "elapsed_seconds": 0.3401
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/merchant_house/mire_material_1.png",
+          "image_sha256": "b8ed1a79b88785bacb8efa8d94edbfb64ad24c401a7851d252463b3dbcf7377a",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -42.04772186279297,
+            68.18537139892578,
+            43.92430877685547
+          ],
+          "camera_target": [
+            5.170000076293945,
+            1.5250537395477295,
+            6.150131702423096
+          ],
+          "ortho_scale": 29.81714782714844,
+          "elapsed_seconds": 0.3132
+        }
+      ],
+      "build_seconds": 1.7046,
+      "geometry_hash": "9762c14269dc43d4696101f3629effc2ba9daccda6027af67fd5aa29fc5a1645",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 1.94,
+            "bounds": [
+              0.0,
+              0.0,
+              10.34,
+              7.36
+            ],
+            "eave": 7.539999999999999,
+            "function": "MERCHANT_HOUSE",
+            "key": "mire_longhouse",
+            "roof": "BOW",
+            "triangles": 26586,
+            "valid": true,
+            "vertices": 23924,
+            "wall_thickness": 0.18
+          }
+        ],
+        "errors": [],
+        "objects": 31,
+        "source_objects": 31,
+        "source_triangles": 27114,
+        "source_vertices": 24276,
+        "triangles": 27114,
+        "valid": true
+      },
+      "backend": {
+        "objects": 31,
+        "vertices": 24276,
+        "width": 11.830000042915344,
+        "depth": 13.159891605377197,
+        "height": 12.40394838154316,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.7450000047683716,
+          11.085000038146973
+        ],
+        [
+          -5.054892063140869,
+          8.104999542236328
+        ],
+        [
+          -0.05184228718280792,
+          12.352106094360352
+        ]
+      ]
+    },
+    {
+      "function": "MERCHANT_HOUSE",
+      "region": "EMBERHOLT",
+      "label": "Merchant House",
+      "settings": {
+        "seed": 91,
+        "function": "MERCHANT_HOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "EMBERHOLD",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/merchant_house/emberholt_clay_0.png",
+          "image_sha256": "c30990b2e73c06b93b96302ad6dbe65f8eab6b458dcc1441657a8c34554acc96",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            53.430816650390625,
+            -61.24281692504883,
+            41.73917770385742
+          ],
+          "camera_target": [
+            6.213097095489502,
+            5.417500019073486,
+            3.9649999141693115
+          ],
+          "ortho_scale": 29.81714782714844,
+          "elapsed_seconds": 0.291
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/merchant_house/emberholt_clay_1.png",
+          "image_sha256": "593db7f8984b2eb05169f24e08ef448b9a92d49366a793f07be281f852040179",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -41.00462341308594,
+            72.07781982421875,
+            41.73917770385742
+          ],
+          "camera_target": [
+            6.213097095489502,
+            5.417500019073486,
+            3.9649999141693115
+          ],
+          "ortho_scale": 29.81714782714844,
+          "elapsed_seconds": 0.2947
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/merchant_house/emberholt_material_0.png",
+          "image_sha256": "3b5f0cbb0542539f046c971eafa92242aead8c8f26c3a5632c51e685208f8a94",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            53.430816650390625,
+            -61.24281692504883,
+            41.73917770385742
+          ],
+          "camera_target": [
+            6.213097095489502,
+            5.417500019073486,
+            3.9649999141693115
+          ],
+          "ortho_scale": 29.81714782714844,
+          "elapsed_seconds": 0.3037
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/merchant_house/emberholt_material_1.png",
+          "image_sha256": "a46986c3b64297db7015f7b847135a8e2d14e586cb7542c886c9f738f1ba0765",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -41.00462341308594,
+            72.07781982421875,
+            41.73917770385742
+          ],
+          "camera_target": [
+            6.213097095489502,
+            5.417500019073486,
+            3.9649999141693115
+          ],
+          "ortho_scale": 29.81714782714844,
+          "elapsed_seconds": 0.3072
+        }
+      ],
+      "build_seconds": 1.0062,
+      "geometry_hash": "4964bfda52e3421e3f857d58eb386c271845796304708e3b5d776aedad0e94b3",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.48,
+            "bounds": [
+              0,
+              0,
+              8.4,
+              10.8
+            ],
+            "eave": 6.08,
+            "function": "MERCHANT_HOUSE",
+            "key": "emberholt_main_block",
+            "roof": "TERRACE",
+            "triangles": 10736,
+            "valid": true,
+            "vertices": 7768,
+            "wall_thickness": 0.7
+          },
+          {
+            "base": 0.48,
+            "bounds": [
+              8.4,
+              0,
+              12.432,
+              7.2
+            ],
+            "eave": 3.0,
+            "function": "WORKSHOP",
+            "key": "emberholt_domestic_work_range",
+            "roof": "SHED",
+            "triangles": 4285,
+            "valid": true,
+            "vertices": 3250,
+            "wall_thickness": 0.7
+          }
+        ],
+        "errors": [],
+        "objects": 48,
+        "source_objects": 48,
+        "source_triangles": 15021,
+        "source_vertices": 11018,
+        "triangles": 15021,
+        "valid": true
+      },
+      "backend": {
+        "objects": 48,
+        "vertices": 11018,
+        "width": 14.163719832897186,
+        "depth": 12.51500016450882,
+        "height": 7.929999828338623,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.8687626719474792,
+          13.294957160949707
+        ],
+        [
+          -0.8399999737739563,
+          11.675000190734863
+        ],
+        [
+          0.0,
+          7.929999828338623
+        ]
+      ]
+    }
+  ]
+}

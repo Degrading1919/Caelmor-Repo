@@ -1,0 +1,920 @@
+{
+  "source_revision": "809300bcfddf67601fa6719ebf4e91aef9135098",
+  "generator_version": "0.5.0",
+  "source_sha256": {
+    "__init__.py": "57f662977d12340c1c4b91864c6655335854bdf196de143b3448ee154b18c2e0",
+    "blender_backend.py": "ccd4ce109d97eb98df309fcad795398f96eb55c02a1b012fc969a45deca6bdcc",
+    "blender_manifest.toml": "f9ec85f7be7b8fd2b6210d783d60f4402a97a912b27897ac6ba41e2fb509a452",
+    "engine.py": "11d4a8b1868afc1170a34a03d0b294b85d09f7c344153cb24074f5d2acce0ed7",
+    "facade.py": "f989e3a56624f89a034701e275beb6e10d7bfd52bb7a14b0ffad23a235708f4d",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "8da06e3a1242be8c2ac21bca994d1805a36f399425ab585befdaf386346b65ce",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+  },
+  "render_source_sha256": {
+    "render_household_review.py": "08bc6f0ac312f457e341cbf44163eb1276a203282074f67bb1952f899264ba78",
+    "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+  },
+  "settings_contract": {
+    "seed": 91,
+    "footprint": "L",
+    "width": 11.0,
+    "depth": 7.0,
+    "wing_width": 4.2,
+    "wing_depth": 4.5,
+    "floors": 2,
+    "floor_height": 2.65,
+    "pitch": 48.0,
+    "overhang": 0.45,
+    "detail": "MEDIUM",
+    "window_density": 1.0,
+    "context": "AUTO",
+    "wealth": "ESTABLISHED",
+    "craftsmanship": "STANDARD",
+    "maintenance": 0.7,
+    "age": 35,
+    "use_grammar": true,
+    "roof_style": "AUTO",
+    "geometry_mode": "EFFICIENT",
+    "world_aware": true
+  },
+  "renderer": "5.0.1",
+  "engine": "BLENDER_EEVEE",
+  "samples": 32,
+  "studio": "render_world_evidence._reset_scene, ground at grade",
+  "scale_policy": "Common projected orthographic scale per archetype across four regions and both views; different archetypes fitted independently.",
+  "geometry_generation": "One native backend build/validation per configuration; same objects reused for clay and material.",
+  "records": [
+    {
+      "function": "BARRACKS",
+      "region": "LOWMARK",
+      "label": "Barracks",
+      "settings": {
+        "seed": 91,
+        "function": "BARRACKS",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RURAL",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/barracks/lowmark_clay_0.png",
+          "image_sha256": "9fbf056de7f829aeeaef3ec60521a657b99bf993f5713b0409ce297422499076",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            57.23271942138672,
+            -63.360816955566406,
+            42.05955123901367
+          ],
+          "camera_target": [
+            10.014999389648438,
+            3.2995009422302246,
+            4.285373687744141
+          ],
+          "ortho_scale": 32.142892456054696,
+          "elapsed_seconds": 0.3093
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/barracks/lowmark_clay_1.png",
+          "image_sha256": "e712300e3de67c23a93030e6bc91df0dc6e4865e51ff5365b85249cb54dc2181",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -37.202720642089844,
+            69.9598159790039,
+            42.05955123901367
+          ],
+          "camera_target": [
+            10.014999389648438,
+            3.2995009422302246,
+            4.285373687744141
+          ],
+          "ortho_scale": 32.142892456054696,
+          "elapsed_seconds": 0.2513
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/barracks/lowmark_material_0.png",
+          "image_sha256": "58bad5a8495d992b5ab19a279e6cd40808061891a19a5e6def49c23592f0d8c0",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            57.23271942138672,
+            -63.360816955566406,
+            42.05955123901367
+          ],
+          "camera_target": [
+            10.014999389648438,
+            3.2995009422302246,
+            4.285373687744141
+          ],
+          "ortho_scale": 32.142892456054696,
+          "elapsed_seconds": 0.2726
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/barracks/lowmark_material_1.png",
+          "image_sha256": "caefafdb1b62ad27115d8f2e15a1260d66a397bcfddf727b7bce1c10b7db4212",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -37.202720642089844,
+            69.9598159790039,
+            42.05955123901367
+          ],
+          "camera_target": [
+            10.014999389648438,
+            3.2995009422302246,
+            4.285373687744141
+          ],
+          "ortho_scale": 32.142892456054696,
+          "elapsed_seconds": 0.2714
+        }
+      ],
+      "build_seconds": 3.1363,
+      "geometry_hash": "198df678fb8b32db0586ea07f1ceaf2fe7c13a7eee298bcfb636e17f3cff0432",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.45,
+            "bounds": [
+              0,
+              0,
+              15.0,
+              8.0
+            ],
+            "eave": 6.05,
+            "function": "BARRACKS",
+            "key": "lowmark_main_hall",
+            "roof": "GABLE",
+            "triangles": 17270,
+            "valid": true,
+            "vertices": 15428,
+            "wall_thickness": 0.28
+          },
+          {
+            "base": 0.45,
+            "bounds": [
+              15.85,
+              -0.96,
+              20.09,
+              4.8
+            ],
+            "eave": 2.95,
+            "function": "COTTAGE",
+            "key": "lowmark_service_wing",
+            "roof": "SHED",
+            "triangles": 4129,
+            "valid": true,
+            "vertices": 3519,
+            "wall_thickness": 0.28
+          }
+        ],
+        "errors": [],
+        "objects": 39,
+        "source_objects": 39,
+        "source_triangles": 21459,
+        "source_vertices": 18987,
+        "triangles": 21459,
+        "valid": true
+      },
+      "backend": {
+        "objects": 39,
+        "vertices": 18987,
+        "width": 20.999999403953552,
+        "depth": 10.370997428894043,
+        "height": 8.694208353757858,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.48500001430511475,
+          20.514999389648438
+        ],
+        [
+          -1.8859977722167969,
+          8.484999656677246
+        ],
+        [
+          -0.06173059344291687,
+          8.632477760314941
+        ]
+      ]
+    },
+    {
+      "function": "BARRACKS",
+      "region": "THORNFELL",
+      "label": "Barracks",
+      "settings": {
+        "seed": 91,
+        "function": "BARRACKS",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RIDGE",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/barracks/thornfell_clay_0.png",
+          "image_sha256": "6fb9936328791ef4867eacf8ca6ff14ffb00eda35a90f2ab726a3d2be5c628bb",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            52.7480583190918,
+            -62.777889251708984,
+            43.36577224731445
+          ],
+          "camera_target": [
+            5.530337810516357,
+            3.8824286460876465,
+            5.591594696044922
+          ],
+          "ortho_scale": 32.142892456054696,
+          "elapsed_seconds": 0.2588
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/barracks/thornfell_clay_1.png",
+          "image_sha256": "7791947c4a1f3bf13f020e69eb48d5e200f0475e80480ddd1ad5d9507b8f6633",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -41.687381744384766,
+            70.5427474975586,
+            43.36577224731445
+          ],
+          "camera_target": [
+            5.530337810516357,
+            3.8824286460876465,
+            5.591594696044922
+          ],
+          "ortho_scale": 32.142892456054696,
+          "elapsed_seconds": 0.2386
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/barracks/thornfell_material_0.png",
+          "image_sha256": "f60678531942d63422332f55b62570a635f69ac8459cfe2da4cf5df234f8da2f",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            52.7480583190918,
+            -62.777889251708984,
+            43.36577224731445
+          ],
+          "camera_target": [
+            5.530337810516357,
+            3.8824286460876465,
+            5.591594696044922
+          ],
+          "ortho_scale": 32.142892456054696,
+          "elapsed_seconds": 0.2896
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/barracks/thornfell_material_1.png",
+          "image_sha256": "7b29be91cc7fe319146d034dec4622c3a1c7d643edc44e1b583626616ab3cfe7",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -41.687381744384766,
+            70.5427474975586,
+            43.36577224731445
+          ],
+          "camera_target": [
+            5.530337810516357,
+            3.8824286460876465,
+            5.591594696044922
+          ],
+          "ortho_scale": 32.142892456054696,
+          "elapsed_seconds": 0.2895
+        }
+      ],
+      "build_seconds": 2.1556,
+      "geometry_hash": "3a91ad10dd8d3bbdb229a9910395a6ad237a512e61915f369162fb89584dd673",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.5,
+            "bounds": [
+              0,
+              0,
+              10.8438,
+              8.338176
+            ],
+            "eave": 5.763999999999999,
+            "function": "BARRACKS",
+            "key": "thornfell_stone_hall",
+            "roof": "GABLE",
+            "triangles": 18525,
+            "valid": true,
+            "vertices": 16732,
+            "wall_thickness": 0.5
+          },
+          {
+            "base": 0.9199999999999999,
+            "bounds": [
+              10.8438,
+              1.6676352000000003,
+              15.18132,
+              5.8676352000000005
+            ],
+            "eave": 2.9729599999999996,
+            "function": "COTTAGE",
+            "key": "thornfell_lower_stone_range",
+            "roof": "GABLE",
+            "triangles": 5993,
+            "valid": true,
+            "vertices": 4984,
+            "wall_thickness": 0.5
+          },
+          {
+            "base": 0.5,
+            "bounds": [
+              -4.120644,
+              3.0017433600000003,
+              0.0,
+              6.50377728
+            ],
+            "eave": 5.763999999999999,
+            "function": "WATCHTOWER",
+            "key": "thornfell_signal_tower",
+            "roof": "GABLE",
+            "triangles": 7090,
+            "valid": true,
+            "vertices": 5772,
+            "wall_thickness": 0.5
+          }
+        ],
+        "errors": [],
+        "objects": 88,
+        "source_objects": 88,
+        "source_triangles": 31608,
+        "source_vertices": 27488,
+        "triangles": 31608,
+        "valid": true
+      },
+      "backend": {
+        "objects": 88,
+        "vertices": 27488,
+        "width": 19.761963844299316,
+        "depth": 9.44485741853714,
+        "height": 11.183189392089844,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -4.350644111633301,
+          15.411319732666016
+        ],
+        [
+          -0.8399999737739563,
+          8.604857444763184
+        ],
+        [
+          0.0,
+          11.183189392089844
+        ]
+      ]
+    },
+    {
+      "function": "BARRACKS",
+      "region": "MIRE",
+      "label": "Barracks",
+      "settings": {
+        "seed": 91,
+        "function": "BARRACKS",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "SORROWMERE",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/barracks/mire_clay_0.png",
+          "image_sha256": "05dd302a59e83f888ec6ad2bc7ff5eac9d4ba3f74c0e3b38f28c6cc844a30d97",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.38356018066406,
+            -65.13526153564453,
+            43.92430877685547
+          ],
+          "camera_target": [
+            8.165839195251465,
+            1.5250537395477295,
+            6.150131702423096
+          ],
+          "ortho_scale": 32.142892456054696,
+          "elapsed_seconds": 0.2754
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/barracks/mire_clay_1.png",
+          "image_sha256": "e4ff579245be2e1a53bfd8303256bcd8291c74481fd115d0eda3fd5ecd81ccc0",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.0518798828125,
+            68.18537139892578,
+            43.92430877685547
+          ],
+          "camera_target": [
+            8.165839195251465,
+            1.5250537395477295,
+            6.150131702423096
+          ],
+          "ortho_scale": 32.142892456054696,
+          "elapsed_seconds": 0.3023
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/barracks/mire_material_0.png",
+          "image_sha256": "5ca57c9593f1b01cb99c71df86126c54dddb77eaed4b172294d1bc5d183ff2e5",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.38356018066406,
+            -65.13526153564453,
+            43.92430877685547
+          ],
+          "camera_target": [
+            8.165839195251465,
+            1.5250537395477295,
+            6.150131702423096
+          ],
+          "ortho_scale": 32.142892456054696,
+          "elapsed_seconds": 0.3135
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/barracks/mire_material_1.png",
+          "image_sha256": "6a56c8e1254aa9c2f89407a09a74ac6886ecce232ac9a94227cc7a01366bf33a",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.0518798828125,
+            68.18537139892578,
+            43.92430877685547
+          ],
+          "camera_target": [
+            8.165839195251465,
+            1.5250537395477295,
+            6.150131702423096
+          ],
+          "ortho_scale": 32.142892456054696,
+          "elapsed_seconds": 0.2949
+        }
+      ],
+      "build_seconds": 2.4921,
+      "geometry_hash": "e1743000b8e7abfa864e6c7849f9e65f6996e14fae35089618f6bd4711bf39ae",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 1.94,
+            "bounds": [
+              0.0,
+              0.0,
+              10.4512,
+              7.36
+            ],
+            "eave": 7.539999999999999,
+            "function": "BARRACKS",
+            "key": "mire_longhouse",
+            "roof": "BOW",
+            "triangles": 26538,
+            "valid": true,
+            "vertices": 23906,
+            "wall_thickness": 0.18
+          },
+          {
+            "base": 1.94,
+            "bounds": [
+              12.2512,
+              0.8096000000000001,
+              16.43168,
+              6.5504
+            ],
+            "eave": 4.74,
+            "function": "COTTAGE",
+            "key": "mire_linked_pavilion",
+            "roof": "BOW",
+            "triangles": 11264,
+            "valid": true,
+            "vertices": 9680,
+            "wall_thickness": 0.18
+          }
+        ],
+        "errors": [],
+        "objects": 59,
+        "source_objects": 59,
+        "source_triangles": 38846,
+        "source_vertices": 34282,
+        "triangles": 38846,
+        "valid": true
+      },
+      "backend": {
+        "objects": 59,
+        "vertices": 34282,
+        "width": 17.8216792345047,
+        "depth": 13.159891605377197,
+        "height": 12.40394838154316,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.7450000047683716,
+          17.076679229736328
+        ],
+        [
+          -5.054892063140869,
+          8.104999542236328
+        ],
+        [
+          -0.05184228718280792,
+          12.352106094360352
+        ]
+      ]
+    },
+    {
+      "function": "BARRACKS",
+      "region": "EMBERHOLT",
+      "label": "Barracks",
+      "settings": {
+        "seed": 91,
+        "function": "BARRACKS",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "EMBERHOLD",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/barracks/emberholt_clay_0.png",
+          "image_sha256": "9833433fe2a463f1dea9f608a85e99462ed6f0853c571d64b0cfcbc914a86dfe",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            57.84272003173828,
+            -60.73531723022461,
+            41.912376403808594
+          ],
+          "camera_target": [
+            10.625,
+            5.925000190734863,
+            4.138197898864746
+          ],
+          "ortho_scale": 32.142892456054696,
+          "elapsed_seconds": 0.2535
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/barracks/emberholt_clay_1.png",
+          "image_sha256": "8542bd1213ec015d435a60a5afd7bee784d9d257c664a461b74df707c11add0d",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -36.59272003173828,
+            72.58531951904297,
+            41.912376403808594
+          ],
+          "camera_target": [
+            10.625,
+            5.925000190734863,
+            4.138197898864746
+          ],
+          "ortho_scale": 32.142892456054696,
+          "elapsed_seconds": 0.2536
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/barracks/emberholt_material_0.png",
+          "image_sha256": "102e90c72e3bc33575ab853f7ffe0a416f98ec9decf293feff4cc244e00ebda9",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            57.84272003173828,
+            -60.73531723022461,
+            41.912376403808594
+          ],
+          "camera_target": [
+            10.625,
+            5.925000190734863,
+            4.138197898864746
+          ],
+          "ortho_scale": 32.142892456054696,
+          "elapsed_seconds": 0.2933
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/barracks/emberholt_material_1.png",
+          "image_sha256": "b029baec0792646af173775b419b2655fe54d6bd972ed02d817d65bf88013b97",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -36.59272003173828,
+            72.58531951904297,
+            41.912376403808594
+          ],
+          "camera_target": [
+            10.625,
+            5.925000190734863,
+            4.138197898864746
+          ],
+          "ortho_scale": 32.142892456054696,
+          "elapsed_seconds": 0.257
+        }
+      ],
+      "build_seconds": 1.5256,
+      "geometry_hash": "a8140969bd2318c50bd9de56db6bb7d5f6c1cc15b8318bc88f7a21c96ca2c272",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.48,
+            "bounds": [
+              0,
+              0,
+              16.200000000000003,
+              12.0
+            ],
+            "eave": 6.08,
+            "function": "BARRACKS",
+            "key": "emberholt_main_block",
+            "roof": "TERRACE",
+            "triangles": 16878,
+            "valid": true,
+            "vertices": 12216,
+            "wall_thickness": 0.7
+          },
+          {
+            "base": 0.48,
+            "bounds": [
+              17.550000000000004,
+              3.9,
+              21.250000000000004,
+              8.1
+            ],
+            "eave": 6.08,
+            "function": "WATCHTOWER",
+            "key": "emberholt_vent_tower",
+            "roof": "TERRACE",
+            "triangles": 4682,
+            "valid": true,
+            "vertices": 3392,
+            "wall_thickness": 0.7
+          }
+        ],
+        "errors": [],
+        "objects": 52,
+        "source_objects": 52,
+        "source_triangles": 22076,
+        "source_vertices": 15952,
+        "triangles": 22076,
+        "valid": true
+      },
+      "backend": {
+        "objects": 52,
+        "vertices": 15952,
+        "width": 22.987525641918182,
+        "depth": 12.570000052452087,
+        "height": 8.40360426902771,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.8687626719474792,
+          22.118762969970703
+        ],
+        [
+          -0.36000001430511475,
+          12.210000038146973
+        ],
+        [
+          -0.06360411643981934,
+          8.34000015258789
+        ]
+      ]
+    }
+  ]
+}

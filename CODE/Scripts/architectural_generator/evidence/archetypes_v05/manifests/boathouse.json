@@ -1,0 +1,869 @@
+{
+  "source_revision": "809300bcfddf67601fa6719ebf4e91aef9135098",
+  "generator_version": "0.5.0",
+  "source_sha256": {
+    "__init__.py": "57f662977d12340c1c4b91864c6655335854bdf196de143b3448ee154b18c2e0",
+    "blender_backend.py": "ccd4ce109d97eb98df309fcad795398f96eb55c02a1b012fc969a45deca6bdcc",
+    "blender_manifest.toml": "f9ec85f7be7b8fd2b6210d783d60f4402a97a912b27897ac6ba41e2fb509a452",
+    "engine.py": "11d4a8b1868afc1170a34a03d0b294b85d09f7c344153cb24074f5d2acce0ed7",
+    "facade.py": "f989e3a56624f89a034701e275beb6e10d7bfd52bb7a14b0ffad23a235708f4d",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "8da06e3a1242be8c2ac21bca994d1805a36f399425ab585befdaf386346b65ce",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+  },
+  "render_source_sha256": {
+    "render_household_review.py": "08bc6f0ac312f457e341cbf44163eb1276a203282074f67bb1952f899264ba78",
+    "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+  },
+  "settings_contract": {
+    "seed": 91,
+    "footprint": "L",
+    "width": 11.0,
+    "depth": 7.0,
+    "wing_width": 4.2,
+    "wing_depth": 4.5,
+    "floors": 2,
+    "floor_height": 2.65,
+    "pitch": 48.0,
+    "overhang": 0.45,
+    "detail": "MEDIUM",
+    "window_density": 1.0,
+    "context": "AUTO",
+    "wealth": "ESTABLISHED",
+    "craftsmanship": "STANDARD",
+    "maintenance": 0.7,
+    "age": 35,
+    "use_grammar": true,
+    "roof_style": "AUTO",
+    "geometry_mode": "EFFICIENT",
+    "world_aware": true
+  },
+  "renderer": "5.0.1",
+  "engine": "BLENDER_EEVEE",
+  "samples": 32,
+  "studio": "render_world_evidence._reset_scene, ground at grade",
+  "scale_policy": "Common projected orthographic scale per archetype across four regions and both views; different archetypes fitted independently.",
+  "geometry_generation": "One native backend build/validation per configuration; same objects reused for clay and material.",
+  "records": [
+    {
+      "function": "BOATHOUSE",
+      "region": "LOWMARK",
+      "label": "Boathouse",
+      "settings": {
+        "seed": 91,
+        "function": "BOATHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RURAL",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/boathouse/lowmark_clay_0.png",
+          "image_sha256": "b1ea68465ed801c82a42b4add033b43be52c639d34510b8812240961350ab2fb",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.73271942138672,
+            -63.360816955566406,
+            40.659549713134766
+          ],
+          "camera_target": [
+            8.514999389648438,
+            3.2995009422302246,
+            2.885373592376709
+          ],
+          "ortho_scale": 27.642172241210943,
+          "elapsed_seconds": 0.3972
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/boathouse/lowmark_clay_1.png",
+          "image_sha256": "8f85abe85d100d727a57e3eca034e903ddc6d0e8669137fef7c64a59ffba7872",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -38.702720642089844,
+            69.9598159790039,
+            40.659549713134766
+          ],
+          "camera_target": [
+            8.514999389648438,
+            3.2995009422302246,
+            2.885373592376709
+          ],
+          "ortho_scale": 27.642172241210943,
+          "elapsed_seconds": 0.3733
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/boathouse/lowmark_material_0.png",
+          "image_sha256": "e62d9c0f128f8c75f78c179735acac9a6b8fa2bc206ac39cf10b7c9424be1d6e",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.73271942138672,
+            -63.360816955566406,
+            40.659549713134766
+          ],
+          "camera_target": [
+            8.514999389648438,
+            3.2995009422302246,
+            2.885373592376709
+          ],
+          "ortho_scale": 27.642172241210943,
+          "elapsed_seconds": 0.2945
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/boathouse/lowmark_material_1.png",
+          "image_sha256": "a3ba0eeccb9346eed3385cbace10f25f24db921a156cce0658410458778be7fb",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -38.702720642089844,
+            69.9598159790039,
+            40.659549713134766
+          ],
+          "camera_target": [
+            8.514999389648438,
+            3.2995009422302246,
+            2.885373592376709
+          ],
+          "ortho_scale": 27.642172241210943,
+          "elapsed_seconds": 0.2733
+        }
+      ],
+      "build_seconds": 2.6623,
+      "geometry_hash": "dbafaf57076e33aff438213e20d0d35e08fe8cec7500d1c6bce23d531b3fadb9",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.45,
+            "bounds": [
+              0,
+              0,
+              12.0,
+              8.0
+            ],
+            "eave": 3.25,
+            "function": "BOATHOUSE",
+            "key": "lowmark_main_hall",
+            "roof": "GABLE",
+            "triangles": 11504,
+            "valid": true,
+            "vertices": 10848,
+            "wall_thickness": 0.28
+          },
+          {
+            "base": 0.45,
+            "bounds": [
+              12.85,
+              -0.96,
+              17.09,
+              4.8
+            ],
+            "eave": 2.95,
+            "function": "WORKSHOP",
+            "key": "lowmark_service_wing",
+            "roof": "SHED",
+            "triangles": 4129,
+            "valid": true,
+            "vertices": 3519,
+            "wall_thickness": 0.28
+          }
+        ],
+        "errors": [],
+        "objects": 38,
+        "source_objects": 38,
+        "source_triangles": 15693,
+        "source_vertices": 14407,
+        "triangles": 15693,
+        "valid": true
+      },
+      "backend": {
+        "objects": 38,
+        "vertices": 14407,
+        "width": 17.999999403953552,
+        "depth": 10.370997428894043,
+        "height": 5.894208163022995,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.48500001430511475,
+          17.514999389648438
+        ],
+        [
+          -1.8859977722167969,
+          8.484999656677246
+        ],
+        [
+          -0.06173059344291687,
+          5.832477569580078
+        ]
+      ]
+    },
+    {
+      "function": "BOATHOUSE",
+      "region": "THORNFELL",
+      "label": "Boathouse",
+      "settings": {
+        "seed": 91,
+        "function": "BOATHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RIDGE",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/boathouse/thornfell_clay_0.png",
+          "image_sha256": "8ff75cc35dac14e3c31c2f38bd89f16ea0ba83df822288975f48d70f22313a0f",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            54.85422134399414,
+            -62.524314880371094,
+            42.028594970703125
+          ],
+          "camera_target": [
+            7.636499881744385,
+            4.13599967956543,
+            4.254419326782227
+          ],
+          "ortho_scale": 27.642172241210943,
+          "elapsed_seconds": 0.2561
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/boathouse/thornfell_clay_1.png",
+          "image_sha256": "e85aabc315d8d2f28610f6a49273ece40ad5bb744a7d6000e24a505ab020afd4",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.58121871948242,
+            70.79631805419922,
+            42.028594970703125
+          ],
+          "camera_target": [
+            7.636499881744385,
+            4.13599967956543,
+            4.254419326782227
+          ],
+          "ortho_scale": 27.642172241210943,
+          "elapsed_seconds": 0.2447
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/boathouse/thornfell_material_0.png",
+          "image_sha256": "c44138803fbd3e3c25ab9e014f3a07d1328bcdf7b30082529e886d399bddf3d8",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            54.85422134399414,
+            -62.524314880371094,
+            42.028594970703125
+          ],
+          "camera_target": [
+            7.636499881744385,
+            4.13599967956543,
+            4.254419326782227
+          ],
+          "ortho_scale": 27.642172241210943,
+          "elapsed_seconds": 0.2818
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/boathouse/thornfell_material_1.png",
+          "image_sha256": "6dfe1f917595650be6150c6de6c3b01719ae39ab0712ddecc2fcf0d9502416e6",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.58121871948242,
+            70.79631805419922,
+            42.028594970703125
+          ],
+          "camera_target": [
+            7.636499881744385,
+            4.13599967956543,
+            4.254419326782227
+          ],
+          "ortho_scale": 27.642172241210943,
+          "elapsed_seconds": 0.2743
+        }
+      ],
+      "build_seconds": 1.2584,
+      "geometry_hash": "1866f410bc88d13faf1dadf4ea6cebc616f720871dc59297d11e910d98762e5f",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.5,
+            "bounds": [
+              0,
+              0,
+              10.92,
+              8.272
+            ],
+            "eave": 3.1319999999999997,
+            "function": "BOATHOUSE",
+            "key": "thornfell_stone_hall",
+            "roof": "GABLE",
+            "triangles": 14173,
+            "valid": true,
+            "vertices": 13422,
+            "wall_thickness": 0.5
+          },
+          {
+            "base": 0.9199999999999999,
+            "bounds": [
+              10.92,
+              1.6544,
+              15.288,
+              5.8544
+            ],
+            "eave": 2.9729599999999996,
+            "function": "COTTAGE",
+            "key": "thornfell_lower_stone_range",
+            "roof": "GABLE",
+            "triangles": 5993,
+            "valid": true,
+            "vertices": 4984,
+            "wall_thickness": 0.5
+          }
+        ],
+        "errors": [],
+        "objects": 54,
+        "source_objects": 54,
+        "source_triangles": 20166,
+        "source_vertices": 18406,
+        "triangles": 20166,
+        "valid": true
+      },
+      "backend": {
+        "objects": 54,
+        "vertices": 18406,
+        "width": 15.762999653816223,
+        "depth": 8.805362224578857,
+        "height": 8.508838653564453,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.24500000476837158,
+          15.517999649047852
+        ],
+        [
+          -0.2666811943054199,
+          8.538681030273438
+        ],
+        [
+          0.0,
+          8.508838653564453
+        ]
+      ]
+    },
+    {
+      "function": "BOATHOUSE",
+      "region": "MIRE",
+      "label": "Boathouse",
+      "settings": {
+        "seed": 91,
+        "function": "BOATHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "SORROWMERE",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/boathouse/mire_clay_0.png",
+          "image_sha256": "570fd1f279348602b2c1851122d479c5ce17feecad2a09375791faa4748a3694",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            52.85771942138672,
+            -66.48357391357422,
+            42.50753402709961
+          ],
+          "camera_target": [
+            5.639999866485596,
+            0.17674541473388672,
+            4.733357906341553
+          ],
+          "ortho_scale": 27.642172241210943,
+          "elapsed_seconds": 0.2523
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/boathouse/mire_clay_1.png",
+          "image_sha256": "2dcf865cfdfcfbde0e20e84e573cfbe14d217965b389a47dfe07f42dbba4ac46",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -41.577720642089844,
+            66.8370590209961,
+            42.50753402709961
+          ],
+          "camera_target": [
+            5.639999866485596,
+            0.17674541473388672,
+            4.733357906341553
+          ],
+          "ortho_scale": 27.642172241210943,
+          "elapsed_seconds": 0.2406
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/boathouse/mire_material_0.png",
+          "image_sha256": "e76c7797d7aec0288efc3dc30823c10de95ab16c99bf9a703b4c473fa78dfdbd",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            52.85771942138672,
+            -66.48357391357422,
+            42.50753402709961
+          ],
+          "camera_target": [
+            5.639999866485596,
+            0.17674541473388672,
+            4.733357906341553
+          ],
+          "ortho_scale": 27.642172241210943,
+          "elapsed_seconds": 0.265
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/boathouse/mire_material_1.png",
+          "image_sha256": "9f4bb381570bfe13dafd37e4a77c3cdeda145af47f5a01685a1e2b1dd6b98ec9",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -41.577720642089844,
+            66.8370590209961,
+            42.50753402709961
+          ],
+          "camera_target": [
+            5.639999866485596,
+            0.17674541473388672,
+            4.733357906341553
+          ],
+          "ortho_scale": 27.642172241210943,
+          "elapsed_seconds": 0.2794
+        }
+      ],
+      "build_seconds": 1.4257,
+      "geometry_hash": "9c011343f7abe9b8bd9cbe72ebfb5d5a727e92fba53f4aa915ffc37c031091fb",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 1.94,
+            "bounds": [
+              0.0,
+              0.0,
+              11.28,
+              7.36
+            ],
+            "eave": 4.74,
+            "function": "BOATHOUSE",
+            "key": "mire_longhouse",
+            "roof": "BOW",
+            "triangles": 22738,
+            "valid": true,
+            "vertices": 21678,
+            "wall_thickness": 0.18
+          }
+        ],
+        "errors": [],
+        "objects": 29,
+        "source_objects": 29,
+        "source_triangles": 23242,
+        "source_vertices": 22014,
+        "triangles": 23242,
+        "valid": true
+      },
+      "backend": {
+        "objects": 29,
+        "vertices": 22014,
+        "width": 12.769999623298645,
+        "depth": 15.856508255004883,
+        "height": 9.63749760389328,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.7450000047683716,
+          12.024999618530273
+        ],
+        [
+          -7.751508712768555,
+          8.104999542236328
+        ],
+        [
+          -0.08539074659347534,
+          9.552106857299805
+        ]
+      ]
+    },
+    {
+      "function": "BOATHOUSE",
+      "region": "EMBERHOLT",
+      "label": "Boathouse",
+      "settings": {
+        "seed": 91,
+        "function": "BOATHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "EMBERHOLD",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/boathouse/emberholt_clay_0.png",
+          "image_sha256": "418dd61d3cb3979a134c18a807aaaf91d9792bfef12d81729ef06f5e5bf8317f",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            54.71772003173828,
+            -60.98531723022461,
+            41.944175720214844
+          ],
+          "camera_target": [
+            7.5,
+            5.675000190734863,
+            4.170000076293945
+          ],
+          "ortho_scale": 27.642172241210943,
+          "elapsed_seconds": 0.2489
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/boathouse/emberholt_clay_1.png",
+          "image_sha256": "50eafd7e97da7938a846a86313a7c3b2b312d2d651ab15664cb1ea86f1fed1f0",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.71772003173828,
+            72.33531951904297,
+            41.944175720214844
+          ],
+          "camera_target": [
+            7.5,
+            5.675000190734863,
+            4.170000076293945
+          ],
+          "ortho_scale": 27.642172241210943,
+          "elapsed_seconds": 0.2636
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/boathouse/emberholt_material_0.png",
+          "image_sha256": "2271c735b29a95675fd8cbdbc1b1d74dec5d6c321e22375d96080fcf8ed56da8",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            54.71772003173828,
+            -60.98531723022461,
+            41.944175720214844
+          ],
+          "camera_target": [
+            7.5,
+            5.675000190734863,
+            4.170000076293945
+          ],
+          "ortho_scale": 27.642172241210943,
+          "elapsed_seconds": 0.2966
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/boathouse/emberholt_material_1.png",
+          "image_sha256": "199dcbee097c4ba213e4d3cceb956400a3605c7831cb582b2ba47bc21d7603b3",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.71772003173828,
+            72.33531951904297,
+            41.944175720214844
+          ],
+          "camera_target": [
+            7.5,
+            5.675000190734863,
+            4.170000076293945
+          ],
+          "ortho_scale": 27.642172241210943,
+          "elapsed_seconds": 0.322
+        }
+      ],
+      "build_seconds": 1.0199,
+      "geometry_hash": "a48791f1ed112212f891c8861651c8720dd126434685f2857ddf40774654b962",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.48,
+            "bounds": [
+              0,
+              0,
+              15.0,
+              11.5
+            ],
+            "eave": 6.08,
+            "function": "BOATHOUSE",
+            "key": "emberholt_main_block",
+            "roof": "TERRACE",
+            "triangles": 16260,
+            "valid": true,
+            "vertices": 11776,
+            "wall_thickness": 0.7
+          }
+        ],
+        "errors": [],
+        "objects": 20,
+        "source_objects": 20,
+        "source_triangles": 16260,
+        "source_vertices": 11776,
+        "triangles": 16260,
+        "valid": true
+      },
+      "backend": {
+        "objects": 20,
+        "vertices": 11776,
+        "width": 16.737525641918182,
+        "depth": 12.070000052452087,
+        "height": 8.34000015258789,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.8687626719474792,
+          15.868762969970703
+        ],
+        [
+          -0.36000001430511475,
+          11.710000038146973
+        ],
+        [
+          0.0,
+          8.34000015258789
+        ]
+      ]
+    }
+  ]
+}
