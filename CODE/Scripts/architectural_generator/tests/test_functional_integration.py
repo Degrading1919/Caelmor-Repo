@@ -62,5 +62,19 @@ class FunctionalIntegrationTests(unittest.TestCase):
         self.assertFalse(result['valid'])
         self.assertTrue(any('functional structure crosses weather roof' in e for e in result['errors']))
 
+    def test_forge_exhaust_is_open_from_hood_into_stack(self):
+        from test_world import _ray_hits
+        import math
+        for region in ('LOWMARK','THORNFELL','MIRE','EMBERHOLT'):
+            with self.subTest(region=region):
+                plan,buffers=generate(self.settings('SMITHY',region))
+                for label in ('hood_inlet','duct','stack'):
+                    start,end=plan.functional_program['ventilation'][label]
+                    distance=math.dist(start,end)
+                    direction=tuple((b-a)/distance for a,b in zip(start,end))
+                    hits=_ray_hits(start,direction,distance,buffers)
+                    self.assertEqual(len(hits),0,(region,label,[(round(t,4),b.name) for t,b in hits[:4]]))
+                self.assertTrue(validate(plan,buffers)['valid'])
+
 
 if __name__=='__main__':unittest.main(verbosity=2)

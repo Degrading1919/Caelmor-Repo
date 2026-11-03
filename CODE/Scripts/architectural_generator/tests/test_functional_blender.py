@@ -53,6 +53,21 @@ class FunctionalMeshTests(unittest.TestCase):
                 probes=[(o,t) for o,t in trees if not any(str(o.get('caelm_buffer_id','')).endswith(n)
                         for n in ('.facade_doors','.facade_iron'))]
                 rays=0
+                process_rays=0
+                ventilation=program.get('ventilation',{})
+                for label in ('hood_inlet','duct','stack'):
+                    if label not in ventilation:continue
+                    start,end=map(Vector,ventilation[label])
+                    direction=end-start;distance=direction.length;direction.normalize()
+                    lateral=Vector((0,1,0))
+                    second=Vector((1,0,0)) if abs(direction.z)>.9 else Vector((0,0,1))
+                    for offset in (Vector((0,0,0)),lateral*.04,-lateral*.04,second*.04,-second*.04):
+                        hits=[]
+                        for obj,tree in visuals:
+                            location,_,_,hit=tree.ray_cast(start+offset,direction,distance)
+                            if location is not None:hits.append((obj.name,round(hit,4)))
+                        self.assertFalse(hits,(function,region,'exhaust',label,offset,hits[:4]))
+                        process_rays+=1
                 stair_probes=0
                 for station in program['stations']:
                     if '.tread.' not in station['key']:continue
@@ -85,6 +100,7 @@ class FunctionalMeshTests(unittest.TestCase):
                             rays+=1
                 reports.append({'function':function,'region':region,'clearance_rays':rays,
                                 'stair_headroom_rays':stair_probes,
+                                'exhaust_path_rays':process_rays,
                                 'glass_structure_overlaps':len(overlap),
                                 'source_geometry_hash':collection['caelm_geometry_hash']})
         current={p.name:hashlib.sha256(p.read_bytes()).hexdigest()

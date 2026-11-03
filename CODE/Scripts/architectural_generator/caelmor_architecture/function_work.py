@@ -46,12 +46,23 @@ def _smithy_flue(builder, mass, x, y, zbase):
                   (x-.34,y+.24,upper_z),(x-.82,y+.48,lower_z)],(.065,0,0))
     hood.extrude([(x+.82,y-.48,lower_z),(x+.34,y-.24,upper_z),
                   (x+.34,y+.24,upper_z),(x+.82,y+.48,lower_z)],(-.065,0,0))
-    duct_z = upper_z
+    # Rise above the tapered hood before turning sideways; a horizontal run at
+    # its rim would cut through the hood's own sloping side panel.
+    duct_z = upper_z+.18
     outside_x = -1.05
     half=.34; wall=.09
     throat=ctx.buffer("smithy.flue_throat","iron","details",zone=mass)
     throat.structural_role="hollow_flue_throat"
-    throat_end=outside_x+half-.045
+    for side in (-1,1):
+        neck_top=duct_z-.155 if side<0 else duct_z+.12
+        throat.box((x+side*.12,y,(upper_z+neck_top)*.5),(.07,.24,neck_top-upper_z))
+        throat.box((x,y+side*.12,(upper_z+duct_z+.12)*.5),(.24,.07,duct_z+.12-upper_z))
+    throat.box((x+.0775,y,duct_z+.12),(.155,.24,.07))
+    # Reducer flange joins the broad open hood mouth to the hollow vertical neck.
+    for side in (-1,1):
+        throat.box((x+side*(.34+.085)*.5,y,upper_z),(.34-.085,.48,.03))
+        throat.box((x,y+side*(.24+.085)*.5,upper_z),(.17,.24-.085,.03))
+    throat_end=outside_x+half-wall-.03
     mid_x=(x+throat_end)*.5
     run=x-throat_end
     throat.box((mid_x,y-.12,duct_z),(run,.07,.24))
@@ -60,7 +71,7 @@ def _smithy_flue(builder, mass, x, y, zbase):
     # Leave the underside open over the hood's throat so rising smoke can turn
     # into the horizontal duct. The remaining bottom plate closes continuously
     # from the hood outlet to the stack interior.
-    bottom_end=x+.34
+    bottom_end=x-.12
     bottom_run=bottom_end-throat_end
     throat.box(((bottom_end+throat_end)*.5,y,duct_z-.12),
                (bottom_run,.24,.07))
@@ -73,7 +84,14 @@ def _smithy_flue(builder, mass, x, y, zbase):
     zmid=(.04+top)*.5; zheight=top-.04
     stack_x=outside_x
     flue.box((stack_x-half+wall/2,y,zmid),(wall,2*half,zheight))
-    flue.box((stack_x+half-wall/2,y,zmid),(wall,2*half,zheight))
+    # The duct enters the right wall through a genuine aperture. A hollow
+    # shaft with an uncut inlet wall would still be a sealed exhaust path.
+    wall_x=stack_x+half-wall/2
+    inlet_low,inlet_high=duct_z-.20,duct_z+.20
+    flue.box((wall_x,y,(.04+inlet_low)*.5),(wall,2*half,inlet_low-.04))
+    flue.box((wall_x,y,(inlet_high+top)*.5),(wall,2*half,top-inlet_high))
+    for side in (-1,1):
+        flue.box((wall_x,y+side*(half+.20)*.5,duct_z),(wall,half-.20,.40))
     flue.box((stack_x,y-half+wall/2,zmid),(2*half-2*wall,wall,zheight))
     flue.box((stack_x,y+half-wall/2,zmid),(2*half-2*wall,wall,zheight))
     # Open topped coping keeps the smoke channel unobstructed.
@@ -81,6 +99,11 @@ def _smithy_flue(builder, mass, x, y, zbase):
         flue.box((stack_x+dx,y,top+.035),(wall,2*half,.07))
     for dy in (-half+wall/2,half-wall/2):
         flue.box((stack_x,y+dy,top+.035),(2*half-2*wall,wall,.07))
+    builder.program['ventilation']={
+        'hood_inlet':[(x-.04,y,upper_z-.20),(x-.04,y,duct_z+.04)],
+        'duct':[(x-.04,y,duct_z),(outside_x,y,duct_z)],
+        'stack':[(outside_x,y,duct_z),(outside_x,y,top+.18)],
+        'scope':'Open geometric air path, not a draft or thermal simulation'}
 
 
 def build_smithy(ctx):
