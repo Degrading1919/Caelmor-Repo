@@ -279,6 +279,18 @@ def build(settings, collection=None, layers=None, origin=None):
         if scope - present: raise ValueError("Cannot partially regenerate missing layers: " + ", ".join(sorted(scope-present)))
     protected_ids = {o.get("caelm_buffer_id") for o in (collection.objects if collection else ())
                      if o.get(TAG) and o.get("caelm_protected")}
+    # Preserve explicit slot replacements as well as edits to cached shader
+    # datablocks. Generated objects still receive new condition maps when their
+    # inputs change; an author's replacement material remains their decision.
+    overrides={}
+    for old in (collection.objects if collection else ()):
+        if not old.get(TAG) or old.type!='MESH' or old.get('caelm_collider'):continue
+        slots=tuple(old.data.materials)
+        if slots and any(m is not None and (
+                old.get('caelm_surface_material') and m.name!=old['caelm_surface_material']
+                or not m.get('caelm_material')
+                or m.get('caelm_user_override')) for m in slots):
+            overrides[old.get('caelm_buffer_id')]=slots
     build_id = uuid.uuid4().hex; stage = _new_collection("__CAELMOR_STAGE__" + build_id[:8])
     try:
         cache = {}
@@ -293,6 +305,18 @@ def build(settings, collection=None, layers=None, origin=None):
                     if host is not None:mesh_plan=host.plan
                 obj = _mesh_object(buffer, cache, build_id, mesh_plan)
                 if obj: stage.objects.link(obj)
+        from .surface_atlas import apply_surfaces
+        new_objects=list(stage.objects)
+        new_ids={o.get('caelm_buffer_id') for o in new_objects}
+        retained_context=[o for o in (collection.objects if collection else ())
+                          if o.get(TAG) and o.get('caelm_buffer_id') not in new_ids]
+        surface_report=apply_surfaces(new_objects,plan,settings,
+                                      context_objects=new_objects+retained_context)
+        for obj in stage.objects:
+            replacement=overrides.get(obj.get('caelm_buffer_id'))
+            if replacement:
+                obj.data.materials.clear()
+                for material in replacement:obj.data.materials.append(material)
         if scope is None:
             for obj in _colliders(plan, build_id):
                 stage.objects.link(obj); obj.hide_set(True)
@@ -309,6 +333,7 @@ def build(settings, collection=None, layers=None, origin=None):
         _cleanup_stage(stage); stage = None
         collection[COLLECTION_TAG] = True
         collection[SETTINGS_KEY] = json.dumps(setting_data, sort_keys=True)
+        collection['caelm_surface_diagnostics']=json.dumps(surface_report,sort_keys=True)
         collection["caelm_geometry_hash"] = geometry_hash(buffers)
         collection["caelm_source_geometry_hash"] = geometry_hash(buffers)
         collection["caelm_architecture"] = validation.get("architecture", "WORLD" if settings.world_aware else "LEGACY")

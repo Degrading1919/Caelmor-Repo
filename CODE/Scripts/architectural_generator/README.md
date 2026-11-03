@@ -1,6 +1,31 @@
 # Caelmor Architectural Generator
 
-Version 0.8.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
+Version 0.9.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
+
+The 0.9 surface pass preserves the 0.8 procedural geometry. Standard exported
+PBR maps now carry preparation, material sorting and environmental history.
+Wealth sorts natural stock; craftsmanship controls preparation/tool marks and
+finish; age accumulates patina; maintenance reduces deterioration and supplies
+localized replacements, repointing and limewash. Wealth does not set cleanliness.
+The Lowmark Smithy and Thornfell Gatehouse are the controlled visual fixtures;
+see `evidence/materials_v09` for surface-only comparisons and actual GLB
+round-trip diagnostics. These isolate finishes on identical geometry; normal
+generation continues to honor wealth/craftsmanship's existing construction rules.
+
+Surface maps are original packed albedo, tangent-normal and ORM PNGs connected
+directly to Principled BSDF, with no renderer-only procedural shader dependency.
+`UV2_Surface` supplements `UV0_Metric` and `UV1_Lightmap`; mesh vertices/faces
+are unchanged. CaelmorTint is neutral for these baked materials to avoid double
+weathering on export. Detail controls map density (wood receives twice the base
+density); individual face charts are capped at 256 pixels and atlases at 4096
+per dimension. This is an authoring resolution policy, not a runtime budget.
+Blender's bundled NumPy evaluates the maps; no external textures or packages are
+downloaded. Atlas revision 1 is separate from the retained legacy surface bank.
+Unchanged geometry/settings reuse their material datablocks, preserving shader
+edits. Explicit material-slot overrides and protected objects survive regeneration.
+Changing condition inputs creates a new finish bank instead of overwriting a
+material an artist may have edited. Old manually edited surfaces can remain on
+protected objects; condition changes do not forcibly replace them.
 
 The 0.8 art benchmarks revise **Lowmark Smithy** and **Thornfell Gatehouse** in
 World mode. The smithy has a primary gabled forge and a lower boarded stock
@@ -85,7 +110,7 @@ The supported footprints are RECT, L, T, and U. L wings may mirror, T wings may 
 
 ### Household finish and condition
 
-Wealth (Modest, Established, Affluent) changes household capacity, work/storage space and private-room/access arrangements in World mode, as well as grammar-mode scale and local finish assumptions. Craftsmanship (Rough, Standard, Fine) affects proportions, masonry selection, joinery and surface finish. Age and Maintenance are separate inputs: older maintained buildings can remain cared for, and neglected buildings can be young. Condition changes subdued wear and selected structural repair events; wealth does not automatically determine upkeep. These are authoring controls, not economic simulation or canonical social classes. Material revision 4 uses fresh datablocks to preserve earlier material edits. Saved settings remain readable; World geometry evolves with the tool revision, so exact older World output requires its original version. Protected pieces remain intact and can require manual reconciliation with a changed room arrangement.
+Wealth (Modest, Established, Affluent) changes household capacity, work/storage space and private-room/access arrangements in World mode, as well as grammar-mode scale and local finish assumptions. Craftsmanship (Rough, Standard, Fine) affects proportions, masonry selection, joinery and surface finish. Age and Maintenance are separate inputs: older maintained buildings retain patina and repair history, while neglected buildings accumulate exposure-specific deterioration. Wealth does not determine upkeep. These are authoring controls, not economic simulation or canonical social classes. The legacy material revision 4 bank remains readable; the current atlas bank uses separate fingerprints and datablocks. Saved settings remain readable; exact older World output and finishes require their original version. Protected pieces remain intact and can require manual reconciliation with a changed room arrangement.
 
 ### Detail and geometry modes
 

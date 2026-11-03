@@ -1,0 +1,249 @@
+"""Bake semantic surface fields into standard glTF PBR maps without mesh changes.
+
+UV0 metric and UV1 lightmap coordinates remain editable. UV2 packs face charts
+with gutters. A material bank is local to its geometry/settings fingerprint;
+unchanged regeneration reuses datablocks (including user node edits).
+"""
+import hashlib
+import json
+import math
+import numpy as np
+from .materials import PALETTE, _palette_entry, _hash2
+from .surface_patterns import sample_pattern
+from .surface_conditions import condition_fields, environment
+
+ATLAS_REVISION=1
+UV_NAME='UV2_Surface'
+FAMILY={'timber':'wood','timber_light':'wood','stone':'stone','stone_light':'stone',
+        'mortar':'stone','stone_sooted':'stone','plaster':'plaster','plaster_patch':'plaster',
+        'roof':'roof','roof_dark':'roof','roof_patch':'roof','roof_worn':'roof',
+        'iron':'iron','bellows_leather':'leather','charcoal':'charcoal'}
+PAD=2
+
+
+def _components(mesh):
+    """Connected pieces retain one stock grade across all their faces."""
+    parent=list(range(len(mesh.vertices)))
+    def find(a):
+        while parent[a]!=a:
+            parent[a]=parent[parent[a]];a=parent[a]
+        return a
+    for p in mesh.polygons:
+        root=find(p.vertices[0])
+        for v in p.vertices[1:]:parent[find(v)]=root
+    groups={}
+    for v in mesh.vertices:groups.setdefault(find(v.index),[]).append(tuple(v.co))
+    centers={k:np.mean(v,axis=0) for k,v in groups.items()}
+    return {p.index:centers[find(p.vertices[0])] for p in mesh.polygons}
+
+
+def _charts(objects, density):
+    charts=[]
+    for obj,host in objects:
+        mesh=obj.data; uv=mesh.uv_layers['UV0_Metric']; pieces=_components(mesh)
+        for poly in mesh.polygons:
+            ids=list(poly.loop_indices)
+            coords=np.array([tuple(uv.data[i].uv) for i in ids],dtype=float)
+            points=np.array([tuple(mesh.vertices[mesh.loops[i].vertex_index].co) for i in ids])
+            low=coords.min(axis=0); span=coords.max(axis=0)-low
+            if min(span)<1e-7: continue
+            # Solve the existing metric projection in least squares, including
+            # triangles/ngons; no guessed world height for sloped roof charts.
+            transform=np.linalg.lstsq(np.column_stack((coords,np.ones(len(ids)))),points,rcond=None)[0]
+            w,h=[max(2,min(256,int(math.ceil(float(s)*density)))) for s in span]
+            charts.append(dict(obj=obj,poly=poly.index,loops=ids,coords=coords,low=low,span=span,
+                transform=transform,normal=tuple(poly.normal),center=pieces[poly.index],
+                w=w,h=h,host=host))
+    return sorted(charts,key=lambda c:(-c['h'],-c['w'],c['obj']['caelm_buffer_id'],c['poly']))
+
+
+def _pack(charts):
+    choices=[]
+    for width in (256,512,1024,2048,4096):
+        x=y=row=0;ok=True
+        layout=[]
+        for c in charts:
+            w,h=c['w']+2*PAD,c['h']+2*PAD
+            if w>width:ok=False;break
+            if x+w>width:x=0;y+=row;row=0
+            if y+h>4096:ok=False;break
+            layout.append((x,y));x+=w;row=max(row,h)
+        if ok:
+            height=max(4,int(math.ceil((y+row)/4))*4)
+            choices.append((width*height,width,height,layout))
+    if choices:
+        _,width,height,layout=min(choices,key=lambda c:(c[0],c[1]))
+        for c,xy in zip(charts,layout):c['xy']=xy
+        return width,height
+    raise ValueError('Surface atlas exceeded 4096; reduce chart density')
+
+
+def _image(name,pixels,colorspace):
+    import bpy
+    height,width,_=pixels.shape
+    image=bpy.data.images.new(name,width=width,height=height,alpha=True,float_buffer=False)
+    image.colorspace_settings.name=colorspace
+    if colorspace=='sRGB':
+        # Byte-backed Image.pixels are encoded values. Convert our linear
+        # material albedo once; the shader/export importer decodes sRGB once.
+        pixels=pixels.copy();rgb=pixels[:,:,:3]
+        pixels[:,:,:3]=np.where(rgb<=.0031308,12.92*rgb,1.055*np.power(rgb,1./2.4)-.055)
+    image.pixels.foreach_set(np.asarray(pixels,dtype=np.float32).ravel())
+    image.file_format='PNG';image.pack()
+    image['caelm_atlas_revision']=ATLAS_REVISION
+    return image
+
+
+def _make_material(key,fingerprint,base,images):
+    import bpy
+    mat=bpy.data.materials.new(f'Caelmor | {key} | Surface {fingerprint[:12]}')
+    mat.use_nodes=True;nodes=mat.node_tree.nodes;links=mat.node_tree.links
+    nodes.clear();output=nodes.new('ShaderNodeOutputMaterial');shader=nodes.new('ShaderNodeBsdfPrincipled')
+    output.location=(650,0);shader.location=(360,0);links.new(shader.outputs['BSDF'],output.inputs['Surface'])
+    shader.inputs['Base Color'].default_value=(1,1,1,1)
+    uv=nodes.new('ShaderNodeUVMap');uv.uv_map=UV_NAME;uv.location=(-700,0)
+    textures=[]
+    for i,(name,im) in enumerate(zip(('Base Color','Normal','ORM'),images)):
+        tex=nodes.new('ShaderNodeTexImage');tex.image=im;tex.label=name
+        tex.extension='EXTEND';tex.location=(-450,300-i*300)
+        links.new(uv.outputs['UV'],tex.inputs['Vector']);textures.append(tex)
+    links.new(textures[0].outputs['Color'],shader.inputs['Base Color'])
+    normal=nodes.new('ShaderNodeNormalMap');normal.space='TANGENT';normal.uv_map=UV_NAME
+    normal.inputs['Strength'].default_value=1.;normal.location=(80,-100)
+    links.new(textures[1].outputs['Color'],normal.inputs['Color']);links.new(normal.outputs['Normal'],shader.inputs['Normal'])
+    separate=nodes.new('ShaderNodeSeparateColor');separate.mode='RGB';separate.location=(50,-370)
+    links.new(textures[2].outputs['Color'],separate.inputs['Color'])
+    links.new(separate.outputs['Green'],shader.inputs['Roughness'])
+    links.new(separate.outputs['Blue'],shader.inputs['Metallic'])
+    mat.diffuse_color=base
+    mat['caelm_material']=key;mat['caelm_atlas_revision']=ATLAS_REVISION
+    mat['caelm_surface_fingerprint']=fingerprint
+    mat['caelm_surface_uv']=UV_NAME
+    return mat
+
+
+def apply_surfaces(objects,plan,settings,context_objects=None):
+    """Finish native objects; can recoat fixed geometry for controlled diagnostics.
+
+    Production build calls this with its real settings. Diagnostic surface-only
+    sweeps explicitly hold geometry fixed, rather than silently changing massing
+    while attributing all differences to surface treatment.
+    """
+    import bpy
+    hosts={m.key:m.plan for m in getattr(plan,'world_zones',())}
+    contexts={id(host):environment(host) for host in [plan,*hosts.values()]}
+    for obj in (objects if context_objects is None else context_objects):
+        if obj.type!='MESH' or obj.get('caelm_collider'):continue
+        host=hosts.get(obj.get('caelm_world_zone'),plan)
+        role=obj.get('caelm_functional_role','')
+        if role not in ('forge_fire','chimney'):continue
+        if role=='forge_fire' and obj.get('caelm_material')!='iron':continue
+        points=np.asarray([tuple(obj.matrix_local @ v.co) for v in obj.data.vertices])
+        low=points.min(axis=0);high=points.max(axis=0);center=(low+high)*.5
+        if role=='forge_fire':
+            contexts[id(host)].setdefault('heat',[]).append((float(center[0]),float(center[1]),float(high[2])))
+        else:
+            contexts[id(host)]['soot'].append((float(center[0]),float(center[1]),float(high[2])))
+    groups={}
+    for obj in objects:
+        if obj.type!='MESH' or obj.get('caelm_collider'):continue
+        key=obj.get('caelm_material','timber')
+        if key not in FAMILY:continue
+        host=hosts.get(obj.get('caelm_world_zone'),plan)
+        base=_palette_entry(key,getattr(host,'style',None),settings)[0]
+        groups.setdefault((key,base),[]).append((obj,host))
+    reports=[]
+    for (key,base),members in sorted(groups.items()):
+        digest=hashlib.sha256()
+        digest.update(json.dumps((ATLAS_REVISION,key,base,settings.__dict__),sort_keys=True).encode())
+        for obj,host in members:
+            digest.update(obj['caelm_buffer_id'].encode())
+            digest.update(json.dumps(contexts[id(host)],sort_keys=True).encode())
+            for v in obj.data.vertices:digest.update(np.asarray(v.co,dtype='<f4').tobytes())
+            for p in obj.data.polygons:digest.update(np.asarray(p.vertices,dtype='<i4').tobytes())
+            digest.update(np.asarray([tuple(v.uv) for v in obj.data.uv_layers['UV0_Metric'].data],dtype='<f4').tobytes())
+        fingerprint=digest.hexdigest()
+        material=next((m for m in bpy.data.materials if m.get('caelm_surface_fingerprint')==fingerprint),None)
+        density={'LOW':24,'MEDIUM':48,'HIGH':72}[settings.detail]
+        if FAMILY[key]=='wood':density*=2
+        charts=_charts(members,density);width,height_px=_pack(charts)
+        for c in charts:
+            mesh=c['obj'].data
+            layer=mesh.uv_layers.get(UV_NAME) or mesh.uv_layers.new(name=UV_NAME)
+            x,y=c['xy']
+            for li,coord in zip(c['loops'],c['coords']):
+                unit=(coord-c['low'])/c['span']
+                layer.data[li].uv=((x+PAD+unit[0]*c['w'])/width,(y+PAD+unit[1]*c['h'])/height_px)
+        if material is None:
+            # Sample each material bank in one vector batch instead of invoking
+            # procedural noise thousands of times for individual small stones.
+            count=sum((c['w']+2*PAD)*(c['h']+2*PAD) for c in charts)
+            positions=np.empty((count,3));normals=np.empty_like(positions)
+            uu=np.empty(count);vv=np.empty(count);unit=np.empty(count);uz=np.empty(count)
+            start=0
+            for c in charts:
+                w,h=c['w'],c['h'];length=(w+2*PAD)*(h+2*PAD)
+                fx=np.clip((np.arange(w+2*PAD)-PAD+.5)/w,0.,1.)
+                fy=np.clip((np.arange(h+2*PAD)-PAD+.5)/h,0.,1.)
+                u,v=np.meshgrid(c['low'][0]+fx*c['span'][0],c['low'][1]+fy*c['span'][1])
+                end=start+length;uu[start:end]=u.ravel();vv[start:end]=v.ravel()
+                positions[start:end]=np.column_stack((u.ravel(),v.ravel(),np.ones(length)))@c['transform']
+                normals[start:end]=c['normal']
+                center=c['center'];stock=_hash2(int(round(center[0]*107)),int(round(center[1]*107))+int(round(center[2]*149)),settings.seed)
+                unit[start:end]=stock;uz[start:end]=center[2]
+                c['slice']=(start,end);start=end
+            family=FAMILY[key]
+            # Metric fields have unbounded coordinates. Stable world offsets
+            # distinguish stock faces without resetting a knot every polygon.
+            pattern=sample_pattern(family,uu+positions[:,0]*.173,vv+positions[:,1]*.197,
+                region=settings.region,wealth=settings.wealth,craftsmanship=settings.craftsmanship,seed=settings.seed)
+            color=pattern['albedo']*np.asarray(base[:3]);height=pattern['height'].copy()
+            rough=pattern['roughness'].copy();metal=pattern['metallic'].copy()
+            # Regions/material cohorts share textures but retain their actual
+            # host volume's eaves, apertures and hearths.
+            for host in {id(c['host']):c['host'] for c in charts}.values():
+                idx=np.concatenate([np.arange(*c['slice']) for c in charts if c['host'] is host])
+                fields=condition_fields(positions[idx],normals[idx],uu[idx],vv[idx],key,settings,contexts[id(host)],
+                    unit=unit[idx],unit_z=uz[idx],family=family)
+                silver=fields['silver'][:,None]
+                color[idx]=(color[idx]*(1.-silver)+np.array([.16,.18,.165])*silver)*fields['tint']
+                white=fields['white'][:,None]
+                color[idx]=color[idx]*(1.-white)+np.array([.66,.63,.53])*white
+                rust=fields['corrosion'][:,None]
+                color[idx]=color[idx]*(1.-rust)+np.array([.23,.083,.026])*rust
+                metal[idx]*=1.-fields['corrosion'];rough[idx]+=fields['roughness_delta']+.12*fields['corrosion']
+                height[idx]+=fields['height']
+            color=np.clip(color,0.,1.);rough=np.clip(rough,.24,.99)
+            pixels=np.ones((height_px,width,4),dtype=np.float32)
+            normal_pixels=np.ones_like(pixels);normal_pixels[:,:,:3]=(.5,.5,1.)
+            orm=np.ones_like(pixels);orm[:,:,1]=.9;orm[:,:,2]=0.
+            for c in charts:
+                x,y=c['xy'];w,h=c['w']+2*PAD,c['h']+2*PAD;s,e=c['slice']
+                pixels[y:y+h,x:x+w,:3]=color[s:e].reshape(h,w,3)
+                elevation=height[s:e].reshape(h,w)
+                dy,dx=np.gradient(elevation,c['span'][1]/c['h'],c['span'][0]/c['w'])
+                vec=np.stack((-dx,-dy,np.ones_like(dx)),axis=-1)
+                vec/=np.linalg.norm(vec,axis=-1,keepdims=True)
+                normal_pixels[y:y+h,x:x+w,:3]=vec*.5+.5
+                orm[y:y+h,x:x+w,1]=rough[s:e].reshape(h,w)
+                orm[y:y+h,x:x+w,2]=metal[s:e].reshape(h,w)
+            label=f'Caelmor Surface {fingerprint[:16]}'
+            # Albedo is encoded once for byte-backed sRGB PNG; normal/ORM data
+            # remain linear. The exported image payload is checked on reimport.
+            images=(_image(label+' Color',pixels,'sRGB'),_image(label+' Normal',normal_pixels,'Non-Color'),
+                    _image(label+' ORM',orm,'Non-Color'))
+            material=_make_material(key,fingerprint,base,images)
+            material['caelm_atlas_size']=[width,height_px];material['caelm_texels_per_metre']=density
+        for obj,_ in members:
+            obj.data.materials.clear();obj.data.materials.append(material)
+            obj['caelm_surface_material']=material.name
+            obj['caelm_surface_fingerprint']=fingerprint
+            # Conditions are already in the PBR map. Neutral COLOR_0 prevents
+            # exporters multiplying the old vertex weathering a second time.
+            tint=obj.data.color_attributes.get('CaelmorTint')
+            if tint:
+                tint.data.foreach_set('color',np.ones(len(tint.data)*4,dtype=np.float32))
+            obj.data.uv_layers.active_index=0;obj.data.uv_layers[0].active_render=True
+        reports.append({'material':key,'fingerprint':fingerprint,'size':[width,height_px],'density':density,
+                        'charts':len(charts),'objects':len(members)})
+    return reports

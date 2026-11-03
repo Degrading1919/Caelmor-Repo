@@ -43,7 +43,8 @@ assert bpy.ops.caelmor.generate()=={'FINISHED'}
 collection=next(c for c in bpy.data.collections if c.get('caelm_build'))
 meshes=[o for o in collection.objects if o.get('caelm_generated') and not o.get('caelm_collider')]
 assert len(meshes)>=15,len(meshes)
-assert all(len(o.data.uv_layers)==2 for o in meshes)
+assert all('UV0_Metric' in o.data.uv_layers and 'UV1_Lightmap' in o.data.uv_layers for o in meshes)
+assert any('UV2_Surface' in o.data.uv_layers for o in meshes)
 print('ISOLATED_EXTENSION_INSTALL_AND_GENERATE_PASS',len(meshes))
 """
         if world_aware and function in ('SMITHY','MARKET_HALL','STABLE','GATEHOUSE'):
