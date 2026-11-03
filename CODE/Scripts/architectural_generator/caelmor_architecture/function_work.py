@@ -33,6 +33,7 @@ def _smithy_flue(builder, mass, x, y, zbase):
     # A shallow shed roof rises toward the closed rear; the hood is prominent
     # but stays well below the low front eave.
     hood_z = min(mass.eave - .50, zbase + 2.45)
+    if builder.region=='THORNFELL':hood_z-=.08
     hood = ctx.buffer("smithy.forge_hood", "iron", "details", zone=mass)
     hood.structural_role = "forge_hood"
     lower_z=hood_z-.50; upper_z=hood_z+.22
@@ -48,7 +49,7 @@ def _smithy_flue(builder, mass, x, y, zbase):
                   (x+.34,y+.24,upper_z),(x+.82,y+.48,lower_z)],(-.065,0,0))
     # Rise above the tapered hood before turning sideways; a horizontal run at
     # its rim would cut through the hood's own sloping side panel.
-    duct_z = upper_z+.18
+    duct_z = upper_z+(.36 if builder.region=='MIRE' else .18)
     outside_x = -1.05
     half=.34; wall=.09
     throat=ctx.buffer("smithy.flue_throat","iron","details",zone=mass)
@@ -100,8 +101,8 @@ def _smithy_flue(builder, mass, x, y, zbase):
     for dy in (-half+wall/2,half-wall/2):
         flue.box((stack_x,y+dy,top+.035),(2*half-2*wall,wall,.07))
     builder.program['ventilation']={
-        'hood_inlet':[(x-.04,y,upper_z-.20),(x-.04,y,duct_z+.04)],
-        'duct':[(x-.04,y,duct_z),(outside_x,y,duct_z)],
+        'hood_inlet':[(x,y,zbase+.65),(x,y,duct_z+.04)],
+        'duct':[(x,y,duct_z),(outside_x,y,duct_z)],
         'stack':[(outside_x,y,duct_z),(outside_x,y,top+.18)],
         'scope':'Open geometric air path, not a draft or thermal simulation'}
 

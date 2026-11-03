@@ -61,7 +61,7 @@ class FunctionalMeshTests(unittest.TestCase):
                     direction=end-start;distance=direction.length;direction.normalize()
                     lateral=Vector((0,1,0))
                     second=Vector((1,0,0)) if abs(direction.z)>.9 else Vector((0,0,1))
-                    for offset in (Vector((0,0,0)),lateral*.04,-lateral*.04,second*.04,-second*.04):
+                    for offset in (Vector((0,0,0)),lateral*.075,-lateral*.075,second*.075,-second*.075):
                         hits=[]
                         for obj,tree in visuals:
                             location,_,_,hit=tree.ray_cast(start+offset,direction,distance)
