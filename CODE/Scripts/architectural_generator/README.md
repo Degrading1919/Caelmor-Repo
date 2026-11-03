@@ -1,6 +1,15 @@
 # Caelmor Architectural Generator
 
-Version 0.7.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
+Version 0.8.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
+
+The 0.8 art benchmarks revise **Lowmark Smithy** and **Thornfell Gatehouse** in
+World mode. The smithy has a primary gabled forge and a lower boarded stock
+range, with fire screening, coursed stack, pegged bents and repair equipment.
+The gatehouse has broad hipped flanks, an actual vaulted archway, courtyard
+entries, defensive slots and a guard hall. These are procedural construction
+rules for every seed of the selected pair, with fixed-camera before/after
+comparisons under `evidence/benchmarks_v08`. Artistic acceptance is pending;
+the other 78 region/function combinations retain their existing geometry.
 
 In World mode, Smithy, Market Hall, Stable and Gatehouse now allocate functional
 spaces before their regional construction shell. Integral work equipment,

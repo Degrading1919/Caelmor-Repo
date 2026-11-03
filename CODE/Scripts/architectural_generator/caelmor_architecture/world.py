@@ -25,6 +25,14 @@ class MassPlan(Plan):
 def _profile_sources(plan, mode):
     x0,y0,x1,y1,_=plan.rects[0]
     d=y1-y0; o=plan.settings.overhang
+    if mode=='SHED' and (getattr(plan,'shed_reverse',False) or plan.rects[0][4]=='Y'):
+        across_x=plan.rects[0][4]=='Y'
+        span=x1-x0 if across_x else d
+        slope=-plan.slope if getattr(plan,'shed_reverse',False) else plan.slope
+        intercept=plan.eave+(span*plan.slope if getattr(plan,'shed_reverse',False) else 0.)
+        poly=[(x0-o,y0-o),(x1+o,y0-o),(x1+o,y1+o),(x0-o,y1+o)]
+        return [RoofPatch(poly,(slope,0.,intercept-slope*x0) if across_x
+                          else (0.,slope,intercept-slope*y0))]
     if mode=='TERRACE':
         return [RoofPatch([(x0,y0),(x1,y0),(x1,y1),(x0,y1)],
                           (0.,.035,plan.eave-.035*y0))]
@@ -110,7 +118,8 @@ class Context:
              base=None,roof='GABLE',pitch=None,overhang=None,openings='DOMESTIC',
              entrance_edge=0,blocked_edges=(),steps=True,foundation='PLINTH',access_edges=(),
              function=None,gallery_edges=(),open_edges=(),open_access=(),wall_infill_roof_clearance=None,
-             roof_axis='X'):
+             roof_axis='X',shed_reverse=False,passage_arch=None,aperture_schedule=None,frame_visibility=None,
+             construction=None):
         if any(m.key==key for m in self.masses):
             raise ValueError('Duplicate construction zone: '+key)
         if not all(math.isfinite(v) for v in (x,y,width,depth)) or min(width,depth)<1.4:
@@ -166,6 +175,9 @@ class Context:
         plan.open_edges=set(open_edges)
         plan.functional_access=tuple(dict(r) for r in open_access)
         plan.wall_infill_roof_clearance=wall_infill_roof_clearance
+        plan.shed_reverse=shed_reverse
+        plan.passage_arch=passage_arch
+        plan.aperture_schedule=aperture_schedule
         plan.blocked_edges=set(blocked_edges)
         plan.entry_steps=steps
         plan.world_mass=True
@@ -175,6 +187,14 @@ class Context:
         plan.door_thickness=.12 if s.region=='EMBERHOLT' else .065
         plan.disable_gable_frame=roof=='BOW'
         plan.suppress_function_details=True
+        if frame_visibility is not None:
+            plan.style=replace(plan.style,frame_visibility=float(frame_visibility))
+        if construction is not None:
+            if construction not in ('BOARD','TIMBER_INFILL','RUBBLE','ASHLAR'):
+                raise ValueError('Unsupported construction override')
+            plan.style=replace(plan.style,construction=construction,
+                wall_material='timber_light' if construction=='BOARD' else
+                'plaster' if construction=='TIMBER_INFILL' else 'stone')
         plan.suppress_chimney=self.settings.region in ('MIRE','EMBERHOLT') or openings=='NONE'
         if roof in ('BOW','SHED','TERRACE'):
             plan.custom_roof_sources=_profile_sources(plan,roof)
@@ -316,6 +336,7 @@ def _abutment_flashings(ctx):
                 for patch in roof_sources(mass.plan):
                     cuts.update(p[1-axis] for p in patch.poly if lo<p[1-axis]<hi)
             for k,(t0,t1) in enumerate(zip(sorted(cuts),sorted(cuts)[1:])):
+                if t1-t0<1e-6:continue
                 middle=[0.,0.];middle[axis]=station;middle[1-axis]=(t0+t1)*.5
                 h0,h1=(m.roof_height(*middle) for m in (first,second))
                 if abs(h0-h1)<.08:continue
@@ -327,7 +348,20 @@ def _abutment_flashings(ctx):
                     p=[0.,0.];p[axis]=station+inward*offset;p[1-axis]=t
                     points.append((*p,lower.roof_height(*p)+.065))
                 buffer=ctx.buffer(f'{first.key}.{second.key}.roof_apron.{k}','iron','roof',lower)
-                buffer.extrude(points,(0,0,-.012))
+                if lower.plan.roof_mode=='HIP':
+                    # A hip break can cross the *width* of this apron even
+                    # when its party-line stations are split. Clip to each
+                    # actual planar roof face; a warped quad can invert its
+                    # thin solid despite a plausible centreline.
+                    footprint=[p[:2] for p in points]
+                    if area(footprint)<0:footprint.reverse()
+                    for patch in roof_faces(lower.plan):
+                        piece=footprint
+                        for plane in inequalities(patch.poly):piece=clip(piece,*plane)
+                        if piece:
+                            buffer.extrude([(x,y,patch.height(x,y)+.065) for x,y in piece],(0,0,-.012))
+                else:
+                    buffer.extrude(points,(0,0,-.012))
                 p,q=points[:2]
                 buffer.extrude([p,q,(q[0],q[1],q[2]+.17),(p[0],p[1],p[2]+.17)],
                                tuple((.012*inward if j==axis else 0.) for j in range(3)))

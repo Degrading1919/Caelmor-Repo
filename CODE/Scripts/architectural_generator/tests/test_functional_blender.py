@@ -29,6 +29,10 @@ class FunctionalMeshTests(unittest.TestCase):
                 for p in (ROOT/'caelmor_architecture').glob('*.py') if p.name not in unused}
         cases=[(f,r) for f in FUNCTIONS for r in REGIONS]
         if selected!=['']:cases=[c for c in cases if c[0] in selected]
+        if os.environ.get('CAELM_CASES'):
+            requested={tuple(c.split(':')) for c in os.environ['CAELM_CASES'].split(',')}
+            cases=[c for c in cases if c in requested]
+            self.assertEqual(set(cases),requested,'Unsupported native fixture case')
         if os.environ.get('CAELM_FUNCTION_PILOT'):
             cases=list(zip(FUNCTIONS,REGIONS))
         reports=[]
@@ -118,6 +122,7 @@ class FunctionalMeshTests(unittest.TestCase):
         out=ROOT/'evidence'/output_name;out.mkdir(parents=True,exist_ok=True)
         name='pilot_mesh_checks.json' if os.environ.get('CAELM_FUNCTION_PILOT') else 'mesh_checks.json'
         if selected!=['']:name='mesh_checks_'+'_'.join(f.lower() for f in selected)+'.json'
+        if os.environ.get('CAELM_CASES'):name='benchmark_mesh_checks.json'
         (out/name).write_text(json.dumps({'blender':bpy.app.version_string,'source_sha256':source,
             'cases':reports,'scope':'Actual BVH clearance rays include exported wall/floor proxies. Glazing intersections include structure and all integral functional fixtures, including detail-layer pieces. Closed service door leaves are omitted from circulation probes; this is not runtime traversal or exhaustive solid intersection.'},indent=2)+'\n')
 

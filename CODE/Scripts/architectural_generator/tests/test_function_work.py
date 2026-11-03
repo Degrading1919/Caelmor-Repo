@@ -85,23 +85,11 @@ class FakeContext:
 
 class FunctionWorkTests(unittest.TestCase):
     def test_lowmark_smithy_has_open_front_workbays_and_clear_routes(self):
-        ctx = FakeContext("LOWMARK")
-        with patch.object(function_work, "Builder", FakeBuilder):
-            function_work.build_smithy(ctx)
-        _, kwargs, mass = ctx.masses[0]
-        self.assertEqual(kwargs["open_edges"], [0, 1, 3])
-        self.assertEqual([(a["s0"],a["s1"]) for a in kwargs["open_access"]],
-                         [(.55,4.3),(5.3,8.9)])
-        self.assertEqual({row[0] for row in ctx.program["routes"]},
-                         {"forge_material_lane", "smithy.operator_workpad", "smithy.apron_clearance"})
-        self.assertEqual(kwargs["roof"], "SHED")
-        self.assertEqual(kwargs["pitch"], 18)
-        self.assertEqual((kwargs["width"],kwargs["depth"],kwargs["floor_height"]),(9.6,4.6,3.5))
-        self.assertEqual(ctx.decks[0][0], "smithy.work_apron")
-        self.assertEqual(ctx.ramps[0][0], "smithy.material_ramp")
-        self.assertTrue(any(row[0] == "hearth_stone_plinth" for row in ctx.boxes))
-        self.assertTrue(any(row[0] == "smithy.external_flue" for row in ctx.buffers))
-        self.assertGreater(mass.depth, 0)
+        plan,buffers=generate(Settings(function='SMITHY',region='LOWMARK',world_aware=True,seed=91))
+        self.assertTrue(validate(plan,buffers)['valid'])
+        self.assertEqual([m.plan.roof_mode for m in plan.world_zones],['GABLE','SHED'])
+        self.assertTrue(any(r['key']=='forge_material_lane' for r in plan.functional_program['routes']))
+        self.assertTrue(any('smithy.external_flue' in b.name for b in buffers))
 
     def test_thornfell_smithy_reserves_high_rear_wall_vent(self):
         ctx = FakeContext("THORNFELL")
@@ -134,8 +122,8 @@ class ActualFunctionGenerationTests(unittest.TestCase):
         self.assertEqual(plan.functional_program["function"], "SMITHY")
         self.assertTrue(any("external_flue" in buffer.name for buffer in buffers))
         mass=plan.world_zones[0]
-        self.assertEqual(mass.plan.roof_mode,"SHED")
-        self.assertEqual(mass.plan.settings.pitch,18)
+        self.assertEqual(mass.plan.roof_mode,"GABLE")
+        self.assertEqual(mass.plan.settings.pitch,32)
         self.assertEqual(mass.plan.open_edges,{0,1,3})
         stack=next(buffer for buffer in buffers if "external_flue" in buffer.name)
         xs=[p[0] for p in stack.vertices]

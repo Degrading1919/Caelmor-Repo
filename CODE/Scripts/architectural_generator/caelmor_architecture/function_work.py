@@ -216,6 +216,8 @@ def _smithy_flue(builder, mass, x, y, zbase):
     flue.structural_role = "supported_hollow_masonry_flue"
     top=duct_z+(2.6 if _enum(builder.region)=="THORNFELL" else
                 1.8 if _enum(builder.region)=="EMBERHOLT" else 1.25)
+    if builder.region=='LOWMARK':
+        top=max(top,mass.roof_height(mass.width*.5,mass.depth*.5)+.65)
     zmid=(.04+top)*.5; zheight=top-.04
     stack_x=outside_x
     flue.box((stack_x-half+wall/2,y,zmid),(wall,2*half,zheight))
@@ -264,7 +266,7 @@ def build_smithy(ctx):
     """Build one serviceable forge with separated hot work and handling lanes."""
     b = Builder(ctx, "SMITHY")
     if b.region == "LOWMARK":
-        w,d,floor_height=9.6,4.6,3.5
+        w,d,floor_height=9.6,5.2,3.6
     elif b.region == "THORNFELL":
         w,d,floor_height=8.8,4.8,3.5
     elif b.region == "MIRE":
@@ -310,12 +312,13 @@ def build_smithy(ctx):
         rear_open = []
         open_access = [{"edge_index": 2, "s0": w*.45, "s1": w*.55,
                         "height": 2.95}]
-    mass = b.mass("forge_hall", x=0, y=0, width=w, depth=d,
+    mass = b.mass("forge_hall", x=0, y=0, width=5.6 if region=='LOWMARK' else w, depth=d,
                    floors=1, floor_height=floor_height, openings="NONE", entrance_edge=0,
-                   roof="SHED" if region=="LOWMARK" else b.roof,
-                   pitch=18 if region=="LOWMARK" else b.pitch,
+                   roof=b.roof,roof_axis='Y' if region=='LOWMARK' else 'X',
+                   pitch=32 if region=="LOWMARK" else b.pitch,
                    open_edges=rear_open, open_access=open_access,
-                   overhang=.42 if region == "LOWMARK" else .28)
+                   overhang=.42 if region == "LOWMARK" else .28,
+                   frame_visibility=0. if region=='LOWMARK' else None)
     # Public/work access along the front; the main through lane is kept clear.
     if region == "LOWMARK":
         b.deck("smithy.work_apron",[(.2,-1.35),(4.9,-1.35),(4.9,0),(.2,0)],
@@ -323,7 +326,7 @@ def build_smithy(ctx):
         b.route("smithy.apron_clearance",(.2,-1.35,0,4.9,0,mass.base+.1),kind="human")
         b.ramp("smithy.material_ramp",(7.1,-2.0),(7.1,0),2.4,mass.base,
                zone=mass,material="stone")
-        b.route("forge_material_lane", (5.35,.15,mass.base,8.85,d-mass.plan.wall_thickness-.15,mass.base+2.05), kind="material")
+        b.route("forge_material_lane", (6.2,.15,mass.base,8.2,d-.75,mass.base+2.05), kind="material")
     elif region == "THORNFELL":
         wall_clear=mass.plan.wall_thickness+.15
         lane_x1=w-wall_clear
@@ -431,7 +434,6 @@ def build_smithy(ctx):
         b.deck("smithy.hot_work_pad",
                [(hx-1.25,hy-.85),(hx+1.35,hy-.85),(hx+1.35,hy+1.8),(hx-1.25,hy+1.8)],
                z=mass.base,material="stone",zone=mass)
-        _smithy_bay_frame(b,mass,.38,2.9,.62,3.45,"timber")
     elif region=="THORNFELL":
         # A thick windward breast behind the hearth gives the open forge a
         # sheltered stone working face while leaving the hood inlet and side
@@ -447,10 +449,13 @@ def build_smithy(ctx):
     # Structural rhythm carries the roof and reinforces the open face; these
     # posts are at the perimeter and outside all recorded circulation.
     if region!="MIRE":
-        for i,x in enumerate((.3,w-.3)):
+        for i,x in enumerate((.3,mass.width-.3)):
             post_top=mass.roof_height(x,d-.12)-.24
             _beam(ctx,f"smithy.bay_post_{i}","timber" if region=="LOWMARK" else "stone",
                   (x,d-.12,mass.base),(x,d-.12,post_top),.20,.20,mass)
+    if region=='LOWMARK':
+        from .benchmark_construction import smithy_range
+        smithy_range(b,mass)
     b.finish()
 
 

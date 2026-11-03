@@ -9,6 +9,9 @@ PALETTE = {
     "roof_worn": ((.117,.125,.116,1),.94,0), "roof_patch": ((.12,.125,.112,1),.94,0),
     "iron": ((.09,.105,.10,1),.52,.55), "glass": ((.16,.25,.26,1),.22,.08),
     "mortar": ((.39,.35,.29,1),.97,0),
+    "stone_sooted": ((.31,.29,.25,1),.96,0),
+    "charcoal": ((.028,.023,.018,1),.98,0),
+    "bellows_leather": ((.13,.065,.032,1),.91,0),
 }
 
 SIZE = 128
@@ -18,6 +21,7 @@ FAMILIES = {
     "roof": "roof", "roof_dark": "roof", "roof_worn": "roof", "roof_patch": "roof",
     "stone": "stone", "stone_light": "stone", "mortar": "stone",
     "plaster": "plaster", "plaster_patch": "plaster",
+    "stone_sooted":"stone", "charcoal":"stone", "bellows_leather":"plaster",
 }
 
 
@@ -385,5 +389,8 @@ def surface_tint(position, normal, material, plan=None, style=None, settings=Non
             factor*=1.-(.16+.12*(1.-upkeep))*plume
     # glTF COLOR_0 is normalized [0, 1]. Clamp here so Blender preview and
     # exported vertex data use the same standards-valid weathering values.
+    if key=='stone_sooted':
+        heat=(1.-_smoothstep(.35,1.35,math.hypot(x-1.5,y-1.2)))
+        factor*=1.-.76*heat*_smoothstep(.62,1.10,z)
     factor = max(0.0, min(1.0, factor))
     return (factor, factor, factor, 1.0)

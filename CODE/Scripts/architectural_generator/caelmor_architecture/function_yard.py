@@ -321,6 +321,9 @@ def _stair_to_guard_floor(b, prefix, x, y0, y1, base, upper, zone, material):
 
 def build_gatehouse(ctx):
     """Build a defended through-passage with flank towers and guard access."""
+    if ctx.settings.region=='THORNFELL':
+        from .benchmark_gatehouse import build
+        return build(ctx)
     b = Builder(ctx, 'GATEHOUSE')
     region = str(getattr(b.settings, 'region', 'LOWMARK')).upper()
     base = b.base

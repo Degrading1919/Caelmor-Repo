@@ -81,6 +81,39 @@ not new canon or an expansion of the function catalog.
 
 ## Sources and inference boundaries
 
+### Two architectural benchmarks (0.8)
+
+Only Lowmark Smithy and Thornfell Gatehouse receive the new composition pass.
+Lowmark's forge hall has a distinct lower stock range with an outward-draining
+lean-to roof, boarded weather faces, masonry fire screen and coursed open flue.
+Primary pegged bents carry the gable and stock roofs; selective cart/tool repair
+equipment, charcoal and localized soot communicate use. Thornfell's broad stone
+flanks have hipped slate roofs, courtyard doors and real unglazed defensive
+slots. The central guard hall bridges a vaulted, genuinely arched passage.
+Masonry bearings support its floor rather than ground posts inside the route.
+Curtain returns are short site-connection interfaces, not a generated castle.
+
+Reusable construction support includes outward-draining shed axes, optional
+facade construction/framing control, scheduled apertures, convex arch cuts shared
+by walls and collision proxies, radial voussoirs and planar hip-abutment aprons.
+Defaults preserve the other regional function geometries. Existing roof and
+opening constraints remain; they are not waived for the benchmarks. Guard/forge
+geometry is illustrative construction, not structural or thermal simulation.
+
+Fixed cameras compare the published 0.7 pair with 0.8 at distant, normal and close
+scales in clay and materials. The historical set is immutable; source, settings,
+image and package hashes accompany the new evidence. Both outputs are generated
+through normal World-mode settings and remain editable/regenerable/exportable.
+Final art approval belongs to the Creative Director.
+
+Historical principles are interpretations: the explicitly 19th-century
+[Southwater Smithy](https://www.wealddown.co.uk/buildings/smithy-from-southwater/)
+informs local/reused materials, fire screening and agricultural repair workflow,
+not a copied medieval design. The guarded passage, courtyard access and rooms
+above [Dunstanburgh's gatehouse](https://www.english-heritage.org.uk/visit/places/dunstanburgh-castle/history/description/)
+inform functional composition; its exceptional scale/design is not adopted.
+The approved regional dossiers remain the canon authority.
+
 Approved region dossiers remain the authority: Lowmark's agricultural/trading
 settlements and Crestbridge stables; Thornfell's wind/stone/ridge traditions;
 Mire raised banks, stilts and paths; Emberholt forge culture and open-air markets.

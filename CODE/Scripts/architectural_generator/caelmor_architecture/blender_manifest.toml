@@ -1,6 +1,6 @@
 schema_version = "1.0.0"
 id = "caelmor_architecture"
-version = "0.7.0"
+version = "0.8.0"
 name = "Caelmor Architectural Generator"
 tagline = "Generate editable regional Caelmor buildings"
 maintainer = "Caelmor"

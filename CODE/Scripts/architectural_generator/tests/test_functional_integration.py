@@ -88,8 +88,11 @@ class FunctionalIntegrationTests(unittest.TestCase):
     def test_shed_high_wall_infill_fits_across_its_full_thickness(self):
         """The inside of the high wall used to protrude ~91mm through tiles."""
         import math
-        plan,buffers=generate(self.settings('SMITHY','LOWMARK'))
-        mass=plan.world_zones[0]
+        settings=resolve_settings(self.settings('SMITHY','LOWMARK'))
+        ctx=Context(settings);builder=Builder(ctx,'SMITHY')
+        mass=builder.mass('original_shed_regression',width=9.6,depth=4.6,
+                          floor_height=3.5,roof='SHED',pitch=18,open_edges=(0,1,3))
+        plan,buffers=WorldPlan(ctx,settings),ctx.buffers
         walls=[b for b in buffers if b.layer=='walls']
         samples=[(b,i,p) for b in walls for i,p in enumerate(b.vertices)
                  if math.isfinite(mass.roof_height(p[0],p[1]))]

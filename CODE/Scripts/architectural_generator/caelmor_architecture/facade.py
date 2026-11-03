@@ -204,6 +204,15 @@ def _openings_for_edge(plan, edge_index, edge):
                                      "z0":z0, "z1":z1})
 
     policy=getattr(plan,'opening_style','DOMESTIC')
+    schedule=getattr(plan,'aperture_schedule',None)
+    if schedule is not None:
+        openings=[dict(o) for o in schedule.get(edge_index,())]
+    arch=getattr(plan,'passage_arch',None)
+    if arch:
+        for o in openings:
+            if o.get('role') in ('passage_entry','passage_exit'):
+                o['arch']={'spring':fh+arch['spring'],'rise':arch['rise'],'segments':16}
+                o['z1']=o['arch']['spring']+arch['rise']
     if policy in ('EMBER','EMBER_HOME') and int(s.floors)>1 and edge_index in getattr(plan,'gallery_edges',()):
         deck_z=fh+float(s.floor_height)+.08
         openings.append({'kind':'door','role':'gallery_access','s0':length*.5-.58,
@@ -261,7 +270,10 @@ def _openings_for_edge(plan, edge_index, edge):
             o["assembly_members"]=( ["jambs","lintel","open_passage"]
                                      if o.get("role") in ("passage_entry","passage_exit")
                                      else ["jambs","lintel","leaf","threshold"] )
-        if o["s1"] - o["s0"] >= 0.38 and o["z1"] - o["z0"] >= 0.35:
+        if o.get('role')=='arrow_loop':
+            o['assembly_members']=['stone_reveals','open_defensive_slot']
+        minimum_width=.16 if o.get('role')=='arrow_loop' else .38
+        if o["s1"] - o["s0"] >= minimum_width and o["z1"] - o["z0"] >= 0.35:
             clean.append(o)
     # Resolve accidental overlaps in deterministic order, keeping a margin between cuts.
     # Keep the functional entrance before display/vent openings. Otherwise a
@@ -282,6 +294,23 @@ def _openings_for_edge(plan, edge_index, edge):
 
 def _wall_panels(buf, a, b, normal, length, openings, top, bottom=FOUNDATION_HEIGHT, thickness=WALL_THICKNESS):
     """Tessellate the wall around apertures; no wall surface crosses an opening."""
+    if any(o.get('arch') for o in openings):
+        # The same convex aperture polygon cuts visual walls and exported
+        # collision walls. An arch frame cannot merely conceal a rectangular
+        # hole or solid wall above the opening's spring line.
+        from .benchmark_construction import arch_polygon
+        fragments=[[(0.,bottom),(length,bottom),(length,top),(0.,top)]]
+        for o in openings:
+            cutter=(arch_polygon(o) if o.get('arch') else
+                    [(o['s0'],o['z0']),(o['s1'],o['z0']),(o['s1'],o['z1']),(o['s0'],o['z1'])])
+            planes=inequalities(cutter)
+            fragments=[part for fragment in fragments for part in subtract_convex(fragment,planes)]
+        (tx,ty),_= _unit(a,b)
+        for poly in fragments:
+            if abs(area(poly))<1e-7:continue
+            xyz=[(a[0]+tx*s,a[1]+ty*s,z) for s,z in poly]
+            buf.extrude(xyz,(-normal[0]*thickness,-normal[1]*thickness,0.))
+        return
     xs = {0.0, length}
     zs = {bottom, top}
     for o in openings:
@@ -527,6 +556,9 @@ def _emit_clipped_skin_tile(plan,edge_index,edge,profile,openings,buffer,tile,ef
             bounds=opening.get("assembly_bounds",opening)
             cutter=[(bounds["s0"],bounds["z0"]),(bounds["s1"],bounds["z0"]),
                     (bounds["s1"],bounds["z1"]),(bounds["s0"],bounds["z1"])]
+            if opening.get('arch'):
+                from .benchmark_construction import arch_polygon
+                cutter=arch_polygon(opening,outer=.04)
             planes=inequalities(cutter)
             next_fragments=[]
             for fragment in fragments:
@@ -808,6 +840,9 @@ def _opening_frame(buffers, a,b,n,o, function, foundation_height=FOUNDATION_HEIG
     tx,ty = _unit(a,b)[0]
     windows, doors, timbers, details = buffers["windows"],buffers["doors"],buffers["timber"],buffers["details"]
     kind=o["kind"]; s0,s1,z0,z1=o["s0"],o["s1"],o["z0"],o["z1"]
+    if o.get('arch') or o.get('role') in ('arrow_loop','portcullis_slot'):
+        # These openings receive masonry reveals from their construction rule.
+        return
     def point(s, inset=0.0):
         return (a[0]+tx*s-n[0]*inset, a[1]+ty*s-n[1]*inset)
     if kind == "door":
@@ -1382,7 +1417,8 @@ def build_facades(plan):
                     center=(o["s0"]+o["s1"])*.5
                     passage.append({"edge_index":i,"role":o["role"],
                                     "center":(a[0]+tx*center,a[1]+ty*center),
-                                    "s0":o["s0"],"s1":o["s1"],"z0":o["z0"],"z1":o["z1"]})
+                                    "s0":o["s0"],"s1":o["s1"],"z0":o["z0"],"z1":o["z1"],
+                                    **({'clear_head':o['arch']['spring']} if o.get('arch') else {})})
         if len(passage)==2:
             centers_aligned=abs(passage[0]["center"][0]-passage[1]["center"][0])<=1e-6
             same_width=abs((passage[0]["s1"]-passage[0]["s0"])-
@@ -1391,7 +1427,7 @@ def build_facades(plan):
                 "valid":centers_aligned and same_width,"alignment":{"centers_aligned":centers_aligned,
                 "same_width":same_width},"openings":passage,
                 "clear_width":min(p["s1"]-p["s0"] for p in passage),
-                "clear_height":min(p["z1"] for p in passage)-fh,
+                "clear_height":min(p.get('clear_head',p['z1']) for p in passage)-fh,
                 "centerline_length":math.dist(passage[0]["center"],passage[1]["center"])}
         else:
             plan.passage_geometry={"kind":"open_through_passage","openings":passage,
