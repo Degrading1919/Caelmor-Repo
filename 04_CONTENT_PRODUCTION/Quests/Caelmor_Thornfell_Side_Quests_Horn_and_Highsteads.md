@@ -40,7 +40,7 @@
 | Part | Who is left out | By what rule | What the player can change |
 |---|---|---|---|
 | TNR | Tova Rask, eleven, who has missed lessons all autumn. | The ropeway rota runs by lineage; the keeper's household (the newest on the shelf) rides last, and in short winter light the last runs are cancelled. | The rota, after the player has fixed the thing it schedules. |
-| TSM | The Sedge household at Hushfold. | The winter tally counts work done; the Sedges missed their hauls while nursing a sick traveller and were kept back from shared work for fear of the fever. | Whether need and shared work make a claim. Whether the player is counted too. |
+| TSM | The Kvist household at Hushfold. | The winter tally counts work done; the Kvists missed their hauls while nursing a sick traveller and were kept back from shared work for fear of the fever. | Whether need and shared work make a claim. Whether the player is counted too. |
 | TRR | A clanless household at the clan festival. | Witness ribbons have always been tied by clan households. | Where the ribbon goes, and whether everyone ties one. |
 
 ### 0.3 Unlock graph
@@ -140,7 +140,7 @@ The two series do not gate each other. A player can finish either without touchi
 
 Content ids (suggested; the Schema & Content Engineer owns naming): `thornfell.side.the_third_horn`, `thornfell.side.witness_at_the_gate`, `thornfell.side.the_notes_we_keep`, `thornfell.side.nettlehook_rope`, `thornfell.side.a_place_at_smoke_week`, `thornfell.side.rope_raising_day`.
 
-New minor names [NEW] introduced here: **Thyra Brack** (host of Three Calls Shelter); **Osk Varrow** (Nettlehook's rota elder); **Leiv** (lesson-keeper at Nettlehook's lower longhouse); **Ama Sedge** and **Pell Sedge** (the Hushfold household); **Grima Loft** (Hushfold's hauling elder, who keeps the work count). All other speakers are bible cast or role names.
+New minor names [NEW] introduced here: **Thyra Brack** (host of Three Calls Shelter); **Osk Varrow** (Nettlehook's rota elder); **Leiv** (lesson-keeper at Nettlehook's lower longhouse); **Ama Kvist** and **Pell Kvist** (the Hushfold household); **Grima Loft** (Hushfold's hauling elder, who keeps the work count). All other speakers are bible cast or role names.
 
 ---
 
@@ -1414,7 +1414,7 @@ TNR-D6.04 KETIL: "Hushfold sends their tally down our rope at first smoke. You'l
 
 ### TSM.1 The quest in one paragraph
 
-At first heavy snow every highstead reads its **winter tally** aloud: beds, food, who is expected, who is still out. Hushfold's tally decides each shelter household's claim on Nettlehook's shared granary, and it is kept by work: Grima Loft counts every haul. This year it leaves out the **Sedge household**. In autumn Ama Sedge and her son Pell took in a sick traveller with a fever nobody could name, nursed him for three weeks, and were kept back from shared work for fear of it. He got well and walked on. The Sedges are two wood hauls and a meat share short, and the count says short is short. Runa Weatherall reads the tally on the last night of Smoke Week and hates this year's page. The player does what the count says the Sedges owe: two sledge hauls of cut wood along the shelf path from the near woodstacks, in wind windows, and a cliff goat from the shoulder above Nettlehook, carried home with a winter-thin pack following. Then the first smoke: at Runa's word every chimney on the shelter line is lit at once, the smokes rise straight in the still cold, and at one height they all lean together toward the far shielings. At the reading the player says what the work means: work done for a household counts for it; need itself makes a claim; or leave the tally and see they eat. Runa then asks the question every host asks: *"And you? Expected or not?"*
+At first heavy snow every highstead reads its **winter tally** aloud: beds, food, who is expected, who is still out. Hushfold's tally decides each shelter household's claim on Nettlehook's shared granary, and it is kept by work: Grima Loft counts every haul. This year it leaves out the **Kvist household**. In autumn Ama Kvist and her son Pell took in a sick traveller with a fever nobody could name, nursed him for three weeks, and were kept back from shared work for fear of it. He got well and walked on. The Kvists are two wood hauls and a meat share short, and the count says short is short. Runa Weatherall reads the tally on the last night of Smoke Week and hates this year's page. The player does what the count says the Kvists owe: two sledge hauls of cut wood along the shelf path from the near woodstacks, in wind windows, and a cliff goat from the shoulder above Nettlehook, carried home with a winter-thin pack following. Then the first smoke: at Runa's word every chimney on the shelter line is lit at once, the smokes rise straight in the still cold, and at one height they all lean together toward the far shielings. At the reading the player says what the work means: work done for a household counts for it; need itself makes a claim; or leave the tally and see they eat. Runa then asks the question every host asks: *"And you? Expected or not?"*
 
 **Remember:** the smokes leaning together. **Want next:** to see Hushfold stand in the Assembly with one voice (TF-M5); Rope-Raising Day.
 
@@ -1422,8 +1422,8 @@ At first heavy snow every highstead reads its **winter tally** aloud: beds, food
 
 | Candidate | Verdict |
 |---|---|
-| **A. A hearing where the player argues the Sedges' case.** | Rejected. Talk-led; Thornfell is talkative only in the Assembly (bible §1). |
-| **B. The player donates goods to buy the Sedges' place.** | Rejected. Makes belonging a purchase with no civic stakes. |
+| **A. A hearing where the player argues the Kvists' case.** | Rejected. Talk-led; Thornfell is talkative only in the Assembly (bible §1). |
+| **B. The player donates goods to buy the Kvists' place.** | Rejected. Makes belonging a purchase with no civic stakes. |
 | **C. Do the owed work → first smoke → the reading → three principles with costs → the player's own tally question** (selected). | **Selected.** The player's hands earn the right to an opinion; the decision is the shelter line's, voiced through Runa. |
 
 | Element | Source | Status |
@@ -1434,7 +1434,7 @@ At first heavy snow every highstead reads its **winter tally** aloud: beds, food
 | Runa Weatherall: warm, tired, proud; says "we" | Bible §5.2 | [NEW] |
 | A host who adds the player uses their name thereafter | Bible §5.3 rule 4 | [NEW] |
 | Ridge Wolves; cliff goats as Hunting fauna | Bible §10 | [NEW on dossier] |
-| The Sedges, Grima Loft, the near woodstacks, the work count, the leaning smokes | This package | [NEW] |
+| The Kvists, Grima Loft, the near woodstacks, the work count, the leaning smokes | This package | [NEW] |
 
 ### TSM.3 Summary card
 
@@ -1462,26 +1462,26 @@ At first heavy snow every highstead reads its **winter tally** aloud: beds, food
 | Area | Purpose | Environmental storytelling |
 |---|---|---|
 | **A. Hushfold tally hearth** | Hook; reading | The shelter line's common hearth: a long room, benches, the tally book on a stand. Chalk on the lintel: household marks, one per door, no clan signs. The current page lists households with strokes for hauls. |
-| **B. The Sedge house** | The family | End of the line. A cot by the fire, still made up, a fever-cloth folded on it. A carved spoon on the shelf that isn't Hushfold work (the traveller's thanks; no origin stated). Two split-wood strokes on the doorframe where the tally gives others five. |
-| **C. Grima's count** | The rule | A board by the woodshed with every household's hauls. Sedge: two short. Grima's chair beside it. |
+| **B. The Kvist house** | The family | End of the line. A cot by the fire, still made up, a fever-cloth folded on it. A carved spoon on the shelf that isn't Hushfold work (the traveller's thanks; no origin stated). Two split-wood strokes on the doorframe where the tally gives others five. |
+| **C. Grima's count** | The rule | A board by the woodshed with every household's hauls. Kvist: two short. Grima's chair beside it. |
 | **D. The shelf path and near woodstacks** | Hauling | A path along a shelf above Hushfold to stacks of cut crag-pine. Fluted rock whistles before gusts. Chalked shelter faces every 60 m. |
 | **E. The goat shoulder** | Hunting; TSM-E1 | Above Nettlehook: ledges, cropped heather, goat tracks and droppings; the TGY ledges' near edge (bible TP28). |
 
 ### TSM.5 Player-facing sequence
 
-**Beat 0 — This year's page (`S00_hook`).** *Objective: Ask Runa about the tally.* `TSM-D1`. She shows the page: Sedge, left out.
+**Beat 0 — This year's page (`S00_hook`).** *Objective: Ask Runa about the tally.* `TSM-D1`. She shows the page: Kvist, left out.
 
-**Beat 1 — The Sedges (`S01_sedges`).** *Objective: Visit the Sedge house.* `TSM-D2` (Ama, Pell). Inspects (2 required): the cot, the doorframe strokes. Optional: the spoon.
+**Beat 1 — The Kvists (`S01_sedges`).** *Objective: Visit the Kvist house.* `TSM-D2` (Ama, Pell). Inspects (2 required): the cot, the doorframe strokes. Optional: the spoon.
 
-**Beat 2 — The count (`S02_count`).** *Objective: Ask Grima what the Sedges owe.* `TSM-D3`. Two wood hauls and a meat share. Grima is not cruel: the count kept Hushfold alive when there was nothing else.
+**Beat 2 — The count (`S02_count`).** *Objective: Ask Grima what the Kvists owe.* `TSM-D3`. Two wood hauls and a meat share. Grima is not cruel: the count kept Hushfold alive when there was nothing else.
 
-**Beat 3 — Two hauls (`S03_haul_one`, `S04_haul_two`).** *Objective: Haul the Sedges' wood from the near woodstacks.* Load a sledge (3 s), pull it (carry-state, slow walk, sprint disabled) along the shelf path. Gusts: the whistle tells; stop behind a chalked face and the sledge is braced; caught in the open, the player is knocked down and the sledge slides back to the last face (never off the shelf). Unload at the Sedge woodpile (3 s). Pell joins the second haul (`TSM-B2.01`). **Crew alternative** for the physical strain: none needed (no skill), but Pell and two youths can pull with the player on either haul, halving gust knock-backs.
+**Beat 3 — Two hauls (`S03_haul_one`, `S04_haul_two`).** *Objective: Haul the Kvists' wood from the near woodstacks.* Load a sledge (3 s), pull it (carry-state, slow walk, sprint disabled) along the shelf path. Gusts: the whistle tells; stop behind a chalked face and the sledge is braced; caught in the open, the player is knocked down and the sledge slides back to the last face (never off the shelf). Unload at the Kvist woodpile (3 s). Pell joins the second haul (`TSM-B2.01`). **Crew alternative** for the physical strain: none needed (no skill), but Pell and two youths can pull with the player on either haul, halving gust knock-backs.
 
-**Beat 4 — The meat share (`S05_hunt`).** *Objective: Bring the Sedges a meat share.* Track a cliff goat on the shoulder: three sign inspects (tracks, droppings, cropped heather) narrow the ledge; take it with Hunting. **Crew alternative:** Pell's snare line for snowhares (set three snares, watch interaction ~30 s; equals a share). Carry the meat home (light carry). **TSM-E1** on the way down: the pack smelled it.
+**Beat 4 — The meat share (`S05_hunt`).** *Objective: Bring the Kvists a meat share.* Track a cliff goat on the shoulder: three sign inspects (tracks, droppings, cropped heather) narrow the ledge; take it with Hunting. **Crew alternative:** Pell's snare line for snowhares (set three snares, watch interaction ~30 s; equals a share). Carry the meat home (light carry). **TSM-E1** on the way down: the pack smelled it.
 
-**Beat 5 — First smoke (`S06_first_smoke`).** *Objective: Light the Sedge hearth at Runa's word.* At dusk Runa blows **Gather** from the hearth step; every household lights its fire. The player lights the Sedges' (interaction). **The wonder** (TSM.7).
+**Beat 5 — First smoke (`S06_first_smoke`).** *Objective: Light the Kvist hearth at Runa's word.* At dusk Runa blows **Gather** from the hearth step; every household lights its fire. The player lights the Kvists' (interaction). **The wonder** (TSM.7).
 
-**Beat 6 — The reading (`S07_reading`).** *Objective: Stand at the tally reading.* Runa reads (`TSM-D5`). She reaches the Sedges and stops. The choice. Then the player's own place.
+**Beat 6 — The reading (`S07_reading`).** *Objective: Stand at the tally reading.* Runa reads (`TSM-D5`). She reaches the Kvists and stops. The choice. Then the player's own place.
 
 **Beat 7 — Done (`S08_close`).** *Objective: Eat.* Smoke Week supper. `TSM-D7`. Quest Completed.
 
@@ -1498,7 +1498,7 @@ At first heavy snow every highstead reads its **winter tally** aloud: beds, food
 | Time | Element | Spec |
 |---|---|---|
 | 0 s | **Gather** | Runa blows Gather from the hearth step (glyph: three dots). |
-| 2–8 s | **Fires** | Doors open down the line; fires are lit in a ripple. The player lights the Sedges' last. |
+| 2–8 s | **Fires** | Doors open down the line; fires are lit in a ripple. The player lights the Kvists' last. |
 | 8–20 s | **Straight up** | In the still cold, every smoke rises straight, a row of grey columns. Snow falls straight. The shelter line goes quiet. |
 | 20–30 s | **The lean** | At one height, all the columns bend together the same way, toward the pass and the far shielings beyond it, like a row of reeds in a current. (An inversion layer moving with a high wind; nobody says so.) |
 | 30 s+ | **Runa** | `TSM-D4`: *"Smoke points at whoever's still out. Old saying."* (before TF-M5: Hushfold's column is still out at the far shielings; after TF-M5: she adds "There's nobody out this year. It still points.") |
@@ -1509,12 +1509,12 @@ At first heavy snow every highstead reads its **winter tally** aloud: beds, food
 | Step | Objective | Completes on | Req. |
 |---|---|---|---|
 | `S00_hook` | Ask Runa about the tally. | `TSM-D1` end | Yes |
-| `S01_sedges` | Visit the Sedge house. | `TSM-D2` end + 2 inspects | Yes |
-| `S02_count` | Ask Grima what the Sedges owe. | `TSM-D3` end | Yes |
-| `S03_haul_one` | Haul the Sedges' wood (1 of 2). | Carry-deposit of sledge load at Sedge woodpile | Yes |
-| `S04_haul_two` | Haul the Sedges' wood (2 of 2). | Second deposit | Yes |
-| `S05_hunt` | Bring the Sedges a meat share. | Meat (goat or snare share) carry-deposited at the Sedge house; TSM-E1 dispersed | Yes |
-| `S06_first_smoke` | Light the Sedge hearth at Runa's word. | Hearth interaction after Runa's Gather; `TSM-D4` end | Yes |
+| `S01_sedges` | Visit the Kvist house. | `TSM-D2` end + 2 inspects | Yes |
+| `S02_count` | Ask Grima what the Kvists owe. | `TSM-D3` end | Yes |
+| `S03_haul_one` | Haul the Kvists' wood (1 of 2). | Carry-deposit of sledge load at Kvist woodpile | Yes |
+| `S04_haul_two` | Haul the Kvists' wood (2 of 2). | Second deposit | Yes |
+| `S05_hunt` | Bring the Kvists a meat share. | Meat (goat or snare share) carry-deposited at the Kvist house; TSM-E1 dispersed | Yes |
+| `S06_first_smoke` | Light the Kvist hearth at Runa's word. | Hearth interaction after Runa's Gather; `TSM-D4` end | Yes |
 | `S07_reading` | Stand at the tally reading. | `TSM-D5` choice + `TSM-D6` answer | Yes |
 | `S08_close` | Eat. | `TSM-D7` end | Yes (→ Completed) |
 
@@ -1530,9 +1530,9 @@ At first heavy snow every highstead reads its **winter tally** aloud: beds, food
 
 | Option | Immediate | Cost | Later |
 |---|---|---|---|
-| **Counted** — *"Work done for a household counts for it. The hauls are the Sedges'."* | Runa writes the Sedges in, five strokes. The shelter line agrees, slowly: work is the rule, and the rule is kept. `TH_HUSHFOLD_VOICE` = true. | Grima: "So anyone can buy a place with a stranger's back." A precedent: next winter's poorest households will look for someone to haul for them. | TF-M5: Runa speaks for Hushfold with the tally in her hand. TRR: Ama ties her ribbon as a household that "kept the count". |
-| **Shared** — *"Need makes a claim. And keeping a sick man alive is Hushfold's work."* | Runa adds a new line to the tally's form: *"shelter given"*, counted as hauls. Every household's granary share is cut by a measure to carry it. `TH_HUSHFOLD_VOICE` = true. | Thinner stores for everyone; three households grumble at supper; Grima signs last. | TF-M5: Runa speaks for Hushfold and the new line is read out. TRR: the Sedges are asked to tie a ribbon by others, not by themselves. |
-| **Private** — *"Leave the tally. I'll see they eat."* | The page stands. The player's wood and meat feed the Sedges; Runa adds a sack from her own store, quietly. `TH_HUSHFOLD_VOICE` = false. | The Sedges eat and are not counted. Ama's pride. Hushfold has no agreed position to carry anywhere. | TF-M5: Runa stands alone. TRR: Ama hesitates to ask about the ribbon at all. |
+| **Counted** — *"Work done for a household counts for it. The hauls are the Kvists'."* | Runa writes the Kvists in, five strokes. The shelter line agrees, slowly: work is the rule, and the rule is kept. `TH_HUSHFOLD_VOICE` = true. | Grima: "So anyone can buy a place with a stranger's back." A precedent: next winter's poorest households will look for someone to haul for them. | TF-M5: Runa speaks for Hushfold with the tally in her hand. TRR: Ama ties her ribbon as a household that "kept the count". |
+| **Shared** — *"Need makes a claim. And keeping a sick man alive is Hushfold's work."* | Runa adds a new line to the tally's form: *"shelter given"*, counted as hauls. Every household's granary share is cut by a measure to carry it. `TH_HUSHFOLD_VOICE` = true. | Thinner stores for everyone; three households grumble at supper; Grima signs last. | TF-M5: Runa speaks for Hushfold and the new line is read out. TRR: the Kvists are asked to tie a ribbon by others, not by themselves. |
+| **Private** — *"Leave the tally. I'll see they eat."* | The page stands. The player's wood and meat feed the Kvists; Runa adds a sack from her own store, quietly. `TH_HUSHFOLD_VOICE` = false. | The Kvists eat and are not counted. Ama's pride. Hushfold has no agreed position to carry anywhere. | TF-M5: Runa stands alone. TRR: Ama hesitates to ask about the ribbon at all. |
 
 **The player's place.** Yes: *"Expected."* Runa writes the player's name under "expected from the path" and every Hushfold and Nettlehook host uses it from then on (`TSM_PLAYER_TALLIED`; bible §5.3 rule 4; nothing else changes). No: *"Not this year."* "Walker" stays. Neither affects `TH_HUSHFOLD_VOICE`.
 
@@ -1565,7 +1565,7 @@ At first heavy snow every highstead reads its **winter tally** aloud: beds, food
 | **Name address** | Dialogue system | Hosts' lines swap "walker" for the player's name on `TSM_PLAYER_TALLIED` or `TME01_TALLIED` (TME01, Settlements and Combat file). |
 | Creatures | Encounters package | Ridge Wolf runner (snatch), howler. |
 
-**Mystery ledger.** *Who the traveller was:* author truth unspecified; a walker with a fever who got well and left. **Never identified** (no cross-region tie; the spoon is unremarkable work). *Wrong reading:* the Sedges were hiding someone dangerous. Self-contained.
+**Mystery ledger.** *Who the traveller was:* author truth unspecified; a walker with a fever who got well and left. **Never identified** (no cross-region tie; the spoon is unremarkable work). *Wrong reading:* the Kvists were hiding someone dangerous. Self-contained.
 **Open decisions.** (1) The new tally line "shelter given" is a custom change [NEW]; TF-M5 may read it aloud (request). (2) Whether Elira's storekeepers appear: with `TH_STORES` = seized, one Runa line notes the granary is fuller this year (`TSM-D5.03`); no other link.
 
 | Review finding | Revision |
@@ -1582,8 +1582,8 @@ At first heavy snow every highstead reads its **winter tally** aloud: beds, food
 | Speaker | Knows | Doesn't know | Voice |
 |---|---|---|---|
 | **Runa Weatherall** | The tally, every household. Her family "came over in the thaw". | Anything about the Gatefall (TF-M5). | Warm, tired, proud. Says "we" for the whole line. |
-| **Ama Sedge** [NEW] | The traveller, the three weeks, the fever. | His name beyond "Tam, he said". | Proud, short, will not ask. |
-| **Pell Sedge** [NEW] | Snares, the shelf path. | Why adults are so slow about everything. | Fifteen, keen, embarrassed by his mother's pride. |
+| **Ama Kvist** [NEW] | The traveller, the three weeks, the fever. | His name beyond "Tam, he said". | Proud, short, will not ask. |
+| **Pell Kvist** [NEW] | Snares, the shelf path. | Why adults are so slow about everything. | Fifteen, keen, embarrassed by his mother's pride. |
 | **Grima Loft** [NEW] | Every haul for thirty winters. | How to say yes quickly. | Hard, fair, counting. |
 
 #### Barks
@@ -1591,7 +1591,7 @@ At first heavy snow every highstead reads its **winter tally** aloud: beds, food
 | Id | Speaker | Condition | Line |
 |---|---|---|---|
 | TSM-B1.01 | Pell | Available, at Nettlehook | *"You're the one who fixed the rope. Hushfold's tally's wrong. Mam won't say. I'm saying."* |
-| TSM-B1.03 | Runa | Active, returns | *"Page is still open. So is the Sedges' door."* |
+| TSM-B1.03 | Runa | Active, returns | *"Page is still open. So is the Kvists' door."* |
 | TSM-B2.01 | Pell | Second haul | *"I'll take the front. You take the gusts."* |
 | TSM-B2.02 | Grima | Watching a haul | *"That's a haul. Badly loaded. Still a haul."* |
 | TSM-B3.01 | Hushfold host | `TSM_PLAYER_TALLIED` | *"{PLAYER}. You're expected. Bed by the door's yours if you want it."* |
@@ -1601,7 +1601,7 @@ At first heavy snow every highstead reads its **winter tally** aloud: beds, food
 
 ```
 TSM-D1.01 RUNA: (book open on the stand) "Smoke Week. We read the tally on the last night. We're always proud of it."
-TSM-D1.02 RUNA: "Not this page." (turns it) "Sedge. Left out. Two hauls and a meat share short."
+TSM-D1.02 RUNA: "Not this page." (turns it) "Kvist. Left out. Two hauls and a meat share short."
   > "Why short?"                                           → TSM-D1.10
   > "Who decides?"                                         → TSM-D1.20
 TSM-D1.10 RUNA: "They nursed a sick walker three weeks. We kept them back from shared work. Fever. Nobody knew what it was."
@@ -1641,16 +1641,16 @@ TSM-D4.02 [TF-M5 Completed] RUNA: "There's nobody out this year." (beat) "It sti
 
 ```
 TSM-D5.01 RUNA: (reading) "Weatherall: beds four, hauls five, meat two. Loft: beds two, hauls five, meat one..." (and on, through the line)
-TSM-D5.02 RUNA: (reaches the page's end; stops) "Sedge."
+TSM-D5.02 RUNA: (reaches the page's end; stops) "Kvist."
 TSM-D5.03 [TH_STORES = seized] RUNA: "Granary's fuller than last year. Elira's people brought sacks up. Nobody asked from where."
 TSM-D5.04 GRIMA: "Two hauls short, one meat."
 TSM-D5.05 PELL: "They're hauled. The walker hauled them. I was there."
 TSM-D5.06 RUNA: (to the player) "You did the work. Say what it counts for. Then we'll argue."
-  > "Work done for a household counts for it. The hauls are the Sedges'."            → TSM-D5.10
+  > "Work done for a household counts for it. The hauls are the Kvists'."            → TSM-D5.10
   > "Need makes a claim. And keeping a sick man alive is Hushfold's work."           → TSM-D5.20
   > "Leave the tally. I'll see they eat."                                            → TSM-D5.30
 TSM-D5.10 GRIMA: "So anyone can buy a place with a stranger's back." (beat) "...It's hauled. I said it was hauled."
-TSM-D5.11 RUNA: (writes five strokes) "Sedge: hauls five." (to the room) "We count the work. We always have."   {set TSM_CLAIM = counted; set TH_HUSHFOLD_VOICE}  → TSM-D6.01
+TSM-D5.11 RUNA: (writes five strokes) "Kvist: hauls five." (to the room) "We count the work. We always have."   {set TSM_CLAIM = counted; set TH_HUSHFOLD_VOICE}  → TSM-D6.01
 TSM-D5.20 RUNA: (long pause) "A new line." (writes) "'Shelter given.' Counted as hauls."
 TSM-D5.21 GRIMA: "That's a measure off every house."
 TSM-D5.22 RUNA: "Yes." (beat) "We kept a man alive. We'll be a measure hungry for it."
@@ -1679,7 +1679,7 @@ TSM-D7.04 AMA: "Pell."
 
 | Id | Object | Text |
 |---|---|---|
-| TSM-I1.01 | Tally page | *"Households in a column, strokes for hauls. The Sedge line ends after two strokes, and a line is drawn under it."* |
+| TSM-I1.01 | Tally page | *"Households in a column, strokes for hauls. The Kvist line ends after two strokes, and a line is drawn under it."* |
 | TSM-I1.02 | The cot | *"Made up neatly. A fever-cloth folded on the pillow, washed thin."* |
 | TSM-I1.03 | Doorframe strokes | *"Two split-wood strokes. Every other door on the line has five."* |
 | TSM-I1.04 | Spoon (optional) | *"A carved spoon. Plain work, not Hushfold's pattern. Left on the shelf like a thank-you."* |
@@ -1691,7 +1691,7 @@ TSM-D7.04 AMA: "Pell."
 
 ### TRR.1 The quest in one paragraph
 
-Aud Hammerlee has finally replaced the storm patch the player helped throw across the **Narrows** with a proper span, and a span made permanent is raised the old way: **Rope-Raising Day**. A bridgewright crew inspects it in front of an apprentice and a regular traveller, so that no crew's knowledge becomes private power; Aud asks the player to be the traveller. Then the children of every highstead carry the **unweighted guide line** across, hand over hand, while an adult walks ahead calling them forward between gusts; this year that adult is the player, with a horn. Thyra Brack brings the old guide line from Three Calls so a strand of it can be spliced into the new one, and its knots turn out to be a notation, every tenth knot doubled, that the old crews used for something they did not write down. Elders judge knots, and the player's knot is judged with everyone's, badly or well. At the meal, Ama Sedge asks, or does not quite ask, whether a clanless household may tie a **witness ribbon** on the span, as the clan households do. Ressa checks the safety; Hadrik eats and listens and does not let it become a vote. When the guide line touches the far anchor, every horn post in earshot blows Rest at once, and the Narrows throws it back as one chord.
+Aud Hammerlee has finally replaced the storm patch the player helped throw across the **Narrows** with a proper span, and a span made permanent is raised the old way: **Rope-Raising Day**. A bridgewright crew inspects it in front of an apprentice and a regular traveller, so that no crew's knowledge becomes private power; Aud asks the player to be the traveller. Then the children of every highstead carry the **unweighted guide line** across, hand over hand, while an adult walks ahead calling them forward between gusts; this year that adult is the player, with a horn. Thyra Brack brings the old guide line from Three Calls so a strand of it can be spliced into the new one, and its knots turn out to be a notation, every tenth knot doubled, that the old crews used for something they did not write down. Elders judge knots, and the player's knot is judged with everyone's, badly or well. At the meal, Ama Kvist asks, or does not quite ask, whether a clanless household may tie a **witness ribbon** on the span, as the clan households do. Ressa checks the safety; Hadrik eats and listens and does not let it become a vote. When the guide line touches the far anchor, every horn post in earshot blows Rest at once, and the Narrows throws it back as one chord.
 
 **Remember:** the chord, and twenty children cheering inside it. **Want next:** the Assembly, where the highsteads stand (TF-M5).
 
@@ -1807,8 +1807,8 @@ Ama's opener depends on `TSM_CLAIM`: counted, she asks herself; shared, others a
 
 | Option | Immediate | Cost | Later |
 |---|---|---|---|
-| **Everyone** — *"Everyone ties one. Clan or not. One span, one row."* | Aud hands out ribbons from every basket and a new one; every household, clan or clanless, ties one on the near rail. `TH_HIGHSTEADS_TOGETHER` = true. | A few clan elders feel their ribbons mean less now; Osk ties his last and says nothing. The Sedges' ribbon is one among many and nobody sees it particularly. | TF-M5: the highsteads stand as one block. Narrows bark: a rail of ribbons. |
-| **Witness** — *"The Sedges tie a witness ribbon. As witnesses, not as a clan."* | Ama ties a plain ribbon on the far rail, apart, as Part 3's nonstructural witness ribbon: belonging made visible without a clan oath. `TH_HIGHSTEADS_TOGETHER` = true. | It marks the Sedges out. Ama: "Everyone will know which one's ours." That's the point, and it's also the cost. | TF-M5: highsteads stand together with Hushfold at the front. |
+| **Everyone** — *"Everyone ties one. Clan or not. One span, one row."* | Aud hands out ribbons from every basket and a new one; every household, clan or clanless, ties one on the near rail. `TH_HIGHSTEADS_TOGETHER` = true. | A few clan elders feel their ribbons mean less now; Osk ties his last and says nothing. The Kvists' ribbon is one among many and nobody sees it particularly. | TF-M5: the highsteads stand as one block. Narrows bark: a rail of ribbons. |
+| **Witness** — *"The Kvists tie a witness ribbon. As witnesses, not as a clan."* | Ama ties a plain ribbon on the far rail, apart, as Part 3's nonstructural witness ribbon: belonging made visible without a clan oath. `TH_HIGHSTEADS_TOGETHER` = true. | It marks the Kvists out. Ama: "Everyone will know which one's ours." That's the point, and it's also the cost. | TF-M5: highsteads stand together with Hushfold at the front. |
 | **Old line** — *"Tie it on the old Three Calls line. It's carried more people than this span has."* | The ribbon goes on the old guide line, which Thyra takes home to hang in the shelter. `TH_HIGHSTEADS_TOGETHER` = false. | No row on the span; no argument on the day; the highsteads go home separately. | TF-M5: Nettlehook stands with its clan neighbours. Thyra hangs the line by the horn map; it is still there. |
 
 None is wrong.
@@ -1857,7 +1857,7 @@ None is wrong.
 | Speaker | Knows | Doesn't know | Voice |
 |---|---|---|---|
 | **Aud Hammerlee** | Every lashing. The custom. | The old line's notation. | Swears at rope affectionately. Loves being corrected by a traveller. |
-| **Ama Sedge** | What a ribbon means to clan households. | Whether she's allowed. | Will not ask; asks anyway, badly. |
+| **Ama Kvist** | What a ribbon means to clan households. | Whether she's allowed. | Will not ask; asks anyway, badly. |
 | **Thyra Brack** | That the old line is old. | What the knots counted. | Dry. |
 | **Ressa Highcrag** | Safety. | — | One word where three would do. |
 | **Hadrik Stonewake** | That the Assembly is afraid; who brought bread. | — | Gentle, wry, refuses to be the decision. |
@@ -1912,13 +1912,13 @@ TRR-D4.03 [TNR_ROTA = lots] AUD: "Judges by lot this year. Osk's idea. I'm still
 
 ```
 TRR-D5.01 [TSM_CLAIM = counted] AMA: (to Aud, then the player) "Hushfold hauled for this span. Some of us. We'd tie a ribbon. If it's allowed."
-TRR-D5.01 [TSM_CLAIM = shared] RUNA: "The Sedges kept a man alive and Hushfold went a measure short for it. They should tie a ribbon." AMA: "Runa—"
+TRR-D5.01 [TSM_CLAIM = shared] RUNA: "The Kvists kept a man alive and Hushfold went a measure short for it. They should tie a ribbon." AMA: "Runa—"
 TRR-D5.01 [TSM_CLAIM = private] PELL: "Mam wants a ribbon." AMA: "I don't." PELL: "She does."
 TRR-D5.02 AUD: "Ribbons are clan custom. Not law. There's no law about ribbons. I've looked."
 TRR-D5.03 OSK: "Custom is how we know who's ours."
 TRR-D5.04 AUD: (to the player) "Traveller. You walked the span and the line. Where does it go?"
   > "Everyone ties one. Clan or not. One span, one row."                                  → TRR-D5.10
-  > "The Sedges tie a witness ribbon. As witnesses, not as a clan."                        → TRR-D5.20
+  > "The Kvists tie a witness ribbon. As witnesses, not as a clan."                        → TRR-D5.20
   > "Tie it on the old Three Calls line. It's carried more people than this span has."      → TRR-D5.30
 TRR-D5.10 AUD: (tipping the baskets out) "Everyone. Here's a pile. Take one." OSK: (last; ties his without a word)   {set TRR_RIBBON = everyone; set TH_HIGHSTEADS_TOGETHER}
 TRR-D5.20 AMA: "Everyone will know which one's ours." (beat) "Good."   {set TRR_RIBBON = witness; set TH_HIGHSTEADS_TOGETHER}

@@ -1491,7 +1491,7 @@ TFS-D7.05 SOLVEIG: "The hearth's yours when you're passing. Bring something for 
 |---|---|
 | Content id (suggested) | `thornfell.side.bridge_that_chose` |
 | Type | Settlement (Windscar), Smithing. Bible §7.2 brief. |
-| Unlock | TF-M1 Completed. Offered at the Passwatch-side bridgehead of the Narrows after a storm (any visit after TF-M1; per-player presentation of the cracked state). |
+| Unlock | TF-M1 Completed. Offered by Aud's bark at the Passwatch-side bridgehead of the Narrows after a storm (any visit after TF-M1). The cracked state is per-player and shows **only while TBC is Active**; the scree path is walkable regardless (Zones §6.2). |
 | Resume hook | Aud Hammerlee at her field forge: "Bridge is still broken. I've been swearing at it in your absence." |
 | Skills | Smithing (required), Melee (light) |
 | Combat share | ~10% (two pass bandits at the bridgehead, they yield) |
@@ -1651,7 +1651,7 @@ No plan and no account option is wrong. Every load crosses.
 | Updraft snow | VFX | Local particle override inside the gap volume for ~9 s. |
 | Repair post carving | Art | Prop swap with one or two lines by `TBC_WAIT_NAMED`. |
 | Lowmark state read | Schema | Read `lowmark.side.night_bridge` Completed and its `NB_*` outcome flag for variant lines only. |
-| Cracked-bridge state | 33.1.B2 | Per-player bridge state after TF-M1 until TBC completes. |
+| Cracked-bridge state | 33.1.B2 | Per-player bridge state: cracked only while TBC is Active, mended on Completed; scree path walkable regardless (Zones §6.2, canonical). |
 
 ### TBC.12 Economy dependencies
 
@@ -1822,7 +1822,7 @@ TBC-D8.06 AUD: "Forge is here. Use it. Swear at it. It likes that."
 1. **Braid 2 callback** (`TBC-D7.50`–`.57`) is optional and reads Lowmark NB state only. If the Director prefers no Lowmark read in Thornfell side content, delete those nodes; nothing else changes.
 2. **TD-5:** the post's "who waited" line is a small local practice, not the Assembly's closure account (TF-M5 adopts that). Act III author may echo it (request: one Aud line at the Assembly if `TBC_WAIT_NAMED`).
 3. **EC-02 stock:** recommend plain carbon steel stock for parity; ridge iron only if EC-01 lands.
-4. The cracked-bridge state after TF-M1 needs the zone package to support a per-player Narrows state (TF-M1 leaves it patched; TBC's storm breaks it again; TRR needs it permanent after TBC or regardless: sister package to confirm).
+4. **Resolved (Zones §6.2):** the Narrows has one per-player state machine; TBC shows it cracked only while TBC is Active; TRR's permanent span applies regardless of TBC.
 
 ### TBC.16 Review log
 
@@ -1833,6 +1833,7 @@ TBC-D8.06 AUD: "Forge is here. Use it. Swear at it. It likes that."
 | Early wonder was a singing span. | Cut: TNR owns the singing cable and TRR the Narrows chord. Replaced with updraft snow. Echo at the Narrows avoided (TTH owns it). |
 | GRANDMOTHER's memory could reveal R06. | She names no closing, date or place; it supports the misunderstanding ladder only. |
 | Lowmark callback risked a route claim. | Aud names no river, crossing or direction; it is hearsay and optional. |
+| Cracked state ran "after TF-M1 until TBC completes", showing a broken bridge to players who never took TBC (Batch 4 review, Zones Z-1). | Cracked only while TBC is Active; offered by Aud's bark; scree path walkable regardless (TBC.1, TBC.11, open decision 4). |
 
 ---
 
@@ -1880,3 +1881,4 @@ TBC-D8.06 AUD: "Forge is here. Use it. Swear at it. It likes that."
 | Quest items | None; carry-state and stations only. |
 | Lowmark independence | Only TBC reads Lowmark state, for optional lines. |
 | **Independent review (2026-11-03)** | 6 findings (1 high, 3 medium, 2 low). High: TST granted the first Ranged weapon while S01 is open and release scope may not grow; TST.15's fallback is now the default (stave racked unstrung, the player calls lulls for Brita), and the bow, arrows and Ranged lesson are kept only as **[PROPOSAL — DIRECTOR]** gated on S01 (summary, beats, steps, rewards, integration, open questions). Medium: TSR's Asa Grell collided with TWN's Asa Brede; renamed **Dagny Grell**; a plot-list "Orm" collided with Orm Brede; renamed **Eyolf**. Medium: bowyer Hild Crane collided with "Hild, a weaver" on Act III's closure roster; renamed **Brita Crane** (`TST_HILD_BENCH` → `TST_BRITA_BENCH`). Medium: Bera's herding horn was a gift; now a carry-state loan only if the TF-M1 practice horn is not carried. Low: TFS verse confirmed as canonical; TTH now quotes it. Low: Ranged mentions gated on S01. |
+| **Batch 4 handoff review (2026-11-03)** | 1 finding (medium). TBC's cracked Narrows state ran from TF-M1 until TBC completed, contradicting the Batch 4 bridge model. Smallest edit: TBC.1 Unlock and TBC.11 now show the bridge cracked only while TBC is Active (scree path walkable regardless); TBC.15 open decision 4 marked resolved; TBC.16 row added. No other text changed. |

@@ -1,6 +1,6 @@
 # Thornfell — Narrative Production Bible
 
-**Status (2026-11-02):** Authored production direction, in review state. This is the controlling document for every Thornfell quest, NPC, dialogue, encounter, discovery and world-content package. It turns the approved narrative architecture (`Caelmor_Narrative_Architecture.md` and its four companion files; rulings in `Caelmor_Narrative_Architecture_Review_and_Authoring_Sequence.md` §5.0) into a concrete, playable slate for the Thornfell Marches. Everything marked **[NEW]** is authored and not canon until the Creative Director promotes it. Everything marked **[PROPOSAL — DIRECTOR]** is a consequential story choice the content is built on but that Collin may replace; §3 lists exactly what changes if he does.
+**Status (2026-11-03):** Authored production direction, in review state. All four production batches are authored and reviewed (§12). This is the controlling document for every Thornfell quest, NPC, dialogue, encounter, discovery and world-content package. It turns the approved narrative architecture (`Caelmor_Narrative_Architecture.md` and its four companion files; rulings in `Caelmor_Narrative_Architecture_Review_and_Authoring_Sequence.md` §5.0) into a concrete, playable slate for the Thornfell Marches. Everything marked **[NEW]** is authored and not canon until the Creative Director promotes it. Everything marked **[PROPOSAL — DIRECTOR]** is a consequential story choice the content is built on but that Collin may replace; §3 lists exactly what changes if he does.
 
 **Scope guard.** Thornfell is the Phase 1.3 v1.5 direction. Only Lowmark is approved for release. This package authorizes **no** release scope, no schema, no production JSON and no C#. It is schema-ready markdown for the day Roadmap 31.2/31.3/31.5 exist (Master Protocol §5.1). Technical needs are documented for later integration in the integration handoff (§12, Batch 4), never implemented here.
 
@@ -277,7 +277,7 @@ Three **interconnected questlines** (8 quests) and twelve standalone quests. 13 
 | Code | Quest | Phase 1.5 type | Unlock | Where | Core verb | One-line pitch | Systems link | Cross-region |
 |---|---|---|---|---|---|---|---|---|
 | TSR | **Seam Rights** | Skill intro (Mining) | After TF-M1 | Red Slope Terraces | prospect, mine, judge | Two highsteads want the same ridge-iron seam; one runs under the war's refuge plots. Echo-sound the rock (tap and count) to tell grave voids from ore, and find a seam that doesn't take the dead's ground. | Mining intro; Gerrit Carrick cameo | None |
-| TST | **Stormwood** | Skill intro (Woodcutting, Fletching) | After TF-M1 | Burned Slope, Stonewake bowyer | select, cut, string | A bowyer will only teach someone who can pick wood the wind has already tested. | Woodcutting/Fletching intro; first Ranged weapon | None |
+| TST | **Stormwood** | Skill intro (Woodcutting, Fletching) | After TF-M1 | Burned Slope, Stonewake bowyer | select, cut, string | A bowyer will only teach someone who can pick wood the wind has already tested. | Woodcutting/Fletching intro; the first Ranged weapon is a [PROPOSAL — DIRECTOR] gated on economy decision S01 (default: the stave is hung unstrung) | None |
 | TGY | **Goat Year** | Skill intro (Hunting, Leatherworking) | After TF-M1 | Goat Ledges | track, cull or drive, tan | A ram herd is knocking travellers off the shoulder path. Cull the old ram, or drive the herd to other ledges using the Gather and Fall calls the goats already obey, then learn goat leather. | Hunting and Leatherworking intro | None |
 | TFS | **First Smoke** | Skill intro (Cooking) | After TF-M2 (first snow) | Nettlehook longhouse | hunt, cook, tell | The first true winter night: bring the meal and a ridiculous weather story. The best story wins. The children's verse "third call too late" is sung (seed for *The Third Horn*). | Cooking intro; snowhare | None |
 | TBC | **The Bridge That Chose** | Settlement (Windscar) | After TF-M1 | The Narrows | triage, smith, account | A storm cracks the Narrows again with escorts, grain and families all waiting. Smith the fittings, then make a triage plan the waiting can see. | Smithing; Aud's commissions | Optional Lowmark repair-credit callback (Part 4 braid 2) |
@@ -293,7 +293,7 @@ Three **interconnected questlines** (8 quests) and twelve standalone quests. 13 
 
 **Structure check.** No two side quests share a core verb and setting. Combat is the core in TGM and TSG; present but secondary in TPW-adjacent TBC, TAS, TGY, TSL. Talk-led resolution is limited to closing beats.
 
-**Skill coverage.** Mining (TSR, TF-M3), Woodcutting (TST, TF-M1), Fletching and Ranged (TST), Hunting (TGY, TFS, TSM), Leatherworking (TGY), Cooking (TFS), Smithing (TF-M1, TBC, TAS), Melee (all combat). No main milestone hard-gates on a skill; every skill step has a crew alternative.
+**Skill coverage.** Mining (TSR, TF-M3), Woodcutting (TST, TF-M1), Fletching (TST; Ranged only if S01 allows), Hunting (TGY, TFS, TSM), Leatherworking (TGY), Cooking (TFS), Smithing (TF-M1, TBC, TAS), Melee (all combat). No main milestone hard-gates on a skill; every skill step has a crew alternative.
 
 ### 7.3 Micro-events (10; Phase 1.5 range 6–10)
 
@@ -475,9 +475,11 @@ Nine families (Phase 1.5 §4.1) from dossier ecology. Cliff goats, fell stags ou
 |---|---|---|
 | 1 | This bible | `Quests/Caelmor_Thornfell_Narrative_Production_Bible.md` |
 | 2 | Milestone packages and dialogue | `Quests/Caelmor_Thornfell_Main_Act_I.md` (TF-M1, TF-M2), `_Act_II.md` (TF-M3, TF-M4), `_Act_III.md` (TF-M5) and matching `Dialogue & Narrative/Caelmor_Thornfell_Main_Act_<n>_Dialogue.md` |
-| 3 | Side quests, micro-events, discoveries | `Quests/Caelmor_Thornfell_Side_Quests_Horn_and_Highsteads.md` (TTH, TWG, TNK, TNR, TSM, TRR); `…_Banner_and_Memory.md` (TSL, TWC, TWN, TSN, TOS); `…_Work_and_Skills.md` (TSR, TST, TGY, TFS, TBC); `…_Settlements_and_Combat.md` (TMM, TAS, TGM, TSG, TME01–TME10, TD01–TD10) |
+| 3 | Side quests, micro-events, discoveries | `Quests/Caelmor_Thornfell_Side_Quests_Horn_and_Highsteads.md` (TTH, TWG, TNK, TNR, TSM, TRR); `…_Banner_and_Memory.md` (TSL, TWC, TWN, TSN, TOS); `…_Work_and_Skills.md` (TSR, TST, TGY, TFS, TBC); `…_Settlements_and_Combat.md` (TMM, TAS, TGM, TSG, TME01–TME10, TDS01–TDS10) |
 | 4 | Encounters, POIs, integration handoff | `Enemies/Caelmor_Thornfell_Encounter_and_Enemy_Requirements.md`; `Zones/Caelmor_Thornfell_POI_and_Zone_Requirements.md`; `Quests/Caelmor_Thornfell_Integration_Requirements.md` |
 | 5 | Independent review and fix pass | Revisions in place; review log in each package |
+
+**Production status (2026-11-03):** Batches 1–3 are committed and independently reviewed (bible 9b84c32; main acts bcc60d9, 24 findings fixed; side quests 655499f, 27 findings fixed). Batch 4 handoffs are committed after their own review. Everything stays in review state: [NEW] and [PROPOSAL — DIRECTOR] material is not canon until the Director rules on it. The packages renamed a few minor characters to avoid collisions (Sig Brede, the Lunde and Kvist households, the Tofte carters, Dagny Grell, Brita Crane), and the Batch 3 discovery flags are `TDS##_SEEN` / `TDS##_READ`.
 
 **Production dependencies (not narrative work):** quest step/flag schema (Roadmap 31.3), dialogue schema (31.5), NPC schema (31.2), zone and encounter data (31.4, 33.7), runtime step tracking (24.1), and the Systems Engineer's availability. Nothing here waits on them; nothing here implements them.
 
