@@ -73,10 +73,20 @@ def main():
         members=len(bundle.namelist())
     for name in ('installed_smithy.json','installed_gatehouse.json','installed_legacy.json'):
         assert read(OUT/name)['archive_sha256']==archive_hash
+    historical=0
+    for folder in ('archetypes_v05','function_v06','function_v07'):
+        base=ROOT/'evidence'/folder
+        for path in (base/'manifests').glob('*.json'):
+            for row in read(path)['records']:
+                for v in row['views']:
+                    assert sha(base/v['image'])==v['image_sha256']
+                    historical+=1
+    assert historical==448
     report={'valid':True,'source_revisions':revisions,'images_verified':counts,'comparison_sheets':6,
         'geometry_costs':cost,'geometry_hashes':geometry,'archive_sha256':archive_hash,'archive_members':members,
         'native_integration_cases':len(mesh['cases']),'targeted_final_native_cases':len(targeted['cases']),
         'late_native_source_changes':sorted(changes),
+        'historical_images_matching_retained_manifests':historical,
         'scope':'Fixed-camera matched imagery, actual mesh gate correspondence, two lifecycle checks and final archive identity. Technical evidence; Creative Director art acceptance remains pending.'}
     (OUT/'verification.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report,indent=2))

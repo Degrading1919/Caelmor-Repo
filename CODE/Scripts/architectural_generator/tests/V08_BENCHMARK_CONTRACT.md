@@ -41,7 +41,8 @@ not presented as a medieval Caelmor prototype and its design is not copied.
 supports the distinction between guarded passage, courtyard-accessed guardrooms
 and accommodation above; its exceptional scale and exact tower design are not
 adopted. Existing archaeological forge guidance remains a process reference.
-All generated geometry and code remain original under the add-on's existing GPL.
+The new implementation is original and retains the add-on's existing
+GPL-3.0-or-later license. No reference assets or implementation code were copied.
 
 ## Observable acceptance set
 

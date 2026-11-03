@@ -1,0 +1,57 @@
+{
+  "stage": "after",
+  "source_revision": "e5070b4",
+  "generator_source_sha256": {
+    "__init__.py": "12f364b5ab3d06c8cdc3e46949d2e444ce56eec985cbb4b1bc2ddd91208ebb58",
+    "benchmark_construction.py": "4ec72e47bdd9f1f867faa02abf139c03d5920fb3512b5e0a762638a7b312db36",
+    "benchmark_gatehouse.py": "fec6f86d9688d4a635b43c739ddbc92ccc9f121968cf018329f7c07e3f3cf78a",
+    "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
+    "blender_manifest.toml": "f9010658cc82004d064416db5356e16bb3ddb7742bc4c5fe2a4b20d30a01f53c",
+    "engine.py": "89979c9f9012a50b9155f66f7cd56c8796bd7fed0271802dc996bdf5b2a6580e",
+    "facade.py": "44a1d926cc16496917fc18be7b2c4385193eea55b9377e37c19c935c1c3bee0a",
+    "function_work.py": "410de667f732496f01cb8b13b58e8ec61abbee567748f6f4a6c5d2d84e394add",
+    "function_yard.py": "a7d05edd0f83d0ae9ec51c026e0556289f075482eb01a24214b3623aead75948",
+    "functional.py": "10f719e1db914f5bfc3e1958fe5c0fd323d2e75d8bd02e71f068117a1ad96baa",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "LICENSE": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+    "materials.py": "f5cbe097db77cb9bcad2560b6289e394e6ed5ff93fc377aa288405cfd0b22bdb",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "c75db94854a1db0bf777a6433bd8067e4031194834c4f8048887f1959db494f4",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+  },
+  "render_source_sha256_by_case": {
+    "SMITHY": {
+      "render_architectural_benchmarks.py": "e3bc25141b237e1c23609e43a31106956dacbe961a998014270e02cadde423bb",
+      "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+    },
+    "GATEHOUSE": {
+      "render_architectural_benchmarks.py": "e3bc25141b237e1c23609e43a31106956dacbe961a998014270e02cadde423bb",
+      "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+    }
+  },
+  "cases": [
+    {
+      "function": "SMITHY",
+      "region": "LOWMARK",
+      "manifest": "cases/smithy.json",
+      "manifest_sha256": "66e6dc841353253653cae9d762aa97f37ddbf8f75de20e5ebe7cc368d99fae1e",
+      "image_count": 12,
+      "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367"
+    },
+    {
+      "function": "GATEHOUSE",
+      "region": "THORNFELL",
+      "manifest": "cases/gatehouse.json",
+      "manifest_sha256": "9509b67ea46a280febfa3c603d086c16d8b5b4005db540af2cb0bebd6a4003b3",
+      "image_count": 12,
+      "geometry_hash": "4b7472cc506bae5d4db82b9aa1336277195cebee072995e9f09294bc27946ec3"
+    }
+  ],
+  "case_count": 2,
+  "image_count": 24,
+  "source_unchanged_during_capture": true
+}
