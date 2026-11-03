@@ -109,7 +109,7 @@ class FunctionWorkTests(unittest.TestCase):
         _, kwargs, _ = ctx.masses[0]
         aperture = kwargs["open_access"][0]
         self.assertEqual(aperture["edge_index"], 0)
-        self.assertEqual(aperture["height"], 2.8)
+        self.assertEqual(aperture["height"], 3.0)
         self.assertEqual(kwargs["open_edges"], [0,3])
 
 
@@ -146,6 +146,20 @@ class ActualFunctionGenerationTests(unittest.TestCase):
         self.assertEqual(plan.functional_program["function"], "MARKET_HALL")
         self.assertEqual(len([row for row in plan.functional_program["stations"]
                               if "counter" in row["key"]]), 12)
+
+    def test_thornfell_smithy_is_a_front_visible_shallow_stone_workshop(self):
+        plan,buffers=self._generate_and_validate("SMITHY","THORNFELL")
+        mass=plan.world_zones[0]
+        self.assertEqual(mass.bounds,(0,0,8.8,4.8))
+        self.assertEqual(mass.plan.open_edges,{0,3})
+        self.assertEqual(mass.plan.settings.floor_height,3.5)
+        self.assertEqual(mass.plan.settings.pitch,42)
+        self.assertEqual(mass.plan.roof_mode,"GABLE")
+        stack=next(buffer for buffer in buffers if "external_flue" in buffer.name)
+        self.assertLess(max(p[0] for p in stack.vertices),-.38)
+        self.assertGreater(max(p[2] for p in stack.vertices),mass.eave+1.5)
+        self.assertTrue(any(a["key"]=="smithy.material_ramp"
+                            for a in plan.functional_program["approaches"]))
 
     def test_lowmark_smithy_front_rays_reach_open_hearth(self):
         plan, buffers = self._generate_and_validate("SMITHY", "LOWMARK")
@@ -196,6 +210,15 @@ class ActualFunctionGenerationTests(unittest.TestCase):
                     side_gap=side_hits[0][0]-(x1-side_origin[0])
                     self.assertGreaterEqual(side_gap,.149,
                                             "material lane reaches into the closed side wall")
+                if region in ("THORNFELL","MIRE","EMBERHOLT"):
+                    self.assertGreaterEqual(route["bounds"][3]-route["bounds"][0],1.4)
+                if region in ("THORNFELL","EMBERHOLT"):
+                    self.assertTrue(any(a["key"]=="smithy.material_ramp"
+                                        for a in smithy.functional_program["approaches"]))
+                if region=="THORNFELL":
+                    hearth_hits=_ray_hits((1.8,-.1,mass.base+.46),(0,1,0),mass.depth+.2,buffers)
+                    self.assertTrue(any("hearth_firebed" in b.name for _,b in hearth_hits),
+                                    "Thornfell front ray does not reach its forge")
             with self.subTest(region=region,function="MARKET_HALL"):
                 market,buffers=self._generate_and_validate("MARKET_HALL",region)
                 mass=market.world_zones[0]
@@ -225,6 +248,9 @@ class ActualFunctionGenerationTests(unittest.TestCase):
                         clearance=hits[0][0]-.025
                         self.assertGreaterEqual(clearance,.149,
                                                 f"{side} vendor stand enters the wall thickness")
+                if region in ("LOWMARK","THORNFELL"):
+                    approaches={a["key"] for a in market.functional_program["approaches"]}
+                    self.assertTrue({"market.front_approach","market.rear_approach"}.issubset(approaches))
 
     def test_market_hall_allocates_two_to_four_bays_without_aisle_stalls(self):
         for wealth, expected in (("MODEST", 2), ("ESTABLISHED", 3), ("AFFLUENT", 4)):

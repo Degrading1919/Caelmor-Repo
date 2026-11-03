@@ -63,6 +63,21 @@ def archetype_gallery(args):
     for function in functions:
         if function not in TYPE_SPECS:raise ValueError('Unsupported archetype '+function)
         manifest_path=out/'manifests'/f'{function.lower()}.json'
+        retained=[]
+        if args.gallery_refresh and manifest_path.exists():
+            old=json.loads(manifest_path.read_text())
+            if old['settings_contract']!=contract:raise RuntimeError('Refresh settings changed: '+function)
+            for row in old['records']:
+                if row['region'] in args.regions:continue
+                row.setdefault('source_revision',old['source_revision'])
+                row.setdefault('source_sha256',old['source_sha256'])
+                row.setdefault('render_source_sha256',old['render_source_sha256'])
+                # Retain only exact geometry. Original render provenance stays
+                # attached to the row; this is not a pixel identity assertion.
+                retained_plan,retained_buffers=generate(Settings(**row['settings']))
+                if geometry_hash(retained_buffers)!=row['geometry_hash']:
+                    raise RuntimeError('Retained geometry changed; include region: '+row['region'])
+                retained.append(row)
         if args.gallery_resume and manifest_path.exists():
             old=json.loads(manifest_path.read_text())
             if (old['source_sha256']!=source or old['render_source_sha256']!=render_source
@@ -81,6 +96,8 @@ def archetype_gallery(args):
         for region in args.regions:
             settings=Settings(function=function,region=region,**contract)
             row={'function':function,'region':region,'label':TYPE_SPECS[function].label,
+                 'source_revision':args.source_revision,'source_sha256':source,
+                 'render_source_sha256':render_source,
                  'settings':asdict(settings),'resolved_context':resolve_settings(settings).context,
                  'status':'pending','views':[]}
             records.append(row)
@@ -105,13 +122,21 @@ def archetype_gallery(args):
                 row['error']=str(error);row['traceback']=traceback.format_exc()
         # Fixed scale across all four regions and both opposing views of a type.
         scale=0.;aspect=1024/704
-        for _,_,center,corners in cases:
+        retained_bounds=[]
+        for row in retained:
+            bounds=row['bounds'];center=Vector(tuple((a+b)*.5 for a,b in bounds))
+            corners=[Vector((x,y,z)) for x in bounds[0] for y in bounds[1] for z in bounds[2]]
+            retained_bounds.append((None,None,center,corners))
+        for _,_,center,corners in cases+retained_bounds:
             for direction in VIEWS:
                 inverse=(-Vector(direction).normalized()).to_track_quat('-Z','Y').inverted()
                 points=[inverse@(v-center) for v in corners]
                 scale=max(scale,max(p.x for p in points)-min(p.x for p in points),
                           (max(p.y for p in points)-min(p.y for p in points))*aspect)
         scale*=1.10
+        for row in retained:
+            if any(abs(v['ortho_scale']-scale)>1e-6 for v in row['views']):
+                raise RuntimeError('Common framing changed; refresh all regions for '+function)
         clay=_neutral_material()
         for row,collection,center,corners in cases:
             collection.hide_render=False
@@ -151,7 +176,7 @@ def archetype_gallery(args):
                   'engine':scene.render.engine,'samples':32,'studio':'render_world_evidence._reset_scene, ground at grade',
                   'scale_policy':'Common projected orthographic scale per archetype across four regions and both views; different archetypes fitted independently.',
                   'geometry_generation':'One native backend build/validation per configuration; same objects reused for clay and material.',
-                  'records':records}
+                  'records':sorted(retained+records,key=lambda r:REGIONS.index(r['region']))}
         temporary=manifest_path.with_suffix('.tmp')
         temporary.write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
         temporary.replace(manifest_path)
@@ -172,10 +197,13 @@ def main():
     parser.add_argument('--gallery-functions',nargs='+',help='Optional bounded subset of archetype IDs')
     parser.add_argument('--gallery-resume',action='store_true',help='Reuse complete image/hash/source-verified archetypes')
     parser.add_argument('--gallery-output',default='archetypes_v05',help='Separate evidence folder; preserve historical galleries')
+    parser.add_argument('--gallery-refresh',action='store_true',help='Refresh selected regions, retaining verified geometry/framing and original per-record provenance')
     parser.add_argument('--source-revision',help='Pinned generator commit for the archetype gallery')
     args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
     if args.archetype_gallery:
         if not args.source_revision:parser.error('--source-revision is required for the archetype gallery')
+        if args.gallery_refresh and args.gallery_output=='archetypes_v05':
+            parser.error('Historical v0.5 gallery is immutable; choose a new output folder')
         archetype_gallery(args)
         return
     mode='pbr' if args.pbr else 'clay'

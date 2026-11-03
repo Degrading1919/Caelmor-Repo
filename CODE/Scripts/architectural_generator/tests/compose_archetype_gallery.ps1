@@ -89,7 +89,7 @@ try {
         $mutedBrush=[System.Drawing.SolidBrush]::new([System.Drawing.Color]::FromArgb(185,182,172))
         $sourceIndividuals=[System.Collections.Generic.List[object]]::new()
         try {
-            $sourceRevisions=@($columns | ForEach-Object {[string]$_.Manifest.source_revision} | Select-Object -Unique) -join '; '
+            $sourceRevisions=@($columns | ForEach-Object {if($_.Record.source_revision){[string]$_.Record.source_revision}else{[string]$_.Manifest.source_revision}} | Select-Object -Unique) -join '; '
             $profileHashes=@($columns | ForEach-Object {if($_.Manifest.source_sha256 -and $_.Manifest.source_sha256.'profiles.py'){([string]$_.Manifest.source_sha256.'profiles.py').Substring(0,8)}} | Select-Object -Unique)
             $profileShort=if($profileHashes.Count){$profileHashes -join ','}else{'unknown'}
             $graphics.DrawString($sheetSpec.Title,$fontHeader,$brush,12,6)

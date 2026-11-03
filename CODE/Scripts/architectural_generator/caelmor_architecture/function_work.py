@@ -68,7 +68,8 @@ def _smithy_flue(builder, mass, x, y, zbase):
     # beyond both the left roof overhang and the open side wall.
     flue = ctx.buffer("smithy.external_flue", "stone", "details", zone=mass)
     flue.structural_role = "supported_hollow_masonry_flue"
-    top=duct_z+(1.8 if _enum(builder.region)=="EMBERHOLT" else 1.25)
+    top=duct_z+(2.6 if _enum(builder.region)=="THORNFELL" else
+                1.8 if _enum(builder.region)=="EMBERHOLT" else 1.25)
     zmid=(.04+top)*.5; zheight=top-.04
     stack_x=outside_x
     flue.box((stack_x-half+wall/2,y,zmid),(wall,2*half,zheight))
@@ -88,7 +89,7 @@ def build_smithy(ctx):
     if b.region == "LOWMARK":
         w,d,floor_height=9.6,4.6,3.5
     elif b.region == "THORNFELL":
-        w,d,floor_height=max(11.0,b.settings.width),max(8.0,b.settings.depth),3.1
+        w,d,floor_height=8.8,4.8,3.5
     elif b.region == "MIRE":
         w,d,floor_height=max(10.5,b.settings.width),max(8.2,b.settings.depth),3.0
     elif b.region == "EMBERHOLT":
@@ -109,8 +110,8 @@ def build_smithy(ctx):
         vent_station=d*.42+.15
         wall_clear=_wall_thickness(region)+.15
         lane_x1=w-wall_clear
-        open_access=[{"edge_index":0,"s0":.55,"s1":w*.43,"height":2.8},
-                     {"edge_index":0,"s0":lane_x1-.70,"s1":lane_x1,"height":2.8},
+        open_access=[{"edge_index":0,"s0":.55,"s1":4.3,"height":3.0},
+                     {"edge_index":0,"s0":lane_x1-1.4,"s1":lane_x1,"height":3.0},
                      {"edge_index":3,"s0":d-vent_station-.65,"s1":d-vent_station+.65,"height":2.7}]
     elif region == "MIRE":
         rear_open=[0,3]
@@ -118,7 +119,7 @@ def build_smithy(ctx):
         wall_clear=_wall_thickness(region)+.15
         lane_x1=w-wall_clear
         open_access=[{"edge_index":0,"s0":.55,"s1":w*.43,"height":2.7},
-                     {"edge_index":0,"s0":lane_x1-.70,"s1":lane_x1,"height":2.7},
+                     {"edge_index":0,"s0":lane_x1-1.4,"s1":lane_x1,"height":2.7},
                      {"edge_index":3,"s0":d-vent_station-.7,"s1":d-vent_station+.7,"height":2.7}]
     elif region == "EMBERHOLT":
         rear_open=[0,1,3]
@@ -126,7 +127,7 @@ def build_smithy(ctx):
         wall_clear=_wall_thickness(region)+.15
         lane_x1=w-wall_clear
         open_access=[{"edge_index":0,"s0":.55,"s1":w*.43,"height":3.1},
-                     {"edge_index":0,"s0":lane_x1-.70,"s1":lane_x1,"height":3.1},
+                     {"edge_index":0,"s0":lane_x1-1.4,"s1":lane_x1,"height":3.1},
                      {"edge_index":3,"s0":d-vent_station-.7,"s1":d-vent_station+.7,"height":3.1}]
     else:
         rear_open = []
@@ -146,6 +147,14 @@ def build_smithy(ctx):
         b.ramp("smithy.material_ramp",(7.1,-2.0),(7.1,0),2.4,mass.base,
                zone=mass,material="stone")
         b.route("forge_material_lane", (5.35,.15,mass.base,8.85,d-mass.plan.wall_thickness-.15,mass.base+2.05), kind="material")
+    elif region == "THORNFELL":
+        wall_clear=mass.plan.wall_thickness+.15
+        lane_x1=w-wall_clear
+        lane_x0=lane_x1-1.4
+        b.ramp("smithy.material_ramp",((lane_x0+lane_x1)*.5,-2.0),
+               ((lane_x0+lane_x1)*.5,.15),1.4,mass.base,zone=mass,material="stone")
+        b.route("smithy.material_ramp_clearance",(lane_x0,-2.0,0,lane_x1,.15,mass.base+.1),kind="material")
+        b.route("forge_material_lane",(lane_x0,.15,mass.base,lane_x1,d-wall_clear,mass.base+2.05),kind="material")
     elif region == "MIRE":
         ramp_x=w*.75
         b.ramp("smithy.gentle_raised_approach",(ramp_x,-11.5),(ramp_x,-.05),2.2,mass.base,
@@ -155,23 +164,26 @@ def build_smithy(ctx):
         b.route("forge_work_lane",(.55,.25,mass.base,w*.56,2.0,mass.base+2.1),kind="human")
         wall_clear=mass.plan.wall_thickness+.15
         lane_x1=w-wall_clear
-        b.route("forge_material_lane",(lane_x1-.70,1.9,mass.base,lane_x1,d-wall_clear,mass.base+2.05),kind="material")
+        b.route("forge_material_lane",(lane_x1-1.4,1.9,mass.base,lane_x1,d-wall_clear,mass.base+2.05),kind="material")
     elif region == "EMBERHOLT":
         b.route("forge_work_lane",(.55,.25,mass.base,w*.58,2.0,mass.base+2.1),kind="human")
         wall_clear=mass.plan.wall_thickness+.15
         lane_x1=w-wall_clear
-        b.route("forge_material_lane",(lane_x1-.70,.2,mass.base,lane_x1,d-wall_clear,mass.base+2.05),kind="material")
+        b.ramp("smithy.material_ramp",(lane_x1-.7,-2.0),(lane_x1-.7,.2),1.4,mass.base,
+               zone=mass,material="stone")
+        b.route("smithy.material_ramp_clearance",(lane_x1-1.4,-2,0,lane_x1,.2,mass.base+.1),kind="material")
+        b.route("forge_material_lane",(lane_x1-1.4,.2,mass.base,lane_x1,d-wall_clear,mass.base+2.05),kind="material")
     else:
         b.route("forge_work_lane", (.65,.25,mass.base,w-.65,2.0,mass.base+2.1), kind="human")
         wall_clear=mass.plan.wall_thickness+.15
         lane_x1=w-wall_clear
-        b.route("forge_material_lane", (lane_x1-.70,1.9,mass.base,lane_x1,d-wall_clear,mass.base+2.05), kind="material")
+        b.route("forge_material_lane", (lane_x1-1.4,1.9,mass.base,lane_x1,d-wall_clear,mass.base+2.05), kind="material")
     # The Lowmark forge occupies the front-left bay, immediately legible from
     # the public approach; a right-side lane keeps stock and visitors clear.
     if region=="LOWMARK":
         hx,hy=1.5,1.2
     elif region=="THORNFELL":
-        hx,hy=w*.29,d*.42
+        hx,hy=1.8,1.2
     elif region=="MIRE":
         hx,hy=w*.25,d*.42
     elif region=="EMBERHOLT":
@@ -203,7 +215,9 @@ def build_smithy(ctx):
     b.box("bellows", (hx-.98,hy+.70,mass.base+1.05,
                        hx-.10,hy+1.25,mass.base+1.77), "timber", mass, role="forge")
     if region in ("LOWMARK","THORNFELL","MIRE"):
-        b.route("smithy.operator_workpad",(ax-.42,.12,mass.base,ax+.52,.62,mass.base+2.0),kind="human")
+        operator_x0=ax+.1 if region=="THORNFELL" else ax-.42
+        operator_x1=ax+.85 if region=="THORNFELL" else ax+.52
+        b.route("smithy.operator_workpad",(operator_x0,.12,mass.base,operator_x1,.62,mass.base+2.0),kind="human")
         if region=="LOWMARK":
             b.box("quench_trough", (4.75,1.8,mass.base+.04,5.25,2.5,mass.base+.42), "timber", mass, role="quench")
             b.box("coal_bin", (.35,3.05,mass.base+.04,1.25,3.75,mass.base+.88), "timber", mass, role="fuel")
@@ -270,6 +284,16 @@ def build_market(ctx):
     # strips, each with a standing/vendor bay on its inner side.
     b.route("public_through_aisle", ((w-aisle_width)*.5,.25,mass.base,
             (w+aisle_width)*.5,d-.25,mass.base+2.25), kind="public")
+    if region in ("LOWMARK","THORNFELL"):
+        ramp_material="stone" if region=="THORNFELL" else "timber"
+        for end,start_xy,floor_xy in (
+                ("front",(w*.5,-2.0),(w*.5,.25)),
+                ("rear",(w*.5,d+2.0),(w*.5,d-.25))):
+            b.ramp(f"market.{end}_approach",start_xy,floor_xy,aisle_width,mass.base,
+                   zone=mass,material=ramp_material)
+            y0,y1=sorted((start_xy[1],floor_xy[1]))
+            b.route(f"market.{end}_approach_clearance",
+                    ((w-aisle_width)*.5,y0,0,(w+aisle_width)*.5,y1,mass.base+.1),kind="public")
     wall_clear=mass.plan.wall_thickness+.15
     side_width=(w-2*wall_clear-aisle_width)*.5
     for side, x0 in (("west",wall_clear),("east",wall_clear+side_width+aisle_width)):
