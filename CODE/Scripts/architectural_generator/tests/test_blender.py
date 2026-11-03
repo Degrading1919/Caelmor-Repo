@@ -68,6 +68,9 @@ class BlenderIntegration(unittest.TestCase):
         # Factory reset clears custom Scene RNA properties; register the add-on
         # after creating the fresh scene used by this fixture.
         addon.register()
+        # This fixture verifies preserved legacy buffer identities. World-mode
+        # defaults and zone-qualified regeneration have their own integration test.
+        bpy.context.scene.caelmor_settings.caelm_world_aware = False
         bpy.context.scene.caelmor_settings.caelm_seed = 73
         bpy.context.scene.caelmor_settings.caelm_function = "FARMHOUSE"
         bpy.context.scene.caelmor_settings.caelm_footprint = "L"

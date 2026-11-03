@@ -19,6 +19,10 @@ def main():
         Settings(function='SMITHY', region='EMBERHOLT', context='EMBERFORGES',
                  use_grammar=True, seed=41),
     )
+    if '--world' in sys.argv:
+        examples=tuple(Settings(function='COTTAGE',region=region,use_grammar=True,
+                                world_aware=True,seed=91)
+                       for region in ('LOWMARK','THORNFELL','MIRE','EMBERHOLT'))
     rows = []
     for settings in examples:
         for detail in ('LOW', 'MEDIUM', 'HIGH'):
@@ -32,7 +36,8 @@ def main():
                           for p in sorted((ROOT / 'caelmor_architecture').glob('*.py'))},
         'cases': rows,
     }
-    target = ROOT / 'evidence' / 'geometry_mode_diagnostics.json'
+    target = ROOT / 'evidence' / ('world_geometry_diagnostics.json' if '--world' in sys.argv
+                                 else 'geometry_mode_diagnostics.json')
     target.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
     for row in rows:
         settings, result = row['settings'], row['results']

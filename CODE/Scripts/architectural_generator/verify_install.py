@@ -11,7 +11,7 @@ import tempfile
 from package_addon import package
 
 
-def run(blender, export=None, region='LOWMARK', function='FARMHOUSE', geometry_mode='SOLID'):
+def run(blender, export=None, region='LOWMARK', function='FARMHOUSE', geometry_mode='SOLID',world_aware=True):
     archive,archive_hash=package()
     with tempfile.TemporaryDirectory(prefix='caelmor_install_') as directory:
         target=Path(directory).resolve()
@@ -36,6 +36,7 @@ assert hasattr(bpy.ops.caelmor,'generate')
 props.caelm_region={region!r}
 props.caelm_function={function!r}
 props.caelm_geometry_mode={geometry_mode!r}
+props.caelm_world_aware={world_aware!r}
 """
         expression+="""
 assert bpy.ops.caelmor.generate()=={'FINISHED'}
@@ -52,7 +53,7 @@ print('ISOLATED_EXTENSION_INSTALL_AND_GENERATE_PASS',len(meshes))
         call(['--background','--python-exit-code','1','--python-expr',expression])
     return {'installed_archive':str(archive),'archive_sha256':archive_hash,
             'native_install_and_generate':True,'isolated_preferences':True,
-            'region':region,'building_type':function,'geometry_mode':geometry_mode}
+            'region':region,'building_type':function,'geometry_mode':geometry_mode,'world_aware':world_aware}
 
 
 if __name__=='__main__':
@@ -64,8 +65,9 @@ if __name__=='__main__':
     parser.add_argument('--function',choices=tuple(TYPE_SPECS),default='FARMHOUSE')
     parser.add_argument('--geometry-mode',choices=('SOLID','EFFICIENT'),default='SOLID')
     parser.add_argument('--report',help='Optionally retain the tested archive hash and settings as JSON')
+    parser.add_argument('--legacy',action='store_true',help='Verify the preserved legacy architecture mode')
     args=parser.parse_args()
-    result=run(Path(args.blender),args.export,args.region,args.function,args.geometry_mode)
+    result=run(Path(args.blender),args.export,args.region,args.function,args.geometry_mode,not args.legacy)
     if args.report:
         Path(args.report).write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(result,indent=2))

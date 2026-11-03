@@ -1,0 +1,214 @@
+{
+  "refreshed_regions": [
+    "LOWMARK",
+    "THORNFELL"
+  ],
+  "frame_count": 24,
+  "frames": [
+    {
+      "manifest": "world_first_four_clay_manifest.json",
+      "image": "first_four_clay_C.png",
+      "region": "LOWMARK",
+      "function": "COTTAGE",
+      "wealth": "MODEST",
+      "geometry_hash": "f393f00e58af6a0272d37e2959560b287c5a428035064353bb3c5dccd6eeef79"
+    },
+    {
+      "manifest": "world_first_four_clay_manifest.json",
+      "image": "first_four_clay_A.png",
+      "region": "THORNFELL",
+      "function": "COTTAGE",
+      "wealth": "MODEST",
+      "geometry_hash": "bcdb12d6f30cd10e054c79f183dd0943c0f9f890ab670870ca385a3a1ac66826"
+    },
+    {
+      "manifest": "world_wealth_cottages_render_manifest.json",
+      "image": "wealth_cottage_00.png",
+      "region": "LOWMARK",
+      "function": "COTTAGE",
+      "wealth": "MODEST",
+      "geometry_hash": "f393f00e58af6a0272d37e2959560b287c5a428035064353bb3c5dccd6eeef79"
+    },
+    {
+      "manifest": "world_wealth_cottages_render_manifest.json",
+      "image": "wealth_cottage_01.png",
+      "region": "LOWMARK",
+      "function": "COTTAGE",
+      "wealth": "ESTABLISHED",
+      "geometry_hash": "83488857cf1ac42fbc3979c745e7ded0e3af04c62e6c25b6855e22c215716883"
+    },
+    {
+      "manifest": "world_wealth_cottages_render_manifest.json",
+      "image": "wealth_cottage_02.png",
+      "region": "LOWMARK",
+      "function": "COTTAGE",
+      "wealth": "AFFLUENT",
+      "geometry_hash": "7749fda1884f895d788ed74eafb12fd11e289ea104cf308cdaaa68d90aa64b0d"
+    },
+    {
+      "manifest": "world_wealth_cottages_render_manifest.json",
+      "image": "wealth_cottage_03.png",
+      "region": "THORNFELL",
+      "function": "COTTAGE",
+      "wealth": "MODEST",
+      "geometry_hash": "bcdb12d6f30cd10e054c79f183dd0943c0f9f890ab670870ca385a3a1ac66826"
+    },
+    {
+      "manifest": "world_wealth_cottages_render_manifest.json",
+      "image": "wealth_cottage_04.png",
+      "region": "THORNFELL",
+      "function": "COTTAGE",
+      "wealth": "ESTABLISHED",
+      "geometry_hash": "890ec84e198bfe80ba862b715f60f22a412775304176586044a7395690bc4403"
+    },
+    {
+      "manifest": "world_wealth_cottages_render_manifest.json",
+      "image": "wealth_cottage_05.png",
+      "region": "THORNFELL",
+      "function": "COTTAGE",
+      "wealth": "AFFLUENT",
+      "geometry_hash": "62ef47e9ba88ba3c91392cea8c63e1b53f2a949f30a2f1fde6f961c71e805f07"
+    },
+    {
+      "manifest": "world_matrix_render_manifest.json",
+      "image": "function_matrix_00.png",
+      "region": "LOWMARK",
+      "function": "COTTAGE",
+      "wealth": "MODEST",
+      "geometry_hash": "f393f00e58af6a0272d37e2959560b287c5a428035064353bb3c5dccd6eeef79"
+    },
+    {
+      "manifest": "world_matrix_render_manifest.json",
+      "image": "function_matrix_01.png",
+      "region": "LOWMARK",
+      "function": "FARMHOUSE",
+      "wealth": "MODEST",
+      "geometry_hash": "a1fe4464f224cb25b7489851bdafb4ff076b4cd08c486e686aa51bb4f15cb3dd"
+    },
+    {
+      "manifest": "world_matrix_render_manifest.json",
+      "image": "function_matrix_02.png",
+      "region": "LOWMARK",
+      "function": "SMITHY",
+      "wealth": "MODEST",
+      "geometry_hash": "eaee429a1ee966d88042b003aad5e0c84b1c80b3fcf5b9a8d26c439566768451"
+    },
+    {
+      "manifest": "world_matrix_render_manifest.json",
+      "image": "function_matrix_03.png",
+      "region": "LOWMARK",
+      "function": "ASSEMBLY_HALL",
+      "wealth": "MODEST",
+      "geometry_hash": "08c79fc7edad9e5237c1c22c9ed088977115b173606023d0b69cef0d514841c5"
+    },
+    {
+      "manifest": "world_matrix_render_manifest.json",
+      "image": "function_matrix_04.png",
+      "region": "THORNFELL",
+      "function": "COTTAGE",
+      "wealth": "MODEST",
+      "geometry_hash": "bcdb12d6f30cd10e054c79f183dd0943c0f9f890ab670870ca385a3a1ac66826"
+    },
+    {
+      "manifest": "world_matrix_render_manifest.json",
+      "image": "function_matrix_05.png",
+      "region": "THORNFELL",
+      "function": "FARMHOUSE",
+      "wealth": "MODEST",
+      "geometry_hash": "0e9e6af199fda29de8181d33b92292ab7e9ff9f9d3e3184f683d5612ccc5684d"
+    },
+    {
+      "manifest": "world_matrix_render_manifest.json",
+      "image": "function_matrix_06.png",
+      "region": "THORNFELL",
+      "function": "SMITHY",
+      "wealth": "MODEST",
+      "geometry_hash": "54539fea0eade87b5e72a17eaf37ed5f5472d463c2bec91e22b434148a746653"
+    },
+    {
+      "manifest": "world_matrix_render_manifest.json",
+      "image": "function_matrix_07.png",
+      "region": "THORNFELL",
+      "function": "ASSEMBLY_HALL",
+      "wealth": "MODEST",
+      "geometry_hash": "f80a75d05444e576e13d10e50403849eed95d1ab3a447c4048186cd4739ba4d3"
+    },
+    {
+      "manifest": "world_high_profiles_render_manifest.json",
+      "image": "high_profiles_00.png",
+      "region": "LOWMARK",
+      "function": "COTTAGE",
+      "wealth": "ESTABLISHED",
+      "geometry_hash": "fb89012af79d943a47d42f1c2b65d84025aa470492567ad8109a88b550988ff0"
+    },
+    {
+      "manifest": "world_high_profiles_render_manifest.json",
+      "image": "high_profiles_01.png",
+      "region": "LOWMARK",
+      "function": "COTTAGE",
+      "wealth": "ESTABLISHED",
+      "geometry_hash": "d3abf0abf72b63c321daff8b71e7bd96e84a55ee68ddf7eb4521920343f9e036"
+    },
+    {
+      "manifest": "world_high_profiles_render_manifest.json",
+      "image": "high_profiles_02.png",
+      "region": "LOWMARK",
+      "function": "COTTAGE",
+      "wealth": "AFFLUENT",
+      "geometry_hash": "7604a431d0c0e201b087dea726a2b97d7e0b09bf3621ceb6aad56094e446e515"
+    },
+    {
+      "manifest": "world_high_profiles_render_manifest.json",
+      "image": "high_profiles_03.png",
+      "region": "LOWMARK",
+      "function": "COTTAGE",
+      "wealth": "AFFLUENT",
+      "geometry_hash": "eb2063a07dbd51cbf73d2ec20d7748808afba718aa5bbeaecd487f45e1df91de"
+    },
+    {
+      "manifest": "world_high_profiles_render_manifest.json",
+      "image": "high_profiles_04.png",
+      "region": "THORNFELL",
+      "function": "COTTAGE",
+      "wealth": "ESTABLISHED",
+      "geometry_hash": "40bbfca0841a39645fd4aebbcf66a79f919ec75162e261d079d911eb791e33ff"
+    },
+    {
+      "manifest": "world_high_profiles_render_manifest.json",
+      "image": "high_profiles_05.png",
+      "region": "THORNFELL",
+      "function": "COTTAGE",
+      "wealth": "ESTABLISHED",
+      "geometry_hash": "525bc26f7acbf4d9743fea55443a6a67ee22ccf1e294311e6577611f52d72ac6"
+    },
+    {
+      "manifest": "world_high_profiles_render_manifest.json",
+      "image": "high_profiles_06.png",
+      "region": "THORNFELL",
+      "function": "COTTAGE",
+      "wealth": "AFFLUENT",
+      "geometry_hash": "e3697cbeeffc1246e7a0caccd7c2339da1fcb680e64c6bbe79795a8cadbdb640"
+    },
+    {
+      "manifest": "world_high_profiles_render_manifest.json",
+      "image": "high_profiles_07.png",
+      "region": "THORNFELL",
+      "function": "COTTAGE",
+      "wealth": "AFFLUENT",
+      "geometry_hash": "4fa9d0ac3b660417acfdcbbaec6567025c9893989947296da067b3f837c4cefa"
+    }
+  ],
+  "blender_version": "5.0.1",
+  "source_hashes": {
+    "engine.py": "547d9b0e28252aa0fe7306947cbb525c54836eb9eeb7887bab4803293205b8ca",
+    "model.py": "d52927e24f0b093dabdd9affc071a111ef4b82db052089b04bb44052f53e43ce",
+    "facade.py": "9639904540df538372e7883f4cd363baad0fd6c4edf0131b88233c5e7e0dc1c4",
+    "roof.py": "2932203eb3675bb9f3c0d9a346e6d655d65bc001ec144c7c4297984a56e50880",
+    "world.py": "3db9903928e76e70cea50c4b52fa7245248e7f5b25c4c2f0810f5859c16645c6",
+    "world_lowmark_thornfell.py": "8eb195c922ab78c185271ce96653e6397aff64141d1ada2b36c12acbc3940449",
+    "world_mire.py": "3be11f40c80893ded91cf61db4ca194a5a671632c9a71cecb56d87582554e6b7",
+    "world_emberholt.py": "3f8c474a4f1333795c07c3f5428624a35e7e2fcbf8bbb89f0b608a1eb52e5fbf",
+    "blender_backend.py": "4c28a3b03c538b81be3b4a95319396bd284dd852f0711426fa75530dd74ed01e",
+    "render_world_evidence.py": "d69625f57916cf18f289900aedcdecbbe266431bd22c37ffe69185f2e26822bb"
+  }
+}

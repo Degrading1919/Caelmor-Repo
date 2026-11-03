@@ -1,15 +1,15 @@
 # Caelmor Architectural Generator
 
-Version 0.3.0 is an offline Blender add-on for editable, metre-scale exterior buildings. It combines regional working grammars, twenty purpose-led building types, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
+Version 0.4.0 is an offline Blender add-on for editable, metre-scale exterior buildings. It combines twenty purpose-led building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
 
-The regional mappings and exact architectural choices are reversible visual interpretations of the four regional dossiers, not new canon. See [REGIONAL_GRAMMAR.md](REGIONAL_GRAMMAR.md) for the source cues, context IDs, type grammar, and boundaries of those interpretations.
+The regional mappings and exact architectural choices are reversible visual interpretations of the four regional dossiers, not new canon. See [REGIONAL_GRAMMAR.md](REGIONAL_GRAMMAR.md) for the source cues, context IDs, type grammar, and boundaries of those interpretations. [WORLD_ARCHITECTURAL_LANGUAGES.md](WORLD_ARCHITECTURAL_LANGUAGES.md) records the broader structural art direction; its proposals are visual interpretations, not canon or approved material catalogs.
 
 ## Requirements and installation
 
 - Blender 5.0.1 is the tested target. The extension manifest declares Blender 4.2 as its minimum; other Blender releases have not been validated.
 - Install `dist/caelmor_architecture.zip` using **Edit → Preferences → Get Extensions → Install from Disk**, then enable **Caelmor Architectural Generator**.
 - Open a 3D View and find the **Caelmor** tab in the N-panel.
-- Rebuild the distributable with `py -3 package_addon.py` from this directory. The ZIP contains the add-on source, full GPL license, third-party notices, research reference, and regional grammar reference.
+- Rebuild the distributable with `py -3 package_addon.py` from this directory. The ZIP contains the add-on source, full GPL license, third-party notices, research reference, and both architecture references.
 
 ## Generate a building
 
@@ -37,7 +37,11 @@ Each type has its own default plan proportions and exterior features such as sta
 
 With **Use Regional Grammar** on, type, region, context, wealth, and craftsmanship resolve a constraint-checked footprint, dimensions, floor count and height, pitch, roof preference, foundation, construction, and cover. The manual width, depth, wing, footprint, floor, floor-height, and pitch values are not consumed in this mode; overhang remains an explicit user-controlled roof setting. **Apply Grammar to Shape Controls** copies the resolved dimensions into those controls; switch grammar off to edit the resulting shape manually.
 
-With grammar off, the manual dimensions and footprint are used directly. Roof style remains an independent control: **Regional / Type Default** selects the type's preference; Gable and Hip explicitly choose a roof. This keeps manual shaping available without silently applying archetype dimensions.
+With **World Construction Language** on (the default for new Blender settings), the selected region and building function create multiple structural, roofed volumes where appropriate. Lowmark pairs broad halls with open shed-roof work ranges; Thornfell uses stepped masonry gables, deep stone openings and narrow towers; the Mire raises timber halls under bowed reed roofs with supported decks; Emberholt builds terrace roofs, parapets, buttresses, shafts and connected ironwalks. These forms can change the footprint and number of volumes, so shape values are profile inputs rather than promises of exact final dimensions. The panel describes the selected construction language; generated bounds and validation report the actual result. Regional construction chooses the roof forms and eaves, so manual roof style and overhang are disabled in this mode.
+
+Turn **World Construction Language** off to use the single-plan regional generator. This retains the prior manual and grammar workflows for compatibility.
+
+With both World Construction Language and grammar off, manual dimensions and footprint are used directly. Roof style remains an independent control: **Regional / Type Default** selects the type's preference; Gable and Hip explicitly choose a roof. This keeps manual shaping available without silently applying archetype dimensions.
 
 The supported footprints are RECT, L, T, and U. L wings may mirror, T wings may shift, and U wings may have unequal depths according to the seed. The guardrails require width 6–24 m, depth 4–16 m, 1–3 floors, and wing widths of at least 2.5 m. Non-rectangular wings must fit the main body, and U footprints retain at least 2 m of courtyard clearance.
 
@@ -58,7 +62,7 @@ The add-on reports effective plan dimensions and the latest geometry validation 
 
 **Load Selected Settings** restores saved settings. **Regenerate Selected** replaces all generated layers or a selected roof, windows/doors, or details layer. Untagged objects are preserved. Use **Protect / Unprotect Selected** to retain an edited generated mesh through regeneration; protected meshes are included in exports.
 
-Exports write GLB or glTF, a separate approximate collision GLB when proxies exist, and a `.caelmor.json` sidecar. The sidecar records settings, geometry hash, semantic layers, per-object material and topology, structural role, roof-envelope/support-surface diagnostics, and protected state. Collision proxies are approximate static wall and footprint shapes; they have not been tested for traversal or in Unity.
+Exports write GLB or glTF, a separate approximate collision GLB when proxies exist, and a `.caelmor.json` sidecar. The sidecar records settings, architecture mode, construction-zone bounds and validation counts, geometry hash, semantic layers, each object's world-zone, material and topology, structural role, roof-envelope/support-surface diagnostics, and protected state. World-aware collision proxies are generated for each construction zone and use its own foundation and eave heights; legacy proxies retain their prior layout. Collision proxies are approximate static wall and footprint shapes; they have not been tested for traversal or in Unity.
 
 Generated meshes include metric UV0, packed UV1 lightmap coordinates, material factors, and normalized `COLOR_0` weathering. Original tileable 128×128 color, tangent-normal, and roughness maps are generated for shared wood, stone, plaster, and roof material families and packed into the Blender file. Region/context/wealth/craftsmanship palettes are cached independently of seed; small seed variation is baked per building. GLB embeds supported material images. Review material behavior in the target pipeline before production use.
 
@@ -74,7 +78,7 @@ from caelmor_architecture.blender_backend import build, export_building
 settings = Settings(
     seed=17, function="BOATHOUSE", region="MIRE", context="SORROWMERE",
     use_grammar=True, wealth="ESTABLISHED", craftsmanship="STANDARD",
-    geometry_mode="SOLID",
+    geometry_mode="SOLID", world_aware=True,
 )
 effective = resolve_settings(settings)
 plan, buffers = generate(settings)
@@ -83,7 +87,7 @@ collection, metrics = build(settings)
 sidecar_path = export_building(collection, r"C:\temp\boathouse.glb")
 ```
 
-`generate` and `validate` are pure Python. `build` creates or replaces Blender objects; `export_building` writes the interchange files. The API preserves the original manual `Settings` fields and adds the regional controls. Snapshots from version 0.2 that lack the new fields load as manual Lowmark SOLID buildings with a Gable roof, preserving the previous roof interpretation during scoped regeneration.
+`generate` and `validate` are pure Python. `build` creates or replaces Blender objects; `export_building` writes the interchange files. The `Settings` API defaults `world_aware=False` so existing scripts keep the legacy path; new Blender UI settings default it on. Snapshots without `world_aware` load with it off, preserving the prior geometry path and manual settings. Snapshots without the other regional additions continue to load as manual Lowmark SOLID buildings with a Gable roof.
 
 ## Development checks
 
@@ -94,6 +98,12 @@ py -3 -m unittest discover -s tests -p "test_generator.py" -v
 py -3 -m unittest discover -s tests -p "test_geometry.py" -v
 py -3 -m unittest discover -s tests -p "test_expansion.py" -v
 py -3 -m unittest discover -s tests -p "test_facade_raycast.py" -v
+py -3 tests/test_world.py
+py -3 tests/stress_world.py
+py -3 tests/measure_geometry_modes.py --world
+& "C:\Program Files\Blender Foundation\Blender 5.0\blender.exe" --factory-startup --background --python tests/test_world_blender.py
+& "C:\Program Files\Blender Foundation\Blender 5.0\blender.exe" --factory-startup --background --python tests/render_world_evidence.py -- --matrix
+& "C:\Program Files\Blender Foundation\Blender 5.0\blender.exe" --factory-startup --background --python tests/render_world_feature_heroes.py
 & "C:\Program Files\Blender Foundation\Blender 5.0\blender.exe" --background --python tests/test_blender.py
 & "C:\Program Files\Blender Foundation\Blender 5.0\blender.exe" --background --python tests/test_roof_clearance.py
 & "C:\Program Files\Blender Foundation\Blender 5.0\blender.exe" --background --python tests/test_glass_timber_bvh.py
@@ -104,11 +114,13 @@ py -3 -m unittest discover -s tests -p "test_facade_raycast.py" -v
 py -3 verify_install.py
 ```
 
-See [tests/VALIDATION.md](tests/VALIDATION.md) for the current executed checks and evidence. Validation is generator and Blender authoring evidence; it is not a Unity compatibility check or a player-experience test.
+See [tests/WORLD_VALIDATION.md](tests/WORLD_VALIDATION.md) for current world-language verification and [tests/VALIDATION.md](tests/VALIDATION.md) for the retained v0.3/v0.2 baseline. Validation is generator and Blender authoring evidence; it is not a Unity compatibility check or a player-experience test.
 
 ## Scope limits
 
 This is an exterior generator for orthogonal RECT/L/T/U footprints. It does not create arbitrary drawn polygons, interiors, enterable room layouts, or a complete settlement. Weathering, materials, and condition are procedural art, not measured simulation. Exported material behavior, collision, lighting, traversal, and performance still need review in any target engine.
+
+World construction derives mass placement and roof shapes from the region; unused legacy footprint/wing/pitch/eave controls are disabled. Shared opening details, repeated surface patterns and some broad masonry faces still need artistic refinement. Protected manual edits remain intact but are outside the procedural geometry checks; changing a building's architectural language can require manual reconciliation of those edits. No interior load analysis or terrain fitting is claimed.
 
 ## License and original assets
 

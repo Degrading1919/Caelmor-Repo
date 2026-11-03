@@ -10,10 +10,13 @@ from .facade import build_facades
 from .roof import build_roof, roof_faces, roof_topology
 from .geometry import area, cross, sub, dot
 
-TOOL_REVISION='0.3.0'
+TOOL_REVISION='0.4.0'
 
 
 def generate(settings):
+    if settings.world_aware:
+        from .world import generate as generate_world
+        return generate_world(settings)
     plan=make_plan(settings)
     buffers=build_facades(plan)+build_roof(plan)
     return plan,buffers
@@ -27,6 +30,11 @@ def geometry_hash(buffers):
 
 
 def validate(plan,buffers):
+    if hasattr(plan,'world_zones'):
+        from .world import validate as validate_world
+        result=validate_world(plan,buffers,validate)
+        result.update(geometry_hash=geometry_hash(buffers),tool_revision=TOOL_REVISION)
+        return result
     errors=[]
     triangles=0
     for b in buffers:
@@ -104,6 +112,10 @@ def validate(plan,buffers):
                            for face in b.faces)
             if b.roof_envelope is None:
                 ceiling=lambda x,y: plan.roof_height(x,y)-.12
+                if b.structural_role=='mechanical':
+                    # Waterwheels are intentionally weather-exposed. Samples
+                    # inside the actual roof domain still obey deck clearance.
+                    samples=[p for p in samples if math.isfinite(plan.roof_height(p[0],p[1]))]
             else:
                 # A porch/gallery has its own authored, actual roof plane and
                 # support footprint; it is not exempt from clearance checks.

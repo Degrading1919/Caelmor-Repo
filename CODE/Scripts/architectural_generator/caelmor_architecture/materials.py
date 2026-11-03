@@ -292,7 +292,10 @@ def _sill_runoff(position, normal, plan):
             across = (position[0]-a[0])*outward[0] + (position[1]-a[1])*outward[1]
             if across < -.08 or across > .42 or not 0.0 <= along <= length:
                 continue
-            for opening in _openings_for_edge(plan, edge_index, edge):
+            records=getattr(plan,'facade_records',None)
+            scheduled=(records[edge_index]['openings'] if records and edge_index<len(records)
+                       else _openings_for_edge(plan,edge_index,edge))
+            for opening in scheduled:
                 if opening["kind"] not in ("window", "vent"):
                     continue
                 center = (opening["s0"] + opening["s1"]) * .5

@@ -34,6 +34,7 @@ def _normalize_settings_data(data):
     # newer AUTO type roof when partially replacing just one visual layer.
     values.setdefault("region", "LOWMARK")
     values.setdefault("use_grammar", False)
+    values.setdefault("world_aware", False)
     values.setdefault("geometry_mode", "SOLID")
     values.setdefault("roof_style", "GABLE")
     normalized = Settings(**values)
@@ -117,6 +118,7 @@ def _mesh_object(buffer, cache, build_id, plan=None):
     obj[TAG] = True; obj["caelm_layer"] = _layer_for(buffer)
     obj["caelm_buffer_id"] = buffer.name
     obj["caelm_material"] = material; obj["caelm_semantic"] = _layer_for(buffer)
+    obj["caelm_world_zone"] = str(getattr(buffer, "world_zone", None) or "")
     obj["caelm_build_id"] = build_id
     topology = str(getattr(buffer, "topology", "SOLID")).upper()
     obj["caelm_topology"] = topology if topology in ("SOLID", "SURFACE") else "SOLID"
@@ -129,13 +131,14 @@ def _mesh_object(buffer, cache, build_id, plan=None):
     return obj
 
 
-def _collider_object(name, vertices, faces, build_id):
+def _collider_object(name, vertices, faces, build_id, world_zone=None):
     mesh = bpy.data.meshes.new(name + "Mesh")
     mesh.from_pydata(vertices, [], faces); mesh.update(calc_edges=True)
     obj = bpy.data.objects.new(name, mesh)
     obj["caelm_collider"] = True; obj["caelm_generated"] = True
     obj["caelm_layer"] = "collider"; obj["caelm_semantic"] = "collider"
     obj["caelm_build_id"] = build_id
+    obj["caelm_world_zone"] = str(world_zone or "")
     obj.hide_render = True
     return obj
 
@@ -144,27 +147,54 @@ def _colliders(plan, build_id):
     """Make simple, closed collision proxies per outer wall and footprint wing."""
     out = []
     half = .09
-    eave = plan.eave
-    for index, edge in enumerate(plan.edges):
-        a, b = Vector((edge[0][0], edge[0][1], 0)), Vector((edge[1][0], edge[1][1], 0))
-        direction = b - a
-        length = math.hypot(direction.x, direction.y)
-        if length < 1e-5: continue
-        normal = Vector((-direction.y / length, direction.x / length, 0)) * half
-        # Counter-clockwise from above, so caps and sides below point outward.
-        bottom = [a - normal, b - normal, b + normal, a + normal]
-        top = [v + Vector((0, 0, eave)) for v in bottom]
-        verts = [tuple(v) for v in bottom + top]
-        faces = [(0, 3, 2, 1), (4, 5, 6, 7), (0, 1, 5, 4),
-                 (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7)]
-        out.append(_collider_object(f"Collider Wall {index+1:02d}", verts, faces, build_id))
-    for index, rect in enumerate(plan.rects):
-        x0, y0, x1, y1, _axis = rect
-        z0, z1 = 0.0, .2
-        verts = [(x0,y0,z0),(x1,y0,z0),(x1,y1,z0),(x0,y1,z0),
-                 (x0,y0,z1),(x1,y0,z1),(x1,y1,z1),(x0,y1,z1)]
-        faces = [(0,3,2,1),(4,5,6,7),(0,1,5,4),(1,2,6,5),(2,3,7,6),(3,0,4,7)]
-        out.append(_collider_object(f"Collider Floor {index+1:02d}", verts, faces, build_id))
+    zones = getattr(plan, "world_zones", None)
+    if zones:
+        # A world plan may contain separated or stepped masses. Keep each
+        # collision proxy attached to its actual zone bounds and base height.
+        for zone_index, mass in enumerate(zones, 1):
+            for index, edge in enumerate(mass.plan.edges, 1):
+                a, b = Vector((edge[0][0], edge[0][1], mass.base)), Vector((edge[1][0], edge[1][1], mass.base))
+                direction = b - a
+                length = math.hypot(direction.x, direction.y)
+                if length < 1e-5: continue
+                normal = Vector((-direction.y / length, direction.x / length, 0)) * half
+                bottom = [a - normal, b - normal, b + normal, a + normal]
+                top = [Vector((v.x, v.y, mass.eave)) for v in bottom]
+                verts = [tuple(v) for v in bottom + top]
+                faces = [(0, 3, 2, 1), (4, 5, 6, 7), (0, 1, 5, 4),
+                         (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7)]
+                out.append(_collider_object(
+                    f"Collider Wall {zone_index:02d}-{index:02d}", verts, faces, build_id, mass.key))
+            for index, rect in enumerate(mass.plan.rects, 1):
+                x0, y0, x1, y1, _axis = rect
+                z0, z1 = mass.base-.16, mass.base
+                verts = [(x0,y0,z0),(x1,y0,z0),(x1,y1,z0),(x0,y1,z0),
+                         (x0,y0,z1),(x1,y0,z1),(x1,y1,z1),(x0,y1,z1)]
+                faces = [(0,3,2,1),(4,5,6,7),(0,1,5,4),(1,2,6,5),(2,3,7,6),(3,0,4,7)]
+                out.append(_collider_object(
+                    f"Collider Floor {zone_index:02d}-{index:02d}", verts, faces, build_id, mass.key))
+    else:
+        # Preserve legacy collider geometry and names for snapshots and manual mode.
+        eave = plan.eave
+        for index, edge in enumerate(plan.edges):
+            a, b = Vector((edge[0][0], edge[0][1], 0)), Vector((edge[1][0], edge[1][1], 0))
+            direction = b - a
+            length = math.hypot(direction.x, direction.y)
+            if length < 1e-5: continue
+            normal = Vector((-direction.y / length, direction.x / length, 0)) * half
+            bottom = [a - normal, b - normal, b + normal, a + normal]
+            top = [v + Vector((0, 0, eave)) for v in bottom]
+            verts = [tuple(v) for v in bottom + top]
+            faces = [(0, 3, 2, 1), (4, 5, 6, 7), (0, 1, 5, 4),
+                     (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7)]
+            out.append(_collider_object(f"Collider Wall {index+1:02d}", verts, faces, build_id))
+        for index, rect in enumerate(plan.rects):
+            x0, y0, x1, y1, _axis = rect
+            z0, z1 = 0.0, .2
+            verts = [(x0,y0,z0),(x1,y0,z0),(x1,y1,z0),(x0,y1,z0),
+                     (x0,y0,z1),(x1,y0,z1),(x1,y1,z1),(x0,y1,z1)]
+            faces = [(0,3,2,1),(4,5,6,7),(0,1,5,4),(1,2,6,5),(2,3,7,6),(3,0,4,7)]
+            out.append(_collider_object(f"Collider Floor {index+1:02d}", verts, faces, build_id))
     return out
 
 
@@ -259,12 +289,27 @@ def build(settings, collection=None, layers=None, origin=None):
         collection[SETTINGS_KEY] = json.dumps(setting_data, sort_keys=True)
         collection["caelm_geometry_hash"] = geometry_hash(buffers)
         collection["caelm_source_geometry_hash"] = geometry_hash(buffers)
+        collection["caelm_architecture"] = validation.get("architecture", "WORLD" if settings.world_aware else "LEGACY")
+        construction_zones = validation.get("construction_zones", [])
+        collection["caelm_construction_zones"] = json.dumps(construction_zones, sort_keys=True)
+        collection["caelm_source_validation"] = json.dumps({
+            "valid": bool(validation.get("valid", False)),
+            "source_objects": int(validation.get("objects", len(buffers))),
+            "source_vertices": int(validation.get("vertices", 0)),
+            "source_triangles": int(validation.get("triangles", 0)),
+            "construction_zones": construction_zones,
+        }, sort_keys=True)
         collection["caelm_generator_version"] = TOOL_REVISION; collection["caelm_units"] = "metres"
         collection["caelm_validation"] = json.dumps({
             "valid": bool(validation.get("valid", False)) if isinstance(validation, dict) else True,
             "errors": list(validation.get("errors", ())) if isinstance(validation, dict) else [],
             "triangles": int(validation.get("triangles", 0)) if isinstance(validation, dict) else 0,
             "objects": int(validation.get("objects", len(buffers))) if isinstance(validation, dict) else len(buffers),
+            "architecture": validation.get("architecture", "WORLD" if settings.world_aware else "LEGACY"),
+            "source_objects": int(validation.get("objects", len(buffers))),
+            "source_vertices": int(validation.get("vertices", 0)),
+            "source_triangles": int(validation.get("triangles", 0)),
+            "construction_zones": construction_zones,
         }, sort_keys=True)
         _focus_collection(collection)
         return collection, collection_metrics(collection)
@@ -324,6 +369,9 @@ def export_building(collection, filepath):
         _export_selection(collider_path, colliders, anchor, 'GLB')
     manifest = {"format": "CaelmorBuildingExport", "version": 1, "generator_version": TOOL_REVISION,
                 "settings": load_settings(collection),
+                "architecture": collection.get("caelm_architecture", "LEGACY"),
+                "construction_zones": json.loads(collection.get("caelm_construction_zones", "[]")),
+                "source_validation": json.loads(collection.get("caelm_source_validation", "{}")),
                 "source_geometry_hash": collection.get("caelm_source_geometry_hash", ""),
                 "has_protected_buffers": any(o.get("caelm_protected") for o in objects),
                 "protected_buffer_count": sum(1 for o in objects if o.get("caelm_protected")),
@@ -337,6 +385,7 @@ def export_building(collection, filepath):
                            "rotation_euler": list(anchor.rotation_euler), "scale": list(anchor.scale)},
                 "layers": collection_metrics(collection)["layers"],
                 "objects": [{"name": o.name, "layer": o.get("caelm_layer"), "material": o.get("caelm_material"),
+                             "world_zone": str(o.get("caelm_world_zone", "")),
                              "semantic": o.get("caelm_semantic"), "protected": bool(o.get("caelm_protected")),
                              "topology": o.get("caelm_topology", "SOLID"),
                              "structural_role": o.get("caelm_structural_role", "framing"),

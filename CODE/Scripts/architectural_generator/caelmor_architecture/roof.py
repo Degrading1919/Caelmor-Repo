@@ -22,6 +22,8 @@ class RoofPatch:
 
 
 def roof_sources(plan):
+    if hasattr(plan,'custom_roof_sources'):
+        return plan.custom_roof_sources
     result=[]
     o=plan.settings.overhang
     s=plan.slope
@@ -368,7 +370,9 @@ def build_roof(plan):
             # The roof falls across the complete board section, not just its
             # centreline. Keep even the outer top arris below the supporting
             # roof plane; a fixed centre offset let brown timber breach tiles.
-            fascia_drop=.02+.11*math.sqrt(1+plan.slope**2)+.065*plan.slope
+            supporting=patches[users[0][0]].plane
+            section_slope=math.hypot(supporting[0],supporting[1])
+            fascia_drop=.02+.11*math.sqrt(1+section_slope**2)+.065*section_slope
             method((a[0],a[1],a[2]-fascia_drop),(b[0],b[1],b[2]-fascia_drop),.13,.22)
         elif kind=='ridge':
             dx,dy=b[0]-a[0],b[1]-a[1]

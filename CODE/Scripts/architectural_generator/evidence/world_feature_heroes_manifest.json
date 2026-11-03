@@ -1,0 +1,385 @@
+{
+  "schema": "world-feature-heroes-v1",
+  "source_hashes": {
+    "engine.py": "547d9b0e28252aa0fe7306947cbb525c54836eb9eeb7887bab4803293205b8ca",
+    "model.py": "d52927e24f0b093dabdd9affc071a111ef4b82db052089b04bb44052f53e43ce",
+    "facade.py": "9639904540df538372e7883f4cd363baad0fd6c4edf0131b88233c5e7e0dc1c4",
+    "roof.py": "2932203eb3675bb9f3c0d9a346e6d655d65bc001ec144c7c4297984a56e50880",
+    "world.py": "16a255a3873ae6cf5b4423248a7032114040a5a02aa28c243b0d31f352925565",
+    "world_lowmark_thornfell.py": "9c1e4a5c523d18a4a5498fdd12ef27f95163b9e49284e1438c874f24f0be600e",
+    "world_mire.py": "3be11f40c80893ded91cf61db4ca194a5a671632c9a71cecb56d87582554e6b7",
+    "world_emberholt.py": "3f8c474a4f1333795c07c3f5428624a35e7e2fcbf8bbb89f0b608a1eb52e5fbf",
+    "blender_backend.py": "4c28a3b03c538b81be3b4a95319396bd284dd852f0711426fa75530dd74ed01e",
+    "render_world_feature_heroes.py": "894d7f6c10a684bbc0c7c739a63b9bba69b2d4d30058c3f4272d690e9748e84e"
+  },
+  "blender_version": "5.0.1",
+  "records": [
+    {
+      "settings": {
+        "seed": 91,
+        "function": "MILLER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "geometry_hash": "e1e13bfe7ab62cc958b859bf62ec7c4f5a275f7c4b88e093dcb32ae37e418a8e",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 45,
+        "vertices": 29842,
+        "triangles": 45304,
+        "materials": 12,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "building_type": "MILLER",
+        "geometry_mode": "SOLID",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "lowmark_main_hall",
+            "bounds": [
+              0,
+              0,
+              11.0,
+              7.2
+            ],
+            "base": 0.45,
+            "eave": 6.05,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "MILLER",
+            "wall_thickness": 0.28,
+            "vertices": 23850,
+            "triangles": 36104
+          },
+          {
+            "key": "lowmark_service_wing",
+            "bounds": [
+              11.0,
+              -0.864,
+              14.816,
+              4.32
+            ],
+            "base": 0.45,
+            "eave": 2.746,
+            "valid": true,
+            "roof": "SHED",
+            "function": "WORKSHOP",
+            "wall_thickness": 0.28,
+            "vertices": 5952,
+            "triangles": 9140
+          }
+        ],
+        "geometry_hash": "e1e13bfe7ab62cc958b859bf62ec7c4f5a275f7c4b88e093dcb32ae37e418a8e",
+        "tool_revision": "0.4.0"
+      },
+      "backend_metrics": {
+        "objects": 45,
+        "vertices": 29842,
+        "width": 16.451000213623047,
+        "depth": 9.474997758865356,
+        "height": 8.444259852170944,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -1.2100000381469727,
+          15.241000175476074
+        ],
+        [
+          -1.7899978160858154,
+          7.684999942779541
+        ],
+        [
+          -0.06173059344291687,
+          8.382529258728027
+        ]
+      ],
+      "camera_direction": [
+        -1.0,
+        -0.38,
+        0.72
+      ],
+      "neutral_clay": true,
+      "image": "evidence\\world_lowmark_miller_high.png",
+      "image_sha256": "5f9898480291e4dd737a8b206eb38b56003e2f139b357ddc8ed00d0853d1b231",
+      "build_seconds": 3.3261,
+      "render_seconds": 2.0904,
+      "elapsed_seconds": 6.1457,
+      "blender_version": "5.0.1"
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "BOATHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "geometry_hash": "7e2447d6ac1b5f59fa3e9dea794a1459da0a02bf66cc79a51d8cd13bc8c97e50",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 28,
+        "vertices": 60276,
+        "triangles": 90748,
+        "materials": 9,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "building_type": "BOATHOUSE",
+        "geometry_mode": "SOLID",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "mire_longhouse",
+            "bounds": [
+              0.0,
+              0.0,
+              11.28,
+              7.36
+            ],
+            "base": 1.94,
+            "eave": 4.74,
+            "valid": true,
+            "roof": "BOW",
+            "function": "BOATHOUSE",
+            "wall_thickness": 0.18,
+            "vertices": 59940,
+            "triangles": 90244
+          }
+        ],
+        "geometry_hash": "7e2447d6ac1b5f59fa3e9dea794a1459da0a02bf66cc79a51d8cd13bc8c97e50",
+        "tool_revision": "0.4.0"
+      },
+      "backend_metrics": {
+        "objects": 28,
+        "vertices": 60276,
+        "width": 12.769999623298645,
+        "depth": 15.856508255004883,
+        "height": 9.638702094554901,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.7450000047683716,
+          12.024999618530273
+        ],
+        [
+          -7.751508712768555,
+          8.104999542236328
+        ],
+        [
+          -0.08539074659347534,
+          9.553311347961426
+        ]
+      ],
+      "camera_direction": [
+        0.05,
+        -1.0,
+        0.62
+      ],
+      "neutral_clay": true,
+      "image": "evidence\\world_mire_boathouse_high.png",
+      "image_sha256": "4898b3dd8f879c9cfb8992fb871b42272d15f6aa144cf41f80b0ec3fa6fe22aa",
+      "build_seconds": 4.6619,
+      "render_seconds": 0.5963,
+      "elapsed_seconds": 6.627,
+      "blender_version": "5.0.1"
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "geometry_hash": "8a169ae35c8a28eb5828376000afc1ca58033fcafa75cabb0adb7415d4eb6e0e",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 74,
+        "vertices": 18184,
+        "triangles": 27384,
+        "materials": 6,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "SMITHY",
+        "geometry_mode": "SOLID",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              16.8,
+              13.0
+            ],
+            "base": 0.48,
+            "eave": 6.08,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "SMITHY",
+            "wall_thickness": 0.7,
+            "vertices": 11100,
+            "triangles": 16692
+          },
+          {
+            "key": "emberholt_forge_work_range",
+            "bounds": [
+              5.208,
+              13.0,
+              11.592,
+              20.28
+            ],
+            "base": 0.48,
+            "eave": 3.0,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "WORKSHOP",
+            "wall_thickness": 0.7,
+            "vertices": 3428,
+            "triangles": 5176
+          },
+          {
+            "key": "emberholt_vent_tower",
+            "bounds": [
+              18.150000000000002,
+              4.6,
+              21.85,
+              8.399999999999999
+            ],
+            "base": 0.48,
+            "eave": 6.08,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "WATCHTOWER",
+            "wall_thickness": 0.7,
+            "vertices": 3312,
+            "triangles": 5000
+          }
+        ],
+        "geometry_hash": "8a169ae35c8a28eb5828376000afc1ca58033fcafa75cabb0adb7415d4eb6e0e",
+        "tool_revision": "0.4.0"
+      },
+      "backend_metrics": {
+        "objects": 74,
+        "vertices": 18184,
+        "width": 23.58752602338791,
+        "depth": 21.480000853538513,
+        "height": 9.103604078292847,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.8687626719474792,
+          22.71876335144043
+        ],
+        [
+          -0.36000001430511475,
+          21.1200008392334
+        ],
+        [
+          -0.06360411643981934,
+          9.039999961853027
+        ]
+      ],
+      "camera_direction": [
+        0.82,
+        0.78,
+        0.68
+      ],
+      "neutral_clay": false,
+      "image": "evidence\\world_emberholt_smithy_high_pbr.png",
+      "image_sha256": "cd49afc2774da620b36eb2ddc9e631b4aeaa06bd2c55308e452722686d5c83fa",
+      "build_seconds": 2.0643,
+      "render_seconds": 0.4779,
+      "elapsed_seconds": 2.9823,
+      "blender_version": "5.0.1",
+      "blend": "evidence\\world_emberholt_smithy_pbr.blend",
+      "blend_sha256": "b050955104d0906316a4222e69b31f4af52b6d064d3fa1566d917e4995ca039f",
+      "blend_bytes": 881508
+    }
+  ],
+  "notes": "Miller and Boathouse are neutral clay to expose geometry. Emberholt Smithy keeps backend materials; its editable compressed Blender scene is included."
+}

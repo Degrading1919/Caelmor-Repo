@@ -2,7 +2,7 @@
 bl_info = {
     "name": "Caelmor Architectural Generator",
     "author": "Caelmor",
-    "version": (0, 3, 0),
+    "version": (0, 4, 0),
     "blender": (4, 2, 0),
     "location": "View3D > Sidebar > Caelmor",
     "description": "Generate editable regional Caelmor buildings",
@@ -69,6 +69,7 @@ def _settings_from_props(props):
         use_grammar=props.caelm_use_grammar,
         roof_style=props.caelm_roof_style,
         geometry_mode=props.caelm_geometry_mode,
+        world_aware=props.caelm_world_aware,
     )
 
 
@@ -95,6 +96,7 @@ def _set_props(props, settings):
     props.caelm_use_grammar = settings.use_grammar
     props.caelm_roof_style = settings.roof_style
     props.caelm_geometry_mode = settings.geometry_mode
+    props.caelm_world_aware = settings.world_aware
 
 
 def _active_build(context):
@@ -151,6 +153,9 @@ def _make_classes(b):
         caelm_maintenance: b.props.FloatProperty(name="Maintenance", default=.7, min=0.0, max=1.0)
         caelm_age: b.props.FloatProperty(name="Age (years)", default=20.0, min=0.0, max=250.0)
         caelm_use_grammar: b.props.BoolProperty(name="Use Regional Grammar", default=True)
+        caelm_world_aware: b.props.BoolProperty(
+            name="World Construction Language", default=True,
+            description="Build regional structural forms as connected, roofed construction volumes")
         caelm_roof_style: b.props.EnumProperty(name="Roof Style", items=[
             ('AUTO', "Regional / Type Default", "Select a suitable roof by type and region"),
             ('GABLE', "Gable", "Gabled roof"), ('HIP', "Hip", "Hipped roof")], default='AUTO')
@@ -316,23 +321,38 @@ def _make_classes(b):
             regional.prop(p, "caelm_age")
             regional.prop(p, "caelm_maintenance")
             regional.prop(p, "caelm_use_grammar")
-            regional.prop(p, "caelm_roof_style")
+            regional.prop(p, "caelm_world_aware")
+            roof_row = regional.row()
+            roof_row.enabled = not p.caelm_world_aware
+            roof_row.prop(p, "caelm_roof_style")
+            if p.caelm_world_aware:
+                regional.label(text="Regional construction chooses roof forms")
             regional.prop(p, "caelm_geometry_mode")
             regional.operator("caelmor.apply_grammar", icon='FILE_REFRESH')
-            box.label(text="Manual shape controls (used when grammar is off)")
+            box.label(text="Shape inputs" if p.caelm_world_aware else "Manual shape controls (used when grammar is off)")
+            if p.caelm_world_aware:
+                box.label(text="Regional construction adapts these inputs to its building form")
             col = box.column(align=True)
             col.enabled = not p.caelm_use_grammar
-            col.prop(p, "caelm_footprint")
+            footprint_row=col.row()
+            footprint_row.enabled=not p.caelm_world_aware
+            footprint_row.prop(p, "caelm_footprint")
             col.prop(p, "caelm_width")
             col.prop(p, "caelm_depth")
-            col.prop(p, "caelm_wing_width")
-            col.prop(p, "caelm_wing_depth")
+            wings=col.column()
+            wings.enabled=not p.caelm_world_aware
+            wings.prop(p, "caelm_wing_width")
+            wings.prop(p, "caelm_wing_depth")
             col = box.column(align=True)
             col.enabled = not p.caelm_use_grammar
             col.prop(p, "caelm_floors")
             col.prop(p, "caelm_floor_height")
-            col.prop(p, "caelm_pitch")
-            box.prop(p, "caelm_overhang")
+            pitch_row=col.row()
+            pitch_row.enabled=not p.caelm_world_aware
+            pitch_row.prop(p, "caelm_pitch")
+            overhang_row=box.row()
+            overhang_row.enabled=not p.caelm_world_aware
+            overhang_row.prop(p, "caelm_overhang")
             box.prop(p, "caelm_detail")
             box.prop(p, "caelm_window_density")
             try:
@@ -344,11 +364,22 @@ def _make_classes(b):
                 spec = TYPE_SPECS[effective.function]
                 region_spec = REGIONS[effective.region]
                 info = layout.box()
-                info.label(text="Effective Regional Plan" if requested.use_grammar else "Manual Plan")
+                info.label(text="World Construction Language" if requested.world_aware else
+                           ("Effective Regional Plan" if requested.use_grammar else "Manual Plan"))
                 info.label(text=f"{region_spec.label} / {effective.context} · {spec.category.replace('_',' ').title()}")
-                info.label(text=f"{effective.width:.1f} × {effective.depth:.1f} m main block")
-                info.label(text=f"{style.foundation_height + effective.floors * effective.floor_height:.1f} m eaves · {effective.pitch:.0f}° {effective.roof_style.lower()}")
-                info.label(text=f"{style.foundation_mode} foundation · {style.construction} · {style.roof_cover}")
+                if requested.world_aware:
+                    descriptions = {
+                        "LOWMARK": "Low, broad halls with roofed service ranges",
+                        "THORNFELL": "Stepped stone masses with steep, sheltered roofs",
+                        "MIRE": "Raised timber volumes with supported connections",
+                        "EMBERHOLT": "Terraced masonry blocks with industrial massing",
+                    }
+                    info.label(text=descriptions.get(effective.region, "Regional roofed construction volumes"))
+                    info.label(text="Final bounds and validation appear after generation")
+                else:
+                    info.label(text=f"{effective.width:.1f} × {effective.depth:.1f} m main block")
+                    info.label(text=f"{style.foundation_height + effective.floors * effective.floor_height:.1f} m eaves · {effective.pitch:.0f}° {effective.roof_style.lower()}")
+                    info.label(text=f"{style.foundation_mode} foundation · {style.construction} · {style.roof_cover}")
             except (ValueError, KeyError, AttributeError):
                 pass
             layout.operator("caelmor.generate", icon='ADD')
@@ -391,6 +422,7 @@ def _settings_from_json(data):
     if "region" not in data: values["region"] = "LOWMARK"
     if "geometry_mode" not in data: values["geometry_mode"] = "SOLID"
     if "roof_style" not in data: values["roof_style"] = "GABLE"
+    if "world_aware" not in data: values["world_aware"] = False
     return Settings(**values)
 
 

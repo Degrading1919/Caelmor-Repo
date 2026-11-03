@@ -1,0 +1,1421 @@
+[
+  {
+    "settings": {
+      "seed": 91,
+      "function": "COTTAGE",
+      "footprint": "L",
+      "width": 11.0,
+      "depth": 7.0,
+      "wing_width": 4.2,
+      "wing_depth": 4.5,
+      "floors": 2,
+      "floor_height": 2.65,
+      "pitch": 48.0,
+      "overhang": 0.45,
+      "detail": "LOW",
+      "window_density": 1.0,
+      "region": "LOWMARK",
+      "context": "AUTO",
+      "wealth": "MODEST",
+      "craftsmanship": "STANDARD",
+      "maintenance": 0.7,
+      "age": 35.0,
+      "use_grammar": true,
+      "roof_style": "AUTO",
+      "geometry_mode": "SOLID",
+      "world_aware": true
+    },
+    "geometry_hash": "f393f00e58af6a0272d37e2959560b287c5a428035064353bb3c5dccd6eeef79",
+    "metrics": {
+      "valid": true,
+      "errors": [],
+      "objects": 42,
+      "vertices": 5798,
+      "triangles": 8896,
+      "materials": 12,
+      "region": "LOWMARK",
+      "context": "RURAL",
+      "building_type": "COTTAGE",
+      "geometry_mode": "SOLID",
+      "architecture": "WORLD",
+      "construction_zones": [
+        {
+          "key": "lowmark_main_hall",
+          "bounds": [
+            0,
+            0,
+            5.9136,
+            4.4352
+          ],
+          "base": 0.45,
+          "eave": 3.25,
+          "valid": true,
+          "roof": "GABLE",
+          "vertices": 4046,
+          "triangles": 6172
+        },
+        {
+          "key": "lowmark_service_wing",
+          "bounds": [
+            5.9136,
+            -0.532224,
+            8.7136,
+            2.6611199999999995
+          ],
+          "base": 0.45,
+          "eave": 2.746,
+          "valid": true,
+          "roof": "SHED",
+          "vertices": 1712,
+          "triangles": 2664
+        }
+      ],
+      "geometry_hash": "f393f00e58af6a0272d37e2959560b287c5a428035064353bb3c5dccd6eeef79",
+      "tool_revision": "0.4.0"
+    },
+    "backend_metrics": {
+      "objects": 42,
+      "vertices": 5798,
+      "width": 9.623600363731384,
+      "depth": 6.378421664237976,
+      "height": 4.804930418729782,
+      "layers": [
+        "details",
+        "doors",
+        "foundation",
+        "roof",
+        "structure",
+        "walls",
+        "windows"
+      ]
+    },
+    "build_seconds": 1.789,
+    "elapsed_seconds": 2.234,
+    "bounds": [
+      [
+        -0.48500001430511475,
+        9.13860034942627
+      ],
+      [
+        -1.4582217931747437,
+        4.920199871063232
+      ],
+      [
+        -0.06173059344291687,
+        4.743199825286865
+      ]
+    ],
+    "image": "wealth_cottage_00.png",
+    "label": "LOWMARK \u00b7 COTTAGE \u00b7 MODEST \u00b7 SOLID",
+    "blender_version": "5.0.1",
+    "source_hashes": {
+      "engine.py": "547d9b0e28252aa0fe7306947cbb525c54836eb9eeb7887bab4803293205b8ca",
+      "model.py": "d52927e24f0b093dabdd9affc071a111ef4b82db052089b04bb44052f53e43ce",
+      "facade.py": "9639904540df538372e7883f4cd363baad0fd6c4edf0131b88233c5e7e0dc1c4",
+      "roof.py": "2932203eb3675bb9f3c0d9a346e6d655d65bc001ec144c7c4297984a56e50880",
+      "world.py": "3db9903928e76e70cea50c4b52fa7245248e7f5b25c4c2f0810f5859c16645c6",
+      "world_lowmark_thornfell.py": "8eb195c922ab78c185271ce96653e6397aff64141d1ada2b36c12acbc3940449",
+      "world_mire.py": "3be11f40c80893ded91cf61db4ca194a5a671632c9a71cecb56d87582554e6b7",
+      "world_emberholt.py": "3f8c474a4f1333795c07c3f5428624a35e7e2fcbf8bbb89f0b608a1eb52e5fbf",
+      "blender_backend.py": "4c28a3b03c538b81be3b4a95319396bd284dd852f0711426fa75530dd74ed01e",
+      "render_world_evidence.py": "d69625f57916cf18f289900aedcdecbbe266431bd22c37ffe69185f2e26822bb"
+    }
+  },
+  {
+    "settings": {
+      "seed": 91,
+      "function": "COTTAGE",
+      "footprint": "L",
+      "width": 11.0,
+      "depth": 7.0,
+      "wing_width": 4.2,
+      "wing_depth": 4.5,
+      "floors": 2,
+      "floor_height": 2.65,
+      "pitch": 48.0,
+      "overhang": 0.45,
+      "detail": "LOW",
+      "window_density": 1.0,
+      "region": "LOWMARK",
+      "context": "AUTO",
+      "wealth": "ESTABLISHED",
+      "craftsmanship": "STANDARD",
+      "maintenance": 0.7,
+      "age": 35.0,
+      "use_grammar": true,
+      "roof_style": "AUTO",
+      "geometry_mode": "SOLID",
+      "world_aware": true
+    },
+    "geometry_hash": "83488857cf1ac42fbc3979c745e7ded0e3af04c62e6c25b6855e22c215716883",
+    "metrics": {
+      "valid": true,
+      "errors": [],
+      "objects": 42,
+      "vertices": 7496,
+      "triangles": 11456,
+      "materials": 12,
+      "region": "LOWMARK",
+      "context": "RURAL",
+      "building_type": "COTTAGE",
+      "geometry_mode": "SOLID",
+      "architecture": "WORLD",
+      "construction_zones": [
+        {
+          "key": "lowmark_main_hall",
+          "bounds": [
+            0,
+            0,
+            8.0,
+            6.0
+          ],
+          "base": 0.45,
+          "eave": 3.25,
+          "valid": true,
+          "roof": "GABLE",
+          "vertices": 5528,
+          "triangles": 8408
+        },
+        {
+          "key": "lowmark_service_wing",
+          "bounds": [
+            8.0,
+            -0.72,
+            11.18,
+            3.6000000000000005
+          ],
+          "base": 0.45,
+          "eave": 2.746,
+          "valid": true,
+          "roof": "SHED",
+          "vertices": 1928,
+          "triangles": 2988
+        }
+      ],
+      "geometry_hash": "83488857cf1ac42fbc3979c745e7ded0e3af04c62e6c25b6855e22c215716883",
+      "tool_revision": "0.4.0"
+    },
+    "backend_metrics": {
+      "objects": 42,
+      "vertices": 7496,
+      "width": 12.089999556541443,
+      "depth": 8.130997896194458,
+      "height": 5.269338816404343,
+      "layers": [
+        "details",
+        "doors",
+        "foundation",
+        "roof",
+        "structure",
+        "walls",
+        "windows"
+      ]
+    },
+    "build_seconds": 1.9042,
+    "elapsed_seconds": 2.3984,
+    "bounds": [
+      [
+        -0.48500001430511475,
+        11.604999542236328
+      ],
+      [
+        -1.6459977626800537,
+        6.485000133514404
+      ],
+      [
+        -0.06173059344291687,
+        5.207608222961426
+      ]
+    ],
+    "image": "wealth_cottage_01.png",
+    "label": "LOWMARK \u00b7 COTTAGE \u00b7 ESTABLISHED \u00b7 SOLID",
+    "blender_version": "5.0.1",
+    "source_hashes": {
+      "engine.py": "547d9b0e28252aa0fe7306947cbb525c54836eb9eeb7887bab4803293205b8ca",
+      "model.py": "d52927e24f0b093dabdd9affc071a111ef4b82db052089b04bb44052f53e43ce",
+      "facade.py": "9639904540df538372e7883f4cd363baad0fd6c4edf0131b88233c5e7e0dc1c4",
+      "roof.py": "2932203eb3675bb9f3c0d9a346e6d655d65bc001ec144c7c4297984a56e50880",
+      "world.py": "3db9903928e76e70cea50c4b52fa7245248e7f5b25c4c2f0810f5859c16645c6",
+      "world_lowmark_thornfell.py": "8eb195c922ab78c185271ce96653e6397aff64141d1ada2b36c12acbc3940449",
+      "world_mire.py": "3be11f40c80893ded91cf61db4ca194a5a671632c9a71cecb56d87582554e6b7",
+      "world_emberholt.py": "3f8c474a4f1333795c07c3f5428624a35e7e2fcbf8bbb89f0b608a1eb52e5fbf",
+      "blender_backend.py": "4c28a3b03c538b81be3b4a95319396bd284dd852f0711426fa75530dd74ed01e",
+      "render_world_evidence.py": "d69625f57916cf18f289900aedcdecbbe266431bd22c37ffe69185f2e26822bb"
+    }
+  },
+  {
+    "settings": {
+      "seed": 91,
+      "function": "COTTAGE",
+      "footprint": "L",
+      "width": 11.0,
+      "depth": 7.0,
+      "wing_width": 4.2,
+      "wing_depth": 4.5,
+      "floors": 2,
+      "floor_height": 2.65,
+      "pitch": 48.0,
+      "overhang": 0.45,
+      "detail": "LOW",
+      "window_density": 1.0,
+      "region": "LOWMARK",
+      "context": "AUTO",
+      "wealth": "AFFLUENT",
+      "craftsmanship": "STANDARD",
+      "maintenance": 0.7,
+      "age": 35.0,
+      "use_grammar": true,
+      "roof_style": "AUTO",
+      "geometry_mode": "SOLID",
+      "world_aware": true
+    },
+    "geometry_hash": "7749fda1884f895d788ed74eafb12fd11e289ea104cf308cdaaa68d90aa64b0d",
+    "metrics": {
+      "valid": true,
+      "errors": [],
+      "objects": 42,
+      "vertices": 9446,
+      "triangles": 14272,
+      "materials": 12,
+      "region": "LOWMARK",
+      "context": "RURAL",
+      "building_type": "COTTAGE",
+      "geometry_mode": "SOLID",
+      "architecture": "WORLD",
+      "construction_zones": [
+        {
+          "key": "lowmark_main_hall",
+          "bounds": [
+            0,
+            0,
+            10.1248,
+            7.5936
+          ],
+          "base": 0.45,
+          "eave": 3.25,
+          "valid": true,
+          "roof": "GABLE",
+          "vertices": 7280,
+          "triangles": 10920
+        },
+        {
+          "key": "lowmark_service_wing",
+          "bounds": [
+            10.1248,
+            -0.911232,
+            14.149408000000001,
+            4.55616
+          ],
+          "base": 0.45,
+          "eave": 2.746,
+          "valid": true,
+          "roof": "SHED",
+          "vertices": 2126,
+          "triangles": 3292
+        }
+      ],
+      "geometry_hash": "7749fda1884f895d788ed74eafb12fd11e289ea104cf308cdaaa68d90aa64b0d",
+      "tool_revision": "0.4.0"
+    },
+    "backend_metrics": {
+      "objects": 42,
+      "vertices": 9446,
+      "width": 15.059407591819763,
+      "depth": 9.91582977771759,
+      "height": 5.767234534025192,
+      "layers": [
+        "details",
+        "doors",
+        "foundation",
+        "roof",
+        "structure",
+        "walls",
+        "windows"
+      ]
+    },
+    "build_seconds": 2.0899,
+    "elapsed_seconds": 2.6556,
+    "bounds": [
+      [
+        -0.48500001430511475,
+        14.574407577514648
+      ],
+      [
+        -1.83722984790802,
+        8.07859992980957
+      ],
+      [
+        -0.06173059344291687,
+        5.705503940582275
+      ]
+    ],
+    "image": "wealth_cottage_02.png",
+    "label": "LOWMARK \u00b7 COTTAGE \u00b7 AFFLUENT \u00b7 SOLID",
+    "blender_version": "5.0.1",
+    "source_hashes": {
+      "engine.py": "547d9b0e28252aa0fe7306947cbb525c54836eb9eeb7887bab4803293205b8ca",
+      "model.py": "d52927e24f0b093dabdd9affc071a111ef4b82db052089b04bb44052f53e43ce",
+      "facade.py": "9639904540df538372e7883f4cd363baad0fd6c4edf0131b88233c5e7e0dc1c4",
+      "roof.py": "2932203eb3675bb9f3c0d9a346e6d655d65bc001ec144c7c4297984a56e50880",
+      "world.py": "3db9903928e76e70cea50c4b52fa7245248e7f5b25c4c2f0810f5859c16645c6",
+      "world_lowmark_thornfell.py": "8eb195c922ab78c185271ce96653e6397aff64141d1ada2b36c12acbc3940449",
+      "world_mire.py": "3be11f40c80893ded91cf61db4ca194a5a671632c9a71cecb56d87582554e6b7",
+      "world_emberholt.py": "3f8c474a4f1333795c07c3f5428624a35e7e2fcbf8bbb89f0b608a1eb52e5fbf",
+      "blender_backend.py": "4c28a3b03c538b81be3b4a95319396bd284dd852f0711426fa75530dd74ed01e",
+      "render_world_evidence.py": "d69625f57916cf18f289900aedcdecbbe266431bd22c37ffe69185f2e26822bb"
+    }
+  },
+  {
+    "settings": {
+      "seed": 91,
+      "function": "COTTAGE",
+      "footprint": "L",
+      "width": 11.0,
+      "depth": 7.0,
+      "wing_width": 4.2,
+      "wing_depth": 4.5,
+      "floors": 2,
+      "floor_height": 2.65,
+      "pitch": 48.0,
+      "overhang": 0.45,
+      "detail": "LOW",
+      "window_density": 1.0,
+      "region": "THORNFELL",
+      "context": "AUTO",
+      "wealth": "MODEST",
+      "craftsmanship": "STANDARD",
+      "maintenance": 0.7,
+      "age": 35.0,
+      "use_grammar": true,
+      "roof_style": "AUTO",
+      "geometry_mode": "SOLID",
+      "world_aware": true
+    },
+    "geometry_hash": "bcdb12d6f30cd10e054c79f183dd0943c0f9f890ab670870ca385a3a1ac66826",
+    "metrics": {
+      "valid": true,
+      "errors": [],
+      "objects": 52,
+      "vertices": 8724,
+      "triangles": 13108,
+      "materials": 10,
+      "region": "THORNFELL",
+      "context": "RIDGE",
+      "building_type": "COTTAGE",
+      "geometry_mode": "SOLID",
+      "architecture": "WORLD",
+      "construction_zones": [
+        {
+          "key": "thornfell_stone_hall",
+          "bounds": [
+            0,
+            0,
+            5.76576,
+            6.6000000000000005
+          ],
+          "base": 0.5,
+          "eave": 3.1319999999999997,
+          "valid": true,
+          "roof": "GABLE",
+          "vertices": 5768,
+          "triangles": 8668
+        },
+        {
+          "key": "thornfell_lower_stone_range",
+          "bounds": [
+            5.76576,
+            1.3200000000000003,
+            8.76576,
+            4.752000000000001
+          ],
+          "base": 0.9199999999999999,
+          "eave": 2.9729599999999996,
+          "valid": true,
+          "roof": "GABLE",
+          "vertices": 2956,
+          "triangles": 4440
+        }
+      ],
+      "geometry_hash": "bcdb12d6f30cd10e054c79f183dd0943c0f9f890ab670870ca385a3a1ac66826",
+      "tool_revision": "0.4.0"
+    },
+    "backend_metrics": {
+      "objects": 52,
+      "vertices": 8724,
+      "width": 9.24075996875763,
+      "depth": 7.706681072711945,
+      "height": 8.081999778747559,
+      "layers": [
+        "details",
+        "doors",
+        "foundation",
+        "roof",
+        "structure",
+        "walls",
+        "windows"
+      ]
+    },
+    "build_seconds": 1.6693,
+    "elapsed_seconds": 2.1833,
+    "bounds": [
+      [
+        -0.24500000476837158,
+        8.995759963989258
+      ],
+      [
+        -0.8399999737739563,
+        6.866681098937988
+      ],
+      [
+        0.0,
+        8.081999778747559
+      ]
+    ],
+    "image": "wealth_cottage_03.png",
+    "label": "THORNFELL \u00b7 COTTAGE \u00b7 MODEST \u00b7 SOLID",
+    "blender_version": "5.0.1",
+    "source_hashes": {
+      "engine.py": "547d9b0e28252aa0fe7306947cbb525c54836eb9eeb7887bab4803293205b8ca",
+      "model.py": "d52927e24f0b093dabdd9affc071a111ef4b82db052089b04bb44052f53e43ce",
+      "facade.py": "9639904540df538372e7883f4cd363baad0fd6c4edf0131b88233c5e7e0dc1c4",
+      "roof.py": "2932203eb3675bb9f3c0d9a346e6d655d65bc001ec144c7c4297984a56e50880",
+      "world.py": "3db9903928e76e70cea50c4b52fa7245248e7f5b25c4c2f0810f5859c16645c6",
+      "world_lowmark_thornfell.py": "8eb195c922ab78c185271ce96653e6397aff64141d1ada2b36c12acbc3940449",
+      "world_mire.py": "3be11f40c80893ded91cf61db4ca194a5a671632c9a71cecb56d87582554e6b7",
+      "world_emberholt.py": "3f8c474a4f1333795c07c3f5428624a35e7e2fcbf8bbb89f0b608a1eb52e5fbf",
+      "blender_backend.py": "4c28a3b03c538b81be3b4a95319396bd284dd852f0711426fa75530dd74ed01e",
+      "render_world_evidence.py": "d69625f57916cf18f289900aedcdecbbe266431bd22c37ffe69185f2e26822bb"
+    }
+  },
+  {
+    "settings": {
+      "seed": 91,
+      "function": "COTTAGE",
+      "footprint": "L",
+      "width": 11.0,
+      "depth": 7.0,
+      "wing_width": 4.2,
+      "wing_depth": 4.5,
+      "floors": 2,
+      "floor_height": 2.65,
+      "pitch": 48.0,
+      "overhang": 0.45,
+      "detail": "LOW",
+      "window_density": 1.0,
+      "region": "THORNFELL",
+      "context": "AUTO",
+      "wealth": "ESTABLISHED",
+      "craftsmanship": "STANDARD",
+      "maintenance": 0.7,
+      "age": 35.0,
+      "use_grammar": true,
+      "roof_style": "AUTO",
+      "geometry_mode": "SOLID",
+      "world_aware": true
+    },
+    "geometry_hash": "890ec84e198bfe80ba862b715f60f22a412775304176586044a7395690bc4403",
+    "metrics": {
+      "valid": true,
+      "errors": [],
+      "objects": 52,
+      "vertices": 9136,
+      "triangles": 13724,
+      "materials": 10,
+      "region": "THORNFELL",
+      "context": "RIDGE",
+      "building_type": "COTTAGE",
+      "geometry_mode": "SOLID",
+      "architecture": "WORLD",
+      "construction_zones": [
+        {
+          "key": "thornfell_stone_hall",
+          "bounds": [
+            0,
+            0,
+            7.28,
+            6.6000000000000005
+          ],
+          "base": 0.5,
+          "eave": 3.1319999999999997,
+          "valid": true,
+          "roof": "GABLE",
+          "vertices": 6230,
+          "triangles": 9360
+        },
+        {
+          "key": "thornfell_lower_stone_range",
+          "bounds": [
+            7.28,
+            1.3200000000000003,
+            10.280000000000001,
+            4.752000000000001
+          ],
+          "base": 0.9199999999999999,
+          "eave": 2.9729599999999996,
+          "valid": true,
+          "roof": "GABLE",
+          "vertices": 2906,
+          "triangles": 4364
+        }
+      ],
+      "geometry_hash": "890ec84e198bfe80ba862b715f60f22a412775304176586044a7395690bc4403",
+      "tool_revision": "0.4.0"
+    },
+    "backend_metrics": {
+      "objects": 52,
+      "vertices": 9136,
+      "width": 10.755000233650208,
+      "depth": 7.706681072711945,
+      "height": 8.081999778747559,
+      "layers": [
+        "details",
+        "doors",
+        "foundation",
+        "roof",
+        "structure",
+        "walls",
+        "windows"
+      ]
+    },
+    "build_seconds": 1.7009,
+    "elapsed_seconds": 2.232,
+    "bounds": [
+      [
+        -0.24500000476837158,
+        10.510000228881836
+      ],
+      [
+        -0.8399999737739563,
+        6.866681098937988
+      ],
+      [
+        0.0,
+        8.081999778747559
+      ]
+    ],
+    "image": "wealth_cottage_04.png",
+    "label": "THORNFELL \u00b7 COTTAGE \u00b7 ESTABLISHED \u00b7 SOLID",
+    "blender_version": "5.0.1",
+    "source_hashes": {
+      "engine.py": "547d9b0e28252aa0fe7306947cbb525c54836eb9eeb7887bab4803293205b8ca",
+      "model.py": "d52927e24f0b093dabdd9affc071a111ef4b82db052089b04bb44052f53e43ce",
+      "facade.py": "9639904540df538372e7883f4cd363baad0fd6c4edf0131b88233c5e7e0dc1c4",
+      "roof.py": "2932203eb3675bb9f3c0d9a346e6d655d65bc001ec144c7c4297984a56e50880",
+      "world.py": "3db9903928e76e70cea50c4b52fa7245248e7f5b25c4c2f0810f5859c16645c6",
+      "world_lowmark_thornfell.py": "8eb195c922ab78c185271ce96653e6397aff64141d1ada2b36c12acbc3940449",
+      "world_mire.py": "3be11f40c80893ded91cf61db4ca194a5a671632c9a71cecb56d87582554e6b7",
+      "world_emberholt.py": "3f8c474a4f1333795c07c3f5428624a35e7e2fcbf8bbb89f0b608a1eb52e5fbf",
+      "blender_backend.py": "4c28a3b03c538b81be3b4a95319396bd284dd852f0711426fa75530dd74ed01e",
+      "render_world_evidence.py": "d69625f57916cf18f289900aedcdecbbe266431bd22c37ffe69185f2e26822bb"
+    }
+  },
+  {
+    "settings": {
+      "seed": 91,
+      "function": "COTTAGE",
+      "footprint": "L",
+      "width": 11.0,
+      "depth": 7.0,
+      "wing_width": 4.2,
+      "wing_depth": 4.5,
+      "floors": 2,
+      "floor_height": 2.65,
+      "pitch": 48.0,
+      "overhang": 0.45,
+      "detail": "LOW",
+      "window_density": 1.0,
+      "region": "THORNFELL",
+      "context": "AUTO",
+      "wealth": "AFFLUENT",
+      "craftsmanship": "STANDARD",
+      "maintenance": 0.7,
+      "age": 35.0,
+      "use_grammar": true,
+      "roof_style": "AUTO",
+      "geometry_mode": "SOLID",
+      "world_aware": true
+    },
+    "geometry_hash": "62ef47e9ba88ba3c91392cea8c63e1b53f2a949f30a2f1fde6f961c71e805f07",
+    "metrics": {
+      "valid": true,
+      "errors": [],
+      "objects": 80,
+      "vertices": 13876,
+      "triangles": 20840,
+      "materials": 10,
+      "region": "THORNFELL",
+      "context": "RIDGE",
+      "building_type": "COTTAGE",
+      "geometry_mode": "SOLID",
+      "architecture": "WORLD",
+      "construction_zones": [
+        {
+          "key": "thornfell_stone_hall",
+          "bounds": [
+            0,
+            0,
+            8.805888000000001,
+            6.948480000000001
+          ],
+          "base": 0.5,
+          "eave": 3.1319999999999997,
+          "valid": true,
+          "roof": "GABLE",
+          "vertices": 7192,
+          "triangles": 10800
+        },
+        {
+          "key": "thornfell_lower_stone_range",
+          "bounds": [
+            8.805888000000001,
+            1.3896960000000003,
+            12.328243200000003,
+            5.002905600000001
+          ],
+          "base": 0.9199999999999999,
+          "eave": 2.9729599999999996,
+          "valid": true,
+          "roof": "GABLE",
+          "vertices": 3052,
+          "triangles": 4580
+        },
+        {
+          "key": "thornfell_signal_tower",
+          "bounds": [
+            -3.3462374400000003,
+            2.5014528,
+            0.0,
+            5.5014528
+          ],
+          "base": 0.5,
+          "eave": 8.395999999999999,
+          "valid": true,
+          "roof": "GABLE",
+          "vertices": 3632,
+          "triangles": 5460
+        }
+      ],
+      "geometry_hash": "62ef47e9ba88ba3c91392cea8c63e1b53f2a949f30a2f1fde6f961c71e805f07",
+      "tool_revision": "0.4.0"
+    },
+    "backend_metrics": {
+      "objects": 80,
+      "vertices": 13876,
+      "width": 16.134480237960815,
+      "depth": 8.05516129732132,
+      "height": 11.246000289916992,
+      "layers": [
+        "details",
+        "doors",
+        "foundation",
+        "roof",
+        "structure",
+        "walls",
+        "windows"
+      ]
+    },
+    "build_seconds": 2.0474,
+    "elapsed_seconds": 2.6687,
+    "bounds": [
+      [
+        -3.576237440109253,
+        12.558242797851562
+      ],
+      [
+        -0.8399999737739563,
+        7.215161323547363
+      ],
+      [
+        0.0,
+        11.246000289916992
+      ]
+    ],
+    "image": "wealth_cottage_05.png",
+    "label": "THORNFELL \u00b7 COTTAGE \u00b7 AFFLUENT \u00b7 SOLID",
+    "blender_version": "5.0.1",
+    "source_hashes": {
+      "engine.py": "547d9b0e28252aa0fe7306947cbb525c54836eb9eeb7887bab4803293205b8ca",
+      "model.py": "d52927e24f0b093dabdd9affc071a111ef4b82db052089b04bb44052f53e43ce",
+      "facade.py": "9639904540df538372e7883f4cd363baad0fd6c4edf0131b88233c5e7e0dc1c4",
+      "roof.py": "2932203eb3675bb9f3c0d9a346e6d655d65bc001ec144c7c4297984a56e50880",
+      "world.py": "3db9903928e76e70cea50c4b52fa7245248e7f5b25c4c2f0810f5859c16645c6",
+      "world_lowmark_thornfell.py": "8eb195c922ab78c185271ce96653e6397aff64141d1ada2b36c12acbc3940449",
+      "world_mire.py": "3be11f40c80893ded91cf61db4ca194a5a671632c9a71cecb56d87582554e6b7",
+      "world_emberholt.py": "3f8c474a4f1333795c07c3f5428624a35e7e2fcbf8bbb89f0b608a1eb52e5fbf",
+      "blender_backend.py": "4c28a3b03c538b81be3b4a95319396bd284dd852f0711426fa75530dd74ed01e",
+      "render_world_evidence.py": "d69625f57916cf18f289900aedcdecbbe266431bd22c37ffe69185f2e26822bb"
+    }
+  },
+  {
+    "settings": {
+      "seed": 91,
+      "function": "COTTAGE",
+      "footprint": "L",
+      "width": 11.0,
+      "depth": 7.0,
+      "wing_width": 4.2,
+      "wing_depth": 4.5,
+      "floors": 2,
+      "floor_height": 2.65,
+      "pitch": 48.0,
+      "overhang": 0.45,
+      "detail": "LOW",
+      "window_density": 1.0,
+      "region": "MIRE",
+      "context": "AUTO",
+      "wealth": "MODEST",
+      "craftsmanship": "STANDARD",
+      "maintenance": 0.7,
+      "age": 35.0,
+      "use_grammar": true,
+      "roof_style": "AUTO",
+      "geometry_mode": "SOLID",
+      "world_aware": true
+    },
+    "geometry_hash": "7db8392b799b728ab80f193826f6cf5783afc858b70b6912c7abbd90848ea910",
+    "metrics": {
+      "valid": true,
+      "errors": [],
+      "objects": 28,
+      "vertices": 8068,
+      "triangles": 12224,
+      "materials": 9,
+      "region": "MIRE",
+      "context": "SORROWMERE",
+      "building_type": "COTTAGE",
+      "geometry_mode": "SOLID",
+      "architecture": "WORLD",
+      "construction_zones": [
+        {
+          "key": "mire_longhouse",
+          "bounds": [
+            0.0,
+            0.0,
+            6.6175999999999995,
+            4.857600000000001
+          ],
+          "base": 1.82,
+          "eave": 4.62,
+          "valid": true,
+          "roof": "BOW",
+          "vertices": 7756,
+          "triangles": 11756
+        }
+      ],
+      "geometry_hash": "7db8392b799b728ab80f193826f6cf5783afc858b70b6912c7abbd90848ea910",
+      "tool_revision": "0.4.0"
+    },
+    "backend_metrics": {
+      "objects": 28,
+      "vertices": 8068,
+      "width": 8.1075998544693,
+      "depth": 10.11516284942627,
+      "height": 7.8638879135251045,
+      "layers": [
+        "details",
+        "doors",
+        "foundation",
+        "roof",
+        "structure",
+        "walls",
+        "windows"
+      ]
+    },
+    "build_seconds": 1.5852,
+    "elapsed_seconds": 2.1447,
+    "bounds": [
+      [
+        -0.7450000047683716,
+        7.362599849700928
+      ],
+      [
+        -4.5125627517700195,
+        5.60260009765625
+      ],
+      [
+        -0.05202401429414749,
+        7.811863899230957
+      ]
+    ],
+    "image": "wealth_cottage_06.png",
+    "label": "MIRE \u00b7 COTTAGE \u00b7 MODEST \u00b7 SOLID",
+    "blender_version": "5.0.1",
+    "source_hashes": {
+      "engine.py": "547d9b0e28252aa0fe7306947cbb525c54836eb9eeb7887bab4803293205b8ca",
+      "model.py": "d52927e24f0b093dabdd9affc071a111ef4b82db052089b04bb44052f53e43ce",
+      "facade.py": "36f8cc1a71cc72f0b51de4e9e085d2b242203f59c07800857da17969a0f1da9e",
+      "roof.py": "2932203eb3675bb9f3c0d9a346e6d655d65bc001ec144c7c4297984a56e50880",
+      "world.py": "40dd8ace1b76d5cb36aaff77729983b0905d98f1819495022ae19bc2b10d2130",
+      "world_lowmark_thornfell.py": "4f3cc119d23e86081c2bf1638a355e0ea96a6646d26ead2daec29e1ee7590cb7",
+      "world_mire.py": "3be11f40c80893ded91cf61db4ca194a5a671632c9a71cecb56d87582554e6b7",
+      "world_emberholt.py": "73ced3d07cc3994eb89322f469a844c413c3cbb9f6ff0162f5ada666532374b3",
+      "blender_backend.py": "4c28a3b03c538b81be3b4a95319396bd284dd852f0711426fa75530dd74ed01e",
+      "render_world_evidence.py": "d69625f57916cf18f289900aedcdecbbe266431bd22c37ffe69185f2e26822bb"
+    }
+  },
+  {
+    "settings": {
+      "seed": 91,
+      "function": "COTTAGE",
+      "footprint": "L",
+      "width": 11.0,
+      "depth": 7.0,
+      "wing_width": 4.2,
+      "wing_depth": 4.5,
+      "floors": 2,
+      "floor_height": 2.65,
+      "pitch": 48.0,
+      "overhang": 0.45,
+      "detail": "LOW",
+      "window_density": 1.0,
+      "region": "MIRE",
+      "context": "AUTO",
+      "wealth": "ESTABLISHED",
+      "craftsmanship": "STANDARD",
+      "maintenance": 0.7,
+      "age": 35.0,
+      "use_grammar": true,
+      "roof_style": "AUTO",
+      "geometry_mode": "SOLID",
+      "world_aware": true
+    },
+    "geometry_hash": "95afeb7278fc3aa098e3271dc23566afe5d256ef525e5a0a254f0242a687e701",
+    "metrics": {
+      "valid": true,
+      "errors": [],
+      "objects": 28,
+      "vertices": 8980,
+      "triangles": 13596,
+      "materials": 9,
+      "region": "MIRE",
+      "context": "SORROWMERE",
+      "building_type": "COTTAGE",
+      "geometry_mode": "SOLID",
+      "architecture": "WORLD",
+      "construction_zones": [
+        {
+          "key": "mire_longhouse",
+          "bounds": [
+            0.0,
+            0.0,
+            7.52,
+            5.5200000000000005
+          ],
+          "base": 1.94,
+          "eave": 4.74,
+          "valid": true,
+          "roof": "BOW",
+          "vertices": 8660,
+          "triangles": 13116
+        }
+      ],
+      "geometry_hash": "95afeb7278fc3aa098e3271dc23566afe5d256ef525e5a0a254f0242a687e701",
+      "tool_revision": "0.4.0"
+    },
+    "backend_metrics": {
+      "objects": 28,
+      "vertices": 8980,
+      "width": 9.010000348091125,
+      "depth": 11.319891929626465,
+      "height": 8.407641962170601,
+      "layers": [
+        "details",
+        "doors",
+        "foundation",
+        "roof",
+        "structure",
+        "walls",
+        "windows"
+      ]
+    },
+    "build_seconds": 1.6376,
+    "elapsed_seconds": 2.2201,
+    "bounds": [
+      [
+        -0.7450000047683716,
+        8.265000343322754
+      ],
+      [
+        -5.054892063140869,
+        6.264999866485596
+      ],
+      [
+        -0.05184228718280792,
+        8.355799674987793
+      ]
+    ],
+    "image": "wealth_cottage_07.png",
+    "label": "MIRE \u00b7 COTTAGE \u00b7 ESTABLISHED \u00b7 SOLID",
+    "blender_version": "5.0.1",
+    "source_hashes": {
+      "engine.py": "547d9b0e28252aa0fe7306947cbb525c54836eb9eeb7887bab4803293205b8ca",
+      "model.py": "d52927e24f0b093dabdd9affc071a111ef4b82db052089b04bb44052f53e43ce",
+      "facade.py": "36f8cc1a71cc72f0b51de4e9e085d2b242203f59c07800857da17969a0f1da9e",
+      "roof.py": "2932203eb3675bb9f3c0d9a346e6d655d65bc001ec144c7c4297984a56e50880",
+      "world.py": "40dd8ace1b76d5cb36aaff77729983b0905d98f1819495022ae19bc2b10d2130",
+      "world_lowmark_thornfell.py": "4f3cc119d23e86081c2bf1638a355e0ea96a6646d26ead2daec29e1ee7590cb7",
+      "world_mire.py": "3be11f40c80893ded91cf61db4ca194a5a671632c9a71cecb56d87582554e6b7",
+      "world_emberholt.py": "73ced3d07cc3994eb89322f469a844c413c3cbb9f6ff0162f5ada666532374b3",
+      "blender_backend.py": "4c28a3b03c538b81be3b4a95319396bd284dd852f0711426fa75530dd74ed01e",
+      "render_world_evidence.py": "d69625f57916cf18f289900aedcdecbbe266431bd22c37ffe69185f2e26822bb"
+    }
+  },
+  {
+    "settings": {
+      "seed": 91,
+      "function": "COTTAGE",
+      "footprint": "L",
+      "width": 11.0,
+      "depth": 7.0,
+      "wing_width": 4.2,
+      "wing_depth": 4.5,
+      "floors": 2,
+      "floor_height": 2.65,
+      "pitch": 48.0,
+      "overhang": 0.45,
+      "detail": "LOW",
+      "window_density": 1.0,
+      "region": "MIRE",
+      "context": "AUTO",
+      "wealth": "AFFLUENT",
+      "craftsmanship": "STANDARD",
+      "maintenance": 0.7,
+      "age": 35.0,
+      "use_grammar": true,
+      "roof_style": "AUTO",
+      "geometry_mode": "SOLID",
+      "world_aware": true
+    },
+    "geometry_hash": "0c67158418208302969acae735425f752fc948d7fda9afd3903b5069fc20257f",
+    "metrics": {
+      "valid": true,
+      "errors": [],
+      "objects": 53,
+      "vertices": 15744,
+      "triangles": 23856,
+      "materials": 9,
+      "region": "MIRE",
+      "context": "SORROWMERE",
+      "building_type": "COTTAGE",
+      "geometry_mode": "SOLID",
+      "architecture": "WORLD",
+      "construction_zones": [
+        {
+          "key": "mire_longhouse",
+          "bounds": [
+            0.0,
+            0.0,
+            8.4224,
+            6.182400000000001
+          ],
+          "base": 2.12,
+          "eave": 4.92,
+          "valid": true,
+          "roof": "BOW",
+          "vertices": 9772,
+          "triangles": 14784
+        },
+        {
+          "key": "mire_linked_pavilion",
+          "bounds": [
+            10.2224,
+            0.6800640000000002,
+            14.022400000000001,
+            5.5023360000000014
+          ],
+          "base": 2.12,
+          "eave": 4.92,
+          "valid": true,
+          "roof": "BOW",
+          "vertices": 5540,
+          "triangles": 8424
+        }
+      ],
+      "geometry_hash": "0c67158418208302969acae735425f752fc948d7fda9afd3903b5069fc20257f",
+      "tool_revision": "0.4.0"
+    },
+    "backend_metrics": {
+      "objects": 53,
+      "vertices": 15744,
+      "width": 15.412400364875793,
+      "depth": 12.270713329315186,
+      "height": 9.011343475431204,
+      "layers": [
+        "details",
+        "doors",
+        "foundation",
+        "roof",
+        "structure",
+        "walls",
+        "windows"
+      ]
+    },
+    "build_seconds": 2.1038,
+    "elapsed_seconds": 2.8755,
+    "bounds": [
+      [
+        -0.7450000047683716,
+        14.667400360107422
+      ],
+      [
+        -5.343313217163086,
+        6.9274001121521
+      ],
+      [
+        -0.05160760506987572,
+        8.959735870361328
+      ]
+    ],
+    "image": "wealth_cottage_08.png",
+    "label": "MIRE \u00b7 COTTAGE \u00b7 AFFLUENT \u00b7 SOLID",
+    "blender_version": "5.0.1",
+    "source_hashes": {
+      "engine.py": "547d9b0e28252aa0fe7306947cbb525c54836eb9eeb7887bab4803293205b8ca",
+      "model.py": "d52927e24f0b093dabdd9affc071a111ef4b82db052089b04bb44052f53e43ce",
+      "facade.py": "36f8cc1a71cc72f0b51de4e9e085d2b242203f59c07800857da17969a0f1da9e",
+      "roof.py": "2932203eb3675bb9f3c0d9a346e6d655d65bc001ec144c7c4297984a56e50880",
+      "world.py": "40dd8ace1b76d5cb36aaff77729983b0905d98f1819495022ae19bc2b10d2130",
+      "world_lowmark_thornfell.py": "4f3cc119d23e86081c2bf1638a355e0ea96a6646d26ead2daec29e1ee7590cb7",
+      "world_mire.py": "3be11f40c80893ded91cf61db4ca194a5a671632c9a71cecb56d87582554e6b7",
+      "world_emberholt.py": "73ced3d07cc3994eb89322f469a844c413c3cbb9f6ff0162f5ada666532374b3",
+      "blender_backend.py": "4c28a3b03c538b81be3b4a95319396bd284dd852f0711426fa75530dd74ed01e",
+      "render_world_evidence.py": "d69625f57916cf18f289900aedcdecbbe266431bd22c37ffe69185f2e26822bb"
+    }
+  },
+  {
+    "settings": {
+      "seed": 91,
+      "function": "COTTAGE",
+      "footprint": "L",
+      "width": 11.0,
+      "depth": 7.0,
+      "wing_width": 4.2,
+      "wing_depth": 4.5,
+      "floors": 2,
+      "floor_height": 2.65,
+      "pitch": 48.0,
+      "overhang": 0.45,
+      "detail": "LOW",
+      "window_density": 1.0,
+      "region": "EMBERHOLT",
+      "context": "AUTO",
+      "wealth": "MODEST",
+      "craftsmanship": "STANDARD",
+      "maintenance": 0.7,
+      "age": 35.0,
+      "use_grammar": true,
+      "roof_style": "AUTO",
+      "geometry_mode": "SOLID",
+      "world_aware": true
+    },
+    "geometry_hash": "dcc518fd5ea4ac23458a67b2dd61a65f89c264b99881fd1a2a1f4bf85054a4c6",
+    "metrics": {
+      "valid": true,
+      "errors": [],
+      "objects": 20,
+      "vertices": 8848,
+      "triangles": 13288,
+      "materials": 5,
+      "region": "EMBERHOLT",
+      "context": "EMBERHOLD",
+      "building_type": "COTTAGE",
+      "geometry_mode": "SOLID",
+      "architecture": "WORLD",
+      "construction_zones": [
+        {
+          "key": "emberholt_main_block",
+          "bounds": [
+            0,
+            0,
+            12.0,
+            10.8
+          ],
+          "base": 0.48,
+          "eave": 6.08,
+          "valid": true,
+          "roof": "TERRACE",
+          "vertices": 8848,
+          "triangles": 13288
+        }
+      ],
+      "geometry_hash": "dcc518fd5ea4ac23458a67b2dd61a65f89c264b99881fd1a2a1f4bf85054a4c6",
+      "tool_revision": "0.4.0"
+    },
+    "backend_metrics": {
+      "objects": 20,
+      "vertices": 8848,
+      "width": 13.737525641918182,
+      "depth": 11.37000024318695,
+      "height": 8.34000015258789,
+      "layers": [
+        "details",
+        "doors",
+        "foundation",
+        "roof",
+        "structure",
+        "walls",
+        "windows"
+      ]
+    },
+    "build_seconds": 0.9875,
+    "elapsed_seconds": 1.5017,
+    "bounds": [
+      [
+        -0.8687626719474792,
+        12.868762969970703
+      ],
+      [
+        -0.36000001430511475,
+        11.010000228881836
+      ],
+      [
+        0.0,
+        8.34000015258789
+      ]
+    ],
+    "image": "wealth_cottage_09.png",
+    "label": "EMBERHOLT \u00b7 COTTAGE \u00b7 MODEST \u00b7 SOLID",
+    "blender_version": "5.0.1",
+    "source_hashes": {
+      "engine.py": "547d9b0e28252aa0fe7306947cbb525c54836eb9eeb7887bab4803293205b8ca",
+      "model.py": "d52927e24f0b093dabdd9affc071a111ef4b82db052089b04bb44052f53e43ce",
+      "facade.py": "36f8cc1a71cc72f0b51de4e9e085d2b242203f59c07800857da17969a0f1da9e",
+      "roof.py": "2932203eb3675bb9f3c0d9a346e6d655d65bc001ec144c7c4297984a56e50880",
+      "world.py": "40dd8ace1b76d5cb36aaff77729983b0905d98f1819495022ae19bc2b10d2130",
+      "world_lowmark_thornfell.py": "4f3cc119d23e86081c2bf1638a355e0ea96a6646d26ead2daec29e1ee7590cb7",
+      "world_mire.py": "3be11f40c80893ded91cf61db4ca194a5a671632c9a71cecb56d87582554e6b7",
+      "world_emberholt.py": "73ced3d07cc3994eb89322f469a844c413c3cbb9f6ff0162f5ada666532374b3",
+      "blender_backend.py": "4c28a3b03c538b81be3b4a95319396bd284dd852f0711426fa75530dd74ed01e",
+      "render_world_evidence.py": "d69625f57916cf18f289900aedcdecbbe266431bd22c37ffe69185f2e26822bb"
+    }
+  },
+  {
+    "settings": {
+      "seed": 91,
+      "function": "COTTAGE",
+      "footprint": "L",
+      "width": 11.0,
+      "depth": 7.0,
+      "wing_width": 4.2,
+      "wing_depth": 4.5,
+      "floors": 2,
+      "floor_height": 2.65,
+      "pitch": 48.0,
+      "overhang": 0.45,
+      "detail": "LOW",
+      "window_density": 1.0,
+      "region": "EMBERHOLT",
+      "context": "AUTO",
+      "wealth": "ESTABLISHED",
+      "craftsmanship": "STANDARD",
+      "maintenance": 0.7,
+      "age": 35.0,
+      "use_grammar": true,
+      "roof_style": "AUTO",
+      "geometry_mode": "SOLID",
+      "world_aware": true
+    },
+    "geometry_hash": "ba417578c97f72c2d3bde4f4461462a116f8660cf10a92d9b20c38cf55b0de16",
+    "metrics": {
+      "valid": true,
+      "errors": [],
+      "objects": 20,
+      "vertices": 10082,
+      "triangles": 15140,
+      "materials": 5,
+      "region": "EMBERHOLT",
+      "context": "EMBERHOLD",
+      "building_type": "COTTAGE",
+      "geometry_mode": "SOLID",
+      "architecture": "WORLD",
+      "construction_zones": [
+        {
+          "key": "emberholt_main_block",
+          "bounds": [
+            0,
+            0,
+            15.0,
+            11.5
+          ],
+          "base": 0.48,
+          "eave": 6.08,
+          "valid": true,
+          "roof": "TERRACE",
+          "vertices": 10082,
+          "triangles": 15140
+        }
+      ],
+      "geometry_hash": "ba417578c97f72c2d3bde4f4461462a116f8660cf10a92d9b20c38cf55b0de16",
+      "tool_revision": "0.4.0"
+    },
+    "backend_metrics": {
+      "objects": 20,
+      "vertices": 10082,
+      "width": 16.737525641918182,
+      "depth": 12.070000052452087,
+      "height": 8.34000015258789,
+      "layers": [
+        "details",
+        "doors",
+        "foundation",
+        "roof",
+        "structure",
+        "walls",
+        "windows"
+      ]
+    },
+    "build_seconds": 1.0739,
+    "elapsed_seconds": 1.6078,
+    "bounds": [
+      [
+        -0.8687626719474792,
+        15.868762969970703
+      ],
+      [
+        -0.36000001430511475,
+        11.710000038146973
+      ],
+      [
+        0.0,
+        8.34000015258789
+      ]
+    ],
+    "image": "wealth_cottage_10.png",
+    "label": "EMBERHOLT \u00b7 COTTAGE \u00b7 ESTABLISHED \u00b7 SOLID",
+    "blender_version": "5.0.1",
+    "source_hashes": {
+      "engine.py": "547d9b0e28252aa0fe7306947cbb525c54836eb9eeb7887bab4803293205b8ca",
+      "model.py": "d52927e24f0b093dabdd9affc071a111ef4b82db052089b04bb44052f53e43ce",
+      "facade.py": "36f8cc1a71cc72f0b51de4e9e085d2b242203f59c07800857da17969a0f1da9e",
+      "roof.py": "2932203eb3675bb9f3c0d9a346e6d655d65bc001ec144c7c4297984a56e50880",
+      "world.py": "40dd8ace1b76d5cb36aaff77729983b0905d98f1819495022ae19bc2b10d2130",
+      "world_lowmark_thornfell.py": "4f3cc119d23e86081c2bf1638a355e0ea96a6646d26ead2daec29e1ee7590cb7",
+      "world_mire.py": "3be11f40c80893ded91cf61db4ca194a5a671632c9a71cecb56d87582554e6b7",
+      "world_emberholt.py": "73ced3d07cc3994eb89322f469a844c413c3cbb9f6ff0162f5ada666532374b3",
+      "blender_backend.py": "4c28a3b03c538b81be3b4a95319396bd284dd852f0711426fa75530dd74ed01e",
+      "render_world_evidence.py": "d69625f57916cf18f289900aedcdecbbe266431bd22c37ffe69185f2e26822bb"
+    }
+  },
+  {
+    "settings": {
+      "seed": 91,
+      "function": "COTTAGE",
+      "footprint": "L",
+      "width": 11.0,
+      "depth": 7.0,
+      "wing_width": 4.2,
+      "wing_depth": 4.5,
+      "floors": 2,
+      "floor_height": 2.65,
+      "pitch": 48.0,
+      "overhang": 0.45,
+      "detail": "LOW",
+      "window_density": 1.0,
+      "region": "EMBERHOLT",
+      "context": "AUTO",
+      "wealth": "AFFLUENT",
+      "craftsmanship": "STANDARD",
+      "maintenance": 0.7,
+      "age": 35.0,
+      "use_grammar": true,
+      "roof_style": "AUTO",
+      "geometry_mode": "SOLID",
+      "world_aware": true
+    },
+    "geometry_hash": "6c6705f369817bce2ccb0a2f490f828c9717b72bac9f40e2b45d76edfc3f2f0b",
+    "metrics": {
+      "valid": true,
+      "errors": [],
+      "objects": 47,
+      "vertices": 20312,
+      "triangles": 30496,
+      "materials": 6,
+      "region": "EMBERHOLT",
+      "context": "EMBERHOLD",
+      "building_type": "COTTAGE",
+      "geometry_mode": "SOLID",
+      "architecture": "WORLD",
+      "construction_zones": [
+        {
+          "key": "emberholt_main_block",
+          "bounds": [
+            0,
+            0,
+            16.5,
+            12.6
+          ],
+          "base": 0.48,
+          "eave": 8.879999999999999,
+          "valid": true,
+          "roof": "TERRACE",
+          "vertices": 17060,
+          "triangles": 25608
+        },
+        {
+          "key": "emberholt_vent_tower",
+          "bounds": [
+            19.6,
+            4.4,
+            23.3,
+            8.2
+          ],
+          "base": 0.48,
+          "eave": 8.879999999999999,
+          "valid": true,
+          "roof": "TERRACE",
+          "vertices": 2844,
+          "triangles": 4276
+        }
+      ],
+      "geometry_hash": "6c6705f369817bce2ccb0a2f490f828c9717b72bac9f40e2b45d76edfc3f2f0b",
+      "tool_revision": "0.4.0"
+    },
+    "backend_metrics": {
+      "objects": 47,
+      "vertices": 20312,
+      "width": 25.03894329071045,
+      "depth": 13.170000433921814,
+      "height": 11.203604459762573,
+      "layers": [
+        "details",
+        "doors",
+        "foundation",
+        "roof",
+        "structure",
+        "walls",
+        "windows"
+      ]
+    },
+    "build_seconds": 2.1939,
+    "elapsed_seconds": 2.9761,
+    "bounds": [
+      [
+        -0.869471549987793,
+        24.169471740722656
+      ],
+      [
+        -0.36000001430511475,
+        12.8100004196167
+      ],
+      [
+        -0.06360411643981934,
+        11.140000343322754
+      ]
+    ],
+    "image": "wealth_cottage_11.png",
+    "label": "EMBERHOLT \u00b7 COTTAGE \u00b7 AFFLUENT \u00b7 SOLID",
+    "blender_version": "5.0.1",
+    "source_hashes": {
+      "engine.py": "547d9b0e28252aa0fe7306947cbb525c54836eb9eeb7887bab4803293205b8ca",
+      "model.py": "d52927e24f0b093dabdd9affc071a111ef4b82db052089b04bb44052f53e43ce",
+      "facade.py": "36f8cc1a71cc72f0b51de4e9e085d2b242203f59c07800857da17969a0f1da9e",
+      "roof.py": "2932203eb3675bb9f3c0d9a346e6d655d65bc001ec144c7c4297984a56e50880",
+      "world.py": "40dd8ace1b76d5cb36aaff77729983b0905d98f1819495022ae19bc2b10d2130",
+      "world_lowmark_thornfell.py": "4f3cc119d23e86081c2bf1638a355e0ea96a6646d26ead2daec29e1ee7590cb7",
+      "world_mire.py": "3be11f40c80893ded91cf61db4ca194a5a671632c9a71cecb56d87582554e6b7",
+      "world_emberholt.py": "73ced3d07cc3994eb89322f469a844c413c3cbb9f6ff0162f5ada666532374b3",
+      "blender_backend.py": "4c28a3b03c538b81be3b4a95319396bd284dd852f0711426fa75530dd74ed01e",
+      "render_world_evidence.py": "d69625f57916cf18f289900aedcdecbbe266431bd22c37ffe69185f2e26822bb"
+    }
+  }
+]

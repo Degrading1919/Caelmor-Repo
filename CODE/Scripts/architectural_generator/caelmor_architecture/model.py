@@ -35,6 +35,7 @@ class Settings:
     use_grammar: bool = False
     roof_style: str = 'AUTO'
     geometry_mode: str = 'SOLID'
+    world_aware: bool = False
 
     def check(self, validate_shape=True):
         for name in ('width','depth','wing_width','wing_depth','floor_height','pitch','overhang','window_density','maintenance','age'):
@@ -50,7 +51,7 @@ class Settings:
         valid_contexts = ('AUTO', *CONTEXTS[self.region].keys())
         if self.context not in valid_contexts:
             raise ValueError(f'Context {self.context!r} is not compatible with {self.region}')
-        if not isinstance(self.use_grammar, bool) or not 0<=self.maintenance<=1 or not 0<=self.age<=250:
+        if not isinstance(self.use_grammar, bool) or not isinstance(self.world_aware,bool) or not 0<=self.maintenance<=1 or not 0<=self.age<=250:
             raise ValueError('Grammar must be boolean; maintenance 0–1 and age 0–250 years required')
         if not isinstance(self.seed,int):
             raise ValueError('Integer seed required')
@@ -204,6 +205,15 @@ def style_for(settings):
 
 def resolve_settings(requested):
     """Return a validated effective grammar realization; manual dimensions are retained."""
+    if requested.world_aware and not requested.use_grammar:
+        # World builders consume envelope dimensions, not legacy U/L wing or
+        # roof controls. Stale hidden controls cannot invalidate a valid input.
+        requested.check(validate_shape=False)
+        effective=replace(requested,footprint='RECT',wing_width=2.5,wing_depth=2.5,
+                          pitch={'LOWMARK':32.,'THORNFELL':52.,'MIRE':38.,'EMBERHOLT':42.}[requested.region])
+        effective.check()
+        return replace(effective,context=_context(effective),
+                       roof_style=TYPE_SPECS[requested.function].roof_style)
     # Grammar replaces the footprint and dimensional controls, so validate
     # those constraints on the effective type plan below. Always validate the
     # active profile, seed, finite values, upkeep, roof control and detail inputs.
