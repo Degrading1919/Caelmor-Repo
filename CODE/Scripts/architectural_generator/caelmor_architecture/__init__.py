@@ -2,7 +2,7 @@
 bl_info = {
     "name": "Caelmor Architectural Generator",
     "author": "Caelmor",
-    "version": (0, 4, 0),
+    "version": (0, 5, 0),
     "blender": (4, 2, 0),
     "location": "View3D > Sidebar > Caelmor",
     "description": "Generate editable regional Caelmor buildings",
@@ -141,9 +141,9 @@ def _make_classes(b):
         caelm_region: b.props.EnumProperty(name="Region", items=_REGION_ITEMS, default='LOWMARK', update=reset_context)
         caelm_context: b.props.EnumProperty(name="Local Context", items=context_items, default=0)
         caelm_wealth: b.props.EnumProperty(name="Wealth", items=[
-            ('MODEST', "Modest", "Plain local materials and restrained finish"),
-            ('ESTABLISHED', "Established", "Established household or enterprise"),
-            ('AFFLUENT', "Affluent", "Costlier local finishes and workmanship"),
+            ('MODEST', "Modest", "Multipurpose household space and restrained local investment"),
+            ('ESTABLISHED', "Established", "Investment in working space, storage and household capacity"),
+            ('AFFLUENT', "Affluent", "Investment in private rooms, service spaces and sheltered access; craftsmanship is separate"),
         ], default='ESTABLISHED')
         caelm_craftsmanship: b.props.EnumProperty(name="Craftsmanship", items=[
             ('ROUGH', "Rough", "Rough-cut and irregular workmanship"),
@@ -155,7 +155,7 @@ def _make_classes(b):
         caelm_use_grammar: b.props.BoolProperty(name="Use Regional Grammar", default=True)
         caelm_world_aware: b.props.BoolProperty(
             name="World Construction Language", default=True,
-            description="Build regional structural forms as connected, roofed construction volumes")
+            description="Arrange regional structural forms as roofed construction volumes")
         caelm_roof_style: b.props.EnumProperty(name="Roof Style", items=[
             ('AUTO', "Regional / Type Default", "Select a suitable roof by type and region"),
             ('GABLE', "Gable", "Gabled roof"), ('HIP', "Hip", "Hipped roof")], default='AUTO')

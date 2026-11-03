@@ -11,6 +11,13 @@ original v0.3 gallery is retained as the visual baseline. Regional dossiers and
 all game runtime/content files remain outside this change; the new construction
 language reference explicitly distinguishes art direction from approved canon.
 
+The 0.5 household authenticity pass remains in this same isolated PR. It changes
+regional room/work/storage/access programs, construction details and materials,
+with matched clay/material comparisons and a retained legacy geometry baseline.
+Only this generator directory is included. See `V05_VALIDATION.md` for executed
+checks, rejected iterations and unresolved artistic limits; these results do not
+constitute Creative Director production-art approval. No merge is authorized.
+
 ## Excluded unrelated files
 
 The following 32 files were left in the original mixed commit and were not imported into the generator branch. This is a scope inventory, not a review or endorsement of their contents.

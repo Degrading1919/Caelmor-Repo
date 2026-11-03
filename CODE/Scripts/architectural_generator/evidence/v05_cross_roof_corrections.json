@@ -1,0 +1,143 @@
+{
+  "scan": "Recheck of only six previously failing Lowmark roof pairs; shared analytic crossing_roofs plus engine.validate.",
+  "cases": [
+    {
+      "settings": {
+        "seed": 91,
+        "region": "LOWMARK",
+        "function": "BARN",
+        "wealth": "AFFLUENT",
+        "detail": "LOW",
+        "use_grammar": true,
+        "world_aware": true
+      },
+      "mass_keys": [
+        "lowmark_main_hall",
+        "lowmark_service_wing",
+        "lowmark_loading_bay"
+      ],
+      "crossing_roofs": [],
+      "validation": {
+        "valid": true,
+        "errors": []
+      }
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "region": "LOWMARK",
+        "function": "WAREHOUSE",
+        "wealth": "ESTABLISHED",
+        "detail": "LOW",
+        "use_grammar": true,
+        "world_aware": true
+      },
+      "mass_keys": [
+        "lowmark_main_hall",
+        "lowmark_service_wing",
+        "lowmark_loading_bay"
+      ],
+      "crossing_roofs": [],
+      "validation": {
+        "valid": true,
+        "errors": []
+      }
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "region": "LOWMARK",
+        "function": "WAREHOUSE",
+        "wealth": "AFFLUENT",
+        "detail": "LOW",
+        "use_grammar": true,
+        "world_aware": true
+      },
+      "mass_keys": [
+        "lowmark_main_hall",
+        "lowmark_service_wing",
+        "lowmark_loading_bay"
+      ],
+      "crossing_roofs": [],
+      "validation": {
+        "valid": true,
+        "errors": []
+      }
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "region": "LOWMARK",
+        "function": "MARKET_HALL",
+        "wealth": "MODEST",
+        "detail": "LOW",
+        "use_grammar": true,
+        "world_aware": true
+      },
+      "mass_keys": [
+        "lowmark_main_hall",
+        "lowmark_service_wing",
+        "lowmark_loading_bay"
+      ],
+      "crossing_roofs": [],
+      "validation": {
+        "valid": true,
+        "errors": []
+      }
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "region": "LOWMARK",
+        "function": "MARKET_HALL",
+        "wealth": "ESTABLISHED",
+        "detail": "LOW",
+        "use_grammar": true,
+        "world_aware": true
+      },
+      "mass_keys": [
+        "lowmark_main_hall",
+        "lowmark_service_wing",
+        "lowmark_loading_bay"
+      ],
+      "crossing_roofs": [],
+      "validation": {
+        "valid": true,
+        "errors": []
+      }
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "region": "LOWMARK",
+        "function": "MARKET_HALL",
+        "wealth": "AFFLUENT",
+        "detail": "LOW",
+        "use_grammar": true,
+        "world_aware": true
+      },
+      "mass_keys": [
+        "lowmark_main_hall",
+        "lowmark_service_wing",
+        "lowmark_loading_bay"
+      ],
+      "crossing_roofs": [],
+      "validation": {
+        "valid": true,
+        "errors": []
+      }
+    }
+  ],
+  "all_crossings_cleared": true,
+  "all_validation_passed": true,
+  "source_sha256": {
+    "caelmor_architecture\\world_lowmark_thornfell.py": "a072bfb35cee820f40be10b5384517cab3cf3430510e0452f66d9961b2f77b45",
+    "caelmor_architecture\\world.py": "747b6049609e0c7c03506d40465f8aac0fdad9057c77d5a1c291ec684379ccd1",
+    "caelmor_architecture\\roof.py": "22fc0428a1eb98028a0f70b3c14f8a83fb960c59779dd4376846c0b18bf96d23",
+    "tests\\test_household_investment.py": "3bf64fa22ee8702f9c6c7d159eef6e0d30080f03078d9cf2a6ec66336aed6e9b"
+  },
+  "limits": [
+    "Only the six previous failures were regenerated.",
+    "No repeat-generation, geometry hash, Blender, render, or package check was run."
+  ]
+}

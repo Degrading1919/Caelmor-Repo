@@ -269,7 +269,14 @@ def build(settings, collection=None, layers=None, origin=None):
         cache = {}
         for buffer in buffers:
             if buffer.name not in protected_ids and (scope is None or _layer_for(buffer) in scope):
-                obj = _mesh_object(buffer, cache, build_id, plan)
+                # Finish/wear uses the actual host volume's roof, apertures and
+                # hearths. A world building may contain multiple eave heights.
+                mesh_plan=plan
+                if hasattr(plan,'world_zones'):
+                    host=next((m for m in plan.world_zones
+                               if m.key==getattr(buffer,'world_zone',None)),None)
+                    if host is not None:mesh_plan=host.plan
+                obj = _mesh_object(buffer, cache, build_id, mesh_plan)
                 if obj: stage.objects.link(obj)
         if scope is None:
             for obj in _colliders(plan, build_id):

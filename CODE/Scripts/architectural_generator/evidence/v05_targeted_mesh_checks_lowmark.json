@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "region": "LOWMARK",
+      "wealth": "MODEST",
+      "function": "COTTAGE",
+      "aperture_rays": 9,
+      "door_rays": 3,
+      "glass_structure_intersections": 0
+    },
+    {
+      "region": "LOWMARK",
+      "wealth": "ESTABLISHED",
+      "function": "COTTAGE",
+      "aperture_rays": 24,
+      "door_rays": 9,
+      "glass_structure_intersections": 0
+    },
+    {
+      "region": "LOWMARK",
+      "wealth": "AFFLUENT",
+      "function": "COTTAGE",
+      "aperture_rays": 48,
+      "door_rays": 15,
+      "glass_structure_intersections": 0
+    }
+  ],
+  "blender": "5.0.1",
+  "source_sha256": {
+    "blender_backend.py": "ccd4ce109d97eb98df309fcad795398f96eb55c02a1b012fc969a45deca6bdcc",
+    "engine.py": "11d4a8b1868afc1170a34a03d0b294b85d09f7c344153cb24074f5d2acce0ed7",
+    "facade.py": "f989e3a56624f89a034701e275beb6e10d7bfd52bb7a14b0ffad23a235708f4d",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "8da06e3a1242be8c2ac21bca994d1805a36f399425ab585befdaf386346b65ce",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126",
+    "__init__.py": "7fa1a0ce9871a3c9e7faebe021fb530bdaff3f31175cc0c9528176b3f03d488e"
+  }
+}

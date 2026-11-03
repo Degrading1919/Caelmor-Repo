@@ -1,15 +1,26 @@
 # Caelmor Architectural Generator
 
-Version 0.4.0 is an offline Blender add-on for editable, metre-scale exterior buildings. It combines twenty purpose-led building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
+Version 0.5.0 is an offline Blender add-on for editable, metre-scale exterior buildings. It combines twenty purpose-led building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
 
 The regional mappings and exact architectural choices are reversible visual interpretations of the four regional dossiers, not new canon. See [REGIONAL_GRAMMAR.md](REGIONAL_GRAMMAR.md) for the source cues, context IDs, type grammar, and boundaries of those interpretations. [WORLD_ARCHITECTURAL_LANGUAGES.md](WORLD_ARCHITECTURAL_LANGUAGES.md) records the broader structural art direction; its proposals are visual interpretations, not canon or approved material catalogs.
+
+The 0.5 household pass makes investment change usable construction: Lowmark
+work/store/private-room compounds; calm Thornfell domestic roofs and sheltered
+room ranges; Mire compact landings versus roofed work decks/private links; and
+Emberholt hearth halls, narrow artisan bodies, lower work ranges and private
+courts. Craftsmanship and condition remain separate controls. Emberholt work
+roofs use lapped iron sheets, household windows have enclosed domestic
+proportions, and soot follows generated hearths. See
+[ARTISTIC_REFINEMENT.md](ARTISTIC_REFINEMENT.md) for the matched comparison brief,
+research and limits. These are reviewable art improvements, not production-art
+approval.
 
 ## Requirements and installation
 
 - Blender 5.0.1 is the tested target. The extension manifest declares Blender 4.2 as its minimum; other Blender releases have not been validated.
 - Install `dist/caelmor_architecture.zip` using **Edit → Preferences → Get Extensions → Install from Disk**, then enable **Caelmor Architectural Generator**.
 - Open a 3D View and find the **Caelmor** tab in the N-panel.
-- Rebuild the distributable with `py -3 package_addon.py` from this directory. The ZIP contains the add-on source, full GPL license, third-party notices, research reference, and both architecture references.
+- Rebuild the distributable with `py -3 package_addon.py` from this directory. The ZIP contains the add-on source, full GPL license, third-party notices, research reference, architecture references and household comparison brief.
 
 ## Generate a building
 
@@ -37,7 +48,7 @@ Each type has its own default plan proportions and exterior features such as sta
 
 With **Use Regional Grammar** on, type, region, context, wealth, and craftsmanship resolve a constraint-checked footprint, dimensions, floor count and height, pitch, roof preference, foundation, construction, and cover. The manual width, depth, wing, footprint, floor, floor-height, and pitch values are not consumed in this mode; overhang remains an explicit user-controlled roof setting. **Apply Grammar to Shape Controls** copies the resolved dimensions into those controls; switch grammar off to edit the resulting shape manually.
 
-With **World Construction Language** on (the default for new Blender settings), the selected region and building function create multiple structural, roofed volumes where appropriate. Lowmark pairs broad halls with open shed-roof work ranges; Thornfell uses stepped masonry gables, deep stone openings and narrow towers; the Mire raises timber halls under bowed reed roofs with supported decks; Emberholt builds terrace roofs, parapets, buttresses, shafts and connected ironwalks. These forms can change the footprint and number of volumes, so shape values are profile inputs rather than promises of exact final dimensions. The panel describes the selected construction language; generated bounds and validation report the actual result. Regional construction chooses the roof forms and eaves, so manual roof style and overhang are disabled in this mode.
+With **World Construction Language** on (the default for new Blender settings), region, function and household investment create multiple roofed volumes where appropriate. Lowmark pairs halls with working/storage/private-room ranges; Thornfell households use calm stone gables and sheltered courts while public/defensive functions can justify towers; the Mire combines raised timber halls with working decks and private links; Emberholt uses deep masonry, hearth flues, narrow domestic bodies, terraced courts, lower iron-roofed work ranges and civic/industrial ironwalks. These forms can change the footprint and number of volumes, so shape values are profile inputs rather than promises of exact final dimensions. Generated bounds and validation report the actual result. Regional construction chooses roof forms and eaves, so manual roof style and overhang are disabled in this mode.
 
 Turn **World Construction Language** off to use the single-plan regional generator. This retains the prior manual and grammar workflows for compatibility.
 
@@ -47,7 +58,7 @@ The supported footprints are RECT, L, T, and U. L wings may mirror, T wings may 
 
 ### Household finish and condition
 
-Wealth (Modest, Established, Affluent) affects grammar-mode scale and local finish assumptions. Craftsmanship (Rough, Standard, Fine) affects proportions, masonry selection, and surface finish. Age and Maintenance are separate condition inputs: older maintained buildings can remain cared for, and neglected buildings can be young. Condition changes subdued material wear; wealth does not automatically determine upkeep. These are art-authoring controls, not economic simulation or claims about canonical social classes.
+Wealth (Modest, Established, Affluent) changes household capacity, work/storage space and private-room/access arrangements in World mode, as well as grammar-mode scale and local finish assumptions. Craftsmanship (Rough, Standard, Fine) affects proportions, masonry selection, joinery and surface finish. Age and Maintenance are separate inputs: older maintained buildings can remain cared for, and neglected buildings can be young. Condition changes subdued wear and selected structural repair events; wealth does not automatically determine upkeep. These are authoring controls, not economic simulation or canonical social classes. Material revision 4 uses fresh datablocks to preserve earlier material edits. Saved settings remain readable; World geometry evolves with the tool revision, so exact older World output requires its original version. Protected pieces remain intact and can require manual reconciliation with a changed room arrangement.
 
 ### Detail and geometry modes
 
@@ -114,7 +125,7 @@ py -3 tests/measure_geometry_modes.py --world
 py -3 verify_install.py
 ```
 
-See [tests/WORLD_VALIDATION.md](tests/WORLD_VALIDATION.md) for current world-language verification and [tests/VALIDATION.md](tests/VALIDATION.md) for the retained v0.3/v0.2 baseline. Validation is generator and Blender authoring evidence; it is not a Unity compatibility check or a player-experience test.
+See [tests/V05_VALIDATION.md](tests/V05_VALIDATION.md) for current household verification, [tests/WORLD_VALIDATION.md](tests/WORLD_VALIDATION.md) for the retained v0.4 record and [tests/VALIDATION.md](tests/VALIDATION.md) for v0.3/v0.2. Validation is generator and Blender authoring evidence, not target-engine compatibility or player experience.
 
 ## Scope limits
 

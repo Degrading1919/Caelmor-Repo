@@ -12,7 +12,7 @@ def package(destination=None):
     source=ROOT/'caelmor_architecture'
     members={p.name:p for p in source.iterdir() if p.is_file() and p.suffix in ('.py','.toml')}
     members['LICENSE']=source/'LICENSE'
-    for name in ('README.md','REGIONAL_GRAMMAR.md','WORLD_ARCHITECTURAL_LANGUAGES.md',
+    for name in ('README.md','REGIONAL_GRAMMAR.md','WORLD_ARCHITECTURAL_LANGUAGES.md','ARTISTIC_REFINEMENT.md',
                  'THIRD_PARTY.md','Caelmor_Architectural_Generator_Research.md'):
         members[name]=ROOT/name
     with zipfile.ZipFile(destination,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as archive:

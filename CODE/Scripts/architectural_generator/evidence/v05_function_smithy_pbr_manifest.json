@@ -1,0 +1,266 @@
+{
+  "renderer": "5.0.1",
+  "source_hashes": {
+    "__init__.py": "7fa1a0ce9871a3c9e7faebe021fb530bdaff3f31175cc0c9528176b3f03d488e",
+    "blender_backend.py": "ccd4ce109d97eb98df309fcad795398f96eb55c02a1b012fc969a45deca6bdcc",
+    "engine.py": "11d4a8b1868afc1170a34a03d0b294b85d09f7c344153cb24074f5d2acce0ed7",
+    "facade.py": "446a8cd22056287eb27228d65b95fe60d15b3535a4d057d59c8c690f23ffac09",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "6976fae093e032145de6b3e05d06caeaba7a5c9c8cc9d0dd9b50d3f7ed7e6195",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce"
+  },
+  "records": [
+    {
+      "settings": {
+        "seed": 91,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "slot": "ESTABLISHED",
+      "view": 0,
+      "geometry_hash": "bafee27b35b403732a277365959941e4639d95a603b1b573c76f997e730a0257",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 74,
+        "vertices": 15594,
+        "triangles": 21369,
+        "materials": 6,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "SMITHY",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              16.8,
+              13.0
+            ],
+            "base": 0.48,
+            "eave": 6.08,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "SMITHY",
+            "wall_thickness": 0.7,
+            "vertices": 9296,
+            "triangles": 12574
+          },
+          {
+            "key": "emberholt_forge_work_range",
+            "bounds": [
+              5.208,
+              13.0,
+              11.592,
+              20.28
+            ],
+            "base": 0.48,
+            "eave": 3.0,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "WORKSHOP",
+            "wall_thickness": 0.7,
+            "vertices": 3122,
+            "triangles": 4385
+          },
+          {
+            "key": "emberholt_vent_tower",
+            "bounds": [
+              18.150000000000002,
+              4.6,
+              21.85,
+              8.399999999999999
+            ],
+            "base": 0.48,
+            "eave": 6.08,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "WATCHTOWER",
+            "wall_thickness": 0.7,
+            "vertices": 2832,
+            "triangles": 3894
+          }
+        ],
+        "geometry_hash": "bafee27b35b403732a277365959941e4639d95a603b1b573c76f997e730a0257",
+        "tool_revision": "0.5.0"
+      },
+      "backend": {
+        "objects": 74,
+        "vertices": 15594,
+        "width": 23.59376335144043,
+        "depth": 21.480000853538513,
+        "height": 9.103604078292847,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "image": "v05_function_smithy_pbr_emberholt_established_0.png",
+      "image_sha256": "91e498c847832e147cc8e8c5c61a33743bb7aad526294053047270eadfa095cf",
+      "ortho_scale": 34.83579578399659,
+      "camera_direction": [
+        0.85,
+        -1.2,
+        0.68
+      ],
+      "elapsed_seconds": 3.65
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "slot": "ESTABLISHED",
+      "view": 1,
+      "geometry_hash": "bafee27b35b403732a277365959941e4639d95a603b1b573c76f997e730a0257",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 74,
+        "vertices": 15594,
+        "triangles": 21369,
+        "materials": 6,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "SMITHY",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              16.8,
+              13.0
+            ],
+            "base": 0.48,
+            "eave": 6.08,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "SMITHY",
+            "wall_thickness": 0.7,
+            "vertices": 9296,
+            "triangles": 12574
+          },
+          {
+            "key": "emberholt_forge_work_range",
+            "bounds": [
+              5.208,
+              13.0,
+              11.592,
+              20.28
+            ],
+            "base": 0.48,
+            "eave": 3.0,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "WORKSHOP",
+            "wall_thickness": 0.7,
+            "vertices": 3122,
+            "triangles": 4385
+          },
+          {
+            "key": "emberholt_vent_tower",
+            "bounds": [
+              18.150000000000002,
+              4.6,
+              21.85,
+              8.399999999999999
+            ],
+            "base": 0.48,
+            "eave": 6.08,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "WATCHTOWER",
+            "wall_thickness": 0.7,
+            "vertices": 2832,
+            "triangles": 3894
+          }
+        ],
+        "geometry_hash": "bafee27b35b403732a277365959941e4639d95a603b1b573c76f997e730a0257",
+        "tool_revision": "0.5.0"
+      },
+      "backend": {
+        "objects": 74,
+        "vertices": 15594,
+        "width": 23.59376335144043,
+        "depth": 21.480000853538513,
+        "height": 9.103604078292847,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "image": "v05_function_smithy_pbr_emberholt_established_1.png",
+      "image_sha256": "7c7efcda5d22410b0021a26335633fa7331ff728d96d4c7bf82deb417972728c",
+      "ortho_scale": 34.83579578399659,
+      "camera_direction": [
+        -0.85,
+        1.2,
+        0.68
+      ],
+      "elapsed_seconds": 3.821
+    }
+  ],
+  "study": "wealth",
+  "scope": "Matched tiers, common projected orthographic scale per region, two opposed views."
+}

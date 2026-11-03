@@ -1,5 +1,6 @@
 """Independent varied-context/condition authoring gate, beyond fixed-seed matrix."""
 from dataclasses import asdict
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -15,6 +16,9 @@ from caelmor_architecture.profiles import REGIONS, TYPE_SPECS
 
 
 def main():
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--output',default='evidence/world_context_stress.json')
+    args=parser.parse_args()
     started=time.perf_counter(); rng=random.Random(60713); cases=[]
     for ri,(region,spec) in enumerate(REGIONS.items()):
         for fi,function in enumerate(TYPE_SPECS):
@@ -37,7 +41,7 @@ def main():
     report={'valid':True,'cases':cases,'seed':60713,'seconds':round(time.perf_counter()-started,3),
             'source_sha256':{p.name:hashlib.sha256(p.read_bytes()).hexdigest()
                              for p in sorted((ROOT/'caelmor_architecture').glob('*.py'))}}
-    target=ROOT/'evidence'/'world_context_stress.json'
+    target=ROOT/args.output
     target.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     print(json.dumps({'cases':len(cases),'valid':True,'seconds':report['seconds']}))
 

@@ -92,12 +92,19 @@ def _add_access(ctx, mass, key, extra_width=0.0):
     # aligns with its entrance; the bottom landing sits beyond the stair run.
     out_y = ymin - (1.55 if s.wealth == "MODEST" else 1.9)
     left, right = xmin - extra_width, xmax + extra_width
+    door=next((o for o in mass.plan.facade_records[0]['openings'] if o['kind']=='door'),None)
+    entrance_x=xmin+(door['s0']+door['s1'])*.5 if door else (left+right)*.5
+    # A modest home pays for a usable landing, not a promenade across every
+    # window. Working/public buildings keep the goods-handling frontage.
+    if s.wealth=='MODEST' and s.function in ('COTTAGE','FARMHOUSE','TOWNHOUSE','MERCHANT_HOUSE'):
+        left,right=entrance_x-1.35,entrance_x+1.35
+        out_y=ymin-1.45
     ctx.deck(f"{key}_front_deck",
              [(left, out_y), (right, out_y), (right, ymin), (left, ymin)],
              z=z, thickness=.16, material="timber", zone=None)
     span = right - left
     stair_w = min(1.35, max(1.0, span * .20))
-    stair_x = (left + right) * .5
+    stair_x = entrance_x
     boat=str(s.function).upper()=='BOATHOUSE'
     if boat:
         door=next(o for o in mass.plan.facade_records[0]['openings'] if o['kind']=='door')
@@ -145,6 +152,76 @@ def _should_add_pavilion(settings):
     civic = function in {"INN", "ASSEMBLY_HALL", "MARKET_HALL", "LONGHOUSE",
                          "CHAPEL", "WAREHOUSE", "BARRACKS"}
     return wealth == "AFFLUENT" or (civic and context == "SORROWMERE")
+
+
+def _sheltered_work_deck(ctx,mass):
+    """A lower reed porch, with a real ledger, front posts and shoulder braces.
+
+    The roof drains away from the dwelling; its ledger tucks below the existing
+    bow eave. Its declared plane validates the complete exposed timber sections.
+    """
+    x0,y0,x1,_=mass.bounds
+    front=y0-1.72
+    back=y0+.035
+    slope=.095
+    door=next(o for o in mass.plan.facade_records[0]['openings'] if o['kind']=='door')
+    # Upper-storey houses can have taller goods/entry doors than cottages.
+    # Derive the veranda from the complete head assembly, not a fixed datum.
+    head=door.get('assembly_bounds',door)['z1']
+    front_z=max(mass.base+2.30,head+.17)
+    if front_z+slope*(back-front)>mass.roof_height((x0+x1)*.5,y0)-.17:
+        return False  # no legal weather/door clearance at this low eave
+    c=front_z-slope*front
+    plane=(0.,slope,c)
+    def height(y):return slope*y+c
+    roof=ctx.buffer('mire_work_veranda_reed_roof','roof','roof',mass)
+    roof.extrude([(x0-.16,front-.12,height(front-.12)),
+                  (x1+.16,front-.12,height(front-.12)),
+                  (x1+.16,back,height(back)),(x0-.16,back,height(back))],(0,0,-.10))
+    frame=ctx.buffer('mire_work_veranda_frame','timber','structure',mass)
+    frame.roof_envelope={'plane':plane,'clearance':.12}
+    ledger_z=height(back)-.23
+    frame.beam((x0+.10,back,ledger_z),(x1-.10,back,ledger_z),.13,.16)
+    edge_z=height(front)-.23
+    frame.beam((x0+.10,front,edge_z),(x1-.10,front,edge_z),.15,.17)
+    # Front posts stand on the deck supports' load line, clear of the entry.
+    entry=x0+(door['s0']+door['s1'])*.5
+    stations=[x0+.18,x1-.18]
+    stations += [x for x in (x0+mass.width/3,x0+mass.width*2/3) if abs(x-entry)>1.15]
+    for i,x in enumerate(sorted(stations)):
+        frame.chamfered_beam((x,front,mass.base),(x,front,edge_z),.15,.15,
+                             .018 if ctx.settings.craftsmanship=='FINE' else .006)
+        # Knee meets both post and front plate; no floating decorative brace.
+        toward=1 if x<(x0+x1)*.5 else -1
+        frame.beam((x,front,edge_z-.52),(x+toward*.46,front,edge_z),.085,.10)
+    for i in range(max(3,math.ceil(mass.width/1.45))+1):
+        x=x0+.12+(mass.width-.24)*i/max(3,math.ceil(mass.width/1.45))
+        frame.beam((x,front,height(front)-.18),(x,back,height(back)-.18),.07,.08)
+    # Establishing the porch is an investment in dry work space; it is never
+    # conditioned on wear or age and remains visible at LOW detail.
+
+
+def _private_link_screens(ctx,x0,x1,y0,y1,z):
+    """Boarded lower rails give the separate room a genuinely private approach."""
+    for side,y in (('south',y0),('north',y1)):
+        rail=ctx.rail('mire_private_link_screen_'+side,(x0,y),(x1,y),z+.02)
+        y=max(rail.support_surface['bounds'][1]+.06,
+              min(rail.support_surface['bounds'][3]-.06,y))
+        count=max(4,math.ceil((x1-x0)/.18))
+        for i in range(count):
+            x=x0+.10+(x1-x0-.20)*(i+.5)/count
+            rail.box((x,y,z+.52),(.115,.045,.84))
+
+
+def _pier_repair(ctx,mass):
+    if ctx.settings.age<70 or ctx.settings.maintenance>=.6:return
+    x0,y0,_,_=mass.bounds
+    repair=ctx.buffer('mire_sistered_pier_repair','timber_light','foundation',mass)
+    # New pile adjacent to the existing southwest pile; a real head tie carries
+    # the same floor, rather than scattering cosmetic damage over every board.
+    repair.box((x0+.32,y0+.18,mass.base*.5),(.14,.16,mass.base))
+    repair.beam((x0+.13,y0+.18,mass.base-.12),
+                (x0+.42,y0+.18,mass.base-.12),.12,.16)
 
 
 def _rear_work_landing(ctx,mass):
@@ -230,4 +307,9 @@ def build(ctx):
         _add_access(ctx, mass, "mire_access", extra_width=0.0)
     else:
         _add_access(ctx, mass, "mire_access")
+    if s.wealth!='MODEST':
+        _sheltered_work_deck(ctx,mass)
+    if pavilion is not None:
+        _private_link_screens(ctx,width,pxmin,deck_y0,deck_y1,base)
+    _pier_repair(ctx,mass)
     return mass

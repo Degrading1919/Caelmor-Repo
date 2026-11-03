@@ -9,7 +9,7 @@ import random
 
 from .geometry import MeshBuffer, area, clip, inequalities, stable_seed
 from .model import Plan, Settings, resolve_settings, style_for
-from .roof import RoofPatch, build_roof
+from .roof import RoofPatch, build_roof, roof_faces
 from .facade import build_facades
 
 
@@ -126,11 +126,28 @@ class Context:
         # Zone dimensions are constrained by builders, not public manual UI bounds:
         # a supported service wing can be narrower than the 6m main-body control.
         plan=MassPlan(s,[(x,y,x+width,y+depth,'X')],self.settings)
+        # Tile cohorts describe a limited stock/material range. Broad contrasting
+        # rectangles on every slope read as arbitrary repairs in material views.
+        # Geometry and the bounded eave-repair construction remain unchanged.
+        palette=dict(plan.style.palette)
+        roof_color=palette.get('roof')
+        if roof_color is not None:
+            for label,factor in (('roof_dark',.94),('roof_worn',.985),('roof_patch',1.025)):
+                palette[label]=tuple(min(1.,c*factor) if i<3 else c for i,c in enumerate(roof_color))
+            plan.style=replace(plan.style,palette=palette)
         plan.style=replace(plan.style,foundation_height=base if base is not None else plan.foundation_height,
                            foundation_mode=foundation)
         if self.settings.region in ('THORNFELL','EMBERHOLT'):
-            plan.style=replace(plan.style,construction='ASHLAR' if self.settings.region=='EMBERHOLT' else 'RUBBLE',
+            stone_construction=('ASHLAR' if (self.settings.region=='EMBERHOLT' and s.craftsmanship!='ROUGH')
+                                or (self.settings.region=='THORNFELL' and s.craftsmanship=='FINE') else 'RUBBLE')
+            plan.style=replace(plan.style,construction=stone_construction,
                                wall_material='stone',frame_visibility=0.)
+        if self.settings.region=='EMBERHOLT':
+            palette=dict(plan.style.palette)
+            palette.update(stone=(.17,.18,.185,1),stone_light=(.205,.205,.195,1),
+                           mortar=(.115,.12,.12,1),metal=(.075,.085,.09,1))
+            plan.style=replace(plan.style,palette=palette,
+                               roof_cover='IRON' if roof!='TERRACE' else plan.style.roof_cover)
         if self.settings.region=='MIRE':
             plan.style=replace(plan.style,construction='BOARD',wall_material='timber_light',
                                roof_cover='REED',frame_visibility=1.)
@@ -379,8 +396,34 @@ def generate(settings):
     return WorldPlan(ctx,settings),buffers
 
 
+def weather_crossings(masses):
+    """Find intersecting visible roof planes across separately built volumes.
+
+    Nonoverlapping occupied footprints alone do not protect projecting eaves.
+    Intentional abutments may touch; a sign change within an overlap polygon is
+    a genuine surface crossing requiring a junction or sufficient separation.
+    """
+    errors=[]
+    patches=[roof_faces(m.plan) for m in masses]
+    for i,a in enumerate(masses):
+        for j in range(i+1,len(masses)):
+            for pa in patches[i]:
+                for pb in patches[j]:
+                    poly=pa.poly
+                    for plane in inequalities(pb.poly):
+                        poly=clip(poly,*plane)
+                        if not poly:break
+                    if len(poly)<3 or abs(area(poly))<1e-5:continue
+                    delta=[pa.height(x,y)-pb.height(x,y) for x,y in poly]
+                    if min(delta)<-.015 and max(delta)>.015:
+                        errors.append((a.key,masses[j].key,min(delta),max(delta)))
+    return errors
+
+
 def validate(plan,buffers,legacy_validator):
     errors=[]; rows=[]
+    errors.extend(f'Weather roofs cross: {a} / {b}'
+                  for a,b,_,_ in weather_crossings(plan.world_zones))
     zones={m.key:m for m in plan.world_zones}
     for i,mass in enumerate(plan.world_zones):
         for other in plan.world_zones[i+1:]:

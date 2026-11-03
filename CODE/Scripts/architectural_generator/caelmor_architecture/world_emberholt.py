@@ -4,6 +4,7 @@ This is a reversible art-direction interpretation: substantial angular stone
 volumes, terraces, vents, and iron service walks. It creates original geometry
 from the shared construction context and never assembles preset meshes.
 """
+import math
 
 
 def _value(obj, name, default=None):
@@ -79,10 +80,12 @@ def _gallery_access(mass, preferred_edge=None):
     return None
 
 
-def _buttresses(ctx, mass, detail, count_limit=4):
+def _buttresses(ctx, mass, detail, count_limit=4, excluded_edges=()):
     """Put battered stone ribs on solid side-wall stations, clear of openings."""
     spacing = 3.1 if detail == "HIGH" else 4.4
     for edge in (1, 3):
+        if edge in excluded_edges:
+            continue
         stations = ctx.solid_stations(mass, edge, spacing=spacing, radius=.52)
         for index, station in enumerate(stations[:count_limit]):
             x, y = _wall_point(mass, edge, station)
@@ -153,6 +156,186 @@ def _iron_walk(ctx, main, tower, wealth):
              (x1-.08, yc-half), z+.01, "iron")
 
 
+def _edge_normal(mass, edge_index):
+    a, b = _edges(mass)[edge_index]
+    dx, dy = b[0]-a[0], b[1]-a[1]
+    length = max(math.hypot(dx, dy), 1e-8)
+    return (dy/length, -dx/length)
+
+
+def _grounded_household_ties(ctx, mass, detail):
+    """Narrow iron straps tie upper masonry back to ground-bearing corners."""
+    for edge in (0, 3):
+        stations=ctx.solid_stations(mass,edge,spacing=4.8 if detail=="LOW" else 3.8,
+                                    radius=.15)
+        if not stations:
+            continue
+        chosen=stations if detail=="HIGH" else [stations[len(stations)//2]]
+        a,b=_edges(mass)[edge]
+        dx,dy=b[0]-a[0],b[1]-a[1]
+        length=max(math.hypot(dx,dy),1e-8)
+        tx,ty=dx/length,dy/length
+        nx,ny=_edge_normal(mass,edge)
+        iron=ctx.buffer("emberholt_grounded_ties_%d"%edge,"iron","structure",zone=mass)
+        for index,station in enumerate(chosen):
+            x,y=_wall_point(mass,edge,station)
+            x+=nx*.37; y+=ny*.37
+            z0,z1=.27,mass.eave-.12
+            iron.beam((x,y,z0),(x,y,z1),.085,.045)
+            # Broad end shoes transfer the strap into the plinth and roof plate.
+            iron.beam((x-tx*.14,y-ty*.14,z0+.08),
+                      (x+tx*.14,y+ty*.14,z0+.08),.25,.10)
+            iron.beam((x-tx*.14,y-ty*.14,z1-.08),
+                      (x+tx*.14,y+ty*.14,z1-.08),.25,.10)
+
+
+def _masonry_corbels_and_anchors(ctx, mass, detail):
+    """Seat small parapet corbels and iron anchor plates in clear wall bays."""
+    station_spacing=3.8 if detail=="HIGH" else 5.0
+    for edge in (0,2):
+        stations=ctx.solid_stations(mass,edge,spacing=station_spacing,radius=.56)
+        if not stations:
+            continue
+        if detail!="HIGH":
+            stations=stations[::2] or stations[:1]
+        nx,ny=_edge_normal(mass,edge)
+        stone=ctx.buffer("emberholt_parapet_corbels_%d"%edge,
+                         "stone_light","structure",zone=mass)
+        iron=ctx.buffer("emberholt_forged_anchor_plates_%d"%edge,
+                        "iron","structure",zone=mass)
+        for station in stations:
+            x,y=_wall_point(mass,edge,station)
+            lower=(x+nx*.04,y+ny*.04,mass.eave-.62)
+            upper=(x+nx*.38,y+ny*.38,mass.eave-.24)
+            stone.beam(lower,upper,.24,.23)
+            iron.beam((x+nx*.40,y+ny*.40,mass.eave-.30),
+                      (x+nx*.40,y+ny*.40,mass.eave-.12),.27,.08)
+
+
+def _hearth_flue(ctx, mass, detail, edge=2):
+    """A hollow masonry flue rises from the ground along an opening-safe wall bay."""
+    candidates=ctx.solid_stations(mass,edge,spacing=3.7,radius=.48)
+    if not candidates:
+        return None
+    length=math.dist(*_edges(mass)[edge])
+    station=min(candidates,key=lambda value:abs(value-length*.5))
+    x,y=_wall_point(mass,edge,station)
+    nx,ny=_edge_normal(mass,edge)
+    tx,ty=_edges(mass)[edge][1][0]-_edges(mass)[edge][0][0],\
+          _edges(mass)[edge][1][1]-_edges(mass)[edge][0][1]
+    edge_len=max(math.hypot(tx,ty),1e-8); tx/=edge_len; ty/=edge_len
+    half_t,half_n=.50,.42
+    cx,cy=x+nx*(half_n-.025),y+ny*(half_n-.025)
+    z0,z1=.04,mass.eave+(1.65 if detail=="LOW" else 1.85)
+    wall=.17
+    flue=ctx.buffer("emberholt_hearth_flue","stone","structure",zone=mass)
+    def strip(t0,n0,t1,n1):
+        return [(cx+tx*t0+nx*n0,cy+ty*t0+ny*n0),
+                (cx+tx*t1+nx*n0,cy+ty*t1+ny*n0),
+                (cx+tx*t1+nx*n1,cy+ty*t1+ny*n1),
+                (cx+tx*t0+nx*n1,cy+ty*t0+ny*n1)]
+    inner_t,inner_n=half_t-wall,half_n-wall
+    for poly in (strip(-half_t,-half_n,half_t,-half_n+wall),
+                 strip(-half_t,half_n-wall,half_t,half_n),
+                 strip(-half_t,-half_n+wall,-inner_t,half_n-wall),
+                 strip(inner_t,-half_n+wall,half_t,half_n-wall)):
+        flue.prism(poly,z0,z1)
+    # A four-sided weather rim protects the open throat without capping it.
+    outer_t,outer_n=half_t+.08,half_n+.06
+    rim_t,rim_n=.14,.14
+    for poly in (strip(-outer_t,-outer_n,outer_t,-outer_n+rim_n),
+                 strip(-outer_t,outer_n-rim_n,outer_t,outer_n),
+                 strip(-outer_t,-outer_n+rim_n,-outer_t+rim_t,outer_n-rim_n),
+                 strip(outer_t-rim_t,-outer_n+rim_n,outer_t,outer_n-rim_n)):
+        flue.prism(poly,z1-.12,z1)
+    collar=ctx.buffer("emberholt_flue_iron_collar","iron","structure",zone=mass)
+    collar.beam((cx-tx*(half_t+.04)-nx*(half_n+.04),
+                 cy-ty*(half_t+.04)-ny*(half_n+.04),mass.eave+.22),
+                (cx+tx*(half_t+.04)-nx*(half_n+.04),
+                 cy+ty*(half_t+.04)-ny*(half_n+.04),mass.eave+.22),.09,.07)
+    mass.plan.soot_sources=[(cx,cy,z1)]
+    return flue
+
+
+def _deep_portal(ctx, mass, edge_index):
+    """Stone jambs and a supported lintel frame the actual lower entrance."""
+    record=next((r for r in _records(mass)
+                 if int(r.get("edge_index",-1))==edge_index),None)
+    if not record:
+        return None
+    door=next((o for o in record.get("openings",())
+               if o.get("kind")=="door" and o.get("role")!="gallery_access"),None)
+    if not door:
+        return None
+    bounds=door.get("assembly_bounds",door)
+    lo,hi=float(bounds["s0"]),float(bounds["s1"])
+    supports=ctx.solid_stations(mass,edge_index,spacing=.8,radius=.18)
+    left=[s for s in supports if s<lo-.22]
+    right=[s for s in supports if s>hi+.22]
+    if not left or not right:
+        return None
+    stations=(max(left),min(right))
+    nx,ny=_edge_normal(mass,edge_index)
+    top=float(door["z1"])+.27
+    portal=ctx.buffer("emberholt_deep_supported_portal","stone_light","structure",zone=mass)
+    for station in stations:
+        x,y=_wall_point(mass,edge_index,station)
+        inner=(x+nx*.20,y+ny*.20)
+        outer=(x+nx*1.02,y+ny*1.02)
+        portal.beam((*inner,.27),(*outer,.27),.42,.42)
+        portal.beam((*inner,top),(*outer,top),.42,.34)
+        portal.beam((*outer,.27),(*outer,top),.34,.34)
+        # Forged knee braces visibly transfer the projecting lintel load into
+        # the piers; their endpoints stay outside the authored door assembly.
+        portal.beam((x+nx*.35,y+ny*.35,top-.58),
+                    (x+nx*.96,y+ny*.96,top-.10),.15,.13)
+    # The outer lintel bears on both projected jambs, leaving the opening clear.
+    p0=_wall_point(mass,edge_index,stations[0]);p1=_wall_point(mass,edge_index,stations[1])
+    portal.beam((p0[0]+nx*1.02,p0[1]+ny*1.02,top),
+                (p1[0]+nx*1.02,p1[1]+ny*1.02,top),.34,.34)
+    return portal
+
+
+def _private_court(ctx, main, wealth, function):
+    """A low stepped room range faces the main household across a supported court."""
+    width,depth=main.width,main.depth
+    gap=3.45
+    room_width=4.5
+    room_depth=depth*.66
+    room_y=(depth-room_depth)*.5
+    room_x=width+gap
+    rooms=_mass(ctx,"emberholt_private_rooms",x=room_x,y=room_y,
+                width=room_width,depth=room_depth,floors=1,
+                floor_height=main.plan.settings.floor_height,base=main.base,
+                roof="TERRACE",pitch=0.0,overhang=.05,entrance_edge=3,
+                steps=False,function=function,openings="EMBER_HOME",
+                foundation="PLINTH")
+    _buttresses(ctx,rooms,ctx.settings.detail,count_limit=2)
+    half=min(2.25,room_depth*.30)
+    cy=depth*.5
+    y0,y1=cy-half,cy+half
+    x0,x1=width+.05,room_x-.05
+    court_z=main.base+.02
+    court=[(x0,y0),(x1,y0),(x1,y1),(x0,y1)]
+    ctx.deck("emberholt_private_court",court,court_z,thickness=.20,material="stone")
+    curb=ctx.buffer("emberholt_private_court_coping","stone_light","foundation")
+    curb.beam((x0+.18,y0,court_z+.08),(x1-.18,y0,court_z+.08),.18,.16)
+    curb.beam((x0+.18,y1,court_z+.08),(x1-.18,y1,court_z+.08),.18,.16)
+    # Grounded treads avoid a hanging stair mesh below the buried court deck.
+    steps=ctx.buffer("emberholt_private_court_steps","stone","foundation")
+    run=1.35; tread_count=max(2,int(math.ceil((court_z-main.base)/.16)))
+    tread_h=(court_z-main.base)/tread_count
+    for index in range(tread_count):
+        top_z=main.base+(index+1)*tread_h
+        y_front=y0-run+(index*run/tread_count)
+        y_back=y0-run+((index+1)*run/tread_count)
+        steps.prism([((x0+x1)*.5-.55,y_front),((x0+x1)*.5+.55,y_front),
+                     ((x0+x1)*.5+.55,y_back),((x0+x1)*.5-.55,y_back)],
+                    max(.02,top_z-.13),top_z)
+    _deep_portal(ctx,main,1)
+    return rooms
+
+
 def build(ctx):
     """Build an angular Emberholt structure from the shared geometry context."""
     s = ctx.settings
@@ -162,23 +345,55 @@ def build(ctx):
     detail = _tag(_value(s, "detail", "MEDIUM"))
     age = float(_value(s, "age", 35.0))
     floor_h = max(2.8, min(3.35, float(_value(s, "floor_height", 3.0))))
+    household = function in {"COTTAGE", "FARMHOUSE", "TOWNHOUSE",
+                             "MERCHANT_HOUSE", "SHOP"}
+    cottage_household=function=="COTTAGE"
+    household_affluent = household and wealth == "AFFLUENT"
+    household_tier = "AFFLUENT" if household_affluent else wealth
 
     industrial = function in {"SMITHY", "WORKSHOP"} or (
-        context == "EMBERFORGES" and function not in
+        context == "EMBERFORGES" and not household and function not in
         {"GATEHOUSE","WATCHTOWER","BARRACKS","ASSEMBLY_HALL"})
     civic = function in {"ASSEMBLY_HALL", "GATEHOUSE", "WATCHTOWER", "BARRACKS"}
     defensive = function in {"GATEHOUSE", "WATCHTOWER", "BARRACKS"} or context == "EMBERGATE"
-    affluent = wealth == "AFFLUENT" or context == "ASHSPIRE"
+    affluent = wealth == "AFFLUENT"
     # The gatehouse's authored through-passage uses the north/south openings;
     # an east-side court would introduce an unrelated entrance.
     entry_court = (affluent or civic or industrial) and function != "GATEHOUSE"
 
     # Even dwellings occupy a deep, stone city bay. Wealth adds useful volume
     # and a court-like approach before it adds a signal tower.
-    width = max(12.0, float(_value(s, "width", 10.5)))
-    depth = max(10.0, float(_value(s, "depth", 8.0)))
+    configured_width=float(_value(s,"width",10.5))
+    configured_depth=float(_value(s,"depth",8.0))
+    width = max(12.0, configured_width)
+    depth = max(10.0, configured_depth)
     floors = max(2, min(3, int(_value(s, "floors", 2))))
-    if wealth == "MODEST":
+    if cottage_household and household_tier == "MODEST":
+        width=min(10.0,max(8.8,configured_width*.80))
+        depth=min(9.8,max(8.2,configured_depth))
+        floors=1
+    elif cottage_household and household_tier == "ESTABLISHED":
+        width=min(8.0,max(6.8,configured_width*.65))
+        depth=min(11.0,max(9.6,configured_depth))
+        floors=2
+    elif cottage_household:
+        width=min(10.0,max(8.2,configured_width*.78))
+        depth=min(12.2,max(10.8,configured_depth))
+        floors=3
+    elif household:
+        domestic_profiles={
+            "FARMHOUSE":(9.0,11.2,2),
+            "TOWNHOUSE":(7.4,10.2,3),
+            "MERCHANT_HOUSE":(8.4,10.8,2),
+            "SHOP":(7.8,9.8,2),
+        }
+        base_width,base_depth,base_floors=domestic_profiles[function]
+        tier_delta={"MODEST":(-.5,-.4),"ESTABLISHED":(0.,0.),
+                    "AFFLUENT":(1.0,1.0)}.get(household_tier,(0.,0.))
+        width=min(base_width+1.2,max(base_width-.5,base_width+tier_delta[0]))
+        depth=max(8.8,base_depth+tier_delta[1])
+        floors=base_floors
+    elif wealth == "MODEST":
         width, depth, floors = min(width, 13.2), max(depth, 10.8), 2
     elif wealth == "ESTABLISHED":
         width, depth, floors = min(max(width, 15.0), 16.4), max(depth, 11.5), 2
@@ -186,12 +401,15 @@ def build(ctx):
         width, depth, floors = min(max(width, 16.5), 18.0), max(depth, 12.6), 3
 
     if context == "CINDERWEAVE":
-        width = min(16.0, max(width, 15.0))
-        depth = max(depth, 12.0)
+        if not household:
+            width = min(16.0, max(width, 15.0))
+            depth = max(depth, 12.0)
     elif context == "EMBERFORGES":
-        width, depth, floors = min(18.0, max(width, 16.0)), max(depth, 13.0), 2
+        if not household:
+            width, depth, floors = min(18.0, max(width, 16.0)), max(depth, 13.0), 2
     elif context == "ASHSPIRE":
-        width, depth, floors = min(18.0, max(width, 16.5)), max(depth, 13.0), 3
+        if not household:
+            width, depth, floors = min(18.0, max(width, 16.5)), max(depth, 13.0), 3
     elif context == "EMBERGATE":
         width, depth = min(width, 17.0), max(depth, 12.0)
 
@@ -210,19 +428,43 @@ def build(ctx):
     # ward's hall is broader. All primary footprints remain below 24m.
     width = min(19.0, width)
     depth = min(16.0, depth)
-    tower_needed = affluent or civic or defensive or industrial
+    tower_needed = (affluent or civic or defensive or industrial) and not household
     link_needed = tower_needed and function not in {"WATCHTOWER", "GATEHOUSE"}
     primary = _mass(
         ctx, "emberholt_main_block", x=0, y=0, width=width, depth=depth,
         floors=floors, floor_height=floor_h, roof="TERRACE", pitch=0.0,
-        overhang=.08, entrance_edge=0 if function == "GATEHOUSE" else (1 if floors > 1 else 0),
-        blocked_edges=(2,) if industrial else (),
+        overhang=.08, entrance_edge=(0 if function=="GATEHOUSE" or household
+                                     else (1 if floors>1 else 0)),
+        blocked_edges=(2,) if industrial else ((1,) if household else ()),
         steps=not entry_court,
         function=function, gallery_edges=(1,) if link_needed else (),
+        openings="EMBER_HOME" if household else "EMBER",
         foundation="PLINTH",
     )
 
     _buttresses(ctx, primary, detail, count_limit=2 if detail == "LOW" else 4)
+    if household:
+        _masonry_corbels_and_anchors(ctx,primary,detail)
+        _grounded_household_ties(ctx,primary,detail)
+        _hearth_flue(ctx,primary,detail)
+        include_work_range=(not cottage_household or household_tier=="ESTABLISHED")
+        if include_work_range:
+            range_width=(3.8 if cottage_household else
+                         min(4.5,max(3.3,width*.48)))
+            work_depth=min(7.2,depth*.72)
+            work=_mass(ctx,"emberholt_domestic_work_range",x=width,y=0,
+                       width=range_width,depth=work_depth,floors=1,
+                       floor_height=floor_h*.9,base=primary.base,
+                       roof="SHED",pitch=24.0,overhang=.04,entrance_edge=0,
+                       blocked_edges=(3,),function="WORKSHOP",steps=False,
+                       openings="EMBER_HOME",
+                       foundation="PLINTH")
+            _buttresses(ctx,work,detail,count_limit=2,excluded_edges=(3,))
+
+    if industrial:
+        # The annex occupies the rear edge, so the working hearth rises on the
+        # exposed west wall and remains clear of loading apertures by station.
+        _hearth_flue(ctx,primary,detail,edge=3)
 
     # Industrial contexts get a lower wide work range, with a blind shared wall
     # and its own terrace parapet. It adds process area instead of cottage wings.
@@ -290,8 +532,8 @@ def build(ctx):
 
     # Roofline vents and industrial shafts are open, four-sided stone stacks.
     # They sit within the host roof plan and have separate real geometry buffers.
-    if industrial or context in {"EMBERFORGES", "EMBERHOLD", "CINDERWEAVE",
-                                 "ASHSPIRE", "EMBERGATE"} or affluent:
+    if not household and (industrial or context in {"EMBERFORGES", "EMBERHOLD", "CINDERWEAVE",
+                                                     "ASHSPIRE", "EMBERGATE"} or affluent):
         shaft_height = 3.0 if industrial else 2.3
         sx = width*.24
         sy = depth*.16
@@ -310,6 +552,9 @@ def build(ctx):
     # and stair gap follow the geometry contract; no rail crosses either door.
     if tower is not None and link_needed:
         _iron_walk(ctx, primary, tower, wealth)
+
+    if cottage_household and household_affluent:
+        _private_court(ctx,primary,wealth,function)
 
     # The Glassed Hollow's sealed/warped treatment is left to authored landmarks;
     # normal buildings receive only use-driven soot and maintenance cohorts.

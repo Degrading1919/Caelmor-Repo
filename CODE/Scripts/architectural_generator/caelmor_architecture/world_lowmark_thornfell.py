@@ -6,6 +6,8 @@ in surface decoration, so LOW detail still retains the regional silhouette.
 """
 import math
 
+_DOMESTIC_FAMILIES = {"COTTAGE", "FARMHOUSE", "TOWNHOUSE", "MERCHANT_HOUSE"}
+
 
 def _get(obj, name, default=None):
     if isinstance(obj, dict):
@@ -45,6 +47,64 @@ def _wall_point(mass, edge_index, station):
     return a[0] + dx/length*station, a[1] + dy/length*station
 
 
+def _entry_outside(mass):
+    """Return the actual entrance edge, door center, tangent, normal and stair run."""
+    record = next((row for row in mass.plan.facade_records
+                   if row["edge_index"] == mass.plan.entrance_edge_override), None)
+    if record is None:
+        return None
+    door = next((opening for opening in record["openings"]
+                 if opening["kind"] == "door"), None)
+    if door is None:
+        return None
+    a, b = mass.plan.edges[record["edge_index"]]
+    dx, dy = b[0]-a[0], b[1]-a[1]
+    length = math.hypot(dx, dy)
+    if length <= 1e-8:
+        return None
+    tx, ty = dx/length, dy/length
+    nx, ny = ty, -tx
+    station = (door["s0"]+door["s1"])*.5
+    center = (a[0]+tx*station, a[1]+ty*station)
+    run = max(.9, mass.base*1.6)
+    outside = (center[0]+nx*run, center[1]+ny*run)
+    return center, outside, (tx, ty), (nx, ny), run
+
+
+def _paved_segment(buffer, a, b, width=.9):
+    dx, dy = b[0]-a[0], b[1]-a[1]
+    length = math.hypot(dx, dy)
+    if length <= .05:
+        return
+    px, py = -dy/length*width*.5, dx/length*width*.5
+    poly = [(a[0]+px, a[1]+py), (b[0]+px, b[1]+py),
+            (b[0]-px, b[1]-py), (a[0]-px, a[1]-py)]
+    buffer.prism(poly, .015, .075)
+
+
+def _private_entry_link(ctx, public_mass, private_mass, key):
+    """Pave the route between real door records beyond their exterior stairs."""
+    first, second = _entry_outside(public_mass), _entry_outside(private_mass)
+    if first is None or second is None:
+        return
+    # Continue both approaches past the last tread before joining the paths.
+    a = (first[0][0]+first[3][0]*(first[4]+.08),
+         first[0][1]+first[3][1]*(first[4]+.08))
+    b = (second[0][0]+second[3][0]*(second[4]+.08),
+         second[0][1]+second[3][1]*(second[4]+.08))
+    paving = ctx.buffer(key, "stone_light", "foundation")
+    _paved_segment(paving, first[1], a)
+    _paved_segment(paving, second[1], b)
+    # Parallel entrances share a straight yard walk. A side entrance uses a
+    # dogleg beyond the outer wall faces, never a diagonal through the hall.
+    if abs(first[3][0]*second[3][0] + first[3][1]*second[3][1]) > .98:
+        _paved_segment(paving, a, b)
+    else:
+        corner = (b[0], a[1])
+        _paved_segment(paving, a, corner)
+        _paved_segment(paving, corner, b)
+
+
 def build_lowmark(ctx):
     """Construct a low, expandable Lowmark household/trade building."""
     s = ctx.settings
@@ -56,7 +116,7 @@ def build_lowmark(ctx):
     factor = {"MODEST": .84, "ESTABLISHED": 1.0, "AFFLUENT": 1.13}.get(wealth, 1.0)
     width = max(6.0, float(_get(s, "width", 10.5)))
     depth = max(5.0, float(_get(s, "depth", 7.0)))
-    floors = max(1, min(2, int(_get(s, "floors", 2))))
+    floors = max(1, int(_get(s, "floors", 2)))
     floor_h = float(_get(s, "floor_height", 2.8))
     # Broad agricultural/commercial bodies preserve a low eave and horizontal
     # roofline. Dwellings stay narrower and more closed.
@@ -64,6 +124,7 @@ def build_lowmark(ctx):
         "BARN", "GRAIN_STORE", "WAREHOUSE", "MARKET_HALL", "STABLE",
         "WORKSHOP", "SMITHY", "BOATHOUSE", "MILLER", "INN",
     }
+    household = category in _DOMESTIC_FAMILIES
     if working:
         width = max(width, 11.0) * factor
         depth = max(depth, 7.2)
@@ -73,6 +134,8 @@ def build_lowmark(ctx):
         width *= factor
         depth *= factor
         openings = "DOMESTIC"
+        if category == "COTTAGE" and wealth == "MODEST":
+            floors = 1
     # Context alters the real plan: trade towns receive a longer frontage;
     # rebuilt Ashenstead stays modest and rural plots stay compact.
     if context in {"BROOKHOLLOW", "CRESTBRIDGE"}:
@@ -87,20 +150,42 @@ def build_lowmark(ctx):
         blocked_edges=(1,3) if category=='MILLER' else (1,), foundation="PLINTH",
     )
 
-    # Attached side range: an open, framed grain/work bay or covered store.
-    # Party edges are closed, preserving both structural bearing and openings.
+    # A freestanding yard-side range keeps a weather gap from the main hall.
+    # Its own floor and steps preserve direct work access without intersecting
+    # the independent roof systems.
     wing_w = max(2.8, min(depth * .53, 5.2))
     wing_d = max(3.0, min(depth * .72, 5.8))
-    wing_x = width
+    wing_x = width + .85
     wing_y = -depth * .12
+    wing_openings = "NONE"
+    wing_edges = (0, 1, 2)
+    if household:
+        # Household wealth changes the use and layout of the secondary range,
+        # not only the size or finish of the main hall.
+        if wealth == "MODEST":
+            wing_w, wing_d = 3.1, 3.4
+            wing_y = depth * .12
+            wing_x = width + .85
+        elif wealth == "ESTABLISHED":
+            wing_w, wing_d = max(4.0, min(depth * .66, 4.8)), max(4.0, min(depth * .70, 5.0))
+            wing_y = depth * .08
+            wing_x = width + .85
+        else:
+            wing_w, wing_d = max(4.2, min(depth * .72, 5.2)), max(4.2, min(depth * .78, 5.6))
+            # Leave a useful covered service yard between the hall and range.
+            wing_y = depth * .08
+            wing_x = width + 2.8
+            wing_openings = "WORKSHOP"
+            wing_edges = (0, 1)
     wing = _mass(
         ctx, "lowmark_service_wing", x=wing_x, y=wing_y,
         width=wing_w, depth=wing_d, floors=1,
-        floor_height=max(2.2, floor_h * .82), base=core.base,
+        floor_height=max(2.5, floor_h * .82), base=core.base,
         roof="SHED", pitch=20, overhang=.36,
-        openings="NONE",open_edges=(0,1,2),
-        function='WORKSHOP' if working else 'COTTAGE',
-        entrance_edge=0, blocked_edges=(3,), foundation="PLINTH",
+        openings=wing_openings, open_edges=wing_edges if wing_openings == "NONE" else (),
+        function='WORKSHOP' if working or household and wealth == "AFFLUENT" else 'COTTAGE',
+        entrance_edge=0, blocked_edges=(3,) if wealth != "AFFLUENT" or not household else (),
+        foundation="PLINTH",
     )
     ctx.deck('lowmark_working_range_floor',wing.plan.outline,wing.base,material='timber',zone=wing)
     # An occupied raised work platform has a real approach; open bents carry
@@ -108,6 +193,39 @@ def build_lowmark(ctx):
     ctx.stair('lowmark_work_range_steps',top=(wing_x+wing_w*.5,wing_y,wing.base),
               width=min(1.6,wing_w-.4),run=max(.9,wing.base*1.6),direction=(0,-1),
               material='stone')
+    if household and wealth in {"ESTABLISHED", "AFFLUENT"}:
+        # A closed store keeps grain/tools out of the weather; its actual door
+        # and wall assemblies come from the shared mass generator.
+        store_w, store_d = 3.0, 3.4
+        store_x = wing_x + wing_w + .90
+        store_y = wing_y + max(0.0, (wing_d-store_d)*.5)
+        _mass(ctx, "lowmark_household_store", x=store_x, y=store_y,
+              width=store_w, depth=store_d, floors=1, floor_height=floor_h*.78,
+              base=core.base, roof="GABLE", pitch=28, overhang=.30,
+              openings="WORKSHOP", entrance_edge=0, function="WAREHOUSE",
+              foundation="PLINTH")
+    if household and wealth == "AFFLUENT":
+        # A separate solar gives the household private domestic space while
+        # the hall and service range continue to face the work yard.
+        solar_w, solar_d = 4.0, 4.6
+        solar_x = -solar_w - .85
+        solar_y = 0.0
+        _mass(ctx, "lowmark_private_solar", x=solar_x, y=solar_y,
+              width=solar_w, depth=solar_d, floors=1, floor_height=floor_h*.88,
+              base=core.base, roof="GABLE", pitch=30, overhang=.38,
+              openings="DOMESTIC", entrance_edge=0, blocked_edges=(),
+              function="COTTAGE", foundation="PLINTH")
+        _private_entry_link(ctx, core, ctx.masses[-1],
+                            "lowmark_private_solar_approach")
+        # A low, ground-bearing rear boundary makes the service yard legible;
+        # the approach stays open at the front and no aperture is crossed.
+        yard = ctx.buffer("lowmark_sheltered_workyard_boundary", "stone", "foundation")
+        rear_y = max(wing_y+wing_d, depth)+.12
+        gate_w = 1.25
+        middle = (width+wing_x)*.5
+        for left, right in ((width, middle-gate_w*.5), (middle+gate_w*.5, wing_x+wing_w)):
+            if right-left >= .25:
+                _box(yard, left, rear_y, 0, right, rear_y+.12, 1.0)
     # A narrow covered loading bay extends broad trade buildings as useful
     # capacity instead of adding height. Its small gap keeps the core's rear
     # openings and entrance approach clear while it reads as a yard-side range.
@@ -184,15 +302,15 @@ def build_thornfell(ctx):
     # sequence rather than a Lowmark-like frontage.
     width = max(6.0, min(float(_get(s, "width", 10.5)), 11.0)) * factor
     depth = max(6.0, float(_get(s, "depth", 7.0))) * 1.10
-    floors = max(1, min(2, int(_get(s, "floors", 2))))
+    floors = max(1, int(_get(s, "floors", 2)))
     floor_h = float(_get(s, "floor_height", 2.8)) * .94
     civic = category in {"ASSEMBLY_HALL", "INN", "MARKET_HALL", "GATEHOUSE", "BARRACKS"}
-    defensive = category in {"WATCHTOWER", "GATEHOUSE", "BARRACKS"} or context == "PASSWATCH"
+    defensive = category in {"WATCHTOWER", "GATEHOUSE", "BARRACKS"}
     if category in {"WATCHTOWER"}:
         width = max(5.2, min(width, 7.2))
         depth = max(5.2, min(depth, 7.0))
         floors = max(2, floors)
-    if category == "LONGHOUSE" or context == "HIGHSTEADS":
+    if category == "LONGHOUSE":
         width = max(width, 9.0)
         depth = max(depth, 7.2)
         floors = 1
@@ -203,17 +321,21 @@ def build_thornfell(ctx):
         width *= .93
         depth *= .96
 
-    tower_needed = (wealth == "AFFLUENT" or
-                    category in {"ASSEMBLY_HALL", "WATCHTOWER", "GATEHOUSE"} or
-                    context in {"PASSWATCH", "STONEWAKE"})
+    tower_needed = category in {"ASSEMBLY_HALL", "WATCHTOWER", "GATEHOUSE", "BARRACKS"}
+    domestic_home = category in _DOMESTIC_FAMILIES or category == "LONGHOUSE"
+    calm_coping = domestic_home or category in {"WORKSHOP", "INN"}
+    if category == "COTTAGE" and wealth == "MODEST":
+        floors = 1
+    household_pitch = 42 if calm_coping else 52
     roof = _mass(
         ctx, "thornfell_stone_hall", x=0, y=0, width=width, depth=depth,
-        floors=floors, floor_height=floor_h, roof="GABLE", pitch=52,
+        floors=floors, floor_height=floor_h, roof="GABLE", pitch=household_pitch,
         overhang=.18, openings="NARROW" if defensive else "DOMESTIC",
         entrance_edge=0, blocked_edges=(1, 3) if tower_needed else (1,),
         foundation="PLINTH",
     )
-    _stepped_stone_gables(ctx,roof)
+    if not calm_coping:
+        _stepped_stone_gables(ctx,roof)
 
     # A side-set lower room creates a stepped plan/roofline; the shared wall is
     # blind, and its exposed entry faces the sheltered approach.
@@ -222,25 +344,52 @@ def build_thornfell(ctx):
     annex_x = width
     annex_y = depth*.20
     lower_base = roof.base + .42
-    annex = _mass(
-        ctx, "thornfell_lower_stone_range", x=annex_x, y=annex_y,
-        width=annex_w, depth=annex_d, floors=1, floor_height=floor_h*.78,
-        base=lower_base, roof="GABLE", pitch=50, overhang=.14,
-        openings="NARROW", entrance_edge=0, blocked_edges=(3,),
-        function='COTTAGE',
-        foundation="PLINTH",
-    )
-    _stepped_stone_gables(ctx,annex)
+    annex = None
+    if not domestic_home or wealth != "MODEST":
+        if domestic_home:
+            annex_w = max(3.2, min(width*.34, 4.0))
+            annex_d = max(3.2, min(depth*.46, 3.8))
+            annex_y = depth*.24
+        annex = _mass(
+            ctx, "thornfell_lower_stone_range", x=annex_x, y=annex_y,
+            width=annex_w, depth=annex_d, floors=1, floor_height=floor_h*.78,
+            base=lower_base, roof="GABLE", pitch=40 if calm_coping else 50,
+            overhang=.14,
+            openings="NARROW", entrance_edge=0, blocked_edges=(3,),
+            function='COTTAGE', foundation="PLINTH",
+        )
+        if not calm_coping:
+            _stepped_stone_gables(ctx,annex)
 
-    # Wealth, civic role, or frontier duty can justify a narrow signal tower.
-    # It attaches on the side opposite the lower range, keeping both footprints
-    # clear of each other and every aperture facing an exposed elevation.
+    if domestic_home and wealth == "AFFLUENT":
+        private_w, private_d = 3.8, 4.4
+        private = _mass(
+            ctx, "thornfell_private_room_range", x=-private_w-3.0,
+            y=depth*.18, width=private_w, depth=private_d, floors=1,
+            floor_height=floor_h*.88, base=roof.base, roof="GABLE", pitch=40,
+            overhang=.16, openings="NARROW", entrance_edge=1,
+            function="COTTAGE", foundation="PLINTH",
+        )
+        if category in _DOMESTIC_FAMILIES:
+            # The side door opens into the sheltered court; the path stays
+            # grounded and is derived from the generated doorway assembly.
+            _private_entry_link(ctx, roof, private,
+                                "thornfell_private_court_approach")
+        # Close the rear of the narrow wind-sheltered court between the hall
+        # and private range. Its low stone return is ground-bearing and leaves
+        # both actual entrances at the open approach.
+        court_wall = ctx.buffer("thornfell_private_court_return", "stone", "foundation")
+        court_y = depth*.18+private_d+.08
+        _box(court_wall, -2.9, court_y, 0, -.12, court_y+.20, 1.15)
+
+    # Only explicit civic/defensive functions receive a signal tower. A wealthy
+    # home or a town-context label alone does not change the domestic skyline.
     if tower_needed:
         tw = max(3.1, min(4.2, width*.38))
         td = max(3.0, min(4.0, depth*.42))
         tx = -tw
         ty = depth*.36
-        tower_floors = 3 if wealth == "AFFLUENT" or category == "WATCHTOWER" else 2
+        tower_floors = 3 if category == "WATCHTOWER" else 2
         tower = _mass(
             ctx, "thornfell_signal_tower", x=tx, y=ty,
             width=tw, depth=td, floors=tower_floors, floor_height=floor_h,
@@ -252,7 +401,8 @@ def build_thornfell(ctx):
         _stepped_stone_gables(ctx,tower)
         _thornfell_buttresses(ctx, tower, s, count=1 if detail == "LOW" else 2)
 
-    _thornfell_buttresses(ctx, roof, s, count=1 if detail == "LOW" else 3)
+    _thornfell_buttresses(ctx, roof, s,
+                          count=1 if detail == "LOW" or domestic_home else 3)
 
     # Defensive/wealthy entries sit under an actual stone hood supported by
     # jamb piers. Keep the small hood in front of, rather than over, the door.
@@ -272,5 +422,5 @@ def build_thornfell(ctx):
 
     # Exposed age is expressed through buttress repairs; low-detail mode still
     # keeps all primary stepped volumes, steep roofs, and narrow proportions.
-    if age>=90 and float(s.maintenance)<.7 and detail == "HIGH":
+    if annex is not None and age>=90 and float(s.maintenance)<.7 and detail == "HIGH":
         _thornfell_buttresses(ctx, annex, s, count=2)

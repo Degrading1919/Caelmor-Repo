@@ -204,13 +204,24 @@ def _openings_for_edge(plan, edge_index, edge):
                                      "z0":z0, "z1":z1})
 
     policy=getattr(plan,'opening_style','DOMESTIC')
-    if policy=='EMBER' and int(s.floors)>1 and edge_index in getattr(plan,'gallery_edges',()):
+    if policy in ('EMBER','EMBER_HOME') and int(s.floors)>1 and edge_index in getattr(plan,'gallery_edges',()):
         deck_z=fh+float(s.floor_height)+.08
         openings.append({'kind':'door','role':'gallery_access','s0':length*.5-.58,
                          's1':length*.5+.58,'z0':deck_z,'z1':deck_z+2.12})
     # Construction-specific apertures are dimensioned before the full casing
     # exclusion schedule is built. Material changes never stand in for this.
     for o in openings:
+        if o['kind']=='window' and policy=='EMBER_HOME':
+            center=(o['s0']+o['s1'])*.5
+            cap={'MODEST':.60,'ESTABLISHED':.88,'AFFLUENT':1.02}[s.wealth]
+            height={'MODEST':.72,'ESTABLISHED':.91,'AFFLUENT':1.04}[s.wealth]
+            # A shop invests in light for its work/display floor; the rooms
+            # above retain enclosed domestic proportions and deep reveals.
+            if fn=='SHOP' and o['z0']<fh+s.floor_height:
+                cap,height=1.45,1.12
+            width=min(o['s1']-o['s0'],cap)
+            o['s0'],o['s1']=center-width*.5,center+width*.5
+            o['z1']=min(o['z1'],o['z0']+height)
         if o['kind']=='window' and policy in ('NARROW','EMBER'):
             center=(o['s0']+o['s1'])*.5
             width=min(o['s1']-o['s0'],.52 if policy=='NARROW' else .64)
@@ -548,6 +559,14 @@ def frame_layout(plan, edge_index, edge):
     rake_drop=.14+.5*.21*math.sqrt(1+slope*slope)+.5*.19*slope
     kingpost_drop=.14+.5*.19*slope
     openings = [dict(o) for o in _openings_for_edge(plan, edge_index, edge)]
+    access_clearances=[]
+    if edge_index in getattr(plan,'open_edges',()) and edge_index==getattr(plan,'entrance_edge_override',0):
+        # A roofed open working bay still has an approach. Reserve the center
+        # stairs/handling route without inventing a door leaf or window hole.
+        center=length*.5
+        access_clearances=[{'s0':center-.90,'s1':center+.90,
+                            'z0':_foundation(plan),'z1':_foundation(plan)+2.0}]
+    constraints=openings+access_clearances
     fn = str(plan.settings.function).upper()
     spacing = 3.7 if fn in ("BARN", "GRAIN_STORE") else 4.1
     post_width = .22 if fn in ("BARN", "GRAIN_STORE") else .19
@@ -555,7 +574,7 @@ def frame_layout(plan, edge_index, edge):
     # to keep their full width clear from the lower jamb through the upper floors.
     blocked=[]
     post_clearance=post_width*.5+.11
-    for o in openings:
+    for o in constraints:
         bounds=o.get("assembly_bounds",o)
         blocked.append((max(0.0,bounds["s0"]-post_clearance),
                         min(length,bounds["s1"]+post_clearance)))
@@ -651,7 +670,7 @@ def frame_layout(plan, edge_index, edge):
         brace={"s0":post_s,"z0":upper_plate-.85,
                "s1":inward_s,"z1":upper_plate,"width":.15,
                "support":"knee","post_s":post_s,"plate_z":upper_plate}
-        if not any(_segment_hits_opening(brace,o.get("assembly_bounds",o),brace["width"]*.5+.035) for o in openings):
+        if not any(_segment_hits_opening(brace,o.get("assembly_bounds",o),brace["width"]*.5+.035) for o in constraints):
             braces.append(brace)
 
     # Full-bay diagonals remain only at a credible pitch (35-65 degrees).
@@ -674,7 +693,7 @@ def frame_layout(plan, edge_index, edge):
             slope=abs(brace["z1"]-brace["z0"])/(brace["s1"]-brace["s0"])
             if not .70<=slope<=2.15:
                 continue
-            if any(_segment_hits_opening(brace, o.get("assembly_bounds",o), width*.5+.035) for o in openings):
+            if any(_segment_hits_opening(brace, o.get("assembly_bounds",o), width*.5+.035) for o in constraints):
                 continue
             # One selected brace per bay, in the first storey band with clearance.
             braces.append(brace)
@@ -711,6 +730,7 @@ def frame_layout(plan, edge_index, edge):
     if getattr(plan,'disable_gable_frame',False):
         gable={"rakes":[],"kingpost":None,"collar":None}
     return {"edge_index": edge_index, "length": length, "openings": openings,
+            "access_clearances":access_clearances,
             "opening_assembly_bounds":[dict(o["assembly_bounds"]) for o in openings],
             "posts": posts, "principal_posts": posts, "jambs": jambs,
             "unsupported_spans": unsupported_spans,

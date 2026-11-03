@@ -1,0 +1,621 @@
+{
+  "renderer": "5.0.1",
+  "source_hashes": {
+    "__init__.py": "a3d0485795e34d821748dfd92f6eba76719caa0ec14e9c89772bfb87926b7331",
+    "blender_backend.py": "4c28a3b03c538b81be3b4a95319396bd284dd852f0711426fa75530dd74ed01e",
+    "engine.py": "547d9b0e28252aa0fe7306947cbb525c54836eb9eeb7887bab4803293205b8ca",
+    "facade.py": "9639904540df538372e7883f4cd363baad0fd6c4edf0131b88233c5e7e0dc1c4",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "192d3a5a29d2996804bb72314bea12a1d5a4a3f6a9103e34ca369caf0548c958",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "2932203eb3675bb9f3c0d9a346e6d655d65bc001ec144c7c4297984a56e50880",
+    "world.py": "16a255a3873ae6cf5b4423248a7032114040a5a02aa28c243b0d31f352925565",
+    "world_emberholt.py": "0985ec2bdc8d4cbf64cbe65b951aad2cdc9ce8d5eb2ffd3970cf4f44bd3f5104"
+  },
+  "records": [
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "slot": "MODEST",
+      "view": 0,
+      "geometry_hash": "2df521e293daa9a86d430d0d3f151c531cd0f104e0471c484e84b022a04eb296",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 25,
+        "vertices": 4480,
+        "triangles": 6296,
+        "materials": 5,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "COTTAGE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              8.8,
+              8.2
+            ],
+            "base": 0.48,
+            "eave": 3.28,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.7,
+            "vertices": 4480,
+            "triangles": 6296
+          }
+        ],
+        "geometry_hash": "2df521e293daa9a86d430d0d3f151c531cd0f104e0471c484e84b022a04eb296",
+        "tool_revision": "0.4.0"
+      },
+      "backend": {
+        "objects": 25,
+        "vertices": 4480,
+        "width": 10.528874516487122,
+        "depth": 9.914999783039093,
+        "height": 5.130000114440918,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "image": "v05_revised_cottage_pbr_emberholt_modest_0.png",
+      "image_sha256": "c9c7586c72b5570d5b0dd4e87c84801dc3a08b88b7ef0587fdc5366025b126e3",
+      "ortho_scale": 29.193601989746096,
+      "camera_direction": [
+        0.85,
+        -1.2,
+        0.68
+      ],
+      "elapsed_seconds": 3.176
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "slot": "MODEST",
+      "view": 1,
+      "geometry_hash": "2df521e293daa9a86d430d0d3f151c531cd0f104e0471c484e84b022a04eb296",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 25,
+        "vertices": 4480,
+        "triangles": 6296,
+        "materials": 5,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "COTTAGE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              8.8,
+              8.2
+            ],
+            "base": 0.48,
+            "eave": 3.28,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.7,
+            "vertices": 4480,
+            "triangles": 6296
+          }
+        ],
+        "geometry_hash": "2df521e293daa9a86d430d0d3f151c531cd0f104e0471c484e84b022a04eb296",
+        "tool_revision": "0.4.0"
+      },
+      "backend": {
+        "objects": 25,
+        "vertices": 4480,
+        "width": 10.528874516487122,
+        "depth": 9.914999783039093,
+        "height": 5.130000114440918,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "image": "v05_revised_cottage_pbr_emberholt_modest_1.png",
+      "image_sha256": "1e4410f24cc774d922a9205a22cc67822b088fb70d7c94256be0b5cbb99889be",
+      "ortho_scale": 29.193601989746096,
+      "camera_direction": [
+        -0.85,
+        1.2,
+        0.68
+      ],
+      "elapsed_seconds": 3.313
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "slot": "ESTABLISHED",
+      "view": 0,
+      "geometry_hash": "e884bd96542bdf3ed766d55db5eee4ac7b0588b2fb8a3cd50c23e5a8c9d4146c",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 46,
+        "vertices": 11938,
+        "triangles": 14036,
+        "materials": 9,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "COTTAGE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              6.8,
+              9.6
+            ],
+            "base": 0.48,
+            "eave": 6.08,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.7,
+            "vertices": 5944,
+            "triangles": 8124
+          },
+          {
+            "key": "emberholt_domestic_work_range",
+            "bounds": [
+              6.8,
+              0,
+              10.6,
+              6.912
+            ],
+            "base": 0.48,
+            "eave": 3.0,
+            "valid": true,
+            "roof": "SHED",
+            "function": "WORKSHOP",
+            "wall_thickness": 0.7,
+            "vertices": 5994,
+            "triangles": 5912
+          }
+        ],
+        "geometry_hash": "e884bd96542bdf3ed766d55db5eee4ac7b0588b2fb8a3cd50c23e5a8c9d4146c",
+        "tool_revision": "0.4.0"
+      },
+      "backend": {
+        "objects": 46,
+        "vertices": 11938,
+        "width": 12.331720054149628,
+        "depth": 11.315000355243683,
+        "height": 7.929999828338623,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "image": "v05_revised_cottage_pbr_emberholt_established_0.png",
+      "image_sha256": "14c329549bf85ddc118c6744a98ecd3fbfb269a5ac855d15fef388af47b56f2c",
+      "ortho_scale": 29.193601989746096,
+      "camera_direction": [
+        0.85,
+        -1.2,
+        0.68
+      ],
+      "elapsed_seconds": 1.556
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "slot": "ESTABLISHED",
+      "view": 1,
+      "geometry_hash": "e884bd96542bdf3ed766d55db5eee4ac7b0588b2fb8a3cd50c23e5a8c9d4146c",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 46,
+        "vertices": 11938,
+        "triangles": 14036,
+        "materials": 9,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "COTTAGE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              6.8,
+              9.6
+            ],
+            "base": 0.48,
+            "eave": 6.08,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.7,
+            "vertices": 5944,
+            "triangles": 8124
+          },
+          {
+            "key": "emberholt_domestic_work_range",
+            "bounds": [
+              6.8,
+              0,
+              10.6,
+              6.912
+            ],
+            "base": 0.48,
+            "eave": 3.0,
+            "valid": true,
+            "roof": "SHED",
+            "function": "WORKSHOP",
+            "wall_thickness": 0.7,
+            "vertices": 5994,
+            "triangles": 5912
+          }
+        ],
+        "geometry_hash": "e884bd96542bdf3ed766d55db5eee4ac7b0588b2fb8a3cd50c23e5a8c9d4146c",
+        "tool_revision": "0.4.0"
+      },
+      "backend": {
+        "objects": 46,
+        "vertices": 11938,
+        "width": 12.331720054149628,
+        "depth": 11.315000355243683,
+        "height": 7.929999828338623,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "image": "v05_revised_cottage_pbr_emberholt_established_1.png",
+      "image_sha256": "ea147073bca4663cc6187eb8a15e9cab9b6ec120654ca43b367966c0e3e69fa7",
+      "ortho_scale": 29.193601989746096,
+      "camera_direction": [
+        -0.85,
+        1.2,
+        0.68
+      ],
+      "elapsed_seconds": 1.716
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "slot": "AFFLUENT",
+      "view": 0,
+      "geometry_hash": "273ec58f680fe764e6f229d79012f0268573e1ab1d8c009e10184a2a030f888b",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 45,
+        "vertices": 15140,
+        "triangles": 20982,
+        "materials": 6,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "COTTAGE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              8.2,
+              10.8
+            ],
+            "base": 0.48,
+            "eave": 8.879999999999999,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.7,
+            "vertices": 12276,
+            "triangles": 16956
+          },
+          {
+            "key": "emberholt_private_rooms",
+            "bounds": [
+              11.649999999999999,
+              1.8359999999999999,
+              16.15,
+              8.964
+            ],
+            "base": 0.48,
+            "eave": 3.28,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.7,
+            "vertices": 2752,
+            "triangles": 3858
+          }
+        ],
+        "geometry_hash": "273ec58f680fe764e6f229d79012f0268573e1ab1d8c009e10184a2a030f888b",
+        "tool_revision": "0.4.0"
+      },
+      "backend": {
+        "objects": 45,
+        "vertices": 15140,
+        "width": 17.88390827178955,
+        "depth": 12.170000195503235,
+        "height": 10.729999542236328,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "image": "v05_revised_cottage_pbr_emberholt_affluent_0.png",
+      "image_sha256": "91e351741bf4c89411d771cf756d71880a75a261db3dab728e9a44e7dc46c80d",
+      "ortho_scale": 29.193601989746096,
+      "camera_direction": [
+        0.85,
+        -1.2,
+        0.68
+      ],
+      "elapsed_seconds": 1.875
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "slot": "AFFLUENT",
+      "view": 1,
+      "geometry_hash": "273ec58f680fe764e6f229d79012f0268573e1ab1d8c009e10184a2a030f888b",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 45,
+        "vertices": 15140,
+        "triangles": 20982,
+        "materials": 6,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "COTTAGE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              8.2,
+              10.8
+            ],
+            "base": 0.48,
+            "eave": 8.879999999999999,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.7,
+            "vertices": 12276,
+            "triangles": 16956
+          },
+          {
+            "key": "emberholt_private_rooms",
+            "bounds": [
+              11.649999999999999,
+              1.8359999999999999,
+              16.15,
+              8.964
+            ],
+            "base": 0.48,
+            "eave": 3.28,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.7,
+            "vertices": 2752,
+            "triangles": 3858
+          }
+        ],
+        "geometry_hash": "273ec58f680fe764e6f229d79012f0268573e1ab1d8c009e10184a2a030f888b",
+        "tool_revision": "0.4.0"
+      },
+      "backend": {
+        "objects": 45,
+        "vertices": 15140,
+        "width": 17.88390827178955,
+        "depth": 12.170000195503235,
+        "height": 10.729999542236328,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "image": "v05_revised_cottage_pbr_emberholt_affluent_1.png",
+      "image_sha256": "3930c5d7c86fcca5ccaf6f446605e67fa0f224094deee6373fecd3ff1a20a74f",
+      "ortho_scale": 29.193601989746096,
+      "camera_direction": [
+        -0.85,
+        1.2,
+        0.68
+      ],
+      "elapsed_seconds": 2.035
+    }
+  ],
+  "scope": "Matched tiers, common projected orthographic scale per region, two opposed views."
+}

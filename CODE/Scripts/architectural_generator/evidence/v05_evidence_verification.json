@@ -1,0 +1,78 @@
+{
+  "valid": true,
+  "unique_render_settings": 23,
+  "render_records": 53,
+  "raw_frame_hashes_verified": 53,
+  "render_geometry_matches_final_source": true,
+  "source_snapshots": [
+    {
+      "manifest": "v05_final_cottage_clay_manifest.json",
+      "source_byte_agreement": false
+    },
+    {
+      "manifest": "v05_final_cottage_pbr_manifest.json",
+      "source_byte_agreement": false
+    },
+    {
+      "manifest": "v05_condition_cottage_pbr_manifest.json",
+      "source_byte_agreement": false
+    },
+    {
+      "manifest": "v05_craft_cottage_pbr_manifest.json",
+      "source_byte_agreement": false
+    },
+    {
+      "manifest": "v05_function_farmhouse_pbr_manifest.json",
+      "source_byte_agreement": false
+    },
+    {
+      "manifest": "v05_function_inn_pbr_manifest.json",
+      "source_byte_agreement": false
+    },
+    {
+      "manifest": "v05_function_boathouse_pbr_manifest.json",
+      "source_byte_agreement": false
+    },
+    {
+      "manifest": "v05_function_smithy_pbr_manifest.json",
+      "source_byte_agreement": false
+    }
+  ],
+  "final_addon_source_sha256": {
+    "blender_backend.py": "ccd4ce109d97eb98df309fcad795398f96eb55c02a1b012fc969a45deca6bdcc",
+    "engine.py": "11d4a8b1868afc1170a34a03d0b294b85d09f7c344153cb24074f5d2acce0ed7",
+    "facade.py": "f989e3a56624f89a034701e275beb6e10d7bfd52bb7a14b0ffad23a235708f4d",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "8da06e3a1242be8c2ac21bca994d1805a36f399425ab585befdaf386346b65ce",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126",
+    "__init__.py": "57f662977d12340c1c4b91864c6655335854bdf196de143b3448ee154b18c2e0"
+  },
+  "archive_sha256": "93c5688f43e1edf2a033190e64a06b3a01beac556b8c1eb5f0bd54be7fa3d1ce",
+  "archive_members_verified": 21,
+  "native_export_geometry_hash": "1ee4873391da7636e6b81683540ee57a5d5ab605027714c37fcf62204a901212",
+  "legacy_baseline_geometry_unchanged": true,
+  "composite_sha256": {
+    "v05_final_cottage_clay_emberholt.png": "a367d3234de18fd0985191491e3f4d1b6204adfdb1611449fc11b6d866b905bd",
+    "v05_final_cottage_clay_lowmark.png": "d1c8e897c30ae2d907488333343967d29f2dd195639183d4e6fb53ba17dc13ef",
+    "v05_final_cottage_clay_mire.png": "a6dd5a5d04f8db12cb1ac67e7909115768bd03cb44526f00b986551402eb100f",
+    "v05_final_cottage_clay_thornfell.png": "5d8270121a4d2cb547bf32975fa227aa2c725de5934313ea7aeb1f5ee767a08f",
+    "v05_final_cottage_pbr_emberholt.png": "03662f43d698587a1b72557209022e394815c781c8221b299f86b65b380d44de",
+    "v05_final_cottage_pbr_lowmark.png": "d666f4c419c9d5976b4a30126256fd1ee39cac431a2fc2e399fefeb8a5c7b2e0",
+    "v05_final_cottage_pbr_mire.png": "9c44552f8056bcc1c13e1e71b8ff2a3ff4005f8ff8488dc116b19bcb8d4c9b76",
+    "v05_final_cottage_pbr_thornfell.png": "603f572872fd7f255bede998dbb1fc9a69e1801550306b7e327c5d23b3c1b9ab",
+    "v05_function_boathouse_pbr_mire.png": "2e011dd940b190eb3a920cf91163f206820df295fd322dc181ac1f9773603de6",
+    "v05_function_farmhouse_pbr_lowmark.png": "9bdd20acb16417a633348c5579b64d398d7d02182f31a45d38a37e2ad19041b1",
+    "v05_function_inn_pbr_thornfell.png": "71fd164f8b9fb69dfb0c3e22584ccf4bbf665030f19aca5fffba3facd86d9144",
+    "v05_function_smithy_pbr_emberholt.png": "6938649c46a589c56bb796a1f10d3e7886fadcbd5af86db4914da4def05c76f7",
+    "v05_condition_cottage_pbr_mire.png": "2f9c90dc54e830cc36c1581481648170ef5f0f9106a1f8cf977820d6dda6a380",
+    "v05_craft_cottage_pbr_emberholt.png": "bb325f364558726e87c646efee692b742a2cceec7310412ca0ba7538173715fd",
+    "v05_craft_cottage_pbr_thornfell.png": "d46446011c373040c2e51d8d5b57a9a88947a059d88ea0a80c03434558b1767c"
+  },
+  "scope": "Geometry replay does not establish pixel identity or human artistic acceptance."
+}

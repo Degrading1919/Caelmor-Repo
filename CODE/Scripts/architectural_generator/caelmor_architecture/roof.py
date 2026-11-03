@@ -314,6 +314,42 @@ def _build_cover_piece(buffer,shingle,cover,efficient,detail):
         _finish_piece(buffer,shingle,section,slope,values[k]-slope*lo,efficient)
 
 
+def _iron_cover(plan,patches,efficient):
+    """Small lapped metal sheets with folded seams, rather than orange tiles."""
+    panels=MeshBuffer('Lapped iron roof sheets','iron','roof',
+                      topology='SURFACE' if efficient else 'SOLID')
+    folds=MeshBuffer('Folded iron sheet seams','iron','roof')
+    width={'LOW':.95,'MEDIUM':.64,'HIGH':.48}[plan.settings.detail]
+    for patch in patches:
+        across=0 if abs(patch.plane[1])>=abs(patch.plane[0]) else 1
+        lo=min(p[across] for p in patch.poly); hi=max(p[across] for p in patch.poly)
+        aa,bb=(1.,0.) if across==0 else (0.,1.)
+        for i in range(math.floor(lo/width),math.ceil(hi/width)):
+            section=clip(clip(patch.poly,aa,bb,-i*width),-aa,-bb,(i+1)*width+.018)
+            if len(section)<3 or abs(area(section))<1e-7:continue
+            along=1-across
+            amin=min(p[along] for p in section); amax=max(p[along] for p in section)
+            u,v=(1.,0.) if along==0 else (0.,1.)
+            for row in range(math.floor(amin/1.2),math.ceil(amax/1.2)):
+                sheet=clip(clip(section,u,v,-row*1.2),-u,-v,(row+1)*1.2+.025)
+                if len(sheet)<3 or abs(area(sheet))<1e-7:continue
+                # Bounded hand-workable plates lap downhill. The lower edge
+                # lifts just above the previous plate, avoiding coplanar overlap.
+                sign=1 if patch.plane[along]>=0 else -1
+                def lift(point):
+                    t=(point[along]-row*1.2)/1.2
+                    return .006+.012*max(0.,min(1.,1.-t if sign>0 else t))
+                top=[(x,y,patch.height(x,y)+lift((x,y))) for x,y in sheet]
+                if efficient:panels.face(top)
+                else:panels.extrude(top,(0.,0.,-.004))
+            at=(i+1)*width
+            span=_line_span(patch.poly,across,at)
+            if span and span[1]-span[0]>.08 and lo+.01<at<hi-.01:
+                ends=[(at,t) if across==0 else (t,at) for t in span]
+                folds.beam(*[(x,y,patch.height(x,y)+.045) for x,y in ends],.026,.055)
+    return panels,folds
+
+
 def build_roof(plan):
     patches=roof_faces(plan)
     points,faces,edges=roof_topology(patches)
@@ -336,10 +372,17 @@ def build_roof(plan):
     bedding=MeshBuffer('Concealed roof course bedding','roof_dark','roof',topology='SURFACE')
     if efficient:
         for patch in patches:
-            bedding.face([(x,y,patch.height(x,y)+.029) for x,y in patch.poly])
-    for shingle in shingle_layout(plan,patches,(points,faces,edges)):
-        _build_cover_piece(tiles[shingle.material],shingle,cover,efficient,detail=plan.settings.detail)
+            bedding.face([(x,y,patch.height(x,y)+(.002 if cover=='IRON' else .029)) for x,y in patch.poly])
+    metal=[]
+    if cover=='IRON':
+        metal=list(_iron_cover(plan,patches,efficient))
+    else:
+        for shingle in shingle_layout(plan,patches,(points,faces,edges)):
+            _build_cover_piece(tiles[shingle.material],shingle,cover,efficient,detail=plan.settings.detail)
     ridge=MeshBuffer('Overlapping ridge caps','roof_dark','roof')
+    if cover=='IRON':
+        ridge.material='iron'
+        bedding.material='iron'
     trim=MeshBuffer('Ridge caps and valley flashing','iron','roof')
     fascia=MeshBuffer('Roof edge fascia','timber','roof')
     rafters=MeshBuffer('Supported roof rafters','timber','roof')
@@ -402,4 +445,4 @@ def build_roof(plan):
                 inward=(-dy/l*.13,dx/l*.13)
                 xy=[p[:2],q[:2],(q[0]+inward[0],q[1]+inward[1]),(p[0]+inward[0],p[1]+inward[1])]
                 trim.extrude([(x,y,patches[fi].height(x,y)+.013) for x,y in xy],(0,0,-.007))
-    return [b for b in (deck,bedding,*tiles.values(),ridge,trim,fascia,rafters) if b.faces]
+    return [b for b in (deck,bedding,*tiles.values(),*metal,ridge,trim,fascia,rafters) if b.faces]

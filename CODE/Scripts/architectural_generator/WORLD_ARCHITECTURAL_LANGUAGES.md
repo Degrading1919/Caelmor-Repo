@@ -58,7 +58,7 @@ Canon anchors: volcanic stone terraces, a city of forges, heat vents, emberwork,
 
 ## Shared variation rules
 
-### Implemented construction language in 0.4
+### Foundation implemented in 0.4
 
 These are original authoring interpretations, rather than structural or climate
 simulation. Lowmark uses broad halls with open shed-roof working ranges and
@@ -75,6 +75,16 @@ Folded aprons join lower roofs to taller party walls. Lowmark mill wheels and
 raceways, warehouse gantries, sistered repair posts, and the other functional
 parts are generated from original mesh primitives. No hidden ancient techniques,
 new resources, modern machines or narrative facts are implied by this geometry.
+
+The 0.5 [household refinement](ARTISTIC_REFINEMENT.md) supersedes the stepped
+gable treatment for ordinary Thornfell homes and work premises with calm
+continuous roof verges. Towers are justified by public/defensive use rather
+than wealth or a settlement label alone. Household investment now buys usable
+work/store/private-room arrangements across existing domestic families; the Mire
+adds sheltered working decks and screened private links; Emberholt uses narrow
+room bodies, lower work ranges, enclosed domestic openings, real hearth flues,
+forged sheet roofing and ground-bearing corbels/ties. These are additional
+reversible art interpretations, not new canon or historical construction claims.
 
 - **Make function change the silhouette.** A barn needs clear span and loading access; a home needs protected openings; a watchpost needs sightlines; a market needs doors onto a public route; a forge needs process volume, ventilation, and material movement. Apply regional grammar on top of that function.
 - **Make wealth change capacity and workmanship.** Add useful bays, safer spans, better supports, a court, or more durable repairs before adding arbitrary ornament. Wealth is a generator control, not a canonical social taxonomy.

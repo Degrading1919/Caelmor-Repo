@@ -12,7 +12,7 @@ PALETTE = {
 }
 
 SIZE = 128
-SURFACE_REVISION = 3
+SURFACE_REVISION = 4
 FAMILIES = {
     "timber": "wood", "timber_light": "wood",
     "roof": "roof", "roof_dark": "roof", "roof_worn": "roof", "roof_patch": "roof",
@@ -376,6 +376,13 @@ def surface_tint(position, normal, material, plan=None, style=None, settings=Non
         distance = math.hypot(x-cx,y-cy)
         soot = (1.0-_smoothstep(.28,1.65,distance)) * _smoothstep(plan.eave-.25,plan.eave+.2,z)
         factor *= 1.0 - .11*soot
+    # Real authored hearths localize heat/soot weathering; the mask must follow
+    # each construction zone, not an invented chimney at the building center.
+    if is_masonry or key=='iron':
+        for sx,sy,top in getattr(plan,'soot_sources',()):
+            distance=math.hypot(x-sx,y-sy)
+            plume=(1.-_smoothstep(.25,1.05,distance))*_smoothstep(plan.eave-.75,top,z)
+            factor*=1.-(.16+.12*(1.-upkeep))*plume
     # glTF COLOR_0 is normalized [0, 1]. Clamp here so Blender preview and
     # exported vertex data use the same standards-valid weathering values.
     factor = max(0.0, min(1.0, factor))
