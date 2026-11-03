@@ -1,0 +1,10 @@
+{
+  "installed_archive": "C:\\Users\\CK\\Documents\\Caelmor-Architecture\\CODE\\Scripts\\architectural_generator\\dist\\caelmor_architecture.zip",
+  "archive_sha256": "f3f17484f62bf6eb72202f2d9279cc1e292fa85bd81562bd3fb0470dd5b6f8b2",
+  "native_install_and_generate": true,
+  "isolated_preferences": true,
+  "region": "EMBERHOLT",
+  "building_type": "SMITHY",
+  "geometry_mode": "EFFICIENT",
+  "world_aware": true
+}

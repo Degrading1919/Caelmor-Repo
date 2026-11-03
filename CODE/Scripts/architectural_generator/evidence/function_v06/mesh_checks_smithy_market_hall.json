@@ -1,0 +1,87 @@
+{
+  "blender": "5.0.1",
+  "source_sha256": {
+    "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
+    "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
+    "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
+    "functional.py": "98d7f5f4b7e33dc0ce8d598721f13d69cccef9aa470d31b8cb0c4f1067dd0529",
+    "function_work.py": "b9b360f86ed3a039296bc47cdfb2bfe98407d364c938c4b6da316e3ae07c219c",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "27317e50e6c20791b33066e00263d358fd94dadda7b1d0c940c5940f6901b76e",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126",
+    "__init__.py": "3d360cbfdd05522f158f79145f93b96c231ef06bd5854ee828c831760aeab8cd"
+  },
+  "cases": [
+    {
+      "function": "SMITHY",
+      "region": "LOWMARK",
+      "clearance_rays": 15,
+      "stair_headroom_rays": 0,
+      "glass_structure_overlaps": 0,
+      "source_geometry_hash": "41075dedc3644bd05a6332fd46b7e36cf27e136c2c86d877867a09643a99d12b"
+    },
+    {
+      "function": "SMITHY",
+      "region": "THORNFELL",
+      "clearance_rays": 15,
+      "stair_headroom_rays": 0,
+      "glass_structure_overlaps": 0,
+      "source_geometry_hash": "b4473bcc69561b2af78f7a1827aad584df75e753c573ebdbd8f40fd66b129e34"
+    },
+    {
+      "function": "SMITHY",
+      "region": "MIRE",
+      "clearance_rays": 33,
+      "stair_headroom_rays": 0,
+      "glass_structure_overlaps": 0,
+      "source_geometry_hash": "012cc494ca058f83881670d90c6c76111ef74b712f4b1096b8d03e13b1e8e7d0"
+    },
+    {
+      "function": "SMITHY",
+      "region": "EMBERHOLT",
+      "clearance_rays": 18,
+      "stair_headroom_rays": 0,
+      "glass_structure_overlaps": 0,
+      "source_geometry_hash": "732bdd2d7c1d4545c2701ac9cca025d0a5fd28af91b97a3611418c95bb05f455"
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "LOWMARK",
+      "clearance_rays": 117,
+      "stair_headroom_rays": 0,
+      "glass_structure_overlaps": 0,
+      "source_geometry_hash": "cff78b15f9307555d7a8d0e5ad69aea3ce81fb572d8205cc5752b64e936a8cc6"
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "THORNFELL",
+      "clearance_rays": 117,
+      "stair_headroom_rays": 0,
+      "glass_structure_overlaps": 0,
+      "source_geometry_hash": "37aa5dbc8402eb77817a0a06209ac079444073724451501cd60f50e3686e06db"
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "MIRE",
+      "clearance_rays": 132,
+      "stair_headroom_rays": 0,
+      "glass_structure_overlaps": 0,
+      "source_geometry_hash": "97c0f594800ab3ed9388c7657c4b595a1dd0895dd37b2221fe036425c9d90550"
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "EMBERHOLT",
+      "clearance_rays": 117,
+      "stair_headroom_rays": 0,
+      "glass_structure_overlaps": 0,
+      "source_geometry_hash": "320d55b031ac7810bc8ea4926492819825e3ef2472bcc03c4fdf621a498dfa9f"
+    }
+  ],
+  "scope": "Actual BVH clearance rays include exported wall/floor proxies. Closed service door leaves are omitted; this is not runtime traversal or exhaustive solid intersection."
+}

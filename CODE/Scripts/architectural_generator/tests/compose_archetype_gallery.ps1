@@ -160,6 +160,13 @@ try {
         Write-Output "Composed $($sheetSpec.Name) ($sheetHash)"
     }
 } finally {$fontHeader.Dispose();$fontRow.Dispose();$fontBody.Dispose()}
+if(-not $Proof -and $Functions -and (Test-Path -LiteralPath (Join-Path $sheetRoot 'manifest.json'))){
+    $previous=Get-Content -LiteralPath (Join-Path $sheetRoot 'manifest.json') -Raw | ConvertFrom-Json
+    $updatedNames=@($sheetRecords | ForEach-Object {$_.function})
+    foreach($oldSheet in $previous.sheets){
+        if($oldSheet.function -notin $updatedNames){$sheetRecords.Add($oldSheet)}
+    }
+}
 $sheetManifest=[pscustomobject]@{schema='caelmor.archetype-gallery.v1';gallery=$Gallery;regions=$regionOrder;rows=@($rowOrder | ForEach-Object {$_.Label});sheets=@($sheetRecords)}
 $sheetManifest | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath (Join-Path $sheetRoot 'manifest.json') -Encoding utf8
 Write-Output "Gallery manifest written for $($sheetRecords.Count) sheets."

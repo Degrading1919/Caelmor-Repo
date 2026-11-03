@@ -1,0 +1,112 @@
+{
+  "cases": [
+    {
+      "function": "SMITHY",
+      "region": "THORNFELL",
+      "wealth": "MODEST",
+      "detail": "LOW",
+      "mode": "SOLID",
+      "valid": true,
+      "geometry_hash": "44fdf19788ad24d588f6e9071a8279878499579ab7e55948a2c84c35ee460724"
+    },
+    {
+      "function": "SMITHY",
+      "region": "THORNFELL",
+      "wealth": "AFFLUENT",
+      "detail": "HIGH",
+      "mode": "EFFICIENT",
+      "valid": true,
+      "geometry_hash": "98afcd9c816be3985bc88de4c044873a25b8a244b9dc8014180736cfce768a44"
+    },
+    {
+      "function": "SMITHY",
+      "region": "MIRE",
+      "wealth": "MODEST",
+      "detail": "LOW",
+      "mode": "SOLID",
+      "valid": true,
+      "geometry_hash": "26735797dfd44064505079c1de8ff09dfe91465ba858a88dc4c527954312da66"
+    },
+    {
+      "function": "SMITHY",
+      "region": "MIRE",
+      "wealth": "AFFLUENT",
+      "detail": "HIGH",
+      "mode": "EFFICIENT",
+      "valid": true,
+      "geometry_hash": "b04003bd6016e99b1af4d81c5db95eb7e86d1b2371fc537eb2d33f6c9c806442"
+    },
+    {
+      "function": "SMITHY",
+      "region": "EMBERHOLT",
+      "wealth": "MODEST",
+      "detail": "LOW",
+      "mode": "SOLID",
+      "valid": true,
+      "geometry_hash": "67136efab5bb4b32b7900ad0d53ea2da613659795b5546952617bc4853f3dcdb"
+    },
+    {
+      "function": "SMITHY",
+      "region": "EMBERHOLT",
+      "wealth": "AFFLUENT",
+      "detail": "HIGH",
+      "mode": "EFFICIENT",
+      "valid": true,
+      "geometry_hash": "1d42b381705eef08c26f321fc6826773f18fdeddce8b3d75a550409f52b86304"
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "LOWMARK",
+      "wealth": "MODEST",
+      "detail": "LOW",
+      "mode": "SOLID",
+      "valid": true,
+      "geometry_hash": "6f78e815e1c14661b3aa90b1db3f4fc78f5ec8d05b3d5eb238190342afd256ba"
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "LOWMARK",
+      "wealth": "AFFLUENT",
+      "detail": "HIGH",
+      "mode": "EFFICIENT",
+      "valid": true,
+      "geometry_hash": "976750cf795290e448792d6712593fd8241495731489d31815805465ad705c71"
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "THORNFELL",
+      "wealth": "MODEST",
+      "detail": "LOW",
+      "mode": "SOLID",
+      "valid": true,
+      "geometry_hash": "21603bfadfb1e805247000b9cb854193cf45328235d716c9a0d0e8dc973fe148"
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "THORNFELL",
+      "wealth": "AFFLUENT",
+      "detail": "HIGH",
+      "mode": "EFFICIENT",
+      "valid": true,
+      "geometry_hash": "0cc432d166dcede7d1be0e04b579bd34cac9fb83a2df92b708f5642aee35a8e9"
+    }
+  ],
+  "source_sha256": {
+    "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
+    "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
+    "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
+    "functional.py": "98d7f5f4b7e33dc0ce8d598721f13d69cccef9aa470d31b8cb0c4f1067dd0529",
+    "function_work.py": "b9b360f86ed3a039296bc47cdfb2bfe98407d364c938c4b6da316e3ae07c219c",
+    "function_yard.py": "6b2bc1fa856e9b2c90118cf71e5c8d30729fcc2bd8a64460e86e25888d6b721f",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "27317e50e6c20791b33066e00263d358fd94dadda7b1d0c940c5940f6901b76e",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126",
+    "__init__.py": "3d360cbfdd05522f158f79145f93b96c231ef06bd5854ee828c831760aeab8cd"
+  }
+}

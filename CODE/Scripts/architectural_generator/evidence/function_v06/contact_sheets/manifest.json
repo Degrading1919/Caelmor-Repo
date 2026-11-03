@@ -1,0 +1,766 @@
+{
+  "schema": "caelmor.archetype-gallery.v1",
+  "gallery": "function_v06",
+  "regions": [
+    "LOWMARK",
+    "THORNFELL",
+    "MIRE",
+    "EMBERHOLT"
+  ],
+  "rows": [
+    "CLAY | FRONT",
+    "CLAY | REAR",
+    "MATERIAL | FRONT",
+    "MATERIAL | REAR"
+  ],
+  "sheets": [
+    {
+      "function": "smithy",
+      "label": "Smithy | SMITHY",
+      "source_revision": "905e97b; 1286d07",
+      "contact_sheet": "contact_sheets/smithy.png",
+      "contact_sheet_sha256": "1a19149cb5eb4e4f9750a54c79b43cbc7e4cf0e384d115614b816f20a5f228b1",
+      "contact_sheet_width": 4316,
+      "contact_sheet_height": 3080,
+      "source_individuals": [
+        {
+          "function": "SMITHY",
+          "region": "LOWMARK",
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/smithy/lowmark_clay_0.png",
+          "declared_sha256": "95824cdd9eee92635c1ceda2a48c5026c0a6fbfe6974abc130185bc0db3aad10",
+          "actual_sha256": "95824cdd9eee92635c1ceda2a48c5026c0a6fbfe6974abc130185bc0db3aad10",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "SMITHY",
+          "region": "THORNFELL",
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/smithy/thornfell_clay_0.png",
+          "declared_sha256": "a4b50d10264af71e59ddbcf795077cf115500eed9f0d4b7bdeaec9ea0d770975",
+          "actual_sha256": "a4b50d10264af71e59ddbcf795077cf115500eed9f0d4b7bdeaec9ea0d770975",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "SMITHY",
+          "region": "MIRE",
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/smithy/mire_clay_0.png",
+          "declared_sha256": "503abab456a6889e9a52310db838968f922b87941d076ffa696de9f4f5a5b709",
+          "actual_sha256": "503abab456a6889e9a52310db838968f922b87941d076ffa696de9f4f5a5b709",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "SMITHY",
+          "region": "EMBERHOLT",
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/smithy/emberholt_clay_0.png",
+          "declared_sha256": "2848340f7cab251a20bed71f6c0fd2acc38dd5e467417a19b5fe3db15063b0e0",
+          "actual_sha256": "2848340f7cab251a20bed71f6c0fd2acc38dd5e467417a19b5fe3db15063b0e0",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "SMITHY",
+          "region": "LOWMARK",
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/smithy/lowmark_clay_1.png",
+          "declared_sha256": "1b2bbd46b66667364776d31e691df7c00cfdedf380dbcc9478eb8ae43fe17413",
+          "actual_sha256": "1b2bbd46b66667364776d31e691df7c00cfdedf380dbcc9478eb8ae43fe17413",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "SMITHY",
+          "region": "THORNFELL",
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/smithy/thornfell_clay_1.png",
+          "declared_sha256": "261ecd2073d45faab3b6c091dacbf5d52f87611b89bf08689d9469162be542e9",
+          "actual_sha256": "261ecd2073d45faab3b6c091dacbf5d52f87611b89bf08689d9469162be542e9",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "SMITHY",
+          "region": "MIRE",
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/smithy/mire_clay_1.png",
+          "declared_sha256": "582cf46538299d70023079aa69f7841a477237491b7561517be8844eeaf010bc",
+          "actual_sha256": "582cf46538299d70023079aa69f7841a477237491b7561517be8844eeaf010bc",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "SMITHY",
+          "region": "EMBERHOLT",
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/smithy/emberholt_clay_1.png",
+          "declared_sha256": "fa9117c4aa2491b07361b5fc035ce577deb0ca1934635e557d1b32f221567b98",
+          "actual_sha256": "fa9117c4aa2491b07361b5fc035ce577deb0ca1934635e557d1b32f221567b98",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "SMITHY",
+          "region": "LOWMARK",
+          "mode": "material",
+          "view": 0,
+          "image": "individual/smithy/lowmark_material_0.png",
+          "declared_sha256": "cccdb5f2a1c6e27695337fa112dea6829e956784b827bf0e39939dc41f97dc0e",
+          "actual_sha256": "cccdb5f2a1c6e27695337fa112dea6829e956784b827bf0e39939dc41f97dc0e",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "SMITHY",
+          "region": "THORNFELL",
+          "mode": "material",
+          "view": 0,
+          "image": "individual/smithy/thornfell_material_0.png",
+          "declared_sha256": "6bee6f0a6d9cfeb6a0a8d5d572bfce14d55235a2b0b0683b1e18258eabc22448",
+          "actual_sha256": "6bee6f0a6d9cfeb6a0a8d5d572bfce14d55235a2b0b0683b1e18258eabc22448",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "SMITHY",
+          "region": "MIRE",
+          "mode": "material",
+          "view": 0,
+          "image": "individual/smithy/mire_material_0.png",
+          "declared_sha256": "b71f4ea9ada20e3397d4d904a83ce62f82933c674e8972dcca6f950e184c88d0",
+          "actual_sha256": "b71f4ea9ada20e3397d4d904a83ce62f82933c674e8972dcca6f950e184c88d0",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "SMITHY",
+          "region": "EMBERHOLT",
+          "mode": "material",
+          "view": 0,
+          "image": "individual/smithy/emberholt_material_0.png",
+          "declared_sha256": "9d9a3e4b5990c7974fb21a39c953298a1c36bf6ab2628cbe4bbbc7dc7ce6049d",
+          "actual_sha256": "9d9a3e4b5990c7974fb21a39c953298a1c36bf6ab2628cbe4bbbc7dc7ce6049d",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "SMITHY",
+          "region": "LOWMARK",
+          "mode": "material",
+          "view": 1,
+          "image": "individual/smithy/lowmark_material_1.png",
+          "declared_sha256": "82ca4fc21d1bf026ebdcc0ac519bbd19ad2fba21b1a930aadef0e129f3ebfe0d",
+          "actual_sha256": "82ca4fc21d1bf026ebdcc0ac519bbd19ad2fba21b1a930aadef0e129f3ebfe0d",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "SMITHY",
+          "region": "THORNFELL",
+          "mode": "material",
+          "view": 1,
+          "image": "individual/smithy/thornfell_material_1.png",
+          "declared_sha256": "303387c376c13f12dc152708b2d0cbfa1d2dacbab8d9599b167730967b3e8e4c",
+          "actual_sha256": "303387c376c13f12dc152708b2d0cbfa1d2dacbab8d9599b167730967b3e8e4c",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "SMITHY",
+          "region": "MIRE",
+          "mode": "material",
+          "view": 1,
+          "image": "individual/smithy/mire_material_1.png",
+          "declared_sha256": "7b96b19c04d3fd7b72ebb05520907c31fb870fc209ace23aeeca066af4150bc1",
+          "actual_sha256": "7b96b19c04d3fd7b72ebb05520907c31fb870fc209ace23aeeca066af4150bc1",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "SMITHY",
+          "region": "EMBERHOLT",
+          "mode": "material",
+          "view": 1,
+          "image": "individual/smithy/emberholt_material_1.png",
+          "declared_sha256": "f1010e1fc30e8006f2939b307a30335515341219040a37a12a8da16e5bb3a7f4",
+          "actual_sha256": "f1010e1fc30e8006f2939b307a30335515341219040a37a12a8da16e5bb3a7f4",
+          "result": "included",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "function": "market_hall",
+      "label": "Market Hall | MARKET_HALL",
+      "source_revision": "1286d07; 905e97b",
+      "contact_sheet": "contact_sheets/market_hall.png",
+      "contact_sheet_sha256": "d8fd85d81126a335941a06a1e7b4538dc0ae10365bd0b0d3b2446fdf1f04e447",
+      "contact_sheet_width": 4316,
+      "contact_sheet_height": 3080,
+      "source_individuals": [
+        {
+          "function": "MARKET_HALL",
+          "region": "LOWMARK",
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/market_hall/lowmark_clay_0.png",
+          "declared_sha256": "10643e5972d4b0028480abe9caf484280c7d31c720cc525a8f11de9babaae64b",
+          "actual_sha256": "10643e5972d4b0028480abe9caf484280c7d31c720cc525a8f11de9babaae64b",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "MARKET_HALL",
+          "region": "THORNFELL",
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/market_hall/thornfell_clay_0.png",
+          "declared_sha256": "e1c254990a568015c291365ff59efddae729fb7ac257dfa2f4a46402057506c5",
+          "actual_sha256": "e1c254990a568015c291365ff59efddae729fb7ac257dfa2f4a46402057506c5",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "MARKET_HALL",
+          "region": "MIRE",
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/market_hall/mire_clay_0.png",
+          "declared_sha256": "f4fcfd02d67e4433fe7d78601cc48380dafa998b1db3b7bf3e2806fed54cb7d5",
+          "actual_sha256": "f4fcfd02d67e4433fe7d78601cc48380dafa998b1db3b7bf3e2806fed54cb7d5",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "MARKET_HALL",
+          "region": "EMBERHOLT",
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/market_hall/emberholt_clay_0.png",
+          "declared_sha256": "629838144019bfe087f4018c70f06e6f5f63e99384112fe438ceb598dd16af39",
+          "actual_sha256": "629838144019bfe087f4018c70f06e6f5f63e99384112fe438ceb598dd16af39",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "MARKET_HALL",
+          "region": "LOWMARK",
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/market_hall/lowmark_clay_1.png",
+          "declared_sha256": "5cadf1a4038be56cb5009164ce2e893840f4d37985d6f1d6d2255b7440280c11",
+          "actual_sha256": "5cadf1a4038be56cb5009164ce2e893840f4d37985d6f1d6d2255b7440280c11",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "MARKET_HALL",
+          "region": "THORNFELL",
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/market_hall/thornfell_clay_1.png",
+          "declared_sha256": "d4e2cbd48d7c2ceda6a41e7db0b243287fbf356750d159c8e491c583c47afae2",
+          "actual_sha256": "d4e2cbd48d7c2ceda6a41e7db0b243287fbf356750d159c8e491c583c47afae2",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "MARKET_HALL",
+          "region": "MIRE",
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/market_hall/mire_clay_1.png",
+          "declared_sha256": "39f45ca2c0498f9750b7bd1e94bdf430dee06899129b76f46fedae6e16283a17",
+          "actual_sha256": "39f45ca2c0498f9750b7bd1e94bdf430dee06899129b76f46fedae6e16283a17",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "MARKET_HALL",
+          "region": "EMBERHOLT",
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/market_hall/emberholt_clay_1.png",
+          "declared_sha256": "ff7c611c2d70ab8baf1dd37184692a57100787244678e79484cb4a1603d69de4",
+          "actual_sha256": "ff7c611c2d70ab8baf1dd37184692a57100787244678e79484cb4a1603d69de4",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "MARKET_HALL",
+          "region": "LOWMARK",
+          "mode": "material",
+          "view": 0,
+          "image": "individual/market_hall/lowmark_material_0.png",
+          "declared_sha256": "4758d3946cb38f62998ce5009c2197f3e7a72c5213b5145a41862bd87a865fcb",
+          "actual_sha256": "4758d3946cb38f62998ce5009c2197f3e7a72c5213b5145a41862bd87a865fcb",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "MARKET_HALL",
+          "region": "THORNFELL",
+          "mode": "material",
+          "view": 0,
+          "image": "individual/market_hall/thornfell_material_0.png",
+          "declared_sha256": "1c50c85d73a27817b559916308158d7a322ea1336ef59843c5cb32fa8f1783ea",
+          "actual_sha256": "1c50c85d73a27817b559916308158d7a322ea1336ef59843c5cb32fa8f1783ea",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "MARKET_HALL",
+          "region": "MIRE",
+          "mode": "material",
+          "view": 0,
+          "image": "individual/market_hall/mire_material_0.png",
+          "declared_sha256": "63f579889bcc7d5fdac61ca59cd589086e5f8f8d934f8fa4343afdab8cc5525e",
+          "actual_sha256": "63f579889bcc7d5fdac61ca59cd589086e5f8f8d934f8fa4343afdab8cc5525e",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "MARKET_HALL",
+          "region": "EMBERHOLT",
+          "mode": "material",
+          "view": 0,
+          "image": "individual/market_hall/emberholt_material_0.png",
+          "declared_sha256": "1ec014c4bff7462ed624cd42d59aa0e21a5670ab204b7e3e998ca0707c9475f6",
+          "actual_sha256": "1ec014c4bff7462ed624cd42d59aa0e21a5670ab204b7e3e998ca0707c9475f6",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "MARKET_HALL",
+          "region": "LOWMARK",
+          "mode": "material",
+          "view": 1,
+          "image": "individual/market_hall/lowmark_material_1.png",
+          "declared_sha256": "b1b3948b22506a37731f27340728b27b84b3ef97401fc1292b36b17c8118855a",
+          "actual_sha256": "b1b3948b22506a37731f27340728b27b84b3ef97401fc1292b36b17c8118855a",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "MARKET_HALL",
+          "region": "THORNFELL",
+          "mode": "material",
+          "view": 1,
+          "image": "individual/market_hall/thornfell_material_1.png",
+          "declared_sha256": "be161d00a3d48e8206195cb293ba1d528cbdf6a6fbdfc6ee1406038d019e21cf",
+          "actual_sha256": "be161d00a3d48e8206195cb293ba1d528cbdf6a6fbdfc6ee1406038d019e21cf",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "MARKET_HALL",
+          "region": "MIRE",
+          "mode": "material",
+          "view": 1,
+          "image": "individual/market_hall/mire_material_1.png",
+          "declared_sha256": "8a25c36b311a61d1cd9e376898e74cfcd102c2f253f2950a92097b9022f0d8c6",
+          "actual_sha256": "8a25c36b311a61d1cd9e376898e74cfcd102c2f253f2950a92097b9022f0d8c6",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "MARKET_HALL",
+          "region": "EMBERHOLT",
+          "mode": "material",
+          "view": 1,
+          "image": "individual/market_hall/emberholt_material_1.png",
+          "declared_sha256": "f3151969a12235dd13969dfb389ffdde6569a1b15a236a37d0ffc5f8c2ca73c5",
+          "actual_sha256": "f3151969a12235dd13969dfb389ffdde6569a1b15a236a37d0ffc5f8c2ca73c5",
+          "result": "included",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "function": "stable",
+      "label": "Stable | STABLE",
+      "source_revision": "905e97b",
+      "contact_sheet": "contact_sheets/stable.png",
+      "contact_sheet_sha256": "415caa745e56349bee16822fa2dea2491085f8536d97df11c3d3d785afc526ac",
+      "contact_sheet_width": 4316,
+      "contact_sheet_height": 3080,
+      "source_individuals": [
+        {
+          "function": "STABLE",
+          "region": "LOWMARK",
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/stable/lowmark_clay_0.png",
+          "declared_sha256": "15233949a849f15216f7e33183e013a21832395e767d509343a42ccfa7b2085d",
+          "actual_sha256": "15233949a849f15216f7e33183e013a21832395e767d509343a42ccfa7b2085d",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "STABLE",
+          "region": "THORNFELL",
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/stable/thornfell_clay_0.png",
+          "declared_sha256": "7f40b9258428117151591fa898d309d84e1f9e830b5a48d5356339d1402c04d9",
+          "actual_sha256": "7f40b9258428117151591fa898d309d84e1f9e830b5a48d5356339d1402c04d9",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "STABLE",
+          "region": "MIRE",
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/stable/mire_clay_0.png",
+          "declared_sha256": "b61fecfb0ae62791aba61867756fd655591b967ce033493abd664b88516c00e7",
+          "actual_sha256": "b61fecfb0ae62791aba61867756fd655591b967ce033493abd664b88516c00e7",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "STABLE",
+          "region": "EMBERHOLT",
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/stable/emberholt_clay_0.png",
+          "declared_sha256": "229c066dca9e6bad9e2f015b7f1ff3ce58a65d631feee19725099a0b8e78622c",
+          "actual_sha256": "229c066dca9e6bad9e2f015b7f1ff3ce58a65d631feee19725099a0b8e78622c",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "STABLE",
+          "region": "LOWMARK",
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/stable/lowmark_clay_1.png",
+          "declared_sha256": "7a4d8cf8dcb249bfbde6a08e81e0732d25672fa60524de392ab4732963f5e02c",
+          "actual_sha256": "7a4d8cf8dcb249bfbde6a08e81e0732d25672fa60524de392ab4732963f5e02c",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "STABLE",
+          "region": "THORNFELL",
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/stable/thornfell_clay_1.png",
+          "declared_sha256": "5a62b2134a405ec842e9b8ace236349a2c3d37b5b4d44bc0eb91f1c977598de7",
+          "actual_sha256": "5a62b2134a405ec842e9b8ace236349a2c3d37b5b4d44bc0eb91f1c977598de7",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "STABLE",
+          "region": "MIRE",
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/stable/mire_clay_1.png",
+          "declared_sha256": "ed11571a34cda08e1858ecede455d42d1e4893eacd6c896da93c9a37ba8735b3",
+          "actual_sha256": "ed11571a34cda08e1858ecede455d42d1e4893eacd6c896da93c9a37ba8735b3",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "STABLE",
+          "region": "EMBERHOLT",
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/stable/emberholt_clay_1.png",
+          "declared_sha256": "ba5f768d8f2e2b8ef56cfbc2a4befbdd9a4c5d90817b9b0676cc79e426193766",
+          "actual_sha256": "ba5f768d8f2e2b8ef56cfbc2a4befbdd9a4c5d90817b9b0676cc79e426193766",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "STABLE",
+          "region": "LOWMARK",
+          "mode": "material",
+          "view": 0,
+          "image": "individual/stable/lowmark_material_0.png",
+          "declared_sha256": "b3205c87dd21da7f1d8ec4b0b8b875d1bc399436ed8e04cd4185aa0a9a8c0e49",
+          "actual_sha256": "b3205c87dd21da7f1d8ec4b0b8b875d1bc399436ed8e04cd4185aa0a9a8c0e49",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "STABLE",
+          "region": "THORNFELL",
+          "mode": "material",
+          "view": 0,
+          "image": "individual/stable/thornfell_material_0.png",
+          "declared_sha256": "3af9f0407776fd6a068c60c4156eb2c6182ce76543e40c7b73e28d930dfd54a0",
+          "actual_sha256": "3af9f0407776fd6a068c60c4156eb2c6182ce76543e40c7b73e28d930dfd54a0",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "STABLE",
+          "region": "MIRE",
+          "mode": "material",
+          "view": 0,
+          "image": "individual/stable/mire_material_0.png",
+          "declared_sha256": "75f826302e8cb5434f56074ac6c71736915759f2b1818b1f8fa8f5e260662489",
+          "actual_sha256": "75f826302e8cb5434f56074ac6c71736915759f2b1818b1f8fa8f5e260662489",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "STABLE",
+          "region": "EMBERHOLT",
+          "mode": "material",
+          "view": 0,
+          "image": "individual/stable/emberholt_material_0.png",
+          "declared_sha256": "5e9d6f358d34d47c0fb852ce91a4cd7db60d0428ddd865b1f9f4f8759dfe348c",
+          "actual_sha256": "5e9d6f358d34d47c0fb852ce91a4cd7db60d0428ddd865b1f9f4f8759dfe348c",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "STABLE",
+          "region": "LOWMARK",
+          "mode": "material",
+          "view": 1,
+          "image": "individual/stable/lowmark_material_1.png",
+          "declared_sha256": "27b8a3eac4cbf2ee55f56ca63c06f7c4c7141c5867e9c291ccd239cb0e07f357",
+          "actual_sha256": "27b8a3eac4cbf2ee55f56ca63c06f7c4c7141c5867e9c291ccd239cb0e07f357",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "STABLE",
+          "region": "THORNFELL",
+          "mode": "material",
+          "view": 1,
+          "image": "individual/stable/thornfell_material_1.png",
+          "declared_sha256": "3bb2c8dc13f2e32f3459caeb33eb3f0ddfd21328ad1d3d51cc5e03f3a4235a58",
+          "actual_sha256": "3bb2c8dc13f2e32f3459caeb33eb3f0ddfd21328ad1d3d51cc5e03f3a4235a58",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "STABLE",
+          "region": "MIRE",
+          "mode": "material",
+          "view": 1,
+          "image": "individual/stable/mire_material_1.png",
+          "declared_sha256": "53d494419e6ed0dfa623201910b68c5783462cbbe3f6a389696956ff3bea5be9",
+          "actual_sha256": "53d494419e6ed0dfa623201910b68c5783462cbbe3f6a389696956ff3bea5be9",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "STABLE",
+          "region": "EMBERHOLT",
+          "mode": "material",
+          "view": 1,
+          "image": "individual/stable/emberholt_material_1.png",
+          "declared_sha256": "253e2d5ae8e0a358a2fe7becf1d4def5b588b1c531ed1424949b7ee14f843029",
+          "actual_sha256": "253e2d5ae8e0a358a2fe7becf1d4def5b588b1c531ed1424949b7ee14f843029",
+          "result": "included",
+          "reason": null
+        }
+      ]
+    },
+    {
+      "function": "gatehouse",
+      "label": "Gatehouse | GATEHOUSE",
+      "source_revision": "905e97b",
+      "contact_sheet": "contact_sheets/gatehouse.png",
+      "contact_sheet_sha256": "99131a39e0326f44950fa3fb83e74023f56716b0b4567ee26bb54c142c7bc7c6",
+      "contact_sheet_width": 4316,
+      "contact_sheet_height": 3080,
+      "source_individuals": [
+        {
+          "function": "GATEHOUSE",
+          "region": "LOWMARK",
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/gatehouse/lowmark_clay_0.png",
+          "declared_sha256": "57d381dd4a00180d4b2f91a53d588cfd2fae882b96b09cae3b3db1166caba32b",
+          "actual_sha256": "57d381dd4a00180d4b2f91a53d588cfd2fae882b96b09cae3b3db1166caba32b",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "GATEHOUSE",
+          "region": "THORNFELL",
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/gatehouse/thornfell_clay_0.png",
+          "declared_sha256": "0fe695956af6abf7ad82cf4139477a2575c69a08e1847b95f9466eeda7ca9483",
+          "actual_sha256": "0fe695956af6abf7ad82cf4139477a2575c69a08e1847b95f9466eeda7ca9483",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "GATEHOUSE",
+          "region": "MIRE",
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/gatehouse/mire_clay_0.png",
+          "declared_sha256": "11cd6ee3c617835e01b64d46044cb2762b001bb5fa7c4aba31fea738f7e4c617",
+          "actual_sha256": "11cd6ee3c617835e01b64d46044cb2762b001bb5fa7c4aba31fea738f7e4c617",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "GATEHOUSE",
+          "region": "EMBERHOLT",
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/gatehouse/emberholt_clay_0.png",
+          "declared_sha256": "e0becd7f8259223a4cc7336cdd70ed1604d41bcde8a5a0d3f417b586d595e83d",
+          "actual_sha256": "e0becd7f8259223a4cc7336cdd70ed1604d41bcde8a5a0d3f417b586d595e83d",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "GATEHOUSE",
+          "region": "LOWMARK",
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/gatehouse/lowmark_clay_1.png",
+          "declared_sha256": "70471f05f23377cebcbe2ae58b38b9dfd19b065d92a77b42597adc2021d5ab6b",
+          "actual_sha256": "70471f05f23377cebcbe2ae58b38b9dfd19b065d92a77b42597adc2021d5ab6b",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "GATEHOUSE",
+          "region": "THORNFELL",
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/gatehouse/thornfell_clay_1.png",
+          "declared_sha256": "d819ea47019bca5991c1564057475cbadf68c5a85cd484cc47baea46b1609329",
+          "actual_sha256": "d819ea47019bca5991c1564057475cbadf68c5a85cd484cc47baea46b1609329",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "GATEHOUSE",
+          "region": "MIRE",
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/gatehouse/mire_clay_1.png",
+          "declared_sha256": "a185e25deb4f65ed87d8bda25e033a664585c38a6e8a8266f0e964bc7acbc746",
+          "actual_sha256": "a185e25deb4f65ed87d8bda25e033a664585c38a6e8a8266f0e964bc7acbc746",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "GATEHOUSE",
+          "region": "EMBERHOLT",
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/gatehouse/emberholt_clay_1.png",
+          "declared_sha256": "bef714e7e923af5d82bae40eda4394ba3580183c60ed793402859df2b6538a2c",
+          "actual_sha256": "bef714e7e923af5d82bae40eda4394ba3580183c60ed793402859df2b6538a2c",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "GATEHOUSE",
+          "region": "LOWMARK",
+          "mode": "material",
+          "view": 0,
+          "image": "individual/gatehouse/lowmark_material_0.png",
+          "declared_sha256": "2f6992d41d92466d3c83dcceecf0bca164de252d01f72f3614a29cf813f10c81",
+          "actual_sha256": "2f6992d41d92466d3c83dcceecf0bca164de252d01f72f3614a29cf813f10c81",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "GATEHOUSE",
+          "region": "THORNFELL",
+          "mode": "material",
+          "view": 0,
+          "image": "individual/gatehouse/thornfell_material_0.png",
+          "declared_sha256": "ef0f83c12a4785fddfa9e5163216726c95324e4f0e09d301fee7a5bc906094b5",
+          "actual_sha256": "ef0f83c12a4785fddfa9e5163216726c95324e4f0e09d301fee7a5bc906094b5",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "GATEHOUSE",
+          "region": "MIRE",
+          "mode": "material",
+          "view": 0,
+          "image": "individual/gatehouse/mire_material_0.png",
+          "declared_sha256": "dd2c7d1422171194ceadfe682f42bbe8b3d6bbe05937e78434325e1cc0a24d53",
+          "actual_sha256": "dd2c7d1422171194ceadfe682f42bbe8b3d6bbe05937e78434325e1cc0a24d53",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "GATEHOUSE",
+          "region": "EMBERHOLT",
+          "mode": "material",
+          "view": 0,
+          "image": "individual/gatehouse/emberholt_material_0.png",
+          "declared_sha256": "7982f59c5ffdcddb3231d395a2c1ee94da2cea04bedce8657fe7a64660361266",
+          "actual_sha256": "7982f59c5ffdcddb3231d395a2c1ee94da2cea04bedce8657fe7a64660361266",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "GATEHOUSE",
+          "region": "LOWMARK",
+          "mode": "material",
+          "view": 1,
+          "image": "individual/gatehouse/lowmark_material_1.png",
+          "declared_sha256": "b0293210baa577735380f35cc9360f8ca8e23e1a84be63df2b59f6426ea78762",
+          "actual_sha256": "b0293210baa577735380f35cc9360f8ca8e23e1a84be63df2b59f6426ea78762",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "GATEHOUSE",
+          "region": "THORNFELL",
+          "mode": "material",
+          "view": 1,
+          "image": "individual/gatehouse/thornfell_material_1.png",
+          "declared_sha256": "4e7a6b910cc75656a7f1e5e8f30e07344e559f2ed8f82a7fb8f45c718009e79e",
+          "actual_sha256": "4e7a6b910cc75656a7f1e5e8f30e07344e559f2ed8f82a7fb8f45c718009e79e",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "GATEHOUSE",
+          "region": "MIRE",
+          "mode": "material",
+          "view": 1,
+          "image": "individual/gatehouse/mire_material_1.png",
+          "declared_sha256": "82a0a642e0ec66efd14e5f9950f5c6cb34d41a0f463276fb71c9d186063e595d",
+          "actual_sha256": "82a0a642e0ec66efd14e5f9950f5c6cb34d41a0f463276fb71c9d186063e595d",
+          "result": "included",
+          "reason": null
+        },
+        {
+          "function": "GATEHOUSE",
+          "region": "EMBERHOLT",
+          "mode": "material",
+          "view": 1,
+          "image": "individual/gatehouse/emberholt_material_1.png",
+          "declared_sha256": "34c3efd65597686f9bef4d7ffde29f48da539ea5cdc77c169bfaf0079c8bc88a",
+          "actual_sha256": "34c3efd65597686f9bef4d7ffde29f48da539ea5cdc77c169bfaf0079c8bc88a",
+          "result": "included",
+          "reason": null
+        }
+      ]
+    }
+  ]
+}

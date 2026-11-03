@@ -1,0 +1,591 @@
+{
+  "source_revision": "fa0597a99668ea812966cff9560271c986c86324+v06-pilot",
+  "generator_version": "0.6.0",
+  "source_sha256": {
+    "__init__.py": "3d360cbfdd05522f158f79145f93b96c231ef06bd5854ee828c831760aeab8cd",
+    "blender_backend.py": "45fbf7a69057a642615c7dfc5676ceb90dd200a1e7874bee67e3fb8960e3a1f2",
+    "blender_manifest.toml": "e021854efaf3ad456fc9ab0d62b0ce81ebdc343e813a5fc71e7dc224ce2449b6",
+    "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
+    "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
+    "function_work.py": "debecb666f66eec08f276181785cc50503d42202a57cc7d5f6e57dbc236fdecc",
+    "function_yard.py": "2acd42e3f50e1b9a31689c5528a0e17b13c395a8f2abf9ee599cd33a4b458e9b",
+    "functional.py": "db0443fbdf63a0603b9be2ef10161deb8dc30248d9c7852315d78b177957ed9c",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "c08dc03fc1e3f31f9e0d429216839e4b941d904a758c40458d4fa44a1e246d9b",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+  },
+  "render_source_sha256": {
+    "render_household_review.py": "46cba9929120f809ec77be5ef5a68601d12b7e5fc09c131d51c7a86781fa7ef0",
+    "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+  },
+  "settings_contract": {
+    "seed": 91,
+    "footprint": "L",
+    "width": 11.0,
+    "depth": 7.0,
+    "wing_width": 4.2,
+    "wing_depth": 4.5,
+    "floors": 2,
+    "floor_height": 2.65,
+    "pitch": 48.0,
+    "overhang": 0.45,
+    "detail": "MEDIUM",
+    "window_density": 1.0,
+    "context": "AUTO",
+    "wealth": "ESTABLISHED",
+    "craftsmanship": "STANDARD",
+    "maintenance": 0.7,
+    "age": 35,
+    "use_grammar": true,
+    "roof_style": "AUTO",
+    "geometry_mode": "EFFICIENT",
+    "world_aware": true
+  },
+  "renderer": "5.0.1",
+  "engine": "BLENDER_EEVEE",
+  "samples": 32,
+  "studio": "render_world_evidence._reset_scene, ground at grade",
+  "scale_policy": "Common projected orthographic scale per archetype across four regions and both views; different archetypes fitted independently.",
+  "geometry_generation": "One native backend build/validation per configuration; same objects reused for clay and material.",
+  "records": [
+    {
+      "function": "MARKET_HALL",
+      "region": "THORNFELL",
+      "label": "Market Hall",
+      "settings": {
+        "seed": 91,
+        "function": "MARKET_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RIDGE",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/market_hall/thornfell_clay_0.png",
+          "image_sha256": "a0e17133ad18b6c6c63211052e001573a66ec53d17b06095a3446c80dee61d12",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.21772003173828,
+            -63.410316467285156,
+            41.238834381103516
+          ],
+          "camera_target": [
+            8.0,
+            3.25,
+            3.4646565914154053
+          ],
+          "ortho_scale": 20.678274536132815,
+          "elapsed_seconds": 2.5271
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/market_hall/thornfell_clay_1.png",
+          "image_sha256": "4fe57fed355606f840de4e1ae21e0204fdbaf0718f53dc49d8b99d1acbe717ac",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.21772003173828,
+            69.91031646728516,
+            41.238834381103516
+          ],
+          "camera_target": [
+            8.0,
+            3.25,
+            3.4646565914154053
+          ],
+          "ortho_scale": 20.678274536132815,
+          "elapsed_seconds": 0.3374
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/market_hall/thornfell_material_0.png",
+          "image_sha256": "ee34b54ba1bb4bd0a9c5858e7d6435e59368d3d0fd00a642f38f4426574aff93",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.21772003173828,
+            -63.410316467285156,
+            41.238834381103516
+          ],
+          "camera_target": [
+            8.0,
+            3.25,
+            3.4646565914154053
+          ],
+          "ortho_scale": 20.678274536132815,
+          "elapsed_seconds": 0.3122
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/market_hall/thornfell_material_1.png",
+          "image_sha256": "436fa3f61f7deb73dd89201acf6ae9b406a553a955a30526f530ca6438a77feb",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.21772003173828,
+            69.91031646728516,
+            41.238834381103516
+          ],
+          "camera_target": [
+            8.0,
+            3.25,
+            3.4646565914154053
+          ],
+          "ortho_scale": 20.678274536132815,
+          "elapsed_seconds": 0.2618
+        }
+      ],
+      "build_seconds": 1.6384,
+      "geometry_hash": "87fea03e2dcc5b575f940b77d27d7404925364b795ffac8d43dbac7fefce1bfd",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.32,
+            "bounds": [
+              0,
+              0,
+              16.0,
+              6.5
+            ],
+            "eave": 3.92,
+            "function": "MARKET_HALL",
+            "key": "market_hall",
+            "roof": "GABLE",
+            "triangles": 10372,
+            "valid": true,
+            "vertices": 10860,
+            "wall_thickness": 0.5
+          }
+        ],
+        "errors": [],
+        "objects": 30,
+        "source_objects": 30,
+        "source_triangles": 10372,
+        "source_vertices": 10860,
+        "triangles": 10372,
+        "valid": true
+      },
+      "backend": {
+        "objects": 30,
+        "vertices": 10860,
+        "width": 16.88999968767166,
+        "depth": 7.4072085916996,
+        "height": 6.9293131828308105,
+        "layers": [
+          "details",
+          "foundation",
+          "roof",
+          "structure",
+          "walls"
+        ]
+      },
+      "functional_program": {
+        "adaptations": [],
+        "context": "RIDGE",
+        "function": "MARKET_HALL",
+        "region": "THORNFELL",
+        "rooms": [
+          {
+            "base": 0.32,
+            "bounds": [
+              0,
+              0,
+              16.0,
+              6.5
+            ],
+            "eave": 3.92,
+            "key": "market_hall",
+            "open_edges": [
+              0,
+              2
+            ],
+            "roof": "GABLE"
+          }
+        ],
+        "routes": [
+          {
+            "bounds": [
+              6.825,
+              0.25,
+              0.32,
+              9.175,
+              6.25,
+              2.57
+            ],
+            "key": "public_through_aisle",
+            "kind": "public"
+          },
+          {
+            "bounds": [
+              0.47,
+              1.48,
+              0.32,
+              2.3216666666666668,
+              2.2,
+              2.3699999999999997
+            ],
+            "key": "west_bay_1_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              0.47,
+              4.3,
+              0.32,
+              2.3216666666666668,
+              5.02,
+              2.3699999999999997
+            ],
+            "key": "west_bay_1_rear_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              2.561666666666667,
+              1.48,
+              0.32,
+              4.413333333333333,
+              2.2,
+              2.3699999999999997
+            ],
+            "key": "west_bay_2_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              2.561666666666667,
+              4.3,
+              0.32,
+              4.413333333333333,
+              5.02,
+              2.3699999999999997
+            ],
+            "key": "west_bay_2_rear_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              4.653333333333333,
+              1.48,
+              0.32,
+              6.505,
+              2.2,
+              2.3699999999999997
+            ],
+            "key": "west_bay_3_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              4.653333333333333,
+              4.3,
+              0.32,
+              6.505,
+              5.02,
+              2.3699999999999997
+            ],
+            "key": "west_bay_3_rear_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              9.295,
+              1.48,
+              0.32,
+              11.146666666666668,
+              2.2,
+              2.3699999999999997
+            ],
+            "key": "east_bay_1_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              9.295,
+              4.3,
+              0.32,
+              11.146666666666668,
+              5.02,
+              2.3699999999999997
+            ],
+            "key": "east_bay_1_rear_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              11.386666666666667,
+              1.48,
+              0.32,
+              13.238333333333335,
+              2.2,
+              2.3699999999999997
+            ],
+            "key": "east_bay_2_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              11.386666666666667,
+              4.3,
+              0.32,
+              13.238333333333335,
+              5.02,
+              2.3699999999999997
+            ],
+            "key": "east_bay_2_rear_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              13.478333333333333,
+              1.48,
+              0.32,
+              15.330000000000002,
+              2.2,
+              2.3699999999999997
+            ],
+            "key": "east_bay_3_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              13.478333333333333,
+              4.3,
+              0.32,
+              15.330000000000002,
+              5.02,
+              2.3699999999999997
+            ],
+            "key": "east_bay_3_rear_seller_space",
+            "kind": "service"
+          }
+        ],
+        "stations": [
+          {
+            "bounds": [
+              0.47,
+              0.7,
+              0.36,
+              2.3216666666666668,
+              1.38,
+              1.28
+            ],
+            "key": "world_thornfell.market_hall.west_bay_1_front_counter",
+            "role": "stall_west_1_front",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              0.47,
+              5.12,
+              0.36,
+              2.3216666666666668,
+              5.8,
+              1.28
+            ],
+            "key": "world_thornfell.market_hall.west_bay_1_rear_counter",
+            "role": "stall_west_1_rear",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              2.561666666666667,
+              0.7,
+              0.36,
+              4.413333333333333,
+              1.38,
+              1.28
+            ],
+            "key": "world_thornfell.market_hall.west_bay_2_front_counter",
+            "role": "stall_west_2_front",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              2.561666666666667,
+              5.12,
+              0.36,
+              4.413333333333333,
+              5.8,
+              1.28
+            ],
+            "key": "world_thornfell.market_hall.west_bay_2_rear_counter",
+            "role": "stall_west_2_rear",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              4.653333333333333,
+              0.7,
+              0.36,
+              6.505,
+              1.38,
+              1.28
+            ],
+            "key": "world_thornfell.market_hall.west_bay_3_front_counter",
+            "role": "stall_west_3_front",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              4.653333333333333,
+              5.12,
+              0.36,
+              6.505,
+              5.8,
+              1.28
+            ],
+            "key": "world_thornfell.market_hall.west_bay_3_rear_counter",
+            "role": "stall_west_3_rear",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              9.295,
+              0.7,
+              0.36,
+              11.146666666666668,
+              1.38,
+              1.28
+            ],
+            "key": "world_thornfell.market_hall.east_bay_1_front_counter",
+            "role": "stall_east_1_front",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              9.295,
+              5.12,
+              0.36,
+              11.146666666666668,
+              5.8,
+              1.28
+            ],
+            "key": "world_thornfell.market_hall.east_bay_1_rear_counter",
+            "role": "stall_east_1_rear",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              11.386666666666667,
+              0.7,
+              0.36,
+              13.238333333333335,
+              1.38,
+              1.28
+            ],
+            "key": "world_thornfell.market_hall.east_bay_2_front_counter",
+            "role": "stall_east_2_front",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              11.386666666666667,
+              5.12,
+              0.36,
+              13.238333333333335,
+              5.8,
+              1.28
+            ],
+            "key": "world_thornfell.market_hall.east_bay_2_rear_counter",
+            "role": "stall_east_2_rear",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              13.478333333333333,
+              0.7,
+              0.36,
+              15.330000000000002,
+              1.38,
+              1.28
+            ],
+            "key": "world_thornfell.market_hall.east_bay_3_front_counter",
+            "role": "stall_east_3_front",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              13.478333333333333,
+              5.12,
+              0.36,
+              15.330000000000002,
+              5.8,
+              1.28
+            ],
+            "key": "world_thornfell.market_hall.east_bay_3_rear_counter",
+            "role": "stall_east_3_rear",
+            "zone": "market_hall"
+          }
+        ]
+      },
+      "bounds": [
+        [
+          -0.4449999928474426,
+          16.44499969482422
+        ],
+        [
+          -0.4536043703556061,
+          6.953604221343994
+        ],
+        [
+          0.0,
+          6.9293131828308105
+        ]
+      ]
+    }
+  ]
+}

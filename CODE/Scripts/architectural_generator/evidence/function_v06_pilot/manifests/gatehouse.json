@@ -1,0 +1,1121 @@
+{
+  "source_revision": "fa0597a99668ea812966cff9560271c986c86324+v06-pilot",
+  "generator_version": "0.6.0",
+  "source_sha256": {
+    "__init__.py": "3d360cbfdd05522f158f79145f93b96c231ef06bd5854ee828c831760aeab8cd",
+    "blender_backend.py": "45fbf7a69057a642615c7dfc5676ceb90dd200a1e7874bee67e3fb8960e3a1f2",
+    "blender_manifest.toml": "e021854efaf3ad456fc9ab0d62b0ce81ebdc343e813a5fc71e7dc224ce2449b6",
+    "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
+    "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
+    "function_work.py": "debecb666f66eec08f276181785cc50503d42202a57cc7d5f6e57dbc236fdecc",
+    "function_yard.py": "2acd42e3f50e1b9a31689c5528a0e17b13c395a8f2abf9ee599cd33a4b458e9b",
+    "functional.py": "db0443fbdf63a0603b9be2ef10161deb8dc30248d9c7852315d78b177957ed9c",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "c08dc03fc1e3f31f9e0d429216839e4b941d904a758c40458d4fa44a1e246d9b",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+  },
+  "render_source_sha256": {
+    "render_household_review.py": "46cba9929120f809ec77be5ef5a68601d12b7e5fc09c131d51c7a86781fa7ef0",
+    "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+  },
+  "settings_contract": {
+    "seed": 91,
+    "footprint": "L",
+    "width": 11.0,
+    "depth": 7.0,
+    "wing_width": 4.2,
+    "wing_depth": 4.5,
+    "floors": 2,
+    "floor_height": 2.65,
+    "pitch": 48.0,
+    "overhang": 0.45,
+    "detail": "MEDIUM",
+    "window_density": 1.0,
+    "context": "AUTO",
+    "wealth": "ESTABLISHED",
+    "craftsmanship": "STANDARD",
+    "maintenance": 0.7,
+    "age": 35,
+    "use_grammar": true,
+    "roof_style": "AUTO",
+    "geometry_mode": "EFFICIENT",
+    "world_aware": true
+  },
+  "renderer": "5.0.1",
+  "engine": "BLENDER_EEVEE",
+  "samples": 32,
+  "studio": "render_world_evidence._reset_scene, ground at grade",
+  "scale_policy": "Common projected orthographic scale per archetype across four regions and both views; different archetypes fitted independently.",
+  "geometry_generation": "One native backend build/validation per configuration; same objects reused for clay and material.",
+  "records": [
+    {
+      "function": "GATEHOUSE",
+      "region": "EMBERHOLT",
+      "label": "Gatehouse",
+      "settings": {
+        "seed": 91,
+        "function": "GATEHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "EMBERHOLD",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/gatehouse/emberholt_clay_0.png",
+          "image_sha256": "9f20ebc9d596655a84ea21f6a1afbb21e025f8cc05c128e589b663d605a17565",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.51771926879883,
+            -62.4603157043457,
+            44.08367919921875
+          ],
+          "camera_target": [
+            8.300000190734863,
+            4.199999809265137,
+            6.309499740600586
+          ],
+          "ortho_scale": 33.20117950439454,
+          "elapsed_seconds": 2.3925
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/gatehouse/emberholt_clay_1.png",
+          "image_sha256": "92c9a701afbe345712f0e0b3d2ca775a06cd7449f6dbfc464df3f3dc003c5139",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -38.917720794677734,
+            70.86031341552734,
+            44.08367919921875
+          ],
+          "camera_target": [
+            8.300000190734863,
+            4.199999809265137,
+            6.309499740600586
+          ],
+          "ortho_scale": 33.20117950439454,
+          "elapsed_seconds": 0.2672
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/gatehouse/emberholt_material_0.png",
+          "image_sha256": "c1bb8877d3bb7cdc0493483188d64e96af9d7d790261bbbeda9a5a26e602b77e",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.51771926879883,
+            -62.4603157043457,
+            44.08367919921875
+          ],
+          "camera_target": [
+            8.300000190734863,
+            4.199999809265137,
+            6.309499740600586
+          ],
+          "ortho_scale": 33.20117950439454,
+          "elapsed_seconds": 0.2813
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/gatehouse/emberholt_material_1.png",
+          "image_sha256": "166d4de00e3436fd5b3abe37e536ff091691672d0173c44b9050fdf0e9afedf7",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -38.917720794677734,
+            70.86031341552734,
+            44.08367919921875
+          ],
+          "camera_target": [
+            8.300000190734863,
+            4.199999809265137,
+            6.309499740600586
+          ],
+          "ortho_scale": 33.20117950439454,
+          "elapsed_seconds": 0.2956
+        }
+      ],
+      "build_seconds": 2.4296,
+      "geometry_hash": "34e9a84fb16eb55ed49ad06072a08a751bb3ee5901868c44b5c3289cb3429614",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.32,
+            "bounds": [
+              4.1,
+              0.0,
+              12.5,
+              8.4
+            ],
+            "eave": 7.92,
+            "function": "GATEHOUSE",
+            "key": "gatehouse_portal",
+            "roof": "TERRACE",
+            "triangles": 8206,
+            "valid": true,
+            "vertices": 6148,
+            "wall_thickness": 0.7
+          },
+          {
+            "base": 0.32,
+            "bounds": [
+              0.0,
+              0.0,
+              4.1,
+              8.4
+            ],
+            "eave": 11.719999999999999,
+            "function": "WATCHTOWER",
+            "key": "gatehouse_west_watchtower",
+            "roof": "TERRACE",
+            "triangles": 11256,
+            "valid": true,
+            "vertices": 8336,
+            "wall_thickness": 0.7
+          },
+          {
+            "base": 0.32,
+            "bounds": [
+              12.5,
+              0.0,
+              16.6,
+              8.4
+            ],
+            "eave": 11.719999999999999,
+            "function": "WATCHTOWER",
+            "key": "gatehouse_east_watchtower",
+            "roof": "TERRACE",
+            "triangles": 11358,
+            "valid": true,
+            "vertices": 8400,
+            "wall_thickness": 0.7
+          }
+        ],
+        "errors": [],
+        "objects": 119,
+        "source_objects": 119,
+        "source_triangles": 30820,
+        "source_vertices": 22884,
+        "triangles": 30820,
+        "valid": true
+      },
+      "backend": {
+        "objects": 119,
+        "vertices": 22884,
+        "width": 17.019999459385872,
+        "depth": 14.399999618530273,
+        "height": 12.878999590873718,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "functional_program": {
+        "adaptations": [],
+        "approaches": [
+          {
+            "end": [
+              8.3,
+              0.0
+            ],
+            "key": "gatehouse.front_threshold_ramp",
+            "rise": 0.32,
+            "run": 3.0,
+            "slope": 0.10666666666666667,
+            "start": [
+              8.3,
+              -3.0
+            ],
+            "width": 2.2
+          },
+          {
+            "end": [
+              8.3,
+              8.4
+            ],
+            "key": "gatehouse.rear_threshold_ramp",
+            "rise": 0.32,
+            "run": 3.0,
+            "slope": 0.10666666666666667,
+            "start": [
+              8.3,
+              11.4
+            ],
+            "width": 2.2
+          }
+        ],
+        "context": "EMBERHOLD",
+        "function": "GATEHOUSE",
+        "region": "EMBERHOLT",
+        "rooms": [
+          {
+            "base": 0.32,
+            "bounds": [
+              4.1,
+              0.0,
+              12.5,
+              8.4
+            ],
+            "eave": 7.92,
+            "key": "gatehouse_portal",
+            "open_edges": [],
+            "roof": "TERRACE"
+          },
+          {
+            "base": 0.32,
+            "bounds": [
+              0.0,
+              0.0,
+              4.1,
+              8.4
+            ],
+            "eave": 11.719999999999999,
+            "key": "gatehouse_west_watchtower",
+            "open_edges": [],
+            "roof": "TERRACE"
+          },
+          {
+            "base": 0.32,
+            "bounds": [
+              12.5,
+              0.0,
+              16.6,
+              8.4
+            ],
+            "eave": 11.719999999999999,
+            "key": "gatehouse_east_watchtower",
+            "open_edges": [],
+            "roof": "TERRACE"
+          }
+        ],
+        "routes": [
+          {
+            "bounds": [
+              6.9,
+              0.0,
+              0.32,
+              9.7,
+              8.4,
+              3.67
+            ],
+            "key": "gatehouse_open_through_passage",
+            "kind": "human"
+          },
+          {
+            "bounds": [
+              1.4699999999999998,
+              0.52,
+              0.32,
+              2.63,
+              7.08,
+              4.26
+            ],
+            "key": "gatehouse.west_guard_stair.clearance",
+            "kind": "stair"
+          },
+          {
+            "bounds": [
+              13.97,
+              0.52,
+              0.32,
+              15.13,
+              7.08,
+              4.26
+            ],
+            "key": "gatehouse.east_guard_stair.clearance",
+            "kind": "stair"
+          }
+        ],
+        "stations": [
+          {
+            "bounds": [
+              4.22,
+              0.14,
+              0.32,
+              5.619999999999999,
+              0.3,
+              3.67
+            ],
+            "key": "world_emberholt.gatehouse_portal.gatehouse.open_leaf.west",
+            "role": "gate_leaf",
+            "zone": "gatehouse_portal"
+          },
+          {
+            "bounds": [
+              10.98,
+              0.14,
+              0.32,
+              12.38,
+              0.3,
+              3.67
+            ],
+            "key": "world_emberholt.gatehouse_portal.gatehouse.open_leaf.east",
+            "role": "gate_leaf",
+            "zone": "gatehouse_portal"
+          },
+          {
+            "bounds": [
+              6.985,
+              0.27,
+              3.73,
+              7.055000000000001,
+              0.43,
+              4.04
+            ],
+            "key": "world_emberholt.gatehouse_portal.gatehouse.portcullis.upright.0",
+            "role": "defense",
+            "zone": "gatehouse_portal"
+          },
+          {
+            "bounds": [
+              7.305000000000001,
+              0.27,
+              3.73,
+              7.375000000000001,
+              0.43,
+              4.04
+            ],
+            "key": "world_emberholt.gatehouse_portal.gatehouse.portcullis.upright.1",
+            "role": "defense",
+            "zone": "gatehouse_portal"
+          },
+          {
+            "bounds": [
+              7.625,
+              0.27,
+              3.73,
+              7.695,
+              0.43,
+              4.04
+            ],
+            "key": "world_emberholt.gatehouse_portal.gatehouse.portcullis.upright.2",
+            "role": "defense",
+            "zone": "gatehouse_portal"
+          },
+          {
+            "bounds": [
+              7.945,
+              0.27,
+              3.73,
+              8.015,
+              0.43,
+              4.04
+            ],
+            "key": "world_emberholt.gatehouse_portal.gatehouse.portcullis.upright.3",
+            "role": "defense",
+            "zone": "gatehouse_portal"
+          },
+          {
+            "bounds": [
+              8.265,
+              0.27,
+              3.73,
+              8.335,
+              0.43,
+              4.04
+            ],
+            "key": "world_emberholt.gatehouse_portal.gatehouse.portcullis.upright.4",
+            "role": "defense",
+            "zone": "gatehouse_portal"
+          },
+          {
+            "bounds": [
+              8.585,
+              0.27,
+              3.73,
+              8.655000000000001,
+              0.43,
+              4.04
+            ],
+            "key": "world_emberholt.gatehouse_portal.gatehouse.portcullis.upright.5",
+            "role": "defense",
+            "zone": "gatehouse_portal"
+          },
+          {
+            "bounds": [
+              8.905,
+              0.27,
+              3.73,
+              8.975,
+              0.43,
+              4.04
+            ],
+            "key": "world_emberholt.gatehouse_portal.gatehouse.portcullis.upright.6",
+            "role": "defense",
+            "zone": "gatehouse_portal"
+          },
+          {
+            "bounds": [
+              9.225,
+              0.27,
+              3.73,
+              9.295,
+              0.43,
+              4.04
+            ],
+            "key": "world_emberholt.gatehouse_portal.gatehouse.portcullis.upright.7",
+            "role": "defense",
+            "zone": "gatehouse_portal"
+          },
+          {
+            "bounds": [
+              9.545,
+              0.27,
+              3.73,
+              9.615,
+              0.43,
+              4.04
+            ],
+            "key": "world_emberholt.gatehouse_portal.gatehouse.portcullis.upright.8",
+            "role": "defense",
+            "zone": "gatehouse_portal"
+          },
+          {
+            "bounds": [
+              6.9,
+              0.27,
+              3.79,
+              9.7,
+              0.43,
+              3.87
+            ],
+            "key": "world_emberholt.gatehouse_portal.gatehouse.portcullis.crossbar.0",
+            "role": "defense",
+            "zone": "gatehouse_portal"
+          },
+          {
+            "bounds": [
+              6.9,
+              0.27,
+              3.9,
+              9.7,
+              0.43,
+              3.98
+            ],
+            "key": "world_emberholt.gatehouse_portal.gatehouse.portcullis.crossbar.1",
+            "role": "defense",
+            "zone": "gatehouse_portal"
+          },
+          {
+            "bounds": [
+              1.5299999999999998,
+              0.5118,
+              0.43500000000000005,
+              2.57,
+              0.9382000000000001,
+              0.5650000000000001
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.0",
+            "role": "access",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              1.5299999999999998,
+              0.9218,
+              0.68,
+              2.57,
+              1.3482,
+              0.81
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.1",
+            "role": "access",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              1.5299999999999998,
+              1.3318,
+              0.9250000000000002,
+              2.57,
+              1.7582000000000002,
+              1.0550000000000002
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.2",
+            "role": "access",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              1.5299999999999998,
+              1.7418,
+              1.17,
+              2.57,
+              2.1682,
+              1.3
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.3",
+            "role": "access",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              1.5299999999999998,
+              2.1518,
+              1.415,
+              2.57,
+              2.5782000000000003,
+              1.5450000000000002
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.4",
+            "role": "access",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              1.5299999999999998,
+              2.5618000000000003,
+              1.6600000000000001,
+              2.57,
+              2.9882000000000004,
+              1.7900000000000003
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.5",
+            "role": "access",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              1.5299999999999998,
+              2.9718,
+              1.9050000000000002,
+              2.57,
+              3.3982,
+              2.035
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.6",
+            "role": "access",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              1.5299999999999998,
+              3.3818,
+              2.1500000000000004,
+              2.57,
+              3.8082000000000003,
+              2.2800000000000002
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.7",
+            "role": "access",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              1.5299999999999998,
+              3.7918000000000007,
+              2.395,
+              2.57,
+              4.2182,
+              2.525
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.8",
+            "role": "access",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              1.5299999999999998,
+              4.201800000000001,
+              2.64,
+              2.57,
+              4.6282000000000005,
+              2.77
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.9",
+            "role": "access",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              1.5299999999999998,
+              4.6118000000000015,
+              2.8850000000000002,
+              2.57,
+              5.038200000000001,
+              3.015
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.10",
+            "role": "access",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              1.5299999999999998,
+              5.021800000000002,
+              3.1300000000000003,
+              2.57,
+              5.448200000000001,
+              3.2600000000000002
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.11",
+            "role": "access",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              1.5299999999999998,
+              5.4318,
+              3.3750000000000004,
+              2.57,
+              5.858199999999999,
+              3.5050000000000003
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.12",
+            "role": "access",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              1.5299999999999998,
+              5.8418,
+              3.62,
+              2.57,
+              6.268199999999999,
+              3.75
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.13",
+            "role": "access",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              1.5299999999999998,
+              6.2518,
+              3.865,
+              2.57,
+              6.6781999999999995,
+              3.995
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.14",
+            "role": "access",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              1.5299999999999998,
+              6.6618,
+              4.11,
+              2.57,
+              7.0882,
+              4.24
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.15",
+            "role": "access",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              0.16,
+              0.28,
+              4.24,
+              3.9399999999999995,
+              0.48,
+              5.19
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_parapet.front",
+            "role": "defense",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              0.43249999999999994,
+              0.25,
+              4.96,
+              0.8325,
+              0.57,
+              5.5200000000000005
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_merlon.0",
+            "role": "defense",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              1.3774999999999997,
+              0.25,
+              4.96,
+              1.7774999999999996,
+              0.57,
+              5.5200000000000005
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_merlon.1",
+            "role": "defense",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              2.3225,
+              0.25,
+              4.96,
+              2.7225,
+              0.57,
+              5.5200000000000005
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_merlon.2",
+            "role": "defense",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              3.267499999999999,
+              0.25,
+              4.96,
+              3.6674999999999995,
+              0.57,
+              5.5200000000000005
+            ],
+            "key": "world_emberholt.gatehouse_west_watchtower.gatehouse.west_merlon.3",
+            "role": "defense",
+            "zone": "gatehouse_west_watchtower"
+          },
+          {
+            "bounds": [
+              14.030000000000001,
+              0.5118,
+              0.43500000000000005,
+              15.07,
+              0.9382000000000001,
+              0.5650000000000001
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.0",
+            "role": "access",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              14.030000000000001,
+              0.9218,
+              0.68,
+              15.07,
+              1.3482,
+              0.81
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.1",
+            "role": "access",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              14.030000000000001,
+              1.3318,
+              0.9250000000000002,
+              15.07,
+              1.7582000000000002,
+              1.0550000000000002
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.2",
+            "role": "access",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              14.030000000000001,
+              1.7418,
+              1.17,
+              15.07,
+              2.1682,
+              1.3
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.3",
+            "role": "access",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              14.030000000000001,
+              2.1518,
+              1.415,
+              15.07,
+              2.5782000000000003,
+              1.5450000000000002
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.4",
+            "role": "access",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              14.030000000000001,
+              2.5618000000000003,
+              1.6600000000000001,
+              15.07,
+              2.9882000000000004,
+              1.7900000000000003
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.5",
+            "role": "access",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              14.030000000000001,
+              2.9718,
+              1.9050000000000002,
+              15.07,
+              3.3982,
+              2.035
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.6",
+            "role": "access",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              14.030000000000001,
+              3.3818,
+              2.1500000000000004,
+              15.07,
+              3.8082000000000003,
+              2.2800000000000002
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.7",
+            "role": "access",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              14.030000000000001,
+              3.7918000000000007,
+              2.395,
+              15.07,
+              4.2182,
+              2.525
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.8",
+            "role": "access",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              14.030000000000001,
+              4.201800000000001,
+              2.64,
+              15.07,
+              4.6282000000000005,
+              2.77
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.9",
+            "role": "access",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              14.030000000000001,
+              4.6118000000000015,
+              2.8850000000000002,
+              15.07,
+              5.038200000000001,
+              3.015
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.10",
+            "role": "access",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              14.030000000000001,
+              5.021800000000002,
+              3.1300000000000003,
+              15.07,
+              5.448200000000001,
+              3.2600000000000002
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.11",
+            "role": "access",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              14.030000000000001,
+              5.4318,
+              3.3750000000000004,
+              15.07,
+              5.858199999999999,
+              3.5050000000000003
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.12",
+            "role": "access",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              14.030000000000001,
+              5.8418,
+              3.62,
+              15.07,
+              6.268199999999999,
+              3.75
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.13",
+            "role": "access",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              14.030000000000001,
+              6.2518,
+              3.865,
+              15.07,
+              6.6781999999999995,
+              3.995
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.14",
+            "role": "access",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              14.030000000000001,
+              6.6618,
+              4.11,
+              15.07,
+              7.0882,
+              4.24
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.15",
+            "role": "access",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              12.66,
+              0.28,
+              4.24,
+              16.44,
+              0.48,
+              5.19
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_parapet.front",
+            "role": "defense",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              12.932500000000001,
+              0.25,
+              4.96,
+              13.3325,
+              0.57,
+              5.5200000000000005
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_merlon.0",
+            "role": "defense",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              13.877500000000001,
+              0.25,
+              4.96,
+              14.2775,
+              0.57,
+              5.5200000000000005
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_merlon.1",
+            "role": "defense",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              14.822500000000002,
+              0.25,
+              4.96,
+              15.2225,
+              0.57,
+              5.5200000000000005
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_merlon.2",
+            "role": "defense",
+            "zone": "gatehouse_east_watchtower"
+          },
+          {
+            "bounds": [
+              15.767500000000002,
+              0.25,
+              4.96,
+              16.1675,
+              0.57,
+              5.5200000000000005
+            ],
+            "key": "world_emberholt.gatehouse_east_watchtower.gatehouse.east_merlon.3",
+            "role": "defense",
+            "zone": "gatehouse_east_watchtower"
+          }
+        ]
+      },
+      "bounds": [
+        [
+          -0.20999999344348907,
+          16.809999465942383
+        ],
+        [
+          -3.0,
+          11.399999618530273
+        ],
+        [
+          -0.12999999523162842,
+          12.74899959564209
+        ]
+      ]
+    }
+  ]
+}
