@@ -1,6 +1,6 @@
 # Caelmor Architectural Generator
 
-Version 0.6.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
+Version 0.7.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
 
 In World mode, Smithy, Market Hall, Stable and Gatehouse now allocate functional
 spaces before their regional construction shell. Integral work equipment,
@@ -10,6 +10,15 @@ stations, clearances and approaches are included in the export sidecar. Other
 functions retain their existing regional builders, and legacy/manual mode
 remains available. See [FUNCTIONAL_PROGRAMS.md](FUNCTIONAL_PROGRAMS.md) for the
 construction contract, inference boundaries and small visual acceptance set.
+
+The 0.7 construction pass gives these programs shaped working equipment,
+framed selling bays and open hall trusses, constructed stall gates and feeding
+troughs, and deep defended portals with masonry arches and battered tower
+buttresses. Lowmark and Thornfell market ridges now follow the public aisle;
+Mire keeps its raised crowned shelter and Emberholt its mineral terrace.
+Sloping wall infill is cut across its full thickness beneath the roof. These
+are geometry changes, with the existing studio and material system retained
+for comparison; they remain subject to Creative Director artistic acceptance.
 
 The regional mappings and exact architectural choices are reversible visual interpretations of the four regional dossiers, not new canon. See [REGIONAL_GRAMMAR.md](REGIONAL_GRAMMAR.md) for the source cues, context IDs, type grammar, and boundaries of those interpretations. [WORLD_ARCHITECTURAL_LANGUAGES.md](WORLD_ARCHITECTURAL_LANGUAGES.md) records the broader structural art direction; its proposals are visual interpretations, not canon or approved material catalogs.
 

@@ -62,8 +62,17 @@ class FunctionalIntegrationTests(unittest.TestCase):
         self.assertFalse(result['valid'])
         self.assertTrue(any('functional structure crosses weather roof' in e for e in result['errors']))
 
+    def test_public_corridor_cannot_be_shrunk_to_an_empty_ray(self):
+        s=resolve_settings(self.settings('MARKET_HALL','MIRE'))
+        ctx=Context(s);b=Builder(ctx,'MARKET_HALL')
+        b.mass('hall',width=8,depth=6,floor_height=3.5,open_edges=(0,2))
+        b.route('too_narrow_connector',(1,2,1.15,7,2.35,3.35),kind='public')
+        result=validate(WorldPlan(ctx,s),ctx.buffers)
+        self.assertFalse(result['valid'])
+        self.assertTrue(any('Public circulation narrower than 1.2m' in e for e in result['errors']))
+
     def test_forge_exhaust_is_open_from_hood_into_stack(self):
-        from test_world import _ray_hits
+        from tests.test_world import _ray_hits
         import math
         for region in ('LOWMARK','THORNFELL','MIRE','EMBERHOLT'):
             with self.subTest(region=region):
@@ -75,6 +84,34 @@ class FunctionalIntegrationTests(unittest.TestCase):
                     hits=_ray_hits(start,direction,distance,buffers)
                     self.assertEqual(len(hits),0,(region,label,[(round(t,4),b.name) for t,b in hits[:4]]))
                 self.assertTrue(validate(plan,buffers)['valid'])
+
+    def test_shed_high_wall_infill_fits_across_its_full_thickness(self):
+        """The inside of the high wall used to protrude ~91mm through tiles."""
+        import math
+        plan,buffers=generate(self.settings('SMITHY','LOWMARK'))
+        mass=plan.world_zones[0]
+        walls=[b for b in buffers if b.layer=='walls']
+        samples=[(b,i,p) for b in walls for i,p in enumerate(b.vertices)
+                 if math.isfinite(mass.roof_height(p[0],p[1]))]
+        self.assertTrue(samples)
+        self.assertLessEqual(max(z-mass.roof_height(x,y) for _,_,(x,y,z) in samples),1e-6)
+        # Falsify the gate using a real wall corner, not a timber-only fixture.
+        b,i,(x,y,z)=max(samples,key=lambda row:row[2][2])
+        b.vertices[i]=(x,y,mass.roof_height(x,y)+.09)
+        result=validate(plan,buffers)
+        self.assertFalse(result['valid'])
+        self.assertTrue(any('functional wall crosses weather roof' in e for e in result['errors']))
+
+    def test_portal_head_full_sections_preserve_declared_clear_height(self):
+        for region in ('LOWMARK','THORNFELL','MIRE','EMBERHOLT'):
+            with self.subTest(region=region):
+                plan,buffers=generate(self.settings('GATEHOUSE',region))
+                route=next(r for r in plan.functional_program['routes']
+                           if r['key']=='gatehouse_open_through_passage')
+                heads=[b for b in buffers if 'gatehouse.portal_arch.' in b.name
+                       or 'gatehouse.portal_lintel.' in b.name]
+                self.assertEqual(len(heads),2)
+                self.assertGreaterEqual(min(p[2] for b in heads for p in b.vertices),route['bounds'][5])
 
 
 if __name__=='__main__':unittest.main(verbosity=2)

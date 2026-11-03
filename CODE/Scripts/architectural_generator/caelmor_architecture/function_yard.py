@@ -3,6 +3,7 @@
 These assemblies describe working layouts (stalls, handling lanes, guarded
 passages) independently of the general regional massing builders.
 """
+import math
 from .functional import Builder
 
 
@@ -89,10 +90,18 @@ def build_stable(ctx):
                   (post_x - .12, -.10, base, post_x + .12, .10, post_top),
                   'timber' if region not in ('THORNFELL', 'EMBERHOLT') else 'stone',
                   zone, role='structure')
+            if region not in ('THORNFELL', 'EMBERHOLT'):
+                bent = b.fixture(f'stable.front_bent_brace.{bay}', 'timber',
+                                 zone, role='structure')
+                for side in (-1, 1):
+                    bent.beam((post_x, 0.0, post_top - .10),
+                              (post_x + side * .48, 0.0, post_top - .82),
+                              .10, .10)
             b.box(f'stable.divider.{bay}',
                   (x0 - .09, aisle_depth, base, x0 + .09, depth - .18,
                    base + 1.30), partition_mat, zone, role='partition')
-        # Two half-height gate wings face one another across the clear entry.
+        # Open framed gate leaves read as working joinery while preserving the
+        # full animal-width lead-in between the two wings.
         gate_half = (stall_width - 1.4) * .5
         for wing, xa, xb in (('left', x0, x0 + gate_half),
                              ('right', x1 - gate_half, x1)):
@@ -103,21 +112,67 @@ def build_stable(ctx):
                       (xa + .05, aisle_depth - .10, base,
                        xb - .05, aisle_depth + .10, base + .55),
                       'stone', zone, role='windbreak')
+            gate_x0, gate_x1 = xa + .09, xb - .09
+            gate_y = aisle_depth
+            gate_bottom = base + (.55 if region == 'THORNFELL' else 0.0)
+            gate_top = base + 1.08
+            # Keep the semantic gate station on its bottom rail; the added
+            # members are construction detail and preserve the same opening.
             b.box(f'stable.split_gate.{bay}.{wing}',
-                  (xa + .05, aisle_depth - .07,
-                   base + (.55 if region == 'THORNFELL' else 0.0),
-                   xb - .05, aisle_depth + .07, base + 1.08),
+                  (gate_x0, gate_y - .05, gate_bottom + .03,
+                   gate_x1, gate_y + .05, gate_bottom + .13),
                   'timber_light', zone, role='stall_gate')
+            b.box(f'stable.split_gate.rail.{bay}.{wing}',
+                  (gate_x0, gate_y - .045, gate_bottom + .45,
+                   gate_x1, gate_y + .045, gate_bottom + .54),
+                  'timber_light', zone, role='structure')
+            b.box(f'stable.split_gate.top.{bay}.{wing}',
+                  (gate_x0, gate_y - .05, gate_top - .11,
+                   gate_x1, gate_y + .05, gate_top - .01),
+                  'timber_light', zone, role='structure')
+            for post, post_x in enumerate((gate_x0, gate_x1)):
+                b.box(f'stable.split_gate.stile.{bay}.{wing}.{post}',
+                      (post_x - .045, gate_y - .05, gate_bottom + .08,
+                       post_x + .045, gate_y + .05, gate_top - .06),
+                      'timber_light', zone, role='structure')
+            gate_brace = b.fixture(f'stable.split_gate.brace.{bay}.{wing}',
+                                   'timber_light', zone, role='structure')
+            gate_brace.beam((gate_x0 + .04, gate_y, gate_bottom + .12),
+                            (gate_x1 - .04, gate_y, gate_top - .10),
+                            .065, .065)
         center = (x0 + x1) * .5
+        manger_material = ('stone_light' if region in ('THORNFELL', 'EMBERHOLT')
+                          else 'timber')
+        # Keep the historic station key on the trough floor; separate sides
+        # leave the inside open so the feed trough has a readable hollow profile.
         b.box(f'stable.manger.{bay}',
               (center - .68, depth - .74, base + .40,
+               center + .68, depth - .32, base + .50),
+              manger_material, zone, role='feeding')
+        b.box(f'stable.manger.side.front.{bay}',
+              (center - .68, depth - .74, base + .48,
+               center + .68, depth - .66, base + .78),
+              manger_material, zone, role='feeding')
+        b.box(f'stable.manger.side.back.{bay}',
+              (center - .68, depth - .40, base + .48,
                center + .68, depth - .32, base + .78),
-              'stone_light' if region in ('THORNFELL', 'EMBERHOLT') else 'timber',
-              zone, role='feeding')
+              manger_material, zone, role='feeding')
+        for end, x0, x1 in (('west', center - .68, center - .60),
+                            ('east', center + .60, center + .68)):
+            b.box(f'stable.manger.end.{bay}.{end}',
+                  (x0, depth - .66, base + .48,
+                   x1, depth - .40, base + .78),
+                  manger_material, zone, role='feeding')
         b.box(f'stable.hayrack.rail.{bay}',
               (center - .78, depth - .24, base + .92,
                center + .78, depth - .10, base + 1.04),
               'timber_light', zone, role='feeding')
+        rack = b.fixture(f'stable.hayrack.profile.{bay}', 'timber_light',
+                         zone, role='feeding')
+        for side in (-1, 1):
+            rack.beam((center + side * .70, depth - .20, base + .58),
+                      (center + side * .70, depth - .12, base + 1.0),
+                      .075, .075)
         for slat in range(5):
             sx = center - .64 + slat * .32
             b.box(f'stable.hayrack.slat.{bay}.{slat}',
@@ -139,6 +194,23 @@ def build_stable(ctx):
           (service_x0 + .20, depth - 1.05, base + .10,
            service_x0 + 1.05, depth - .28, base + 1.30),
           'timber', zone, role='storage')
+
+    # A framed service opening ties the hay bay, rear weather-wall gaps and
+    # loading route together as one purposeful construction.
+    service_frame_x0 = service_access_x - .78
+    service_frame_x1 = service_access_x + .78
+    frame_y0, frame_y1 = depth - .14, depth
+    frame_top = base + 2.38
+    for side, px in (('west', service_frame_x0), ('east', service_frame_x1)):
+        b.box(f'stable.hay_service_frame.post.{side}',
+              (px - .08, frame_y0, base, px + .08, frame_y1, frame_top),
+              'timber' if region not in ('THORNFELL', 'EMBERHOLT') else 'stone',
+              zone, role='structure')
+    b.box('stable.hay_service_frame.header',
+          (service_frame_x0, frame_y0, frame_top,
+           service_frame_x1, frame_y1, frame_top + .20),
+          'timber' if region not in ('THORNFELL', 'EMBERHOLT') else 'stone_light',
+          zone, role='structure')
 
     # Reserve a continuous clear front apron and the animal-width approach.
     # MIRE's gentle ramp is 1:7 onto the raised bank.
@@ -252,9 +324,10 @@ def build_gatehouse(ctx):
     b = Builder(ctx, 'GATEHOUSE')
     region = str(getattr(b.settings, 'region', 'LOWMARK')).upper()
     base = b.base
-    tower_width = 4.1 if region != 'THORNFELL' else 3.7
-    core_width = 8.4
+    tower_width = 4.6 if region == 'THORNFELL' else 5.0
+    core_width = 6.0
     depth = 8.4
+    tower_depth = 7.0
     total_width = 2 * tower_width + core_width
     height = 3.8
     roof = ('TERRACE' if region == 'EMBERHOLT' else
@@ -269,19 +342,21 @@ def build_gatehouse(ctx):
            floors=2, floor_height=height, function='GATEHOUSE',
            roof=roof, openings='NARROW', blocked_edges=[1, 3])
     tower_roof = roof
-    left = b.mass('gatehouse_west_watchtower', x=0.0, y=0.0,
-                  width=tower_width, depth=depth, floors=3,
+    tower_front = -0.6 if region != 'MIRE' else 0.0
+    left = b.mass('gatehouse_west_watchtower', x=0.0, y=tower_front,
+                  width=tower_width, depth=tower_depth, floors=3,
                   floor_height=height, function='WATCHTOWER',
                   roof=tower_roof, openings='NARROW', blocked_edges=[1])
-    right_y = 1.2 if region == 'MIRE' else 0.0
-    right_access = ([{'edge_index': 1, 's0': depth * .5 - .7,
-                      's1': depth * .5 + .7, 'height': 2.25}]
+    right_y = 1.2 if region == 'MIRE' else tower_front
+    right_access = ([{'edge_index': 1, 's0': tower_depth * .5 - .7,
+                      's1': tower_depth * .5 + .7, 'height': 2.25}]
                     if region == 'MIRE' else [])
     right = b.mass('gatehouse_east_watchtower', x=core_x + core_width, y=right_y,
-                   width=tower_width, depth=depth, floors=3,
+                   width=tower_width, depth=tower_depth, floors=3,
                    floor_height=height, function='WATCHTOWER',
                    roof=tower_roof, openings='NARROW', blocked_edges=[3],
-                   open_access=right_access)
+                   open_access=right_access,
+                   access_edges=[1] if region == 'MIRE' else [])
     zone = core
 
     passage_width = 2.8
@@ -317,6 +392,121 @@ def build_gatehouse(ctx):
         b.box(f'gatehouse.portcullis.crossbar.{rail_index}',
               (passage_x0, grille_y0, z - .04,
                passage_x1, grille_y1, z + .04), 'iron', zone, role='defense')
+
+    # Iron guides sit just outside the measured clear width; hinge plates fix
+    # the parked leaves to the portal cheeks instead of leaving them as props.
+    guides = b.fixture('gatehouse.portcullis.guides', 'iron', zone,
+                       role='defense')
+    for gx in (passage_x0 - .10, passage_x1 + .10):
+        guides.beam((gx, .30, base + .18),
+                    (gx, .30, base + height - .12), .09, .09)
+    hinges = b.fixture('gatehouse.open_leaf.hinges', 'iron', zone,
+                       role='structure')
+    for hx in (core_x + .20, core_x + core_width - .20):
+        for hz in (base + .35, base + clear_height - .28):
+            hinges.beam((hx, .12, hz), (hx, .38, hz), .10, .10)
+
+    # Build the portal as a supported threshold on both faces. Masonry regions
+    # use a shallow relieving arch above the unchanged rectangular clear box;
+    # timber regions use a deep beam seated on full-height jamb posts.
+    portal_mat = {'LOWMARK': 'stone_light', 'THORNFELL': 'stone',
+                  'MIRE': 'timber', 'EMBERHOLT': 'stone'}[region]
+    for face, face_y0, face_y1 in (
+            ('front', -.62, .42), ('rear', depth - .42, depth + .62)):
+        for side, px0, px1 in (
+                ('west', passage_x0 - .40, passage_x0 - .08),
+                ('east', passage_x1 + .08, passage_x1 + .40)):
+            key = (f'gatehouse.lowmark_stone_portal_cheek.{side}'
+                   if region == 'LOWMARK' and face == 'front' else
+                   f'gatehouse.ridge_portal_pier.{side}'
+                   if region == 'THORNFELL' and face == 'front' else
+                   f'gatehouse.portal_jamb.{face}.{side}')
+            if region == 'MIRE':
+                jamb = b.fixture(key, portal_mat, zone, role='structure')
+                jamb.beam(((px0 + px1) * .5,
+                           (face_y0 + face_y1) * .5, base),
+                          ((px0 + px1) * .5,
+                           (face_y0 + face_y1) * .5,
+                          base + clear_height + .12), .34, .34)
+            else:
+                b.box(key, (px0, face_y0, base, px1, face_y1,
+                            base + clear_height + .12), portal_mat, zone,
+                      role='structure')
+        if region in ('THORNFELL', 'EMBERHOLT'):
+            arch = b.fixture(f'gatehouse.portal_arch.{face}', portal_mat,
+                             zone, role='structure')
+            # Radial wedge stones carry a segmental relieving arch. Construct
+            # the full intrados/extrados, rather than rotating rectangular
+            # beams whose section can dip into the declared clear opening.
+            center=(passage_x0+passage_x1)*.5
+            radius=(passage_x1-passage_x0)*.5
+            segments = 7
+            spring = base + clear_height + .12
+            rise = .40
+            front_y=-.43 if face=='front' else depth-.12
+            for index in range(segments):
+                t0=math.pi*(index+.012)/segments
+                t1=math.pi*(index+.988)/segments
+                points=[(center+r*math.cos(t),front_y,spring+h*math.sin(t))
+                        for r,h,t in ((radius,rise,t0),(radius,rise,t1),
+                                      (radius+.30,rise+.32,t1),(radius+.30,rise+.32,t0))]
+                arch.extrude(points,(0,.55,0))
+        else:
+            if region == 'MIRE':
+                lintel = b.fixture(f'gatehouse.portal_lintel.{face}',
+                                   'timber', zone, role='structure')
+                lintel.beam((passage_x0 - .08,
+                             (face_y0 + face_y1) * .5,
+                             base + clear_height + .40),
+                            (passage_x1 + .08,
+                             (face_y0 + face_y1) * .5,
+                             base + clear_height + .40), .22, .66)
+            else:
+                b.box(f'gatehouse.portal_lintel.{face}',
+                      (passage_x0 - .08, face_y0, base + clear_height + .08,
+                       passage_x1 + .08, face_y1, base + clear_height + .34),
+                      portal_mat, zone, role='structure')
+
+    # Ridge and Emberholt stone towers carry stepped corner feet into the
+    # ground; Lowmark relies on its timber frame and Mire on raised piles.
+    if region in ('THORNFELL', 'EMBERHOLT'):
+        for side, owner in (('west', left), ('east', right)):
+            tx0, ty0, tx1, ty1 = owner.bounds
+            # Each broad front/rear blade begins .45m out from the wall and
+            # slopes back to an engaged upper bearing at 4.8m. The .72m width
+            # makes it a true buttress rather than a thin applied strip.
+            for face, wall_y, direction in (('front', ty0, -1),
+                                             ('rear', ty1, 1)):
+                for corner, cx in (('west', tx0 + .36),
+                                   ('east', tx1 - .36)):
+                    buttress = b.fixture(
+                        f'gatehouse.{side}_tower_buttress.{face}.{corner}',
+                        'stone' if region == 'THORNFELL' else 'stone_light',
+                        owner, role='structure')
+                    buttress.extrude([
+                        (cx-.36,wall_y-direction*.12,base),
+                        (cx-.36,wall_y+direction*.60,base),
+                        (cx-.36,wall_y+direction*.14,base+4.8),
+                        (cx-.36,wall_y-direction*.12,base+4.8)],(.72,0,0))
+    if region == 'EMBERHOLT':
+        # A projecting corbel band gives the terrace towers a deliberate heavy
+        # crown; it is exterior massing, not a claim of a walkable roof walk.
+        for side, owner in (('west', left), ('east', right)):
+            tx0, ty0, tx1, ty1 = owner.bounds
+            crown_z0 = base + 3 * height - .52
+            crown_z1 = base + 3 * height - .24
+            b.box(f'gatehouse.{side}_tower_crown.front',
+                  (tx0, ty0 - .18, crown_z0, tx1, ty0, crown_z1),
+                  'stone_light', owner, role='structure')
+            b.box(f'gatehouse.{side}_tower_crown.rear',
+                  (tx0, ty1, crown_z0, tx1, ty1 + .18, crown_z1),
+                  'stone_light', owner, role='structure')
+            b.box(f'gatehouse.{side}_tower_crown.west',
+                  (tx0 - .18, ty0, crown_z0, tx0, ty1, crown_z1),
+                  'stone_light', owner, role='structure')
+            b.box(f'gatehouse.{side}_tower_crown.east',
+                  (tx1, ty0, crown_z0, tx1 + .18, ty1, crown_z1),
+                  'stone_light', owner, role='structure')
 
     # A defended upper gallery is split on each side so the passage remains
     # open below. Its staircase is placed inside each tower, clear of traffic.
@@ -395,35 +585,28 @@ def build_gatehouse(ctx):
                [(core_x - 1.0, -1.0), (core_x + core_width + 1.0, -1.0),
                 (core_x + core_width + 1.0, 0.0), (core_x - 1.0, 0.0)],
                z=base, material='stone', zone=zone)
-    if region == 'LOWMARK':
-        # Lowmark retains a timber superstructure but sets the portal on two
-        # durable stone cheeks where carts and weather strike the opening.
-        for side, x0 in (('west', core_x + 2.42),
-                         ('east', core_x + core_width - 2.72)):
-            b.box(f'gatehouse.lowmark_stone_portal_cheek.{side}',
-                  (x0, .38, base, x0 + .30, .72, base + 2.55),
-                  'stone_light', zone, role='structure')
-    elif region == 'THORNFELL':
-        # Hewn-stone shoulder piers make the narrow gabled pass defensive.
-        for side, x0 in (('west', core_x + 2.38),
-                         ('east', core_x + core_width - 2.70)):
-            b.box(f'gatehouse.ridge_portal_pier.{side}',
-                  (x0, .36, base, x0 + .32, .78, base + 3.05),
-                  'stone', zone, role='structure')
     if region == 'MIRE':
         # The shifted east watchbank opens onto a stilted timber walk that
         # skirts the portal and descends back to the banks at both ends.
         bridge_x0, bridge_x1 = total_width + .15, total_width + 2.35
-        bridge_y0, bridge_y1 = right_y - .20, right_y + depth + .20
+        bridge_y0, bridge_y1 = right.bounds[1] - .20, right.bounds[3] + .20
         bridge_center = (bridge_x0 + bridge_x1) * .5
+        access_y = (right.bounds[1] + right.bounds[3]) * .5
         b.deck('gatehouse.mire_watchbank_bridge',
                [(bridge_x0, bridge_y0), (bridge_x1, bridge_y0),
                 (bridge_x1, bridge_y1), (bridge_x0, bridge_y1)],
                z=base, material='timber', zone=right)
-        for side, x in (('inner', bridge_x0 + .10), ('outer', bridge_x1 - .10)):
-            b.ctx.rail(f'gatehouse.mire_bridge_rail.{side}',
-                       (x, bridge_y0), (x, bridge_y1), base,
-                       material='timber', zone=right)
+        b.ctx.rail('gatehouse.mire_bridge_rail.inner',
+                   (bridge_x0 + .10, bridge_y0),
+                   (bridge_x0 + .10, access_y - .65), base,
+                   material='timber', zone=right)
+        b.ctx.rail('gatehouse.mire_bridge_rail.inner.rear',
+                   (bridge_x0 + .10, access_y + .65),
+                   (bridge_x0 + .10, bridge_y1), base,
+                   material='timber', zone=right)
+        b.ctx.rail('gatehouse.mire_bridge_rail.outer',
+                   (bridge_x1 - .10, bridge_y0), (bridge_x1 - .10, bridge_y1),
+                   base, material='timber', zone=right)
         bridge_run = max(3.0, base * 7.0)
         b.ramp('gatehouse.mire_watchbank_front_ramp',
                (bridge_center, bridge_y0 - bridge_run),
@@ -434,10 +617,9 @@ def build_gatehouse(ctx):
         b.route('gatehouse.mire_watchbank_bridge_route',
                 (bridge_center - .50, bridge_y0, base + .05,
                  bridge_center + .50, bridge_y1, base + 2.15), kind='human')
-        access_y = right_y + depth * .5
         b.route('gatehouse.mire_watchbank_door_route',
-                (total_width - .08, access_y - .62, base + .05,
-                 bridge_x0 + .05, access_y + .62, base + 2.15), kind='human')
+                (total_width - .50, access_y - .50, base + .05,
+                 bridge_x0 + .50, access_y + .50, base + 2.15), kind='human')
         b.deck('gatehouse.mire_watchbank_door_landing',
                [(total_width - .02, access_y - .70),
                 (bridge_x0 + .02, access_y - .70),

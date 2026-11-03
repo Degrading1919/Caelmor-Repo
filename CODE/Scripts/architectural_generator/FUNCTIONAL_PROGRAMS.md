@@ -29,6 +29,11 @@ stations cannot intersect declared clear human/public/animal/service routes.
 These semantic checks supplement actual triangle/BVH probes; metadata alone
 cannot establish a usable entrance, ventilation or an artistic read. Existing
 roof, complete aperture/frame, occupied-volume and supported-access guards remain.
+Public transit routes must retain at least 1.2m clear plan width; this authoring
+constraint is distinct from local standing work pads. Mire's market reserves a
+1.35m rear cross-aisle before allocating stalls. A frame reservation is not a
+wall opening: a bridge connection must have a real door aperture and body-sized
+clearance through the rendered wall and its collision proxy.
 
 ## Small acceptance set and evidence schedule
 
@@ -41,6 +46,38 @@ extending the four programs across regions. Final comparison covers only these
 four functions; it is not another 80-building gallery. Keep early rejected views
 separate and rerender only changed configurations. Final art acceptance remains
 the Creative Director's, not a successful agent recognition test.
+
+## Construction-quality comparison contract (0.7)
+
+The Creative Director found the 0.6 programs functionally clearer but still too
+simple. A two-case controlled study holds native geometry/settings constant and
+changes lighting or camera elevation separately. It reveals more relief and
+work equipment, but does not remove the broad undifferentiated roofs, primitive
+equipment or flat defended frontage. This supports a geometry-first revision
+for those cases; it does not isolate individual shaders or establish a universal
+finding for all buildings. Historical renders remain in `evidence/function_v06`;
+the control is in `evidence/function_v07_diagnosis`.
+
+The next matched clay/material set must show these actual construction cues:
+
+- Smithy: readable hearth capture, shaped anvil/bellows/quench, a supported hot
+  working bay and separate stock handling, with an unobstructed exhaust path.
+- Market Hall: framed selling places and roof support rhythm related to their
+  layout, rather than low boxes inside an otherwise empty shell; clear public
+  and vendor circulation including the Mire quay connection.
+- Stable: load-bearing bay divisions, open constructed gates, feeding points
+  and an identifiable hay-service end, without narrowing animal routes.
+- Gatehouse: a deep supported defended threshold with gate mechanics and
+  flanking construction; masonry load paths and weather/defensive edges must
+  remain plausible in both opposed views.
+
+Use seed 91 and the existing established/standard/age-35/maintenance-.7 medium
+efficient settings and studio. Review early representatives before the final
+16-configuration/64-frame comparison. New supports must obey full-body weather
+envelopes; equipment must obey actual circulation/exhaust clearances. Technical
+passes and internal artistic assessments remain distinct from Creative Director
+acceptance. These changes are interpretations of existing construction cues,
+not new canon or an expansion of the function catalog.
 
 ## Sources and inference boundaries
 

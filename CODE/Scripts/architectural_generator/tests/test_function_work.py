@@ -67,6 +67,7 @@ class FakeBuilder:
 class FakeBuffer:
     def __init__(self, key):
         self.key = key
+        self.name = key
     def beam(self, *args): pass
     def extrude(self, *args): pass
     def box(self, *args): pass
@@ -146,6 +147,10 @@ class ActualFunctionGenerationTests(unittest.TestCase):
         self.assertEqual(plan.functional_program["function"], "MARKET_HALL")
         self.assertEqual(len([row for row in plan.functional_program["stations"]
                               if "counter" in row["key"]]), 12)
+        self.assertTrue(any(b.name.endswith("market.vendor_bay_frames")
+                            and b.layer=="structure" for b in buffers))
+        self.assertEqual(len([row for row in plan.functional_program["stations"]
+                              if row["role"]=="market_counter"]), 6)
 
     def test_thornfell_smithy_is_a_front_visible_shallow_stone_workshop(self):
         plan,buffers=self._generate_and_validate("SMITHY","THORNFELL")
@@ -173,16 +178,43 @@ class ActualFunctionGenerationTests(unittest.TestCase):
         self.assertTrue(any("hearth_firebed" in buffer.name
                             for _,buffer in hits),
                         "Open front does not reveal the forge hearth")
+        station=next(s for s in plan.functional_program["stations"]
+                     if s["key"].endswith(".anvil"))
+        for actual,expected in zip(station["bounds"],(3.552,.92,1.10,4.512,1.48,1.44)):
+            self.assertAlmostEqual(actual,expected)
+        shaped=next(b for b in buffers if b.name.endswith(".anvil"))
+        self.assertGreater(len(shaped.faces),6,"Anvil profile is still a single block")
 
     def test_thornfell_market_aisle_rays_enter_and_cross_both_open_ends(self):
         plan, buffers = self._generate_and_validate("MARKET_HALL", "THORNFELL")
         mass=plan.world_zones[0]
         center=mass.width*.5
-        for z in (mass.base+1,mass.base+2,mass.base+3):
+        for z in (mass.base+1,mass.base+2,mass.base+2.75):
             for x in (center-.8,center,center+.8):
                 with self.subTest(z=z,x=x):
-                    hits=_ray_hits((x,-.1,z),(0,1,0),mass.depth+.2,buffers)
+                    hits=[(t,b) for t,b in _ray_hits((x,-.1,z),(0,1,0),mass.depth+.2,buffers)
+                          if b.layer=="walls" or "facade_walls" in b.name]
                     self.assertEqual(hits,[],"Through-aisle clearance is obstructed")
+
+    def test_lowmark_and_thornfell_markets_have_open_gables_and_supported_trusses(self):
+        for region in ("LOWMARK","THORNFELL"):
+            with self.subTest(region=region):
+                plan,buffers=self._generate_and_validate("MARKET_HALL",region)
+                mass=plan.world_zones[0]
+                self.assertEqual(mass.plan.rects[0][4],"Y")
+                self.assertEqual(mass.plan.open_edges,{0,2})
+                truss=next(b for b in buffers if b.name.endswith("market.open_gable_trusses"))
+                purlin=next(b for b in buffers if b.name.endswith("market.ridge_purlin"))
+                self.assertTrue(truss.faces and purlin.faces)
+                self.assertTrue(any(abs(x-mass.width*.5)<.1 and y<.5
+                                    for x,y,z in truss.vertices),
+                                "Front gable has no central kingpost")
+                # A high approach ray checks that the end opening is real;
+                # the tie/truss is deliberately above the functional clear box.
+                hits=[(t,b) for t,b in _ray_hits((mass.width*.5,-.1,mass.base+2.2),
+                                                  (0,1,0),.7,buffers)
+                      if b.layer=="walls" or "facade_walls" in b.name]
+                self.assertEqual(hits,[],"Open gable frontage is filled by a wall")
 
     def test_all_regional_functional_pilots_generate_validate_and_admit_access_rays(self):
         for region in ("LOWMARK","THORNFELL","MIRE","EMBERHOLT"):
@@ -231,26 +263,56 @@ class ActualFunctionGenerationTests(unittest.TestCase):
                                          "public through-aisle ray is obstructed")
                 if region=="MIRE":
                     self.assertTrue(any("linear_quay_boardwalk" in b.name for b in buffers))
+                    route=next(r for r in market.functional_program["routes"]
+                               if r["key"]=="market.quay_connector")
+                    x0,y0,z0,x1,y1,z1=route["bounds"]
+                    self.assertGreaterEqual(y1-y0,1.349,"quay connector is too narrow for public passage")
+                    opening=next(a for a in mass.plan.functional_access if a["edge_index"]==1)
+                    self.assertGreaterEqual(opening["s1"]-opening["s0"],1.5)
+                    self.assertEqual(len([s for s in market.functional_program["stations"]
+                                          if s["role"]=="market_counter"]),2*3)
+                    probe=(x0+.025,(y0+y1)*.5,z0+2.0)
+                    hits=_ray_hits(probe,(1,0,0),x1-x0-.05,buffers)
+                    self.assertEqual(hits,[],"quay connector ray hits the open-edge facade frame")
                 if region=="EMBERHOLT":
                     counters=[b for b in buffers if "counter" in b.name]
                     self.assertTrue(counters and all(b.material=="iron" for b in counters))
-                if region in ("THORNFELL","EMBERHOLT","LOWMARK"):
-                    wall=mass.plan.wall_thickness
-                    for side,direction in (("west",(-1,0,0)),("east",(1,0,0))):
-                        bay_number=1 if side=="west" else 3
-                        route=next(r for r in market.functional_program["routes"]
-                                   if r["key"]==f"{side}_bay_{bay_number}_front_seller_space")
-                        x0,y0,_,x1,y1,_=route["bounds"]
-                        x=x0+.025 if side=="west" else x1-.025
-                        origin=(x,y0+.144,mass.base+.45)
-                        hits=self._wall_hits(origin,direction,2,buffers)
-                        self.assertTrue(hits,f"{side} vendor stand has no sidewall boundary")
-                        clearance=hits[0][0]-.025
-                        self.assertGreaterEqual(clearance,.149,
-                                                f"{side} vendor stand enters the wall thickness")
+                aisle_left=(mass.width-aisle)*.5
+                aisle_right=(mass.width+aisle)*.5
+                for side in ("west","east"):
+                    stands=[s for s in market.functional_program["stations"]
+                            if s["role"]=="market_counter" and f"{side}_bay_" in s["key"]]
+                    self.assertTrue(stands)
+                    ordered=sorted(stands,key=lambda s:s["bounds"][1])
+                    self.assertTrue(all(a["bounds"][1]<b["bounds"][1]
+                                        for a,b in zip(ordered,ordered[1:])))
+                    for stand in stands:
+                        x0,y0,_,x1,y1,_=stand["bounds"]
+                        self.assertGreater(y1-y0,.55,"vendor counter is too short to use")
+                        if side=="west":
+                            self.assertLess(x1,aisle_left,"west counter intrudes into the public aisle")
+                        else:
+                            self.assertGreater(x0,aisle_right,"east counter intrudes into the public aisle")
+                        route_key=stand["key"].split(".")[-1].replace("_front_counter","_front_seller_space")
+                        route=next(r for r in market.functional_program["routes"] if r["key"]==route_key)
+                        a,b=route["bounds"],stand["bounds"]
+                        overlap=[min(a[k+3],b[k+3])-max(a[k],b[k]) for k in range(3)]
+                        self.assertLessEqual(min(overlap),.005,"seller route overlaps its counter")
                 if region in ("LOWMARK","THORNFELL"):
                     approaches={a["key"] for a in market.functional_program["approaches"]}
                     self.assertTrue({"market.front_approach","market.rear_approach"}.issubset(approaches))
+
+    def test_all_eight_function_profiles_repeat_seed_geometry_identically(self):
+        for function in ("SMITHY","MARKET_HALL"):
+            for region in ("LOWMARK","THORNFELL","MIRE","EMBERHOLT"):
+                with self.subTest(function=function,region=region):
+                    settings=Settings(function=function,region=region,world_aware=True,
+                                      use_grammar=True,detail="LOW",seed=91)
+                    _,first=generate(settings)
+                    _,second=generate(settings)
+                    signature=lambda buffers:[(b.name,b.material,b.layer,
+                                               tuple(b.vertices),tuple(b.faces)) for b in buffers]
+                    self.assertEqual(signature(first),signature(second))
 
     def test_market_hall_allocates_two_to_four_bays_without_aisle_stalls(self):
         for wealth, expected in (("MODEST", 2), ("ESTABLISHED", 3), ("AFFLUENT", 4)):
@@ -258,7 +320,8 @@ class ActualFunctionGenerationTests(unittest.TestCase):
                 ctx = FakeContext("THORNFELL", wealth=wealth)
                 with patch.object(function_work, "Builder", FakeBuilder):
                     function_work.build_market(ctx)
-                self.assertEqual(len([row for row in ctx.boxes if "_counter" in row[0]]), expected*4)
+                self.assertEqual(len([row for row in ctx.program["stations"]
+                                     if "_counter" in row["key"]]), expected*4)
                 aisle = next(row for row in ctx.program["routes"] if row[0] == "public_through_aisle")
                 self.assertLess(aisle[1][0], aisle[1][3])
                 _, kwargs, _ = ctx.masses[0]

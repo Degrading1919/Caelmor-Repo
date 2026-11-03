@@ -45,7 +45,10 @@ class FunctionalMeshTests(unittest.TestCase):
                 trees=[(o,object_bvh(o,dep)) for o in collection.objects if o.get(TAG)]
                 visuals=[(o,t) for o,t in trees if not o.get('caelm_collider')]
                 glass=[(o,t) for o,t in visuals if o.get('caelm_material')=='glass']
-                structure=[(o,t) for o,t in visuals if o.get('caelm_layer')=='structure']
+                # New integral fixtures (portal shoulders, stall bents, etc.)
+                # must not evade the glazing gate by living in the detail layer.
+                structure=[(o,t) for o,t in visuals if o.get('caelm_layer')=='structure'
+                           or o.get('caelm_functional_role')]
                 overlap=[(g.name,s.name) for g,gt in glass for s,st in structure if gt.overlap(st)]
                 self.assertFalse(overlap,overlap[:4])
                 # Operable door leaves/straps may close service entrances. Their
@@ -84,7 +87,9 @@ class FunctionalMeshTests(unittest.TestCase):
                     bounds=route['bounds'];axis=0 if bounds[3]-bounds[0]>=bounds[4]-bounds[1] else 1
                     other=1-axis
                     for lateral in (.2,.5,.8):
-                        for rise in (.45,1.2,2.0):
+                        rises=sorted({.45,1.2,2.0,round(bounds[5]-max(floor,bounds[2])-.05,6)})
+                        for rise in rises:
+                            if rise<=0:continue
                             z=max(floor,bounds[2])+rise
                             if z>=bounds[5]-.02:continue
                             point=[0.,0.,z]
@@ -102,15 +107,19 @@ class FunctionalMeshTests(unittest.TestCase):
                                 'stair_headroom_rays':stair_probes,
                                 'exhaust_path_rays':process_rays,
                                 'glass_structure_overlaps':len(overlap),
+                                'glazing_opaque_objects_tested':len(structure),
                                 'source_geometry_hash':collection['caelm_geometry_hash']})
         current={p.name:hashlib.sha256(p.read_bytes()).hexdigest()
                  for p in (ROOT/'caelmor_architecture').glob('*.py') if p.name not in unused}
         self.assertEqual(current,source,'Source changed during native checks')
-        out=ROOT/'evidence'/'function_v06';out.mkdir(parents=True,exist_ok=True)
+        output_name=os.environ.get('CAELM_FUNCTION_OUTPUT','function_v06')
+        if output_name in ('.','..') or Path(output_name).name!=output_name or '/' in output_name or '\\' in output_name:
+            raise ValueError('Functional output must be a single evidence folder')
+        out=ROOT/'evidence'/output_name;out.mkdir(parents=True,exist_ok=True)
         name='pilot_mesh_checks.json' if os.environ.get('CAELM_FUNCTION_PILOT') else 'mesh_checks.json'
         if selected!=['']:name='mesh_checks_'+'_'.join(f.lower() for f in selected)+'.json'
         (out/name).write_text(json.dumps({'blender':bpy.app.version_string,'source_sha256':source,
-            'cases':reports,'scope':'Actual BVH clearance rays include exported wall/floor proxies. Closed service door leaves are omitted; this is not runtime traversal or exhaustive solid intersection.'},indent=2)+'\n')
+            'cases':reports,'scope':'Actual BVH clearance rays include exported wall/floor proxies. Glazing intersections include structure and all integral functional fixtures, including detail-layer pieces. Closed service door leaves are omitted from circulation probes; this is not runtime traversal or exhaustive solid intersection.'},indent=2)+'\n')
 
 
 if __name__=='__main__':

@@ -27,6 +27,140 @@ def _beam(ctx, key, material, start, end, width, height=None, zone=None):
     return buf
 
 
+def _station_fixture(builder, key, material, zone, role, bounds):
+    """Create detailed geometry while retaining the station's stable AABB."""
+    buf = builder.ctx.buffer(key, material, "details", zone=zone)
+    buf.functional_role = role
+    builder.program["stations"].append({
+        "key": buf.name, "role": role, "bounds": bounds,
+        "zone": getattr(zone,"key",None) if zone else None,
+    })
+    return buf
+
+
+def _open_bin(builder, key, bounds, material, zone, role, *, slatted=False):
+    """A hollow, open-top working bin with the original station bounds."""
+    x0,y0,z0,x1,y1,z1=bounds
+    buf=_station_fixture(builder,key,material,zone,role,bounds)
+    wall=min(.09,(x1-x0)*.14,(y1-y0)*.14)
+    floor=min(.09,(z1-z0)*.18)
+    buf.box(((x0+x1)*.5,(y0+y1)*.5,z0+floor*.5),(x1-x0-2*wall,y1-y0-2*wall,floor))
+    # Side walls leave a real open top. Coal bins use spaced boards so the
+    # contents remain visible; the quench trough is continuous and fireproof.
+    for side in (0,1):
+        x=x0+wall*.5 if side==0 else x1-wall*.5
+        if slatted:
+            count=3
+            for i in range(count):
+                z=z0+floor+.10+(z1-z0-floor-.16)*(i+.5)/count
+                buf.box((x,(y0+y1)*.5,z),(wall,y1-y0,.075))
+        else:
+            buf.box((x,(y0+y1)*.5,(z0+floor+z1)*.5),(wall,y1-y0,z1-z0-floor))
+    for side in (0,1):
+        y=y0+wall*.5 if side==0 else y1-wall*.5
+        if slatted:
+            count=3
+            for i in range(count):
+                z=z0+floor+.10+(z1-z0-floor-.16)*(i+.5)/count
+                buf.box(((x0+x1)*.5,y,z),(x1-x0,wall,.075))
+        else:
+            buf.box(((x0+x1)*.5,y,(z0+floor+z1)*.5),(x1-x0-2*wall,wall,z1-z0-floor))
+    return buf
+
+
+def _market_counter(builder, key, bounds, material, zone):
+    """Legged counter with a lower shelf and a shallow, divided display top."""
+    x0,y0,z0,x1,y1,z1=bounds
+    buf=_station_fixture(builder,key,material,zone,"market_counter",bounds)
+    leg=min(.10,(x1-x0)*.16,(y1-y0)*.14)
+    top_z=z1-.12
+    for x in (x0+leg*.75,x1-leg*.75):
+        for y in (y0+leg*.75,y1-leg*.75):
+            buf.box((x,y,(z0+top_z)*.5),(leg,leg,top_z-z0))
+    buf.box(((x0+x1)*.5,(y0+y1)*.5,top_z+.06),(x1-x0,y1-y0,.12))
+    shelf_z=z0+(top_z-z0)*.43
+    buf.box(((x0+x1)*.5,(y0+y1)*.5,shelf_z),(x1-x0-2*leg,y1-y0-2*leg,.07))
+    # Low dividers keep produce or small goods in the stall's footprint and
+    # give the counter a clear working/display face in clay renders.
+    rail=min(.055,(y1-y0)*.12)
+    for y in (y0+rail*.5,y1-rail*.5):
+        buf.box(((x0+x1)*.5,y,top_z+.12+rail*.5),(x1-x0,rail,rail))
+    for x in (x0+rail*.5,x1-rail*.5):
+        buf.box((x,(y0+y1)*.5,top_z+.12+rail*.5),(rail,y1-y0-2*rail,rail))
+    return buf
+
+
+def _market_back_shelf(builder, key, bounds, material, zone):
+    """Open two-tier stock shelf paired with a customer-side counter."""
+    x0,y0,z0,x1,y1,z1=bounds
+    buf=_station_fixture(builder,key,material,zone,"market_stock_shelf",bounds)
+    post=min(.07,(x1-x0)*.18,(y1-y0)*.12)
+    for x in (x0+post*.7,x1-post*.7):
+        for y in (y0+post*.7,y1-post*.7):
+            buf.box((x,y,(z0+z1)*.5),(post,post,z1-z0))
+    for z in (z0+.12,z0+(z1-z0)*.56):
+        buf.box(((x0+x1)*.5,(y0+y1)*.5,z),(x1-x0-2*post,y1-y0-2*post,.075))
+    # A back rail prevents stock from slipping while leaving the front open.
+    buf.box(((x0+x1)*.5,y1-post*.5,(z0+z1)*.5),(x1-x0,post,z1-z0))
+    return buf
+
+
+def _market_vendor_frames(builder, mass, bays, aisle_left, aisle_right, margin, material,
+                          rear_margin=None):
+    """Build roof-contained aisle-edge bents aligned to vendor-bay breaks."""
+    ctx=builder.ctx
+    d=mass.depth
+    rear_margin=margin if rear_margin is None else rear_margin
+    step=(d-margin-rear_margin)/bays
+    stations=[margin+i*step for i in range(bays+1)]
+    frame=ctx.buffer("market.vendor_bay_frames",material,"structure",mass)
+    frame.structural_role="market_vendor_bay_load_path"
+    for side in ("west","east"):
+        inner=aisle_left-.30 if side=="west" else aisle_right+.30
+        outer=aisle_left-2.85 if side=="west" else aisle_right+2.85
+        for y in stations:
+            zroof=min(mass.roof_height(x,y) for x in (outer,inner))
+            top=zroof-.56
+            for x in (outer,inner):
+                frame.box((x,y,(mass.base+top)*.5),(.20,.20,top-mass.base))
+            frame.beam((outer,y,top-.08),(inner,y,top-.08),.20,.16)
+        # Side lintels connect the bay posts into a legible covered arcade.
+        for y0,y1 in zip(stations,stations[1:]):
+            x=outer if side=="west" else inner
+            z0=min(mass.roof_height(x,y0),mass.roof_height(x,y1))-.62
+            z1=min(mass.roof_height(x,y0),mass.roof_height(x,y1))-.62
+            frame.beam((x,y0,z0),(x,y1,z1),.16,.16)
+
+
+def _market_open_gables(builder, mass, tie_clearance):
+    """Frame the open end gables and carry their ridge into the vendor bays."""
+    ctx=builder.ctx
+    width,depth=mass.width,mass.depth
+    x0,x1=.34,width-.34
+    ridge=width*.5
+    tie_z=mass.base+tie_clearance+.08
+    truss=ctx.buffer("market.open_gable_trusses","timber","structure",mass)
+    truss.structural_role="market_open_gable_end_truss"
+    ends=(.24,depth-.24)
+    for y in ends:
+        eave_z=[mass.roof_height(x,y)-.32 for x in (x0,x1)]
+        # Bearing posts sit at the ends of the public opening; the tie remains
+        # above its clear route, while the central aisle stays unobstructed.
+        for x,z in zip((x0,x1),eave_z):
+            truss.box((x,y,(mass.base+z)*.5),(.20,.20,z-mass.base))
+        truss.beam((x0,y,tie_z),(x1,y,tie_z),.16,.16)
+        truss.beam((x0,y,eave_z[0]),(ridge,y,mass.roof_height(ridge,y)-.42),.16,.18)
+        truss.beam((ridge,y,mass.roof_height(ridge,y)-.42),(x1,y,eave_z[1]),.16,.18)
+        truss.beam((ridge,y,tie_z+.08),(ridge,y,mass.roof_height(ridge,y)-.50),.14,.14)
+        for x in (width*.32,width*.68):
+            z=mass.roof_height(x,y)-.48
+            truss.beam((ridge,y,tie_z+.15),(x,y,z),.12,.12)
+    purlin=ctx.buffer("market.ridge_purlin","timber","structure",mass)
+    purlin.structural_role="gable_truss_supported_ridge_purlin"
+    z=mass.roof_height(ridge,depth*.5)-.50
+    purlin.beam((ridge,ends[0],z),(ridge,ends[1],z),.18,.20)
+
+
 def _smithy_flue(builder, mass, x, y, zbase):
     """Hood and outside stack vent through the open left wall without roof cuts."""
     ctx = builder.ctx
@@ -105,6 +239,25 @@ def _smithy_flue(builder, mass, x, y, zbase):
         'duct':[(x,y,duct_z),(outside_x,y,duct_z)],
         'stack':[(outside_x,y,duct_z),(outside_x,y,top+.18)],
         'scope':'Open geometric air path, not a draft or thermal simulation'}
+
+
+def _smithy_bay_frame(builder, mass, x0, x1, y0, y1, material):
+    """A small roof-supported work bay, kept around rather than over the forge."""
+    ctx=builder.ctx
+    frame=ctx.buffer("smithy.hot_bay_frame",material,"structure",mass)
+    frame.structural_role="forge_bay_load_path"
+    posts=((x0,y0),(x1,y0),(x0,y1),(x1,y1))
+    tops=[]
+    for x,y in posts:
+        top=mass.roof_height(x,y)-.58
+        tops.append(top)
+        frame.box((x,y,(mass.base+top)*.5),(.16,.16,top-mass.base))
+    # Eaves and ties follow the roof's rise. Each member's top remains below
+    # the host weather surface so the forge frame never becomes a roof cut.
+    for i,(a,b) in enumerate(((0,1),(2,3),(0,2),(1,3))):
+        p0,p1=posts[a],posts[b]
+        z0,z1=tops[a],tops[b]
+        frame.beam((p0[0],p0[1],z0-.08),(p1[0],p1[1],z1-.08),.16,.16)
 
 
 def build_smithy(ctx):
@@ -229,31 +382,67 @@ def build_smithy(ctx):
     ax=(w*.42 if region=="LOWMARK" else
         hx+1.1 if region in ("THORNFELL","MIRE") else w*.48)
     ay=hy
-    b.box("anvil", (ax-.48,ay-.28,mass.base+.78,ax+.48,ay+.28,mass.base+1.12), "iron", mass, role="forge")
+    anvil_bounds=(ax-.48,ay-.28,mass.base+.78,ax+.48,ay+.28,mass.base+1.12)
+    anvil=_station_fixture(b,"anvil","iron",mass,"forge",anvil_bounds)
+    # Forged section: a broad working head narrows through the waist into a
+    # flared foot. Keeping the original station AABB preserves clearance data.
+    anvil.extrude([(ax-.38,ay-.20,mass.base+.78),
+                   (ax+.38,ay-.20,mass.base+.78),
+                   (ax+.24,ay-.20,mass.base+.91),
+                   (ax+.43,ay-.20,mass.base+1.04),
+                   (ax-.43,ay-.20,mass.base+1.04),
+                   (ax-.24,ay-.20,mass.base+.91)],(0,.40,0))
+    anvil.box((ax,ay,mass.base+1.055),(.94,.52,.09))
     horn=ctx.buffer("smithy.anvil_horn","iron","details",zone=mass)
     horn.structural_role="anvil_working_surface"
-    horn.extrude([(ax-.12,ay-.24,mass.base+1.07),
-                  (ax+.30,ay-.24,mass.base+1.07),
-                  (ax+.03,ay-.24,mass.base+1.15)],(0,-.44,0))
+    horn.extrude([(ax+.20,ay-.22,mass.base+1.08),
+                  (ax+.46,ay-.22,mass.base+1.08),
+                  (ax+.46,ay-.22,mass.base+1.15)],(0,.44,0))
     b.box("anvil_stump", (ax-.28,ay-.31,mass.base+.04,ax+.28,ay+.31,mass.base+.76), "timber", mass, role="forge")
-    b.box("bellows", (hx-.98,hy+.70,mass.base+1.05,
-                       hx-.10,hy+1.25,mass.base+1.77), "timber", mass, role="forge")
+    bellows_bounds=(hx-.98,hy+.70,mass.base+1.05,hx-.10,hy+1.25,mass.base+1.77)
+    bellows=_station_fixture(b,"bellows","timber",mass,"forge_bellows",bellows_bounds)
+    bx0,by0,bz0,bx1,by1,bz1=bellows_bounds
+    # Folded wedge cheeks and a top board give the bellows a compressed,
+    # directed form instead of a solid crate silhouette.
+    for x in (bx0+.08,bx1-.08):
+        bellows.extrude([(x,by0+.05,bz0+.08),(x,by1-.04,bz0+.08),
+                         (x,by1-.04,bz1-.08)],(.08,0,0))
+    bellows.box(((bx0+bx1)*.5,(by0+by1)*.5,bz1-.10),(bx1-bx0,by1-by0,.12))
+    bellows.box(((bx0+bx1)*.5,by0+.08,bz0+.10),(bx1-bx0-.12,.12,.12))
+    _beam(ctx,"smithy.bellows_nozzle","iron",
+          (bx0+.02,by0+.10,bz0+.28),(hx-.05,hy+.26,mass.base+.88),.09,.09,mass)
     if region in ("LOWMARK","THORNFELL","MIRE"):
         operator_x0=ax+.1 if region=="THORNFELL" else ax-.42
         operator_x1=ax+.85 if region=="THORNFELL" else ax+.52
         b.route("smithy.operator_workpad",(operator_x0,.12,mass.base,operator_x1,.62,mass.base+2.0),kind="human")
         if region=="LOWMARK":
-            b.box("quench_trough", (4.75,1.8,mass.base+.04,5.25,2.5,mass.base+.42), "timber", mass, role="quench")
-            b.box("coal_bin", (.35,3.05,mass.base+.04,1.25,3.75,mass.base+.88), "timber", mass, role="fuel")
+            _open_bin(b,"quench_trough",(4.75,1.8,mass.base+.04,5.25,2.5,mass.base+.42),"stone",mass,"quench")
+            _open_bin(b,"coal_bin",(.35,3.05,mass.base+.04,1.25,3.75,mass.base+.88),"timber",mass,"fuel",slatted=True)
         else:
-            b.box("quench_trough", (hx+2.2,hy+.2,mass.base+.04,hx+3.0,hy+.9,mass.base+.42), "stone" if region=="MIRE" else "iron", mass, role="quench")
-            b.box("coal_bin", (.35,d*.68,mass.base+.04,1.25,d*.68+.7,mass.base+.88), "timber", mass, role="fuel")
+            _open_bin(b,"quench_trough",(hx+2.2,hy+.2,mass.base+.04,hx+3.0,hy+.9,mass.base+.42),"stone" if region=="MIRE" else "iron",mass,"quench")
+            _open_bin(b,"coal_bin",(.35,d*.68,mass.base+.04,1.25,d*.68+.7,mass.base+.88),"timber",mass,"fuel",slatted=True)
     else:
-        b.box("quench_trough", (w*.74,d*.55,mass.base+.04,w*.74+1.05,d*.55+.65,mass.base+.42), "timber", mass, role="quench")
-        b.box("coal_bin", (.4,d*.58,mass.base+.04,1.45,d*.58+.82,mass.base+.88), "timber", mass, role="fuel")
+        _open_bin(b,"quench_trough",(w*.74,d*.55,mass.base+.04,w*.74+1.05,d*.55+.65,mass.base+.42),"stone" if region=="EMBERHOLT" else "timber",mass,"quench")
+        _open_bin(b,"coal_bin",(.4,d*.58,mass.base+.04,1.45,d*.58+.82,mass.base+.88),"timber",mass,"fuel",slatted=True)
     if region=="EMBERHOLT":
         b.box("forge_slag_catch",(w*.64,hy+.55,mass.base+.04,w*.76,hy+1.2,mass.base+.52),"iron",mass,role="slag_bay")
         b.box("ingot_work_bench",(w*.62,hy+1.45,mass.base+.04,w*.77,hy+2.1,mass.base+.98),"iron",mass,role="material_bay")
+    if region=="LOWMARK":
+        b.deck("smithy.hot_work_pad",
+               [(hx-1.25,hy-.85),(hx+1.35,hy-.85),(hx+1.35,hy+1.8),(hx-1.25,hy+1.8)],
+               z=mass.base,material="stone",zone=mass)
+        _smithy_bay_frame(b,mass,.38,2.9,.62,3.45,"timber")
+    elif region=="THORNFELL":
+        # A thick windward breast behind the hearth gives the open forge a
+        # sheltered stone working face while leaving the hood inlet and side
+        # exhaust route unobstructed.
+        wall=ctx.buffer("smithy.stone_hearth_windwall","stone","structure",mass)
+        wall.structural_role="hearth_windwall"
+        wall.box((hx,hy+.79,mass.base+.86),(1.76,.24,1.08))
+    elif region=="EMBERHOLT":
+        breast=ctx.buffer("smithy.masonry_hotbay","stone","structure",mass)
+        breast.structural_role="masonry_forge_breast"
+        breast.box((hx,hy+.88,mass.base+.82),(2.0,.32,.96))
     _smithy_flue(b, mass, hx, hy+.15, mass.base)
     # Structural rhythm carries the roof and reinforces the open face; these
     # posts are at the perimeter and outside all recorded circulation.
@@ -278,6 +467,8 @@ def build_market(ctx):
         w,d,floor_height=max(11.0,b.settings.width),max(8.0,b.settings.depth),2.8
     region=_enum(b.region)
     bays=_wealth_capacity(b.settings)
+    front_margin=.62
+    rear_margin=1.65 if region=="MIRE" else front_margin
     # Thornfell protects the market from ridge wind with stone walls and paired
     # entries. Lowmark's timber hall opens at both ends for a direct public
     # passage. The remaining regions receive distinct covered arcade edges.
@@ -292,7 +483,8 @@ def build_market(ctx):
     elif region == "MIRE":
         open_edges=[0,1,2]
         open_access=[{"edge_index":0,"s0":w*.5-1.3,"s1":w*.5+1.3,"height":2.4},
-                     {"edge_index":2,"s0":w*.5-1.3,"s1":w*.5+1.3,"height":2.4}]
+                     {"edge_index":2,"s0":w*.5-1.3,"s1":w*.5+1.3,"height":2.4},
+                     {"edge_index":1,"s0":d-1.55,"s1":d-.02,"height":2.4}]
     elif region == "EMBERHOLT":
         open_edges=[0,2]
         open_access=[{"edge_index":0,"s0":w*.5-1.3,"s1":w*.5+1.3,"height":2.7},
@@ -302,7 +494,10 @@ def build_market(ctx):
         open_access=[]
     mass=b.mass("market_hall",x=0,y=0,width=w,depth=d,floors=1,floor_height=floor_height,
                 entrance_edge=0,openings="NONE",open_edges=open_edges,
-                open_access=open_access,overhang=.38)
+                open_access=open_access,overhang=.38,
+                roof_axis="Y" if region in ("LOWMARK","THORNFELL") else "X",
+                roof="GABLE" if region in ("LOWMARK","THORNFELL") else b.roof,
+                pitch=30 if region in ("LOWMARK","THORNFELL") else b.pitch)
     aisle_width=2.35 if region=="THORNFELL" else 2.6
     # A central through aisle spans the full depth. Counters occupy the outer
     # strips, each with a standing/vendor bay on its inner side.
@@ -320,21 +515,52 @@ def build_market(ctx):
                     ((w-aisle_width)*.5,y0,0,(w+aisle_width)*.5,y1,mass.base+.1),kind="public")
     wall_clear=mass.plan.wall_thickness+.15
     side_width=(w-2*wall_clear-aisle_width)*.5
-    for side, x0 in (("west",wall_clear),("east",wall_clear+side_width+aisle_width)):
-        bay_width=(side_width-.55)/bays
+    aisle_left,aisle_right=(w-aisle_width)*.5,(w+aisle_width)*.5
+    margin=front_margin
+    bay_length=(d-margin-rear_margin)/bays
+    trade_material="iron" if region=="EMBERHOLT" else "stone" if region=="THORNFELL" else "timber"
+    # Each capacity bay now runs along the public aisle, with a customer
+    # counter, a clear seller pocket, and a back stock shelf. Existing front /
+    # rear IDs remain stable: they identify the customer face and stock face of
+    # each paired stall rather than two isolated end rows.
+    for side in ("west","east"):
         for i in range(bays):
-            x=x0+i*bay_width
-            cx0=x+.12; cx1=min(x+bay_width-.12,x0+side_width-.12)
-            for end,cy0,cy1,seller_y0,seller_y1 in (
-                    ("front",.70,1.38,1.48,2.20),
-                    ("rear",d-1.38,d-.70,d-2.20,d-1.48)):
-                b.box(f"{side}_bay_{i+1}_{end}_counter",
-                      (cx0,cy0,mass.base+.04,cx1,cy1,mass.base+.96),
-                      "iron" if region=="EMBERHOLT" else
-                      "stone" if region=="THORNFELL" else "timber",
-                      mass, role=f"stall_{side}_{i+1}_{end}")
-                b.route(f"{side}_bay_{i+1}_{end}_seller_space",
-                        (cx0,seller_y0,mass.base,cx1,seller_y1,mass.base+2.05),kind="service")
+            y_start=margin+i*bay_length
+            y0=y_start+.14
+            y1=y_start+bay_length-.14
+            usable_length=y1-y0
+            counter_length=min(1.48,usable_length)
+            cy=(y0+y1)*.5
+            c_y0,c_y1=cy-counter_length*.5,cy+counter_length*.5
+            if side=="west":
+                counter_x1=aisle_left-.25
+                counter_x0=counter_x1-.78
+                seller_x1=counter_x0-.12
+                seller_x0=seller_x1-1.02
+                shelf_x1=seller_x0-.18
+                shelf_x0=shelf_x1-.46
+            else:
+                counter_x0=aisle_right+.25
+                counter_x1=counter_x0+.78
+                seller_x0=counter_x1+.12
+                seller_x1=seller_x0+1.02
+                shelf_x0=seller_x1+.18
+                shelf_x1=shelf_x0+.46
+            bnd=(counter_x0,c_y0,mass.base+.04,counter_x1,c_y1,mass.base+1.00)
+            _market_counter(b,f"{side}_bay_{i+1}_front_counter",bnd,
+                            trade_material,mass)
+            # Seller clearance separates the counter from a rear stock shelf;
+            # the public aisle stays entirely outside the trade bay.
+            b.route(f"{side}_bay_{i+1}_front_seller_space",
+                    (seller_x0,y0,mass.base,seller_x1,y1,mass.base+2.05),kind="service")
+            shelf_bounds=(shelf_x0,c_y0,mass.base+.04,shelf_x1,c_y1,mass.base+1.58)
+            _market_back_shelf(b,f"{side}_bay_{i+1}_rear_counter",shelf_bounds,
+                               trade_material,mass)
+    _market_vendor_frames(b,mass,bays,aisle_left,aisle_right,margin,
+                          "stone" if region in ("THORNFELL","EMBERHOLT") else "timber",
+                          rear_margin=rear_margin)
+    if region in ("LOWMARK","THORNFELL"):
+        _market_open_gables(b,mass,2.48 if region=="LOWMARK" else 2.90)
     if region=="MIRE":
         # Sorrowmere's raised trading hall meets a broad boardwalk on the open
         # river-facing side; the long ramp keeps the quay approach gentle.
@@ -346,8 +572,10 @@ def build_market(ctx):
                zone=mass,material="timber")
         b.route("market.quay_approach",(w+.1,-11.5,mass.base-.05,
                                          w+2.7,-.05,mass.base+2.0),kind="public")
-        b.route("market.quay_connector",((w+aisle_width)*.5,d*.5-.7,mass.base,
-                                          w+2.8,d*.5+.7,mass.base+2.2),kind="public")
+        # Join the raised linear quay at the clear rear bay break; the central
+        # side frontage remains allocated to the vendor stalls.
+        b.route("market.quay_connector",((w+aisle_width)*.5,d-1.45,mass.base,
+                                          w+2.8,d-.10,mass.base+2.2),kind="public")
     if region=="EMBERHOLT":
         # A broad stone public court precedes the paired iron trade-bay rows.
         center=w*.5

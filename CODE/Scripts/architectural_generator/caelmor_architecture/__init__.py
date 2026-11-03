@@ -2,7 +2,7 @@
 bl_info = {
     "name": "Caelmor Architectural Generator",
     "author": "Caelmor",
-    "version": (0, 6, 0),
+    "version": (0, 7, 0),
     "blender": (4, 2, 0),
     "location": "View3D > Sidebar > Caelmor",
     "description": "Generate editable regional Caelmor buildings",

@@ -109,13 +109,16 @@ class Context:
     def mass(self,key,*,x=0.,y=0.,width,depth,floors=1,floor_height=None,
              base=None,roof='GABLE',pitch=None,overhang=None,openings='DOMESTIC',
              entrance_edge=0,blocked_edges=(),steps=True,foundation='PLINTH',access_edges=(),
-             function=None,gallery_edges=(),open_edges=(),open_access=()):
+             function=None,gallery_edges=(),open_edges=(),open_access=(),wall_infill_roof_clearance=None,
+             roof_axis='X'):
         if any(m.key==key for m in self.masses):
             raise ValueError('Duplicate construction zone: '+key)
         if not all(math.isfinite(v) for v in (x,y,width,depth)) or min(width,depth)<1.4:
             raise ValueError('Invalid construction volume dimensions')
         if roof not in ('GABLE','HIP','SHED','BOW','TERRACE'):
             raise ValueError('Unsupported construction roof')
+        if roof_axis not in ('X','Y'):
+            raise ValueError('Unsupported construction ridge axis')
         s=replace(self.settings,world_aware=False,use_grammar=False,footprint='RECT',
                   function=function or self.settings.function,
                   width=width,depth=depth,floors=int(floors),
@@ -125,7 +128,7 @@ class Context:
                   roof_style='HIP' if roof=='HIP' else 'GABLE')
         # Zone dimensions are constrained by builders, not public manual UI bounds:
         # a supported service wing can be narrower than the 6m main-body control.
-        plan=MassPlan(s,[(x,y,x+width,y+depth,'X')],self.settings)
+        plan=MassPlan(s,[(x,y,x+width,y+depth,roof_axis)],self.settings)
         # Tile cohorts describe a limited stock/material range. Broad contrasting
         # rectangles on every slope read as arbitrary repairs in material views.
         # Geometry and the bounded eave-repair construction remain unchanged.
@@ -162,6 +165,7 @@ class Context:
         plan.gallery_edges=tuple(gallery_edges)
         plan.open_edges=set(open_edges)
         plan.functional_access=tuple(dict(r) for r in open_access)
+        plan.wall_infill_roof_clearance=wall_infill_roof_clearance
         plan.blocked_edges=set(blocked_edges)
         plan.entry_steps=steps
         plan.world_mass=True
@@ -432,6 +436,10 @@ def validate(plan,buffers,legacy_validator):
         for route in program['routes']:
             if route['kind'] not in ('human','public','animal','service','material'):continue
             a=route['bounds']
+            # A public transit strip is a usable aisle, not a thin empty ray
+            # between fixtures. Standing work pads are a separate human role.
+            if route['kind']=='public' and min(a[3]-a[0],a[4]-a[1])<1.2-1e-6:
+                errors.append('Public circulation narrower than 1.2m: '+route['key'])
             for station in program['stations']:
                 b=station['bounds']
                 overlap=[min(a[i+3],b[i+3])-max(a[i],b[i]) for i in range(3)]
@@ -452,11 +460,11 @@ def validate(plan,buffers,legacy_validator):
         local=[b for b in buffers if getattr(b,'world_zone',None)==key]
         if program:
             for buffer in local:
-                if buffer.layer!='structure':continue
+                if buffer.layer not in ('structure','walls'):continue
                 excess=max((z-mass.roof_height(x,y) for x,y,z in buffer.vertices
                             if math.isfinite(mass.roof_height(x,y))),default=0.)
                 if excess>1e-5:
-                    errors.append(buffer.name+': functional structure crosses weather roof')
+                    errors.append(buffer.name+': functional '+('wall' if buffer.layer=='walls' else 'structure')+' crosses weather roof')
         report=legacy_validator(mass.plan,local)
         if mass.plan.settings.function=='GATEHOUSE' and not getattr(mass.plan,'passage_geometry',{}).get('valid'):
             errors.append(f'{key}: gate passage is not aligned through the occupied volume')

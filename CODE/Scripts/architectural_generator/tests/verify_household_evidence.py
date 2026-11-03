@@ -112,10 +112,12 @@ def verify_archetypes():
     print(json.dumps({k:v for k,v in report.items() if not k.endswith('_sha256')},indent=2))
 
 
-def verify_functional_gallery():
+def verify_functional_gallery(output_name='function_v06'):
     """Verify the v0.6 function gallery and preserve the v0.5 image baseline."""
     import struct
-    out=ROOT/'evidence'/'function_v06'
+    if not output_name or output_name in ('.','..') or Path(output_name).name!=output_name or '/' in output_name or '\\' in output_name:
+        raise ValueError(f'Functional output must be a single folder name: {output_name!r}')
+    out=ROOT/'evidence'/output_name
     function_names=('smithy','market_hall','stable','gatehouse')
     regions=('LOWMARK','THORNFELL','MIRE','EMBERHOLT')
     expected_settings={'seed':91,'wealth':'ESTABLISHED','craftsmanship':'STANDARD','age':35,
@@ -148,13 +150,13 @@ def verify_functional_gallery():
         for source_name,expected_hash in manifest['source_sha256'].items():
             source_path=ROOT/'caelmor_architecture'/source_name
             assert source_path.is_file(),source_path
-            assert digest(source_path)==expected_hash or source_name=='function_work.py',(name,source_name,'addon source snapshot mismatch')
+            assert digest(source_path)==expected_hash or (output_name=='function_v06' and source_name=='function_work.py'),(name,source_name,'addon source snapshot mismatch')
             source_snapshot[source_name]=expected_hash
         render_snapshot={}
         for helper_name,expected_hash in manifest['render_source_sha256'].items():
             helper_path=ROOT/'tests'/helper_name
             assert helper_path.is_file(),helper_path
-            assert digest(helper_path)==expected_hash or helper_name=='render_household_review.py',(name,helper_name,'render helper snapshot mismatch')
+            assert digest(helper_path)==expected_hash or (output_name=='function_v06' and helper_name=='render_household_review.py'),(name,helper_name,'render helper snapshot mismatch')
             render_snapshot[helper_name]=expected_hash
         function_source_snapshots[name]={'addon_source_sha256':source_snapshot,'render_source_sha256':render_snapshot}
         seen_regions=set(); scales=[]; directions={}; per_function_records=[]
@@ -164,7 +166,7 @@ def verify_functional_gallery():
             row_source=row.get('source_sha256',manifest['source_sha256'])
             differences=[key for key,value in row_source.items()
                          if digest(ROOT/'caelmor_architecture'/key)!=value]
-            assert set(differences)<= {'function_work.py'},(name,region,'unclassified source change',differences)
+            assert set(differences)<= ({'function_work.py'} if output_name=='function_v06' else set()),(name,region,'unclassified source change',differences)
             if differences:
                 plan,buffers=generate(Settings(**settings))
                 validation=validate(plan,buffers)
@@ -393,6 +395,16 @@ def main():
 
 
 if __name__=='__main__':
-    if '--functional-gallery' in sys.argv:verify_functional_gallery()
-    elif '--archetype-gallery' in sys.argv:verify_archetypes()
+    import argparse
+    parser=argparse.ArgumentParser(description='Verify retained architectural generator evidence.')
+    modes=parser.add_mutually_exclusive_group()
+    modes.add_argument('--functional-gallery',action='store_true',help='Verify the functional gallery and retained v0.5 baseline.')
+    modes.add_argument('--archetype-gallery',action='store_true',help='Verify the historical v0.5 archetype gallery.')
+    parser.add_argument('--functional-output',default='function_v06',metavar='NAME',
+                        help='Evidence subfolder used with --functional-gallery (default: function_v06).')
+    args=parser.parse_args()
+    if args.functional_output!='function_v06' and not args.functional_gallery:
+        parser.error('--functional-output requires --functional-gallery')
+    if args.functional_gallery:verify_functional_gallery(args.functional_output)
+    elif args.archetype_gallery:verify_archetypes()
     else:main()

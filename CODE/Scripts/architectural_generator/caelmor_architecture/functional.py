@@ -29,6 +29,9 @@ class Builder:
         kwargs.setdefault('roof',self.roof);kwargs.setdefault('pitch',self.pitch)
         kwargs.setdefault('overhang',.38 if self.region in ('LOWMARK','MIRE') else .25)
         kwargs.setdefault('openings','NONE');kwargs.setdefault('steps',False)
+        # Cut sloping infill across its complete thickness at the roof soffit.
+        # Legacy/non-program builders retain their existing output contract.
+        kwargs.setdefault('wall_infill_roof_clearance',.12)
         mass=self.ctx.mass(key,**kwargs)
         self.program['rooms'].append({'key':key,'bounds':mass.bounds,'base':mass.base,
                                      'eave':mass.eave,'open_edges':sorted(mass.plan.open_edges),

@@ -1239,7 +1239,43 @@ def _gable_infill(buf, plan, edge):
         poly=[(x0,y0,base),(x1,y1,base),(x1,y1,z1),(x0,y0,z0)]
         # Edge tangent crossed with vertical points outward for a CCW footprint.
         thickness=getattr(plan,'wall_thickness',WALL_THICKNESS)
-        buf.extrude(poly,(-n[0]*thickness,-n[1]*thickness,0.0))
+        clearance=getattr(plan,'wall_infill_roof_clearance',None)
+        if clearance is None:
+            buf.extrude(poly,(-n[0]*thickness,-n[1]*thickness,0.0))
+        else:
+            # A vertical extrusion copies the outside gable height to the
+            # inside face. On a shed high wall the weather plane falls inward,
+            # so that copied face used to emerge through the roof covering.
+            # Build the actual mitred solid with each top corner at its local
+            # soffit; retain the same wall station and editable semantic ID.
+            footprint=_xy_wall(a,b,n,s0,s1,thickness=thickness)
+            lower=[(x,y,base) for x,y in footprint]
+            upper=[]
+            for x,y in footprint:
+                s=(x-a[0])*tx+(y-a[1])*ty
+                h=height_at(s)
+                roof=float(plan.roof_height(x,y))
+                cap=max(base,roof-clearance) if math.isfinite(roof) else h
+                upper.append((x,y,min(h,cap)))
+            # At the eave a wedge can taper to zero height. Weld coincident
+            # corners and omit collapsed side faces instead of emitting zero-
+            # area quads; the remaining triangles still close the solid.
+            vertices=[];lookup={};remap=[]
+            for point in lower+upper:
+                if point not in lookup:
+                    lookup[point]=len(vertices);vertices.append(point)
+                remap.append(lookup[point])
+            faces=[]
+            for source in ((3,2,1,0),(4,5,6,7),(0,1,5,4),
+                           (1,2,6,5),(2,3,7,6),(3,0,4,7)):
+                face=[]
+                for i in source:
+                    j=remap[i]
+                    if not face or j!=face[-1]:face.append(j)
+                if len(face)>1 and face[0]==face[-1]:face.pop()
+                if len(set(face))>=3:faces.append(tuple(face))
+            if len(vertices)>=4 and len(faces)>=4:
+                buf.indexed(vertices,faces)
 
 
 def build_facades(plan):

@@ -1,0 +1,311 @@
+{
+  "records": [
+    {
+      "function": "SMITHY",
+      "region": "LOWMARK",
+      "settings": {
+        "seed": 91,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "geometry_hash": "972eb72e11466ab5b8e0bc00d46a31ed4b8323c57f0cc8968feba0d01c76c3e8",
+      "source_revision": "8c76e5f",
+      "baseline_views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/smithy/lowmark_clay_0.png",
+          "image_sha256": "4a8c98acf510e57c67f121eaf5433baae96a50aaabe438f5af32c8c59aa1d04e",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            51.56521987915039,
+            -65.11781311035156,
+            40.45888137817383
+          ],
+          "camera_target": [
+            4.347499847412109,
+            1.5425000190734863,
+            2.6847033500671387
+          ],
+          "ortho_scale": 29.7110107421875,
+          "elapsed_seconds": 2.6999
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/smithy/lowmark_material_0.png",
+          "image_sha256": "d743915c46d6621377daccf3f214e8a82cd262c67e87a79b84bfb93586aac9c6",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            51.56521987915039,
+            -65.11781311035156,
+            40.45888137817383
+          ],
+          "camera_target": [
+            4.347499847412109,
+            1.5425000190734863,
+            2.6847033500671387
+          ],
+          "ortho_scale": 29.7110107421875,
+          "elapsed_seconds": 0.3956
+        }
+      ],
+      "views": [
+        {
+          "treatment": "raking_light",
+          "mode": "clay",
+          "image": "smithy_lowmark_raking_light_clay.png",
+          "camera_location": [
+            51.56521987915039,
+            -65.11781311035156,
+            40.45888137817383
+          ],
+          "camera_target": [
+            4.347499847412109,
+            1.5425000190734863,
+            2.6847033500671387
+          ],
+          "ortho_scale": 29.711009979248047,
+          "sha256": "4172f2b4a487673a932912f4c1bf2cc04d2981cbe68e3b8826463e2786f6a0a4"
+        },
+        {
+          "treatment": "raking_light",
+          "mode": "material",
+          "image": "smithy_lowmark_raking_light_material.png",
+          "camera_location": [
+            51.56521987915039,
+            -65.11781311035156,
+            40.45888137817383
+          ],
+          "camera_target": [
+            4.347499847412109,
+            1.5425000190734863,
+            2.6847033500671387
+          ],
+          "ortho_scale": 29.711009979248047,
+          "sha256": "2cb6667896a22eeae8ff53f50208c28eef459a58cd058f9d9aaf321959da3478"
+        },
+        {
+          "treatment": "lower_frontage",
+          "mode": "clay",
+          "image": "smithy_lowmark_lower_frontage_clay.png",
+          "camera_location": [
+            55.319190979003906,
+            -70.41753387451172,
+            20.674713134765625
+          ],
+          "camera_target": [
+            4.347499847412109,
+            1.5425000190734863,
+            2.6847033500671387
+          ],
+          "ortho_scale": 29.711009979248047,
+          "sha256": "132482fba8b306d9b11013568974e6f7cd3d033ac08e053ca9a836770ccd42ae"
+        },
+        {
+          "treatment": "lower_frontage",
+          "mode": "material",
+          "image": "smithy_lowmark_lower_frontage_material.png",
+          "camera_location": [
+            55.319190979003906,
+            -70.41753387451172,
+            20.674713134765625
+          ],
+          "camera_target": [
+            4.347499847412109,
+            1.5425000190734863,
+            2.6847033500671387
+          ],
+          "ortho_scale": 29.711009979248047,
+          "sha256": "486ef5458ad20f32386914ff57bbef80b3551608f6ac900d8c318d6a2ecbf7aa"
+        }
+      ]
+    },
+    {
+      "function": "GATEHOUSE",
+      "region": "EMBERHOLT",
+      "settings": {
+        "seed": 91,
+        "function": "GATEHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "geometry_hash": "34e9a84fb16eb55ed49ad06072a08a751bb3ee5901868c44b5c3289cb3429614",
+      "source_revision": "905e97b",
+      "baseline_views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/gatehouse/emberholt_clay_0.png",
+          "image_sha256": "e0becd7f8259223a4cc7336cdd70ed1604d41bcde8a5a0d3f417b586d595e83d",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.51771926879883,
+            -62.4603157043457,
+            44.08367919921875
+          ],
+          "camera_target": [
+            8.300000190734863,
+            4.199999809265137,
+            6.309499740600586
+          ],
+          "ortho_scale": 48.094413757324226,
+          "elapsed_seconds": 0.3549
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/gatehouse/emberholt_material_0.png",
+          "image_sha256": "7982f59c5ffdcddb3231d395a2c1ee94da2cea04bedce8657fe7a64660361266",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.51771926879883,
+            -62.4603157043457,
+            44.08367919921875
+          ],
+          "camera_target": [
+            8.300000190734863,
+            4.199999809265137,
+            6.309499740600586
+          ],
+          "ortho_scale": 48.094413757324226,
+          "elapsed_seconds": 0.3562
+        }
+      ],
+      "views": [
+        {
+          "treatment": "raking_light",
+          "mode": "clay",
+          "image": "gatehouse_emberholt_raking_light_clay.png",
+          "camera_location": [
+            55.51771926879883,
+            -62.4603157043457,
+            44.08367919921875
+          ],
+          "camera_target": [
+            8.300000190734863,
+            4.199999809265137,
+            6.309499740600586
+          ],
+          "ortho_scale": 48.09441375732422,
+          "sha256": "92536b84f8cb8aa69d7ed8fde05534558edd41200ed10a146d70894b925fc95d"
+        },
+        {
+          "treatment": "raking_light",
+          "mode": "material",
+          "image": "gatehouse_emberholt_raking_light_material.png",
+          "camera_location": [
+            55.51771926879883,
+            -62.4603157043457,
+            44.08367919921875
+          ],
+          "camera_target": [
+            8.300000190734863,
+            4.199999809265137,
+            6.309499740600586
+          ],
+          "ortho_scale": 48.09441375732422,
+          "sha256": "a857fb3ece4a05120cc4024634535f949832f95f0b2ce3e98ce025a91d848bc1"
+        },
+        {
+          "treatment": "lower_frontage",
+          "mode": "clay",
+          "image": "gatehouse_emberholt_lower_frontage_clay.png",
+          "camera_location": [
+            59.271690368652344,
+            -67.76004028320312,
+            24.299509048461914
+          ],
+          "camera_target": [
+            8.300000190734863,
+            4.199999809265137,
+            6.309499740600586
+          ],
+          "ortho_scale": 48.09441375732422,
+          "sha256": "98d48a5bdf1c76030e4fc129bed89945a56871ad57b56da86f4f21daef65023e"
+        },
+        {
+          "treatment": "lower_frontage",
+          "mode": "material",
+          "image": "gatehouse_emberholt_lower_frontage_material.png",
+          "camera_location": [
+            59.271690368652344,
+            -67.76004028320312,
+            24.299509048461914
+          ],
+          "camera_target": [
+            8.300000190734863,
+            4.199999809265137,
+            6.309499740600586
+          ],
+          "ortho_scale": 48.09441375732422,
+          "sha256": "2b922f4afac90751c69610715795de5c9764fe755ebb2f2142d2e152a3685aeb"
+        }
+      ]
+    }
+  ],
+  "design": "Geometry/native hash and settings held constant. Baseline studio reused from v0.6; light-only and camera-only treatments. No production shader edits."
+}

@@ -60,6 +60,7 @@ def archetype_gallery(args):
                     use_grammar=True,world_aware=True))
     contract.pop('function');contract.pop('region')
     functions=args.gallery_functions or tuple(TYPE_SPECS)
+    failures=[]
     for function in functions:
         if function not in TYPE_SPECS:raise ValueError('Unsupported archetype '+function)
         manifest_path=out/'manifests'/f'{function.lower()}.json'
@@ -181,6 +182,10 @@ def archetype_gallery(args):
         temporary.write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
         temporary.replace(manifest_path)
         print('ARCHETYPE_GALLERY_COMPLETE',function,flush=True)
+        failures.extend((row['function'],row['region'],row.get('error',row['status']))
+                        for row in records if row['status']!='rendered')
+    if failures:
+        raise RuntimeError('Gallery configurations failed; manifests retained: '+repr(failures))
 
 
 def main():

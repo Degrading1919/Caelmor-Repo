@@ -27,6 +27,12 @@ class StableProgramTests(unittest.TestCase):
         self.assertEqual('STABLE', program['function'])
         self.assertEqual(4, sum('.stable.divider.' in key for key in keys))
         self.assertEqual(10, roles.count('stall_gate'))
+        self.assertEqual(10, sum('.split_gate.rail.' in key for key in keys))
+        self.assertEqual(10, sum('.split_gate.top.' in key for key in keys))
+        self.assertEqual(20, sum('.split_gate.stile.' in key for key in keys))
+        self.assertEqual(5, sum('.manger.side.front.' in key for key in keys))
+        self.assertEqual(5, sum('.manger.side.back.' in key for key in keys))
+        self.assertEqual(10, sum('.manger.end.' in key for key in keys))
         self.assertGreaterEqual(roles.count('feeding'), 20)
         self.assertIn('storage', roles)
         self.assertTrue(any(route['key'] == 'stable.stall_entry.0'
@@ -70,6 +76,10 @@ class GatehouseProgramTests(unittest.TestCase):
         self.assertTrue(any('east_guard_stair.tread' in key for key in station_keys))
         self.assertTrue(any('open_leaf' in key for key in station_keys))
         self.assertTrue(any('portcullis.upright' in key for key in station_keys))
+        self.assertTrue(any('portal_jamb.front.west' in key
+                            for key in station_keys))
+        self.assertTrue(any('portal_jamb.rear.east' in key
+                            for key in station_keys))
         self.assertEqual(['WATCHTOWER', 'WATCHTOWER'],
                          [mass.plan.settings.function for mass in ctx.masses[1:]])
         self.assertEqual([3, 3], [mass.plan.settings.floors for mass in ctx.masses[1:]])
@@ -134,6 +144,8 @@ class RegionalFunctionTests(unittest.TestCase):
         ember_gate = _context('GATEHOUSE', 'EMBERHOLT')
         build_gatehouse(ember_gate)
         self.assertEqual('GABLE', thorn_gate.masses[0].plan.roof_mode)
+        self.assertAlmostEqual(-.6, low_gate.masses[1].bounds[1])
+        self.assertAlmostEqual(-.6, ember_gate.masses[2].bounds[1])
         self.assertTrue(any('lowmark_stone_portal_cheek' in row['key']
                             for row in low_gate.functional_program['stations']))
         self.assertAlmostEqual(1.2, mire_gate.masses[2].bounds[1])
@@ -168,6 +180,34 @@ class RegionalFunctionTests(unittest.TestCase):
         mire_hits = _ray_hits((mire_center, -.5, mire_gate.base + 1.5),
                               (0, 1, 0), mire_gate.depth + 1.0, mire_gate_buffers)
         self.assertEqual([], [(round(t, 3), b.name) for t, b in mire_hits])
+
+        mire_context = _context('GATEHOUSE', 'MIRE', seed=91)
+        mire_program = build_gatehouse(mire_context)
+        east_edge = next(record for record in mire_context.masses[2].plan.facade_records
+                         if record['edge_index'] == 1)
+        access_door = next(opening for opening in east_edge['openings']
+                           if opening['kind'] == 'door')
+        self.assertAlmostEqual(1.05, access_door['s1'] - access_door['s0'])
+        door_route = next(route for route in mire_program['routes']
+                          if route['key'] == 'gatehouse.mire_watchbank_door_route')
+        route_bounds = door_route['bounds']
+        door_y = (route_bounds[1] + route_bounds[4]) * .5
+        door_start_x = route_bounds[0]
+        door_distance = route_bounds[3] - route_bounds[0] + .10
+        # The façade door is operable and may be closed in this static build;
+        # retain every wall, frame, glazing and proxy buffer in the clearance test.
+        door_solid_buffers = [buffer for buffer in mire_gate_buffers
+                              if not buffer.name.endswith('.facade_doors')]
+        for y_offset in (-.4, 0.0, .4):
+            for z_offset in (.45, 1.2, 2.0):
+                with self.subTest(mire_access_y=y_offset,
+                                  mire_access_z=z_offset):
+                    door_hits = _ray_hits(
+                        (door_start_x, door_y + y_offset,
+                         mire_gate.base + z_offset),
+                        (1, 0, 0), door_distance, door_solid_buffers)
+                    self.assertEqual([], [(round(t, 3), b.name)
+                                          for t, b in door_hits])
 
     def test_modest_established_affluent_and_detail_profiles(self):
         for wealth, expected_watch_slots, expected_stalls in (
