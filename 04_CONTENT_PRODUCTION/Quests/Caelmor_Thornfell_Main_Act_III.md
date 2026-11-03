@@ -47,9 +47,9 @@ TF-M5 never asks how an earlier flag was set; it reads only the §9.1 values. Ev
 | Quest-local or completion condition (never required) | Read in | Effect |
 |---|---|---|
 | `TPW_NAMES_ASKED` (TF-M1) | Dawn (`TSW-D8`) | Vessa remembers the player asked her to write who was outside. |
-| TDS10 *The Gatefall from below* inspected (`TDS10_SEEN`: **[NEW] placeholder; Batch 3 package fixes the name**) | Galleries | A bark and a tick on each pale-propped marker: "Three pale. Same as from below." |
+| TDS10 *The Gatefall from below* inspected (`TDS10_READ`, set by the Batch 3 discovery when the pale props are inspected) | Galleries | A bark and a tick on each pale-propped marker: "Three pale. Same as from below." |
 | *The Weight of a Name* (TWN) Completed | Assembly reading; Maera's line | Maera notes this is the second wall this autumn that kept names nobody read. Name-slip weight only (bible §8.1). |
-| *A Place at Smoke Week* (TSM) Completed or TME01 tally-add (`TME01_TALLIED`: **[NEW] placeholder; Batch 3 package fixes the name**; the Batch 3 draft currently uses `TME01_EXPECTED`) | Runa's lines | Runa uses the player's name instead of "walker" (bible §5.3 rule 4). |
+| Player on a Hushfold tally (`TSM_PLAYER_TALLIED` or `TME01_TALLIED`; TSM can complete without the tally) | Runa's lines | Runa uses the player's name instead of "walker" (bible §5.3 rule 4). |
 | *The Third Horn* (TTH) Completed | Stragglers | Read through `TH_THIRD_HORN`. |
 | *Ash in the Snow* (TAS) Completed | Assembly (optional bark) | Tessaly Varn's crew stands at the back wall. One line. Never a placement factor. |
 | `LM_CIVIC_STANDING` (Lowmark) | Assembly (optional line) | Elira's one variant line about the Vale deciding at one table. Never a gate. |
@@ -686,7 +686,7 @@ Documented dependencies for a later Systems Engineer. None is implemented here.
 | **Epilogue state presentation** | Systems + art | Per-player props keyed on `TH_ASSEMBLY_POSTURE`, `TH_STORES`, `TH_HORN` (§E). |
 | **Thaw presentation** | Systems | `TSW_THAW` set on first re-entry after leaving the region post-completion; swaps snow props for thaw props (§E.7). See open decision 3. |
 | Creatures | Schema / Gameplay | Ridge wolf runner, howler; Iron Winter spear, hornman; Ingrith (boss). From the Batch 4 enemies package. |
-| Batch 3 flag names | Side-quest authors | `TDS10_SEEN` and `TME01_TALLIED` are **[NEW] placeholders; the Batch 3 package fixes the names** (its draft uses `TME01_EXPECTED` for the tally-add; TDS10 has no named flag yet). Swap in this file and the dialogue file only. |
+| Batch 3 flag names | Side-quest authors | **Closed (2026-11-03):** Batch 3 fixes `TDS10_READ` (pale props inspected) and `TME01_TALLIED`; both now used here and in the dialogue file. |
 
 ## 13. Mystery ledger entries
 

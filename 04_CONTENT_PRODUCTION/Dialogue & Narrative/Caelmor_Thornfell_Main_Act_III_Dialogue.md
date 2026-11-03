@@ -73,7 +73,7 @@
 ### Runa Weatherall, Hushfold shelter host [NEW]
 - **In TF-M5:** brings the column through; reads the first tally book as her people come in; may read the rubbing.
 - **Knows:** "we came over in the thaw". **Doesn't know (until tonight):** that her grandmother's name is cut into the Gatefall. She does not find out at the gate: the player has read the wall, she has not. She hears it in the hall (or reads it herself).
-- **Voice:** warm, tired, proud; "we" for the whole shelter line. Uses `{PLAYER}` if the player is on a Hushfold tally (TSM Completed or TME01 tally-add).
+- **Voice:** warm, tired, proud; "we" for the whole shelter line. Uses `{PLAYER}` if the player is on a Hushfold tally (`TSM_PLAYER_TALLIED` or `TME01_TALLIED`).
 
 ### Ingrith Scarrow, the Quartermaster [NEW] `[SPLINTER]`
 - **Who:** former pass quartermaster; eight years old in the final year's long winter; leads the Iron Winter.
@@ -176,7 +176,7 @@ TSW-D2.20 IVEN: "Listen for the howl. It comes before the teeth."   {event: TSW-
 |---|---|---|---|
 | TSW-B2.0 | Howler howls | (caption) | "A howl, left." / "A howl, right." / "A howl, behind." |
 | TSW-B2.0a | Wolves flee | IVEN (above) | "They're hungry, not stupid. Neither are you. Go on." |
-| TSW-B2.1 | First view of the galleries with `TDS10_SEEN` ([NEW] placeholder; Batch 3 package fixes the name) | (log) | "Three pale. Same as from below." |
+| TSW-B2.1 | First view of the galleries with `TDS10_READ` | (log) | "Three pale. Same as from below." |
 | TSW-B2.2 | First view without it | (log) | "Seven galleries over the cut. Most of the props are grey. Three are new wood, pale as bread." |
 
 ### TSW-D3: Dorn at the near apron (S02)
@@ -202,11 +202,11 @@ TSW-D3.40 DORN: "Pull-line's the weak bit. Rope always is." (beat) "Don't tell A
 |---|---|---|
 | Marker G1 | "Two falling bars, then one short dot. Grey props above, black with age. Behind them, nothing but the gallery's back wall." | — |
 | Marker G2 | "Falling bars, two dots. Grey props. An old heap below, snow on it like a blanket on a sleeper." | — |
-| Marker G3 | "Falling bars, one long bar. The props above are new: pale wood, axe marks still sharp. A pull-line runs down from the pin-beam." | tick if `TDS10_SEEN` |
+| Marker G3 | "Falling bars, one long bar. The props above are new: pale wood, axe marks still sharp. A pull-line runs down from the pin-beam." | tick if `TDS10_READ` |
 | Marker G4 | "Falling bars, dot and bar. Grey props, one cracked through. It isn't holding anything up but itself." | — |
-| Marker G5 | "Falling bars, bar and dot. Pale props. The pins are new iron, oiled." | tick if `TDS10_SEEN` |
+| Marker G5 | "Falling bars, bar and dot. Pale props. The pins are new iron, oiled." | tick if `TDS10_READ` |
 | Marker G6 | "Falling bars, two bars. Grey. The gallery's stone is in the cut below, where it fell in the war." | — |
-| Marker G7 | "Falling bars, two bars and a dot. Pale props right over the gatehouse. The pins have been drawn halfway." | tick if `TDS10_SEEN` |
+| Marker G7 | "Falling bars, two bars and a dot. Pale props right over the gatehouse. The pins have been drawn halfway." | tick if `TDS10_READ` |
 | Grey prop on the cut floor | "A prop from a spent gallery, fallen years back. The wood's gone grey and soft as felt." | — |
 | War heap with axle | "Stone heaped in the cut, and in it a wagon axle, frozen in. Whatever it carried got the other side of the gate. Or didn't." | — |
 | Pull-line | "New rope, hemp, tarred." / with `TH_STORES` ≠ seized: "The coil end's stamped 'W.'" | — |
