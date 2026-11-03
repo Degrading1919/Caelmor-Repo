@@ -76,3 +76,27 @@ documentation before final captures/packaging. Record image/settings/source and
 archive hashes, actual authoring geometry costs and limitations. Model usage,
 subscription allowance, tokens, API dollars and wall time remain separate;
 do not invent unavailable efficiency measurements.
+
+## Integration findings at source freeze
+
+The new arch-volume test found automatic guard-floor ground supports inside the
+passage. Its replacement is a slab borne by the masonry vault. Architectural
+review also required real upper doors and supported thresholds from both tower
+stair landings into the guard hall; a floor without a connection was insufficient.
+Narrow defensive slots initially failed an ordinary-window width threshold and
+were silently discarded. They now have explicit aperture semantics and pure/native
+air probes through both visible walls and collision proxies. The stock range's
+boarded faces use the facade builder so its closed weather faces receive proxies.
+
+The original shed-wall regression is retained as an explicit shed fixture even
+though the smithy's primary roof is now gabled. The 78 unaffected geometry hashes
+remain regression controls. Final targeted native tests follow the late guard-door
+change; the earlier 16-case integration check retains its own source fingerprint.
+The six final benchmark tests and both native lifecycle checks passed before
+final evidence capture. Technical success does not grant artistic acceptance.
+
+The Luna High evidence worker captured the immutable 24-image control set, then
+reported `usage_limit_exceeded`. Root completed implementation, integration and
+visual review. No later independent-model art review or model-efficiency advantage
+is claimed. Intermediate pilots are developmental evidence; final before/after
+records are separately source-pinned and verified.
