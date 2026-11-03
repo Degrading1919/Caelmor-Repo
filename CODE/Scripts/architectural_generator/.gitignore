@@ -1,4 +1,5 @@
 __pycache__/
 *.pyc
 evidence/_frames/
+evidence/_expansion_frames/
 *.blend1

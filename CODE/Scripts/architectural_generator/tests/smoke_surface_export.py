@@ -54,7 +54,7 @@ def main():
     legacy_shader.inputs["Base Color"].default_value = legacy_color
     revision_material = get_material("plaster_patch")
     assert revision_material is not legacy
-    assert revision_material.name.endswith(f"[Surface{SURFACE_REVISION}]")
+    assert f"S{SURFACE_REVISION}]" in revision_material.name
     assert all(abs(a-b) < 1e-6 for a, b in zip(legacy_shader.inputs["Base Color"].default_value, legacy_color))
     revised_shader = next(node for node in revision_material.node_tree.nodes if node.type == "BSDF_PRINCIPLED")
     edited_color = (.31, .41, .51, 1.0)
@@ -98,7 +98,7 @@ def main():
     roof_patch_materials = [m for m in bpy.data.materials if m.get("caelm_material") == "roof_patch"]
     assert roof_patch_materials, "Roof patch material missing"
     roof_base = tuple(roof_patch_materials[0].node_tree.nodes.get("Principled BSDF").inputs["Base Color"].default_value)
-    assert all(abs(a-b) < 0.015 for a, b in zip(roof_base[:3], (.12, .125, .112))), roof_base
+    assert all(abs(a-b) < 0.015 for a, b in zip(roof_base[:3], (.30, .22, .16))), roof_base
     with tempfile.TemporaryDirectory(prefix="caelmor_surface_smoke_") as tmp:
         glb = Path(tmp) / "smoke.glb"
         export_building(collection, str(glb))

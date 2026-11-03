@@ -12,7 +12,7 @@ PALETTE = {
 }
 
 SIZE = 128
-SURFACE_REVISION = 2
+SURFACE_REVISION = 3
 FAMILIES = {
     "timber": "wood", "timber_light": "wood",
     "roof": "roof", "roof_dark": "roof", "roof_worn": "roof", "roof_patch": "roof",
@@ -149,7 +149,43 @@ def _images(family, base):
     return color, normal, roughness
 
 
-def _configure_new_material(mat, key, base, roughness, metallic):
+def _style_token(style, settings):
+    """Stable palette identity, deliberately independent of the building seed."""
+    if style is None:
+        return "LOWMARK|RURAL|ESTABLISHED|STANDARD"
+    region = str(getattr(style, "region", "LOWMARK"))
+    context = str(getattr(style, "context", "RURAL"))
+    wealth = str(getattr(settings, "wealth", "ESTABLISHED"))
+    craft = str(getattr(settings, "craftsmanship", "STANDARD"))
+    return "|".join((region, context, wealth, craft))
+
+
+def _palette_entry(key, style, settings):
+    base, roughness, metallic = PALETTE[key]
+    palette = getattr(style, "palette", {}) if style is not None else {}
+    aliases = {"roof_worn":"roof", "roof_patch":"roof", "plaster_patch":"plaster",
+               "stone_light":"stone", "mortar":"stone", "timber_light":"timber",
+               "iron":"metal"}
+    styled = palette.get(key, palette.get(aliases.get(key, key))) if hasattr(palette, "get") else None
+    if styled is not None:
+        base = tuple(styled)
+    wealth = str(getattr(settings, "wealth", "ESTABLISHED"))
+    craft = str(getattr(settings, "craftsmanship", "STANDARD"))
+    # Wealth changes the choice and finish of ordinary natural materials, not
+    # the upkeep state. Kept modest so all tiers remain regionally plausible.
+    wealth_factor = {"MODEST": .975, "ESTABLISHED": 1.0, "AFFLUENT": 1.025}.get(wealth, 1.0)
+    material_factor = wealth_factor if key in ("roof", "roof_dark", "plaster", "plaster_patch", "stone", "stone_light", "timber", "timber_light") else 1.0
+    craft_factor = {"ROUGH": .985, "STANDARD": 1.0, "FINE": 1.012}.get(craft, 1.0)
+    base = tuple(max(0.0, min(1.0, c * material_factor * craft_factor)) if i < 3 else c
+                 for i,c in enumerate(base))
+    if craft == "ROUGH": roughness = min(.99, roughness + .035)
+    elif craft == "FINE": roughness = max(.05, roughness - .025)
+    # Preserve each region's natural material family, adding only modest seed
+    # variation to common pigments. Socioeconomic changes are authored in style.
+    return (tuple(base), roughness, metallic)
+
+
+def _configure_new_material(mat, key, base, roughness, metallic, style=None, settings=None, token=None):
     family = FAMILIES.get(key)
     mat.diffuse_color = base
     mat.use_nodes = True
@@ -161,7 +197,7 @@ def _configure_new_material(mat, key, base, roughness, metallic):
     shader.inputs['Roughness'].default_value = roughness
     shader.inputs['Metallic'].default_value = metallic
     mat["caelm_material"] = key
-    mat["caelm_palette"] = "Lowmark muted PBR"
+    mat["caelm_palette"] = token or "Lowmark muted PBR"
     if family is None:
         return
     color_image, normal_image, rough_image = _images(family, base)
@@ -197,31 +233,41 @@ def _configure_new_material(mat, key, base, roughness, metallic):
     mat["caelm_texture_family"] = family
 
 
-def get_material(name, cache=None):
+def get_material(name, cache=None, style=None, settings=None):
     """Return current shared material without replacing edits or legacy datablocks."""
     import bpy
     key = name if name in PALETTE else "timber"
-    if cache is not None and key in cache:
+    token = _style_token(style, settings)
+    cache_key = (key, token)
+    if cache is not None and cache_key in cache:
+        return cache[cache_key]
+    if cache is not None and style is None and settings is None and key in cache:
         return cache[key]
     base_name = "Caelmor | " + key.replace("_", " ").title()
-    # Reuse by semantic key + surface revision first, even if the user renamed it.
+    # Palette identity includes region/context/wealth/quality so multiple
+    # buildings in one scene cannot inherit whichever palette was made first.
     mat = next((candidate for candidate in bpy.data.materials
                 if candidate.get("caelm_material") == key
-                and candidate.get("caelm_surface_revision") == SURFACE_REVISION), None)
+                and candidate.get("caelm_surface_revision") == SURFACE_REVISION
+                and candidate.get("caelm_palette_key") == token), None)
     if mat is None:
         legacy = bpy.data.materials.get(base_name)
         # Keep an existing pre-revision material and every manual edit intact.
         # New scenes retain friendly names; legacy scenes get an explicit revision suffix.
-        mat_name = base_name if legacy is None else f"{base_name} [Surface{SURFACE_REVISION}]"
+        suffix_token = token.replace("|", "-")
+        mat_name = f"{base_name} [{suffix_token} S{SURFACE_REVISION}]" if legacy is not None or token != "LOWMARK|RURAL|ESTABLISHED|STANDARD" else base_name
         suffix = 2
         while bpy.data.materials.get(mat_name) is not None:
-            mat_name = f"{base_name} [Surface{SURFACE_REVISION}.{suffix}]"
+            mat_name = f"{base_name} [{suffix_token} S{SURFACE_REVISION}.{suffix}]"
             suffix += 1
         mat = bpy.data.materials.new(mat_name)
-        _configure_new_material(mat, key, *PALETTE[key])
+        _configure_new_material(mat, key, *_palette_entry(key, style, settings), style=style, settings=settings, token=token)
         mat["caelm_surface_revision"] = SURFACE_REVISION
+        mat["caelm_palette_key"] = token
     if cache is not None:
-        cache[key] = mat
+        cache[cache_key] = mat
+        if style is None and settings is None:
+            cache[key] = mat
     return mat
 
 
@@ -265,7 +311,7 @@ def _sill_runoff(position, normal, plan):
         return 0.0
 
 
-def surface_tint(position, normal, material, plan=None):
+def surface_tint(position, normal, material, plan=None, style=None, settings=None):
     """Bounded linear-RGB multiplier for baked per-corner environmental weathering.
 
     This helper has no Blender dependency, so masks can be inspected or unit-tested
@@ -277,6 +323,17 @@ def surface_tint(position, normal, material, plan=None):
     nlen = math.sqrt(nx*nx+ny*ny+nz*nz) or 1.0
     nx,ny,nz = nx/nlen,ny/nlen,nz/nlen
     factor = 1.0
+    if settings is not None:
+        # Subtle seed variation is baked per building, while the reusable
+        # palette bank stays one context family rather than one bank per seed.
+        variation = .006 * _hash2(int(getattr(settings, "seed", 0)), sum(ord(c) for c in key), 197)
+        factor *= 1.0 + variation
+    # Exposure, age and upkeep are separate causes: old but maintained fabric
+    # stays legible, while neglected young buildings show restrained wear.
+    age = max(0.0, min(250.0, float(getattr(settings, "age", 0.0) or 0.0))) / 250.0
+    upkeep = max(0.0, min(1.0, float(getattr(settings, "maintenance", .7) if settings is not None else .7)))
+    weather = float(getattr(style, "weather_exposure", 0.4) if style is not None else .4)
+    wear = max(0.0, min(.22, (age*.10 + (1.0-upkeep)*.12) * (.55 + .45*weather)))
     is_masonry = key in {"stone","stone_light","mortar","plaster","plaster_patch"}
     is_roof = key.startswith("roof") or key == "timber" and z > (getattr(plan,"eave",2.8)-.2)
     if is_masonry:
@@ -297,6 +354,17 @@ def surface_tint(position, normal, material, plan=None):
     exposure = toward_sun * elevation
     if is_masonry or is_roof or key.startswith("timber"):
         factor *= 1.0 + .045*exposure
+    if wear:
+        # Causal wear tracks lower masonry damp, exposed edges, and timber
+        # weathering; it does not place identical isolated stains everywhere.
+        low_damp = (1.0-_smoothstep(.15,.9,z)) if is_masonry else 0.0
+        exposed_edge = max(0.0, 1.0-abs(nz)) if is_roof else max(0.0, abs(nx)+abs(ny)-.7)
+        if is_masonry:
+            factor *= 1.0 - wear*(.30 + .70*low_damp)
+        elif is_roof:
+            factor *= 1.0 - wear*(.25 + .75*exposed_edge)
+        elif key.startswith("timber"):
+            factor *= 1.0 - wear*(.20 + .80*exposed_edge)
     # Chimney soot is localized to the roof surrounding the known domestic stack.
     if is_roof and plan is not None and str(getattr(getattr(plan,"settings",None),"function","")).upper() in ("FARMHOUSE","MILLER","INN"):
         rect = max(plan.rects, key=lambda r:(r[2]-r[0])*(r[3]-r[1]))

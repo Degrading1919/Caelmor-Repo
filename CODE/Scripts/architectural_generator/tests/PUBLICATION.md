@@ -4,6 +4,8 @@ The original mixed commit `9eaaf1d58f464630b9d68fbaf01f6fdf08890679` remains pre
 
 A separate worktree on `codex/architectural-generator` was created from remote main `9b84c32d0fe0c6f17568a11a70e3ee29a1ffb6ec`. Only `CODE/Scripts/architectural_generator/` was restored from the mixed commit. Its 34 prototype files were byte-for-byte identical before subsequent exterior improvements. The PR does not cherry-pick the mixed commit or include its other changes.
 
+The 0.3 regional expansion continues in this isolated worktree and [PR #85](https://github.com/Degrading1919/Caelmor-Repo/pull/85). Remote main `bcc60d91bd5164e7a8bf572ef9673859a24a27d3` was incorporated without overwriting local or concurrent work; the final fetch found no newer main. The expansion changes remain confined to this generator directory. No Unity/C#, gameplay, schema, or regional dossier changes form part of the generator diff.
+
 ## Excluded unrelated files
 
 The following 32 files were left in the original mixed commit and were not imported into the generator branch. This is a scope inventory, not a review or endorsement of their contents.

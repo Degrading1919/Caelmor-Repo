@@ -28,6 +28,24 @@ def roof_sources(plan):
     for i,(a,b,c,d,axis) in enumerate(plan.rects):
         ymin,ymax=b-o,d+o if i==0 else d
         xmin,xmax=a-o,c+o
+        if plan.settings.roof_style=='HIP':
+            # A hip is the lower envelope of its four eave-distance planes.
+            # Partition each rectangle first; roof_faces may then union those
+            # explicitly supported slopes across intersecting building volumes.
+            planes=[(s,0,plan.eave-s*a),(-s,0,plan.eave+s*c),
+                    (0,s,plan.eave-s*b),(0,-s,plan.eave+s*d)]
+            domain=[(xmin,ymin),(xmax,ymin),(xmax,ymax),(xmin,ymax)]
+            for plane in planes:
+                poly=domain
+                for other in planes:
+                    if other==plane:
+                        continue
+                    poly=clip(poly,*(u-v for u,v in zip(other,plane)))
+                    if not poly:
+                        break
+                if poly:
+                    result.append(RoofPatch(poly,plane,i))
+            continue
         if axis=='X':
             middle=(b+d)*.5
             result.extend([
@@ -158,6 +176,7 @@ class Shingle:
     repair: bool
     butt: float
     tilt: float
+    exposed_end: float = 0.
 
     def height(self,x,y):
         t=self.direction*((x,y)[self.axis]-self.eave_coord)
@@ -177,8 +196,10 @@ def shingle_layout(plan,patches=None,topology=None):
     points,faces,edges=roof_topology(patches) if topology is None else topology
     clearances=_valley_clearances(points,patches,edges)
     detail=plan.settings.detail
-    exposure={'HIGH':.30,'MEDIUM':.44,'LOW':.85}[detail]
-    width={'HIGH':.205,'MEDIUM':.32,'LOW':.67}[detail]
+    cover=getattr(getattr(plan,'style',None),'roof_cover','SHINGLE')
+    cover_scale={'SHINGLE':1.,'SLATE':1.1,'CLAY':1.15,'REED':1.5}[cover]
+    exposure={'HIGH':.30,'MEDIUM':.44,'LOW':.85}[detail]*cover_scale
+    width={'HIGH':.205,'MEDIUM':.32,'LOW':.67}[detail]*cover_scale
     step=exposure/math.sqrt(1+plan.slope**2)
     # Shingles need headlap, not separated rectangular plates on a bare deck.
     # Three-course coverage keeps the lower courses behind each open side joint.
@@ -211,7 +232,7 @@ def shingle_layout(plan,patches=None,topology=None):
                 while u<source_hi:
                     span=width*rng.uniform(.76,1.24)
                     u0,u1=u+.002,u+span-.002
-                    upper_taper=min(.012,span*.045)
+                    upper_taper=min(.012,span*.045) if cover=='SHINGLE' else 0.
                     # Split shingles narrow towards their concealed heads.
                     local=[(u0,t),(u1,t),(u1-upper_taper,end),(u0+upper_taper,end)]
                     poly=[((u,eave+direction*v) if axis==1 else (eave+direction*v,u)) for u,v in local]
@@ -225,14 +246,70 @@ def shingle_layout(plan,patches=None,topology=None):
                     shade=rng.random()
                     material='roof_patch' if repair else 'roof_dark' if shade<.17 else 'roof_worn' if shade>.86 else 'roof'
                     butt,tilt=rng.uniform(.019,.021),rng.uniform(-.004,.004)
+                    if cover=='SLATE': butt*=.45
+                    elif cover=='REED': butt*=1.8
                     if poly and area(poly)>.0002:
                         output.append(Shingle(poly,patch.plane,patch.source,row,bay,axis,direction,eave,t,end,u0,u1,material,repair,
-                                              butt,tilt))
+                                              butt,tilt,t+advance))
                     u+=span
                     bay+=1
             t+=advance
             row+=1
     return output
+
+
+def _finish_piece(buffer,shingle,poly,bend_a=0.,bend_c=0.,efficient=False):
+    top=[(x,y,shingle.height(x,y)+bend_a*(x,y)[1-shingle.axis]+bend_c) for x,y in poly]
+    if not efficient:
+        buffer.extrude(top,(0,0,-.023))
+        return
+    # The weather deck is closed; this is explicitly open render-detail skin.
+    # Hidden headlap, bottoms and buried side walls are not exported as solids.
+    vertices=list(top)
+    faces=[tuple(range(len(top)))]
+    for i,p in enumerate(poly):
+        j=(i+1)%len(poly)
+        q=poly[j]
+        t0=shingle.direction*(p[shingle.axis]-shingle.eave_coord)
+        t1=shingle.direction*(q[shingle.axis]-shingle.eave_coord)
+        if abs(t0-shingle.course_start)<1e-6 and abs(t1-shingle.course_start)<1e-6:
+            n=len(vertices)
+            vertices.extend([(top[i][0],top[i][1],top[i][2]-.023),
+                             (top[j][0],top[j][1],top[j][2]-.023)])
+            faces.append((i,n,n+1,j))
+    buffer.indexed(vertices,faces)
+
+
+def _build_cover_piece(buffer,shingle,cover,efficient,detail):
+    poly=shingle.poly
+    if efficient:
+        # Keep only the exposed course; a continuous bedding skin represents
+        # the concealed overlapping heads seen through millimetre side joints.
+        axis=shingle.axis
+        a,b=(shingle.direction,0) if axis==0 else (0,shingle.direction)
+        c=-shingle.direction*shingle.eave_coord-shingle.exposed_end
+        poly=clip(poly,-a,-b,-c)
+        if not poly or area(poly)<.0002:
+            return
+    if cover in ('SHINGLE','SLATE') or detail=='LOW':
+        _finish_piece(buffer,shingle,poly,efficient=efficient)
+        return
+    # Original lofted clay pans / reed bundles, evaluated on the exact slope.
+    # Three bounded planar strips approximate the curved cross-section and are
+    # clipped at valleys using the same footprint as all other roof details.
+    across=1-shingle.axis
+    span=shingle.u1-shingle.u0
+    amplitude=.022 if cover=='CLAY' else .035
+    values=[0.,amplitude,amplitude,0.]
+    for k in range(3):
+        lo=shingle.u0+span*k/3
+        hi=shingle.u0+span*(k+1)/3
+        aa,bb=(1,0) if across==0 else (0,1)
+        section=clip(clip(poly,aa,bb,-lo),-aa,-bb,hi)
+        if not section:
+            continue
+        slope=(values[k+1]-values[k])/(hi-lo)
+        _finish_piece(buffer,shingle,section,slope,values[k]-slope*lo,efficient)
 
 
 def build_roof(plan):
@@ -247,11 +324,19 @@ def build_roof(plan):
             _,a,b=users[0]
             solids.append((a,a+n,b+n,b))
     deck.indexed(verts,solids)
+    efficient=plan.settings.geometry_mode=='EFFICIENT'
+    cover=plan.style.roof_cover
     tiles={key:MeshBuffer(name,key,'roof') for key,name in [
         ('roof','Split oak shingle courses'),('roof_dark','Seasoned shingle cohorts'),
         ('roof_worn','Exposed shingle butts'),('roof_patch','Replacement shingle cohort')]}
+    if efficient:
+        for buffer in tiles.values(): buffer.topology='SURFACE'
+    bedding=MeshBuffer('Concealed roof course bedding','roof_dark','roof',topology='SURFACE')
+    if efficient:
+        for patch in patches:
+            bedding.face([(x,y,patch.height(x,y)+.029) for x,y in patch.poly])
     for shingle in shingle_layout(plan,patches,(points,faces,edges)):
-        tiles[shingle.material].extrude([(x,y,shingle.height(x,y)) for x,y in shingle.poly],(0,0,-.023))
+        _build_cover_piece(tiles[shingle.material],shingle,cover,efficient,detail=plan.settings.detail)
     ridge=MeshBuffer('Overlapping ridge caps','roof_dark','roof')
     trim=MeshBuffer('Ridge caps and valley flashing','iron','roof')
     fascia=MeshBuffer('Roof edge fascia','timber','roof')
@@ -293,11 +378,16 @@ def build_roof(plan):
             for i in range(pieces):
                 start=lerp(a,b,i/pieces)
                 finish=lerp(a,b,min(1,(i+1)/pieces+.012/length))
-                # Two pitched cap boards lap across the ridge, rather than a round pipe.
-                for side in (-1,1):
-                    poly=[]
-                    for p,d in ((start,0),(finish,0),(finish,side*.145),(start,side*.145)):
-                        poly.append((p[0]+across[0]*d,p[1]+across[1]*d,p[2]+.083-abs(d)*plan.slope))
+                # Use each adjacent plane, including diagonal hip ridges. A
+                # gable-only cross-slope approximation buries caps on hip roofs.
+                for fi,ea,eb in users:
+                    va,vb=points[ea],points[eb]
+                    vx,vy=vb[0]-va[0],vb[1]-va[1]
+                    vl=math.hypot(vx,vy)
+                    inward=(-vy/vl*.145,vx/vl*.145)
+                    xy=[start[:2],finish[:2],(finish[0]+inward[0],finish[1]+inward[1]),
+                        (start[0]+inward[0],start[1]+inward[1])]
+                    poly=[(x,y,patches[fi].height(x,y)+.083) for x,y in xy]
                     ridge.extrude(poly,(0,0,-.025))
         elif kind=='valley':
             # Folded valley aprons lie beneath cut shingle margins on both slopes.
@@ -308,4 +398,4 @@ def build_roof(plan):
                 inward=(-dy/l*.13,dx/l*.13)
                 xy=[p[:2],q[:2],(q[0]+inward[0],q[1]+inward[1]),(p[0]+inward[0],p[1]+inward[1])]
                 trim.extrude([(x,y,patches[fi].height(x,y)+.013) for x,y in xy],(0,0,-.007))
-    return [b for b in (deck,*tiles.values(),ridge,trim,fascia,rafters) if b.faces]
+    return [b for b in (deck,bedding,*tiles.values(),ridge,trim,fascia,rafters) if b.faces]

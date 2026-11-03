@@ -45,7 +45,10 @@ def extended_roof_height(plan, x, y):
     """Evaluate each supporting roof plane beyond its footprint edge."""
     values = []
     for x0, y0, x1, y1, axis in plan.rects:
-        distance = min(y - y0, y1 - y) if axis == "X" else min(x - x0, x1 - x)
+        if plan.settings.roof_style == "HIP":
+            distance = min(x-x0, x1-x, y-y0, y1-y)
+        else:
+            distance = min(y - y0, y1 - y) if axis == "X" else min(x - x0, x1 - x)
         values.append(plan.eave + plan.slope * distance)
     return max(values)
 
@@ -70,6 +73,16 @@ def build_cases():
         yield Settings(seed=91, function=function, footprint="RECT", width=8.0,
                        depth=5.5, floors=1, floor_height=2.4, pitch=60.0,
                        detail="HIGH")
+    # Expanded regional grammar coverage includes HIP profiles, elevated Mire
+    # foundations and mixed-use civic framing at their resolved dimensions.
+    yield Settings(seed=113, function="WATCHTOWER", region="THORNFELL", context="PASSWATCH",
+                   use_grammar=True, detail="HIGH", pitch=60.0)
+    yield Settings(seed=114, function="MARKET_HALL", region="EMBERHOLT", context="EMBERHOLD",
+                   use_grammar=True, detail="HIGH", pitch=60.0)
+    yield Settings(seed=115, function="COTTAGE", region="MIRE", context="SORROWMERE",
+                   use_grammar=True, maintenance=.1, age=180, detail="HIGH", pitch=60.0)
+    yield Settings(seed=116, function="ASSEMBLY_HALL", region="EMBERHOLT", context="CINDERWEAVE",
+                   use_grammar=True, detail="HIGH", pitch=60.0)
 
 
 class RoofClearance(unittest.TestCase):

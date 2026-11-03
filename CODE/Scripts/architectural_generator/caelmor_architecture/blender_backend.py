@@ -25,6 +25,21 @@ def load_settings(collection):
     return json.loads(raw)
 
 
+def _normalize_settings_data(data):
+    """Additive migration: old snapshots remain manual Lowmark SOLID plans."""
+    from .model import Settings
+    allowed = Settings.__dataclass_fields__.keys()
+    values = {key: data[key] for key in allowed if key in data}
+    # Version 0.2 only generated gables, so its snapshots must not inherit the
+    # newer AUTO type roof when partially replacing just one visual layer.
+    values.setdefault("region", "LOWMARK")
+    values.setdefault("use_grammar", False)
+    values.setdefault("geometry_mode", "SOLID")
+    values.setdefault("roof_style", "GABLE")
+    normalized = Settings(**values)
+    return {key: getattr(normalized, key) for key in allowed}
+
+
 def _project(p, axis):
     return (p.y, p.z) if axis == 0 else ((p.x, p.z) if axis == 1 else (p.x, p.y))
 
@@ -81,7 +96,9 @@ def _mesh_object(buffer, cache, build_id, plan=None):
         bpy.data.meshes.remove(mesh); return None
     for face in mesh.polygons: face.use_smooth = False
     material = getattr(buffer, "material", "timber")
-    mesh.materials.append(get_material(material, cache))
+    style = getattr(plan, "style", None)
+    settings = getattr(plan, "settings", None)
+    mesh.materials.append(get_material(material, cache, style=style, settings=settings))
     uv0 = _metric_uv(mesh, material)
     _lightmap_uv(mesh)
     # COLOR_0 carries deterministic environmental weathering into glTF/GLB.
@@ -91,7 +108,7 @@ def _mesh_object(buffer, cache, build_id, plan=None):
         normal = tuple(poly.normal)
         for loop_index in poly.loop_indices:
             vertex = mesh.vertices[mesh.loops[loop_index].vertex_index].co
-            tint_layer.data[loop_index].color = surface_tint(tuple(vertex), normal, material, plan)
+            tint_layer.data[loop_index].color = surface_tint(tuple(vertex), normal, material, plan, style, settings)
     mesh.uv_layers.active_index = 0
     # Set the single render-layer index last, using a fresh RNA reference after
     # adding UV1. Clearing another layer can clear the shared render flag.
@@ -101,6 +118,14 @@ def _mesh_object(buffer, cache, build_id, plan=None):
     obj["caelm_buffer_id"] = buffer.name
     obj["caelm_material"] = material; obj["caelm_semantic"] = _layer_for(buffer)
     obj["caelm_build_id"] = build_id
+    topology = str(getattr(buffer, "topology", "SOLID")).upper()
+    obj["caelm_topology"] = topology if topology in ("SOLID", "SURFACE") else "SOLID"
+    obj["caelm_structural_role"] = str(getattr(buffer, "structural_role", "framing"))
+    for attr, tag in (("roof_envelope", "caelm_roof_envelope"),
+                      ("support_surface", "caelm_support_surface")):
+        value = getattr(buffer, attr, None)
+        if value is not None:
+            obj[tag] = json.dumps(value, sort_keys=True, separators=(",", ":"))
     return obj
 
 
@@ -203,7 +228,7 @@ def build(settings, collection=None, layers=None, origin=None):
         if scope is None: raise ValueError(f"Unknown regeneration scope: {layers}")
     elif layers is not None and not isinstance(layers, str): scope = set(layers)
     if collection and scope is not None:
-        if load_settings(collection) != setting_data:
+        if _normalize_settings_data(load_settings(collection)) != _normalize_settings_data(setting_data):
             raise ValueError("Settings differ from this building. Load its saved settings or regenerate All Layers first.")
         present = {o.get("caelm_layer") for o in collection.objects if o.get(TAG)}
         if scope - present: raise ValueError("Cannot partially regenerate missing layers: " + ", ".join(sorted(scope-present)))
@@ -235,6 +260,12 @@ def build(settings, collection=None, layers=None, origin=None):
         collection["caelm_geometry_hash"] = geometry_hash(buffers)
         collection["caelm_source_geometry_hash"] = geometry_hash(buffers)
         collection["caelm_generator_version"] = TOOL_REVISION; collection["caelm_units"] = "metres"
+        collection["caelm_validation"] = json.dumps({
+            "valid": bool(validation.get("valid", False)) if isinstance(validation, dict) else True,
+            "errors": list(validation.get("errors", ())) if isinstance(validation, dict) else [],
+            "triangles": int(validation.get("triangles", 0)) if isinstance(validation, dict) else 0,
+            "objects": int(validation.get("objects", len(buffers))) if isinstance(validation, dict) else len(buffers),
+        }, sort_keys=True)
         _focus_collection(collection)
         return collection, collection_metrics(collection)
     except Exception:
@@ -306,7 +337,11 @@ def export_building(collection, filepath):
                            "rotation_euler": list(anchor.rotation_euler), "scale": list(anchor.scale)},
                 "layers": collection_metrics(collection)["layers"],
                 "objects": [{"name": o.name, "layer": o.get("caelm_layer"), "material": o.get("caelm_material"),
-                             "semantic": o.get("caelm_semantic"), "protected": bool(o.get("caelm_protected"))}
+                             "semantic": o.get("caelm_semantic"), "protected": bool(o.get("caelm_protected")),
+                             "topology": o.get("caelm_topology", "SOLID"),
+                             "structural_role": o.get("caelm_structural_role", "framing"),
+                             "roof_envelope": json.loads(o["caelm_roof_envelope"]) if o.get("caelm_roof_envelope") else None,
+                             "support_surface": json.loads(o["caelm_support_surface"]) if o.get("caelm_support_surface") else None}
                             for o in objects]}
     sidecar = os.path.splitext(filepath)[0] + ".caelmor.json"
     with open(sidecar, "w", encoding="utf-8") as f: json.dump(manifest, f, indent=2)

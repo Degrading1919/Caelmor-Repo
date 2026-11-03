@@ -214,7 +214,9 @@ class GenerationTests(unittest.TestCase):
         self.assertEqual(brace_slopes, {"ascending", "descending"})
 
     def test_simple_gables_have_two_rakes_a_kingpost_and_collar(self):
-        for function in ("FARMHOUSE", "BARN", "GRAIN_STORE", "MILLER", "INN"):
+        # Grain Store now defaults to a HIP roof; exercise only profiles whose
+        # actual resolved roof style is a simple gable.
+        for function in ("FARMHOUSE", "BARN", "MILLER", "INN"):
             with self.subTest(function=function):
                 plan = make_plan(Settings(function=function, footprint="RECT", seed=17))
                 gables = [frame_layout(plan, i, edge)["gable"]

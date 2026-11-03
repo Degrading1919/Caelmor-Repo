@@ -2,17 +2,38 @@
 bl_info = {
     "name": "Caelmor Architectural Generator",
     "author": "Caelmor",
-    "version": (0, 2, 0),
+    "version": (0, 3, 0),
     "blender": (4, 2, 0),
     "location": "View3D > Sidebar > Caelmor",
-    "description": "Generate editable, metre-scale Lowmark buildings",
+    "description": "Generate editable regional Caelmor buildings",
     "category": "Add Mesh",
 }
 
 import json
+from .profiles import REGIONS, TYPE_SPECS
 
 # Keep this package importable by ordinary Python outside Blender.
 bpy = None
+
+# Blender enum callbacks keep their strings alive for the lifetime of the
+# registered properties. Region/type choices are stable static enums; local
+# contexts are region-scoped dynamic enums backed by these persistent tuples.
+_TYPE_ITEMS = tuple(
+    (code, spec.label,
+     f"{getattr(spec, 'building_category', spec.category).replace('_', ' ').title()} · {spec.family.replace('_', ' ')}")
+    for code, spec in TYPE_SPECS.items())
+_REGION_ITEMS = (
+    ('LOWMARK', "Lowmark Vale", "Lowmark Vale regional architecture"),
+    ('THORNFELL', "Thornfell Marches", "Thornfell Marches regional architecture"),
+    ('MIRE', "Mire of Fallen Banners", "Mire regional architecture"),
+    ('EMBERHOLT', "Emberholt Heights", "Emberholt regional architecture"),
+)
+_CONTEXT_ITEMS = {
+    code: (("AUTO", "Regional Default", "Use the region's default local context"),) + tuple(
+        (context, label, f"{label} local architectural context")
+        for context, label in region.contexts.items())
+    for code, region in REGIONS.items()
+}
 
 
 def _bpy():
@@ -39,6 +60,15 @@ def _settings_from_props(props):
         overhang=props.caelm_overhang,
         detail=props.caelm_detail,
         window_density=props.caelm_window_density,
+        region=props.caelm_region,
+        context=props.caelm_context,
+        wealth=props.caelm_wealth,
+        craftsmanship=props.caelm_craftsmanship,
+        maintenance=props.caelm_maintenance,
+        age=props.caelm_age,
+        use_grammar=props.caelm_use_grammar,
+        roof_style=props.caelm_roof_style,
+        geometry_mode=props.caelm_geometry_mode,
     )
 
 
@@ -56,6 +86,15 @@ def _set_props(props, settings):
     props.caelm_overhang = settings.overhang
     props.caelm_detail = settings.detail
     props.caelm_window_density = settings.window_density
+    props.caelm_region = settings.region
+    props.caelm_context = settings.context
+    props.caelm_wealth = settings.wealth
+    props.caelm_craftsmanship = settings.craftsmanship
+    props.caelm_maintenance = settings.maintenance
+    props.caelm_age = settings.age
+    props.caelm_use_grammar = settings.use_grammar
+    props.caelm_roof_style = settings.roof_style
+    props.caelm_geometry_mode = settings.geometry_mode
 
 
 def _active_build(context):
@@ -85,15 +124,39 @@ class CAELMOR_PG_Settings(_bpy().types.PropertyGroup if False else object):
 
 
 def _make_classes(b):
+    def context_items(self, context):
+        region = getattr(self, "caelm_region", "LOWMARK")
+        return _CONTEXT_ITEMS.get(region, _CONTEXT_ITEMS["LOWMARK"])
+
+    def reset_context(self, context):
+        # Context identifiers are region-scoped. A region change safely returns
+        # to that region's default rather than leaving a stale enum identifier.
+        self.caelm_context = "AUTO"
+
     class CAELMOR_PG_Settings(b.types.PropertyGroup):
         caelm_seed: b.props.IntProperty(name="Seed", default=17, min=0, max=2147483647)
-        caelm_function: b.props.EnumProperty(name="Building", items=[
-            ('FARMHOUSE', "Farmhouse", "Rural dwelling"),
-            ('BARN', "Barn", "Agricultural outbuilding"),
-            ('GRAIN_STORE', "Grain Store", "Small rural grain store"),
-            ('MILLER', "Miller", "Miller rural home and workplace"),
-            ('INN', "Inn", "Small rural inn"),
-        ], default='FARMHOUSE')
+        caelm_function: b.props.EnumProperty(name="Building", items=_TYPE_ITEMS, default='FARMHOUSE')
+        caelm_region: b.props.EnumProperty(name="Region", items=_REGION_ITEMS, default='LOWMARK', update=reset_context)
+        caelm_context: b.props.EnumProperty(name="Local Context", items=context_items, default=0)
+        caelm_wealth: b.props.EnumProperty(name="Wealth", items=[
+            ('MODEST', "Modest", "Plain local materials and restrained finish"),
+            ('ESTABLISHED', "Established", "Established household or enterprise"),
+            ('AFFLUENT', "Affluent", "Costlier local finishes and workmanship"),
+        ], default='ESTABLISHED')
+        caelm_craftsmanship: b.props.EnumProperty(name="Craftsmanship", items=[
+            ('ROUGH', "Rough", "Rough-cut and irregular workmanship"),
+            ('STANDARD', "Standard", "Competent everyday workmanship"),
+            ('FINE', "Fine", "Careful joinery and finish"),
+        ], default='STANDARD')
+        caelm_maintenance: b.props.FloatProperty(name="Maintenance", default=.7, min=0.0, max=1.0)
+        caelm_age: b.props.FloatProperty(name="Age (years)", default=20.0, min=0.0, max=250.0)
+        caelm_use_grammar: b.props.BoolProperty(name="Use Regional Grammar", default=True)
+        caelm_roof_style: b.props.EnumProperty(name="Roof Style", items=[
+            ('AUTO', "Regional / Type Default", "Select a suitable roof by type and region"),
+            ('GABLE', "Gable", "Gabled roof"), ('HIP', "Hip", "Hipped roof")], default='AUTO')
+        caelm_geometry_mode: b.props.EnumProperty(name="Geometry", items=[
+            ('SOLID', "Solid", "Closed solids with full roof construction"),
+            ('EFFICIENT', "Efficient", "Reduced hidden roof geometry")], default='SOLID')
         caelm_footprint: b.props.EnumProperty(name="Footprint", items=[
             ('RECT', "Rectangular", "Single rectangle"), ('L', "L", "Two joined wings"),
             ('T', "T", "Three joined wings"), ('U', "U", "Three sides around a court"),
@@ -108,6 +171,22 @@ def _make_classes(b):
         caelm_overhang: b.props.FloatProperty(name="Overhang", default=0.45, min=0.2, max=0.75, unit='LENGTH')
         caelm_detail: b.props.EnumProperty(name="Detail", items=[('LOW', "Low", "Fewer architectural details"), ('MEDIUM', "Medium", "Balanced detail"), ('HIGH', "High", "Full detail")], default='HIGH')
         caelm_window_density: b.props.FloatProperty(name="Window Density", default=1.0, min=0.4, max=1.5)
+
+    class CAELMOR_OT_apply_grammar(b.types.Operator):
+        bl_idname = "caelmor.apply_grammar"
+        bl_label = "Apply Grammar to Shape Controls"
+        bl_options = {'REGISTER', 'UNDO'}
+
+        def execute(self, context):
+            try:
+                from .model import resolve_settings
+                props = context.scene.caelmor_settings
+                effective = resolve_settings(_settings_from_props(props))
+                _set_props(props, effective)
+                self.report({'INFO'}, "Applied regional massing to shape controls")
+                return {'FINISHED'}
+            except Exception as exc:
+                return _report_error(self, exc)
 
     class CAELMOR_OT_generate(b.types.Operator):
         bl_idname = "caelmor.generate"
@@ -227,19 +306,51 @@ def _make_classes(b):
             box.label(text="Building", icon='HOME')
             box.prop(p, "caelm_seed")
             box.prop(p, "caelm_function")
-            box.prop(p, "caelm_footprint")
+            regional = box.box()
+            regional.label(text="Region and Household")
+            regional.prop(p, "caelm_region")
+            regional.prop(p, "caelm_context")
+            row = regional.row(align=True)
+            row.prop(p, "caelm_wealth")
+            row.prop(p, "caelm_craftsmanship")
+            regional.prop(p, "caelm_age")
+            regional.prop(p, "caelm_maintenance")
+            regional.prop(p, "caelm_use_grammar")
+            regional.prop(p, "caelm_roof_style")
+            regional.prop(p, "caelm_geometry_mode")
+            regional.operator("caelmor.apply_grammar", icon='FILE_REFRESH')
+            box.label(text="Manual shape controls (used when grammar is off)")
             col = box.column(align=True)
+            col.enabled = not p.caelm_use_grammar
+            col.prop(p, "caelm_footprint")
             col.prop(p, "caelm_width")
             col.prop(p, "caelm_depth")
             col.prop(p, "caelm_wing_width")
             col.prop(p, "caelm_wing_depth")
             col = box.column(align=True)
+            col.enabled = not p.caelm_use_grammar
             col.prop(p, "caelm_floors")
             col.prop(p, "caelm_floor_height")
             col.prop(p, "caelm_pitch")
-            col.prop(p, "caelm_overhang")
+            box.prop(p, "caelm_overhang")
             box.prop(p, "caelm_detail")
             box.prop(p, "caelm_window_density")
+            try:
+                from .model import resolve_settings, style_for
+                from .profiles import TYPE_SPECS, REGIONS
+                requested = _settings_from_props(p)
+                effective = resolve_settings(requested)
+                style = style_for(effective)
+                spec = TYPE_SPECS[effective.function]
+                region_spec = REGIONS[effective.region]
+                info = layout.box()
+                info.label(text="Effective Regional Plan" if requested.use_grammar else "Manual Plan")
+                info.label(text=f"{region_spec.label} / {effective.context} · {spec.category.replace('_',' ').title()}")
+                info.label(text=f"{effective.width:.1f} × {effective.depth:.1f} m main block")
+                info.label(text=f"{style.foundation_height + effective.floors * effective.floor_height:.1f} m eaves · {effective.pitch:.0f}° {effective.roof_style.lower()}")
+                info.label(text=f"{style.foundation_mode} foundation · {style.construction} · {style.roof_cover}")
+            except (ValueError, KeyError, AttributeError):
+                pass
             layout.operator("caelmor.generate", icon='ADD')
             layout.operator("caelmor.protect_selected", icon='LOCKED', text="Protect / Unprotect Selected")
             layout.label(text="Protected buffers retain edits through regeneration.")
@@ -256,15 +367,31 @@ def _make_classes(b):
                 m = collection_metrics(collection)
                 layout.label(text=f"{m['vertices']:,} verts · {m['objects']} objects")
                 layout.label(text=f"Bounds: {m['width']:.1f} × {m['depth']:.1f} × {m['height']:.1f} m")
+                raw_diagnostics = collection.get("caelm_validation")
+                if raw_diagnostics:
+                    try:
+                        diagnostics = json.loads(raw_diagnostics)
+                        status = "Geometry checks passed" if diagnostics.get("valid") else "Geometry checks found issues"
+                        layout.label(text=f"{status} · {diagnostics.get('triangles', 0):,} triangles",
+                                     icon='CHECKMARK' if diagnostics.get("valid") else 'ERROR')
+                        for issue in diagnostics.get("errors", ())[:2]:
+                            layout.label(text=str(issue)[:72], icon='DOT')
+                    except (ValueError, TypeError):
+                        layout.label(text="Saved geometry diagnostics unavailable", icon='INFO')
 
-    return (CAELMOR_PG_Settings, CAELMOR_OT_generate, CAELMOR_OT_load,
+    return (CAELMOR_PG_Settings, CAELMOR_OT_apply_grammar, CAELMOR_OT_generate, CAELMOR_OT_load,
             CAELMOR_OT_regenerate, CAELMOR_OT_protect, CAELMOR_OT_export, CAELMOR_PT_main)
 
 
 def _settings_from_json(data):
     from .model import Settings
     allowed = Settings.__dataclass_fields__.keys()
-    return Settings(**{key: data[key] for key in allowed if key in data})
+    values = {key: data[key] for key in allowed if key in data}
+    if "use_grammar" not in data: values["use_grammar"] = False
+    if "region" not in data: values["region"] = "LOWMARK"
+    if "geometry_mode" not in data: values["geometry_mode"] = "SOLID"
+    if "roof_style" not in data: values["roof_style"] = "GABLE"
+    return Settings(**values)
 
 
 _CLASSES = ()

@@ -97,6 +97,10 @@ class MeshBuffer:
     layer: str = 'structure'
     vertices: list = field(default_factory=list)
     faces: list = field(default_factory=list)
+    topology: str = 'SOLID'
+    roof_envelope: dict | None = None
+    structural_role: str = 'framing'
+    support_surface: dict | None = None
 
     def indexed(self, vertices, faces):
         offset = len(self.vertices)

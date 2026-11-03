@@ -11,8 +11,8 @@ import tempfile
 from package_addon import package
 
 
-def run(blender, export=None):
-    archive,_=package()
+def run(blender, export=None, region='LOWMARK', function='FARMHOUSE', geometry_mode='SOLID'):
+    archive,archive_hash=package()
     with tempfile.TemporaryDirectory(prefix='caelmor_install_') as directory:
         target=Path(directory).resolve()
         assert target.parent==Path(tempfile.gettempdir()).resolve()
@@ -31,6 +31,13 @@ def run(blender, export=None):
         call(['--command','extension','install-file','--repo','caelmor_test','--enable',str(archive)])
         expression="""import bpy
 assert hasattr(bpy.ops.caelmor,'generate')
+"""
+        expression+=f"""props=bpy.context.scene.caelmor_settings
+props.caelm_region={region!r}
+props.caelm_function={function!r}
+props.caelm_geometry_mode={geometry_mode!r}
+"""
+        expression+="""
 assert bpy.ops.caelmor.generate()=={'FINISHED'}
 collection=next(c for c in bpy.data.collections if c.get('caelm_build'))
 meshes=[o for o in collection.objects if o.get('caelm_generated') and not o.get('caelm_collider')]
@@ -43,12 +50,22 @@ print('ISOLATED_EXTENSION_INSTALL_AND_GENERATE_PASS',len(meshes))
             export.parent.mkdir(parents=True,exist_ok=True)
             expression+=f"\nassert bpy.ops.caelmor.export(filepath={str(export)!r})=={{'FINISHED'}}\n"
         call(['--background','--python-exit-code','1','--python-expr',expression])
-    return {'installed_archive':str(archive),'native_install_and_generate':True,'isolated_preferences':True}
+    return {'installed_archive':str(archive),'archive_sha256':archive_hash,
+            'native_install_and_generate':True,'isolated_preferences':True,
+            'region':region,'building_type':function,'geometry_mode':geometry_mode}
 
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser()
     parser.add_argument('--blender',default=r'C:\Program Files\Blender Foundation\Blender 5.0\blender.exe')
     parser.add_argument('--export',help='Optionally retain a generated GLB for inspection')
+    from caelmor_architecture.profiles import REGIONS, TYPE_SPECS
+    parser.add_argument('--region',choices=tuple(REGIONS),default='LOWMARK')
+    parser.add_argument('--function',choices=tuple(TYPE_SPECS),default='FARMHOUSE')
+    parser.add_argument('--geometry-mode',choices=('SOLID','EFFICIENT'),default='SOLID')
+    parser.add_argument('--report',help='Optionally retain the tested archive hash and settings as JSON')
     args=parser.parse_args()
-    print(json.dumps(run(Path(args.blender),args.export),indent=2))
+    result=run(Path(args.blender),args.export,args.region,args.function,args.geometry_mode)
+    if args.report:
+        Path(args.report).write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
+    print(json.dumps(result,indent=2))

@@ -63,20 +63,18 @@ def glb_json(filepath):
 
 
 class BlenderIntegration(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        addon.register()
-
-    @classmethod
-    def tearDownClass(cls):
-        addon.unregister()
-
     def setUp(self):
         bpy.ops.wm.read_factory_settings(use_empty=True)
+        # Factory reset clears custom Scene RNA properties; register the add-on
+        # after creating the fresh scene used by this fixture.
+        addon.register()
         bpy.context.scene.caelmor_settings.caelm_seed = 73
         bpy.context.scene.caelmor_settings.caelm_function = "FARMHOUSE"
         bpy.context.scene.caelmor_settings.caelm_footprint = "L"
         bpy.context.scene.cursor.location = (2.0, 3.0, 0.0)
+
+    def tearDown(self):
+        addon.unregister()
 
     def _collection(self):
         return next(c for c in bpy.data.collections if c.get(COLLECTION_TAG))
