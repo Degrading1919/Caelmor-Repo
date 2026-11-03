@@ -1,6 +1,7 @@
 # v0.6 function-first implementation and verification
 
-Generator sources: `905e97b`, then the scoped forge/access correction `1286d07`.
+Generator sources: `905e97b`, scoped forge/access correction `1286d07`, and
+physical exhaust connections/clearance in `8c76e5f`.
 Blender 5.0.1; pure tests used Python 3.13. No Unity, C#, runtime benchmark,
 gameplay/content/canon changes or merge. Final art acceptance is the Creative
 Director's. [Construction contract and precedents](../FUNCTIONAL_PROGRAMS.md).
@@ -65,6 +66,13 @@ passage/opening cuts; they remain approximate, not runtime traversal proof.
    The shallower stone hall, forward hearth/hood and taller exterior flue expose
    its work process. Loading/public ramp and stock-lane corrections accompanied
    the affected profiles. Old Thornfell views remain as rejected evidence.
+7. Final source review found that a hollow shaft still had an uncut inlet wall,
+   a bottom plate blocked the hood throat, and the original horizontal turn
+   crossed the hood's side. The stack now has a real inlet aperture and the
+   hood has an open reducer/neck/elbow into the duct. Regional neck heights clear
+   the load-bearing wall plates. A permanent firebed-to-neck/duct/stack regression
+   and sixty actual Blender air-path probes check the opening at center and
+   ±75 mm offsets. These are geometric connections, not a draft/thermal model.
 
 These are session-observed failures/corrections; original failed command stdout
 was not retained as a separate immutable log. Initial working-tree pilots retain
@@ -75,10 +83,10 @@ their settings/source hashes, not a falsely claimed committed source snapshot.
 | Gate | Executed result and scope |
 |---|---|
 | Python integration milestone | 71 methods passed in 132.087 s: 37 retained legacy, 7 rural, 3 Emberholt household, 5 investment/roof, 1 open-work access, 1 stone craft, 9 work-program and 8 yard-program tests. This preceded the final scoped forge/access revision. |
-| Shared functional regressions | Four methods passed separately: all 16 region/function programs validate/reproduce; an actual counter blocking a declared public route is rejected; stone above a weather roof is rejected; all 64 recorded configurations for the other sixteen functions retain their v0.5 geometry hashes. |
-| Boundary coverage | 32 combinations across the four functions/regions, MODEST/ROUGH/LOW/SOLID and AFFLUENT/FINE/HIGH/EFFICIENT, seed 29, age 110/upkeep .3 passed. The ten affected extreme combinations were checked again after the last revision; both JSON reports retain source fingerprints. |
+| Shared functional regressions | Five methods passed separately: all 16 region/function programs validate/reproduce; an actual counter blocking a declared public route is rejected; stone above a weather roof is rejected; all 64 recorded configurations for the other sixteen functions retain their v0.5 geometry hashes; and all four forge exhausts have open firebed/hood, duct and stack paths. The last method passed after the exhaust correction (0.877 s). |
+| Boundary coverage | 32 combinations across the four functions/regions, MODEST/ROUGH/LOW/SOLID and AFFLUENT/FINE/HIGH/EFFICIENT, seed 29, age 110/upkeep .3 passed. The ten affected extreme combinations were checked again after the forge/access revision. Eight Smithy extremes additionally passed validation and all three exhaust segments after the final connection correction. Reports retain source fingerprints. |
 | Retained Blender regressions | Seven methods across `test_blender`, `test_roof_clearance`, `test_glass_timber_bvh`, `test_profiles_blender`, `test_world_blender` passed. Includes 21 roof fixtures, actual glass/frame checks, settings migration/material banks, protected regeneration, save/reopen and GLB export. Individual module durations were 21.753, 157.937, 20.168, 13.202 and 17.499 s; these are workload timings, not model speed or runtime benchmarks. |
-| New actual Blender geometry | Sixteen configurations covered in two eight-case reports. Final checks total 1,050 circulation/proxy rays and 128 stair-headroom rays, plus glass/structure BVH checks. Yard cases passed in 19.715 s. After the final forge/access correction, the eight work cases passed again in 18.338 s, and ten focused work Python tests passed in 2.566 s. |
+| New actual Blender geometry | Sixteen configurations covered in two eight-case reports. Final checks total 1,050 circulation/proxy rays, 128 stair-headroom rays and 60 exhaust-path rays, plus glass/structure BVH checks. Yard cases passed in 19.715 s. After the final exhaust correction, the eight work cases passed again in 15.848 s, and ten focused work Python tests passed in 2.800 s. |
 | Native package | Final ZIP installed/enabled in isolated Blender preferences; real UI operators generated and exported an EFFICIENT Emberholt Smithy with a functional program. A separate install generated legacy Lowmark Farmhouse. Both reports identify the same archive SHA256 below. |
 | Evidence consistency | 16 configurations, 64 individual images and 4 sheets verified; all sixteen native mesh-gate geometry hashes match render records. Source/settings/camera/image/archive checks passed. The old 320 images and 20 sheets match their original manifests and were not rerendered. |
 
@@ -102,12 +110,13 @@ two opposed views in clay/materials, common orthographic scale within a function
 Different functions are independently framed. The initial four representative
 pilots and focused rejected Smithy views are separate from the final comparisons.
 
-The late revision refreshed only five configurations / twenty images. Eleven
-configurations / forty-four images were retained, including their original
-source and camera snapshots. The verifier replayed those eleven geometries
-against current source; material/studio source is unchanged. Original rendered
-revisions `905e97b` and `1286d07` remain recorded per configuration. Matching
-geometry does not claim pixel identity across source versions.
+The forge/access revision refreshed only five configurations / twenty images.
+The final exhaust correction refreshed the four smithies / sixteen images;
+twelve configurations / forty-eight images were retained on that pass, including
+their original source and camera snapshots. The verifier replayed those twelve
+geometries against current source; material/studio source is unchanged. Original
+rendered revisions `905e97b`, `1286d07` and `8c76e5f` remain recorded per
+configuration. Matching geometry does not claim pixel identity across versions.
 
 The lead inspected Stable/Gatehouse sheets, the representative pilots and the
 revised Thornfell forge. Independent Luna High review inspected Smithy/Market
@@ -121,7 +130,7 @@ not an accuracy study or Creative Director art approval.
 
 Final archive: `dist/caelmor_architecture.zip`, 25 members, all byte-equal to local
 source/bundled documents. SHA256:
-`f3f17484f62bf6eb72202f2d9279cc1e292fa85bd81562bd3fb0470dd5b6f8b2`.
+`16acce0519d8c38225c18b40674658af5dad0ae59d74789f0626f76e5a6fbf5e`.
 GPL-3.0-or-later and notices remain included; no third-party meshes, copied
 RuneScape designs or downloaded material assets are introduced.
 
@@ -150,7 +159,8 @@ These observations concern this workflow, not a universal model ranking.
 
 One native build is reused for clay/materials and both angles. Partial refresh
 preserves old images/provenance and invalidates retained views if geometry or
-common framing changes. That avoided forty-four late rerenders, but incremental
+common framing changes. It retained forty-four views on the forge/access pass
+and forty-eight on the final exhaust pass, but incremental
 manifest support and review also consumed engineering/model effort. No measured
 token, subscription-allowance, API-dollar or total wall-time saving is established.
 The testable lesson is earlier semantic/art falsification plus targeted verification,

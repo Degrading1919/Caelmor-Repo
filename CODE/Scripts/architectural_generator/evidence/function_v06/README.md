@@ -39,12 +39,14 @@ Blender mesh-gate geometry hashes agree with the comparison records. The complet
 historical v0.5 gallery remains unchanged: 320 individual images and 20 sheets
 verified against its retained manifests. It was not rerendered.
 
-The first integrated source is `905e97b`; the later Thornfell forge and access
-corrections are `1286d07`. Only the five affected configurations (20 frames)
-were refreshed. The other eleven retain their original 44 image files, camera
-scale and render source snapshots. Per-record source metadata takes precedence
-over a manifest's latest refresh header. Eleven retained settings
-were replayed against current geometry; material and studio sources are unchanged.
+The first integrated source is `905e97b`; the later Thornfell forge/access
+correction is `1286d07`, followed by the physical exhaust connection correction
+in `8c76e5f`. The first partial refresh changed five configurations (20 frames);
+the final exhaust refresh changed only four smithies (16 frames). On that last
+pass, the other twelve retained their 48 image files, camera scale and original
+render source snapshots. Per-record metadata takes precedence over a manifest's
+latest refresh header. Twelve retained settings were replayed against current
+geometry; material and studio sources are unchanged.
 This establishes geometry correspondence, not pixel identity across source revisions.
 
 Independent visual review first rejected the hidden Thornfell forge and then
@@ -52,8 +54,8 @@ confirmed its hearth, hood, anvil and outside flue were exposed after correction
 The [rejected Thornfell views](../function_v06_rejected_thornfell/) and the initial
 pilot remain historical comparisons. Early pilots used working-tree snapshots
 based on `fa0597a`, whose hashes are recorded; they are not falsely described as
-committed source trees. Only the final comparison uses the two committed revisions
-above.
+committed source trees. The final comparison uses the three committed rendered
+revisions above.
 
 To verify the recorded delivery without rendering or rebuilding the old gallery:
 
@@ -65,6 +67,6 @@ To reproduce the four-function study in a separate folder, from the generator
 directory with Blender 5.0.1 and the current v0.6 source:
 
 ```powershell
-& 'C:\Program Files\Blender Foundation\Blender 5.0\blender.exe' --factory-startup --background --python-exit-code 1 --python tests/render_household_review.py -- --archetype-gallery --gallery-functions SMITHY MARKET_HALL STABLE GATEHOUSE --gallery-output function_v06_reproduction --source-revision 1286d07
+& 'C:\Program Files\Blender Foundation\Blender 5.0\blender.exe' --factory-startup --background --python-exit-code 1 --python tests/render_household_review.py -- --archetype-gallery --gallery-functions SMITHY MARKET_HALL STABLE GATEHOUSE --gallery-output function_v06_reproduction --source-revision 8c76e5f
 ./tests/compose_archetype_gallery.ps1 -Gallery function_v06_reproduction -Functions @('SMITHY','MARKET_HALL','STABLE','GATEHOUSE')
 ```

@@ -5,7 +5,7 @@
     "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
     "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
     "functional.py": "98d7f5f4b7e33dc0ce8d598721f13d69cccef9aa470d31b8cb0c4f1067dd0529",
-    "function_work.py": "b9b360f86ed3a039296bc47cdfb2bfe98407d364c938c4b6da316e3ae07c219c",
+    "function_work.py": "6721ccdc6e5ba6003a4a47148e9b7af691b7ad944542815128614ec42425a2fb",
     "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
     "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
     "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
@@ -23,38 +23,43 @@
       "region": "LOWMARK",
       "clearance_rays": 15,
       "stair_headroom_rays": 0,
+      "exhaust_path_rays": 15,
       "glass_structure_overlaps": 0,
-      "source_geometry_hash": "41075dedc3644bd05a6332fd46b7e36cf27e136c2c86d877867a09643a99d12b"
+      "source_geometry_hash": "972eb72e11466ab5b8e0bc00d46a31ed4b8323c57f0cc8968feba0d01c76c3e8"
     },
     {
       "function": "SMITHY",
       "region": "THORNFELL",
       "clearance_rays": 15,
       "stair_headroom_rays": 0,
+      "exhaust_path_rays": 15,
       "glass_structure_overlaps": 0,
-      "source_geometry_hash": "b4473bcc69561b2af78f7a1827aad584df75e753c573ebdbd8f40fd66b129e34"
+      "source_geometry_hash": "040c89c79df4f3172d05809e8993bd842c6d6b46f2699b9b2930bcbf5dad11c3"
     },
     {
       "function": "SMITHY",
       "region": "MIRE",
       "clearance_rays": 33,
       "stair_headroom_rays": 0,
+      "exhaust_path_rays": 15,
       "glass_structure_overlaps": 0,
-      "source_geometry_hash": "012cc494ca058f83881670d90c6c76111ef74b712f4b1096b8d03e13b1e8e7d0"
+      "source_geometry_hash": "d9f32ee91b83a88a9ef7e48730aa3e689acb72e95c25d43cc52c3ebbfa77277e"
     },
     {
       "function": "SMITHY",
       "region": "EMBERHOLT",
       "clearance_rays": 18,
       "stair_headroom_rays": 0,
+      "exhaust_path_rays": 15,
       "glass_structure_overlaps": 0,
-      "source_geometry_hash": "732bdd2d7c1d4545c2701ac9cca025d0a5fd28af91b97a3611418c95bb05f455"
+      "source_geometry_hash": "474bde5fdc72590f0bfabf999f185b16da33319356e7e9e2114f0fb25ccc24e5"
     },
     {
       "function": "MARKET_HALL",
       "region": "LOWMARK",
       "clearance_rays": 117,
       "stair_headroom_rays": 0,
+      "exhaust_path_rays": 0,
       "glass_structure_overlaps": 0,
       "source_geometry_hash": "cff78b15f9307555d7a8d0e5ad69aea3ce81fb572d8205cc5752b64e936a8cc6"
     },
@@ -63,6 +68,7 @@
       "region": "THORNFELL",
       "clearance_rays": 117,
       "stair_headroom_rays": 0,
+      "exhaust_path_rays": 0,
       "glass_structure_overlaps": 0,
       "source_geometry_hash": "37aa5dbc8402eb77817a0a06209ac079444073724451501cd60f50e3686e06db"
     },
@@ -71,6 +77,7 @@
       "region": "MIRE",
       "clearance_rays": 132,
       "stair_headroom_rays": 0,
+      "exhaust_path_rays": 0,
       "glass_structure_overlaps": 0,
       "source_geometry_hash": "97c0f594800ab3ed9388c7657c4b595a1dd0895dd37b2221fe036425c9d90550"
     },
@@ -79,6 +86,7 @@
       "region": "EMBERHOLT",
       "clearance_rays": 117,
       "stair_headroom_rays": 0,
+      "exhaust_path_rays": 0,
       "glass_structure_overlaps": 0,
       "source_geometry_hash": "320d55b031ac7810bc8ea4926492819825e3ef2472bcc03c4fdf621a498dfa9f"
     }

@@ -1,5 +1,5 @@
 {
-  "source_revision": "1286d07",
+  "source_revision": "8c76e5f",
   "generator_version": "0.6.0",
   "source_sha256": {
     "__init__.py": "3d360cbfdd05522f158f79145f93b96c231ef06bd5854ee828c831760aeab8cd",
@@ -7,7 +7,7 @@
     "blender_manifest.toml": "e021854efaf3ad456fc9ab0d62b0ce81ebdc343e813a5fc71e7dc224ce2449b6",
     "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
     "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
-    "function_work.py": "b9b360f86ed3a039296bc47cdfb2bfe98407d364c938c4b6da316e3ae07c219c",
+    "function_work.py": "6721ccdc6e5ba6003a4a47148e9b7af691b7ad944542815128614ec42425a2fb",
     "functional.py": "98d7f5f4b7e33dc0ce8d598721f13d69cccef9aa470d31b8cb0c4f1067dd0529",
     "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
     "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
@@ -57,6 +57,29 @@
       "function": "SMITHY",
       "region": "LOWMARK",
       "label": "Smithy",
+      "source_revision": "8c76e5f",
+      "source_sha256": {
+        "__init__.py": "3d360cbfdd05522f158f79145f93b96c231ef06bd5854ee828c831760aeab8cd",
+        "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
+        "blender_manifest.toml": "e021854efaf3ad456fc9ab0d62b0ce81ebdc343e813a5fc71e7dc224ce2449b6",
+        "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
+        "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
+        "function_work.py": "6721ccdc6e5ba6003a4a47148e9b7af691b7ad944542815128614ec42425a2fb",
+        "functional.py": "98d7f5f4b7e33dc0ce8d598721f13d69cccef9aa470d31b8cb0c4f1067dd0529",
+        "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+        "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+        "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+        "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+        "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+        "world.py": "27317e50e6c20791b33066e00263d358fd94dadda7b1d0c940c5940f6901b76e",
+        "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+        "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+        "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+      },
+      "render_source_sha256": {
+        "render_household_review.py": "f633aca84153fc175ac38d38f506f286854d883685c79582c04c77aed072dadf",
+        "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+      },
       "settings": {
         "seed": 91,
         "function": "SMITHY",
@@ -89,7 +112,7 @@
           "mode": "clay",
           "view": 0,
           "image": "individual/smithy/lowmark_clay_0.png",
-          "image_sha256": "95824cdd9eee92635c1ceda2a48c5026c0a6fbfe6974abc130185bc0db3aad10",
+          "image_sha256": "4a8c98acf510e57c67f121eaf5433baae96a50aaabe438f5af32c8c59aa1d04e",
           "width": 1024,
           "height": 704,
           "camera_direction": [
@@ -108,13 +131,13 @@
             2.6847033500671387
           ],
           "ortho_scale": 29.7110107421875,
-          "elapsed_seconds": 2.4243
+          "elapsed_seconds": 2.6999
         },
         {
           "mode": "clay",
           "view": 1,
           "image": "individual/smithy/lowmark_clay_1.png",
-          "image_sha256": "1b2bbd46b66667364776d31e691df7c00cfdedf380dbcc9478eb8ae43fe17413",
+          "image_sha256": "0be300bf8d235f5e9f57bb6412cb22d87332db618ca1e9bd9a5b92906d3ac4e8",
           "width": 1024,
           "height": 704,
           "camera_direction": [
@@ -133,13 +156,13 @@
             2.6847033500671387
           ],
           "ortho_scale": 29.7110107421875,
-          "elapsed_seconds": 0.2498
+          "elapsed_seconds": 0.3919
         },
         {
           "mode": "material",
           "view": 0,
           "image": "individual/smithy/lowmark_material_0.png",
-          "image_sha256": "cccdb5f2a1c6e27695337fa112dea6829e956784b827bf0e39939dc41f97dc0e",
+          "image_sha256": "d743915c46d6621377daccf3f214e8a82cd262c67e87a79b84bfb93586aac9c6",
           "width": 1024,
           "height": 704,
           "camera_direction": [
@@ -158,13 +181,13 @@
             2.6847033500671387
           ],
           "ortho_scale": 29.7110107421875,
-          "elapsed_seconds": 0.2465
+          "elapsed_seconds": 0.3956
         },
         {
           "mode": "material",
           "view": 1,
           "image": "individual/smithy/lowmark_material_1.png",
-          "image_sha256": "82ca4fc21d1bf026ebdcc0ac519bbd19ad2fba21b1a930aadef0e129f3ebfe0d",
+          "image_sha256": "2810736235e0b0a1595f785f12fb4c1e5777d8c90e80147d9df8726fb0bc97cc",
           "width": 1024,
           "height": 704,
           "camera_direction": [
@@ -183,11 +206,11 @@
             2.6847033500671387
           ],
           "ortho_scale": 29.7110107421875,
-          "elapsed_seconds": 0.2545
+          "elapsed_seconds": 0.4197
         }
       ],
-      "build_seconds": 1.824,
-      "geometry_hash": "41075dedc3644bd05a6332fd46b7e36cf27e136c2c86d877867a09643a99d12b",
+      "build_seconds": 2.0084,
+      "geometry_hash": "972eb72e11466ab5b8e0bc00d46a31ed4b8323c57f0cc8968feba0d01c76c3e8",
       "validation": {
         "architecture": "WORLD",
         "construction_zones": [
@@ -203,23 +226,23 @@
             "function": "SMITHY",
             "key": "forge_hall",
             "roof": "SHED",
-            "triangles": 5582,
+            "triangles": 5726,
             "valid": true,
-            "vertices": 5092,
+            "vertices": 5188,
             "wall_thickness": 0.28
           }
         ],
         "errors": [],
         "objects": 34,
         "source_objects": 34,
-        "source_triangles": 5582,
-        "source_vertices": 5092,
-        "triangles": 5582,
+        "source_triangles": 5726,
+        "source_vertices": 5188,
+        "triangles": 5726,
         "valid": true
       },
       "backend": {
         "objects": 34,
-        "vertices": 5092,
+        "vertices": 5188,
         "width": 11.475000023841858,
         "depth": 7.085000038146973,
         "height": 5.629406809806824,
@@ -441,7 +464,46 @@
             "role": "fuel",
             "zone": "forge_hall"
           }
-        ]
+        ],
+        "ventilation": {
+          "duct": [
+            [
+              1.5,
+              1.3499999999999999,
+              3.1700000000000004
+            ],
+            [
+              -1.05,
+              1.3499999999999999,
+              3.1700000000000004
+            ]
+          ],
+          "hood_inlet": [
+            [
+              1.5,
+              1.3499999999999999,
+              0.97
+            ],
+            [
+              1.5,
+              1.3499999999999999,
+              3.2100000000000004
+            ]
+          ],
+          "scope": "Open geometric air path, not a draft or thermal simulation",
+          "stack": [
+            [
+              -1.05,
+              1.3499999999999999,
+              3.1700000000000004
+            ],
+            [
+              -1.05,
+              1.3499999999999999,
+              4.6
+            ]
+          ]
+        }
       },
       "bounds": [
         [
@@ -456,44 +518,20 @@
           -0.12999999523162842,
           5.499406814575195
         ]
-      ],
-      "source_revision": "905e97b",
-      "source_sha256": {
-        "__init__.py": "3d360cbfdd05522f158f79145f93b96c231ef06bd5854ee828c831760aeab8cd",
-        "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
-        "blender_manifest.toml": "e021854efaf3ad456fc9ab0d62b0ce81ebdc343e813a5fc71e7dc224ce2449b6",
-        "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
-        "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
-        "function_work.py": "f6fff29fc88d494762ac9943d6ea49a5bfa77b031a16dc1f8208e2cb63d31c93",
-        "function_yard.py": "6b2bc1fa856e9b2c90118cf71e5c8d30729fcc2bd8a64460e86e25888d6b721f",
-        "functional.py": "98d7f5f4b7e33dc0ce8d598721f13d69cccef9aa470d31b8cb0c4f1067dd0529",
-        "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
-        "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
-        "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
-        "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
-        "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
-        "world.py": "27317e50e6c20791b33066e00263d358fd94dadda7b1d0c940c5940f6901b76e",
-        "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
-        "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
-        "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
-      },
-      "render_source_sha256": {
-        "render_household_review.py": "0164574efc2a94ce14846a41db7255efd41bcf2a25af9d8eebb912f77e015648",
-        "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
-      }
+      ]
     },
     {
       "function": "SMITHY",
       "region": "THORNFELL",
       "label": "Smithy",
-      "source_revision": "1286d07",
+      "source_revision": "8c76e5f",
       "source_sha256": {
         "__init__.py": "3d360cbfdd05522f158f79145f93b96c231ef06bd5854ee828c831760aeab8cd",
         "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
         "blender_manifest.toml": "e021854efaf3ad456fc9ab0d62b0ce81ebdc343e813a5fc71e7dc224ce2449b6",
         "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
         "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
-        "function_work.py": "b9b360f86ed3a039296bc47cdfb2bfe98407d364c938c4b6da316e3ae07c219c",
+        "function_work.py": "6721ccdc6e5ba6003a4a47148e9b7af691b7ad944542815128614ec42425a2fb",
         "functional.py": "98d7f5f4b7e33dc0ce8d598721f13d69cccef9aa470d31b8cb0c4f1067dd0529",
         "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
         "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
@@ -541,7 +579,7 @@
           "mode": "clay",
           "view": 0,
           "image": "individual/smithy/thornfell_clay_0.png",
-          "image_sha256": "a4b50d10264af71e59ddbcf795077cf115500eed9f0d4b7bdeaec9ea0d770975",
+          "image_sha256": "ab46cec0ca262c655bff8e717b1606544c9415a071299b2321e8ed000e4029e6",
           "width": 1024,
           "height": 704,
           "camera_direction": [
@@ -560,13 +598,13 @@
             2.966984748840332
           ],
           "ortho_scale": 29.7110107421875,
-          "elapsed_seconds": 2.8118
+          "elapsed_seconds": 0.3798
         },
         {
           "mode": "clay",
           "view": 1,
           "image": "individual/smithy/thornfell_clay_1.png",
-          "image_sha256": "261ecd2073d45faab3b6c091dacbf5d52f87611b89bf08689d9469162be542e9",
+          "image_sha256": "36f51db8952bd13ce7a3feb96f9ed1782d751ce64673ed8252c6a6fa37256cde",
           "width": 1024,
           "height": 704,
           "camera_direction": [
@@ -585,13 +623,13 @@
             2.966984748840332
           ],
           "ortho_scale": 29.7110107421875,
-          "elapsed_seconds": 0.3176
+          "elapsed_seconds": 0.4124
         },
         {
           "mode": "material",
           "view": 0,
           "image": "individual/smithy/thornfell_material_0.png",
-          "image_sha256": "6bee6f0a6d9cfeb6a0a8d5d572bfce14d55235a2b0b0683b1e18258eabc22448",
+          "image_sha256": "651693031763cf15d803d81183447d879a1ffc6a782aafdc3f22204884a09bb1",
           "width": 1024,
           "height": 704,
           "camera_direction": [
@@ -610,13 +648,13 @@
             2.966984748840332
           ],
           "ortho_scale": 29.7110107421875,
-          "elapsed_seconds": 0.3075
+          "elapsed_seconds": 0.4338
         },
         {
           "mode": "material",
           "view": 1,
           "image": "individual/smithy/thornfell_material_1.png",
-          "image_sha256": "303387c376c13f12dc152708b2d0cbfa1d2dacbab8d9599b167730967b3e8e4c",
+          "image_sha256": "d630b00993fd80530f657b6cc4d02a02af1b4043f850e21277df0e54c6655bbc",
           "width": 1024,
           "height": 704,
           "camera_direction": [
@@ -635,11 +673,11 @@
             2.966984748840332
           ],
           "ortho_scale": 29.7110107421875,
-          "elapsed_seconds": 0.346
+          "elapsed_seconds": 0.4253
         }
       ],
-      "build_seconds": 1.3601,
-      "geometry_hash": "b4473bcc69561b2af78f7a1827aad584df75e753c573ebdbd8f40fd66b129e34",
+      "build_seconds": 0.4233,
+      "geometry_hash": "040c89c79df4f3172d05809e8993bd842c6d6b46f2699b9b2930bcbf5dad11c3",
       "validation": {
         "architecture": "WORLD",
         "construction_zones": [
@@ -655,23 +693,23 @@
             "function": "SMITHY",
             "key": "forge_hall",
             "roof": "GABLE",
-            "triangles": 6168,
+            "triangles": 6312,
             "valid": true,
-            "vertices": 5838,
+            "vertices": 5934,
             "wall_thickness": 0.5
           }
         ],
         "errors": [],
         "objects": 36,
         "source_objects": 36,
-        "source_triangles": 6168,
-        "source_vertices": 5838,
-        "triangles": 6168,
+        "source_triangles": 6312,
+        "source_vertices": 5934,
+        "triangles": 6312,
         "valid": true
       },
       "backend": {
         "objects": 36,
-        "vertices": 5838,
+        "vertices": 5934,
         "width": 10.535000443458557,
         "depth": 7.153604507446289,
         "height": 6.1939696073532104,
@@ -892,7 +930,46 @@
             "role": "fuel",
             "zone": "forge_hall"
           }
-        ]
+        ],
+        "ventilation": {
+          "duct": [
+            [
+              1.8,
+              1.3499999999999999,
+              3.0900000000000003
+            ],
+            [
+              -1.05,
+              1.3499999999999999,
+              3.0900000000000003
+            ]
+          ],
+          "hood_inlet": [
+            [
+              1.8,
+              1.3499999999999999,
+              0.97
+            ],
+            [
+              1.8,
+              1.3499999999999999,
+              3.1300000000000003
+            ]
+          ],
+          "scope": "Open geometric air path, not a draft or thermal simulation",
+          "stack": [
+            [
+              -1.05,
+              1.3499999999999999,
+              3.0900000000000003
+            ],
+            [
+              -1.05,
+              1.3499999999999999,
+              5.87
+            ]
+          ]
+        }
       },
       "bounds": [
         [
@@ -913,14 +990,14 @@
       "function": "SMITHY",
       "region": "MIRE",
       "label": "Smithy",
-      "source_revision": "1286d07",
+      "source_revision": "8c76e5f",
       "source_sha256": {
         "__init__.py": "3d360cbfdd05522f158f79145f93b96c231ef06bd5854ee828c831760aeab8cd",
         "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
         "blender_manifest.toml": "e021854efaf3ad456fc9ab0d62b0ce81ebdc343e813a5fc71e7dc224ce2449b6",
         "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
         "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
-        "function_work.py": "b9b360f86ed3a039296bc47cdfb2bfe98407d364c938c4b6da316e3ae07c219c",
+        "function_work.py": "6721ccdc6e5ba6003a4a47148e9b7af691b7ad944542815128614ec42425a2fb",
         "functional.py": "98d7f5f4b7e33dc0ce8d598721f13d69cccef9aa470d31b8cb0c4f1067dd0529",
         "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
         "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
@@ -968,7 +1045,7 @@
           "mode": "clay",
           "view": 0,
           "image": "individual/smithy/mire_clay_0.png",
-          "image_sha256": "503abab456a6889e9a52310db838968f922b87941d076ffa696de9f4f5a5b709",
+          "image_sha256": "299157499c5a3f19e0cadabd5eb221475ec96c599843329e620b15c9858e7fb8",
           "width": 1024,
           "height": 704,
           "camera_direction": [
@@ -987,13 +1064,13 @@
             4.682289123535156
           ],
           "ortho_scale": 29.7110107421875,
-          "elapsed_seconds": 0.3271
+          "elapsed_seconds": 0.4273
         },
         {
           "mode": "clay",
           "view": 1,
           "image": "individual/smithy/mire_clay_1.png",
-          "image_sha256": "582cf46538299d70023079aa69f7841a477237491b7561517be8844eeaf010bc",
+          "image_sha256": "cf6bdb444c6ce390422137f694d8e0184b3be1de8f56a36842520c5089fa4de2",
           "width": 1024,
           "height": 704,
           "camera_direction": [
@@ -1012,13 +1089,13 @@
             4.682289123535156
           ],
           "ortho_scale": 29.7110107421875,
-          "elapsed_seconds": 0.3211
+          "elapsed_seconds": 0.4181
         },
         {
           "mode": "material",
           "view": 0,
           "image": "individual/smithy/mire_material_0.png",
-          "image_sha256": "b71f4ea9ada20e3397d4d904a83ce62f82933c674e8972dcca6f950e184c88d0",
+          "image_sha256": "695dc674e2753aa3fad3ef1a33747a68e1f657272ea7998602a4baaa1d1ff2e8",
           "width": 1024,
           "height": 704,
           "camera_direction": [
@@ -1037,13 +1114,13 @@
             4.682289123535156
           ],
           "ortho_scale": 29.7110107421875,
-          "elapsed_seconds": 0.3651
+          "elapsed_seconds": 0.46
         },
         {
           "mode": "material",
           "view": 1,
           "image": "individual/smithy/mire_material_1.png",
-          "image_sha256": "7b96b19c04d3fd7b72ebb05520907c31fb870fc209ace23aeeca066af4150bc1",
+          "image_sha256": "ff9ba621c93526d1ce6f94b9921ce977eb5dc56b34ca8fd9232e8bfd72c47c65",
           "width": 1024,
           "height": 704,
           "camera_direction": [
@@ -1062,11 +1139,11 @@
             4.682289123535156
           ],
           "ortho_scale": 29.7110107421875,
-          "elapsed_seconds": 0.3681
+          "elapsed_seconds": 0.4136
         }
       ],
-      "build_seconds": 1.0122,
-      "geometry_hash": "012cc494ca058f83881670d90c6c76111ef74b712f4b1096b8d03e13b1e8e7d0",
+      "build_seconds": 0.9206,
+      "geometry_hash": "d9f32ee91b83a88a9ef7e48730aa3e689acb72e95c25d43cc52c3ebbfa77277e",
       "validation": {
         "architecture": "WORLD",
         "construction_zones": [
@@ -1082,23 +1159,23 @@
             "function": "SMITHY",
             "key": "forge_hall",
             "roof": "BOW",
-            "triangles": 15214,
+            "triangles": 15358,
             "valid": true,
-            "vertices": 15124,
+            "vertices": 15220,
             "wall_thickness": 0.18
           }
         ],
         "errors": [],
         "objects": 34,
         "source_objects": 34,
-        "source_triangles": 15214,
-        "source_vertices": 15124,
-        "triangles": 15214,
+        "source_triangles": 15358,
+        "source_vertices": 15220,
+        "triangles": 15358,
         "valid": true
       },
       "backend": {
         "objects": 34,
-        "vertices": 15124,
+        "vertices": 15220,
         "width": 12.235000252723694,
         "depth": 20.045000076293945,
         "height": 9.624578356742859,
@@ -1331,7 +1408,46 @@
             "role": "fuel",
             "zone": "forge_hall"
           }
-        ]
+        ],
+        "ventilation": {
+          "duct": [
+            [
+              2.625,
+              3.5939999999999994,
+              4.180000000000001
+            ],
+            [
+              -1.05,
+              3.5939999999999994,
+              4.180000000000001
+            ]
+          ],
+          "hood_inlet": [
+            [
+              2.625,
+              3.5939999999999994,
+              1.7999999999999998
+            ],
+            [
+              2.625,
+              3.5939999999999994,
+              4.220000000000001
+            ]
+          ],
+          "scope": "Open geometric air path, not a draft or thermal simulation",
+          "stack": [
+            [
+              -1.05,
+              3.5939999999999994,
+              4.180000000000001
+            ],
+            [
+              -1.05,
+              3.5939999999999994,
+              5.61
+            ]
+          ]
+        }
       },
       "bounds": [
         [
@@ -1352,14 +1468,14 @@
       "function": "SMITHY",
       "region": "EMBERHOLT",
       "label": "Smithy",
-      "source_revision": "1286d07",
+      "source_revision": "8c76e5f",
       "source_sha256": {
         "__init__.py": "3d360cbfdd05522f158f79145f93b96c231ef06bd5854ee828c831760aeab8cd",
         "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
         "blender_manifest.toml": "e021854efaf3ad456fc9ab0d62b0ce81ebdc343e813a5fc71e7dc224ce2449b6",
         "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
         "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
-        "function_work.py": "b9b360f86ed3a039296bc47cdfb2bfe98407d364c938c4b6da316e3ae07c219c",
+        "function_work.py": "6721ccdc6e5ba6003a4a47148e9b7af691b7ad944542815128614ec42425a2fb",
         "functional.py": "98d7f5f4b7e33dc0ce8d598721f13d69cccef9aa470d31b8cb0c4f1067dd0529",
         "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
         "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
@@ -1407,7 +1523,7 @@
           "mode": "clay",
           "view": 0,
           "image": "individual/smithy/emberholt_clay_0.png",
-          "image_sha256": "2848340f7cab251a20bed71f6c0fd2acc38dd5e467417a19b5fe3db15063b0e0",
+          "image_sha256": "86599525dcad837cdf9aa4e844ae4c41d28900633bbafa16e94ebf5c2e1126f0",
           "width": 1024,
           "height": 704,
           "camera_direction": [
@@ -1418,21 +1534,21 @@
           "camera_location": [
             53.4127197265625,
             -63.05531692504883,
-            40.194175720214844
+            40.22917938232422
           ],
           "camera_target": [
             6.194999694824219,
             3.6050000190734863,
-            2.419999837875366
+            2.4549999237060547
           ],
           "ortho_scale": 29.7110107421875,
-          "elapsed_seconds": 0.3288
+          "elapsed_seconds": 0.4189
         },
         {
           "mode": "clay",
           "view": 1,
           "image": "individual/smithy/emberholt_clay_1.png",
-          "image_sha256": "fa9117c4aa2491b07361b5fc035ce577deb0ca1934635e557d1b32f221567b98",
+          "image_sha256": "92bf42e876136b88f97e6fc50dc548780228ecc84a1f289557786dcab982d1f8",
           "width": 1024,
           "height": 704,
           "camera_direction": [
@@ -1443,21 +1559,21 @@
           "camera_location": [
             -41.02272033691406,
             70.26531982421875,
-            40.194175720214844
+            40.22917938232422
           ],
           "camera_target": [
             6.194999694824219,
             3.6050000190734863,
-            2.419999837875366
+            2.4549999237060547
           ],
           "ortho_scale": 29.7110107421875,
-          "elapsed_seconds": 0.3249
+          "elapsed_seconds": 0.4054
         },
         {
           "mode": "material",
           "view": 0,
           "image": "individual/smithy/emberholt_material_0.png",
-          "image_sha256": "9d9a3e4b5990c7974fb21a39c953298a1c36bf6ab2628cbe4bbbc7dc7ce6049d",
+          "image_sha256": "62309d0bae4d5618a1c0db38314c08a1be81cdf9d1d02f0fd6a0e397de90a56b",
           "width": 1024,
           "height": 704,
           "camera_direction": [
@@ -1468,21 +1584,21 @@
           "camera_location": [
             53.4127197265625,
             -63.05531692504883,
-            40.194175720214844
+            40.22917938232422
           ],
           "camera_target": [
             6.194999694824219,
             3.6050000190734863,
-            2.419999837875366
+            2.4549999237060547
           ],
           "ortho_scale": 29.7110107421875,
-          "elapsed_seconds": 0.3277
+          "elapsed_seconds": 0.4133
         },
         {
           "mode": "material",
           "view": 1,
           "image": "individual/smithy/emberholt_material_1.png",
-          "image_sha256": "f1010e1fc30e8006f2939b307a30335515341219040a37a12a8da16e5bb3a7f4",
+          "image_sha256": "eee046b940e5db329c5abd2451a2eb22afae685222d8da474189e4a80c6bda1d",
           "width": 1024,
           "height": 704,
           "camera_direction": [
@@ -1493,19 +1609,19 @@
           "camera_location": [
             -41.02272033691406,
             70.26531982421875,
-            40.194175720214844
+            40.22917938232422
           ],
           "camera_target": [
             6.194999694824219,
             3.6050000190734863,
-            2.419999837875366
+            2.4549999237060547
           ],
           "ortho_scale": 29.7110107421875,
-          "elapsed_seconds": 0.3313
+          "elapsed_seconds": 0.4206
         }
       ],
-      "build_seconds": 0.271,
-      "geometry_hash": "732bdd2d7c1d4545c2701ac9cca025d0a5fd28af91b97a3611418c95bb05f455",
+      "build_seconds": 0.2381,
+      "geometry_hash": "474bde5fdc72590f0bfabf999f185b16da33319356e7e9e2114f0fb25ccc24e5",
       "validation": {
         "architecture": "WORLD",
         "construction_zones": [
@@ -1521,26 +1637,26 @@
             "function": "SMITHY",
             "key": "forge_hall",
             "roof": "TERRACE",
-            "triangles": 3644,
+            "triangles": 3788,
             "valid": true,
-            "vertices": 2550,
+            "vertices": 2646,
             "wall_thickness": 0.7
           }
         ],
         "errors": [],
         "objects": 34,
         "source_objects": 34,
-        "source_triangles": 3644,
-        "source_vertices": 2550,
-        "triangles": 3644,
+        "source_triangles": 3788,
+        "source_vertices": 2646,
+        "triangles": 3788,
         "valid": true
       },
       "backend": {
         "objects": 34,
-        "vertices": 2550,
+        "vertices": 2646,
         "width": 15.169999718666077,
         "depth": 11.210000038146973,
-        "height": 5.099999785423279,
+        "height": 5.169999957084656,
         "layers": [
           "details",
           "foundation",
@@ -1785,7 +1901,46 @@
             "role": "material_bay",
             "zone": "forge_hall"
           }
-        ]
+        ],
+        "ventilation": {
+          "duct": [
+            [
+              3.375,
+              3.9299999999999997,
+              3.1700000000000004
+            ],
+            [
+              -1.05,
+              3.9299999999999997,
+              3.1700000000000004
+            ]
+          ],
+          "hood_inlet": [
+            [
+              3.375,
+              3.9299999999999997,
+              0.97
+            ],
+            [
+              3.375,
+              3.9299999999999997,
+              3.2100000000000004
+            ]
+          ],
+          "scope": "Open geometric air path, not a draft or thermal simulation",
+          "stack": [
+            [
+              -1.05,
+              3.9299999999999997,
+              3.1700000000000004
+            ],
+            [
+              -1.05,
+              3.9299999999999997,
+              5.15
+            ]
+          ]
+        }
       },
       "bounds": [
         [
@@ -1798,7 +1953,7 @@
         ],
         [
           -0.12999999523162842,
-          4.96999979019165
+          5.039999961853027
         ]
       ]
     }

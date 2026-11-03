@@ -238,7 +238,46 @@
         "role": "material_bay",
         "zone": "forge_hall"
       }
-    ]
+    ],
+    "ventilation": {
+      "duct": [
+        [
+          3.375,
+          3.9299999999999997,
+          3.1700000000000004
+        ],
+        [
+          -1.05,
+          3.9299999999999997,
+          3.1700000000000004
+        ]
+      ],
+      "hood_inlet": [
+        [
+          3.375,
+          3.9299999999999997,
+          0.97
+        ],
+        [
+          3.375,
+          3.9299999999999997,
+          3.2100000000000004
+        ]
+      ],
+      "scope": "Open geometric air path, not a draft or thermal simulation",
+      "stack": [
+        [
+          -1.05,
+          3.9299999999999997,
+          3.1700000000000004
+        ],
+        [
+          -1.05,
+          3.9299999999999997,
+          5.15
+        ]
+      ]
+    }
   },
   "settings": {
     "age": 20.0,
@@ -279,9 +318,9 @@
       "function": "SMITHY",
       "key": "forge_hall",
       "roof": "TERRACE",
-      "triangles": 4058,
+      "triangles": 4202,
       "valid": true,
-      "vertices": 2878,
+      "vertices": 2974,
       "wall_thickness": 0.7
     }
   ],
@@ -299,18 +338,18 @@
         "function": "SMITHY",
         "key": "forge_hall",
         "roof": "TERRACE",
-        "triangles": 4058,
+        "triangles": 4202,
         "valid": true,
-        "vertices": 2878,
+        "vertices": 2974,
         "wall_thickness": 0.7
       }
     ],
     "source_objects": 34,
-    "source_triangles": 4058,
-    "source_vertices": 2878,
+    "source_triangles": 4202,
+    "source_vertices": 2974,
     "valid": true
   },
-  "source_geometry_hash": "b81678b11f04b73fedaa9e408dfe35b028964ea7b6c3efb625169b0084223397",
+  "source_geometry_hash": "152478a3aa980411db8f82771260ffa511bc95a2955e8b9edb1def58a0bc069f",
   "has_protected_buffers": false,
   "protected_buffer_count": 0,
   "units": "metres",

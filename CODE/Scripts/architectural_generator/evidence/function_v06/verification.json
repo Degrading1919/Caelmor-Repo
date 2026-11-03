@@ -2,17 +2,29 @@
   "valid": true,
   "manifest_source_revisions": [
     "1286d07",
+    "8c76e5f",
     "905e97b"
   ],
   "source_revisions_at_render": [
     "1286d07",
+    "8c76e5f",
     "905e97b"
   ],
   "retained_geometry_replays": [
     {
-      "function": "SMITHY",
+      "function": "MARKET_HALL",
       "region": "LOWMARK",
-      "source_revision_at_render": "905e97b",
+      "source_revision_at_render": "1286d07",
+      "geometry_matches_current": true,
+      "changed_source_files": [
+        "function_work.py"
+      ],
+      "material_and_studio_source_unchanged": true
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "THORNFELL",
+      "source_revision_at_render": "1286d07",
       "geometry_matches_current": true,
       "changed_source_files": [
         "function_work.py"
@@ -138,7 +150,7 @@
   "individual_images_verified": 64,
   "contact_sheets_verified": 4,
   "functional_manifest_sha256": {
-    "smithy.json": "f054a7e7fa6b046a76efa218b8d74db872645f67b96c40edeac36971ffd5124c",
+    "smithy.json": "e28bb143acd8f8ca58f310f7539bacbf1f2c7085fa7c4d13694fdc22cd529e65",
     "market_hall.json": "3300a4e14689a7aaa2c8d2d33840f8f27aaf6e2f8a1d0b475ccc5137a8a8efc2",
     "stable.json": "e09412ec65d7062080a2cfd1fdda64f8d4398229745ca2bd5d92a64893c74026",
     "gatehouse.json": "06b4f8ef1b18cf7685161fe95ef8822bd4f0a0611a661c68885af23f67d9b341"
@@ -151,7 +163,7 @@
         "blender_manifest.toml": "e021854efaf3ad456fc9ab0d62b0ce81ebdc343e813a5fc71e7dc224ce2449b6",
         "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
         "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
-        "function_work.py": "b9b360f86ed3a039296bc47cdfb2bfe98407d364c938c4b6da316e3ae07c219c",
+        "function_work.py": "6721ccdc6e5ba6003a4a47148e9b7af691b7ad944542815128614ec42425a2fb",
         "functional.py": "98d7f5f4b7e33dc0ce8d598721f13d69cccef9aa470d31b8cb0c4f1067dd0529",
         "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
         "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
@@ -244,7 +256,7 @@
     }
   },
   "contact_sheet_sha256": {
-    "contact_sheets/smithy.png": "1a19149cb5eb4e4f9750a54c79b43cbc7e4cf0e384d115614b816f20a5f228b1",
+    "contact_sheets/smithy.png": "afaff46da2a48f4eac062df88973a6fe3c41a64ed65de0c75b06a1df36c16462",
     "contact_sheets/market_hall.png": "d8fd85d81126a335941a06a1e7b4538dc0ae10365bd0b0d3b2446fdf1f04e447",
     "contact_sheets/stable.png": "415caa745e56349bee16822fa2dea2491085f8536d97df11c3d3d785afc526ac",
     "contact_sheets/gatehouse.png": "99131a39e0326f44950fa3fb83e74023f56716b0b4567ee26bb54c142c7bc7c6"
@@ -429,13 +441,13 @@
       "blender": "5.0.1"
     },
     "mesh_checks_smithy_market_hall.json": {
-      "check_file_sha256": "e64ba0284b339ae0493710857093829f7c7bf0392e8a29106baac1722ba552e9",
+      "check_file_sha256": "f4d0a4ee25596b0e59ae15e85b20f209abf79c4282fe22aa4c285181c5d61979",
       "source_sha256_at_check": {
         "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
         "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
         "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
         "functional.py": "98d7f5f4b7e33dc0ce8d598721f13d69cccef9aa470d31b8cb0c4f1067dd0529",
-        "function_work.py": "b9b360f86ed3a039296bc47cdfb2bfe98407d364c938c4b6da316e3ae07c219c",
+        "function_work.py": "6721ccdc6e5ba6003a4a47148e9b7af691b7ad944542815128614ec42425a2fb",
         "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
         "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
         "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
@@ -502,7 +514,7 @@
     "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
     "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
     "functional.py": "98d7f5f4b7e33dc0ce8d598721f13d69cccef9aa470d31b8cb0c4f1067dd0529",
-    "function_work.py": "b9b360f86ed3a039296bc47cdfb2bfe98407d364c938c4b6da316e3ae07c219c",
+    "function_work.py": "6721ccdc6e5ba6003a4a47148e9b7af691b7ad944542815128614ec42425a2fb",
     "function_yard.py": "6b2bc1fa856e9b2c90118cf71e5c8d30729fcc2bd8a64460e86e25888d6b721f",
     "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
     "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
@@ -515,11 +527,11 @@
     "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126",
     "__init__.py": "3d360cbfdd05522f158f79145f93b96c231ef06bd5854ee828c831760aeab8cd"
   },
-  "archive_sha256": "f3f17484f62bf6eb72202f2d9279cc1e292fa85bd81562bd3fb0470dd5b6f8b2",
+  "archive_sha256": "16acce0519d8c38225c18b40674658af5dad0ae59d74789f0626f76e5a6fbf5e",
   "archive_members_verified": 25,
   "package_report_sha256": {
-    "installed_extension.json": "ca167b83e4cc930a09bbea6be98aa07f3a8f9d6c9cc34233583668b92403921e",
-    "installed_legacy.json": "25be274e6edc1c2fddabaabc10792d0af17ddecc4db565ba1cb316b6795abee7"
+    "installed_extension.json": "f9c1617ebfc7c80b5fe7052471fa3eb53ff8db13d756942fb4639c1a2e49d7bb",
+    "installed_legacy.json": "f4be09b63aabe8ea1dbedfd30b31857ccb832f5e3e143e2a376dbc70fb0296eb"
   },
   "verification_source_sha256": "791f1018844200f0aab9e50d5830452b95e3c8bf2dd7669c13cf08cfd8ef4619",
   "composition_source_sha256": "281357daedaaa0106c3b5644e8664e6e48c3017c2021ad36613c503a8e2cfd60",
