@@ -49,6 +49,8 @@ Name the exact missing dependency and continue independent work where safe. Neve
 
 ## 3.1 Repository Retrieval Before File Requests
 
+GitHub is the sole repository authority for Caelmor. Use the designated working checkout and branch/PR workflow in the root `AGENTS.md`. Keep approved project artifacts and evidence in the repository at the File Manifest destinations. Treat local recovery copies, temporary outputs and external reference datasets as supporting material. Record provenance for external references.
+
 When a task references a file that is expected to exist in the Caelmor GitHub repository, assistants must first attempt to retrieve it from:
 
 `Degrading1919/Caelmor-Repo`
