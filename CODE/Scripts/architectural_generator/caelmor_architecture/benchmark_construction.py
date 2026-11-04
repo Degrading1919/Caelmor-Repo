@@ -51,14 +51,30 @@ def arch_ring(buffer,center,y0,y1,spring,radius,rise,thickness=.30,segments=16,s
         buffer.extrude(points,(0,y1-y0,0))
 
 
-def smithy_range(b,main):
+def smithy_range(b,main,profile=None):
     """An accreted, lower stock range and legible primary timber bent."""
     ctx=b.ctx;z=main.base;d=main.depth
-    stock=b.mass('smithy_stock_range',x=5.6,y=0,width=4.0,depth=d,
-                 floor_height=2.55,roof='SHED',roof_axis='Y',shed_reverse=True,
-                 pitch=12,overhang=.18,open_edges=[0,3],openings='NONE',
-                 frame_visibility=0.,construction='BOARD',
-                 open_access=[{'edge_index':0,'s0':.55,'s1':3.2,'height':2.25}])
+    if profile is None:
+        stock_x,stock_y,stock_w,stock_d=5.6,0.,4.0,d
+        stock=b.mass('smithy_stock_range',x=stock_x,y=stock_y,width=stock_w,depth=stock_d,
+                     floor_height=2.55,roof='SHED',roof_axis='Y',shed_reverse=True,
+                     pitch=12,overhang=.18,open_edges=[0,3],openings='NONE',
+                     frame_visibility=0.,construction='BOARD',
+                     open_access=[{'edge_index':0,'s0':.55,'s1':3.2,'height':2.25}])
+    else:
+        stock_x=main.width
+        stock_y=profile['stock_setback']
+        stock_w=profile['stock_width']
+        stock_d=d-stock_y
+        stock_roof=profile['stock_roof']
+        stock=b.mass('smithy_stock_range',x=stock_x,y=stock_y,width=stock_w,depth=stock_d,
+            floor_height=profile['stock_floor_height'],roof=stock_roof,
+                     roof_axis='X' if stock_roof=='GABLE' else 'Y',
+                     shed_reverse=stock_roof=='SHED',
+                     pitch=profile['stock_pitch'],overhang=.18,open_edges=[0,3],openings='NONE',
+                     frame_visibility=0.,construction='BOARD',
+                     open_access=[{'edge_index':0,'s0':.55,
+                                   's1':min(3.2,stock_w-.55),'height':2.25}])
     frame=ctx.buffer('smithy.primary_end_bent','timber','structure',main)
     frame.structural_role='pegged_primary_bent'
     for y in (.22,d-.24):
@@ -70,7 +86,7 @@ def smithy_range(b,main):
         ridge=main.width*.5;peak=main.roof_height(ridge,y)-.42
         frame.beam((ridge,y,top),(ridge,y,peak),.18,.18)
         for x in xs:
-            if ctx.settings.crafted_curves:
+            if ctx.settings.crafted_curves and getattr(main.plan,'custom_roof_sources',None):
                 cuts={u for patch in main.plan.custom_roof_sources for u,_ in patch.poly
                       if min(x,ridge)<u<max(x,ridge)}
                 stations=[x,*sorted(cuts,reverse=x>ridge),ridge]
@@ -83,7 +99,7 @@ def smithy_range(b,main):
         # above the declared human route, with real bearing at both ends.
         knees=ctx.buffer('smithy.tie_knees.'+('front' if y<d*.5 else 'rear'),'timber','structure',main)
         for x,sign in ((xs[0],1),(xs[1],-1)):
-            if ctx.settings.crafted_curves:
+            if ctx.settings.crafted_curves and getattr(main.plan,'custom_roof_sources',None):
                 hew=ctx.rng(f'smithy.knee.{y}.{sign}').uniform(-.045,.045)
                 centers=cubic_centers((x,y,top-.84),(x+sign*.24,y,top-.58+hew),
                                       (x+sign*.50,y,top-.21+hew),(x+sign*.91,y,top-.14))
@@ -101,15 +117,25 @@ def smithy_range(b,main):
         h=main.roof_height(x,.22)-.42
         frame.beam((x,.22,h),(x,d-.24,h),.18,.22)
     stock_frame=ctx.buffer('smithy.stock_bents','timber','structure',stock)
-    for y in (.22,d-.24):
-        for x in (5.82,9.38):
+    stock_bents=(.22,d-.24) if profile is None else (
+        stock_y+.22,
+        *((stock_y+stock_d*.5,) if profile['extra_stock_bent'] else ()),
+        stock_y+stock_d-.24)
+    for y in stock_bents:
+        for x in ((5.82,9.38) if profile is None else
+                  (stock_x+.22,stock_x+stock_w-.22)):
             top=stock.roof_height(x,y)-.30
             stock_frame.chamfered_beam((x,y,z),(x,y,top),.26,.26)
-        stock_frame.beam((5.82,y,stock.roof_height(5.82,y)-.30),
-                         (9.38,y,stock.roof_height(9.38,y)-.30),.26,.28)
-    for x in (5.82,9.38):
-        top=stock.roof_height(x,.22)-.30
-        stock_frame.beam((x,.22,top),(x,d-.24,top),.18,.22)
+        xa,xb=((5.82,9.38) if profile is None else
+               (stock_x+.22,stock_x+stock_w-.22))
+        stock_frame.beam((xa,y,stock.roof_height(xa,y)-.30),
+                         (xb,y,stock.roof_height(xb,y)-.30),.26,.28)
+    for x in ((5.82,9.38) if profile is None else
+              (stock_x+.22,stock_x+stock_w-.22)):
+        y0,y1=((.22,d-.24) if profile is None else
+               (stock_y+.22,stock_y+stock_d-.24))
+        top=stock.roof_height(x,y0)-.30
+        stock_frame.beam((x,y0,top),(x,y1,top),.18,.22)
     feet=ctx.buffer('smithy.post_stone_shoes','stone','foundation',main)
     for y in (.22,d-.24):
         for x in (.24,main.width-.24):
@@ -157,29 +183,45 @@ def smithy_range(b,main):
         stone.box((sx+side*.395,sy,top+.07),(.21,1.0,.14))
         stone.box((sx,sy+side*.395,top+.07),(.58,.21,.14))
     bench=b.fixture('smithy.stock_bench','timber',stock,'workbench')
-    for x in (6.1,8.4):
-        for y in (d-.62,d-.18):bench.box((x,y,z+.43),(.12,.12,.86))
-    bench.box((7.25,d-.4,z+.91),(2.65,.70,.12))
-    bench.box((7.25,d-.4,z+.25),(2.45,.54,.08))
+    bench_xs=(6.1,8.4) if profile is None else (stock_x+stock_w*.13,stock_x+stock_w*.70)
+    bench_y= d-.4 if profile is None else stock_y+stock_d-.4
+    for x in bench_xs:
+        for y in ((d-.62,d-.18) if profile is None else
+                  (stock_y+stock_d-.62,stock_y+stock_d-.18)):
+            bench.box((x,y,z+.43),(.12,.12,.86))
+    bench_center=7.25 if profile is None else sum(bench_xs)*.5
+    bench_width=2.65 if profile is None else max(1.6,bench_xs[1]-bench_xs[0]+.35)
+    bench.box((bench_center,bench_y,z+.91),(bench_width,.70,.12))
+    bench.box((bench_center,bench_y,z+.25),(bench_width-.20,.54,.08))
     stock_iron=b.fixture('smithy.stock_and_tools','iron',stock,'stock')
     for i in range(5):
-        x=6.2+i*.42
-        stock_iron.beam((x,d-.35,z+.99),(x,d-.35,z+1.45+(i%2)*.12),.035,.035)
-        stock_iron.box((x,d-.35,z+1.47+(i%2)*.12),(.23,.09,.08))
+        x=6.2+i*.42 if profile is None else stock_x+stock_w*(.14+i*.14)
+        tool_y=d-.35 if profile is None else stock_y+stock_d-.35
+        stock_iron.beam((x,tool_y,z+.99),(x,tool_y,z+1.45+(i%2)*.12),.035,.035)
+        stock_iron.box((x,tool_y,z+1.47+(i%2)*.12),(.23,.09,.08))
     # One wheel being repaired, stored beside the dry work range, conveys
     # agricultural/cart work without a general furnishing catalog.
     wheel=b.fixture('smithy.repair_wheel','timber',stock,'repair_work')
     ring=b.fixture('smithy.repair_wheel_tyre','iron',stock,'repair_work')
-    cy,cz=1.55,z+.68
+    wheel_x=9.22 if profile is None else stock_x+stock_w-.38
+    cy,cz=(1.55,z+.68) if profile is None else (stock_y+stock_d*.30,z+.68)
     for i in range(16):
         a=2*math.pi*i/16;c=2*math.pi*(i+1)/16
-        p=(9.22,cy+.65*math.cos(a),cz+.65*math.sin(a))
-        q=(9.22,cy+.65*math.cos(c),cz+.65*math.sin(c))
-        wheel.beam(p,q,.075,.085);ring.beam((9.27,p[1],p[2]),(9.27,q[1],q[2]),.035,.04)
+        if profile is None:
+            p=(9.22,cy+.65*math.cos(a),cz+.65*math.sin(a))
+            q=(9.22,cy+.65*math.cos(c),cz+.65*math.sin(c))
+            ring_x=9.27
+        else:
+            p=(wheel_x,cy+.65*math.cos(a),cz+.65*math.sin(a))
+            q=(wheel_x,cy+.65*math.cos(c),cz+.65*math.sin(c))
+            ring_x=wheel_x+.05
+        wheel.beam(p,q,.075,.085);ring.beam((ring_x,p[1],p[2]),(ring_x,q[1],q[2]),.035,.04)
     for i in range(8):
         a=2*math.pi*i/8
-        wheel.beam((9.22,cy,cz),(9.22,cy+.62*math.cos(a),cz+.62*math.sin(a)),.045,.055)
-    wheel.cylinder((9.10,cy,cz),(9.35,cy,cz),.13,8)
+        spoke_x=9.22 if profile is None else wheel_x
+        wheel.beam((spoke_x,cy,cz),(spoke_x,cy+.62*math.cos(a),cz+.62*math.sin(a)),.045,.055)
+    hub_bounds=((9.10,9.35) if profile is None else (wheel_x-.12,wheel_x+.13))
+    wheel.cylinder((hub_bounds[0],cy,cz),(hub_bounds[1],cy,cz),.13,8)
     steps=ctx.buffer('smithy.workfront_threshold','stone','foundation',main)
     steps.box((2.4,-.40,.085),(4.2,.40,.17))
     steps.box((2.4,-.15,.135),(4.2,.30,.27))

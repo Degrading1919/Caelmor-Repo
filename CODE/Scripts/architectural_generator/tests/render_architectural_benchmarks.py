@@ -62,12 +62,13 @@ def source_hashes():
     return {p.relative_to(base).as_posix():sha(p) for p in sorted(base.rglob('*'))
             if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.pyc'}
 
-def frame_test(camera,bounds,target):
+def frame_test(camera,bounds,target,vertices=None):
     aspect=WIDTH/HEIGHT
     q=camera.rotation_euler.to_quaternion()
     inverse=q.inverted()
-    projected=[inverse@(Vector((x,y,z))-Vector(target)) for x in bounds[0]
-               for y in bounds[1] for z in bounds[2]]
+    if vertices is None:
+        vertices=((x,y,z) for x in bounds[0] for y in bounds[1] for z in bounds[2])
+    projected=[inverse@(Vector(vertex)-Vector(target)) for vertex in vertices]
     half_width=camera.data.ortho_scale*.5
     half_height=half_width/aspect
     pad=.985

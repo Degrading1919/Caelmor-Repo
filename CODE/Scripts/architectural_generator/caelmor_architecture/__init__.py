@@ -2,7 +2,7 @@
 bl_info = {
     "name": "Caelmor Architectural Generator",
     "author": "Caelmor",
-    "version": (0, 11, 0),
+    "version": (0, 12, 0),
     "blender": (4, 2, 0),
     "location": "View3D > Sidebar > Caelmor",
     "description": "Generate editable regional Caelmor buildings",
@@ -71,6 +71,7 @@ def _settings_from_props(props):
         geometry_mode=props.caelm_geometry_mode,
         world_aware=props.caelm_world_aware,
         crafted_curves=props.caelm_crafted_curves,
+        seed_massing=props.caelm_seed_massing,
     )
 
 
@@ -99,6 +100,7 @@ def _set_props(props, settings):
     props.caelm_geometry_mode = settings.geometry_mode
     props.caelm_world_aware = settings.world_aware
     props.caelm_crafted_curves = settings.crafted_curves
+    props.caelm_seed_massing = settings.seed_massing
 
 
 def _active_build(context):
@@ -160,7 +162,10 @@ def _make_classes(b):
             description="Arrange regional structural forms as roofed construction volumes")
         caelm_crafted_curves: b.props.BoolProperty(
             name="Crafted Curves", default=True,
-            description="Use swept Lowmark smithy roofs and joinery, taller Thornfell gate vaults, and continuous Mire bow ribs")
+            description="Allow swept Lowmark Smithy roofs and joinery, taller Thornfell gate vaults, and continuous Mire bow ribs")
+        caelm_seed_massing: b.props.BoolProperty(
+            name="Seed Changes Layout", default=True,
+            description="Vary massing and roof forms by seed for the Lowmark Smithy and Thornfell Gatehouse")
         caelm_roof_style: b.props.EnumProperty(name="Roof Style", items=[
             ('AUTO', "Regional / Type Default", "Select a suitable roof by type and region"),
             ('GABLE', "Gable", "Gabled roof"), ('HIP', "Hip", "Hipped roof")], default='AUTO')
@@ -330,6 +335,9 @@ def _make_classes(b):
             curve_row = regional.row()
             curve_row.enabled = p.caelm_world_aware
             curve_row.prop(p, "caelm_crafted_curves")
+            if p.caelm_world_aware and (p.caelm_region, p.caelm_function) in (
+                    ('LOWMARK', 'SMITHY'), ('THORNFELL', 'GATEHOUSE')):
+                regional.prop(p, "caelm_seed_massing")
             roof_row = regional.row()
             roof_row.enabled = not p.caelm_world_aware
             roof_row.prop(p, "caelm_roof_style")

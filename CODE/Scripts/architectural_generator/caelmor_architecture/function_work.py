@@ -265,6 +265,40 @@ def _smithy_bay_frame(builder, mass, x0, x1, y0, y1, material):
 def build_smithy(ctx):
     """Build one serviceable forge with separated hot work and handling lanes."""
     b = Builder(ctx, "SMITHY")
+    seed_profile = None
+    if b.region == "LOWMARK" and getattr(b.settings, "seed_massing", False):
+        # Seed the architectural arrangement independently from surface and
+        # furnishing variation. Service stations stay anchored in the forge;
+        # only the hall shell and the dry stock range change shape.
+        capacity = ctx.rng("smithy.stock_capacity").random()
+        site_width = ctx.rng("smithy.site_width").random()
+        weather = ctx.rng("smithy.weather").random()
+        growth = ctx.rng("smithy.growth").random()
+        hall_width = round(5.4+site_width*1.2, 2)
+        depth = round(4.9+(1.0-growth)*.9, 2)
+        # A taller forge bay carries its smoke hood and leaves a useful roof
+        # shoulder above the lower stock range at their shared eaves.
+        floor_height = round(3.8+site_width*.4, 2)
+        pitch = round(30.0+weather*8.0, 1)
+        stock_width = round(3.8+capacity, 2)
+        stock_setback = round(.18+growth*.87, 2)
+        # Larger stock needs a second bent and the independent cross-gable;
+        # narrow, accreted ranges retain the outward-draining shed roof.
+        extra_stock_bent = stock_width >= 4.30 and depth-stock_setback >= 4.5
+        stock_roof = ("GABLE" if capacity > .5 or growth < .25 else "SHED")
+        stock_pitch = round(10.0+capacity, 1)
+        sweep = (round(.28+weather*.06, 3)
+                 if b.settings.crafted_curves and weather < .6 else 0.0)
+        seed_profile = {
+            "hall_width": hall_width, "depth": depth,
+            "floor_height": floor_height, "pitch": pitch,
+            "stock_width": stock_width, "stock_setback": stock_setback,
+            "stock_roof": stock_roof, "stock_pitch": stock_pitch,
+            "stock_floor_height": 2.55,
+            "extra_stock_bent": extra_stock_bent,
+            "swept_eaves": sweep,
+        }
+
     if b.region == "LOWMARK":
         w,d,floor_height=9.6,5.2,3.6
     elif b.region == "THORNFELL":
@@ -276,14 +310,23 @@ def build_smithy(ctx):
     else:
         w,d,floor_height=max(8.4,b.settings.width),max(7.2,b.settings.depth),2.8
     region = _enum(b.region)
+    if seed_profile is not None:
+        d = seed_profile["depth"]
+        floor_height = seed_profile["floor_height"]
     # Lowmark's front and sides open to the hot work apron; the rear wall closes
     # against weather. Other regions retain their wind-sheltered rear vent.
     if region == "LOWMARK":
         rear_open = [0,1,3]
-        open_access = [
-            {"edge_index":0,"s0":.55,"s1":4.3,"height":3.0},
-            {"edge_index":0,"s0":5.3,"s1":8.9,"height":3.0},
-        ]
+        if seed_profile is None:
+            open_access = [
+                {"edge_index":0,"s0":.55,"s1":4.3,"height":3.0},
+                {"edge_index":0,"s0":5.3,"s1":8.9,"height":3.0},
+            ]
+        else:
+            # Reserve one broad, in-bounds working frontage for the hot bay.
+            open_access = [{"edge_index":0,"s0":.55,
+                            "s1":min(4.3,seed_profile["hall_width"]-.30),
+                            "height":3.0}]
     elif region == "THORNFELL":
         rear_open=[0,3]
         vent_station=d*.42+.15
@@ -312,12 +355,19 @@ def build_smithy(ctx):
         rear_open = []
         open_access = [{"edge_index": 2, "s0": w*.45, "s1": w*.55,
                         "height": 2.95}]
-    sweep = (b.ctx.rng('smithy.eaves').uniform(.28,.34)
-             if region == 'LOWMARK' and b.settings.crafted_curves else 0.)
-    mass = b.mass("forge_hall", x=0, y=0, width=5.6 if region=='LOWMARK' else w, depth=d,
+    if seed_profile is None:
+        sweep = (b.ctx.rng('smithy.eaves').uniform(.28,.34)
+                 if region == 'LOWMARK' and b.settings.crafted_curves else 0.)
+        hall_width = 5.6 if region == 'LOWMARK' else w
+        mass_pitch = 32 if region == "LOWMARK" else b.pitch
+    else:
+        sweep = seed_profile["swept_eaves"]
+        hall_width = seed_profile["hall_width"]
+        mass_pitch = seed_profile["pitch"]
+    mass = b.mass("forge_hall", x=0, y=0, width=hall_width if region=='LOWMARK' else w, depth=d,
                    floors=1, floor_height=floor_height, openings="NONE", entrance_edge=0,
                    roof=b.roof,roof_axis='Y' if region=='LOWMARK' else 'X',
-                   pitch=32 if region=="LOWMARK" else b.pitch,
+                   pitch=mass_pitch,
                    open_edges=rear_open, open_access=open_access,
                    overhang=.42 if region == "LOWMARK" else .28,
                    frame_visibility=0. if region=='LOWMARK' else None,swept_eaves=sweep)
@@ -326,9 +376,22 @@ def build_smithy(ctx):
         b.deck("smithy.work_apron",[(.2,-1.35),(4.9,-1.35),(4.9,0),(.2,0)],
                z=.04,material="stone",zone=mass)
         b.route("smithy.apron_clearance",(.2,-1.35,0,4.9,0,mass.base+.1),kind="human")
-        b.ramp("smithy.material_ramp",(7.1,-2.0),(7.1,0),2.4,mass.base,
-               zone=mass,material="stone")
-        b.route("forge_material_lane", (6.2,.15,mass.base,8.2,d-.75,mass.base+2.05), kind="material")
+        if seed_profile is None:
+            b.ramp("smithy.material_ramp",(7.1,-2.0),(7.1,0),2.4,mass.base,
+                   zone=mass,material="stone")
+            b.route("forge_material_lane", (6.2,.15,mass.base,8.2,d-.75,mass.base+2.05), kind="material")
+        else:
+            stock_x=hall_width
+            stock_y=seed_profile["stock_setback"]
+            ramp_x=stock_x+1.0
+            lane_y1=stock_y+(d-stock_y)-.75
+            b.ramp("smithy.material_ramp",(ramp_x,-2.0),(ramp_x,stock_y),1.4,mass.base,
+                   zone=mass,material="stone")
+            b.route("smithy.material_ramp_clearance",
+                    (ramp_x-.7,-2.0,0,ramp_x+.7,stock_y,mass.base+.1),kind="material")
+            b.route("forge_material_lane",
+                    (stock_x+.30,stock_y+.15,mass.base,stock_x+1.70,lane_y1,mass.base+2.05),
+                    kind="material")
     elif region == "THORNFELL":
         wall_clear=mass.plan.wall_thickness+.15
         lane_x1=w-wall_clear
@@ -457,7 +520,7 @@ def build_smithy(ctx):
                   (x,d-.12,mass.base),(x,d-.12,post_top),.20,.20,mass)
     if region=='LOWMARK':
         from .benchmark_construction import smithy_range
-        smithy_range(b,mass)
+        smithy_range(b,mass,seed_profile)
     b.finish()
 
 

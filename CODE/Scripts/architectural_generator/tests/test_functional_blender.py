@@ -5,6 +5,8 @@ import os
 from pathlib import Path
 import sys
 import unittest
+from contextlib import nullcontext
+from unittest.mock import patch
 
 import bpy
 from mathutils import Vector
@@ -36,13 +38,19 @@ class FunctionalMeshTests(unittest.TestCase):
         if os.environ.get('CAELM_FUNCTION_PILOT'):
             cases=list(zip(FUNCTIONS,REGIONS))
         reports=[]
-        for function,region in cases:
-            with self.subTest(function=function,region=region):
+        geometry_only=os.environ.get('CAELM_GEOMETRY_ONLY')=='1'
+        seeds=tuple(int(seed) for seed in os.environ.get('CAELM_SEEDS','91').split(','))
+        for function,region,seed in ((f,r,s) for f,r in cases for s in seeds):
+            with self.subTest(function=function,region=region,seed=seed):
                 bpy.ops.wm.read_factory_settings(use_empty=True)
-                settings=Settings(function=function,region=region,seed=91,detail='MEDIUM',
+                settings=Settings(function=function,region=region,seed=seed,detail='MEDIUM',
                                   geometry_mode='EFFICIENT',use_grammar=True,world_aware=True,
-                                  crafted_curves=os.environ.get('CAELM_CRAFTED_CURVES')=='1')
-                collection,_=build(settings)
+                                  crafted_curves=os.environ.get('CAELM_CRAFTED_CURVES')=='1',
+                                  seed_massing=os.environ.get('CAELM_SEED_MASSING')=='1')
+                atlas = (patch('caelmor_architecture.surface_atlas.apply_surfaces', return_value=[])
+                         if geometry_only else nullcontext())
+                with atlas:
+                    collection,_=build(settings)
                 bpy.context.view_layer.update()
                 program=json.loads(collection['caelm_functional_program'])
                 floor=min(r['base'] for r in program['rooms'])
@@ -121,7 +129,7 @@ class FunctionalMeshTests(unittest.TestCase):
                                   if tree.ray_cast(start,Vector((0,1,0)),y1-y0+1.2)[0] is not None]
                             self.assertEqual(not hits,clear,(offset,hits[:5]))
                             arch_probes+=1
-                reports.append({'function':function,'region':region,'clearance_rays':rays,
+                reports.append({'function':function,'region':region,'seed':seed,'clearance_rays':rays,
                                 'stair_headroom_rays':stair_probes,
                                 'arch_aperture_rays':arch_probes,
                                 'exhaust_path_rays':process_rays,
@@ -139,7 +147,7 @@ class FunctionalMeshTests(unittest.TestCase):
         if selected!=['']:name='mesh_checks_'+'_'.join(f.lower() for f in selected)+'.json'
         if os.environ.get('CAELM_CASES'):name='benchmark_mesh_checks.json'
         (out/name).write_text(json.dumps({'blender':bpy.app.version_string,'source_sha256':source,
-            'cases':reports,'scope':'Actual BVH clearance rays include exported wall/floor proxies. Glazing intersections include structure and all integral functional fixtures, including detail-layer pieces. Closed service door leaves are omitted from circulation probes; this is not runtime traversal or exhaustive solid intersection.'},indent=2)+'\n')
+            'cases':reports,'surface_atlas_baked':not geometry_only,'scope':'Actual BVH clearance rays include exported wall/floor proxies. Glazing intersections include structure and all integral functional fixtures, including detail-layer pieces. Closed service door leaves are omitted from circulation probes; this is not runtime traversal or exhaustive solid intersection.'},indent=2)+'\n')
 
 
 if __name__=='__main__':

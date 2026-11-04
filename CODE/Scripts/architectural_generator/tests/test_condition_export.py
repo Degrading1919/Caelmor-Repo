@@ -562,7 +562,8 @@ def run_case(function, region):
         shader(legacy).inputs["Base Color"].default_value = legacy_color
     settings = Settings(function=function, region=region, seed=91, world_aware=True,
                         use_grammar=True, detail="MEDIUM", geometry_mode="EFFICIENT",
-                        crafted_curves=os.environ.get("CAELM_CRAFTED_CURVES") == "1")
+                        crafted_curves=os.environ.get("CAELM_CRAFTED_CURVES") == "1",
+                        seed_massing=os.environ.get("CAELM_SEED_MASSING") == "1")
     plan, buffers = generate(settings)
     expected = geometry_hash(buffers)
     collection, _ = build(settings)

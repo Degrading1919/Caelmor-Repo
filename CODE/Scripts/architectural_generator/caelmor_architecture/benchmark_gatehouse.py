@@ -81,18 +81,68 @@ def _tower_openings(width,depth,base,outer_edge):
     return schedule
 
 
+def _pass_layout(ctx, tower_width):
+    """Size the pass and roof the guard rooms according to sightline and exposure."""
+    road_width=ctx.rng('gatehouse.halls').random()
+    watch=ctx.rng('gatehouse.watch').random()
+    exposed=ctx.rng('gatehouse.wind').random()
+    lead=ctx.rng('gatehouse.lead').random()
+    # A broader road needs both a wider throat and masonry shoulders.
+    throat=2.7+.75*road_width
+    core_width=throat+2.0
+    core_pitch=28.+10.*road_width
+    core_height=3.67+.37*road_width
+    paired=watch<=.14 or .30<=watch<=.70
+    # Along the party line a tall watch wing needs the portal eave to
+    # stay between the two wing eaves. A transverse ridge would cross it.
+    core_roof='HIP' if paired and exposed<.12 else 'GABLE'
+    core_axis='Y' if not paired or road_width>.78 else 'X'
+    lookout=0 if lead<.18 else 1
+    wings=[]
+    for side in (0,1):
+        high_watch=not paired and side==lookout
+        if paired:
+            width=tower_width*(.87+.20*road_width)
+            front=-1.24-.88*exposed
+            # Hold the gallery opening under its full casing and eaves.
+            height=min(3.34+.25*watch,core_height-.32)
+            roof='GABLE' if exposed<.12 else 'HIP'
+            pitch=42. if roof=='GABLE' else 29.+10.*watch
+        else:
+            width=tower_width*(1.04 if high_watch else .88)
+            front=-2.55 if high_watch else -1.20
+            height=4.38 if high_watch else 3.34
+            roof='GABLE' if high_watch and exposed>.38 else 'HIP'
+            pitch=47. if high_watch else 31.
+        wings.append((width,front,height,roof,pitch))
+    return core_width, throat, (core_roof,core_axis,core_pitch,core_height), wings
+
+
 def build(ctx):
     from .function_yard import _stair_to_guard_floor
     b=Builder(ctx,'GATEHOUSE');base=b.base
     upper=base+3.92;link_y=4.05
     wealth=b.settings.wealth
+    diverse=b.settings.seed_massing
     tower_width={'MODEST':5.4,'ESTABLISHED':5.8,'AFFLUENT':6.2}[wealth]
-    core_width=4.8;depth=8.4;tower_depth=6.8;front=-1.8
-    cx=tower_width+core_width*.5;total=2*tower_width+core_width
+    core_width=4.8;depth=8.4;front=-1.8
+    throat=2.8
+    core_roof,core_axis,core_pitch,core_height='GABLE','Y',32,3.8
+    wings=[(tower_width,front,3.5,'HIP',38)]*2
+    if diverse:
+        core_width,throat,core_spec,wings=_pass_layout(ctx,tower_width)
+        core_roof,core_axis,core_pitch,core_height=core_spec
+    west_width,east_width=wings[0][0],wings[1][0]
+    east_x=west_width+core_width
+    cx=west_width+core_width*.5;total=east_x+east_width
+    radius=throat*.5
+    grille_span=throat-.24 if diverse else 2.56
+    threshold_width=throat-.20 if diverse else 2.6
+    paving_width=throat/5-.02 if diverse else .54
     core_schedule={0:[],1:[],2:[],3:[]}
     for edge in (0,2):
         core_schedule[edge].append(dict(kind='door',role='passage_entry' if edge==0 else 'passage_exit',
-            s0=core_width*.5-1.4,s1=core_width*.5+1.4,z0=base-.02,z1=base+3.5))
+            s0=core_width*.5-radius,s1=core_width*.5+radius,z0=base-.02,z1=base+3.5))
     core_schedule[0].append(dict(kind='vent',role='portcullis_slot',s0=core_width*.5-.75,
         s1=core_width*.5+.75,z0=base+4.10,z1=base+5.40))
     core_schedule[2].append(dict(kind='window',s0=core_width*.5-.48,
@@ -104,25 +154,28 @@ def build(ctx):
     arch_spec={'spring':2.90,'rise':rise}
     if b.settings.crafted_curves:
         arch_spec['stations']=voussoir_stations(16,ctx.rng('gatehouse.voussoir_bond').uniform(0,tau))
-    core=b.mass('gatehouse_portal',x=tower_width,width=core_width,depth=depth,
-        floors=2,floor_height=3.8,function='GATEHOUSE',roof='GABLE',roof_axis='Y',pitch=32,
+    core=b.mass('gatehouse_portal',x=west_width,width=core_width,depth=depth,
+        floors=2,floor_height=core_height,function='GATEHOUSE',roof=core_roof,
+        roof_axis=core_axis,pitch=core_pitch,
         overhang=.25,openings='NARROW',
         passage_arch=arch_spec,aperture_schedule=core_schedule)
     towers=[]
-    for side,x,inner,outer in (('west',0.,1,3),('east',tower_width+core_width,3,1)):
-        schedule=_tower_openings(tower_width,tower_depth,base,outer)
+    for (side,x,inner,outer), (width,front,height,roof,pitch) in zip(
+            (('west',0.,1,3),('east',east_x,3,1)),wings):
+        tower_depth=5.0-front
+        schedule=_tower_openings(width,tower_depth,base,outer)
         station=link_y-front if inner==1 else front+tower_depth-link_y
         schedule[inner]=[dict(kind='door',role='gallery_access',s0=station-.55,
             s1=station+.55,z0=upper,z1=upper+2.05)]
-        owner=b.mass('gatehouse_'+side+'_watchtower',x=x,y=front,width=tower_width,
-            depth=tower_depth,floors=2,floor_height=3.5,function='WATCHTOWER',
-            roof='HIP',pitch=38,overhang=.25,entrance_edge=2,openings='NARROW',
+        owner=b.mass('gatehouse_'+side+'_watchtower',x=x,y=front,width=width,
+            depth=tower_depth,floors=2,floor_height=height,function='WATCHTOWER',
+            roof=roof,roof_axis='Y' if roof=='GABLE' else 'X',pitch=pitch,overhang=.25,entrance_edge=2,openings='NARROW',
             aperture_schedule=schedule)
         towers.append(owner)
-    x0,x1=cx-1.4,cx+1.4;spring=base+2.90
+    x0,x1=cx-radius,cx+radius;spring=base+2.90
     b.route('gatehouse_open_through_passage',(x0,0,base,x1,depth,spring),kind='human')
     # True side-wall gate pockets keep open leaves outside the clear rectangle.
-    for side,a,c,inner in (('west',tower_width,x0,x0),('east',x1,tower_width+core_width,x1)):
+    for side,a,c,inner in (('west',west_width,x0,x0),('east',x1,east_x,x1)):
         wall=b.fixture('gatehouse.passage_cheek.'+side,'stone',core,'passage_wall')
         for ya,yb in ((0.,.48),(2.2,depth)):
             wall.box(((a+c)*.5,(ya+yb)*.5,(base+spring)*.5),(c-a,yb-ya,spring-base))
@@ -135,7 +188,7 @@ def build(ctx):
         straps=b.fixture('gatehouse.leaf_straps.'+side,'iron',core,'gate_leaf')
         for zz in (.42,1.20,2.18):straps.box((lx,1.34,base+zz),(.11,1.52,.055))
     vault=b.fixture('gatehouse.vaulted_passage','stone_light',core,'vault')
-    arch_ring(vault,cx,.16,depth-.16,spring,1.4,rise,.26,stations=arch_spec.get('stations'))
+    arch_ring(vault,cx,.16,depth-.16,spring,radius,rise,.26,stations=arch_spec.get('stations'))
     flare=.24 if b.settings.crafted_curves else 0.
     projection=.51 if flare else .34
     for face,wall_y,sign in (('front',0.,-1),('rear',depth,1)):
@@ -143,7 +196,7 @@ def build(ctx):
                          (wall_y-sign*.16,0.)))
         ya,yb=sections[0][0],sections[-1][0]
         arch=b.fixture('gatehouse.portal_arch.'+face,'stone_light',core,'structure')
-        arch_ring(arch,cx,ya,yb,spring,1.4,rise,.34 if flare else .30,
+        arch_ring(arch,cx,ya,yb,spring,radius,rise,.34 if flare else .30,
                   stations=arch_spec.get('stations'),sections=sections if flare else None)
         for side,xa,xb in (('west',x0-.42,x0),('east',x1,x1+.42)):
             jamb=b.fixture('gatehouse.portal_jamb.'+face+'.'+side,'stone_light',core,'structure')
@@ -164,9 +217,9 @@ def build(ctx):
     iron=b.fixture('gatehouse.portcullis','iron',core,'defense')
     bar_bottom=3.56+(rise-.60)
     for j in range(9):
-        x=x0+.12+j*2.56/8
+        x=x0+.12+j*grille_span/8
         iron.beam((x,.07,base+bar_bottom),(x,.07,base+5.32),.045,.055)
-    for z in (3.68+(rise-.60),4.38,5.18):iron.box((cx,.07,base+z),(2.8,.08,.055))
+    for z in (3.68+(rise-.60),4.38,5.18):iron.box((cx,.07,base+z),(throat,.08,.055))
     iron.cylinder((cx-.62,.20,base+4.80),(cx+.62,.20,base+4.80),.13,10)
     for x in (x0-.07,x1+.07):iron.beam((x,.10,base+.12),(x,.10,base+4.65),.065,.065)
     for side,owner in zip(('west','east'),towers):
@@ -182,11 +235,20 @@ def build(ctx):
         # masonry work; the mass stays squat and unornamented above them.
         _battered_courses(b,side,owner)
         corners=b.fixture('gatehouse.'+side+'_bonded_quoins','stone_light',owner,'structure')
-        for row in range(17):
+        rows=int((owner.eave-base)/.40) if diverse else 17
+        for row in range(rows):
             z=base+(row+.5)*.40
+            sx,sy=(.58,.38) if row%2 else (.38,.58)
             for x in (a+.20,c-.20):
                 for y in (y0+.13,y1-.13):
-                    corners.box((x,y,z),(.58 if row%2 else .38,.38 if row%2 else .58,.385))
+                    if diverse:
+                        # Projecting quoins follow the full roof soffit, even
+                        # at the outer arrises of a low hipped corner.
+                        soffit=min(owner.roof_height(x+dx*sx*.5,y+dy*sy*.5)
+                                   for dx in (-1,1) for dy in (-1,1))-.12
+                        if z+.385*.5 > soffit:
+                            continue
+                    corners.box((x,y,z),(sx,sy,.385))
         band=b.fixture('gatehouse.'+side+'_stringcourse','stone_light',owner,'structure')
         band.box(((a+c)*.5,y0-.04,upper-.14),(c-a+.16,.22,.20))
         band.box(((a+c)*.5,y1+.04,upper-.14),(c-a+.16,.22,.20))
@@ -208,23 +270,28 @@ def build(ctx):
     floor=ctx.buffer('gatehouse.guard_hall_floor','timber','foundation',core)
     floor.structural_role='floor_borne_by_masonry_vault'
     floor.box((cx,depth*.5,upper-.06),(core_width-.16,depth-.60,.12))
-    for side,x in (('west',tower_width),('east',tower_width+core_width)):
+    for side,x in (('west',west_width),('east',east_x)):
         b.deck('gatehouse.guardhall_threshold.'+side,
                [(x-.45,link_y-.70),(x+.45,link_y-.70),
                 (x+.45,link_y+.70),(x-.45,link_y+.70)],z=upper,material='stone',zone=core)
         b.route('gatehouse.guardhall_connection.'+side,
                 (x-.8,link_y-.45,upper,x+.8,link_y+.45,upper+2.),kind='human')
-    _paved_threshold(b,'gatehouse.front_threshold_ramp',(cx,-4.0),(cx,0),2.6,base,core)
-    _paved_threshold(b,'gatehouse.rear_threshold_ramp',(cx,depth+3.),(cx,depth),2.6,base,core)
+    _paved_threshold(b,'gatehouse.front_threshold_ramp',(cx,-4.0),(cx,0),threshold_width,base,core)
+    _paved_threshold(b,'gatehouse.rear_threshold_ramp',(cx,depth+3.),(cx,depth),threshold_width,base,core)
     paving=ctx.buffer('gatehouse.passage_paving','stone_light','foundation',core)
     for row in range(16):
         for col in range(5):
-            paving.box((x0+(col+.5)*2.8/5,(row+.5)*depth/16,base+.008),(.54,depth/16-.018,.016))
+            paving.box((x0+(col+.5)*throat/5,(row+.5)*depth/16,base+.008),(paving_width,depth/16-.018,.016))
     # Short cut-off boundary returns make the fortification connection legible;
     # artists extend their plain end interfaces to the selected site wall.
     for side,xa,xb in (('west',-2.4,0.),('east',total,total+2.4)):
-        wall=b.fixture('gatehouse.curtain_return.'+side,'stone',towers[0 if side=='west' else 1],'boundary')
-        wall.box(((xa+xb)*.5,-.55,(base+3.5)*.5),(xb-xa,.70,base+3.5))
-        wall.box(((xa+xb)*.5,-.55,base+3.52),(xb-xa+.06,.82,.18))
-    b.program['adaptations'].append('Compact Thornfell ridge gate: hipped flank roofs, vaulted guarded passage and courtyard tower entries')
+        owner=towers[0 if side=='west' else 1]
+        tie_y=owner.bounds[1]+1.25 if diverse else -.55
+        wall=b.fixture('gatehouse.curtain_return.'+side,'stone',owner,'boundary')
+        wall.box(((xa+xb)*.5,tie_y,(base+3.5)*.5),(xb-xa,.70,base+3.5))
+        wall.box(((xa+xb)*.5,tie_y,base+3.52),(xb-xa+.06,.82,.18))
+    if diverse:
+        b.program['adaptations'].append('Road-sized vaulted passage with guard wings set for exposure and sightlines')
+    else:
+        b.program['adaptations'].append('Compact Thornfell ridge gate: hipped flank roofs, vaulted guarded passage and courtyard tower entries')
     return b.finish()

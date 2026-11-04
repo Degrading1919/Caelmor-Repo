@@ -17,11 +17,16 @@ def settings(function):
                     use_grammar=True,detail='MEDIUM',geometry_mode='EFFICIENT',age=35,maintenance=.7)
 
 
-def capture(collection,out,function,finishes=('clay','material'),distances=('distant','normal','close'),views=(0,1)):
+def capture(collection,out,function,finishes=('clay','material'),distances=('distant','normal','close'),views=(0,1),vertex_framing=False):
     scene=bpy.context.scene;camera=scene.camera;spec=CASE_SPECS[function]
     scene.render.resolution_x=WIDTH;scene.render.resolution_y=HEIGHT;scene.render.resolution_percentage=100
     scene.eevee.taa_render_samples=SAMPLES
     bpy.context.view_layer.update();bounds=_bounds(collection)
+    vertices=None
+    if vertex_framing:
+        vertices=[o.matrix_world @ v.co for o in collection.objects
+                  if o.type=='MESH' and not o.hide_render and not o.get('caelm_collider')
+                  for v in o.data.vertices]
     original=[(o,tuple(o.data.materials)) for o in collection.objects if o.type=='MESH']
     clay=_neutral_material();records=[]
     for finish in finishes:
@@ -36,7 +41,7 @@ def capture(collection,out,function,finishes=('clay','material'),distances=('dis
                 target=Vector(spec['targets'][target_key]);direction=Vector(spec['directions'][distance][view]).normalized()
                 location=target+direction*spec['camera_distances'][distance]
                 _aim(camera,location,target);camera.data.ortho_scale=spec['scales'][distance]
-                framing=frame_test(camera,bounds,target) if distance!='close' else {'valid':None,'note':'intentional close crop'}
+                framing=frame_test(camera,bounds,target,vertices) if distance!='close' else {'valid':None,'note':'intentional close crop'}
                 if distance!='close':assert framing['valid'],framing
                 path=out/function.lower()/f'{distance}_{finish}_{view}.png';path.parent.mkdir(parents=True,exist_ok=True)
                 scene.render.filepath=str(path);bpy.ops.render.render(write_still=True)

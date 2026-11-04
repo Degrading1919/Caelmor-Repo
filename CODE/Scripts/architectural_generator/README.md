@@ -1,11 +1,19 @@
 # Caelmor Architectural Generator
 
-Version 0.11.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
+Version 0.12.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
+
+In 0.12, **Seed Changes Layout** varies construction in the world-aware
+Lowmark Smithy and Thornfell Gatehouse. It is on in new Blender scenes.
+Older building snapshots load with the option off. Use full regeneration
+to change the seed layout of an existing building, since structure, roofs,
+routes and collision proxies are sized together. See
+[five-seed comparisons](evidence/diversity_v12) for the verified range.
 
 The 0.11 **Crafted Curves** control is on for new Blender scenes in world-aware mode.
 It adds swept gables and fitted timber to the Lowmark Smithy, a taller splayed
 portal to the Thornfell Gatehouse, and continuous roof ribs where Mire builders
-use bowed roofs. Switch it off for the previous profiles. Older building
+use bowed roofs. Turn it off to use straight Smithy joinery and the earlier
+Gatehouse portal profile. Older building
 snapshots load with the option off. Change the option with full regeneration
 so roof, structure and aperture geometry are rebuilt together. See
 [evidence/curves_v11](evidence/curves_v11) for matched comparisons and checks.

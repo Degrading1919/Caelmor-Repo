@@ -37,6 +37,7 @@ class Settings:
     geometry_mode: str = 'SOLID'
     world_aware: bool = False
     crafted_curves: bool = False
+    seed_massing: bool = False
 
     def check(self, validate_shape=True):
         for name in ('width','depth','wing_width','wing_depth','floor_height','pitch','overhang','window_density','maintenance','age'):
@@ -56,6 +57,8 @@ class Settings:
             raise ValueError('Grammar must be boolean; maintenance 0–1 and age 0–250 years required')
         if not isinstance(self.crafted_curves, bool):
             raise ValueError('Crafted curves must be boolean')
+        if not isinstance(self.seed_massing, bool):
+            raise ValueError('Seed massing must be boolean')
         if not isinstance(self.seed,int):
             raise ValueError('Integer seed required')
         if validate_shape and (not isinstance(self.floors,int) or not 1<=self.floors<=3):
