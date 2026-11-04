@@ -1,6 +1,11 @@
 # Caelmor Architectural Generator
 
-Version 0.12.1 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
+Version 0.12.2 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
+
+The 0.12.2 pigment study adds directional color to selected Lowmark Smithy
+timbers and mineral color accents to the Thornfell Gatehouse's existing
+masonry faces and bevels. See [the study](evidence/painted_materials) for the
+matched views and GLB checks.
 
 The 0.12.1 Thornfell Gatehouse finish groups warmer and cooler stock across
 neighboring wall stones. It preserves the separate dressed stone and the

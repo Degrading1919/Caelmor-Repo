@@ -41,6 +41,13 @@ def uses_masonry_stock(buffer_name, settings):
             and '.facade_masonry_skin' in buffer_name)
 
 
+def uses_hewn_pigment(buffer_name, settings):
+    return (settings.world_aware and (settings.region,settings.function)==('LOWMARK','SMITHY')
+            and any(part in buffer_name for part in (
+                '.smithy.primary_end_bent', '.smithy.tie_knees.', '.smithy.stock_bents',
+                '.Roof edge fascia')))
+
+
 def masonry_stock_tint(centers, seed):
     """One mineral tint per stone, with related stock in adjacent courses."""
     import numpy as np

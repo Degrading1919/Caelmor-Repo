@@ -11,7 +11,9 @@ import numpy as np
 from .materials import PALETTE, _palette_entry, _hash2
 from .surface_detail import sample_detail,generate_normal_tile,DETAIL_PERIOD
 from .surface_conditions import condition_fields, environment
-from .benchmark_finish import masonry_stock_tint, surface_base, uses_masonry_stock
+from .benchmark_finish import (masonry_stock_tint, surface_base, uses_hewn_pigment,
+                               uses_masonry_stock)
+from .surface_pigments import masonry_pigment, timber_pigment
 
 ATLAS_REVISION=2
 UV_NAME='UV2_Surface'
@@ -173,8 +175,12 @@ def apply_surfaces(objects,plan,settings,context_objects=None):
     for (key,base,wall_stock),members in sorted(groups.items()):
         digest=hashlib.sha256()
         digest.update(json.dumps((ATLAS_REVISION,key,base,settings.__dict__),sort_keys=True).encode())
+        hewn={obj.name for obj,_ in members if FAMILY[key]=='wood'
+              and uses_hewn_pigment(obj.get('caelm_buffer_id',''),settings)}
         if wall_stock:
-            digest.update(b'Thornfell masonry stock v1')
+            digest.update(b'Thornfell masonry stock v1, pigment v1')
+        if hewn:
+            digest.update(b'Lowmark hewn pigment v1')
         for obj,host in members:
             digest.update(obj['caelm_buffer_id'].encode())
             digest.update(json.dumps(contexts[id(host)],sort_keys=True).encode())
@@ -205,6 +211,7 @@ def apply_surfaces(objects,plan,settings,context_objects=None):
             count=sum((c['w']+2*PAD)*(c['h']+2*PAD) for c in charts)
             positions=np.empty((count,3));normals=np.empty_like(positions)
             uu=np.empty(count);vv=np.empty(count);unit=np.empty(count);uz=np.empty(count)
+            hewn_mask=np.zeros(count,dtype=np.uint8) if hewn else None
             start=0
             for c in charts:
                 w,h=c['w'],c['h'];length=(w+2*PAD)*(h+2*PAD)
@@ -216,6 +223,12 @@ def apply_surfaces(objects,plan,settings,context_objects=None):
                 normals[start:end]=c['normal']
                 center=c['center'];stock=_hash2(int(round(center[0]*107)),int(round(center[1]*107))+int(round(center[2]*149)),settings.seed)
                 unit[start:end]=stock;uz[start:end]=center[2]
+                if hewn and c['obj'].name in hewn:
+                    long_span,cross_span=c['span']
+                    # Real narrow longitudinal faces on the hewn frame and
+                    # verge. Wide faces get pigment without the arris accent.
+                    arris=cross_span<.055 and long_span>max(.16,4.*cross_span)
+                    hewn_mask[start:end]=2 if arris else 1
                 c['slice']=(start,end);start=end
             family=FAMILY[key]
             # Metric fields have unbounded coordinates. Stable world offsets
@@ -227,6 +240,11 @@ def apply_surfaces(objects,plan,settings,context_objects=None):
                 for c,tint in zip(charts,tints):
                     start,end=c['slice']
                     color[start:end]*=tint
+                color*=masonry_pigment(positions,normals,unit)
+            if hewn:
+                selected=hewn_mask>0
+                color[selected]*=timber_pigment(uu[selected],vv[selected],unit[selected],
+                                              hewn_mask[selected]==2,settings.craftsmanship)
             rough=pattern['roughness'].copy();metal=pattern['metallic'].copy()
             # Regions/material cohorts share textures but retain their actual
             # host volume's eaves, apertures and hearths.
