@@ -51,7 +51,7 @@ def arch_ring(buffer,center,y0,y1,spring,radius,rise,thickness=.30,segments=16,s
         buffer.extrude(points,(0,y1-y0,0))
 
 
-def smithy_range(b,main,profile=None):
+def smithy_range(b,main,profile=None,*,firebed_top=None):
     """An accreted, lower stock range and legible primary timber bent."""
     ctx=b.ctx;z=main.base;d=main.depth
     if profile is None:
@@ -79,10 +79,14 @@ def smithy_range(b,main,profile=None):
     frame.structural_role='pegged_primary_bent'
     spec=ctx.component(frame,main,'primary_bent','frame_member','structural_timber')
     from .construction_geometry import hewn_member
-    craft={'FINE':.68,'STANDARD':1.,'ROUGH':1.20}[b.settings.craftsmanship]
+    from .construction_library import timber_workmanship
+    craft=timber_workmanship(b.settings)
 
     def cut(buffer, start, end, width, depth):
-        if spec and b.settings.detail!='LOW':
+        selected=buffer.construction
+        if selected and selected.variant=='squared_housed':
+            buffer.chamfered_beam(start,end,width,depth,.006)
+        elif selected and b.settings.detail!='LOW':
             rng=ctx.rng(f'smithy.hewn.{start}.{end}')
             hewn_member(buffer,start,end,width,depth,craft,rng)
         else:
@@ -94,7 +98,13 @@ def smithy_range(b,main,profile=None):
         for x in xs:
             cut(frame,(x,y,z+.28),(x,y,top),.32,.32)
         cut(frame,(xs[0],y,top-.10),(xs[1],y,top-.10),.30,.32)
-        if spec:
+        if spec and spec.variant=='squared_housed':
+            for x,sign in zip(xs,(-1,1)):
+                # A housed shoulder increases the seat below the tie while
+                # keeping the end grain flush with the outside of the post.
+                frame.chamfered_beam((x,y,top-.278),(x-sign*.235,y,top-.278),
+                                     .24,.070,.006)
+        elif spec:
             for x,sign in zip(xs,(-1,1)):
                 # Through-tenons occupy the core of the existing tie. The
                 # small end grain shoulder is clear of the roof and route.
@@ -164,10 +174,11 @@ def smithy_range(b,main,profile=None):
         from .construction import bind
         bind(spec,pegs)
     # Expose the tapered ends of seated pins on the road-facing bent.
-    for x in (.24,main.width-.24):
-        top=min(main.roof_height(a,.22) for a in (.24,main.width-.24))-.46 if spec else main.roof_height(x,.22)-.46
-        for dx in (-.055,.055):
-            pegs.cylinder((x+dx,.037 if spec else .065,top),(x+dx,.14,top),.025 if spec else .023,6)
+    if not spec or spec.variant!='squared_housed':
+        for x in (.24,main.width-.24):
+            top=min(main.roof_height(a,.22) for a in (.24,main.width-.24))-.46 if spec else main.roof_height(x,.22)-.46
+            for dx in (-.055,.055):
+                pegs.cylinder((x+dx,.037 if spec else .065,top),(x+dx,.14,top),.025 if spec else .023,6)
     # Masonry shields the timber from the hot bay and ties the stack foot to
     # the building. Its top leaves the verified side duct unobstructed.
     shield=b.fixture('smithy.fire_screen','stone',main,'fire_screen')
@@ -184,8 +195,14 @@ def smithy_range(b,main,profile=None):
     coals=b.fixture('smithy.fuel_on_firebed','charcoal',main,'forge_fire')
     for iy in range(3):
         for ix in range(7):
-            coals.cylinder((1.02+ix*.16,1.00+iy*.19,z+.55),
-                           (1.02+ix*.16,1.00+iy*.19,z+.61),.075,5)
+            if firebed_top is None:
+                x,y,bottom,top,radius=1.02+ix*.16,1.+iy*.19,z+.55,z+.61,.075
+            else:
+                rng=ctx.rng(f'smithy.firebed.fuel.{ix}.{iy}')
+                x=.94+ix*.18+rng.uniform(-.029,.029)
+                y=.88+iy*.22+rng.uniform(-.045,.045)
+                bottom,top,radius=firebed_top,firebed_top+rng.uniform(.063,.13),rng.uniform(.081,.122)
+            coals.cylinder((x,y,bottom),(x,y,top),radius,5)
     leather=b.fixture('smithy.bellows_skin','bellows_leather',main,'forge_bellows')
     leather.extrude([(.60,1.96,z+1.34),(1.30,1.96,z+1.34),
                      (1.35,2.25,z+1.34),(.98,2.42,z+1.34),(.58,2.25,z+1.34)],(0,0,.18))

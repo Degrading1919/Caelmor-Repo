@@ -27,11 +27,11 @@ def stone_face(lo, hi, bottom, top, arris):
     return [(lo+cut,bottom),(hi-cut,bottom),(hi,bottom+cut),(hi,top-cut),
             (hi-cut,top),(lo+cut,top),(lo,top-cut),(lo,bottom+cut)]
 
-def hewn_member(buffer, start, end, width, depth, workmanship, rng):
+def hewn_member(buffer, start, end, width, depth, workmanship, rng, *, side=None):
     """Work a long member inside its designed bearing section and envelope."""
     axis = unit(sub(end,start))
     ref = (0,1,0) if abs(axis[2])>.95 else (0,0,1)
-    side = unit(cross(axis,ref))
+    side = side or unit(cross(axis,ref))
     fraction = rng.uniform(.39,.64)
     cut = workmanship*rng.uniform(.10,.16)
     middle = lerp(start,end,fraction)

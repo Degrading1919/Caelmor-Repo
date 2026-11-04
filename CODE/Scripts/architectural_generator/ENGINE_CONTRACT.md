@@ -20,7 +20,7 @@ Keep full-section roof clearance, bearing and aperture checks in force when exte
 
 ## Construction treatments
 
-The Director approved the seven treatment families below. The 0.13.0 implementation uses the following IDs, component mapping and settings. This section carries forward the contract changes from `4ae1d62`. See [the consolidation record](../../../00_ADMIN/Reference/Caelmor_Repository_Consolidation.md) for provenance and recovery refs.
+The Director approved the seven treatment families below. The implementation uses the following IDs, component mapping and settings. This section carries forward the contract changes from `4ae1d62`. See [the consolidation record](../../../00_ADMIN/Reference/Caelmor_Repository_Consolidation.md) for provenance and recovery refs.
 
 ### Taxonomy
 
@@ -47,7 +47,7 @@ The planner supplies a stable component ID and `component_role` before a geometr
 | Condition | Keep age and maintenance independent. Derive exposure from local practice and component orientation/shelter. Resolve repair locally, such as a replacement shingle cohort or repointed joints. Repairs inherit role and treatment unless a compatible change is explicitly authored. |
 | Artistic finish | An optional `finish` reference selects the existing procedural/baked look or a compatible artist-authored surface. Bind it after construction and condition resolve. Finish changes affect shading or maps and their required UVs. They leave the assembly, support, aperture profile and physical condition inputs intact. An existing explicit slot override still wins at Blender binding. |
 
-The settings shape is an optional `construction_overrides` object with optional `by_component` and `by_role` maps, keyed by stable component ID and the role IDs above. Each map value is an object with any of `treatment`, `substrate`, `surface_family` or `finish` as registered string IDs. Missing fields inherit. An empty `construction_overrides` opts in with defaults. Omit the object to keep the legacy path. This uses the current settings store and adds no external preset file. For opted-in components, resolve each authored field in this order.
+The settings shape is an optional `construction_overrides` object with optional `by_component` and `by_role` maps, keyed by stable component ID and the role IDs above. Each map value is an object with any of `treatment`, `substrate`, `surface_family`, `finish` or `variant` as registered string IDs. Missing fields inherit. An empty `construction_overrides` opts in with defaults. Omit the object to keep the legacy path. This uses the current settings store and adds no external preset file. For opted-in components, resolve each authored field in this order.
 
 1. Use an explicit component override, then an explicit role override scoped to the building. Omission inherits from the next level.
 2. Use compatible defaults from the resolved local context, then the region. Translate current style choices where they apply (`RUBBLE`, `ASHLAR`, `BOARD`, `TIMBER_INFILL`, `SHINGLE`, `SLATE`, `CLAY`). A composite style such as `TIMBER_INFILL` supplies separate frame and infill choices. World zones can carry distinct local assembly choices. Requirements such as passage bearing width or a continuous roof envelope constrain selection.
@@ -100,3 +100,32 @@ placement. Reed, iron and terrace systems retain their specialized paths.
 Legacy and unclassified pieces can coexist with treated pieces, with treatment
 provenance omitted on the former. A named Blender finish reuses the author
 material datablock and does not build a new procedural atlas for that component.
+
+
+### Construction library authoring
+
+The 0.14.0 authoring panel presents a curated set of presets for plinths,
+supports, masonry bodies, framed infill, roof supports, and roof cover. It
+projects selectors into the existing role override map and retains
+per-component and unrepresented fields. Existing scene property data and
+saved settings use the same representation. The new optional `variant`
+refines a treatment and role without changing its stock or finish. The first
+registered variants are `broken_course` and `level_course` for masonry walls
+and plinths, and `hewn_pegged` and `squared_housed` for timber frame members and
+roof supports. An absent variant uses the role's established preparation.
+Incompatible variants report the component and field. The optional provenance
+sidecar records `variant` where present. Strict format-1 exports retain the
+old field set.
+
+The Lowmark Smithy and Stable are the two authoring fixtures. The Smithy
+retains its existing workfront and stock lanes and uses a raised visible
+firebed with a seated ash opening and a higher hood mouth. Stable stall
+frontage, handling route and hay access remain specific to its work. The
+Thornfell curtain refinement seats both faces into a continuous bed and
+bridges it at alternate headers. Function-specific assemblies and specialized
+regional systems continue to reserve bearing, passage and roof shape.
+
+Metal framing remains a proposed taxonomy extension. Its separate stock,
+section, connections, host bearing, corrosion and validation would need
+authoring review before registration. The current structural selection is
+timber. Iron roofs and fixtures continue on their existing paths.

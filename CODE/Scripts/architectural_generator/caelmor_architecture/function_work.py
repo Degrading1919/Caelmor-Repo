@@ -170,17 +170,24 @@ def _smithy_flue(builder, mass, x, y, zbase):
     if builder.region=='THORNFELL':hood_z-=.08
     hood = ctx.buffer("smithy.forge_hood", "iron", "details", zone=mass)
     hood.structural_role = "forge_hood"
-    lower_z=hood_z-.50; upper_z=hood_z+.22
+    prominent = builder.region=='LOWMARK' and ctx.construction_resolver is not None
+    lower_z=hood_z-(.28 if prominent else .50)
+    upper_z=hood_z+.22
+    front=y-(.34 if prominent else .48)
+    half_width=1.02 if prominent else .82
     # Four sloped sheet panels form a truncated pyramid with an open underside
     # and a small top throat. The intake remains visibly open above the firebed.
-    hood.extrude([(x-.82,y-.48,lower_z),(x+.82,y-.48,lower_z),
+    hood.extrude([(x-half_width,front,lower_z),(x+half_width,front,lower_z),
                   (x+.34,y-.24,upper_z),(x-.34,y-.24,upper_z)],(0,.065,0))
-    hood.extrude([(x-.82,y+.48,lower_z),(x+.82,y+.48,lower_z),
+    hood.extrude([(x-half_width,y+.48,lower_z),(x+half_width,y+.48,lower_z),
                   (x+.34,y+.24,upper_z),(x-.34,y+.24,upper_z)],(0,-.065,0))
-    hood.extrude([(x-.82,y-.48,lower_z),(x-.34,y-.24,upper_z),
-                  (x-.34,y+.24,upper_z),(x-.82,y+.48,lower_z)],(.065,0,0))
-    hood.extrude([(x+.82,y-.48,lower_z),(x+.34,y-.24,upper_z),
-                  (x+.34,y+.24,upper_z),(x+.82,y+.48,lower_z)],(-.065,0,0))
+    hood.extrude([(x-half_width,front,lower_z),(x-.34,y-.24,upper_z),
+                  (x-.34,y+.24,upper_z),(x-half_width,y+.48,lower_z)],(.065,0,0))
+    hood.extrude([(x+half_width,front,lower_z),(x+.34,y-.24,upper_z),
+                  (x+.34,y+.24,upper_z),(x+half_width,y+.48,lower_z)],(-.065,0,0))
+    if prominent:
+        hood.chamfered_beam((x-half_width,front,lower_z),(x+half_width,front,lower_z),
+                            .086,.091,.012)
     # Rise above the tapered hood before turning sideways; a horizontal run at
     # its rim would cut through the hood's own sloping side panel.
     duct_z = upper_z+(.36 if builder.region=='MIRE' else .18)
@@ -440,13 +447,36 @@ def build_smithy(ctx):
                [(max(.15,hx-2.2),hy-1.35),(hx+2.35,hy-1.35),
                 (hx+2.35,hy+1.2),(max(.15,hx-2.2),hy+1.2)],
                z=mass.base,material="stone",zone=mass)
-    b.box("hearth_stone_plinth", (hx-.95,hy-.85,mass.base+.04,hx+.95,hy+.85,mass.base+.45), "stone", mass, role="forge")
-    # Open-front masonry hearth: the iron firebed is exposed above three low
-    # curbs, facing the public workfront so the hot process reads from outside.
-    b.box("hearth_firebed", (hx-.66,hy-.58,mass.base+.45,hx+.66,hy+.42,mass.base+.55), "iron", mass, role="forge_fire")
-    b.box("hearth_left_curb", (hx-.76,hy-.65,mass.base+.45,hx-.60,hy+.53,mass.base+1.15), "stone", mass, role="forge")
-    b.box("hearth_right_curb", (hx+.60,hy-.65,mass.base+.45,hx+.76,hy+.53,mass.base+1.15), "stone", mass, role="forge")
-    b.box("hearth_rear_curb", (hx-.76,hy+.48,mass.base+.45,hx+.76,hy+.65,mass.base+1.15), "stone", mass, role="forge")
+    prominent = region=="LOWMARK" and ctx.construction_resolver is not None
+    firebed_top = mass.base+(.91 if prominent else .55)
+    if prominent:
+        # The approach sees a supported working-height firebed above an
+        # open ash access, with both piers continuing into the slab.
+        b.box("hearth_stone_plinth",(hx-1.10,hy-.79,mass.base+.04,
+                                    hx+1.10,hy+.80,mass.base+.22),"stone",mass,role="forge")
+        for side in (-1,1):
+            x=hx+side*.81
+            b.box("hearth_bearing_"+str(side),(x-.25,hy-.65,mass.base+.22,
+                  x+.25,hy+.67,firebed_top-.22),"stone",mass,role="forge")
+        b.box("hearth_backing",(hx-.57,hy+.44,mass.base+.22,hx+.57,hy+.70,
+                  firebed_top-.22),"stone",mass,role="forge")
+        b.box("hearth_working_slab",(hx-1.08,hy-.72,firebed_top-.22,hx+1.08,hy+.70,
+                  firebed_top-.075),"stone_light",mass,role="forge")
+        b.box("hearth_firebed",(hx-.81,hy-.60,firebed_top-.075,hx+.81,hy+.51,
+                  firebed_top),"iron",mass,role="forge_fire")
+        for side in (-1,1):
+            x=hx+side*.91
+            curb=b.fixture("hearth_"+("left" if side<0 else "right")+"_curb","stone",mass,"forge")
+            curb.extrude([(x-.10,hy-.56,firebed_top-.08),(x-.10,hy+.61,firebed_top-.08),
+                          (x-.10,hy+.61,firebed_top+.38),(x-.10,hy-.43,firebed_top+.09)],(.20,0,0))
+        b.box("hearth_rear_curb",(hx-.81,hy+.45,firebed_top-.08,hx+.81,hy+.65,
+                  firebed_top+.42),"stone",mass,role="forge")
+    else:
+        b.box("hearth_stone_plinth", (hx-.95,hy-.85,mass.base+.04,hx+.95,hy+.85,mass.base+.45), "stone", mass, role="forge")
+        b.box("hearth_firebed", (hx-.66,hy-.58,mass.base+.45,hx+.66,hy+.42,mass.base+.55), "iron", mass, role="forge_fire")
+        b.box("hearth_left_curb", (hx-.76,hy-.65,mass.base+.45,hx-.60,hy+.53,mass.base+1.15), "stone", mass, role="forge")
+        b.box("hearth_right_curb", (hx+.60,hy-.65,mass.base+.45,hx+.76,hy+.53,mass.base+1.15), "stone", mass, role="forge")
+        b.box("hearth_rear_curb", (hx-.76,hy+.48,mass.base+.45,hx+.76,hy+.65,mass.base+1.15), "stone", mass, role="forge")
     ax=(w*.42 if region=="LOWMARK" else
         hx+1.1 if region in ("THORNFELL","MIRE") else w*.48)
     ay=hy
@@ -478,7 +508,7 @@ def build_smithy(ctx):
     bellows.box(((bx0+bx1)*.5,(by0+by1)*.5,bz1-.10),(bx1-bx0,by1-by0,.12))
     bellows.box(((bx0+bx1)*.5,by0+.08,bz0+.10),(bx1-bx0-.12,.12,.12))
     _beam(ctx,"smithy.bellows_nozzle","iron",
-          (bx0+.02,by0+.10,bz0+.28),(hx-.05,hy+.26,mass.base+.88),.09,.09,mass)
+          (bx0+.02,by0+.10,bz0+.28),(hx-.05,hy+.26,firebed_top+.33 if prominent else mass.base+.88),.09,.09,mass)
     if region in ("LOWMARK","THORNFELL","MIRE"):
         operator_x0=ax+.1 if region=="THORNFELL" else ax-.42
         operator_x1=ax+.85 if region=="THORNFELL" else ax+.52
@@ -520,7 +550,7 @@ def build_smithy(ctx):
                   (x,d-.12,mass.base),(x,d-.12,post_top),.20,.20,mass)
     if region=='LOWMARK':
         from .benchmark_construction import smithy_range
-        smithy_range(b,mass,seed_profile)
+        smithy_range(b,mass,seed_profile,firebed_top=firebed_top if prominent else None)
     b.finish()
 
 

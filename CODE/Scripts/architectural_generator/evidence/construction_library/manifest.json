@@ -1,0 +1,965 @@
+{
+  "blender": "5.0.1",
+  "base_revision": "67cba19",
+  "source_sha256": {
+    "__init__.py": "19b626df437432ea36eab7c8ee0b621b96b04dce20495ca0c579571c3b1e9d49",
+    "benchmark_construction.py": "2def99d6947e73ea9056d6d45457ba95a7a0ada265cd7f592af796b57199213f",
+    "benchmark_finish.py": "aba9669eef117f6ae2c9f4f0186df30bced62751590da6b3e145a7eb5d65c52d",
+    "benchmark_gatehouse.py": "81ac36b9943e062d00e86973c14e4ad66d6beda2ece50c482060b8de49195d35",
+    "blender_backend.py": "380f66f2fa8c0eb20aa8a935770d4685c701b48b66c25f4afa303a7232deda9d",
+    "blender_manifest.toml": "67ddd97ef79a2b511872050b87ba1edfd97d1e50f3dae142d6a85c16451d60d0",
+    "construction.py": "6670662435a8bee3085ffaef4a8fd7d894d4a7a2ee1455d41e490cf8567158dd",
+    "construction_geometry.py": "af5ad8626246364bb1da91710c90f2a292730328efe54b243e77293655037b86",
+    "construction_library.py": "c46e3892f881cf6a3aeceaeeb4b12ddf0956f71fe6edda4824ef1bc904e45134",
+    "crafted_geometry.py": "402d20f9192f22779da8afd83181062003e1874594821b10acf7c2a66763c4f3",
+    "curtain_masonry.py": "a4a6b4788541e886b63cff1ba1f26cc49bea1a83dc434eb01e91c15232f96256",
+    "curve_profiles.py": "f98554e8a5f4e0ea2a0a80f01cb4a4b79a2c77299230f454357eb6b3a5993ee7",
+    "curve_sweep.py": "00f9bef55fa29e129fc856ba8d12f05bace416a1a682df5b3fd8c26d1e471f84",
+    "engine.py": "30fe0c9ee59ba2f34160d003a328f1174a742a940e11aba051d46ff807709df5",
+    "facade.py": "713ee270d0548500b0b65e2b64513f0472d9e0b4c58a59923b16829be44e33d3",
+    "function_work.py": "1220e0828501ddafb2ad658ad7ac647ef3f76ad6ad394f65459400ab7453fb35",
+    "function_yard.py": "666b14cd4ce6b4127826f83cb93b03eba2f7face679efb43a47ba640967889f7",
+    "functional.py": "ac2bf3b9730e5aeceefe178b35a493ecb09d8e9d6a0ebc0394a8990c2291c7b5",
+    "geometry.py": "e30de2d821d4ddd0cd215975192d06ae24c87687ccb99b9b4275b8acf03d11da",
+    "LICENSE": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+    "materials.py": "f34d142df25551554fbc14a4ad86ca59f3ca4efdb09d268e09ff69504d2fb210",
+    "model.py": "2981e64661534a762c35a72c6f4324a7299d2094aa6dca1ca3615fb944d0fa99",
+    "profiles.py": "3e7e29517f947d0eff991945248824ff47e2a2f9aa7afe3558dca1988745c344",
+    "roof.py": "670526e61d1118f127035bf0fc85addc4681118048a4b9d4a28606681cb74efd",
+    "roof_pigments.py": "509d1658182078e19149e65e4e069d4ab13be9f510be6b0c21553be501886cd0",
+    "surface_atlas.py": "37e374074faa24eeb057108727c5af7271dc4fc354af6deabf6bd699a4c27bd6",
+    "surface_conditions.py": "353fe1509a42c171bbdbe0ca05396768cb747a0d622f4b92e1309018a3e66196",
+    "surface_detail.py": "1b2992c8e677364de23e94564b78247153c647945417585cd20fa5d6136ac169",
+    "surface_patterns.py": "ae6c45574c1758f4a246abde1499ffd4a3e812183a9356ef1e3e306b15930640",
+    "surface_pigments.py": "bfb0fb2ea8f206b29c2fffe837092377ab1c5275d69df11a29884ccddcef6ae9",
+    "world.py": "de2f3d06ea9de55ad804a45907300223a98cec892cfc94c81dd587b50d6ac162",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "c766daba6d8b19441e9589b340e3693a7e118332cd97e261b6c2fcbad1482534",
+    "world_mire.py": "4a6b314f6c7f415d8ad5b4c5176f1197ad4e89896bae3a3dbfafa32b6a925042"
+  },
+  "cases": [
+    {
+      "function": "SMITHY",
+      "region": "LOWMARK",
+      "variant": "timber_shingle",
+      "settings": {
+        "seed": 91,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": true,
+        "seed_massing": true,
+        "construction_overrides": {
+          "by_role": {
+            "plinth": {
+              "treatment": "stone_masonry",
+              "variant": "broken_course"
+            },
+            "frame_member": {
+              "treatment": "structural_timber",
+              "variant": "hewn_pegged"
+            },
+            "wall_infill": {
+              "treatment": "wooden_boarding"
+            },
+            "roof_support": {
+              "treatment": "structural_timber",
+              "variant": "hewn_pegged"
+            },
+            "roof_cover": {
+              "treatment": "wooden_shingles",
+              "substrate": "split_wood"
+            }
+          }
+        }
+      },
+      "triangles": 15731,
+      "geometry_hash": "27adb4d48261a32f021a08345ae1dcb40d7f7229830ddfeecb9941ce63e4133a",
+      "images": [
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "clay",
+          "view": 0,
+          "image": "timber_shingle/smithy/normal_clay_0.png",
+          "sha256": "91821cbf892b820aa0630c1bc49f490cfac8904f150dd757ecb8f3638f146754",
+          "camera_location": [
+            24.985652923583984,
+            -28.026805877685547,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -4.9743242263793945,
+                7.650158405303955
+              ],
+              "y": [
+                -5.019678592681885,
+                4.824228763580322
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "close",
+          "finish": "clay",
+          "view": 0,
+          "image": "timber_shingle/smithy/close_clay_0.png",
+          "sha256": "090c151780944c88d68d93fc30c0e20eccd99499792f0eb502957a03c7602bc9",
+          "camera_location": [
+            7.642703056335449,
+            -15.90234375,
+            8.572418212890625
+          ],
+          "camera_target": [
+            2.799999952316284,
+            0.23999999463558197,
+            2.25
+          ],
+          "ortho_scale": 7.400000095367432,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "timber_shingle/smithy/normal_material_0.png",
+          "sha256": "1011686da3d0fcfb669b296b295aa8b384ac2080ae0a92aaaedccff0ac744d6c",
+          "camera_location": [
+            24.985652923583984,
+            -28.026805877685547,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -4.9743242263793945,
+                7.650158405303955
+              ],
+              "y": [
+                -5.019678592681885,
+                4.824228763580322
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "close",
+          "finish": "material",
+          "view": 0,
+          "image": "timber_shingle/smithy/close_material_0.png",
+          "sha256": "57d68ce4b5b1535e266721a74baaa7f5cb7832cb50b7317138959a2505ca1c56",
+          "camera_location": [
+            7.642703056335449,
+            -15.90234375,
+            8.572418212890625
+          ],
+          "camera_target": [
+            2.799999952316284,
+            0.23999999463558197,
+            2.25
+          ],
+          "ortho_scale": 7.400000095367432,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        }
+      ],
+      "treatments": [
+        "stone_masonry",
+        "structural_timber",
+        "wooden_boarding",
+        "wooden_shingles"
+      ]
+    },
+    {
+      "function": "SMITHY",
+      "region": "LOWMARK",
+      "variant": "render_slate",
+      "settings": {
+        "seed": 91,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": true,
+        "seed_massing": true,
+        "construction_overrides": {
+          "by_role": {
+            "plinth": {
+              "treatment": "stone_masonry",
+              "variant": "level_course"
+            },
+            "frame_member": {
+              "treatment": "structural_timber",
+              "variant": "squared_housed"
+            },
+            "wall_infill": {
+              "treatment": "plaster_limewash",
+              "substrate": "lime_render"
+            },
+            "roof_support": {
+              "treatment": "structural_timber",
+              "variant": "squared_housed"
+            },
+            "roof_cover": {
+              "treatment": "slate_tile_roofing",
+              "substrate": "slate"
+            }
+          }
+        }
+      },
+      "triangles": 15309,
+      "geometry_hash": "52c966c75a00df4d9259d879650b832fd0a31084cc16de14d6f08c2e86899492",
+      "images": [
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "clay",
+          "view": 0,
+          "image": "render_slate/smithy/normal_clay_0.png",
+          "sha256": "c35c10714dd66eec502dfc1ab5495c328b17dac9598cc3a4ab87af5fe60d90db",
+          "camera_location": [
+            24.985652923583984,
+            -28.026805877685547,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -4.9743242263793945,
+                7.650158405303955
+              ],
+              "y": [
+                -5.019678592681885,
+                4.824228763580322
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "close",
+          "finish": "clay",
+          "view": 0,
+          "image": "render_slate/smithy/close_clay_0.png",
+          "sha256": "b76dcaf6f5eefdedbdf950612379958f9a9d5d4698b3c1d73c35773f88b85777",
+          "camera_location": [
+            7.642703056335449,
+            -15.90234375,
+            8.572418212890625
+          ],
+          "camera_target": [
+            2.799999952316284,
+            0.23999999463558197,
+            2.25
+          ],
+          "ortho_scale": 7.400000095367432,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "render_slate/smithy/normal_material_0.png",
+          "sha256": "fc6573e93a1ed66a4253e53ab98edc6e7f83f93f9656daddd174eeaebd9cadb6",
+          "camera_location": [
+            24.985652923583984,
+            -28.026805877685547,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -4.9743242263793945,
+                7.650158405303955
+              ],
+              "y": [
+                -5.019678592681885,
+                4.824228763580322
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "close",
+          "finish": "material",
+          "view": 0,
+          "image": "render_slate/smithy/close_material_0.png",
+          "sha256": "dba740d70381c937a40e1d7cdb963f474103cc7bb973dd1a6c589eaea976119b",
+          "camera_location": [
+            7.642703056335449,
+            -15.90234375,
+            8.572418212890625
+          ],
+          "camera_target": [
+            2.799999952316284,
+            0.23999999463558197,
+            2.25
+          ],
+          "ortho_scale": 7.400000095367432,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        }
+      ],
+      "treatments": [
+        "plaster_limewash",
+        "slate_tile_roofing",
+        "stone_masonry",
+        "structural_timber",
+        "wooden_boarding"
+      ]
+    },
+    {
+      "function": "SMITHY",
+      "region": "LOWMARK",
+      "variant": "earth_clay",
+      "settings": {
+        "seed": 91,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": true,
+        "seed_massing": true,
+        "construction_overrides": {
+          "by_role": {
+            "plinth": {
+              "treatment": "dressed_stone"
+            },
+            "frame_member": {
+              "treatment": "structural_timber",
+              "variant": "hewn_pegged"
+            },
+            "wall_infill": {
+              "treatment": "plaster_limewash",
+              "substrate": "earthen_render"
+            },
+            "roof_support": {
+              "treatment": "structural_timber",
+              "variant": "squared_housed"
+            },
+            "roof_cover": {
+              "treatment": "slate_tile_roofing",
+              "substrate": "fired_clay"
+            }
+          }
+        }
+      },
+      "triangles": 16996,
+      "geometry_hash": "db35b96368fbe316f4b66d19449cd88593a87e78e244645c7fb14b8d78af2fd5",
+      "images": [
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "clay",
+          "view": 0,
+          "image": "earth_clay/smithy/normal_clay_0.png",
+          "sha256": "c1f090fde71568b9f6c6ffbc4c6d23e72a1653bbbc095d2c451418d761eb9427",
+          "camera_location": [
+            24.985652923583984,
+            -28.026805877685547,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -4.9743242263793945,
+                7.650158405303955
+              ],
+              "y": [
+                -5.019678592681885,
+                4.824228763580322
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "close",
+          "finish": "clay",
+          "view": 0,
+          "image": "earth_clay/smithy/close_clay_0.png",
+          "sha256": "c85150e065e6c4718bcb8942dcbc07aa789a6044e35c6133b691c9a2063d8fda",
+          "camera_location": [
+            7.642703056335449,
+            -15.90234375,
+            8.572418212890625
+          ],
+          "camera_target": [
+            2.799999952316284,
+            0.23999999463558197,
+            2.25
+          ],
+          "ortho_scale": 7.400000095367432,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "earth_clay/smithy/normal_material_0.png",
+          "sha256": "e1bdd2d0a42e0a21b65b50a436d1788e5858a41886e07d999e9c470fadf769e5",
+          "camera_location": [
+            24.985652923583984,
+            -28.026805877685547,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -4.9743242263793945,
+                7.650158405303955
+              ],
+              "y": [
+                -5.019678592681885,
+                4.824228763580322
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "close",
+          "finish": "material",
+          "view": 0,
+          "image": "earth_clay/smithy/close_material_0.png",
+          "sha256": "884a4f95602d5e0aae296e8f8366e485443289fc41c44d2355c909a9ab44ff67",
+          "camera_location": [
+            7.642703056335449,
+            -15.90234375,
+            8.572418212890625
+          ],
+          "camera_target": [
+            2.799999952316284,
+            0.23999999463558197,
+            2.25
+          ],
+          "ortho_scale": 7.400000095367432,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        }
+      ],
+      "treatments": [
+        "dressed_stone",
+        "plaster_limewash",
+        "slate_tile_roofing",
+        "structural_timber",
+        "wooden_boarding"
+      ]
+    },
+    {
+      "function": "STABLE",
+      "region": "LOWMARK",
+      "variant": "render_slate",
+      "settings": {
+        "seed": 91,
+        "function": "STABLE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": false,
+        "seed_massing": false,
+        "construction_overrides": {
+          "by_role": {
+            "plinth": {
+              "treatment": "stone_masonry",
+              "variant": "level_course"
+            },
+            "frame_member": {
+              "treatment": "structural_timber",
+              "variant": "squared_housed"
+            },
+            "wall_infill": {
+              "treatment": "plaster_limewash",
+              "substrate": "lime_render"
+            },
+            "roof_support": {
+              "treatment": "structural_timber",
+              "variant": "squared_housed"
+            },
+            "roof_cover": {
+              "treatment": "slate_tile_roofing",
+              "substrate": "slate"
+            }
+          }
+        }
+      },
+      "triangles": 15402,
+      "geometry_hash": "fc1b58443e4473ab79a658054d67177666aa705a932ad4ab89d781b9cc486ddb",
+      "images": [
+        {
+          "function": "STABLE",
+          "distance": "normal",
+          "finish": "clay",
+          "view": 0,
+          "image": "render_slate/stable/normal_clay_0.png",
+          "sha256": "ed25e7e55bd46e7e38ebd116971ac4d75869fdcd4aa9b2a478d377703741a423",
+          "camera_location": [
+            29.685653686523438,
+            -26.626806259155273,
+            19.488523483276367
+          ],
+          "camera_target": [
+            8.699999809265137,
+            3.0,
+            2.700000047683716
+          ],
+          "ortho_scale": 31.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -10.285310745239258,
+                10.764725685119629
+              ],
+              "y": [
+                -6.062918186187744,
+                4.996435642242432
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -15.5,
+                15.5
+              ],
+              "y": [
+                -10.65625,
+                10.65625
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "STABLE",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "render_slate/stable/normal_material_0.png",
+          "sha256": "f61db1334825a12fbc8da82d77a618d2c530ae289a7a7b7b7d325922b4ddf4be",
+          "camera_location": [
+            29.685653686523438,
+            -26.626806259155273,
+            19.488523483276367
+          ],
+          "camera_target": [
+            8.699999809265137,
+            3.0,
+            2.700000047683716
+          ],
+          "ortho_scale": 31.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -10.285310745239258,
+                10.764725685119629
+              ],
+              "y": [
+                -6.062918186187744,
+                4.996435642242432
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -15.5,
+                15.5
+              ],
+              "y": [
+                -10.65625,
+                10.65625
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        }
+      ],
+      "treatments": [
+        "plaster_limewash",
+        "slate_tile_roofing",
+        "stone_masonry",
+        "structural_timber",
+        "wooden_boarding"
+      ]
+    },
+    {
+      "function": "GATEHOUSE",
+      "region": "THORNFELL",
+      "variant": "bonded_returns",
+      "settings": {
+        "seed": 91,
+        "function": "GATEHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": true,
+        "seed_massing": true,
+        "construction_overrides": {}
+      },
+      "triangles": 73870,
+      "geometry_hash": "07e4c86de3c8d320b2600199962b98e40de5a21db2e8c52b8e707e2238e69c37",
+      "images": [
+        {
+          "function": "GATEHOUSE",
+          "distance": "normal",
+          "finish": "clay",
+          "view": 0,
+          "image": "bonded_returns/gatehouse/normal_clay_0.png",
+          "sha256": "ed43ec4de08b53b6e7fb1297186c44b360ff245db36fe5339b23c333aa680e89",
+          "camera_location": [
+            38.32919692993164,
+            -39.95886993408203,
+            31.143360137939453
+          ],
+          "camera_target": [
+            7.900000095367432,
+            3.0,
+            6.800000190734863
+          ],
+          "ortho_scale": 32.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -10.35550308227539,
+                8.512018203735352
+              ],
+              "y": [
+                -10.412212371826172,
+                4.976620674133301
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -16.0,
+                16.0
+              ],
+              "y": [
+                -11.0,
+                11.0
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "close",
+          "finish": "clay",
+          "view": 0,
+          "image": "bonded_returns/gatehouse/close_clay_0.png",
+          "sha256": "85daff2d3aad066e8c8180bfdd9464a13f402f207159b400c7a1a18b768ae190",
+          "camera_location": [
+            29.5878963470459,
+            -18.126083374023438,
+            11.873114585876465
+          ],
+          "camera_target": [
+            16.996503829956055,
+            -0.3499999940395355,
+            1.7999999523162842
+          ],
+          "ortho_scale": 7.699999809265137,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "bonded_returns/gatehouse/normal_material_0.png",
+          "sha256": "36439e46019f4e9868576e428b72d8618e4f744204c50a937e4f6fa6f22494af",
+          "camera_location": [
+            38.32919692993164,
+            -39.95886993408203,
+            31.143360137939453
+          ],
+          "camera_target": [
+            7.900000095367432,
+            3.0,
+            6.800000190734863
+          ],
+          "ortho_scale": 32.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -10.35550308227539,
+                8.512018203735352
+              ],
+              "y": [
+                -10.412212371826172,
+                4.976620674133301
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -16.0,
+                16.0
+              ],
+              "y": [
+                -11.0,
+                11.0
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "close",
+          "finish": "material",
+          "view": 0,
+          "image": "bonded_returns/gatehouse/close_material_0.png",
+          "sha256": "3ce65e08b9181e093e5bface69f928b22d5df6f4feb163abff9bb5476daa7c6e",
+          "camera_location": [
+            29.5878963470459,
+            -18.126083374023438,
+            11.873114585876465
+          ],
+          "camera_target": [
+            16.996503829956055,
+            -0.3499999940395355,
+            1.7999999523162842
+          ],
+          "ortho_scale": 7.699999809265137,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        }
+      ],
+      "treatments": [
+        "dressed_stone",
+        "slate_tile_roofing",
+        "stone_masonry",
+        "structural_timber",
+        "wooden_boarding"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "installed_archive": "../../dist/caelmor_architecture.zip",
+  "archive_sha256": "d1ee5c956e3abd2884758425e9dabfa741f460cd4ae37583e277226fc85db33a",
+  "native_install_and_generate": true,
+  "isolated_preferences": true,
+  "region": "LOWMARK",
+  "building_type": "SMITHY",
+  "geometry_mode": "EFFICIENT",
+  "world_aware": true
+}

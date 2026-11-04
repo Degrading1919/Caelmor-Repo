@@ -331,7 +331,8 @@ def build(ctx):
             from .geometry import stable_seed
             dressed_curtain_return(wall,xa,xb,tie_y,base,
                                    stable_seed(b.settings.seed,spec.component_id),
-                                   dressed=spec.treatment=='dressed_stone')
+                                   dressed=spec.treatment=='dressed_stone',
+                                   bonded=True,variant=spec.variant)
     if diverse:
         b.program['adaptations'].append('Road-sized vaulted passage with guard wings set for exposure and sightlines')
     else:

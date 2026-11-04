@@ -86,11 +86,24 @@ def build_stable(ctx):
             # this carries the long roof without interrupting the 1.4m openings.
             post_x = x0
             post_top = shelter.roof_height(post_x, 0.0) - .22
-            b.box(f'stable.front_bearing_post.{bay}',
-                  (post_x - .12, -.10, base, post_x + .12, .10, post_top),
-                  'timber' if region not in ('THORNFELL', 'EMBERHOLT') else 'stone',
-                  zone, role='structure')
-            if region not in ('THORNFELL', 'EMBERHOLT'):
+            key=f'stable.front_bearing_post.{bay}'
+            is_timber=region not in ('THORNFELL', 'EMBERHOLT')
+            post=b.box(key,(post_x-.12,-.10,base,post_x+.12,.10,post_top),
+                       'timber' if is_timber else 'stone',zone,role='structure')
+            if is_timber:
+                spec=ctx.component(post,zone,key,'frame_member','structural_timber')
+                if spec and spec.variant:
+                    from .construction_geometry import hewn_member
+                    from .construction_library import timber_workmanship
+                    start,end=(post_x,0.,base),(post_x,0.,post_top)
+                    post.vertices.clear()
+                    post.faces.clear()
+                    if spec.variant=='hewn_pegged' and b.settings.detail!='LOW':
+                        hewn_member(post,start,end,.24,.20,timber_workmanship(b.settings),
+                                    ctx.rng(key))
+                    else:
+                        post.chamfered_beam(start,end,.24,.20,.006)
+            if is_timber:
                 bent = b.fixture(f'stable.front_bent_brace.{bay}', 'timber',
                                  zone, role='structure')
                 for side in (-1, 1):

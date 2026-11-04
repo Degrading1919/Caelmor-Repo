@@ -484,11 +484,14 @@ def _cladding_tiles(plan, edge_index, edge, openings, construction, buffer):
         z=bottom
         row=0
         while z<roof_max:
-            h=min(roof_max-z,base_h*rng.uniform(.88,1.12))
-            stagger=(row%2)*base_w*.42
+            variant=getattr(body,'variant',None)
+            level=variant=='level_course'
+            broken=variant=='broken_course'
+            h=min(roof_max-z,base_h*(1. if level else rng.uniform(.76 if broken else .88,1.24 if broken else 1.12)))
+            stagger=(row%2)*base_w*(.5 if level else .42)
             s=-stagger
             while s<length:
-                span=base_w*rng.uniform(.72,1.32)
+                span=base_w*(1. if level else rng.uniform(.65 if broken else .72,1.32))
                 lo,hi=max(0.0,s+.018),min(length,s+span-.018)
                 if hi-lo>.16:
                     tile=[(lo,z+.008),(hi,z+.008),(hi,z+h-.008),(lo,z+h-.008)]
@@ -849,17 +852,26 @@ def _add_foundation(buffers, plan, edge_index, edge):
     if spec:
         from .construction_geometry import stone_face
         dressed = spec.treatment=='dressed_stone'
-        count=max(1,round(fh/(.29 if dressed else .23)))
+        level = spec.variant=='level_course'
+        broken = spec.variant=='broken_course'
+        count=max(1,round(fh/(.29 if dressed else .18 if level else .23)))
+        weights=([rng.uniform(.75,1.25) for _ in range(count)] if broken else [1.]*count)
+        levels=[0.]
+        for weight in weights:
+            levels.append(levels[-1]+fh*weight/sum(weights))
         for row in range(count):
-            height=fh/count
-            position=-(.35 if row%2 else 0.)
+            position=-(.38 if row%2 and level else .35 if row%2 else 0.)
             while position<length:
-                width=rng.uniform(.76,.82) if dressed else rng.uniform(.55,.89)
+                width=.76 if level else rng.uniform(.76,.82) if dressed else rng.uniform(.47 if broken else .55,.89)
                 left,right=max(0.,position+.012),min(length,position+width-.012)
                 if right-left>.12:
-                    bottom,top=row*height+.009,(row+1)*height-.009
+                    bottom,top=levels[row]+.009,levels[row+1]-.009
                     proud=.066 if row==0 else .041
-                    polygon=stone_face(left,right,bottom,top,.014 if dressed else .024)
+                    if broken:
+                        proud+=rng.uniform(-.009,.013)
+                    if top<=bottom:
+                        break
+                    polygon=stone_face(left,right,bottom,top,.014 if dressed or level else .024)
                     _skin_polygon(stone,edge,polygon,proud,proud+.026)
                 position+=width
         return
@@ -1016,9 +1028,20 @@ def _timber_frame(buffers, plan, edge_index, edge, openings, top):
     post_width = .22 if str(plan.settings.function).upper() in ("BARN", "GRAIN_STORE") else .19
     structural_top=layout["roof_safety"]["structural_top"]
     visibility=float(getattr(getattr(plan,"style",None),"frame_visibility",1.0))
+    spec=timber.construction
     if visibility > .16:
         for ss in layout["principal_posts"]:
-            _post(timber,a,b,ss,_foundation(plan),structural_top,post_width,.25,chamfer)
+            if spec and spec.variant=='hewn_pegged' and detail!='LOW':
+                from .construction_geometry import hewn_member
+                from .construction_library import timber_workmanship
+                x,y=a[0]+tx*ss,a[1]+ty*ss
+                # Section axes follow the wall tangent and its normal,
+                # including every orthogonal wing face.
+                hewn_member(timber,(x,y,_foundation(plan)),(x,y,structural_top),post_width,.25,
+                            timber_workmanship(plan.settings),plan.rng(f'frame.hewn.{edge_index}.{ss}'),
+                            side=(tx,ty,0))
+            else:
+                _post(timber,a,b,ss,_foundation(plan),structural_top,post_width,.25,chamfer)
     # Storey plates are continuous through ordinary bays and interrupted only
     # where a tall door removes the wall below that level.
     plate_schedule=(layout["plates"] if visibility>.16 and edge_index not in getattr(plan,'open_edges',()) else layout["plates"][-1:])
@@ -1038,7 +1061,7 @@ def _timber_frame(buffers, plan, edge_index, edge, openings, top):
         p0=(a[0]+tx*brace["s0"],a[1]+ty*brace["s0"],brace["z0"])
         p1=(a[0]+tx*brace["s1"],a[1]+ty*brace["s1"],brace["z1"])
         _frame_beam(timber,p0,p1,.14,brace["width"],chamfer)
-        if brace.get("support")=="knee":
+        if brace.get("support")=="knee" and (not spec or spec.variant!='squared_housed'):
             for ss,zz in ((brace["s0"],brace["z0"]),(brace["s1"],brace["z1"])):
                 for tangent_offset in (-.035,.035):
                     x=a[0]+tx*(ss+tangent_offset)
@@ -1542,6 +1565,9 @@ def build_facades(plan):
         if (float(getattr(getattr(plan,"style",None),"frame_visibility",1.0))>.16
                 and not peg_levels and len(layout["plates"])>1):
             peg_levels=[layout["plates"][-1]]
+        timber_spec=buffers["timber"].construction
+        if timber_spec and timber_spec.variant=='squared_housed':
+            peg_positions=()
         for ss in peg_positions:
             for z in peg_levels:
                 # Paired oak pegs enter the joint across the post face. Their

@@ -156,6 +156,7 @@ class Style:
     frame_visibility: float
     palette: dict
     weather_exposure: float
+    authored_roof_cover: bool = False
 
 
 def _context(settings):

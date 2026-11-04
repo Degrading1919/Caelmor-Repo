@@ -1,5 +1,6 @@
 """Semantic component selection, independent of mesh names and palette slots."""
 from dataclasses import dataclass, field
+from .construction_library import VARIANTS
 
 TREATMENTS = {
     'stone_masonry': ('wall_body', 'plinth', 'arch_ring', 'vault'),
@@ -23,7 +24,7 @@ COVERS = {'SHINGLE': ('wooden_shingles', 'split_wood'),
           'CLAY': ('slate_tile_roofing', 'fired_clay')}
 COVER_FROM_STOCK = {stock: cover for cover, (_, stock) in COVERS.items()}
 PROVENANCE = ('component_id', 'component_role', 'treatment', 'substrate', 'surface_family',
-              'finish', 'host_component')
+              'finish', 'host_component', 'variant')
 
 
 def _choice(component, field, value, allowed):
@@ -41,6 +42,7 @@ class Construction:
     surface_family: str
     finish: str = 'procedural'
     host_component: str | None = None
+    variant: str | None = None
 
 
 @dataclass
@@ -57,6 +59,7 @@ class Resolver:
         registered = {
             'treatment': TREATMENTS, 'substrate': set().union(*STOCK.values()),
             'surface_family': ('stone', 'wood', 'roof', 'plaster'), 'finish': finishes,
+            'variant': {variant for options in VARIANTS.values() for variant in options},
         }
         for scope in ('by_role', 'by_component'):
             entries = self.overrides.get(scope, {})
@@ -95,8 +98,13 @@ class Resolver:
         family = ('stone' if substrate in STONE else 'roof' if role == 'roof_cover'
                   else 'plaster' if treatment == 'plaster_limewash' else 'wood')
         surface = _choice(key, 'surface_family', fields.get('surface_family', family), (family,))
+        variant = fields.get('variant')
+        if variant is not None:
+            allowed_variants = tuple(name for name, roles in VARIANTS.get(treatment, {}).items()
+                                     if role in roles)
+            _choice(key, 'variant', variant, allowed_variants)
         result = Construction(key, role, treatment, substrate, surface,
-                              fields.get('finish', 'procedural'), host)
+                              fields.get('finish', 'procedural'), host, variant)
         self.components[key] = result
         return result
 

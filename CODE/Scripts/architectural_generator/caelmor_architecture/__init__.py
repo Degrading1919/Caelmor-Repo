@@ -2,7 +2,7 @@
 bl_info = {
     "name": "Caelmor Architectural Generator",
     "author": "Caelmor",
-    "version": (0, 13, 0),
+    "version": (0, 14, 0),
     "blender": (4, 2, 0),
     "location": "View3D > Sidebar > Caelmor",
     "description": "Generate editable regional Caelmor buildings",
@@ -11,6 +11,7 @@ bl_info = {
 
 import json
 from .profiles import REGIONS, TYPE_SPECS
+from .construction_library import ASSEMBLIES, FINISH_ROLES, authored_overrides, enum_items, selected
 
 # Keep this package importable by ordinary Python outside Blender.
 bpy = None
@@ -47,8 +48,8 @@ def _bpy():
 def _settings_from_props(props):
     from .model import Settings
     overrides = json.loads(props.caelm_construction_overrides or '{}') if props.caelm_construction else None
-    if props.caelm_construction and not isinstance(overrides, dict):
-        raise ValueError('Construction Overrides must be a JSON object')
+    if overrides is not None:
+        overrides = authored_overrides(props, overrides)
     return Settings(
         seed=props.caelm_seed,
         function=props.caelm_function,
@@ -106,7 +107,13 @@ def _set_props(props, settings):
     props.caelm_crafted_curves = settings.crafted_curves
     props.caelm_seed_massing = settings.seed_massing
     props.caelm_construction = settings.construction_overrides is not None
-    props.caelm_construction_overrides = json.dumps(settings.construction_overrides or {}, sort_keys=True)
+    original = settings.construction_overrides or {}
+    props.caelm_construction_overrides = json.dumps(original, sort_keys=True)
+    roles = original.get('by_role',{})
+    for name,(role,_,options) in ASSEMBLIES.items():
+        setattr(props, 'caelm_assembly_'+name, selected(options,roles.get(role,{})))
+    props.caelm_edit_finish = False
+    props.caelm_finish_material = None
 
 
 def _active_build(context):
@@ -176,8 +183,11 @@ def _make_classes(b):
             name="Construction Treatments", default=True,
             description="Resolve construction by component role; legacy buildings load with this off")
         caelm_construction_overrides: b.props.StringProperty(
-            name="Construction Overrides", default="{}",
-            description="Optional JSON by_component and by_role maps; empty uses regional defaults")
+            name="Saved Construction Overrides", default="{}", options={'HIDDEN'})
+        caelm_edit_finish: b.props.BoolProperty(name="Set a finish on this role")
+        caelm_finish_role: b.props.EnumProperty(name="Finish surface", items=[
+            (role, role.replace('_',' ').title(), '') for role in FINISH_ROLES])
+        caelm_finish_material: b.props.PointerProperty(name="Artist finish", type=b.types.Material)
         caelm_roof_style: b.props.EnumProperty(name="Roof Style", items=[
             ('AUTO', "Regional / Type Default", "Select a suitable roof by type and region"),
             ('GABLE', "Gable", "Gabled roof"), ('HIP', "Hip", "Hipped roof")], default='AUTO')
@@ -198,6 +208,10 @@ def _make_classes(b):
         caelm_overhang: b.props.FloatProperty(name="Overhang", default=0.45, min=0.2, max=0.75, unit='LENGTH')
         caelm_detail: b.props.EnumProperty(name="Detail", items=[('LOW', "Low", "Fewer architectural details"), ('MEDIUM', "Medium", "Balanced detail"), ('HIGH', "High", "Full detail")], default='HIGH')
         caelm_window_density: b.props.FloatProperty(name="Window Density", default=1.0, min=0.4, max=1.5)
+
+    for name,(_,label,options) in ASSEMBLIES.items():
+        CAELMOR_PG_Settings.__annotations__['caelm_assembly_'+name] = b.props.EnumProperty(
+            name=label, items=enum_items(options), default='AUTO')
 
     class CAELMOR_OT_apply_grammar(b.types.Operator):
         bl_idname = "caelmor.apply_grammar"
@@ -365,7 +379,15 @@ def _make_classes(b):
             regional.prop(p, "caelm_geometry_mode")
             regional.prop(p, "caelm_construction")
             if p.caelm_construction:
-                regional.prop(p, "caelm_construction_overrides")
+                construction = box.box()
+                construction.label(text="Construction library")
+                for name in ASSEMBLIES:
+                    construction.prop(p, 'caelm_assembly_'+name)
+                construction.prop(p, "caelm_edit_finish")
+                if p.caelm_edit_finish:
+                    construction.prop(p, "caelm_finish_role")
+                    construction.prop(p, "caelm_finish_material")
+                    construction.label(text="Empty material uses the procedural finish")
             regional.operator("caelmor.apply_grammar", icon='FILE_REFRESH')
             box.label(text="Shape inputs" if p.caelm_world_aware else "Manual shape controls (used when grammar is off)")
             if p.caelm_world_aware:

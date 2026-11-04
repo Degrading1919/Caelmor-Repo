@@ -412,10 +412,10 @@ def build_roof(plan):
     if cover_spec is not None and COVER_FROM_STOCK[cover_spec.substrate]!=cover:
         cover=COVER_FROM_STOCK[cover_spec.substrate]
         palette=dict(plan.style.palette)
-        color={'SHINGLE':(.22,.15,.10), 'SLATE':(.22,.26,.27), 'CLAY':(.37,.19,.12)}[cover]
+        color={'SHINGLE':(.22,.15,.10), 'SLATE':(.155,.20,.224), 'CLAY':(.35,.14,.07)}[cover]
         for key,factor in (('roof',1.),('roof_dark',.94),('roof_worn',.985),('roof_patch',1.025)):
             palette[key]=tuple(c*factor for c in color)+(1.,)
-        plan.style=replace(plan.style,roof_cover=cover,palette=palette)
+        plan.style=replace(plan.style,roof_cover=cover,palette=palette,authored_roof_cover=True)
     patches=roof_faces(plan)
     points,faces,edges=roof_topology(patches)
     deck=MeshBuffer('Continuous roof deck','timber','roof')
@@ -480,7 +480,16 @@ def build_roof(plan):
             for value in span:
                 x,y=(u,value) if axis==1 else (value,u)
                 ends.append((x,y,patch.height(x,y)-.22))
-            rafters.beam(*ends,.12,.16)
+            spec=rafters.construction
+            if spec and spec.variant=='hewn_pegged' and detail!='LOW':
+                from .construction_geometry import hewn_member
+                from .construction_library import timber_workmanship
+                hewn_member(rafters,*ends,.12,.16,timber_workmanship(plan.settings),
+                            plan.rng(f'roof.hewn.{patch.source}.{col}.{ends[0]}'))
+            elif spec and spec.variant=='squared_housed':
+                rafters.chamfered_beam(*ends,.12,.16,.005)
+            else:
+                rafters.beam(*ends,.12,.16)
     if any(p.swept for p in patches):
         from .curve_sweep import sweep_member
         axis=0 if abs(patches[0].plane[0])>1e-8 else 1
