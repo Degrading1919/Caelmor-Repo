@@ -31,9 +31,31 @@ def surface_base(key,buffer_name,settings,base):
     # Wall field is local coursed stone; quoins, arch and bearing bands receive
     # more carefully dressed stock. Sharing the old stone_light key must not
     # make the entire fortification as pale as its dressed portal.
-    if settings.world_aware and (settings.region,settings.function)==('THORNFELL','GATEHOUSE') and '.facade_masonry_skin' in buffer_name:
+    if uses_masonry_stock(buffer_name,settings):
         return (.295,.315,.32,1.)
     return base
+
+
+def uses_masonry_stock(buffer_name, settings):
+    return (settings.world_aware and (settings.region,settings.function)==('THORNFELL','GATEHOUSE')
+            and '.facade_masonry_skin' in buffer_name)
+
+
+def masonry_stock_tint(centers, seed):
+    """One mineral tint per stone, with related stock in adjacent courses."""
+    import numpy as np
+    from .surface_patterns import _noise
+
+    x,y,z=np.asarray(centers).T
+    seed=seed & 0xffff
+    # Sample at the connected stone's center so its front and bevel share
+    # stock. Two crossed fields avoid straight stripes on orthogonal walls.
+    stock=np.clip(1.45*(.72*_noise(x+.64*y,z,.68,.73,seed+271)
+                       +.28*_noise(y-.46*x,z,1.05,1.22,seed+389)),-1.,1.)
+    # Iron-tinted and cooler stock bracket the regional stone palette. This
+    # changes diffuse color with little change in value. The dressed surrounds
+    # keep their separate palette and the geometry supplies the joint shadows.
+    return 1.+stock[:,None]*np.array([.185,.035,-.155])
 
 
 def refine(ctx):

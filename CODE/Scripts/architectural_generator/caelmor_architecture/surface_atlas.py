@@ -11,6 +11,7 @@ import numpy as np
 from .materials import PALETTE, _palette_entry, _hash2
 from .surface_detail import sample_detail,generate_normal_tile,DETAIL_PERIOD
 from .surface_conditions import condition_fields, environment
+from .benchmark_finish import masonry_stock_tint, surface_base, uses_masonry_stock
 
 ATLAS_REVISION=2
 UV_NAME='UV2_Surface'
@@ -164,13 +165,16 @@ def apply_surfaces(objects,plan,settings,context_objects=None):
         if key not in FAMILY:continue
         host=hosts.get(obj.get('caelm_world_zone'),plan)
         base=_palette_entry(key,getattr(host,'style',None),settings)[0]
-        from .benchmark_finish import surface_base
-        base=surface_base(key,obj.get('caelm_buffer_id',''),settings,base)
-        groups.setdefault((key,base),[]).append((obj,host))
+        buffer_id=obj.get('caelm_buffer_id','')
+        base=surface_base(key,buffer_id,settings,base)
+        wall_stock=uses_masonry_stock(buffer_id,settings)
+        groups.setdefault((key,base,wall_stock),[]).append((obj,host))
     reports=[]
-    for (key,base),members in sorted(groups.items()):
+    for (key,base,wall_stock),members in sorted(groups.items()):
         digest=hashlib.sha256()
         digest.update(json.dumps((ATLAS_REVISION,key,base,settings.__dict__),sort_keys=True).encode())
+        if wall_stock:
+            digest.update(b'Thornfell masonry stock v1')
         for obj,host in members:
             digest.update(obj['caelm_buffer_id'].encode())
             digest.update(json.dumps(contexts[id(host)],sort_keys=True).encode())
@@ -218,6 +222,11 @@ def apply_surfaces(objects,plan,settings,context_objects=None):
             # distinguish stock faces without resetting a knot every polygon.
             pattern=sample_detail(family,uu,vv,region=settings.region,craftsmanship=settings.craftsmanship)
             color=pattern['albedo']*np.asarray(base[:3])
+            if wall_stock:
+                tints=masonry_stock_tint([c['center'] for c in charts],settings.seed)
+                for c,tint in zip(charts,tints):
+                    start,end=c['slice']
+                    color[start:end]*=tint
             rough=pattern['roughness'].copy();metal=pattern['metallic'].copy()
             # Regions/material cohorts share textures but retain their actual
             # host volume's eaves, apertures and hearths.
