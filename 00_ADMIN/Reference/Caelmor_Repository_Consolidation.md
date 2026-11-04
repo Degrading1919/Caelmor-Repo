@@ -20,6 +20,14 @@ The Creative Director authorized removal of the redundant copies after GitHub ve
 
 The original rejected contract and its mixed parent remain reachable on GitHub through `codex/preserve-rejected-contract`. The local architecture recovery snapshot at `4efa0205` was reconciled file by file. Its raw history is superseded by the indexed artifacts above and the existing source history on PR #85.
 
+### Cleanup completed
+
+GitHub's tree for `63068b4` matched the local blob IDs for all 22 changed files. Before removing the originals, the cleanup rechecked their SHA-256 values against the inventory and verified the architecture branch, PR head and rejected-contract recovery ref on GitHub.
+
+- Git removed the detached `Caelmor-Architecture` worktree and its directory. The cleanup also removed `Caelmor`, `Caelmor-Build`, `Caelmor Art Director Support`, `RS3-Material-Usage`, the Fort Forinthry extracts directory and four research-tool staging directories.
+- The cleanup removed 15 loose files, including old playable ZIPs, two generated research bundles, duplicate research downloads and third-party reference images. Their retained project-owned content or provenance is recorded above.
+- The three obsolete local recovery branches were removed. The final filesystem sweep found only the designated checkout among the inspected project locations. Git reported a single registered worktree.
+
 ### Inventory before cleanup
 
 | Location | Finding and disposition |
