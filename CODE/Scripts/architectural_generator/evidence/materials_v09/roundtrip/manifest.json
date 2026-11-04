@@ -1,0 +1,77 @@
+{
+  "blender": "5.0.1",
+  "images": [
+    {
+      "function": "SMITHY",
+      "distance": "normal",
+      "image": "smithy_normal.png",
+      "sha256": "557c57601428588e4f22df9d4fcec730cc7275f34f27a1c90363167ee223dafd",
+      "glb_sha256": "f14a3f6a0fd1c2584220077dd7d511ef2c8eaad698dcd67eeb88aede4c3b5abd",
+      "camera_location": [
+        24.985652923583984,
+        -28.026805877685547,
+        19.988523483276367
+      ],
+      "camera_target": [
+        4,
+        1.6,
+        3.2
+      ],
+      "ortho_scale": 18.0
+    },
+    {
+      "function": "SMITHY",
+      "distance": "close",
+      "image": "smithy_close.png",
+      "sha256": "159682aa3416a616973976b0ef31230dc47acb278b6d3ade2e9f146181f28415",
+      "glb_sha256": "f14a3f6a0fd1c2584220077dd7d511ef2c8eaad698dcd67eeb88aede4c3b5abd",
+      "camera_location": [
+        10.827001571655273,
+        -13.888312339782715,
+        6.762770652770996
+      ],
+      "camera_target": [
+        2.6,
+        1.3,
+        1.7
+      ],
+      "ortho_scale": 7.5
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "normal",
+      "image": "gatehouse_normal.png",
+      "sha256": "95b3a3435bb30a4815dd503db90b7eca6695469afa5f31e47ed46e17793db011",
+      "glb_sha256": "c948de70e19d0145784dd625f46dd21949bd745d67f0d090705f39c2a2c0aa65",
+      "camera_location": [
+        38.32919692993164,
+        -39.95886993408203,
+        31.143360137939453
+      ],
+      "camera_target": [
+        7.9,
+        3,
+        6.8
+      ],
+      "ortho_scale": 38.0
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "close",
+      "image": "gatehouse_close.png",
+      "sha256": "7e7153909c67f3bb8b054de80b163e8589bb8e6c7256d50786abcb621d163f51",
+      "glb_sha256": "c948de70e19d0145784dd625f46dd21949bd745d67f0d090705f39c2a2c0aa65",
+      "camera_location": [
+        20.491392135620117,
+        -17.376083374023438,
+        12.973114013671875
+      ],
+      "camera_target": [
+        7.9,
+        0.4,
+        2.9
+      ],
+      "ortho_scale": 9.0
+    }
+  ]
+}

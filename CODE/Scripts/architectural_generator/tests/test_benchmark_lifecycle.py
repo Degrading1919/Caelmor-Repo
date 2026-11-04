@@ -66,7 +66,7 @@ for function,region in (('SMITHY','LOWMARK'),('GATEHOUSE','THORNFELL')):
     data=json.loads(sidecar.read_text())
     assert data['settings']['seed']==91 and data['functional_program']['function']==function
     assert any(o.get('functional_role') for o in data['objects'])
-    assert all(len(o.data.uv_layers)==2 for o in collection.objects if o.get(TAG) and not o.get('caelm_collider'))
+    assert all('UV0_Metric' in o.data.uv_layers and 'UV1_Lightmap' in o.data.uv_layers for o in collection.objects if o.get(TAG) and not o.get('caelm_collider'))
     with tempfile.TemporaryDirectory(prefix='caelmor_benchmark_') as folder:
         saved=Path(folder)/'reopen.blend'
         bpy.ops.wm.save_as_mainfile(filepath=str(saved))

@@ -1,0 +1,156 @@
+{
+  "blender": "5.0.1",
+  "source_sha256": {
+    "surface_atlas.py": "51fd04bb8b89d033c047abae363b0f0989fb4bb0a5e6182122c1b6d5cd5a76a4",
+    "blender_backend.py": "a51def14b82dcbade35b37e0c9071b47bf522103764078226aa2d8198e1fec81",
+    "surface_patterns.py": "08bd96e520f837bc431db6f07125030ad04a5ca727ec5fc8ea140f93dcc1a677",
+    "surface_conditions.py": "48a2623d36972f09e13cfd8da41e5bce036749fb306b592fec7ef74301ffe55a"
+  },
+  "source_unchanged_during_run": true,
+  "png_payloads_equal_to_pre_context_fix": {
+    "SMITHY": true,
+    "GATEHOUSE": true
+  },
+  "cases": [
+    {
+      "function": "SMITHY",
+      "region": "LOWMARK",
+      "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367",
+      "uv2_exported_corner_values_checked": 18372,
+      "material_export": {
+        "materials_with_maps": 14,
+        "map_bindings": {
+          "base": 14,
+          "normal": 14,
+          "orm": 14
+        },
+        "embedded_image_count": 42,
+        "embedded_png_sha256": [
+          "e604f6b374c45a0f5a89ee05c67b1b8f849131dcfef45f973e46a99dcf0aac68",
+          "3e3d82017ee64fc0bbc4d8f1ec6c193e76e71790139be339127513ba441a465e",
+          "f9abca6b78423a341aea1cb781da41d7d7940c33a29b4c59e6badf6264f9e496",
+          "6ed1a301739b369589a224348acb4966616a823bf716783b255f283bb4b2cbb9",
+          "0dc239de1365691f09071aa4db0f9fba0c8fb91c4438469ad93d1a26c846f896",
+          "69d0f41ec07ca68fadf7c17459e998816174fa381d2712e6abad97c89e943295",
+          "6a42197ca7b5420a1497f20dff27bd3a6a8635c959e09ff7e0fd1a74d8dc317f",
+          "3c25331e0d38e1bb7d9295a13b4e8c84636b2d2507851cd2312ce721598167f0",
+          "385985cbfffd58358d9479cfea869cc525b3a87f555dda8f1fa87ddf909bdb23",
+          "dad7a54c4145b92d325a5ceb1229a32db103d81519d3444697901f14c3e879b5",
+          "46bc24a07f823646399ab8a5f5c8856dfba39cf8c760df2ca0a07f79a9bc68ef",
+          "caeec14356c08963da5c77250faa21074f5777aafb242065ce7b5724f0aa99ce",
+          "81e952162dfbfd398a359b07894c3644ecc13082aca6be6aa248f1b0c575dc65",
+          "d362441e3931200aaf4dffdeff43f61c807ddcafca188fa666953c420eca5dfa",
+          "1161545a0c6694b085e5a92dc2a8d2091b0ca4040ede2477aa0cd5cb6373a308",
+          "177e824aa3aadf19cd42c502ff4906e6f4aeb1c63ae0091d0531d3b33deaa0c2",
+          "f47e7aaf4babee9274a468bdddc0d1614252c4e4c511d9ca536de293adaf9141",
+          "9ecb7f2ae6af816cb512bba98ca59e20c0e73ae4a99421446c26ad953040d713",
+          "6d9175eb92bace289ec2114736b4aa6edc9cdcf4db0fb12a31090c62cecb97b7",
+          "4620d7256d3162ce51cf101beb8e8f48b35dd3b05a9234d8bdd998c9ed02679b",
+          "a189e8177e4558b4efa14c5407044c67cea6fdd51bf135de3ac344df23387148",
+          "0761baa67c7edd5f0e3c5752434995a36d91190c5984611c5142de7f3a70ed95",
+          "1849126536aade2fb249389667895fd52783da87a6de519bc550a9214858cf55",
+          "6e0cbfd641d97727bedcede5979f905b465cca85c467e73b03fcb1a645381f78",
+          "38eea259bb860d7ad0fe3fa7e8d72bc4dfe1ac3daac576247265f19b20dbb947",
+          "7e1be4c46a8a8bcbba7f5d954955f6220fb66fdf5ad3932b2784bf59dc7881f6",
+          "d74aeb175e42c0effe78a81d8dd0a30466066434846cf7bce55b38dc02a2e569",
+          "462775d6c58b8088246c3db58270f1e8b82e4e644aa13a60fe664721194d70cf",
+          "d74fd302f8e542825c1a8cc54e2273320fbd05385c61caa6bcf2c5b267bdc6ba",
+          "9658991ffde4abd33c25687624c95ee50f0868a8edb095c00f5fe26b2159b07c",
+          "a2586781e716bf909851dbf6f9dbe8b16978ef97076567a626dc5b7a69692c95",
+          "7959824596fbd4694cc561b4e4cc0d33289ff1cb7facce9d0c88ec02005e314b",
+          "d4ea158d5f0e827baca5ed66beb5b9b692d2a9ae72202004b037eafcedc728dc",
+          "f92d1aa15fa7214b4af279b48f6846f0308e861b85822c54c53736f11e1e3486",
+          "b3c53d026520e3652f91615ab6bfa0bc0b4447360880a1978edf516577bdaa1a",
+          "6c139d1460255dd36e7ff5d2b0d961c052447dbd4a408beac570db8e42431d51",
+          "66b3cd00658fed6210fb038759ccfe24cebdba68982f5f7bdd4a5555b38dc60c",
+          "65438f91dd35a0054b4cccb77412fe575ee694160d9614bf28d654994a857320",
+          "d8549758234faf3d9b57fc2e663ff52ca0e6ec7c71fe4342e1736973dbaad9ff",
+          "219c18a586387d3ee901b2521cd30c78507a8498710d8c0e1d59ecad0ba3ce94",
+          "487698ff0d22df35c1e2c4824a003d021869ca4f7fcdb2efb1ae9d2d9b6a9725",
+          "3b9a312106e69b313007a6bedbc77ff40204de66272545aa48063cf5c64ce187"
+        ]
+      },
+      "reimport": {
+        "imported_meshes": 65,
+        "reimported_pixel_map_checks": 56,
+        "distinct_source_pixel_signatures": 42
+      },
+      "source_map_variation": {
+        "albedo_rgb_max_range": 0.8627450913190842,
+        "orm_roughness_g_range": 0.43137258291244507,
+        "orm_metallic_b_range": 0.8156863451004028
+      },
+      "regeneration_protection_override": {
+        "protected_geometry_edit_retained": true,
+        "material_override_retained": true,
+        "unprotected_geometry_restored": true,
+        "cached_shader_edit_survived_regeneration": true,
+        "remaining_atlas_maps_deterministic": true,
+        "protected_hearth_retained_on_full_regeneration": true,
+        "roof_stone_fingerprints_unchanged": true,
+        "roof_only_regeneration_retained_heat_context": true,
+        "roof_only_atlas_materials_valid": true,
+        "roof_only_albedo_normal_orm_samples_checked": 432,
+        "roof_only_max_sample_error": 5.930077442428683e-07,
+        "saved_scene_reopened_with_packed_images_and_uvs": true
+      },
+      "glb_sha256": "f14a3f6a0fd1c2584220077dd7d511ef2c8eaad698dcd67eeb88aede4c3b5abd"
+    },
+    {
+      "function": "GATEHOUSE",
+      "region": "THORNFELL",
+      "geometry_hash": "4b7472cc506bae5d4db82b9aa1336277195cebee072995e9f09294bc27946ec3",
+      "uv2_exported_corner_values_checked": 83726,
+      "material_export": {
+        "materials_with_maps": 9,
+        "map_bindings": {
+          "base": 9,
+          "normal": 9,
+          "orm": 9
+        },
+        "embedded_image_count": 27,
+        "embedded_png_sha256": [
+          "a0aa682c62cd1262f483da1aa875c9090a41097f7d9146a80a712fe2fce928a8",
+          "3c1a576ca39566ffd32b64de1f4864c98c07eda52f169fceb6254ed4574fbe83",
+          "7cff018f2e7209da10b9297695117b45fca2ed6fd2cc4daf2a8d194beb567903",
+          "5fcd5170a1095b1cb3f32fb0083f4b065b60554f262f36ca0c08422c1a3b5aa0",
+          "98cfbf47b769f3404eceb8bc56b10eb2f577eb8fa38630186da9033a3ba084bb",
+          "0e8f203ffaea04854ce9ebed81b5fe600be1d4d67afaf686ad355cc4a2cf1a42",
+          "72f1cf4927249127cff7da7ca5ba53f5f49d7abc26018b59a879096322a80180",
+          "ae39cb7155219a5cb334776a9d6e5cd9555b12b37876a3d08a55f0ac15f625bb",
+          "28347b578fac400ec41775f94ba5504a1013b35ef8cc1d7c6b36da64cb4801b9",
+          "f833119f5982a1bdb881616709573244406b7ba8edfd659714915be0d5fb4164",
+          "bcdbba962985c801d02cbb2e5e76fe3ca921cae1b4d1803593df13dd8b771d54",
+          "bb7f9acf408f9df5f610861f2d5f3110123813f6227a97fd713a9ae0966c5c83",
+          "d53c8aa864486e89c38df2942ec8ae6625e3e8eeb0c970d59e9fa2828d669a1f",
+          "06d23a3193d572b466bcb7ea53b1e524962020272fbebdfb6ebf296e61fdbc23",
+          "7e159a2981b4a9afb764489fdb5f8fb6bc59703cb6fb4abc49baa37d8f20467a",
+          "88bbc43fb3e8a69855ffa542b992c6719087d65096ce7d2e95786fbc048fbd82",
+          "8fcd099f1000a4f3829f41ef7c5030075b8adcc6fafa877d6e9b4fa1aeecba67",
+          "e4ae0db3bd16c575f8f808bf6efc5f9c2c7580c6096d33354db0670f30461462",
+          "9e079e15a2565523195da96ccc067bb123ce88645d98d91d1bf6381dca2cb78e",
+          "4a91271ecf8546066c996baf9a29d21e45d08330053cc941cbdfc4a987b11fb3",
+          "e18d5bb27be329aeb5f1834ff671cabfe85d2eecaabc9597487141f91ca2e9d3",
+          "9762f59ecd0d4129a0eae23e41ecfd62eb26764805398fe5a4b0a681a6e7a22e",
+          "fdbe98c227841ccb26ddb5a2534a395ba8cc0bc81c31d1c1281b3ac472098d91",
+          "b6a95de57875a2561fe4fb4c7e1f0349524664f49cc1403062d380fc8dfcd3ac",
+          "d4a3913ba2c323b0843f20985eb989714db403abef8ed6d8e4eaeef667b4d651",
+          "825f31713a36456c49748853c6d4190978dddcddaada3589fd404207db1ef7e2",
+          "5236d9e18295ed15de8dd23b116d5bb06f2ceb105cd4d667649ebcd699432d44"
+        ]
+      },
+      "reimport": {
+        "imported_meshes": 149,
+        "reimported_pixel_map_checks": 36,
+        "distinct_source_pixel_signatures": 27
+      },
+      "source_map_variation": {
+        "albedo_rgb_max_range": 0.6509803831577301,
+        "orm_roughness_g_range": 0.43137258291244507,
+        "orm_metallic_b_range": 0.8156863451004028
+      },
+      "regeneration_protection_override": {},
+      "glb_sha256": "c948de70e19d0145784dd625f46dd21949bd745d67f0d090705f39c2a2c0aa65"
+    }
+  ]
+}
