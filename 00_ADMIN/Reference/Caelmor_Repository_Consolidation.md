@@ -1,5 +1,9 @@
 # Caelmor repository consolidation
 
+## Current development policy
+
+The Creative Director has authorized direct work on `main` in the sole checkout `C:/Users/CK/Documents/Caelmor-Repo`. PR #85 was merged into `main`. The distinct lore proposal was preserved as a proposal-only file without reverting the newer approved balance decisions. The historical lore-proposal and rejected-contract branch commit ancestry was also incorporated into `main` while retaining the reconciled `main` file tree. Old branch names are historical and no longer implementation targets; the work policy is defined by root `AGENTS.md` and the Master Assistant Protocol. The inventory below records the earlier consolidation stages, not active development instructions.
+
 ## Authority and implementation target
 
 GitHub `Degrading1919/Caelmor-Repo` is the project authority. `C:/Users/CK/Documents/Caelmor-Repo` is the sole designated working checkout on this machine. See the [agent workflow](../../AGENTS.md) for feature branches, PR review and cleanup gates.
