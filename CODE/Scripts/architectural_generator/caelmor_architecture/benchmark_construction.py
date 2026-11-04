@@ -39,12 +39,21 @@ def smithy_range(b,main):
         xs=(.24,main.width-.24)
         top=min(main.roof_height(x,y) for x in xs)-.36
         for x in xs:
-            frame.chamfered_beam((x,y,z+.28),(x,y,top),.24,.24)
-        frame.chamfered_beam((xs[0],y,top-.10),(xs[1],y,top-.10),.24,.26)
+            frame.chamfered_beam((x,y,z+.28),(x,y,top),.32,.32)
+        frame.chamfered_beam((xs[0],y,top-.10),(xs[1],y,top-.10),.30,.32)
         ridge=main.width*.5;peak=main.roof_height(ridge,y)-.42
         frame.beam((ridge,y,top),(ridge,y,peak),.18,.18)
         for x in xs:
-            frame.chamfered_beam((x,y,top),(ridge,y,peak),.18,.22)
+            frame.chamfered_beam((x,y,top),(ridge,y,peak),.22,.26)
+        # Hewn knees join the post shoulders to the tie. The lower end stays
+        # above the declared human route, with real bearing at both ends.
+        knees=ctx.buffer('smithy.tie_knees.'+('front' if y<d*.5 else 'rear'),'timber','structure',main)
+        for x,sign in ((xs[0],1),(xs[1],-1)):
+            points=[(x,y-.10,top-.88),(x+sign*.14,y-.10,top-.86),
+                    (x+sign*.40,y-.10,top-.49),(x+sign*.88,y-.10,top-.20),
+                    (x+sign*.88,y-.10,top-.09),(x+sign*.65,y-.10,top-.09),
+                    (x+sign*.24,y-.10,top-.34),(x,y-.10,top-.64)]
+            knees.extrude(points,(0,.20,0))
         for x in (1.35,main.width-1.35):
             frame.beam((ridge,y,top+.12),(x,y,main.roof_height(x,y)-.42),.15,.17)
     for x in (.24,main.width-.24,main.width*.5):
@@ -54,9 +63,9 @@ def smithy_range(b,main):
     for y in (.22,d-.24):
         for x in (5.82,9.38):
             top=stock.roof_height(x,y)-.30
-            stock_frame.chamfered_beam((x,y,z),(x,y,top),.20,.20)
+            stock_frame.chamfered_beam((x,y,z),(x,y,top),.26,.26)
         stock_frame.beam((5.82,y,stock.roof_height(5.82,y)-.30),
-                         (9.38,y,stock.roof_height(9.38,y)-.30),.20,.22)
+                         (9.38,y,stock.roof_height(9.38,y)-.30),.26,.28)
     for x in (5.82,9.38):
         top=stock.roof_height(x,.22)-.30
         stock_frame.beam((x,.22,top),(x,d-.24,top),.18,.22)

@@ -435,6 +435,8 @@ def generate(settings):
     if not ctx.masses:raise ValueError('Architectural language created no occupied volume')
     _abutment_flashings(ctx)
     _working_apparatus(ctx)
+    from .benchmark_finish import refine
+    refine(ctx)
     buffers=[b for b in ctx.buffers if b.faces]
     return WorldPlan(ctx,settings),buffers
 

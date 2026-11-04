@@ -3,7 +3,7 @@ import json, math, os, uuid
 import bpy
 from mathutils import Vector, Matrix
 from .engine import generate, validate, geometry_hash, TOOL_REVISION
-from .materials import get_material, surface_tint
+from .materials import get_material
 
 TAG = "caelm_generated"
 COLLECTION_TAG = "caelm_build"
@@ -105,11 +105,10 @@ def _mesh_object(buffer, cache, build_id, plan=None):
     # COLOR_0 carries deterministic environmental weathering into glTF/GLB.
     # Corner colors let adjacent faces retain their own exposure without changing geometry.
     tint_layer = mesh.color_attributes.new(name="CaelmorTint", type='FLOAT_COLOR', domain='CORNER')
-    for poly in mesh.polygons:
-        normal = tuple(poly.normal)
-        for loop_index in poly.loop_indices:
-            vertex = mesh.vertices[mesh.loops[loop_index].vertex_index].co
-            tint_layer.data[loop_index].color = surface_tint(tuple(vertex), normal, material, plan, style, settings)
+    import numpy as np
+    # Current finishes bake causal colour into PBR maps. Computing the old
+    # per-corner sill scans only to overwrite them wastes work on large assets.
+    tint_layer.data.foreach_set('color',np.ones(len(tint_layer.data)*4,dtype=np.float32))
     mesh.uv_layers.active_index = 0
     # Set the single render-layer index last, using a fresh RNA reference after
     # adding UV1. Clearing another layer can clear the shared render flag.

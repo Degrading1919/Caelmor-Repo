@@ -1,6 +1,8 @@
 # Caelmor Architectural Generator
 
-Version 0.9.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
+Version 0.10.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
+
+The 0.10 art pass gives the Lowmark Smithy heavier timber bents and hewn knees. The Thornfell Gatehouse gains worked stone faces, bonded battered plinths and ground-bearing flagstone approaches. Both use stronger regional material contrasts. Compact condition atlases and shared metric normal tiles preserve the finish in GLB. See `evidence/polish_v10` for comparisons and checks.
 
 The 0.9 surface pass preserves the 0.8 procedural geometry. Standard exported
 PBR maps now carry preparation, material sorting and environmental history.

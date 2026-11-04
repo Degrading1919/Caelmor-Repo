@@ -173,6 +173,9 @@ def _palette_entry(key, style, settings):
     styled = palette.get(key, palette.get(aliases.get(key, key))) if hasattr(palette, "get") else None
     if styled is not None:
         base = tuple(styled)
+    from .benchmark_finish import palette as benchmark_palette
+    directed=benchmark_palette(key,settings)
+    if directed is not None:base=directed
     wealth = str(getattr(settings, "wealth", "ESTABLISHED"))
     craft = str(getattr(settings, "craftsmanship", "STANDARD"))
     # Wealth changes the choice and finish of ordinary natural materials, not

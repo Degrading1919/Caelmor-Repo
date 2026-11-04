@@ -75,6 +75,7 @@ def condition_fields(position, normal, u, v, key, settings, context,
     rough=np.zeros_like(z); corrosion=np.zeros_like(z); relief=np.zeros_like(z);silver=np.zeros_like(z)
     # Stock grading changes between pieces, not arbitrary per-vertex noise.
     grade={'MODEST':.19,'ESTABLISHED':.115,'AFFLUENT':.055}[settings.wealth]
+    if family=='roof':grade*=.45
     stock=1.+grade*np.asarray(unit)
     if family not in ('iron','leather','charcoal'):
         tint*=np.broadcast_to(stock,(len(z),))[:,None]

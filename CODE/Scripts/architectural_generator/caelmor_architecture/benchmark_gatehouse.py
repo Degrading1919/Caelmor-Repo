@@ -1,6 +1,66 @@
 """Thornfell pass-control benchmark: broad flanks, vaulted gate and guard hall."""
 from .functional import Builder
 from .benchmark_construction import arch_ring
+from .geometry import MeshBuffer
+from .crafted_geometry import beveled_box
+
+
+def _battered_courses(b,side,owner):
+    """Bonded front plinth, retaining the original battered support envelope."""
+    a,y0,c,_=owner.bounds;top=owner.base+1.15
+    core=b.fixture('gatehouse.'+side+'_plinth_bedding','mortar',owner,'structure')
+    core.extrude([(a-.12,y0+.10,0.),(a-.12,y0-.515,0.),
+                  (a-.12,y0-.065,top),(a-.12,y0+.10,top)],(c-a+.24,0,0))
+    face=b.fixture('gatehouse.'+side+'_battered_plinth','stone',owner,'structure')
+    rng=owner.plan.rng('gatehouse.bonded_batter')
+    rows=4;rise=top/rows
+    for row in range(rows):
+        start=a-.12-(.62 if row%2 else .05)
+        while start<c+.12:
+            end=start+rng.uniform(.94,1.34)
+            lo=max(a-.12,start+.009);hi=min(c+.12,end-.009)
+            if hi-lo>.08:
+                zlo=row*rise+.006;zhi=(row+1)*rise-.006
+                stone=MeshBuffer('plinth_piece')
+                beveled_box(stone,(.5,.5,.5),(1.,1.,1.),.026)
+                vertices=[]
+                for u,v,w in stone.vertices:
+                    z=zlo+(zhi-zlo)*w;front=y0-.55+.45*z/top
+                    vertices.append((lo+(hi-lo)*u,front+(y0+.10-front)*v,z))
+                # Mapping the worked cube to a battered block is mildly
+                # bilinear; explicit triangles keep every face planar.
+                faces=[(f[0],f[j],f[j+1]) for f in stone.faces for j in range(1,len(f)-1)]
+                face.indexed(vertices,faces)
+            start=end
+
+
+def _paved_threshold(b,key,start,end,width,base,owner):
+    """Ground-bearing architectural causeway with bonded flagstone surfacing."""
+    ramp=b.ramp(key,start,end,width,base,zone=owner,material='stone')
+    # The generic ramp's slender piers suit decks, not this masonry gate.
+    support=next(buf for buf in b.ctx.buffers if buf.name==ramp.name+'.supports')
+    support.vertices.clear();support.faces.clear()
+    ramp.vertices.clear();ramp.faces.clear()
+    sx,sy=start;ex,ey=end;length=((ex-sx)**2+(ey-sy)**2)**.5
+    dx,dy=(ex-sx)/length,(ey-sy)/length;px,py=-dy,dx
+    def point(u,t,lower=0.):
+        return (sx+(ex-sx)*t+px*u,sy+(ey-sy)*t+py*u,.03+(base-.03)*t-lower)
+    top=[point(-width*.5,0,.045),point(width*.5,0,.045),point(width*.5,1,.045),point(-width*.5,1,.045)]
+    if sum(p[0]*q[1]-q[0]*p[1] for p,q in zip(top,top[1:]+top[:1]))<0:top.reverse()
+    bottom=[(x,y,-.08) for x,y,z in top]
+    # Keep the original approach top exactly: only its bearing and paving change.
+    ramp.indexed(bottom+top,[(3,2,1,0),(4,5,6,7),(0,1,5,4),(1,2,6,5),(2,3,7,6),(3,0,4,7)])
+    paving=b.fixture(key+'.bonded_flags','stone_light',owner,'threshold')
+    rows=max(3,round(length/.55))
+    for row in range(rows):
+        t0=row/rows+.007/length;t1=(row+1)/rows-.007/length
+        start_u=-width*.5-(width/6 if row%2 else 0.)
+        while start_u<width*.5:
+            u0=max(-width*.5,start_u+.006);u1=min(width*.5,start_u+width/3-.006)
+            if u1-u0>.06:
+                paving.extrude([point(u0,t0),point(u1,t0),point(u1,t1),point(u0,t1)],(0,0,-.055))
+            start_u+=width/3
+    return ramp
 
 
 def _tower_openings(width,depth,base,outer_edge):
@@ -98,9 +158,7 @@ def build(ctx):
         b.ramp('gatehouse.'+side+'_courtyard_approach',(stair_x,y1+2.0),(stair_x,y1),1.5,base,zone=owner,material='stone')
         # Splayed foot courses, bonded quoins and a stringcourse explain the
         # masonry work; the mass stays squat and unornamented above them.
-        basebuf=b.fixture('gatehouse.'+side+'_battered_plinth','stone',owner,'structure')
-        basebuf.extrude([(a-.12,y0+.10,0.),(a-.12,y0-.55,0.),
-                        (a-.12,y0-.10,base+1.15),(a-.12,y0+.10,base+1.15)],(c-a+.24,0,0))
+        _battered_courses(b,side,owner)
         corners=b.fixture('gatehouse.'+side+'_bonded_quoins','stone_light',owner,'structure')
         for row in range(17):
             z=base+(row+.5)*.40
@@ -134,8 +192,8 @@ def build(ctx):
                 (x+.45,link_y+.70),(x-.45,link_y+.70)],z=upper,material='stone',zone=core)
         b.route('gatehouse.guardhall_connection.'+side,
                 (x-.8,link_y-.45,upper,x+.8,link_y+.45,upper+2.),kind='human')
-    b.ramp('gatehouse.front_threshold_ramp',(cx,-4.0),(cx,0),2.6,base,zone=core,material='stone')
-    b.ramp('gatehouse.rear_threshold_ramp',(cx,depth+3.),(cx,depth),2.6,base,zone=core,material='stone')
+    _paved_threshold(b,'gatehouse.front_threshold_ramp',(cx,-4.0),(cx,0),2.6,base,core)
+    _paved_threshold(b,'gatehouse.rear_threshold_ramp',(cx,depth+3.),(cx,depth),2.6,base,core)
     paving=ctx.buffer('gatehouse.passage_paving','stone_light','foundation',core)
     for row in range(16):
         for col in range(5):

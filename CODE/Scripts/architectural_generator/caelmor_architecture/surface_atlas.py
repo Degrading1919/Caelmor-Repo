@@ -9,11 +9,12 @@ import json
 import math
 import numpy as np
 from .materials import PALETTE, _palette_entry, _hash2
-from .surface_patterns import sample_pattern
+from .surface_detail import sample_detail,generate_normal_tile,DETAIL_PERIOD
 from .surface_conditions import condition_fields, environment
 
-ATLAS_REVISION=1
+ATLAS_REVISION=2
 UV_NAME='UV2_Surface'
+DETAIL_UV='UV3_Detail'
 FAMILY={'timber':'wood','timber_light':'wood','stone':'stone','stone_light':'stone',
         'mortar':'stone','stone_sooted':'stone','plaster':'plaster','plaster_patch':'plaster',
         'roof':'roof','roof_dark':'roof','roof_patch':'roof','roof_worn':'roof',
@@ -50,7 +51,7 @@ def _charts(objects, density):
             # Solve the existing metric projection in least squares, including
             # triangles/ngons; no guessed world height for sloped roof charts.
             transform=np.linalg.lstsq(np.column_stack((coords,np.ones(len(ids)))),points,rcond=None)[0]
-            w,h=[max(2,min(256,int(math.ceil(float(s)*density)))) for s in span]
+            w,h=[max(1,min(256,int(math.ceil(float(s)*density)))) for s in span]
             charts.append(dict(obj=obj,poly=poly.index,loops=ids,coords=coords,low=low,span=span,
                 transform=transform,normal=tuple(poly.normal),center=pieces[poly.index],
                 w=w,h=h,host=host))
@@ -81,7 +82,7 @@ def _pack(charts):
 def _image(name,pixels,colorspace):
     import bpy
     height,width,_=pixels.shape
-    image=bpy.data.images.new(name,width=width,height=height,alpha=True,float_buffer=False)
+    image=bpy.data.images.new(name,width=width,height=height,alpha=False,float_buffer=False)
     image.colorspace_settings.name=colorspace
     if colorspace=='sRGB':
         # Byte-backed Image.pixels are encoded values. Convert our linear
@@ -102,13 +103,14 @@ def _make_material(key,fingerprint,base,images):
     output.location=(650,0);shader.location=(360,0);links.new(shader.outputs['BSDF'],output.inputs['Surface'])
     shader.inputs['Base Color'].default_value=(1,1,1,1)
     uv=nodes.new('ShaderNodeUVMap');uv.uv_map=UV_NAME;uv.location=(-700,0)
+    detail_uv=nodes.new('ShaderNodeUVMap');detail_uv.uv_map=DETAIL_UV;detail_uv.location=(-700,-200)
     textures=[]
     for i,(name,im) in enumerate(zip(('Base Color','Normal','ORM'),images)):
         tex=nodes.new('ShaderNodeTexImage');tex.image=im;tex.label=name
-        tex.extension='EXTEND';tex.location=(-450,300-i*300)
-        links.new(uv.outputs['UV'],tex.inputs['Vector']);textures.append(tex)
+        tex.extension='REPEAT' if i==1 else 'EXTEND';tex.location=(-450,300-i*300)
+        links.new((detail_uv if i==1 else uv).outputs['UV'],tex.inputs['Vector']);textures.append(tex)
     links.new(textures[0].outputs['Color'],shader.inputs['Base Color'])
-    normal=nodes.new('ShaderNodeNormalMap');normal.space='TANGENT';normal.uv_map=UV_NAME
+    normal=nodes.new('ShaderNodeNormalMap');normal.space='TANGENT';normal.uv_map=DETAIL_UV
     normal.inputs['Strength'].default_value=1.;normal.location=(80,-100)
     links.new(textures[1].outputs['Color'],normal.inputs['Color']);links.new(normal.outputs['Normal'],shader.inputs['Normal'])
     separate=nodes.new('ShaderNodeSeparateColor');separate.mode='RGB';separate.location=(50,-370)
@@ -119,7 +121,18 @@ def _make_material(key,fingerprint,base,images):
     mat['caelm_material']=key;mat['caelm_atlas_revision']=ATLAS_REVISION
     mat['caelm_surface_fingerprint']=fingerprint
     mat['caelm_surface_uv']=UV_NAME
+    mat['caelm_detail_uv']=DETAIL_UV
     return mat
+
+
+def _detail_image(family,settings):
+    import bpy
+    name=f'Caelmor Detail2 {family} {settings.region} {settings.craftsmanship}'
+    found=bpy.data.images.get(name)
+    if found is not None:return found
+    pixels=generate_normal_tile(family,settings.region,settings.craftsmanship,resolution=256)
+    image=_image(name,pixels,'Non-Color');image['caelm_shared_detail']=True
+    return image
 
 
 def apply_surfaces(objects,plan,settings,context_objects=None):
@@ -151,6 +164,8 @@ def apply_surfaces(objects,plan,settings,context_objects=None):
         if key not in FAMILY:continue
         host=hosts.get(obj.get('caelm_world_zone'),plan)
         base=_palette_entry(key,getattr(host,'style',None),settings)[0]
+        from .benchmark_finish import surface_base
+        base=surface_base(key,obj.get('caelm_buffer_id',''),settings,base)
         groups.setdefault((key,base),[]).append((obj,host))
     reports=[]
     for (key,base),members in sorted(groups.items()):
@@ -164,16 +179,22 @@ def apply_surfaces(objects,plan,settings,context_objects=None):
             digest.update(np.asarray([tuple(v.uv) for v in obj.data.uv_layers['UV0_Metric'].data],dtype='<f4').tobytes())
         fingerprint=digest.hexdigest()
         material=next((m for m in bpy.data.materials if m.get('caelm_surface_fingerprint')==fingerprint),None)
-        density={'LOW':24,'MEDIUM':48,'HIGH':72}[settings.detail]
-        if FAMILY[key]=='wood':density*=2
+        base_density={'wood':64,'stone':24,'roof':24,'plaster':32,'iron':32,'leather':48,'charcoal':16}[FAMILY[key]]
+        density=base_density*{'LOW':.5,'MEDIUM':1.,'HIGH':1.5}[settings.detail]
         charts=_charts(members,density);width,height_px=_pack(charts)
         for c in charts:
             mesh=c['obj'].data
             layer=mesh.uv_layers.get(UV_NAME) or mesh.uv_layers.new(name=UV_NAME)
+            detail=mesh.uv_layers.get(DETAIL_UV) or mesh.uv_layers.new(name=DETAIL_UV)
+            center=c['center']
+            c['phase']=tuple(DETAIL_PERIOD*_hash2(int(round(center[0]*97))+offset,
+                       int(round(center[1]*101))+int(round(center[2]*149)),settings.seed+offset)
+                       for offset in (701,811))
             x,y=c['xy']
             for li,coord in zip(c['loops'],c['coords']):
                 unit=(coord-c['low'])/c['span']
                 layer.data[li].uv=((x+PAD+unit[0]*c['w'])/width,(y+PAD+unit[1]*c['h'])/height_px)
+                detail.data[li].uv=((coord[0]+c['phase'][0])/DETAIL_PERIOD,(coord[1]+c['phase'][1])/DETAIL_PERIOD)
         if material is None:
             # Sample each material bank in one vector batch instead of invoking
             # procedural noise thousands of times for individual small stones.
@@ -186,7 +207,7 @@ def apply_surfaces(objects,plan,settings,context_objects=None):
                 fx=np.clip((np.arange(w+2*PAD)-PAD+.5)/w,0.,1.)
                 fy=np.clip((np.arange(h+2*PAD)-PAD+.5)/h,0.,1.)
                 u,v=np.meshgrid(c['low'][0]+fx*c['span'][0],c['low'][1]+fy*c['span'][1])
-                end=start+length;uu[start:end]=u.ravel();vv[start:end]=v.ravel()
+                end=start+length;uu[start:end]=u.ravel()+c['phase'][0];vv[start:end]=v.ravel()+c['phase'][1]
                 positions[start:end]=np.column_stack((u.ravel(),v.ravel(),np.ones(length)))@c['transform']
                 normals[start:end]=c['normal']
                 center=c['center'];stock=_hash2(int(round(center[0]*107)),int(round(center[1]*107))+int(round(center[2]*149)),settings.seed)
@@ -195,9 +216,8 @@ def apply_surfaces(objects,plan,settings,context_objects=None):
             family=FAMILY[key]
             # Metric fields have unbounded coordinates. Stable world offsets
             # distinguish stock faces without resetting a knot every polygon.
-            pattern=sample_pattern(family,uu+positions[:,0]*.173,vv+positions[:,1]*.197,
-                region=settings.region,wealth=settings.wealth,craftsmanship=settings.craftsmanship,seed=settings.seed)
-            color=pattern['albedo']*np.asarray(base[:3]);height=pattern['height'].copy()
+            pattern=sample_detail(family,uu,vv,region=settings.region,craftsmanship=settings.craftsmanship)
+            color=pattern['albedo']*np.asarray(base[:3])
             rough=pattern['roughness'].copy();metal=pattern['metallic'].copy()
             # Regions/material cohorts share textures but retain their actual
             # host volume's eaves, apertures and hearths.
@@ -212,28 +232,26 @@ def apply_surfaces(objects,plan,settings,context_objects=None):
                 rust=fields['corrosion'][:,None]
                 color[idx]=color[idx]*(1.-rust)+np.array([.23,.083,.026])*rust
                 metal[idx]*=1.-fields['corrosion'];rough[idx]+=fields['roughness_delta']+.12*fields['corrosion']
-                height[idx]+=fields['height']
             color=np.clip(color,0.,1.);rough=np.clip(rough,.24,.99)
             pixels=np.ones((height_px,width,4),dtype=np.float32)
-            normal_pixels=np.ones_like(pixels);normal_pixels[:,:,:3]=(.5,.5,1.)
             orm=np.ones_like(pixels);orm[:,:,1]=.9;orm[:,:,2]=0.
             for c in charts:
                 x,y=c['xy'];w,h=c['w']+2*PAD,c['h']+2*PAD;s,e=c['slice']
                 pixels[y:y+h,x:x+w,:3]=color[s:e].reshape(h,w,3)
-                elevation=height[s:e].reshape(h,w)
-                dy,dx=np.gradient(elevation,c['span'][1]/c['h'],c['span'][0]/c['w'])
-                vec=np.stack((-dx,-dy,np.ones_like(dx)),axis=-1)
-                vec/=np.linalg.norm(vec,axis=-1,keepdims=True)
-                normal_pixels[y:y+h,x:x+w,:3]=vec*.5+.5
                 orm[y:y+h,x:x+w,1]=rough[s:e].reshape(h,w)
                 orm[y:y+h,x:x+w,2]=metal[s:e].reshape(h,w)
             label=f'Caelmor Surface {fingerprint[:16]}'
             # Albedo is encoded once for byte-backed sRGB PNG; normal/ORM data
             # remain linear. The exported image payload is checked on reimport.
-            images=(_image(label+' Color',pixels,'sRGB'),_image(label+' Normal',normal_pixels,'Non-Color'),
-                    _image(label+' ORM',orm,'Non-Color'))
+            # Roughness/metallic are broad condition signals; 2x area-filtered
+            # maps share the exact normalized UV chart layout. Normal detail is
+            # reusable at metric scale rather than copied into every face tile.
+            compact_orm=orm.reshape(height_px//2,2,width//2,2,4).mean(axis=(1,3))
+            images=(_image(label+' Color',pixels,'sRGB'),_detail_image(family,settings),
+                    _image(label+' ORM',compact_orm,'Non-Color'))
             material=_make_material(key,fingerprint,base,images)
             material['caelm_atlas_size']=[width,height_px];material['caelm_texels_per_metre']=density
+            material['caelm_orm_size']=[width//2,height_px//2]
         for obj,_ in members:
             obj.data.materials.clear();obj.data.materials.append(material)
             obj['caelm_surface_material']=material.name
@@ -245,5 +263,6 @@ def apply_surfaces(objects,plan,settings,context_objects=None):
                 tint.data.foreach_set('color',np.ones(len(tint.data)*4,dtype=np.float32))
             obj.data.uv_layers.active_index=0;obj.data.uv_layers[0].active_render=True
         reports.append({'material':key,'fingerprint':fingerprint,'size':[width,height_px],'density':density,
+                        'orm_size':[width//2,height_px//2],'normal_size':[256,256],'shared_normal':True,
                         'charts':len(charts),'objects':len(members)})
     return reports
