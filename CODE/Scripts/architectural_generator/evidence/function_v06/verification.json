@@ -1,0 +1,539 @@
+{
+  "valid": true,
+  "manifest_source_revisions": [
+    "1286d07",
+    "8c76e5f",
+    "905e97b"
+  ],
+  "source_revisions_at_render": [
+    "1286d07",
+    "8c76e5f",
+    "905e97b"
+  ],
+  "retained_geometry_replays": [
+    {
+      "function": "MARKET_HALL",
+      "region": "LOWMARK",
+      "source_revision_at_render": "1286d07",
+      "geometry_matches_current": true,
+      "changed_source_files": [
+        "function_work.py"
+      ],
+      "material_and_studio_source_unchanged": true
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "THORNFELL",
+      "source_revision_at_render": "1286d07",
+      "geometry_matches_current": true,
+      "changed_source_files": [
+        "function_work.py"
+      ],
+      "material_and_studio_source_unchanged": true
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "MIRE",
+      "source_revision_at_render": "905e97b",
+      "geometry_matches_current": true,
+      "changed_source_files": [
+        "function_work.py"
+      ],
+      "material_and_studio_source_unchanged": true
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "EMBERHOLT",
+      "source_revision_at_render": "905e97b",
+      "geometry_matches_current": true,
+      "changed_source_files": [
+        "function_work.py"
+      ],
+      "material_and_studio_source_unchanged": true
+    },
+    {
+      "function": "STABLE",
+      "region": "LOWMARK",
+      "source_revision_at_render": "905e97b",
+      "geometry_matches_current": true,
+      "changed_source_files": [
+        "function_work.py"
+      ],
+      "material_and_studio_source_unchanged": true
+    },
+    {
+      "function": "STABLE",
+      "region": "THORNFELL",
+      "source_revision_at_render": "905e97b",
+      "geometry_matches_current": true,
+      "changed_source_files": [
+        "function_work.py"
+      ],
+      "material_and_studio_source_unchanged": true
+    },
+    {
+      "function": "STABLE",
+      "region": "MIRE",
+      "source_revision_at_render": "905e97b",
+      "geometry_matches_current": true,
+      "changed_source_files": [
+        "function_work.py"
+      ],
+      "material_and_studio_source_unchanged": true
+    },
+    {
+      "function": "STABLE",
+      "region": "EMBERHOLT",
+      "source_revision_at_render": "905e97b",
+      "geometry_matches_current": true,
+      "changed_source_files": [
+        "function_work.py"
+      ],
+      "material_and_studio_source_unchanged": true
+    },
+    {
+      "function": "GATEHOUSE",
+      "region": "LOWMARK",
+      "source_revision_at_render": "905e97b",
+      "geometry_matches_current": true,
+      "changed_source_files": [
+        "function_work.py"
+      ],
+      "material_and_studio_source_unchanged": true
+    },
+    {
+      "function": "GATEHOUSE",
+      "region": "THORNFELL",
+      "source_revision_at_render": "905e97b",
+      "geometry_matches_current": true,
+      "changed_source_files": [
+        "function_work.py"
+      ],
+      "material_and_studio_source_unchanged": true
+    },
+    {
+      "function": "GATEHOUSE",
+      "region": "MIRE",
+      "source_revision_at_render": "905e97b",
+      "geometry_matches_current": true,
+      "changed_source_files": [
+        "function_work.py"
+      ],
+      "material_and_studio_source_unchanged": true
+    },
+    {
+      "function": "GATEHOUSE",
+      "region": "EMBERHOLT",
+      "source_revision_at_render": "905e97b",
+      "geometry_matches_current": true,
+      "changed_source_files": [
+        "function_work.py"
+      ],
+      "material_and_studio_source_unchanged": true
+    }
+  ],
+  "functions": [
+    "SMITHY",
+    "MARKET_HALL",
+    "STABLE",
+    "GATEHOUSE"
+  ],
+  "regions": [
+    "LOWMARK",
+    "THORNFELL",
+    "MIRE",
+    "EMBERHOLT"
+  ],
+  "configurations": 16,
+  "rendered_configurations": 16,
+  "native_build_validation_records": 16,
+  "individual_images_verified": 64,
+  "contact_sheets_verified": 4,
+  "functional_manifest_sha256": {
+    "smithy.json": "e28bb143acd8f8ca58f310f7539bacbf1f2c7085fa7c4d13694fdc22cd529e65",
+    "market_hall.json": "3300a4e14689a7aaa2c8d2d33840f8f27aaf6e2f8a1d0b475ccc5137a8a8efc2",
+    "stable.json": "e09412ec65d7062080a2cfd1fdda64f8d4398229745ca2bd5d92a64893c74026",
+    "gatehouse.json": "06b4f8ef1b18cf7685161fe95ef8822bd4f0a0611a661c68885af23f67d9b341"
+  },
+  "functional_source_snapshots": {
+    "smithy": {
+      "addon_source_sha256": {
+        "__init__.py": "3d360cbfdd05522f158f79145f93b96c231ef06bd5854ee828c831760aeab8cd",
+        "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
+        "blender_manifest.toml": "e021854efaf3ad456fc9ab0d62b0ce81ebdc343e813a5fc71e7dc224ce2449b6",
+        "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
+        "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
+        "function_work.py": "6721ccdc6e5ba6003a4a47148e9b7af691b7ad944542815128614ec42425a2fb",
+        "functional.py": "98d7f5f4b7e33dc0ce8d598721f13d69cccef9aa470d31b8cb0c4f1067dd0529",
+        "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+        "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+        "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+        "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+        "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+        "world.py": "27317e50e6c20791b33066e00263d358fd94dadda7b1d0c940c5940f6901b76e",
+        "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+        "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+        "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+      },
+      "render_source_sha256": {
+        "render_household_review.py": "f633aca84153fc175ac38d38f506f286854d883685c79582c04c77aed072dadf",
+        "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+      }
+    },
+    "market_hall": {
+      "addon_source_sha256": {
+        "__init__.py": "3d360cbfdd05522f158f79145f93b96c231ef06bd5854ee828c831760aeab8cd",
+        "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
+        "blender_manifest.toml": "e021854efaf3ad456fc9ab0d62b0ce81ebdc343e813a5fc71e7dc224ce2449b6",
+        "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
+        "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
+        "function_work.py": "b9b360f86ed3a039296bc47cdfb2bfe98407d364c938c4b6da316e3ae07c219c",
+        "functional.py": "98d7f5f4b7e33dc0ce8d598721f13d69cccef9aa470d31b8cb0c4f1067dd0529",
+        "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+        "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+        "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+        "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+        "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+        "world.py": "27317e50e6c20791b33066e00263d358fd94dadda7b1d0c940c5940f6901b76e",
+        "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+        "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+        "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+      },
+      "render_source_sha256": {
+        "render_household_review.py": "f633aca84153fc175ac38d38f506f286854d883685c79582c04c77aed072dadf",
+        "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+      }
+    },
+    "stable": {
+      "addon_source_sha256": {
+        "__init__.py": "3d360cbfdd05522f158f79145f93b96c231ef06bd5854ee828c831760aeab8cd",
+        "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
+        "blender_manifest.toml": "e021854efaf3ad456fc9ab0d62b0ce81ebdc343e813a5fc71e7dc224ce2449b6",
+        "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
+        "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
+        "function_work.py": "f6fff29fc88d494762ac9943d6ea49a5bfa77b031a16dc1f8208e2cb63d31c93",
+        "function_yard.py": "6b2bc1fa856e9b2c90118cf71e5c8d30729fcc2bd8a64460e86e25888d6b721f",
+        "functional.py": "98d7f5f4b7e33dc0ce8d598721f13d69cccef9aa470d31b8cb0c4f1067dd0529",
+        "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+        "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+        "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+        "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+        "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+        "world.py": "27317e50e6c20791b33066e00263d358fd94dadda7b1d0c940c5940f6901b76e",
+        "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+        "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+        "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+      },
+      "render_source_sha256": {
+        "render_household_review.py": "0164574efc2a94ce14846a41db7255efd41bcf2a25af9d8eebb912f77e015648",
+        "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+      }
+    },
+    "gatehouse": {
+      "addon_source_sha256": {
+        "__init__.py": "3d360cbfdd05522f158f79145f93b96c231ef06bd5854ee828c831760aeab8cd",
+        "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
+        "blender_manifest.toml": "e021854efaf3ad456fc9ab0d62b0ce81ebdc343e813a5fc71e7dc224ce2449b6",
+        "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
+        "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
+        "function_work.py": "f6fff29fc88d494762ac9943d6ea49a5bfa77b031a16dc1f8208e2cb63d31c93",
+        "function_yard.py": "6b2bc1fa856e9b2c90118cf71e5c8d30729fcc2bd8a64460e86e25888d6b721f",
+        "functional.py": "98d7f5f4b7e33dc0ce8d598721f13d69cccef9aa470d31b8cb0c4f1067dd0529",
+        "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+        "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+        "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+        "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+        "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+        "world.py": "27317e50e6c20791b33066e00263d358fd94dadda7b1d0c940c5940f6901b76e",
+        "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+        "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+        "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+      },
+      "render_source_sha256": {
+        "render_household_review.py": "0164574efc2a94ce14846a41db7255efd41bcf2a25af9d8eebb912f77e015648",
+        "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+      }
+    }
+  },
+  "contact_sheet_sha256": {
+    "contact_sheets/smithy.png": "afaff46da2a48f4eac062df88973a6fe3c41a64ed65de0c75b06a1df36c16462",
+    "contact_sheets/market_hall.png": "d8fd85d81126a335941a06a1e7b4538dc0ae10365bd0b0d3b2446fdf1f04e447",
+    "contact_sheets/stable.png": "415caa745e56349bee16822fa2dea2491085f8536d97df11c3d3d785afc526ac",
+    "contact_sheets/gatehouse.png": "99131a39e0326f44950fa3fb83e74023f56716b0b4567ee26bb54c142c7bc7c6"
+  },
+  "functional_settings_contracts": {
+    "smithy": {
+      "seed": 91,
+      "footprint": "L",
+      "width": 11.0,
+      "depth": 7.0,
+      "wing_width": 4.2,
+      "wing_depth": 4.5,
+      "floors": 2,
+      "floor_height": 2.65,
+      "pitch": 48.0,
+      "overhang": 0.45,
+      "detail": "MEDIUM",
+      "window_density": 1.0,
+      "context": "AUTO",
+      "wealth": "ESTABLISHED",
+      "craftsmanship": "STANDARD",
+      "maintenance": 0.7,
+      "age": 35,
+      "use_grammar": true,
+      "roof_style": "AUTO",
+      "geometry_mode": "EFFICIENT",
+      "world_aware": true
+    },
+    "market_hall": {
+      "seed": 91,
+      "footprint": "L",
+      "width": 11.0,
+      "depth": 7.0,
+      "wing_width": 4.2,
+      "wing_depth": 4.5,
+      "floors": 2,
+      "floor_height": 2.65,
+      "pitch": 48.0,
+      "overhang": 0.45,
+      "detail": "MEDIUM",
+      "window_density": 1.0,
+      "context": "AUTO",
+      "wealth": "ESTABLISHED",
+      "craftsmanship": "STANDARD",
+      "maintenance": 0.7,
+      "age": 35,
+      "use_grammar": true,
+      "roof_style": "AUTO",
+      "geometry_mode": "EFFICIENT",
+      "world_aware": true
+    },
+    "stable": {
+      "seed": 91,
+      "footprint": "L",
+      "width": 11.0,
+      "depth": 7.0,
+      "wing_width": 4.2,
+      "wing_depth": 4.5,
+      "floors": 2,
+      "floor_height": 2.65,
+      "pitch": 48.0,
+      "overhang": 0.45,
+      "detail": "MEDIUM",
+      "window_density": 1.0,
+      "context": "AUTO",
+      "wealth": "ESTABLISHED",
+      "craftsmanship": "STANDARD",
+      "maintenance": 0.7,
+      "age": 35,
+      "use_grammar": true,
+      "roof_style": "AUTO",
+      "geometry_mode": "EFFICIENT",
+      "world_aware": true
+    },
+    "gatehouse": {
+      "seed": 91,
+      "footprint": "L",
+      "width": 11.0,
+      "depth": 7.0,
+      "wing_width": 4.2,
+      "wing_depth": 4.5,
+      "floors": 2,
+      "floor_height": 2.65,
+      "pitch": 48.0,
+      "overhang": 0.45,
+      "detail": "MEDIUM",
+      "window_density": 1.0,
+      "context": "AUTO",
+      "wealth": "ESTABLISHED",
+      "craftsmanship": "STANDARD",
+      "maintenance": 0.7,
+      "age": 35,
+      "use_grammar": true,
+      "roof_style": "AUTO",
+      "geometry_mode": "EFFICIENT",
+      "world_aware": true
+    }
+  },
+  "camera_contracts": {
+    "smithy": {
+      "directions": {
+        "0": [
+          0.85,
+          -1.2,
+          0.68
+        ],
+        "1": [
+          -0.85,
+          1.2,
+          0.68
+        ]
+      },
+      "ortho_scale": 29.7110107421875
+    },
+    "market_hall": {
+      "directions": {
+        "0": [
+          0.85,
+          -1.2,
+          0.68
+        ],
+        "1": [
+          -0.85,
+          1.2,
+          0.68
+        ]
+      },
+      "ortho_scale": 37.04493713378906
+    },
+    "stable": {
+      "directions": {
+        "0": [
+          0.85,
+          -1.2,
+          0.68
+        ],
+        "1": [
+          -0.85,
+          1.2,
+          0.68
+        ]
+      },
+      "ortho_scale": 32.030319213867195
+    },
+    "gatehouse": {
+      "directions": {
+        "0": [
+          0.85,
+          -1.2,
+          0.68
+        ],
+        "1": [
+          -0.85,
+          1.2,
+          0.68
+        ]
+      },
+      "ortho_scale": 48.094413757324226
+    }
+  },
+  "native_geometry_gate_cases": 16,
+  "native_geometry_gate_provenance": {
+    "mesh_checks_stable_gatehouse.json": {
+      "check_file_sha256": "2549fb9af8ab60ca937631d962a02f04770a20e38fcc51f1a3309b9e224d820f",
+      "source_sha256_at_check": {
+        "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
+        "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
+        "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
+        "functional.py": "db0443fbdf63a0603b9be2ef10161deb8dc30248d9c7852315d78b177957ed9c",
+        "function_yard.py": "6b2bc1fa856e9b2c90118cf71e5c8d30729fcc2bd8a64460e86e25888d6b721f",
+        "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+        "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+        "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+        "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+        "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+        "world.py": "c08dc03fc1e3f31f9e0d429216839e4b941d904a758c40458d4fa44a1e246d9b",
+        "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+        "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+        "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126",
+        "__init__.py": "3d360cbfdd05522f158f79145f93b96c231ef06bd5854ee828c831760aeab8cd"
+      },
+      "blender": "5.0.1"
+    },
+    "mesh_checks_smithy_market_hall.json": {
+      "check_file_sha256": "f4d0a4ee25596b0e59ae15e85b20f209abf79c4282fe22aa4c285181c5d61979",
+      "source_sha256_at_check": {
+        "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
+        "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
+        "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
+        "functional.py": "98d7f5f4b7e33dc0ce8d598721f13d69cccef9aa470d31b8cb0c4f1067dd0529",
+        "function_work.py": "6721ccdc6e5ba6003a4a47148e9b7af691b7ad944542815128614ec42425a2fb",
+        "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+        "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+        "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+        "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+        "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+        "world.py": "27317e50e6c20791b33066e00263d358fd94dadda7b1d0c940c5940f6901b76e",
+        "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+        "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+        "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126",
+        "__init__.py": "3d360cbfdd05522f158f79145f93b96c231ef06bd5854ee828c831760aeab8cd"
+      },
+      "blender": "5.0.1"
+    }
+  },
+  "historical_v05_preserved": true,
+  "historical_v05_individual_images_verified": 320,
+  "historical_v05_contact_sheets_verified": 20,
+  "historical_v05_manifest_sha256": {
+    "farmhouse.json": "6d086b9ab20faf033e4f11cf32cfc9c9751d6194cd32869c632e5aedad22a862",
+    "barn.json": "e0531194463af28680dddcc896573827da7dd150a39d68bc359e781b92f67793",
+    "grain_store.json": "f352d7f663ad4b812d216a7583b6c109657a48deab6a1db3191b2b7f7db61d59",
+    "miller.json": "dcaaa6e35c78de5295a2743b4576d1be78033be389d561239b25fcb254c43728",
+    "inn.json": "1efeba1daefe6b579124e381356702a66dc88cfd98b514be29b1933f10f73fb0",
+    "cottage.json": "206c03a45f7eb8e773c4635aa80429eb74393b9ba781c7fa8205d38a5d573f25",
+    "townhouse.json": "e5881b7c4301a7e66436f76800ab0739051ae4422ed34dbd388ad44bb786c967",
+    "merchant_house.json": "32df8cfde0a5423c22dfabdebaeda70223ce6b242a0099345cc50bdc889f45a1",
+    "longhouse.json": "5d15f5f64a4e1eca107daa7d41c53213d42d66eca4a1b6e55ceb57aade62aca3",
+    "shop.json": "38d4bd50e2037a3848d59d77f0bb43331d506d4118b30c7029401657c1e42889",
+    "warehouse.json": "ebbbc8fb662b3e3b671b17d3820a328bcd230338a4dfa0720364f6109e8dfb0e",
+    "market_hall.json": "04891893f7ae5ade809228309ee5b72eedfcfbb0597f0ff459efbbafc4d3dab0",
+    "stable.json": "d3736ba8505651b13bc3c7ff18b115b7a44698ae67036b5b635d269f8ab50d46",
+    "smithy.json": "4311845472e89fd61ccc3c2ea3410e53683f8638e64099e153d3669872721716",
+    "workshop.json": "dc8b977060096b5481d2837efce78573085c2848000b5c06ddf4f069b981372f",
+    "assembly_hall.json": "643483286657f75d9e3c836fef4ea1d97f7713d276ca98c5cde4881f04e77153",
+    "watchtower.json": "3c8ae29cb51d4e41c8448a4447104ac82264f302d73b29264a27cb74151a3932",
+    "gatehouse.json": "d0554b25821eaec2a578783d1bd3c8ff0806f7196eacf6fc4a6d70930a679cac",
+    "barracks.json": "40b046596a5d26a270d98f9480beed9eced70e287250716119d7cde1d361d88a",
+    "boathouse.json": "464e1a68f8a225f44d3870e6e9a3844ab79646520e3122d28f0604f2d2a601d8"
+  },
+  "historical_v05_contact_sheet_sha256": {
+    "contact_sheets/farmhouse.png": "61108d8230417f958ba4b7f0943f1cf552a4c541b0cc09e391ddda6e8cf5dc7a",
+    "contact_sheets/barn.png": "fd3c28f1283a77caed19afb9bf7ff66b9c2ebb57915b6d1b1589e0f8e0435444",
+    "contact_sheets/grain_store.png": "25f5eb188292d3d0811bfbb7c1385a41a12967f07b47d0fce8b0bd6ca9a957bd",
+    "contact_sheets/miller.png": "e0567de9862691591a293c7651cd5760994c56c69a6dbce4d4293e196a46f48a",
+    "contact_sheets/inn.png": "60e0af548d1976656ded4de90b940770c6bd6449a3322ede487451e7c70b81a9",
+    "contact_sheets/cottage.png": "cd22634ad96052e4bc2579fc6c2af43a83555b24019b874d36043aae1638d2e0",
+    "contact_sheets/townhouse.png": "2efb5353b02a8c5d018fa6295f7bc3e5b41c1f003eebc365a037118150e4c3e0",
+    "contact_sheets/merchant_house.png": "097478134e0311f568488d0e773f751684f49a53455e94884867ceb625902467",
+    "contact_sheets/longhouse.png": "8e136d7a4e7cbf0bb3d09fd22a9ab4a0d5899cfea244eb7c01f55ea5ee525a50",
+    "contact_sheets/shop.png": "0b6f215b1e63f9d56dbbed0d26a0d03a779b0b30aa523e5ca4b0c7135658af19",
+    "contact_sheets/warehouse.png": "f19b78d7355276bd49205011f88f42c10af78381791511b5e0dc0bf8cd41a4ac",
+    "contact_sheets/market_hall.png": "4992450b9b0e66dce8d05e2b755571d16c7dc518c831aa94da8ff74e36c7236c",
+    "contact_sheets/stable.png": "cc8470ceba5bb226e3429837d0c3b8e6e1b091be5cada7cfac72d60b4d9a7fb9",
+    "contact_sheets/smithy.png": "585807897f4566d71f068e830cc56ffbffaf151ffd5fdd95f640245557f91554",
+    "contact_sheets/workshop.png": "ebb714efcaf023a415ba17a54e07bf3ef5505c3e64a3f3cac2c9e5881caa75cc",
+    "contact_sheets/assembly_hall.png": "550394f963807cd2b3c9e64438eb3d6fe81304543a9335b63a48a217cca87bfc",
+    "contact_sheets/watchtower.png": "ea1e7a4b8e708029fe2138acbea67f12dd15d5af7bad6f6fc90138fb1df03229",
+    "contact_sheets/gatehouse.png": "bf2de7bbe36deed0b6a77db9c280b717076bbaa6f6211f45d58087066e173b0a",
+    "contact_sheets/barracks.png": "2828d9e43dceaa08a8b8318acf34e60b5661e9a8276b12122c8869250c6aa39c",
+    "contact_sheets/boathouse.png": "e461c079942209950d59bcea147ba0f1e2aa75c050db5667641abd644365d8f5"
+  },
+  "addon_source_sha256": {
+    "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
+    "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
+    "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
+    "functional.py": "98d7f5f4b7e33dc0ce8d598721f13d69cccef9aa470d31b8cb0c4f1067dd0529",
+    "function_work.py": "6721ccdc6e5ba6003a4a47148e9b7af691b7ad944542815128614ec42425a2fb",
+    "function_yard.py": "6b2bc1fa856e9b2c90118cf71e5c8d30729fcc2bd8a64460e86e25888d6b721f",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "27317e50e6c20791b33066e00263d358fd94dadda7b1d0c940c5940f6901b76e",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126",
+    "__init__.py": "3d360cbfdd05522f158f79145f93b96c231ef06bd5854ee828c831760aeab8cd"
+  },
+  "archive_sha256": "16acce0519d8c38225c18b40674658af5dad0ae59d74789f0626f76e5a6fbf5e",
+  "archive_members_verified": 25,
+  "package_report_sha256": {
+    "installed_extension.json": "f9c1617ebfc7c80b5fe7052471fa3eb53ff8db13d756942fb4639c1a2e49d7bb",
+    "installed_legacy.json": "f4be09b63aabe8ea1dbedfd30b31857ccb832f5e3e143e2a376dbc70fb0296eb"
+  },
+  "verification_source_sha256": "791f1018844200f0aab9e50d5830452b95e3c8bf2dd7669c13cf08cfd8ef4619",
+  "composition_source_sha256": "281357daedaaa0106c3b5644e8664e6e48c3017c2021ad36613c503a8e2cfd60",
+  "scope": "Manifest/file hashes, settings/cameras, native build records, Blender BVH geometry correspondence, retained historical v0.5 evidence, and final archive/package identity. Retained views keep original render source snapshots; only stale function_work.py records receive targeted geometry replay. Material/studio bytes are unchanged. Matching geometry is not a pixel-identity or final-art claim. No rerender, broad regression or target-engine test is performed by this verifier."
+}

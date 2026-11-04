@@ -1,0 +1,44 @@
+{
+  "checks": [
+    {
+      "check": "Work, yard, shared integration and initial benchmark suite",
+      "local_log": "v08_python_final.log",
+      "log_sha256": "c65127b7f398d6ca944eab15a82fb326303ed35acef33a8f9f1ee3afe904ce4d",
+      "unittest_methods": 33,
+      "test_elapsed_seconds": 99.657,
+      "result": "OK"
+    },
+    {
+      "check": "Final six benchmark regressions after guard-hall access correction",
+      "local_log": "v08_benchmarks_final.log",
+      "log_sha256": "db1f83fa87c9632334c39dc19a8e117a97151347686bb5d1a994adce19a106b2",
+      "unittest_methods": 6,
+      "test_elapsed_seconds": 31.454,
+      "result": "OK"
+    },
+    {
+      "check": "16-case native integration before final guard-door link",
+      "local_log": "v08_native_final.log",
+      "log_sha256": "275ad32d0f4793c6d7f09204d14262bd570f8473e2e5a8e78404243f5d965c24",
+      "unittest_methods": 1,
+      "test_elapsed_seconds": 59.65,
+      "result": "OK"
+    },
+    {
+      "check": "Final two native benchmark fixtures",
+      "local_log": "v08_native_benchmarks_final.log",
+      "log_sha256": "ef6a95946a501dea1f4f13ba0f2a91467170c5c3365876367a944b4d4bfeff81",
+      "unittest_methods": 1,
+      "test_elapsed_seconds": 9.109,
+      "result": "OK"
+    },
+    {
+      "check": "Both final benchmark lifecycle/export/reopen fixtures",
+      "local_log": "v08_lifecycle_final.log",
+      "log_sha256": "b14d6c433203671dd1840e83b4d9586c2a3cb5a35fd63ba3b2f49b29268bd060",
+      "cases": 2,
+      "result": "PASS"
+    }
+  ],
+  "scope": "Executed evidence. Repeated methods are not additional unique tests. Durations do not measure total wall time, model usage or API cost."
+}

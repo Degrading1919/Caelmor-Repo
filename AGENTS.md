@@ -2,25 +2,14 @@
 
 ## Delivery
 
-For normal Caelmor tasks, work directly on `main`.
+GitHub `Degrading1919/Caelmor-Repo` is the sole source of truth. `C:/Users/CK/Documents/Caelmor-Repo` is the only designated local checkout. Feature branches and PRs use that checkout. Additional clones, worktrees or parallel working directories require explicit Creative Director authorization.
 
-- Do not create task branches.
-- Do not create pull requests unless the user explicitly asks for one.
-- Do not inspect Git configuration, remotes, line endings, usernames, repository metadata, or individual changed files unless a publish command actually fails.
-- Assume the repository is already configured correctly.
-- Do not perform a Git/GitHub audit before publishing.
+- Fetch from `origin`, confirm the active branch/PR and check for pending local work before switching. Start new feature work on a `codex/` branch from the applicable GitHub base. Continue work for an existing PR on its designated branch. For architecture, use `codex/architectural-generator` and PR #85 while that review is open.
+- Commit only the scoped files and push the feature branch normally. Use a PR to review each feature before integration to `main`. Keep existing PRs for their assigned work. Do not merge a PR without Creative Director authorization. On a rejected push, preserve the commit, report the failure and stop unless the Director has authorized reconciliation. Never force-push or overwrite divergent work.
+- Commit and push every project-owned deliverable, including source, tools, research, evidence and decisions, at an existing File Manifest destination. Use the tracked tree to confirm exact paths. Record external references by source, revision or hash, and rights. Third-party assets require distribution rights before they can be published.
+- Keep temporary builds, research inputs and evidence inside the designated checkout. Before handoff, incorporate justified project-owned material, remove disposable outputs and verify the pushed commit and clean working tree. Persistent external research, evidence, build and staging directories are prohibited. Verify recoverability from GitHub before removing unique work, and obtain Creative Director authorization before retiring any old project copy.
 
-When the task is complete, publish using only:
-
-`git add -A`
-`git commit -m "<short task summary>"`
-`git push origin main`
-
-If `git commit` reports nothing to commit, continue with the push.
-
-If any publish command fails, report that exact failure and stop. Do not investigate alternate GitHub integrations, APIs, authentication methods, repository configuration, or unrelated diagnostics unless explicitly asked.
-
-If the user explicitly requests a PR, follow that request for that task only.
+See [the repository consolidation record](00_ADMIN/Reference/Caelmor_Repository_Consolidation.md) for the checkout transition, approved placements and preservation inventory.
 
 ## Design Identity Guardrail
 
@@ -44,4 +33,4 @@ The Creative Director sets objectives, approved canon/scope, and milestone accep
 - Prefer a compiling, executed, playable Lowmark slice over more scaffolding, speculative optimizations, or redundant governance reviews.
 - Distinguish source presence, successful compile, tests executed, Unity runtime validation, and real player experience; claim only what evidence supports.
 
-This standing authorization covers **routine execution within the user's assigned mission**, not unrelated repository edits or unrequested external actions. Preserve the Delivery rules above: direct to `main` unless a PR was explicitly requested, exact publish sequence, and STOP on publish failure.
+This standing authorization covers **routine execution within the user's assigned mission**. Follow the feature-branch, PR review and preservation workflow above.

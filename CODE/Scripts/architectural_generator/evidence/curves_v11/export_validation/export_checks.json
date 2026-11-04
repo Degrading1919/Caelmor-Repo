@@ -1,0 +1,147 @@
+{
+  "blender": "5.0.1",
+  "source_sha256": {
+    "surface_atlas.py": "66f060531484f0eaa4299f8bda31484bcc788cc7d05faed17d94331f58e3bb24",
+    "surface_detail.py": "9eced5bc6dbd7a7521c0a290281e45bd03a3357b514d0072b5d9638572248c35",
+    "blender_backend.py": "88df4b2e03b3d456a071cbb1417e82e00bf835495cb42101326a1f94cb8c3554",
+    "surface_patterns.py": "08bd96e520f837bc431db6f07125030ad04a5ca727ec5fc8ea140f93dcc1a677",
+    "surface_conditions.py": "e6c18af8118173854f61a20cc7c671bb24f9240f32f7a1fb08a98069ed3110a8"
+  },
+  "source_unchanged_during_run": true,
+  "cases": [
+    {
+      "function": "SMITHY",
+      "region": "LOWMARK",
+      "geometry_hash": "27489cdb61cfc0fba9d620a099fc21773478efd3e5090edbe316d2b54071a609",
+      "uv_bound_values_checked": 86004,
+      "max_uv_serialization_delta": 1.1920928955078125e-07,
+      "material_export": {
+        "materials_with_maps": 14,
+        "map_bindings": {
+          "base": 14,
+          "normal": 14,
+          "orm": 14
+        },
+        "embedded_image_count": 35,
+        "embedded_png_sha256": [
+          "c6b10be2a70ba0662a75aaf9a2ffe15f352943869b78837391665eccfa856267",
+          "497feca65e2c2174a5ebca5c34c9ed1b54e00b9aaace903dbecaeb3e29892ecb",
+          "a091da25080b01629caefa31c20810300958b7497d88361860a30753b8acf133",
+          "02668fc450f8793f4dfcae2554285eb9b8dd5a71fff82076d9c8fbda4709ea25",
+          "ecac209d3858ea840ddea1465fd5a347e3a03e1c5aad025e9a81c0e114b7bace",
+          "ebaa62206847e4b8fb0241fb39e750472e7ff164a335133dd4b8640def214b8c",
+          "ac63c26b43d58cb9ca5f427efc0b88fa5230a39f5a0cab0c6eaea4c1bd754708",
+          "431eb9b936a173e3c06715f41137b0c171fe17ea55183b29160da820842baef0",
+          "fa90f71ccf5f5be9a6f4b39f0b8b18d8851ded09f4620127f3d170748b5abbac",
+          "78fa589eca024c95493f3ed84b20c5b92653d2f3eb072a6fe0ec70413de099a9",
+          "570784f8b6e4c71f45d22765b9365f0a0f7f0ae4a51cbc3bc7533a83b64775d8",
+          "3112a6e4c3f4f46c835a60612610b9d0068be241ecc70d18699c194d28eca752",
+          "3bb60ed17772ffc0eb7d8ff3110a548cbe70829fb9244d622b44f2325822723f",
+          "269ec81b78f2e1fa09d6917b287cfdf0b0305bf4ef6f87d14639a8478ed6dfe0",
+          "08de4cbc9a4237931f588528ae5b87577ab131c0ed0aae78b901d5c6ca6f4706",
+          "4ccb5339b24bb54ee1d6cdda8f2789ece83dc030f7e49efb34bc4cf872990837",
+          "d1810bf881741deef6f900a72aa8897ee958b543e4f2cf76e46c17fca043fb9e",
+          "5fcd427bdb55445e9594f62541500595b5a197d99215f15b3dfa3c597a557b5a",
+          "b0e788420a402017efa8f2fa5b3cedd98e6abc4caa8fe60e860c41569d93d793",
+          "f246c9c099b1e0bbbb843ac67f5c1b0b40e0b037af9f7aa373372436b498714f",
+          "807de9a5112bdda51ff8619f9dba9d7be7a8d50f55de9250672f15c1f57fc04e",
+          "b0fb341b1adf61bd6859329f64589b03f024abc2ec2264e0269134f979d81967",
+          "6420a9ac69a57d682a90c6672a2a65af1d83d5f42dd52de9b74743bf31f9b897",
+          "3f110438ed1852677aee9ca92a02a3ebbec097c60062da35fb51182499ff9c40",
+          "d37474567a67044b40569581d41993f91d421a1aceeb5ddfdb0df44afa1f8c7e",
+          "a6cec0b442eeda1546829f9efc2d2575e120d56757cfa9f4b5c1fc60dc220a7d",
+          "ea7334ff3242c9c1fe1f052a6adeb2d123d366f3363b8efb379b66ed5fd88dca",
+          "f8453aa2241219d6ed5f7e59c1086c97b7baece05a3ed8773605f6514779a394",
+          "59a193965aff2c11bcc811fac4eb6f0edbe46b8af857584217e3c43abe6b79fc",
+          "9030cbda4c5d26569bc1f0e6296476a1c837f1fde671aa8c79a31fe99e02e4c9",
+          "293010778ca219d552f1397eaad126b171da319fc5e34c7ad90fcb0861762d66",
+          "6a3826bd2a411b7cf1c1c0487e810556d75cdc9b086df67b7e064335ca604af6",
+          "ccd102cfb2909d0bfa0f2bca4aba95ed631cf73d793bfdc662293d9b4ac4f4b1",
+          "f94256e7c8c4f8f4ffd02219698a8b06ef25eff7e6c6f0ab6213c02a26f8fbc2",
+          "30d4e4af1e28d5fa0f7d8bc5cd2dd6c9660a886fd4d908ed0da72bf04fa98a16"
+        ]
+      },
+      "reimport": {
+        "imported_meshes": 67,
+        "meshes_with_surface_uvs": 67,
+        "reimported_pixel_map_checks": 56,
+        "distinct_source_pixel_signatures": 35
+      },
+      "source_map_variation": {
+        "albedo_rgb_max_range": 0.8627450913190842,
+        "orm_roughness_g_range": 0.43137258291244507,
+        "orm_metallic_b_range": 0.8117647767066956
+      },
+      "regeneration_protection_override": {
+        "protected_geometry_edit_retained": true,
+        "material_override_retained": true,
+        "unprotected_geometry_restored": true,
+        "cached_shader_edit_survived_regeneration": true,
+        "remaining_atlas_maps_deterministic": true,
+        "protected_hearth_retained_on_full_regeneration": true,
+        "roof_stone_fingerprints_unchanged": true,
+        "roof_only_regeneration_retained_heat_context": true,
+        "roof_only_atlas_materials_valid": true,
+        "roof_only_albedo_normal_orm_samples_checked": 441,
+        "roof_only_max_sample_error": 0.001960772275925393,
+        "saved_scene_reopened_with_packed_images_and_uvs": true
+      },
+      "glb_sha256": "f62368006e314704046cdf7fdde80d4713cc4403baf75459af3c47b94e622fd5"
+    },
+    {
+      "function": "GATEHOUSE",
+      "region": "THORNFELL",
+      "geometry_hash": "e6004fbc3da880abbaa2ea3fe6a45f479f02afb8fe114e3be05f951bea9ce45a",
+      "uv_bound_values_checked": 395406,
+      "max_uv_serialization_delta": 1.1920928955078125e-07,
+      "material_export": {
+        "materials_with_maps": 10,
+        "map_bindings": {
+          "base": 10,
+          "normal": 10,
+          "orm": 10
+        },
+        "embedded_image_count": 24,
+        "embedded_png_sha256": [
+          "c08114c8a09041302b927bebf65c1c5638ba249f704a4b58633dff2d832fb1f3",
+          "9719b0cc41df72a65d7d54584f681e0b10404a206336fa4b34bf94b8a0b08a6e",
+          "bfffa2a2917acdbda8c1cdcc42b723686153e3e2fadf3797d27131266a5c6286",
+          "02668fc450f8793f4dfcae2554285eb9b8dd5a71fff82076d9c8fbda4709ea25",
+          "fa23fb1c04313894740f08e49eef0fe3b8dd279a57d872a2ecea5816f50ce1d6",
+          "8ce45dfbd7c16a7751cb232998895bc7968c0de7fdf7531952c5c2e9294f4757",
+          "338830490aa1679ff6873a1eba70c6510655f364ca779788a1191600cf59de1b",
+          "6a8d987651816a2d403cd3919d8248452190c6419621d1385d8ea63eebff4a6f",
+          "3112a6e4c3f4f46c835a60612610b9d0068be241ecc70d18699c194d28eca752",
+          "a4e0c01edef2c419658f4e6eaaf2bbea37f3ae9ff31804492021228414dd9f79",
+          "c192613361a81ffb1c1c23bfd56e12e03d6180b07bc98e85fd80c0a74d2e7beb",
+          "c6b10be2a70ba0662a75aaf9a2ffe15f352943869b78837391665eccfa856267",
+          "e6bcc45038ff578470c1388d57ffde96bce65335e141d3180fb71a37da2ff02b",
+          "e62dc27421bf87cc784e95bbf5a014c9d1c6aac5c785ca5d0a340d102774dc03",
+          "7c44686a70e2ac3ce67772b3d002562dba41f0c3dee797bb31d89c6aa5e0ea79",
+          "6cef96d47f91c0c90f093b7af0bc0921a9d15abfa4474864df2d37feff304973",
+          "f2e65713e14706dd8c489000eb298e0c38c06c4d5438ad47d693bff7803b6703",
+          "3401e4d3340f089a6f8624fdecb14331a5f9fd9ad09b3e064970e468500d2e87",
+          "fcff25b6ae2a7c0b1846084e69f1a8e6befc8b9c3068d81ca101fda02e4dc274",
+          "213a4661f431520bc7de65fae8145c91e7b4f4fabc9736380dafc6aab59f53b3",
+          "37bfa809209d4542c861ffffeca48bb273bbfe1c232c188dddbc28413d9e1fc4",
+          "4344ecdde2e2ae0d5016e0d43e95ed6550532d57a32ca482e91557f182377e1a",
+          "503662f5680acce07b86a0130d7fd66687dedfba45d3438224a58d526e306901",
+          "603aff3c14302a5770a48486495fa5793b2b9d785fac1bd3ac08b000ec0ddd5e"
+        ]
+      },
+      "reimport": {
+        "imported_meshes": 151,
+        "meshes_with_surface_uvs": 148,
+        "reimported_pixel_map_checks": 40,
+        "distinct_source_pixel_signatures": 24
+      },
+      "source_map_variation": {
+        "albedo_rgb_max_range": 0.8039215505123138,
+        "orm_roughness_g_range": 0.43137258291244507,
+        "orm_metallic_b_range": 0.8117647767066956
+      },
+      "regeneration_protection_override": {},
+      "glb_sha256": "aebe671f913b4423ba5dbaba666391a4907cf5df90388f7af4b6c85ebed10139"
+    }
+  ]
+}

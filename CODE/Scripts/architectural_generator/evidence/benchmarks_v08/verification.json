@@ -1,0 +1,52 @@
+{
+  "valid": true,
+  "source_revisions": {
+    "before": "39f2e6c",
+    "after": "e5070b4"
+  },
+  "images_verified": 48,
+  "comparison_sheets": 6,
+  "geometry_costs": [
+    {
+      "function": "SMITHY",
+      "region": "LOWMARK",
+      "before": {
+        "vertices": 5428,
+        "triangles": 6086,
+        "objects": 37
+      },
+      "after": {
+        "vertices": 8136,
+        "triangles": 9352,
+        "objects": 65
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "region": "THORNFELL",
+      "before": {
+        "vertices": 36904,
+        "triangles": 44118,
+        "objects": 154
+      },
+      "after": {
+        "vertices": 34996,
+        "triangles": 42006,
+        "objects": 149
+      }
+    }
+  ],
+  "geometry_hashes": {
+    "SMITHY": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367",
+    "GATEHOUSE": "4b7472cc506bae5d4db82b9aa1336277195cebee072995e9f09294bc27946ec3"
+  },
+  "archive_sha256": "9d67c8cfb9a57a8378a2d3a86d276a7d5404870a356bc5493c61d7baa74f7505",
+  "archive_members": 27,
+  "native_integration_cases": 16,
+  "targeted_final_native_cases": 2,
+  "late_native_source_changes": [
+    "benchmark_gatehouse.py"
+  ],
+  "historical_images_matching_retained_manifests": 448,
+  "scope": "Fixed-camera matched imagery, actual mesh gate correspondence, two lifecycle checks and final archive identity. Technical evidence; Creative Director art acceptance remains pending."
+}

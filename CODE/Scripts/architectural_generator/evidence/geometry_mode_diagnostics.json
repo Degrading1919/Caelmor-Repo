@@ -1,0 +1,1345 @@
+{
+  "scope": "Authoring geometry counts and pure generation/validation time; no runtime measurements.",
+  "source_sha256": {
+    "__init__.py": "7998a866e52cfc1ab065a0b867686dee9f730b2f99303614294e1f8d3db61add",
+    "blender_backend.py": "c104abb6341438822efa52f20f15a4c28f7839008368f1c6bc2723c4960da168",
+    "engine.py": "7ff831ec55952754a59c61913aacd8996e01e7815e713fdca09b75bf2e30453e",
+    "facade.py": "c07be6d2167e05e323338a526958b69e2fc601d692ef24276ad13172619ecd2f",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "ffcf5bee153711172ed38685f3dfdbd8be3679eb9c435ec89ea027dd230a7272",
+    "model.py": "c577c3fb8a160d0ecdc5d2bc4c84d3a7f708a4bbacc11657834a799c04cb4d8f",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "a4836d7fddad0543686180103dfe455ecd5fc1f6d10b98b5a747505ebbcc13c1"
+  },
+  "cases": [
+    {
+      "settings": {
+        "seed": 17,
+        "function": "FARMHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 26,
+          "vertices": 11812,
+          "triangles": 17888,
+          "materials": 12,
+          "footprint_area": 89.5,
+          "roof_projected_area": 109.66,
+          "geometry_hash": "c99c581b5cb98cd44b1b3396a155c3354d4e4f7c1725879ff170ccd39406317e",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 26
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 1496,
+              "triangles": 2244,
+              "buffers": 5
+            },
+            "walls": {
+              "vertices": 1212,
+              "triangles": 1812,
+              "buffers": 1
+            },
+            "structure": {
+              "vertices": 2112,
+              "triangles": 3336,
+              "buffers": 2
+            },
+            "windows": {
+              "vertices": 840,
+              "triangles": 1260,
+              "buffers": 2
+            },
+            "doors": {
+              "vertices": 64,
+              "triangles": 96,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 944,
+              "triangles": 1416,
+              "buffers": 6
+            },
+            "roof": {
+              "vertices": 5144,
+              "triangles": 7724,
+              "buffers": 9
+            }
+          },
+          "region": "LOWMARK",
+          "context": "RURAL",
+          "building_type": "FARMHOUSE",
+          "roof_style": "GABLE",
+          "geometry_mode": "SOLID",
+          "roof_cover": "SHINGLE",
+          "construction": "TIMBER_INFILL",
+          "generation_validation_seconds": 0.27
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 27,
+          "vertices": 10148,
+          "triangles": 13466,
+          "materials": 12,
+          "footprint_area": 89.5,
+          "roof_projected_area": 109.66,
+          "geometry_hash": "b2456cdae879e1598c652f63fc7c2ddcfe86f07a5e0e9bfa62939ea04465e549",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 22,
+            "SURFACE": 5
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 1496,
+              "triangles": 2244,
+              "buffers": 5
+            },
+            "walls": {
+              "vertices": 1212,
+              "triangles": 1812,
+              "buffers": 1
+            },
+            "structure": {
+              "vertices": 2112,
+              "triangles": 3336,
+              "buffers": 2
+            },
+            "windows": {
+              "vertices": 840,
+              "triangles": 1260,
+              "buffers": 2
+            },
+            "doors": {
+              "vertices": 64,
+              "triangles": 96,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 944,
+              "triangles": 1416,
+              "buffers": 6
+            },
+            "roof": {
+              "vertices": 3480,
+              "triangles": 3302,
+              "buffers": 10
+            }
+          },
+          "region": "LOWMARK",
+          "context": "RURAL",
+          "building_type": "FARMHOUSE",
+          "roof_style": "GABLE",
+          "geometry_mode": "EFFICIENT",
+          "roof_cover": "SHINGLE",
+          "construction": "TIMBER_INFILL",
+          "generation_validation_seconds": 0.208
+        },
+        "vertices_reduction_percent": 14.09,
+        "triangles_reduction_percent": 24.72
+      }
+    },
+    {
+      "settings": {
+        "seed": 17,
+        "function": "FARMHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 26,
+          "vertices": 20502,
+          "triangles": 31268,
+          "materials": 12,
+          "footprint_area": 89.5,
+          "roof_projected_area": 109.66,
+          "geometry_hash": "44537edcd505fa6cad9c922098464967da0cfc8ad07588e4d8643dd95c14be7b",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 26
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 1496,
+              "triangles": 2244,
+              "buffers": 5
+            },
+            "walls": {
+              "vertices": 1212,
+              "triangles": 1812,
+              "buffers": 1
+            },
+            "structure": {
+              "vertices": 2704,
+              "triangles": 4520,
+              "buffers": 2
+            },
+            "windows": {
+              "vertices": 840,
+              "triangles": 1260,
+              "buffers": 2
+            },
+            "doors": {
+              "vertices": 64,
+              "triangles": 96,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 944,
+              "triangles": 1416,
+              "buffers": 6
+            },
+            "roof": {
+              "vertices": 13242,
+              "triangles": 19920,
+              "buffers": 9
+            }
+          },
+          "region": "LOWMARK",
+          "context": "RURAL",
+          "building_type": "FARMHOUSE",
+          "roof_style": "GABLE",
+          "geometry_mode": "SOLID",
+          "roof_cover": "SHINGLE",
+          "construction": "TIMBER_INFILL",
+          "generation_validation_seconds": 0.4913
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 27,
+          "vertices": 16148,
+          "triangles": 18346,
+          "materials": 12,
+          "footprint_area": 89.5,
+          "roof_projected_area": 109.66,
+          "geometry_hash": "cee3036ac0421f2b1efc8d7001136b520f191c6166b9771a1a2eaa15f97a9a9d",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 22,
+            "SURFACE": 5
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 1496,
+              "triangles": 2244,
+              "buffers": 5
+            },
+            "walls": {
+              "vertices": 1212,
+              "triangles": 1812,
+              "buffers": 1
+            },
+            "structure": {
+              "vertices": 2704,
+              "triangles": 4520,
+              "buffers": 2
+            },
+            "windows": {
+              "vertices": 840,
+              "triangles": 1260,
+              "buffers": 2
+            },
+            "doors": {
+              "vertices": 64,
+              "triangles": 96,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 944,
+              "triangles": 1416,
+              "buffers": 6
+            },
+            "roof": {
+              "vertices": 8888,
+              "triangles": 6998,
+              "buffers": 10
+            }
+          },
+          "region": "LOWMARK",
+          "context": "RURAL",
+          "building_type": "FARMHOUSE",
+          "roof_style": "GABLE",
+          "geometry_mode": "EFFICIENT",
+          "roof_cover": "SHINGLE",
+          "construction": "TIMBER_INFILL",
+          "generation_validation_seconds": 0.3648
+        },
+        "vertices_reduction_percent": 21.24,
+        "triangles_reduction_percent": 41.33
+      }
+    },
+    {
+      "settings": {
+        "seed": 17,
+        "function": "FARMHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 26,
+          "vertices": 33278,
+          "triangles": 50448,
+          "materials": 12,
+          "footprint_area": 89.5,
+          "roof_projected_area": 109.66,
+          "geometry_hash": "5d74b352ad10e5467981b21a422e5356c060156b859ce7b250cc005e4a607deb",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 26
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 1496,
+              "triangles": 2244,
+              "buffers": 5
+            },
+            "walls": {
+              "vertices": 1212,
+              "triangles": 1812,
+              "buffers": 1
+            },
+            "structure": {
+              "vertices": 2704,
+              "triangles": 4520,
+              "buffers": 2
+            },
+            "windows": {
+              "vertices": 840,
+              "triangles": 1260,
+              "buffers": 2
+            },
+            "doors": {
+              "vertices": 64,
+              "triangles": 96,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 944,
+              "triangles": 1416,
+              "buffers": 6
+            },
+            "roof": {
+              "vertices": 26018,
+              "triangles": 39100,
+              "buffers": 9
+            }
+          },
+          "region": "LOWMARK",
+          "context": "RURAL",
+          "building_type": "FARMHOUSE",
+          "roof_style": "GABLE",
+          "geometry_mode": "SOLID",
+          "roof_cover": "SHINGLE",
+          "construction": "TIMBER_INFILL",
+          "generation_validation_seconds": 0.8188
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 27,
+          "vertices": 25063,
+          "triangles": 24381,
+          "materials": 12,
+          "footprint_area": 89.5,
+          "roof_projected_area": 109.66,
+          "geometry_hash": "143fffd11826c4bae4b4e3cd8f8bb3ae25675b73ff2392aeb957265c0a6b9465",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 22,
+            "SURFACE": 5
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 1496,
+              "triangles": 2244,
+              "buffers": 5
+            },
+            "walls": {
+              "vertices": 1212,
+              "triangles": 1812,
+              "buffers": 1
+            },
+            "structure": {
+              "vertices": 2704,
+              "triangles": 4520,
+              "buffers": 2
+            },
+            "windows": {
+              "vertices": 840,
+              "triangles": 1260,
+              "buffers": 2
+            },
+            "doors": {
+              "vertices": 64,
+              "triangles": 96,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 944,
+              "triangles": 1416,
+              "buffers": 6
+            },
+            "roof": {
+              "vertices": 17803,
+              "triangles": 13033,
+              "buffers": 10
+            }
+          },
+          "region": "LOWMARK",
+          "context": "RURAL",
+          "building_type": "FARMHOUSE",
+          "roof_style": "GABLE",
+          "geometry_mode": "EFFICIENT",
+          "roof_cover": "SHINGLE",
+          "construction": "TIMBER_INFILL",
+          "generation_validation_seconds": 0.576
+        },
+        "vertices_reduction_percent": 24.69,
+        "triangles_reduction_percent": 51.67
+      }
+    },
+    {
+      "settings": {
+        "seed": 23,
+        "function": "WATCHTOWER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "PASSWATCH",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 22,
+          "vertices": 11404,
+          "triangles": 17096,
+          "materials": 11,
+          "footprint_area": 41.9146,
+          "roof_projected_area": 54.3796,
+          "geometry_hash": "474dcc332b188daa1f2822877db3f001d7d25244104a90713f490e2ad42bec9a",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 22
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 712,
+              "triangles": 1068,
+              "buffers": 6
+            },
+            "walls": {
+              "vertices": 4320,
+              "triangles": 6480,
+              "buffers": 2
+            },
+            "structure": {
+              "vertices": 416,
+              "triangles": 624,
+              "buffers": 1
+            },
+            "windows": {
+              "vertices": 560,
+              "triangles": 840,
+              "buffers": 2
+            },
+            "doors": {
+              "vertices": 128,
+              "triangles": 192,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 848,
+              "triangles": 1272,
+              "buffers": 2
+            },
+            "roof": {
+              "vertices": 4420,
+              "triangles": 6620,
+              "buffers": 8
+            }
+          },
+          "region": "THORNFELL",
+          "context": "PASSWATCH",
+          "building_type": "WATCHTOWER",
+          "roof_style": "HIP",
+          "geometry_mode": "SOLID",
+          "roof_cover": "SLATE",
+          "construction": "RUBBLE",
+          "generation_validation_seconds": 0.3043
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 23,
+          "vertices": 10027,
+          "triangles": 12927,
+          "materials": 11,
+          "footprint_area": 41.9146,
+          "roof_projected_area": 54.3796,
+          "geometry_hash": "c14a49ab3d96c73fb1e2a615e7f7931c7a1de400d253fdfac888d6c8cac1049f",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 17,
+            "SURFACE": 6
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 712,
+              "triangles": 1068,
+              "buffers": 6
+            },
+            "walls": {
+              "vertices": 4320,
+              "triangles": 5662,
+              "buffers": 2
+            },
+            "structure": {
+              "vertices": 416,
+              "triangles": 624,
+              "buffers": 1
+            },
+            "windows": {
+              "vertices": 560,
+              "triangles": 840,
+              "buffers": 2
+            },
+            "doors": {
+              "vertices": 128,
+              "triangles": 192,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 848,
+              "triangles": 1272,
+              "buffers": 2
+            },
+            "roof": {
+              "vertices": 3043,
+              "triangles": 3269,
+              "buffers": 9
+            }
+          },
+          "region": "THORNFELL",
+          "context": "PASSWATCH",
+          "building_type": "WATCHTOWER",
+          "roof_style": "HIP",
+          "geometry_mode": "EFFICIENT",
+          "roof_cover": "SLATE",
+          "construction": "RUBBLE",
+          "generation_validation_seconds": 0.2617
+        },
+        "vertices_reduction_percent": 12.07,
+        "triangles_reduction_percent": 24.39
+      }
+    },
+    {
+      "settings": {
+        "seed": 23,
+        "function": "WATCHTOWER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "PASSWATCH",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 22,
+          "vertices": 18166,
+          "triangles": 27308,
+          "materials": 11,
+          "footprint_area": 41.9146,
+          "roof_projected_area": 54.3796,
+          "geometry_hash": "9cc742fb777f49e83aa12347dea2caa0ae6d48ccc89bf80fa3b486a835e65a8c",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 22
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 712,
+              "triangles": 1068,
+              "buffers": 6
+            },
+            "walls": {
+              "vertices": 6288,
+              "triangles": 9432,
+              "buffers": 2
+            },
+            "structure": {
+              "vertices": 448,
+              "triangles": 688,
+              "buffers": 1
+            },
+            "windows": {
+              "vertices": 560,
+              "triangles": 840,
+              "buffers": 2
+            },
+            "doors": {
+              "vertices": 128,
+              "triangles": 192,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 848,
+              "triangles": 1272,
+              "buffers": 2
+            },
+            "roof": {
+              "vertices": 9182,
+              "triangles": 13816,
+              "buffers": 8
+            }
+          },
+          "region": "THORNFELL",
+          "context": "PASSWATCH",
+          "building_type": "WATCHTOWER",
+          "roof_style": "HIP",
+          "geometry_mode": "SOLID",
+          "roof_cover": "SLATE",
+          "construction": "RUBBLE",
+          "generation_validation_seconds": 0.5244
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 23,
+          "vertices": 14941,
+          "triangles": 17469,
+          "materials": 11,
+          "footprint_area": 41.9146,
+          "roof_projected_area": 54.3796,
+          "geometry_hash": "c44ab8f4805391379a549539c152c423e399a0a2eb711c0483e0c8fff1d054b3",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 17,
+            "SURFACE": 6
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 712,
+              "triangles": 1068,
+              "buffers": 6
+            },
+            "walls": {
+              "vertices": 6288,
+              "triangles": 8122,
+              "buffers": 2
+            },
+            "structure": {
+              "vertices": 448,
+              "triangles": 688,
+              "buffers": 1
+            },
+            "windows": {
+              "vertices": 560,
+              "triangles": 840,
+              "buffers": 2
+            },
+            "doors": {
+              "vertices": 128,
+              "triangles": 192,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 848,
+              "triangles": 1272,
+              "buffers": 2
+            },
+            "roof": {
+              "vertices": 5957,
+              "triangles": 5287,
+              "buffers": 9
+            }
+          },
+          "region": "THORNFELL",
+          "context": "PASSWATCH",
+          "building_type": "WATCHTOWER",
+          "roof_style": "HIP",
+          "geometry_mode": "EFFICIENT",
+          "roof_cover": "SLATE",
+          "construction": "RUBBLE",
+          "generation_validation_seconds": 0.3794
+        },
+        "vertices_reduction_percent": 17.75,
+        "triangles_reduction_percent": 36.03
+      }
+    },
+    {
+      "settings": {
+        "seed": 23,
+        "function": "WATCHTOWER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "PASSWATCH",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 22,
+          "vertices": 27554,
+          "triangles": 41408,
+          "materials": 11,
+          "footprint_area": 41.9146,
+          "roof_projected_area": 54.3796,
+          "geometry_hash": "73e905a6f57d8d6ba31b94acab764f4eaad775f51a0f74ee5e6f111cef13da19",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 22
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 712,
+              "triangles": 1068,
+              "buffers": 6
+            },
+            "walls": {
+              "vertices": 8800,
+              "triangles": 13200,
+              "buffers": 2
+            },
+            "structure": {
+              "vertices": 448,
+              "triangles": 688,
+              "buffers": 1
+            },
+            "windows": {
+              "vertices": 560,
+              "triangles": 840,
+              "buffers": 2
+            },
+            "doors": {
+              "vertices": 128,
+              "triangles": 192,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 848,
+              "triangles": 1272,
+              "buffers": 2
+            },
+            "roof": {
+              "vertices": 16058,
+              "triangles": 24148,
+              "buffers": 8
+            }
+          },
+          "region": "THORNFELL",
+          "context": "PASSWATCH",
+          "building_type": "WATCHTOWER",
+          "roof_style": "HIP",
+          "geometry_mode": "SOLID",
+          "roof_cover": "SLATE",
+          "construction": "RUBBLE",
+          "generation_validation_seconds": 0.7979
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 23,
+          "vertices": 21919,
+          "triangles": 23697,
+          "materials": 11,
+          "footprint_area": 41.9146,
+          "roof_projected_area": 54.3796,
+          "geometry_hash": "cbd5a03ecaa4e151fd6058cc9ffcff449e4c3e0382a2605a8e8ac0ec2d931edb",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 17,
+            "SURFACE": 6
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 712,
+              "triangles": 1068,
+              "buffers": 6
+            },
+            "walls": {
+              "vertices": 8800,
+              "triangles": 11262,
+              "buffers": 2
+            },
+            "structure": {
+              "vertices": 448,
+              "triangles": 688,
+              "buffers": 1
+            },
+            "windows": {
+              "vertices": 560,
+              "triangles": 840,
+              "buffers": 2
+            },
+            "doors": {
+              "vertices": 128,
+              "triangles": 192,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 848,
+              "triangles": 1272,
+              "buffers": 2
+            },
+            "roof": {
+              "vertices": 10423,
+              "triangles": 8375,
+              "buffers": 9
+            }
+          },
+          "region": "THORNFELL",
+          "context": "PASSWATCH",
+          "building_type": "WATCHTOWER",
+          "roof_style": "HIP",
+          "geometry_mode": "EFFICIENT",
+          "roof_cover": "SLATE",
+          "construction": "RUBBLE",
+          "generation_validation_seconds": 0.5728
+        },
+        "vertices_reduction_percent": 20.45,
+        "triangles_reduction_percent": 42.77
+      }
+    },
+    {
+      "settings": {
+        "seed": 41,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERFORGES",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 21,
+          "vertices": 7464,
+          "triangles": 11200,
+          "materials": 9,
+          "footprint_area": 86.4,
+          "roof_projected_area": 104.13,
+          "geometry_hash": "e4acd6e5223b593575d1e3be5eee16433c66050e40adc1fd7302ea0422874193",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 21
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 1384,
+              "triangles": 2076,
+              "buffers": 5
+            },
+            "walls": {
+              "vertices": 2380,
+              "triangles": 3572,
+              "buffers": 2
+            },
+            "structure": {
+              "vertices": 344,
+              "triangles": 516,
+              "buffers": 1
+            },
+            "doors": {
+              "vertices": 88,
+              "triangles": 132,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 216,
+              "triangles": 324,
+              "buffers": 4
+            },
+            "roof": {
+              "vertices": 3052,
+              "triangles": 4580,
+              "buffers": 8
+            }
+          },
+          "region": "EMBERHOLT",
+          "context": "EMBERFORGES",
+          "building_type": "SMITHY",
+          "roof_style": "GABLE",
+          "geometry_mode": "SOLID",
+          "roof_cover": "CLAY",
+          "construction": "ASHLAR",
+          "generation_validation_seconds": 0.1687
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 22,
+          "vertices": 6634,
+          "triangles": 8204,
+          "materials": 9,
+          "footprint_area": 86.4,
+          "roof_projected_area": 104.13,
+          "geometry_hash": "f4c0883f73c86e13922bb8663cec214a3186143e9c9d2c41cd40211e94958da0",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 16,
+            "SURFACE": 6
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 1384,
+              "triangles": 2076,
+              "buffers": 5
+            },
+            "walls": {
+              "vertices": 2380,
+              "triangles": 3086,
+              "buffers": 2
+            },
+            "structure": {
+              "vertices": 344,
+              "triangles": 516,
+              "buffers": 1
+            },
+            "doors": {
+              "vertices": 88,
+              "triangles": 132,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 216,
+              "triangles": 324,
+              "buffers": 4
+            },
+            "roof": {
+              "vertices": 2222,
+              "triangles": 2070,
+              "buffers": 9
+            }
+          },
+          "region": "EMBERHOLT",
+          "context": "EMBERFORGES",
+          "building_type": "SMITHY",
+          "roof_style": "GABLE",
+          "geometry_mode": "EFFICIENT",
+          "roof_cover": "CLAY",
+          "construction": "ASHLAR",
+          "generation_validation_seconds": 0.1246
+        },
+        "vertices_reduction_percent": 11.12,
+        "triangles_reduction_percent": 26.75
+      }
+    },
+    {
+      "settings": {
+        "seed": 41,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERFORGES",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 21,
+          "vertices": 27426,
+          "triangles": 41184,
+          "materials": 9,
+          "footprint_area": 86.4,
+          "roof_projected_area": 104.13,
+          "geometry_hash": "e31bfd83ac2c7704190bc3c9c86b737fb0dcf774462f59322f899147f7fc39a7",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 21
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 1384,
+              "triangles": 2076,
+              "buffers": 5
+            },
+            "walls": {
+              "vertices": 3062,
+              "triangles": 4596,
+              "buffers": 2
+            },
+            "structure": {
+              "vertices": 376,
+              "triangles": 580,
+              "buffers": 1
+            },
+            "doors": {
+              "vertices": 88,
+              "triangles": 132,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 216,
+              "triangles": 324,
+              "buffers": 4
+            },
+            "roof": {
+              "vertices": 22300,
+              "triangles": 33476,
+              "buffers": 8
+            }
+          },
+          "region": "EMBERHOLT",
+          "context": "EMBERFORGES",
+          "building_type": "SMITHY",
+          "roof_style": "GABLE",
+          "geometry_mode": "SOLID",
+          "roof_cover": "CLAY",
+          "construction": "ASHLAR",
+          "generation_validation_seconds": 0.689
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 22,
+          "vertices": 20530,
+          "triangles": 17865,
+          "materials": 9,
+          "footprint_area": 86.4,
+          "roof_projected_area": 104.13,
+          "geometry_hash": "eee7753d241e51b191553331eb5d87de506179209ad2fd194c44d5cca1dfda41",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 16,
+            "SURFACE": 6
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 1384,
+              "triangles": 2076,
+              "buffers": 5
+            },
+            "walls": {
+              "vertices": 3062,
+              "triangles": 3939,
+              "buffers": 2
+            },
+            "structure": {
+              "vertices": 376,
+              "triangles": 580,
+              "buffers": 1
+            },
+            "doors": {
+              "vertices": 88,
+              "triangles": 132,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 216,
+              "triangles": 324,
+              "buffers": 4
+            },
+            "roof": {
+              "vertices": 15404,
+              "triangles": 10814,
+              "buffers": 9
+            }
+          },
+          "region": "EMBERHOLT",
+          "context": "EMBERFORGES",
+          "building_type": "SMITHY",
+          "roof_style": "GABLE",
+          "geometry_mode": "EFFICIENT",
+          "roof_cover": "CLAY",
+          "construction": "ASHLAR",
+          "generation_validation_seconds": 0.3932
+        },
+        "vertices_reduction_percent": 25.14,
+        "triangles_reduction_percent": 56.62
+      }
+    },
+    {
+      "settings": {
+        "seed": 41,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERFORGES",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 21,
+          "vertices": 54288,
+          "triangles": 81480,
+          "materials": 9,
+          "footprint_area": 86.4,
+          "roof_projected_area": 104.13,
+          "geometry_hash": "04373ceaec1392d62029b4589c82f2e16b34339d5a63057f022435d15b64bc6d",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 21
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 1384,
+              "triangles": 2076,
+              "buffers": 5
+            },
+            "walls": {
+              "vertices": 3644,
+              "triangles": 5472,
+              "buffers": 2
+            },
+            "structure": {
+              "vertices": 376,
+              "triangles": 580,
+              "buffers": 1
+            },
+            "doors": {
+              "vertices": 88,
+              "triangles": 132,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 216,
+              "triangles": 324,
+              "buffers": 4
+            },
+            "roof": {
+              "vertices": 48580,
+              "triangles": 72896,
+              "buffers": 8
+            }
+          },
+          "region": "EMBERHOLT",
+          "context": "EMBERFORGES",
+          "building_type": "SMITHY",
+          "roof_style": "GABLE",
+          "geometry_mode": "SOLID",
+          "roof_cover": "CLAY",
+          "construction": "ASHLAR",
+          "generation_validation_seconds": 1.3777
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 22,
+          "vertices": 39980,
+          "triangles": 31182,
+          "materials": 9,
+          "footprint_area": 86.4,
+          "roof_projected_area": 104.13,
+          "geometry_hash": "1eb8e82ba99d8e3f8205a319272caa8506537958f969cbdcf6e4189c49080db8",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 16,
+            "SURFACE": 6
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 1384,
+              "triangles": 2076,
+              "buffers": 5
+            },
+            "walls": {
+              "vertices": 3644,
+              "triangles": 4668,
+              "buffers": 2
+            },
+            "structure": {
+              "vertices": 376,
+              "triangles": 580,
+              "buffers": 1
+            },
+            "doors": {
+              "vertices": 88,
+              "triangles": 132,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 216,
+              "triangles": 324,
+              "buffers": 4
+            },
+            "roof": {
+              "vertices": 34272,
+              "triangles": 23402,
+              "buffers": 9
+            }
+          },
+          "region": "EMBERHOLT",
+          "context": "EMBERFORGES",
+          "building_type": "SMITHY",
+          "roof_style": "GABLE",
+          "geometry_mode": "EFFICIENT",
+          "roof_cover": "CLAY",
+          "construction": "ASHLAR",
+          "generation_validation_seconds": 0.7334
+        },
+        "vertices_reduction_percent": 26.36,
+        "triangles_reduction_percent": 61.73
+      }
+    }
+  ]
+}

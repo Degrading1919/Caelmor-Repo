@@ -1,0 +1,886 @@
+{
+  "source_revision": "809300bcfddf67601fa6719ebf4e91aef9135098",
+  "generator_version": "0.5.0",
+  "source_sha256": {
+    "__init__.py": "57f662977d12340c1c4b91864c6655335854bdf196de143b3448ee154b18c2e0",
+    "blender_backend.py": "ccd4ce109d97eb98df309fcad795398f96eb55c02a1b012fc969a45deca6bdcc",
+    "blender_manifest.toml": "f9ec85f7be7b8fd2b6210d783d60f4402a97a912b27897ac6ba41e2fb509a452",
+    "engine.py": "11d4a8b1868afc1170a34a03d0b294b85d09f7c344153cb24074f5d2acce0ed7",
+    "facade.py": "f989e3a56624f89a034701e275beb6e10d7bfd52bb7a14b0ffad23a235708f4d",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "8da06e3a1242be8c2ac21bca994d1805a36f399425ab585befdaf386346b65ce",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+  },
+  "render_source_sha256": {
+    "render_household_review.py": "08bc6f0ac312f457e341cbf44163eb1276a203282074f67bb1952f899264ba78",
+    "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+  },
+  "settings_contract": {
+    "seed": 91,
+    "footprint": "L",
+    "width": 11.0,
+    "depth": 7.0,
+    "wing_width": 4.2,
+    "wing_depth": 4.5,
+    "floors": 2,
+    "floor_height": 2.65,
+    "pitch": 48.0,
+    "overhang": 0.45,
+    "detail": "MEDIUM",
+    "window_density": 1.0,
+    "context": "AUTO",
+    "wealth": "ESTABLISHED",
+    "craftsmanship": "STANDARD",
+    "maintenance": 0.7,
+    "age": 35,
+    "use_grammar": true,
+    "roof_style": "AUTO",
+    "geometry_mode": "EFFICIENT",
+    "world_aware": true
+  },
+  "renderer": "5.0.1",
+  "engine": "BLENDER_EEVEE",
+  "samples": 32,
+  "studio": "render_world_evidence._reset_scene, ground at grade",
+  "scale_policy": "Common projected orthographic scale per archetype across four regions and both views; different archetypes fitted independently.",
+  "geometry_generation": "One native backend build/validation per configuration; same objects reused for clay and material.",
+  "records": [
+    {
+      "function": "LONGHOUSE",
+      "region": "LOWMARK",
+      "label": "Longhouse",
+      "settings": {
+        "seed": 91,
+        "function": "LONGHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RURAL",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/longhouse/lowmark_clay_0.png",
+          "image_sha256": "38783e8e6c48d30d60a9e52778d8b6ce86d36e381d9f8319aa09274e6cb8ab88",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            57.46772003173828,
+            -63.80081558227539,
+            40.503334045410156
+          ],
+          "camera_target": [
+            10.25,
+            2.8595011234283447,
+            2.729156255722046
+          ],
+          "ortho_scale": 26.060757446289063,
+          "elapsed_seconds": 0.4216
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/longhouse/lowmark_clay_1.png",
+          "image_sha256": "b401033c21c1e20598ab7db6097a599fdae589b497467f8ac686178d026a1331",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -36.96772003173828,
+            69.51982116699219,
+            40.503334045410156
+          ],
+          "camera_target": [
+            10.25,
+            2.8595011234283447,
+            2.729156255722046
+          ],
+          "ortho_scale": 26.060757446289063,
+          "elapsed_seconds": 0.3254
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/longhouse/lowmark_material_0.png",
+          "image_sha256": "15eb4bbf3901d38ff6e13a419018cccacc32441378644455d6ebb66a075e195b",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            57.46772003173828,
+            -63.80081558227539,
+            40.503334045410156
+          ],
+          "camera_target": [
+            10.25,
+            2.8595011234283447,
+            2.729156255722046
+          ],
+          "ortho_scale": 26.060757446289063,
+          "elapsed_seconds": 0.2894
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/longhouse/lowmark_material_1.png",
+          "image_sha256": "7ea7f11aa85a3bf175c5f1825398e6d2bf94b6780f8e69a3637de1228203fede",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -36.96772003173828,
+            69.51982116699219,
+            40.503334045410156
+          ],
+          "camera_target": [
+            10.25,
+            2.8595011234283447,
+            2.729156255722046
+          ],
+          "ortho_scale": 26.060757446289063,
+          "elapsed_seconds": 0.294
+        }
+      ],
+      "build_seconds": 2.9639,
+      "geometry_hash": "b2af4e8b311183a2957340fc5a22710313415400069cd1ddd4983e3b7c27e9f9",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.45,
+            "bounds": [
+              0,
+              0,
+              16.0,
+              7.0
+            ],
+            "eave": 3.25,
+            "function": "LONGHOUSE",
+            "key": "lowmark_main_hall",
+            "roof": "GABLE",
+            "triangles": 14546,
+            "valid": true,
+            "vertices": 13504,
+            "wall_thickness": 0.28
+          },
+          {
+            "base": 0.45,
+            "bounds": [
+              16.85,
+              -0.84,
+              20.560000000000002,
+              4.2
+            ],
+            "eave": 2.95,
+            "function": "COTTAGE",
+            "key": "lowmark_service_wing",
+            "roof": "SHED",
+            "triangles": 3340,
+            "valid": true,
+            "vertices": 2838,
+            "wall_thickness": 0.28
+          }
+        ],
+        "errors": [],
+        "objects": 42,
+        "source_objects": 42,
+        "source_triangles": 17946,
+        "source_vertices": 16382,
+        "triangles": 17946,
+        "valid": true
+      },
+      "backend": {
+        "objects": 42,
+        "vertices": 16382,
+        "width": 21.470000624656677,
+        "depth": 9.25099790096283,
+        "height": 5.581773489713669,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.48500001430511475,
+          20.985000610351562
+        ],
+        [
+          -1.7659977674484253,
+          7.485000133514404
+        ],
+        [
+          -0.06173059344291687,
+          5.520042896270752
+        ]
+      ]
+    },
+    {
+      "function": "LONGHOUSE",
+      "region": "THORNFELL",
+      "label": "Longhouse",
+      "settings": {
+        "seed": 91,
+        "function": "LONGHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RIDGE",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/longhouse/thornfell_clay_0.png",
+          "image_sha256": "30f4e7432c7da50d7cbb2328c968878cc87a3c73b819ad1fd0608c57905b4901",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            54.567718505859375,
+            -63.33451461791992,
+            41.01095962524414
+          ],
+          "camera_target": [
+            7.349999904632568,
+            3.3258020877838135,
+            3.236781120300293
+          ],
+          "ortho_scale": 26.060757446289063,
+          "elapsed_seconds": 0.3254
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/longhouse/thornfell_clay_1.png",
+          "image_sha256": "63355b91b5a81bd323eff25d5bcc1be504f556149df3a73f8cd3616833579659",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.86772155761719,
+            69.98612213134766,
+            41.01095962524414
+          ],
+          "camera_target": [
+            7.349999904632568,
+            3.3258020877838135,
+            3.236781120300293
+          ],
+          "ortho_scale": 26.060757446289063,
+          "elapsed_seconds": 0.3049
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/longhouse/thornfell_material_0.png",
+          "image_sha256": "644531545b8e9766b739826704980fc9a3171f197351e37030546d623be5f223",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            54.567718505859375,
+            -63.33451461791992,
+            41.01095962524414
+          ],
+          "camera_target": [
+            7.349999904632568,
+            3.3258020877838135,
+            3.236781120300293
+          ],
+          "ortho_scale": 26.060757446289063,
+          "elapsed_seconds": 0.3186
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/longhouse/thornfell_material_1.png",
+          "image_sha256": "c4a42c0d72035f1c50a62b702d27d2436b97729b0be86701f49eda4eed7fe740",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.86772155761719,
+            69.98612213134766,
+            41.01095962524414
+          ],
+          "camera_target": [
+            7.349999904632568,
+            3.3258020877838135,
+            3.236781120300293
+          ],
+          "ortho_scale": 26.060757446289063,
+          "elapsed_seconds": 0.2814
+        }
+      ],
+      "build_seconds": 1.1554,
+      "geometry_hash": "fbfab624cdfdfe8dbc59ead250cb03299d484cb7bd267c97acade46e1470c377",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.5,
+            "bounds": [
+              0,
+              0,
+              11.0,
+              7.238
+            ],
+            "eave": 3.1319999999999997,
+            "function": "LONGHOUSE",
+            "key": "thornfell_stone_hall",
+            "roof": "GABLE",
+            "triangles": 11959,
+            "valid": true,
+            "vertices": 10942,
+            "wall_thickness": 0.5
+          },
+          {
+            "base": 0.9199999999999999,
+            "bounds": [
+              11.0,
+              1.73712,
+              14.74,
+              5.0666
+            ],
+            "eave": 2.9729599999999996,
+            "function": "COTTAGE",
+            "key": "thornfell_lower_stone_range",
+            "roof": "GABLE",
+            "triangles": 4086,
+            "valid": true,
+            "vertices": 3296,
+            "wall_thickness": 0.5
+          }
+        ],
+        "errors": [],
+        "objects": 50,
+        "source_objects": 50,
+        "source_triangles": 16045,
+        "source_vertices": 14238,
+        "triangles": 16045,
+        "valid": true
+      },
+      "backend": {
+        "objects": 50,
+        "vertices": 14238,
+        "width": 15.18999969959259,
+        "depth": 8.331604301929474,
+        "height": 6.473562240600586,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.24500000476837158,
+          14.944999694824219
+        ],
+        [
+          -0.8399999737739563,
+          7.491604328155518
+        ],
+        [
+          0.0,
+          6.473562240600586
+        ]
+      ]
+    },
+    {
+      "function": "LONGHOUSE",
+      "region": "MIRE",
+      "label": "Longhouse",
+      "settings": {
+        "seed": 91,
+        "function": "LONGHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "SORROWMERE",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/longhouse/mire_clay_0.png",
+          "image_sha256": "bed9245ba0ec38158dc8d8882677afc640f7067ced9784a0137fa73dd35a2065",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            54.54011917114258,
+            -65.59526062011719,
+            42.229286193847656
+          ],
+          "camera_target": [
+            7.322400093078613,
+            1.065053939819336,
+            4.45510721206665
+          ],
+          "ortho_scale": 26.060757446289063,
+          "elapsed_seconds": 0.3322
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/longhouse/mire_clay_1.png",
+          "image_sha256": "589605e5283b3af8ce1459d5c923cd8d3b584822a9754839b88f9e30276ca16d",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.895320892333984,
+            67.72537231445312,
+            42.229286193847656
+          ],
+          "camera_target": [
+            7.322400093078613,
+            1.065053939819336,
+            4.45510721206665
+          ],
+          "ortho_scale": 26.060757446289063,
+          "elapsed_seconds": 0.324
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/longhouse/mire_material_0.png",
+          "image_sha256": "8154c100723ac9f6964cc37d42df0dfb620acbb2c0ccf46a4e1efc13b227b8b0",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            54.54011917114258,
+            -65.59526062011719,
+            42.229286193847656
+          ],
+          "camera_target": [
+            7.322400093078613,
+            1.065053939819336,
+            4.45510721206665
+          ],
+          "ortho_scale": 26.060757446289063,
+          "elapsed_seconds": 0.3603
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/longhouse/mire_material_1.png",
+          "image_sha256": "f41ac0172d0f51d4476428832bf809d7ca8774e62f46e639d6c972a2e459ab30",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.895320892333984,
+            67.72537231445312,
+            42.229286193847656
+          ],
+          "camera_target": [
+            7.322400093078613,
+            1.065053939819336,
+            4.45510721206665
+          ],
+          "ortho_scale": 26.060757446289063,
+          "elapsed_seconds": 0.3319
+        }
+      ],
+      "build_seconds": 1.9125,
+      "geometry_hash": "c43de3e8058fd251dab330a6f7993b49a4edaeae93d94f2316236f95e3f2fe83",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 1.94,
+            "bounds": [
+              0.0,
+              0.0,
+              9.1448,
+              6.44
+            ],
+            "eave": 4.74,
+            "function": "LONGHOUSE",
+            "key": "mire_longhouse",
+            "roof": "BOW",
+            "triangles": 17676,
+            "valid": true,
+            "vertices": 16698,
+            "wall_thickness": 0.18
+          },
+          {
+            "base": 1.94,
+            "bounds": [
+              10.9448,
+              0.7084000000000001,
+              14.744800000000001,
+              5.7316
+            ],
+            "eave": 4.74,
+            "function": "COTTAGE",
+            "key": "mire_linked_pavilion",
+            "roof": "BOW",
+            "triangles": 9630,
+            "valid": true,
+            "vertices": 8324,
+            "wall_thickness": 0.18
+          }
+        ],
+        "errors": [],
+        "objects": 57,
+        "source_objects": 57,
+        "source_triangles": 28350,
+        "source_vertices": 25718,
+        "triangles": 28350,
+        "valid": true
+      },
+      "backend": {
+        "objects": 57,
+        "vertices": 25718,
+        "width": 16.13480007648468,
+        "depth": 12.23989200592041,
+        "height": 9.013899400830269,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.7450000047683716,
+          15.389800071716309
+        ],
+        [
+          -5.054892063140869,
+          7.184999942779541
+        ],
+        [
+          -0.05184228718280792,
+          8.962057113647461
+        ]
+      ]
+    },
+    {
+      "function": "LONGHOUSE",
+      "region": "EMBERHOLT",
+      "label": "Longhouse",
+      "settings": {
+        "seed": 91,
+        "function": "LONGHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "EMBERHOLD",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/longhouse/emberholt_clay_0.png",
+          "image_sha256": "56210fbc09f397ee1937bad0763ea9045876be3fbcf08ebd704e252763dcc318",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.417720794677734,
+            -60.98531723022461,
+            41.944175720214844
+          ],
+          "camera_target": [
+            8.199999809265137,
+            5.675000190734863,
+            4.170000076293945
+          ],
+          "ortho_scale": 26.060757446289063,
+          "elapsed_seconds": 0.3105
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/longhouse/emberholt_clay_1.png",
+          "image_sha256": "f949d23ce65433ea42ca4aaeab441bf40aa727790c1ab785d454317d251f4853",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.01771926879883,
+            72.33531951904297,
+            41.944175720214844
+          ],
+          "camera_target": [
+            8.199999809265137,
+            5.675000190734863,
+            4.170000076293945
+          ],
+          "ortho_scale": 26.060757446289063,
+          "elapsed_seconds": 0.2549
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/longhouse/emberholt_material_0.png",
+          "image_sha256": "7c2c2e9cdcd6fa786fab70882d70c6bb7a82cb1df1a885795fc8eb8e0bab4acb",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.417720794677734,
+            -60.98531723022461,
+            41.944175720214844
+          ],
+          "camera_target": [
+            8.199999809265137,
+            5.675000190734863,
+            4.170000076293945
+          ],
+          "ortho_scale": 26.060757446289063,
+          "elapsed_seconds": 0.2839
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/longhouse/emberholt_material_1.png",
+          "image_sha256": "954bde6383fcd4e672251f5d641b0fde8406f9cdf659df7993cb9629c1b0f19e",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.01771926879883,
+            72.33531951904297,
+            41.944175720214844
+          ],
+          "camera_target": [
+            8.199999809265137,
+            5.675000190734863,
+            4.170000076293945
+          ],
+          "ortho_scale": 26.060757446289063,
+          "elapsed_seconds": 0.2811
+        }
+      ],
+      "build_seconds": 1.136,
+      "geometry_hash": "024be3fdbc69875cc9bd3827c04541e74aa42cbbd50824adcfcbc07414daa6bf",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.48,
+            "bounds": [
+              0,
+              0,
+              16.4,
+              11.5
+            ],
+            "eave": 6.08,
+            "function": "LONGHOUSE",
+            "key": "emberholt_main_block",
+            "roof": "TERRACE",
+            "triangles": 16568,
+            "valid": true,
+            "vertices": 12024,
+            "wall_thickness": 0.7
+          }
+        ],
+        "errors": [],
+        "objects": 21,
+        "source_objects": 21,
+        "source_triangles": 16568,
+        "source_vertices": 12024,
+        "triangles": 16568,
+        "valid": true
+      },
+      "backend": {
+        "objects": 21,
+        "vertices": 12024,
+        "width": 18.137525260448456,
+        "depth": 12.070000052452087,
+        "height": 8.34000015258789,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.8687626719474792,
+          17.268762588500977
+        ],
+        [
+          -0.36000001430511475,
+          11.710000038146973
+        ],
+        [
+          0.0,
+          8.34000015258789
+        ]
+      ]
+    }
+  ]
+}

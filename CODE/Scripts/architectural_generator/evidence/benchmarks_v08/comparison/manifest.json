@@ -1,0 +1,499 @@
+{
+  "schema": "caelmor.architectural-benchmarks.v1",
+  "before_stage": "before",
+  "after_stage": "after",
+  "sheets": [
+    {
+      "function": "SMITHY",
+      "distance": "normal",
+      "image": "comparison/smithy_normal.png",
+      "image_sha256": "423575bd8ca8a0697f134b22901f266776965a96dc13e2c3ae4a7dda933b4f50",
+      "width": 4276,
+      "height": 1490,
+      "inputs": [
+        {
+          "stage": "before",
+          "finish": "clay",
+          "view": 0,
+          "image": "individual/smithy/normal_clay_front.png",
+          "image_sha256": "d0bb2054e9f83bed7493c4f7b3295b3c8cf0c7050f751d81541f6f1871a4168c",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "a36910ff87f9d41502ea02cdfa8dbf4779fe74d37cad8a9c6018a32418152e0b"
+        },
+        {
+          "stage": "after",
+          "finish": "clay",
+          "view": 0,
+          "image": "individual/smithy/normal_clay_front.png",
+          "image_sha256": "ecee87634dc56a6c6ad3dd6aa1a149371c1fd7d765359918fdbd3eaf9001f9bd",
+          "source_revision": "e5070b4",
+          "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367"
+        },
+        {
+          "stage": "before",
+          "finish": "clay",
+          "view": 1,
+          "image": "individual/smithy/normal_clay_rear.png",
+          "image_sha256": "bd825799b52e2aa8bd015eb4879847a8c31bf7fe38b703d5669ab6a57a465bdb",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "a36910ff87f9d41502ea02cdfa8dbf4779fe74d37cad8a9c6018a32418152e0b"
+        },
+        {
+          "stage": "after",
+          "finish": "clay",
+          "view": 1,
+          "image": "individual/smithy/normal_clay_rear.png",
+          "image_sha256": "3f6386854c049fecd7c0fdfe964dc365bf9d2c11e36e2dd0114a98d160ae420d",
+          "source_revision": "e5070b4",
+          "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367"
+        },
+        {
+          "stage": "before",
+          "finish": "material",
+          "view": 0,
+          "image": "individual/smithy/normal_material_front.png",
+          "image_sha256": "d6bdfdc00a4579a4e5eb9e04012ceb95b41c31b91e785d5193286e4eefb0037f",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "a36910ff87f9d41502ea02cdfa8dbf4779fe74d37cad8a9c6018a32418152e0b"
+        },
+        {
+          "stage": "after",
+          "finish": "material",
+          "view": 0,
+          "image": "individual/smithy/normal_material_front.png",
+          "image_sha256": "fcff74427fc5fc093809eaccbf70671834592cddf4e60fed29e48f9418d86ad2",
+          "source_revision": "e5070b4",
+          "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367"
+        },
+        {
+          "stage": "before",
+          "finish": "material",
+          "view": 1,
+          "image": "individual/smithy/normal_material_rear.png",
+          "image_sha256": "752d01387472374c362a76a0b5c2f28882b090b6e7d587efa82d947f007242d2",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "a36910ff87f9d41502ea02cdfa8dbf4779fe74d37cad8a9c6018a32418152e0b"
+        },
+        {
+          "stage": "after",
+          "finish": "material",
+          "view": 1,
+          "image": "individual/smithy/normal_material_rear.png",
+          "image_sha256": "b7d1a3891839565530334b8095ecdc13bc49826c02769544322e25f44f7574c8",
+          "source_revision": "e5070b4",
+          "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367"
+        }
+      ]
+    },
+    {
+      "function": "SMITHY",
+      "distance": "distant",
+      "image": "comparison/smithy_distant.png",
+      "image_sha256": "8732ede18dc059e6ec23b0b05acfb2e34194668341b5474c7a58c5a12d0de112",
+      "width": 4276,
+      "height": 1490,
+      "inputs": [
+        {
+          "stage": "before",
+          "finish": "clay",
+          "view": 0,
+          "image": "individual/smithy/distant_clay_front.png",
+          "image_sha256": "20db0cae12490b88f0c7c8a0518399f862c314c0fc7d95116475197029358480",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "a36910ff87f9d41502ea02cdfa8dbf4779fe74d37cad8a9c6018a32418152e0b"
+        },
+        {
+          "stage": "after",
+          "finish": "clay",
+          "view": 0,
+          "image": "individual/smithy/distant_clay_front.png",
+          "image_sha256": "07ebf05aa2b069a1a63d5b0bcb79ca15867b56928260f92778f2a4574133d193",
+          "source_revision": "e5070b4",
+          "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367"
+        },
+        {
+          "stage": "before",
+          "finish": "clay",
+          "view": 1,
+          "image": "individual/smithy/distant_clay_rear.png",
+          "image_sha256": "fbc444bcc38a092afff69296435ac92985dbf9e7ce201aa1d26b5320ee4036f6",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "a36910ff87f9d41502ea02cdfa8dbf4779fe74d37cad8a9c6018a32418152e0b"
+        },
+        {
+          "stage": "after",
+          "finish": "clay",
+          "view": 1,
+          "image": "individual/smithy/distant_clay_rear.png",
+          "image_sha256": "c3eff4ab91061a73609a7b5c555c25818189549ffd2c3dbfb281a2a2c7f9a391",
+          "source_revision": "e5070b4",
+          "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367"
+        },
+        {
+          "stage": "before",
+          "finish": "material",
+          "view": 0,
+          "image": "individual/smithy/distant_material_front.png",
+          "image_sha256": "5aed263b7aa75bd71f50019b80f1a27270647f3b0c4858661cdbebdeca2b4a0d",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "a36910ff87f9d41502ea02cdfa8dbf4779fe74d37cad8a9c6018a32418152e0b"
+        },
+        {
+          "stage": "after",
+          "finish": "material",
+          "view": 0,
+          "image": "individual/smithy/distant_material_front.png",
+          "image_sha256": "6cf363505934c9a4361c616caad580576feaa01688587d6325ae525ffeb0ea7d",
+          "source_revision": "e5070b4",
+          "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367"
+        },
+        {
+          "stage": "before",
+          "finish": "material",
+          "view": 1,
+          "image": "individual/smithy/distant_material_rear.png",
+          "image_sha256": "be2235c7017eb65f05afee0a8feee4748d5ad55eb78505d6c73d9a87c24453cf",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "a36910ff87f9d41502ea02cdfa8dbf4779fe74d37cad8a9c6018a32418152e0b"
+        },
+        {
+          "stage": "after",
+          "finish": "material",
+          "view": 1,
+          "image": "individual/smithy/distant_material_rear.png",
+          "image_sha256": "ff4ea870a18ae4a824b389db084a033d88d131e37629c9712af4c01a66dca8ea",
+          "source_revision": "e5070b4",
+          "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367"
+        }
+      ]
+    },
+    {
+      "function": "SMITHY",
+      "distance": "close",
+      "image": "comparison/smithy_close.png",
+      "image_sha256": "d99c1c82978259b0c269f4ac30cec7d2707afff44865c040e33461e75337e76d",
+      "width": 4276,
+      "height": 1490,
+      "inputs": [
+        {
+          "stage": "before",
+          "finish": "clay",
+          "view": 0,
+          "image": "individual/smithy/close_clay_workfront_a.png",
+          "image_sha256": "113277faaa57c795c6661614b27a23666a135b2f2ca0fa7ac1503a7e7405af1b",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "a36910ff87f9d41502ea02cdfa8dbf4779fe74d37cad8a9c6018a32418152e0b"
+        },
+        {
+          "stage": "after",
+          "finish": "clay",
+          "view": 0,
+          "image": "individual/smithy/close_clay_workfront_a.png",
+          "image_sha256": "9673501f627f495aa3d9d89d01b20328c50ff215b79424741411c4edbc639cfe",
+          "source_revision": "e5070b4",
+          "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367"
+        },
+        {
+          "stage": "before",
+          "finish": "clay",
+          "view": 1,
+          "image": "individual/smithy/close_clay_workfront_b.png",
+          "image_sha256": "31b24413115d59c1e9e370949c68e2fb5460328af67cd429f8990c06d565a042",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "a36910ff87f9d41502ea02cdfa8dbf4779fe74d37cad8a9c6018a32418152e0b"
+        },
+        {
+          "stage": "after",
+          "finish": "clay",
+          "view": 1,
+          "image": "individual/smithy/close_clay_workfront_b.png",
+          "image_sha256": "6bc1cdcaa04de8f00cc8c9a6d349ee289b96d2456295b2cafa3b4c4ad9f37056",
+          "source_revision": "e5070b4",
+          "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367"
+        },
+        {
+          "stage": "before",
+          "finish": "material",
+          "view": 0,
+          "image": "individual/smithy/close_material_workfront_a.png",
+          "image_sha256": "268ec66177cfb8c113e02a5e9a80ab0fcc53bb7388a4dc53e270a137400c1551",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "a36910ff87f9d41502ea02cdfa8dbf4779fe74d37cad8a9c6018a32418152e0b"
+        },
+        {
+          "stage": "after",
+          "finish": "material",
+          "view": 0,
+          "image": "individual/smithy/close_material_workfront_a.png",
+          "image_sha256": "23fd56805510584cb01071b43ca9196ff1d7ddf62cfa477c3c04d8a257d43009",
+          "source_revision": "e5070b4",
+          "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367"
+        },
+        {
+          "stage": "before",
+          "finish": "material",
+          "view": 1,
+          "image": "individual/smithy/close_material_workfront_b.png",
+          "image_sha256": "2aa444b967262f61b9c69f912e29fe7e5707cc31979d59366f37e349a1082354",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "a36910ff87f9d41502ea02cdfa8dbf4779fe74d37cad8a9c6018a32418152e0b"
+        },
+        {
+          "stage": "after",
+          "finish": "material",
+          "view": 1,
+          "image": "individual/smithy/close_material_workfront_b.png",
+          "image_sha256": "91b4b6a5fd496992581c489a52c635b62bd0ba6133ae0eb0bab075b9d6dcb7d6",
+          "source_revision": "e5070b4",
+          "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367"
+        }
+      ]
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "normal",
+      "image": "comparison/gatehouse_normal.png",
+      "image_sha256": "6a07188de213f1fffb7c17530972352ec1ac10555d5b555cddd11576cf7d97c7",
+      "width": 4276,
+      "height": 1490,
+      "inputs": [
+        {
+          "stage": "before",
+          "finish": "clay",
+          "view": 0,
+          "image": "individual/gatehouse/normal_clay_front.png",
+          "image_sha256": "1881a67f395043f72f8564c83fa67a41bf5a7d7135dafa1c9f012ee644635f3e",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "e25d82a27e1c3b0bfed1734c34ccdd271708b53730022826fdcee8700c40d227"
+        },
+        {
+          "stage": "after",
+          "finish": "clay",
+          "view": 0,
+          "image": "individual/gatehouse/normal_clay_front.png",
+          "image_sha256": "971868f648fab0598aff2920e0e1e7e60615a3851050a487739c50cacd18d600",
+          "source_revision": "e5070b4",
+          "geometry_hash": "4b7472cc506bae5d4db82b9aa1336277195cebee072995e9f09294bc27946ec3"
+        },
+        {
+          "stage": "before",
+          "finish": "clay",
+          "view": 1,
+          "image": "individual/gatehouse/normal_clay_rear.png",
+          "image_sha256": "0564cc4bad7a99343d7df7eba0d202ac6736578fa08be913cf864a9e99c0908c",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "e25d82a27e1c3b0bfed1734c34ccdd271708b53730022826fdcee8700c40d227"
+        },
+        {
+          "stage": "after",
+          "finish": "clay",
+          "view": 1,
+          "image": "individual/gatehouse/normal_clay_rear.png",
+          "image_sha256": "2dc7ee969f81a0f3d110b000f6fc98dd5e637d78f8b8f9ed2ef4b8d151de3d66",
+          "source_revision": "e5070b4",
+          "geometry_hash": "4b7472cc506bae5d4db82b9aa1336277195cebee072995e9f09294bc27946ec3"
+        },
+        {
+          "stage": "before",
+          "finish": "material",
+          "view": 0,
+          "image": "individual/gatehouse/normal_material_front.png",
+          "image_sha256": "f118570eb8ede07236fb701b85f4b5a4072652d3ab83bdc5ac4e658dc67005a6",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "e25d82a27e1c3b0bfed1734c34ccdd271708b53730022826fdcee8700c40d227"
+        },
+        {
+          "stage": "after",
+          "finish": "material",
+          "view": 0,
+          "image": "individual/gatehouse/normal_material_front.png",
+          "image_sha256": "4da5fee87948d6d7c4b8d1af95f0231e545cf2b42e0f2c551dfb2155bccb052e",
+          "source_revision": "e5070b4",
+          "geometry_hash": "4b7472cc506bae5d4db82b9aa1336277195cebee072995e9f09294bc27946ec3"
+        },
+        {
+          "stage": "before",
+          "finish": "material",
+          "view": 1,
+          "image": "individual/gatehouse/normal_material_rear.png",
+          "image_sha256": "ded8bfff321ff7589ae8edd6bf7547f10dd71978cc383304637263f3437ce74c",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "e25d82a27e1c3b0bfed1734c34ccdd271708b53730022826fdcee8700c40d227"
+        },
+        {
+          "stage": "after",
+          "finish": "material",
+          "view": 1,
+          "image": "individual/gatehouse/normal_material_rear.png",
+          "image_sha256": "4039fe749deb31f7dc752b19c5f5ef6c36ab1785e81c45b67ccef91eb493f589",
+          "source_revision": "e5070b4",
+          "geometry_hash": "4b7472cc506bae5d4db82b9aa1336277195cebee072995e9f09294bc27946ec3"
+        }
+      ]
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "distant",
+      "image": "comparison/gatehouse_distant.png",
+      "image_sha256": "91c9c1aeaf29280a769285b0e00cb22ca8f63eaecd00e27bc4ce013b7b127d00",
+      "width": 4276,
+      "height": 1490,
+      "inputs": [
+        {
+          "stage": "before",
+          "finish": "clay",
+          "view": 0,
+          "image": "individual/gatehouse/distant_clay_front.png",
+          "image_sha256": "c166b02e39e7d9717b02e816e1c81d9960de30f4861a9b7a5fb71863d1de2a36",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "e25d82a27e1c3b0bfed1734c34ccdd271708b53730022826fdcee8700c40d227"
+        },
+        {
+          "stage": "after",
+          "finish": "clay",
+          "view": 0,
+          "image": "individual/gatehouse/distant_clay_front.png",
+          "image_sha256": "4405dde24f155a270688210cea03effa798b5261d069a9ad8f00c67802c75622",
+          "source_revision": "e5070b4",
+          "geometry_hash": "4b7472cc506bae5d4db82b9aa1336277195cebee072995e9f09294bc27946ec3"
+        },
+        {
+          "stage": "before",
+          "finish": "clay",
+          "view": 1,
+          "image": "individual/gatehouse/distant_clay_rear.png",
+          "image_sha256": "9fd765ca19f604d57bf864fecbf3b0a243310f35e86e25f53f60d67cd0a13e8d",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "e25d82a27e1c3b0bfed1734c34ccdd271708b53730022826fdcee8700c40d227"
+        },
+        {
+          "stage": "after",
+          "finish": "clay",
+          "view": 1,
+          "image": "individual/gatehouse/distant_clay_rear.png",
+          "image_sha256": "936f69a3a4cc01c87e7c037f38f81307d37744d98b7fb4537c49f04e750ea34e",
+          "source_revision": "e5070b4",
+          "geometry_hash": "4b7472cc506bae5d4db82b9aa1336277195cebee072995e9f09294bc27946ec3"
+        },
+        {
+          "stage": "before",
+          "finish": "material",
+          "view": 0,
+          "image": "individual/gatehouse/distant_material_front.png",
+          "image_sha256": "9e88099f4a4321949882b2981eb64d7ab8ef7ea8a2e80aeccefc684e148249d9",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "e25d82a27e1c3b0bfed1734c34ccdd271708b53730022826fdcee8700c40d227"
+        },
+        {
+          "stage": "after",
+          "finish": "material",
+          "view": 0,
+          "image": "individual/gatehouse/distant_material_front.png",
+          "image_sha256": "ac01c855c41e2a3bcbbe08b22b3d6f39cabd1fa3454472421faa69a03b11eabd",
+          "source_revision": "e5070b4",
+          "geometry_hash": "4b7472cc506bae5d4db82b9aa1336277195cebee072995e9f09294bc27946ec3"
+        },
+        {
+          "stage": "before",
+          "finish": "material",
+          "view": 1,
+          "image": "individual/gatehouse/distant_material_rear.png",
+          "image_sha256": "b9f7553822281e1b5bc947e24b563877a3387dcf0c5b0ec0e865b2aeb26c547d",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "e25d82a27e1c3b0bfed1734c34ccdd271708b53730022826fdcee8700c40d227"
+        },
+        {
+          "stage": "after",
+          "finish": "material",
+          "view": 1,
+          "image": "individual/gatehouse/distant_material_rear.png",
+          "image_sha256": "3265f678d8d202bcd0449f038db813909a2514bae9d2eb1780d154bade7b4028",
+          "source_revision": "e5070b4",
+          "geometry_hash": "4b7472cc506bae5d4db82b9aa1336277195cebee072995e9f09294bc27946ec3"
+        }
+      ]
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "close",
+      "image": "comparison/gatehouse_close.png",
+      "image_sha256": "6d85e5ae481a95fe4062158a9573cc44b97ddbe83a757b070bc8df9af9e13596",
+      "width": 4276,
+      "height": 1490,
+      "inputs": [
+        {
+          "stage": "before",
+          "finish": "clay",
+          "view": 0,
+          "image": "individual/gatehouse/close_clay_front.png",
+          "image_sha256": "97056f8ff9e7d213484503576e703dbbe10c72416cc0281483d2fcc59476bfbc",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "e25d82a27e1c3b0bfed1734c34ccdd271708b53730022826fdcee8700c40d227"
+        },
+        {
+          "stage": "after",
+          "finish": "clay",
+          "view": 0,
+          "image": "individual/gatehouse/close_clay_front.png",
+          "image_sha256": "1a96b654d48d5d67426f6257dddbeb5d098b07b131b3a75f1dcff83b15e2dd9d",
+          "source_revision": "e5070b4",
+          "geometry_hash": "4b7472cc506bae5d4db82b9aa1336277195cebee072995e9f09294bc27946ec3"
+        },
+        {
+          "stage": "before",
+          "finish": "clay",
+          "view": 1,
+          "image": "individual/gatehouse/close_clay_rear.png",
+          "image_sha256": "28b772370cf5aee6fcf10e70cdaa32d564ece18fdde8735bf8fed42de92b13d5",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "e25d82a27e1c3b0bfed1734c34ccdd271708b53730022826fdcee8700c40d227"
+        },
+        {
+          "stage": "after",
+          "finish": "clay",
+          "view": 1,
+          "image": "individual/gatehouse/close_clay_rear.png",
+          "image_sha256": "beed06ae86a079606b3775430a89e38ee9275f9ef6eed0015ad19fb1aacf5c1b",
+          "source_revision": "e5070b4",
+          "geometry_hash": "4b7472cc506bae5d4db82b9aa1336277195cebee072995e9f09294bc27946ec3"
+        },
+        {
+          "stage": "before",
+          "finish": "material",
+          "view": 0,
+          "image": "individual/gatehouse/close_material_front.png",
+          "image_sha256": "38204d6047ea85994594c3db95a4a7e4b6bdbc6955115643f415d6b861f7d343",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "e25d82a27e1c3b0bfed1734c34ccdd271708b53730022826fdcee8700c40d227"
+        },
+        {
+          "stage": "after",
+          "finish": "material",
+          "view": 0,
+          "image": "individual/gatehouse/close_material_front.png",
+          "image_sha256": "059417816ffca381ed4ff4663db4e25bfc45a23e55c6b05280de1641a7e17bdd",
+          "source_revision": "e5070b4",
+          "geometry_hash": "4b7472cc506bae5d4db82b9aa1336277195cebee072995e9f09294bc27946ec3"
+        },
+        {
+          "stage": "before",
+          "finish": "material",
+          "view": 1,
+          "image": "individual/gatehouse/close_material_rear.png",
+          "image_sha256": "12b107d8b7855a2816da004f4d35cb83b40cd7653d99365f39a0992e977911a7",
+          "source_revision": "39f2e6c",
+          "geometry_hash": "e25d82a27e1c3b0bfed1734c34ccdd271708b53730022826fdcee8700c40d227"
+        },
+        {
+          "stage": "after",
+          "finish": "material",
+          "view": 1,
+          "image": "individual/gatehouse/close_material_rear.png",
+          "image_sha256": "e909bf892fd2b401583a21da2bf8624de365dc6b65661cefabfdefa0bde085cb",
+          "source_revision": "e5070b4",
+          "geometry_hash": "4b7472cc506bae5d4db82b9aa1336277195cebee072995e9f09294bc27946ec3"
+        }
+      ]
+    }
+  ]
+}

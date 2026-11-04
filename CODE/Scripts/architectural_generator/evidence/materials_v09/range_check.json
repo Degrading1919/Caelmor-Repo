@@ -1,0 +1,157 @@
+{
+  "valid": true,
+  "settings": {
+    "age": 35.0,
+    "context": "AUTO",
+    "craftsmanship": "STANDARD",
+    "depth": 16,
+    "detail": "HIGH",
+    "floor_height": 2.65,
+    "floors": 3,
+    "footprint": "L",
+    "function": "FARMHOUSE",
+    "geometry_mode": "EFFICIENT",
+    "maintenance": 0.7,
+    "overhang": 0.45,
+    "pitch": 48.0,
+    "region": "LOWMARK",
+    "roof_style": "AUTO",
+    "seed": 17,
+    "use_grammar": false,
+    "wealth": "ESTABLISHED",
+    "width": 24,
+    "window_density": 1.0,
+    "wing_depth": 4.5,
+    "wing_width": 4.2,
+    "world_aware": false
+  },
+  "geometry_hash": "99e7f3a8c9093c64c6267ed76174d1ce57bc256149281adbcfd41c00741746b5",
+  "metrics": {
+    "objects": 26,
+    "vertices": 91498,
+    "width": 25.056923270225525,
+    "depth": 21.546745777130127,
+    "height": 17.367900848388672,
+    "layers": [
+      "details",
+      "doors",
+      "foundation",
+      "roof",
+      "structure",
+      "walls",
+      "windows"
+    ]
+  },
+  "surfaces": [
+    {
+      "charts": 2346,
+      "density": 72,
+      "fingerprint": "ac0098e00c472c145ade3b4a44c99f15e1d91b7e525efa7ae29c1c39303dd3f2",
+      "material": "iron",
+      "objects": 3,
+      "size": [
+        1024,
+        1208
+      ]
+    },
+    {
+      "charts": 516,
+      "density": 72,
+      "fingerprint": "b13444fba3690e7305107e49e9d3989a356afb80cb313a2bb2cb2cbc4f57814a",
+      "material": "mortar",
+      "objects": 1,
+      "size": [
+        512,
+        488
+      ]
+    },
+    {
+      "charts": 4050,
+      "density": 72,
+      "fingerprint": "3ef060b074257c1df909800e4f373ac5c853d3dd0f985d43df580c65bfb93c88",
+      "material": "plaster",
+      "objects": 1,
+      "size": [
+        4096,
+        3528
+      ]
+    },
+    {
+      "charts": 15703,
+      "density": 72,
+      "fingerprint": "4df4eb43b62b44cccb726a071f160db5d012bb8d0b3fd1181dffbb3ebac363e3",
+      "material": "roof",
+      "objects": 1,
+      "size": [
+        4096,
+        1132
+      ]
+    },
+    {
+      "charts": 4963,
+      "density": 72,
+      "fingerprint": "2a2c030bea55a04d08f6beca5dfc4bc103e11e7699d3af748a1e4050994c5c6b",
+      "material": "roof_dark",
+      "objects": 3,
+      "size": [
+        1024,
+        2328
+      ]
+    },
+    {
+      "charts": 2962,
+      "density": 72,
+      "fingerprint": "94d46f85691a303d3f855e4f002396189ffd5f591a8732b7df4e792cd418d04f",
+      "material": "roof_worn",
+      "objects": 1,
+      "size": [
+        1024,
+        868
+      ]
+    },
+    {
+      "charts": 84,
+      "density": 72,
+      "fingerprint": "ab3a83465be0509385acbdfe1c31db18554c75023369269123fe04cfe570af38",
+      "material": "stone",
+      "objects": 2,
+      "size": [
+        1024,
+        476
+      ]
+    },
+    {
+      "charts": 1488,
+      "density": 72,
+      "fingerprint": "19ad52148d125b83a9e34866b6b60190cc24c321077bd5804dc7d3379a81782d",
+      "material": "stone_light",
+      "objects": 4,
+      "size": [
+        1024,
+        988
+      ]
+    },
+    {
+      "charts": 3340,
+      "density": 144,
+      "fingerprint": "94704ac9df9896b73780aeb722823887c78f2bc63998b64bacf2d7caa277481c",
+      "material": "timber",
+      "objects": 5,
+      "size": [
+        4096,
+        3644
+      ]
+    },
+    {
+      "charts": 3856,
+      "density": 144,
+      "fingerprint": "2d5f0392b0eb2b7f12f8f07312f4f4c637541b035b3ba790acd01ac4e31afd54",
+      "material": "timber_light",
+      "objects": 4,
+      "size": [
+        1024,
+        2804
+      ]
+    }
+  ]
+}

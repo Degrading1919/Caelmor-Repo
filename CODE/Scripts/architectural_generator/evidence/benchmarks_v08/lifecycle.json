@@ -1,0 +1,35 @@
+{
+  "blender": "5.0.1",
+  "cases": [
+    {
+      "function": "SMITHY",
+      "region": "LOWMARK",
+      "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367",
+      "protected_edit_retained": true,
+      "unprotected_regeneration_restored": true,
+      "unique_semantic_ids": true,
+      "two_native_uv_maps": true,
+      "saved_reopen": true,
+      "export_reimport": true,
+      "imported_meshes": 65,
+      "actual_slot_and_collision_aperture_rays": 0,
+      "actual_arch_profile_rays": 0,
+      "glb_sha256": "059a1013ff916929daad93f3f7c3d7bca74ef27da6809602b80974cf0e2520a1"
+    },
+    {
+      "function": "GATEHOUSE",
+      "region": "THORNFELL",
+      "geometry_hash": "4b7472cc506bae5d4db82b9aa1336277195cebee072995e9f09294bc27946ec3",
+      "protected_edit_retained": true,
+      "unprotected_regeneration_restored": true,
+      "unique_semantic_ids": true,
+      "two_native_uv_maps": true,
+      "saved_reopen": true,
+      "export_reimport": true,
+      "imported_meshes": 149,
+      "actual_slot_and_collision_aperture_rays": 36,
+      "actual_arch_profile_rays": 2,
+      "glb_sha256": "5677b1f1530a9d7ef7dfc00a7826d130bf48dd5c81ff43b647757d785e4325c5"
+    }
+  ]
+}

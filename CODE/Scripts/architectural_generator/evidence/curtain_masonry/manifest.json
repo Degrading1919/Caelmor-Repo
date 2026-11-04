@@ -1,0 +1,314 @@
+{
+  "blender": "5.0.1",
+  "source_sha256": {
+    "__init__.py": "44b3d3b5b80928081cd29b975cb5f817c0d02af6acc82b6d406ffbc440dea6c6",
+    "benchmark_construction.py": "cb7f62eca3dc086d51cd844db28e2e62f86af7de978e81d3395d236e5f244343",
+    "benchmark_finish.py": "b218e6ef0627b92261c2d37efba1341281163dd30b371e1fc16b6c5eac281f01",
+    "benchmark_gatehouse.py": "87e202cc917737c180b5b7594b02290bd312d01e3533de7ba7a723428707fc7d",
+    "blender_backend.py": "88df4b2e03b3d456a071cbb1417e82e00bf835495cb42101326a1f94cb8c3554",
+    "blender_manifest.toml": "fe5956241107d3fc34b52eafcf09cd71cdf15edbc064bc6b2135840d61666f3e",
+    "crafted_geometry.py": "8cb9d2f8f8dd4161fb90511087d433ae1828e92d133ec966665dd90ff6e1ac74",
+    "curtain_masonry.py": "89d0a6b5428a51ff4b5e2202d3f6ab304ef599e05afdadfce26328950c632482",
+    "curve_profiles.py": "563edc2cddcb12b6493ad95d8eefc5772c0b31a95cb42a18e529840aa49623c0",
+    "curve_sweep.py": "a2b3b2ed6106ddd566e53924729ee4b49ea0d3779c4f875e60dfa4bfb3949a74",
+    "engine.py": "c7d32770776717720ce78c7d896e165d40eb6120c9150cc0fcc3cc5d9781d5e6",
+    "facade.py": "44fa1ea715a0b0d5d26b163b532c683586445eb91fc3d9d335e42d0d67f7f020",
+    "function_work.py": "f776360d1911be1d13ed794ddcb8098cc4208118bb406a7eeddd372d0aa7a0f2",
+    "function_yard.py": "a7d05edd0f83d0ae9ec51c026e0556289f075482eb01a24214b3623aead75948",
+    "functional.py": "10f719e1db914f5bfc3e1958fe5c0fd323d2e75d8bd02e71f068117a1ad96baa",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "LICENSE": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+    "materials.py": "119930a294c310950b09b7d6c09cfc2ee3459caf3e59da8276d835e39c78d062",
+    "model.py": "ed5361b518d71b6386ef960cfbc024801ad547eed479557bfdc2703de50c89f1",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "d7108db77e59b057122527d9affdec8cf42fad944350697cdf1c59b61fbdddf7",
+    "roof_pigments.py": "5d615f22a7b46aaf4c5e2c2ac8ac89ffd8ce0752c1a63b6c1cee4704638a81dc",
+    "surface_atlas.py": "ef174226ba0efee12c8bfc096da20a998170af6f96fd4719f3e5583a888fe2ce",
+    "surface_conditions.py": "e6c18af8118173854f61a20cc7c671bb24f9240f32f7a1fb08a98069ed3110a8",
+    "surface_detail.py": "9eced5bc6dbd7a7521c0a290281e45bd03a3357b514d0072b5d9638572248c35",
+    "surface_patterns.py": "08bd96e520f837bc431db6f07125030ad04a5ca727ec5fc8ea140f93dcc1a677",
+    "surface_pigments.py": "4dd2da250bf96e53af3ad9a0aed9601b2b035de1c14225438ac3a8fdb5900eb4",
+    "world.py": "27c044fd67bfe3f39a8fe450b29373052a2af7a4e537fe15025b6bfa606632c7",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "49db2616e637fb2133e288eaf2f04b995e71109b64bcc99207c03f10dd69b69f"
+  },
+  "settings": {
+    "seed": 91,
+    "function": "GATEHOUSE",
+    "footprint": "L",
+    "width": 11.0,
+    "depth": 7.0,
+    "wing_width": 4.2,
+    "wing_depth": 4.5,
+    "floors": 2,
+    "floor_height": 2.65,
+    "pitch": 48.0,
+    "overhang": 0.45,
+    "detail": "MEDIUM",
+    "window_density": 1.0,
+    "region": "THORNFELL",
+    "context": "AUTO",
+    "wealth": "ESTABLISHED",
+    "craftsmanship": "STANDARD",
+    "maintenance": 0.7,
+    "age": 35,
+    "use_grammar": true,
+    "roof_style": "AUTO",
+    "geometry_mode": "EFFICIENT",
+    "world_aware": true,
+    "crafted_curves": true,
+    "seed_massing": true
+  },
+  "material_control_revision": "2a260e9",
+  "clay_control_revision": "1ac5d02",
+  "geometry_hashes": [
+    "5e503eb4365bee229ae42c1225c417b4fbbd136067c3b1be550bb35dea979d9c",
+    "656faf3edcb3b3930b76e733d917db857c8ed8cc1c2636597791c8a2cedbd29e"
+  ],
+  "triangles": [
+    66483,
+    67143
+  ],
+  "changed_buffers": [
+    "world_thornfell.gatehouse_east_watchtower.gatehouse.curtain_return.east"
+  ],
+  "candidate_wall_bounds": [
+    [
+      16.36650298024113,
+      18.76650298024113
+    ],
+    [
+      -1.9038155397615615,
+      -0.8899999999999999
+    ],
+    [
+      0.0,
+      3.9299999999999997
+    ]
+  ],
+  "unchanged_collision_proxies": 15,
+  "clear_route_bounds": 5,
+  "baseline": {
+    "clay": {
+      "function": "GATEHOUSE",
+      "distance": "normal",
+      "finish": "clay",
+      "view": 0,
+      "image": "91/gatehouse/normal_clay_0.png",
+      "sha256": "3286d29653efd005ac8fe646dcb6af2b2384fdde8e752f57e910260646a34176",
+      "camera_location": [
+        38.32919692993164,
+        -39.95886993408203,
+        31.143360137939453
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 38.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -10.371673583984375,
+            8.512018203735352
+          ],
+          "y": [
+            -10.400906562805176,
+            4.976620674133301
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -19.0,
+            19.0
+          ],
+          "y": [
+            -13.0625,
+            13.0625
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    "material": {
+      "function": "GATEHOUSE",
+      "distance": "normal",
+      "finish": "material",
+      "view": 0,
+      "image": "gatehouse/normal_material_0.png",
+      "sha256": "4d39f9f8ef8ff5bb10a62b1f5ba53f26ce0828febd4608f19d8d7c84d53e1a11",
+      "camera_location": [
+        38.32919692993164,
+        -39.95886993408203,
+        31.143360137939453
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 38.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -10.371673583984375,
+            8.512018203735352
+          ],
+          "y": [
+            -10.400906562805176,
+            4.976620674133301
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -19.0,
+            19.0
+          ],
+          "y": [
+            -13.0625,
+            13.0625
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    }
+  },
+  "after": [
+    {
+      "function": "GATEHOUSE",
+      "distance": "normal",
+      "finish": "clay",
+      "view": 0,
+      "image": "gatehouse/normal_clay_0.png",
+      "sha256": "6f418cd9506423d0d76634525eeb5f99fc2f1d6653c8cb534767491082b62e03",
+      "camera_location": [
+        38.32919692993164,
+        -39.95886993408203,
+        31.143360137939453
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 38.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -10.371673583984375,
+            8.512018203735352
+          ],
+          "y": [
+            -10.451292037963867,
+            4.976620674133301
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -19.0,
+            19.0
+          ],
+          "y": [
+            -13.0625,
+            13.0625
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "normal",
+      "finish": "material",
+      "view": 0,
+      "image": "gatehouse/normal_material_0.png",
+      "sha256": "a3e02a998ad144460686c5e8c4d6da023077e2b09a9eb89fde1883d7ad8a2c3d",
+      "camera_location": [
+        38.32919692993164,
+        -39.95886993408203,
+        31.143360137939453
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 38.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -10.371673583984375,
+            8.512018203735352
+          ],
+          "y": [
+            -10.451292037963867,
+            4.976620674133301
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -19.0,
+            19.0
+          ],
+          "y": [
+            -13.0625,
+            13.0625
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    }
+  ],
+  "glb_bytes": 16613556,
+  "material_export": {
+    "materials_with_maps": 10,
+    "map_bindings": {
+      "base": 10,
+      "normal": 10,
+      "orm": 10
+    },
+    "embedded_image_count": 24,
+    "embedded_png_sha256": [
+      "c08114c8a09041302b927bebf65c1c5638ba249f704a4b58633dff2d832fb1f3",
+      "03ae5386da10e4f82a28b2f6a0bb6161aef87ed948a192708231c638b80c07a2",
+      "5051ce24ec1b04c5aeeb3c2d7d68a0be7d8d6cfea20ae4ce89db3af0536eb6de",
+      "02668fc450f8793f4dfcae2554285eb9b8dd5a71fff82076d9c8fbda4709ea25",
+      "643eb8f6d579b394aaf15cf49d4bbc5a0a516ddf736fb9758324bfd103e12749",
+      "8982fc80ac5212762f4427c7221ace3227d6847ec6327d0c2022463bf3af7e0f",
+      "5afd8adb5355872c88cbe4862eb169640a020711b5bf60bfa521bbb24bb4162b",
+      "551af5ed2d235dd15db384617a055cb37f77e980bee5ef2aaa18108dad570765",
+      "3112a6e4c3f4f46c835a60612610b9d0068be241ecc70d18699c194d28eca752",
+      "0d16def637faede9d406ed428a0596e5e590024722d365046b8daab3ed5b00b4",
+      "7b4bbac729677d645caeac79c223a7dde03cc4645d1d30bf49653e1f18653aab",
+      "c6b10be2a70ba0662a75aaf9a2ffe15f352943869b78837391665eccfa856267",
+      "be969dd7001f1271656ec96eecf3f23acd2c8a16425e6602dbc858477e88fbb3",
+      "ad5b2309d01383c35f70abc62002b561c7934590682a81aefcbc7d47f8ab64fb",
+      "eedca51f218c898425b3f41d3d38a810f7e3b78a0f963c8d5591396e25094e77",
+      "e8c13d6069c2e168346bdbfdf8473d816eebd9d2899c8ab24554dd57dffdd554",
+      "53dd05a810591398dc7fbd6f450e96fd8ed5e04be91102a8615eec8d88a2d709",
+      "3728421ee681fbaf40ae12fba69940618be17332d0cd6eda3ed97b3c7319dc30",
+      "01d6d1535cbf8b5065d5057013f7ad6d1cf376df7cc0d416eb2ec46207865654",
+      "34c24ceae904fe348e55da488ff3b1a9d29b656ebb10f2aed8e3fbff0bd51815",
+      "db54259fa35bd207c5d1af7ee207d0579493cd7ce34c9913efad1dabfb2eb08b",
+      "7d6555a30f4c426a7c7bfaf04e76ad39933262ec6ebadb413744a5f0dd6fdc8a",
+      "0fdbb4dfcb7428755d2236d7422b2d698b7a380ba12edb40bd3238ccdb1ed257",
+      "84a1d568d82d97b5e76d45abf9fb0cbd0303a0f6b5b70058e73de1bb886879a7"
+    ]
+  },
+  "reimport": {
+    "imported_meshes": 149,
+    "meshes_with_surface_uvs": 146,
+    "reimported_pixel_map_checks": 4,
+    "distinct_source_pixel_signatures": 3
+  },
+  "comparison": {
+    "image": "comparison.png",
+    "sha256": "88f46d1701ea0ba25775bfcf40802ece2fc27b0d6360573191c6fd26fc969b2a"
+  }
+}

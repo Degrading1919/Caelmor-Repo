@@ -1,7 +1,7 @@
 ﻿CAELMOR_FILE_MANIFEST_v1
-Generated automatically from full Caelmor project root.
-Project root: C:\Users\CK\Documents\Caelmor
-Update timestamp: 12/17/2025 19:05:55
+GitHub authority: Degrading1919/Caelmor-Repo
+Designated checkout on this workstation: C:\Users\CK\Documents\Caelmor-Repo
+The directory listing below originated in the December 17, 2025 snapshot. Confirm exact current paths in the appropriate GitHub branch. This list is a placement guide and does not make the old workspace authoritative.
 
 ============================================================
 DIRECTORY STRUCTURE (Including Empty Folders)
@@ -37,6 +37,10 @@ UNITY/
     - Stage 6.1 — Combat Architecture Snapshot.md
     - Stage 6.3 — Combat Runtime Implementation.md
 00_ADMIN\Reference/
+    - Caelmor_Artistic_Methodology.md
+    - Caelmor_Material_Research_Review.xlsx
+    - Caelmor_Repository_Consolidation.md
+    - RS3_Material_Reuse_Research.xlsx
     - Caelmor_Assistant_Activation_Prompts.md
     - Caelmor_File_Manifest.txt
     - Caelmor_File_Manifest_Autogen.ps1
@@ -195,8 +199,17 @@ ARCHIVE\Experimental/
     - 1.1.3 systems architect review.txt
     - enemy variant and family.md
     - VS Enemy Family & Variant — Behavioral + Design Specification.md
+ARCHIVE\LegacyWorkspace/
+    - Caelmor_Creative_Readiness_Assessment.md
+    - Consolidation_Inventory.json
+    - Recovered_*.zip (historical research, tools, source and build evidence)
 CODE\Prototypes/
 CODE\Scripts/
+CODE\Scripts\architectural_generator/
+    - ENGINE_CONTRACT.md
+CODE\Scripts\architectural_generator\evidence/
+    - Recovered_Architecture_*.zip (historical source and validation evidence)
+CODE\Scripts\architectural_generator\dist/
 CODE\Systems/
     - CombatIntentQueueSystem.cs
     - CombatOutcomeApplicationSystem.cs

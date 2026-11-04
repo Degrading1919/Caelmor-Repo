@@ -1,0 +1,903 @@
+{
+  "source_revision": "809300bcfddf67601fa6719ebf4e91aef9135098",
+  "generator_version": "0.5.0",
+  "source_sha256": {
+    "__init__.py": "57f662977d12340c1c4b91864c6655335854bdf196de143b3448ee154b18c2e0",
+    "blender_backend.py": "ccd4ce109d97eb98df309fcad795398f96eb55c02a1b012fc969a45deca6bdcc",
+    "blender_manifest.toml": "f9ec85f7be7b8fd2b6210d783d60f4402a97a912b27897ac6ba41e2fb509a452",
+    "engine.py": "11d4a8b1868afc1170a34a03d0b294b85d09f7c344153cb24074f5d2acce0ed7",
+    "facade.py": "f989e3a56624f89a034701e275beb6e10d7bfd52bb7a14b0ffad23a235708f4d",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "8da06e3a1242be8c2ac21bca994d1805a36f399425ab585befdaf386346b65ce",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+  },
+  "render_source_sha256": {
+    "render_household_review.py": "08bc6f0ac312f457e341cbf44163eb1276a203282074f67bb1952f899264ba78",
+    "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+  },
+  "settings_contract": {
+    "seed": 91,
+    "footprint": "L",
+    "width": 11.0,
+    "depth": 7.0,
+    "wing_width": 4.2,
+    "wing_depth": 4.5,
+    "floors": 2,
+    "floor_height": 2.65,
+    "pitch": 48.0,
+    "overhang": 0.45,
+    "detail": "MEDIUM",
+    "window_density": 1.0,
+    "context": "AUTO",
+    "wealth": "ESTABLISHED",
+    "craftsmanship": "STANDARD",
+    "maintenance": 0.7,
+    "age": 35,
+    "use_grammar": true,
+    "roof_style": "AUTO",
+    "geometry_mode": "EFFICIENT",
+    "world_aware": true
+  },
+  "renderer": "5.0.1",
+  "engine": "BLENDER_EEVEE",
+  "samples": 32,
+  "studio": "render_world_evidence._reset_scene, ground at grade",
+  "scale_policy": "Common projected orthographic scale per archetype across four regions and both views; different archetypes fitted independently.",
+  "geometry_generation": "One native backend build/validation per configuration; same objects reused for clay and material.",
+  "records": [
+    {
+      "function": "WATCHTOWER",
+      "region": "LOWMARK",
+      "label": "Watchtower",
+      "settings": {
+        "seed": 91,
+        "function": "WATCHTOWER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RURAL",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/watchtower/lowmark_clay_0.png",
+          "image_sha256": "c193e44c8ae20ccb9da950479dc55b4036c09c3bad53df9d2dfa275a67c6e2cc",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            52.96772003173828,
+            -63.80081558227539,
+            43.3033332824707
+          ],
+          "camera_target": [
+            5.75,
+            2.8595011234283447,
+            5.52915620803833
+          ],
+          "ortho_scale": 32.84014739990235,
+          "elapsed_seconds": 0.3385
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/watchtower/lowmark_clay_1.png",
+          "image_sha256": "5f24b60573cd088ccfa34aeb258f71e4d7b2a155d16b486a5157b7782128d270",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -41.46772003173828,
+            69.51982116699219,
+            43.3033332824707
+          ],
+          "camera_target": [
+            5.75,
+            2.8595011234283447,
+            5.52915620803833
+          ],
+          "ortho_scale": 32.84014739990235,
+          "elapsed_seconds": 0.3235
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/watchtower/lowmark_material_0.png",
+          "image_sha256": "21347110ad813c08c8a329f6af1fcf6ced55e533d6bb203c2982c2a605dc9fce",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            52.96772003173828,
+            -63.80081558227539,
+            43.3033332824707
+          ],
+          "camera_target": [
+            5.75,
+            2.8595011234283447,
+            5.52915620803833
+          ],
+          "ortho_scale": 32.84014739990235,
+          "elapsed_seconds": 0.3185
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/watchtower/lowmark_material_1.png",
+          "image_sha256": "da973a392a16cbff09da268592c8a9f79d3301ba434950bd653702ce71996f0c",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -41.46772003173828,
+            69.51982116699219,
+            43.3033332824707
+          ],
+          "camera_target": [
+            5.75,
+            2.8595011234283447,
+            5.52915620803833
+          ],
+          "ortho_scale": 32.84014739990235,
+          "elapsed_seconds": 0.3539
+        }
+      ],
+      "build_seconds": 2.8868,
+      "geometry_hash": "217f87519978819e909ff9f5f42ed1240ba71ba06b329284ec6b4ccf09744009",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.45,
+            "bounds": [
+              0,
+              0,
+              7.0,
+              7.0
+            ],
+            "eave": 8.849999999999998,
+            "function": "WATCHTOWER",
+            "key": "lowmark_main_hall",
+            "roof": "GABLE",
+            "triangles": 10404,
+            "valid": true,
+            "vertices": 8610,
+            "wall_thickness": 0.28
+          },
+          {
+            "base": 0.45,
+            "bounds": [
+              7.85,
+              -0.84,
+              11.559999999999999,
+              4.2
+            ],
+            "eave": 2.95,
+            "function": "COTTAGE",
+            "key": "lowmark_service_wing",
+            "roof": "SHED",
+            "triangles": 3340,
+            "valid": true,
+            "vertices": 2838,
+            "wall_thickness": 0.28
+          }
+        ],
+        "errors": [],
+        "objects": 39,
+        "source_objects": 39,
+        "source_triangles": 13804,
+        "source_vertices": 11488,
+        "triangles": 13804,
+        "valid": true
+      },
+      "backend": {
+        "objects": 39,
+        "vertices": 11488,
+        "width": 12.46999967098236,
+        "depth": 9.25099790096283,
+        "height": 11.181773394346237,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.48500001430511475,
+          11.984999656677246
+        ],
+        [
+          -1.7659977674484253,
+          7.485000133514404
+        ],
+        [
+          -0.06173059344291687,
+          11.12004280090332
+        ]
+      ]
+    },
+    {
+      "function": "WATCHTOWER",
+      "region": "THORNFELL",
+      "label": "Watchtower",
+      "settings": {
+        "seed": 91,
+        "function": "WATCHTOWER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RIDGE",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/watchtower/thornfell_clay_0.png",
+          "image_sha256": "6fb8fc03c98c02ce825a9a50bba8cdfcbe0a1601e21ea79540e2abcc377b2223",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            50.12976837158203,
+            -63.58697509765625,
+            44.44717788696289
+          ],
+          "camera_target": [
+            2.912050247192383,
+            3.07334041595459,
+            6.672999858856201
+          ],
+          "ortho_scale": 32.84014739990235,
+          "elapsed_seconds": 0.3256
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/watchtower/thornfell_clay_1.png",
+          "image_sha256": "724b87e6bf677ba10b3006743299ea085871e3174a6208a6ce3c182e257c204d",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -44.30567169189453,
+            69.73365783691406,
+            44.44717788696289
+          ],
+          "camera_target": [
+            2.912050247192383,
+            3.07334041595459,
+            6.672999858856201
+          ],
+          "ortho_scale": 32.84014739990235,
+          "elapsed_seconds": 0.3117
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/watchtower/thornfell_material_0.png",
+          "image_sha256": "28e8385ca798d720fb60cce4ab8b81493839bd6411c12d15b79ab072f51cb463",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            50.12976837158203,
+            -63.58697509765625,
+            44.44717788696289
+          ],
+          "camera_target": [
+            2.912050247192383,
+            3.07334041595459,
+            6.672999858856201
+          ],
+          "ortho_scale": 32.84014739990235,
+          "elapsed_seconds": 0.2898
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/watchtower/thornfell_material_1.png",
+          "image_sha256": "6d9213d628aaa76fdd92a1f322e68196d1aec8f2e78772be4012a1d5ff36d22c",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -44.30567169189453,
+            69.73365783691406,
+            44.44717788696289
+          ],
+          "camera_target": [
+            2.912050247192383,
+            3.07334041595459,
+            6.672999858856201
+          ],
+          "ortho_scale": 32.84014739990235,
+          "elapsed_seconds": 0.2775
+        }
+      ],
+      "build_seconds": 1.6144,
+      "geometry_hash": "5c3ecc60a5f8979ff79caa46c2151a5b008741545a5951a898d0ebd8c437192b",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.5,
+            "bounds": [
+              0,
+              0,
+              5.9241,
+              6.72
+            ],
+            "eave": 8.395999999999999,
+            "function": "WATCHTOWER",
+            "key": "thornfell_stone_hall",
+            "roof": "GABLE",
+            "triangles": 13578,
+            "valid": true,
+            "vertices": 11546,
+            "wall_thickness": 0.5
+          },
+          {
+            "base": 0.9199999999999999,
+            "bounds": [
+              5.9241,
+              1.344,
+              8.9241,
+              4.8384
+            ],
+            "eave": 2.9729599999999996,
+            "function": "COTTAGE",
+            "key": "thornfell_lower_stone_range",
+            "roof": "GABLE",
+            "triangles": 4554,
+            "valid": true,
+            "vertices": 3640,
+            "wall_thickness": 0.5
+          },
+          {
+            "base": 0.5,
+            "bounds": [
+              -3.1,
+              2.4192,
+              0.0,
+              5.4192
+            ],
+            "eave": 8.395999999999999,
+            "function": "WATCHTOWER",
+            "key": "thornfell_signal_tower",
+            "roof": "GABLE",
+            "triangles": 6472,
+            "valid": true,
+            "vertices": 5220,
+            "wall_thickness": 0.5
+          }
+        ],
+        "errors": [],
+        "objects": 86,
+        "source_objects": 86,
+        "source_triangles": 24604,
+        "source_vertices": 20406,
+        "triangles": 24604,
+        "valid": true
+      },
+      "backend": {
+        "objects": 86,
+        "vertices": 20406,
+        "width": 12.484100341796875,
+        "depth": 7.826680958271027,
+        "height": 13.345999717712402,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -3.3299999237060547,
+          9.15410041809082
+        ],
+        [
+          -0.8399999737739563,
+          6.98668098449707
+        ],
+        [
+          0.0,
+          13.345999717712402
+        ]
+      ]
+    },
+    {
+      "function": "WATCHTOWER",
+      "region": "MIRE",
+      "label": "Watchtower",
+      "settings": {
+        "seed": 91,
+        "function": "WATCHTOWER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "SORROWMERE",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/watchtower/mire_clay_0.png",
+          "image_sha256": "2fefbb7e96f54813efc2df71f34b0bd652f566b721c65db86f34d4f43361e81e",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            50.507720947265625,
+            -65.59526062011719,
+            45.0292854309082
+          ],
+          "camera_target": [
+            3.2899999618530273,
+            1.065053939819336,
+            7.2551069259643555
+          ],
+          "ortho_scale": 32.84014739990235,
+          "elapsed_seconds": 0.2484
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/watchtower/mire_clay_1.png",
+          "image_sha256": "c2bf72801dc3f77a6795e74e34867b149932d86007e2aa6199334cc0f66cd227",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -43.92771911621094,
+            67.72537231445312,
+            45.0292854309082
+          ],
+          "camera_target": [
+            3.2899999618530273,
+            1.065053939819336,
+            7.2551069259643555
+          ],
+          "ortho_scale": 32.84014739990235,
+          "elapsed_seconds": 0.2515
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/watchtower/mire_material_0.png",
+          "image_sha256": "aaa02dedcc83eb302871c3e69b11f3cedba52165cc0c3b0c6a97ba8cba410ab1",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            50.507720947265625,
+            -65.59526062011719,
+            45.0292854309082
+          ],
+          "camera_target": [
+            3.2899999618530273,
+            1.065053939819336,
+            7.2551069259643555
+          ],
+          "ortho_scale": 32.84014739990235,
+          "elapsed_seconds": 0.2695
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/watchtower/mire_material_1.png",
+          "image_sha256": "8fc7f9fa82fa709826af8cadc2f6ececa9e39399950eb0cf57f387004b848de7",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -43.92771911621094,
+            67.72537231445312,
+            45.0292854309082
+          ],
+          "camera_target": [
+            3.2899999618530273,
+            1.065053939819336,
+            7.2551069259643555
+          ],
+          "ortho_scale": 32.84014739990235,
+          "elapsed_seconds": 0.2763
+        }
+      ],
+      "build_seconds": 1.3345,
+      "geometry_hash": "c6ad8de84c123ecedc57eb448ab6dfd2e2fa84fe76e4d67a116915b9fb4698f8",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 1.94,
+            "bounds": [
+              0.0,
+              0.0,
+              6.58,
+              6.44
+            ],
+            "eave": 10.339999999999998,
+            "function": "WATCHTOWER",
+            "key": "mire_longhouse",
+            "roof": "BOW",
+            "triangles": 19492,
+            "valid": true,
+            "vertices": 16754,
+            "wall_thickness": 0.18
+          }
+        ],
+        "errors": [],
+        "objects": 31,
+        "source_objects": 31,
+        "source_triangles": 19972,
+        "source_vertices": 17074,
+        "triangles": 19972,
+        "valid": true
+      },
+      "backend": {
+        "objects": 31,
+        "vertices": 17074,
+        "width": 8.069999814033508,
+        "depth": 12.23989200592041,
+        "height": 14.613898828625679,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.7450000047683716,
+          7.324999809265137
+        ],
+        [
+          -5.054892063140869,
+          7.184999942779541
+        ],
+        [
+          -0.05184228718280792,
+          14.562056541442871
+        ]
+      ]
+    },
+    {
+      "function": "WATCHTOWER",
+      "region": "EMBERHOLT",
+      "label": "Watchtower",
+      "settings": {
+        "seed": 91,
+        "function": "WATCHTOWER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "EMBERHOLD",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/watchtower/emberholt_clay_0.png",
+          "image_sha256": "ba95527a2e22ee8d02fdf680dd9a446b186ad0a8df2dc9186f2c2f5c3ddf01d7",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            54.99272155761719,
+            -61.73531723022461,
+            44.71237564086914
+          ],
+          "camera_target": [
+            7.774999618530273,
+            4.925000190734863,
+            6.938197612762451
+          ],
+          "ortho_scale": 32.84014739990235,
+          "elapsed_seconds": 0.2497
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/watchtower/emberholt_clay_1.png",
+          "image_sha256": "a9ae485ccf1bd8ebe5f1e2e42ee59862b00efa6b076dd732de85d7aa3b9c8d83",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.442718505859375,
+            71.58531951904297,
+            44.71237564086914
+          ],
+          "camera_target": [
+            7.774999618530273,
+            4.925000190734863,
+            6.938197612762451
+          ],
+          "ortho_scale": 32.84014739990235,
+          "elapsed_seconds": 0.24
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/watchtower/emberholt_material_0.png",
+          "image_sha256": "cb7773774be2b6e46ff047cc38355db04251f2e224696967ce88307415f34415",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            54.99272155761719,
+            -61.73531723022461,
+            44.71237564086914
+          ],
+          "camera_target": [
+            7.774999618530273,
+            4.925000190734863,
+            6.938197612762451
+          ],
+          "ortho_scale": 32.84014739990235,
+          "elapsed_seconds": 0.2778
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/watchtower/emberholt_material_1.png",
+          "image_sha256": "4836fb6ec721cfd8df8ad4fb6736cf374bfc116b19416cbad1b63b2624fb8a31",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.442718505859375,
+            71.58531951904297,
+            44.71237564086914
+          ],
+          "camera_target": [
+            7.774999618530273,
+            4.925000190734863,
+            6.938197612762451
+          ],
+          "ortho_scale": 32.84014739990235,
+          "elapsed_seconds": 0.281
+        }
+      ],
+      "build_seconds": 1.8093,
+      "geometry_hash": "0971b835b0e8f293e79ccf5ce1285c782d603335e4fdf7b9ae086dfbe4335bb4",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.48,
+            "bounds": [
+              0,
+              0,
+              10.5,
+              10.0
+            ],
+            "eave": 11.68,
+            "function": "WATCHTOWER",
+            "key": "emberholt_main_block",
+            "roof": "TERRACE",
+            "triangles": 19974,
+            "valid": true,
+            "vertices": 14660,
+            "wall_thickness": 0.7
+          },
+          {
+            "base": 0.48,
+            "bounds": [
+              11.85,
+              2.9,
+              15.55,
+              7.1
+            ],
+            "eave": 11.68,
+            "function": "WATCHTOWER",
+            "key": "emberholt_vent_tower",
+            "roof": "TERRACE",
+            "triangles": 7202,
+            "valid": true,
+            "vertices": 5336,
+            "wall_thickness": 0.7
+          }
+        ],
+        "errors": [],
+        "objects": 48,
+        "source_objects": 48,
+        "source_triangles": 27536,
+        "source_vertices": 20236,
+        "triangles": 27536,
+        "valid": true
+      },
+      "backend": {
+        "objects": 48,
+        "vertices": 20236,
+        "width": 17.289416909217834,
+        "depth": 10.570000052452087,
+        "height": 14.00360369682312,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.8697086572647095,
+          16.419708251953125
+        ],
+        [
+          -0.36000001430511475,
+          10.210000038146973
+        ],
+        [
+          -0.06360411643981934,
+          13.9399995803833
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "source_revision": "094eb8c",
+  "checks": [
+    {
+      "name": "Vectorized material patterns and causal condition fields",
+      "command": "Blender-bundled python.exe -m unittest tests.test_surface_patterns tests.test_condition_fields -q",
+      "unittest_methods": 12,
+      "result": "OK",
+      "reported_test_seconds": 0.213
+    },
+    {
+      "name": "Preserved architectural geometry regressions",
+      "command": "py -3 -m unittest tests.test_architectural_benchmarks -q",
+      "unittest_methods": 6,
+      "result": "OK",
+      "reported_test_seconds": 18.242,
+      "scope": "Geometry rule, seed, aperture and 78 unaffected output regressions; subsequent backend context fix did not change generation geometry."
+    },
+    {
+      "name": "Final native material export, lifecycle and scoped context",
+      "command": "blender.exe --background --python-exit-code 1 --python tests/test_condition_export.py",
+      "cases": 2,
+      "result": "PASS",
+      "report": "export_checks.json"
+    },
+    {
+      "name": "Legacy material and export regression",
+      "command": "blender.exe --background --python-exit-code 1 --python tests/smoke_surface_export.py",
+      "cases": 1,
+      "result": "PASS",
+      "report": "legacy_surface_check.json"
+    },
+    {
+      "name": "Rendered sRGB calibration",
+      "command": "blender.exe --background --factory-startup --python-exit-code 1 --python tests/check_surface_color_space.py",
+      "result": "PASS",
+      "report": "color_space_probe.json"
+    },
+    {
+      "name": "Isolated extension installation and operator generation/export",
+      "command": "verify_install.py --function SMITHY --region LOWMARK / --function GATEHOUSE --region THORNFELL --geometry-mode EFFICIENT --export ... --report ...",
+      "cases": 2,
+      "result": "PASS",
+      "reports": ["install_smithy.json", "install_gatehouse.json"]
+    },
+    {
+      "name": "Final matched capture, composition and GLB reimport renders",
+      "result": "PASS",
+      "condition_images": 44,
+      "comparison_sheets": 6,
+      "reimport_images": 4,
+      "reports": ["final/manifest.json", "comparison/manifest.json", "roundtrip/manifest.json"]
+    },
+    {
+      "name": "Large legacy authoring-range generation",
+      "cases": 1,
+      "settings": "Farmhouse / L / width24 depth16 / floors3 / HIGH EFFICIENT / seed17",
+      "result": "PASS",
+      "report": "range_check.json",
+      "scope": "Native generation and atlas capacity check, no render or runtime performance measurement."
+    },
+    {
+      "name": "Source, image, historical control and package correspondence",
+      "command": "py -3 tests/verify_material_evidence.py",
+      "result": "PASS",
+      "report": "verification.json"
+    }
+  ],
+  "measurement_scope": "Executed results. Repeated provisional tests are not additional unique methods. Timings are test-reported durations, not total wall time, tokens, subscription usage or API cost."
+}

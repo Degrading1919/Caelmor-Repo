@@ -1,0 +1,1150 @@
+{
+  "format": "CaelmorBuildingExport",
+  "version": 1,
+  "generator_version": "0.4.0",
+  "settings": {
+    "age": 20.0,
+    "context": "AUTO",
+    "craftsmanship": "STANDARD",
+    "depth": 7.0,
+    "detail": "HIGH",
+    "floor_height": 2.6500000953674316,
+    "floors": 2,
+    "footprint": "L",
+    "function": "SMITHY",
+    "geometry_mode": "EFFICIENT",
+    "maintenance": 0.699999988079071,
+    "overhang": 0.44999998807907104,
+    "pitch": 48.0,
+    "region": "EMBERHOLT",
+    "roof_style": "AUTO",
+    "seed": 17,
+    "use_grammar": true,
+    "wealth": "ESTABLISHED",
+    "width": 11.0,
+    "window_density": 1.0,
+    "wing_depth": 4.5,
+    "wing_width": 4.199999809265137,
+    "world_aware": true
+  },
+  "architecture": "WORLD",
+  "construction_zones": [
+    {
+      "base": 0.48,
+      "bounds": [
+        0,
+        0,
+        16.8,
+        13.0
+      ],
+      "eave": 6.08,
+      "function": "SMITHY",
+      "key": "emberholt_main_block",
+      "roof": "TERRACE",
+      "triangles": 14829,
+      "valid": true,
+      "vertices": 11090,
+      "wall_thickness": 0.7
+    },
+    {
+      "base": 0.48,
+      "bounds": [
+        5.208,
+        13.0,
+        11.592,
+        20.28
+      ],
+      "eave": 3.0,
+      "function": "WORKSHOP",
+      "key": "emberholt_forge_work_range",
+      "roof": "TERRACE",
+      "triangles": 4788,
+      "valid": true,
+      "vertices": 3444,
+      "wall_thickness": 0.7
+    },
+    {
+      "base": 0.48,
+      "bounds": [
+        18.150000000000002,
+        4.6,
+        21.85,
+        8.399999999999999
+      ],
+      "eave": 6.08,
+      "function": "WATCHTOWER",
+      "key": "emberholt_vent_tower",
+      "roof": "TERRACE",
+      "triangles": 4546,
+      "valid": true,
+      "vertices": 3352,
+      "wall_thickness": 0.7
+    }
+  ],
+  "source_validation": {
+    "construction_zones": [
+      {
+        "base": 0.48,
+        "bounds": [
+          0,
+          0,
+          16.8,
+          13.0
+        ],
+        "eave": 6.08,
+        "function": "SMITHY",
+        "key": "emberholt_main_block",
+        "roof": "TERRACE",
+        "triangles": 14829,
+        "valid": true,
+        "vertices": 11090,
+        "wall_thickness": 0.7
+      },
+      {
+        "base": 0.48,
+        "bounds": [
+          5.208,
+          13.0,
+          11.592,
+          20.28
+        ],
+        "eave": 3.0,
+        "function": "WORKSHOP",
+        "key": "emberholt_forge_work_range",
+        "roof": "TERRACE",
+        "triangles": 4788,
+        "valid": true,
+        "vertices": 3444,
+        "wall_thickness": 0.7
+      },
+      {
+        "base": 0.48,
+        "bounds": [
+          18.150000000000002,
+          4.6,
+          21.85,
+          8.399999999999999
+        ],
+        "eave": 6.08,
+        "function": "WATCHTOWER",
+        "key": "emberholt_vent_tower",
+        "roof": "TERRACE",
+        "triangles": 4546,
+        "valid": true,
+        "vertices": 3352,
+        "wall_thickness": 0.7
+      }
+    ],
+    "source_objects": 74,
+    "source_triangles": 24679,
+    "source_vertices": 18230,
+    "valid": true
+  },
+  "source_geometry_hash": "01c264cf498f84724075d502da1a998f6aeb25c4304064cd7c73bcc719a2cabf",
+  "has_protected_buffers": false,
+  "protected_buffer_count": 0,
+  "units": "metres",
+  "up_axis": "Y",
+  "collision": {
+    "file": "world_installed_smithy.collision.glb",
+    "object_count": 15,
+    "wall_proxy_count": 12,
+    "floor_proxy_count": 3,
+    "note": "Approximate static outer-wall and footprint proxies; not tested for traversal."
+  },
+  "anchor": {
+    "name": "Caelmor Building Root",
+    "location": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotation_euler": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "layers": [
+    "details",
+    "doors",
+    "foundation",
+    "roof",
+    "structure",
+    "walls",
+    "windows"
+  ],
+  "objects": [
+    {
+      "name": "world_emberholt.emberholt_main_block.facade_foundation_core",
+      "layer": "foundation",
+      "material": "stone",
+      "world_zone": "emberholt_main_block",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.facade_stone",
+      "layer": "foundation",
+      "material": "stone_light",
+      "world_zone": "emberholt_main_block",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.facade_mortar",
+      "layer": "foundation",
+      "material": "mortar",
+      "world_zone": "emberholt_main_block",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.facade_quoins",
+      "layer": "foundation",
+      "material": "stone_light",
+      "world_zone": "emberholt_main_block",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.facade_walls",
+      "layer": "walls",
+      "material": "stone",
+      "world_zone": "emberholt_main_block",
+      "semantic": "walls",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.facade_masonry_skin",
+      "layer": "walls",
+      "material": "stone",
+      "world_zone": "emberholt_main_block",
+      "semantic": "walls",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.facade_timber",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "emberholt_main_block",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.facade_doors",
+      "layer": "doors",
+      "material": "iron",
+      "world_zone": "emberholt_main_block",
+      "semantic": "doors",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.facade_iron",
+      "layer": "details",
+      "material": "iron",
+      "world_zone": "emberholt_main_block",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.Draining terrace roof",
+      "layer": "roof",
+      "material": "stone",
+      "world_zone": "emberholt_main_block",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.Terrace parapet and coping",
+      "layer": "roof",
+      "material": "stone_light",
+      "world_zone": "emberholt_main_block",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.Scupper apron",
+      "layer": "roof",
+      "material": "iron",
+      "world_zone": "emberholt_main_block",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.Terrace slab seams",
+      "layer": "roof",
+      "material": "iron",
+      "world_zone": "emberholt_main_block",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.emberholt_buttress_1_0",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "emberholt_main_block",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.emberholt_buttress_1_1",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "emberholt_main_block",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.emberholt_buttress_3_0",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "emberholt_main_block",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.emberholt_buttress_3_1",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "emberholt_main_block",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.emberholt_buttress_3_2",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "emberholt_main_block",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.emberholt_buttress_3_3",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "emberholt_main_block",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.facade_foundation_core",
+      "layer": "foundation",
+      "material": "stone",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.facade_steps",
+      "layer": "foundation",
+      "material": "stone_light",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.facade_stone",
+      "layer": "foundation",
+      "material": "stone_light",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.facade_mortar",
+      "layer": "foundation",
+      "material": "mortar",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.facade_quoins",
+      "layer": "foundation",
+      "material": "stone_light",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.facade_walls",
+      "layer": "walls",
+      "material": "stone",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "walls",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.facade_masonry_skin",
+      "layer": "walls",
+      "material": "stone",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "walls",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.facade_timber",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.facade_windows",
+      "layer": "windows",
+      "material": "glass",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "windows",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.facade_doors",
+      "layer": "doors",
+      "material": "iron",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "doors",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.facade_iron",
+      "layer": "details",
+      "material": "iron",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.Draining terrace roof",
+      "layer": "roof",
+      "material": "stone",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.Terrace parapet and coping",
+      "layer": "roof",
+      "material": "stone_light",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.Scupper apron",
+      "layer": "roof",
+      "material": "iron",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.Terrace slab seams",
+      "layer": "roof",
+      "material": "iron",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.emberholt_buttress_1_0",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.emberholt_buttress_1_1",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.emberholt_buttress_3_0",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.emberholt_buttress_3_1",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.facade_foundation_core",
+      "layer": "foundation",
+      "material": "stone",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.facade_steps",
+      "layer": "foundation",
+      "material": "stone_light",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.facade_stone",
+      "layer": "foundation",
+      "material": "stone_light",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.facade_mortar",
+      "layer": "foundation",
+      "material": "mortar",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.facade_quoins",
+      "layer": "foundation",
+      "material": "stone_light",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.facade_walls",
+      "layer": "walls",
+      "material": "stone",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "walls",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.facade_masonry_skin",
+      "layer": "walls",
+      "material": "stone",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "walls",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.facade_timber",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.facade_doors",
+      "layer": "doors",
+      "material": "iron",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "doors",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.facade_iron",
+      "layer": "details",
+      "material": "iron",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.Draining terrace roof",
+      "layer": "roof",
+      "material": "stone",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.Terrace parapet and coping",
+      "layer": "roof",
+      "material": "stone_light",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.Scupper apron",
+      "layer": "roof",
+      "material": "iron",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.Terrace slab seams",
+      "layer": "roof",
+      "material": "iron",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.emberholt_buttress_1_0",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.emberholt_buttress_1_1",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.emberholt_buttress_3_0",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.emberholt_buttress_3_1",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_terraced_entry_court",
+      "layer": "foundation",
+      "material": "stone",
+      "world_zone": "",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_terraced_entry_court.supports",
+      "layer": "foundation",
+      "material": "timber",
+      "world_zone": "",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_court_rail_south",
+      "layer": "details",
+      "material": "iron",
+      "world_zone": "",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "exterior_access",
+      "roof_envelope": null,
+      "support_surface": {
+        "bounds": [
+          16.8,
+          3.9,
+          18.0,
+          9.1
+        ],
+        "max_height": 1.1,
+        "plane": [
+          0.0,
+          0.0,
+          0.52
+        ]
+      }
+    },
+    {
+      "name": "world_emberholt.emberholt_court_rail_north_a",
+      "layer": "details",
+      "material": "iron",
+      "world_zone": "",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "exterior_access",
+      "roof_envelope": null,
+      "support_surface": {
+        "bounds": [
+          16.8,
+          3.9,
+          18.0,
+          9.1
+        ],
+        "max_height": 1.1,
+        "plane": [
+          0.0,
+          0.0,
+          0.52
+        ]
+      }
+    },
+    {
+      "name": "world_emberholt.emberholt_court_rail_north_b",
+      "layer": "details",
+      "material": "iron",
+      "world_zone": "",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "exterior_access",
+      "roof_envelope": null,
+      "support_surface": {
+        "bounds": [
+          16.8,
+          3.9,
+          18.0,
+          9.1
+        ],
+        "max_height": 1.1,
+        "plane": [
+          0.0,
+          0.0,
+          0.52
+        ]
+      }
+    },
+    {
+      "name": "world_emberholt.emberholt_court_rail_outer",
+      "layer": "details",
+      "material": "iron",
+      "world_zone": "",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "exterior_access",
+      "roof_envelope": null,
+      "support_surface": {
+        "bounds": [
+          16.8,
+          3.9,
+          18.0,
+          9.1
+        ],
+        "max_height": 1.1,
+        "plane": [
+          0.0,
+          0.0,
+          0.52
+        ]
+      }
+    },
+    {
+      "name": "world_emberholt.emberholt_court_steps",
+      "layer": "foundation",
+      "material": "stone",
+      "world_zone": "",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.emberholt_primary_vent",
+      "layer": "details",
+      "material": "stone",
+      "world_zone": "emberholt_main_block",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.emberholt_primary_vent_cap",
+      "layer": "structure",
+      "material": "iron",
+      "world_zone": "emberholt_main_block",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.emberholt_secondary_vent",
+      "layer": "details",
+      "material": "stone",
+      "world_zone": "emberholt_main_block",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_main_block.emberholt_secondary_vent_cap",
+      "layer": "structure",
+      "material": "iron",
+      "world_zone": "emberholt_main_block",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.emberholt_tower_vent",
+      "layer": "details",
+      "material": "stone",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_vent_tower.emberholt_tower_vent_cap",
+      "layer": "structure",
+      "material": "iron",
+      "world_zone": "emberholt_vent_tower",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_iron_walk",
+      "layer": "foundation",
+      "material": "iron",
+      "world_zone": "",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_iron_walk.supports",
+      "layer": "foundation",
+      "material": "iron",
+      "world_zone": "",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_emberholt.emberholt_walk_rail_north",
+      "layer": "details",
+      "material": "iron",
+      "world_zone": "",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "exterior_access",
+      "roof_envelope": null,
+      "support_surface": {
+        "bounds": [
+          16.8,
+          5.42,
+          18.150000000000002,
+          7.58
+        ],
+        "max_height": 1.1,
+        "plane": [
+          0.0,
+          0.0,
+          3.3699999999999997
+        ]
+      }
+    },
+    {
+      "name": "world_emberholt.emberholt_walk_rail_south",
+      "layer": "details",
+      "material": "iron",
+      "world_zone": "",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "exterior_access",
+      "roof_envelope": null,
+      "support_surface": {
+        "bounds": [
+          16.8,
+          5.42,
+          18.150000000000002,
+          7.58
+        ],
+        "max_height": 1.1,
+        "plane": [
+          0.0,
+          0.0,
+          3.3699999999999997
+        ]
+      }
+    },
+    {
+      "name": "world_emberholt.emberholt_forge_work_range.emberholt_main_block.emberholt_forge_work_range.roof_apron.0",
+      "layer": "roof",
+      "material": "iron",
+      "world_zone": "emberholt_forge_work_range",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    }
+  ]
+}

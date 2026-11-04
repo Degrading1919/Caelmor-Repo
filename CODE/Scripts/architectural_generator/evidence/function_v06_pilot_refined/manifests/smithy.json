@@ -1,0 +1,433 @@
+{
+  "source_revision": "fa0597a99668ea812966cff9560271c986c86324+v06-refined",
+  "generator_version": "0.6.0",
+  "source_sha256": {
+    "__init__.py": "3d360cbfdd05522f158f79145f93b96c231ef06bd5854ee828c831760aeab8cd",
+    "blender_backend.py": "45fbf7a69057a642615c7dfc5676ceb90dd200a1e7874bee67e3fb8960e3a1f2",
+    "blender_manifest.toml": "e021854efaf3ad456fc9ab0d62b0ce81ebdc343e813a5fc71e7dc224ce2449b6",
+    "engine.py": "a572b5736f7360e12154759cc12a3856231350df811a5f05f8e4a70027045c42",
+    "facade.py": "c6b60312aa6e39a515aee437fe9e54f083bbce9288048a8d91f6dd4f71bcc14d",
+    "function_work.py": "2f0036d9d416589eaeb9f296935645bf81546b45b4b1b50fb12f565ddbc22d5c",
+    "functional.py": "db0443fbdf63a0603b9be2ef10161deb8dc30248d9c7852315d78b177957ed9c",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "c08dc03fc1e3f31f9e0d429216839e4b941d904a758c40458d4fa44a1e246d9b",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+  },
+  "render_source_sha256": {
+    "render_household_review.py": "0164574efc2a94ce14846a41db7255efd41bcf2a25af9d8eebb912f77e015648",
+    "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+  },
+  "settings_contract": {
+    "seed": 91,
+    "footprint": "L",
+    "width": 11.0,
+    "depth": 7.0,
+    "wing_width": 4.2,
+    "wing_depth": 4.5,
+    "floors": 2,
+    "floor_height": 2.65,
+    "pitch": 48.0,
+    "overhang": 0.45,
+    "detail": "MEDIUM",
+    "window_density": 1.0,
+    "context": "AUTO",
+    "wealth": "ESTABLISHED",
+    "craftsmanship": "STANDARD",
+    "maintenance": 0.7,
+    "age": 35,
+    "use_grammar": true,
+    "roof_style": "AUTO",
+    "geometry_mode": "EFFICIENT",
+    "world_aware": true
+  },
+  "renderer": "5.0.1",
+  "engine": "BLENDER_EEVEE",
+  "samples": 32,
+  "studio": "render_world_evidence._reset_scene, ground at grade",
+  "scale_policy": "Common projected orthographic scale per archetype across four regions and both views; different archetypes fitted independently.",
+  "geometry_generation": "One native backend build/validation per configuration; same objects reused for clay and material.",
+  "records": [
+    {
+      "function": "SMITHY",
+      "region": "LOWMARK",
+      "label": "Smithy",
+      "settings": {
+        "seed": 91,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RURAL",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/smithy/lowmark_clay_0.png",
+          "image_sha256": "ff4470510846a3060cb08c4c73eff57527ce31a2dca20eaae4d1536f118c3603",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            52.01771926879883,
+            -64.0128173828125,
+            40.64422607421875
+          ],
+          "camera_target": [
+            4.800000190734863,
+            2.6475000381469727,
+            2.8700475692749023
+          ],
+          "ortho_scale": 16.863987731933594,
+          "elapsed_seconds": 1.8432
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/smithy/lowmark_clay_1.png",
+          "image_sha256": "29030d1b08665deaec8c11aa25938a5e5659be66f2d7e13ee754c0361a1b6489",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -42.417720794677734,
+            69.30781555175781,
+            40.64422607421875
+          ],
+          "camera_target": [
+            4.800000190734863,
+            2.6475000381469727,
+            2.8700475692749023
+          ],
+          "ortho_scale": 16.863987731933594,
+          "elapsed_seconds": 0.238
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/smithy/lowmark_material_0.png",
+          "image_sha256": "99edfa26fe69602ce1fab342de698c512c3c9b0cae23b1742675920a48b8422c",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            52.01771926879883,
+            -64.0128173828125,
+            40.64422607421875
+          ],
+          "camera_target": [
+            4.800000190734863,
+            2.6475000381469727,
+            2.8700475692749023
+          ],
+          "ortho_scale": 16.863987731933594,
+          "elapsed_seconds": 0.2406
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/smithy/lowmark_material_1.png",
+          "image_sha256": "7ce199b6f9df444023998d2547e5d5bc8c0f0c6600ec127f8786668e03982c6c",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -42.417720794677734,
+            69.30781555175781,
+            40.64422607421875
+          ],
+          "camera_target": [
+            4.800000190734863,
+            2.6475000381469727,
+            2.8700475692749023
+          ],
+          "ortho_scale": 16.863987731933594,
+          "elapsed_seconds": 0.2419
+        }
+      ],
+      "build_seconds": 1.7954,
+      "geometry_hash": "de68dd3707adb70c9882f264c0a6fe3e19ab34b43267a1e96c401bf46814a856",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.32,
+            "bounds": [
+              0,
+              0,
+              9.6,
+              6.2
+            ],
+            "eave": 3.7199999999999998,
+            "function": "SMITHY",
+            "key": "forge_hall",
+            "roof": "GABLE",
+            "triangles": 7370,
+            "valid": true,
+            "vertices": 7034,
+            "wall_thickness": 0.28
+          }
+        ],
+        "errors": [],
+        "objects": 32,
+        "source_objects": 32,
+        "source_triangles": 7370,
+        "source_vertices": 7034,
+        "triangles": 7370,
+        "valid": true
+      },
+      "backend": {
+        "objects": 32,
+        "vertices": 7034,
+        "width": 10.570000052452087,
+        "depth": 8.074999928474426,
+        "height": 5.740095138549805,
+        "layers": [
+          "details",
+          "foundation",
+          "roof",
+          "structure",
+          "walls"
+        ]
+      },
+      "functional_program": {
+        "adaptations": [],
+        "context": "RURAL",
+        "function": "SMITHY",
+        "region": "LOWMARK",
+        "rooms": [
+          {
+            "base": 0.32,
+            "bounds": [
+              0,
+              0,
+              9.6,
+              6.2
+            ],
+            "eave": 3.7199999999999998,
+            "key": "forge_hall",
+            "open_edges": [
+              0,
+              1,
+              2
+            ],
+            "roof": "GABLE"
+          }
+        ],
+        "routes": [
+          {
+            "bounds": [
+              5.35,
+              0.15,
+              0.32,
+              8.95,
+              5.95,
+              2.3699999999999997
+            ],
+            "key": "forge_material_lane",
+            "kind": "material"
+          },
+          {
+            "bounds": [
+              3.65,
+              0.12,
+              0.32,
+              4.3,
+              0.64,
+              2.32
+            ],
+            "key": "smithy.operator_workpad",
+            "kind": "human"
+          }
+        ],
+        "stations": [
+          {
+            "bounds": [
+              1.55,
+              0.15000000000000002,
+              0.36,
+              3.45,
+              1.85,
+              0.77
+            ],
+            "key": "world_lowmark.forge_hall.hearth_stone_plinth",
+            "role": "forge",
+            "zone": "forge_hall"
+          },
+          {
+            "bounds": [
+              1.8399999999999999,
+              0.42000000000000004,
+              0.77,
+              3.16,
+              1.42,
+              0.8700000000000001
+            ],
+            "key": "world_lowmark.forge_hall.hearth_firebed",
+            "role": "forge_fire",
+            "zone": "forge_hall"
+          },
+          {
+            "bounds": [
+              1.74,
+              0.35,
+              0.77,
+              1.9,
+              1.53,
+              1.47
+            ],
+            "key": "world_lowmark.forge_hall.hearth_left_curb",
+            "role": "forge",
+            "zone": "forge_hall"
+          },
+          {
+            "bounds": [
+              3.1,
+              0.35,
+              0.77,
+              3.26,
+              1.53,
+              1.47
+            ],
+            "key": "world_lowmark.forge_hall.hearth_right_curb",
+            "role": "forge",
+            "zone": "forge_hall"
+          },
+          {
+            "bounds": [
+              1.74,
+              1.48,
+              0.77,
+              3.26,
+              1.65,
+              1.47
+            ],
+            "key": "world_lowmark.forge_hall.hearth_rear_curb",
+            "role": "forge",
+            "zone": "forge_hall"
+          },
+          {
+            "bounds": [
+              3.42,
+              0.72,
+              1.1,
+              4.22,
+              1.28,
+              1.4400000000000002
+            ],
+            "key": "world_lowmark.forge_hall.anvil",
+            "role": "forge",
+            "zone": "forge_hall"
+          },
+          {
+            "bounds": [
+              3.5700000000000003,
+              0.69,
+              0.36,
+              4.07,
+              1.31,
+              1.08
+            ],
+            "key": "world_lowmark.forge_hall.anvil_stump",
+            "role": "forge",
+            "zone": "forge_hall"
+          },
+          {
+            "bounds": [
+              1.52,
+              1.63,
+              1.37,
+              2.4,
+              2.13,
+              2.09
+            ],
+            "key": "world_lowmark.forge_hall.bellows",
+            "role": "forge",
+            "zone": "forge_hall"
+          },
+          {
+            "bounds": [
+              4.35,
+              1.85,
+              0.36,
+              5.15,
+              2.5,
+              0.74
+            ],
+            "key": "world_lowmark.forge_hall.quench_trough",
+            "role": "quench",
+            "zone": "forge_hall"
+          },
+          {
+            "bounds": [
+              0.4,
+              3.5959999999999996,
+              0.36,
+              1.45,
+              4.4159999999999995,
+              1.2
+            ],
+            "key": "world_lowmark.forge_hall.coal_bin",
+            "role": "fuel",
+            "zone": "forge_hall"
+          }
+        ]
+      },
+      "bounds": [
+        [
+          -0.48500001430511475,
+          10.085000038146973
+        ],
+        [
+          -1.3899999856948853,
+          6.684999942779541
+        ],
+        [
+          0.0,
+          5.740095138549805
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,901 @@
+{
+  "source_revision": "809300bcfddf67601fa6719ebf4e91aef9135098",
+  "generator_version": "0.5.0",
+  "source_sha256": {
+    "__init__.py": "57f662977d12340c1c4b91864c6655335854bdf196de143b3448ee154b18c2e0",
+    "blender_backend.py": "ccd4ce109d97eb98df309fcad795398f96eb55c02a1b012fc969a45deca6bdcc",
+    "blender_manifest.toml": "f9ec85f7be7b8fd2b6210d783d60f4402a97a912b27897ac6ba41e2fb509a452",
+    "engine.py": "11d4a8b1868afc1170a34a03d0b294b85d09f7c344153cb24074f5d2acce0ed7",
+    "facade.py": "f989e3a56624f89a034701e275beb6e10d7bfd52bb7a14b0ffad23a235708f4d",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "8da06e3a1242be8c2ac21bca994d1805a36f399425ab585befdaf386346b65ce",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+  },
+  "render_source_sha256": {
+    "render_household_review.py": "08bc6f0ac312f457e341cbf44163eb1276a203282074f67bb1952f899264ba78",
+    "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+  },
+  "settings_contract": {
+    "seed": 91,
+    "footprint": "L",
+    "width": 11.0,
+    "depth": 7.0,
+    "wing_width": 4.2,
+    "wing_depth": 4.5,
+    "floors": 2,
+    "floor_height": 2.65,
+    "pitch": 48.0,
+    "overhang": 0.45,
+    "detail": "MEDIUM",
+    "window_density": 1.0,
+    "context": "AUTO",
+    "wealth": "ESTABLISHED",
+    "craftsmanship": "STANDARD",
+    "maintenance": 0.7,
+    "age": 35,
+    "use_grammar": true,
+    "roof_style": "AUTO",
+    "geometry_mode": "EFFICIENT",
+    "world_aware": true
+  },
+  "renderer": "5.0.1",
+  "engine": "BLENDER_EEVEE",
+  "samples": 32,
+  "studio": "render_world_evidence._reset_scene, ground at grade",
+  "scale_policy": "Common projected orthographic scale per archetype across four regions and both views; different archetypes fitted independently.",
+  "geometry_generation": "One native backend build/validation per configuration; same objects reused for clay and material.",
+  "records": [
+    {
+      "function": "WAREHOUSE",
+      "region": "LOWMARK",
+      "label": "Warehouse",
+      "settings": {
+        "seed": 91,
+        "function": "WAREHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RURAL",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/warehouse/lowmark_clay_0.png",
+          "image_sha256": "28c1edfe551622ca3cae2dbfd4fe657f59200b44d55b45a9dee6f51170b91c17",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            58.71271896362305,
+            -60.18331527709961,
+            40.97198486328125
+          ],
+          "camera_target": [
+            11.494999885559082,
+            6.477001190185547,
+            3.197808265686035
+          ],
+          "ortho_scale": 33.7503646850586,
+          "elapsed_seconds": 0.4876
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/warehouse/lowmark_clay_1.png",
+          "image_sha256": "ed9d6f7d8ea00f235b8ad5f77c4407f8bc59baa276a850352ff59f0ee92874de",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -35.722721099853516,
+            73.13731384277344,
+            40.97198486328125
+          ],
+          "camera_target": [
+            11.494999885559082,
+            6.477001190185547,
+            3.197808265686035
+          ],
+          "ortho_scale": 33.7503646850586,
+          "elapsed_seconds": 0.3969
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/warehouse/lowmark_material_0.png",
+          "image_sha256": "476ccbe26b7476eb17d223b3366c504080b4768dba5ab074c3b94f5a160bc37d",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            58.71271896362305,
+            -60.18331527709961,
+            40.97198486328125
+          ],
+          "camera_target": [
+            11.494999885559082,
+            6.477001190185547,
+            3.197808265686035
+          ],
+          "ortho_scale": 33.7503646850586,
+          "elapsed_seconds": 0.3446
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/warehouse/lowmark_material_1.png",
+          "image_sha256": "c5f5df24295f1597bc4b30d14f3d1f39c605f8d98ffe386d37a63f794608ed66",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -35.722721099853516,
+            73.13731384277344,
+            40.97198486328125
+          ],
+          "camera_target": [
+            11.494999885559082,
+            6.477001190185547,
+            3.197808265686035
+          ],
+          "ortho_scale": 33.7503646850586,
+          "elapsed_seconds": 0.289
+        }
+      ],
+      "build_seconds": 3.4026,
+      "geometry_hash": "bd1278db8132dfc3851d27bfec829107ccd57a573d3538f8473ff26052d53cbd",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.45,
+            "bounds": [
+              0,
+              0,
+              17.0,
+              10.0
+            ],
+            "eave": 3.25,
+            "function": "WAREHOUSE",
+            "key": "lowmark_main_hall",
+            "roof": "GABLE",
+            "triangles": 15750,
+            "valid": true,
+            "vertices": 16056,
+            "wall_thickness": 0.28
+          },
+          {
+            "base": 0.45,
+            "bounds": [
+              17.85,
+              -1.2,
+              23.05,
+              4.6
+            ],
+            "eave": 2.95,
+            "function": "WORKSHOP",
+            "key": "lowmark_service_wing",
+            "roof": "SHED",
+            "triangles": 4324,
+            "valid": true,
+            "vertices": 3816,
+            "wall_thickness": 0.28
+          },
+          {
+            "base": 0.45,
+            "bounds": [
+              0,
+              10.24,
+              7.0,
+              14.24
+            ],
+            "eave": 2.55,
+            "function": "WAREHOUSE",
+            "key": "lowmark_loading_bay",
+            "roof": "SHED",
+            "triangles": 4970,
+            "valid": true,
+            "vertices": 4086,
+            "wall_thickness": 0.28
+          }
+        ],
+        "errors": [],
+        "objects": 56,
+        "source_objects": 56,
+        "source_triangles": 25104,
+        "source_vertices": 23998,
+        "triangles": 25104,
+        "valid": true
+      },
+      "backend": {
+        "objects": 56,
+        "vertices": 23998,
+        "width": 23.96000039577484,
+        "depth": 17.205997705459595,
+        "height": 6.519077509641647,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls"
+        ]
+      },
+      "bounds": [
+        [
+          -0.48500001430511475,
+          23.475000381469727
+        ],
+        [
+          -2.12599778175354,
+          15.079999923706055
+        ],
+        [
+          -0.06173059344291687,
+          6.4573469161987305
+        ]
+      ]
+    },
+    {
+      "function": "WAREHOUSE",
+      "region": "THORNFELL",
+      "label": "Warehouse",
+      "settings": {
+        "seed": 91,
+        "function": "WAREHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RIDGE",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/warehouse/thornfell_clay_0.png",
+          "image_sha256": "6807f78786d39041358e697ad40b6897670d9c412eed689cb6db4f4712af18d0",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            54.910221099853516,
+            -61.490318298339844,
+            42.69032669067383
+          ],
+          "camera_target": [
+            7.692500114440918,
+            5.170000076293945,
+            4.916149139404297
+          ],
+          "ortho_scale": 33.7503646850586,
+          "elapsed_seconds": 0.2688
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/warehouse/thornfell_clay_1.png",
+          "image_sha256": "46c055697b11f1b89db126c0857efe53b0efc3480eed47633689f5721f0030c7",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.52521896362305,
+            71.83031463623047,
+            42.69032669067383
+          ],
+          "camera_target": [
+            7.692500114440918,
+            5.170000076293945,
+            4.916149139404297
+          ],
+          "ortho_scale": 33.7503646850586,
+          "elapsed_seconds": 0.2483
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/warehouse/thornfell_material_0.png",
+          "image_sha256": "a080666c21652d92d610f4a8c0a69751b121267df406dc243607d85e457635a7",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            54.910221099853516,
+            -61.490318298339844,
+            42.69032669067383
+          ],
+          "camera_target": [
+            7.692500114440918,
+            5.170000076293945,
+            4.916149139404297
+          ],
+          "ortho_scale": 33.7503646850586,
+          "elapsed_seconds": 0.2808
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/warehouse/thornfell_material_1.png",
+          "image_sha256": "2bc61f57b85d80a3ee629fddb2d231cccb7b3ac2b6edac6f164c8dd8efee5673",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.52521896362305,
+            71.83031463623047,
+            42.69032669067383
+          ],
+          "camera_target": [
+            7.692500114440918,
+            5.170000076293945,
+            4.916149139404297
+          ],
+          "ortho_scale": 33.7503646850586,
+          "elapsed_seconds": 0.2731
+        }
+      ],
+      "build_seconds": 1.5728,
+      "geometry_hash": "dfc96415fabdf7c7bf52f1113a46c2cc6f4efa59225446f54bb217f2f6dcb6b9",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.5,
+            "bounds": [
+              0,
+              0,
+              11.0,
+              10.34
+            ],
+            "eave": 3.1319999999999997,
+            "function": "WAREHOUSE",
+            "key": "thornfell_stone_hall",
+            "roof": "GABLE",
+            "triangles": 16319,
+            "valid": true,
+            "vertices": 15656,
+            "wall_thickness": 0.5
+          },
+          {
+            "base": 0.9199999999999999,
+            "bounds": [
+              11.0,
+              2.068,
+              15.4,
+              6.268000000000001
+            ],
+            "eave": 2.9729599999999996,
+            "function": "COTTAGE",
+            "key": "thornfell_lower_stone_range",
+            "roof": "GABLE",
+            "triangles": 6003,
+            "valid": true,
+            "vertices": 4992,
+            "wall_thickness": 0.5
+          }
+        ],
+        "errors": [],
+        "objects": 56,
+        "source_objects": 56,
+        "source_triangles": 22322,
+        "source_vertices": 20648,
+        "triangles": 22322,
+        "valid": true
+      },
+      "backend": {
+        "objects": 56,
+        "vertices": 20648,
+        "width": 15.87500011920929,
+        "depth": 12.020000278949738,
+        "height": 9.832298278808594,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.24500000476837158,
+          15.630000114440918
+        ],
+        [
+          -0.8399999737739563,
+          11.180000305175781
+        ],
+        [
+          0.0,
+          9.832298278808594
+        ]
+      ]
+    },
+    {
+      "function": "WAREHOUSE",
+      "region": "MIRE",
+      "label": "Warehouse",
+      "settings": {
+        "seed": 91,
+        "function": "WAREHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "SORROWMERE",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/warehouse/mire_clay_0.png",
+          "image_sha256": "9b7d6221fe13206c2cded4afdcdedcf8371f2dd330f4ed57561dff14cacbf213",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            58.757720947265625,
+            -63.91276168823242,
+            43.114593505859375
+          ],
+          "camera_target": [
+            11.539999961853027,
+            2.747554063796997,
+            5.340414524078369
+          ],
+          "ortho_scale": 33.7503646850586,
+          "elapsed_seconds": 0.2744
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/warehouse/mire_clay_1.png",
+          "image_sha256": "36223d7e7e6b68143d47529cff5e1ddbf896ddfdf2db79dee7780e91e19fa49c",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -35.67771911621094,
+            69.40786743164062,
+            43.114593505859375
+          ],
+          "camera_target": [
+            11.539999961853027,
+            2.747554063796997,
+            5.340414524078369
+          ],
+          "ortho_scale": 33.7503646850586,
+          "elapsed_seconds": 0.2793
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/warehouse/mire_material_0.png",
+          "image_sha256": "482dd837b6354b3e375c3884cfe76e6130ca054fdd6fec3de6e2f4d544683d3a",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            58.757720947265625,
+            -63.91276168823242,
+            43.114593505859375
+          ],
+          "camera_target": [
+            11.539999961853027,
+            2.747554063796997,
+            5.340414524078369
+          ],
+          "ortho_scale": 33.7503646850586,
+          "elapsed_seconds": 0.3281
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/warehouse/mire_material_1.png",
+          "image_sha256": "347ad5d3855de89ad27d38bf10283110bd2ade1bcf61511241fe96e467172681",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -35.67771911621094,
+            69.40786743164062,
+            43.114593505859375
+          ],
+          "camera_target": [
+            11.539999961853027,
+            2.747554063796997,
+            5.340414524078369
+          ],
+          "ortho_scale": 33.7503646850586,
+          "elapsed_seconds": 0.3197
+        }
+      ],
+      "build_seconds": 2.682,
+      "geometry_hash": "da872cc0fb8e00eff89ee94bc235c1ffc7caf70ac37ed6bfce57a78c1251f9bf",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 1.94,
+            "bounds": [
+              0.0,
+              0.0,
+              15.979999999999999,
+              9.200000000000001
+            ],
+            "eave": 4.74,
+            "function": "WAREHOUSE",
+            "key": "mire_longhouse",
+            "roof": "BOW",
+            "triangles": 29660,
+            "valid": true,
+            "vertices": 30060,
+            "wall_thickness": 0.18
+          },
+          {
+            "base": 1.94,
+            "bounds": [
+              17.779999999999998,
+              1.6000000000000005,
+              23.18,
+              7.6000000000000005
+            ],
+            "eave": 4.74,
+            "function": "COTTAGE",
+            "key": "mire_linked_pavilion",
+            "roof": "BOW",
+            "triangles": 12648,
+            "valid": true,
+            "vertices": 11096,
+            "wall_thickness": 0.18
+          }
+        ],
+        "errors": [],
+        "objects": 60,
+        "source_objects": 60,
+        "source_triangles": 43556,
+        "source_vertices": 41988,
+        "triangles": 43556,
+        "valid": true
+      },
+      "backend": {
+        "objects": 60,
+        "vertices": 41988,
+        "width": 24.570000767707825,
+        "depth": 15.604892253875732,
+        "height": 10.784514024853706,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.7450000047683716,
+          23.825000762939453
+        ],
+        [
+          -5.054892063140869,
+          10.550000190734863
+        ],
+        [
+          -0.05184228718280792,
+          10.732671737670898
+        ]
+      ]
+    },
+    {
+      "function": "WAREHOUSE",
+      "region": "EMBERHOLT",
+      "label": "Warehouse",
+      "settings": {
+        "seed": 91,
+        "function": "WAREHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "EMBERHOLD",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/warehouse/emberholt_clay_0.png",
+          "image_sha256": "c6301883ded9b7996aaae6be4165e8fc908acdf0660e6b68149cd30162bde1c9",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.417720794677734,
+            -60.67031478881836,
+            41.944175720214844
+          ],
+          "camera_target": [
+            8.199999809265137,
+            5.990000247955322,
+            4.170000076293945
+          ],
+          "ortho_scale": 33.7503646850586,
+          "elapsed_seconds": 0.2728
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/warehouse/emberholt_clay_1.png",
+          "image_sha256": "6d1242e2febc17f82863b2658bc79f66d2c34ab50928b08f4b5fb5ee7c8b440b",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.01771926879883,
+            72.65031433105469,
+            41.944175720214844
+          ],
+          "camera_target": [
+            8.199999809265137,
+            5.990000247955322,
+            4.170000076293945
+          ],
+          "ortho_scale": 33.7503646850586,
+          "elapsed_seconds": 0.2517
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/warehouse/emberholt_material_0.png",
+          "image_sha256": "4fbcac2666e2838872f4b355c5212d57ff016aa6a3e791777340c517c98023bf",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.417720794677734,
+            -60.67031478881836,
+            41.944175720214844
+          ],
+          "camera_target": [
+            8.199999809265137,
+            5.990000247955322,
+            4.170000076293945
+          ],
+          "ortho_scale": 33.7503646850586,
+          "elapsed_seconds": 0.2934
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/warehouse/emberholt_material_1.png",
+          "image_sha256": "3703042b2aeba0486e0374b50751cb94926aa9e7305b9c9d572c1d3bd3265ce6",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.01771926879883,
+            72.65031433105469,
+            41.944175720214844
+          ],
+          "camera_target": [
+            8.199999809265137,
+            5.990000247955322,
+            4.170000076293945
+          ],
+          "ortho_scale": 33.7503646850586,
+          "elapsed_seconds": 0.2678
+        }
+      ],
+      "build_seconds": 0.7688,
+      "geometry_hash": "b19c49f3cc2d26ea7ca45fab020fda7bd58e8329a018ecd315e07c664fa1ca08",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.48,
+            "bounds": [
+              0,
+              0,
+              16.4,
+              11.5
+            ],
+            "eave": 6.08,
+            "function": "WAREHOUSE",
+            "key": "emberholt_main_block",
+            "roof": "TERRACE",
+            "triangles": 11994,
+            "valid": true,
+            "vertices": 8832,
+            "wall_thickness": 0.7
+          }
+        ],
+        "errors": [],
+        "objects": 20,
+        "source_objects": 20,
+        "source_triangles": 11994,
+        "source_vertices": 8832,
+        "triangles": 11994,
+        "valid": true
+      },
+      "backend": {
+        "objects": 20,
+        "vertices": 8832,
+        "width": 18.137525260448456,
+        "depth": 12.700000166893005,
+        "height": 8.34000015258789,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls"
+        ]
+      },
+      "bounds": [
+        [
+          -0.8687626719474792,
+          17.268762588500977
+        ],
+        [
+          -0.36000001430511475,
+          12.34000015258789
+        ],
+        [
+          0.0,
+          8.34000015258789
+        ]
+      ]
+    }
+  ]
+}

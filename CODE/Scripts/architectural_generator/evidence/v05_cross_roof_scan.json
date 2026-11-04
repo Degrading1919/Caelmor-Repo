@@ -1,0 +1,208 @@
+{
+  "scan": "analytic pairwise roof surface crossings using tests/test_household_investment.py::crossing_roofs",
+  "settings": {
+    "regions": [
+      "LOWMARK",
+      "THORNFELL",
+      "MIRE",
+      "EMBERHOLT"
+    ],
+    "functions": [
+      "FARMHOUSE",
+      "BARN",
+      "GRAIN_STORE",
+      "MILLER",
+      "INN",
+      "COTTAGE",
+      "TOWNHOUSE",
+      "MERCHANT_HOUSE",
+      "LONGHOUSE",
+      "SHOP",
+      "WAREHOUSE",
+      "MARKET_HALL",
+      "STABLE",
+      "SMITHY",
+      "BOATHOUSE",
+      "WATCHTOWER",
+      "GATEHOUSE",
+      "BARRACKS",
+      "ASSEMBLY_HALL",
+      "WORKSHOP"
+    ],
+    "wealths": [
+      "MODEST",
+      "ESTABLISHED",
+      "AFFLUENT"
+    ],
+    "seed": 91,
+    "detail": "LOW",
+    "world_aware": true,
+    "use_grammar": true
+  },
+  "cases_scanned": 240,
+  "crossing_pair_count": 6,
+  "crossings": [
+    {
+      "region": "LOWMARK",
+      "function": "BARN",
+      "wealth": "AFFLUENT",
+      "pair": [
+        "lowmark_main_hall",
+        "lowmark_service_wing"
+      ],
+      "min_height_difference_m": -0.046,
+      "max_height_difference_m": 1.355,
+      "attribution": "pre_existing_v04_unchanged_non_domestic_branch",
+      "attribution_basis": "This worker changed the domestic-family layout branch; these functions take the existing non-domestic working-building branch, whose service-wing position/roof call is unchanged. No historical-v04 replay was run."
+    },
+    {
+      "region": "LOWMARK",
+      "function": "WAREHOUSE",
+      "wealth": "ESTABLISHED",
+      "pair": [
+        "lowmark_main_hall",
+        "lowmark_service_wing"
+      ],
+      "min_height_difference_m": -0.042,
+      "max_height_difference_m": 1.361,
+      "attribution": "pre_existing_v04_unchanged_non_domestic_branch",
+      "attribution_basis": "This worker changed the domestic-family layout branch; these functions take the existing non-domestic working-building branch, whose service-wing position/roof call is unchanged. No historical-v04 replay was run."
+    },
+    {
+      "region": "LOWMARK",
+      "function": "WAREHOUSE",
+      "wealth": "AFFLUENT",
+      "pair": [
+        "lowmark_main_hall",
+        "lowmark_service_wing"
+      ],
+      "min_height_difference_m": -0.095,
+      "max_height_difference_m": 1.271,
+      "attribution": "pre_existing_v04_unchanged_non_domestic_branch",
+      "attribution_basis": "This worker changed the domestic-family layout branch; these functions take the existing non-domestic working-building branch, whose service-wing position/roof call is unchanged. No historical-v04 replay was run."
+    },
+    {
+      "region": "LOWMARK",
+      "function": "MARKET_HALL",
+      "wealth": "MODEST",
+      "pair": [
+        "lowmark_main_hall",
+        "lowmark_service_wing"
+      ],
+      "min_height_difference_m": -0.067,
+      "max_height_difference_m": 1.319,
+      "attribution": "pre_existing_v04_unchanged_non_domestic_branch",
+      "attribution_basis": "This worker changed the domestic-family layout branch; these functions take the existing non-domestic working-building branch, whose service-wing position/roof call is unchanged. No historical-v04 replay was run."
+    },
+    {
+      "region": "LOWMARK",
+      "function": "MARKET_HALL",
+      "wealth": "ESTABLISHED",
+      "pair": [
+        "lowmark_main_hall",
+        "lowmark_service_wing"
+      ],
+      "min_height_difference_m": -0.13,
+      "max_height_difference_m": 1.211,
+      "attribution": "pre_existing_v04_unchanged_non_domestic_branch",
+      "attribution_basis": "This worker changed the domestic-family layout branch; these functions take the existing non-domestic working-building branch, whose service-wing position/roof call is unchanged. No historical-v04 replay was run."
+    },
+    {
+      "region": "LOWMARK",
+      "function": "MARKET_HALL",
+      "wealth": "AFFLUENT",
+      "pair": [
+        "lowmark_main_hall",
+        "lowmark_service_wing"
+      ],
+      "min_height_difference_m": -0.193,
+      "max_height_difference_m": 1.103,
+      "attribution": "pre_existing_v04_unchanged_non_domestic_branch",
+      "attribution_basis": "This worker changed the domestic-family layout branch; these functions take the existing non-domestic working-building branch, whose service-wing position/roof call is unchanged. No historical-v04 replay was run."
+    }
+  ],
+  "source_sha256": {
+    "caelmor_architecture\\world_lowmark_thornfell.py": "31ad31b109fc2a3813a61ce7b881d635cd6595946c58d89bf12c1ce5abf545b0",
+    "caelmor_architecture\\world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126",
+    "caelmor_architecture\\world_emberholt.py": "1578f593c8d624ace1b1b10df4e4602e17e455a54666753fc11327cb02c5a448",
+    "caelmor_architecture\\world.py": "747b6049609e0c7c03506d40465f8aac0fdad9057c77d5a1c291ec684379ccd1",
+    "caelmor_architecture\\roof.py": "22fc0428a1eb98028a0f70b3c14f8a83fb960c59779dd4376846c0b18bf96d23",
+    "caelmor_architecture\\model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "tests\\test_household_investment.py": "3bf64fa22ee8702f9c6c7d159eef6e0d30080f03078d9cf2a6ec66336aed6e9b"
+  },
+  "lowmark_private_solar_approach_inspection": {
+    "settings": {
+      "seed": 91,
+      "region": "LOWMARK",
+      "function": "COTTAGE",
+      "wealth": "AFFLUENT",
+      "detail": "LOW"
+    },
+    "main_bounds_xy_m": [
+      0,
+      0,
+      10.1248,
+      7.5936
+    ],
+    "solar_bounds_xy_m": [
+      -4.85,
+      0.0,
+      -0.8499999999999996,
+      4.6
+    ],
+    "main_entrance": {
+      "edge_index": 0,
+      "s_interval_m": [
+        4.5374,
+        5.587400000000001
+      ],
+      "center_xy_m": [
+        5.0624,
+        0.0
+      ],
+      "outward_normal": [
+        0.0,
+        -1.0
+      ],
+      "assembly_bounds": {
+        "s0": 4.4474,
+        "s1": 5.6774000000000004,
+        "z0": 0.35,
+        "z1": 2.8193939439731475
+      }
+    },
+    "solar_entrance": {
+      "edge_index": 0,
+      "s_interval_m": [
+        1.475,
+        2.525
+      ],
+      "center_xy_m": [
+        -2.8499999999999996,
+        0.0
+      ],
+      "outward_normal": [
+        0.0,
+        -1.0
+      ],
+      "assembly_bounds": {
+        "s0": 1.385,
+        "s1": 2.6149999999999998,
+        "z0": 0.35,
+        "z1": 2.4902842109675043
+      }
+    },
+    "paving_bounds_xy_m": [
+      -3.3,
+      -1.43,
+      5.5124,
+      -0.53
+    ],
+    "paving_face_count": 18,
+    "observed": "Entry path endpoints derive from the actual scheduled doors and extend beyond the stair run. The pavers remain outside both mass footprints; both entrances are on edge 0 and remain open."
+  },
+  "limits": [
+    "No validate(), geometry_hash, repeat-generation, Blender, render, or package operation was run.",
+    "Attribution is categorized from changed path/mass names; no historical-v0.4 replay was performed."
+  ]
+}

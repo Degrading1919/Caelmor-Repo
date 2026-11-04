@@ -1,0 +1,10 @@
+{
+  "installed_archive": "C:\\Users\\CK\\Documents\\Caelmor-Architecture\\CODE\\Scripts\\architectural_generator\\dist\\caelmor_architecture.zip",
+  "archive_sha256": "93c5688f43e1edf2a033190e64a06b3a01beac556b8c1eb5f0bd54be7fa3d1ce",
+  "native_install_and_generate": true,
+  "isolated_preferences": true,
+  "region": "EMBERHOLT",
+  "building_type": "COTTAGE",
+  "geometry_mode": "EFFICIENT",
+  "world_aware": true
+}

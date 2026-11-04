@@ -1,0 +1,727 @@
+{
+  "function": "SMITHY",
+  "region": "LOWMARK",
+  "settings": {
+    "seed": 91,
+    "function": "SMITHY",
+    "footprint": "L",
+    "width": 11.0,
+    "depth": 7.0,
+    "wing_width": 4.2,
+    "wing_depth": 4.5,
+    "floors": 2,
+    "floor_height": 2.65,
+    "pitch": 48.0,
+    "overhang": 0.45,
+    "detail": "MEDIUM",
+    "window_density": 1.0,
+    "region": "LOWMARK",
+    "context": "AUTO",
+    "wealth": "ESTABLISHED",
+    "craftsmanship": "STANDARD",
+    "maintenance": 0.7,
+    "age": 35,
+    "use_grammar": true,
+    "roof_style": "AUTO",
+    "geometry_mode": "EFFICIENT",
+    "world_aware": true
+  },
+  "source_revision": "e5070b4",
+  "generator_source_sha256": {
+    "__init__.py": "12f364b5ab3d06c8cdc3e46949d2e444ce56eec985cbb4b1bc2ddd91208ebb58",
+    "benchmark_construction.py": "4ec72e47bdd9f1f867faa02abf139c03d5920fb3512b5e0a762638a7b312db36",
+    "benchmark_gatehouse.py": "fec6f86d9688d4a635b43c739ddbc92ccc9f121968cf018329f7c07e3f3cf78a",
+    "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
+    "blender_manifest.toml": "f9010658cc82004d064416db5356e16bb3ddb7742bc4c5fe2a4b20d30a01f53c",
+    "engine.py": "89979c9f9012a50b9155f66f7cd56c8796bd7fed0271802dc996bdf5b2a6580e",
+    "facade.py": "44a1d926cc16496917fc18be7b2c4385193eea55b9377e37c19c935c1c3bee0a",
+    "function_work.py": "410de667f732496f01cb8b13b58e8ec61abbee567748f6f4a6c5d2d84e394add",
+    "function_yard.py": "a7d05edd0f83d0ae9ec51c026e0556289f075482eb01a24214b3623aead75948",
+    "functional.py": "10f719e1db914f5bfc3e1958fe5c0fd323d2e75d8bd02e71f068117a1ad96baa",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "LICENSE": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+    "materials.py": "f5cbe097db77cb9bcad2560b6289e394e6ed5ff93fc377aa288405cfd0b22bdb",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "c75db94854a1db0bf777a6433bd8067e4031194834c4f8048887f1959db494f4",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+  },
+  "render_source_sha256": {
+    "render_architectural_benchmarks.py": "e3bc25141b237e1c23609e43a31106956dacbe961a998014270e02cadde423bb",
+    "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+  },
+  "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367",
+  "pure_geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367",
+  "bounds": [
+    [
+      -1.564018964767456,
+      9.845000267028809
+    ],
+    [
+      -2.0,
+      5.684999942779541
+    ],
+    [
+      -0.12999999523162842,
+      6.459634304046631
+    ]
+  ],
+  "pure_validation": {
+    "valid": true,
+    "errors": [],
+    "objects": 65,
+    "vertices": 8136,
+    "triangles": 9352,
+    "materials": 14,
+    "region": "LOWMARK",
+    "context": "RURAL",
+    "building_type": "SMITHY",
+    "geometry_mode": "EFFICIENT",
+    "architecture": "WORLD",
+    "construction_zones": [
+      {
+        "key": "forge_hall",
+        "bounds": [
+          0,
+          0,
+          5.6,
+          5.2
+        ],
+        "base": 0.32,
+        "eave": 3.92,
+        "valid": true,
+        "roof": "GABLE",
+        "function": "SMITHY",
+        "wall_thickness": 0.28,
+        "vertices": 5086,
+        "triangles": 5882
+      },
+      {
+        "key": "smithy_stock_range",
+        "bounds": [
+          5.6,
+          0,
+          9.6,
+          5.2
+        ],
+        "base": 0.32,
+        "eave": 2.8699999999999997,
+        "valid": true,
+        "roof": "SHED",
+        "function": "SMITHY",
+        "wall_thickness": 0.28,
+        "vertices": 3050,
+        "triangles": 3470
+      }
+    ],
+    "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367",
+    "tool_revision": "0.8.0"
+  },
+  "native_validation": {
+    "architecture": "WORLD",
+    "construction_zones": [
+      {
+        "base": 0.32,
+        "bounds": [
+          0,
+          0,
+          5.6,
+          5.2
+        ],
+        "eave": 3.92,
+        "function": "SMITHY",
+        "key": "forge_hall",
+        "roof": "GABLE",
+        "triangles": 5882,
+        "valid": true,
+        "vertices": 5086,
+        "wall_thickness": 0.28
+      },
+      {
+        "base": 0.32,
+        "bounds": [
+          5.6,
+          0,
+          9.6,
+          5.2
+        ],
+        "eave": 2.8699999999999997,
+        "function": "SMITHY",
+        "key": "smithy_stock_range",
+        "roof": "SHED",
+        "triangles": 3470,
+        "valid": true,
+        "vertices": 3050,
+        "wall_thickness": 0.28
+      }
+    ],
+    "errors": [],
+    "objects": 65,
+    "source_objects": 65,
+    "source_triangles": 9352,
+    "source_vertices": 8136,
+    "triangles": 9352,
+    "valid": true
+  },
+  "backend_metrics": {
+    "objects": 65,
+    "vertices": 8136,
+    "width": 11.409019231796265,
+    "depth": 7.684999942779541,
+    "height": 6.589634299278259,
+    "layers": [
+      "details",
+      "foundation",
+      "roof",
+      "structure",
+      "walls"
+    ]
+  },
+  "build_seconds": 118.2123,
+  "renderer": "5.0.1",
+  "engine": "BLENDER_EEVEE",
+  "resolution": [
+    1024,
+    704
+  ],
+  "samples": 32,
+  "studio": "render_world_evidence._reset_scene; unchanged neutral studio",
+  "images": [
+    {
+      "distance": "normal",
+      "finish": "clay",
+      "view": 0,
+      "view_name": "front",
+      "image": "individual/smithy/normal_clay_front.png",
+      "image_sha256": "ecee87634dc56a6c6ad3dd6aa1a149371c1fd7d765359918fdbd3eaf9001f9bd",
+      "width": 1024,
+      "height": 704,
+      "samples": 32,
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "camera_direction": [
+        0.85,
+        -1.2,
+        0.68
+      ],
+      "camera_location": [
+        24.985652923583984,
+        -28.026805877685547,
+        19.988523483276367
+      ],
+      "ortho_scale": 18.0,
+      "framing_check": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -6.621240139007568,
+            7.130866527557373
+          ],
+          "y": [
+            -5.673490047454834,
+            5.707566738128662
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -9.0,
+            9.0
+          ],
+          "y": [
+            -6.1875,
+            6.1875
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "distance": "normal",
+      "finish": "clay",
+      "view": 1,
+      "view_name": "rear",
+      "image": "individual/smithy/normal_clay_rear.png",
+      "image_sha256": "3f6386854c049fecd7c0fdfe964dc365bf9d2c11e36e2dd0114a98d160ae420d",
+      "width": 1024,
+      "height": 704,
+      "samples": 32,
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "camera_direction": [
+        -0.85,
+        1.2,
+        0.68
+      ],
+      "camera_location": [
+        -16.985652923583984,
+        31.226806640625,
+        19.988523483276367
+      ],
+      "ortho_scale": 18.0,
+      "framing_check": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -7.130864143371582,
+            6.621237754821777
+          ],
+          "y": [
+            -5.7714314460754395,
+            5.609619140625
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -9.0,
+            9.0
+          ],
+          "y": [
+            -6.1875,
+            6.1875
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "distance": "distant",
+      "finish": "clay",
+      "view": 0,
+      "view_name": "front",
+      "image": "individual/smithy/distant_clay_front.png",
+      "image_sha256": "07ebf05aa2b069a1a63d5b0bcb79ca15867b56928260f92778f2a4574133d193",
+      "width": 1024,
+      "height": 704,
+      "samples": 32,
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "camera_direction": [
+        0.85,
+        -1.2,
+        0.68
+      ],
+      "camera_location": [
+        37.57704544067383,
+        -45.80289077758789,
+        30.06163787841797
+      ],
+      "ortho_scale": 32.0,
+      "framing_check": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -6.621238708496094,
+            7.13086462020874
+          ],
+          "y": [
+            -5.673489570617676,
+            5.707566261291504
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -16.0,
+            16.0
+          ],
+          "y": [
+            -11.0,
+            11.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "distance": "distant",
+      "finish": "clay",
+      "view": 1,
+      "view_name": "rear",
+      "image": "individual/smithy/distant_clay_rear.png",
+      "image_sha256": "c3eff4ab91061a73609a7b5c555c25818189549ffd2c3dbfb281a2a2c7f9a391",
+      "width": 1024,
+      "height": 704,
+      "samples": 32,
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "camera_direction": [
+        -0.85,
+        1.2,
+        0.68
+      ],
+      "camera_location": [
+        -29.577045440673828,
+        49.00288772583008,
+        30.06163787841797
+      ],
+      "ortho_scale": 32.0,
+      "framing_check": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -7.130864143371582,
+            6.6212382316589355
+          ],
+          "y": [
+            -5.7714314460754395,
+            5.609619140625
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -16.0,
+            16.0
+          ],
+          "y": [
+            -11.0,
+            11.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "distance": "close",
+      "finish": "clay",
+      "view": 0,
+      "view_name": "workfront_a",
+      "image": "individual/smithy/close_clay_workfront_a.png",
+      "image_sha256": "9673501f627f495aa3d9d89d01b20328c50ff215b79424741411c4edbc639cfe",
+      "width": 1024,
+      "height": 704,
+      "samples": 32,
+      "camera_target": [
+        2.5999999046325684,
+        1.2999999523162842,
+        1.7000000476837158
+      ],
+      "camera_direction": [
+        0.65,
+        -1.2,
+        0.4
+      ],
+      "camera_location": [
+        10.827001571655273,
+        -13.888312339782715,
+        6.762770652770996
+      ],
+      "ortho_scale": 7.5,
+      "framing_check": {
+        "valid": null,
+        "note": "Intentional close crop; full building bounds are not required."
+      }
+    },
+    {
+      "distance": "close",
+      "finish": "clay",
+      "view": 1,
+      "view_name": "workfront_b",
+      "image": "individual/smithy/close_clay_workfront_b.png",
+      "image_sha256": "6bc1cdcaa04de8f00cc8c9a6d349ee289b96d2456295b2cafa3b4c4ad9f37056",
+      "width": 1024,
+      "height": 704,
+      "samples": 32,
+      "camera_target": [
+        2.5999999046325684,
+        1.2999999523162842,
+        1.7000000476837158
+      ],
+      "camera_direction": [
+        -0.8,
+        -1.2,
+        0.4
+      ],
+      "camera_location": [
+        -7.02140474319458,
+        -13.13210678100586,
+        6.510702133178711
+      ],
+      "ortho_scale": 7.5,
+      "framing_check": {
+        "valid": null,
+        "note": "Intentional close crop; full building bounds are not required."
+      }
+    },
+    {
+      "distance": "normal",
+      "finish": "material",
+      "view": 0,
+      "view_name": "front",
+      "image": "individual/smithy/normal_material_front.png",
+      "image_sha256": "fcff74427fc5fc093809eaccbf70671834592cddf4e60fed29e48f9418d86ad2",
+      "width": 1024,
+      "height": 704,
+      "samples": 32,
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "camera_direction": [
+        0.85,
+        -1.2,
+        0.68
+      ],
+      "camera_location": [
+        24.985652923583984,
+        -28.026805877685547,
+        19.988523483276367
+      ],
+      "ortho_scale": 18.0,
+      "framing_check": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -6.621240139007568,
+            7.130866527557373
+          ],
+          "y": [
+            -5.673490047454834,
+            5.707566738128662
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -9.0,
+            9.0
+          ],
+          "y": [
+            -6.1875,
+            6.1875
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "distance": "normal",
+      "finish": "material",
+      "view": 1,
+      "view_name": "rear",
+      "image": "individual/smithy/normal_material_rear.png",
+      "image_sha256": "b7d1a3891839565530334b8095ecdc13bc49826c02769544322e25f44f7574c8",
+      "width": 1024,
+      "height": 704,
+      "samples": 32,
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "camera_direction": [
+        -0.85,
+        1.2,
+        0.68
+      ],
+      "camera_location": [
+        -16.985652923583984,
+        31.226806640625,
+        19.988523483276367
+      ],
+      "ortho_scale": 18.0,
+      "framing_check": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -7.130864143371582,
+            6.621237754821777
+          ],
+          "y": [
+            -5.7714314460754395,
+            5.609619140625
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -9.0,
+            9.0
+          ],
+          "y": [
+            -6.1875,
+            6.1875
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "distance": "distant",
+      "finish": "material",
+      "view": 0,
+      "view_name": "front",
+      "image": "individual/smithy/distant_material_front.png",
+      "image_sha256": "6cf363505934c9a4361c616caad580576feaa01688587d6325ae525ffeb0ea7d",
+      "width": 1024,
+      "height": 704,
+      "samples": 32,
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "camera_direction": [
+        0.85,
+        -1.2,
+        0.68
+      ],
+      "camera_location": [
+        37.57704544067383,
+        -45.80289077758789,
+        30.06163787841797
+      ],
+      "ortho_scale": 32.0,
+      "framing_check": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -6.621238708496094,
+            7.13086462020874
+          ],
+          "y": [
+            -5.673489570617676,
+            5.707566261291504
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -16.0,
+            16.0
+          ],
+          "y": [
+            -11.0,
+            11.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "distance": "distant",
+      "finish": "material",
+      "view": 1,
+      "view_name": "rear",
+      "image": "individual/smithy/distant_material_rear.png",
+      "image_sha256": "ff4ea870a18ae4a824b389db084a033d88d131e37629c9712af4c01a66dca8ea",
+      "width": 1024,
+      "height": 704,
+      "samples": 32,
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "camera_direction": [
+        -0.85,
+        1.2,
+        0.68
+      ],
+      "camera_location": [
+        -29.577045440673828,
+        49.00288772583008,
+        30.06163787841797
+      ],
+      "ortho_scale": 32.0,
+      "framing_check": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -7.130864143371582,
+            6.6212382316589355
+          ],
+          "y": [
+            -5.7714314460754395,
+            5.609619140625
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -16.0,
+            16.0
+          ],
+          "y": [
+            -11.0,
+            11.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "distance": "close",
+      "finish": "material",
+      "view": 0,
+      "view_name": "workfront_a",
+      "image": "individual/smithy/close_material_workfront_a.png",
+      "image_sha256": "23fd56805510584cb01071b43ca9196ff1d7ddf62cfa477c3c04d8a257d43009",
+      "width": 1024,
+      "height": 704,
+      "samples": 32,
+      "camera_target": [
+        2.5999999046325684,
+        1.2999999523162842,
+        1.7000000476837158
+      ],
+      "camera_direction": [
+        0.65,
+        -1.2,
+        0.4
+      ],
+      "camera_location": [
+        10.827001571655273,
+        -13.888312339782715,
+        6.762770652770996
+      ],
+      "ortho_scale": 7.5,
+      "framing_check": {
+        "valid": null,
+        "note": "Intentional close crop; full building bounds are not required."
+      }
+    },
+    {
+      "distance": "close",
+      "finish": "material",
+      "view": 1,
+      "view_name": "workfront_b",
+      "image": "individual/smithy/close_material_workfront_b.png",
+      "image_sha256": "91b4b6a5fd496992581c489a52c635b62bd0ba6133ae0eb0bab075b9d6dcb7d6",
+      "width": 1024,
+      "height": 704,
+      "samples": 32,
+      "camera_target": [
+        2.5999999046325684,
+        1.2999999523162842,
+        1.7000000476837158
+      ],
+      "camera_direction": [
+        -0.8,
+        -1.2,
+        0.4
+      ],
+      "camera_location": [
+        -7.02140474319458,
+        -13.13210678100586,
+        6.510702133178711
+      ],
+      "ortho_scale": 7.5,
+      "framing_check": {
+        "valid": null,
+        "note": "Intentional close crop; full building bounds are not required."
+      }
+    }
+  ],
+  "image_count": 12
+}

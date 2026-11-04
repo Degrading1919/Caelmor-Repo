@@ -1,0 +1,6999 @@
+{
+  "blender_version": "5.0.1",
+  "renderer": "BLENDER_EEVEE",
+  "source_sha256": {
+    "__init__.py": "7998a866e52cfc1ab065a0b867686dee9f730b2f99303614294e1f8d3db61add",
+    "blender_backend.py": "c104abb6341438822efa52f20f15a4c28f7839008368f1c6bc2723c4960da168",
+    "engine.py": "7ff831ec55952754a59c61913aacd8996e01e7815e713fdca09b75bf2e30453e",
+    "facade.py": "c07be6d2167e05e323338a526958b69e2fc601d692ef24276ad13172619ecd2f",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "ffcf5bee153711172ed38685f3dfdbd8be3679eb9c435ec89ea027dd230a7272",
+    "model.py": "c577c3fb8a160d0ecdc5d2bc4c84d3a7f708a4bbacc11657834a799c04cb4d8f",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "a4836d7fddad0543686180103dfe455ecd5fc1f6d10b98b5a747505ebbcc13c1"
+  },
+  "loaded_modules": {
+    "caelmor_architecture": {
+      "file": "C:\\Users\\CK\\Documents\\Caelmor-Architecture\\CODE\\Scripts\\architectural_generator\\caelmor_architecture\\__init__.py",
+      "sha256": "7998a866e52cfc1ab065a0b867686dee9f730b2f99303614294e1f8d3db61add"
+    },
+    "caelmor_architecture.model": {
+      "file": "C:\\Users\\CK\\Documents\\Caelmor-Architecture\\CODE\\Scripts\\architectural_generator\\caelmor_architecture\\model.py",
+      "sha256": "c577c3fb8a160d0ecdc5d2bc4c84d3a7f708a4bbacc11657834a799c04cb4d8f"
+    }
+  },
+  "rows": [
+    {
+      "label": "Region \u00b7 LOWMARK",
+      "settings": {
+        "seed": 17,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 17,
+        "function": "COTTAGE",
+        "footprint": "RECT",
+        "width": 8.0,
+        "depth": 6.0,
+        "wing_width": 3.0,
+        "wing_depth": 3.5,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 43,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 22,
+        "vertices": 10478,
+        "triangles": 16024,
+        "materials": 11,
+        "footprint_area": 48.0,
+        "roof_projected_area": 61.41,
+        "geometry_hash": "772b0dad3bd5455d30806f77024e00352baa0dd1ad17ad07064e4a35762bbb74",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 22
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1120,
+            "triangles": 1680,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 384,
+            "triangles": 572,
+            "buffers": 1
+          },
+          "structure": {
+            "vertices": 1560,
+            "triangles": 2624,
+            "buffers": 2
+          },
+          "windows": {
+            "vertices": 280,
+            "triangles": 420,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 64,
+            "triangles": 96,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 432,
+            "triangles": 648,
+            "buffers": 4
+          },
+          "roof": {
+            "vertices": 6638,
+            "triangles": 9984,
+            "buffers": 7
+          }
+        },
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "building_type": "COTTAGE",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "SHINGLE",
+        "construction": "TIMBER_INFILL"
+      },
+      "mesh_objects": 22,
+      "style": {
+        "wall_material": "plaster",
+        "construction": "TIMBER_INFILL",
+        "roof_cover": "SHINGLE",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 2
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 2
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "stone_light": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "mortar": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "plaster": [
+          0.7,
+          0.63,
+          0.49,
+          1.0
+        ],
+        "timber": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "timber_light": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "glass": [
+          0.48,
+          0.64,
+          0.63,
+          1.0
+        ],
+        "iron": [
+          0.24,
+          0.25,
+          0.23,
+          1.0
+        ],
+        "roof": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ],
+        "roof_dark": [
+          0.19,
+          0.17,
+          0.15,
+          1.0
+        ],
+        "roof_worn": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ]
+      },
+      "vertices": 10478,
+      "triangles": 16024,
+      "bounds_m": [
+        9.03000032901764,
+        7.365019619464874,
+        6.130545139312744
+      ],
+      "geometry_hash": "772b0dad3bd5455d30806f77024e00352baa0dd1ad17ad07064e4a35762bbb74",
+      "blender_build_seconds": 2.7009,
+      "pure_generation_validation_seconds": 0.2559
+    },
+    {
+      "label": "Region \u00b7 THORNFELL",
+      "settings": {
+        "seed": 17,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 17,
+        "function": "COTTAGE",
+        "footprint": "RECT",
+        "width": 7.28,
+        "depth": 5.64,
+        "wing_width": 3.0,
+        "wing_depth": 3.5,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 48,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        30.0,
+        0.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 22,
+        "vertices": 10242,
+        "triangles": 15408,
+        "materials": 10,
+        "footprint_area": 41.0592,
+        "roof_projected_area": 53.4972,
+        "geometry_hash": "a00c21aa823059050f310d057d93213407feacfe82b72d7b16f16c9467549cbf",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 22
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1080,
+            "triangles": 1620,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 2638,
+            "triangles": 3960,
+            "buffers": 2
+          },
+          "structure": {
+            "vertices": 224,
+            "triangles": 352,
+            "buffers": 1
+          },
+          "windows": {
+            "vertices": 224,
+            "triangles": 336,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 64,
+            "triangles": 96,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 384,
+            "triangles": 576,
+            "buffers": 4
+          },
+          "roof": {
+            "vertices": 5628,
+            "triangles": 8468,
+            "buffers": 7
+          }
+        },
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "building_type": "COTTAGE",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "SLATE",
+        "construction": "RUBBLE"
+      },
+      "mesh_objects": 22,
+      "style": {
+        "wall_material": "stone",
+        "construction": "RUBBLE",
+        "roof_cover": "SLATE",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_worn": 1,
+        "stone": 3,
+        "stone_light": 5,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_worn": 1,
+        "stone": 3,
+        "stone_light": 5,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.43,
+          0.43,
+          0.41,
+          1.0
+        ],
+        "stone_light": [
+          0.43,
+          0.43,
+          0.41,
+          1.0
+        ],
+        "mortar": [
+          0.43,
+          0.43,
+          0.41,
+          1.0
+        ],
+        "timber": [
+          0.25,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "glass": [
+          0.42,
+          0.51,
+          0.52,
+          1.0
+        ],
+        "timber_light": [
+          0.25,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "iron": [
+          0.24,
+          0.27,
+          0.29,
+          1.0
+        ],
+        "roof": [
+          0.24,
+          0.27,
+          0.29,
+          1.0
+        ],
+        "roof_dark": [
+          0.15,
+          0.18,
+          0.2,
+          1.0
+        ],
+        "roof_worn": [
+          0.24,
+          0.27,
+          0.29,
+          1.0
+        ]
+      },
+      "vertices": 10242,
+      "triangles": 15408,
+      "bounds_m": [
+        8.31000006198883,
+        7.011745750904083,
+        6.514927387237549
+      ],
+      "geometry_hash": "a00c21aa823059050f310d057d93213407feacfe82b72d7b16f16c9467549cbf",
+      "blender_build_seconds": 0.9887,
+      "pure_generation_validation_seconds": 0.2677
+    },
+    {
+      "label": "Region \u00b7 MIRE",
+      "settings": {
+        "seed": 17,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 17,
+        "function": "COTTAGE",
+        "footprint": "RECT",
+        "width": 7.52,
+        "depth": 5.5200000000000005,
+        "wing_width": 3.0,
+        "wing_depth": 3.5,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 38,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        0.0,
+        25.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 21,
+        "vertices": 13284,
+        "triangles": 20232,
+        "materials": 10,
+        "footprint_area": 41.5104,
+        "roof_projected_area": 54.0564,
+        "geometry_hash": "3f9291e62c161e5dc60d4d1db9cd644825c16ede4953c2f58d276a452ed359f5",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 21
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 608,
+            "triangles": 912,
+            "buffers": 3
+          },
+          "walls": {
+            "vertices": 2096,
+            "triangles": 3140,
+            "buffers": 2
+          },
+          "structure": {
+            "vertices": 1528,
+            "triangles": 2576,
+            "buffers": 2
+          },
+          "windows": {
+            "vertices": 224,
+            "triangles": 336,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 64,
+            "triangles": 96,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 384,
+            "triangles": 576,
+            "buffers": 4
+          },
+          "roof": {
+            "vertices": 8380,
+            "triangles": 12596,
+            "buffers": 7
+          }
+        },
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "building_type": "COTTAGE",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "REED",
+        "construction": "BOARD"
+      },
+      "mesh_objects": 21,
+      "style": {
+        "wall_material": "timber_light",
+        "construction": "BOARD",
+        "roof_cover": "REED",
+        "foundation_mode": "PIERS"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_worn": 1,
+        "stone": 1,
+        "stone_light": 2,
+        "timber": 6,
+        "timber_light": 4
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_worn": 1,
+        "stone": 1,
+        "stone_light": 2,
+        "timber": 6,
+        "timber_light": 4
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "timber": [
+          0.28,
+          0.24,
+          0.17,
+          1.0
+        ],
+        "stone_light": [
+          0.35,
+          0.34,
+          0.3,
+          1.0
+        ],
+        "mortar": [
+          0.35,
+          0.34,
+          0.3,
+          1.0
+        ],
+        "timber_light": [
+          0.28,
+          0.24,
+          0.17,
+          1.0
+        ],
+        "glass": [
+          0.39,
+          0.48,
+          0.43,
+          1.0
+        ],
+        "iron": [
+          0.25,
+          0.25,
+          0.21,
+          1.0
+        ],
+        "stone": [
+          0.35,
+          0.34,
+          0.3,
+          1.0
+        ],
+        "roof": [
+          0.29,
+          0.27,
+          0.21,
+          1.0
+        ],
+        "roof_dark": [
+          0.18,
+          0.19,
+          0.17,
+          1.0
+        ],
+        "roof_worn": [
+          0.29,
+          0.27,
+          0.21,
+          1.0
+        ]
+      },
+      "vertices": 13284,
+      "triangles": 20232,
+      "bounds_m": [
+        8.549999833106995,
+        7.437722563743591,
+        5.960389137268066
+      ],
+      "geometry_hash": "3f9291e62c161e5dc60d4d1db9cd644825c16ede4953c2f58d276a452ed359f5",
+      "blender_build_seconds": 1.3536,
+      "pure_generation_validation_seconds": 0.3373
+    },
+    {
+      "label": "Region \u00b7 EMBERHOLT",
+      "settings": {
+        "seed": 17,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 17,
+        "function": "COTTAGE",
+        "footprint": "RECT",
+        "width": 8.64,
+        "depth": 6.0,
+        "wing_width": 3.0,
+        "wing_depth": 3.5,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 42,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        30.0,
+        25.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 22,
+        "vertices": 20470,
+        "triangles": 30748,
+        "materials": 10,
+        "footprint_area": 51.84,
+        "roof_projected_area": 65.826,
+        "geometry_hash": "75403121b88a4d4d39ec4968ac3d48ef4c69a6980a852244c82457198918a825",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 22
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1144,
+            "triangles": 1716,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 2410,
+            "triangles": 3616,
+            "buffers": 2
+          },
+          "structure": {
+            "vertices": 288,
+            "triangles": 448,
+            "buffers": 1
+          },
+          "windows": {
+            "vertices": 336,
+            "triangles": 504,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 64,
+            "triangles": 96,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 480,
+            "triangles": 720,
+            "buffers": 4
+          },
+          "roof": {
+            "vertices": 15748,
+            "triangles": 23648,
+            "buffers": 7
+          }
+        },
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "COTTAGE",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "CLAY",
+        "construction": "ASHLAR"
+      },
+      "mesh_objects": 22,
+      "style": {
+        "wall_material": "stone",
+        "construction": "ASHLAR",
+        "roof_cover": "CLAY",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_worn": 1,
+        "stone": 4,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_worn": 1,
+        "stone": 4,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "stone_light": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "mortar": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "timber": [
+          0.25,
+          0.16,
+          0.12,
+          1.0
+        ],
+        "glass": [
+          0.45,
+          0.5,
+          0.5,
+          1.0
+        ],
+        "timber_light": [
+          0.25,
+          0.16,
+          0.12,
+          1.0
+        ],
+        "iron": [
+          0.27,
+          0.25,
+          0.24,
+          1.0
+        ],
+        "roof": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "roof_dark": [
+          0.2,
+          0.15,
+          0.13,
+          1.0
+        ],
+        "roof_worn": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ]
+      },
+      "vertices": 20470,
+      "triangles": 30748,
+      "bounds_m": [
+        9.669999718666077,
+        7.363604366779327,
+        6.064212322235107
+      ],
+      "geometry_hash": "75403121b88a4d4d39ec4968ac3d48ef4c69a6980a852244c82457198918a825",
+      "blender_build_seconds": 1.9766,
+      "pure_generation_validation_seconds": 0.6325
+    },
+    {
+      "label": "Lowmark \u00b7 MODEST",
+      "settings": {
+        "seed": 41,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 100,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 41,
+        "function": "COTTAGE",
+        "footprint": "RECT",
+        "width": 7.04,
+        "depth": 5.28,
+        "wing_width": 2.64,
+        "wing_depth": 3.08,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 41,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 100,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        0.0,
+        52.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 23,
+        "vertices": 8630,
+        "triangles": 13208,
+        "materials": 12,
+        "footprint_area": 37.1712,
+        "roof_projected_area": 49.0692,
+        "geometry_hash": "c6c29477672b1d8ee5577944967f3fb668ccb562a007e6fa856680cc029c443b",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 23
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 976,
+            "triangles": 1464,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 256,
+            "triangles": 380,
+            "buffers": 1
+          },
+          "structure": {
+            "vertices": 1296,
+            "triangles": 2188,
+            "buffers": 2
+          },
+          "windows": {
+            "vertices": 168,
+            "triangles": 252,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 64,
+            "triangles": 96,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 336,
+            "triangles": 504,
+            "buffers": 4
+          },
+          "roof": {
+            "vertices": 5534,
+            "triangles": 8324,
+            "buffers": 8
+          }
+        },
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "building_type": "COTTAGE",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "SHINGLE",
+        "construction": "TIMBER_INFILL"
+      },
+      "mesh_objects": 23,
+      "style": {
+        "wall_material": "plaster",
+        "construction": "TIMBER_INFILL",
+        "roof_cover": "SHINGLE",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 2
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 2
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.38025,
+          0.3705,
+          0.32175,
+          1.0
+        ],
+        "stone_light": [
+          0.38025,
+          0.3705,
+          0.32175,
+          1.0
+        ],
+        "mortar": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "plaster": [
+          0.6825,
+          0.61425,
+          0.47775,
+          1.0
+        ],
+        "timber": [
+          0.26325,
+          0.18525,
+          0.117,
+          1.0
+        ],
+        "timber_light": [
+          0.26325,
+          0.18525,
+          0.117,
+          1.0
+        ],
+        "glass": [
+          0.48,
+          0.64,
+          0.63,
+          1.0
+        ],
+        "iron": [
+          0.24,
+          0.25,
+          0.23,
+          1.0
+        ],
+        "roof": [
+          0.2925,
+          0.2145,
+          0.156,
+          1.0
+        ],
+        "roof_dark": [
+          0.18525,
+          0.16575,
+          0.14625,
+          1.0
+        ],
+        "roof_worn": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ],
+        "roof_patch": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ]
+      },
+      "vertices": 8630,
+      "triangles": 13208,
+      "bounds_m": [
+        8.069999814033508,
+        6.642166435718536,
+        5.6279168128967285
+      ],
+      "geometry_hash": "c6c29477672b1d8ee5577944967f3fb668ccb562a007e6fa856680cc029c443b",
+      "blender_build_seconds": 1.034,
+      "pure_generation_validation_seconds": 0.2738
+    },
+    {
+      "label": "Lowmark \u00b7 ESTABLISHED",
+      "settings": {
+        "seed": 41,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 100,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 41,
+        "function": "COTTAGE",
+        "footprint": "RECT",
+        "width": 8.0,
+        "depth": 6.0,
+        "wing_width": 3.0,
+        "wing_depth": 3.5,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 43,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 100,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        15.0,
+        52.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 23,
+        "vertices": 10450,
+        "triangles": 15980,
+        "materials": 12,
+        "footprint_area": 48.0,
+        "roof_projected_area": 61.41,
+        "geometry_hash": "64b2f0a229136a35ec0ede641f73996fb3904904a70d2a1d5318408262594862",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 23
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1112,
+            "triangles": 1668,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 384,
+            "triangles": 572,
+            "buffers": 1
+          },
+          "structure": {
+            "vertices": 1560,
+            "triangles": 2624,
+            "buffers": 2
+          },
+          "windows": {
+            "vertices": 280,
+            "triangles": 420,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 64,
+            "triangles": 96,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 432,
+            "triangles": 648,
+            "buffers": 4
+          },
+          "roof": {
+            "vertices": 6618,
+            "triangles": 9952,
+            "buffers": 8
+          }
+        },
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "building_type": "COTTAGE",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "SHINGLE",
+        "construction": "TIMBER_INFILL"
+      },
+      "mesh_objects": 23,
+      "style": {
+        "wall_material": "plaster",
+        "construction": "TIMBER_INFILL",
+        "roof_cover": "SHINGLE",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 2
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 2
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "stone_light": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "mortar": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "plaster": [
+          0.7,
+          0.63,
+          0.49,
+          1.0
+        ],
+        "timber": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "timber_light": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "glass": [
+          0.48,
+          0.64,
+          0.63,
+          1.0
+        ],
+        "iron": [
+          0.24,
+          0.25,
+          0.23,
+          1.0
+        ],
+        "roof": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ],
+        "roof_dark": [
+          0.19,
+          0.17,
+          0.15,
+          1.0
+        ],
+        "roof_worn": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ],
+        "roof_patch": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ]
+      },
+      "vertices": 10450,
+      "triangles": 15980,
+      "bounds_m": [
+        9.03000032901764,
+        7.365019619464874,
+        6.130545139312744
+      ],
+      "geometry_hash": "64b2f0a229136a35ec0ede641f73996fb3904904a70d2a1d5318408262594862",
+      "blender_build_seconds": 1.1289,
+      "pure_generation_validation_seconds": 0.3647
+    },
+    {
+      "label": "Lowmark \u00b7 AFFLUENT",
+      "settings": {
+        "seed": 41,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 100,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 41,
+        "function": "COTTAGE",
+        "footprint": "RECT",
+        "width": 8.96,
+        "depth": 6.720000000000001,
+        "wing_width": 3.3600000000000003,
+        "wing_depth": 3.9200000000000004,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 45,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 100,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        30.0,
+        52.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 23,
+        "vertices": 11926,
+        "triangles": 17932,
+        "materials": 11,
+        "footprint_area": 60.2112,
+        "roof_projected_area": 75.1332,
+        "geometry_hash": "5b05616b0926e32e46bff7025a6bfda90cee1175ed15e3c3e1aa3dc3a962ee7a",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 23
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1184,
+            "triangles": 1776,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 2626,
+            "triangles": 3940,
+            "buffers": 2
+          },
+          "structure": {
+            "vertices": 288,
+            "triangles": 448,
+            "buffers": 1
+          },
+          "windows": {
+            "vertices": 336,
+            "triangles": 504,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 64,
+            "triangles": 96,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 480,
+            "triangles": 720,
+            "buffers": 4
+          },
+          "roof": {
+            "vertices": 6948,
+            "triangles": 10448,
+            "buffers": 8
+          }
+        },
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "building_type": "COTTAGE",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "SLATE",
+        "construction": "ASHLAR"
+      },
+      "mesh_objects": 23,
+      "style": {
+        "wall_material": "stone",
+        "construction": "ASHLAR",
+        "roof_cover": "SLATE",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 4,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 4,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.39975,
+          0.3895,
+          0.33825,
+          1.0
+        ],
+        "stone_light": [
+          0.39975,
+          0.3895,
+          0.33825,
+          1.0
+        ],
+        "mortar": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "timber": [
+          0.27675,
+          0.19475,
+          0.123,
+          1.0
+        ],
+        "glass": [
+          0.48,
+          0.64,
+          0.63,
+          1.0
+        ],
+        "timber_light": [
+          0.27675,
+          0.19475,
+          0.123,
+          1.0
+        ],
+        "iron": [
+          0.24,
+          0.25,
+          0.23,
+          1.0
+        ],
+        "roof": [
+          0.2665,
+          0.29725,
+          0.29725,
+          1.0
+        ],
+        "roof_dark": [
+          0.1845,
+          0.205,
+          0.205,
+          1.0
+        ],
+        "roof_worn": [
+          0.26,
+          0.29,
+          0.29,
+          1.0
+        ],
+        "roof_patch": [
+          0.26,
+          0.29,
+          0.29,
+          1.0
+        ]
+      },
+      "vertices": 11926,
+      "triangles": 17932,
+      "bounds_m": [
+        9.990000367164612,
+        8.087781727313995,
+        6.692999839782715
+      ],
+      "geometry_hash": "5b05616b0926e32e46bff7025a6bfda90cee1175ed15e3c3e1aa3dc3a962ee7a",
+      "blender_build_seconds": 1.4989,
+      "pure_generation_validation_seconds": 0.371
+    },
+    {
+      "label": "Wear \u00b7 Maintained",
+      "settings": {
+        "seed": 41,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 1.0,
+        "age": 160,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 41,
+        "function": "COTTAGE",
+        "footprint": "RECT",
+        "width": 8.0,
+        "depth": 6.0,
+        "wing_width": 3.0,
+        "wing_depth": 3.5,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 43,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 1.0,
+        "age": 160,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        0.0,
+        73.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 23,
+        "vertices": 10450,
+        "triangles": 15980,
+        "materials": 12,
+        "footprint_area": 48.0,
+        "roof_projected_area": 61.41,
+        "geometry_hash": "64b2f0a229136a35ec0ede641f73996fb3904904a70d2a1d5318408262594862",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 23
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1112,
+            "triangles": 1668,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 384,
+            "triangles": 572,
+            "buffers": 1
+          },
+          "structure": {
+            "vertices": 1560,
+            "triangles": 2624,
+            "buffers": 2
+          },
+          "windows": {
+            "vertices": 280,
+            "triangles": 420,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 64,
+            "triangles": 96,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 432,
+            "triangles": 648,
+            "buffers": 4
+          },
+          "roof": {
+            "vertices": 6618,
+            "triangles": 9952,
+            "buffers": 8
+          }
+        },
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "building_type": "COTTAGE",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "SHINGLE",
+        "construction": "TIMBER_INFILL"
+      },
+      "mesh_objects": 23,
+      "style": {
+        "wall_material": "plaster",
+        "construction": "TIMBER_INFILL",
+        "roof_cover": "SHINGLE",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 2
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 2
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "stone_light": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "mortar": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "plaster": [
+          0.7,
+          0.63,
+          0.49,
+          1.0
+        ],
+        "timber": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "timber_light": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "glass": [
+          0.48,
+          0.64,
+          0.63,
+          1.0
+        ],
+        "iron": [
+          0.24,
+          0.25,
+          0.23,
+          1.0
+        ],
+        "roof": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ],
+        "roof_dark": [
+          0.19,
+          0.17,
+          0.15,
+          1.0
+        ],
+        "roof_worn": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ],
+        "roof_patch": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ]
+      },
+      "vertices": 10450,
+      "triangles": 15980,
+      "bounds_m": [
+        9.03000032901764,
+        7.365019619464874,
+        6.130545139312744
+      ],
+      "geometry_hash": "64b2f0a229136a35ec0ede641f73996fb3904904a70d2a1d5318408262594862",
+      "blender_build_seconds": 1.2251,
+      "pure_generation_validation_seconds": 0.3319
+    },
+    {
+      "label": "Wear \u00b7 Neglected",
+      "settings": {
+        "seed": 41,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.0,
+        "age": 160,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 41,
+        "function": "COTTAGE",
+        "footprint": "RECT",
+        "width": 8.0,
+        "depth": 6.0,
+        "wing_width": 3.0,
+        "wing_depth": 3.5,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 43,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.0,
+        "age": 160,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        15.0,
+        73.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 23,
+        "vertices": 10450,
+        "triangles": 15980,
+        "materials": 12,
+        "footprint_area": 48.0,
+        "roof_projected_area": 61.41,
+        "geometry_hash": "64b2f0a229136a35ec0ede641f73996fb3904904a70d2a1d5318408262594862",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 23
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1112,
+            "triangles": 1668,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 384,
+            "triangles": 572,
+            "buffers": 1
+          },
+          "structure": {
+            "vertices": 1560,
+            "triangles": 2624,
+            "buffers": 2
+          },
+          "windows": {
+            "vertices": 280,
+            "triangles": 420,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 64,
+            "triangles": 96,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 432,
+            "triangles": 648,
+            "buffers": 4
+          },
+          "roof": {
+            "vertices": 6618,
+            "triangles": 9952,
+            "buffers": 8
+          }
+        },
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "building_type": "COTTAGE",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "SHINGLE",
+        "construction": "TIMBER_INFILL"
+      },
+      "mesh_objects": 23,
+      "style": {
+        "wall_material": "plaster",
+        "construction": "TIMBER_INFILL",
+        "roof_cover": "SHINGLE",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 2
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 2
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "stone_light": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "mortar": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "plaster": [
+          0.7,
+          0.63,
+          0.49,
+          1.0
+        ],
+        "timber": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "timber_light": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "glass": [
+          0.48,
+          0.64,
+          0.63,
+          1.0
+        ],
+        "iron": [
+          0.24,
+          0.25,
+          0.23,
+          1.0
+        ],
+        "roof": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ],
+        "roof_dark": [
+          0.19,
+          0.17,
+          0.15,
+          1.0
+        ],
+        "roof_worn": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ],
+        "roof_patch": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ]
+      },
+      "vertices": 10450,
+      "triangles": 15980,
+      "bounds_m": [
+        9.03000032901764,
+        7.365019619464874,
+        6.130545139312744
+      ],
+      "geometry_hash": "64b2f0a229136a35ec0ede641f73996fb3904904a70d2a1d5318408262594862",
+      "blender_build_seconds": 1.2166,
+      "pure_generation_validation_seconds": 0.3286
+    },
+    {
+      "label": "Type \u00b7 FARMHOUSE",
+      "settings": {
+        "seed": 100,
+        "function": "FARMHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 100,
+        "function": "FARMHOUSE",
+        "footprint": "L",
+        "width": 10.5,
+        "depth": 7.0,
+        "wing_width": 4.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 43,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        0.0,
+        105.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 26,
+        "vertices": 11776,
+        "triangles": 17836,
+        "materials": 12,
+        "footprint_area": 89.5,
+        "roof_projected_area": 109.66,
+        "geometry_hash": "08829c066c2c11b2b0e6a03eb62deabba4e962d8b5305cd5605d82987c78d644",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 26
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1512,
+            "triangles": 2268,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 1212,
+            "triangles": 1812,
+            "buffers": 1
+          },
+          "structure": {
+            "vertices": 2112,
+            "triangles": 3336,
+            "buffers": 2
+          },
+          "windows": {
+            "vertices": 840,
+            "triangles": 1260,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 64,
+            "triangles": 96,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 944,
+            "triangles": 1416,
+            "buffers": 6
+          },
+          "roof": {
+            "vertices": 5092,
+            "triangles": 7648,
+            "buffers": 9
+          }
+        },
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "building_type": "FARMHOUSE",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "SHINGLE",
+        "construction": "TIMBER_INFILL"
+      },
+      "mesh_objects": 26,
+      "style": {
+        "wall_material": "plaster",
+        "construction": "TIMBER_INFILL",
+        "roof_cover": "SHINGLE",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 3,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 4
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 3,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 4
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "stone_light": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "mortar": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "plaster": [
+          0.7,
+          0.63,
+          0.49,
+          1.0
+        ],
+        "timber": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "timber_light": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "glass": [
+          0.48,
+          0.64,
+          0.63,
+          1.0
+        ],
+        "iron": [
+          0.24,
+          0.25,
+          0.23,
+          1.0
+        ],
+        "roof": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ],
+        "roof_dark": [
+          0.19,
+          0.17,
+          0.15,
+          1.0
+        ],
+        "roof_worn": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ],
+        "roof_patch": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ]
+      },
+      "vertices": 11776,
+      "triangles": 17836,
+      "bounds_m": [
+        11.556924223899841,
+        12.040019512176514,
+        9.39680290222168
+      ],
+      "geometry_hash": "08829c066c2c11b2b0e6a03eb62deabba4e962d8b5305cd5605d82987c78d644",
+      "blender_build_seconds": 1.4796,
+      "pure_generation_validation_seconds": 0.3527
+    },
+    {
+      "label": "Type \u00b7 BARN",
+      "settings": {
+        "seed": 101,
+        "function": "BARN",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 101,
+        "function": "BARN",
+        "footprint": "T",
+        "width": 15.0,
+        "depth": 9.0,
+        "wing_width": 5.0,
+        "wing_depth": 6.0,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 43,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        24.0,
+        105.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 19,
+        "vertices": 12378,
+        "triangles": 18796,
+        "materials": 11,
+        "footprint_area": 165.0,
+        "roof_projected_area": 192.81,
+        "geometry_hash": "e3d0e4686e7b60279f0459cce8a3024f60cace4654f3aed2c6b5b7092e25e9d6",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 19
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1512,
+            "triangles": 2268,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 724,
+            "triangles": 1080,
+            "buffers": 1
+          },
+          "structure": {
+            "vertices": 2552,
+            "triangles": 4052,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 128,
+            "triangles": 192,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 88,
+            "triangles": 132,
+            "buffers": 1
+          },
+          "roof": {
+            "vertices": 7374,
+            "triangles": 11072,
+            "buffers": 9
+          }
+        },
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "building_type": "BARN",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "SHINGLE",
+        "construction": "TIMBER_INFILL"
+      },
+      "mesh_objects": 19,
+      "style": {
+        "wall_material": "plaster",
+        "construction": "TIMBER_INFILL",
+        "roof_cover": "SHINGLE",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "iron": 2,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 1,
+        "stone_light": 3,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "actual_blender_material_counts": {
+        "iron": 2,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 1,
+        "stone_light": 3,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "stone_light": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "mortar": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "plaster": [
+          0.7,
+          0.63,
+          0.49,
+          1.0
+        ],
+        "timber": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "timber_light": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "iron": [
+          0.24,
+          0.25,
+          0.23,
+          1.0
+        ],
+        "roof": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ],
+        "roof_dark": [
+          0.19,
+          0.17,
+          0.15,
+          1.0
+        ],
+        "roof_worn": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ],
+        "roof_patch": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ]
+      },
+      "vertices": 12378,
+      "triangles": 18796,
+      "bounds_m": [
+        16.03000032901764,
+        16.040019512176514,
+        7.529317855834961
+      ],
+      "geometry_hash": "e3d0e4686e7b60279f0459cce8a3024f60cace4654f3aed2c6b5b7092e25e9d6",
+      "blender_build_seconds": 1.4929,
+      "pure_generation_validation_seconds": 0.4688
+    },
+    {
+      "label": "Type \u00b7 GRAIN_STORE",
+      "settings": {
+        "seed": 102,
+        "function": "GRAIN_STORE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 102,
+        "function": "GRAIN_STORE",
+        "footprint": "RECT",
+        "width": 9.0,
+        "depth": 7.0,
+        "wing_width": 3.2,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 43,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        48.0,
+        105.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 17,
+        "vertices": 8616,
+        "triangles": 13036,
+        "materials": 10,
+        "footprint_area": 63.0,
+        "roof_projected_area": 78.21,
+        "geometry_hash": "f4ebb5f2c6790f257d4fefa20a4af0c2c255a5abee686ae173262369d19f2af3",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 17
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 824,
+            "triangles": 1236,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 520,
+            "triangles": 780,
+            "buffers": 1
+          },
+          "structure": {
+            "vertices": 1440,
+            "triangles": 2284,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 80,
+            "triangles": 120,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 88,
+            "triangles": 132,
+            "buffers": 1
+          },
+          "roof": {
+            "vertices": 5664,
+            "triangles": 8484,
+            "buffers": 7
+          }
+        },
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "building_type": "GRAIN_STORE",
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID",
+        "roof_cover": "SHINGLE",
+        "construction": "TIMBER_INFILL"
+      },
+      "mesh_objects": 17,
+      "style": {
+        "wall_material": "plaster",
+        "construction": "TIMBER_INFILL",
+        "roof_cover": "SHINGLE",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "iron": 1,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_worn": 1,
+        "stone": 1,
+        "stone_light": 3,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "actual_blender_material_counts": {
+        "iron": 1,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_worn": 1,
+        "stone": 1,
+        "stone_light": 3,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "stone_light": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "mortar": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "plaster": [
+          0.7,
+          0.63,
+          0.49,
+          1.0
+        ],
+        "timber": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "timber_light": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "iron": [
+          0.24,
+          0.25,
+          0.23,
+          1.0
+        ],
+        "roof": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ],
+        "roof_dark": [
+          0.19,
+          0.17,
+          0.15,
+          1.0
+        ],
+        "roof_worn": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ]
+      },
+      "vertices": 8616,
+      "triangles": 13036,
+      "bounds_m": [
+        10.105060756206512,
+        8.392530262470245,
+        9.39680290222168
+      ],
+      "geometry_hash": "f4ebb5f2c6790f257d4fefa20a4af0c2c255a5abee686ae173262369d19f2af3",
+      "blender_build_seconds": 1.0397,
+      "pure_generation_validation_seconds": 0.2171
+    },
+    {
+      "label": "Type \u00b7 MILLER",
+      "settings": {
+        "seed": 103,
+        "function": "MILLER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 103,
+        "function": "MILLER",
+        "footprint": "L",
+        "width": 11.88,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 42,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        72.0,
+        105.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 25,
+        "vertices": 16692,
+        "triangles": 25048,
+        "materials": 11,
+        "footprint_area": 102.06,
+        "roof_projected_area": 123.912,
+        "geometry_hash": "34be78e1cc40f498d676d38d1317fe2fa721d804a8a079b581437e57a2687ab5",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 25
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1560,
+            "triangles": 2340,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 6952,
+            "triangles": 10432,
+            "buffers": 2
+          },
+          "structure": {
+            "vertices": 816,
+            "triangles": 1224,
+            "buffers": 1
+          },
+          "windows": {
+            "vertices": 1288,
+            "triangles": 1932,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 64,
+            "triangles": 96,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 1328,
+            "triangles": 1992,
+            "buffers": 5
+          },
+          "roof": {
+            "vertices": 4684,
+            "triangles": 7032,
+            "buffers": 9
+          }
+        },
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "MILLER",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "CLAY",
+        "construction": "ASHLAR"
+      },
+      "mesh_objects": 25,
+      "style": {
+        "wall_material": "stone",
+        "construction": "ASHLAR",
+        "roof_cover": "CLAY",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 3,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 4,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 2
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 3,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 4,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 2
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "stone_light": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "mortar": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "timber": [
+          0.25,
+          0.16,
+          0.12,
+          1.0
+        ],
+        "glass": [
+          0.45,
+          0.5,
+          0.5,
+          1.0
+        ],
+        "timber_light": [
+          0.25,
+          0.16,
+          0.12,
+          1.0
+        ],
+        "iron": [
+          0.27,
+          0.25,
+          0.24,
+          1.0
+        ],
+        "roof": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "roof_dark": [
+          0.2,
+          0.15,
+          0.13,
+          1.0
+        ],
+        "roof_worn": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "roof_patch": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ]
+      },
+      "vertices": 16692,
+      "triangles": 25048,
+      "bounds_m": [
+        12.936923623085022,
+        12.538604259490967,
+        9.314414024353027
+      ],
+      "geometry_hash": "34be78e1cc40f498d676d38d1317fe2fa721d804a8a079b581437e57a2687ab5",
+      "blender_build_seconds": 1.7889,
+      "pure_generation_validation_seconds": 0.473
+    },
+    {
+      "label": "Type \u00b7 INN",
+      "settings": {
+        "seed": 104,
+        "function": "INN",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 104,
+        "function": "INN",
+        "footprint": "L",
+        "width": 14.040000000000001,
+        "depth": 9.0,
+        "wing_width": 4.5,
+        "wing_depth": 5.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 42,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        96.0,
+        105.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 28,
+        "vertices": 20644,
+        "triangles": 30976,
+        "materials": 11,
+        "footprint_area": 148.86,
+        "roof_projected_area": 174.906,
+        "geometry_hash": "4dbeeb090c02d8c97e113c81c47926defbc0d07006f086a8d7724331d8784025",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 28
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1824,
+            "triangles": 2736,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 8594,
+            "triangles": 12896,
+            "buffers": 2
+          },
+          "structure": {
+            "vertices": 1096,
+            "triangles": 1644,
+            "buffers": 2
+          },
+          "windows": {
+            "vertices": 1736,
+            "triangles": 2604,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 72,
+            "triangles": 108,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 1720,
+            "triangles": 2580,
+            "buffers": 7
+          },
+          "roof": {
+            "vertices": 5602,
+            "triangles": 8408,
+            "buffers": 9
+          }
+        },
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "INN",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "CLAY",
+        "construction": "ASHLAR"
+      },
+      "mesh_objects": 28,
+      "style": {
+        "wall_material": "stone",
+        "construction": "ASHLAR",
+        "roof_cover": "CLAY",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 3,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 6,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 3
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 3,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 6,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 3
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "stone_light": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "mortar": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "timber": [
+          0.25,
+          0.16,
+          0.12,
+          1.0
+        ],
+        "timber_light": [
+          0.25,
+          0.16,
+          0.12,
+          1.0
+        ],
+        "glass": [
+          0.45,
+          0.5,
+          0.5,
+          1.0
+        ],
+        "iron": [
+          0.27,
+          0.25,
+          0.24,
+          1.0
+        ],
+        "roof": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "roof_dark": [
+          0.2,
+          0.15,
+          0.13,
+          1.0
+        ],
+        "roof_worn": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "roof_patch": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ]
+      },
+      "vertices": 20644,
+      "triangles": 30976,
+      "bounds_m": [
+        15.096923470497131,
+        15.038604259490967,
+        10.214818000793457
+      ],
+      "geometry_hash": "4dbeeb090c02d8c97e113c81c47926defbc0d07006f086a8d7724331d8784025",
+      "blender_build_seconds": 2.5291,
+      "pure_generation_validation_seconds": 0.7293
+    },
+    {
+      "label": "Type \u00b7 COTTAGE",
+      "settings": {
+        "seed": 105,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 105,
+        "function": "COTTAGE",
+        "footprint": "RECT",
+        "width": 8.0,
+        "depth": 6.0,
+        "wing_width": 3.0,
+        "wing_depth": 3.5,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 43,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        0.0,
+        129.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 22,
+        "vertices": 5852,
+        "triangles": 8892,
+        "materials": 11,
+        "footprint_area": 48.0,
+        "roof_projected_area": 61.41,
+        "geometry_hash": "51d819893d95e1b3aa8e791e329888906e8860b6cdbf820f28b2370db8364eb1",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 22
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1120,
+            "triangles": 1680,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 384,
+            "triangles": 572,
+            "buffers": 1
+          },
+          "structure": {
+            "vertices": 1224,
+            "triangles": 1952,
+            "buffers": 2
+          },
+          "windows": {
+            "vertices": 280,
+            "triangles": 420,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 64,
+            "triangles": 96,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 432,
+            "triangles": 648,
+            "buffers": 4
+          },
+          "roof": {
+            "vertices": 2348,
+            "triangles": 3524,
+            "buffers": 7
+          }
+        },
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "building_type": "COTTAGE",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "SHINGLE",
+        "construction": "TIMBER_INFILL"
+      },
+      "mesh_objects": 22,
+      "style": {
+        "wall_material": "plaster",
+        "construction": "TIMBER_INFILL",
+        "roof_cover": "SHINGLE",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 2
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 2
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "stone_light": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "mortar": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "plaster": [
+          0.7,
+          0.63,
+          0.49,
+          1.0
+        ],
+        "timber": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "timber_light": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "glass": [
+          0.48,
+          0.64,
+          0.63,
+          1.0
+        ],
+        "iron": [
+          0.24,
+          0.25,
+          0.23,
+          1.0
+        ],
+        "roof": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ],
+        "roof_dark": [
+          0.19,
+          0.17,
+          0.15,
+          1.0
+        ],
+        "roof_worn": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ]
+      },
+      "vertices": 5852,
+      "triangles": 8892,
+      "bounds_m": [
+        9.03000032901764,
+        7.365019619464874,
+        6.130545139312744
+      ],
+      "geometry_hash": "51d819893d95e1b3aa8e791e329888906e8860b6cdbf820f28b2370db8364eb1",
+      "blender_build_seconds": 0.826,
+      "pure_generation_validation_seconds": 0.1959
+    },
+    {
+      "label": "Type \u00b7 TOWNHOUSE",
+      "settings": {
+        "seed": 106,
+        "function": "TOWNHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 106,
+        "function": "TOWNHOUSE",
+        "footprint": "RECT",
+        "width": 7.5,
+        "depth": 8.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 3,
+        "floor_height": 2.8,
+        "pitch": 43,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        24.0,
+        129.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 20,
+        "vertices": 9714,
+        "triangles": 14736,
+        "materials": 12,
+        "footprint_area": 60.0,
+        "roof_projected_area": 74.76,
+        "geometry_hash": "64800a9b588e8b230a20bbeac7372e37191ef6163b1f2ea1d2f717c9dd4139e1",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 20
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 816,
+            "triangles": 1224,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 1616,
+            "triangles": 2420,
+            "buffers": 1
+          },
+          "structure": {
+            "vertices": 2128,
+            "triangles": 3360,
+            "buffers": 2
+          },
+          "windows": {
+            "vertices": 1232,
+            "triangles": 1848,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 64,
+            "triangles": 96,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 1144,
+            "triangles": 1716,
+            "buffers": 1
+          },
+          "roof": {
+            "vertices": 2714,
+            "triangles": 4072,
+            "buffers": 8
+          }
+        },
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "building_type": "TOWNHOUSE",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "SHINGLE",
+        "construction": "TIMBER_INFILL"
+      },
+      "mesh_objects": 20,
+      "style": {
+        "wall_material": "plaster",
+        "construction": "TIMBER_INFILL",
+        "roof_cover": "SHINGLE",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 1,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 1,
+        "stone_light": 3,
+        "timber": 5,
+        "timber_light": 2
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 1,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 1,
+        "stone_light": 3,
+        "timber": 5,
+        "timber_light": 2
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "stone_light": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "mortar": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "plaster": [
+          0.7,
+          0.63,
+          0.49,
+          1.0
+        ],
+        "timber": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "timber_light": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "glass": [
+          0.48,
+          0.64,
+          0.63,
+          1.0
+        ],
+        "iron": [
+          0.24,
+          0.25,
+          0.23,
+          1.0
+        ],
+        "roof": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ],
+        "roof_dark": [
+          0.19,
+          0.17,
+          0.15,
+          1.0
+        ],
+        "roof_worn": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ],
+        "roof_patch": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ]
+      },
+      "vertices": 9714,
+      "triangles": 14736,
+      "bounds_m": [
+        8.53000032901764,
+        9.365019619464874,
+        12.663060188293457
+      ],
+      "geometry_hash": "64800a9b588e8b230a20bbeac7372e37191ef6163b1f2ea1d2f717c9dd4139e1",
+      "blender_build_seconds": 1.2549,
+      "pure_generation_validation_seconds": 0.285
+    },
+    {
+      "label": "Type \u00b7 MERCHANT_HOUSE",
+      "settings": {
+        "seed": 107,
+        "function": "MERCHANT_HOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 107,
+        "function": "MERCHANT_HOUSE",
+        "footprint": "L",
+        "width": 11.88,
+        "depth": 8.0,
+        "wing_width": 4.0,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 42,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        48.0,
+        129.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 21,
+        "vertices": 17702,
+        "triangles": 26564,
+        "materials": 11,
+        "footprint_area": 113.04,
+        "roof_projected_area": 135.792,
+        "geometry_hash": "eeb950d1eca3c59107a2d2e43e7602726bdfcb8e62c44fd7571c17e3946ba8bf",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 21
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1224,
+            "triangles": 1836,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 7514,
+            "triangles": 11276,
+            "buffers": 2
+          },
+          "structure": {
+            "vertices": 944,
+            "triangles": 1416,
+            "buffers": 1
+          },
+          "windows": {
+            "vertices": 1512,
+            "triangles": 2268,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 64,
+            "triangles": 96,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 1384,
+            "triangles": 2076,
+            "buffers": 1
+          },
+          "roof": {
+            "vertices": 5060,
+            "triangles": 7596,
+            "buffers": 9
+          }
+        },
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "MERCHANT_HOUSE",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "CLAY",
+        "construction": "ASHLAR"
+      },
+      "mesh_objects": 21,
+      "style": {
+        "wall_material": "stone",
+        "construction": "ASHLAR",
+        "roof_cover": "CLAY",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 3,
+        "stone_light": 3,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 3,
+        "stone_light": 3,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "stone_light": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "mortar": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "timber": [
+          0.25,
+          0.16,
+          0.12,
+          1.0
+        ],
+        "glass": [
+          0.45,
+          0.5,
+          0.5,
+          1.0
+        ],
+        "timber_light": [
+          0.25,
+          0.16,
+          0.12,
+          1.0
+        ],
+        "iron": [
+          0.27,
+          0.25,
+          0.24,
+          1.0
+        ],
+        "roof": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "roof_dark": [
+          0.2,
+          0.15,
+          0.13,
+          1.0
+        ],
+        "roof_worn": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "roof_patch": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ]
+      },
+      "vertices": 17702,
+      "triangles": 26564,
+      "bounds_m": [
+        12.93692433834076,
+        13.538604259490967,
+        9.764616012573242
+      ],
+      "geometry_hash": "eeb950d1eca3c59107a2d2e43e7602726bdfcb8e62c44fd7571c17e3946ba8bf",
+      "blender_build_seconds": 2.5139,
+      "pure_generation_validation_seconds": 0.568
+    },
+    {
+      "label": "Type \u00b7 LONGHOUSE",
+      "settings": {
+        "seed": 108,
+        "function": "LONGHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 108,
+        "function": "LONGHOUSE",
+        "footprint": "RECT",
+        "width": 16.0,
+        "depth": 7.0,
+        "wing_width": 5.0,
+        "wing_depth": 6.0,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 43,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        72.0,
+        129.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 22,
+        "vertices": 9542,
+        "triangles": 14464,
+        "materials": 11,
+        "footprint_area": 112.0,
+        "roof_projected_area": 133.51,
+        "geometry_hash": "87ec6673122da52c2bbb639420e4a90cef76bf4bcfdb2362de88bae3a77399e0",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 22
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1496,
+            "triangles": 2244,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 520,
+            "triangles": 776,
+            "buffers": 1
+          },
+          "structure": {
+            "vertices": 1648,
+            "triangles": 2624,
+            "buffers": 2
+          },
+          "windows": {
+            "vertices": 448,
+            "triangles": 672,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 64,
+            "triangles": 96,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 576,
+            "triangles": 864,
+            "buffers": 4
+          },
+          "roof": {
+            "vertices": 4790,
+            "triangles": 7188,
+            "buffers": 7
+          }
+        },
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "building_type": "LONGHOUSE",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "SHINGLE",
+        "construction": "TIMBER_INFILL"
+      },
+      "mesh_objects": 22,
+      "style": {
+        "wall_material": "plaster",
+        "construction": "TIMBER_INFILL",
+        "roof_cover": "SHINGLE",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 2
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 2
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "stone_light": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "mortar": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "plaster": [
+          0.7,
+          0.63,
+          0.49,
+          1.0
+        ],
+        "timber": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "timber_light": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "glass": [
+          0.48,
+          0.64,
+          0.63,
+          1.0
+        ],
+        "iron": [
+          0.24,
+          0.25,
+          0.23,
+          1.0
+        ],
+        "roof": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ],
+        "roof_dark": [
+          0.19,
+          0.17,
+          0.15,
+          1.0
+        ],
+        "roof_worn": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ]
+      },
+      "vertices": 9542,
+      "triangles": 14464,
+      "bounds_m": [
+        17.029999375343323,
+        8.365019619464874,
+        6.596802711486816
+      ],
+      "geometry_hash": "87ec6673122da52c2bbb639420e4a90cef76bf4bcfdb2362de88bae3a77399e0",
+      "blender_build_seconds": 1.149,
+      "pure_generation_validation_seconds": 0.3444
+    },
+    {
+      "label": "Type \u00b7 SHOP",
+      "settings": {
+        "seed": 109,
+        "function": "SHOP",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 109,
+        "function": "SHOP",
+        "footprint": "RECT",
+        "width": 8.64,
+        "depth": 7.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 42,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        96.0,
+        129.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 19,
+        "vertices": 9216,
+        "triangles": 13828,
+        "materials": 10,
+        "footprint_area": 60.48,
+        "roof_projected_area": 75.366,
+        "geometry_hash": "b8114bf2af8f125b4443133eaffd2ecaaebf0bc9a9eee8865a7eadcf0df9d4d6",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 19
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 800,
+            "triangles": 1200,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 3932,
+            "triangles": 5900,
+            "buffers": 2
+          },
+          "structure": {
+            "vertices": 512,
+            "triangles": 768,
+            "buffers": 1
+          },
+          "windows": {
+            "vertices": 784,
+            "triangles": 1176,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 80,
+            "triangles": 120,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 760,
+            "triangles": 1140,
+            "buffers": 1
+          },
+          "roof": {
+            "vertices": 2348,
+            "triangles": 3524,
+            "buffers": 7
+          }
+        },
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "SHOP",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "CLAY",
+        "construction": "ASHLAR"
+      },
+      "mesh_objects": 19,
+      "style": {
+        "wall_material": "stone",
+        "construction": "ASHLAR",
+        "roof_cover": "CLAY",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 1,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_worn": 1,
+        "stone": 3,
+        "stone_light": 3,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 1,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_worn": 1,
+        "stone": 3,
+        "stone_light": 3,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "stone_light": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "mortar": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "timber": [
+          0.25,
+          0.16,
+          0.12,
+          1.0
+        ],
+        "glass": [
+          0.45,
+          0.5,
+          0.5,
+          1.0
+        ],
+        "timber_light": [
+          0.25,
+          0.16,
+          0.12,
+          1.0
+        ],
+        "iron": [
+          0.27,
+          0.25,
+          0.24,
+          1.0
+        ],
+        "roof": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "roof_dark": [
+          0.2,
+          0.15,
+          0.13,
+          1.0
+        ],
+        "roof_worn": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ]
+      },
+      "vertices": 9216,
+      "triangles": 13828,
+      "bounds_m": [
+        9.669999718666077,
+        8.363604366779327,
+        9.314414024353027
+      ],
+      "geometry_hash": "b8114bf2af8f125b4443133eaffd2ecaaebf0bc9a9eee8865a7eadcf0df9d4d6",
+      "blender_build_seconds": 1.3634,
+      "pure_generation_validation_seconds": 0.339
+    },
+    {
+      "label": "Type \u00b7 WAREHOUSE",
+      "settings": {
+        "seed": 110,
+        "function": "WAREHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 110,
+        "function": "WAREHOUSE",
+        "footprint": "T",
+        "width": 18.36,
+        "depth": 10.0,
+        "wing_width": 5.0,
+        "wing_depth": 6.0,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 42,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        0.0,
+        153.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 19,
+        "vertices": 15318,
+        "triangles": 22992,
+        "materials": 9,
+        "footprint_area": 213.6,
+        "roof_projected_area": 245.334,
+        "geometry_hash": "22fc46501e895653ce566a5c7693e1040674dbc6a4ff9836e4f6a90f50df7be5",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 19
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1728,
+            "triangles": 2592,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 4576,
+            "triangles": 6868,
+            "buffers": 2
+          },
+          "structure": {
+            "vertices": 824,
+            "triangles": 1236,
+            "buffers": 1
+          },
+          "doors": {
+            "vertices": 240,
+            "triangles": 360,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 192,
+            "triangles": 288,
+            "buffers": 1
+          },
+          "roof": {
+            "vertices": 7758,
+            "triangles": 11648,
+            "buffers": 9
+          }
+        },
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "WAREHOUSE",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "CLAY",
+        "construction": "ASHLAR"
+      },
+      "mesh_objects": 19,
+      "style": {
+        "wall_material": "stone",
+        "construction": "ASHLAR",
+        "roof_cover": "CLAY",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 3,
+        "stone_light": 3,
+        "timber": 5
+      },
+      "actual_blender_material_counts": {
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 3,
+        "stone_light": 3,
+        "timber": 5
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "stone_light": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "mortar": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "timber": [
+          0.25,
+          0.16,
+          0.12,
+          1.0
+        ],
+        "iron": [
+          0.27,
+          0.25,
+          0.24,
+          1.0
+        ],
+        "roof": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "roof_dark": [
+          0.2,
+          0.15,
+          0.13,
+          1.0
+        ],
+        "roof_worn": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "roof_patch": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ]
+      },
+      "vertices": 15318,
+      "triangles": 22992,
+      "bounds_m": [
+        19.389999985694885,
+        17.355000019073486,
+        7.865020275115967
+      ],
+      "geometry_hash": "22fc46501e895653ce566a5c7693e1040674dbc6a4ff9836e4f6a90f50df7be5",
+      "blender_build_seconds": 2.0685,
+      "pure_generation_validation_seconds": 0.4879
+    },
+    {
+      "label": "Type \u00b7 MARKET_HALL",
+      "settings": {
+        "seed": 111,
+        "function": "MARKET_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 111,
+        "function": "MARKET_HALL",
+        "footprint": "U",
+        "width": 19.44,
+        "depth": 12.0,
+        "wing_width": 5.0,
+        "wing_depth": 7.0,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 42,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        24.0,
+        153.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 21,
+        "vertices": 29130,
+        "triangles": 43724,
+        "materials": 9,
+        "footprint_area": 303.28,
+        "roof_projected_area": 344.986,
+        "geometry_hash": "55b5e6a4440b037a7a72b4d6c9eaa859ecfb1af6d5ba43926e3866c62e56f22d",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 21
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 2176,
+            "triangles": 3264,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 4800,
+            "triangles": 7200,
+            "buffers": 2
+          },
+          "structure": {
+            "vertices": 992,
+            "triangles": 1488,
+            "buffers": 1
+          },
+          "doors": {
+            "vertices": 64,
+            "triangles": 96,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 120,
+            "triangles": 180,
+            "buffers": 3
+          },
+          "roof": {
+            "vertices": 20978,
+            "triangles": 31496,
+            "buffers": 9
+          }
+        },
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "MARKET_HALL",
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID",
+        "roof_cover": "CLAY",
+        "construction": "ASHLAR"
+      },
+      "mesh_objects": 21,
+      "style": {
+        "wall_material": "stone",
+        "construction": "ASHLAR",
+        "roof_cover": "CLAY",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 5,
+        "stone_light": 3,
+        "timber": 5
+      },
+      "actual_blender_material_counts": {
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 5,
+        "stone_light": 3,
+        "timber": 5
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "stone_light": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "mortar": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "timber": [
+          0.25,
+          0.16,
+          0.12,
+          1.0
+        ],
+        "iron": [
+          0.27,
+          0.25,
+          0.24,
+          1.0
+        ],
+        "roof": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "roof_dark": [
+          0.2,
+          0.15,
+          0.13,
+          1.0
+        ],
+        "roof_worn": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "roof_patch": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ]
+      },
+      "vertices": 29130,
+      "triangles": 43724,
+      "bounds_m": [
+        20.54506129026413,
+        20.150269031524658,
+        8.765424728393555
+      ],
+      "geometry_hash": "55b5e6a4440b037a7a72b4d6c9eaa859ecfb1af6d5ba43926e3866c62e56f22d",
+      "blender_build_seconds": 3.6946,
+      "pure_generation_validation_seconds": 1.1571
+    },
+    {
+      "label": "Type \u00b7 STABLE",
+      "settings": {
+        "seed": 112,
+        "function": "STABLE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 112,
+        "function": "STABLE",
+        "footprint": "L",
+        "width": 13.0,
+        "depth": 8.0,
+        "wing_width": 4.5,
+        "wing_depth": 5.0,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 43,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        48.0,
+        153.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 19,
+        "vertices": 10958,
+        "triangles": 16624,
+        "materials": 11,
+        "footprint_area": 126.5,
+        "roof_projected_area": 150.71,
+        "geometry_hash": "179bc35dabd84bf9b76682b099b4cc26470548564f1310cbe8e2ae85c442a157",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 19
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1320,
+            "triangles": 1980,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 710,
+            "triangles": 1060,
+            "buffers": 1
+          },
+          "structure": {
+            "vertices": 2224,
+            "triangles": 3520,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 128,
+            "triangles": 192,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 176,
+            "triangles": 264,
+            "buffers": 1
+          },
+          "roof": {
+            "vertices": 6400,
+            "triangles": 9608,
+            "buffers": 9
+          }
+        },
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "building_type": "STABLE",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "SHINGLE",
+        "construction": "TIMBER_INFILL"
+      },
+      "mesh_objects": 19,
+      "style": {
+        "wall_material": "plaster",
+        "construction": "TIMBER_INFILL",
+        "roof_cover": "SHINGLE",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "iron": 2,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 1,
+        "stone_light": 3,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "actual_blender_material_counts": {
+        "iron": 2,
+        "mortar": 1,
+        "plaster": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 1,
+        "stone_light": 3,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "stone_light": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "mortar": [
+          0.39,
+          0.38,
+          0.33,
+          1.0
+        ],
+        "plaster": [
+          0.7,
+          0.63,
+          0.49,
+          1.0
+        ],
+        "timber": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "timber_light": [
+          0.27,
+          0.19,
+          0.12,
+          1.0
+        ],
+        "iron": [
+          0.24,
+          0.25,
+          0.23,
+          1.0
+        ],
+        "roof": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ],
+        "roof_dark": [
+          0.19,
+          0.17,
+          0.15,
+          1.0
+        ],
+        "roof_worn": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ],
+        "roof_patch": [
+          0.3,
+          0.22,
+          0.16,
+          1.0
+        ]
+      },
+      "vertices": 10958,
+      "triangles": 16624,
+      "bounds_m": [
+        14.056923508644104,
+        14.040019512176514,
+        7.063060283660889
+      ],
+      "geometry_hash": "179bc35dabd84bf9b76682b099b4cc26470548564f1310cbe8e2ae85c442a157",
+      "blender_build_seconds": 1.3283,
+      "pure_generation_validation_seconds": 0.4049
+    },
+    {
+      "label": "Type \u00b7 SMITHY",
+      "settings": {
+        "seed": 113,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 113,
+        "function": "SMITHY",
+        "footprint": "RECT",
+        "width": 10.8,
+        "depth": 8.0,
+        "wing_width": 3.5,
+        "wing_depth": 4.0,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 42,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        72.0,
+        153.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 21,
+        "vertices": 7596,
+        "triangles": 11400,
+        "materials": 9,
+        "footprint_area": 86.4,
+        "roof_projected_area": 104.13,
+        "geometry_hash": "3002f8467225967ff62bb3d4e28b3ca87554a85faf12303ce6f303c6a89cfeb4",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 21
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1360,
+            "triangles": 2040,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 2416,
+            "triangles": 3628,
+            "buffers": 2
+          },
+          "structure": {
+            "vertices": 400,
+            "triangles": 600,
+            "buffers": 1
+          },
+          "doors": {
+            "vertices": 88,
+            "triangles": 132,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 224,
+            "triangles": 336,
+            "buffers": 4
+          },
+          "roof": {
+            "vertices": 3108,
+            "triangles": 4664,
+            "buffers": 8
+          }
+        },
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "SMITHY",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "CLAY",
+        "construction": "ASHLAR"
+      },
+      "mesh_objects": 21,
+      "style": {
+        "wall_material": "stone",
+        "construction": "ASHLAR",
+        "roof_cover": "CLAY",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 4,
+        "stone_light": 4,
+        "timber": 5
+      },
+      "actual_blender_material_counts": {
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 4,
+        "stone_light": 4,
+        "timber": 5
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "stone_light": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "mortar": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "timber": [
+          0.25,
+          0.16,
+          0.12,
+          1.0
+        ],
+        "iron": [
+          0.27,
+          0.25,
+          0.24,
+          1.0
+        ],
+        "roof": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "roof_dark": [
+          0.2,
+          0.15,
+          0.13,
+          1.0
+        ],
+        "roof_worn": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "roof_patch": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ]
+      },
+      "vertices": 7596,
+      "triangles": 11400,
+      "bounds_m": [
+        11.829999566078186,
+        9.363604366779327,
+        6.964616298675537
+      ],
+      "geometry_hash": "3002f8467225967ff62bb3d4e28b3ca87554a85faf12303ce6f303c6a89cfeb4",
+      "blender_build_seconds": 1.0206,
+      "pure_generation_validation_seconds": 0.2094
+    },
+    {
+      "label": "Type \u00b7 WORKSHOP",
+      "settings": {
+        "seed": 114,
+        "function": "WORKSHOP",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 114,
+        "function": "WORKSHOP",
+        "footprint": "L",
+        "width": 10.8,
+        "depth": 7.0,
+        "wing_width": 3.5,
+        "wing_depth": 4.0,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 42,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        96.0,
+        153.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 21,
+        "vertices": 10094,
+        "triangles": 15156,
+        "materials": 11,
+        "footprint_area": 89.6,
+        "roof_projected_area": 110.03,
+        "geometry_hash": "cc7fee581465d0661041654b1496f91c8e612c367a9670688f9d4c7ccbec4dc6",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 21
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1128,
+            "triangles": 1692,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 3418,
+            "triangles": 5132,
+            "buffers": 2
+          },
+          "structure": {
+            "vertices": 304,
+            "triangles": 456,
+            "buffers": 1
+          },
+          "windows": {
+            "vertices": 392,
+            "triangles": 588,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 80,
+            "triangles": 120,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 424,
+            "triangles": 636,
+            "buffers": 1
+          },
+          "roof": {
+            "vertices": 4348,
+            "triangles": 6532,
+            "buffers": 9
+          }
+        },
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "WORKSHOP",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "CLAY",
+        "construction": "ASHLAR"
+      },
+      "mesh_objects": 21,
+      "style": {
+        "wall_material": "stone",
+        "construction": "ASHLAR",
+        "roof_cover": "CLAY",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 3,
+        "stone_light": 3,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 3,
+        "stone_light": 3,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "stone_light": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "mortar": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "timber": [
+          0.25,
+          0.16,
+          0.12,
+          1.0
+        ],
+        "glass": [
+          0.45,
+          0.5,
+          0.5,
+          1.0
+        ],
+        "timber_light": [
+          0.25,
+          0.16,
+          0.12,
+          1.0
+        ],
+        "iron": [
+          0.27,
+          0.25,
+          0.24,
+          1.0
+        ],
+        "roof": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "roof_dark": [
+          0.2,
+          0.15,
+          0.13,
+          1.0
+        ],
+        "roof_worn": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "roof_patch": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ]
+      },
+      "vertices": 10094,
+      "triangles": 15156,
+      "bounds_m": [
+        11.856923699378967,
+        12.038604259490967,
+        6.514414310455322
+      ],
+      "geometry_hash": "cc7fee581465d0661041654b1496f91c8e612c367a9670688f9d4c7ccbec4dc6",
+      "blender_build_seconds": 1.3841,
+      "pure_generation_validation_seconds": 0.3385
+    },
+    {
+      "label": "Type \u00b7 ASSEMBLY_HALL",
+      "settings": {
+        "seed": 115,
+        "function": "ASSEMBLY_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 115,
+        "function": "ASSEMBLY_HALL",
+        "footprint": "T",
+        "width": 17.28,
+        "depth": 11.0,
+        "wing_width": 5.0,
+        "wing_depth": 6.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 42,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        0.0,
+        177.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 23,
+        "vertices": 28232,
+        "triangles": 42368,
+        "materials": 11,
+        "footprint_area": 220.08,
+        "roof_projected_area": 251.742,
+        "geometry_hash": "3bb8a75a637d2cfd2a7e57f32181f1c8244476d5f541ad9f0b76e442e8e98898",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 23
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1696,
+            "triangles": 2544,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 7248,
+            "triangles": 10872,
+            "buffers": 2
+          },
+          "structure": {
+            "vertices": 1088,
+            "triangles": 1632,
+            "buffers": 1
+          },
+          "windows": {
+            "vertices": 1736,
+            "triangles": 2604,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 96,
+            "triangles": 144,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 1608,
+            "triangles": 2412,
+            "buffers": 3
+          },
+          "roof": {
+            "vertices": 14760,
+            "triangles": 22160,
+            "buffers": 9
+          }
+        },
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "ASSEMBLY_HALL",
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID",
+        "roof_cover": "CLAY",
+        "construction": "ASHLAR"
+      },
+      "mesh_objects": 23,
+      "style": {
+        "wall_material": "stone",
+        "construction": "ASHLAR",
+        "roof_cover": "CLAY",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 5,
+        "stone_light": 3,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 5,
+        "stone_light": 3,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "stone_light": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "mortar": [
+          0.34,
+          0.31,
+          0.29,
+          1.0
+        ],
+        "timber": [
+          0.25,
+          0.16,
+          0.12,
+          1.0
+        ],
+        "glass": [
+          0.45,
+          0.5,
+          0.5,
+          1.0
+        ],
+        "timber_light": [
+          0.25,
+          0.16,
+          0.12,
+          1.0
+        ],
+        "iron": [
+          0.27,
+          0.25,
+          0.24,
+          1.0
+        ],
+        "roof": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "roof_dark": [
+          0.2,
+          0.15,
+          0.13,
+          1.0
+        ],
+        "roof_worn": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "roof_patch": [
+          0.31,
+          0.2,
+          0.15,
+          1.0
+        ]
+      },
+      "vertices": 28232,
+      "triangles": 42368,
+      "bounds_m": [
+        18.38506144285202,
+        18.105060577392578,
+        11.115221977233887
+      ],
+      "geometry_hash": "3bb8a75a637d2cfd2a7e57f32181f1c8244476d5f541ad9f0b76e442e8e98898",
+      "blender_build_seconds": 3.9128,
+      "pure_generation_validation_seconds": 1.0661
+    },
+    {
+      "label": "Type \u00b7 WATCHTOWER",
+      "settings": {
+        "seed": 116,
+        "function": "WATCHTOWER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 116,
+        "function": "WATCHTOWER",
+        "footprint": "RECT",
+        "width": 6.37,
+        "depth": 6.58,
+        "wing_width": 2.8,
+        "wing_depth": 3.0,
+        "floors": 3,
+        "floor_height": 2.8,
+        "pitch": 48,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        24.0,
+        177.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 22,
+        "vertices": 11434,
+        "triangles": 17140,
+        "materials": 11,
+        "footprint_area": 41.9146,
+        "roof_projected_area": 54.3796,
+        "geometry_hash": "b4650dd109b1fd67b5309a534a98fcfe12ceb73cd1ad018eadae76f5c9b7f6a4",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 22
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 720,
+            "triangles": 1080,
+            "buffers": 6
+          },
+          "walls": {
+            "vertices": 4376,
+            "triangles": 6564,
+            "buffers": 2
+          },
+          "structure": {
+            "vertices": 416,
+            "triangles": 624,
+            "buffers": 1
+          },
+          "windows": {
+            "vertices": 560,
+            "triangles": 840,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 128,
+            "triangles": 192,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 848,
+            "triangles": 1272,
+            "buffers": 2
+          },
+          "roof": {
+            "vertices": 4386,
+            "triangles": 6568,
+            "buffers": 8
+          }
+        },
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "building_type": "WATCHTOWER",
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID",
+        "roof_cover": "SLATE",
+        "construction": "RUBBLE"
+      },
+      "mesh_objects": 22,
+      "style": {
+        "wall_material": "stone",
+        "construction": "RUBBLE",
+        "roof_cover": "SLATE",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 1,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 3
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 1,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 3
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.43,
+          0.43,
+          0.41,
+          1.0
+        ],
+        "stone_light": [
+          0.43,
+          0.43,
+          0.41,
+          1.0
+        ],
+        "mortar": [
+          0.43,
+          0.43,
+          0.41,
+          1.0
+        ],
+        "timber": [
+          0.25,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "glass": [
+          0.42,
+          0.51,
+          0.52,
+          1.0
+        ],
+        "timber_light": [
+          0.25,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "iron": [
+          0.24,
+          0.27,
+          0.29,
+          1.0
+        ],
+        "roof": [
+          0.24,
+          0.27,
+          0.29,
+          1.0
+        ],
+        "roof_dark": [
+          0.15,
+          0.18,
+          0.2,
+          1.0
+        ],
+        "roof_worn": [
+          0.24,
+          0.27,
+          0.29,
+          1.0
+        ],
+        "roof_patch": [
+          0.24,
+          0.27,
+          0.29,
+          1.0
+        ]
+      },
+      "vertices": 11434,
+      "triangles": 17140,
+      "bounds_m": [
+        7.930000066757202,
+        8.20000010728836,
+        12.52030086517334
+      ],
+      "geometry_hash": "b4650dd109b1fd67b5309a534a98fcfe12ceb73cd1ad018eadae76f5c9b7f6a4",
+      "blender_build_seconds": 1.6312,
+      "pure_generation_validation_seconds": 0.3817
+    },
+    {
+      "label": "Type \u00b7 GATEHOUSE",
+      "settings": {
+        "seed": 117,
+        "function": "GATEHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 117,
+        "function": "GATEHOUSE",
+        "footprint": "U",
+        "width": 10.92,
+        "depth": 7.52,
+        "wing_width": 4.0,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 48,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        48.0,
+        177.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 22,
+        "vertices": 26812,
+        "triangles": 40340,
+        "materials": 11,
+        "footprint_area": 118.1184,
+        "roof_projected_area": 143.6244,
+        "geometry_hash": "509686a9de15e41575aa187a808c48a26df9efeeb5f04241275e944dd12bef44",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 22
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1688,
+            "triangles": 2588,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 6208,
+            "triangles": 9312,
+            "buffers": 2
+          },
+          "structure": {
+            "vertices": 816,
+            "triangles": 1224,
+            "buffers": 1
+          },
+          "windows": {
+            "vertices": 1176,
+            "triangles": 1764,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 64,
+            "triangles": 96,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 1488,
+            "triangles": 2232,
+            "buffers": 2
+          },
+          "roof": {
+            "vertices": 15372,
+            "triangles": 23124,
+            "buffers": 9
+          }
+        },
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "building_type": "GATEHOUSE",
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID",
+        "roof_cover": "SLATE",
+        "construction": "RUBBLE"
+      },
+      "mesh_objects": 22,
+      "style": {
+        "wall_material": "stone",
+        "construction": "RUBBLE",
+        "roof_cover": "SLATE",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 3,
+        "timber": 5,
+        "timber_light": 3
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 2,
+        "stone_light": 3,
+        "timber": 5,
+        "timber_light": 3
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.43,
+          0.43,
+          0.41,
+          1.0
+        ],
+        "stone_light": [
+          0.43,
+          0.43,
+          0.41,
+          1.0
+        ],
+        "mortar": [
+          0.43,
+          0.43,
+          0.41,
+          1.0
+        ],
+        "timber": [
+          0.25,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "glass": [
+          0.42,
+          0.51,
+          0.52,
+          1.0
+        ],
+        "timber_light": [
+          0.25,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "iron": [
+          0.24,
+          0.27,
+          0.29,
+          1.0
+        ],
+        "roof": [
+          0.24,
+          0.27,
+          0.29,
+          1.0
+        ],
+        "roof_dark": [
+          0.15,
+          0.18,
+          0.2,
+          1.0
+        ],
+        "roof_worn": [
+          0.24,
+          0.27,
+          0.29,
+          1.0
+        ],
+        "roof_patch": [
+          0.24,
+          0.27,
+          0.29,
+          1.0
+        ]
+      },
+      "vertices": 26812,
+      "triangles": 40340,
+      "bounds_m": [
+        12.479999780654907,
+        13.907845973968506,
+        10.358902931213379
+      ],
+      "geometry_hash": "509686a9de15e41575aa187a808c48a26df9efeeb5f04241275e944dd12bef44",
+      "blender_build_seconds": 3.7873,
+      "pure_generation_validation_seconds": 1.159
+    },
+    {
+      "label": "Type \u00b7 BARRACKS",
+      "settings": {
+        "seed": 118,
+        "function": "BARRACKS",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 118,
+        "function": "BARRACKS",
+        "footprint": "L",
+        "width": 13.65,
+        "depth": 7.52,
+        "wing_width": 4.5,
+        "wing_depth": 5.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 48,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        72.0,
+        177.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 23,
+        "vertices": 19494,
+        "triangles": 29256,
+        "materials": 11,
+        "footprint_area": 125.148,
+        "roof_projected_area": 149.511,
+        "geometry_hash": "385f3decbf6925bdd92b716f2d21f18cfc6c167aff8d9945e2e6a25b3d8d30a5",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 23
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 1280,
+            "triangles": 1920,
+            "buffers": 5
+          },
+          "walls": {
+            "vertices": 8504,
+            "triangles": 12764,
+            "buffers": 2
+          },
+          "structure": {
+            "vertices": 912,
+            "triangles": 1368,
+            "buffers": 1
+          },
+          "windows": {
+            "vertices": 1456,
+            "triangles": 2184,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 64,
+            "triangles": 96,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 1368,
+            "triangles": 2052,
+            "buffers": 3
+          },
+          "roof": {
+            "vertices": 5910,
+            "triangles": 8872,
+            "buffers": 9
+          }
+        },
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "building_type": "BARRACKS",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "SLATE",
+        "construction": "RUBBLE"
+      },
+      "mesh_objects": 23,
+      "style": {
+        "wall_material": "stone",
+        "construction": "RUBBLE",
+        "roof_cover": "SLATE",
+        "foundation_mode": "PLINTH"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 4,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 2,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_patch": 1,
+        "roof_worn": 1,
+        "stone": 4,
+        "stone_light": 4,
+        "timber": 5,
+        "timber_light": 1
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "stone": [
+          0.43,
+          0.43,
+          0.41,
+          1.0
+        ],
+        "stone_light": [
+          0.43,
+          0.43,
+          0.41,
+          1.0
+        ],
+        "mortar": [
+          0.43,
+          0.43,
+          0.41,
+          1.0
+        ],
+        "timber": [
+          0.25,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "glass": [
+          0.42,
+          0.51,
+          0.52,
+          1.0
+        ],
+        "timber_light": [
+          0.25,
+          0.2,
+          0.15,
+          1.0
+        ],
+        "iron": [
+          0.24,
+          0.27,
+          0.29,
+          1.0
+        ],
+        "roof": [
+          0.24,
+          0.27,
+          0.29,
+          1.0
+        ],
+        "roof_dark": [
+          0.15,
+          0.18,
+          0.2,
+          1.0
+        ],
+        "roof_worn": [
+          0.24,
+          0.27,
+          0.29,
+          1.0
+        ],
+        "roof_patch": [
+          0.24,
+          0.27,
+          0.29,
+          1.0
+        ]
+      },
+      "vertices": 19494,
+      "triangles": 29256,
+      "bounds_m": [
+        14.706923842430115,
+        13.566746234893799,
+        10.358902931213379
+      ],
+      "geometry_hash": "385f3decbf6925bdd92b716f2d21f18cfc6c167aff8d9945e2e6a25b3d8d30a5",
+      "blender_build_seconds": 2.8213,
+      "pure_generation_validation_seconds": 0.6873
+    },
+    {
+      "label": "Type \u00b7 BOATHOUSE",
+      "settings": {
+        "seed": 119,
+        "function": "BOATHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "effective_settings": {
+        "seed": 119,
+        "function": "BOATHOUSE",
+        "footprint": "RECT",
+        "width": 11.28,
+        "depth": 7.36,
+        "wing_width": 4.0,
+        "wing_depth": 5.4,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 38,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "collection_origin_m": [
+        96.0,
+        177.0,
+        0.0
+      ],
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 19,
+        "vertices": 6756,
+        "triangles": 10252,
+        "materials": 8,
+        "footprint_area": 83.0208,
+        "roof_projected_area": 100.6068,
+        "geometry_hash": "19c6d2b1c5b539277a9ae0b264e58a54fbfea93f4faf6e940f4568e921566645",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 19
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 288,
+            "triangles": 432,
+            "buffers": 3
+          },
+          "walls": {
+            "vertices": 1760,
+            "triangles": 2636,
+            "buffers": 2
+          },
+          "structure": {
+            "vertices": 1368,
+            "triangles": 2172,
+            "buffers": 2
+          },
+          "windows": {
+            "vertices": 504,
+            "triangles": 756,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 152,
+            "triangles": 228,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 568,
+            "triangles": 852,
+            "buffers": 2
+          },
+          "roof": {
+            "vertices": 2116,
+            "triangles": 3176,
+            "buffers": 7
+          }
+        },
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "building_type": "BOATHOUSE",
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID",
+        "roof_cover": "REED",
+        "construction": "BOARD"
+      },
+      "mesh_objects": 19,
+      "style": {
+        "wall_material": "timber_light",
+        "construction": "BOARD",
+        "roof_cover": "REED",
+        "foundation_mode": "PIERS"
+      },
+      "expected_material_counts": {
+        "glass": 1,
+        "iron": 1,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_worn": 1,
+        "timber": 7,
+        "timber_light": 5
+      },
+      "actual_blender_material_counts": {
+        "glass": 1,
+        "iron": 1,
+        "mortar": 1,
+        "roof": 1,
+        "roof_dark": 2,
+        "roof_worn": 1,
+        "timber": 7,
+        "timber_light": 5
+      },
+      "material_counts_match": true,
+      "blender_material_rgba": {
+        "timber": [
+          0.28,
+          0.24,
+          0.17,
+          1.0
+        ],
+        "mortar": [
+          0.35,
+          0.34,
+          0.3,
+          1.0
+        ],
+        "timber_light": [
+          0.28,
+          0.24,
+          0.17,
+          1.0
+        ],
+        "glass": [
+          0.39,
+          0.48,
+          0.43,
+          1.0
+        ],
+        "iron": [
+          0.25,
+          0.25,
+          0.21,
+          1.0
+        ],
+        "roof": [
+          0.29,
+          0.27,
+          0.21,
+          1.0
+        ],
+        "roof_dark": [
+          0.18,
+          0.19,
+          0.17,
+          1.0
+        ],
+        "roof_worn": [
+          0.29,
+          0.27,
+          0.21,
+          1.0
+        ]
+      },
+      "vertices": 6756,
+      "triangles": 10252,
+      "bounds_m": [
+        12.31000006198883,
+        9.677722692489624,
+        6.778131119906902
+      ],
+      "geometry_hash": "19c6d2b1c5b539277a9ae0b264e58a54fbfea93f4faf6e940f4568e921566645",
+      "blender_build_seconds": 0.8089,
+      "pure_generation_validation_seconds": 0.2445
+    }
+  ],
+  "scope": "Blender authoring geometry and visual comparison; not Unity runtime or structural certification.",
+  "solid_efficient_geometry_comparison": {
+    "settings": {
+      "seed": 23,
+      "function": "WATCHTOWER",
+      "footprint": "L",
+      "width": 11.0,
+      "depth": 7.0,
+      "wing_width": 4.2,
+      "wing_depth": 4.5,
+      "floors": 2,
+      "floor_height": 2.65,
+      "pitch": 48.0,
+      "overhang": 0.45,
+      "detail": "HIGH",
+      "window_density": 1.0,
+      "region": "THORNFELL",
+      "context": "PASSWATCH",
+      "wealth": "ESTABLISHED",
+      "craftsmanship": "STANDARD",
+      "maintenance": 0.7,
+      "age": 35.0,
+      "use_grammar": true,
+      "roof_style": "AUTO",
+      "geometry_mode": "SOLID"
+    },
+    "results": {
+      "SOLID": {
+        "valid": true,
+        "errors": [],
+        "objects": 22,
+        "vertices": 27554,
+        "triangles": 41408,
+        "materials": 11,
+        "footprint_area": 41.9146,
+        "roof_projected_area": 54.3796,
+        "geometry_hash": "73e905a6f57d8d6ba31b94acab764f4eaad775f51a0f74ee5e6f111cef13da19",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 22
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 712,
+            "triangles": 1068,
+            "buffers": 6
+          },
+          "walls": {
+            "vertices": 8800,
+            "triangles": 13200,
+            "buffers": 2
+          },
+          "structure": {
+            "vertices": 448,
+            "triangles": 688,
+            "buffers": 1
+          },
+          "windows": {
+            "vertices": 560,
+            "triangles": 840,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 128,
+            "triangles": 192,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 848,
+            "triangles": 1272,
+            "buffers": 2
+          },
+          "roof": {
+            "vertices": 16058,
+            "triangles": 24148,
+            "buffers": 8
+          }
+        },
+        "region": "THORNFELL",
+        "context": "PASSWATCH",
+        "building_type": "WATCHTOWER",
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID",
+        "roof_cover": "SLATE",
+        "construction": "RUBBLE",
+        "generation_validation_seconds": 0.9361
+      },
+      "EFFICIENT": {
+        "valid": true,
+        "errors": [],
+        "objects": 23,
+        "vertices": 21919,
+        "triangles": 23697,
+        "materials": 11,
+        "footprint_area": 41.9146,
+        "roof_projected_area": 54.3796,
+        "geometry_hash": "cbd5a03ecaa4e151fd6058cc9ffcff449e4c3e0382a2605a8e8ac0ec2d931edb",
+        "tool_revision": "0.3.0",
+        "topology": {
+          "SOLID": 17,
+          "SURFACE": 6
+        },
+        "layers": {
+          "foundation": {
+            "vertices": 712,
+            "triangles": 1068,
+            "buffers": 6
+          },
+          "walls": {
+            "vertices": 8800,
+            "triangles": 11262,
+            "buffers": 2
+          },
+          "structure": {
+            "vertices": 448,
+            "triangles": 688,
+            "buffers": 1
+          },
+          "windows": {
+            "vertices": 560,
+            "triangles": 840,
+            "buffers": 2
+          },
+          "doors": {
+            "vertices": 128,
+            "triangles": 192,
+            "buffers": 1
+          },
+          "details": {
+            "vertices": 848,
+            "triangles": 1272,
+            "buffers": 2
+          },
+          "roof": {
+            "vertices": 10423,
+            "triangles": 8375,
+            "buffers": 9
+          }
+        },
+        "region": "THORNFELL",
+        "context": "PASSWATCH",
+        "building_type": "WATCHTOWER",
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT",
+        "roof_cover": "SLATE",
+        "construction": "RUBBLE",
+        "generation_validation_seconds": 0.6798
+      },
+      "vertices_reduction_percent": 20.45,
+      "triangles_reduction_percent": 42.77
+    },
+    "actual_render_fixtures": [
+      {
+        "label": "Geometry mode \u00b7 SOLID",
+        "mode": "SOLID",
+        "settings": {
+          "seed": 23,
+          "function": "WATCHTOWER",
+          "footprint": "L",
+          "width": 11.0,
+          "depth": 7.0,
+          "wing_width": 4.2,
+          "wing_depth": 4.5,
+          "floors": 2,
+          "floor_height": 2.65,
+          "pitch": 48.0,
+          "overhang": 0.45,
+          "detail": "HIGH",
+          "window_density": 1.0,
+          "region": "THORNFELL",
+          "context": "PASSWATCH",
+          "wealth": "ESTABLISHED",
+          "craftsmanship": "STANDARD",
+          "maintenance": 0.7,
+          "age": 35.0,
+          "use_grammar": true,
+          "roof_style": "AUTO",
+          "geometry_mode": "SOLID"
+        },
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "objects": 22,
+          "vertices": 27554,
+          "triangles": 41408,
+          "materials": 11,
+          "footprint_area": 41.9146,
+          "roof_projected_area": 54.3796,
+          "geometry_hash": "73e905a6f57d8d6ba31b94acab764f4eaad775f51a0f74ee5e6f111cef13da19",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 22
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 712,
+              "triangles": 1068,
+              "buffers": 6
+            },
+            "walls": {
+              "vertices": 8800,
+              "triangles": 13200,
+              "buffers": 2
+            },
+            "structure": {
+              "vertices": 448,
+              "triangles": 688,
+              "buffers": 1
+            },
+            "windows": {
+              "vertices": 560,
+              "triangles": 840,
+              "buffers": 2
+            },
+            "doors": {
+              "vertices": 128,
+              "triangles": 192,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 848,
+              "triangles": 1272,
+              "buffers": 2
+            },
+            "roof": {
+              "vertices": 16058,
+              "triangles": 24148,
+              "buffers": 8
+            }
+          },
+          "region": "THORNFELL",
+          "context": "PASSWATCH",
+          "building_type": "WATCHTOWER",
+          "roof_style": "HIP",
+          "geometry_mode": "SOLID",
+          "roof_cover": "SLATE",
+          "construction": "RUBBLE"
+        },
+        "mesh_objects": 22,
+        "vertices": 27554,
+        "triangles": 41408,
+        "expected_material_counts": {
+          "glass": 1,
+          "iron": 1,
+          "mortar": 1,
+          "roof": 1,
+          "roof_dark": 2,
+          "roof_patch": 1,
+          "roof_worn": 1,
+          "stone": 2,
+          "stone_light": 4,
+          "timber": 5,
+          "timber_light": 3
+        },
+        "actual_blender_material_counts": {
+          "glass": 1,
+          "iron": 1,
+          "mortar": 1,
+          "roof": 1,
+          "roof_dark": 2,
+          "roof_patch": 1,
+          "roof_worn": 1,
+          "stone": 2,
+          "stone_light": 4,
+          "timber": 5,
+          "timber_light": 3
+        },
+        "material_counts_match": true,
+        "bounds_m": [
+          7.930000066757202,
+          8.20000010728836,
+          12.52030086517334
+        ],
+        "geometry_hash": "73e905a6f57d8d6ba31b94acab764f4eaad775f51a0f74ee5e6f111cef13da19",
+        "blender_build_seconds": 3.5135,
+        "pure_generation_validation_seconds": 0.9295
+      },
+      {
+        "label": "Geometry mode \u00b7 EFFICIENT",
+        "mode": "EFFICIENT",
+        "settings": {
+          "seed": 23,
+          "function": "WATCHTOWER",
+          "footprint": "L",
+          "width": 11.0,
+          "depth": 7.0,
+          "wing_width": 4.2,
+          "wing_depth": 4.5,
+          "floors": 2,
+          "floor_height": 2.65,
+          "pitch": 48.0,
+          "overhang": 0.45,
+          "detail": "HIGH",
+          "window_density": 1.0,
+          "region": "THORNFELL",
+          "context": "PASSWATCH",
+          "wealth": "ESTABLISHED",
+          "craftsmanship": "STANDARD",
+          "maintenance": 0.7,
+          "age": 35.0,
+          "use_grammar": true,
+          "roof_style": "AUTO",
+          "geometry_mode": "EFFICIENT"
+        },
+        "validation": {
+          "valid": true,
+          "errors": [],
+          "objects": 23,
+          "vertices": 21919,
+          "triangles": 23697,
+          "materials": 11,
+          "footprint_area": 41.9146,
+          "roof_projected_area": 54.3796,
+          "geometry_hash": "cbd5a03ecaa4e151fd6058cc9ffcff449e4c3e0382a2605a8e8ac0ec2d931edb",
+          "tool_revision": "0.3.0",
+          "topology": {
+            "SOLID": 17,
+            "SURFACE": 6
+          },
+          "layers": {
+            "foundation": {
+              "vertices": 712,
+              "triangles": 1068,
+              "buffers": 6
+            },
+            "walls": {
+              "vertices": 8800,
+              "triangles": 11262,
+              "buffers": 2
+            },
+            "structure": {
+              "vertices": 448,
+              "triangles": 688,
+              "buffers": 1
+            },
+            "windows": {
+              "vertices": 560,
+              "triangles": 840,
+              "buffers": 2
+            },
+            "doors": {
+              "vertices": 128,
+              "triangles": 192,
+              "buffers": 1
+            },
+            "details": {
+              "vertices": 848,
+              "triangles": 1272,
+              "buffers": 2
+            },
+            "roof": {
+              "vertices": 10423,
+              "triangles": 8375,
+              "buffers": 9
+            }
+          },
+          "region": "THORNFELL",
+          "context": "PASSWATCH",
+          "building_type": "WATCHTOWER",
+          "roof_style": "HIP",
+          "geometry_mode": "EFFICIENT",
+          "roof_cover": "SLATE",
+          "construction": "RUBBLE"
+        },
+        "mesh_objects": 23,
+        "vertices": 21919,
+        "triangles": 23697,
+        "expected_material_counts": {
+          "glass": 1,
+          "iron": 1,
+          "mortar": 1,
+          "roof": 1,
+          "roof_dark": 3,
+          "roof_patch": 1,
+          "roof_worn": 1,
+          "stone": 2,
+          "stone_light": 4,
+          "timber": 5,
+          "timber_light": 3
+        },
+        "actual_blender_material_counts": {
+          "glass": 1,
+          "iron": 1,
+          "mortar": 1,
+          "roof": 1,
+          "roof_dark": 3,
+          "roof_patch": 1,
+          "roof_worn": 1,
+          "stone": 2,
+          "stone_light": 4,
+          "timber": 5,
+          "timber_light": 3
+        },
+        "material_counts_match": true,
+        "bounds_m": [
+          7.930000066757202,
+          8.20000010728836,
+          12.52030086517334
+        ],
+        "geometry_hash": "cbd5a03ecaa4e151fd6058cc9ffcff449e4c3e0382a2605a8e8ac0ec2d931edb",
+        "blender_build_seconds": 2.3585,
+        "pure_generation_validation_seconds": 0.6801
+      }
+    ]
+  },
+  "renders": {
+    "solid_efficient_roof_comparison": {
+      "file": "solid_efficient_roof_comparison.png",
+      "resolution": [
+        1600,
+        1100
+      ],
+      "seconds": 0.661
+    },
+    "hero": {
+      "file": "expansion_hero.png",
+      "seconds": 3.008
+    },
+    "four_region_comparison": {
+      "file": "four_regions_comparison.png",
+      "resolution": [
+        1600,
+        1100
+      ],
+      "seconds": 0.725
+    },
+    "lowmark_wealth_comparison": {
+      "file": "lowmark_wealth_comparison.png",
+      "resolution": [
+        1600,
+        1100
+      ],
+      "seconds": 0.688
+    },
+    "lowmark_maintenance_comparison": {
+      "file": "lowmark_maintenance_comparison.png",
+      "resolution": [
+        1600,
+        1100
+      ],
+      "seconds": 0.636
+    },
+    "labeled_comparisons": [
+      "four_regions_comparison_labeled.png",
+      "lowmark_wealth_comparison_labeled.png",
+      "lowmark_maintenance_comparison_labeled.png"
+    ],
+    "closeups": [
+      {
+        "file": "closeup_window_beam.png",
+        "resolution": [
+          900,
+          900
+        ],
+        "seconds": 0.434
+      },
+      {
+        "file": "closeup_gable_roof.png",
+        "resolution": [
+          900,
+          900
+        ],
+        "seconds": 0.412
+      },
+      {
+        "file": "closeup_hip_roof.png",
+        "resolution": [
+          900,
+          900
+        ],
+        "seconds": 0.451
+      }
+    ],
+    "gallery": {
+      "items": 29,
+      "frame_resolution": [
+        420,
+        420
+      ],
+      "seconds": 10.54,
+      "camera_fit": "projected actual mesh bounds with 12% margin plus 2 m"
+    }
+  }
+}

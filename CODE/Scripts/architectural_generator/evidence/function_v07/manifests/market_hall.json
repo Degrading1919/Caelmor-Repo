@@ -1,0 +1,2181 @@
+{
+  "source_revision": "c9bc152",
+  "generator_version": "0.7.0",
+  "source_sha256": {
+    "__init__.py": "51c4880a7a314aad65905cf76a6f3065effb250545b4e394e2ec749d01ddf37d",
+    "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
+    "blender_manifest.toml": "f1a00a550e3699ee2ceef656ce101fcc570dbb0628b15de1b60d3d8cd59d03fb",
+    "engine.py": "9a940ac14646224e897aa2d484f4a773663c3e849953099e6d6addcc7ccedb7c",
+    "facade.py": "4a2bc517ae2c5c66dfc2510e8c3e5c2e6ddb4e8f3488577a30fbd050aa384e7b",
+    "function_work.py": "b6af089ff373604a6a2d3b88586efc35cf67485ab3c8b9b4a3c4a88393ada75a",
+    "function_yard.py": "4067b9a248a3ae0b0c2977e854e7f0b7ef69475abbcc2e492365bf9d79a0e228",
+    "functional.py": "10f719e1db914f5bfc3e1958fe5c0fd323d2e75d8bd02e71f068117a1ad96baa",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "29ca4c63f845a3d8d3b69436e28b674b9290cfb542498e2e58639934a091ba27",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+  },
+  "render_source_sha256": {
+    "render_household_review.py": "5186292c333daab8afa185089b425085de6b76c081be4571e2a8a8d95952bcc5",
+    "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+  },
+  "settings_contract": {
+    "seed": 91,
+    "footprint": "L",
+    "width": 11.0,
+    "depth": 7.0,
+    "wing_width": 4.2,
+    "wing_depth": 4.5,
+    "floors": 2,
+    "floor_height": 2.65,
+    "pitch": 48.0,
+    "overhang": 0.45,
+    "detail": "MEDIUM",
+    "window_density": 1.0,
+    "context": "AUTO",
+    "wealth": "ESTABLISHED",
+    "craftsmanship": "STANDARD",
+    "maintenance": 0.7,
+    "age": 35,
+    "use_grammar": true,
+    "roof_style": "AUTO",
+    "geometry_mode": "EFFICIENT",
+    "world_aware": true
+  },
+  "renderer": "5.0.1",
+  "engine": "BLENDER_EEVEE",
+  "samples": 32,
+  "studio": "render_world_evidence._reset_scene, ground at grade",
+  "scale_policy": "Common projected orthographic scale per archetype across four regions and both views; different archetypes fitted independently.",
+  "geometry_generation": "One native backend build/validation per configuration; same objects reused for clay and material.",
+  "records": [
+    {
+      "function": "MARKET_HALL",
+      "region": "LOWMARK",
+      "label": "Market Hall",
+      "source_revision": "c9bc152",
+      "source_sha256": {
+        "__init__.py": "51c4880a7a314aad65905cf76a6f3065effb250545b4e394e2ec749d01ddf37d",
+        "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
+        "blender_manifest.toml": "f1a00a550e3699ee2ceef656ce101fcc570dbb0628b15de1b60d3d8cd59d03fb",
+        "engine.py": "9a940ac14646224e897aa2d484f4a773663c3e849953099e6d6addcc7ccedb7c",
+        "facade.py": "4a2bc517ae2c5c66dfc2510e8c3e5c2e6ddb4e8f3488577a30fbd050aa384e7b",
+        "function_work.py": "b6af089ff373604a6a2d3b88586efc35cf67485ab3c8b9b4a3c4a88393ada75a",
+        "function_yard.py": "4067b9a248a3ae0b0c2977e854e7f0b7ef69475abbcc2e492365bf9d79a0e228",
+        "functional.py": "10f719e1db914f5bfc3e1958fe5c0fd323d2e75d8bd02e71f068117a1ad96baa",
+        "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+        "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+        "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+        "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+        "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+        "world.py": "29ca4c63f845a3d8d3b69436e28b674b9290cfb542498e2e58639934a091ba27",
+        "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+        "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+        "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+      },
+      "render_source_sha256": {
+        "render_household_review.py": "5186292c333daab8afa185089b425085de6b76c081be4571e2a8a8d95952bcc5",
+        "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+      },
+      "settings": {
+        "seed": 91,
+        "function": "MARKET_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RURAL",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/market_hall/lowmark_clay_0.png",
+          "image_sha256": "131eafd0924c073da7c766ec334545d9360144dd7efb5be007d0bb41d76f15e9",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            56.21772003173828,
+            -60.660316467285156,
+            41.90875244140625
+          ],
+          "camera_target": [
+            9.0,
+            6.0,
+            4.134576320648193
+          ],
+          "ortho_scale": 37.04493713378906,
+          "elapsed_seconds": 0.2427
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/market_hall/lowmark_clay_1.png",
+          "image_sha256": "f283874f9cbf16786b9625c9f3fc22d93521300cb22d4f604ef558f60235b198",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -38.21772003173828,
+            72.66031646728516,
+            41.90875244140625
+          ],
+          "camera_target": [
+            9.0,
+            6.0,
+            4.134576320648193
+          ],
+          "ortho_scale": 37.04493713378906,
+          "elapsed_seconds": 0.2376
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/market_hall/lowmark_material_0.png",
+          "image_sha256": "87943b59e92ee8af19b9604714c0a355c59dd9ce12a0b0f3ba6ff2f8aabb8a0f",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            56.21772003173828,
+            -60.660316467285156,
+            41.90875244140625
+          ],
+          "camera_target": [
+            9.0,
+            6.0,
+            4.134576320648193
+          ],
+          "ortho_scale": 37.04493713378906,
+          "elapsed_seconds": 0.2661
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/market_hall/lowmark_material_1.png",
+          "image_sha256": "513a2ad385503b17f19d839d12146ed14bd5f3eec210afc2f7646c8bdde72729",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -38.21772003173828,
+            72.66031646728516,
+            41.90875244140625
+          ],
+          "camera_target": [
+            9.0,
+            6.0,
+            4.134576320648193
+          ],
+          "ortho_scale": 37.04493713378906,
+          "elapsed_seconds": 0.2481
+        }
+      ],
+      "build_seconds": 2.2465,
+      "geometry_hash": "33c5d44800967cba341f609eb6097e26a765bcff698f1484065b69565860caef",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.32,
+            "bounds": [
+              0,
+              0,
+              18.0,
+              12.0
+            ],
+            "eave": 3.1199999999999997,
+            "function": "MARKET_HALL",
+            "key": "market_hall",
+            "roof": "GABLE",
+            "triangles": 16383,
+            "valid": true,
+            "vertices": 17567,
+            "wall_thickness": 0.28
+          }
+        ],
+        "errors": [],
+        "objects": 35,
+        "source_objects": 35,
+        "source_triangles": 16383,
+        "source_vertices": 17567,
+        "triangles": 16383,
+        "valid": true
+      },
+      "backend": {
+        "objects": 35,
+        "vertices": 17567,
+        "width": 18.88999968767166,
+        "depth": 16.0,
+        "height": 8.529152750968933,
+        "layers": [
+          "details",
+          "foundation",
+          "roof",
+          "structure",
+          "walls"
+        ]
+      },
+      "functional_program": {
+        "adaptations": [],
+        "approaches": [
+          {
+            "end": [
+              9.0,
+              0.25
+            ],
+            "key": "market.front_approach",
+            "rise": 0.32,
+            "run": 2.25,
+            "slope": 0.14222222222222222,
+            "start": [
+              9.0,
+              -2.0
+            ],
+            "width": 2.6
+          },
+          {
+            "end": [
+              9.0,
+              11.75
+            ],
+            "key": "market.rear_approach",
+            "rise": 0.32,
+            "run": 2.25,
+            "slope": 0.14222222222222222,
+            "start": [
+              9.0,
+              14.0
+            ],
+            "width": 2.6
+          }
+        ],
+        "context": "RURAL",
+        "function": "MARKET_HALL",
+        "region": "LOWMARK",
+        "rooms": [
+          {
+            "base": 0.32,
+            "bounds": [
+              0,
+              0,
+              18.0,
+              12.0
+            ],
+            "eave": 3.1199999999999997,
+            "key": "market_hall",
+            "open_edges": [
+              0,
+              2
+            ],
+            "roof": "GABLE"
+          }
+        ],
+        "routes": [
+          {
+            "bounds": [
+              7.7,
+              0.25,
+              0.32,
+              10.3,
+              11.75,
+              2.57
+            ],
+            "key": "public_through_aisle",
+            "kind": "public"
+          },
+          {
+            "bounds": [
+              7.7,
+              -2.0,
+              0,
+              10.3,
+              0.25,
+              0.42000000000000004
+            ],
+            "key": "market.front_approach_clearance",
+            "kind": "public"
+          },
+          {
+            "bounds": [
+              7.7,
+              11.75,
+              0,
+              10.3,
+              14.0,
+              0.42000000000000004
+            ],
+            "key": "market.rear_approach_clearance",
+            "kind": "public"
+          },
+          {
+            "bounds": [
+              5.529999999999999,
+              0.76,
+              0.32,
+              6.55,
+              4.066666666666667,
+              2.3699999999999997
+            ],
+            "key": "west_bay_1_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              5.529999999999999,
+              4.346666666666667,
+              0.32,
+              6.55,
+              7.653333333333335,
+              2.3699999999999997
+            ],
+            "key": "west_bay_2_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              5.529999999999999,
+              7.9333333333333345,
+              0.32,
+              6.55,
+              11.240000000000002,
+              2.3699999999999997
+            ],
+            "key": "west_bay_3_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              11.45,
+              0.76,
+              0.32,
+              12.469999999999999,
+              4.066666666666667,
+              2.3699999999999997
+            ],
+            "key": "east_bay_1_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              11.45,
+              4.346666666666667,
+              0.32,
+              12.469999999999999,
+              7.653333333333335,
+              2.3699999999999997
+            ],
+            "key": "east_bay_2_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              11.45,
+              7.9333333333333345,
+              0.32,
+              12.469999999999999,
+              11.240000000000002,
+              2.3699999999999997
+            ],
+            "key": "east_bay_3_front_seller_space",
+            "kind": "service"
+          }
+        ],
+        "stations": [
+          {
+            "bounds": [
+              6.67,
+              1.6733333333333336,
+              0.36,
+              7.45,
+              3.1533333333333333,
+              1.32
+            ],
+            "key": "world_lowmark.market_hall.west_bay_1_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              4.89,
+              1.6733333333333336,
+              0.36,
+              5.35,
+              3.1533333333333333,
+              1.9000000000000001
+            ],
+            "key": "world_lowmark.market_hall.west_bay_1_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              6.67,
+              5.260000000000001,
+              0.36,
+              7.45,
+              6.740000000000001,
+              1.32
+            ],
+            "key": "world_lowmark.market_hall.west_bay_2_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              4.89,
+              5.260000000000001,
+              0.36,
+              5.35,
+              6.740000000000001,
+              1.9000000000000001
+            ],
+            "key": "world_lowmark.market_hall.west_bay_2_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              6.67,
+              8.846666666666668,
+              0.36,
+              7.45,
+              10.326666666666668,
+              1.32
+            ],
+            "key": "world_lowmark.market_hall.west_bay_3_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              4.89,
+              8.846666666666668,
+              0.36,
+              5.35,
+              10.326666666666668,
+              1.9000000000000001
+            ],
+            "key": "world_lowmark.market_hall.west_bay_3_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              10.55,
+              1.6733333333333336,
+              0.36,
+              11.33,
+              3.1533333333333333,
+              1.32
+            ],
+            "key": "world_lowmark.market_hall.east_bay_1_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              12.649999999999999,
+              1.6733333333333336,
+              0.36,
+              13.11,
+              3.1533333333333333,
+              1.9000000000000001
+            ],
+            "key": "world_lowmark.market_hall.east_bay_1_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              10.55,
+              5.260000000000001,
+              0.36,
+              11.33,
+              6.740000000000001,
+              1.32
+            ],
+            "key": "world_lowmark.market_hall.east_bay_2_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              12.649999999999999,
+              5.260000000000001,
+              0.36,
+              13.11,
+              6.740000000000001,
+              1.9000000000000001
+            ],
+            "key": "world_lowmark.market_hall.east_bay_2_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              10.55,
+              8.846666666666668,
+              0.36,
+              11.33,
+              10.326666666666668,
+              1.32
+            ],
+            "key": "world_lowmark.market_hall.east_bay_3_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              12.649999999999999,
+              8.846666666666668,
+              0.36,
+              13.11,
+              10.326666666666668,
+              1.9000000000000001
+            ],
+            "key": "world_lowmark.market_hall.east_bay_3_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          }
+        ]
+      },
+      "bounds": [
+        [
+          -0.4449999928474426,
+          18.44499969482422
+        ],
+        [
+          -2.0,
+          14.0
+        ],
+        [
+          -0.12999999523162842,
+          8.399152755737305
+        ]
+      ]
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "THORNFELL",
+      "label": "Market Hall",
+      "source_revision": "c9bc152",
+      "source_sha256": {
+        "__init__.py": "51c4880a7a314aad65905cf76a6f3065effb250545b4e394e2ec749d01ddf37d",
+        "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
+        "blender_manifest.toml": "f1a00a550e3699ee2ceef656ce101fcc570dbb0628b15de1b60d3d8cd59d03fb",
+        "engine.py": "9a940ac14646224e897aa2d484f4a773663c3e849953099e6d6addcc7ccedb7c",
+        "facade.py": "4a2bc517ae2c5c66dfc2510e8c3e5c2e6ddb4e8f3488577a30fbd050aa384e7b",
+        "function_work.py": "b6af089ff373604a6a2d3b88586efc35cf67485ab3c8b9b4a3c4a88393ada75a",
+        "function_yard.py": "4067b9a248a3ae0b0c2977e854e7f0b7ef69475abbcc2e492365bf9d79a0e228",
+        "functional.py": "10f719e1db914f5bfc3e1958fe5c0fd323d2e75d8bd02e71f068117a1ad96baa",
+        "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+        "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+        "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+        "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+        "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+        "world.py": "29ca4c63f845a3d8d3b69436e28b674b9290cfb542498e2e58639934a091ba27",
+        "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+        "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+        "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+      },
+      "render_source_sha256": {
+        "render_household_review.py": "5186292c333daab8afa185089b425085de6b76c081be4571e2a8a8d95952bcc5",
+        "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+      },
+      "settings": {
+        "seed": 91,
+        "function": "MARKET_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RIDGE",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/market_hall/thornfell_clay_0.png",
+          "image_sha256": "e82c07f06532fef57ddbfa1676ab9f3f146979a05ee3733ce2ef5a0c55a2cce8",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.21772003173828,
+            -63.410316467285156,
+            42.02008056640625
+          ],
+          "camera_target": [
+            8.0,
+            3.25,
+            4.245901107788086
+          ],
+          "ortho_scale": 37.04493713378906,
+          "elapsed_seconds": 0.2476
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/market_hall/thornfell_clay_1.png",
+          "image_sha256": "255dd6b803ac5acc6fd4fc0475b871c075699a5f01a29ca3268b96e2ad70eb09",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.21772003173828,
+            69.91031646728516,
+            42.02008056640625
+          ],
+          "camera_target": [
+            8.0,
+            3.25,
+            4.245901107788086
+          ],
+          "ortho_scale": 37.04493713378906,
+          "elapsed_seconds": 0.2357
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/market_hall/thornfell_material_0.png",
+          "image_sha256": "e0336975558aa58745fe2e14afc57348739a4b5e49866a22651d6626d71b9cef",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.21772003173828,
+            -63.410316467285156,
+            42.02008056640625
+          ],
+          "camera_target": [
+            8.0,
+            3.25,
+            4.245901107788086
+          ],
+          "ortho_scale": 37.04493713378906,
+          "elapsed_seconds": 0.2594
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/market_hall/thornfell_material_1.png",
+          "image_sha256": "ef165cb8ef37d645eb5bfd9015d692ccce1c512dae2cf01d2bc90b90804973ec",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.21772003173828,
+            69.91031646728516,
+            42.02008056640625
+          ],
+          "camera_target": [
+            8.0,
+            3.25,
+            4.245901107788086
+          ],
+          "ortho_scale": 37.04493713378906,
+          "elapsed_seconds": 0.2544
+        }
+      ],
+      "build_seconds": 0.5178,
+      "geometry_hash": "910a8f56d0ca50dfb696d217ab4319e8b6dfee02215633d356364de5756719f4",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.32,
+            "bounds": [
+              0,
+              0,
+              16.0,
+              6.5
+            ],
+            "eave": 3.92,
+            "function": "MARKET_HALL",
+            "key": "market_hall",
+            "roof": "GABLE",
+            "triangles": 9530,
+            "valid": true,
+            "vertices": 9438,
+            "wall_thickness": 0.5
+          }
+        ],
+        "errors": [],
+        "objects": 37,
+        "source_objects": 37,
+        "source_triangles": 9530,
+        "source_vertices": 9438,
+        "triangles": 9530,
+        "valid": true
+      },
+      "backend": {
+        "objects": 37,
+        "vertices": 9438,
+        "width": 16.88999968767166,
+        "depth": 10.5,
+        "height": 8.751802325248718,
+        "layers": [
+          "details",
+          "foundation",
+          "roof",
+          "structure",
+          "walls"
+        ]
+      },
+      "functional_program": {
+        "adaptations": [],
+        "approaches": [
+          {
+            "end": [
+              8.0,
+              0.25
+            ],
+            "key": "market.front_approach",
+            "rise": 0.32,
+            "run": 2.25,
+            "slope": 0.14222222222222222,
+            "start": [
+              8.0,
+              -2.0
+            ],
+            "width": 2.35
+          },
+          {
+            "end": [
+              8.0,
+              6.25
+            ],
+            "key": "market.rear_approach",
+            "rise": 0.32,
+            "run": 2.25,
+            "slope": 0.14222222222222222,
+            "start": [
+              8.0,
+              8.5
+            ],
+            "width": 2.35
+          }
+        ],
+        "context": "RIDGE",
+        "function": "MARKET_HALL",
+        "region": "THORNFELL",
+        "rooms": [
+          {
+            "base": 0.32,
+            "bounds": [
+              0,
+              0,
+              16.0,
+              6.5
+            ],
+            "eave": 3.92,
+            "key": "market_hall",
+            "open_edges": [
+              0,
+              2
+            ],
+            "roof": "GABLE"
+          }
+        ],
+        "routes": [
+          {
+            "bounds": [
+              6.825,
+              0.25,
+              0.32,
+              9.175,
+              6.25,
+              2.57
+            ],
+            "key": "public_through_aisle",
+            "kind": "public"
+          },
+          {
+            "bounds": [
+              6.825,
+              -2.0,
+              0,
+              9.175,
+              0.25,
+              0.42000000000000004
+            ],
+            "key": "market.front_approach_clearance",
+            "kind": "public"
+          },
+          {
+            "bounds": [
+              6.825,
+              6.25,
+              0,
+              9.175,
+              8.5,
+              0.42000000000000004
+            ],
+            "key": "market.rear_approach_clearance",
+            "kind": "public"
+          },
+          {
+            "bounds": [
+              4.654999999999999,
+              0.76,
+              0.32,
+              5.675,
+              2.233333333333333,
+              2.3699999999999997
+            ],
+            "key": "west_bay_1_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              4.654999999999999,
+              2.513333333333333,
+              0.32,
+              5.675,
+              3.986666666666666,
+              2.3699999999999997
+            ],
+            "key": "west_bay_2_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              4.654999999999999,
+              4.266666666666666,
+              0.32,
+              5.675,
+              5.739999999999999,
+              2.3699999999999997
+            ],
+            "key": "west_bay_3_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              10.325,
+              0.76,
+              0.32,
+              11.344999999999999,
+              2.233333333333333,
+              2.3699999999999997
+            ],
+            "key": "east_bay_1_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              10.325,
+              2.513333333333333,
+              0.32,
+              11.344999999999999,
+              3.986666666666666,
+              2.3699999999999997
+            ],
+            "key": "east_bay_2_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              10.325,
+              4.266666666666666,
+              0.32,
+              11.344999999999999,
+              5.739999999999999,
+              2.3699999999999997
+            ],
+            "key": "east_bay_3_front_seller_space",
+            "kind": "service"
+          }
+        ],
+        "stations": [
+          {
+            "bounds": [
+              5.795,
+              0.7600000000000001,
+              0.36,
+              6.575,
+              2.233333333333333,
+              1.32
+            ],
+            "key": "world_thornfell.market_hall.west_bay_1_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              4.015,
+              0.7600000000000001,
+              0.36,
+              4.475,
+              2.233333333333333,
+              1.9000000000000001
+            ],
+            "key": "world_thornfell.market_hall.west_bay_1_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              5.795,
+              2.513333333333333,
+              0.36,
+              6.575,
+              3.986666666666666,
+              1.32
+            ],
+            "key": "world_thornfell.market_hall.west_bay_2_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              4.015,
+              2.513333333333333,
+              0.36,
+              4.475,
+              3.986666666666666,
+              1.9000000000000001
+            ],
+            "key": "world_thornfell.market_hall.west_bay_2_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              5.795,
+              4.266666666666666,
+              0.36,
+              6.575,
+              5.739999999999998,
+              1.32
+            ],
+            "key": "world_thornfell.market_hall.west_bay_3_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              4.015,
+              4.266666666666666,
+              0.36,
+              4.475,
+              5.739999999999998,
+              1.9000000000000001
+            ],
+            "key": "world_thornfell.market_hall.west_bay_3_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              9.425,
+              0.7600000000000001,
+              0.36,
+              10.205,
+              2.233333333333333,
+              1.32
+            ],
+            "key": "world_thornfell.market_hall.east_bay_1_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              11.524999999999999,
+              0.7600000000000001,
+              0.36,
+              11.985,
+              2.233333333333333,
+              1.9000000000000001
+            ],
+            "key": "world_thornfell.market_hall.east_bay_1_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              9.425,
+              2.513333333333333,
+              0.36,
+              10.205,
+              3.986666666666666,
+              1.32
+            ],
+            "key": "world_thornfell.market_hall.east_bay_2_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              11.524999999999999,
+              2.513333333333333,
+              0.36,
+              11.985,
+              3.986666666666666,
+              1.9000000000000001
+            ],
+            "key": "world_thornfell.market_hall.east_bay_2_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              9.425,
+              4.266666666666666,
+              0.36,
+              10.205,
+              5.739999999999998,
+              1.32
+            ],
+            "key": "world_thornfell.market_hall.east_bay_3_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              11.524999999999999,
+              4.266666666666666,
+              0.36,
+              11.985,
+              5.739999999999998,
+              1.9000000000000001
+            ],
+            "key": "world_thornfell.market_hall.east_bay_3_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          }
+        ]
+      },
+      "bounds": [
+        [
+          -0.4449999928474426,
+          16.44499969482422
+        ],
+        [
+          -2.0,
+          8.5
+        ],
+        [
+          -0.12999999523162842,
+          8.62180233001709
+        ]
+      ]
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "MIRE",
+      "label": "Market Hall",
+      "source_revision": "c9bc152",
+      "source_sha256": {
+        "__init__.py": "51c4880a7a314aad65905cf76a6f3065effb250545b4e394e2ec749d01ddf37d",
+        "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
+        "blender_manifest.toml": "f1a00a550e3699ee2ceef656ce101fcc570dbb0628b15de1b60d3d8cd59d03fb",
+        "engine.py": "9a940ac14646224e897aa2d484f4a773663c3e849953099e6d6addcc7ccedb7c",
+        "facade.py": "4a2bc517ae2c5c66dfc2510e8c3e5c2e6ddb4e8f3488577a30fbd050aa384e7b",
+        "function_work.py": "b6af089ff373604a6a2d3b88586efc35cf67485ab3c8b9b4a3c4a88393ada75a",
+        "function_yard.py": "4067b9a248a3ae0b0c2977e854e7f0b7ef69475abbcc2e492365bf9d79a0e228",
+        "functional.py": "10f719e1db914f5bfc3e1958fe5c0fd323d2e75d8bd02e71f068117a1ad96baa",
+        "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+        "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+        "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+        "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+        "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+        "world.py": "29ca4c63f845a3d8d3b69436e28b674b9290cfb542498e2e58639934a091ba27",
+        "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+        "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+        "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+      },
+      "render_source_sha256": {
+        "render_household_review.py": "5186292c333daab8afa185089b425085de6b76c081be4571e2a8a8d95952bcc5",
+        "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+      },
+      "settings": {
+        "seed": 91,
+        "function": "MARKET_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "SORROWMERE",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/market_hall/mire_clay_0.png",
+          "image_sha256": "890f2b7e60297125c6f508dadd877a09e21dd09c420133e51e3da3e76f60f6b6",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            56.855220794677734,
+            -66.66781616210938,
+            43.36701583862305
+          ],
+          "camera_target": [
+            9.637499809265137,
+            -0.007500171661376953,
+            5.592838764190674
+          ],
+          "ortho_scale": 37.04493713378906,
+          "elapsed_seconds": 0.2476
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/market_hall/mire_clay_1.png",
+          "image_sha256": "160556e06d5446c9e7f7722247a7ef94410bc38662a05799a071ecd2580de687",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -37.58021926879883,
+            66.65281677246094,
+            43.36701583862305
+          ],
+          "camera_target": [
+            9.637499809265137,
+            -0.007500171661376953,
+            5.592838764190674
+          ],
+          "ortho_scale": 37.04493713378906,
+          "elapsed_seconds": 0.2405
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/market_hall/mire_material_0.png",
+          "image_sha256": "1ef844a4a8442d9fffa4ecdce4f6a41a19d83d65ff824e53a774945316fdbe6d",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            56.855220794677734,
+            -66.66781616210938,
+            43.36701583862305
+          ],
+          "camera_target": [
+            9.637499809265137,
+            -0.007500171661376953,
+            5.592838764190674
+          ],
+          "ortho_scale": 37.04493713378906,
+          "elapsed_seconds": 0.2628
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/market_hall/mire_material_1.png",
+          "image_sha256": "37880cf9da5b48b748e690516dea01cb45667792e6825c4bf8bd579b1ae15945",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -37.58021926879883,
+            66.65281677246094,
+            43.36701583862305
+          ],
+          "camera_target": [
+            9.637499809265137,
+            -0.007500171661376953,
+            5.592838764190674
+          ],
+          "ortho_scale": 37.04493713378906,
+          "elapsed_seconds": 0.2574
+        }
+      ],
+      "build_seconds": 1.3571,
+      "geometry_hash": "ccf204846a01de21bf39adf3d4f7b910350783fb7f13e22c6b3e075a700471e0",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 1.15,
+            "bounds": [
+              0,
+              0,
+              16.919999999999998,
+              11.040000000000001
+            ],
+            "eave": 4.15,
+            "function": "MARKET_HALL",
+            "key": "market_hall",
+            "roof": "BOW",
+            "triangles": 25208,
+            "valid": true,
+            "vertices": 26850,
+            "wall_thickness": 0.18
+          }
+        ],
+        "errors": [],
+        "objects": 33,
+        "source_objects": 33,
+        "source_triangles": 25208,
+        "source_vertices": 26850,
+        "triangles": 25208,
+        "valid": true
+      },
+      "backend": {
+        "objects": 33,
+        "vertices": 26850,
+        "width": 20.164999306201935,
+        "depth": 22.984999656677246,
+        "height": 11.445677638053894,
+        "layers": [
+          "details",
+          "foundation",
+          "roof",
+          "structure",
+          "walls"
+        ]
+      },
+      "functional_program": {
+        "adaptations": [],
+        "approaches": [
+          {
+            "end": [
+              18.319999999999997,
+              -0.05
+            ],
+            "key": "market.quay_ramp",
+            "rise": 1.15,
+            "run": 11.45,
+            "slope": 0.10043668122270742,
+            "start": [
+              18.319999999999997,
+              -11.5
+            ],
+            "width": 2.6
+          }
+        ],
+        "context": "SORROWMERE",
+        "function": "MARKET_HALL",
+        "region": "MIRE",
+        "rooms": [
+          {
+            "base": 1.15,
+            "bounds": [
+              0,
+              0,
+              16.919999999999998,
+              11.040000000000001
+            ],
+            "eave": 4.15,
+            "key": "market_hall",
+            "open_edges": [
+              0,
+              1,
+              2
+            ],
+            "roof": "BOW"
+          }
+        ],
+        "routes": [
+          {
+            "bounds": [
+              7.159999999999999,
+              0.25,
+              1.15,
+              9.76,
+              10.790000000000001,
+              3.4
+            ],
+            "key": "public_through_aisle",
+            "kind": "public"
+          },
+          {
+            "bounds": [
+              4.989999999999998,
+              0.76,
+              1.15,
+              6.009999999999999,
+              3.4033333333333338,
+              3.1999999999999997
+            ],
+            "key": "west_bay_1_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              4.989999999999998,
+              3.683333333333334,
+              1.15,
+              6.009999999999999,
+              6.326666666666668,
+              3.1999999999999997
+            ],
+            "key": "west_bay_2_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              4.989999999999998,
+              6.606666666666667,
+              1.15,
+              6.009999999999999,
+              9.25,
+              3.1999999999999997
+            ],
+            "key": "west_bay_3_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              10.909999999999998,
+              0.76,
+              1.15,
+              11.929999999999998,
+              3.4033333333333338,
+              3.1999999999999997
+            ],
+            "key": "east_bay_1_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              10.909999999999998,
+              3.683333333333334,
+              1.15,
+              11.929999999999998,
+              6.326666666666668,
+              3.1999999999999997
+            ],
+            "key": "east_bay_2_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              10.909999999999998,
+              6.606666666666667,
+              1.15,
+              11.929999999999998,
+              9.25,
+              3.1999999999999997
+            ],
+            "key": "east_bay_3_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              17.02,
+              -11.5,
+              1.0999999999999999,
+              19.619999999999997,
+              -0.05,
+              3.15
+            ],
+            "key": "market.quay_approach",
+            "kind": "public"
+          },
+          {
+            "bounds": [
+              9.76,
+              9.590000000000002,
+              1.15,
+              19.72,
+              10.940000000000001,
+              3.35
+            ],
+            "key": "market.quay_connector",
+            "kind": "public"
+          }
+        ],
+        "stations": [
+          {
+            "bounds": [
+              6.129999999999999,
+              1.341666666666667,
+              1.19,
+              6.909999999999999,
+              2.821666666666667,
+              2.15
+            ],
+            "key": "world_mire.market_hall.west_bay_1_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              4.349999999999999,
+              1.341666666666667,
+              1.19,
+              4.809999999999999,
+              2.821666666666667,
+              2.73
+            ],
+            "key": "world_mire.market_hall.west_bay_1_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              6.129999999999999,
+              4.265000000000001,
+              1.19,
+              6.909999999999999,
+              5.745000000000001,
+              2.15
+            ],
+            "key": "world_mire.market_hall.west_bay_2_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              4.349999999999999,
+              4.265000000000001,
+              1.19,
+              4.809999999999999,
+              5.745000000000001,
+              2.73
+            ],
+            "key": "world_mire.market_hall.west_bay_2_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              6.129999999999999,
+              7.1883333333333335,
+              1.19,
+              6.909999999999999,
+              8.668333333333333,
+              2.15
+            ],
+            "key": "world_mire.market_hall.west_bay_3_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              4.349999999999999,
+              7.1883333333333335,
+              1.19,
+              4.809999999999999,
+              8.668333333333333,
+              2.73
+            ],
+            "key": "world_mire.market_hall.west_bay_3_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              10.01,
+              1.341666666666667,
+              1.19,
+              10.79,
+              2.821666666666667,
+              2.15
+            ],
+            "key": "world_mire.market_hall.east_bay_1_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              12.109999999999998,
+              1.341666666666667,
+              1.19,
+              12.569999999999999,
+              2.821666666666667,
+              2.73
+            ],
+            "key": "world_mire.market_hall.east_bay_1_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              10.01,
+              4.265000000000001,
+              1.19,
+              10.79,
+              5.745000000000001,
+              2.15
+            ],
+            "key": "world_mire.market_hall.east_bay_2_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              12.109999999999998,
+              4.265000000000001,
+              1.19,
+              12.569999999999999,
+              5.745000000000001,
+              2.73
+            ],
+            "key": "world_mire.market_hall.east_bay_2_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              10.01,
+              7.1883333333333335,
+              1.19,
+              10.79,
+              8.668333333333333,
+              2.15
+            ],
+            "key": "world_mire.market_hall.east_bay_3_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              12.109999999999998,
+              7.1883333333333335,
+              1.19,
+              12.569999999999999,
+              8.668333333333333,
+              2.73
+            ],
+            "key": "world_mire.market_hall.east_bay_3_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          }
+        ]
+      },
+      "bounds": [
+        [
+          -0.4449999928474426,
+          19.719999313354492
+        ],
+        [
+          -11.5,
+          11.484999656677246
+        ],
+        [
+          -0.12999999523162842,
+          11.315677642822266
+        ]
+      ]
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "EMBERHOLT",
+      "label": "Market Hall",
+      "source_revision": "c9bc152",
+      "source_sha256": {
+        "__init__.py": "51c4880a7a314aad65905cf76a6f3065effb250545b4e394e2ec749d01ddf37d",
+        "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
+        "blender_manifest.toml": "f1a00a550e3699ee2ceef656ce101fcc570dbb0628b15de1b60d3d8cd59d03fb",
+        "engine.py": "9a940ac14646224e897aa2d484f4a773663c3e849953099e6d6addcc7ccedb7c",
+        "facade.py": "4a2bc517ae2c5c66dfc2510e8c3e5c2e6ddb4e8f3488577a30fbd050aa384e7b",
+        "function_work.py": "b6af089ff373604a6a2d3b88586efc35cf67485ab3c8b9b4a3c4a88393ada75a",
+        "function_yard.py": "4067b9a248a3ae0b0c2977e854e7f0b7ef69475abbcc2e492365bf9d79a0e228",
+        "functional.py": "10f719e1db914f5bfc3e1958fe5c0fd323d2e75d8bd02e71f068117a1ad96baa",
+        "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+        "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+        "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+        "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+        "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+        "world.py": "29ca4c63f845a3d8d3b69436e28b674b9290cfb542498e2e58639934a091ba27",
+        "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+        "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+        "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+      },
+      "render_source_sha256": {
+        "render_household_review.py": "5186292c333daab8afa185089b425085de6b76c081be4571e2a8a8d95952bcc5",
+        "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+      },
+      "settings": {
+        "seed": 91,
+        "function": "MARKET_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "EMBERHOLD",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/market_hall/emberholt_clay_0.png",
+          "image_sha256": "ced8d6e498c4c828a2dfe9f11ab0beab32d276fcd58e04a38a1df9fcf1681756",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            56.937721252441406,
+            -62.02031707763672,
+            40.346675872802734
+          ],
+          "camera_target": [
+            9.720000267028809,
+            4.639999866485596,
+            2.572499990463257
+          ],
+          "ortho_scale": 37.04493713378906,
+          "elapsed_seconds": 0.2403
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/market_hall/emberholt_clay_1.png",
+          "image_sha256": "6c759c1c994b0df2f34cf83dfa4d51953fb38e77c974f4789dce88883c64f0a2",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -37.497718811035156,
+            71.3003158569336,
+            40.346675872802734
+          ],
+          "camera_target": [
+            9.720000267028809,
+            4.639999866485596,
+            2.572499990463257
+          ],
+          "ortho_scale": 37.04493713378906,
+          "elapsed_seconds": 0.2277
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/market_hall/emberholt_material_0.png",
+          "image_sha256": "528085dd7bacc63c74088d170d35ba7d559c49cb9450b00a9d779c367bdab23f",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            56.937721252441406,
+            -62.02031707763672,
+            40.346675872802734
+          ],
+          "camera_target": [
+            9.720000267028809,
+            4.639999866485596,
+            2.572499990463257
+          ],
+          "ortho_scale": 37.04493713378906,
+          "elapsed_seconds": 0.2369
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/market_hall/emberholt_material_1.png",
+          "image_sha256": "e0f15f92dcaffb678fa28776371fbbddf18049b1b6b58aef11601020b4f739f7",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -37.497718811035156,
+            71.3003158569336,
+            40.346675872802734
+          ],
+          "camera_target": [
+            9.720000267028809,
+            4.639999866485596,
+            2.572499990463257
+          ],
+          "ortho_scale": 37.04493713378906,
+          "elapsed_seconds": 0.2396
+        }
+      ],
+      "build_seconds": 0.3234,
+      "geometry_hash": "fa7c0c1522debb15f04e3066ee7c1a40bc8a8c15a1a6e3347b10117b16b53a3a",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.32,
+            "bounds": [
+              0,
+              0,
+              19.44,
+              12.0
+            ],
+            "eave": 4.12,
+            "function": "MARKET_HALL",
+            "key": "market_hall",
+            "roof": "TERRACE",
+            "triangles": 6420,
+            "valid": true,
+            "vertices": 4524,
+            "wall_thickness": 0.7
+          }
+        ],
+        "errors": [],
+        "objects": 30,
+        "source_objects": 30,
+        "source_triangles": 6420,
+        "source_vertices": 4524,
+        "triangles": 6420,
+        "valid": true
+      },
+      "backend": {
+        "objects": 30,
+        "vertices": 4524,
+        "width": 23.440000534057617,
+        "depth": 15.279999732971191,
+        "height": 5.40500009059906,
+        "layers": [
+          "details",
+          "foundation",
+          "roof",
+          "structure",
+          "walls"
+        ]
+      },
+      "functional_program": {
+        "adaptations": [],
+        "approaches": [
+          {
+            "end": [
+              9.72,
+              -0.05
+            ],
+            "key": "market.court_ramp",
+            "rise": 0.32,
+            "run": 2.45,
+            "slope": 0.13061224489795917,
+            "start": [
+              9.72,
+              -2.5
+            ],
+            "width": 2.5
+          }
+        ],
+        "context": "EMBERHOLD",
+        "function": "MARKET_HALL",
+        "region": "EMBERHOLT",
+        "rooms": [
+          {
+            "base": 0.32,
+            "bounds": [
+              0,
+              0,
+              19.44,
+              12.0
+            ],
+            "eave": 4.12,
+            "key": "market_hall",
+            "open_edges": [
+              0,
+              2
+            ],
+            "roof": "TERRACE"
+          }
+        ],
+        "routes": [
+          {
+            "bounds": [
+              8.42,
+              0.25,
+              0.32,
+              11.020000000000001,
+              11.75,
+              2.57
+            ],
+            "key": "public_through_aisle",
+            "kind": "public"
+          },
+          {
+            "bounds": [
+              6.25,
+              0.76,
+              0.32,
+              7.27,
+              4.066666666666667,
+              2.3699999999999997
+            ],
+            "key": "west_bay_1_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              6.25,
+              4.346666666666667,
+              0.32,
+              7.27,
+              7.653333333333335,
+              2.3699999999999997
+            ],
+            "key": "west_bay_2_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              6.25,
+              7.9333333333333345,
+              0.32,
+              7.27,
+              11.240000000000002,
+              2.3699999999999997
+            ],
+            "key": "west_bay_3_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              12.17,
+              0.76,
+              0.32,
+              13.19,
+              4.066666666666667,
+              2.3699999999999997
+            ],
+            "key": "east_bay_1_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              12.17,
+              4.346666666666667,
+              0.32,
+              13.19,
+              7.653333333333335,
+              2.3699999999999997
+            ],
+            "key": "east_bay_2_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              12.17,
+              7.9333333333333345,
+              0.32,
+              13.19,
+              11.240000000000002,
+              2.3699999999999997
+            ],
+            "key": "east_bay_3_front_seller_space",
+            "kind": "service"
+          },
+          {
+            "bounds": [
+              8.47,
+              -2.5,
+              0,
+              10.97,
+              -0.05,
+              0.42000000000000004
+            ],
+            "key": "market.court_approach",
+            "kind": "public"
+          }
+        ],
+        "stations": [
+          {
+            "bounds": [
+              7.39,
+              1.6733333333333336,
+              0.36,
+              8.17,
+              3.1533333333333333,
+              1.32
+            ],
+            "key": "world_emberholt.market_hall.west_bay_1_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              5.61,
+              1.6733333333333336,
+              0.36,
+              6.07,
+              3.1533333333333333,
+              1.9000000000000001
+            ],
+            "key": "world_emberholt.market_hall.west_bay_1_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              7.39,
+              5.260000000000001,
+              0.36,
+              8.17,
+              6.740000000000001,
+              1.32
+            ],
+            "key": "world_emberholt.market_hall.west_bay_2_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              5.61,
+              5.260000000000001,
+              0.36,
+              6.07,
+              6.740000000000001,
+              1.9000000000000001
+            ],
+            "key": "world_emberholt.market_hall.west_bay_2_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              7.39,
+              8.846666666666668,
+              0.36,
+              8.17,
+              10.326666666666668,
+              1.32
+            ],
+            "key": "world_emberholt.market_hall.west_bay_3_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              5.61,
+              8.846666666666668,
+              0.36,
+              6.07,
+              10.326666666666668,
+              1.9000000000000001
+            ],
+            "key": "world_emberholt.market_hall.west_bay_3_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              11.270000000000001,
+              1.6733333333333336,
+              0.36,
+              12.05,
+              3.1533333333333333,
+              1.32
+            ],
+            "key": "world_emberholt.market_hall.east_bay_1_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              13.37,
+              1.6733333333333336,
+              0.36,
+              13.83,
+              3.1533333333333333,
+              1.9000000000000001
+            ],
+            "key": "world_emberholt.market_hall.east_bay_1_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              11.270000000000001,
+              5.260000000000001,
+              0.36,
+              12.05,
+              6.740000000000001,
+              1.32
+            ],
+            "key": "world_emberholt.market_hall.east_bay_2_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              13.37,
+              5.260000000000001,
+              0.36,
+              13.83,
+              6.740000000000001,
+              1.9000000000000001
+            ],
+            "key": "world_emberholt.market_hall.east_bay_2_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              11.270000000000001,
+              8.846666666666668,
+              0.36,
+              12.05,
+              10.326666666666668,
+              1.32
+            ],
+            "key": "world_emberholt.market_hall.east_bay_3_front_counter",
+            "role": "market_counter",
+            "zone": "market_hall"
+          },
+          {
+            "bounds": [
+              13.37,
+              8.846666666666668,
+              0.36,
+              13.83,
+              10.326666666666668,
+              1.9000000000000001
+            ],
+            "key": "world_emberholt.market_hall.east_bay_3_rear_counter",
+            "role": "market_stock_shelf",
+            "zone": "market_hall"
+          }
+        ]
+      },
+      "bounds": [
+        [
+          -2.0,
+          21.440000534057617
+        ],
+        [
+          -3.0,
+          12.279999732971191
+        ],
+        [
+          -0.12999999523162842,
+          5.275000095367432
+        ]
+      ]
+    }
+  ]
+}

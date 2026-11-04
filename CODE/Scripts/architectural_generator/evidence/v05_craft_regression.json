@@ -1,0 +1,1097 @@
+{
+  "checks": [
+    {
+      "settings": {
+        "seed": 60029,
+        "function": "BARN",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "HIGHSTEADS",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.9,
+        "age": 70.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 55,
+        "vertices": 18336,
+        "triangles": 19545,
+        "materials": 10,
+        "region": "THORNFELL",
+        "context": "HIGHSTEADS",
+        "building_type": "BARN",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "thornfell_stone_hall",
+            "bounds": [
+              0,
+              0,
+              11.0,
+              9.306
+            ],
+            "base": 0.5,
+            "eave": 3.32,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "BARN",
+            "wall_thickness": 0.5,
+            "vertices": 13596,
+            "triangles": 13863
+          },
+          {
+            "key": "thornfell_lower_stone_range",
+            "bounds": [
+              11.0,
+              1.8612,
+              15.4,
+              6.0612
+            ],
+            "base": 0.9199999999999999,
+            "eave": 3.1195999999999997,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.5,
+            "vertices": 4740,
+            "triangles": 5682
+          }
+        ],
+        "geometry_hash": "a3acf77862817275325d162f05c1f3e000e2b138babe886ee81e681b4fcd0461",
+        "tool_revision": "0.5.0"
+      }
+    },
+    {
+      "settings": {
+        "seed": 96214,
+        "function": "INN",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "STONEWAKE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.9,
+        "age": 240.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 52,
+        "vertices": 41890,
+        "triangles": 62948,
+        "materials": 10,
+        "region": "THORNFELL",
+        "context": "STONEWAKE",
+        "building_type": "INN",
+        "geometry_mode": "SOLID",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "thornfell_stone_hall",
+            "bounds": [
+              0,
+              0,
+              11.66,
+              10.395000000000001
+            ],
+            "base": 0.5,
+            "eave": 6.14,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "INN",
+            "wall_thickness": 0.5,
+            "vertices": 34766,
+            "triangles": 52216
+          },
+          {
+            "key": "thornfell_lower_stone_range",
+            "bounds": [
+              11.66,
+              2.079,
+              16.060000000000002,
+              6.279
+            ],
+            "base": 0.9199999999999999,
+            "eave": 3.1195999999999997,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.5,
+            "vertices": 7124,
+            "triangles": 10732
+          }
+        ],
+        "geometry_hash": "fd4d21ea3b74735fe39cab95bc80fcbf3dd84fc9a71cd44d25cd0719ee903279",
+        "tool_revision": "0.5.0"
+      }
+    },
+    {
+      "settings": {
+        "seed": 92787,
+        "function": "MERCHANT_HOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.9,
+        "age": 0.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 45,
+        "vertices": 17098,
+        "triangles": 19584,
+        "materials": 9,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "building_type": "MERCHANT_HOUSE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "thornfell_stone_hall",
+            "bounds": [
+              0,
+              0,
+              10.01,
+              8.272
+            ],
+            "base": 0.5,
+            "eave": 6.14,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "MERCHANT_HOUSE",
+            "wall_thickness": 0.5,
+            "vertices": 13886,
+            "triangles": 15653
+          },
+          {
+            "key": "thornfell_lower_stone_range",
+            "bounds": [
+              10.01,
+              1.98528,
+              13.4134,
+              5.78528
+            ],
+            "base": 0.9199999999999999,
+            "eave": 3.1195999999999997,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.5,
+            "vertices": 3212,
+            "triangles": 3931
+          }
+        ],
+        "geometry_hash": "038cbb3517cfa19c5cb586b8c8d665e273250081f381a492d24447bfeefb99c7",
+        "tool_revision": "0.5.0"
+      }
+    },
+    {
+      "settings": {
+        "seed": 76288,
+        "function": "WAREHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "PASSWATCH",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.9,
+        "age": 160.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 52,
+        "vertices": 23556,
+        "triangles": 35456,
+        "materials": 9,
+        "region": "THORNFELL",
+        "context": "PASSWATCH",
+        "building_type": "WAREHOUSE",
+        "geometry_mode": "SOLID",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "thornfell_stone_hall",
+            "bounds": [
+              0,
+              0,
+              11.0,
+              10.34
+            ],
+            "base": 0.5,
+            "eave": 3.32,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "WAREHOUSE",
+            "wall_thickness": 0.5,
+            "vertices": 17930,
+            "triangles": 26976
+          },
+          {
+            "key": "thornfell_lower_stone_range",
+            "bounds": [
+              11.0,
+              2.068,
+              15.4,
+              6.268000000000001
+            ],
+            "base": 0.9199999999999999,
+            "eave": 3.1195999999999997,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.5,
+            "vertices": 5626,
+            "triangles": 8480
+          }
+        ],
+        "geometry_hash": "7d745d1e73798cc620221444a15fcbf98846c4b5729386922a4a749a65e24a83",
+        "tool_revision": "0.5.0"
+      }
+    },
+    {
+      "settings": {
+        "seed": 15576,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "HIGHSTEADS",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.9,
+        "age": 240.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 57,
+        "vertices": 15770,
+        "triangles": 17703,
+        "materials": 10,
+        "region": "THORNFELL",
+        "context": "HIGHSTEADS",
+        "building_type": "SMITHY",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "thornfell_stone_hall",
+            "bounds": [
+              0,
+              0,
+              9.1,
+              8.272
+            ],
+            "base": 0.5,
+            "eave": 3.32,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "SMITHY",
+            "wall_thickness": 0.5,
+            "vertices": 11572,
+            "triangles": 12575
+          },
+          {
+            "key": "thornfell_lower_stone_range",
+            "bounds": [
+              9.1,
+              1.6544,
+              12.74,
+              5.8544
+            ],
+            "base": 0.9199999999999999,
+            "eave": 3.1195999999999997,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.5,
+            "vertices": 4198,
+            "triangles": 5128
+          }
+        ],
+        "geometry_hash": "71e696a118cf91a1438ef46b64e4120453f3fd47e2cdbb43bff65e065c116144",
+        "tool_revision": "0.5.0"
+      }
+    },
+    {
+      "settings": {
+        "seed": 71551,
+        "function": "WATCHTOWER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "STONEWAKE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.9,
+        "age": 70.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 83,
+        "vertices": 32580,
+        "triangles": 49044,
+        "materials": 10,
+        "region": "THORNFELL",
+        "context": "STONEWAKE",
+        "building_type": "WATCHTOWER",
+        "geometry_mode": "SOLID",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "thornfell_stone_hall",
+            "bounds": [
+              0,
+              0,
+              6.696000000000001,
+              6.72
+            ],
+            "base": 0.5,
+            "eave": 8.959999999999999,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "WATCHTOWER",
+            "wall_thickness": 0.5,
+            "vertices": 19736,
+            "triangles": 29676
+          },
+          {
+            "key": "thornfell_lower_stone_range",
+            "bounds": [
+              6.696000000000001,
+              1.344,
+              9.696000000000002,
+              4.8384
+            ],
+            "base": 0.9199999999999999,
+            "eave": 3.1195999999999997,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.5,
+            "vertices": 5566,
+            "triangles": 8392
+          },
+          {
+            "key": "thornfell_signal_tower",
+            "bounds": [
+              -3.1,
+              2.4192,
+              0.0,
+              5.4192
+            ],
+            "base": 0.5,
+            "eave": 8.959999999999999,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "WATCHTOWER",
+            "wall_thickness": 0.5,
+            "vertices": 7278,
+            "triangles": 10976
+          }
+        ],
+        "geometry_hash": "afb7ddf18b433fcd77dde5bdfc5a3ec7d64293a00f5824d00817333663b66bde",
+        "tool_revision": "0.5.0"
+      }
+    },
+    {
+      "settings": {
+        "seed": 92944,
+        "function": "BOATHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.9,
+        "age": 160.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 54,
+        "vertices": 17112,
+        "triangles": 18782,
+        "materials": 10,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "building_type": "BOATHOUSE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "thornfell_stone_hall",
+            "bounds": [
+              0,
+              0,
+              10.92,
+              8.272
+            ],
+            "base": 0.5,
+            "eave": 3.32,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "BOATHOUSE",
+            "wall_thickness": 0.5,
+            "vertices": 12440,
+            "triangles": 13127
+          },
+          {
+            "key": "thornfell_lower_stone_range",
+            "bounds": [
+              10.92,
+              1.6544,
+              15.288,
+              5.8544
+            ],
+            "base": 0.9199999999999999,
+            "eave": 3.1195999999999997,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.5,
+            "vertices": 4672,
+            "triangles": 5655
+          }
+        ],
+        "geometry_hash": "d4509a166f3bdcbafd17344351fcb24e038f9f93aee6c99f4b82871160bc24d3",
+        "tool_revision": "0.5.0"
+      }
+    },
+    {
+      "settings": {
+        "seed": 40997,
+        "function": "FARMHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 0.4,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.15,
+        "age": 240.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 52,
+        "vertices": 14886,
+        "triangles": 22424,
+        "materials": 4,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "FARMHOUSE",
+        "geometry_mode": "SOLID",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              8.5,
+              10.799999999999999
+            ],
+            "base": 0.48,
+            "eave": 6.08,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "FARMHOUSE",
+            "wall_thickness": 0.7,
+            "vertices": 9724,
+            "triangles": 14636
+          },
+          {
+            "key": "emberholt_domestic_work_range",
+            "bounds": [
+              8.5,
+              0,
+              12.58,
+              7.2
+            ],
+            "base": 0.48,
+            "eave": 3.0,
+            "valid": true,
+            "roof": "SHED",
+            "function": "WORKSHOP",
+            "wall_thickness": 0.7,
+            "vertices": 5162,
+            "triangles": 7788
+          }
+        ],
+        "geometry_hash": "fb54b2f0e4decd8d90a6f3b17605d49a903cb963067949539c651ca7407cb195",
+        "tool_revision": "0.5.0"
+      }
+    },
+    {
+      "settings": {
+        "seed": 52205,
+        "function": "MILLER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.4,
+        "region": "EMBERHOLT",
+        "context": "ASHSPIRE",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.15,
+        "age": 0.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 24,
+        "vertices": 13092,
+        "triangles": 16922,
+        "materials": 4,
+        "region": "EMBERHOLT",
+        "context": "ASHSPIRE",
+        "building_type": "MILLER",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              16.5,
+              13.0
+            ],
+            "base": 0.48,
+            "eave": 8.879999999999999,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "MILLER",
+            "wall_thickness": 0.7,
+            "vertices": 13092,
+            "triangles": 16922
+          }
+        ],
+        "geometry_hash": "189e546a8ed4699fc1e386422621815f0084484b62dff02824cc31e51f09a9b5",
+        "tool_revision": "0.5.0"
+      }
+    },
+    {
+      "settings": {
+        "seed": 2466,
+        "function": "TOWNHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.4,
+        "region": "EMBERHOLT",
+        "context": "CINDERWEAVE",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.15,
+        "age": 160.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 47,
+        "vertices": 11624,
+        "triangles": 17528,
+        "materials": 4,
+        "region": "EMBERHOLT",
+        "context": "CINDERWEAVE",
+        "building_type": "TOWNHOUSE",
+        "geometry_mode": "SOLID",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              6.9,
+              9.799999999999999
+            ],
+            "base": 0.48,
+            "eave": 8.879999999999999,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "TOWNHOUSE",
+            "wall_thickness": 0.7,
+            "vertices": 8068,
+            "triangles": 12148
+          },
+          {
+            "key": "emberholt_domestic_work_range",
+            "bounds": [
+              6.9,
+              0,
+              10.212,
+              7.055999999999999
+            ],
+            "base": 0.48,
+            "eave": 3.0,
+            "valid": true,
+            "roof": "SHED",
+            "function": "WORKSHOP",
+            "wall_thickness": 0.7,
+            "vertices": 3556,
+            "triangles": 5380
+          }
+        ],
+        "geometry_hash": "fcaec80be0973119bad5d270254e3a5c9d35971a0009891478144f2b410e4c63",
+        "tool_revision": "0.5.0"
+      }
+    },
+    {
+      "settings": {
+        "seed": 27993,
+        "function": "SHOP",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.4,
+        "region": "EMBERHOLT",
+        "context": "EMBERFORGES",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.15,
+        "age": 240.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 47,
+        "vertices": 9954,
+        "triangles": 13221,
+        "materials": 5,
+        "region": "EMBERHOLT",
+        "context": "EMBERFORGES",
+        "building_type": "SHOP",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              7.3,
+              9.4
+            ],
+            "base": 0.48,
+            "eave": 6.08,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "SHOP",
+            "wall_thickness": 0.7,
+            "vertices": 6714,
+            "triangles": 8991
+          },
+          {
+            "key": "emberholt_domestic_work_range",
+            "bounds": [
+              7.3,
+              0,
+              10.804,
+              6.768
+            ],
+            "base": 0.48,
+            "eave": 3.0,
+            "valid": true,
+            "roof": "SHED",
+            "function": "WORKSHOP",
+            "wall_thickness": 0.7,
+            "vertices": 3240,
+            "triangles": 4230
+          }
+        ],
+        "geometry_hash": "321d52070c2676b3803a11ac1e90b6a026cc7c5c8c0d9ac097e91ed3c790e16f",
+        "tool_revision": "0.5.0"
+      }
+    },
+    {
+      "settings": {
+        "seed": 52756,
+        "function": "STABLE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 0.4,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.15,
+        "age": 70.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 24,
+        "vertices": 12418,
+        "triangles": 18676,
+        "materials": 4,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "STABLE",
+        "geometry_mode": "SOLID",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              12.355200000000002,
+              10.8
+            ],
+            "base": 0.48,
+            "eave": 6.08,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "STABLE",
+            "wall_thickness": 0.7,
+            "vertices": 12418,
+            "triangles": 18676
+          }
+        ],
+        "geometry_hash": "8cdb0e56debf820b44d8c4ad79c44db710dc5e4f8dc96266d044643131587076",
+        "tool_revision": "0.5.0"
+      }
+    },
+    {
+      "settings": {
+        "seed": 33013,
+        "function": "ASSEMBLY_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.4,
+        "region": "EMBERHOLT",
+        "context": "ASHSPIRE",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.15,
+        "age": 160.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 51,
+        "vertices": 20828,
+        "triangles": 27598,
+        "materials": 6,
+        "region": "EMBERHOLT",
+        "context": "ASHSPIRE",
+        "building_type": "ASSEMBLY_HALL",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              16.5,
+              13.0
+            ],
+            "base": 0.48,
+            "eave": 8.879999999999999,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "ASSEMBLY_HALL",
+            "wall_thickness": 0.7,
+            "vertices": 16082,
+            "triangles": 21225
+          },
+          {
+            "key": "emberholt_vent_tower",
+            "bounds": [
+              17.85,
+              4.4,
+              21.1,
+              8.600000000000001
+            ],
+            "base": 0.48,
+            "eave": 8.879999999999999,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "WATCHTOWER",
+            "wall_thickness": 0.7,
+            "vertices": 4402,
+            "triangles": 5857
+          }
+        ],
+        "geometry_hash": "978fada2443b94e4220fc008b73436e5f537e47bd6767a9613f819f19d7401b1",
+        "tool_revision": "0.5.0"
+      }
+    },
+    {
+      "settings": {
+        "seed": 94561,
+        "function": "BARRACKS",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.4,
+        "region": "EMBERHOLT",
+        "context": "CINDERWEAVE",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.15,
+        "age": 0.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 54,
+        "vertices": 12776,
+        "triangles": 19248,
+        "materials": 5,
+        "region": "EMBERHOLT",
+        "context": "CINDERWEAVE",
+        "building_type": "BARRACKS",
+        "geometry_mode": "SOLID",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              15.0,
+              12.0
+            ],
+            "base": 0.48,
+            "eave": 6.08,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "BARRACKS",
+            "wall_thickness": 0.7,
+            "vertices": 9132,
+            "triangles": 13748
+          },
+          {
+            "key": "emberholt_vent_tower",
+            "bounds": [
+              16.35,
+              3.9,
+              19.6,
+              8.1
+            ],
+            "base": 0.48,
+            "eave": 6.08,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "WATCHTOWER",
+            "wall_thickness": 0.7,
+            "vertices": 3300,
+            "triangles": 4984
+          }
+        ],
+        "geometry_hash": "4b5685cdb94e2d07eadfdcd57933de0b7a7a6f4be16e3e39ac111864070f8597",
+        "tool_revision": "0.5.0"
+      }
+    }
+  ],
+  "count": 14,
+  "valid": true,
+  "scope": "Only cases affected by restored masonry workmanship",
+  "source_sha256": {
+    "blender_backend.py": "ccd4ce109d97eb98df309fcad795398f96eb55c02a1b012fc969a45deca6bdcc",
+    "engine.py": "11d4a8b1868afc1170a34a03d0b294b85d09f7c344153cb24074f5d2acce0ed7",
+    "facade.py": "446a8cd22056287eb27228d65b95fe60d15b3535a4d057d59c8c690f23ffac09",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "8da06e3a1242be8c2ac21bca994d1805a36f399425ab585befdaf386346b65ce",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "5ca9b76d0ed57d4faa18dd33f11c5d736f50fb71e63347df13bbb984ae2c2bb2",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126",
+    "__init__.py": "7fa1a0ce9871a3c9e7faebe021fb530bdaff3f31175cc0c9528176b3f03d488e"
+  }
+}

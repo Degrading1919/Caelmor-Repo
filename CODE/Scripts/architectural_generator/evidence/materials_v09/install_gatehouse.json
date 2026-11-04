@@ -1,0 +1,10 @@
+{
+  "installed_archive": "C:\\Users\\CK\\Documents\\Caelmor-Architecture\\CODE\\Scripts\\architectural_generator\\dist\\caelmor_architecture.zip",
+  "archive_sha256": "fce644532bb1fa714ecfa515bd680fc44aa09d5d9ca642d588bcc820be0cb919",
+  "native_install_and_generate": true,
+  "isolated_preferences": true,
+  "region": "THORNFELL",
+  "building_type": "GATEHOUSE",
+  "geometry_mode": "EFFICIENT",
+  "world_aware": true
+}

@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+evidence/_frames/
+evidence/_expansion_frames/
+evidence/_world_frames/
+evidence/_household_frames/
+evidence/*.log
+evidence/v05_revised*_editable.blend
+*.blend1

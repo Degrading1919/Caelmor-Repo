@@ -1,0 +1,382 @@
+{
+  "format": "CaelmorBuildingExport",
+  "version": 1,
+  "generator_version": "0.3.0",
+  "settings": {
+    "age": 20.0,
+    "context": "AUTO",
+    "craftsmanship": "STANDARD",
+    "depth": 7.0,
+    "detail": "HIGH",
+    "floor_height": 2.6500000953674316,
+    "floors": 2,
+    "footprint": "L",
+    "function": "FARMHOUSE",
+    "geometry_mode": "SOLID",
+    "maintenance": 0.699999988079071,
+    "overhang": 0.44999998807907104,
+    "pitch": 48.0,
+    "region": "LOWMARK",
+    "roof_style": "AUTO",
+    "seed": 17,
+    "use_grammar": true,
+    "wealth": "ESTABLISHED",
+    "width": 11.0,
+    "window_density": 1.0,
+    "wing_depth": 4.5,
+    "wing_width": 4.199999809265137
+  },
+  "source_geometry_hash": "7e1d0dc109b870d34899fe09630cde07d4674847dd614d51b6d50c48dc7297e7",
+  "has_protected_buffers": false,
+  "protected_buffer_count": 0,
+  "units": "metres",
+  "up_axis": "Y",
+  "collision": {
+    "file": "expanded_installed_farmhouse.collision.glb",
+    "object_count": 8,
+    "wall_proxy_count": 6,
+    "floor_proxy_count": 2,
+    "note": "Approximate static outer-wall and footprint proxies; not tested for traversal."
+  },
+  "anchor": {
+    "name": "Caelmor Building Root",
+    "location": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotation_euler": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "layers": [
+    "details",
+    "doors",
+    "foundation",
+    "roof",
+    "structure",
+    "walls",
+    "windows"
+  ],
+  "objects": [
+    {
+      "name": "facade_foundation_core",
+      "layer": "foundation",
+      "material": "stone",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "facade_steps",
+      "layer": "foundation",
+      "material": "stone_light",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "facade_stone",
+      "layer": "foundation",
+      "material": "stone_light",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "facade_mortar",
+      "layer": "foundation",
+      "material": "mortar",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "facade_quoins",
+      "layer": "foundation",
+      "material": "stone_light",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "facade_walls",
+      "layer": "walls",
+      "material": "plaster",
+      "semantic": "walls",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "facade_timber",
+      "layer": "structure",
+      "material": "timber",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "facade_pegs",
+      "layer": "structure",
+      "material": "timber_light",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "facade_windows",
+      "layer": "windows",
+      "material": "glass",
+      "semantic": "windows",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "facade_shutters",
+      "layer": "windows",
+      "material": "timber_light",
+      "semantic": "windows",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "facade_doors",
+      "layer": "doors",
+      "material": "timber",
+      "semantic": "doors",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "facade_iron",
+      "layer": "details",
+      "material": "iron",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "facade_details",
+      "layer": "details",
+      "material": "stone_light",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "facade_chimney",
+      "layer": "details",
+      "material": "stone",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "facade_flashing",
+      "layer": "details",
+      "material": "iron",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "facade_porch",
+      "layer": "details",
+      "material": "timber_light",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": {
+        "bounds": [
+          6.165000000000001,
+          -0.88,
+          7.8149999999999995,
+          -0.18000000000000005
+        ],
+        "clearance": 0.12,
+        "plane": [
+          0.0,
+          0.0,
+          3.46
+        ]
+      },
+      "support_surface": null
+    },
+    {
+      "name": "facade_porch_roof",
+      "layer": "details",
+      "material": "timber_light",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": {
+        "bounds": [
+          6.165000000000001,
+          -0.88,
+          7.8149999999999995,
+          -0.18000000000000005
+        ],
+        "clearance": 0.0,
+        "plane": [
+          0.0,
+          0.0,
+          3.46
+        ]
+      },
+      "support_surface": null
+    },
+    {
+      "name": "Continuous roof deck",
+      "layer": "roof",
+      "material": "timber",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "Split oak shingle courses",
+      "layer": "roof",
+      "material": "roof",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "Seasoned shingle cohorts",
+      "layer": "roof",
+      "material": "roof_dark",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "Exposed shingle butts",
+      "layer": "roof",
+      "material": "roof_worn",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "Replacement shingle cohort",
+      "layer": "roof",
+      "material": "roof_patch",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "Overlapping ridge caps",
+      "layer": "roof",
+      "material": "roof_dark",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "Ridge caps and valley flashing",
+      "layer": "roof",
+      "material": "iron",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "Roof edge fascia",
+      "layer": "roof",
+      "material": "timber",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "Supported roof rafters",
+      "layer": "roof",
+      "material": "timber",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "roof_envelope": null,
+      "support_surface": null
+    }
+  ]
+}

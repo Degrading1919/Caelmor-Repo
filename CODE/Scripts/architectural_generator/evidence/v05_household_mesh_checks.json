@@ -1,0 +1,114 @@
+[
+  {
+    "region": "LOWMARK",
+    "wealth": "MODEST",
+    "function": "COTTAGE",
+    "aperture_rays": 9,
+    "door_rays": 3,
+    "glass_structure_intersections": 0
+  },
+  {
+    "region": "LOWMARK",
+    "wealth": "ESTABLISHED",
+    "function": "COTTAGE",
+    "aperture_rays": 24,
+    "door_rays": 9,
+    "glass_structure_intersections": 0
+  },
+  {
+    "region": "LOWMARK",
+    "wealth": "AFFLUENT",
+    "function": "COTTAGE",
+    "aperture_rays": 48,
+    "door_rays": 15,
+    "glass_structure_intersections": 0
+  },
+  {
+    "region": "THORNFELL",
+    "wealth": "MODEST",
+    "function": "COTTAGE",
+    "aperture_rays": 9,
+    "door_rays": 3,
+    "glass_structure_intersections": 0
+  },
+  {
+    "region": "THORNFELL",
+    "wealth": "ESTABLISHED",
+    "function": "COTTAGE",
+    "aperture_rays": 15,
+    "door_rays": 6,
+    "glass_structure_intersections": 0
+  },
+  {
+    "region": "THORNFELL",
+    "wealth": "AFFLUENT",
+    "function": "COTTAGE",
+    "aperture_rays": 27,
+    "door_rays": 9,
+    "glass_structure_intersections": 0
+  },
+  {
+    "region": "MIRE",
+    "wealth": "MODEST",
+    "function": "COTTAGE",
+    "aperture_rays": 12,
+    "door_rays": 3,
+    "glass_structure_intersections": 0
+  },
+  {
+    "region": "MIRE",
+    "wealth": "ESTABLISHED",
+    "function": "COTTAGE",
+    "aperture_rays": 15,
+    "door_rays": 3,
+    "glass_structure_intersections": 0
+  },
+  {
+    "region": "MIRE",
+    "wealth": "AFFLUENT",
+    "function": "COTTAGE",
+    "aperture_rays": 27,
+    "door_rays": 9,
+    "glass_structure_intersections": 0
+  },
+  {
+    "region": "EMBERHOLT",
+    "wealth": "MODEST",
+    "function": "COTTAGE",
+    "aperture_rays": 21,
+    "door_rays": 3,
+    "glass_structure_intersections": 0
+  },
+  {
+    "region": "EMBERHOLT",
+    "wealth": "ESTABLISHED",
+    "function": "COTTAGE",
+    "aperture_rays": 30,
+    "door_rays": 6,
+    "glass_structure_intersections": 0
+  },
+  {
+    "region": "EMBERHOLT",
+    "wealth": "AFFLUENT",
+    "function": "COTTAGE",
+    "aperture_rays": 78,
+    "door_rays": 6,
+    "glass_structure_intersections": 0
+  },
+  {
+    "region": "MIRE",
+    "wealth": "ESTABLISHED",
+    "function": "FARMHOUSE",
+    "aperture_rays": 36,
+    "door_rays": 3,
+    "glass_structure_intersections": 0
+  },
+  {
+    "region": "EMBERHOLT",
+    "wealth": "AFFLUENT",
+    "function": "SHOP",
+    "aperture_rays": 51,
+    "door_rays": 6,
+    "glass_structure_intersections": 0
+  }
+]

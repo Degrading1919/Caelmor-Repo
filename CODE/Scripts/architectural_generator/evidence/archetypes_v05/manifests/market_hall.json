@@ -1,0 +1,901 @@
+{
+  "source_revision": "809300bcfddf67601fa6719ebf4e91aef9135098",
+  "generator_version": "0.5.0",
+  "source_sha256": {
+    "__init__.py": "57f662977d12340c1c4b91864c6655335854bdf196de143b3448ee154b18c2e0",
+    "blender_backend.py": "ccd4ce109d97eb98df309fcad795398f96eb55c02a1b012fc969a45deca6bdcc",
+    "blender_manifest.toml": "f9ec85f7be7b8fd2b6210d783d60f4402a97a912b27897ac6ba41e2fb509a452",
+    "engine.py": "11d4a8b1868afc1170a34a03d0b294b85d09f7c344153cb24074f5d2acce0ed7",
+    "facade.py": "f989e3a56624f89a034701e275beb6e10d7bfd52bb7a14b0ffad23a235708f4d",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "8da06e3a1242be8c2ac21bca994d1805a36f399425ab585befdaf386346b65ce",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+  },
+  "render_source_sha256": {
+    "render_household_review.py": "08bc6f0ac312f457e341cbf44163eb1276a203282074f67bb1952f899264ba78",
+    "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+  },
+  "settings_contract": {
+    "seed": 91,
+    "footprint": "L",
+    "width": 11.0,
+    "depth": 7.0,
+    "wing_width": 4.2,
+    "wing_depth": 4.5,
+    "floors": 2,
+    "floor_height": 2.65,
+    "pitch": 48.0,
+    "overhang": 0.45,
+    "detail": "MEDIUM",
+    "window_density": 1.0,
+    "context": "AUTO",
+    "wealth": "ESTABLISHED",
+    "craftsmanship": "STANDARD",
+    "maintenance": 0.7,
+    "age": 35,
+    "use_grammar": true,
+    "roof_style": "AUTO",
+    "geometry_mode": "EFFICIENT",
+    "world_aware": true
+  },
+  "renderer": "5.0.1",
+  "engine": "BLENDER_EEVEE",
+  "samples": 32,
+  "studio": "render_world_evidence._reset_scene, ground at grade",
+  "scale_policy": "Common projected orthographic scale per archetype across four regions and both views; different archetypes fitted independently.",
+  "geometry_generation": "One native backend build/validation per configuration; same objects reused for clay and material.",
+  "records": [
+    {
+      "function": "MARKET_HALL",
+      "region": "LOWMARK",
+      "label": "Market Hall",
+      "settings": {
+        "seed": 91,
+        "function": "MARKET_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RURAL",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/market_hall/lowmark_clay_0.png",
+          "image_sha256": "544534856967ce1a8d7a21fdfefa8d3da12e134c59f66e1dbcfab8318b478963",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            59.21271896362305,
+            -59.303314208984375,
+            41.284420013427734
+          ],
+          "camera_target": [
+            11.994999885559082,
+            7.357001304626465,
+            3.5102429389953613
+          ],
+          "ortho_scale": 36.48899230957032,
+          "elapsed_seconds": 0.36
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/market_hall/lowmark_clay_1.png",
+          "image_sha256": "21456c0670ad6b44e842c0d18a85caa776d48534a69e600cbae34a214e2d5c0a",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -35.222721099853516,
+            74.01731872558594,
+            41.284420013427734
+          ],
+          "camera_target": [
+            11.994999885559082,
+            7.357001304626465,
+            3.5102429389953613
+          ],
+          "ortho_scale": 36.48899230957032,
+          "elapsed_seconds": 0.2742
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/market_hall/lowmark_material_0.png",
+          "image_sha256": "0b0294e43c64b978ed13405e0a96ad30da2eec4cb3fb6b063c87e53972f5ebc6",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            59.21271896362305,
+            -59.303314208984375,
+            41.284420013427734
+          ],
+          "camera_target": [
+            11.994999885559082,
+            7.357001304626465,
+            3.5102429389953613
+          ],
+          "ortho_scale": 36.48899230957032,
+          "elapsed_seconds": 0.3319
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/market_hall/lowmark_material_1.png",
+          "image_sha256": "3c5ffb98d5748567d8cbf8bb8905a0a42d891969076dada0ada1ce3c2a6c516a",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -35.222721099853516,
+            74.01731872558594,
+            41.284420013427734
+          ],
+          "camera_target": [
+            11.994999885559082,
+            7.357001304626465,
+            3.5102429389953613
+          ],
+          "ortho_scale": 36.48899230957032,
+          "elapsed_seconds": 0.3686
+        }
+      ],
+      "build_seconds": 3.6384,
+      "geometry_hash": "2ac8dd52c45d57e64037601f4da68097236bfa3281888b24d180c35cebc141dd",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.45,
+            "bounds": [
+              0,
+              0,
+              18.0,
+              12.0
+            ],
+            "eave": 3.25,
+            "function": "MARKET_HALL",
+            "key": "lowmark_main_hall",
+            "roof": "GABLE",
+            "triangles": 18010,
+            "valid": true,
+            "vertices": 19090,
+            "wall_thickness": 0.28
+          },
+          {
+            "base": 0.45,
+            "bounds": [
+              18.85,
+              -1.44,
+              24.05,
+              4.359999999999999
+            ],
+            "eave": 2.95,
+            "function": "WORKSHOP",
+            "key": "lowmark_service_wing",
+            "roof": "SHED",
+            "triangles": 4324,
+            "valid": true,
+            "vertices": 3816,
+            "wall_thickness": 0.28
+          },
+          {
+            "base": 0.45,
+            "bounds": [
+              0,
+              12.24,
+              7.0,
+              16.240000000000002
+            ],
+            "eave": 2.55,
+            "function": "WAREHOUSE",
+            "key": "lowmark_loading_bay",
+            "roof": "SHED",
+            "triangles": 4970,
+            "valid": true,
+            "vertices": 4086,
+            "wall_thickness": 0.28
+          }
+        ],
+        "errors": [],
+        "objects": 55,
+        "source_objects": 55,
+        "source_triangles": 27364,
+        "source_vertices": 27032,
+        "triangles": 27364,
+        "valid": true
+      },
+      "backend": {
+        "objects": 55,
+        "vertices": 27032,
+        "width": 24.96000039577484,
+        "depth": 19.445997714996338,
+        "height": 7.1439468562603,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls"
+        ]
+      },
+      "bounds": [
+        [
+          -0.48500001430511475,
+          24.475000381469727
+        ],
+        [
+          -2.365997791290283,
+          17.079999923706055
+        ],
+        [
+          -0.06173059344291687,
+          7.082216262817383
+        ]
+      ]
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "THORNFELL",
+      "label": "Market Hall",
+      "settings": {
+        "seed": 91,
+        "function": "MARKET_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RIDGE",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/market_hall/thornfell_clay_0.png",
+          "image_sha256": "0b7f3405f1f8e01afcd3b4db2878192b88890fdd76f85ec7d1220152a5f29ff9",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.24021911621094,
+            -60.432777404785156,
+            43.705177307128906
+          ],
+          "camera_target": [
+            8.022500038146973,
+            6.227540493011475,
+            5.931000232696533
+          ],
+          "ortho_scale": 36.48899230957032,
+          "elapsed_seconds": 0.2885
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/market_hall/thornfell_clay_1.png",
+          "image_sha256": "902b14a5aa048d5fd20a2d861af044c016e8776530aee971602e71e6b633bc33",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.195220947265625,
+            72.88785552978516,
+            43.705177307128906
+          ],
+          "camera_target": [
+            8.022500038146973,
+            6.227540493011475,
+            5.931000232696533
+          ],
+          "ortho_scale": 36.48899230957032,
+          "elapsed_seconds": 0.2592
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/market_hall/thornfell_material_0.png",
+          "image_sha256": "da54ab2f2a39c3760f77eb3f98410f778e6da36bf496015a807c382c120286ed",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.24021911621094,
+            -60.432777404785156,
+            43.705177307128906
+          ],
+          "camera_target": [
+            8.022500038146973,
+            6.227540493011475,
+            5.931000232696533
+          ],
+          "ortho_scale": 36.48899230957032,
+          "elapsed_seconds": 0.2778
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/market_hall/thornfell_material_1.png",
+          "image_sha256": "bba01a568f8ee6abb4f85f3b317c994eb4aec4c7bb78e68d41ca091d8075447f",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.195220947265625,
+            72.88785552978516,
+            43.705177307128906
+          ],
+          "camera_target": [
+            8.022500038146973,
+            6.227540493011475,
+            5.931000232696533
+          ],
+          "ortho_scale": 36.48899230957032,
+          "elapsed_seconds": 0.2815
+        }
+      ],
+      "build_seconds": 1.7566,
+      "geometry_hash": "88a134f6dc1cc30148f2d7e00f5abf7716f1b5913a59556b444cd94a86a243be",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.5,
+            "bounds": [
+              0,
+              0,
+              11.66,
+              13.0284
+            ],
+            "eave": 3.1319999999999997,
+            "function": "MARKET_HALL",
+            "key": "thornfell_stone_hall",
+            "roof": "GABLE",
+            "triangles": 19884,
+            "valid": true,
+            "vertices": 19672,
+            "wall_thickness": 0.5
+          },
+          {
+            "base": 0.9199999999999999,
+            "bounds": [
+              11.66,
+              2.60568,
+              16.060000000000002,
+              6.805680000000001
+            ],
+            "eave": 2.9729599999999996,
+            "function": "COTTAGE",
+            "key": "thornfell_lower_stone_range",
+            "roof": "GABLE",
+            "triangles": 6003,
+            "valid": true,
+            "vertices": 4992,
+            "wall_thickness": 0.5
+          }
+        ],
+        "errors": [],
+        "objects": 55,
+        "source_objects": 55,
+        "source_triangles": 25887,
+        "source_vertices": 24664,
+        "triangles": 25887,
+        "valid": true
+      },
+      "backend": {
+        "objects": 55,
+        "vertices": 24664,
+        "width": 16.535000920295715,
+        "depth": 14.135081112384796,
+        "height": 11.862000465393066,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.24500000476837158,
+          16.290000915527344
+        ],
+        [
+          -0.8399999737739563,
+          13.29508113861084
+        ],
+        [
+          0.0,
+          11.862000465393066
+        ]
+      ]
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "MIRE",
+      "label": "Market Hall",
+      "settings": {
+        "seed": 91,
+        "function": "MARKET_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "SORROWMERE",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/market_hall/mire_clay_0.png",
+          "image_sha256": "46728d0ddc38df4c8c3de1b13fc58c5ce2db5cf3336a5457529f8559998776d6",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            59.227718353271484,
+            -63.29526138305664,
+            43.6988525390625
+          ],
+          "camera_target": [
+            12.00999927520752,
+            3.36505389213562,
+            5.924674987792969
+          ],
+          "ortho_scale": 36.48899230957032,
+          "elapsed_seconds": 0.2615
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/market_hall/mire_clay_1.png",
+          "image_sha256": "07687ab0faa31951a161a1d8626415059a4e3cb8ff4326c99ae3ff4362b703cb",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -35.20772171020508,
+            70.0253677368164,
+            43.6988525390625
+          ],
+          "camera_target": [
+            12.00999927520752,
+            3.36505389213562,
+            5.924674987792969
+          ],
+          "ortho_scale": 36.48899230957032,
+          "elapsed_seconds": 0.2563
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/market_hall/mire_material_0.png",
+          "image_sha256": "9daaaf6b127904f45939817d36b4ba9743a37690fe2ec967dc27e43928cefd3d",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            59.227718353271484,
+            -63.29526138305664,
+            43.6988525390625
+          ],
+          "camera_target": [
+            12.00999927520752,
+            3.36505389213562,
+            5.924674987792969
+          ],
+          "ortho_scale": 36.48899230957032,
+          "elapsed_seconds": 0.3121
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/market_hall/mire_material_1.png",
+          "image_sha256": "b2f9ff0fa6719dbdd03dc2a59c1d3232a38a91c85f789d55a6ae2cb9c960ca91",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -35.20772171020508,
+            70.0253677368164,
+            43.6988525390625
+          ],
+          "camera_target": [
+            12.00999927520752,
+            3.36505389213562,
+            5.924674987792969
+          ],
+          "ortho_scale": 36.48899230957032,
+          "elapsed_seconds": 0.328
+        }
+      ],
+      "build_seconds": 3.0892,
+      "geometry_hash": "098423d6a2d5c662a5f469a51dfdb5eddc9606042308c65727b93198962129a0",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 1.94,
+            "bounds": [
+              0.0,
+              0.0,
+              16.919999999999998,
+              11.040000000000001
+            ],
+            "eave": 4.74,
+            "function": "MARKET_HALL",
+            "key": "mire_longhouse",
+            "roof": "BOW",
+            "triangles": 33388,
+            "valid": true,
+            "vertices": 33998,
+            "wall_thickness": 0.18
+          },
+          {
+            "base": 1.94,
+            "bounds": [
+              18.72,
+              2.5200000000000005,
+              24.119999999999997,
+              8.52
+            ],
+            "eave": 4.74,
+            "function": "COTTAGE",
+            "key": "mire_linked_pavilion",
+            "roof": "BOW",
+            "triangles": 12360,
+            "valid": true,
+            "vertices": 10920,
+            "wall_thickness": 0.18
+          }
+        ],
+        "errors": [],
+        "objects": 55,
+        "source_objects": 55,
+        "source_triangles": 46888,
+        "source_vertices": 45678,
+        "triangles": 46888,
+        "valid": true
+      },
+      "backend": {
+        "objects": 55,
+        "vertices": 45678,
+        "width": 25.50999939441681,
+        "depth": 16.83989191055298,
+        "height": 11.953034952282906,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.7450000047683716,
+          24.764999389648438
+        ],
+        [
+          -5.054892063140869,
+          11.78499984741211
+        ],
+        [
+          -0.05184228718280792,
+          11.901192665100098
+        ]
+      ]
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "EMBERHOLT",
+      "label": "Market Hall",
+      "settings": {
+        "seed": 91,
+        "function": "MARKET_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "EMBERHOLD",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/market_hall/emberholt_clay_0.png",
+          "image_sha256": "12ecfe19cc9b38ca727908acaa1050be313d373a15eddc0c045ff444cb7f03b0",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.417720794677734,
+            -60.73531723022461,
+            41.944175720214844
+          ],
+          "camera_target": [
+            8.199999809265137,
+            5.925000190734863,
+            4.170000076293945
+          ],
+          "ortho_scale": 36.48899230957032,
+          "elapsed_seconds": 0.2598
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/market_hall/emberholt_clay_1.png",
+          "image_sha256": "812a889a273384b5d118b2ede1793106fbb7de35076b0807e0b7c1c981399379",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.01771926879883,
+            72.58531951904297,
+            41.944175720214844
+          ],
+          "camera_target": [
+            8.199999809265137,
+            5.925000190734863,
+            4.170000076293945
+          ],
+          "ortho_scale": 36.48899230957032,
+          "elapsed_seconds": 0.2444
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/market_hall/emberholt_material_0.png",
+          "image_sha256": "5d54dd5beff440535cb034be6e6e85f12b1557ee4867335917a11e33a441a768",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            55.417720794677734,
+            -60.73531723022461,
+            41.944175720214844
+          ],
+          "camera_target": [
+            8.199999809265137,
+            5.925000190734863,
+            4.170000076293945
+          ],
+          "ortho_scale": 36.48899230957032,
+          "elapsed_seconds": 0.2714
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/market_hall/emberholt_material_1.png",
+          "image_sha256": "2d2b107f754ea91f2e2ccb98dfa4ea7be56165ed4b9a326d1875dae6851d6f41",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.01771926879883,
+            72.58531951904297,
+            41.944175720214844
+          ],
+          "camera_target": [
+            8.199999809265137,
+            5.925000190734863,
+            4.170000076293945
+          ],
+          "ortho_scale": 36.48899230957032,
+          "elapsed_seconds": 0.2689
+        }
+      ],
+      "build_seconds": 0.9048,
+      "geometry_hash": "f37f66accc72141bae85f797b4b0f1220d5bcdb7defb8f4810ca98a7b38eac22",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.48,
+            "bounds": [
+              0,
+              0,
+              16.4,
+              12.0
+            ],
+            "eave": 6.08,
+            "function": "MARKET_HALL",
+            "key": "emberholt_main_block",
+            "roof": "TERRACE",
+            "triangles": 12270,
+            "valid": true,
+            "vertices": 9048,
+            "wall_thickness": 0.7
+          }
+        ],
+        "errors": [],
+        "objects": 20,
+        "source_objects": 20,
+        "source_triangles": 12270,
+        "source_vertices": 9048,
+        "triangles": 12270,
+        "valid": true
+      },
+      "backend": {
+        "objects": 20,
+        "vertices": 9048,
+        "width": 18.137525260448456,
+        "depth": 12.570000052452087,
+        "height": 8.34000015258789,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls"
+        ]
+      },
+      "bounds": [
+        [
+          -0.8687626719474792,
+          17.268762588500977
+        ],
+        [
+          -0.36000001430511475,
+          12.210000038146973
+        ],
+        [
+          0.0,
+          8.34000015258789
+        ]
+      ]
+    }
+  ]
+}

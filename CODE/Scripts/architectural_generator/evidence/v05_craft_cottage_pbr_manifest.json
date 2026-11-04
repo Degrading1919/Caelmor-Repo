@@ -1,0 +1,658 @@
+{
+  "renderer": "5.0.1",
+  "source_hashes": {
+    "__init__.py": "7fa1a0ce9871a3c9e7faebe021fb530bdaff3f31175cc0c9528176b3f03d488e",
+    "blender_backend.py": "ccd4ce109d97eb98df309fcad795398f96eb55c02a1b012fc969a45deca6bdcc",
+    "engine.py": "11d4a8b1868afc1170a34a03d0b294b85d09f7c344153cb24074f5d2acce0ed7",
+    "facade.py": "446a8cd22056287eb27228d65b95fe60d15b3535a4d057d59c8c690f23ffac09",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "8da06e3a1242be8c2ac21bca994d1805a36f399425ab585befdaf386346b65ce",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "5ca9b76d0ed57d4faa18dd33f11c5d736f50fb71e63347df13bbb984ae2c2bb2"
+  },
+  "records": [
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "slot": "MODEST",
+      "view": 0,
+      "geometry_hash": "d276872c9f0c6de1379fc0de9b49cf914fe79f66b3736b31992369a80d7fd772",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 50,
+        "vertices": 10604,
+        "triangles": 12277,
+        "materials": 10,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "building_type": "COTTAGE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "thornfell_stone_hall",
+            "bounds": [
+              0,
+              0,
+              7.28,
+              6.6000000000000005
+            ],
+            "base": 0.5,
+            "eave": 2.9909999999999997,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.5,
+            "vertices": 7582,
+            "triangles": 8512
+          },
+          {
+            "key": "thornfell_lower_stone_range",
+            "bounds": [
+              7.28,
+              1.584,
+              10.48,
+              4.784000000000001
+            ],
+            "base": 0.9199999999999999,
+            "eave": 2.8629799999999994,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.5,
+            "vertices": 3022,
+            "triangles": 3765
+          }
+        ],
+        "geometry_hash": "d276872c9f0c6de1379fc0de9b49cf914fe79f66b3736b31992369a80d7fd772",
+        "tool_revision": "0.5.0"
+      },
+      "backend": {
+        "objects": 50,
+        "vertices": 10604,
+        "width": 10.93000042438507,
+        "depth": 7.693604290485382,
+        "height": 6.045333385467529,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "image": "v05_craft_cottage_pbr_thornfell_modest_0.png",
+      "image_sha256": "3eec16a0891d143edc6c5c6d7b737baf2e9ff5a90e37fbf1e0b0295de90ea05b",
+      "ortho_scale": 17.71579818725586,
+      "camera_direction": [
+        0.85,
+        -1.2,
+        0.68
+      ],
+      "elapsed_seconds": 3.436
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "slot": "ESTABLISHED",
+      "view": 0,
+      "geometry_hash": "07abd729eef84fcf6baf2ee41df9e947e698eddc1bc0784a33013fc0165601dd",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 50,
+        "vertices": 10754,
+        "triangles": 12460,
+        "materials": 10,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "building_type": "COTTAGE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "thornfell_stone_hall",
+            "bounds": [
+              0,
+              0,
+              7.28,
+              6.6000000000000005
+            ],
+            "base": 0.5,
+            "eave": 3.1319999999999997,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.5,
+            "vertices": 7730,
+            "triangles": 8694
+          },
+          {
+            "key": "thornfell_lower_stone_range",
+            "bounds": [
+              7.28,
+              1.584,
+              10.48,
+              4.784000000000001
+            ],
+            "base": 0.9199999999999999,
+            "eave": 2.9729599999999996,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.5,
+            "vertices": 3024,
+            "triangles": 3766
+          }
+        ],
+        "geometry_hash": "07abd729eef84fcf6baf2ee41df9e947e698eddc1bc0784a33013fc0165601dd",
+        "tool_revision": "0.5.0"
+      },
+      "backend": {
+        "objects": 50,
+        "vertices": 10754,
+        "width": 10.93000042438507,
+        "depth": 7.693604290485382,
+        "height": 6.186333179473877,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "image": "v05_craft_cottage_pbr_thornfell_established_0.png",
+      "image_sha256": "1cd4673715427c671a9914d9a9c6d40416dd36d939a007848ee54a81326a3d75",
+      "ortho_scale": 17.71579818725586,
+      "camera_direction": [
+        0.85,
+        -1.2,
+        0.68
+      ],
+      "elapsed_seconds": 1.823
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "slot": "AFFLUENT",
+      "view": 0,
+      "geometry_hash": "05007bbf490eb4c5cb2a9699dc9bd55842a520a04a7e8d186efd2b02ff68a6d6",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 50,
+        "vertices": 10154,
+        "triangles": 11712,
+        "materials": 10,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "building_type": "COTTAGE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "thornfell_stone_hall",
+            "bounds": [
+              0,
+              0,
+              7.28,
+              6.6000000000000005
+            ],
+            "base": 0.5,
+            "eave": 3.32,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.5,
+            "vertices": 7238,
+            "triangles": 8080
+          },
+          {
+            "key": "thornfell_lower_stone_range",
+            "bounds": [
+              7.28,
+              1.584,
+              10.48,
+              4.784000000000001
+            ],
+            "base": 0.9199999999999999,
+            "eave": 3.1195999999999997,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.5,
+            "vertices": 2916,
+            "triangles": 3632
+          }
+        ],
+        "geometry_hash": "05007bbf490eb4c5cb2a9699dc9bd55842a520a04a7e8d186efd2b02ff68a6d6",
+        "tool_revision": "0.5.0"
+      },
+      "backend": {
+        "objects": 50,
+        "vertices": 10154,
+        "width": 10.93000042438507,
+        "depth": 7.693604290485382,
+        "height": 6.374333381652832,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "image": "v05_craft_cottage_pbr_thornfell_affluent_0.png",
+      "image_sha256": "b989a47d6e0400581fb285d5ebf6f5177a89028a68ee719939a9ac168dd3653f",
+      "ortho_scale": 17.71579818725586,
+      "camera_direction": [
+        0.85,
+        -1.2,
+        0.68
+      ],
+      "elapsed_seconds": 1.801
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "slot": "MODEST",
+      "view": 0,
+      "geometry_hash": "0330f3a693cd15206216099ae44381463166f24afc0eba191e4a1a5e33b0394f",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 48,
+        "vertices": 10634,
+        "triangles": 14207,
+        "materials": 5,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "COTTAGE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              6.8,
+              9.6
+            ],
+            "base": 0.48,
+            "eave": 6.08,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.7,
+            "vertices": 7100,
+            "triangles": 9584
+          },
+          {
+            "key": "emberholt_domestic_work_range",
+            "bounds": [
+              6.8,
+              0,
+              10.6,
+              6.912
+            ],
+            "base": 0.48,
+            "eave": 3.0,
+            "valid": true,
+            "roof": "SHED",
+            "function": "WORKSHOP",
+            "wall_thickness": 0.7,
+            "vertices": 3534,
+            "triangles": 4623
+          }
+        ],
+        "geometry_hash": "0330f3a693cd15206216099ae44381463166f24afc0eba191e4a1a5e33b0394f",
+        "tool_revision": "0.5.0"
+      },
+      "backend": {
+        "objects": 48,
+        "vertices": 10634,
+        "width": 12.331720054149628,
+        "depth": 11.315000355243683,
+        "height": 7.929999828338623,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "image": "v05_craft_cottage_pbr_emberholt_modest_0.png",
+      "image_sha256": "de6c61c3b54cff02a3a187f47dee41731b9bb088bf2e3c3bc7103a7f2b3a1c10",
+      "ortho_scale": 23.084971618652347,
+      "camera_direction": [
+        0.85,
+        -1.2,
+        0.68
+      ],
+      "elapsed_seconds": 1.242
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "slot": "ESTABLISHED",
+      "view": 0,
+      "geometry_hash": "439ba667a2f904ca9fa6222fc79952dedfdbe61ead11df7485401be55abe3f39",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 48,
+        "vertices": 8896,
+        "triangles": 12032,
+        "materials": 5,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "COTTAGE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              6.8,
+              9.6
+            ],
+            "base": 0.48,
+            "eave": 6.08,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.7,
+            "vertices": 5904,
+            "triangles": 8088
+          },
+          {
+            "key": "emberholt_domestic_work_range",
+            "bounds": [
+              6.8,
+              0,
+              10.6,
+              6.912
+            ],
+            "base": 0.48,
+            "eave": 3.0,
+            "valid": true,
+            "roof": "SHED",
+            "function": "WORKSHOP",
+            "wall_thickness": 0.7,
+            "vertices": 2992,
+            "triangles": 3944
+          }
+        ],
+        "geometry_hash": "439ba667a2f904ca9fa6222fc79952dedfdbe61ead11df7485401be55abe3f39",
+        "tool_revision": "0.5.0"
+      },
+      "backend": {
+        "objects": 48,
+        "vertices": 8896,
+        "width": 12.331720054149628,
+        "depth": 11.315000355243683,
+        "height": 7.929999828338623,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "image": "v05_craft_cottage_pbr_emberholt_established_0.png",
+      "image_sha256": "b30828d6170bb025af03270af468cae7f0e081fffaafb4c69f7f76baf3c2a9f7",
+      "ortho_scale": 23.084971618652347,
+      "camera_direction": [
+        0.85,
+        -1.2,
+        0.68
+      ],
+      "elapsed_seconds": 1.131
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "slot": "AFFLUENT",
+      "view": 0,
+      "geometry_hash": "e2880e49b18998e0dd3315eca35df2913c3752c8bc98e70233a6e739d3aed26c",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 48,
+        "vertices": 9316,
+        "triangles": 12558,
+        "materials": 5,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "COTTAGE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              6.8,
+              9.6
+            ],
+            "base": 0.48,
+            "eave": 6.48,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.7,
+            "vertices": 6214,
+            "triangles": 8475
+          },
+          {
+            "key": "emberholt_domestic_work_range",
+            "bounds": [
+              6.8,
+              0,
+              10.6,
+              6.912
+            ],
+            "base": 0.48,
+            "eave": 3.18,
+            "valid": true,
+            "roof": "SHED",
+            "function": "WORKSHOP",
+            "wall_thickness": 0.7,
+            "vertices": 3102,
+            "triangles": 4083
+          }
+        ],
+        "geometry_hash": "e2880e49b18998e0dd3315eca35df2913c3752c8bc98e70233a6e739d3aed26c",
+        "tool_revision": "0.5.0"
+      },
+      "backend": {
+        "objects": 48,
+        "vertices": 9316,
+        "width": 12.332898020744324,
+        "depth": 11.315000355243683,
+        "height": 8.329999923706055,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "image": "v05_craft_cottage_pbr_emberholt_affluent_0.png",
+      "image_sha256": "e6ead360ff597bc2979553f4c72c9d07d21374be75f5df12dcd728f7aaab7efa",
+      "ortho_scale": 23.084971618652347,
+      "camera_direction": [
+        0.85,
+        -1.2,
+        0.68
+      ],
+      "elapsed_seconds": 1.148
+    }
+  ],
+  "study": "craft",
+  "view_selection": "front-only",
+  "scope": "Matched parameters, common projected orthographic scale per region; see records for view selection."
+}

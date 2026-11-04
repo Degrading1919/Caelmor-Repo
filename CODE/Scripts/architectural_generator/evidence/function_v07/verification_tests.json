@@ -1,0 +1,45 @@
+{
+  "gallery_source_revision": "c9bc152",
+  "tests": [
+    {
+      "command": "py -3 -m unittest tests.test_function_work tests.test_function_yard tests.test_functional_integration -v",
+      "unittest_methods": 28,
+      "unittest_elapsed_seconds": 40.764,
+      "result": "OK",
+      "local_log": "v07_python_final.log",
+      "log_sha256": "e602ef60bee7be93f2ae12bda32ea01b9b6696ff5773bdff04eb13b29f93834b"
+    },
+    {
+      "command": "Blender 5.0.1 test_functional_blender.py; CAELM_FUNCTIONS=SMITHY,MARKET_HALL",
+      "unittest_methods": 1,
+      "unittest_elapsed_seconds": 22.536,
+      "result": "OK",
+      "local_log": "v07_work_native_final.log",
+      "log_sha256": "8b13aef2845132d9a493bd547ab5afedd93618eb32f6f0390110e612a4e15ec9"
+    },
+    {
+      "command": "Blender 5.0.1 test_functional_blender.py; CAELM_FUNCTIONS=STABLE,GATEHOUSE",
+      "unittest_methods": 1,
+      "unittest_elapsed_seconds": 19.754,
+      "result": "OK",
+      "local_log": "v07_yard_native_final.log",
+      "log_sha256": "64fc683b02870742e6cade4eaa3a3482fd55efb335537c18214e90816b58066a"
+    },
+    {
+      "command": "Blender 5.0.1 tests/test_blender.py",
+      "unittest_methods": 1,
+      "unittest_elapsed_seconds": 14.633,
+      "result": "OK",
+      "local_log": "v07_legacy_backend.log",
+      "log_sha256": "a4f7014651ccbec6a1b82bf6e08e338ac8f540d50a23a78e03fcab6499605b1e"
+    }
+  ],
+  "native_cases": 16,
+  "native_probe_totals": {
+    "clearance_rays": 1056,
+    "stair_headroom_rays": 128,
+    "exhaust_path_rays": 60,
+    "glass_structure_overlaps": 0
+  },
+  "scope": "Executed tests only. Log timings are individual unittest durations, not total wall time or a cost/usage measurement. Native source snapshots and geometry correspondence are in mesh_checks files and verification.json. Human art acceptance remains pending."
+}

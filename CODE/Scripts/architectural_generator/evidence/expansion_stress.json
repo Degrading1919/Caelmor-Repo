@@ -1,0 +1,7273 @@
+{
+  "schema": "caelmor.expansion-stress.v1",
+  "seed": 7447,
+  "requested_cases": 96,
+  "completed_cases": 96,
+  "started_utc": "2026-11-03T01:31:03Z",
+  "elapsed_seconds": 96.523,
+  "source_sha256": "84421262db1f2a38d6d74d2f6c37acd4d0fabc2f82b6a81f652107ae6d2aaf96",
+  "passed": true,
+  "failure_count": 0,
+  "cases": [
+    {
+      "index": 0,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31000,
+        "function": "FARMHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.0,
+        "age": 0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 87.1468,
+        "expected_area": 87.14679999999998,
+        "patches": 10
+      },
+      "effective_settings": {
+        "seed": 31000,
+        "function": "FARMHOUSE",
+        "footprint": "L",
+        "width": 9.24,
+        "depth": 6.16,
+        "wing_width": 3.52,
+        "wing_depth": 3.52,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 41,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.0,
+        "age": 0,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "d800794239975b0923cf3e121f0fb83379f098bf10c5f364a58e6955aa9d674e",
+      "validation": {
+        "valid": true,
+        "vertices": 9858,
+        "triangles": 14948,
+        "topology": {
+          "SOLID": 26
+        }
+      },
+      "determinism": {
+        "repeat_hash": "d800794239975b0923cf3e121f0fb83379f098bf10c5f364a58e6955aa9d674e",
+        "matched": true
+      },
+      "seconds": 0.3905,
+      "passed": true
+    },
+    {
+      "index": 1,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31001,
+        "function": "BARN",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.25,
+        "age": 17,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 192.80999999999997,
+        "expected_area": 192.80999999999997,
+        "patches": 11
+      },
+      "effective_settings": {
+        "seed": 31001,
+        "function": "BARN",
+        "footprint": "T",
+        "width": 15.0,
+        "depth": 9.0,
+        "wing_width": 5.0,
+        "wing_depth": 6.0,
+        "floors": 1,
+        "floor_height": 2.65,
+        "pitch": 43,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.25,
+        "age": 17,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "1f74a1328490dfc168b4c86c007a9ecc295468005cc7389d809666050b298235",
+      "validation": {
+        "valid": true,
+        "vertices": 12628,
+        "triangles": 19168,
+        "topology": {
+          "SOLID": 18
+        }
+      },
+      "seconds": 0.2866,
+      "passed": true
+    },
+    {
+      "index": 2,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31002,
+        "function": "GRAIN_STORE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.5,
+        "age": 34,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 0,
+            "s0": 2.9323,
+            "s1": 7.4,
+            "length": 4.467700000000001
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 95.96520000000001,
+        "expected_area": 95.96520000000004,
+        "patches": 12
+      },
+      "effective_settings": {
+        "seed": 31002,
+        "function": "GRAIN_STORE",
+        "footprint": "RECT",
+        "width": 10.080000000000002,
+        "depth": 7.840000000000001,
+        "wing_width": 3.5840000000000005,
+        "wing_depth": 4.48,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 45,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.5,
+        "age": 34,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "0edc8e738d993ce691a1c3f57652a4dd6a3cbdd6332a081b7d65f53dcf61c2eb",
+      "validation": {
+        "valid": true,
+        "vertices": 19428,
+        "triangles": 29196,
+        "topology": {
+          "SOLID": 18
+        }
+      },
+      "seconds": 0.4647,
+      "passed": true
+    },
+    {
+      "index": 3,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31003,
+        "function": "MILLER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.75,
+        "age": 51,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 92.89495999999998,
+        "expected_area": 92.89496,
+        "patches": 9
+      },
+      "effective_settings": {
+        "seed": 31003,
+        "function": "MILLER",
+        "footprint": "L",
+        "width": 9.68,
+        "depth": 6.16,
+        "wing_width": 3.696,
+        "wing_depth": 3.96,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 41,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.75,
+        "age": 51,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "9d52a739e6f1f46a086ee7cb199dea17fb0fb6ff2300d66fda5f0172649ed95f",
+      "validation": {
+        "valid": true,
+        "vertices": 18434,
+        "triangles": 28160,
+        "topology": {
+          "SOLID": 25
+        }
+      },
+      "seconds": 0.4261,
+      "passed": true
+    },
+    {
+      "index": 4,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31004,
+        "function": "INN",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 1.0,
+        "age": 68,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 2,
+            "s0": 1.9424,
+            "s1": 6.5242,
+            "length": 4.5818
+          },
+          {
+            "edge_index": 3,
+            "s0": 1.5064,
+            "s1": 7.4963,
+            "length": 5.9899
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 164.60999999999999,
+        "expected_area": 164.60999999999999,
+        "patches": 10
+      },
+      "effective_settings": {
+        "seed": 31004,
+        "function": "INN",
+        "footprint": "L",
+        "width": 13.0,
+        "depth": 9.0,
+        "wing_width": 4.5,
+        "wing_depth": 5.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 43,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 1.0,
+        "age": 68,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "db8812621c755dff5667f0b67a3e7dbf600ed78163b3595030ba8fa98d83ec54",
+      "validation": {
+        "valid": true,
+        "vertices": 47260,
+        "triangles": 71440,
+        "topology": {
+          "SOLID": 28
+        }
+      },
+      "seconds": 1.1556,
+      "passed": true
+    },
+    {
+      "index": 5,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31005,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.0,
+        "age": 85,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 75.13320000000002,
+        "expected_area": 75.1332,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31005,
+        "function": "COTTAGE",
+        "footprint": "RECT",
+        "width": 8.96,
+        "depth": 6.720000000000001,
+        "wing_width": 3.3600000000000003,
+        "wing_depth": 3.9200000000000004,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 45,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.0,
+        "age": 85,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "ebd5bb8a77cd32e6fbba5d448b2c465cb8e25e96f21d23485bd3731c0c78f8a4",
+      "validation": {
+        "valid": true,
+        "vertices": 14890,
+        "triangles": 14024,
+        "topology": {
+          "SOLID": 18,
+          "SURFACE": 5
+        }
+      },
+      "seconds": 0.3057,
+      "passed": true
+    },
+    {
+      "index": 6,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31006,
+        "function": "TOWNHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "FINE",
+        "maintenance": 0.25,
+        "age": 102,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 59.55,
+        "expected_area": 59.550000000000004,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31006,
+        "function": "TOWNHOUSE",
+        "footprint": "RECT",
+        "width": 6.6,
+        "depth": 7.04,
+        "wing_width": 2.64,
+        "wing_depth": 3.52,
+        "floors": 3,
+        "floor_height": 3.0,
+        "pitch": 41,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "MODEST",
+        "craftsmanship": "FINE",
+        "maintenance": 0.25,
+        "age": 102,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "4b818625f7d8d39498e8d02b2165ad2e0997c169afbcbca01b55eba73649b053",
+      "validation": {
+        "valid": true,
+        "vertices": 6254,
+        "triangles": 8646,
+        "topology": {
+          "SOLID": 16,
+          "SURFACE": 4
+        }
+      },
+      "seconds": 0.1674,
+      "passed": true
+    },
+    {
+      "index": 7,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31007,
+        "function": "MERCHANT_HOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.5,
+        "age": 119,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 127.95999999999998,
+        "expected_area": 127.96,
+        "patches": 9
+      },
+      "effective_settings": {
+        "seed": 31007,
+        "function": "MERCHANT_HOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 8.0,
+        "wing_width": 4.0,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 3.0,
+        "pitch": 43,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.5,
+        "age": 119,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "a7cf749612dc724b83d09804663826d7359cf0d8ff09adc197a8a721b9e107ae",
+      "validation": {
+        "valid": true,
+        "vertices": 11735,
+        "triangles": 15671,
+        "topology": {
+          "SOLID": 17,
+          "SURFACE": 5
+        }
+      },
+      "seconds": 0.3064,
+      "passed": true
+    },
+    {
+      "index": 8,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31008,
+        "function": "LONGHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "FINE",
+        "maintenance": 0.75,
+        "age": 136,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 164.48680000000002,
+        "expected_area": 164.48680000000002,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31008,
+        "function": "LONGHOUSE",
+        "footprint": "RECT",
+        "width": 17.92,
+        "depth": 7.840000000000001,
+        "wing_width": 5.6000000000000005,
+        "wing_depth": 6.720000000000001,
+        "floors": 1,
+        "floor_height": 3.0,
+        "pitch": 45,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "FINE",
+        "maintenance": 0.75,
+        "age": 136,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "9b19d66067600d211695b411db31338d6e95e8cafe798987b970712748775818",
+      "validation": {
+        "valid": true,
+        "vertices": 18026,
+        "triangles": 18713,
+        "topology": {
+          "SOLID": 18,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.4518,
+      "passed": true
+    },
+    {
+      "index": 9,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31009,
+        "function": "SHOP",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 1.0,
+        "age": 153,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 2,
+            "s0": 1.3941,
+            "s1": 5.7111,
+            "length": 4.317
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 56.056400000000004,
+        "expected_area": 56.056400000000004,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31009,
+        "function": "SHOP",
+        "footprint": "RECT",
+        "width": 7.04,
+        "depth": 6.16,
+        "wing_width": 2.64,
+        "wing_depth": 3.52,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 41,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 1.0,
+        "age": 153,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "528264b941848cad3b033ccf890b29d64b17b391ec068f2a83c17412e3ef0d81",
+      "validation": {
+        "valid": true,
+        "vertices": 8629,
+        "triangles": 10351,
+        "topology": {
+          "SOLID": 16,
+          "SURFACE": 5
+        }
+      },
+      "seconds": 0.2468,
+      "passed": true
+    },
+    {
+      "index": 10,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31010,
+        "function": "WAREHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.0,
+        "age": 170,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 230.51,
+        "expected_area": 230.50999999999996,
+        "patches": 11
+      },
+      "effective_settings": {
+        "seed": 31010,
+        "function": "WAREHOUSE",
+        "footprint": "T",
+        "width": 17.0,
+        "depth": 10.0,
+        "wing_width": 5.0,
+        "wing_depth": 6.0,
+        "floors": 1,
+        "floor_height": 2.65,
+        "pitch": 43,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.0,
+        "age": 170,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "64e092be461bb06bf80b434ccd0914e144319a9be7e34931ce270bf77d50b8c6",
+      "validation": {
+        "valid": true,
+        "vertices": 56134,
+        "triangles": 84860,
+        "topology": {
+          "SOLID": 19
+        }
+      },
+      "seconds": 1.7979,
+      "passed": true
+    },
+    {
+      "index": 11,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31011,
+        "function": "MARKET_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.25,
+        "age": 187,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 403.9204000000001,
+        "expected_area": 403.92039999999986,
+        "patches": 81
+      },
+      "effective_settings": {
+        "seed": 31011,
+        "function": "MARKET_HALL",
+        "footprint": "U",
+        "width": 20.160000000000004,
+        "depth": 13.440000000000001,
+        "wing_width": 5.6000000000000005,
+        "wing_depth": 7.840000000000001,
+        "floors": 1,
+        "floor_height": 2.65,
+        "pitch": 45,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.25,
+        "age": 187,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "c86ba0b4a58b47eb17153f1bf5ddd9a7a18d81ac2e556ad26c55535017bd8ff2",
+      "validation": {
+        "valid": true,
+        "vertices": 116308,
+        "triangles": 174848,
+        "topology": {
+          "SOLID": 21
+        }
+      },
+      "seconds": 4.3463,
+      "passed": true
+    },
+    {
+      "index": 12,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31012,
+        "function": "STABLE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.5,
+        "age": 204,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 119.36359999999999,
+        "expected_area": 119.36359999999999,
+        "patches": 9
+      },
+      "effective_settings": {
+        "seed": 31012,
+        "function": "STABLE",
+        "footprint": "L",
+        "width": 11.44,
+        "depth": 7.04,
+        "wing_width": 3.96,
+        "wing_depth": 4.4,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 41,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.5,
+        "age": 204,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "40ecdec4f50bd2a18deb6531c06faed3f316d9b3d98bb650f435ba1b9708115f",
+      "validation": {
+        "valid": true,
+        "vertices": 9078,
+        "triangles": 13796,
+        "topology": {
+          "SOLID": 19
+        }
+      },
+      "seconds": 0.3074,
+      "passed": true
+    },
+    {
+      "index": 13,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31013,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.75,
+        "age": 221,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 97.00999999999998,
+        "expected_area": 97.00999999999999,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31013,
+        "function": "SMITHY",
+        "footprint": "RECT",
+        "width": 10.0,
+        "depth": 8.0,
+        "wing_width": 3.5,
+        "wing_depth": 4.0,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 43,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.75,
+        "age": 221,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "1f71337660f6503ec058c267040e873e7ebfc0e5bbc3c8c654b24e425be13a57",
+      "validation": {
+        "valid": true,
+        "vertices": 7052,
+        "triangles": 10708,
+        "topology": {
+          "SOLID": 21
+        }
+      },
+      "seconds": 0.2037,
+      "passed": true
+    },
+    {
+      "index": 14,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31014,
+        "function": "WORKSHOP",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 1.0,
+        "age": 238,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 127.34760000000003,
+        "expected_area": 127.3476,
+        "patches": 9
+      },
+      "effective_settings": {
+        "seed": 31014,
+        "function": "WORKSHOP",
+        "footprint": "L",
+        "width": 11.200000000000001,
+        "depth": 7.840000000000001,
+        "wing_width": 3.9200000000000004,
+        "wing_depth": 4.48,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 45,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 1.0,
+        "age": 238,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "fcd9fc5b0d1c0c6c842c66810996fbeaa9952e4caff51a70404232b9871f080e",
+      "validation": {
+        "valid": true,
+        "vertices": 20242,
+        "triangles": 30436,
+        "topology": {
+          "SOLID": 20
+        }
+      },
+      "seconds": 0.6334,
+      "passed": true
+    },
+    {
+      "index": 15,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31015,
+        "function": "ASSEMBLY_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "FINE",
+        "maintenance": 0.0,
+        "age": 4,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 186.47239999999994,
+        "expected_area": 186.47239999999985,
+        "patches": 57
+      },
+      "effective_settings": {
+        "seed": 31015,
+        "function": "ASSEMBLY_HALL",
+        "footprint": "T",
+        "width": 14.08,
+        "depth": 9.68,
+        "wing_width": 4.4,
+        "wing_depth": 5.28,
+        "floors": 2,
+        "floor_height": 3.0,
+        "pitch": 41,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "MODEST",
+        "craftsmanship": "FINE",
+        "maintenance": 0.0,
+        "age": 4,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "8bc466cb1214013a441e234abf840dcd20d8727f892b09f39a5deb580c0ebb53",
+      "validation": {
+        "valid": true,
+        "vertices": 27594,
+        "triangles": 29534,
+        "topology": {
+          "SOLID": 19,
+          "SURFACE": 5
+        }
+      },
+      "seconds": 1.0014,
+      "passed": true
+    },
+    {
+      "index": 16,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31016,
+        "function": "WATCHTOWER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.25,
+        "age": 21,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 62.410000000000004,
+        "expected_area": 62.41,
+        "patches": 4
+      },
+      "effective_settings": {
+        "seed": 31016,
+        "function": "WATCHTOWER",
+        "footprint": "RECT",
+        "width": 7.0,
+        "depth": 7.0,
+        "wing_width": 2.8,
+        "wing_depth": 3.0,
+        "floors": 3,
+        "floor_height": 3.0,
+        "pitch": 43,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.25,
+        "age": 21,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "37361ef7a29e39b23d9372a6d7ee64f2cb1854650d0f502ca3d7c3a700f74c8a",
+      "validation": {
+        "valid": true,
+        "vertices": 16176,
+        "triangles": 16846,
+        "topology": {
+          "SOLID": 18,
+          "SURFACE": 5
+        }
+      },
+      "seconds": 0.3746,
+      "passed": true
+    },
+    {
+      "index": 17,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31017,
+        "function": "GATEHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "FINE",
+        "maintenance": 0.5,
+        "age": 38,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 6,
+            "s0": 4.1,
+            "s1": 8.9824,
+            "length": 4.8824000000000005
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 195.62279999999998,
+        "expected_area": 195.62279999999993,
+        "patches": 73
+      },
+      "effective_settings": {
+        "seed": 31017,
+        "function": "GATEHOUSE",
+        "footprint": "U",
+        "width": 13.440000000000001,
+        "depth": 8.96,
+        "wing_width": 4.48,
+        "wing_depth": 5.040000000000001,
+        "floors": 2,
+        "floor_height": 3.0,
+        "pitch": 45,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "FINE",
+        "maintenance": 0.5,
+        "age": 38,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "39ae9f0ecf03bb35b1a058f658776018c494060817d6afb64f6921f3d7a50c5e",
+      "validation": {
+        "valid": true,
+        "vertices": 51279,
+        "triangles": 50709,
+        "topology": {
+          "SOLID": 17,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 1.8772,
+      "passed": true
+    },
+    {
+      "index": 18,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31018,
+        "function": "BARRACKS",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.75,
+        "age": 55,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 133.338,
+        "expected_area": 133.338,
+        "patches": 10
+      },
+      "effective_settings": {
+        "seed": 31018,
+        "function": "BARRACKS",
+        "footprint": "L",
+        "width": 13.2,
+        "depth": 7.04,
+        "wing_width": 3.96,
+        "wing_depth": 4.4,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 41,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.75,
+        "age": 55,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "c2cb6863f4e279a2fff11277fc3a45cea2fffc15221111bb9d05af87133ef64a",
+      "validation": {
+        "valid": true,
+        "vertices": 10981,
+        "triangles": 14521,
+        "topology": {
+          "SOLID": 19,
+          "SURFACE": 5
+        }
+      },
+      "seconds": 0.2577,
+      "passed": true
+    },
+    {
+      "index": 19,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31019,
+        "function": "BOATHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 1.0,
+        "age": 72,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 114.80999999999997,
+        "expected_area": 114.80999999999997,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31019,
+        "function": "BOATHOUSE",
+        "footprint": "RECT",
+        "width": 12.0,
+        "depth": 8.0,
+        "wing_width": 4.0,
+        "wing_depth": 5.0,
+        "floors": 1,
+        "floor_height": 2.65,
+        "pitch": 43,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 1.0,
+        "age": 72,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "3ee4c31812cbb3f6b981025c2c2ea098384b3bd6a5e51e945ca9efa4458127b6",
+      "validation": {
+        "valid": true,
+        "vertices": 6910,
+        "triangles": 8800,
+        "topology": {
+          "SOLID": 17,
+          "SURFACE": 4
+        }
+      },
+      "seconds": 0.1536,
+      "passed": true
+    },
+    {
+      "index": 20,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31020,
+        "function": "FARMHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.0,
+        "age": 89,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 120.04299136000002,
+        "expected_area": 120.04299136000002,
+        "patches": 10
+      },
+      "effective_settings": {
+        "seed": 31020,
+        "function": "FARMHOUSE",
+        "footprint": "L",
+        "width": 10.701600000000001,
+        "depth": 7.369600000000001,
+        "wing_width": 4.48,
+        "wing_depth": 4.48,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 50,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.0,
+        "age": 89,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "3fd7e1fd7b44b4661c4a0619b3c0849184fb8fc3641c328119023075c0209c51",
+      "validation": {
+        "valid": true,
+        "vertices": 28558,
+        "triangles": 42928,
+        "topology": {
+          "SOLID": 25
+        }
+      },
+      "seconds": 0.7908,
+      "passed": true
+    },
+    {
+      "index": 21,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31021,
+        "function": "BARN",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.25,
+        "age": 106,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 135.7320576,
+        "expected_area": 135.7320576,
+        "patches": 11
+      },
+      "effective_settings": {
+        "seed": 31021,
+        "function": "BARN",
+        "footprint": "T",
+        "width": 12.012,
+        "depth": 7.444799999999999,
+        "wing_width": 4.4,
+        "wing_depth": 5.28,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 46,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.25,
+        "age": 106,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "e198667e2a3a95a7e02495e197a3a5a15d565f4a411300315e55e35f6e7703e0",
+      "validation": {
+        "valid": true,
+        "vertices": 23490,
+        "triangles": 35336,
+        "topology": {
+          "SOLID": 19
+        }
+      },
+      "seconds": 0.7239,
+      "passed": true
+    },
+    {
+      "index": 22,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31022,
+        "function": "GRAIN_STORE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.5,
+        "age": 123,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 67.99319999999999,
+        "expected_area": 67.99319999999997,
+        "patches": 12
+      },
+      "effective_settings": {
+        "seed": 31022,
+        "function": "GRAIN_STORE",
+        "footprint": "RECT",
+        "width": 8.19,
+        "depth": 6.58,
+        "wing_width": 3.2,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 48,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.5,
+        "age": 123,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "a556d3e69e4f9309691237f181d4026756691aff6029c3232e197ea3baf837fc",
+      "validation": {
+        "valid": true,
+        "vertices": 26612,
+        "triangles": 39996,
+        "topology": {
+          "SOLID": 17
+        }
+      },
+      "seconds": 0.7868,
+      "passed": true
+    },
+    {
+      "index": 23,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31023,
+        "function": "MILLER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.75,
+        "age": 140,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 128.39893952000003,
+        "expected_area": 128.39893952000003,
+        "patches": 9
+      },
+      "effective_settings": {
+        "seed": 31023,
+        "function": "MILLER",
+        "footprint": "L",
+        "width": 11.211200000000002,
+        "depth": 7.369600000000001,
+        "wing_width": 4.704000000000001,
+        "wing_depth": 5.040000000000001,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 50,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.75,
+        "age": 140,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "052c8814abe07e74405bb38ccfdefd690c8f9d0a6df149e1f2f0a84e92ba1a1b",
+      "validation": {
+        "valid": true,
+        "vertices": 43526,
+        "triangles": 65380,
+        "topology": {
+          "SOLID": 25
+        }
+      },
+      "seconds": 1.3024,
+      "passed": true
+    },
+    {
+      "index": 24,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31024,
+        "function": "INN",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "FINE",
+        "maintenance": 1.0,
+        "age": 157,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 115.76702592,
+        "expected_area": 115.76702592000001,
+        "patches": 9
+      },
+      "effective_settings": {
+        "seed": 31024,
+        "function": "INN",
+        "footprint": "L",
+        "width": 10.410400000000001,
+        "depth": 7.444799999999999,
+        "wing_width": 3.96,
+        "wing_depth": 4.4,
+        "floors": 2,
+        "floor_height": 3.0,
+        "pitch": 46,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "MODEST",
+        "craftsmanship": "FINE",
+        "maintenance": 1.0,
+        "age": 157,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "3182612451457be1e030b104cc56c964b708fa058ae07406500296bb5e72fe77",
+      "validation": {
+        "valid": true,
+        "vertices": 18312,
+        "triangles": 27480,
+        "topology": {
+          "SOLID": 27
+        }
+      },
+      "seconds": 0.5119,
+      "passed": true
+    },
+    {
+      "index": 25,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31025,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.0,
+        "age": 174,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 53.49720000000001,
+        "expected_area": 53.4972,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31025,
+        "function": "COTTAGE",
+        "footprint": "RECT",
+        "width": 7.28,
+        "depth": 5.64,
+        "wing_width": 3.0,
+        "wing_depth": 3.5,
+        "floors": 1,
+        "floor_height": 3.0,
+        "pitch": 48,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.0,
+        "age": 174,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "692b25caed894aa37123978533d15195d02f550ed598ca06aeaba2a4e02763b6",
+      "validation": {
+        "valid": true,
+        "vertices": 5248,
+        "triangles": 6706,
+        "topology": {
+          "SOLID": 18,
+          "SURFACE": 5
+        }
+      },
+      "seconds": 0.1246,
+      "passed": true
+    },
+    {
+      "index": 26,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31026,
+        "function": "TOWNHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "FINE",
+        "maintenance": 0.25,
+        "age": 191,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 79.6505856,
+        "expected_area": 79.6505856,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31026,
+        "function": "TOWNHOUSE",
+        "footprint": "RECT",
+        "width": 7.644000000000001,
+        "depth": 8.4224,
+        "wing_width": 3.3600000000000003,
+        "wing_depth": 4.48,
+        "floors": 3,
+        "floor_height": 3.0,
+        "pitch": 50,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "FINE",
+        "maintenance": 0.25,
+        "age": 191,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "d5d544a2a842e84fe6e3977d41220a1543db2406f9305635e3dcd3031ad4ee9b",
+      "validation": {
+        "valid": true,
+        "vertices": 18014,
+        "triangles": 21285,
+        "topology": {
+          "SOLID": 15,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.4075,
+      "passed": true
+    },
+    {
+      "index": 27,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31027,
+        "function": "MERCHANT_HOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.5,
+        "age": 208,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 90.49007488,
+        "expected_area": 90.49007488,
+        "patches": 10
+      },
+      "effective_settings": {
+        "seed": 31027,
+        "function": "MERCHANT_HOUSE",
+        "footprint": "L",
+        "width": 8.8088,
+        "depth": 6.6175999999999995,
+        "wing_width": 3.52,
+        "wing_depth": 3.96,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 46,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.5,
+        "age": 208,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "639567e08586fe24821fbc111d71788ff1a4227560aacb0fd36ce3e00e4e8d56",
+      "validation": {
+        "valid": true,
+        "vertices": 19330,
+        "triangles": 21808,
+        "topology": {
+          "SOLID": 16,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.5132,
+      "passed": true
+    },
+    {
+      "index": 28,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31028,
+        "function": "LONGHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.75,
+        "age": 225,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 2,
+            "s0": 7.2907,
+            "s1": 12.5426,
+            "length": 5.2519
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 115.64080000000001,
+        "expected_area": 115.6408,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31028,
+        "function": "LONGHOUSE",
+        "footprint": "RECT",
+        "width": 14.56,
+        "depth": 6.58,
+        "wing_width": 5.0,
+        "wing_depth": 6.0,
+        "floors": 1,
+        "floor_height": 2.65,
+        "pitch": 48,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.75,
+        "age": 225,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "a2b0a6cf70654c9ca0b3fb1a3ce3cdda89de34e44a3cfe7a741e3fb73fae6692",
+      "validation": {
+        "valid": true,
+        "vertices": 23670,
+        "triangles": 22329,
+        "topology": {
+          "SOLID": 18,
+          "SURFACE": 5
+        }
+      },
+      "seconds": 0.5421,
+      "passed": true
+    },
+    {
+      "index": 29,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31029,
+        "function": "SHOP",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "ROUGH",
+        "maintenance": 1.0,
+        "age": 242,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 0,
+            "s0": 1.8911,
+            "s1": 6.2416,
+            "length": 4.3505
+          },
+          {
+            "edge_index": 1,
+            "s0": 1.2965,
+            "s1": 5.6949,
+            "length": 4.3984
+          },
+          {
+            "edge_index": 2,
+            "s0": 1.5139,
+            "s1": 6.2598,
+            "length": 4.745900000000001
+          },
+          {
+            "edge_index": 3,
+            "s0": 1.2061,
+            "s1": 5.7383,
+            "length": 4.5322
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 74.86965056000001,
+        "expected_area": 74.86965056,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31029,
+        "function": "SHOP",
+        "footprint": "RECT",
+        "width": 8.1536,
+        "depth": 7.369600000000001,
+        "wing_width": 3.3600000000000003,
+        "wing_depth": 4.48,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 50,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "ROUGH",
+        "maintenance": 1.0,
+        "age": 242,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "7ae82da7e1c948d0416316702c23394f39b6bbcbb4aad182dd3d0d2dd45b4f79",
+      "validation": {
+        "valid": true,
+        "vertices": 21340,
+        "triangles": 21895,
+        "topology": {
+          "SOLID": 15,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.4769,
+      "passed": true
+    },
+    {
+      "index": 30,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31030,
+        "function": "WAREHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.0,
+        "age": 8,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 161.10273919999995,
+        "expected_area": 161.10273919999997,
+        "patches": 11
+      },
+      "effective_settings": {
+        "seed": 31030,
+        "function": "WAREHOUSE",
+        "footprint": "T",
+        "width": 13.6136,
+        "depth": 8.271999999999998,
+        "wing_width": 4.4,
+        "wing_depth": 5.28,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 46,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.0,
+        "age": 8,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "5d45529789e0c38c4897b30cf3dfc221e7218987f6c2760e4707f74de90e1339",
+      "validation": {
+        "valid": true,
+        "vertices": 12450,
+        "triangles": 18684,
+        "topology": {
+          "SOLID": 19
+        }
+      },
+      "seconds": 0.341,
+      "passed": true
+    },
+    {
+      "index": 31,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31031,
+        "function": "MARKET_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.25,
+        "age": 25,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 293.0704,
+        "expected_area": 293.0703999999998,
+        "patches": 89
+      },
+      "effective_settings": {
+        "seed": 31031,
+        "function": "MARKET_HALL",
+        "footprint": "U",
+        "width": 16.38,
+        "depth": 11.28,
+        "wing_width": 5.0,
+        "wing_depth": 7.0,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 48,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.25,
+        "age": 25,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "2e851bca9d99a1fa35f3c15815e670d3db3e1fe680e768bd4353e06ef1500c74",
+      "validation": {
+        "valid": true,
+        "vertices": 28084,
+        "triangles": 42184,
+        "topology": {
+          "SOLID": 21
+        }
+      },
+      "seconds": 1.0315,
+      "passed": true
+    },
+    {
+      "index": 32,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31032,
+        "function": "STABLE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.5,
+        "age": 42,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 165.17223103999999,
+        "expected_area": 165.17223103999999,
+        "patches": 10
+      },
+      "effective_settings": {
+        "seed": 31032,
+        "function": "STABLE",
+        "footprint": "L",
+        "width": 13.249600000000001,
+        "depth": 8.4224,
+        "wing_width": 5.040000000000001,
+        "wing_depth": 5.6000000000000005,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 50,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.5,
+        "age": 42,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "c21893b03bed2010672ed0945bc7af1b1f86d59d59e4383a8be021ba1ad09285",
+      "validation": {
+        "valid": true,
+        "vertices": 25072,
+        "triangles": 37700,
+        "topology": {
+          "SOLID": 19
+        }
+      },
+      "seconds": 0.7286,
+      "passed": true
+    },
+    {
+      "index": 33,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31033,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "FINE",
+        "maintenance": 0.75,
+        "age": 59,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 66.96678079999998,
+        "expected_area": 66.96678079999998,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31033,
+        "function": "SMITHY",
+        "footprint": "RECT",
+        "width": 8.008,
+        "depth": 6.6175999999999995,
+        "wing_width": 3.08,
+        "wing_depth": 3.52,
+        "floors": 1,
+        "floor_height": 3.0,
+        "pitch": 46,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "MODEST",
+        "craftsmanship": "FINE",
+        "maintenance": 0.75,
+        "age": 59,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "99644634b7729b66c01ba9269c602fc8963b4e5e0cb4bc03f373952c2bc36abf",
+      "validation": {
+        "valid": true,
+        "vertices": 12346,
+        "triangles": 18568,
+        "topology": {
+          "SOLID": 20
+        }
+      },
+      "seconds": 0.3199,
+      "passed": true
+    },
+    {
+      "index": 34,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31034,
+        "function": "WORKSHOP",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 1.0,
+        "age": 76,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 92.4,
+        "expected_area": 92.4,
+        "patches": 10
+      },
+      "effective_settings": {
+        "seed": 31034,
+        "function": "WORKSHOP",
+        "footprint": "L",
+        "width": 9.1,
+        "depth": 6.58,
+        "wing_width": 3.5,
+        "wing_depth": 4.0,
+        "floors": 1,
+        "floor_height": 3.0,
+        "pitch": 48,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 1.0,
+        "age": 76,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "85a492104bf8ff3c44a9545f86b16ad5ae48c22b9ebf337b613f7da183a2d577",
+      "validation": {
+        "valid": true,
+        "vertices": 29322,
+        "triangles": 44080,
+        "topology": {
+          "SOLID": 20
+        }
+      },
+      "seconds": 0.8855,
+      "passed": true
+    },
+    {
+      "index": 35,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31035,
+        "function": "ASSEMBLY_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "FINE",
+        "maintenance": 0.0,
+        "age": 93,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 5,
+            "s0": 1.7217,
+            "s1": 9.7641,
+            "length": 8.042399999999999
+          },
+          {
+            "edge_index": 7,
+            "s0": 1.7847,
+            "s1": 9.7908,
+            "length": 8.0061
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 258.43962176,
+        "expected_area": 258.4396217599999,
+        "patches": 51
+      },
+      "effective_settings": {
+        "seed": 31035,
+        "function": "ASSEMBLY_HALL",
+        "footprint": "T",
+        "width": 16.3072,
+        "depth": 11.580800000000002,
+        "wing_width": 5.6000000000000005,
+        "wing_depth": 6.720000000000001,
+        "floors": 2,
+        "floor_height": 3.0,
+        "pitch": 50,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "FINE",
+        "maintenance": 0.0,
+        "age": 93,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "d3b4d29eaafb2a711c626271c715a95cfdcd5b935767dc79d881359842f0d412",
+      "validation": {
+        "valid": true,
+        "vertices": 60989,
+        "triangles": 56469,
+        "topology": {
+          "SOLID": 18,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 2.2054,
+      "passed": true
+    },
+    {
+      "index": 36,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31036,
+        "function": "WATCHTOWER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.25,
+        "age": 110,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 46.163759999999996,
+        "expected_area": 46.16376,
+        "patches": 12
+      },
+      "effective_settings": {
+        "seed": 31036,
+        "function": "WATCHTOWER",
+        "footprint": "RECT",
+        "width": 6,
+        "depth": 5.7904,
+        "wing_width": 2.5,
+        "wing_depth": 2.64,
+        "floors": 3,
+        "floor_height": 2.65,
+        "pitch": 46,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.25,
+        "age": 110,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "22276f9fe8cc612033eb80c16bd3fc27d8dca8e637f4de9b12a980694c92e819",
+      "validation": {
+        "valid": true,
+        "vertices": 9387,
+        "triangles": 12193,
+        "topology": {
+          "SOLID": 17,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.2472,
+      "passed": true
+    },
+    {
+      "index": 37,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31037,
+        "function": "GATEHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.5,
+        "age": 127,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 143.6244,
+        "expected_area": 143.62439999999992,
+        "patches": 106
+      },
+      "effective_settings": {
+        "seed": 31037,
+        "function": "GATEHOUSE",
+        "footprint": "U",
+        "width": 10.92,
+        "depth": 7.52,
+        "wing_width": 4.0,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.5,
+        "age": 127,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "07ee6afdbe35fe689e455a9c6df24c58fd38b8528b59facfea1ceb036e9bf1d3",
+      "validation": {
+        "valid": true,
+        "vertices": 20110,
+        "triangles": 25070,
+        "topology": {
+          "SOLID": 17,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.8335,
+      "passed": true
+    },
+    {
+      "index": 38,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31038,
+        "function": "BARRACKS",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.75,
+        "age": 144,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 2,
+            "s0": 2.7635,
+            "s1": 7.4958,
+            "length": 4.7323
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 184.17501120000003,
+        "expected_area": 184.1750112,
+        "patches": 10
+      },
+      "effective_settings": {
+        "seed": 31038,
+        "function": "BARRACKS",
+        "footprint": "L",
+        "width": 15.288000000000002,
+        "depth": 8.4224,
+        "wing_width": 5.040000000000001,
+        "wing_depth": 5.6000000000000005,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 50,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.75,
+        "age": 144,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "e178a70ea01ef67e02b0796828c8d8ac8c9f6b1ab2fdc68bd89fc09613089f07",
+      "validation": {
+        "valid": true,
+        "vertices": 31577,
+        "triangles": 35166,
+        "topology": {
+          "SOLID": 18,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.8727,
+      "passed": true
+    },
+    {
+      "index": 39,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31039,
+        "function": "BOATHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 1.0,
+        "age": 161,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 79.00696896,
+        "expected_area": 79.00696896,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31039,
+        "function": "BOATHOUSE",
+        "footprint": "RECT",
+        "width": 9.6096,
+        "depth": 6.6175999999999995,
+        "wing_width": 3.52,
+        "wing_depth": 4.4,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 46,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 1.0,
+        "age": 161,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "2d0120e79012af9a4f47d6923cc9abcfde36e7c54165acd3304686be56ef3db5",
+      "validation": {
+        "valid": true,
+        "vertices": 11155,
+        "triangles": 11383,
+        "topology": {
+          "SOLID": 16,
+          "SURFACE": 5
+        }
+      },
+      "determinism": {
+        "repeat_hash": "2d0120e79012af9a4f47d6923cc9abcfde36e7c54165acd3304686be56ef3db5",
+        "matched": true
+      },
+      "seconds": 0.4823,
+      "passed": true
+    },
+    {
+      "index": 40,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31040,
+        "function": "FARMHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.0,
+        "age": 178,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 98.6518,
+        "expected_area": 98.65180000000001,
+        "patches": 10
+      },
+      "effective_settings": {
+        "seed": 31040,
+        "function": "FARMHOUSE",
+        "footprint": "L",
+        "width": 9.87,
+        "depth": 6.44,
+        "wing_width": 4.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 38,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.0,
+        "age": 178,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "97c6073cad0b0faaff4d177cd249343ef0ad5776fba6aafbc9b98337e17bf3b5",
+      "validation": {
+        "valid": true,
+        "vertices": 42002,
+        "triangles": 63540,
+        "topology": {
+          "SOLID": 25
+        }
+      },
+      "seconds": 1.179,
+      "passed": true
+    },
+    {
+      "index": 41,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31041,
+        "function": "BARN",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.25,
+        "age": 195,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 213.49773120000006,
+        "expected_area": 213.49773120000003,
+        "patches": 11
+      },
+      "effective_settings": {
+        "seed": 31041,
+        "function": "BARN",
+        "footprint": "T",
+        "width": 15.792000000000002,
+        "depth": 9.273600000000002,
+        "wing_width": 5.6000000000000005,
+        "wing_depth": 6.720000000000001,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 40,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.25,
+        "age": 195,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "dcba93a05250f7dd4774d0da14066477def5a94e1a9c276574d623f1eb51e565",
+      "validation": {
+        "valid": true,
+        "vertices": 55812,
+        "triangles": 84352,
+        "topology": {
+          "SOLID": 18
+        }
+      },
+      "seconds": 1.7299,
+      "passed": true
+    },
+    {
+      "index": 42,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31042,
+        "function": "GRAIN_STORE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "FINE",
+        "maintenance": 0.5,
+        "age": 212,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 54.80197056000001,
+        "expected_area": 54.801970560000015,
+        "patches": 12
+      },
+      "effective_settings": {
+        "seed": 31042,
+        "function": "GRAIN_STORE",
+        "footprint": "RECT",
+        "width": 7.444799999999999,
+        "depth": 5.6672,
+        "wing_width": 2.8160000000000003,
+        "wing_depth": 3.8016,
+        "floors": 2,
+        "floor_height": 3.0,
+        "pitch": 36,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "MODEST",
+        "craftsmanship": "FINE",
+        "maintenance": 0.5,
+        "age": 212,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "3f5cfaa698fcce69ada8f6e172ea059df06a161238f29d7f1706cf392f2642b4",
+      "validation": {
+        "valid": true,
+        "vertices": 5786,
+        "triangles": 8776,
+        "topology": {
+          "SOLID": 17
+        }
+      },
+      "seconds": 0.1634,
+      "passed": true
+    },
+    {
+      "index": 43,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31043,
+        "function": "MILLER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.75,
+        "age": 229,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 105.45160000000001,
+        "expected_area": 105.45159999999998,
+        "patches": 9
+      },
+      "effective_settings": {
+        "seed": 31043,
+        "function": "MILLER",
+        "footprint": "L",
+        "width": 10.34,
+        "depth": 6.44,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 3.0,
+        "pitch": 38,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.75,
+        "age": 229,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "4fa9b02556bdb3aa5dfa1a0b8d3174baaf63aeb4f30edba7c957ee71ff00a07f",
+      "validation": {
+        "valid": true,
+        "vertices": 11628,
+        "triangles": 17616,
+        "topology": {
+          "SOLID": 24
+        }
+      },
+      "seconds": 0.3216,
+      "passed": true
+    },
+    {
+      "index": 44,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31044,
+        "function": "INN",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "FINE",
+        "maintenance": 1.0,
+        "age": 246,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 181.66019904000004,
+        "expected_area": 181.66019904000007,
+        "patches": 10
+      },
+      "effective_settings": {
+        "seed": 31044,
+        "function": "INN",
+        "footprint": "L",
+        "width": 13.6864,
+        "depth": 9.273600000000002,
+        "wing_width": 5.040000000000001,
+        "wing_depth": 5.6000000000000005,
+        "floors": 2,
+        "floor_height": 3.0,
+        "pitch": 40,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "FINE",
+        "maintenance": 1.0,
+        "age": 246,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "4c88a0774114c94b03031c6116d30b29ad460dce2dfc27e899d8aed3560c8bfd",
+      "validation": {
+        "valid": true,
+        "vertices": 35212,
+        "triangles": 53360,
+        "topology": {
+          "SOLID": 27
+        }
+      },
+      "seconds": 1.0648,
+      "passed": true
+    },
+    {
+      "index": 45,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31045,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.0,
+        "age": 12,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 43.283333760000005,
+        "expected_area": 43.283333760000005,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31045,
+        "function": "COTTAGE",
+        "footprint": "RECT",
+        "width": 6.6175999999999995,
+        "depth": 4.857600000000001,
+        "wing_width": 2.64,
+        "wing_depth": 3.08,
+        "floors": 1,
+        "floor_height": 2.65,
+        "pitch": 36,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.0,
+        "age": 12,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "4ddc4af1b7b73cec935854bc8aa7a426774c22d35a26ad6ea461d8c977b696f8",
+      "validation": {
+        "valid": true,
+        "vertices": 8758,
+        "triangles": 9778,
+        "topology": {
+          "SOLID": 17,
+          "SURFACE": 5
+        }
+      },
+      "seconds": 0.1986,
+      "passed": true
+    },
+    {
+      "index": 46,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31046,
+        "function": "TOWNHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.25,
+        "age": 29,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 65.667,
+        "expected_area": 65.667,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31046,
+        "function": "TOWNHOUSE",
+        "footprint": "RECT",
+        "width": 7.05,
+        "depth": 7.36,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 3,
+        "floor_height": 2.65,
+        "pitch": 38,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.25,
+        "age": 29,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "78c4105411dd26e2b9681ff7a50cdf31188972f613a4a82a57dba5f75d351485",
+      "validation": {
+        "valid": true,
+        "vertices": 22458,
+        "triangles": 23278,
+        "topology": {
+          "SOLID": 14,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.4847,
+      "passed": true
+    },
+    {
+      "index": 47,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31047,
+        "function": "MERCHANT_HOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.5,
+        "age": 46,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 141.22965056,
+        "expected_area": 141.22965056000007,
+        "patches": 9
+      },
+      "effective_settings": {
+        "seed": 31047,
+        "function": "MERCHANT_HOUSE",
+        "footprint": "L",
+        "width": 11.580800000000002,
+        "depth": 8.243200000000002,
+        "wing_width": 4.48,
+        "wing_depth": 5.040000000000001,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 40,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.5,
+        "age": 46,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "9e4f34682bf76b8a2546cf9477538e84a7aa7a902ae3c05772eef3d735d8f06e",
+      "validation": {
+        "valid": true,
+        "vertices": 36201,
+        "triangles": 37039,
+        "topology": {
+          "SOLID": 15,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.962,
+      "passed": true
+    },
+    {
+      "index": 48,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31048,
+        "function": "LONGHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.75,
+        "age": 63,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 92.82868544,
+        "expected_area": 92.82868543999999,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31048,
+        "function": "LONGHOUSE",
+        "footprint": "RECT",
+        "width": 13.235199999999999,
+        "depth": 5.6672,
+        "wing_width": 4.4,
+        "wing_depth": 5.28,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 36,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.75,
+        "age": 63,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "ddef1c2cdc6d69afaaa183e0bfe8de89be2dc9cf955120fd9fcc350d4dfaef58",
+      "validation": {
+        "valid": true,
+        "vertices": 6156,
+        "triangles": 8404,
+        "topology": {
+          "SOLID": 17,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.1531,
+      "passed": true
+    },
+    {
+      "index": 49,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31049,
+        "function": "SHOP",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 1.0,
+        "age": 80,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 61.802800000000005,
+        "expected_area": 61.802800000000005,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31049,
+        "function": "SHOP",
+        "footprint": "RECT",
+        "width": 7.52,
+        "depth": 6.44,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 38,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 1.0,
+        "age": 80,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "44bfc45a261faba6cc5f1ad4c51a4b5e6d046e2be65d10441862e25efff31d88",
+      "validation": {
+        "valid": true,
+        "vertices": 6922,
+        "triangles": 9738,
+        "topology": {
+          "SOLID": 14,
+          "SURFACE": 5
+        }
+      },
+      "seconds": 0.1786,
+      "passed": true
+    },
+    {
+      "index": 50,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31050,
+        "function": "WAREHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.0,
+        "age": 97,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 6,
+            "s0": 6.2,
+            "s1": 11.2286,
+            "length": 5.0286
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 257.78271040000004,
+        "expected_area": 257.78271040000004,
+        "patches": 11
+      },
+      "effective_settings": {
+        "seed": 31050,
+        "function": "WAREHOUSE",
+        "footprint": "T",
+        "width": 17.8976,
+        "depth": 10.304000000000002,
+        "wing_width": 5.6000000000000005,
+        "wing_depth": 7.257600000000001,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 40,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.0,
+        "age": 97,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "3cba5850b7bd17eaf4648fc833cc9ee670004d48aa39ce53972b2fb00106575a",
+      "validation": {
+        "valid": true,
+        "vertices": 36716,
+        "triangles": 55744,
+        "topology": {
+          "SOLID": 17
+        }
+      },
+      "seconds": 1.1587,
+      "passed": true
+    },
+    {
+      "index": 51,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31051,
+        "function": "MARKET_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "FINE",
+        "maintenance": 0.25,
+        "age": 114,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 232.90576191999997,
+        "expected_area": 232.9057619199998,
+        "patches": 86
+      },
+      "effective_settings": {
+        "seed": 31051,
+        "function": "MARKET_HALL",
+        "footprint": "U",
+        "width": 14.889599999999998,
+        "depth": 9.715200000000001,
+        "wing_width": 4.4,
+        "wing_depth": 6.16,
+        "floors": 1,
+        "floor_height": 3.0,
+        "pitch": 36,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "MODEST",
+        "craftsmanship": "FINE",
+        "maintenance": 0.25,
+        "age": 114,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "3d4856a3e2a65220c9aeb638616493005ba6fb1f27ca888a680c7633f650d23a",
+      "validation": {
+        "valid": true,
+        "vertices": 67304,
+        "triangles": 101728,
+        "topology": {
+          "SOLID": 18
+        }
+      },
+      "seconds": 2.1451,
+      "passed": true
+    },
+    {
+      "index": 52,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31052,
+        "function": "STABLE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.5,
+        "age": 131,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 135.37120000000002,
+        "expected_area": 135.3712,
+        "patches": 10
+      },
+      "effective_settings": {
+        "seed": 31052,
+        "function": "STABLE",
+        "footprint": "L",
+        "width": 12.219999999999999,
+        "depth": 7.36,
+        "wing_width": 4.5,
+        "wing_depth": 5.0,
+        "floors": 1,
+        "floor_height": 3.0,
+        "pitch": 38,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.5,
+        "age": 131,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "350b9d9a1104d3aa8c61fccec6aa8b360a5553a1a26c144a34cf456ad271509a",
+      "validation": {
+        "valid": true,
+        "vertices": 48874,
+        "triangles": 73792,
+        "topology": {
+          "SOLID": 18
+        }
+      },
+      "seconds": 1.3773,
+      "passed": true
+    },
+    {
+      "index": 53,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31053,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "FINE",
+        "maintenance": 0.75,
+        "age": 148,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 0,
+            "s0": 3.0967,
+            "s1": 7.4313,
+            "length": 4.3346
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 104.4884896,
+        "expected_area": 104.48848959999998,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31053,
+        "function": "SMITHY",
+        "footprint": "RECT",
+        "width": 10.527999999999999,
+        "depth": 8.243200000000002,
+        "wing_width": 3.9200000000000004,
+        "wing_depth": 4.48,
+        "floors": 1,
+        "floor_height": 3.0,
+        "pitch": 40,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "FINE",
+        "maintenance": 0.75,
+        "age": 148,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "158dd34db2cf5e95e3f583e762c7618df2632522a3c19d08718d47c74e0ed4bc",
+      "validation": {
+        "valid": true,
+        "vertices": 27408,
+        "triangles": 41428,
+        "topology": {
+          "SOLID": 19
+        }
+      },
+      "seconds": 0.7347,
+      "passed": true
+    },
+    {
+      "index": 54,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31054,
+        "function": "WORKSHOP",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 1.0,
+        "age": 165,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 74.24395839999998,
+        "expected_area": 74.2439584,
+        "patches": 9
+      },
+      "effective_settings": {
+        "seed": 31054,
+        "function": "WORKSHOP",
+        "footprint": "L",
+        "width": 8.271999999999998,
+        "depth": 5.6672,
+        "wing_width": 3.08,
+        "wing_depth": 3.52,
+        "floors": 1,
+        "floor_height": 2.65,
+        "pitch": 36,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 1.0,
+        "age": 165,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "a44b78bfcb2324c43d9147ff0e76b6bd7022c7694c038d51c18d31ac3eaf8daa",
+      "validation": {
+        "valid": true,
+        "vertices": 6754,
+        "triangles": 10280,
+        "topology": {
+          "SOLID": 20
+        }
+      },
+      "seconds": 0.1708,
+      "passed": true
+    },
+    {
+      "index": 55,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31055,
+        "function": "ASSEMBLY_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.0,
+        "age": 182,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 211.05880000000002,
+        "expected_area": 211.05879999999982,
+        "patches": 51
+      },
+      "effective_settings": {
+        "seed": 31055,
+        "function": "ASSEMBLY_HALL",
+        "footprint": "T",
+        "width": 15.04,
+        "depth": 10.120000000000001,
+        "wing_width": 5.0,
+        "wing_depth": 6.0,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 38,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.0,
+        "age": 182,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "7e1577cb008f442c63d1d6ebd2948186727d8ddbf60f6e7c23726ad9b71e81e7",
+      "validation": {
+        "valid": true,
+        "vertices": 17373,
+        "triangles": 23097,
+        "topology": {
+          "SOLID": 17,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.5329,
+      "passed": true
+    },
+    {
+      "index": 56,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31056,
+        "function": "WATCHTOWER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.25,
+        "age": 199,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 67.08961088000002,
+        "expected_area": 67.08961088000005,
+        "patches": 12
+      },
+      "effective_settings": {
+        "seed": 31056,
+        "function": "WATCHTOWER",
+        "footprint": "RECT",
+        "width": 7.369600000000001,
+        "depth": 7.212800000000001,
+        "wing_width": 3.136,
+        "wing_depth": 3.3600000000000003,
+        "floors": 3,
+        "floor_height": 2.65,
+        "pitch": 40,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.25,
+        "age": 199,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "71a90013237a57b3d875586921d300ca600d2d7e188ff0bb912703ce5163076b",
+      "validation": {
+        "valid": true,
+        "vertices": 18347,
+        "triangles": 22741,
+        "topology": {
+          "SOLID": 16,
+          "SURFACE": 5
+        }
+      },
+      "seconds": 0.4846,
+      "passed": true
+    },
+    {
+      "index": 57,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31057,
+        "function": "GATEHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.5,
+        "age": 216,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 6,
+            "s0": 2.5939,
+            "s1": 7.3415,
+            "length": 4.7476
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 114.87058751999999,
+        "expected_area": 114.8705875199999,
+        "patches": 106
+      },
+      "effective_settings": {
+        "seed": 31057,
+        "function": "GATEHOUSE",
+        "footprint": "U",
+        "width": 9.9264,
+        "depth": 6.4768,
+        "wing_width": 3.52,
+        "wing_depth": 3.96,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 36,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.5,
+        "age": 216,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "d3b27cb73bf73bfb861286ec85b983376928c3c106f02d22f35d708dd6e4ef75",
+      "validation": {
+        "valid": true,
+        "vertices": 28132,
+        "triangles": 30092,
+        "topology": {
+          "SOLID": 17,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.9674,
+      "passed": true
+    },
+    {
+      "index": 58,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31058,
+        "function": "BARRACKS",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.75,
+        "age": 233,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 0,
+            "s0": 2.412,
+            "s1": 7.1034,
+            "length": 4.6914
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 150.89999999999998,
+        "expected_area": 150.89999999999998,
+        "patches": 9
+      },
+      "effective_settings": {
+        "seed": 31058,
+        "function": "BARRACKS",
+        "footprint": "L",
+        "width": 14.1,
+        "depth": 7.36,
+        "wing_width": 4.5,
+        "wing_depth": 5.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 38,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.75,
+        "age": 233,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "43b603b0f5512f09d9e92e8eacfc49b6965ce4972c09499144b05298ddc11c03",
+      "validation": {
+        "valid": true,
+        "vertices": 43533,
+        "triangles": 41863,
+        "topology": {
+          "SOLID": 17,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.9701,
+      "passed": true
+    },
+    {
+      "index": 59,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31059,
+        "function": "BOATHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 1.0,
+        "age": 250,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 0,
+            "s0": 2.497,
+            "s1": 8.1628,
+            "length": 5.665800000000001
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 123.74041152000002,
+        "expected_area": 123.74041152000001,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31059,
+        "function": "BOATHOUSE",
+        "footprint": "RECT",
+        "width": 12.633600000000001,
+        "depth": 8.243200000000002,
+        "wing_width": 4.48,
+        "wing_depth": 6.048000000000001,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 40,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 1.0,
+        "age": 250,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "1be74303d39447fad5437a29e53f53e0ecf459b5934ace2eff23334c02865ac6",
+      "validation": {
+        "valid": true,
+        "vertices": 25789,
+        "triangles": 23807,
+        "topology": {
+          "SOLID": 15,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.56,
+      "passed": true
+    },
+    {
+      "index": 60,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31060,
+        "function": "FARMHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "FINE",
+        "maintenance": 0.0,
+        "age": 16,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 92.365552,
+        "expected_area": 92.36555200000001,
+        "patches": 9
+      },
+      "effective_settings": {
+        "seed": 31060,
+        "function": "FARMHOUSE",
+        "footprint": "L",
+        "width": 9.9792,
+        "depth": 6.16,
+        "wing_width": 3.52,
+        "wing_depth": 3.52,
+        "floors": 2,
+        "floor_height": 3.0,
+        "pitch": 40,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "MODEST",
+        "craftsmanship": "FINE",
+        "maintenance": 0.0,
+        "age": 16,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "6bbbb1e04c27681496e68072add40e594bfcabc13d614129c67e31a36183bbea",
+      "validation": {
+        "valid": true,
+        "vertices": 13360,
+        "triangles": 20048,
+        "topology": {
+          "SOLID": 26
+        }
+      },
+      "seconds": 0.3482,
+      "passed": true
+    },
+    {
+      "index": 61,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31061,
+        "function": "BARN",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.25,
+        "age": 33,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 204.69,
+        "expected_area": 204.69,
+        "patches": 11
+      },
+      "effective_settings": {
+        "seed": 31061,
+        "function": "BARN",
+        "footprint": "T",
+        "width": 16.200000000000003,
+        "depth": 9.0,
+        "wing_width": 5.0,
+        "wing_depth": 6.0,
+        "floors": 1,
+        "floor_height": 3.0,
+        "pitch": 42,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.25,
+        "age": 33,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "411b6c1fec65771aee370c69b7211e962815818fa87f2955f97cd5908c57fad7",
+      "validation": {
+        "valid": true,
+        "vertices": 13196,
+        "triangles": 19808,
+        "topology": {
+          "SOLID": 19
+        }
+      },
+      "seconds": 0.3399,
+      "passed": true
+    },
+    {
+      "index": 62,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31062,
+        "function": "GRAIN_STORE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "FINE",
+        "maintenance": 0.5,
+        "age": 50,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 0,
+            "s0": 3.2011,
+            "s1": 7.6853,
+            "length": 4.4841999999999995
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 103.01313600000002,
+        "expected_area": 103.01313600000003,
+        "patches": 12
+      },
+      "effective_settings": {
+        "seed": 31062,
+        "function": "GRAIN_STORE",
+        "footprint": "RECT",
+        "width": 10.886400000000002,
+        "depth": 7.840000000000001,
+        "wing_width": 3.5840000000000005,
+        "wing_depth": 4.48,
+        "floors": 2,
+        "floor_height": 3.0,
+        "pitch": 44,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "FINE",
+        "maintenance": 0.5,
+        "age": 50,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "25bba4beb91e2bbb9e75c8c9510ea4625da2e41641b020301c5747ed3cc2f3d1",
+      "validation": {
+        "valid": true,
+        "vertices": 37960,
+        "triangles": 56992,
+        "topology": {
+          "SOLID": 17
+        }
+      },
+      "seconds": 0.9945,
+      "passed": true
+    },
+    {
+      "index": 63,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31063,
+        "function": "MILLER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.75,
+        "age": 67,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 98.362224,
+        "expected_area": 98.36222400000003,
+        "patches": 10
+      },
+      "effective_settings": {
+        "seed": 31063,
+        "function": "MILLER",
+        "footprint": "L",
+        "width": 10.454400000000001,
+        "depth": 6.16,
+        "wing_width": 3.696,
+        "wing_depth": 3.96,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 40,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.75,
+        "age": 67,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "66a38f96dedfc202f1048c73ea4229f4e7f44f65685155bfd4f3a53806a52ff1",
+      "validation": {
+        "valid": true,
+        "vertices": 24166,
+        "triangles": 36344,
+        "topology": {
+          "SOLID": 24
+        }
+      },
+      "seconds": 0.6784,
+      "passed": true
+    },
+    {
+      "index": 64,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31064,
+        "function": "INN",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 1.0,
+        "age": 84,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 5,
+            "s0": 1.4622,
+            "s1": 7.5358,
+            "length": 6.0736
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 174.906,
+        "expected_area": 174.906,
+        "patches": 9
+      },
+      "effective_settings": {
+        "seed": 31064,
+        "function": "INN",
+        "footprint": "L",
+        "width": 14.040000000000001,
+        "depth": 9.0,
+        "wing_width": 4.5,
+        "wing_depth": 5.0,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 42,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 1.0,
+        "age": 84,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "78a3636d8c3a76392aaf7b5de924ef6372309a3648f1866db7fd79128b3001cc",
+      "validation": {
+        "valid": true,
+        "vertices": 106782,
+        "triangles": 160268,
+        "topology": {
+          "SOLID": 28
+        }
+      },
+      "seconds": 2.8107,
+      "passed": true
+    },
+    {
+      "index": 65,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31065,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.0,
+        "age": 101,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 0,
+            "s0": 2.4057,
+            "s1": 7.2887,
+            "length": 4.883000000000001
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 80.59521600000002,
+        "expected_area": 80.59521600000001,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31065,
+        "function": "COTTAGE",
+        "footprint": "RECT",
+        "width": 9.676800000000002,
+        "depth": 6.720000000000001,
+        "wing_width": 3.3600000000000003,
+        "wing_depth": 3.9200000000000004,
+        "floors": 1,
+        "floor_height": 2.65,
+        "pitch": 44,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.0,
+        "age": 101,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "efe7a67b36994b75b2133b544ce49656a6c888054f486cc11060c9605fb84c1c",
+      "validation": {
+        "valid": true,
+        "vertices": 33920,
+        "triangles": 27849,
+        "topology": {
+          "SOLID": 18,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.6141,
+      "passed": true
+    },
+    {
+      "index": 66,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31066,
+        "function": "TOWNHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.25,
+        "age": 118,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 63.742320000000014,
+        "expected_area": 63.74232000000001,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31066,
+        "function": "TOWNHOUSE",
+        "footprint": "RECT",
+        "width": 7.128000000000001,
+        "depth": 7.04,
+        "wing_width": 2.64,
+        "wing_depth": 3.52,
+        "floors": 3,
+        "floor_height": 2.8,
+        "pitch": 40,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.25,
+        "age": 118,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "f2e92880e9b6092197e24b45703be219ddee79fd6a83d5585af480ec0b968322",
+      "validation": {
+        "valid": true,
+        "vertices": 9228,
+        "triangles": 11879,
+        "topology": {
+          "SOLID": 15,
+          "SURFACE": 5
+        }
+      },
+      "seconds": 0.1978,
+      "passed": true
+    },
+    {
+      "index": 67,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31067,
+        "function": "MERCHANT_HOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.5,
+        "age": 135,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 135.792,
+        "expected_area": 135.792,
+        "patches": 10
+      },
+      "effective_settings": {
+        "seed": 31067,
+        "function": "MERCHANT_HOUSE",
+        "footprint": "L",
+        "width": 11.88,
+        "depth": 8.0,
+        "wing_width": 4.0,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 42,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.5,
+        "age": 135,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "dfb634a82b2eb958e63f00afda441d71abd4389ced270fc57e2f23d78138fdac",
+      "validation": {
+        "valid": true,
+        "vertices": 16410,
+        "triangles": 21379,
+        "topology": {
+          "SOLID": 16,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.4078,
+      "passed": true
+    },
+    {
+      "index": 68,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31068,
+        "function": "LONGHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.75,
+        "age": 152,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 177.01646400000004,
+        "expected_area": 177.01646400000004,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31068,
+        "function": "LONGHOUSE",
+        "footprint": "RECT",
+        "width": 19.353600000000004,
+        "depth": 7.840000000000001,
+        "wing_width": 5.6000000000000005,
+        "wing_depth": 6.720000000000001,
+        "floors": 1,
+        "floor_height": 2.8,
+        "pitch": 44,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.75,
+        "age": 152,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "674c93c221317aaf6648e679e8e70fa39fb59099bf570ee53788a42f23a5223c",
+      "validation": {
+        "valid": true,
+        "vertices": 34438,
+        "triangles": 29630,
+        "topology": {
+          "SOLID": 18,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.6485,
+      "passed": true
+    },
+    {
+      "index": 69,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31069,
+        "function": "SHOP",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "FINE",
+        "maintenance": 1.0,
+        "age": 169,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 2,
+            "s0": 1.5138,
+            "s1": 6.0042,
+            "length": 4.4904
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 60.03259200000001,
+        "expected_area": 60.032592,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31069,
+        "function": "SHOP",
+        "footprint": "RECT",
+        "width": 7.6032,
+        "depth": 6.16,
+        "wing_width": 2.64,
+        "wing_depth": 3.52,
+        "floors": 2,
+        "floor_height": 3.0,
+        "pitch": 40,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "MODEST",
+        "craftsmanship": "FINE",
+        "maintenance": 1.0,
+        "age": 169,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "8136b3c7fb0f870ea0d191b098086411ca1e63fd73fa7ad0f2d34364fbe8d32a",
+      "validation": {
+        "valid": true,
+        "vertices": 11934,
+        "triangles": 13698,
+        "topology": {
+          "SOLID": 15,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.273,
+      "passed": true
+    },
+    {
+      "index": 70,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31070,
+        "function": "WAREHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.0,
+        "age": 186,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 6,
+            "s0": 6.2,
+            "s1": 11.506,
+            "length": 5.306
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 245.33399999999997,
+        "expected_area": 245.33399999999997,
+        "patches": 11
+      },
+      "effective_settings": {
+        "seed": 31070,
+        "function": "WAREHOUSE",
+        "footprint": "T",
+        "width": 18.36,
+        "depth": 10.0,
+        "wing_width": 5.0,
+        "wing_depth": 6.0,
+        "floors": 1,
+        "floor_height": 3.0,
+        "pitch": 42,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 0.0,
+        "age": 186,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "69570bb97a3de40b20877653b0804f21bb960d1d269a78bac5db9eff5757e0a9",
+      "validation": {
+        "valid": true,
+        "vertices": 127110,
+        "triangles": 190764,
+        "topology": {
+          "SOLID": 18
+        }
+      },
+      "seconds": 3.4698,
+      "passed": true
+    },
+    {
+      "index": 71,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31071,
+        "function": "MARKET_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "FINE",
+        "maintenance": 0.25,
+        "age": 203,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 427.04795200000007,
+        "expected_area": 427.04795199999967,
+        "patches": 73
+      },
+      "effective_settings": {
+        "seed": 31071,
+        "function": "MARKET_HALL",
+        "footprint": "U",
+        "width": 21.772800000000004,
+        "depth": 13.440000000000001,
+        "wing_width": 5.6000000000000005,
+        "wing_depth": 7.840000000000001,
+        "floors": 1,
+        "floor_height": 3.0,
+        "pitch": 44,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "FINE",
+        "maintenance": 0.25,
+        "age": 203,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "88b7bf66c172ce2d13a079a9285b03556d7077e4e4ea197d1442ad94351d125a",
+      "validation": {
+        "valid": true,
+        "vertices": 276824,
+        "triangles": 415572,
+        "topology": {
+          "SOLID": 21
+        }
+      },
+      "seconds": 7.6743,
+      "passed": true
+    },
+    {
+      "index": 72,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31072,
+        "function": "STABLE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.5,
+        "age": 220,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 126.63028800000001,
+        "expected_area": 126.63028800000005,
+        "patches": 9
+      },
+      "effective_settings": {
+        "seed": 31072,
+        "function": "STABLE",
+        "footprint": "L",
+        "width": 12.355200000000002,
+        "depth": 7.04,
+        "wing_width": 3.96,
+        "wing_depth": 4.4,
+        "floors": 1,
+        "floor_height": 2.65,
+        "pitch": 40,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "MODEST",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.5,
+        "age": 220,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "7f3750bea7134fea133c6b0da407c93717deb7ed5a2fcd74a6b10842b86da1b2",
+      "validation": {
+        "valid": true,
+        "vertices": 10900,
+        "triangles": 16360,
+        "topology": {
+          "SOLID": 19
+        }
+      },
+      "seconds": 0.2797,
+      "passed": true
+    },
+    {
+      "index": 73,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31073,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.75,
+        "age": 237,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 0,
+            "s0": 3.1873,
+            "s1": 8.2,
+            "length": 5.012699999999999
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 104.12999999999998,
+        "expected_area": 104.13,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31073,
+        "function": "SMITHY",
+        "footprint": "RECT",
+        "width": 10.8,
+        "depth": 8.0,
+        "wing_width": 3.5,
+        "wing_depth": 4.0,
+        "floors": 1,
+        "floor_height": 2.65,
+        "pitch": 42,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "ROUGH",
+        "maintenance": 0.75,
+        "age": 237,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "423c2746c073713e2a0d4e2aedaef5fe9e17b398c9faa64a7b0dc6075a3e7a75",
+      "validation": {
+        "valid": true,
+        "vertices": 7632,
+        "triangles": 11452,
+        "topology": {
+          "SOLID": 20
+        }
+      },
+      "seconds": 0.1751,
+      "passed": true
+    },
+    {
+      "index": 74,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31074,
+        "function": "WORKSHOP",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "ROUGH",
+        "maintenance": 1.0,
+        "age": 3,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 135.17864000000003,
+        "expected_area": 135.17864,
+        "patches": 9
+      },
+      "effective_settings": {
+        "seed": 31074,
+        "function": "WORKSHOP",
+        "footprint": "L",
+        "width": 12.096000000000002,
+        "depth": 7.840000000000001,
+        "wing_width": 3.9200000000000004,
+        "wing_depth": 4.48,
+        "floors": 1,
+        "floor_height": 2.65,
+        "pitch": 44,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 0.95,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "ROUGH",
+        "maintenance": 1.0,
+        "age": 3,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "d62af3955378c600f013c9a181c8660ba7707143e60290d46899d7285f23bf83",
+      "validation": {
+        "valid": true,
+        "vertices": 40938,
+        "triangles": 61496,
+        "topology": {
+          "SOLID": 21
+        }
+      },
+      "seconds": 0.9859,
+      "passed": true
+    },
+    {
+      "index": 75,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31075,
+        "function": "ASSEMBLY_HALL",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.0,
+        "age": 20,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 198.38971199999997,
+        "expected_area": 198.38971199999995,
+        "patches": 56
+      },
+      "effective_settings": {
+        "seed": 31075,
+        "function": "ASSEMBLY_HALL",
+        "footprint": "T",
+        "width": 15.2064,
+        "depth": 9.68,
+        "wing_width": 4.4,
+        "wing_depth": 5.28,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 40,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.1,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.0,
+        "age": 20,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "75c937fbbbbe78c8186703232457088ee23a69a12581cc58a2136037a788ae11",
+      "validation": {
+        "valid": true,
+        "vertices": 34044,
+        "triangles": 36384,
+        "topology": {
+          "SOLID": 18,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 1.0281,
+      "passed": true
+    },
+    {
+      "index": 76,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31076,
+        "function": "WATCHTOWER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.25,
+        "age": 37,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 66.834,
+        "expected_area": 66.83399999999999,
+        "patches": 12
+      },
+      "effective_settings": {
+        "seed": 31076,
+        "function": "WATCHTOWER",
+        "footprint": "RECT",
+        "width": 7.5600000000000005,
+        "depth": 7.0,
+        "wing_width": 2.8,
+        "wing_depth": 3.0,
+        "floors": 3,
+        "floor_height": 2.8,
+        "pitch": 42,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.25,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.25,
+        "age": 37,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "1ed4472f2f79cf13fc6933d53b619733df7ed099367018bbbf833d7d83d2cb79",
+      "validation": {
+        "valid": true,
+        "vertices": 35477,
+        "triangles": 32185,
+        "topology": {
+          "SOLID": 17,
+          "SURFACE": 5
+        }
+      },
+      "seconds": 0.6755,
+      "passed": true
+    },
+    {
+      "index": 77,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31077,
+        "function": "GATEHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.5,
+        "age": 54,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 6,
+            "s0": 4.9148,
+            "s1": 9.5809,
+            "length": 4.6661
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 206.224272,
+        "expected_area": 206.2242719999998,
+        "patches": 73
+      },
+      "effective_settings": {
+        "seed": 31077,
+        "function": "GATEHOUSE",
+        "footprint": "U",
+        "width": 14.515200000000002,
+        "depth": 8.96,
+        "wing_width": 4.48,
+        "wing_depth": 5.040000000000001,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 44,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.4,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "AFFLUENT",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.5,
+        "age": 54,
+        "use_grammar": true,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "4ce30a6a84f26da4f63ebd9a79a8d6bd2da092292fa76d737077f19571dac8ad",
+      "validation": {
+        "valid": true,
+        "vertices": 95480,
+        "triangles": 79370,
+        "topology": {
+          "SOLID": 17,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 1.8678,
+      "passed": true
+    },
+    {
+      "index": 78,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31078,
+        "function": "BARRACKS",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "FINE",
+        "maintenance": 0.75,
+        "age": 71,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 141.72264000000004,
+        "expected_area": 141.72263999999998,
+        "patches": 9
+      },
+      "effective_settings": {
+        "seed": 31078,
+        "function": "BARRACKS",
+        "footprint": "L",
+        "width": 14.256000000000002,
+        "depth": 7.04,
+        "wing_width": 3.96,
+        "wing_depth": 4.4,
+        "floors": 2,
+        "floor_height": 3.0,
+        "pitch": 40,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.65,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "MODEST",
+        "craftsmanship": "FINE",
+        "maintenance": 0.75,
+        "age": 71,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "23b93f9bd3c76b3d6d8f168ee01bde10cd85f81d6a07568df1243d7a19896de6",
+      "validation": {
+        "valid": true,
+        "vertices": 16336,
+        "triangles": 20936,
+        "topology": {
+          "SOLID": 18,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.3186,
+      "passed": true
+    },
+    {
+      "index": 79,
+      "phase": "region_type",
+      "requested_settings": {
+        "seed": 31079,
+        "function": "BOATHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 1.0,
+        "age": 88,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 123.35399999999998,
+        "expected_area": 123.35399999999998,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 31079,
+        "function": "BOATHOUSE",
+        "footprint": "RECT",
+        "width": 12.96,
+        "depth": 8.0,
+        "wing_width": 4.0,
+        "wing_depth": 5.0,
+        "floors": 1,
+        "floor_height": 3.0,
+        "pitch": 42,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 0.8,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "FINE",
+        "maintenance": 1.0,
+        "age": 88,
+        "use_grammar": true,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "0e91d5e68159507424fd9167b56f52664080fd0f87df1443b0dcad29b196ab60",
+      "validation": {
+        "valid": true,
+        "vertices": 7882,
+        "triangles": 9869,
+        "topology": {
+          "SOLID": 16,
+          "SURFACE": 6
+        }
+      },
+      "determinism": {
+        "repeat_hash": "0e91d5e68159507424fd9167b56f52664080fd0f87df1443b0dcad29b196ab60",
+        "matched": true
+      },
+      "seconds": 0.2568,
+      "passed": true
+    },
+    {
+      "index": 80,
+      "phase": "manual_extreme",
+      "requested_settings": {
+        "seed": 42000,
+        "function": "FARMHOUSE",
+        "footprint": "RECT",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 30.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 167.61000000000004,
+        "expected_area": 167.61,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 42000,
+        "function": "FARMHOUSE",
+        "footprint": "RECT",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 30.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "98a4293597559bcfc3bf259c1c24c9eb2cbf8752194731cb99c0920bdbd43c8d",
+      "validation": {
+        "valid": true,
+        "vertices": 38322,
+        "triangles": 57864,
+        "topology": {
+          "SOLID": 24
+        }
+      },
+      "determinism": {
+        "repeat_hash": "98a4293597559bcfc3bf259c1c24c9eb2cbf8752194731cb99c0920bdbd43c8d",
+        "matched": true
+      },
+      "seconds": 1.4951,
+      "passed": true
+    },
+    {
+      "index": 81,
+      "phase": "manual_extreme",
+      "requested_settings": {
+        "seed": 42001,
+        "function": "BARN",
+        "footprint": "RECT",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 60.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 167.61000000000004,
+        "expected_area": 167.61,
+        "patches": 2
+      },
+      "effective_settings": {
+        "seed": 42001,
+        "function": "BARN",
+        "footprint": "RECT",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 60.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "feb3c5431cfa04ca05be3c976df77997bf7217616a291925db50392ea7727a1c",
+      "validation": {
+        "valid": true,
+        "vertices": 44896,
+        "triangles": 41055,
+        "topology": {
+          "SOLID": 13,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 0.7777,
+      "passed": true
+    },
+    {
+      "index": 82,
+      "phase": "manual_extreme",
+      "requested_settings": {
+        "seed": 42002,
+        "function": "GATEHOUSE",
+        "footprint": "RECT",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 30.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 167.61000000000004,
+        "expected_area": 167.6100000000001,
+        "patches": 12
+      },
+      "effective_settings": {
+        "seed": 42002,
+        "function": "GATEHOUSE",
+        "footprint": "RECT",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 30.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "c7fbd2e663fc72366e2368d0012d25a8f5a6a9249a66fc2dd8ea9927b475541a",
+      "validation": {
+        "valid": true,
+        "vertices": 66152,
+        "triangles": 99656,
+        "topology": {
+          "SOLID": 21
+        }
+      },
+      "seconds": 1.3176,
+      "passed": true
+    },
+    {
+      "index": 83,
+      "phase": "manual_extreme",
+      "requested_settings": {
+        "seed": 42003,
+        "function": "BOATHOUSE",
+        "footprint": "RECT",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 60.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 167.61000000000004,
+        "expected_area": 167.61,
+        "patches": 12
+      },
+      "effective_settings": {
+        "seed": 42003,
+        "function": "BOATHOUSE",
+        "footprint": "RECT",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 60.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "4b9a770144e7ee05fa4e48a5518561a86f3e90f4cb814dcc16c2ce84487c5af3",
+      "validation": {
+        "valid": true,
+        "vertices": 96760,
+        "triangles": 75316,
+        "topology": {
+          "SOLID": 16,
+          "SURFACE": 5
+        }
+      },
+      "seconds": 1.4196,
+      "passed": true
+    },
+    {
+      "index": 84,
+      "phase": "manual_extreme",
+      "requested_settings": {
+        "seed": 42004,
+        "function": "FARMHOUSE",
+        "footprint": "L",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 30.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 184.01000000000002,
+        "expected_area": 184.01,
+        "patches": 10
+      },
+      "effective_settings": {
+        "seed": 42004,
+        "function": "FARMHOUSE",
+        "footprint": "L",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 30.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "fbb3377cfe663089f8f0ff6360926c55d9833b6acc2204228156593dde51b615",
+      "validation": {
+        "valid": true,
+        "vertices": 44610,
+        "triangles": 67496,
+        "topology": {
+          "SOLID": 26
+        }
+      },
+      "seconds": 0.9232,
+      "passed": true
+    },
+    {
+      "index": 85,
+      "phase": "manual_extreme",
+      "requested_settings": {
+        "seed": 42005,
+        "function": "BARN",
+        "footprint": "L",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 60.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 184.01000000000005,
+        "expected_area": 184.01,
+        "patches": 9
+      },
+      "effective_settings": {
+        "seed": 42005,
+        "function": "BARN",
+        "footprint": "L",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 60.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "ab7c179c204be76e9fe710a55b8ea79a3e76da54357ae106fc4d0b2ba2d4c7fa",
+      "validation": {
+        "valid": true,
+        "vertices": 54572,
+        "triangles": 51185,
+        "topology": {
+          "SOLID": 14,
+          "SURFACE": 5
+        }
+      },
+      "seconds": 1.0527,
+      "passed": true
+    },
+    {
+      "index": 86,
+      "phase": "manual_extreme",
+      "requested_settings": {
+        "seed": 42006,
+        "function": "GATEHOUSE",
+        "footprint": "L",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 30.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 0,
+            "s0": 2.1705,
+            "s1": 8.7915,
+            "length": 6.620999999999999
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 184.01000000000005,
+        "expected_area": 184.01,
+        "patches": 38
+      },
+      "effective_settings": {
+        "seed": 42006,
+        "function": "GATEHOUSE",
+        "footprint": "L",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 30.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "f39b78081ad82411cfa146b7136d3c5956556c43b8d4305974b348cd1799dc6d",
+      "validation": {
+        "valid": true,
+        "vertices": 83232,
+        "triangles": 125440,
+        "topology": {
+          "SOLID": 21
+        }
+      },
+      "seconds": 1.8498,
+      "passed": true
+    },
+    {
+      "index": 87,
+      "phase": "manual_extreme",
+      "requested_settings": {
+        "seed": 42007,
+        "function": "BOATHOUSE",
+        "footprint": "L",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 60.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [
+          {
+            "edge_index": 2,
+            "s0": 2.1664,
+            "s1": 8.7689,
+            "length": 6.602500000000001
+          }
+        ],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 184.01000000000002,
+        "expected_area": 184.00999999999993,
+        "patches": 37
+      },
+      "effective_settings": {
+        "seed": 42007,
+        "function": "BOATHOUSE",
+        "footprint": "L",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 60.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "862b923c3b449cfa7f22fde2cc3d2ad8866bc6324f04a49b23535bba183196b6",
+      "validation": {
+        "valid": true,
+        "vertices": 107770,
+        "triangles": 84524,
+        "topology": {
+          "SOLID": 17,
+          "SURFACE": 5
+        }
+      },
+      "seconds": 1.7784,
+      "passed": true
+    },
+    {
+      "index": 88,
+      "phase": "manual_extreme",
+      "requested_settings": {
+        "seed": 42008,
+        "function": "FARMHOUSE",
+        "footprint": "T",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 30.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 184.01000000000002,
+        "expected_area": 184.01,
+        "patches": 11
+      },
+      "effective_settings": {
+        "seed": 42008,
+        "function": "FARMHOUSE",
+        "footprint": "T",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 30.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "643d7a5c858797f15d334017ce103fbe68397a840a0692e0df69edde5dd146ba",
+      "validation": {
+        "valid": true,
+        "vertices": 43674,
+        "triangles": 66148,
+        "topology": {
+          "SOLID": 26
+        }
+      },
+      "seconds": 0.9481,
+      "passed": true
+    },
+    {
+      "index": 89,
+      "phase": "manual_extreme",
+      "requested_settings": {
+        "seed": 42009,
+        "function": "BARN",
+        "footprint": "T",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 60.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 184.01000000000002,
+        "expected_area": 184.01000000000002,
+        "patches": 11
+      },
+      "effective_settings": {
+        "seed": 42009,
+        "function": "BARN",
+        "footprint": "T",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 60.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "e53f41605374a8f773d25fe65862d87674607a3b3a8b96906608d22b3a6bc900",
+      "validation": {
+        "valid": true,
+        "vertices": 51923,
+        "triangles": 47746,
+        "topology": {
+          "SOLID": 14,
+          "SURFACE": 5
+        }
+      },
+      "seconds": 0.9851,
+      "passed": true
+    },
+    {
+      "index": 90,
+      "phase": "manual_extreme",
+      "requested_settings": {
+        "seed": 42010,
+        "function": "GATEHOUSE",
+        "footprint": "T",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 30.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 184.01000000000005,
+        "expected_area": 184.01000000000013,
+        "patches": 56
+      },
+      "effective_settings": {
+        "seed": 42010,
+        "function": "GATEHOUSE",
+        "footprint": "T",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 30.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "10d657197f50f4aab90621ee5a6cca187abe3b8663c7596345d73e408e76a5ce",
+      "validation": {
+        "valid": true,
+        "vertices": 85000,
+        "triangles": 128236,
+        "topology": {
+          "SOLID": 22
+        }
+      },
+      "seconds": 1.9219,
+      "passed": true
+    },
+    {
+      "index": 91,
+      "phase": "manual_extreme",
+      "requested_settings": {
+        "seed": 42011,
+        "function": "BOATHOUSE",
+        "footprint": "T",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 60.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 184.01000000000002,
+        "expected_area": 184.0099999999999,
+        "patches": 56
+      },
+      "effective_settings": {
+        "seed": 42011,
+        "function": "BOATHOUSE",
+        "footprint": "T",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 60.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "d874fa72d1331ba5f5e13633e0dee6c5f7fc1f72c1b9458c6b3f52ae9c2d70e4",
+      "validation": {
+        "valid": true,
+        "vertices": 110417,
+        "triangles": 85643,
+        "topology": {
+          "SOLID": 17,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 1.9593,
+      "passed": true
+    },
+    {
+      "index": 92,
+      "phase": "manual_extreme",
+      "requested_settings": {
+        "seed": 42012,
+        "function": "FARMHOUSE",
+        "footprint": "U",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 30.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 200.41000000000003,
+        "expected_area": 200.41000000000003,
+        "patches": 19
+      },
+      "effective_settings": {
+        "seed": 42012,
+        "function": "FARMHOUSE",
+        "footprint": "U",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 30.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "GABLE",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "c05dacf92f0730c3c53ad1d6e3d7a6a107252a556f546b97e73d98720c018601",
+      "validation": {
+        "valid": true,
+        "vertices": 51788,
+        "triangles": 78472,
+        "topology": {
+          "SOLID": 26
+        }
+      },
+      "seconds": 1.1941,
+      "passed": true
+    },
+    {
+      "index": 93,
+      "phase": "manual_extreme",
+      "requested_settings": {
+        "seed": 42013,
+        "function": "BARN",
+        "footprint": "U",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 60.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 200.41000000000003,
+        "expected_area": 200.41000000000003,
+        "patches": 19
+      },
+      "effective_settings": {
+        "seed": 42013,
+        "function": "BARN",
+        "footprint": "U",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 60.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "GABLE",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "d19528a40a37a2d8d30dda3738e7a40a5d764ad4debf52738d002dc2ba8ac461",
+      "validation": {
+        "valid": true,
+        "vertices": 64095,
+        "triangles": 61026,
+        "topology": {
+          "SOLID": 14,
+          "SURFACE": 6
+        }
+      },
+      "seconds": 1.4081,
+      "passed": true
+    },
+    {
+      "index": 94,
+      "phase": "manual_extreme",
+      "requested_settings": {
+        "seed": 42014,
+        "function": "GATEHOUSE",
+        "footprint": "U",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 30.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 200.41000000000003,
+        "expected_area": 200.41,
+        "patches": 86
+      },
+      "effective_settings": {
+        "seed": 42014,
+        "function": "GATEHOUSE",
+        "footprint": "U",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 30.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "HIP",
+        "geometry_mode": "SOLID"
+      },
+      "geometry_hash": "0a3bcbb0fd9ea01570355a53b3f08f58b488603a709b6edf190e34ac3297628c",
+      "validation": {
+        "valid": true,
+        "vertices": 106512,
+        "triangles": 160628,
+        "topology": {
+          "SOLID": 22
+        }
+      },
+      "seconds": 2.5845,
+      "passed": true
+    },
+    {
+      "index": 95,
+      "phase": "manual_extreme",
+      "requested_settings": {
+        "seed": 42015,
+        "function": "BOATHOUSE",
+        "footprint": "U",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 60.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "errors": [],
+      "structural_diagnostics": {
+        "raw_interpost_spans": [],
+        "solid_wall_support_gaps": []
+      },
+      "roof": {
+        "projected_area": 200.41000000000003,
+        "expected_area": 200.4099999999999,
+        "patches": 87
+      },
+      "effective_settings": {
+        "seed": 42015,
+        "function": "BOATHOUSE",
+        "footprint": "U",
+        "width": 14.0,
+        "depth": 10.0,
+        "wing_width": 3.0,
+        "wing_depth": 4.0,
+        "floors": 2,
+        "floor_height": 2.8,
+        "pitch": 60.0,
+        "overhang": 0.55,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "HIP",
+        "geometry_mode": "EFFICIENT"
+      },
+      "geometry_hash": "776ca292d0490f07f0bdecd9bed568d4d87e47775d3c546fd98acdcb75840385",
+      "validation": {
+        "valid": true,
+        "vertices": 123107,
+        "triangles": 96879,
+        "topology": {
+          "SOLID": 17,
+          "SURFACE": 6
+        }
+      },
+      "determinism": {
+        "repeat_hash": "776ca292d0490f07f0bdecd9bed568d4d87e47775d3c546fd98acdcb75840385",
+        "matched": true
+      },
+      "seconds": 5.1322,
+      "passed": true
+    }
+  ]
+}

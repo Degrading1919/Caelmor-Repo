@@ -1,0 +1,32 @@
+{
+  "valid": true,
+  "source_revision": "094eb8c",
+  "images_verified": 44,
+  "roundtrip_images": 4,
+  "max_camera_metadata_delta_metres": 1.9073486345888568e-07,
+  "comparison_sheets": 6,
+  "historical_benchmark_images_verified": 48,
+  "archive_sha256": "fce644532bb1fa714ecfa515bd680fc44aa09d5d9ca642d588bcc820be0cb919",
+  "archive_members": 30,
+  "asset_diagnostics": [
+    {
+      "function": "SMITHY",
+      "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367",
+      "atlas_banks": 14,
+      "atlas_maps": 42,
+      "atlas_texels": 6293504,
+      "glb_bytes": 11844828,
+      "blend_bytes": 10914285
+    },
+    {
+      "function": "GATEHOUSE",
+      "geometry_hash": "4b7472cc506bae5d4db82b9aa1336277195cebee072995e9f09294bc27946ec3",
+      "atlas_banks": 9,
+      "atlas_maps": 27,
+      "atlas_texels": 21919744,
+      "glb_bytes": 50400660,
+      "blend_bytes": 46127287
+    }
+  ],
+  "scope": "Source/image/archive correspondence and executed native reports; not final artistic acceptance or runtime performance."
+}

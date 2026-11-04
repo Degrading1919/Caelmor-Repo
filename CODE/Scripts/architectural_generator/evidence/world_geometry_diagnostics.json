@@ -1,0 +1,1436 @@
+{
+  "scope": "Authoring geometry counts and pure generation/validation time; no runtime measurements.",
+  "source_sha256": {
+    "__init__.py": "92f7392656260890e23f43d76165ec960dfc4e921dd6f5572d92e83103ee5b4c",
+    "blender_backend.py": "4c28a3b03c538b81be3b4a95319396bd284dd852f0711426fa75530dd74ed01e",
+    "engine.py": "547d9b0e28252aa0fe7306947cbb525c54836eb9eeb7887bab4803293205b8ca",
+    "facade.py": "9639904540df538372e7883f4cd363baad0fd6c4edf0131b88233c5e7e0dc1c4",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "192d3a5a29d2996804bb72314bea12a1d5a4a3f6a9103e34ca369caf0548c958",
+    "model.py": "d52927e24f0b093dabdd9affc071a111ef4b82db052089b04bb44052f53e43ce",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "2932203eb3675bb9f3c0d9a346e6d655d65bc001ec144c7c4297984a56e50880",
+    "world.py": "16a255a3873ae6cf5b4423248a7032114040a5a02aa28c243b0d31f352925565",
+    "world_emberholt.py": "3f8c474a4f1333795c07c3f5428624a35e7e2fcbf8bbb89f0b608a1eb52e5fbf",
+    "world_lowmark_thornfell.py": "9c1e4a5c523d18a4a5498fdd12ef27f95163b9e49284e1438c874f24f0be600e",
+    "world_mire.py": "3be11f40c80893ded91cf61db4ca194a5a671632c9a71cecb56d87582554e6b7"
+  },
+  "cases": [
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 42,
+          "vertices": 7496,
+          "triangles": 11456,
+          "materials": 12,
+          "region": "LOWMARK",
+          "context": "RURAL",
+          "building_type": "COTTAGE",
+          "geometry_mode": "SOLID",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "lowmark_main_hall",
+              "bounds": [
+                0,
+                0,
+                8.0,
+                6.0
+              ],
+              "base": 0.45,
+              "eave": 3.25,
+              "valid": true,
+              "roof": "GABLE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.28,
+              "vertices": 5528,
+              "triangles": 8408
+            },
+            {
+              "key": "lowmark_service_wing",
+              "bounds": [
+                8.0,
+                -0.72,
+                11.18,
+                3.6000000000000005
+              ],
+              "base": 0.45,
+              "eave": 2.746,
+              "valid": true,
+              "roof": "SHED",
+              "function": "COTTAGE",
+              "wall_thickness": 0.28,
+              "vertices": 1928,
+              "triangles": 2988
+            }
+          ],
+          "geometry_hash": "83488857cf1ac42fbc3979c745e7ded0e3af04c62e6c25b6855e22c215716883",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.1121
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 44,
+          "vertices": 6626,
+          "triangles": 9116,
+          "materials": 12,
+          "region": "LOWMARK",
+          "context": "RURAL",
+          "building_type": "COTTAGE",
+          "geometry_mode": "EFFICIENT",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "lowmark_main_hall",
+              "bounds": [
+                0,
+                0,
+                8.0,
+                6.0
+              ],
+              "base": 0.45,
+              "eave": 3.25,
+              "valid": true,
+              "roof": "GABLE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.28,
+              "vertices": 4834,
+              "triangles": 6600
+            },
+            {
+              "key": "lowmark_service_wing",
+              "bounds": [
+                8.0,
+                -0.72,
+                11.18,
+                3.6000000000000005
+              ],
+              "base": 0.45,
+              "eave": 2.746,
+              "valid": true,
+              "roof": "SHED",
+              "function": "COTTAGE",
+              "wall_thickness": 0.28,
+              "vertices": 1752,
+              "triangles": 2456
+            }
+          ],
+          "geometry_hash": "eaff49e327ebd58d8eec862084a174f1bef7f5449b71405950e433d12dc67337",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.096
+        },
+        "vertices_reduction_percent": 11.61,
+        "triangles_reduction_percent": 20.43
+      }
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 42,
+          "vertices": 13094,
+          "triangles": 20164,
+          "materials": 12,
+          "region": "LOWMARK",
+          "context": "RURAL",
+          "building_type": "COTTAGE",
+          "geometry_mode": "SOLID",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "lowmark_main_hall",
+              "bounds": [
+                0,
+                0,
+                8.0,
+                6.0
+              ],
+              "base": 0.45,
+              "eave": 3.25,
+              "valid": true,
+              "roof": "GABLE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.28,
+              "vertices": 9808,
+              "triangles": 15016
+            },
+            {
+              "key": "lowmark_service_wing",
+              "bounds": [
+                8.0,
+                -0.72,
+                11.18,
+                3.6000000000000005
+              ],
+              "base": 0.45,
+              "eave": 2.746,
+              "valid": true,
+              "roof": "SHED",
+              "function": "COTTAGE",
+              "wall_thickness": 0.28,
+              "vertices": 3246,
+              "triangles": 5088
+            }
+          ],
+          "geometry_hash": "5507cf6994e2903f2b7b99adaff9b4f6eaa3790c2920131c2e289425426645b4",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.2134
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 44,
+          "vertices": 10614,
+          "triangles": 12594,
+          "materials": 12,
+          "region": "LOWMARK",
+          "context": "RURAL",
+          "building_type": "COTTAGE",
+          "geometry_mode": "EFFICIENT",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "lowmark_main_hall",
+              "bounds": [
+                0,
+                0,
+                8.0,
+                6.0
+              ],
+              "base": 0.45,
+              "eave": 3.25,
+              "valid": true,
+              "roof": "GABLE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.28,
+              "vertices": 7818,
+              "triangles": 9082
+            },
+            {
+              "key": "lowmark_service_wing",
+              "bounds": [
+                8.0,
+                -0.72,
+                11.18,
+                3.6000000000000005
+              ],
+              "base": 0.45,
+              "eave": 2.746,
+              "valid": true,
+              "roof": "SHED",
+              "function": "COTTAGE",
+              "wall_thickness": 0.28,
+              "vertices": 2756,
+              "triangles": 3452
+            }
+          ],
+          "geometry_hash": "76b378e3e2e6752c19d9d425d8126eb34020706c00757c55bb46dfe227526854",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.1489
+        },
+        "vertices_reduction_percent": 18.94,
+        "triangles_reduction_percent": 37.54
+      }
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 42,
+          "vertices": 20644,
+          "triangles": 31492,
+          "materials": 12,
+          "region": "LOWMARK",
+          "context": "RURAL",
+          "building_type": "COTTAGE",
+          "geometry_mode": "SOLID",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "lowmark_main_hall",
+              "bounds": [
+                0,
+                0,
+                8.0,
+                6.0
+              ],
+              "base": 0.45,
+              "eave": 3.25,
+              "valid": true,
+              "roof": "GABLE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.28,
+              "vertices": 15722,
+              "triangles": 23892
+            },
+            {
+              "key": "lowmark_service_wing",
+              "bounds": [
+                8.0,
+                -0.72,
+                11.18,
+                3.6000000000000005
+              ],
+              "base": 0.45,
+              "eave": 2.746,
+              "valid": true,
+              "roof": "SHED",
+              "function": "COTTAGE",
+              "wall_thickness": 0.28,
+              "vertices": 4882,
+              "triangles": 7540
+            }
+          ],
+          "geometry_hash": "fb89012af79d943a47d42f1c2b65d84025aa470492567ad8109a88b550988ff0",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.3163
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 44,
+          "vertices": 15901,
+          "triangles": 16179,
+          "materials": 12,
+          "region": "LOWMARK",
+          "context": "RURAL",
+          "building_type": "COTTAGE",
+          "geometry_mode": "EFFICIENT",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "lowmark_main_hall",
+              "bounds": [
+                0,
+                0,
+                8.0,
+                6.0
+              ],
+              "base": 0.45,
+              "eave": 3.25,
+              "valid": true,
+              "roof": "GABLE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.28,
+              "vertices": 11925,
+              "triangles": 11865
+            },
+            {
+              "key": "lowmark_service_wing",
+              "bounds": [
+                8.0,
+                -0.72,
+                11.18,
+                3.6000000000000005
+              ],
+              "base": 0.45,
+              "eave": 2.746,
+              "valid": true,
+              "roof": "SHED",
+              "function": "COTTAGE",
+              "wall_thickness": 0.28,
+              "vertices": 3936,
+              "triangles": 4254
+            }
+          ],
+          "geometry_hash": "d3abf0abf72b63c321daff8b71e7bd96e84a55ee68ddf7eb4521920343f9e036",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.2129
+        },
+        "vertices_reduction_percent": 22.98,
+        "triangles_reduction_percent": 48.63
+      }
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 52,
+          "vertices": 9136,
+          "triangles": 13724,
+          "materials": 10,
+          "region": "THORNFELL",
+          "context": "RIDGE",
+          "building_type": "COTTAGE",
+          "geometry_mode": "SOLID",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "thornfell_stone_hall",
+              "bounds": [
+                0,
+                0,
+                7.28,
+                6.6000000000000005
+              ],
+              "base": 0.5,
+              "eave": 3.1319999999999997,
+              "valid": true,
+              "roof": "GABLE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.5,
+              "vertices": 6230,
+              "triangles": 9360
+            },
+            {
+              "key": "thornfell_lower_stone_range",
+              "bounds": [
+                7.28,
+                1.3200000000000003,
+                10.280000000000001,
+                4.752000000000001
+              ],
+              "base": 0.9199999999999999,
+              "eave": 2.9729599999999996,
+              "valid": true,
+              "roof": "GABLE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.5,
+              "vertices": 2906,
+              "triangles": 4364
+            }
+          ],
+          "geometry_hash": "890ec84e198bfe80ba862b715f60f22a412775304176586044a7395690bc4403",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.1297
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 54,
+          "vertices": 8292,
+          "triangles": 10838,
+          "materials": 10,
+          "region": "THORNFELL",
+          "context": "RIDGE",
+          "building_type": "COTTAGE",
+          "geometry_mode": "EFFICIENT",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "thornfell_stone_hall",
+              "bounds": [
+                0,
+                0,
+                7.28,
+                6.6000000000000005
+              ],
+              "base": 0.5,
+              "eave": 3.1319999999999997,
+              "valid": true,
+              "roof": "GABLE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.5,
+              "vertices": 5614,
+              "triangles": 7227
+            },
+            {
+              "key": "thornfell_lower_stone_range",
+              "bounds": [
+                7.28,
+                1.3200000000000003,
+                10.280000000000001,
+                4.752000000000001
+              ],
+              "base": 0.9199999999999999,
+              "eave": 2.9729599999999996,
+              "valid": true,
+              "roof": "GABLE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.5,
+              "vertices": 2678,
+              "triangles": 3611
+            }
+          ],
+          "geometry_hash": "9b5e4ec73667cb534441cc85883be02386fe2067f5d9f013a52c06e33e916749",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.1123
+        },
+        "vertices_reduction_percent": 9.24,
+        "triangles_reduction_percent": 21.03
+      }
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 55,
+          "vertices": 15020,
+          "triangles": 22644,
+          "materials": 10,
+          "region": "THORNFELL",
+          "context": "RIDGE",
+          "building_type": "COTTAGE",
+          "geometry_mode": "SOLID",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "thornfell_stone_hall",
+              "bounds": [
+                0,
+                0,
+                7.28,
+                6.6000000000000005
+              ],
+              "base": 0.5,
+              "eave": 3.1319999999999997,
+              "valid": true,
+              "roof": "GABLE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.5,
+              "vertices": 10810,
+              "triangles": 16284
+            },
+            {
+              "key": "thornfell_lower_stone_range",
+              "bounds": [
+                7.28,
+                1.3200000000000003,
+                10.280000000000001,
+                4.752000000000001
+              ],
+              "base": 0.9199999999999999,
+              "eave": 2.9729599999999996,
+              "valid": true,
+              "roof": "GABLE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.5,
+              "vertices": 4210,
+              "triangles": 6360
+            }
+          ],
+          "geometry_hash": "efb3c1eb58cf71abafb6448356d761c32ceb067aa41e35b7d7f2335e78803f49",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.23
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 57,
+          "vertices": 12696,
+          "triangles": 14730,
+          "materials": 10,
+          "region": "THORNFELL",
+          "context": "RIDGE",
+          "building_type": "COTTAGE",
+          "geometry_mode": "EFFICIENT",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "thornfell_stone_hall",
+              "bounds": [
+                0,
+                0,
+                7.28,
+                6.6000000000000005
+              ],
+              "base": 0.5,
+              "eave": 3.1319999999999997,
+              "valid": true,
+              "roof": "GABLE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.5,
+              "vertices": 9042,
+              "triangles": 10163
+            },
+            {
+              "key": "thornfell_lower_stone_range",
+              "bounds": [
+                7.28,
+                1.3200000000000003,
+                10.280000000000001,
+                4.752000000000001
+              ],
+              "base": 0.9199999999999999,
+              "eave": 2.9729599999999996,
+              "valid": true,
+              "roof": "GABLE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.5,
+              "vertices": 3654,
+              "triangles": 4567
+            }
+          ],
+          "geometry_hash": "3827446eb5a837b6956e3d89c94b2fae6c9ce4485a56d891ae53b8c6d8e4216d",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.1726
+        },
+        "vertices_reduction_percent": 15.47,
+        "triangles_reduction_percent": 34.95
+      }
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 55,
+          "vertices": 24436,
+          "triangles": 36768,
+          "materials": 10,
+          "region": "THORNFELL",
+          "context": "RIDGE",
+          "building_type": "COTTAGE",
+          "geometry_mode": "SOLID",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "thornfell_stone_hall",
+              "bounds": [
+                0,
+                0,
+                7.28,
+                6.6000000000000005
+              ],
+              "base": 0.5,
+              "eave": 3.1319999999999997,
+              "valid": true,
+              "roof": "GABLE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.5,
+              "vertices": 18362,
+              "triangles": 27612
+            },
+            {
+              "key": "thornfell_lower_stone_range",
+              "bounds": [
+                7.28,
+                1.3200000000000003,
+                10.280000000000001,
+                4.752000000000001
+              ],
+              "base": 0.9199999999999999,
+              "eave": 2.9729599999999996,
+              "valid": true,
+              "roof": "GABLE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.5,
+              "vertices": 6074,
+              "triangles": 9156
+            }
+          ],
+          "geometry_hash": "40bbfca0841a39645fd4aebbcf66a79f919ec75162e261d079d911eb791e33ff",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.3976
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 57,
+          "vertices": 19870,
+          "triangles": 20670,
+          "materials": 10,
+          "region": "THORNFELL",
+          "context": "RIDGE",
+          "building_type": "COTTAGE",
+          "geometry_mode": "EFFICIENT",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "thornfell_stone_hall",
+              "bounds": [
+                0,
+                0,
+                7.28,
+                6.6000000000000005
+              ],
+              "base": 0.5,
+              "eave": 3.1319999999999997,
+              "valid": true,
+              "roof": "GABLE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.5,
+              "vertices": 14802,
+              "triangles": 14861
+            },
+            {
+              "key": "thornfell_lower_stone_range",
+              "bounds": [
+                7.28,
+                1.3200000000000003,
+                10.280000000000001,
+                4.752000000000001
+              ],
+              "base": 0.9199999999999999,
+              "eave": 2.9729599999999996,
+              "valid": true,
+              "roof": "GABLE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.5,
+              "vertices": 5068,
+              "triangles": 5809
+            }
+          ],
+          "geometry_hash": "525bc26f7acbf4d9743fea55443a6a67ee22ccf1e294311e6577611f52d72ac6",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.2762
+        },
+        "vertices_reduction_percent": 18.69,
+        "triangles_reduction_percent": 43.78
+      }
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 28,
+          "vertices": 8980,
+          "triangles": 13596,
+          "materials": 9,
+          "region": "MIRE",
+          "context": "SORROWMERE",
+          "building_type": "COTTAGE",
+          "geometry_mode": "SOLID",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "mire_longhouse",
+              "bounds": [
+                0.0,
+                0.0,
+                7.52,
+                5.5200000000000005
+              ],
+              "base": 1.94,
+              "eave": 4.74,
+              "valid": true,
+              "roof": "BOW",
+              "function": "COTTAGE",
+              "wall_thickness": 0.18,
+              "vertices": 8660,
+              "triangles": 13116
+            }
+          ],
+          "geometry_hash": "95afeb7278fc3aa098e3271dc23566afe5d256ef525e5a0a254f0242a687e701",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.1835
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 29,
+          "vertices": 7360,
+          "triangles": 10262,
+          "materials": 9,
+          "region": "MIRE",
+          "context": "SORROWMERE",
+          "building_type": "COTTAGE",
+          "geometry_mode": "EFFICIENT",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "mire_longhouse",
+              "bounds": [
+                0.0,
+                0.0,
+                7.52,
+                5.5200000000000005
+              ],
+              "base": 1.94,
+              "eave": 4.74,
+              "valid": true,
+              "roof": "BOW",
+              "function": "COTTAGE",
+              "wall_thickness": 0.18,
+              "vertices": 7040,
+              "triangles": 9782
+            }
+          ],
+          "geometry_hash": "71223ec15f275e436aeaee5db96acad305efca79fb51d500c22ef8380a8800e8",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.1551
+        },
+        "vertices_reduction_percent": 18.04,
+        "triangles_reduction_percent": 24.52
+      }
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 28,
+          "vertices": 24388,
+          "triangles": 36916,
+          "materials": 9,
+          "region": "MIRE",
+          "context": "SORROWMERE",
+          "building_type": "COTTAGE",
+          "geometry_mode": "SOLID",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "mire_longhouse",
+              "bounds": [
+                0.0,
+                0.0,
+                7.52,
+                5.5200000000000005
+              ],
+              "base": 1.94,
+              "eave": 4.74,
+              "valid": true,
+              "roof": "BOW",
+              "function": "COTTAGE",
+              "wall_thickness": 0.18,
+              "vertices": 24068,
+              "triangles": 36436
+            }
+          ],
+          "geometry_hash": "2a4c0699231c925e3544a0736f96e4bad5df02716e8fead5a29fb0f5ac0e06bd",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.4528
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 29,
+          "vertices": 14382,
+          "triangles": 15920,
+          "materials": 9,
+          "region": "MIRE",
+          "context": "SORROWMERE",
+          "building_type": "COTTAGE",
+          "geometry_mode": "EFFICIENT",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "mire_longhouse",
+              "bounds": [
+                0.0,
+                0.0,
+                7.52,
+                5.5200000000000005
+              ],
+              "base": 1.94,
+              "eave": 4.74,
+              "valid": true,
+              "roof": "BOW",
+              "function": "COTTAGE",
+              "wall_thickness": 0.18,
+              "vertices": 14062,
+              "triangles": 15440
+            }
+          ],
+          "geometry_hash": "e9bae3eb28031a0cfbe0285a865260889f7659f86a3d7f7ba0228bb315b5c0e5",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.2521
+        },
+        "vertices_reduction_percent": 41.03,
+        "triangles_reduction_percent": 56.88
+      }
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 28,
+          "vertices": 38356,
+          "triangles": 57868,
+          "materials": 9,
+          "region": "MIRE",
+          "context": "SORROWMERE",
+          "building_type": "COTTAGE",
+          "geometry_mode": "SOLID",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "mire_longhouse",
+              "bounds": [
+                0.0,
+                0.0,
+                7.52,
+                5.5200000000000005
+              ],
+              "base": 1.94,
+              "eave": 4.74,
+              "valid": true,
+              "roof": "BOW",
+              "function": "COTTAGE",
+              "wall_thickness": 0.18,
+              "vertices": 38036,
+              "triangles": 57388
+            }
+          ],
+          "geometry_hash": "cdcd5d9745fa7eae3ce1b567678d478f1acb3844d5ec0bb0b165a4bcfa8feb1a",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.6625
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 29,
+          "vertices": 20682,
+          "triangles": 20500,
+          "materials": 9,
+          "region": "MIRE",
+          "context": "SORROWMERE",
+          "building_type": "COTTAGE",
+          "geometry_mode": "EFFICIENT",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "mire_longhouse",
+              "bounds": [
+                0.0,
+                0.0,
+                7.52,
+                5.5200000000000005
+              ],
+              "base": 1.94,
+              "eave": 4.74,
+              "valid": true,
+              "roof": "BOW",
+              "function": "COTTAGE",
+              "wall_thickness": 0.18,
+              "vertices": 20362,
+              "triangles": 20020
+            }
+          ],
+          "geometry_hash": "baa747ae7232809ce53b7351d446c75fdf074a13a216c455428b43502bb38654",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.3235
+        },
+        "vertices_reduction_percent": 46.08,
+        "triangles_reduction_percent": 64.57
+      }
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 20,
+          "vertices": 10082,
+          "triangles": 15140,
+          "materials": 5,
+          "region": "EMBERHOLT",
+          "context": "EMBERHOLD",
+          "building_type": "COTTAGE",
+          "geometry_mode": "SOLID",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "emberholt_main_block",
+              "bounds": [
+                0,
+                0,
+                15.0,
+                11.5
+              ],
+              "base": 0.48,
+              "eave": 6.08,
+              "valid": true,
+              "roof": "TERRACE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.7,
+              "vertices": 10082,
+              "triangles": 15140
+            }
+          ],
+          "geometry_hash": "ba417578c97f72c2d3bde4f4461462a116f8660cf10a92d9b20c38cf55b0de16",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.1635
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 20,
+          "vertices": 10082,
+          "triangles": 14091,
+          "materials": 5,
+          "region": "EMBERHOLT",
+          "context": "EMBERHOLD",
+          "building_type": "COTTAGE",
+          "geometry_mode": "EFFICIENT",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "emberholt_main_block",
+              "bounds": [
+                0,
+                0,
+                15.0,
+                11.5
+              ],
+              "base": 0.48,
+              "eave": 6.08,
+              "valid": true,
+              "roof": "TERRACE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.7,
+              "vertices": 10082,
+              "triangles": 14091
+            }
+          ],
+          "geometry_hash": "ee42f728fccad0852fb7d46552c8680e2958b65e97d5b08aed6dde366571ccae",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.1579
+        },
+        "vertices_reduction_percent": 0.0,
+        "triangles_reduction_percent": 6.93
+      }
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 21,
+          "vertices": 11784,
+          "triangles": 17708,
+          "materials": 5,
+          "region": "EMBERHOLT",
+          "context": "EMBERHOLD",
+          "building_type": "COTTAGE",
+          "geometry_mode": "SOLID",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "emberholt_main_block",
+              "bounds": [
+                0,
+                0,
+                15.0,
+                11.5
+              ],
+              "base": 0.48,
+              "eave": 6.08,
+              "valid": true,
+              "roof": "TERRACE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.7,
+              "vertices": 11784,
+              "triangles": 17708
+            }
+          ],
+          "geometry_hash": "711583c79d0645c38af4f93aa35ab728595d8d86fedbb3986227c170e8f23e24",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.1869
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 21,
+          "vertices": 11784,
+          "triangles": 16254,
+          "materials": 5,
+          "region": "EMBERHOLT",
+          "context": "EMBERHOLD",
+          "building_type": "COTTAGE",
+          "geometry_mode": "EFFICIENT",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "emberholt_main_block",
+              "bounds": [
+                0,
+                0,
+                15.0,
+                11.5
+              ],
+              "base": 0.48,
+              "eave": 6.08,
+              "valid": true,
+              "roof": "TERRACE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.7,
+              "vertices": 11784,
+              "triangles": 16254
+            }
+          ],
+          "geometry_hash": "50b81ded5747d9323768bb52d22c83e568869e596457c7c2622429c8607067fd",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.1834
+        },
+        "vertices_reduction_percent": 0.0,
+        "triangles_reduction_percent": 8.21
+      }
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "HIGH",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "results": {
+        "SOLID": {
+          "valid": true,
+          "errors": [],
+          "objects": 21,
+          "vertices": 13226,
+          "triangles": 19872,
+          "materials": 5,
+          "region": "EMBERHOLT",
+          "context": "EMBERHOLD",
+          "building_type": "COTTAGE",
+          "geometry_mode": "SOLID",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "emberholt_main_block",
+              "bounds": [
+                0,
+                0,
+                15.0,
+                11.5
+              ],
+              "base": 0.48,
+              "eave": 6.08,
+              "valid": true,
+              "roof": "TERRACE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.7,
+              "vertices": 13226,
+              "triangles": 19872
+            }
+          ],
+          "geometry_hash": "021c14fc57d3a06cedb288f330241aa022bb4af9aa201528fe0267fb6f02da52",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.2151
+        },
+        "EFFICIENT": {
+          "valid": true,
+          "errors": [],
+          "objects": 21,
+          "vertices": 13226,
+          "triangles": 18057,
+          "materials": 5,
+          "region": "EMBERHOLT",
+          "context": "EMBERHOLD",
+          "building_type": "COTTAGE",
+          "geometry_mode": "EFFICIENT",
+          "architecture": "WORLD",
+          "construction_zones": [
+            {
+              "key": "emberholt_main_block",
+              "bounds": [
+                0,
+                0,
+                15.0,
+                11.5
+              ],
+              "base": 0.48,
+              "eave": 6.08,
+              "valid": true,
+              "roof": "TERRACE",
+              "function": "COTTAGE",
+              "wall_thickness": 0.7,
+              "vertices": 13226,
+              "triangles": 18057
+            }
+          ],
+          "geometry_hash": "585af7b6cb90378c3b3e8da43ac5523f954a29ffee129c2a313fe8b1adfe7530",
+          "tool_revision": "0.4.0",
+          "generation_validation_seconds": 0.2101
+        },
+        "vertices_reduction_percent": 0.0,
+        "triangles_reduction_percent": 9.13
+      }
+    }
+  ]
+}

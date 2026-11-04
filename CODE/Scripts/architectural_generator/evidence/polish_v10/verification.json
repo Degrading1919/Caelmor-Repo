@@ -1,0 +1,67 @@
+{
+  "valid": true,
+  "revision": "ae0ec03",
+  "matched_native_images": 48,
+  "reimport_images": 12,
+  "sheets": 7,
+  "archive_sha256": "1a37b4677ab561e2b9ab78844f967f6c7524b869a81446c8759c4a8ff9499189",
+  "archive_members": 33,
+  "measurements": [
+    {
+      "function": "SMITHY",
+      "before_glb": {
+        "bytes": 11844828,
+        "images": 42,
+        "image_bytes": 10545791,
+        "image_bytes_by_role": {
+          "base": 4596465,
+          "normal": 3331362,
+          "orm": 2617964
+        }
+      },
+      "after_glb": {
+        "bytes": 3781076,
+        "images": 35,
+        "image_bytes": 1951642,
+        "image_bytes_by_role": {
+          "base": 1467231,
+          "normal": 101483,
+          "orm": 382928
+        }
+      },
+      "after_geometry": {
+        "vertices": 9320,
+        "triangles": 11704,
+        "objects": 67
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "before_glb": {
+        "bytes": 50400660,
+        "images": 27,
+        "image_bytes": 44863073,
+        "image_bytes_by_role": {
+          "base": 18758338,
+          "normal": 15576932,
+          "orm": 10527803
+        }
+      },
+      "after_glb": {
+        "bytes": 16016336,
+        "images": 24,
+        "image_bytes": 6336672,
+        "image_bytes_by_role": {
+          "base": 4920814,
+          "normal": 58600,
+          "orm": 1357258
+        }
+      },
+      "after_geometry": {
+        "vertices": 46432,
+        "triangles": 64562,
+        "objects": 151
+      }
+    }
+  ]
+}

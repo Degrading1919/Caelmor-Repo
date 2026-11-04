@@ -1,0 +1,1047 @@
+{
+  "regions": [
+    "LOWMARK",
+    "THORNFELL"
+  ],
+  "matrix_rows_updated": 120,
+  "selected_profiles_updated": 8,
+  "source_hashes": {
+    "engine.py": "547d9b0e28252aa0fe7306947cbb525c54836eb9eeb7887bab4803293205b8ca",
+    "model.py": "d52927e24f0b093dabdd9affc071a111ef4b82db052089b04bb44052f53e43ce",
+    "facade.py": "9639904540df538372e7883f4cd363baad0fd6c4edf0131b88233c5e7e0dc1c4",
+    "roof.py": "2932203eb3675bb9f3c0d9a346e6d655d65bc001ec144c7c4297984a56e50880",
+    "world.py": "16a255a3873ae6cf5b4423248a7032114040a5a02aa28c243b0d31f352925565",
+    "world_lowmark_thornfell.py": "9c1e4a5c523d18a4a5498fdd12ef27f95163b9e49284e1438c874f24f0be600e",
+    "world_mire.py": "3be11f40c80893ded91cf61db4ca194a5a671632c9a71cecb56d87582554e6b7",
+    "world_emberholt.py": "3f8c474a4f1333795c07c3f5428624a35e7e2fcbf8bbb89f0b608a1eb52e5fbf",
+    "blender_backend.py": "4c28a3b03c538b81be3b4a95319396bd284dd852f0711426fa75530dd74ed01e"
+  },
+  "matrix": [
+    {
+      "matrix_index": 0,
+      "region": "LOWMARK",
+      "function": "FARMHOUSE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "a1fe4464f224cb25b7489851bdafb4ff076b4cd08c486e686aa51bb4f15cb3dd"
+    },
+    {
+      "matrix_index": 1,
+      "region": "LOWMARK",
+      "function": "FARMHOUSE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "a737a2e14d86c07ab1dfa9c767401449aab45057c608d735c403685ef50437b7"
+    },
+    {
+      "matrix_index": 2,
+      "region": "LOWMARK",
+      "function": "FARMHOUSE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "f2aec6e046a9ce2372f9c7708048367004278d604f3070b5ec7a4ea09e048e25"
+    },
+    {
+      "matrix_index": 3,
+      "region": "LOWMARK",
+      "function": "BARN",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "8b9d594281ca7c42fe57c68898acd59344a3452ac18c54718d296e527488bfff"
+    },
+    {
+      "matrix_index": 4,
+      "region": "LOWMARK",
+      "function": "BARN",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "22a0c853c4b4bc7904869056f9aa7168931cf84c8bc6b7bc9f3cdc9d862c9bfe"
+    },
+    {
+      "matrix_index": 5,
+      "region": "LOWMARK",
+      "function": "BARN",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "012bc987db291cada8090385c8a2eb1c0b32c334f0cb7ad876cf5d9ea0ce8e62"
+    },
+    {
+      "matrix_index": 6,
+      "region": "LOWMARK",
+      "function": "GRAIN_STORE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "48de24e94bdc3ae0bfd7de065b5dd1ae667254ef4b40ac3f1840d0f1ccae63d0"
+    },
+    {
+      "matrix_index": 7,
+      "region": "LOWMARK",
+      "function": "GRAIN_STORE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "248078dc9ce6669623c46e3f1990f3fc568a28504691a78c34f47f4c88f355b1"
+    },
+    {
+      "matrix_index": 8,
+      "region": "LOWMARK",
+      "function": "GRAIN_STORE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "6ec3d32d39b6425b1ac29159ed18f2119c7fd44add01750991afdf945d312ec1"
+    },
+    {
+      "matrix_index": 9,
+      "region": "LOWMARK",
+      "function": "MILLER",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "aed7d87a0a54cb91c75c0b0c0d2e655c3e297ea6a03c948522bd702ae04f58df"
+    },
+    {
+      "matrix_index": 10,
+      "region": "LOWMARK",
+      "function": "MILLER",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "c62ead7e06fe2d0264395517b19666eca91f47d725002e827d5f8df01a5d8609"
+    },
+    {
+      "matrix_index": 11,
+      "region": "LOWMARK",
+      "function": "MILLER",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "1744b0c08d2ed7e1dfb8179981da89ec2ce7672d1dde95087019c96a44ef9381"
+    },
+    {
+      "matrix_index": 12,
+      "region": "LOWMARK",
+      "function": "INN",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "597893cc02106b5252e3b883108fadf388832efeceb5c2148e8d5218f0ef1972"
+    },
+    {
+      "matrix_index": 13,
+      "region": "LOWMARK",
+      "function": "INN",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "3364a13ae705c9a9dfc68078dba9d08c21f41031ca5a35781b28396a970651c5"
+    },
+    {
+      "matrix_index": 14,
+      "region": "LOWMARK",
+      "function": "INN",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "95d0bf8ad786f16d1c953ab2a2f15edeae072378d6e71013f71aa7ca148d53ba"
+    },
+    {
+      "matrix_index": 15,
+      "region": "LOWMARK",
+      "function": "COTTAGE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "f393f00e58af6a0272d37e2959560b287c5a428035064353bb3c5dccd6eeef79"
+    },
+    {
+      "matrix_index": 16,
+      "region": "LOWMARK",
+      "function": "COTTAGE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "83488857cf1ac42fbc3979c745e7ded0e3af04c62e6c25b6855e22c215716883"
+    },
+    {
+      "matrix_index": 17,
+      "region": "LOWMARK",
+      "function": "COTTAGE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "7749fda1884f895d788ed74eafb12fd11e289ea104cf308cdaaa68d90aa64b0d"
+    },
+    {
+      "matrix_index": 18,
+      "region": "LOWMARK",
+      "function": "TOWNHOUSE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "4e4d9a5bfa9d4285f897d0284999e4ccfa52c6f981895e6851b0f19f9a901d24"
+    },
+    {
+      "matrix_index": 19,
+      "region": "LOWMARK",
+      "function": "TOWNHOUSE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "2b9e3c103408d74f9e5febf1e0e6b284890b03687f605865666135bbde12104b"
+    },
+    {
+      "matrix_index": 20,
+      "region": "LOWMARK",
+      "function": "TOWNHOUSE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "4cbc7c1b48cef2dbee5f098e0d0cc7bb22b47a5b3e5419178efb67b39c02b8fd"
+    },
+    {
+      "matrix_index": 21,
+      "region": "LOWMARK",
+      "function": "MERCHANT_HOUSE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "5e678a2af69c4f6a71347d3782bde400e70706b8419f51853d93b41b0af4273f"
+    },
+    {
+      "matrix_index": 22,
+      "region": "LOWMARK",
+      "function": "MERCHANT_HOUSE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "232de442a1b6fcf044b5fe26127c31f8cd6d66c121175052fd04af354f631ccc"
+    },
+    {
+      "matrix_index": 23,
+      "region": "LOWMARK",
+      "function": "MERCHANT_HOUSE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "6f8e04bddf2096a76754f5614839f0725cbe3ca7209ad650c982bf5e564ca94f"
+    },
+    {
+      "matrix_index": 24,
+      "region": "LOWMARK",
+      "function": "LONGHOUSE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "e3c2bd723252d256ce6f07bf67b614642daf092e6d150ecdab7698c5b352ae16"
+    },
+    {
+      "matrix_index": 25,
+      "region": "LOWMARK",
+      "function": "LONGHOUSE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "f0f6d5f8908d72388053c588866f17e10d0e0ca3ec2f1b2fec9bbe9cafdb3abb"
+    },
+    {
+      "matrix_index": 26,
+      "region": "LOWMARK",
+      "function": "LONGHOUSE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "96cada1241a486d85034e454160586640d8aa6971f9acb70267fa26b3f667a1b"
+    },
+    {
+      "matrix_index": 27,
+      "region": "LOWMARK",
+      "function": "SHOP",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "2f21545b5179a391fd51eca13c6eb55bae79f033607462c15256c56342b33884"
+    },
+    {
+      "matrix_index": 28,
+      "region": "LOWMARK",
+      "function": "SHOP",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "9d2b420e70ca75eeeca90a354eeae22a8e6942e4d5fc745f7899477154c250ba"
+    },
+    {
+      "matrix_index": 29,
+      "region": "LOWMARK",
+      "function": "SHOP",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "c0629f41feaed36afe72872a380eb18c6d00ceb1ed5553d21b30c16a3f090070"
+    },
+    {
+      "matrix_index": 30,
+      "region": "LOWMARK",
+      "function": "WAREHOUSE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "edc00656af693caaa1babed6778092e6138120cd2c44e0ee62d39b8e5aea8abd"
+    },
+    {
+      "matrix_index": 31,
+      "region": "LOWMARK",
+      "function": "WAREHOUSE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "d5cc84db4053ce5838bed0dc50d73804b0ef8a9638d50d168f6dba229ccb9dd7"
+    },
+    {
+      "matrix_index": 32,
+      "region": "LOWMARK",
+      "function": "WAREHOUSE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "a445aed3a4da55b171f82236c413e7b7d8e380b1ddcd795199aa45934bc97f2e"
+    },
+    {
+      "matrix_index": 33,
+      "region": "LOWMARK",
+      "function": "MARKET_HALL",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "c25b678d5db2c27125b1de99fdf92142f61c1981de1f85e79ff950b57edab3c0"
+    },
+    {
+      "matrix_index": 34,
+      "region": "LOWMARK",
+      "function": "MARKET_HALL",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "7d3f0a3d0a3a79ac1ebd11f5860d028d103701c861c63b6df97749d6f8300553"
+    },
+    {
+      "matrix_index": 35,
+      "region": "LOWMARK",
+      "function": "MARKET_HALL",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "9706e00a3ff5af52a689f100b88aa493fcd4059420dbbb4183f87433c7d42199"
+    },
+    {
+      "matrix_index": 36,
+      "region": "LOWMARK",
+      "function": "STABLE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "875354d5cb0c31295e3786012f95acc207c71d215b0144788f821e4b5c246b32"
+    },
+    {
+      "matrix_index": 37,
+      "region": "LOWMARK",
+      "function": "STABLE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "cdb461d1f2186162a02b4db19175e716f3e49b3dd66ccea74edbb63454cc8d8b"
+    },
+    {
+      "matrix_index": 38,
+      "region": "LOWMARK",
+      "function": "STABLE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "aa837212e1a0c5639a0ee774ded51f558a7166a649f52359e2994411e65d92f8"
+    },
+    {
+      "matrix_index": 39,
+      "region": "LOWMARK",
+      "function": "SMITHY",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "eaee429a1ee966d88042b003aad5e0c84b1c80b3fcf5b9a8d26c439566768451"
+    },
+    {
+      "matrix_index": 40,
+      "region": "LOWMARK",
+      "function": "SMITHY",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "0d02edee24ff6b4aceb14c1570efdc31b9deb6612e5a92036e553db6f1095c47"
+    },
+    {
+      "matrix_index": 41,
+      "region": "LOWMARK",
+      "function": "SMITHY",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "c2b61290937a9ca7c58050752b6172d98e54055adf4a6295bc48c5a5609b95c5"
+    },
+    {
+      "matrix_index": 42,
+      "region": "LOWMARK",
+      "function": "WORKSHOP",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "58326b33cb602e4847447e5eab5c9d09d8a743ed76c32b97fcb7d65b83ef2791"
+    },
+    {
+      "matrix_index": 43,
+      "region": "LOWMARK",
+      "function": "WORKSHOP",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "e8bceea63fe0b5cd48b936cde8d9a7f51ae13ecacdebc52c7c57c754b85e511e"
+    },
+    {
+      "matrix_index": 44,
+      "region": "LOWMARK",
+      "function": "WORKSHOP",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "4ad9e8c84fe558b85f2273d941e916aa34da99b9920543a2f8e593581c71be96"
+    },
+    {
+      "matrix_index": 45,
+      "region": "LOWMARK",
+      "function": "ASSEMBLY_HALL",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "08c79fc7edad9e5237c1c22c9ed088977115b173606023d0b69cef0d514841c5"
+    },
+    {
+      "matrix_index": 46,
+      "region": "LOWMARK",
+      "function": "ASSEMBLY_HALL",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "52e36493a2cd0efbadc88ccf05fef5c49e79176776c6d15fb22999a7ae718702"
+    },
+    {
+      "matrix_index": 47,
+      "region": "LOWMARK",
+      "function": "ASSEMBLY_HALL",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "a4268f87f0fd2a6653b84a5a9593be97ddbf4e1207d24f154bee8a9a5adf0b49"
+    },
+    {
+      "matrix_index": 48,
+      "region": "LOWMARK",
+      "function": "WATCHTOWER",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "6e9693937d568798c9dd287646fe28df0c9dfee674139c331e1587c4a2828fdb"
+    },
+    {
+      "matrix_index": 49,
+      "region": "LOWMARK",
+      "function": "WATCHTOWER",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "850d7ba091afab892be1311115599849188acbd5b09ae96debfb8c23afe59c6c"
+    },
+    {
+      "matrix_index": 50,
+      "region": "LOWMARK",
+      "function": "WATCHTOWER",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "3b03cbd20028fae201eaf5f615e486d46b2138ede16b656c74b2da0573f70017"
+    },
+    {
+      "matrix_index": 51,
+      "region": "LOWMARK",
+      "function": "GATEHOUSE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "d05fed7884eaf34318f07a436234bee88a48ae5065475cdbabf3885f7c1a9563"
+    },
+    {
+      "matrix_index": 52,
+      "region": "LOWMARK",
+      "function": "GATEHOUSE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "27948207216f982eb349707025f7335514179738c1d1c8a7d9ede086a3906df7"
+    },
+    {
+      "matrix_index": 53,
+      "region": "LOWMARK",
+      "function": "GATEHOUSE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "37328b7809550a429c04b5f2252eee31a5ed11ec4856ecdae6a0f0e53781587e"
+    },
+    {
+      "matrix_index": 54,
+      "region": "LOWMARK",
+      "function": "BARRACKS",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "88d55d31768329825f2e12f065f3cb9fb3ebeccfadb8a77f4740d51df8a0cda2"
+    },
+    {
+      "matrix_index": 55,
+      "region": "LOWMARK",
+      "function": "BARRACKS",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "530dbddb7c52710acc2cef3cc524c8ee978445d8ea0162644d499cfdad0af07a"
+    },
+    {
+      "matrix_index": 56,
+      "region": "LOWMARK",
+      "function": "BARRACKS",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "a5049d4430c11de0cd9975a7bd791ff8b192967c64d23d349a6a2d598f1d276c"
+    },
+    {
+      "matrix_index": 57,
+      "region": "LOWMARK",
+      "function": "BOATHOUSE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "87a7e9b26b09b2a09147306f1755c0c2799b136b20c314618871584948950768"
+    },
+    {
+      "matrix_index": 58,
+      "region": "LOWMARK",
+      "function": "BOATHOUSE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "118f679850d00bbdfd154af45aa6674a6121d7e307aa5f8361470ce15011362e"
+    },
+    {
+      "matrix_index": 59,
+      "region": "LOWMARK",
+      "function": "BOATHOUSE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "1399e3ed8a3f7994a4d8c9bd70529b3d1fa4387a44bb988060aef9b61aa1fae7"
+    },
+    {
+      "matrix_index": 60,
+      "region": "THORNFELL",
+      "function": "FARMHOUSE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "0e9e6af199fda29de8181d33b92292ab7e9ff9f9d3e3184f683d5612ccc5684d"
+    },
+    {
+      "matrix_index": 61,
+      "region": "THORNFELL",
+      "function": "FARMHOUSE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "6e5b2dfff5379428dc5bcaae3abeeaee03bba259d6f32dbc94effa1d7cf70339"
+    },
+    {
+      "matrix_index": 62,
+      "region": "THORNFELL",
+      "function": "FARMHOUSE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "23d05f79af11c7c3438429b7bfd63f4393dc2870ee43ae2daed2d7fc31b1d924"
+    },
+    {
+      "matrix_index": 63,
+      "region": "THORNFELL",
+      "function": "BARN",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "31b97ede58b99bf96a6797af5cc9b6bc6bd0a600c5701a54ca96a1be3df69d32"
+    },
+    {
+      "matrix_index": 64,
+      "region": "THORNFELL",
+      "function": "BARN",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "43d6c335b7387b98d32c869830c88468c22173e26a3e764767c058d9395324f6"
+    },
+    {
+      "matrix_index": 65,
+      "region": "THORNFELL",
+      "function": "BARN",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "5067dfdf104b3c9d634e6a09cc21ce20f71319d5f6960a5cd1c29ee43bd90c3f"
+    },
+    {
+      "matrix_index": 66,
+      "region": "THORNFELL",
+      "function": "GRAIN_STORE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "479d013458df69d3ead83515df52be2c531398620a2a5bf1504d07f6fb8aea57"
+    },
+    {
+      "matrix_index": 67,
+      "region": "THORNFELL",
+      "function": "GRAIN_STORE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "f7f03085a3011c62f509942fe3665130a1c7ee4889daa7ae0631e746dc225546"
+    },
+    {
+      "matrix_index": 68,
+      "region": "THORNFELL",
+      "function": "GRAIN_STORE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "99e6b7f2170f0ebeed13f935c576817ea1575589e9227bb1c611e447a00cbbfc"
+    },
+    {
+      "matrix_index": 69,
+      "region": "THORNFELL",
+      "function": "MILLER",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "5f1c43baea8dd4617d28615b98b21be5ae177a2fd5096ca9edc285f9026543d2"
+    },
+    {
+      "matrix_index": 70,
+      "region": "THORNFELL",
+      "function": "MILLER",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "4b59264c55b25163a4d732853334e8a72b6ac1829a3cfd60bf792b32de6e55aa"
+    },
+    {
+      "matrix_index": 71,
+      "region": "THORNFELL",
+      "function": "MILLER",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "0bab9c3aa29fe2f9f7eb88922f56919203dd62adcf6cd80f8c9420b975a4758e"
+    },
+    {
+      "matrix_index": 72,
+      "region": "THORNFELL",
+      "function": "INN",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "276297e106f41458aa438528c8ec13b14b2bad71622f3d191ec1a9bad7ea9167"
+    },
+    {
+      "matrix_index": 73,
+      "region": "THORNFELL",
+      "function": "INN",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "952bc9bc1ac87e4914c0c2a573caebb365b29657341c0b461d94ac8111a32b62"
+    },
+    {
+      "matrix_index": 74,
+      "region": "THORNFELL",
+      "function": "INN",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "9b0d1dcbb27a20646a4d84208a578092a938b5bccb8a623538b8932bb1358ee0"
+    },
+    {
+      "matrix_index": 75,
+      "region": "THORNFELL",
+      "function": "COTTAGE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "bcdb12d6f30cd10e054c79f183dd0943c0f9f890ab670870ca385a3a1ac66826"
+    },
+    {
+      "matrix_index": 76,
+      "region": "THORNFELL",
+      "function": "COTTAGE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "890ec84e198bfe80ba862b715f60f22a412775304176586044a7395690bc4403"
+    },
+    {
+      "matrix_index": 77,
+      "region": "THORNFELL",
+      "function": "COTTAGE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "62ef47e9ba88ba3c91392cea8c63e1b53f2a949f30a2f1fde6f961c71e805f07"
+    },
+    {
+      "matrix_index": 78,
+      "region": "THORNFELL",
+      "function": "TOWNHOUSE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "9f8d04ebeef87d09c9c06105a486c238185ffc577a2f800f2e64529ff3238b67"
+    },
+    {
+      "matrix_index": 79,
+      "region": "THORNFELL",
+      "function": "TOWNHOUSE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "ef7442dfc3714853e84c08e69c69a864a31442b60cd90c7c4fa687ae8c55e4ec"
+    },
+    {
+      "matrix_index": 80,
+      "region": "THORNFELL",
+      "function": "TOWNHOUSE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "fb7199cebef4b6e7d9e20399bf14863094c987ff190bb3bd62298f22a5bbdfe3"
+    },
+    {
+      "matrix_index": 81,
+      "region": "THORNFELL",
+      "function": "MERCHANT_HOUSE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "22ad7efd37566eb1f5c88bd0ff5fbbd808d1b4cf9ab46ac846495d76a88404b5"
+    },
+    {
+      "matrix_index": 82,
+      "region": "THORNFELL",
+      "function": "MERCHANT_HOUSE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "e96b35fd2c3fffb9fb9cfff7c36e4fbd4bc2c307b21aeb0054c8c49ae0de373e"
+    },
+    {
+      "matrix_index": 83,
+      "region": "THORNFELL",
+      "function": "MERCHANT_HOUSE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "e6bc86f2974b46c33758a3f1556452887c57f052226480b147a04f9589cc55a5"
+    },
+    {
+      "matrix_index": 84,
+      "region": "THORNFELL",
+      "function": "LONGHOUSE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "29b46b19d9171172a10e91b01d80e1eac71d5a1a6af5720fd0ea9d42b1aed3d7"
+    },
+    {
+      "matrix_index": 85,
+      "region": "THORNFELL",
+      "function": "LONGHOUSE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "2efe95dac052a07de63be6bf898769db0d0bd1dfe5cc7672c2309efd758a0b01"
+    },
+    {
+      "matrix_index": 86,
+      "region": "THORNFELL",
+      "function": "LONGHOUSE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "81731f44b3ff0b2435d8783dbca38fe81b1fd81b040f1faa5d7b4c84cfe949e3"
+    },
+    {
+      "matrix_index": 87,
+      "region": "THORNFELL",
+      "function": "SHOP",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "caaf3ec62a3388bc2fb24edafbf8f73f6c66e9670d5567b0a33802e981a8341e"
+    },
+    {
+      "matrix_index": 88,
+      "region": "THORNFELL",
+      "function": "SHOP",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "aca2fe5896b9ce962d11a0ca8efd1429e482b7872198726e3cf0f7056e7df1f6"
+    },
+    {
+      "matrix_index": 89,
+      "region": "THORNFELL",
+      "function": "SHOP",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "d511b57f79b97dee7195f4cb180ad8a9b3ca4f50a8b5bed44ec6336860886aa4"
+    },
+    {
+      "matrix_index": 90,
+      "region": "THORNFELL",
+      "function": "WAREHOUSE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "9287a6dc0ef9bc0a0bab7318c3aba9071bdc37606d341eb5b974d8dd7198050e"
+    },
+    {
+      "matrix_index": 91,
+      "region": "THORNFELL",
+      "function": "WAREHOUSE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "b03dff433601c8baea4c704812fac246a9977bf04bc8ea8c82cd4f93109a71ce"
+    },
+    {
+      "matrix_index": 92,
+      "region": "THORNFELL",
+      "function": "WAREHOUSE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "a57c7d6e9d7127dc64a8e61d41fb70d42a2b3073410498335ac44e37b8b14735"
+    },
+    {
+      "matrix_index": 93,
+      "region": "THORNFELL",
+      "function": "MARKET_HALL",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "76554905e4cc200fed84b6eebcf4fcdad64d8e4524b8c602fc679bc65018eb78"
+    },
+    {
+      "matrix_index": 94,
+      "region": "THORNFELL",
+      "function": "MARKET_HALL",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "6b7853c830c19a32ff8eb9c1d9295800c59c8ba1c1a5c9cdecd6e5dde1d5ac01"
+    },
+    {
+      "matrix_index": 95,
+      "region": "THORNFELL",
+      "function": "MARKET_HALL",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "9d5a8022bffe8424941648910338a3f705f685e381d628c052757070fda86479"
+    },
+    {
+      "matrix_index": 96,
+      "region": "THORNFELL",
+      "function": "STABLE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "53faa4f7e47f53ae4329d2df1eb8fd86d1d1ec329ffe637550ef8c1f78b83ed6"
+    },
+    {
+      "matrix_index": 97,
+      "region": "THORNFELL",
+      "function": "STABLE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "942a8d7df1a90c8f272db463a2fc3bae97121862a0e6c95110c53ed39398bd4b"
+    },
+    {
+      "matrix_index": 98,
+      "region": "THORNFELL",
+      "function": "STABLE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "f2f9b24286e29b61172d83b25d19f76f671eabca778d0cd93c8bfbc61bd6fc87"
+    },
+    {
+      "matrix_index": 99,
+      "region": "THORNFELL",
+      "function": "SMITHY",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "54539fea0eade87b5e72a17eaf37ed5f5472d463c2bec91e22b434148a746653"
+    },
+    {
+      "matrix_index": 100,
+      "region": "THORNFELL",
+      "function": "SMITHY",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "5f0fd46428222365788d40ed244264cd32c799e29110d8b56a61ab0b6f21c284"
+    },
+    {
+      "matrix_index": 101,
+      "region": "THORNFELL",
+      "function": "SMITHY",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "eaf53168d97c22d1999af49e7123ac00a067f64eb3f3dcfdfd70779786dd5da2"
+    },
+    {
+      "matrix_index": 102,
+      "region": "THORNFELL",
+      "function": "WORKSHOP",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "bd8c419565ff91c619fd0a7dcec26df23fec4711e7a368c6ceeac4d74a08d816"
+    },
+    {
+      "matrix_index": 103,
+      "region": "THORNFELL",
+      "function": "WORKSHOP",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "5e018d487b99f7bdfa71039c4645545ce0d239252ed279d65469d6ad47cde7ec"
+    },
+    {
+      "matrix_index": 104,
+      "region": "THORNFELL",
+      "function": "WORKSHOP",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "7ced96cefe6fc622f318224cd8934fa2ed271c22d9d015256efc108d98986493"
+    },
+    {
+      "matrix_index": 105,
+      "region": "THORNFELL",
+      "function": "ASSEMBLY_HALL",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "f80a75d05444e576e13d10e50403849eed95d1ab3a447c4048186cd4739ba4d3"
+    },
+    {
+      "matrix_index": 106,
+      "region": "THORNFELL",
+      "function": "ASSEMBLY_HALL",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "fa113d9ee6e9799399b0dfa4965f8a12d2a680e922e039dc1fead09de1b569d4"
+    },
+    {
+      "matrix_index": 107,
+      "region": "THORNFELL",
+      "function": "ASSEMBLY_HALL",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "7f81310054d3b9601e55c34732742bdfef7e0af6803abafe6946462f46b99e44"
+    },
+    {
+      "matrix_index": 108,
+      "region": "THORNFELL",
+      "function": "WATCHTOWER",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "0ac0578c55c789d6d5152531142581141b48bbacdeddd6758e7ce873f9631745"
+    },
+    {
+      "matrix_index": 109,
+      "region": "THORNFELL",
+      "function": "WATCHTOWER",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "3e9fc2558e495847d208ee33d92b68249b9a6fbc4cd86f71a714f482879597b7"
+    },
+    {
+      "matrix_index": 110,
+      "region": "THORNFELL",
+      "function": "WATCHTOWER",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "ee9047b8062e53237a774c2bc720d2c62e042ed6d99415dacb42eef8f5d2dc66"
+    },
+    {
+      "matrix_index": 111,
+      "region": "THORNFELL",
+      "function": "GATEHOUSE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "923e5b1520d08ccd1afdd4885dbcfc0c6bb2fd58fcedb340a5e00ee0bd44c048"
+    },
+    {
+      "matrix_index": 112,
+      "region": "THORNFELL",
+      "function": "GATEHOUSE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "0313965bc053eb96d198bdd9f7bb0c288b3390aafef1fdae7a30dcaab86b12c0"
+    },
+    {
+      "matrix_index": 113,
+      "region": "THORNFELL",
+      "function": "GATEHOUSE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "b60e09e05339f2c1cc9a45065d2f01d6790b2a1f8bb10a98ec72e0797382749b"
+    },
+    {
+      "matrix_index": 114,
+      "region": "THORNFELL",
+      "function": "BARRACKS",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "816124fbd7d7b023a87f8af9a66661c088b25cfafcde30cdf21e53ebd615c3bb"
+    },
+    {
+      "matrix_index": 115,
+      "region": "THORNFELL",
+      "function": "BARRACKS",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "62823eb218aa64801455fff93cd6c5a0a8af7a51ab039745f8d4a1e813f64572"
+    },
+    {
+      "matrix_index": 116,
+      "region": "THORNFELL",
+      "function": "BARRACKS",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "8dc6fb427b3c26b66d6f7c6106559aad455ccc7bcc4de2c421630283426971e4"
+    },
+    {
+      "matrix_index": 117,
+      "region": "THORNFELL",
+      "function": "BOATHOUSE",
+      "wealth": "MODEST",
+      "valid": true,
+      "hash": "fd3e417db2f9b93b580b1988f35e177843dbc63a153463a365649d830188af67"
+    },
+    {
+      "matrix_index": 118,
+      "region": "THORNFELL",
+      "function": "BOATHOUSE",
+      "wealth": "ESTABLISHED",
+      "valid": true,
+      "hash": "5ca62cca23a5f42ef8e5ae4ad0d7f241261781135edf4498c11c59c5f9099769"
+    },
+    {
+      "matrix_index": 119,
+      "region": "THORNFELL",
+      "function": "BOATHOUSE",
+      "wealth": "AFFLUENT",
+      "valid": true,
+      "hash": "d14d8de1bebce6b5a86db7f5a6ec3949a4b6f42c09bdafe99c56d398f8d31bf0"
+    }
+  ],
+  "selected_profiles": [
+    {
+      "profile_index": 0,
+      "region": "LOWMARK",
+      "wealth": "ESTABLISHED",
+      "mode": "SOLID",
+      "valid": true,
+      "hash": "fb89012af79d943a47d42f1c2b65d84025aa470492567ad8109a88b550988ff0"
+    },
+    {
+      "profile_index": 1,
+      "region": "LOWMARK",
+      "wealth": "ESTABLISHED",
+      "mode": "EFFICIENT",
+      "valid": true,
+      "hash": "d3abf0abf72b63c321daff8b71e7bd96e84a55ee68ddf7eb4521920343f9e036"
+    },
+    {
+      "profile_index": 2,
+      "region": "LOWMARK",
+      "wealth": "AFFLUENT",
+      "mode": "SOLID",
+      "valid": true,
+      "hash": "7604a431d0c0e201b087dea726a2b97d7e0b09bf3621ceb6aad56094e446e515"
+    },
+    {
+      "profile_index": 3,
+      "region": "LOWMARK",
+      "wealth": "AFFLUENT",
+      "mode": "EFFICIENT",
+      "valid": true,
+      "hash": "eb2063a07dbd51cbf73d2ec20d7748808afba718aa5bbeaecd487f45e1df91de"
+    },
+    {
+      "profile_index": 4,
+      "region": "THORNFELL",
+      "wealth": "ESTABLISHED",
+      "mode": "SOLID",
+      "valid": true,
+      "hash": "40bbfca0841a39645fd4aebbcf66a79f919ec75162e261d079d911eb791e33ff"
+    },
+    {
+      "profile_index": 5,
+      "region": "THORNFELL",
+      "wealth": "ESTABLISHED",
+      "mode": "EFFICIENT",
+      "valid": true,
+      "hash": "525bc26f7acbf4d9743fea55443a6a67ee22ccf1e294311e6577611f52d72ac6"
+    },
+    {
+      "profile_index": 6,
+      "region": "THORNFELL",
+      "wealth": "AFFLUENT",
+      "mode": "SOLID",
+      "valid": true,
+      "hash": "e3697cbeeffc1246e7a0caccd7c2339da1fcb680e64c6bbe79795a8cadbdb640"
+    },
+    {
+      "profile_index": 7,
+      "region": "THORNFELL",
+      "wealth": "AFFLUENT",
+      "mode": "EFFICIENT",
+      "valid": true,
+      "hash": "4fa9d0ac3b660417acfdcbbaec6567025c9893989947296da067b3f837c4cefa"
+    }
+  ]
+}

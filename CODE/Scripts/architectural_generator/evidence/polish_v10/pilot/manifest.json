@@ -1,0 +1,366 @@
+{
+  "stage": "pilot",
+  "source_revision": "development",
+  "generator_sha256": {
+    "__init__.py": "060f346a57193646f92248f27358d2a087eb83c40bb107e8d7f47d782c75ed31",
+    "benchmark_construction.py": "e6e655a13101daa6c2a27cc5153191a9d1a4601e8c4dfcb0c61281df98495669",
+    "benchmark_finish.py": "a12cb6c6d1e1f19b8983f2d80bec62c5aa37487a6f1abddf874d124b8149d3ea",
+    "benchmark_gatehouse.py": "fec6f86d9688d4a635b43c739ddbc92ccc9f121968cf018329f7c07e3f3cf78a",
+    "blender_backend.py": "53f72aa185619fca37d25df2ca99b0fcd45373a426cc6ebd9acf2e4042c83dd6",
+    "blender_manifest.toml": "8405d9bfd9969142c2ae559a256c99aa8e060464f4cd918871e5ab89765eaba3",
+    "crafted_geometry.py": "8cb9d2f8f8dd4161fb90511087d433ae1828e92d133ec966665dd90ff6e1ac74",
+    "engine.py": "520342936b1bf001058eab76c408b73a7f423b5a925848b2fd986e23c5fd9091",
+    "facade.py": "44a1d926cc16496917fc18be7b2c4385193eea55b9377e37c19c935c1c3bee0a",
+    "function_work.py": "410de667f732496f01cb8b13b58e8ec61abbee567748f6f4a6c5d2d84e394add",
+    "function_yard.py": "a7d05edd0f83d0ae9ec51c026e0556289f075482eb01a24214b3623aead75948",
+    "functional.py": "10f719e1db914f5bfc3e1958fe5c0fd323d2e75d8bd02e71f068117a1ad96baa",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "LICENSE": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+    "materials.py": "119930a294c310950b09b7d6c09cfc2ee3459caf3e59da8276d835e39c78d062",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "surface_atlas.py": "590f13a2e77ec6f0c56079d1989889ec81986745f89e51bd15ae1f030f86f984",
+    "surface_conditions.py": "48a2623d36972f09e13cfd8da41e5bce036749fb306b592fec7ef74301ffe55a",
+    "surface_detail.py": "9eced5bc6dbd7a7521c0a290281e45bd03a3357b514d0072b5d9638572248c35",
+    "surface_patterns.py": "08bd96e520f837bc431db6f07125030ad04a5ca727ec5fc8ea140f93dcc1a677",
+    "world.py": "33a48795e5770a4561b224887ea1db372b28aa4813ac64178bc9b77bcb9b0e1f",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+  },
+  "source_unchanged_during_capture": true,
+  "blender": "5.0.1",
+  "render_script_sha256": "8f2a57a60dccc795413f8e38def045a37b332df22bae935ab9d7caca884fe099",
+  "cases": [
+    {
+      "function": "SMITHY",
+      "settings": {
+        "age": 35,
+        "context": "AUTO",
+        "craftsmanship": "STANDARD",
+        "depth": 7.0,
+        "detail": "MEDIUM",
+        "floor_height": 2.65,
+        "floors": 2,
+        "footprint": "L",
+        "function": "SMITHY",
+        "geometry_mode": "EFFICIENT",
+        "maintenance": 0.7,
+        "overhang": 0.45,
+        "pitch": 48.0,
+        "region": "LOWMARK",
+        "roof_style": "AUTO",
+        "seed": 91,
+        "use_grammar": true,
+        "wealth": "ESTABLISHED",
+        "width": 11.0,
+        "window_density": 1.0,
+        "wing_depth": 4.5,
+        "wing_width": 4.2,
+        "world_aware": true
+      },
+      "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367",
+      "input_blend_sha256": "9c124d18336d78f22dacdbb811dac33bd5e75e69b669e76d3f08261c66c94c84",
+      "input_source_revision": "094eb8c"
+    },
+    {
+      "function": "GATEHOUSE",
+      "settings": {
+        "age": 35,
+        "context": "AUTO",
+        "craftsmanship": "STANDARD",
+        "depth": 7.0,
+        "detail": "MEDIUM",
+        "floor_height": 2.65,
+        "floors": 2,
+        "footprint": "L",
+        "function": "GATEHOUSE",
+        "geometry_mode": "EFFICIENT",
+        "maintenance": 0.7,
+        "overhang": 0.45,
+        "pitch": 48.0,
+        "region": "THORNFELL",
+        "roof_style": "AUTO",
+        "seed": 91,
+        "use_grammar": true,
+        "wealth": "ESTABLISHED",
+        "width": 11.0,
+        "window_density": 1.0,
+        "wing_depth": 4.5,
+        "wing_width": 4.2,
+        "world_aware": true
+      },
+      "geometry_hash": "4b7472cc506bae5d4db82b9aa1336277195cebee072995e9f09294bc27946ec3",
+      "input_blend_sha256": "31641ed35009c76fcfb092d82b178156f4c40ed18a32680f67800fbb2866f80e",
+      "input_source_revision": "094eb8c"
+    }
+  ],
+  "images": [
+    {
+      "function": "SMITHY",
+      "distance": "normal",
+      "finish": "material",
+      "view": 0,
+      "image": "material_only/smithy/normal_material_0.png",
+      "sha256": "4c760a03124624fd7abb5de0ae400a7e3514ff33b66e6afe550d28546a8a0536",
+      "camera_location": [
+        24.985652923583984,
+        -28.026805877685547,
+        19.988523483276367
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 18.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -6.621240139007568,
+            7.130866527557373
+          ],
+          "y": [
+            -5.673490047454834,
+            5.707566738128662
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -9.0,
+            9.0
+          ],
+          "y": [
+            -6.1875,
+            6.1875
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      },
+      "variant": "material_only"
+    },
+    {
+      "function": "SMITHY",
+      "distance": "normal",
+      "finish": "clay",
+      "view": 0,
+      "image": "crafted/smithy/normal_clay_0.png",
+      "sha256": "57eb0e84e354e7303aa6778fb73c13dcb99f7ab7b96d3870672827a4bbeda163",
+      "camera_location": [
+        24.985652923583984,
+        -28.026805877685547,
+        19.988523483276367
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 18.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -6.621240139007568,
+            7.130866527557373
+          ],
+          "y": [
+            -5.673490047454834,
+            5.707566738128662
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -9.0,
+            9.0
+          ],
+          "y": [
+            -6.1875,
+            6.1875
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      },
+      "variant": "crafted"
+    },
+    {
+      "function": "SMITHY",
+      "distance": "normal",
+      "finish": "material",
+      "view": 0,
+      "image": "crafted/smithy/normal_material_0.png",
+      "sha256": "edb50b476b4cdfff389c4000b99d9b618fd787941ea951825efef2e60a06d700",
+      "camera_location": [
+        24.985652923583984,
+        -28.026805877685547,
+        19.988523483276367
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 18.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -6.621240139007568,
+            7.130866527557373
+          ],
+          "y": [
+            -5.673490047454834,
+            5.707566738128662
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -9.0,
+            9.0
+          ],
+          "y": [
+            -6.1875,
+            6.1875
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      },
+      "variant": "crafted"
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "normal",
+      "finish": "material",
+      "view": 0,
+      "image": "material_only/gatehouse/normal_material_0.png",
+      "sha256": "102773d58ae6e0e358a4ffba05e6a1ced7c204fb4a5047f03cef2622c504874a",
+      "camera_location": [
+        38.32919692993164,
+        -39.95886993408203,
+        31.143360137939453
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 38.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -12.47565746307373,
+            13.774496078491211
+          ],
+          "y": [
+            -11.339171409606934,
+            7.9868621826171875
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -19.0,
+            19.0
+          ],
+          "y": [
+            -13.0625,
+            13.0625
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      },
+      "variant": "material_only"
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "normal",
+      "finish": "clay",
+      "view": 0,
+      "image": "crafted/gatehouse/normal_clay_0.png",
+      "sha256": "9ee7c4285d249c2643498014c0b69fa335742b961ef22791efd4fd5fe59ee0f3",
+      "camera_location": [
+        38.32919692993164,
+        -39.95886993408203,
+        31.143360137939453
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 38.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -12.47565746307373,
+            13.774496078491211
+          ],
+          "y": [
+            -11.339171409606934,
+            7.9868621826171875
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -19.0,
+            19.0
+          ],
+          "y": [
+            -13.0625,
+            13.0625
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      },
+      "variant": "crafted"
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "normal",
+      "finish": "material",
+      "view": 0,
+      "image": "crafted/gatehouse/normal_material_0.png",
+      "sha256": "d6517a184812fc6939c813e700cbfacf84b7786f5131768c0cb94e2daa2cf7a9",
+      "camera_location": [
+        38.32919692993164,
+        -39.95886993408203,
+        31.143360137939453
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 38.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -12.47565746307373,
+            13.774496078491211
+          ],
+          "y": [
+            -11.339171409606934,
+            7.9868621826171875
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -19.0,
+            19.0
+          ],
+          "y": [
+            -13.0625,
+            13.0625
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      },
+      "variant": "crafted"
+    }
+  ],
+  "image_count": 6
+}

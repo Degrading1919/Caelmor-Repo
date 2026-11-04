@@ -1,0 +1,9 @@
+{
+  "installed_archive": "C:\\Users\\CK\\Documents\\Caelmor-Architecture\\CODE\\Scripts\\architectural_generator\\dist\\caelmor_architecture.zip",
+  "archive_sha256": "e5b9f0b1fc86223b7c592be70686590494c6a8fbdc8f9e80b400df3e9deab05e",
+  "native_install_and_generate": true,
+  "isolated_preferences": true,
+  "region": "THORNFELL",
+  "building_type": "WATCHTOWER",
+  "geometry_mode": "EFFICIENT"
+}

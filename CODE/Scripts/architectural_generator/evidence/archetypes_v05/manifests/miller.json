@@ -1,0 +1,869 @@
+{
+  "source_revision": "809300bcfddf67601fa6719ebf4e91aef9135098",
+  "generator_version": "0.5.0",
+  "source_sha256": {
+    "__init__.py": "57f662977d12340c1c4b91864c6655335854bdf196de143b3448ee154b18c2e0",
+    "blender_backend.py": "ccd4ce109d97eb98df309fcad795398f96eb55c02a1b012fc969a45deca6bdcc",
+    "blender_manifest.toml": "f9ec85f7be7b8fd2b6210d783d60f4402a97a912b27897ac6ba41e2fb509a452",
+    "engine.py": "11d4a8b1868afc1170a34a03d0b294b85d09f7c344153cb24074f5d2acce0ed7",
+    "facade.py": "f989e3a56624f89a034701e275beb6e10d7bfd52bb7a14b0ffad23a235708f4d",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "8da06e3a1242be8c2ac21bca994d1805a36f399425ab585befdaf386346b65ce",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+  },
+  "render_source_sha256": {
+    "render_household_review.py": "08bc6f0ac312f457e341cbf44163eb1276a203282074f67bb1952f899264ba78",
+    "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+  },
+  "settings_contract": {
+    "seed": 91,
+    "footprint": "L",
+    "width": 11.0,
+    "depth": 7.0,
+    "wing_width": 4.2,
+    "wing_depth": 4.5,
+    "floors": 2,
+    "floor_height": 2.65,
+    "pitch": 48.0,
+    "overhang": 0.45,
+    "detail": "MEDIUM",
+    "window_density": 1.0,
+    "context": "AUTO",
+    "wealth": "ESTABLISHED",
+    "craftsmanship": "STANDARD",
+    "maintenance": 0.7,
+    "age": 35,
+    "use_grammar": true,
+    "roof_style": "AUTO",
+    "geometry_mode": "EFFICIENT",
+    "world_aware": true
+  },
+  "renderer": "5.0.1",
+  "engine": "BLENDER_EEVEE",
+  "samples": 32,
+  "studio": "render_world_evidence._reset_scene, ground at grade",
+  "scale_policy": "Common projected orthographic scale per archetype across four regions and both views; different archetypes fitted independently.",
+  "geometry_generation": "One native backend build/validation per configuration; same objects reused for clay and material.",
+  "records": [
+    {
+      "function": "MILLER",
+      "region": "LOWMARK",
+      "label": "Miller House",
+      "settings": {
+        "seed": 91,
+        "function": "MILLER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RURAL",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/miller/lowmark_clay_0.png",
+          "image_sha256": "c81702c765af06ed0cc01d52c3479b7e5c5edbf851e79547927f7a02df5c4b14",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            54.65821838378906,
+            -63.71281433105469,
+            41.93457794189453
+          ],
+          "camera_target": [
+            7.440499782562256,
+            2.9475011825561523,
+            4.160399436950684
+          ],
+          "ortho_scale": 27.99216461181641,
+          "elapsed_seconds": 0.3221
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/miller/lowmark_clay_1.png",
+          "image_sha256": "23587ce5c909922bcaaa1944f582eebeeb2b065e0870f449735100238a9e0764",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.7772216796875,
+            69.60781860351562,
+            41.93457794189453
+          ],
+          "camera_target": [
+            7.440499782562256,
+            2.9475011825561523,
+            4.160399436950684
+          ],
+          "ortho_scale": 27.99216461181641,
+          "elapsed_seconds": 0.3249
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/miller/lowmark_material_0.png",
+          "image_sha256": "6a631f114f92855cdd9dccd3082d9e121e0a50ac8f36bcdf85a808002ab028b1",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            54.65821838378906,
+            -63.71281433105469,
+            41.93457794189453
+          ],
+          "camera_target": [
+            7.440499782562256,
+            2.9475011825561523,
+            4.160399436950684
+          ],
+          "ortho_scale": 27.99216461181641,
+          "elapsed_seconds": 0.3447
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/miller/lowmark_material_1.png",
+          "image_sha256": "f92d3ae67fababb6b09b268cc5cc330352b9811a9aa0fdcd6d4bc03e68f5a9ec",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.7772216796875,
+            69.60781860351562,
+            41.93457794189453
+          ],
+          "camera_target": [
+            7.440499782562256,
+            2.9475011825561523,
+            4.160399436950684
+          ],
+          "ortho_scale": 27.99216461181641,
+          "elapsed_seconds": 0.3093
+        }
+      ],
+      "build_seconds": 2.8682,
+      "geometry_hash": "09c3f69737fb0093ba2a38c77e22ccc8d82ee9bac0066e609cdf36b6add784e3",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.45,
+            "bounds": [
+              0,
+              0,
+              11.0,
+              7.2
+            ],
+            "eave": 6.05,
+            "function": "MILLER",
+            "key": "lowmark_main_hall",
+            "roof": "GABLE",
+            "triangles": 13856,
+            "valid": true,
+            "vertices": 11892,
+            "wall_thickness": 0.28
+          },
+          {
+            "base": 0.45,
+            "bounds": [
+              11.85,
+              -0.864,
+              15.666,
+              4.32
+            ],
+            "eave": 2.95,
+            "function": "WORKSHOP",
+            "key": "lowmark_service_wing",
+            "roof": "SHED",
+            "triangles": 3636,
+            "valid": true,
+            "vertices": 3076,
+            "wall_thickness": 0.28
+          }
+        ],
+        "errors": [],
+        "objects": 45,
+        "source_objects": 45,
+        "source_triangles": 17552,
+        "source_vertices": 15008,
+        "triangles": 17552,
+        "valid": true
+      },
+      "backend": {
+        "objects": 45,
+        "vertices": 15008,
+        "width": 17.300999641418457,
+        "depth": 9.474997758865356,
+        "height": 8.444259852170944,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -1.2100000381469727,
+          16.090999603271484
+        ],
+        [
+          -1.7899978160858154,
+          7.684999942779541
+        ],
+        [
+          -0.06173059344291687,
+          8.382529258728027
+        ]
+      ]
+    },
+    {
+      "function": "MILLER",
+      "region": "THORNFELL",
+      "label": "Miller House",
+      "settings": {
+        "seed": 91,
+        "function": "MILLER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "RIDGE",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/miller/thornfell_clay_0.png",
+          "image_sha256": "b4b044451ce2f85d80987819284f8b0811ef167e0950be09495060ddfaaafa6d",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            54.217220306396484,
+            -63.32797622680664,
+            43.13117599487305
+          ],
+          "camera_target": [
+            6.999500274658203,
+            3.3323404788970947,
+            5.35699987411499
+          ],
+          "ortho_scale": 27.99216461181641,
+          "elapsed_seconds": 0.3338
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/miller/thornfell_clay_1.png",
+          "image_sha256": "63a08a8084c76e65989ccd175f06a304f70fa451e408cc5be2765752a1ee55f3",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -40.21821975708008,
+            69.99266052246094,
+            43.13117599487305
+          ],
+          "camera_target": [
+            6.999500274658203,
+            3.3323404788970947,
+            5.35699987411499
+          ],
+          "ortho_scale": 27.99216461181641,
+          "elapsed_seconds": 0.3138
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/miller/thornfell_material_0.png",
+          "image_sha256": "1064936473f4b86896640cb431dda0343f4076dfd01227ae797932f5201974ed",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            54.217220306396484,
+            -63.32797622680664,
+            43.13117599487305
+          ],
+          "camera_target": [
+            6.999500274658203,
+            3.3323404788970947,
+            5.35699987411499
+          ],
+          "ortho_scale": 27.99216461181641,
+          "elapsed_seconds": 0.3154
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/miller/thornfell_material_1.png",
+          "image_sha256": "172f08413add6e19cf3db2864ed4af78766629e9d8bae323431ee0e875a4f024",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -40.21821975708008,
+            69.99266052246094,
+            43.13117599487305
+          ],
+          "camera_target": [
+            6.999500274658203,
+            3.3323404788970947,
+            5.35699987411499
+          ],
+          "ortho_scale": 27.99216461181641,
+          "elapsed_seconds": 0.3691
+        }
+      ],
+      "build_seconds": 1.1749,
+      "geometry_hash": "fa8d926cfa4e53c652d2302458aed47a44cd2736ab50e0c69dd1aedc4fbaba41",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.5,
+            "bounds": [
+              0,
+              0,
+              10.01,
+              7.238
+            ],
+            "eave": 5.763999999999999,
+            "function": "MILLER",
+            "key": "thornfell_stone_hall",
+            "roof": "GABLE",
+            "triangles": 18322,
+            "valid": true,
+            "vertices": 15806,
+            "wall_thickness": 0.5
+          },
+          {
+            "base": 0.9199999999999999,
+            "bounds": [
+              10.01,
+              1.4476000000000002,
+              14.014,
+              5.211360000000001
+            ],
+            "eave": 2.9729599999999996,
+            "function": "COTTAGE",
+            "key": "thornfell_lower_stone_range",
+            "roof": "GABLE",
+            "triangles": 5167,
+            "valid": true,
+            "vertices": 4266,
+            "wall_thickness": 0.5
+          }
+        ],
+        "errors": [],
+        "objects": 57,
+        "source_objects": 57,
+        "source_triangles": 23489,
+        "source_vertices": 20072,
+        "triangles": 23489,
+        "valid": true
+      },
+      "backend": {
+        "objects": 57,
+        "vertices": 20072,
+        "width": 14.48900043964386,
+        "depth": 8.344681084156036,
+        "height": 10.71399974822998,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.24500000476837158,
+          14.244000434875488
+        ],
+        [
+          -0.8399999737739563,
+          7.50468111038208
+        ],
+        [
+          0.0,
+          10.71399974822998
+        ]
+      ]
+    },
+    {
+      "function": "MILLER",
+      "region": "MIRE",
+      "label": "Miller House",
+      "settings": {
+        "seed": 91,
+        "function": "MILLER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "SORROWMERE",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/miller/mire_clay_0.png",
+          "image_sha256": "8cdd59b461486352e6f4a2717d76425c624c563b7ba1367c9797cab21d260602",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            51.79011917114258,
+            -65.59526062011719,
+            43.6292839050293
+          ],
+          "camera_target": [
+            4.572400093078613,
+            1.065053939819336,
+            5.855107307434082
+          ],
+          "ortho_scale": 27.99216461181641,
+          "elapsed_seconds": 0.3167
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/miller/mire_clay_1.png",
+          "image_sha256": "4884728c420137dc5da26d7ae5015daab1c805ea01aa406dba784b6869b21825",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -42.645320892333984,
+            67.72537231445312,
+            43.6292839050293
+          ],
+          "camera_target": [
+            4.572400093078613,
+            1.065053939819336,
+            5.855107307434082
+          ],
+          "ortho_scale": 27.99216461181641,
+          "elapsed_seconds": 0.3203
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/miller/mire_material_0.png",
+          "image_sha256": "0e59c8721518a3bb2488bc4a334fefba17afcadb6df6636cea719a5064191c3a",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            51.79011917114258,
+            -65.59526062011719,
+            43.6292839050293
+          ],
+          "camera_target": [
+            4.572400093078613,
+            1.065053939819336,
+            5.855107307434082
+          ],
+          "ortho_scale": 27.99216461181641,
+          "elapsed_seconds": 0.3033
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/miller/mire_material_1.png",
+          "image_sha256": "0650110e1acd43aa64092ee2bbb7af8676471f40294dc6b4dd4a54bb4085cc44",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -42.645320892333984,
+            67.72537231445312,
+            43.6292839050293
+          ],
+          "camera_target": [
+            4.572400093078613,
+            1.065053939819336,
+            5.855107307434082
+          ],
+          "ortho_scale": 27.99216461181641,
+          "elapsed_seconds": 0.3007
+        }
+      ],
+      "build_seconds": 1.4271,
+      "geometry_hash": "ab1e49e42fbf5c7e6fd5d566b148db6bce5e8d306a677badad5dc6c882eafbf8",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 1.94,
+            "bounds": [
+              0.0,
+              0.0,
+              9.1448,
+              6.44
+            ],
+            "eave": 7.539999999999999,
+            "function": "MILLER",
+            "key": "mire_longhouse",
+            "roof": "BOW",
+            "triangles": 21192,
+            "valid": true,
+            "vertices": 19130,
+            "wall_thickness": 0.18
+          }
+        ],
+        "errors": [],
+        "objects": 31,
+        "source_objects": 31,
+        "source_triangles": 21708,
+        "source_vertices": 19474,
+        "triangles": 21708,
+        "valid": true
+      },
+      "backend": {
+        "objects": 31,
+        "vertices": 19474,
+        "width": 10.63480007648468,
+        "depth": 12.23989200592041,
+        "height": 11.813899591565132,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.7450000047683716,
+          9.889800071716309
+        ],
+        [
+          -5.054892063140869,
+          7.184999942779541
+        ],
+        [
+          -0.05184228718280792,
+          11.762057304382324
+        ]
+      ]
+    },
+    {
+      "function": "MILLER",
+      "region": "EMBERHOLT",
+      "label": "Miller House",
+      "settings": {
+        "seed": 91,
+        "function": "MILLER",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "resolved_context": "EMBERHOLD",
+      "status": "rendered",
+      "views": [
+        {
+          "mode": "clay",
+          "view": 0,
+          "image": "individual/miller/emberholt_clay_0.png",
+          "image_sha256": "cf7b1752b116c2efdf768db1c202f1c3c92bb90593e7f5462aa08b2cc585680d",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            54.71772003173828,
+            -60.98531723022461,
+            41.944175720214844
+          ],
+          "camera_target": [
+            7.5,
+            5.675000190734863,
+            4.170000076293945
+          ],
+          "ortho_scale": 27.99216461181641,
+          "elapsed_seconds": 0.2875
+        },
+        {
+          "mode": "clay",
+          "view": 1,
+          "image": "individual/miller/emberholt_clay_1.png",
+          "image_sha256": "7f0034f703d01ecbdb24df8388216db2307b684e160b54ec13b44c732eb208e0",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.71772003173828,
+            72.33531951904297,
+            41.944175720214844
+          ],
+          "camera_target": [
+            7.5,
+            5.675000190734863,
+            4.170000076293945
+          ],
+          "ortho_scale": 27.99216461181641,
+          "elapsed_seconds": 0.3045
+        },
+        {
+          "mode": "material",
+          "view": 0,
+          "image": "individual/miller/emberholt_material_0.png",
+          "image_sha256": "f59fe8e876187194166063a8e2f9e2d0b2cda19c42f581b8c0cf5e306d4700cb",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            0.85,
+            -1.2,
+            0.68
+          ],
+          "camera_location": [
+            54.71772003173828,
+            -60.98531723022461,
+            41.944175720214844
+          ],
+          "camera_target": [
+            7.5,
+            5.675000190734863,
+            4.170000076293945
+          ],
+          "ortho_scale": 27.99216461181641,
+          "elapsed_seconds": 0.3235
+        },
+        {
+          "mode": "material",
+          "view": 1,
+          "image": "individual/miller/emberholt_material_1.png",
+          "image_sha256": "eaa81bbecaabefd813afc3edfb7ab59c0b80453e29fbd1db0fc907621e1e45ad",
+          "width": 1024,
+          "height": 704,
+          "camera_direction": [
+            -0.85,
+            1.2,
+            0.68
+          ],
+          "camera_location": [
+            -39.71772003173828,
+            72.33531951904297,
+            41.944175720214844
+          ],
+          "camera_target": [
+            7.5,
+            5.675000190734863,
+            4.170000076293945
+          ],
+          "ortho_scale": 27.99216461181641,
+          "elapsed_seconds": 0.27
+        }
+      ],
+      "build_seconds": 1.2979,
+      "geometry_hash": "76c8cdadd96c6d12155e5be37cfa3af252b6e0d03c587eace70e612bdf5e7f0e",
+      "validation": {
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "base": 0.48,
+            "bounds": [
+              0,
+              0,
+              15.0,
+              11.5
+            ],
+            "eave": 6.08,
+            "function": "MILLER",
+            "key": "emberholt_main_block",
+            "roof": "TERRACE",
+            "triangles": 16288,
+            "valid": true,
+            "vertices": 11808,
+            "wall_thickness": 0.7
+          }
+        ],
+        "errors": [],
+        "objects": 21,
+        "source_objects": 21,
+        "source_triangles": 16288,
+        "source_vertices": 11808,
+        "triangles": 16288,
+        "valid": true
+      },
+      "backend": {
+        "objects": 21,
+        "vertices": 11808,
+        "width": 16.737525641918182,
+        "depth": 12.070000052452087,
+        "height": 8.34000015258789,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "bounds": [
+        [
+          -0.8687626719474792,
+          15.868762969970703
+        ],
+        [
+          -0.36000001430511475,
+          11.710000038146973
+        ],
+        [
+          0.0,
+          8.34000015258789
+        ]
+      ]
+    }
+  ]
+}

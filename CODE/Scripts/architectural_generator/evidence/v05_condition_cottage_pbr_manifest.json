@@ -1,0 +1,287 @@
+{
+  "renderer": "5.0.1",
+  "source_hashes": {
+    "__init__.py": "7fa1a0ce9871a3c9e7faebe021fb530bdaff3f31175cc0c9528176b3f03d488e",
+    "blender_backend.py": "ccd4ce109d97eb98df309fcad795398f96eb55c02a1b012fc969a45deca6bdcc",
+    "engine.py": "11d4a8b1868afc1170a34a03d0b294b85d09f7c344153cb24074f5d2acce0ed7",
+    "facade.py": "446a8cd22056287eb27228d65b95fe60d15b3535a4d057d59c8c690f23ffac09",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "6976fae093e032145de6b3e05d06caeaba7a5c9c8cc9d0dd9b50d3f7ed7e6195",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+  },
+  "records": [
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.9,
+        "age": 15,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "slot": "MODEST",
+      "view": 0,
+      "geometry_hash": "e9bae3eb28031a0cfbe0285a865260889f7659f86a3d7f7ba0228bb315b5c0e5",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 29,
+        "vertices": 14382,
+        "triangles": 15920,
+        "materials": 9,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "building_type": "COTTAGE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "mire_longhouse",
+            "bounds": [
+              0.0,
+              0.0,
+              7.52,
+              5.5200000000000005
+            ],
+            "base": 1.94,
+            "eave": 4.74,
+            "valid": true,
+            "roof": "BOW",
+            "function": "COTTAGE",
+            "wall_thickness": 0.18,
+            "vertices": 14062,
+            "triangles": 15440
+          }
+        ],
+        "geometry_hash": "e9bae3eb28031a0cfbe0285a865260889f7659f86a3d7f7ba0228bb315b5c0e5",
+        "tool_revision": "0.5.0"
+      },
+      "backend": {
+        "objects": 29,
+        "vertices": 14382,
+        "width": 9.010000348091125,
+        "depth": 11.319891929626465,
+        "height": 8.424169138073921,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "image": "v05_condition_cottage_pbr_mire_modest_0.png",
+      "image_sha256": "6762674a7487667564318d52dae0f0be1026f48e2b27981929b49ab2bab0eab9",
+      "ortho_scale": 21.934586334228516,
+      "camera_direction": [
+        0.85,
+        -1.2,
+        0.68
+      ],
+      "elapsed_seconds": 3.604
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 85,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "slot": "ESTABLISHED",
+      "view": 0,
+      "geometry_hash": "e9bae3eb28031a0cfbe0285a865260889f7659f86a3d7f7ba0228bb315b5c0e5",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 29,
+        "vertices": 14382,
+        "triangles": 15920,
+        "materials": 9,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "building_type": "COTTAGE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "mire_longhouse",
+            "bounds": [
+              0.0,
+              0.0,
+              7.52,
+              5.5200000000000005
+            ],
+            "base": 1.94,
+            "eave": 4.74,
+            "valid": true,
+            "roof": "BOW",
+            "function": "COTTAGE",
+            "wall_thickness": 0.18,
+            "vertices": 14062,
+            "triangles": 15440
+          }
+        ],
+        "geometry_hash": "e9bae3eb28031a0cfbe0285a865260889f7659f86a3d7f7ba0228bb315b5c0e5",
+        "tool_revision": "0.5.0"
+      },
+      "backend": {
+        "objects": 29,
+        "vertices": 14382,
+        "width": 9.010000348091125,
+        "depth": 11.319891929626465,
+        "height": 8.424169138073921,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "image": "v05_condition_cottage_pbr_mire_established_0.png",
+      "image_sha256": "982cc3f204a9181e76684fbb2f1d5d232edc3abcddaed2e559b01ef870fd4485",
+      "ortho_scale": 21.934586334228516,
+      "camera_direction": [
+        0.85,
+        -1.2,
+        0.68
+      ],
+      "elapsed_seconds": 1.974
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.3,
+        "age": 120,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "slot": "AFFLUENT",
+      "view": 0,
+      "geometry_hash": "d6de85ae885ae3b8569a487c4c1adcce3736a4e482801894b96c9a603cfc3e98",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 30,
+        "vertices": 14398,
+        "triangles": 15944,
+        "materials": 9,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "building_type": "COTTAGE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "mire_longhouse",
+            "bounds": [
+              0.0,
+              0.0,
+              7.52,
+              5.5200000000000005
+            ],
+            "base": 1.94,
+            "eave": 4.74,
+            "valid": true,
+            "roof": "BOW",
+            "function": "COTTAGE",
+            "wall_thickness": 0.18,
+            "vertices": 14078,
+            "triangles": 15464
+          }
+        ],
+        "geometry_hash": "d6de85ae885ae3b8569a487c4c1adcce3736a4e482801894b96c9a603cfc3e98",
+        "tool_revision": "0.5.0"
+      },
+      "backend": {
+        "objects": 30,
+        "vertices": 14398,
+        "width": 9.010000348091125,
+        "depth": 11.319891929626465,
+        "height": 8.424169138073921,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "image": "v05_condition_cottage_pbr_mire_affluent_0.png",
+      "image_sha256": "3d6974344eee708a4a96881a65e524d145a22f642938dee945ea7510ccd20335",
+      "ortho_scale": 21.934586334228516,
+      "camera_direction": [
+        0.85,
+        -1.2,
+        0.68
+      ],
+      "elapsed_seconds": 1.986
+    }
+  ],
+  "study": "condition",
+  "scope": "Matched tiers, common projected orthographic scale per region, two opposed views."
+}

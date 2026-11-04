@@ -1,0 +1,392 @@
+{
+  "before": "c2da894",
+  "after": "ae0ec03",
+  "sheets": [
+    {
+      "sha256": "3112a416edb5394c05f5666f256bb53fab7bfd381dc10158437e6e8cf036b2ea",
+      "image": "comparison/smithy_distant.png",
+      "inputs": [
+        {
+          "sha256": "d971354459e9c8e115bf925675f9d6f02af7b913f4969f036886829328289907",
+          "image": "before/smithy/distant_clay_0.png",
+          "label": "v0.9 clay / front"
+        },
+        {
+          "sha256": "577e00b62bc36f010addc40bee56e97dd5ce8e94901d761fb1917b90fe6fd2ae",
+          "image": "after/smithy/distant_clay_0.png",
+          "label": "v0.10 clay / front"
+        },
+        {
+          "sha256": "ead014328c4d78ef803e1f74a29d8f07c2dae5cd77ab24d7834dd3721c097553",
+          "image": "before/smithy/distant_clay_1.png",
+          "label": "v0.9 clay / rear"
+        },
+        {
+          "sha256": "e87e4b996b1136979d8a3caf1567c38b65a2084b7fa4890c7aaa40777a290fc5",
+          "image": "after/smithy/distant_clay_1.png",
+          "label": "v0.10 clay / rear"
+        },
+        {
+          "sha256": "87bd7d42239bf428bd2c34a7a6a1bb026689a742dcf9130460e690eadbb5943b",
+          "image": "before/smithy/distant_material_0.png",
+          "label": "v0.9 material / front"
+        },
+        {
+          "sha256": "3cbb7463921a0fb9a57f65a4e99f7dfa1f398dad2664da8c73acfc6a53d55990",
+          "image": "after/smithy/distant_material_0.png",
+          "label": "v0.10 material / front"
+        },
+        {
+          "sha256": "b170b14ae6eff92ad20d6c2ffe493eed489c69bc8a9c968cfff683ae48252354",
+          "image": "before/smithy/distant_material_1.png",
+          "label": "v0.9 material / rear"
+        },
+        {
+          "sha256": "e6b10078c61d2d31e6072094b84af93b8da3b1b83dc26d4aceb4dc2deb927ea0",
+          "image": "after/smithy/distant_material_1.png",
+          "label": "v0.10 material / rear"
+        },
+        {
+          "sha256": "3697fe2a7339cbe9de2aa57dc38b83fe02290277f37ed3b70cd99361dfada38d",
+          "image": "after/exported/smithy/distant_material_0.png",
+          "label": "GLB reimport / view 1"
+        },
+        {
+          "sha256": "9c927f8da7c1b1976f3941ff4873228ae0b1c05952ff015e0c958ed3c693d0ba",
+          "image": "after/exported/smithy/distant_material_1.png",
+          "label": "GLB reimport / view 2"
+        }
+      ],
+      "height": 2260,
+      "width": 4096
+    },
+    {
+      "sha256": "e7bd09cd2dd2a7721d78763f9ecc9869d58b4c5522cbcf6f9e75c2a8155cfffe",
+      "image": "comparison/smithy_normal.png",
+      "inputs": [
+        {
+          "sha256": "04334d4ebd124c3b531a425f28d3ea1a39a867c0545a7c3cbfd12dd2f6b3ce9a",
+          "image": "before/smithy/normal_clay_0.png",
+          "label": "v0.9 clay / front"
+        },
+        {
+          "sha256": "19d475e8f44913cf34983d89a9cf927809838f6f1202205226c19144610ae7d7",
+          "image": "after/smithy/normal_clay_0.png",
+          "label": "v0.10 clay / front"
+        },
+        {
+          "sha256": "f49616159638c2ff38dc298f2cfe84a17e12c83edd9882eb89cda4dec0d7e05a",
+          "image": "before/smithy/normal_clay_1.png",
+          "label": "v0.9 clay / rear"
+        },
+        {
+          "sha256": "89cb4a8538f4243f4d1f80cb487a252270f81ac7d03201738deb9651753dbc5a",
+          "image": "after/smithy/normal_clay_1.png",
+          "label": "v0.10 clay / rear"
+        },
+        {
+          "sha256": "65ec1dcb848a6fac7cf0c99baa3b03f665fc6bb5c099cebb4b43aa088f2febd0",
+          "image": "before/smithy/normal_material_0.png",
+          "label": "v0.9 material / front"
+        },
+        {
+          "sha256": "60427eba6c516f806ecde072dd13b9eafe5b7edb0e2cb9dc30dfd9e4256bac3d",
+          "image": "after/smithy/normal_material_0.png",
+          "label": "v0.10 material / front"
+        },
+        {
+          "sha256": "490984c7206652cfcb24a69ffa10a848152377a4684cfa73640c821249836a8b",
+          "image": "before/smithy/normal_material_1.png",
+          "label": "v0.9 material / rear"
+        },
+        {
+          "sha256": "7f6bdad549d5fc8db339c1a44337a7b67aa9d50b6644d296b48901dce8e4e6ff",
+          "image": "after/smithy/normal_material_1.png",
+          "label": "v0.10 material / rear"
+        },
+        {
+          "sha256": "30851d37f1bc71a82e770adca29b6a96498c236bb4647d9270f0fe77706d540f",
+          "image": "after/exported/smithy/normal_material_0.png",
+          "label": "GLB reimport / view 1"
+        },
+        {
+          "sha256": "8d18901e6fa18a3bdf03de9b393c4ae6d03be89d0ac85eb521482dd5ae279b08",
+          "image": "after/exported/smithy/normal_material_1.png",
+          "label": "GLB reimport / view 2"
+        }
+      ],
+      "height": 2260,
+      "width": 4096
+    },
+    {
+      "sha256": "141c5ec185b387a0e6bf2d38b66fb5ba6999ee959a1f032de4b7817a1b1b052e",
+      "image": "comparison/smithy_close.png",
+      "inputs": [
+        {
+          "sha256": "18331deb591620b6875a008273690afba10087e281660d7b5c7e0e324309149b",
+          "image": "before/smithy/close_clay_0.png",
+          "label": "v0.9 clay / detail 1"
+        },
+        {
+          "sha256": "800f189e7ce466627ff717b3b1ef1f0bb58f5b926697a695f72da1f3e316c6f7",
+          "image": "after/smithy/close_clay_0.png",
+          "label": "v0.10 clay / detail 1"
+        },
+        {
+          "sha256": "533c604383cfaf20df11ce0550a5e6a712958402cb56bc7c259afe1df8a1e5b7",
+          "image": "before/smithy/close_clay_1.png",
+          "label": "v0.9 clay / detail 2"
+        },
+        {
+          "sha256": "93ba95e2daeb9ab549b6bc7f205f7a808cb7d83cfff28a7dbd413e2ecabd4ff7",
+          "image": "after/smithy/close_clay_1.png",
+          "label": "v0.10 clay / detail 2"
+        },
+        {
+          "sha256": "cbcbb63fbbe7aa9b3d3b48c15e2b76acf1ee41318e42e4797ed5e4a73709594b",
+          "image": "before/smithy/close_material_0.png",
+          "label": "v0.9 material / detail 1"
+        },
+        {
+          "sha256": "f0aa47777b6eb1a885c4e6ad7d03564896b7ebedd67e3285a60678bcddba8ba5",
+          "image": "after/smithy/close_material_0.png",
+          "label": "v0.10 material / detail 1"
+        },
+        {
+          "sha256": "4f78a0c56f793ca99f8218dcc6064cdf54e8389d6c5ac085d1d9f946bcc41d58",
+          "image": "before/smithy/close_material_1.png",
+          "label": "v0.9 material / detail 2"
+        },
+        {
+          "sha256": "61743b479192004c8b55816d5cc30f7c65ed628dc6c319a8796af9e2f2f3ac64",
+          "image": "after/smithy/close_material_1.png",
+          "label": "v0.10 material / detail 2"
+        },
+        {
+          "sha256": "5ce669b0d973bdf29d84eec56ad766e601d0c6cff91d9735fc5779142c22c67e",
+          "image": "after/exported/smithy/close_material_0.png",
+          "label": "GLB reimport / view 1"
+        },
+        {
+          "sha256": "1b8ccb0a8a5bf8b2fc99451874a84a89cb12dba883115ea372141dd390461842",
+          "image": "after/exported/smithy/close_material_1.png",
+          "label": "GLB reimport / view 2"
+        }
+      ],
+      "height": 2260,
+      "width": 4096
+    },
+    {
+      "sha256": "3d2266a8b2cc9a2911090d1dfe82a81dc1ffe871045b24bbef832d749a128d94",
+      "image": "comparison/gatehouse_distant.png",
+      "inputs": [
+        {
+          "sha256": "7a242530fb1bbb3028e3ab06d298945d59a942722c624b1980e009eb0e60181d",
+          "image": "before/gatehouse/distant_clay_0.png",
+          "label": "v0.9 clay / front"
+        },
+        {
+          "sha256": "dceee12dee5162077528f6d4ca2831bfeb7211f213fb8d91860412a58c5969c9",
+          "image": "after/gatehouse/distant_clay_0.png",
+          "label": "v0.10 clay / front"
+        },
+        {
+          "sha256": "cae01f234fb24f3cac3ab0dcd37b1cffeef76846869203eee585ca5bd3720896",
+          "image": "before/gatehouse/distant_clay_1.png",
+          "label": "v0.9 clay / rear"
+        },
+        {
+          "sha256": "bbbb6847d155f1428728bdc04c17a7607c041d5f2f1ca2e4bc99d0322cbe7612",
+          "image": "after/gatehouse/distant_clay_1.png",
+          "label": "v0.10 clay / rear"
+        },
+        {
+          "sha256": "9e8fe831055c3dd308790d3a04957ab731b3c0d513d5405b2c4e7e5a26d65ee8",
+          "image": "before/gatehouse/distant_material_0.png",
+          "label": "v0.9 material / front"
+        },
+        {
+          "sha256": "804ad0c8f0f199f1ae0cbd5f7a818785a81ce76c0d0f4568c81fcdd451a4ac59",
+          "image": "after/gatehouse/distant_material_0.png",
+          "label": "v0.10 material / front"
+        },
+        {
+          "sha256": "d25b6b81b84a39736a0e9bd3d8909803043f37fe38ad0638f2119a0b0cf1cff1",
+          "image": "before/gatehouse/distant_material_1.png",
+          "label": "v0.9 material / rear"
+        },
+        {
+          "sha256": "9875d04b687eab542d18bebf28cc865c5bc51c855f4a63cd8e06dbf6adb6b1d1",
+          "image": "after/gatehouse/distant_material_1.png",
+          "label": "v0.10 material / rear"
+        },
+        {
+          "sha256": "a684be7aa0dd224076e6de4ec5d9a52e6b8aec674b62d9b50dbc0ac760285434",
+          "image": "after/exported/gatehouse/distant_material_0.png",
+          "label": "GLB reimport / view 1"
+        },
+        {
+          "sha256": "60ade0721944446aafe97db4bcfa4164d33d4e1ef3a219cfed9c56e4bd112ab1",
+          "image": "after/exported/gatehouse/distant_material_1.png",
+          "label": "GLB reimport / view 2"
+        }
+      ],
+      "height": 2260,
+      "width": 4096
+    },
+    {
+      "sha256": "f03424bb019947492aa80a9be168c88e8e779d80a708ef25e321991b83a1c7d0",
+      "image": "comparison/gatehouse_normal.png",
+      "inputs": [
+        {
+          "sha256": "6c3a9965cebe07082c8fd3683ca2ff58b01674fed460905305031e21565e7237",
+          "image": "before/gatehouse/normal_clay_0.png",
+          "label": "v0.9 clay / front"
+        },
+        {
+          "sha256": "8d6006dffbf87375611789bf49f7e2ee44ecab08dac75f389a6bb68a80c4f08e",
+          "image": "after/gatehouse/normal_clay_0.png",
+          "label": "v0.10 clay / front"
+        },
+        {
+          "sha256": "d221760cbff1b658b7827060bbd70f509dc717bd87d9648037a2a02fec6c3fea",
+          "image": "before/gatehouse/normal_clay_1.png",
+          "label": "v0.9 clay / rear"
+        },
+        {
+          "sha256": "ae9663a6159f2ea8946479e0fe4cb4c23f83e252e8b821f645d71cf41efff0fc",
+          "image": "after/gatehouse/normal_clay_1.png",
+          "label": "v0.10 clay / rear"
+        },
+        {
+          "sha256": "c4577f4a62ed1b57c92db7ae5f301faf2f9d2bbc3e2e80e6d879ad17c525c8bc",
+          "image": "before/gatehouse/normal_material_0.png",
+          "label": "v0.9 material / front"
+        },
+        {
+          "sha256": "925847a613266fbdee4dc5dee3289710096ecd53bc4bbfc94b97043f4a6ae7bd",
+          "image": "after/gatehouse/normal_material_0.png",
+          "label": "v0.10 material / front"
+        },
+        {
+          "sha256": "0029a3ee17f42571ff4bd136d4a812120a2a46993fde14dba516e931d0aba66a",
+          "image": "before/gatehouse/normal_material_1.png",
+          "label": "v0.9 material / rear"
+        },
+        {
+          "sha256": "01e0052bfb37e6bff594ac7b4e1b96f09378dad77c24b73c5fbe17b3e91f942b",
+          "image": "after/gatehouse/normal_material_1.png",
+          "label": "v0.10 material / rear"
+        },
+        {
+          "sha256": "97ca624356e84a184c6216f7392a272e6bd18c8d8fbb741d226ad964fb08eb21",
+          "image": "after/exported/gatehouse/normal_material_0.png",
+          "label": "GLB reimport / view 1"
+        },
+        {
+          "sha256": "6e0d0d265dd4a24ee1b8753eb815b5052e12b1bb7899abe2450462466aaca9ab",
+          "image": "after/exported/gatehouse/normal_material_1.png",
+          "label": "GLB reimport / view 2"
+        }
+      ],
+      "height": 2260,
+      "width": 4096
+    },
+    {
+      "sha256": "05e7852300a25c6baab722107b5d169f153e6b82fe2e42d8fedeebdae2d2e679",
+      "image": "comparison/gatehouse_close.png",
+      "inputs": [
+        {
+          "sha256": "f8610a158b0eafa4ece1757c7ea3b08c21be78fd3fa847409c82e43aa42a0b88",
+          "image": "before/gatehouse/close_clay_0.png",
+          "label": "v0.9 clay / detail 1"
+        },
+        {
+          "sha256": "ed2a74bf2ede1e2844cc6cf34c10d15f4dee71eaf3ce37c5c4beb37d0ef375cc",
+          "image": "after/gatehouse/close_clay_0.png",
+          "label": "v0.10 clay / detail 1"
+        },
+        {
+          "sha256": "96f0a3cd150f8a581b1219c9a01a87d1686fc3584b606a9d8484a36cf3814972",
+          "image": "before/gatehouse/close_clay_1.png",
+          "label": "v0.9 clay / detail 2"
+        },
+        {
+          "sha256": "a6b7bcbbb4958cba547080e1fa27eae0681dd4b9df603060fa6ea22daa0211ae",
+          "image": "after/gatehouse/close_clay_1.png",
+          "label": "v0.10 clay / detail 2"
+        },
+        {
+          "sha256": "080a6c4fd95d04ffce64df872d1c290ffb2a3d20c98270c772eddd220f71e762",
+          "image": "before/gatehouse/close_material_0.png",
+          "label": "v0.9 material / detail 1"
+        },
+        {
+          "sha256": "1f2bff302f133001adc258b056f6daf5a3f8f9a36f986a5e33be6489010e9b43",
+          "image": "after/gatehouse/close_material_0.png",
+          "label": "v0.10 material / detail 1"
+        },
+        {
+          "sha256": "b99725b7cc4176dc526f6b311c7c392ea39bf69a155d44ab08d59bac5b6ffaf4",
+          "image": "before/gatehouse/close_material_1.png",
+          "label": "v0.9 material / detail 2"
+        },
+        {
+          "sha256": "e60ca75ae9af25098cc9172efecbd156290c029c08160cbc4d6264229c45f0a0",
+          "image": "after/gatehouse/close_material_1.png",
+          "label": "v0.10 material / detail 2"
+        },
+        {
+          "sha256": "bc0ca386dbc08ffcde8a931944e4c27dbd4390e2a6cadf8f22b1bd305ef6b5fe",
+          "image": "after/exported/gatehouse/close_material_0.png",
+          "label": "GLB reimport / view 1"
+        },
+        {
+          "sha256": "b269e74410f9e4f52de1f3bb9c003bb014da0fad69e7e087c7f8ffbe413135c5",
+          "image": "after/exported/gatehouse/close_material_1.png",
+          "label": "GLB reimport / view 2"
+        }
+      ],
+      "height": 2260,
+      "width": 4096
+    },
+    {
+      "sha256": "d42bd41574e1b19f4e938f3280fa96311c1c08d50ea6d34c30d3c67c70a081d1",
+      "image": "comparison/experiment_normal.png",
+      "inputs": [
+        {
+          "sha256": "65ec1dcb848a6fac7cf0c99baa3b03f665fc6bb5c099cebb4b43aa088f2febd0",
+          "image": "before/smithy/normal_material_0.png",
+          "label": "SMITHY / v0.9 control"
+        },
+        {
+          "sha256": "4c760a03124624fd7abb5de0ae400a7e3514ff33b66e6afe550d28546a8a0536",
+          "image": "pilot/material_only/smithy/normal_material_0.png",
+          "label": "New material / same geometry"
+        },
+        {
+          "sha256": "edb50b476b4cdfff389c4000b99d9b618fd787941ea951825efef2e60a06d700",
+          "image": "pilot/crafted/smithy/normal_material_0.png",
+          "label": "New material / first edge pass"
+        },
+        {
+          "sha256": "c4577f4a62ed1b57c92db7ae5f301faf2f9d2bbc3e2e80e6d879ad17c525c8bc",
+          "image": "before/gatehouse/normal_material_0.png",
+          "label": "GATEHOUSE / v0.9 control"
+        },
+        {
+          "sha256": "102773d58ae6e0e358a4ffba05e6a1ced7c204fb4a5047f03cef2622c504874a",
+          "image": "pilot/material_only/gatehouse/normal_material_0.png",
+          "label": "New material / same geometry"
+        },
+        {
+          "sha256": "d6517a184812fc6939c813e700cbfacf84b7786f5131768c0cb94e2daa2cf7a9",
+          "image": "pilot/crafted/gatehouse/normal_material_0.png",
+          "label": "New material / first edge pass"
+        }
+      ],
+      "height": 1522,
+      "width": 3072
+    }
+  ]
+}

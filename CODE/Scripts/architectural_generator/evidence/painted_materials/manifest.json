@@ -1,0 +1,613 @@
+{
+  "blender": "5.0.1",
+  "source_sha256": {
+    "__init__.py": "44b3d3b5b80928081cd29b975cb5f817c0d02af6acc82b6d406ffbc440dea6c6",
+    "benchmark_construction.py": "cb7f62eca3dc086d51cd844db28e2e62f86af7de978e81d3395d236e5f244343",
+    "benchmark_finish.py": "b218e6ef0627b92261c2d37efba1341281163dd30b371e1fc16b6c5eac281f01",
+    "benchmark_gatehouse.py": "6116e60f7f0e616b2a35f3878e172e99cbaad5ecb5fccc9b8eb3072eb4060530",
+    "blender_backend.py": "88df4b2e03b3d456a071cbb1417e82e00bf835495cb42101326a1f94cb8c3554",
+    "blender_manifest.toml": "fe5956241107d3fc34b52eafcf09cd71cdf15edbc064bc6b2135840d61666f3e",
+    "crafted_geometry.py": "8cb9d2f8f8dd4161fb90511087d433ae1828e92d133ec966665dd90ff6e1ac74",
+    "curve_profiles.py": "563edc2cddcb12b6493ad95d8eefc5772c0b31a95cb42a18e529840aa49623c0",
+    "curve_sweep.py": "a2b3b2ed6106ddd566e53924729ee4b49ea0d3779c4f875e60dfa4bfb3949a74",
+    "engine.py": "c7d32770776717720ce78c7d896e165d40eb6120c9150cc0fcc3cc5d9781d5e6",
+    "facade.py": "44fa1ea715a0b0d5d26b163b532c683586445eb91fc3d9d335e42d0d67f7f020",
+    "function_work.py": "f776360d1911be1d13ed794ddcb8098cc4208118bb406a7eeddd372d0aa7a0f2",
+    "function_yard.py": "a7d05edd0f83d0ae9ec51c026e0556289f075482eb01a24214b3623aead75948",
+    "functional.py": "10f719e1db914f5bfc3e1958fe5c0fd323d2e75d8bd02e71f068117a1ad96baa",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "LICENSE": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+    "materials.py": "119930a294c310950b09b7d6c09cfc2ee3459caf3e59da8276d835e39c78d062",
+    "model.py": "ed5361b518d71b6386ef960cfbc024801ad547eed479557bfdc2703de50c89f1",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "d7108db77e59b057122527d9affdec8cf42fad944350697cdf1c59b61fbdddf7",
+    "surface_atlas.py": "e10bdb2cb3e575de491505b4a1ee50c8136fa3b699dbf927d68fd2002042f5fd",
+    "surface_conditions.py": "e6c18af8118173854f61a20cc7c671bb24f9240f32f7a1fb08a98069ed3110a8",
+    "surface_detail.py": "9eced5bc6dbd7a7521c0a290281e45bd03a3357b514d0072b5d9638572248c35",
+    "surface_patterns.py": "08bd96e520f837bc431db6f07125030ad04a5ca727ec5fc8ea140f93dcc1a677",
+    "surface_pigments.py": "4dd2da250bf96e53af3ad9a0aed9601b2b035de1c14225438ac3a8fdb5900eb4",
+    "world.py": "27c044fd67bfe3f39a8fe450b29373052a2af7a4e537fe15025b6bfa606632c7",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "49db2616e637fb2133e288eaf2f04b995e71109b64bcc99207c03f10dd69b69f"
+  },
+  "smithy_baseline_revision": "1ac5d02",
+  "gatehouse_baseline_revision": "8bb4dd7",
+  "cases": [
+    {
+      "settings": {
+        "seed": 91,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": true,
+        "seed_massing": true
+      },
+      "geometry_hash": "1815c1cdd8ceaa5474883aad3eabe05f0d5bc8cc6ad922ab2a2b2a19c7c7f79c",
+      "metrics": {
+        "objects": 70,
+        "vertices": 10272,
+        "width": 11.929381251335144,
+        "depth": 8.135000228881836,
+        "height": 7.076393961906433,
+        "layers": [
+          "details",
+          "foundation",
+          "roof",
+          "structure",
+          "walls"
+        ]
+      },
+      "before_directory": "evidence/diversity_v12/after",
+      "before": [
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "91/smithy/normal_material_0.png",
+          "sha256": "e45261a495269c3aecf2c52e301d460161305d04778bcb9124dfb05ba7ee43df",
+          "camera_location": [
+            24.985652923583984,
+            -28.026805877685547,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -4.9743242263793945,
+                7.650158405303955
+              ],
+              "y": [
+                -5.019678592681885,
+                4.824228763580322
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "material",
+          "view": 1,
+          "image": "91/smithy/normal_material_1.png",
+          "sha256": "5830c5395fe3ace0736b4bd011b7a2c183e5b06f04feb5b600d4592174b01825",
+          "camera_location": [
+            -16.985652923583984,
+            31.226806640625,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -7.6501569747924805,
+                4.974323272705078
+              ],
+              "y": [
+                -5.300158977508545,
+                3.141251802444458
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        }
+      ],
+      "after": [
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "smithy/normal_material_0.png",
+          "sha256": "c7ad2e2e46703e6aaa93a97643a3f3c0fa6dcb055160b40f7d70a2623fdab720",
+          "camera_location": [
+            24.985652923583984,
+            -28.026805877685547,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -4.9743242263793945,
+                7.650158405303955
+              ],
+              "y": [
+                -5.019678592681885,
+                4.824228763580322
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "material",
+          "view": 1,
+          "image": "smithy/normal_material_1.png",
+          "sha256": "dbd640455faac766e4afdb238ad4e21204f0cbdfa2b95570c8a7977e362082b4",
+          "camera_location": [
+            -16.985652923583984,
+            31.226806640625,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -7.6501569747924805,
+                4.974323272705078
+              ],
+              "y": [
+                -5.300158977508545,
+                3.141251802444458
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        }
+      ],
+      "mapped_meshes": 70,
+      "changed_basecolor_bindings": [
+        "world_lowmark.forge_hall.anvil_stump",
+        "world_lowmark.forge_hall.bellows",
+        "world_lowmark.forge_hall.coal_bin",
+        "world_lowmark.forge_hall.Continuous roof deck",
+        "world_lowmark.forge_hall.facade_timber",
+        "world_lowmark.forge_hall.Roof edge fascia",
+        "world_lowmark.forge_hall.smithy.bay_post_0",
+        "world_lowmark.forge_hall.smithy.bay_post_1",
+        "world_lowmark.forge_hall.smithy.primary_end_bent",
+        "world_lowmark.forge_hall.smithy.tie_knees.front",
+        "world_lowmark.forge_hall.smithy.tie_knees.rear",
+        "world_lowmark.forge_hall.Supported roof rafters",
+        "world_lowmark.smithy_stock_range.Continuous roof deck",
+        "world_lowmark.smithy_stock_range.facade_timber",
+        "world_lowmark.smithy_stock_range.Roof edge fascia",
+        "world_lowmark.smithy_stock_range.smithy.repair_wheel",
+        "world_lowmark.smithy_stock_range.smithy.stock_bench",
+        "world_lowmark.smithy_stock_range.smithy.stock_bents",
+        "world_lowmark.smithy_stock_range.Supported roof rafters"
+      ],
+      "material_export": {
+        "materials_with_maps": 14,
+        "map_bindings": {
+          "base": 14,
+          "normal": 14,
+          "orm": 14
+        },
+        "embedded_image_count": 35,
+        "embedded_png_sha256": [
+          "c6b10be2a70ba0662a75aaf9a2ffe15f352943869b78837391665eccfa856267",
+          "5cb4d83ac869a5808b40b320bf55fff207bfbca03f6b8326be4d062c063a974e",
+          "8acf9ae6298a397209514fb7a50c753fbc9895d4d8bfcd511dffa24bb55bad0d",
+          "02668fc450f8793f4dfcae2554285eb9b8dd5a71fff82076d9c8fbda4709ea25",
+          "63bd170e4d95330e7357f2672aaa78ab21b342e4a5beb55eab7bcfcacf6f37f1",
+          "5c35c3e90468ae2ba60b41821ba4efefc76cc9280c34ad8e89a4820357367a10",
+          "ac63c26b43d58cb9ca5f427efc0b88fa5230a39f5a0cab0c6eaea4c1bd754708",
+          "2124366ac7806ab9028e1bffd35df46b4f9af7256872fba51ccf2966a3270472",
+          "fc837c933ec0d4b31dc73930f6cd474bc6056b2ca9a5992ed1563a90e48def5b",
+          "83560a19a32f349614153484e302b9a64c083e3f482312e7a6c55c0cf79ec2ad",
+          "06c7266ff0c8fae535ff73579a7954d4f3288738816d83798446d39c09c5b1a5",
+          "3112a6e4c3f4f46c835a60612610b9d0068be241ecc70d18699c194d28eca752",
+          "1e41ff6e92d60a5e534e49f520a907eac6a7bbab92fb4a476f9c597666b28764",
+          "572542bec253c28984c9121cfbc38dadf6cd867f3d3422360fff5a18dbcbec12",
+          "38b1c0468666d99fd67724ec784f121848766b894b47b45bedfe1c699171472b",
+          "bae76f8d08afb6307a7e4da8163f0467591e665047b2d11747cd207824fce140",
+          "500bfdc8b5f4c2649cf295bd0c46e23a9553a6ef57282ceca3e2f5bb1fbc37d8",
+          "8336d0743e88b73daf5bfb0806b8dd2a55f88e112702cd1d36ba7d794b2c9e1a",
+          "b0e788420a402017efa8f2fa5b3cedd98e6abc4caa8fe60e860c41569d93d793",
+          "b03d50a72c32e354ad104339d0d7f2256f098ade63c4a78c0ed858cb38f79bcf",
+          "dc94b1e12b252545c2045ff1858c0d7340692370cfdfcb8c9102e952fec37189",
+          "b0fb341b1adf61bd6859329f64589b03f024abc2ec2264e0269134f979d81967",
+          "6420a9ac69a57d682a90c6672a2a65af1d83d5f42dd52de9b74743bf31f9b897",
+          "5f46fbc882e80ef6c8772b6879b1242e2c43436edafd95301bf0e0e427334e46",
+          "e64c6dc76d9a6555601ffa67b8de1d71aaf14eb9e5b1a6a1c6823a0505dd9182",
+          "a6cec0b442eeda1546829f9efc2d2575e120d56757cfa9f4b5c1fc60dc220a7d",
+          "ea7334ff3242c9c1fe1f052a6adeb2d123d366f3363b8efb379b66ed5fd88dca",
+          "f8453aa2241219d6ed5f7e59c1086c97b7baece05a3ed8773605f6514779a394",
+          "c22aaf71f4c6817b6306203fadc211b99b77f840e243844cc71d717b977ba0c5",
+          "92a70cd331e3043fa038c7335b9fa96ce8c0f5247d4855bace7e5cdc008d706b",
+          "293010778ca219d552f1397eaad126b171da319fc5e34c7ad90fcb0861762d66",
+          "6a3826bd2a411b7cf1c1c0487e810556d75cdc9b086df67b7e064335ca604af6",
+          "ccd102cfb2909d0bfa0f2bca4aba95ed631cf73d793bfdc662293d9b4ac4f4b1",
+          "894843f47828306a2d7bfdc814d65d5652df41ad53a54e779be89b6e18ef802d",
+          "3eb1851fc1ed631ab2cb020b8e101cbd13a77751319c971137af1f257513c99d"
+        ]
+      },
+      "glb_bytes": 4262100,
+      "baseline_glb_bytes": 4156292,
+      "reimport": {
+        "imported_meshes": 70,
+        "meshes_with_surface_uvs": 70,
+        "reimported_pixel_map_checks": 4,
+        "distinct_source_pixel_signatures": 3
+      },
+      "approach_pixels_with_rgb_delta_at_least_4": 20115
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "GATEHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": true,
+        "seed_massing": true
+      },
+      "geometry_hash": "5e503eb4365bee229ae42c1225c417b4fbbd136067c3b1be550bb35dea979d9c",
+      "metrics": {
+        "objects": 149,
+        "vertices": 47525,
+        "width": 21.226503133773804,
+        "depth": 15.399999618530273,
+        "height": 12.527264475822449,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "before_directory": "evidence/masonry_stock/after",
+      "before": [
+        {
+          "function": "GATEHOUSE",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "gatehouse/normal_material_0.png",
+          "sha256": "59836b9f1aad7a54fab1b5357b284449f44c4c1284e373826c5ddaf5bb65d476",
+          "camera_location": [
+            38.32919692993164,
+            -39.95886993408203,
+            31.143360137939453
+          ],
+          "camera_target": [
+            7.900000095367432,
+            3.0,
+            6.800000190734863
+          ],
+          "ortho_scale": 38.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -10.371673583984375,
+                8.512018203735352
+              ],
+              "y": [
+                -10.400906562805176,
+                4.976620674133301
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -19.0,
+                19.0
+              ],
+              "y": [
+                -13.0625,
+                13.0625
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "normal",
+          "finish": "material",
+          "view": 1,
+          "image": "gatehouse/normal_material_1.png",
+          "sha256": "a1906cb41c52d60071b0990a6a4c14c6865b39165c8331a8209f27e685d95002",
+          "camera_location": [
+            -22.529197692871094,
+            45.95886993408203,
+            31.143360137939453
+          ],
+          "camera_target": [
+            7.900000095367432,
+            3.0,
+            6.800000190734863
+          ],
+          "ortho_scale": 38.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -8.512017250061035,
+                10.371673583984375
+              ],
+              "y": [
+                -9.533100128173828,
+                8.38917350769043
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -19.0,
+                19.0
+              ],
+              "y": [
+                -13.0625,
+                13.0625
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        }
+      ],
+      "after": [
+        {
+          "function": "GATEHOUSE",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "gatehouse/normal_material_0.png",
+          "sha256": "4d39f9f8ef8ff5bb10a62b1f5ba53f26ce0828febd4608f19d8d7c84d53e1a11",
+          "camera_location": [
+            38.32919692993164,
+            -39.95886993408203,
+            31.143360137939453
+          ],
+          "camera_target": [
+            7.900000095367432,
+            3.0,
+            6.800000190734863
+          ],
+          "ortho_scale": 38.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -10.371673583984375,
+                8.512018203735352
+              ],
+              "y": [
+                -10.400906562805176,
+                4.976620674133301
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -19.0,
+                19.0
+              ],
+              "y": [
+                -13.0625,
+                13.0625
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "normal",
+          "finish": "material",
+          "view": 1,
+          "image": "gatehouse/normal_material_1.png",
+          "sha256": "dbabce6cee70d626857bdb1c640c99ce7b86635c1e8d294d090797a0c0c99c45",
+          "camera_location": [
+            -22.529197692871094,
+            45.95886993408203,
+            31.143360137939453
+          ],
+          "camera_target": [
+            7.900000095367432,
+            3.0,
+            6.800000190734863
+          ],
+          "ortho_scale": 38.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -8.512017250061035,
+                10.371673583984375
+              ],
+              "y": [
+                -9.533100128173828,
+                8.38917350769043
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -19.0,
+                19.0
+              ],
+              "y": [
+                -13.0625,
+                13.0625
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        }
+      ],
+      "mapped_meshes": 146,
+      "changed_basecolor_bindings": [
+        "world_thornfell.gatehouse_east_watchtower.facade_masonry_skin",
+        "world_thornfell.gatehouse_portal.facade_masonry_skin",
+        "world_thornfell.gatehouse_west_watchtower.facade_masonry_skin"
+      ],
+      "material_export": {
+        "materials_with_maps": 10,
+        "map_bindings": {
+          "base": 10,
+          "normal": 10,
+          "orm": 10
+        },
+        "embedded_image_count": 24,
+        "embedded_png_sha256": [
+          "c08114c8a09041302b927bebf65c1c5638ba249f704a4b58633dff2d832fb1f3",
+          "03ae5386da10e4f82a28b2f6a0bb6161aef87ed948a192708231c638b80c07a2",
+          "5051ce24ec1b04c5aeeb3c2d7d68a0be7d8d6cfea20ae4ce89db3af0536eb6de",
+          "02668fc450f8793f4dfcae2554285eb9b8dd5a71fff82076d9c8fbda4709ea25",
+          "643eb8f6d579b394aaf15cf49d4bbc5a0a516ddf736fb9758324bfd103e12749",
+          "8982fc80ac5212762f4427c7221ace3227d6847ec6327d0c2022463bf3af7e0f",
+          "5afd8adb5355872c88cbe4862eb169640a020711b5bf60bfa521bbb24bb4162b",
+          "551af5ed2d235dd15db384617a055cb37f77e980bee5ef2aaa18108dad570765",
+          "3112a6e4c3f4f46c835a60612610b9d0068be241ecc70d18699c194d28eca752",
+          "90c974067a7ff32cb957389eb06d5d5ae7e61c034f71891f1acbfbee103aac7e",
+          "6766e19b4e9ae12ac20b2f2f2484174ba5b6bee4b81e22cc1dde800cb7cf7ebf",
+          "c6b10be2a70ba0662a75aaf9a2ffe15f352943869b78837391665eccfa856267",
+          "be969dd7001f1271656ec96eecf3f23acd2c8a16425e6602dbc858477e88fbb3",
+          "ad5b2309d01383c35f70abc62002b561c7934590682a81aefcbc7d47f8ab64fb",
+          "eedca51f218c898425b3f41d3d38a810f7e3b78a0f963c8d5591396e25094e77",
+          "e8c13d6069c2e168346bdbfdf8473d816eebd9d2899c8ab24554dd57dffdd554",
+          "53dd05a810591398dc7fbd6f450e96fd8ed5e04be91102a8615eec8d88a2d709",
+          "3728421ee681fbaf40ae12fba69940618be17332d0cd6eda3ed97b3c7319dc30",
+          "01d6d1535cbf8b5065d5057013f7ad6d1cf376df7cc0d416eb2ec46207865654",
+          "34c24ceae904fe348e55da488ff3b1a9d29b656ebb10f2aed8e3fbff0bd51815",
+          "db54259fa35bd207c5d1af7ee207d0579493cd7ce34c9913efad1dabfb2eb08b",
+          "7d6555a30f4c426a7c7bfaf04e76ad39933262ec6ebadb413744a5f0dd6fdc8a",
+          "0fdbb4dfcb7428755d2236d7422b2d698b7a380ba12edb40bd3238ccdb1ed257",
+          "84a1d568d82d97b5e76d45abf9fb0cbd0303a0f6b5b70058e73de1bb886879a7"
+        ]
+      },
+      "glb_bytes": 16508572,
+      "baseline_glb_bytes": 16352616,
+      "reimport": {
+        "imported_meshes": 149,
+        "meshes_with_surface_uvs": 146,
+        "reimported_pixel_map_checks": 4,
+        "distinct_source_pixel_signatures": 3
+      },
+      "approach_pixels_with_rgb_delta_at_least_4": 19076
+    }
+  ],
+  "comparison": {
+    "image": "comparison.png",
+    "sha256": "d8179af3a845d13655ed8b147d465b7b94f901b05ace931fff29281f41a23742"
+  }
+}

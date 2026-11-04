@@ -1,0 +1,186 @@
+{
+  "blender": "5.0.1",
+  "source_sha256": {
+    "benchmark_construction.py": "4ec72e47bdd9f1f867faa02abf139c03d5920fb3512b5e0a762638a7b312db36",
+    "benchmark_gatehouse.py": "162266f4d8551b73417e49a76ade3c9da8c399be93ce538c8185e21f7e8c3673",
+    "blender_backend.py": "f6dae849a7ad4d19c04c181e47c5ef61628f17646e2fc1ca985dd27aac0e5edc",
+    "engine.py": "89979c9f9012a50b9155f66f7cd56c8796bd7fed0271802dc996bdf5b2a6580e",
+    "facade.py": "44a1d926cc16496917fc18be7b2c4385193eea55b9377e37c19c935c1c3bee0a",
+    "functional.py": "10f719e1db914f5bfc3e1958fe5c0fd323d2e75d8bd02e71f068117a1ad96baa",
+    "function_work.py": "410de667f732496f01cb8b13b58e8ec61abbee567748f6f4a6c5d2d84e394add",
+    "function_yard.py": "a7d05edd0f83d0ae9ec51c026e0556289f075482eb01a24214b3623aead75948",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "f5cbe097db77cb9bcad2560b6289e394e6ed5ff93fc377aa288405cfd0b22bdb",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "c75db94854a1db0bf777a6433bd8067e4031194834c4f8048887f1959db494f4",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126",
+    "__init__.py": "12f364b5ab3d06c8cdc3e46949d2e444ce56eec985cbb4b1bc2ddd91208ebb58"
+  },
+  "cases": [
+    {
+      "function": "SMITHY",
+      "region": "LOWMARK",
+      "clearance_rays": 21,
+      "stair_headroom_rays": 0,
+      "exhaust_path_rays": 15,
+      "glass_structure_overlaps": 0,
+      "glazing_opaque_objects_tested": 23,
+      "source_geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367"
+    },
+    {
+      "function": "SMITHY",
+      "region": "THORNFELL",
+      "clearance_rays": 21,
+      "stair_headroom_rays": 0,
+      "exhaust_path_rays": 15,
+      "glass_structure_overlaps": 0,
+      "glazing_opaque_objects_tested": 14,
+      "source_geometry_hash": "d9b06566648c427f7c69479006b8741fe55350b6eda72f306a724f5ac14ab1cd"
+    },
+    {
+      "function": "SMITHY",
+      "region": "MIRE",
+      "clearance_rays": 42,
+      "stair_headroom_rays": 0,
+      "exhaust_path_rays": 15,
+      "glass_structure_overlaps": 0,
+      "glazing_opaque_objects_tested": 12,
+      "source_geometry_hash": "60bfb26ebec22a459fbaefe65c3c417a9bdabbc7c84e6afa9737f0ef5687fc5f"
+    },
+    {
+      "function": "SMITHY",
+      "region": "EMBERHOLT",
+      "clearance_rays": 24,
+      "stair_headroom_rays": 0,
+      "exhaust_path_rays": 15,
+      "glass_structure_overlaps": 0,
+      "glazing_opaque_objects_tested": 17,
+      "source_geometry_hash": "71bd22f98a68ab6518d106b4a322b31ca2ad0d34a4203414be6d1de74202e0db"
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "LOWMARK",
+      "clearance_rays": 72,
+      "stair_headroom_rays": 0,
+      "exhaust_path_rays": 0,
+      "glass_structure_overlaps": 0,
+      "glazing_opaque_objects_tested": 17,
+      "source_geometry_hash": "33c5d44800967cba341f609eb6097e26a765bcff698f1484065b69565860caef"
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "THORNFELL",
+      "clearance_rays": 72,
+      "stair_headroom_rays": 0,
+      "exhaust_path_rays": 0,
+      "glass_structure_overlaps": 0,
+      "glazing_opaque_objects_tested": 18,
+      "source_geometry_hash": "910a8f56d0ca50dfb696d217ab4319e8b6dfee02215633d356364de5756719f4"
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "MIRE",
+      "clearance_rays": 87,
+      "stair_headroom_rays": 0,
+      "exhaust_path_rays": 0,
+      "glass_structure_overlaps": 0,
+      "glazing_opaque_objects_tested": 15,
+      "source_geometry_hash": "ccf204846a01de21bf39adf3d4f7b910350783fb7f13e22c6b3e075a700471e0"
+    },
+    {
+      "function": "MARKET_HALL",
+      "region": "EMBERHOLT",
+      "clearance_rays": 69,
+      "stair_headroom_rays": 0,
+      "exhaust_path_rays": 0,
+      "glass_structure_overlaps": 0,
+      "glazing_opaque_objects_tested": 16,
+      "source_geometry_hash": "fa7c0c1522debb15f04e3066ee7c1a40bc8a8c15a1a6e3347b10117b16b53a3a"
+    },
+    {
+      "function": "STABLE",
+      "region": "LOWMARK",
+      "clearance_rays": 144,
+      "stair_headroom_rays": 0,
+      "exhaust_path_rays": 0,
+      "glass_structure_overlaps": 0,
+      "glazing_opaque_objects_tested": 154,
+      "source_geometry_hash": "eb4cd535d00d14035d4306c99935da870600451e712b8710ca6c2b38bf17314c"
+    },
+    {
+      "function": "STABLE",
+      "region": "THORNFELL",
+      "clearance_rays": 144,
+      "stair_headroom_rays": 0,
+      "exhaust_path_rays": 0,
+      "glass_structure_overlaps": 0,
+      "glazing_opaque_objects_tested": 155,
+      "source_geometry_hash": "155bf443b230da4ed1f0f6aad09777c55097c1212bbd314c8b8a637ab395fe14"
+    },
+    {
+      "function": "STABLE",
+      "region": "MIRE",
+      "clearance_rays": 144,
+      "stair_headroom_rays": 0,
+      "exhaust_path_rays": 0,
+      "glass_structure_overlaps": 0,
+      "glazing_opaque_objects_tested": 148,
+      "source_geometry_hash": "913c1d5e5e149f6b9cbc53a91f9a31e409bdfdff34f492a1b8eb22362c168baf"
+    },
+    {
+      "function": "STABLE",
+      "region": "EMBERHOLT",
+      "clearance_rays": 144,
+      "stair_headroom_rays": 0,
+      "exhaust_path_rays": 0,
+      "glass_structure_overlaps": 0,
+      "glazing_opaque_objects_tested": 153,
+      "source_geometry_hash": "40e429e1d32bafe76c9ac714feb256a3af87dec3b4727efe20fffdfb5073d305"
+    },
+    {
+      "function": "GATEHOUSE",
+      "region": "LOWMARK",
+      "clearance_rays": 12,
+      "stair_headroom_rays": 32,
+      "exhaust_path_rays": 0,
+      "glass_structure_overlaps": 0,
+      "glazing_opaque_objects_tested": 73,
+      "source_geometry_hash": "46d1e63dd38454ccd48e7e92c25d53c491ea352590b4ac129a91629486641b7e"
+    },
+    {
+      "function": "GATEHOUSE",
+      "region": "THORNFELL",
+      "clearance_rays": 12,
+      "stair_headroom_rays": 32,
+      "exhaust_path_rays": 0,
+      "glass_structure_overlaps": 0,
+      "glazing_opaque_objects_tested": 63,
+      "source_geometry_hash": "097f2e96a40a78a7227c4ced649359d1b4130a579fe8391d3487944c26d4ef1e"
+    },
+    {
+      "function": "GATEHOUSE",
+      "region": "MIRE",
+      "clearance_rays": 36,
+      "stair_headroom_rays": 32,
+      "exhaust_path_rays": 0,
+      "glass_structure_overlaps": 0,
+      "glazing_opaque_objects_tested": 73,
+      "source_geometry_hash": "ef01dbba36f56f2454087a849c30309d56a07221f87b6412d61aa375ea839200"
+    },
+    {
+      "function": "GATEHOUSE",
+      "region": "EMBERHOLT",
+      "clearance_rays": 12,
+      "stair_headroom_rays": 32,
+      "exhaust_path_rays": 0,
+      "glass_structure_overlaps": 0,
+      "glazing_opaque_objects_tested": 86,
+      "source_geometry_hash": "d01c55dc6b97c92a71435e7cf9687510ebb1243e1ffad06642779de39b81a08f"
+    }
+  ],
+  "scope": "Actual BVH clearance rays include exported wall/floor proxies. Glazing intersections include structure and all integral functional fixtures, including detail-layer pieces. Closed service door leaves are omitted from circulation probes; this is not runtime traversal or exhaustive solid intersection."
+}

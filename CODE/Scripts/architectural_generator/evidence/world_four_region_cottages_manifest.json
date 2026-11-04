@@ -1,0 +1,425 @@
+{
+  "blender_version": "5.0.1",
+  "blend_sha256": "f91ba70593afef050d086142d8806ffaade6301afc36d86ff94f282b9e8a3cca",
+  "source_hashes": {
+    "engine.py": "547d9b0e28252aa0fe7306947cbb525c54836eb9eeb7887bab4803293205b8ca",
+    "model.py": "d52927e24f0b093dabdd9affc071a111ef4b82db052089b04bb44052f53e43ce",
+    "facade.py": "9639904540df538372e7883f4cd363baad0fd6c4edf0131b88233c5e7e0dc1c4",
+    "roof.py": "2932203eb3675bb9f3c0d9a346e6d655d65bc001ec144c7c4297984a56e50880",
+    "world.py": "16a255a3873ae6cf5b4423248a7032114040a5a02aa28c243b0d31f352925565",
+    "world_lowmark_thornfell.py": "9c1e4a5c523d18a4a5498fdd12ef27f95163b9e49284e1438c874f24f0be600e",
+    "world_mire.py": "3be11f40c80893ded91cf61db4ca194a5a671632c9a71cecb56d87582554e6b7",
+    "world_emberholt.py": "3f8c474a4f1333795c07c3f5428624a35e7e2fcbf8bbb89f0b608a1eb52e5fbf",
+    "blender_backend.py": "4c28a3b03c538b81be3b4a95319396bd284dd852f0711426fa75530dd74ed01e",
+    "render_world_evidence.py": "f4e0e04d95f807b85ee69d020eebf54fdb141e77180c14001e97f8629e99af49"
+  },
+  "buildings": [
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "collection": "Caelmor Building",
+      "bounds": [
+        [
+          -0.48500001430511475,
+          9.13860034942627
+        ],
+        [
+          -1.4582217931747437,
+          4.920199871063232
+        ],
+        [
+          -0.06173059344291687,
+          4.743199825286865
+        ]
+      ],
+      "backend_metrics": {
+        "objects": 42,
+        "vertices": 5798,
+        "width": 9.623600363731384,
+        "depth": 6.378421664237976,
+        "height": 4.804930418729782,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "geometry_hash": "f393f00e58af6a0272d37e2959560b287c5a428035064353bb3c5dccd6eeef79",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 42,
+        "vertices": 5798,
+        "triangles": 8896,
+        "materials": 12,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "building_type": "COTTAGE",
+        "geometry_mode": "SOLID",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "lowmark_main_hall",
+            "bounds": [
+              0,
+              0,
+              5.9136,
+              4.4352
+            ],
+            "base": 0.45,
+            "eave": 3.25,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.28,
+            "vertices": 4046,
+            "triangles": 6172
+          },
+          {
+            "key": "lowmark_service_wing",
+            "bounds": [
+              5.9136,
+              -0.532224,
+              8.7136,
+              2.6611199999999995
+            ],
+            "base": 0.45,
+            "eave": 2.746,
+            "valid": true,
+            "roof": "SHED",
+            "function": "COTTAGE",
+            "wall_thickness": 0.28,
+            "vertices": 1712,
+            "triangles": 2664
+          }
+        ],
+        "geometry_hash": "f393f00e58af6a0272d37e2959560b287c5a428035064353bb3c5dccd6eeef79",
+        "tool_revision": "0.4.0"
+      }
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "collection": "Caelmor Building.001",
+      "bounds": [
+        [
+          -0.24500000476837158,
+          8.995759963989258
+        ],
+        [
+          -0.8399999737739563,
+          6.866681098937988
+        ],
+        [
+          0.0,
+          8.081999778747559
+        ]
+      ],
+      "backend_metrics": {
+        "objects": 52,
+        "vertices": 8724,
+        "width": 9.24075996875763,
+        "depth": 7.706681072711945,
+        "height": 8.081999778747559,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "geometry_hash": "bcdb12d6f30cd10e054c79f183dd0943c0f9f890ab670870ca385a3a1ac66826",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 52,
+        "vertices": 8724,
+        "triangles": 13108,
+        "materials": 10,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "building_type": "COTTAGE",
+        "geometry_mode": "SOLID",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "thornfell_stone_hall",
+            "bounds": [
+              0,
+              0,
+              5.76576,
+              6.6000000000000005
+            ],
+            "base": 0.5,
+            "eave": 3.1319999999999997,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.5,
+            "vertices": 5768,
+            "triangles": 8668
+          },
+          {
+            "key": "thornfell_lower_stone_range",
+            "bounds": [
+              5.76576,
+              1.3200000000000003,
+              8.76576,
+              4.752000000000001
+            ],
+            "base": 0.9199999999999999,
+            "eave": 2.9729599999999996,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.5,
+            "vertices": 2956,
+            "triangles": 4440
+          }
+        ],
+        "geometry_hash": "bcdb12d6f30cd10e054c79f183dd0943c0f9f890ab670870ca385a3a1ac66826",
+        "tool_revision": "0.4.0"
+      }
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "MIRE",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "collection": "Caelmor Building.002",
+      "bounds": [
+        [
+          -0.7450000047683716,
+          7.362599849700928
+        ],
+        [
+          -4.5125627517700195,
+          5.60260009765625
+        ],
+        [
+          -0.05202401429414749,
+          7.811863899230957
+        ]
+      ],
+      "backend_metrics": {
+        "objects": 28,
+        "vertices": 8068,
+        "width": 8.1075998544693,
+        "depth": 10.11516284942627,
+        "height": 7.8638879135251045,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "geometry_hash": "7db8392b799b728ab80f193826f6cf5783afc858b70b6912c7abbd90848ea910",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 28,
+        "vertices": 8068,
+        "triangles": 12224,
+        "materials": 9,
+        "region": "MIRE",
+        "context": "SORROWMERE",
+        "building_type": "COTTAGE",
+        "geometry_mode": "SOLID",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "mire_longhouse",
+            "bounds": [
+              0.0,
+              0.0,
+              6.6175999999999995,
+              4.857600000000001
+            ],
+            "base": 1.82,
+            "eave": 4.62,
+            "valid": true,
+            "roof": "BOW",
+            "function": "COTTAGE",
+            "wall_thickness": 0.18,
+            "vertices": 7756,
+            "triangles": 11756
+          }
+        ],
+        "geometry_hash": "7db8392b799b728ab80f193826f6cf5783afc858b70b6912c7abbd90848ea910",
+        "tool_revision": "0.4.0"
+      }
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "LOW",
+        "window_density": 1.0,
+        "region": "EMBERHOLT",
+        "context": "AUTO",
+        "wealth": "MODEST",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "SOLID",
+        "world_aware": true
+      },
+      "collection": "Caelmor Building.003",
+      "bounds": [
+        [
+          -0.8687626719474792,
+          12.868762969970703
+        ],
+        [
+          -0.36000001430511475,
+          11.010000228881836
+        ],
+        [
+          0.0,
+          8.34000015258789
+        ]
+      ],
+      "backend_metrics": {
+        "objects": 20,
+        "vertices": 8848,
+        "width": 13.737525641918182,
+        "depth": 11.37000024318695,
+        "height": 8.34000015258789,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "geometry_hash": "dcc518fd5ea4ac23458a67b2dd61a65f89c264b99881fd1a2a1f4bf85054a4c6",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 20,
+        "vertices": 8848,
+        "triangles": 13288,
+        "materials": 5,
+        "region": "EMBERHOLT",
+        "context": "EMBERHOLD",
+        "building_type": "COTTAGE",
+        "geometry_mode": "SOLID",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "emberholt_main_block",
+            "bounds": [
+              0,
+              0,
+              12.0,
+              10.8
+            ],
+            "base": 0.48,
+            "eave": 6.08,
+            "valid": true,
+            "roof": "TERRACE",
+            "function": "COTTAGE",
+            "wall_thickness": 0.7,
+            "vertices": 8848,
+            "triangles": 13288
+          }
+        ],
+        "geometry_hash": "dcc518fd5ea4ac23458a67b2dd61a65f89c264b99881fd1a2a1f4bf85054a4c6",
+        "tool_revision": "0.4.0"
+      }
+    }
+  ],
+  "scene": "Four editable, neutral-clay cottages; each collection has world settings metadata."
+}

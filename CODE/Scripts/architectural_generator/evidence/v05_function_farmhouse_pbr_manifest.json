@@ -1,0 +1,282 @@
+{
+  "renderer": "5.0.1",
+  "source_hashes": {
+    "__init__.py": "7fa1a0ce9871a3c9e7faebe021fb530bdaff3f31175cc0c9528176b3f03d488e",
+    "blender_backend.py": "ccd4ce109d97eb98df309fcad795398f96eb55c02a1b012fc969a45deca6bdcc",
+    "engine.py": "11d4a8b1868afc1170a34a03d0b294b85d09f7c344153cb24074f5d2acce0ed7",
+    "facade.py": "f989e3a56624f89a034701e275beb6e10d7bfd52bb7a14b0ffad23a235708f4d",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "world.py": "8da06e3a1242be8c2ac21bca994d1805a36f399425ab585befdaf386346b65ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81"
+  },
+  "records": [
+    {
+      "settings": {
+        "seed": 91,
+        "function": "FARMHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "slot": "ESTABLISHED",
+      "view": 0,
+      "geometry_hash": "4d4394a45e654924bb8e7a5526bf640dc942389e71e8679b1cac598973f1c907",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 61,
+        "vertices": 17895,
+        "triangles": 21359,
+        "materials": 12,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "building_type": "FARMHOUSE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "lowmark_main_hall",
+            "bounds": [
+              0,
+              0,
+              10.5,
+              7.0
+            ],
+            "base": 0.45,
+            "eave": 6.05,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "FARMHOUSE",
+            "wall_thickness": 0.28,
+            "vertices": 11461,
+            "triangles": 13381
+          },
+          {
+            "key": "lowmark_service_wing",
+            "bounds": [
+              11.35,
+              0.56,
+              15.969999999999999,
+              5.459999999999999
+            ],
+            "base": 0.45,
+            "eave": 2.95,
+            "valid": true,
+            "roof": "SHED",
+            "function": "COTTAGE",
+            "wall_thickness": 0.28,
+            "vertices": 3324,
+            "triangles": 3902
+          },
+          {
+            "key": "lowmark_household_store",
+            "bounds": [
+              16.869999999999997,
+              1.3099999999999998,
+              19.869999999999997,
+              4.71
+            ],
+            "base": 0.45,
+            "eave": 2.634,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "WAREHOUSE",
+            "wall_thickness": 0.28,
+            "vertices": 3070,
+            "triangles": 4016
+          }
+        ],
+        "geometry_hash": "4d4394a45e654924bb8e7a5526bf640dc942389e71e8679b1cac598973f1c907",
+        "tool_revision": "0.5.0"
+      },
+      "backend": {
+        "objects": 61,
+        "vertices": 17895,
+        "width": 20.720000624656677,
+        "depth": 8.32500010728836,
+        "height": 8.381773203611374,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "image": "v05_function_farmhouse_pbr_lowmark_established_0.png",
+      "image_sha256": "7e5fe0bd9054723c661b065194c825c2289ecef45c2c614c075b7d177a8b9561",
+      "ortho_scale": 24.777215576171876,
+      "camera_direction": [
+        0.85,
+        -1.2,
+        0.68
+      ],
+      "elapsed_seconds": 4.166
+    },
+    {
+      "settings": {
+        "seed": 91,
+        "function": "FARMHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "slot": "ESTABLISHED",
+      "view": 1,
+      "geometry_hash": "4d4394a45e654924bb8e7a5526bf640dc942389e71e8679b1cac598973f1c907",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 61,
+        "vertices": 17895,
+        "triangles": 21359,
+        "materials": 12,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "building_type": "FARMHOUSE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "lowmark_main_hall",
+            "bounds": [
+              0,
+              0,
+              10.5,
+              7.0
+            ],
+            "base": 0.45,
+            "eave": 6.05,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "FARMHOUSE",
+            "wall_thickness": 0.28,
+            "vertices": 11461,
+            "triangles": 13381
+          },
+          {
+            "key": "lowmark_service_wing",
+            "bounds": [
+              11.35,
+              0.56,
+              15.969999999999999,
+              5.459999999999999
+            ],
+            "base": 0.45,
+            "eave": 2.95,
+            "valid": true,
+            "roof": "SHED",
+            "function": "COTTAGE",
+            "wall_thickness": 0.28,
+            "vertices": 3324,
+            "triangles": 3902
+          },
+          {
+            "key": "lowmark_household_store",
+            "bounds": [
+              16.869999999999997,
+              1.3099999999999998,
+              19.869999999999997,
+              4.71
+            ],
+            "base": 0.45,
+            "eave": 2.634,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "WAREHOUSE",
+            "wall_thickness": 0.28,
+            "vertices": 3070,
+            "triangles": 4016
+          }
+        ],
+        "geometry_hash": "4d4394a45e654924bb8e7a5526bf640dc942389e71e8679b1cac598973f1c907",
+        "tool_revision": "0.5.0"
+      },
+      "backend": {
+        "objects": 61,
+        "vertices": 17895,
+        "width": 20.720000624656677,
+        "depth": 8.32500010728836,
+        "height": 8.381773203611374,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "image": "v05_function_farmhouse_pbr_lowmark_established_1.png",
+      "image_sha256": "98f05eed36638452f2b44593c52628674bee2d517805390a97aaef30456b1450",
+      "ortho_scale": 24.777215576171876,
+      "camera_direction": [
+        -0.85,
+        1.2,
+        0.68
+      ],
+      "elapsed_seconds": 4.335
+    }
+  ],
+  "study": "wealth",
+  "view_selection": "two opposed views",
+  "scope": "Matched parameters, common projected orthographic scale per region; see records for view selection.",
+  "prior_source_snapshots": [
+    {
+      "__init__.py": "7fa1a0ce9871a3c9e7faebe021fb530bdaff3f31175cc0c9528176b3f03d488e",
+      "blender_backend.py": "ccd4ce109d97eb98df309fcad795398f96eb55c02a1b012fc969a45deca6bdcc",
+      "engine.py": "11d4a8b1868afc1170a34a03d0b294b85d09f7c344153cb24074f5d2acce0ed7",
+      "facade.py": "446a8cd22056287eb27228d65b95fe60d15b3535a4d057d59c8c690f23ffac09",
+      "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+      "materials.py": "c3f524bbcbfe54f828c209c16bfd7c219202df1e4970508e3042f38b1bf2e5cc",
+      "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+      "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+      "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+      "world.py": "6976fae093e032145de6b3e05d06caeaba7a5c9c8cc9d0dd9b50d3f7ed7e6195",
+      "world_lowmark_thornfell.py": "5ca9b76d0ed57d4faa18dd33f11c5d736f50fb71e63347df13bbb984ae2c2bb2"
+    }
+  ]
+}

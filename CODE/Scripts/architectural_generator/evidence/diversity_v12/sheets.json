@@ -1,0 +1,182 @@
+{
+  "before": "c43e1e9",
+  "sheets": [
+    {
+      "inputs": [
+        {
+          "image": "before/7/smithy/normal_clay_0.png",
+          "sha256": "29a4dc003e08e87b9de64a2aa0ed4161a69621983bf456ef296a82ec4d081b55"
+        },
+        {
+          "image": "after/7/smithy/normal_clay_0.png",
+          "sha256": "a86d2ff20c184ac308d76c2fe8b7e5ff7513a64259aea6c967d515ddb0255ca3"
+        },
+        {
+          "image": "before/7/smithy/normal_material_0.png",
+          "sha256": "8d73154cb7462ccff32a6548c56dceaaa6a8400d8afeded4c04908a18fb7ec47"
+        },
+        {
+          "image": "after/7/smithy/normal_material_0.png",
+          "sha256": "b1f3b766b32fb22e23c626fb3e4e7b8cc810364a4e8502aacde50961e6b35f4f"
+        },
+        {
+          "image": "before/17/smithy/normal_clay_0.png",
+          "sha256": "59922ee7e2bcf18625a14ad6cc642612dbae786ae9d0f9441e3db5f59576149d"
+        },
+        {
+          "image": "after/17/smithy/normal_clay_0.png",
+          "sha256": "d99fc30acdd4b4b5b63eceb6c1d0687b2f02597c7258d714fb3e7a09e2332a60"
+        },
+        {
+          "image": "before/17/smithy/normal_material_0.png",
+          "sha256": "4a716e0164a0fafd13ce784611ff10479b3b845d183f84a445c28069dd04515d"
+        },
+        {
+          "image": "after/17/smithy/normal_material_0.png",
+          "sha256": "1a0c24cbe71aaf206aa22e26d9b56ebefc247bf3365c0cc84de53a518fb13496"
+        },
+        {
+          "image": "before/19/smithy/normal_clay_0.png",
+          "sha256": "6f1ea7915beda4eb661524a0eb37d532ebac497c937fde6d188693b7f850b4e7"
+        },
+        {
+          "image": "after/19/smithy/normal_clay_0.png",
+          "sha256": "6a66ac079c13ed5e80965ccfd1f2ca1183a6b0168c7e401626f85ff28f67047d"
+        },
+        {
+          "image": "before/19/smithy/normal_material_0.png",
+          "sha256": "788053c7fd20280cbacc1b1b3cbe82b0ba1b6b5bdd372b80edb2f2aa7a92ad22"
+        },
+        {
+          "image": "after/19/smithy/normal_material_0.png",
+          "sha256": "c19e6958042d456fd57207790f36138b7b4589bf8aa2a42e8d7fac9f7dcf790a"
+        },
+        {
+          "image": "before/91/smithy/normal_clay_0.png",
+          "sha256": "bc9802e36c31fc2bc89948523f9833c22dceb0c6f95db395a10eb9996f2c5ac0"
+        },
+        {
+          "image": "after/91/smithy/normal_clay_0.png",
+          "sha256": "74bbb63b98f08867ea31002cfa7372cfffa1b6bf5a98ef0651f0f6f3aa334370"
+        },
+        {
+          "image": "before/91/smithy/normal_material_0.png",
+          "sha256": "ece523e732a2c2e92fa790e80bc73f7451067dbeb373fe1ba14d80026f4adf5f"
+        },
+        {
+          "image": "after/91/smithy/normal_material_0.png",
+          "sha256": "e45261a495269c3aecf2c52e301d460161305d04778bcb9124dfb05ba7ee43df"
+        },
+        {
+          "image": "before/408/smithy/normal_clay_0.png",
+          "sha256": "27c576c3d15061178e11edd6c9c3d3fdb610a3953570637389e5cb4533565842"
+        },
+        {
+          "image": "after/408/smithy/normal_clay_0.png",
+          "sha256": "54c963c06201827a8a36bd27bba93844640e6052c8176c9791f03b0af941e944"
+        },
+        {
+          "image": "before/408/smithy/normal_material_0.png",
+          "sha256": "22e2250dbde230c530027c27e04511be4a98be3a1cca1c6f7fca004357177206"
+        },
+        {
+          "image": "after/408/smithy/normal_material_0.png",
+          "sha256": "d6d1c3f1f9f456daec109cf55bb82a875b122334a5a0b9e7b4fca595697ac881"
+        }
+      ],
+      "width": 3200,
+      "height": 1904,
+      "image": "smithy.png",
+      "sha256": "87bc6c4ec61af097e6c1b1620fd774bebe1357902e36f60a6ced65fd66eb3ac4"
+    },
+    {
+      "inputs": [
+        {
+          "image": "before/7/gatehouse/normal_clay_0.png",
+          "sha256": "07bcd2aa4670aebb32b03f6b120a6c86b1bea8ae1cb1b2e081e0cd5a20c3f9e2"
+        },
+        {
+          "image": "after/7/gatehouse/normal_clay_0.png",
+          "sha256": "cd48bae18992c4e1b54080d7a1b60134acf27b485a99926b062b725a03d8e51d"
+        },
+        {
+          "image": "before/7/gatehouse/normal_material_0.png",
+          "sha256": "8b59ad151552ca29feafdffcca9c70c11b0fe94a6e6c7d7aaf5a5f06e86014df"
+        },
+        {
+          "image": "after/7/gatehouse/normal_material_0.png",
+          "sha256": "f95389eaf39efd3f3cebbba70a421710174a5e6371c5ddc20eb5d93aa834c664"
+        },
+        {
+          "image": "before/17/gatehouse/normal_clay_0.png",
+          "sha256": "c44d6a5c1bae38ce1a215d5396b1c4731297360e83d01590e82e9311e60291a8"
+        },
+        {
+          "image": "after/17/gatehouse/normal_clay_0.png",
+          "sha256": "f53817c0fab9a2e44f5f0a97c6d17af78068340be09eb0f81753c559e6205cd2"
+        },
+        {
+          "image": "before/17/gatehouse/normal_material_0.png",
+          "sha256": "d16623eb389b66e9c665d0dbb0e03fe2adac9eae1307a640a2be321f3e7a62dc"
+        },
+        {
+          "image": "after/17/gatehouse/normal_material_0.png",
+          "sha256": "7aa119506ef539cda2df2146d823287b06c867b94534337d4917c1825b8f44f6"
+        },
+        {
+          "image": "before/19/gatehouse/normal_clay_0.png",
+          "sha256": "f060d00ad706fe951be3118e858f008b915ed62a423e537d9dc2739893549620"
+        },
+        {
+          "image": "after/19/gatehouse/normal_clay_0.png",
+          "sha256": "2edffb3113755a6ca4464f431fe98ec897a348bfe476a22956b90106b310ee8c"
+        },
+        {
+          "image": "before/19/gatehouse/normal_material_0.png",
+          "sha256": "0889c34762692d652d0b9161a894c456e88f9df656485ae490a0e36fdc9b0738"
+        },
+        {
+          "image": "after/19/gatehouse/normal_material_0.png",
+          "sha256": "0fe10a95cea6cc633f40d5b63eb27009b5f50ad83d2a6eb53d9404a34cd5f5d0"
+        },
+        {
+          "image": "before/91/gatehouse/normal_clay_0.png",
+          "sha256": "43f677dd3609cea840a7e6735c12dd633a4fd0fe7a3e67e3e2dc42a16832031d"
+        },
+        {
+          "image": "after/91/gatehouse/normal_clay_0.png",
+          "sha256": "3286d29653efd005ac8fe646dcb6af2b2384fdde8e752f57e910260646a34176"
+        },
+        {
+          "image": "before/91/gatehouse/normal_material_0.png",
+          "sha256": "adf78690e174f53221d91fec14f7b56225a7b93c06fabe5cfbcc3c19e97351f9"
+        },
+        {
+          "image": "after/91/gatehouse/normal_material_0.png",
+          "sha256": "b0b549054dca9d832fd0d7e5dd55d5e8c50ddd2b01ac174c2b1ff367412ddbb3"
+        },
+        {
+          "image": "before/408/gatehouse/normal_clay_0.png",
+          "sha256": "52a1473d23d8b720e097fd9c83a3b0fd7b2779757cbf61743390221050ffeaaa"
+        },
+        {
+          "image": "after/408/gatehouse/normal_clay_0.png",
+          "sha256": "ac13a8972d3f1cb8f12476adcce32e0613696d8c21a14828f561c821a1973f56"
+        },
+        {
+          "image": "before/408/gatehouse/normal_material_0.png",
+          "sha256": "c2ea7a244d762caf8b86ec23e4e03dd33ce2254db311f1eaf80dcb24c124463b"
+        },
+        {
+          "image": "after/408/gatehouse/normal_material_0.png",
+          "sha256": "0d10ae2f05f847ab0b6f425af691f2897a668d91c844423615eb2c6bb2a048d3"
+        }
+      ],
+      "width": 3200,
+      "height": 1904,
+      "image": "gatehouse.png",
+      "sha256": "257ca4a45963d96269911c60a86dc40f129811939d20b7dff54b64bba7ec3e07"
+    }
+  ],
+  "after": "1ac5d02"
+}
