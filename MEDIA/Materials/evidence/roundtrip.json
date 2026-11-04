@@ -1,0 +1,12 @@
+{
+  "fixture": "split_oak_shingle",
+  "blender": "5.0.1",
+  "synthetic_png_only": true,
+  "ipad_import_tested": false,
+  "revision_chain_verified": true,
+  "unchanged_master_and_technical_maps": true,
+  "protected_occupied_slot": true,
+  "explicit_metric_repeat_assignment": true,
+  "chromatic_return_preserved": true,
+  "packed_zip_images_survive_reload": true
+}

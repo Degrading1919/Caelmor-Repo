@@ -1,0 +1,3220 @@
+{
+  "schema_version": "1.0.0",
+  "title": "Caelmor Material Surface Master Catalog",
+  "scope": "Art-direction and generator surface/pattern references; not an economy resource catalog or regional source-chain claim.",
+  "motifs": [
+    "shingle_staggered_lap",
+    "stone_broken_course",
+    "slate_rhythmic_lap",
+    "timber_long_grain",
+    "metal_hammered",
+    "fabric_plain_weave",
+    "wooden_shake_irregular_lap",
+    "reed_bundled_lap",
+    "organic_thatch_bundles",
+    "organic_bark_fissures",
+    "board_horizontal_weatherlap",
+    "board_vertical_lap",
+    "board_batten_joint",
+    "timber_framed_panel",
+    "timber_steam_bent",
+    "timber_scarf_joint",
+    "stone_level_course",
+    "stone_dry_stack",
+    "stone_ashlar_bond",
+    "stone_flint_nodule",
+    "roof_flat_clay_lap",
+    "roof_pantile_wave",
+    "roof_interlocking_pan",
+    "terrain_cobbled_sett",
+    "terrain_bedrock_strata",
+    "plaster_smooth_trowel",
+    "plaster_stippled_earth",
+    "plaster_fine_float",
+    "plaster_fibre_render",
+    "plaster_wattle_daub",
+    "wall_wattle_lattice",
+    "wall_lath_infill",
+    "plaster_reed_keying",
+    "metal_cast_fettle",
+    "metal_bloom_forge",
+    "metal_folded_seam",
+    "iron_forged_rivet",
+    "iron_seamed_sheet",
+    "metal_scale_lap",
+    "metal_brazed_joint",
+    "scale_overlap",
+    "metal_quench_scale",
+    "fabric_fulled_weave",
+    "fabric_herringbone",
+    "fabric_open_sackweave",
+    "fabric_felt",
+    "fabric_braided_band",
+    "fabric_dense_plain",
+    "basket_interlace",
+    "fabric_tablet_band",
+    "leather_pebbled",
+    "leather_grain_panel",
+    "leather_stitched",
+    "leather_tooled_relief",
+    "leather_turned_edge",
+    "leather_laminated_panel",
+    "terrain_compacted_track",
+    "terrain_scattered_gravel",
+    "terrain_gravel_packed",
+    "terrain_grass_tufts",
+    "terrain_scree_slope",
+    "organic_root_tangle",
+    "organic_leaf_veins",
+    "bone_striation",
+    "ceramic_wheel_rib",
+    "ceramic_vitrified_body",
+    "glass_leaded",
+    "glass_cased_lead"
+  ],
+  "materials": [
+    {
+      "rank": 1,
+      "id": "split_oak_shingle",
+      "name": "Split Oak Shingle",
+      "family": "wood",
+      "template": "roof",
+      "scale_m": [
+        2,
+        1
+      ],
+      "regions": [
+        "lowmark"
+      ],
+      "use": "Roof cover; show overlap, eaves, and weather shedding.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale split oak shingle with shingle_staggered_lap relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "wood",
+      "motif": "shingle_staggered_lap",
+      "repeat": [
+        7,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 2,
+      "id": "coursed_fieldstone",
+      "name": "Coursed Fieldstone",
+      "family": "stone",
+      "template": "wall",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell"
+      ],
+      "use": "Wall/infill finish; preserve apertures and joint readability.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale coursed fieldstone with stone_broken_course relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "stone",
+      "motif": "stone_broken_course",
+      "repeat": [
+        4,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 3,
+      "id": "split_slate",
+      "name": "Split Slate",
+      "family": "stone",
+      "template": "roof",
+      "scale_m": [
+        2,
+        1
+      ],
+      "regions": [
+        "thornfell"
+      ],
+      "use": "Roof cover; show overlap, eaves, and weather shedding.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale split slate with slate_rhythmic_lap relief/pattern, restrained cool slate grey hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region2_ThornfellMarches.md, without implying local supply.",
+      "palette": "stone",
+      "motif": "slate_rhythmic_lap",
+      "repeat": [
+        6,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 4,
+      "id": "hewn_oak",
+      "name": "Hewn Oak",
+      "family": "wood",
+      "template": "beam",
+      "scale_m": [
+        1,
+        4
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell"
+      ],
+      "use": "Structural-member finish; align grain with member axis.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale hewn oak with timber_long_grain relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "wood",
+      "motif": "timber_long_grain",
+      "repeat": [
+        1,
+        8
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 5,
+      "id": "forged_iron",
+      "name": "Forged Iron",
+      "family": "metal",
+      "template": "metal",
+      "scale_m": [
+        0.06,
+        0.06
+      ],
+      "regions": [
+        "thornfell",
+        "emberholt"
+      ],
+      "use": "Fitting or plate finish; keep bright wear on exposed edges.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale forged iron with metal_hammered relief/pattern, restrained cool slate grey hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region2_ThornfellMarches.md, without implying local supply.",
+      "palette": "metal",
+      "motif": "metal_hammered",
+      "repeat": [
+        4,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 6,
+      "id": "plain_linen",
+      "name": "Plain Linen",
+      "family": "fabric",
+      "template": "fabric",
+      "scale_m": [
+        0.18,
+        0.18
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "emberholt"
+      ],
+      "use": "Cloth finish; make weave scale readable at prop distance.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale plain linen with fabric_plain_weave relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "textile",
+      "motif": "fabric_plain_weave",
+      "repeat": [
+        34,
+        38
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 7,
+      "id": "pine_shingle",
+      "name": "Pine Shingle",
+      "family": "wood",
+      "template": "roof",
+      "scale_m": [
+        2,
+        1
+      ],
+      "regions": [
+        "lowmark"
+      ],
+      "use": "Roof cover; show overlap, eaves, and weather shedding.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale pine shingle with shingle_staggered_lap relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "wood",
+      "motif": "shingle_staggered_lap",
+      "repeat": [
+        6,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 8,
+      "id": "cedar_shingle",
+      "name": "Cedar Shingle",
+      "family": "wood",
+      "template": "roof",
+      "scale_m": [
+        2,
+        1
+      ],
+      "regions": [
+        "lowmark"
+      ],
+      "use": "Roof cover; show overlap, eaves, and weather shedding.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale cedar shingle with shingle_staggered_lap relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "wood",
+      "motif": "shingle_staggered_lap",
+      "repeat": [
+        9,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 9,
+      "id": "split_oak_shake",
+      "name": "Split Oak Shake",
+      "family": "wood",
+      "template": "roof",
+      "scale_m": [
+        2,
+        1
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Thick hand-split shakes with irregular exposed edges and deep lapped joints.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale split oak shake using wooden_shake_irregular_lap as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "wood",
+      "motif": "wooden_shake_irregular_lap",
+      "repeat": [
+        6,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 10,
+      "id": "reed_thatch",
+      "name": "Reed Thatch",
+      "family": "organic",
+      "template": "roof",
+      "scale_m": [
+        2,
+        1
+      ],
+      "regions": [
+        "mire"
+      ],
+      "use": "Roof cover; show overlap, eaves, and weather shedding.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region3_MireOfFallenBanners.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale reed thatch with reed_bundled_lap relief/pattern, restrained muted peat brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region3_MireOfFallenBanners.md, without implying local supply.",
+      "palette": "green",
+      "motif": "reed_bundled_lap",
+      "repeat": [
+        11,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 11,
+      "id": "straw_thatch",
+      "name": "Straw Thatch",
+      "family": "organic",
+      "template": "roof",
+      "scale_m": [
+        2,
+        1
+      ],
+      "regions": [
+        "lowmark"
+      ],
+      "use": "Roof cover; show overlap, eaves, and weather shedding.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale straw thatch with organic_thatch_bundles relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "green",
+      "motif": "organic_thatch_bundles",
+      "repeat": [
+        16,
+        6
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 12,
+      "id": "bark_shingle",
+      "name": "Bark Shingle",
+      "family": "organic",
+      "template": "roof",
+      "scale_m": [
+        2,
+        1
+      ],
+      "regions": [
+        "mire"
+      ],
+      "use": "Roof cover; show overlap, eaves, and weather shedding.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region3_MireOfFallenBanners.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale bark shingle with organic_bark_fissures relief/pattern, restrained muted peat brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region3_MireOfFallenBanners.md, without implying local supply.",
+      "palette": "green",
+      "motif": "organic_bark_fissures",
+      "repeat": [
+        3,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 13,
+      "id": "split_chestnut_boards",
+      "name": "Split Chestnut Boards",
+      "family": "wood",
+      "template": "board",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark"
+      ],
+      "use": "Board/deck finish; clarify seam and edge direction.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale split chestnut boards with board_horizontal_weatherlap relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "wood",
+      "motif": "board_horizontal_weatherlap",
+      "repeat": [
+        4,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 14,
+      "id": "oak_boarding",
+      "name": "Oak Boarding",
+      "family": "wood",
+      "template": "board",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell"
+      ],
+      "use": "Board/deck finish; clarify seam and edge direction.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale oak boarding with board_vertical_lap relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "wood",
+      "motif": "board_vertical_lap",
+      "repeat": [
+        5,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 15,
+      "id": "pine_boarding",
+      "name": "Pine Boarding",
+      "family": "wood",
+      "template": "board",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark"
+      ],
+      "use": "Board/deck finish; clarify seam and edge direction.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale pine boarding with board_horizontal_weatherlap relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "wood",
+      "motif": "board_horizontal_weatherlap",
+      "repeat": [
+        4,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 16,
+      "id": "board_batten_siding",
+      "name": "Board and Batten Siding",
+      "family": "wood",
+      "template": "board",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Wide boards with narrow cover battens closing the vertical seams.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale board and batten siding using board_batten_joint as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "wood",
+      "motif": "board_batten_joint",
+      "repeat": [
+        4,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 17,
+      "id": "sawn_plank",
+      "name": "Sawn Plank",
+      "family": "wood",
+      "template": "board",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell"
+      ],
+      "use": "Board/deck finish; clarify seam and edge direction.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale sawn plank with timber_framed_panel relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "wood",
+      "motif": "timber_framed_panel",
+      "repeat": [
+        2,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 18,
+      "id": "end_grain_block",
+      "name": "End Grain Block",
+      "family": "wood",
+      "template": "board",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark"
+      ],
+      "use": "Board/deck finish; clarify seam and edge direction.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale end grain block with timber_framed_panel relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "wood",
+      "motif": "timber_framed_panel",
+      "repeat": [
+        2,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 19,
+      "id": "spruce_pole",
+      "name": "Spruce Pole",
+      "family": "wood",
+      "template": "beam",
+      "scale_m": [
+        1,
+        4
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire"
+      ],
+      "use": "Structural-member finish; align grain with member axis.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale spruce pole with timber_long_grain relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "wood",
+      "motif": "timber_long_grain",
+      "repeat": [
+        1,
+        8
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 20,
+      "id": "ash_beam",
+      "name": "Ash Beam",
+      "family": "wood",
+      "template": "beam",
+      "scale_m": [
+        1,
+        4
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell"
+      ],
+      "use": "Structural-member finish; align grain with member axis.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale ash beam with timber_long_grain relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "wood",
+      "motif": "timber_long_grain",
+      "repeat": [
+        1,
+        8
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 21,
+      "id": "steam_bent_ash_rib",
+      "name": "Steam Bent Ash Rib",
+      "family": "wood",
+      "template": "beam",
+      "scale_m": [
+        1,
+        4
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Bent ash member with continuous curved grain and restrained compression marks.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale steam bent ash rib using timber_steam_bent as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "wood",
+      "motif": "timber_steam_bent",
+      "repeat": [
+        1,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 22,
+      "id": "scarf_jointed_oak",
+      "name": "Scarf Jointed Oak",
+      "family": "wood",
+      "template": "beam",
+      "scale_m": [
+        1,
+        4
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Long timber assembled from keyed scarf joints with visible shoulder and peg.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region3_MireOfFallenBanners.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale scarf jointed oak using timber_scarf_joint as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "wood",
+      "motif": "timber_scarf_joint",
+      "repeat": [
+        2,
+        1
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 23,
+      "id": "oak_wainscot",
+      "name": "Oak Wainscot",
+      "family": "wood",
+      "template": "wall",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark"
+      ],
+      "use": "Wall/infill finish; preserve apertures and joint readability.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale oak wainscot with timber_framed_panel relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "wood",
+      "motif": "timber_framed_panel",
+      "repeat": [
+        3,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 24,
+      "id": "pegged_oak_frame",
+      "name": "Pegged Oak Frame",
+      "family": "wood",
+      "template": "beam",
+      "scale_m": [
+        1,
+        4
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell"
+      ],
+      "use": "Structural-member finish; align grain with member axis.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale pegged oak frame with timber_framed_panel relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "wood",
+      "motif": "timber_framed_panel",
+      "repeat": [
+        2,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 25,
+      "id": "level_fieldstone",
+      "name": "Level Fieldstone",
+      "family": "stone",
+      "template": "wall",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell"
+      ],
+      "use": "Wall/infill finish; preserve apertures and joint readability.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale level fieldstone with stone_level_course relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "stone",
+      "motif": "stone_level_course",
+      "repeat": [
+        4,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 26,
+      "id": "rough_rubble",
+      "name": "Rough Rubble",
+      "family": "stone",
+      "template": "wall",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell"
+      ],
+      "use": "Wall/infill finish; preserve apertures and joint readability.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale rough rubble with stone_broken_course relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "stone",
+      "motif": "stone_broken_course",
+      "repeat": [
+        7,
+        6
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 27,
+      "id": "dry_stacked_wallstone",
+      "name": "Dry Stacked Wallstone",
+      "family": "stone",
+      "template": "wall",
+      "scale_m": [
+        1.5,
+        1.5
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Carefully interlocked wall stones without visible mortar beds.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale dry stacked wallstone using stone_dry_stack as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "stone",
+      "motif": "stone_dry_stack",
+      "repeat": [
+        4,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 28,
+      "id": "hewn_sandstone",
+      "name": "Hewn Sandstone",
+      "family": "stone",
+      "template": "wall",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "thornfell"
+      ],
+      "use": "Wall/infill finish; preserve apertures and joint readability.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale hewn sandstone with stone_level_course relief/pattern, restrained cool slate grey hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region2_ThornfellMarches.md, without implying local supply.",
+      "palette": "stone",
+      "motif": "stone_level_course",
+      "repeat": [
+        4,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 29,
+      "id": "squared_limestone_blocks",
+      "name": "Squared Limestone Blocks",
+      "family": "stone",
+      "template": "wall",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark"
+      ],
+      "use": "Cut limestone blocks with dressed beds and squared arrises; retain the quarried face at the centre.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint squared limestone with a subtle split between dressed edges and quarry face, in stone palette. Keep block geometry and bedding as the read; do not rely on hue variation.",
+      "palette": "stone",
+      "motif": "stone_ashlar_bond",
+      "repeat": [
+        4,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 30,
+      "id": "flint_nodule_masonry",
+      "name": "Flint Nodule Masonry",
+      "family": "stone",
+      "template": "wall",
+      "scale_m": [
+        1.5,
+        1.5
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Rounded flint nodules set in narrow mortar joints with fitted corner quoins.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale flint nodule masonry using stone_flint_nodule as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "stone",
+      "motif": "stone_flint_nodule",
+      "repeat": [
+        9,
+        8
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 31,
+      "id": "volcanic_basalt",
+      "name": "Volcanic Basalt",
+      "family": "stone",
+      "template": "wall",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "emberholt"
+      ],
+      "use": "Wall/infill finish; preserve apertures and joint readability.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region4_EmberholtHeights.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale volcanic basalt with stone_broken_course relief/pattern, restrained warm ash and subdued iron-red hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region4_EmberholtHeights.md, without implying local supply.",
+      "palette": "stone",
+      "motif": "stone_broken_course",
+      "repeat": [
+        4,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 32,
+      "id": "volcanic_tuff",
+      "name": "Volcanic Tuff",
+      "family": "stone",
+      "template": "wall",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "emberholt"
+      ],
+      "use": "Wall/infill finish; preserve apertures and joint readability.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region4_EmberholtHeights.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale volcanic tuff with stone_level_course relief/pattern, restrained warm ash and subdued iron-red hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region4_EmberholtHeights.md, without implying local supply.",
+      "palette": "stone",
+      "motif": "stone_level_course",
+      "repeat": [
+        5,
+        6
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 33,
+      "id": "ashlar_granite",
+      "name": "Ashlar Granite",
+      "family": "stone",
+      "template": "wall",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "thornfell",
+        "emberholt"
+      ],
+      "use": "Wall/infill finish; preserve apertures and joint readability.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale ashlar granite with stone_ashlar_bond relief/pattern, restrained cool slate grey hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region2_ThornfellMarches.md, without implying local supply.",
+      "palette": "stone",
+      "motif": "stone_ashlar_bond",
+      "repeat": [
+        3,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 34,
+      "id": "flat_fired_clay_tile",
+      "name": "Flat Fired Clay Tile",
+      "family": "ceramic",
+      "template": "roof",
+      "scale_m": [
+        1,
+        1
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Flat fired tiles in offset laps with a visible lower edge and raised side nib.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale flat fired clay tile using roof_flat_clay_lap as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "earth",
+      "motif": "roof_flat_clay_lap",
+      "repeat": [
+        6,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 35,
+      "id": "thin_slate_tile",
+      "name": "Thin Slate Tile",
+      "family": "stone",
+      "template": "roof",
+      "scale_m": [
+        2,
+        1
+      ],
+      "regions": [
+        "thornfell"
+      ],
+      "use": "Roof cover; show overlap, eaves, and weather shedding.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale thin slate tile with slate_rhythmic_lap relief/pattern, restrained cool slate grey hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region2_ThornfellMarches.md, without implying local supply.",
+      "palette": "stone",
+      "motif": "slate_rhythmic_lap",
+      "repeat": [
+        8,
+        6
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 36,
+      "id": "curved_clay_pantile",
+      "name": "Curved Clay Pantile",
+      "family": "ceramic",
+      "template": "roof",
+      "scale_m": [
+        1,
+        1
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "S-shaped pan and cover tiles forming continuous water channels.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region4_EmberholtHeights.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale curved clay pantile using roof_pantile_wave as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "earth",
+      "motif": "roof_pantile_wave",
+      "repeat": [
+        5,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 37,
+      "id": "interlocking_clay_pan",
+      "name": "Interlocking Clay Pan",
+      "family": "ceramic",
+      "template": "roof",
+      "scale_m": [
+        1,
+        1
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Moulded pan tiles with side locks and a pronounced headlap.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale interlocking clay pan using roof_interlocking_pan as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "earth",
+      "motif": "roof_interlocking_pan",
+      "repeat": [
+        5,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 38,
+      "id": "flagstone",
+      "name": "Flagstone",
+      "family": "stone",
+      "template": "terrain",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "thornfell",
+        "lowmark"
+      ],
+      "use": "Ground finish; preserve route, slope, and footing contrast.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale flagstone with terrain_cobbled_sett relief/pattern, restrained cool slate grey hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region2_ThornfellMarches.md, without implying local supply.",
+      "palette": "stone",
+      "motif": "terrain_cobbled_sett",
+      "repeat": [
+        4,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 39,
+      "id": "river_worn_cobble",
+      "name": "River Worn Cobble",
+      "family": "stone",
+      "template": "terrain",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark"
+      ],
+      "use": "Ground finish; preserve route, slope, and footing contrast.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale river worn cobble with terrain_cobbled_sett relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "stone",
+      "motif": "terrain_cobbled_sett",
+      "repeat": [
+        9,
+        8
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 40,
+      "id": "split_bedrock",
+      "name": "Split Bedrock",
+      "family": "stone",
+      "template": "terrain",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "thornfell",
+        "emberholt"
+      ],
+      "use": "Ground finish; preserve route, slope, and footing contrast.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale split bedrock with terrain_bedrock_strata relief/pattern, restrained cool slate grey hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region2_ThornfellMarches.md, without implying local supply.",
+      "palette": "stone",
+      "motif": "terrain_bedrock_strata",
+      "repeat": [
+        3,
+        2
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 41,
+      "id": "layered_volcanic_rock",
+      "name": "Layered Volcanic Rock",
+      "family": "stone",
+      "template": "terrain",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "emberholt"
+      ],
+      "use": "Ground finish; preserve route, slope, and footing contrast.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region4_EmberholtHeights.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale layered volcanic rock with terrain_bedrock_strata relief/pattern, restrained warm ash and subdued iron-red hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region4_EmberholtHeights.md, without implying local supply.",
+      "palette": "stone",
+      "motif": "terrain_bedrock_strata",
+      "repeat": [
+        3,
+        2
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 42,
+      "id": "mortar_lime",
+      "name": "Lime Mortar",
+      "family": "plaster",
+      "template": "wall",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell"
+      ],
+      "use": "Wall/infill finish; preserve apertures and joint readability.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale lime mortar with plaster_smooth_trowel relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "stone",
+      "motif": "plaster_smooth_trowel",
+      "repeat": [
+        2,
+        2
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 43,
+      "id": "mortar_earth",
+      "name": "Earth Mortar",
+      "family": "plaster",
+      "template": "wall",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "mire",
+        "lowmark"
+      ],
+      "use": "Wall/infill finish; preserve apertures and joint readability.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region3_MireOfFallenBanners.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale earth mortar with plaster_stippled_earth relief/pattern, restrained muted peat brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region3_MireOfFallenBanners.md, without implying local supply.",
+      "palette": "stone",
+      "motif": "plaster_stippled_earth",
+      "repeat": [
+        3,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 44,
+      "id": "fine_floated_lime_plaster",
+      "name": "Fine Floated Lime Plaster",
+      "family": "plaster",
+      "template": "wall",
+      "scale_m": [
+        1,
+        1
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell"
+      ],
+      "use": "Thin lime plaster closed by repeated float passes, leaving a fine compact face.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint the fine floated lime plaster with plaster_fine_float as its defining physical process. Show its construction in a neutral mid-value material study; avoid color, age, dirt, or patina as the identifying feature.",
+      "palette": "stone",
+      "motif": "plaster_fine_float",
+      "repeat": [
+        2,
+        2
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 45,
+      "id": "straw_tempered_earth_render",
+      "name": "Straw Tempered Earth Render",
+      "family": "plaster",
+      "template": "wall",
+      "scale_m": [
+        1,
+        1
+      ],
+      "regions": [
+        "lowmark",
+        "mire"
+      ],
+      "use": "Earth render with short plant fibres distributed through the body to limit drying cracks.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint the straw tempered earth render with plaster_fibre_render as its defining physical process. Show its construction in a neutral mid-value material study; avoid color, age, dirt, or patina as the identifying feature.",
+      "palette": "stone",
+      "motif": "plaster_fibre_render",
+      "repeat": [
+        3,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 46,
+      "id": "clay_wattle_daub",
+      "name": "Clay Wattle and Daub",
+      "family": "plaster",
+      "template": "wall",
+      "scale_m": [
+        1,
+        1
+      ],
+      "regions": [
+        "mire",
+        "emberholt"
+      ],
+      "use": "Clay-rich daub pressed through a wattle lattice, leaving keyed ridges at the weave.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region3_MireOfFallenBanners.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint the clay wattle and daub with plaster_wattle_daub as its defining physical process. Show its construction in a neutral mid-value material study; avoid color, age, dirt, or patina as the identifying feature.",
+      "palette": "stone",
+      "motif": "plaster_wattle_daub",
+      "repeat": [
+        3,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 47,
+      "id": "wattle_lattice_infill",
+      "name": "Wattle Lattice Infill",
+      "family": "organic",
+      "template": "wall",
+      "scale_m": [
+        1,
+        1
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Interlaced rods in a framed bay, with the open lattice readable before daub.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale wattle lattice infill using wall_wattle_lattice as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "green",
+      "motif": "wall_wattle_lattice",
+      "repeat": [
+        8,
+        8
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 48,
+      "id": "riven_lath_plaster",
+      "name": "Riven Lath Plaster",
+      "family": "plaster",
+      "template": "wall",
+      "scale_m": [
+        1,
+        1
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Narrow split laths fixed across framing and keyed with a thin plaster coat.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region4_EmberholtHeights.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale riven lath plaster using wall_lath_infill as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "stone",
+      "motif": "wall_lath_infill",
+      "repeat": [
+        8,
+        6
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 49,
+      "id": "reed_keyed_plaster",
+      "name": "Reed Keyed Plaster",
+      "family": "plaster",
+      "template": "wall",
+      "scale_m": [
+        1,
+        1
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Fine plaster keyed onto bundled reed mat with restrained raised ribs.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale reed keyed plaster using plaster_reed_keying as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "stone",
+      "motif": "plaster_reed_keying",
+      "repeat": [
+        8,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 50,
+      "id": "cast_iron_roughskin",
+      "name": "Cast Iron Roughskin",
+      "family": "metal",
+      "template": "metal",
+      "scale_m": [
+        0.08,
+        0.08
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Cast plate with subtle mould parting and fettled edges; keep casting pits sparse.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale cast iron roughskin using metal_cast_fettle as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "metal",
+      "motif": "metal_cast_fettle",
+      "repeat": [
+        4,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 51,
+      "id": "iron_bloom_stock",
+      "name": "Iron Bloom Stock",
+      "family": "metal",
+      "template": "metal",
+      "scale_m": [
+        0.12,
+        0.08
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Porous consolidated bloom bar with compressed slag streaks and forged end.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region4_EmberholtHeights.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale iron bloom stock using metal_bloom_forge as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "metal",
+      "motif": "metal_bloom_forge",
+      "repeat": [
+        4,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 52,
+      "id": "folded_copper_seam",
+      "name": "Folded Copper Seam",
+      "family": "metal",
+      "template": "metal",
+      "scale_m": [
+        0.5,
+        0.5
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Folded sheet edges locked in a standing seam, with no corrosion color cue.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale folded copper seam using metal_folded_seam as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "metal",
+      "motif": "metal_folded_seam",
+      "repeat": [
+        4,
+        2
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 53,
+      "id": "riveted_iron_plate",
+      "name": "Riveted Iron Plate",
+      "family": "metal",
+      "template": "metal",
+      "scale_m": [
+        0.08,
+        0.08
+      ],
+      "regions": [
+        "thornfell",
+        "emberholt"
+      ],
+      "use": "Fitting or plate finish; keep bright wear on exposed edges.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale riveted iron plate with iron_forged_rivet relief/pattern, restrained cool slate grey hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region2_ThornfellMarches.md, without implying local supply.",
+      "palette": "metal",
+      "motif": "iron_forged_rivet",
+      "repeat": [
+        4,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 54,
+      "id": "seamed_iron_sheet",
+      "name": "Seamed Iron Sheet",
+      "family": "metal",
+      "template": "roof",
+      "scale_m": [
+        0.5,
+        0.5
+      ],
+      "regions": [
+        "emberholt"
+      ],
+      "use": "Roof cover; show overlap, eaves, and weather shedding.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region4_EmberholtHeights.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale seamed iron sheet with iron_seamed_sheet relief/pattern, restrained warm ash and subdued iron-red hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region4_EmberholtHeights.md, without implying local supply.",
+      "palette": "metal",
+      "motif": "iron_seamed_sheet",
+      "repeat": [
+        4,
+        2
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 55,
+      "id": "hammered_copper",
+      "name": "Hammered Copper",
+      "family": "metal",
+      "template": "metal",
+      "scale_m": [
+        0.08,
+        0.08
+      ],
+      "regions": [
+        "emberholt"
+      ],
+      "use": "Fitting or plate finish; keep bright wear on exposed edges.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region4_EmberholtHeights.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale hammered copper with metal_hammered relief/pattern, restrained warm ash and subdued iron-red hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region4_EmberholtHeights.md, without implying local supply.",
+      "palette": "metal",
+      "motif": "metal_hammered",
+      "repeat": [
+        4,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 56,
+      "id": "overlapped_copper_scale",
+      "name": "Overlapped Copper Scale",
+      "family": "metal",
+      "template": "metal",
+      "scale_m": [
+        0.5,
+        0.5
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Small formed copper plates overlap at a consistent headlap on a curved backing.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region4_EmberholtHeights.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale overlapped copper scale using metal_scale_lap as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "metal",
+      "motif": "metal_scale_lap",
+      "repeat": [
+        5,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 57,
+      "id": "bronze_fitting",
+      "name": "Bronze Fitting",
+      "family": "metal",
+      "template": "metal",
+      "scale_m": [
+        0.06,
+        0.06
+      ],
+      "regions": [
+        "thornfell",
+        "emberholt"
+      ],
+      "use": "Fitting or plate finish; keep bright wear on exposed edges.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale bronze fitting with metal_hammered relief/pattern, restrained cool slate grey hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region2_ThornfellMarches.md, without implying local supply.",
+      "palette": "metal",
+      "motif": "metal_hammered",
+      "repeat": [
+        4,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 58,
+      "id": "brazed_sheet_panel",
+      "name": "Brazed Sheet Panel",
+      "family": "metal",
+      "template": "roof",
+      "scale_m": [
+        0.5,
+        0.5
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Thin metal sheets joined by narrow brazed seams and small backing tabs.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region4_EmberholtHeights.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale brazed sheet panel using metal_brazed_joint as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "metal",
+      "motif": "metal_brazed_joint",
+      "repeat": [
+        4,
+        2
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 59,
+      "id": "chain_link",
+      "name": "Forged Chain Link",
+      "family": "metal",
+      "template": "metal",
+      "scale_m": [
+        0.04,
+        0.04
+      ],
+      "regions": [
+        "thornfell"
+      ],
+      "use": "Fitting or plate finish; keep bright wear on exposed edges.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale forged chain link with scale_overlap relief/pattern, restrained cool slate grey hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region2_ThornfellMarches.md, without implying local supply.",
+      "palette": "metal",
+      "motif": "scale_overlap",
+      "repeat": [
+        5,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 60,
+      "id": "iron_scale",
+      "name": "Iron Scale",
+      "family": "metal",
+      "template": "metal",
+      "scale_m": [
+        0.06,
+        0.06
+      ],
+      "regions": [
+        "thornfell",
+        "emberholt"
+      ],
+      "use": "Fitting or plate finish; keep bright wear on exposed edges.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale iron scale with scale_overlap relief/pattern, restrained cool slate grey hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region2_ThornfellMarches.md, without implying local supply.",
+      "palette": "metal",
+      "motif": "scale_overlap",
+      "repeat": [
+        5,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 61,
+      "id": "quenched_steel_plate",
+      "name": "Quenched Steel Plate",
+      "family": "metal",
+      "template": "metal",
+      "scale_m": [
+        0.08,
+        0.08
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Heat-treated steel plate with fine scale break at the edge; show no rust or age tint.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region3_MireOfFallenBanners.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale quenched steel plate using metal_quench_scale as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "metal",
+      "motif": "metal_quench_scale",
+      "repeat": [
+        4,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 62,
+      "id": "hemp_plain_canvas",
+      "name": "Hemp Plain Canvas",
+      "family": "fabric",
+      "template": "fabric",
+      "scale_m": [
+        0.22,
+        0.22
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Plain-woven hemp canvas with visible paired yarns and firm selvedge.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale hemp plain canvas using fabric_plain_weave as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "textile",
+      "motif": "fabric_plain_weave",
+      "repeat": [
+        22,
+        26
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 63,
+      "id": "coarse_linen",
+      "name": "Coarse Linen",
+      "family": "fabric",
+      "template": "fabric",
+      "scale_m": [
+        0.22,
+        0.22
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell"
+      ],
+      "use": "Cloth finish; make weave scale readable at prop distance.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale coarse linen with fabric_plain_weave relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "textile",
+      "motif": "fabric_plain_weave",
+      "repeat": [
+        16,
+        22
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 64,
+      "id": "wool_plain_weave",
+      "name": "Wool Plain Weave",
+      "family": "fabric",
+      "template": "fabric",
+      "scale_m": [
+        0.18,
+        0.18
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Balanced plain-weave wool with distinct warp and weft yarns.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale wool plain weave using fabric_plain_weave as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "textile",
+      "motif": "fabric_plain_weave",
+      "repeat": [
+        24,
+        28
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 65,
+      "id": "fulled_woven_wool",
+      "name": "Fulled Woven Wool",
+      "family": "fabric",
+      "template": "fabric",
+      "scale_m": [
+        0.18,
+        0.18
+      ],
+      "regions": [
+        "thornfell",
+        "emberholt"
+      ],
+      "use": "Woven wool fulled after weaving; retain compressed warp and weft ridges beneath the felted nap.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint the fulled woven wool with fabric_fulled_weave as its defining physical process. Show its construction in a neutral mid-value material study; avoid color, age, dirt, or patina as the identifying feature.",
+      "palette": "textile",
+      "motif": "fabric_fulled_weave",
+      "repeat": [
+        24,
+        28
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 66,
+      "id": "wool_herringbone",
+      "name": "Wool Herringbone",
+      "family": "fabric",
+      "template": "fabric",
+      "scale_m": [
+        0.18,
+        0.18
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Woven wool with alternating twill direction forming compact chevrons.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale wool herringbone using fabric_herringbone as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "textile",
+      "motif": "fabric_herringbone",
+      "repeat": [
+        32,
+        32
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 67,
+      "id": "open_hemp_sackweave",
+      "name": "Open Hemp Sackweave",
+      "family": "fabric",
+      "template": "fabric",
+      "scale_m": [
+        0.22,
+        0.22
+      ],
+      "regions": [
+        "lowmark",
+        "mire"
+      ],
+      "use": "Coarse open hemp weave with broad yarn bundles and clearly visible interstices.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint the open hemp sackweave with fabric_open_sackweave as its defining physical process. Show its construction in a neutral mid-value material study; avoid color, age, dirt, or patina as the identifying feature.",
+      "palette": "textile",
+      "motif": "fabric_open_sackweave",
+      "repeat": [
+        12,
+        16
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 68,
+      "id": "nonwoven_wool_felt",
+      "name": "Nonwoven Wool Felt",
+      "family": "fabric",
+      "template": "fabric",
+      "scale_m": [
+        0.18,
+        0.18
+      ],
+      "regions": [
+        "thornfell",
+        "emberholt"
+      ],
+      "use": "Interlocked wool fibres without warp or weft; show a continuous matte fibre bed.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint the nonwoven wool felt with fabric_felt as its defining physical process. Show its construction in a neutral mid-value material study; avoid color, age, dirt, or patina as the identifying feature.",
+      "palette": "textile",
+      "motif": "fabric_felt",
+      "repeat": [
+        3,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 69,
+      "id": "braided_wool_band",
+      "name": "Braided Wool Band",
+      "family": "fabric",
+      "template": "fabric",
+      "scale_m": [
+        0.12,
+        0.24
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Three-strand wool braid used as a narrow edging or tie, not a broad cloth field.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale braided wool band using fabric_braided_band as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "textile",
+      "motif": "fabric_braided_band",
+      "repeat": [
+        3,
+        12
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 70,
+      "id": "dense_linen_canvas",
+      "name": "Dense Linen Canvas",
+      "family": "fabric",
+      "template": "fabric",
+      "scale_m": [
+        0.22,
+        0.22
+      ],
+      "regions": [
+        "lowmark",
+        "emberholt"
+      ],
+      "use": "Tightly tensioned linen canvas with a firm selvage and compact plain weave.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint the dense linen canvas with fabric_dense_plain as its defining physical process. Show its construction in a neutral mid-value material study; avoid color, age, dirt, or patina as the identifying feature.",
+      "palette": "textile",
+      "motif": "fabric_dense_plain",
+      "repeat": [
+        34,
+        30
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 71,
+      "id": "reed_mat",
+      "name": "Reed Mat",
+      "family": "organic",
+      "template": "fabric",
+      "scale_m": [
+        0.2,
+        0.2
+      ],
+      "regions": [
+        "mire"
+      ],
+      "use": "Cloth finish; make weave scale readable at prop distance.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region3_MireOfFallenBanners.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale reed mat with basket_interlace relief/pattern, restrained muted peat brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region3_MireOfFallenBanners.md, without implying local supply.",
+      "palette": "green",
+      "motif": "basket_interlace",
+      "repeat": [
+        8,
+        8
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 72,
+      "id": "tablet_woven_banner_band",
+      "name": "Tablet Woven Banner Band",
+      "family": "fabric",
+      "template": "fabric",
+      "scale_m": [
+        0.12,
+        0.24
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Dense tablet-woven band with paired diagonal ridges and a bound edge; distinct from broad banner cloth.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint the tablet-woven band with narrow raised diagonals, visible warp tension, and a clean selvage at close prop scale.",
+      "palette": "textile",
+      "motif": "fabric_tablet_band",
+      "repeat": [
+        4,
+        12
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 73,
+      "id": "dense_linen_plainweave",
+      "name": "Dense Linen Plain Weave",
+      "family": "fabric",
+      "template": "fabric",
+      "scale_m": [
+        0.16,
+        0.16
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Closely packed linen plain weave with a finer thread count than coarse linen.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale dense linen plain weave using fabric_dense_plain as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "textile",
+      "motif": "fabric_dense_plain",
+      "repeat": [
+        54,
+        52
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 74,
+      "id": "tanned_goatskin",
+      "name": "Tanned Goatskin",
+      "family": "leather",
+      "template": "fabric",
+      "scale_m": [
+        0.3,
+        0.3
+      ],
+      "regions": [
+        "thornfell"
+      ],
+      "use": "Leather surface on a compatible equipment panel; preserve edge seams and wear readability.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale tanned goatskin with leather_pebbled relief/pattern, restrained cool slate grey hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region2_ThornfellMarches.md, without implying local supply.",
+      "palette": "leather",
+      "motif": "leather_pebbled",
+      "repeat": [
+        6,
+        6
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 75,
+      "id": "curried_hide_panel",
+      "name": "Curried Hide Panel",
+      "family": "leather",
+      "template": "fabric",
+      "scale_m": [
+        0.3,
+        0.3
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Curried hide panel with broad natural grain folds and a clean cut edge.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region4_EmberholtHeights.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale curried hide panel using leather_grain_panel as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "leather",
+      "motif": "leather_grain_panel",
+      "repeat": [
+        6,
+        6
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 76,
+      "id": "stitched_leather",
+      "name": "Stitched Leather",
+      "family": "leather",
+      "template": "fabric",
+      "scale_m": [
+        0.2,
+        0.2
+      ],
+      "regions": [
+        "thornfell",
+        "lowmark"
+      ],
+      "use": "Leather surface on a compatible equipment panel; preserve edge seams and wear readability.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale stitched leather with leather_stitched relief/pattern, restrained cool slate grey hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region2_ThornfellMarches.md, without implying local supply.",
+      "palette": "leather",
+      "motif": "leather_stitched",
+      "repeat": [
+        4,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 77,
+      "id": "tooled_leather_relief",
+      "name": "Tooled Leather Relief",
+      "family": "leather",
+      "template": "fabric",
+      "scale_m": [
+        0.2,
+        0.2
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Shallow hand-tooled channels pressed into leather without added color or emblem.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale tooled leather relief using leather_tooled_relief as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "leather",
+      "motif": "leather_tooled_relief",
+      "repeat": [
+        4,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 78,
+      "id": "layered_leather",
+      "name": "Layered Leather",
+      "family": "leather",
+      "template": "fabric",
+      "scale_m": [
+        0.2,
+        0.2
+      ],
+      "regions": [
+        "thornfell"
+      ],
+      "use": "Leather surface on a compatible equipment panel; preserve edge seams and wear readability.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale layered leather with scale_overlap relief/pattern, restrained cool slate grey hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region2_ThornfellMarches.md, without implying local supply.",
+      "palette": "leather",
+      "motif": "scale_overlap",
+      "repeat": [
+        5,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 79,
+      "id": "turned_edge_leather",
+      "name": "Turned Edge Leather",
+      "family": "leather",
+      "template": "fabric",
+      "scale_m": [
+        0.2,
+        0.2
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Leather edge folded and stitched around a shaped panel, showing the rolled return.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale turned edge leather using leather_turned_edge as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "leather",
+      "motif": "leather_turned_edge",
+      "repeat": [
+        4,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 80,
+      "id": "laminated_leather_panel",
+      "name": "Laminated Leather Panel",
+      "family": "leather",
+      "template": "fabric",
+      "scale_m": [
+        0.3,
+        0.3
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Two hide layers bonded into a stiff panel with offset edge seams.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region3_MireOfFallenBanners.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale laminated leather panel using leather_laminated_panel as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "leather",
+      "motif": "leather_laminated_panel",
+      "repeat": [
+        4,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 81,
+      "id": "rawhide_lacing",
+      "name": "Rawhide Lacing",
+      "family": "leather",
+      "template": "fabric",
+      "scale_m": [
+        0.12,
+        0.24
+      ],
+      "regions": [
+        "thornfell"
+      ],
+      "use": "Leather surface on a compatible equipment panel; preserve edge seams and wear readability.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale rawhide lacing with leather_stitched relief/pattern, restrained cool slate grey hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region2_ThornfellMarches.md, without implying local supply.",
+      "palette": "leather",
+      "motif": "leather_stitched",
+      "repeat": [
+        4,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 82,
+      "id": "compacted_earth",
+      "name": "Compacted Earth",
+      "family": "terrain",
+      "template": "terrain",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark",
+        "mire"
+      ],
+      "use": "Ground finish; preserve route, slope, and footing contrast.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale compacted earth with terrain_compacted_track relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "earth",
+      "motif": "terrain_compacted_track",
+      "repeat": [
+        3,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 83,
+      "id": "mud_track",
+      "name": "Mud Track",
+      "family": "terrain",
+      "template": "terrain",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "mire",
+        "lowmark"
+      ],
+      "use": "Ground finish; preserve route, slope, and footing contrast.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region3_MireOfFallenBanners.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale mud track with terrain_compacted_track relief/pattern, restrained muted peat brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region3_MireOfFallenBanners.md, without implying local supply.",
+      "palette": "earth",
+      "motif": "terrain_compacted_track",
+      "repeat": [
+        3,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 84,
+      "id": "scattered_gravel",
+      "name": "Scattered Gravel",
+      "family": "terrain",
+      "template": "terrain",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell"
+      ],
+      "use": "Ground finish; preserve route, slope, and footing contrast.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale scattered gravel with terrain_scattered_gravel relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "earth",
+      "motif": "terrain_scattered_gravel",
+      "repeat": [
+        5,
+        5
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 85,
+      "id": "stone_packed_track",
+      "name": "Stone Packed Track",
+      "family": "terrain",
+      "template": "terrain",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Angular small stones compacted into a firm path over a finer bed.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale stone packed track using terrain_gravel_packed as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "earth",
+      "motif": "terrain_gravel_packed",
+      "repeat": [
+        5,
+        5
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 86,
+      "id": "short_grass",
+      "name": "Short Grass",
+      "family": "terrain",
+      "template": "terrain",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark"
+      ],
+      "use": "Ground finish; preserve route, slope, and footing contrast.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale short grass with terrain_grass_tufts relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "earth",
+      "motif": "terrain_grass_tufts",
+      "repeat": [
+        17,
+        14
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 87,
+      "id": "marsh_grass",
+      "name": "Marsh Grass",
+      "family": "terrain",
+      "template": "terrain",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "mire"
+      ],
+      "use": "Ground finish; preserve route, slope, and footing contrast.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region3_MireOfFallenBanners.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale marsh grass with terrain_grass_tufts relief/pattern, restrained muted peat brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region3_MireOfFallenBanners.md, without implying local supply.",
+      "palette": "earth",
+      "motif": "terrain_grass_tufts",
+      "repeat": [
+        11,
+        8
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 88,
+      "id": "heather_tufts",
+      "name": "Heather Tufts",
+      "family": "terrain",
+      "template": "terrain",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "thornfell"
+      ],
+      "use": "Ground finish; preserve route, slope, and footing contrast.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale heather tufts with terrain_grass_tufts relief/pattern, restrained cool slate grey hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region2_ThornfellMarches.md, without implying local supply.",
+      "palette": "earth",
+      "motif": "terrain_grass_tufts",
+      "repeat": [
+        8,
+        8
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 89,
+      "id": "peat_cut_face",
+      "name": "Peat Cut Face",
+      "family": "terrain",
+      "template": "terrain",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "mire"
+      ],
+      "use": "Ground finish; preserve route, slope, and footing contrast.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region3_MireOfFallenBanners.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale peat cut face with terrain_bedrock_strata relief/pattern, restrained muted peat brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region3_MireOfFallenBanners.md, without implying local supply.",
+      "palette": "earth",
+      "motif": "terrain_bedrock_strata",
+      "repeat": [
+        3,
+        2
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 90,
+      "id": "scree_slope",
+      "name": "Scree Slope",
+      "family": "terrain",
+      "template": "terrain",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Coarse angular fragments graded from large toe stones to finer downslope debris.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale scree slope using terrain_scree_slope as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "earth",
+      "motif": "terrain_scree_slope",
+      "repeat": [
+        4,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 91,
+      "id": "ash_soil",
+      "name": "Ash Soil",
+      "family": "terrain",
+      "template": "terrain",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "emberholt"
+      ],
+      "use": "Ground finish; preserve route, slope, and footing contrast.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region4_EmberholtHeights.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale ash soil with terrain_bedrock_strata relief/pattern, restrained warm ash and subdued iron-red hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region4_EmberholtHeights.md, without implying local supply.",
+      "palette": "earth",
+      "motif": "terrain_bedrock_strata",
+      "repeat": [
+        3,
+        2
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 92,
+      "id": "root_tangle",
+      "name": "Exposed Root Tangle",
+      "family": "organic",
+      "template": "terrain",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "mire"
+      ],
+      "use": "Ground finish; preserve route, slope, and footing contrast.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region3_MireOfFallenBanners.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale exposed root tangle with organic_root_tangle relief/pattern, restrained muted peat brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region3_MireOfFallenBanners.md, without implying local supply.",
+      "palette": "green",
+      "motif": "organic_root_tangle",
+      "repeat": [
+        7,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 93,
+      "id": "bark_fissure",
+      "name": "Fissured Bark",
+      "family": "organic",
+      "template": "organic",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "mire",
+        "lowmark"
+      ],
+      "use": "Organic detail; avoid magical or emblematic readings.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region3_MireOfFallenBanners.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale fissured bark with organic_bark_fissures relief/pattern, restrained muted peat brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region3_MireOfFallenBanners.md, without implying local supply.",
+      "palette": "green",
+      "motif": "organic_bark_fissures",
+      "repeat": [
+        3,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 94,
+      "id": "leaf_vein",
+      "name": "Leaf Vein",
+      "family": "organic",
+      "template": "organic",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark",
+        "mire"
+      ],
+      "use": "Organic detail; avoid magical or emblematic readings.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale leaf vein with organic_leaf_veins relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "green",
+      "motif": "organic_leaf_veins",
+      "repeat": [
+        2,
+        2
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 95,
+      "id": "basket_interlace",
+      "name": "Basket Interlace",
+      "family": "organic",
+      "template": "organic",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "mire",
+        "lowmark"
+      ],
+      "use": "Organic detail; avoid magical or emblematic readings.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region3_MireOfFallenBanners.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale basket interlace with basket_interlace relief/pattern, restrained muted peat brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region3_MireOfFallenBanners.md, without implying local supply.",
+      "palette": "green",
+      "motif": "basket_interlace",
+      "repeat": [
+        8,
+        8
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 96,
+      "id": "bone_striation",
+      "name": "Bone Striation",
+      "family": "organic",
+      "template": "organic",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "thornfell",
+        "mire"
+      ],
+      "use": "Organic detail; avoid magical or emblematic readings.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region2_ThornfellMarches.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale bone striation with bone_striation relief/pattern, restrained cool slate grey hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region2_ThornfellMarches.md, without implying local supply.",
+      "palette": "green",
+      "motif": "bone_striation",
+      "repeat": [
+        3,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 97,
+      "id": "wheel_ribbed_earthenware",
+      "name": "Wheel Ribbed Earthenware",
+      "family": "ceramic",
+      "template": "wall",
+      "scale_m": [
+        0.3,
+        0.3
+      ],
+      "regions": [
+        "emberholt",
+        "lowmark"
+      ],
+      "use": "Wheel-thrown earthenware body with shallow concentric throwing ribs and a clean foot.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region4_EmberholtHeights.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint the wheel ribbed earthenware with ceramic_wheel_rib as its defining physical process. Show its construction in a neutral mid-value material study; avoid color, age, dirt, or patina as the identifying feature.",
+      "palette": "earth",
+      "motif": "ceramic_wheel_rib",
+      "repeat": [
+        4,
+        4
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 98,
+      "id": "vitrified_stoneware",
+      "name": "Vitrified Stoneware",
+      "family": "ceramic",
+      "template": "wall",
+      "scale_m": [
+        0.3,
+        0.3
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "High-fired stoneware body with dense vitrified fracture and slight throwing compression.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region4_EmberholtHeights.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint the vitrified stoneware with ceramic_vitrified_body as its defining physical process. Show its construction in a neutral mid-value material study; avoid color, age, dirt, or patina as the identifying feature.",
+      "palette": "earth",
+      "motif": "ceramic_vitrified_body",
+      "repeat": [
+        6,
+        6
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 99,
+      "id": "leaded_glass",
+      "name": "Leaded Glass",
+      "family": "glass",
+      "template": "wall",
+      "scale_m": [
+        2,
+        2
+      ],
+      "regions": [
+        "lowmark",
+        "emberholt"
+      ],
+      "use": "Wall/infill finish; preserve apertures and joint readability.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale leaded glass with glass_leaded relief/pattern, restrained warm river-clay brown hue and clear mid-value grouping. Preserve physical edges and use traces; add no symbols. Apply as a visual interpretation of Caelmor_Region1_LowmarkVale.md, without implying local supply.",
+      "palette": "stone",
+      "motif": "glass_leaded",
+      "repeat": [
+        3,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    },
+    {
+      "rank": 100,
+      "id": "cased_leaded_glass",
+      "name": "Cased Leaded Glass",
+      "family": "glass",
+      "template": "wall",
+      "scale_m": [
+        0.3,
+        0.3
+      ],
+      "regions": [
+        "lowmark",
+        "thornfell",
+        "mire",
+        "emberholt"
+      ],
+      "use": "Thin colored glass casing held within a leaded frame, with visible depth at the pane edge.",
+      "research": [
+        "00_ADMIN/Reference/Caelmor_Material_Research_Review.xlsx",
+        "00_ADMIN/Reference/RS3_Material_Reuse_Research.xlsx",
+        "LORE/Regions/Caelmor_Region4_EmberholtHeights.md",
+        "CODE/Scripts/architectural_generator/ENGINE_CONTRACT.md",
+        "CODE/Scripts/architectural_generator/WORLD_ARCHITECTURAL_LANGUAGES.md"
+      ],
+      "paint": "Paint a metre-scale cased leaded glass using glass_cased_lead as the physical construction cue. Show material structure and joins in neutral mid-value; do not use age, dirt, patina, or hue shifts as the defining difference.",
+      "palette": "stone",
+      "motif": "glass_cased_lead",
+      "repeat": [
+        3,
+        3
+      ],
+      "notes": "Art-direction/surface treatment proposal only; region is a visual fit, not proof of extraction, trade, recipe, or locked canon."
+    }
+  ],
+  "required_maps": {
+    "master.png": "Original sRGB grayscale paint-value source",
+    "color.png": "RGB grayscale baseline linked as Procreate Base Color, chromatic paint may return separately",
+    "roughness.png": "Editable linear roughness, linked in the MTL",
+    "metallic.png": "Editable linear metallic, linked in the MTL",
+    "normal.png": "Derived tangent-space +Y normal, linked read-only in Procreate",
+    "height.png": "Derived scalar relief source, kept as a technical companion"
+  }
+}

@@ -1,0 +1,452 @@
+{
+  "packages_dir": "packages",
+  "count": 6,
+  "passed": 6,
+  "failed": 0,
+  "packages": [
+    {
+      "id": "split_oak_shingle",
+      "source": "split_oak_shingle.zip",
+      "status": "pass",
+      "obj": "material.obj",
+      "mtl_material": "split_oak_shingle",
+      "mtl_maps": {
+        "map_Kd": "color.png",
+        "map_roughness": "roughness.png",
+        "map_metallic": "metallic.png",
+        "map_tangentSpaceNormal": "normal.png"
+      },
+      "images": {
+        "master.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "color.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "sRGB"
+        },
+        "height.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "roughness.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "metallic.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "normal.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        }
+      },
+      "mesh": {
+        "dimensions_blender_xyz": [
+          2.0,
+          0.19750000536441803,
+          1.0
+        ],
+        "uv_layers": 1,
+        "uv_min": [
+          0.0,
+          0.0
+        ],
+        "uv_max": [
+          1.0,
+          1.0
+        ],
+        "uv_signed_area": 1.0,
+        "faces": 256,
+        "vertices": 289,
+        "boundary_edges": 64
+      },
+      "preview": "split_oak_shingle.png",
+      "render": {
+        "engine": "Cycles",
+        "resolution": [
+          640,
+          640
+        ],
+        "samples": 12
+      }
+    },
+    {
+      "id": "coursed_fieldstone",
+      "source": "coursed_fieldstone.zip",
+      "status": "pass",
+      "obj": "material.obj",
+      "mtl_material": "coursed_fieldstone",
+      "mtl_maps": {
+        "map_Kd": "color.png",
+        "map_roughness": "roughness.png",
+        "map_metallic": "metallic.png",
+        "map_tangentSpaceNormal": "normal.png"
+      },
+      "images": {
+        "master.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "color.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "sRGB"
+        },
+        "height.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "roughness.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "metallic.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "normal.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        }
+      },
+      "mesh": {
+        "dimensions_blender_xyz": [
+          2.0,
+          0.05000000074505806,
+          2.0
+        ],
+        "uv_layers": 1,
+        "uv_min": [
+          0.0,
+          0.0
+        ],
+        "uv_max": [
+          1.0,
+          1.0
+        ],
+        "uv_signed_area": 1.0,
+        "faces": 256,
+        "vertices": 289,
+        "boundary_edges": 64
+      },
+      "preview": "coursed_fieldstone.png",
+      "render": {
+        "engine": "Cycles",
+        "resolution": [
+          640,
+          640
+        ],
+        "samples": 12
+      }
+    },
+    {
+      "id": "split_slate",
+      "source": "split_slate.zip",
+      "status": "pass",
+      "obj": "material.obj",
+      "mtl_material": "split_slate",
+      "mtl_maps": {
+        "map_Kd": "color.png",
+        "map_roughness": "roughness.png",
+        "map_metallic": "metallic.png",
+        "map_tangentSpaceNormal": "normal.png"
+      },
+      "images": {
+        "master.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "color.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "sRGB"
+        },
+        "height.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "roughness.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "metallic.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "normal.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        }
+      },
+      "mesh": {
+        "dimensions_blender_xyz": [
+          2.0,
+          0.19750000536441803,
+          1.0
+        ],
+        "uv_layers": 1,
+        "uv_min": [
+          0.0,
+          0.0
+        ],
+        "uv_max": [
+          1.0,
+          1.0
+        ],
+        "uv_signed_area": 1.0,
+        "faces": 256,
+        "vertices": 289,
+        "boundary_edges": 64
+      },
+      "preview": "split_slate.png",
+      "render": {
+        "engine": "Cycles",
+        "resolution": [
+          640,
+          640
+        ],
+        "samples": 12
+      }
+    },
+    {
+      "id": "hewn_oak",
+      "source": "hewn_oak.zip",
+      "status": "pass",
+      "obj": "material.obj",
+      "mtl_material": "hewn_oak",
+      "mtl_maps": {
+        "map_Kd": "color.png",
+        "map_roughness": "roughness.png",
+        "map_metallic": "metallic.png",
+        "map_tangentSpaceNormal": "normal.png"
+      },
+      "images": {
+        "master.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "color.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "sRGB"
+        },
+        "height.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "roughness.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "metallic.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "normal.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        }
+      },
+      "mesh": {
+        "dimensions_blender_xyz": [
+          1.0,
+          0.02500000223517418,
+          4.0
+        ],
+        "uv_layers": 1,
+        "uv_min": [
+          0.0,
+          0.0
+        ],
+        "uv_max": [
+          1.0,
+          1.0
+        ],
+        "uv_signed_area": 1.0,
+        "faces": 256,
+        "vertices": 289,
+        "boundary_edges": 64
+      },
+      "preview": "hewn_oak.png",
+      "render": {
+        "engine": "Cycles",
+        "resolution": [
+          640,
+          640
+        ],
+        "samples": 12
+      }
+    },
+    {
+      "id": "forged_iron",
+      "source": "forged_iron.zip",
+      "status": "pass",
+      "obj": "material.obj",
+      "mtl_material": "forged_iron",
+      "mtl_maps": {
+        "map_Kd": "color.png",
+        "map_roughness": "roughness.png",
+        "map_metallic": "metallic.png",
+        "map_tangentSpaceNormal": "normal.png"
+      },
+      "images": {
+        "master.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "color.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "sRGB"
+        },
+        "height.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "roughness.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "metallic.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "normal.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        }
+      },
+      "mesh": {
+        "dimensions_blender_xyz": [
+          0.05999999865889549,
+          0.0031914899591356516,
+          0.05999999865889549
+        ],
+        "uv_layers": 1,
+        "uv_min": [
+          0.0,
+          0.0
+        ],
+        "uv_max": [
+          1.0,
+          1.0
+        ],
+        "uv_signed_area": 1.0,
+        "faces": 256,
+        "vertices": 289,
+        "boundary_edges": 64
+      },
+      "preview": "forged_iron.png",
+      "render": {
+        "engine": "Cycles",
+        "resolution": [
+          640,
+          640
+        ],
+        "samples": 12
+      }
+    },
+    {
+      "id": "plain_linen",
+      "source": "plain_linen.zip",
+      "status": "pass",
+      "obj": "material.obj",
+      "mtl_material": "plain_linen",
+      "mtl_maps": {
+        "map_Kd": "color.png",
+        "map_roughness": "roughness.png",
+        "map_metallic": "metallic.png",
+        "map_tangentSpaceNormal": "normal.png"
+      },
+      "images": {
+        "master.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "color.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "sRGB"
+        },
+        "height.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "roughness.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "metallic.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        },
+        "normal.png": {
+          "width": 512,
+          "height": 512,
+          "color_space": "Non-Color"
+        }
+      },
+      "mesh": {
+        "dimensions_blender_xyz": [
+          0.18000000715255737,
+          0.018899625167250633,
+          0.18000000715255737
+        ],
+        "uv_layers": 1,
+        "uv_min": [
+          0.0,
+          0.0
+        ],
+        "uv_max": [
+          1.0,
+          1.0
+        ],
+        "uv_signed_area": 1.0,
+        "faces": 256,
+        "vertices": 289,
+        "boundary_edges": 64
+      },
+      "preview": "plain_linen.png",
+      "render": {
+        "engine": "Cycles",
+        "resolution": [
+          640,
+          640
+        ],
+        "samples": 12
+      }
+    }
+  ]
+}

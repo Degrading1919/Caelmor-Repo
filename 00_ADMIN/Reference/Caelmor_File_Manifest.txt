@@ -371,4 +371,6 @@ LORE\Worldbuilding Docs/
     - Caelmor_War_History.md
 MEDIA\Concept Art/
 MEDIA\Maps/
+MEDIA\Materials/
+    - Original material masters, reusable painting templates, package source, and Procreate handoff evidence
 MEDIA\Reference Images/
