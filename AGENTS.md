@@ -2,10 +2,10 @@
 
 ## Delivery
 
-GitHub `Degrading1919/Caelmor-Repo` is the sole source of truth. `C:/Users/CK/Documents/Caelmor-Repo` is the only designated local checkout. Feature branches and PRs use that checkout. Additional clones, worktrees or parallel working directories require explicit Creative Director authorization.
+GitHub `Degrading1919/Caelmor-Repo` is the sole source of truth. `C:/Users/CK/Documents/Caelmor-Repo` is the only designated local checkout. **The Creative Director directs all ongoing project work on `main`.** No new feature branches, PRs, clones, worktrees or parallel working directories without explicit Creative Director authorization.
 
-- Fetch from `origin`, confirm the active branch/PR and check for pending local work before switching. Start new feature work on a `codex/` branch from the applicable GitHub base. Continue work for an existing PR on its designated branch. For architecture, use `codex/architectural-generator` and PR #85 while that review is open.
-- Commit only the scoped files and push the feature branch normally. Use a PR to review each feature before integration to `main`. Keep existing PRs for their assigned work. Do not merge a PR without Creative Director authorization. On a rejected push, preserve the commit, report the failure and stop unless the Director has authorized reconciliation. Never force-push or overwrite divergent work.
+- Before work, fetch `origin`, confirm the designated checkout is on `main`, inspect for pending local changes, and synchronize safely with `origin/main`. Work in the existing checkout on `main` for all authorized project tasks, including architectural development. Previous feature branches and PRs are historical records, not active implementation targets.
+- Commit only scoped, verified changes directly to `main` and push normally after fetching and integrating any remote changes safely. Preserve milestone reviews and Creative Director approval gates without requiring PRs. On a rejected push, preserve the commit, report the failure and stop unless the Director has authorized reconciliation. Never force-push or overwrite divergent work.
 - Commit and push every project-owned deliverable, including source, tools, research, evidence and decisions, at an existing File Manifest destination. Use the tracked tree to confirm exact paths. Record external references by source, revision or hash, and rights. Third-party assets require distribution rights before they can be published.
 - Keep temporary builds, research inputs and evidence inside the designated checkout. Before handoff, incorporate justified project-owned material, remove disposable outputs and verify the pushed commit and clean working tree. Persistent external research, evidence, build and staging directories are prohibited. Verify recoverability from GitHub before removing unique work, and obtain Creative Director authorization before retiring any old project copy.
 
@@ -33,4 +33,4 @@ The Creative Director sets objectives, approved canon/scope, and milestone accep
 - Prefer a compiling, executed, playable Lowmark slice over more scaffolding, speculative optimizations, or redundant governance reviews.
 - Distinguish source presence, successful compile, tests executed, Unity runtime validation, and real player experience; claim only what evidence supports.
 
-This standing authorization covers **routine execution within the user's assigned mission**. Follow the feature-branch, PR review and preservation workflow above.
+This standing authorization covers **routine execution within the user's assigned mission**. Follow the direct-`main`, single-checkout and preservation workflow above.
