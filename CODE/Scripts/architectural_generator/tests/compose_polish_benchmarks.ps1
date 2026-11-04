@@ -1,11 +1,17 @@
+param([switch]$Curves)
 $ErrorActionPreference='Stop'
 Add-Type -AssemblyName System.Drawing
-$root=Join-Path (Split-Path -Parent $PSScriptRoot) 'evidence/polish_v10'
+$evidence=Join-Path (Split-Path -Parent $PSScriptRoot) 'evidence'
+$folder=if($Curves){'curves_v11'}else{'polish_v10'}
+$root=Join-Path $evidence $folder
+$control=if($Curves){'../polish_v10/after'}else{'before'}
+$beforeLabel=if($Curves){'v0.10'}else{'v0.9'}
+$afterLabel=if($Curves){'v0.11'}else{'v0.10'}
 $out=Join-Path $root 'comparison'
 New-Item -ItemType Directory -Force $out | Out-Null
-$before=Get-Content (Join-Path $root 'before/manifest.json') -Raw | ConvertFrom-Json
+$before=Get-Content (Join-Path $root "$control/manifest.json") -Raw | ConvertFrom-Json
 $after=Get-Content (Join-Path $root 'after/manifest.json') -Raw | ConvertFrom-Json
-$pilot=Get-Content (Join-Path $root 'pilot/manifest.json') -Raw | ConvertFrom-Json
+if(!$Curves){$pilot=Get-Content (Join-Path $root 'pilot/manifest.json') -Raw | ConvertFrom-Json}
 $font=[Drawing.Font]::new('Segoe UI',16,[Drawing.FontStyle]::Bold)
 $brush=[Drawing.SolidBrush]::new([Drawing.Color]::WhiteSmoke)
 $sheets=[Collections.Generic.List[object]]::new()
@@ -49,11 +55,13 @@ function Find-Frame($manifest,$function,$distance,$finish,$view){
 try {
     $experiment=@()
     foreach($function in @('SMITHY','GATEHOUSE')){
-        $base=Find-Frame $before $function normal material 0
-        $variants=@($pilot.images | Where-Object {$_.function -eq $function -and $_.finish -eq 'material'})
-        $experiment+=,@(@{stage='before';row=$base;label="$function / v0.9 control"},
-            @{stage='pilot';row=($variants | Where-Object variant -eq 'material_only');label='New material / same geometry'},
-            @{stage='pilot';row=($variants | Where-Object variant -eq 'crafted');label='New material / first edge pass'})
+        if(!$Curves){
+            $base=Find-Frame $before $function normal material 0
+            $variants=@($pilot.images | Where-Object {$_.function -eq $function -and $_.finish -eq 'material'})
+            $experiment+=,@(@{stage='before';row=$base;label="$function / v0.9 control"},
+                @{stage='pilot';row=($variants | Where-Object variant -eq 'material_only');label='New material / same geometry'},
+                @{stage='pilot';row=($variants | Where-Object variant -eq 'crafted');label='New material / first edge pass'})
+        }
         foreach($distance in @('distant','normal','close')){
             $rows=@()
             foreach($finish in @('clay','material')){
@@ -71,7 +79,7 @@ try {
             New-Sheet "$($function.ToLowerInvariant())_$distance" "$function / $distance / matched studio and camera" $rows 4
         }
     }
-    New-Sheet 'experiment_normal' 'Controlled normal-distance experiment' $experiment 3
+    if(!$Curves){New-Sheet 'experiment_normal' 'Controlled normal-distance experiment' $experiment 3}
 } finally {$font.Dispose();$brush.Dispose()}
 @{sheets=@($sheets);before=$before.source_revision;after=$after.source_revision} |
     ConvertTo-Json -Depth 10 | Set-Content (Join-Path $out 'manifest.json') -Encoding utf8

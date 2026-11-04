@@ -9,6 +9,7 @@ reimported node links independently of the geometry hash.
 import hashlib
 import json
 import math
+import os
 import struct
 import sys
 import tempfile
@@ -24,7 +25,7 @@ from caelmor_architecture.engine import generate, geometry_hash
 from caelmor_architecture.model import Settings
 from caelmor_architecture.surface_atlas import ATLAS_REVISION
 
-OUT = ROOT / "evidence" / "polish_v10"
+OUT = ROOT / "evidence" / os.environ.get("CAELM_CONDITION_OUTPUT", "polish_v10")
 
 
 def read_glb(path):
@@ -560,7 +561,8 @@ def run_case(function, region):
         legacy["caelm_surface_revision"] = 3
         shader(legacy).inputs["Base Color"].default_value = legacy_color
     settings = Settings(function=function, region=region, seed=91, world_aware=True,
-                        use_grammar=True, detail="MEDIUM", geometry_mode="EFFICIENT")
+                        use_grammar=True, detail="MEDIUM", geometry_mode="EFFICIENT",
+                        crafted_curves=os.environ.get("CAELM_CRAFTED_CURVES") == "1")
     plan, buffers = generate(settings)
     expected = geometry_hash(buffers)
     collection, _ = build(settings)

@@ -119,7 +119,7 @@ class Context:
              entrance_edge=0,blocked_edges=(),steps=True,foundation='PLINTH',access_edges=(),
              function=None,gallery_edges=(),open_edges=(),open_access=(),wall_infill_roof_clearance=None,
              roof_axis='X',shed_reverse=False,passage_arch=None,aperture_schedule=None,frame_visibility=None,
-             construction=None):
+             construction=None,swept_eaves=0.):
         if any(m.key==key for m in self.masses):
             raise ValueError('Duplicate construction zone: '+key)
         if not all(math.isfinite(v) for v in (x,y,width,depth)) or min(width,depth)<1.4:
@@ -196,6 +196,11 @@ class Context:
                 wall_material='timber_light' if construction=='BOARD' else
                 'plaster' if construction=='TIMBER_INFILL' else 'stone')
         plan.suppress_chimney=self.settings.region in ('MIRE','EMBERHOLT') or openings=='NONE'
+        if swept_eaves:
+            if roof != 'GABLE':
+                raise ValueError('Swept eaves require a gable')
+            from .curve_profiles import swept_gable_sources
+            plan.custom_roof_sources=swept_gable_sources(plan,swept_eaves)
         if roof in ('BOW','SHED','TERRACE'):
             plan.custom_roof_sources=_profile_sources(plan,roof)
         buffers=build_facades(plan)+(_terrace_roof(plan) if roof=='TERRACE' else build_roof(plan))

@@ -2,7 +2,7 @@
 bl_info = {
     "name": "Caelmor Architectural Generator",
     "author": "Caelmor",
-    "version": (0, 10, 0),
+    "version": (0, 11, 0),
     "blender": (4, 2, 0),
     "location": "View3D > Sidebar > Caelmor",
     "description": "Generate editable regional Caelmor buildings",
@@ -70,6 +70,7 @@ def _settings_from_props(props):
         roof_style=props.caelm_roof_style,
         geometry_mode=props.caelm_geometry_mode,
         world_aware=props.caelm_world_aware,
+        crafted_curves=props.caelm_crafted_curves,
     )
 
 
@@ -97,6 +98,7 @@ def _set_props(props, settings):
     props.caelm_roof_style = settings.roof_style
     props.caelm_geometry_mode = settings.geometry_mode
     props.caelm_world_aware = settings.world_aware
+    props.caelm_crafted_curves = settings.crafted_curves
 
 
 def _active_build(context):
@@ -156,6 +158,9 @@ def _make_classes(b):
         caelm_world_aware: b.props.BoolProperty(
             name="World Construction Language", default=True,
             description="Arrange regional structural forms as roofed construction volumes")
+        caelm_crafted_curves: b.props.BoolProperty(
+            name="Crafted Curves", default=True,
+            description="Use swept Lowmark smithy roofs and joinery, taller Thornfell gate vaults, and continuous Mire bow ribs")
         caelm_roof_style: b.props.EnumProperty(name="Roof Style", items=[
             ('AUTO', "Regional / Type Default", "Select a suitable roof by type and region"),
             ('GABLE', "Gable", "Gabled roof"), ('HIP', "Hip", "Hipped roof")], default='AUTO')
@@ -322,6 +327,9 @@ def _make_classes(b):
             regional.prop(p, "caelm_maintenance")
             regional.prop(p, "caelm_use_grammar")
             regional.prop(p, "caelm_world_aware")
+            curve_row = regional.row()
+            curve_row.enabled = p.caelm_world_aware
+            curve_row.prop(p, "caelm_crafted_curves")
             roof_row = regional.row()
             roof_row.enabled = not p.caelm_world_aware
             roof_row.prop(p, "caelm_roof_style")

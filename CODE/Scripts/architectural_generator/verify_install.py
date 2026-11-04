@@ -39,8 +39,10 @@ props.caelm_geometry_mode={geometry_mode!r}
 props.caelm_world_aware={world_aware!r}
 """
         expression+="""
+import json
 assert bpy.ops.caelmor.generate()=={'FINISHED'}
 collection=next(c for c in bpy.data.collections if c.get('caelm_build'))
+assert json.loads(collection['caelm_settings'])['crafted_curves'] is True
 meshes=[o for o in collection.objects if o.get('caelm_generated') and not o.get('caelm_collider')]
 assert len(meshes)>=15,len(meshes)
 assert all('UV0_Metric' in o.data.uv_layers and 'UV1_Lightmap' in o.data.uv_layers for o in meshes)

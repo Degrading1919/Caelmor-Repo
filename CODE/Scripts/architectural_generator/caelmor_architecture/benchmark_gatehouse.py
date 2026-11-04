@@ -1,7 +1,9 @@
 """Thornfell pass-control benchmark: broad flanks, vaulted gate and guard hall."""
+from math import tau
 from .functional import Builder
 from .benchmark_construction import arch_ring
 from .geometry import MeshBuffer
+from .curve_profiles import voussoir_stations
 from .crafted_geometry import beveled_box
 
 
@@ -98,10 +100,14 @@ def build(ctx):
     for edge,station in ((1,link_y),(3,depth-link_y)):
         core_schedule[edge].append(dict(kind='door',role='gallery_access',s0=station-.55,
             s1=station+.55,z0=upper,z1=upper+2.05))
+    rise=.82 if b.settings.crafted_curves else .60
+    arch_spec={'spring':2.90,'rise':rise}
+    if b.settings.crafted_curves:
+        arch_spec['stations']=voussoir_stations(16,ctx.rng('gatehouse.voussoir_bond').uniform(0,tau))
     core=b.mass('gatehouse_portal',x=tower_width,width=core_width,depth=depth,
         floors=2,floor_height=3.8,function='GATEHOUSE',roof='GABLE',roof_axis='Y',pitch=32,
         overhang=.25,openings='NARROW',
-        passage_arch={'spring':2.90,'rise':.60},aperture_schedule=core_schedule)
+        passage_arch=arch_spec,aperture_schedule=core_schedule)
     towers=[]
     for side,x,inner,outer in (('west',0.,1,3),('east',tower_width+core_width,3,1)):
         schedule=_tower_openings(tower_width,tower_depth,base,outer)
@@ -129,22 +135,38 @@ def build(ctx):
         straps=b.fixture('gatehouse.leaf_straps.'+side,'iron',core,'gate_leaf')
         for zz in (.42,1.20,2.18):straps.box((lx,1.34,base+zz),(.11,1.52,.055))
     vault=b.fixture('gatehouse.vaulted_passage','stone_light',core,'vault')
-    arch_ring(vault,cx,.16,depth-.16,spring,1.4,.60,.26)
-    for face,ya,yb in (('front',-.34,.16),('rear',depth-.16,depth+.34)):
+    arch_ring(vault,cx,.16,depth-.16,spring,1.4,rise,.26,stations=arch_spec.get('stations'))
+    flare=.24 if b.settings.crafted_curves else 0.
+    projection=.51 if flare else .34
+    for face,wall_y,sign in (('front',0.,-1),('rear',depth,1)):
+        sections=sorted(((wall_y+sign*projection,flare),(wall_y,0.),
+                         (wall_y-sign*.16,0.)))
+        ya,yb=sections[0][0],sections[-1][0]
         arch=b.fixture('gatehouse.portal_arch.'+face,'stone_light',core,'structure')
-        arch_ring(arch,cx,ya,yb,spring,1.4,.60,.30)
+        arch_ring(arch,cx,ya,yb,spring,1.4,rise,.34 if flare else .30,
+                  stations=arch_spec.get('stations'),sections=sections if flare else None)
         for side,xa,xb in (('west',x0-.42,x0),('east',x1,x1+.42)):
             jamb=b.fixture('gatehouse.portal_jamb.'+face+'.'+side,'stone_light',core,'structure')
             rows=8;h=(spring-base)/rows
             for row in range(rows):
-                jamb.box(((xa+xb)*.5,(ya+yb)*.5,base+(row+.5)*h),
-                         (xb-xa,yb-ya,h-.012))
+                if flare:
+                    direction=-1 if side=='west' else 1
+                    # A broader springer spreads the ring's bearing into the jamb.
+                    left=xa-(.07 if row==rows-1 and direction<0 else 0.)
+                    right=xb+(.07 if row==rows-1 and direction>0 else 0.)
+                    section=[(left+direction*offset,y) for y,offset in sections]
+                    section.extend((right+direction*offset,y) for y,offset in reversed(sections))
+                    jamb.prism(section,base+row*h+.006,base+(row+1)*h-.006)
+                else:
+                    jamb.box(((xa+xb)*.5,(ya+yb)*.5,base+(row+.5)*h),
+                             (xb-xa,yb-ya,h-.012))
     # Raised grille and a visible winch aperture, separate from the open arch.
     iron=b.fixture('gatehouse.portcullis','iron',core,'defense')
+    bar_bottom=3.56+(rise-.60)
     for j in range(9):
         x=x0+.12+j*2.56/8
-        iron.beam((x,.07,base+3.56),(x,.07,base+5.32),.045,.055)
-    for z in (3.68,4.38,5.18):iron.box((cx,.07,base+z),(2.8,.08,.055))
+        iron.beam((x,.07,base+bar_bottom),(x,.07,base+5.32),.045,.055)
+    for z in (3.68+(rise-.60),4.38,5.18):iron.box((cx,.07,base+z),(2.8,.08,.055))
     iron.cylinder((cx-.62,.20,base+4.80),(cx+.62,.20,base+4.80),.13,10)
     for x in (x0-.07,x1+.07):iron.beam((x,.10,base+.12),(x,.10,base+4.65),.065,.065)
     for side,owner in zip(('west','east'),towers):

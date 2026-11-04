@@ -1,5 +1,7 @@
 """Construction rules for the two 0.8 art benchmarks; no stored mesh assets."""
 import math
+from .curve_profiles import cubic_centers
+from .curve_sweep import sweep_member
 
 
 def arch_polygon(opening, outer=0.):
@@ -8,14 +10,38 @@ def arch_polygon(opening, outer=0.):
     spec=opening['arch'];center=(s0+s1)*.5;radius=(s1-s0)*.5
     spring=spec['spring'];rise=spec['rise']+outer
     points=[(s0,opening['z0']-outer),(s1,opening['z0']-outer)]
-    for i in range(spec.get('segments',16)+1):
-        t=math.pi*i/spec.get('segments',16)
+    segments=spec.get('segments',16)
+    stations=spec.get('stations') or (math.pi*i/segments for i in range(segments+1))
+    for t in stations:
         points.append((center+radius*math.cos(t),spring+rise*math.sin(t)))
     return points
 
 
-def arch_ring(buffer,center,y0,y1,spring,radius,rise,thickness=.30,segments=16):
+def arch_ring(buffer,center,y0,y1,spring,radius,rise,thickness=.30,segments=16,stations=None,sections=None):
     """Bonded radial voussoirs with actual open intrados and normal depth."""
+    if stations is not None:
+        def point(y, flare, t, offset):
+            return (center+(radius+offset+flare)*math.cos(t),y,spring+(rise+offset)*math.sin(t))
+
+        def between(p,q,t):
+            return tuple(x+(y-x)*t for x,y in zip(p,q))
+
+        sections=sections or ((y0,0.),(y1,0.))
+        for a,b in zip(stations,stations[1:]):
+            vertices=[]
+            for y,flare in sections:
+                inner_a,inner_b=point(y,flare,a,0.),point(y,flare,b,0.)
+                outer_a,outer_b=point(y,flare,a,thickness),point(y,flare,b,thickness)
+                vertices.extend((between(inner_a,inner_b,.008),between(inner_a,inner_b,.992),
+                                 between(outer_a,outer_b,.992),between(outer_a,outer_b,.008)))
+            last=len(vertices)-4
+            faces=[(3,2,1,0),(last,last+1,last+2,last+3)]
+            for start in range(0,last,4):
+                for i in range(4):
+                    a0,a1=start+i,start+(i+1)%4
+                    faces.extend(((a0,a1,a1+4),(a0,a1+4,a0+4)))
+            buffer.indexed(vertices,faces)
+        return
     for i in range(segments):
         t0=math.pi*(i+.008)/segments;t1=math.pi*(i+.992)/segments
         points=[(center+r*math.cos(t),y0,spring+h*math.sin(t))
@@ -44,11 +70,26 @@ def smithy_range(b,main):
         ridge=main.width*.5;peak=main.roof_height(ridge,y)-.42
         frame.beam((ridge,y,top),(ridge,y,peak),.18,.18)
         for x in xs:
-            frame.chamfered_beam((x,y,top),(ridge,y,peak),.22,.26)
+            if ctx.settings.crafted_curves:
+                cuts={u for patch in main.plan.custom_roof_sources for u,_ in patch.poly
+                      if min(x,ridge)<u<max(x,ridge)}
+                stations=[x,*sorted(cuts,reverse=x>ridge),ridge]
+                centers=[(u,y,main.roof_height(u,y)-.36-.06*(u-x)/(ridge-x))
+                         for u in stations]
+                sweep_member(frame,centers,(0,1,0),[.26]*len(centers),[.22]*len(centers))
+            else:
+                frame.chamfered_beam((x,y,top),(ridge,y,peak),.22,.26)
         # Hewn knees join the post shoulders to the tie. The lower end stays
         # above the declared human route, with real bearing at both ends.
         knees=ctx.buffer('smithy.tie_knees.'+('front' if y<d*.5 else 'rear'),'timber','structure',main)
         for x,sign in ((xs[0],1),(xs[1],-1)):
+            if ctx.settings.crafted_curves:
+                hew=ctx.rng(f'smithy.knee.{y}.{sign}').uniform(-.045,.045)
+                centers=cubic_centers((x,y,top-.84),(x+sign*.24,y,top-.58+hew),
+                                      (x+sign*.50,y,top-.21+hew),(x+sign*.91,y,top-.14))
+                sweep_member(knees,centers,(0,1,0),[.20]*len(centers),
+                             [.24,.23,.22,.20,.19,.18,.20])
+                continue
             points=[(x,y-.10,top-.88),(x+sign*.14,y-.10,top-.86),
                     (x+sign*.40,y-.10,top-.49),(x+sign*.88,y-.10,top-.20),
                     (x+sign*.88,y-.10,top-.09),(x+sign*.65,y-.10,top-.09),

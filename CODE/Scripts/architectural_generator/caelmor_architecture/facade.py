@@ -211,7 +211,7 @@ def _openings_for_edge(plan, edge_index, edge):
     if arch:
         for o in openings:
             if o.get('role') in ('passage_entry','passage_exit'):
-                o['arch']={'spring':fh+arch['spring'],'rise':arch['rise'],'segments':16}
+                o['arch']={**arch,'spring':fh+arch['spring'],'segments':16}
                 o['z1']=o['arch']['spring']+arch['rise']
     if policy in ('EMBER','EMBER_HOME') and int(s.floors)>1 and edge_index in getattr(plan,'gallery_edges',()):
         deck_z=fh+float(s.floor_height)+.08

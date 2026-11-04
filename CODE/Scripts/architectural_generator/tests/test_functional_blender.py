@@ -40,7 +40,8 @@ class FunctionalMeshTests(unittest.TestCase):
             with self.subTest(function=function,region=region):
                 bpy.ops.wm.read_factory_settings(use_empty=True)
                 settings=Settings(function=function,region=region,seed=91,detail='MEDIUM',
-                                  geometry_mode='EFFICIENT',use_grammar=True,world_aware=True)
+                                  geometry_mode='EFFICIENT',use_grammar=True,world_aware=True,
+                                  crafted_curves=os.environ.get('CAELM_CRAFTED_CURVES')=='1')
                 collection,_=build(settings)
                 bpy.context.view_layer.update()
                 program=json.loads(collection['caelm_functional_program'])
@@ -107,8 +108,22 @@ class FunctionalMeshTests(unittest.TestCase):
                                 if location is not None:hits.append((obj.name,round(hit,3)))
                             self.assertFalse(hits,(function,region,route['key'],point,hits[:5]))
                             rays+=1
+                arch_probes=0
+                if settings.crafted_curves and (function,region)==('GATEHOUSE','THORNFELL'):
+                    x0,y0,z0,x1,y1,spring=next(r['bounds'] for r in program['routes']
+                                               if r['key']=='gatehouse_open_through_passage')
+                    x=(x0+x1)*.5
+                    for group in (visuals,[(o,t) for o,t in trees if o.get('caelm_collider')]):
+                        self.assertTrue(group)
+                        for offset,clear in ((.65,True),(.92,False)):
+                            start=Vector((x,y0-.6,spring+offset))
+                            hits=[obj.name for obj,tree in group
+                                  if tree.ray_cast(start,Vector((0,1,0)),y1-y0+1.2)[0] is not None]
+                            self.assertEqual(not hits,clear,(offset,hits[:5]))
+                            arch_probes+=1
                 reports.append({'function':function,'region':region,'clearance_rays':rays,
                                 'stair_headroom_rays':stair_probes,
+                                'arch_aperture_rays':arch_probes,
                                 'exhaust_path_rays':process_rays,
                                 'glass_structure_overlaps':len(overlap),
                                 'glazing_opaque_objects_tested':len(structure),

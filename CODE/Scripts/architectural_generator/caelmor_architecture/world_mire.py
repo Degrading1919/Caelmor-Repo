@@ -47,6 +47,12 @@ def _add_bow_ribs(ctx, mass, key, spacing=2.7):
                     for i in range(segments + 1)]
     for j in range(count):
         x = xmin + (xmax - xmin) * (j + .5) / count
+        if s.crafted_curves:
+            from .curve_sweep import sweep_member
+            centers = [(x,y,mass.roof_height(x,y)-.28) for y in stations]
+            width = .085 if s.detail == "LOW" else .11
+            sweep_member(buf,centers,(1,0,0),[width]*len(centers),[.10]*len(centers))
+            continue
         prev = None
         for y in stations:
             # Sample the mass's own roof envelope so every rafter follows the

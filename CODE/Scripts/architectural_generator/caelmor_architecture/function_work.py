@@ -312,13 +312,15 @@ def build_smithy(ctx):
         rear_open = []
         open_access = [{"edge_index": 2, "s0": w*.45, "s1": w*.55,
                         "height": 2.95}]
+    sweep = (b.ctx.rng('smithy.eaves').uniform(.28,.34)
+             if region == 'LOWMARK' and b.settings.crafted_curves else 0.)
     mass = b.mass("forge_hall", x=0, y=0, width=5.6 if region=='LOWMARK' else w, depth=d,
                    floors=1, floor_height=floor_height, openings="NONE", entrance_edge=0,
                    roof=b.roof,roof_axis='Y' if region=='LOWMARK' else 'X',
                    pitch=32 if region=="LOWMARK" else b.pitch,
                    open_edges=rear_open, open_access=open_access,
                    overhang=.42 if region == "LOWMARK" else .28,
-                   frame_visibility=0. if region=='LOWMARK' else None)
+                   frame_visibility=0. if region=='LOWMARK' else None,swept_eaves=sweep)
     # Public/work access along the front; the main through lane is kept clear.
     if region == "LOWMARK":
         b.deck("smithy.work_apron",[(.2,-1.35),(4.9,-1.35),(4.9,0),(.2,0)],

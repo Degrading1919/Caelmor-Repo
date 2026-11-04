@@ -1,6 +1,6 @@
 """v10 controlled art experiment and release evidence; reuse v08 studio/cameras."""
 import argparse,json,sys,time
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from pathlib import Path
 import bpy
 from mathutils import Vector
@@ -53,14 +53,22 @@ def main():
     parser=argparse.ArgumentParser();parser.add_argument('--stage',choices=['before','pilot','after'],required=True)
     parser.add_argument('--source-revision',required=True)
     parser.add_argument('--label')
+    parser.add_argument('--seed',type=int,default=91)
+    parser.add_argument('--curves',action='store_true',help='Capture the crafted-curves comparison')
     parser.add_argument('--cases',nargs='+',default=list(CASE_SPECS),choices=list(CASE_SPECS))
     args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
-    out=ROOT/'evidence/polish_v10'/(args.label or args.stage);out.mkdir(parents=True,exist_ok=True)
+    if args.seed != 91 and (not args.curves or args.stage != 'pilot' or not args.label):
+        parser.error('Alternate seeds require a named crafted-curves pilot')
+    if args.curves and args.stage=='before':
+        parser.error('Crafted curves reuse the immutable v10 after capture as their control')
+    folder='curves_v11' if args.curves else 'polish_v10'
+    out=ROOT/'evidence'/folder/(args.label or args.stage)
+    out.mkdir(parents=True,exist_ok=True)
     if args.stage=='before' and (out/'manifest.json').exists():raise RuntimeError('Completed control capture is immutable')
     sources=source_hashes();records=[];cases=[]
     for function in args.cases:
         s=settings(function)
-        if args.stage in ('before','pilot'):
+        if args.stage in ('before','pilot') and not args.curves:
             old=ROOT/'evidence/materials_v09/final'/(function.lower()+'.blend')
             bpy.ops.wm.open_mainfile(filepath=str(old))
             collection=next(c for c in bpy.data.collections if c.get('caelm_build'))
@@ -75,10 +83,15 @@ def main():
             material_records=capture(collection,out/'material_only',function,('material',),('normal',),(0,))
             for row in material_records:row['image']='material_only/'+row['image'];row['variant']='material_only'
             records+=material_records
+        if args.curves:
+            s=replace(s,crafted_curves=True,seed=args.seed)
         _reset_scene();bpy.data.objects['Neutral ground'].location.z=0.
         started=time.perf_counter();collection,metrics=build(s)
         plan,buffers=generate(s);checks=validate(plan,buffers);assert checks['valid'],checks['errors']
         assert geometry_hash(buffers)==collection['caelm_geometry_hash']
+        if args.curves and args.stage=='pilot':
+            cases.append(dict(function=function,settings=asdict(s),metrics=metrics,
+                              geometry_hash=geometry_hash(buffers)))
         dest=out/'crafted' if args.stage=='pilot' else out
         generated_records=capture(collection,dest,function,('clay','material'),('normal',) if args.stage=='pilot' else ('distant','normal','close'),(0,) if args.stage=='pilot' else (0,1))
         if args.stage=='pilot':
@@ -104,6 +117,7 @@ def main():
     unchanged=sources==source_hashes()
     if args.stage=='after':assert unchanged,'Source changed during final capture'
     (out/'manifest.json').write_text(json.dumps(dict(stage=args.stage,source_revision=args.source_revision,
+        control='polish_v10/after/manifest.json' if args.curves else None,
         generator_sha256=sources,source_unchanged_during_capture=unchanged,blender=bpy.app.version_string,
         render_script_sha256=sha(__file__),cases=cases,images=records,image_count=len(records)),indent=2)+'\n')
     print('POLISH_CAPTURE_PASS',args.stage,len(records),flush=True)

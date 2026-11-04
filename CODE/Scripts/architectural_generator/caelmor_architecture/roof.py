@@ -15,6 +15,7 @@ class RoofPatch:
     poly: list
     plane: tuple
     source: int = 0
+    swept: bool = False
 
     def height(self,x,y):
         a,b,c=self.plane
@@ -83,7 +84,7 @@ def roof_faces(plan):
             fragments=[part for poly in fragments for part in subtract_convex(poly,cutter)]
             if not fragments:
                 break
-        visible.extend(RoofPatch(poly,face.plane,face.source) for poly in fragments if area(poly)>1e-7)
+        visible.extend(RoofPatch(poly,face.plane,face.source,face.swept) for poly in fragments if area(poly)>1e-7)
     return visible
 
 
@@ -141,6 +142,11 @@ def roof_join_kind(points,patches,users):
     p,q=(patches[u[0]] for u in users)
     if sum(abs(x-y) for x,y in zip(p.plane,q.plane))<1e-6:
         return 'coplanar'
+    if p.swept and q.swept and p.source == q.source:
+        a, b = p.plane[:2]
+        c, d = q.plane[:2]
+        if a*c + b*d > 0 and abs(a*d - b*c) < 1e-8:
+            return 'profile'
     slope_sum=0.
     for patch,(_,a,b) in zip((p,q),users):
         dx,dy=points[b][0]-points[a][0],points[b][1]-points[a][1]
@@ -188,6 +194,23 @@ class Shingle:
         return a*x+b*y+c+.033+self.butt*lip+self.tilt*(u-(self.u0+self.u1)*.5)
 
 
+def shingle_step(plan):
+    cover_scale={'SHINGLE':1.,'SLATE':1.1,'CLAY':1.15,'REED':1.5}[plan.style.roof_cover]
+    exposure={'HIGH':.30,'MEDIUM':.44,'LOW':.85}[plan.settings.detail]*cover_scale
+    return exposure/math.sqrt(1+plan.slope**2)
+
+
+def roof_courses(plan, source, direction, limit):
+    step=shingle_step(plan)
+    rng=plan.rng(f'roof.courses.{source}.{direction}')
+    row,t=-2,-2*step
+    while t<=limit+1e-7:
+        advance=step*rng.uniform(.96,1.04)
+        yield row,t,advance
+        t+=advance
+        row+=1
+
+
 def shingle_layout(plan,patches=None,topology=None):
     """Variable-width, lapped courses on resolved slopes; bounded eave repairs.
 
@@ -200,9 +223,8 @@ def shingle_layout(plan,patches=None,topology=None):
     detail=plan.settings.detail
     cover=getattr(getattr(plan,'style',None),'roof_cover','SHINGLE')
     cover_scale={'SHINGLE':1.,'SLATE':1.1,'CLAY':1.15,'REED':1.5}[cover]
-    exposure={'HIGH':.30,'MEDIUM':.44,'LOW':.85}[detail]*cover_scale
     width={'HIGH':.205,'MEDIUM':.32,'LOW':.67}[detail]*cover_scale
-    step=exposure/math.sqrt(1+plan.slope**2)
+    step=shingle_step(plan)
     # Shingles need headlap, not separated rectangular plates on a bare deck.
     # Three-course coverage keeps the lower courses behind each open side joint.
     overlap=step*2.2
@@ -221,11 +243,7 @@ def shingle_layout(plan,patches=None,topology=None):
         # A short failed eave board can require replacing nearby shingle butts.
         repaired=cohort.random()<.34
         repair_u=cohort.uniform(source_lo+.2,source_hi-.2)
-        row=-2
-        t=-2*step
-        course_rng=plan.rng(f'roof.courses.{patch.source}.{direction}')
-        while t<=max_t+1e-7:
-            advance=step*course_rng.uniform(.96,1.04)
+        for row,t,advance in roof_courses(plan,patch.source,direction,max_t):
             end=t+advance+overlap
             if end>=min_t:
                 rng=plan.rng(f'roof.shingles.{patch.source}.{direction}.{row}')
@@ -255,8 +273,6 @@ def shingle_layout(plan,patches=None,topology=None):
                                               butt,tilt,t+advance))
                     u+=span
                     bay+=1
-            t+=advance
-            row+=1
     return output
 
 
@@ -402,6 +418,20 @@ def build_roof(plan):
                 x,y=(u,value) if axis==1 else (value,u)
                 ends.append((x,y,patch.height(x,y)-.22))
             rafters.beam(*ends,.12,.16)
+    if any(p.swept for p in patches):
+        from .curve_sweep import sweep_member
+        axis=0 if abs(patches[0].plane[0])>1e-8 else 1
+        across=1-axis
+        normal=(0,1,0) if axis==0 else (1,0,0)
+        limits=(min(p[across] for p in points),max(p[across] for p in points))
+        for limit in limits:
+            verge=sorted((p for p in points if p[across]==limit),key=lambda p:p[axis])
+            crown=max(range(len(verge)),key=lambda i:verge[i][2])
+            # Two separate boards bear against the ridge, avoiding a bent miter
+            # through the sharp crown. Section clearance covers the full slope.
+            for half in (verge[:crown+1],verge[crown:]):
+                centers=[(x,y,z-.205) for x,y,z in half]
+                sweep_member(fascia,centers,normal,[.13]*len(centers),[.22]*len(centers))
     for key,users in edges.items():
         a,b=(points[i] for i in key)
         length=math.dist(a,b)
@@ -409,6 +439,11 @@ def build_roof(plan):
             continue
         kind=roof_join_kind(points,patches,users)
         if kind=='edge':
+            patch=patches[users[0][0]]
+            if patch.swept and abs(a[0]*patch.plane[0]+a[1]*patch.plane[1]
+                                   -b[0]*patch.plane[0]-b[1]*patch.plane[1])>1e-7:
+                # The two continuous bargeboards follow the full verge profile.
+                continue
             method=fascia.chamfered_beam if detail!='LOW' else fascia.beam
             # The roof falls across the complete board section, not just its
             # centreline. Keep even the outer top arris below the supporting
