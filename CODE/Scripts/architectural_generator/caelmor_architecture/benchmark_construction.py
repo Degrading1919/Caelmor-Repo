@@ -77,12 +77,28 @@ def smithy_range(b,main,profile=None):
                                    's1':min(3.2,stock_w-.55),'height':2.25}])
     frame=ctx.buffer('smithy.primary_end_bent','timber','structure',main)
     frame.structural_role='pegged_primary_bent'
+    spec=ctx.component(frame,main,'primary_bent','frame_member','structural_timber')
+    from .construction_geometry import hewn_member
+    craft={'FINE':.68,'STANDARD':1.,'ROUGH':1.20}[b.settings.craftsmanship]
+
+    def cut(buffer, start, end, width, depth):
+        if spec and b.settings.detail!='LOW':
+            rng=ctx.rng(f'smithy.hewn.{start}.{end}')
+            hewn_member(buffer,start,end,width,depth,craft,rng)
+        else:
+            buffer.chamfered_beam(start,end,width,depth)
+
     for y in (.22,d-.24):
         xs=(.24,main.width-.24)
         top=min(main.roof_height(x,y) for x in xs)-.36
         for x in xs:
-            frame.chamfered_beam((x,y,z+.28),(x,y,top),.32,.32)
-        frame.chamfered_beam((xs[0],y,top-.10),(xs[1],y,top-.10),.30,.32)
+            cut(frame,(x,y,z+.28),(x,y,top),.32,.32)
+        cut(frame,(xs[0],y,top-.10),(xs[1],y,top-.10),.30,.32)
+        if spec:
+            for x,sign in zip(xs,(-1,1)):
+                # Through-tenons occupy the core of the existing tie. The
+                # small end grain shoulder is clear of the roof and route.
+                frame.chamfered_beam((x,y,top-.10),(x+sign*.195,y,top-.10),.13,.135,.018)
         ridge=main.width*.5;peak=main.roof_height(ridge,y)-.42
         frame.beam((ridge,y,top),(ridge,y,peak),.18,.18)
         for x in xs:
@@ -94,10 +110,12 @@ def smithy_range(b,main,profile=None):
                          for u in stations]
                 sweep_member(frame,centers,(0,1,0),[.26]*len(centers),[.22]*len(centers))
             else:
-                frame.chamfered_beam((x,y,top),(ridge,y,peak),.22,.26)
+                cut(frame,(x,y,top),(ridge,y,peak),.22,.26)
         # Hewn knees join the post shoulders to the tie. The lower end stays
         # above the declared human route, with real bearing at both ends.
         knees=ctx.buffer('smithy.tie_knees.'+('front' if y<d*.5 else 'rear'),'timber','structure',main)
+        ctx.component(knees,main,'tie_knees.'+('front' if y<d*.5 else 'rear'),
+                      'frame_member','structural_timber')
         for x,sign in ((xs[0],1),(xs[1],-1)):
             if ctx.settings.crafted_curves and getattr(main.plan,'custom_roof_sources',None):
                 hew=ctx.rng(f'smithy.knee.{y}.{sign}').uniform(-.045,.045)
@@ -117,6 +135,7 @@ def smithy_range(b,main,profile=None):
         h=main.roof_height(x,.22)-.42
         frame.beam((x,.22,h),(x,d-.24,h),.18,.22)
     stock_frame=ctx.buffer('smithy.stock_bents','timber','structure',stock)
+    ctx.component(stock_frame,stock,'stock_bents','frame_member','structural_timber')
     stock_bents=(.22,d-.24) if profile is None else (
         stock_y+.22,
         *((stock_y+stock_d*.5,) if profile['extra_stock_bent'] else ()),
@@ -125,7 +144,7 @@ def smithy_range(b,main,profile=None):
         for x in ((5.82,9.38) if profile is None else
                   (stock_x+.22,stock_x+stock_w-.22)):
             top=stock.roof_height(x,y)-.30
-            stock_frame.chamfered_beam((x,y,z),(x,y,top),.26,.26)
+            cut(stock_frame,(x,y,z),(x,y,top),.26,.26)
         xa,xb=((5.82,9.38) if profile is None else
                (stock_x+.22,stock_x+stock_w-.22))
         stock_frame.beam((xa,y,stock.roof_height(xa,y)-.30),
@@ -141,10 +160,14 @@ def smithy_range(b,main,profile=None):
         for x in (.24,main.width-.24):
             feet.box((x,y,z+.14),(.42,.42,.28))
     pegs=b.fixture('smithy.bent_joint_pegs','timber_light',main,'joinery')
+    if spec:
+        from .construction import bind
+        bind(spec,pegs)
+    # Expose the tapered ends of seated pins on the road-facing bent.
     for x in (.24,main.width-.24):
-        top=main.roof_height(x,.22)-.46
+        top=min(main.roof_height(a,.22) for a in (.24,main.width-.24))-.46 if spec else main.roof_height(x,.22)-.46
         for dx in (-.055,.055):
-            pegs.cylinder((x+dx,.065,top),(x+dx,.14,top),.023,6)
+            pegs.cylinder((x+dx,.037 if spec else .065,top),(x+dx,.14,top),.025 if spec else .023,6)
     # Masonry shields the timber from the hot bay and ties the stack foot to
     # the building. Its top leaves the verified side duct unobstructed.
     shield=b.fixture('smithy.fire_screen','stone',main,'fire_screen')

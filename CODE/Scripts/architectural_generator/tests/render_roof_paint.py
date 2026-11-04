@@ -1,5 +1,5 @@
 """Render two roof-only treatments against the existing fixed-camera baseline."""
-from dataclasses import asdict, replace
+from dataclasses import replace
 from pathlib import Path
 import json
 import sys
@@ -15,6 +15,7 @@ from render_polish_benchmarks import build,capture,export_building,settings
 from render_world_evidence import _reset_scene
 from render_architectural_benchmarks import source_hashes
 from test_condition_export import assert_glb_materials,check_reimport,linked_image,read_glb
+from caelmor_architecture.blender_backend import _settings_dict
 from caelmor_architecture.engine import generate,geometry_hash
 from caelmor_architecture.surface_atlas import FAMILY,apply_surfaces
 
@@ -49,7 +50,7 @@ def compare_maps(previous,current,roof_ids):
 
 def run_case(function,baseline,scratch):
     s=replace(settings(function),crafted_curves=True,seed_massing=True)
-    prior=next(row for row in baseline['cases'] if row['settings']==asdict(s))
+    prior=next(row for row in baseline['cases'] if row['settings']==_settings_dict(s))
     before=next(frame for frame in prior['after'] if frame['view']==0)
     _reset_scene()
     bpy.data.objects['Neutral ground'].location.z=0.
@@ -91,7 +92,7 @@ def run_case(function,baseline,scratch):
             treatments[mode].update(material_export=export,reimport=reimport)
         else:
             pigment=current
-    return dict(settings=asdict(s),geometry_hash=prior['geometry_hash'],
+    return dict(settings=_settings_dict(s),geometry_hash=prior['geometry_hash'],
                 baseline=before,baseline_glb_bytes=baseline_glb.stat().st_size,treatments=treatments)
 
 

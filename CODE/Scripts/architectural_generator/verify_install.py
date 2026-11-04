@@ -13,9 +13,9 @@ from package_addon import package
 
 def run(blender, export=None, region='LOWMARK', function='FARMHOUSE', geometry_mode='SOLID',world_aware=True):
     archive,archive_hash=package()
-    with tempfile.TemporaryDirectory(prefix='caelmor_install_') as directory:
+    with tempfile.TemporaryDirectory(prefix='caelmor_install_', dir=archive.parent) as directory:
         target=Path(directory).resolve()
-        assert target.parent==Path(tempfile.gettempdir()).resolve()
+        assert target.parent==archive.parent.resolve()
         env=os.environ.copy()
         for variable,name in [('BLENDER_USER_CONFIG','config'),('BLENDER_USER_SCRIPTS','scripts'),('BLENDER_USER_EXTENSIONS','extensions')]:
             path=target/name

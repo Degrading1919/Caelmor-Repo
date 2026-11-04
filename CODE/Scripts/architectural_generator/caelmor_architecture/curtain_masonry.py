@@ -36,7 +36,7 @@ def _facing_stone(buffer, x0, x1, z0, z1, nose, bed, rng, dressed):
     buffer.indexed(front+back,faces)
 
 
-def dressed_curtain_return(buffer, start, end, station, base, seed):
+def dressed_curtain_return(buffer, start, end, station, base, seed, *, dressed=False):
     """Build road facing and cap around a continuous bearing wall.
 
     The wall runs from tower joint to site interface in positive X. The
@@ -68,7 +68,7 @@ def dressed_curtain_return(buffer, start, end, station, base, seed):
             x1=start+b*width-(.012 if not last else 0.)
             z0=levels[row]+(.009 if row else 0.)
             z1=levels[row+1]-.009
-            _facing_stone(buffer,x0,x1,z0,z1,front-setback,bed,rng,header or role=='foot')
+            _facing_stone(buffer,x0,x1,z0,z1,front-setback,bed,rng,dressed or header or role=='foot')
     for i,(a,b) in enumerate(zip((.0,.34,.66),(.34,.66,1.))):
         x0=start+a*width+(.012 if i else 0.)
         x1=start+b*width-(.012 if i<2 else 0.)

@@ -171,7 +171,7 @@ def apply_surfaces(objects,plan,settings,context_objects=None,*,roof_finish="BAS
     for obj in objects:
         if obj.type!='MESH' or obj.get('caelm_collider'):continue
         key=obj.get('caelm_material','timber')
-        if key not in FAMILY:continue
+        if key not in FAMILY or obj.get('caelm_finish','').startswith('material:'):continue
         host=hosts.get(obj.get('caelm_world_zone'),plan)
         base=_palette_entry(key,getattr(host,'style',None),settings)[0]
         buffer_id=obj.get('caelm_buffer_id','')
@@ -179,13 +179,14 @@ def apply_surfaces(objects,plan,settings,context_objects=None,*,roof_finish="BAS
         wall_stock=uses_masonry_stock(buffer_id,settings)
         groups.setdefault((key,base,wall_stock),[]).append((obj,host))
     reports=[]
+    surface_settings={k:v for k,v in settings.__dict__.items() if k!='construction_overrides'}
     for (key,base,wall_stock),members in sorted(groups.items()):
         painted_roof=(FAMILY[key]=='roof' and roof_finish!='BASELINE'
                       and settings.world_aware
                       and (settings.region,settings.function) in (('LOWMARK','SMITHY'),('THORNFELL','GATEHOUSE')))
         course_edges=painted_roof and roof_finish=='COURSES'
         digest=hashlib.sha256()
-        digest.update(json.dumps((ATLAS_REVISION,key,base,settings.__dict__),sort_keys=True).encode())
+        digest.update(json.dumps((ATLAS_REVISION,key,base,surface_settings),sort_keys=True).encode())
         if painted_roof:
             digest.update(f'roof pigment v1 {roof_finish}'.encode())
         hewn={obj.name for obj,_ in members if FAMILY[key]=='wood'

@@ -440,7 +440,7 @@ def _gable_profile(plan, edge):
     return [(s, height_at(s)) for s in sorted(cuts)]
 
 
-def _skin_polygon(buffer, edge, polygon_sz, outward, thickness, efficient=False):
+def _skin_polygon(buffer, edge, polygon_sz, outward, thickness, efficient=False, slope=0., center=0.):
     """Emit a clipped s/z face as a closed veneer or explicit SURFACE detail."""
     if len(polygon_sz)<3 or abs(area(polygon_sz))<.012:
         return
@@ -449,8 +449,8 @@ def _skin_polygon(buffer, edge, polygon_sz, outward, thickness, efficient=False)
     a,b=edge
     (tx,ty),_length=_unit(a,b)
     n=(ty,-tx)
-    xyz=[(a[0]+tx*s+n[0]*outward,a[1]+ty*s+n[1]*outward,z)
-         for s,z in polygon_sz]
+    xyz=[(a[0]+tx*s+n[0]*(outward+(s-center)*slope),
+          a[1]+ty*s+n[1]*(outward+(s-center)*slope),z) for s,z in polygon_sz]
     if efficient:
         # EFFICIENT keeps the visible front and every exposed edge reveal so
         # staggered joints retain real depth. Only the concealed back cap goes.
@@ -471,6 +471,11 @@ def _cladding_tiles(plan, edge_index, edge, openings, construction, buffer):
         return
     detail=str(getattr(plan.settings,"detail","HIGH")).upper()
     efficient=str(getattr(plan.settings,"geometry_mode","SOLID")).upper()=="EFFICIENT"
+    worked = getattr(plan, 'construction_resolver', None) is not None
+    from .construction_geometry import stone_face
+    body = getattr(plan,'masonry_body',None)
+    arris_scale = {'fieldstone':1.15,'ridge_stone':1.,'volcanic_stone':.85}.get(
+        getattr(body,'substrate',None),1.)
     # Low-detail faces remain broad and let the material normal carry fine grain.
     if construction=="RUBBLE":
         rng=plan.rng(f"facade.cladding.rubble.edge.{edge_index}")
@@ -487,8 +492,25 @@ def _cladding_tiles(plan, edge_index, edge, openings, construction, buffer):
                 lo,hi=max(0.0,s+.018),min(length,s+span-.018)
                 if hi-lo>.16:
                     tile=[(lo,z+.008),(hi,z+.008),(hi,z+h-.008),(lo,z+h-.008)]
-                    _emit_clipped_skin_tile(plan,edge_index,edge,profile,openings,buffer,
-                                            tile,efficient)
+                    if worked:
+                        # Low courses and periodically tied headers project;
+                        # field stones retain a calmer common bedding face.
+                        header=(row+(0 if s<base_w else int(s/base_w)))%5==0
+                        # Broad construction hierarchy first, then uneven
+                        # seating inside each band. Keep relief within the
+                        # reveal and eave reserve set by the clipping rules.
+                        proud=(.077 if row==0 else .064 if header else .036)
+                        seat=plan.rng(f'facade.bedding.{edge_index}.{row}.{s:.5f}')
+                        tolerance={'FINE':.004,'STANDARD':.010,'ROUGH':.016}[plan.settings.craftsmanship]
+                        proud+=seat.uniform(-tolerance,tolerance)
+                        arris={'FINE':.014,'STANDARD':.024,'ROUGH':.034}[plan.settings.craftsmanship]
+                        if header and detail!='LOW' and h>.045:
+                            tile=stone_face(lo,hi,z+.008,z+h-.008,arris*arris_scale)
+                        _emit_clipped_skin_tile(plan,edge_index,edge,profile,openings,buffer,
+                                                tile,efficient,outward=proud,thickness=proud+.012)
+                    else:
+                        _emit_clipped_skin_tile(plan,edge_index,edge,profile,openings,buffer,
+                                                tile,efficient)
                 s+=span
             z+=h
             row+=1
@@ -507,8 +529,12 @@ def _cladding_tiles(plan, edge_index, edge, openings, construction, buffer):
                 lo,hi=max(0.0,s+.022),min(length,s+span-.022)
                 if hi-lo>.22:
                     tile=[(lo,z+.012),(hi,z+.012),(hi,z+h-.012),(lo,z+h-.012)]
+                    # Medium detail keeps arrises at periodic bond headers.
+                    if worked and h>.055 and (detail=='HIGH' or detail=='MEDIUM' and
+                                               (row+int(max(0,s)/bay_w))%3==0):
+                        tile=stone_face(lo,hi,z+.012,z+h-.012,.013*arris_scale)
                     _emit_clipped_skin_tile(plan,edge_index,edge,profile,openings,buffer,
-                                            tile,efficient)
+                                            tile,efficient, **({'outward':.034,'thickness':.046} if worked else {}))
                 s+=span
             z+=h
             row+=1
@@ -517,38 +543,61 @@ def _cladding_tiles(plan, edge_index, edge, openings, construction, buffer):
         board_w=.42 if detail=="LOW" else (.27 if detail=="MEDIUM" else .21)
         gap=.022 if detail!="LOW" else .03
         s=-.5*board_w
+        work_rng=plan.rng(f'facade.boarding.stock.edge.{edge_index}') if worked else None
+        craft={'FINE':.60,'STANDARD':1.,'ROUGH':1.23}[plan.settings.craftsmanship]
+        exposure=min(1.,plan.style.weather_exposure*(1.-plan.settings.maintenance*.60)+plan.settings.age/280.)
+        index=0
         while s<length:
-            width=board_w*rng.uniform(.97,1.03)
+            tolerance=.22*craft if worked else .03
+            width=board_w*rng.uniform(1.-tolerance,1.+tolerance)
             lo,hi=max(0.0,s+gap*.5),min(length,s+width-gap*.5)
             if hi-lo>.07:
-                tile=[(lo,bottom),(hi,bottom),(hi,roof_max),(lo,roof_max)]
+                left_end=right_end=bottom
+                props={}
+                if work_rng is not None:
+                    # Deep, individually seated boards share one backing.
+                    # Worked edges tilt across the width. A few untrimmed
+                    # ends sit above the splash line without moving the plinth.
+                    nose=.041+craft*work_rng.uniform(-.014,.025)
+                    if detail!='LOW' and work_rng.random()<.18+.22*exposure:
+                        left_end+=work_rng.uniform(.018,.075)*craft
+                        right_end=left_end+work_rng.uniform(-.011,.024)*craft
+                    props=dict(outward=nose,thickness=nose+.025,
+                               slope=work_rng.uniform(-.10,.10)*craft,center=(lo+hi)*.5)
+                tile=[(lo,left_end),(hi,right_end),(hi,roof_max),(lo,roof_max)]
                 _emit_clipped_skin_tile(plan,edge_index,edge,profile,openings,buffer,
-                                        tile,efficient)
+                                        tile,efficient, **props)
             # Narrow battens cover board joints and remain subject to the same
             # roof and full-assembly cutters as the siding beneath them.
-            batten=.035 if detail=="HIGH" else (.028 if detail=="MEDIUM" else .0)
+            if worked:
+                batten=(.078 if index%4==0 else .063) if detail!='LOW' else .057
+            else:
+                batten=.035 if detail=="HIGH" else (.028 if detail=="MEDIUM" else .0)
             if batten and lo>0:
                 blo,bhi=max(0.0,s-batten*.5),min(length,s+batten*.5)
                 if bhi-blo>.02:
                     tile=[(blo,bottom),(bhi,bottom),(bhi,roof_max),(blo,roof_max)]
                     _emit_clipped_skin_tile(plan,edge_index,edge,profile,openings,buffer,
-                                            tile,efficient,outward=.024,thickness=.012)
+                                            tile,efficient,outward=.079 if worked else .024,
+                                            thickness=.086 if worked else .012)
             s+=width
+            index+=1
 
 
 def _emit_clipped_skin_tile(plan,edge_index,edge,profile,openings,buffer,tile,efficient,
-                            outward=.022,thickness=.018):
+                            outward=.022,thickness=.018,slope=0.,center=0.):
     """Clip a tile to one roof-profile segment and all assembly exclusion boxes."""
+    bounded=getattr(plan,'construction_resolver',None) is not None
     for (rs0,rh0),(rs1,rh1) in zip(profile,profile[1:]):
         if rs1-rs0<1e-8:
             continue
-        piece=clip(tile,1,0,-rs0)
-        piece=clip(piece,-1,0,rs1)
+        piece=clip(tile,1,0,-rs0,bounded=bounded)
+        piece=clip(piece,-1,0,rs1,bounded=bounded)
         if not piece:
             continue
-        slope=(rh1-rh0)/(rs1-rs0)
-        roof_intercept=rh0-slope*rs0-.12
-        piece=clip(piece,slope,-1,roof_intercept)
+        roof_slope=(rh1-rh0)/(rs1-rs0)
+        roof_intercept=rh0-roof_slope*rs0-.12
+        piece=clip(piece,roof_slope,-1,roof_intercept,bounded=bounded)
         if not piece:
             continue
         fragments=[piece]
@@ -568,12 +617,12 @@ def _emit_clipped_skin_tile(plan,edge_index,edge,profile,openings,buffer,tile,ef
                     min(p[1] for p in fragment)>=bounds["z1"]):
                     next_fragments.append(fragment)
                 else:
-                    next_fragments.extend(subtract_convex(fragment,planes))
+                    next_fragments.extend(subtract_convex(fragment,planes,bounded=bounded))
             fragments=next_fragments
             if not fragments:
                 break
         for fragment in fragments:
-            _skin_polygon(buffer,edge,fragment,outward,thickness,efficient)
+            _skin_polygon(buffer,edge,fragment,outward,thickness,efficient,slope,center)
 
 
 def frame_layout(plan, edge_index, edge):
@@ -796,6 +845,24 @@ def _add_foundation(buffers, plan, edge_index, edge):
     _wall_solid(core,a,b,n,0,length,0.0,fh,thickness=getattr(plan,'wall_thickness',WALL_THICKNESS))
     # Shallow, staggered cut-stone courses on the outside face; the core closes gaps.
     rng = plan.rng(f"facade.masonry.edge.{edge_index}")
+    spec = getattr(stone,'construction',None)
+    if spec:
+        from .construction_geometry import stone_face
+        dressed = spec.treatment=='dressed_stone'
+        count=max(1,round(fh/(.29 if dressed else .23)))
+        for row in range(count):
+            height=fh/count
+            position=-(.35 if row%2 else 0.)
+            while position<length:
+                width=rng.uniform(.76,.82) if dressed else rng.uniform(.55,.89)
+                left,right=max(0.,position+.012),min(length,position+width-.012)
+                if right-left>.12:
+                    bottom,top=row*height+.009,(row+1)*height-.009
+                    proud=.066 if row==0 else .041
+                    polygon=stone_face(left,right,bottom,top,.014 if dressed else .024)
+                    _skin_polygon(stone,edge,polygon,proud,proud+.026)
+                position+=width
+        return
     course_h = 0.22
     for row, z0 in enumerate((0.04, 0.26)):
         z1 = min(fh-0.015,z0+course_h)
@@ -836,9 +903,12 @@ def _corner_quoin(buf, point, size=0.25):
     buf.box((point[0],point[1],0.245),(size,size,0.40))
 
 
-def _opening_frame(buffers, a,b,n,o, function, foundation_height=FOUNDATION_HEIGHT, generate_steps=True, glazing_recess=0., door_thickness=WALL_THICKNESS):
+def _opening_frame(buffers, a,b,n,o, function, foundation_height=FOUNDATION_HEIGHT,
+                   generate_steps=True, glazing_recess=0., door_thickness=WALL_THICKNESS, trim=None):
     tx,ty = _unit(a,b)[0]
     windows, doors, timbers, details = buffers["windows"],buffers["doors"],buffers["timber"],buffers["details"]
+    if trim is not None:
+        timbers = trim
     kind=o["kind"]; s0,s1,z0,z1=o["s0"],o["s1"],o["z0"],o["z1"]
     if o.get('arch') or o.get('role') in ('arrow_loop','portcullis_slot'):
         # These openings receive masonry reveals from their construction rule.
@@ -863,13 +933,21 @@ def _opening_frame(buffers, a,b,n,o, function, foundation_height=FOUNDATION_HEIG
                             (steps-step)*.28,step_z0,step_z1)
         # Door leaf as an oriented closed prism.
         poly = _xy_wall(a,b,n,s0+0.035,s1-0.035,inset=-0.018,thickness=door_thickness)
-        doors.prism(poly,z0+0.05,z1-0.035)
-        # Narrow vertical board seams and three cross rails, overlaid as timber members.
         count=max(3,int((s1-s0)/0.19))
-        for j in range(1,count):
-            ss=s0+0.035+(s1-s0-0.07)*j/count
-            p0,p1=point(ss,-0.042),point(ss,-0.042)
-            doors.beam((p0[0],p0[1],z0+0.12),(p1[0],p1[1],z1-0.12),0.018,0.018)
+        if getattr(doors,'construction',None):
+            start=s0+.035
+            width=(s1-s0-.07)/count
+            for j in range(count):
+                left=start+j*width
+                board=_xy_wall(a,b,n,left+.002,left+width-.002,inset=-.018,thickness=door_thickness)
+                doors.prism(board,z0+.05,z1-.035)
+        else:
+            doors.prism(poly,z0+0.05,z1-0.035)
+            for j in range(1,count):
+                ss=s0+.035+(s1-s0-.07)*j/count
+                x,y=point(ss,-.042)
+                doors.beam((x,y,z0+.12),(x,y,z1-.12),.018,.018)
+        # Cross rails tie the leaves in both assemblies.
         for zz in (z0+0.36,z0+0.74,z1-0.26):
             _beam_edge(doors,a,b,s0+0.08,s1-0.08,zz,0.08,0.035,normal=n,normal_offset=.05)
         # Black iron strap hinges and a plain hanging ring.
@@ -933,6 +1011,8 @@ def _timber_frame(buffers, plan, edge_index, edge, openings, top):
     layout = frame_layout(plan, edge_index, edge)
     detail=str(plan.settings.detail).upper()
     chamfer=.012 if detail=="HIGH" else (.008 if detail=="MEDIUM" else 0.0)
+    if getattr(timber,'construction',None) and detail!='LOW':
+        chamfer={'ROUGH':.018,'STANDARD':.012,'FINE':.007}[plan.settings.craftsmanship]
     post_width = .22 if str(plan.settings.function).upper() in ("BARN", "GRAIN_STORE") else .19
     structural_top=layout["roof_safety"]["structural_top"]
     visibility=float(getattr(getattr(plan,"style",None),"frame_visibility",1.0))
@@ -1313,6 +1393,50 @@ def _gable_infill(buf, plan, edge):
                 buf.indexed(vertices,faces)
 
 
+def _facade_components(plan, buffers, pier_mode, construction):
+    from .construction import bind, component
+    resolver = getattr(plan, 'construction_resolver', None)
+    if resolver is None:
+        return construction
+    industrial = getattr(plan, 'world_mass', False) and plan.settings.region == 'EMBERHOLT'
+    if pier_mode:
+        bind(component(plan,'raised_frame','frame_member','structural_timber'), buffers['foundation_core'])
+    else:
+        bind(component(plan,'plinth','plinth','stone_masonry'),
+             buffers['foundation_core'], buffers['stone'])
+    if not industrial:
+        if construction not in ('RUBBLE', 'ASHLAR'):
+            bind(component(plan,'frame','frame_member','structural_timber'), buffers['timber'])
+        bind(component(plan,'door_leaves','boarding','wooden_boarding'), buffers['doors'])
+
+    if construction in ('RUBBLE','ASHLAR'):
+        body = bind(component(plan,'wall','wall_body',
+                              'dressed_stone' if construction=='ASHLAR' else 'stone_masonry'),
+                    buffers['walls'], buffers['masonry_skin'])
+        plan.masonry_body=body
+        construction = 'ASHLAR' if body.treatment=='dressed_stone' else 'RUBBLE'
+        if not industrial:
+            bind(component(plan,'opening_trim','opening_trim','dressed_stone'), buffers['cut_opening_trim'])
+        if resolver.requested(f'{plan.construction_zone}/wall_surface','wall_surface'):
+            bind(component(plan,'wall_surface','wall_surface','plaster_limewash',
+                           host=body.component_id), buffers['render_skin'])
+            # A wash follows the exposed masonry. A thick render replaces the
+            # exposed facing and bonds directly to the continuous backing.
+            if buffers['render_skin'].construction.substrate == 'limewash':
+                buffers['masonry_skin'].material = 'plaster'
+    else:
+        if industrial and construction=='BOARD':
+            # Preserve this specialized iron shell outside the timber taxonomy.
+            return construction
+        infill = component(plan,'wall_infill','wall_infill',
+                           'wooden_boarding' if construction=='BOARD' else 'plaster_limewash',
+                           treatments=('plaster_limewash',) if industrial else None)
+        construction = 'BOARD' if infill.treatment=='wooden_boarding' else 'TIMBER_INFILL'
+        bind(infill,buffers['walls'],buffers['board_skin'],buffers['render_skin'])
+        buffers['walls'].material='timber_light' if construction=='BOARD' else 'plaster'
+    return construction
+
+
 def build_facades(plan):
     """Build exterior wall, frame, openings, plinth and restrained building details."""
     buffers = {}
@@ -1350,6 +1474,18 @@ def build_facades(plan):
     add("access_rails","timber","details")
     add("slipway","timber_light","foundation")
 
+    if getattr(plan, 'construction_resolver', None) is not None:
+        add("render_skin","plaster","walls")
+        add("cut_opening_trim","stone_light","structure")
+    construction = _facade_components(plan, buffers, pier_mode, construction)
+    render = buffers.get('render_skin')
+    coating = getattr(render, 'construction', None)
+    if coating and coating.component_role=='wall_surface' and coating.substrate=='limewash':
+        # Zero-relief coat: the same faces carry the coating provenance and
+        # plaster surface, while the wall component retains its physical stock.
+        from .construction import bind
+        bind(coating, buffers['masonry_skin'])
+
     if pier_mode:
         # A continuous closed timber deck sits at the plan foundation datum and
         # joins the raised perimeter beams before the wall assemblies begin.
@@ -1368,8 +1504,33 @@ def build_facades(plan):
         _add_foundation(buffers,plan,i,edge)
         is_open=i in getattr(plan,'open_edges',())
         if not is_open:_wall_panels(buffers["walls"],a,b,n,length,openings,wall_top,fh,getattr(plan,'wall_thickness',WALL_THICKNESS))
-        if skin_buffer is not None and not is_open:
-            _cladding_tiles(plan,i,edge,openings,construction,skin_buffer)
+        if not is_open:
+            thick_coat = coating and coating.component_role=='wall_surface' and coating.substrate!='limewash'
+            if skin_buffer is not None and not thick_coat:
+                _cladding_tiles(plan,i,edge,openings,construction,skin_buffer)
+            if thick_coat or (coating and construction=='TIMBER_INFILL'):
+                profile = _gable_profile(plan,edge)
+                top = max(z for _,z in profile)
+                thickness = .034 if coating.substrate=='earthen_render' else .023
+                tile = [(0,fh),(length,fh),(length,top),(0,top)]
+                # Render ends against the plinth. A short worn margin exposes
+                # backing only at the bottom, outside the reserved apertures.
+                wear=plan.style.weather_exposure*(1-plan.settings.maintenance)
+                if wear>.12 and plan.settings.detail!='LOW' and length>1.:
+                    width=min(.36,length*.15)
+                    start=plan.rng(f'facade.render.splash.{i}').uniform(.18,length-width-.18)
+                    left=[(0,fh),(start,fh),(start,top),(0,top)]
+                    apex=start+width*.35
+                    lost=fh+min(.11,.045+wear*.12)
+                    chip_left=[(start,fh),(apex,lost),(apex,top),(start,top)]
+                    chip_right=[(apex,lost),(start+width,fh),(start+width,top),(apex,top)]
+                    right=[(start+width,fh),(length,fh),(length,top),(start+width,top)]
+                    tiles=(left,chip_left,chip_right,right)
+                else:
+                    tiles=(tile,)
+                for panel in tiles:
+                    _emit_clipped_skin_tile(plan,i,edge,profile,openings,render,panel,False,
+                                            outward=thickness*.74,thickness=thickness)
         _timber_frame(buffers,plan,i,edge,openings,wall_top)
         # Small exposed pegs indicate the principal post/plate joints. Pegs follow
         # the semantic frame schedule and sit flush to the outward face of timber.
@@ -1393,9 +1554,11 @@ def build_facades(plan):
                     end=(x+n[0]*.145,y+n[1]*.145,z)
                     buffers["pegs"].cylinder(start,end,.018,6)
         for o in openings:
+            trim = buffers.get('cut_opening_trim')
             _opening_frame(buffers,a,b,n,o,str(plan.settings.function).upper(),_foundation(plan),
                            getattr(plan,'entry_steps',True),getattr(plan,'glazing_recess',0.),
-                           getattr(plan,'door_thickness',WALL_THICKNESS))
+                           getattr(plan,'door_thickness',WALL_THICKNESS),
+                           trim if getattr(trim,'construction',None) else None)
         # Foundation joints are represented by very shallow mortar reveals between courses.
         # Thin segmented seams remain on the exterior face and never cut the solid core.
         tx,ty=_unit(a,b)[0]

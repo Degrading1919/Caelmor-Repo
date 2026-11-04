@@ -2,7 +2,7 @@
 bl_info = {
     "name": "Caelmor Architectural Generator",
     "author": "Caelmor",
-    "version": (0, 12, 2),
+    "version": (0, 13, 0),
     "blender": (4, 2, 0),
     "location": "View3D > Sidebar > Caelmor",
     "description": "Generate editable regional Caelmor buildings",
@@ -46,6 +46,9 @@ def _bpy():
 
 def _settings_from_props(props):
     from .model import Settings
+    overrides = json.loads(props.caelm_construction_overrides or '{}') if props.caelm_construction else None
+    if props.caelm_construction and not isinstance(overrides, dict):
+        raise ValueError('Construction Overrides must be a JSON object')
     return Settings(
         seed=props.caelm_seed,
         function=props.caelm_function,
@@ -72,6 +75,7 @@ def _settings_from_props(props):
         world_aware=props.caelm_world_aware,
         crafted_curves=props.caelm_crafted_curves,
         seed_massing=props.caelm_seed_massing,
+        construction_overrides=overrides,
     )
 
 
@@ -101,6 +105,8 @@ def _set_props(props, settings):
     props.caelm_world_aware = settings.world_aware
     props.caelm_crafted_curves = settings.crafted_curves
     props.caelm_seed_massing = settings.seed_massing
+    props.caelm_construction = settings.construction_overrides is not None
+    props.caelm_construction_overrides = json.dumps(settings.construction_overrides or {}, sort_keys=True)
 
 
 def _active_build(context):
@@ -166,6 +172,12 @@ def _make_classes(b):
         caelm_seed_massing: b.props.BoolProperty(
             name="Seed Changes Layout", default=True,
             description="Vary massing and roof forms by seed for the Lowmark Smithy and Thornfell Gatehouse")
+        caelm_construction: b.props.BoolProperty(
+            name="Construction Treatments", default=True,
+            description="Resolve construction by component role; legacy buildings load with this off")
+        caelm_construction_overrides: b.props.StringProperty(
+            name="Construction Overrides", default="{}",
+            description="Optional JSON by_component and by_role maps; empty uses regional defaults")
         caelm_roof_style: b.props.EnumProperty(name="Roof Style", items=[
             ('AUTO', "Regional / Type Default", "Select a suitable roof by type and region"),
             ('GABLE', "Gable", "Gabled roof"), ('HIP', "Hip", "Hipped roof")], default='AUTO')
@@ -289,6 +301,12 @@ def _make_classes(b):
         bl_options = {'REGISTER'}
         filepath: b.props.StringProperty(subtype='FILE_PATH')
         filter_glob: b.props.StringProperty(default="*.glb;*.gltf", options={'HIDDEN'})
+        construction_metadata: b.props.BoolProperty(
+            name="Construction Metadata", default=False,
+            description="Add optional construction settings and per-object provenance to the sidecar")
+
+        def draw(self, context):
+            self.layout.prop(self, "construction_metadata")
 
         @classmethod
         def poll(cls, context):
@@ -301,7 +319,8 @@ def _make_classes(b):
         def execute(self, context):
             try:
                 from .blender_backend import export_building
-                export_building(_active_build(context), self.filepath)
+                export_building(_active_build(context), self.filepath,
+                                construction_metadata=self.construction_metadata)
                 self.report({'INFO'}, "Exported building and metadata manifest")
                 return {'FINISHED'}
             except Exception as exc:
@@ -344,6 +363,9 @@ def _make_classes(b):
             if p.caelm_world_aware:
                 regional.label(text="Regional construction chooses roof forms")
             regional.prop(p, "caelm_geometry_mode")
+            regional.prop(p, "caelm_construction")
+            if p.caelm_construction:
+                regional.prop(p, "caelm_construction_overrides")
             regional.operator("caelmor.apply_grammar", icon='FILE_REFRESH')
             box.label(text="Shape inputs" if p.caelm_world_aware else "Manual shape controls (used when grammar is off)")
             if p.caelm_world_aware:
@@ -412,6 +434,9 @@ def _make_classes(b):
             if collection:
                 from .blender_backend import collection_metrics
                 m = collection_metrics(collection)
+                conflicts = json.loads(collection.get('caelm_construction_conflicts','[]'))
+                if conflicts:
+                    layout.label(text=f"{len(conflicts)} protected buffers need review", icon='ERROR')
                 layout.label(text=f"{m['vertices']:,} verts · {m['objects']} objects")
                 layout.label(text=f"Bounds: {m['width']:.1f} × {m['depth']:.1f} × {m['height']:.1f} m")
                 raw_diagnostics = collection.get("caelm_validation")

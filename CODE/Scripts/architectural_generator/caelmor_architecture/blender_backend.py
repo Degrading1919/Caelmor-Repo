@@ -4,6 +4,7 @@ import bpy
 from mathutils import Vector, Matrix
 from .engine import generate, validate, geometry_hash, TOOL_REVISION
 from .materials import get_material
+from .construction import PROVENANCE
 
 TAG = "caelm_generated"
 COLLECTION_TAG = "caelm_build"
@@ -14,8 +15,12 @@ SCOPE_LAYERS = {"ROOF": {"roof"}, "WINDOWS": {"windows", "doors"}, "DETAILS": {"
 
 def _settings_dict(settings):
     if hasattr(settings, "__dataclass_fields__"):
-        return {name: getattr(settings, name) for name in settings.__dataclass_fields__}
-    return dict(settings)
+        data = {name: getattr(settings, name) for name in settings.__dataclass_fields__}
+    else:
+        data = dict(settings)
+    if data.get('construction_overrides') is None:
+        data.pop('construction_overrides',None)
+    return data
 
 
 def load_settings(collection):
@@ -123,6 +128,13 @@ def _mesh_object(buffer, cache, build_id, plan=None):
     obj["caelm_topology"] = topology if topology in ("SOLID", "SURFACE") else "SOLID"
     obj["caelm_structural_role"] = str(getattr(buffer, "structural_role", "framing"))
     obj["caelm_functional_role"] = str(getattr(buffer, "functional_role", ""))
+    construction = getattr(buffer, 'construction', None)
+    if construction is not None:
+        obj['caelm_component_source_hash'] = geometry_hash((buffer,))
+        for field in PROVENANCE:
+            value = getattr(construction, field)
+            if value is not None:
+                obj['caelm_' + field] = value
     for attr, tag in (("roof_envelope", "caelm_roof_envelope"),
                       ("support_surface", "caelm_support_surface")):
         value = getattr(buffer, attr, None)
@@ -261,7 +273,7 @@ def build(settings, collection=None, layers=None, origin=None):
     """Build off-scene, then swap generated objects in requested layers only."""
     if collection is not None and not collection.get(COLLECTION_TAG):
         raise ValueError("Selected collection is not a Caelmor generated building")
-    plan, buffers = generate(settings)
+    plan, buffers = generate(settings, finish_names=bpy.data.materials.keys())
     validation = validate(plan, buffers)
     if isinstance(validation, dict) and not validation.get("valid", False):
         raise ValueError("Geometry validation failed; existing building was left unchanged")
@@ -287,9 +299,25 @@ def build(settings, collection=None, layers=None, origin=None):
         slots=tuple(old.data.materials)
         if slots and any(m is not None and (
                 old.get('caelm_surface_material') and m.name!=old['caelm_surface_material']
-                or not m.get('caelm_material')
+                or (not m.get('caelm_material') and
+                    not (old.get('caelm_finish','').startswith('material:') and
+                         m.name == old.get('caelm_surface_material')))
                 or m.get('caelm_user_override')) for m in slots):
             overrides[old.get('caelm_buffer_id')]=slots
+    candidates = {b.name:b for b in buffers}
+    conflicts = []
+    for obj in (collection.objects if collection else ()):
+        if not (obj.get(TAG) and obj.get('caelm_protected')) or obj.get('caelm_collider'):
+            continue
+        key = obj.get('caelm_buffer_id')
+        candidate = candidates.get(key)
+        spec = getattr(candidate, 'construction', None)
+        physical_fields = (field for field in PROVENANCE if field not in ('finish','surface_family'))
+        old_source = obj.get('caelm_component_source_hash')
+        if (candidate is None or
+                any(obj.get('caelm_'+field)!=getattr(spec,field,None) for field in physical_fields) or
+                (old_source is not None and old_source!=geometry_hash((candidate,)))):
+            conflicts.append(key or obj.name)
     build_id = uuid.uuid4().hex; stage = _new_collection("__CAELMOR_STAGE__" + build_id[:8])
     try:
         cache = {}
@@ -313,9 +341,15 @@ def build(settings, collection=None, layers=None, origin=None):
                                       context_objects=new_objects+retained_context)
         for obj in stage.objects:
             replacement=overrides.get(obj.get('caelm_buffer_id'))
+            finish = obj.get('caelm_finish', '')
             if replacement:
                 obj.data.materials.clear()
                 for material in replacement:obj.data.materials.append(material)
+            elif finish.startswith('material:'):
+                authored = bpy.data.materials[finish.removeprefix('material:')]
+                obj.data.materials[0] = authored
+                # Distinguish a selected finish from a manual slot override.
+                obj['caelm_surface_material'] = authored.name
         if scope is None:
             for obj in _colliders(plan, build_id):
                 stage.objects.link(obj); obj.hide_set(True)
@@ -332,9 +366,10 @@ def build(settings, collection=None, layers=None, origin=None):
         _cleanup_stage(stage); stage = None
         collection[COLLECTION_TAG] = True
         collection[SETTINGS_KEY] = json.dumps(setting_data, sort_keys=True)
+        collection['caelm_construction_conflicts'] = json.dumps(sorted(conflicts))
         collection['caelm_surface_diagnostics']=json.dumps(surface_report,sort_keys=True)
-        collection["caelm_geometry_hash"] = geometry_hash(buffers)
-        collection["caelm_source_geometry_hash"] = geometry_hash(buffers)
+        collection["caelm_geometry_hash"] = validation["geometry_hash"]
+        collection["caelm_source_geometry_hash"] = validation["geometry_hash"]
         collection["caelm_architecture"] = validation.get("architecture", "WORLD" if settings.world_aware else "LEGACY")
         construction_zones = validation.get("construction_zones", [])
         collection["caelm_construction_zones"] = json.dumps(construction_zones, sort_keys=True)
@@ -401,7 +436,7 @@ def _export_selection(filepath, objects, anchor, export_format):
         except ReferenceError: view_layer.objects.active = None
 
 
-def export_building(collection, filepath):
+def export_building(collection, filepath, *, construction_metadata=False):
     """Export the generated collection to glTF/GLB plus a semantic JSON sidecar."""
     if not collection or not collection.get(COLLECTION_TAG): raise ValueError("No Caelmor generated building is selected")
     objects = [o for o in collection.objects if o.get(TAG) and not o.get("caelm_collider")]
@@ -441,6 +476,14 @@ def export_building(collection, filepath):
                              "roof_envelope": json.loads(o["caelm_roof_envelope"]) if o.get("caelm_roof_envelope") else None,
                              "support_surface": json.loads(o["caelm_support_surface"]) if o.get("caelm_support_surface") else None}
                             for o in objects]}
+    if construction_metadata:
+        for obj, entry in zip(objects, manifest['objects']):
+            for field in PROVENANCE:
+                value = obj.get('caelm_' + field)
+                if value is not None:
+                    entry[field] = value
+    else:
+        manifest['settings'].pop('construction_overrides', None)
     sidecar = os.path.splitext(filepath)[0] + ".caelmor.json"
     with open(sidecar, "w", encoding="utf-8") as f: json.dump(manifest, f, indent=2)
     return sidecar

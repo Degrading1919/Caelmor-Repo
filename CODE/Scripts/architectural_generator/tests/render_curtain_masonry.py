@@ -1,5 +1,5 @@
 """Compare one Thornfell curtain return with the fixed Gatehouse controls."""
-from dataclasses import asdict, replace
+from dataclasses import replace
 from pathlib import Path
 import json
 import sys
@@ -16,6 +16,7 @@ from render_world_evidence import _reset_scene
 from render_roof_paint import snapshots
 from test_condition_export import assert_glb_materials,check_reimport,read_glb
 from caelmor_architecture import benchmark_gatehouse
+from caelmor_architecture.blender_backend import _settings_dict
 from caelmor_architecture.blender_backend import _colliders
 from caelmor_architecture.curtain_masonry import dressed_curtain_return
 from caelmor_architecture.engine import generate,geometry_hash,validate
@@ -37,12 +38,12 @@ def main():
     source=source_hashes()
     existing=json.loads((BASE/'manifest.json').read_text())
     clay=json.loads((CLAY/'after/manifest.json').read_text())
-    controls={finish:next(im for row in record['cases'] if row['settings']==asdict(s)
+    controls={finish:next(im for row in record['cases'] if row['settings']==_settings_dict(s)
                           for im in row[key] if im['finish']==finish and im['view']==0)
               for finish,record,key in (('clay',clay,'images'),('material',existing,'after'))}
     baseline_plan,baseline_buffers=generate(s)
     baseline_hash=geometry_hash(baseline_buffers)
-    assert any(row['settings']==asdict(s) and row['geometry_hash']==baseline_hash
+    assert any(row['settings']==_settings_dict(s) and row['geometry_hash']==baseline_hash
                for row in existing['cases'])
     original=benchmark_gatehouse._curtain_return
 
@@ -102,7 +103,7 @@ def main():
         assert len(imported.data.loop_triangles)==sum(len(face)-2 for face in wall.faces)
     assert source==source_hashes()
     (OUT/'manifest.json').write_text(json.dumps(dict(
-        blender=bpy.app.version_string,source_sha256=source,settings=asdict(s),
+        blender=bpy.app.version_string,source_sha256=source,settings=_settings_dict(s),
         material_control_revision='2a260e9',clay_control_revision=clay['revision'],
         geometry_hashes=[baseline_hash,candidate_mesh['geometry_hash']],
         triangles=[original_mesh['triangles'],candidate_mesh['triangles']],

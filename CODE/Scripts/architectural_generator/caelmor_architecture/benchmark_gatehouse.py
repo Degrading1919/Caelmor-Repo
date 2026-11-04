@@ -187,13 +187,33 @@ def build(ctx):
         pa,pc=(a,c-.18) if side=='west' else (a+.18,c)
         wall.box(((pa+pc)*.5,1.34,(base+spring)*.5),(pc-pa,1.72,spring-base))
         leaf=b.fixture('gatehouse.open_leaf.'+side,'timber',core,'gate_leaf')
+        leaf_spec=ctx.component(leaf,core,'gate_leaf.'+side,'boarding','wooden_boarding')
         lx=inner-.10 if side=='west' else inner+.10
         for j in range(8):
-            leaf.box((lx,.58+(j+.5)*1.52/8,base+1.33),(.09,1.52/8-.008,2.62))
+            if leaf_spec:
+                leaf.chamfered_beam((lx,.58+(j+.5)*1.52/8,base+.02),
+                                    (lx,.58+(j+.5)*1.52/8,base+2.64),.09,1.52/8-.006,.009)
+            else:
+                leaf.box((lx,.58+(j+.5)*1.52/8,base+1.33),(.09,1.52/8-.008,2.62))
         straps=b.fixture('gatehouse.leaf_straps.'+side,'iron',core,'gate_leaf')
         for zz in (.42,1.20,2.18):straps.box((lx,1.34,base+zz),(.11,1.52,.055))
     vault=b.fixture('gatehouse.vaulted_passage','stone_light',core,'vault')
-    arch_ring(vault,cx,.16,depth-.16,spring,radius,rise,.26,stations=arch_spec.get('stations'))
+    vault_spec=ctx.component(vault,core,'vault','vault','dressed_stone')
+    if vault_spec and vault_spec.treatment=='stone_masonry':
+        # Transverse rings stagger their radial seams while following the
+        # portal intrados. Identical end rings bear against the front/back face.
+        stations=arch_spec.get('stations')
+        runs=9
+        for course in range(runs):
+            ya=.16+(depth-.32)*course/runs
+            yb=.16+(depth-.32)*(course+1)/runs
+            base_stations=stations or tuple(tau*i/32 for i in range(17))
+            interior=tuple((a+b)*.5 for a,b in zip(base_stations,base_stations[1:]))
+            alternate=(0.,*interior,tau*.5)
+            arch_ring(vault,cx,ya+.006,yb-.006,spring,radius,rise,.26,
+                      stations=alternate if course%2 else base_stations)
+    else:
+        arch_ring(vault,cx,.16,depth-.16,spring,radius,rise,.26,stations=arch_spec.get('stations'))
     flare=.24 if b.settings.crafted_curves else 0.
     projection=.51 if flare else .34
     for face,wall_y,sign in (('front',0.,-1),('rear',depth,1)):
@@ -201,10 +221,15 @@ def build(ctx):
                          (wall_y-sign*.16,0.)))
         ya,yb=sections[0][0],sections[-1][0]
         arch=b.fixture('gatehouse.portal_arch.'+face,'stone_light',core,'structure')
-        arch_ring(arch,cx,ya,yb,spring,radius,rise,.34 if flare else .30,
+        ring_spec=ctx.component(arch,core,'arch_ring.'+face,'arch_ring','dressed_stone')
+        thickness=.34 if flare else .30
+        if ring_spec and ring_spec.treatment=='stone_masonry':
+            thickness+=.04
+        arch_ring(arch,cx,ya,yb,spring,radius,rise,thickness,
                   stations=arch_spec.get('stations'),sections=sections if flare else None)
         for side,xa,xb in (('west',x0-.42,x0),('east',x1,x1+.42)):
             jamb=b.fixture('gatehouse.portal_jamb.'+face+'.'+side,'stone_light',core,'structure')
+            jamb_spec=ctx.component(jamb,core,'portal_jamb.'+face+'.'+side,'opening_trim','dressed_stone')
             rows=8;h=(spring-base)/rows
             for row in range(rows):
                 if flare:
@@ -216,8 +241,13 @@ def build(ctx):
                     section.extend((right+direction*offset,y) for y,offset in reversed(sections))
                     jamb.prism(section,base+row*h+.006,base+(row+1)*h-.006)
                 else:
-                    jamb.box(((xa+xb)*.5,(ya+yb)*.5,base+(row+.5)*h),
-                             (xb-xa,yb-ya,h-.012))
+                    if jamb_spec:
+                        from .construction_geometry import stone_face
+                        polygon=stone_face(xa,xb,base+row*h+.006,base+(row+1)*h-.006,.014)
+                        jamb.extrude([(x,ya,z) for x,z in polygon],(0,yb-ya,0))
+                    else:
+                        jamb.box(((xa+xb)*.5,(ya+yb)*.5,base+(row+.5)*h),
+                                 (xb-xa,yb-ya,h-.012))
     # Raised grille and a visible winch aperture, separate from the open arch.
     iron=b.fixture('gatehouse.portcullis','iron',core,'defense')
     bar_bottom=3.56+(rise-.60)
@@ -293,7 +323,15 @@ def build(ctx):
         owner=towers[0 if side=='west' else 1]
         tie_y=owner.bounds[1]+1.25 if diverse else -.55
         wall=b.fixture('gatehouse.curtain_return.'+side,'stone',owner,'boundary')
-        _curtain_return(wall,xa,xb,tie_y,base)
+        spec=ctx.component(wall,owner,'curtain_return','wall_body','stone_masonry')
+        if spec is None:
+            _curtain_return(wall,xa,xb,tie_y,base)
+        else:
+            from .curtain_masonry import dressed_curtain_return
+            from .geometry import stable_seed
+            dressed_curtain_return(wall,xa,xb,tie_y,base,
+                                   stable_seed(b.settings.seed,spec.component_id),
+                                   dressed=spec.treatment=='dressed_stone')
     if diverse:
         b.program['adaptations'].append('Road-sized vaulted passage with guard wings set for exposure and sightlines')
     else:

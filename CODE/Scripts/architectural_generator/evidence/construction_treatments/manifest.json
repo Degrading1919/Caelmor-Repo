@@ -1,0 +1,861 @@
+{
+  "blender": "5.0.1",
+  "control_revision": "abfa9f0",
+  "source_sha256": {
+    "__init__.py": "41afcf79a2493b640255e3a8f7b8696645644d9deb12572672fd95d845d94f20",
+    "benchmark_construction.py": "52b5f20d7c47dd8a866f44a97361e9f727e9d0194a4f57e7315a685dd0265222",
+    "benchmark_finish.py": "aba9669eef117f6ae2c9f4f0186df30bced62751590da6b3e145a7eb5d65c52d",
+    "benchmark_gatehouse.py": "f800f09d4fac55c21a9da41051f69c73efeb4c9fa037949dbd13eee28b7664f7",
+    "blender_backend.py": "380f66f2fa8c0eb20aa8a935770d4685c701b48b66c25f4afa303a7232deda9d",
+    "blender_manifest.toml": "23f358eca248ba24d4dedbecc6228a9a8381b652565cf1c789633a7a7bbe3baa",
+    "construction.py": "5a25dd119d8e64991d4d7e62c6ee9cca488e124febf3c3163d2f8a37a7c5b3a4",
+    "construction_geometry.py": "21362bf45a9cc352ae182bffdc056a71ea933cd5a1118a68763d609fcac42bf8",
+    "crafted_geometry.py": "402d20f9192f22779da8afd83181062003e1874594821b10acf7c2a66763c4f3",
+    "curtain_masonry.py": "158e071031df6a7b6002a3285a797abf53397399dde84a96a27dc927c55ca747",
+    "curve_profiles.py": "f98554e8a5f4e0ea2a0a80f01cb4a4b79a2c77299230f454357eb6b3a5993ee7",
+    "curve_sweep.py": "00f9bef55fa29e129fc856ba8d12f05bace416a1a682df5b3fd8c26d1e471f84",
+    "engine.py": "eee72883281e445bb96cf32f4d029732c6e07a2e466c7ff2bef6c66c0912e371",
+    "facade.py": "950c4726df005d819963cc4c05c33488abba0b605fba1682ecbf9ab6764387cd",
+    "function_work.py": "2d156d0290a51315c8ff311a2b9cbb698bb5e89d9489db3810dc54cd50a6dce1",
+    "function_yard.py": "8f0ce8644596f565df87ddda6a0e6cb50dd7bb2142eda7c211c820b3e19818d1",
+    "functional.py": "ac2bf3b9730e5aeceefe178b35a493ecb09d8e9d6a0ebc0394a8990c2291c7b5",
+    "geometry.py": "e30de2d821d4ddd0cd215975192d06ae24c87687ccb99b9b4275b8acf03d11da",
+    "LICENSE": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+    "materials.py": "d8622d2b5b458d76edb6dca90d780d7ab8279b3852a62eabc68d65cf8226dc6b",
+    "model.py": "dfc9692492f9668c662441fa83baeac03b7e10d00c15c04b50284e9af77a2b69",
+    "profiles.py": "3e7e29517f947d0eff991945248824ff47e2a2f9aa7afe3558dca1988745c344",
+    "roof.py": "a1b4f3cf0b87a16adda30236f1ce1c92cce7a1b74746d19f6eb7ebd4ae2b62ff",
+    "roof_pigments.py": "509d1658182078e19149e65e4e069d4ab13be9f510be6b0c21553be501886cd0",
+    "surface_atlas.py": "37e374074faa24eeb057108727c5af7271dc4fc354af6deabf6bd699a4c27bd6",
+    "surface_conditions.py": "353fe1509a42c171bbdbe0ca05396768cb747a0d622f4b92e1309018a3e66196",
+    "surface_detail.py": "1b2992c8e677364de23e94564b78247153c647945417585cd20fa5d6136ac169",
+    "surface_patterns.py": "ae6c45574c1758f4a246abde1499ffd4a3e812183a9356ef1e3e306b15930640",
+    "surface_pigments.py": "bfb0fb2ea8f206b29c2fffe837092377ab1c5275d69df11a29884ccddcef6ae9",
+    "world.py": "de2f3d06ea9de55ad804a45907300223a98cec892cfc94c81dd587b50d6ac162",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "c766daba6d8b19441e9589b340e3693a7e118332cd97e261b6c2fcbad1482534",
+    "world_mire.py": "4a6b314f6c7f415d8ad5b4c5176f1197ad4e89896bae3a3dbfafa32b6a925042"
+  },
+  "cases": [
+    {
+      "function": "SMITHY",
+      "region": "LOWMARK",
+      "variant": "before",
+      "settings": {
+        "seed": 91,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": true,
+        "seed_massing": true
+      },
+      "triangles": 12838,
+      "geometry_hash": "1815c1cdd8ceaa5474883aad3eabe05f0d5bc8cc6ad922ab2a2b2a19c7c7f79c",
+      "images": [
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "clay",
+          "view": 0,
+          "image": "before/smithy/normal_clay_0.png",
+          "sha256": "b3c8929f44bd309529c593f1385da3979899d8b8034b6798b23aeca2d055bfdc",
+          "camera_location": [
+            24.985652923583984,
+            -28.026805877685547,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -4.9743242263793945,
+                7.650158405303955
+              ],
+              "y": [
+                -5.019678592681885,
+                4.824228763580322
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "close",
+          "finish": "clay",
+          "view": 0,
+          "image": "before/smithy/close_clay_0.png",
+          "sha256": "76249d75e1328c98ed7a8f7afd188b2006f4ca9d7fad25a39a280919dd06fe45",
+          "camera_location": [
+            20.33145523071289,
+            -8.250460624694824,
+            9.046490669250488
+          ],
+          "camera_target": [
+            6.5,
+            1.0499999523162842,
+            2.25
+          ],
+          "ortho_scale": 10.199999809265137,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "before/smithy/normal_material_0.png",
+          "sha256": "bc9aed445b26ee74b2bd4e97251207c6344d46b0aa857d58b8b22a365f1dfc0e",
+          "camera_location": [
+            24.985652923583984,
+            -28.026805877685547,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -4.9743242263793945,
+                7.650158405303955
+              ],
+              "y": [
+                -5.019678592681885,
+                4.824228763580322
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "close",
+          "finish": "material",
+          "view": 0,
+          "image": "before/smithy/close_material_0.png",
+          "sha256": "8f2bf58f869e5c7dacfcc02ad5fe870a3d823f9227aa5511e520232dcf8f8bdc",
+          "camera_location": [
+            20.33145523071289,
+            -8.250460624694824,
+            9.046490669250488
+          ],
+          "camera_target": [
+            6.5,
+            1.0499999523162842,
+            2.25
+          ],
+          "ortho_scale": 10.199999809265137,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        }
+      ],
+      "treatments": []
+    },
+    {
+      "function": "SMITHY",
+      "region": "LOWMARK",
+      "variant": "after",
+      "settings": {
+        "seed": 91,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": true,
+        "seed_massing": true,
+        "construction_overrides": {}
+      },
+      "triangles": 14407,
+      "geometry_hash": "894251c048cf41885c57747f8a6b318a447a1354ea371f25c02e75c531817dcd",
+      "images": [
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "clay",
+          "view": 0,
+          "image": "after/smithy/normal_clay_0.png",
+          "sha256": "8557895fb64b7fb573d91d003155ae12d9b77a8be6143ee3dabd1d4c422fe4b5",
+          "camera_location": [
+            24.985652923583984,
+            -28.026805877685547,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -4.9743242263793945,
+                7.650158405303955
+              ],
+              "y": [
+                -5.019678592681885,
+                4.824228763580322
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "close",
+          "finish": "clay",
+          "view": 0,
+          "image": "after/smithy/close_clay_0.png",
+          "sha256": "0d90e6cda0442a4da2dd54176600dee0f718bba6c881a000a9543ab4495be656",
+          "camera_location": [
+            20.33145523071289,
+            -8.250460624694824,
+            9.046490669250488
+          ],
+          "camera_target": [
+            6.5,
+            1.0499999523162842,
+            2.25
+          ],
+          "ortho_scale": 10.199999809265137,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "after/smithy/normal_material_0.png",
+          "sha256": "547c6595e5226c1e181ffaa682fc6c1638d24bb8d17ce6019deb11f9e83c978e",
+          "camera_location": [
+            24.985652923583984,
+            -28.026805877685547,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -4.9743242263793945,
+                7.650158405303955
+              ],
+              "y": [
+                -5.019678592681885,
+                4.824228763580322
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "close",
+          "finish": "material",
+          "view": 0,
+          "image": "after/smithy/close_material_0.png",
+          "sha256": "4f648ee1377fc925e226eb43478a7c666cf535cb236b5c2ace72e7195de7fdaa",
+          "camera_location": [
+            20.33145523071289,
+            -8.250460624694824,
+            9.046490669250488
+          ],
+          "camera_target": [
+            6.5,
+            1.0499999523162842,
+            2.25
+          ],
+          "ortho_scale": 10.199999809265137,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        }
+      ],
+      "treatments": [
+        "plaster_limewash",
+        "stone_masonry",
+        "structural_timber",
+        "wooden_boarding",
+        "wooden_shingles"
+      ]
+    },
+    {
+      "function": "GATEHOUSE",
+      "region": "THORNFELL",
+      "variant": "before",
+      "settings": {
+        "seed": 91,
+        "function": "GATEHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": true,
+        "seed_massing": true
+      },
+      "triangles": 66483,
+      "geometry_hash": "5e503eb4365bee229ae42c1225c417b4fbbd136067c3b1be550bb35dea979d9c",
+      "images": [
+        {
+          "function": "GATEHOUSE",
+          "distance": "normal",
+          "finish": "clay",
+          "view": 0,
+          "image": "before/gatehouse/normal_clay_0.png",
+          "sha256": "288d2168ce3c84d97e390a7da87188a47118ef5749ec5c8c982f4c162b432a3b",
+          "camera_location": [
+            38.32919692993164,
+            -39.95886993408203,
+            31.143360137939453
+          ],
+          "camera_target": [
+            7.900000095367432,
+            3.0,
+            6.800000190734863
+          ],
+          "ortho_scale": 32.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -10.371673583984375,
+                8.512018203735352
+              ],
+              "y": [
+                -10.400906562805176,
+                4.976620674133301
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -16.0,
+                16.0
+              ],
+              "y": [
+                -11.0,
+                11.0
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "close",
+          "finish": "clay",
+          "view": 0,
+          "image": "before/gatehouse/close_clay_0.png",
+          "sha256": "46d99d7aafd4fcf5b9a6c838c547cbac5a1f7bf4f2e21c720f68d1e2b3b0b74c",
+          "camera_location": [
+            29.5878963470459,
+            -18.126083374023438,
+            11.873114585876465
+          ],
+          "camera_target": [
+            16.996503829956055,
+            -0.3499999940395355,
+            1.7999999523162842
+          ],
+          "ortho_scale": 7.699999809265137,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "before/gatehouse/normal_material_0.png",
+          "sha256": "ab89b344a87846a7fce3f0c665dafbb19cdd9a51eb78e01659e783a3044c0d49",
+          "camera_location": [
+            38.32919692993164,
+            -39.95886993408203,
+            31.143360137939453
+          ],
+          "camera_target": [
+            7.900000095367432,
+            3.0,
+            6.800000190734863
+          ],
+          "ortho_scale": 32.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -10.371673583984375,
+                8.512018203735352
+              ],
+              "y": [
+                -10.400906562805176,
+                4.976620674133301
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -16.0,
+                16.0
+              ],
+              "y": [
+                -11.0,
+                11.0
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "close",
+          "finish": "material",
+          "view": 0,
+          "image": "before/gatehouse/close_material_0.png",
+          "sha256": "46138a38358b047629d18d28b40ff97c08518da779ff4d7553dce9172baadafa",
+          "camera_location": [
+            29.5878963470459,
+            -18.126083374023438,
+            11.873114585876465
+          ],
+          "camera_target": [
+            16.996503829956055,
+            -0.3499999940395355,
+            1.7999999523162842
+          ],
+          "ortho_scale": 7.699999809265137,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        }
+      ],
+      "treatments": []
+    },
+    {
+      "function": "GATEHOUSE",
+      "region": "THORNFELL",
+      "variant": "after",
+      "settings": {
+        "seed": 91,
+        "function": "GATEHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": true,
+        "seed_massing": true,
+        "construction_overrides": {}
+      },
+      "triangles": 72918,
+      "geometry_hash": "ad294c3fb4254bcdd6c484ca60cff982111a4571051ae5cbe21d146a83a28b39",
+      "images": [
+        {
+          "function": "GATEHOUSE",
+          "distance": "normal",
+          "finish": "clay",
+          "view": 0,
+          "image": "after/gatehouse/normal_clay_0.png",
+          "sha256": "4bab08c6fc21e5849fe50e9a9b7ce8168e75be8162a7e5e2b7608c551bd1b230",
+          "camera_location": [
+            38.32919692993164,
+            -39.95886993408203,
+            31.143360137939453
+          ],
+          "camera_target": [
+            7.900000095367432,
+            3.0,
+            6.800000190734863
+          ],
+          "ortho_scale": 32.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -10.407570838928223,
+                8.512018203735352
+              ],
+              "y": [
+                -10.447662353515625,
+                4.976620674133301
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -16.0,
+                16.0
+              ],
+              "y": [
+                -11.0,
+                11.0
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "close",
+          "finish": "clay",
+          "view": 0,
+          "image": "after/gatehouse/close_clay_0.png",
+          "sha256": "80f463d841b6e6d32a5e3f90f3e1d7e546c770284bb60a7ed224a9e7bf9d5abb",
+          "camera_location": [
+            29.5878963470459,
+            -18.126083374023438,
+            11.873114585876465
+          ],
+          "camera_target": [
+            16.996503829956055,
+            -0.3499999940395355,
+            1.7999999523162842
+          ],
+          "ortho_scale": 7.699999809265137,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "after/gatehouse/normal_material_0.png",
+          "sha256": "398dc7fec2f41dd9d1d6ca1b895a5de63b8be2dc5d14a047e961e905346719ab",
+          "camera_location": [
+            38.32919692993164,
+            -39.95886993408203,
+            31.143360137939453
+          ],
+          "camera_target": [
+            7.900000095367432,
+            3.0,
+            6.800000190734863
+          ],
+          "ortho_scale": 32.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -10.407570838928223,
+                8.512018203735352
+              ],
+              "y": [
+                -10.447662353515625,
+                4.976620674133301
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -16.0,
+                16.0
+              ],
+              "y": [
+                -11.0,
+                11.0
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "close",
+          "finish": "material",
+          "view": 0,
+          "image": "after/gatehouse/close_material_0.png",
+          "sha256": "a771b5df3425ff28f219939b1ad8a13474cf6c2bc853a004440476c70abdf6ef",
+          "camera_location": [
+            29.5878963470459,
+            -18.126083374023438,
+            11.873114585876465
+          ],
+          "camera_target": [
+            16.996503829956055,
+            -0.3499999940395355,
+            1.7999999523162842
+          ],
+          "ortho_scale": 7.699999809265137,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        }
+      ],
+      "treatments": [
+        "dressed_stone",
+        "slate_tile_roofing",
+        "stone_masonry",
+        "structural_timber",
+        "wooden_boarding"
+      ]
+    },
+    {
+      "function": "STABLE",
+      "region": "LOWMARK",
+      "variant": "reuse",
+      "settings": {
+        "seed": 91,
+        "function": "STABLE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": false,
+        "seed_massing": false,
+        "construction_overrides": {}
+      },
+      "triangles": 15155,
+      "geometry_hash": "4d223aec2c0bd9aa76bc41d18e18fc3a41b6459e7ac2e00cfa7551b917fbcca5",
+      "images": [
+        {
+          "function": "STABLE",
+          "distance": "normal",
+          "finish": "clay",
+          "view": 0,
+          "image": "reuse/stable/normal_clay_0.png",
+          "sha256": "6152d8ccf6bbcc46e37cac4a954ba9ac254e779c87fc378dd5fa4c253dab9a62",
+          "camera_location": [
+            29.685653686523438,
+            -26.626806259155273,
+            19.488523483276367
+          ],
+          "camera_target": [
+            8.699999809265137,
+            3.0,
+            2.700000047683716
+          ],
+          "ortho_scale": 31.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -10.285310745239258,
+                10.764725685119629
+              ],
+              "y": [
+                -6.062918186187744,
+                4.998720169067383
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -15.5,
+                15.5
+              ],
+              "y": [
+                -10.65625,
+                10.65625
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "STABLE",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "reuse/stable/normal_material_0.png",
+          "sha256": "9b6503f78ccd25312f225ca049b722e14e1ecba2124cb68dac960cd3d89d7e2e",
+          "camera_location": [
+            29.685653686523438,
+            -26.626806259155273,
+            19.488523483276367
+          ],
+          "camera_target": [
+            8.699999809265137,
+            3.0,
+            2.700000047683716
+          ],
+          "ortho_scale": 31.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -10.285310745239258,
+                10.764725685119629
+              ],
+              "y": [
+                -6.062918186187744,
+                4.998720169067383
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -15.5,
+                15.5
+              ],
+              "y": [
+                -10.65625,
+                10.65625
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        }
+      ],
+      "treatments": [
+        "plaster_limewash",
+        "stone_masonry",
+        "structural_timber",
+        "wooden_boarding",
+        "wooden_shingles"
+      ]
+    }
+  ]
+}

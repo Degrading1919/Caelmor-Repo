@@ -185,6 +185,8 @@ class Shingle:
     butt: float
     tilt: float
     exposed_end: float = 0.
+    thickness: float = .023
+    lap_margin: float = 0.
 
     def height(self,x,y):
         t=self.direction*((x,y)[self.axis]-self.eave_coord)
@@ -227,7 +229,10 @@ def shingle_layout(plan,patches=None,topology=None):
     step=shingle_step(plan)
     # Shingles need headlap, not separated rectangular plates on a bare deck.
     # Three-course coverage keeps the lower courses behind each open side joint.
-    overlap=step*2.2
+    worked = getattr(plan,'construction_resolver',None) is not None and cover in ('SHINGLE','SLATE','CLAY')
+    overlap=step*(1.50 if worked else 2.2)
+    workmanship={'FINE':.65,'STANDARD':1.,'ROUGH':1.25}[plan.settings.craftsmanship]
+    exposure=min(1.,plan.style.weather_exposure*(1.-plan.settings.maintenance*.55)+plan.settings.age/260.)
     output=[]
     for pi,patch in enumerate(patches):
         axis=1 if abs(patch.plane[1])>1e-8 else 0
@@ -248,18 +253,34 @@ def shingle_layout(plan,patches=None,topology=None):
             if end>=min_t:
                 rng=plan.rng(f'roof.shingles.{patch.source}.{direction}.{row}')
                 u=source_lo-width*(.35 if row%2 else .85)-rng.uniform(0,.12)*width
+                work_rng=plan.rng(f'roof.worked.{patch.source}.{direction}.{row}') if worked else None
                 bay=0
                 while u<source_hi:
                     span=width*rng.uniform(.76,1.24)
                     u0,u1=u+.002,u+span-.002
                     upper_taper=min(.012,span*.045) if cover=='SHINGLE' else 0.
-                    # Split shingles narrow towards their concealed heads.
-                    local=[(u0,t),(u1,t),(u1-upper_taper,end),(u0+upper_taper,end)]
+                    # Use a separate fabrication stream so regional pigment and
+                    # replacement cohorts survive a change in section.
+                    left=right=t
+                    tip=end
+                    cropped=0.
+                    if work_rng is not None:
+                        tolerance=(.115 if cover=='SHINGLE' else .057)*workmanship
+                        left+=advance*work_rng.uniform(-tolerance,tolerance)
+                        right=left+advance*work_rng.uniform(-tolerance*.55,tolerance*.55)
+                        tip+=advance*work_rng.uniform(-.13,.13)
+                        if cover!='CLAY' and detail!='LOW' and work_rng.random()<.12+.16*exposure:
+                            cropped=span*work_rng.uniform(.09,.21)*workmanship
+                    # Keep the head lapped. A few exposed corners are split
+                    # or clipped back within the covered course below.
+                    local=([(u0,left+cropped),(u0+cropped,left),(u1,right)] if cropped else
+                           [(u0,left),(u1,right)])
+                    local.extend(((u1-upper_taper,tip),(u0+upper_taper,tip)))
                     poly=[((u,eave+direction*v) if axis==1 else (eave+direction*v,u)) for u,v in local]
                     if area(poly)<0:
                         poly.reverse()
                     for a,b,c in inequalities(patch.poly)+clearances[pi]:
-                        poly=clip(poly,a,b,c)
+                        poly=clip(poly,a,b,c,bounded=worked)
                         if not poly:
                             break
                     repair=repaired and 0<=row<3 and abs((u0+u1)*.5-repair_u)<(.46-row*.10)
@@ -268,18 +289,28 @@ def shingle_layout(plan,patches=None,topology=None):
                     butt,tilt=rng.uniform(.019,.021),rng.uniform(-.004,.004)
                     if cover=='SLATE': butt*=.45
                     elif cover=='REED': butt*=1.8
+                    thickness=.023
+                    if work_rng is not None:
+                        # A thin slate edge seats more closely than split wood
+                        # or a fired pan. Wear affects variation, not the roof datum.
+                        rise,gauge={'SHINGLE':(.062,.036),'SLATE':(.034,.020),'CLAY':(.043,.028)}[cover]
+                        variation=(.08+.065*exposure)*workmanship
+                        butt=rise*work_rng.uniform(1-variation,1+variation)
+                        thickness=gauge*work_rng.uniform(1-variation,1+variation)
+                        tilt=work_rng.uniform(-.020,.020)*workmanship
                     if poly and area(poly)>.0002:
-                        output.append(Shingle(poly,patch.plane,patch.source,row,bay,axis,direction,eave,t,end,u0,u1,material,repair,
-                                              butt,tilt,t+advance))
+                        output.append(Shingle(poly,patch.plane,patch.source,row,bay,axis,direction,eave,t,tip,u0,u1,material,repair,
+                                              butt,tilt,t+advance,thickness,advance*.18 if worked else 0.))
                     u+=span
                     bay+=1
     return output
 
 
 def _finish_piece(buffer,shingle,poly,bend_a=0.,bend_c=0.,efficient=False):
+    thickness=shingle.thickness
     top=[(x,y,shingle.height(x,y)+bend_a*(x,y)[1-shingle.axis]+bend_c) for x,y in poly]
     if not efficient:
-        buffer.extrude(top,(0,0,-.023))
+        buffer.extrude(top,(0,0,-thickness))
         return
     # The weather deck is closed; this is explicitly open render-detail skin.
     # Hidden headlap, bottoms and buried side walls are not exported as solids.
@@ -290,10 +321,16 @@ def _finish_piece(buffer,shingle,poly,bend_a=0.,bend_c=0.,efficient=False):
         q=poly[j]
         t0=shingle.direction*(p[shingle.axis]-shingle.eave_coord)
         t1=shingle.direction*(q[shingle.axis]-shingle.eave_coord)
-        if abs(t0-shingle.course_start)<1e-6 and abs(t1-shingle.course_start)<1e-6:
+        if shingle.lap_margin:
+            # The lip follows the split edge instead of a fixed course line.
+            # Hidden head and side walls remain omitted in efficient mode.
+            exposed=max(t0,t1)-shingle.course_start<shingle.lap_margin*1.5
+        else:
+            exposed=abs(t0-shingle.course_start)<1e-6 and abs(t1-shingle.course_start)<1e-6
+        if exposed:
             n=len(vertices)
-            vertices.extend([(top[i][0],top[i][1],top[i][2]-.023),
-                             (top[j][0],top[j][1],top[j][2]-.023)])
+            vertices.extend([(top[i][0],top[i][1],top[i][2]-thickness),
+                             (top[j][0],top[j][1],top[j][2]-thickness)])
             faces.append((i,n,n+1,j))
     buffer.indexed(vertices,faces)
 
@@ -305,8 +342,8 @@ def _build_cover_piece(buffer,shingle,cover,efficient,detail):
         # the concealed overlapping heads seen through millimetre side joints.
         axis=shingle.axis
         a,b=(shingle.direction,0) if axis==0 else (0,shingle.direction)
-        c=-shingle.direction*shingle.eave_coord-shingle.exposed_end
-        poly=clip(poly,-a,-b,-c)
+        c=-shingle.direction*shingle.eave_coord-shingle.exposed_end-shingle.lap_margin
+        poly=clip(poly,-a,-b,-c,bounded=bool(shingle.lap_margin))
         if not poly or area(poly)<.0002:
             return
     if cover in ('SHINGLE','SLATE') or detail=='LOW':
@@ -323,7 +360,8 @@ def _build_cover_piece(buffer,shingle,cover,efficient,detail):
         lo=shingle.u0+span*k/3
         hi=shingle.u0+span*(k+1)/3
         aa,bb=(1,0) if across==0 else (0,1)
-        section=clip(clip(poly,aa,bb,-lo),-aa,-bb,hi)
+        bounded=bool(shingle.lap_margin)
+        section=clip(clip(poly,aa,bb,-lo,bounded=bounded),-aa,-bb,hi,bounded=bounded)
         if not section:
             continue
         slope=(values[k+1]-values[k])/(hi-lo)
@@ -367,6 +405,17 @@ def _iron_cover(plan,patches,efficient):
 
 
 def build_roof(plan):
+    from dataclasses import replace
+    from .construction import COVERS, COVER_FROM_STOCK, bind, component
+    cover=plan.style.roof_cover
+    cover_spec=component(plan,'roof_cover','roof_cover',COVERS[cover][0],stock=COVERS[cover][1]) if cover in COVERS else None
+    if cover_spec is not None and COVER_FROM_STOCK[cover_spec.substrate]!=cover:
+        cover=COVER_FROM_STOCK[cover_spec.substrate]
+        palette=dict(plan.style.palette)
+        color={'SHINGLE':(.22,.15,.10), 'SLATE':(.22,.26,.27), 'CLAY':(.37,.19,.12)}[cover]
+        for key,factor in (('roof',1.),('roof_dark',.94),('roof_worn',.985),('roof_patch',1.025)):
+            palette[key]=tuple(c*factor for c in color)+(1.,)
+        plan.style=replace(plan.style,roof_cover=cover,palette=palette)
     patches=roof_faces(plan)
     points,faces,edges=roof_topology(patches)
     deck=MeshBuffer('Continuous roof deck','timber','roof')
@@ -377,9 +426,19 @@ def build_roof(plan):
         if len(users)==1:
             _,a,b=users[0]
             solids.append((a,a+n,b+n,b))
-    deck.indexed(verts,solids)
+    industrial = getattr(plan, 'world_mass', False) and plan.settings.region == 'EMBERHOLT'
+    deck_spec = None if industrial else component(plan,'roof_deck','roof_deck','wooden_boarding')
+    underlay = MeshBuffer('Roof underlay','roof_dark','roof',topology='SURFACE')
+    if deck_spec is not None:
+        from .construction_geometry import board_strips
+        bind(deck_spec,deck)
+        for patch in patches:
+            axis = 0 if abs(patch.plane[0]) >= abs(patch.plane[1]) else 1
+            board_strips(deck,patch.poly,axis,patch.height,.12,width=.48 if plan.settings.detail=='LOW' else .30)
+            underlay.face([(x,y,patch.height(x,y)+.001) for x,y in patch.poly])
+    else:
+        deck.indexed(verts,solids)
     efficient=plan.settings.geometry_mode=='EFFICIENT'
-    cover=plan.style.roof_cover
     tiles={key:MeshBuffer(name,key,'roof') for key,name in [
         ('roof','Split oak shingle courses'),('roof_dark','Seasoned shingle cohorts'),
         ('roof_worn','Exposed shingle butts'),('roof_patch','Replacement shingle cohort')]}
@@ -402,6 +461,10 @@ def build_roof(plan):
     trim=MeshBuffer('Ridge caps and valley flashing','iron','roof')
     fascia=MeshBuffer('Roof edge fascia','timber','roof')
     rafters=MeshBuffer('Supported roof rafters','timber','roof')
+    if not industrial:
+        bind(component(plan,'roof_support','roof_support','structural_timber'),rafters)
+    if cover_spec:
+        bind(cover_spec,*tiles.values(),ridge)
     detail=plan.settings.detail
     for patch in patches:
         axis=1 if abs(patch.plane[1])>1e-8 else 0
@@ -480,4 +543,4 @@ def build_roof(plan):
                 inward=(-dy/l*.13,dx/l*.13)
                 xy=[p[:2],q[:2],(q[0]+inward[0],q[1]+inward[1]),(p[0]+inward[0],p[1]+inward[1])]
                 trim.extrude([(x,y,patches[fi].height(x,y)+.013) for x,y in xy],(0,0,-.007))
-    return [b for b in (deck,bedding,*tiles.values(),*metal,ridge,trim,fascia,rafters) if b.faces]
+    return [b for b in (deck,underlay,bedding,*tiles.values(),*metal,ridge,trim,fascia,rafters) if b.faces]

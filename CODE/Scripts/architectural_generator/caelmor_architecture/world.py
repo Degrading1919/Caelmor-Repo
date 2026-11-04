@@ -94,8 +94,9 @@ class Mass:
 
 
 class Context:
-    def __init__(self,settings):
+    def __init__(self,settings, resolver=None):
         self.settings=settings
+        self.construction_resolver=resolver
         self.masses=[]; self.buffers=[]; self.decks=[]
 
     def rng(self,label):
@@ -113,6 +114,10 @@ class Context:
 
     def buffer(self,key,material,layer,zone=None):
         return self._tag(MeshBuffer(key,material,layer),key,zone)
+
+    def component(self, buffer, zone, slot, role, treatment, **constraints):
+        from .construction import bind, component
+        return bind(component(zone.plan, slot, role, treatment, **constraints), buffer)
 
     def mass(self,key,*,x=0.,y=0.,width,depth,floors=1,floor_height=None,
              base=None,roof='GABLE',pitch=None,overhang=None,openings='DOMESTIC',
@@ -203,6 +208,8 @@ class Context:
             plan.custom_roof_sources=swept_gable_sources(plan,swept_eaves)
         if roof in ('BOW','SHED','TERRACE'):
             plan.custom_roof_sources=_profile_sources(plan,roof)
+        plan.construction_zone=key
+        plan.construction_resolver=self.construction_resolver
         buffers=build_facades(plan)+(_terrace_roof(plan) if roof=='TERRACE' else build_roof(plan))
         mass=Mass(key,plan,buffers)
         self.masses.append(mass)
@@ -233,7 +240,12 @@ class Context:
         polygon=list(polygon_xy)
         if area(polygon)<0: polygon.reverse()
         deck=self.buffer(key,material,'foundation',zone)
-        deck.prism(polygon,z-thickness,z)
+        if (material == 'timber' and zone is not None and
+                self.component(deck, zone, key, 'boarding', 'wooden_boarding')):
+            from .construction_geometry import board_strips
+            board_strips(deck, polygon, 0, lambda x,y: z, thickness)
+        else:
+            deck.prism(polygon,z-thickness,z)
         bounds=(min(x for x,y in polygon),min(y for x,y in polygon),
                 max(x for x,y in polygon),max(y for x,y in polygon))
         self.decks.append((bounds,z))
@@ -419,9 +431,9 @@ def _working_apparatus(ctx):
             buf.cylinder((x-ty*.04,y+tx*.04,z-.17),(x+ty*.04,y-tx*.04,z-.17),.15,10)
 
 
-def generate(settings):
+def generate(settings, *, resolver=None):
     effective=resolve_settings(settings)
-    ctx=Context(effective)
+    ctx=Context(effective,resolver)
     from .functional import build as build_function
     if build_function(ctx):
         pass

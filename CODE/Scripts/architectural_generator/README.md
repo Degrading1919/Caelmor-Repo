@@ -1,6 +1,6 @@
 # Caelmor Architectural Generator
 
-Version 0.12.2 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
+Version 0.13.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
 
 See the [engine contract](ENGINE_CONTRACT.md) for the current source baseline, legacy scene compatibility and the proposed treatment interface.
 
@@ -150,6 +150,35 @@ Wealth (Modest, Established, Affluent) changes household capacity, work/storage 
 - **Efficient** reduces hidden roof layering and headlap geometry, and uses surface topology for physical cladding skins. The closed roof deck and structural core remain; exposed shingle relief, selected roof bedding, and optimized construction skins are tagged as `SURFACE` and are intentionally open surface geometry. This trades fully solid decorative layers for lower geometry counts; it is not a fully watertight building mesh.
 
 The add-on reports effective plan dimensions and the latest geometry validation result in the panel.
+
+## Construction treatments
+
+New Blender scenes enable **Construction Treatments**. Old collections load with
+the switch off. In Python, omit `construction_overrides` for the legacy path,
+pass `{}` for role-based regional defaults, or supply a JSON-compatible override map.
+For example, a Thornfell Gatehouse can use a clay tile cover while one watchtower
+keeps its slate:
+
+```json
+{
+  "by_role": {"roof_cover": {"substrate": "fired_clay"}},
+  "by_component": {"gatehouse_west_watchtower/roof_cover": {"substrate": "slate"}}
+}
+```
+
+Inspect a generated mesh's `caelm_component_id` property for exact keys. Each
+component field inherits separately through component override, role override,
+then the local assembly default. A compatible `finish` can be `procedural` or
+`material:<existing Blender material name>`. Named materials should use the
+metric UV set for mapped export. Manually replaced material slots still take
+priority. Changing overrides requires regeneration of all layers. A collection
+warning lists retained protected pieces that differ from the new construction
+plan, with IDs in `caelm_construction_conflicts`.
+
+Enable **Construction Metadata** in the export dialog to include optional
+provenance and overrides in the format-1 sidecar. The default keeps the legacy
+sidecar field set. See [engine contract](ENGINE_CONTRACT.md) and the
+[benchmark evidence](evidence/construction_treatments/README.md).
 
 ## Regeneration and export
 

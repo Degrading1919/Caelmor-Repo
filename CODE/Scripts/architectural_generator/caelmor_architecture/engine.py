@@ -10,16 +10,25 @@ from .facade import build_facades
 from .roof import build_roof, roof_faces, roof_topology
 from .geometry import area, cross, sub, dot
 
-TOOL_REVISION='0.12.2'
+TOOL_REVISION='0.13.0'
 
 
-def generate(settings):
+def generate(settings, *, finish_names=()):
+    from .construction import Resolver
+    resolver = (Resolver(settings.construction_overrides, settings.region, tuple(finish_names))
+                if settings.construction_overrides is not None else None)
     if settings.world_aware:
         from .world import generate as generate_world
-        return generate_world(settings)
-    plan=make_plan(settings)
-    buffers=build_facades(plan)+build_roof(plan)
-    return plan,buffers
+        plan, buffers = generate_world(settings, resolver=resolver)
+    else:
+        plan = make_plan(settings)
+        plan.construction_zone = 'main'
+        plan.construction_resolver = resolver
+        buffers = build_facades(plan) + build_roof(plan)
+    if resolver is not None:
+        resolver.finish()
+        plan.construction_components = dict(resolver.components)
+    return plan, buffers
 
 
 def geometry_hash(buffers):

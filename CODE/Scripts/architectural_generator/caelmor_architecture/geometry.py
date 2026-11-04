@@ -55,7 +55,7 @@ def clean(poly):
     return result
 
 
-def clip(poly, a, b, c):
+def clip(poly, a, b, c, *, bounded=False):
     """Sutherland-Hodgman half-plane clip, retaining a*x+b*y+c >= 0."""
     if not poly:
         return []
@@ -66,7 +66,10 @@ def clip(poly, a, b, c):
         if pin:
             result.append(p)
         if pin != qin:
-            result.append(lerp(p,q,dp/(dp-dq)))
+            t=dp/(dp-dq)
+            # The tolerance can classify a near-plane point as inside even
+            # when both signed distances are negative. Do not extrapolate.
+            result.append(lerp(p,q,max(0.,min(1.,t)) if bounded else t))
     result = clean(result)
     return result if len(result)>=3 and abs(area(result)) > EPS else []
 
@@ -77,14 +80,14 @@ def inequalities(poly):
             for p,q in zip(poly,poly[1:]+poly[:1])]
 
 
-def subtract_convex(poly, planes):
+def subtract_convex(poly, planes, *, bounded=False):
     """Partition poly minus convex cutter into nonoverlapping convex fragments."""
     result, remaining = [], poly
     for a,b,c in planes:
-        outside = clip(remaining,-a,-b,-c)
+        outside = clip(remaining,-a,-b,-c,bounded=bounded)
         if outside:
             result.append(outside)
-        remaining = clip(remaining,a,b,c)
+        remaining = clip(remaining,a,b,c,bounded=bounded)
         if not remaining:
             break
     return result
@@ -101,6 +104,7 @@ class MeshBuffer:
     roof_envelope: dict | None = None
     structural_role: str = 'framing'
     support_surface: dict | None = None
+    construction: object | None = None
 
     def indexed(self, vertices, faces):
         offset = len(self.vertices)

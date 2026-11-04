@@ -38,6 +38,7 @@ class Settings:
     world_aware: bool = False
     crafted_curves: bool = False
     seed_massing: bool = False
+    construction_overrides: dict | None = None
 
     def check(self, validate_shape=True):
         for name in ('width','depth','wing_width','wing_depth','floor_height','pitch','overhang','window_density','maintenance','age'):

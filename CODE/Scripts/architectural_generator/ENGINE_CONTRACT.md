@@ -2,7 +2,7 @@
 
 ## Current offline implementation
 
-Use the current GitHub head of [PR #85](https://github.com/Degrading1919/Caelmor-Repo/pull/85), `codex/architectural-generator`, as the architectural development baseline. The reference source reviewed here is `22e4185` (tool revision 0.12.2, including the bounded Thornfell curtain return study). PR #85 is under review. The Lowmark-only prototype in `9eaaf1d` and its evidence are historical compatibility references. Phase 1, the four regional dossiers and the roadmap still govern project scope. This add-on authors offline Blender assets in metres with Z up. The glTF exporter emits Y up.
+The designated `main` checkout is the development and delivery baseline. [PR #85](https://github.com/Degrading1919/Caelmor-Repo/pull/85) and `22e4185` (tool revision 0.12.2) are historical references, including the bounded Thornfell curtain return study. Phase 1, the four regional dossiers and the roadmap govern project scope. This add-on authors offline Blender assets in metres with Z up. The glTF exporter emits Y up.
 
 | Interface | Current contract |
 | --- | --- |
@@ -18,9 +18,9 @@ The original manual Lowmark interface used orthogonal RECT/L/T/U plans, intersec
 
 Keep full-section roof clearance, bearing and aperture checks in force when extending the surviving path. For timber this includes the projected section, deck underside and supporting fascia plane. For roof cover retain valid overlap/headlap and valley/ridge clearance in each topology mode. The earlier revision-specific dimensions, material revisions and test tolerances are available in Git history.
 
-## Construction treatments — proposal for Creative Director review
+## Construction treatments
 
-The Director approved the seven treatment families below. The IDs, component mapping, overrides and export extensions are proposed for the current implementation above. This section carries forward the unique contract changes from `4ae1d62`. See [the consolidation record](../../../00_ADMIN/Reference/Caelmor_Repository_Consolidation.md) for provenance and recovery refs.
+The Director approved the seven treatment families below. The 0.13.0 implementation uses the following IDs, component mapping and settings. This section carries forward the contract changes from `4ae1d62`. See [the consolidation record](../../../00_ADMIN/Reference/Caelmor_Repository_Consolidation.md) for provenance and recovery refs.
 
 ### Taxonomy
 
@@ -47,7 +47,7 @@ The planner supplies a stable component ID and `component_role` before a geometr
 | Condition | Keep age and maintenance independent. Derive exposure from local practice and component orientation/shelter. Resolve repair locally, such as a replacement shingle cohort or repointed joints. Repairs inherit role and treatment unless a compatible change is explicitly authored. |
 | Artistic finish | An optional `finish` reference selects the existing procedural/baked look or a compatible artist-authored surface. Bind it after construction and condition resolve. Finish changes affect shading or maps and their required UVs. They leave the assembly, support, aperture profile and physical condition inputs intact. An existing explicit slot override still wins at Blender binding. |
 
-Proposed settings shape is an optional `construction_overrides` object with optional `by_component` and `by_role` maps, keyed by stable component ID and the role IDs above. Each map value is an object with any of `treatment`, `substrate`, `surface_family` or `finish` as registered string IDs. Missing fields inherit. An empty `construction_overrides` opts in with defaults. Omit the object to keep the legacy path. This uses the current settings store and adds no external preset file. For opted-in components, resolve each authored field in this order.
+The settings shape is an optional `construction_overrides` object with optional `by_component` and `by_role` maps, keyed by stable component ID and the role IDs above. Each map value is an object with any of `treatment`, `substrate`, `surface_family` or `finish` as registered string IDs. Missing fields inherit. An empty `construction_overrides` opts in with defaults. Omit the object to keep the legacy path. This uses the current settings store and adds no external preset file. For opted-in components, resolve each authored field in this order.
 
 1. Use an explicit component override, then an explicit role override scoped to the building. Omission inherits from the next level.
 2. Use compatible defaults from the resolved local context, then the region. Translate current style choices where they apply (`RUBBLE`, `ASHLAR`, `BOARD`, `TIMBER_INFILL`, `SHINGLE`, `SLATE`, `CLAY`). A composite style such as `TIMBER_INFILL` supplies separate frame and infill choices. World zones can carry distinct local assembly choices. Requirements such as passage bearing width or a continuous roof envelope constrain selection.
@@ -71,8 +71,32 @@ The dossier sources are `LORE/Regions/Caelmor_Region1_LowmarkVale.md`, `Caelmor_
 ### Validation and compatibility
 
 - Before geometry generation, reject unknown fields, unknown explicit IDs, invalid region/context pairs, incompatible role/treatment/stock or host combinations, unresolvable finish references and unsupported builders. A role override must be compatible with each matched component after applying component overrides. Identify the component, rejected field and allowed choices. Check existing numeric ranges and validate the candidate geometry before replacing the collection, including aperture clearance, bearing, cover continuity and the existing topology rules for the selected mode. A rejected request leaves the collection intact.
-- Acceptance checks for a future implementation include repeatability at fixed settings and seed, a shared role resolving consistently across functions, the same stock in masonry and dressed stone, and slate and clay resolving under the same roof treatment. A finish-only change preserves vertex positions, faces and component identity. A repair-only change stays local. Check a Lowmark legacy farmhouse and the reference Gatehouse, and confirm the Mire reed path survives.
+- Acceptance checks include repeatability at fixed settings and seed, a shared role resolving consistently across functions, the same stock in masonry and dressed stone, and slate and clay resolving under the same roof treatment. A finish-only change preserves vertex positions, faces and component identity. A repair-only change stays local. Check a Lowmark legacy farmhouse and the reference Gatehouse, and confirm the Mire reed path survives.
 - Existing saved settings without the `construction_overrides` object resolve through their original compatibility path. Keep existing controls, material slots, UV conventions, datablocks and override behavior. Compare normalized settings for scoped regeneration, preserving the distinction between legacy and opted-in settings. Changes affecting multiple layers or support/cover geometry require full regeneration. Preserve protected buffers and artist overrides by stable buffer identity. Flag protected components that conflict with the new plan for manual reconciliation.
-- Keep `CaelmorBuildingExport` format 1, existing field meanings and sidecar naming. For treatment-aware exports, propose optional per-object `component_role`, `treatment`, `substrate` and `surface_family` fields. Record the resolved construction provenance from the object, including for protected pieces with known provenance. These fields describe the assembly and its selected source family even if an artist replaces the displayed material. Omit values for unclassified or protected pieces whose classification is unknown. Emit a single classification only when it describes the whole object. Preserve existing grouping and omit ambiguous tags for mixed buffers. The source geometry hash still describes generated source geometry. Verify reader tolerance for both optional settings and object fields before emitting them by default, and retain the existing export shape for strict readers.
+- Keep `CaelmorBuildingExport` format 1, existing field meanings and sidecar naming. For treatment-aware exports, support optional per-object `component_role`, `treatment`, `substrate` and `surface_family` fields. Record the resolved construction provenance from the object, including for protected pieces with known provenance. These fields describe the assembly and its selected source family even if an artist replaces the displayed material. Omit values for unclassified or protected pieces whose classification is unknown. Emit a single classification only when it describes the whole object. Preserve existing grouping and omit ambiguous tags for mixed buffers. The source geometry hash still describes generated source geometry. The exporter defaults to the existing field set for strict readers. Enable Construction Metadata (or pass `construction_metadata=True`) for both optional settings and object fields.
 
-This section is the proposed authoring contract. Settings are Blender collection data and the sidecar is offline export metadata. No JSON Schema change is required for this proposal. The gameplay schemas and the economy worker interchange schema govern separate inputs.
+Settings are Blender collection data and the sidecar is offline export metadata. No JSON Schema change is required. The gameplay schemas and the economy worker interchange schema govern separate inputs.
+
+
+### Implemented bindings and limits
+
+Component IDs use `zone/slot`, with `main` for the single-plan path. See
+`construction.py` for registered stock IDs and role constraints. Existing
+regional grammar selects the initial assembly and roof forms before the
+resolver runs. The initial builders classify participating wall bodies, plinths,
+infill, optional coatings, opening trim, principal frames, board leaves and
+decks, pitched roof support and covers, and the Thornfell Gatehouse portal and
+vault. Boards can replace plaster in compatible framed bays. Masonry stock
+can carry either rubble or dressed work. A mineral cover can use flat slate or
+fired clay under the same treatment ID. An explicit request that targets no
+supported component is an error.
+
+Masonry relief and render use continuous backing solids. Stone faces preserve
+aperture cuts and leave recessed beds, with profile variation concentrated at
+headers and footing. The curtain returns preserve site connection planes and
+the route envelope. Board decks share the existing roof surface with a thin
+underlay, and cover still uses the established valley, ridge and headlap
+placement. Reed, iron and terrace systems retain their specialized paths.
+Legacy and unclassified pieces can coexist with treated pieces, with treatment
+provenance omitted on the former. A named Blender finish reuses the author
+material datablock and does not build a new procedural atlas for that component.

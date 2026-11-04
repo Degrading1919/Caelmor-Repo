@@ -1,5 +1,5 @@
 """Capture the one-seed Thornfell masonry stock study and verify its GLB."""
-from dataclasses import asdict, replace
+from dataclasses import replace
 from hashlib import sha256
 import json
 from pathlib import Path
@@ -11,6 +11,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from render_polish_benchmarks import build, capture, settings, export_building
+from caelmor_architecture.blender_backend import _settings_dict
 from render_world_evidence import _reset_scene
 from render_architectural_benchmarks import source_hashes
 from test_condition_export import (assert_glb_materials, check_reimport, image_payload,
@@ -46,7 +47,7 @@ def main():
                    if row['settings']['function']=='GATEHOUSE' and row['settings']['seed']==91)
     before = [r for r in control['images'] if r['finish']=='material']
     s = replace(settings('GATEHOUSE'), crafted_curves=True, seed_massing=True)
-    assert asdict(s)==control['settings']
+    assert _settings_dict(s)==control['settings']
     _reset_scene()
     bpy.data.objects['Neutral ground'].location.z=0.
     collection, metrics = build(s)
@@ -85,7 +86,7 @@ def main():
     reimport=check_reimport(path,{material.name:snapshots})
     (OUT/'comparison.json').write_text(json.dumps(dict(
         baseline_revision=baseline['revision'], source_sha256=source_hashes(),
-        blender=bpy.app.version_string, settings=asdict(s), metrics=metrics,
+        blender=bpy.app.version_string, settings=_settings_dict(s), metrics=metrics,
         geometry_hash=control['geometry_hash'], before=before, after=images,
         mapped_meshes=len(new),changed_meshes=changes,
         glb_bytes=path.stat().st_size, baseline_glb_bytes=old_path.stat().st_size if old_path.exists() else None,

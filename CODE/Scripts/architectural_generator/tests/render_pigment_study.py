@@ -1,5 +1,5 @@
 """One seed per material family, using the existing studio and GLB checks."""
-from dataclasses import asdict, replace
+from dataclasses import replace
 from pathlib import Path
 import json
 import sys
@@ -14,6 +14,7 @@ from render_polish_benchmarks import build,capture,export_building,settings
 from render_world_evidence import _reset_scene
 from render_architectural_benchmarks import source_hashes
 from test_condition_export import assert_glb_materials,check_reimport,linked_image,read_glb
+from caelmor_architecture.blender_backend import _settings_dict
 from caelmor_architecture.benchmark_finish import uses_hewn_pigment,uses_masonry_stock
 
 OUT=ROOT/'evidence/painted_materials'
@@ -23,7 +24,7 @@ MASONRY=ROOT/'evidence/masonry_stock'
 
 def run_case(function, baseline):
     s=replace(settings(function),crafted_curves=True,seed_massing=True)
-    row=next(case for case in baseline['cases'] if case['settings']==asdict(s))
+    row=next(case for case in baseline['cases'] if case['settings']==_settings_dict(s))
     if function=='SMITHY':
         before_dir=BASE/'after'
         before=[img for img in row['images'] if img['finish']=='material']
@@ -75,7 +76,7 @@ def run_case(function, baseline):
             assert all(scoped(name,s) for name in changed)
     reimport=check_reimport(path,samples)
     assert reimport['reimported_pixel_map_checks']==len(materials)*4
-    return dict(settings=asdict(s),geometry_hash=row['geometry_hash'],metrics=metrics,
+    return dict(settings=_settings_dict(s),geometry_hash=row['geometry_hash'],metrics=metrics,
                 before_directory=before_dir.relative_to(ROOT).as_posix(),before=before,after=after,
                 mapped_meshes=len(new),changed_basecolor_bindings=changed,material_export=export,
                 glb_bytes=path.stat().st_size,baseline_glb_bytes=old_glb.stat().st_size if old_glb.is_file() else None,
