@@ -118,6 +118,11 @@ def _pass_layout(ctx, tower_width):
     return core_width, throat, (core_roof,core_axis,core_pitch,core_height), wings
 
 
+def _curtain_return(buffer, start, end, station, base):
+    buffer.box(((start+end)*.5,station,(base+3.5)*.5),(end-start,.70,base+3.5))
+    buffer.box(((start+end)*.5,station,base+3.52),(end-start+.06,.82,.18))
+
+
 def build(ctx):
     from .function_yard import _stair_to_guard_floor
     b=Builder(ctx,'GATEHOUSE');base=b.base
@@ -288,8 +293,7 @@ def build(ctx):
         owner=towers[0 if side=='west' else 1]
         tie_y=owner.bounds[1]+1.25 if diverse else -.55
         wall=b.fixture('gatehouse.curtain_return.'+side,'stone',owner,'boundary')
-        wall.box(((xa+xb)*.5,tie_y,(base+3.5)*.5),(xb-xa,.70,base+3.5))
-        wall.box(((xa+xb)*.5,tie_y,base+3.52),(xb-xa+.06,.82,.18))
+        _curtain_return(wall,xa,xb,tie_y,base)
     if diverse:
         b.program['adaptations'].append('Road-sized vaulted passage with guard wings set for exposure and sightlines')
     else:
