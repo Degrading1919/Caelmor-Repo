@@ -1,0 +1,974 @@
+{
+  "stage": "before",
+  "source_revision": "c2da894",
+  "generator_sha256": {
+    "__init__.py": "060f346a57193646f92248f27358d2a087eb83c40bb107e8d7f47d782c75ed31",
+    "benchmark_construction.py": "4ec72e47bdd9f1f867faa02abf139c03d5920fb3512b5e0a762638a7b312db36",
+    "benchmark_gatehouse.py": "fec6f86d9688d4a635b43c739ddbc92ccc9f121968cf018329f7c07e3f3cf78a",
+    "blender_backend.py": "a51def14b82dcbade35b37e0c9071b47bf522103764078226aa2d8198e1fec81",
+    "blender_manifest.toml": "8405d9bfd9969142c2ae559a256c99aa8e060464f4cd918871e5ab89765eaba3",
+    "crafted_geometry.py": "8cb9d2f8f8dd4161fb90511087d433ae1828e92d133ec966665dd90ff6e1ac74",
+    "engine.py": "520342936b1bf001058eab76c408b73a7f423b5a925848b2fd986e23c5fd9091",
+    "facade.py": "44a1d926cc16496917fc18be7b2c4385193eea55b9377e37c19c935c1c3bee0a",
+    "function_work.py": "410de667f732496f01cb8b13b58e8ec61abbee567748f6f4a6c5d2d84e394add",
+    "function_yard.py": "a7d05edd0f83d0ae9ec51c026e0556289f075482eb01a24214b3623aead75948",
+    "functional.py": "10f719e1db914f5bfc3e1958fe5c0fd323d2e75d8bd02e71f068117a1ad96baa",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "LICENSE": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+    "materials.py": "f5cbe097db77cb9bcad2560b6289e394e6ed5ff93fc377aa288405cfd0b22bdb",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "surface_atlas.py": "51fd04bb8b89d033c047abae363b0f0989fb4bb0a5e6182122c1b6d5cd5a76a4",
+    "surface_chart_reuse.py": "200a4dfd3eeda915f2f0f9ecfcab2e280d28790e0143dee61b882aae45306eb2",
+    "surface_conditions.py": "48a2623d36972f09e13cfd8da41e5bce036749fb306b592fec7ef74301ffe55a",
+    "surface_detail.py": "41832071b13d605f3e72f67dc7bb7d98800d4d5811915915a79ceb7663eee701",
+    "surface_patterns.py": "08bd96e520f837bc431db6f07125030ad04a5ca727ec5fc8ea140f93dcc1a677",
+    "world.py": "c75db94854a1db0bf777a6433bd8067e4031194834c4f8048887f1959db494f4",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+  },
+  "source_unchanged_during_capture": true,
+  "blender": "5.0.1",
+  "render_script_sha256": "4148c157f7bfd672b4067f9efe78c936afdb9220009c832a1ecb4c56632d1d3a",
+  "cases": [
+    {
+      "function": "SMITHY",
+      "settings": {
+        "age": 35,
+        "context": "AUTO",
+        "craftsmanship": "STANDARD",
+        "depth": 7.0,
+        "detail": "MEDIUM",
+        "floor_height": 2.65,
+        "floors": 2,
+        "footprint": "L",
+        "function": "SMITHY",
+        "geometry_mode": "EFFICIENT",
+        "maintenance": 0.7,
+        "overhang": 0.45,
+        "pitch": 48.0,
+        "region": "LOWMARK",
+        "roof_style": "AUTO",
+        "seed": 91,
+        "use_grammar": true,
+        "wealth": "ESTABLISHED",
+        "width": 11.0,
+        "window_density": 1.0,
+        "wing_depth": 4.5,
+        "wing_width": 4.2,
+        "world_aware": true
+      },
+      "geometry_hash": "194dc4b870dbacd6faa99571448ce1153dfe059ac29c956bb472f89fca4b6367",
+      "input_blend_sha256": "9c124d18336d78f22dacdbb811dac33bd5e75e69b669e76d3f08261c66c94c84",
+      "input_source_revision": "094eb8c"
+    },
+    {
+      "function": "GATEHOUSE",
+      "settings": {
+        "age": 35,
+        "context": "AUTO",
+        "craftsmanship": "STANDARD",
+        "depth": 7.0,
+        "detail": "MEDIUM",
+        "floor_height": 2.65,
+        "floors": 2,
+        "footprint": "L",
+        "function": "GATEHOUSE",
+        "geometry_mode": "EFFICIENT",
+        "maintenance": 0.7,
+        "overhang": 0.45,
+        "pitch": 48.0,
+        "region": "THORNFELL",
+        "roof_style": "AUTO",
+        "seed": 91,
+        "use_grammar": true,
+        "wealth": "ESTABLISHED",
+        "width": 11.0,
+        "window_density": 1.0,
+        "wing_depth": 4.5,
+        "wing_width": 4.2,
+        "world_aware": true
+      },
+      "geometry_hash": "4b7472cc506bae5d4db82b9aa1336277195cebee072995e9f09294bc27946ec3",
+      "input_blend_sha256": "31641ed35009c76fcfb092d82b178156f4c40ed18a32680f67800fbb2866f80e",
+      "input_source_revision": "094eb8c"
+    }
+  ],
+  "images": [
+    {
+      "function": "SMITHY",
+      "distance": "distant",
+      "finish": "clay",
+      "view": 0,
+      "image": "smithy/distant_clay_0.png",
+      "sha256": "d971354459e9c8e115bf925675f9d6f02af7b913f4969f036886829328289907",
+      "camera_location": [
+        37.57704544067383,
+        -45.80289077758789,
+        30.06163787841797
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 32.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -6.621238708496094,
+            7.13086462020874
+          ],
+          "y": [
+            -5.673489570617676,
+            5.707566261291504
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -16.0,
+            16.0
+          ],
+          "y": [
+            -11.0,
+            11.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "distant",
+      "finish": "clay",
+      "view": 1,
+      "image": "smithy/distant_clay_1.png",
+      "sha256": "ead014328c4d78ef803e1f74a29d8f07c2dae5cd77ab24d7834dd3721c097553",
+      "camera_location": [
+        -29.577045440673828,
+        49.00288772583008,
+        30.06163787841797
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 32.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -7.130864143371582,
+            6.6212382316589355
+          ],
+          "y": [
+            -5.7714314460754395,
+            5.609619140625
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -16.0,
+            16.0
+          ],
+          "y": [
+            -11.0,
+            11.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "normal",
+      "finish": "clay",
+      "view": 0,
+      "image": "smithy/normal_clay_0.png",
+      "sha256": "04334d4ebd124c3b531a425f28d3ea1a39a867c0545a7c3cbfd12dd2f6b3ce9a",
+      "camera_location": [
+        24.985652923583984,
+        -28.026805877685547,
+        19.988523483276367
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 18.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -6.621240139007568,
+            7.130866527557373
+          ],
+          "y": [
+            -5.673490047454834,
+            5.707566738128662
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -9.0,
+            9.0
+          ],
+          "y": [
+            -6.1875,
+            6.1875
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "normal",
+      "finish": "clay",
+      "view": 1,
+      "image": "smithy/normal_clay_1.png",
+      "sha256": "f49616159638c2ff38dc298f2cfe84a17e12c83edd9882eb89cda4dec0d7e05a",
+      "camera_location": [
+        -16.985652923583984,
+        31.226806640625,
+        19.988523483276367
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 18.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -7.130864143371582,
+            6.621237754821777
+          ],
+          "y": [
+            -5.7714314460754395,
+            5.609619140625
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -9.0,
+            9.0
+          ],
+          "y": [
+            -6.1875,
+            6.1875
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "close",
+      "finish": "clay",
+      "view": 0,
+      "image": "smithy/close_clay_0.png",
+      "sha256": "18331deb591620b6875a008273690afba10087e281660d7b5c7e0e324309149b",
+      "camera_location": [
+        10.827001571655273,
+        -13.888312339782715,
+        6.762770652770996
+      ],
+      "camera_target": [
+        2.5999999046325684,
+        1.2999999523162842,
+        1.7000000476837158
+      ],
+      "ortho_scale": 7.5,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "close",
+      "finish": "clay",
+      "view": 1,
+      "image": "smithy/close_clay_1.png",
+      "sha256": "533c604383cfaf20df11ce0550a5e6a712958402cb56bc7c259afe1df8a1e5b7",
+      "camera_location": [
+        -7.02140474319458,
+        -13.13210678100586,
+        6.510702133178711
+      ],
+      "camera_target": [
+        2.5999999046325684,
+        1.2999999523162842,
+        1.7000000476837158
+      ],
+      "ortho_scale": 7.5,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "distant",
+      "finish": "material",
+      "view": 0,
+      "image": "smithy/distant_material_0.png",
+      "sha256": "87bd7d42239bf428bd2c34a7a6a1bb026689a742dcf9130460e690eadbb5943b",
+      "camera_location": [
+        37.57704544067383,
+        -45.80289077758789,
+        30.06163787841797
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 32.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -6.621238708496094,
+            7.13086462020874
+          ],
+          "y": [
+            -5.673489570617676,
+            5.707566261291504
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -16.0,
+            16.0
+          ],
+          "y": [
+            -11.0,
+            11.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "distant",
+      "finish": "material",
+      "view": 1,
+      "image": "smithy/distant_material_1.png",
+      "sha256": "b170b14ae6eff92ad20d6c2ffe493eed489c69bc8a9c968cfff683ae48252354",
+      "camera_location": [
+        -29.577045440673828,
+        49.00288772583008,
+        30.06163787841797
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 32.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -7.130864143371582,
+            6.6212382316589355
+          ],
+          "y": [
+            -5.7714314460754395,
+            5.609619140625
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -16.0,
+            16.0
+          ],
+          "y": [
+            -11.0,
+            11.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "normal",
+      "finish": "material",
+      "view": 0,
+      "image": "smithy/normal_material_0.png",
+      "sha256": "65ec1dcb848a6fac7cf0c99baa3b03f665fc6bb5c099cebb4b43aa088f2febd0",
+      "camera_location": [
+        24.985652923583984,
+        -28.026805877685547,
+        19.988523483276367
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 18.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -6.621240139007568,
+            7.130866527557373
+          ],
+          "y": [
+            -5.673490047454834,
+            5.707566738128662
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -9.0,
+            9.0
+          ],
+          "y": [
+            -6.1875,
+            6.1875
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "normal",
+      "finish": "material",
+      "view": 1,
+      "image": "smithy/normal_material_1.png",
+      "sha256": "490984c7206652cfcb24a69ffa10a848152377a4684cfa73640c821249836a8b",
+      "camera_location": [
+        -16.985652923583984,
+        31.226806640625,
+        19.988523483276367
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 18.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -7.130864143371582,
+            6.621237754821777
+          ],
+          "y": [
+            -5.7714314460754395,
+            5.609619140625
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -9.0,
+            9.0
+          ],
+          "y": [
+            -6.1875,
+            6.1875
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "close",
+      "finish": "material",
+      "view": 0,
+      "image": "smithy/close_material_0.png",
+      "sha256": "cbcbb63fbbe7aa9b3d3b48c15e2b76acf1ee41318e42e4797ed5e4a73709594b",
+      "camera_location": [
+        10.827001571655273,
+        -13.888312339782715,
+        6.762770652770996
+      ],
+      "camera_target": [
+        2.5999999046325684,
+        1.2999999523162842,
+        1.7000000476837158
+      ],
+      "ortho_scale": 7.5,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "close",
+      "finish": "material",
+      "view": 1,
+      "image": "smithy/close_material_1.png",
+      "sha256": "4f78a0c56f793ca99f8218dcc6064cdf54e8389d6c5ac085d1d9f946bcc41d58",
+      "camera_location": [
+        -7.02140474319458,
+        -13.13210678100586,
+        6.510702133178711
+      ],
+      "camera_target": [
+        2.5999999046325684,
+        1.2999999523162842,
+        1.7000000476837158
+      ],
+      "ortho_scale": 7.5,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "distant",
+      "finish": "clay",
+      "view": 0,
+      "image": "gatehouse/distant_clay_0.png",
+      "sha256": "7a242530fb1bbb3028e3ab06d298945d59a942722c624b1980e009eb0e60181d",
+      "camera_location": [
+        58.26557159423828,
+        -68.10433197021484,
+        47.09245681762695
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 64.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -12.47565746307373,
+            13.774496078491211
+          ],
+          "y": [
+            -11.339170455932617,
+            7.9868621826171875
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -32.0,
+            32.0
+          ],
+          "y": [
+            -22.0,
+            22.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "distant",
+      "finish": "clay",
+      "view": 1,
+      "image": "gatehouse/distant_clay_1.png",
+      "sha256": "cae01f234fb24f3cac3ab0dcd37b1cffeef76846869203eee585ca5bd3720896",
+      "camera_location": [
+        -42.46556854248047,
+        74.10433197021484,
+        47.09245681762695
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 64.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -13.774494171142578,
+            12.475656509399414
+          ],
+          "y": [
+            -11.673101425170898,
+            7.65292501449585
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -32.0,
+            32.0
+          ],
+          "y": [
+            -22.0,
+            22.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "normal",
+      "finish": "clay",
+      "view": 0,
+      "image": "gatehouse/normal_clay_0.png",
+      "sha256": "6c3a9965cebe07082c8fd3683ca2ff58b01674fed460905305031e21565e7237",
+      "camera_location": [
+        38.32919692993164,
+        -39.95886993408203,
+        31.143360137939453
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 38.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -12.47565746307373,
+            13.774496078491211
+          ],
+          "y": [
+            -11.339171409606934,
+            7.9868621826171875
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -19.0,
+            19.0
+          ],
+          "y": [
+            -13.0625,
+            13.0625
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "normal",
+      "finish": "clay",
+      "view": 1,
+      "image": "gatehouse/normal_clay_1.png",
+      "sha256": "d221760cbff1b658b7827060bbd70f509dc717bd87d9648037a2a02fec6c3fea",
+      "camera_location": [
+        -22.529197692871094,
+        45.95886993408203,
+        31.143360137939453
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 38.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -13.774496078491211,
+            12.47565746307373
+          ],
+          "y": [
+            -11.673105239868164,
+            7.652927875518799
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -19.0,
+            19.0
+          ],
+          "y": [
+            -13.0625,
+            13.0625
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "close",
+      "finish": "clay",
+      "view": 0,
+      "image": "gatehouse/close_clay_0.png",
+      "sha256": "f8610a158b0eafa4ece1757c7ea3b08c21be78fd3fa847409c82e43aa42a0b88",
+      "camera_location": [
+        20.491392135620117,
+        -17.376083374023438,
+        12.973114013671875
+      ],
+      "camera_target": [
+        7.900000095367432,
+        0.4000000059604645,
+        2.9000000953674316
+      ],
+      "ortho_scale": 9.0,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "close",
+      "finish": "clay",
+      "view": 1,
+      "image": "gatehouse/close_clay_1.png",
+      "sha256": "96f0a3cd150f8a581b1219c9a01a87d1686fc3584b606a9d8484a36cf3814972",
+      "camera_location": [
+        -4.691392421722412,
+        25.77608299255371,
+        12.973114013671875
+      ],
+      "camera_target": [
+        7.900000095367432,
+        8.0,
+        2.9000000953674316
+      ],
+      "ortho_scale": 9.0,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "distant",
+      "finish": "material",
+      "view": 0,
+      "image": "gatehouse/distant_material_0.png",
+      "sha256": "9e8fe831055c3dd308790d3a04957ab731b3c0d513d5405b2c4e7e5a26d65ee8",
+      "camera_location": [
+        58.26557159423828,
+        -68.10433197021484,
+        47.09245681762695
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 64.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -12.47565746307373,
+            13.774496078491211
+          ],
+          "y": [
+            -11.339170455932617,
+            7.9868621826171875
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -32.0,
+            32.0
+          ],
+          "y": [
+            -22.0,
+            22.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "distant",
+      "finish": "material",
+      "view": 1,
+      "image": "gatehouse/distant_material_1.png",
+      "sha256": "d25b6b81b84a39736a0e9bd3d8909803043f37fe38ad0638f2119a0b0cf1cff1",
+      "camera_location": [
+        -42.46556854248047,
+        74.10433197021484,
+        47.09245681762695
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 64.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -13.774494171142578,
+            12.475656509399414
+          ],
+          "y": [
+            -11.673101425170898,
+            7.65292501449585
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -32.0,
+            32.0
+          ],
+          "y": [
+            -22.0,
+            22.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "normal",
+      "finish": "material",
+      "view": 0,
+      "image": "gatehouse/normal_material_0.png",
+      "sha256": "c4577f4a62ed1b57c92db7ae5f301faf2f9d2bbc3e2e80e6d879ad17c525c8bc",
+      "camera_location": [
+        38.32919692993164,
+        -39.95886993408203,
+        31.143360137939453
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 38.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -12.47565746307373,
+            13.774496078491211
+          ],
+          "y": [
+            -11.339171409606934,
+            7.9868621826171875
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -19.0,
+            19.0
+          ],
+          "y": [
+            -13.0625,
+            13.0625
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "normal",
+      "finish": "material",
+      "view": 1,
+      "image": "gatehouse/normal_material_1.png",
+      "sha256": "0029a3ee17f42571ff4bd136d4a812120a2a46993fde14dba516e931d0aba66a",
+      "camera_location": [
+        -22.529197692871094,
+        45.95886993408203,
+        31.143360137939453
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 38.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -13.774496078491211,
+            12.47565746307373
+          ],
+          "y": [
+            -11.673105239868164,
+            7.652927875518799
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -19.0,
+            19.0
+          ],
+          "y": [
+            -13.0625,
+            13.0625
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "close",
+      "finish": "material",
+      "view": 0,
+      "image": "gatehouse/close_material_0.png",
+      "sha256": "080a6c4fd95d04ffce64df872d1c290ffb2a3d20c98270c772eddd220f71e762",
+      "camera_location": [
+        20.491392135620117,
+        -17.376083374023438,
+        12.973114013671875
+      ],
+      "camera_target": [
+        7.900000095367432,
+        0.4000000059604645,
+        2.9000000953674316
+      ],
+      "ortho_scale": 9.0,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "close",
+      "finish": "material",
+      "view": 1,
+      "image": "gatehouse/close_material_1.png",
+      "sha256": "b99725b7cc4176dc526f6b311c7c392ea39bf69a155d44ab08d59bac5b6ffaf4",
+      "camera_location": [
+        -4.691392421722412,
+        25.77608299255371,
+        12.973114013671875
+      ],
+      "camera_target": [
+        7.900000095367432,
+        8.0,
+        2.9000000953674316
+      ],
+      "ortho_scale": 9.0,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    }
+  ],
+  "image_count": 24
+}

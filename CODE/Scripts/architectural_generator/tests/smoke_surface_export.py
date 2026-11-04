@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / "tests"))
 from caelmor_architecture.blender_backend import TAG, build, export_building
 from caelmor_architecture.materials import PALETTE, SURFACE_REVISION, get_material
 from caelmor_architecture.model import Settings
+from caelmor_architecture.surface_atlas import ATLAS_REVISION
 from test_condition_export import (assert_glb_materials, assert_source_surface_uv,
                                    read_glb, accessor_values)
 
@@ -62,7 +63,7 @@ def main():
             assert np.ptp(uv) > 0
             source_uv_counts[name] += len(uv) // 2
         atlas_slots = [slot.material for slot in obj.material_slots if slot.material
-                       and slot.material.get("caelm_atlas_revision") == 1]
+                       and slot.material.get("caelm_atlas_revision") == ATLAS_REVISION]
         if atlas_slots:
             assert "UV2_Surface" in obj.data.uv_layers, f"{obj.name} lacks atlas UV2"
             uv = np.empty(len(obj.data.uv_layers["UV2_Surface"].data) * 2, dtype=np.float32)
@@ -81,7 +82,7 @@ def main():
     assert neutral_tint_meshes, "No neutral CaelmorTint values checked"
 
     roof_materials = [material for material in bpy.data.materials
-                      if material.get("caelm_atlas_revision") == 1
+                      if material.get("caelm_atlas_revision") == ATLAS_REVISION
                       and material.get("caelm_material") == "roof_patch"]
     assert roof_materials, "Roof patch atlas material missing"
     roof_base = tuple(roof_materials[0].diffuse_color)
@@ -143,7 +144,7 @@ def main():
             "glb_normal_accessors_checked": normal_accessors,
             "material_export": material_summary,
         }
-    evidence = ROOT / "evidence" / "materials_v09" / "legacy_surface_check.json"
+    evidence = ROOT / "evidence" / "polish_v10" / "legacy_surface_check.json"
     evidence.parent.mkdir(parents=True, exist_ok=True)
     evidence.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print("SURFACE_SMOKE_OK " + json.dumps(report, sort_keys=True), flush=True)

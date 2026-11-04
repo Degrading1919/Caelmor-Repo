@@ -1,0 +1,36 @@
+{
+  "result": "PASS",
+  "fixture": "legacy FARMHOUSE / seed 17 / L footprint / LOW detail",
+  "source_mesh_count": 26,
+  "legacy_material_preserved": "Caelmor | Plaster Patch",
+  "revisioned_material_user_edit_retained": "Caelmor | Plaster Patch [LOWMARK-RURAL-ESTABLISHED-STANDARD S4]",
+  "revisioned_original_bank_images": 3,
+  "atlas_material_count": 11,
+  "roof_patch_palette_rgb": [
+    0.30000001192092896,
+    0.2199999988079071,
+    0.1599999964237213
+  ],
+  "source_uv_corner_counts": {
+    "UV0_Metric": 39316,
+    "UV1_Lightmap": 39316,
+    "UV2_Surface": 38860
+  },
+  "exported_uv2_corner_values_checked": [
+    116580,
+    2.384185791015625e-07
+  ],
+  "neutral_tint_meshes_checked": 25,
+  "glb_color_accessors_checked": 26,
+  "glb_normal_accessors_checked": 26,
+  "material_export": {
+    "materials_with_maps": 11,
+    "map_bindings": {
+      "base": 11,
+      "normal": 11,
+      "orm": 11
+    },
+    "embedded_image_count": 27,
+    "distinct_embedded_png_count": 27
+  }
+}

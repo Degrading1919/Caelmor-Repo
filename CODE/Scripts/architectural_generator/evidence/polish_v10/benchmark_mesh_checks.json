@@ -1,0 +1,52 @@
+{
+  "blender": "5.0.1",
+  "source_sha256": {
+    "benchmark_construction.py": "e6e655a13101daa6c2a27cc5153191a9d1a4601e8c4dfcb0c61281df98495669",
+    "benchmark_finish.py": "e137dc2a4d4a5e6ece7c2cd57fd4ce9618689df649e70ebe35e92977a21b554b",
+    "benchmark_gatehouse.py": "08130570d0518c4fb079a87eb95cca474d231d6f4035504b6fbb14569f563217",
+    "blender_backend.py": "88df4b2e03b3d456a071cbb1417e82e00bf835495cb42101326a1f94cb8c3554",
+    "crafted_geometry.py": "8cb9d2f8f8dd4161fb90511087d433ae1828e92d133ec966665dd90ff6e1ac74",
+    "engine.py": "6dc9434feb73c5f2ea173977f2a0c84219e48a0ab8c66bb6a480ea49221cb1bb",
+    "facade.py": "44a1d926cc16496917fc18be7b2c4385193eea55b9377e37c19c935c1c3bee0a",
+    "functional.py": "10f719e1db914f5bfc3e1958fe5c0fd323d2e75d8bd02e71f068117a1ad96baa",
+    "function_work.py": "410de667f732496f01cb8b13b58e8ec61abbee567748f6f4a6c5d2d84e394add",
+    "function_yard.py": "a7d05edd0f83d0ae9ec51c026e0556289f075482eb01a24214b3623aead75948",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "materials.py": "119930a294c310950b09b7d6c09cfc2ee3459caf3e59da8276d835e39c78d062",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "surface_atlas.py": "66f060531484f0eaa4299f8bda31484bcc788cc7d05faed17d94331f58e3bb24",
+    "surface_conditions.py": "e6c18af8118173854f61a20cc7c671bb24f9240f32f7a1fb08a98069ed3110a8",
+    "surface_detail.py": "9eced5bc6dbd7a7521c0a290281e45bd03a3357b514d0072b5d9638572248c35",
+    "surface_patterns.py": "08bd96e520f837bc431db6f07125030ad04a5ca727ec5fc8ea140f93dcc1a677",
+    "world.py": "33a48795e5770a4561b224887ea1db372b28aa4813ac64178bc9b77bcb9b0e1f",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126",
+    "__init__.py": "e60467e223f107a8c7c191e210c4ce0852ae821b483a8ae4e2de9bc0238c7eb9"
+  },
+  "cases": [
+    {
+      "function": "SMITHY",
+      "region": "LOWMARK",
+      "clearance_rays": 21,
+      "stair_headroom_rays": 0,
+      "exhaust_path_rays": 15,
+      "glass_structure_overlaps": 0,
+      "glazing_opaque_objects_tested": 25,
+      "source_geometry_hash": "fa9003af4bbcb6888b615addea6faa9648a84b5014441471f914ad55a3ea64d8"
+    },
+    {
+      "function": "GATEHOUSE",
+      "region": "THORNFELL",
+      "clearance_rays": 30,
+      "stair_headroom_rays": 32,
+      "exhaust_path_rays": 0,
+      "glass_structure_overlaps": 0,
+      "glazing_opaque_objects_tested": 67,
+      "source_geometry_hash": "45d459f774dce17db832450e588c578e888bf06673193e5c3e8b0df7959d07e7"
+    }
+  ],
+  "scope": "Actual BVH clearance rays include exported wall/floor proxies. Glazing intersections include structure and all integral functional fixtures, including detail-layer pieces. Closed service door leaves are omitted from circulation probes; this is not runtime traversal or exhaustive solid intersection."
+}

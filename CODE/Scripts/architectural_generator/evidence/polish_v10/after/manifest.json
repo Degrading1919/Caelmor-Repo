@@ -1,0 +1,2045 @@
+{
+  "stage": "after",
+  "source_revision": "ae0ec03",
+  "generator_sha256": {
+    "__init__.py": "e60467e223f107a8c7c191e210c4ce0852ae821b483a8ae4e2de9bc0238c7eb9",
+    "benchmark_construction.py": "e6e655a13101daa6c2a27cc5153191a9d1a4601e8c4dfcb0c61281df98495669",
+    "benchmark_finish.py": "e137dc2a4d4a5e6ece7c2cd57fd4ce9618689df649e70ebe35e92977a21b554b",
+    "benchmark_gatehouse.py": "08130570d0518c4fb079a87eb95cca474d231d6f4035504b6fbb14569f563217",
+    "blender_backend.py": "88df4b2e03b3d456a071cbb1417e82e00bf835495cb42101326a1f94cb8c3554",
+    "blender_manifest.toml": "c5168e2ec467fe613ddc99265cc9c3e60052d23741a61b099a6e049671b3c0ce",
+    "crafted_geometry.py": "8cb9d2f8f8dd4161fb90511087d433ae1828e92d133ec966665dd90ff6e1ac74",
+    "engine.py": "6dc9434feb73c5f2ea173977f2a0c84219e48a0ab8c66bb6a480ea49221cb1bb",
+    "facade.py": "44a1d926cc16496917fc18be7b2c4385193eea55b9377e37c19c935c1c3bee0a",
+    "function_work.py": "410de667f732496f01cb8b13b58e8ec61abbee567748f6f4a6c5d2d84e394add",
+    "function_yard.py": "a7d05edd0f83d0ae9ec51c026e0556289f075482eb01a24214b3623aead75948",
+    "functional.py": "10f719e1db914f5bfc3e1958fe5c0fd323d2e75d8bd02e71f068117a1ad96baa",
+    "geometry.py": "863d1db70b68f914ac51ca0563e94dc836811100462bcf78b4a675fe3e4f6104",
+    "LICENSE": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+    "materials.py": "119930a294c310950b09b7d6c09cfc2ee3459caf3e59da8276d835e39c78d062",
+    "model.py": "4b105626ec1ccbf336bb1f82efeb721cb6fffe8dadb7de5fad9164f5798d9be5",
+    "profiles.py": "c290bb0d1f55178d58ef616378014a7a834520df9d10b8a436f16f7a2e2133ba",
+    "roof.py": "3d39dbf5b59d77c0b65b64cb2d0b76fd39a3243ee17d8e3e2bf6bf3e14ceab88",
+    "surface_atlas.py": "66f060531484f0eaa4299f8bda31484bcc788cc7d05faed17d94331f58e3bb24",
+    "surface_conditions.py": "e6c18af8118173854f61a20cc7c671bb24f9240f32f7a1fb08a98069ed3110a8",
+    "surface_detail.py": "9eced5bc6dbd7a7521c0a290281e45bd03a3357b514d0072b5d9638572248c35",
+    "surface_patterns.py": "08bd96e520f837bc431db6f07125030ad04a5ca727ec5fc8ea140f93dcc1a677",
+    "world.py": "33a48795e5770a4561b224887ea1db372b28aa4813ac64178bc9b77bcb9b0e1f",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "432e9853fa4bfdbcd6ac5a545a234f166f48f8f76dfafed1fe0d3d39ca8ccf81",
+    "world_mire.py": "b20f9553adeca9c950297ec59594abfd0b50415ab8ca7d25a498aa60aa47a126"
+  },
+  "source_unchanged_during_capture": true,
+  "blender": "5.0.1",
+  "render_script_sha256": "5eaba0cf9fa13fe8f64a3599d4e1fc5bf657064bd3ae14eea06d4ed6e9194f7c",
+  "cases": [
+    {
+      "function": "SMITHY",
+      "settings": {
+        "seed": 91,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "geometry_hash": "fa9003af4bbcb6888b615addea6faa9648a84b5014441471f914ad55a3ea64d8",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 67,
+        "vertices": 9320,
+        "triangles": 11704,
+        "materials": 14,
+        "region": "LOWMARK",
+        "context": "RURAL",
+        "building_type": "SMITHY",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "forge_hall",
+            "bounds": [
+              0,
+              0,
+              5.6,
+              5.2
+            ],
+            "base": 0.32,
+            "eave": 3.92,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "SMITHY",
+            "wall_thickness": 0.28,
+            "vertices": 6270,
+            "triangles": 8234
+          },
+          {
+            "key": "smithy_stock_range",
+            "bounds": [
+              5.6,
+              0,
+              9.6,
+              5.2
+            ],
+            "base": 0.32,
+            "eave": 2.8699999999999997,
+            "valid": true,
+            "roof": "SHED",
+            "function": "SMITHY",
+            "wall_thickness": 0.28,
+            "vertices": 3050,
+            "triangles": 3470
+          }
+        ],
+        "geometry_hash": "fa9003af4bbcb6888b615addea6faa9648a84b5014441471f914ad55a3ea64d8",
+        "tool_revision": "0.10.0"
+      },
+      "metrics": {
+        "objects": 67,
+        "vertices": 9320,
+        "width": 11.409019231796265,
+        "depth": 7.684999942779541,
+        "height": 6.589634299278259,
+        "layers": [
+          "details",
+          "foundation",
+          "roof",
+          "structure",
+          "walls"
+        ]
+      },
+      "surfaces": [
+        {
+          "charts": 7,
+          "density": 48.0,
+          "fingerprint": "a4562400e957b00e708c4d977dd83f01aee6d8d3b8ae89e45d36054c8a982248",
+          "material": "bellows_leather",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 1,
+          "orm_size": [
+            128,
+            14
+          ],
+          "shared_normal": true,
+          "size": [
+            256,
+            28
+          ]
+        },
+        {
+          "charts": 147,
+          "density": 16.0,
+          "fingerprint": "88268a160f82ebf04c01aa8fa410a22c90c7ee3eb91810e22253b71f28ca7779",
+          "material": "charcoal",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 1,
+          "orm_size": [
+            128,
+            12
+          ],
+          "shared_normal": true,
+          "size": [
+            256,
+            24
+          ]
+        },
+        {
+          "charts": 301,
+          "density": 32.0,
+          "fingerprint": "2cf2316ab5046f10658b05904c3f62c312ad5244ab5bad1166762e11d6a9d9f1",
+          "material": "iron",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 9,
+          "orm_size": [
+            128,
+            216
+          ],
+          "shared_normal": true,
+          "size": [
+            256,
+            432
+          ]
+        },
+        {
+          "charts": 48,
+          "density": 24.0,
+          "fingerprint": "6b638d657b893a71c2ca58a382a35e2626ca146fbd0d030f6ac01db1c4e6db55",
+          "material": "mortar",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 2,
+          "orm_size": [
+            128,
+            112
+          ],
+          "shared_normal": true,
+          "size": [
+            256,
+            224
+          ]
+        },
+        {
+          "charts": 16,
+          "density": 32.0,
+          "fingerprint": "ba7ad554c863076ea08f8875c7212a71564018173b1c40c4f60fb147ddd0187e",
+          "material": "plaster",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 1,
+          "orm_size": [
+            128,
+            204
+          ],
+          "shared_normal": true,
+          "size": [
+            256,
+            408
+          ]
+        },
+        {
+          "charts": 739,
+          "density": 24.0,
+          "fingerprint": "5a42176dabd3fb779a0c390b8b6a09e60f2b98ad068f27bbfd429bebc850cced",
+          "material": "roof",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 2,
+          "orm_size": [
+            128,
+            170
+          ],
+          "shared_normal": true,
+          "size": [
+            256,
+            340
+          ]
+        },
+        {
+          "charts": 380,
+          "density": 24.0,
+          "fingerprint": "faee67d3581c6b94c497e94dff8189a530be50a0722b6623e12a93238c846b61",
+          "material": "roof_dark",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 5,
+          "orm_size": [
+            256,
+            96
+          ],
+          "shared_normal": true,
+          "size": [
+            512,
+            192
+          ]
+        },
+        {
+          "charts": 14,
+          "density": 24.0,
+          "fingerprint": "48f0d38795f4bd03b5468050f414d61afa7bbb3729814b5cdb675389194743c9",
+          "material": "roof_patch",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 1,
+          "orm_size": [
+            128,
+            8
+          ],
+          "shared_normal": true,
+          "size": [
+            256,
+            16
+          ]
+        },
+        {
+          "charts": 175,
+          "density": 24.0,
+          "fingerprint": "a9dafed6e73cd4e3e6477047e314310111dcefa60ac00c35ae0e3415814a2357",
+          "material": "roof_worn",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 2,
+          "orm_size": [
+            128,
+            44
+          ],
+          "shared_normal": true,
+          "size": [
+            256,
+            88
+          ]
+        },
+        {
+          "charts": 320,
+          "density": 24.0,
+          "fingerprint": "14ea8a7b1c283fd0d458bea9597e69732a1c9721dc9258f838bac4bc7cf6a4dd",
+          "material": "stone",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 12,
+          "orm_size": [
+            256,
+            202
+          ],
+          "shared_normal": true,
+          "size": [
+            512,
+            404
+          ]
+        },
+        {
+          "charts": 2508,
+          "density": 24.0,
+          "fingerprint": "304b0314cf4f91be8ba0f9c60ad9cd15f91dbf09f1c91d067d2ce8d57bbf5b4e",
+          "material": "stone_light",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 6,
+          "orm_size": [
+            128,
+            474
+          ],
+          "shared_normal": true,
+          "size": [
+            256,
+            948
+          ]
+        },
+        {
+          "charts": 18,
+          "density": 24.0,
+          "fingerprint": "fbfe21ce5468039459dc004ee600210c73ea947c563e4a9f658b70a00e0dd74d",
+          "material": "stone_sooted",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 3,
+          "orm_size": [
+            128,
+            28
+          ],
+          "shared_normal": true,
+          "size": [
+            256,
+            56
+          ]
+        },
+        {
+          "charts": 878,
+          "density": 64.0,
+          "fingerprint": "54b2f67eae869a4bc73a1311c80c58e1ce1e0c9d74d4ad2a71b5c2bc243bf614",
+          "material": "timber",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 19,
+          "orm_size": [
+            1024,
+            496
+          ],
+          "shared_normal": true,
+          "size": [
+            2048,
+            992
+          ]
+        },
+        {
+          "charts": 399,
+          "density": 64.0,
+          "fingerprint": "f580c1370b21676c84ef09a88e4954c021f8ed45f597205f628f221621ced98b",
+          "material": "timber_light",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 3,
+          "orm_size": [
+            1024,
+            178
+          ],
+          "shared_normal": true,
+          "size": [
+            2048,
+            356
+          ]
+        }
+      ],
+      "export_sha256": "b8dbeec2abda7fdedd6d8fbb0b73904b758ad8e2155134f02ff580c4561c7236",
+      "native_blend_sha256": "8240e6698b9592b9e7a6a935312a5e075a4289e653e4accf9d1ecbc9131fe4d4",
+      "authoring_seconds": 13.007
+    },
+    {
+      "function": "GATEHOUSE",
+      "settings": {
+        "seed": 91,
+        "function": "GATEHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true
+      },
+      "geometry_hash": "45d459f774dce17db832450e588c578e888bf06673193e5c3e8b0df7959d07e7",
+      "validation": {
+        "valid": true,
+        "errors": [],
+        "objects": 151,
+        "vertices": 46432,
+        "triangles": 64562,
+        "materials": 10,
+        "region": "THORNFELL",
+        "context": "RIDGE",
+        "building_type": "GATEHOUSE",
+        "geometry_mode": "EFFICIENT",
+        "architecture": "WORLD",
+        "construction_zones": [
+          {
+            "key": "gatehouse_portal",
+            "bounds": [
+              5.8,
+              0.0,
+              10.6,
+              8.4
+            ],
+            "base": 0.32,
+            "eave": 7.92,
+            "valid": true,
+            "roof": "GABLE",
+            "function": "GATEHOUSE",
+            "wall_thickness": 0.5,
+            "vertices": 14672,
+            "triangles": 20138
+          },
+          {
+            "key": "gatehouse_west_watchtower",
+            "bounds": [
+              0.0,
+              -1.8,
+              5.8,
+              5.0
+            ],
+            "base": 0.32,
+            "eave": 7.32,
+            "valid": true,
+            "roof": "HIP",
+            "function": "WATCHTOWER",
+            "wall_thickness": 0.5,
+            "vertices": 15892,
+            "triangles": 22230
+          },
+          {
+            "key": "gatehouse_east_watchtower",
+            "bounds": [
+              10.6,
+              -1.8,
+              16.4,
+              5.0
+            ],
+            "base": 0.32,
+            "eave": 7.32,
+            "valid": true,
+            "roof": "HIP",
+            "function": "WATCHTOWER",
+            "wall_thickness": 0.5,
+            "vertices": 15868,
+            "triangles": 22194
+          }
+        ],
+        "geometry_hash": "45d459f774dce17db832450e588c578e888bf06673193e5c3e8b0df7959d07e7",
+        "tool_revision": "0.10.0"
+      },
+      "metrics": {
+        "objects": 151,
+        "vertices": 46432,
+        "width": 21.259999990463257,
+        "depth": 15.399999618530273,
+        "height": 9.798727869987488,
+        "layers": [
+          "details",
+          "doors",
+          "foundation",
+          "roof",
+          "structure",
+          "walls",
+          "windows"
+        ]
+      },
+      "surfaces": [
+        {
+          "charts": 730,
+          "density": 32.0,
+          "fingerprint": "d9fad16a3f0978079f7cdf835aa5decccf63e639139aa7d5fc4cf0cff53a7b14",
+          "material": "iron",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 12,
+          "orm_size": [
+            128,
+            232
+          ],
+          "shared_normal": true,
+          "size": [
+            256,
+            464
+          ]
+        },
+        {
+          "charts": 84,
+          "density": 24.0,
+          "fingerprint": "fac82f5691f75f00c8d8e1afef1010338557b595a1ee747ecddfda8c04959e41",
+          "material": "mortar",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 5,
+          "orm_size": [
+            128,
+            274
+          ],
+          "shared_normal": true,
+          "size": [
+            256,
+            548
+          ]
+        },
+        {
+          "charts": 1706,
+          "density": 24.0,
+          "fingerprint": "1c9c6621da007d016fe59e533dd540faa76a83143ddce97ea05b3c65cce64378",
+          "material": "roof",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 3,
+          "orm_size": [
+            128,
+            402
+          ],
+          "shared_normal": true,
+          "size": [
+            256,
+            804
+          ]
+        },
+        {
+          "charts": 2151,
+          "density": 24.0,
+          "fingerprint": "3b7a70ae197a08075cd3a6f4c9a35e3962a3f4bbddc1eea6acec424f74b2407b",
+          "material": "roof_dark",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 9,
+          "orm_size": [
+            512,
+            182
+          ],
+          "shared_normal": true,
+          "size": [
+            1024,
+            364
+          ]
+        },
+        {
+          "charts": 64,
+          "density": 24.0,
+          "fingerprint": "dc952df3fbfeb6a9570954803aba53790840b7cff7d47408113ba2bdd526088e",
+          "material": "roof_patch",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 3,
+          "orm_size": [
+            128,
+            20
+          ],
+          "shared_normal": true,
+          "size": [
+            256,
+            40
+          ]
+        },
+        {
+          "charts": 449,
+          "density": 24.0,
+          "fingerprint": "ee560d57424ee0f621bbf7f98cb05e8bbdad974969948b6b721525f32467f19f",
+          "material": "roof_worn",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 3,
+          "orm_size": [
+            128,
+            112
+          ],
+          "shared_normal": true,
+          "size": [
+            256,
+            224
+          ]
+        },
+        {
+          "charts": 3458,
+          "density": 24.0,
+          "fingerprint": "27255389038113c13acc3e5476b24905d62cabde137f3ebc4ca93bf386c60864",
+          "material": "stone",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 20,
+          "orm_size": [
+            512,
+            1056
+          ],
+          "shared_normal": true,
+          "size": [
+            1024,
+            2112
+          ]
+        },
+        {
+          "charts": 15210,
+          "density": 24.0,
+          "fingerprint": "3af5e9b3cb9f4785e8441727606cfe7a145cabbe15b32db0bf959ccb8fb2ffda",
+          "material": "stone_light",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 3,
+          "orm_size": [
+            512,
+            822
+          ],
+          "shared_normal": true,
+          "size": [
+            1024,
+            1644
+          ]
+        },
+        {
+          "charts": 8408,
+          "density": 24.0,
+          "fingerprint": "a9a63a5452ddac8bc340c1d1b1badb80536e16f7069b5462ff65efc73c29eafa",
+          "material": "stone_light",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 25,
+          "orm_size": [
+            256,
+            1162
+          ],
+          "shared_normal": true,
+          "size": [
+            512,
+            2324
+          ]
+        },
+        {
+          "charts": 1832,
+          "density": 64.0,
+          "fingerprint": "cd39254a252ad9d2039ea974363c808fa2956c57ba8f95cb48b073b1bccc7071",
+          "material": "timber",
+          "normal_size": [
+            256,
+            256
+          ],
+          "objects": 65,
+          "orm_size": [
+            1024,
+            1314
+          ],
+          "shared_normal": true,
+          "size": [
+            2048,
+            2628
+          ]
+        }
+      ],
+      "export_sha256": "08b3aff81d742b408bd127504a6cc42ce6b89227df0c5c28eaf54556412c8b72",
+      "native_blend_sha256": "ed051fb0c1b8ac617ee6b1d11d8f8061d8a8b21feba78fb0f6494e5357dfa9d0",
+      "authoring_seconds": 32.544
+    }
+  ],
+  "images": [
+    {
+      "function": "SMITHY",
+      "distance": "distant",
+      "finish": "clay",
+      "view": 0,
+      "image": "smithy/distant_clay_0.png",
+      "sha256": "577e00b62bc36f010addc40bee56e97dd5ce8e94901d761fb1917b90fe6fd2ae",
+      "camera_location": [
+        37.57704544067383,
+        -45.80289077758789,
+        30.06163787841797
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 32.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -6.621238708496094,
+            7.13086462020874
+          ],
+          "y": [
+            -5.673489570617676,
+            5.707566261291504
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -16.0,
+            16.0
+          ],
+          "y": [
+            -11.0,
+            11.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "distant",
+      "finish": "clay",
+      "view": 1,
+      "image": "smithy/distant_clay_1.png",
+      "sha256": "e87e4b996b1136979d8a3caf1567c38b65a2084b7fa4890c7aaa40777a290fc5",
+      "camera_location": [
+        -29.577045440673828,
+        49.00288772583008,
+        30.06163787841797
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 32.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -7.130864143371582,
+            6.6212382316589355
+          ],
+          "y": [
+            -5.7714314460754395,
+            5.609619140625
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -16.0,
+            16.0
+          ],
+          "y": [
+            -11.0,
+            11.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "normal",
+      "finish": "clay",
+      "view": 0,
+      "image": "smithy/normal_clay_0.png",
+      "sha256": "19d475e8f44913cf34983d89a9cf927809838f6f1202205226c19144610ae7d7",
+      "camera_location": [
+        24.985652923583984,
+        -28.026805877685547,
+        19.988523483276367
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 18.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -6.621240139007568,
+            7.130866527557373
+          ],
+          "y": [
+            -5.673490047454834,
+            5.707566738128662
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -9.0,
+            9.0
+          ],
+          "y": [
+            -6.1875,
+            6.1875
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "normal",
+      "finish": "clay",
+      "view": 1,
+      "image": "smithy/normal_clay_1.png",
+      "sha256": "89cb4a8538f4243f4d1f80cb487a252270f81ac7d03201738deb9651753dbc5a",
+      "camera_location": [
+        -16.985652923583984,
+        31.226806640625,
+        19.988523483276367
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 18.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -7.130864143371582,
+            6.621237754821777
+          ],
+          "y": [
+            -5.7714314460754395,
+            5.609619140625
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -9.0,
+            9.0
+          ],
+          "y": [
+            -6.1875,
+            6.1875
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "close",
+      "finish": "clay",
+      "view": 0,
+      "image": "smithy/close_clay_0.png",
+      "sha256": "800f189e7ce466627ff717b3b1ef1f0bb58f5b926697a695f72da1f3e316c6f7",
+      "camera_location": [
+        10.827001571655273,
+        -13.888312339782715,
+        6.762770652770996
+      ],
+      "camera_target": [
+        2.5999999046325684,
+        1.2999999523162842,
+        1.7000000476837158
+      ],
+      "ortho_scale": 7.5,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "close",
+      "finish": "clay",
+      "view": 1,
+      "image": "smithy/close_clay_1.png",
+      "sha256": "93ba95e2daeb9ab549b6bc7f205f7a808cb7d83cfff28a7dbd413e2ecabd4ff7",
+      "camera_location": [
+        -7.02140474319458,
+        -13.13210678100586,
+        6.510702133178711
+      ],
+      "camera_target": [
+        2.5999999046325684,
+        1.2999999523162842,
+        1.7000000476837158
+      ],
+      "ortho_scale": 7.5,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "distant",
+      "finish": "material",
+      "view": 0,
+      "image": "smithy/distant_material_0.png",
+      "sha256": "3cbb7463921a0fb9a57f65a4e99f7dfa1f398dad2664da8c73acfc6a53d55990",
+      "camera_location": [
+        37.57704544067383,
+        -45.80289077758789,
+        30.06163787841797
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 32.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -6.621238708496094,
+            7.13086462020874
+          ],
+          "y": [
+            -5.673489570617676,
+            5.707566261291504
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -16.0,
+            16.0
+          ],
+          "y": [
+            -11.0,
+            11.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "distant",
+      "finish": "material",
+      "view": 1,
+      "image": "smithy/distant_material_1.png",
+      "sha256": "e6b10078c61d2d31e6072094b84af93b8da3b1b83dc26d4aceb4dc2deb927ea0",
+      "camera_location": [
+        -29.577045440673828,
+        49.00288772583008,
+        30.06163787841797
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 32.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -7.130864143371582,
+            6.6212382316589355
+          ],
+          "y": [
+            -5.7714314460754395,
+            5.609619140625
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -16.0,
+            16.0
+          ],
+          "y": [
+            -11.0,
+            11.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "normal",
+      "finish": "material",
+      "view": 0,
+      "image": "smithy/normal_material_0.png",
+      "sha256": "60427eba6c516f806ecde072dd13b9eafe5b7edb0e2cb9dc30dfd9e4256bac3d",
+      "camera_location": [
+        24.985652923583984,
+        -28.026805877685547,
+        19.988523483276367
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 18.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -6.621240139007568,
+            7.130866527557373
+          ],
+          "y": [
+            -5.673490047454834,
+            5.707566738128662
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -9.0,
+            9.0
+          ],
+          "y": [
+            -6.1875,
+            6.1875
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "normal",
+      "finish": "material",
+      "view": 1,
+      "image": "smithy/normal_material_1.png",
+      "sha256": "7f6bdad549d5fc8db339c1a44337a7b67aa9d50b6644d296b48901dce8e4e6ff",
+      "camera_location": [
+        -16.985652923583984,
+        31.226806640625,
+        19.988523483276367
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 18.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -7.130864143371582,
+            6.621237754821777
+          ],
+          "y": [
+            -5.7714314460754395,
+            5.609619140625
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -9.0,
+            9.0
+          ],
+          "y": [
+            -6.1875,
+            6.1875
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "close",
+      "finish": "material",
+      "view": 0,
+      "image": "smithy/close_material_0.png",
+      "sha256": "f0aa47777b6eb1a885c4e6ad7d03564896b7ebedd67e3285a60678bcddba8ba5",
+      "camera_location": [
+        10.827001571655273,
+        -13.888312339782715,
+        6.762770652770996
+      ],
+      "camera_target": [
+        2.5999999046325684,
+        1.2999999523162842,
+        1.7000000476837158
+      ],
+      "ortho_scale": 7.5,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "close",
+      "finish": "material",
+      "view": 1,
+      "image": "smithy/close_material_1.png",
+      "sha256": "61743b479192004c8b55816d5cc30f7c65ed628dc6c319a8796af9e2f2f3ac64",
+      "camera_location": [
+        -7.02140474319458,
+        -13.13210678100586,
+        6.510702133178711
+      ],
+      "camera_target": [
+        2.5999999046325684,
+        1.2999999523162842,
+        1.7000000476837158
+      ],
+      "ortho_scale": 7.5,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "distant",
+      "finish": "exported_material",
+      "view": 0,
+      "image": "exported/smithy/distant_material_0.png",
+      "sha256": "3697fe2a7339cbe9de2aa57dc38b83fe02290277f37ed3b70cd99361dfada38d",
+      "camera_location": [
+        37.57704544067383,
+        -45.80289077758789,
+        30.06163787841797
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 32.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -6.621238708496094,
+            7.13086462020874
+          ],
+          "y": [
+            -5.673489570617676,
+            5.707566261291504
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -16.0,
+            16.0
+          ],
+          "y": [
+            -11.0,
+            11.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "distant",
+      "finish": "exported_material",
+      "view": 1,
+      "image": "exported/smithy/distant_material_1.png",
+      "sha256": "9c927f8da7c1b1976f3941ff4873228ae0b1c05952ff015e0c958ed3c693d0ba",
+      "camera_location": [
+        -29.577045440673828,
+        49.00288772583008,
+        30.06163787841797
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 32.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -7.130864143371582,
+            6.6212382316589355
+          ],
+          "y": [
+            -5.7714314460754395,
+            5.609619140625
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -16.0,
+            16.0
+          ],
+          "y": [
+            -11.0,
+            11.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "normal",
+      "finish": "exported_material",
+      "view": 0,
+      "image": "exported/smithy/normal_material_0.png",
+      "sha256": "30851d37f1bc71a82e770adca29b6a96498c236bb4647d9270f0fe77706d540f",
+      "camera_location": [
+        24.985652923583984,
+        -28.026805877685547,
+        19.988523483276367
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 18.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -6.621240139007568,
+            7.130866527557373
+          ],
+          "y": [
+            -5.673490047454834,
+            5.707566738128662
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -9.0,
+            9.0
+          ],
+          "y": [
+            -6.1875,
+            6.1875
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "normal",
+      "finish": "exported_material",
+      "view": 1,
+      "image": "exported/smithy/normal_material_1.png",
+      "sha256": "8d18901e6fa18a3bdf03de9b393c4ae6d03be89d0ac85eb521482dd5ae279b08",
+      "camera_location": [
+        -16.985652923583984,
+        31.226806640625,
+        19.988523483276367
+      ],
+      "camera_target": [
+        4.0,
+        1.600000023841858,
+        3.200000047683716
+      ],
+      "ortho_scale": 18.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -7.130864143371582,
+            6.621237754821777
+          ],
+          "y": [
+            -5.7714314460754395,
+            5.609619140625
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -9.0,
+            9.0
+          ],
+          "y": [
+            -6.1875,
+            6.1875
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "close",
+      "finish": "exported_material",
+      "view": 0,
+      "image": "exported/smithy/close_material_0.png",
+      "sha256": "5ce669b0d973bdf29d84eec56ad766e601d0c6cff91d9735fc5779142c22c67e",
+      "camera_location": [
+        10.827001571655273,
+        -13.888312339782715,
+        6.762770652770996
+      ],
+      "camera_target": [
+        2.5999999046325684,
+        1.2999999523162842,
+        1.7000000476837158
+      ],
+      "ortho_scale": 7.5,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    },
+    {
+      "function": "SMITHY",
+      "distance": "close",
+      "finish": "exported_material",
+      "view": 1,
+      "image": "exported/smithy/close_material_1.png",
+      "sha256": "1b8ccb0a8a5bf8b2fc99451874a84a89cb12dba883115ea372141dd390461842",
+      "camera_location": [
+        -7.02140474319458,
+        -13.13210678100586,
+        6.510702133178711
+      ],
+      "camera_target": [
+        2.5999999046325684,
+        1.2999999523162842,
+        1.7000000476837158
+      ],
+      "ortho_scale": 7.5,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "distant",
+      "finish": "clay",
+      "view": 0,
+      "image": "gatehouse/distant_clay_0.png",
+      "sha256": "dceee12dee5162077528f6d4ca2831bfeb7211f213fb8d91860412a58c5969c9",
+      "camera_location": [
+        58.26557159423828,
+        -68.10433197021484,
+        47.09245681762695
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 64.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -12.47565746307373,
+            13.774496078491211
+          ],
+          "y": [
+            -11.339170455932617,
+            7.9868621826171875
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -32.0,
+            32.0
+          ],
+          "y": [
+            -22.0,
+            22.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "distant",
+      "finish": "clay",
+      "view": 1,
+      "image": "gatehouse/distant_clay_1.png",
+      "sha256": "bbbb6847d155f1428728bdc04c17a7607c041d5f2f1ca2e4bc99d0322cbe7612",
+      "camera_location": [
+        -42.46556854248047,
+        74.10433197021484,
+        47.09245681762695
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 64.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -13.774494171142578,
+            12.475656509399414
+          ],
+          "y": [
+            -11.673101425170898,
+            7.65292501449585
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -32.0,
+            32.0
+          ],
+          "y": [
+            -22.0,
+            22.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "normal",
+      "finish": "clay",
+      "view": 0,
+      "image": "gatehouse/normal_clay_0.png",
+      "sha256": "8d6006dffbf87375611789bf49f7e2ee44ecab08dac75f389a6bb68a80c4f08e",
+      "camera_location": [
+        38.32919692993164,
+        -39.95886993408203,
+        31.143360137939453
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 38.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -12.47565746307373,
+            13.774496078491211
+          ],
+          "y": [
+            -11.339171409606934,
+            7.9868621826171875
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -19.0,
+            19.0
+          ],
+          "y": [
+            -13.0625,
+            13.0625
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "normal",
+      "finish": "clay",
+      "view": 1,
+      "image": "gatehouse/normal_clay_1.png",
+      "sha256": "ae9663a6159f2ea8946479e0fe4cb4c23f83e252e8b821f645d71cf41efff0fc",
+      "camera_location": [
+        -22.529197692871094,
+        45.95886993408203,
+        31.143360137939453
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 38.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -13.774496078491211,
+            12.47565746307373
+          ],
+          "y": [
+            -11.673105239868164,
+            7.652927875518799
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -19.0,
+            19.0
+          ],
+          "y": [
+            -13.0625,
+            13.0625
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "close",
+      "finish": "clay",
+      "view": 0,
+      "image": "gatehouse/close_clay_0.png",
+      "sha256": "ed2a74bf2ede1e2844cc6cf34c10d15f4dee71eaf3ce37c5c4beb37d0ef375cc",
+      "camera_location": [
+        20.491392135620117,
+        -17.376083374023438,
+        12.973114013671875
+      ],
+      "camera_target": [
+        7.900000095367432,
+        0.4000000059604645,
+        2.9000000953674316
+      ],
+      "ortho_scale": 9.0,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "close",
+      "finish": "clay",
+      "view": 1,
+      "image": "gatehouse/close_clay_1.png",
+      "sha256": "a6b7bcbbb4958cba547080e1fa27eae0681dd4b9df603060fa6ea22daa0211ae",
+      "camera_location": [
+        -4.691392421722412,
+        25.77608299255371,
+        12.973114013671875
+      ],
+      "camera_target": [
+        7.900000095367432,
+        8.0,
+        2.9000000953674316
+      ],
+      "ortho_scale": 9.0,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "distant",
+      "finish": "material",
+      "view": 0,
+      "image": "gatehouse/distant_material_0.png",
+      "sha256": "804ad0c8f0f199f1ae0cbd5f7a818785a81ce76c0d0f4568c81fcdd451a4ac59",
+      "camera_location": [
+        58.26557159423828,
+        -68.10433197021484,
+        47.09245681762695
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 64.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -12.47565746307373,
+            13.774496078491211
+          ],
+          "y": [
+            -11.339170455932617,
+            7.9868621826171875
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -32.0,
+            32.0
+          ],
+          "y": [
+            -22.0,
+            22.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "distant",
+      "finish": "material",
+      "view": 1,
+      "image": "gatehouse/distant_material_1.png",
+      "sha256": "9875d04b687eab542d18bebf28cc865c5bc51c855f4a63cd8e06dbf6adb6b1d1",
+      "camera_location": [
+        -42.46556854248047,
+        74.10433197021484,
+        47.09245681762695
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 64.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -13.774494171142578,
+            12.475656509399414
+          ],
+          "y": [
+            -11.673101425170898,
+            7.65292501449585
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -32.0,
+            32.0
+          ],
+          "y": [
+            -22.0,
+            22.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "normal",
+      "finish": "material",
+      "view": 0,
+      "image": "gatehouse/normal_material_0.png",
+      "sha256": "925847a613266fbdee4dc5dee3289710096ecd53bc4bbfc94b97043f4a6ae7bd",
+      "camera_location": [
+        38.32919692993164,
+        -39.95886993408203,
+        31.143360137939453
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 38.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -12.47565746307373,
+            13.774496078491211
+          ],
+          "y": [
+            -11.339171409606934,
+            7.9868621826171875
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -19.0,
+            19.0
+          ],
+          "y": [
+            -13.0625,
+            13.0625
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "normal",
+      "finish": "material",
+      "view": 1,
+      "image": "gatehouse/normal_material_1.png",
+      "sha256": "01e0052bfb37e6bff594ac7b4e1b96f09378dad77c24b73c5fbe17b3e91f942b",
+      "camera_location": [
+        -22.529197692871094,
+        45.95886993408203,
+        31.143360137939453
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 38.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -13.774496078491211,
+            12.47565746307373
+          ],
+          "y": [
+            -11.673105239868164,
+            7.652927875518799
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -19.0,
+            19.0
+          ],
+          "y": [
+            -13.0625,
+            13.0625
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "close",
+      "finish": "material",
+      "view": 0,
+      "image": "gatehouse/close_material_0.png",
+      "sha256": "1f2bff302f133001adc258b056f6daf5a3f8f9a36f986a5e33be6489010e9b43",
+      "camera_location": [
+        20.491392135620117,
+        -17.376083374023438,
+        12.973114013671875
+      ],
+      "camera_target": [
+        7.900000095367432,
+        0.4000000059604645,
+        2.9000000953674316
+      ],
+      "ortho_scale": 9.0,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "close",
+      "finish": "material",
+      "view": 1,
+      "image": "gatehouse/close_material_1.png",
+      "sha256": "e60ca75ae9af25098cc9172efecbd156290c029c08160cbc4d6264229c45f0a0",
+      "camera_location": [
+        -4.691392421722412,
+        25.77608299255371,
+        12.973114013671875
+      ],
+      "camera_target": [
+        7.900000095367432,
+        8.0,
+        2.9000000953674316
+      ],
+      "ortho_scale": 9.0,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "distant",
+      "finish": "exported_material",
+      "view": 0,
+      "image": "exported/gatehouse/distant_material_0.png",
+      "sha256": "a684be7aa0dd224076e6de4ec5d9a52e6b8aec674b62d9b50dbc0ac760285434",
+      "camera_location": [
+        58.26557159423828,
+        -68.10433197021484,
+        47.09245681762695
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 64.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -12.47565746307373,
+            13.774496078491211
+          ],
+          "y": [
+            -11.339170455932617,
+            7.9868621826171875
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -32.0,
+            32.0
+          ],
+          "y": [
+            -22.0,
+            22.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "distant",
+      "finish": "exported_material",
+      "view": 1,
+      "image": "exported/gatehouse/distant_material_1.png",
+      "sha256": "60ade0721944446aafe97db4bcfa4164d33d4e1ef3a219cfed9c56e4bd112ab1",
+      "camera_location": [
+        -42.46556854248047,
+        74.10433197021484,
+        47.09245681762695
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 64.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -13.774494171142578,
+            12.475656509399414
+          ],
+          "y": [
+            -11.673101425170898,
+            7.65292501449585
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -32.0,
+            32.0
+          ],
+          "y": [
+            -22.0,
+            22.0
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "normal",
+      "finish": "exported_material",
+      "view": 0,
+      "image": "exported/gatehouse/normal_material_0.png",
+      "sha256": "97ca624356e84a184c6216f7392a272e6bd18c8d8fbb741d226ad964fb08eb21",
+      "camera_location": [
+        38.32919692993164,
+        -39.95886993408203,
+        31.143360137939453
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 38.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -12.47565746307373,
+            13.774496078491211
+          ],
+          "y": [
+            -11.339171409606934,
+            7.9868621826171875
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -19.0,
+            19.0
+          ],
+          "y": [
+            -13.0625,
+            13.0625
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "normal",
+      "finish": "exported_material",
+      "view": 1,
+      "image": "exported/gatehouse/normal_material_1.png",
+      "sha256": "6e0d0d265dd4a24ee1b8753eb815b5052e12b1bb7899abe2450462466aaca9ab",
+      "camera_location": [
+        -22.529197692871094,
+        45.95886993408203,
+        31.143360137939453
+      ],
+      "camera_target": [
+        7.900000095367432,
+        3.0,
+        6.800000190734863
+      ],
+      "ortho_scale": 38.0,
+      "framing": {
+        "valid": true,
+        "projected_bounds": {
+          "x": [
+            -13.774496078491211,
+            12.47565746307373
+          ],
+          "y": [
+            -11.673105239868164,
+            7.652927875518799
+          ]
+        },
+        "frame_bounds": {
+          "x": [
+            -19.0,
+            19.0
+          ],
+          "y": [
+            -13.0625,
+            13.0625
+          ]
+        },
+        "safety_margin_fraction": 0.015000000000000013
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "close",
+      "finish": "exported_material",
+      "view": 0,
+      "image": "exported/gatehouse/close_material_0.png",
+      "sha256": "bc0ca386dbc08ffcde8a931944e4c27dbd4390e2a6cadf8f22b1bd305ef6b5fe",
+      "camera_location": [
+        20.491392135620117,
+        -17.376083374023438,
+        12.973114013671875
+      ],
+      "camera_target": [
+        7.900000095367432,
+        0.4000000059604645,
+        2.9000000953674316
+      ],
+      "ortho_scale": 9.0,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "distance": "close",
+      "finish": "exported_material",
+      "view": 1,
+      "image": "exported/gatehouse/close_material_1.png",
+      "sha256": "b269e74410f9e4f52de1f3bb9c003bb014da0fad69e7e087c7f8ffbe413135c5",
+      "camera_location": [
+        -4.691392421722412,
+        25.77608299255371,
+        12.973114013671875
+      ],
+      "camera_target": [
+        7.900000095367432,
+        8.0,
+        2.9000000953674316
+      ],
+      "ortho_scale": 9.0,
+      "framing": {
+        "valid": null,
+        "note": "intentional close crop"
+      }
+    }
+  ],
+  "image_count": 36
+}
