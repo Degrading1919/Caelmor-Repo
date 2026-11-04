@@ -14,6 +14,8 @@ from .surface_conditions import condition_fields, environment
 from .benchmark_finish import (masonry_stock_tint, surface_base, uses_hewn_pigment,
                                uses_masonry_stock)
 from .surface_pigments import masonry_pigment, timber_pigment
+from .roof_pigments import TILE_BUFFERS, course_start, roof_pigment, course_pigment
+from .surface_conditions import smooth
 
 ATLAS_REVISION=2
 UV_NAME='UV2_Surface'
@@ -41,10 +43,12 @@ def _components(mesh):
     return {p.index:centers[find(p.vertices[0])] for p in mesh.polygons}
 
 
-def _charts(objects, density):
+def _charts(objects, density, course_edges=False):
     charts=[]
+    course_cache={}
     for obj,host in objects:
         mesh=obj.data; uv=mesh.uv_layers['UV0_Metric']; pieces=_components(mesh)
+        cover_tiles=course_edges and obj['caelm_buffer_id'].endswith(TILE_BUFFERS)
         for poly in mesh.polygons:
             ids=list(poly.loop_indices)
             coords=np.array([tuple(uv.data[i].uv) for i in ids],dtype=float)
@@ -57,7 +61,8 @@ def _charts(objects, density):
             w,h=[max(1,min(256,int(math.ceil(float(s)*density)))) for s in span]
             charts.append(dict(obj=obj,poly=poly.index,loops=ids,coords=coords,low=low,span=span,
                 transform=transform,normal=tuple(poly.normal),center=pieces[poly.index],
-                w=w,h=h,host=host))
+                w=w,h=h,host=host,
+                course=course_start(host,points,poly.normal,course_cache) if cover_tiles else None))
     return sorted(charts,key=lambda c:(-c['h'],-c['w'],c['obj']['caelm_buffer_id'],c['poly']))
 
 
@@ -138,7 +143,7 @@ def _detail_image(family,settings):
     return image
 
 
-def apply_surfaces(objects,plan,settings,context_objects=None):
+def apply_surfaces(objects,plan,settings,context_objects=None,*,roof_finish="BASELINE"):
     """Finish native objects; can recoat fixed geometry for controlled diagnostics.
 
     Production build calls this with its real settings. Diagnostic surface-only
@@ -146,6 +151,8 @@ def apply_surfaces(objects,plan,settings,context_objects=None):
     while attributing all differences to surface treatment.
     """
     import bpy
+    if roof_finish not in ('BASELINE','PIGMENT','COURSES'):
+        raise ValueError(f'Unsupported roof finish {roof_finish!r}')
     hosts={m.key:m.plan for m in getattr(plan,'world_zones',())}
     contexts={id(host):environment(host) for host in [plan,*hosts.values()]}
     for obj in (objects if context_objects is None else context_objects):
@@ -173,8 +180,14 @@ def apply_surfaces(objects,plan,settings,context_objects=None):
         groups.setdefault((key,base,wall_stock),[]).append((obj,host))
     reports=[]
     for (key,base,wall_stock),members in sorted(groups.items()):
+        painted_roof=(FAMILY[key]=='roof' and roof_finish!='BASELINE'
+                      and settings.world_aware
+                      and (settings.region,settings.function) in (('LOWMARK','SMITHY'),('THORNFELL','GATEHOUSE')))
+        course_edges=painted_roof and roof_finish=='COURSES'
         digest=hashlib.sha256()
         digest.update(json.dumps((ATLAS_REVISION,key,base,settings.__dict__),sort_keys=True).encode())
+        if painted_roof:
+            digest.update(f'roof pigment v1 {roof_finish}'.encode())
         hewn={obj.name for obj,_ in members if FAMILY[key]=='wood'
               and uses_hewn_pigment(obj.get('caelm_buffer_id',''),settings)}
         if wall_stock:
@@ -191,7 +204,7 @@ def apply_surfaces(objects,plan,settings,context_objects=None):
         material=next((m for m in bpy.data.materials if m.get('caelm_surface_fingerprint')==fingerprint),None)
         base_density={'wood':64,'stone':24,'roof':24,'plaster':32,'iron':32,'leather':48,'charcoal':16}[FAMILY[key]]
         density=base_density*{'LOW':.5,'MEDIUM':1.,'HIGH':1.5}[settings.detail]
-        charts=_charts(members,density);width,height_px=_pack(charts)
+        charts=_charts(members,density,course_edges);width,height_px=_pack(charts)
         for c in charts:
             mesh=c['obj'].data
             layer=mesh.uv_layers.get(UV_NAME) or mesh.uv_layers.new(name=UV_NAME)
@@ -245,6 +258,19 @@ def apply_surfaces(objects,plan,settings,context_objects=None):
                 selected=hewn_mask>0
                 color[selected]*=timber_pigment(uu[selected],vv[selected],unit[selected],
                                               hewn_mask[selected]==2,settings.craftsmanship)
+            if painted_roof:
+                color*=roof_pigment(positions,normals,settings.region,settings.seed)
+            if course_edges:
+                for c in charts:
+                    if c['course'] is None:
+                        continue
+                    axis,direction,edge,row,has_butt=c['course']
+                    start,end=c['slice']
+                    distance=direction*(positions[start:end,axis]-edge)
+                    lip=(1.-smooth(.006,.095,distance)) if has_butt else np.zeros(end-start)
+                    lip*=.66+.34*unit[start:end]
+                    row_stock=_hash2(row,axis*direction,settings.seed+911)
+                    color[start:end]*=course_pigment(unit[start:end],row_stock,lip,settings.region)
             rough=pattern['roughness'].copy();metal=pattern['metallic'].copy()
             # Regions/material cohorts share textures but retain their actual
             # host volume's eaves, apertures and hearths.
