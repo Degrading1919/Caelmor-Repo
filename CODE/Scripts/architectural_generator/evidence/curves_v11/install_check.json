@@ -1,0 +1,10 @@
+{
+  "installed_archive": "C:\\Users\\CK\\Documents\\Caelmor-Architecture\\CODE\\Scripts\\architectural_generator\\dist\\caelmor_architecture.zip",
+  "archive_sha256": "12df66ea34054b1182c03f712d799688c40c2932e98ee011b691b4e757f64a50",
+  "native_install_and_generate": true,
+  "isolated_preferences": true,
+  "region": "LOWMARK",
+  "building_type": "SMITHY",
+  "geometry_mode": "EFFICIENT",
+  "world_aware": true
+}

@@ -68,8 +68,13 @@ try {
                 $row=@()
                 foreach($view in 0,1){
                     $angle=if($distance -eq 'close'){"detail $($view+1)"}elseif($view -eq 0){'front'}else{'rear'}
-                    $row+=@{stage='before';row=(Find-Frame $before $function $distance $finish $view);label="v0.9 $finish / $angle"}
-                    $row+=@{stage='after';row=(Find-Frame $after $function $distance $finish $view);label="v0.10 $finish / $angle"}
+                    $original=Find-Frame $before $function $distance $finish $view
+                    $updated=Find-Frame $after $function $distance $finish $view
+                    if($Curves -and (($original.camera_location -join ',') -ne ($updated.camera_location -join ',') -or
+                        ($original.camera_target -join ',') -ne ($updated.camera_target -join ',') -or
+                        $original.ortho_scale -ne $updated.ortho_scale)){throw "Unmatched cameras for $function $distance $finish $view"}
+                    $row+=@{stage=$control;row=$original;label="$beforeLabel $finish / $angle"}
+                    $row+=@{stage='after';row=$updated;label="$afterLabel $finish / $angle"}
                 }
                 $rows+=,$row
             }
