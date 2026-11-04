@@ -47,7 +47,7 @@ The planner supplies a stable component ID and `component_role` before a geometr
 | Condition | Keep age and maintenance independent. Derive exposure from local practice and component orientation/shelter. Resolve repair locally, such as a replacement shingle cohort or repointed joints. Repairs inherit role and treatment unless a compatible change is explicitly authored. |
 | Artistic finish | An optional `finish` reference selects the existing procedural/baked look or a compatible artist-authored surface. Bind it after construction and condition resolve. Finish changes affect shading or maps and their required UVs. They leave the assembly, support, aperture profile and physical condition inputs intact. An existing explicit slot override still wins at Blender binding. |
 
-The settings shape is an optional `construction_overrides` object with optional `by_component` and `by_role` maps, keyed by stable component ID and the role IDs above. Each map value is an object with any of `treatment`, `substrate`, `surface_family`, `finish` or `variant` as registered string IDs. Missing fields inherit. An empty `construction_overrides` opts in with defaults. Omit the object to keep the legacy path. This uses the current settings store and adds no external preset file. For opted-in components, resolve each authored field in this order.
+The settings shape is an optional `construction_overrides` object with optional `by_component` and `by_role` maps, keyed by stable component ID and the role IDs above. Each map value is an object with any of `treatment`, `substrate`, `surface_family`, `finish`, `variant` or `representation` as registered string IDs. Missing fields inherit. An empty `construction_overrides` opts in with defaults. Omit the object to keep the legacy path. This uses the current settings store and adds no external preset file. For opted-in components, resolve each authored field in this order.
 
 1. Use an explicit component override, then an explicit role override scoped to the building. Omission inherits from the next level.
 2. Use compatible defaults from the resolved local context, then the region. Translate current style choices where they apply (`RUBBLE`, `ASHLAR`, `BOARD`, `TIMBER_INFILL`, `SHINGLE`, `SLATE`, `CLAY`). A composite style such as `TIMBER_INFILL` supplies separate frame and infill choices. World zones can carry distinct local assembly choices. Requirements such as passage bearing width or a continuous roof envelope constrain selection.
@@ -129,3 +129,29 @@ Metal framing remains a proposed taxonomy extension. Its separate stock,
 section, connections, host bearing, corrosion and validation would need
 authoring review before registration. The current structural selection is
 timber. Iron roofs and fixtures continue on their existing paths.
+
+
+### Construction depth representation
+
+The optional `representation` field is independent of treatment, stock,
+variant and finish. The supported values are `MODELED`, `HYBRID` and `TEXTURE`.
+Omission uses the historical modeled path. The latter two require Efficient
+geometry and apply to eligible `roof_cover` and exposed `wall_body` components.
+A role-level masonry choice leaves full-depth structural curtain assemblies
+modeled. An explicit mapped request on a curtain or coated masonry is
+incompatible. Specialized reed and iron roof paths keep their own builders.
+
+Mapped fields are open render surfaces over the original bearing and weather
+assemblies. Roof fields follow the roof patch planes and clear the flashing
+lanes. Hybrid retains individual modeled units around significant roof edges.
+Texture dominant retains eave and verge units, caps and flashing. Mapped
+masonry fields use the original full aperture cutters. Hybrid retains
+selected body headers and corner and bottom courses, while both modes retain
+the separate plinth, quoins, portal and bonded curtain assemblies.
+
+The repeatable PBR set uses the same material binding and export path as
+the atlas. Metric and lightmap UVs remain available. The aligned field uses
+`UV2_Surface` for all three map channels. Compatible fields reuse packed
+images, and normal and ORM tiles can be shared across albedo palettes.
+Optional construction export metadata records representation when authored.
+Legacy format-1 export fields and default modeled geometry remain stable.

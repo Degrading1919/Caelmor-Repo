@@ -1,0 +1,2749 @@
+{
+  "blender": "5.0.1",
+  "source_sha256": {
+    "__init__.py": "bfb2e07462ec7de5380f436b83402aa9f95d46d77bd470bffd6363853af00f27",
+    "benchmark_construction.py": "2def99d6947e73ea9056d6d45457ba95a7a0ada265cd7f592af796b57199213f",
+    "benchmark_finish.py": "aba9669eef117f6ae2c9f4f0186df30bced62751590da6b3e145a7eb5d65c52d",
+    "benchmark_gatehouse.py": "6d6849926ed813865c802ce05413702c3208bb85ca48f061965050fc52ea8bd0",
+    "blender_backend.py": "1bee6906e60791164980b3e9c046abd6daa79b1c91109a527454cac7155ded12",
+    "blender_manifest.toml": "1b71a8cfcc9b4274a41b5fe06cce9aeae096fdfb67e10d8ff346e0573357af75",
+    "construction.py": "12fc1b395851da4765fa853c23de7bf27371c955e729639c616d6c9092dbc3ef",
+    "construction_geometry.py": "af5ad8626246364bb1da91710c90f2a292730328efe54b243e77293655037b86",
+    "construction_library.py": "1ba97eecffed264efb61328e82d366fea911de120f9ca24d35e81eca27d43334",
+    "construction_relief.py": "5e35123d5db9c2ddcab0387582f2954c46e4b627dac9f7abe4a7a9ed9643f0da",
+    "crafted_geometry.py": "402d20f9192f22779da8afd83181062003e1874594821b10acf7c2a66763c4f3",
+    "curtain_masonry.py": "a4a6b4788541e886b63cff1ba1f26cc49bea1a83dc434eb01e91c15232f96256",
+    "curve_profiles.py": "f98554e8a5f4e0ea2a0a80f01cb4a4b79a2c77299230f454357eb6b3a5993ee7",
+    "curve_sweep.py": "00f9bef55fa29e129fc856ba8d12f05bace416a1a682df5b3fd8c26d1e471f84",
+    "engine.py": "af92af6df493bbe8264f337610aa900924e2c9b1a036659415641de08cab7bf6",
+    "facade.py": "8fc3eaeb58dabea6199690be55bc29a34dae068df2344de1b1f46f17b2ef5682",
+    "function_work.py": "1220e0828501ddafb2ad658ad7ac647ef3f76ad6ad394f65459400ab7453fb35",
+    "function_yard.py": "666b14cd4ce6b4127826f83cb93b03eba2f7face679efb43a47ba640967889f7",
+    "functional.py": "ac2bf3b9730e5aeceefe178b35a493ecb09d8e9d6a0ebc0394a8990c2291c7b5",
+    "geometry.py": "86dfbba36547c87286c02068fc311bbdbd640502b4cd28283347ff0af710bcb8",
+    "LICENSE": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809",
+    "materials.py": "f34d142df25551554fbc14a4ad86ca59f3ca4efdb09d268e09ff69504d2fb210",
+    "model.py": "2981e64661534a762c35a72c6f4324a7299d2094aa6dca1ca3615fb944d0fa99",
+    "profiles.py": "3e7e29517f947d0eff991945248824ff47e2a2f9aa7afe3558dca1988745c344",
+    "roof.py": "8541dfdcd8e0e95abf5377a3930fa427f68bcf856e334afdb54b85a259e51579",
+    "roof_pigments.py": "509d1658182078e19149e65e4e069d4ab13be9f510be6b0c21553be501886cd0",
+    "surface_atlas.py": "589e25e0febaecefeb0512021e979a7e53890588e90f0da01079db18297c1a05",
+    "surface_conditions.py": "353fe1509a42c171bbdbe0ca05396768cb747a0d622f4b92e1309018a3e66196",
+    "surface_detail.py": "1b2992c8e677364de23e94564b78247153c647945417585cd20fa5d6136ac169",
+    "surface_patterns.py": "ae6c45574c1758f4a246abde1499ffd4a3e812183a9356ef1e3e306b15930640",
+    "surface_pigments.py": "bfb0fb2ea8f206b29c2fffe837092377ab1c5275d69df11a29884ccddcef6ae9",
+    "world.py": "8868ff3b776b6958fe7aa7115a3bf03a84c83dc07d8d86026723c3563abd4d5f",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "c766daba6d8b19441e9589b340e3693a7e118332cd97e261b6c2fcbad1482534",
+    "world_mire.py": "4a6b314f6c7f415d8ad5b4c5176f1197ad4e89896bae3a3dbfafa32b6a925042"
+  },
+  "baseline_commit": "414bd97",
+  "cases": [
+    {
+      "function": "SMITHY",
+      "representation": "MODELED",
+      "settings": {
+        "seed": 91,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": true,
+        "seed_massing": true,
+        "construction_overrides": {
+          "by_role": {
+            "plinth": {
+              "treatment": "stone_masonry",
+              "variant": "broken_course"
+            },
+            "frame_member": {
+              "treatment": "structural_timber",
+              "variant": "hewn_pegged"
+            },
+            "wall_infill": {
+              "treatment": "wooden_boarding"
+            },
+            "roof_support": {
+              "treatment": "structural_timber",
+              "variant": "hewn_pegged"
+            },
+            "roof_cover": {
+              "treatment": "wooden_shingles",
+              "substrate": "split_wood"
+            }
+          }
+        }
+      },
+      "geometry_hash": "27adb4d48261a32f021a08345ae1dcb40d7f7229830ddfeecb9941ce63e4133a",
+      "triangles": 15731,
+      "vertices": 12121,
+      "layers": {
+        "foundation": {
+          "vertices": 1496,
+          "triangles": 2532,
+          "buffers": 15
+        },
+        "walls": {
+          "vertices": 1000,
+          "triangles": 1258,
+          "buffers": 4
+        },
+        "structure": {
+          "vertices": 752,
+          "triangles": 1320,
+          "buffers": 6
+        },
+        "roof": {
+          "vertices": 5887,
+          "triangles": 5537,
+          "buffers": 22
+        },
+        "details": {
+          "vertices": 2986,
+          "triangles": 5084,
+          "buffers": 30
+        }
+      },
+      "frames": [
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "clay",
+          "view": 0,
+          "image": "modeled/smithy/normal_clay_0.png",
+          "sha256": "26bbc256ef29f765a31597e2b8d011bf15b098deb34a57c8c42a79ef89bf7211",
+          "camera_location": [
+            24.985652923583984,
+            -28.026805877685547,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -4.9743242263793945,
+                7.650158405303955
+              ],
+              "y": [
+                -5.019678592681885,
+                4.824228763580322
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "close",
+          "finish": "clay",
+          "view": 0,
+          "image": "modeled/smithy/close_clay_0.png",
+          "sha256": "0d120b56663a2bf3f348a740d915ddd805085b417c21238f71c6bba77fa8ca89",
+          "camera_location": [
+            15.766782760620117,
+            -8.325719833374023,
+            12.942197799682617
+          ],
+          "camera_target": [
+            4.25,
+            2.0999999046325684,
+            3.8499999046325684
+          ],
+          "ortho_scale": 9.5,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "modeled/smithy/normal_material_0.png",
+          "sha256": "1af237274468bcc0393f6b7d178dc42605af91f3370c450f7bc575db51ce2cc5",
+          "camera_location": [
+            24.985652923583984,
+            -28.026805877685547,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -4.9743242263793945,
+                7.650158405303955
+              ],
+              "y": [
+                -5.019678592681885,
+                4.824228763580322
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "close",
+          "finish": "material",
+          "view": 0,
+          "image": "modeled/smithy/close_material_0.png",
+          "sha256": "5e8d72b5838ccdbbe37992fec3078d32913da32ec303ecb701cd0ca60997a9f9",
+          "camera_location": [
+            15.766782760620117,
+            -8.325719833374023,
+            12.942197799682617
+          ],
+          "camera_target": [
+            4.25,
+            2.0999999046325684,
+            3.8499999046325684
+          ],
+          "ortho_scale": 9.5,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        }
+      ],
+      "export": {
+        "bytes": 5302732,
+        "materials": 13,
+        "textures": 39,
+        "images": [
+          {
+            "name": "Caelmor Detail2 iron LOWMARK STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 11260,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 56f82622720af8b0 Color",
+            "width": 256,
+            "height": 408,
+            "png_bytes": 44604,
+            "rgba8_mipped_bytes": 556988
+          },
+          {
+            "name": "Caelmor Surface 56f82622720af8b0 ORM",
+            "width": 128,
+            "height": 204,
+            "png_bytes": 23838,
+            "rgba8_mipped_bytes": 139196
+          },
+          {
+            "name": "Caelmor Detail2 wood LOWMARK STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 13053,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 6d21336a7addd0ae Color",
+            "width": 4096,
+            "height": 648,
+            "png_bytes": 1167993,
+            "rgba8_mipped_bytes": 14155068
+          },
+          {
+            "name": "Caelmor Surface 6d21336a7addd0ae ORM",
+            "width": 2048,
+            "height": 324,
+            "png_bytes": 273116,
+            "rgba8_mipped_bytes": 3538236
+          },
+          {
+            "name": "Caelmor Detail2 roof LOWMARK STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 12349,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 4c0b0daa52560014 Color",
+            "width": 512,
+            "height": 380,
+            "png_bytes": 81003,
+            "rgba8_mipped_bytes": 1037324
+          },
+          {
+            "name": "Caelmor Surface 4c0b0daa52560014 ORM",
+            "width": 256,
+            "height": 190,
+            "png_bytes": 20287,
+            "rgba8_mipped_bytes": 259084
+          },
+          {
+            "name": "Caelmor Surface c85a5a6a0fa7dd0d Color",
+            "width": 256,
+            "height": 108,
+            "png_bytes": 12033,
+            "rgba8_mipped_bytes": 147324
+          },
+          {
+            "name": "Caelmor Surface c85a5a6a0fa7dd0d ORM",
+            "width": 128,
+            "height": 54,
+            "png_bytes": 4170,
+            "rgba8_mipped_bytes": 36732
+          },
+          {
+            "name": "Caelmor Surface 4699d1eca375f710 Color",
+            "width": 1024,
+            "height": 1584,
+            "png_bytes": 679252,
+            "rgba8_mipped_bytes": 8650620
+          },
+          {
+            "name": "Caelmor Surface 4699d1eca375f710 ORM",
+            "width": 512,
+            "height": 792,
+            "png_bytes": 151419,
+            "rgba8_mipped_bytes": 2162556
+          },
+          {
+            "name": "Caelmor Detail2 stone LOWMARK STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 20581,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 5579b41eaf86b2d3 Color",
+            "width": 256,
+            "height": 856,
+            "png_bytes": 110457,
+            "rgba8_mipped_bytes": 1168656
+          },
+          {
+            "name": "Caelmor Surface 5579b41eaf86b2d3 ORM",
+            "width": 128,
+            "height": 428,
+            "png_bytes": 27564,
+            "rgba8_mipped_bytes": 292112
+          },
+          {
+            "name": "Caelmor Surface c1a65c57c89dd872 Color",
+            "width": 256,
+            "height": 236,
+            "png_bytes": 7862,
+            "rgba8_mipped_bytes": 322076
+          },
+          {
+            "name": "Caelmor Surface c1a65c57c89dd872 ORM",
+            "width": 128,
+            "height": 118,
+            "png_bytes": 3720,
+            "rgba8_mipped_bytes": 80412
+          },
+          {
+            "name": "Caelmor Surface 73208bdd1b6ed652 Color",
+            "width": 256,
+            "height": 956,
+            "png_bytes": 117758,
+            "rgba8_mipped_bytes": 1305096
+          },
+          {
+            "name": "Caelmor Surface 73208bdd1b6ed652 ORM",
+            "width": 128,
+            "height": 478,
+            "png_bytes": 35058,
+            "rgba8_mipped_bytes": 326152
+          },
+          {
+            "name": "Caelmor Surface 20c38aab9c071442 Color",
+            "width": 256,
+            "height": 52,
+            "png_bytes": 4268,
+            "rgba8_mipped_bytes": 70908
+          },
+          {
+            "name": "Caelmor Surface 20c38aab9c071442 ORM",
+            "width": 128,
+            "height": 26,
+            "png_bytes": 1391,
+            "rgba8_mipped_bytes": 17660
+          },
+          {
+            "name": "Caelmor Surface 49219ce6da52757f Color",
+            "width": 256,
+            "height": 20,
+            "png_bytes": 2060,
+            "rgba8_mipped_bytes": 27260
+          },
+          {
+            "name": "Caelmor Surface 49219ce6da52757f ORM",
+            "width": 128,
+            "height": 10,
+            "png_bytes": 870,
+            "rgba8_mipped_bytes": 6780
+          },
+          {
+            "name": "Caelmor Detail2 leather LOWMARK STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 15784,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 667babd3c078e1f5 Color",
+            "width": 256,
+            "height": 28,
+            "png_bytes": 1871,
+            "rgba8_mipped_bytes": 38140
+          },
+          {
+            "name": "Caelmor Surface 667babd3c078e1f5 ORM",
+            "width": 128,
+            "height": 14,
+            "png_bytes": 760,
+            "rgba8_mipped_bytes": 9468
+          },
+          {
+            "name": "Caelmor Detail2 charcoal LOWMARK STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 17070,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 116160126187e877 Color",
+            "width": 256,
+            "height": 28,
+            "png_bytes": 2327,
+            "rgba8_mipped_bytes": 38140
+          },
+          {
+            "name": "Caelmor Surface 116160126187e877 ORM",
+            "width": 128,
+            "height": 14,
+            "png_bytes": 1221,
+            "rgba8_mipped_bytes": 9468
+          },
+          {
+            "name": "Caelmor Surface 4b5d7d8433521f32 Color",
+            "width": 256,
+            "height": 432,
+            "png_bytes": 47235,
+            "rgba8_mipped_bytes": 589788
+          },
+          {
+            "name": "Caelmor Surface 4b5d7d8433521f32 ORM",
+            "width": 128,
+            "height": 216,
+            "png_bytes": 16247,
+            "rgba8_mipped_bytes": 147420
+          }
+        ],
+        "rgba8_mipped_bytes": 37229808,
+        "primitives": 77,
+        "blended_primitives": 0,
+        "vertex_records": 30835,
+        "mapped_materials": 13,
+        "shared_field_materials": []
+      }
+    },
+    {
+      "function": "SMITHY",
+      "representation": "HYBRID",
+      "settings": {
+        "seed": 91,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": true,
+        "seed_massing": true,
+        "construction_overrides": {
+          "by_role": {
+            "plinth": {
+              "treatment": "stone_masonry",
+              "variant": "broken_course"
+            },
+            "frame_member": {
+              "treatment": "structural_timber",
+              "variant": "hewn_pegged"
+            },
+            "wall_infill": {
+              "treatment": "wooden_boarding"
+            },
+            "roof_support": {
+              "treatment": "structural_timber",
+              "variant": "hewn_pegged"
+            },
+            "roof_cover": {
+              "treatment": "wooden_shingles",
+              "substrate": "split_wood",
+              "representation": "HYBRID"
+            }
+          }
+        }
+      },
+      "geometry_hash": "c6adec354367d27a5e6980d4791be4040ec1cc5e5021067c8acf475f31e03461",
+      "triangles": 13999,
+      "vertices": 9549,
+      "layers": {
+        "foundation": {
+          "vertices": 1496,
+          "triangles": 2532,
+          "buffers": 15
+        },
+        "walls": {
+          "vertices": 1000,
+          "triangles": 1258,
+          "buffers": 4
+        },
+        "structure": {
+          "vertices": 752,
+          "triangles": 1320,
+          "buffers": 6
+        },
+        "roof": {
+          "vertices": 3315,
+          "triangles": 3805,
+          "buffers": 22
+        },
+        "details": {
+          "vertices": 2986,
+          "triangles": 5084,
+          "buffers": 30
+        }
+      },
+      "frames": [
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "clay",
+          "view": 0,
+          "image": "hybrid/smithy/normal_clay_0.png",
+          "sha256": "75f122fac7cb853f72673291243f390186a1f5734310ae8b8634a4d65224aaf7",
+          "camera_location": [
+            24.985652923583984,
+            -28.026805877685547,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -4.9743242263793945,
+                7.650158405303955
+              ],
+              "y": [
+                -5.019678592681885,
+                4.824228763580322
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "close",
+          "finish": "clay",
+          "view": 0,
+          "image": "hybrid/smithy/close_clay_0.png",
+          "sha256": "1ca6aa56dc6fc8af1b018f0279c8d23f515a8c6be2c16a724e860efe10e93e80",
+          "camera_location": [
+            15.766782760620117,
+            -8.325719833374023,
+            12.942197799682617
+          ],
+          "camera_target": [
+            4.25,
+            2.0999999046325684,
+            3.8499999046325684
+          ],
+          "ortho_scale": 9.5,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "hybrid/smithy/normal_material_0.png",
+          "sha256": "220f79f61f3cb95f98846b2c528d3056134e88c70ecdec49911b4257cad46ec9",
+          "camera_location": [
+            24.985652923583984,
+            -28.026805877685547,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -4.9743242263793945,
+                7.650158405303955
+              ],
+              "y": [
+                -5.019678592681885,
+                4.824228763580322
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "close",
+          "finish": "material",
+          "view": 0,
+          "image": "hybrid/smithy/close_material_0.png",
+          "sha256": "1479285e99f2d944004f62fea8332028f4c808953d24a963356474b54b7d3762",
+          "camera_location": [
+            15.766782760620117,
+            -8.325719833374023,
+            12.942197799682617
+          ],
+          "camera_target": [
+            4.25,
+            2.0999999046325684,
+            3.8499999046325684
+          ],
+          "ortho_scale": 9.5,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "glb/smithy/normal_material_0.png",
+          "sha256": "db179c617322ea4516f334f6c3623c3f32e095dbf33afa174f2e18bc025831c2",
+          "camera_location": [
+            24.985652923583984,
+            -28.026805877685547,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -4.9743242263793945,
+                7.650158405303955
+              ],
+              "y": [
+                -5.019678592681885,
+                4.824228763580322
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        }
+      ],
+      "export": {
+        "bytes": 5140544,
+        "materials": 14,
+        "textures": 42,
+        "images": [
+          {
+            "name": "Caelmor Detail2 iron LOWMARK STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 11260,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 56f82622720af8b0 Color",
+            "width": 256,
+            "height": 408,
+            "png_bytes": 44604,
+            "rgba8_mipped_bytes": 556988
+          },
+          {
+            "name": "Caelmor Surface 56f82622720af8b0 ORM",
+            "width": 128,
+            "height": 204,
+            "png_bytes": 23838,
+            "rgba8_mipped_bytes": 139196
+          },
+          {
+            "name": "Caelmor Detail2 wood LOWMARK STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 13053,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 6d21336a7addd0ae Color",
+            "width": 4096,
+            "height": 648,
+            "png_bytes": 1167993,
+            "rgba8_mipped_bytes": 14155068
+          },
+          {
+            "name": "Caelmor Surface 6d21336a7addd0ae ORM",
+            "width": 2048,
+            "height": 324,
+            "png_bytes": 273116,
+            "rgba8_mipped_bytes": 3538236
+          },
+          {
+            "name": "Caelmor Detail2 roof LOWMARK STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 12349,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 9c4b12fdbbe43396 Color",
+            "width": 256,
+            "height": 44,
+            "png_bytes": 4557,
+            "rgba8_mipped_bytes": 59964
+          },
+          {
+            "name": "Caelmor Surface 9c4b12fdbbe43396 ORM",
+            "width": 128,
+            "height": 22,
+            "png_bytes": 1774,
+            "rgba8_mipped_bytes": 14908
+          },
+          {
+            "name": "Caelmor Surface 4699d1eca375f710 Color",
+            "width": 1024,
+            "height": 1584,
+            "png_bytes": 679252,
+            "rgba8_mipped_bytes": 8650620
+          },
+          {
+            "name": "Caelmor Surface 4699d1eca375f710 ORM",
+            "width": 512,
+            "height": 792,
+            "png_bytes": 151419,
+            "rgba8_mipped_bytes": 2162556
+          },
+          {
+            "name": "Caelmor Detail2 stone LOWMARK STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 20581,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 5579b41eaf86b2d3 Color",
+            "width": 256,
+            "height": 856,
+            "png_bytes": 110457,
+            "rgba8_mipped_bytes": 1168656
+          },
+          {
+            "name": "Caelmor Surface 5579b41eaf86b2d3 ORM",
+            "width": 128,
+            "height": 428,
+            "png_bytes": 27564,
+            "rgba8_mipped_bytes": 292112
+          },
+          {
+            "name": "Caelmor Surface c1a65c57c89dd872 Color",
+            "width": 256,
+            "height": 236,
+            "png_bytes": 7862,
+            "rgba8_mipped_bytes": 322076
+          },
+          {
+            "name": "Caelmor Surface c1a65c57c89dd872 ORM",
+            "width": 128,
+            "height": 118,
+            "png_bytes": 3720,
+            "rgba8_mipped_bytes": 80412
+          },
+          {
+            "name": "Caelmor Surface 73208bdd1b6ed652 Color",
+            "width": 256,
+            "height": 956,
+            "png_bytes": 117758,
+            "rgba8_mipped_bytes": 1305096
+          },
+          {
+            "name": "Caelmor Surface 73208bdd1b6ed652 ORM",
+            "width": 128,
+            "height": 478,
+            "png_bytes": 35058,
+            "rgba8_mipped_bytes": 326152
+          },
+          {
+            "name": "Caelmor Surface 20c38aab9c071442 Color",
+            "width": 256,
+            "height": 52,
+            "png_bytes": 4268,
+            "rgba8_mipped_bytes": 70908
+          },
+          {
+            "name": "Caelmor Surface 20c38aab9c071442 ORM",
+            "width": 128,
+            "height": 26,
+            "png_bytes": 1391,
+            "rgba8_mipped_bytes": 17660
+          },
+          {
+            "name": "Caelmor Relief shingle 75bab97cb9b9 Normal",
+            "width": 512,
+            "height": 512,
+            "png_bytes": 58925,
+            "rgba8_mipped_bytes": 1398100
+          },
+          {
+            "name": "Caelmor Field shingle b4512f72e4b4 Color",
+            "width": 512,
+            "height": 512,
+            "png_bytes": 105052,
+            "rgba8_mipped_bytes": 1398100
+          },
+          {
+            "name": "Caelmor Relief shingle 75bab97cb9b9 ORM",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 10997,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 91f4e0da7f60eedc Color",
+            "width": 256,
+            "height": 424,
+            "png_bytes": 45074,
+            "rgba8_mipped_bytes": 578844
+          },
+          {
+            "name": "Caelmor Surface 91f4e0da7f60eedc ORM",
+            "width": 128,
+            "height": 212,
+            "png_bytes": 12094,
+            "rgba8_mipped_bytes": 144668
+          },
+          {
+            "name": "Caelmor Surface 95f50bf7f6b6c91a Color",
+            "width": 256,
+            "height": 16,
+            "png_bytes": 1090,
+            "rgba8_mipped_bytes": 21884
+          },
+          {
+            "name": "Caelmor Surface 95f50bf7f6b6c91a ORM",
+            "width": 128,
+            "height": 8,
+            "png_bytes": 520,
+            "rgba8_mipped_bytes": 5500
+          },
+          {
+            "name": "Caelmor Detail2 leather LOWMARK STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 15784,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 667babd3c078e1f5 Color",
+            "width": 256,
+            "height": 28,
+            "png_bytes": 1871,
+            "rgba8_mipped_bytes": 38140
+          },
+          {
+            "name": "Caelmor Surface 667babd3c078e1f5 ORM",
+            "width": 128,
+            "height": 14,
+            "png_bytes": 760,
+            "rgba8_mipped_bytes": 9468
+          },
+          {
+            "name": "Caelmor Detail2 charcoal LOWMARK STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 17070,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 116160126187e877 Color",
+            "width": 256,
+            "height": 28,
+            "png_bytes": 2327,
+            "rgba8_mipped_bytes": 38140
+          },
+          {
+            "name": "Caelmor Surface 116160126187e877 ORM",
+            "width": 128,
+            "height": 14,
+            "png_bytes": 1221,
+            "rgba8_mipped_bytes": 9468
+          },
+          {
+            "name": "Caelmor Surface e600b7742e8da69f Color",
+            "width": 256,
+            "height": 152,
+            "png_bytes": 16443,
+            "rgba8_mipped_bytes": 207468
+          },
+          {
+            "name": "Caelmor Surface e600b7742e8da69f ORM",
+            "width": 128,
+            "height": 76,
+            "png_bytes": 5959,
+            "rgba8_mipped_bytes": 51820
+          }
+        ],
+        "rgba8_mipped_bytes": 39208876,
+        "primitives": 77,
+        "blended_primitives": 0,
+        "vertex_records": 27413,
+        "mapped_materials": 14,
+        "shared_field_materials": [
+          "Caelmor | roof | Surface b4512f72e4b4"
+        ]
+      }
+    },
+    {
+      "function": "SMITHY",
+      "representation": "TEXTURE",
+      "settings": {
+        "seed": 91,
+        "function": "SMITHY",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": true,
+        "seed_massing": true,
+        "construction_overrides": {
+          "by_role": {
+            "plinth": {
+              "treatment": "stone_masonry",
+              "variant": "broken_course"
+            },
+            "frame_member": {
+              "treatment": "structural_timber",
+              "variant": "hewn_pegged"
+            },
+            "wall_infill": {
+              "treatment": "wooden_boarding"
+            },
+            "roof_support": {
+              "treatment": "structural_timber",
+              "variant": "hewn_pegged"
+            },
+            "roof_cover": {
+              "treatment": "wooden_shingles",
+              "substrate": "split_wood",
+              "representation": "TEXTURE"
+            }
+          }
+        }
+      },
+      "geometry_hash": "978130b70579f5a427adb137c85277c18a50833ab907f5b7b2e58060f7c82257",
+      "triangles": 13457,
+      "vertices": 8767,
+      "layers": {
+        "foundation": {
+          "vertices": 1496,
+          "triangles": 2532,
+          "buffers": 15
+        },
+        "walls": {
+          "vertices": 1000,
+          "triangles": 1258,
+          "buffers": 4
+        },
+        "structure": {
+          "vertices": 752,
+          "triangles": 1320,
+          "buffers": 6
+        },
+        "roof": {
+          "vertices": 2533,
+          "triangles": 3263,
+          "buffers": 22
+        },
+        "details": {
+          "vertices": 2986,
+          "triangles": 5084,
+          "buffers": 30
+        }
+      },
+      "frames": [
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "clay",
+          "view": 0,
+          "image": "texture/smithy/normal_clay_0.png",
+          "sha256": "f78c538147fd193f27ee9ad948f28a61d553a2c7dce664a397a8ccfaeb218fb4",
+          "camera_location": [
+            24.985652923583984,
+            -28.026805877685547,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -4.9743242263793945,
+                7.650158405303955
+              ],
+              "y": [
+                -5.019678592681885,
+                4.824228763580322
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "close",
+          "finish": "clay",
+          "view": 0,
+          "image": "texture/smithy/close_clay_0.png",
+          "sha256": "085800d533d55a6ebf15b72e897d0a36320914f55742917e9b2314c835453032",
+          "camera_location": [
+            15.766782760620117,
+            -8.325719833374023,
+            12.942197799682617
+          ],
+          "camera_target": [
+            4.25,
+            2.0999999046325684,
+            3.8499999046325684
+          ],
+          "ortho_scale": 9.5,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "texture/smithy/normal_material_0.png",
+          "sha256": "f3a175218401b67b95ee22ac8aea40d2182c3db41ec1aeffaa215b433da8291f",
+          "camera_location": [
+            24.985652923583984,
+            -28.026805877685547,
+            19.988523483276367
+          ],
+          "camera_target": [
+            4.0,
+            1.600000023841858,
+            3.200000047683716
+          ],
+          "ortho_scale": 18.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -4.9743242263793945,
+                7.650158405303955
+              ],
+              "y": [
+                -5.019678592681885,
+                4.824228763580322
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -9.0,
+                9.0
+              ],
+              "y": [
+                -6.1875,
+                6.1875
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "SMITHY",
+          "distance": "close",
+          "finish": "material",
+          "view": 0,
+          "image": "texture/smithy/close_material_0.png",
+          "sha256": "b371c3c2b5c42cf1783f36e56ade28523bf44db86cbcbb0d5478f9019249d002",
+          "camera_location": [
+            15.766782760620117,
+            -8.325719833374023,
+            12.942197799682617
+          ],
+          "camera_target": [
+            4.25,
+            2.0999999046325684,
+            3.8499999046325684
+          ],
+          "ortho_scale": 9.5,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        }
+      ],
+      "export": {
+        "bytes": 5048168,
+        "materials": 14,
+        "textures": 42,
+        "images": [
+          {
+            "name": "Caelmor Detail2 iron LOWMARK STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 11260,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 56f82622720af8b0 Color",
+            "width": 256,
+            "height": 408,
+            "png_bytes": 44604,
+            "rgba8_mipped_bytes": 556988
+          },
+          {
+            "name": "Caelmor Surface 56f82622720af8b0 ORM",
+            "width": 128,
+            "height": 204,
+            "png_bytes": 23838,
+            "rgba8_mipped_bytes": 139196
+          },
+          {
+            "name": "Caelmor Detail2 wood LOWMARK STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 13053,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 6d21336a7addd0ae Color",
+            "width": 4096,
+            "height": 648,
+            "png_bytes": 1167993,
+            "rgba8_mipped_bytes": 14155068
+          },
+          {
+            "name": "Caelmor Surface 6d21336a7addd0ae ORM",
+            "width": 2048,
+            "height": 324,
+            "png_bytes": 273116,
+            "rgba8_mipped_bytes": 3538236
+          },
+          {
+            "name": "Caelmor Detail2 roof LOWMARK STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 12349,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 40f6fcada2f3c1c6 Color",
+            "width": 256,
+            "height": 28,
+            "png_bytes": 2186,
+            "rgba8_mipped_bytes": 38140
+          },
+          {
+            "name": "Caelmor Surface 40f6fcada2f3c1c6 ORM",
+            "width": 128,
+            "height": 14,
+            "png_bytes": 983,
+            "rgba8_mipped_bytes": 9468
+          },
+          {
+            "name": "Caelmor Surface 4699d1eca375f710 Color",
+            "width": 1024,
+            "height": 1584,
+            "png_bytes": 679252,
+            "rgba8_mipped_bytes": 8650620
+          },
+          {
+            "name": "Caelmor Surface 4699d1eca375f710 ORM",
+            "width": 512,
+            "height": 792,
+            "png_bytes": 151419,
+            "rgba8_mipped_bytes": 2162556
+          },
+          {
+            "name": "Caelmor Detail2 stone LOWMARK STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 20581,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 5579b41eaf86b2d3 Color",
+            "width": 256,
+            "height": 856,
+            "png_bytes": 110457,
+            "rgba8_mipped_bytes": 1168656
+          },
+          {
+            "name": "Caelmor Surface 5579b41eaf86b2d3 ORM",
+            "width": 128,
+            "height": 428,
+            "png_bytes": 27564,
+            "rgba8_mipped_bytes": 292112
+          },
+          {
+            "name": "Caelmor Surface c1a65c57c89dd872 Color",
+            "width": 256,
+            "height": 236,
+            "png_bytes": 7862,
+            "rgba8_mipped_bytes": 322076
+          },
+          {
+            "name": "Caelmor Surface c1a65c57c89dd872 ORM",
+            "width": 128,
+            "height": 118,
+            "png_bytes": 3720,
+            "rgba8_mipped_bytes": 80412
+          },
+          {
+            "name": "Caelmor Surface 73208bdd1b6ed652 Color",
+            "width": 256,
+            "height": 956,
+            "png_bytes": 117758,
+            "rgba8_mipped_bytes": 1305096
+          },
+          {
+            "name": "Caelmor Surface 73208bdd1b6ed652 ORM",
+            "width": 128,
+            "height": 478,
+            "png_bytes": 35058,
+            "rgba8_mipped_bytes": 326152
+          },
+          {
+            "name": "Caelmor Surface 20c38aab9c071442 Color",
+            "width": 256,
+            "height": 52,
+            "png_bytes": 4268,
+            "rgba8_mipped_bytes": 70908
+          },
+          {
+            "name": "Caelmor Surface 20c38aab9c071442 ORM",
+            "width": 128,
+            "height": 26,
+            "png_bytes": 1391,
+            "rgba8_mipped_bytes": 17660
+          },
+          {
+            "name": "Caelmor Relief shingle 75bab97cb9b9 Normal",
+            "width": 512,
+            "height": 512,
+            "png_bytes": 58925,
+            "rgba8_mipped_bytes": 1398100
+          },
+          {
+            "name": "Caelmor Field shingle b4512f72e4b4 Color",
+            "width": 512,
+            "height": 512,
+            "png_bytes": 105052,
+            "rgba8_mipped_bytes": 1398100
+          },
+          {
+            "name": "Caelmor Relief shingle 75bab97cb9b9 ORM",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 10997,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface e2dff3a6576c2966 Color",
+            "width": 256,
+            "height": 412,
+            "png_bytes": 43343,
+            "rgba8_mipped_bytes": 562364
+          },
+          {
+            "name": "Caelmor Surface e2dff3a6576c2966 ORM",
+            "width": 128,
+            "height": 206,
+            "png_bytes": 11538,
+            "rgba8_mipped_bytes": 140476
+          },
+          {
+            "name": "Caelmor Surface 4554024039e205c1 Color",
+            "width": 256,
+            "height": 16,
+            "png_bytes": 907,
+            "rgba8_mipped_bytes": 21884
+          },
+          {
+            "name": "Caelmor Surface 4554024039e205c1 ORM",
+            "width": 128,
+            "height": 8,
+            "png_bytes": 455,
+            "rgba8_mipped_bytes": 5500
+          },
+          {
+            "name": "Caelmor Detail2 leather LOWMARK STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 15784,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 667babd3c078e1f5 Color",
+            "width": 256,
+            "height": 28,
+            "png_bytes": 1871,
+            "rgba8_mipped_bytes": 38140
+          },
+          {
+            "name": "Caelmor Surface 667babd3c078e1f5 ORM",
+            "width": 128,
+            "height": 14,
+            "png_bytes": 760,
+            "rgba8_mipped_bytes": 9468
+          },
+          {
+            "name": "Caelmor Detail2 charcoal LOWMARK STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 17070,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 116160126187e877 Color",
+            "width": 256,
+            "height": 28,
+            "png_bytes": 2327,
+            "rgba8_mipped_bytes": 38140
+          },
+          {
+            "name": "Caelmor Surface 116160126187e877 ORM",
+            "width": 128,
+            "height": 14,
+            "png_bytes": 1221,
+            "rgba8_mipped_bytes": 9468
+          },
+          {
+            "name": "Caelmor Surface 845c83e7fdf89da5 Color",
+            "width": 256,
+            "height": 80,
+            "png_bytes": 8066,
+            "rgba8_mipped_bytes": 109212
+          },
+          {
+            "name": "Caelmor Surface 845c83e7fdf89da5 ORM",
+            "width": 128,
+            "height": 40,
+            "png_bytes": 3159,
+            "rgba8_mipped_bytes": 27292
+          }
+        ],
+        "rgba8_mipped_bytes": 39038156,
+        "primitives": 77,
+        "blended_primitives": 0,
+        "vertex_records": 26351,
+        "mapped_materials": 14,
+        "shared_field_materials": [
+          "Caelmor | roof | Surface b4512f72e4b4"
+        ]
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "representation": "MODELED",
+      "settings": {
+        "seed": 91,
+        "function": "GATEHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": true,
+        "seed_massing": true,
+        "construction_overrides": {
+          "by_role": {}
+        }
+      },
+      "geometry_hash": "07e4c86de3c8d320b2600199962b98e40de5a21db2e8c52b8e707e2238e69c37",
+      "triangles": 73870,
+      "vertices": 53042,
+      "layers": {
+        "foundation": {
+          "vertices": 3528,
+          "triangles": 5736,
+          "buffers": 36
+        },
+        "walls": {
+          "vertices": 25676,
+          "triangles": 37456,
+          "buffers": 6
+        },
+        "structure": {
+          "vertices": 480,
+          "triangles": 768,
+          "buffers": 6
+        },
+        "windows": {
+          "vertices": 24,
+          "triangles": 36,
+          "buffers": 3
+        },
+        "doors": {
+          "vertices": 384,
+          "triangles": 576,
+          "buffers": 3
+        },
+        "details": {
+          "vertices": 9924,
+          "triangles": 17372,
+          "buffers": 67
+        },
+        "roof": {
+          "vertices": 13026,
+          "triangles": 11926,
+          "buffers": 34
+        }
+      },
+      "frames": [
+        {
+          "function": "GATEHOUSE",
+          "distance": "normal",
+          "finish": "clay",
+          "view": 0,
+          "image": "modeled/gatehouse/normal_clay_0.png",
+          "sha256": "447511029b388b5acaef3d51c33ac3cadacde73c4e5766b94af6415d48d9d076",
+          "camera_location": [
+            38.32919692993164,
+            -39.95886993408203,
+            31.143360137939453
+          ],
+          "camera_target": [
+            7.900000095367432,
+            3.0,
+            6.800000190734863
+          ],
+          "ortho_scale": 32.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -10.35550308227539,
+                8.512018203735352
+              ],
+              "y": [
+                -10.412212371826172,
+                4.976620674133301
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -16.0,
+                16.0
+              ],
+              "y": [
+                -11.0,
+                11.0
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "close",
+          "finish": "clay",
+          "view": 0,
+          "image": "modeled/gatehouse/close_clay_0.png",
+          "sha256": "5e77ad37898d0a06c9668641b1fd58c25cd430bbffb40f96637c224285987c7d",
+          "camera_location": [
+            25.291393280029297,
+            -16.076082229614258,
+            13.773114204406738
+          ],
+          "camera_target": [
+            12.699999809265137,
+            1.7000000476837158,
+            3.700000047683716
+          ],
+          "ortho_scale": 11.0,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "modeled/gatehouse/normal_material_0.png",
+          "sha256": "9bcdaf0e2ae7a8a97767a2c157195d1b8912d372151065942b4fd93df68b73bc",
+          "camera_location": [
+            38.32919692993164,
+            -39.95886993408203,
+            31.143360137939453
+          ],
+          "camera_target": [
+            7.900000095367432,
+            3.0,
+            6.800000190734863
+          ],
+          "ortho_scale": 32.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -10.35550308227539,
+                8.512018203735352
+              ],
+              "y": [
+                -10.412212371826172,
+                4.976620674133301
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -16.0,
+                16.0
+              ],
+              "y": [
+                -11.0,
+                11.0
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "close",
+          "finish": "material",
+          "view": 0,
+          "image": "modeled/gatehouse/close_material_0.png",
+          "sha256": "ed8e378b3d7c52c6791c356822628701ad64719204ea8f4e625e4dd7c585448d",
+          "camera_location": [
+            25.291393280029297,
+            -16.076082229614258,
+            13.773114204406738
+          ],
+          "camera_target": [
+            12.699999809265137,
+            1.7000000476837158,
+            3.700000047683716
+          ],
+          "ortho_scale": 11.0,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        }
+      ],
+      "export": {
+        "bytes": 18219680,
+        "materials": 11,
+        "textures": 30,
+        "images": [
+          {
+            "name": "Caelmor Detail2 roof THORNFELL STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 13706,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 585af9ba22cf86e7 Color",
+            "width": 1024,
+            "height": 456,
+            "png_bytes": 217782,
+            "rgba8_mipped_bytes": 2490172
+          },
+          {
+            "name": "Caelmor Surface 585af9ba22cf86e7 ORM",
+            "width": 512,
+            "height": 228,
+            "png_bytes": 57300,
+            "rgba8_mipped_bytes": 622396
+          },
+          {
+            "name": "Caelmor Detail2 wood THORNFELL STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 13053,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface ae2f2077e56fdbbc Color",
+            "width": 2048,
+            "height": 2856,
+            "png_bytes": 2347682,
+            "rgba8_mipped_bytes": 31194692
+          },
+          {
+            "name": "Caelmor Surface ae2f2077e56fdbbc ORM",
+            "width": 1024,
+            "height": 1428,
+            "png_bytes": 582492,
+            "rgba8_mipped_bytes": 7798340
+          },
+          {
+            "name": "Caelmor Surface d9abe7905e14c650 Color",
+            "width": 256,
+            "height": 236,
+            "png_bytes": 26887,
+            "rgba8_mipped_bytes": 322076
+          },
+          {
+            "name": "Caelmor Surface d9abe7905e14c650 ORM",
+            "width": 128,
+            "height": 118,
+            "png_bytes": 8511,
+            "rgba8_mipped_bytes": 80412
+          },
+          {
+            "name": "Caelmor Detail2 stone THORNFELL STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 20581,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 9088ce8edfcf6464 Color",
+            "width": 1024,
+            "height": 1332,
+            "png_bytes": 576872,
+            "rgba8_mipped_bytes": 7274020
+          },
+          {
+            "name": "Caelmor Surface 9088ce8edfcf6464 ORM",
+            "width": 512,
+            "height": 666,
+            "png_bytes": 183905,
+            "rgba8_mipped_bytes": 1818148
+          },
+          {
+            "name": "Caelmor Surface fe69cf1bb490619e Color",
+            "width": 1024,
+            "height": 2376,
+            "png_bytes": 1340568,
+            "rgba8_mipped_bytes": 12975932
+          },
+          {
+            "name": "Caelmor Surface fe69cf1bb490619e ORM",
+            "width": 512,
+            "height": 1188,
+            "png_bytes": 338677,
+            "rgba8_mipped_bytes": 3243836
+          },
+          {
+            "name": "Caelmor Detail2 iron THORNFELL STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 11260,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface a1313fe0f3dc2b14 Color",
+            "width": 256,
+            "height": 464,
+            "png_bytes": 42669,
+            "rgba8_mipped_bytes": 633484
+          },
+          {
+            "name": "Caelmor Surface a1313fe0f3dc2b14 ORM",
+            "width": 128,
+            "height": 232,
+            "png_bytes": 25728,
+            "rgba8_mipped_bytes": 158348
+          },
+          {
+            "name": "Caelmor Surface 40391382654546b7 Color",
+            "width": 1024,
+            "height": 1808,
+            "png_bytes": 1066956,
+            "rgba8_mipped_bytes": 9873996
+          },
+          {
+            "name": "Caelmor Surface 40391382654546b7 ORM",
+            "width": 512,
+            "height": 904,
+            "png_bytes": 270245,
+            "rgba8_mipped_bytes": 2468428
+          },
+          {
+            "name": "Caelmor Surface bf53aa824131b067 Color",
+            "width": 256,
+            "height": 548,
+            "png_bytes": 36799,
+            "rgba8_mipped_bytes": 748108
+          },
+          {
+            "name": "Caelmor Surface bf53aa824131b067 ORM",
+            "width": 128,
+            "height": 274,
+            "png_bytes": 11446,
+            "rgba8_mipped_bytes": 186956
+          },
+          {
+            "name": "Caelmor Surface f46f4cdf8a54b6f9 Color",
+            "width": 256,
+            "height": 40,
+            "png_bytes": 3898,
+            "rgba8_mipped_bytes": 54588
+          },
+          {
+            "name": "Caelmor Surface f46f4cdf8a54b6f9 ORM",
+            "width": 128,
+            "height": 20,
+            "png_bytes": 1497,
+            "rgba8_mipped_bytes": 13628
+          },
+          {
+            "name": "Caelmor Surface 9affbb282f9af109 Color",
+            "width": 256,
+            "height": 984,
+            "png_bytes": 109452,
+            "rgba8_mipped_bytes": 1343416
+          },
+          {
+            "name": "Caelmor Surface 9affbb282f9af109 ORM",
+            "width": 128,
+            "height": 492,
+            "png_bytes": 35660,
+            "rgba8_mipped_bytes": 335800
+          }
+        ],
+        "rgba8_mipped_bytes": 85034872,
+        "primitives": 155,
+        "blended_primitives": 0,
+        "vertex_records": 148436,
+        "mapped_materials": 10,
+        "shared_field_materials": []
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "representation": "HYBRID",
+      "settings": {
+        "seed": 91,
+        "function": "GATEHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": true,
+        "seed_massing": true,
+        "construction_overrides": {
+          "by_role": {
+            "wall_body": {
+              "representation": "HYBRID"
+            }
+          }
+        }
+      },
+      "geometry_hash": "9e671ba787794665c601027be6a71e6af6403c8d00bc6dea00ed15f6d990bfaa",
+      "triangles": 52025,
+      "vertices": 38481,
+      "layers": {
+        "foundation": {
+          "vertices": 3528,
+          "triangles": 5736,
+          "buffers": 36
+        },
+        "walls": {
+          "vertices": 11115,
+          "triangles": 15611,
+          "buffers": 9
+        },
+        "structure": {
+          "vertices": 480,
+          "triangles": 768,
+          "buffers": 6
+        },
+        "windows": {
+          "vertices": 24,
+          "triangles": 36,
+          "buffers": 3
+        },
+        "doors": {
+          "vertices": 384,
+          "triangles": 576,
+          "buffers": 3
+        },
+        "details": {
+          "vertices": 9924,
+          "triangles": 17372,
+          "buffers": 67
+        },
+        "roof": {
+          "vertices": 13026,
+          "triangles": 11926,
+          "buffers": 34
+        }
+      },
+      "frames": [
+        {
+          "function": "GATEHOUSE",
+          "distance": "normal",
+          "finish": "clay",
+          "view": 0,
+          "image": "hybrid/gatehouse/normal_clay_0.png",
+          "sha256": "98b568b772d9e92a2137284c09216448d49d0263896d97c65351904f183b17cd",
+          "camera_location": [
+            38.32919692993164,
+            -39.95886993408203,
+            31.143360137939453
+          ],
+          "camera_target": [
+            7.900000095367432,
+            3.0,
+            6.800000190734863
+          ],
+          "ortho_scale": 32.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -10.35550308227539,
+                8.512018203735352
+              ],
+              "y": [
+                -10.412212371826172,
+                4.976620674133301
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -16.0,
+                16.0
+              ],
+              "y": [
+                -11.0,
+                11.0
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "close",
+          "finish": "clay",
+          "view": 0,
+          "image": "hybrid/gatehouse/close_clay_0.png",
+          "sha256": "9a4f11b371419ed5ba2e41ee521e2320993f367055a52af8d66f288f06f34343",
+          "camera_location": [
+            25.291393280029297,
+            -16.076082229614258,
+            13.773114204406738
+          ],
+          "camera_target": [
+            12.699999809265137,
+            1.7000000476837158,
+            3.700000047683716
+          ],
+          "ortho_scale": 11.0,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "hybrid/gatehouse/normal_material_0.png",
+          "sha256": "dbc756ee4320ad3eef5433bed04b9a1f54ca75b2315847bf2fa88f90c2c109cc",
+          "camera_location": [
+            38.32919692993164,
+            -39.95886993408203,
+            31.143360137939453
+          ],
+          "camera_target": [
+            7.900000095367432,
+            3.0,
+            6.800000190734863
+          ],
+          "ortho_scale": 32.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -10.35550308227539,
+                8.512018203735352
+              ],
+              "y": [
+                -10.412212371826172,
+                4.976620674133301
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -16.0,
+                16.0
+              ],
+              "y": [
+                -11.0,
+                11.0
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "close",
+          "finish": "material",
+          "view": 0,
+          "image": "hybrid/gatehouse/close_material_0.png",
+          "sha256": "ff25428eed5eff99a1ab111895a03d0b1637cad5ea41906e74f9cec18909ce9a",
+          "camera_location": [
+            25.291393280029297,
+            -16.076082229614258,
+            13.773114204406738
+          ],
+          "camera_target": [
+            12.699999809265137,
+            1.7000000476837158,
+            3.700000047683716
+          ],
+          "ortho_scale": 11.0,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "glb/gatehouse/normal_material_0.png",
+          "sha256": "67493bc212d7cc8bc46cf390ebf9e70b1916923c891a013abf0efd9169e1b449",
+          "camera_location": [
+            38.32919692993164,
+            -39.95886993408203,
+            31.143360137939453
+          ],
+          "camera_target": [
+            7.900000095367432,
+            3.0,
+            6.800000190734863
+          ],
+          "ortho_scale": 32.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -10.35550308227539,
+                8.512018203735352
+              ],
+              "y": [
+                -10.412212371826172,
+                4.976620674133301
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -16.0,
+                16.0
+              ],
+              "y": [
+                -11.0,
+                11.0
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        }
+      ],
+      "export": {
+        "bytes": 14507848,
+        "materials": 12,
+        "textures": 33,
+        "images": [
+          {
+            "name": "Caelmor Detail2 roof THORNFELL STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 13706,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 585af9ba22cf86e7 Color",
+            "width": 1024,
+            "height": 456,
+            "png_bytes": 217782,
+            "rgba8_mipped_bytes": 2490172
+          },
+          {
+            "name": "Caelmor Surface 585af9ba22cf86e7 ORM",
+            "width": 512,
+            "height": 228,
+            "png_bytes": 57300,
+            "rgba8_mipped_bytes": 622396
+          },
+          {
+            "name": "Caelmor Detail2 wood THORNFELL STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 13053,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface ae2f2077e56fdbbc Color",
+            "width": 2048,
+            "height": 2856,
+            "png_bytes": 2347682,
+            "rgba8_mipped_bytes": 31194692
+          },
+          {
+            "name": "Caelmor Surface ae2f2077e56fdbbc ORM",
+            "width": 1024,
+            "height": 1428,
+            "png_bytes": 582492,
+            "rgba8_mipped_bytes": 7798340
+          },
+          {
+            "name": "Caelmor Surface d9abe7905e14c650 Color",
+            "width": 256,
+            "height": 236,
+            "png_bytes": 26887,
+            "rgba8_mipped_bytes": 322076
+          },
+          {
+            "name": "Caelmor Surface d9abe7905e14c650 ORM",
+            "width": 128,
+            "height": 118,
+            "png_bytes": 8511,
+            "rgba8_mipped_bytes": 80412
+          },
+          {
+            "name": "Caelmor Detail2 stone THORNFELL STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 20581,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 9088ce8edfcf6464 Color",
+            "width": 1024,
+            "height": 1332,
+            "png_bytes": 576872,
+            "rgba8_mipped_bytes": 7274020
+          },
+          {
+            "name": "Caelmor Surface 9088ce8edfcf6464 ORM",
+            "width": 512,
+            "height": 666,
+            "png_bytes": 183905,
+            "rgba8_mipped_bytes": 1818148
+          },
+          {
+            "name": "Caelmor Surface fe69cf1bb490619e Color",
+            "width": 1024,
+            "height": 2376,
+            "png_bytes": 1340568,
+            "rgba8_mipped_bytes": 12975932
+          },
+          {
+            "name": "Caelmor Surface fe69cf1bb490619e ORM",
+            "width": 512,
+            "height": 1188,
+            "png_bytes": 338677,
+            "rgba8_mipped_bytes": 3243836
+          },
+          {
+            "name": "Caelmor Detail2 iron THORNFELL STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 11260,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface a1313fe0f3dc2b14 Color",
+            "width": 256,
+            "height": 464,
+            "png_bytes": 42669,
+            "rgba8_mipped_bytes": 633484
+          },
+          {
+            "name": "Caelmor Surface a1313fe0f3dc2b14 ORM",
+            "width": 128,
+            "height": 232,
+            "png_bytes": 25728,
+            "rgba8_mipped_bytes": 158348
+          },
+          {
+            "name": "Caelmor Relief rubble a74989cdab69 Normal",
+            "width": 512,
+            "height": 512,
+            "png_bytes": 101700,
+            "rgba8_mipped_bytes": 1398100
+          },
+          {
+            "name": "Caelmor Field rubble e5735ff42b3e Color",
+            "width": 512,
+            "height": 512,
+            "png_bytes": 84107,
+            "rgba8_mipped_bytes": 1398100
+          },
+          {
+            "name": "Caelmor Relief rubble a74989cdab69 ORM",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 17211,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 4723fe155dd23be9 Color",
+            "width": 512,
+            "height": 1276,
+            "png_bytes": 384153,
+            "rgba8_mipped_bytes": 3483996
+          },
+          {
+            "name": "Caelmor Surface 4723fe155dd23be9 ORM",
+            "width": 256,
+            "height": 638,
+            "png_bytes": 95736,
+            "rgba8_mipped_bytes": 870748
+          },
+          {
+            "name": "Caelmor Surface bf53aa824131b067 Color",
+            "width": 256,
+            "height": 548,
+            "png_bytes": 36799,
+            "rgba8_mipped_bytes": 748108
+          },
+          {
+            "name": "Caelmor Surface bf53aa824131b067 ORM",
+            "width": 128,
+            "height": 274,
+            "png_bytes": 11446,
+            "rgba8_mipped_bytes": 186956
+          },
+          {
+            "name": "Caelmor Surface f46f4cdf8a54b6f9 Color",
+            "width": 256,
+            "height": 40,
+            "png_bytes": 3898,
+            "rgba8_mipped_bytes": 54588
+          },
+          {
+            "name": "Caelmor Surface f46f4cdf8a54b6f9 ORM",
+            "width": 128,
+            "height": 20,
+            "png_bytes": 1497,
+            "rgba8_mipped_bytes": 13628
+          },
+          {
+            "name": "Caelmor Surface 9affbb282f9af109 Color",
+            "width": 256,
+            "height": 984,
+            "png_bytes": 109452,
+            "rgba8_mipped_bytes": 1343416
+          },
+          {
+            "name": "Caelmor Surface 9affbb282f9af109 ORM",
+            "width": 128,
+            "height": 492,
+            "png_bytes": 35660,
+            "rgba8_mipped_bytes": 335800
+          }
+        ],
+        "rgba8_mipped_bytes": 80192916,
+        "primitives": 158,
+        "blended_primitives": 0,
+        "vertex_records": 105333,
+        "mapped_materials": 11,
+        "shared_field_materials": [
+          "Caelmor | stone_light | Surface e5735ff42b3e"
+        ]
+      }
+    },
+    {
+      "function": "GATEHOUSE",
+      "representation": "TEXTURE",
+      "settings": {
+        "seed": 91,
+        "function": "GATEHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": true,
+        "seed_massing": true,
+        "construction_overrides": {
+          "by_role": {
+            "wall_body": {
+              "representation": "TEXTURE"
+            }
+          }
+        }
+      },
+      "geometry_hash": "cfc203dec384721e4a3fcd464b7a2def2a950941475f8d1aaf8015f2ecd5a19c",
+      "triangles": 38925,
+      "vertices": 29409,
+      "layers": {
+        "foundation": {
+          "vertices": 3528,
+          "triangles": 5736,
+          "buffers": 36
+        },
+        "walls": {
+          "vertices": 2043,
+          "triangles": 2511,
+          "buffers": 6
+        },
+        "structure": {
+          "vertices": 480,
+          "triangles": 768,
+          "buffers": 6
+        },
+        "windows": {
+          "vertices": 24,
+          "triangles": 36,
+          "buffers": 3
+        },
+        "doors": {
+          "vertices": 384,
+          "triangles": 576,
+          "buffers": 3
+        },
+        "details": {
+          "vertices": 9924,
+          "triangles": 17372,
+          "buffers": 67
+        },
+        "roof": {
+          "vertices": 13026,
+          "triangles": 11926,
+          "buffers": 34
+        }
+      },
+      "frames": [
+        {
+          "function": "GATEHOUSE",
+          "distance": "normal",
+          "finish": "clay",
+          "view": 0,
+          "image": "texture/gatehouse/normal_clay_0.png",
+          "sha256": "3449008813a5e266952068bb5a22ecc90ba7c0bc056f73e401e570c384f6b95b",
+          "camera_location": [
+            38.32919692993164,
+            -39.95886993408203,
+            31.143360137939453
+          ],
+          "camera_target": [
+            7.900000095367432,
+            3.0,
+            6.800000190734863
+          ],
+          "ortho_scale": 32.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -10.35550308227539,
+                8.512018203735352
+              ],
+              "y": [
+                -10.412212371826172,
+                4.976620674133301
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -16.0,
+                16.0
+              ],
+              "y": [
+                -11.0,
+                11.0
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "close",
+          "finish": "clay",
+          "view": 0,
+          "image": "texture/gatehouse/close_clay_0.png",
+          "sha256": "7d06b77f9311d519e844884cd8de79e1ba7c2ea0fc1e38865db487bb23325bf9",
+          "camera_location": [
+            25.291393280029297,
+            -16.076082229614258,
+            13.773114204406738
+          ],
+          "camera_target": [
+            12.699999809265137,
+            1.7000000476837158,
+            3.700000047683716
+          ],
+          "ortho_scale": 11.0,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "normal",
+          "finish": "material",
+          "view": 0,
+          "image": "texture/gatehouse/normal_material_0.png",
+          "sha256": "baaf15dffd1531ab7ffe50aeeb4216371d302bb41982aa8ff1135cedcba3fb94",
+          "camera_location": [
+            38.32919692993164,
+            -39.95886993408203,
+            31.143360137939453
+          ],
+          "camera_target": [
+            7.900000095367432,
+            3.0,
+            6.800000190734863
+          ],
+          "ortho_scale": 32.0,
+          "framing": {
+            "valid": true,
+            "projected_bounds": {
+              "x": [
+                -10.35550308227539,
+                8.512018203735352
+              ],
+              "y": [
+                -10.412212371826172,
+                4.976620674133301
+              ]
+            },
+            "frame_bounds": {
+              "x": [
+                -16.0,
+                16.0
+              ],
+              "y": [
+                -11.0,
+                11.0
+              ]
+            },
+            "safety_margin_fraction": 0.015000000000000013
+          }
+        },
+        {
+          "function": "GATEHOUSE",
+          "distance": "close",
+          "finish": "material",
+          "view": 0,
+          "image": "texture/gatehouse/close_material_0.png",
+          "sha256": "599be39530e222d8d31175c1f20ffd15dca9920118f409013274061d2c76ea12",
+          "camera_location": [
+            25.291393280029297,
+            -16.076082229614258,
+            13.773114204406738
+          ],
+          "camera_target": [
+            12.699999809265137,
+            1.7000000476837158,
+            3.700000047683716
+          ],
+          "ortho_scale": 11.0,
+          "framing": {
+            "valid": null,
+            "note": "intentional close crop"
+          }
+        }
+      ],
+      "export": {
+        "bytes": 12211488,
+        "materials": 11,
+        "textures": 30,
+        "images": [
+          {
+            "name": "Caelmor Detail2 roof THORNFELL STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 13706,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 585af9ba22cf86e7 Color",
+            "width": 1024,
+            "height": 456,
+            "png_bytes": 217782,
+            "rgba8_mipped_bytes": 2490172
+          },
+          {
+            "name": "Caelmor Surface 585af9ba22cf86e7 ORM",
+            "width": 512,
+            "height": 228,
+            "png_bytes": 57300,
+            "rgba8_mipped_bytes": 622396
+          },
+          {
+            "name": "Caelmor Detail2 wood THORNFELL STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 13053,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface ae2f2077e56fdbbc Color",
+            "width": 2048,
+            "height": 2856,
+            "png_bytes": 2347682,
+            "rgba8_mipped_bytes": 31194692
+          },
+          {
+            "name": "Caelmor Surface ae2f2077e56fdbbc ORM",
+            "width": 1024,
+            "height": 1428,
+            "png_bytes": 582492,
+            "rgba8_mipped_bytes": 7798340
+          },
+          {
+            "name": "Caelmor Surface d9abe7905e14c650 Color",
+            "width": 256,
+            "height": 236,
+            "png_bytes": 26887,
+            "rgba8_mipped_bytes": 322076
+          },
+          {
+            "name": "Caelmor Surface d9abe7905e14c650 ORM",
+            "width": 128,
+            "height": 118,
+            "png_bytes": 8511,
+            "rgba8_mipped_bytes": 80412
+          },
+          {
+            "name": "Caelmor Detail2 stone THORNFELL STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 20581,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface 9088ce8edfcf6464 Color",
+            "width": 1024,
+            "height": 1332,
+            "png_bytes": 576872,
+            "rgba8_mipped_bytes": 7274020
+          },
+          {
+            "name": "Caelmor Surface 9088ce8edfcf6464 ORM",
+            "width": 512,
+            "height": 666,
+            "png_bytes": 183905,
+            "rgba8_mipped_bytes": 1818148
+          },
+          {
+            "name": "Caelmor Surface fe69cf1bb490619e Color",
+            "width": 1024,
+            "height": 2376,
+            "png_bytes": 1340568,
+            "rgba8_mipped_bytes": 12975932
+          },
+          {
+            "name": "Caelmor Surface fe69cf1bb490619e ORM",
+            "width": 512,
+            "height": 1188,
+            "png_bytes": 338677,
+            "rgba8_mipped_bytes": 3243836
+          },
+          {
+            "name": "Caelmor Detail2 iron THORNFELL STANDARD",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 11260,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface a1313fe0f3dc2b14 Color",
+            "width": 256,
+            "height": 464,
+            "png_bytes": 42669,
+            "rgba8_mipped_bytes": 633484
+          },
+          {
+            "name": "Caelmor Surface a1313fe0f3dc2b14 ORM",
+            "width": 128,
+            "height": 232,
+            "png_bytes": 25728,
+            "rgba8_mipped_bytes": 158348
+          },
+          {
+            "name": "Caelmor Relief rubble a74989cdab69 Normal",
+            "width": 512,
+            "height": 512,
+            "png_bytes": 101700,
+            "rgba8_mipped_bytes": 1398100
+          },
+          {
+            "name": "Caelmor Field rubble e5735ff42b3e Color",
+            "width": 512,
+            "height": 512,
+            "png_bytes": 84107,
+            "rgba8_mipped_bytes": 1398100
+          },
+          {
+            "name": "Caelmor Relief rubble a74989cdab69 ORM",
+            "width": 256,
+            "height": 256,
+            "png_bytes": 17211,
+            "rgba8_mipped_bytes": 349524
+          },
+          {
+            "name": "Caelmor Surface bf53aa824131b067 Color",
+            "width": 256,
+            "height": 548,
+            "png_bytes": 36799,
+            "rgba8_mipped_bytes": 748108
+          },
+          {
+            "name": "Caelmor Surface bf53aa824131b067 ORM",
+            "width": 128,
+            "height": 274,
+            "png_bytes": 11446,
+            "rgba8_mipped_bytes": 186956
+          },
+          {
+            "name": "Caelmor Surface f46f4cdf8a54b6f9 Color",
+            "width": 256,
+            "height": 40,
+            "png_bytes": 3898,
+            "rgba8_mipped_bytes": 54588
+          },
+          {
+            "name": "Caelmor Surface f46f4cdf8a54b6f9 ORM",
+            "width": 128,
+            "height": 20,
+            "png_bytes": 1497,
+            "rgba8_mipped_bytes": 13628
+          },
+          {
+            "name": "Caelmor Surface 9affbb282f9af109 Color",
+            "width": 256,
+            "height": 984,
+            "png_bytes": 109452,
+            "rgba8_mipped_bytes": 1343416
+          },
+          {
+            "name": "Caelmor Surface 9affbb282f9af109 ORM",
+            "width": 128,
+            "height": 492,
+            "png_bytes": 35660,
+            "rgba8_mipped_bytes": 335800
+          }
+        ],
+        "rgba8_mipped_bytes": 75838172,
+        "primitives": 155,
+        "blended_primitives": 0,
+        "vertex_records": 79911,
+        "mapped_materials": 10,
+        "shared_field_materials": [
+          "Caelmor | stone_light | Surface e5735ff42b3e"
+        ]
+      }
+    }
+  ]
+}

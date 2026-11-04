@@ -103,7 +103,7 @@ def _image(name,pixels,colorspace):
     return image
 
 
-def _make_material(key,fingerprint,base,images):
+def _make_material(key,fingerprint,base,images,*,repeated=False):
     import bpy
     mat=bpy.data.materials.new(f'Caelmor | {key} | Surface {fingerprint[:12]}')
     mat.use_nodes=True;nodes=mat.node_tree.nodes;links=mat.node_tree.links
@@ -111,14 +111,17 @@ def _make_material(key,fingerprint,base,images):
     output.location=(650,0);shader.location=(360,0);links.new(shader.outputs['BSDF'],output.inputs['Surface'])
     shader.inputs['Base Color'].default_value=(1,1,1,1)
     uv=nodes.new('ShaderNodeUVMap');uv.uv_map=UV_NAME;uv.location=(-700,0)
-    detail_uv=nodes.new('ShaderNodeUVMap');detail_uv.uv_map=DETAIL_UV;detail_uv.location=(-700,-200)
+    detail_name=UV_NAME if repeated else DETAIL_UV
+    detail_uv=uv
+    if not repeated:
+        detail_uv=nodes.new('ShaderNodeUVMap');detail_uv.uv_map=detail_name;detail_uv.location=(-700,-200)
     textures=[]
     for i,(name,im) in enumerate(zip(('Base Color','Normal','ORM'),images)):
         tex=nodes.new('ShaderNodeTexImage');tex.image=im;tex.label=name
-        tex.extension='REPEAT' if i==1 else 'EXTEND';tex.location=(-450,300-i*300)
+        tex.extension='REPEAT' if repeated or i==1 else 'EXTEND';tex.location=(-450,300-i*300)
         links.new((detail_uv if i==1 else uv).outputs['UV'],tex.inputs['Vector']);textures.append(tex)
     links.new(textures[0].outputs['Color'],shader.inputs['Base Color'])
-    normal=nodes.new('ShaderNodeNormalMap');normal.space='TANGENT';normal.uv_map=DETAIL_UV
+    normal=nodes.new('ShaderNodeNormalMap');normal.space='TANGENT';normal.uv_map=detail_name
     normal.inputs['Strength'].default_value=1.;normal.location=(80,-100)
     links.new(textures[1].outputs['Color'],normal.inputs['Color']);links.new(normal.outputs['Normal'],shader.inputs['Normal'])
     separate=nodes.new('ShaderNodeSeparateColor');separate.mode='RGB';separate.location=(50,-370)
@@ -129,7 +132,7 @@ def _make_material(key,fingerprint,base,images):
     mat['caelm_material']=key;mat['caelm_atlas_revision']=ATLAS_REVISION
     mat['caelm_surface_fingerprint']=fingerprint
     mat['caelm_surface_uv']=UV_NAME
-    mat['caelm_detail_uv']=DETAIL_UV
+    mat['caelm_detail_uv']=detail_name
     return mat
 
 
@@ -141,6 +144,40 @@ def _detail_image(family,settings):
     pixels=generate_normal_tile(family,settings.region,settings.craftsmanship,resolution=256)
     image=_image(name,pixels,'Non-Color');image['caelm_shared_detail']=True
     return image
+
+
+def _apply_repeated_field(obj, host, settings):
+    import bpy
+    from .construction_relief import field_maps
+    family=obj['caelm_field_family']
+    key=obj['caelm_material']
+    base=_palette_entry(key,getattr(host,'style',None),settings)[0]
+    base=surface_base(key,obj['caelm_field_source'],settings,base)
+    exposure=getattr(getattr(host,'style',None),'weather_exposure',.5)
+    # Quantized broad weather deliberately reuses compatible image sets.
+    weather=min(4,round(4*(.68*exposure*(1-settings.maintenance)+.32*settings.age/250)))/4
+    pattern=('construction-field-v2',family,settings.craftsmanship,weather)
+    payload=(pattern,base)
+    fingerprint=hashlib.sha256(json.dumps(payload).encode()).hexdigest()
+    material=next((m for m in bpy.data.materials if m.get('caelm_surface_fingerprint')==fingerprint),None)
+    if material is None:
+        albedo,normal,orm=field_maps(family,settings.craftsmanship,weather,base)
+        label=f'Caelmor Field {family} {fingerprint[:12]}'
+        shared=f'Caelmor Relief {family} {hashlib.sha256(json.dumps(pattern).encode()).hexdigest()[:12]}'
+        normal_name=shared+' Normal'
+        orm_name=shared+' ORM'
+        images=(_image(label+' Color',albedo,'sRGB'),
+                bpy.data.images.get(normal_name) or _image(normal_name,normal,'Non-Color'),
+                bpy.data.images.get(orm_name) or _image(orm_name,orm,'Non-Color'))
+        material=_make_material(key,fingerprint,base,images,repeated=True)
+        material['caelm_shared_field']=family
+    obj.data.materials.clear()
+    obj.data.materials.append(material)
+    obj['caelm_surface_material']=material.name
+    obj['caelm_surface_fingerprint']=fingerprint
+    return {'material':key,'fingerprint':fingerprint,'field':family,
+            'size':[512,512],'normal_size':[512,512],'orm_size':[256,256],
+            'shared_field':True,'objects':1}
 
 
 def apply_surfaces(objects,plan,settings,context_objects=None,*,roof_finish="BASELINE"):
@@ -168,17 +205,20 @@ def apply_surfaces(objects,plan,settings,context_objects=None,*,roof_finish="BAS
         else:
             contexts[id(host)]['soot'].append((float(center[0]),float(center[1]),float(high[2])))
     groups={}
+    reports=[]
     for obj in objects:
         if obj.type!='MESH' or obj.get('caelm_collider'):continue
         key=obj.get('caelm_material','timber')
         if key not in FAMILY or obj.get('caelm_finish','').startswith('material:'):continue
         host=hosts.get(obj.get('caelm_world_zone'),plan)
+        if obj.get('caelm_field_family'):
+            reports.append(_apply_repeated_field(obj,host,settings))
+            continue
         base=_palette_entry(key,getattr(host,'style',None),settings)[0]
         buffer_id=obj.get('caelm_buffer_id','')
         base=surface_base(key,buffer_id,settings,base)
         wall_stock=uses_masonry_stock(buffer_id,settings)
         groups.setdefault((key,base,wall_stock),[]).append((obj,host))
-    reports=[]
     surface_settings={k:v for k,v in settings.__dict__.items() if k!='construction_overrides'}
     for (key,base,wall_stock),members in sorted(groups.items()):
         painted_roof=(FAMILY[key]=='roof' and roof_finish!='BASELINE'

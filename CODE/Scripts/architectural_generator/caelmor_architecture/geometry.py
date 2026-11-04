@@ -105,6 +105,10 @@ class MeshBuffer:
     structural_role: str = 'framing'
     support_surface: dict | None = None
     construction: object | None = None
+    field_family: str | None = None
+    field_uv: list = field(default_factory=list)
+    field_source: str | None = None
+    field_peers: tuple = ()
 
     def indexed(self, vertices, faces):
         offset = len(self.vertices)
@@ -113,6 +117,10 @@ class MeshBuffer:
 
     def face(self, points):
         self.indexed(points, [tuple(range(len(points)))])
+
+    def mapped_face(self, points, uv):
+        self.face(points)
+        self.field_uv.extend(uv)
 
     def box(self, center, size):
         if min(size) <= 0:

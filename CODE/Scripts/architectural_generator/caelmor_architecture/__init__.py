@@ -2,7 +2,7 @@
 bl_info = {
     "name": "Caelmor Architectural Generator",
     "author": "Caelmor",
-    "version": (0, 14, 0),
+    "version": (0, 15, 0),
     "blender": (4, 2, 0),
     "location": "View3D > Sidebar > Caelmor",
     "description": "Generate editable regional Caelmor buildings",
@@ -211,7 +211,9 @@ def _make_classes(b):
 
     for name,(_,label,options) in ASSEMBLIES.items():
         CAELMOR_PG_Settings.__annotations__['caelm_assembly_'+name] = b.props.EnumProperty(
-            name=label, items=enum_items(options), default='AUTO')
+            name=label, items=([('AUTO','Modeled','Use the established modeled construction'),
+                                *enum_items(options)[1:]] if name.endswith('_depth')
+                               else enum_items(options)), default='AUTO')
 
     class CAELMOR_OT_apply_grammar(b.types.Operator):
         bl_idname = "caelmor.apply_grammar"
@@ -382,7 +384,10 @@ def _make_classes(b):
                 construction = box.box()
                 construction.label(text="Construction library")
                 for name in ASSEMBLIES:
-                    construction.prop(p, 'caelm_assembly_'+name)
+                    row = construction.row()
+                    if name.endswith('_depth'):
+                        row.enabled = p.caelm_geometry_mode=='EFFICIENT'
+                    row.prop(p, 'caelm_assembly_'+name)
                 construction.prop(p, "caelm_edit_finish")
                 if p.caelm_edit_finish:
                     construction.prop(p, "caelm_finish_role")

@@ -107,6 +107,12 @@ def _mesh_object(buffer, cache, build_id, plan=None):
     mesh.materials.append(get_material(material, cache, style=style, settings=settings))
     uv0 = _metric_uv(mesh, material)
     _lightmap_uv(mesh)
+    if buffer.field_family:
+        field_uv=mesh.uv_layers.new(name='UV2_Surface')
+        if len(buffer.field_uv)!=len(mesh.loops):
+            raise ValueError(f'{buffer.name}: mapped surface has incomplete UVs')
+        for item, uv in zip(field_uv.data,buffer.field_uv):
+            item.uv=uv
     # COLOR_0 carries deterministic environmental weathering into glTF/GLB.
     # Corner colors let adjacent faces retain their own exposure without changing geometry.
     tint_layer = mesh.color_attributes.new(name="CaelmorTint", type='FLOAT_COLOR', domain='CORNER')
@@ -121,6 +127,10 @@ def _mesh_object(buffer, cache, build_id, plan=None):
     obj = bpy.data.objects.new(buffer.name, mesh)
     obj[TAG] = True; obj["caelm_layer"] = _layer_for(buffer)
     obj["caelm_buffer_id"] = buffer.name
+    if buffer.field_family:
+        obj['caelm_field_family']=buffer.field_family
+        obj['caelm_field_source']=buffer.field_source
+        obj['caelm_field_peers']=json.dumps(buffer.field_peers)
     obj["caelm_material"] = material; obj["caelm_semantic"] = _layer_for(buffer)
     obj["caelm_world_zone"] = str(getattr(buffer, "world_zone", None) or "")
     obj["caelm_build_id"] = build_id
@@ -305,6 +315,29 @@ def build(settings, collection=None, layers=None, origin=None):
                 or m.get('caelm_user_override')) for m in slots):
             overrides[old.get('caelm_buffer_id')]=slots
     candidates = {b.name:b for b in buffers}
+    # Crossing representations changes ownership of part of the weather skin.
+    # Preserve protected edited skins by rejecting a conflicting transaction.
+    old_fields={o.get('caelm_field_source'):o for o in (collection.objects if collection else ())
+                if o.get('caelm_field_source')}
+    new_fields={b.field_source:b for b in buffers if b.field_source}
+    changed_fields={key for key in old_fields.keys() | new_fields.keys()
+                    if (getattr(getattr(new_fields.get(key),'construction',None),'representation',None)
+                        != (old_fields[key].get('caelm_representation') if key in old_fields else None))}
+    if changed_fields:
+        affected=set(changed_fields)
+        for source in changed_fields:
+            if source in new_fields:
+                affected.update(new_fields[source].field_peers)
+            if source in old_fields:
+                affected.update(json.loads(old_fields[source].get('caelm_field_peers','[]')))
+        for obj in (collection.objects if collection else ()):
+            key=obj.get('caelm_buffer_id')
+            if obj.get(TAG) and obj.get('caelm_protected') and (
+                    key in affected or obj.get('caelm_field_source') in changed_fields):
+                raise ValueError(f'{key}: unprotect the edited surface before changing its depth representation')
+    for source,obj in old_fields.items():
+        if source not in new_fields and obj.get('caelm_buffer_id') in overrides:
+            overrides.setdefault(source,overrides[obj['caelm_buffer_id']])
     conflicts = []
     for obj in (collection.objects if collection else ()):
         if not (obj.get(TAG) and obj.get('caelm_protected')) or obj.get('caelm_collider'):
@@ -341,6 +374,8 @@ def build(settings, collection=None, layers=None, origin=None):
                                       context_objects=new_objects+retained_context)
         for obj in stage.objects:
             replacement=overrides.get(obj.get('caelm_buffer_id'))
+            if replacement is None and obj.get('caelm_field_source'):
+                replacement=overrides.get(obj['caelm_field_source'])
             finish = obj.get('caelm_finish', '')
             if replacement:
                 obj.data.materials.clear()

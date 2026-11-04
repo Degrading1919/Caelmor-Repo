@@ -48,6 +48,16 @@ ASSEMBLIES = {
          {'treatment':'slate_tile_roofing', 'substrate':'fired_clay'}),
     )),
 }
+REPRESENTATIONS = (
+    ('HYBRID','Hybrid','Modeled perimeter and structural accents with a mapped field',
+     {'representation':'HYBRID'}),
+    ('TEXTURE','Texture dominant','Mapped field with essential physical terminations',
+     {'representation':'TEXTURE'}),
+)
+ASSEMBLIES.update({
+    'roof_depth': ('roof_cover','Roof depth representation',REPRESENTATIONS),
+    'wall_depth': ('wall_body','Masonry depth representation',REPRESENTATIONS),
+})
 FINISH_ROLES = ('wall_body', 'wall_infill', 'roof_cover')
 
 

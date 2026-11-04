@@ -323,7 +323,7 @@ def build(ctx):
         owner=towers[0 if side=='west' else 1]
         tie_y=owner.bounds[1]+1.25 if diverse else -.55
         wall=b.fixture('gatehouse.curtain_return.'+side,'stone',owner,'boundary')
-        spec=ctx.component(wall,owner,'curtain_return','wall_body','stone_masonry')
+        spec=ctx.component(wall,owner,'curtain_return','wall_body','stone_masonry',mapped=False)
         if spec is None:
             _curtain_return(wall,xa,xb,tie_y,base)
         else:

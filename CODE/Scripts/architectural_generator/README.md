@@ -1,6 +1,6 @@
 # Caelmor Architectural Generator
 
-Version 0.14.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
+Version 0.15.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
 
 See the [engine contract](ENGINE_CONTRACT.md) for the current source baseline, legacy scene compatibility and the proposed treatment interface.
 
@@ -195,6 +195,23 @@ Enable **Construction Metadata** in the export dialog to include optional
 provenance and overrides in the format-1 sidecar. The default keeps the legacy
 field set. See the [engine contract](ENGINE_CONTRACT.md) and
 [vertical-slice comparisons](evidence/construction_library/README.md).
+
+### Construction depth study
+
+With **Efficient** geometry, the Construction library can opt a roof cover or
+exposed masonry wall into **Hybrid** or **Texture dominant** depth. **Modeled**
+remains the default. Hybrid keeps physical perimeter units and structural
+accents over a shared mapped field. Texture dominant retains the essential
+terminations and relies more heavily on the field. See the
+[measured Smithy and Gatehouse comparisons](evidence/construction_depth/README.md)
+before choosing either alternative for a production asset.
+
+Slate, fired clay and split wood use separate relief profiles. An artist
+finish can replace the shared procedural maps, and the mapped field inherits
+an existing manual replacement from its primary modeled skin. A protected
+surface blocks a representation change that would otherwise layer a new
+field over the retained edit. Keep its current depth setting or reconcile the
+edited surface before regenerating with another representation.
 
 ## Regeneration and export
 

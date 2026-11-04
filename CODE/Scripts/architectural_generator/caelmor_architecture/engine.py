@@ -10,7 +10,7 @@ from .facade import build_facades
 from .roof import build_roof, roof_faces, roof_topology
 from .geometry import area, cross, sub, dot
 
-TOOL_REVISION='0.14.0'
+TOOL_REVISION='0.15.0'
 
 
 def generate(settings, *, finish_names=()):
@@ -35,6 +35,8 @@ def geometry_hash(buffers):
     digest=hashlib.sha256()
     for b in buffers:
         digest.update(json.dumps((b.name,b.material,b.layer,b.topology,b.roof_envelope,b.structural_role,b.support_surface,b.vertices,b.faces),separators=(',',':')).encode())
+        if b.field_family:
+            digest.update(json.dumps((b.field_family,b.field_uv),separators=(',',':')).encode())
     return digest.hexdigest()
 
 
@@ -47,6 +49,9 @@ def validate(plan,buffers):
     errors=[]
     triangles=0
     for b in buffers:
+        if b.field_family and (len(b.field_uv)!=sum(map(len,b.faces)) or
+                               any(not math.isfinite(c) for uv in b.field_uv for c in uv)):
+            errors.append(f'{b.name}: invalid mapped surface coordinates')
         solid=b.topology=='SOLID'
         if b.topology not in ('SOLID','SURFACE'):
             errors.append(f'{b.name}: invalid topology role')

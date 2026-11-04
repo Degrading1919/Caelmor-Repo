@@ -106,6 +106,10 @@ class Context:
         if isinstance(zone,Mass) and not key.startswith(zone.key+'.'):
             key=zone.key+'.'+key
         buffer.name=f'world_{self.settings.region.lower()}.{key}'
+        if buffer.field_source is not None and isinstance(zone,Mass):
+            prefix=f'world_{self.settings.region.lower()}.{zone.key}.'
+            buffer.field_source=prefix+buffer.field_source
+            buffer.field_peers=tuple(prefix+peer for peer in buffer.field_peers)
         if any(b.name==buffer.name for b in self.buffers):
             raise ValueError('Duplicate semantic buffer identity: '+buffer.name)
         buffer.world_zone=zone.key if isinstance(zone,Mass) else zone

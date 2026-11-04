@@ -404,6 +404,49 @@ def _iron_cover(plan,patches,efficient):
     return panels,folds
 
 
+def _roof_field(buffer, plan, patches, cover, clearances):
+    # Follow the same across-slope and upslope axes and course gauge as the
+    # constructed units. The coordinates stay continuous across sweep patches.
+    scale={'SHINGLE':1.,'SLATE':1.1,'CLAY':1.15}[cover]
+    width={'HIGH':.205,'MEDIUM':.32,'LOW':.67}[plan.settings.detail]*scale
+    course=shingle_step(plan)
+    offset={'SHINGLE':.053,'SLATE':.046,'CLAY':.055}[cover]
+    for index,patch in enumerate(patches):
+        poly=patch.poly
+        for a,b,c in clearances[index]:
+            poly=clip(poly,a,b,c,bounded=True)
+        if not poly:
+            continue
+        axis=1 if abs(patch.plane[1])>1e-8 else 0
+        across=1-axis
+        direction=1 if patch.plane[axis]>0 else -1
+        rect=plan.rects[patch.source]
+        eave=rect[axis]-plan.settings.overhang if direction>0 else rect[axis+2]+plan.settings.overhang
+        u0=rect[across]-plan.settings.overhang
+        phase=plan.rng(f'roof.mapped.phase.{patch.source}.{direction}').randrange(4)
+        uv=[((p[across]-u0)/width/4+phase/4,
+             (direction*(p[axis]-eave)/course)/4) for p in poly]
+        buffer.mapped_face([(x,y,patch.height(x,y)+offset) for x,y in poly],uv)
+
+
+def _keep_exposed_cover(shingle, boundaries, mode):
+    axis=shingle.axis
+    a,b=(shingle.direction,0) if axis==0 else (0,shingle.direction)
+    c=-shingle.direction*shingle.eave_coord-shingle.exposed_end
+    exposed=clip(shingle.poly,-a,-b,-c,bounded=True)
+    for (x0,y0),(x1,y1),kind in boundaries:
+        limit=(.22 if kind=='edge' else .17) if mode=='HYBRID' else (.014 if kind=='edge' else 0.)
+        if not limit:
+            continue
+        dx,dy=x1-x0,y1-y0
+        length=dx*dx+dy*dy
+        for x,y in exposed:
+            t=max(0.,min(1.,((x-x0)*dx+(y-y0)*dy)/length))
+            if (x-x0-t*dx)**2+(y-y0-t*dy)**2<=limit**2:
+                return True
+    return False
+
+
 def build_roof(plan):
     from dataclasses import replace
     from .construction import COVERS, COVER_FROM_STOCK, bind, component
@@ -444,8 +487,22 @@ def build_roof(plan):
         ('roof_worn','Exposed shingle butts'),('roof_patch','Replacement shingle cohort')]}
     if efficient:
         for buffer in tiles.values(): buffer.topology='SURFACE'
+    mode=cover_spec.representation if cover_spec else None
+    mapped=mode in ('HYBRID','TEXTURE')
+    field=MeshBuffer('Mapped roof field','roof','roof',topology='SURFACE')
+    boundaries=[]
+    if mapped:
+        bind(cover_spec,field)
+        field.field_family=cover.lower()
+        field.field_source=tiles['roof'].name
+        field.field_peers=tuple(b.name for b in tiles.values())+('Concealed roof course bedding',)
+        _roof_field(field,plan,patches,cover,_valley_clearances(points,patches,edges))
+        for (i,j),users in edges.items():
+            kind=roof_join_kind(points,patches,users)
+            if kind in ('edge','ridge','valley') and math.dist(points[i][:2],points[j][:2])>.01:
+                boundaries.append((points[i][:2],points[j][:2],kind))
     bedding=MeshBuffer('Concealed roof course bedding','roof_dark','roof',topology='SURFACE')
-    if efficient:
+    if efficient and not mapped:
         for patch in patches:
             bedding.face([(x,y,patch.height(x,y)+(.002 if cover=='IRON' else .029)) for x,y in patch.poly])
     metal=[]
@@ -453,7 +510,8 @@ def build_roof(plan):
         metal=list(_iron_cover(plan,patches,efficient))
     else:
         for shingle in shingle_layout(plan,patches,(points,faces,edges)):
-            _build_cover_piece(tiles[shingle.material],shingle,cover,efficient,detail=plan.settings.detail)
+            if not mapped or _keep_exposed_cover(shingle,boundaries,mode):
+                _build_cover_piece(tiles[shingle.material],shingle,cover,efficient,detail=plan.settings.detail)
     ridge=MeshBuffer('Overlapping ridge caps','roof_dark','roof')
     if cover=='IRON':
         ridge.material='iron'
@@ -552,4 +610,4 @@ def build_roof(plan):
                 inward=(-dy/l*.13,dx/l*.13)
                 xy=[p[:2],q[:2],(q[0]+inward[0],q[1]+inward[1]),(p[0]+inward[0],p[1]+inward[1])]
                 trim.extrude([(x,y,patches[fi].height(x,y)+.013) for x,y in xy],(0,0,-.007))
-    return [b for b in (deck,underlay,bedding,*tiles.values(),*metal,ridge,trim,fascia,rafters) if b.faces]
+    return [b for b in (deck,underlay,bedding,field,*tiles.values(),*metal,ridge,trim,fascia,rafters) if b.faces]

@@ -24,7 +24,7 @@ COVERS = {'SHINGLE': ('wooden_shingles', 'split_wood'),
           'CLAY': ('slate_tile_roofing', 'fired_clay')}
 COVER_FROM_STOCK = {stock: cover for cover, (_, stock) in COVERS.items()}
 PROVENANCE = ('component_id', 'component_role', 'treatment', 'substrate', 'surface_family',
-              'finish', 'host_component', 'variant')
+              'finish', 'host_component', 'variant', 'representation')
 
 
 def _choice(component, field, value, allowed):
@@ -43,6 +43,7 @@ class Construction:
     finish: str = 'procedural'
     host_component: str | None = None
     variant: str | None = None
+    representation: str | None = None
 
 
 @dataclass
@@ -60,6 +61,7 @@ class Resolver:
             'treatment': TREATMENTS, 'substrate': set().union(*STOCK.values()),
             'surface_family': ('stone', 'wood', 'roof', 'plaster'), 'finish': finishes,
             'variant': {variant for options in VARIANTS.values() for variant in options},
+            'representation': ('MODELED','HYBRID','TEXTURE'),
         }
         for scope in ('by_role', 'by_component'):
             entries = self.overrides.get(scope, {})
@@ -78,11 +80,16 @@ class Resolver:
         return (key in self.overrides.get('by_component', {}) or
                 role in self.overrides.get('by_role', {}))
 
-    def resolve(self, key, role, default, *, stock=None, treatments=None, host=None):
+    def resolve(self, key, role, default, *, stock=None, treatments=None, host=None,
+                mapped=True):
         if key in self.components:
             raise ValueError(f'{key}: duplicate construction component')
-        fields = {**self.overrides.get('by_role', {}).get(role, {}),
-                  **self.overrides.get('by_component', {}).get(key, {})}
+        specific = self.overrides.get('by_component', {}).get(key, {})
+        fields = {**self.overrides.get('by_role', {}).get(role, {}), **specific}
+        if not mapped:
+            if specific.get('representation') in ('HYBRID','TEXTURE'):
+                raise ValueError(f'{key}: this structural assembly requires modeled geometry')
+            fields.pop('representation',None)
         allowed = treatments or tuple(t for t, roles in TREATMENTS.items() if role in roles)
         treatment = _choice(key, 'treatment', fields.get('treatment', default), allowed)
         stocks = STOCK[treatment]
@@ -103,8 +110,11 @@ class Resolver:
             allowed_variants = tuple(name for name, roles in VARIANTS.get(treatment, {}).items()
                                      if role in roles)
             _choice(key, 'variant', variant, allowed_variants)
+        representation = fields.get('representation')
+        if representation and role not in ('wall_body','roof_cover'):
+            _choice(key,'representation',representation,())
         result = Construction(key, role, treatment, substrate, surface,
-                              fields.get('finish', 'procedural'), host, variant)
+                              fields.get('finish', 'procedural'), host, variant, representation)
         self.components[key] = result
         return result
 
@@ -119,7 +129,10 @@ def component(plan, slot, role, treatment, **constraints):
     resolver = getattr(plan, 'construction_resolver', None)
     if resolver is None:
         return None
-    return resolver.resolve(f'{plan.construction_zone}/{slot}', role, treatment, **constraints)
+    spec = resolver.resolve(f'{plan.construction_zone}/{slot}', role, treatment, **constraints)
+    if spec.representation in ('HYBRID','TEXTURE') and plan.settings.geometry_mode!='EFFICIENT':
+        raise ValueError(f'{spec.component_id}: {spec.representation} representation requires Efficient geometry')
+    return spec
 
 
 def bind(spec, *buffers):

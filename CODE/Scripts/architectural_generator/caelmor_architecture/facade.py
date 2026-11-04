@@ -440,7 +440,8 @@ def _gable_profile(plan, edge):
     return [(s, height_at(s)) for s in sorted(cuts)]
 
 
-def _skin_polygon(buffer, edge, polygon_sz, outward, thickness, efficient=False, slope=0., center=0.):
+def _skin_polygon(buffer, edge, polygon_sz, outward, thickness, efficient=False, slope=0., center=0.,
+                  field_grid=None):
     """Emit a clipped s/z face as a closed veneer or explicit SURFACE detail."""
     if len(polygon_sz)<3 or abs(area(polygon_sz))<.012:
         return
@@ -451,6 +452,10 @@ def _skin_polygon(buffer, edge, polygon_sz, outward, thickness, efficient=False,
     n=(ty,-tx)
     xyz=[(a[0]+tx*s+n[0]*(outward+(s-center)*slope),
           a[1]+ty*s+n[1]*(outward+(s-center)*slope),z) for s,z in polygon_sz]
+    if field_grid is not None:
+        du,dv,base,phase=field_grid
+        buffer.mapped_face(xyz,[(s/du+phase,(z-base)/dv) for s,z in polygon_sz])
+        return
     if efficient:
         # EFFICIENT keeps the visible front and every exposed edge reveal so
         # staggered joints retain real depth. Only the concealed back cap goes.
@@ -461,7 +466,7 @@ def _skin_polygon(buffer, edge, polygon_sz, outward, thickness, efficient=False,
         buffer.extrude(xyz,(-n[0]*thickness,-n[1]*thickness,0.0))
 
 
-def _cladding_tiles(plan, edge_index, edge, openings, construction, buffer):
+def _cladding_tiles(plan, edge_index, edge, openings, construction, buffer, field=None):
     """Generate bounded regional wall relief, cut around complete openings."""
     a,b,tx,ty,n,length=_edge_frame(plan,edge_index,edge)
     profile=_gable_profile(plan,edge)
@@ -476,6 +481,19 @@ def _cladding_tiles(plan, edge_index, edge, openings, construction, buffer):
     body = getattr(plan,'masonry_body',None)
     arris_scale = {'fieldstone':1.15,'ridge_stone':1.,'volcanic_stone':.85}.get(
         getattr(body,'substrate',None),1.)
+    mode=body.representation if body else None
+    if field is not None:
+        dressed=construction=='ASHLAR'
+        width=({'LOW':1.55,'MEDIUM':1.30,'HIGH':1.14} if dressed else
+               {'LOW':1.25,'MEDIUM':.98,'HIGH':.78})[detail]
+        height=({'LOW':.52,'MEDIUM':.42,'HIGH':.36} if dressed else
+                {'LOW':.54,'MEDIUM':.38,'HIGH':.30})[detail]
+        phase=plan.rng(f'facade.mapped.phase.{edge_index}').randrange(4)/4
+        wall=[(0,bottom),(length,bottom),(length,roof_max),(0,roof_max)]
+        _emit_clipped_skin_tile(plan,edge_index,edge,profile,openings,field,wall,False,
+                                outward=.015,field_grid=(width*4,height*4,bottom,phase))
+        if mode=='TEXTURE':
+            return
     # Low-detail faces remain broad and let the material normal carry fine grain.
     if construction=="RUBBLE":
         rng=plan.rng(f"facade.cladding.rubble.edge.{edge_index}")
@@ -495,10 +513,17 @@ def _cladding_tiles(plan, edge_index, edge, openings, construction, buffer):
                 lo,hi=max(0.0,s+.018),min(length,s+span-.018)
                 if hi-lo>.16:
                     tile=[(lo,z+.008),(hi,z+.008),(hi,z+h-.008),(lo,z+h-.008)]
+                    corner=lo<.36 or hi>length-.36
+                    header=(row+(0 if s<base_w else int(s/base_w)))%5==0
+                    # Keep the occasional projecting bond stone in the field
+                    # as well as the built edges. The rest reads from the map.
+                    retained_header=header and row%3==1
+                    if field is not None and not (row==0 or corner or retained_header):
+                        s+=span
+                        continue
                     if worked:
                         # Low courses and periodically tied headers project;
                         # field stones retain a calmer common bedding face.
-                        header=(row+(0 if s<base_w else int(s/base_w)))%5==0
                         # Broad construction hierarchy first, then uneven
                         # seating inside each band. Keep relief within the
                         # reveal and eave reserve set by the clipping rules.
@@ -530,7 +555,7 @@ def _cladding_tiles(plan, edge_index, edge, openings, construction, buffer):
             while s<length:
                 span=bay_w*rng.uniform(.94,1.06)
                 lo,hi=max(0.0,s+.022),min(length,s+span-.022)
-                if hi-lo>.22:
+                if hi-lo>.22 and (field is None or row==0 or lo<.36 or hi>length-.36):
                     tile=[(lo,z+.012),(hi,z+.012),(hi,z+h-.012),(lo,z+h-.012)]
                     # Medium detail keeps arrises at periodic bond headers.
                     if worked and h>.055 and (detail=='HIGH' or detail=='MEDIUM' and
@@ -588,7 +613,7 @@ def _cladding_tiles(plan, edge_index, edge, openings, construction, buffer):
 
 
 def _emit_clipped_skin_tile(plan,edge_index,edge,profile,openings,buffer,tile,efficient,
-                            outward=.022,thickness=.018,slope=0.,center=0.):
+                            outward=.022,thickness=.018,slope=0.,center=0.,field_grid=None):
     """Clip a tile to one roof-profile segment and all assembly exclusion boxes."""
     bounded=getattr(plan,'construction_resolver',None) is not None
     for (rs0,rh0),(rs1,rh1) in zip(profile,profile[1:]):
@@ -625,7 +650,7 @@ def _emit_clipped_skin_tile(plan,edge_index,edge,profile,openings,buffer,tile,ef
             if not fragments:
                 break
         for fragment in fragments:
-            _skin_polygon(buffer,edge,fragment,outward,thickness,efficient,slope,center)
+            _skin_polygon(buffer,edge,fragment,outward,thickness,efficient,slope,center,field_grid)
 
 
 def frame_layout(plan, edge_index, edge):
@@ -1503,6 +1528,18 @@ def build_facades(plan):
     construction = _facade_components(plan, buffers, pier_mode, construction)
     render = buffers.get('render_skin')
     coating = getattr(render, 'construction', None)
+    body=getattr(plan,'masonry_body',None)
+    field=None
+    if body and body.representation in ('HYBRID','TEXTURE'):
+        if coating is not None:
+            raise ValueError(f'{body.component_id}: mapped masonry requires an exposed stone body')
+        add('masonry_field', buffers['masonry_skin'].material, 'walls')
+        field=buffers['masonry_field']
+        field.topology='SURFACE'
+        field.field_family=('dressed' if body.treatment=='dressed_stone' else
+                            'level' if body.variant=='level_course' else 'rubble')
+        field.field_source=buffers['masonry_skin'].name
+        field.construction=body
     if coating and coating.component_role=='wall_surface' and coating.substrate=='limewash':
         # Zero-relief coat: the same faces carry the coating provenance and
         # plaster surface, while the wall component retains its physical stock.
@@ -1530,7 +1567,7 @@ def build_facades(plan):
         if not is_open:
             thick_coat = coating and coating.component_role=='wall_surface' and coating.substrate!='limewash'
             if skin_buffer is not None and not thick_coat:
-                _cladding_tiles(plan,i,edge,openings,construction,skin_buffer)
+                _cladding_tiles(plan,i,edge,openings,construction,skin_buffer,field)
             if thick_coat or (coating and construction=='TIMBER_INFILL'):
                 profile = _gable_profile(plan,edge)
                 top = max(z for _,z in profile)
