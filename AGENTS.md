@@ -2,12 +2,12 @@
 
 ## Delivery
 
-GitHub `Degrading1919/Caelmor-Repo` is the sole repository authority. Use one designated local checkout at `C:/Users/CK/Documents/Caelmor-Repo` on this workstation. Treat detached recovery copies, build output and external research as non-authoritative. Preserve unique work before retiring any copy and obtain Creative Director authorization before deleting or moving it.
+GitHub `Degrading1919/Caelmor-Repo` is the sole source of truth. `C:/Users/CK/Documents/Caelmor-Repo` is the only designated local checkout. Feature branches and PRs use that checkout. Additional clones, worktrees or parallel working directories require explicit Creative Director authorization.
 
 - Fetch from `origin`, confirm the active branch/PR and check for pending local work before switching. Start new feature work on a `codex/` branch from the applicable GitHub base. Continue work for an existing PR on its designated branch. For architecture, use `codex/architectural-generator` and PR #85 while that review is open.
 - Commit only the scoped files and push the feature branch normally. Use a PR to review each feature before integration to `main`. Keep existing PRs for their assigned work. Do not merge a PR without Creative Director authorization. On a rejected push, preserve the commit, report the failure and stop unless the Director has authorized reconciliation. Never force-push or overwrite divergent work.
-- Keep source, accepted evidence and decisions at the existing File Manifest destinations. Use the tracked tree to confirm exact paths. Record evidence provenance and record external datasets by source, revision or hash, and rights/access. Keep third-party assets and bulky temporary results out of Git unless their inclusion is explicitly approved.
-- Before handoff, check the commit, pushed ref and working-tree status. Identify anything still held locally and record recoverable refs and artifact locations. Clean up temporary outputs only after confirming that unique work is preserved and obtaining authorization for cleanup of old project copies.
+- Commit and push every project-owned deliverable, including source, tools, research, evidence and decisions, at an existing File Manifest destination. Use the tracked tree to confirm exact paths. Record external references by source, revision or hash, and rights. Third-party assets require distribution rights before they can be published.
+- Keep temporary builds, research inputs and evidence inside the designated checkout. Before handoff, incorporate justified project-owned material, remove disposable outputs and verify the pushed commit and clean working tree. Persistent external research, evidence, build and staging directories are prohibited. Verify recoverability from GitHub before removing unique work, and obtain Creative Director authorization before retiring any old project copy.
 
 See [the repository consolidation record](00_ADMIN/Reference/Caelmor_Repository_Consolidation.md) for the checkout transition, approved placements and preservation inventory.
 

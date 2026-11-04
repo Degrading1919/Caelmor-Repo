@@ -38,7 +38,9 @@ UNITY/
     - Stage 6.3 — Combat Runtime Implementation.md
 00_ADMIN\Reference/
     - Caelmor_Artistic_Methodology.md
+    - Caelmor_Material_Research_Review.xlsx
     - Caelmor_Repository_Consolidation.md
+    - RS3_Material_Reuse_Research.xlsx
     - Caelmor_Assistant_Activation_Prompts.md
     - Caelmor_File_Manifest.txt
     - Caelmor_File_Manifest_Autogen.ps1
@@ -199,11 +201,14 @@ ARCHIVE\Experimental/
     - VS Enemy Family & Variant — Behavioral + Design Specification.md
 ARCHIVE\LegacyWorkspace/
     - Caelmor_Creative_Readiness_Assessment.md
+    - Consolidation_Inventory.json
+    - Recovered_*.zip (historical research, tools, source and build evidence)
 CODE\Prototypes/
 CODE\Scripts/
 CODE\Scripts\architectural_generator/
     - ENGINE_CONTRACT.md
 CODE\Scripts\architectural_generator\evidence/
+    - Recovered_Architecture_*.zip (historical source and validation evidence)
 CODE\Scripts\architectural_generator\dist/
 CODE\Systems/
     - CombatIntentQueueSystem.cs

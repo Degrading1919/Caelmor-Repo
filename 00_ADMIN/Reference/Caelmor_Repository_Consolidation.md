@@ -8,6 +8,20 @@ The architecture target is [`codex/architectural-generator`, PR #85](https://git
 
 ## Local inventory and preservation
 
+### Physical consolidation handoff
+
+The Creative Director authorized removal of the redundant copies after GitHub verification. The [consolidation inventory](../../ARCHIVE/LegacyWorkspace/Consolidation_Inventory.json) records the original paths, SHA-256 values and dispositions. Where content already existed in GitHub history, the inventory records the blob ID. For retained archive members it records the repository path and member name. The prior inventory below describes the state before physical cleanup.
+
+| Recovered material | Repository destination |
+| --- | --- |
+| Architecture evidence | Existing [generator evidence directory](../../CODE/Scripts/architectural_generator/evidence). The recovery archives contain editable Blender scenes and backups, a Blender regression script, the local add-on package, validation logs, original Caelmor renders and export evidence. Three sidecars are beside their existing studies. Exact extracted image copies are recoverable from the retained GLBs. The archives preserve historical bytes and do not replace current code or `dist/`. Blender opened the three editable scenes and found original Caelmor packed maps and no linked libraries. |
+| Art direction, historical source and build validation | Existing [legacy archive](../../ARCHIVE/LegacyWorkspace). Retained authored plugin staging source, art research and validation, one earlier schema report, build and smoke logs, the workspace audit, and unique text metadata from the old playable packages. Build binaries, stock Unity template, Unity caches and bytecode are disposable. |
+| Material research | The [Caelmor research workbook](Caelmor_Material_Research_Review.xlsx) and [material reuse workbook](RS3_Material_Reuse_Research.xlsx) are retained in `00_ADMIN/Reference/`. The legacy archive contains the project-authored scanner and resolver scripts and their factual CSV/JSON observations. The helpers depend on a separately supplied RSMV environment. No raw cache or third-party meshes, images or textures are retained. |
+
+The original rejected contract and its mixed parent remain reachable on GitHub through `codex/preserve-rejected-contract`. The local architecture recovery snapshot at `4efa0205` was reconciled file by file. Its raw history is superseded by the indexed artifacts above and the existing source history on PR #85.
+
+### Inventory before cleanup
+
 | Location | Finding and disposition |
 | --- | --- |
 | `Documents/Caelmor-Repo` | Clean before the transition. Former local `main` at `4ae1d62` had two local commits and was eight commits behind GitHub `main`. The preserved branch `codex/preserve-rejected-contract` points at the original commit and retains its mixed parent `9eaaf1d`. It is a recovery branch. The contract's unique change was applied by file to the architecture branch. Local `main` now tracks `origin/main`. |
@@ -18,7 +32,7 @@ The architecture target is [`codex/architectural-generator`, PR #85](https://git
 | `Documents/Caelmor Art Director Support` | Separate non-Git plugin staging and research/validation pack. Preserved the project-facing [art methodology](Caelmor_Artistic_Methodology.md) in the repository as a working reference. The plugin package, source bundle, validation and research originals remain in place. |
 | Caelmor files in `Downloads` | Generator research matched a Git blob in the architectural branch. Preserved the [creative readiness assessment](../../ARCHIVE/LegacyWorkspace/Caelmor_Creative_Readiness_Assessment.md) as a historical snapshot. The material workbook is a supporting research source recorded below. |
 
-Inspect the local architecture recovery set with `git diff --name-status 22e4185 codex/preserve-architecture-worktree`. The GitHub branch already tracks the curated studies under `evidence/`, including their provenance and technical checks. Review local-only files individually for acceptance before adding a bounded evidence set. Keep recovery branches out of feature merges. Before authorizing removal of an old copy, verify the backup and disposition of local-only files. Detaching the worktree leaves its folder and files available for that review.
+The curated studies under `evidence/` remain the first point of reference. Keep recovery branches and archives out of active implementation inputs.
 
 ## Artifact placement and external provenance
 
@@ -28,6 +42,6 @@ Accepted evidence should include source commit, tool version, settings/seed, wha
 
 | External source | Provenance and use |
 | --- | --- |
-| `Caelmor_Material_Research_Review.xlsx` | Local research workbook in `Downloads`. SHA-256 `7f8bccd9bc9a00fb6bc9b4184a9daa1a8da7bfd5807529313d9677eae4898f14`. Starter Library and Shared Surface Maps informed reuse of surface families across treatments. |
-| RS3 named material usage | Local `Documents/RS3-Material-Usage/material_usage_named.csv`. SHA-256 `db3cb36ea80e22cecebf4267fc2e9a2d091b7cb1c77291002a42ae2b6a676159`. Counts are scan observations, with mixed naming provenance. The source informed material reuse. It supplies no Caelmor assets, names or regional defaults. |
-| Fort Forinthry and extracted visual references | The [curtain study](../../CODE/Scripts/architectural_generator/evidence/curtain_masonry/README.md) and [pigment study](../../CODE/Scripts/architectural_generator/evidence/painted_materials/README.md) describe the supplied captures and sampled material evidence. The extracted meshes, textures, screenshots and caches remain external. |
+| `Caelmor_Material_Research_Review.xlsx` | Originally in `Downloads`. SHA-256 `7f8bccd9bc9a00fb6bc9b4184a9daa1a8da7bfd5807529313d9677eae4898f14`. Starter Library and Shared Surface Maps informed reuse of surface families across treatments. |
+| RS3 named material usage | Originally `Documents/RS3-Material-Usage/material_usage_named.csv`. SHA-256 `db3cb36ea80e22cecebf4267fc2e9a2d091b7cb1c77291002a42ae2b6a676159`. Counts are scan observations, with mixed naming provenance. The source informed material reuse. It supplies no Caelmor assets, names or regional defaults. |
+| Fort Forinthry and extracted visual references | The [curtain study](../../CODE/Scripts/architectural_generator/evidence/curtain_masonry/README.md) and [pigment study](../../CODE/Scripts/architectural_generator/evidence/painted_materials/README.md) describe the supplied captures and sampled material evidence. The inventory records fingerprints for the excluded extracts. |

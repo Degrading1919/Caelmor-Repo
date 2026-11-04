@@ -1,0 +1,2714 @@
+{
+  "format": "CaelmorBuildingExport",
+  "version": 1,
+  "generator_version": "0.12.1",
+  "functional_program": {
+    "adaptations": [
+      "Road-sized vaulted passage with guard wings set for exposure and sightlines"
+    ],
+    "approaches": [
+      {
+        "end": [
+          2.552,
+          5.0
+        ],
+        "key": "gatehouse.west_courtyard_approach",
+        "rise": 0.32,
+        "run": 2.0,
+        "slope": 0.16,
+        "start": [
+          2.552,
+          7.0
+        ],
+        "width": 1.5
+      },
+      {
+        "end": [
+          13.350502980241131,
+          5.0
+        ],
+        "key": "gatehouse.east_courtyard_approach",
+        "rise": 0.32,
+        "run": 2.0,
+        "slope": 0.16,
+        "start": [
+          13.350502980241131,
+          7.0
+        ],
+        "width": 1.5
+      },
+      {
+        "end": [
+          7.719251490120566,
+          0
+        ],
+        "key": "gatehouse.front_threshold_ramp",
+        "rise": 0.32,
+        "run": 4.0,
+        "slope": 0.08,
+        "start": [
+          7.719251490120566,
+          -4.0
+        ],
+        "width": 3.030502980241131
+      },
+      {
+        "end": [
+          7.719251490120566,
+          8.4
+        ],
+        "key": "gatehouse.rear_threshold_ramp",
+        "rise": 0.32,
+        "run": 3.0,
+        "slope": 0.10666666666666667,
+        "start": [
+          7.719251490120566,
+          11.4
+        ],
+        "width": 3.030502980241131
+      }
+    ],
+    "context": "RIDGE",
+    "function": "GATEHOUSE",
+    "region": "THORNFELL",
+    "rooms": [
+      {
+        "base": 0.32,
+        "bounds": [
+          5.104,
+          0.0,
+          10.334502980241131,
+          8.4
+        ],
+        "eave": 8.183429607171249,
+        "key": "gatehouse_portal",
+        "open_edges": [],
+        "roof": "GABLE"
+      },
+      {
+        "base": 0.32,
+        "bounds": [
+          0.0,
+          -1.2,
+          5.104,
+          5.0
+        ],
+        "eave": 7.0,
+        "key": "gatehouse_west_watchtower",
+        "open_edges": [],
+        "roof": "HIP"
+      },
+      {
+        "base": 0.32,
+        "bounds": [
+          10.334502980241131,
+          -2.55,
+          16.36650298024113,
+          5.0
+        ],
+        "eave": 9.08,
+        "key": "gatehouse_east_watchtower",
+        "open_edges": [],
+        "roof": "GABLE"
+      }
+    ],
+    "routes": [
+      {
+        "bounds": [
+          6.104000000000001,
+          0,
+          0.32,
+          9.334502980241131,
+          8.4,
+          3.2199999999999998
+        ],
+        "key": "gatehouse_open_through_passage",
+        "kind": "human"
+      },
+      {
+        "bounds": [
+          1.972,
+          -0.6799999999999999,
+          0.32,
+          3.132,
+          3.6799999999999997,
+          4.26
+        ],
+        "key": "gatehouse.west_guard_stair.clearance",
+        "kind": "stair"
+      },
+      {
+        "bounds": [
+          12.770502980241131,
+          -2.03,
+          0.32,
+          13.930502980241132,
+          3.6799999999999997,
+          4.26
+        ],
+        "key": "gatehouse.east_guard_stair.clearance",
+        "kind": "stair"
+      },
+      {
+        "bounds": [
+          4.304,
+          3.5999999999999996,
+          4.24,
+          5.904,
+          4.5,
+          6.24
+        ],
+        "key": "gatehouse.guardhall_connection.west",
+        "kind": "human"
+      },
+      {
+        "bounds": [
+          9.53450298024113,
+          3.5999999999999996,
+          4.24,
+          11.134502980241132,
+          4.5,
+          6.24
+        ],
+        "key": "gatehouse.guardhall_connection.east",
+        "kind": "human"
+      }
+    ],
+    "stations": [
+      {
+        "bounds": [
+          2.032,
+          -0.6854499999999999,
+          0.43500000000000005,
+          3.072,
+          -0.40204999999999996,
+          0.5650000000000001
+        ],
+        "key": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.0",
+        "role": "access",
+        "zone": "gatehouse_west_watchtower"
+      },
+      {
+        "bounds": [
+          2.032,
+          -0.41295,
+          0.68,
+          3.072,
+          -0.12955,
+          0.81
+        ],
+        "key": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.1",
+        "role": "access",
+        "zone": "gatehouse_west_watchtower"
+      },
+      {
+        "bounds": [
+          2.032,
+          -0.14045000000000002,
+          0.9250000000000002,
+          3.072,
+          0.14294999999999997,
+          1.0550000000000002
+        ],
+        "key": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.2",
+        "role": "access",
+        "zone": "gatehouse_west_watchtower"
+      },
+      {
+        "bounds": [
+          2.032,
+          0.13204999999999995,
+          1.17,
+          3.072,
+          0.41544999999999993,
+          1.3
+        ],
+        "key": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.3",
+        "role": "access",
+        "zone": "gatehouse_west_watchtower"
+      },
+      {
+        "bounds": [
+          2.032,
+          0.4045499999999999,
+          1.415,
+          3.072,
+          0.6879499999999998,
+          1.5450000000000002
+        ],
+        "key": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.4",
+        "role": "access",
+        "zone": "gatehouse_west_watchtower"
+      },
+      {
+        "bounds": [
+          2.032,
+          0.6770499999999999,
+          1.6600000000000001,
+          3.072,
+          0.9604499999999998,
+          1.7900000000000003
+        ],
+        "key": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.5",
+        "role": "access",
+        "zone": "gatehouse_west_watchtower"
+      },
+      {
+        "bounds": [
+          2.032,
+          0.9495499999999999,
+          1.9050000000000002,
+          3.072,
+          1.2329499999999998,
+          2.035
+        ],
+        "key": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.6",
+        "role": "access",
+        "zone": "gatehouse_west_watchtower"
+      },
+      {
+        "bounds": [
+          2.032,
+          1.2220499999999999,
+          2.1500000000000004,
+          3.072,
+          1.5054499999999997,
+          2.2800000000000002
+        ],
+        "key": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.7",
+        "role": "access",
+        "zone": "gatehouse_west_watchtower"
+      },
+      {
+        "bounds": [
+          2.032,
+          1.4945499999999998,
+          2.395,
+          3.072,
+          1.7779499999999997,
+          2.525
+        ],
+        "key": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.8",
+        "role": "access",
+        "zone": "gatehouse_west_watchtower"
+      },
+      {
+        "bounds": [
+          2.032,
+          1.7670499999999998,
+          2.64,
+          3.072,
+          2.0504499999999997,
+          2.77
+        ],
+        "key": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.9",
+        "role": "access",
+        "zone": "gatehouse_west_watchtower"
+      },
+      {
+        "bounds": [
+          2.032,
+          2.0395499999999993,
+          2.8850000000000002,
+          3.072,
+          2.3229499999999996,
+          3.015
+        ],
+        "key": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.10",
+        "role": "access",
+        "zone": "gatehouse_west_watchtower"
+      },
+      {
+        "bounds": [
+          2.032,
+          2.3120499999999993,
+          3.1300000000000003,
+          3.072,
+          2.5954499999999996,
+          3.2600000000000002
+        ],
+        "key": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.11",
+        "role": "access",
+        "zone": "gatehouse_west_watchtower"
+      },
+      {
+        "bounds": [
+          2.032,
+          2.5845499999999992,
+          3.3750000000000004,
+          3.072,
+          2.8679499999999996,
+          3.5050000000000003
+        ],
+        "key": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.12",
+        "role": "access",
+        "zone": "gatehouse_west_watchtower"
+      },
+      {
+        "bounds": [
+          2.032,
+          2.857049999999999,
+          3.62,
+          3.072,
+          3.1404499999999995,
+          3.75
+        ],
+        "key": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.13",
+        "role": "access",
+        "zone": "gatehouse_west_watchtower"
+      },
+      {
+        "bounds": [
+          2.032,
+          3.129549999999999,
+          3.865,
+          3.072,
+          3.4129499999999995,
+          3.995
+        ],
+        "key": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.14",
+        "role": "access",
+        "zone": "gatehouse_west_watchtower"
+      },
+      {
+        "bounds": [
+          2.032,
+          3.402049999999999,
+          4.11,
+          3.072,
+          3.6854499999999994,
+          4.24
+        ],
+        "key": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.15",
+        "role": "access",
+        "zone": "gatehouse_west_watchtower"
+      },
+      {
+        "bounds": [
+          12.830502980241132,
+          -2.0371374999999996,
+          0.43500000000000005,
+          13.870502980241131,
+          -1.6659874999999997,
+          0.5650000000000001
+        ],
+        "key": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.0",
+        "role": "access",
+        "zone": "gatehouse_east_watchtower"
+      },
+      {
+        "bounds": [
+          12.830502980241132,
+          -1.6802625,
+          0.68,
+          13.870502980241131,
+          -1.3091125,
+          0.81
+        ],
+        "key": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.1",
+        "role": "access",
+        "zone": "gatehouse_east_watchtower"
+      },
+      {
+        "bounds": [
+          12.830502980241132,
+          -1.3233875,
+          0.9250000000000002,
+          13.870502980241131,
+          -0.9522374999999998,
+          1.0550000000000002
+        ],
+        "key": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.2",
+        "role": "access",
+        "zone": "gatehouse_east_watchtower"
+      },
+      {
+        "bounds": [
+          12.830502980241132,
+          -0.9665125000000001,
+          1.17,
+          13.870502980241131,
+          -0.5953625,
+          1.3
+        ],
+        "key": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.3",
+        "role": "access",
+        "zone": "gatehouse_east_watchtower"
+      },
+      {
+        "bounds": [
+          12.830502980241132,
+          -0.6096375,
+          1.415,
+          13.870502980241131,
+          -0.23848750000000002,
+          1.5450000000000002
+        ],
+        "key": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.4",
+        "role": "access",
+        "zone": "gatehouse_east_watchtower"
+      },
+      {
+        "bounds": [
+          12.830502980241132,
+          -0.25276250000000017,
+          1.6600000000000001,
+          13.870502980241131,
+          0.11838749999999981,
+          1.7900000000000003
+        ],
+        "key": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.5",
+        "role": "access",
+        "zone": "gatehouse_east_watchtower"
+      },
+      {
+        "bounds": [
+          12.830502980241132,
+          0.10411249999999989,
+          1.9050000000000002,
+          13.870502980241131,
+          0.47526249999999987,
+          2.035
+        ],
+        "key": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.6",
+        "role": "access",
+        "zone": "gatehouse_east_watchtower"
+      },
+      {
+        "bounds": [
+          12.830502980241132,
+          0.46098749999999994,
+          2.1500000000000004,
+          13.870502980241131,
+          0.8321375,
+          2.2800000000000002
+        ],
+        "key": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.7",
+        "role": "access",
+        "zone": "gatehouse_east_watchtower"
+      },
+      {
+        "bounds": [
+          12.830502980241132,
+          0.8178624999999995,
+          2.395,
+          13.870502980241131,
+          1.1890124999999996,
+          2.525
+        ],
+        "key": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.8",
+        "role": "access",
+        "zone": "gatehouse_east_watchtower"
+      },
+      {
+        "bounds": [
+          12.830502980241132,
+          1.1747374999999995,
+          2.64,
+          13.870502980241131,
+          1.5458874999999996,
+          2.77
+        ],
+        "key": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.9",
+        "role": "access",
+        "zone": "gatehouse_east_watchtower"
+      },
+      {
+        "bounds": [
+          12.830502980241132,
+          1.5316124999999996,
+          2.8850000000000002,
+          13.870502980241131,
+          1.9027624999999997,
+          3.015
+        ],
+        "key": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.10",
+        "role": "access",
+        "zone": "gatehouse_east_watchtower"
+      },
+      {
+        "bounds": [
+          12.830502980241132,
+          1.8884874999999997,
+          3.1300000000000003,
+          13.870502980241131,
+          2.2596374999999997,
+          3.2600000000000002
+        ],
+        "key": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.11",
+        "role": "access",
+        "zone": "gatehouse_east_watchtower"
+      },
+      {
+        "bounds": [
+          12.830502980241132,
+          2.2453624999999993,
+          3.3750000000000004,
+          13.870502980241131,
+          2.6165124999999994,
+          3.5050000000000003
+        ],
+        "key": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.12",
+        "role": "access",
+        "zone": "gatehouse_east_watchtower"
+      },
+      {
+        "bounds": [
+          12.830502980241132,
+          2.6022374999999998,
+          3.62,
+          13.870502980241131,
+          2.9733875,
+          3.75
+        ],
+        "key": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.13",
+        "role": "access",
+        "zone": "gatehouse_east_watchtower"
+      },
+      {
+        "bounds": [
+          12.830502980241132,
+          2.9591124999999994,
+          3.865,
+          13.870502980241131,
+          3.3302624999999995,
+          3.995
+        ],
+        "key": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.14",
+        "role": "access",
+        "zone": "gatehouse_east_watchtower"
+      },
+      {
+        "bounds": [
+          12.830502980241132,
+          3.315987499999999,
+          4.11,
+          13.870502980241131,
+          3.687137499999999,
+          4.24
+        ],
+        "key": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.15",
+        "role": "access",
+        "zone": "gatehouse_east_watchtower"
+      }
+    ]
+  },
+  "settings": {
+    "age": 35,
+    "context": "AUTO",
+    "crafted_curves": true,
+    "craftsmanship": "STANDARD",
+    "depth": 7.0,
+    "detail": "MEDIUM",
+    "floor_height": 2.65,
+    "floors": 2,
+    "footprint": "L",
+    "function": "GATEHOUSE",
+    "geometry_mode": "EFFICIENT",
+    "maintenance": 0.7,
+    "overhang": 0.45,
+    "pitch": 48.0,
+    "region": "THORNFELL",
+    "roof_style": "AUTO",
+    "seed": 91,
+    "seed_massing": true,
+    "use_grammar": true,
+    "wealth": "ESTABLISHED",
+    "width": 11.0,
+    "window_density": 1.0,
+    "wing_depth": 4.5,
+    "wing_width": 4.2,
+    "world_aware": true
+  },
+  "architecture": "WORLD",
+  "construction_zones": [
+    {
+      "base": 0.32,
+      "bounds": [
+        5.104,
+        0.0,
+        10.334502980241131,
+        8.4
+      ],
+      "eave": 8.183429607171249,
+      "function": "GATEHOUSE",
+      "key": "gatehouse_portal",
+      "roof": "GABLE",
+      "triangles": 20619,
+      "valid": true,
+      "vertices": 15246,
+      "wall_thickness": 0.5
+    },
+    {
+      "base": 0.32,
+      "bounds": [
+        0.0,
+        -1.2,
+        5.104,
+        5.0
+      ],
+      "eave": 7.0,
+      "function": "WATCHTOWER",
+      "key": "gatehouse_west_watchtower",
+      "roof": "HIP",
+      "triangles": 19825,
+      "valid": true,
+      "vertices": 13959,
+      "wall_thickness": 0.5
+    },
+    {
+      "base": 0.32,
+      "bounds": [
+        10.334502980241131,
+        -2.55,
+        16.36650298024113,
+        5.0
+      ],
+      "eave": 9.08,
+      "function": "WATCHTOWER",
+      "key": "gatehouse_east_watchtower",
+      "roof": "GABLE",
+      "triangles": 26039,
+      "valid": true,
+      "vertices": 18320,
+      "wall_thickness": 0.5
+    }
+  ],
+  "source_validation": {
+    "construction_zones": [
+      {
+        "base": 0.32,
+        "bounds": [
+          5.104,
+          0.0,
+          10.334502980241131,
+          8.4
+        ],
+        "eave": 8.183429607171249,
+        "function": "GATEHOUSE",
+        "key": "gatehouse_portal",
+        "roof": "GABLE",
+        "triangles": 20619,
+        "valid": true,
+        "vertices": 15246,
+        "wall_thickness": 0.5
+      },
+      {
+        "base": 0.32,
+        "bounds": [
+          0.0,
+          -1.2,
+          5.104,
+          5.0
+        ],
+        "eave": 7.0,
+        "function": "WATCHTOWER",
+        "key": "gatehouse_west_watchtower",
+        "roof": "HIP",
+        "triangles": 19825,
+        "valid": true,
+        "vertices": 13959,
+        "wall_thickness": 0.5
+      },
+      {
+        "base": 0.32,
+        "bounds": [
+          10.334502980241131,
+          -2.55,
+          16.36650298024113,
+          5.0
+        ],
+        "eave": 9.08,
+        "function": "WATCHTOWER",
+        "key": "gatehouse_east_watchtower",
+        "roof": "GABLE",
+        "triangles": 26039,
+        "valid": true,
+        "vertices": 18320,
+        "wall_thickness": 0.5
+      }
+    ],
+    "source_objects": 149,
+    "source_triangles": 66483,
+    "source_vertices": 47525,
+    "valid": true
+  },
+  "source_geometry_hash": "5e503eb4365bee229ae42c1225c417b4fbbd136067c3b1be550bb35dea979d9c",
+  "has_protected_buffers": false,
+  "protected_buffer_count": 0,
+  "units": "metres",
+  "up_axis": "Y",
+  "collision": {
+    "file": "gatehouse.collision.glb",
+    "object_count": 15,
+    "wall_proxy_count": 12,
+    "floor_proxy_count": 3,
+    "note": "Approximate static outer-wall and footprint proxies; not tested for traversal."
+  },
+  "anchor": {
+    "name": "Caelmor Building Root",
+    "location": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "rotation_euler": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "scale": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  },
+  "layers": [
+    "details",
+    "doors",
+    "foundation",
+    "roof",
+    "structure",
+    "walls",
+    "windows"
+  ],
+  "objects": [
+    {
+      "name": "world_thornfell.gatehouse_portal.facade_foundation_core",
+      "layer": "foundation",
+      "material": "stone",
+      "world_zone": "gatehouse_portal",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.facade_stone",
+      "layer": "foundation",
+      "material": "stone_light",
+      "world_zone": "gatehouse_portal",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.facade_mortar",
+      "layer": "foundation",
+      "material": "mortar",
+      "world_zone": "gatehouse_portal",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.facade_quoins",
+      "layer": "foundation",
+      "material": "stone_light",
+      "world_zone": "gatehouse_portal",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.facade_walls",
+      "layer": "walls",
+      "material": "stone",
+      "world_zone": "gatehouse_portal",
+      "semantic": "walls",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.facade_masonry_skin",
+      "layer": "walls",
+      "material": "stone_light",
+      "world_zone": "gatehouse_portal",
+      "semantic": "walls",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.facade_timber",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "gatehouse_portal",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.facade_windows",
+      "layer": "windows",
+      "material": "glass",
+      "world_zone": "gatehouse_portal",
+      "semantic": "windows",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.facade_doors",
+      "layer": "doors",
+      "material": "timber",
+      "world_zone": "gatehouse_portal",
+      "semantic": "doors",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.facade_iron",
+      "layer": "details",
+      "material": "iron",
+      "world_zone": "gatehouse_portal",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.Continuous roof deck",
+      "layer": "roof",
+      "material": "timber",
+      "world_zone": "gatehouse_portal",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.Concealed roof course bedding",
+      "layer": "roof",
+      "material": "roof_dark",
+      "world_zone": "gatehouse_portal",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.Split oak shingle courses",
+      "layer": "roof",
+      "material": "roof",
+      "world_zone": "gatehouse_portal",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.Seasoned shingle cohorts",
+      "layer": "roof",
+      "material": "roof_dark",
+      "world_zone": "gatehouse_portal",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.Exposed shingle butts",
+      "layer": "roof",
+      "material": "roof_worn",
+      "world_zone": "gatehouse_portal",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.Replacement shingle cohort",
+      "layer": "roof",
+      "material": "roof_patch",
+      "world_zone": "gatehouse_portal",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.Overlapping ridge caps",
+      "layer": "roof",
+      "material": "roof_dark",
+      "world_zone": "gatehouse_portal",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.Roof edge fascia",
+      "layer": "roof",
+      "material": "timber",
+      "world_zone": "gatehouse_portal",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.Supported roof rafters",
+      "layer": "roof",
+      "material": "timber",
+      "world_zone": "gatehouse_portal",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.facade_foundation_core",
+      "layer": "foundation",
+      "material": "stone",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.facade_stone",
+      "layer": "foundation",
+      "material": "stone_light",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.facade_mortar",
+      "layer": "foundation",
+      "material": "mortar",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.facade_quoins",
+      "layer": "foundation",
+      "material": "stone_light",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.facade_walls",
+      "layer": "walls",
+      "material": "stone",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "walls",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.facade_masonry_skin",
+      "layer": "walls",
+      "material": "stone_light",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "walls",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.facade_timber",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.facade_windows",
+      "layer": "windows",
+      "material": "glass",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "windows",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.facade_doors",
+      "layer": "doors",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "doors",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.facade_iron",
+      "layer": "details",
+      "material": "iron",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.Continuous roof deck",
+      "layer": "roof",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.Concealed roof course bedding",
+      "layer": "roof",
+      "material": "roof_dark",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.Split oak shingle courses",
+      "layer": "roof",
+      "material": "roof",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.Seasoned shingle cohorts",
+      "layer": "roof",
+      "material": "roof_dark",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.Exposed shingle butts",
+      "layer": "roof",
+      "material": "roof_worn",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.Replacement shingle cohort",
+      "layer": "roof",
+      "material": "roof_patch",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.Overlapping ridge caps",
+      "layer": "roof",
+      "material": "roof_dark",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.Roof edge fascia",
+      "layer": "roof",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.Supported roof rafters",
+      "layer": "roof",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.facade_foundation_core",
+      "layer": "foundation",
+      "material": "stone",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.facade_stone",
+      "layer": "foundation",
+      "material": "stone_light",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.facade_mortar",
+      "layer": "foundation",
+      "material": "mortar",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.facade_quoins",
+      "layer": "foundation",
+      "material": "stone_light",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.facade_walls",
+      "layer": "walls",
+      "material": "stone",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "walls",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.facade_masonry_skin",
+      "layer": "walls",
+      "material": "stone_light",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "walls",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.facade_timber",
+      "layer": "structure",
+      "material": "stone_light",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "structure",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.facade_windows",
+      "layer": "windows",
+      "material": "glass",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "windows",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.facade_doors",
+      "layer": "doors",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "doors",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.facade_iron",
+      "layer": "details",
+      "material": "iron",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.Continuous roof deck",
+      "layer": "roof",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.Concealed roof course bedding",
+      "layer": "roof",
+      "material": "roof_dark",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.Split oak shingle courses",
+      "layer": "roof",
+      "material": "roof",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.Seasoned shingle cohorts",
+      "layer": "roof",
+      "material": "roof_dark",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.Exposed shingle butts",
+      "layer": "roof",
+      "material": "roof_worn",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.Replacement shingle cohort",
+      "layer": "roof",
+      "material": "roof_patch",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SURFACE",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.Overlapping ridge caps",
+      "layer": "roof",
+      "material": "roof_dark",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.Roof edge fascia",
+      "layer": "roof",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.Supported roof rafters",
+      "layer": "roof",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.passage_cheek.west",
+      "layer": "details",
+      "material": "stone",
+      "world_zone": "gatehouse_portal",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "passage_wall",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.open_leaf.west",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_portal",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "gate_leaf",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.leaf_straps.west",
+      "layer": "details",
+      "material": "iron",
+      "world_zone": "gatehouse_portal",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "gate_leaf",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.passage_cheek.east",
+      "layer": "details",
+      "material": "stone",
+      "world_zone": "gatehouse_portal",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "passage_wall",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.open_leaf.east",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_portal",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "gate_leaf",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.leaf_straps.east",
+      "layer": "details",
+      "material": "iron",
+      "world_zone": "gatehouse_portal",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "gate_leaf",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.vaulted_passage",
+      "layer": "details",
+      "material": "stone_light",
+      "world_zone": "gatehouse_portal",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "vault",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.portal_arch.front",
+      "layer": "details",
+      "material": "stone_light",
+      "world_zone": "gatehouse_portal",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "structure",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.portal_jamb.front.west",
+      "layer": "details",
+      "material": "stone_light",
+      "world_zone": "gatehouse_portal",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "structure",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.portal_jamb.front.east",
+      "layer": "details",
+      "material": "stone_light",
+      "world_zone": "gatehouse_portal",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "structure",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.portal_arch.rear",
+      "layer": "details",
+      "material": "stone_light",
+      "world_zone": "gatehouse_portal",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "structure",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.portal_jamb.rear.west",
+      "layer": "details",
+      "material": "stone_light",
+      "world_zone": "gatehouse_portal",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "structure",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.portal_jamb.rear.east",
+      "layer": "details",
+      "material": "stone_light",
+      "world_zone": "gatehouse_portal",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "structure",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.portcullis",
+      "layer": "details",
+      "material": "iron",
+      "world_zone": "gatehouse_portal",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "defense",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_floor.left",
+      "layer": "foundation",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_floor.left.supports",
+      "layer": "foundation",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_floor.right",
+      "layer": "foundation",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_floor.right.supports",
+      "layer": "foundation",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_landing",
+      "layer": "foundation",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_landing.supports",
+      "layer": "foundation",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.0",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.1",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.2",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.3",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.4",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.5",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.6",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.7",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.8",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.9",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.10",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.11",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.12",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.13",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.14",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.15",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.stringers",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.handrails",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_courtyard_approach",
+      "layer": "foundation",
+      "material": "stone",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_courtyard_approach.supports",
+      "layer": "foundation",
+      "material": "stone",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_plinth_bedding",
+      "layer": "details",
+      "material": "mortar",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "structure",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_battered_plinth",
+      "layer": "details",
+      "material": "stone",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "structure",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_bonded_quoins",
+      "layer": "details",
+      "material": "stone_light",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "structure",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_stringcourse",
+      "layer": "details",
+      "material": "stone_light",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "structure",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.west_loop_reveals",
+      "layer": "details",
+      "material": "stone_light",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "defense",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_floor.left",
+      "layer": "foundation",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_floor.left.supports",
+      "layer": "foundation",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_floor.right",
+      "layer": "foundation",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_floor.right.supports",
+      "layer": "foundation",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_landing",
+      "layer": "foundation",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_landing.supports",
+      "layer": "foundation",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.0",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.1",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.2",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.3",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.4",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.5",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.6",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.7",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.8",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.9",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.10",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.11",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.12",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.13",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.14",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.15",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.stringers",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.handrails",
+      "layer": "details",
+      "material": "timber",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "access",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_courtyard_approach",
+      "layer": "foundation",
+      "material": "stone",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_courtyard_approach.supports",
+      "layer": "foundation",
+      "material": "stone",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_plinth_bedding",
+      "layer": "details",
+      "material": "mortar",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "structure",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_battered_plinth",
+      "layer": "details",
+      "material": "stone",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "structure",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_bonded_quoins",
+      "layer": "details",
+      "material": "stone_light",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "structure",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_stringcourse",
+      "layer": "details",
+      "material": "stone_light",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "structure",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.east_loop_reveals",
+      "layer": "details",
+      "material": "stone_light",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "defense",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.guard_hall_floor",
+      "layer": "foundation",
+      "material": "timber",
+      "world_zone": "gatehouse_portal",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "floor_borne_by_masonry_vault",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.guardhall_threshold.west",
+      "layer": "foundation",
+      "material": "stone",
+      "world_zone": "gatehouse_portal",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.guardhall_threshold.west.supports",
+      "layer": "foundation",
+      "material": "timber",
+      "world_zone": "gatehouse_portal",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.guardhall_threshold.east",
+      "layer": "foundation",
+      "material": "stone",
+      "world_zone": "gatehouse_portal",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.guardhall_threshold.east.supports",
+      "layer": "foundation",
+      "material": "timber",
+      "world_zone": "gatehouse_portal",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.front_threshold_ramp",
+      "layer": "foundation",
+      "material": "stone",
+      "world_zone": "gatehouse_portal",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.front_threshold_ramp.bonded_flags",
+      "layer": "details",
+      "material": "stone_light",
+      "world_zone": "gatehouse_portal",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "threshold",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.rear_threshold_ramp",
+      "layer": "foundation",
+      "material": "stone",
+      "world_zone": "gatehouse_portal",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.rear_threshold_ramp.bonded_flags",
+      "layer": "details",
+      "material": "stone_light",
+      "world_zone": "gatehouse_portal",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "threshold",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse.passage_paving",
+      "layer": "foundation",
+      "material": "stone_light",
+      "world_zone": "gatehouse_portal",
+      "semantic": "foundation",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse.curtain_return.west",
+      "layer": "details",
+      "material": "stone",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "boundary",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_east_watchtower.gatehouse.curtain_return.east",
+      "layer": "details",
+      "material": "stone",
+      "world_zone": "gatehouse_east_watchtower",
+      "semantic": "details",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "boundary",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse_portal.gatehouse_west_watchtower.roof_apron.0",
+      "layer": "roof",
+      "material": "iron",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse_portal.gatehouse_west_watchtower.roof_apron.2",
+      "layer": "roof",
+      "material": "iron",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_west_watchtower.gatehouse_portal.gatehouse_west_watchtower.roof_apron.4",
+      "layer": "roof",
+      "material": "iron",
+      "world_zone": "gatehouse_west_watchtower",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    },
+    {
+      "name": "world_thornfell.gatehouse_portal.gatehouse_east_watchtower.roof_apron.0",
+      "layer": "roof",
+      "material": "iron",
+      "world_zone": "gatehouse_portal",
+      "semantic": "roof",
+      "protected": false,
+      "topology": "SOLID",
+      "structural_role": "framing",
+      "functional_role": "",
+      "roof_envelope": null,
+      "support_surface": null
+    }
+  ]
+}
