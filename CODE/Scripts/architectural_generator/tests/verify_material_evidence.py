@@ -53,6 +53,10 @@ for row in roundtrip['images']:
     assert sha(OUT/(row['function'].lower()+'.glb'))==row['glb_sha256']
     check_image(OUT/'roundtrip'/row['image'],row['sha256'])
 assert read(OUT/'legacy_surface_check.json')['result']=='PASS'
+assert read(OUT/'color_space_probe.json')['valid']
+boundary=read(OUT/'range_check.json');assert boundary['valid']
+assert boundary['settings']['detail']=='HIGH' and boundary['settings']['floors']==3
+assert all(max(s['size'])<=4096 for s in boundary['surfaces'])
 
 archive=ROOT/'dist/caelmor_architecture.zip';archive_hash=sha(archive)
 for function in ('smithy','gatehouse'):

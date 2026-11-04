@@ -52,6 +52,14 @@
       "reports": ["final/manifest.json", "comparison/manifest.json", "roundtrip/manifest.json"]
     },
     {
+      "name": "Large legacy authoring-range generation",
+      "cases": 1,
+      "settings": "Farmhouse / L / width24 depth16 / floors3 / HIGH EFFICIENT / seed17",
+      "result": "PASS",
+      "report": "range_check.json",
+      "scope": "Native generation and atlas capacity check, no render or runtime performance measurement."
+    },
+    {
       "name": "Source, image, historical control and package correspondence",
       "command": "py -3 tests/verify_material_evidence.py",
       "result": "PASS",

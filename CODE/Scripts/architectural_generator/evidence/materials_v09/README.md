@@ -102,6 +102,11 @@ remain authority; no lore, catalog or game code changes were made.
 - Isolated extension installation generated/exported the
   [Smithy](install_smithy.json) and [Gatehouse](install_gatehouse.json) from the
   same archive. Profiles were isolated from the user's installed add-ons.
+- A [large authoring-range fixture](range_check.json) also generated successfully:
+  legacy L-shaped farmhouse, width24/depth16, three floors, HIGH/EFFICIENT,
+  seed17; 91,498 native vertices and 10 atlas banks. Its largest atlas is
+  4096 × 3644. This is a boundary generation check, not an additional visual
+  benchmark, all-parameter guarantee or runtime test.
 - [Evidence verification](verification.json) checks all 44 images, six sheets,
   four reimport views, current source bytes, native records and all 30 archive
   members. All 48 historical v08 benchmark image hashes still match. Archive
