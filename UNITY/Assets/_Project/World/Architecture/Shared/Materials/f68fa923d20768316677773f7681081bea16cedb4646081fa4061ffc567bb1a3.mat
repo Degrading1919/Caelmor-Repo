@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: f68fa923d20768316677773f7681081bea16cedb4646081fa4061ffc567bb1a3
+  m_Shader: {fileID: 4800000, guid: 6a799a3e792e6a0459e00060790c40e0, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 494c2e1389ec0634397142e0509a88fc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalTex:
+        m_Texture: {fileID: 2800000, guid: 96413bf83b856de4d86d8a9e0701de48, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OrmTex:
+        m_Texture: {fileID: 2800000, guid: ef07d974e70555e41bf69f5971e536a8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BaseUv: 0
+    - _Cull: 0
+    - _Cutoff: -1
+    - _HasNormal: 1
+    - _HasOrm: 1
+    - _Metallic: 0
+    - _NormalScale: 0.32
+    - _NormalUv: 0
+    - _OcclusionStrength: 0
+    - _OrmUv: 0
+    - _Roughness: 1
+    - _VertexColor: 1
+    m_Colors:
+    - _Color: {r: 0.5331328, g: 0.5627161, b: 0.5813849, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

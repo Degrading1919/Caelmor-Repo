@@ -1,0 +1,1228 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dd80b58c79d0247a336be7b0a89e06, type: 3}
+  m_Name: ImportRecord
+  m_EditorClassIdentifier: Assembly-CSharp::Caelmor.Unity.ArchitectureImportRecord
+  sourcePath: CODE/Scripts/architectural_generator/evidence/benchmarks_v08/gatehouse.glb
+  importerVersion: CaelmorArchitectureImport/1
+  sourceHash: 5677b1f1530a9d7ef7dfc00a7826d130bf48dd5c81ff43b647757d785e4325c5
+  collisionHash: b618ec91573645f7a663524444967ced7b5563b68df7a42da443f6fa3999b33b
+  sidecarHash: b4c926784912565db06ccc83da75e77c6692eb9ac2aa2534c0f4bb43401a0512
+  compatibilitySignature: 252df4b355169b4ff22b14161c1971b48f95d6e616d7f41d4648d7ea12ccb1a1
+  bindingsSignature: none
+  buildingId: asset:thornfell_gatehouse
+  generatedPrefab: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/thornfell_gatehouse.prefab
+  placementPrefab: Assets/_Project/World/Architecture/Prefabs/thornfell_gatehouse.prefab
+  placementGuid: 13787595a3c99dc41887b4c16ccae517
+  unresolvedLibraryMappings: 'world_thornfell.gatehouse_portal.facade_foundation_core
+    => generator stone
+
+    world_thornfell.gatehouse_portal.facade_stone => generator
+    stone_light
+
+    world_thornfell.gatehouse_portal.facade_mortar => generator
+    mortar
+
+    world_thornfell.gatehouse_portal.facade_quoins => generator stone_light
+
+    world_thornfell.gatehouse_portal.facade_walls.001
+    => generator stone
+
+    world_thornfell.gatehouse_portal.facade_masonry_skin
+    => generator stone_light
+
+    world_thornfell.gatehouse_portal.facade_timber
+    => generator stone_light
+
+    world_thornfell.gatehouse_portal.facade_windows
+    => generator glass
+
+    world_thornfell.gatehouse_portal.facade_doors => generator
+    timber
+
+    world_thornfell.gatehouse_portal.facade_iron => generator iron
+
+    world_thornfell.gatehouse_portal.Continuous
+    roof deck => generator timber
+
+    world_thornfell.gatehouse_portal.Concealed
+    roof course bedding => generator roof_dark
+
+    world_thornfell.gatehouse_portal.Split
+    oak shingle courses => generator roof
+
+    world_thornfell.gatehouse_portal.Seasoned
+    shingle cohorts => generator roof_dark
+
+    world_thornfell.gatehouse_portal.Exposed
+    shingle butts => generator roof_worn
+
+    world_thornfell.gatehouse_portal.Replacement
+    shingle cohort => generator roof_patch
+
+    world_thornfell.gatehouse_portal.Overlapping
+    ridge caps => generator roof_dark
+
+    world_thornfell.gatehouse_portal.Roof
+    edge fascia => generator timber
+
+    world_thornfell.gatehouse_portal.Supported
+    roof rafters => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.facade_foundation_core
+    => generator stone
+
+    world_thornfell.gatehouse_west_watchtower.facade_stone
+    => generator stone_light
+
+    world_thornfell.gatehouse_west_watchtower.facade_mortar
+    => generator mortar
+
+    world_thornfell.gatehouse_west_watchtower.facade_quoins
+    => generator stone_light
+
+    world_thornfell.gatehouse_west_watchtower.facade_walls
+    => generator stone
+
+    world_thornfell.gatehouse_west_watchtower.facade_masonry_skin
+    => generator stone_light
+
+    world_thornfell.gatehouse_west_watchtower.facade_timber
+    => generator stone_light
+
+    world_thornfell.gatehouse_west_watchtower.facade_windows
+    => generator glass
+
+    world_thornfell.gatehouse_west_watchtower.facade_doors
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.facade_iron
+    => generator iron
+
+    world_thornfell.gatehouse_west_watchtower.Continuous roof
+    deck => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.Concealed
+    roof course bedding => generator roof_dark
+
+    world_thornfell.gatehouse_west_watchtower.Split
+    oak shingle courses => generator roof
+
+    world_thornfell.gatehouse_west_watchtower.Seasoned
+    shingle cohorts => generator roof_dark
+
+    world_thornfell.gatehouse_west_watchtower.Exposed
+    shingle butts => generator roof_worn
+
+    world_thornfell.gatehouse_west_watchtower.Replacement
+    shingle cohort => generator roof_patch
+
+    world_thornfell.gatehouse_west_watchtower.Overlapping
+    ridge caps => generator roof_dark
+
+    world_thornfell.gatehouse_west_watchtower.Roof
+    edge fascia => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.Supported
+    roof rafters => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.facade_foundation_core
+    => generator stone
+
+    world_thornfell.gatehouse_east_watchtower.facade_stone
+    => generator stone_light
+
+    world_thornfell.gatehouse_east_watchtower.facade_mortar
+    => generator mortar
+
+    world_thornfell.gatehouse_east_watchtower.facade_quoins
+    => generator stone_light
+
+    world_thornfell.gatehouse_east_watchtower.facade_walls
+    => generator stone
+
+    world_thornfell.gatehouse_east_watchtower.facade_masonry_skin
+    => generator stone_light
+
+    world_thornfell.gatehouse_east_watchtower.facade_timber
+    => generator stone_light
+
+    world_thornfell.gatehouse_east_watchtower.facade_windows
+    => generator glass
+
+    world_thornfell.gatehouse_east_watchtower.facade_doors
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.facade_iron
+    => generator iron
+
+    world_thornfell.gatehouse_east_watchtower.Continuous roof
+    deck => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.Concealed
+    roof course bedding => generator roof_dark
+
+    world_thornfell.gatehouse_east_watchtower.Split
+    oak shingle courses => generator roof
+
+    world_thornfell.gatehouse_east_watchtower.Seasoned
+    shingle cohorts => generator roof_dark
+
+    world_thornfell.gatehouse_east_watchtower.Exposed
+    shingle butts => generator roof_worn
+
+    world_thornfell.gatehouse_east_watchtower.Replacement
+    shingle cohort => generator roof_patch
+
+    world_thornfell.gatehouse_east_watchtower.Overlapping
+    ridge caps => generator roof_dark
+
+    world_thornfell.gatehouse_east_watchtower.Roof
+    edge fascia => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.Supported
+    roof rafters => generator timber
+
+    world_thornfell.gatehouse_portal.gatehouse.passage_cheek.west
+    => generator stone
+
+    world_thornfell.gatehouse_portal.gatehouse.open_leaf.west
+    => generator timber
+
+    world_thornfell.gatehouse_portal.gatehouse.leaf_straps.west
+    => generator iron
+
+    world_thornfell.gatehouse_portal.gatehouse.passage_cheek.east
+    => generator stone
+
+    world_thornfell.gatehouse_portal.gatehouse.open_leaf.east
+    => generator timber
+
+    world_thornfell.gatehouse_portal.gatehouse.leaf_straps.east
+    => generator iron
+
+    world_thornfell.gatehouse_portal.gatehouse.vaulted_passage
+    => generator stone_light
+
+    world_thornfell.gatehouse_portal.gatehouse.portal_arch.front
+    => generator stone_light
+
+    world_thornfell.gatehouse_portal.gatehouse.portal_jamb.front.west
+    => generator stone_light
+
+    world_thornfell.gatehouse_portal.gatehouse.portal_jamb.front.east
+    => generator stone_light
+
+    world_thornfell.gatehouse_portal.gatehouse.portal_arch.rear
+    => generator stone_light
+
+    world_thornfell.gatehouse_portal.gatehouse.portal_jamb.rear.west
+    => generator stone_light
+
+    world_thornfell.gatehouse_portal.gatehouse.portal_jamb.rear.east
+    => generator stone_light
+
+    world_thornfell.gatehouse_portal.gatehouse.portcullis
+    => generator iron
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_floor.left
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_floor.left.supports
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_floor.right
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_floor.right.supports
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_landing
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_landing.supports
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.0
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.1
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.2
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.3
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.4
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.5
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.6
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.7
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.8
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.9
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.10
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.11
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.12
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.13
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.14
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.tread.15
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.stringers
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_guard_stair.handrails
+    => generator timber
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_courtyard_approach
+    => generator stone
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_courtyard_approach.supports
+    => generator stone
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_battered_plinth
+    => generator stone
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_bonded_quoins
+    => generator stone_light
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_stringcourse
+    => generator stone_light
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.west_loop_reveals
+    => generator stone_light
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_floor.left
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_floor.left.supports
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_floor.right
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_floor.right.supports
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_landing
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_landing.supports
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.0
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.1
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.2
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.3
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.4
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.5
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.6
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.7
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.8
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.9
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.10
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.11
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.12
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.13
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.14
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.tread.15
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.stringers
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_guard_stair.handrails
+    => generator timber
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_courtyard_approach
+    => generator stone
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_courtyard_approach.supports
+    => generator stone
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_battered_plinth
+    => generator stone
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_bonded_quoins
+    => generator stone_light
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_stringcourse
+    => generator stone_light
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.east_loop_reveals
+    => generator stone_light
+
+    world_thornfell.gatehouse_portal.gatehouse.guard_hall_floor
+    => generator timber
+
+    world_thornfell.gatehouse_portal.gatehouse.guardhall_threshold.west
+    => generator stone
+
+    world_thornfell.gatehouse_portal.gatehouse.guardhall_threshold.west.supports
+    => generator timber
+
+    world_thornfell.gatehouse_portal.gatehouse.guardhall_threshold.east
+    => generator stone
+
+    world_thornfell.gatehouse_portal.gatehouse.guardhall_threshold.east.supports
+    => generator timber
+
+    world_thornfell.gatehouse_portal.gatehouse.front_threshold_ramp
+    => generator stone
+
+    world_thornfell.gatehouse_portal.gatehouse.front_threshold_ramp.supports
+    => generator stone
+
+    world_thornfell.gatehouse_portal.gatehouse.rear_threshold_ramp
+    => generator stone
+
+    world_thornfell.gatehouse_portal.gatehouse.rear_threshold_ramp.supports
+    => generator stone
+
+    world_thornfell.gatehouse_portal.gatehouse.passage_paving
+    => generator stone_light
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse.curtain_return.west
+    => generator stone
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse.curtain_return.east
+    => generator stone
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse_portal.gatehouse_west_watchtower.roof_apron.0
+    => generator iron
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse_portal.gatehouse_west_watchtower.roof_apron.2
+    => generator iron
+
+    world_thornfell.gatehouse_west_watchtower.gatehouse_portal.gatehouse_west_watchtower.roof_apron.3
+    => generator iron
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse_portal.gatehouse_east_watchtower.roof_apron.0
+    => generator iron
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse_portal.gatehouse_east_watchtower.roof_apron.3
+    => generator iron
+
+    world_thornfell.gatehouse_east_watchtower.gatehouse_portal.gatehouse_east_watchtower.roof_apron.6
+    => generator iron'
+  sourceBytes: 5075515
+  generatedBytes: 19747903
+  importSeconds: 6.505253
+  rendererCount: 149
+  meshCount: 149
+  colliderCount: 15
+  materialCount: 10
+  textureCount: 9
+  vertices: 83798
+  triangles: 42006
+  ownedFiles:
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/collision.glb
+    sha256: b618ec91573645f7a663524444967ced7b5563b68df7a42da443f6fa3999b33b
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/collision.glb.meta
+    sha256: ca00b76abaa4a0a4ad832a38ad6f76313f3005e4e601ba054834b9a6b0ffcebd
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/0154618b37ba488acab9.asset
+    sha256: b1f34a41f7887428047d3e69cddb7a02e2d78a530c6a25abfab5ec2dd0a7a672
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/0154618b37ba488acab9.asset.meta
+    sha256: be13dab46ed1b6a5741ddb5043a1d558e81dd873b490dae4d728e9fb028dc331
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/02678b9ffe4a05208be9.asset
+    sha256: c1c2e0f8e79b05e93dcd250d168d5685051650014fa47516c69adc5526ba1312
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/02678b9ffe4a05208be9.asset.meta
+    sha256: e0690e74104e880b22ddc2918c59ba58bbd8c987fdee1c988967c897f25f0295
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/0296cc0eaa91865377a1.asset
+    sha256: 85757eeb79fdb4eb9536730d186f22957f2804cb2877f0f6763edef5b51a8c21
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/0296cc0eaa91865377a1.asset.meta
+    sha256: 8c160d43faf9ed95cc91897be2d23a4742a88c14b3f72eb851b7b28c63f8ee31
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/0573db8180c1cdbe454e.asset
+    sha256: 0aa6e854bb2c3c0f410ed975cb6ea41d510ed3d2b4e079b0f1ea79e7ef32180f
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/0573db8180c1cdbe454e.asset.meta
+    sha256: 24f2fc7c5b43bbc1ee45466f083f2c8159063bf71d2ad25611f4b1d09d7f1b7c
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/07457543d1da0998af69.asset
+    sha256: 8c3c52ed8297ff7d2e1f93d3eb7572fdd9b1c87dd8145d0ef809cc9d9559b2c8
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/07457543d1da0998af69.asset.meta
+    sha256: 52dd1194baf79d827b1375b38375792992395ad838ab3a2988bd091932490958
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/086fb4df0cb8ac5418bd.asset
+    sha256: a8d393d508f951fc9cf0477f99254a80150ec8a74f8b2c3dd5db285389997b3b
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/086fb4df0cb8ac5418bd.asset.meta
+    sha256: c07532a6637674a9b16f0a169d82a77f7254fc43f4265c8e70eb68fe772e5dee
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/0e0f6c7f366b8f55271d.asset
+    sha256: cfe8870f4e5f78c3f4ae57b432044436a79e4fd00d65b18484c4d1638f331f32
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/0e0f6c7f366b8f55271d.asset.meta
+    sha256: 0bfe5960841e4ff716b9bb6ddbf3b642d8dbc2e0b08190d8d6bb261c678705f7
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/11143c87132dae1dffa7.asset
+    sha256: 4253a669b26e65b6c5b44eb75bb1631aff0eb19cbd23aa7b4aa55a7042836a9f
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/11143c87132dae1dffa7.asset.meta
+    sha256: 846e6d5e2108b415934477c9a53d1ed11ec8ae43c0f50b0da22d66a25723a425
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/149e1028f78829892f42.asset
+    sha256: 19ac63e872cb6ca6ed755d4ee920a29074e89a1a33b8d86d1e0b13c9a174147d
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/149e1028f78829892f42.asset.meta
+    sha256: 4519c293efdb99467cc74605d76cfc94136d9a3c2a236c2ad70a546a7278251c
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/199126c1d9c3683a2cb0.asset
+    sha256: 7aeff53d36a4bc4e84debd4b2a9f45bebc7a707786ab4c6022ba7b08856fc1d7
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/199126c1d9c3683a2cb0.asset.meta
+    sha256: b7c29863c90ef983e54ab40b9097683f51ef7c57ae8f902b752972585df583b0
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/19f1d621f0064c0b7ff6.asset
+    sha256: b3f3ef6273079b614853762b80afb460b11f493af4bd1610b29c077d746ca869
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/19f1d621f0064c0b7ff6.asset.meta
+    sha256: 3251f3537ae22ba65743134f8af9c99a28c8efba979123244508dda85eea2518
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/1abad5f568cb2fc5560f.asset
+    sha256: d76f311e42dfab4297751401ba7c38583fdd66e6216e2048bff4bf5292e6f352
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/1abad5f568cb2fc5560f.asset.meta
+    sha256: 7a226417a3f1298e63765b36a76b851b4b74c719e9ad6ce38b978059ccea7561
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/1c115c4e42663ea5eeab.asset
+    sha256: 18808c14a8cde5e05cb137f357614c24ea4e0ef0de33bd0936a078fa8b6eb550
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/1c115c4e42663ea5eeab.asset.meta
+    sha256: 50bb2c7c5ff918b949b3080e75d455c506424be1ac891115a40355faa328456d
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/1d0e2989d08919c1f5f3.asset
+    sha256: edb22c5ccd4a31b1a5dda82a78c556006801ce0b32f9c3fc158507b715df237a
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/1d0e2989d08919c1f5f3.asset.meta
+    sha256: d70b47bd6abde079bec8deb7322d1b2ffc722e299299c9333103088a84aba032
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/1df06103b4114312cc1b.asset
+    sha256: ba9e4594e7b3aebad56696b7f49c5563cb53a2ca6627038cb18536d71338d778
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/1df06103b4114312cc1b.asset.meta
+    sha256: 570113dcc0c657706707e592304546b2808c17a8eac06d02dd9b624eca0c14fa
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/20317b6c7cf1c8e31f8c.asset
+    sha256: b4fffc5351b7b5afc9a30a75e18e3ce0e6b335cddcbe227a6e6d5d233ac6f302
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/20317b6c7cf1c8e31f8c.asset.meta
+    sha256: 374f97a7bb614e728f8396b3e3f971da36ed0cf4365d4ff1d4c69160d4a1e1d7
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/2449c2fa4ea4a64ddc72.asset
+    sha256: 4540e248551640d3cef2311d349c530476f2d85bb8c1c465a9a4d53da72d40dd
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/2449c2fa4ea4a64ddc72.asset.meta
+    sha256: 267d9fe1cea7d96889c3c63cedf451518cecd206a20988e43d1318a62a5bd98c
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/24cca50f45373e0283e3.asset
+    sha256: 5506ee8bfb908deca04deec1173dbc851411e9f61e2cc70c345a74e064bf5891
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/24cca50f45373e0283e3.asset.meta
+    sha256: d5992c379540f863c7d23c069aced23408442e9498859049d67864b131cb780e
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/27ebeabd264d010029e7.asset
+    sha256: 0f34bcb8a9e9fbfa5b180acab993635bb4951ddbe99e291bddaa0d007d5d74ac
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/27ebeabd264d010029e7.asset.meta
+    sha256: e61e183626dd3a9a4e5959a8a2fe8763ee350a8478686a96a833222e410fa5b4
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/2855dc4dfb4b92eaac73.asset
+    sha256: 6be54cb16f40ecb4fbf7c05842959d1496b454df2f91e6ffcd056c1314551eb3
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/2855dc4dfb4b92eaac73.asset.meta
+    sha256: a8c376389f7b8ed6dcf57bd61ccf9a88b17aa177a60cd62d406390dec40ecb55
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/29484920e9ea1c7808e2.asset
+    sha256: dbaf7db52a37e176f74b8ede931ae522d98715d9ff7545b9a57f1d49924ffcdf
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/29484920e9ea1c7808e2.asset.meta
+    sha256: 9ff6df338b97cbea315efb547c33be277366dbf8abd752124f7773422de7067a
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/2ae519822618170cb51d.asset
+    sha256: 154207580edaeb9fa93fbdfa5295d2cc08c598f0e73d79990773e7ee373b6cad
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/2ae519822618170cb51d.asset.meta
+    sha256: 983eb4fbb7059ef087bf967d30577eef2f609b03101385c187c70e200fd8e396
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3053f2428c22a50b7d12.asset
+    sha256: 1e9d5651dd6ce0128015895bbbac5d1ce611044d02fb7a1f55c6de654cfe9743
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3053f2428c22a50b7d12.asset.meta
+    sha256: 6d2fcf6e2cb087b607d61d08c921a3fad09c9604ac2f20f778b3a0d0313deba7
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/316f4599d55890e813f3.asset
+    sha256: 517a6bc336f62933e44b36581fda788fd7c651922cb133b17d6d9929bc8ce992
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/316f4599d55890e813f3.asset.meta
+    sha256: fce0b3c53e90b4500beaf4d7aad151c07b2153f4e603771c82b6e1b8bf066e2f
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/31951d9d7a9adb8f4303.asset
+    sha256: c026d468f04e21917f8ff8ed3a84fd9c484ddd56fc9b279de5225f035114f883
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/31951d9d7a9adb8f4303.asset.meta
+    sha256: d267bc36939cac322fb75b566810122c8cd2a14c56868223c73e94d76d4194ad
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/31e19451220e9654d663.asset
+    sha256: 44d5f77e88aaa7d89e4cd5ff74d61b05cf6baa63defeee76a37f1fa712fcdea1
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/31e19451220e9654d663.asset.meta
+    sha256: db0077e396313ff55ac7fa2cb883a04a345c05b04e02a96c9b7d1f14ac035208
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/328c396e8b1f7e84b130.asset
+    sha256: eb4e4f1e6e07b5412c60618f48a6ee610cd62836643dd2db054899ce819c370d
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/328c396e8b1f7e84b130.asset.meta
+    sha256: f3a7cc1e689aefe72c68554575103eece2fd8c892d79512ab6c5559f98d07001
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3292533b75807ca919fe.asset
+    sha256: 535f50a237b17593f809fd03dda9f347aa19604457de7f454f6e084e7342bb45
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3292533b75807ca919fe.asset.meta
+    sha256: 7a3e920ef10785aa85441fdfe15da3cfdd509ae9011bfdabe86039ad6deceeff
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/332ec50bec2bcaab5553.asset
+    sha256: aafa16c5ac00dc44bb5064e5939bcf8b4d27484a7be6e5ccc9e878c7e7f4c82f
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/332ec50bec2bcaab5553.asset.meta
+    sha256: d74263aa63e99a6cba63f50368b4b9fb5605f74484dbcaf602ca0c25a23ceb00
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/36846723114af8310d77.asset
+    sha256: 14ced169a16318939c95f3a35a319cfc5f0a1fb306edfab491ff06862d97ae22
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/36846723114af8310d77.asset.meta
+    sha256: 6e0fe3d97a9da455ac06b70e4b77aa91ba63bc7e870993b243450e58b818b6f6
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/370f68c7c27bba2596bf.asset
+    sha256: 0da1ccf1e6cf851fd57ac301c7cf0b4a788e1059e6cab4bc3da5b03acc0f2084
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/370f68c7c27bba2596bf.asset.meta
+    sha256: 0450024ab3515f0bb9fe04c726c947164daae2e7eaefd0227ac8b4f66528c963
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/383d7b4eb1dc6a893b83.asset
+    sha256: 704cc225cac448c72eb0b63f3786ee614604c334098360ac5bce5a13e0b83741
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/383d7b4eb1dc6a893b83.asset.meta
+    sha256: 47a0e1c58f34482c9dae6ff110a22b06872d6406bcf0e0fcc38c5f193d17be79
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3a4f637414b26134a328.asset
+    sha256: 4fb91f63ca52a5f081b018117f6c9e9ce4b5930523036c30e000ec8839421cc1
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3a4f637414b26134a328.asset.meta
+    sha256: 13c00f6c1878d7ddcd9e61d87e1a0c28a804704457bc5417f2b30726808df869
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3af8c926dc5ff6544e10.asset
+    sha256: c8071af4deeab8ed4a1ed60eb2cb5748a64b18f892ebecff90f5804cc67d15ea
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3af8c926dc5ff6544e10.asset.meta
+    sha256: cc2c170c1b34690cac5e5150e290cba6abfdd08c1d3ea1f69f96a915f2c68da3
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3b54a660df403f45375e.asset
+    sha256: ff57d06edcbe2686b35aa7554f51a21b9f694d20cd56da7f0888488220b55197
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3b54a660df403f45375e.asset.meta
+    sha256: fdcf9c37c46997f36ef1ac7e3a881a60cce5a124e4f3db519807afaaf07a1b74
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3b583e4737b58bc8810e.asset
+    sha256: 4e55a903ec5c5f8f6b8168ac79f1a35b7d0f55bb6bae60fcc4a021003e7822ba
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3b583e4737b58bc8810e.asset.meta
+    sha256: 6a2dbebd840c867c5d2262502bbb1d75ed6b7c31f627f9df0ff9875e315d1838
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3c9341be26a57e0b6ae9.asset
+    sha256: 2c0331b8104908e6ae36503fb19e05ca47bc226e52f27e52cd7673f28f5e6eb8
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3c9341be26a57e0b6ae9.asset.meta
+    sha256: d84fa314e7ba03d2828aff7f5bcd585cfb374f9bd91d20ad58e47bc057a39673
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3d14dba4729830b06824.asset
+    sha256: 8b41c177deb3a1858fa9821ad1c50fb1a083fcf6f232f330a58088748c2e396b
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3d14dba4729830b06824.asset.meta
+    sha256: a915af7b84e3675b00993ce6cccc819bc8132caae4d6161a8773f5fea4b0ccee
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3e1d892d5da6415eb464.asset
+    sha256: 5b3207757aa1a9c2bb8814a055a32c64976c6f03f904e304f819ab9880c521eb
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3e1d892d5da6415eb464.asset.meta
+    sha256: 1566edc9cc33271e40e6d59bb617bc829418f647d7105513d3ee6565c4211836
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3e687a7eaab4ec7af94a.asset
+    sha256: 33a539f5f2b7155c5f9705e0d7b5a11ac7ef28e45cf99a3934fbc73fdb744446
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/3e687a7eaab4ec7af94a.asset.meta
+    sha256: 0d0fe635cda7e11b8c123709cff498619308a418af64c47a7efa50b50e2bc3ad
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/40539e8f3d4a989e7f45.asset
+    sha256: 643adabd57312da9c2c0acb2ec662ccadddb4bdfd45d1c1e72575bce7f71ab6b
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/40539e8f3d4a989e7f45.asset.meta
+    sha256: 0db1a90a56e145ced11456e083fe4a51c6950f53f05cfc59f857a5bd2ccccd68
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/4486547804db1b8477fd.asset
+    sha256: bcbde9c8ef20267478c9ee1f2a04e73623b79587d47f37f42395cf6ed1fb022c
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/4486547804db1b8477fd.asset.meta
+    sha256: 17c28a14fa4d3be1a367ee494ba832e42d9eadaf70c5410684ee3623ea15cb02
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/4583ed02208cd8cb9698.asset
+    sha256: f1179bbafa72f797e9ce7382044260bb8379b6ce6efb09d5eb04c0fc0d14b4f5
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/4583ed02208cd8cb9698.asset.meta
+    sha256: b915ff1140aeeabc8374a3cec530dbef909e73d357916b58d986f3a0b15a7a68
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/468285b2c5c3ec2ef909.asset
+    sha256: d8aa8a323c6149b4a29f506b2c40fc45d9b22672e0ba98b0e91572b2249d2612
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/468285b2c5c3ec2ef909.asset.meta
+    sha256: ec9376be8ce2e13343f5ffd9d6ddd871acd072ea4f7d4198ec1a1c03d9716dab
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/46c5f60d40d46f40fcc8.asset
+    sha256: 9f61124facd1a9aa0e9967f45b55f33c48a7feee5eb3aac43491347d6e423f93
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/46c5f60d40d46f40fcc8.asset.meta
+    sha256: ecb00c1fc32c6840e52d51f7e9e2f5734c4a606e7007a34b87d3c1300702be41
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/47b2f357fa03ba25785a.asset
+    sha256: f281cca086803dbd05681eedf8d63a98672eb42774abe5ccca70242b46d9d000
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/47b2f357fa03ba25785a.asset.meta
+    sha256: 1ce786dbb7dc30f0a80d314c3663754fc8fd43dd98681420662066bd5f734bc9
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/49d79b191f4960bcfcd6.asset
+    sha256: 42cc19ed6c0eeac5ae06c35e7adc17442bd56901b4146ec6bd0225a9f4bd2c02
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/49d79b191f4960bcfcd6.asset.meta
+    sha256: dec596e92b847dc7ced2141ed0037a249d0a16d043c46aeed3ef4a5bea5576ac
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/4a6f22c8bcec3caa149e.asset
+    sha256: bb13e7a1e599c480edbcdd9d88d7aace42b10f20f1c4d7df571cba9c54d13170
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/4a6f22c8bcec3caa149e.asset.meta
+    sha256: d4cff8909a648b859031f0cbe10573cae6b6d8719369200e0208f04a5d41abfb
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/4aeab07716825c6d339f.asset
+    sha256: affdcc43b27dc4e80281e5ee95168d2c9c86288d394df0058a74820651ed3052
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/4aeab07716825c6d339f.asset.meta
+    sha256: b32855bea1eefdd665588cf1cc5edf4b7a17ede3efd8267c4c7ad9a28660aacd
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/4bb27458788d0fb2fafc.asset
+    sha256: 39113baa99b906784f3776078de1e30b342f2483b28d5e44b5069b4c788a9dfc
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/4bb27458788d0fb2fafc.asset.meta
+    sha256: 2159485acca116020fbb7314f30b4d4e3f138047cd9859b95eb7bc8446eb1240
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/4cba862cc28ce9d0cccc.asset
+    sha256: a56a7dfd4edbad222a62610bc90fd320692d6d2ec66e0aa58d3abe6e60a9cc14
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/4cba862cc28ce9d0cccc.asset.meta
+    sha256: 599339df8f2ebce9e2d378cb12f716afbca8d1e4e2d0f42ae24b64e2c4e793aa
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/4d2bf0ed7dd2578775f9.asset
+    sha256: 7863bd3d649326b5ed4dd17868e862c96318a79fdb5387ea01cd1419e91e9af3
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/4d2bf0ed7dd2578775f9.asset.meta
+    sha256: 04d317f8344d0216ce9191058f0e15287c4c76b830330a8becfcec543ed7e169
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/4f7ea6cb97ccd6c9b34a.asset
+    sha256: 0cfbf31f2b06dc24a3ba9291fd0067f5cb449c4f25347eafa1062547ae2a34b8
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/4f7ea6cb97ccd6c9b34a.asset.meta
+    sha256: 5540c81e43b8dc64bdf282bf5d2510fafbcc39d3c9cc2f76f530b97ed4b14e30
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/54902f5d98735295cd60.asset
+    sha256: 64dbf77fc0b0da90d6de45c9a86a03a4cb46ab7a6b11fc16ed4187905447234d
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/54902f5d98735295cd60.asset.meta
+    sha256: 32760b25906bb19e8af41063d0210367bbb7e696119af1ef7ca5c0b0a925dcac
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/54a62c1f2415a6a3386f.asset
+    sha256: f848309be511475cbf4dbeb414a775b07b036e590f8f3c7afcf7589198375de3
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/54a62c1f2415a6a3386f.asset.meta
+    sha256: fd8807ca75a26ac69bf6358ea61c9da9e12fd274c7a110ad0754f440b5407e38
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/558006406d105b66e179.asset
+    sha256: 925ba73e4f34f2095394ea244f950f55232c97abe9feb04160fed84c9bfd9377
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/558006406d105b66e179.asset.meta
+    sha256: 4e6cef8f22eefee9d1091644d1abc02196575f67b7bbcb67a2eccbd244e058cc
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/564fd21e42877622851f.asset
+    sha256: 726138c19a6309cdf3890afb1bfc397f396ce4926b42ca3889834e572d17cd1c
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/564fd21e42877622851f.asset.meta
+    sha256: 503f932b4df8e186f8325814edc1a7a2c81bf4aaaffbbb79a6fe76b508d29f56
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/5669bc9ba4a7f6d7b880.asset
+    sha256: 72e1395d6ccf2c400845fda8dc588f59943c36fc8fcdcf0a3c3246bb30afd8bf
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/5669bc9ba4a7f6d7b880.asset.meta
+    sha256: 90876520934d18c008ea340415a19cd673cba646d6cc2f5d76bbd237561ee5ba
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/5b3ef453b6162ffd989c.asset
+    sha256: c7484a931f41197449b3e28fb28244932f88e2be83e7dc3c4b3c9b2006d36597
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/5b3ef453b6162ffd989c.asset.meta
+    sha256: 7db4ac5065251b4d9b81a38dc4ca09f473a9acda4cb022d629979cf758611ff8
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/5ccaccb99583c444933f.asset
+    sha256: 324fcf3a58ce83042c1186b0e9c787f26695713c916f4640fc83c79a94fdced8
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/5ccaccb99583c444933f.asset.meta
+    sha256: 33134ae727182dc5b122e3787546a0dce5c58dc507e6654161764c1f6d6cc6c4
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/5f56abec9290612a88d3.asset
+    sha256: c64d5b111a0e2d580d04c38c9a1164a0b017b3fc349d9bf5598b62c75419b158
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/5f56abec9290612a88d3.asset.meta
+    sha256: 72f979d61b24698e7ee053555d42f01b6dc3ef0f55f7cd923678f541940037e9
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/62ba92a3520471f626bc.asset
+    sha256: 2b7494577f14a487e8bac837aaada2872c9c57fce8ab158cc04b510c259c32ad
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/62ba92a3520471f626bc.asset.meta
+    sha256: 373d27963f1776684b409ca6e574b2da9ffdcd3d4596ce3924510fa201ba5a08
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/630520d61901be402644.asset
+    sha256: 41e27e4189e4fcfb883ee81c9fa9c9131f5cafad53823accec6242dfa84d8e8b
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/630520d61901be402644.asset.meta
+    sha256: 057eb75ac6aa73754d0856d06dde3eba62cf694f20f3679addf906cff399a8cf
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/64e759bc5804af3168e3.asset
+    sha256: 22d67be13a8dacca9dea87293ec94cda2d52b13531de8d65329da561bb677f5c
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/64e759bc5804af3168e3.asset.meta
+    sha256: 4cfe94920d488752a0cdd8070c0fba224e5e1f24d9cea509238b2dd8294c4867
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/6a07ef4d317cb230f64c.asset
+    sha256: 21a4df9a9e9bf82c932afbab85b9ae535ebbac8af4690182178db8dac2c31837
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/6a07ef4d317cb230f64c.asset.meta
+    sha256: 2594052a0c48a01da079217af2910a34bd57a10166d3300f77746f7ecc500a57
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/6ab77b2fd6f03465e8c2.asset
+    sha256: 7ddb7d44011b566b0fd44e5960670eb8f7184f54c6cfef6882e9bc00b50e78a0
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/6ab77b2fd6f03465e8c2.asset.meta
+    sha256: d5988f60f1a5c599700c9b817f95718f3940689ed78c918eac8240d51979527c
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/6d04f12bb7948a279aee.asset
+    sha256: 68491269cbeabc0dbdff9052089349df83e17fd6bb4909ae83e84dee215977d2
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/6d04f12bb7948a279aee.asset.meta
+    sha256: aa2508500c791b16b5ae2a22812b8d1e7a2c866443515ee850b57026a50aa5d4
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/6ecc4355b45e5ae1dc83.asset
+    sha256: fd050fd14b6a3f11a10483f11b8732156cd2df6e86a54144d912931b062b2b59
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/6ecc4355b45e5ae1dc83.asset.meta
+    sha256: 958b4b782125ec1a08306755e3ffd90fbc52122df8be693c8cb1520aec78f8d2
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/6fe47aa6c4903cbff87a.asset
+    sha256: bb49da90cc8be369fad9f3be2b51efbfabab1e07a67e6999a1c0b6fc8686291a
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/6fe47aa6c4903cbff87a.asset.meta
+    sha256: 2b2bb4c9b0e66eac3f5597e0e06a4e430b93075094de7d137ad59c53d3f00d01
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/707881933ef45257e6ad.asset
+    sha256: 6cd55e72e59117c2b0cda40271376dcd246a2cceb20f19598fded49255b39600
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/707881933ef45257e6ad.asset.meta
+    sha256: 5cb079c4c3f5a9e5ef2363fbc9b9ee4cc96d4f7d0fbc83cf9ea786f96d7a3095
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/7145a352651956662e5c.asset
+    sha256: c623131bb858183b331d80af51a8c29ef4ca2414b29307698b3cc165a667a9e6
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/7145a352651956662e5c.asset.meta
+    sha256: 3edb4cd352403333a927525b7d5db02bede15f4c1d1a45cac91e2fc8668fed98
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/71de4e1d84532713f01f.asset
+    sha256: a48ec1064fbe8e534e3a3ac4531a2cec70c672bdff2bda8c9ef330302ae6d9a4
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/71de4e1d84532713f01f.asset.meta
+    sha256: 341b2bb09e52b4d7185282f2a3de2f6d9af57ce73d1887f1d81b89b05ebee96c
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/72f1a4eb8bad0c81a498.asset
+    sha256: 183f864166d4d12c4d1c8e05ab1d2bfc074564e7cf90fedb192666a297963907
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/72f1a4eb8bad0c81a498.asset.meta
+    sha256: 2e10421cd702b7506f3cc48a47e57dda6d0d9cccbc204cdbc10d4d1043689417
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/779556c42b8bf498c418.asset
+    sha256: 2892a20c501ca8b4c9c38446759d387dd4d1e37c1d59fb5b0caa94b067a099bb
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/779556c42b8bf498c418.asset.meta
+    sha256: 2dc631750e19a51f8a3ce6afe255ce1d4025a47380965b44b9a9912883d29888
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/7896d76e4e9a09336d4f.asset
+    sha256: 5422a5976a16e844ff66bba0855f563dbec0901b5bc6c2067d7e7fe1a0572eda
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/7896d76e4e9a09336d4f.asset.meta
+    sha256: f5643feded49cdf319a30863624aca3f3ab57a87732ec23989ad66892fcb2d79
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/78cfb5c0721b9be881e5.asset
+    sha256: 111db0b12ce2c25fd65ef13c8c676d36a2a4795657f1819105983e7cc5a453ee
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/78cfb5c0721b9be881e5.asset.meta
+    sha256: 4cba123f40c52e97a245ffedbe7c99001035c2d09b1272d4a1569db16dcdbd9d
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/7a820088f0f3a21595c1.asset
+    sha256: 7ce75aac246b1846c18e610e8b44c3ba2dfce79a6cdce78c669d232d2b49143f
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/7a820088f0f3a21595c1.asset.meta
+    sha256: aca765f8dc732b0a9ef368a5fe59f827de4370eaa25ebbe09e7a77c4f115c854
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/7b9e4f4663e954855d5b.asset
+    sha256: 16bf0ec9ff90194e02e6e613f3a7b618d51eac29300ef2a934147eac342a9871
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/7b9e4f4663e954855d5b.asset.meta
+    sha256: 7dfa55458750a242a9747d15f48ba67a861b5690e02e12a07fbf0d5743151b1f
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/7d710183f47ae03a7928.asset
+    sha256: 735f0171220b800397a4f189c8fa69a4a81457f988fb94f11c2021472d797213
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/7d710183f47ae03a7928.asset.meta
+    sha256: 033ca2e6d1303640e5f7a32292279e3468c264d2fd2351909496fb67ceabe563
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/7fefb4b866ad582f10b8.asset
+    sha256: 171b6866251d82b14e2faa60b881e2fd06a61297a9e17751c6a472d8e65b3ab9
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/7fefb4b866ad582f10b8.asset.meta
+    sha256: 49b1fed73fcb0c75592acf58de1886ad1666c0e38595f252991e0425e758c93c
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/800a98ad6c10ad091f17.asset
+    sha256: ba64d9ea5528f2179cb9c6bdf74b244fba161fc9d7ab298fd0f2acc6e313b4a8
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/800a98ad6c10ad091f17.asset.meta
+    sha256: 94bcf5c12bf32f86c58913ece407c2b866008829c351eccd8f8a56d8641974f9
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/83f8471caa8f54d3f8eb.asset
+    sha256: c68e9da3cba9bd216689499c2785f4cb20d25b5a065abac39e882babdcb63e1f
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/83f8471caa8f54d3f8eb.asset.meta
+    sha256: 6f28602e0264cc6bba1908f0c2435f24f852beb14419a9a654fdc7396c763887
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/858bf7ce1919358f0a30.asset
+    sha256: 314e8e711e1299f57e1907b6c6b1260d07bfe70322c9bfc730d682fdadd1df92
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/858bf7ce1919358f0a30.asset.meta
+    sha256: 367251e170c39a173553b7743e9e667d154e8f31cfd56735e7d5ca02b39f88c6
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/85f86bb49093c3959a25.asset
+    sha256: 2f7a5cfdc42ee1bac315db4ef48cf51e5dd99cb0f0e4c43e9666e2840c2cd6c4
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/85f86bb49093c3959a25.asset.meta
+    sha256: c5ae9ed695198fcb9ec52188865323e104e040d22e05795ac0cdc45b2594f3fc
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/862e1c26885ed3dd2409.asset
+    sha256: 38e4e1219b3e77510e7216089c3542c885015822c524621a43a2e32656bb0b84
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/862e1c26885ed3dd2409.asset.meta
+    sha256: da274e804525eca5ea076ed635a92c19f000477c564b056fa504673517f5d2c2
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/8798e8b7bcb24cfa0f4c.asset
+    sha256: edb5b5957018fbcafe70a5b1cf01f0936e015fec0721b2d583db1eeb6130a507
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/8798e8b7bcb24cfa0f4c.asset.meta
+    sha256: e458f564fb696b6c9eb3fa7e1c42f6f2b31919203a4a6e1aa96833d19dd26afe
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/88c2f19930fedaca1d8f.asset
+    sha256: b2f33f55dffc9de3a8b04481f925d71fceaf171ddb873f4c5068aa7eaf3beaa8
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/88c2f19930fedaca1d8f.asset.meta
+    sha256: 64259dc37ddf7f534e7c5edb4abd289feebe8f42ca84524ad04453897d90c62f
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/893a5a0839e14fa87e9a.asset
+    sha256: 57278c9ef45530adbbcb9150097a85f20b281f429a211da87e070100c4e52a42
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/893a5a0839e14fa87e9a.asset.meta
+    sha256: 7d3126e78a50af5c5ed645b537a43ab901d1ab91155cfc986b163bf69fc92b91
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/89e765b58de184bbd2ce.asset
+    sha256: dc9c6130b0071b1bc7092a1af2d514a1f43dce5d9acb40744d273c2416895713
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/89e765b58de184bbd2ce.asset.meta
+    sha256: 411584fd0bd2e0828ea28c7fb4e8768d8a4ee4942828761b96421284e9845a0e
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/8a0d4c315664161b4919.asset
+    sha256: fedc4ff6c8f239b788e5702da6bfc9788cc8869404c338d9b6aa861dc33fd997
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/8a0d4c315664161b4919.asset.meta
+    sha256: 5c585fcc3653787d5bd37420e9322474d03d10b4e98aa2f931ce92dbb51c2db1
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/8ba3e2f488ff7ef38625.asset
+    sha256: afc73d5767c5279c4869b1399c2ea77f8091e0d078c57f416a5621b19262960e
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/8ba3e2f488ff7ef38625.asset.meta
+    sha256: d4475110680488a451e7b7c55b45c3f7ee35841d10954c1a8832a4cca4f21a71
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/8eec07b1ec3d08dd23f3.asset
+    sha256: 9d7c9b1061191dfd67eef394e33a9e36137fa3a014bff9e5b6892290a4fe2ae8
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/8eec07b1ec3d08dd23f3.asset.meta
+    sha256: b1a4d1c4dda3a16f91399b7e1ff1ec4f1c69b2efaffbb64757822d94adfad439
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/8f585c8ac24faeef9720.asset
+    sha256: 204c39e09932fa0557a14c233310842f71bf20f558b6eebd9d60d00fdf6bec13
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/8f585c8ac24faeef9720.asset.meta
+    sha256: 815f6d29e1b70013f7a0a9852c4ff73413eeddf4bd71e0b27fa5cbf03c3212f8
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/8fe4cdee3460e77ddf0b.asset
+    sha256: 94d63d6cdf5a041d084bb03958aac3df8a763ecabc7a117c1f55ba42ec3b826b
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/8fe4cdee3460e77ddf0b.asset.meta
+    sha256: 8b100b9b0a71c13ddf96190c1544d8e086c84112f53fd339f06681cccf340ebe
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/93997f2dce5ceb4ccb1d.asset
+    sha256: 369f9fcd851bb505429431e78e5bd975d69a7f2b586541850a456ccd2ded135d
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/93997f2dce5ceb4ccb1d.asset.meta
+    sha256: 81f60feb11b04f93ad751aed276eb5af8f95f140f9032054be7c5f21d94885ef
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/94196ab122974958130a.asset
+    sha256: c0087dea18dbddbd902a5df806366c3345415cb65b2af13d942ffdf339ab6a7b
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/94196ab122974958130a.asset.meta
+    sha256: 8cf8abd99d2821fe844205cde2e615ab4fc0512b22c0dc64bd28e0973795d4f1
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/95cd6f6cffee1822d731.asset
+    sha256: c3aa9575adfc3d99057a17645828fd01569bc4eb05a55d4d5884fb77a767f924
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/95cd6f6cffee1822d731.asset.meta
+    sha256: 9029cd6974aeb2a2121a6a2bac182c99b4273d0cd3b3cea394709b9195d1fbcf
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/9a35a3bb82419f94b343.asset
+    sha256: 18b7da39e743565f8a4d333177c723fc4f50c3b3c04307a671a3fd03f86fbe50
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/9a35a3bb82419f94b343.asset.meta
+    sha256: cb93eadeb94aab5a2c4567ee2c0e170395b090bfcbe7c4daa4d7213314267310
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/9b9f877445d1510a4f0c.asset
+    sha256: fbbdfca69ab57494b8fd8f8957f1b646716baeeaab5e25a773495f14f3e0c8ba
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/9b9f877445d1510a4f0c.asset.meta
+    sha256: d9fd8d966de34197dc8ea6713ebe1836acf8fc9149d255018dad6517658da7d4
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/9be9231af1115a96a153.asset
+    sha256: 6457bcb0a60619557858797666a988db993ca95ca38514f4a66e32c96f29f581
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/9be9231af1115a96a153.asset.meta
+    sha256: c70f4501d038d69c6c9ce64709c1328c7cb0dd96b6ab634db0a44ba21ad769f1
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/9c51b25a174b279b8549.asset
+    sha256: b587324c60b724d40112950ee0fbdfed78f2592fe591acc8d7ab1d694e011e5d
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/9c51b25a174b279b8549.asset.meta
+    sha256: ddbf97f9b89cd0da25cbde050854280988d020b627df2f2fcfb66106424dfb57
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/9e25d7c4cb3d05972716.asset
+    sha256: fdb3e6f5b3852d65baf24a7a8b13dbcf4252b5031bc94f282a7c0c05911bc91d
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/9e25d7c4cb3d05972716.asset.meta
+    sha256: d9a8f740105437706796d746bc5290e53c37493a0339edd7a5232c06c74cb917
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/a4bf5e7db879a7b82dd9.asset
+    sha256: 3a324591f44dbc519d437048bfd45f4539371ab6a41099dec9a259cebe3a4c24
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/a4bf5e7db879a7b82dd9.asset.meta
+    sha256: ce0f566e11b24924b83b37bcc5554ae5d0c4d1ef24e4e2bcf09c3aedc9c719c0
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/a7a6f76abfb8daf6d87c.asset
+    sha256: 757dc71478073c84b984d18050aff2cf07762b50ef5a0052397bb72cd28e6527
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/a7a6f76abfb8daf6d87c.asset.meta
+    sha256: 51ba2d8629c68182736e38359198b1e9d0d8ad8a57424916d9c99139699d9394
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/a7af6da8da1e2e57c3eb.asset
+    sha256: d951587403ba4a27a3b1d38d0ccc1f036639d4fdb018bc9420da8386c41b2eba
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/a7af6da8da1e2e57c3eb.asset.meta
+    sha256: 6b9bc5bac8bfaf8f106ae7401e7e244122cebc1f6159f5602bc9e1b7850399dc
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/aa28dbfe677b1434dba6.asset
+    sha256: a0a2b478b1d4e0fac4f4e39612b898213ac2391cd128e751fe49071241137050
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/aa28dbfe677b1434dba6.asset.meta
+    sha256: 03d3cb14fe5e0c4579f9e317a393c5db2fc052cb21ce46de6634e92f3cf3dc7c
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/aa5b415d2f60afd9cbd1.asset
+    sha256: 332938faeaa94204ab9be5c972de3d1d807132411b8382a1346aff8af63555a6
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/aa5b415d2f60afd9cbd1.asset.meta
+    sha256: eb78733c8fa69541fa55ecd44dcea4c8243a7daa640171ed4cda58877afde33c
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/adfde5d4e76c5c44e5a9.asset
+    sha256: e01a4bc2c4f00b63022de78598f550cdd35f5933bc3e5c3374d6e6322147d15f
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/adfde5d4e76c5c44e5a9.asset.meta
+    sha256: 4fff7af9032ff28f45b0e041514db8c2bccdf2c8b7575eb2a4e655113c37cb56
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/af5b567edf13d3618e69.asset
+    sha256: 73c74ee79f32a50dfde5cda6790f33bc1f5e83994a78cc822828ff28745268ef
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/af5b567edf13d3618e69.asset.meta
+    sha256: 87ba16d1a7840afff0b6e6ea753039c0813bbf65a541e909936358fcf5f0b857
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/b3577b0af9b1a70e7f76.asset
+    sha256: 93957b8a8d05b122c9892af169483aec79c842b4671accb8d4df43884a26b148
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/b3577b0af9b1a70e7f76.asset.meta
+    sha256: 70d4133443afcc51bc47d6691e5fb24fc19e62b33e6911068942c2ee1bf50205
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/b4cb7799a05eea33c75a.asset
+    sha256: db62bebe0e042ea1e9488424c07d2c1f0c35e581524cd5546e3d168f384bc8c3
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/b4cb7799a05eea33c75a.asset.meta
+    sha256: d3f66f654973d5043599782d941427a92437a5d75784c6bcd57477b0dbe53adf
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/b5327c205660feef18c1.asset
+    sha256: 0692d45ab2077d5dd5b603650f2dece8b064d3e0e111e52b0c0d8dbae464a2c6
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/b5327c205660feef18c1.asset.meta
+    sha256: 02f19caa6d9b3f35d63fbfcec84ecbca067ac2624230f1c4881bc00bfa4b876d
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/b954a86e1a252a965f15.asset
+    sha256: d9a596971ebe1859b96fa2551ae7abf4b5c163b22a7ca874cc924081b3cf6b21
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/b954a86e1a252a965f15.asset.meta
+    sha256: aa7040e9b95aaa86687806a82ae674816a35465a44ac1ef8d1cf73a837596d83
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/baf643da7f3753ccfa46.asset
+    sha256: 491651ce0244b7a5f50bb89a266b753109411a7906be6f1b7150e749f8aa9fb9
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/baf643da7f3753ccfa46.asset.meta
+    sha256: ad8ee5121b1d98a8fe71ce2c8dbabfd3ed13542ac970b6266dd85258f82d8c66
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/bbe6d32b58a1f1d4689e.asset
+    sha256: 99c706f71a10f28e59b4dd628a03eeda88f743f2de10cfb6b8474ea7f1228f57
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/bbe6d32b58a1f1d4689e.asset.meta
+    sha256: 9912558644e377cc723cdcc7a895b124f50959757d0a6591adf6962d2e10bc2e
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/bc4d4247f520b2244031.asset
+    sha256: 972a46e6dd671606cf123aec993892bf9d52eb3819dea2f42b367d4ea03a10d6
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/bc4d4247f520b2244031.asset.meta
+    sha256: e7f957f4ce4f4c25454704d7fe587ab9cc3ae5a9d5f9b7cfc711e49e55dc5bf0
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/bf9dc7f4b0e9b3fa0370.asset
+    sha256: 4d5e8420f6ecc2e29f177a94c95e673a89879e7030cb58ebcad9c20d15ec702a
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/bf9dc7f4b0e9b3fa0370.asset.meta
+    sha256: c7c28acb53de850a4234080f261a7afbabdb89f6c54e50247c68dc05ffb2bc92
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/c24fcf9f9d896a6ead68.asset
+    sha256: 8d75628f09cc3f52640c22b94590c48ec89daa944838b4ab2e93a807bf4801fe
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/c24fcf9f9d896a6ead68.asset.meta
+    sha256: cfae95f56327e1cf5e1f58fa8b4731ac606cb0c322494b289dad81ca1f2fd635
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/c4f6f2eef61b23cd0377.asset
+    sha256: b1533c0b9b2a876fad9d291a8a9b584e7ee0eb81c12d911c358bfcff516b81eb
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/c4f6f2eef61b23cd0377.asset.meta
+    sha256: 8597997ae5d6ab9784f9887bfdbcddc28270d5e5aca19188199a15e25615431f
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/c91608514f104440bc4e.asset
+    sha256: d93e28df305f53d8fce96ea2871c6ea435f08a15568dd3021d7b62867387f48e
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/c91608514f104440bc4e.asset.meta
+    sha256: 5be54c1015550ff13846e6f79b57cd8c592ca00e7daebbd6125f3fd3705771a6
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/cb6c7089bdb46528767b.asset
+    sha256: dcfbe80dff913b1be6de847eb3869d3adac4c847e67dc1bb023fb2a7586293cf
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/cb6c7089bdb46528767b.asset.meta
+    sha256: f32d44d037190dfb0f0662fa2b01d0e08b53cff6d5b6012565ffba8e87580b89
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/cd6591789b5d13f90829.asset
+    sha256: 27eb352bd86fdbb6d136910bfc173e28f2c707dd1615d7923d984ae747c9cbae
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/cd6591789b5d13f90829.asset.meta
+    sha256: 36a2f5168457061ad1b04c0e33500fbc5fb0a0acf6b9101b99a6d2200d5bf9cc
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_1c736f98243380345cf3.asset
+    sha256: ca90bae6d41fcdf24614dc99dd19af7281818f4cc12d836d1d078fb0d24b1c07
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_1c736f98243380345cf3.asset.meta
+    sha256: 2e4b4bd3af3e5d734567cfb1c3a3833ebc9fb8ca44db003efc15e7b68a29efaf
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_1d3a14bfe28c017732a2.asset
+    sha256: 19bb19eb16d5b72875a6bc1564e2b556fae26f18e8555f9081d88ea6fdb0ec10
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_1d3a14bfe28c017732a2.asset.meta
+    sha256: dd04b9f0ebac1cb05f94814a544565f6880d10ac94dcd52169d4c04815d21e00
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_1fa1c3efcf8dbc550864.asset
+    sha256: 13a31e8a3815a0e4cceb445184bcd0d6e1c72a77ceb370592d78760593634a61
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_1fa1c3efcf8dbc550864.asset.meta
+    sha256: d8fa7157b5413725d6b276abed5a469b55fa13c8e044f68a806fbff1ea8501d7
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_5c6958acdf8eb161d20c.asset
+    sha256: d2bdacf71993b21c6fbed889c1800622778c68523a5ae1773281ca8f57188741
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_5c6958acdf8eb161d20c.asset.meta
+    sha256: f84792f0a8eed0e16e674829e9c2bcb61fcb7e7d674d831bed689a43ee931f6e
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_5fcc522031ab7e31eb4c.asset
+    sha256: 0eadc2eb00ca42114ee358e76dbd403ea37f5a459a680970f528ad2e5a14710f
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_5fcc522031ab7e31eb4c.asset.meta
+    sha256: 3aa1174cd052553357bf41e1c1c1deef079fd62c2fb85fd6bee2bcac840c5d19
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_81d5f8034a8d7e7fc8b7.asset
+    sha256: abca0bb54b940585f51bbbd85fe05f53cabee3d2de6a577e97afd6b56a1dc873
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_81d5f8034a8d7e7fc8b7.asset.meta
+    sha256: 32df91ada84b4d7ae8d72d084d691d7a9ec4a9c0c2d37d1eb01cf89d88ce0d15
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_9287e3713fc31f065a58.asset
+    sha256: 256626e1860e362a9f26e3be820a129beee442407249305d0f0818496e9fb8c7
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_9287e3713fc31f065a58.asset.meta
+    sha256: 2fefc733b609e4b7c5d7401839b9d497b7a4ac84f000ed151f9caf2dde314218
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_9a4a0f7001a947dfaf15.asset
+    sha256: 60bd07a3c442826bf829c69659dd9d83ce44a65e6ad104df5f144bc50f678408
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_9a4a0f7001a947dfaf15.asset.meta
+    sha256: b9c2654d0b2d7c06cb88d0d8109ccd9feedf8a34799d8be3cb49c3dd8d2ac23a
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_a4f068d9b24182e19bbb.asset
+    sha256: 93b7e93260077d826fdd102424739230f4b93ad2849828ef828b46c242f1ef3f
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_a4f068d9b24182e19bbb.asset.meta
+    sha256: 17a49daba15b5ddd8b3fa4f9b4ee82fb8af7bca28c5e90893ca32aa571b78258
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_a7e97c96a3ddbcb304d1.asset
+    sha256: 6768191e02e9bf8f30a31982d97224cd6bbb1df303a47ed0dbbd5f7e067e9112
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_a7e97c96a3ddbcb304d1.asset.meta
+    sha256: ecda03e4eb2c9b94e2fe600fb201d0d99ef69c3e9eea89fa475f7eb37796ecec
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_ae08d37081b82b8f8ac9.asset
+    sha256: 1e971b180b967d9fa7ad62eb8d08af99a20e68f399a07ad1edd192d6b509e6c4
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_ae08d37081b82b8f8ac9.asset.meta
+    sha256: 8db3af13918f26739511cde82bb9ef71ab136f59f7761b2744bb61ea39f6e2d1
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_b1e08545f695bd855516.asset
+    sha256: 06b35a2ba2e8a562251dd727bf31e30bb59fbfbdc1f8c1be3f24ff275286830a
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_b1e08545f695bd855516.asset.meta
+    sha256: ebefe786229a8e1b44b2ebefe99a58d22407eed1ab4cfb1dde9deb10d23e7f88
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_bb9e7fcf49c2671ab1a9.asset
+    sha256: 38d3fb69905f96e71635f8544aa38953dfb1927cd8d81ae0cdc78625b16a1450
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_bb9e7fcf49c2671ab1a9.asset.meta
+    sha256: 49629661e6d82af179a9941e18c3a34d4ebaf3e43cb041f7540f742dcc9d1ca1
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_c988daf3ca38628d6f2b.asset
+    sha256: 8e466025d8d681e1173465c9eaab545d923a780eb579a598e77a075fc4b2f708
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_c988daf3ca38628d6f2b.asset.meta
+    sha256: 277441510d24ffee96898e86437bd82de261f289b7247514435cbe3bd02c759c
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_d6f3b58952e7f5a26520.asset
+    sha256: 75886322ec436d7c3a4356a357fbcd8dbf250573524570c3c3d661a369e3ebd0
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/collision_d6f3b58952e7f5a26520.asset.meta
+    sha256: 909881f5db2f835b8c6b4a0fcdcf38c1e6b63ace3261c29af9c2a269ca76f6c9
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d00f8588889925c2db68.asset
+    sha256: 37da9d8433c51a97935489e4046eb603dc66606a76c1f25ddc3de6f24d4f9d57
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d00f8588889925c2db68.asset.meta
+    sha256: dde685d6d88584547e5c12706fe3d2e8ffae340c74699edf41135bfe43e19fb2
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d0d11d8593c366e78ee4.asset
+    sha256: 6a232df880f630b9ab658000c571dc82e35e196fc2c40ae38ffa8d08b614de9a
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d0d11d8593c366e78ee4.asset.meta
+    sha256: bc1a54f98a6fd8d2adaee1f5262aa6af0fa85a8d1092bb1837460f332f2b0991
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d13791f56c3833b830a5.asset
+    sha256: fd60d0711f7c935488b6e79044e0ed8abbb0811ac1addbf22ab75cfb1c3ade3b
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d13791f56c3833b830a5.asset.meta
+    sha256: 34686f198f3e65dc70d02c1b7701c6ba30930a156285f642dfdb6ab320c816ab
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d3fcf36faa6e38c14ac7.asset
+    sha256: 77dd4b5aefcd19a99ac5ac8c1cec2feb8d0e18b9111819d72315bbbf941f4962
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d3fcf36faa6e38c14ac7.asset.meta
+    sha256: 942fd0d9c70a7bb106f129021d71d29c5a4522ff25ad03e548679bae0550e53a
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d574c2cf0b42621bbfa5.asset
+    sha256: c69d763e65a9dfa50961f2c1340e4b6253bb114e559c7939bbaeb9cbf13869a7
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d574c2cf0b42621bbfa5.asset.meta
+    sha256: 369a60de9a646697dd0f93c09199f81eb39ef073247f7f1357456f6d51e598f9
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d5d86be76a468001f2af.asset
+    sha256: eb692f710c37f4611d910bf0287b0801e43fc929989cfbc8b1f8632339a63f8a
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d5d86be76a468001f2af.asset.meta
+    sha256: 6e5e71bc2bf63627953ad43c3fa33b4e4e37a8d5309c667742cd99576f0236a0
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d6118bb907983e1a2d59.asset
+    sha256: 73c324e4f3cef1c14298cbf0387d8e4fadbbb8eba50be48c20852407fa7b6349
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d6118bb907983e1a2d59.asset.meta
+    sha256: 74ed367d2f8b5402bab86f4c041a22a4f4daee6f04382cf0abfaa51c69c95290
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d67fb299860d6cda8baa.asset
+    sha256: 4e844ef494de3b26f392cd42b66c12f02830bb20a3e99ace068fd5d7ee6eafbc
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d67fb299860d6cda8baa.asset.meta
+    sha256: 81615c1f088768ddb23de61699d8dd2529be7f9afde279c8c4527aa699b6e7c4
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d685cf991b6ad05a08a1.asset
+    sha256: b91b70f22007c0a9013bfa864f534ef16bccb3c2eb794f0c786e52dcb6d9fd50
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d685cf991b6ad05a08a1.asset.meta
+    sha256: 9ef95ee538fe3a52a9c2cf2863f63a887473fb641448a1d282fe20f454de99ac
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d697710ec248002f09c3.asset
+    sha256: 5ae5633e01a116ac29fb9bb3fa118e21b41c4cb85ce5266ef3c08e39af1ad4a5
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d697710ec248002f09c3.asset.meta
+    sha256: 1ca5e0b346e7dd76bab661c84a009166226b8ca7ca030cec9a8ddad63788f1b4
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d8d970c9754d73040949.asset
+    sha256: 56206ec87988319b45e008c88b4921b127e9cce060c4c2e9f9aa07f56a7e3105
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d8d970c9754d73040949.asset.meta
+    sha256: 7d491d11bb8be316fac155b5b8650338985eef1febea9f4ef3d5599e80de7960
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d95b1673cdc0c833ae20.asset
+    sha256: e804b77c1920a92861a28df5f265c21759519e5252b3306c619ebf47cf9d0e84
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d95b1673cdc0c833ae20.asset.meta
+    sha256: 3e2b054c4b38598181af6192b15aea5e7db671ca59d943e1e71bc610f0334d90
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d9adc8ccd40dbbd2a337.asset
+    sha256: aa82d298c82b8e67a2877558932d56f7d0c6ab60221ecd29d8fca6889be0344d
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/d9adc8ccd40dbbd2a337.asset.meta
+    sha256: 866c10e7844323c450257e1f62fcdbb788a042e8954c26d190c5da5972d3a469
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/da0d4dea4e6ebf12f3d4.asset
+    sha256: fe6d131446b78feaade7a7be759c5794eed20a58cc6e29edd8e852f03a836790
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/da0d4dea4e6ebf12f3d4.asset.meta
+    sha256: 072fdeefcc926f8725136a9f2bc14b21a1b28fe6987be2a9a4a1c5bbafd625bf
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/e0af1c7a754c492e5504.asset
+    sha256: 06cf0e2f90c0219500a0545189fd68ee2ea36debe14ed8df3419ad767f4c5b41
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/e0af1c7a754c492e5504.asset.meta
+    sha256: 1ce37cdc57fe3826291cc30d68eefd0893934caaf010c44cbac9f375a5622658
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/e1238abd614e6e14ca9c.asset
+    sha256: 821e6922c6afcf1a9e17dd9159f3935752a7941e8f49ad1a4808533a1add1925
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/e1238abd614e6e14ca9c.asset.meta
+    sha256: 5fbc29790df8d99574b7eff52c981983917c9541c4b0ff781986ac1b1375e0d0
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/e4d5c789ccb02c10b57d.asset
+    sha256: ea2fcced3a06963ef9d5b976308ab2782678ea45eaef810d777705695aee72c0
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/e4d5c789ccb02c10b57d.asset.meta
+    sha256: 0695c56d6119f5026cb8ea08cada0c887504d43550d43d86b17d2627e72fc41f
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/e67cdade8d952be0c21b.asset
+    sha256: 97889a25fcce9febe6a67f3094655a84467503c6fb94c6226ec70bec264afa91
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/e67cdade8d952be0c21b.asset.meta
+    sha256: 7a39890894677d071fe24d17e533062ac9921433e3412a8fb160b69ee679ee40
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/e6e65f0e0b4cfc808973.asset
+    sha256: a1e44b278b5910422ee52fd5580f62fffd3f8809861d608afe7be409c29ab36c
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/e6e65f0e0b4cfc808973.asset.meta
+    sha256: fc179de6dffec9f257e7283a37fe434996284944e3587105cdf606a00babef5b
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/e942fd096ab1464d70d9.asset
+    sha256: aed3e69d68ca98ef67868d236ae7b007b9ea6c7548cb50f76e3c9e59c74123fc
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/e942fd096ab1464d70d9.asset.meta
+    sha256: 49669969b8b71726ac899b4f6e611f8b13c29c10eca9178b3e9ab772511ea9f5
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/ec64e07c6e268b8a1218.asset
+    sha256: d179d4e36920297cb352b2d4b1adfa088ffa7824b4582e7f10f26a96e506d203
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/ec64e07c6e268b8a1218.asset.meta
+    sha256: 8aa88f85cac472129968276f759707723109977f6b7d1820acc7b865bd6dc171
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/edab0d6366fc93c4bd1b.asset
+    sha256: 8f9e8240730e9c4e3441d7a969415946a5485579ce94b121c69ebbc01df778d3
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/edab0d6366fc93c4bd1b.asset.meta
+    sha256: 5ad69a957e5290ca4118539b7fa3b0158ba37f7536506cb0e9e590b11d0b5339
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/ee0f658fe695c1a806c1.asset
+    sha256: e7940ef7d72a346b5d19534c9e78e0c2d606ec6b6cb1e12c026c0c866c9459e1
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/ee0f658fe695c1a806c1.asset.meta
+    sha256: 5d3583eb1e8711637268231f5f6e3ea80246e55fad48b6f73f8a4c136bfb01b1
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/f29574c9c19bb53130ad.asset
+    sha256: e4dcaeb1d13c29a5d56ed92af51d43e9e092f3a5ab3dd44d8f1db445700e8906
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/f29574c9c19bb53130ad.asset.meta
+    sha256: b75a8bba7e9c866dc3bd6c0b0b4de349b89922e9ccd66d6e61803329748f8821
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/f2ab131a34b850adc59f.asset
+    sha256: 20a76db8b4c24da747573144d7ec6776ea168f22b11226b889062890ea37235c
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/f2ab131a34b850adc59f.asset.meta
+    sha256: df37c1aabc7c98129ba37b7971ca794120aedd1316be771df708abf6e33fa5ae
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/f521dd4980027ca2c777.asset
+    sha256: c935033507f42a26234ddd2605849c990eece74ea8a0525a48c32e40ad195180
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/f521dd4980027ca2c777.asset.meta
+    sha256: e554c580789945b9065e7a296cb9cd3236ecfe443979a0feff37e747f35e427c
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/fa30fc37c0b714ab99d9.asset
+    sha256: 094b243115e21636278309f5b18026c9c18004b1799687061c6f337c97301d80
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/Meshes/fa30fc37c0b714ab99d9.asset.meta
+    sha256: 184a720110ab325d90f2f7cbe0ccd1e0e58a1c238a81278880ef98b33734a55a
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/source.caelmor.json
+    sha256: c3af2cd417d19ece858dab83b9d6de70f3ea47f560980a10bf3c7da48cb9367b
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/source.caelmor.json.meta
+    sha256: f5426450955d3ddbce622cb35d04e2283132b45213a0eb79dc690c0ab1dfc4f9
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/thornfell_gatehouse.prefab
+    sha256: 22b750dd8d4d538853029f4d5c091f457b9535acf45ffc412e95eac1bfee4ad0
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/thornfell_gatehouse.prefab.meta
+    sha256: 29ad2f625aaecc5d91938d83daada0d98fa9f6bdc9768423e5852431f7b8959d
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/visual.glb
+    sha256: ea9b235fe2324bca6aceb309f68be6d3a36ea5208e5d2796220acaa0ee9a2941
+  - path: Assets/_Project/World/Architecture/Generated/thornfell_gatehouse/visual.glb.meta
+    sha256: 05ddc25430df77211bf736450f01ab31ce13fda9872e6cfcbe1dabecdbc8d8db
+  - path: Assets/_Project/World/Architecture/Shared/Materials/05185b1aeb5e27472109a4d7bbb8d3b7e7222b73510f3afc851f81ba3be1eff2.mat
+    sha256: ba6412c9d07bfd05baad0bc81920ca7131eee0d23563511a997413660c8ad61b
+  - path: Assets/_Project/World/Architecture/Shared/Materials/05185b1aeb5e27472109a4d7bbb8d3b7e7222b73510f3afc851f81ba3be1eff2.mat.meta
+    sha256: 113321c65eacd9b1e9c9b90fdf6cc98f7fcb64e5779521ddf20701399ca23c50
+  - path: Assets/_Project/World/Architecture/Shared/Materials/1165338d5ea9ae428e1bd648d71ba9cd7d3094dfbf5863cad9335910370d0cb3.mat
+    sha256: 8fa6467f6281cf7110eb9b3d1e732a41d343fb6918b3bfb0af5fd3e4aa364f94
+  - path: Assets/_Project/World/Architecture/Shared/Materials/1165338d5ea9ae428e1bd648d71ba9cd7d3094dfbf5863cad9335910370d0cb3.mat.meta
+    sha256: 059405ea01f1df8433984134bee124a852b493f8e5c5b6832f9f55ba2cb31fd2
+  - path: Assets/_Project/World/Architecture/Shared/Materials/5135773a6cac769f36b134dcfa0727cf407100b5e45c82ace28fa768930642b7.mat
+    sha256: b8086afa75d93392a68ed59085a2162988cca627eeb8cb50d67998b263b2334c
+  - path: Assets/_Project/World/Architecture/Shared/Materials/5135773a6cac769f36b134dcfa0727cf407100b5e45c82ace28fa768930642b7.mat.meta
+    sha256: 7bea27a9ce782391c6600dabb8fcdd5083629e8313a64bec34e829ed2ef05876
+  - path: Assets/_Project/World/Architecture/Shared/Materials/65ef2b9d01c8511408a4422d330fba82ff7e7981a2cb17a8c4836a2f7d5e9b3f.mat
+    sha256: 2fd04592d5e24bf0b0ad009d8dc18374407d0e7fedca5c1fa9eb5e2ed515aa5c
+  - path: Assets/_Project/World/Architecture/Shared/Materials/65ef2b9d01c8511408a4422d330fba82ff7e7981a2cb17a8c4836a2f7d5e9b3f.mat.meta
+    sha256: 576dd4b5b30d68a1704db541e15e75b9940be69ad7f64b108691c4de4a62e5f5
+  - path: Assets/_Project/World/Architecture/Shared/Materials/9268b8cea07e46faf7a925a18223ea26bd32defe0e4b8be101c9693d27a131d9.mat
+    sha256: 8624080c57c2c16e1476747d320e0101bd10be6be24bd2e3bf5f9b7f20633572
+  - path: Assets/_Project/World/Architecture/Shared/Materials/9268b8cea07e46faf7a925a18223ea26bd32defe0e4b8be101c9693d27a131d9.mat.meta
+    sha256: 9fa79b055691e3a414312642fea29d70708f7a2c2a4cdf2f53ca8199317c334c
+  - path: Assets/_Project/World/Architecture/Shared/Materials/aa822591b173b3ec8dc10ac82cd93a5d61b5b83998a40923ce27e28620e1eff4.mat
+    sha256: c26ec69c1415f7c07ceffce3fd3ab533f82a8b6c8e3db554e898d85def586b5b
+  - path: Assets/_Project/World/Architecture/Shared/Materials/aa822591b173b3ec8dc10ac82cd93a5d61b5b83998a40923ce27e28620e1eff4.mat.meta
+    sha256: 46f817db4691b237e99abdcd58337bca29a8a6df17d32cbdcbebf142d07d6a35
+  - path: Assets/_Project/World/Architecture/Shared/Materials/ae6c466ef7cc0ba17dc1b04dac9486ad460ff802ec94b4776eff01bfbb8e81d9.mat
+    sha256: bc35f7800b8cf4590659b4bb79dbb440d406912af4c989632cb252002271d8bb
+  - path: Assets/_Project/World/Architecture/Shared/Materials/ae6c466ef7cc0ba17dc1b04dac9486ad460ff802ec94b4776eff01bfbb8e81d9.mat.meta
+    sha256: 281510d559b0253855b77f86325509600f2a3f1861914c41b8695649e4620a77
+  - path: Assets/_Project/World/Architecture/Shared/Materials/b17be6bede60320057b3e24201672baf79deeaabc6a4c4929b952bdd4054a49d.mat
+    sha256: a359f4582f4db9c8e440b63e67f11df6e28e095e775c26a72acff8fad4ccf658
+  - path: Assets/_Project/World/Architecture/Shared/Materials/b17be6bede60320057b3e24201672baf79deeaabc6a4c4929b952bdd4054a49d.mat.meta
+    sha256: 26ed76d8d096a789e21da1712a03a479544c4700ac8574a35014a98dbefa96fb
+  - path: Assets/_Project/World/Architecture/Shared/Materials/d2ad5dae9590032f9943ac7f702e825e6022c6c0cac9d9894167851bc5ca9a1e.mat
+    sha256: e11b9ddc5d2b70bccb155840710cf2a1917560c71f4abcfc0d9a8b20ec59671a
+  - path: Assets/_Project/World/Architecture/Shared/Materials/d2ad5dae9590032f9943ac7f702e825e6022c6c0cac9d9894167851bc5ca9a1e.mat.meta
+    sha256: 92842b7e28fdfd104c4c9ffeec645182ad9252a2eb0a47aea913be160cbabb24
+  - path: Assets/_Project/World/Architecture/Shared/Materials/f68fa923d20768316677773f7681081bea16cedb4646081fa4061ffc567bb1a3.mat
+    sha256: 2453606c51246db5ecf649dfcefa40c1f808c38160483ddb3c99f6d33bfe6c69
+  - path: Assets/_Project/World/Architecture/Shared/Materials/f68fa923d20768316677773f7681081bea16cedb4646081fa4061ffc567bb1a3.mat.meta
+    sha256: 2f6e25ffcb707297f132e32bfeb04c36e2fd7a66c21ae13444e65c4bc2af5d65
+  - path: Assets/_Project/World/Architecture/Shared/Textures/2e09d6be5ee56c76c36bed06b5d08c4374db85e8d55b62762a7dd52545e7587a.png
+    sha256: 90d7ec8ba02e29308ba6fb23fe41b57e12a34ab296895072c252ca627a498afc
+  - path: Assets/_Project/World/Architecture/Shared/Textures/2e09d6be5ee56c76c36bed06b5d08c4374db85e8d55b62762a7dd52545e7587a.png.meta
+    sha256: 982d92f2b31cab32a7051054bb64edd6d7af97389592c75c6935c8e1d064af86
+  - path: Assets/_Project/World/Architecture/Shared/Textures/4714a23b95f7370cba1fa1c85c3e2dccb8ba1cd77bb134dd5799e9aa66c8ae36.png
+    sha256: 8a5d2a10c41cc52538c6987c6edd65f115b582057ca324b6f910f260f695abfb
+  - path: Assets/_Project/World/Architecture/Shared/Textures/4714a23b95f7370cba1fa1c85c3e2dccb8ba1cd77bb134dd5799e9aa66c8ae36.png.meta
+    sha256: 5dc4c18ce7f9b616223ab4a08b47cb5ab21f917e76204b2528c2f5e1c1e2798f
+  - path: Assets/_Project/World/Architecture/Shared/Textures/6cebf0a10a615b551fac5c3e5593bdc829efbfae3f957931e4d5c8b9c778990f.png
+    sha256: d72c9655635eb02cadc5e6974004f727e11a878535dd88a22d6b28c281ada093
+  - path: Assets/_Project/World/Architecture/Shared/Textures/6cebf0a10a615b551fac5c3e5593bdc829efbfae3f957931e4d5c8b9c778990f.png.meta
+    sha256: 24d840c44edffce94543987a5cdf71781a7520aa08ecdd63fa27ae410bd7379b
+  - path: Assets/_Project/World/Architecture/Shared/Textures/9a8dff9de0f5dec70db11c58534698d57e238d97851711bf86e0c29a2f329c77.png
+    sha256: 5f8d9e799faf4e9109c6ebde02ce7c1fd5e9957b273c10237b40599c5c3be577
+  - path: Assets/_Project/World/Architecture/Shared/Textures/9a8dff9de0f5dec70db11c58534698d57e238d97851711bf86e0c29a2f329c77.png.meta
+    sha256: 7643e31915a3643caee94acd129b4955859451f398c74f0bd8699fee14de85df
+  - path: Assets/_Project/World/Architecture/Shared/Textures/a0dc5e279012f4ef424d5bf4e9baf3b9b742af715f3bc34652ef3211607b7ae1.png
+    sha256: 2f964b2b4237e3e7f572544fb7d08b08b871d0a56be76a06300bed51e67403a2
+  - path: Assets/_Project/World/Architecture/Shared/Textures/a0dc5e279012f4ef424d5bf4e9baf3b9b742af715f3bc34652ef3211607b7ae1.png.meta
+    sha256: f19a0cf347f635a8153e3da46b7a9bb4f35dbf977b43217ccf66d0a053b3957a
+  - path: Assets/_Project/World/Architecture/Shared/Textures/a5c7b484126b75ac80afce045ed97c0ac24206b901a6a7c6c46c39c72a89b66d.png
+    sha256: 79d9749e489635c11a17d3f180206974efc8ed9a4869ed67d964da2af0e988d4
+  - path: Assets/_Project/World/Architecture/Shared/Textures/a5c7b484126b75ac80afce045ed97c0ac24206b901a6a7c6c46c39c72a89b66d.png.meta
+    sha256: 95cbf235a01dc63f6113752340e5c790fb39bbe207ec5b5c7fedb225d9939fb1
+  - path: Assets/_Project/World/Architecture/Shared/Textures/b43cbb05059126ca83ca4127969994d4cef69666083bbd187eeb39e9e4358da8.png
+    sha256: 631ffd770c3658d88cd2319478f61b63ad01c015d6e8c8bae33783e1e499357b
+  - path: Assets/_Project/World/Architecture/Shared/Textures/b43cbb05059126ca83ca4127969994d4cef69666083bbd187eeb39e9e4358da8.png.meta
+    sha256: 96c26d7e1373e42e924b33d7c05b7c0703462753496ad48cd861efa91ef18d34
+  - path: Assets/_Project/World/Architecture/Shared/Textures/d4f634fca5408be6d8ff488766100ee12dfdb85c6903875a5a52db3be1501c14.png
+    sha256: 2e2f2785fe22ea47a79ef9b20a51c4908aa16a8e1eff75315e618b06bdd877d7
+  - path: Assets/_Project/World/Architecture/Shared/Textures/d4f634fca5408be6d8ff488766100ee12dfdb85c6903875a5a52db3be1501c14.png.meta
+    sha256: 198ad4378db204edda96b9bc82e4102eb0467c4dc355997b4791f8a3fadddbf0
+  - path: Assets/_Project/World/Architecture/Shared/Textures/ebf50d9435eeb6677c5cf78087cc5a426cea6cb7552681d21ca9c9c80f773dad.png
+    sha256: d1a51516ef0f10e08d9ecdffe4bf64baf01d91afdccc702c822078ef513a20c7
+  - path: Assets/_Project/World/Architecture/Shared/Textures/ebf50d9435eeb6677c5cf78087cc5a426cea6cb7552681d21ca9c9c80f773dad.png.meta
+    sha256: c8c9310b2048886d5be86004c961af97d1d3028a9fb63bbbded7fdc16f6c9b1e

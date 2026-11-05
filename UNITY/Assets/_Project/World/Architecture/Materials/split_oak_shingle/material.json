@@ -1,0 +1,27 @@
+{
+  "color_space": "color.png: sRGB; normal and scalar/packed maps: linear",
+  "generated_files_sha256": {
+    "color.png": "c48c597830f58047f34c6ececfe20e2c1468e4bfe896e55f5f8a8c6167d918af",
+    "metallic.png": "d67543f16c64deda1b71d24c0da5e38b3225186a801db0d9bb17ae7bcbfad8d2",
+    "metallic_smoothness.png": "6c695a77a1cdaffd843bc92f7d0cb0a8a896bf3b9e7a1880e759f3a1f521e77d",
+    "normal.png": "e137447889adb1af0aad0e78ddc4ea471224f5ded33c0a67c4cfb11ecc221913",
+    "roughness.png": "c4bb1c4dc087402cea4284aa9d7a43dcc7b3b01566abd40e05a9418ec2a7905c"
+  },
+  "id": "split_oak_shingle",
+  "normal_space": "tangent +Y",
+  "packing": "metallic_smoothness.png R=metallic, G=B=0, A=1-roughness; linear UNorm8",
+  "resolution": [
+    512,
+    512
+  ],
+  "rights": "Original Caelmor procedural grayscale baseline and PBR companions; see MEDIA/Materials/PRODUCTION_REPORT.md.",
+  "scale_m": [
+    2,
+    1
+  ],
+  "source_master_sha256": "b25035bccd824d49e06621039dccfa72c89cbe9be3839afc4ec8a881a35dd853",
+  "source_metadata_sha256": "1d913b91ed996ac11716a93f86f49e38191dad9a5978368663e63d09c391f68f",
+  "source_package": "MEDIA/Materials/packages/split_oak_shingle.zip",
+  "source_package_sha256": "658982fc2169cf3f262d321bf254d65b12fc3cd9907828a8aa13a487e175d2b2",
+  "usage": "Explicit artist binding only; requires source metric UV0. No generator-to-library mapping is inferred."
+}

@@ -1,0 +1,118 @@
+fileFormatVersion: 2
+guid: e599c171681a1564a9e5ffa795a2dec6
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 715df9372183c47e389bb6e19fbc3b52, type: 3}
+  editorImportSettings:
+    generateSecondaryUVSet: 0
+  importSettings:
+    nodeNameMethod: 1
+    animationMethod: 2
+    generateMipMaps: 1
+    texturesReadable: 0
+    defaultMinFilterMode: 9729
+    defaultMagFilterMode: 9729
+    anisotropicFilterLevel: 1
+  instantiationSettings:
+    mask: -1
+    layer: 0
+    skinUpdateWhenOffscreen: 1
+    lightIntensityFactor: 1
+    sceneObjectCreation: 1
+  assetDependencies:
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\afa95a1b96043e4573b8d4cfd63d7606a7da873b40520e1e359ee6febcd94e59.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\afa95a1b96043e4573b8d4cfd63d7606a7da873b40520e1e359ee6febcd94e59.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\4ee91f26dfafb65a5ec72f606825b1b7a30c3f8f7d36e79bd23e47845b4c1004.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\4ee91f26dfafb65a5ec72f606825b1b7a30c3f8f7d36e79bd23e47845b4c1004.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\23a79b3fb6181a55420f2d46e917d3870df3ca3a413e99c26a206450a0f5c749.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\23a79b3fb6181a55420f2d46e917d3870df3ca3a413e99c26a206450a0f5c749.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\9a7010c6440e70cf480816b0c2b3932e1d3f5e3c627342e97c1cdb355ae004a3.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\9a7010c6440e70cf480816b0c2b3932e1d3f5e3c627342e97c1cdb355ae004a3.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\43e2cfa41a9bfe63d2da7f7a4f7802279d5caf921bf0e8b37b61cfc7f54b461f.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\43e2cfa41a9bfe63d2da7f7a4f7802279d5caf921bf0e8b37b61cfc7f54b461f.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\bc63fa7769a6322ea3d8d045b6b9780849d532c7ab3141d1975e2f59489cdbfb.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\bc63fa7769a6322ea3d8d045b6b9780849d532c7ab3141d1975e2f59489cdbfb.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\9a7010c6440e70cf480816b0c2b3932e1d3f5e3c627342e97c1cdb355ae004a3.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\9a7010c6440e70cf480816b0c2b3932e1d3f5e3c627342e97c1cdb355ae004a3.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\63845cdd6261b840b6fb1567555e2f20406e65b609400329f96bcd634dc6a531.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\63845cdd6261b840b6fb1567555e2f20406e65b609400329f96bcd634dc6a531.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\197ccce1a3b7cbde67099b21bbafa1041d19cfc19fd38fb4dc07505fbdbf886c.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\197ccce1a3b7cbde67099b21bbafa1041d19cfc19fd38fb4dc07505fbdbf886c.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\9a7010c6440e70cf480816b0c2b3932e1d3f5e3c627342e97c1cdb355ae004a3.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\9a7010c6440e70cf480816b0c2b3932e1d3f5e3c627342e97c1cdb355ae004a3.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\64392c2b6c6af6329305191b084324f2de784817eb488ecb488a3e63c5868a31.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\64392c2b6c6af6329305191b084324f2de784817eb488ecb488a3e63c5868a31.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\d8566c7520e1ad8d806311f1b7229331c67ce369c3d44bd38d6646d905e88e2d.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\d8566c7520e1ad8d806311f1b7229331c67ce369c3d44bd38d6646d905e88e2d.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\d2b8fceedb7a85894fd60519bb5464c7db0b62d8d7c88de90fccaec35b63e9b1.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\d2b8fceedb7a85894fd60519bb5464c7db0b62d8d7c88de90fccaec35b63e9b1.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\bb9861eb43e62d0a30e4b985ccfff18647cf578b6cb41fe38f9b0620a52d9f5c.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\bb9861eb43e62d0a30e4b985ccfff18647cf578b6cb41fe38f9b0620a52d9f5c.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\780212f13530b974b25b37ce297cf6c32358fb87228bdbde1bc9b8357209cb72.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\780212f13530b974b25b37ce297cf6c32358fb87228bdbde1bc9b8357209cb72.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\d2b8fceedb7a85894fd60519bb5464c7db0b62d8d7c88de90fccaec35b63e9b1.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\d2b8fceedb7a85894fd60519bb5464c7db0b62d8d7c88de90fccaec35b63e9b1.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\eba7be89155449e664e8f5aca8b2cc656667775d0221a639c4e60871c4c98edd.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\eba7be89155449e664e8f5aca8b2cc656667775d0221a639c4e60871c4c98edd.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\efe8c6d4014b37c5287f8b4304e259d4bad38d7097b8c5caaddd4836b7000485.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\efe8c6d4014b37c5287f8b4304e259d4bad38d7097b8c5caaddd4836b7000485.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\d2b8fceedb7a85894fd60519bb5464c7db0b62d8d7c88de90fccaec35b63e9b1.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\d2b8fceedb7a85894fd60519bb5464c7db0b62d8d7c88de90fccaec35b63e9b1.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\fd43316480ae1fd9807ac5805ad9a3b2d5faa3bb1513a77d53eceb464bca641d.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\fd43316480ae1fd9807ac5805ad9a3b2d5faa3bb1513a77d53eceb464bca641d.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\1d0c8e47b27e36ac19130d1385080fb33d14312a626b736919dc7be22d9644fc.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\1d0c8e47b27e36ac19130d1385080fb33d14312a626b736919dc7be22d9644fc.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\5fa20a85cb651fec3892f827bb6a8e0c853e898929c38afedc192db2e405e369.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\5fa20a85cb651fec3892f827bb6a8e0c853e898929c38afedc192db2e405e369.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\dce4edd2f7e7ae95e8546bc9f18abd565c4be15fd9316ee3c6756476b99aa494.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\dce4edd2f7e7ae95e8546bc9f18abd565c4be15fd9316ee3c6756476b99aa494.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\7f10d8f36ddcfb984b06d1b458b9230e153829437a7776f8ca7f209789254e71.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\7f10d8f36ddcfb984b06d1b458b9230e153829437a7776f8ca7f209789254e71.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\afa95a1b96043e4573b8d4cfd63d7606a7da873b40520e1e359ee6febcd94e59.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\afa95a1b96043e4573b8d4cfd63d7606a7da873b40520e1e359ee6febcd94e59.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\3fce0551966160b4e1da0393f17999c0cdb1da0652032a29b5498097dcb6b216.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\3fce0551966160b4e1da0393f17999c0cdb1da0652032a29b5498097dcb6b216.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\b1264000d1aaf6ce6520f51a16c8d86bea8ba5c6284d99aa5e2527b7a9e2a84f.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\b1264000d1aaf6ce6520f51a16c8d86bea8ba5c6284d99aa5e2527b7a9e2a84f.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\3fe509ffc41b5b3e47df05c33992ca36e0c1949e8a632f6314d7373837d0ec80.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\3fe509ffc41b5b3e47df05c33992ca36e0c1949e8a632f6314d7373837d0ec80.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\50a816d05dfdf9cf4d887cfbe412a2167d76a380eede265ecc267b5bae38e27b.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\50a816d05dfdf9cf4d887cfbe412a2167d76a380eede265ecc267b5bae38e27b.png
+  - type: 1
+    originalUri: Assets\_Project\World\Architecture\Shared\Textures\4334707c4aa1d8d885160920819cc51015bfec5698e520bf67b0096eb172d2a8.png
+    assetPath: Assets\_Project\World\Architecture\Shared\Textures\4334707c4aa1d8d885160920819cc51015bfec5698e520bf67b0096eb172d2a8.png
+  reportItems: []

@@ -1,0 +1,27 @@
+{
+  "color_space": "color.png: sRGB; normal and scalar/packed maps: linear",
+  "generated_files_sha256": {
+    "color.png": "2d349768e74d58ee61e0046e49b70647043b7bdaa40670a81893d542c3306ca1",
+    "metallic.png": "bb41be9faa8e59fde3b1db72cdb12cbf4136b6e146bda12b67bff766e5569188",
+    "metallic_smoothness.png": "84b8d0a8f26d3552756f10162d572bd82e4cb35570074c7882514eb2d61eb988",
+    "normal.png": "36fad875a8a3124549eb36635882ede40628ee91738c5452c7ffa51ef899c7e5",
+    "roughness.png": "1499bbe2dcb37927e77b3fcf98b04b742efc2ed8828547edba51492814d90eb7"
+  },
+  "id": "forged_iron",
+  "normal_space": "tangent +Y",
+  "packing": "metallic_smoothness.png R=metallic, G=B=0, A=1-roughness; linear UNorm8",
+  "resolution": [
+    512,
+    512
+  ],
+  "rights": "Original Caelmor procedural grayscale baseline and PBR companions; see MEDIA/Materials/PRODUCTION_REPORT.md.",
+  "scale_m": [
+    0.06,
+    0.06
+  ],
+  "source_master_sha256": "8646ea363fc25a32afe1ba119ab91ec86930d411e5709b6b84525062f86e7c89",
+  "source_metadata_sha256": "de19d451812d1a7dade091e37753f6caadbf442e3fe0221377314fde426765d9",
+  "source_package": "MEDIA/Materials/packages/forged_iron.zip",
+  "source_package_sha256": "5892311b455782c613aaeda6dacfa278d25accdbc733428a93cd949ed2ea55fa",
+  "usage": "Explicit artist binding only; requires source metric UV0. No generator-to-library mapping is inferred."
+}

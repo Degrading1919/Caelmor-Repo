@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f46bf0302c8dbc44b4df0e45dd236b1, type: 3}
+  m_Name: floor_visibility_demo
+  m_EditorClassIdentifier: Assembly-CSharp::Caelmor.Unity.ArchitectureMaterialBindings
+  bindings:
+  - bufferId: world_lowmark.lowmark_main_hall.Split oak shingle courses::covering
+    materialId: split_oak_shingle
+    metricUv0Verified: 1
+  - bufferId: world_lowmark.lowmark_main_hall.facade_iron::floor:lowmark_main_hall:0
+    materialId: forged_iron
+    metricUv0Verified: 1

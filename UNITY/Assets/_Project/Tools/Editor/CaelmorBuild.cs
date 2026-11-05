@@ -5,7 +5,6 @@ using UnityEngine.AI;
 using Caelmor.Unity.Playable;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
-using UnityEditor.Build;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
@@ -13,19 +12,17 @@ namespace Caelmor.Unity.Editor
 {
     public static class CaelmorBuild
     {
-        const string ScenePath = "Assets/_Project/World/PlayableFoundation.unity";
-        [InitializeOnLoadMethod]
-        static void InitializeProject()
-        {
-            if (Application.isBatchMode) return;
-            EditorApplication.delayCall += () =>
-            {
-                if (!File.Exists(ScenePath) && !EditorApplication.isPlayingOrWillChangePlaymode)
-                    CreateScene();
-            };
-        }
-        [MenuItem("Caelmor/Create technical playable scene")]
+        public const string ScenePath = "Assets/_Project/World/PlayableFoundation.unity";
+        [MenuItem("Caelmor/Technical fixture/Regenerate owned playable scene")]
         public static void CreateScene()
+        {
+            CaelmorSceneOwnership.RequireCleanScenes();
+            CaelmorSceneOwnership.RequireUnmodifiedFixture();
+            var setup = EditorSceneManager.GetSceneManagerSetup();
+            try { GenerateOwnedScene(); }
+            finally { CaelmorSceneOwnership.RestoreSetup(setup); }
+        }
+        static void GenerateOwnedScene()
         {
             EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             Directory.CreateDirectory("Assets/_Project/World/Materials");
@@ -100,37 +97,58 @@ namespace Caelmor.Unity.Editor
             game.spawn = spawn.transform; game.playerView = avatar.transform; game.playerCamera = camera; game.interactionAnchor = anchor;
             game.gameObject.AddComponent<PlayableHud>().game = game;
             EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), ScenePath);
-            EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
-            PlayerSettings.companyName = "Caelmor"; PlayerSettings.productName = "Caelmor Playable Foundation";
-            PlayerSettings.defaultScreenWidth = 1280; PlayerSettings.defaultScreenHeight = 720;
-            PlayerSettings.fullScreenMode = FullScreenMode.Windowed;
-            PlayerSettings.runInBackground = true;
-            PlayerSettings.SetScriptingBackend(NamedBuildTarget.Standalone, ScriptingImplementation.Mono2x);
-            PlayerSettings.SetApiCompatibilityLevel(NamedBuildTarget.Standalone, ApiCompatibilityLevel.NET_Standard);
-            AssetDatabase.SaveAssets();
+            CaelmorSceneOwnership.SaveOwnedAssetsAndRecordHashes();
             Debug.Log("CAELMOR_SCENE_READY: " + ScenePath);
         }
         [MenuItem("Caelmor/Validate playable scene")]
         public static void Validate()
         {
-            EditorSceneManager.OpenScene(ScenePath);
-            var anchor = UnityEngine.Object.FindAnyObjectByType<InteractionAnchor>();
-            PlayableValidation.Run(anchor, 1 << 8, UnityEngine.Object.FindAnyObjectByType<TerrainNavigation>());
+            CaelmorSceneOwnership.RequireCleanScenes();
+            if (!File.Exists(ScenePath))
+                throw new InvalidOperationException("CAELMOR_FIXTURE_MISSING: explicitly regenerate the owned technical fixture before validation.");
+            var setup = EditorSceneManager.GetSceneManagerSetup();
+            try
+            {
+                // Global Physics/NavMesh checks require isolation from unrelated authored scene geometry.
+                // Open only after refusing unsaved changes, and never persist validation mutations.
+                EditorSceneManager.OpenScene(ScenePath);
+                var anchor = UnityEngine.Object.FindAnyObjectByType<InteractionAnchor>();
+                PlayableValidation.Run(anchor, 1 << 8, UnityEngine.Object.FindAnyObjectByType<TerrainNavigation>());
+            }
+            finally { CaelmorSceneOwnership.RestoreSetup(setup); }
         }
         public static void BuildWindows()
         {
-            CreateScene(); Validate();
+            CaelmorSceneOwnership.RequireCleanScenes();
+            var scenes = GetBuildScenePaths();
+            Validate();
             string output = Environment.GetEnvironmentVariable("CAELMOR_BUILD_OUTPUT");
-            if (string.IsNullOrWhiteSpace(output)) output = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Caelmor-Build", "Caelmor.exe");
+            if (string.IsNullOrWhiteSpace(output)) output = Path.Combine(Directory.GetCurrentDirectory(), "Builds", "Windows", "Caelmor.exe");
             Directory.CreateDirectory(Path.GetDirectoryName(output));
             var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
             {
-                scenes = new[] { ScenePath }, locationPathName = output,
+                scenes = scenes, locationPathName = output,
                 target = BuildTarget.StandaloneWindows64, options = BuildOptions.Development
             });
             if (report.summary.result != BuildResult.Succeeded)
                 throw new InvalidOperationException("CAELMOR_BUILD_FAILED: " + report.summary.result + " errors=" + report.summary.totalErrors);
             Debug.Log("CAELMOR_BUILD_SUCCEEDED: " + output);
+        }
+        public static string[] GetBuildScenePaths()
+        {
+            var result = new List<string>();
+            foreach (var scene in EditorBuildSettings.scenes)
+            {
+                if (!scene.enabled) continue;
+                if (string.IsNullOrWhiteSpace(scene.path) || !File.Exists(scene.path))
+                    throw new InvalidOperationException("CAELMOR_BUILD_SCENE_MISSING: " + scene.path);
+                if (result.Contains(scene.path))
+                    throw new InvalidOperationException("CAELMOR_BUILD_SCENE_DUPLICATE: " + scene.path);
+                result.Add(scene.path);
+            }
+            if (result.Count == 0)
+                throw new InvalidOperationException("CAELMOR_BUILD_SCENES_EMPTY: select saved scenes in Build Settings; builds do not generate or replace scenes.");
+            return result.ToArray();
         }
         static NavMeshData BakeNavigation()
         {

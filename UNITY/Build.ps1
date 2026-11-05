@@ -1,6 +1,6 @@
 param(
     [string]$UnityEditor = 'C:\Program Files\Unity\Hub\Editor\6000.5.5f1\Editor\Unity.exe',
-    [string]$OutputDirectory = 'C:\Users\CK\Documents\Caelmor-Build',
+    [string]$OutputDirectory = (Join-Path $PSScriptRoot 'Builds\Windows'),
     [switch]$StageOnly,
     [switch]$SkipSmoke
 )

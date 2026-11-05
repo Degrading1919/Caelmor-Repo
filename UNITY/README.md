@@ -2,18 +2,22 @@
 
 Unity 6000.5.5f1, Windows x64, built-in rendering. This is a playable greybox of authored content, with reusable RPG runtime integration; it is not the finished Lowmark v1 release.
 
+For reusable Blender architectural assets, explicit painting-library bindings,
+scene ownership, import commands and executed evidence, see
+[the architectural asset pipeline](ARCHITECTURE_PIPELINE.md).
+
 ## Reproduce and play
 
 Activate the installed Unity Editor license in Unity Hub, then run from the repository root in PowerShell 7:
 
 ```powershell
 ./CODE/Build-And-Validate.ps1 -Configuration Release
+./UNITY/Build.ps1
 ./UNITY/Tools/Compile-Source.ps1
-./UNITY/Build.ps1 -OutputDirectory 'C:/Users/CK/Documents/Caelmor-Build/FloodKitchen'
-& 'C:/Users/CK/Documents/Caelmor-Build/FloodKitchen/Caelmor.exe'
+& './UNITY/Builds/Windows/Caelmor.exe'
 ```
 
-Build.ps1 validates GameplayContent.schema.json, copies the authoritative 04_CONTENT_PRODUCTION/Quests/LowmarkGameplay.json into the Unity Resources staging asset, compiles/stages the canonical runtime DLL, generates/bakes/reopens the scene, executes foundation checks, builds Windows, then runs standalone engine checks. Nonzero exit or a missing success marker fails the script. Logs are unity-build.log and standalone-smoke.log beside the executable. Default output without the override remains Caelmor-Build/Caelmor.exe. Generated output is never an authored source. No paid art or additional NuGet dependency is needed.
+Build.ps1 validates GameplayContent.schema.json, copies the authoritative 04_CONTENT_PRODUCTION/Quests/LowmarkGameplay.json into the Unity Resources staging asset, compiles/stages the canonical runtime DLL, validates the existing technical fixture, builds the saved enabled Build Settings scenes, then runs standalone engine checks. It does not regenerate scenes or rebake navigation. Nonzero exit or a missing success marker fails the script. Logs are unity-build.log and standalone-smoke.log beside the executable. Default output is UNITY/Builds/Windows/Caelmor.exe, inside the designated checkout. Generated output is never an authored source. The standalone smoke expects the technical playable composition; use -SkipSmoke when deliberately building a different authored composition. No paid art or additional NuGet dependency is needed.
 
 For editor play, run ./UNITY/Build.ps1 -StageOnly, open UNITY in Unity Hub and the saved Assets/_Project/World/PlayableFoundation.unity scene. Restage after changing CODE or production content. The SDK source check verifies real Unity API compilation only; it does not replace Editor import or engine execution.
 
@@ -54,7 +58,7 @@ The file is Application.persistentDataPath/lowmark-gameplay.checkpoint.json, cur
 
 ## Executed validation and limits
 
-The C# runner now passes 104 checks: the original 88 plus connected quest/economy/restore regressions, all True Line evidence choices, all Bank Walk branches, all Flood Kitchen choices and both fuel routes, flock/closure/recovery authority, tagged-input overlap and generic production counter atomicity. It performs actual atomic disk writes/reads as well as in-memory state tests. See CODE/README.md for the baseline scope.
+The C# runner now passes 105 checks: the original 88 plus connected quest/economy/restore and floor-visibility regressions, all True Line evidence choices, all Bank Walk branches, all Flood Kitchen choices and both fuel routes, flock/closure/recovery authority, tagged-input overlap and generic production counter atomicity. It performs actual atomic disk writes/reads as well as in-memory state tests. See CODE/README.md for the baseline scope.
 
 The licensed Unity build runs native NavMesh/physics movement/collision/authority checks. Standalone LowmarkValidation drives real queued commands through The True Line, a repeatable economy cycle, The Bank Walk's building branch and The Flood Kitchen's own-food/crate route. It checks incoming melee damage, movement dodge, interruptions, hazards with collision-validated push, connected hub paths, flock relocation and take/recovery, closed ground, short-sprint arrival noise, tagged meals, public-only Cooking objective progress, mid-hush restoration, persistent water state, real damage/death/shelter recovery and JsonUtility/disk checkpoints for all three quests. It asserts gameplay is committed before movement snapshots and suspended lifecycle blocks it. The separate scheduler sample checks elapsed wall time against 10 Hz after draining the synchronous test frame; simulation checks still use fixed 100 ms deltas. Success markers: CAELMOR_GAMEPLAY_CHECKS_PASSED, CAELMOR_LOWMARK_PASSED, CAELMOR_SMOKE_PASSED.
 

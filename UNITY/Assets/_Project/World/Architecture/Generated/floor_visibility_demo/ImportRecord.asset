@@ -1,0 +1,842 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dd80b58c79d0247a336be7b0a89e06, type: 3}
+  m_Name: ImportRecord
+  m_EditorClassIdentifier: Assembly-CSharp::Caelmor.Unity.ArchitectureImportRecord
+  sourcePath: CODE/Scripts/architectural_generator/dist/floor_visibility_demo.glb
+  importerVersion: CaelmorArchitectureImport/1
+  sourceHash: 951984947d89b9b54e6007fedbb0629b29d87bcc70f7a375dcbdc63e3f04ef17
+  collisionHash: dfdc21b0d8f9e71763566be0ca42c8e6a9fb1185cda7de3f55cf1a2e2cb754a9
+  sidecarHash: 8f553b1a0b8d2ae3f9bccbe8265ba20f2c4b48afa39d291fff68042d70e073f6
+  compatibilitySignature: 576a5255db45703268d6f4da13ca692e5cd2510b053baf793067522dc469bf5b
+  bindingsSignature: 0e93b00d972ac02e283271f633e5d13bb22628a5b7142b42dae73d8c4ef0c698
+  buildingId: 1610eef703944eba8c8def569d26f3a7
+  generatedPrefab: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/floor_visibility_demo.prefab
+  placementPrefab: Assets/_Project/World/Architecture/Prefabs/floor_visibility_demo.prefab
+  placementGuid: 71857c5b7cde0d14c9aa9651fea0d253
+  unresolvedLibraryMappings: 'world_lowmark.lowmark_main_hall.facade_foundation_core::floor:lowmark_main_hall:0
+    => generator stone
+
+    world_lowmark.lowmark_main_hall.facade_steps::floor:lowmark_main_hall:0
+    => generator stone_light
+
+    world_lowmark.lowmark_main_hall.facade_stone::floor:lowmark_main_hall:0
+    => generator stone_light
+
+    world_lowmark.lowmark_main_hall.facade_mortar::floor:lowmark_main_hall:0
+    => generator mortar
+
+    world_lowmark.lowmark_main_hall.facade_mortar::floor:lowmark_main_hall:2
+    => generator mortar
+
+    world_lowmark.lowmark_main_hall.facade_quoins::floor:lowmark_main_hall:0
+    => generator stone_light
+
+    world_lowmark.lowmark_main_hall.facade_walls::floor:lowmark_main_hall:0
+    => generator plaster
+
+    world_lowmark.lowmark_main_hall.facade_walls::floor:lowmark_main_hall:1
+    => generator plaster
+
+    world_lowmark.lowmark_main_hall.facade_walls::floor:lowmark_main_hall:2
+    => generator plaster
+
+    world_lowmark.lowmark_main_hall.facade_timber::floor:lowmark_main_hall:0
+    => generator timber
+
+    world_lowmark.lowmark_main_hall.facade_timber::floor:lowmark_main_hall:1
+    => generator timber
+
+    world_lowmark.lowmark_main_hall.facade_timber::floor:lowmark_main_hall:2
+    => generator timber
+
+    world_lowmark.lowmark_main_hall.facade_pegs::floor:lowmark_main_hall:0
+    => generator timber_light
+
+    world_lowmark.lowmark_main_hall.facade_pegs::floor:lowmark_main_hall:1
+    => generator timber_light
+
+    world_lowmark.lowmark_main_hall.facade_windows::floor:lowmark_main_hall:0
+    => generator glass
+
+    world_lowmark.lowmark_main_hall.facade_windows::floor:lowmark_main_hall:1
+    => generator glass
+
+    world_lowmark.lowmark_main_hall.facade_shutters::floor:lowmark_main_hall:0
+    => generator timber_light
+
+    world_lowmark.lowmark_main_hall.facade_shutters::floor:lowmark_main_hall:1
+    => generator timber_light
+
+    world_lowmark.lowmark_main_hall.facade_doors::floor:lowmark_main_hall:0
+    => generator timber
+
+    world_lowmark.lowmark_main_hall.facade_iron::floor:lowmark_main_hall:1
+    => generator iron
+
+    world_lowmark.lowmark_main_hall.facade_details::floor:lowmark_main_hall:2
+    => generator stone_light
+
+    world_lowmark.lowmark_main_hall.facade_chimney::floor:lowmark_main_hall:1
+    => generator stone
+
+    world_lowmark.lowmark_main_hall.facade_chimney::floor:lowmark_main_hall:2
+    => generator stone
+
+    world_lowmark.lowmark_main_hall.facade_flashing::floor:lowmark_main_hall:2
+    => generator iron
+
+    world_lowmark.lowmark_main_hall.facade_render_skin::floor:lowmark_main_hall:0
+    => generator plaster
+
+    world_lowmark.lowmark_main_hall.facade_render_skin::floor:lowmark_main_hall:1
+    => generator plaster
+
+    world_lowmark.lowmark_main_hall.facade_render_skin::floor:lowmark_main_hall:2
+    => generator plaster
+
+    world_lowmark.lowmark_main_hall.Continuous roof deck::covering
+    => generator timber
+
+    world_lowmark.lowmark_main_hall.Roof underlay::covering
+    => generator roof_dark
+
+    world_lowmark.lowmark_main_hall.Seasoned shingle
+    cohorts::covering => generator roof_dark
+
+    world_lowmark.lowmark_main_hall.Exposed
+    shingle butts::covering => generator roof_worn
+
+    world_lowmark.lowmark_main_hall.Overlapping
+    ridge caps::covering => generator roof_dark
+
+    world_lowmark.lowmark_main_hall.Roof
+    edge fascia::covering => generator timber
+
+    world_lowmark.lowmark_main_hall.Supported
+    roof rafters::covering => generator timber
+
+    world_lowmark.lowmark_service_wing.facade_foundation_core::floor:lowmark_service_wing:0
+    => generator stone
+
+    world_lowmark.lowmark_service_wing.facade_stone::floor:lowmark_service_wing:0
+    => generator stone_light
+
+    world_lowmark.lowmark_service_wing.facade_mortar::floor:lowmark_service_wing:0
+    => generator mortar
+
+    world_lowmark.lowmark_service_wing.facade_quoins::floor:lowmark_service_wing:0
+    => generator stone_light
+
+    world_lowmark.lowmark_service_wing.facade_walls::floor:lowmark_service_wing:0
+    => generator plaster
+
+    world_lowmark.lowmark_service_wing.facade_walls::floor:lowmark_service_wing:1
+    => generator plaster
+
+    world_lowmark.lowmark_service_wing.facade_timber::floor:lowmark_service_wing:0
+    => generator timber
+
+    world_lowmark.lowmark_service_wing.facade_timber::floor:lowmark_service_wing:1
+    => generator timber
+
+    world_lowmark.lowmark_service_wing.facade_pegs::floor:lowmark_service_wing:0
+    => generator timber_light
+
+    world_lowmark.lowmark_service_wing.facade_render_skin::floor:lowmark_service_wing:0
+    => generator plaster
+
+    world_lowmark.lowmark_service_wing.facade_render_skin::floor:lowmark_service_wing:1
+    => generator plaster
+
+    world_lowmark.lowmark_service_wing.Continuous roof
+    deck::covering => generator timber
+
+    world_lowmark.lowmark_service_wing.Roof
+    underlay::covering => generator roof_dark
+
+    world_lowmark.lowmark_service_wing.Split
+    oak shingle courses::covering => generator roof
+
+    world_lowmark.lowmark_service_wing.Seasoned
+    shingle cohorts::covering => generator roof_dark
+
+    world_lowmark.lowmark_service_wing.Exposed
+    shingle butts::covering => generator roof_worn
+
+    world_lowmark.lowmark_service_wing.Roof
+    edge fascia::covering => generator timber
+
+    world_lowmark.lowmark_service_wing.Supported
+    roof rafters::covering => generator timber
+
+    world_lowmark.lowmark_service_wing.lowmark_working_range_floor::floor:lowmark_service_wing:0
+    => generator timber
+
+    world_lowmark.lowmark_service_wing.lowmark_working_range_floor.supports::floor:lowmark_service_wing:0
+    => generator timber
+
+    world_lowmark.lowmark_work_range_steps::always => generator
+    stone
+
+    world_lowmark.lowmark_household_store.facade_foundation_core::floor:lowmark_household_store:0
+    => generator stone
+
+    world_lowmark.lowmark_household_store.facade_steps::floor:lowmark_household_store:0
+    => generator stone_light
+
+    world_lowmark.lowmark_household_store.facade_stone::floor:lowmark_household_store:0
+    => generator stone_light
+
+    world_lowmark.lowmark_household_store.facade_mortar::floor:lowmark_household_store:0
+    => generator mortar
+
+    world_lowmark.lowmark_household_store.facade_quoins::floor:lowmark_household_store:0
+    => generator stone_light
+
+    world_lowmark.lowmark_household_store.facade_walls::floor:lowmark_household_store:0
+    => generator plaster
+
+    world_lowmark.lowmark_household_store.facade_walls::floor:lowmark_household_store:1
+    => generator plaster
+
+    world_lowmark.lowmark_household_store.facade_timber::floor:lowmark_household_store:0
+    => generator timber
+
+    world_lowmark.lowmark_household_store.facade_timber::floor:lowmark_household_store:1
+    => generator timber
+
+    world_lowmark.lowmark_household_store.facade_pegs::floor:lowmark_household_store:0
+    => generator timber_light
+
+    world_lowmark.lowmark_household_store.facade_doors::floor:lowmark_household_store:0
+    => generator timber
+
+    world_lowmark.lowmark_household_store.facade_iron::floor:lowmark_household_store:0
+    => generator iron
+
+    world_lowmark.lowmark_household_store.facade_render_skin::floor:lowmark_household_store:0
+    => generator plaster
+
+    world_lowmark.lowmark_household_store.facade_render_skin::floor:lowmark_household_store:1
+    => generator plaster
+
+    world_lowmark.lowmark_household_store.Continuous roof
+    deck::covering => generator timber
+
+    world_lowmark.lowmark_household_store.Roof
+    underlay::covering => generator roof_dark
+
+    world_lowmark.lowmark_household_store.Split
+    oak shingle courses::covering => generator roof
+
+    world_lowmark.lowmark_household_store.Seasoned
+    shingle cohorts::covering => generator roof_dark
+
+    world_lowmark.lowmark_household_store.Exposed
+    shingle butts::covering => generator roof_worn
+
+    world_lowmark.lowmark_household_store.Overlapping
+    ridge caps::covering => generator roof_dark
+
+    world_lowmark.lowmark_household_store.Roof
+    edge fascia::covering => generator timber
+
+    world_lowmark.lowmark_household_store.Supported
+    roof rafters::covering => generator timber'
+  sourceBytes: 17678458
+  generatedBytes: 50708241
+  importSeconds: 7.791220999999999
+  rendererCount: 79
+  meshCount: 79
+  colliderCount: 15
+  materialCount: 13
+  textureCount: 31
+  vertices: 118428
+  triangles: 61262
+  ownedFiles:
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/collision.glb
+    sha256: dfdc21b0d8f9e71763566be0ca42c8e6a9fb1185cda7de3f55cf1a2e2cb754a9
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/collision.glb.meta
+    sha256: 7b8c11d7af0d9478191dd9d4c557783c9244a1ac8fe3144bdd5f7875c9cfc2ad
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/floor_visibility_demo.prefab
+    sha256: 88d0d180f3484eaf3e6d42c3b8fed25708dc86d5e87062e6fbe8dc292e88d223
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/floor_visibility_demo.prefab.meta
+    sha256: fc52eb828a31568640d2ed7a23ece61ad5111f88cacb082c15aba39f25dc491d
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/02aad2dff248cf343090.asset
+    sha256: a6e95db7e13fc17f8ceb3589581431ef44465a632465dbad54762079febb7e7f
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/02aad2dff248cf343090.asset.meta
+    sha256: 4912b16bc645c15d98286e85bb07ec91a767cc480eb312ef54cb1b546e264724
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/037abfccfbcf7b78051f.asset
+    sha256: 5f04c1abd09c5998460c41e6ae1f2bb5e201daffeddcfde2ada16a79530eca0d
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/037abfccfbcf7b78051f.asset.meta
+    sha256: d9f662d363aa9f4a15b4c669b401f9cdd66cdea0ac80e65e03452d63e2989e78
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/06d1663d24279ffea772.asset
+    sha256: aac96079588c149c63080061e5f5dae97b7c983c61c0f1b82b3e2cf329519938
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/06d1663d24279ffea772.asset.meta
+    sha256: ccdc548ed3d2b94c6e05f879b3c1072d2b1e2d99f689250f9723a1d85a24556d
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/0c286accb85e96a13fc0.asset
+    sha256: 20c3c0c67e1dc8cb14b68ab7653e973bcb6cdc9e189bed63d11e270ddd07c27a
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/0c286accb85e96a13fc0.asset.meta
+    sha256: 8a0218a941925db3cf74b217979dd88b8f2bb28515a4f5ecae322c08ac30162a
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/0fb5ec284eca24332565.asset
+    sha256: a268037865a6453818d2eb377211dafe77280ca4b99a75f11fb60878103642a9
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/0fb5ec284eca24332565.asset.meta
+    sha256: 84fc7ea113db5991a57d5702232d88bfe19629a5d460b284eb3546e507ba7e36
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/11eab1b0dfe0c9bcf600.asset
+    sha256: e885ba04dab415beb9080c3bd1c876c6128cdd49c56fcd9350835c38f01bf49f
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/11eab1b0dfe0c9bcf600.asset.meta
+    sha256: 17f6d9c7bcac729a65da8f3f0b66273b7a1a921b7c83b5221976dae2da7b3fed
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/1af6cc158234f629c965.asset
+    sha256: 9198c4e9b883ebd0fc4f0876698fb69c5d399912539cfd6f28654b663f74af9b
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/1af6cc158234f629c965.asset.meta
+    sha256: 856ab6b0e86bab7dd314edc96872eeebddcd903598cbb8c4c0d0ae8433d4dd0f
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/1d63a3cfd43bfd6372d3.asset
+    sha256: 47469b8ac1036ccf000d14ee0ddd409f3c1a36a024ee00590053bec5af788bbe
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/1d63a3cfd43bfd6372d3.asset.meta
+    sha256: e72d24827404b559cd7d655b39cf31bfb51d2b3c4f22efcea44aae92a21ac5e5
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/1e64fbe8a3f002319a00.asset
+    sha256: 8fae125105cc9540bd4183341537bde3071fa60e4f9861074762820e655f7d8a
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/1e64fbe8a3f002319a00.asset.meta
+    sha256: 53c44b659adf7f382a9a5aaf54a16a9b0ba7781ee104012fceaf63e877f8ef1b
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/21c6b9b6cd42cbedcc2e.asset
+    sha256: c0e91190e137aeaae958eb3fe5d736158fdd8f2bdaa7233baf38b1e2cce276c0
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/21c6b9b6cd42cbedcc2e.asset.meta
+    sha256: bb721dafbbcd8b1b12f1b06bacfd5365246c9fec184e42399f5f65af2e6e1bb1
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/23b9cf031acc7b33688a.asset
+    sha256: b406e145f424e1f97b7964cd644c148383b31bf2059cda372fbc328556c19283
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/23b9cf031acc7b33688a.asset.meta
+    sha256: 54b0337aa8c4811eaab19e2895a62df22bed418a909f1a1ce739226d5b00fe7f
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/290d4cf4b943d8de9f10.asset
+    sha256: 7a7f9098e202105f47ae9470fa0c6298ae0ef70ed84a87487fb6c75a51455cf1
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/290d4cf4b943d8de9f10.asset.meta
+    sha256: 7fa88fca39f8a1a94d9115631dfe2d1820d9f4284af1f8d06cf595f2e23e25ea
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/2d015778a67bb2f0675a.asset
+    sha256: 105c864bc2e6244f001735d50f22ac587752c57cfe49ee7320b900058c4ad7fb
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/2d015778a67bb2f0675a.asset.meta
+    sha256: cb74557a259e67c1cfcc7039c134ecd96521077d2bcc5d986be35a510e897455
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/3bc25ef9ed8487ee9e30.asset
+    sha256: 4b7906f4a6e771feee9a186e5168a547dc71c60e71430184393db462a7943bf5
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/3bc25ef9ed8487ee9e30.asset.meta
+    sha256: 9c8de9436108fc00a0f4d4e20d497e64c2c7a38fff0469c69d8e5612a2a11ce4
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/3f8aa35137a1abaae29e.asset
+    sha256: 2126635f518d2ab35dd1f888e08e6f45fc3bb126f2a166f29ed632c9789c2a9c
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/3f8aa35137a1abaae29e.asset.meta
+    sha256: c00bdb1726465afa000e9c478d905704fc276572d71b5e98bae3c7221f500859
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/424996c158a460251a2f.asset
+    sha256: 2d1bafa1c234396b9a0ee9fee6379b8fcb0511568c1249db2e91dc37e42e8c4f
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/424996c158a460251a2f.asset.meta
+    sha256: 19dcae109b79a366304e1de63b8e61e89b360082300b93dd6866a592cca7bb81
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/43bd2089c837f42830cb.asset
+    sha256: 1266bf0a98b6b06787942aadf424c08658c7525cac4a5d452a1857f020cc91da
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/43bd2089c837f42830cb.asset.meta
+    sha256: 96075be6545fcacd95fe277463b3ff0d9169abb7d3febb71bd512ca25417e8f8
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/44a4575765149f5356c5.asset
+    sha256: bf56b21e73762a979ff5e0dd8bf399a0b4d3eb866649323d1eb19009fa3b15db
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/44a4575765149f5356c5.asset.meta
+    sha256: 9eef6606a43ea63761bd1f5b5bc24b50c0a17402875609540b7a8afc1282f1fb
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/44e5fec1a2d35c135e01.asset
+    sha256: dd057399d97dcc90e05a29a34469700970a379643a8f061f97453c68fcf5142e
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/44e5fec1a2d35c135e01.asset.meta
+    sha256: 9f9081e20c8119948de02ca04b96eb9307e7362775373b4779af88b05130eebe
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/4b4bf49fdeed84c0be3a.asset
+    sha256: 7faec92ab547f9a42ef9a9a3f221b65807c08272102981fcee8c21254d136888
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/4b4bf49fdeed84c0be3a.asset.meta
+    sha256: a899681f938e574869ba12b249386c7c251860cacaf8555ed24267d50cf65b09
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/4d378d1f925fa572e929.asset
+    sha256: 860fbb3394e817b6bc99363219c16ea19af28c45cfe4aa029ac880b7054f3d44
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/4d378d1f925fa572e929.asset.meta
+    sha256: f6a32f229cb421e80f81f1107b40f1a6ca940856f5e7198f7d33dec0c6e9b38c
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/5442c74b58ea8ce5a694.asset
+    sha256: f37288add995897c4ad91f064e2c607fc7cc389e4b6c3b68fb678600bcf270da
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/5442c74b58ea8ce5a694.asset.meta
+    sha256: c31dcb87911c383317386523319dfa25f797eb77faff0f80417badd2ab022087
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/54da8172ef1155587137.asset
+    sha256: 8cbb1fbf68bbb5a0063fd39c18260ac62655a5fbd73a07ab16afa833ea9b740a
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/54da8172ef1155587137.asset.meta
+    sha256: 61c6c00f4e30c7cc7b774e892af20f2629aa6a331db0423bb663cb7a0e019370
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/5b8b0f4df2991ed22664.asset
+    sha256: 8cbd08ba6f7084525d6c8b422709d24e47a3cbb84d768415274b8d843d8105d7
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/5b8b0f4df2991ed22664.asset.meta
+    sha256: ba6d7f14b3772e12116cbe0aa16c120ab0ef557cb80093c8219cdd3049fad697
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/5ca8b370f6b7e999c2b0.asset
+    sha256: e001a616a1f654375d17a290c9599d9992b8962879c76b0b725c0a378dcc1ffa
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/5ca8b370f6b7e999c2b0.asset.meta
+    sha256: a5facb5fc785030838712187ffcaa0f3ac6dd0721c5cddd77924ab257044a1c0
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/5e4a750ecd6111cf3db7.asset
+    sha256: 73b86252d886957d731454ae5638369190d6a22c48b9f09a98b4b10e3baabfc1
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/5e4a750ecd6111cf3db7.asset.meta
+    sha256: 1a61be1dfb9e6d0d8ba5c0157bdb80a10a96fff8890f0465ae954500f431d9bf
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/5e6c4136624f35aabb52.asset
+    sha256: e0277e10044dd263e27904b12ff9cdea2fa43cf02eb3dd960b284e46f5fe6587
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/5e6c4136624f35aabb52.asset.meta
+    sha256: 3f91a9afa8c1ccda2b61c43334af583c473074fac3899a0d51a7d9f4906f9fd2
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/5ff2fc4ec5877a60c00e.asset
+    sha256: d9cab3ad3cd75b5b33cc997c5d5347646204fcbd4b2c91a21b87603df6ad844c
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/5ff2fc4ec5877a60c00e.asset.meta
+    sha256: eb803a208002d489d3a2fa4c1fccb12c707744e15984382fc6a19e5503679b38
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/60ade9557407dacf9448.asset
+    sha256: c7c47d5acde9ae18878dad4688dbaac906ab0bffbcf57542a36770e69584de80
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/60ade9557407dacf9448.asset.meta
+    sha256: 9a7c2fa9256484a68cbde4d2856e44364e8b69430d446103e19ed476591b452e
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/6187218d23c5bfe1dafd.asset
+    sha256: 41911afc09f0c795c1cb975ceaa9dd1b28fbcf2a3ec616d8ea9992de90a757b1
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/6187218d23c5bfe1dafd.asset.meta
+    sha256: 26e4e7f0a3ac3bdc0dd6af2baccbeb5a2a56cf6f6f438d022b4cd12e3d559d91
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/6519e7d07708425fd6a9.asset
+    sha256: 29e7895d0d30005d2aa54ba34b5f5dee0de97310086e3956a04bd5f4c4078e5e
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/6519e7d07708425fd6a9.asset.meta
+    sha256: ba669e059cf723a099977990bbe2bb921f24d54bdf4f90fcabe577a8682ab799
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/68aac1ae3ccb53d11d2d.asset
+    sha256: 97bccd28535e30dc138377a88998c2230c55f1cc77d8ead2de160121fdc71f38
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/68aac1ae3ccb53d11d2d.asset.meta
+    sha256: 9a262ea65a409416813aa3d73ae3f071a3e7d3ae131efef7abd8e77e377a60f5
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/68ad2b56553ca2b3b6d0.asset
+    sha256: 9fd3c05f07a9800b7d8e74dc15d14d77c3c115e51a92f181b4fe4a502bea0415
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/68ad2b56553ca2b3b6d0.asset.meta
+    sha256: abf652e8cf800294abebfabc5ffdbc4e8f0df77e2d4a1288a2ad11486cff17b7
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/6ca17c8b5e62c6bb41c2.asset
+    sha256: 31f0f3f77cefe1ee41832f91f97389d01cd8c34f5f56c63f0f997c8f579659da
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/6ca17c8b5e62c6bb41c2.asset.meta
+    sha256: 7089148c2fa399f7b91101387bc3446499fd2e1f280d83b937f03fe406096eca
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/6d6e83b60ec51f688475.asset
+    sha256: 33def6a73b365294dec2c45711ea0740c0e0164921e273a8834b87799e0bc678
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/6d6e83b60ec51f688475.asset.meta
+    sha256: ab3a23525c6b7063510182d525e63361a0fe6af8fc5df4f84c056bc51bd7d9c5
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/6d995acc27a8f2fd8a98.asset
+    sha256: b313b4e16c9db1a7e0a7def990fa3220336bd331f163972b1a910caf815dd5fc
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/6d995acc27a8f2fd8a98.asset.meta
+    sha256: bde4c89bf5df6f3e1bff4502095f720e78efebfd5c96f4b9bd3bfbfbda906ca0
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/6e811e8c6e15375a3890.asset
+    sha256: c8a91788c850136eb5ddc29907a6b5a9cc2ccb4bce3521385ca920bc80f217cc
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/6e811e8c6e15375a3890.asset.meta
+    sha256: 716164b1c45bf6914650620f3c0aeab1a0d602094368d67a57c7ed06cc372e36
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/71c005802e62d459c89c.asset
+    sha256: f572fafc5d5752584712bd8d9165b54cc7427da9ab694f1b84fb99153fbb9661
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/71c005802e62d459c89c.asset.meta
+    sha256: cfdf3c8edd45fe6d33c71dbb44bd7f5ead1d8d5f851307a2730cf18e5649309f
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/777c0aab065de24e210e.asset
+    sha256: d7614f91823493f0cd6a61f49992c6ab4eeaccead0807b4974020932e452b636
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/777c0aab065de24e210e.asset.meta
+    sha256: af648a802348ee200998d92d6986fa3d7635f7a5bd27da7789483272ed92e85f
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/79f8832f360f1c2b0a78.asset
+    sha256: 5e13819f7c3763b3595e65ffff56bbe3d65805cb05d326a2a2c5618c2176821b
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/79f8832f360f1c2b0a78.asset.meta
+    sha256: 92333fd95b47ecc0ef3b2e6ad5ee1fbeb3128f3a119583bf9f6a3f440b3d189a
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/7b7cf7eec1f27ce234d1.asset
+    sha256: aead51ae6215985f2650804fa65f96a9a47150575b4022d207e11fe655ad1e1b
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/7b7cf7eec1f27ce234d1.asset.meta
+    sha256: 6a3c5b9bb2bd7fac147df0107acd987572fab598582549530f322bfe08c45f98
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/7bae1fdf57a6f9d16cc2.asset
+    sha256: c4f5b0d64ae3d17e355cd4bd2528d439c47cc2b5d449da09e1c5596586f47a8e
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/7bae1fdf57a6f9d16cc2.asset.meta
+    sha256: 9e6342cf1f358797c74020ceba1bc49603b971deeb46f3c709f70dfb791dc675
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/80b2a40cb70c17b4e8ff.asset
+    sha256: 69760f67341431b99003d2aa73ba21458782c6e579c00585518188537d850b07
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/80b2a40cb70c17b4e8ff.asset.meta
+    sha256: a8a82017769fe453fdac55cc2df37f7c61a5fe6d3e201c4e33e61b9567d2e0a0
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/840e739f06dbc156666f.asset
+    sha256: e61c3bca63f18f8ddc51133118ee366d2f86a66b4a6116749fa02e1405a86cb3
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/840e739f06dbc156666f.asset.meta
+    sha256: e41ff5e59a9d3abaca6db8e1d78789b974d0a8fc3d06999f3ec1ecc8301f848f
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/86b1433a0431cded1e06.asset
+    sha256: f99188226062e1ac59bb9ea7dd08c046168ae7d7ba6d1a92f826a1e17dc093fe
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/86b1433a0431cded1e06.asset.meta
+    sha256: 4fd7d760e66e82306f3aa26bd29bea0a4ac6907a6d5bd263734b963fa9a6cfbb
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/894eabf2dafd34131962.asset
+    sha256: a378e1c7118ec5fccb1ea73d7619621afcb8b34c26c3243b7371f3f42f166cbe
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/894eabf2dafd34131962.asset.meta
+    sha256: 8ebf4c64553132feb42853ad383c80f15e9330a6bf7fdef9a6ed950d070cd402
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/8ad6dadbdb312787d98b.asset
+    sha256: a6cad2e355a37d0756480bb08ac2ca442a69218992b1dd5bf0aa0d9ad0238bf2
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/8ad6dadbdb312787d98b.asset.meta
+    sha256: 1ddbda240e16c3fe41f023185773a48097684fad99f8ddc7a07bb44a15d21241
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/8c7a421aa2d682fb6db9.asset
+    sha256: b21c6d26d214392abd98d6162f9831fb749785480af5af794924cef566ba7c27
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/8c7a421aa2d682fb6db9.asset.meta
+    sha256: a9a4965d2b343224ee05fc41f572278466996525e38bf956a6fa46ee9a3aa69d
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/91631af74bae93bd8e96.asset
+    sha256: 0c43cb90925cdf0910a5560feef4e8f994cc1ed2ab6139a9f8a33de90849edfc
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/91631af74bae93bd8e96.asset.meta
+    sha256: 63bb8e3f1e10541d93d814dce92af26132617c921db3327e3aada6bb9a072de5
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/9cb5c2df94e52625005b.asset
+    sha256: 20f2ad2a68186ae0a9926b165a37eb7400201bcfede2b4462301ccb3f7ce2ce2
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/9cb5c2df94e52625005b.asset.meta
+    sha256: fa2c0afe26f3aca155d5c496b353b22081bb360abccc68bd914f52c7017f311e
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/9e9e4850d8ecd89b4273.asset
+    sha256: 627fb40bf348764185e5237466b641c3fb0a883723b5f9f30dcd3b462e96c997
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/9e9e4850d8ecd89b4273.asset.meta
+    sha256: aaf867e719ada30ae2aef5c1069d1ccdc0443c1e75351d7e1414f5a5f2e77b3f
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/a1ef66ae0ecd5ddb1488.asset
+    sha256: 313ae8cfc1a0425bc3ece5f15e27b156aa9e729a50b164e6dd0287eff100ac5a
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/a1ef66ae0ecd5ddb1488.asset.meta
+    sha256: 1b094ae6ba428a599d670b3802ba25985c5e26640861678996645597e9b66e72
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/a70d67988277152fb79c.asset
+    sha256: 562b57cce07c89cf6da3f5e1ca6d0be0ecf5f6c411b2a0796c31614f8d0a4a46
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/a70d67988277152fb79c.asset.meta
+    sha256: 2a26e6af031ac9d1c59119aadc6a9cf2256db5fdbe00e9105ee59c00985a0dee
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/a86da2e1920cf79fa7c6.asset
+    sha256: a4eb1f4f2f6abcade58c380524da566b99294fe6b849ed6a91c88b728d968a55
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/a86da2e1920cf79fa7c6.asset.meta
+    sha256: 45e276d9a65edc76b94f24b5fd37c20875315e247da6d587c34d63e77497f463
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/b98d8e64552756936943.asset
+    sha256: f3dc54af69e21ece70fa67214fd3d473e3d68c284bc2a9a67fc71ee27049a344
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/b98d8e64552756936943.asset.meta
+    sha256: c57d1fa1271c3d0b17fa80e89747b6be507b3712e80415ad7dec2212692e220b
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/bd9ede5f2969f7a0ce3e.asset
+    sha256: 0615980dea2013a7c806b89e22349986f1e6f3a87c5198613b2bfd02954708e5
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/bd9ede5f2969f7a0ce3e.asset.meta
+    sha256: 4fd15813e06513e6fd3e11b55a85aaf1b0ef33138c31a654088986ca07106a5c
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/be40718ac50dbf208c3c.asset
+    sha256: bfb32fcef0610e63ef437d0fab34b99b2d4676827d7ace6879cfbca984c4e2e1
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/be40718ac50dbf208c3c.asset.meta
+    sha256: 49d2a2667ff6d163bb5777f05e1ccaf62f15778d11129b369a9985a87e37c73b
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/bfbee3b5b1ab8d38c32e.asset
+    sha256: 11579f36c0f2a6e0a1c8d2b325f52bf1625bf416a17bdcc6f43b1e46eac39008
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/bfbee3b5b1ab8d38c32e.asset.meta
+    sha256: 6faafa5b097c317be02927b561ff37baf5af55b16d6645fbd13b46817b9128cd
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/c98f51f7565d27213890.asset
+    sha256: 3338e2ad28e88bced80ed878643dcfe43197d58e3dce1abaef4509b041083c1b
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/c98f51f7565d27213890.asset.meta
+    sha256: fcae988c77e148b207c184f8195bc5fe05b909fbced4c536959bf2fc531ca228
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/ca5bf642c8caf85d74d0.asset
+    sha256: 5dcc38be066d3c9ac54a46d5ea6652761fec394876d80bbd115e74ae9cc63c69
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/ca5bf642c8caf85d74d0.asset.meta
+    sha256: 7ce61c61eccea97253fcad9fa5860881556b70036bf15d9dd4d49f5719470e10
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/cbcfcf6f80c8dc15a823.asset
+    sha256: 0f7933c293ab4bf0734027932f3fe222bb2eb0d4d37d68b15f4d1b49bef94fd7
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/cbcfcf6f80c8dc15a823.asset.meta
+    sha256: 465bb1e0f5d04a4be22019b3ab583ead6696a635e228a75581ee63fe920b8e66
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/cebe7d1f95e205113b4e.asset
+    sha256: a103264b8843352e9f05ca570c0c094c51d1a77f4bb23d95aa6bd951100a7252
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/cebe7d1f95e205113b4e.asset.meta
+    sha256: 1986e52bcf92d6b6aa7b1e9bbf5e65641c0e81b80def73051352c3d0d96c0fdb
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_1c736f98243380345cf3.asset
+    sha256: 411e35f0091cf80f90e8499a59ab04540a376a9c84f2606856e4ee3ae6c44aca
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_1c736f98243380345cf3.asset.meta
+    sha256: 1b4a71ae01556c604b08bb4e0b86fce4a95c0ab98b8d08471c85bcab7831d7cc
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_1d3a14bfe28c017732a2.asset
+    sha256: 513681cc3b0a342cb4b74f5b63328ceb457a0f41d38fb4026c30a38e4acb25a8
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_1d3a14bfe28c017732a2.asset.meta
+    sha256: f8b9e62633eddddc90e0abfb62418925815922319f30517f2f538379a71dbbab
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_1fa1c3efcf8dbc550864.asset
+    sha256: 6dc63d4ed7f83daf4c1812f5c74869d3e03c273073236787216094a0fa1c34e5
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_1fa1c3efcf8dbc550864.asset.meta
+    sha256: 55ea1598315bbee0cb67dba33bf67dcb734e7d6ecc41660870f992252ea4770a
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_5c6958acdf8eb161d20c.asset
+    sha256: 06c9f8f0bd1591d8f4cede71f2a39ff14ecd848ddc3dfa52ea3d56daba99014e
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_5c6958acdf8eb161d20c.asset.meta
+    sha256: 2032c003b1793bfed89c8f93839e5c1cc6257a1258d8319355375e8079d62d72
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_5fcc522031ab7e31eb4c.asset
+    sha256: 1dff84754b6da8125a8069dcad051e0d50b51f52a85657a7d5dafeb4fae7d69f
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_5fcc522031ab7e31eb4c.asset.meta
+    sha256: 5cd9aaa502e1959dfca53ee7d67a23ea2a4204317c432ddbc1e0ac0c7943545f
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_81d5f8034a8d7e7fc8b7.asset
+    sha256: 4483660e26645ac6eaa2db28a2d64dc411f37c23ced1239a7684f8d6290081c6
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_81d5f8034a8d7e7fc8b7.asset.meta
+    sha256: 070b2b070b3c10fd1d93e782c17aad903f3bd8857801763042d8a7e8eb68ccbb
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_9287e3713fc31f065a58.asset
+    sha256: f41f8281bbd3aace03277069cc5f0dbedc3aec6d7f27d79349e70575dd28ab25
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_9287e3713fc31f065a58.asset.meta
+    sha256: 0d08085fbea2c7ae2606c2f88cd76c89a878d4c0acfd45feba1068aec4012802
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_9a4a0f7001a947dfaf15.asset
+    sha256: 422d04359a26c7ef3dcb283f2048ad6aabc2a44d3e1dafeb1c78fb063d492525
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_9a4a0f7001a947dfaf15.asset.meta
+    sha256: 0caf62223aaf02a14d0ef3fa71ca9dd007e77ac2ba2a5143c46c2ded7a2a09e1
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_a4f068d9b24182e19bbb.asset
+    sha256: 05b72cf60eed36f5f3ae8dd1585a65d4d13454e5e6802914f7d03548d27dea92
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_a4f068d9b24182e19bbb.asset.meta
+    sha256: 36bb3a2d6f882d4a982b7b4319e0dd633c8932cc4bada4849bba9d76174715af
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_a7e97c96a3ddbcb304d1.asset
+    sha256: 61e48d97b015046256815789e5b17aa64c53feccdc464186ffc5c52a29ea6e70
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_a7e97c96a3ddbcb304d1.asset.meta
+    sha256: 0adcfadb099348e4ff51301c0c827c2a4bd2cc54735d0863cd17023096a8d298
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_ae08d37081b82b8f8ac9.asset
+    sha256: e30812fd0b2200a0403e244bc2d5ac1116e6e4b3af2333bdfe9828f81f66f711
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_ae08d37081b82b8f8ac9.asset.meta
+    sha256: a58e4807330deae5fa9494bd972189a786fdd2fbb2c9b3191057fdf640e00280
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_b1e08545f695bd855516.asset
+    sha256: 2c90e84eda38af26f89c8e31b7cacb11d8b33bf171f6c2014f04f4a093af782f
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_b1e08545f695bd855516.asset.meta
+    sha256: 579601731817d24e9075b722faebb7bfe4ef50ffde49fe6d6297c00ac744fc51
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_bb9e7fcf49c2671ab1a9.asset
+    sha256: be42db2cc18943326dea3501e3482a074f804d5becf926f75a5d2d2c62dab744
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_bb9e7fcf49c2671ab1a9.asset.meta
+    sha256: 768f039b1f1fb955d00701a421a61c7723114aab431c07067d701e81726bcb8c
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_c988daf3ca38628d6f2b.asset
+    sha256: 0abb93d9c330075f348d88b1ecd61881bf6e53fc243074aa6fbed643605305d6
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_c988daf3ca38628d6f2b.asset.meta
+    sha256: 7f164dc8441c32a27d1950a23c40884dd2ecc441fbb6a7719f0b70ce0d6980c4
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_d6f3b58952e7f5a26520.asset
+    sha256: 06b1e7ae7cbf53db8cf546d4fbcc78e116ec0bfe9cf79c647ed91fb551945229
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/collision_d6f3b58952e7f5a26520.asset.meta
+    sha256: 0c14c8a5c3de00de49520fa46fcbb263e1a55d99cf517e6be6d9be1d235419f9
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/d02d7759a5e96b8a1d85.asset
+    sha256: 45c0ed38427841dbc477834a3c80a887af4b41093788488496062b1619d99662
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/d02d7759a5e96b8a1d85.asset.meta
+    sha256: 47e4342e19f427b8c61e501208ec1e5353d6842c439cf9d55457ad4db9213e4b
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/d6b4f8e46bcdbae041f0.asset
+    sha256: 6248bb72be479b931fe27797c535f560ba6d9a0fed0dbbcf6fd56bc673dbd020
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/d6b4f8e46bcdbae041f0.asset.meta
+    sha256: 038b4b49ebb4ca5cde2a2b1f014da27b6b30bb747c4257e1d62b34ee44e7633d
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/d9473a7eb8c4744daf07.asset
+    sha256: eb5e481fd25e5c6b7432e26efae2c5d5027fcb7490252ba392797c2e258591ad
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/d9473a7eb8c4744daf07.asset.meta
+    sha256: eed58a9d2b3d4425bc951c5d5a33adfea26095cb7828ed3318baedfb2dec3396
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/dc08d587c2884425886b.asset
+    sha256: 37aa5a0449416cabb07971beed0f61a7caf690558488b76a9e9ebd6dce71da00
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/dc08d587c2884425886b.asset.meta
+    sha256: 55c57440cf2b15c2e5a76e0cab3e23f7ddc374ed0cd1dc11d305eb8d1df53c1a
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/e02e3bfdfa3caa7d2753.asset
+    sha256: f9fa55021e6b4c1feed5c2099c27d362afd16fa079f6be5670e86da00a260cd2
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/e02e3bfdfa3caa7d2753.asset.meta
+    sha256: da17da862876938f9bd6e381afa29280098a41c5e43d923b82687b01a656d700
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/e3bffddbf370813b2ddb.asset
+    sha256: ce74d9f8245a715a5414c940eb94170a4dc5dd75c06407fb0298bd5815923d7b
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/e3bffddbf370813b2ddb.asset.meta
+    sha256: fd2ca09d0542a4830934a7c5a28969047299e52d66517462517d5223a26b7c42
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/e7e5e38f43976229de2f.asset
+    sha256: ed6f470ff2d68ce14e15bc013aaf3a02295310a7ed36d2d1385f55cdd87ab978
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/e7e5e38f43976229de2f.asset.meta
+    sha256: 9948e1fe53a6f7856f7be7f219dfb9c09377d6e5a4e186f3203abba5d104756a
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/ea849a0f076311552798.asset
+    sha256: 2d7ca53dab7f0b9a78e8430d88e64baa33e641c8ad4fe350c2cad49bd89a4d05
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/ea849a0f076311552798.asset.meta
+    sha256: 2e46348b08073036d0607f003f6ad62be5546448b7add0c201b6a8c4a25251b2
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/eb5174def612e4008351.asset
+    sha256: f9c0afcf97fe95286192fcec2cca1b3ee5fd25e72d2b7b6d6ba5339893e3d12b
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/eb5174def612e4008351.asset.meta
+    sha256: 9387be6e158bd9dbd2e76795081efe4c53e07e6c92b57068db9231b4d2d2bac8
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/eb678cfc33f92766a5cd.asset
+    sha256: b6218a76f8114f0e67f5b041aaeb073d83cea8a7c7c43c5a34067602f3165d05
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/eb678cfc33f92766a5cd.asset.meta
+    sha256: 020539ac3000c0d5adf9b322468ec73a63a3cbd60946ecdea22a68bd4d9cbb0c
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/f21aad2d2a79d50e8aa8.asset
+    sha256: e4c8c383147804e775e2a6af24547e3cddf140142c0ccff71b6b09611c182856
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/f21aad2d2a79d50e8aa8.asset.meta
+    sha256: f2d917d0a979369cdd5d0825ab65db80c64769d2dd6696d5187e59697c875542
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/f2a078ad198dad8f10e9.asset
+    sha256: 56b89379c47c1b4f0bd26517bc0d5b5ac9cec75d5ae33830f4549389854aed47
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/f2a078ad198dad8f10e9.asset.meta
+    sha256: 41506ae1a47820129a87ee85438a79e898344ee9b39dc19403ac54cd7806dea5
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/f6d73c10c6b60314997d.asset
+    sha256: f05ceff56ed71664c7fa056cf7ba5765f62367d05a85067a27143259b048da50
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/f6d73c10c6b60314997d.asset.meta
+    sha256: 4cd2333c1d98fb401d5ecc11712cbcf989ad36559c4b68460b9fdad850d0b303
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/f98f661e87512ac6ca0c.asset
+    sha256: f7bc8ecbbebdb52daa4eef5ab25e767ab929f34ec9e6efaa83da4b1eadeac730
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/f98f661e87512ac6ca0c.asset.meta
+    sha256: b8cc81c2f996d0355a1155f9904242c99b0aebdaa5ba911a5d06f473c219885a
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/fca1aa67b863f29e20f5.asset
+    sha256: eaeef9146e7816e914a5a888b75a6a37a5b657a8b411a65a451b5de8b197eb16
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/fca1aa67b863f29e20f5.asset.meta
+    sha256: 84a397ce06472f7aaf821118344db14d4f14e574612db6cf9572e3face5fd764
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/fccafc32bc01d90b42ba.asset
+    sha256: cbbab089919314e9cacb0e0f3d44457dbe49a83a2848dcb8659b89c2d79f4083
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/fccafc32bc01d90b42ba.asset.meta
+    sha256: 3b923aab35f2c4084ad3112c01d19c064be0499fcb5e7bf3281c5b1b91277ca3
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/ffd821889c2769a92fda.asset
+    sha256: 43a0922075e0969f4c790e27cc081a5da1b58f423b278770acba08fc288c0b0b
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/Meshes/ffd821889c2769a92fda.asset.meta
+    sha256: 19cf8d4b58bb951f583936ec4f474ee4ae7110bef75bf4272551ee7857c8610c
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/source.caelmor.json
+    sha256: 5de570680cef8e579aa75e29b9d2a9239ba4792714b00cfa67ea94794d01276f
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/source.caelmor.json.meta
+    sha256: 7b0c3e455807b5346d01c63fedde1817a2df1262a2325c3ced77de463957ca73
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/visual.glb
+    sha256: 187b29564531c5690646ce6ddf9b3364f8f06ee4941b839e20ab82f205f4619c
+  - path: Assets/_Project/World/Architecture/Generated/floor_visibility_demo/visual.glb.meta
+    sha256: 2583e33c9823bc7c90c46541c547c84a50513a04b502860d6e3cdc66e29cb3e5
+  - path: Assets/_Project/World/Architecture/Materials/forged_iron/color.png
+    sha256: 2d349768e74d58ee61e0046e49b70647043b7bdaa40670a81893d542c3306ca1
+  - path: Assets/_Project/World/Architecture/Materials/forged_iron/color.png.meta
+    sha256: 67954f36ad8f329e2b0ebdae0b390fdff7c1ffff9f27446fe6501582c14c52de
+  - path: Assets/_Project/World/Architecture/Materials/forged_iron/forged_iron.mat
+    sha256: 6fe9609e2730fe0f0925a8d59fb669ecc1f48d7a16c25ee0791613751689d0ce
+  - path: Assets/_Project/World/Architecture/Materials/forged_iron/forged_iron.mat.meta
+    sha256: 41f0ea297dd321e3454f676ff7cd4d16074376eba371ef6a425acfc443e4a7b3
+  - path: Assets/_Project/World/Architecture/Materials/forged_iron/material.json
+    sha256: 27ce629600dcaf49d988d9ccd7899bf81413ccb697eb3041ea4678349aa28d04
+  - path: Assets/_Project/World/Architecture/Materials/forged_iron/material.json.meta
+    sha256: 462eec7e06fffee15ede971f6bafd6a4ab7cc825d57a9461e42fc018a77fc776
+  - path: Assets/_Project/World/Architecture/Materials/forged_iron/metallic_smoothness.png
+    sha256: 84b8d0a8f26d3552756f10162d572bd82e4cb35570074c7882514eb2d61eb988
+  - path: Assets/_Project/World/Architecture/Materials/forged_iron/metallic_smoothness.png.meta
+    sha256: 733664ffcbdaada6c8d025ad5310d186622ab04394c1c243ae291b67916d9883
+  - path: Assets/_Project/World/Architecture/Materials/forged_iron/normal.png
+    sha256: 36fad875a8a3124549eb36635882ede40628ee91738c5452c7ffa51ef899c7e5
+  - path: Assets/_Project/World/Architecture/Materials/forged_iron/normal.png.meta
+    sha256: cd2f8867bc05e5b26abe8f3686d1349854fced85516486483248b1fa5b3289b8
+  - path: Assets/_Project/World/Architecture/Materials/split_oak_shingle/color.png
+    sha256: c48c597830f58047f34c6ececfe20e2c1468e4bfe896e55f5f8a8c6167d918af
+  - path: Assets/_Project/World/Architecture/Materials/split_oak_shingle/color.png.meta
+    sha256: 6abe437ef794d680846c1378cc4972543f4d48d3f57deff20e548761d0e40b9c
+  - path: Assets/_Project/World/Architecture/Materials/split_oak_shingle/material.json
+    sha256: 6f324d0aace19e49710abb241bc7687c793a4ce65e24de521e90fa0e70b092ab
+  - path: Assets/_Project/World/Architecture/Materials/split_oak_shingle/material.json.meta
+    sha256: f1b5acae0dc797337d150f981c90ac68138f899efc8d0a0706a7008a374f6cde
+  - path: Assets/_Project/World/Architecture/Materials/split_oak_shingle/metallic_smoothness.png
+    sha256: 6c695a77a1cdaffd843bc92f7d0cb0a8a896bf3b9e7a1880e759f3a1f521e77d
+  - path: Assets/_Project/World/Architecture/Materials/split_oak_shingle/metallic_smoothness.png.meta
+    sha256: c4eb9deb680bb6fd8beec24cdc8cb336f4b458b467b9f947a933675752eb0862
+  - path: Assets/_Project/World/Architecture/Materials/split_oak_shingle/normal.png
+    sha256: e137447889adb1af0aad0e78ddc4ea471224f5ded33c0a67c4cfb11ecc221913
+  - path: Assets/_Project/World/Architecture/Materials/split_oak_shingle/normal.png.meta
+    sha256: 0c0445535b34eba030e74386d168b9f24a64577a82f93c6b37f99d3b00784b7b
+  - path: Assets/_Project/World/Architecture/Materials/split_oak_shingle/split_oak_shingle.mat
+    sha256: e37de6c12df6ac5fad4117791c872964de5afc5cef68a5255df9e25de19ba402
+  - path: Assets/_Project/World/Architecture/Materials/split_oak_shingle/split_oak_shingle.mat.meta
+    sha256: 20624f555b3ba1e6988d1fa54fc33d86308e3be73356a81771f18f06420bca25
+  - path: Assets/_Project/World/Architecture/Shared/Materials/058a4cdd237597d3ee6c9aed05b135c560650881eb7e66983553b39a53b3b93a.mat
+    sha256: cfca56b7ed4cfbb761e51b1b9d43fc28e8315b30137328bac5cf3f3ce4adb9ad
+  - path: Assets/_Project/World/Architecture/Shared/Materials/058a4cdd237597d3ee6c9aed05b135c560650881eb7e66983553b39a53b3b93a.mat.meta
+    sha256: b6804e4d05fcfe3d4e0c07b05c470a312a5c47779dec46d5ed54cfe80a68a2d5
+  - path: Assets/_Project/World/Architecture/Shared/Materials/208cab2d80e11aa71b8520b861c8704c30fce6d9829830fc8c69c9865ea6b1ac.mat
+    sha256: 84a5acc3449b1fd9843d18c9876cec74c4637c0be6e58449eacadd0d759e2728
+  - path: Assets/_Project/World/Architecture/Shared/Materials/208cab2d80e11aa71b8520b861c8704c30fce6d9829830fc8c69c9865ea6b1ac.mat.meta
+    sha256: 97f4f79f2bd47cc86bc2ca6935e5a1bb051d940d12f49b3eb7423a611ae9f605
+  - path: Assets/_Project/World/Architecture/Shared/Materials/2266191027731b573f234de9f5e61b798927c413de1358d7687b152a945dfc1d.mat
+    sha256: 2c2e5975406619def0b0a71d0d4acd9327d1462155af16e9b156a18001d87f9e
+  - path: Assets/_Project/World/Architecture/Shared/Materials/2266191027731b573f234de9f5e61b798927c413de1358d7687b152a945dfc1d.mat.meta
+    sha256: be026d172b8287bc6aa152d990b9f1e8ca5680aff3160ff125b3437fc3a1c5da
+  - path: Assets/_Project/World/Architecture/Shared/Materials/29a6a0d0657db3a42828f24ed61e7746bd93ab9bff9f83046be3e201a80f22d8.mat
+    sha256: d6ba5e31e6bf6cf71ef0f85a4c2231a8fc84494736dd3eae27733cafe8a18f7b
+  - path: Assets/_Project/World/Architecture/Shared/Materials/29a6a0d0657db3a42828f24ed61e7746bd93ab9bff9f83046be3e201a80f22d8.mat.meta
+    sha256: fdd38a254603c3bb96b64845543dbda96e209df8f76b84890a5eba0559abf3d4
+  - path: Assets/_Project/World/Architecture/Shared/Materials/4d2819148ee98eeccb88be4cbe5cc55bba8510c614cf42f0487a12b178d5698b.mat
+    sha256: b5d2ce56f2ffdedaaaf5f5c3f60caa4ba555f23e0f920c47eae7c08eff501e04
+  - path: Assets/_Project/World/Architecture/Shared/Materials/4d2819148ee98eeccb88be4cbe5cc55bba8510c614cf42f0487a12b178d5698b.mat.meta
+    sha256: 1b273a7fbe19ade2c3ed04cac6140702a89aa8dd6f5aaa33b22b8a5b86cd9da9
+  - path: Assets/_Project/World/Architecture/Shared/Materials/742f081343ec1f8be98b1ab4c634f473c667f6b7dd3a882a170555cf959cde4c.mat
+    sha256: 5138494abb1759700560e16ca36c0e2ab0abc5d1934e63fcb1b08288587c8eb6
+  - path: Assets/_Project/World/Architecture/Shared/Materials/742f081343ec1f8be98b1ab4c634f473c667f6b7dd3a882a170555cf959cde4c.mat.meta
+    sha256: 23801605b564ae3b0b948ed999d8a0b1ae438f7c22124e5e163c2f89de7eaf56
+  - path: Assets/_Project/World/Architecture/Shared/Materials/bc9e586dea2d381684d7c9961dc7962c6e5cf93df3e47c8f3f004618ae05ed87.mat
+    sha256: e029f8fadc2ed304266c56c9ce7555086df7d44e9f982db4ea88da5c4d28cde8
+  - path: Assets/_Project/World/Architecture/Shared/Materials/bc9e586dea2d381684d7c9961dc7962c6e5cf93df3e47c8f3f004618ae05ed87.mat.meta
+    sha256: f5426287518fb1aa6c2dd29e52687e945b03c807432c208b359e04478b9f6299
+  - path: Assets/_Project/World/Architecture/Shared/Materials/c9ce528897d086607c016442c2192624998214b6a0d6065759a5180e4fc3250a.mat
+    sha256: 54007927cb978db589928ccaff18d0b1d58b0487a2cb0672ab0f2e6755ba1cfe
+  - path: Assets/_Project/World/Architecture/Shared/Materials/c9ce528897d086607c016442c2192624998214b6a0d6065759a5180e4fc3250a.mat.meta
+    sha256: 58cab83912049f016657fbed42942070e73db02cefe1879c2e698022c5681afc
+  - path: Assets/_Project/World/Architecture/Shared/Materials/cfea5e1a2e1471701b66a97236376350f9a7db5e27b1f1ab1dd0f14169a94ad5.mat
+    sha256: f5eb6b61c3a4e4fdc0db861b62d3d57fb0ab6a5e47f681b354f075e813b76dc4
+  - path: Assets/_Project/World/Architecture/Shared/Materials/cfea5e1a2e1471701b66a97236376350f9a7db5e27b1f1ab1dd0f14169a94ad5.mat.meta
+    sha256: c1f8e4b5d703cf700da8c95150953670807fbe3ef031cbc403ad632582529afc
+  - path: Assets/_Project/World/Architecture/Shared/Materials/dc980ac97b760d893172bc99c459b527666ec43ed0f14839123c4a72dd7013fc.mat
+    sha256: bf1062d4e15f7386b81067c40edea4e0f833ee1b059c6832c9ea77c50be1d3ae
+  - path: Assets/_Project/World/Architecture/Shared/Materials/dc980ac97b760d893172bc99c459b527666ec43ed0f14839123c4a72dd7013fc.mat.meta
+    sha256: 9b900cc197c13a28fe7ef28b347e609992dc2dd762c4f6b721dd5f005d674a81
+  - path: Assets/_Project/World/Architecture/Shared/Materials/e11c0502f5fcd173f3e03c079adcbbd58e3aad1710cd68019af7d55c748c5a54.mat
+    sha256: 2cdf43767a476154d55236aaafe80347d40b50b2e32cf25a7340d8b519df2677
+  - path: Assets/_Project/World/Architecture/Shared/Materials/e11c0502f5fcd173f3e03c079adcbbd58e3aad1710cd68019af7d55c748c5a54.mat.meta
+    sha256: 9b5e98c12bd00833b90a6d758000fde004dd5d08473d7b85316ca5e4fec0b968
+  - path: Assets/_Project/World/Architecture/Shared/Textures/197ccce1a3b7cbde67099b21bbafa1041d19cfc19fd38fb4dc07505fbdbf886c.png
+    sha256: 00747e138bf8c8f685ebce8bd45e67186dec75f235c6f731e51ff8ba21f28b2b
+  - path: Assets/_Project/World/Architecture/Shared/Textures/197ccce1a3b7cbde67099b21bbafa1041d19cfc19fd38fb4dc07505fbdbf886c.png.meta
+    sha256: ed26dbbe5658c82d8714413d5c780e9ce8ddd1ceaa63c13d106677750b809bc8
+  - path: Assets/_Project/World/Architecture/Shared/Textures/1d0c8e47b27e36ac19130d1385080fb33d14312a626b736919dc7be22d9644fc.png
+    sha256: f7b796ddb85149d4b84ba07b42cf7064f970b73b44eeaf865f5c7c42f5f2d452
+  - path: Assets/_Project/World/Architecture/Shared/Textures/1d0c8e47b27e36ac19130d1385080fb33d14312a626b736919dc7be22d9644fc.png.meta
+    sha256: 6cff39da49c108cf1a040663c91454164394be31917c04b89a1ae51d3b315cb2
+  - path: Assets/_Project/World/Architecture/Shared/Textures/23a79b3fb6181a55420f2d46e917d3870df3ca3a413e99c26a206450a0f5c749.png
+    sha256: ea45419702e70a3d83786bf9eb10a8bc25fe5128a0005a95bc773380d6547fe5
+  - path: Assets/_Project/World/Architecture/Shared/Textures/23a79b3fb6181a55420f2d46e917d3870df3ca3a413e99c26a206450a0f5c749.png.meta
+    sha256: 9a956454a71271f859414acc10479fc67291432e08c654625e74ba05d977911f
+  - path: Assets/_Project/World/Architecture/Shared/Textures/3fce0551966160b4e1da0393f17999c0cdb1da0652032a29b5498097dcb6b216.png
+    sha256: bbce00e859c22ee113a6be92efc61dba90c3dd7960ed8896eccfc87b588831ec
+  - path: Assets/_Project/World/Architecture/Shared/Textures/3fce0551966160b4e1da0393f17999c0cdb1da0652032a29b5498097dcb6b216.png.meta
+    sha256: fd9cb36d50ab12da861a94e3f32e2593f3eb2545afde82d9f1f47e32c1414a02
+  - path: Assets/_Project/World/Architecture/Shared/Textures/3fe509ffc41b5b3e47df05c33992ca36e0c1949e8a632f6314d7373837d0ec80.png
+    sha256: c6b10be2a70ba0662a75aaf9a2ffe15f352943869b78837391665eccfa856267
+  - path: Assets/_Project/World/Architecture/Shared/Textures/3fe509ffc41b5b3e47df05c33992ca36e0c1949e8a632f6314d7373837d0ec80.png.meta
+    sha256: 4b36bbfae306bc55ae2a2f654d555a9141e05a50ea39e041bbe54faba30e645d
+  - path: Assets/_Project/World/Architecture/Shared/Textures/4334707c4aa1d8d885160920819cc51015bfec5698e520bf67b0096eb172d2a8.png
+    sha256: dc54c05b58a348ebff414ccf2b75da95de8ed6982b4068bdb8da769ccfa0a70e
+  - path: Assets/_Project/World/Architecture/Shared/Textures/4334707c4aa1d8d885160920819cc51015bfec5698e520bf67b0096eb172d2a8.png.meta
+    sha256: 9f6428455dc5e51acca8549a7a442416f4c342917f7cc599dc7b7421c4877c30
+  - path: Assets/_Project/World/Architecture/Shared/Textures/43e2cfa41a9bfe63d2da7f7a4f7802279d5caf921bf0e8b37b61cfc7f54b461f.png
+    sha256: 5b1602be4ca1a360186195b773034624d46afa21918b5665d5b52cca99db6200
+  - path: Assets/_Project/World/Architecture/Shared/Textures/43e2cfa41a9bfe63d2da7f7a4f7802279d5caf921bf0e8b37b61cfc7f54b461f.png.meta
+    sha256: cffeb311b437eae810f91305853d66bee73ca74e848fd6eca1dc68148142f97b
+  - path: Assets/_Project/World/Architecture/Shared/Textures/4ee91f26dfafb65a5ec72f606825b1b7a30c3f8f7d36e79bd23e47845b4c1004.png
+    sha256: f418b1437a59c1ee2e35dc4a9d5174b4f1771071d048f7ac4ca24f57a22d664e
+  - path: Assets/_Project/World/Architecture/Shared/Textures/4ee91f26dfafb65a5ec72f606825b1b7a30c3f8f7d36e79bd23e47845b4c1004.png.meta
+    sha256: a45f3a1416f1dc5f21f04e398ed53eb505508f15b8e246510bf0fe4e23766f80
+  - path: Assets/_Project/World/Architecture/Shared/Textures/50a816d05dfdf9cf4d887cfbe412a2167d76a380eede265ecc267b5bae38e27b.png
+    sha256: 996674f1b1de3c528193ecf2d17295898c39e137403d1dea7fcd0c79cb6ab44a
+  - path: Assets/_Project/World/Architecture/Shared/Textures/50a816d05dfdf9cf4d887cfbe412a2167d76a380eede265ecc267b5bae38e27b.png.meta
+    sha256: f5ea34f7d3babee0754618e0b40dadc4d121a9889ad6354001d2637b3c684fa9
+  - path: Assets/_Project/World/Architecture/Shared/Textures/5fa20a85cb651fec3892f827bb6a8e0c853e898929c38afedc192db2e405e369.png
+    sha256: b0e788420a402017efa8f2fa5b3cedd98e6abc4caa8fe60e860c41569d93d793
+  - path: Assets/_Project/World/Architecture/Shared/Textures/5fa20a85cb651fec3892f827bb6a8e0c853e898929c38afedc192db2e405e369.png.meta
+    sha256: 649ef712a7bb289d9c25339ed907af0278f15907af3f1b6fb16aceefb2c17a35
+  - path: Assets/_Project/World/Architecture/Shared/Textures/63845cdd6261b840b6fb1567555e2f20406e65b609400329f96bcd634dc6a531.png
+    sha256: 21eed6665cd474296cf1dbc7b0922ea0fe267957e26c493a68daa77c15c4f86d
+  - path: Assets/_Project/World/Architecture/Shared/Textures/63845cdd6261b840b6fb1567555e2f20406e65b609400329f96bcd634dc6a531.png.meta
+    sha256: b33ebbf832860a081e315edf38a695664fbe833db7b0490a59c1ddc5fdfa7d47
+  - path: Assets/_Project/World/Architecture/Shared/Textures/64392c2b6c6af6329305191b084324f2de784817eb488ecb488a3e63c5868a31.png
+    sha256: bd397b26ab8ea305e2243a5056b05491d5e97239217cf778dc545a81c42e580c
+  - path: Assets/_Project/World/Architecture/Shared/Textures/64392c2b6c6af6329305191b084324f2de784817eb488ecb488a3e63c5868a31.png.meta
+    sha256: 9493d803c48acdb640084c410083384377663d8e58ddf756656a94ffd5b71a29
+  - path: Assets/_Project/World/Architecture/Shared/Textures/780212f13530b974b25b37ce297cf6c32358fb87228bdbde1bc9b8357209cb72.png
+    sha256: 66e4a9a6393cfb819b35b15566fc68b2114c3fa6a8d5352ebbf94a0b7a04b0f3
+  - path: Assets/_Project/World/Architecture/Shared/Textures/780212f13530b974b25b37ce297cf6c32358fb87228bdbde1bc9b8357209cb72.png.meta
+    sha256: e50a7339caf3ea2d5aab128d62b50ba64b5e808e3481c51736b74349f849b3da
+  - path: Assets/_Project/World/Architecture/Shared/Textures/7f10d8f36ddcfb984b06d1b458b9230e153829437a7776f8ca7f209789254e71.png
+    sha256: 5523acf86fe084c7a9330e6a6c68f16c7c5e59f49677f4bfd6624d5a1e9b14ba
+  - path: Assets/_Project/World/Architecture/Shared/Textures/7f10d8f36ddcfb984b06d1b458b9230e153829437a7776f8ca7f209789254e71.png.meta
+    sha256: 6671b487ffcd520320d1c8ddb1c8568ff087b07d0b90d072785cbe3f9d92a105
+  - path: Assets/_Project/World/Architecture/Shared/Textures/9a7010c6440e70cf480816b0c2b3932e1d3f5e3c627342e97c1cdb355ae004a3.png
+    sha256: ac63c26b43d58cb9ca5f427efc0b88fa5230a39f5a0cab0c6eaea4c1bd754708
+  - path: Assets/_Project/World/Architecture/Shared/Textures/9a7010c6440e70cf480816b0c2b3932e1d3f5e3c627342e97c1cdb355ae004a3.png.meta
+    sha256: 396c49ee9603b5105572acf9e3849412b238b775ac0f71206b2244238ff09f54
+  - path: Assets/_Project/World/Architecture/Shared/Textures/afa95a1b96043e4573b8d4cfd63d7606a7da873b40520e1e359ee6febcd94e59.png
+    sha256: 02668fc450f8793f4dfcae2554285eb9b8dd5a71fff82076d9c8fbda4709ea25
+  - path: Assets/_Project/World/Architecture/Shared/Textures/afa95a1b96043e4573b8d4cfd63d7606a7da873b40520e1e359ee6febcd94e59.png.meta
+    sha256: 2537f44083ad1e0dae45ed49c8ff93078c12319f58da0ae6d0ac6a487bd1008b
+  - path: Assets/_Project/World/Architecture/Shared/Textures/b1264000d1aaf6ce6520f51a16c8d86bea8ba5c6284d99aa5e2527b7a9e2a84f.png
+    sha256: bce152c022055630aab9cb7f4ea04cfa1477e0e3da3cd28f0126b142d0cc0aa7
+  - path: Assets/_Project/World/Architecture/Shared/Textures/b1264000d1aaf6ce6520f51a16c8d86bea8ba5c6284d99aa5e2527b7a9e2a84f.png.meta
+    sha256: 8821bc9182159a562e3cef6f2c23813bd11682cfcdca183a8ece4eeabc4d0d78
+  - path: Assets/_Project/World/Architecture/Shared/Textures/bb9861eb43e62d0a30e4b985ccfff18647cf578b6cb41fe38f9b0620a52d9f5c.png
+    sha256: f69a4c1ccf3be9fe3819daccefc4f25eb68e82de0b261b31d9fbb13bbf7ce068
+  - path: Assets/_Project/World/Architecture/Shared/Textures/bb9861eb43e62d0a30e4b985ccfff18647cf578b6cb41fe38f9b0620a52d9f5c.png.meta
+    sha256: 1bbcbc3802b72bd088b22b7b895a6717e747d185d38b75375222ae12d23b0e30
+  - path: Assets/_Project/World/Architecture/Shared/Textures/bc63fa7769a6322ea3d8d045b6b9780849d532c7ab3141d1975e2f59489cdbfb.png
+    sha256: 54abf0369845035b4f28c177e405e151ec9fe533d7ad07fdb1d537ccabf44b8c
+  - path: Assets/_Project/World/Architecture/Shared/Textures/bc63fa7769a6322ea3d8d045b6b9780849d532c7ab3141d1975e2f59489cdbfb.png.meta
+    sha256: 958f4c2163c92fdb5979ce89b7eb2c29824ca7416869bf1b539fa82bd274a435
+  - path: Assets/_Project/World/Architecture/Shared/Textures/d2b8fceedb7a85894fd60519bb5464c7db0b62d8d7c88de90fccaec35b63e9b1.png
+    sha256: 3112a6e4c3f4f46c835a60612610b9d0068be241ecc70d18699c194d28eca752
+  - path: Assets/_Project/World/Architecture/Shared/Textures/d2b8fceedb7a85894fd60519bb5464c7db0b62d8d7c88de90fccaec35b63e9b1.png.meta
+    sha256: fedb084cf0d9b06c6014e25a3a129dedb57a0329d2ebfcdf836b3d22fe3ed2db
+  - path: Assets/_Project/World/Architecture/Shared/Textures/d8566c7520e1ad8d806311f1b7229331c67ce369c3d44bd38d6646d905e88e2d.png
+    sha256: 7acdb20416be1001094b1f9c296fe3e886f6ddbeba50b55ead77c3a803a52b37
+  - path: Assets/_Project/World/Architecture/Shared/Textures/d8566c7520e1ad8d806311f1b7229331c67ce369c3d44bd38d6646d905e88e2d.png.meta
+    sha256: 3cfcf0430c4ce2b22f787d5470a9ec1fb2fa9c312e24ef16e862553d1322952c
+  - path: Assets/_Project/World/Architecture/Shared/Textures/dce4edd2f7e7ae95e8546bc9f18abd565c4be15fd9316ee3c6756476b99aa494.png
+    sha256: d38ecafeaa48194c88aae48d832d6b28cffd8c62754e410786140645c28a4fac
+  - path: Assets/_Project/World/Architecture/Shared/Textures/dce4edd2f7e7ae95e8546bc9f18abd565c4be15fd9316ee3c6756476b99aa494.png.meta
+    sha256: a6258f9ef7d9975384214623049bea6235a41c9dc6fb652080f95b605622510a
+  - path: Assets/_Project/World/Architecture/Shared/Textures/eba7be89155449e664e8f5aca8b2cc656667775d0221a639c4e60871c4c98edd.png
+    sha256: 43fdf5764df454829366b3ab8d103c5eb155d39934ba641c9b1624ff962ed0fc
+  - path: Assets/_Project/World/Architecture/Shared/Textures/eba7be89155449e664e8f5aca8b2cc656667775d0221a639c4e60871c4c98edd.png.meta
+    sha256: cf733d70e517ee21bb9976551a88b7039f4625462a496a5af99aa9b204768f10
+  - path: Assets/_Project/World/Architecture/Shared/Textures/efe8c6d4014b37c5287f8b4304e259d4bad38d7097b8c5caaddd4836b7000485.png
+    sha256: 71d567556ed436b0e19e68314b99482f4631c634d054a7b6a7fee10ef6aee302
+  - path: Assets/_Project/World/Architecture/Shared/Textures/efe8c6d4014b37c5287f8b4304e259d4bad38d7097b8c5caaddd4836b7000485.png.meta
+    sha256: 49b42a188a4ff8e2e7d90b44d3536dd91004dd61225fa1b248dc653b8db25400
+  - path: Assets/_Project/World/Architecture/Shared/Textures/fd43316480ae1fd9807ac5805ad9a3b2d5faa3bb1513a77d53eceb464bca641d.png
+    sha256: 0a6727dc80990e70e62ce6cb3cf85809e0f18edab47d74e2b8972988d937b8c1
+  - path: Assets/_Project/World/Architecture/Shared/Textures/fd43316480ae1fd9807ac5805ad9a3b2d5faa3bb1513a77d53eceb464bca641d.png.meta
+    sha256: babf855f934c8601eab92247596c615014f9e745c4ef23eb1094800639e817e8
