@@ -18,6 +18,64 @@ The original manual Lowmark interface used orthogonal RECT/L/T/U plans, intersec
 
 Keep full-section roof clearance, bearing and aperture checks in force when extending the surviving path. For timber this includes the projected section, deck underside and supporting fascia plane. For roof cover retain valid overlap/headlap and valley/ridge clearance in each topology mode. The earlier revision-specific dimensions, material revisions and test tolerances are available in Git history.
 
+## Floor-separated presentation (additive v0.16)
+
+New Settings and Blender authoring default `floor_separation=True`. Loading a
+saved snapshot that omits this key explicitly selects `False`; its old scene and
+export shape remain usable. To migrate, load the building's settings, enable
+Floor-separated visuals and regenerate All Layers. Changing this setting while
+visual sections are protected fails before replacement; unprotect or retain the
+legacy representation. Scoped regeneration requires the same saved settings.
+Disabling separation with section-specific material-slot overrides also fails
+safely: restore those slots or retain the separated representation rather than
+silently merging different floor finishes.
+
+The pure engine still emits its original semantic construction buffers. The
+Blender adapter partitions their finished geometry **after** material/atlas/UV
+binding and **before** the staged collection swap. Every construction volume
+retains its own foundation datum, storey height and occupied floor count. Floor
+0 is ground; the additional band at `count` is unoccupied attic/gable geometry.
+Continuous solid members and walls are clipped at these planes, not assigned
+by origin. Cut solid boundaries are capped, surface skins remain surfaces.
+Existing UV0, atlas/detail UVs, color layers, materials and exterior normals are
+interpolated; UV1 lightmap charts are repacked within each resulting section.
+Semantically identified hollow flues/chimneys have explicit `ALWAYS` behavior
+so cutting cannot plug their voids. Legacy four-strip stacks may be partitioned
+without bridging their central void. Roofing is `COVERING`, independent of
+occupied floor indices. Unhosted World access assemblies use a render-only
+shared ALWAYS group, never an inferred storey or occupancy area.
+
+Hierarchy: persistent building root → construction volume → visibility/floor
+group → renderable construction-role sections. Stable `caelm_buffer_id` section
+keys retain `caelm_source_buffer_id`. Existing layer, structural/functional
+roles, construction provenance and world-zone associations remain unchanged.
+Sections carry `caelm_building_id`, `caelm_floor_volume`, `caelm_floor_index`,
+`caelm_visibility` (`FLOOR`, `COVERING`, `ALWAYS`), `caelm_floor_min/max` and
+`caelm_floor_contract=1`. Coordinates are building-local Blender Z metres;
+standard Y-up GLB conversion makes the same height scalar local Y. Build UUID
+remains a regeneration identifier; persistent building UUID is separate.
+
+Full exterior shows all sections. An explicitly selected occupied floor sets
+the cutoff to that volume's storey ceiling. Show FLOOR sections with minimum
+height below cutoff; hide COVERING above it (retain wholly lower wing roofs);
+ALWAYS stays visible. Other wings retain their own complete floor sections,
+using their own datums rather than a fabricated global floor index. Blender's
+preview changes visual `hide_set/hide_render` only, snapshots preexisting hidden
+states and restores them on Exterior. This is an inspection tool, not an
+assertion that generated exterior shells contain usable interiors.
+
+Export always selects the full visual hierarchy, even during an interior
+preview, then restores preview state. GLB node extras and the optional additive
+`floor_presentation` sidecar extension retain all identities and schedules.
+The version-1 building export's existing fields keep their meanings. Unsplit
+exports omit the extension. Collision exports are unchanged and independent.
+`occupancy_areas=[]` is intentional: exterior shells do not establish enterable
+areas, stairs, navigation, interior slabs or a player floor. A client must bind
+**authored** occupancy volumes and occupiable bands before enabling automatic
+selection. No server state, replication or save field belongs to this feature.
+
+See [floor evidence and client handoff](evidence/floor_visibility/README.md).
+
 ## Construction treatments
 
 The Director approved the seven treatment families below. The implementation uses the following IDs, component mapping and settings. This section carries forward the contract changes from `4ae1d62`. See [the consolidation record](../../../00_ADMIN/Reference/Caelmor_Repository_Consolidation.md) for provenance and recovery refs.

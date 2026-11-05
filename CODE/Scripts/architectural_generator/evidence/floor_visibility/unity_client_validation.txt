@@ -1,0 +1,10 @@
+Caelmor client floor visibility presentation validation
+
+Tool: Unity Editor 6000.5.5f1, Windows x64, built-in render pipeline project settings.
+Command: Unity.exe -batchmode -nographics -quit -projectPath UNITY -executeMethod Caelmor.Unity.Editor.FloorVisibilityPresentationEditorValidation.Run -logFile UNITY/floor-visibility-validation.log
+Result: exit code 0; log marker CAELMOR_FLOOR_VISIBILITY_CHECKS_PASSED.
+Source check: UNITY/Tools/Compile-Source.ps1 passed with 0 warnings and 0 errors.
+
+Checks cover explicit occupancy versus an adjacent outside probe, local-Y bands for two volumes at different elevations under one building root, dwell and boundary hysteresis, FLOOR/COVERING/ALWAYS cutoff behavior, initially disabled and externally toggled renderer states, nested built-in camera restoration, Scriptable Render Pipeline callback handler paths, occupancy collider preservation, and disabling during an active render.
+
+This is an isolated component validation; the playable scene remains unmodified and no rendered player scene or multi-camera runtime experience is claimed.

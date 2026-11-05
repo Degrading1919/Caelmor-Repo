@@ -39,8 +39,12 @@ class Settings:
     crafted_curves: bool = False
     seed_massing: bool = False
     construction_overrides: dict | None = None
+    # Saved pre-floor scenes explicitly migrate to False in the Blender loader.
+    floor_separation: bool = True
 
     def check(self, validate_shape=True):
+        if not isinstance(self.floor_separation, bool):
+            raise ValueError('Floor separation must be boolean')
         for name in ('width','depth','wing_width','wing_depth','floor_height','pitch','overhang','window_density','maintenance','age'):
             if not math.isfinite(getattr(self,name)):
                 raise ValueError(f'{name} must be finite')

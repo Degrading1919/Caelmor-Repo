@@ -1,6 +1,14 @@
 # Caelmor Architectural Generator
 
-Version 0.15.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, Unity code, game schemas, or regional canon.
+Version 0.16.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, game schemas, or regional canon. An isolated, opt-in Unity client floor-presentation adapter accompanies floor-aware exports; it is not wired into the playable scene.
+
+New buildings have floor-separated visuals by default. Select a building, set
+**Simulated floor** (0 = ground, −1 = exterior), choose its **Construction volume**
+and **Apply Floor Preview**. The preview only hides visual components. Full GLB
+exports remain complete even while previewing an interior. Old saved buildings
+remain unsplit until explicitly enabled and regenerated; unprotect edited
+sections before changing representation. See [floor evidence and integration
+handoff](evidence/floor_visibility/README.md) for limitations and measurements.
 
 See the [engine contract](ENGINE_CONTRACT.md) for the current source baseline, legacy scene compatibility and the proposed treatment interface.
 

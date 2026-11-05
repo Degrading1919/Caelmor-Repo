@@ -48,7 +48,9 @@ def passage(collection, plan):
 def main():
     bpy.ops.wm.read_factory_settings(use_empty=True)
     addon.register()
-    s = fixture('THORNFELL','GATEHOUSE', detail='LOW')
+    # Retain this historical unsplit lifecycle gate; floor-aware lifecycle and
+    # section-level protection have their own native suite.
+    s = fixture('THORNFELL','GATEHOUSE', detail='LOW', floor_separation=False)
     old = replace(s,construction_overrides=None)
     collection, _ = build(old)
     assert 'construction_overrides' not in load_settings(collection)

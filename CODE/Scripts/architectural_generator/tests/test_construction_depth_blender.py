@@ -16,7 +16,7 @@ def main():
     bpy.ops.wm.read_factory_settings(use_empty=True)
     addon.register()
     props=bpy.context.scene.caelmor_settings
-    base=replace(case('SMITHY'),detail='LOW')
+    base=replace(case('SMITHY'),detail='LOW',floor_separation=False)
     addon._set_props(props,base)
     bpy.ops.caelmor.generate()
     collection=next(c for c in bpy.data.collections if c.get('caelm_build'))

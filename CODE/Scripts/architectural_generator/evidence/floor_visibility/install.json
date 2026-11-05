@@ -1,0 +1,10 @@
+{
+  "installed_archive": "C:\\Users\\CK\\Documents\\Caelmor-Repo\\CODE\\Scripts\\architectural_generator\\dist\\caelmor_architecture.zip",
+  "archive_sha256": "d745890e86c4a5400c06b6b467d93d25b4a23e6a50f5ba7da8cceea2a665146c",
+  "native_install_and_generate": true,
+  "isolated_preferences": true,
+  "region": "LOWMARK",
+  "building_type": "FARMHOUSE",
+  "geometry_mode": "SOLID",
+  "world_aware": true
+}

@@ -1,0 +1,377 @@
+{
+  "blender": "5.0.1",
+  "cases": [
+    {
+      "case": "lowmark_1f",
+      "settings": {
+        "age": 35.0,
+        "context": "AUTO",
+        "crafted_curves": false,
+        "craftsmanship": "STANDARD",
+        "depth": 6,
+        "detail": "MEDIUM",
+        "floor_height": 2.65,
+        "floor_separation": true,
+        "floors": 1,
+        "footprint": "RECT",
+        "function": "FARMHOUSE",
+        "geometry_mode": "SOLID",
+        "maintenance": 0.7,
+        "overhang": 0.45,
+        "pitch": 48.0,
+        "region": "LOWMARK",
+        "roof_style": "AUTO",
+        "seed": 17,
+        "seed_massing": false,
+        "use_grammar": false,
+        "wealth": "ESTABLISHED",
+        "width": 9,
+        "window_density": 1.0,
+        "wing_depth": 4.5,
+        "wing_width": 4.2,
+        "world_aware": false
+      },
+      "volumes": [
+        {
+          "base": 0.45,
+          "boundaries": [
+            3.1
+          ],
+          "count": 1,
+          "height": 2.65,
+          "volume": "main"
+        }
+      ],
+      "before": {
+        "meshes": 24,
+        "vertices": 11660,
+        "triangles": 17784,
+        "materials": 11,
+        "glb_bytes": 4782412,
+        "primitives": 24
+      },
+      "after": {
+        "meshes": 28,
+        "vertices": 11868,
+        "triangles": 18040,
+        "materials": 11,
+        "glb_bytes": 4840148,
+        "primitives": 28
+      },
+      "exterior_ray_checks": 594,
+      "hidden_ground_meshes": 13
+    },
+    {
+      "case": "lowmark_2f",
+      "settings": {
+        "age": 35.0,
+        "context": "AUTO",
+        "crafted_curves": false,
+        "craftsmanship": "STANDARD",
+        "depth": 6,
+        "detail": "MEDIUM",
+        "floor_height": 2.65,
+        "floor_separation": true,
+        "floors": 2,
+        "footprint": "L",
+        "function": "FARMHOUSE",
+        "geometry_mode": "SOLID",
+        "maintenance": 0.7,
+        "overhang": 0.45,
+        "pitch": 48.0,
+        "region": "LOWMARK",
+        "roof_style": "AUTO",
+        "seed": 17,
+        "seed_massing": false,
+        "use_grammar": false,
+        "wealth": "ESTABLISHED",
+        "width": 9,
+        "window_density": 1.0,
+        "wing_depth": 4.5,
+        "wing_width": 4.2,
+        "world_aware": false
+      },
+      "volumes": [
+        {
+          "base": 0.45,
+          "boundaries": [
+            3.1,
+            5.75
+          ],
+          "count": 2,
+          "height": 2.65,
+          "volume": "main"
+        }
+      ],
+      "before": {
+        "meshes": 26,
+        "vertices": 19618,
+        "triangles": 29932,
+        "materials": 12,
+        "glb_bytes": 8463280,
+        "primitives": 26
+      },
+      "after": {
+        "meshes": 37,
+        "vertices": 20922,
+        "triangles": 31702,
+        "materials": 12,
+        "glb_bytes": 8748784,
+        "primitives": 37
+      },
+      "exterior_ray_checks": 594,
+      "hidden_ground_meshes": 24
+    },
+    {
+      "case": "lowmark_3f",
+      "settings": {
+        "age": 35.0,
+        "context": "AUTO",
+        "crafted_curves": false,
+        "craftsmanship": "STANDARD",
+        "depth": 6,
+        "detail": "MEDIUM",
+        "floor_height": 2.65,
+        "floor_separation": true,
+        "floors": 3,
+        "footprint": "RECT",
+        "function": "FARMHOUSE",
+        "geometry_mode": "SOLID",
+        "maintenance": 0.7,
+        "overhang": 0.45,
+        "pitch": 48.0,
+        "region": "LOWMARK",
+        "roof_style": "AUTO",
+        "seed": 17,
+        "seed_massing": false,
+        "use_grammar": false,
+        "wealth": "ESTABLISHED",
+        "width": 9,
+        "window_density": 1.0,
+        "wing_depth": 4.5,
+        "wing_width": 4.2,
+        "world_aware": false
+      },
+      "volumes": [
+        {
+          "base": 0.45,
+          "boundaries": [
+            3.1,
+            5.75,
+            8.399999999999999
+          ],
+          "count": 3,
+          "height": 2.65,
+          "volume": "main"
+        }
+      ],
+      "before": {
+        "meshes": 24,
+        "vertices": 15108,
+        "triangles": 23052,
+        "materials": 11,
+        "glb_bytes": 6459692,
+        "primitives": 24
+      },
+      "after": {
+        "meshes": 41,
+        "vertices": 16828,
+        "triangles": 25504,
+        "materials": 11,
+        "glb_bytes": 6852812,
+        "primitives": 41
+      },
+      "exterior_ray_checks": 594,
+      "hidden_ground_meshes": 28
+    },
+    {
+      "case": "smithy_wings",
+      "settings": {
+        "age": 35.0,
+        "construction_overrides": {},
+        "context": "AUTO",
+        "crafted_curves": true,
+        "craftsmanship": "STANDARD",
+        "depth": 7.0,
+        "detail": "MEDIUM",
+        "floor_height": 2.65,
+        "floor_separation": true,
+        "floors": 2,
+        "footprint": "L",
+        "function": "SMITHY",
+        "geometry_mode": "EFFICIENT",
+        "maintenance": 0.7,
+        "overhang": 0.45,
+        "pitch": 48.0,
+        "region": "LOWMARK",
+        "roof_style": "AUTO",
+        "seed": 91,
+        "seed_massing": true,
+        "use_grammar": true,
+        "wealth": "ESTABLISHED",
+        "width": 11.0,
+        "window_density": 1.0,
+        "wing_depth": 4.5,
+        "wing_width": 4.2,
+        "world_aware": true
+      },
+      "volumes": [
+        {
+          "base": 0.32,
+          "boundaries": [
+            4.14
+          ],
+          "count": 1,
+          "height": 3.82,
+          "volume": "forge_hall"
+        },
+        {
+          "base": 0.32,
+          "boundaries": [
+            2.8699999999999997
+          ],
+          "count": 1,
+          "height": 2.55,
+          "volume": "smithy_stock_range"
+        }
+      ],
+      "before": {
+        "meshes": 77,
+        "vertices": 11369,
+        "triangles": 14483,
+        "materials": 14,
+        "glb_bytes": 4822888,
+        "primitives": 77
+      },
+      "after": {
+        "meshes": 83,
+        "vertices": 11821,
+        "triangles": 14959,
+        "materials": 14,
+        "glb_bytes": 4957136,
+        "primitives": 83
+      },
+      "exterior_ray_checks": 594,
+      "hidden_ground_meshes": 13
+    },
+    {
+      "case": "thornfell_gatehouse",
+      "settings": {
+        "age": 35.0,
+        "construction_overrides": {},
+        "context": "AUTO",
+        "crafted_curves": true,
+        "craftsmanship": "STANDARD",
+        "depth": 7.0,
+        "detail": "MEDIUM",
+        "floor_height": 2.65,
+        "floor_separation": true,
+        "floors": 2,
+        "footprint": "L",
+        "function": "GATEHOUSE",
+        "geometry_mode": "EFFICIENT",
+        "maintenance": 0.7,
+        "overhang": 0.45,
+        "pitch": 48.0,
+        "region": "THORNFELL",
+        "roof_style": "AUTO",
+        "seed": 91,
+        "seed_massing": true,
+        "use_grammar": true,
+        "wealth": "ESTABLISHED",
+        "width": 11.0,
+        "window_density": 1.0,
+        "wing_depth": 4.5,
+        "wing_width": 4.2,
+        "world_aware": true
+      },
+      "volumes": [
+        {
+          "base": 0.32,
+          "boundaries": [
+            4.2517148035856245,
+            8.183429607171249
+          ],
+          "count": 2,
+          "height": 3.9317148035856246,
+          "volume": "gatehouse_portal"
+        },
+        {
+          "base": 0.32,
+          "boundaries": [
+            3.6599999999999997,
+            7.0
+          ],
+          "count": 2,
+          "height": 3.34,
+          "volume": "gatehouse_west_watchtower"
+        },
+        {
+          "base": 0.32,
+          "boundaries": [
+            4.7,
+            9.08
+          ],
+          "count": 2,
+          "height": 4.38,
+          "volume": "gatehouse_east_watchtower"
+        }
+      ],
+      "before": {
+        "meshes": 155,
+        "vertices": 53042,
+        "triangles": 73870,
+        "materials": 11,
+        "glb_bytes": 18219680,
+        "primitives": 155
+      },
+      "after": {
+        "meshes": 188,
+        "vertices": 55698,
+        "triangles": 76972,
+        "materials": 11,
+        "glb_bytes": 18868308,
+        "primitives": 188
+      },
+      "exterior_ray_checks": 594,
+      "hidden_ground_meshes": 64
+    }
+  ],
+  "source_files": {
+    "benchmark_construction.py": "2def99d6947e73ea9056d6d45457ba95a7a0ada265cd7f592af796b57199213f",
+    "benchmark_finish.py": "aba9669eef117f6ae2c9f4f0186df30bced62751590da6b3e145a7eb5d65c52d",
+    "benchmark_gatehouse.py": "6d6849926ed813865c802ce05413702c3208bb85ca48f061965050fc52ea8bd0",
+    "blender_backend.py": "f870efaf64330e2cfc58856fab373d70130cdb82c2c7d3c87f278604878388f7",
+    "construction.py": "12fc1b395851da4765fa853c23de7bf27371c955e729639c616d6c9092dbc3ef",
+    "construction_geometry.py": "af5ad8626246364bb1da91710c90f2a292730328efe54b243e77293655037b86",
+    "construction_library.py": "1ba97eecffed264efb61328e82d366fea911de120f9ca24d35e81eca27d43334",
+    "construction_relief.py": "5e35123d5db9c2ddcab0387582f2954c46e4b627dac9f7abe4a7a9ed9643f0da",
+    "crafted_geometry.py": "402d20f9192f22779da8afd83181062003e1874594821b10acf7c2a66763c4f3",
+    "curtain_masonry.py": "a4a6b4788541e886b63cff1ba1f26cc49bea1a83dc434eb01e91c15232f96256",
+    "curve_profiles.py": "f98554e8a5f4e0ea2a0a80f01cb4a4b79a2c77299230f454357eb6b3a5993ee7",
+    "curve_sweep.py": "00f9bef55fa29e129fc856ba8d12f05bace416a1a682df5b3fd8c26d1e471f84",
+    "engine.py": "59a1789fbcd8a197e14079137d3679e736d2773b4836ba9a578c1d42a8b9f6b6",
+    "facade.py": "8fc3eaeb58dabea6199690be55bc29a34dae068df2344de1b1f46f17b2ef5682",
+    "floors.py": "4690003ca9a9131964b344fd553bbfb44def05bc87ea78827d90602d4cbd0c82",
+    "floor_backend.py": "13fe072361bf471d3dfa8317ec465da76ac7f3d29c8ca8002ab375f00d50b1fc",
+    "functional.py": "ac2bf3b9730e5aeceefe178b35a493ecb09d8e9d6a0ebc0394a8990c2291c7b5",
+    "function_work.py": "1220e0828501ddafb2ad658ad7ac647ef3f76ad6ad394f65459400ab7453fb35",
+    "function_yard.py": "666b14cd4ce6b4127826f83cb93b03eba2f7face679efb43a47ba640967889f7",
+    "geometry.py": "86dfbba36547c87286c02068fc311bbdbd640502b4cd28283347ff0af710bcb8",
+    "materials.py": "f34d142df25551554fbc14a4ad86ca59f3ca4efdb09d268e09ff69504d2fb210",
+    "model.py": "6ed9d37d44a2225a49d5b7a65b71c1c5e70a08668b0003e6631a4f85f78b3681",
+    "profiles.py": "3e7e29517f947d0eff991945248824ff47e2a2f9aa7afe3558dca1988745c344",
+    "roof.py": "8541dfdcd8e0e95abf5377a3930fa427f68bcf856e334afdb54b85a259e51579",
+    "roof_pigments.py": "509d1658182078e19149e65e4e069d4ab13be9f510be6b0c21553be501886cd0",
+    "surface_atlas.py": "2e93d1363241b4af6549f3c5457710828a61c4d48b9d2ab36f1c1ce6d93fd337",
+    "surface_conditions.py": "353fe1509a42c171bbdbe0ca05396768cb747a0d622f4b92e1309018a3e66196",
+    "surface_detail.py": "1b2992c8e677364de23e94564b78247153c647945417585cd20fa5d6136ac169",
+    "surface_patterns.py": "ae6c45574c1758f4a246abde1499ffd4a3e812183a9356ef1e3e306b15930640",
+    "surface_pigments.py": "bfb0fb2ea8f206b29c2fffe837092377ab1c5275d69df11a29884ccddcef6ae9",
+    "world.py": "8868ff3b776b6958fe7aa7115a3bf03a84c83dc07d8d86026723c3563abd4d5f",
+    "world_emberholt.py": "6161d2ae1f0b587c990bf462538cea439741f9ba4f0d3ad642126313dc3732ce",
+    "world_lowmark_thornfell.py": "c766daba6d8b19441e9589b340e3693a7e118332cd97e261b6c2fcbad1482534",
+    "world_mire.py": "4a6b314f6c7f415d8ad5b4c5176f1197ad4e89896bae3a3dbfafa32b6a925042",
+    "__init__.py": "86425efdb7902bd68683061b97cd590be51afa98df177c93410414fceb687900"
+  }
+}

@@ -1,0 +1,22 @@
+floor_generator.log
+Ran 17 tests in 9.772s
+OK
+
+floor_architecture.log
+Ran 6 tests in 27.745s
+OK
+
+floor_final.log
+FLOOR VISIBILITY: all native checks passed
+
+floor_edges.log
+FLOOR EDGES: boundary, capped solid, neutral cap colors, semantic continuity and HYBRID UV checks passed
+
+floor_construction_legacy.log
+CONSTRUCTION_NATIVE_PASS 155 {'materials_with_maps': 13, 'map_bindings': {'base': 13, 'normal': 13, 'orm': 13}, 'embedded_image_count': 30, 'embedded_png_sha256': ['c08114c8a09041302b927bebf65c1c5638b
+
+floor_depth_legacy.log
+CONSTRUCTION_DEPTH_NATIVE_PASS
+
+floor_install.log
+ISOLATED_EXTENSION_INSTALL_AND_GENERATE_PASS 79

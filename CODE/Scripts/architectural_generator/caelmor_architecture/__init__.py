@@ -2,7 +2,7 @@
 bl_info = {
     "name": "Caelmor Architectural Generator",
     "author": "Caelmor",
-    "version": (0, 15, 0),
+    "version": (0, 16, 0),
     "blender": (4, 2, 0),
     "location": "View3D > Sidebar > Caelmor",
     "description": "Generate editable regional Caelmor buildings",
@@ -35,6 +35,8 @@ _CONTEXT_ITEMS = {
         for context, label in region.contexts.items())
     for code, region in REGIONS.items()
 }
+_FLOOR_VOLUMES = [('AUTO', 'First volume', 'Use the first construction volume')]
+_FLOOR_VOLUME_CACHE = {}
 
 
 def _bpy():
@@ -60,6 +62,7 @@ def _settings_from_props(props):
         wing_depth=props.caelm_wing_depth,
         floors=props.caelm_floors,
         floor_height=props.caelm_floor_height,
+        floor_separation=props.caelm_floor_separation,
         pitch=props.caelm_pitch,
         overhang=props.caelm_overhang,
         detail=props.caelm_detail,
@@ -90,6 +93,7 @@ def _set_props(props, settings):
     props.caelm_wing_depth = settings.wing_depth
     props.caelm_floors = settings.floors
     props.caelm_floor_height = settings.floor_height
+    props.caelm_floor_separation = settings.floor_separation
     props.caelm_pitch = settings.pitch
     props.caelm_overhang = settings.overhang
     props.caelm_detail = settings.detail
@@ -143,6 +147,16 @@ class CAELMOR_PG_Settings(_bpy().types.PropertyGroup if False else object):
 
 
 def _make_classes(b):
+    def floor_volume_items(self, context):
+        collection = _active_build(context) if context else None
+        schedule = []
+        if collection and collection.get('caelm_floor_schedule'):
+            schedule = [(v['volume'], v['count']) for v in json.loads(collection['caelm_floor_schedule']) if v['count'] > 0]
+        key = tuple(schedule)
+        if key not in _FLOOR_VOLUME_CACHE:
+            _FLOOR_VOLUME_CACHE[key] = _FLOOR_VOLUMES+[(volume,volume,f'Floors 0–{count-1}') for volume,count in schedule]
+        return _FLOOR_VOLUME_CACHE[key]
+
     def context_items(self, context):
         region = getattr(self, "caelm_region", "LOWMARK")
         return _CONTEXT_ITEMS.get(region, _CONTEXT_ITEMS["LOWMARK"])
@@ -203,6 +217,10 @@ def _make_classes(b):
         caelm_wing_width: b.props.FloatProperty(name="Wing Width", default=4.2, min=2.5, max=10.0, unit='LENGTH')
         caelm_wing_depth: b.props.FloatProperty(name="Wing Depth", default=4.5, min=2.5, max=12.0, unit='LENGTH')
         caelm_floors: b.props.IntProperty(name="Floors", default=2, min=1, max=3)
+        caelm_floor_separation: b.props.BoolProperty(name="Floor-separated visuals", default=True,
+            description="Partition visual meshes by volume and floor; leave collision independent")
+        caelm_preview_floor: b.props.IntProperty(name="Simulated floor (-1 = exterior)", default=-1, min=-1, max=2)
+        caelm_preview_volume: b.props.EnumProperty(name="Construction volume", items=floor_volume_items)
         caelm_floor_height: b.props.FloatProperty(name="Floor Height", default=2.65, min=2.4, max=3.8, unit='LENGTH')
         caelm_pitch: b.props.FloatProperty(name="Roof Pitch (degrees)", default=48.0, min=30.0, max=60.0)
         caelm_overhang: b.props.FloatProperty(name="Overhang", default=0.45, min=0.2, max=0.75, unit='LENGTH')
@@ -311,6 +329,26 @@ def _make_classes(b):
             self.report({'INFO'}, f"{obj.name} is now {state} regeneration")
             return {'FINISHED'}
 
+    class CAELMOR_OT_floor_preview(b.types.Operator):
+        bl_idname = 'caelmor.floor_preview'
+        bl_label = 'Apply Floor Preview'
+        bl_options = {'REGISTER', 'UNDO'}
+
+        @classmethod
+        def poll(cls, context):
+            collection = _active_build(context)
+            return bool(collection and collection.get('caelm_floor_contract'))
+
+        def execute(self, context):
+            try:
+                from .floor_backend import preview
+                props = context.scene.caelmor_settings
+                preview(_active_build(context), props.caelm_preview_floor,
+                        None if props.caelm_preview_volume == 'AUTO' else props.caelm_preview_volume)
+                return {'FINISHED'}
+            except Exception as exc:
+                return _report_error(self, exc)
+
     class CAELMOR_OT_export(b.types.Operator):
         bl_idname = "caelmor.export"
         bl_label = "Export Building"
@@ -411,6 +449,7 @@ def _make_classes(b):
             col = box.column(align=True)
             col.enabled = not p.caelm_use_grammar
             col.prop(p, "caelm_floors")
+            col.prop(p, 'caelm_floor_separation')
             col.prop(p, "caelm_floor_height")
             pitch_row=col.row()
             pitch_row.enabled=not p.caelm_world_aware
@@ -459,6 +498,15 @@ def _make_classes(b):
                 op.scope = scope
             collection = _active_build(context)
             if collection:
+                if collection.get('caelm_floor_contract'):
+                    box = layout.box()
+                    box.label(text='Visual floor preview (collision unchanged)')
+                    box.prop(p, 'caelm_preview_floor')
+                    box.prop(p, 'caelm_preview_volume')
+                    for host in json.loads(collection['caelm_floor_schedule']):
+                        box.label(text=f"{host['volume']}: floors 0–{host['count']-1}" if host['count']
+                                       else f"{host['volume']}: exterior access (always visible)")
+                    box.operator('caelmor.floor_preview')
                 from .blender_backend import collection_metrics
                 m = collection_metrics(collection)
                 conflicts = json.loads(collection.get('caelm_construction_conflicts','[]'))
@@ -479,7 +527,7 @@ def _make_classes(b):
                         layout.label(text="Saved geometry diagnostics unavailable", icon='INFO')
 
     return (CAELMOR_PG_Settings, CAELMOR_OT_apply_grammar, CAELMOR_OT_generate, CAELMOR_OT_load,
-            CAELMOR_OT_regenerate, CAELMOR_OT_protect, CAELMOR_OT_export, CAELMOR_PT_main)
+            CAELMOR_OT_regenerate, CAELMOR_OT_protect, CAELMOR_OT_floor_preview, CAELMOR_OT_export, CAELMOR_PT_main)
 
 
 def _settings_from_json(data):
@@ -491,6 +539,7 @@ def _settings_from_json(data):
     if "geometry_mode" not in data: values["geometry_mode"] = "SOLID"
     if "roof_style" not in data: values["roof_style"] = "GABLE"
     if "world_aware" not in data: values["world_aware"] = False
+    if 'floor_separation' not in data: values['floor_separation'] = False
     return Settings(**values)
 
 

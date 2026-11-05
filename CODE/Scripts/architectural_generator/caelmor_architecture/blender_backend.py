@@ -27,7 +27,9 @@ def load_settings(collection):
     raw = collection.get(SETTINGS_KEY)
     if not raw:
         raise ValueError("Selected collection has no saved Caelmor settings")
-    return json.loads(raw)
+    data = json.loads(raw)
+    data.setdefault('floor_separation', False)
+    return data
 
 
 def _normalize_settings_data(data):
@@ -42,6 +44,7 @@ def _normalize_settings_data(data):
     values.setdefault("world_aware", False)
     values.setdefault("geometry_mode", "SOLID")
     values.setdefault("roof_style", "GABLE")
+    values.setdefault('floor_separation', False)
     normalized = Settings(**values)
     return {key: getattr(normalized, key) for key in allowed}
 
@@ -71,8 +74,8 @@ def _metric_uv(mesh, material):
     return layer
 
 
-def _lightmap_uv(mesh):
-    layer = mesh.uv_layers.new(name="UV1_Lightmap")
+def _lightmap_uv(mesh, layer=None):
+    if layer is None: layer = mesh.uv_layers.new(name="UV1_Lightmap")
     count = max(1, len(mesh.polygons)); cols = max(1, math.ceil(math.sqrt(count)))
     rows = max(1, math.ceil(count / cols)); pad = .10
     for fi, poly in enumerate(mesh.polygons):
@@ -300,6 +303,8 @@ def build(settings, collection=None, layers=None, origin=None):
         if scope - present: raise ValueError("Cannot partially regenerate missing layers: " + ", ".join(sorted(scope-present)))
     protected_ids = {o.get("caelm_buffer_id") for o in (collection.objects if collection else ())
                      if o.get(TAG) and o.get("caelm_protected")}
+    if collection and protected_ids and load_settings(collection)['floor_separation'] != settings.floor_separation:
+        raise ValueError('Unprotect edited visual sections before changing floor separation; the building was left unchanged')
     # Preserve explicit slot replacements as well as edits to cached shader
     # datablocks. Generated objects still receive new condition maps when their
     # inputs change; an author's replacement material remains their decision.
@@ -314,6 +319,8 @@ def build(settings, collection=None, layers=None, origin=None):
                          m.name == old.get('caelm_surface_material')))
                 or m.get('caelm_user_override')) for m in slots):
             overrides[old.get('caelm_buffer_id')]=slots
+    if collection and collection.get('caelm_floor_contract') and not settings.floor_separation and overrides:
+        raise ValueError('Restore section-specific material slots before disabling floor separation, or keep the separated representation; artist overrides were left unchanged')
     candidates = {b.name:b for b in buffers}
     # Crossing representations changes ownership of part of the weather skin.
     # Preserve protected edited skins by rejecting a conflicting transaction.
@@ -343,7 +350,7 @@ def build(settings, collection=None, layers=None, origin=None):
         if not (obj.get(TAG) and obj.get('caelm_protected')) or obj.get('caelm_collider'):
             continue
         key = obj.get('caelm_buffer_id')
-        candidate = candidates.get(key)
+        candidate = candidates.get(obj.get('caelm_source_buffer_id', key))
         spec = getattr(candidate, 'construction', None)
         physical_fields = (field for field in PROVENANCE if field not in ('finish','surface_family'))
         old_source = obj.get('caelm_component_source_hash')
@@ -369,7 +376,7 @@ def build(settings, collection=None, layers=None, origin=None):
         new_objects=list(stage.objects)
         new_ids={o.get('caelm_buffer_id') for o in new_objects}
         retained_context=[o for o in (collection.objects if collection else ())
-                          if o.get(TAG) and o.get('caelm_buffer_id') not in new_ids]
+                          if o.get(TAG) and o.get('caelm_source_buffer_id', o.get('caelm_buffer_id')) not in new_ids]
         surface_report=apply_surfaces(new_objects,plan,settings,
                                       context_objects=new_objects+retained_context)
         for obj in stage.objects:
@@ -385,6 +392,16 @@ def build(settings, collection=None, layers=None, origin=None):
                 obj.data.materials[0] = authored
                 # Distinguish a selected finish from a manual slot override.
                 obj['caelm_surface_material'] = authored.name
+        if settings.floor_separation:
+            from .floor_backend import partition
+            floor_volumes = partition(stage, plan)
+            for obj in list(stage.objects):
+                key = obj.get('caelm_buffer_id')
+                if key in protected_ids:
+                    _remove_object(obj)
+                elif key in overrides:
+                    obj.data.materials.clear()
+                    for material in overrides[key]: obj.data.materials.append(material)
         if scope is None:
             for obj in _colliders(plan, build_id):
                 stage.objects.link(obj); obj.hide_set(True)
@@ -397,8 +414,25 @@ def build(settings, collection=None, layers=None, origin=None):
             _parent_to_anchor(obj, anchor)
             collection.objects.link(obj)
         for obj in old_generated: _remove_object(obj)
+        # Staging coexists with the old scene, so Blender may temporarily suffix
+        # object names. Restore canonical section names after replacement.
+        for obj in staged:
+            if obj.get('caelm_buffer_id'): obj.name = obj['caelm_buffer_id']
         for obj in staged: stage.objects.unlink(obj)
         _cleanup_stage(stage); stage = None
+        if settings.floor_separation:
+            from .floor_backend import hierarchy, preview
+            hierarchy(collection, anchor, floor_volumes)
+            preview_floor = collection.get('caelm_preview_floor', -1)
+            preview_volume = collection.get('caelm_preview_volume')
+            if not any(v['volume'] == preview_volume and preview_floor < v['count'] for v in floor_volumes):
+                preview_floor, preview_volume = -1, None
+            preview(collection, preview_floor, preview_volume)
+        else:
+            for obj in list(collection.objects):
+                if obj.get('caelm_floor_group'): _remove_object(obj)
+            for key in ('caelm_floor_contract', 'caelm_floor_schedule', 'caelm_preview_floor', 'caelm_preview_volume'):
+                if key in collection: del collection[key]
         collection[COLLECTION_TAG] = True
         collection[SETTINGS_KEY] = json.dumps(setting_data, sort_keys=True)
         collection['caelm_construction_conflicts'] = json.dumps(sorted(conflicts))
@@ -449,11 +483,21 @@ def _export_selection(filepath, objects, anchor, export_format):
     view_layer = bpy.context.view_layer
     prior_selected = list(bpy.context.selected_objects)
     prior_active = view_layer.objects.active
-    hidden_state = {obj: obj.hide_get() for obj in objects if obj.get("caelm_collider")}
+    # Include semantic ancestors in selection. Export a full exterior even when
+    # Blender is previewing an interior; restore all local visibility afterward.
+    objects = list(objects)
+    for obj in list(objects):
+        parent = obj.parent
+        while parent and parent != anchor:
+            if parent not in objects: objects.append(parent)
+            parent = parent.parent
+    if anchor not in objects: objects.append(anchor)
+    hidden_state = {obj: (obj.hide_get(), obj.hide_render) for obj in objects}
     try:
         for obj in prior_selected: obj.select_set(False)
         for obj in objects:
-            if obj.get("caelm_collider"): obj.hide_set(False)
+            obj.hide_set(False)
+            obj.hide_render = False
             obj.select_set(True)
         anchor.select_set(True)
         view_layer.objects.active = anchor
@@ -461,9 +505,9 @@ def _export_selection(filepath, objects, anchor, export_format):
                                   export_apply=True, export_extras=True, export_yup=True)
     finally:
         for obj in list(bpy.context.selected_objects): obj.select_set(False)
-        for obj in objects:
-            if obj.get("caelm_collider"):
-                obj.hide_set(hidden_state.get(obj, True))
+        for obj, (hidden, render) in hidden_state.items():
+            obj.hide_set(hidden)
+            obj.hide_render = render
         for obj in prior_selected:
             try: obj.select_set(True)
             except ReferenceError: pass
@@ -519,6 +563,20 @@ def export_building(collection, filepath, *, construction_metadata=False):
                     entry[field] = value
     else:
         manifest['settings'].pop('construction_overrides', None)
+    if collection.get('caelm_floor_contract'):
+        manifest['floor_presentation'] = {
+            'version': 1, 'building_id': collection['caelm_building_id'],
+            'coordinate_space': 'building-local Blender Z metres (GLB local Y after axis conversion)',
+            'volumes': json.loads(collection['caelm_floor_schedule']),
+            'occupancy_areas': [],
+            'occupancy_note': 'Visual bands only. No enterable interior areas are inferred or exported.',
+        }
+        for obj, entry in zip(objects, manifest['objects']):
+            entry['floor_section'] = {key: obj.get('caelm_'+key) for key in (
+                'source_buffer_id', 'floor_volume', 'floor_index', 'visibility', 'floor_min', 'floor_max')}
+    else:
+        # Preserve the historical shape for unsplit exports.
+        manifest['settings'].pop('floor_separation', None)
     sidecar = os.path.splitext(filepath)[0] + ".caelmor.json"
     with open(sidecar, "w", encoding="utf-8") as f: json.dump(manifest, f, indent=2)
     return sidecar
