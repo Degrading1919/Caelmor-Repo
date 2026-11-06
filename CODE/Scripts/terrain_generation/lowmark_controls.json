@@ -1,0 +1,4151 @@
+{
+  "purpose": "Offline deterministic terrain-authoring controls; not a production gameplay schema",
+  "authority": {
+    "baseline_commit": "d9fbc37",
+    "approved": "Horizontal geographical composition and relationships in supplied planning/thematic maps",
+    "unvalidated": "Map elevations, contours, gradients and scale",
+    "technical_proposals": "All metre dimensions, heights, hydraulic depths, freeboards, thresholds and candidate-area assumptions below",
+    "population": "Settlement counts and NPC budgets are proposed planning targets, never instantiated"
+  },
+  "world": {
+    "width_m": 6144,
+    "height_m": 4992,
+    "seed": 1919,
+    "coordinate_system": "Local Cartesian east/north/up metres; origin at south-west map frame; not geodetic",
+    "normalized_coordinates": "xy=[east/width,north/height]",
+    "base_elevation_m": 65,
+    "nominal_resolution_m": 8,
+    "flood_scenario_rise_m": 1.5,
+    "walk_speed_sensitivity_mps": 3,
+    "sprint_speed_sensitivity_mps": 5.5,
+    "traversal_speed_authority": "Technical fixture sensitivity only, PlayableHost.cs42,50; not production movement balance",
+    "north_slope": 0.001,
+    "east_slope": 0.0005
+  },
+  "map_frame": {
+    "topographical_crop_px": {
+      "x0": 6,
+      "x1": 1102,
+      "y0": 6,
+      "y1": 898
+    },
+    "pixel_to_normalized": "xE=(px-6)/1096; yNorth=(898-py)/892",
+    "north": "up",
+    "right_panel": "Legend excluded",
+    "trace_status": "Approximate human interpretation of approved map geometry; raw pixels retained",
+    "height_authority": "None; illustrated elevations/scale are not sampled"
+  },
+  "sources": [
+    {
+      "path": "MEDIA/Maps/Lowmark_Planning_Map.png",
+      "sha256": "83a056feac40f8a0a2b8db2143156de9e8dab291d7feb17ac5f952df0060f312",
+      "authority": "Creative Director approved composition; visual elevations/contours/scale not validated",
+      "hash_mode": "raw"
+    },
+    {
+      "path": "MEDIA/Maps/Lowmark_Thematic_Map.png",
+      "sha256": "6c345e335c9931d6dd3f8d75008b99e73ef78a892027f41e38e81c847ca040ec",
+      "authority": "Creative Director approved composition cross-check; not surveyed height or scale data",
+      "hash_mode": "raw"
+    },
+    {
+      "path": "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+      "sha256": "206da19df7b3eb46560b5f4261b07e6101f74438f6e2ef5a82954c718f63493e",
+      "line_ranges": [
+        [
+          137,
+          151
+        ],
+        [
+          170,
+          200
+        ],
+        [
+          206,
+          255
+        ],
+        [
+          471,
+          471
+        ]
+      ],
+      "authority": "Regional dossier; use current map approval for horizontal placement.",
+      "hash_mode": "utf8_lf"
+    },
+    {
+      "path": "04_CONTENT_PRODUCTION/Zones/Caelmor_Lowmark_POI_and_Zone_Requirements.md",
+      "sha256": "12dcfb7c511b0e75176679bd235cca776d69de59d38673d6ed5446cb2180eec4",
+      "line_ranges": [
+        [
+          29,
+          38
+        ],
+        [
+          155,
+          201
+        ],
+        [
+          331,
+          351
+        ],
+        [
+          436,
+          472
+        ],
+        [
+          510,
+          516
+        ]
+      ],
+      "authority": "Authored location requirements; older map questions are not authority to relocate approved anchors.",
+      "hash_mode": "utf8_lf"
+    },
+    {
+      "path": "04_CONTENT_PRODUCTION/Quests/Caelmor_Lowmark_Side_Quests_Discovery_and_Memory.md",
+      "sha256": "de55fc9f7302e2e5f26cb300ccaa3b1a09828f1028ac56a972cff76a3a871ad4",
+      "line_ranges": [
+        [
+          283,
+          283
+        ],
+        [
+          304,
+          311
+        ],
+        [
+          496,
+          500
+        ]
+      ],
+      "authority": "Uphill Braid lift is existing authored proposal; no pump mechanism is invented.",
+      "hash_mode": "utf8_lf"
+    },
+    {
+      "path": "04_CONTENT_PRODUCTION/Quests/Caelmor_Lowmark_Main_Act_III.md",
+      "sha256": "76aed63290a161fd44483a9f24230d2cb31c1e62039484cb1d82e5c89e715e2d",
+      "line_ranges": [
+        [
+          239,
+          247
+        ]
+      ],
+      "authority": "Cut closure is an authored quest state, not a reason to remove baseline natural outlet.",
+      "hash_mode": "utf8_lf"
+    }
+  ],
+  "hydrology": {
+    "nodes": [
+      {
+        "id": "head",
+        "xy": [
+          0.052007299,
+          0.933856502
+        ],
+        "map_px": [
+          63,
+          65
+        ],
+        "bed_m": 186.8,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 188
+      },
+      {
+        "id": "falls_lip",
+        "xy": [
+          0.187043796,
+          0.76793722
+        ],
+        "map_px": [
+          211,
+          213
+        ],
+        "bed_m": 146.8,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 148
+      },
+      {
+        "id": "falls_base",
+        "xy": [
+          0.189781022,
+          0.762331839
+        ],
+        "map_px": [
+          214,
+          218
+        ],
+        "bed_m": 63.2,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 64.4
+      },
+      {
+        "id": "fen_in",
+        "xy": [
+          0.218065693,
+          0.704035874
+        ],
+        "map_px": [
+          245,
+          270
+        ],
+        "bed_m": 63,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 64.2
+      },
+      {
+        "id": "fen_mid1",
+        "xy": [
+          0.189781022,
+          0.65470852
+        ],
+        "map_px": [
+          214,
+          314
+        ],
+        "bed_m": 62.85,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 64.05
+      },
+      {
+        "id": "fen_mid2",
+        "xy": [
+          0.255474453,
+          0.617713004
+        ],
+        "map_px": [
+          286,
+          347
+        ],
+        "bed_m": 62.75,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 63.95
+      },
+      {
+        "id": "fen_mid3",
+        "xy": [
+          0.240875912,
+          0.561659193
+        ],
+        "map_px": [
+          270,
+          397
+        ],
+        "bed_m": 62.7,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "adjustment_note": "Raised 0.10m from initial 63.80m technical scenario to maintain passive head toward Hollow inlet63.85m; no horizontal relocation.",
+        "water_level_m": 63.9
+      },
+      {
+        "id": "fen_out",
+        "xy": [
+          0.322080292,
+          0.470852018
+        ],
+        "map_px": [
+          359,
+          478
+        ],
+        "bed_m": 62.45,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 63.65
+      },
+      {
+        "id": "crest",
+        "xy": [
+          0.429744526,
+          0.30941704
+        ],
+        "map_px": [
+          477,
+          622
+        ],
+        "bed_m": 61.9,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 63.1
+      },
+      {
+        "id": "mill_intake",
+        "xy": [
+          0.437043796,
+          0.283632287
+        ],
+        "map_px": [
+          485,
+          645
+        ],
+        "bed_m": 61.7,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 62.9
+      },
+      {
+        "id": "weir_up",
+        "xy": [
+          0.575729927,
+          0.207399103
+        ],
+        "map_px": [
+          637,
+          713
+        ],
+        "bed_m": 60.1,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 61.3
+      },
+      {
+        "id": "weir_down",
+        "xy": [
+          0.579379562,
+          0.196188341
+        ],
+        "map_px": [
+          641,
+          723
+        ],
+        "bed_m": 58.9,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 60.1
+      },
+      {
+        "id": "whisper",
+        "xy": [
+          0.66149635,
+          0.183856502
+        ],
+        "map_px": [
+          731,
+          734
+        ],
+        "bed_m": 58.8,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 60
+      },
+      {
+        "id": "lowerbend",
+        "xy": [
+          0.684306569,
+          0.057174888
+        ],
+        "map_px": [
+          756,
+          847
+        ],
+        "bed_m": 58.35,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 59.55
+      },
+      {
+        "id": "brook_reach",
+        "xy": [
+          0.775547445,
+          0.036995516
+        ],
+        "map_px": [
+          856,
+          865
+        ],
+        "bed_m": 58.1,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 59.3
+      },
+      {
+        "id": "outlet",
+        "xy": [
+          0.935218978,
+          0.0
+        ],
+        "map_px": [
+          1031,
+          898
+        ],
+        "bed_m": 57.6,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 58.8,
+        "boundary_note": "One-pixel technical crop-edge snap from y897 to898; within trace uncertainty, not settlement/waterway relocation."
+      },
+      {
+        "id": "western_arm_terminal",
+        "xy": [
+          0.482664234,
+          0.09529148
+        ],
+        "map_px": [
+          535,
+          813
+        ],
+        "bed_m": 59.01,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "horizontal_status": "Unresolved sidearm topology; do not claim confirmed active distributary",
+        "water_level_m": 60.1
+      },
+      {
+        "id": "hollow_lock_inlet",
+        "xy": [
+          0.341240876,
+          0.522421525
+        ],
+        "map_px": [
+          380,
+          432
+        ],
+        "bed_m": 62.65,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 63.85
+      },
+      {
+        "id": "hollow_lock_tail",
+        "xy": [
+          0.355839416,
+          0.520179372
+        ],
+        "map_px": [
+          396,
+          434
+        ],
+        "bed_m": 61.55,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 62.75
+      },
+      {
+        "id": "cut_corner",
+        "xy": [
+          0.658759124,
+          0.488789238
+        ],
+        "map_px": [
+          728,
+          462
+        ],
+        "bed_m": 60.9,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 62.1
+      },
+      {
+        "id": "cut_elbow",
+        "xy": [
+          0.682481752,
+          0.403587444
+        ],
+        "map_px": [
+          754,
+          538
+        ],
+        "bed_m": 60.55,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 61.75
+      },
+      {
+        "id": "uphill_canal_foot",
+        "xy": [
+          0.74270073,
+          0.394618834
+        ],
+        "map_px": [
+          820,
+          546
+        ],
+        "bed_m": 60.7,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 61.9
+      },
+      {
+        "id": "uphill_canal_cistern",
+        "xy": [
+          0.993613139,
+          0.591928251
+        ],
+        "map_px": [
+          1095,
+          370
+        ],
+        "bed_m": 78.8,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 80
+      },
+      {
+        "id": "mill_forebay",
+        "xy": [
+          0.489963504,
+          0.25
+        ],
+        "map_px": [
+          543,
+          675
+        ],
+        "bed_m": 61.3,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "horizontal_status": "Technical3px local offset from approved mill centre; no building relocation",
+        "water_level_m": 62.5
+      },
+      {
+        "id": "mill_tailrace",
+        "xy": [
+          0.489963504,
+          0.243273543
+        ],
+        "map_px": [
+          543,
+          681
+        ],
+        "bed_m": 60.35,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "horizontal_status": "Technical3px local offset from approved mill centre; no building relocation",
+        "water_level_m": 61.55
+      },
+      {
+        "id": "grey_in",
+        "xy": [
+          0.993613139,
+          0.32735426
+        ],
+        "map_px": [
+          1095,
+          606
+        ],
+        "bed_m": 64.8,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 66
+      },
+      {
+        "id": "grey_up",
+        "xy": [
+          0.937956204,
+          0.306053812
+        ],
+        "map_px": [
+          1034,
+          625
+        ],
+        "bed_m": 62.8,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 64
+      },
+      {
+        "id": "grey_town_water",
+        "xy": [
+          0.875912409,
+          0.25
+        ],
+        "map_px": [
+          966,
+          675
+        ],
+        "bed_m": 61.6,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 62.8
+      },
+      {
+        "id": "grey_lower",
+        "xy": [
+          0.925182482,
+          0.176008969
+        ],
+        "map_px": [
+          1020,
+          741
+        ],
+        "bed_m": 60.6,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 61.8
+      },
+      {
+        "id": "grey_confluence",
+        "xy": [
+          0.856751825,
+          0.058295964
+        ],
+        "map_px": [
+          945,
+          846
+        ],
+        "bed_m": 57.9,
+        "vertical_status": "Technical scenario, not surveyed/map elevation",
+        "water_level_m": 59.1
+      }
+    ],
+    "reaches": [
+      {
+        "id": "upland_headwater",
+        "from": "head",
+        "to": "falls_lip",
+        "points": [
+          [
+            0.052007299,
+            0.933856502
+          ],
+          [
+            0.08120438,
+            0.906950673
+          ],
+          [
+            0.114963504,
+            0.882286996
+          ],
+          [
+            0.149635036,
+            0.874439462
+          ],
+          [
+            0.172445255,
+            0.844170404
+          ],
+          [
+            0.187043796,
+            0.799327354
+          ],
+          [
+            0.187043796,
+            0.76793722
+          ]
+        ],
+        "map_points_px": [
+          [
+            63,
+            65
+          ],
+          [
+            95,
+            89
+          ],
+          [
+            132,
+            111
+          ],
+          [
+            170,
+            118
+          ],
+          [
+            195,
+            145
+          ],
+          [
+            211,
+            185
+          ],
+          [
+            211,
+            213
+          ]
+        ],
+        "half_width_m": 6,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario"
+      },
+      {
+        "id": "veilwater_falls",
+        "from": "falls_lip",
+        "to": "falls_base",
+        "points": [
+          [
+            0.187043796,
+            0.76793722
+          ],
+          [
+            0.189781022,
+            0.762331839
+          ]
+        ],
+        "map_points_px": [
+          [
+            211,
+            213
+          ],
+          [
+            214,
+            218
+          ]
+        ],
+        "half_width_m": 6,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario",
+        "transition": "Explicit steep waterfall; do not smear with regional interpolation",
+        "feature_type": "waterfall"
+      },
+      {
+        "id": "falls_outflow",
+        "from": "falls_base",
+        "to": "fen_in",
+        "points": [
+          [
+            0.189781022,
+            0.762331839
+          ],
+          [
+            0.195255474,
+            0.735426009
+          ],
+          [
+            0.218065693,
+            0.704035874
+          ]
+        ],
+        "map_points_px": [
+          [
+            214,
+            218
+          ],
+          [
+            220,
+            242
+          ],
+          [
+            245,
+            270
+          ]
+        ],
+        "half_width_m": 14,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario"
+      },
+      {
+        "id": "fen_main_upper",
+        "from": "fen_in",
+        "to": "fen_mid1",
+        "points": [
+          [
+            0.218065693,
+            0.704035874
+          ],
+          [
+            0.243613139,
+            0.69058296
+          ],
+          [
+            0.218065693,
+            0.673766816
+          ],
+          [
+            0.189781022,
+            0.65470852
+          ]
+        ],
+        "map_points_px": [
+          [
+            245,
+            270
+          ],
+          [
+            273,
+            282
+          ],
+          [
+            245,
+            297
+          ],
+          [
+            214,
+            314
+          ]
+        ],
+        "half_width_m": 14,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario"
+      },
+      {
+        "id": "fen_main_middle",
+        "from": "fen_mid1",
+        "to": "fen_mid2",
+        "points": [
+          [
+            0.189781022,
+            0.65470852
+          ],
+          [
+            0.189781022,
+            0.639013453
+          ],
+          [
+            0.226277372,
+            0.631165919
+          ],
+          [
+            0.255474453,
+            0.617713004
+          ]
+        ],
+        "map_points_px": [
+          [
+            214,
+            314
+          ],
+          [
+            214,
+            328
+          ],
+          [
+            254,
+            335
+          ],
+          [
+            286,
+            347
+          ]
+        ],
+        "half_width_m": 14,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario"
+      },
+      {
+        "id": "fen_main_lower",
+        "from": "fen_mid2",
+        "to": "fen_mid3",
+        "points": [
+          [
+            0.255474453,
+            0.617713004
+          ],
+          [
+            0.266423358,
+            0.598654709
+          ],
+          [
+            0.249087591,
+            0.579596413
+          ],
+          [
+            0.240875912,
+            0.561659193
+          ]
+        ],
+        "map_points_px": [
+          [
+            286,
+            347
+          ],
+          [
+            298,
+            364
+          ],
+          [
+            279,
+            381
+          ],
+          [
+            270,
+            397
+          ]
+        ],
+        "half_width_m": 14,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario"
+      },
+      {
+        "id": "fen_outflow",
+        "from": "fen_mid3",
+        "to": "fen_out",
+        "points": [
+          [
+            0.240875912,
+            0.561659193
+          ],
+          [
+            0.259124088,
+            0.535874439
+          ],
+          [
+            0.295620438,
+            0.515695067
+          ],
+          [
+            0.322080292,
+            0.493273543
+          ],
+          [
+            0.322080292,
+            0.470852018
+          ]
+        ],
+        "map_points_px": [
+          [
+            270,
+            397
+          ],
+          [
+            290,
+            420
+          ],
+          [
+            330,
+            438
+          ],
+          [
+            359,
+            458
+          ],
+          [
+            359,
+            478
+          ]
+        ],
+        "half_width_m": 14,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario"
+      },
+      {
+        "id": "fen_western_braid",
+        "from": "fen_in",
+        "to": "fen_out",
+        "points": [
+          [
+            0.218065693,
+            0.704035874
+          ],
+          [
+            0.142335766,
+            0.697309417
+          ],
+          [
+            0.116788321,
+            0.64573991
+          ],
+          [
+            0.085766423,
+            0.59529148
+          ],
+          [
+            0.104014599,
+            0.541479821
+          ],
+          [
+            0.195255474,
+            0.505605381
+          ],
+          [
+            0.322080292,
+            0.470852018
+          ]
+        ],
+        "map_points_px": [
+          [
+            245,
+            270
+          ],
+          [
+            162,
+            276
+          ],
+          [
+            134,
+            322
+          ],
+          [
+            100,
+            367
+          ],
+          [
+            120,
+            415
+          ],
+          [
+            220,
+            447
+          ],
+          [
+            359,
+            478
+          ]
+        ],
+        "half_width_m": 8,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario",
+        "topology_status": "Technical distributary interpretation within approved fen; natural connected shallow-channel support"
+      },
+      {
+        "id": "fen_eastern_braid",
+        "from": "fen_in",
+        "to": "fen_out",
+        "points": [
+          [
+            0.218065693,
+            0.704035874
+          ],
+          [
+            0.322992701,
+            0.69955157
+          ],
+          [
+            0.415145985,
+            0.658071749
+          ],
+          [
+            0.385036496,
+            0.591928251
+          ],
+          [
+            0.34580292,
+            0.538116592
+          ],
+          [
+            0.322080292,
+            0.470852018
+          ]
+        ],
+        "map_points_px": [
+          [
+            245,
+            270
+          ],
+          [
+            360,
+            274
+          ],
+          [
+            461,
+            311
+          ],
+          [
+            428,
+            370
+          ],
+          [
+            385,
+            418
+          ],
+          [
+            359,
+            478
+          ]
+        ],
+        "half_width_m": 8,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario",
+        "topology_status": "Technical distributary interpretation within approved fen; natural connected shallow-channel support"
+      },
+      {
+        "id": "fen_to_crestbridge",
+        "from": "fen_out",
+        "to": "crest",
+        "points": [
+          [
+            0.322080292,
+            0.470852018
+          ],
+          [
+            0.295620438,
+            0.442825112
+          ],
+          [
+            0.251824818,
+            0.42264574
+          ],
+          [
+            0.223540146,
+            0.397982063
+          ],
+          [
+            0.221715328,
+            0.378923767
+          ],
+          [
+            0.240875912,
+            0.356502242
+          ],
+          [
+            0.287408759,
+            0.343049327
+          ],
+          [
+            0.343978102,
+            0.334080717
+          ],
+          [
+            0.388686131,
+            0.319506726
+          ],
+          [
+            0.429744526,
+            0.30941704
+          ]
+        ],
+        "map_points_px": [
+          [
+            359,
+            478
+          ],
+          [
+            330,
+            503
+          ],
+          [
+            282,
+            521
+          ],
+          [
+            251,
+            543
+          ],
+          [
+            249,
+            560
+          ],
+          [
+            270,
+            580
+          ],
+          [
+            321,
+            592
+          ],
+          [
+            383,
+            600
+          ],
+          [
+            432,
+            613
+          ],
+          [
+            477,
+            622
+          ]
+        ],
+        "half_width_m": 18,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario"
+      },
+      {
+        "id": "crestbridge_to_mill_intake",
+        "from": "crest",
+        "to": "mill_intake",
+        "points": [
+          [
+            0.429744526,
+            0.30941704
+          ],
+          [
+            0.444343066,
+            0.293721973
+          ],
+          [
+            0.437043796,
+            0.283632287
+          ]
+        ],
+        "map_points_px": [
+          [
+            477,
+            622
+          ],
+          [
+            493,
+            636
+          ],
+          [
+            485,
+            645
+          ]
+        ],
+        "half_width_m": 18,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario"
+      },
+      {
+        "id": "mill_bypass_main_river",
+        "from": "mill_intake",
+        "to": "weir_up",
+        "points": [
+          [
+            0.437043796,
+            0.283632287
+          ],
+          [
+            0.421532847,
+            0.266816143
+          ],
+          [
+            0.407846715,
+            0.243273543
+          ],
+          [
+            0.416970803,
+            0.229820628
+          ],
+          [
+            0.453467153,
+            0.215246637
+          ],
+          [
+            0.497262774,
+            0.215246637
+          ],
+          [
+            0.538321168,
+            0.221973094
+          ],
+          [
+            0.575729927,
+            0.207399103
+          ]
+        ],
+        "map_points_px": [
+          [
+            485,
+            645
+          ],
+          [
+            468,
+            660
+          ],
+          [
+            453,
+            681
+          ],
+          [
+            463,
+            693
+          ],
+          [
+            503,
+            706
+          ],
+          [
+            551,
+            706
+          ],
+          [
+            596,
+            700
+          ],
+          [
+            637,
+            713
+          ]
+        ],
+        "half_width_m": 18,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario"
+      },
+      {
+        "id": "bramblelock_weir_passage",
+        "from": "weir_up",
+        "to": "weir_down",
+        "points": [
+          [
+            0.575729927,
+            0.207399103
+          ],
+          [
+            0.579379562,
+            0.196188341
+          ]
+        ],
+        "map_points_px": [
+          [
+            637,
+            713
+          ],
+          [
+            641,
+            723
+          ]
+        ],
+        "half_width_m": 18,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario",
+        "feature_type": "engineered_weir_on_natural_watercourse",
+        "control_id": "bramblelock_weir",
+        "hydraulic_status": "Passive downstream flow over proposed1.2m weir head; gate/pulse operations not simulated"
+      },
+      {
+        "id": "weir_to_whisperflow",
+        "from": "weir_down",
+        "to": "whisper",
+        "points": [
+          [
+            0.579379562,
+            0.196188341
+          ],
+          [
+            0.623175182,
+            0.193946188
+          ],
+          [
+            0.66149635,
+            0.183856502
+          ]
+        ],
+        "map_points_px": [
+          [
+            641,
+            723
+          ],
+          [
+            689,
+            725
+          ],
+          [
+            731,
+            734
+          ]
+        ],
+        "half_width_m": 18,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario"
+      },
+      {
+        "id": "whisperflow_eastern_hairpin",
+        "from": "whisper",
+        "to": "lowerbend",
+        "points": [
+          [
+            0.66149635,
+            0.183856502
+          ],
+          [
+            0.695255474,
+            0.167040359
+          ],
+          [
+            0.712591241,
+            0.141255605
+          ],
+          [
+            0.709854015,
+            0.117713004
+          ],
+          [
+            0.685218978,
+            0.096412556
+          ],
+          [
+            0.671532847,
+            0.075112108
+          ],
+          [
+            0.684306569,
+            0.057174888
+          ]
+        ],
+        "map_points_px": [
+          [
+            731,
+            734
+          ],
+          [
+            768,
+            749
+          ],
+          [
+            787,
+            772
+          ],
+          [
+            784,
+            793
+          ],
+          [
+            757,
+            812
+          ],
+          [
+            742,
+            831
+          ],
+          [
+            756,
+            847
+          ]
+        ],
+        "half_width_m": 18,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario",
+        "topology_status": "Current direct downstream interpretation; western arm unresolved separately"
+      },
+      {
+        "id": "lowerbend_to_brookhollow",
+        "from": "lowerbend",
+        "to": "brook_reach",
+        "points": [
+          [
+            0.684306569,
+            0.057174888
+          ],
+          [
+            0.715328467,
+            0.043721973
+          ],
+          [
+            0.750912409,
+            0.036995516
+          ],
+          [
+            0.775547445,
+            0.036995516
+          ]
+        ],
+        "map_points_px": [
+          [
+            756,
+            847
+          ],
+          [
+            790,
+            859
+          ],
+          [
+            829,
+            865
+          ],
+          [
+            856,
+            865
+          ]
+        ],
+        "half_width_m": 18,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario"
+      },
+      {
+        "id": "western_whisperflow_arm",
+        "from": "western_arm_terminal",
+        "to": "weir_down",
+        "points": [
+          [
+            0.482664234,
+            0.09529148
+          ],
+          [
+            0.448905109,
+            0.110986547
+          ],
+          [
+            0.426094891,
+            0.133408072
+          ],
+          [
+            0.444343066,
+            0.159192825
+          ],
+          [
+            0.489963504,
+            0.178251121
+          ],
+          [
+            0.532846715,
+            0.182735426
+          ],
+          [
+            0.569343066,
+            0.186098655
+          ],
+          [
+            0.579379562,
+            0.196188341
+          ]
+        ],
+        "map_points_px": [
+          [
+            535,
+            813
+          ],
+          [
+            498,
+            799
+          ],
+          [
+            473,
+            779
+          ],
+          [
+            493,
+            756
+          ],
+          [
+            543,
+            739
+          ],
+          [
+            590,
+            735
+          ],
+          [
+            630,
+            732
+          ],
+          [
+            641,
+            723
+          ]
+        ],
+        "half_width_m": 14,
+        "bank_rise_m": 2,
+        "water_depth_m": 1.2,
+        "kind": "backwater",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario",
+        "passive_flow": false,
+        "standing_water_level_m": 60.1,
+        "topology_status": "INTERPRETATION_UNRESOLVED: terminal backwater vs continuous main meander; pending Director map reading",
+        "profile": [
+          {
+            "fraction": 0,
+            "z_m": 59.01
+          },
+          {
+            "fraction": 1,
+            "z_m": 58.9
+          }
+        ]
+      },
+      {
+        "id": "fen_to_hollow_lock",
+        "from": "fen_mid3",
+        "to": "hollow_lock_inlet",
+        "points": [
+          [
+            0.240875912,
+            0.561659193
+          ],
+          [
+            0.287408759,
+            0.544843049
+          ],
+          [
+            0.341240876,
+            0.522421525
+          ]
+        ],
+        "map_points_px": [
+          [
+            270,
+            397
+          ],
+          [
+            321,
+            412
+          ],
+          [
+            380,
+            432
+          ]
+        ],
+        "half_width_m": 8,
+        "bank_rise_m": 0.8,
+        "water_depth_m": 1.2,
+        "kind": "engineered",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario",
+        "passive_flow": true,
+        "topology_status": "Local connector interpretation; preserve mapped lock position",
+        "profile": [
+          {
+            "fraction": 0,
+            "z_m": 62.7
+          },
+          {
+            "fraction": 1,
+            "z_m": 62.65
+          }
+        ],
+        "junction_bed_note": "Prototype common1.2m planning depth and continuous shared bed/water endpoints; avoids artificial outfall sump. No boat-draft, discharge or lock-cycle certification."
+      },
+      {
+        "id": "hollow_lock_chamber",
+        "from": "hollow_lock_inlet",
+        "to": "hollow_lock_tail",
+        "points": [
+          [
+            0.341240876,
+            0.522421525
+          ],
+          [
+            0.355839416,
+            0.520179372
+          ]
+        ],
+        "map_points_px": [
+          [
+            380,
+            432
+          ],
+          [
+            396,
+            434
+          ]
+        ],
+        "half_width_m": 8,
+        "bank_rise_m": 0.8,
+        "water_depth_m": 1.2,
+        "kind": "engineered",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario",
+        "passive_flow": true,
+        "control_id": "hollow_lock",
+        "feature_type": "gated_lock_level_transition",
+        "head_drop_m": 1.1,
+        "profile": [
+          {
+            "fraction": 0,
+            "z_m": 62.65
+          },
+          {
+            "fraction": 1,
+            "z_m": 61.55
+          }
+        ],
+        "junction_bed_note": "Prototype common1.2m planning depth and continuous shared bed/water endpoints; avoids artificial outfall sump. No boat-draft, discharge or lock-cycle certification."
+      },
+      {
+        "id": "relief_cut_straight",
+        "from": "hollow_lock_tail",
+        "to": "cut_corner",
+        "points": [
+          [
+            0.355839416,
+            0.520179372
+          ],
+          [
+            0.468978102,
+            0.507847534
+          ],
+          [
+            0.587591241,
+            0.498878924
+          ],
+          [
+            0.658759124,
+            0.488789238
+          ]
+        ],
+        "map_points_px": [
+          [
+            396,
+            434
+          ],
+          [
+            520,
+            445
+          ],
+          [
+            650,
+            453
+          ],
+          [
+            728,
+            462
+          ]
+        ],
+        "half_width_m": 8,
+        "bank_rise_m": 0.8,
+        "water_depth_m": 1.2,
+        "kind": "engineered",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario",
+        "passive_flow": true,
+        "feature_type": "wartime_cut",
+        "profile": [
+          {
+            "fraction": 0,
+            "z_m": 61.55
+          },
+          {
+            "fraction": 1,
+            "z_m": 60.9
+          }
+        ],
+        "junction_bed_note": "Prototype common1.2m planning depth and continuous shared bed/water endpoints; avoids artificial outfall sump. No boat-draft, discharge or lock-cycle certification."
+      },
+      {
+        "id": "relief_cut_elbow",
+        "from": "cut_corner",
+        "to": "cut_elbow",
+        "points": [
+          [
+            0.658759124,
+            0.488789238
+          ],
+          [
+            0.682481752,
+            0.403587444
+          ]
+        ],
+        "map_points_px": [
+          [
+            728,
+            462
+          ],
+          [
+            754,
+            538
+          ]
+        ],
+        "half_width_m": 8,
+        "bank_rise_m": 0.8,
+        "water_depth_m": 1.2,
+        "kind": "engineered",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario",
+        "passive_flow": true,
+        "feature_type": "wartime_cut",
+        "profile": [
+          {
+            "fraction": 0,
+            "z_m": 60.9
+          },
+          {
+            "fraction": 1,
+            "z_m": 60.55
+          }
+        ],
+        "junction_bed_note": "Prototype common1.2m planning depth and continuous shared bed/water endpoints; avoids artificial outfall sump. No boat-draft, discharge or lock-cycle certification."
+      },
+      {
+        "id": "relief_cut_downstream",
+        "from": "cut_elbow",
+        "to": "weir_up",
+        "points": [
+          [
+            0.682481752,
+            0.403587444
+          ],
+          [
+            0.656021898,
+            0.341928251
+          ],
+          [
+            0.621350365,
+            0.279147982
+          ],
+          [
+            0.575729927,
+            0.207399103
+          ]
+        ],
+        "map_points_px": [
+          [
+            754,
+            538
+          ],
+          [
+            725,
+            593
+          ],
+          [
+            687,
+            649
+          ],
+          [
+            637,
+            713
+          ]
+        ],
+        "half_width_m": 8,
+        "bank_rise_m": 0.8,
+        "water_depth_m": 1.2,
+        "kind": "engineered",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario",
+        "passive_flow": true,
+        "feature_type": "wartime_cut",
+        "outlet_status": "Cut-mouth/weir spatial separation requires later local engineering detail; no anchor moved",
+        "profile": [
+          {
+            "fraction": 0,
+            "z_m": 60.55
+          },
+          {
+            "fraction": 1,
+            "z_m": 60.1
+          }
+        ],
+        "junction_bed_note": "Prototype common1.2m planning depth and continuous shared bed/water endpoints; avoids artificial outfall sump. No boat-draft, discharge or lock-cycle certification."
+      },
+      {
+        "id": "uphill_foot_pool_overflow",
+        "from": "uphill_canal_foot",
+        "to": "cut_elbow",
+        "points": [
+          [
+            0.74270073,
+            0.394618834
+          ],
+          [
+            0.711678832,
+            0.387892377
+          ],
+          [
+            0.682481752,
+            0.403587444
+          ]
+        ],
+        "map_points_px": [
+          [
+            820,
+            546
+          ],
+          [
+            786,
+            552
+          ],
+          [
+            754,
+            538
+          ]
+        ],
+        "half_width_m": 2,
+        "bank_rise_m": 0.8,
+        "water_depth_m": 1.2,
+        "kind": "engineered",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario",
+        "passive_flow": true,
+        "topology_status": "Local interpretation: downhill pool overflow to Cut, not uphill gravity supply",
+        "profile": [
+          {
+            "fraction": 0,
+            "z_m": 60.7
+          },
+          {
+            "fraction": 1,
+            "z_m": 60.55
+          }
+        ],
+        "junction_bed_note": "Prototype common1.2m planning depth and continuous shared bed/water endpoints; avoids artificial outfall sump. No boat-draft, discharge or lock-cycle certification."
+      },
+      {
+        "id": "uphill_canal_lift",
+        "from": "uphill_canal_foot",
+        "to": "uphill_canal_cistern",
+        "points": [
+          [
+            0.74270073,
+            0.394618834
+          ],
+          [
+            0.762773723,
+            0.411434978
+          ],
+          [
+            0.762773723,
+            0.439461883
+          ],
+          [
+            0.784671533,
+            0.439461883
+          ],
+          [
+            0.784671533,
+            0.47309417
+          ],
+          [
+            0.809306569,
+            0.47309417
+          ],
+          [
+            0.809306569,
+            0.505605381
+          ],
+          [
+            0.83850365,
+            0.505605381
+          ],
+          [
+            0.83850365,
+            0.535874439
+          ],
+          [
+            0.868613139,
+            0.535874439
+          ],
+          [
+            0.868613139,
+            0.556053812
+          ],
+          [
+            0.905109489,
+            0.556053812
+          ],
+          [
+            0.905109489,
+            0.571748879
+          ],
+          [
+            0.953467153,
+            0.571748879
+          ],
+          [
+            0.953467153,
+            0.584080717
+          ],
+          [
+            0.993613139,
+            0.591928251
+          ]
+        ],
+        "map_points_px": [
+          [
+            820,
+            546
+          ],
+          [
+            842,
+            531
+          ],
+          [
+            842,
+            506
+          ],
+          [
+            866,
+            506
+          ],
+          [
+            866,
+            476
+          ],
+          [
+            893,
+            476
+          ],
+          [
+            893,
+            447
+          ],
+          [
+            925,
+            447
+          ],
+          [
+            925,
+            420
+          ],
+          [
+            958,
+            420
+          ],
+          [
+            958,
+            402
+          ],
+          [
+            998,
+            402
+          ],
+          [
+            998,
+            388
+          ],
+          [
+            1051,
+            388
+          ],
+          [
+            1051,
+            377
+          ],
+          [
+            1095,
+            370
+          ]
+        ],
+        "half_width_m": 2,
+        "bank_rise_m": 0.8,
+        "water_depth_m": 1.2,
+        "kind": "anomalous_engineered",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario",
+        "passive_flow": false,
+        "positive_head_m": 18.1,
+        "energy_source": "UNKNOWN_AUTHORED_BRAID_MECHANISM",
+        "approval_boundary": "Existing quest proposal; mechanism withheld; no pump invented; not validated as passive hydrology",
+        "local_geometry_status": "Regional envelope only; twenty-odd short steps/cistern/return spill/culvert need local design",
+        "profile": [
+          {
+            "fraction": 0,
+            "z_m": 60.7
+          },
+          {
+            "fraction": 1,
+            "z_m": 78.8
+          }
+        ],
+        "junction_bed_note": "Prototype common1.2m planning depth and continuous shared bed/water endpoints; avoids artificial outfall sump. No boat-draft, discharge or lock-cycle certification."
+      },
+      {
+        "id": "drowsebank_mill_leat",
+        "from": "mill_intake",
+        "to": "mill_forebay",
+        "points": [
+          [
+            0.437043796,
+            0.283632287
+          ],
+          [
+            0.458029197,
+            0.273542601
+          ],
+          [
+            0.47810219,
+            0.261210762
+          ],
+          [
+            0.489963504,
+            0.25
+          ]
+        ],
+        "map_points_px": [
+          [
+            485,
+            645
+          ],
+          [
+            508,
+            654
+          ],
+          [
+            530,
+            665
+          ],
+          [
+            543,
+            675
+          ]
+        ],
+        "half_width_m": 4,
+        "bank_rise_m": 0.8,
+        "water_depth_m": 1.2,
+        "kind": "engineered",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario",
+        "passive_flow": true,
+        "topology_status": "Provisional local mill-leat interpretation, not newly approved major waterway",
+        "profile": [
+          {
+            "fraction": 0,
+            "z_m": 61.7
+          },
+          {
+            "fraction": 1,
+            "z_m": 61.3
+          }
+        ],
+        "junction_bed_note": "Prototype common1.2m planning depth and continuous shared bed/water endpoints; avoids artificial outfall sump. No boat-draft, discharge or lock-cycle certification."
+      },
+      {
+        "id": "drowsebank_wheel_drop",
+        "from": "mill_forebay",
+        "to": "mill_tailrace",
+        "points": [
+          [
+            0.489963504,
+            0.25
+          ],
+          [
+            0.489963504,
+            0.243273543
+          ]
+        ],
+        "map_points_px": [
+          [
+            543,
+            675
+          ],
+          [
+            543,
+            681
+          ]
+        ],
+        "half_width_m": 3,
+        "bank_rise_m": 0.8,
+        "water_depth_m": 1.2,
+        "kind": "engineered",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario",
+        "passive_flow": true,
+        "feature_type": "watermill_head_transition",
+        "head_drop_m": 0.95,
+        "profile": [
+          {
+            "fraction": 0,
+            "z_m": 61.3
+          },
+          {
+            "fraction": 1,
+            "z_m": 60.35
+          }
+        ],
+        "junction_bed_note": "Prototype common1.2m planning depth and continuous shared bed/water endpoints; avoids artificial outfall sump. No boat-draft, discharge or lock-cycle certification."
+      },
+      {
+        "id": "drowsebank_tailrace",
+        "from": "mill_tailrace",
+        "to": "weir_up",
+        "points": [
+          [
+            0.489963504,
+            0.243273543
+          ],
+          [
+            0.518248175,
+            0.230941704
+          ],
+          [
+            0.550182482,
+            0.220852018
+          ],
+          [
+            0.575729927,
+            0.207399103
+          ]
+        ],
+        "map_points_px": [
+          [
+            543,
+            681
+          ],
+          [
+            574,
+            692
+          ],
+          [
+            609,
+            701
+          ],
+          [
+            637,
+            713
+          ]
+        ],
+        "half_width_m": 4,
+        "bank_rise_m": 0.8,
+        "water_depth_m": 1.2,
+        "kind": "engineered",
+        "horizontal_status": "Approximate approved-map trace; hydraulic topology interpreted as explicitly noted",
+        "vertical_status": "Technical hydraulic scenario",
+        "passive_flow": true,
+        "topology_status": "Provisional tail return; Drowse spur-to-lowerCut link pending local detail",
+        "profile": [
+          {
+            "fraction": 0,
+            "z_m": 60.35
+          },
+          {
+            "fraction": 1,
+            "z_m": 60.1
+          }
+        ],
+        "junction_bed_note": "Prototype common1.2m planning depth and continuous shared bed/water endpoints; avoids artificial outfall sump. No boat-draft, discharge or lock-cycle certification."
+      },
+      {
+        "id": "greyharrow_boundary_inflow",
+        "from": "grey_in",
+        "to": "grey_up",
+        "points": [
+          [
+            0.993613139,
+            0.32735426
+          ],
+          [
+            0.965328467,
+            0.316143498
+          ],
+          [
+            0.937956204,
+            0.306053812
+          ]
+        ],
+        "map_points_px": [
+          [
+            1095,
+            606
+          ],
+          [
+            1064,
+            616
+          ],
+          [
+            1034,
+            625
+          ]
+        ],
+        "half_width_m": 8,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; topology interpreted from source composition",
+        "vertical_status": "Technical hydraulic scenario"
+      },
+      {
+        "id": "greyharrow_upper_branch",
+        "from": "grey_up",
+        "to": "grey_town_water",
+        "points": [
+          [
+            0.937956204,
+            0.306053812
+          ],
+          [
+            0.903284672,
+            0.289237668
+          ],
+          [
+            0.878649635,
+            0.272421525
+          ],
+          [
+            0.864963504,
+            0.251121076
+          ],
+          [
+            0.875912409,
+            0.25
+          ]
+        ],
+        "map_points_px": [
+          [
+            1034,
+            625
+          ],
+          [
+            996,
+            640
+          ],
+          [
+            969,
+            655
+          ],
+          [
+            954,
+            674
+          ],
+          [
+            966,
+            675
+          ]
+        ],
+        "half_width_m": 8,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; topology interpreted from source composition",
+        "vertical_status": "Technical hydraulic scenario"
+      },
+      {
+        "id": "greyharrow_town_branch",
+        "from": "grey_town_water",
+        "to": "grey_lower",
+        "points": [
+          [
+            0.875912409,
+            0.25
+          ],
+          [
+            0.88229927,
+            0.227578475
+          ],
+          [
+            0.912408759,
+            0.219730942
+          ],
+          [
+            0.929744526,
+            0.201793722
+          ],
+          [
+            0.925182482,
+            0.176008969
+          ]
+        ],
+        "map_points_px": [
+          [
+            966,
+            675
+          ],
+          [
+            973,
+            695
+          ],
+          [
+            1006,
+            702
+          ],
+          [
+            1025,
+            718
+          ],
+          [
+            1020,
+            741
+          ]
+        ],
+        "half_width_m": 8,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; topology interpreted from source composition",
+        "vertical_status": "Technical hydraulic scenario"
+      },
+      {
+        "id": "greyharrow_lower_branch",
+        "from": "grey_lower",
+        "to": "grey_confluence",
+        "points": [
+          [
+            0.925182482,
+            0.176008969
+          ],
+          [
+            0.897810219,
+            0.151345291
+          ],
+          [
+            0.885948905,
+            0.116591928
+          ],
+          [
+            0.879562044,
+            0.082959641
+          ],
+          [
+            0.862226277,
+            0.061659193
+          ],
+          [
+            0.856751825,
+            0.058295964
+          ]
+        ],
+        "map_points_px": [
+          [
+            1020,
+            741
+          ],
+          [
+            990,
+            763
+          ],
+          [
+            977,
+            794
+          ],
+          [
+            970,
+            824
+          ],
+          [
+            951,
+            843
+          ],
+          [
+            945,
+            846
+          ]
+        ],
+        "half_width_m": 8,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; topology interpreted from source composition",
+        "vertical_status": "Technical hydraulic scenario"
+      },
+      {
+        "id": "brookhollow_to_grey_confluence",
+        "from": "brook_reach",
+        "to": "grey_confluence",
+        "points": [
+          [
+            0.775547445,
+            0.036995516
+          ],
+          [
+            0.817518248,
+            0.041479821
+          ],
+          [
+            0.850364964,
+            0.060538117
+          ],
+          [
+            0.856751825,
+            0.058295964
+          ]
+        ],
+        "map_points_px": [
+          [
+            856,
+            865
+          ],
+          [
+            902,
+            861
+          ],
+          [
+            938,
+            844
+          ],
+          [
+            945,
+            846
+          ]
+        ],
+        "half_width_m": 18,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; topology interpreted from source composition",
+        "vertical_status": "Technical hydraulic scenario"
+      },
+      {
+        "id": "confluence_to_region_exit",
+        "from": "grey_confluence",
+        "to": "outlet",
+        "points": [
+          [
+            0.856751825,
+            0.058295964
+          ],
+          [
+            0.880474453,
+            0.057174888
+          ],
+          [
+            0.910583942,
+            0.030269058
+          ],
+          [
+            0.935218978,
+            0.0
+          ]
+        ],
+        "map_points_px": [
+          [
+            945,
+            846
+          ],
+          [
+            971,
+            847
+          ],
+          [
+            1004,
+            871
+          ],
+          [
+            1031,
+            898
+          ]
+        ],
+        "half_width_m": 18,
+        "bank_rise_m": 4,
+        "water_depth_m": 1.2,
+        "kind": "natural",
+        "horizontal_status": "Approximate approved-map trace; topology interpreted from source composition",
+        "vertical_status": "Technical hydraulic scenario"
+      }
+    ],
+    "engineered_controls": [
+      {
+        "id": "bramblelock_weir",
+        "upstream": "weir_up",
+        "downstream": "weir_down",
+        "head_drop_m": 1.2,
+        "type": "passive_weir",
+        "status": "Static head scenario; flush/backwater pulse not simulated"
+      },
+      {
+        "id": "hollow_lock",
+        "upstream": "hollow_lock_inlet",
+        "downstream": "hollow_lock_tail",
+        "head_drop_m": 1.1,
+        "type": "lock",
+        "status": "Level-control envelope only; chamber filling/draining not simulated"
+      },
+      {
+        "id": "drowsebank_mill",
+        "upstream": "mill_forebay",
+        "downstream": "mill_tailrace",
+        "head_drop_m": 0.95,
+        "type": "mill",
+        "status": "Technical head proposal; detailed wheel/race/pond and Drowse spur unvalidated"
+      }
+    ],
+    "operating_state": "Static baseline open-state planning geometry; not quest gate operation or transient flood simulation",
+    "outlet": "outlet",
+    "depth_scenario_note": "Natural and engineered planning channels use common1.2m depth to maintain continuous junction beds; not a navigable-barge draft or hydraulic capacity claim. Standing unresolved backwater retains a tiny bottom gradient."
+  },
+  "settlements": [
+    {
+      "id": "brookhollow",
+      "name": "Brookhollow",
+      "xy": [
+        0.775547445,
+        0.066143498
+      ],
+      "map_px": [
+        856,
+        839
+      ],
+      "placement_status": "Approved-map trace; approximate symbol-centre interpretation",
+      "span_m": [
+        400,
+        650
+      ],
+      "envelope_axes_m": [
+        650,
+        490
+      ],
+      "buildings": [
+        75,
+        120
+      ],
+      "npc_roster": [
+        85,
+        150
+      ],
+      "typical_visible_npcs": [
+        22,
+        40
+      ],
+      "capacity_status": "Proposed planning targets from Director mission, not population canon",
+      "policy": "town",
+      "working_radius_m": 600,
+      "footprint_m2": 150,
+      "plot_coverage": 0.3,
+      "road_fraction": 0.3,
+      "max_building_slope_deg": 5,
+      "min_freeboard_m": 1.2,
+      "terrain_modification": "No settlement grading applied by regional synthesis; suitability/adaptation assessed only",
+      "policy_notes": "Upper residential/civic ground separated from floodable docks and waterfront work; local foundations/terraces only. No blanket flattening.",
+      "area_targets": {
+        "roof_footprint_m2": [
+          11250,
+          18000
+        ],
+        "developable_plot_area_m2": [
+          37500,
+          60000
+        ],
+        "circulation_public_fraction": 0.3,
+        "working_landscape_radius_m": 600,
+        "working_landscape_use": "Approach roads, fields and working waterfront; no parcel plan inferred"
+      },
+      "reference_ground_m": 65.5,
+      "reference_ground_status": "Broad low-amplitude natural-ground preference, not flat settlement pad or surveyed height",
+      "flood_scenario_rise_m": 1.5,
+      "exposure_policy": {
+        "residential_freeboard_above_normal_stage_m": 1.2,
+        "floodable_waterfront_working_area": true,
+        "extra_flood_scenario_m": 1.5,
+        "grading_scope": "Local foundations/terraces only; no grading performed by prototype"
+      }
+    },
+    {
+      "id": "crestbridge",
+      "name": "Crestbridge",
+      "xy": [
+        0.429744526,
+        0.323991031
+      ],
+      "map_px": [
+        477,
+        609
+      ],
+      "placement_status": "Approved-map trace; approximate symbol-centre interpretation",
+      "span_m": [
+        350,
+        600
+      ],
+      "envelope_axes_m": [
+        600,
+        420
+      ],
+      "buildings": [
+        60,
+        100
+      ],
+      "npc_roster": [
+        70,
+        125
+      ],
+      "typical_visible_npcs": [
+        18,
+        35
+      ],
+      "capacity_status": "Proposed planning targets from Director mission, not population canon",
+      "policy": "town",
+      "working_radius_m": 650,
+      "footprint_m2": 160,
+      "plot_coverage": 0.3,
+      "road_fraction": 0.3,
+      "max_building_slope_deg": 5,
+      "min_freeboard_m": 1.2,
+      "terrain_modification": "No settlement grading applied by regional synthesis; suitability/adaptation assessed only",
+      "policy_notes": "Upper residential/civic ground separated from floodable docks and waterfront work; local foundations/terraces only. No blanket flattening.",
+      "area_targets": {
+        "roof_footprint_m2": [
+          9600,
+          16000
+        ],
+        "developable_plot_area_m2": [
+          32000,
+          53333
+        ],
+        "circulation_public_fraction": 0.3,
+        "working_landscape_radius_m": 650,
+        "working_landscape_use": "Approach roads, fields and working waterfront; no parcel plan inferred",
+        "external_infrastructure_ids": [
+          "crest_hall",
+          "hill_depot"
+        ],
+        "external_infrastructure_status": "Separate outworks/infrastructure in third working-landscape area; fixed anchors outside600m built-up core. Working radius is an overlay screen, not a limit on remote outworks. Whether proposed town building/span budget includes these outworks requires Director clarification."
+      },
+      "reference_ground_m": 68.5,
+      "reference_ground_status": "Broad low-amplitude natural-ground preference, not flat settlement pad or surveyed height",
+      "flood_scenario_rise_m": 1.5,
+      "exposure_policy": {
+        "residential_freeboard_above_normal_stage_m": 1.2,
+        "floodable_waterfront_working_area": true,
+        "extra_flood_scenario_m": 1.5,
+        "grading_scope": "Local foundations/terraces only; no grading performed by prototype"
+      }
+    },
+    {
+      "id": "ashenstead",
+      "name": "Ashenstead",
+      "xy": [
+        0.77189781,
+        0.698430493
+      ],
+      "map_px": [
+        852,
+        275
+      ],
+      "placement_status": "Approved-map trace; approximate symbol-centre interpretation",
+      "span_m": [
+        220,
+        420
+      ],
+      "envelope_axes_m": [
+        420,
+        310
+      ],
+      "buildings": [
+        35,
+        60
+      ],
+      "npc_roster": [
+        35,
+        70
+      ],
+      "typical_visible_npcs": [
+        10,
+        22
+      ],
+      "capacity_status": "Proposed planning targets from Director mission, not population canon",
+      "policy": "village",
+      "working_radius_m": 850,
+      "footprint_m2": 140,
+      "plot_coverage": 0.3,
+      "road_fraction": 0.25,
+      "max_building_slope_deg": 4,
+      "min_freeboard_m": 1.5,
+      "terrain_modification": "No settlement grading applied by regional synthesis; suitability/adaptation assessed only",
+      "policy_notes": "Compact core fits existing land; extensive usable fields remain outside village. Local pads and field drainage rather than a plateau.",
+      "area_targets": {
+        "roof_footprint_m2": [
+          4900,
+          8400
+        ],
+        "developable_plot_area_m2": [
+          16333,
+          28000
+        ],
+        "circulation_public_fraction": 0.25,
+        "working_landscape_radius_m": 850,
+        "working_landscape_use": "Extensive agricultural fields beyond core"
+      },
+      "reference_ground_m": 85,
+      "reference_ground_status": "Broad low-amplitude natural-ground preference, not flat settlement pad or surveyed height",
+      "flood_scenario_rise_m": 1.5,
+      "exposure_policy": {
+        "residential_freeboard_above_normal_stage_m": 1.5,
+        "floodable_waterfront_working_area": true,
+        "extra_flood_scenario_m": 1.5,
+        "grading_scope": "Local foundations/terraces only; no grading performed by prototype"
+      }
+    },
+    {
+      "id": "greyharrow",
+      "name": "Greyharrow",
+      "xy": [
+        0.887773723,
+        0.248878924
+      ],
+      "map_px": [
+        979,
+        676
+      ],
+      "placement_status": "Approved-map trace; approximate symbol-centre interpretation",
+      "span_m": [
+        220,
+        380
+      ],
+      "envelope_axes_m": [
+        380,
+        270
+      ],
+      "buildings": [
+        28,
+        50
+      ],
+      "npc_roster": [
+        30,
+        60
+      ],
+      "typical_visible_npcs": [
+        8,
+        18
+      ],
+      "capacity_status": "Proposed planning targets from Director mission, not population canon",
+      "policy": "town",
+      "working_radius_m": 450,
+      "footprint_m2": 140,
+      "plot_coverage": 0.3,
+      "road_fraction": 0.25,
+      "max_building_slope_deg": 4.5,
+      "min_freeboard_m": 1.2,
+      "terrain_modification": "No settlement grading applied by regional synthesis; suitability/adaptation assessed only",
+      "policy_notes": "Upper residential/civic ground separated from floodable docks and waterfront work; local foundations/terraces only. No blanket flattening.",
+      "area_targets": {
+        "roof_footprint_m2": [
+          3920,
+          7000
+        ],
+        "developable_plot_area_m2": [
+          13067,
+          23333
+        ],
+        "circulation_public_fraction": 0.25,
+        "working_landscape_radius_m": 450,
+        "working_landscape_use": "Approach roads, fields and working waterfront; no parcel plan inferred"
+      },
+      "reference_ground_m": 67,
+      "reference_ground_status": "Broad low-amplitude natural-ground preference, not flat settlement pad or surveyed height",
+      "flood_scenario_rise_m": 1.5,
+      "exposure_policy": {
+        "residential_freeboard_above_normal_stage_m": 1.2,
+        "floodable_waterfront_working_area": true,
+        "extra_flood_scenario_m": 1.5,
+        "grading_scope": "Local foundations/terraces only; no grading performed by prototype"
+      }
+    },
+    {
+      "id": "reedmere",
+      "name": "Reedmere",
+      "xy": [
+        0.071167883,
+        0.548206278
+      ],
+      "map_px": [
+        84,
+        409
+      ],
+      "placement_status": "Approved-map trace; approximate symbol-centre interpretation",
+      "span_m": [
+        130,
+        250
+      ],
+      "envelope_axes_m": [
+        250,
+        180
+      ],
+      "buildings": [
+        12,
+        24
+      ],
+      "npc_roster": [
+        15,
+        32
+      ],
+      "typical_visible_npcs": [
+        5,
+        12
+      ],
+      "capacity_status": "Proposed planning targets from Director mission, not population canon",
+      "policy": "fen",
+      "working_radius_m": 350,
+      "footprint_m2": 120,
+      "plot_coverage": 0.35,
+      "road_fraction": 0.18,
+      "max_building_slope_deg": 3,
+      "min_freeboard_m": 0.3,
+      "terrain_modification": "No settlement grading applied by regional synthesis; suitability/adaptation assessed only",
+      "policy_notes": "Wetland adaptation: natural ridges, stilts and boardwalks; flooded cells are adaptation candidates, not automatically dry developable land. No fen drainage or broad grading.",
+      "area_targets": {
+        "roof_footprint_m2": [
+          1440,
+          2880
+        ],
+        "developable_plot_area_m2": [
+          4114,
+          8229
+        ],
+        "circulation_public_fraction": 0.18,
+        "working_landscape_radius_m": 350,
+        "working_landscape_use": "Managed reed/water access and undrained marsh"
+      },
+      "reference_ground_m": 65,
+      "reference_ground_status": "Broad low-amplitude natural-ground preference, not flat settlement pad or surveyed height",
+      "flood_scenario_rise_m": 1.5,
+      "exposure_policy": {
+        "dry_ridge_freeboard_m": 0.3,
+        "flooded_adaptation": "Conditional stilts/boardwalks allowed above bed; no dry-capacity claim for wet cells",
+        "bulk_draining": false
+      }
+    },
+    {
+      "id": "whisperflow_landing",
+      "name": "Whisperflow Landing",
+      "xy": [
+        0.591240876,
+        0.091928251
+      ],
+      "map_px": [
+        654,
+        816
+      ],
+      "placement_status": "Approved-map trace; approximate symbol-centre interpretation",
+      "span_m": [
+        100,
+        200
+      ],
+      "envelope_axes_m": [
+        200,
+        140
+      ],
+      "buildings": [
+        5,
+        12
+      ],
+      "npc_roster": [
+        10,
+        25
+      ],
+      "typical_visible_npcs": [
+        5,
+        20
+      ],
+      "capacity_status": "Proposed planning targets from Director mission, not population canon",
+      "policy": "worksite",
+      "working_radius_m": 300,
+      "footprint_m2": 120,
+      "plot_coverage": 0.35,
+      "road_fraction": 0.22,
+      "max_building_slope_deg": 4,
+      "min_freeboard_m": 0.6,
+      "terrain_modification": "No settlement grading applied by regional synthesis; suitability/adaptation assessed only",
+      "policy_notes": "Working landing adapts to riverbank, floodable loading edge and safer small service pads; no town-sized plateau.",
+      "area_targets": {
+        "roof_footprint_m2": [
+          600,
+          1440
+        ],
+        "developable_plot_area_m2": [
+          1714,
+          4114
+        ],
+        "circulation_public_fraction": 0.22,
+        "working_landscape_radius_m": 300,
+        "working_landscape_use": "Waterway/approach/storage and functional catchment"
+      },
+      "reference_ground_m": 62,
+      "reference_ground_status": "Broad low-amplitude natural-ground preference, not flat settlement pad or surveyed height",
+      "flood_scenario_rise_m": 1.5,
+      "exposure_policy": {
+        "floodable_working_edge": true,
+        "safer_service_pads": true,
+        "maximum_local_grading_depth_m": 1.2,
+        "grading_scope": "Footprints only; no grading performed by prototype"
+      }
+    },
+    {
+      "id": "drowsebank_mill",
+      "name": "Drowsebank Mill",
+      "xy": [
+        0.489963504,
+        0.246636771
+      ],
+      "map_px": [
+        543,
+        678
+      ],
+      "placement_status": "Approved-map trace; approximate symbol-centre interpretation",
+      "span_m": [
+        70,
+        160
+      ],
+      "envelope_axes_m": [
+        160,
+        120
+      ],
+      "buildings": [
+        4,
+        10
+      ],
+      "npc_roster": [
+        5,
+        14
+      ],
+      "typical_visible_npcs": [
+        2,
+        7
+      ],
+      "capacity_status": "Proposed planning targets from Director mission, not population canon",
+      "policy": "worksite",
+      "working_radius_m": 300,
+      "footprint_m2": 180,
+      "plot_coverage": 0.35,
+      "road_fraction": 0.22,
+      "max_building_slope_deg": 3,
+      "min_freeboard_m": 0.6,
+      "terrain_modification": "No settlement grading applied by regional synthesis; suitability/adaptation assessed only",
+      "policy_notes": "Mill headwater, pond/race/tail levels govern placement. Limit grading to local machinery/foundation/yard pads; preserve flood conveyance.",
+      "area_targets": {
+        "roof_footprint_m2": [
+          720,
+          1800
+        ],
+        "developable_plot_area_m2": [
+          2057,
+          5143
+        ],
+        "circulation_public_fraction": 0.22,
+        "working_landscape_radius_m": 300,
+        "working_landscape_use": "Waterway/approach/storage and functional catchment"
+      },
+      "reference_ground_m": 63.1,
+      "reference_ground_status": "Broad low-amplitude natural-ground preference, not flat settlement pad or surveyed height",
+      "flood_scenario_rise_m": 1.5,
+      "exposure_policy": {
+        "floodable_working_edge": true,
+        "safer_service_pads": true,
+        "maximum_local_grading_depth_m": 1.2,
+        "grading_scope": "Footprints only; no grading performed by prototype"
+      }
+    }
+  ],
+  "landforms": [
+    {
+      "id": "northwest_uplands",
+      "xy": [
+        0.094890511,
+        0.849775785
+      ],
+      "map_px": [
+        110,
+        140
+      ],
+      "amplitude_m": 160,
+      "radius_m": 850,
+      "status": "Technical relief proposal; no contour heights treated as surveyed"
+    },
+    {
+      "id": "western_ridge",
+      "xy": [
+        0.067518248,
+        0.322869955
+      ],
+      "map_px": [
+        80,
+        610
+      ],
+      "amplitude_m": 120,
+      "radius_m": 800,
+      "status": "Technical relief proposal; no contour heights treated as surveyed"
+    },
+    {
+      "id": "northeast_uplands",
+      "xy": [
+        0.715328467,
+        0.917040359
+      ],
+      "map_px": [
+        790,
+        80
+      ],
+      "amplitude_m": 110,
+      "radius_m": 1000,
+      "status": "Technical relief proposal; no contour heights treated as surveyed"
+    },
+    {
+      "id": "technical_northwest_boundary_rim",
+      "xy": [
+        0,
+        1
+      ],
+      "map_px": [
+        6,
+        6
+      ],
+      "amplitude_m": 25,
+      "radius_m": 350,
+      "status": "Technical smooth watershed-boundary elevation fit; no named geographic/canon feature; original155.7m corner was below retained headwater and required23.16m conditioning fill",
+      "boundary_assumption": "Bounded single-outlet study closes the remaining map boundary; external drainage/true watershed divide remains unsurveyed. No approved anchor or conditioning budget changed."
+    }
+  ],
+  "routes": [
+    {
+      "id": "brookhollow_to_landing",
+      "points": [
+        [
+          0.775547445,
+          0.066143498
+        ],
+        [
+          0.710766423,
+          0.05941704
+        ],
+        [
+          0.642335766,
+          0.06838565
+        ],
+        [
+          0.591240876,
+          0.091928251
+        ]
+      ],
+      "map_points_px": [
+        [
+          856,
+          839
+        ],
+        [
+          785,
+          845
+        ],
+        [
+          710,
+          837
+        ],
+        [
+          654,
+          816
+        ]
+      ],
+      "width_m": 12,
+      "route_type": "cart",
+      "max_grade": 0.1,
+      "status": "Approximate approved-map route trace; crossings require explicit bridges/works, not generated traversable routes",
+      "crossings_policy": "Flag water intersections; no bridge, ford or runtime navigation invented"
+    },
+    {
+      "id": "landing_to_crestbridge",
+      "points": [
+        [
+          0.591240876,
+          0.091928251
+        ],
+        [
+          0.531934307,
+          0.076233184
+        ],
+        [
+          0.45620438,
+          0.094170404
+        ],
+        [
+          0.397810219,
+          0.128923767
+        ],
+        [
+          0.36770073,
+          0.174887892
+        ],
+        [
+          0.368613139,
+          0.239910314
+        ],
+        [
+          0.401459854,
+          0.288116592
+        ],
+        [
+          0.429744526,
+          0.323991031
+        ]
+      ],
+      "map_points_px": [
+        [
+          654,
+          816
+        ],
+        [
+          589,
+          830
+        ],
+        [
+          506,
+          814
+        ],
+        [
+          442,
+          783
+        ],
+        [
+          409,
+          742
+        ],
+        [
+          410,
+          684
+        ],
+        [
+          446,
+          641
+        ],
+        [
+          477,
+          609
+        ]
+      ],
+      "width_m": 12,
+      "route_type": "cart",
+      "max_grade": 0.1,
+      "status": "Approximate approved-map route trace; crossings require explicit bridges/works, not generated traversable routes",
+      "crossings_policy": "Flag water intersections; no bridge, ford or runtime navigation invented"
+    },
+    {
+      "id": "crestbridge_to_ashenstead",
+      "points": [
+        [
+          0.429744526,
+          0.323991031
+        ],
+        [
+          0.530109489,
+          0.341928251
+        ],
+        [
+          0.616788321,
+          0.362107623
+        ],
+        [
+          0.648722628,
+          0.406950673
+        ],
+        [
+          0.647810219,
+          0.469730942
+        ],
+        [
+          0.671532847,
+          0.530269058
+        ],
+        [
+          0.717153285,
+          0.596412556
+        ],
+        [
+          0.752737226,
+          0.65470852
+        ],
+        [
+          0.77189781,
+          0.698430493
+        ]
+      ],
+      "map_points_px": [
+        [
+          477,
+          609
+        ],
+        [
+          587,
+          593
+        ],
+        [
+          682,
+          575
+        ],
+        [
+          717,
+          535
+        ],
+        [
+          716,
+          479
+        ],
+        [
+          742,
+          425
+        ],
+        [
+          792,
+          366
+        ],
+        [
+          831,
+          314
+        ],
+        [
+          852,
+          275
+        ]
+      ],
+      "width_m": 12,
+      "route_type": "cart",
+      "max_grade": 0.1,
+      "status": "Approximate approved-map route trace; crossings require explicit bridges/works, not generated traversable routes",
+      "crossings_policy": "Flag water intersections; no bridge, ford or runtime navigation invented"
+    },
+    {
+      "id": "ashenstead_path_of_unburnt_reeds",
+      "points": [
+        [
+          0.77189781,
+          0.698430493
+        ],
+        [
+          0.723540146,
+          0.686098655
+        ],
+        [
+          0.678832117,
+          0.691704036
+        ],
+        [
+          0.626824818,
+          0.718609865
+        ],
+        [
+          0.567518248,
+          0.730941704
+        ],
+        [
+          0.523722628,
+          0.724215247
+        ],
+        [
+          0.487226277,
+          0.720852018
+        ],
+        [
+          0.460766423,
+          0.745515695
+        ],
+        [
+          0.414233577,
+          0.733183857
+        ],
+        [
+          0.369525547,
+          0.735426009
+        ],
+        [
+          0.327554745,
+          0.75
+        ],
+        [
+          0.303832117,
+          0.760089686
+        ],
+        [
+          0.249087591,
+          0.77690583
+        ],
+        [
+          0.204379562,
+          0.779147982
+        ],
+        [
+          0.188868613,
+          0.764573991
+        ]
+      ],
+      "map_points_px": [
+        [
+          852,
+          275
+        ],
+        [
+          799,
+          286
+        ],
+        [
+          750,
+          281
+        ],
+        [
+          693,
+          257
+        ],
+        [
+          628,
+          246
+        ],
+        [
+          580,
+          252
+        ],
+        [
+          540,
+          255
+        ],
+        [
+          511,
+          233
+        ],
+        [
+          460,
+          244
+        ],
+        [
+          411,
+          242
+        ],
+        [
+          365,
+          229
+        ],
+        [
+          339,
+          220
+        ],
+        [
+          279,
+          205
+        ],
+        [
+          230,
+          203
+        ],
+        [
+          213,
+          216
+        ]
+      ],
+      "width_m": 5,
+      "route_type": "foot",
+      "max_grade": 0.22,
+      "status": "Approximate approved-map route trace; crossings require explicit bridges/works, not generated traversable routes",
+      "crossings_policy": "Flag water intersections; no bridge, ford or runtime navigation invented"
+    },
+    {
+      "id": "reedmere_to_crestbridge",
+      "points": [
+        [
+          0.071167883,
+          0.548206278
+        ],
+        [
+          0.097627737,
+          0.512331839
+        ],
+        [
+          0.140510949,
+          0.479820628
+        ],
+        [
+          0.177919708,
+          0.432735426
+        ],
+        [
+          0.226277372,
+          0.41367713
+        ],
+        [
+          0.284671533,
+          0.426008969
+        ],
+        [
+          0.327554745,
+          0.409192825
+        ],
+        [
+          0.339416058,
+          0.356502242
+        ],
+        [
+          0.376824818,
+          0.307174888
+        ],
+        [
+          0.429744526,
+          0.323991031
+        ]
+      ],
+      "map_points_px": [
+        [
+          84,
+          409
+        ],
+        [
+          113,
+          441
+        ],
+        [
+          160,
+          470
+        ],
+        [
+          201,
+          512
+        ],
+        [
+          254,
+          529
+        ],
+        [
+          318,
+          518
+        ],
+        [
+          365,
+          533
+        ],
+        [
+          378,
+          580
+        ],
+        [
+          419,
+          624
+        ],
+        [
+          477,
+          609
+        ]
+      ],
+      "width_m": 5,
+      "route_type": "foot",
+      "max_grade": 0.22,
+      "status": "Approximate approved-map route trace; crossings require explicit bridges/works, not generated traversable routes",
+      "crossings_policy": "Flag water intersections; no bridge, ford or runtime navigation invented"
+    },
+    {
+      "id": "crestbridge_to_greyharrow",
+      "points": [
+        [
+          0.429744526,
+          0.323991031
+        ],
+        [
+          0.527372263,
+          0.311659193
+        ],
+        [
+          0.633211679,
+          0.329596413
+        ],
+        [
+          0.749087591,
+          0.349775785
+        ],
+        [
+          0.843065693,
+          0.326233184
+        ],
+        [
+          0.876824818,
+          0.284753363
+        ],
+        [
+          0.887773723,
+          0.248878924
+        ]
+      ],
+      "map_points_px": [
+        [
+          477,
+          609
+        ],
+        [
+          584,
+          620
+        ],
+        [
+          700,
+          604
+        ],
+        [
+          827,
+          586
+        ],
+        [
+          930,
+          607
+        ],
+        [
+          967,
+          644
+        ],
+        [
+          979,
+          676
+        ]
+      ],
+      "width_m": 12,
+      "route_type": "cart",
+      "max_grade": 0.1,
+      "status": "Approximate approved-map route trace; crossings require explicit bridges/works, not generated traversable routes",
+      "crossings_policy": "Flag water intersections; no bridge, ford or runtime navigation invented"
+    },
+    {
+      "id": "brookhollow_to_greyharrow",
+      "points": [
+        [
+          0.775547445,
+          0.066143498
+        ],
+        [
+          0.829379562,
+          0.073991031
+        ],
+        [
+          0.866788321,
+          0.106502242
+        ],
+        [
+          0.878649635,
+          0.164798206
+        ],
+        [
+          0.868613139,
+          0.215246637
+        ],
+        [
+          0.887773723,
+          0.248878924
+        ]
+      ],
+      "map_points_px": [
+        [
+          856,
+          839
+        ],
+        [
+          915,
+          832
+        ],
+        [
+          956,
+          803
+        ],
+        [
+          969,
+          751
+        ],
+        [
+          958,
+          706
+        ],
+        [
+          979,
+          676
+        ]
+      ],
+      "width_m": 12,
+      "route_type": "cart",
+      "max_grade": 0.1,
+      "status": "Approximate approved-map route trace; crossings require explicit bridges/works, not generated traversable routes",
+      "crossings_policy": "Flag water intersections; no bridge, ford or runtime navigation invented"
+    },
+    {
+      "id": "crestbridge_to_mill",
+      "points": [
+        [
+          0.429744526,
+          0.323991031
+        ],
+        [
+          0.429744526,
+          0.30941704
+        ],
+        [
+          0.453467153,
+          0.293721973
+        ],
+        [
+          0.491788321,
+          0.281390135
+        ],
+        [
+          0.509124088,
+          0.263452915
+        ],
+        [
+          0.489963504,
+          0.246636771
+        ]
+      ],
+      "map_points_px": [
+        [
+          477,
+          609
+        ],
+        [
+          477,
+          622
+        ],
+        [
+          503,
+          636
+        ],
+        [
+          545,
+          647
+        ],
+        [
+          564,
+          663
+        ],
+        [
+          543,
+          678
+        ]
+      ],
+      "width_m": 8,
+      "route_type": "cart",
+      "max_grade": 0.1,
+      "status": "Proposed local technical access corridor between fixed approved anchors; not a built road or newly approved major route",
+      "crossings_policy": "Flag water intersections and grades; no bridge, ford, grading or runtime navigation constructed"
+    },
+    {
+      "id": "crestbridge_to_hall",
+      "points": [
+        [
+          0.429744526,
+          0.323991031
+        ],
+        [
+          0.468065693,
+          0.340807175
+        ],
+        [
+          0.499087591,
+          0.355381166
+        ],
+        [
+          0.530109489,
+          0.366591928
+        ]
+      ],
+      "map_points_px": [
+        [
+          477,
+          609
+        ],
+        [
+          519,
+          594
+        ],
+        [
+          553,
+          581
+        ],
+        [
+          587,
+          571
+        ]
+      ],
+      "width_m": 8,
+      "route_type": "cart",
+      "max_grade": 0.1,
+      "status": "Proposed local technical access corridor between fixed approved anchors; not a built road or newly approved major route",
+      "crossings_policy": "Flag water intersections and grades; no bridge, ford, grading or runtime navigation constructed"
+    },
+    {
+      "id": "hall_to_depot",
+      "points": [
+        [
+          0.530109489,
+          0.366591928
+        ],
+        [
+          0.523722628,
+          0.391255605
+        ],
+        [
+          0.513686131,
+          0.417040359
+        ],
+        [
+          0.510948905,
+          0.443946188
+        ]
+      ],
+      "map_points_px": [
+        [
+          587,
+          571
+        ],
+        [
+          580,
+          549
+        ],
+        [
+          569,
+          526
+        ],
+        [
+          566,
+          502
+        ]
+      ],
+      "width_m": 8,
+      "route_type": "cart",
+      "max_grade": 0.1,
+      "status": "Proposed local technical access corridor between fixed approved anchors; not a built road or newly approved major route",
+      "crossings_policy": "Flag water intersections and grades; no bridge, ford, grading or runtime navigation constructed"
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "uphill_canal_energy",
+      "status": "Declared authored anomalous positive-head transfer; mechanism unknown; no ordinary pump invented",
+      "source": "Discovery_and_Memory.md:496-500"
+    },
+    {
+      "id": "sealed_fen_outlet",
+      "status": "Closing parallel Relief Cut and side culverts cannot remove independently open natural main-river outlet; quest-state explanation requires review",
+      "source": "Zones:32 and Main_Act_III:239-247"
+    },
+    {
+      "id": "lower_western_arm_topology",
+      "status": "Western blue arm interpreted provisionally as terminal standing backwater; continuous meander vs backwater awaits Director reading. No claim full downstream topology approved."
+    },
+    {
+      "id": "local_waterworks_detail",
+      "status": "Canal regional18.1m head/longalignment vs twenty-odd short steps, lock dimensions, Cutmouth/weir separation, cisternreturn/culvert and mill spur need local engineering design"
+    },
+    {
+      "id": "uphill_pool_supply",
+      "status": "Foot-pool source and sustainable water/energy budget not resolved; local overflow falls toward Cut elbow. No Cut-to-pool uphill gravity connection claimed."
+    },
+    {
+      "id": "route_crossings",
+      "status": "Road alignments may cross Relief Cut/Greyharrow branch; report intersections and grade conflicts; bridges/ford works not built or validated."
+    },
+    {
+      "id": "crestbridge_outworks_budget_scope",
+      "status": "Fixed Crest Hall and Hill Depot anchors lie outside Crestbridge600m core envelope; classified as separate infrastructure/outworks in third area. Director clarification required if proposed built-up span/building budget must include them; no anchors moved or building content invented."
+    }
+  ],
+  "wetlands": [
+    {
+      "id": "stillwater_fen",
+      "polygon": [
+        [
+          0.082116788,
+          0.715246637
+        ],
+        [
+          0.195255474,
+          0.733183857
+        ],
+        [
+          0.313868613,
+          0.715246637
+        ],
+        [
+          0.433394161,
+          0.68161435
+        ],
+        [
+          0.488138686,
+          0.637892377
+        ],
+        [
+          0.498175182,
+          0.579596413
+        ],
+        [
+          0.455291971,
+          0.534753363
+        ],
+        [
+          0.370437956,
+          0.487668161
+        ],
+        [
+          0.273722628,
+          0.458520179
+        ],
+        [
+          0.166970803,
+          0.476457399
+        ],
+        [
+          0.079379562,
+          0.515695067
+        ],
+        [
+          0.052007299,
+          0.575112108
+        ],
+        [
+          0.063868613,
+          0.651345291
+        ]
+      ],
+      "map_polygon_px": [
+        [
+          96,
+          260
+        ],
+        [
+          220,
+          244
+        ],
+        [
+          350,
+          260
+        ],
+        [
+          481,
+          290
+        ],
+        [
+          541,
+          329
+        ],
+        [
+          552,
+          381
+        ],
+        [
+          505,
+          421
+        ],
+        [
+          412,
+          463
+        ],
+        [
+          306,
+          489
+        ],
+        [
+          189,
+          473
+        ],
+        [
+          93,
+          438
+        ],
+        [
+          63,
+          385
+        ],
+        [
+          76,
+          317
+        ]
+      ],
+      "water_level_mode": "nearest_natural_reach",
+      "water_level_range_m": [
+        63.65,
+        64.2
+      ],
+      "bed_depth_m": 0.6,
+      "blend_width_m": 200,
+      "status": "Approved fen composition; polygon trace approximate; stage/bed technical shallow-marsh scenario",
+      "upstream_guard_reach": "veilwater_falls",
+      "upstream_guard_transition_m": 500,
+      "upstream_guard_status": "Smooth upstream/downstream transition relative to declared waterfall reach; excludes upland-stage Voronoi discontinuities from fen apron, not a new landform or changed map anchor.",
+      "upstream_guard_boundary_fade_m": 200
+    }
+  ],
+  "landmark_anchors": [
+    {
+      "id": "crest_hall",
+      "xy": [
+        0.530109489,
+        0.366591928
+      ],
+      "map_px": [
+        587,
+        571
+      ],
+      "status": "Approximate approved-map symbol anchor; no generated settlement/building"
+    },
+    {
+      "id": "hill_depot",
+      "xy": [
+        0.510948905,
+        0.443946188
+      ],
+      "map_px": [
+        566,
+        502
+      ],
+      "status": "Approximate approved-map symbol anchor; no generated settlement/building"
+    },
+    {
+      "id": "whispering_door_farmhouse",
+      "xy": [
+        0.343065693,
+        0.053811659
+      ],
+      "map_px": [
+        382,
+        850
+      ],
+      "status": "Approximate approved-map symbol anchor; no generated settlement/building"
+    },
+    {
+      "id": "floodplain_orchards",
+      "xy": [
+        0.723540146,
+        0.278026906
+      ],
+      "map_px": [
+        799,
+        650
+      ],
+      "status": "Approximate approved-map symbol anchor; no generated settlement/building"
+    },
+    {
+      "id": "brackenford_woods",
+      "xy": [
+        0.901459854,
+        0.401345291
+      ],
+      "map_px": [
+        994,
+        540
+      ],
+      "status": "Approximate approved-map symbol anchor; no generated settlement/building"
+    },
+    {
+      "id": "mantle_shrine",
+      "xy": [
+        0.303832117,
+        0.760089686
+      ],
+      "map_px": [
+        339,
+        220
+      ],
+      "status": "Approximate approved-map symbol anchor; no generated settlement/building"
+    },
+    {
+      "id": "circle_unburnt_reeds",
+      "xy": [
+        0.460766423,
+        0.745515695
+      ],
+      "map_px": [
+        511,
+        233
+      ],
+      "status": "Approximate approved-map symbol anchor; no generated settlement/building"
+    },
+    {
+      "id": "veilwater_falls",
+      "xy": [
+        0.188868613,
+        0.764573991
+      ],
+      "map_px": [
+        213,
+        216
+      ],
+      "status": "Approximate approved-map symbol anchor; no generated settlement/building"
+    }
+  ],
+  "lowland_corridors": [
+    {
+      "id": "relief_cut_lowland",
+      "reach_ids": [
+        "fen_to_hollow_lock",
+        "hollow_lock_chamber",
+        "relief_cut_straight",
+        "relief_cut_elbow",
+        "relief_cut_downstream"
+      ],
+      "relative_to_water_level_m": 3.5,
+      "core_half_width_m": 180,
+      "blend_width_m": 400,
+      "status": "Technical background terrain constraint following existing approved Cut alignment; not actual excavation/history or settlement pads"
+    }
+  ],
+  "floodplains": [
+    {
+      "id": "floodplain_orchards",
+      "polygon": [
+        [
+          0.642335766,
+          0.322869955
+        ],
+        [
+          0.688868613,
+          0.346412556
+        ],
+        [
+          0.751824818,
+          0.348654709
+        ],
+        [
+          0.790145985,
+          0.323991031
+        ],
+        [
+          0.795620438,
+          0.278026906
+        ],
+        [
+          0.760948905,
+          0.243273543
+        ],
+        [
+          0.709854015,
+          0.225336323
+        ],
+        [
+          0.659671533,
+          0.234304933
+        ],
+        [
+          0.638686131,
+          0.271300448
+        ]
+      ],
+      "map_polygon_px": [
+        [
+          710,
+          610
+        ],
+        [
+          761,
+          589
+        ],
+        [
+          830,
+          587
+        ],
+        [
+          872,
+          609
+        ],
+        [
+          878,
+          650
+        ],
+        [
+          840,
+          681
+        ],
+        [
+          784,
+          697
+        ],
+        [
+          729,
+          689
+        ],
+        [
+          706,
+          656
+        ]
+      ],
+      "reference_node": "weir_up",
+      "ground_offset_range_m": [
+        0.6,
+        0.8
+      ],
+      "berm_height_m": 1.2,
+      "berm_spacing_m": 90,
+      "berm_width_m": 10,
+      "berm_angle_degrees": 15,
+      "blend_width_m": 180,
+      "drainage_to": "weir_up",
+      "status": "Technical seasonal floodplain and proposed sparse berm controls within mapped orchard area; no tree/building/parcel authoring or finished civil grading",
+      "source_constraint": "LORE/Regions/Caelmor_Region1_LowmarkVale.md:147-151; fertile groves along seasonal flood routes with raised berms, old dikes and sluices",
+      "drainage_status": "Inferred local floodplain apron/ditch space adjacent to approved Cut mouth/towpath and weir works; not an approved additional major watercourse. Gravity outlet and seasonal connectivity require independent terrain validation.",
+      "drainage_corridor_points": [
+        [
+          0.660583942,
+          0.244394619
+        ],
+        [
+          0.638686131,
+          0.242152466
+        ],
+        [
+          0.616788321,
+          0.233183857
+        ],
+        [
+          0.598540146,
+          0.217488789
+        ],
+        [
+          0.575729927,
+          0.207399103
+        ]
+      ],
+      "drainage_corridor_map_points_px": [
+        [
+          730,
+          680
+        ],
+        [
+          706,
+          682
+        ],
+        [
+          682,
+          690
+        ],
+        [
+          662,
+          704
+        ],
+        [
+          637,
+          713
+        ]
+      ],
+      "drainage_corridor_half_width_m": 80,
+      "drainage_corridor_blend_width_m": 120
+    }
+  ]
+}

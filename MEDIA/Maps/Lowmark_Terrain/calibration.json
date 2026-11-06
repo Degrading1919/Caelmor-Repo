@@ -1,0 +1,12 @@
+{
+  "array_origin": "south_west",
+  "image_origin": "north_west",
+  "axes": "x east, y north, z elevation metres",
+  "height_png_min_m": 57.6,
+  "height_png_max_m": 230.58849967404646,
+  "height_png_quantization_m": 0.002639635304402937,
+  "mesh_decimation_stride": 4,
+  "grid_cell_m": 8.0,
+  "obj_authority": "Decimated inspection preview only; authoritative validation uses the full-resolution array.",
+  "authoritative_array": "height.npy (float32 metric elevations); terrain_arrays.npz also retains float64 model and routing."
+}

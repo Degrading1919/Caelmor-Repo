@@ -1,0 +1,9 @@
+{
+  "vertices": 480625,
+  "triangles": 958464,
+  "maximum_elevation_error_m": 7.629363551586721e-06,
+  "axes": "GLB east X / elevation Y / minus north Z; Blender east X / north Y / elevation Z",
+  "glb_bytes": 23038260,
+  "sha256": "4f9708d0e17b9e681a6eb362184a00a3b2543e153f728500bca210a568a8a8b0",
+  "scope": "Every vertex checked. No camera render or Unity import is implied."
+}
