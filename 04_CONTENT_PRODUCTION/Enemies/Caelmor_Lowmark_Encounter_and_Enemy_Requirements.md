@@ -32,7 +32,7 @@
 | **Agility triggers approved but not built; no multi-level traversal or off-mesh links yet** (README) | No encounter may require an agility trigger. Raised "safe footing" (Marking-Stone plinths, post footings, serpent stakes) must be NavMesh-walkable by ramp or step height, not by trigger. |
 | **10 Hz authoritative tick; intents enqueue for T+1** (Stage 6.1.1) | A player's reaction costs 1–2 ticks of latency on top of human reaction. Telegraph durations below are given in seconds and ticks. **Minimum telegraphs:** light hits ≥ 0.8 s (8 ticks); moderate or heavy hits ≥ 1.0 s (10 ticks); any hit at or above 25% max HP, any displacement toward a hazard, and any area effect ≥ 1.5 s (15 ticks). |
 | **Auto-attack on weapon interval; specials on cooldown; no stamina** (Phase 1.3 §2) | Fights are about position and target priority, not input speed. "Punish windows" are when the enemy is exposed and the player's auto-attack and specials land freely. |
-| **AI roles: Passive, Aggressive, Defensive; enemies never flee** (Phase 1.3 §2; CDR-1) | Every creature below has one role and is defeated at 0 HP. "Re-forming" drift, "sinking" serpents and "scattering" goblin crews (a bark after all members are defeated) are all specified so that nothing runs away at low HP during a fight. |
+| **AI roles: Passive, Aggressive, Defensive; enemies never flee** (Phase 1.3 §2; CDR-1) | Every creature below has one role and is defeated at 0 HP. "Re-forming" drift, "sinking" serpents and goblin crews (each member defeated, no scatter) are all specified so that nothing runs away at low HP during a fight. |
 | **Combat states: Idle, Engaged, Acting, Defending, Restricted, Incapacitated; Incapacitated "does not imply death"** (Stage 6.1.2) | Human enemies take the **ordinary defeat** at 0 HP (§8, CDR-1); content no longer depends on CombatIncapacitated. The two scripted exceptions (SX-1 Joss, SX-2 Sallow) use the quest's **on-defeat hook**. Short staggers and knockdowns need a ruling (§9). |
 | **Ranged is a core combat skill** (CDR-2) | Every Lowmark encounter can be fought with **melee or ranged**; none requires ranged and none is trivialised by it (no boss the player can shoot from a spot the boss cannot reach). Arena edges, deep sides and ledges must not give a ranged player a safe unreachable perch. Lowmark stays melee-led; WC has one optional borrowed short bow (§11.2). |
 | **Interaction needs reach and line of sight** (README) | Channelled interactions under attack (cranks, levers, withies, boards) need clear sightlines from the safe standing spot to the object. |
@@ -161,7 +161,7 @@ Each table lists the variant kit with canonical telegraphs. "Band tuning" gives 
 
 **Band tuning.** Novice core; Competent filler (GL-E4c, TB-E1). Scrappers **fragile-standard**; trappers **standard**; Sack-King **elite**, 60–90 s, first attempt ends at 30–60% HP.
 
-**Respawn.** After SM S06 the depot is a revisitable dungeon; goblins respawn as world creatures and the Sack-King is replaced by a non-elite **heap-boss** scrapper (crown passes on). **Scatter rule:** goblin crews "scatter" only after all members are defeated (TB-E1), as a group bark. This is not fleeing.
+**Respawn.** After SM S06 the depot is a revisitable dungeon; goblins respawn as world creatures and the Sack-King is replaced by a non-elite **heap-boss** scrapper (crown passes on). **No scatter (CDR-1):** goblin crews do not scatter; each member is defeated at 0 HP (TB-E1 included).
 
 ### 5.3 Ash Hounds (low)
 
@@ -486,8 +486,8 @@ MQ12 has no combat. MQ8 and MQ9 are the designed combat valley.
 
 | Id | Step gate | Place | Families / variants | Band | Respawn |
 |---|---|---|---|---|---|
-| WC-E1 | WC `S03_barns` (WC unlocks after MQ2) | P20 burned barn row (two barns), Heartlands–Ashenstead edge | 3 scrapper, 1 trapper (melee, or the optional borrowed hunter's short bow; CDR-2) | Novice | STEP → WORLD (P20 goblin camp until UR changes it) |
-| WC-E2 | WC `S06a_hunt` (if sow taken) | M03 scrub margin bed | 1 Furrow Boar sow (territorial) | Novice | OPT; ONCE (Hunting opportunity state) |
+| WC-E1 | WC `S03_barns` (WC unlocks after MQ2) | P20 burned barn row (two barns), Heartlands–Ashenstead edge | 3 scrapper, 1 trapper (melee or ranged; CDR-2) | Novice | STEP → WORLD (P20 goblin camp until UR changes it) |
+| WC-E2 | WC `S06a_hunt` (if sow taken) | M03 scrub margin bed | 1 Furrow Boar sow (territorial; melee, or the optional borrowed hunter's short bow lent at `WC-D6.12`, CDR-2) | Novice | OPT; ONCE (Hunting opportunity state) |
 | BW-E1 | BW `S02_free_jam` | M04 scour pool | 5 swarm (Skitter) | Novice | STEP → WORLD |
 | BW-H1/H2 | BW `S02` / `S04` | M04 jam swing; leaner fall | hazards | Novice | ONCE |
 | FK-E1 | FK `S02_fowl` (closed ground) | P01 D reed margin nesting section | 2 Marsh Fen Goose | Novice | OPT; nest remains |

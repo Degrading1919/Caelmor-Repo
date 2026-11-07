@@ -249,7 +249,7 @@ No variant of any of these says when, how or from where the sacks came.
 | TPW-B3.3 | Spotted (goat track, from behind) | SLINGER | "Where did... He came over the top!" |
 | TPW-B3.4 | Cutter engages | CUTTER | "Closing day, walker. Everybody's stranded. Everybody pays." |
 | TPW-B3.5 | (removed: CDR-1) | — | — |
-| TPW-B3.6 | After E1: inspect the cut badge nailed to the overturned cart (optional, T-2) | (inspect) | "A Ridge Warden's coat badge, cut away with a knife and nailed to the cart for luck. Eleven winters of wear on it. They took the badge. Nobody asked for the coat back." |
+| TPW-B3.6 | After E1: inspect the cut badge nailed to the overturned cart (optional, T-2) | (inspect) | "A Ridge Warden's coat badge, cut off with a knife and nailed to the cart for luck. Eleven winters of wear on it. The one in the Warden's coat had a bare patch on it just this size." |
 | TPW-B3.7 | After E1 | PEDDLER (righting a bale) | "Thank you. We'll wait out the storm at Passwatch." (beat) "If the gate'll have us." |
 | TPW-B3.8 | Cart righted (optional) | PEDDLER | "For your trouble. Don't argue. It's bad luck to argue on a closing day." |
 
@@ -811,7 +811,7 @@ TIW-D7.02 BRYNJAR: (turning) "Walker. You've a face like a closing day. Out with
   > "There's a reserve nobody declared. The ledger says the Iron Winter."   → TIW-D7.10
 
 TIW-D7.10 BRYNJAR: "The Whinstone? That's a hole in a cliff. Pigeons and old tallow." (pounds the parapet) "Who told you this?"
-TIW-D7.11 BRYNJAR: "No. Don't tell me. Show me. I'll come up there and prove you wrong in front of whatever clerk you've found up there."
+TIW-D7.11 BRYNJAR: "No. Don't tell me. Show me. I'll come up there and prove you wrong in front of whatever clerk you've found."
 TIW-D7.12 BRYNJAR: "Hoist foot. I'll be there before you. I'm faster on a track than I look."
       {Brynjar placed at the hoist foot; objective: Meet Brynjar at the hoist foot}
 

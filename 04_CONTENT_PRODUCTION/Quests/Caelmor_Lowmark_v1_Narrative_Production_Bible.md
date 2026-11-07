@@ -265,7 +265,7 @@ Selected and redesigned from the Part 5 lattice. The audit's concern was adminis
 
 | Code | Quest | Phase 1.5 type | Lattice source | Unlock | Where | Core verb | One-line pitch | Systems link |
 |---|---|---|---|---|---|---|---|---|
-| WC | **The Wrong Culprit** | Skill intro (Hunting) | Hunting portfolio C1 | After MQ2 | Heartlands–Ashenstead edge, P20 | track and judge | An Ashenstead household blames the furrow boars for a ruined field; the sign says goblins. Hunt the right culprit or refuse the wrong hunt. | Hunting H1/H2 evidence reading; food and raw hide; opens rooter opportunities; optional borrowed hunter's short bow for the culprit hunt (CDR-2) |
+| WC | **The Wrong Culprit** | Skill intro (Hunting) | Hunting portfolio C1 | After MQ2 | Heartlands–Ashenstead edge, P20 | track and judge | An Ashenstead household blames the furrow boars for a ruined field; the sign says goblins. Hunt the right culprit or refuse the wrong hunt. | Hunting H1/H2 evidence reading; food and raw hide; opens rooter opportunities; optional borrowed hunter's short bow for the sow hunt (CDR-2) |
 | BW | **The Bank Walk** | Skill intro (Woodcutting) | L-S01, C-WD2 | After MQ1 | Greyharrow bank | cut selectively | Tamsin's measuring cord marked a bank as unsafe and nobody believes the child. Clear a driftroot jam and choose which bank-binding trees to keep. | Riparian woodcutting stewardship; bank state persists |
 | FK | **The Flood Kitchen** | Skill intro (Cooking) | new; Nan Ferrin | After MQ1 | Brookhollow flood shelter | hunt, cook, feed | A flush flooded the low lanes; Nan runs a kitchen for the displaced and needs a hunter-cook. | Cooking station intro; reed-margin fowl; food as recovery before MQ3 |
 | BP | **Bark for the Pits** | Skill intro (Leatherworking) | new; woodland bark co-output | After MQ2 | Brookhollow tan-yard, coppice | gather, process, make | Kell Ashby's tan pits are starving for bark since the flood took the bark stack. Supply bark, learn the yard, make your first light protection. | Woodcutting bark → tannery → Leatherworking; Milestone 1 light protection; Riverpath Leathers commission giver |
@@ -286,7 +286,7 @@ Selected and redesigned from the Part 5 lattice. The audit's concern was adminis
 
 **Structure check.** No two side quests share a core verb and setting. Combat is the core in three (NT, FW, OL); it is present but secondary in WC, UR, NB, WD, CN. Talk-led resolution is limited to the closing beat of each.
 
-**Skill coverage.** Hunting (WC, FK), Woodcutting (BW, BP, MQ1, MQ3), Cooking (FK, MQ1), Leatherworking (BP), Smithing (HS, MQ6), Melee and Ranged (all combat; every Lowmark encounter accepts ranged, none requires it; CDR-2). *The Wrong Culprit* has one optional bow beat: borrow a hunter's short bow for the culprit hunt. Fletching is not taught in Lowmark. Mining is not used (D-10).
+**Skill coverage.** Hunting (WC, FK), Woodcutting (BW, BP, MQ1, MQ3), Cooking (FK, MQ1), Leatherworking (BP), Smithing (HS, MQ6), Melee and Ranged (all combat; every Lowmark encounter accepts ranged, none requires it; CDR-2). *The Wrong Culprit* has one optional bow beat: borrow a hunter's short bow for the sow hunt. Fletching is not taught in Lowmark. Mining is not used (D-10).
 
 ### 7.1 Micro-events (10; Phase 1.5 range 6–10)
 

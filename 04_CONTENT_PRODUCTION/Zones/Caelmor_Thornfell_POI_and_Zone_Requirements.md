@@ -376,7 +376,7 @@ Format per POI: **placement**, **areas** (sub-space ids are the packages' own le
 | Areas | G2 broken fold; G3 print line; G4 rubbing pine; G5 kill cache under an overhang (crow column visible from G4); G6 bare rock with the frost stripe; G7 den approach; G8 outer cave (ordinary sound); G9 **inner chamber** (round, three free-standing pillars, the hollow, thick dust) |
 | Traversal | G7: A ledge shimmy → long switchback. |
 | Sound features | `audio_null` at the G8 → G9 threshold, layered over 2 s (drip, wind, footsteps, breath). |
-| State and phasing | By `TGM_OUTCOME`: **ended** empty den; **sleeping** stacked threshold and stormflower net, shoulder path below closed for the winter by a warning cairn. |
+| State and phasing | By `TGM_OUTCOME`: **ended** empty den; **sleeping** stacked threshold and stormflower net (his resting place), Yrsa's small cairn below the den. |
 | Used by | TGM |
 | Map | MAP VERIFICATION REQUIRED: pillars must be far enough from walls to stop charges and to hide him in P3. |
 
@@ -513,7 +513,7 @@ All states are **per-player presentation** (bible §9). Co-op fallback: the host
 | `TSR_SEAM` | TP21 | Seam works and camp props |
 | `TST_STEM` | TP24 | Seed stool with a red rag, or a tallied stump |
 | `TGY_WAY`, `TGY_STEPS_SEEN` | TP28 | Herd location; goat-steps route |
-| `TGM_OUTCOME` | TP25 | Empty den / stacked threshold and net; shoulder path closed for winter (sleeping) |
+| `TGM_OUTCOME` | TP25 | Empty den / stacked threshold and net with Yrsa's cairn below (sleeping) |
 | `TSG_SPOIL`, `TSG_LEDGE` | TP12 | Terrace held or dropped (scramble route); shed and hoist kept or struck |
 | `TSN_*` | TP05 | Drift post recut / told / left |
 | `TBC_WAITS`, `TBC_WAIT_NAMED` | TP07, TP06 | Who sleeps at Three Calls; repair post lines |

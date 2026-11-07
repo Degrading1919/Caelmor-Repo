@@ -537,7 +537,7 @@ On the Ashen Flats stands a tree split down the middle by two burnings, black on
 
 **Beat 0 — It's fruiting (`S00_offer`).** *Objective: See the Twice-Burned Tree.* Offered by the household bark or by approaching the tree. Reaching area A before dusk shows green fruit; Sedge is not there yet. Inspect the fruit: *"Small, hard, green. Not yet."* A wait seat (a flat root) is offered: *Wait for dusk* (§0.4).
 
-**Beat 1 — Rakes (`S01_goblins`).** *Objective: Drive off the goblins.* At dusk a Field Goblin crew arrives along the goblin path and starts beating the branches (E1). Unripe fruit falls and bursts. When the last goblin is defeated the raid is over; one of them dropped a long **hook-pole**.
+**Beat 1 — Rakes (`S01_goblins`).** *Objective: Stop the goblins.* At dusk a Field Goblin crew arrives along the goblin path and starts beating the branches (E1). Unripe fruit falls and bursts. When the last goblin is defeated the raid is over; one of them dropped a long **hook-pole**.
 
 **Beat 2 — The fork (`S02_pick`).** *Objective: Pick a ripe fruit.* As full dusk sets, the fruit in the fork pales and softens (prop swap). Two routes: climb into the fork (agility) and **Pick** (2 s), or use the dropped hook-pole at the base (**Hook a fruit**, 4 s; walkable fallback). Picking produces a fruit in the player's hand (carry state). Sedge is now under the tree (TB-D1).
 
@@ -583,7 +583,7 @@ The goblins drop farm-tool junk only. Nothing advances the quest except the hook
 | Step | Objective | Completes on | Required |
 |---|---|---|---|
 | `S00_offer` | See the Twice-Burned Tree. | Enter area A | Yes |
-| `S01_goblins` | Drive off the goblins. | Time window dusk → E1 defeated | Yes |
+| `S01_goblins` | Stop the goblins. | Time window dusk → E1 defeated | Yes |
 | `S02_pick` | Pick a ripe fruit. | Interaction `pick_fruit` or `hook_fruit` complete | Yes |
 | `S03_eat` | Eat the fruit. | Interaction `eat_fruit` (or `leave_fruit` → skip to S05) | Yes |
 | `S04_dream` | — | `twice_burned.dream_end` (any exit) | Yes if eaten |

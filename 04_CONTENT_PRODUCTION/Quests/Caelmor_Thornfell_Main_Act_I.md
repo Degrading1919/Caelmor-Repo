@@ -270,7 +270,7 @@ The player tells them by blowing **Gather** at the bridgehead when ready (the ca
 The escort runs from the far bridgehead, across the span, through the Blind Corners, to the outer road below Passwatch. The column **moves on Gather and halts on Fall**: the player gives both with the call wheel. This is the act's use of what Dorn taught.
 - **On the span:** gusts. The player blows **Fall** when the fluted face whistles (the column stops and crouches on the span); **Gather** after the gust. If the player does nothing, the column's leader stops by herself after the gust starts (it is slower, never fatal).
 - **Under the shedding face (near side):** a Fall is needed. The player counts the echo or watches the dust; blowing Fall halts the column under cover of the near anchors. If the player forgets, Aud's crew blows Fall from the anvil cart (the column halts late and a beast is grazed by a stone: a presentation limp, a line from Ketil; no loss).
-- **At the Blind Corners: wolves** (**TPW-E3**). A small pack comes down the goat track for the beasts. The column halts on its own when wolves engage. A **howler** lifts its head and holds a howl (~1.5 s); if not interrupted, two more runners come down. The beasts cannot die; wolves "worry" a beast (it bawls and stops the column) until driven off.
+- **At the Blind Corners: wolves** (**TPW-E3**). A small pack comes down the goat track for the beasts. The column halts on its own when wolves engage. A **howler** lifts its head and holds a howl (~1.5 s); if not interrupted, two more runners come down. The beasts cannot die; wolves "worry" a beast (it bawls and stops the column) until they are defeated.
 - **The outer road:** the gate in sight. **The last Close** sounds as the column comes onto the outer road (the held pip fills).
 **Verbs:** escort, call, fight.
 
@@ -389,7 +389,7 @@ All three loads are **safe** in every outcome: whatever waits at Three Calls arr
 | Player answers a call wrongly at the horn post | Dorn repeats the call. No penalty. |
 | Player is hit by a gust or a slide | Damage and knockback to the last shelter face; the guide line stays paid out; segments of the snub post persist. |
 | Player forgets to call Fall on the escort | The column's leader (span) or Aud's crew (near side) calls it late. A beast limps (presentation). No loss. |
-| Wolves reach the beasts | The beast bawls and the column halts until the wolves are driven off. Beasts cannot die. |
+| Wolves reach the beasts | The beast bawls and the column halts until the wolves are defeated. Beasts cannot die. |
 | Death | Respawn at the gate (before Corners) or at Aud's anvil cart (after). Encounters defeated stay defeated. Bridge stages and the chosen load persist. |
 | Logout mid-escort | Restore to `S10`: the column is waiting at the far bridgehead (or the span's near end if the player had crossed); wolves reset. |
 | Walking away | Quest stays Active at its step. Resume hook: Vessa at the gate ("Still shut. Still waiting on you."); after S04, Aud at the anvil cart. The Close count resumes where it stood. |

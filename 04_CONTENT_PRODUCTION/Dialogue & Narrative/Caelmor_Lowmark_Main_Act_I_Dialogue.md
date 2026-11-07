@@ -83,7 +83,7 @@
 | **Mabry Gorse** | [NEW] | Ashen Flats herder who once walked with the Watchers. Plain and embarrassed by the part she saw. |
 | **Orrin Tull** | [NEW] | Reedmere fen-cutter. Speaks once, after. Nobody names whom he mourns. |
 | **Wenna Tull** | [NEW] | Orrin's sister; stacks reed bundles; keeps his tally. |
-| **Rusk** | [NEW] | Sallow's crew boss. An ordinary enemy (crew boss elite); fights to 0 HP and has no post-fight dialogue (CDR-1). His fear of the fen shows only on his slate and in `NF-D5.04`. |
+| **Rusk** | [NEW] | Sallow's crew boss. An ordinary enemy (crew boss elite); fights to 0 HP and has no post-fight dialogue (CDR-1). His fear of the fen shows only on his slate ("no more water"). |
 | Porters, keepers, Watchers, orchard hands, crew | Role-based | Barks. |
 
 ---
@@ -709,7 +709,7 @@ Reconciled to CDR-1: Rusk fights to 0 HP and is not spoken to. The former conver
 
 ### NF-D8: smash or chain (S10)
 
-No conversation. The former Rusk barks `NF-D8.01`–`NF-D8.04` are **(removed: CDR-1)**; the flag writes stay on the interaction completions.
+No conversation. The former Rusk barks are **(removed: CDR-1)**: `NF-D8.01` and `NF-D8.03` are cut; `NF-D8.02` and `NF-D8.04` stay as unvoiced events that carry the flag writes on the interaction completions.
 
 | Id | Trigger | Speaker | Line |
 |---|---|---|---|

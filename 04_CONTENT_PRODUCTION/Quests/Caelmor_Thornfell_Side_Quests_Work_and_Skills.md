@@ -17,7 +17,7 @@ Exact items, recipes, yields, stats, levels and XP belong to the item, economy a
 | Code | Quest | Skill introduced | Core verb (primary first) | Unlock (quest state) | Where (bible §4) | Length |
 |---|---|---|---|---|---|---|
 | **TSR** | Seam Rights | Mining | **prospect**, mine, judge | TF-M1 Completed | Red Slope Terraces (TP21), Stormwake shoulder | 30–40 min |
-| **TST** | Stormwood | Woodcutting, Fletching (stave, string, arrows), Ranged (first bow) | **select**, cut, string | TF-M1 Completed | Stonewake ridge-market (TP01); Burned Slope (TP24), Ridgewall | 35–45 min |
+| **TST** | Stormwood | Woodcutting, Fletching (stave, string, arrows), Ranged (first bow) | **select**, cut, string, fletch, shoot | TF-M1 Completed | Stonewake ridge-market (TP01); Burned Slope (TP24), Ridgewall | 35–45 min |
 | **TGY** | Goat Year | Hunting, Leatherworking | **track**, cull or drive, tan | TF-M1 Completed (needs `TH_CALLS`, always set by TF-M1) | Goat Ledges of the Stormwake Shoulder (TP28) and a herding shieling at their foot | 35–45 min |
 | **TFS** | First Smoke | Cooking (with entry Hunting) | **hunt**, cook, tell | TF-M2 Completed (`TH_SEASON` = snow) | Nettlehook Highstead (TP03), the upper longhouse and the snow shelf above it | 30–40 min |
 | **TBC** | The Bridge That Chose | Smithing (settlement) | **triage**, smith, account | TF-M1 Completed | The Windscar Narrows (TP07): Passwatch-side bridgehead and Aud's field forge; Three Calls Shelter (TP06) across the gap | 35–45 min |

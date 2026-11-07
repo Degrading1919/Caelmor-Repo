@@ -383,7 +383,7 @@ No option is wrong. Each touches a value: Annelise's belief that remembrance sho
 
 | Mystery | Author truth | Public belief | Evidence | Wrong reading | Withheld | Reveal owner |
 |---|---|---|---|---|---|---|
-| What the Rebirth Fields were in the war | Emergency treatment and supply ground; the culvert carried water around it to keep it dry and fed clean troughs. | "Always fields"; the circle marks the first planting after the burning. | Stencils, markers, hooks, pins, the guide-line Joric's ploughs kept to. | A mass grave; a cursed field. | Who was treated there; who died; who carved the marks. | Nobody in v1; independent records only (Part 5 lattice L-S18 pattern). |
+| What the Rebirth Fields were in the war | Emergency treatment and supply ground; the culvert carried water around it to keep it dry and fed clean troughs. | "Always fields"; the circle marks the first planting after the burning. | Stencils, markers, hooks, pins, the guide-line Joric's ploughs kept to. | A mass grave; a cursed field. | Who was treated there; who died; who carved the marks. | Nobody in Lowmark content; independent records only (Part 5 lattice L-S18 pattern). |
 | The scratched marks | Marks made by people in the culvert during the war; unreadable. | — | The niche. | They are names of the dead and can be read by the water. | Everything. | Not revealed. |
 | The warm well | Unexplained. Compatible with backed fen water moving under the green. | "Never happened." | Steam; warm bucket; cold after the fix. | The well is grieving. | Cause. | Not revealed in Lowmark content. |
 | The reed-cutter | Sedge, the Last Field-Mage (D-7). | An old cutter. | One sentence; clean cuts. | — | Everything. | MQ8 (never confirmed aloud). |

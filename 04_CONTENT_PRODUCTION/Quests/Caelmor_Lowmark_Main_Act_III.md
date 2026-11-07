@@ -407,7 +407,7 @@ From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: 
 | Smoulder timer on carry objects | Systems | Per-object timer started by enter-volume; on expiry sets a flag and teleports the object to the yard. |
 | Carry state (bundles, sacks, chips, barge post) | Systems | Same as MQ1. |
 | Table deposit volume with per-chip validity and weight | Schema & Content | A list of chip ids with conditions, weight and singe flag; deposit event increments `CR_CHIPS_LAID`/`CR_WEIGHT`. |
-| **On-defeat quest hook** (SX-2) | Systems + Gameplay | When Sallow's creature is defeated at 0 HP, the quest's defeat hook plays the scripted surrender presentation instead of the ordinary one and spawns Sallow as a non-hostile NPC (`creature.scripted_defeat`, formerly EV08). No health-threshold event. The same hook serves SX-1 Joss Garrow (*Old Lantern*) and SX-3 Ingrith (Thornfell). Human crew use the ordinary defeat presentation; no downed state. |
+| **On-defeat quest hook** (SX-2) | Systems + Gameplay | When Sallow's creature is defeated at 0 HP, the quest's defeat hook plays the scripted surrender presentation instead of the ordinary one and spawns Sallow as a non-hostile NPC (EV08 `creature.scripted_defeat`, formerly `creature.yielded`). No health-threshold event. The same hook serves SX-1 Joss Garrow (*Old Lantern*) and SX-3 Ingrith (Thornfell). Human crew use the ordinary defeat presentation; no downed state. |
 | Moving barge with bollard wait points | Systems | Pathed prop (as MQ4's barge) that slows beside the next bollard while the player is near; two instant line-throw interactions. |
 | Lantern-rope prop (drop + relight) | Systems + art | Breakable light with a relight interaction. Reused for MQ11 lantern racks. |
 | Audio duck on `cr.plan_agreed` | Audio | Local duck of the water-gate emitter and ceiling ripple-light pause. |
@@ -967,7 +967,7 @@ Sites quieted in Acts I–II stay quieted. "As left" means the state the player'
 | `LM_HESKETH` | kept | On the bridge with the countersign log. | Commission giver: Crestbridge Guard. |
 | | stood-down | At the Cut mouth with a shovel. `CR_HESKETH_SELF`: "I did it myself. That's the only part I'm proud of." | Works the Cut seal and later the Crestbridge Braid gate. The Keeper-Lieutenant gives the commission. |
 | `CR_CREW_LENIENCY` | true / false | Sallow at the Cut mouth (true) or behind the grille (false). | Lock crew on seal and Braid work (true). |
-| `CR_HAULED_CREWMAN` | true | The young pole-man, now on the seal crew, nods to the player. | — |
+| `CR_HAULED_CREWMAN` | true | The young pole-man nods to the player: on the seal crew if `CR_CREW_LENIENCY`, otherwise from the keepers' work line at the Cut. | — |
 | `UL_RHOSYN_WITNESS` / `UL_RHOSYN_STAYS` / `UL_RHOSYN_FLED` / UL not done | | Witness: clerking for the keepers, wry. Stays: a stall writing letters. Fled: absent; Ottilie's line about the dark cellar. Not done: no Rhosyn; a dock bark about the Lamb's shut back room. (`RR-D19`) | As MQ12. |
 | `LM_PLAN_ROUTES` | crews / keepers / shared | Who lights the Whisperflow lanterns with the player. | Who calls crossings on flood nights (barks; crossing-closed notices signed by crews, keepers, or both). |
 | `LM_PLAN_MEMORIAL` | watchers / gardens / reedmere | Who stands at the fen's memorial ground in E.1.3. | Same. |
@@ -985,7 +985,7 @@ Sites quieted in Acts I–II stay quieted. "As left" means the state the player'
 
 ## E.4 What every ending shares
 
-Crossings reopen under accountable rules (crews' marks on stones, keepers' countersign). The far bank is owed and paid. The present wrong is answered in public. Stillwater is safer. Lowmark has a way to tend future water wounds: the roll in three books. Sedge stays a reed-cutter. Oriel stays behind the falls. The Fourteenth Lot stays at the bottom of the heart pool, and nobody in v1 learns who gave the order. That is the complete local ending of Main Arc movement 12.
+Crossings reopen under accountable rules (crews' marks on stones, keepers' countersign). The far bank is owed and paid. The present wrong is answered in public. Stillwater is safer. Lowmark has a way to tend future water wounds: the roll in three books. Sedge stays a reed-cutter. Oriel stays behind the falls. The Fourteenth Lot stays at the bottom of the heart pool, and nobody in Lowmark content learns who gave the order. That is the complete local ending of Main Arc movement 12.
 
 ---
 

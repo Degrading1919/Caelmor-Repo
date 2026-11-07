@@ -975,7 +975,7 @@ Tuned for late Competent to early Advanced (TD-12).
 | Option | Immediate | Cost | Honoured how |
 |---|---|---|---|
 | **Leave him to the trappers** — *"Leave him to the trappers. The hostel needs the winter."* (`ended`) | Yrsa kneels by him for a while, then whistles the trappers up. Hunting: the player may help butcher (the trappers do it otherwise); hide and fat go to the hostel's winter, meat to its store and to Hushfold. | Greymantle is gone from the shoulder's stories. Yrsa's grief, short and dry. The hostel's children ask where the grey bear went. | Yrsa hangs one grey hank of his coat by the hostel door. The den is empty (prop). Hostel barks: winter meat, and a toast "to the old one". |
-| **Seal the den** — *"He went where it's quiet. Let him have it."* (`sleeping`) | Stack the threshold; hang the stormflower net. The quiet room is his resting place. | The hostel goes into winter without his hide and fat. Yrsa puts a cairn below the den and will not set her best snare line under it. | The stacked threshold and net stay (prop). Yrsa's bark: "Stones are still up. I checked from very far away." |
+| **Seal the den** — *"He went where it's quiet. Let him have it."* (`sleeping`) | Stack the threshold; hang the stormflower net. The quiet room is his resting place. | The hostel goes into winter without his hide and fat. Yrsa puts a cairn below the den and will not set her best snare line under it. | The stacked threshold and net stay (prop). Yrsa's bark: "Stones are still up. I walk past. I don't go in." |
 
 No option is wrong. Neither gives the old bear his rest and the hostel its winter.
 
@@ -1047,7 +1047,7 @@ Small payment from the hostel's box. Yrsa's snare lore in dialogue (later Huntin
 | `TGM-B2` | YRSA | At the rubbing pine | *"Taller than when I last saw him. Or I've shrunk."* |
 | `TGM-B3` | YRSA | Player stalls on bare rock | *"Look for where the frost's been knocked off. He's heavy. He brushes."* |
 | `TGM-B4` | YRSA | Den mouth | *"I don't go in. Not because I'm scared. Because I'm sensible."* |
-| `TGM-B5` | YRSA | Post-quest, `sleeping` | *"Stones are still up. I checked from very far away."* |
+| `TGM-B5` | YRSA | Post-quest, `sleeping` | *"Stones are still up. I walk past. I don't go in."* |
 | `TGM-B6` | HOSTEL CHILD | Post-quest, `ended` | *"Where's the grey bear gone?"* / YRSA: *"Into the stew. Eat it respectfully."* |
 
 #### Nodes
