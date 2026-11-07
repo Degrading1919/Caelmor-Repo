@@ -6,6 +6,11 @@ kept separate from adjustable metre-scale/elevation assumptions. This is not a
 production settlement, runtime terrain generator, hydraulic simulation or locked
 world scale. No buildings or NPCs are generated.
 
+The subsequent [local-refinement milestone](LOCAL_README.md) adds bounded 2 m
+surfaces, actual Blender inspection views and explicit civic/waterworks review
+for Crestbridge, Greyharrow, Reedmere and Drowsebank. Reproduce it with
+`Generate-Lowmark.ps1 -Local`; the regional foundation below remains its source.
+
 ## Reproduce
 
 From the designated checkout in PowerShell 7, with Python 3.13 and Blender 5.0.1:

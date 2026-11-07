@@ -1,0 +1,354 @@
+{
+  "blender": "5.0.1",
+  "blender_hash": "a3db93c5b259",
+  "render_engine": "CYCLES",
+  "samples": 12,
+  "resolution": [
+    1600,
+    1000
+  ],
+  "vertical_scale": 1,
+  "meshes": [
+    {
+      "id": "crestbridge_mill",
+      "vertices": 667233,
+      "triangles": 1331200,
+      "glb_bytes": 31989264,
+      "source_npz_sha256": "a48da3bff11e2fe407faa6079627a46fba4d531343bba0687891c0a813c81077"
+    },
+    {
+      "id": "greyharrow",
+      "vertices": 127305,
+      "triangles": 253184,
+      "glb_bytes": 6094784,
+      "source_npz_sha256": "df2ac25f71379c4dfc311e4277227576cd9976088504f6fd7b5cb3a8527ac306"
+    },
+    {
+      "id": "reedmere",
+      "vertices": 133209,
+      "triangles": 264960,
+      "glb_bytes": 6377788,
+      "source_npz_sha256": "4727555547f5f5c56394d477e62ae96fed5f8028b7e330fdcf13c46e272bd096"
+    }
+  ],
+  "views": [
+    {
+      "id": "crestbridge_broad_elevated",
+      "position_east_north_up_m": [
+        2100.0,
+        600.0,
+        972.5224609375
+      ],
+      "eye_height_above_sampled_ground_m": 900,
+      "target_east_north_up_m": [
+        3000,
+        1770,
+        79.75339037314954
+      ],
+      "lens_mm": 45.0,
+      "vertical_scale": 1,
+      "labels": [
+        {
+          "id": "bridge_proxy",
+          "point": [
+            2581.2102275,
+            1556.418001,
+            67.115367
+          ],
+          "text": "Crossing: technical deck proxy",
+          "normalized_pixel_xy": [
+            0.31571871042251587,
+            0.8370185792446136
+          ]
+        },
+        {
+          "id": "crest_hall_scale_proxy",
+          "point": [
+            3256.9927,
+            1830.026905,
+            86.08422892465941
+          ],
+          "text": "Crest Hall: fixed anchor / size proxy",
+          "ground_m": 70.08422892465941,
+          "normalized_pixel_xy": [
+            0.610130786895752,
+            0.3828103542327881
+          ]
+        },
+        {
+          "id": "depot_area_marker",
+          "point": [
+            3139.270072,
+            2216.17937,
+            72.34690511727558
+          ],
+          "text": "Hill Depot: underground area marker",
+          "ground_m": 67.34690511727558,
+          "normalized_pixel_xy": [
+            0.4039704501628876,
+            0.2902950048446655
+          ]
+        },
+        {
+          "id": "granary_yard_concept",
+          "point": [
+            2631.210228,
+            1646.418001,
+            76.2406398133161
+          ],
+          "text": "Granary concept ONLY: no approved XY",
+          "ground_m": 65.2406398133161,
+          "normalized_pixel_xy": [
+            0.3130524754524231,
+            0.7344621419906616
+          ]
+        }
+      ],
+      "raw_path": "C:\\Users\\CK\\Documents\\Caelmor-Repo\\CODE\\Scripts\\terrain_generation\\.scratch\\inspection_raw\\crestbridge_broad_elevated.png",
+      "render_seconds": 10.454755300000215
+    },
+    {
+      "id": "crestbridge_ground_approach",
+      "position_east_north_up_m": [
+        2483.71435546875,
+        1455.9462890625,
+        68.99956512451172
+      ],
+      "eye_height_above_sampled_ground_m": 1.75,
+      "target_east_north_up_m": [
+        2581.210228,
+        1556.418001,
+        66.2204913870914
+      ],
+      "lens_mm": 35.0,
+      "vertical_scale": 1,
+      "labels": [
+        {
+          "id": "bridge_proxy",
+          "point": [
+            2581.2102275,
+            1556.418001,
+            67.115367
+          ],
+          "text": "Crossing: technical deck proxy",
+          "normalized_pixel_xy": [
+            0.4999983012676239,
+            0.4900597333908081
+          ]
+        },
+        {
+          "id": "crest_hall_scale_proxy",
+          "point": [
+            3256.9927,
+            1830.026905,
+            86.08422892465941
+          ],
+          "text": "Crest Hall: fixed anchor / size proxy",
+          "ground_m": 70.08422892465941,
+          "normalized_pixel_xy": [
+            0.8549513220787048,
+            0.43616145849227905
+          ]
+        },
+        {
+          "id": "depot_area_marker",
+          "point": [
+            3139.270072,
+            2216.17937,
+            72.34690511727558
+          ],
+          "text": "Hill Depot: underground area marker",
+          "ground_m": 67.34690511727558,
+          "normalized_pixel_xy": [
+            0.44278043508529663,
+            0.4639231562614441
+          ]
+        },
+        {
+          "id": "granary_yard_concept",
+          "point": [
+            2631.210228,
+            1646.418001,
+            76.2406398133161
+          ],
+          "text": "Granary concept ONLY: no approved XY",
+          "ground_m": 65.2406398133161,
+          "normalized_pixel_xy": [
+            0.3911072909832001,
+            0.4220259189605713
+          ]
+        }
+      ],
+      "raw_path": "C:\\Users\\CK\\Documents\\Caelmor-Repo\\CODE\\Scripts\\terrain_generation\\.scratch\\inspection_raw\\crestbridge_ground_approach.png",
+      "render_seconds": 8.297678800000085
+    },
+    {
+      "id": "crestbridge_relationships",
+      "position_east_north_up_m": [
+        3800.0,
+        1200.0,
+        511.62744140625
+      ],
+      "eye_height_above_sampled_ground_m": 450,
+      "target_east_north_up_m": [
+        2950,
+        1850,
+        80.08347310453279
+      ],
+      "lens_mm": 40.0,
+      "vertical_scale": 1,
+      "labels": [
+        {
+          "id": "bridge_proxy",
+          "point": [
+            2581.2102275,
+            1556.418001,
+            67.115367
+          ],
+          "text": "Crossing: technical deck proxy",
+          "normalized_pixel_xy": [
+            0.09837203472852707,
+            0.4566541314125061
+          ]
+        },
+        {
+          "id": "crest_hall_scale_proxy",
+          "point": [
+            3256.9927,
+            1830.026905,
+            86.08422892465941
+          ],
+          "text": "Crest Hall: fixed anchor / size proxy",
+          "ground_m": 70.08422892465941,
+          "normalized_pixel_xy": [
+            0.7073822617530823,
+            0.675384908914566
+          ]
+        },
+        {
+          "id": "depot_area_marker",
+          "point": [
+            3139.270072,
+            2216.17937,
+            72.34690511727558
+          ],
+          "text": "Hill Depot: underground area marker",
+          "ground_m": 67.34690511727558,
+          "normalized_pixel_xy": [
+            0.8685574531555176,
+            0.47124922275543213
+          ]
+        },
+        {
+          "id": "granary_yard_concept",
+          "point": [
+            2631.210228,
+            1646.418001,
+            76.2406398133161
+          ],
+          "text": "Granary concept ONLY: no approved XY",
+          "ground_m": 65.2406398133161,
+          "normalized_pixel_xy": [
+            0.19040784239768982,
+            0.43741726875305176
+          ]
+        }
+      ],
+      "raw_path": "C:\\Users\\CK\\Documents\\Caelmor-Repo\\CODE\\Scripts\\terrain_generation\\.scratch\\inspection_raw\\crestbridge_relationships.png",
+      "render_seconds": 9.921055600000273
+    },
+    {
+      "id": "greyharrow_local",
+      "position_east_north_up_m": [
+        5100.0,
+        850.0,
+        298.4823913574219
+      ],
+      "eye_height_above_sampled_ground_m": 230,
+      "target_east_north_up_m": [
+        5450,
+        1250,
+        65.7225429439107
+      ],
+      "lens_mm": 43.0,
+      "vertical_scale": 1,
+      "labels": [],
+      "raw_path": "C:\\Users\\CK\\Documents\\Caelmor-Repo\\CODE\\Scripts\\terrain_generation\\.scratch\\inspection_raw\\greyharrow_local.png",
+      "render_seconds": 10.247046199999659
+    },
+    {
+      "id": "reedmere_local",
+      "position_east_north_up_m": [
+        850.0,
+        2370.0,
+        214.45396423339844
+      ],
+      "eye_height_above_sampled_ground_m": 150,
+      "target_east_north_up_m": [
+        440,
+        2770,
+        65.61487837528634
+      ],
+      "lens_mm": 43.0,
+      "vertical_scale": 1,
+      "labels": [],
+      "raw_path": "C:\\Users\\CK\\Documents\\Caelmor-Repo\\CODE\\Scripts\\terrain_generation\\.scratch\\inspection_raw\\reedmere_local.png",
+      "render_seconds": 9.849875200000042
+    },
+    {
+      "id": "reedmere_floor_detail",
+      "position_east_north_up_m": [
+        400.0,
+        2700.0,
+        68.50737762451172
+      ],
+      "eye_height_above_sampled_ground_m": 4,
+      "target_east_north_up_m": [
+        416,
+        2744,
+        66.00953059866222
+      ],
+      "lens_mm": 35.0,
+      "vertical_scale": 1,
+      "labels": [],
+      "raw_path": "C:\\Users\\CK\\Documents\\Caelmor-Repo\\CODE\\Scripts\\terrain_generation\\.scratch\\inspection_raw\\reedmere_floor_detail.png",
+      "render_seconds": 9.258628600000065
+    },
+    {
+      "id": "drowsebank_local",
+      "position_east_north_up_m": [
+        2770.0,
+        1000.0,
+        234.3447723388672
+      ],
+      "eye_height_above_sampled_ground_m": 170,
+      "target_east_north_up_m": [
+        3040,
+        1250,
+        69.66048944645992
+      ],
+      "lens_mm": 42.0,
+      "vertical_scale": 1,
+      "labels": [
+        {
+          "id": "crest_hall_scale_proxy",
+          "point": [
+            3256.9927,
+            1830.026905,
+            86.08422892465941
+          ],
+          "text": "Crest Hall: fixed anchor / size proxy",
+          "ground_m": 70.08422892465941,
+          "normalized_pixel_xy": [
+            0.1399848759174347,
+            0.0009227991104125977
+          ]
+        }
+      ],
+      "raw_path": "C:\\Users\\CK\\Documents\\Caelmor-Repo\\CODE\\Scripts\\terrain_generation\\.scratch\\inspection_raw\\drowsebank_local.png",
+      "render_seconds": 10.215956399999868
+    }
+  ],
+  "scope": "Actual saved 2m terrain, static water, candidate roads and explicitly conceptual scale proxies. No architecture assets or runtime validation.",
+  "total_seconds": 76.9923359999998
+}

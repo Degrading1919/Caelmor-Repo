@@ -1,0 +1,104 @@
+test_anomaly_is_not_fabricated_gravity_flow (test_terrain.TerrainCoreTests.test_anomaly_is_not_fabricated_gravity_flow) ... ok
+test_candidate_footprints_exclude_actual_open_waterworks (test_terrain.TerrainCoreTests.test_candidate_footprints_exclude_actual_open_waterworks) ... ok
+test_constant_stage_wetland_has_finite_blended_apron (test_terrain.TerrainCoreTests.test_constant_stage_wetland_has_finite_blended_apron) ... ok
+test_continuity_diagnostic_exposes_an_offsite_height_step (test_terrain.TerrainCoreTests.test_continuity_diagnostic_exposes_an_offsite_height_step) ... ok
+test_distant_high_river_cannot_impose_a_voronoi_cliff (test_terrain.TerrainCoreTests.test_distant_high_river_cannot_impose_a_voronoi_cliff) ... ok
+test_flood_screen_capacity_never_counts_exposed_footprints_safe (test_terrain.TerrainCoreTests.test_flood_screen_capacity_never_counts_exposed_footprints_safe) ... ok
+test_real_dem_damage_is_detected (test_terrain.TerrainCoreTests.test_real_dem_damage_is_detected) ... ok
+test_reject_uphill_natural_profile (test_terrain.TerrainCoreTests.test_reject_uphill_natural_profile) ... ok
+test_reproducibility_and_independent_drainage (test_terrain.TerrainCoreTests.test_reproducibility_and_independent_drainage) ... ok
+test_saved_arrays_and_exports_are_deterministic (test_terrain.TerrainCoreTests.test_saved_arrays_and_exports_are_deterministic) ... ok
+test_settlement_capacity_never_flattens_land (test_terrain.TerrainCoreTests.test_settlement_capacity_never_flattens_land) ... ok
+test_stage_screen_does_not_flood_disconnected_low_pockets (test_terrain.TerrainCoreTests.test_stage_screen_does_not_flood_disconnected_low_pockets) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.280s
+
+OK
+test_actual_slope_conserves_contributing_area (test_hydrology_review.IndependentOracleTests.test_actual_slope_conserves_contributing_area) ... ok
+test_contributing_area_is_not_just_a_positive_number (test_hydrology_review.IndependentOracleTests.test_contributing_area_is_not_just_a_positive_number) ... ok
+test_dammed_dem_rejected_even_if_profile_metadata_still_descends (test_hydrology_review.IndependentOracleTests.test_dammed_dem_rejected_even_if_profile_metadata_still_descends) ... ok
+test_fabricated_tree_cannot_jump_across_a_watershed (test_hydrology_review.IndependentOracleTests.test_fabricated_tree_cannot_jump_across_a_watershed) ... ok
+test_interior_terminal_is_not_a_valid_outlet (test_hydrology_review.IndependentOracleTests.test_interior_terminal_is_not_a_valid_outlet) ... ok
+test_conditioning_budget_checks_the_actual_height_change (test_hydrology_review.LowmarkActualTerrainTests.test_conditioning_budget_checks_the_actual_height_change) ... ok
+test_fen_keeps_shallow_wet_channels_and_drier_marsh_microrelief (test_hydrology_review.LowmarkActualTerrainTests.test_fen_keeps_shallow_wet_channels_and_drier_marsh_microrelief) ... ok
+test_final_natural_dem_not_a_reported_profile_drains_and_conserves (test_hydrology_review.LowmarkActualTerrainTests.test_final_natural_dem_not_a_reported_profile_drains_and_conserves) ... ok
+test_named_junction_water_levels_and_topology_are_continuous (test_hydrology_review.LowmarkActualTerrainTests.test_named_junction_water_levels_and_topology_are_continuous) ... ok
+test_natural_channel_sections_remain_connected_and_descend_in_actual_raster (test_hydrology_review.LowmarkActualTerrainTests.test_natural_channel_sections_remain_connected_and_descend_in_actual_raster) ... ok
+test_no_pathological_neighbour_cliff_away_from_declared_falls (test_hydrology_review.LowmarkActualTerrainTests.test_no_pathological_neighbour_cliff_away_from_declared_falls) ... ok
+test_open_engineered_terrain_has_no_undeclared_sink_or_false_uphill_flow (test_hydrology_review.LowmarkActualTerrainTests.test_open_engineered_terrain_has_no_undeclared_sink_or_false_uphill_flow) ... ok
+test_orchard_soil_and_berms_have_actual_seasonal_river_connectivity (test_hydrology_review.LowmarkActualTerrainTests.test_orchard_soil_and_berms_have_actual_seasonal_river_connectivity) ... ok
+test_uphill_canal_is_a_measured_exception_and_not_a_natural_receiver_edge (test_hydrology_review.LowmarkActualTerrainTests.test_uphill_canal_is_a_measured_exception_and_not_a_natural_receiver_edge) ... ok
+test_waterfall_drop_is_present_in_actual_grid_and_not_regionally_smoothed (test_hydrology_review.LowmarkActualTerrainTests.test_waterfall_drop_is_present_in_actual_grid_and_not_regionally_smoothed) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 10.863s
+
+OK
+INDEPENDENT_CONTINUITY natural max_neighbour_jump_m=11.795959310 endpoints_m=[[440.0, 3640.0], [432.0, 3648.0]]
+INDEPENDENT_CONTINUITY open_engineered max_neighbour_jump_m=14.123732273 endpoints_m=[[5152.0, 2672.0], [5144.0, 2680.0]]
+CAELMOR_TERRAIN_PROTOTYPE_VERIFIED {"cells": 480625, "height_sha256": "f53f80923072e08fa9ed660136217334ad14bc389632c26bb18b079ed137a4e4", "output": "C:\\Users\\CK\\Documents\\Caelmor-Repo\\MEDIA\\Maps\\Lowmark_Terrain"}
+CAELMOR_TERRAIN_GLB_VERIFIED {"vertices": 480625, "triangles": 958464, "maximum_elevation_error_m": 7.629363551586721e-06, "axes": "GLB east X / elevation Y / minus north Z; Blender east X / north Y / elevation Z", "glb_bytes": 23038260, "sha256": "4f9708d0e17b9e681a6eb362184a00a3b2543e153f728500bca210a568a8a8b0", "scope": "Every vertex checked; local meshes also verify all SWNE faces and upward winding. No Unity import is implied."}
+{
+  "seconds": 18.595661299999847,
+  "composite_sinks": 0,
+  "patches": [
+    {
+      "id": "crestbridge_mill",
+      "cells": 667233,
+      "interior_sink_count": 0,
+      "maximum_total_cut_fill_m": 2.0
+    },
+    {
+      "id": "greyharrow",
+      "cells": 127305,
+      "interior_sink_count": 0,
+      "maximum_total_cut_fill_m": 0.9376532149045715
+    },
+    {
+      "id": "reedmere",
+      "cells": 133209,
+      "interior_sink_count": 0,
+      "maximum_total_cut_fill_m": 0.6163777435113147
+    }
+  ]
+}
+test_actual_owned_drainage_has_real_outward_exits (test_local_refinement.LocalRefinementTests.test_actual_owned_drainage_has_real_outward_exits) ... ok
+test_actual_profile_projection_respects_declared_grade (test_local_refinement.LocalRefinementTests.test_actual_profile_projection_respects_declared_grade) ... ok
+test_bounded_projection_preserves_immutable_cells_and_actual_descent (test_local_refinement.LocalRefinementTests.test_bounded_projection_preserves_immutable_cells_and_actual_descent) ... ok
+test_diagonal_parent_route_is_not_broken_by_bilinear_sampling (test_local_refinement.LocalRefinementTests.test_diagonal_parent_route_is_not_broken_by_bilinear_sampling) ... ok
+test_overlap_ownership_conflict_is_rejected (test_local_refinement.LocalRefinementTests.test_overlap_ownership_conflict_is_rejected) ... ok
+test_parent_source_and_patch_seams_are_exactly_preserved (test_local_refinement.LocalRefinementTests.test_parent_source_and_patch_seams_are_exactly_preserved) ... ok
+test_repeat_generation_and_saved_arrays_match (test_local_refinement.LocalRefinementTests.test_repeat_generation_and_saved_arrays_match) ... ok
+test_stage_deltas_reconstruct_the_saved_final_surface (test_local_refinement.LocalRefinementTests.test_stage_deltas_reconstruct_the_saved_final_surface) ... ok
+test_actual_composite_regional_drainage_and_bounded_ownership (tests.test_local_review.ActualLocalTerrainReview.test_actual_composite_regional_drainage_and_bounded_ownership) ... ok
+test_actual_edits_are_bounded_and_water_crossings_are_not_ground_roads (tests.test_local_review.ActualLocalTerrainReview.test_actual_edits_are_bounded_and_water_crossings_are_not_ground_roads) ... ok
+test_actual_halo_drainage_and_owned_accumulation (tests.test_local_review.ActualLocalTerrainReview.test_actual_halo_drainage_and_owned_accumulation) ... ok
+test_all_four_sites_have_disjoint_or_joint_explicit_ownership (tests.test_local_review.ActualLocalTerrainReview.test_all_four_sites_have_disjoint_or_joint_explicit_ownership) ... ok
+test_existing_watercourse_centrelines_are_wet_on_the_actual_final_mesh (tests.test_local_review.ActualLocalTerrainReview.test_existing_watercourse_centrelines_are_wet_on_the_actual_final_mesh) ... ok
+test_final_full_footprints_and_flood_status_are_rescreened (tests.test_local_review.ActualLocalTerrainReview.test_final_full_footprints_and_flood_status_are_rescreened) ... ok
+test_final_subcell_geometry_is_more_than_a_denser_parent_array (tests.test_local_review.ActualLocalTerrainReview.test_final_subcell_geometry_is_more_than_a_denser_parent_array) ... ok
+test_identical_inputs_reproduce_actual_local_geometry (tests.test_local_review.ActualLocalTerrainReview.test_identical_inputs_reproduce_actual_local_geometry) ... ok
+test_inspection_preserves_fixed_anchors_and_has_no_vertical_exaggeration (tests.test_local_review.ActualLocalTerrainReview.test_inspection_preserves_fixed_anchors_and_has_no_vertical_exaggeration) ... ok
+test_postprojection_road_grade_uses_the_actual_triangle_surface (tests.test_local_review.ActualLocalTerrainReview.test_postprojection_road_grade_uses_the_actual_triangle_surface) ... ok
+test_saved_local_arrays_preserve_every_sample_and_world_coordinate (tests.test_local_review.ActualLocalTerrainReview.test_saved_local_arrays_preserve_every_sample_and_world_coordinate) ... ok
+test_stage_deltas_account_for_the_actual_final_surface (tests.test_local_review.ActualLocalTerrainReview.test_stage_deltas_account_for_the_actual_final_surface) ... ok
+test_true_world_basis_and_exact_parent_mesh_seams (tests.test_local_review.ActualLocalTerrainReview.test_true_world_basis_and_exact_parent_mesh_seams) ... ok
+test_changed_border_vertex_is_detected (tests.test_local_review.LocalReviewOracleTests.test_changed_border_vertex_is_detected) ... ok
+test_mesh_triangle_is_not_bilinear_upsampling (tests.test_local_review.LocalReviewOracleTests.test_mesh_triangle_is_not_bilinear_upsampling) ... ok
+test_north_boundary_is_not_automatically_an_outlet (tests.test_local_review.LocalReviewOracleTests.test_north_boundary_is_not_automatically_an_outlet) ... ok
+test_real_halo_continuation_and_area_are_verified (tests.test_local_review.LocalReviewOracleTests.test_real_halo_continuation_and_area_are_verified) ... ok
+test_reversed_north_axis_is_not_an_export_convention (tests.test_local_review.LocalReviewOracleTests.test_reversed_north_axis_is_not_an_export_convention) ... ok
+test_safe_centre_does_not_excuse_a_flood_exposed_footprint_corner (tests.test_local_review.LocalReviewOracleTests.test_safe_centre_does_not_excuse_a_flood_exposed_footprint_corner) ... ok
+test_shared_xy_height_conflict_is_detected (tests.test_local_review.LocalReviewOracleTests.test_shared_xy_height_conflict_is_detected) ... ok
+
+----------------------------------------------------------------------
+Ran 28 tests in 44.877s
+
+OK
+CAELMOR_SAVED_LOCAL_TERRAIN_VERIFIED {"patches": 3, "samples": 927747, "sources": 9}
+CAELMOR_LOCAL_RENDER_CAPTIONS 7
+CAELMOR_TERRAIN_GLB_VERIFIED {"vertices": 667233, "triangles": 1331200, "maximum_elevation_error_m": 3.814686181158322e-06, "axes": "GLB east X / elevation Y / minus north Z; Blender east X / north Y / elevation Z", "glb_bytes": 31989264, "sha256": "263a2c1eae3a8d9cd648aa5b45682217b6a715b8a8b09620070ad4db2e1801e6", "scope": "Every vertex checked; local meshes also verify all SWNE faces and upward winding. No Unity import is implied."}
+CAELMOR_TERRAIN_GLB_VERIFIED {"vertices": 127305, "triangles": 253184, "maximum_elevation_error_m": 3.814649460309738e-06, "axes": "GLB east X / elevation Y / minus north Z; Blender east X / north Y / elevation Z", "glb_bytes": 6094784, "sha256": "f3db7a5d67c055d65d698226857eb6ec1053177180f2804770d24ffdeef957ef", "scope": "Every vertex checked; local meshes also verify all SWNE faces and upward winding. No Unity import is implied."}
+CAELMOR_TERRAIN_GLB_VERIFIED {"vertices": 133209, "triangles": 264960, "maximum_elevation_error_m": 3.8146575747077804e-06, "axes": "GLB east X / elevation Y / minus north Z; Blender east X / north Y / elevation Z", "glb_bytes": 6377788, "sha256": "b95dc9ad87ac3ff5810ca4ea3fb977af3748703783d7e666564faf380e626dd7", "scope": "Every vertex checked; local meshes also verify all SWNE faces and upward winding. No Unity import is implied."}
+Lowmark offline terrain ready: C:\Users\CK\Documents\Caelmor-Repo\MEDIA\Maps\Lowmark_Terrain

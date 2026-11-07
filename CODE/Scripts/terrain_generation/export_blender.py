@@ -14,6 +14,37 @@ import bpy
 import numpy as np
 
 
+def create_grid(x, y, z, name, cell_mask=None, triangulate=False):
+    """Create a metric grid mesh shared by the regional and local authoring tools."""
+    z = np.asarray(z, dtype=np.float32)
+    x, y = np.asarray(x, dtype=np.float32), np.asarray(y, dtype=np.float32)
+    if z.shape != (len(y), len(x)) or not np.isfinite(z).all():
+        raise ValueError("Finite grid elevations must match the supplied coordinates")
+    ny, nx = z.shape
+    xx, yy = np.meshgrid(x, y)
+    coordinates = np.column_stack((xx.ravel(), yy.ravel(), z.ravel())).astype(np.float32)
+    corners = (np.arange(ny-1)[:, None] * nx + np.arange(nx-1)[None, :])
+    if cell_mask is not None:
+        if cell_mask.shape != corners.shape:
+            raise ValueError("Mesh cell mask dimensions changed")
+        corners = corners[cell_mask]
+    corners = corners.ravel().astype(np.int32)
+    quads = np.column_stack((corners, corners+1, corners+nx+1, corners+nx)).astype(np.int32)
+    faces = np.vstack((quads[:,[0,1,2]],quads[:,[0,2,3]])) if triangulate else quads
+    loop_size = 3 if triangulate else 4
+    mesh = bpy.data.meshes.new(name)
+    mesh.vertices.add(len(coordinates)); mesh.vertices.foreach_set("co", coordinates.ravel())
+    mesh.loops.add(faces.size); mesh.loops.foreach_set("vertex_index", faces.ravel())
+    mesh.polygons.add(len(faces))
+    mesh.polygons.foreach_set("loop_start", np.arange(len(faces), dtype=np.int32)*loop_size)
+    mesh.polygons.foreach_set("loop_total", np.full(len(faces),loop_size,dtype=np.int32))
+    mesh.polygons.foreach_set("use_smooth", np.ones(len(faces), dtype=bool))
+    mesh.update(calc_edges=True)
+    obj = bpy.data.objects.new(name, mesh)
+    bpy.context.collection.objects.link(obj)
+    return obj
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--arrays", type=Path, required=True)
@@ -27,22 +58,11 @@ def main():
     ny, nx = z.shape
     if z.shape != (len(y), len(x)):
         raise ValueError("Terrain grid dimensions do not match coordinates")
-    xx, yy = np.meshgrid(x, y)
-    coordinates = np.column_stack((xx.ravel(), yy.ravel(), z.ravel())).astype(np.float32)
-    corners = (np.arange(ny-1)[:, None] * nx + np.arange(nx-1)[None, :]).ravel().astype(np.int32)
-    quads = np.column_stack((corners, corners+1, corners+nx+1, corners+nx)).astype(np.int32)
     bpy.ops.object.select_all(action="SELECT")
     bpy.ops.object.delete(use_global=False)
-    mesh = bpy.data.meshes.new("Lowmark full 8m mathematical terrain")
-    mesh.vertices.add(len(coordinates)); mesh.vertices.foreach_set("co", coordinates.ravel())
-    mesh.loops.add(quads.size); mesh.loops.foreach_set("vertex_index", quads.ravel())
-    mesh.polygons.add(len(quads))
-    mesh.polygons.foreach_set("loop_start", np.arange(len(quads), dtype=np.int32)*4)
-    mesh.polygons.foreach_set("loop_total", np.full(len(quads),4,dtype=np.int32))
-    mesh.polygons.foreach_set("use_smooth", np.ones(len(quads), dtype=bool))
-    mesh.update(calc_edges=True)
-    obj = bpy.data.objects.new("Lowmark / offline mathematical terrain / provisional open works", mesh)
-    bpy.context.collection.objects.link(obj)
+    obj = create_grid(x, y, z, "Lowmark / offline mathematical terrain / provisional open works")
+    mesh = obj.data
+    mesh.name = "Lowmark full 8m mathematical terrain"
     obj["purpose"] = "Full-resolution offline terrain prototype; not a production world scene or building export"
     obj["axes_blender"] = "east X / north Y / elevation Z, metres, south-west origin"
     obj["glb_axes"] = "east X / elevation Y / minus north Z, right-handed glTF"
@@ -59,7 +79,7 @@ def main():
     args.output.parent.mkdir(parents=True, exist_ok=True)
     bpy.ops.export_scene.gltf(filepath=str(args.output.resolve()), export_format="GLB", use_selection=True,
                               export_yup=True, export_extras=True, export_normals=True, export_texcoords=False)
-    print("CAELMOR_TERRAIN_GLB_EXPORTED " + json.dumps({"vertices":len(coordinates), "triangles":2*len(quads),
+    print("CAELMOR_TERRAIN_GLB_EXPORTED " + json.dumps({"vertices":ny*nx, "triangles":2*(ny-1)*(nx-1),
           "bytes":args.output.stat().st_size, "height_float32_sha256":obj["height_float32_sha256"]}))
 
 

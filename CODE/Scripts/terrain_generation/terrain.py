@@ -452,7 +452,7 @@ def priority_flood(raw, fixed, epsilon=0.001):
     return result
 
 
-def d8_receivers(height, resolution, outlet):
+def d8_receivers(height, resolution, outlet=None):
     """Independent steepest-downslope D8 routing on the actual final DEM."""
     ny, nx = height.shape
     best = np.zeros_like(height)
@@ -467,7 +467,8 @@ def d8_receivers(height, resolution, outlet):
         select = slope > best[src_r, src_c]
         best[src_r, src_c][select] = slope[select]
         receivers[src_r, src_c][select] = indices[dst_r, dst_c][select]
-    receivers.ravel()[outlet] = -1
+    if outlet is not None:
+        receivers.ravel()[outlet] = -1
     return receivers
 
 

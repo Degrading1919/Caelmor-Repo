@@ -1,0 +1,75 @@
+{
+  "payload_sha256": "eaf72006c1f4cb364bb3cdb73e59014fdfafed262450e1521da0fa6702f57199",
+  "payload_bytes": 7127375,
+  "composite_source_sha256": "ed3e95aec4371712d5de3d46f38965e25d9c22962ed89090a9cb0650dabe0290",
+  "grids": [
+    {
+      "id": "regional",
+      "shape": [
+        625,
+        769
+      ]
+    },
+    {
+      "id": "crestbridge_mill",
+      "shape": [
+        801,
+        833
+      ]
+    },
+    {
+      "id": "greyharrow",
+      "shape": [
+        369,
+        345
+      ]
+    },
+    {
+      "id": "reedmere",
+      "shape": [
+        361,
+        369
+      ]
+    }
+  ],
+  "spawn_points": [
+    {
+      "name": "Crestbridge approach",
+      "east_m": 2483.714354,
+      "north_m": 1455.946341,
+      "ground_m": 67.25003669923552
+    },
+    {
+      "name": "Greyharrow",
+      "east_m": 5480.0,
+      "north_m": 1250.0,
+      "ground_m": 64.52055591613261
+    },
+    {
+      "name": "Reedmere",
+      "east_m": 410.0,
+      "north_m": 2726.0,
+      "ground_m": 64.59456007099091
+    },
+    {
+      "name": "Drowsebank Mill",
+      "east_m": 3044.0,
+      "north_m": 1232.0,
+      "ground_m": 67.11508763296874
+    }
+  ],
+  "bridge_approaches": [
+    {
+      "id": "bridge_scale_proxy",
+      "terrain_end_heights_m": [
+        63.69844790797348,
+        63.551669818847714
+      ],
+      "deck_top_m": 66.115367,
+      "status": "No ramps generated; measured step gaps remain explicit."
+    }
+  ],
+  "basis": "Unity east X / elevation Y / north Z; arrays are baked, not regenerated during walking.",
+  "water": "Source-profile strips at existing stages; inspection cue, no hydraulic simulation or collision.",
+  "rights": "Caelmor project-generated terrain and Creative Director-authored control geometry; no third-party landscape assets."
+}

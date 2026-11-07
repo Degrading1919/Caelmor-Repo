@@ -1,0 +1,419 @@
+{
+  "purpose": "Offline local terrain-refinement and 3D inspection controls; not production content or approved settlement design",
+  "baseline_commit": "3ec4003",
+  "regional_source": "MEDIA/Maps/Lowmark_Terrain/terrain_arrays.npz",
+  "regional_controls": "CODE/Scripts/terrain_generation/lowmark_controls.json",
+  "resolution_m": 2,
+  "boundary_feather_m": 48,
+  "authority": {
+    "fixed": "Approved regional anchors, waterway relationships, source stages and regional arrays remain the baseline; no anchor relocation",
+    "delegated": "Bounded reversible local terrain refinement, cart-grade screens and sparse test pads",
+    "unresolved": "Crest Hall/bridge/granary/depot functional adjacency and hydrological topology/state decisions remain for Director review",
+    "proxy_rule": "Neutral inspection proxies only; no generated architectural assets, finished settlement, NPCs or conceptual granary authority"
+  },
+  "ownership": {
+    "regional_controls_read_only": true,
+    "regional_source_read_only": true,
+    "patch_boundary_heights": "Match regional baseline exactly",
+    "interior_regional_8m_samples": "Bounded reversible changes authorized; verify composite drainage independently",
+    "no_gameplay_runtime_integration": true,
+    "unity_inspection_authorized": "Subsequent Creative Director request authorizes a separate walking inspector. Its explicit adapter owns the disposable scene; no gameplay, save, networking or authored-world integration.",
+    "canonical_hydraulic_junction_samples": "Fixed source junction elevations, water stages and XY; no relocation or new head",
+    "intermediate_generated_wet_samples": "Bounded analytic bank/cross-section correction up to1.0m inside existing corridors; verify local and regional composite drainage after changes"
+  },
+  "patches": [
+    {
+      "id": "crestbridge_mill",
+      "bounds_m": [
+        2240,
+        896,
+        3904,
+        2496
+      ],
+      "settlement_ids": [
+        "crestbridge",
+        "drowsebank_mill"
+      ],
+      "landmark_ids": [
+        "crest_hall",
+        "hill_depot"
+      ],
+      "route_ids": [
+        "landing_to_crestbridge",
+        "crestbridge_to_ashenstead",
+        "crestbridge_to_greyharrow",
+        "crestbridge_to_mill",
+        "crestbridge_to_hall",
+        "hall_to_depot"
+      ],
+      "bank_reach_ids": [
+        "fen_to_crestbridge",
+        "crestbridge_to_mill_intake",
+        "mill_bypass_main_river",
+        "bramblelock_weir_passage",
+        "drowsebank_mill_leat",
+        "drowsebank_wheel_drop",
+        "drowsebank_tailrace",
+        "relief_cut_downstream"
+      ],
+      "status": "Joint patch preserves one continuous local surface for town, fixed outworks and Mill; does not solve narrative adjacency by roads alone"
+    },
+    {
+      "id": "greyharrow",
+      "bounds_m": [
+        5120,
+        864,
+        5808,
+        1600
+      ],
+      "settlement_ids": [
+        "greyharrow"
+      ],
+      "route_ids": [
+        "crestbridge_to_greyharrow",
+        "brookhollow_to_greyharrow"
+      ],
+      "bank_reach_ids": [
+        "greyharrow_upper_branch",
+        "greyharrow_town_branch",
+        "greyharrow_lower_branch"
+      ],
+      "status": "Fortified side-branch town local test; no move to main river"
+    },
+    {
+      "id": "reedmere",
+      "bounds_m": [
+        128,
+        2400,
+        864,
+        3120
+      ],
+      "settlement_ids": [
+        "reedmere"
+      ],
+      "route_ids": [
+        "reedmere_to_crestbridge"
+      ],
+      "bank_reach_ids": [
+        "fen_western_braid"
+      ],
+      "policy": "stilts_only",
+      "foundation_grading": false,
+      "status": "Preserve wet fen ground and ridge access; deck/stilt levels are conditional design screens, not dry-terrain certification"
+    }
+  ],
+  "roads": {
+    "half_width_m": 4,
+    "blend_m": 10,
+    "max_cut_fill_m": 2,
+    "max_grade": 0.1,
+    "profile_smoothing_m": 12,
+    "water_crossing_exclusion_m": 24,
+    "status": "Candidate access grading screen; unresolved crossings are gaps requiring works, not roads certified across water"
+  },
+  "foundations": {
+    "max_cut_fill_m": 1,
+    "max_plane_grade": 0.05,
+    "blend_m": 3,
+    "max_pad_count": 24,
+    "status": "Sparse foundation feasibility tests only, not building generation or final parcel plan; no foundations at Reedmere",
+    "scenario_floor_clearance_m": 0.3,
+    "scenario_floor_clearance_status": "Explicit existing0.3m floor-clearance screen above the static connected+1.5m planning scenario; no flood safety, hydrograph, structural or access certification. Parameter exposure only; previously computed terrain and floor values unchanged."
+  },
+  "inspection": {
+    "vertical_scale": 1,
+    "coordinate_basis": "east X, north Y, elevation Z; metres and true elevation, no vertical exaggeration",
+    "anchors": [
+      {
+        "id": "crestbridge_centre",
+        "xy_m": [
+          2640.350368,
+          1617.363227
+        ],
+        "source_type": "settlement",
+        "source_id": "crestbridge",
+        "status": "Fixed approved-map symbol anchor"
+      },
+      {
+        "id": "bridge_crossing",
+        "xy_m": [
+          2581.210228,
+          1556.418001
+        ],
+        "source_type": "retained_route_natural_reach_intersection",
+        "status": "Technical inspection crossing of retained road/river; not approved surveyed bridge centre; regional crest node shown separately and unchanged",
+        "source_route_id": "landing_to_crestbridge",
+        "source_reach_id": "fen_to_crestbridge"
+      },
+      {
+        "id": "crest_hall",
+        "xy_m": [
+          3256.9927,
+          1830.026905
+        ],
+        "source_type": "landmark",
+        "source_id": "crest_hall",
+        "status": "Fixed approved-map symbol anchor; direct riverbank/water-gate relationship currently fails"
+      },
+      {
+        "id": "hill_depot",
+        "xy_m": [
+          3139.270072,
+          2216.17937
+        ],
+        "source_type": "landmark",
+        "source_id": "hill_depot",
+        "status": "Fixed approved-map area anchor; actual underground footprint/chute location unspecified"
+      },
+      {
+        "id": "regional_crest_node",
+        "xy_m": [
+          2640.350368,
+          1544.609864
+        ],
+        "source_type": "hydrology_node",
+        "source_id": "crest",
+        "status": "Fixed regional hydrology node, not surveyed bridge geometry; retained unchanged"
+      }
+    ],
+    "proxies": [
+      {
+        "id": "bridge_scale_proxy",
+        "type": "bridge_deck",
+        "endpoints_xy_m": [
+          [
+            2556.13986,
+            1530.582431
+          ],
+          [
+            2606.280595,
+            1582.253571
+          ]
+        ],
+        "width_m": 8,
+        "deck_top_m": 66.115367,
+        "deck_thickness_m": 1.2,
+        "status": "Technical72x8m scale deck aligned to actual retained route/river intersection; not civil certification or relocation of regional hydrology anchor. Other water crossings remain unbuilt.",
+        "water_stage_m": 63.115367,
+        "crossing_angle_degrees": 57.15259,
+        "retained_route_id": "landing_to_crestbridge",
+        "crossed_reach_id": "fen_to_crestbridge"
+      },
+      {
+        "id": "crest_hall_scale_proxy",
+        "type": "box",
+        "anchor_id": "crest_hall",
+        "footprint_m": [
+          24,
+          18
+        ],
+        "height_m": 14,
+        "status": "Conceptual size marker at fixed anchor, not an architectural asset or approved Hall design"
+      },
+      {
+        "id": "depot_area_marker",
+        "type": "box",
+        "anchor_id": "hill_depot",
+        "footprint_m": [
+          8,
+          4
+        ],
+        "height_m": 3,
+        "status": "Inspection entrance/area marker only; Hill Depot is underground, not this surface box"
+      },
+      {
+        "id": "granary_yard_concept",
+        "type": "box",
+        "xy_m": [
+          2631.210228,
+          1646.418001
+        ],
+        "footprint_m": [
+          28,
+          14
+        ],
+        "height_m": 9,
+        "include_in_capacity": false,
+        "terrain_grading": false,
+        "status": "CONCEPT ONLY: no approved granary XY. Near-crossing example illustrates unsolved distance to fixed Hall/Depot; not approved placement or generated architecture"
+      }
+    ],
+    "failed_relationship_lines": [
+      {
+        "id": "hall_to_nearest_natural_river",
+        "from_anchor": "crest_hall",
+        "to_xy_m": [
+          2730.043797504,
+          1466.260089216
+        ],
+        "distance_m": 640.3135499404309,
+        "status": "Measured failed direct waterfront relationship; line is not a canal, tunnel, water-gate or annex"
+      },
+      {
+        "id": "regional_crest_node_to_hall",
+        "from_anchor": "regional_crest_node",
+        "to_anchor": "crest_hall",
+        "distance_m": 679.4929386513109,
+        "status": "Measured spacing; does not implement near-by north stair/water-gate connection"
+      },
+      {
+        "id": "inspection_crossing_to_hall",
+        "from_anchor": "bridge_crossing",
+        "to_anchor": "crest_hall",
+        "distance_m": 729.0704918117297,
+        "status": "Measured spacing from technical road crossing; no functional water-gate or north-stair connection implemented"
+      }
+    ],
+    "cameras": [
+      {
+        "id": "crestbridge_broad_elevated",
+        "position_xy_m": [
+          2100,
+          600
+        ],
+        "eye_height_above_ground_m": 900,
+        "target_xy_m": [
+          3000,
+          1770
+        ],
+        "target_height_above_ground_m": 10,
+        "lens_mm": 45,
+        "status": "True-scale elevated inspection; terrain sampler resolves Z"
+      },
+      {
+        "id": "crestbridge_ground_approach",
+        "position_xy_m": [
+          2483.714354,
+          1455.946341
+        ],
+        "eye_height_above_ground_m": 1.75,
+        "target_xy_m": [
+          2581.210228,
+          1556.418001
+        ],
+        "target_height_above_ground_m": 4.215367,
+        "lens_mm": 35,
+        "status": "On retained landing road140m before analytical crossing, eye1.75m above sampled solid ground; technical camera, no terrain alteration"
+      },
+      {
+        "id": "crestbridge_relationships",
+        "position_xy_m": [
+          3800,
+          1200
+        ],
+        "eye_height_above_ground_m": 450,
+        "target_xy_m": [
+          2950,
+          1850
+        ],
+        "target_height_above_ground_m": 10,
+        "lens_mm": 40,
+        "status": "True-scale bridge/granary-concept/Hall/Depot spacing; no compressed distances"
+      }
+    ],
+    "reedmere_floor_test_xy_m": [
+      [
+        416.0,
+        2744.0
+      ],
+      [
+        512.0,
+        2744.0
+      ],
+      [
+        440.0,
+        2816.0
+      ]
+    ],
+    "reedmere_floor_test_status": "Three conditional10x8m technical raised-floor footprints at existing baseline valid candidate centres; not authored placements, huts, structural pile design or safe access certification. No land grading.",
+    "reedmere_floor_test_source": {
+      "path": "MEDIA/Maps/Lowmark_Terrain/candidate_plots.json",
+      "revision": "3ec4003",
+      "hash_mode": "utf8_lf",
+      "sha256": "7c89b3b5824b45c90cc5e45ed5f220d05d34969311d1adac95155a8acf5d3f8c"
+    },
+    "reedmere_floor_test_rule": "normal locally connected water stage +1.5m scenario +0.3m clearance; sampler must reject missing/invalid water stage and preserve ground",
+    "depot_chute_diagnostic": {
+      "baseline_revision": "3ec4003",
+      "sample_spacing_m": 8,
+      "depot_ground_sample_m": 67.23568682326828,
+      "nearest_natural_water_node": "crest",
+      "nearest_distance_m": 836.6160852501513,
+      "normal_water_stage_m": 63.1,
+      "gross_ground_to_water_head_m": 4.13568682326828,
+      "straight_mean_fall_percent": 0.49433508346085586,
+      "defined_downstream_comparison": {
+        "node": "mill_intake",
+        "distance_m": 920.1312691155001,
+        "water_stage_m": 62.9,
+        "gross_head_m": 4.335686823268283,
+        "straight_mean_fall_percent": 0.4712030738218551
+      },
+      "source_requirement": "Main Act I A5.2 K-L, lines150-151; underground gallery, stone chute, pulley gantry, high ledge above slack backwater and short bank/hill-road return; POI P07 line153 requires below toll line",
+      "bounds": "Diagnostic uses symbol-centre nearest8m ground, not an approved underground gallery intake or chute exit. Closest natural point is the toll-line node, not a verified below-toll backwater. Longer actual routing and underground levels are unknown. No friction/grain-flow/hoist model, new chute geometry or impossibility proof."
+    }
+  },
+  "source_refs": [
+    {
+      "path": "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
+      "revision": "3ec4003",
+      "hash_mode": "utf8_lf",
+      "sha256": "206da19df7b3eb46560b5f4261b07e6101f74438f6e2ef5a82954c718f63493e"
+    },
+    {
+      "path": "04_CONTENT_PRODUCTION/Quests/Caelmor_Lowmark_v1_Narrative_Production_Bible.md",
+      "revision": "3ec4003",
+      "hash_mode": "utf8_lf",
+      "sha256": "80f76b195cc4b7840dba295ce8ca2d65da0eaa1044185133dfcb6f2c5b95c214"
+    },
+    {
+      "path": "04_CONTENT_PRODUCTION/Zones/Caelmor_Lowmark_POI_and_Zone_Requirements.md",
+      "revision": "3ec4003",
+      "hash_mode": "utf8_lf",
+      "sha256": "12dcfb7c511b0e75176679bd235cca776d69de59d38673d6ed5446cb2180eec4"
+    },
+    {
+      "path": "04_CONTENT_PRODUCTION/Quests/Caelmor_Lowmark_Main_Act_I.md",
+      "revision": "3ec4003",
+      "hash_mode": "utf8_lf",
+      "sha256": "ab5062458611dcbea56d864ab14ab5d809ca53b59896ced13a91e1be4728e07a"
+    },
+    {
+      "path": "04_CONTENT_PRODUCTION/Quests/Caelmor_Lowmark_Main_Act_II.md",
+      "revision": "3ec4003",
+      "hash_mode": "utf8_lf",
+      "sha256": "886ce4b432ca1737f909aa3a7297b512ce70f54bc3240d49817d6b4e898e6fcb"
+    },
+    {
+      "path": "04_CONTENT_PRODUCTION/Quests/Caelmor_Lowmark_Main_Act_III.md",
+      "revision": "3ec4003",
+      "hash_mode": "utf8_lf",
+      "sha256": "76aed63290a161fd44483a9f24230d2cb31c1e62039484cb1d82e5c89e715e2d"
+    },
+    {
+      "path": "04_CONTENT_PRODUCTION/Quests/Caelmor_Lowmark_Side_Quests_Discovery_and_Memory.md",
+      "revision": "3ec4003",
+      "hash_mode": "utf8_lf",
+      "sha256": "de55fc9f7302e2e5f26cb300ccaa3b1a09828f1028ac56a972cff76a3a871ad4"
+    },
+    {
+      "path": "04_CONTENT_PRODUCTION/Quests/Caelmor_Lowmark_Side_Quests_Settlements_and_Combat.md",
+      "revision": "3ec4003",
+      "hash_mode": "utf8_lf",
+      "sha256": "aa4fd7a268f74f9edf3f99c92f782cc067f8869c547e1afad7cb7206de3a78f1"
+    }
+  ],
+  "banks": {
+    "max_cut_fill_m": 1.0,
+    "blend_m": 8,
+    "status": "Bounded analytic refinement of existing channel cross-sections; water stages, canonical hydraulic junction samples and approved XY anchors remain fixed. Intermediate generated wet8m raster bed samples may change locally within existing corridors; no new geography or engineering head."
+  },
+  "beds": {
+    "reach_ids": [
+      "drowsebank_mill_leat"
+    ],
+    "max_cut_fill_m": 2.0,
+    "minimum_static_depth_m": 0.2,
+    "status": "Dedicated bounded correction of inherited raster dry dam; original water stages, XY and canonical endpoints unchanged. No discharge, navigability or certified depth claim; report any clipped remaining shallow/dry segments."
+  }
+}

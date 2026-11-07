@@ -566,19 +566,19 @@
       "resolution_m": 32,
       "status": "rejected",
       "reason": "Rasterized channel graph contains a cycle at 32m; this resolution cannot preserve the authored reach network. Affected downstream reaches: falls_outflow, fen_main_upper, fen_main_middle, fen_main_lower, fen_outflow, fen_western_braid, fen_eastern_braid, fen_to_crestbridge, crestbridge_to_mill_intake, mill_bypass_main_river, bramblelock_weir_passage, weir_to_whisperflow, whisperflow_eastern_hairpin, lowerbend_to_brookhollow, greyharrow_lower_branch, brookhollow_to_grey_confluence, confluence_to_region_exit",
-      "seconds_to_rejection": 0.04066870000679046
+      "seconds_to_rejection": 0.05786370000032548
     },
     {
       "resolution_m": 16,
       "status": "rejected",
       "reason": "Rasterized channel graph contains a cycle at 16m; this resolution cannot preserve the authored reach network. Affected downstream reaches: falls_outflow, fen_main_upper, fen_main_middle, fen_main_lower, fen_outflow, fen_western_braid, fen_eastern_braid, fen_to_crestbridge, crestbridge_to_mill_intake, mill_bypass_main_river, bramblelock_weir_passage, weir_to_whisperflow, whisperflow_eastern_hairpin, lowerbend_to_brookhollow, greyharrow_lower_branch, brookhollow_to_grey_confluence, confluence_to_region_exit",
-      "seconds_to_rejection": 0.26128560001961887
+      "seconds_to_rejection": 0.3102091999999175
     },
     {
       "resolution_m": 8,
       "status": "generated",
       "cells": 480625,
-      "model_seconds": 8.196771699993405,
+      "model_seconds": 12.493473600000016,
       "height_sha256": "f53f80923072e08fa9ed660136217334ad14bc389632c26bb18b079ed137a4e4",
       "unintended_sinks": 0,
       "all_cells_reach_outlet": true,
@@ -599,5 +599,5 @@
   "scope": "Offline authoring prototype only; no C#, runtime, buildings, NPCs, production settlement layout or architectural tool changes.",
   "seed_policy": "Current solver uses deterministic authored geometry and analytic refinement; seed is reserved provenance, no unconstrained stochastic noise.",
   "performance_note": "Wall times are observations and intentionally excluded from deterministic geometry hashes.",
-  "pipeline_seconds_before_figures": 75.90563360002125
+  "pipeline_seconds_before_figures": 110.52606049999986
 }

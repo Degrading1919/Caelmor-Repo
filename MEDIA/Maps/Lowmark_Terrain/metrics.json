@@ -1190,7 +1190,7 @@
   "height_sha256": "f53f80923072e08fa9ed660136217334ad14bc389632c26bb18b079ed137a4e4",
   "raw_height_sha256": "e0d4872167485c355a1e9875bf1a1ffe0b5eae0407faa43275e0659fc8eb540f",
   "receiver_sha256": "50847cbe186b2f612b1b1c56672f58756584007f74f273e7496a75910b9d98a6",
-  "seconds": 8.412593299988657,
+  "seconds": 9.414848599999914,
   "limitations": [
     "Static elevation/routing prototype; no rainfall-runoff or calibrated hydraulic simulation.",
     "Engineered and canon-anomalous waterways are separate level/head graphs, not fabricated natural D8 flow.",

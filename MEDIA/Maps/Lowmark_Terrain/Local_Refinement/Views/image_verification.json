@@ -1,0 +1,54 @@
+{
+  "images": [
+    {
+      "id": "crestbridge_broad_elevated",
+      "file": "crestbridge_broad_elevated.png",
+      "raw_render_sha256": "877839d11cfa3b0c0c7b304445ed66b733922c472ae5e2e769530f553127c755",
+      "annotated_sha256": "a689192d728caa4dd436dfb278eda6975010cf07b279c59480774f816f941903",
+      "pixel_policy": "Raw render pixels preserved at original resolution; captions and projected numbered markers only."
+    },
+    {
+      "id": "crestbridge_ground_approach",
+      "file": "crestbridge_ground_approach.png",
+      "raw_render_sha256": "11d0fff760480787227a23396d0d2809519d99cf51eb6644ffa7c63a82832b01",
+      "annotated_sha256": "c1df967470506990d7c74d97dce8800e1dc5bb5dcd83be8eceeeac46fe4ba8bc",
+      "pixel_policy": "Raw render pixels preserved at original resolution; captions and projected numbered markers only."
+    },
+    {
+      "id": "crestbridge_relationships",
+      "file": "crestbridge_relationships.png",
+      "raw_render_sha256": "04c92e9f4f460920530e00260965ed4f2fbccc61d7f89af93cbc697dd6a42553",
+      "annotated_sha256": "5d6022dc6b2f229895e5152cc89de5b473cbbe7185a728007f893526e3fb4634",
+      "pixel_policy": "Raw render pixels preserved at original resolution; captions and projected numbered markers only."
+    },
+    {
+      "id": "greyharrow_local",
+      "file": "greyharrow_local.png",
+      "raw_render_sha256": "f00188fb5a7ebe98b119eba013963bb7d66a7510ae75def002709dec401cd2b3",
+      "annotated_sha256": "c99a3e991562bc380b0e733e0489e05f4a023d92b497fa8a690bacf2a94016d7",
+      "pixel_policy": "Raw render pixels preserved at original resolution; captions and projected numbered markers only."
+    },
+    {
+      "id": "reedmere_local",
+      "file": "reedmere_local.png",
+      "raw_render_sha256": "2e5787f39b8a1c69310b73968bcdead56fd127bf95da85b085f001cef365e3d2",
+      "annotated_sha256": "02f7bc57f784a56855451ea347516c44ddd8877f457b9a4287df713fca1592e4",
+      "pixel_policy": "Raw render pixels preserved at original resolution; captions and projected numbered markers only."
+    },
+    {
+      "id": "reedmere_floor_detail",
+      "file": "reedmere_floor_detail.png",
+      "raw_render_sha256": "48fd234bbdf3253fdecd4127c77f8ff75414f5f60277a5778fa9f6cd3d11b655",
+      "annotated_sha256": "087048ea1d54b5ef92c6d6b98ebacd75ef6bf41491ee2d73a84f186111e21938",
+      "pixel_policy": "Raw render pixels preserved at original resolution; captions and projected numbered markers only."
+    },
+    {
+      "id": "drowsebank_local",
+      "file": "drowsebank_local.png",
+      "raw_render_sha256": "b47c8caac086225038378a115611b3f3ef896c144ca515debb1b8b436e75f8a4",
+      "annotated_sha256": "15abf11c721936bea7b28a4c794e6ee166b720bc2d228b6e9b3475a64e4ee17a",
+      "pixel_policy": "Raw render pixels preserved at original resolution; captions and projected numbered markers only."
+    }
+  ],
+  "source_metadata": "render_metadata.json"
+}
