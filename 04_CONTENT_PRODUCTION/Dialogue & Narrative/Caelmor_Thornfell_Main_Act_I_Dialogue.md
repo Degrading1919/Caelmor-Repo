@@ -70,7 +70,7 @@
 | **Haulier** (at the gate) | Role | Looks away at the name Whinstone. Returns in TF-M2. |
 | **Lowmark caravan hand** | Role, `LM_CIVIC_STANDING` only | One farewell line. No cargo or route mentioned. |
 | **Peddler pair** | Role | Robbed at the Blind Corners. |
-| **Corner-Boss** | Role (elite) | A deserter in a Warden's coat with the badge cut off. |
+| **Corner-Boss** | Role (elite) | A deserter in a Warden's coat with the badge cut off. Fights to 0 HP; no lines after defeat. What he was is read from his cut badge (`TPW-B3.6`, inspect). |
 | **Pass bandits, Aud's crew, Ketil's crew** | Role | Barks. |
 
 ### TF-M2
@@ -248,8 +248,8 @@ No variant of any of these says when, how or from where the sacks came.
 | TPW-B3.2 | Spotted (road) | SLINGER | "Walker on the road! Stones!" |
 | TPW-B3.3 | Spotted (goat track, from behind) | SLINGER | "Where did... He came over the top!" |
 | TPW-B3.4 | Cutter engages | CUTTER | "Closing day, walker. Everybody's stranded. Everybody pays." |
-| TPW-B3.5 | Cutter yields | CUTTER | "Down. I'm down. It's cold enough without you." |
-| TPW-B3.6 | Corner-Boss yields | CORNER-BOSS (kneels; pulls the hood off) | "Fine. Fine." (beat) "Wore this coat for eleven winters. They took the badge. They never asked for the coat back." |
+| TPW-B3.5 | (removed: CDR-1) | — | — |
+| TPW-B3.6 | After E1: inspect the cut badge nailed to the overturned cart (optional, T-2) | (inspect) | "A Ridge Warden's coat badge, cut away with a knife and nailed to the cart for luck. Eleven winters of wear on it. They took the badge. Nobody asked for the coat back." |
 | TPW-B3.7 | After E1 | PEDDLER (righting a bale) | "Thank you. We'll wait out the storm at Passwatch." (beat) "If the gate'll have us." |
 | TPW-B3.8 | Cart righted (optional) | PEDDLER | "For your trouble. Don't argue. It's bad luck to argue on a closing day." |
 
@@ -577,8 +577,8 @@ No NPC comments on the gully. Ever.
 | TIW-B4.5 | Fight starts | HIRE (dropping a spear, running downhill) | "We're hired, not sworn!" |
 | TIW-B4.6 | Hornman blows Gather | (Gather: three short; spears quicken) | — |
 | TIW-B4.7 | Player blows Rest in the window | SPEAR (stopping, confused) | "Who blew Rest?" |
-| TIW-B4.8 | Spear yields | SPEAR | "Down. I'm down. It's for Thornfell, you idiot. It's all for Thornfell." |
-| TIW-B4.9 | Crew boss yields | CREW BOSS | "You'll see. When the forges eat the grain. You'll see." |
+| TIW-B4.8 | Spear engages (second line) | SPEAR | "It's for Thornfell, you idiot. It's all for Thornfell." |
+| TIW-B4.9 | Crew boss engages | CREW BOSS | "You'll see. When the forges eat the grain. You'll see." |
 | TIW-B4.10 | Ledge route, crows | (log) | "Crows on the rail, gone quiet." |
 | TIW-B4.11 | Ledge route, drill below (unaware) | CREW BOSS (below) | "Again!" |
 
@@ -652,13 +652,13 @@ No NPC comments on the gully. Ever.
 | Id | Trigger | Speaker | Line |
 |---|---|---|---|
 | TIW-B6.1 | TIW-E2 (guards rising) | SPEAR | "Who... The porridge. Get up, get *up*!" |
-| TIW-B6.2 | Guard yields | SPEAR | "Sitting. I was already sitting. Let me keep sitting." |
+| TIW-B6.2 | (removed: CDR-1) | — | — |
 | TIW-B7.1 | Crows dive | (log) | "A shriek, and a shadow on the floor." |
 | TIW-B7.2 | Draught | (log) | "The vent sings. The crows scatter to the walls." |
 | TIW-B8.1 | TIW-E4 spotted | HORNMAN | "Store's got a visitor!" |
 | TIW-B8.2 | Hornman blows Gather (not cancelled) | CREWMAN (from the counting room) | "Coming!" |
 | TIW-B8.3 | Player blows Rest in the window | HORNMAN | "That's not ours. Who's that?" |
-| TIW-B8.4 | Hornman yields | HORNMAN | "Don't break the horn. It's my own. It's the only thing here that's mine." |
+| TIW-B8.4 | Hornman engages (horn on his back) | HORNMAN | "Mind the horn. It's my own. It's the only thing here that's mine." |
 
 ### TIW-B9: the counting room (S09, TIW-E5) `[SPLINTER]`
 
@@ -666,8 +666,8 @@ No NPC comments on the gully. Ever.
 |---|---|---|---|
 | TIW-B9.1 | Player enters | BERSI `[SPLINTER]` (ledger clutched to his chest; as far from the loophole as the room allows) | "No. No, you can't be in here, this is the counting room." |
 | TIW-B9.2 | Crews engage | BERSI `[SPLINTER]` | "Not near the desk! Not near the — mind the ink!" |
-| TIW-B9.3 | Surrender trigger | BERSI `[SPLINTER]` | "Down! Put them down! It's a ledger, not a wall!" |
-| TIW-B9.4 | Crews yield | CREWMAN | "You heard the factor." |
+| TIW-B9.3 | Last crewman defeated (Bersi gives up, SX-N1) | BERSI `[SPLINTER]` (hands up, ledger still in them) | "Enough! Enough. It's a ledger, not a wall!" |
+| TIW-B9.4 | (removed: CDR-1) | — | — |
 | TIW-B9.5 | Bersi sits | BERSI `[SPLINTER]` (puts the ledger on the desk; sits on the floor with his back to the inner wall) | "Take it. Mind the binding. It's properly sewn." |
 | TIW-B9.6 | Trial frame touched (§B8.2) | BERSI `[SPLINTER]` (flinching) | "Don't. He says it carries." |
 | TIW-B9.7 | Player asks "Who says?" (optional, one line) | BERSI `[SPLINTER]` | "The man who tunes them. I don't hear the difference. I count them." |
@@ -790,7 +790,7 @@ TIW-D6.50 BERSI [SPLINTER]: "Somebody blew Rest at a crew." (almost admiring) "T
 
 TIW-D6.55 BERSI [SPLINTER]: "It hums. The rock. The crows go." (beat) "He says that means it's right. I don't know what right means for a noise."   → TIW-D6 options
 
-TIW-D6.60 BERSI [SPLINTER]: "I'm not climbing down that shaft." (beat) "I'll be here. Tie the knots loose, would you? I bruise."
+TIW-D6.60 BERSI [SPLINTER]: "I'm not climbing down that shaft." (beat) "I'll be here. Shut the door gently, would you? The draught gets in the ink."
 TIW-D6.61 BERSI [SPLINTER]: "Are you going to throw me off the cliff?"
   > "No."                                      → TIW-D6.62
 TIW-D6.62 BERSI [SPLINTER]: "...Are you sure?"
@@ -811,7 +811,7 @@ TIW-D7.02 BRYNJAR: (turning) "Walker. You've a face like a closing day. Out with
   > "There's a reserve nobody declared. The ledger says the Iron Winter."   → TIW-D7.10
 
 TIW-D7.10 BRYNJAR: "The Whinstone? That's a hole in a cliff. Pigeons and old tallow." (pounds the parapet) "Who told you this?"
-TIW-D7.11 BRYNJAR: "No. Don't tell me. Show me. I'll come up there and prove you wrong in front of whatever clerk you've got tied up."
+TIW-D7.11 BRYNJAR: "No. Don't tell me. Show me. I'll come up there and prove you wrong in front of whatever clerk you've found up there."
 TIW-D7.12 BRYNJAR: "Hoist foot. I'll be there before you. I'm faster on a track than I look."
       {Brynjar placed at the hoist foot; objective: Meet Brynjar at the hoist foot}
 
@@ -969,11 +969,12 @@ TIW-D9.31 is the act's last line: a count, not a speech. It carries the Act I tu
 | Canon anchors | Dorn: teaches, fears, deflects; no service or roster. Ressa: "Not that one." and nothing else; no roster, no battle. Elira: counts, defends Brynjar. Brynjar: not a member; disowns or defends; the canon boast; protective of children. Hadrik: reads totals, asks, does not decide; no scars mentioned. Torvek: one sentence, no wartime claim. |
 | Splinter tags | Bersi (TIW-B9, TIW-D6, TIW-D7.34, TIW-B12.6, the chit initials, the ledger); Eyvind (the sketches' "E."; Bersi's "he"); "the Quartermaster" (TIW-B4.3 only). **Ingrith is never named. Bersi never says "the Quartermaster" and never names whose orders they are.** |
 | FT-03 | "Up the track" (destination), "in the yard", "by the usual hands". No line states when, how, by whom or from which direction the relief grain arrived. The recognition line notes only the date and the account. |
-| Evidence rule | The early Close, the quiet gully and the hum are never interpreted by any NPC. Bersi's testimony follows his yield. |
+| Evidence rule | The early Close, the quiet gully and the hum are never interpreted by any NPC. Bersi's testimony follows his giving up (he is a non-combatant, SX-N1); no defeated enemy speaks after a fight (CDR-1). |
 | Magic | Nobody calls anything magic. "Wind trick", "it hums", "it carries". |
 | Address | "Walker" throughout. No name, gender, title or origin for the player. |
-| R15 phrase | Printed exactly: "When the forges eat the grain, the passes go dark." Echoed once by a yielded crew boss (TIW-B4.9) in a shortened form; never explained. |
+| R15 phrase | Printed exactly: "When the forges eat the grain, the passes go dark." Echoed once by the crew boss as he engages (TIW-B4.9) in a shortened form; never explained. |
 | Flags | Every flag set here (`TPW_WHINSTONE_ASKED`, `TPW_BOARD_SEEN`, `TPW_SACKS_SEEN`, `TPW_CREW_STAKES`, `TPW_CREW_FITTINGS`, `TH_CALLS`, `TH_PASSWATCH_ROUTE`, `TPW_NAMES_ASKED`, `TIW_LEAD_BOARD`, `TIW_LEAD_CHIT`, `TIW_GULLY_HEARD`, `TIW_BROADSHEET_READ`, `TIW_SACKS_INSPECTED`, `TIW_IRON_SEEN`, `TIW_HASP_SMITHED`, `TIW_PLATES_SEEN`, `TIW_SKETCHES_SEEN`, `TIW_BERSI_TESTIMONY`, `TIW_LOWMARK_RECOGNISED`, `TIW_ROUTE`, `TH_BRYNJAR`, `TH_STORES`) matches the quest file's tables. `TIW_GATHER_CANCELLED`, `TIW_FRAME_TOUCHED`, `TIW_CAGE_WOUND`, `TIW_HUT_ROUTE` and `TH_SEASON` are set by world events, not dialogue. |
 | Lowmark independence | Every Lowmark-conditioned line (`TPW-B0.1`, `TPW-D1.30`, sack and ledger recognition, `TIW-D6.40`) is optional variant text. |
 | Minor names [NEW] | Aud's crew (Brann, Holt, Odo) and Nettlehook's "old Freya" are incidental names; removable. |
 | Independent review (2026-11-03) | Stencil wording RELIEF — FENMERE; ledger-calendar coexistence note; `[SPLINTER]` on `TIW-D7.56`, `TIW-B12.5`, `TIW-D9.22`; em-dash chains removed from `TPW-B3.3`, `TIW-B6.1`, `TIW-D8.22`. |
+| Director rulings reconciliation (2026-11-03) | CDR-1: yield barks removed (`TPW-B3.5`, `TIW-B6.2`, `TIW-B9.4`, ids kept as "removed"); `TIW-B4.8`, `TIW-B4.9`, `TIW-B8.4` retriggered as engage barks; `TPW-B3.6` re-sourced as the cut-badge inspect (T-2); `TIW-B9.3` now plays when the last crewman is defeated (Bersi gives up, SX-N1); "tied" lines in `TIW-D6.60` and `TIW-D7.11` rewritten. |

@@ -2,6 +2,8 @@
 
 **Status (2026-11-03):** review-state content. Gameplay Designer requirement set, Batch 4 of the Thornfell production plan (bible §12). It brings together every enemy family, variant, boss, miniboss, wildlife fight and hazard authored in the Thornfell narrative packages into one implementation reference. Everything here is **[NEW]** authored content and is not canon until the Creative Director promotes it (TD-14). Items marked **[PROPOSAL — DIRECTOR]** are consequential rules the content depends on. Numbers are **framing targets** (fight length, HP remaining, telegraph duration), not balance values. Health, damage, armour and XP values belong to the tuning pass after a playable build exists. This file is **documented dependencies only**: no schema, JSON or C# is authored or implied (bible §11.11).
 
+**Director rulings (2026-11-03, binding):** `Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md`. CDR-1: every enemy is defeated at **0 HP**; no health-threshold yield, break-off or downed state; Ingrith's scripted surrender on defeat (SX-3) is Thornfell's only exception. CDR-2: Ranged is a core combat skill (S01 resolved); every fight accepts melee or ranged and none requires ranged. CDR-3: Thornfell is an internal milestone of the complete game. Engineering consequences: `Quests/Caelmor_Combat_Ranged_Release_Engineering_Handoff.md`.
+
 **Sources read:** `Quests/Caelmor_Thornfell_Narrative_Production_Bible.md` (whole; §2.4, §2.6, §3 TD-7/TD-8/TD-12, §9.4–9.5, §10, §11 binding); `Quests/Caelmor_Thornfell_Main_Act_I.md` (§A7, §B7), `_Act_II.md` (§A7, §A8.1, §B7, §B8.3), `_Act_III.md` (§7, §7.1, §11, §E); `Quests/Caelmor_Thornfell_Side_Quests_Horn_and_Highsteads.md`, `_Banner_and_Memory.md`, `_Work_and_Skills.md`, `_Settlements_and_Combat.md` (every encounters-and-hazards table, the TME and TDS sections); the Lowmark encounter file as the format standard.
 
 **Source state.** The three main acts were reviewed and committed before this file was written. The four side-quest files were still in independent review when it was drafted; those reviews have since landed, and the independent review of this file (§16) re-checked ids, flags and names against the committed text. Number differences that remain in the packages are superseded by §13 (shared canonical register C-1 to C-8 and rows I-1 to I-21).
@@ -19,7 +21,7 @@
 | Building creature definitions | §4 roster, §5 family specs, §6 wildlife, §7 bosses and minibosses |
 | Building spawn and encounter data | §11 encounter-pocket index, §10 Horn-Echo storm sites |
 | Building hazards and the sound system | §3 telegraph grammar, §9 hazard register (the Summit node is in §9.2) |
-| Building combat runtime support | §1 constraints, §8 non-lethal defeat, §9.4 runtime needs |
+| Building combat runtime support | §1 constraints, §8 defeat (CDR-1), §9.4 runtime needs |
 | Tuning after the first playable build | §2 bands and universal targets; the band notes in §5 |
 | Reviewing for the Director | §13 inconsistencies, §14 questions |
 
@@ -37,12 +39,12 @@ These are the Lowmark constraints (Lowmark encounter file §1), unchanged, plus 
 | **Agility triggers approved, not built** | No encounter may need an agility trigger. Every Thornfell shortcut into an arena (goat track, chimney, shimmy, scramble) has a walkable fallback, and shelter faces, niches and pillars must be NavMesh-reachable. |
 | **10 Hz authoritative tick; intents enqueue for T+1** (Stage 6.1.1) | **Minimum telegraphs (carried from Lowmark):** light hits ≥ 0.8 s; moderate or heavy hits ≥ 1.0 s; any hit at or above 25% max HP, any displacement and any area effect ≥ 1.5 s. Gusts are displacement, so the wind-window tell must be ≥ 1.5 s (canonical 2.5 s, §13 I-1). |
 | **Auto-attack on interval; specials on cooldown; no stamina** (Phase 1.3 §2) | Fights are about position, target priority and **sound** (who is about to call), not input speed. |
-| **AI roles Passive / Aggressive / Defensive; enemies never flee** (Phase 1.3 §2) | Thornfell has two pressures against "never flee": wolves breaking off (§13 I-6) and humans yielding (§8). Both are presented as **defeat events**, not fleeing mid-fight. |
-| **Combat states; Incapacitated "does not imply death"** (Stage 6.1.2) | Human yield maps to CombatIncapacitated with recovery to a non-hostile NPC (§8). |
+| **AI roles Passive / Aggressive / Defensive; enemies never flee** (Phase 1.3 §2) | Matches CDR-1: every Thornfell enemy, human or animal, fights until defeated at 0 HP (§8). The former wolf break-off and human yield are removed (§13 C-5, I-6). Leash/reset stays. |
+| **Combat states; Incapacitated "does not imply death"** (Stage 6.1.2) | No longer required by Thornfell content: humans are defeated at 0 HP. Ingrith's SX-3 outcome is a quest on-defeat hook that spawns her as a non-hostile NPC (§7.1, §8). |
 | **Interaction needs reach and line of sight** | Channels under attack (winch, snub post, pull-line cut, Take the horn, Unbolt) need a clear standing pad facing the object. |
 | **Player camera only** | Telegraphs must read at default zoom from any angle. In Thornfell the **audio tell is primary** and the visual tell is its required twin, except in null-points, where only the visual tell plays (TGM). |
-| **Solo-first; per-player state** (bible §9) | Every encounter is solo-clearable at its band. Co-op scales health per participant, shares world creatures and gives step credit to all participants on the step. Storm windows, whiteout, Close count and boss yield scenes are per player. |
-| **Combat never reveals evidence** (bible §11.3) | No creature drop and no yield line advances an investigation. Testimony after a yield is a person speaking. Phenomena prove nothing. |
+| **Solo-first; per-player state** (bible §9) | Every encounter is solo-clearable at its band. Co-op scales health per participant, shares world creatures and gives step credit to all participants on the step. Storm windows, whiteout, Close count and Ingrith's SX-3 scene are per player. |
+| **Combat never reveals evidence** (bible §11.3) | No creature drop advances an investigation, and defeated ordinary enemies have no dialogue. Testimony comes from non-combatants (Bersi), allies, places or Ingrith's SX-3 scene. Phenomena prove nothing. |
 | **No resonance outside canon sites** (bible §2.4; TD-8) | Horn-Echo figures exist only in Shatterfall's storm volume. Node pulses exist only in the Summit great hall. The Gatefall, every settlement and every side-quest site use ordinary dangers only. |
 
 ---
@@ -142,32 +144,32 @@ Each table lists the variant kit with canonical telegraphs. "Band notes" gives t
 
 **Ecology.** Black ridge crows that roost in vent shafts, cliff cracks, sheave housings and stair faces. They follow patrols, mob the weak and steal food. They lift all at once on a horn-trial note (TIW S09 trial frame, TSH-E1), which is a tell of the trials and never evidence.
 
-**AI role.** Aggressive inside a nest volume; leashed to it. Scatter (a defeat event, not fleeing) when the flock's health pool is spent. Vent draughts suspend dives (TIW-E3).
+**AI role.** Aggressive inside a nest volume; leashed to it. The flock is one creature with one health pool and is defeated at 0 HP like any creature (the swirl breaking up is its defeat presentation). Vent draughts suspend dives (TIW-E3).
 
 | Variant | Behaviour | Telegraph | Counter | Bands |
 |---|---|---|---|---|
 | **Flock** | One combined creature (a swirl of 4–6 birds) with one health pool; mobs a spot | The swirl darkens and tightens over one spot, birds go silent (**1.2 s**†), then pecks in a **2 m circle** (light) | Leave the circle; cross under vents on the draught | Competent (all) |
-| **Diver** | Single bird; climbs and dives in a straight line from a shaft mouth or tower top | Sharp caw, wings fold, shadow on the floor (**1.2 s**†), then a straight drop strike (light-moderate) | Step aside; Ranged from below if S01 allows (C-8) | Competent–Advanced |
+| **Diver** | Single bird; climbs and dives in a straight line from a shaft mouth or tower top | Sharp caw, wings fold, shadow on the floor (**1.2 s**†), then a straight drop strike (light-moderate) | Step aside; shoot it from below with Ranged (C-8) | Competent–Advanced |
 
-**Variants in context.** TRR-E1's flock targets the bread trestle, never people (comic beat). TGM-E1's crows mob only a player under 50% HP and scatter when the wolves are down.
+**Variants in context.** TRR-E1's flock targets the bread trestle, never people (comic beat). TGM-E1's crows mob only a player under 50% HP; they fight to 0 HP like any flock.
 
-**Yield / loot.** Animals: no yield. Loot: ordinary feathers or nothing (tuning pass). Nothing advances a quest. Band: flock and diver **fragile**.
+**Defeat / loot.** Defeated at 0 HP. Loot: ordinary feathers or nothing (tuning pass). Nothing advances a quest. Band: flock and diver **fragile**.
 
 ### 5.2 Ridge Wolves (low)
 
 **Ecology.** Winter-thin packs on high trails, drawn to carcasses, goat pens, mule trains and carried meat. The **howl is a readable call**: its rising shape rhymes with the Lost glyph (TTH), which is presentation, not meaning.
 
-**AI role.** Aggressive pack. Runners circle and flank; the howler hangs back on a rock and calls. **Break-off rule [PROPOSAL — DIRECTOR]:** a wolf at or below 30% health limps away out of the fight; this **counts as defeated** for step credit (§13 I-6). Escort and protect pockets: runners target the beasts, mules or carried meat first, which can be bitten, made to halt or dropped, but never killed or lost.
+**AI role.** Aggressive pack. Runners circle and flank; the howler hangs back on a rock and calls. Wolves fight until defeated at **0 HP** (CDR-1; the former 30% break-off is removed, §13 C-5). Escort and protect pockets: runners target the beasts, mules or carried meat first, which can be bitten, made to halt or dropped, but never killed or lost.
 
 | Variant | Behaviour | Telegraph | Counter | Bands |
 |---|---|---|---|---|
 | **Runner** | Flanks in pairs (one front, one circles behind); lunge-bite; snatch variant in TSM-E1 (dives for the carry) | Chest down, ears flat, tail flat (**0.9 s**†), then a lunge 3–4 m. Circler: low growl (**1.0 s**) before its lunge. Snatch: circles behind, head low, growl (**1.2 s**) | Side-step; keep runners in front; pick up a dropped carry | Competent–Advanced |
-| **Howler** | Holds a rock 10–15 m upslope; calls reinforcements | Head lifts, ribcage swells (**1.5 s**†), then a long rising howl; if completed, **+1 runner** from the ridge, once per fight (TPW-E3: +2, authored escort pressure). Optional delayed commit form: runners commit 4 s after the howl (TAS-E2, TGM-E1) | Interrupt the draw with any hit, any call blown at it (it flinches; Fall startles it), or Ranged if S01 allows (C-8) | Competent–Advanced |
-| **Pack-Mother** (elite; unplaced) | Leads a pack of runners and a howler; **rally howl** that restores runners already broken off to the fight once; heavy lunge with knockdown | Rally howl: head back, two short barks then a held howl (**2.0 s**). Heavy lunge: hindquarters drop, snow kicks up behind (**1.5 s**), lunge 5 m with knockdown 1 s | Interrupt the rally; sidestep the heavy lunge; fight her last or first, never in between | Advanced / post-arc (TW-04) |
+| **Howler** | Holds a rock 10–15 m upslope; calls reinforcements | Head lifts, ribcage swells (**1.5 s**†), then a long rising howl; if completed, **+1 runner** from the ridge, once per fight (TPW-E3: +2, authored escort pressure). Optional delayed commit form: runners commit 4 s after the howl (TAS-E2, TGM-E1) | Interrupt the draw with any hit, any call blown at it (it flinches; Fall startles it), or a Ranged shot (C-8) | Competent–Advanced |
+| **Pack-Mother** (elite; unplaced) | Leads a pack of runners and a howler; **rally howl** that calls one extra runner from the ridge, once; heavy lunge with knockdown | Rally howl: head back, two short barks then a held howl (**2.0 s**). Heavy lunge: hindquarters drop, snow kicks up behind (**1.5 s**), lunge 5 m with knockdown 1 s | Interrupt the rally; sidestep the heavy lunge; fight her last or first, never in between | Advanced / post-arc (TW-04) |
 
 **Band notes.** TF-M1 teaches wolves (TPW-E2, 30–45 s). Every later wolf pocket is a variation on one question: **who is about to call?** In TF-M5 (TSW-E1) the fight is by ear in near-white (3 m visibility): the howl is positional and captioned ("a howl, left") and the lunge comes from that side. Runner **standard**, howler **sturdy**, Pack-Mother **elite**.
 
-**Yield / loot.** Animals: no yield; break-off at 30% (proposal). Loot: hides belong to the economy pass (goat and wolf leather are not catalog items, TD-13); nothing advances a quest.
+**Defeat / loot.** Defeated at 0 HP. Loot: hides belong to the economy pass (goat and wolf leather are not catalog items, TD-13); nothing advances a quest.
 
 ### 5.3 Rock Vipers (low)
 
@@ -182,11 +184,11 @@ Each table lists the variant kit with canonical telegraphs. "Band notes" gives t
 
 **Band notes.** First reading of shale is optional or short (TSR-E1 30–45 s; TOS-E1 required, 75–90% HP remaining). TES-E1 is the Advanced warm-up under gusts. Viper **fragile**, shale-coil **sturdy**.
 
-**Yield / loot.** Animals. Nothing advances a quest.
+**Defeat / loot.** Defeated at 0 HP. Nothing advances a quest.
 
 ### 5.4 Pass Bandits (low)
 
-**Ecology.** Deserters and clanless robbers at blind corners and lookouts. They know the Ordinary Calls (TWG: they duck on Fall once). People: they **yield** (§8).
+**Ecology.** Deserters and clanless robbers at blind corners and lookouts. They know the Ordinary Calls (TWG: they duck on Fall once). They fight to 0 HP (§8).
 
 **AI role.** Aggressive. Prop-targeting: cutters go for a waiting load's lead line (TBC-E1, ~4 s channel) or pick over pack-frames (TAS-E1) until engaged.
 
@@ -194,11 +196,11 @@ Each table lists the variant kit with canonical telegraphs. "Band notes" gives t
 |---|---|---|---|---|
 | **Cutter** | Rushes; two quick cuts; works props | Drops the shoulder, blade drawn back low (**1.0 s**†), then a two-cut rush (moderate). Prop work: crouch at the line, knife drawn (**1.0 s**) then a 4 s cut; any hit interrupts | Step aside; interrupt the prop work | Competent |
 | **Slinger** | Holds a ledge or parapet; stone in a straight line; at TWG-E1 leans into a horn-tower groove to call help | Sling whirled overhead with a **rising whirr** (**1.2 s**†; glyph: a spiral), one stone along a line (light-moderate). Groove call: steps to the channel and leans (**2.0 s**); if not interrupted, +1 cutter once | Strafe; interrupt the groove call with a hit or Fall | Competent |
-| **Corner-Boss** (elite) | A deserter in a Warden's coat with the badge cut off; anchors a bend; steps in when a cutter yields; yields last | Raises the hood and plants his feet (**1.4 s**), then a two-hit heavy chop, the second hit bigger | Step out after the first hit; punish the recovery | Competent (TPW-E1) |
+| **Corner-Boss** (elite) | A deserter in a Warden's coat with the badge cut off; anchors a bend; steps in when a cutter is defeated; the last of his group to fall | Raises the hood and plants his feet (**1.4 s**), then a two-hit heavy chop, the second hit bigger | Step out after the first hit; punish the recovery | Competent (TPW-E1) |
 
 **Band notes.** TPW-E1 is the first Thornfell fight (90–120 s, 50–70% HP); the goat track gives the player the slingers first (~20% easier). Later bandit pockets are short and readable. Cutter **standard**, slinger **standard**, Corner-Boss **elite**. **World:** the Blind Corners (TP26) keep a bandit population after TF-M1 (TW-01).
 
-**Yield / loot.** Yield at 0% (kneel; tied by NPCs). Yielded bandits drop no loot (§12). Their words are testimony about bandits only.
+**Defeat / loot.** Defeated at 0 HP with the ordinary defeat presentation (§8). Ordinary loot only (§12); nothing evidentiary. No dialogue after defeat; the Corner-Boss's cut badge is read on the overturned cart (T-2).
 
 ### 5.5 Iron Winter crews (mid)
 
@@ -214,7 +216,7 @@ Each table lists the variant kit with canonical telegraphs. "Band notes" gives t
 
 **Band notes.** TF-M2 teaches the hornman and the Rest-cancel (TIW-E1, E4). TF-M4 asks the player to fight between node pulses (TSH-E3). TF-M5's gallery crews are optional if the pull-line is cut (TSW-E2/E3). Strength by `TH_STORES`: `reported` standard; `seized` fewer (TSH-E3 has no extra spear; TSW-E3 unmanned); `leverage` more (TSH-E3 +1 spear; TSW-E3 crew of 4 with new spearheads; Ingrith's phase 2 +1 spear). Spear **standard**, hornman **standard**.
 
-**Yield / loot.** Yield at 0% (down to one knee, spear dropped, sit; tied or walked down by wardens). No loot; spears and horns stay as props. Crews' words after yield are testimony with no proof weight.
+**Defeat / loot.** Defeated at 0 HP with the ordinary defeat presentation (§8). Ordinary loot only; nothing evidentiary. Defeated crews have no dialogue.
 
 ### 5.6 Shatterfall Brigands (mid)
 
@@ -230,7 +232,7 @@ Each table lists the variant kit with canonical telegraphs. "Band notes" gives t
 
 **Band notes.** TSG only, by design (bible §10: "TF-M3 edge, *Salvage Ledge*"); in TF-M3 they are seen from the overlook and never fought. Pick-hand **standard**, plate-thrower **sturdy**, Foreman **elite**.
 
-**Yield / loot.** Yield at 0% (pick-hands, throwers) and 20% (Foreman). **Plates are not loot**: the stack is a carry-state crate returned to the Horn Seat (TSG S07).
+**Defeat / loot.** All defeated at 0 HP, the Foreman included (§7.4). **Plates are not loot**: the stack is a carry-state crate returned to the Horn Seat (TSG S07).
 
 ### 5.7 Fell Stags (mid)
 
@@ -244,7 +246,7 @@ Each table lists the variant kit with canonical telegraphs. "Band notes" gives t
 | **Rutting stag** | Straight charges | Paws twice and lowers its head (**1.5 s**†), straight charge (heavy) | Sidestep; it overruns and stands exposed ~1.5 s | Competent (late) |
 | **Storm Stag** (elite; unplaced) | An old white-flanked stag that charges only in storm windows; its antlers carry stormlight | **Charge** as rutting stag (**1.5 s**). **Stormlight:** a rising buzz from its antlers (**2.5 s**, the TSL-H2 tell) before a lightning strike near it; get low in a lee or away from it | Sidestep; leave its side when its antlers sing | Advanced / post-arc (TW-05) |
 
-**Yield / loot.** Animals; leashed disengage at the leash edge. Antler and hide belong to the economy pass. Nothing advances a quest.
+**Defeat / loot.** Defeated at 0 HP; standard leash/reset at the leash edge (not a retreat). Antler and hide belong to the economy pass. Nothing advances a quest.
 
 ### 5.8 Horn-Echo (high) — resonance imprints
 
@@ -258,7 +260,7 @@ Full rules in §10. **Author truth:** imprints of the wartime horn blast in viol
 | **Echo-line** | Three figures abreast across two lanes, charging as one; breaking the middle figure collapses the line | Haze darkens in a broad band and the fluted faces **drop a note** (**2.0 s**) | Leave both lanes, or break the middle figure | Advanced |
 | *Uphill group* (presentation, not a variant) | Five or six shapes that run **uphill toward the Horn Seat** and break on the wall below it; pass through the player as haze; no damage | Ordinary lane tell | None needed | TES S05 only |
 
-**Yield / loot.** Not creatures that die or drop anything. No target frame name (blank), no nameplate, no colours, no face, no clan mark.
+**Defeat / loot.** Not creatures that die or drop anything (spirit place rule: they re-form while the storm lasts, CDR rulings §3.1.2). No target frame name (blank), no nameplate, no colours, no face, no clan mark.
 
 ### 5.9 Ridge Bears (high)
 
@@ -269,7 +271,7 @@ Full rules in §10. **Author truth:** imprints of the wartime horn blast in viol
 | **Bear** (standard; unplaced) | Defensive in its den; Aggressive if the den is entered; swipe and charge | Swipe: weight back, ruff lifts (**1.0 s**), wide arc. Charge: head down, two paw-strikes with dust (**1.6 s**), straight charge (heavy) | Sidestep; pillars and boulders stop the charge | Advanced / post-arc (TW-06) |
 | **Greymantle** (miniboss) | §7.3 | §7.3 | §7.3 | Competent (late)–Advanced |
 
-**Yield / loot.** Animals; no yield. Greymantle's end is a quest choice (TGM S06), not loot. A standard bear's materials belong to the economy pass.
+**Defeat / loot.** Defeated at 0 HP. Greymantle is defeated like any creature; how he is left is a quest choice (TGM S06), not loot. A standard bear's materials belong to the economy pass.
 
 ---
 
@@ -277,14 +279,14 @@ Full rules in §10. **Author truth:** imprints of the wartime horn blast in viol
 
 | Animal | Default role | Provoked / scripted state | Telegraph | Counter | Appears |
 |---|---|---|---|---|---|
-| **Storm hawks** | Passive (ride updrafts) | Harass anything on their ledge: one dive at a time on a 6–8 s cycle; lands on the lip 2 s after each dive | Shriek, then the hawk's shadow sweeps the rock (**1.2 s**) | **Brace** (one click on the rock) negates the knockback; two hits on a landed hawk (or two Ranged hits, if S01 allows; C-8) drive it off for the visit. Killing allowed, never required | TSL-E2 (Splitpine Crag hawk ledge) |
+| **Storm hawks** | Passive (ride updrafts) | Harass anything on their ledge: one dive at a time on a 6–8 s cycle; lands on the lip 2 s after each dive | Shriek, then the hawk's shadow sweeps the rock (**1.2 s**) | **Brace** (one click on the rock) negates the knockback; a landed hawk is an ordinary target defeated at 0 HP with melee or Ranged (C-8); defeating it is allowed, never required (Brace alone gets the player across) | TSL-E2 (Splitpine Crag hawk ledge) |
 | **The old ram** (cliff goat) | Passive herd leader | Charges along the shoulder path at dusk or at a careless approach, then resettles | Head down and a front-foot stamp (**1.5 s**†), straight charge along the path | Step into a moss-marked niche or sidestep downhill into the heather; never off a cliff | TGY-E1 |
 | **The young ram** | Passive | Bluffs travellers for a season after the cull path; charge stops short | As old ram, shorter charge | Harmless | TGY-E2 (post-quest ambient, `TGY_WAY = cull`) |
 | **Cliff goats** | Passive | Driven by Gather and Fall calls (TGY drive); never hostile | — | — | TP28; TME07 skull only |
 | **Snowhares** | Passive, flee into drifts | Hunting interaction only (snare or still-approach) | — | — | TFS, TSM |
 | **Fell stags (out of season)** | Passive | Become the Fell Stags family only on the rut ground (§5.7) | — | — | Stormwake plateau |
 
-**Rules.** Fauna never flee mid-fight once fighting except as specified (hawks driven off; rams resettle). Quest-spawned fauna is one instance per player.
+**Rules.** Fauna in a fight are defeated at 0 HP (CDR-1); none flees on health. The old ram's resettle after a charge is a scripted pathing beat outside combat, not a health retreat. Quest-spawned fauna is one instance per player.
 
 ---
 
@@ -296,17 +298,17 @@ Source: Act III §6 Beat 4, §7, §7.1 (committed). Summary for creature buildin
 
 | Field | Spec |
 |---|---|
-| Read | Broad, weathered woman in a quartermaster's quilted coat with tally cords at the belt; ridge-iron spear; lips moving as she counts. Not a monster: never threatens the column; stops when beaten. |
+| Read | Broad, weathered woman in a quartermaster's quilted coat with tally cords at the belt; ridge-iron spear; lips moving as she counts. Not a monster: never threatens the column. |
 | Arena | Winch floor (H3) over the Gatefall cut: ~18 × 10 m timber floor, **drum hood** (~6 × 4 m, cover), **slab slot** (2 m strip, danger on a drop), hornman's parapet with a fluted stone, inner stair (entry) and outer stair (phase-2 crew). Railed edges; no fall. |
 | **The Count** | Says "One." "Two." "Three." (~0.8 s each), stepping forward; a thrust on each number (moderate). P3: silent, telegraphed by steps and a raised spear per number. Counter: step aside each beat. |
 | **Short Measure** | Says "Short." and reverses the spear (**1.0 s**); butt-stroke, 2 m knockback, brief stagger. |
 | **The Close** | Hornman raises (**1.5 s**†, §13 I-3) and blows Close (two long falling, ~2.0 s); on the second note she kicks the drum brake: the slab drops a notch, heavy damage + knockdown **in the slot only**; dust falls along the slot first. Counter: be out of the slot by the second note, or interrupt the raise. Period ~20 s (P1), ~15 s (P2), ~12 s (P3). |
 | **The Gust** | Fluted parapet whistles (**2.5 s**); she steps behind the hood post; gust pushes open-floor players 2 m toward the inner wall and slows 3 s; she lunges at a slowed player. Counter: under the hood with her, or brace at the rail. |
 | **Gate gallery shed** (P2–P3) | Dorn's **Fall** from below, grit circles (~2 s), stone; hits her too. |
-| Phases | P1 Count 100–60% → "Gather." two crew up the outer stair (three with `leverage`) → P2 Crew 60–35% → she drops her tally cords and goes silent → P3 Silent 35–20%. |
-| Yield | **At ~20%** she plants the spear, sits on the drum frame and stops counting. Hornman and any crew sit down. `TSW-D5` opens. **No loot. Nothing evidentiary.** |
+| Phases | P1 Count 100–60% → "Gather." two crew up the outer stair (three with `leverage`) → P2 Crew 60–35% → she drops her tally cords and goes silent → P3 Silent 35–0%. |
+| Defeat (SX-3) | Defeated at **0 HP**; no health threshold. **When Ingrith is defeated, the quest plays her scripted surrender** instead of the ordinary defeat presentation: she plants the spear and sits on the drum frame, still counting under her breath, and is spawned as a non-hostile NPC (CDR rulings §4 SX-3). The hornman and any crew fight on to 0 HP; `TSW-D5` opens when the winch floor is clear. **No loot. Nothing evidentiary.** |
 | Targets | Solo 5–7 min (Advanced identity, cooked food); ends at 30–60% HP. No single hit above 30% max HP except The Close in the slot (~35%; the one sanctioned exception, telegraphed ~3.5 s from raise to drop). |
-| Death / logout / co-op | Respawn in the warden room; fight resets to the top of the current phase (100/60/35%); yielded crew stay yielded. Logout restarts at 100%. Shared boss; health scales; the Count rotates targets; per-player yield scene. |
+| Death / logout / co-op | Respawn in the warden room; fight resets to the top of the current phase (100/60/35%); defeated crew stay defeated. Logout restarts at 100%. Shared boss; health scales; the Count rotates targets; per-player SX-3 scene. |
 | Splinter swap | Name, coat and lines swap under TD-1; the mechanics (count, gate, gust) survive any "quartermaster who knows the gate". |
 
 ### 7.2 The Held Line — miniboss phenomenon (TF-M3, `TES-E4`)
@@ -340,7 +342,7 @@ Source: Settlements and Combat TGM.7.1 (committed).
 | **Ceiling fall** (P2–P3) | Rears against a wall; dust shadows on the floor (**1.8 s**) then a stone; max 3 at once. |
 | **From the side** (P3, <35%) | Into the hollow; 3 s later out from behind a pillar; **dust trickles from that pillar's top** (**1.5 s**). Once per 20 s. |
 | Phases | P1 100–60%; P2 60–35%; P3 <35%. No enrage. |
-| End | **At 10%** he walks into the hollow and lies down; combat ends; untargetable until the S06 choice (end him / let him sleep). An animal, not a yield. |
+| End | Defeated at **0 HP** like any creature (the 10% lie-down is removed, CDR-1). He falls in the chamber; the S06 choice is **how the old bear is left**: seal the den as his resting place (three stones and Yrsa's stormflower net, "so the wind can't reach him"; `sleeping`) or leave him to the trappers (`ended`; Yrsa butchers, Hunting optional). Same steps and flags (CDR rulings §4). |
 | Targets | 3.5–4.5 min, late Competent to early Advanced. |
 | Reset / co-op | Leaving G9 or dying resets him to full in the hollow; tracking steps persist. Shared creature; silence applies to every player in G9. |
 | Reference case | The slate's reference for visual-only telegraph readability (large silhouette or dust/frost events, never colour alone). |
@@ -354,29 +356,24 @@ Source: Settlements and Combat TSG.7.1 (committed).
 | **Pry sweep** | Plants the pry-bar's foot and leans (**1.2 s**) | Low sweep, knockdown on hit; ~8 s cadence | Step back out of reach |
 | **Stack topple** (once per stack, 3 stacks) | Heaves a plate stack; it **rings as it tilts** (**1.5 s**) | Plates spill in a cone; damage and a 3 s ringing patch that slows | Leave the cone and the patch |
 | **Second wind** (<50%, once) | Drinks from a flask (2 s) | Heals 10% if not interrupted | Any hit interrupts |
-| Yield | At **20%**: drops the bar, one knee; shouts "Cut the props!" (starts TSG S04–S05) | — | — |
-| Reset | Leaving the shed resets him to 100% unless yielded; stacks re-stack | — | — |
+| Defeat | At **0 HP** (the 20% yield is removed). He bellows "Cut the props!" as his **second wind** bark; TSG S04–S05 start **on his defeat** (step trigger "on defeat" replaces "on yield") | — | — |
+| Reset | Leaving the shed resets him to 100% unless defeated; stacks re-stack | — | — |
 | Target | 2–3 min with 1 pick-hand | — | — |
 
 ---
-## 8. Non-lethal human defeat (TD-7)
+## 8. Defeat (CDR-1; supersedes TD-7)
 
-**Rule.** No human enemy in Thornfell is killed. Every human creature (all Pass Bandit, Iron Winter and Shatterfall Brigand variants, the Corner-Boss, the Brigand Foreman, Ingrith Scarrow) ends combat in a **yield state** when its health reaches its **yield threshold**. This is the same rule and the same runtime mechanism as Lowmark D-13 (Lowmark encounter file §8).
+**Rule.** Every Thornfell enemy, human, animal or Horn-Echo figure, fights until defeated at **0 HP**. No health threshold ends a fight early; nothing yields, kneels, breaks off, limps away or lies down because of its health. Leash/reset stays standard RPG behaviour. Echo-figures re-form while the storm lasts (a place rule, §10). XP, loot and co-op credit are awarded at defeat. Every step that completed "on yield" completes **on defeat**. The former TD-7 table (bandits, Iron Winter crews and brigands yield at 0%; the Foreman and Ingrith at 20%) is retired.
 
-| Creature | Threshold | Presentation | After |
-|---|---|---|---|
-| Bandit cutter, slinger | 0% | Kneels; tied by peddlers, Aud's crew or wardens (prop) | TPW: marched to Passwatch after the quest (barks); TBC: tied to bridgehead posts, taken at dawn |
-| Corner-Boss | 0% (yields last of his group) | Hood down, kneels (`TPW-B3.6`) | Marched to Passwatch by Vessa's last free warden |
-| Iron Winter spear, hornman | 0% | One knee, spear or horn dropped, sits; tied (prop) | Wardens walk them down |
-| Brigand pick-hand, plate-thrower | 0% | One knee | Wardens take them (TSG S06); two may go back to Gerrit (`licensed`) |
-| Brigand Foreman | **20%** | Drops the bar, one knee; shouts | As above |
-| Ingrith Scarrow | **~20%** | Plants spear, sits on the drum frame, stops counting | Held in the warden room, walked to Stonewake at dawn; tribunal at thaw |
+**Defeated humans.** Ordinary defeat presentation: the enemy falls and fades after the standard corpse time, with ordinary loot (§12). No tied or bound props, no downed state, no "walked down" or "marched to Passwatch" afterlife, no dialogue with a defeated ordinary enemy. One short, sober ally line after a human fight is enough where the old text had a "they'll live" beat. Where the old text said crews were walked down, say the pass is clear.
 
-**Non-combatants (never targetable):** Bersi Coldbrook (TIW-E5; surrenders on first yield, ~60 s, or a fight near him), Eyvind Stall (TSH; stopped by **Take the horn**, ~2 s channel), the clanless hires (TIW-E1; run downhill), the Blood-Oath tower crew (TAS; de-escalated, never hostile), every Thornfell settler, child and warden.
+**The one scripted exception (SX-3).** Ingrith Scarrow is defeated at 0 HP like any boss; the TSW quest's on-defeat hook then plays her scripted surrender instead of the ordinary defeat presentation and spawns her as a non-hostile NPC for `TSW-D5` (§7.1). She is held in the warden room, walked to Stonewake at dawn and kept for a clan tribunal at thaw.
 
-**Runtime need (Systems Engineer).** One health-threshold defeat event per creature definition that ends combat participation, sets CombatIncapacitated, plays the yield presentation, optionally swaps to a non-hostile NPC with a dialogue entry point, and blocks further targeting. Lowmark's mechanism is reused unchanged.
+**Non-combatants (never targetable; SX-N, not exceptions):** **Bersi Coldbrook** (TIW-E5) never fights; when the last crew member in the counting room is defeated he gives up (a quest script) and testifies (SX-N1). The crews fight to 0 HP; there is no encounter-level surrender, and a fight that only comes near him does not end the encounter. **Eyvind Stall** (TSH) is stopped by **Take the horn** (~2 s channel, SX-N2). Gallery crews whose haul ends because the player **cut the pull-line** sit down: a puzzle outcome, not a health outcome (SX-N3). Also never targetable: the clanless hires (TIW-E1; run downhill when the fight starts), the Blood-Oath tower crew (TAS; de-escalated, never hostile), every Thornfell settler, child and warden.
 
-**Animals are not humans.** Wolves break off at 30% (proposal, §13 I-6), crows scatter, stags disengage at the leash, Greymantle lies down at 10%. None of these uses the yield presentation.
+**Runtime need (Systems Engineer).** None beyond standard defeat at 0 HP. The former health-threshold yield event, CombatIncapacitated use and hostile-to-neutral swap for ordinary humans are **removed**. One quest-level need remains: a **quest on-defeat hook for named creatures** (Ingrith SX-3; also step triggers "on defeat" such as TSG S04), see the integration handoff and `Quests/Caelmor_Combat_Ranged_Release_Engineering_Handoff.md`.
+
+**Animals.** Wolves, crows, stags, hawks and bears are defeated at 0 HP and can be harvested where the economy allows. The wolf break-off (former C-5) and Greymantle's 10% lie-down are removed.
 
 ---
 
@@ -520,7 +517,7 @@ Hazards are environmental. They have no health, no target frame and no AI. All o
 | TSL-E2 | `S05_traverse` | Splitpine Crag hawk ledge [NEW place] | 2 pairs storm hawks (fauna) | Competent (late) | Never fatal | → WORLD (hawks nest) | Banner TSL 1.6 |
 | TWC-E1 | Camp investigation | Abandoned Ridge Camp (TP23) | 3 runner, howler (+2 in source; →+1†) | Competent (late) | 60–75% HP | → WORLD (den under the gate) | Banner TWC 2.6 |
 | TWN-E1 | Stone ledge (OPT) | Shale under the stone ledge, Oath Cairn Fields (TP15) | 2 viper, shale-coil | Advanced | 75–90% HP | → WORLD | Banner TWN 3.6 |
-| TSN-E1 | Morning after | Black Glass Hostel goat pen (TP05) | 2 runner (break off at 30%) | Competent (late) | 75–90% HP | STEP | Banner TSN 4.6 |
+| TSN-E1 | Morning after | Black Glass Hostel goat pen (TP05) | 2 runner (fight to 0 HP) | Competent (late) | 75–90% HP | STEP | Banner TSN 4.6 |
 | TOS-E1 | Under the arch | Shale under Oathkeeper's Step (TP16) | 2 viper, shale-coil | Competent | 75–90% HP | ONCE (nest cleared) | Banner TOS 5.6 |
 | TSR-E1 | Third sounding station | Red Slope scarp shale fan (TP21) | 2 viper, shale-coil (first-appearance tells) | Competent | 30–45 s | → WORLD | Work TSR.6 |
 | TST-E1 | Below the second stand | Burned Slope foot (TP24) | 2 runner, howler (+1) | Competent | 45–60 s | → WORLD | Work TST.6 |
@@ -561,7 +558,7 @@ Hazards are environmental. They have no health, no target frame and no AI. All o
 |---|---|
 | **No new quest items** | The Thornfell budget is four (`TIW_store_ledger`, `TES_horn_roster`, `TSH_trial_record`, `TSW_closure_rubbing`); none comes from a creature. All four are picked up from places (desk, niche, bench, rubbed wall). |
 | **Combat drops nothing evidentiary** | No chit, ledger page, roster leaf, sketch or tally is carried by an enemy. Pay chits (TES) are on a nail; the broadsheet is on a door. |
-| **Humans who yield drop nothing** | Matches Ingrith's "No loot". Coin rewards in the packages come from NPCs (peddlers' handcart, Aud, Gerrit, Elira's finder's share), not corpses. |
+| **Defeated humans drop ordinary loot only** | Ordinary drops per the economy pass; nothing evidentiary. Ingrith (SX-3) drops nothing. Coin rewards in the packages still come from NPCs (peddlers' handcart, Aud, Gerrit, Elira's finder's share), not corpses. |
 | **Plates are never loot** | TSG's plate crate is a carry-state object returned to the Horn Seat; Iron Winter plates follow `TH_HORN` and TNK. No player-held plate exists. |
 | **Animals** | Ordinary materials (feathers, hides, antler, meat) are economy-pass items; ridge iron, stormwood and goat leather are **not catalog items** (TD-13). Greymantle's meat appears only through the TGM `ended` choice. |
 | **Fauna** | Hunting yields only through Hunting interactions (snowhares, goats), never through combat kills in a quest step. |
@@ -578,10 +575,10 @@ Hazards are environmental. They have no health, no target frame and no AI. All o
 | C-2 | Hazard clamp | No hazard can kill a player above **25% HP**; TSL-H2 stormlight clamps at **10%**. |
 | C-3 | Hornman | Raise **1.5 s**; Gather gives allies within 8 m faster attacks for **8 s**; any hit during the raise interrupts; the player's **Rest within 3 s** cancels it in every hornman pocket. |
 | C-4 | Howler and calls | Draw **1.5 s**; a completed howl adds **+1 runner once** (TPW-E3 keeps +2 as authored escort pressure). Any call blown at a howler makes it flinch; Fall also makes bandits duck once per fight. |
-| C-5 | Ridge Wolves at low health | At or below 30% HP a wolf breaks off and limps away; **break-off counts as defeat** (step credit and co-op credit as a kill). **[PROPOSAL — DIRECTOR]**; if refused, wolves fight to 0% and only text changes. |
+| C-5 | Ridge Wolves at low health | **Removed by CDR-1 (2026-11-03).** Wolves fight until defeated at 0 HP; no break-off, no limp-away. Step and co-op credit at defeat. |
 | C-6 | Narrows bridge (TP07) | One per-player state machine, owned by the Zones package: **N0 down** (before TPW `S08_span`) → **N1 patched** → **N2 cracked only while TBC is Active** (overrides N1, N3 or N4 for that player) → **N3 mended** (TBC Completed) → **N4 permanent span** (TRR Active or Completed). Before TBC is accepted the bridge shows its ordinary state and TBC is offered by Aud's bark after a storm. The scree path is walkable in every state. |
-| C-7 | Season and thaw | `TH_SEASON` has two values: autumn, then snow from TIW `S13_elira` start. Thaw is the quest-local bool `TSW_THAW` (first re-entry to Thornfell after TF-M5 Completed and leaving the region once) **[PROPOSAL — DIRECTOR; Act III open decision 3]**; no third `TH_SEASON` value. |
-| C-8 | Ranged | Never required. While S01 is open every Ranged counter is optional and has a melee, brace or call alternative; TST's default is the racked unstrung stave. |
+| C-7 | Season and thaw | `TH_SEASON` has two values: autumn, then snow from TIW `S13_elira` start. Thaw is the quest-local bool `TSW_THAW` (first re-entry to Thornfell after TF-M5 Completed and leaving the region once) **[APPROVED — CDR 2026-11-03]**; no third `TH_SEASON` value. |
+| C-8 | Ranged | **S01 resolved by CDR-2.** Ranged is a first-class option in every fight and is never required; every counter that names Ranged also has a melee, brace or call answer. No fight is designed so ranged trivialises it (no boss shootable from a place it cannot reach). TST teaches the bow (cut, string, fletch, shoot); the racked unstrung stave is only the bowyer's display piece. Weapon, ammunition and XP values belong to the item and systems specialists. |
 
 | # | Inconsistency | Packages | Recommended canonical value |
 |---|---|---|---|
@@ -590,7 +587,7 @@ Hazards are environmental. They have no health, no target frame and no AI. All o
 | **I-3** | **Hornman raise and Gather buff** differ: raise 1.5 s, faster thrusts 8 s (TIW); raise 2.0 s, +damage 15 s (TSH-E2); raise 1.2 s, faster attacks in 8 m for 8 s (TSW-E2; Ingrith's Close raise 1.2 s). | Act I, II, III | **Raise 1.5 s; allies in 8 m attack faster for 8 s.** TSH-E2 and TSW-E2/E4 change the numbers only. |
 | **I-4** | **Rest-cancel** taught in TF-M2 is not restated for TSH-E2/E3 or TSW-E2/E3. | Act II, III | Rest within 3 s cancels every hornman Gather in every pocket. One line in each encounter table; no other change. |
 | **I-5** | **Howler draw** 1.5 s (TPW, TTH, TSM, TAS, TGM, TSW) vs 2.0 s (TWC, TST); reinforcements +2 (TPW-E3, TWC-E1) vs +1 (others). | Act I; Horn; Banner; Work; Settlements | **1.5 s draw; +1 runner once.** TPW-E3's +2 kept as authored escort pressure (committed); TWC-E1 to +1. |
-| **I-6** | **Wolves at low health**: flee at 30% (TSW-E1, TSN-E1), "disperse" (TTH, TSM), fight to defeat (TPW). Phase 1.3 says enemies never flee. | Act III; Banner; Horn; Act I | **[PROPOSAL — DIRECTOR]** Canonical rule: **break-off counts as defeat.** All Ridge Wolves break off at 30% with a limp-away presentation; step and co-op credit are given as for a kill (C-5). Act III "Wolves flee", TSN "flee" and Horn and Highsteads "disperse" all mean this break-off. If refused, wolves fight to 0% and TSW-E1/TSN-E1 text changes only. |
+| **I-6** | **Wolves at low health**: flee at 30% (TSW-E1, TSN-E1), "disperse" (TTH, TSM), fight to defeat (TPW). Phase 1.3 says enemies never flee. | Act III; Banner; Horn; Act I | **Resolved (CDR-1, 2026-11-03):** wolves fight to 0 HP (C-5). Act III "Wolves flee", TSN "flee" and Horn and Highsteads "disperse" all become defeat at 0 HP; text changes only. |
 | **I-7** | **Rock Vipers' first appearance**: bible §10 says TF-M3; TSR and TOS both unlock after TF-M1 and use vipers. TSR lengthens the viper tell to 1.6 s for "first appearance"; TOS uses 1.0 s. | Bible; Work TSR.6; Banner TOS 5.6 | **First appearance is TSR or TOS** (whichever the player takes first). Both use the **1.6 s** first-appearance viper tell; TES and TWN use 1.0 s. Bible §10 "First seen" should read "TSR / TOS (after TF-M1)". |
 | **I-8** | **Shale-coil kit**: straight lunge 1.4 s (TES, TSR + slow) vs ring burst 1.5 s (TWN, TOS). | Act II; Work; Banner | Keep **both** as one kit (§5.3). Each pocket may use one or both; slow on the lunge is optional. |
 | **I-9** | **Crow tells**: diver 0.8 s (TNR) vs 1.2 s (TIW, TSH); flock tighten 1.0 s (TIW-E1b, TSH-E1, TGM) vs 1.2 s (TNR, TRR); flock effect "accuracy debuff" (TSH) vs 2 m peck circle (TNR). | Act I, II; Horn; Settlements | **Diver 1.2 s; flock 1.2 s (area effect); 2 m peck circle, light damage; no accuracy debuff** (avoids a new status). |
@@ -603,7 +600,7 @@ Hazards are environmental. They have no health, no target frame and no AI. All o
 | **I-16** | **Greymantle** is listed as the Ridge Bears' elite and as a side miniboss. | Bible §10 | Count as the miniboss; the elite slot is filled by it (like the Held Line for Horn-Echo). |
 | **I-17** | **Unplaced variants**: Pack-Mother, the Storm Stag, the standard ridge bear. | Bible §10 | World placements TW-04, TW-05, TW-06 (§11.3), or cut Pack-Mother and Storm Stag (count 19). |
 | **I-18** | **Ridge Crows' first appearance**: bible says "TF-M2 vents"; the ledge route (TIW-E1b) comes earlier in TF-M2. | Bible; Act I | "First seen: TF-M2" (either route). Text only. |
-| **I-19** | **Yield threshold** default not stated for the Corner-Boss; Horn and Highsteads says humans yield "at 0 HP". | Act I; Horn | **0%** default; Ingrith and the Foreman 20%. One table (§8). |
+| **I-19** | **Yield threshold** default not stated for the Corner-Boss; Horn and Highsteads says humans yield "at 0 HP". | Act I; Horn | **Resolved (CDR-1):** no yield thresholds; every human, the Corner-Boss, the Foreman and Ingrith included, is defeated at 0 HP (§8). Ingrith's SX-3 outcome plays on defeat. |
 | **I-20** | **Fall as a startle** works on howlers (TTH, TSM) and bandits (TWG) but not in TF-M1's wolves (any call makes the howler flinch). | Act I; Horn | Both true: **any call** makes a howler flinch; **Fall** additionally makes bandits duck once per fight. |
 | **I-21** | **Ridge Crows "not used" in TSL** "because they belong to the vents of TF-M2", while TSH, TNR, TRR and TGM use crows. | Banner TSL 1.6 rules | Harmless; crows are a ridge-wide family. Recommend deleting the reason clause in TSL's rule. |
 
@@ -611,7 +608,7 @@ Hazards are environmental. They have no health, no target frame and no AI. All o
 
 ## 14. Director-level questions
 
-1. **Wolves break off at 30% (I-6):** approve as a defeat event for one family, or fight to 0%?
+1. ~~Wolves break off at 30% (I-6)~~ **Resolved 2026-11-03 (CDR-1):** wolves fight to 0 HP.
 2. **World elites (I-17):** place Pack-Mother, the Storm Stag and a standard ridge bear as proposed, or cut the two elites?
 3. **Post-story Shatterfall storm (§10.2 `storm.shatterfall_world`):** approve the revisitable storm event without the Held Line or the uphill group?
 4. **Greymantle UI mute (TGM-OD1):** mute UI sounds inside the null-point as well as world audio?
@@ -622,7 +619,7 @@ Hazards are environmental. They have no health, no target frame and no AI. All o
 | To | What |
 |---|---|
 | Schema & Content Engineer (33.7) | Creature definitions for 21 variants + 3 bosses/minibosses + sub-forms (crew boss, uphill group presentation) + fauna (storm hawks, old and young ram, goats, snowhares); pocket data from §11; hazard ids including the [NEW id]s in §9 |
-| Systems Engineer | §8 yield mechanism (Lowmark reuse); §9.4 status list; call events, Rest-cancel and interrupt-on-windup; lane dispersal and storm windows; node pulse with pressure-shadow volumes; audio-null volumes; push-to-safe-side clamp |
+| Systems Engineer | Standard defeat at 0 HP (the §8 yield mechanism is removed); quest on-defeat hook for named creatures (Ingrith SX-3, TSG Foreman step trigger); §9.4 status list; call events, Rest-cancel and interrupt-on-windup; lane dispersal and storm windows; node pulse with pressure-shadow volumes; audio-null volumes; push-to-safe-side clamp |
 | Animation / VFX / Audio | §3 telegraph grammar and canonical tells; whistle a fifth up at 2.5 s; visual-only Greymantle set; blank echo-figure presentation |
 | Level design (Zones file) | Arenas (winch floor, seat approach, great hall, G9 den, plate shed), shelter faces and niches, edge blockers, echo faces, horn rests |
 | Side-quest authors | Number-only changes from I-1, I-2, I-5, I-7, I-9, I-11, I-13, I-14; TSL rule clause (I-21) |
@@ -633,7 +630,7 @@ Hazards are environmental. They have no health, no target frame and no AI. All o
 | Check | Result |
 |---|---|
 | Coverage | Every encounter and hazard id in the three main acts and four side-quest files is in §9 or §11; quests with no combat are listed. Nine families, 21 variants, 3 bosses/minibosses, fauna. |
-| Binding rules | Summit node is a passive hazard with no health, frame, name, AI or voice (§9.2). Horn-Echo never identifies anyone and stays at Shatterfall (§10). Humans yield (§8). Combat reveals nothing; no new quest items (§12). No resonance at the Gatefall. No Remnant, no magic, no player spellcasting. |
+| Binding rules | Summit node is a passive hazard with no health, frame, name, AI or voice (§9.2). Horn-Echo never identifies anyone and stays at Shatterfall (§10). Every enemy is defeated at 0 HP; Ingrith SX-3 is the only scripted surrender (§8, CDR-1). Combat reveals nothing; no new quest items (§12). No resonance at the Gatefall. No Remnant, no magic, no player spellcasting. |
 | Click-to-move | No counter needs a jump or timed input; every arena shortcut has a walkable fallback; every push is clamped to a safe side. |
 | Telegraph minimums | After §13 reconciliation, every tell meets 0.8 / 1.0 / 1.5 s. |
 | Splinter tagging | Ingrith, Bersi and Eyvind entries tagged `[SPLINTER]`. |
@@ -641,3 +638,4 @@ Hazards are environmental. They have no health, no target frame and no AI. All o
 | Name changes (2026-11-03) | This file names no roster or name-slip family; the review-pass renames (the name-slip "Sig Brede", the roster's Lunde family, the Tofte carters) need no edit here. |
 | **Reconciliation needed** | The four side-quest files were under independent review while this file was written. **After those reviews land, re-check every side-quest row in §9 and §11.2 and inconsistencies I-1, I-2, I-5 to I-9, I-11 to I-14, I-19 to I-21 against the revised text.** The main-act rows reflect the committed packages. |
 | **Independent review (2026-11-03)** | 5 findings (0 high, 3 medium, 2 low). Grep checks against the committed packages: every encounter id in §9 and §11 exists in its package (hazard ids absent from packages are all marked [NEW id]); every flag named exists; the four quest items match; no stale names (this file names no renamed NPC). Medium: the three handoffs disagreed on wind-window, howler, hornman and hazard-clamp values and on the Narrows bridge and thaw models; the shared canonical register C-1 to C-8 (§13) now states them identically in all three, marked canonical for implementation. Medium: I-1 left TST's gust undecided; now 3 s everywhere with TST's ~6 s kept as a labelled long gust. Medium: Ranged appeared as a counter (diver, howler, storm hawks) without the S01 gate; now optional "if S01 allows" (C-8). Low: I-6 restated as the canonical rule "break-off counts as defeat" [PROPOSAL — DIRECTOR] (C-5). Low: source-state lines and §7.3, §7.4, §11.2 headings still said "in review"; updated to committed. Binding rules re-checked: Summit node passive; Horn-Echo never identifies; humans yield; no Remnant; no grain route; walkable fallbacks; no scope expansion; no contract change. The reconciliation row above is closed by this review. |
+| **Director rulings reconciliation (2026-11-03)** | Applied CDR-1..3 (`Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md`). §8 rewritten as defeat at 0 HP (TD-7 superseded); per-family Defeat/loot rows replace Yield/loot (bandits, Iron Winter crews, brigands, Foreman 20% → 0 HP); wolf break-off removed (AI role, Pack-Mother rally, C-5, I-6, TSN-E1); Ingrith §7.1 defeat at 0 HP with the SX-3 scripted surrender on defeat, crew fight to 0 HP; Greymantle 10% lie-down removed, S06 reframed (seal the den / leave him to the trappers; flags unchanged); Foreman TSG S04–S05 start on his defeat; crows and hawks defeated at 0 HP (TGM-E1 "scatter when the wolves are down" removed; hawks no longer "driven off"); C-7 thaw approved; C-8 and every "if S01 allows" hedge → Ranged first-class, never required; I-19 and §14 Q1 resolved; runtime yield mechanism removed, quest on-defeat hook named; pointer to the engineering handoff. Earlier rows in this log describe past states. |

@@ -202,7 +202,7 @@ Quest state → Completed. Crossing service at Whisperflow Landing becomes avail
 
 ## 7. Encounters
 
-All encounters use existing v1 combat: auto-attack on tick, weapon cooldown specials, readable telegraphs, no flee-at-low-HP (Phase 1.3 §2). Tuning targets assume a fresh character with the onboarding starter melee weapon and no armor. Final numbers belong to Gameplay Designer tuning after a playable build exists; the targets below are the acceptance bar.
+All encounters use the game's standard combat: auto-attack on tick, weapon cooldown specials, readable telegraphs, no flee-at-low-HP (Phase 1.3 §2); every creature fights until defeated at 0 HP (CDR-1). Every encounter accepts melee or ranged and none requires ranged (CDR-2). Tuning targets assume a fresh character with the onboarding starter melee weapon and no armor. Final numbers belong to Gameplay Designer tuning after a playable build exists; the targets below are the acceptance bar.
 
 | Id | Enemies | Placement | AI role (Phase 1.3) | Telegraph | Purpose | Solo target |
 |---|---|---|---|---|---|---|
@@ -215,7 +215,7 @@ All encounters use existing v1 combat: auto-attack on tick, weapon cooldown spec
 - Combat cannot reveal evidence. Nothing dropped by a creature advances the investigation (evidence rule).
 - No respawns during the step that requires them. E2 and E4 creatures respawn only after the quest's step has passed, and then as ordinary world wildlife.
 - **Death:** respawn at the crew fire with quest step and quest items intact. No item loss for quest items (Phase 1.1 non-negotiable: no overly punishing death penalties).
-- **Co-op:** world creatures are shared. Each participating player whose quest instance is on the relevant step receives step credit. Loot follows the v1 instanced/fair loot rule.
+- **Co-op:** world creatures are shared. Each participating player whose quest instance is on the relevant step receives step credit. Loot follows the game's instanced/fair loot rule.
 
 ---
 
@@ -276,7 +276,7 @@ This is the quest's centerpiece. It must feel strange and quiet, never like a sp
 
 ### 9.3 Choices and consequences
 
-There is no faction reputation system in v1 (Phase 1.1 §8). Consequences are carried by flags that change dialogue, world props at the landing, and how movement 2 opens. No option is wrong; each reflects a real Lowmark authority (Main Arc thesis: authority is split among people who do necessary work).
+There is no faction reputation system in Lowmark content (Phase 1.1 §8). Consequences are carried by flags that change dialogue, world props at the landing, and how movement 2 opens. No option is wrong; each reflects a real Lowmark authority (Main Arc thesis: authority is split among people who do necessary work).
 
 **Choice 1 — Who keeps the proof**
 
@@ -318,7 +318,7 @@ The reward is access, knowledge and a working tool, not power (Main Arc: "the pl
 | `crew_hatchet` | Loaned in Beat 5 if needed | Kept by the player at completion |
 | `grain_sack`, `nan_trunk` | Carried in Beat 8 | Carry-state objects, never enter inventory |
 
-That is 3 quest items against the Phase 1.5 budget of 8–12 for all of v1. The hatchet is a reward tool, not a quest item.
+That is 3 quest items against the Phase 1.5 budget of 8–12 for all of Lowmark (the Lowmark milestone). The hatchet is a reward tool, not a quest item.
 
 ---
 
@@ -432,3 +432,4 @@ Decided here under delegated authority and recorded for review: no lump quest XP
 | Choice 1 originally had a "wrong" answer (keeping the evidence lost the crossing). | All three options now resolve safely, with different costs and later doors. |
 | The far-bank figure risked confirming the Field-Mage. | Made optional, view-dependent, unnamed and pronoun-free. |
 | Skill coverage drifted toward the 14-skill economy list. | Limited to Melee, Woodcutting, Hunting and Cooking, which appear in both Phase 1.3 and Stage 3.1. |
+| Director rulings reconciliation (2026-11-03, CDR-1/2/3). | No yield or non-lethal content existed here. §7 now states the 0 HP defeat rule and that every encounter accepts melee or ranged (ranged never required). "v1" release wording changed to "the game's" / "Lowmark content" / "the Lowmark milestone"; the "v1 production bible" document reference keeps its file label. No beats, steps or flags changed. |

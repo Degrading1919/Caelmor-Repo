@@ -1,4 +1,4 @@
-# Lowmark v1 — Side Quests: Work and Skills
+# Lowmark — Side Quests: Work and Skills
 
 **Status:** Authored production content for Creative Director milestone review (bible §12, batch 3). Five skill-introduction side quests from `Caelmor_Lowmark_v1_Narrative_Production_Bible.md` §7: **WC** *The Wrong Culprit*, **BW** *The Bank Walk*, **FK** *The Flood Kitchen*, **BP** *Bark for the Pits*, **HS** *Honest Steel*. Everything here is **[NEW]** unless marked **[CANON]**. Consequential choices the content depends on are marked **[PROPOSAL — DIRECTOR]**. Markdown only: no schema, JSON or C#. Dialogue sits inline in each package, in the node format and voice rules of `Dialogue & Narrative/Caelmor_Lowmark_The_True_Line_Cast_and_Dialogue.md` (Part 1 binding).
 
@@ -19,6 +19,8 @@ These five quests are where a player first learns what a Lowmark skill is *for*.
 | HS | Honest Steel | Smithing | inspect, forge, decide | `lowmark.main.02_short_measure` Completed | Crestbridge forge (P02) | 25–35 min |
 
 All five are optional, solo-clearable, cannot fail, and give no lump quest XP (skill XP comes from the actions). Co-op partners run independent instances against shared world creatures. Side quests use **no quest items** (bible §11.6): every object is a carry-state prop, a station object, an inspect point, or an ordinary economy output.
+
+Every enemy is defeated at 0 HP (CDR-1). Every fight accepts **melee or ranged** (CDR-2); ranged is never required, and "Melee" in the skill rows names the combat, not a melee-only rule. WC carries Lowmark's one optional bow beat (the eldest's short bow for the sow hunt, WC.3 Beat 6).
 
 ### 0.2 Skill coverage and how the five feed one chain
 
@@ -96,7 +98,7 @@ None repeats The True Line's investigate-and-repair loop or a §6 main-quest ver
 | Content id (suggested) | `lowmark.side.wrong_culprit` |
 | Type | Skill introduction (Hunting). Source: Hunting portfolio C1 *The wrong culprit*, presented at entry level with N2's guided structure. |
 | Unlock | MQ2 *Short Measure* Completed (after the Hill Depot's goblin introduction). Offered by the smallholder at the field edge on approach. |
-| Skills | Hunting (required: reading and tracking; optional: take and recover), Melee (required), Cooking (optional) |
+| Skills | Hunting (required: reading and tracking; optional: take and recover), Melee (required), Ranged (optional: the eldest's short bow for the sow hunt), Cooking (optional) |
 | Combat share | ~20% (one required barn fight; one optional dangerous-contact hunt) |
 | Choice | The sow with farrow: take her, leave her, or leave her and feed the household yourself |
 | Unlocks | Crop-damage reading; the Ashenstead margin rooter opportunity (state set by the choice) |
@@ -131,7 +133,7 @@ A smallholding on the **Heartlands–Ashenstead edge**, the Heartlands-facing ma
 
 **Beat 5 — The Sow (`S05_margin`).** *Objective: Find the boars the household blamed.* At the scrub margin the eldest (role: ELDEST) has a spear and a plan. The player inspects the fresh rooting and the bed (two inspects). The sow is visible, feeding, inside her alert radius only if the player blunders in.
 
-**Beat 6 — Judge (`S06_judge`).** *Objective: Decide what the margin needs.* Dialogue `WC-D6` (WC.7). If the player takes the sow, `S06a_hunt` opens: approach, resolve, then field dressing (Hunting recovery) gives the food relationship and raw hide.
+**Beat 6 — Judge (`S06_judge`).** *Objective: Decide what the margin needs.* Dialogue `WC-D6` (WC.7). If the player takes the sow, `S06a_hunt` opens: approach, resolve, then field dressing (Hunting recovery) gives the food relationship and raw hide. **Optional bow beat (CDR-2):** the eldest offers their short bow for the hunt (`WC-D6.11`). With it, a careful player can resolve the sow from the edge of her alert radius instead of closing with a blade. Melee works exactly as before; nothing requires the bow, and it is handed back at the report (`WC-D7.12`).
 
 **Beat 7 — Tell Them (`S07_report`).** *Objective: Tell the household what you found.* Dialogue `WC-D7`. Quest Completed.
 
@@ -144,9 +146,9 @@ In the end barn, under the fallen roof, the stolen roots stand replanted in thre
 | Id | Enemies | Placement | AI role | Telegraph | Purpose | Solo target |
 |---|---|---|---|---|---|---|
 | **E1** | 3 × Field Goblin scrapper, 1 × Field Goblin trapper | Barn row, in two barns | Scrappers: Aggressive in the barn volume. Trapper: keeps distance, lays rake traps | Scrapper: hoe raised overhead (~1 s) then a short chop. Trapper: crouches and sets a rake (~1 s); the tines stay visible; stepping on one staggers the player briefly | Goblins on open farm ground after MQ2's warren: reading traps outside a dungeon | Required. 60–90 s; player ends at 50–70% HP |
-| **E2** | 1 × Furrow Boar sow (only if `WC_SOW_TAKEN` is chosen) | Scrub margin bed | Hunting approach target. If alerted at close range she turns territorial | Bristles and snorts (~1.2 s), then a short straight charge; sidestepping makes her overrun and pause (~1.5 s) | Dangerous contact handed to combat (economy D02); recovery still needs field dressing | Optional. A careful approach resolves without a charge; a careless one is a 30–45 s fight |
+| **E2** | 1 × Furrow Boar sow (only if `WC_SOW_TAKEN` is chosen) | Scrub margin bed | Hunting approach target. If alerted at close range she turns territorial | Bristles and snorts (~1.2 s), then a short straight charge; sidestepping makes her overrun and pause (~1.5 s) | Dangerous contact handed to combat (economy D02); recovery still needs field dressing | Optional. A careful approach resolves without a charge; a careless one is a 30–45 s fight. Melee or the lent short bow; a bow shot from the bramble edge is the quiet option, and a charge still closes the distance |
 
-The farrow are ambient wildlife, not targets: they scatter into the brambles and are never harvestable in this quest. Goblin heaps hold no evidence (the trail and field did the proving). Death: respawn at the field gate with step and carried-sack state reset to the heap.
+The farrow are ambient wildlife, not targets: they scatter into the brambles and are never harvestable in this quest. Both encounters accept melee or ranged. Goblin heaps hold no evidence (the trail and field did the proving). Death: respawn at the field gate with step and carried-sack state reset to the heap.
 
 ### WC.6 Steps and flags
 
@@ -160,7 +162,7 @@ The farrow are ambient wildlife, not targets: they scatter into the brambles and
 | `S04_recover` | Carry back what's left of the crop. | 2 sack-deposit events at the field gate | Yes | Carry-state; sprint allowed |
 | `S05_margin` | Find the boars the household blamed. | 2 inspect events (fresh rooting, bed) | Yes | |
 | `S06_judge` | Decide what the margin needs. | Dialogue `WC-D6` choice node | Yes | |
-| `S06a_hunt` | (If chosen) Take the sow cleanly. | Hunting recovery (field dressing) interaction complete on the sow | Conditional | Required only after `WC_SOW_TAKEN`. Field dressing yields the food relationship and raw hide |
+| `S06a_hunt` | (If chosen) Take the sow cleanly. | Hunting recovery (field dressing) interaction complete on the sow | Conditional | Required only after `WC_SOW_TAKEN`. Melee or the lent short bow. Field dressing yields the food relationship and raw hide |
 | `S07_report` | Tell the household what you found. | Dialogue `WC-D7` end node | Yes | Quest Completed |
 
 | Flag | Set by | Read by |
@@ -186,8 +188,9 @@ No option is wrong. The quest never tells the player which is right; the smallho
 | **Reading damage** | Knowledge | Authored crop-damage props across Lowmark become inspectable and return a cause line: *"Rooted. Fresh."* / *"Rooted, but days old."* / *"Cut, not rooted."* / *"Drowned. Water did this."* Same inspect interaction as marker reading. |
 | Margin rooter opportunity | Access | Open now (`WC_SOW_SPARED*`) or after MQ5 (`WC_SOW_TAKEN`). |
 | Hunter's field knife | Tool | Given by the eldest at `WC-D6` if the player lacks a recovery tool. Item pass defines it. |
+| Hunter's short bow and a bundle of arrows (loan) | Tool (loan) | Item names are **proposals for the economy and item pass**; no stats here. Lent at `WC-D6.12` for the sow hunt, taken back at `WC-D7.12`; arrows used are not returned. Not a reward. |
 | Small payment | Currency / kind | A meal at the gate plus a few coins (amount at economy tuning); fewer coins on *Leave her*, since the household is short. |
-| Hunting, Melee XP | Action XP only | No lump quest XP. |
+| Hunting, Melee (or Ranged, if the bow is used) XP | Action XP only | No lump quest XP. |
 
 ### WC.9 Failure, recovery, co-op
 
@@ -197,12 +200,13 @@ No option is wrong. The quest never tells the player which is right; the smallho
 | Player kills the sow before `S06_judge` | Not possible to soft-lock: the sow is non-interactive until `S05_margin` completes. |
 | Player takes the sow but scares her off | She returns to the bed after a short delay; no idle wait (the player can report back and return). |
 | Player has no recovery tool | Field knife at `WC-D6`. |
+| Player no longer holds the lent bow at the report | `WC-D7.12` is skipped (item-held condition); nothing depends on it. |
 | Logout | Last step and flags restored; carries discarded. |
 | Co-op | Shared E1 creatures give credit to each participant. The sow is per-player presentation once any instance chooses; a partner who chose *Leave her* does not see their sow taken. If per-player creature presentation is unavailable, fallback: each instance's sow is a separate spawn in the same bed. |
 
 ### WC.10 Integration needs
 
-Steps/flags (31.3, 24.1); dialogue with item-held conditions (31.5); inspect and carry-state interactions (as TL); Hunting approach/resolve/recover hooks on the sow (Hunting interaction pass; D02/D03); authored opportunity state for the margin rooter (economy D04 vocabulary: open / closed-until); step-gated encounter pocket E1; quest-state-conditioned props (goblin rows; spear at the gate).
+Steps/flags (31.3, 24.1); dialogue with item-held conditions (31.5); inspect and carry-state interactions (as TL); Hunting approach/resolve/recover hooks on the sow (Hunting interaction pass; D02/D03); authored opportunity state for the margin rooter (economy D04 vocabulary: open / closed-until); dialogue give/take of the lent short bow and arrows (same give/take and item-held conditions as the field knife and cooked food; no new flag); step-gated encounter pocket E1; quest-state-conditioned props (goblin rows; spear at the gate).
 
 ### WC.11 Dialogue
 
@@ -252,6 +256,12 @@ WC-D6.06 ELDEST: "You're the one who reads sign. You say."
   > [player holds cooked food] "Leave her. Take this instead."   → WC-D6.30
 WC-D6.07 ELDEST: "You'll want this, whatever you do. Holder's knife." {give hunter's field knife}   → WC-D6.06 options
 WC-D6.10 ELDEST: "Cleanly, then. I'll keep the young off you."
+WC-D6.11 ELDEST: (unslings a short bow) "Spear's loud. This isn't. Your choice."
+  > "I'll take the bow."                                    → WC-D6.12
+  > "I'll go in close."                                     → WC-D6.13
+WC-D6.12 ELDEST: "Bring it back. It's the only one we've got."
+      {lend hunter's short bow + bundle of arrows [item names: PROPOSAL — economy pass]; set WC_SOW_TAKEN; S06a_hunt active; event: S06_judge complete}  → end
+WC-D6.13 ELDEST: "Your way."
       {set WC_SOW_TAKEN; S06a_hunt active; event: S06_judge complete}  → end
 WC-D6.20 ELDEST: (lowers the spear) "Holder'll say I went soft."
 WC-D6.21 ELDEST: "If one does come for the roots, I'll know it by the sign now. Won't I."
@@ -269,6 +279,7 @@ WC-D7.02 [any] HOLDER: (sees the two sacks) "...That's my roots. Where were they
 WC-D7.03 HOLDER: "Goblins." (spits) "And the boars?"            → WC-D7.10 / .20 / .30 by flag
 WC-D7.10 [WC_SOW_TAKEN] ELDEST: "We'll eat this week. She wasn't the one, mind."
 WC-D7.11 [WC_SOW_TAKEN] HOLDER: "Didn't need to be." (beat) "No more off that margin till the young are grown. I'll see to it."
+WC-D7.12 [player holds hunter's short bow] ELDEST: (holds a hand out) "Bow." (checks the string) "Still good."   {take hunter's short bow}
 WC-D7.20 [WC_SOW_SPARED] HOLDER: "So I've two sacks and no meat and a boar in my scrub."
 WC-D7.21 [WC_SOW_SPARED] HOLDER: "Fine. If one roots my rows, it's yours. Proper sign, mind."
 WC-D7.30 [WC_SOW_SPARED_FED] HOLDER: "You gave us your own supper and left the boar. Odd sort of hunter."
@@ -296,6 +307,7 @@ WC-D7.50 HOLDER: "Eat before you go. That's not a question."
 | Taking the sow risked reading as the "wrong" answer. | It feeds the household and supplies BP's hide; its cost is a closed margin, not a scolding. |
 | Goblin field could read as comic relief only. | Kept small and inspect-only; the notched blade quietly echoes TL's markers and tells the player raiders watch farms. |
 | Combat could have looked like it gave Hunting output. | Barn combat gives none; the sow's output comes only from field dressing (D02/D03). |
+| Director rulings reconciliation (CDR-2, 2026-11-03): Lowmark had no ranged option anywhere. | One optional bow beat: the eldest lends a short bow for the sow hunt (`WC-D6.11`–`.13`, returned at `WC-D7.12`). No new step, flag or region flag; melee unchanged; item names are proposals. `WC_SOW_TAKEN` now sets on `WC-D6.12`/`.13` instead of `WC-D6.10` (same choice, same step event). |
 | Independent review pass: after MQ1, WC took MQ2's first goblin fight and pulled the player into a mid-tier subzone. | Director ruling: WC unlocks after MQ2; its field margin sits on the Heartlands–Ashenstead edge. BP's hide supply is unaffected (BP also unlocks at MQ2, and the yard sells hide). |
 
 ---
@@ -541,7 +553,7 @@ BW-D6.07 TAMSIN: "You held it nearly right, by the end."
 | B. The shelter | Hub | An empty grain warehouse: families on sacking, wet clothes on the rafters, Nan's trunk again, Duchess the hen on it. A wall of old chalked flood lines, each with a season beside it; the oldest are highest. Children have added tonight's line. It is lower than most. |
 | C. Field kitchen | Cooking station | A fire pit under the loading door, pot crane, a cold kettle, Nan's stores in a crate (barley, roots, salt). Wet wood stacked uselessly. |
 | D. Reed margin | Hunting | Below the docks. An open section marked with a plain stake; a closed nesting section marked with rag-tied stakes. The flock feeds between them. |
-| E. Recovery shallows | Recovery | Soft footing at the margin's edge where downed birds land. A River Leech in the deeper part. |
+| E. Recovery shallows | Recovery | Soft footing at the margin's edge where taken birds fall. A River Leech in the deeper part. |
 
 ### FK.3 Beats
 
@@ -553,7 +565,7 @@ BW-D6.07 TAMSIN: "You held it nearly right, by the end."
 - **Read:** inspect the feeding traces and the sentinel bird on the bank (two inspects).
 - **Approach:** through reed cover. The flock's alert is readable: heads up and a single honk is the warning (~1.5 s); a second honk lifts the flock. If the flock lifts, it resettles on the far end of the open section within a short walk; the player never waits idly.
 - **Closed ground:** the rag-staked nesting section is closed. Entering it triggers a child's bark from the docks and two Marsh Fen Geese defend (E1); fowl there cannot be taken in this quest.
-- **Resolve and recover:** downed birds fall in the recovery shallows (wet footing; optional E2). The quest needs two recovered fowl (count set by the Gameplay Designer). F3 is food-only: no hide, no feather output.
+- **Resolve and recover:** taken birds fall in the recovery shallows (wet footing; optional E2). The quest needs two recovered fowl (count set by the Gameplay Designer). F3 is food-only: no hide, no feather output.
 
 **Beat 3 — The Pot (`S03_cook`).** *Objective: Cook for the shelter.* Cooking station interaction using the fowl and Nan's stores. Exact recipe and output belong to the item pass; the quest accepts any edible cooked result and needs enough portions for the shelter (Gameplay Designer). During the first cook the **hush** plays (FK.4).
 
@@ -581,7 +593,7 @@ BW-D6.07 TAMSIN: "You held it nearly right, by the end."
 | **E1** | 2 × Marsh Fen Goose | Closed nesting section only | Defensive; do not pursue past the rag stakes | Neck stretch and hiss (~1 s) before a wing-beat | Avoidable; leaving the closed section ends it |
 | **E2** | 1 × River Leech | Deep end of the recovery shallows | Aggressive, slow, leashed to water | Rears (~1.2 s) before latching; stepping onto the bank breaks the latch | Optional; birds can be recovered without entering its water |
 
-Taking fowl is a Hunting resolution, not a combat kill; recovery is the Hunting recovery interaction on the downed bird.
+Taking fowl is a Hunting resolution, not a combat kill; recovery is the Hunting recovery interaction on the taken bird.
 
 ### FK.6 Choices and consequences
 
@@ -1103,7 +1115,7 @@ Neither option tells the player who swapped the bars. That stays open (HS.10).
 
 | Mystery | Author truth (proposal) | Public belief | Evidence | Plausible wrong reading | Withheld | Reveal owner |
 |---|---|---|---|---|---|---|
-| **Who swapped the bars** | Deliberately unselected. Compatible with the Brookhollow black-market trade in steel (dossier) and with wartime ironwork being pulled from old sites. **No canon anchor's history is implied.** | The carrier cheated; or the importer did. | Retied tag; cut ends; plugged bolt-holes; a broad arrow and a number; the scale-keeper's tally and Corvin's weight difference. | The carrier did it (he is frightened, which looks like guilt); the stencil "proves" which wartime site it came from (it proves only that it was once marked). | Origin; who swapped it; what it was bolted to. | None in v1. UL may echo it. |
+| **Who swapped the bars** | Deliberately unselected. Compatible with the Brookhollow black-market trade in steel (dossier) and with wartime ironwork being pulled from old sites. **No canon anchor's history is implied.** | The carrier cheated; or the importer did. | Retied tag; cut ends; plugged bolt-holes; a broad arrow and a number; the scale-keeper's tally and Corvin's weight difference. | The carrier did it (he is frightened, which looks like guilt); the stencil "proves" which wartime site it came from (it proves only that it was once marked). | Origin; who swapped it; what it was bolted to. | None in Lowmark content. UL may echo it. |
 
 ### HS.11 Integration needs
 
@@ -1263,3 +1275,7 @@ Applied the independent side-content review and Director rulings 8, 9, 10 and 11
 - **BW:** recorded the pronoun-neutral wording note.
 - **Rejected:** finding 20's "fold the close into the last action" for BW and HS. Their closing nodes carry choice variants and set the commission flags (`HS_BRIGID_QUEUE`), so they stay as dialogue.
 - **No flag renames in this file.**
+
+## Director rulings reconciliation (2026-11-03)
+
+Applied `Caelmor_Director_Rulings_Combat_Ranged_Release.md`. **CDR-2:** WC gains Lowmark's one optional bow beat (the eldest's short bow for the sow hunt: WC.1, WC.3 Beat 6, WC.5, WC.6, WC.8, WC.9, WC.10, nodes `WC-D6.11`–`.13` and `WC-D7.12`, WC.12 log). Bow and arrows are a loan; item names are proposals for the economy and item pass. A §0.1 note states that every fight accepts melee or ranged. **CDR-1:** no human enemy or yield exists in this file; FK's "downed birds" now read "taken birds" (Hunting recovery unchanged). **CDR-3:** the title drops "v1" (the bible's filename is unchanged) and HS's "None in v1" reads as Lowmark content. No step, flag or dialogue id removed.

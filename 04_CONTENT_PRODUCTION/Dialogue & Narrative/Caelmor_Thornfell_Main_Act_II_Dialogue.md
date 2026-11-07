@@ -72,13 +72,13 @@
 - **Voice:** short, dry, practical; insults with affection. Calls the player "walker" until the Counting Room, then "you".
 
 ### Eyvind Stall, hornwright [NEW] `[SPLINTER]`
-- **In TF-M3:** named on the pay chits and by Gerrit. **In TF-M4:** on the dais, playing; stopped; yields; names Ingrith.
+- **In TF-M3:** named on the pay chits and by Gerrit. **In TF-M4:** on the dais, playing; stopped by *Take the horn*; gives up (SX-N2; never fights); names Ingrith.
 - **Want:** the sound. **Fear:** that it was never his.
 - **Knows:** tuning, the plates, every trial date; that the Summit hums when he tests (he thinks it means the horn is "right"). **Doesn't know:** what the hum is.
 - **Voice:** a craftsman in love with a sound. Not cruel; careless. Talks to plates more kindly than to people. Grieves the silence.
 
 ### Iron Winter crew [NEW]
-- Clan renegades and clanless hires. Crew call the hum "the guardian" and are afraid of it. They yield.
+- Clan renegades and clanless hires. Crew call the hum "the guardian" and are afraid of it. They fight until defeated at 0 HP (CDR-1); no lines after defeat.
 
 ### Act II barks-only cast
 | NPC | Status | Notes |
@@ -628,9 +628,9 @@ TSH-D2.90 (resume) IVEN: "Stairs haven't moved. I checked."
 | TSH-B3.1 | Spotted | SPEAR | "Up the stair! Somebody's on the stair!" |
 | TSH-B3.2 | Hornman raises horn | HORNMAN | "Hold, I'll call it —" |
 | TSH-B3.3 | Hornman interrupted | HORNMAN | "My teeth —" |
-| TSH-B3.4 | Spear yields | SPEAR | "All right. Down. I'm down. Don't go in there. It's awake." |
-| TSH-B3.5 | Hornman yields `[SPLINTER]` | HORNMAN | "It's the guardian. Eyvind says it means the horn's right. I say it means go home." |
-| TSH-B3.6 | Reply | IVEN | (tying him to the sledge) "Halls don't hear the landing. The landing hears the halls. You'll hear plenty." |
+| TSH-B3.4 | Spear engages (second line) | SPEAR | "Don't go in there. It's awake." |
+| TSH-B3.5 | Hornman engages `[SPLINTER]` | HORNMAN | "It's the guardian. Eyvind says it means the horn's right. I say it means go home." |
+| TSH-B3.6 | Reply (during the fight) | IVEN | "Halls don't hear the landing. The landing hears the halls. You'll hear plenty." |
 
 **Inspect: crates (S4)** "Empty plate crates. Grey grit in the corners. Shatterfall grit."
 **Inspect: cookfire (S4)** "Warm. A pot of something with too much salt. They've been up here days."
@@ -735,7 +735,7 @@ TSH-D6.03 [SPLINTER] EYVIND: "Listen to it. Listen. That's the mountain saying i
 (during TSH-E3, between pulses)
 TSH-D6.10 [SPLINTER] EYVIND: "Again. Four, and —"
 TSH-D6.11 [SPLINTER] EYVIND: "You can hear it in Stonewake on a still night. Did you know? I didn't, at first."
-TSH-D6.12 [SPLINTER] EYVIND: (to a yielded crewman) "Get up. No. Stay down, then. Keep your head under it."
+TSH-D6.12 [SPLINTER] EYVIND: (to a crewman cowering from a pulse) "Get up. No. Stay down, then. Keep your head under it."
 
 (after TSH-E3; the player steps onto the dais)
 TSH-D6.20 [SPLINTER] EYVIND: (still playing) "Don't. Not yet. It isn't finished."
@@ -756,8 +756,8 @@ TSH-D6.22 [SPLINTER] EYVIND: (sits on the dais step) "All right. All right." (be
 | TSH-B6.5 | Reply to TSH-B6.4 | KALDREN | "The hall's ringing. Halls don't get angry." |
 | TSH-B6.6 | Hornman calls | HORNMAN | (a short, ugly call) "Up, up, all of you!" |
 | TSH-B6.7 | Leverage only: extra spear | SPEAR (VI) | "Two of us in here, Leif! Told you it'd be worth the climb!" |
-| TSH-B6.8 | Spear yields | SPEAR | "Down. Down. Get it to stop." |
-| TSH-B6.9 | Hornman yields | HORNMAN | "I only hum it for him. I only hum it." |
+| TSH-B6.8 | Spear caught by a pulse | SPEAR | "Get it to stop." |
+| TSH-B6.9 | Hornman engages | HORNMAN | "I only hum it for him. I only hum it." |
 | TSH-B6.10 | Dust shapes rise (first time) | IVEN | "Dust, standing up." (beat) "It does that on the Crown stair. After." |
 | TSH-B6.11 | Kaldren, if asked during the fight | KALDREN | "I don't fight. I hold the wall up. Somebody has to." |
 
@@ -879,7 +879,7 @@ TSH-D10.40 [SPLINTER] EYVIND: "Fine. Let them carry the mouthpiece. Don't let th
       {event: TSH-D10 end → S11}
 ```
 
-(TSH-D10.10–.12 is testimony after yielding. If TD-1 changes, swap only these lines, the flyleaf and the record's mentions of "the Quartermaster".)
+(TSH-D10.10–.12 is a non-combatant's testimony after he gives up, SX-N2. If TD-1 changes, swap only these lines, the flyleaf and the record's mentions of "the Quartermaster".)
 
 ### TSH-D11: the horn (`S11_choose`)
 
@@ -913,7 +913,7 @@ TSH-D11.31 KALDREN: "Keep them out of the open on the way down. Wrapped, in a sl
 ### TSH-D12: the Crown (`S12_crown`)
 
 ```
-TSH-D12.01 IVEN: (on the summit top; blows Gather: three short, for the wardens) "They'll be up by dark. For him, and the crew." {if surrendered} "And the sledge."
+TSH-D12.01 IVEN: (on the summit top; blows Gather: three short, for the wardens) "They'll be up by dark. For him." {if surrendered} "And the sledge."
 TSH-D12.02 IVEN: (turning the sketch over; drawing on the back) "You can see it all from here. Look."
 TSH-D12.03 IVEN: "That ridge, down to the Stormwake road. That line above the old watchfires. That rim, to Carrick's ladders."
 TSH-D12.04 IVEN: "Nobody walks them but me. You can, now. Mind the wind."
@@ -951,7 +951,7 @@ TSH-D12.30 IVEN: "Down's easier. Mostly."
 |---|---|
 | Line length | Every conversation returns options or control within six NPC lines. Barks are one or two short sentences. |
 | Canon anchors | **Dorn:** "Wind trick." never smiling; "I've never been down" (TES-D2.20), "I wasn't there" (TES-D6.10, TES-D8.10); neither carries nor keeps the roster (a Ridge Warden runner carries it in `kept`, TES-D9.32). **Maera:** decides (TES-D9.01); "both honest"; does not reconcile; "The stones know how to listen" as custom, not testimony. **Torvek:** one sentence, no war claim. **Kaldren:** no origins (TSH-D5.05 "a guess"; TSH-D5.10); Summit account limited to "Stresses settled. That's all I can tell you." (TSH-D9.30); canon line in TSH-D2.20. **Iven:** reports first; "Mountains get tired. Not like this." **Brynjar:** barks only; no membership, no casualty. **Ressa:** "I keep the horns anyway." |
-| Evidence rule | No line says who the echo-figures are. The miner belief ("The dead are up") and crew belief ("the guardian's angry") are answered and never confirmed. Ingrith is named only by Eyvind after yielding and on the record's flyleaf. |
+| Evidence rule | No line says who the echo-figures are. The miner belief ("The dead are up") and crew belief ("the guardian's angry") are answered and never confirmed. Ingrith is named only by Eyvind (a non-combatant) after he gives up and on the record's flyleaf. |
 | Withheld | The roster's duty margin has rotted (no hornbearer name). Maera's leaf shows seven names and "continued"; cairn row runs past the path; no total anywhere. |
 | Dates | Trial record: 3, 9, 14, 18, 21, 24, 26, 27 of frost. Iven's no-storm hums: 3, 9, 18, 21, 24, 27; 14th = rota gap; 26th = listed with storms. Hours match (an hour past dusk; second hour; third hour; second to fourth). |
 | Roster vs. list | Roster: "4th hr, late. Split." List: "last seen... at the fifth hour". Shown side by side; not reconciled. |
@@ -961,3 +961,4 @@ TSH-D12.30 IVEN: "Down's easier. Mostly."
 | Magic | Nobody calls anything magic. "Wind trick", "the hall's ringing", "a quiet room", "only air". |
 | No route, no Remnant | No line says how grain or plates moved beyond "hauled up the stair". No Remnant presence. Emberholt appears only as the splinter's fear ("Emberholt will"; "let the forges hear"), never caricatured. |
 | Independent review (2026-11-03) | `TES-D9.32` runner carries the kept roster, new `TES-D9.33`; slip and list name Sig Brede; frost-count coexistence note; `[SPLINTER]` on `TSH-B3.5`, `TSH-D9` option 3, `TSH-D12` option 1, `TSH-D12.10`. |
+| Director rulings reconciliation (2026-11-03) | CDR-1: crew yield barks retriggered as engage/pulse barks (`TSH-B3.4`, `TSH-B3.5`, `TSH-B6.8`, `TSH-B6.9`; ids kept); Iven's tying direction (`TSH-B3.6`) and "the crew" in `TSH-D12.01` removed; `TSH-D6.12` no longer addresses a yielded crewman. Eyvind (SX-N2) unchanged. |

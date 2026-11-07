@@ -120,7 +120,7 @@ Crestbridge's grain factor, Corvin Tath, keeps two tallies, and both say the sam
 | Combat share | ~35% (the dungeon) |
 | Dialogue share | ~15% |
 | Exploration, traps, counting, choice | ~50% |
-| Skills touched | Melee (required); Woodcutting (optional: cut through a root-choked side tunnel) |
+| Skills touched | Melee or Ranged (combat required; Lowmark is melee-led); Woodcutting (optional: cut through a root-choked side tunnel) |
 | Choices | Where the remaining relief grain goes (3 options) |
 | Unlocks | `LM_GRAIN_ROUTE`; Corvin's trust (granary tally room access); the Hill Depot as a revisitable dungeon; MQ3 |
 
@@ -348,7 +348,7 @@ The far bank is hungry and the Board's order says "delivered". Corvin has twelve
 | Corvin's trust: tally-room access | Access / knowledge | The tally room's plain rack becomes inspectable and returns current draw counts on later visits (flavour; feeds MQ10). |
 | The Hill Depot | Access | A revisitable low-tier dungeon with goblin respawns and an unlocked river-ledge shortcut to the hill road. |
 | Small payment | Currency | Corvin pays a porter's day for the twelve sacks recovered ("Twelve sacks, twelve parts of a day"). Amount set in economy tuning. |
-| Skill XP | Action XP only | Melee and optional Woodcutting from actions. No lump quest XP. |
+| Skill XP | Action XP only | Melee (or Ranged, if used) and optional Woodcutting from actions. No lump quest XP. |
 | Side-quest unlocks | Story | *Bark for the Pits*, *Honest Steel*, *Night Bridge*, *Night Ferry*. |
 | MQ3 lead-in | Story | A Watcher's lantern-tag is hung on Corvin's tally-room door for the player (§B6 Beat 0). |
 
@@ -457,7 +457,7 @@ Wraithwatcher Ansel Corrie has three places on his patrol book he cannot cover p
 | Combat share | ~30% (first drift fight; hounds; the walk-out) |
 | Dialogue share | ~20% |
 | Exploration, repair, rescue, synthesis | ~50% |
-| Skills | Melee (required); Woodcutting (required at the orchard: entry-level driftroot); Hunting (optional: track the hound runner to the den) |
+| Skills | Melee or Ranged (combat required; melee-led); Woodcutting (required at the orchard: entry-level driftroot); Hunting (optional: track the hound runner to the den) |
 | Choices | Order of sites (free); how to bring Orrin out (smoke hops, with an optional rope assist from Lessa) |
 | Unlocks | First quieted drift site; Ansel's patrol book (readable at the Lantern Post); MQ4 |
 
@@ -643,7 +643,7 @@ HW's choices are **how** rather than **what**: the order of sites (changes who t
 | First quieted drift site | World change | Orchard pool no longer spawns drift. Bryn's trees recover over the following visits (prop stages). |
 | Watcher's welcome | Access | The Lantern Post becomes a rest point: brazier for Cooking, a bed for respawn binding if the respawn system supports it. |
 | Small payment | Currency | Bryn pays in fruit (food item, existing type) or a coin. Ansel pays a Watcher's contract day "for three nights' work" (economy tuning). |
-| Skill XP | Action only | Melee, Woodcutting, optional Hunting. |
+| Skill XP | Action only | Melee (or Ranged, if used), Woodcutting, optional Hunting. |
 | Side-quest unlocks | Story | *Unreplanted*, *The Uphill Canal*, *Fen Watch*, *Old Lantern*, *The Candle Rule*, *A Verse Kept Back*. |
 
 ## B11. Failure, recovery, persistence, co-op
@@ -677,7 +677,7 @@ HW's choices are **how** rather than **what**: the order of sites (changes who t
 |---|---|---|---|---|---|---|
 | **Why three places go wrong together** | Each Hollow Lock flush drags heavy water out of the fen and pushes a pulse down the Vale (bible §2.3). | Curses; bad dikes; hounds; drink. | Same nights, same fill, every fifth night, fen side first, including the Whisperflow night. | The drowned walk on a schedule; the Field-Mage does it; the goblins. | That it is a machine, and whose. | MQ4. |
 | **What drift is** | Place-bound imprints that disperse and re-form while conditions remain (bible §2.5). | Hauntings; the drowned. | It gets back up; it stops when the water moves; it won't enter smoke. | Souls; killable monsters; an angry river. | Why grief collects in water at all. | MQ8 (Sedge's demonstration). |
-| **The dry footprints** | Orrin walked out and back on an earlier wrong night in a trance; the dryness is bounded resonance at a grief-heavy bend. | — | Two lines of his prints; one wet, one dry. | Something walked back in his boots. | Everything else. | Not revealed in v1 (it stays strange). |
+| **The dry footprints** | Orrin walked out and back on an earlier wrong night in a trance; the dryness is bounded resonance at a grief-heavy bend. | — | Two lines of his prints; one wet, one dry. | Something walked back in his boots. | Everything else. | Not revealed in Lowmark content (it stays strange). |
 
 ## B14. Open decisions
 
@@ -715,7 +715,7 @@ On the next fifth night the player sits on Bramblelock Weir, where everything of
 | Candidate | Verdict |
 |---|---|
 | **A. Ambush the barge at the weir.** | Rejected. It spends the Lock, and the brief requires the pursuit and the two-part assault. |
-| **B. A stealth infiltration of the Lock.** | Rejected. No stealth system in v1 (Phase 1.3). |
+| **B. A stealth infiltration of the Lock.** | Rejected. No stealth system (Phase 1.3). |
 | **C. Watch → flush → unfailable pursuit → two-part assault → hold the crank → choice → dawn turn** (selected; the bible brief). | **Selected.** A single night with one escalating rhythm: stillness, surge, momentum, violence, labour, decision, quiet. |
 
 ## C3. Canon grounding
@@ -742,7 +742,7 @@ On the next fifth night the player sits on Bramblelock Weir, where everything of
 | Combat share | ~40% |
 | Dialogue share | ~10% |
 | Watch, pursuit, labour, choice | ~50% |
-| Skills | Melee (required) |
+| Skills | Melee or Ranged (combat required; melee-led) |
 | Choices | Smash the winding gear or chain it (2 options) |
 | Unlocks | `LM_LOCK_STATE`; flushes stopped through the Lock; Bramblelock pool quieted; *Under the Lamb*, *The Whispering Door*, *What the Flood Carried*; MQ5 |
 
@@ -809,7 +809,7 @@ At the Cut mouth the player sees the barge scrape over the sill and turn into th
 
 ### Beat 4 — The Lookouts (`S04_lookouts`)
 **Objective:** *Get past the lookouts.*
-Two crew lookouts on the Cut-mouth towpath (**NF-E1**), a pole-man and a cutter: the first human enemies in Lowmark. Barks `NF-B4`. Defeated crew **yield** (they go down and stay down; Phase 1.3: no fleeing). They are tied up off the path (no player interaction needed; a crew rope prop).
+Two crew lookouts on the Cut-mouth towpath (**NF-E1**), a pole-man and a cutter: the first human enemies in Lowmark. Barks `NF-B4`. They fight until defeated at 0 HP (CDR-1; Phase 1.3: no fleeing) and take the ordinary defeat presentation.
 **Verbs:** fight.
 
 ### Beat 5 — Up the Cut (`S05_straight`)
@@ -823,7 +823,7 @@ Assault part 1 (**NF-E2**). The yard is dark, and the crew see by hooded lantern
 
 ### Beat 7 — The Winding Floor (`S07_winding_floor`)
 **Objective:** *Stop the flush.*
-Assault part 2 (**NF-E3**). The stair up from the yard opens onto the winding floor. Across the lock chamber, on the far gallery, a man in a good coat is standing with one hand on the lock-chain: **Gideon Sallow** `[ANTAGONIST]`. He touches the chain before every flush. He is calling the next one (`NF-D5`). He sees the player, and he is delighted rather than afraid ("Look at that! We've got a visitor!"). He sends his crew boss **Rusk** and two crew at the player. Sallow himself is out of reach across the chamber; the gallery is not connected to this side except by the lock gates. The fight is close and loud on the platform around the gear.
+Assault part 2 (**NF-E3**). The stair up from the yard opens onto the winding floor. Across the lock chamber, on the far gallery, a man in a good coat is standing with one hand on the lock-chain: **Gideon Sallow** `[ANTAGONIST]`. He touches the chain before every flush. He is calling the next one (`NF-D5`). He sees the player, and he is delighted rather than afraid ("Look at that! We've got a visitor!"). He sends his crew boss **Rusk** and two crew at the player. Rusk and his crew fight to 0 HP (CDR-1). Sallow himself is out of reach across the chamber; the gallery is not connected to this side except by the lock gates. The fight is close and loud on the platform around the gear.
 After the fight the player may explore the floor before closing it:
 - **The greased gear** (inspect, required): *"Greased this week. The old grease under it is the war's."*
 - **The post store** (inspect, required, D-2): the yellow posts with pre-cut notches and the chalk crossings board.
@@ -843,16 +843,16 @@ The crank is a **channelled interaction in three segments** (each 5 s). Damage i
 On the third segment the gates meet with a sound felt in the floor. **The Cut's roar stops.** The silence that follows is ordinary: frogs, wind, the barge creaking. The drift in the chamber sinks into water that is no longer moving and does not re-form. The player has felt the difference between the flush's silence and an ordinary one.
 
 ### Beat 9 — The Name (`S09_rusk`)
-**Objective:** *Talk to the crewman.*
-Rusk has yielded and is sitting against the gear with his hands on his knees (`NF-D7`). He is frightened of the fen, not of the player. He names the man in the coat: Gideon Sallow, the factor, the one who pays. He doesn't know who Sallow answers to ("a name on a bill") and says so. Optional: ask where the crew gets paid. "At the Lamb, in Brookhollow. Back room." This sets `NF_LEAD_LAMB` (UL lead-in).
-This is **testimony**, given in conversation after the fight. It is not a creature drop.
+**Objective:** *Look over the crew boss's slate.*
+*(Reconciled to CDR-1, pattern T-2 + T-1: Rusk fights to 0 HP; nobody talks with a defeated crewman.)* Rusk's slate hangs on the gear rail (inspect, required, `NF-D7`): nights chalked in fives since harvest, the crew's names with RUSK at the top, and a pay column marked only with a scratched lamb. It carries **no** name for the man in the coat (D-1: Sallow's name stays on nothing physical). The name comes at dawn, from an ally: when Maelin sees the posts carried out she asks who was on the gallery, and from the player's "a man in a good coat, touching the chain" she names him: **Gideon Sallow, the factor, the one who pays the night crews** (`NF-D9.05`, always heard). She does not know who Sallow answers to and says so. Optional: ask where his crews get paid. "The Lamb, in Brookhollow. Back room." This sets `NF_LEAD_LAMB` (UL lead-in).
+This is **testimony** from an ally who knows the river crews (T-1). It is not a creature drop.
 
 ### Beat 10 — Smash or Chain (`S10_choose`)
 **Objective:** *Decide what to do with the winding gear.*
 A physical choice at the gear (§C9.3):
 - **Smash it:** pick up the crew's maul (prop) and break the pawl and the drive teeth (3 interactions, loud).
 - **Chain it:** take the crew's own chain from the yard (carry state), wrap the crank and the drum, and drive the wedge (2 interactions).
-Rusk has a line for either (`NF-D8`).
+The interaction completions set `LM_LOCK_STATE` (`NF-D8`; Rusk's former barks removed, CDR-1).
 
 ### Beat 11 — Dawn (`S11_dawn`)
 **Objective:** *Watch for the dawn.*
@@ -860,7 +860,8 @@ The player climbs to the **roof walk** (L7). The `S11` step plays dawn whenever 
 - Ansel reports, in his book voice, that Bramblelock lay flat at dawn for the first time in a month, and that the fog over Stillwater is **thicker than he has ever seen it**: "the last one stirred it."
 - From the roof walk the player can see it for themselves (§C8.3).
 - Maelin looks at the posts and says what she thinks of people who lie with posts.
-- The keepers take Rusk and impound the posts (and, if chained, the gear).
+- Maelin names the man in the coat (`NF-D9.05`; Beat 9).
+- The keepers impound the posts (and, if chained, the gear).
 
 The quest completes on `NF-D9` end. Act I is over.
 
@@ -878,8 +879,9 @@ Tuned for **Milestone 1 dependable field equipment** (bible §6 level framing).
 **Gideon Sallow** appears only across the chamber in MQ4. **He is not fought here.** His miniboss fight belongs to MQ10 (bible §10). He has no combat definition in this package.
 
 **Rules**
-- **Combat never reveals evidence.** Posts, chalk board, bill and gear are found by inspection of the place. Sallow's name is Rusk's testimony after he yields.
-- Defeated crew **yield** and are tied (prop). Nobody is executed. Human enemies are knocked down, not killed, in presentation (Lowmark tone). The Gameplay Designer may choose the same death-state as other enemies mechanically, with yield presentation.
+- **Combat never reveals evidence.** Posts, chalk board, bill, slate and gear are found by inspection of the place. Sallow's name is Maelin's testimony at dawn (T-1).
+- **Defeat (CDR-1):** every crewman, Rusk included, fights until defeated at 0 HP and takes the ordinary defeat presentation (falls, fades after the standard corpse time, ordinary loot). No yield, no tied props, no dialogue with a defeated crewman. No gore (Lowmark tone).
+- **Melee or ranged:** every encounter here accepts ranged; none requires it (CDR-2). Sallow on the far gallery is an unreachable actor, not a target.
 - **Death:** respawn at the Cut mouth (T3) once reached, otherwise at the weir. Completed assault groups stay defeated. Crank segments persist. Quest item persists.
 - **Co-op:** shared crew and drift. The flush and barge are presented per player from their own `S02` (fallback: shared event if both are on `S01` at the bench; partners on other steps see an empty night). Each partner closes their own Lock in presentation; fallback: shared Lock state, with all present credited.
 
@@ -932,7 +934,7 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 | `S06_yard` | Get into the Hollow Lock. | NF-E2 groups A and B defeated | Yes | `pull_hoods` optional |
 | `S07_winding_floor` | Stop the flush. | NF-E3 defeated + inspect gear + inspect post store + `NF_bill_of_lading` acquired | Yes | Optional inspects: counterweight, slack gate, chalk board (part of post store) |
 | `S08_crank` | Wind the Lock shut. | 3 × `wind_crank` segments complete | Yes | NF-E4 waves; Sallow escape actor on segment 1 start |
-| `S09_rusk` | Talk to the crewman. | `NF-D7` end | Yes | `NF_LEAD_LAMB` optional |
+| `S09_rusk` | Look over the crew boss's slate. | Inspect `NF-D7` (Rusk's slate) | Yes | Step id kept (CDR-1 reconciliation). The name is heard at dawn (`NF-D9.05`); `NF_LEAD_LAMB` optional there |
 | `S10_choose` | Decide what to do with the winding gear. | Smash interactions × 3 **or** chain interactions × 2 | Yes | Sets `LM_LOCK_STATE` |
 | `S11_dawn` | Watch for the dawn. | Enter roof-walk volume + `NF-D9` end | Yes | Bramblelock pool → quieted; quest → Completed |
 
@@ -943,7 +945,7 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 | `NF_LEAD_CONVOY` | Convoy-stone inspect (required in `S00`; always set) | `NF-D9.20` option | **MQ11** (Fourteenth Lot line; kept as a flag for variant text, never as a gate) |
 | `NF_HOODS_PULLED` | Yard interaction | Barks | — |
 | `NF_POSTS_SEEN` | Post-store inspect (required) | `NF-D9` | **MQ10** evidence chip (posts impounded by keepers at dawn in both outcomes) |
-| `NF_LEAD_LAMB` | `NF-D7.20` | — | ***Under the Lamb*** opening line |
+| `NF_LEAD_LAMB` | `NF-D9.50` (Maelin, optional; was `NF-D7.20`) | — | ***Under the Lamb*** opening line |
 | `LM_LOCK_STATE` | S10 | `NF-D9` variants | MQ6 crew-route line; MQ10 chip |
 
 ### C9.3 Choice: smash or chain
@@ -962,7 +964,7 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 | Flush stopped through the Lock | World change | Bramblelock pool quieted. The Hollow Lock becomes a revisitable site (keeper-watched after dawn; no hostile crew). |
 | Relief Cut towpath | Access | A traversal route between the weir and the Lock. |
 | Small payment | Currency | Maelin's crew share for "a night on the bank" or a keepers' finder's due (economy tuning). |
-| Skill XP | Action only | Melee. |
+| Skill XP | Action only | Melee (or Ranged, if used). |
 | Side-quest unlocks | Story | *Under the Lamb*, *The Whispering Door*, *What the Flood Carried*. |
 | MQ5 | Story | Act II begins (Ashenstead). |
 
@@ -989,7 +991,7 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 | **Trail-clue volumes** | Systems | Enter-volume events that re-pin objective text. |
 | **Channelled segments with persistence** (crank) | Systems | Three-segment interaction; completed segments persisted. |
 | **Unreachable actor** (Sallow) | Systems / NPC | Scripted path to skiff; no combat definition in MQ4. |
-| **Yield presentation** for human enemies | Gameplay / animation | Defeated humans kneel and are tied (prop swap). |
+| ~~Yield presentation for human enemies~~ | — | **Removed (CDR-1).** Humans use the ordinary defeat presentation. No tied-prop swap, no hostile→neutral swap. |
 | Creatures | Schema / Gameplay | Smuggler pole-man, cutter, crew boss (Rusk); lantern-drift. |
 | Quest item `NF_bill_of_lading` | Schema | Non-droppable document with inspect text. |
 | **Act II seed** | Act II author | The slack gate (L6) is the first visible sign of the backwater (Act II §A2.2). It is not a crew route: after MQ4 the crew's pulses go only through the Drowsebank mill race (MQ6). |
@@ -999,15 +1001,15 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 | Mystery | Author truth | Public belief | Player-observable evidence | Plausible wrong reading | Withheld | Reveal owner |
 |---|---|---|---|---|---|---|
 | **Who moved the Whisperflow post** (D-2) | Sallow's Lock crew, on Marrick's scheme, to hide a scheduled flush. | Unknown. | Pre-notched posts, the chalk crossings board, the flush timing. | Wynn; the keepers; the river. | Who stood at Whisperflow that night. | MQ10 (Rhosyn, Sallow). |
-| **Who Sallow answers to** | Edda Marrick `[ANTAGONIST]`. | — | A Board seal on the bill; "a name on a bill" (Rusk). | The whole Board; Hesketh; Aldric. | The name. | MQ10. |
+| **Who Sallow answers to** | Edda Marrick `[ANTAGONIST]`. | — | A Board seal on the bill; "Ask the bill, not me" (Maelin, `NF-D9.06`). | The whole Board; Hesketh; Aldric. | The name. | MQ10. |
 | **Why the fen got worse** | The last flush dragged heavy water out of the deep pools; with the Lock shut, the pressure has nowhere to go but the old works, and it starts leaking out as the backwater (bible §2.3; Act II §A2.2). | The Watchers' bad luck; the dead are angry. | Fog wall at dawn; Ansel's book; the slack gate's wet, bulging silt. | Closing the Lock was a mistake; the Lock was holding something in. | The Braids; the Fourteenth Lot. | MQ8, MQ9, MQ11. |
 | **The missing convoy stone** | The Fourteenth Lot (bible §2.1). | Nothing. | A blank stone between thirteen and fifteen (required inspect); Maelin: "Fourteen's missing. Always has been." | A broken stone replaced. | That a convoy sank. | MQ9 (flow-table wreck scar), MQ11 (Lessa, before the boss). |
 
 ## C14. Open decisions
 
-1. **D-2** is answered here as a proposal (posts and chalk board). If the Director chooses otherwise, edit only the post-store inspect texts and `NF-D7.10`.
-2. **D-1** — Sallow's name appears in `NF-D5`, `NF-D6`, `NF-D7` (tagged) and on nothing physical. The bill carries the Board seal (swap layer).
-3. **Bill of lading buyer.** *Resolved 2026-11-02 (FT-03 approved):* the bill reads "for the account of the Whinstone Store". In v1 it is only a name; nothing in Lowmark says where the Whinstone Store is. Thornfell's TF-M2 reveals it as a Thornfell store-house used by an independent Blood-Oath splinter. No route for the grain is stated anywhere (ruling: do not invent unverified trade routes).
+1. **D-2** is answered here as a proposal (posts and chalk board). If the Director chooses otherwise, edit only the post-store inspect texts and `NF-D9.05`.
+2. **D-1** — Sallow's name appears in `NF-D5`, `NF-D6`, `NF-D9.05`–`.06` (tagged) and on nothing physical. The bill carries the Board seal (swap layer).
+3. **Bill of lading buyer.** *Resolved 2026-11-02 (FT-03 approved):* the bill reads "for the account of the Whinstone Store". In Lowmark content it is only a name; nothing in Lowmark says where the Whinstone Store is. Thornfell's TF-M2 reveals it as a Thornfell store-house used by an independent Blood-Oath splinter. No route for the grain is stated anywhere (ruling: do not invent unverified trade routes).
 4. **Map and hydrology** of the Cut route (MAP VERIFICATION REQUIRED, §C5.3).
 
 ## C15. Internal review log
@@ -1016,13 +1018,14 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 |---|---|
 | The pursuit first had a fail timer. | Removed. The barge waits at the sill, and trail clues re-pin the objective. Lost and re-found only. |
 | Sallow was fought on the winding floor. | Removed. He is MQ10's miniboss; here he is seen across an unbridgeable chamber, and his escape is scripted. |
-| Rusk naming Sallow risked being "combat reveals evidence". | Rusk yields, then answers questions. It is testimony, and the bill and posts stand without it. |
+| Rusk naming Sallow risked being "combat reveals evidence". | Rusk yields, then answers questions. It is testimony, and the bill and posts stand without it. *(Superseded 2026-11-03 by CDR-1: see the reconciliation row below.)* |
 | The flush risked reading as a spell. | No glow, no music. It is the water, a thump and a barge. The weir going silent carries it. |
 | The smash/chain choice originally made "smash" the clearly better option. | Chain now gives MQ10's stronger mechanism chip; smash ends Lock flushes beyond doubt. Both converge on MQ6 via the mill race. |
 | Bramblelock pool and Stillwater both changed with no explanation. | Ansel reports both, as observations. Nothing explains them. |
 | Maelin might have joined the pursuit on the water. | Canon: she refuses night passage on specific stretches. She stays and arrives at dawn. |
 | Act item budget. | `NF_bill_of_lading` is item 2 of 2. The posts are carry-state flavour; the evidence is a flag and an impound. |
 | Agility triggers not yet built. | Each has a walkable fallback (footbridge, dike top). |
+| Director rulings reconciliation (2026-11-03, CDR-1/2/3). | Lookouts, yard crew, Rusk and crank waves fight to 0 HP with the ordinary defeat presentation; yield, tied props and the yield-presentation integration need removed. Rusk's post-fight testimony re-sourced: `S09_rusk` (id kept) is now an inspect of Rusk's slate (T-2, no name on it), and Maelin names Sallow at dawn (`NF-D9.05`, T-1), with the Lamb lead moved to her (`NF-D9.50`). Rusk's NF-D6.04/NF-D7/NF-D8 lines removed; smash/chain flag writes moved to the interaction completions. Ranged accepted in every encounter, never required. "v1" release wording changed to Lowmark-content wording. Quest structure, step ids and flags unchanged. |
 | Independent review pass. | The slack gate is no longer a crew route: its silt bulges wet from behind, the first visible sign of the backwater; after MQ4 the crew uses only the mill race. The chained Lock is watched by keepers and its chain is never cut. The convoy stones are a required inspect with Maelin's line, so every player meets the Fourteenth Lot's blank stone. The bill reads sixty-eight measures. |
 
 ---
@@ -1032,7 +1035,7 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 | Rule | Check |
 |---|---|
 | Canon anchors | Corvin: numbers, duplicate tallies; the ledger regret is reserved for MQ10. Aldric: polite, knows only the wartime name of the Cut from old compacts. Lessa: "done" path, no explanation. Maelin: no night passage. None receives an invented age, service, kinship, travel, meeting or record custody. Tovin absent. |
-| Evidence rule | Slip on a floor; heaps counted; nights from chalk, notches, tally, book; posts, board and bill inspected; Sallow's name by testimony. No drift, stone or flush identifies anyone. |
+| Evidence rule | Slip on a floor; heaps counted; nights from chalk, notches, tally, book; posts, board, bill and slate inspected; Sallow's name by Maelin's testimony at dawn. No drift, stone or flush identifies anyone. |
 | No fail, no soft-lock | Every required proof is on the critical path and persistent. No quest can fail. |
 | No cutscenes | Glimpse, flush, escape and dawn are world actions under player camera. |
 | Solo / co-op | Solo-clearable; per-player state with fallbacks. |
@@ -1040,4 +1043,4 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 | Quest items | 2 (`SM_requisition`, `NF_bill_of_lading`). |
 | Region flags | Only `LM_TL_EVIDENCE` (read), `LM_GRAIN_ROUTE`, `LM_LOCK_STATE` (set). |
 | Antagonist tagging | Every node naming Marrick or Sallow is `[ANTAGONIST]` in the dialogue file. |
-| Skills | Melee, Woodcutting, Hunting only. No Ranged, Fletching or Mining. |
+| Skills | Taught here: Melee, Woodcutting, Hunting. No Ranged, Fletching or Mining teaching in Act I (Lowmark's optional bow beat is in *The Wrong Culprit*). Every Act I encounter accepts ranged; none requires it (CDR-2). |

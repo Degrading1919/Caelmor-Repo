@@ -81,7 +81,7 @@ The study verified that the public `parsed-osrs` extraction holds quest requirem
 | Story progress unlocks access and repeatable encounters. | **Adopted.** Routes, regions, and post-story climax sites. |
 | Diary-style regional completion layers. | **Adapted** as a proposed regional deeds layer (Gameplay Designer). |
 | Recurring mentor characters travelling across regions. | **Adapted.** Recurrence travels through records, trade, and route workers, and the player; anchors do not gain travel the character ledger forbids. |
-| Completion badges revoked when new quests ship; autocompleted story content; placeholder finales; hidden partial gates. | **Rejected.** Badges are per region; no autocomplete; each regional arc is planned to completion before release; every gate is a visible milestone. |
+| Completion badges revoked when new quests ship; autocompleted story content; placeholder finales; hidden partial gates. | **Rejected.** Badges are per region; no autocomplete; each regional arc is planned and built to completion before the first public beta, which contains the complete game (CDR-3); every gate is a visible milestone. |
 | Fail states and abandonment. | **Rejected** by the three-state rule. |
 
 ---
@@ -96,9 +96,9 @@ Mythic Age → Quiet Withdrawal → Rediscovery (Riverwardens, Echohewn, Memoryw
 
 Lowmark v1 (12 main quests) → Thornfell (5) → Lowmark return (1; optional for regional play, required before the convergence) → Mire (5) → Emberholt (6) → convergence (4) → Long Horizon. Optional series run alongside. Players meet history out of chronological order by design: they learn the war's end (each region's stop) before they learn the prewar Concord, and Lowmark's own wartime shame last among the regions.
 
-### 5.3 Future production and release (only Lowmark is approved for release)
+### 5.3 Production order and release strategy (CDR-3, ruled 2026-11-03)
 
-v1 Lowmark → v1.5 Thornfell (the Phase 1.3 direction) → Mire → Emberholt (D-R1 ruled: preferred **production** order, not a player order or release schedule) → Lowmark return as an update alongside Thornfell or later → convergence once all four regions exist → Long Horizon. Only Lowmark is approved for release; Phase 1.3 names Thornfell as the v1.5 direction.
+Production milestones (internal, D-R1): Lowmark → Thornfell → Mire → Emberholt, with the Lowmark return authored once Thornfell exists, then the convergence once all four regions exist, then the Long Horizon. These are **internal production milestones, not release boundaries.** Caelmor is developed and playtested privately until the complete planned game is implemented; the **first public beta contains the complete planned game** and is used for feedback, balance and refinement. There is no Lowmark-only launch and no separate regional release. The older Phase 1.3 "v1 / v1.5" release framing is superseded and flagged for revision (`Caelmor_Director_Rulings_Combat_Ranged_Release.md` §5). "Lowmark v1" survives only as a production label for the first milestone's files.
 
 ---
 

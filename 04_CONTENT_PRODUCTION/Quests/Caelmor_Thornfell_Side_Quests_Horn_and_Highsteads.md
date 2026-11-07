@@ -1,6 +1,6 @@
 # Thornfell Side Quests — Horn and Silence; Clans of the High Steads
 
-**Status (2026-11-02):** Authored production content for Creative Director review (Thornfell bible §12, batch 3). Six side-quest packages in two interconnected questlines (bible §7.1): ***Horn and Silence*** (**TTH** *The Third Horn*, **TWG** *Witness at the Gate*, **TNK** *The Notes We Keep*) and ***Clans of the High Steads*** (**TNR** *Nettlehook Rope*, **TSM** *A Place at Smoke Week*, **TRR** *Rope-Raising Day*). Everything marked **[NEW]** is authored here and is not canon until the Director promotes it. **[CANON]** items come from the reconciled `LORE/` files. **[PROPOSAL — DIRECTOR]** marks a consequential choice the content is built on. **[APPROVED — id]** cites an architecture ruling. No schema, JSON or C# is created here; nothing here authorizes release scope (Thornfell is Phase 1.3 v1.5 direction).
+**Status (2026-11-02):** Authored production content for Creative Director review (Thornfell bible §12, batch 3). Six side-quest packages in two interconnected questlines (bible §7.1): ***Horn and Silence*** (**TTH** *The Third Horn*, **TWG** *Witness at the Gate*, **TNK** *The Notes We Keep*) and ***Clans of the High Steads*** (**TNR** *Nettlehook Rope*, **TSM** *A Place at Smoke Week*, **TRR** *Rope-Raising Day*). Everything marked **[NEW]** is authored here and is not canon until the Director promotes it. **[CANON]** items come from the reconciled `LORE/` files. **[PROPOSAL — DIRECTOR]** marks a consequential choice the content is built on. **[APPROVED — id]** cites an architecture ruling. No schema, JSON or C# is created here; nothing here sets release scope (Thornfell is an internal production milestone; the first public beta contains the complete game, CDR-3). **Reconciled 2026-11-03** to the binding `Caelmor_Director_Rulings_Combat_Ranged_Release.md` (CDR-1 defeat at 0 HP, CDR-2 ranged included, CDR-3 milestone wording).
 
 **Controlled by:** `Caelmor_Thornfell_Narrative_Production_Bible.md` (author truth §2, cast and voice §5, side-quest slate §7.1, revelation map §8, flags §9, encounter families §10, conventions §11). **Format:** the Lowmark side-quest package format (`Caelmor_Lowmark_Side_Quests_Settlements_and_Combat.md`), extended with the Lowmark act-package sections the Thornfell bible §11.1 requires (selection record, canon grounding, contribution-contract fields, strange-moment presentation spec, mystery ledger, open decisions). **Dialogue is inline** in each package (§x.18), in the Lowmark node format, with node ids `<CODE>-D<n>.<nn>`, barks `<CODE>-B<n>.<nn>` and encounters `<CODE>-E<n>`.
 
@@ -117,11 +117,11 @@ The two series do not gate each other. A player can finish either without touchi
 - **No quest can fail.** Inactive / Active / Completed only. Death respawns at the quest's named safe point with step and flags intact. Logout restores the last persisted step; channels in progress are discarded, completed channel segments persist, and a dropped carry-state object returns to its source. Walking away keeps the quest Active at its step with the resume hook named in each package.
 - **Wind windows** (bible §9.5): the fluted-face whistle "a fifth before the gust" is the tell; sheltering behind chalk-marked faces is always safe. A gust that catches the player in the open knocks them down (stagger, small damage, never off a ledge).
 - **Agility triggers** are optional shortcuts; each has a walkable fallback named in its place table (click-to-move).
-- **Human enemies yield** (TD-7): at 0 HP they kneel and are tied (prop); presented as beaten, not killed.
+- **Defeat** (CDR-1; TD-7 superseded): every enemy, human or animal, fights until defeated at 0 HP and uses the ordinary defeat presentation. No yields, tied props, break-off or low-health retreat. None of these six packages has a scripted surrender.
 - **Evidence rule.** Every fact is carried by a record, an object, a place or a person. The echo that adds a tail (TTH), the call that runs the towers (TWG), the cable's note (TNR), the leaning smoke (TSM), the chord (TRR) and the unanswered call (TNK) **prove nothing and identify nobody**. Combat drops nothing that advances an investigation.
 - **Season** (`TH_SEASON`): TTH, TWG and TNR can be played in autumn or snow (both presentations noted where they differ). TSM and TRR are always in snow (TSM needs TF-M2). TNK is always in snow.
 - **Co-op:** independent instances; shared world creatures give step credit to every participant on that step; quest-state props and NPC placement are per player (Lowmark per-player prop pattern; fallback: the host's state drives props, each player's own state drives dialogue).
-- **Skills:** Hunting (TSM), Smithing (TNR, TNK), Woodcutting (TSM optional), Melee (all combat), Ranged (optional, all combat). Every skill step has a crew alternative. Exact levels belong to the Gameplay Designer. Ridge iron, stormwood and goat leather remain unapproved item concepts (TD-13): no step consumes or rewards them as named items.
+- **Skills:** Hunting (TSM), Smithing (TNR, TNK), Woodcutting (TSM optional), Melee and Ranged (all combat; Ranged is a first-class option, never required, CDR-2). Every skill step has a crew alternative. Exact levels belong to the Gameplay Designer. Ridge iron, stormwood and goat leather remain unapproved item concepts (TD-13): no step consumes or rewards them as named items.
 - **Splinter tagging:** every node naming Eyvind Stall, Ingrith Scarrow or Bersi Coldbrook is tagged `[SPLINTER]` (TNK names Eyvind throughout; TWG-D6.03 names him once; all tagged).
 - **Lowmark independence:** no quest here reads a Lowmark flag. None is needed.
 
@@ -187,7 +187,7 @@ Dorn Feldhorn's training board at the Passwatch horn post has a row for every ca
 | Unlock | TF-M1 Completed (`TH_CALLS`). Offered by Dorn at the Passwatch horn post (`TTH-D1`), or by inspecting the seventh row of the training board (Dorn then calls the player over). **Richer after TF-M3:** Dorn's lines connect the reply to the horn roster's "No answer" (`TTH-D1.06`, `TTH-D6.04`). |
 | Length | 30–40 minutes |
 | Combat share | ~15% (one wolf encounter) |
-| Skills | Melee (Ranged if S01 allows) (encounter only) |
+| Skills | Melee or Ranged (encounter only) |
 | Choice | Who keeps the restored reply (`TTH_KEEPER`: board / wardens / hosts) |
 | Outputs | `TH_THIRD_HORN` = true; `TTH_KEEPER`; Three Calls "kept bed" rest point |
 | **Anchor** | Thornfell Hornbearers and Ridge Wardens (Dorn, Ressa); Three Calls Shelter's hosts. |
@@ -221,7 +221,7 @@ All placements relative. **MAP VERIFICATION REQUIRED** for every answering stone
 
 **Beat 2 — The Gate Stone (`S02_gate_stone`).** *Objective: Blow Lost from the Gate Stone.* `call-blown` (Lost) in the stone volume. The warden on the gate answers: Answer. Glyphs show. A cadet chalks a tick. This teaches the relay.
 
-**Beat 3 — The Corner Stone and the drill (`S03_corner_drill`).** *Objective: Run the drill at the Corner Stone.* The two drill cadets are "out" (at the chalked stakes). The player blows Lost. Cadet one walks in to the stone. The player must now reply to the next station. The peg prompt offers only what the player knows: **Answer**. The player blows it. Passwatch hears Answer and blows **Rest**. Cadet two, still at the far stake, throws up her hands and walks down: *"Nobody waited."* (`TTH-D2`). The point lands in play: Answer means "heard"; nothing says "someone is still out". **TTH-E1** (the wolves) begins as the Rest call fades: the pack answered the horn. The cadets retreat behind the stone (they are never targets). The step completes when E1 is dispersed and `TTH-D2` ends.
+**Beat 3 — The Corner Stone and the drill (`S03_corner_drill`).** *Objective: Run the drill at the Corner Stone.* The two drill cadets are "out" (at the chalked stakes). The player blows Lost. Cadet one walks in to the stone. The player must now reply to the next station. The peg prompt offers only what the player knows: **Answer**. The player blows it. Passwatch hears Answer and blows **Rest**. Cadet two, still at the far stake, throws up her hands and walks down: *"Nobody waited."* (`TTH-D2`). The point lands in play: Answer means "heard"; nothing says "someone is still out". **TTH-E1** (the wolves) begins as the Rest call fades: the pack answered the horn. The cadets retreat behind the stone (they are never targets). The step completes when E1 is defeated and `TTH-D2` ends.
 
 **Beat 4 — The Narrows Stone (`S04_narrows_stone`).** *Objective: Blow Lost from the Narrows Stone.* `call-blown` (Lost). The warden posted at Three Calls answers with Answer. The player is prompted to acknowledge (blow Answer back, a courtesy Dorn taught). **The strange moment** (TTH.8): the player's Answer returns off the fluted faces with a long rising tail. One inner-voice inspect. If the player blows Answer again, it comes back plain. Nothing explains it. Dorn, if asked later, says "wind tricks" and does not smile (`TTH-D6.02`).
 
@@ -245,7 +245,7 @@ Tuned for Competent identity (TD-12, TF-M1–M2 band).
 |---|---|---|---|---|---|---|
 | **TTH-E1** | 2 × Ridge Wolf runner, 1 × Ridge Wolf howler | Corner Stone shoulder; runners come down the goat track, howler holds a rock 15 m upslope | Runners: Aggressive, flank in a pair (one front, one circles behind the stone). Howler: Defensive at range; howls to call. Leashed to the shoulder. | **Runner lunge:** drops its chest to the snow, ears flat (~0.9 s), then a straight lunge 4 m; side-step beats it. **Howler call:** throws its head back, throat working (~1.5 s), then a **rising** howl; if not interrupted (any hit, or the player blowing **Fall** at it, which startles it), one more runner comes over the ridge (at most once). | The pack "answers" the horn: a light, readable fight that makes the Corner Stone a place, not a menu. The rising howl rhymes with the Lost glyph. | 40–60 s; player at 60–80% HP. Optional Ranged on the howler. |
 
-**Rules.** Cadets stand behind the stone and are never targeted; the drill resumes after E1. Wolves disperse at low health (they turn and run; standard creature death is the Gameplay Designer's call). Nothing they leave advances the quest. If the player arrives at the Corner Stone after dark, the pack is already on the shoulder (same fight, eyes in the dark as the first tell).
+**Rules.** Cadets stand behind the stone and are never targeted; the drill resumes after E1. Wolves fight until defeated at 0 HP (CDR-1). Nothing they leave advances the quest. If the player arrives at the Corner Stone after dark, the pack is already on the shoulder (same fight, eyes in the dark as the first tell).
 
 ### TTH.8 The strange moment: the Narrows return (Beat 4)
 
@@ -268,7 +268,7 @@ Tuned for Competent identity (TD-12, TF-M1–M2 band).
 | `S00_hook` | Ask Dorn about the board. | `TTH-D1` end node, or seventh-row inspect then `TTH-D1` | Yes | Inactive → Active. Practice horn given if the player has none. |
 | `S01_board` | Look at the seventh row. | Inspect `hole` + `rake_board` channel (2 s) on the label | Yes | |
 | `S02_gate_stone` | Blow Lost from the Gate Stone. | `call-blown` (Lost) in Gate Stone volume | Yes | Gate warden answers (scripted call). |
-| `S03_corner_drill` | Run the drill at the Corner Stone. | `call-blown` (Lost) → cadet one arrives → `call-blown` (Answer) → TTH-E1 dispersed → `TTH-D2` end | Yes | Drill state persists per segment. |
+| `S03_corner_drill` | Run the drill at the Corner Stone. | `call-blown` (Lost) → cadet one arrives → `call-blown` (Answer) → TTH-E1 defeated → `TTH-D2` end | Yes | Drill state persists per segment. |
 | `S04_narrows_stone` | Blow Lost from the Narrows Stone. | `call-blown` (Lost) then `call-blown` (Answer) in Narrows volume | Yes | Strange moment fires on the Answer, once per player. |
 | `S05_shelter_map` | Ask the shelter host about the stones. | `TTH-D3` reaches `.10` + 3 map inspects | Yes | Shelter Stone relay auto-completes. |
 | `S06_bed_book` | Read the old bed book. | 3 required bed-book inspects | Yes | Parallel with S05/S07. |
@@ -306,7 +306,7 @@ All three set `TH_THIRD_HORN = true`. None is wrong. None makes the reply both u
 | **A kept bed at Three Calls** | Access | Rest point and respawn option at Three Calls Shelter (Thyra: "Your bed's the fourth. It always is."). |
 | **Practice horn** | — | Not a reward here: the player already holds TF-M1's practice horn. A `TTH-D1` loan (fallback only) returns to Dorn on completion. |
 | Small payment | Currency | Ressa's drill pay for a walker. Economy tuning. |
-| Skill XP | Actions only | Melee (Ranged if S01 allows). |
+| Skill XP | Actions only | Melee or Ranged. |
 | *Witness at the Gate* | Story | Dorn: "There's another. Not on any board." (`TTH-D7.04`) |
 
 ### TTH.13 Failure, recovery, persistence, co-op
@@ -315,7 +315,7 @@ All three set `TH_THIRD_HORN = true`. None is wrong. None makes the reply both u
 |---|---|
 | Wrong call blown at a stone | The warden answers with a confused Gather (dry bark); the prompt repeats. No failure. |
 | Wrong composition on the board | Plays back as composed; hint after three tries; the step cannot be failed. |
-| Death at the Corner Stone | Respawn at the Passwatch gate; drill state kept; TTH-E1 resets if not dispersed. |
+| Death at the Corner Stone | Respawn at the Passwatch gate; drill state kept; TTH-E1 resets if not defeated. |
 | Arrives at the shelter before the stones | Thyra talks and shows the map and book; the stone steps stay open and can be done after. `S04` must still be done before `S08` (the composition needs the full relay seen). |
 | Walking away | Stays Active. Resume: Dorn at the horn post (`TTH-B1.04`). Drill cadets wait at the Corner Stone indefinitely (they have a fire). |
 | Logout mid-drill | Restores to `S03` start; cadets back at their stakes. |
@@ -575,7 +575,7 @@ Ressa Highcrag was taught one call she has never blown on duty: two long, one he
 | Unlock | TTH Completed. Offered by Ressa at Passwatch on the player's next visit after TTH (`TWG-D1`); alternatively, inspecting a groove bank on the Old Watchfire Line (TDS03) with TTH Completed starts the quest at `S01` and Ressa's node becomes the hand-in. |
 | Length | 35–45 minutes |
 | Combat share | ~20% (one bandit fight) |
-| Skills | Melee (Ranged if S01 allows) (encounter); agility triggers (optional) |
+| Skills | Melee or Ranged (encounter); agility triggers (optional) |
 | Choice | What Thornfell does with the call (`TWG_CALL`: recorded / greeting / left) |
 | Outputs | `TWG_CALL`; the Old Watchfire Line traversal route; R16 seed placed |
 | **Anchor** | Ridge Wardens (Ressa) and the Old Watchfire Line as a place. |
@@ -609,7 +609,7 @@ Ressa Highcrag was taught one call she has never blown on duty: two long, one he
 
 **Beat 3 — Decode (`S03_decode`).** *Objective: Find the call the seventh groove was cut for.* At T3 the seventh channel is iced; clear it (3 s channel, `chip_ice`). Then compose on the peg board. **The test is the echo** (bible §1.1): blown into the right groove, a shape that fits returns one clean echo off Tower 4's parapet; a shape that does not fit returns a smeared, doubled echo. The **held** peg is a hold of 5 s on the call interaction with a breath bar; releasing early plays it short (and smears). Hints come from the groove itself (`TWG-I1.07`: two long troughs and a closed cup). On **long, long, held** the strange moment (TWG.7, part 1) fires: the call is taken down the line.
 
-**Beat 4 — The lookout (`S04_lookout`).** *Objective: Get past the fourth tower.* The bandits heard the call run past them. **TWG-E1.** They yield; the yielded lookout talks (`TWG-D2`): they use the Gather groove to call each other; "the seventh one won't blow for us."
+**Beat 4 — The lookout (`S04_lookout`).** *Objective: Get past the fourth tower.* The bandits heard the call run past them. **TWG-E1.** Defeat the crew. (The slinger's groove call in the fight shows the bandits using the Gather groove; no post-fight talk.)
 
 **Beat 5 — The shoulder (`S05_shoulder`).** *Objective: Cross to the sixth tower.* T5 parapet in wind windows. No combat.
 
@@ -627,7 +627,7 @@ Ressa Highcrag was taught one call she has never blown on duty: two long, one he
 |---|---|---|---|---|---|---|
 | **TWG-E1** | 2 × Pass Bandit cutter, 1 × Pass Bandit slinger (lookout) | T4: cutters on the stair landing and floor, slinger on the parapet | Cutters: Aggressive, hold the stair. Slinger: Defensive at range; moves to the Gather channel to call help. | **Cutter:** drops the blade behind the hip (~1.0 s), then a two-cut rush. **Slinger:** the sling whirrs overhead (~1.4 s, a rising whirr: a sound tell), then a stone; strafe beats it. **Groove call:** slinger steps to the parapet and leans to the channel (~2.0 s); if not interrupted, one more cutter comes up from the scree (once). Interrupt: any hit, or the player blowing **Fall**, which makes every bandit duck for 1 s (once per fight; they know the calls too). | A readable mixed fight on a tight tower floor; calls as tools. | 50–75 s; player at 60–80% HP. |
 
-**Rules.** Bandits yield and are tied (TD-7). The yielded lookout's testimony (`TWG-D2`) is flavour; nothing about the call depends on it. After the quest the T4 hide stays empty. Death respawns at T1 (or at T6 once reached); E1 stays defeated once won.
+**Rules.** Bandits fight until defeated at 0 HP (CDR-1). The former lookout talk (`TWG-D2`) was flavour and is cut (rulings §3.2 T-4); nothing about the call depends on it. After the quest the T4 hide stays empty. Death respawns at T1 (or at T6 once reached); E1 stays defeated once won.
 
 ### TWG.7 The strange moment: the call runs the line, and stops
 
@@ -662,7 +662,7 @@ Ressa Highcrag was taught one call she has never blown on duty: two long, one he
 | `S01_read_bank` | Read the grooves on the first tower. | 6 glyph matches + seventh-channel inspect at T1 | Yes |
 | `S02_second_tower` | Get onto the second tower. | Enter T2 top volume (agility or ladder) | Yes |
 | `S03_decode` | Find the call the seventh groove was cut for. | `chip_ice` (3 s) + `call-blown` (long, long, held) in T3 seventh-channel volume | Yes |
-| `S04_lookout` | Get past the fourth tower. | TWG-E1 defeated; `TWG-D2` optional | Yes |
+| `S04_lookout` | Get past the fourth tower. | TWG-E1 defeated | Yes |
 | `S05_shoulder` | Cross to the sixth tower. | Enter T6 volume | Yes |
 | `S06_lintel` | Read the end tower. | Lintel inspect + downward-channel inspect | Yes |
 | `S07_gorge` | Follow the groove down. | Enter G2 + 3 inspects (gateposts, bench, snow) | Yes |
@@ -696,7 +696,7 @@ None is wrong. None tells anyone what the call meant.
 | **Witness at the Gate** | Knowledge | Added to the player's calls with its glyph. It does nothing mechanically anywhere in Thornfell. |
 | **The Line route** | Access | The six towers become a traversal route along the crest (ladder left at T2; ice cleared at T3), with a view of Windscar and the Silent Gorge. |
 | Small payment | Currency | Ressa: "for the ladder". Economy tuning. |
-| Skill XP | Actions only | Melee (Ranged if S01 allows). |
+| Skill XP | Actions only | Melee or Ranged. |
 | *The Notes We Keep* | Story | Available once TF-M4 is also Completed. |
 
 ### TWG.12 Failure, recovery, persistence, co-op
@@ -750,7 +750,7 @@ None is wrong. None tells anyone what the call meant.
 |---|---|---|---|
 | **Ressa Highcrag** | That she was taught the call and told "for strangers". That it was not a warning. | Which strangers; why it stopped; the gateposts. | Short. Distrusts any call she can't explain to the person who hears it. |
 | **Dorn Feldhorn** | The code book's form. | The call (he was never taught it). | Wants it written down; afraid of what people will put in the gap. |
-| **Bandit lookout** (role name) | That the bandits relay with the grooves; that the seventh "won't blow". | Anything else. | Sullen, cold, practical. |
+| **Bandit lookout** (role name) | Nothing spoken (TWG-D2 removed: CDR-1). Combat role only. | — | — |
 
 #### Barks
 
@@ -778,13 +778,12 @@ TWG-D1.12 RESSA: "Go and see if they cut that one. If they did, it was a real ca
 ```
 
 ```
-TWG-D2.01 LOOKOUT: (tied, on the floor) "You blew that? Through the towers?"
-TWG-D2.02 LOOKOUT: "We use the three dots. Calls the lads up off the scree. Easier than shouting."
-  > "And the seventh groove?"                              → TWG-D2.10
-  > "You're done here."                                     → TWG-D2.20
-TWG-D2.10 LOOKOUT: "Won't blow for us. Makes your ears ache. Ferro said it was for calling the dead in."
-TWG-D2.11 LOOKOUT: "Ferro says a lot of things. Ferro's wrong about most of them."   → TWG-D2.20
-TWG-D2.20 LOOKOUT: "Wardens'll have us. Fine. Warmer than this."   {event: S04 optional dialogue}
+TWG-D2.01 (removed: CDR-1)
+TWG-D2.02 (removed: CDR-1)
+TWG-D2.10 (removed: CDR-1)
+TWG-D2.11 (removed: CDR-1)
+TWG-D2.20 (removed: CDR-1)
+  (Former post-yield lookout talk; flavour only, cut per rulings §3.2 T-4. S04 completes on TWG-E1 defeated.)
 ```
 
 ```
@@ -1234,7 +1233,7 @@ Tova Rask, eleven, has a slate of half-finished letters and has not been to less
 |---|---|---|---|---|---|---|
 | **TNR-E1** | 1 × Ridge Crow flock, 2 × Ridge Crow diver | Sheave platform (about 3 × 4 m, railed) | Flock: Aggressive, swirls over the platform. Divers: harassers from the tower top. Leashed to the tower. | **Diver:** folds its wings with a sharp double caw (~0.8 s), then a straight dive; step aside. **Flock:** the swirl darkens and tightens over one spot (~1.2 s), then pecks in a 2 m circle; leave the circle. The rail stops all knockback; nobody falls. | Fight at height that is about footing, not damage. | 35–50 s; player at 70–90% HP. Ranged welcome. |
 
-**Rules.** Crows disperse (scatter to the ravine) at low health. They come back to the tower after the quest without a nest (ambient). Tova and Ketil stay on the ground and are never targets.
+**Rules.** Each crow fights until defeated at 0 HP (CDR-1; rulings §3.1.4 flock rule). After the quest, crows return to the tower as ambient scenery, without a nest. Tova and Ketil stay on the ground and are never targets.
 
 ### TNR.7 The strange moment: the cable's note
 
@@ -1253,7 +1252,7 @@ Tova Rask, eleven, has a slate of half-finished letters and has not been to less
 | Step | Objective | Completes on | Req. |
 |---|---|---|---|
 | `S00_hook` | Ask Tova why nobody's riding. | `TNR-D1` end | Yes |
-| `S01_climb` | Climb the sheave tower. | Enter platform volume + TNR-E1 dispersed | Yes |
+| `S01_climb` | Climb the sheave tower. | Enter platform volume + TNR-E1 defeated | Yes |
 | `S02_clear` | Clear the sheave housing. | `pull_nest` + `chip_ice` channels; sheared-pin inspect | Yes |
 | `S03_pin` | Make a new sheave pin. | Smithing interaction complete **or** watch (crew) | Yes |
 | `S04_seat` | Seat the pin in the sheave. | 3 × `seat_pin` segments (persist) | Yes |
@@ -1283,13 +1282,13 @@ Tova Rask, eleven, has a slate of half-finished letters and has not been to less
 |---|---|---|
 | **The ropeway** | Access | Fast route upper station ↔ lower longhouse (ride interaction; gust stops are ambient). |
 | Small payment / a meal | Currency / gift | Ketil insists. Economy tuning. |
-| Skill XP | Actions only | Smithing, Melee (Ranged if S01 allows). |
+| Skill XP | Actions only | Smithing, Melee or Ranged. |
 | *A Place at Smoke Week* | Story | Unlocks after TF-M2. |
 
 | Situation | Handling |
 |---|---|
 | Falls from the lattice | The agility trigger fails safe to the platform below; the ladder is always there. |
-| Death on the tower | Respawn at the upper station; nest and ice progress persist; E1 resets if not dispersed. |
+| Death on the tower | Respawn at the upper station; nest and ice progress persist; E1 resets if not defeated. |
 | No Smithing | Crew alternative. |
 | Board won't validate | The board highlights the run that breaks a constraint (no brake pair, no morning child run, load overlap). No limit on tries. |
 | Walking away | Stays Active; resume with Ketil (`TNR-B1.03`). |
@@ -1489,9 +1488,9 @@ At first heavy snow every highstead reads its **winter tally** aloud: beds, food
 
 | Id | Enemies (§10) | Placement | AI role | Telegraph | Purpose | Solo target |
 |---|---|---|---|---|---|---|
-| **TSM-E1** | 3 × Ridge Wolf runner, 1 × Ridge Wolf howler | Goat shoulder descent, on the path down | Runners: Aggressive, go for the **carried meat** (one tries to snatch; a successful snatch drops the meat 5 m away, where it can be picked up again). Howler: holds a rock; calls. | **Runner lunge:** chest down, ears flat (~0.9 s). **Snatch:** circles behind, head low, a growl (~1.2 s), then dives for the carry. **Howler:** head back (~1.5 s), rising howl calls one extra runner (once); interrupted by a hit or the **Fall** call. | Protect a carry rather than kill; the snatch is the readable twist. | 55–80 s; player at 55–75% HP. |
+| **TSM-E1** | 3 × Ridge Wolf runner, 1 × Ridge Wolf howler | Goat shoulder descent, on the path down | Runners: Aggressive, go for the **carried meat** (one tries to snatch; a successful snatch drops the meat 5 m away, where it can be picked up again). Howler: holds a rock; calls. | **Runner lunge:** chest down, ears flat (~0.9 s). **Snatch:** circles behind, head low, a growl (~1.2 s), then dives for the carry. **Howler:** head back (~1.5 s), rising howl calls one extra runner (once); interrupted by a hit or the **Fall** call. | Protect a carry while you fight; the snatch is the readable twist. | 55–80 s; player at 55–75% HP. |
 
-**Rules.** Wolves disperse at low health. The meat cannot be lost: if dropped it stays where it fell until the player picks it up (and after a logout it returns to the shoulder kill site). If the player took the snare alternative, E1 still runs (hares smell too).
+**Rules.** Wolves fight until defeated at 0 HP (CDR-1). The meat cannot be lost: if dropped it stays where it fell until the player picks it up (and after a logout it returns to the shoulder kill site). If the player took the snare alternative, E1 still runs (hares smell too).
 
 ### TSM.7 The wonder moment: the smokes lean together
 
@@ -1513,7 +1512,7 @@ At first heavy snow every highstead reads its **winter tally** aloud: beds, food
 | `S02_count` | Ask Grima what the Kvists owe. | `TSM-D3` end | Yes |
 | `S03_haul_one` | Haul the Kvists' wood (1 of 2). | Carry-deposit of sledge load at Kvist woodpile | Yes |
 | `S04_haul_two` | Haul the Kvists' wood (2 of 2). | Second deposit | Yes |
-| `S05_hunt` | Bring the Kvists a meat share. | Meat (goat or snare share) carry-deposited at the Kvist house; TSM-E1 dispersed | Yes |
+| `S05_hunt` | Bring the Kvists a meat share. | Meat (goat or snare share) carry-deposited at the Kvist house; TSM-E1 defeated | Yes |
 | `S06_first_smoke` | Light the Kvist hearth at Runa's word. | Hearth interaction after Runa's Gather; `TSM-D4` end | Yes |
 | `S07_reading` | Stand at the tally reading. | `TSM-D5` choice + `TSM-D6` answer | Yes |
 | `S08_close` | Eat. | `TSM-D7` end | Yes (→ Completed) |
@@ -1542,7 +1541,7 @@ At first heavy snow every highstead reads its **winter tally** aloud: beds, food
 |---|---|---|
 | Smoke Week supper | Gift / buff | One cooked food item (item pass). |
 | A bench at the tally hearth | Access | Rest point at Hushfold. |
-| Skill XP | Actions only | Hunting, Woodcutting (optional), Melee (Ranged if S01 allows). |
+| Skill XP | Actions only | Hunting, Woodcutting (optional), Melee or Ranged. |
 | *Rope-Raising Day* | Story | After TF-M3. |
 
 | Situation | Handling |
@@ -1960,4 +1959,5 @@ TRR-D6.04 [else] AUD: "Assembly'll be Assembly. We'll stand where we stand."
 | Quest items | None. Carry-state objects only. |
 | Lowmark | No Lowmark flag read; no grain route stated (TSM mentions seized stores only, with no origin). |
 | Distinct verbs | compare / climb-decode / retune-perform / repair-ride-rota / haul-hunt / inspect-carry-celebrate. |
-| **Independent review (2026-11-03)** | 8 findings (1 high, 4 medium, 3 low). High: TTH's rhyme differed from TFS's canonical verse; TTH-I3 now quotes TFS.14 word for word, the changing-last-word variant cut. Medium: name collisions with the main acts: Three Calls host Signy Brack (Act II rear guard Signy Rook) renamed **Thyra Brack**; Hallvor (Act II cairn name Hallvard Brenn) renamed **Leiv**. Medium: TNK's pruned ending duplicated TRR's single chord; now the posts answer Rest one by one, farthest first. Medium: Eyvind's custody said "clan tribunal"; aligned to Act II (held by the Ridge Wardens pending the Assembly). Medium: TTH lent a practice horn as if TF-M1 gave none; TF-M1's horn is now relied on, loan is carry-state fallback only. Low: two Eyvind-naming nodes untagged (TWG-D6.03, TNK-B2.02); tagged `[SPLINTER]`. Low: name-address readers now accept `TSM_PLAYER_TALLIED` or `TME01_TALLIED`; token unified to `{PLAYER}`. Low: Ranged mentions gated on S01. |
+| **Independent review (2026-11-03)** | 8 findings (1 high, 4 medium, 3 low). High: TTH's rhyme differed from TFS's canonical verse; TTH-I3 now quotes TFS.14 word for word, the changing-last-word variant cut. Medium: name collisions with the main acts: Three Calls host Signy Brack (Act II rear guard Signy Rook) renamed **Thyra Brack**; Hallvor (Act II cairn name Hallvard Brenn) renamed **Leiv**. Medium: TNK's pruned ending duplicated TRR's single chord; now the posts answer Rest one by one, farthest first. Medium: Eyvind's custody said "clan tribunal"; aligned to Act II (held by the Ridge Wardens pending the Assembly). Medium: TTH lent a practice horn as if TF-M1 gave none; TF-M1's horn is now relied on, loan is carry-state fallback only. Low: two Eyvind-naming nodes untagged (TWG-D6.03, TNK-B2.02); tagged `[SPLINTER]`. Low: name-address readers now accept `TSM_PLAYER_TALLIED` or `TME01_TALLIED`; token unified to `{PLAYER}`. Low: Ranged mentions gated on S01 (superseded 2026-11-03, see next row). |
+| **Director rulings reconciliation (2026-11-03)** | Applied `Caelmor_Director_Rulings_Combat_Ranged_Release.md`. CDR-1: shared rule §0.6 "Human enemies yield" replaced by defeat at 0 HP; TTH-E1, TSM-E1 wolves and TNR-E1 crows no longer disperse at low health (steps complete on *defeated*); TWG-E1 bandits no longer yield or are tied; lookout talk `TWG-D2` cut (T-4, ids kept as removed); TWG Beat 4, step table and speaker row updated. No scripted exceptions in this file. CDR-2: six "Ranged if S01 allows" hedges and the §0.6 skills line now read Melee or Ranged (first-class, never required). CDR-3: header release-scope wording replaced with milestone wording. Step ids, flags, beats and choices unchanged. |

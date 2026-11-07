@@ -83,7 +83,7 @@ No other region flags are created. Quest-local flags use the quest code. The loc
 | `tovin_floor_sheets` | MQ6 | Tovin hands over seven loose sketch sheets (`TF-D4`) | Laid on the floor and picked up again in order; given to the keeper at `S09_record` and held in the Keepers' record room (Act III: among the records carried out of the fire in MQ10). |
 | `riverglass_bowl` | MQ7 | Ottilie Penner's bench (`S02a_bowl`) | Given to Bryn at `S03_set`; stays with Bryn. |
 
-Everything else is a **carry-state object** (circle stones, turf, beam, softmoss bundle, stake bundle), an interaction prop (spades, pry bar, the shift board, the flow-table gates), or a **loaned tool** handled like the True Line crew hatchet. The act uses 2 quest items, which brings v1 to 3 (MQ1) + Act I + 2.
+Everything else is a **carry-state object** (circle stones, turf, beam, softmoss bundle, stake bundle), an interaction prop (spades, pry bar, the shift board, the flow-table gates), or a **loaned tool** handled like the True Line crew hatchet. The act uses 2 quest items, which brings Lowmark to 3 (MQ1) + Act I + 2.
 
 ### A2.7 Drift sites touched (bible §9.2)
 
@@ -157,7 +157,7 @@ On backwater nights the Rebirth Fields at Ashenstead flood from below. Seedlings
 | Offered | On entering Ashenstead (area A) |
 | Target length | 30–40 minutes |
 | Combat share | ~20% |
-| Skills touched | Melee (required); Woodcutting (dike option); Hunting (optional, Ash Hound pelts if the plot option draws a reformed den) |
+| Skills touched | Melee or Ranged (combat required; melee-led); Woodcutting (dike option); Hunting (optional, Ash Hound pelts if the plot option draws a reformed den) |
 | Choice | The fix: circle / plot / dike → `LM_FIELD_FIX` |
 | Quest items | None |
 | Unlocks | Dry Rebirth Fields; field guide-lines readable; Sedge seeded; *The Twice-Burned Tree* (bible §7: after MQ5) |
@@ -356,7 +356,7 @@ No option is wrong. Each touches a value: Annelise's belief that remembrance sho
 | Dry Rebirth Fields | World change | Presentation per fix |
 | Guide-line reading | Knowledge | Boundary stones with the ring sign across Ashenstead Fields become inspectable: *"A guide-line stone. Something under here was kept dry."* |
 | Field share | Small payment | From the Ashenstead field crew; amount set in economy tuning |
-| Skill XP | Actions only | Melee; Woodcutting (dike); Hunting if Ash Hounds are harvested |
+| Skill XP | Actions only | Melee (or Ranged, if used); Woodcutting (dike); Hunting if Ash Hounds are harvested |
 
 ## GL.12 Failure, recovery, co-op
 
@@ -385,13 +385,13 @@ No option is wrong. Each touches a value: Annelise's belief that remembrance sho
 |---|---|---|---|---|---|---|
 | What the Rebirth Fields were in the war | Emergency treatment and supply ground; the culvert carried water around it to keep it dry and fed clean troughs. | "Always fields"; the circle marks the first planting after the burning. | Stencils, markers, hooks, pins, the guide-line Joric's ploughs kept to. | A mass grave; a cursed field. | Who was treated there; who died; who carved the marks. | Nobody in v1; independent records only (Part 5 lattice L-S18 pattern). |
 | The scratched marks | Marks made by people in the culvert during the war; unreadable. | — | The niche. | They are names of the dead and can be read by the water. | Everything. | Not revealed. |
-| The warm well | Unexplained. Compatible with backed fen water moving under the green. | "Never happened." | Steam; warm bucket; cold after the fix. | The well is grieving. | Cause. | Not revealed in v1. |
+| The warm well | Unexplained. Compatible with backed fen water moving under the green. | "Never happened." | Steam; warm bucket; cold after the fix. | The well is grieving. | Cause. | Not revealed in Lowmark content. |
 | The reed-cutter | Sedge, the Last Field-Mage (D-7). | An old cutter. | One sentence; clean cuts. | — | Everything. | MQ8 (never confirmed aloud). |
 
 ## GL.15 Open decisions
 
 1. **Backwater author truth** (§A2.2). *Recommendation: approve.* It is the act's spine.
-2. **Treatment-ground history.** The quest shows emergency care and supply use with no date, unit or side named. *Recommendation: keep it unnamed in v1* (Main Arc movement 5; Part 4 ledger).
+2. **Treatment-ground history.** The quest shows emergency care and supply use with no date, unit or side named. *Recommendation: keep it unnamed in Lowmark content* (Main Arc movement 5; Part 4 ledger).
 3. **The nine circle stones each set by a household** is a [NEW] memorial detail. *Recommendation: promote with Ashenstead.*
 
 ## GL.16 Internal review log
@@ -439,7 +439,7 @@ Miller Imber Cobb has chalked a notice on the Brookhollow dock post: **MILL RUNN
 | Offered | Reading the dock-post notice in Brookhollow, or entering Drowsebank's yard |
 | Target length | 35–45 minutes |
 | Combat share | ~25% |
-| Skills touched | Melee (required); Smithing (optional path, entry level); Cooking (optional, night meal) |
+| Skills touched | Melee or Ranged (combat required; melee-led); Smithing (optional path, entry level); Cooking (optional, night meal) |
 | Choice | Credit Tovin by name or submit unsigned → `LM_TOVIN_CREDITED` |
 | Quest items | `tovin_floor_sheets` |
 | Unlocks | `LM_FLUSH_CALENDAR`; Drowsebank race quieted; the mill-smith's anvil usable; MQ7 (with MQ5) |
@@ -491,7 +491,7 @@ Imber goes home. Tovin goes home. The player climbs to the loft gap and uses **K
 2. They take the long bar from the rack, drop the hoist hook to haul a line from the tail race, try the near crank, find the pin, and swear.
 3. They leave the bar by the trap and go out the way they came.
 
-If the player drops down and engages (`S04b_fight`, optional) at any point after the key lines, **TF-E2**: the two crew fight. Defeated, they're down and stay down; Imber ties them at dawn and the keepers collect them. Fighting gains nothing for the investigation and loses nothing.
+If the player drops down and engages (`S04b_fight`, optional) at any point after the key lines, **TF-E2**: the two crew fight to 0 HP and take the ordinary defeat presentation (CDR-1). Fighting gains nothing for the investigation and loses nothing.
 Completes when the crew's scene reaches its end (they leave) or both are defeated.
 **Verbs:** watch; optional fight.
 
@@ -544,7 +544,7 @@ See §TF.6. Completes when the third swell has passed, the crew is defeated, the
 
 ### Beat 9 — Into the Record (`S09_record`)
 **Objective:** *Give the keeper Tovin's sheets.*
-At dawn the keepers bind the crew. A **Keeper** (role-based, from the Cut watch) reads the sheets on the mill floor where they still lie in order (`TF-D8`). They see the cadence, and they see the tail-door lines and go quiet. The keeper reads them as a second pattern: *"Tail-door wet comes up on the pulse nights too, and higher each time. Crew or no crew."* and *"If that keeps growing like this, the next big one comes over the orchard dikes."* (Sets `TF_KEEPERS_READ_BACKWATER`.) This is the on-screen basis for MQ7's forecast: the backwater keeps the fen's own swell nights, the same fifth nights the war engineers flushed on, so Tovin's calendar dates it and the tail-door lines size it. Then the choice: **credit Tovin by name** in the Keepers' record, or **submit the sheets unsigned**. Tovin is standing right there. Item `tovin_floor_sheets` goes to the keeper either way. Sets `LM_TOVIN_CREDITED` and `LM_FLUSH_CALENDAR`.
+At dawn the keepers come up from the Cut watch. A **Keeper** (role-based, from the Cut watch) reads the sheets on the mill floor where they still lie in order (`TF-D8`). They see the cadence, and they see the tail-door lines and go quiet. The keeper reads them as a second pattern: *"Tail-door wet comes up on the pulse nights too, and higher each time. Crew or no crew."* and *"If that keeps growing like this, the next big one comes over the orchard dikes."* (Sets `TF_KEEPERS_READ_BACKWATER`.) This is the on-screen basis for MQ7's forecast: the backwater keeps the fen's own swell nights, the same fifth nights the war engineers flushed on, so Tovin's calendar dates it and the tail-door lines size it. Then the choice: **credit Tovin by name** in the Keepers' record, or **submit the sheets unsigned**. Tovin is standing right there. Item `tovin_floor_sheets` goes to the keeper either way. Sets `LM_TOVIN_CREDITED` and `LM_FLUSH_CALENDAR`.
 **Verbs:** choose.
 
 ### Beat 10 — Steady Hands (`S10_close`)
@@ -561,7 +561,7 @@ At dawn the keepers bind the crew. A **Keeper** (role-based, from the Cut watch)
 - **Pry-men** (2 × pole-man) come in by the tail door. Their special is **Pry**: crouch at the gate with the long bar, ~2.5 s, bar glinting in the lantern light (the telegraph). On the pin, a completed pry frees the paddle. On a wedged plank, it knocks the wedge out.
 - **Far-crank man** (pole-man variant) on the pond bank across the footbridge. While the pin is free he winds the paddle up **one band every 8 s** (loud clack per tooth; a heavy *thunk* and a gush on each band).
 - **Cutter** (1) harries whoever is carrying. A hit on a player carrying a plank makes them drop it where they stand (pick it up again: instant).
-- When the far-crank man is defeated, **the cutter takes his place** once, after crossing the footbridge (~6 s; readable). When both are down, winding stops for good.
+- When the far-crank man is defeated, **the cutter takes his place** once, after crossing the footbridge (~6 s; readable). When both are defeated, winding stops for good.
 
 **The player's tools (all instant or short, none channelled at a fixed spot):**
 - **Carry a stop-plank** (carry state) from the stack by the hoist (~10 m from the gate; slower movement while carrying).
@@ -574,7 +574,7 @@ At dawn the keepers bind the crew. A **Keeper** (role-based, from the Cut watch)
 1. **The roar** (0:00): the first rumble from the leat; the crew enter. *"Bar! Get the bar on it!"*
 2. **Three swells** (~0:15–3:00): between swells the player carries and wedges; at each swell, water through is counted from the current band and wedged planks, and unwedged planks lift. A focused player keeps water through at 0–1. A struggling player sees 2 or 3, never more. No outcome is a fail.
 3. **The race turns** (as soon as water through has ever been ≥ 1, and in any case at the third swell): the water that got through churns in the race. **Drift rises out of the churn** (§TF.7, TF-E3b), one more for each band of water through, minimum one so the moment always plays. It climbs onto the footbridge and the floor's race edge; fighting it while carrying is the late-game juggle.
-4. **Spill the pond** (after the crew is down): Imber shouts *"Spill boards!"* The player crosses to the far bank and pulls the crew's two extra boards (2 × 3 s channel). The pond drops over the old spill weir with a long rush, the safe way. The pulse dies.
+4. **Spill the pond** (after the crew is defeated): Imber shouts *"Spill boards!"* The player crosses to the far bank and pulls the crew's two extra boards (2 × 3 s channel). The pond drops over the old spill weir with a long rush, the safe way. The pulse dies.
 5. **Keepers** arrive with Tovin as the last drift disperses.
 
 **The strange moment** (after phase 5, unprompted): see §TF.8.
@@ -590,7 +590,7 @@ At dawn the keepers bind the crew. A **Keeper** (role-based, from the Cut watch)
 | **TF-E3a** | 2 pole-men (pry), 1 pole-man (far crank), 1 cutter | Gate, footbridge, far bank, plank stack | See §TF.6 | Pry (pin or wedge): crouch + bar glint ~2.5 s. Sweep: as E2. Far crank: audible clack per tooth. Cutter: shoulder dip (~0.8 s) at the carrier | Carry, wedge and fight: priorities over damage | Required. A first-time player lets 1–2 bands through |
 | **TF-E3b** | 1–4 drift (Water Wraith, standard) | Race and race edge | Place-bound to race volume; lash when approached | The water surface goes glassy and still around the drift (~1.5 s) before an arm-lash; a cold mist ring on the ground marks reach | Drift forms from churned water: conditions, not souls | Required. Disperse all; they won't re-form after the race is quieted |
 
-Crew who are defeated stay down and are bound by the keepers. They are not killed on screen. Nothing they carry is evidence; the keepers' record names the crew's employer from the MQ4 evidence, not from these men (`[ANTAGONIST]` swap layer unaffected).
+Crew fight until defeated at 0 HP and take the ordinary defeat presentation (CDR-1): no binding, no tied props, no lingering bodies, no gore. Every encounter here accepts melee or ranged; none requires ranged (CDR-2). Nothing they carry is evidence; the keepers' record names the crew's employer from the MQ4 evidence, not from these men (`[ANTAGONIST]` swap layer unaffected).
 
 ## TF.8 The lagging pond: presentation spec
 
@@ -602,7 +602,7 @@ Crew who are defeated stay down and are bound by the keepers. They are not kille
 | Visual | Reflections on the pond within ~15 m **lag a breath behind** their sources: the keepers' lanterns, Tovin, the player. The player raises a hand and the reflection raises it late. Then it catches up. |
 | Tovin | If within 10 m, he stops beside the player, looks, and says **one line**: *"...There. Like that."* (`TF-D7.20`). He doesn't explain it and doesn't name it. If the player asks, his answer is *"I don't know. I just see it."* |
 | UI | None |
-| Meaning | Nothing. It identifies no one and proves nothing. It stays **unexplained** in v1 (bible §6.1: "What stays unexplained"). |
+| Meaning | Nothing. It identifies no one and proves nothing. It stays **unexplained** in Lowmark content (bible §6.1: "What stays unexplained"). |
 | Repeatable | No. Afterward the pond has the ME08-style inspect: *"Still. Your reflection keeps up."* |
 
 ## TF.9 Steps and completion events
@@ -650,7 +650,7 @@ Neither option is wrong. One honors Tovin publicly at his expense. The other pro
 | Drowsebank race quieted | World change | No drift in the race |
 | Mill-smith's anvil | Access | Usable Smithing station afterward (if the Zones package keeps it) |
 | Runner's wage, two nights | Small payment | From Imber; economy tuning sets the amount |
-| Skill XP | Actions only | Melee; Smithing (anvil path); Cooking (optional) |
+| Skill XP | Actions only | Melee (or Ranged, if used); Smithing (anvil path); Cooking (optional) |
 
 ## TF.13 Failure, recovery, co-op
 
@@ -679,7 +679,7 @@ Neither option is wrong. One honors Tovin publicly at his expense. The other pro
 |---|---|---|---|---|---|---|
 | Tovin's moved tools and wet floors | For weeks the crew has used the mill race at night as the Lock's overflow run, on the same fifth nights; since MQ4 it is their only route, through the wartime Drowse spur. Their pulses wet the race side. | Tovin is losing his mind. | The night scene; the pawl scars; empty outlines; the sheets. | Tovin did it. | — | This quest. |
 | The tail-door lines | The backwater (§A2.2) arriving up the Drowse spur; they start only after MQ4 and rise on the same fifth nights. | — | The sheets; the step; the keeper's reading (`TF_KEEPERS_READ_BACKWATER`). | The crew again. | Why it grows. | MQ7 (projection), MQ9 (flow-table). |
-| The lagging pond | Unexplained bounded resonance. | Tovin "sees things." | Seen by the player and Tovin. | It's a ghost; it's Tovin's fault. | Everything. | Not revealed in v1. |
+| The lagging pond | Unexplained bounded resonance. | Tovin "sees things." | Seen by the player and Tovin. | It's a ghost; it's Tovin's fault. | Everything. | Not revealed in Lowmark content. |
 
 ## TF.16 Open decisions
 
@@ -700,6 +700,7 @@ Neither option is wrong. One honors Tovin publicly at his expense. The other pro
 | Independent review pass: chronology contradicted itself (crew "moved because the Lock is gone" vs "same as always"; sheets showing weeks of earlier use; a 9-shift cadence matching nothing). | The race is the Lock's long-standing **overflow run**; since MQ4 it is the crew's only route. Tallies retimed to 12/42/72 with the board at 81→82: ten shifts, every fifth night, matching MQ3. Optional `TF-D5.21` ties it to the Watcher's book. The keeper's backwater reading (`TF-D8.03b`) gives MQ7's forecast an on-screen basis. |
 | Independent review pass: third "hold a channel under attack" in a row. | The hold is now a **brace**: stop-plank carries and wedges between three timed swells while fighting. No fixed-spot channel. The crank set pieces stay in MQ4 and MQ11. |
 | Independent review pass: Marrick has no middle. | One added crew line (`TF-D3.05`): Sallow says "the lady" wants the pond through. `[ANTAGONIST]`. Her on-stage Act II appearance is MQ7 (`DK-D9`). |
+| Director rulings reconciliation (2026-11-03, CDR-1/2). | TF-E2 and TF-E3a crews fight to 0 HP with the ordinary defeat presentation. Removed: Imber tying the TF-E2 pair, the keepers binding the crew at dawn, "stay down" wording. Ranged accepted, never required. Steps, flags and the brace set piece unchanged. |
 
 ---
 
@@ -733,7 +734,7 @@ A keepers' notice is nailed to the Sluice Shelter post: from Tovin's floor, the 
 | Offered | The keepers' notice at the Sluice Shelter, or speaking to Bryn |
 | Target length | 35–45 minutes |
 | Combat share | ~35% |
-| Skills touched | Melee (required); Woodcutting (required, entry level); Hunting (optional, elk) |
+| Skills touched | Melee or Ranged (combat required; melee-led); Woodcutting (required, entry level); Hunting (optional, elk) |
 | Choices | Commons roll or household practice → `LM_BRYN_ROLL`; outcome of the hold → `LM_ORCHARD_LOSS` |
 | Quest items | `riverglass_bowl` |
 | Unlocks | Orchard saved; Ottilie's shop as a known stop; MQ8 |
@@ -860,7 +861,7 @@ No option is wrong. It's the C09 threshold question made personal: **protection 
 | The orchard saved (wholly or mostly) | World change | Props per `LM_ORCHARD_LOSS` |
 | Share of the orchard's fruit | Small payment in kind | Ingredient definition belongs to the item pass |
 | Ottilie's shop | Access | Ottilie sells ordinary glass afterward (economy pass) |
-| Skill XP | Actions only | Woodcutting; Melee; Hunting if the elk is harvested |
+| Skill XP | Actions only | Woodcutting; Melee (or Ranged, if used); Hunting if the elk is harvested |
 
 ## DK.11 Failure, recovery, co-op
 
@@ -1127,7 +1128,7 @@ At dawn Sedge walks the player to the end of the Path of Unburnt Reeds and up th
 | Veilwater Falls; behind it the Riverwarden enclave; limestone, moss, reedwork, flowing channels; rituals of listening, not bending | Dossier §IV.6, §VI | [CANON] |
 | Riverwardens taught flood-timing and irrigation; prevented floods by tuning channels; withdrew as wars intensified and demands for power grew | Dossier §VI | [CANON] |
 | Withdrawal because rulers repeatedly tried to turn care for water into command over people | Main Arc author truth; bible §6.1 | Approved architecture |
-| Inner oasis and Warden's Hearth unseen in v1; Riverwardens do not return to rule | Bible §2.7; Main Arc movement 12 | [PROPOSAL — DIRECTOR] D-8 |
+| Inner oasis and Warden's Hearth unseen in Lowmark content; Riverwardens do not return to rule | Bible §2.7; Main Arc movement 12 | [PROPOSAL — DIRECTOR] D-8 |
 | Flood Calendar Stones; "Magic is not taken, it is heard" | Dossier §VI, §XI | [CANON]. The First Listener is **not** referenced (C07 open). |
 | Listening Steps, Oriel, the flow-table, the Braid gate rule | Bible §2.1, §2.7; this package | [NEW] |
 
@@ -1341,7 +1342,7 @@ No other combat. Nothing behind the falls is hostile. Drawing a weapon at the St
 |---|---|---|---|---|---|
 | What the Braids are | A distributed flood-tuning network built and tended by many hands; gates set by season. | Children's stories; "the listeners." | The flow-table; the grooves; Oriel. | A weapon; a battery; a spell. | This quest |
 | Why the Riverwardens withdrew | Rulers asked for floods on command. Withdrawal was an ethical survival choice. | Extinct; cowardly; hoarding. | Oriel's account. | They caused the crisis to be needed again. | This quest (in outline; no leaders, dates or Founder named) |
-| What lies past the reed screen | The inner oasis and Warden's Hearth. | Myth. | A closed passage. | — | Not in v1 |
+| What lies past the reed screen | The inner oasis and Warden's Hearth. | Myth. | A closed passage. | — | Not in Lowmark content |
 
 **Open decisions:** (1) D-8 (Oriel). All Oriel nodes are tagged `[D-8]`. (2) **Riverwarden appearance.** This package describes Oriel by clothing, tools and manner only: grey work clothes, a reed apron, wet forearms. *Recommendation:* the Art Director sets the people's look; nothing here depends on it. (3) **The flow-table must match the final POI map.** It is the one asset where map geometry is narratively load-bearing.
 
@@ -1405,5 +1406,6 @@ Playtest questions (the real bar): *What did the water do that water doesn't do?
 | **Spellcasting** | None by the player. Bryn's and Sedge's practice is shown without light or words. Oriel's gates are stone and clay. |
 | **Antagonist tags** | Sallow is named only in `TF-D3` and `TF-D8`, both tagged. Marrick appears once on stage (`DK-D9`, relief cart, MQ7) and is referred to in `TF-D3.05` ("the lady") and `GL-B8.1`; all tagged. No reveal: nothing she says or does there is evidence. |
 | **Independent review pass** | Applied: one post-MQ4 water story (mill race for the crew, backwater for the fen, slack gate as its first sign); MQ6 chronology and fifth-night cadence; MQ7 forecast basis; Braid gate names and order matched to MQ11; Fourteenth Lot wreck scar; Marrick's Act II appearance; MQ6 brace and MQ7 escort replace two more channel holds; MQ5 den not refought; MQ8 optional ambush and elk line; MQ9 dawn wait removed; promise step id corrected. |
-| **Skills** | Melee, Woodcutting, Hunting, Cooking, Smithing (optional path). No Ranged, Fletching or Mining. |
+| **Skills** | Taught here: Melee, Woodcutting, Hunting, Cooking, Smithing (optional path). No Ranged, Fletching or Mining teaching in Act II; every Act II encounter accepts ranged and none requires it (CDR-2). |
+| **Director rulings reconciliation (2026-11-03)** | CDR-1: MQ6 crews (TF-E2, TF-E3a) fight to 0 HP; tying/binding removed. CDR-2: ranged accepted throughout, never required; skill rows read "Melee or Ranged". CDR-3: "v1" release wording changed to Lowmark-content wording. No steps, flags, beats or line ids changed in this file. |
 | **Size discipline** | MQ7–9 packages are shorter than MQ5–6 by design; MQ8–9 are low-combat quests whose substance is in their presentation specs. |

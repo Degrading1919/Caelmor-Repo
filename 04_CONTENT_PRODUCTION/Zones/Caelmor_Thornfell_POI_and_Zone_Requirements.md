@@ -2,6 +2,8 @@
 
 **Status (2026-11-03):** review-state content. Gameplay Designer requirement set for level design, Batch 4 of the Thornfell production plan (bible §12). It turns every place authored in the Thornfell narrative packages into level-design requirements: subzones, routes, POI sub-spaces, traversal (agility triggers with walkable fallbacks), sound-system features, per-player state and phasing, and relative placement. All places are **[NEW]** unless the bible marks them [CANON], and nothing here is canon until the Director promotes it (TD-14). **[PROPOSAL — DIRECTOR]** marks consequential choices. **MAP VERIFICATION REQUIRED** marks every place where geometry matters (TD-6: relative placement only; no compass direction toward Emberholt is asserted). This file is **documented dependencies only**: no schema, JSON, scene data or C#.
 
+**Director rulings (2026-11-03, binding):** `Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md`. For places this means: every enemy is defeated at 0 HP, so no arena needs tied-prisoner props, downed-state space or break-off exit lanes for wolves (leash/reset only); TD-8 Gatefall deadfalls, `TSW_THAW`, TWN's open stone and TWC's banner walk (Old Torvek's local tradition) are approved; TST's wind butts are a real shooting range (CDR-2); Thornfell is an internal milestone of the complete game (CDR-3).
+
 **Sources:** bible §1.1, §2.1, §4 (TP01–TP28, route order), §7.3–7.4, §9 (flags, season, posture, calls), §11; Act I §A5, §B5, §B10–B11; Act II §A5, §A8.1, §B5, §B8; Act III §5, §8, §11, §E; the place tables of the four side-quest files, TME01–TME10 and TDS01–TDS10; the Lowmark zone file as the format standard.
 
 **Source state.** The three main acts were reviewed and committed before this file was written. The four side-quest files were under independent review when it was drafted; those reviews have since landed, and the independent review of this file (§13) re-checked places, flags and names against the committed text. Shared values (gust, bridge, thaw) follow the canonical register in §12 (C-1 to C-8).
@@ -17,7 +19,7 @@
 | Constraint | Level-design rule |
 |---|---|
 | Click-to-move over a host NavMesh; Shift sprint; no jump | Every required route, objective, shelter face, niche and arena safe space is NavMesh-reachable by walking. |
-| Agility triggers approved, **not built** | Every agility trigger listed here has a **walkable fallback** that is the critical path until triggers ship. No required objective sits behind a trigger. |
+| Agility triggers approved, **not built** | Every agility trigger listed here has a **walkable fallback** that is the critical path until triggers are built. No required objective sits behind a trigger. |
 | No multi-level traversal or off-mesh links yet | Vertical spaces (Whinstone hoist shaft, Summit stairs, gatehouse stair and winch floor, Shatterfall ledges and ladders, horn towers, crag pitches, sheave tower, hostel ward stair) need multi-level NavMesh with stairs or ramps. Rungs, ladders and pitches are **interaction-driven moves** ("climb to next ledge") until off-mesh links exist. Flag each to Systems. |
 | Interaction needs reach and line of sight | Channel points used under attack or weather (snub post, winch drum, pull-line ledges, plate frame, brake post, field anvil) need a ≥ 2 m standing pad facing the object. |
 | Edges | **No fall deaths anywhere in Thornfell.** Every ledge, rim, span, crag, parapet, plank and stair that can be pushed toward has a rope rail, a rope boundary volume or an edge blocker. Every push (gust, charge, surge) goes to a defined safe side. |
@@ -193,7 +195,7 @@ Format per POI: **placement**, **areas** (sub-space ids are the packages' own le
 | Areas | G0 near apron (Dorn's post W4 ends here; a horn post after TF-M5); **G1–G7 galleries** each with a **marker stone** cut with Close + a tag glyph, a cut stair (walkable) and a rock scramble (A); pull ledges below the live galleries' pin-beams; cut floor (war heaps, frozen wagon axle, a fallen grey prop, the slab slot); H1 **warden room** (hearth hard against the inner wall; plaster cracked off; **the closure roster** under soot in three panels; desk, empty slate shelf, drill board, six bedrolls, a child's mitten); H2 inner stair; H3 **winch floor** (~18 × 10 m, railed; drum hood ~6 × 4 m; pawl; slab slot 2 m; parapet with a horn ring and a fluted stone; outer stair); F1 far apron; F2 far track and far hut |
 | Traversal | Gallery scrambles: A → cut stairs. Winch floor: inner stair (player) and outer stair (crew). Far track beyond F1 in whiteout uses the same rules as the high track (rope boundaries, niches). |
 | Sound features | `horn_rest`: gatehouse roof (hornman calls the sealing order), winch-floor parapet ring, near-apron post (after TF-M5; "a true echo"). `fluted_face`: the cut walls and the parapet stone. `echo_face`: the far apron boulder (Oddny), the inner faces. **No resonance**: no echo-figures, surges or hum (TD-8). |
-| State and phasing | **Gallery states (§6.3):** before TF-M5: four spent (grey props), three live (pale props: G3 Shoulder, G5 Lintel, G7 Gate gallery), gatehouse door barred, interior unreachable (TDS10). During TF-M5 per gallery: spent / live / resolved (crew yielded or line cut); G5 unmanned with `TH_STORES = seized`; G7 sheds through `S02`–`S07`. Forced shelter on the cut during `S03` until the rubbing is taken. Slab: half down → wound up (`S05`) → wedged (`S06`) → held by fresh wedges (`S07`) → up and wedged with wardens (`S08`). Post (Act III §E.5): live galleries **pinned dead** with iron straps, G7 cleared (all postures); slab up until deep snow (open), at Ressa's word (watchful), **down** with a postern (sealed_with_terms); roster wall cleaned with bench (open), warden's rail (watchful), closure account slate beside the roster (sealed); Third Horn glyph cut beside the post with `TH_THIRD_HORN`. TDS10 inspect text changes after TF-M5. Thaw event per posture (§E.7). Blizzard is quest-local weather (others see ordinary snow). |
+| State and phasing | **Gallery states (§6.3):** before TF-M5: four spent (grey props), three live (pale props: G3 Shoulder, G5 Lintel, G7 Gate gallery), gatehouse door barred, interior unreachable (TDS10). During TF-M5 per gallery: spent / live / resolved (crew defeated or line cut); G5 unmanned with `TH_STORES = seized`; G7 sheds through `S02`–`S07`. Forced shelter on the cut during `S03` until the rubbing is taken. Slab: half down → wound up (`S05`) → wedged (`S06`) → held by fresh wedges (`S07`) → up and wedged with wardens (`S08`). Post (Act III §E.5): live galleries **pinned dead** with iron straps, G7 cleared (all postures); slab up until deep snow (open), at Ressa's word (watchful), **down** with a postern (sealed_with_terms); roster wall cleaned with bench (open), warden's rail (watchful), closure account slate beside the roster (sealed); Third Horn glyph cut beside the post with `TH_THIRD_HORN`. TDS10 inspect text changes after TF-M5. Thaw event per posture (§E.7). Blizzard is quest-local weather (others see ordinary snow). |
 | Used by | TF-M5, TDS10, TF-M5 epilogue and thaw |
 | Map | MAP VERIFICATION REQUIRED: G7 directly above the gatehouse; visibility ~25–30 m on the near apron in the cut's lee; galleries readable from the road for TDS10; the far hut's distance is a zone call (§12 Z-6). |
 
@@ -261,7 +263,7 @@ Format per POI: **placement**, **areas** (sub-space ids are the packages' own le
 | Placement | Wind-brushed plateaus; the Name-Stone Wall in the upper field; the oath path (TP16) links lower and upper fields; Torvek's cairn-house at the edge [NEW]; the stone ledge above the field, reachable from the Wall without crossing the oath path. |
 | Areas | B the Name-Stone Wall (clan stones; rows of slate name-slips at hip height; unmarked stones at the foot); Maera's cairn-hut beside the wall (`amended` roster keeping); C the stone ledge (bedded stone, wedge-holes, shale under the lip, TWN-E1); cairns on squared foundations (TDS04); stormflower field (TME08) |
 | Sound features | TDS04: voices carry along the line between two foundations and die off it. Gust windows for TME08 (fallback fixed afternoon). |
-| State and phasing | New stone and slip-row props by `TWN_CUT_BOTH` / `TWN_CUT_FAMILY` / `TWN_CUT_OPEN`. Stormflowers bloom in a hard-wind window. |
+| State and phasing | New stone and slip-row props by `TWN_CUT_BOTH` / `TWN_CUT_FAMILY` / `TWN_CUT_OPEN` (the open stone: a newly emerging memorial custom, `[APPROVED — CDR 2026-11-03]`). Stormflowers bloom in a hard-wind window. |
 | Used by | TF-M3 coda (register case), TWN, TOS (top), TME08, TDS04 |
 | Map | MAP VERIFICATION REQUIRED: ledge reachable from the Wall without the oath path. |
 
@@ -342,7 +344,7 @@ Format per POI: **placement**, **areas** (sub-space ids are the packages' own le
 | Traversal | T2: A rubble → carry and set the ladder; T3: scramble → inner-wall steps; T5: parapet → interior stair. |
 | Sound features | `groove_bank` per tower (TDS03: a call carries to the next tower and dust jumps in its mouth). TWG Part 1: the call runs T4 → T5 → T6 and cuts off over the gorge lip. |
 | State and phasing | T2 ladder stays with `TWG_LADDER_SET`. T4 hide empty after TWG. Signal Terrace sightline to the first tower (TNK). |
-| Used by | TWG, TWC (rite walk), TDS03, TNK (answers) |
+| Used by | TWG, TWC (rite walk: walking the banner home, Old Torvek's own practice that others are starting to follow, not a Thornfell-wide custom; `[APPROVED — CDR 2026-11-03]`), TDS03, TNK (answers) |
 | Map | MAP VERIFICATION REQUIRED: each groove bank aims along the crest at the next tower. |
 
 ### TP23 Abandoned Ridge Camp — Ruin/war site, Ridgewall [CANON feature]
@@ -429,7 +431,7 @@ Format per POI: **placement**, **areas** (sub-space ids are the packages' own le
 | **The high track** (C2–C6, warden posts W1–W4) | Windscar | Above Three Calls toward the Gatefall along a cliff face, rope-railed on the drop side; the drovers' fork roped shut | §3 R3 | `horn_rest` W1–W4; `fluted_face` on the Fluted Run; `echo_face` at the Fork (direct call, then the echo off the far face from the wrong side); red-rag niches every 40 paces | Whiteout only during TF-M5 `S01` and `S07` | TF-M5 | Act III §5.1 |
 | **The stormwood slope** (W3) | Windscar | Burned-over slope **below the Narrows** | Walkable | — | — | TF-M1 | Act I §A5.2 |
 | **The far apron, far track and far hut** | Beyond TP09 | Beyond the slab; the far hut "some distance out" | Whiteout rules in TF-M5 | `echo_face`: Oddny's boulder | Post: far-hut winterers (sealed_with_terms) answer Dorn's dusk Lost | TF-M5 | Act III §5.2 |
-| **Hushfold's far shielings** | Beyond TP09 | Beyond the far hut | **Never visited** in v1.5 content | — | Named on the Outside slate by posture | TF-M5 (named) | Bible §4.2 |
+| **Hushfold's far shielings** | Beyond TP09 | Beyond the far hut | **Never visited** in Thornfell content | — | Named on the Outside slate by posture | TF-M5 (named) | Bible §4.2 |
 | **TTH answering stones** B1 Gate Stone, B2 Corner Stone, B3 Narrows Stone, B4 Shelter Stone | Windscar (R1) | Outside the Passwatch gate; Blind Corners goat-track shoulder; near-side bluff above the Narrows under three fluted faces; Three Calls ledge lip | Corner Stone: goat-track trigger → road with its own steps | `horn_rest` (mouth-hollows at horn height); Narrows Stone strange return (once per player) | Restored reply glyph by `TTH_KEEPER` | TTH | Horn TTH.5 |
 | **The mule cache** (TAS P5) | Windscar | Rock overhang below the Blind Corners on the Passwatch side | Road; goat-track shortcut (A → road) | — | Bandits during TAS only | TAS | Settlements TAS.5 |
 | **The TGM tracking ground** (G2 fold to G6 bare rock) | Stormwake | Shieling shelf → print line → rubbing pine → kill cache → bare rock → den | Walkable; nothing timed | Crow column visible from G4 | Stages persist | TGM | Settlements TGM.5 |
@@ -437,7 +439,7 @@ Format per POI: **placement**, **areas** (sub-space ids are the packages' own le
 | **TME07 Ridgewall track** | Ridgewall | By Nettlehook | — | — | Daytime after TF-M1 | TME07 | Settlements TME07 |
 | **TME09 stepped ledge** | Ridgewall | "A ledge Iven names"; added to the map after any talk with Iven post-TF-M1 | Walkable | Echo before sound (third step) | Once per visit | TME09 | Settlements TME09 |
 | **Bera's shieling** | TP28 foot | — | — | — | Leatherworking station | TGY | Work TGY.3 |
-| **Brita's stall and the wind butts** | TP01 | Ridge-market; terrace lip | — | Ribbons show the wind | — | TST | Work TST.3 |
+| **Brita's stall and the wind butts** | TP01 | Ridge-market; terrace lip; the butts are the bowyer's marks for TST's shooting step (CDR-2), with a clear standing line and a safe backstop on the terrace lip | — | Ribbons show the wind | — | TST | Work TST.3 |
 
 **Named NPC homes inside POIs** (Brede, Kvist, Skarde houses; Maera's cairn-hut) are sub-areas of their POIs, not places.
 
@@ -489,7 +491,7 @@ All states are **per-player presentation** (bible §9). Co-op fallback: the host
 | Phase | G1, G2, G4, G6 | G3 Shoulder | G5 Lintel | G7 Gate gallery | Slab | Gatehouse |
 |---|---|---|---|---|---|---|
 | Before TF-M5 (TDS10) | Spent, grey props | Live, pale props | Live, pale props | Live, pale props | Up (open gate) | Door barred; interior unreachable |
-| TF-M5 `S02` | Spent (no Answer to their call) | Live → resolved (crew yielded or line cut) | Live → resolved; **unmanned** with `seized` | Ingrith draws its pins; sheds on the far apron | Half down | Crew camp; roster under soot |
+| TF-M5 `S02` | Spent (no Answer to their call) | Live → resolved (crew defeated or line cut) | Live → resolved; **unmanned** with `seized` | Ingrith draws its pins; sheds on the far apron | Half down | Crew camp; roster under soot |
 | TF-M5 `S03`–`S07` | — | Resolved | Resolved | Sheds on a rhythm (Fall + grit) | Half down → wound up (`S05`) → wedged (`S06`) → fresh wedges (`S07`) | Roster wiped and rubbed (per panel, persistent) |
 | TF-M5 `S08` dawn | — | — | — | Quiet | Up and wedged, wardens on it | Hushfold bedded in the warden room |
 | Post (all postures) | Spent | **Pinned dead** (iron straps) | Pinned dead | Cleared, loose stone barrowed off | By posture (Act III §E.5) | Cleaned roster wall; furniture by posture; child's mitten on the drill-board peg |
@@ -504,7 +506,7 @@ All states are **per-player presentation** (bible §9). Co-op fallback: the host
 | `TES` storm windows 1–5 | TP11 | Gust cycle, haze, Horn-Echo activity (TF-M3 only) |
 | `TSH_MAP_TIER` | TP17 | Entry route and crew start state |
 | `TSW` blizzard (quest-local) | Windscar high track, TP09 | Whiteout ~3 m (`S01`, `S07`); others see ordinary snow |
-| `TSW_THAW` | All Thornfell | Snow props → meltwater and wet stone; goats back on the ledges; Gatefall thaw event [PROPOSAL — DIRECTOR; Act III open decision 3] |
+| `TSW_THAW` | All Thornfell | Snow props → meltwater and wet stone; goats back on the ledges; Gatefall thaw event `[APPROVED — CDR 2026-11-03]` |
 | `TSL_STAFF_LEFT` / `_TAKEN` | Splitpine Crag | Staff in the crack or gone |
 | `TWG_LADDER_SET` | TP22 T2 | Ladder stays |
 | `TOS_COMPLETE` | TP16 | Path repaired |
@@ -524,7 +526,7 @@ All states are **per-player presentation** (bible §9). Co-op fallback: the host
 
 | Rule | Requirement |
 |---|---|
-| Season | `TH_SEASON` has two values only: **autumn**, then **snow** from TIW `S13_elira` start (bible §9.2). No world clock. Thaw is **quest-local** `TSW_THAW` [PROPOSAL — DIRECTOR] (C-7); no third `TH_SEASON` value. |
+| Season | `TH_SEASON` has two values only: **autumn**, then **snow** from TIW `S13_elira` start (bible §9.2). No world clock. Thaw is **quest-local** `TSW_THAW` `[APPROVED — CDR 2026-11-03]` (C-7); no third `TH_SEASON` value. |
 | Storm and blizzard | Every storm, storm window, whiteout, Close sky and stormlight is **per-player quest-local presentation** (keep-watch convention), never world weather. Leaving a zone pauses a quest storm at its current window. |
 | Gust tell | One convention: fluted face whistles up a fifth **2.5 s** before a **3 s** gust; push 2 m toward the safe side (C-1; TST's ~6 s long gust is the one exception). The level supplies the face, the lane and the marked shelter. |
 | Wind windows on climbs | Pushes go wallward or to the last stance; never off. |
@@ -614,8 +616,8 @@ All **MAP VERIFICATION REQUIRED**.
 1. **Track foot fork (§1):** approve one track foot beyond Three Calls forking to the Whinstone switchbacks and the high track?
 2. **Splitpine Crag:** keep as a TSL sub-space or count it as TP29 (unique landmark)? The TSL package invites a dossier-style rename.
 3. **Far hut distance** from the Gatefall far apron (Act III leaves it to the zone pass): recommend one whiteout leg (~the length of the Fluted Run) so both stragglers are findable in one search.
-4. **Thaw:** quest-local `TSW_THAW` or a third `TH_SEASON` value (Act III open decision 3)?
-5. **Kettlecrag and Brackenstep** stay off-map in v1.5?
+4. ~~Thaw~~ **Resolved 2026-11-03:** quest-local `TSW_THAW`; `TH_SEASON` stays two-valued.
+5. **Kettlecrag and Brackenstep** stay off-map in Thornfell content?
 
 ---
 
@@ -629,10 +631,10 @@ All **MAP VERIFICATION REQUIRED**.
 | C-2 | Hazard clamp | No hazard can kill a player above **25% HP**; TSL-H2 stormlight clamps at **10%**. |
 | C-3 | Hornman | Raise **1.5 s**; Gather gives allies within 8 m faster attacks for **8 s**; any hit during the raise interrupts; the player's **Rest within 3 s** cancels it in every hornman pocket. |
 | C-4 | Howler and calls | Draw **1.5 s**; a completed howl adds **+1 runner once** (TPW-E3 keeps +2 as authored escort pressure). Any call blown at a howler makes it flinch; Fall also makes bandits duck once per fight. |
-| C-5 | Ridge Wolves at low health | At or below 30% HP a wolf breaks off and limps away; **break-off counts as defeat** (step credit and co-op credit as a kill). **[PROPOSAL — DIRECTOR]**; if refused, wolves fight to 0% and only text changes. |
+| C-5 | Ridge Wolves at low health | **Removed by CDR-1 (2026-11-03).** Wolves fight until defeated at 0 HP; no break-off, no limp-away. Step and co-op credit at defeat. |
 | C-6 | Narrows bridge (TP07) | One per-player state machine, owned by the Zones package: **N0 down** (before TPW `S08_span`) → **N1 patched** → **N2 cracked only while TBC is Active** (overrides N1, N3 or N4 for that player) → **N3 mended** (TBC Completed) → **N4 permanent span** (TRR Active or Completed). Before TBC is accepted the bridge shows its ordinary state and TBC is offered by Aud's bark after a storm. The scree path is walkable in every state. |
-| C-7 | Season and thaw | `TH_SEASON` has two values: autumn, then snow from TIW `S13_elira` start. Thaw is the quest-local bool `TSW_THAW` (first re-entry to Thornfell after TF-M5 Completed and leaving the region once) **[PROPOSAL — DIRECTOR; Act III open decision 3]**; no third `TH_SEASON` value. |
-| C-8 | Ranged | Never required. While S01 is open every Ranged counter is optional and has a melee, brace or call alternative; TST's default is the racked unstrung stave. |
+| C-7 | Season and thaw | `TH_SEASON` has two values: autumn, then snow from TIW `S13_elira` start. Thaw is the quest-local bool `TSW_THAW` (first re-entry to Thornfell after TF-M5 Completed and leaving the region once) **[APPROVED — CDR 2026-11-03]**; no third `TH_SEASON` value. |
+| C-8 | Ranged | **S01 resolved by CDR-2.** Ranged is a first-class option in every fight and is never required; every counter that names Ranged also has a melee, brace or call answer. No fight is designed so ranged trivialises it (no boss shootable from a place it cannot reach). TST teaches the bow (cut, string, fletch, shoot); the racked unstrung stave is only the bowyer's display piece. Weapon, ammunition and XP values belong to the item and systems specialists. |
 
 | # | Inconsistency | Packages | Recommendation |
 |---|---|---|---|
@@ -661,3 +663,4 @@ All **MAP VERIFICATION REQUIRED**.
 | Name changes (2026-11-03) | This file names no roster or name-slip family; the review-pass renames (the name-slip "Sig Brede", the roster's Lunde family, the Tofte carters) need no edit here. |
 | **Reconciliation needed** | The four side-quest files were under independent review while this file was written. **After those reviews land, re-check §4 and §5 place rows taken from side quests, the §6.4 flag names, and Z-1, Z-2, Z-4, Z-6, Z-7 against the revised text.** Main-act rows reflect the committed packages. |
 | **Independent review (2026-11-03)** | 6 findings (0 high, 4 medium, 2 low). Grep checks against the committed packages: every flag in §6 exists; POIs match bible §4.2. Medium: stale names fixed (Hild Crane → **Brita Crane** ×4: stall, bow stall, rock, §5 row; Signy Brack → **Thyra Brack**; Hallvor → **Leiv**); the Kvist, Brede and Skarde houses already matched. Medium: `leverage` gave G3 new spearheads; Act III puts them on G5 (crew of 4), G3 is standard; fixed. Medium: the shared canonical register (§12 C-1 to C-8) added, identical in all three handoffs. Medium: the Narrows model now states N2 overrides other states and appears only while TBC is Active; TBC.1 and TBC.11 edited to agree (logged in that file). Low: `TH_SEASON` turns at TIW `S13_elira` start, not "TF-M2 completion"; aligned. Low: thaw restated as quest-local `TSW_THAW` [PROPOSAL — DIRECTOR]. Agility fallbacks, no grain route, no Remnant, no Emberholt direction re-checked. The reconciliation row above is closed by this review. |
+| **Director rulings reconciliation (2026-11-03)** | Applied CDR-1..3 (`Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md`). Header note: no tied-prisoner props, downed space or wolf break-off exit lanes (none were authored here; leash/reset only). Gatefall gallery state "resolved (crew yielded or line cut)" → "crew defeated or line cut" (×2). C-5 removed, C-7/`TSW_THAW` approved (§6.5, §7, open question 4 resolved), C-8 ranged first-class; TST wind butts specified as a shooting range. TWN open stone and TWC banner walk (Old Torvek's local tradition) marked approved. "v1.5"/"ship" wording → Thornfell content / milestone language. Earlier rows describe past states. |

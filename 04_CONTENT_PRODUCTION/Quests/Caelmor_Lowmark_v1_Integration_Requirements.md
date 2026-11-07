@@ -2,11 +2,13 @@
 
 **Status:** Requirements handoff from Creative Production, written for the Creative Production Director. Bible batch 5 (`Caelmor_Lowmark_v1_Narrative_Production_Bible.md` §12). This file states **what the authored Lowmark content needs the runtime, schemas and data to support**. It does not design schemas, write JSON or specify C#. Field names below are requirement labels. The **Schema & Content Engineer** owns all real names and shapes, and the **Systems Engineer** owns all runtime contracts.
 
+**Director rulings 2026-11-03 (binding):** `Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md`. CDR-1: every enemy is defeated at 0 HP; the non-lethal defeat requirements (yield thresholds, downed state, tied props, hostile→neutral swap for ordinary enemies) are **removed** and replaced by one small need, a quest on-defeat hook for named creatures (SX-1, SX-2) that plays a scripted outcome and spawns the NPC non-hostile. CDR-2: ranged is a core combat skill, accepted in every encounter, never required. CDR-3: "Lowmark v1" is the label of the first internal production milestone, not a release. Technical changes for the Systems Engineer: `Quests/Caelmor_Combat_Ranged_Release_Engineering_Handoff.md`.
+
 **Audience:** Systems Engineer (runtime, Stages 24–30, 33.x B2 bindings), Schema & Content Engineer (Stage 31, 32, 33.3/33.6/33.7 data, 34.x), with the Gameplay Designer, Zones/POI and item/economy passes named where they own a decision.
 
 **Quest lifecycle (Creative Director ruling, reconciled 2026-11-02 by the Systems Engineer):** quests have exactly three states, **Inactive → Active → Completed**. No quest fails or is abandoned. A quest the player leaves stays Active at its persisted step and is resumed, never re-instanced (§3.7). Stage 15.2, Stage 27 and `QuestRuntimeSystem.cs` now agree on this model.
 
-**Canonical choices applied (concurrent fix pass):** `LM_ORIEL_PROMISE` = aloud / many_hands / return; `LM_PLAN_ROUTES` and `LM_PLAN_MEMORIAL` replace `LM_PLAN_*`; MQ10's Under the Lamb chip = `UL_LEDGER` (weaker if `UL_LEDGER_CUT`; `UL_RHOSYN_WITNESS` for testimony); the player holds `SM_requisition` and `NF_bill_of_lading` until MQ10; human enemies are downed or yield rather than killed ([PROPOSAL — DIRECTOR], needs a yield mechanic). §10 marks these rows canonical.
+**Canonical choices applied (concurrent fix pass):** `LM_ORIEL_PROMISE` = aloud / many_hands / return; `LM_PLAN_ROUTES` and `LM_PLAN_MEMORIAL` replace `LM_PLAN_*`; MQ10's Under the Lamb chip = `UL_LEDGER` (weaker if `UL_LEDGER_CUT`; `UL_RHOSYN_WITNESS` for testimony); the player holds `SM_requisition` and `NF_bill_of_lading` until MQ10; ~~human enemies are downed or yield rather than killed~~ (superseded 2026-11-03 by CDR-1: defeat at 0 HP; SX-1/SX-2 via the on-defeat hook). §10 marks these rows canonical.
 
 **Sources read:** the bible (all); *The True Line* §9–12; the steps, flags, choices, items, integration, co-op and failure sections of `Caelmor_Lowmark_Main_Act_I/II/III.md` and the three `Caelmor_Lowmark_Side_Quests_*.md` files; dialogue-file condition and effect notation in `04_CONTENT_PRODUCTION/Dialogue & Narrative/`; `CODE/Systems/QuestRuntimeSystem.cs`; Systems Design Stages 15.1, 15.2, 15.3, 16.3, 27; `UNITY/README.md`; Roadmap Stages 24, 30, 31, 33, 34, 35.
 
@@ -14,7 +16,7 @@
 
 | Mark | Meaning |
 |---|---|
-| **MUST** | The content cannot ship as authored without it. Every MUST has a fallback named in §7 unless marked *no fallback*. |
+| **MUST** | The content cannot be built as authored without it. Every MUST has a fallback named in §7 unless marked *no fallback*. |
 | **SHOULD** | The authored experience degrades without it but stays playable and non-blocking. |
 | **[DIRECTOR]** | A Director-level item: it would amount to a new core system, a significant unapproved mechanic, or a ruling on an open `[PROPOSAL — DIRECTOR]`. Collected in §11. |
 | Quest codes | TL (MQ1) · SM MQ2 · HW MQ3 · NF MQ4 · GL MQ5 · TF MQ6 · DK MQ7 · MN MQ8 · BF MQ9 · CR MQ10 · SV MQ11 · RR MQ12 · side: WC BW FK BP HS · UL NB UR NT FW OL · SB UC TB WD CN VK FC · ME01–ME10 |
@@ -62,11 +64,12 @@ Owner key: **SE** Systems Engineer · **SCE** Schema & Content Engineer · **GD*
 | G17 | **Per-player instanced NPCs and creatures** (DK Bryn, HW Orrin, MN elk, SV evacuees, Muster visibility) | None | Owner-visible entities | 29.2; 28.2 | SE | **[DIRECTOR]** (fallbacks exist) |
 | G18 | **Follower / escort / walk-with NPCs**, including MQ11 trance state machine | NPC runtime has no movement behaviours | Follow, wait-at-checkpoint, pace-match; trance FSM | 25.x, 26.x, 35.3 | SE, GD | MUST |
 | G19 | **AI that targets props/NPCs** (withies, carts, lanterns, crew winch, Bryn, gate pawl) | Decision framework plans only | Prop/NPC target selection | 26.1–26.4 | SE, GD | SHOULD (fallbacks) |
-| G20 | **Non-lethal defeat**: humans downed at 0 HP; Sallow yields at 20%; Joss yields at 0 HP | Combat runtime has no yield | Threshold event, combat end, swap to non-hostile NPC | 25 (combat integration) | SE, GD | MUST; rule is **[DIRECTOR]** (§10 I-05) |
+| G20 | **Quest on-defeat hook (CDR-1)**: every enemy is defeated at 0 HP with the ordinary defeat; for two named creatures (SX-1 Joss, SX-2 Sallow) the quest plays a scripted outcome on defeat and spawns the NPC non-hostile | Combat runtime emits defeat; no quest hook on a named creature's defeat | A quest on-defeat hook for named creatures (SX-1, SX-2) that plays a scripted outcome and spawns the NPC non-hostile. No threshold, no downed state, no tied props | 25 (combat integration) | SE, GD | MUST (2 uses) |
+| G20a | **Ranged accepted in every encounter (CDR-2)**; WC has one optional borrowed hunter's short bow (§6.3) | Combat and item runtimes | Ranged combat, ammunition and weapon catalog are owned by Gameplay/Systems/Schema; no quest step requires ranged | 25; 36.2 | GD, SE, SCE | SHOULD (optional content) |
 | G21 | **Multi-level navigation** (depot, Lock, bell tower, falls path, bridge underside, culverts) and **agility triggers** | Flat NavMesh, no off-mesh links, no jump | Multi-level NavMesh; Phase 1.3 trigger boxes | 33.1.B; 30.2 | SE, ZN | MUST for multi-level; agility SHOULD (walkable fallbacks everywhere) |
 | G22 | **Craft/station bindings**: Cooking (6 sites), Leatherworking (tan-yard), Smithing (forge, mill anvil, WD anvil-stone) | None | Station binding | 33.5.B2 | SE, IT | MUST for FK/BP/HS; SHOULD elsewhere |
 | G23 | **Gathering and Hunting hooks** (Woodcutting gather events; Hunting approach/resolve/recover; F4 alert-and-flight) | Gathering designs exist | Runtime hooks + events | 33.4.B2; Hunting pass | SE, GD | MUST for WC/FK/MN; SHOULD elsewhere |
-| G24 | **Quest items** (8 for v1) with non-droppable, non-sellable, inspect text | Item runtime | Item definitions, flags | 31.1; 33.6.B | SCE, IT | MUST |
+| G24 | **Quest items** (8 for Lowmark) with non-droppable, non-sellable, inspect text | Item runtime | Item definitions, flags | 31.1; 33.6.B | SCE, IT | MUST |
 | G25 | **Server-emitted presentation events** (20 named, §2.3) for client-local effects | None | Event emission + client effect hooks | 30.1; ART | SE, ART | SHOULD (gameplay never reads them) |
 | G26 | **Quest persistence** including sub-step progress (segments, gate %, wave checkpoints, follower checkpoints) | In-memory only | Save/restore wiring | 24.4.A/B, 24.4.B2 | SE | MUST |
 | G27 | **Respawn anchors keyed to quest step** | Not specified | Respawn override by active quest step | 23.x/28.x (gap) | SE | MUST |
@@ -99,8 +102,8 @@ Owner key: **SE** Systems Engineer · **SCE** Schema & Content Engineer · **GD*
 | EV04 | **item.acquired** | player, item_def_id, qty, source (world pickup / NPC give / craft / gather) | Emitted by the inventory system after the grant commits. Quest reads, never writes inventory (Stage 27). | TL S03 (weathered post), S05 (marker_stem); SM S07 (`SM_requisition`); NF S07 (`NF_bill_of_lading`); TF S05 (sheets); DK S02a (bowl); CR S04 (`CR_board_minute`); WD S01b (stem) |
 | EV05 | **item.given** | player, recipient (npc_id or shrine target), item_def_id **or** item_category, qty | Server validates the item is held; transfer executed by inventory. Category matching required: "any cooked food", "ordinary wood × N", "any tannin-rich bark". | TL S08b, D7 hand-overs; FK S01/S04 (×4); BW S05 Build; BP S03; TF S09; DK S03; CR S07b; SV S02b; WC feed option; MN_FED; NT S01b; UL pass route; ME02; ME09 |
 | EV06 | **carry.picked_up / carry.deposited / carry.returned** | player, carry_object_id, deposit_target (volume or NPC), return_point | Carry objects never enter inventory. `returned` fires when a dropped or abandoned carry snaps back to its source (logout, leaving area, death). A carry-deposit onto an NPC counts as a give (TB gift). | TL sacks ×3, trunk; HW smoke-pot; GL stones, turf, stakes; TF beam; DK moss, stakes; CR record bundles ×2, soaked sacks, barge post, chips; SV lanterns; RR sack; WC sacks ×2; FK crates; BP armfuls ×3; UL crate, ledger; NB cloth; UR basket; NT bundles; OL lantern; UC paddle; TB fruit; CN boat; FC hurdles ×3, case, seed sack; WD hurdles ×2; ME10 lantern |
-| EV07 | **creature.defeated** | creature_instance_id, creature_def_id, encounter_id, group_id, wave, outcome (`killed`/`dispersed`/`downed`/`yielded`/`driven_off`), credited_players[] | Combat runtime authority. "Defeated" includes drift **dispersed** (may re-form) and humans **downed**. Group and wave ids are required ("NF-E2 groups A and B", "all DK-E2"). | TL E2/E4; SM E1, Sack-King; HW E1–E4; NF E1–E3; GL E1/E4b/E4c; TF E1/E2/E3a/E3b; DK E1/E2; MN E1 (and elk killed); CR E3; SV E1–E4, `the_muster`, serpent killed/driven; WC E1; UR E1/E2; FW E1–E3; UC E1; WD E1–E4; FC E1; NB E1/E2 |
-| EV08 | **creature.yielded** | creature_instance_id, threshold (% HP), yielding_npc_def_id | Ends combat for that creature and swaps it to a non-hostile NPC. `cr.sallow_yield` is one instance. | CR S06 (Sallow at 20%); OL S04 (Joss at 0 HP); NF Rusk (narrative yield after E3); downed humans in UL/NT (presentation, §7 M18) |
+| EV07 | **creature.defeated** | creature_instance_id, creature_def_id, encounter_id, group_id, wave, outcome (`killed`/`dispersed`/`driven_off`), credited_players[] | Combat runtime authority. "Defeated" includes drift **dispersed** (may re-form); humans are ordinary defeats (CDR-1). Group and wave ids are required ("NF-E2 groups A and B", "all DK-E2"). | TL E2/E4; SM E1, Sack-King; HW E1–E4; NF E1–E3; GL E1/E4b/E4c; TF E1/E2/E3a/E3b; DK E1/E2; MN E1 (and elk killed); CR E3; SV E1–E4, `the_muster`, serpent killed/driven; WC E1; UR E1/E2; FW E1–E3; UC E1; WD E1–E4; FC E1; NB E1/E2 |
+| EV08 | **creature.scripted_defeat** (replaces `creature.yielded`, CDR-1) | creature_instance_id, creature_def_id, quest step, npc_def_id to spawn | Fired by the quest's **on-defeat hook** when a named creature reaches 0 HP: suppresses the ordinary defeat presentation, plays the scripted outcome and spawns the NPC non-hostile. No HP threshold. `cr.sallow_yield` is one instance. | CR S06 (SX-2 Sallow, on defeat); OL S04 (SX-1 Joss, on defeat). No other users |
 | EV09 | **dialogue.node_reached** | player, dialogue_id, node_id, option_id chosen, flags `is_end`, `is_choice` | Emitted by the dialogue system after the node's effects commit. Satisfies Stage 16.3 (the NPC interaction itself never advances a quest). | Every quest. Specific non-end nodes: SM-D6.40, HW-D10.90, MN-D4 correct-reason, CR-D8.90, UL-D4.20, TF-D5 "tonight" |
 | EV10 | **gather.completed** | player, node_id, node_type, skill, outputs[] | Woodcutting gather. Must fire even when the output is ordinary inventory (driftroot jam). | HW driftroot_jam ×3; SM driftroot_choke (opt); TL marker stem; DK stakes; UR scrub ×3; FW withies ×5; FC logs ×2; WD stem; BP stems; GL dike stakes |
 | EV11 | **hunting.recovery_completed** | player, target creature_instance_id, outputs[] | Hunting recovery (field dressing) is not a combat kill (economy D02/D03). | WC S06a (sow); FK S02 (fowl ×2); optional elsewhere |
@@ -132,7 +135,7 @@ Owner key: **SE** Systems Engineer · **SCE** Schema & Content Engineer · **GD*
 | `tf.crew_scene` / `tf.pond_lag` | TF S04 / S08 | Window; then on S08 completion while in pond volume (else next entry) | Crew scene; reflection delay on the pond |
 | (MN quieting, §MN.7) | MN S07 | After split; restart once on interrupt | Inward rings, mist, Sedge exhausted |
 | `bf.curtain_hush`, `bf.pulse`, `bf.braids_sound` | BF S03, S06 | Threshold volume; Oriel action; valid gate order | Hush; silt thread down the Cut; Braid chord |
-| `cr.sallow_yield` | CR S06 | Yield at 20% HP | Kneel, chain grip |
+| `cr.sallow_yield` | CR S06 | On defeat at 0 HP (SX-2, EV08) | Hook dropped into the basin, chain grip |
 | `cr.minute_read` | CR S08 | When C7 laid and read (or when Aldric reads the finding) | Water-gate duck ~6 s; ceiling ripple stops |
 | `sv.fen_holds` | SV S07 | On seat-post at heart stone | Every loaded stone climbs/holds/releases; distant stones glint; fen-wide duck |
 | `silent_bell.pull` | SB S07 | On SB-D4 end | Bell swings (world animation); river ring for requester only |
@@ -357,7 +360,7 @@ The cast file's format (`NODE SPEAKER: "Line." (stage note)` / `> [condition] "P
 | Conjunction / disjunction | `[A and B]`, `[A or B]`, `[A and B and C]` | Act I |
 | Item held (specific) | `[weathered_marker_post]` | TL D7 |
 | Item category held | "player holds cooked food", "has a cutting tool", "has no cutting tool" | WC, FK, TL D5, CR fire-lines |
-| Node seen | `[D1.10 seen]`, `[SM-D6.20 seen]`, `[NF-D7.10 seen]` | many |
+| Node seen | `[D1.10 seen]`, `[SM-D6.20 seen]`, `[NF-D9.05 seen]` | many |
 | Inspect done | `[all three inspected]`, `[rotted stone inspected]` | GL, TF |
 | Quest state | `[completed side quest OL]` | Act III |
 | Step state | dialogue available "from S01 until S07" | TL leads |
@@ -409,7 +412,7 @@ The cast file's format (`NODE SPEAKER: "Line." (stage note)` / `> [condition] "P
 | Behaviours | idle, walk-to-point-and-use, follow, escort, walk-with (pace-match, wait at checkpoints), invulnerable, cannot-be-targeted, ally slow-aura |
 | Interaction sets | Dialogue entries by step and flags (35.2) |
 | Post-game sets | Placement and barks by `LM_FEN_ENDING`, `CR_TERMS × LM_HESKETH`, etc. (Act III §E) |
-| Hostile/neutral swap | Yielding enemies become NPCs (Sallow, Joss, Rusk) |
+| Post-defeat NPC spawn | Only SX-1 Joss and SX-2 Sallow: the quest's on-defeat hook spawns the person as a non-hostile NPC (EV08). No hostile→neutral swap for ordinary enemies (CDR-1) |
 
 ### 5.2 Roster across all packages
 
@@ -430,7 +433,7 @@ Counts are distinct authored placement sets or schedule entries (estimate from p
 | Dace | NEW (TL) | TL, NT, RR | 4 | Invulnerable lane holder (NT) |
 | Ansel Corrie | NEW (TL) | TL, HW, NF, CR, SV, RR, OL, ME10 | 11 (+3 var) | Lectern patrol book |
 | Edda Marrick `[ANTAGONIST]` | NEW | SM, CR, RR | 6 (+3 var) | Glimpse actor |
-| Gideon Sallow `[ANTAGONIST]` | NEW | NF, CR, RR | 5 | Scripted escape path (NF); miniboss → yield → NPC |
+| Gideon Sallow `[ANTAGONIST]` | NEW | NF, CR, RR | 5 | Scripted escape path (NF); miniboss → defeated → scripted surrender (SX-2) → NPC |
 | Bram Hesketh | NEW | SM, CR, RR | 7 (+2 var) | Escort at sprint pace, ignored by crew (CR S04) |
 | Keeper-Lieutenant | NEW | CR, RR | 2 | Commission giver if `stood_down` |
 | Sedge `[D-7]` | NEW | GL, MN, BF, SV, RR, UC, TB, ME09 (implied) | 11 | Walk-with (MN, BF); quieting channel; sits on UC seat as a hint |
@@ -445,8 +448,8 @@ Counts are distinct authored placement sets or schedule entries (estimate from p
 | Tamsin | NEW | BW, SB, VK, ME01 | 5 | Escort-lite follow (BW); pulls bell rope |
 | Rhosyn Lyle | NEW | UL, CR, RR | 6 | Follows player out (UL S04) |
 | Imber Cobb | NEW | TF | 4 | — |
-| Joss Garrow ("Old Lantern") | NEW | OL, SV, RR | 4 | Patrol path; miniboss → yield → follower |
-| Rusk | NEW | NF | 1 | Yielded crewman, tied |
+| Joss Garrow ("Old Lantern") | NEW | OL, SV, RR | 4 | Patrol path; miniboss → defeated → scripted surrender (SX-1) → follower |
+| Rusk | NEW | NF | 0 (removed: CDR-1) | Crew boss creature only (NF-E3); fights to 0 HP; no NPC, no dialogue. Maelin names Sallow at dawn (T-1) |
 | Orrin Tull | NEW | HW | 3 | Follows smoke ring; invulnerable; position checkpointed |
 | Wenna Tull | NEW | HW | 1 | — |
 | Mabry Gorse | NEW | HW | 1 | — |
@@ -516,6 +519,7 @@ Carry rules (all packages): walk and sprint allowed; no agility while carrying (
 |---|---|---|---|
 | Crew hatchet | Maelin (TL D5), row-warden (UR) | Lacks a cutting tool | Kept |
 | Hunter's field knife | WC eldest (`WC-D6`) | Lacks a recovery tool | Kept |
+| Hunter's short bow *(name is a proposal for the economy pass)* | WC hunter (optional, CDR-2) | Player chooses to borrow it for the culprit hunt | Keep/return rule for the item pass; no stats here |
 | Bank axe | BW upper household | Lacks a cutting tool | Kept |
 | Yard knife | Kell (`BP-D4`) | Lacks a Leatherworking tool | Kept |
 | Forge tongs | Brigid (`HS-D1`) | Lacks Smithing tools | Kept |
@@ -550,7 +554,7 @@ Each row: who uses it, the minimum viable implementation (MVI) and the fallback 
 | M15 | Ordered-slot puzzle with validator returning first contradiction | TF S06 | Seven slot interactions accepting one page sub-state each; validate interaction returns a text key; third wrong check unlocks Imber hint | Per-player UI list over the same floor |
 | M16 | Set-piece state machine: gate band 0–3 with NPC pry channel and far crank | TF S08 | Integer band; inputs pawl seated/free, far-crank alive, wind-down channel; tick timer | — (no-fail by design) |
 | M17 | NPC hold with slip trigger (hit or lunge inside 2 m → 5 s slip, flood decal) | DK S05 | NPC flag `holding`; slip event; counter `DK_SLIPS` | — |
-| M18 | **Non-lethal defeat**: humans downed at 0 HP; yield at HP threshold; combat end; swap to NPC | NF Rusk, UL, NT, CR Sallow (20%), OL Joss (0 HP) | Defeat outcome `downed` (stays down until area exit) and `yielded` (EV08) | Joss "sits" on defeat; Sallow yields at 0 HP |
+| M18 | **Quest on-defeat hook (CDR-1)**: quest on-defeat hook for named creatures (SX-1, SX-2) that plays a scripted outcome and spawns the NPC non-hostile | OL Joss (SX-1), CR Sallow (SX-2) | Hook on the creature definition or encounter: on 0 HP, play the authored outcome and spawn the NPC (EV08) | Ordinary defeat, then the NPC is placed at the spot by the step's NPC placement set |
 | M19 | Gate progress with crew channel, harass pause, decay while a flagged creature is in volume | SV S03–S05 | Per-player progress bar; NPC tick rate; player crank doubles; serpent-in-volume decays | Per-player progress, shared enemies |
 | M20 | Evidence-chip table (deposit volume, per-chip validity, weight, singe, clauses, refusals) | CR S08 | Data list of chip ids with source conditions, holder, weight, singe flag, clause; deposits increment `CR_CHIPS_LAID` / `CR_WEIGHT`; non-chips draw a refusal line | Chips laid by dialogue with the holder; only the speaking holder's prop appears |
 | M21 | Smoulder timer on carry objects | CR S04 | Per-object timer from volume entry; on expiry sets singe flag and moves object to yard; pauses while player dead; never on logout | — |
@@ -624,7 +628,7 @@ Baseline (all packages; Stages 13/15): restore the last persisted step and flags
 | UL S04 | Ledger returns to desk and **step resets to S03** | Step regression (§10 I-14) |
 | NB | Faces rubbed stay rubbed | Per-object flags |
 | NT | Restores the last completed watch | Watch index persisted |
-| OL S06 | Restart S06 with Joss at the bend, already yielded | Post-yield NPC state persisted |
+| OL S06 | Restart S06 with Joss at the bend, already surrendered (SX-1) | Post-defeat NPC state persisted |
 | UC | Steps and latched props persist; float resets if S01 incomplete | Per-player latched prop state |
 | TB S04 | Logout mid-dream: S04 complete on login, player at the tree at first light | Once-only moment marked on start |
 | WD | Night restarts from S02; drain restarts at the grate | Step-entry restart |
@@ -647,16 +651,16 @@ Baseline (all packages; Stages 13/15): restore the last persisted step and flags
 
 Precondition: **M0 = TL slice** per TL §12.3–12.4 (steps + flags, minimal dialogue, inspect/channel, encounter pockets, carry or fallback, quest persistence). Everything below assumes M0 passes its acceptance test.
 
-The shortest dependency path to a playable Lowmark slice is **Act I in order (MQ2 → MQ3 → MQ4)** plus side content that reuses only what Act I builds. Act I exercises every high-frequency contract (region flags, cross-quest reads, quest items, drift-site state, time windows, follower, segmented channel, non-lethal defeat) while avoiding the expensive Act II–III set pieces.
+The shortest dependency path to a playable Lowmark slice is **Act I in order (MQ2 → MQ3 → MQ4)** plus side content that reuses only what Act I builds. Act I exercises every high-frequency contract (region flags, cross-quest reads, quest items, drift-site state, time windows, follower, segmented channel) while avoiding the expensive Act II–III set pieces.
 
 | Milestone | Content | New contracts it forces (beyond M0) | Depends on |
 |---|---|---|---|
 | **M1 — Chain** | MQ2 *Short Measure*; FC *What the Flood Carried*; ME01, ME02, ME05, ME08 | Region flags (`LM_TL_EVIDENCE`, `LM_GRAIN_ROUTE`); quest-state predicates and unlocks; quest item with inspect; cross-quest flag reads after completion; resume hook; multi-level NavMesh (depot); traps (M29); elite reset; per-player cart props or fallback | 24.1–24.4, 31.1, 31.3, 31.5 subset, 33.1.B |
 | **M2 — The water** | MQ3 *Heavy Water*; ME10; optional FK if the Cooking station and Hunting hooks exist | Drift-site state + re-form (M09, M11; **needs D-6 ruling**); dusk window via keep-watch (M04); smoke ring (M06); follower with checkpoint (M08); parallel step groups; synthesis dialogue with counters | M1; 33.7; D-6 |
-| **M3 — Act I turn** | MQ4 *The Night Flush*; UL *Under the Lamb* or NT *Night Ferry* | Watch steps (EV14); zone-wide script event (`night_flush.surge`); pathed vessel (M26); trail clues (M27); segmented channel (M03); downed/yield (M18; **needs I-05 ruling**); physical choice by interaction | M2 |
+| **M3 — Act I turn** | MQ4 *The Night Flush*; UL *Under the Lamb* or NT *Night Ferry* | Watch steps (EV14); zone-wide script event (`night_flush.surge`); pathed vessel (M26); trail clues (M27); segmented channel (M03); ordinary defeat (I-05 ruled, CDR-1); physical choice by interaction | M2 |
 | **M4 — Act II core** | MQ5, MQ6, MQ7 (+ UR, WD, CN) | Set-piece controllers M16, M17 (**D-INT-1**); ordered-slot puzzle (M15); carry facing check; wave checkpoints persisted; mimic barks; AI targeting props/NPCs (M31) | M3; D-INT-1 |
 | **M5 — Act II turn** | MQ8, MQ9 (+ UC, SB, VK) | Herding (M13); drift split (M10); walk-with (M08); flow-table (M22); observation volume (M14); per-player instanced creature or fallback (M45) | M4 |
-| **M6 — Act III** | MQ10, MQ11, MQ12 (+ OL, FW, NB, TB) | Evidence table (M20); smoulder (M21); threshold yield; Muster (M35–M37); trance FSM (M07); gate progress (M19); ending matrix bulk writes; post-game placement sets; dream layer (M23) | M5 |
+| **M6 — Act III** | MQ10, MQ11, MQ12 (+ OL, FW, NB, TB) | Evidence table (M20); smoulder (M21); on-defeat hook (M18, SX-2; also OL SX-1); Muster (M35–M37); trance FSM (M07); gate progress (M19); ending matrix bulk writes; post-game placement sets; dream layer (M23) | M5 |
 
 ### 9.1 Acceptance tests per milestone
 
@@ -664,7 +668,7 @@ The shortest dependency path to a playable Lowmark slice is **Act I in order (MQ
 |---|---|
 | M1 | 1. MQ2 is not offered before TL completes, and is offered on granary-yard entry after. 2. Each of the three `LM_TL_EVIDENCE` values produces the matching `SM-D1` opening. 3. Each `LM_GRAIN_ROUTE` value is reachable and persists across logout. 4. `SM_requisition` cannot be dropped or sold and survives death in the depot. 5. Logout mid-dungeon resumes at the hill gate with earned shortcuts. 6. Dying to the Sack-King resets him to full and keeps all steps. 7. Leave MQ2 mid-quest, travel away and re-enter the yard: MQ2 is still Active at the same step, the resume prompt plays, and the requisition is not granted twice. 8. FC and four micro-events complete using only M0 contracts; `ME01_RULE` and `ME05_CUP` persist. 9. Two-player co-op: both complete MQ2 with different grain routes and each sees their own result (or the fallback bark). |
 | M2 | 1. Sites A, B, C complete in all six orders; `HW_FIRST_DRIFT_SITE` and teaching line follow. 2. Orchard pool drift re-forms until the lever, then never spawns again for that player. 3. Arriving in daylight and hauling the lever early still sets `HW_DRIFT_TAUGHT` by a fallback line. 4. Orrin cannot be lost; lapsed ring makes him stand; logout restores his last ring. 5. Synthesis reaches `HW-D10.90` with zero optional leads. 6. A partner who has not drained their pool still sees and fights their own drift (or the shard fallback completes their step on entering the drained-pool volume). |
-| M3 | 1. Watch takes one step with `HW_LEAD_TALLY`, two otherwise; standing cancels and resumes. 2. No UI appears during `night_flush.surge`. 3. Falling behind the barge never fails; the barge waits at the sill. 4. Crank segments survive damage, death and logout. 5. Sallow cannot be reached or killed. 6. Rusk is downed/yielded, not killed, and names Sallow only in dialogue. 7. Smash and chain each set `LM_LOCK_STATE` and the matching prop (or fallback). 8. Bramblelock pool is quieted at dawn. 9. All Act I acceptance tests in the Act I file pass end to end. |
+| M3 | 1. Watch takes one step with `HW_LEAD_TALLY`, two otherwise; standing cancels and resumes. 2. No UI appears during `night_flush.surge`. 3. Falling behind the barge never fails; the barge waits at the sill. 4. Crank segments survive damage, death and logout. 5. Sallow cannot be reached or killed. 6. Rusk fights to 0 HP with the ordinary defeat; Sallow's name comes from Maelin at dawn, never from a defeated enemy. 7. Smash and chain each set `LM_LOCK_STATE` and the matching prop (or fallback). 8. Bramblelock pool is quieted at dawn. 9. All Act I acceptance tests in the Act I file pass end to end. |
 | M4 | 1. MQ5 and MQ6 complete in either order with correct cross-lines. 2. TF validator returns a contradiction for every wrong order tested; three wrong checks trigger Imber. 3. TF hold reaches band 3 at worst and never fails; death mid-hold resumes at current band with paused timer. 4. DK reaches `LM_ORCHARD_LOSS = none` and `= partial`; logout mid-hold restores slips to last completed wave. 5. Every `LM_FIELD_FIX` value reachable; UR outcome changes GL's plot option without removing it. |
 | M5 | 1. `LM_SEDGE_TRUST = cool` by elk killed and by "mage"; `warm` otherwise; MQ9 offered in all cases. 2. Drift split caps at depth 2; interrupting the quieting twice still finishes. 3. Flow-table wrong order resets without limit. 4. UC float moves only while unobserved; standing on the lip never advances it; culvert stays open thereafter. 5. Each `LM_ORIEL_PROMISE` value reachable and persisted under one canonical value set (I-02 resolved). |
 | M6 | 1. Main-only play yields seven chips and `CR_TERMS ≥ firm` with every bundle singed. 2. Refusing Sallow's terms still exposes Marrick. 3. Logout in CR S04 never singes. 4. Every MQ11 trance resolves; no follower can drown. 5. Gate 2 progress decays only while the serpent is at the sill. 6. Muster death resets to phase top; logout restarts at 100%. 7. Each `LM_FEN_ENDING` writes the §E.1.2 drift-site table exactly. 8. `LM_CIVIC_STANDING` set at RR S06 and all four commission offer lines play. 9. Two-player co-op completes MQ10–12 independently with different endings. |
@@ -679,7 +683,7 @@ The shortest dependency path to a playable Lowmark slice is **Act I in order (MQ
 | I-02 | Flag values and step **(canonical per fix pass)** | `LM_ORIEL_PROMISE` = aloud / many_hands / return (Act II) vs promise_1/2/3 (Act III §0.2, §12.11, §E.2). Setting step `S07_promise` (Act II §A2.5) vs `S08_promise` / `BF-D6` (BF.9) | Act II, Act III | **Canonical: aloud / many_hands / return.** Setting step `S08_promise` (`BF-D6`); fix A2.5 if the fix pass has not |
 | I-03 | Enum value format | `LM_HESKETH = stood-down` uses a hyphen | Bible, Act III | `stood_down` in data; prose may keep the hyphen |
 | I-04 | Chip C8 and Rhosyn **(canonical per fix pass)** | UL makes the chip **the crew ledger** (`UL_LEDGER`, weakened by `UL_LEDGER_CUT`; Rhosyn attends only if `UL_RHOSYN_WITNESS`) and asks Act III to use those flags. Act III's C8 is **"Rhosyn's forged papers", held by Rhosyn in person**, gated on "completed side quest UL", and sets `CR_RHOSYN_LAID`; MQ12 says `CR_RHOSYN_LAID = false` → "she's in the cellar", which contradicts UL options *gone* (left downriver) and *witness* (with the keepers). Bible §6.1 says "Rhosyn's forged papers" | UL.11; Act III §10.5.2, §E.2; bible §6.1 | **Canonical:** C8 = crew ledger, available if `UL_LEDGER`; weight 2, −1 if `UL_LEDGER_CUT`; Rhosyn present as witness only if `UL_RHOSYN_WITNESS`. Key MQ12's Rhosyn scene on `UL_RHOSYN_*`, not on `CR_RHOSYN_LAID`. Update bible §6.1 wording |
-| I-05 | Human defeat rule **(canonical direction per fix pass; still [PROPOSAL — DIRECTOR])** | S&C §0.3: Smugglers are **downed** at 0 HP; Joss **yields** at 0 HP [PROPOSAL — DIRECTOR]. MQ10: Sallow yields at **20%**, "same mechanism used by no other v1 creature; flagged as new". MQ4: Rusk "has yielded"; "defeated humans kneel and are tied" | S&C, Act III §10.13, Act I §C12 | **Canonical direction:** human enemies are downed or yield, never killed; this needs a yield mechanic (M18, EV08). Remains [PROPOSAL — DIRECTOR] until ruled; Sallow's 20% threshold is the one scripted yield. **[DIRECTOR]** |
+| I-05 | Human defeat rule | Earlier packages: Smugglers **downed** at 0 HP; Joss **yields** at 0 HP; Sallow yields at **20%**; Rusk "has yielded"; "defeated humans kneel and are tied" | S&C, Act III §10.13, Act I §C12 | **Resolved 2026-11-03 by CDR-1.** Every enemy is defeated at 0 HP; no yield mechanic, downed state or tied props. SX-1 Joss and SX-2 Sallow use the quest on-defeat hook (M18, EV08). |
 | I-06 | Item custody: `SM_requisition`, `NF_bill_of_lading` **(canonical per fix pass)** | Act I: both "kept by the player to MQ10", no branch hands them to keepers. Act III bundles 1/2 contain them "if Act I left it with the keepers" | Act I §Quest-item budget; Act III §10.4 Beat 3, §10.5.2 C3/C4 | **Canonical:** the player holds both until MQ10. Remove the keeper-custody branch from Act III bundles; chips C3/C4 are laid from inventory |
 | I-07 | Item custody: `tovin_floor_sheets` | Act II: given to the keeper at S09 under both options and held in the record room. Act III: named → "Tovin, in person"; unsigned → bundle 2 | Act II §A2.6; Act III C6 | Sheets always in the record room (bundle 2). `named` adds Tovin as a present witness and full weight; `unsigned` lays the sheets alone |
 | I-08 | Smoke-pot | MQ3: carry-state object from the Step's stake box. OL: "a bundle of banner-thistle smoke… carried Watcher tool, reusable for this quest". MQ11: loaned tool with 3 uses per fill, kept as a reward tool | Act I §B6; S&C OL.3; Act III §11.4, §11.11 | One tool, `watcher_smoke_pot`, defined by the item pass: carry-and-set-down use in MQ3 (loaned for the quest), channel-at-target use with charges in OL and MQ11, kept from MQ11. Not a quest item |
@@ -704,14 +708,20 @@ The shortest dependency path to a playable Lowmark slice is **Act I in order (MQ
 | # | Item | Why it is Director-level | Content affected | Recommendation |
 |---|---|---|---|---|
 | D-INT-1 | **Set-piece controllers** (TF gate band, DK hold/slip, SV gate progress with decay, BF flow-table, CR evidence table, UC observation, Muster drag stones) | No scripting layer exists, and 15.3 forbids scripting in trigger evaluation. Seven bespoke state machines amount to a small new system. | MQ6, 7, 9, 10, 11; UC | Approve **one** generic, data-configured "set-piece state" component (named states, counters, timers, inputs from events; emits EV19/EV20) owned by Systems, rather than seven one-off scripts. |
-| D-INT-2 | **Per-player instanced NPCs and creatures** (owner-visible entities) | Effectively a phasing capability in replication and spawning. | DK Bryn, HW Orrin, MN elk, SV evacuees and Muster visibility, BF Sedge, WC sow | Do not build for v1. Ship the authored shared-entity fallbacks; revisit after M3. |
-| D-INT-3 | **Dream presentation layer** (TB) | A bounded per-player world-dressing swap with aggro immunity; the package calls it "the most expensive presentation in this file". | TB only | Approve the 60 m-ring fallback for v1. |
-| D-INT-4 | **Non-lethal defeat / yield mechanic** (I-05) | Canonical direction (downed or yield, never killed) is still a [PROPOSAL — DIRECTOR] and needs a new yield mechanic in combat runtime. | NF, UL, NT, CR, OL | Approve the rule and the yield mechanic (M18) before M3. |
+| D-INT-2 | **Per-player instanced NPCs and creatures** (owner-visible entities) | Effectively a phasing capability in replication and spawning. | DK Bryn, HW Orrin, MN elk, SV evacuees and Muster visibility, BF Sedge, WC sow | Do not build for the Lowmark milestone. Use the authored shared-entity fallbacks; revisit after M3. |
+| D-INT-3 | **Dream presentation layer** (TB) | A bounded per-player world-dressing swap with aggro immunity; the package calls it "the most expensive presentation in this file". | TB only | Approve the 60 m-ring fallback for the Lowmark milestone. |
+| D-INT-4 | ~~Non-lethal defeat / yield mechanic~~ (I-05) | **Resolved 2026-11-03 by CDR-1.** | OL, CR | Done. Only need left: the quest on-defeat hook for named creatures (SX-1, SX-2) that plays a scripted outcome and spawns the NPC non-hostile (M18). See `Quests/Caelmor_Combat_Ranged_Release_Engineering_Handoff.md`. |
 | D-INT-5 | **D-6 drift-site state model** | Bible D-6 is open. Drift-site state, re-forming creatures, split (MN) and the MQ11 ending matrix all assume "disperse vs quiet". A "Wraiths can be destroyed" ruling removes M09–M11 and the MQ8 demonstration. | MQ3, 4, 6, 7, 8, 11; WD, CN, OL | Rule on D-6 before M2 starts. |
-| D-INT-6 | **Keep-watch as a per-player quest clock** | Determines whether Lowmark needs a world clock at all for v1. Content currently relies on a local clock. | 17 packages | Approve the per-player quest clock (I-11) and defer world time. |
+| D-INT-6 | **Keep-watch as a per-player quest clock** | Determines whether Lowmark needs a world clock at all for its milestone. Content currently relies on a local clock. | 17 packages | Approve the per-player quest clock (I-11) and defer world time. |
 | D-INT-7 | **Quest-state model** (I-13) | **Ruled 2026-11-02.** The Director confirmed three states (Inactive, Active, Completed); no Failed or Abandoned. | All | Done. Stage 15.2, Stage 27 and `QuestRuntimeSystem.cs` reconciled; §3.7 rewritten. |
 | D-INT-8 | **C8 / Rhosyn canon** (I-04) | Resolved in the fix pass (crew ledger, `UL_LEDGER`); Director confirms the bible §6.1 wording change. | UL, MQ10, MQ12 | Confirm. |
 | D-INT-9 | **Name clashes** (I-15) | Renaming authored [NEW] households and characters. | MQ2, MQ12, WD, ME07, MQ3, UR | Approve renames before dialogue line keys are generated. |
 | D-INT-10 | **Vendor and opportunity states** (BP, HS, WC, FK) | Economy surface is reopened by the Director's re-entry directive and is not in narrative scope. | Side quests | Route to the economy pass; narrative needs only the open/closed flags. |
 
 **Open bible decisions that block data but not runtime:** D-1 (antagonist; swap layer is tagged), D-7 (Sedge; `[D-7]` tags), D-8 (Oriel; `[D-8]` tags), D-9 (subzone names), D-5 (map: every flow-table, observation-volume and zone placement is **MAP VERIFICATION REQUIRED**).
+
+---
+
+## Director rulings reconciliation (2026-11-03)
+
+Applied `Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md`. Removed every non-lethal defeat need (G20 threshold/downed/swap, EV07 `downed`/`yielded` outcomes, EV08 `creature.yielded`, the NPC hostile/neutral swap row, M18 non-lethal defeat, Rusk as a tied NPC, the I-05 and D-INT-4 open rulings) and replaced them with one need: a quest on-defeat hook for named creatures (SX-1 Joss, SX-2 Sallow) that plays a scripted outcome and spawns the NPC non-hostile (G20, EV08 `creature.scripted_defeat`, M18). `cr.sallow_yield` now fires on defeat. Added G20a (ranged accepted everywhere, never required; WC optional borrowed short bow). Release wording changed to milestone language (CDR-3). Pointer added to `Quests/Caelmor_Combat_Ranged_Release_Engineering_Handoff.md`. Ids, steps and flags unchanged.

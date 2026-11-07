@@ -37,7 +37,7 @@ Conditions use flags from the quest file §0.2–0.5 and each quest's flag table
 - **Guardrail:** no cackling, threats or confession speech. She never says "I did it." She says what she thinks she did instead.
 
 ### Gideon Sallow — river factor [NEW] `[ANTAGONIST]`
-- **Act III function:** miniboss; yields; optional witness.
+- **Act III function:** miniboss; scripted surrender when defeated (SX-2, CDR-1); optional witness.
 - **Want:** paying, and dry feet. **Fear:** the fen.
 - **Knows:** the Lock, the posts, the flush schedule, the buyer's name on the bill. **Doesn't know:** who the buyer really is.
 - **Voice:** cheerful, quick, superstitious. Touches any chain before he does anything that matters. Jokes in a fight. Calls the player "friend" the way a man says it to a horse.
@@ -224,7 +224,9 @@ CR-D5.02 SALLOW: "No? Shame. Nobody's ever let me have anything easy, friend."
 | Pole-men join | "Lads! Work for your money!" |
 | Shove misses into a bollard | "Ow. Yes. Fair." |
 
-### CR-D6 — Sallow yields (`S06_sallow`) `[ANTAGONIST]`
+### CR-D6 — Sallow's surrender (`S06_sallow`) `[ANTAGONIST]`
+
+Plays when Sallow is defeated at 0 HP: the quest's defeat hook runs his scripted surrender (register exception SX-2) and `cr.sallow_yield` fires on defeat. No health threshold.
 
 ```
 CR-D6.01 SALLOW: (both hands on the chain) "Enough. Enough. I'm done. Look, no hook."
@@ -236,17 +238,17 @@ CR-D6.02 SALLOW: "Keepers'll want me. Fine. Get me out of this basin first, I'm 
 CR-D6.10 SALLOW: (long look) "You did. I saw." (beat) "He can't swim. None of them can. I never asked."
 CR-D6.11 SALLOW: "All right. Lock, posts, the buyer's name off the bill. And tonight."
 CR-D6.12 SALLOW: "She said there should be nothing to read in the morning. Those words. I'll say them in the hall."
-CR-D6.13 SALLOW: "One thing. My crew work the seal, not the lock-up. They only did what I paid them for."
+CR-D6.13 SALLOW: "One thing. My river hands, the ones you'll take up by noon. They work the seal, not the lock-up. They only did what I paid them for."
       {set CR_SALLOW_ACCOUNT = full}  → CR-D6.30
 
 CR-D6.20 SALLOW: "The fen?" (touches the chain) "Don't. Don't talk about the fen down here."
 CR-D6.21 SALLOW: (listening to the player) "Every flush. Every one dragged that out." (quietly) "I used to wave at the fog."
 CR-D6.22 SALLOW: "I'll tell them how we ran the Lock. Every flush, every post. Not tonight, though. Tonight's hers."
-CR-D6.23 SALLOW: "One thing. My crew work the seal, not the lock-up. They only did what I paid them for."
+CR-D6.23 SALLOW: "One thing. My river hands, the ones you'll take up by noon. They work the seal, not the lock-up. They only did what I paid them for."
       {set CR_SALLOW_ACCOUNT = lock if not already full}  → CR-D6.30
 
 CR-D6.30
-  > "You have my word. Your crew work the seal."     → CR-D6.31
+  > "You have my word. Your hands work the seal."    → CR-D6.31
   > "That's not mine to promise."                   → CR-D6.33
 CR-D6.31 SALLOW: "Then you have mine. Such as it is." (lets go of the chain)
       {set CR_CREW_LENIENCY}  → CR-D6.40
@@ -467,7 +469,7 @@ CR-D11.05 ANSEL: "Reedmere, then. Before dusk tomorrow. Bring food. Bring your b
 | Barge loose | POLE-MAN | "Cut it! Cut it and push!" | — |
 | Mooring line thrown | KEEPER | "That's one fast! Next bollard!" | — |
 | Gate lever | KEEPER | "Drop it!" | — |
-| Crew downed | POLE-MAN | "All right! All right, I'm down!" | — |
+| (removed: CDR-1; crew are ordinary defeats) | — | — | — |
 | Crewman swept | POLE-MAN (young) | "I can't — the gate — I can't swim!" | — |
 | Haul complete | POLE-MAN (young) | (coughing) "...Thanks. Don't tell him." | `CR_HAULED_CREWMAN` |
 | Hearing, gallery, after C2 | HOUSEHOLD | "Eighty sacks. That's our winter." | — |
@@ -710,7 +712,7 @@ SV-D9.03 MAELIN: "You'll see."           → end {event: quest Completed; MQ12 b
 | Arrival | CREW (to Lock man) | "You. Under watch. Crank's that way." | `CR_CREW_LENIENCY` |
 | Current begins | WATCHER | "There it goes. Lanterns up!" | — |
 | Serpent killed | CUTTER (post-quest) | "They found it on the sill at dawn. Big as a barge. Nobody's eating it." | `SV_SERPENT_KILLED` |
-| Serpent driven | CUTTER (post-quest) | "It went back down. It'll stay down, if it's sensible." | `SV_SERPENT_DRIVEN` |
+| (removed: CDR-1; the Serpent is always defeated, `SV_SERPENT_DRIVEN` is never set) | — | — | — |
 | After the hold | WATCHER | "Lantern holds!" / "Holds!" | — |
 | After the hold | CUTTER (humming) | (the listeners' tune, badly) | `VK_COMPLETE` |
 | Arrival, loft | ELSPETH | (to Joss, wrapping a second blanket round him) "Stove side. You know the stove side." | `OL_JOSS_IN` |
@@ -1040,6 +1042,7 @@ Spoken once, on first meeting with the flag set. Each opens the commission packa
 | Line length and six-line rule | Checked every node; Hesketh's CR-D9.01–.04 and Marrick's CR-D8 chip answers come in at or under six NPC lines before control returns. Maelin's RR-D6 is her one long line of the act. |
 | Marrick never names anyone | Verified across CR-D2, CR-D8, RR-D2. She says "Factor," "my factor," "dear," "the households." |
 | `[ANTAGONIST]` tags | Every node naming or voicing Marrick or Sallow: CR-D1.10, CR-D2, CR-D5, CR-D6, CR-D7.04, CR-D8, CR-D10.40, SV-D4.03, RR-D2, RR-D12, the Sallow MQ12 bark, the Crestbridge household bark. |
+| Director rulings reconciliation (2026-11-03, CDR-1) | CR-D6 now plays on Sallow's defeat (SX-2 scripted surrender; no 20% threshold); cast note updated. CR-D6.13/.23/.30 say "river hands" (crew the keepers take up, never fought), so `CR_CREW_LENIENCY`, SV-D5.02, the gate-1 bark and RR-D12 stand. Removed: MQ10 "Crew downed" bark and MQ11 "Serpent driven" bark (rows left as "removed: CDR-1"). No line ids renumbered. |
 | Independent review pass | `RR-D4.02` keyed to `aloud` / `many_hands` / `return` with Act II's exact words (blocker). C8 rewritten as the UL crew ledger (`UL_LEDGER`, `UL_LEDGER_CUT`, `UL_RHOSYN_WITNESS`). Silence moved from the minute-book read to the plan's "Aye" (`CR-D10.40` replaces CR-D8.70; R3 reworded). Sedge's lines moved from the hall to the Cut mouth (`CR-D11.10–.12`). Lessa's Fourteenth Lot line `SV-D3.02b`. Gate 1 named and ordered. OL, VK, UL branches with defaults. `SV-D1.02` question cut; `RR-D3.21–.22` no longer correct. Grain lines say sixty-eight / "what's owed". Hearing chip lines combined to one holder/reading line. |
 | Tovin canon guard | CR-D8.51–.52 and RR-D11 describe only; no name for the phenomenon; he solves nothing. |
 | Anchors | Corvin's ledger regret spoken once (CR-D8.23), content unrevealed. Aldric's shame institutional only. Annelise names no one. Lessa explains the reopening, never the closure. No ages, kinship, service or travel added. |

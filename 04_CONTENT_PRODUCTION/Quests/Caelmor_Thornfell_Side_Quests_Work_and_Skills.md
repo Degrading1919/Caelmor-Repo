@@ -1,8 +1,8 @@
 # Thornfell Side Quests — Work and Skills
 
-**Status (2026-11-02):** Authored production content for Creative Director review (Thornfell bible §12, batch 3). Five skill-introduction and work side quests from `Caelmor_Thornfell_Narrative_Production_Bible.md` §7.2: **TSR** *Seam Rights*, **TST** *Stormwood*, **TGY** *Goat Year*, **TFS** *First Smoke*, **TBC** *The Bridge That Chose*. Everything here is **[NEW]** unless marked **[CANON]** or **[APPROVED — id]**. Consequential choices the content depends on are marked **[PROPOSAL — DIRECTOR]**. Markdown only: no schema, JSON or C#. Dialogue sits inline in each package, as in `Caelmor_Lowmark_Side_Quests_Work_and_Skills.md`, in the node format of `Dialogue & Narrative/Caelmor_Lowmark_Main_Act_I_Dialogue.md` and the Thornfell voice rules (bible §5.3).
+**Status (2026-11-02):** Authored production content for Creative Director review (Thornfell bible §12, batch 3). Five skill-introduction and work side quests from `Caelmor_Thornfell_Narrative_Production_Bible.md` §7.2: **TSR** *Seam Rights*, **TST** *Stormwood*, **TGY** *Goat Year*, **TFS** *First Smoke*, **TBC** *The Bridge That Chose*. Everything here is **[NEW]** unless marked **[CANON]** or **[APPROVED — id]**. Consequential choices the content depends on are marked **[PROPOSAL — DIRECTOR]**. Markdown only: no schema, JSON or C#. Dialogue sits inline in each package, as in `Caelmor_Lowmark_Side_Quests_Work_and_Skills.md`, in the node format of `Dialogue & Narrative/Caelmor_Lowmark_Main_Act_I_Dialogue.md` and the Thornfell voice rules (bible §5.3). **Reconciled 2026-11-03** to the binding Creative Director rulings in `Caelmor_Director_Rulings_Combat_Ranged_Release.md` (CDR-1 defeat at 0 HP; CDR-2 Ranged included, S01 resolved; CDR-3 internal-milestone wording); see the package review log.
 
-**Sources used:** the Thornfell bible (binding: §1.1 sound system, §3 TD-4/TD-7/TD-12/TD-13, §4 POIs TP03/TP06/TP07/TP21/TP24/TP28, §5 cast, §7.2 briefs, §9 flags and calls, §10 families, §11 conventions); `LORE/Regions/Caelmor_Region2_ThornfellMarches.md` (cliff goats that ram travellers, snowhares that vanish in drifts, goatwillow, crag pines, the legacy resource list in §XI); `00_ADMIN/Reference/Caelmor_Part3_Thornfell_Proposal.md` (Red Slope Terraces, Nettlehook, First Smoke Evening and the "third call too late" verse, crews in threes); `00_ADMIN/Reference/Caelmor_Regional_Source_Process_Thornfell_Proposal.md` (fuel stewardship, herding households, makers who refuse unsafe hides); `00_ADMIN/Reference/Caelmor_Part4_Cross_Region_Historical_Relationship_Web.md` braid 2 (a repair credited twice); `00_ADMIN/Reference/Caelmor_Part4_Character_Family_Continuity_Ledger.md` (Thornfell rows); `Caelmor_Narrative_Architecture_Review_and_Authoring_Sequence.md` §7.1 (the contribution contract); `DESIGNS/Economy Design/` (the approved material set, the economy content integration rules, S01 ranged deferral); `Caelmor_Lowmark_Side_Quests_Settlements_and_Combat.md` NB *Night Bridge* (for the optional Lowmark callback only); `Caelmor_Thornfell_Side_Quests_Horn_and_Highsteads.md` (sister package: names, wonder moments and distinctness, so nothing here repeats it).
+**Sources used:** the Thornfell bible (binding: §1.1 sound system, §3 TD-4/TD-7/TD-12/TD-13, §4 POIs TP03/TP06/TP07/TP21/TP24/TP28, §5 cast, §7.2 briefs, §9 flags and calls, §10 families, §11 conventions); `LORE/Regions/Caelmor_Region2_ThornfellMarches.md` (cliff goats that ram travellers, snowhares that vanish in drifts, goatwillow, crag pines, the legacy resource list in §XI); `00_ADMIN/Reference/Caelmor_Part3_Thornfell_Proposal.md` (Red Slope Terraces, Nettlehook, First Smoke Evening and the "third call too late" verse, crews in threes); `00_ADMIN/Reference/Caelmor_Regional_Source_Process_Thornfell_Proposal.md` (fuel stewardship, herding households, makers who refuse unsafe hides); `00_ADMIN/Reference/Caelmor_Part4_Cross_Region_Historical_Relationship_Web.md` braid 2 (a repair credited twice); `00_ADMIN/Reference/Caelmor_Part4_Character_Family_Continuity_Ledger.md` (Thornfell rows); `Caelmor_Narrative_Architecture_Review_and_Authoring_Sequence.md` §7.1 (the contribution contract); `DESIGNS/Economy Design/` (the approved material set, the economy content integration rules; the S01 ranged deferral, resolved by CDR-2 on 2026-11-03); `Caelmor_Lowmark_Side_Quests_Settlements_and_Combat.md` NB *Night Bridge* (for the optional Lowmark callback only); `Caelmor_Thornfell_Side_Quests_Horn_and_Highsteads.md` (sister package: names, wonder moments and distinctness, so nothing here repeats it).
 
 ---
 
@@ -17,7 +17,7 @@ Exact items, recipes, yields, stats, levels and XP belong to the item, economy a
 | Code | Quest | Skill introduced | Core verb (primary first) | Unlock (quest state) | Where (bible §4) | Length |
 |---|---|---|---|---|---|---|
 | **TSR** | Seam Rights | Mining | **prospect**, mine, judge | TF-M1 Completed | Red Slope Terraces (TP21), Stormwake shoulder | 30–40 min |
-| **TST** | Stormwood | Woodcutting, Fletching (bow-stave work); Ranged only if S01 is ruled in | **select**, cut, tiller | TF-M1 Completed | Stonewake ridge-market (TP01); Burned Slope (TP24), Ridgewall | 35–45 min |
+| **TST** | Stormwood | Woodcutting, Fletching (stave, string, arrows), Ranged (first bow) | **select**, cut, string | TF-M1 Completed | Stonewake ridge-market (TP01); Burned Slope (TP24), Ridgewall | 35–45 min |
 | **TGY** | Goat Year | Hunting, Leatherworking | **track**, cull or drive, tan | TF-M1 Completed (needs `TH_CALLS`, always set by TF-M1) | Goat Ledges of the Stormwake Shoulder (TP28) and a herding shieling at their foot | 35–45 min |
 | **TFS** | First Smoke | Cooking (with entry Hunting) | **hunt**, cook, tell | TF-M2 Completed (`TH_SEASON` = snow) | Nettlehook Highstead (TP03), the upper longhouse and the snow shelf above it | 30–40 min |
 | **TBC** | The Bridge That Chose | Smithing (settlement) | **triage**, smith, account | TF-M1 Completed | The Windscar Narrows (TP07): Passwatch-side bridgehead and Aud's field forge; Three Calls Shelter (TP06) across the gap | 35–45 min |
@@ -32,8 +32,8 @@ Level framing (TD-12): TSR, TST, TGY and TBC sit at TF-M1's Competent identity; 
 TSR  Mining: echo-sound (prospecting) ──► open a face (wedge, pick) ──► seam ore [EC-01]
                                           └──► the seam rota (who mines it, from when)
 TST  Woodcutting: select by ear in a gust ──► stool-cut one stem ──► wind-tested stave billet [EC-04] + ordinary wood
-     Fletching: split, rough out, tiller ──► an unstrung stave racked at Brita's stall (default, TST.15)
-     [PROPOSAL — DIRECTOR, gated on S01] string [EC-06] ──► fletch [EC-07, EC-08] ──► first bow [EC-05]; Ranged at the wind butts
+     Fletching: split, rough out, tiller ──► string [EC-06] ──► first bow [EC-05] ──► fletch a bundle [EC-07, EC-08]
+     Ranged: shoot the wind butts (lull, aim off, gust) ──► the butts open as a public practice station
 TGY  Hunting: read herd sign ──► watch ──► cull (approach, resolve, field dress) or drive (calls + echo)
                  └─ cull ──► ram hide [EC-09] + meat (food relationship)
      Leatherworking: flesh, light-test, work, smoke ──► goat-leather piece [EC-10] ──► ledge-grip wraps [EC-11]
@@ -45,7 +45,7 @@ TBC  Smithing: read the break ──► forge by ear (sing / clack) ──► br
 
 - **Mining** is prospecting first. Tapping and counting is the skill; the pick comes after the ear (TSR). TF-M3 reuses the same ear for rope anchors, so a player who did TSR first already knows the shape of a hollow return.
 - **Woodcutting** is selection and stewardship: one stem from a stool, cut between gusts, so the stool regrows (TST). Thornfell's fuel and timber are stewarded (Regional Source Process, fuel row: makers may reserve structural timber and protect cover).
-- **Fletching** arrives in TST as bow-stave work: the bowyer will not hand over a bow, and the player tillers a stave she racks for them. **S01 is still open** (economy set: "no ranged concept enters v1 while S01 remains open") and initial-release scope may not grow, so TST ships its fallback (TST.15) as the **default**: no bow, no arrows, no Ranged step. Stringing the bow and the wind-butts Ranged lesson are kept as a **[PROPOSAL — DIRECTOR]** layer gated on S01.
+- **Fletching and Ranged** arrive together in TST as a real loop (CDR-2; S01 resolved, Ranged included): the bowyer will not sell a bow, so the player cuts wind-tested stormwood, tillers and strings a stave into their **first bow**, fletches a bundle of arrows, and learns to shoot in the wind at Brita's butts. Ranged is never required: the butts step has Brita's lull-calling as its alternative path (§0.6), and every encounter in this file can be fought in melee or at range. Item names and stats are proposals for the economy and item passes (TD-13).
 - **Hunting** is herd-reading and judgment (TGY) and fresh-snow tracking (TFS). Combat may resolve a dangerous contact but never grants Hunting recovery; field dressing is the recovery phase (economy D02/D03, as Lowmark).
 - **Leatherworking** is the player's step inside a herding household's shed that keeps working without the player (TGY; the Lowmark P-O4 pattern).
 - **Cooking** is heat and smoke management, and food as recovery or as store (TFS).
@@ -58,10 +58,10 @@ Every material and recipe below is a **dependency**, not an item. The working na
 | Id | Working name in this file | Dossier concept | Used by | Nearest approved state | What the economy pass must decide |
 |---|---|---|---|---|---|
 | **EC-01** | **seam ore** (from a ridge seam) | Ridge iron [legacy, not approved] | TSR (output) | None. Lowmark's hard-material rule is imported plain carbon steel stock; there is no approved ore state. | Whether Thornfell has a mined ore state at all; its processing (smelting labour, fuel); whether it becomes plain carbon steel stock or a separate state. Until then, TSR's ore goes to the seam rota's store and the player's share is paid in coin (TSR.9). |
-| **EC-02** | **bar stock** (for fittings) | Ridge iron or imported steel | TBC (input) | **Plain carbon steel stock** (approved Lowmark chain state) | Whether Thornfell fittings use approved steel stock (recommended for v1.5 parity) or a derived ridge-iron state. TBC is written to work with either: Aud supplies the stock. |
+| **EC-02** | **bar stock** (for fittings) | Ridge iron or imported steel | TBC (input) | **Plain carbon steel stock** (approved Lowmark chain state) | Whether Thornfell fittings use approved steel stock (recommended for parity with Lowmark) or a derived ridge-iron state. TBC is written to work with either: Aud supplies the stock. |
 | **EC-03** | **bridge fittings** (eye-bolts, shackles, anchor pins) | — | TBC (recipe output, installed at once) | None | Recipe definition. Fittings are installed into the bridge (a world-state change), so no inventory item is required for the quest. |
 | **EC-04** | **wind-tested stave billet** | Stormwood [legacy, not approved] | TST (output, then input) | Ordinary wood (approved provisional state) for the trimmings only | Whether a bow-stave wood state exists; how it differs from ordinary wood; seasoning (TST compresses seasoning with Brita's swap, TST.4). |
-| **EC-05** | **first bow** ("bowyer's first stave", bible §11.5 functional name) | — | TST (reward) | None. **S01 open.** | Ranged scope (S01) and the bow recipe. Fallback in TST.15. |
+| **EC-05** | **first bow** ("bowyer's first stave", bible §11.5 functional name) | — | TST (reward, `S06_string`) | None. S01 resolved (CDR-2): Ranged included. | The bow item, its recipe and stats; the name is a proposal (TD-13). |
 | **EC-06** | **bowstring** | — | TST (input from Brita's stock) | Flax linen and tow are approved Lowmark states; gut or sinew is not | String material for Thornfell (imported flax thread, goat gut, sinew). |
 | **EC-07** | **arrow shafts** | Goatwillow (dossier flora: "wood used for bows and light tools") | TST (input from Brita's stock) | Ordinary wood | Shaft wood state, or ordinary wood with a recipe. |
 | **EC-08** | **fletchings and arrowheads** | — | TST (input from Brita's stock) | None | Feather source (no approved feather output; Lowmark F3 is food-only) and head metal. |
@@ -106,7 +106,7 @@ None repeats a milestone verb (bible §6: repair-and-escort, track-and-delve, ro
 - **Sounding.** TSR and TBC use a **sound the rock** interaction [NEW; shared with TF-M3's rope anchors]: a short strike, the return, and after the return a row of beat-dots on screen (accessibility, using the call-glyph art). Players count; the dots confirm. Never a meter, never a colour code.
 - **Wind windows** (bible §9.5): the fluted-face whistle "a fifth before the gust" is the tell; sheltering behind chalk-marked faces is always safe. A gust that catches the player in the open staggers them (small damage, never off a ledge).
 - **Agility triggers** are optional shortcuts, each with a walkable fallback named in the place table.
-- **Human enemies yield** (TD-7). Animals in TGY and TFS are Hunting fauna that fight only when provoked (bible §10) and are not counted as a family.
+- **Every enemy is defeated at 0 HP** (CDR-1; TD-7 superseded). No enemy yields, flees or breaks off at low health. Every encounter accepts melee or ranged (CDR-2); none requires ranged. Animals in TGY and TFS are Hunting fauna that fight only when provoked (bible §10) and are not counted as a family.
 - **Evidence rule.** Nothing in these quests is evidence for a revelation. The moments of wonder and unease prove nothing and identify nobody. The unlisted grave in TSR is never named.
 - **No failure.** Inactive / Active / Completed only. Death respawns at the quest's named safe point with step and flags intact. Logout restores the last persisted step; completed channel segments persist; a dropped carry-state object returns to its source. Walking away keeps the quest Active with the resume hook named in each package.
 - **Season.** TSR, TST, TGY and TBC play in autumn or snow (snow presentation notes where they differ). TFS is always snow.
@@ -544,20 +544,20 @@ TSR-D6.07 DAGNY: "Go on, walker. Five lines were enough for sixty years. Six'll 
 | Field | Value |
 |---|---|
 | Content id (suggested) | `thornfell.side.stormwood` |
-| Type | Skill introduction (Woodcutting, Fletching as bow-stave work). Bible §7.2 brief (its "first Ranged weapon" is held back pending S01, TST.15); discovery TDS09 (Burned Slope regrowth). |
+| Type | Skill introduction (Woodcutting, Fletching, Ranged). Bible §7.2 brief (its "first Ranged weapon", restored by CDR-2); discovery TDS09 (Burned Slope regrowth). |
 | Unlock | TF-M1 Completed. Offered at Brita Crane's stall in Stonewake's ridge-market. |
 | Resume hook | Brita at her stall: "Slope's still there. So's my patience, mostly." |
-| Skills | Woodcutting (required), Fletching (required), Melee (light). Ranged only in the S01-gated proposal layer (TST.15). |
-| Combat share | ~10% (one wolf pair and a howler at the slope foot) |
+| Skills | Woodcutting (required), Fletching (required), Ranged (taught at the wind butts; Brita's lull-calling is the alternative path, §0.6), Melee or Ranged (light, TST-E1). |
+| Combat share | ~10% (one wolf pair and a howler at the slope foot; an optional pair of ridge crows at the butts) |
 | Choice | The slope's last sound stem: leave it to seed, or cut it for the Ridge Wardens' winter bows |
-| Unlocks | Wood selection by ear; the player's racked stave at Brita's stall; Brita as a future commission giver. [PROPOSAL — DIRECTOR, S01] a first bow (EC-05) and the wind butts as a Ranged practice station. |
+| Unlocks | Wood selection by ear; the player's first bow (EC-05) and a bundle of arrows; the wind butts as a public Ranged practice station; Brita as a future commission giver. |
 | **Anchor** (§7.1) | Stonewake's craft households (the ridge-market bowyers) and the Ridge Wardens as the bowyer's customers. |
 | **World-truth row** | None asserted (present-day only). The Burned Slope is a war site [CANON feature]; this quest does not say who burned it. |
 | **Revelation role** | Self-contained. |
 | **Recurring evidence** | None. |
-| **State compliance** | Inactive / Active / Completed. Choice recorded in `TST_STEM`. No fail path: a wrong stem, a cut in a gust, a bad tiller pass or a missed shot each give a line and another try. |
+| **State compliance** | Inactive / Active / Completed. Choice recorded in `TST_STEM`. No fail path: a wrong stem, a cut in a gust, a bad tiller pass, a slipped string, a crooked arrow or a missed shot each give a line and another try. |
 
-**In one paragraph.** Brita Crane, the oldest bowyer in Stonewake's ridge-market, turns away a Warden who wants to buy a bow, and then turns down the player too: she does not sell to people who cannot pick wood, and she does not teach people who will not listen. On the Burned Slope, stormwood has come up through the ash, stems that have been whipped by the hard wind every day of their lives. The ones that cracked inside sing when the gust goes through them. The ones that held stay silent. The player shelters through three wind windows and, in each gust, marks the stem that makes no sound. They cut one stem from each stool between gusts, so the stool grows again, while ridge wolves come up the slope foot. On the last gust the hollow burned stumps moan all together, and Brita, sitting on a rock below, answers them with two short notes on her horn out of a lifetime's habit, and then laughs at herself. Back at her bench the player splits a seasoned billet along its grain, roughs it out, tillers it until both limbs bend alike, and hangs it unstrung on Brita's rack under their own tag. Then Brita takes the player to the wind butts on the terrace edge and shoots while the player calls the lulls: her arrows go where the wind says unless the call is right. (If S01 rules ranged in, a [PROPOSAL — DIRECTOR] layer lets the player string the stave, fletch arrows and shoot the butts themselves; TST.15.)
+**In one paragraph.** Brita Crane, the oldest bowyer in Stonewake's ridge-market, turns away a Warden who wants to buy a bow, and then turns down the player too: she does not sell to people who cannot pick wood, and she does not teach people who will not listen. On the Burned Slope, stormwood has come up through the ash, stems that have been whipped by the hard wind every day of their lives. The ones that cracked inside sing when the gust goes through them. The ones that held stay silent. The player shelters through three wind windows and, in each gust, marks the stem that makes no sound. They cut one stem from each stool between gusts, so the stool grows again, while ridge wolves come up the slope foot. On the last gust the hollow burned stumps moan all together, and Brita, sitting on a rock below, answers them with two short notes on her horn out of a lifetime's habit, and then laughs at herself. Back at her bench the player splits a seasoned billet along its grain, roughs it out, tillers it until both limbs bend alike, and braces and strings it: the player's first bow. Brita's own stave stays unstrung on its pegs above the bench, her display piece, never for sale. The player fletches a bundle of arrows on goatwillow shafts, and Brita spins each one on her thumbnail to hear whether it is true. Then she takes the player to the wind butts on the terrace edge, where the bow is learned as wind-reading: shoot in the lull, aim into a steady wind, and let a gust teach the rest. (A player who would rather not shoot can call the lulls while Brita shoots.)
 
 ### TST.2 Selection record and canon grounding
 
@@ -565,7 +565,7 @@ TSR-D6.07 DAGNY: "Go on, walker. Five lines were enough for sixty years. Six'll 
 |---|---|
 | A. Fetch a rare wood from a dangerous place. | Rejected. A fetch quest teaches nothing about the wood. |
 | B. Pick by sight (straight grain, no knots). | Rejected. Lowmark already taught sight reading; Thornfell's system is sound. |
-| **C. Pick by what the wind does to it, by ear; cut as a steward; tiller the stave; watch the bowyer shoot in the wind** (selected). | **Selected.** Woodcutting and Fletching are each taught as wind-reading, which is the region's grammar. |
+| **C. Pick by what the wind does to it, by ear; cut as a steward; tiller and string the stave; fletch; shoot in the wind** (selected). | **Selected.** Woodcutting, Fletching and Ranged are each taught as wind-reading, which is the region's grammar. |
 
 | Element | Source | Status |
 |---|---|---|
@@ -574,18 +574,18 @@ TSR-D6.07 DAGNY: "Go on, walker. Five lines were enough for sixty years. Six'll 
 | Goatwillow "used for bows and light tools" | Dossier §X | [CANON] flora; shafts (EC-07) |
 | Wind windows and the whistle tell | Bible §1.1, §9.5 | [NEW] system |
 | Ridge Wolves: runner, howler | Bible §10 | [CANON] family; [NEW] variants |
-| Fletching and Ranged in Phase 1.3 `v1_core` | Bible TD-13 | Bible statement; **S01 open** in the economy set |
+| Fletching and Ranged in Phase 1.3 `v1_core` | Bible TD-13 | Bible statement; **S01 resolved by CDR-2** (Ranged included, 2026-11-03) |
 | Brita Crane | This package | [NEW] |
 
 ### TST.3 The places [MAP VERIFICATION REQUIRED]
 
 | Area | Purpose | Environmental storytelling |
 |---|---|---|
-| A. Brita's stall (Stonewake ridge-market) | Hook; bench | A bow rack with three bows and a dozen empty pegs. A tillering board on the wall, marked in lines. Billets on a drying rack, each tagged with a year in knife-cuts. A Warden walking away empty-handed. |
+| A. Brita's stall (Stonewake ridge-market) | Hook; bench | A bow rack with three bows and a dozen empty pegs. Above the bench, on its own pegs, Brita's own stave hangs unstrung: dark with handling, her display piece, not for sale. A tillering board on the wall, marked in lines. Billets on a drying rack, each tagged with a year in knife-cuts. A Warden walking away empty-handed. |
 | B. Burned Slope foot | Brita's rock | Old char on every stone. Hollow burned crag-pine stumps, some taller than a person. Brita sits here on a flat rock with her horn and a flask. |
 | C. The three stands | Selection | Stools of stormwood (several stems from one root) in the lee of chalk-marked shelter faces. The fluted face above whistles before each gust. Some stems carry pale vertical lines in the bark: wind-shake. |
 | D. The upper stand | Choice | The last good stool on the slope, three stems, one of them sound. Below it, the slope is ash and seedlings. |
-| E. The wind butts (Stonewake terrace edge) | Ranged | Three straw butts on posts at the terrace lip, ribbons tied to each post to show the wind. A bench for watchers. |
+| E. The wind butts (Stonewake terrace edge) | Ranged | Three straw butts on posts at the terrace lip, ribbons tied to each post to show the wind. A bench for watchers. Ridge crows nest in a ledge above the third butt and pull its straw (optional, TST-E2). |
 
 ### TST.4 Beats
 
@@ -610,9 +610,15 @@ TSR-D6.07 DAGNY: "Go on, walker. Five lines were enough for sixty years. Six'll 
 3. **Tiller** (three passes). The player draws the stave on the tillering board. The limb curve shows against the board lines; one zone of one limb stays flatter than the rest. The player picks the stiff zone (of three per limb) and scrapes it (short channel). After three passes both limbs bend alike. A wrong zone makes that zone weaker; the next pass shows it and the player corrects the other side. Always finishes in three to five passes.
 - **Crew path for the tiller:** "Show me." Brita scrapes while the player reads the board and points to the stiff zone. Lower Fletching XP.
 
-**Beat 6 — The Rack (`S06_string`).** *Objective: Rack your stave.* **Default (S01 open):** the tillered stave is left unstrung and the player hangs it on Brita's rack under a tag with their name cut in it (one interaction). Brita: "When you've a use for it." No item is granted. **[PROPOSAL — DIRECTOR, gated on S01]** *Objective: String the bow and fletch arrows.* Brace and string (one channel; string from Brita's stock, EC-06). Fletch five arrows at the bench: shaft, fletchings, head from Brita's bins (EC-07, EC-08); one short channel each. The first bow (EC-05) is the player's.
+**Beat 6 — String It (`S06_string`).** *Objective: String your bow.* Brita takes her own stave down from its pegs to show the brace height (`TST-B5.08`) and hangs it back unstrung: it stays there as her display piece. The player braces the tillered stave against the bench step and strings it (one channel; string from Brita's stock, EC-06). A string set off the nocks slips and Brita resets it; nothing is lost. The strung bow is the player's **first bow** (EC-05). Brita cuts the player's name into a tag and hangs it on the empty peg beside her stave (per-player prop).
+- **Crew path:** "Hold it. I'll string." Brita braces and strings while the player holds the stave and seats the loop in the nock. Lower Fletching XP; the bow is still the player's.
 
-**Beat 7 — The Wind Butts (`S07_butts`).** **Default (S01 open):** *Objective: Call the lulls for Brita.* At the terrace edge Brita shoots and the player reads the ribbons and calls **now** or **wait** (two-option prompt per shot, three shots). A call in a lull or a steady wind lands her arrow; a call in a gust sends it wide and she laughs. Any three calls complete the step; nothing is consumed and no Ranged skill is used. **[PROPOSAL — DIRECTOR, gated on S01]** *Objective: Hit the three butts in the wind.* Ranged as wind-reading. The ribbons on each post show the wind. Three rules the player discovers by shooting: shoot **in a lull** after a gust and the arrow flies true; shoot in the **steady wind** and aim off into it by the ribbon; shoot **in a gust** and the arrow goes where the gust says. A hit on each of the three butts completes the step. Arrows come from Brita's practice quiver (no ammunition is consumed). No level check; aim is the player's.
+**Beat 6b — A Bundle (`S06b_fletch`).** *Objective: Fletch a bundle of arrows.* At the bench: shafts from Brita's goatwillow bin (EC-07), fletchings and heads from her bins (EC-08). Each arrow is short play: sight down three shafts and take the straight one, set the fletchings by the cock feather, seat the head (one short channel). Brita spins each finished arrow on her thumbnail: **a true arrow spins quiet; a crooked one buzzes.** A buzzing arrow goes in her kindling box and the player makes another (unlimited). Five true arrows make the bundle; the bundle size and stacking are economy-pass calls.
+- **Crew path:** "You sort. I glue." Brita sets the fletchings while the player picks the shafts and listens to each spin. Lower Fletching XP.
+
+**Beat 7 — The Wind Butts (`S07_butts`).** *Objective: Hit the three butts in the wind.* At the terrace edge, with the player's own bow and bundle. Ranged as wind-reading. The ribbons on each post show the wind. Three rules the player discovers by shooting: shoot **in a lull** after a gust and the arrow flies true; shoot in the **steady wind** and aim off into it by the ribbon; shoot **in a gust** and the arrow goes where the gust says. A hit on each of the three butts completes the step. Spent arrows are picked up from the butts and the turf below them; if the bundle runs short, Brita tops it up from her practice quiver, so the step never stalls on ammunition. No level check; aim is the player's.
+- **Alternative path (§0.6):** "Show me first." Brita shoots and the player reads the ribbons and calls **now** or **wait** (two-option prompt per shot, three shots). A call in a lull or a steady wind lands her arrow; a call in a gust sends it wide and she laughs. Any three calls complete the step. No Ranged XP on this path; the player keeps the bow and the bundle either way.
+- **Optional: the ledge crows (TST-E2).** Two ridge crows nest on the ledge above the third butt and pull its straw. They are scenery unless engaged. Shot from the butts line, or reached by the side steps for melee, they dive and fight as ordinary enemies, each defeated at 0 HP (`TST-B7.08`, `TST-B7.09`). Nothing depends on it; it is the bow's one live use in this quest, and no other quest requires it.
 
 **Beat 8 — Her Bench (`S08_close`).** *Objective: Hear what the bowyer says.* `TST-D7`. Quest Completed; `TST_BRITA_BENCH`.
 
@@ -632,7 +638,8 @@ TSR-D6.07 DAGNY: "Go on, walker. Five lines were enough for sixty years. Six'll 
 
 | Id | Enemies / hazard | Placement | AI role | Telegraph | Purpose | Solo target |
 |---|---|---|---|---|---|---|
-| **TST-E1** | 2 × Ridge Wolf (runner), 1 × Ridge Wolf (howler) | Slope foot below the second stand | Runners: flank and bite, leashed to the slope. Howler: hangs back on a rock | **Runner:** drops its head and shoulders (~1.0 s), then a lunge. **Howler:** sits back and lifts its muzzle (~2.0 s); a finished howl brings one more runner from the ridge (once only). Interrupting the howler (any hit) stops it | Readable pack pressure; a reason to want reach | Required. 45–60 s. Melee is enough; Brita throws stones at the howler if the player is slow (one interrupt, scripted) |
+| **TST-E1** | 2 × Ridge Wolf (runner), 1 × Ridge Wolf (howler) | Slope foot below the second stand | Runners: flank and bite, leashed to the slope. Howler: hangs back on a rock | **Runner:** drops its head and shoulders (~1.0 s), then a lunge. **Howler:** sits back and lifts its muzzle (~2.0 s); a finished howl brings one more runner from the ridge (once only). Interrupting the howler (any hit) stops it | Readable pack pressure; a reason to want reach | Required. 45–60 s. Melee or any ranged weapon the player already carries (the first bow comes later in this quest); Brita throws stones at the howler if the player is slow (one interrupt, scripted) |
+| **TST-E2** | 2 × Ridge Crow (diver) | Ledge above the third wind butt (optional, `S07`) | Scenery until engaged; then divers, leashed to the ledge | **Diver:** folds its wings at the ledge lip (~1.0 s), then a dive | The first bow's one live use; never required | Optional. 20–30 s. Ranged from the butts line, or melee from the side steps |
 | **TST-H1** | Stem whip | Any stand, cutting in a gust | Environmental | The whistle (~3 s) | Teaches the wind window for cutting | Knockback and small damage. Cannot kill above a quarter health |
 | **TST-H2** | Gust in the open | Between stands | Wind window | The whistle | Universal | Stagger; never off the slope |
 
@@ -648,8 +655,9 @@ Combat drops nothing the quest needs. Death: respawn at Brita's rock; marked ste
 | `S03_cut` | Cut the marked stems. | 3 × `stool_cut` complete (or crew path) + TST-E1 defeated | Yes | Channel pauses in gusts, keeps progress; sets `TST_CREW_CUT` on the crew path |
 | `S04_third_stem` | Decide about the upper stand. | `TST-D4` choice (and one `stool_cut` if *wardens*) | Yes | Sets `TST_STEM` |
 | `S05_bench` | Make the stave. | `split` (on-grain) + `rough_out` + tiller passes until even | Yes | Crew path: Brita scrapes |
-| `S06_string` | Rack your stave. | `rack_stave` (default). S01 proposal: `string_bow` + 5 × `fletch` | Yes | Default grants nothing. S01 proposal grants the first bow (EC-05) |
-| `S07_butts` | Call the lulls for Brita. | 3 × `call_lull` (default). S01 proposal: one hit on each of 3 butts | Yes | No ammo used on either path |
+| `S06_string` | String your bow. | `string_bow` complete (or crew path) | Yes | Grants the first bow (EC-05). Brita's own stave stays racked unstrung (display prop); the player's tag hangs beside it |
+| `S06b_fletch` | Fletch a bundle of arrows. | 5 × `fletch` (true arrows) (or crew path) | Yes | New step (CDR-2). Grants the bundle (ordinary output; size to the economy pass) |
+| `S07_butts` | Hit the three butts in the wind. | One hit on each of 3 butts, or 3 × `call_lull` (alternative path) | Yes | Arrows recovered at the butts; Brita's quiver tops up the bundle. TST-E2 optional, not a step |
 | `S08_close` | Hear what the bowyer says. | `TST-D7` end | Yes | Sets `TST_BRITA_BENCH`; quest Completed |
 
 | Flag | Set by | Read by |
@@ -672,13 +680,13 @@ Neither is wrong. Brita does not say which she would have done (`TST-D4.06`).
 | Reward | Type | Notes |
 |---|---|---|
 | **Picking by ear** | Knowledge | Authored stormwood stands across Thornfell become readable in a gust: cracked stems sing, sound stems stay silent. Inspect lines: *"Shaken. It sings."* / *"Sound. It said nothing."* |
-| Racked stave | Place / standing | The player's tagged stave hangs on Brita's rack (per-player prop). No item. |
-| First bow ("bowyer's first stave") | Tool | **[PROPOSAL — DIRECTOR, gated on S01]** EC-05. Not granted by default. Item pass defines it if S01 rules ranged in. |
-| Practice arrows | Ordinary output | **[PROPOSAL — DIRECTOR, gated on S01]** only. |
-| Wind butts | Access | **[PROPOSAL — DIRECTOR, gated on S01]** a public Ranged practice station. By default the butts are Brita's and only watched. |
+| First bow ("bowyer's first stave", proposal name) | Tool | EC-05. Granted at `S06_string`. Name, stats and recipe are proposals for the item and economy passes (TD-13). |
+| Bundle of arrows (proposal name) | Ordinary output | EC-07, EC-08. Made at `S06b_fletch`. Count and stacking to the economy pass. |
+| The tag on Brita's pegs | Place / standing | The player's name-tag hangs beside Brita's display stave (per-player prop). No item. |
+| Wind butts | Access | A public Ranged practice station on the Stonewake terrace edge after completion. |
 | Cutting saw | Tool | Lent at `TST-D2` if the player lacks a cutting tool; kept on completion. |
 | Small payment | Currency | Brita pays for the stems she racked (economy tuning). |
-| Woodcutting, Fletching, Melee XP | Action XP only | No lump quest XP. Ranged XP only in the S01 layer. |
+| Woodcutting, Fletching, Ranged, Melee XP | Action XP only | No lump quest XP. Ranged XP from shooting at the butts (none on the lull-calling path); values to the balance pass. |
 
 ### TST.10 Failure, recovery, persistence, co-op
 
@@ -688,10 +696,12 @@ Neither is wrong. Brita does not say which she would have done (`TST-D4.06`).
 | Cut in a gust | Whip (H1); progress kept. |
 | Split off the grain | Brita hands another billet; unlimited. |
 | Tiller wrong zone | Next pass shows it; always finishes. |
-| Missing shots | No cost; the quiver does not run out. |
+| String off the nocks | Brita resets it; no loss. |
+| Crooked arrow | Into the kindling box; make another; unlimited. |
+| Missing shots | No cost; arrows are picked up at the butts and Brita's quiver tops up the bundle. |
 | Death | Respawn at Brita's rock (or her stall after `S05`). |
 | Walking away / logout | Quest stays Active; last step restored; rags, cuts and bench progress persist. |
-| Co-op | Gusts are world weather (shared); each player marks and cuts their own per-player stems. The upper stand's state follows each player's own `TST_STEM`; fallback: the host's. Each player racks their own stave (S01 proposal: makes their own bow). |
+| Co-op | Gusts are world weather (shared); each player marks and cuts their own per-player stems. The upper stand's state follows each player's own `TST_STEM`; fallback: the host's. Each player makes, strings and keeps their own bow and bundle. |
 
 ### TST.11 Integration needs
 
@@ -700,15 +710,17 @@ Neither is wrong. Brita does not say which she would have done (`TST-D4.06`).
 | Gust-driven stem audio | Audio + Systems | Stand volumes tied to the wind-window timer; tagged stems play an authored whistle during the gust; sound stems play none. Subtitle cue and rumble side. |
 | Pausable channel keeping progress | Systems | Stool-cut channel that auto-pauses on the whistle and resumes. |
 | Tillering board | UI + Systems | A curve overlay with three selectable zones per limb; each pass changes an authored curve state. Fallback: a three-step prompt ("left limb, middle stiff") with the board as art. |
-| Lull-calling prompt (default) | Systems | Two-option prompt read against the wind-window state; Brita's shot plays an authored hit or miss. |
-| Wind on arrows | Combat / Ranged system | **S01 proposal layer only.** Projectile drift by wind state (lull / steady / gust). Fallback: authored hit chance by wind state, shown by the ribbons. |
+| Lull-calling prompt (alternative path) | Systems | Two-option prompt read against the wind-window state; Brita's shot plays an authored hit or miss. |
+| Wind on arrows | Combat / Ranged system | Projectile drift by wind state (lull / steady / gust). Fallback: authored hit chance by wind state, shown by the ribbons. |
+| Stringing and fletching | Systems + item pass | A stringing channel with an authored slip on a bad seat; a per-arrow pick-the-shaft and spin check (true / crooked, authored audio). |
+| Ridge crow divers (optional) | Encounters package | Ledge-perched divers, scenery until engaged (TST-E2). |
 | Wolves with howl interrupt | Encounters package | Howler with a channelled call and one reinforcement. |
 | Per-player stand props | 33.1.B2 | Rags, cut stools, seedling prop or tally-notch stump. |
 | Crew NPC (apprentice) | NPC | Saw loop and a two-option call prompt. |
 
 ### TST.12 Economy dependencies
 
-EC-04 (stave billet); EC-05 to EC-08 (bow, string, shafts, fletchings and heads) only if S01 rules ranged in; ordinary wood from trimmings (approved provisional state). Seasoning is compressed by Brita's swap so no timer is needed.
+EC-04 (stave billet); EC-05 to EC-08 (bow, string, shafts, fletchings and heads; names and stats are proposals for the economy and item passes, TD-13); ordinary wood from trimmings (approved provisional state). Seasoning is compressed by Brita's swap so no timer is needed.
 
 ### TST.13 Mystery ledger entry
 
@@ -797,20 +809,29 @@ TST-D4.06 BRITA: "Don't look at me. I'd have done the other one. I always do the
 | TST-B5.02 | Split off grain | "Ran out. They all do that once. Here." |
 | TST-B5.03 | Tiller, both limbs even | "Look at that. Bends like it means it." |
 | TST-B5.04 | Crew path tiller | "Point. I scrape. You'd take my thumb off." |
-| TST-B5.05 | Stave racked (default) | "Yours. On my rack. Don't tell anyone I tillered it." (beat) "I didn't." |
-| TST-B5.06 | Bow strung (S01 proposal only) | "That's yours. Not mine. Don't tell anyone I made it." (beat) "I didn't." |
+| TST-B5.05 | Player's tag hung beside her stave | "Your tag. Next to mine. Don't let it go to your head." |
+| TST-B5.06 | Bow strung | "That's yours. Not mine. Don't tell anyone I made it." (beat) "I didn't." |
+| TST-B5.07 | String off the nocks | "Again. Nocks, then weight." |
+| TST-B5.08 | Brace demonstration (her own stave) | "Fist and a thumb. Like this." (hangs it back unstrung) "That one stays where it is." |
+| TST-B5.09 | True arrow spins quiet | "Quiet. Good." |
+| TST-B5.10 | Crooked arrow buzzes | "Hear that? Kindling." |
+| TST-B5.11 | Bundle finished | "Five. Enough to lose most of." |
+| TST-B5.12 | Crew path string | "Hold it. I'll string." |
+| TST-B5.13 | Crew path fletch | "You sort. I glue." |
 
 **Wind butts** (barks, `S07`)
 
 | Id | Trigger | Line (BRITA) |
 |---|---|---|
-| TST-B7.01 | Arrival (default) | "Ribbons tell you the wind. I shoot. You say when." |
-| TST-B7.05 | Call in a gust (default) | "Wide. You knew that. So did I." |
-| TST-B7.06 | Call in a lull (default) | "There. You waited for it. So did the arrow." |
-| TST-B7.07 | Arrival (S01 proposal only) | "Ribbons tell you the wind. Shoot when it's quiet, or aim into it. Or don't, and learn." |
+| TST-B7.01 | Arrival, alternative path ("Show me first") | "Ribbons tell you the wind. I shoot. You say when." |
+| TST-B7.05 | Call in a gust (alternative path) | "Wide. You knew that. So did I." |
+| TST-B7.06 | Call in a lull (alternative path) | "There. You waited for it. So did the arrow." |
+| TST-B7.07 | Arrival | "Ribbons tell you the wind. Shoot when it's quiet, or aim into it. Or don't, and learn." |
 | TST-B7.02 | Miss in a gust | "Wind took that. Wind takes most things." |
 | TST-B7.03 | Hit in a lull | "There. Waited for it." |
 | TST-B7.04 | Hit aiming off | "Into the wind. Good. Most people argue with it." |
+| TST-B7.08 | Ledge crows noticed (optional) | "Those two nest in my straw. Every autumn. Go on." |
+| TST-B7.09 | Ledge crows defeated | "Hm. Straw stays." |
 
 **Her bench** (`TST-D7`, step `S08_close`)
 
@@ -835,10 +856,11 @@ TST-D7.06 BRITA: "Not yet. Go away. Come back."
 | Drying rack | "Billets tagged with knife-cut years. Yours goes at the end." |
 | Tillering board | "Lines at even spacing. A good bow's curve sits on them." |
 | Ribbons at the butts | "They tell you which way, and roughly how hard." |
+| Brita's stave (on its pegs) | "Unstrung. Dark with handling. No price on it. None needed." |
 
 ### TST.15 Open decisions
 
-1. **S01 (v1 ranged scope).** The economy set defers all ranged content until S01 is ruled, and initial-release scope may not grow. **The fallback below is now the default build**; the bow, arrows and Ranged lesson are a [PROPOSAL — DIRECTOR] layer that switches on only if S01 rules ranged in. **Default:** `S06` makes an unstrung stave that Brita racks for the player ("when you've a use for it"), `S07` becomes a Brita demonstration the player watches and calls the lulls for, and the reward is the knowledge and the commission giver only. Woodcutting and the choice are unchanged.
+1. **S01 resolved (CDR-2, 2026-11-03): Ranged included.** TST teaches the bow: `S06_string` strings the player's first bow, new step `S06b_fletch` fletches a bundle, and `S07_butts` is a Ranged lesson at the wind butts. Lull-calling stays only as the alternative path. The former default (an unstrung stave racked for the player) is retired; Brita's own unstrung stave stays as her display piece. Item names (first bow, bundle of arrows), stats, bundle size, ammunition rules and Ranged/Fletching XP stay with the economy, item and balance passes (TD-13).
 2. **EC-04 to EC-08** as listed; seasoning compressed by the swap.
 3. Ridge Wolf **howler** reinforcement behaviour to the Encounters package.
 
@@ -849,8 +871,9 @@ TST-D7.06 BRITA: "Not yet. Go away. Come back."
 | First draft picked wood by sight (straight, no knots). | Changed to picking by ear in a gust: Thornfell's system, and new against Lowmark BW. |
 | Tillering risked a fail state (snapped stave). | Tiller cannot snap; a wrong pass is corrected next pass. |
 | The moaning stumps could read as a call or a message. | It is terrain noise with no call shape and no glyph; only Brita's Answer is a real call, and she laughs at her own habit. Checked against TTH's altered echo and TNR's singing cable: different source, place and meaning. |
-| Ranged appearing in v1.5 while S01 is open. | Fallback documented; flagged in open questions. Independent review: fallback made the default; bow reward kept only as [PROPOSAL — DIRECTOR] gated on S01. |
+| Ranged appearing in the Thornfell milestone while S01 was open (historical). | Fallback documented; flagged in open questions. Independent review: fallback made the default; bow reward kept only as a proposal gated on S01. **Superseded 2026-11-03 by CDR-2** (next row). |
 | Stormwood named as an item. | "Stave billet" tied to EC-04; trimmings are ordinary wood. |
+| **Director rulings reconciliation (2026-11-03): CDR-2** Ranged included, S01 resolved. | Bow content restored as a real Woodcutting → Fletching → Ranged loop: `S06_string` now strings the player's first bow (crew path: Brita strings); new `S06b_fletch` (bundle of five, spin-check by ear); `S07_butts` is the player shooting, with lull-calling kept as the alternative path; optional TST-E2 ridge crows as the bow's one live use. Racked unstrung stave retired as the default; Brita's own stave stays as a display prop. Barks TST-B5.05 repointed, B5.06/B7.01/05/06/07 triggers updated, B5.07–B5.13 and B7.08–B7.09 added. Item names are proposals for the economy pass (TD-13). |
 
 ---
 
@@ -864,7 +887,7 @@ TST-D7.06 BRITA: "Not yet. Go away. Come back."
 | Type | Skill introduction (Hunting, Leatherworking). Bible §7.2 brief; dossier §IX ("cliff goats: territorial, can ram travelers from narrow paths"). |
 | Unlock | TF-M1 Completed (`TH_CALLS` is always set). Offered on the Stormwake shoulder path below the Goat Ledges. |
 | Resume hook | Bera Scree at her shieling door: "He's still on the path. So am I, most days." |
-| Skills | Hunting (required: tracking and reading; cull path adds approach, resolve, recover), Leatherworking (required), Melee (Ranged if S01 allows) (cull path, optional contact) |
+| Skills | Hunting (required: tracking and reading; cull path adds approach, resolve, recover), Leatherworking (required), Melee or Ranged (cull path, optional contact) |
 | Combat share | 0–10% (the ram's charge only on a careless approach or a dusk walk) |
 | Choice | Cull the old ram, or drive the herd with the Gather and Fall calls |
 | Unlocks | Herd reading; the goat steps (agility route, walkable fallback); Bera's shed as a Leatherworking station; Bera as a future commission giver |
@@ -917,7 +940,7 @@ TST-D7.06 BRITA: "Not yet. Go away. Come back."
 
 **Beat 4a — The Cull (`S04a_cull`).** *Objective: Take the old ram cleanly.* Hunting approach, resolve, recover:
 - **Approach** from downwind. The wind on the shoulder blows up the slope in gusts; the whistle tells them. Moving during a gust hides footfall but carries scent uphill: approach from **above** in a gust, or from **below** in a lull. A careless approach alerts him (stamp, head lowered) and he charges (E1); he then resettles on the warm stretch after a short wait (no idle).
-- **Resolve:** a bow shot (if the player has a ranged weapon, e.g. from TST) or Bera's ledge spear close in. Exact resolution belongs to the Hunting interaction pass.
+- **Resolve:** a bow shot (any bow, e.g. the one made in TST) or Bera's ledge spear close in. Exact resolution belongs to the Hunting interaction pass.
 - **Recover:** field dressing on the ram (Hunting recovery) yields his hide (EC-09) and meat (food relationship).
 - **Crew path:** "Do it with me." Bera makes the approach and resolution; the player reads the wind and calls **move** or **hold** on each whistle, then does the recovery. Or the player approaches and Bera dresses. Hunting XP either way.
 
@@ -1494,7 +1517,7 @@ TFS-D7.05 SOLVEIG: "The hearth's yours when you're passing. Bring something for 
 | Unlock | TF-M1 Completed. Offered by Aud's bark at the Passwatch-side bridgehead of the Narrows after a storm (any visit after TF-M1). The cracked state is per-player and shows **only while TBC is Active**; the scree path is walkable regardless (Zones §6.2). |
 | Resume hook | Aud Hammerlee at her field forge: "Bridge is still broken. I've been swearing at it in your absence." |
 | Skills | Smithing (required), Melee (light) |
-| Combat share | ~10% (two pass bandits at the bridgehead, they yield) |
+| Combat share | ~10% (two pass bandits at the bridgehead, fought to defeat) |
 | Choice | Who waits for dawn (the family and its goats, the Wardens' mule train, or the grain sledge); whether the repair post names who waited |
 | Unlocks | Reading a break; Aud's field forge as a public Smithing station; Aud as a future commission giver |
 | **Anchor** (§7.1) | The Windscar bridge crews (Aud Hammerlee) and the people who wait at the Narrows: shieling families, Ridge Warden escorts, highstead sledgers. |
@@ -1551,7 +1574,7 @@ The far rock is reached by the guide line (agility traverse) or the fallback: Au
 
 **Beat 4 — The Board (`S04_board`).** *Objective: Chalk a crossing plan the waiting can read.* `TBC-D4` sets the puzzle. Aud counts the whistles off the face: **three windows before dark: long, short, long.** The mended span takes **one heavy load in a long window, or two light loads in any window. Heavy loads cannot go in the short window.** Loads: Family A (light), Family B with GRANDMOTHER (light), Family B's goats (heavy; the family will not leave them, so if the goats wait, Family B waits too, which is a light load moved to dawn), the Warden mule train (heavy), the grain sledge (heavy). The board is a slate with three window rows and a fourth row, **waits for dawn**. The player drags chalk tokens into rows. Aud rejects an impossible plan with a dry line (a heavy in the short row; two heavies in one row). Valid plans always put both families in the short window (or Family A plus Family B's people if goats wait) and two of the three heavy loads in the long windows: **one heavy load waits for dawn.** That is the choice (TBC.8). The board stays up, readable by everyone; each group barks its reaction to its row (TBC-B4). The GRANDMOTHER reads it (unease, `TBC-D4.20`).
 
-**Beat 5 — The Crossings (`S05_cross`).** *Objective: Get each window's load across.* Three windows play in order. The player walks each load across (escort-lite: loads move only in the lull, stop on the whistle). In the **short window**, the strange moment plays (TBC.5). In the second long window, two pass bandits come up from the Blind Corners to cut a load's lead line in the confusion (TBC-E1); they yield. Nobody can fall: loads stop and hold on the whistle.
+**Beat 5 — The Crossings (`S05_cross`).** *Objective: Get each window's load across.* Three windows play in order. The player walks each load across (escort-lite: loads move only in the lull, stop on the whistle). In the **short window**, the strange moment plays (TBC.5). In the second long window, two pass bandits come up from the Blind Corners to cut a load's lead line in the confusion (TBC-E1); both are defeated at 0 HP. Nobody can fall: loads stop and hold on the whistle.
 
 **Beat 6 — The Account (`S06_account`).** *Objective: Help Aud cut the repair post.* `TBC-D6`/`D7`. Aud carves who mended. Optional Lowmark callback (`TBC-D7` variants). The choice to add who waited (`TBC_WAIT_NAMED`).
 
@@ -1573,11 +1596,11 @@ The far rock is reached by the guide line (agility traverse) or the fallback: Au
 
 | Id | Enemies / hazard | Placement | AI role | Telegraph | Purpose | Solo target |
 |---|---|---|---|---|---|---|
-| **TBC-E1** | 1 × Pass Bandit (cutter), 1 × Pass Bandit (slinger) | Passwatch-side bridgehead, during the second long window | Cutter goes for the waiting load's lead line (an interaction he channels, ~4 s); slinger covers from the switchback | **Cutter:** knife drawn and a crouch at the line (~1.0 s) before he starts cutting; any hit interrupts. **Slinger:** whirls the sling overhead (~1.2 s), then a stone | Readable pressure while a plan is running | 40–60 s. They yield (TD-7). If the line is cut, Aud ties it again (bark); nothing is lost |
+| **TBC-E1** | 1 × Pass Bandit (cutter), 1 × Pass Bandit (slinger) | Passwatch-side bridgehead, during the second long window | Cutter goes for the waiting load's lead line (an interaction he channels, ~4 s); slinger covers from the switchback | **Cutter:** knife drawn and a crouch at the line (~1.0 s) before he starts cutting; any hit interrupts. **Slinger:** whirls the sling overhead (~1.2 s), then a stone | Readable pressure while a plan is running | 40–60 s. Both fight to 0 HP (CDR-1). Melee or ranged; the switchback is reachable on foot. If the line is cut, Aud ties it again (bark); nothing is lost |
 | **TBC-H1** | Gust on the span | Span | Wind window | Whistle (~3 s) | Loads stop; the player holds the guide line | Stagger only; the guide line keeps everyone on |
 | **TBC-H2** | Forge spark | Anvil | Environmental | A bright spit on the strike after a clack | Teaches the clack | Cosmetic sting, no damage |
 
-Defeated bandits are tied to the bridgehead posts and taken to Passwatch by the Warden escort at dawn. Combat reveals nothing. Death: respawn at the field forge; fittings forged and set stay set; windows already run stay run.
+Defeated bandits take the ordinary defeat presentation (CDR-1). Combat reveals nothing. Death: respawn at the field forge; fittings forged and set stay set; windows already run stay run.
 
 ### TBC.7 Steps and flags
 
@@ -1749,7 +1772,7 @@ TBC-D4.23 AUD: (quietly) "...Bridges don't choose. People choose. Then they blam
 | TBC-B5.01 | Whistle during a crossing | AUD | "Hold! Hands on the line. Let it blow." |
 | TBC-B5.02 | After the updraft | AUD | "Gap does that. Don't tell the Wardens, they'll want to regulate it." |
 | TBC-B5.03 | E1 starts | CORPORAL | "Corner lads. Off the switchback. Mind the line!" |
-| TBC-B5.04 | Cutter yields | BANDIT | "Fine! Fine. I wasn't going to cut it. Much." |
+| TBC-B5.04 | Cutter first interrupted at the line | BANDIT | "Fine! Fine. I wasn't going to cut it. Much." |
 | TBC-B5.05 | Line cut (if it happens) | AUD | (retying) "I've tied worse in my sleep. I have tied worse in my sleep." |
 
 **The post** (`TBC-D6`, `TBC-D7`)
@@ -1834,6 +1857,7 @@ TBC-D8.06 AUD: "Forge is here. Use it. Swear at it. It likes that."
 | GRANDMOTHER's memory could reveal R06. | She names no closing, date or place; it supports the misunderstanding ladder only. |
 | Lowmark callback risked a route claim. | Aud names no river, crossing or direction; it is hearsay and optional. |
 | Cracked state ran "after TF-M1 until TBC completes", showing a broken bridge to players who never took TBC (Batch 4 review, Zones Z-1). | Cracked only while TBC is Active; offered by Aud's bark; scree path walkable regardless (TBC.1, TBC.11, open decision 4). |
+| **Director rulings reconciliation (2026-11-03): CDR-1.** Bandits yielded (TD-7) and were tied to the bridgehead posts. | TBC-E1 fights to 0 HP; tied-post epilogue removed (ordinary defeat presentation); TBC-B5.04 retriggered to the cutter's first interrupt (line kept). Steps and flags unchanged. |
 
 ---
 
@@ -1849,15 +1873,16 @@ TBC-D8.06 AUD: "Forge is here. Use it. Swear at it. It likes that."
 | Keep-watch per-player hour | TGY, TFS, TBC | Systems | Lowmark convention. |
 | Craft stations | TST (bench), TGY (shed chain), TFS (hearth, hood), TBC (field forge) | 33.5 station binding | Each persists after its quest as a public workspace. |
 | Hunting hooks | TGY, TFS | Hunting interaction pass | Approach, resolve, recover; wind-scent tie to the timer (fallback volumes). |
-| Ranged with wind drift | TST (S01 proposal layer only) | Combat / Ranged system | Not needed by the default build (TST.15). |
+| Ranged with wind drift | TST (`S07_butts`) | Combat / Ranged system | Projectile drift by wind state; fallback authored hit chance by wind state (TST.11). |
+| Stringing and fletching interactions | TST (`S06_string`, `S06b_fletch`) | Systems + item pass | TST.11. |
 | Per-player persistent props | All | 33.1.B2 | Fallbacks listed in each package. |
 | Encounters | TSR (Rock Vipers, first appearance), TST (wolves with howl interrupt), TBC (bandits) | Encounters package | Telegraphs as listed. |
 | Economy states and recipes | All | Economy and item passes | EC-01 to EC-14 (§0.3). |
 
 ## Open questions for the Director and other passes
 
-1. **TD-13 and the economy pass.** None of EC-01 to EC-14 exists as an item. Each quest is written to stand with coin, knowledge and station access if the economy pass derives nothing. Priority for derivation: EC-02 (steel stock for TBC, likely already covered), EC-09/EC-10 (hide and leather, near Lowmark states), EC-12/EC-13 (food), then EC-04 to EC-08 (bow chain, blocked by S01), then EC-01 (ore, a new hard-material decision).
-2. **S01 (ranged scope).** The bible asks TST for a first Ranged weapon; the economy set says no ranged concept enters v1 while S01 is open. TST now builds its fallback by default (racked stave, lull-calling); the bow and Ranged lesson are [PROPOSAL — DIRECTOR] gated on S01.
+1. **TD-13 and the economy pass.** None of EC-01 to EC-14 exists as an item. Each quest is written to stand with coin, knowledge and station access if the economy pass derives nothing. Priority for derivation: EC-02 (steel stock for TBC, likely already covered), EC-09/EC-10 (hide and leather, near Lowmark states), EC-12/EC-13 (food), then EC-04 to EC-08 (bow chain, now needed by TST under CDR-2), then EC-01 (ore, a new hard-material decision).
+2. **S01 (ranged scope): resolved 2026-11-03 by CDR-2 (Ranged included).** TST teaches the first bow, a fletched bundle and the wind-butts Ranged lesson; lull-calling is kept only as the alternative path. Item names and stats are proposals for the economy and item passes (TD-13).
 3. **Rock Vipers' first appearance** moves to TSR for players who take it before TF-M3 (TSR.15).
 4. **New names** [NEW]: Brita Crane, Bera Scree, Dagny Grell, Tormod Lisk, Solveig Tarn; highsteads Kettlecrag and Brackenstep (off-map, unplaced). None collides with the sister package's names.
 5. **Deliberately unexplained** (add to bible §7.4's list if accepted): the sixth cellar at Red Slope; the moaning stumps; the goat steps' makers; snow that falls up in the Narrows gap.
@@ -1873,7 +1898,7 @@ TBC-D8.06 AUD: "Forge is here. Use it. Swear at it. It likes that."
 | Skill steps | Each taught as play through sound or wind; each has a crew or alternative path; no level checks. |
 | Distinct verbs | prospect / select / track / hunt / triage as primaries; checked against milestones and the sister package. |
 | Wonder or unease | One or more per quest; none duplicates the sister package's moments. |
-| Evidence rule | No phenomenon identifies anyone; combat yields nothing; no revelation owned. |
+| Evidence rule | No phenomenon identifies anyone; combat reveals nothing; no revelation owned. |
 | TD-13 | No ridge iron, stormwood or goat leather item; every material listed as an economy-pass dependency. |
 | FT-03 / TD-11 | No route for any grain, oil, salt or stock; the Lowmark callback names no river or crossing. |
 | Remnant, magic | None present; no NPC recognises magic. |
@@ -1882,3 +1907,4 @@ TBC-D8.06 AUD: "Forge is here. Use it. Swear at it. It likes that."
 | Lowmark independence | Only TBC reads Lowmark state, for optional lines. |
 | **Independent review (2026-11-03)** | 6 findings (1 high, 3 medium, 2 low). High: TST granted the first Ranged weapon while S01 is open and release scope may not grow; TST.15's fallback is now the default (stave racked unstrung, the player calls lulls for Brita), and the bow, arrows and Ranged lesson are kept only as **[PROPOSAL — DIRECTOR]** gated on S01 (summary, beats, steps, rewards, integration, open questions). Medium: TSR's Asa Grell collided with TWN's Asa Brede; renamed **Dagny Grell**; a plot-list "Orm" collided with Orm Brede; renamed **Eyolf**. Medium: bowyer Hild Crane collided with "Hild, a weaver" on Act III's closure roster; renamed **Brita Crane** (`TST_HILD_BENCH` → `TST_BRITA_BENCH`). Medium: Bera's herding horn was a gift; now a carry-state loan only if the TF-M1 practice horn is not carried. Low: TFS verse confirmed as canonical; TTH now quotes it. Low: Ranged mentions gated on S01. |
 | **Batch 4 handoff review (2026-11-03)** | 1 finding (medium). TBC's cracked Narrows state ran from TF-M1 until TBC completed, contradicting the Batch 4 bridge model. Smallest edit: TBC.1 Unlock and TBC.11 now show the bridge cracked only while TBC is Active (scree path walkable regardless); TBC.15 open decision 4 marked resolved; TBC.16 row added. No other text changed. |
+| **Director rulings reconciliation (2026-11-03)** | Applied CDR-1/2/3 (`Caelmor_Director_Rulings_Combat_Ranged_Release.md`). CDR-1: shared rule now "every enemy defeated at 0 HP" (TD-7 superseded); TBC-E1 bandits fight to 0 HP, tied-post epilogue removed, TBC-B5.04 retriggered. CDR-2: S01 resolved; TST restored as Woodcutting → Fletching → Ranged (`S06_string` strings the first bow, new `S06b_fletch`, `S07_butts` shot by the player with lull-calling as alternative path, optional TST-E2 ridge crows); TGY cull accepts melee or ranged; all "if S01 allows" hedges removed. CDR-3: "v1.5 parity" and "ships/initial-release" wording replaced. Steps, flags and choices otherwise unchanged. Historical review rows above describe earlier states. |

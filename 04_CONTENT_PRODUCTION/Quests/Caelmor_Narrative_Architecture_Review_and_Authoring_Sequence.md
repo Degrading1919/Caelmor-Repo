@@ -95,11 +95,13 @@ The Creative Director (Collin) reviewed the refined architecture and ruled as fo
 | **D-C03** | Adopt **limited personnel continuity** between the wartime precursor and the formal Remnant. Do not invent an approved precursor name or an extensive surviving leadership roster. | Some individuals of the precursor survived and helped form the formal Remnant (recommendation (a), narrowed). | The precursor's name; the transition date; who the surviving individuals were. Selvara stays bounded by her ledger row. Any named survivor needs a separate ruling. |
 | **D-C06** | Keep the Volkhari population **unnumbered** and their surviving communities **unresolved**. | Content depicts individuals only. | Population, community form, location. |
 | **D-CV1** | The Titan is **bound to rest**. Whether eventual release is possible remains an **open late-game question**. | The CV-M4 outcome is a rest-binding. | The Long Horizon release option is neither approved nor ruled out. |
-| **D-R1** | **Prefer Thornfell → Mire → Emberholt** as the future **production** order. | Authoring order for regional bibles. | It is not a mandatory player progression order and not an approved release schedule. Only Lowmark is approved for release. |
+| **D-R1** | **Prefer Thornfell → Mire → Emberholt** as the future **production** order. | Authoring order for regional bibles. | It is not a mandatory player progression order and not a release schedule. **Release strategy ruled 2026-11-03 (CDR-3):** no partial public release; the first public beta contains the complete planned game. |
 | **Convergence location** | **Approve the concept** of rebuilding a historically significant crossing. Keep **Mirebone Crossing's suitability provisional** until geographic verification. | CV-M3 is a crossing rebuild at an old Concord crossing. | Which crossing. "Mirebone" stays a provisional working name in all documents. |
 | **D-Q1** | **Quest lifecycle: Inactive, Active, Completed only.** The Systems Engineer has already published the contract reconciliation (commit a1c71ea). | Closed. | — |
 
-Still open and unchanged by these rulings: D-E2 (Thalan's fates), D-S1 (the Speaker), contradictions 3 (eastern "invaders"), 4–5 (place-name drift, now handled by each regional bible), 6 (origins), 10 (stale name), D-L1 (all Lowmark bible §3 decisions, including D-11 canon promotion of v1 [NEW] material), and C07.
+Still open and unchanged by these rulings: D-E2 (Thalan's fates), D-S1 (the Speaker), contradictions 3 (eastern "invaders"), 4–5 (place-name drift, now handled by each regional bible), 6 (origins), 10 (stale name), D-L1 (all Lowmark bible §3 decisions except D-13, including D-11 canon promotion of v1 [NEW] material), and C07.
+
+**Further rulings, 2026-11-03** (recorded in full in `Caelmor_Director_Rulings_Combat_Ranged_Release.md`): **CDR-1** RuneScape defeat model (every enemy fights to 0 HP; no yield, retreat or break-off; scripted surrender only as named quest exceptions SX-1 Joss Garrow, SX-2 Gideon Sallow, SX-3 Ingrith Scarrow), which resolves Lowmark D-13 and Thornfell TD-7; **CDR-2** Ranged included as a core combat skill (S01 resolved); **CDR-3** no partial public release, the first public beta contains the complete planned game, regional milestones are internal; **CDR-4** RuneScape as the primary structural reference without copying, avoiding mechanics added only for realism; Thornfell TD-8 Gatefall, the two local calendars, quest-local thaw, the open stone and Old Torvek's banner walk approved. Every future-region package (Mire first) follows these rulings and the §7.1 contract.
 
 Each decision below had a recommendation. The tables are kept as the record of what was proposed.
 
@@ -121,10 +123,10 @@ Each decision below had a recommendation. The tables are kept as the record of w
 | **D-C06** | Volkhari population (canon C06). | Keep unnumbered; depict individuals only. | Nothing; recommended before EH-M4 |
 | **D-E2** | Thalan's possible fates in EH-M4. | Free, or aid in place; no option to end his life. | EH-M4 |
 | **D-CV1** | The Titan after CV-M4. | Bound to rest, still a person lost rather than a monster slain; the player chooses whether its name is restored to the public record. Option for the Long Horizon: a slow, tended release over years until the fire is spent and the initiate can die, kept by Emberholt wardens, with any Volkhari involvement limited to consenting individuals (C06 stays open). | CV-M4; Long Horizon |
-| **D-R1** | Release order after Thornfell. | Mire before Emberholt: the Mire teaches testimony before Emberholt tests it, and Glassed Hollow's displaced civilians reach Mire care first. Either order works structurally. | Production planning |
+| **D-R1** | Production order after Thornfell. | Mire before Emberholt: the Mire teaches testimony before Emberholt tests it, and Glassed Hollow's displaced civilians reach Mire care first. Either order works structurally. | Production planning |
 | **D-Q1** | Retire `Failed`/`Abandoned` from the quest contract (contradiction 1), which also reverses the Lowmark integration handoff's D-INT-7 recommendation. | Approve and hand to the Systems Engineer before Stage 24.1. | Quest runtime |
 | **D-S1** | Speaker's knowledge (contradiction 2). | Knowing ally who is also dream-seeded. | EH-M5 |
-| **D-L1** | Existing Lowmark open decisions (bible §3: antagonist, Field-Mage, Riverwarden contact, backwater, yield state, and the rest). | Unchanged; the architecture assumes the current recommendations but does not depend on any of them except that the bill has a buyer and the Fourteenth Lot exists. | — |
+| **D-L1** | Existing Lowmark open decisions (bible §3: antagonist, Field-Mage, Riverwarden contact, backwater, yield state (resolved 2026-11-03 by CDR-1), and the rest). | Unchanged; the architecture assumes the current recommendations but does not depend on any of them except that the bill has a buyer and the Fourteenth Lot exists. | — |
 | **D-P1** | Canon promotion. | Promote nothing from this package until the FT rulings; then promote approved FTs into `LORE/` in a separate canon pass. | — |
 
 ---
@@ -210,7 +212,7 @@ The order follows dependency, not release dates. Each step names its output and 
 
 ### 7.1 The quest contribution contract
 
-Every future quest, however small, declares five things in its summary card. This is how a self-contained quest still contributes to a larger, consistent world.
+Every future quest, however small, declares six things in its summary card. This is how a self-contained quest still contributes to a larger, consistent world.
 
 | Field | Question | Example answer |
 |---|---|---|
@@ -219,5 +221,6 @@ Every future quest, however small, declares five things in its summary card. Thi
 | **Revelation role** | Does it plant, support, or own a revelation (R01–R20), or is it self-contained? | Plants R06 (a cairn with no body) |
 | **Recurring evidence** | Does any object, record, or person recur, and with which independent custodian? | None |
 | **State compliance** | How does it stay within Inactive/Active/Completed? | Choice recorded in `TH_…` outcome flag (Thornfell region flags use `TH_` because Lowmark MQ6 already uses `TF_` for quest-local flags); no fail path |
+| **Combat compliance** (CDR-1, CDR-2; added 2026-11-03) | Do its enemies fight to 0 HP, and can every fight be won with melee or ranged? Any scripted surrender/mercy is a named exception in the rulings register. | Wolves and brigands fight to 0 HP; no exception |
 
 A quest that answers "self-contained" to the revelation field is welcome. Part 5's rule stands: Caelmor needs many stories that end where they begin.

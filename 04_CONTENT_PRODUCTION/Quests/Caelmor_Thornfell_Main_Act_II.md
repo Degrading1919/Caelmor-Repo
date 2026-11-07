@@ -1,6 +1,6 @@
 # Thornfell Main Questline, Act II: The Echo of Shatterfall, The Summit Hall
 
-**Status:** Authored production content for Creative Director milestone review. This package implements Thornfell milestones TF-M3 and TF-M4 (bible §6, §6.1), which carry Act II from the end of *The Iron Winter Stores* to the Act II turn. It follows the Lowmark act-package format (`Caelmor_Lowmark_Main_Act_I.md`). Everything marked **[NEW]** is authored and not canon until the Director promotes it. Everything marked **[PROPOSAL — DIRECTOR]** rests on an open bible §3 (TD-) decision. **[CANON]** items come from Phase 1 or the reconciled `LORE/` files. No schema, production JSON or C# is created here. Nothing here is release scope (bible scope guard: Thornfell is v1.5 direction).
+**Status:** Authored production content for Creative Director milestone review. This package implements Thornfell milestones TF-M3 and TF-M4 (bible §6, §6.1), which carry Act II from the end of *The Iron Winter Stores* to the Act II turn. It follows the Lowmark act-package format (`Caelmor_Lowmark_Main_Act_I.md`). Everything marked **[NEW]** is authored and not canon until the Director promotes it. Everything marked **[PROPOSAL — DIRECTOR]** rests on an open bible §3 (TD-) decision. **[CANON]** items come from Phase 1 or the reconciled `LORE/` files. No schema, production JSON or C# is created here. Nothing here is release scope: this is Thornfell milestone content, an internal production milestone (CDR-3). Combat follows the Director rulings of 2026-11-03 (`Caelmor_Director_Rulings_Combat_Ranged_Release.md`): every enemy is defeated at 0 HP (CDR-1); every fight accepts melee or ranged (CDR-2).
 
 **Controlling document:** `04_CONTENT_PRODUCTION/Quests/Caelmor_Thornfell_Narrative_Production_Bible.md`. Its §6 table, §6.1 briefs, §5.3 voice rules, §9 flags and §11 conventions are binding and are implemented as written. Where detail had to be invented it is marked [NEW] and stays inside those briefs.
 
@@ -127,7 +127,7 @@ The pay chits in the Whinstone ledger lead the player to **Carrick's Cut**, a mi
 | Combat share | ~30% (vipers, Horn-Echo, the stopped figures) |
 | Dialogue share | ~10% |
 | Traversal, rigging, sounding, reading, choice | ~60% |
-| Skills | Melee (required); Mining (optional; crew alternative) |
+| Skills | Melee or ranged (CDR-2; ranged never required); Mining (optional; crew alternative) |
 | Choices | What becomes of the rear guard's stone: amended / beside / kept (3 options; the player recommends, Maera decides) |
 | Unlocks | `TH_SHATTERFALL_ACCOUNT`; Shatterfall storm event revisitable; Carrick's Cut as a camp; *The Weight of a Name*, *The Salvage Ledge*; *The Third Horn* richer variant; TF-M4 |
 | **Anchor** | Thornfell Cairn-Keepers (Maera) and Ridge Warden hornbearers (Dorn); Shatterfall Gorge; Gerrit Carrick's out-of-work miners |
@@ -272,7 +272,7 @@ The player recommends; **Maera decides** (`TES-D9`). Her decision follows the pl
 
 ## A7. Encounters
 
-Tuned for **Advanced identity (Milestone 3)** (TD-12). Echo-figures follow bible §2.6: **combat disperses, conditions decide.** No echo-figure has a nameplate, a name, a face, a clan mark or colours; target frames show no name (blank). The design names below are for this document and the Enemies package only.
+Tuned for **Advanced identity (Milestone 3)** (TD-12). Echo-figures follow bible §2.6: **combat disperses, conditions decide.** Under CDR-1 each figure is defeated at 0 HP like any enemy ("breaks into haze"); re-forming while the storm window lasts is a place rule (rulings §3.1.2), not a retreat. Every fight accepts melee or ranged (CDR-2); ranged is never required. No echo-figure has a nameplate, a name, a face, a clan mark or colours; target frames show no name (blank). The design names below are for this document and the Enemies package only.
 
 | Id | Enemies (§10) | Placement | AI role | Telegraph | Purpose | Solo target |
 |---|---|---|---|---|---|---|
@@ -487,7 +487,7 @@ Documented dependencies for a later Systems Engineer. None is implemented here.
 
 ## B1. The quest in one paragraph
 
-**Iven Ridgeborne** finds the player with a list: nights the Summit hummed "with no storm in it", written up in his Ridge Warden log by date, hour and wind. Eyvind Stall's tuning sketches from the Whinstone Store named the Summit's great hall. **Kaldren Deepdelver** meets them at the foot of the carved stairs, because "somebody has to stop you all from being clever". The ascent climbs cliff-hugging stairs and an inner stair where air-channels breathe out torches on a rhythm, and on one landing the player hears their own footstep from the next landing up before they take it. Iven says, "That one. Every time." At the top, the **whisper hall** runs behind the great hall's wall: a whisper at one mouth is heard at the others. From three listening mouths the player hears the crew's tools and voices along Iven's carry lines, whispers down each line to see which come back, and marks on Iven's sketch where each crewman is and which alcoves have gone silent. Kaldren shows them how to confirm a **null-point**: dust falls straight, your own voice goes flat. The map decides the way in. In the **great hall**, Eyvind and his crew have mounted the **Wall-Horn**, a frame of Echohewn plates, and are sounding test notes. With each note the hall answers: the air hums, dust spills off the floor into rough upright shapes that never hold, and a pressure pulse rolls out from the centre stone on a rhythm the player can count. The player fights the crew between pulses until they yield, and takes the horn out of Eyvind's hands. The plates keep ringing on their own. The player listens along the frame for the plate that is **carrying the others**, has Kaldren read the stress in its bolts, unbolts it and carries it into a silent alcove between pulses, and again, until the last plate goes quiet. The hum stops. For one breath the whole Summit is silent, and the dust that was spilling toward the player falls straight down. Eyvind's **horn-trial record** dates every test; Iven's list dates every hum; the player sets them together, and they match. Kaldren says, "Stresses settled. That's all I can tell you." Eyvind, yielded, names the person he answers to: **Ingrith Scarrow**, the Quartermaster, who "will close the wall herself if she can't sound it". The player decides what happens to the horn.
+**Iven Ridgeborne** finds the player with a list: nights the Summit hummed "with no storm in it", written up in his Ridge Warden log by date, hour and wind. Eyvind Stall's tuning sketches from the Whinstone Store named the Summit's great hall. **Kaldren Deepdelver** meets them at the foot of the carved stairs, because "somebody has to stop you all from being clever". The ascent climbs cliff-hugging stairs and an inner stair where air-channels breathe out torches on a rhythm, and on one landing the player hears their own footstep from the next landing up before they take it. Iven says, "That one. Every time." At the top, the **whisper hall** runs behind the great hall's wall: a whisper at one mouth is heard at the others. From three listening mouths the player hears the crew's tools and voices along Iven's carry lines, whispers down each line to see which come back, and marks on Iven's sketch where each crewman is and which alcoves have gone silent. Kaldren shows them how to confirm a **null-point**: dust falls straight, your own voice goes flat. The map decides the way in. In the **great hall**, Eyvind and his crew have mounted the **Wall-Horn**, a frame of Echohewn plates, and are sounding test notes. With each note the hall answers: the air hums, dust spills off the floor into rough upright shapes that never hold, and a pressure pulse rolls out from the centre stone on a rhythm the player can count. The player fights the crew between pulses until they are defeated, and takes the horn out of Eyvind's hands. The plates keep ringing on their own. The player listens along the frame for the plate that is **carrying the others**, has Kaldren read the stress in its bolts, unbolts it and carries it into a silent alcove between pulses, and again, until the last plate goes quiet. The hum stops. For one breath the whole Summit is silent, and the dust that was spilling toward the player falls straight down. Eyvind's **horn-trial record** dates every test; Iven's list dates every hum; the player sets them together, and they match. Kaldren says, "Stresses settled. That's all I can tell you." Eyvind, who has given up, names the person he answers to: **Ingrith Scarrow**, the Quartermaster, who "will close the wall herself if she can't sound it". The player decides what happens to the horn.
 
 **What the player should remember:** the silence. **What the player should want next:** to reach Ingrith before she closes the wall.
 
@@ -512,7 +512,7 @@ Documented dependencies for a later Systems Engineer. None is implemented here.
 | Iven: echoes that arrive before sound; stone faces humming; does not think it magic; leads the player step by step | Thornfell anchors §VI | [CANON] |
 | Horn plates salvaged and bolted into horns to force resonance | Bible §2.1; H11 | [CANON] |
 | Eyvind Stall, the Wall-Horn, the trial record, Ingrith Scarrow as Quartermaster | Bible §2.3, §5.2 (TD-1) | [NEW] / [PROPOSAL — DIRECTOR] `[SPLINTER]` |
-| The whisper hall's three listening mouths, the six alcoves, the counting room, the frost-count calendar | This package | [NEW] |
+| The whisper hall's three listening mouths, the six alcoves, the counting room, the frost-count calendar | This package | [NEW]; frost-count calendar `[APPROVED — CDR 2026-11-03]` |
 | Iron Winter crews (spear, hornman); ridge crows | Bible §10 | [NEW] on [CANON] ecology |
 
 ## B4. Quest summary card
@@ -528,7 +528,7 @@ Documented dependencies for a later Systems Engineer. None is implemented here.
 | Combat share | ~25% (crows, lookouts, the great-hall crew under pulses) |
 | Dialogue share | ~10% |
 | Traversal, listening, mapping, damping, reading, choice | ~65% |
-| Skills | Melee (required); Ranged optional (crows) |
+| Skills | Melee or ranged (CDR-2; ranged never required; crows and divers reward it) |
 | Choices | What happens to the horn: silenced / broken / surrendered (3 options) |
 | Unlocks | `TH_HORN`; the Summit node quiet (no hum without a storm); Thornfell **high routes**; *The Notes We Keep* (with *Witness at the Gate*); TF-M5 |
 | **Anchor** | Echohewn keepers (Kaldren); Ridge Warden high-path scouts (Iven); Echochamber Summit |
@@ -606,7 +606,7 @@ Kaldren is on the lowest step with his boots off (`TSH-D2`). He has come because
 
 ### Beat 3 — The Upper Landing (`S03_landing`)
 **Objective:** *Deal with the lookouts.*
-Two Iron Winter lookouts at the Upper Landing (**TSH-E2**): a spear and a hornman. The hornman's call buffs the spear unless interrupted. They yield. Iven ties them to the sledge (prop). Optional inspect: the empty crates (Shatterfall grit), the cookfire (*"Warm. A pot of something with too much salt. They've been up here days."*).
+Two Iron Winter lookouts at the Upper Landing (**TSH-E2**): a spear and a hornman. The hornman's call buffs the spear unless interrupted. They fight until defeated. Optional inspect: the empty crates (Shatterfall grit), the cookfire (*"Warm. A pot of something with too much salt. They've been up here days."*).
 **Verbs:** fight.
 
 ### Beat 4 — Three Mouths (`S04_listen`)
@@ -637,12 +637,12 @@ The player commits the sketch by telling Iven to go in (`TSH-D4.50`). The marks 
 - **Poor map** (0–2 correct): the open stair, and the crew have heard the whispering in the walls. They are gathered before the dais and the hornman has his call off as the player enters (all crew buffed for the first ~20 s).
 All three are solo-clearable. None fails.
 Inside: **Eyvind Stall** `[SPLINTER]` is on the dais with the mouthpiece. He counts four on his heel and blows a test note into the frame. **The hall answers** (§B8.3): the hum climbs a step, dust spills off the floor around the centre stone into rough upright shapes that lean outward and never hold, and a **pressure pulse** rolls out from the centre stone to the walls. Then quiet, and he counts again. The player fights the crew (**TSH-E3**) between pulses, using alcoves and pillar shadows. The pulses stagger the crew too.
-The crew yield. Iven ties them; Kaldren stands in a pillar's shadow with his hand on the stone and does not fight.
+The crew fight until defeated. Kaldren stands in a pillar's shadow with his hand on the stone and does not fight.
 **Verbs:** enter, fight, read the rhythm.
 
 ### Beat 8 — The Hornwright (`S08_stop_eyvind`)
 **Objective:** *Take the horn from Eyvind.*
-Eyvind keeps playing. He is not a fighter and does not fight; he does not stop either (`TSH-D6`). The player walks onto the dais and uses **Take the horn** (channelled ~2 s, interrupted by a pulse; start it right after a pulse). He lets go at once, more upset about the mouthpiece than about himself. He yields and sits on the dais step.
+Eyvind keeps playing. He is not a fighter and does not fight; he does not stop either (`TSH-D6`). The player walks onto the dais and uses **Take the horn** (channelled ~2 s, interrupted by a pulse; start it right after a pulse). He lets go at once, more upset about the mouthpiece than about himself. He gives up (scripted, SX-N2; he never fights) and sits on the dais step.
 **The plates keep ringing.** The hum does not stop. The pulses slow (~18 s) but keep coming. Kaldren: "He's stopped. It hasn't." (`TSH-D7`.)
 **Verbs:** stop a person.
 
@@ -669,7 +669,7 @@ When the last plate is set down in the alcove (§B8.4): the hum stops. For **one
 - **The trial record** (G5): pickup, `TSH_trial_record` (quest item; text in the dialogue file). It dates every test, with plates seated, how long the note was held and what the hall did.
 - **Set them together:** Iven takes out his list and the player uses **Set the records side by side** (the TF-M3 interaction and two-column view). The dates match: every hum Iven logged on a night with no storm is a trial night; the one trial with no hum logged is a night Iven was on the Passwatch rota and says so in his own log; the one trial on a storm night is listed by Iven with the storms, where he cannot separate it. Sets `TSH_RECORDS_SET`. Iven: "Every one." (`TSH-D9`.)
 - **Kaldren**, asked what it was, or whether it is over: "Stresses settled. That's all I can tell you." (`TSH-D9.30`.) He says nothing else about it.
-- **Eyvind** `[SPLINTER]`, yielded, talks (`TSH-D10`). He thought the hum meant the horn was "right". He tells the player he answers to **Ingrith Scarrow**, the Quartermaster, and that she "will close the wall herself if she can't sound it". Sets `TSH_NAMED_QM`. This is testimony after the fight, not a drop.
+- **Eyvind** `[SPLINTER]`, having given up, talks (`TSH-D10`). He thought the hum meant the horn was "right". He tells the player he answers to **Ingrith Scarrow**, the Quartermaster, and that she "will close the wall herself if she can't sound it". Sets `TSH_NAMED_QM`. This is a non-combatant's testimony (T-3), not a drop.
 **Verbs:** take, compare, listen.
 
 ### Beat 12 — The Horn (`S11_choose`)
@@ -682,7 +682,7 @@ Physical choice at the alcoves and the dais (§B9.3, `TSH-D11`):
 
 ### Beat 13 — The Crown (`S12_crown`)
 **Objective:** *Climb to the Crown with Iven.*
-The stair from the Crown Mouth to the summit top (K1). Iven blows **Gather** for the wardens (they will come up for Eyvind, the crew, and in the surrendered outcome the plates). He shows the player the ridgelines and marks three **high routes** on his sketch (§B10), then says what he thinks of weather and a person who wants to close a wall (`TSH-D12`). The quest completes on `TSH-D12` end.
+The stair from the Crown Mouth to the summit top (K1). Iven blows **Gather** for the wardens (they will come up for Eyvind and, in the surrendered outcome, the plates). He shows the player the ridgelines and marks three **high routes** on his sketch (§B10), then says what he thinks of weather and a person who wants to close a wall (`TSH-D12`). The quest completes on `TSH-D12` end.
 **Verbs:** climb, look.
 
 ## B7. Encounters
@@ -696,13 +696,13 @@ Tuned for **Advanced identity (Milestone 3)** (TD-12).
 | **TSH-E3** | 2 × spear (I, VI), 1 × hornman (III); **+1 × spear (VI) with `TH_STORES = leverage`**; plus the **node pulse hazard** | Great hall | Start state by map tier (§B8.2). Crew fight from and toward the alcoves; they shelter from pulses too | As E2. **Pulse hazard** (not an enemy): Eyvind's four heel-taps (audible) → test note (~3 s) → hum climbs and dust lifts and leans outward from the centre stone (~2.0 s) → ring expands to the walls (~1 s). Heavy damage + stagger in the open; none behind a pillar (snow-wedge tell) or in a silent alcove; half in an ordinary alcove. Period ~14 s while Eyvind plays | Combat inside a readable hazard rhythm; crew and player both obey it | Good map: 90–120 s. Fair: 2–2.5 min. Poor: 2.5–3.5 min |
 | **TSH-H1** (hazard) | Node pulses during `S08`–`S09` | Great hall | No combatants. Pulses continue from the ringing plates | As E3, but the tell begins without Eyvind's taps: the hum climbs a step first (~1 s), then the dust lean (~2.0 s). Period ~18 s, then +4 s per correct plate; −6 s once per wrong plate; weaker as plates are damped | Labour under a rhythm | 4–6 min for five plates |
 
-**Eyvind Stall** `[SPLINTER]` is not a combatant. He never attacks. He is stopped by an interaction and yields at once.
+**Eyvind Stall** `[SPLINTER]` is not a combatant. He never attacks. He is stopped by the *Take the horn* interaction and gives up at once (SX-N2).
 
 **The node is never an encounter.** It has no health, no target frame, no name, no AI. The dust shapes do nothing; they are the tell. The pulses are environmental, roll out from the centre stone on a rhythm set by the ringing plates, and stop entirely when the horn stops (C11, R07).
 
 **Rules**
-- **Combat never reveals evidence.** The trial record is found on the bench; Iven's list is his own log; Ingrith's name is Eyvind's testimony after he yields.
-- Defeated crew **yield** and are tied (prop). Nobody is killed in presentation (TD-7).
+- **Combat never reveals evidence.** The trial record is found on the bench; Iven's list is his own log; Ingrith's name is Eyvind's testimony after he gives up.
+- **Defeat at 0 HP** (CDR-1; supersedes TD-7). Crew and crows take the ordinary defeat presentation; no yield state, no tied props.
 - **Death:** respawn at the Upper Landing (before `S07`) or in the Counting Room (after). Defeated crew stay defeated. Damped plates stay damped. Unbolt segments persist.
 - **Co-op:** shared crew and pulses. Each partner marks their own sketch; the **host's** map tier sets the shared start state (fallback). Plates are shared objects: any partner can listen, unbolt or carry; all present are credited. Kaldren answers whoever asks.
 
@@ -864,11 +864,11 @@ Quest item: `TSH_trial_record` (acquired `S10`; kept).
 ## B14. Open decisions
 
 1. **TD-1 swap layer:** Eyvind is named in `TSH-D6`, `TSH-D7`, `TSH-D10` and on the trial record; Ingrith is named only in `TSH-D10` and on the trial record's flyleaf ("for the Quartermaster"). All tagged `[SPLINTER]`.
-2. **Frost-count calendar** [NEW]: Ridge Warden days counted from the first frost on the Passwatch horn rail. Used by Iven's log and Eyvind's record so the dates match. **Coordinated with Act I (independent review):** frost-count is the wardens' and hornwrights' reckoning; Bersi's ledger uses the storekeepers' weeks counted down to First Smoke. Both are local reckonings in use at once, no page converts one into the other, and the TF-M2 ledger's "weeks before that night on the Cut" line stays untouched. Vessa's slate keeps its undated *Dusk. Storm.* Needs Director acceptance only.
+2. **Frost-count calendar** [NEW]: Ridge Warden days counted from the first frost on the Passwatch horn rail. Used by Iven's log and Eyvind's record so the dates match. **Coordinated with Act I (independent review):** frost-count is the wardens' and hornwrights' reckoning; Bersi's ledger uses the storekeepers' weeks counted down to First Smoke. Both are local reckonings in use at once, no page converts one into the other, and the TF-M2 ledger's "weeks before that night on the Cut" line stays untouched. Vessa's slate keeps its undated *Dusk. Storm.* `[APPROVED — CDR 2026-11-03]` (two calendars approved, rulings §2).
 3. **High routes:** the three named routes and their endpoints need the zone package (MAP VERIFICATION REQUIRED).
 4. **Plate count** (5) and pulse timings are Gameplay Designer calls.
 5. **Map tier thresholds** (5–6 / 3–4 / 0–2) are tunable.
-6. **Eyvind's custody** after yielding: held by the Ridge Wardens pending the Assembly (consistent with TF-M5's clan tribunal for Ingrith). *The Notes We Keep* needs him available.
+6. **Eyvind's custody** after he gives up: held by the Ridge Wardens pending the Assembly (consistent with TF-M5's clan tribunal for Ingrith). *The Notes We Keep* needs him available.
 
 ## B15. Internal review log
 
@@ -882,10 +882,11 @@ Quest item: `TSH_trial_record` (acquired `S10`; kept).
 | Eyvind risked being fought. | He is a craftsman; he never attacks; he is stopped by an interaction. |
 | "Stops when the horn stops" vs. Eyvind stopping. | The horn is the frame, not the mouthpiece: the plates ring on until damped. The hum stops with the last plate, exactly. |
 | Iven risked interpreting. | He reports dates, hours, winds and the rota gap; his only interpretation is "Mountains get tired. Not like this." and "Every one." |
-| Ingrith named by a phenomenon or combat. | Named only by Eyvind's testimony after yielding, and on a flyleaf in a record the player picks up. |
+| Ingrith named by a phenomenon or combat. | Named only by Eyvind's testimony after he gives up (a non-combatant), and on a flyleaf in a record the player picks up. |
 | Brynjar's "proudest boast" cost in the broken outcome. | Kept, with `TH_BRYNJAR` variant barks; no family casualty or war service assigned to him. |
 | Quest-item budget. | `TSH_trial_record` is Thornfell item 3 of 4. Iven's list and sketch stay with Iven. |
 | **Independent review (2026-11-03)**, TF-M4: 4 findings (1 medium, 3 low). | "The splinter's remnant" reworded (could read as the Remnant faction). Frost-count coordinated with Act I's ledger reckoning. `[SPLINTER]` tags added to `TSH-B3.5`, the `TSH-D9` Eyvind option, the `TSH-D12` Ingrith option and `TSH-D12.10`. |
+| **Director rulings reconciliation (2026-11-03)**, TF-M3/TF-M4: CDR-1, CDR-2, CDR-3. | TSH crews fight to 0 HP; yield and tied-prop lines removed (Upper Landing, great hall, Rules). Eyvind unchanged as SX-N2 (gives up after *Take the horn*). Echo-figures clarified as defeated at 0 HP and re-forming by place rule. Skills rows now melee or ranged. Frost-count labelled approved. Header release wording reconciled. |
 
 ---
 

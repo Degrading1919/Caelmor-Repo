@@ -127,7 +127,7 @@ Aldric Fenmere has called the Vale to Crest Hall in the morning to agree a plan 
 | Solo / co-op | Solo-clearable. Co-op partners run their own instances; the siege crew and Sallow are shared world creatures for partners on the same step. |
 | Target length | 40–45 min (siege ~22, hearing ~10, plan ~6, rest optional). |
 | Combat share | ~35%, all in the siege. The hearing and plan have none. |
-| Skills | Melee (required); Woodcutting (required as one of two fire-line methods; the other is carrying); Cooking (optional, keepers' dawn fire). |
+| Skills | Melee or Ranged (combat required; melee-led); Woodcutting (required as one of two fire-line methods; the other is carrying); Cooking (optional, keepers' dawn fire). |
 | Choices | Which chips to lay (some carry a cost); Sallow's surrender terms; Hesketh (3 options → 2 values); route keeper (3); memorial keeper (3). |
 | Unlocks | `LM_MARRICK_EXPOSED`, `LM_HESKETH`, `LM_PLAN_*`; the Relief Cut is sealed by the crews before MQ11; MQ11 lead-in. |
 
@@ -190,16 +190,16 @@ A keeper runs up from below: the crew are at the barge. The player goes down thr
 1. **Throw two mooring lines.** The barge drifts past two bollards on the stage. At each, a coiled line lies ready; the player runs to the bollard and **throws** (instant interaction) onto the barge's cleat as it comes level. The barge is a moving target that waits for the player: while the player is within 6 m of the next bollard, the pole-men struggle with the current and the barge slows to a crawl beside it. Crew on the stage try to shove the player off the line (pole-men's trip, E3).
 2. **Drop the water-gate.** Once both lines hold, the barge is fast against the stage and keepers re-seat its plugs. The gate's chain winch is released with a **single lever pull**; the iron gate drops with a crash.
 
-When the gate drops, the basin surges and one young pole-man is swept off the stage and pinned against the gate bars by the current, clinging to the chain. **Optional (`S05b_haul`):** the player can haul him out (3 s channel at the basin edge) before the step ends. If they don't, keepers fish him out afterwards. Nobody drowns in Crest Hall tonight.
+When the gate drops, the basin surges and one young pole-man who was still poling on the barge (not yet engaged; he never enters E3's fight) is swept off the stage and pinned against the gate bars by the current, clinging to the chain. **Optional (`S05b_haul`):** the player can haul him out (3 s channel at the basin edge) before the step ends. If they don't, keepers fish him out afterwards. Nobody drowns in Crest Hall tonight. *(CDR-1: this is a story action, like SX-N3, not a health outcome. From the surge on he is a non-hostile NPC actor; the E3 crew who fought are ordinary defeats.)*
 **Verbs:** chase, throw, fight, optional rescue.
 
 ### Beat 5 — Sallow (`S06_sallow`) `[ANTAGONIST]`
 **Objective:** *Stop Gideon Sallow.*
-Sallow comes up the far steps from his skiff, cheerful and soaked, and touches the gate chain before he says a word (`CR-D5`). He wants the barge gone and then he wants to be gone. The miniboss fight on the Gate Landing is specified in §10.6. At 20% health he yields: he drops the boat-hook into the basin and holds the gate chain with both hands. He is not killed. Enemies in Caelmor never flee; Sallow surrenders, which is a scripted end to the encounter, not a retreat. **[PROPOSAL — DIRECTOR]** (yield at a health threshold; runtime need in §10.13). His crew in E1–E3 are **downed** at 0 HP: they yield and stay down, presented as beaten, never killed (shared rule with the side-quest packages).
-The yield conversation (`CR-D6`) offers the player his account. There are two ways in, and both are always available:
+Sallow comes up the far steps from his skiff, cheerful and soaked, and touches the gate chain before he says a word (`CR-D5`). He wants the barge gone and then he wants to be gone. The miniboss fight on the Gate Landing is specified in §10.6. Sallow fights until defeated at 0 HP like any enemy. **When Sallow is defeated, the quest plays his scripted surrender** (register exception **SX-2**, CDR-1): instead of the ordinary defeat presentation he drops the boat-hook into the basin and grips the gate chain with both hands, and he stays as a non-hostile NPC for the conversation. He is not killed. There is no health threshold; this is a quest event on defeat, not a combat rule (runtime need in §10.13). His crew in E1–E3 fight to 0 HP and take the ordinary defeat presentation (CDR-1).
+The surrender conversation (`CR-D6`) offers the player his account. There are two ways in, and both are always available:
 - **If `CR_HAULED_CREWMAN`:** "You pulled the lad out." He gives the **full account**: the Lock, the posts, the buyer's name as written on the bill, and that "the lady said there should be nothing to read in the morning." (Chip C9, weight 2.)
 - **Otherwise, or as well:** the player tells him what the flushes did to the fen. He fears the fen more than the keepers. He gives the **Lock account** only: how the flushes were run, which posts were moved. He will not speak about tonight. (Chip C9, weight 1.)
-Either way he asks one thing in return: that his crew work the Cut seal instead of rotting in the lock-up. The player can give their word or refuse. The account counts as a chip **only if the player gives their word** (`CR_CREW_LENIENCY`), because without it he will not repeat it in front of the hall. Refusing is legitimate; it costs a chip, not progress.
+Either way he asks one thing in return: that his river hands (the bargemen and skiff hands who worked his runs and were not at Crest Hall tonight; the keepers take them up by noon) work the Cut seal instead of rotting in the lock-up. The player can give their word or refuse. The account counts as a chip **only if the player gives their word** (`CR_CREW_LENIENCY`), because without it he will not repeat it in front of the hall. Refusing is legitimate; it costs a chip, not progress.
 **Verbs:** fight, judge.
 
 ### Beat 6 — Dawn in the Yard (`S07_dawn`)
@@ -251,7 +251,7 @@ Ansel comes up the towpath with his lantern unlit (`CR-D11`): since the fen-end 
 
 ### 10.5.1 Rules
 
-- **A chip is a physical object or a present witness** earned in play. Combat never produces a chip; nothing a crewman or Sallow drops is evidence (the account is testimony given after surrender, in words).
+- **A chip is a physical object or a present witness** earned in play. Combat never produces a chip; nothing a crewman or Sallow drops is evidence (the account is testimony given after his scripted surrender, SX-2, in words).
 - **Exposure:** any **three valid chips** expose Marrick (`LM_MARRICK_EXPOSED = true`).
 - **Terms:** the total **weight** of laid chips sets `CR_TERMS`: **bare** (under 8), **firm** (8–11), **full** (12 or more). Some chips also add a specific **clause** to the plan whatever the tier.
 - **Singeing:** chips in record bundles lose 1 weight if the bundle was singed (minimum 1). Singeing never invalidates a chip.
@@ -302,7 +302,7 @@ From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: 
 | **E1** | 2 × Smuggler cutter | Undercroft aisle, fire-line 2 | Aggressive; leashed to the aisle | Cutter: knife hand drawn back (~0.9 s) before a double cut | Fight in heat-zone terrain | Required. ~40 s. Ends at 75–90% HP. |
 | **E2** | 2 × Smuggler cutter (torch-bearers) | Record room | Aggressive once engaged; otherwise light piles (each lit pile adds a heat zone, not lost records) | As E1; torch swing (~1.2 s) leaves a short-lived fire patch | Urgency without fail | Required. ~40 s. |
 | **E3** | 3 × Smuggler pole-man, 2 × cutter | Water-Gate Hall, barge and stage | Aggressive; pole-men prefer to work the barge until engaged | Pole-man: pole set low (~1.2 s) before a sweeping trip that knocks the player down 1 s | The barge race; mixed reach | Required. ~70 s. Ends at 55–75% HP. |
-| **E4** | **Gideon Sallow** (miniboss) + 2 × pole-man at 66% | Gate Landing | Miniboss; yields at 20% | See below | Act III's human set piece | Required. 2.5–4 min. Ends at 40–70% HP. |
+| **E4** | **Gideon Sallow** (miniboss) + 2 × pole-man at 66% | Gate Landing | Miniboss; defeated at 0 HP, then scripted surrender (SX-2) | See below | Act III's human set piece | Required. 2.5–4 min. Ends at 40–70% HP. |
 
 ### 10.6.1 Miniboss spec: Gideon Sallow `[ANTAGONIST]`
 
@@ -314,10 +314,10 @@ From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: 
 | **Rope Cut** | Telegraph: he looks up and flicks the hook at a lantern rope; the lantern visibly sways first (~1.5 s). Effect: the lantern drops and goes out; that third of the stage goes dim. In the dim his sweeps still telegraph by sound (he whistles before every swing; he can't help it) and the stage edge is harder to read. Counter: the fallen lantern sputters on the stone; **Relight** (2 s interaction) restores the light. Phase 2+ only; never more than two lanterns down at once. |
 | **The Shove** | Telegraph: he plants the hook's butt, lowers his shoulder and scrapes a boot (~1.8 s); a wet streak marks his line on the stone. Effect: 5 m straight charge; on hit, the player is knocked back 3 m. If that carries them over the edge, they fall into the basin: no damage, but they wade to the nearest steps (6–8 s out of the fight). Sallow does not heal while they wade; he talks (barks). Counter: step off the streak, or stand with a bollard behind you. |
 | **Chain Touch** | At 66% and 33% he backs to the gate chain and touches it with an open hand (2 s; one superstitious line). Not an attack. A free opening for the player, and characterisation. |
-| Phases | **P1 (100–66%):** Sweep, Shove. **P2 (66–33%):** adds Rope Cut; 2 pole-men come up the far steps (E3 stats, one at a time). **P3 (33–20%):** Sweep and Shove cadence +25%; one Rope Cut on entry. |
-| Yield | At 20% he drops the hook into the basin, grips the chain with both hands and says "Enough. Enough. I'm done." Combat ends; adds kneel. Event `cr.sallow_yield` → `CR-D6`. |
+| Phases | **P1 (100–66%):** Sweep, Shove. **P2 (66–33%):** adds Rope Cut; 2 pole-men come up the far steps (E3 stats, one at a time). **P3 (33–0%):** Sweep and Shove cadence +25%; one Rope Cut on entry. |
+| Defeat (SX-2) | **At 0 HP** (no threshold) the quest's defeat hook plays the scripted surrender in place of the ordinary defeat presentation: he drops the hook into the basin, grips the chain with both hands and says "Enough. Enough. I'm done." Remaining adds are defeated as normal or, if still up, fight on to 0 HP. He respawns in place as a non-hostile NPC. Event `cr.sallow_yield` fires **on defeat** → `CR-D6`. |
 | Death and recovery | Player death respawns at the Keepers' Yard (H) with steps intact; the barge stays secured and the fire-lines stay cut. Sallow resets to full health on the landing. |
-| Co-op | Shared world creature for partners on `S06_sallow`; health scales per participant (Gameplay Designer). Shove targets the farthest player. Each participant gets the yield and runs `CR-D6` in their own instance. |
+| Co-op | Shared world creature for partners on `S06_sallow`; health scales per participant (Gameplay Designer). Shove targets the farthest player. Each participant gets the scripted surrender on defeat and runs `CR-D6` in their own instance. |
 | Evidence rule | Sallow drops nothing evidentiary. His account is given in words, after the fight, by choice. |
 
 ## 10.7 The strange moment: the water-gate stills
@@ -341,9 +341,9 @@ From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: 
 | `S02_alarm` | Find the fire. | Enter Tally Stair volume | Yes | Night state begins on `S01` completion |
 | `S03_firelines` | Cut the fire-lines (0/3). | 3 × (interaction `cut_hoarding` complete OR soaked-sack deposit on oil trail) | Yes | E1 at line 2 |
 | `S04_records` | Carry the records out (0/2). Get the Keeper-Captain out. | 2 bundle-deposit events (or keeper hand-off) + Hesketh escort enters yard volume + `CR_board_minute` acquired (`CR-D4`) | Yes | Bundle smoulder timers start on record-room entry; singe sets `CR_SINGED_B1/B2` |
-| `S05_water_gate` | Make the barge fast. Drop the water-gate. | 2 × `throw_mooring_line` (instant, at the moving barge beside each bollard) + `drop_gate_lever` (single pull) + E3 downed | Yes | Barge slows beside the next bollard while the player is within 6 m |
+| `S05_water_gate` | Make the barge fast. Drop the water-gate. | 2 × `throw_mooring_line` (instant, at the moving barge beside each bollard) + `drop_gate_lever` (single pull) + E3 defeated | Yes | Barge slows beside the next bollard while the player is within 6 m |
 | `S05b_haul` | (Optional) Haul the crewman out. | Interaction `haul_crewman` complete before `S05` completes | No | Sets `CR_HAULED_CREWMAN` |
-| `S06_sallow` | Stop Gideon Sallow. | Event `cr.sallow_yield` + `CR-D6` end node | Yes | |
+| `S06_sallow` | Stop Gideon Sallow. | Event `cr.sallow_yield` (fires on Sallow's defeat, SX-2) + `CR-D6` end node | Yes | |
 | `S07_dawn` | Go into the hall. | `CR-D7` end + enter Long Hall volume (the bell rings on entry) | Yes | No wait interaction |
 | `S07b_feed` | (Optional) Feed the keepers. | Item-given: cooked food to a keeper | No | `CR_FED_KEEPERS` |
 | `S08_table` | Lay what you found on the table. | ≥3 valid chip deposits + `CR-D8.90` (finding) end node | Yes | Sets `LM_MARRICK_EXPOSED`, `CR_TERMS`, `CR_MARRICK_STORES` |
@@ -370,7 +370,7 @@ From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: 
 
 | Choice | Options | Immediate | Later |
 |---|---|---|---|
-| **Sallow's terms** | Give your word (crew work the seal) / Refuse | Word: C9 is valid; the Lock crew go up the Cut with the seal crews. Refuse: C9 unavailable; crew to the lock-up. | MQ11: Lock crew on gate 1 under keeper watch (word). MQ12: Sallow at the Cut mouth with a shovel (word) or behind the lock-up grille (refuse). |
+| **Sallow's terms** | Give your word (crew work the seal) / Refuse | Word: C9 is valid; Sallow's river hands (taken up by the keepers, never fought) go up the Cut with the seal crews. Refuse: C9 unavailable; crew to the lock-up. | MQ11: Lock crew on gate 1 under keeper watch (word). MQ12: Sallow at the Cut mouth with a shovel (word) or behind the lock-up grille (refuse). |
 | **Which chips** | Any subset ≥3 | Terms tier and clauses (§10.5). | C6 named → Tovin stood (MQ12). C8 (full) → licensed haulers answer to the keepers. Rhosyn's MQ12 fate follows the UL outcome, not the table. |
 | **Hesketh** | Speak for him / Say nothing / Let him speak for himself | kept: he stays Keeper-Captain, under the new countersign rule. stood-down: Aldric stands him down, and he asks to be put on the Cut seal crew. Self: he stands himself down before anyone can. | MQ12 Crestbridge scene. The Crestbridge Guard commission is given by Hesketh (kept) or by the Keeper-Lieutenant with Hesketh's word behind it (stood-down). |
 | **Route keeper** | Crews / Keepers / Shared | Who calls crossings during a pulse. | MQ11: who marshals the evacuation lanes. MQ12: who lights the Whisperflow posts with the player (crews: Maelin's hands; keepers: Hollis; shared: both). |
@@ -382,7 +382,7 @@ From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: 
 |---|---|---|
 | The plan | Story / world | Roles active across the Vale (barks, props, MQ11 positions). |
 | Keepers' waiting-wage | Currency | Small; from Hesketh (kept) or the Keeper-Lieutenant. Amount set in economy tuning. |
-| Skill XP | Action XP only | Melee, Woodcutting, optional Cooking. No lump quest XP. |
+| Skill XP | Action XP only | Melee (or Ranged, if used), Woodcutting, optional Cooking. No lump quest XP. |
 | Crestbridge's thanks | Standing (narrative) | Keepers' barks change across Crestbridge. No reputation system. |
 
 ## 10.12 Failure, recovery, co-op
@@ -407,7 +407,7 @@ From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: 
 | Smoulder timer on carry objects | Systems | Per-object timer started by enter-volume; on expiry sets a flag and teleports the object to the yard. |
 | Carry state (bundles, sacks, chips, barge post) | Systems | Same as MQ1. |
 | Table deposit volume with per-chip validity and weight | Schema & Content | A list of chip ids with conditions, weight and singe flag; deposit event increments `CR_CHIPS_LAID`/`CR_WEIGHT`. |
-| Miniboss yield at health threshold **[PROPOSAL — DIRECTOR]** | Systems + Gameplay | Health-threshold event (20%) that ends combat and switches the creature to a non-hostile NPC. **Runtime need:** the same mechanism serves Joss Garrow's yield in *Old Lantern*; flagged as new for the runtime. Human crew use the shared "downed at 0 HP" presentation (yield and stay down). |
+| **On-defeat quest hook** (SX-2) | Systems + Gameplay | When Sallow's creature is defeated at 0 HP, the quest's defeat hook plays the scripted surrender presentation instead of the ordinary one and spawns Sallow as a non-hostile NPC (`creature.scripted_defeat`, formerly EV08). No health-threshold event. The same hook serves SX-1 Joss Garrow (*Old Lantern*) and SX-3 Ingrith (Thornfell). Human crew use the ordinary defeat presentation; no downed state. |
 | Moving barge with bollard wait points | Systems | Pathed prop (as MQ4's barge) that slows beside the next bollard while the player is near; two instant line-throw interactions. |
 | Lantern-rope prop (drop + relight) | Systems + art | Breakable light with a relight interaction. Reused for MQ11 lantern racks. |
 | Audio duck on `cr.plan_agreed` | Audio | Local duck of the water-gate emitter and ceiling ripple-light pause. |
@@ -417,14 +417,14 @@ From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: 
 | Mystery | Author truth | Public belief after MQ10 | Evidence | Wrong reading | Withheld | Reveal owner |
 |---|---|---|---|---|---|---|
 | Who ordered the fire | Marrick, by implication, to Sallow. | "Her factor's crew did it." | Only C9 full ("nothing to read in the morning"). | Marrick lit it herself; Hesketh tried to burn his orders. | Whether she meant fire. She never says. | MQ10 (testimony only). |
-| Who the buyer was | A name on a bill ("the Whinstone Store"); outside Lowmark. Author truth (FT-03): a Thornfell store-house used by an independent Blood-Oath splinter. | "Someone downriver." | C4. | Emberholt; a rival Lowmark house. | Everything beyond the name. **No v1 content names a region.** | Future region (not v1). |
+| Who the buyer was | A name on a bill ("the Whinstone Store"); outside Lowmark. Author truth (FT-03): a Thornfell store-house used by an independent Blood-Oath splinter. | "Someone downriver." | C4. | Emberholt; a rival Lowmark house. | Everything beyond the name. **No Lowmark content names a region.** | Later-milestone region (Thornfell TF-M2). |
 | Why the water-gate stilled | The gate sits on an old Braid outfall. | "The river came to the meeting." | The silence at the "Aye"; Marrick's parting joke. | The river approved the plan. | All of it. | Never. |
 
 ## 10.15 Open decisions
 
-1. **Miniboss yield** is the only v1 creature that surrenders. *Recommendation: keep; it is the clearest way to show the antagonists are people.*
+1. ~~**Miniboss yield** is the only v1 creature that surrenders.~~ *Resolved 2026-11-03 (CDR-1):* Sallow is register exception **SX-2**, a scripted surrender on defeat at 0 HP. Lowmark's other scripted exception is SX-1 Joss Garrow (*Old Lantern*); no general yield exists.
 2. **Who succeeds Hesketh if stood down.** This package uses a role-based **Keeper-Lieutenant**. Hollis is the emotional choice, but he is junior and born after the armistice. *Recommendation: role-based; revisit if Hollis gets a Keeper-Captain arc later.*
-3. **The outside buyer's name** on `NF_bill_of_lading` is now "the Whinstone Store" (FT-03 approved 2026-11-02). v1 still names no region; Thornfell TF-M2 owns the reveal (R05).
+3. **The outside buyer's name** on `NF_bill_of_lading` is now "the Whinstone Store" (FT-03 approved 2026-11-02). Lowmark content still names no region; Thornfell TF-M2 owns the reveal (R05).
 
 ## 10.16 Internal review log
 
@@ -435,6 +435,7 @@ From main quests alone the player always has **C1, C2, C3, C4, C5, C6 and C7**: 
 | Marrick's answers read as denials. | Rewrote every answer as a reasonable, partly true explanation, each beaten by a *different* chip, so the order the player lays them matters to the conversation. |
 | Hesketh was a passive victim. | He is found saving his own signed orders from the fire. |
 | Sallow's account was gated on an optional rescue only. | Two ways in; both always available; only the weight differs. |
+| Director rulings reconciliation (2026-11-03, CDR-1/2/3). | Sallow's 20% yield replaced by SX-2: he fights to 0 HP and the quest's defeat hook plays the scripted surrender (`cr.sallow_yield` fires on defeat; `CR-D6` unchanged). E1–E3 crews fight to 0 HP; "downed" removed (`S05` completes on E3 defeated). The hauled pole-man is clarified as a non-hostile actor swept by the surge, never one of E3's fighters. Sallow's terms now cover his river hands taken up by the keepers (never fought), so `CR_CREW_LENIENCY` keeps its MQ11/MQ12 uses. Health-threshold integration need replaced by the on-defeat hook. Ranged accepted, never required. "v1" release wording replaced. |
 | The water-gate silence risked reading as proof. | Independent review pass: it no longer coincides with any record. It fires when the hall says "Aye" to the plan, tied to many hands and no person; Marrick mocks it on her way out; the finding cites only chips. |
 | Independent review pass: item custody. | `SM_requisition` and `NF_bill_of_lading` are always player-held and laid from inventory; bundles hold only keepers' records and Tovin's sheets (both values). Minimum main-only weight 10. |
 | Independent review pass: C8. | C8 is now the UL crew ledger (`UL_LEDGER`, weaker if `UL_LEDGER_CUT`), with Rhosyn present only if `UL_RHOSYN_WITNESS`. |
@@ -464,7 +465,7 @@ With the Relief Cut sealed at both ends, Stillwater Fen has nowhere to send its 
 | Solo / co-op | Solo-clearable. The Muster is a shared world creature for partners on the same step. |
 | Target length | 45–55 min (evacuation ~15, gates ~15, Muster ~8, hold and choice ~7). |
 | Combat share | ~45%. |
-| Skills | Melee (required); Cooking (optional, Elspeth's station); marker and stone reading (required knowledge). |
+| Skills | Melee or Ranged (combat required; melee-led); Cooking (optional, Elspeth's station); marker and stone reading (required knowledge). |
 | Choice | Seal / Tend / Shared → `LM_FEN_ENDING`. |
 | Unlocks | Drift-site states change Vale-wide (§ Ending matrix); MQ12. |
 
@@ -519,7 +520,7 @@ Oriel's order (MQ9: **furthest from the Cut's head first, nearest last**): **Ree
 | Gate | Pressure | Encounter |
 |---|---|---|
 | **1. Reedmere Weir** | Low | E2: Reed Stalkers (2 stalkers, 1 lurker) come out of the reeds at the crew. If `CR_CREW_LENIENCY`, two of the crew on this winch are Sallow's Lock men under keeper watch, and they work hard. |
-| **2. The Long Sill** | Rising | E3: one wave of drift, then a **Stillwater Serpent** breaches *through* the sill: stone cracks, the gate-board jams, and progress **falls** while the Serpent is at the sill (it is pushing the channel shut with its body). Kill or drive it off the sill (it submerges to the deep side and resurfaces) and progress resumes. |
+| **2. The Long Sill** | Rising | E3: one wave of drift, then a **Stillwater Serpent** breaches *through* the sill: stone cracks, the gate-board jams, and progress **falls** while the Serpent is at the sill (it is pushing the channel shut with its body). Defeat it at 0 HP and progress resumes (CDR-1: no drive-off; its Submerge move is an ordinary telegraphed attack and it always resurfaces at the sill). |
 | **3. The Lantern Sluice** | Peak | E4: drift waves and two lantern-drifts. As progress passes 50%, the heart pool's fog lifts in one movement and the player can see the lights of the Muster standing up beyond the sluice. |
 
 ### Beat 4 — The Muster (`S06_muster`)
@@ -658,7 +659,7 @@ The voices are chosen for who would really argue each, and who would pay for it.
 | `SV_LESSA_ROUTE` | FW lane used | `SV-D3` variant; MQ12 Lessa |
 | `SV_FED_EVACUEES` | `S02b` | `SV-D8` Elspeth line; MQ12 Elspeth |
 | `SV_GATE_1/2/3` | gates | Lanterns at stones; MQ12 crews' lines |
-| `SV_SERPENT_KILLED` / `SV_SERPENT_DRIVEN` | E3 | MQ12 Reedmere cutter bark |
+| `SV_SERPENT_KILLED` / `SV_SERPENT_DRIVEN` | E3 (`SV_SERPENT_KILLED` set on defeat; `SV_SERPENT_DRIVEN` kept as an id but never set, CDR-1) | MQ12 Reedmere cutter bark (killed variant) |
 | `SV_MUSTER_DISPERSED` | `S06` | `S07` enable |
 
 ## 11.11 Rewards
@@ -667,7 +668,7 @@ The voices are chosen for who would really argue each, and who would pay for it.
 |---|---|---|
 | The fen's new state | World | Drift-site states change Vale-wide (Ending matrix). |
 | Watcher smoke-pot | Tool | The loan is kept ("Keep it. You'll be asked again."). Item pass defines it. |
-| Skill XP | Action XP | Melee, optional Cooking. No lump quest XP. |
+| Skill XP | Action XP | Melee (or Ranged, if used), optional Cooking. No lump quest XP. |
 | Reedmere access | Access | Guided cutting grounds (Tend/Shared) or the outer grounds (Seal) open as gathering areas (economy pass). |
 
 ## 11.12 Failure, recovery, co-op
@@ -699,13 +700,13 @@ The voices are chosen for who would really argue each, and who would pay for it.
 
 | Mystery | Author truth | Public belief after MQ11 | Evidence | Wrong reading | Withheld | Reveal owner |
 |---|---|---|---|---|---|---|
-| What the Muster was | Coalesced grief over the Lot, stirred by the flushes. | "The convoy's dead stood up." | Lantern-lines, oar counts; the Lot's barge ribs. | The convoy's crews were in it; defeating it freed them. | Who was aboard. Who ordered the flush. | Never in v1. |
+| What the Muster was | Coalesced grief over the Lot, stirred by the flushes. | "The convoy's dead stood up." | Lantern-lines, oar counts; the Lot's barge ribs. | The convoy's crews were in it; defeating it freed them. | Who was aboard. Who ordered the flush. | Never in Lowmark content. |
 | Why every stone held at once | The Braids carried the pressure to every calibration stone together. | "The fen let go." / "The Field-Mage did it." | The constellation; Sedge exhausted. | Sedge did it alone; the player did. | The Riverwarden method. | Oriel (MQ12, briefly). |
-| The Fourteenth Lot | Sank in a wartime flush; hushed. | Known now to be "a lot that went down in the fen." | Guaranteed to every player before the boss by main-quest content only: MQ4's blank convoy stone (required inspect, Maelin), MQ9's carved wreck scar on the flow-table (required inspect), and Lessa's line as she pulls her stake (`SV-D3.02b`). Then the ribs in the heart pool. Never supernatural testimony. | Marrick's house did it. | Who gave the order. | Not v1. |
+| The Fourteenth Lot | Sank in a wartime flush; hushed. | Known now to be "a lot that went down in the fen." | Guaranteed to every player before the boss by main-quest content only: MQ4's blank convoy stone (required inspect, Maelin), MQ9's carved wreck scar on the flow-table (required inspect), and Lessa's line as she pulls her stake (`SV-D3.02b`). Then the ribs in the heart pool. Never supernatural testimony. | Marrick's house did it. | Who gave the order. | Not in Lowmark content. |
 
 ## 11.15 Open decisions
 
-1. **Muster fight length** (6–8 min) is long for v1 combat. *Recommendation: keep; it is the only boss; phases checkpoint.*
+1. **Muster fight length** (6–8 min) is long for Lowmark combat. *Recommendation: keep; it is the only boss; phases checkpoint.*
 2. **Annelise at the fen** requires her to travel from Ashenstead. Travel to a nearby memorial site in a crisis is ordinary work for her role; no invented history. *Recommendation: keep.*
 3. **Seal's livelihood cost** for Reedmere needs an economy note (outer grounds only).
 
@@ -875,7 +876,7 @@ None of the four depends on any other Act III choice. Every player who completes
 
 1. ~~`LM_ORIEL_PROMISE` value names.~~ Resolved: `RR-D4.02` is keyed to `aloud` / `many_hands` / `return` and quotes Act II's exact words.
 4. **Maelin's Whisperflow night refusal ends** **[PROPOSAL — DIRECTOR]**: all her other refused stretches stay refused. This changes anchor behaviour and is listed for the Director.
-2. **Who cut the player's mark.** Deliberately unanswered. Compatible with Oriel, with the crews, with Sedge. *Recommendation: never answer it in v1.*
+2. **Who cut the player's mark.** Deliberately unanswered. Compatible with Oriel, with the crews, with Sedge. *Recommendation: never answer it in Lowmark content.*
 3. **Far-bank settlement identity** (TL §14 item 4) affects only travel lines.
 
 ## 12.12 Internal review log
@@ -993,10 +994,11 @@ Crossings reopen under accountable rules (crews' marks on stones, keepers' count
 | Check | Result |
 |---|---|
 | Canon anchors | Maelin: no new history; her night crossing is a choice about one stretch, consistent with "refuses night passage through specific stretches." Corvin: regrets the ledger aloud once (MQ10). Aldric: convenes, does not rule; no wartime service. Lessa: reopens one done path; no Mire kinship. Annelise: no names spoken. Tovin: never names it, never solves; his one line in the hall describes ("I drew what the floor did"). Joric: decides about his field (Act II); MQ12 only reflects it. No ages, kinship, travel or record custody invented. |
-| Evidence rule | Exposure rests on chips only; supernatural items refused at the table; the water-gate stilling is mocked and proves nothing; the Muster names no one; the fen-wide hold proves nothing; Sallow's account is words after surrender, not a combat drop. |
+| Evidence rule | Exposure rests on chips only; supernatural items refused at the table; the water-gate stilling is mocked and proves nothing; the Muster names no one; the fen-wide hold proves nothing; Sallow's account is words after his scripted surrender on defeat (SX-2), not a combat drop. |
 | Soft-locks | Seven main-only chips; singe never invalidates; every trance resolves; gate order chalked; boss phase checkpoints; MQ12 has no combat or timers. |
 | Duplicate structures | MQ10 defence ≠ MQ4 assault; table-laying ≠ TL testimony; MQ10's water-gate is a chase, not a channel; the three-gate hold is the arc's culminating channel set piece (MQ4's crank is the other); seat-the-post deliberately echoes TL as the climax. |
-| Independent review pass | Applied: promise keys; item custody; C8 = `UL_LEDGER` (+`UL_LEDGER_CUT`, `UL_RHOSYN_WITNESS`); water-gate stilling tied to the plan's "Aye"; water-gate chase; Sedge off the public floor; waits replaced by walks; culverts planked so the fen holds its breath; Fourteenth Lot delivery before the boss; Braid gate names/order; OL, VK and UL branches with defaults; residual drift sites; Sallow yield and crew "downed" tagged; Maelin's night crossing tagged. |
+| Independent review pass | Applied: promise keys; item custody; C8 = `UL_LEDGER` (+`UL_LEDGER_CUT`, `UL_RHOSYN_WITNESS`); water-gate stilling tied to the plan's "Aye"; water-gate chase; Sedge off the public floor; waits replaced by walks; culverts planked so the fen holds its breath; Fourteenth Lot delivery before the boss; Braid gate names/order; OL, VK and UL branches with defaults; residual drift sites; Sallow yield and crew "downed" tagged (superseded 2026-11-03: Sallow is SX-2 on defeat; crews are ordinary 0 HP defeats); Maelin's night crossing tagged. |
+| Director rulings reconciliation (2026-11-03) | CDR-1: MQ10 crews to 0 HP; Sallow SX-2 on defeat; MQ11 Serpent defeated at 0 HP (no drive-off). CDR-2: ranged accepted throughout, never required. CDR-3: "v1" release wording replaced with Lowmark-content / later-milestone wording. Step ids, flags and chips unchanged. |
 | Quest items | 1 new (`CR_board_minute`) of 2 allowed. |
 | Flags | `LM_PLAN_ROUTES`/`LM_PLAN_MEMORIAL` documented as the `LM_PLAN_*` family. No other new `LM_` flags. Quest-local flags use CR/SV/RR. Dialogue file checked against §0.4–0.5 and each quest's flag table. |
 | Player address | Origin- and address-neutral; they/them in prose; the mark choice is three plain cuts. |

@@ -89,7 +89,7 @@
 | **Oddny** | Hushfold herder, young woman; went back for a strayed nanny goat. | Furious at the goat. |
 | **Halvard** | Old Hushfold herder; went after Oddny; turned ankle. | Slow, polite, mortified. |
 | **Young warden** (W1) | The one Ressa stopped in TF-M1. | Over-careful. |
-| **Hornman** | Ingrith's call-man on the gatehouse roof. | Says nothing but calls until he yields. |
+| **Hornman** | Ingrith's call-man on the gatehouse roof. | Says nothing but calls until he is defeated. |
 | **Wedge crews** | Blood-Oath households and clanless hires. | Tired, cold, half sure. |
 
 ---
@@ -175,7 +175,7 @@ TSW-D2.20 IVEN: "Listen for the howl. It comes before the teeth."   {event: TSW-
 | Id | Trigger | Speaker | Line |
 |---|---|---|---|
 | TSW-B2.0 | Howler howls | (caption) | "A howl, left." / "A howl, right." / "A howl, behind." |
-| TSW-B2.0a | Wolves flee | IVEN (above) | "They're hungry, not stupid. Neither are you. Go on." |
+| TSW-B2.0a | Wolves defeated | IVEN (above) | "Hungry. Everything's hungry tonight. Go on." |
 | TSW-B2.1 | First view of the galleries with `TDS10_READ` | (log) | "Three pale. Same as from below." |
 | TSW-B2.2 | First view without it | (log) | "Seven galleries over the cut. Most of the props are grey. Three are new wood, pale as bread." |
 
@@ -221,10 +221,10 @@ TSW-D3.40 DORN: "Pull-line's the weak bit. Rope always is." (beat) "Don't tell A
 | TSW-B3.3 | Spent call, no answer, count passes | (log) | "No answer from that gallery. The call moves on." |
 | TSW-B3.4 | Crew sees the player (G3/G5) | WEDGE CREWMAN | "Someone on the stair! Pull, pull before the gust!" |
 | TSW-B3.5 | Whistle stops the haul | WEDGE CREWMAN | "Hold! Face is singing. Hold the line." |
-| TSW-B3.6 | Crewman yields | WEDGE CREWMAN | "Down. I'm down. It's a wall, not a war." |
-| TSW-B3.7 | Hornman (crew) yields | CREW HORNMAN | "Horn's on the ground. Look. On the ground." |
+| TSW-B3.6 | Crewman engages | WEDGE CREWMAN | "It's a wall, not a war! Go home!" |
+| TSW-B3.7 | (removed: CDR-1) | — | — |
 | TSW-B3.8 | Line cut | WEDGE CREWMAN | (the line goes slack and slithers down) "...Well. That's that." (sits on the ledge) |
-| TSW-B3.9 | Seized: G3 crewman, after yield | WEDGE CREWMAN | "Half of them walked. No grain, no wall." |
+| TSW-B3.9 | Seized: G3 crewman engages | WEDGE CREWMAN | "Half of them walked. No grain, no wall." |
 | TSW-B3.10 | Leverage: G5 crew sighted | WEDGE CREWMAN | "New iron! Show them the new iron!" |
 | TSW-B3.11 | G7 called; answer from the roof; first shed | DORN (from below) | Fall. (then, shouting) "That's the Gate gallery! Get in the gatehouse!" |
 | TSW-B3.12 | Rubbing complete; wind eases | DORN (outside the door) | Rest. |
@@ -352,7 +352,7 @@ TSW-D4.20 INGRITH [SPLINTER]: "One."   → TSW-E4 starts
 | TSW-B4.5 | Gust; she steps behind the post | INGRITH `[SPLINTER]` | "Face is singing. Mind your feet." (she means it) |
 | TSW-B4.6 | 60%: transition | INGRITH `[SPLINTER]` | "Gather." (hornman: Gather) |
 | TSW-B4.7 | Crew arrive | IRON WINTER SPEAR | "Quartermaster! Stairs are clear, we're up!" |
-| TSW-B4.8 | Crewman yields | IRON WINTER SPEAR | "I'm sitting. Quartermaster, I'm sitting." |
+| TSW-B4.8 | (removed: CDR-1) | — | — |
 | TSW-B4.9 | Leverage crew (new spearheads) | INGRITH `[SPLINTER]` | "New iron. Forty bars of it. Don't waste it on the floor." |
 | TSW-B4.10 | First G7 shed in the fight | INGRITH `[SPLINTER]` | "That's mine. I drew those pins." (beat) "Hood. Get under the hood, you fool." (to her own crewman) |
 | TSW-B4.11 | 35%: she drops the tally cords | (no voice: the cords clatter on the boards) | — |
@@ -360,9 +360,9 @@ TSW-D4.20 INGRITH [SPLINTER]: "One."   → TSW-E4 starts
 | TSW-B4.13 | Player hit by the Count three times in a row | INGRITH `[SPLINTER]` (P1–P2 only) | "You're not counting." |
 | TSW-B4.14 | Player death | INGRITH `[SPLINTER]` | "Get them down the stair. Gently. Gently, I said." |
 
-### TSW-D5: the yield (S04) `[SPLINTER]`
+### TSW-D5: the surrender (S04; SX-3, scripted on defeat) `[SPLINTER]`
 
-She plants the spear butt-down and sits on the drum frame. The hornman puts his horn on the boards. Any option can end the scene (exit counts as end).
+Ingrith is defeated at 0 HP; the quest plays her scripted surrender (SX-3). She plants the spear butt-down and sits on the drum frame, still counting under her breath. The scene opens once her hornman and any crew have been defeated. Any option can end the scene (exit counts as end).
 
 ```
 TSW-D5.01 INGRITH [SPLINTER]: (sitting; breath smoking; not looking at the player) "Down. I'm down."
@@ -531,7 +531,7 @@ TSW-D8.30 RESSA: "Assembly sits tomorrow. Bring the paper."   {event: TSW-D8 end
 | TSW-B9.5a | Brynjar's back to the door (`defended`) | BRYNJAR | "Readiness isn't a crime, Hadrik. It's a coat." |
 | TSW-B9.6 | Torvek at the stone with the folded banner (`shared`) | TORVEK | (nothing; he sets one hand on the banner) |
 | TSW-B9.7 | Kaldren at the back wall (`silenced`) | KALDREN | "Hall's sound. Floor's sound. I came to check." |
-| TSW-B9.8 | Yielded gallery crew at the door | WEDGE CREWMAN | "They let us stand at the back. I wasn't expecting the back." |
+| TSW-B9.8 | Gallery crew who sat down at a cut line, at the door (any `cut`) | WEDGE CREWMAN | "They let us stand at the back. I wasn't expecting the back." |
 | TSW-B9.9 | Wardens at the rail (any `cut`) | WARDEN | "Re-pinning cut galleries in snow. Lovely work. Thank you." |
 | TSW-B9.10 | TAS Completed | TESSALY VARN (back wall) | "We were told it would be quick. Nothing in Thornfell is quick. It's admirable." |
 | TSW-B9.11 | Ingrith at the side door `[SPLINTER]` | (log) | "At the side door a woman in a quilted coat stands between two wardens, counting the people in the hall under her breath." |
@@ -734,3 +734,4 @@ The offer opens a commission; it grants nothing (quest file §E.8).
 | Flags | Every flag set here (`TSW_HORN_LOANED`, `TSW_INGRITH_WALL`, `TSW_ROSTER_READ`, `TSW_ODDNY`, `TSW_HALVARD`, `TSW_READER`, `TH_COLUMN`, `TH_STAND`, `TH_ASSEMBLY_POSTURE`, `TH_STANDING`) matches the quest file's §9.2. |
 | Names | Roster and tally names avoid Ketil/Tova's family name (Rask) and every named cast member except Weatherall. "Aasen" and "Hollin" appear in the tally and in the sealed-posture account (the same Hushfold households). |
 | Independent review (2026-11-03) | Roster names de-collided (Astrid Weatherall, the Lunde family, the Tofte carters); `TSW-D1.20` option is the no-practice-horn fallback; Hadrik cast note limited to ledger totals; `TDS10_SEEN` marked placeholder; `[SPLINTER]` on `TSW-D5.40`, `TSW-B10.2`. |
+| Director rulings reconciliation (2026-11-03) | CDR-1: `TSW-D5` reframed as Ingrith's scripted surrender on defeat (SX-3); hornman removed from it. Yield barks removed (`TSW-B3.7`, `TSW-B4.8`, ids kept as "removed"); `TSW-B3.6`, `TSW-B3.9` retriggered as engage barks; `TSW-B2.0a` now plays on the wolves' defeat; `TSW-B9.8` now spoken by a crew who sat down at a cut line (SX-N3). |

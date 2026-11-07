@@ -1,6 +1,6 @@
 # Lowmark v1 — Encounter and Enemy Requirements
 
-**Status:** Gameplay Designer requirement set (Master Assistant Protocol §4.4), Batch 4 of the Lowmark v1 production plan (bible §12). It consolidates every enemy, wildlife fight, boss, drift site and encounter pocket authored in the Lowmark narrative packages into one implementation reference. Everything here is **[NEW]** authored content and not canon until the Director promotes it. Items marked **[PROPOSAL — DIRECTOR]** are consequential rules the content depends on. Numbers given are **framing targets** (fight length, HP remaining, telegraph duration), not balance values. Health, damage, armour and XP values belong to the tuning pass after a playable build exists.
+**Status:** Gameplay Designer requirement set (Master Assistant Protocol §4.4), Batch 4 of the Lowmark v1 production plan (bible §12; "Lowmark v1" is the label of the first internal production milestone, not a release, CDR-3). It consolidates every enemy, wildlife fight, boss, drift site and encounter pocket authored in the Lowmark narrative packages into one implementation reference. Everything here is **[NEW]** authored content and not canon until the Director promotes it. Items marked **[PROPOSAL — DIRECTOR]** are consequential rules the content depends on. Numbers given are **framing targets** (fight length, HP remaining, telegraph duration), not balance values. Health, damage, armour and XP values belong to the tuning pass after a playable build exists.
 
 **Sources read:** `Quests/Caelmor_Lowmark_v1_Narrative_Production_Bible.md` (whole; §4, §9, §10 binding); `Quests/Caelmor_Lowmark_Quest_The_True_Line.md`; `Quests/Caelmor_Lowmark_Main_Act_I.md`, `_Act_II.md`, `_Act_III.md`; the three side-quest files; Phase 1.5 §2–4 and §10; Phase 1.3 §1–3 and §6; `DESIGNS/Combat Design/Stage 6.1.1 — Combat Action Intents.md` and `Stage 6.1.2 — Combat State Model.md`; `UNITY/README.md`.
 
@@ -16,7 +16,7 @@
 |---|---|
 | Building creature definitions | §4 roster, §5 family specs, §6 wildlife, §7 bosses |
 | Building spawn and encounter data | §10 drift-site register, §11 encounter-pocket index |
-| Building combat runtime support | §1 constraints, §3 telegraph grammar, §8 non-lethal defeat, §9 status and runtime needs |
+| Building combat runtime support | §1 constraints, §3 telegraph grammar, §8 defeat (CDR-1), §9 status and runtime needs |
 | Tuning after the first playable build | §2 bands and universal targets, per-family band tables |
 | Reviewing for the Director | §12 inconsistencies and resolutions, §13 questions |
 
@@ -32,8 +32,9 @@
 | **Agility triggers approved but not built; no multi-level traversal or off-mesh links yet** (README) | No encounter may require an agility trigger. Raised "safe footing" (Marking-Stone plinths, post footings, serpent stakes) must be NavMesh-walkable by ramp or step height, not by trigger. |
 | **10 Hz authoritative tick; intents enqueue for T+1** (Stage 6.1.1) | A player's reaction costs 1–2 ticks of latency on top of human reaction. Telegraph durations below are given in seconds and ticks. **Minimum telegraphs:** light hits ≥ 0.8 s (8 ticks); moderate or heavy hits ≥ 1.0 s (10 ticks); any hit at or above 25% max HP, any displacement toward a hazard, and any area effect ≥ 1.5 s (15 ticks). |
 | **Auto-attack on weapon interval; specials on cooldown; no stamina** (Phase 1.3 §2) | Fights are about position and target priority, not input speed. "Punish windows" are when the enemy is exposed and the player's auto-attack and specials land freely. |
-| **AI roles: Passive, Aggressive, Defensive; enemies never flee** (Phase 1.3 §2) | Every creature below has one role. "Re-forming" drift, "sinking" serpents, "yielding" humans and "scattering" goblin crews are all specified so that nothing runs away at low HP during a fight. |
-| **Combat states: Idle, Engaged, Acting, Defending, Restricted, Incapacitated; Incapacitated "does not imply death"** (Stage 6.1.2) | Non-lethal human defeat (§8) maps to **CombatIncapacitated** with authoritative recovery to a non-hostile NPC. Short staggers and knockdowns need a ruling (§9). |
+| **AI roles: Passive, Aggressive, Defensive; enemies never flee** (Phase 1.3 §2; CDR-1) | Every creature below has one role and is defeated at 0 HP. "Re-forming" drift, "sinking" serpents and "scattering" goblin crews (a bark after all members are defeated) are all specified so that nothing runs away at low HP during a fight. |
+| **Combat states: Idle, Engaged, Acting, Defending, Restricted, Incapacitated; Incapacitated "does not imply death"** (Stage 6.1.2) | Human enemies take the **ordinary defeat** at 0 HP (§8, CDR-1); content no longer depends on CombatIncapacitated. The two scripted exceptions (SX-1 Joss, SX-2 Sallow) use the quest's **on-defeat hook**. Short staggers and knockdowns need a ruling (§9). |
+| **Ranged is a core combat skill** (CDR-2) | Every Lowmark encounter can be fought with **melee or ranged**; none requires ranged and none is trivialised by it (no boss the player can shoot from a spot the boss cannot reach). Arena edges, deep sides and ledges must not give a ranged player a safe unreachable perch. Lowmark stays melee-led; WC has one optional borrowed short bow (§11.2). |
 | **Interaction needs reach and line of sight** (README) | Channelled interactions under attack (cranks, levers, withies, boards) need clear sightlines from the safe standing spot to the object. |
 | **Player-controlled camera and zoom only** (Phase 1.3 §1) | Telegraphs must read from the default zoom at any orbit angle. Ground decals and audio tells carry the load; no telegraph may depend on a camera angle. |
 | **Solo-first; per-player state** (bible §9; Pillar D) | Every encounter is solo-clearable at its band. Co-op scales health per participant (tuning pass), shares world creatures, and gives step credit to every participant on the step. |
@@ -194,7 +195,7 @@ Each table lists the variant kit with canonical telegraphs. "Band tuning" gives 
 
 **Ecology.** People: Sallow's Lock crews (rope-burned palms, hooded lanterns, superstitious habits copied from Sallow), the Drowned Lamb cellar crew, and Greyharrow Reach opportunists. They fight for pay and fear the fen more than the keepers.
 
-**AI role.** Aggressive. Several patterns **target props first**: carts (NT thieves), lanterns (NT dousers), the near crank pawl (TF pry-men), the barge lines (CR-E3), record piles (CR-E2). Defeat is **non-lethal** (§8).
+**AI role.** Aggressive. Several patterns **target props first**: carts (NT thieves), lanterns (NT dousers), the near crank pawl (TF pry-men), the barge lines (CR-E3), record piles (CR-E2). Defeated at 0 HP with the ordinary defeat presentation (§8, CDR-1).
 
 | Variant | Behaviour | Telegraph | Counter | Bands |
 |---|---|---|---|---|
@@ -290,13 +291,13 @@ Source of truth: Act III §10.6.1. MQ4 shows him across the chamber with **no co
 | **Rope Cut** (P2+) | Looks up, flicks the hook; the lantern sways first (**1.5 s**); that third goes dim. In dim light he **whistles before every swing**. **Relight** the fallen lantern (2 s). Never more than two down |
 | **The Shove** | Charge: plants the hook's butt, lowers shoulder, boot scrape (**1.8 s**); wet streak marks the line; 5 m charge, 3 m knockback. Over the edge = no damage, 6–8 s wade back. Bollard behind you stops it |
 | **Chain Touch** | At 66% and 33%: backs to the gate chain, 2 s open hand, one superstitious line. Free opening; characterisation |
-| Phases | P1 100–66% Sweep, Shove · P2 66–33% + Rope Cut, 2 pole-men one at a time up the far steps · P3 33–20% cadence +25%, one Rope Cut on entry |
-| **Defeat** | **Yields at 20%** (§8): drops the hook into the basin, grips the chain. Combat ends; event `cr.sallow_yield` → `CR-D6` |
+| Phases | P1 100–66% Sweep, Shove · P2 66–33% + Rope Cut, 2 pole-men one at a time up the far steps · P3 33–0% cadence +25%, one Rope Cut on entry |
+| **Defeat** | Defeated at **0 HP**. **SX-2** (§8): on defeat the quest plays his scripted surrender (drops the hook into the basin, grips the chain) and spawns him non-hostile; event `cr.sallow_yield` fires on defeat → `CR-D6` |
 | Solo target (Advanced) | 2.5–4 min; ends at 40–70% HP |
 | Death | Respawn at the Keepers' Yard; barge stays secured, fire-lines stay cut; Sallow resets to full |
 | Co-op | Shared; health scales per participant; Shove targets the farthest player |
 
-**Reconciled:** the bible's "shove toward the water" and the global "never into deep water" rule are compatible because the basin is **wade-depth**; this is a zone requirement. Act III §10.13 calls the yield "the same mechanism used by no other v1 creature"; that is superseded by §8 (Joss and every human enemy use it).
+**Reconciled:** the bible's "shove toward the water" and the global "never into deep water" rule are compatible because the basin is **wade-depth**; this is a zone requirement. Act III §10.13's yield mechanism is superseded by CDR-1: Sallow is defeated at 0 HP and his surrender is the quest's scripted on-defeat outcome (SX-2), shared only with Joss (SX-1).
 
 ### 7.2 Joss Garrow, "Old Lantern" — miniboss (OL, `OL-E2`)
 
@@ -304,7 +305,7 @@ Source of truth: Settlements file §OL.4.1.
 
 | Element | Consolidated spec |
 |---|---|
-| Classification | **Human miniboss** with Wraith-adjacent mechanics. Bible §10 lists him in the Water Wraith elite slot; he is a **living man**, never "dispersed". Keep the bible's slot for counting; implement him as a human creature with the §8 yield |
+| Classification | **Human miniboss** with Wraith-adjacent mechanics. Bible §10 lists him in the Water Wraith elite slot; he is a **living man**, never "dispersed". Keep the bible's slot for counting; implement him as a human creature defeated at 0 HP, with the SX-1 scripted outcome on defeat (§8) |
 | Arena | The willow bend (Old Lantern's bend): 4 raised stone **post footings** (ramped landward side), a heavy-water ford across the middle, deep side behind reeds (unreachable) |
 | **Lantern sweep** | Cone of light settles (**1.5 s**); moderate. If the cone touches the ford, a **lantern-drift** forms there 3 s later (max 2). Fight him on the bank |
 | **Rope cast** | Bark "Hold the line!"; pale line drawn to the player (**1.5 s**); snare drags 3 m toward him. Break: step onto a footing or land two hits |
@@ -312,7 +313,7 @@ Source of truth: Settlements file §OL.4.1.
 | **Wade** (P3, < 25%) | "End of leg."; walks toward the deep side; a ring marks a spot on his path for the whole wade. Stand in it to stop him; if he reaches the reeds he fights knee-deep and drift keep forming |
 | Player tool | Banner-thistle smoke at any footing once per phase (2 s): 10 s cloud; lantern-drift take extra damage; his sweep and rope tells +0.5 s; one lucid fragment |
 | Phases | P1 100–60% sweep, rope · P2 60–25% + count · P3 < 25% + wade, count cadence ~14 s. No enrage |
-| **Defeat** | **Yields at 0 HP** (one knee, lantern set down, still lit). See §8 for the threshold rule |
+| **Defeat** | Defeated at **0 HP**. **SX-1** (§8): on defeat the quest plays his scripted surrender (one knee, lantern set down, still lit) and spawns him non-hostile for the OL choice |
 | Solo target | Milestone 1 dependable to early Competent: 3–4 min |
 | Reset | Leaving the bend or dying resets him to full and his patrol walk; his drift disperse |
 
@@ -344,25 +345,31 @@ Source of truth: Act III §11.6. Bible §6.1 brief and §10 agree with it.
 
 ---
 
-## 8. Non-lethal human defeat [PROPOSAL — DIRECTOR]
+## 8. Defeat (CDR-1, binding 2026-11-03)
 
-**Rule.** No human enemy in Lowmark is killed. Every human creature (all Smugglers variants, crew bosses, Gideon Sallow, Joss Garrow) ends combat in a **non-lethal defeat state** when its health reaches its **defeat threshold**.
+This section replaces the former "Non-lethal human defeat [PROPOSAL — DIRECTOR]" rule, which is **superseded by CDR-1** (`Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md` §1, §3.1, §4).
+
+**Rule.** Every hostile creature in Lowmark, human, animal, monster or spirit, is defeated at **0 HP**. No health threshold ends a fight early; no creature yields, flees, limps away or breaks off because of its health. Leash/reset is ordinary RPG behaviour and stays. Drift re-forming while its site condition holds is a place rule (§5.7, §10), not a disengagement.
 
 | Element | Rule |
 |---|---|
-| Threshold | One per-creature parameter. Default **0%** (standard and elite humans, Joss). **Sallow: 20%** (he gives up while still able to fight; it is characterisation and it keeps him able to talk). Any future named human may set its own |
-| States | **Downed** (standard and elite): sits or kneels, weapon dropped, stays in place, untargetable, takes no further part. **Yielded** (minibosses): same, plus a dialogue opens when the player approaches |
-| Combat state mapping | Defeat → **CombatIncapacitated** (Stage 6.1.2: "does not imply death"; recovery only via authority). Yielded humans then switch authoritatively to a **non-hostile NPC** with a dialogue set. Downed humans never auto-recover |
-| No flee | A downed or yielded human never leaves the fight space during combat (Phase 1.3). Any later removal (tied, taken by keepers) happens after the step ends or the player leaves the area |
-| Despawn | Downed humans are replaced by a **tied/bound prop** at step end (NF, TF, NT, CR) or stay down until the player leaves the building (UL). No body persists into later visits |
-| XP and loot | Combat XP awards at defeat, as for any enemy. Ordinary loot only; nothing evidentiary (testimony is given in dialogue, after, by choice) |
-| No execution | The player cannot attack, loot-strip or interact violently with a downed or yielded human. No dialogue option kills one |
-| Co-op | Defeat state is shared world state; each participant gets credit and runs any yield dialogue in their own instance |
-| Wildlife and creatures | Unchanged: they are defeated normally (drift disperse; serpents sink; animals die and can be harvested) |
+| Threshold | None. Every creature is defeated at 0 HP |
+| Presentation | **Ordinary defeat presentation** for every human (Smugglers variants, crew bosses): falls, fades after the standard corpse time. No downed state, no tied props, no dialogue with a defeated ordinary enemy, no body in later visits. Drift disperse; serpents sink; animals are defeated and can be harvested where the economy allows |
+| Combat state | Ordinary defeat. Content no longer requires **CombatIncapacitated** for any human (rulings §5 G-8) |
+| XP, loot, co-op | Combat XP and ordinary loot at defeat, as for any enemy; nothing evidentiary drops. Shared world state; every participant on the step gets credit |
+| Step completion | Any step that completed "on yield" completes **on defeat** |
+| Allies | One short, sober ally line after a human fight is enough where an old "they'll live" beat stood. Allies do not comment on mercy |
+| Non-combatants | Never targetable (unchanged) |
+| Testimony | Combat never reveals evidence. Facts once given by a defeated ordinary enemy are re-sourced (rulings §3.2). MQ4: Maelin names Sallow at dawn (T-1); Rusk fights to 0 HP |
 
-**Runtime need (Systems Engineer).** One health-threshold defeat event per creature definition that (a) ends that creature's combat participation, (b) sets CombatIncapacitated, (c) plays a downed/yield presentation, (d) optionally swaps the creature to a non-hostile NPC with a dialogue entry point, and (e) blocks further targeting. This replaces the separate "yield" needs listed in Act I §C12, Act III §10.13 and Settlements §OL.10. It is one mechanism, used by every human enemy in v1.
+**Scripted story exceptions (quest events, not combat rules).** Two Lowmark creatures have a quest-scripted outcome **on defeat**. Each is defeated at 0 HP like any other creature; the quest's on-defeat hook then plays a scripted outcome instead of the ordinary defeat presentation and spawns the person as a non-hostile NPC for the next beat.
 
-**Why one rule.** The packages already agree in spirit (Act I "yield", Settlements "downed", Act III and OL "yields") but specify three implementations and two thresholds. Lowmark's tone (combat protects; it doesn't punish) and the evidence rule (testimony after a fight, by choice) both depend on humans surviving. If the Director wants lethal human enemies anywhere in v1, only the presentation and the despawn change; Rusk's, Sallow's and Rhosyn-adjacent testimony beats would need re-authoring.
+| Id | Creature | Quest / encounter | Outcome on defeat |
+|---|---|---|---|
+| **SX-1** | Joss Garrow, "Old Lantern" | OL `S04_joss` (`OL-E2`) | When Joss is defeated, the quest plays his surrender: he goes down to one knee and sets the lantern down, still lit; the drift-hold on him breaks. The OL choice (bring him in alive / bring back only his lantern) follows unchanged |
+| **SX-2** | Gideon Sallow | CR `S06_sallow` (`CR-E4`) | When Sallow is defeated, the quest plays his surrender: he drops the hook into the basin and grips the gate chain ("Enough. I'm done."). `cr.sallow_yield` fires on defeat; `CR-D6` follows unchanged |
+
+**Runtime need (Systems Engineer).** One small need replaces the former health-threshold defeat event: a **quest on-defeat hook for named creatures** (used only by SX-1 and SX-2) that plays a scripted outcome and spawns the NPC non-hostile. No threshold parameter, downed state, tied prop or hostile→neutral swap for ordinary enemies. See `Quests/Caelmor_Combat_Ranged_Release_Engineering_Handoff.md`.
 
 ---
 
@@ -441,7 +448,7 @@ Source of truth: Act III §11.6. Bible §6.1 brief and §10 agree with it.
 | HW-E2 | HW `S02b_den` | P14 B3 burned culvert mouth | 2 runner, 1 ash-shaker | Novice | STEP → WORLD (Flats packs); den area ONCE if HW-E3 cleared |
 | HW-E3 | HW `S02b_den` (optional) | P14 B3 inner chamber | Den Mother + 1 runner | Novice | OPT; ONCE |
 | HW-E4 | HW `S02c_smoke` / `S02c_walk_out` | P22 C2–C3 causeway, bend | waves 2/2/3 drift | Novice | SITE `widows_step` |
-| NF-E1 | NF `S04_lookouts` | P10 T3 Cut mouth towpath | 1 pole-man, 1 cutter | Novice (M1) | ONCE (downed) |
+| NF-E1 | NF `S04_lookouts` | P10 T3 Cut mouth towpath | 1 pole-man, 1 cutter | Novice (M1) | ONCE |
 | NF-E2 | NF `S06_yard` | P09 L1 yard | A: 2 pole-man + 1 cutter; B: 2 cutter (shed ambush) | Novice (M1) | ONCE |
 | NF-E3 | NF `S07_winding_floor` | P09 L3 winding floor | **Rusk** (crew boss) + 2 cutter | Novice (M1) | ONCE |
 | NF-E4 | NF `S08_crank` | P09 L2–L3 crank platform | W1 2 cutter; W2 2 lantern-drift; W3 2 pole-man + re-form | Novice (M1) | ONCE (humans); SITE `hollow_lock_chamber` (step-scoped) |
@@ -479,7 +486,7 @@ MQ12 has no combat. MQ8 and MQ9 are the designed combat valley.
 
 | Id | Step gate | Place | Families / variants | Band | Respawn |
 |---|---|---|---|---|---|
-| WC-E1 | WC `S03_barns` (WC unlocks after MQ2) | P20 burned barn row (two barns), Heartlands–Ashenstead edge | 3 scrapper, 1 trapper | Novice | STEP → WORLD (P20 goblin camp until UR changes it) |
+| WC-E1 | WC `S03_barns` (WC unlocks after MQ2) | P20 burned barn row (two barns), Heartlands–Ashenstead edge | 3 scrapper, 1 trapper (melee, or the optional borrowed hunter's short bow; CDR-2) | Novice | STEP → WORLD (P20 goblin camp until UR changes it) |
 | WC-E2 | WC `S06a_hunt` (if sow taken) | M03 scrub margin bed | 1 Furrow Boar sow (territorial) | Novice | OPT; ONCE (Hunting opportunity state) |
 | BW-E1 | BW `S02_free_jam` | M04 scour pool | 5 swarm (Skitter) | Novice | STEP → WORLD |
 | BW-H1/H2 | BW `S02` / `S04` | M04 jam swing; leaner fall | hazards | Novice | ONCE |
@@ -546,13 +553,13 @@ SB, VK and the other micro-events have no hostile encounters (VK raft Silt Swimm
 | I-5 | **Serpent tail sweep** is 1.2 s in MQ11 and 1.5 s in FW, for a moderate hit with 3 m knockback. | Act III §11.5; FW.4.1 | Canonical **1.5 s** for both (displacement rule in §1). |
 | I-6 | **Ash-shaker cloud** effect differs: attack speed reduced (HW), minor DoT (GL), hurts while inside 3 m (UR); radius 4 m (HW) vs 3 m (UR). | Act I HW-E2; Act II GL-E4b; Settlements UR-E2 | Canonical: **light damage over time while inside, 3 m radius, 4 s**. Drop the attack-speed modifier (it needs a new status type and teaches the same lesson). HW text "coughs (attack speed reduced)" becomes "coughs (takes light damage while inside)". Den Mother storm 5 m. |
 | I-7 | **Encounter id collisions.** Bare `E1`–`E5` reused by TL, MQ10, MQ11 and most side quests. | All | Prefix rule in §0 (`TL-E1`, `CR-E1`, `SV-E1`, `UL-E1`…). Schema & Content Engineer to adopt or replace. |
-| I-8 | **Non-lethal defeat implemented three ways with two thresholds**: Act I "yield … same death-state with yield presentation", Settlements "downed" + "Joss yields at 0 HP", Act III "Sallow yields at 20% … mechanism used by no other v1 creature". | Act I §C7/C12; Settlements §0.3, OL; Act III §10.6, §10.13 | One rule and one runtime mechanism (§8) with a per-creature threshold (default 0%, Sallow 20%). Act III's "no other creature" line is superseded. |
+| I-8 | **Non-lethal defeat implemented three ways with two thresholds**: Act I "yield", Settlements "downed" + "Joss yields at 0 HP", Act III "Sallow yields at 20%". | Act I §C7/C12; Settlements §0.3, OL; Act III §10.6, §10.13 | **Resolved by CDR-1 (2026-11-03).** No non-lethal defeat: every creature is defeated at 0 HP (§8). Only SX-1 Joss and SX-2 Sallow keep a scripted outcome on defeat via the quest's on-defeat hook. |
 | I-9 | **Old Lantern's bend**: OL quiets it on completion; Act III ending matrix keeps it **active by design** as one of three residual sites in every ending. | Settlements OL.6–OL.7; Act III §E.1.2 | OL's quieting stands (it is the quest's promise: "the drift was gathering to the lantern"). The third residual site becomes **`drift.far_leg`** (the two return-path pockets OL already authors), active at dusk after MQ11 in all endings. Count of three preserved. Act III §E.1.2 row needs that edit. |
 | I-10 | **Flats ditch has no quieting step.** Act I says it stays active until "Act II/III changes its conditions"; no Act II quest touches it; the ending matrix shows it quieted in all endings. | Act I header; Act III §E.1.2 | It quiets at MQ11 `sv.fen_holds` (the Braids take the pressure). It is presentation-only throughout (no hostile spawn is authored there). |
 | I-11 | **Whispering Door farmhouse cellar after MQ11.** The matrix says "as left; if active, quieted", which would remove WD's drift if WD is played after MQ11; WD itself says the cause is local. | Act III §E.1.2; Discovery WD.8 | **"As left"** in every ending: the site stays active until WD `S07`. WD remains playable after MQ11. Act III §E.1.2 row needs that edit. |
 | I-12 | **Unplaced elites.** Chorus-Piper (Mud Pipers) and Old Mud (Reed Stalkers) exist only in bible §10. | Bible | Proposed world placements W-01, W-02 (§11.3). If the Director prefers fewer world elites, both can be cut; the variant count drops to 19, still near range. |
 | I-13 | **Smugglers' elite.** Bible lists Gideon Sallow as the family elite; Phase 1.5 counts minibosses separately. | Bible §10; Phase 1.5 §4.2–4.3 | Formalise **crew boss** (Rusk, Brack) as the elite variant **[PROPOSAL — DIRECTOR]**; Sallow is the miniboss only. |
-| I-14 | **Joss in the Wraith elite slot** although he is a living man. | Bible §10; OL.4.1 | Keep the bible's slot for counting; implement as a human with §8 yield and Wraith-adjacent abilities (lantern-drift spawning). Flagged for Director awareness only. |
+| I-14 | **Joss in the Wraith elite slot** although he is a living man. | Bible §10; OL.4.1 | Keep the bible's slot for counting; implement as a human defeated at 0 HP (SX-1 on defeat) with Wraith-adjacent abilities (lantern-drift spawning). Flagged for Director awareness only. |
 | I-15 | **Ashenstead and Riverglass tiers vs early gates.** Bible §4.1 puts Ashenstead Fields at mid tier and Riverglass Banks at mid–high; WC (after MQ2), UR and CN (after MQ3), MQ3 Widow's Step, MQ4 Hollow Lock and OL (after MQ3) all play there at Novice. | Bible §4.1; Work & Skills Q3 | Each subzone gets a **near band and a far band** (Zones file §2): Ashenstead's Heartlands margin (WC smallholding, P20, Joric's plot, P23 village) is Novice; its interior (Rebirth Fields culvert, Path of Unburnt Reeds) is Competent; FW now sits after MQ5. Riverglass's fen edge (P21, P22, P06, P10, P09, far leg) is Novice–Competent; deep fen (P30, FW done stretch) is Advanced. |
 | I-16 | **Elk behaviour** is alert/flight (MN) and charge-at-NPC (DK). | Act II MN, DK | Two authored states of one creature (§6): Passive alert/flight by default, scripted flood-driven charge in DK. |
 | I-17 | **Smuggler sweep displacement** varies: "a step", "2 m", "trip knockdown 1 s". | Act I NF; Settlements UL/NT; Act III CR | Canonical 2 m push; the CR trip knockdown is the Advanced-band upgrade of the same tell. |
@@ -567,7 +574,7 @@ SB, VK and the other micro-events have no hostile encounters (VK raft Silt Swimm
 
 ## 13. Director-level questions
 
-1. **Non-lethal human defeat (§8):** approve one rule for every human enemy, with Sallow yielding at 20% and everyone else at 0%?
+1. ~~Non-lethal human defeat (§8)~~ **Resolved 2026-11-03 by CDR-1:** every enemy is defeated at 0 HP; SX-1 Joss and SX-2 Sallow are scripted outcomes on defeat.
 2. **Crew boss as the Smugglers elite (I-13)** and **Joss kept in the Wraith elite slot (I-14):** approve the counting?
 3. **World elites Chorus-Piper and Old Mud (I-12):** place them as proposed, or cut both?
 4. **Ending-matrix edits (I-9, I-11):** `drift.far_leg` replaces Old Lantern's bend as the residual site; the Whispering Door farmhouse cellar is "as left". These touch Act III §E.1.2.
@@ -577,8 +584,14 @@ SB, VK and the other micro-events have no hostile encounters (VK raft Silt Swimm
 | To | What |
 |---|---|
 | Schema & Content Engineer (33.7) | Creature definitions for 21 variants + 2 sub-forms + heap-boss + 3 wildlife + 2 minibosses + 1 boss; encounter-pocket data from §11; drift-site ids from §10; encounter id prefix rule |
-| Systems Engineer | §8 defeat mechanism; §9 status list; drift-site state and re-form/split spawn rules; safe-ground volume tags; prop-targeting AI; knockdown ruling |
+| Systems Engineer | §8 quest on-defeat hook (SX-1, SX-2 only; see `Quests/Caelmor_Combat_Ranged_Release_Engineering_Handoff.md`); §9 status list; drift-site state and re-form/split spawn rules; safe-ground volume tags; prop-targeting AI; knockdown ruling |
 | Animation / VFX / Audio | §3 telegraph grammar and §5 canonical tells (one drift set, one lantern-drift set) |
 | Level design (Zones file) | Arena distance budgets (§7.2, §7.3), wade-depth basin (§7.1), walkable safe ground (I-20) |
 | Act III author | §E.1.2 row edits (I-9, I-11) |
 | Side-quest author | FW unlock after MQ5 (ruling); WC unlock after MQ2 (ruling); UR-E2 threat (ruling); NB stalker cap (ruling); HW ash-shaker text (I-6) |
+
+---
+
+## Director rulings reconciliation (2026-11-03)
+
+Applied `Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md`. §8 rewritten: the non-lethal human defeat proposal is superseded by CDR-1; every creature is defeated at 0 HP with the ordinary defeat presentation; SX-1 Joss Garrow and SX-2 Gideon Sallow are quest-scripted outcomes on defeat through one on-defeat hook. §7.1 Sallow (20% yield → defeat at 0 HP, P3 now 33–0%), §7.2 Joss, §5.5 Smugglers, §1 constraint rows, NF-E1 "(downed)", I-8, I-14 and §13 question 1 updated. Ranged (CDR-2) added to §1 as a first-class, never-required option; WC-E1 notes the optional borrowed short bow. Release wording clarified (CDR-3). Encounter ids, steps and fight structure unchanged.

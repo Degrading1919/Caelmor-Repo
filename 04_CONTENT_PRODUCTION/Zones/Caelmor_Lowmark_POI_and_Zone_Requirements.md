@@ -1,12 +1,12 @@
 # Lowmark v1 — POI and Zone Requirements
 
-**Status:** Gameplay Designer requirement set for level design (Master Assistant Protocol §4.4), Batch 4 of the Lowmark v1 production plan (bible §12). It turns every place authored in the Lowmark narrative packages into level-design requirements: subzones, routes, POI sub-spaces, interaction objects, quest-state props, NPC presence and relative placement. All places are **[NEW]** unless canon in the region dossier, and nothing here is canon until the Director promotes it. **[PROPOSAL — DIRECTOR]** marks consequential choices. **MAP VERIFICATION REQUIRED** marks every place where geometry matters (bible D-5); no quest logic depends on distances.
+**Status:** Gameplay Designer requirement set for level design (Master Assistant Protocol §4.4), Batch 4 of the Lowmark v1 production plan (bible §12; "Lowmark v1" is the label of the first internal production milestone, not a release, CDR-3). It turns every place authored in the Lowmark narrative packages into level-design requirements: subzones, routes, POI sub-spaces, interaction objects, quest-state props, NPC presence and relative placement. All places are **[NEW]** unless canon in the region dossier, and nothing here is canon until the Director promotes it. **[PROPOSAL — DIRECTOR]** marks consequential choices. **MAP VERIFICATION REQUIRED** marks every place where geometry matters (bible D-5); no quest logic depends on distances.
 
 **Sources:** bible §4 (POIs, subzones), §5 (cast), §6–§7, §9; The True Line §5; Act I §A5/§B5/§C5; Act II §GL.4/§GL.6/§TF.4/§DK.4/§MN.4/§BF.4/§BF.7; Act III §10.3/§11.3/§12.3/§E.1; the three side-quest files' place tables; Phase 1.5 §2–3, §10; Phase 1.3 §1, §6; `UNITY/README.md`.
 
 **Companion:** `04_CONTENT_PRODUCTION/Enemies/Caelmor_Lowmark_Encounter_and_Enemy_Requirements.md` (encounter ids, drift-site ids, arena combat rules).
 
-**Canonical rulings applied (review passes):** Reed Stalkers first appear in Night Bridge; Fen Watch unlocks after MQ5; the Ash Hound burned-culvert den (P14 B3) belongs to MQ3 only; The Wrong Culprit unlocks after MQ2 at the Heartlands–Ashenstead edge; Old Lantern permanently quiets Old Lantern's bend; human enemies are downed or yield, never killed [PROPOSAL — DIRECTOR]; the Whispering Door's farm is referred to as **the Whispering Door farmhouse** (rename pending).
+**Canonical rulings applied (review passes):** Reed Stalkers first appear in Night Bridge; Fen Watch unlocks after MQ5; the Ash Hound burned-culvert den (P14 B3) belongs to MQ3 only; The Wrong Culprit unlocks after MQ2 at the Heartlands–Ashenstead edge; Old Lantern permanently quiets Old Lantern's bend; all enemies, human included, are defeated at 0 HP with the ordinary defeat presentation (CDR-1, 2026-11-03; no downed humans, no tied props; SX-1 Joss and SX-2 Sallow are quest-scripted outcomes on defeat); every encounter space accepts melee or ranged (CDR-2); the Whispering Door's farm is referred to as **the Whispering Door farmhouse** (rename pending).
 
 ---
 
@@ -15,11 +15,13 @@
 | Constraint (source) | Level-design rule |
 |---|---|
 | Click-to-move over a host-validated NavMesh; Shift sprint; no jump (README) | Every required route, objective and combat "safe ground" must be NavMesh-reachable by walking. Clicks on non-terrain are rejected, so every interaction point needs walkable ground within reach. |
-| Agility triggers approved, **not built** (Phase 1.3 §1; README) | Every agility trigger in this file has a **walkable fallback** that is the critical path until triggers ship. Never put a required objective behind a trigger. |
+| Agility triggers approved, **not built** (Phase 1.3 §1; README) | Every agility trigger in this file has a **walkable fallback** that is the critical path until triggers are built. Never put a required objective behind a trigger. |
 | Flat fixture ground; **no multi-level traversal or off-mesh links yet** (README) | Vertical spaces (Hill Depot, culvert shaft, bell tower, bridge underside, falls path, Lock floors, Crest Hall stair, farmhouse cellar, tree fork) need multi-level NavMesh with stairs or ramps. Ladders and rungs are **interaction-driven moves** ("Use the rungs" places the player at the far end) until off-mesh links exist. Flag each to Systems. |
 | Interaction needs reach and line of sight (README) | Channel points used under attack (cranks, levers, boards, withies, winches) need a clear standing pad (≥ 2 m) facing the object with nothing between. |
 | Player camera only; collision-corrected; no automatic adjustment (Phase 1.3 §1) | Tight spaces (warren, culvert low run, drain, listening-seat alcove) must read at default zoom with the camera colliding cleanly. The Uphill Canal occlusion requirement (P28) is load-bearing. |
 | Wading | Shallow water (ankle to knee) is NavMesh-walkable with a slow volume. Deep water is non-navigable (clicks rejected) and is never a knockback destination (kerbs, banks or wade-depth basins). |
+| Ranged is a core combat skill (CDR-2) | Every arena works for melee and ranged. No arena gives a ranged player a safe perch the enemy cannot reach (raised footings, plinths and stakes stay reachable by the enemy; deep sides and far galleries are not standing spots). Ranged is never required. |
+| Defeat presentation (CDR-1) | No "tied", "bound" or "downed" human props anywhere; defeated enemies fade on the standard corpse timer and nothing persists into later visits. SX-1 (Joss, M05 D) and SX-2 (Sallow, P02 Gate Landing) need only a standing spot for the NPC the quest spawns after defeat. |
 | Per-player state (bible §9) | Quest-state props are client presentation keyed to the local player's state; each package's shared-world fallback applies. |
 
 ---
@@ -170,7 +172,7 @@ Format per POI: required areas (sub-space ids are the packages' own letters), en
 |---|---|
 | Areas | L1 walled yard (crew shed, lantern rack with hoods, cut chain on gate stones); L2 lock chamber (barge moored at the lower gate); L3 winding floor (gear, crank platform over the chamber; far gallery **not connected** except by the lock gates); L4 post store; L5 tally room with strongbox; L6 slack gate (silted, fresh spade marks); L7 roof walk by stair; far stair to a skiff at the lower gate |
 | Storytelling | Gear greased this week over war grease; stack of yellow posts notched a hand high; chalk crossings board (Whisperflow ✓, Greyharrow Reach ✓, Drowsebank tail —); flush nights scratched into the beam; counterweight carved like a Marking Stone; warm cookpot |
-| NPCs | Act I: Sallow (across the chamber, unreachable), Rusk and crew, then Maelin's skiff, Ansel, keepers at dawn. Post: keepers (inspection if chained); seal crew at the Cut (MQ12) |
+| NPCs | Act I: Sallow (across the chamber, unreachable), Rusk and crew (creatures only; CDR-1), then Maelin's skiff, Ansel, keepers at dawn. Post: keepers (inspection if chained); seal crew at the Cut (MQ12) |
 | Interactions | I: gear, posts, board, counterweight, slack gate, chain; C: pull the hoods (2 s), crank in 3 × 5 s persistent segments, smash (3) or chain (2) the gear; K: crew chain, a pre-notched post (flavour) |
 | Quest-state props | Gear smashed/chained by `LM_LOCK_STATE`; chain later cut (chained branch, Act II); posts impounded |
 | Used by | MQ4, MQ10 (chips), Act II seed (slack gate) |
@@ -501,7 +503,7 @@ All **MAP VERIFICATION REQUIRED**. "Near" means a short walk with the other plac
 | The Uphill Canal channel surface from outside its observation volume | UC rule is load-bearing |
 | The Listening Steps' "further way" beyond the reed screen | Not interactable; never explained (bible §2.7) |
 | The deep fen inside the Seal boundary after MQ11 | Closed state |
-| Hollow Lock far gallery from the winding floor | Sallow cannot be reached in MQ4 |
+| Hollow Lock far gallery from the winding floor | Sallow cannot be reached in MQ4; he has no combat definition there and is not targetable (by melee or ranged) |
 | The deep side of Old Lantern's bend during the fight | Arena rule |
 | The Whispering Door farmhouse drain → P13 | Not connected for traversal |
 
@@ -514,3 +516,9 @@ All **MAP VERIFICATION REQUIRED**. "Near" means a short walk with the other plac
 3. **Which settlement lies across Whisperflow** (TL §14 item 4; MQ12 far bank and Nan's house)?
 4. **Mines (D-10):** none authored; accept 3 caves and 0 mines, or reserve the Brackenford quarry cut (§5.1)?
 5. **The Whispering Door farmhouse:** confirm the new name so M01 and the drift id can be finalised.
+
+---
+
+## Director rulings reconciliation (2026-11-03)
+
+Applied `Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md`. The "humans downed or yield" review ruling is replaced by CDR-1 (defeat at 0 HP, no downed humans or tied props; SX-1/SX-2 need only an NPC standing spot after defeat). §0 gains ranged (CDR-2: no safe unreachable perches; never required) and defeat-presentation rows; §6.4 notes Sallow is untargetable across the MQ4 chamber. Release wording clarified (CDR-3). No POI, area, interaction or id changed.

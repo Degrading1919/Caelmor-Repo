@@ -1,10 +1,10 @@
 # Thornfell Side Quests — Settlements and Combat Challenges
 
-**Status (2026-11-02):** Authored production content for Creative Director milestone review (Thornfell bible §12, batch 3). Four side-quest packages, ten micro-events and ten discoveries: two settlement stories (**TMM** *The Mason's Margin*, **TAS** *Ash in the Snow*), two combat challenges (**TGM** *Greymantle*, **TSG** *The Salvage Ledge*), micro-events **TME01–TME10** and discoveries **TDS01–TDS10** (the bible's file map calls them TD01–TD10; the bible's own review log fixed the id to `TDS##`, which this file uses). Everything marked **[NEW]** is authored here and is not canon until the Director promotes it. **[CANON]** items come from the reconciled `LORE/` files. **[APPROVED — id]** marks an approved architecture ruling. **[PROPOSAL — DIRECTOR]** marks a consequential choice the content is built on. No schema, JSON or C# is created here.
+**Status (2026-11-02):** Authored production content for Creative Director milestone review (Thornfell bible §12, batch 3). Four side-quest packages, ten micro-events and ten discoveries: two settlement stories (**TMM** *The Mason's Margin*, **TAS** *Ash in the Snow*), two combat challenges (**TGM** *Greymantle*, **TSG** *The Salvage Ledge*), micro-events **TME01–TME10** and discoveries **TDS01–TDS10** (the bible's file map calls them TD01–TD10; the bible's own review log fixed the id to `TDS##`, which this file uses). Everything marked **[NEW]** is authored here and is not canon until the Director promotes it. **[CANON]** items come from the reconciled `LORE/` files. **[APPROVED — id]** marks an approved architecture ruling. **[PROPOSAL — DIRECTOR]** marks a consequential choice the content is built on. No schema, JSON or C# is created here. **Reconciled 2026-11-03** to the binding Creative Director rulings in `Caelmor_Director_Rulings_Combat_Ranged_Release.md` (CDR-1 defeat at 0 HP; CDR-2 Ranged included; CDR-3 internal-milestone wording); see §8.
 
 **Controlled by:** `Caelmor_Thornfell_Narrative_Production_Bible.md` (author truth §2, director decisions §3, POIs §4, cast and voice §5, slate §7.2–7.4, revelation map §8, flags §9, encounter families §10, conventions §11). **Format:** the Lowmark side-quest packages (`Caelmor_Lowmark_Side_Quests_Settlements_and_Combat.md`, micro-events in `Caelmor_Lowmark_Side_Quests_Discovery_and_Memory.md` §8) and the act-package depth of `Caelmor_Lowmark_Main_Act_I.md` Part C. **Dialogue** for all four quests is inline in each package (§x.18), in the Lowmark node format (`NODE SPEAKER: "Line." (stage note)`, `> [condition] "Option." → NEXT {effect}`), with node ids `<CODE>-D<n>.<nn>`, barks `<CODE>-B<n>.<nn>` and inspect texts `<CODE>-I<n>`.
 
-**Scope guard.** Thornfell is v1.5 direction. Nothing here authorizes release scope. Technical needs are documented dependencies for a later Systems Engineer (bible §12, batch 4 integration handoff), never implementations.
+**Scope guard.** Thornfell is the second internal production milestone (CDR-3: there is no partial public release). Nothing here grows scope. Technical needs are documented dependencies for a later Systems Engineer (bible §12, batch 4 integration handoff), never implementations.
 
 ---
 
@@ -29,7 +29,7 @@
 | `TMM_BUNDLE_SEEN` | bool | TMM `S01_account` (always set: the pass-by inspect is guaranteed) | LR-M1 (request) | A recognition line when the Lowmark return asks for "a Thornfell work log": the player has seen where it sits. LR-M1 owns the custodian; this flag is never a gate. |
 | `TAS_ACCOUNT` | named / held / unwritten | TAS `S07_book` | Emberholt content (request; braid 9, "Emberholt owns public worker credit"); Passwatch barks | Whether Passwatch's gate book names the Emberholt crew who set its cramps. A later Emberholt guild scene may read it for one line. Never required. |
 | `TAS_PROOF` | proof / watch / ruled | TAS `S04_tower` | TAS lines only | Which way the tower crew was talked down. |
-| `TGM_OUTCOME` | ended / sleeping | TGM `S06_choice` | Black Glass Hostel barks; *The Snow-Height Mark* (Halla, one optional line, request) | Den prop state (empty den or stacked mouth); Yrsa's barks. |
+| `TGM_OUTCOME` | ended / sleeping | TGM `S06_choice` | Black Glass Hostel barks; *The Snow-Height Mark* (Halla, one optional line, request) | How the old bear was left: `ended` = left to the trappers (empty den), `sleeping` = den sealed as his resting place (stacked mouth and net). Yrsa's barks. |
 | `TSG_LEDGE` | licensed / struck | TSG `S07_choice` | *Seam Rights* (Gerrit cameo line, request); Carrick's Cut barks | Whether Gerrit's crew works the ledge again under Warden licence. |
 | `TSG_SPOIL` | held / dropped | TSG `S05_props` | TSG lines; ledge path prop | Whether the spoil terrace still stands. Both outcomes are safe for every warden. |
 | *(read)* `TH_CALLS` | bool | TF-M1 | TAS, TSG, TME05, TME10, TDS03, TDS10 | Call glyphs display. TSG and TDS10 require the calls; TF-M1 is a prerequisite of their unlocks, so this always holds. |
@@ -46,11 +46,11 @@ No new `TH_` region flags are created. All quest-local flags use the quest code 
 - **Quest items: none.** The bible's Thornfell budget is four, all spent by the milestones (§9.5). Every carried thing in this file (the repair account, the reconciliation slate, the cramp bundle, the plate crate) is a **carry-state object**. Reward tools are named functionally and need the item pass.
 - **Three states only.** Inactive, Active, Completed. No quest can fail or be abandoned. Walking away keeps the quest Active at its persisted step; each package names its resume hook (default: the original offer node, with a "where were we" variant). Choices are outcome flags with costs. Every required proof has a guaranteed path.
 - **Death** respawns at the quest's named safe point with step and flags intact. **Logout** restores the last persisted step; channels and carries are discarded, and a dropped carry-state object returns to its source. Completed channel segments persist (Lowmark convention).
-- **Defeated humans yield** (TD-7): pass bandits and Shatterfall brigands go down to one knee and stay out of the fight. Nobody is killed on screen. Animals (Greymantle, ridge wolves, crows) are fought as animals.
+- **Every enemy is defeated at 0 HP** (CDR-1; TD-7 superseded): pass bandits, Shatterfall brigands, Greymantle, ridge wolves and crows alike. No yield, no downed state, no break-off; defeated humans take the ordinary defeat presentation (no gore, no tied props, no dialogue afterwards). Every encounter can be fought in melee or at range (CDR-2); none requires ranged.
 - **Evidence rule** (bible §11.3). Records (the repair account, the dray book, Hushfold's tally, Vessa's gate book, Yrsa's tally stick, the hostel weather slate), objects (cramps, treads, plates, prop timbers) and testimony carry every fact. Combat drops nothing that advances an investigation. The hall that carries voices, the arch's note, the silent roar and the ringing plates identify nobody and prove nothing.
 - **Sound system** (bible §1.1). Every quest here uses it, each differently: TMM counts courses and lets a hall carry a voice; TAS tests iron by its ring; TGM takes sound away; TSG makes the player the one blowing the calls.
 - **Agility triggers** are optional shortcuts; each has a walkable fallback named in its place table (click-to-move friendly; no input timing anywhere in this file).
-- **Skills** (all with a crew alternative where a step uses them): Smithing (TAS), Mining (TSG, optional), Melee (TAS, TGM, TSG), Hunting (TGM, optional butchering). Exact levels belong to the Gameplay Designer (TD-12).
+- **Skills** (all with a crew alternative where a step uses them): Smithing (TAS), Mining (TSG, optional), Melee or Ranged (TAS, TGM, TSG), Hunting (TGM, optional butchering). Exact levels belong to the Gameplay Designer (TD-12).
 - **Map.** Relative placement only. **MAP VERIFICATION REQUIRED** is marked wherever geometry matters.
 - **Voice.** Bible §5.3: understated, dry, weather as grammar, nobody calls anything magic, strangers are "walker". A host who has added the player to a shelter tally (TME01) uses their name, written here as `{PLAYER}` (the Act III token).
 
@@ -490,7 +490,7 @@ Four masons from Emberholt came up Windscar on the last good day before TF-M1's 
 | Resume hook | Vessa at the gate: `TAS-D1.00` pins the current step. |
 | Target length | 35–45 minutes |
 | Combat share | ~20% (cache bandits required; wolves on the return optional to avoid) |
-| Skills | Smithing (setting cramps; crew alternative); Melee |
+| Skills | Smithing (setting cramps; crew alternative); Melee or Ranged |
 | Choice | What the gate book says (3 options) |
 | Outputs | `TAS_PROOF` = proof / watch / ruled; `TAS_ACCOUNT` = named / held / unwritten |
 | **Anchor** | Passwatch and the Ridge Wardens (Vessa, Ressa, Dorn); a Blood-Oath tower crew; Emberholt's Emberforged stoneworkers as people |
@@ -528,7 +528,7 @@ Four masons from Emberholt came up Windscar on the last good day before TF-M1's 
 
 All four strikes are required. The result is written in Dorn's words (the player's journal): *two named sick, one named sound, one unnamed worse.* The safety claim is **mostly right** and **not complete**: the papers neither prove themselves nor read like a con. **Verbs:** climb, strike, listen.
 
-**Beat 3 — The iron (`S03_cramps`).** *Objective: Bring the new cramps up from the mule cache.* Tessaly gives the cache's place. At P5, pass bandits are picking over the pack-frames (**TAS-E1**); they yield. One talks after yielding (`TAS-D4`): Emberholt iron "fetches double at any forge that won't ask", and that is all he knows. The player leads the two mules back (escort-carry: the mules follow; the cramp bundle rides on a frame). On the road, optional **TAS-E2** ridge wolves come at the mules; the mules shy and stop, cannot be hurt, and walk on when the wolves are down or driven off. **Verbs:** fight, lead.
+**Beat 3 — The iron (`S03_cramps`).** *Objective: Bring the new cramps up from the mule cache.* Tessaly gives the cache's place. At P5, pass bandits are picking over the pack-frames (**TAS-E1**); they fight to 0 HP. (Their talk after the fight is cut, CDR-1 pattern T-4; `TAS-D4` removed.) The player leads the two mules back (escort-carry: the mules follow; the cramp bundle rides on a frame). On the road, optional **TAS-E2** ridge wolves come at the mules; the mules shy and stop, cannot be hurt, and walk on when the wolves are defeated. **Verbs:** fight, lead.
 
 **Beat 4 — Gather against guests (`S04_tower`).** *Objective: Get the iron through the gate.* At the gate the Blood-Oath tower crew block the mules (`TAS-D5`). Their captain, **Geir Vellan**, means to blow **Gather** from the tower horn to bring the barracks out "to see what's coming in". Before the player speaks, **Ressa Highcrag** is on the horn post stair and refuses the call (`TAS-D5.05`: "Gather's for the mountain."). Then the player picks a way through (any one works; `TAS_PROOF`):
 - **proof** — take Geir up to J4 and let him strike it himself (short walk, one strike). He is a Marcher; he believes iron.
@@ -557,7 +557,7 @@ Completed segments persist. **Wind windows** on the scaffold: the fluted faces a
 
 ### TAS.7 Encounters
 
-Tuned for Competent identity (TD-12). Human enemies yield.
+Tuned for Competent identity (TD-12). Every enemy fights to 0 HP (CDR-1); melee or ranged.
 
 | Id | Enemies (bible §10) | Placement | AI role | Telegraph | Purpose | Solo target |
 |---|---|---|---|---|---|---|
@@ -565,7 +565,7 @@ Tuned for Competent identity (TD-12). Human enemies yield.
 | **TAS-E2** | 1 × ridge wolf howler, 2 × runner | Road below the gate, once, on the return | Howler stands off and calls; runners go for the **mules** first, then the player | **Howl:** howler lifts its head (~1.5 s, readable howl); 4 s later the runners commit. **Runner lunge:** crouch and tail-flat (~0.8 s). | Optional (the player may lead the mules past at a walk while the howler is still howling; runners commit only if the player stops). Protect read: the mules shy and halt, never take damage. | 40–60 s |
 | **TAS-H1** | Scaffold gust | Arch scaffold (P4) | Hazard | Fifth-rise whistle ~1.5 s before; snow lifts off the scaffold boards in the last 0.5 s | Wind-window convention inside a skilling job | — |
 
-**Rules.** Nobody fights the tower crew; there is no hostile flag on Thornfell people anywhere in this quest. The masons cannot be targeted or harmed. The yielded bandit's words are testimony about bandits, nothing more. Combat never reveals evidence. **Death:** respawn at the Passwatch barracks door; mules wait at the last point reached; segments and flags kept.
+**Rules.** Nobody fights the tower crew; there is no hostile flag on Thornfell people anywhere in this quest. The masons cannot be targeted or harmed. Combat never reveals evidence. **Death:** respawn at the Passwatch barracks door; mules wait at the last point reached; segments and flags kept.
 
 ### TAS.8 The strange moment: the arch's note (presentation spec)
 
@@ -587,7 +587,7 @@ Tuned for Competent identity (TD-12). Human enemies yield.
 | `S00_hook` | Find out whether Passwatch's gate is failing. | `TAS-D1` end node, or `TAS-B1` then `TAS-D2` start | Yes |
 | `S01_papers` | Talk to Tessaly Varn. | `TAS-D2` reaches `TAS-D2.20` + 2 document inspects | Yes |
 | `S02_arch` | Test the cramps the notice names. | 4 strike interactions (J1–J4) | Yes |
-| `S03_cramps` | Bring the new cramps up from the mule cache. | TAS-E1 yield + escort-arrival of both mules at the gate volume | Yes |
+| `S03_cramps` | Bring the new cramps up from the mule cache. | TAS-E1 defeated + escort-arrival of both mules at the gate volume | Yes |
 | `S04_tower` | Get the iron through the gate. | `TAS-D5` resolved (sets `TAS_PROOF`; the proof route also needs the J4 strike by Geir) | Yes |
 | `S05_repair` | Help the crew set the new cramps. | 3 channel segments complete (player or crew) + 2 protect interruptions resolved | Yes |
 | `S06_dawn` | Strike the new iron. | Watch to dawn + 3 strike interactions | Yes |
@@ -627,7 +627,7 @@ No option is wrong. None both credits the crew and keeps the tower crew's peace 
 | Situation | Handling |
 |---|---|
 | Walking away | Stays Active. Vessa's resume hook. Mules left on the road walk themselves back to the cache. |
-| Death | Respawn at the barracks door; mules wait; downed bandits stay down until the player leaves the area. |
+| Death | Respawn at the barracks door; mules wait; defeated bandits do not respawn until the player leaves the area. |
 | Logout during the night | Completed segments persist; the night restarts at the current segment with the keep-watch hour restored. |
 | Player refuses all three de-escalation routes | Not possible to soft-lock: Ressa's ruling is always available. |
 | No Smithing | Crew alternative on every segment. |
@@ -674,6 +674,7 @@ No option is wrong. None both credits the crew and keeps the tower crew's peace 
 | Remnant check | No Remnant presence, phrase or hint. The broadsheet phrase (R15) is not used. |
 | Emberholt caricature check | The crew are tired professionals; Bjarke complains about the wind; Ansa is young and frightened; Tessaly is exact. Thornfell's suspicion is given its reason in Geir's and Vessa's lines. |
 | Ledger limits | Ressa's refusal is an accountable-warning refusal (Gather is not for neighbours). Dorn's ear judges iron, never history. Brynjar gets no Emberholt relationship. |
+| **Director rulings reconciliation (2026-11-03): CDR-1.** Bandits yielded and one talked after yielding (`TAS-D4`). | TAS-E1 fights to 0 HP; `S03_cramps` completes on defeat; `TAS-D4` cut as flavour (pattern T-4; ids kept as removed); "downed" persistence wording and "driven off" wolves removed. Steps, flags and choice unchanged. |
 
 ### TAS.18 Dialogue
 
@@ -748,11 +749,9 @@ TAS-D3.20 [all four] DORN: "Two sick it named. One sound it named. One bad it mi
 ```
 
 ```
-TAS-D4.01 BANDIT: (on one knee) "All right. All right. It's iron."
-  > "Who told you it was here?"                             → TAS-D4.10
-  > "Go."                                                    → end
-TAS-D4.10 BANDIT: "Nobody. Mules under a rock with Emberholt frames. You don't need telling."
-TAS-D4.11 BANDIT: "Emberholt iron fetches double at any forge that won't ask." (beat) "There's always one."   → end
+TAS-D4.01 (removed: CDR-1, T-4; the bandits fight to 0 HP and nobody talks afterwards)
+TAS-D4.10 (removed: CDR-1, T-4)
+TAS-D4.11 (removed: CDR-1, T-4)
 ```
 
 ```
@@ -835,7 +834,7 @@ TAS-D8.06 TESSALY: "Strike it in spring. Listen. If it hangs, it's good." (bows,
 
 ### TGM.1 The quest in one paragraph
 
-Bears on the Stormwake shoulder sleep from first snow to thaw. **Greymantle**, an old grey-backed ridge bear in the trappers' stories since before most of them were born, is up in deep snow, starving, and has broken a goat fold above the Black Glass Hostel road. Yrsa Fellhand, a trapper wintering at the hostel, notched the night he woke on her tally stick: no thaw, no storm, only a hum from the high halls that the hostel's weather slate also wrote down. The player tracks him: the broken fold, a dragging forepaw in the snow, grey hair on a rubbing pine taller than Yrsa remembers, ridge crows over a cache where wolves are stealing his kill, and frost dust knocked off bare rock where prints cannot hold. The den is a cliff cave whose inner chamber is a **null-point**. Inside, there is no sound at all: not the player's steps, not their blows, not the bear. He rears and roars and nothing reaches the ear; the dust jumps off every ledge and the frost flakes off the walls in a ring. Every telegraph in the fight is sight and dust. When he is beaten he lies down in the quietest hollow of his den, and the player and Yrsa decide whether to end him cleanly or stack the den mouth and let him sleep to thaw.
+Bears on the Stormwake shoulder sleep from first snow to thaw. **Greymantle**, an old grey-backed ridge bear in the trappers' stories since before most of them were born, is up in deep snow, starving, and has broken a goat fold above the Black Glass Hostel road. Yrsa Fellhand, a trapper wintering at the hostel, notched the night he woke on her tally stick: no thaw, no storm, only a hum from the high halls that the hostel's weather slate also wrote down. The player tracks him: the broken fold, a dragging forepaw in the snow, grey hair on a rubbing pine taller than Yrsa remembers, ridge crows over a cache where wolves are stealing his kill, and frost dust knocked off bare rock where prints cannot hold. The den is a cliff cave whose inner chamber is a **null-point**. Inside, there is no sound at all: not the player's steps, not their blows, not the bear. He rears and roars and nothing reaches the ear; the dust jumps off every ledge and the frost flakes off the walls in a ring. Every telegraph in the fight is sight and dust. He fights to the end and dies in the quiet of his own den, and the player and Yrsa decide how the old bear is left: the den sealed as his resting place, or his hide and fat to the trappers for the hostel's winter.
 
 **Remember:** a roar you can see and cannot hear. **Want next:** to know what hums in the high halls on nights with no storm (TF-M4, if not yet played).
 
@@ -845,7 +844,7 @@ Bears on the Stormwake shoulder sleep from first snow to thaw. **Greymantle**, a
 |---|---|
 | **A. A bear arena fight with audio cues.** | Rejected. Ordinary; wastes the null-point. |
 | **B. Prove the horn trials woke him.** | Rejected. A side effect cannot be proved by a bear; phenomena prove nothing (bible §11.3). The dates are set side by side and stay an inference. |
-| **C. Track by four kinds of sign → silent fight read by sight and dust → a choice about an animal** | **Selected.** Tracking first (brief); the fight inverts Thornfell's sound system and is an accessibility showcase; the end is a judgement, not a loot drop. |
+| **C. Track by four kinds of sign → silent fight read by sight and dust → a choice about how an animal is left** | **Selected.** Tracking first (brief); the fight inverts Thornfell's sound system and is an accessibility showcase; the end is a judgement, not a loot drop. |
 
 ### TGM.3 Canon grounding
 
@@ -869,8 +868,8 @@ Bears on the Stormwake shoulder sleep from first snow to thaw. **Greymantle**, a
 | Resume hook | Yrsa at the hostel yard (`TGM-D1.00`), or at the den mouth once reached. |
 | Target length | 30–40 minutes |
 | Combat share | ~45% |
-| Skills | Melee; Hunting optional (butchering in the `ended` outcome) |
-| Choice | End him, or let him sleep (both honoured) |
+| Skills | Melee or Ranged; Hunting optional (butchering in the `ended` outcome) |
+| Choice | Seal the den as his resting place, or leave him to the trappers (both honoured) |
 | Outputs | `TGM_OUTCOME` = ended / sleeping; `TGM_DATES` (optional read) |
 | **Anchor** | Stormwake's trappers and the Black Glass Hostel; the ridge-bear family |
 | **World-truth row** | None (present-day only). Touches the present splinter trials (H25) as a side effect, never as evidence. |
@@ -904,11 +903,11 @@ Bears on the Stormwake shoulder sleep from first snow to thaw. **Greymantle**, a
 
 **Beat 3 — The den (`S03_den`).** *Objective: Find Greymantle's den.* Climb G7 (shimmy or switchback). Yrsa stops at the mouth: "I don't go in. Not because I'm scared. Because I'm sensible." In the outer cave (G8) the sound is ordinary. Stepping into G9, the sound goes: first the drip, then the wind, then the player's footsteps (TGM.8). Greymantle stands up out of the hollow.
 
-**Beat 4 — Greymantle (`S04_fight`).** *Objective: Stop Greymantle.* Miniboss (TGM.7.1). At 10% he stops fighting and lies down in the hollow.
+**Beat 4 — Greymantle (`S04_fight`).** *Objective: Stop Greymantle.* Miniboss (TGM.7.1). He fights to 0 HP (CDR-1) and dies where he falls; the quest keeps his body there (no fade) until `S06_choice`.
 
 **Beat 5 — The hollow (`S05_yrsa`).** *Objective: Fetch Yrsa.* Step out to G8 (sound returns); Yrsa comes in to the chamber edge (`TGM-D3`). In the null-point her lines are subtitles only; she speaks them in the outer cave on the way in and goes silent past the threshold (presentation rule: no voiced audio inside G9).
 
-**Beat 6 — End or sleep (`S06_choice`).** *Objective: Decide what happens to Greymantle.* TGM.11. **End:** one interaction at the hollow (2 s; no gore; the camera stays on the player's back and the dust). **Sleep:** carry three stones from the outer cave's rockfall (light carries) and stack the inner threshold, then hang Yrsa's snare-net with stormflower stems woven in across the gap (interaction) "so the wind can't reach him".
+**Beat 6 — How he is left (`S06_choice`).** *Objective: Decide what happens to Greymantle.* TGM.11. **Leave him to the trappers:** Yrsa whistles the hostel's trappers up from the road; the player may help butcher (Hunting, optional) or leave it to them (one interaction, 2 s; no gore; the camera stays on the player's back and the dust). His hide and fat go to the hostel's winter. **Seal the den:** carry three stones from the outer cave's rockfall (light carries) and stack the inner threshold, then hang Yrsa's snare-net with stormflower stems woven in across the gap (interaction) "so the wind can't reach him". The quiet room is his resting place.
 
 **Beat 7 — The hostel (`S07_close`).** *Objective: Return to the Black Glass Hostel.* `TGM-D4`. Quest Completed.
 
@@ -918,14 +917,14 @@ Tuned for late Competent to early Advanced (TD-12).
 
 | Id | Enemies | Placement | AI role | Telegraph | Purpose | Solo target |
 |---|---|---|---|---|---|---|
-| **TGM-E1** | 1 × ridge wolf howler, 2 × runner; 4 × ridge crow (flock) | Kill cache (G5) | Wolves defend the carcass; crows mob a player under 50% HP | **Howl** (~1.5 s, head lifts); runners commit 4 s later. **Runner lunge:** crouch, tail flat (~0.8 s). **Crow dive:** the flock tightens into a line (~1.0 s). | Required (wolves); crows scatter when the wolves are down | 50–80 s |
+| **TGM-E1** | 1 × ridge wolf howler, 2 × runner; 4 × ridge crow (flock) | Kill cache (G5) | Wolves defend the carcass; crows mob a player under 50% HP | **Howl** (~1.5 s, head lifts); runners commit 4 s later. **Runner lunge:** crouch, tail flat (~0.8 s). **Crow dive:** the flock tightens into a line (~1.0 s). | Required (wolves). A crow that dives is an ordinary enemy, defeated at 0 HP; crows that never dived stay circling as scenery | 50–80 s |
 | **TGM-E2** | **Greymantle** | Inner chamber (G9) | Miniboss; spec below | Visual only | Required | 3.5–4.5 minutes |
 
 #### TGM.7.1 Miniboss spec — Greymantle
 
 | Field | Spec |
 |---|---|
-| Family | Ridge Bears, elite (bible §10). An animal; no yield. |
+| Family | Ridge Bears, elite (bible §10). An animal; fights to 0 HP (CDR-1). |
 | Read | Huge, grey across the back, ribs showing under the coat. Left forepaw lame: he favours it, and his left-side swipes are slower. Snow and frost still caked in his ruff; it sloughs off when he moves hard. His breath plumes in the cold. |
 | **Audio rule** | Inside G9 **no world audio plays**: no bear sounds, no player footsteps, no hit sounds, no voiced lines. UI sounds also muted inside G9 [PROPOSAL — DIRECTOR; see TGM-OD1]. Controller rumble carries impacts where supported. Every telegraph below is visual and has a fixed duration. |
 | Arena | G9: three **pillars** (block charges; a charge into a pillar stuns him 2 s), the **hollow** at the back, thick dust on all ledges. |
@@ -935,7 +934,7 @@ Tuned for late Competent to early Advanced (TD-12).
 | **Ceiling fall** (P2–P3) | He rears against a wall and strikes it. **Dust shadows** appear on the floor first: a patch of dust falling straight down marks where a stone will land (**1.8 s**). Then a stone falls there. Max 3 at once. |
 | **From the side** (P3, below 35%) | He goes into the hollow and out of sight; 3 s later he comes out from behind one of the pillars. The tell: **dust trickles from that pillar's top** (**1.5 s**) before he steps out. Once per 20 s. |
 | Phases | P1 100–60%: swipe, charge. P2 60–35%: + silent roar (~18 s), ceiling fall. P3 below 35%: + from the side; roar ~14 s. No enrage. |
-| End | At 10% he stops, walks into the hollow and lies down, breathing. Combat ends. He cannot be attacked further until `S06_choice`. |
+| End | At 0 HP he goes down where he stands; one last plume of breath, and the dust settles on him. Combat ends. His body stays as a per-player quest prop (no fade) until `S06_choice`. |
 | Reset | If the player leaves G9 or dies, he returns to the hollow at full health. Tracking steps stay complete. |
 | Accessibility | Because the fight has no audio at all, it is the slate's reference case for visual-only telegraph readability. All tells are large-silhouette changes or dust/frost events, never colour alone. |
 
@@ -959,9 +958,9 @@ Tuned for late Competent to early Advanced (TD-12).
 | `S01_dates` | (Optional) Look at the hostel's weather slate. | Inspect slate + tally stick | No (`TGM_DATES`) |
 | `S02_track` | Track Greymantle. | Five sign stages in order (G2–G6 inspects) + TGM-E1 wolves defeated | Yes |
 | `S03_den` | Find Greymantle's den. | Enter G9 volume | Yes |
-| `S04_fight` | Stop Greymantle. | Greymantle at 10% → lie-down event | Yes |
+| `S04_fight` | Stop Greymantle. | Greymantle defeated (0 HP) | Yes |
 | `S05_yrsa` | Fetch Yrsa. | `TGM-D3` reaches choice | Yes |
-| `S06_choice` | Decide what happens to Greymantle. | End interaction, **or** 3 stone carry-deposits + net interaction | Yes |
+| `S06_choice` | Decide what happens to Greymantle. | Butcher interaction (player or trappers), **or** 3 stone carry-deposits + net interaction | Yes |
 | `S07_close` | Return to the Black Glass Hostel. | `TGM-D4` end node | Yes (→ Completed) |
 
 ### TGM.10 Flags
@@ -975,10 +974,10 @@ Tuned for late Competent to early Advanced (TD-12).
 
 | Option | Immediate | Cost | Honoured how |
 |---|---|---|---|
-| **End him** — *"Let him go. Cleanly."* (`ended`) | One interaction; Yrsa kneels by him for a while. Hunting: the player may help butcher (Yrsa does it otherwise); meat goes to the hostel's winter store and to Hushfold. | Greymantle is gone from the shoulder's stories. Yrsa's grief, short and dry. The hostel's children ask where the grey bear went. | Yrsa hangs one grey hank of his coat by the hostel door. The den is empty (prop). Hostel barks: winter meat, and a toast "to the old one". |
-| **Let him sleep** — *"He went where it's quiet. Let him have it."* (`sleeping`) | Stack the threshold; hang the stormflower net. He sleeps. | The shoulder path below the den is closed for the winter with a warning cairn; Yrsa loses her best snare line. He will be there at thaw, hungry. | The stacked threshold and net stay (prop). Yrsa's bark: "Still asleep. I checked from very far away." |
+| **Leave him to the trappers** — *"Leave him to the trappers. The hostel needs the winter."* (`ended`) | Yrsa kneels by him for a while, then whistles the trappers up. Hunting: the player may help butcher (the trappers do it otherwise); hide and fat go to the hostel's winter, meat to its store and to Hushfold. | Greymantle is gone from the shoulder's stories. Yrsa's grief, short and dry. The hostel's children ask where the grey bear went. | Yrsa hangs one grey hank of his coat by the hostel door. The den is empty (prop). Hostel barks: winter meat, and a toast "to the old one". |
+| **Seal the den** — *"He went where it's quiet. Let him have it."* (`sleeping`) | Stack the threshold; hang the stormflower net. The quiet room is his resting place. | The hostel goes into winter without his hide and fat. Yrsa puts a cairn below the den and will not set her best snare line under it. | The stacked threshold and net stay (prop). Yrsa's bark: "Stones are still up. I checked from very far away." |
 
-No option is wrong. Neither keeps both the bear and the path.
+No option is wrong. Neither gives the old bear his rest and the hostel its winter.
 
 ### TGM.12 Rewards and unlocks
 
@@ -1005,6 +1004,7 @@ Small payment from the hostel's box. Yrsa's snare lore in dialogue (later Huntin
 | Sign-trail pinning | Systems Engineer | Inspect events that reveal the next stage marker | All stages visible from the start |
 | Crow column visible at distance | VFX | Looping flock above the cache | Waypoint after G4 |
 | Per-player den prop | Systems Engineer | Keyed to `TGM_OUTCOME` | Host's state |
+| Body kept after defeat | Systems Engineer | On-defeat quest hook: Greymantle's body stays as a per-player prop (no corpse fade) until `S06_choice` | Swap to an authored body prop at the point of defeat |
 
 ### TGM.15 Mystery ledger
 
@@ -1021,7 +1021,7 @@ Small payment from the hostel's box. Yrsa's snare lore in dialogue (later Huntin
 | # | Decision | Recommendation |
 |---|---|---|
 | TGM-OD1 | Mute UI sounds in the null-point too? | Yes, for the full effect, with rumble and visual hit flashes; the Director and the accessibility review decide. **[PROPOSAL — DIRECTOR]** |
-| TGM-OD2 | Should `sleeping` lead to a thaw encounter? | No in v1.5 (season scope is autumn/snow only, bible §9.2). |
+| TGM-OD2 | Should `sleeping` lead to a thaw encounter? | **Closed (CDR-1):** Greymantle dies at 0 HP in both outcomes; `sleeping` now means the den is sealed as his resting place. No thaw encounter. |
 
 ### TGM.17 Internal review log
 
@@ -1031,6 +1031,7 @@ Small payment from the hostel's box. Yrsa's snare lore in dialogue (later Huntin
 | Draft let the bear be fought in the outer cave with sound. | Cut: the identity is the silent fight. The outer cave is the safe point. |
 | Accessibility | Every tell is a silhouette, dust or frost event with a fixed duration; no colour-only reads. |
 | Evidence rule | Combat reveals nothing; the bear carries nothing. |
+| **Director rulings reconciliation (2026-11-03): CDR-1** (rulings §4, mercy without an exception). The 10% lie-down is removed. | Greymantle fights to 0 HP; `S04_fight` completes on defeat; his body stays until `S06_choice`. `S06_choice` and `TGM_OUTCOME` (ended / sleeping) kept, reframed as how the old bear is left: left to the trappers (hide and fat for the hostel's winter) or the den sealed as his resting place (three stones, the stormflower net). TGM-D3.02/.04/.10/.20, TGM-D4.01 [sleeping] and TGM-B5 adjusted; TGM-E1 crows no longer scatter. TGM-OD2 closed. |
 
 ### TGM.18 Dialogue
 
@@ -1046,7 +1047,7 @@ Small payment from the hostel's box. Yrsa's snare lore in dialogue (later Huntin
 | `TGM-B2` | YRSA | At the rubbing pine | *"Taller than when I last saw him. Or I've shrunk."* |
 | `TGM-B3` | YRSA | Player stalls on bare rock | *"Look for where the frost's been knocked off. He's heavy. He brushes."* |
 | `TGM-B4` | YRSA | Den mouth | *"I don't go in. Not because I'm scared. Because I'm sensible."* |
-| `TGM-B5` | YRSA | Post-quest, `sleeping` | *"Still asleep. I checked from very far away."* |
+| `TGM-B5` | YRSA | Post-quest, `sleeping` | *"Stones are still up. I checked from very far away."* |
 | `TGM-B6` | HOSTEL CHILD | Post-quest, `ended` | *"Where's the grey bear gone?"* / YRSA: *"Into the stew. Eat it respectfully."* |
 
 #### Nodes
@@ -1065,18 +1066,18 @@ TGM-D1.20 YRSA: "At the fold. He's lame on the left fore. You'll see it in the s
 
 ```
 TGM-D3.01 YRSA: (in the outer cave, before the threshold) "Is he dead?"
-TGM-D3.02 YRSA: (at the chamber edge; from here on, subtitles only) "No. Lying down. In the quiet bit." (watches him breathe)
+TGM-D3.02 YRSA: (at the chamber edge; from here on, subtitles only) "He is. In the quiet bit." (looks at him a long while)
 TGM-D3.03 YRSA: "He went where it's quiet. Can't blame him. Nothing reaches in there."
-TGM-D3.04 YRSA: "So. Cleanly, now. Or stack the door and let him sleep it out. I've done both in my time."
-  > "Let him go. Cleanly."                                   → TGM-D3.10
+TGM-D3.04 YRSA: "So. Shut the door on him and leave him be. Or the trappers have him. Hide and fat'd see the hostel through." (beat) "I've done both in my time."
+  > "Leave him to the trappers. The hostel needs the winter."   → TGM-D3.10
   > "He went where it's quiet. Let him have it."             → TGM-D3.20
-TGM-D3.10 YRSA: (nods once) "Gently. He's earned gently."   {set TGM_OUTCOME = ended}  {end interaction available}
-TGM-D3.20 YRSA: "Stones from the fall. Three. Then my net, with stormflower in it. Wind can't get through stormflower." (beat) "That's what my mother said. I've never checked."   {set TGM_OUTCOME = sleeping}  {stones available}
+TGM-D3.10 YRSA: (nods once) "Properly, then. He never wasted anything either."   {set TGM_OUTCOME = ended}  {butcher interaction available}
+TGM-D3.20 YRSA: "Stones from the fall. Three. Then my net, with stormflower in it. So the wind can't reach him." (beat) "Stormflower keeps the wind out. My mother said. I've never checked."   {set TGM_OUTCOME = sleeping}  {stones available}
 ```
 
 ```
 TGM-D4.01 [ended] YRSA: (hanging a grey hank of coat by the hostel door) "There. Now he's in the stories and the stew."
-TGM-D4.01 [sleeping] YRSA: "Shoulder path's shut till thaw. I've put a cairn up. Lost my best line." (beat) "Worth it. Probably."
+TGM-D4.01 [sleeping] YRSA: "Den's shut. I've put a cairn up. Won't set my line under it. Lost my best line." (beat) "Worth it. Probably."
 TGM-D4.02 [TGM_DATES] YRSA: "Halla's slate and my stick still agree. Doesn't mean anything. I keep looking at it anyway."
 TGM-D4.03 YRSA: (pays from the hostel box) "Hostel's money. I'm just the one who's sensible enough to hand it over."   {event: S07_close → quest Completed}
 ```
@@ -1099,7 +1100,7 @@ TGM-D4.03 YRSA: (pays from the hostel box) "Hostel's money. I'm just the one who
 
 ### TSG.1 The quest in one paragraph
 
-After TF-M3, Gerrit Carrick's miners walked away from their upper salvage camp, a ledge in the old siege works below the Horn Seat, and the Ridge Wardens put warden pairs on the lower ledges to watch the Seat's approaches. Now Shatterfall brigands have the camp. Two of them used to be Gerrit's. They are prising horn plates out of the gorge wall that the Seat's old rack should keep, and stacking them in his shed to sell "to anyone who wants a loud thing". Gerrit asks the player to take his ledge back. The player climbs to it between wind windows and clears it in two parts: the outer works, where plate-throwers hurl plates that ring as they come, and the plate shed, where the Brigand Foreman yields. Then the foreman's last order is shouted down the ledge: cut the prop stones. Two cutters start on the props under the spoil terrace, which will drop a hillside of spoil onto the lower ledges where the warden pairs stand. The player runs the ledge's lip to three old horn-rests and blows **Fall** from each, listening for each pair's **Answer**, while stopping the cutters. Every pair gets under cover; whether the spoil terrace comes down depends only on how fast the cutters were stopped. The plates go back into the Seat's rack face to the rock, and the player decides whether Gerrit's crew may work the ledge again under licence.
+After TF-M3, Gerrit Carrick's miners walked away from their upper salvage camp, a ledge in the old siege works below the Horn Seat, and the Ridge Wardens put warden pairs on the lower ledges to watch the Seat's approaches. Now Shatterfall brigands have the camp. Two of them used to be Gerrit's. They are prising horn plates out of the gorge wall that the Seat's old rack should keep, and stacking them in his shed to sell to whoever pays. Gerrit asks the player to take his ledge back. The player climbs to it between wind windows and clears it in two parts: the outer works, where plate-throwers hurl plates that ring as they come, and the plate shed, where the Brigand Foreman, losing, bellows his last order down the ledge: cut the prop stones. He fights on to the end. Two cutters start on the props under the spoil terrace, which will drop a hillside of spoil onto the lower ledges where the warden pairs stand. The player runs the ledge's lip to three old horn-rests and blows **Fall** from each, listening for each pair's **Answer**, while stopping the cutters. Every pair gets under cover; whether the spoil terrace comes down depends only on how fast the cutters were stopped. The plates go back into the Seat's rack face to the rock, and the player decides whether Gerrit's crew may work the ledge again under licence.
 
 **Remember:** a stack of stolen plates ringing faintly every time you blow the horn, and three Answers coming up out of the haze. **Want next:** to see the gorge with nobody on its ledges.
 
@@ -1132,7 +1133,7 @@ After TF-M3, Gerrit Carrick's miners walked away from their upper salvage camp, 
 | Resume hook | Gerrit at Carrick's Cut (`TSG-D1.00`); after the ledge is taken, the warden pair leader on the ledge. |
 | Target length | 30–40 minutes |
 | Combat share | ~60% |
-| Skills | Melee; Mining optional (break a jammed hoist pin for a shortcut; crew alternative: Gerrit's man does it from below) |
+| Skills | Melee or Ranged; Mining optional (break a jammed hoist pin for a shortcut; crew alternative: Gerrit's man does it from below) |
 | Choice | What becomes of the ledge (2 options) |
 | Outputs | `TSG_SPOIL` = held / dropped; `TSG_LEDGE` = licensed / struck |
 | **Anchor** | Shatterfall's miners (Gerrit Carrick) and the Ridge Wardens; the Horn Seat as a kept place |
@@ -1163,19 +1164,19 @@ After TF-M3, Gerrit Carrick's miners walked away from their upper salvage camp, 
 
 **Beat 2 — The outer works (`S02_works`).** *Objective: Clear the outer works.* **TSG-E1.** Plates thrown at the player ring as they fly; plates that hit the breastwork ring the stacked plates beside them (the strange moment's foreshadow).
 
-**Beat 3 — The plate shed (`S03_shed`).** *Objective: Take the plate shed.* **TSG-E2**, the Brigand Foreman (TSG.7.1). He yields at 20% and shouts down the ledge: "Cut them! Cut the props!" (`TSG-D2`).
+**Beat 3 — The plate shed (`S03_shed`).** *Objective: Take the plate shed.* **TSG-E2**, the Brigand Foreman (TSG.7.1). At his phase change (below half health) he turns his head and bellows down the ledge: "Cut them! Cut the props!" (`TSG-D2.02`), and the two cutters run for the prop stones. He fights on to 0 HP. When he is defeated, the cutters reach the props and start work: `S04` and `S05` begin, so the warning never overlaps the shed fight.
 
 **Beat 4 — Fall (`S04_warn`).** *Objective: Warn the warden pairs below.* The player takes the **camp horn** (a work horn hanging in the shed; usable only for this quest) and runs the lip. At each **horn-rest** (L5) they **blow Fall** (interaction, 2 s; the call plays with its glyph). If the rest is aimed at a ledge with a pair, the pair's **Answer** comes back (two short) after a few beats; the echo count tells how far the ledge is, and the pair is seen moving under the overhang. Each rest serves one pair; all three are required, in any order. Objective counter: *Pairs answered 0/3*.
 
 **Beat 5 — The props (`S05_props`).** *Objective: Stop the prop cutters.* Runs at the same time as Beat 4. **TSG-E3**: two cutters at the prop stones, each with a visible work bar (a cut takes ~90 s if left alone; a cutter attacked stops cutting to fight). A plate-thrower on a high ledge harries the lip. **No-harm rule:** the terrace can only drop after **all three pairs have answered**. If both props are cut through before that, the terrace shifts and sheds a small slide (a Fall hazard on the spoil slope, telegraphed by a ground-dust line ~1.5 s) and holds "one more breath" until the third Answer, then drops into empty ledges. Outcome: both cutters stopped before both props are cut → `TSG_SPOIL` = held; otherwise `dropped`. Either way every warden is under cover.
 
-**Beat 6 — The pairs come up (`S06_wardens`).** *Objective: Meet the wardens.* The pair leader (role, `TSG-D3`) comes up the ledge path: dry thanks, and the wardens take the yielded brigands. With `dropped`: the lower path is buried; a scramble route opens over the spoil (new traversal; agility trigger with a walkable fallback round the head of it).
+**Beat 6 — The pairs come up (`S06_wardens`).** *Objective: Meet the wardens.* The pair leader (role, `TSG-D3`) comes up the ledge path: dry thanks; the ledge is clear. With `dropped`: the lower path is buried; a scramble route opens over the spoil (new traversal; agility trigger with a walkable fallback round the head of it).
 
 **Beat 7 — Face to the rock (`S07_plates` → `S07_choice`).** *Objective: Return the plates to the Horn Seat.* Carry the plate crate (heavy carry) to the Seat's rack (L7) and set them in (interaction). If Dorn is present (TF-M3 Completed; he comes up with the wardens), he turns each plate to face the rock (`TSG-D4`). Then Gerrit arrives: *Decide what becomes of the ledge* (TSG.11). Quest Completed on `TSG-D5`.
 
 ### TSG.7 Encounters
 
-Tuned for Advanced identity (TD-12). Brigands yield.
+Tuned for Advanced identity (TD-12). Brigands fight to 0 HP (CDR-1): pick-hands, plate-throwers, cutters and the foreman. Melee or ranged; every thrower's perch is reachable on foot.
 
 | Id | Enemies | Placement | AI role | Telegraph | Purpose | Solo target |
 |---|---|---|---|---|---|---|
@@ -1191,10 +1192,10 @@ Tuned for Advanced identity (TD-12). Brigands yield.
 | **Pry sweep** | Plants the pry-bar's foot and leans (~1.2 s); low sweep, knockdown on hit. Cadence ~8 s. |
 | **Stack topple** (once per stack, 3 stacks) | He grabs a plate stack and heaves (~1.5 s; the stack rings as it tilts). Plates spill in a cone; damage and a 3 s ringing patch that slows. |
 | **Second wind** (below 50%) | He drinks from a flask (2 s, interruptible by any hit). If not interrupted, heals 10%. Once. |
-| Yield | At 20%: drops the bar, one knee. `TSG-D2`. |
-| Reset | Leaving the shed resets him to 100% unless yielded; spilled stacks re-stack. |
+| Phase shout | Below 50% (with the second-wind phase): he turns and bellows down the ledge, `TSG-D2.02`; between swings, `TSG-D2.03`. Barks only; the fight does not pause. He fights to 0 HP. |
+| Reset | Leaving the shed resets him to 100% unless defeated; spilled stacks re-stack. |
 
-**Rules.** Combat never reveals evidence; the foreman's words are testimony about brigands only. Death respawns at the top of the gorge path (L2 head); cleared groups stay down; pairs already answered stay answered; prop-cut progress pauses while the player is dead.
+**Rules.** Combat never reveals evidence; the foreman's shouted lines are fight barks, not testimony. The plates are never loot: they are the plate crate (carry-state) only. Death respawns at the top of the gorge path (L2 head); cleared groups stay down; pairs already answered stay answered; prop-cut progress pauses while the player is dead.
 
 ### TSG.8 The strange moment: the plates answer (presentation spec)
 
@@ -1215,10 +1216,10 @@ Tuned for Advanced identity (TD-12). Brigands yield.
 |---|---|---|---|
 | `S00_hook` | Hear Gerrit out. | `TSG-D1` end node | Yes |
 | `S01_climb` | Climb to the Salvage Ledge. | Enter ledge volume | Yes |
-| `S02_works` | Clear the outer works. | TSG-E1 all yielded | Yes |
-| `S03_shed` | Take the plate shed. | Foreman yield event + `TSG-D2` | Yes |
+| `S02_works` | Clear the outer works. | TSG-E1 all defeated | Yes |
+| `S03_shed` | Take the plate shed. | Foreman defeated (0 HP) | Yes |
 | `S04_warn` | Warn the warden pairs below. | 3 Answer events (one per horn-rest) | Yes |
-| `S05_props` | Stop the prop cutters. | Both cutters yielded, **or** terrace drop event after S04 complete | Yes (sets `TSG_SPOIL`) |
+| `S05_props` | Stop the prop cutters. | Both cutters defeated, **or** terrace drop event after S04 complete | Yes (sets `TSG_SPOIL`) |
 | `S06_wardens` | Meet the wardens. | `TSG-D3` end node | Yes |
 | `S07_plates` | Return the plates to the Horn Seat. | Carry-deposit at the rack + interaction | Yes |
 | `S07_choice` | Decide what becomes of the ledge. | `TSG-D5` choice resolved | Yes (→ Completed on end node) |
@@ -1235,8 +1236,8 @@ Tuned for Advanced identity (TD-12). Brigands yield.
 
 | Option | Immediate | Cost | Later |
 |---|---|---|---|
-| **License it** — *"Let Gerrit's crew work it. Iron and timber. Never plates."* (`licensed`) | The pair leader writes a Warden licence for iron and timber only. Gerrit takes back the two of his who yielded, on his word. | The ledge stays a camp; the plates in the wall stay within reach of anyone with a bar. The Wardens must keep a pair on the ledge. Gerrit vouched for two men who robbed the gorge. | Carrick's Cut barks: honest iron work; one of the two ex-brigands is very polite to the player. *Seam Rights* (request): Gerrit mentions the licence. |
-| **Strike it** — *"Pull it down. Give the ledge back to the gorge."* (`struck`) | The shed is pulled down, the hoist rope cut. The yielded brigands go to the Wardens for a clan tribunal. | Gerrit's men lose the last work they had in the gorge; two of them face judgement Gerrit could have spared. | Carrick's Cut thins further; Gerrit is grateful and bleak. The ledge stays empty (prop). |
+| **License it** — *"Let Gerrit's crew work it. Iron and timber. Never plates."* (`licensed`) | The pair leader writes a Warden licence for iron and timber only, on Gerrit's word for his crew. | The ledge stays a camp; the plates in the wall stay within reach of anyone with a bar. The Wardens must keep a pair on the ledge. Gerrit stands surety on the ledge where two of his lads already went wrong. | Carrick's Cut barks: honest iron work; Gerrit's crew handle the plates in the wall like eggs. *Seam Rights* (request): Gerrit mentions the licence. |
+| **Strike it** — *"Pull it down. Give the ledge back to the gorge."* (`struck`) | The shed is pulled down, the hoist rope cut. | Gerrit's men lose the last work they had in the gorge; Gerrit has nothing to show for his two lost lads but an empty ledge. | Carrick's Cut thins further; Gerrit is grateful and bleak. The ledge stays empty (prop). |
 
 No option is wrong. Neither gives Gerrit work and keeps the plates beyond reach.
 
@@ -1250,7 +1251,7 @@ Small payment from Gerrit ("from what's left"). A Warden standing line. The **sc
 |---|---|
 | Walking away | Stays Active; resume via Gerrit or the pair leader. |
 | Leaving mid-hold | Answered pairs stay answered; cut progress pauses while the player is away and resumes on return. |
-| Death | Respawn at the gorge path head; progress kept; the foreman, if not yielded, resets. |
+| Death | Respawn at the gorge path head; progress kept; the foreman, if not defeated, resets. |
 | Player never fights the cutters | The terrace drops after the third Answer (`dropped`). Nobody is hurt. |
 | Co-op | Shared brigands; each player's warning is per player (pairs and terrace presented per player; fallback: shared state, all present credited). Choice per player; ledge prop per player (fallback: host). |
 
@@ -1271,8 +1272,8 @@ Small payment from Gerrit ("from what's left"). A Warden standing line. The **sc
 |---|---|
 | Author truth | The plates were worth something only while someone was building a horn; the brigands are selling into a market that is drying up. |
 | Public belief | "Brigands are robbing the gorge for scrap." |
-| Player-observable | Plate stacks, the chalk tally, the foreman's words, the plates' hum. |
-| Wrong reading | The brigands work for the splinter. They don't; they sold to whoever paid and say so. |
+| Player-observable | Plate stacks, the chalk tally (prices crossed out and lowered twice), the plates' hum. |
+| Wrong reading | The brigands work for the splinter. They don't; the tally shows a falling market and nothing else. |
 | Withheld | Who else wants loud things (no buyer is named; no route is stated). |
 
 ### TSG.16 Open decisions
@@ -1290,6 +1291,7 @@ Small payment from Gerrit ("from what's left"). A Warden standing line. The **sc
 | Draft let the foreman name the hornwright as his buyer. | Cut: no `[SPLINTER]` name; "anyone who wants a loud thing". |
 | Distinctness from TF-M3 | No rope-rig, no Horn-Echo (clear weather only), no rescue; the player blows the calls. |
 | Evidence rule | No record read; nothing proven. |
+| **Director rulings reconciliation (2026-11-03): CDR-1.** Foreman yielded at 20%; brigands yielded and were taken by the wardens. | All brigands (pick-hands, throwers, cutters, foreman) fight to 0 HP. The foreman's order is a phase-change bark (`TSG-D2.02`, `D2.03`); `S04`/`S05` begin on his defeat. Foreman testimony cut (T-4: `TSG-D2.01`, `.10`, `.20` removed); the mystery ledger reads the chalk tally instead. `TSG-D3.03` and `TSG-D5.03`/`.10`/`.21` no longer depend on surviving brigands; the ledge choice, flags and steps are unchanged. Plates remain a carry-state crate, never loot. |
 
 ### TSG.18 Dialogue
 
@@ -1297,7 +1299,7 @@ Small payment from Gerrit ("from what's left"). A Warden standing line. The **sc
 
 **Gerrit Carrick [NEW, bible §5.2]** — Foreman of out-of-work miners. *Knows:* the ledge, the plates' price, the two men who left him. *Doesn't know:* who buys now. *Voice:* defensive, ashamed of the work, grateful; says "my lads" even about the brigands.
 
-**Brigand Foreman [NEW, role]** — talks while fighting; a miner's humour; yields practically.
+**Brigand Foreman [NEW, role]** — talks while fighting; a miner's humour; practical to the last.
 
 **Pair leader [NEW, role]** — Ridge Warden; dry; counts.
 
@@ -1328,20 +1330,18 @@ TSG-D1.20 GERRIT: "If it goes bad, there are horn-rests on the lip. Old siege st
 ```
 
 ```
-TSG-D2.01 FOREMAN: (one knee, bar dropped) "All right! All right. Yours."
-TSG-D2.02 FOREMAN: (turns his head and bellows down the ledge) "Cut them! Cut the props!"
-TSG-D2.03 FOREMAN: (to the player, reasonably) "Spoil comes down, path's gone, we walk off the back. Nothing personal."
-  > "There are wardens under that spoil."                    → TSG-D2.10
-  > "Who buys the plates?"                                   → TSG-D2.20
-TSG-D2.10 FOREMAN: (a pause) "...Then you'd best be loud."   {event: S03_shed; S04 and S05 begin}
-TSG-D2.20 FOREMAN: "Anyone who wants a loud thing. There's always one. Fewer since the storm." (beat) "Go on, they're cutting."   → TSG-D2.10
+TSG-D2.01 (removed: CDR-1; the foreman no longer yields)
+TSG-D2.02 FOREMAN: (fight bark at his phase change; turns his head and bellows down the ledge) "Cut them! Cut the props!"
+TSG-D2.03 FOREMAN: (fight bark, between swings, reasonably) "Spoil comes down, path's gone, we walk off the back. Nothing personal."
+TSG-D2.10 (removed: CDR-1; `S04` and `S05` now begin on the foreman's defeat)
+TSG-D2.20 (removed: CDR-1, T-4; foreman testimony cut)
 ```
 
 ```
 TSG-D3.01 PAIR LEADER: (up the path, snow on her shoulders) "Fall from the lip. Three times. Three rests." (beat) "Somebody's been taught."
 TSG-D3.02 [held] PAIR LEADER: "Spoil's still up. Path's still there. Good."
 TSG-D3.02 [dropped] PAIR LEADER: "Spoil came down on three empty ledges. Path's gone. We'll make another." (beat) "Heard four Answers, by the way. Counted. Face across."
-TSG-D3.03 PAIR LEADER: "We'll take your brigands. They can sit in the snow and be funny at each other."   {event: S06_wardens}
+TSG-D3.03 PAIR LEADER: "Ledge is clear. We'll keep a pair up here till Gerrit's had his say."   {event: S06_wardens}
 ```
 
 ```
@@ -1354,13 +1354,13 @@ TSG-D4.02 [TH_SHATTERFALL_ACCOUNT = kept] DORN: "Roster's at the warden post. Pl
 ```
 TSG-D5.01 GERRIT: (at the shed, looking at the empty plate straw) "So. My ledge."
 TSG-D5.02 [TSG_HOIST] GERRIT: "You broke the hoist pin. It's been stuck since spring. Thanks, I think."
-TSG-D5.03 GERRIT: "The two of mine are sitting in the snow with the Wardens. I can speak for them. If there's work to speak for."
+TSG-D5.03 GERRIT: "The two of mine went down with the rest. Knew them since they carried water." (beat) "I can speak for the crew I've got left. If there's work to speak for."
   > "Let Gerrit's crew work it. Iron and timber. Never plates."   → TSG-D5.10
   > "Pull it down. Give the ledge back to the gorge."             → TSG-D5.20
-TSG-D5.10 PAIR LEADER: (writing) "Licence. Iron, timber. Not plates. A pair on the ledge." (to Gerrit) "Your word for your lads."
+TSG-D5.10 PAIR LEADER: (writing) "Licence. Iron, timber. Not plates. A pair on the ledge." (to Gerrit) "Your word for your crew."
 TSG-D5.11 GERRIT: "My word." (beat) "It's not worth much. It's what I've got."   {set TSG_LEDGE = licensed}
 TSG-D5.20 GERRIT: (a long breath) "Fair." (takes a pry-bar to his own shed's corner post) "I built it. I'll pull it."
-TSG-D5.21 GERRIT: "My lads go to the tribunal, then." (beat) "They knew. I knew."   {set TSG_LEDGE = struck}
+TSG-D5.21 GERRIT: "Nothing up here, then. For any of mine." (beat) "Those two knew. I knew."   {set TSG_LEDGE = struck}
 TSG-D5.30 GERRIT: (pays) "From what's left. Don't count it in front of me."   {event: S07_choice → quest Completed}
 ```
 
@@ -1634,3 +1634,4 @@ Each discovery has a **surface** (what anyone sees), a **reading** (what a caref
 | New names | Ivra, Kel, Sefa Dunholt, Geir Vellan, Bjarke, Ansa, Yrsa Fellhand, the Hallin fold [NEW]; checked against the repository for collisions. |
 | Deviations from the bible | (1) Discovery ids use `TDS##` per the bible's review log, not the file map's `TD##`. (2) TME04's cancelled walk is tied to a postwar rockfall closure ("the long closure, twelve winters back"), not a wartime sealing, so it cannot pre-empt TF-M5's R06 (sealing) payoff. (3) TAS adds braid 9's "two kinds of iron" as an undated visual only (TAS-OD1). |
 | **Independent review (2026-11-03)** | 6 findings (1 high, 3 medium, 2 low). High: TF-M5 could not resolve the discovery and tally flags; TDS10 now sets `TDS10_SEEN` (road view) and `TDS10_READ` (props inspected; the flag TF-M5 should read), and TME01's flag is renamed `TME01_TALLIED` to match Act III. Medium: TME05's moving frost in a null-point duplicated TWG; now a grit fall. Medium: TSG's frost lines on plates duplicated the same image; now beaded water that freezes. Medium: minor name Doran sat one letter from Dorn; renamed **Bjarke**. Low: TMM-D3 name-address now reads `TME01_TALLIED` or `TSM_PLAYER_TALLIED`; token unified to `{PLAYER}`. Low: Ranged mentions gated on S01. |
+| **Director rulings reconciliation (2026-11-03)** | Applied CDR-1/2/3 (`Caelmor_Director_Rulings_Combat_Ranged_Release.md`). CDR-1: shared rule now "every enemy defeated at 0 HP" (TD-7 superseded). TAS-E1 bandits fight to 0, `TAS-D4` cut (T-4). TGM: 10% lie-down removed; Greymantle dies at 0 HP; `S06_choice`/`TGM_OUTCOME` kept as how the old bear is left (`sleeping` = den sealed as his resting place, `ended` = left to the trappers); TGM-E1 crows no longer scatter. TSG: no 20% yield; foreman's order is a phase-change (second-wind) bark; `S04`/`S05` begin on his defeat; foreman testimony cut (T-4); epilogue and ledge-choice lines no longer depend on surviving brigands. CDR-2: Melee or Ranged in TAS, TGM, TSG. CDR-3: scope guard reworded. TMM, TME01–TME10 and TDS01–TDS10 needed no change. Historical rows above describe earlier states. |

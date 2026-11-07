@@ -8,11 +8,11 @@ Milestone codes below (`TF-M1`, `MR-M2`, `CV-M1` and so on) are planning labels 
 
 ## 1. The journey at a glance
 
-| Layer | What it is | Release status | Player role |
+| Layer | What it is | Production status (internal milestones; CDR-3: one public beta with the complete game) | Player role |
 |---|---|---|---|
-| **0. Arrival** | Character creation; an ordinary wanderer on the Brookhollow road [CANON Phase 1.1 §6; v1 D-3]. | v1 | Nobody. |
-| **1. Lowmark: *The River Remains*** | One complete main arc, 18 side quests, 10 micro-events. | **v1, authored** | Trusted hand of the Vale (`LM_CIVIC_STANDING`). |
-| **2. Regional arcs** | Thornfell, the Mire, Emberholt. Each has a local present crisis, a local resolution, one hidden cost of the war, and one tool for the peace. | Proposal; Thornfell is the Phase 1.3 v1.5 direction, Mire and Emberholt unscheduled | Trusted in that region. |
+| **0. Arrival** | Character creation; an ordinary wanderer on the Brookhollow road [CANON Phase 1.1 §6; Lowmark D-3]. | Lowmark milestone | Nobody. |
+| **1. Lowmark: *The River Remains*** | One complete main arc, 18 side quests, 10 micro-events. | **Lowmark milestone, authored** | Trusted hand of the Vale (`LM_CIVIC_STANDING`). |
+| **2. Regional arcs** | Thornfell, the Mire, Emberholt. Each has a local present crisis, a local resolution, one hidden cost of the war, and one tool for the peace. | Thornfell authored (in review); Mire next (D-R1), then Emberholt | Trusted in that region. |
 | **3. Faction and civilian storylines** | Optional series that cross regions through ordinary work, records, and care: the unreturned register, the Watchers' book, horn and silence, guild ledgers, river intelligence, the unburnt. | Proposal | A carrier others rely on. |
 | **4. Lowmark return: *The Fourteenth Lot*** | Lowmark's own hidden stop, discoverable only once another region holds the second custodian. | Proposal | The outsider Lowmark now trusts with its shame. |
 | **5. Convergence: *The Peace Nobody Made*** | The four stops are assembled; the Second Road is halted; the four seats meet at an old Concord crossing (Mirebone, pending the map pass); the Remnant's Perfect Flame is broken beneath Emberholt. | Proposal; requires all four regions | The one person each region will accept evidence from. |
@@ -142,7 +142,7 @@ Each arc lists: entry, premise, what the player learns and misreads, milestone q
 
 **Why Perfect Flame is not Emberholt's capstone.** The dossier proposes *Perfect Flame* as the regional capstone. This package moves its climax to the convergence (CV-M4) so that Emberholt's regional arc resolves locally (a civic account) and the Remnant's final attempt draws on the whole world's state. Emberholt players still see the plan; they do not yet stop it.
 
-**Side-story pools.** Forge saboteurs; Ember-Fused Workers (non-lethal containment, CANON); the Boy of Living Flame myth; Glassmoth's dream tonics (Dreamer thread); the Flame That Would Not Die; joint repair with Thornfell (braid 9); a Lowmark priority-contract correction (Part 5 callback).
+**Side-story pools.** Forge saboteurs; Ember-Fused Workers (containment as a scripted quest outcome, CANON; ordinary fights still end at 0 HP per CDR-1); the Boy of Living Flame myth; Glassmoth's dream tonics (Dreamer thread); the Flame That Would Not Die; joint repair with Thornfell (braid 9); a Lowmark priority-contract correction (Part 5 callback).
 
 **Exit.** `EH_STANDING`. Emberholt holds the Hollow truth; the Remnant is exposed but not ended.
 

@@ -1,12 +1,12 @@
 # Thornfell Side Quests — Banner and Memory
 
-**Status (2026-11-02):** Authored production content for Creative Director review (Thornfell bible §12, batch 3). Five side quests from `Caelmor_Thornfell_Narrative_Production_Bible.md` §7.1–7.2. Everything here is **[NEW]** unless marked **[CANON]** or **[APPROVED — id]**; consequential story choices are marked **[PROPOSAL — DIRECTOR]**. This file authorizes no release scope and creates no schema, JSON or C#. Format follows `Caelmor_Lowmark_Side_Quests_Discovery_and_Memory.md`: each package carries its own cast notes, dialogue, barks, inspect texts and documents inline. Every package declares the five quest contribution-contract fields (Review §7.1) in its summary card.
+**Status (2026-11-02):** Authored production content for Creative Director review (Thornfell bible §12, batch 3). Five side quests from `Caelmor_Thornfell_Narrative_Production_Bible.md` §7.1–7.2. Everything here is **[NEW]** unless marked **[CANON]** or **[APPROVED — id]**; consequential story choices are marked **[PROPOSAL — DIRECTOR]**. This file sets no release scope (Thornfell is an internal production milestone; the first public beta contains the complete game, CDR-3) and creates no schema, JSON or C#. **Reconciled 2026-11-03** to the binding `Caelmor_Director_Rulings_Combat_Ranged_Release.md` (CDR-1 defeat at 0 HP, CDR-2 ranged included, CDR-3 milestone wording). Format follows `Caelmor_Lowmark_Side_Quests_Discovery_and_Memory.md`: each package carries its own cast notes, dialogue, barks, inspect texts and documents inline. Every package declares the five quest contribution-contract fields (Review §7.1) in its summary card.
 
 **Covers:** the series *The Banner and the Ridge*: **TSL** *Stormlight on the Ridge* (1/2) and **TWC** *Whose Colours* (2/2); the Register of the Unreturned, Thornfell case: **TWN** *The Weight of a Name*; memory/lore **TSN** *The Snow-Height Mark*; environmental **TOS** *Oathkeeper's Step*.
 
 **Canon hooks used:** dossier §V (Stormwake Plateau, Oath Cairn Fields, Ridgewall Heights), §X (storm hawks, fell stags, ridge wolves, rock vipers, stormflower, cairn moss), §XII (Lost Banner of Thornfell, Oathkeeper's Step, the Ridgewalker), §XX (Blood-Oath red-dyed banners and broken-horn motifs; Hearthguard mountain-flower motifs and Crestbridge wool cloaks; Ridge Warden rope and spikes; Cairn-Keepers); Thornfell anchors (Brynjar Korr, Elira Hearthward, Old Torvek, Hadrik Stonewake, Maera Cairnwatch, Kaldren Deepdelver, Iven Ridgeborne) under the Part 4 character ledger limits; Part 3 Thornfell proposal (Black Glass Hostel and its no-colours rule, the erased snow-height mark, Hushfold, *The Weight of a Name*, Maera's temporary-name practice); World Truth H16 [APPROVED — FT-02b] and H23; Revelation Ledger R06 and R14.
 
-**Binding limits honoured throughout:** no Thornfell voice calls anything magic and no player casts anything; phenomena never identify a person, prove anything or settle a claim; combat never reveals evidence; defeated humans yield (TD-7; no human enemies appear in this file); no Remnant presence; no statement of how Lowmark grain reached Thornfell (this file does not mention the grain); quests are only Inactive, Active or Completed; no node names Ingrith, Bersi or Eyvind, so no node carries `[SPLINTER]`.
+**Binding limits honoured throughout:** no Thornfell voice calls anything magic and no player casts anything; phenomena never identify a person, prove anything or settle a claim; combat never reveals evidence; every enemy is defeated at 0 HP with no low-health retreat or break-off (CDR-1; TD-7 superseded; no human enemies and no scripted exceptions appear in this file); Melee and Ranged are both first-class combat options, never required (CDR-2); no Remnant presence; no statement of how Lowmark grain reached Thornfell (this file does not mention the grain); quests are only Inactive, Active or Completed; no node names Ingrith, Bersi or Eyvind, so no node carries `[SPLINTER]`.
 
 ---
 
@@ -72,8 +72,8 @@ Every storm since first snow, Iven Ridgeborne has watched colour show on a crag 
 | Unlock | TF-M2 Completed (`TH_SEASON` = snow). |
 | Length | 30–40 minutes. |
 | Core verb | **track, climb, recover**. Identity: tracking by wind-carried evidence, a three-pitch climb in wind windows, a lightning hazard read by sound. |
-| Combat | ~15%, secondary: an avoidable fell-stag rut on the plateau; storm-hawk harassment on the traverse (fauna; driven off, not required to kill). |
-| Skills | None required. Melee optional (strike a landed hawk); Ranged only if S01 allows. |
+| Combat | ~15%, secondary: an avoidable fell-stag rut on the plateau; storm-hawk harassment on the traverse (fauna; fighting them optional, never required). |
+| Skills | None required. Melee or Ranged optional (strike a landed hawk). |
 | NPCs | Iven Ridgeborne [CANON anchor]; Kol Hask, Blood-Oath boy (minor) [NEW]; Brynjar Korr and Elira Hearthward (closing beat, hand-off to TWC). |
 | Choice | Does the staff stay on the crag? (2 options) |
 | Unlocks | TWC; Splitpine Crag viewpoint and a fixed warden line (per player); Iven's stormwatch bench. |
@@ -121,7 +121,7 @@ Every storm since first snow, Iven Ridgeborne has watched colour show on a crag 
 
 **Beat 4 — Pitch one (`S04_pitch_one`).** *Objective: Climb to the hawk ledge.* **Agility route:** the chimney (three climb triggers). **Walkable route:** the goat ramp to the first warden ring, then **Clip and climb the line** (4 s channel) to the ledge. Both routes are under wind windows on their exposed parts.
 
-**Beat 5 — The hawk ledge (`S05_traverse`).** *Objective: Cross the hawk ledge.* The traverse is four stances long. Storm hawks dive at the player (TSL-E2). The player braces on the shriek and moves between dives. Optional: striking a landed hawk twice (or, if S01 allows Ranged, two hits from the ledge start) drives it off; it circles away and does not return this visit. Bracing alone always gets the player across.
+**Beat 5 — The hawk ledge (`S05_traverse`).** *Objective: Cross the hawk ledge.* The traverse is four stances long. Storm hawks dive at the player (TSL-E2). The player braces on the shriek and moves between dives. Optional: a landed hawk can be struck (melee, or Ranged from the ledge start); a struck hawk fights until defeated at 0 HP (CDR-1) and a defeated hawk does not return this visit. Bracing alone always gets the player across.
 
 **Beat 6 — The summit block (`S06_summit`).** *Objective: Reach the pine.* Short climb in wind windows. Here the iron starts to hum (TSL-H2): a rising buzz from the player's spikes and the staff head before each strike near the block; shelter in the lee notch until it passes. The pine and the banner are reached when the player enters the summit volume.
 
@@ -139,8 +139,8 @@ Every storm since first snow, Iven Ridgeborne has watched colour show on a crag 
 
 | Id | Enemies / hazard | Placement | AI role | Telegraph (timings) | Purpose | Solo target |
 |---|---|---|---|---|---|---|
-| **TSL-E1** | 1 × rutting stag, 2 × fell stag (Fell Stags family) | Rut ground on the direct thread line (area B) | Rutting stag charges in straight lines; stags hold and flank only if the player enters the hollow. Leashed to the hollow (about 30 m). | Rutting stag paws twice and lowers its head (**1.4 s**), then a straight charge; a bellow (**1.0 s**) turns the two stags toward the player. | Plateau danger while reading threads; teaches that the plateau is open and that going round is a choice. | **Optional.** Skirting via the scarred stones avoids it. If fought, ends at 60–75% HP on a late Competent-identity character (bible TD-12); stags disengage at the leash. |
-| **TSL-E2** | 2 pairs of storm hawks (fauna; bible §10) | Overhang nests above the hawk ledge (area E) | Harassment: one hawk dives at a time on a 6–8 s cycle; after a dive it lands on the ledge lip for **2 s** before lifting. | Shriek, then the hawk's shadow sweeps across the rock (**1.2 s**) before the dive. **Brace** (one input; click the rock for click-to-move) negates the knock-back. | Rhythm on the traverse: move between dives, brace on the shriek. | Never fatal. An un-braced dive knocks the player back one stance (no fall). Striking a landed hawk twice, or two Ranged hits from the ledge start, drives that hawk off for the visit. Killing is possible (fauna) and not required. |
+| **TSL-E1** | 1 × rutting stag, 2 × fell stag (Fell Stags family) | Rut ground on the direct thread line (area B) | Rutting stag charges in straight lines; stags hold and flank only if the player enters the hollow. Leashed to the hollow (about 30 m). | Rutting stag paws twice and lowers its head (**1.4 s**), then a straight charge; a bellow (**1.0 s**) turns the two stags toward the player. | Plateau danger while reading threads; teaches that the plateau is open and that going round is a choice. | **Optional.** Skirting via the scarred stones avoids it. If fought, ends at 60–75% HP on a late Competent-identity character (bible TD-12); stags reset at the leash (standard leash, not a retreat). |
+| **TSL-E2** | 2 pairs of storm hawks (fauna; bible §10) | Overhang nests above the hawk ledge (area E) | Harassment: one hawk dives at a time on a 6–8 s cycle; after a dive it lands on the ledge lip for **2 s** before lifting. | Shriek, then the hawk's shadow sweeps across the rock (**1.2 s**) before the dive. **Brace** (one input; click the rock for click-to-move) negates the knock-back. | Rhythm on the traverse: move between dives, brace on the shriek. | Never fatal. An un-braced dive knocks the player back one stance (no fall). A struck hawk fights until defeated at 0 HP (CDR-1); a defeated hawk does not return this visit. Fighting is optional and never required. |
 | **TSL-H1** | Wind windows | Plateau, ramp, ledge, summit block | Environmental. | Flute whistle rises a fifth (**1.5 s**), gust (**3 s**). | Pace the exposed moves. | In the open during a gust: pushed back to the last stance; never off the crag. |
 | **TSL-H2** | Stormlight (lightning near the block) | Summit block only, during the storm window | Environmental. | A rising buzz from iron (the player's spikes, the staff head) with a faint blue flicker on gear, **2.5 s** before a strike within the block volume. | Teaches "when the iron sings, get low". | In the lee notch: safe. Outside it: knockdown and moderate damage, clamped so it cannot drop the player below 10% HP. Never fatal. |
 
@@ -187,7 +187,7 @@ Every storm since first snow, Iven Ridgeborne has watched colour show on a crag 
 | `S00_offer` | Ask Iven about the colour on the crag. | Enter shelter volume → TSL-D1 end | Yes |
 | `S01_glimpse` | Watch the crag in a storm. | `keep_stormwatch` reaches `tsl.flash3` | Yes |
 | `S02_threads` | Follow what the wind is carrying. | 3 thread inspects (any order; the third reveals the crag foot) | Yes |
-| `S02b_rut` | (Optional) Deal with the rut. | TSL-E1 disengaged or defeated | No |
+| `S02b_rut` | (Optional) Deal with the rut. | TSL-E1 defeated, or skirted (stags reset at the leash) | No |
 | `S03_crag_foot` | Find a way up the crag. | 2 inspects (pegs, scratches) + TSL-D2 end | Yes |
 | `S04_pitch_one` | Climb to the hawk ledge. | Enter ledge-start volume (either route) | Yes |
 | `S05_traverse` | Cross the hawk ledge. | Enter ledge-end volume | Yes |
@@ -226,7 +226,7 @@ Neither option is wrong. The banner comes down either way.
 | **Iven's stormwatch bench** | Place | A rest spot; sitting there in any storm window shows the crag (with or without the blue point, per `TSL_STAFF_*`). |
 | **Warden's spike straps** | Tool | Functional name; no stat promised (item pass to derive). Iven: "Yours are bent. Have mine." |
 | Small Warden payment | Small payment | Sized by economy tuning. |
-| Skill XP | Action only | Melee (Ranged if S01 allows) from E1/E2 if used. No lump quest XP. |
+| Skill XP | Action only | Melee or Ranged from E1/E2 if used. No lump quest XP. |
 
 ### 1.12 Failure, recovery, persistence, co-op
 
@@ -377,7 +377,7 @@ TSL-D6.05 HADRIK: (from the doorway) "Then it isn't anybody's yet. Bring it in o
 
 ### 2.1 In one paragraph
 
-The banner from Splitpine Crag lies on the floor of the Assembly Hall and two clans are standing over it. Brynjar Korr points to the red field and the broken horn: Blood-Oath made it, Blood-Oath carried it. Elira Hearthward points to the hem: that is Hearthguard flower-stitch, and you do not hem a banner you never carried. Hadrik will not decide. He puts the banner in Old Torvek's keeping, because a colour with no living bearer is settled "the old way", and Torvek hands it to the player: "Read it." The stitching tells a third story. The repairs are in three hands: Blood-Oath horn-stitch in red, Hearthguard flower-stitch in blue, and a plain running stitch in undyed goat-hair, knotted every hand-span with a double knot that neither clan ties. The hoist cord carries a knot for every hand that carried the colour, and the plain knots are there too. At the Abandoned Ridge Camp, past a wolf pack denned in the old palisade, the company's bunk-board is carved with the same three knot signs, and a banked ash pit gives up its mending roll: red wool, blue wool, goat-hair. A mixed company carried this banner, and clanless hands were part of it. Torvek's old way is to walk a colour home in the wind's teeth, off the ground, from the place its company last slept. The player carries it unfurled along the Old Watchfire Line in a hard wind, the horn towers answering as it passes. In the hall, the knots are counted aloud by kind. Torvek holds the hoist cord up by its end, and the cord, wet from the wind and warming in the hall, turns slowly in his hand as it untwists, so that each knot comes round to face whoever is counting. When Runa Weatherall, placed by Hadrik at the back wall, counts the plain knots quietly, the hall goes still enough to hear her, and on her last number the cord stops turning. The one who walked the colour home lays it down. Where the player lays it sets `TH_BANNER`.
+The banner from Splitpine Crag lies on the floor of the Assembly Hall and two clans are standing over it. Brynjar Korr points to the red field and the broken horn: Blood-Oath made it, Blood-Oath carried it. Elira Hearthward points to the hem: that is Hearthguard flower-stitch, and you do not hem a banner you never carried. Hadrik will not decide. He puts the banner in Old Torvek's keeping, because a colour with no living bearer is settled Torvek's way, and Torvek hands it to the player: "Read it." The stitching tells a third story. The repairs are in three hands: Blood-Oath horn-stitch in red, Hearthguard flower-stitch in blue, and a plain running stitch in undyed goat-hair, knotted every hand-span with a double knot that neither clan ties. The hoist cord carries a knot for every hand that carried the colour, and the plain knots are there too. At the Abandoned Ridge Camp, past a wolf pack denned in the old palisade, the company's bunk-board is carved with the same three knot signs, and a banked ash pit gives up its mending roll: red wool, blue wool, goat-hair. A mixed company carried this banner, and clanless hands were part of it. Torvek's own practice, which other households have lately started to follow, is to walk a colour home in the wind's teeth, off the ground, from the place its company last slept `[APPROVED — CDR 2026-11-03]`. The player carries it unfurled along the Old Watchfire Line in a hard wind, the horn towers answering as it passes. In the hall, the knots are counted aloud by kind. Torvek holds the hoist cord up by its end, and the cord, wet from the wind and warming in the hall, turns slowly in his hand as it untwists, so that each knot comes round to face whoever is counting. When Runa Weatherall, placed by Hadrik at the back wall, counts the plain knots quietly, the hall goes still enough to hear her, and on her last number the cord stops turning. The one who walked the colour home lays it down. Where the player lays it sets `TH_BANNER`.
 
 **What the player should remember:** a quiet clanless voice counting knots, and a whole hall holding still to hear it. **What they might want next:** to stand where Runa stood, in TF-M5.
 
@@ -390,7 +390,7 @@ The banner from Splitpine Crag lies on the floor of the Assembly Hall and two cl
 | Length | 40–50 minutes. |
 | Core verb | **investigate, rite**. Identity: reading stitching as evidence; a camp to search under a wolf pack; carrying a colour as a sail through wind windows. |
 | Combat | ~15%: one required Ridge Wolf pack at the Abandoned Ridge Camp. |
-| Skills | None required. Melee (Ranged if S01 allows) for TWC-E1. |
+| Skills | None required. Melee or Ranged for TWC-E1. |
 | NPCs | Old Torvek, Brynjar Korr, Elira Hearthward, Hadrik Stonewake [CANON anchors]; Runa Weatherall [NEW, bible]; a Blood-Oath bearer (Kol Hask's elder cousin, minor) and a Hearthguard storekeeper (minor) who walk the rite. |
 | Choice | Where the player lays the colour down: `TH_BANNER` = blood-oath / hearthguard / shared. |
 | Unlocks | Banner prop in the chosen hall; Torvek's cairn-house as a lore stop; Runa's later trust line (TF-M5 ambient). |
@@ -406,7 +406,7 @@ The banner from Splitpine Crag lies on the floor of the Assembly Hall and two cl
 |---|---|---|
 | Blood-Oath symbols: broken-horn motifs, red-dyed banners | Dossier §XX [CANON] | The banner's field and appliqué; Brynjar's claim. |
 | Hearthguard symbols: mountain-flower motifs, Crestbridge wool cloaks | Dossier §XX [CANON] | Flower-stitch hem in blue wool; Elira's claim. |
-| Torvek: rarely speaks; ends arguments with a sentence; stones "the old way"; "the wind remembers vows" | Anchors II [CANON] | The rite of walking the colour home; his closing sentence. |
+| Torvek: rarely speaks; ends arguments with a sentence; stones "the old way"; "the wind remembers vows" | Anchors II [CANON] | The rite of walking the colour home (his own local practice, `[APPROVED — CDR 2026-11-03]`); his closing sentence. |
 | Hadrik: not a ruler; chooses where people stand; knows the hall carries some voices; never asks why | Anchors I [CANON] | He places Runa at the back wall; he never says why. |
 | Brynjar: loud, loyal, would die for any child; not in the splinter | Anchors II; Part 4 ledger; bible TD-2 | Lines vary by `TH_BRYNJAR`; no war service assigned. |
 | Elira: rebuilder; argues with Brynjar and defends him | Anchors II [CANON] | Her claim and her defence of him in the "hearthguard" outcome. |
@@ -536,7 +536,7 @@ None is wrong. The proof is the same in all three: the company was mixed and cla
 
 ### 2.14 Cast notes and dialogue
 
-**Old Torvek [CANON anchor].** *Knows:* the old way for a colour with no living bearer (walk it home, count the knots, the walker lays it down) [NEW custom]; how cairns are placed. *Does not know:* who the company were; he makes no wartime claim. *Voice:* almost silent; one sentence ends things. He likes old things and says when he does not like new ones.
+**Old Torvek [CANON anchor].** *Knows:* his own way for a colour with no living bearer (walk it home, count the knots, the walker lays it down): Old Torvek's local tradition, which others are starting to follow, not a Thornfell-wide or ancient custom `[APPROVED — CDR 2026-11-03]`; the knot-per-bearer cord itself stays [NEW], in review; how cairns are placed. *Does not know:* who the company were; he makes no wartime claim. *Voice:* almost silent; one sentence ends things. He likes old things and says when he does not like new ones.
 
 **Brynjar Korr [CANON anchor].** *Knows:* horn-stitch (his clan's mending), the colour's design. *Does not know:* the plain knot; anything about the company. *Voice:* loud, warm under it, interrupts. `[disowned]`: raw, quicker to doubt himself this winter. `[defended]`: pride with the doors shut.
 
@@ -609,7 +609,7 @@ TWC-L-RUNA.04 RUNA: "Gran tied hers like that. Doesn't mean it's hers. Means it'
 
 ```
 TWC-D5 (Torvek at the camp gate, after S04; the colour on its staff)
-TWC-D5.01 TORVEK: "A colour that comes home is walked home. From where they last slept."
+TWC-D5.01 TORVEK: "I walk a colour home. From where they last slept."
 TWC-D5.02 TORVEK: "In the wind. Off the ground. The wind remembers."
   > "And if I can't hold it?"                       → TWC-D5.03
   > "Give it here."                                 → TWC-D5.04
@@ -627,8 +627,8 @@ TWC-D5.04 TORVEK: (hands it over) "Dip it when the faces whistle."
 | TWC-B5.03 | Pass tower 1 | HORN-KEEPER | (Answer: two short) |
 | TWC-B5.04 | Pass tower 2 | HORN-KEEPER | (Answer: two short) |
 | TWC-B5.05 | Pass tower 3 | HORN-KEEPER | (Answer: two short) then: "First time I've answered a colour." |
-| TWC-B5.06 | Between towers 2 and 3 | BLOOD-OATH BEARER | "My gran says this is how they did it. My gran says a lot." |
-| TWC-B5.07 | Same | HEARTHGUARD STOREKEEPER | "Mine too. Maybe they knew each other." |
+| TWC-B5.06 | Between towers 2 and 3 | BLOOD-OATH BEARER | "Torvek walked my uncle's colour like this. Now my gran wants them all walked." |
+| TWC-B5.07 | Same | HEARTHGUARD STOREKEEPER | "Ours too, since the thaw. Asked him how. He said 'walk.'" |
 
 ```
 TWC-D6 (Assembly Hall; Hadrik places people; the count; S06)
@@ -692,11 +692,11 @@ TWC-D8.01 [TH_BANNER=shared] HADRIK: "People stop under it. Then they argue unde
 |---|---|---|---|---|---|---|
 | **Whose colours** | Blood-Oath-made, carried and mended by a late-war company of Blood-Oath, Hearthguard and clanless hands who stood watch by turns. | Blood-Oath's (Brynjar) or Hearthguard's (Elira). | Three stitches; hoist knots; bunk-board; mending roll. | Clanless carriers were hired porters, not part of the company; or Hushfold are deserters' kin. | Every name; the company's fate. | TWC (resolved locally). |
 | **The company's fate** | Withheld. They left the camp in haste and did not come back for kit or colour. | Lost in a storm. | Stacked pots; banked fires; outward-broken gate. | They deserted. | Everything beyond the camp. | None in Thornfell. |
-| **The turning cord** | A wet cord untwisting as it warms. Nobody says so. | "The old way"; the knots wanted to be counted. | Only the behaviour. | The bearers were answering. | Nothing to withhold. | None. |
+| **The turning cord** | A wet cord untwisting as it warms. Nobody says so. | "Torvek's way"; the knots wanted to be counted. | Only the behaviour. | The bearers were answering. | Nothing to withhold. | None. |
 
 ### 2.16 Open decisions and review log
 
-**Open:** (1) The "walk it home" rite and the knot-per-bearer custom are [NEW]; the Director may prefer a different form for Torvek's old way. (2) Knot counts (9 / 7 / 6 = 22) are [NEW] and tunable; they record bearers, not dead. (3) Whether Runa's Hushfold knot in the shared outcome should be read by `TH_HUSHFOLD_VOICE` content (recommend: ambient only).
+**Open:** (1) **Resolved:** the "walk it home" rite is `[APPROVED — CDR 2026-11-03]` as Old Torvek's local tradition (his practice, which others are starting to follow; never "the Marchers have always"). The knot-per-bearer custom stays [NEW], in review. (2) Knot counts (9 / 7 / 6 = 22) are [NEW] and tunable; they record bearers, not dead. (3) Whether Runa's Hushfold knot in the shared outcome should be read by `TH_HUSHFOLD_VOICE` content (recommend: ambient only).
 
 **Review log:** First draft settled the claim by the hall voice (the carrying back wall); cut as a breach of the evidence rule. The knots, board and roll settle it. Independent review: the remaining carrying-voice moment duplicated TMM's hall moment and TF-M5's carrying spot, so it was replaced by the turning cord; Runa's voice is now heard because the hall goes quiet for her. First draft used stone-setting on sound lines for the rite; moved away because TWN uses stone ringing; the rite is now a carried colour in wind windows, distinct from TSL's climb and TWN's carve. TDS05 keeps "whose" withheld for names: the camp is attributed to a mixed company, never to a clan or person. `TH_BANNER` = shared carries no posture weight in bible §9.3; kept as written there. Brynjar's lines vary on `TH_BRYNJAR` at D3, D7 and the shared branch; he is never placed in the war.
 
@@ -839,7 +839,7 @@ For thirty springs, Asa Brede of Hushfold has climbed to Maera Cairnwatch's Name
 |---|---|---|---|
 | **Both roads** — *"Cut what the family says and where the rim names him. Both are honest."* | SIG BREDE / went over the pass / named at Shatterfall | The rim's "lost in the gorge storm" now has a reader who disagrees with it; some clan visitors call it a slight to the rim. Asa does not like seeing Shatterfall on her brother's stone. | The stone stands beside the rim's version the way TF-M3's records were set side by side. Hushfold bark: "Two places for one man. That's more than most of us get." |
 | **The family's words** — *"Cut what Asa's mother said. The rim keeps its own."* | SIG BREDE / went over the pass | The roster line and the rim are not on the stone; the next reader will not know there was a question. | Asa is content. Maera keeps a note of the readings in her own list (not shown). Orm: "Gran sleeps better." |
-| **An open stone** — *"Cut the name. Leave the line under it uncut, until somebody knows."* [NEW practice] | SIG BREDE / (a smooth band left blank) | Asa will never see the line filled. Some find a blank band worse than a wrong word. | The slips stay in the niche and are renewed each spring by the family, as before but on his own stone. Maera: "A stone that waits. We've never had one. We've needed one." |
+| **An open stone** — *"Cut the name. Leave the line under it uncut, until somebody knows."* `[APPROVED — CDR 2026-11-03]` (a newly emerging memorial custom) | SIG BREDE / (a smooth band left blank) | Asa will never see the line filled. Some find a blank band worse than a wrong word. | The slips stay in the niche and are renewed each spring by the family, as before but on his own stone. Maera: "A stone that waits. We've never had one. We've needed one." |
 
 Maera decides; she takes the player's recommendation and says why in her own words. None is wrong.
 
@@ -1042,7 +1042,7 @@ TWN-D7.11 ASA: "Next spring I'll come up and not bring slate. I'll have to bring
 
 ### 3.17 Open decisions and review log
 
-**Open:** (1) The "open stone" is a [NEW] practice; the Director may decline it, leaving two options. (2) No Act II change is needed (independent review: the roster is read exactly as Act II gives it). (3) The Mire end of the case belongs to the Register shared civilian ledger (Review and Authoring Sequence, follow-up item 3).
+**Open:** (1) **Resolved:** the "open stone" is `[APPROVED — CDR 2026-11-03]` as a newly emerging memorial custom; all three options stand. (2) No Act II change is needed (independent review: the roster is read exactly as Act II gives it). (3) The Mire end of the case belongs to the Register shared civilian ledger (Review and Authoring Sequence, follow-up item 3).
 
 **Review log:** First draft let the roster's "up" line prove Sig survived; corrected with the two-Bredes testimony and the phrase's double meaning, so dignity rests on the cut stone and uncertainty stays. First draft carried the roster to the wall; changed to read-in-place (quest-item rule; the roster's custody is TF-M3's outcome). The ringing run says nothing and is answered only by "That's the wind." / "Yes." Maera decides every cut (anchor authority); the player recommends. No casualty count, no hornman, no Mire fact. TWN unlocks after TF-M3, so the roster always exists.
 
@@ -1127,7 +1127,7 @@ Black Glass Hostel was a siege infirmary once; now it is the one roof on the Sto
 
 | Id | Enemies / hazard | Placement | AI role | Telegraph (timings) | Purpose | Solo target |
 |---|---|---|---|---|---|---|
-| **TSN-E1** | 2 × Ridge Wolf runner | Goat pen hurdles, lee side | Harass the pen; turn on the player when approached; break off at 30% HP and flee (winter-thin animals). | Crouch, ears flat (**0.8 s**), then a 3 m lunge. One circles to the player's back while the other faces; a low growl (**1.0 s**) marks the circler's lunge. | Morning-after danger; ordinary winter. | Required. Ends at 75–90% HP on a Competent-identity character. Fleeing counts as done. |
+| **TSN-E1** | 2 × Ridge Wolf runner | Goat pen hurdles, lee side | Harass the pen; turn on the player when approached; fight until defeated at 0 HP (CDR-1). | Crouch, ears flat (**0.8 s**), then a 3 m lunge. One circles to the player's back while the other faces; a low growl (**1.0 s**) marks the circler's lunge. | Morning-after danger; ordinary winter. | Required. Ends at 75–90% HP on a Competent-identity character. |
 | **TSN-H1** | Tunnel slump | The dig-out tunnel | Environmental. | Whistle through the black-glass panel rises a fifth (**1.5 s**), gust (**3 s**). | Pace the dig; teach shoring. | An unshored segment slumps: that segment's progress resets. No damage. |
 
 **Rules.** Respawn point: the hostel hearth. Nothing the wolves drop advances the quest.
@@ -1152,7 +1152,7 @@ Black Glass Hostel was a siege infirmary once; now it is the one roof on the Sto
 | `S00_offer` | Shelter at Black Glass Hostel. | TSN-D1 end + `wait_drift` | Yes |
 | `S01_snowlight` | Look at the door. | Scraped-patch inspect during `tsn.snowlight` → TSN-D2 end | Yes |
 | `S02_dig` | Dig the door out. | 3 × `dig_segment` (+ boards), or TSN-D3 + `wait_hearth` | Yes |
-| `S03_pen` | See to the goats. | TSN-E1 defeated or fled | Yes |
+| `S03_pen` | See to the goats. | TSN-E1 defeated | Yes |
 | `S04_mark` | Cut this year's mark. | `cut_notch` (or Ylva's cut) → TSN-D4 end | Yes |
 | `S05_lamp` | Read the post by lamplight. | `hold_lamp` at the low position + inspect | Yes |
 | `S06_ask` | Ask who M.V. was. | 2 of 3: TSN-D5, TSN-B6.01 talk, TSN-D6 (Halla gives key on D6) | Yes |
@@ -1683,3 +1683,4 @@ TOS-D6.40 [else] OTTAR: "Path's open. Pay's not much. Rope's yours if you want i
 | Boundaries | No Remnant; no Lowmark grain route; no Mire fact; no `[SPLINTER]` names; no failure states; no new quest items; only `TH_BANNER` set among region flags. |
 | Scope | Markdown only; integration needs documented, not implemented. |
 | **Independent review (2026-11-03)** | 7 findings (2 high, 3 medium, 2 low). High: TWN depended on a new Act II roster line ("Brede, up past the Seat") that contradicts Act II (no name survives on the roster) and on a Brede on the TF-M5 rubbing that Act III does not have; reworked to read Act II unchanged (Maera's list "Sig Brede. Held.", S. BREDE under the rime on the second rim cairn, the roster's rotted margin), roster custody aligned to Act II, both requests withdrawn, `TES_NAMESLIP_SEEN` variant added. High: TWC's carrying-voice moment duplicated TMM and TF-M5; replaced with the turning cord. Medium: TWN's ringing row duplicated TWG's tower-to-tower call; replaced with snow held in the new-cut letters. Medium: TWC gave Runa name-address without a tally (bible §5.3 rule 4); fixed. Medium: TSL hawk-drive leaned on Ranged while S01 is open; Melee/brace path made primary. Low: Kaldren dated the step ("older than the cairns"); cut. Low: Ranged mentions gated on S01 file-wide. |
+| **Director rulings reconciliation (2026-11-03)** | Applied `Caelmor_Director_Rulings_Combat_Ranged_Release.md`. CDR-1: binding-limits line no longer says defeated humans yield; TSN-E1 wolves no longer break off at 30% and flee (`S03_pen` completes on defeat only); TSL-E2 hawks no longer "driven off" by two hits (a struck hawk fights to 0 HP; fighting stays optional); TSL-E1 `S02b_rut` reads defeated or skirted (leash reset). CDR-2: four "Ranged if/only if S01 allows" hedges now read Melee or Ranged. CDR-3: header release wording replaced. Approved items labelled `[APPROVED — CDR 2026-11-03]`: TWN open stone (newly emerging memorial custom; open decision 1 resolved); TWC walking a colour home as Old Torvek's local tradition (paragraph, canon-grounding row, cast note, open decision 1; TWC-D5.01 and barks TWC-B5.06/.07 rewritten so the walk is his practice others are starting to follow, not an old custom). Knot-per-bearer custom stays in review. Step ids, flags, beats and choices unchanged. |

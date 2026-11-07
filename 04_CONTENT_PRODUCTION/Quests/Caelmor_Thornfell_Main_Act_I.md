@@ -1,6 +1,6 @@
 # Thornfell Main Questline, Act I: The Closing of Passwatch, The Iron Winter Stores
 
-**Status:** Authored production content for Creative Director milestone review. This package implements Thornfell main milestones TF-M1 and TF-M2 (bible §6, §6.1), which carry Act I from the player's arrival at Passwatch to the Act I turn. It follows the Lowmark act-package format (`Caelmor_Lowmark_Main_Act_I.md`). Everything marked **[NEW]** is authored and not canon until the Director promotes it. Everything marked **[PROPOSAL — DIRECTOR]** rests on an open bible §3 decision (TD-1 to TD-14). **[CANON]** items come from Phase 1 or the reconciled `LORE/` files. **[APPROVED — id]** items rest on an architecture ruling. No schema, production JSON or C# is created here. Thornfell is v1.5 direction: nothing here authorizes release scope.
+**Status:** Authored production content for Creative Director milestone review. This package implements Thornfell main milestones TF-M1 and TF-M2 (bible §6, §6.1), which carry Act I from the player's arrival at Passwatch to the Act I turn. It follows the Lowmark act-package format (`Caelmor_Lowmark_Main_Act_I.md`). Everything marked **[NEW]** is authored and not canon until the Director promotes it. Everything marked **[PROPOSAL — DIRECTOR]** rests on an open bible §3 decision (TD-1 to TD-14). **[CANON]** items come from Phase 1 or the reconciled `LORE/` files. **[APPROVED — id]** items rest on an architecture ruling. No schema, production JSON or C# is created here. This is Thornfell milestone content: an internal production milestone, not a release boundary (CDR-3); nothing here authorizes release scope. Combat follows the Director rulings of 2026-11-03 (`Caelmor_Director_Rulings_Combat_Ranged_Release.md`): every enemy is defeated at 0 HP (CDR-1), and every fight accepts melee or ranged (CDR-2).
 
 **Controlling document:** `04_CONTENT_PRODUCTION/Quests/Caelmor_Thornfell_Narrative_Production_Bible.md`. Its §6 table and §6.1 briefs are binding and are implemented as written. Where this package adds detail, it is marked [NEW] and stays inside the bible's cast, places, flags and rulings.
 
@@ -56,7 +56,7 @@ Act I invents no other `TH_` flag. Quest-local flags use `TPW_` and `TIW_`. Thos
 | Quest | Primary verb | Distinct from |
 |---|---|---|
 | TF-M1 | **repair and escort** against the clock; learn calls | Open air, weather-driven, the only bridge build and the only escort in Act I. Combat is bandits and wolves. No dungeon. |
-| TF-M2 | **track and delve** (cliff dungeon); read inventory; fight to surrender | Interior, vertical, four galleries; the only dungeon and the only human assault in Act I. Investigation is in objects, not in a chase. |
+| TF-M2 | **track and delve** (cliff dungeon); read inventory; fight through a clerk's crews | Interior, vertical, four galleries; the only dungeon and the only human assault in Act I. Investigation is in objects, not in a chase. |
 
 No two quests share a set piece. Combat changes family across the act: pass bandits and ridge wolves (TF-M1) → Iron Winter crews and Ridge Crows (TF-M2). Sound changes job across the act: in TF-M1 the calls are *taught* and used to move people; in TF-M2 the player turns the splinter's own calls against it and meets the first sound that should not be there (the trial frame).
 
@@ -217,7 +217,7 @@ The player walks out through the gate. **Close I** sounds behind them from the h
 Shouting from the switchbacks. A stranded peddler pair are being robbed at the second bend (`TPW-B3`). Two routes, both open, neither stealth:
 - **The goat track (agility route):** a ledge above the corners with a frayed hand-rope. One **agility trigger** (a step across a gap in the ledge) has a walkable fallback (a longer scramble round the back of a boulder, 15 s). The track comes down **behind and above the slingers**, so the player engages them before they can volley (`TPW_GOAT_TRACK`).
 - **The road:** straight down the switchbacks. The slingers get the first volley; the cutters meet the player at the bend.
-The fight (**TPW-E1**) ends at yield. The **Corner-Boss**, a deserter in an old Warden's coat with the badge cut off, yields last (`TPW-B3.6`). The peddlers (role names) thank the player in two lines and say they'll wait out the storm at Passwatch "if the gate'll have us" (`TPW-B3.7`). Optional: right the handcart (one interaction) for a small coin.
+The fight (**TPW-E1**) ends when every bandit is defeated. The **Corner-Boss** fights to 0 HP like the rest. **Optional inspect (T-2):** his cut-off Warden's badge, nailed to the overturned cart for luck (`TPW-B3.6`), says what he was: a deserter in an old Warden's coat. The peddlers (role names) thank the player in two lines and say they'll wait out the storm at Passwatch "if the gate'll have us" (`TPW-B3.7`). Optional: right the handcart (one interaction) for a small coin.
 **Verbs:** traverse, fight.
 
 ### Beat 4 — The Narrows (`S04_narrows`)
@@ -292,14 +292,15 @@ Tuned for **Competent identity** (bible TD-12; Milestone 2 equipment). Exact lev
 
 | Id | Enemies (§10) | Placement | AI role | Telegraph | Purpose | Solo target |
 |---|---|---|---|---|---|---|
-| **TPW-E1** | 2 × pass bandit cutter, 2 × slinger, 1 × **Corner-Boss** (elite) | The Blind Corners: slingers on the second bend's ledges, cutters and Corner-Boss at the overturned cart | Slingers: zone the road. Cutters: rush. Corner-Boss: anchors the bend, steps in when a cutter yields | **Slinger:** whirls the sling overhead (~1.2 s, a rising whirr), then a stone along a straight line (sidestep). **Cutter:** drops the shoulder (~0.9 s), then a lunge. **Corner-Boss:** raises his cut-badge coat's hood and plants his feet (~1.4 s), then a two-hit heavy chop; second hit is the bigger one. | First Thornfell fight; terrain matters (the goat track gives the player the slingers first) | 90–120 s; 50–70% HP remaining. Goat-track route is ~20% easier |
+| **TPW-E1** | 2 × pass bandit cutter, 2 × slinger, 1 × **Corner-Boss** (elite) | The Blind Corners: slingers on the second bend's ledges, cutters and Corner-Boss at the overturned cart | Slingers: zone the road. Cutters: rush. Corner-Boss: anchors the bend, steps in when a cutter is defeated | **Slinger:** whirls the sling overhead (~1.2 s, a rising whirr), then a stone along a straight line (sidestep). **Cutter:** drops the shoulder (~0.9 s), then a lunge. **Corner-Boss:** raises his cut-badge coat's hood and plants his feet (~1.4 s), then a two-hit heavy chop; second hit is the bigger one. | First Thornfell fight; terrain matters (the goat track gives the player the slingers first) | 90–120 s; 50–70% HP remaining. Goat-track route is ~20% easier |
 | **TPW-E2** | 2 × ridge wolf runner | Stormwood slope, at a carcass | Runners circle and bite from the flank | **Runner:** flattens its ears and hunches (~0.8 s), then a lunge-bite | Short, readable; introduces wolves before the escort | 30–45 s |
 | **TPW-E3** | 3 × ridge wolf runner, 1 × howler (+2 runners if the howl completes) | The Blind Corners, during the escort; they come down the goat track | Runners: go for the beasts, then the player when struck. Howler: hangs back on the goat track | **Howler:** lifts its head and draws breath (~1.5 s, visible ribcage swell), then a long howl that calls two runners. Interruptible by any hit or by the player's horn (any call blown at it makes it flinch: a small, cheerful use of the calls). | Escort pressure without escort failure | 60–90 s; beasts cannot die |
 
 **Hazards (not encounters):** gusts (whistle a fifth up, ~2 breaths, push and light damage in the open); the shedding face (smeared echo or dust spill, ~2 s, then stones: moderate damage and knockback). Both are always readable and never fatal on their own at Competent identity.
 
 **Rules**
-- **Defeated humans yield** (TD-7). Bandits kneel and are tied by the peddlers (prop). The Corner-Boss is marched to Passwatch by Vessa's last free warden after the quest (barks only).
+- **Defeat at 0 HP** (CDR-1; supersedes TD-7). Bandits and the Corner-Boss fight until defeated and take the ordinary defeat presentation. Wolves fight to 0 HP. No ally comments on mercy.
+- **Melee or ranged** (CDR-2): every fight accepts both. The ledge slingers can be answered with arrows or reached by the goat track; ranged is never required.
 - **Combat never reveals evidence.** No bandit carries anything about the stores.
 - **Death:** respawn at the Passwatch gate before the Blind Corners; at Aud's anvil cart after. Completed encounters stay defeated. The Close count never advances on death. Built bridge stages persist.
 - **Co-op:** bandits and wolves shared. Each partner's Close count, bridge stage and load choice are their own; presentation follows each player's state. Fallback: the host's Close sky and bridge stage; partners still complete their own steps and choice.
@@ -330,7 +331,7 @@ Tuned for **Competent identity** (bible TD-12; Milestone 2 equipment). Exact lev
 | `S00_arrive` | Speak to the warden at the Passwatch gate. | Enter gate volume + `TPW-D1` end | Yes | Quest Active on entering the gate volume. `TPW_WHINSTONE_ASKED` optional (Lowmark MQ4 Completed) |
 | `S01_calls` | Learn the calls at the horn post. | Six lessons complete (`TPW-D2`) | Yes | Sets `TH_CALLS`. Ressa's refusal (`TPW-B1.1`) plays during lesson 4 or 5 on a volume, always. Practice horn granted (temporary; reward tool on completion) |
 | `S02_yard` | Go out through the gate. | Enter store-yard pass-by volume, then exit-gate volume | Yes | Pass-by volume is on the only path from the horn post to the gate. Sack inspect optional (`TPW_SACKS_SEEN`). **Close I** on exit |
-| `S03_corners` | Get through the Blind Corners. | TPW-E1 all yielded | Yes | `TPW_GOAT_TRACK` if the goat-track volume was entered before E1 |
+| `S03_corners` | Get through the Blind Corners. | TPW-E1 all defeated | Yes | `TPW_GOAT_TRACK` if the goat-track volume was entered before E1 |
 | `S04_narrows` | Find the bridgewright at the Narrows. | Enter W4 (**Close II**) + `TPW-D3` lessons end (wind window seen; echo count blown twice) | Yes | |
 | `S05_stakes` | Get three stormwood stakes. | TPW-E2 defeated + (3 stakes delivered **or** crew chosen) | Yes | Crew: `TPW_CREW_STAKES`; a Close sounds when the crew finishes (~60 s after choice) |
 | `S06_fittings` | Make four bridge fittings. | 4 smithing interactions **or** crew chosen | Yes | Crew: `TPW_CREW_FITTINGS`; a Close sounds. Either order with S05 |
@@ -413,7 +414,7 @@ Documented dependencies for a later Systems Engineer. Nothing here is implemente
 | **Per-player gate state** | Systems | The Passwatch gate shut for players between `S11` and the epilogue's storm break; open otherwise. Fallback: a wicket door that wardens open for players on other steps. |
 | **Keep-watch interaction** (epilogue) | Systems | Lowmark convention. Two steps; per-player sky. |
 | Creatures | Schema / Gameplay | Pass bandit cutter, slinger, Corner-Boss; ridge wolf runner, howler. |
-| Yield presentation | Gameplay / animation | Defeated bandits kneel and are tied (prop). |
+| Cut-badge inspect | Art / Systems | The Corner-Boss's cut badge on the overturned cart (inspect prop, `TPW-B3.6`). Ordinary defeat presentation for all bandits (no yield state, no tied props). |
 | Reward tool | Item pass | "Hornbearer's practice horn": the call wheel's carrier. |
 
 ## A13. Mystery ledger entries
@@ -450,6 +451,7 @@ Documented dependencies for a later Systems Engineer. Nothing here is implemente
 | Agility. | Goat-track gap and traveller basket each have walkable fallbacks. |
 | Address. | Vessa, Aud and Dorn say "walker". No name, title or origin. |
 | **Independent review (2026-11-03)**, TF-M1: 2 findings (1 medium, 1 low). | Fenmere verified as Lowmark canon; sack stencil changed to the established RELIEF — FENMERE wording (open decision 3 closed). Practice horn made unconditional (the player always keeps it) so TF-M5 can rely on it. |
+| **Director rulings reconciliation (2026-11-03)**, TF-M1: CDR-1, CDR-2, CDR-3. | TPW-E1 bandits and the Corner-Boss fight to 0 HP; yield, kneel and tied-prop rule removed; Corner-Boss march-off barks removed. Deserter detail re-sourced as an optional cut-badge inspect on the overturned cart (T-2, `TPW-B3.6`). `S03_corners` completes on defeat. Melee-or-ranged rule added (slingers). Header release wording reconciled. Yield-presentation integration need replaced. |
 
 ---
 ---
@@ -458,7 +460,7 @@ Documented dependencies for a later Systems Engineer. Nothing here is implemente
 
 ## B1. The quest in one paragraph
 
-The storm has broken and the Hearthguard storekeepers at Stonewake's ridge-market are counting winter allotments that will not stretch. **Elira Hearthward** tells the player why she thinks so: somebody is buying up grain and iron at two over the board and paying with chits that nobody can cash in Stonewake. The player reads the market's price board, talks a haulier into showing a chit stamped **"W."**, and finds the tarp in the Passwatch store-yard folded and the sacks gone, with sledge-runner marks leading out of the gate and up the **Whinstone track**. On the climb, a haul crew's voices ahead of them vanish in the middle of a word as they pass through a gully where the player's own footsteps make no sound and the dust falls straight down. Above stands the **Muster Hut**, where a splinter crew drills clanless hires with spears and a horn, under an unsigned broadsheet: *"When the forges eat the grain, the passes go dark."* The player fights through or takes the cliff ledge around. The **Whinstone Store**, a wartime store-house cut into the cliff, has its front gate barred from inside, so the player climbs the **old hoist shaft** and can wind its cage up behind them. Inside are four galleries: grain (including sacks with the lowland relief stencil), iron (new spearheads; Ridge Crows nesting in the vents), horn plates packed in grit from Shatterfall (with tuning sketches that name the Summit's great hall), and the counting room. There the store-factor **Bersi Coldbrook**, brave about paperwork and terrified of the drop outside his window, calls his crews off and yields. His **ledger** shows receipts on the Whinstone account, pay chits to Shatterfall miners for plates by the crate, a struck-through children's ration for Nettlehook, and one line: *"Relief grain, sixty-eight measures. Received."* He calls the reserve **the Iron Winter**, "for when Emberholt comes for the passes", and he will not say how the grain came. In the last bay, the player touches a plate on a trial frame and the whole rock hums and every crow on the cliff lifts at once. Then the player decides how **Brynjar Korr** learns, privately at the store or in public before Hadrik, and what happens to the stores. The quest ends with Elira at the market in the first snow.
+The storm has broken and the Hearthguard storekeepers at Stonewake's ridge-market are counting winter allotments that will not stretch. **Elira Hearthward** tells the player why she thinks so: somebody is buying up grain and iron at two over the board and paying with chits that nobody can cash in Stonewake. The player reads the market's price board, talks a haulier into showing a chit stamped **"W."**, and finds the tarp in the Passwatch store-yard folded and the sacks gone, with sledge-runner marks leading out of the gate and up the **Whinstone track**. On the climb, a haul crew's voices ahead of them vanish in the middle of a word as they pass through a gully where the player's own footsteps make no sound and the dust falls straight down. Above stands the **Muster Hut**, where a splinter crew drills clanless hires with spears and a horn, under an unsigned broadsheet: *"When the forges eat the grain, the passes go dark."* The player fights through or takes the cliff ledge around. The **Whinstone Store**, a wartime store-house cut into the cliff, has its front gate barred from inside, so the player climbs the **old hoist shaft** and can wind its cage up behind them. Inside are four galleries: grain (including sacks with the lowland relief stencil), iron (new spearheads; Ridge Crows nesting in the vents), horn plates packed in grit from Shatterfall (with tuning sketches that name the Summit's great hall), and the counting room. There the store-factor **Bersi Coldbrook**, brave about paperwork and terrified of the drop outside his window, gives up when his last crewman falls. His **ledger** shows receipts on the Whinstone account, pay chits to Shatterfall miners for plates by the crate, a struck-through children's ration for Nettlehook, and one line: *"Relief grain, sixty-eight measures. Received."* He calls the reserve **the Iron Winter**, "for when Emberholt comes for the passes", and he will not say how the grain came. In the last bay, the player touches a plate on a trial frame and the whole rock hums and every crow on the cliff lifts at once. Then the player decides how **Brynjar Korr** learns, privately at the store or in public before Hadrik, and what happens to the stores. The quest ends with Elira at the market in the first snow.
 
 **What the player should remember:** the crows lifting off the cliff, and the struck line on the ledger. **What the player should want next:** whose countersign is missing, and what the plates are being tuned for.
 
@@ -468,7 +470,7 @@ The storm has broken and the Hearthguard storekeepers at Stonewake's ridge-marke
 |---|---|
 | **A. A market investigation that ends in a report.** | Rejected. It is the administrative pattern Phase 1.5 warns against. The bible requires a cliff dungeon. |
 | **B. A stealth raid on the store.** | Rejected. No stealth system (Phase 1.3). The hut is a route choice, not a sneak. |
-| **C. Three small leads → tracked climb with a null-point → hut route choice → hoist-shaft entry → four galleries that read as an inventory → surrender and testimony → the trial-frame hum → how Brynjar learns → what happens to the stores** (selected; the bible brief). | **Selected.** The investigation is done with the player's feet and eyes. The dungeon *is* the evidence: each gallery is a line in the ledger before the player reads the ledger. |
+| **C. Three small leads → tracked climb with a null-point → hut route choice → hoist-shaft entry → four galleries that read as an inventory → the clerk gives up and testifies → the trial-frame hum → how Brynjar learns → what happens to the stores** (selected; the bible brief). | **Selected.** The investigation is done with the player's feet and eyes. The dungeon *is* the evidence: each gallery is a line in the ledger before the player reads the ledger. |
 
 ## B3. Canon grounding
 
@@ -589,7 +591,7 @@ Through the Blind Corners, over the Narrows (repaired), past Three Calls, to the
 **Objective:** *Get past the Muster Hut.*
 From the hut shoulder (K4) the player sees the drill: a **hornman** blows Gather, a crew boss counts, six **clanless hires** run at a straw target in a ragged line and mostly miss (`TIW-B4`). The **broadsheet** is on the hut door (H2) and its copy on the ledge rail (H3): either route passes one (required pass-by volume; inspect optional, `TIW_BROADSHEET_READ`). Its text: *"When the forges eat the grain, the passes go dark."* It is unsigned and explains nothing.
 Two routes (the player chooses by walking; not stealth):
-- **Through the yard** (`TIW_HUT_ROUTE = yard`): **TIW-E1**. When the fight starts, the hires drop their spears and run downhill (`TIW-B4.5`: "We're hired, not sworn!"). The crew fight and yield. The hornman's **Gather** calls the crew boss's buff; **the player can blow Rest within ~3 s of a Gather to cancel it** (Dorn: "Rest ends any call"). The crew are startled (`TIW-B4.7`: "Who blew Rest?").
+- **Through the yard** (`TIW_HUT_ROUTE = yard`): **TIW-E1**. When the fight starts, the hires drop their spears and run downhill (`TIW-B4.5`: "We're hired, not sworn!"). The crew fight until defeated. The hornman's **Gather** calls the crew boss's buff; **the player can blow Rest within ~3 s of a Gather to cancel it** (Dorn: "Rest ends any call"). The crew are startled (`TIW-B4.7`: "Who blew Rest?").
 - **The cliff ledge** (`= ledge`): the wartime ledge (K5) around and above the hut. Wind windows on fluted faces (shelter at painted bars: someone kept these painted) and a **Ridge Crow flock** (TIW-E1b) that mobs from the cracks. One **agility trigger** (a step round a broken rail section) with a walkable fallback (an inside path through a cleft, 10 s longer). The ledge comes down onto the track above the hut. The drill goes on below, unaware.
 After the hut, the track's last switchback ends at the store's gate ledge.
 **Verbs:** watch, read, fight or climb.
@@ -603,7 +605,7 @@ After the hut, the track's last switchback ends at the store's gate ledge.
 
 ### Beat 6 — The Grain Gallery (`S06_grain`)
 **Objective:** *Search the store.*
-Two guards are on a porridge break at the bench (**TIW-E2**); the player has the first move. After they yield:
+Two guards are on a porridge break at the bench (**TIW-E2**); the player has the first move. After they are defeated:
 - **Required inspect: the relief sacks** (`TIW_SACKS_INSPECTED`): the lowland relief stencil, tally-notched tags. With `lowmark.main.02_short_measure` Completed: the Crestbridge notches. With `TPW_SACKS_SEEN`: "The same sacks as the Passwatch yard." Nothing says how they came.
 - Optional: **the Passwatch tarp**, folded chalk side in (*W. acct.*); **the highstead sacks** with clan marks bought at two over; **count the bays** ("Nine bays. Eight full. One being filled.").
 **Verbs:** fight, inspect, count.
@@ -627,7 +629,7 @@ Crates of horn plates in straw and grit. **Required inspects:**
 
 ### Beat 9 — The Counting Room (`S09_counting`)
 **Objective:** *Confront whoever keeps this store.*
-**Bersi Coldbrook** `[SPLINTER]` is at the high desk with the ledger in both arms (`TIW-B9`). His crews (**TIW-E5**) come at the player. Bersi stays as far from the loophole as he can. **The fight stops at surrender:** when the first crewman yields, or after ~60 s, or if the fight moves within two paces of the loophole near him, Bersi shouts the crews down ("Down! Put them down! It's a ledger, not a wall!"), and every remaining crewman yields. Bersi puts the ledger on the desk and sits on the floor away from the window.
+**Bersi Coldbrook** `[SPLINTER]` is at the high desk with the ledger in both arms (`TIW-B9`). His crews (**TIW-E5**) come at the player and fight until defeated. Bersi stays as far from the loophole as he can. **When the last crewman is defeated, Bersi gives up** (scripted, SX-N1; he never fights): "Enough! Enough. It's a ledger, not a wall!" (`TIW-B9.3`). He puts the ledger on the desk and sits on the floor away from the window.
 **Required:**
 - **The store ledger** (`TIW_store_ledger`, quest item): picked up from the desk (it is not a combat drop). Its full text is in the dialogue file. Reading it is optional at this point and always available from the item.
 - **The trial frame** (G8): *Touch a plate.* §B8.2: the rock hums and every crow on the cliff lifts at once. Sets `TIW_FRAME_TOUCHED`.
@@ -635,14 +637,14 @@ Crates of horn plates in straw and grit. **Required inspects:**
 
 ### Beat 10 — The Iron Winter (`S10_bersi`)
 **Objective:** *Question the store-factor.*
-Bersi talks (`TIW-D6`), because he is a clerk and the ledger is already in the player's hands. **Testimony, after he yields:**
+Bersi talks (`TIW-D6`), because he is a clerk and the ledger is already in the player's hands. **Testimony, after he gives up (T-3: he is a non-combatant witness):**
 - The reserve is **the Iron Winter**: "what we're storing for". It is "for when Emberholt comes for the passes".
 - He buys on **standing orders**. They come "carried by hand" with a **countersign** line, and he has never seen the line signed. He buys anyway: "An empty line is still a line." **He does not say whose orders they are.** Purchase authority stays withheld (R05).
 - The grain came "**by the usual hands**". He will not say more. It is not courage; it is that he never asked.
 - The plates are paid by chit to "G. Carrick's men, Shatterfall" (the ledger shows it). He knows nothing about horns: "I count them. I don't blow them."
 - **Optional, `lowmark.main.04_night_flush` Completed:** the player can say they have seen a bill for sixty-eight measures on the Whinstone account. Bersi: "Then you've seen more paper than me." (`TIW_LOWMARK_RECOGNISED`). The ledger's own recognition line plays on reading (§B8.3).
 - He asks whether the player will throw him off the cliff. The answer is no; he asks twice.
-Bersi and his crew stay tied in the counting room. "I'm not climbing down that shaft. I'll be here."
+Bersi stays in the counting room. "I'm not climbing down that shaft. I'll be here."
 **Verbs:** question.
 
 ### Beat 11 — How Brynjar Learns (`S11_brynjar`)
@@ -671,7 +673,7 @@ The quest completes at `TIW-D9` end. Act I is over.
 
 ## B7. Encounters
 
-Tuned for **Competent identity** (TD-12). Iron Winter crews are the splinter's fighters; they are people, and they yield (TD-7).
+Tuned for **Competent identity** (TD-12). Iron Winter crews are the splinter's fighters; they fight until defeated at 0 HP (CDR-1; supersedes TD-7). Every fight accepts melee or ranged (CDR-2): crow divers and the hornman hanging back can be answered with arrows; ranged is never required.
 
 | Id | Enemies (§10) | Placement | AI role | Telegraph | Purpose | Solo target |
 |---|---|---|---|---|---|---|
@@ -680,14 +682,14 @@ Tuned for **Competent identity** (TD-12). Iron Winter crews are the splinter's f
 | **TIW-E2** | 2 × spear (on break) | Grain gallery bench | Guards; slow to rise | As E1; **on break**: they take ~1.5 s to stand, giving the player the first move | Pacing; gentle dungeon opener | 30–50 s |
 | **TIW-E3** | Ridge Crow **flock** ×2, **diver** ×2 | Iron gallery, under the three vent shafts | Flocks: mob under vents. Divers: drop from shaft mouths | **Diver:** a shriek and a shadow on the floor (~1.2 s), then a straight drop strike. **Vent draught:** whistle up a fifth (~2 breaths), then ~3 s when crows cannot dive and scatter. | Environment timing; the vents as a wind window | 45–75 s if fought; ~20 s if crossed on draughts |
 | **TIW-E4** | 1 × spear, 1 × hornman | Plate gallery, at the counting-room passage | As E1. Hornman's Gather calls counting-room crew B here unless cancelled | As E1 | The sound puzzle: Rest cancels Gather | 45–70 s (more if crew B joins) |
-| **TIW-E5** | Crew A: 1 × spear, 1 × hornman. Crew B: 2 × spear (if not drawn out in E4). **Bersi** (non-combatant) | Counting room | Crews defend the desk; Bersi stays away from the loophole | As E1. **Surrender:** first yield, or ~60 s, or fight near Bersi at the loophole → Bersi calls all crews down | Climax that ends in a clerk's surrender, not a kill | 60–90 s |
+| **TIW-E5** | Crew A: 1 × spear, 1 × hornman. Crew B: 2 × spear (if not drawn out in E4). **Bersi** (non-combatant) | Counting room | Crews defend the desk; Bersi stays away from the loophole | As E1. Crews fight to 0 HP. **When the last crewman is defeated → Bersi gives up** (quest script, SX-N1) | Climax that ends with a clerk giving up the ledger | 60–90 s |
 
 **Rules**
-- **Combat never reveals evidence.** The ledger is picked up from the desk; the sacks, spearheads, plates and sketches are inspected in place; the Iron Winter, the standing orders and "the usual hands" are Bersi's testimony after he yields.
-- **Defeated humans yield** (TD-7). Crews sit and are tied (prop). The hires flee and are not enemies.
+- **Combat never reveals evidence.** The ledger is picked up from the desk; the sacks, spearheads, plates and sketches are inspected in place; the Iron Winter, the standing orders and "the usual hands" are Bersi's testimony after he gives up.
+- **Defeat at 0 HP** (CDR-1). Crews take the ordinary defeat presentation; no yield state, no tied props. The hires are non-combatants who run at the first blow (a scripted reaction to the fight starting, not a health state) and are never enemies.
 - **Bersi is never attacked.** He is a non-combatant actor. Player attacks on him are not available (no target).
 - **Death:** respawn at the Three Calls Shelter ledge before the hut; at the hoist foot after `S05` (with the cage, if wound, ready). Defeated groups stay defeated. Required inspects and the ledger persist.
-- **Co-op:** crews and crows shared. Inspects, the ledger and the choices are per player. Each partner picks up their own ledger (per-player prop on the desk). Fallback: the first to pick it up triggers Bersi's surrender for both; the other partner still gets their own ledger item from the desk.
+- **Co-op:** crews and crows shared. Inspects, the ledger and the choices are per player. Each partner picks up their own ledger (per-player prop on the desk). Bersi's give-up is shared (it plays when the last crewman is defeated); each partner still gets their own ledger item from the desk.
 
 ## B8. The discovery moments: presentation specs
 
@@ -714,7 +716,7 @@ A null-point, shown before it is named (TF-M4 teaches it; TDS01 is the side disc
 | ~2 s | **The crows** | Through the last bay's loophole, **every crow on the cliff lifts at once**: hundreds, silently for half a second, then a roar of wings. The flock wheels out over the pass and does not come back for the rest of the scene. The iron gallery's vents go quiet too. |
 | 2–4 s | **Hold** | The hum holds. The other plates on the frame shiver on their cords without being touched. |
 | ~4 s | **Stop** | The player's hand damps the plate (automatic). The hum stops when the plate stops. Dust falls. Flames straighten. |
-| After | **Bersi** | (yielded, on the floor) "Don't. He says it carries." `[SPLINTER]` (`TIW-B9.6`). He means Eyvind's word, not a meaning he knows. |
+| After | **Bersi** | (given up, on the floor) "Don't. He says it carries." `[SPLINTER]` (`TIW-B9.6`). He means Eyvind's word, not a meaning he knows. |
 | After | **Inspect the frame** | *"Five plates on gut cord. A felt mallet. Chalk on the beam: three short strokes and a word, 'hums'."* |
 | Never | **Explanation** | Nobody says what it is. Brynjar, if brought (private route), touches nothing on the frame and says "Leave it." It is R07's first seed: the Summit node is not here; this is a plate in a frame, and the cliff answered. |
 
@@ -737,13 +739,13 @@ A null-point, shown before it is named (TF-M4 teaches it; TDS01 is the side disc
 | `S01_market` | Find out who is buying. | `TIW_LEAD_BOARD` + `TIW_LEAD_CHIT` | Yes | Either order |
 | `S02_tarp` | Look at the Passwatch store-yard. | Runner-marks inspect + `TIW-D3` end | Yes | Grain-crack inspect optional |
 | `S03_track` | Follow the sledge marks. | Enter hut-shoulder volume (K4) | Yes | Fork volumes re-pin; the gully event (`whinstone.gully_quiet`) on the crew audio actor; `TIW_GULLY_HEARD` optional inspect |
-| `S04_hut` | Get past the Muster Hut. | (TIW-E1 all yielded) **or** enter ledge-end volume | Yes | Broadsheet pass-by volume on both routes (required); `TIW_HUT_ROUTE`; `TIW_BROADSHEET_READ` optional |
+| `S04_hut` | Get past the Muster Hut. | (TIW-E1 all defeated) **or** enter ledge-end volume | Yes | Broadsheet pass-by volume on both routes (required); `TIW_HUT_ROUTE`; `TIW_BROADSHEET_READ` optional |
 | `S05_shaft` | Find a way into the store. | Front-gate inspect + enter winding-head volume (G3) | Yes | Climb; wind windows in the shaft |
 | `S05b_cage` | (optional) Wind the cage up. | 3 × `wind_cage` segments | No | Sets `TIW_CAGE_WOUND`; enables the cage shortcut and respawn path |
-| `S06_grain` | Search the store. | TIW-E2 yielded + relief-sack inspect | Yes | `TIW_SACKS_INSPECTED` |
+| `S06_grain` | Search the store. | TIW-E2 defeated + relief-sack inspect | Yes | `TIW_SACKS_INSPECTED` |
 | `S07_iron` | Search the store. | Spearhead inspect + enter plate gallery (via hasp **or** vent crawl) | Yes | `TIW_IRON_SEEN`; `TIW_HASP_SMITHED` if Smithing used |
-| `S08_plates` | Search the store. | Plates inspect + sketches inspect + TIW-E4 yielded | Yes | `TIW_PLATES_SEEN`; `TIW_SKETCHES_SEEN`; `TIW_GATHER_CANCELLED` if Rest blown in time |
-| `S09_counting` | Confront whoever keeps this store. | TIW-E5 surrender + `TIW_store_ledger` acquired + trial-frame touch | Yes | Server event `whinstone.frame_hum` (per player); `TIW_FRAME_TOUCHED` |
+| `S08_plates` | Search the store. | Plates inspect + sketches inspect + TIW-E4 defeated | Yes | `TIW_PLATES_SEEN`; `TIW_SKETCHES_SEEN`; `TIW_GATHER_CANCELLED` if Rest blown in time |
+| `S09_counting` | Confront whoever keeps this store. | TIW-E5 defeated (Bersi gives up) + `TIW_store_ledger` acquired + trial-frame touch | Yes | Server event `whinstone.frame_hum` (per player); `TIW_FRAME_TOUCHED` |
 | `S10_bersi` | Question the store-factor. | `TIW-D6` end | Yes | `TIW_BERSI_TESTIMONY`; `TIW_LOWMARK_RECOGNISED` optional |
 | `S11_brynjar` | Decide who hears about the store first. | **Private:** `TIW-D7` at the terrace + Brynjar at the counting room + `TIW-D7.40` end. **Public:** `TIW-D8` end | Yes | Sets `TIW_ROUTE` and `TH_BRYNJAR` on the first of `TIW-D7.01` or `TIW-D8.01` |
 | `S12_stores` | Decide what happens to the stores. | Option chosen in `TIW-D7.50` (private) or `TIW-D8.30` (public) | Yes | Sets `TH_STORES`. `leverage` only offered in `TIW-D7.50` |
@@ -819,7 +821,7 @@ Every outcome keeps the ledger with the player. None is wrong.
 | Walking away after S09 | Resume hook: Bersi in the counting room (he has not moved; "Still here. Still not climbing."), and the S11 objective at Stonewake. |
 | Brynjar on the private route | He waits at the hoist foot until the player arrives; he cannot be lost. If the player leaves, he goes home and meets them at the hoist foot next time the objective is pursued. |
 | Fail state | None. |
-| Co-op | Shared enemies. Per-player inspects, ledger item, route and stores choice. The store's fill-level prop follows each player's `TH_STORES` (fallback: the host's). Bersi's surrender is shared; testimony is per player. Brynjar escorts only the player whose route is private; a partner on the public route sees him in the hall (per-player NPC placement; fallback: Brynjar appears at both, each partner's dialogue from their own state). |
+| Co-op | Shared enemies. Per-player inspects, ledger item, route and stores choice. The store's fill-level prop follows each player's `TH_STORES` (fallback: the host's). Bersi's give-up is shared; testimony is per player. Brynjar escorts only the player whose route is private; a partner on the public route sees him in the hall (per-player NPC placement; fallback: Brynjar appears at both, each partner's dialogue from their own state). |
 
 ## B12. Integration needs
 
@@ -833,7 +835,7 @@ Documented dependencies for a later Systems Engineer. Nothing here is implemente
 | **Climb interaction** | Systems / animation | Ladder climb with rest ledges and a gust "hang on" state; agility shortcut with fallback. |
 | **Channelled segments with persistence** | Systems | The cage winding (3 segments); the cage as a two-stop lift once wound. |
 | **Ridge Crow flock AI and vent draughts** | Gameplay + audio | Flock and diver behaviour; draught windows on a whistle tell that suspend diving. |
-| **Surrender rule** | Gameplay | Encounter-level trigger (first yield / timer / proximity) that sets every remaining crewman to yield. |
+| **Bersi give-up (on-defeat quest hook)** | Systems | When the last TIW-E5 crewman is defeated, the quest plays Bersi's give-up (`TIW-B9.3`, `TIW-B9.5`). Bersi is a non-targetable NPC throughout. No encounter-level surrender, timer or proximity trigger (removed, CDR-1). |
 | **Scripted presentation** (`whinstone.frame_hum`) | Audio + VFX | §B8.2: hum, lamp lean, dust lift, crow lift (a flock VFX outside the loophole), stop on damp. Per player. |
 | **Per-player NPC placement** | Systems / NPC | Brynjar at the hoist foot (private) or in the hall (public); Bersi present or gone by `TH_STORES`. |
 | **Per-player site state** | Systems / art | The Whinstone Store's fill props (sealed / emptied / filling) and the Muster Hut's drill (leverage only). |
@@ -859,7 +861,7 @@ Documented dependencies for a later Systems Engineer. Nothing here is implemente
 1. **TD-1 (splinter leadership):** Bersi is named in `TIW-B9`, `TIW-D6`, `TIW-D7`, `TIW-D8`, `TIW-B9.6`, the chit's initials and the ledger's hand (all tagged `[SPLINTER]`). Eyvind is named only by the sketches' "E." and Bersi's "he". Ingrith is **never named** in this package; crews and hires say "the Quartermaster" (tagged). Eyvind names her in TF-M4.
 2. **TD-2 (Brynjar's response):** private → disowned; public → defended, as recommended. If replaced, edit `TIW-D7.40`, `TIW-D8.20` and the flag mapping.
 3. **TD-11:** no route stated anywhere; "by the usual hands" is Bersi's only line on it.
-4. **Ledger dating [NEW]:** the ledger counts weeks down to First Smoke ("9 wk to Smoke"), which lets the recognition line say "weeks before that night" without a shared calendar. **Coordinated with Act II (independent review):** storekeepers and factors count weeks to First Smoke; Ridge Wardens and hornwrights count days from the first frost on the Passwatch horn rail (Iven's log, Eyvind's record). Both are local reckonings in use at once; no page converts one into the other. If the Director prefers, replace with an unnumbered "early in the filling" and keep the recognition sentence.
+4. **Ledger dating [NEW] `[APPROVED — CDR 2026-11-03]`** (two calendars approved): the ledger counts weeks down to First Smoke ("9 wk to Smoke"), which lets the recognition line say "weeks before that night" without a shared calendar. **Coordinated with Act II (independent review):** storekeepers and factors count weeks to First Smoke; Ridge Wardens and hornwrights count days from the first frost on the Passwatch horn rail (Iven's log, Eyvind's record). Both are local reckonings in use at once; no page converts one into the other. Approved by the Director 2026-11-03 (rulings §2).
 5. **Nettlehook's children's ration line [NEW]:** the splinter outbid the Hearthguard for a lot already allotted to Nettlehook's children. This is the bible's required trigger for Brynjar's disowning.
 6. **Hadrik reads totals, not lines** (public route): this keeps Brynjar from seeing the children's line in public, which is why pride wins. **Confirmed against TF-M5 (independent review):** no TF-M5 line has Hadrik or a defended Brynjar refer to the children's-ration line; Hadrik's TF-M5 knowledge of the stores is the totals he read.
 7. **Season change on S13 start:** the first snow falls as the player walks back to Elira. If the season pass wants it on S12, move it.
@@ -872,7 +874,7 @@ Documented dependencies for a later Systems Engineer. Nothing here is implemente
 | The ledger's sixty-eight line could imply the Lowmark barge's sacks arrived here. | Dated weeks before the Lock night; the recognition line notes the date and says nothing else. No route, no carrier. |
 | The Lowmark callbacks risked gating R05. | The relief stencil carries R05 for every player. Lowmark recognition is optional variant text read from Lowmark quest state. |
 | Leverage could be chosen after a public report. | Only offered in `TIW-D7.50` (private route). |
-| Combat revealing evidence. | Ledger from the desk; everything else inspected in place; testimony after yield. |
+| Combat revealing evidence. | Ledger from the desk; everything else inspected in place; testimony from Bersi, a non-combatant, after he gives up. |
 | The hut risked being stealth. | Two routes chosen by walking; the ledge is a traversal route with its own pressure, not a hide. |
 | The hires as enemies. | They are clanless hires, "hired, not sworn". They flee on the first blow and are never targets. |
 | The trial frame risked becoming a guardian moment. | It is a plate, a hum, crows and dust. It stops when the plate stops. Nobody names it. The Summit node is TF-M4's. |
@@ -883,6 +885,7 @@ Documented dependencies for a later Systems Engineer. Nothing here is implemente
 | Elira's line "Brynjar says Emberholt about the weather" might caricature him. | Kept: it is Elira's affectionate exasperation; she defends him in the leverage closing. |
 | Agility. | Ledge rail break and shaft crossbar each have walkable fallbacks. |
 | **Independent review (2026-11-03)**, TF-M2: 5 findings (2 medium, 3 low). | Calendar coordinated with Act II (weeks-to-Smoke and frost-count coexist; open decision 4). Hadrik-totals rule confirmed against TF-M5 (open decision 6). `TIW_FRAME_TOUCHED` no longer claimed as dating a Summit hum (a phenomenon dating nothing). `TIW_SACKS_INSPECTED`/`TIW_BERSI_TESTIMONY` later-read claims removed (TF-M5 reads `TH_STORES` only). Dialogue: three Bersi nodes tagged `[SPLINTER]`; three em-dash chains removed. |
+| **Director rulings reconciliation (2026-11-03)**, TF-M2: CDR-1, CDR-2. | Crews fight to 0 HP in every encounter; steps S04/S06/S08/S09 complete on defeat. The encounter-level surrender (first yield / ~60 s / loophole proximity) is removed: Bersi (SX-N1, non-combatant) gives up when the last TIW-E5 crewman is defeated, then testifies (T-3). Tied crews removed. Integration "Surrender rule" replaced by an on-defeat quest hook. Ranged accepted (divers, hornman). Two calendars labelled approved (open decision 4). |
 
 ---
 
@@ -891,7 +894,7 @@ Documented dependencies for a later Systems Engineer. Nothing here is implemente
 | Rule | Check |
 |---|---|
 | Canon anchors | Dorn: codes, altered echoes, "wind tricks"-adjacent; no roster custody. Ressa: refuses a call without explaining; no roster, no battle. Elira: rebuilder, defends Brynjar. Brynjar: not a member; learns in TF-M2; disowns or defends; the canon boast. Hadrik: reads, asks, does not decide. None receives an invented age, service, kinship or record custody. |
-| Evidence rule | Sacks, chit, board, tarp, marks, spearheads, plates, sketches and the ledger are found or inspected; the Iron Winter and the standing orders are testimony after yield. The Close that came early, the quiet gully and the hum identify nothing and prove nothing. |
+| Evidence rule | Sacks, chit, board, tarp, marks, spearheads, plates, sketches and the ledger are found or inspected; the Iron Winter and the standing orders are Bersi's testimony after he gives up. The Close that came early, the quiet gully and the hum identify nothing and prove nothing. |
 | FT-03 | No line in either quest states how, when or by which way the Lowmark grain arrived. "Up the track" (TF-M1) is where the sacks are going, not where they came from. |
 | No Remnant | None shown or implied. The broadsheet is unsigned and unexplained. |
 | Splinter tagging | Every node naming Bersi or Eyvind, and every "the Quartermaster" line, is `[SPLINTER]` in the dialogue file. Ingrith is unnamed in Act I. |
@@ -901,4 +904,5 @@ Documented dependencies for a later Systems Engineer. Nothing here is implemente
 | Movement reality | Click-to-move; every agility trigger has a walkable fallback; no timing-critical input (call windows are generous and optional). |
 | Quest items | 1 (`TIW_store_ledger`). |
 | Region flags | `TH_CALLS`, `TH_PASSWATCH_ROUTE`, `TH_STORES`, `TH_BRYNJAR`, `TH_SEASON` only. |
-| Skills | Melee; Woodcutting, Smithing (both optional with alternatives). |
+| Skills | Melee or ranged (CDR-2; ranged never required); Woodcutting, Smithing (both optional with alternatives). |
+| Defeat model | CDR-1: every enemy defeated at 0 HP. Bersi (SX-N1) is the only scripted give-up, and he never fights. |

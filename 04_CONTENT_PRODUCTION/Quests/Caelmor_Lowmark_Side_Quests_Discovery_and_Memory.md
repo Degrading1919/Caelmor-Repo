@@ -35,7 +35,8 @@ None of these quests is required by the main line, by `LM_CIVIC_STANDING`, or by
 ### 0.3 Conventions
 
 - **Steps** are scoped by quest id (`SB` `S00_offer` is distinct from `UC` `S00_offer`). **Flags** use the quest code prefix. No new `LM_` flags; region flags are only read.
-- **Quest items: none.** All seven quests use carry-state objects (TB fruit, FC tin case, CN offering boat, UC gate paddle) or placed props. This file adds **0** to the v1 quest-item budget (bible §11.6).
+- **Quest items: none.** All seven quests use carry-state objects (TB fruit, FC tin case, CN offering boat, UC gate paddle) or placed props. This file adds **0** to the Lowmark quest-item budget (bible §11.6).
+- **Combat:** every enemy is defeated at 0 HP (CDR-1); drift still disperses on defeat and re-forms while its site's condition lasts (a place rule). Every fight accepts **melee or ranged** (CDR-2); ranged is never required, and "Melee" in the skill rows names the combat, not a melee-only rule.
 - **Dialogue** uses the True Line format with `<CODE>-D<n>.<nn>` ids. `[condition]`, `{effect}`, *(repeatable)* as in the cast file. Nodes with Sedge are tagged **`[D-7]`** and the one optional Oriel node **`[D-8]`**, so those Director decisions can be swapped by search. No node in this file names the antagonist.
 - **Death** in any encounter: respawn at the quest's named safe point with step, flags and carried state restored to the last deposit (carried objects return to their pickup point). No quest here can fail.
 - **Co-op:** independent instances; shared world creatures give step credit to every participant on that step; step-conditioned props and strange moments are presented per player from their own state.
@@ -267,7 +268,7 @@ MERRIN:   "That rope'll last till next spring." (beat) "Then I'll do it again."
 | Mystery | Author truth | Public belief | Evidence | Wrong reading | Withheld | Reveal owner |
 |---|---|---|---|---|---|---|
 | **The roster's absent marks** | The ringers came; the bell stopped sounding; the clerk below recorded silence as absence. | The ringers deserted their watch. | Slate, beam tallies, bright clapper. | The families lied to cover shame. | — | SB (resolved locally). |
-| **The silent bell** | **Deliberately unselected [PROPOSAL — DIRECTOR]: never explained in v1.** | Cursed since the armistice; cracked; held by the drowned. | Swings, strikes, no sound; a ring on the river if watched. | It's cracked (inspect: it isn't). The river ring means the bell "rings into the water" (unconfirmed; nothing builds on it). | Everything. | None in v1. |
+| **The silent bell** | **Deliberately unselected [PROPOSAL — DIRECTOR]: never explained in Lowmark content.** | Cursed since the armistice; cracked; held by the drowned. | Swings, strikes, no sound; a ring on the river if watched. | It's cracked (inspect: it isn't). The river ring means the bell "rings into the water" (unconfirmed; nothing builds on it). | Everything. | None in Lowmark content. |
 
 ### 1.14 Integration, open decisions, review log
 
@@ -495,8 +496,8 @@ UC-D5.04 SEDGE: "Water doesn't stop because people do."      → end
 
 | Mystery | Author truth [PROPOSAL — DIRECTOR] | Public belief | Evidence | Wrong reading | Withheld | Reveal owner |
 |---|---|---|---|---|---|---|
-| **Why the canal climbs** | A small surviving Braid that lifts water from a low wet hollow to a higher channel, spreading flood pressure over the hill. | Haunted; "forgets gravity." | The float; the reflection; the matching rings. | It's the Field-Mage's doing; it's a pump. | How Braids move water uphill at all. | Partly MQ9 (context: it is Braid work). The mechanism stays open in v1. |
-| **Why it stops when watched** | Riverwarden works were made by listeners; a watcher's attention is a living imprint the water answers by holding still (C08 resonance). **Never stated in v1.** | "It's shy." | Only the behaviour. | Watching "breaks" it. | Everything. | None in v1. |
+| **Why the canal climbs** | A small surviving Braid that lifts water from a low wet hollow to a higher channel, spreading flood pressure over the hill. | Haunted; "forgets gravity." | The float; the reflection; the matching rings. | It's the Field-Mage's doing; it's a pump. | How Braids move water uphill at all. | Partly MQ9 (context: it is Braid work). The mechanism stays open in Lowmark content. |
+| **Why it stops when watched** | Riverwarden works were made by listeners; a watcher's attention is a living imprint the water answers by holding still (C08 resonance). **Never stated in Lowmark content.** | "It's shy." | Only the behaviour. | Watching "breaks" it. | Everything. | None in Lowmark content. |
 | **Who pulled the paddle** | Wartime work crews pulled Braid paddles when the Relief Cut was dug; this one ended up as a hut step. | — | Chisel scars, the doorstep, brick patches in the culvert. | Children stole it. | Who, when, by whose order. | None (local colour). |
 
 **Review log:** independent review pass (Director ruling 6): the geometry-only honesty layer would break under a free, fading, zooming camera. The channel is now roofed and screened; the server rule is "no player inside the observation volume watching the channel"; the client render rule (the channel always renders still when directly in a camera view) is binding; the climb is shown only in the basin reflection from the seat, which applies a soft camera limit; the volume edge is flagged stone; E1 is restated as Milestone 1. Earlier: first draft used camera direction as the server rule; replaced with a server-checkable volume plus a geometry requirement so the free camera can never "catch" the canal and server and client always agree. The head-gate fix originally repeated MQ3's woodcutting-and-lever; replaced with finding and carrying a reused stone. Co-op griefing risk (a partner standing on the lip) removed by making observation per player.
@@ -536,7 +537,7 @@ On the Ashen Flats stands a tree split down the middle by two burnings, black on
 
 **Beat 0 — It's fruiting (`S00_offer`).** *Objective: See the Twice-Burned Tree.* Offered by the household bark or by approaching the tree. Reaching area A before dusk shows green fruit; Sedge is not there yet. Inspect the fruit: *"Small, hard, green. Not yet."* A wait seat (a flat root) is offered: *Wait for dusk* (§0.4).
 
-**Beat 1 — Rakes (`S01_goblins`).** *Objective: Drive off the goblins.* At dusk a Field Goblin crew arrives along the goblin path and starts beating the branches (E1). Unripe fruit falls and bursts. Win and they scatter back to the barns, leaving a long **hook-pole**.
+**Beat 1 — Rakes (`S01_goblins`).** *Objective: Drive off the goblins.* At dusk a Field Goblin crew arrives along the goblin path and starts beating the branches (E1). Unripe fruit falls and bursts. When the last goblin is defeated the raid is over; one of them dropped a long **hook-pole**.
 
 **Beat 2 — The fork (`S02_pick`).** *Objective: Pick a ripe fruit.* As full dusk sets, the fruit in the fork pales and softens (prop swap). Two routes: climb into the fork (agility) and **Pick** (2 s), or use the dropped hook-pole at the base (**Hook a fruit**, 4 s; walkable fallback). Picking produces a fruit in the player's hand (carry state). Sedge is now under the tree (TB-D1).
 
@@ -554,7 +555,7 @@ The quest completes at the end of TB-D3 (Sedge's dawn line, spoken by Ashenstead
 
 | Id | Enemies | Placement | Role | Telegraph | Solo target |
 |---|---|---|---|---|---|
-| **E1** | 2 × Field Goblin trapper, 1 × Field Goblin scrapper | At the tree, beating branches | Trappers: drop a rake-trap at their feet when engaged (visible tines, ~1 s set); scrapper: rushes the player with a hoe | Trapper: kneels to set (~1 s). Scrapper: raises hoe two-handed (~1.2 s) before an overhead | Required. 40–60 s. A player who walks round the set traps takes little damage. They do not flee at low HP; they scatter only when all three are down (rout as a group bark on defeat, not mid-fight). |
+| **E1** | 2 × Field Goblin trapper, 1 × Field Goblin scrapper | At the tree, beating branches | Trappers: drop a rake-trap at their feet when engaged (visible tines, ~1 s set); scrapper: rushes the player with a hoe | Trapper: kneels to set (~1 s). Scrapper: raises hoe two-handed (~1.2 s) before an overhead | Required. 40–60 s. A player who walks round the set traps takes little damage. Each goblin fights until defeated at 0 HP (CDR-1); none flees or scatters. A group chitter plays as the last one falls. |
 
 The goblins drop farm-tool junk only. Nothing advances the quest except the hook-pole, which is a world prop, not loot.
 
@@ -677,10 +678,10 @@ Joric bark after `TB_GIFT_JORIC`, on the gatepost prop: "Still there. Going soft
 
 | Mystery | Author truth [PROPOSAL — DIRECTOR] | Public belief | Evidence | Wrong reading | Withheld | Reveal owner |
 |---|---|---|---|---|---|---|
-| **The dream** | The tree grew on ground soaked in the Flats' grief before and after two fires; its fruit carries the place's imprint, not any person's (C08). It shows land, never people or events. | "You see the fields." Some say you see the dead (you don't). | The dream itself. | It's a vision of the burning (it isn't); it shows Joric's family (it shows no one). | Why the tree, why a decade. | None in v1. |
-| **The two burnings** | Two separate fires; the older char is smoother. | War, and "the second time." | Char texture; household talk. | Both were the war. | What the second fire was. | None in v1 (local colour; do not build on it without a record). |
+| **The dream** | The tree grew on ground soaked in the Flats' grief before and after two fires; its fruit carries the place's imprint, not any person's (C08). It shows land, never people or events. | "You see the fields." Some say you see the dead (you don't). | The dream itself. | It's a vision of the burning (it isn't); it shows Joric's family (it shows no one). | Why the tree, why a decade. | None in Lowmark content. |
+| **The two burnings** | Two separate fires; the older char is smoother. | War, and "the second time." | Char texture; household talk. | Both were the war. | What the second fire was. | None in Lowmark content (local colour; do not build on it without a record). |
 
-**Review log:** a household line once showed gold dust on the player's boots after waking; cut (no physical trace of the dream). First draft showed one figure at the end of a lane; cut (the brief forbids any person). First draft let Joric recognise his field in the dream; cut, his plot is indistinguishable and he is never told it was "his" field. The dream once lit inspect texts in the fields; cut (no text explaining). The goblins originally fled at low HP; changed to a group scatter after defeat, per combat rules.
+**Review log:** a household line once showed gold dust on the player's boots after waking; cut (no physical trace of the dream). First draft showed one figure at the end of a lane; cut (the brief forbids any person). First draft let Joric recognise his field in the dream; cut, his plot is indistinguishable and he is never told it was "his" field. The dream once lit inspect texts in the fields; cut (no text explaining). The goblins originally fled at low HP; changed to a group scatter after defeat, per combat rules. Director rulings reconciliation (CDR-1, 2026-11-03): the scatter is removed; each goblin is defeated at 0 HP and the hook-pole is simply dropped at the tree.
 
 ---
 ## 4. WD — The Whispering Door
@@ -903,7 +904,7 @@ Ansel Corrie bark at the Lantern Post after completion: "Dunnock farm's off my l
 | Mystery | Author truth | Public belief | Evidence | Wrong reading | Withheld | Reveal owner |
 |---|---|---|---|---|---|---|
 | **Why the door creaks** | Mostly air: water backing up a wartime drain pushes air up the cellar stair (resolved here). | A warning from the dead; a draught. | Tide line, open flap, the channel, the cold air through the grate. | The door is haunted. | — | WD (resolved). |
-| **The second creak** | **Left open [PROPOSAL — DIRECTOR].** It comes before the water rises. Compatible with resonance; never stated. | — | Timing only, for a player who notices. | It proves the dead knock first. | Everything. | None in v1. |
+| **The second creak** | **Left open [PROPOSAL — DIRECTOR].** It comes before the water rises. Compatible with resonance; never stated. | — | Timing only, for a player who notices. | It proves the dead knock first. | Everything. | None in Lowmark content. |
 | **Why drift got worse after the flushes stopped** | After MQ4 the fen is holding pressure (bible §2.3); fields' water rises more often. Consistent with Act II; not explained here. | — | Col's tally. | The Dunnocks did something wrong. | The fen. | MQ5, MQ8, MQ11. |
 
 **Review log:** independent review pass: (1) the lantern-relight defence repeated NT's verb set, so it was replaced with the listening loop (the creak tells which outlet rises; hold the lid), and the lanterns are now ambience; (2) the treatment-boundary dressing gave away MQ5's reveal when WD was played between MQ4 and MQ5, so it is now conditional on MQ5 Completed; (3) E3 was restated as Milestone 1; (4) the household was renamed Hobb → **Dunnock** (name collision with Act I). Earlier: first draft had the drain lead the player into MQ5's culvert; cut to avoid spoiling MQ5 and to keep this quest local. The door originally broke in wave 3; changed to an unbreakable door that drives barks (no fail state). The rusted flap originally needed a forge visit at Crestbridge; replaced with an in-place repair so the fix stays physical and close.
@@ -1105,7 +1106,7 @@ Post-quest barks:
 | Mystery | Author truth | Public belief | Evidence | Wrong reading | Withheld | Reveal owner |
 |---|---|---|---|---|---|---|
 | **Who took the boat** | Nobody: Annelise pinched and shelved it; the flush-night rise took it. | Annelise erased him. | Snuffer wax, ledge, wet line, pinched wick. | Annelise threw it away. | — | CN (resolved). |
-| **What happened to Ewan Holt** | **Deliberately unselected.** No v1 content knows. | Unreturned. | None. | The drift at the pool was Ewan (nothing identifies anyone). | Everything. | None in v1; any later answer needs an independent record (L-S18). |
+| **What happened to Ewan Holt** | **Deliberately unselected.** No Lowmark content knows. | Unreturned. | None. | The drift at the pool was Ewan (nothing identifies anyone). | Everything. | None in Lowmark content; any later answer needs an independent record (L-S18). |
 | **Why still water goes heavy** | Grief left to rot in still water gathers (bible §2.3). Moving water carries it. | "Bad water." | The pool unwinding; drift sinking. | The boards are magic. | The fen-scale version. | MQ8, MQ11. |
 
 **Review log:** independent review pass: CN-D4.30 made Annelise custodian of the memorial stone; reworded so the stone-cutters carve and she only keeps the water. Earlier: first draft had Annelise keep a register of boats; cut (record custody). First draft let the boat drift to Widow's Step and be launched at once; revised so the boat stays in the garden's care, matching Act III's "Annelise brings the recovered offering boat." Board-setting reuses the rope-wear reading idea rather than Braid-gate ordering, to stay distinct from MQ11 Phase 2. The drift no longer "lead" the player to the boat; the boat is visible from the start.
@@ -1311,7 +1312,7 @@ Performance barks: TAMSIN (on the rope) "Now! Now now now!" · HOUSEHOLD (after)
 | Mystery | Author truth [PROPOSAL — DIRECTOR] | Public belief | Evidence | Wrong reading | Withheld | Reveal owner |
 |---|---|---|---|---|---|---|
 | **The missing verse** | The melody began as a Riverwarden gate count; Lowmark folk kept it as a work hum; after the war some households set words to it for their dead. | Words were dropped in shame / there were never words. | Sayer book's later hand; Merrin's prewar hum; Nan's "like counting"; the count channel. | One family is right. | Who first set words; whose dead. | VK (context only). |
-| **The Riverwarden Lullaby** | The same tune, heard near reeds at night. **Its source is never stated.** | For lost Riverwarden children. | The hum after VK. | It's ghosts; it's Sedge. | Everything. | None in v1. |
+| **The Riverwarden Lullaby** | The same tune, heard near reeds at night. **Its source is never stated.** | For lost Riverwarden children. | The hum after VK. | It's ghosts; it's Sedge. | Everything. | None in Lowmark content. |
 
 **Review log:** first draft had Oriel translate words; cut (context, never translation). The pause before MQ9 now has explicit tracker text so it cannot read as a bug. The performance was a rhythm test in draft; replaced with untimed pin pulls (no twitch mechanics).
 
@@ -1396,7 +1397,7 @@ FC's moment is unease, then something ordinary that feels like wonder.
 |---|---|---|
 | `FC_OPENED` / `FC_TO_KEEPERS` / `FC_TO_HEDGE` | FC-D3 (exactly one) | Props; barks |
 | `FC_SEED_ROW` | `S05` if `FC_OPENED` | Hedge-row prop; later sprout state |
-| `FC_SEAL_NOTED` | Inspect of the inner packet (only if opened) | **Removable callback hook** (§7.9). Nothing in v1 reads it. |
+| `FC_SEAL_NOTED` | Inspect of the inner packet (only if opened) | **Removable callback hook** (§7.9). Nothing in Lowmark content reads it. |
 | `FC_COMPLETE` | Completion | Lark barks |
 
 ### 7.9 Choices, consequences and the removable callback
@@ -1650,7 +1651,7 @@ Each micro-event follows the discovery framework's optional-discovery card: a pl
 | *(read)* `LM_SEDGE_TRUST`, MQ9 Completed | Act II | UC-D5; VK `S03` onward. |
 | `SB_COMPLETE`, `SB_TO_FAMILIES` | SB | VK (this file). |
 | `FK_NAN_TUNE` | FK (Work and Skills) | VK-D5 (read here). |
-| `FC_SEAL_NOTED` | FC | No v1 reader (removable callback). |
+| `FC_SEAL_NOTED` | FC | No Lowmark reader (removable callback). |
 
 ## 11. Independent review pass
 
@@ -1674,3 +1675,7 @@ Applied the independent side-content review and Director rulings 3 and 6. Entrie
 | Flags with no reader (minor) | Unread promises are marked "(request)" in §10. |
 
 No flag renames in this file. Renamed: Hobb farm/household → Dunnock (Rhoda Hobb → Rhoda Dunnock, Col Hobb → Col Dunnock).
+
+## 12. Director rulings reconciliation (2026-11-03)
+
+Applied `Caelmor_Director_Rulings_Combat_Ranged_Release.md`. **CDR-1:** TB's goblins no longer scatter as a group; each is defeated at 0 HP and the hook-pole is dropped at the tree (TB beat 1, TB E1, TB review log). Drift encounters are unchanged (dispersal and re-forming are place rules). No human enemy, yield or testimony-from-a-defeated-enemy beat exists in this file. **CDR-2:** a §0.3 convention states that every fight accepts melee or ranged, ranged never required. **CDR-3:** "v1" release wording ("never explained in v1", "None in v1", "No v1 reader", the v1 quest-item budget) now reads as Lowmark content (12 places). Step ids, flags, choices and dialogue ids unchanged; no line removed.

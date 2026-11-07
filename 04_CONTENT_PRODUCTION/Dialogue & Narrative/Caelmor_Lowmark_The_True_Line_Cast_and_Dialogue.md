@@ -583,3 +583,9 @@ Short lines for repeat visits, keyed to the quest's final flags.
 | HOLLIS | "I check the posts myself now. Every morning. Mistress Rowe pretends not to notice." | `TL_EVIDENCE_RIVERFOLK` or `TL_EVIDENCE_PLAYER` |
 | VISITOR (role-based) | "Is this the stone? It doesn't look like much." | `TL_STONE_PUBLIC` |
 | TOVIN | "I drew the other bends again. Looking for notches. Found one, maybe. Maybe." | `TL_TOVIN_TRUSTED` (lead-in for main-arc movement 6) |
+
+---
+
+## Director rulings reconciliation (2026-11-03)
+
+Checked against CDR-1/2/3 (`Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md`). No line needed changing: the quest's only fights are wildlife (geese, Silt Swimmers, River Leech, Furrow Boar), which already end at defeat, and the boar barks (`D8`) already trigger on "Boar defeated". No yield, mercy, ranged-hedge or release wording was present. No line ids changed.

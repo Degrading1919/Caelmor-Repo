@@ -17,7 +17,7 @@
 | **"That path's done."** | [CANON behaviour] Lessa's refusal. She never gives a reason. | Lessa. |
 | **"Paper floats. It doesn't swim."** | [NEW, TL] | Maelin in NF. |
 
-**What nobody in Act I says:** that the drift is a dead person; who ordered the flushes (beyond Rusk's "a name on a bill"); what the stones are; that the fen is "angry". Ansel and Elspeth describe. Bryn swears. Lessa refuses.
+**What nobody in Act I says:** that the drift is a dead person; who ordered the flushes (beyond Maelin's "ask the bill, not me"); what the stones are; that the fen is "angry". Ansel and Elspeth describe. Bryn swears. Lessa refuses.
 
 ---
 
@@ -83,7 +83,7 @@
 | **Mabry Gorse** | [NEW] | Ashen Flats herder who once walked with the Watchers. Plain and embarrassed by the part she saw. |
 | **Orrin Tull** | [NEW] | Reedmere fen-cutter. Speaks once, after. Nobody names whom he mourns. |
 | **Wenna Tull** | [NEW] | Orrin's sister; stacks reed bundles; keeps his tally. |
-| **Rusk** | [NEW] | Sallow's crew boss. Frightened of the fen, not of the player. |
+| **Rusk** | [NEW] | Sallow's crew boss. An ordinary enemy (crew boss elite); fights to 0 HP and has no post-fight dialogue (CDR-1). His fear of the fen shows only on his slate and in `NF-D5.04`. |
 | Porters, keepers, Watchers, orchard hands, crew | Role-based | Barks. |
 
 ---
@@ -637,8 +637,8 @@ NF-D2.03 MAELIN: "Go. Follow it. I'll get word to the keepers and the Watcher." 
 |---|---|---|---|
 | NF-B4.1 | Spotted | POLE-MAN | "Who's that? Who walks the Cut at night?" |
 | NF-B4.2 | Spotted | CUTTER | "Nobody. Nobody walks it. That's the point." |
-| NF-B4.3 | Pole-man yields | POLE-MAN | "All right! All right. I'm sitting. I'm sitting down." |
-| NF-B4.4 | Cutter yields | CUTTER | "It's grain. It's only grain, for the river's sake." |
+| NF-B4.3 | (removed: CDR-1) | — | — |
+| NF-B4.4 | Fight joined | CUTTER | "It's grain. It's only grain, for the river's sake." |
 
 ### NF-B6: the yard (NF-E2)
 
@@ -647,7 +647,7 @@ NF-D2.03 MAELIN: "Go. Follow it. I'll get word to the keepers and the Watcher." 
 | NF-B6.1 | Yard entered | CREW | "Hoods on! Somebody's on the towpath!" |
 | NF-B6.2 | Hoods pulled | CREW (shed) | "Who lit the — we can see them, they can see us — " |
 | NF-B6.3 | Shed ambush (hoods on) | CREW | "Now!" |
-| NF-B6.4 | Last yard crew yields | CREW | "Gideon'll sort you. He sorts everyone." |
+| NF-B6.4 | Second yard group engages | CREW | "Gideon'll sort you. He sorts everyone." |
 
 **Inspect: the cut chain** "The old chain. Cut, not rusted through. The cut is bright."
 
@@ -694,43 +694,29 @@ NF-D5.04 RUSK: "Gently, he says."
 | NF-D6.01 | Crank segment 1 starts | CREW (barge stair) | "They're on the crank! They're closing it!" |
 | NF-D6.02 | Segment 1 (escape) | SALLOW [ANTAGONIST] (across the chamber, going down the far stair) | "No hard feelings! It's only grain!" |
 | NF-D6.03 | Skiff away | SALLOW [ANTAGONIST] (fading downstream) | "Mind the fen, friend! It's listening!" |
-| NF-D6.04 | Segment 1 | RUSK (yielded, by the gear) | "...He'll leave us all. He always said he would. Cheerfully." |
+| NF-D6.04 | (removed: CDR-1; Rusk is defeated) | — | — |
 | NF-D6.05 | Wave 2: drift rises | (no voice: the chamber's churn, and a cold light pulsing in the water) | — |
 | NF-D6.06 | Segment 3 complete | (no voice: gates meet; the Cut's roar stops; frogs) | — |
 
-### NF-D7: Rusk (S09)
+### NF-D7: Rusk's slate (S09, inspect)
 
-```
-NF-D7.01 RUSK: (sitting against the gear, hands on knees) "I'm not getting up. You can stop looking at me like that."
-  > "Who was the man in the coat?"           → NF-D7.10
-  > "Who do you work for?"                   → NF-D7.12
-  > [NF-D7.10 seen] "Where does the crew get paid?"   → NF-D7.20
-  > [NF-D7.10 seen] "Why are you shaking?"   → NF-D7.30
-  > [NF-D7.10 seen] "Sit there till the keepers come."  → NF-D7.40
+Reconciled to CDR-1: Rusk fights to 0 HP and is not spoken to. The former conversation lines `NF-D7.01`–`NF-D7.40` are **(removed: CDR-1)**. The name moved to Maelin at dawn (`NF-D9.05`–`.06`, T-1); the Lamb lead moved to `NF-D9.50`. `NF-D7` is now the slate inspect, and its completion is `{event: NF-D7 end}`.
 
-NF-D7.10 RUSK [ANTAGONIST]: "Sallow. Gideon Sallow. Factor. He runs the Lock and he pays."
-NF-D7.11 RUSK [ANTAGONIST]: "Pays well. Pays on time. Pays and then runs, apparently."   → NF-D7 options
-
-NF-D7.12 RUSK [ANTAGONIST]: "Sallow. Who Sallow works for is a name on a bill. I can't read the bill, and I didn't ask."   → NF-D7 options
-
-NF-D7.20 RUSK: "The Lamb, in Brookhollow. Back room. Ask for the cellar and they'll say there isn't one."   {set NF_LEAD_LAMB}  → NF-D7 options
-
-NF-D7.30 RUSK: "Not you. That." (nods at the chamber) "Every flush, something comes up in it. You saw. He touches the chain and it comes up."
-NF-D7.31 RUSK: "I've been on this crew since harvest. I'd like to never see water again."   → NF-D7 options
-
-NF-D7.40 RUSK: "Where would I go? Up the Cut?" (laughs, not well)   {event: NF-D7 end}
-```
+| Object | Text | Condition |
+|---|---|---|
+| Rusk's slate (gear rail) | "A crew boss's slate. Nights chalked in fives, back to harvest. Names down the side, RUSK at the top. The pay column is a scratched lamb, over and over." {event: NF-D7 end} | Required |
+| Rusk's slate (second look) | "Under the last five, smaller: 'no more water'." | — |
 
 ### NF-D8: smash or chain (S10)
 
-No conversation; Rusk reacts to the player's physical choice.
+No conversation. The former Rusk barks `NF-D8.01`–`NF-D8.04` are **(removed: CDR-1)**; the flag writes stay on the interaction completions.
 
 | Id | Trigger | Speaker | Line |
 |---|---|---|---|
-| NF-D8.01 | Maul picked up | RUSK | "Oh, you're going to — yes. All right. Mind your feet." |
-| NF-D8.02 | Pawl broken (smash complete) | RUSK | "That's months of work. Gideon'll weep." (beat) "He won't. He'll find another way. He always does." {set `LM_LOCK_STATE = smashed`} |
-| NF-D8.03 | Chain lifted (carry) | RUSK | "That's our chain. You're chaining it with our own chain." |
-| NF-D8.04 | Wedge driven (chain complete) | RUSK | "Keepers'll see it working. That's worse for us, isn't it." {set `LM_LOCK_STATE = chained`} |
+| NF-D8.01 | Maul picked up | (removed: CDR-1) | — |
+| NF-D8.02 | Pawl broken (smash complete) | (no voice: the pawl cracks; the noise runs down the Cut) | {set `LM_LOCK_STATE = smashed`} |
+| NF-D8.03 | Chain lifted (carry) | (removed: CDR-1) | — |
+| NF-D8.04 | Wedge driven (chain complete) | (no voice: the wedge bites; the drum stops dead) | {set `LM_LOCK_STATE = chained`} |
 
 ### NF-D9: dawn (S11, closes the quest and Act I)
 
@@ -739,7 +725,10 @@ NF-D9.01 ANSEL: (climbing to the roof walk, out of breath) "Lantern coming in. D
 NF-D9.02 ANSEL: (book open) "Bramblelock. Lay flat at dawn. First time in a month. No gathering on the pool."
 NF-D9.03 ANSEL: "Stillwater." (stops; looks toward the fen) "Thicker than I've ever seen it. Standing up like a wall. The last one stirred it."
 NF-D9.04 MAELIN: (from the skiff below, looking at the posts the keepers are carrying out) "Anyone can lie with paper. That's a shed full of lies made of wood."
+NF-D9.05 MAELIN [ANTAGONIST]: "Who was on the gallery?" (the player describes the good coat, the hand on the chain, the laugh) "Gideon Sallow. Factor. Pays the night crews on this river, pays on time, and runs when it goes wrong."
+NF-D9.06 MAELIN [ANTAGONIST]: "Who pays him, I don't know. Ask the bill, not me."
   > "We stopped them. Why is the fen worse?"   → NF-D9.10
+  > [NF-D9.05 seen] "Where do his crews get paid?"   → NF-D9.50
   > [NF_LEAD_CONVOY] "There's a convoy stone missing on the weir. Fourteen."   → NF-D9.20
   > "What happens to the Lock now?"            → NF-D9.30
   > (Watch the fog.)                            → NF-D9.40
@@ -752,6 +741,8 @@ NF-D9.30 [smashed] MAELIN: "Good. Now it's only a story." (beat) "Stories are ha
 NF-D9.31 [smashed] ANSEL: "It can't flush. That's worth more than proof tonight."   → NF-D9 options
 NF-D9.30 [chained] MAELIN: "Keepers can see it working. Paper floats. A greased gear sinks."
 NF-D9.31 [chained] ANSEL: "Chains get cut." (beat) "Still. It's chained now."   → NF-D9 options
+
+NF-D9.50 MAELIN: "The Lamb, in Brookhollow. Back room. Ask for the cellar and they'll say there isn't one."   {set NF_LEAD_LAMB}  → NF-D9 options
 
 NF-D9.40 (No line. The fog over Stillwater does not move in the wind that moves everything else.)
 NF-D9.41 ANSEL: (quietly, beside the player) "Drift gets back up till the water moves." (beat) "We just stopped the water moving."
@@ -780,9 +771,10 @@ NF-D9.41 is the act's last line. It is an observation, and it is the bible's Act
 |---|---|
 | Line length and the ≤6-line rule | Every conversation returns options or control within six NPC lines. Synthesis options loop at one line each. |
 | Canon anchors | Corvin: numbers only; burned ledger unspoken (reserved for MQ10). Aldric: knows the Cut only as a name in compacts; no service or knowledge invented. Lessa: "done", unexplained. Maelin: no night passage. |
-| Evidence rule | No line attributes identity, guilt or a name to drift, stones or the flush. Rusk's naming is testimony. Elspeth gives ordinary causes only. Ansel declines interpretations. |
-| Antagonist tags | SM-D5.02–.04, SM-D5.13, NF-D5, NF-D6.02–.03, NF-D7.10–.12, bill initials. |
+| Evidence rule | No line attributes identity, guilt or a name to drift, stones or the flush. Sallow's naming is Maelin's testimony at dawn (T-1). Elspeth gives ordinary causes only. Ansel declines interpretations. |
+| Antagonist tags | SM-D5.02–.04, SM-D5.13, NF-D5, NF-D6.02–.03, NF-D9.05–.06 (was NF-D7.10–.12), bill initials. |
 | Flags | Every flag set here (`SM_LEAD_WYNN`, `SM_LEAD_STENCIL`, `SM_LEAD_CUT_NAMED`, `SM_STONE_SEEN`, `SM_HEAPS_COUNTED`, `SM_CORVIN_TRUST`, `LM_GRAIN_ROUTE`, `HW_NIGHTS_*`, `HW_DRIFT_TAUGHT`, `HW_LEAD_TALLY`, `HW_LEAD_SCRAP`, `HW_BRYN_MOSS`, `HW_FEN_FIRST`, `NF_LEAD_CONVOY`, `NF_POSTS_SEEN`, `NF_LEAD_LAMB`, `LM_LOCK_STATE`) matches the quest file's tables. |
 | Address-neutral | No name, gender, title or origin for the player. "Friend" is used only by Wynn and Sallow. |
 | Night numbers | Book, chalk, notches and Orrin's night all use 4/9/14/19, and the Whisperflow entry is the 14th. Next: the 24th. |
+| Director rulings reconciliation (2026-11-03, CDR-1) | Crew fight to 0 HP; no post-fight dialogue with defeated crew. Removed: NF-B4.3, NF-D6.04, NF-D7.01–.40, NF-D8.01/.03 (ids left as "removed: CDR-1"). NF-B4.4 and NF-B6.4 retriggered to fight start. NF-D7 is now Rusk's slate inspect (S09). Maelin names Sallow at dawn (NF-D9.05–.06, new) and gives the Lamb lead (NF-D9.50, new; sets `NF_LEAD_LAMB`). NF-D8.02/.04 keep their flag writes as unvoiced events. |
 | Independent review pass | Grain: heap line and bill now say sixty-eight (slip keeps "eighty", the order). Slack-gate inspect rewritten as the first sign of the backwater (no crew spade marks). Convoy stones are a required inspect with Maelin's bark `NF-B0.1` (Fourteenth Lot delivery 1 of 3). Ansel's "Fourteenth. Watchers don't like that number." makes the 14th-night echo deliberate. Added `SM-L-DRILL` (optional keepers' drill; guard or step-aside; points to Corliss's forge or the quartermaster; no item stats). New flag `SM_DRILL_DONE`. |

@@ -1,6 +1,6 @@
 # Thornfell Main Questline, Act III: Stonewake
 
-**Status:** Authored production content for Creative Director milestone review. This package implements Thornfell milestone **TF-M5 *Stonewake*** (`TSW`), the regional capstone, as written in the Thornfell bible §6 table and §6.1 brief, with the Assembly posture algorithm of §9.3 and the calls of §9.4. Everything marked **[NEW]** is authored here and is not canon until the Director promotes it. **[PROPOSAL — DIRECTOR]** marks a consequential choice the content is built on. **[CANON]** marks material taken from Phase 1 or the reconciled `LORE/` files. **[APPROVED — id]** marks an approved foundational truth. No schema, production JSON or C# is created here.
+**Status:** Authored production content for Creative Director milestone review. This package implements Thornfell milestone **TF-M5 *Stonewake*** (`TSW`), the regional capstone, as written in the Thornfell bible §6 table and §6.1 brief, with the Assembly posture algorithm of §9.3 and the calls of §9.4. Everything marked **[NEW]** is authored here and is not canon until the Director promotes it. **[PROPOSAL — DIRECTOR]** marks a consequential choice the content is built on. **[CANON]** marks material taken from Phase 1 or the reconciled `LORE/` files. **[APPROVED — id]** marks an approved foundational truth. No schema, production JSON or C# is created here. This is Thornfell milestone content, an internal production milestone (CDR-3). Combat follows the Director rulings of 2026-11-03 (`Caelmor_Director_Rulings_Combat_Ranged_Release.md`): every enemy is defeated at 0 HP (CDR-1); Ingrith's surrender is the one scripted exception (SX-3), played on her defeat; every fight accepts melee or ranged (CDR-2).
 
 **Controlling document:** `04_CONTENT_PRODUCTION/Quests/Caelmor_Thornfell_Narrative_Production_Bible.md`. Its §6.1 TF-M5 brief, §9 world state and §11 conventions are binding and are implemented as written. Where this package invents detail, it is marked [NEW] and stays inside the bible.
 
@@ -84,12 +84,12 @@ Everything else is a carry-state object (a rope line to a straggler, a gallery w
 | Maera: absolute authority in matters of the dead; no grave identifies anyone by itself | Anchors V; Part 4 ledger | [CANON] |
 | Brynjar loud, loyal, would die for any Thornfell child; not in the splinter | Anchors II; bible TD-1, TD-2 | [CANON] / [PROPOSAL — DIRECTOR] |
 | Thornfell's late-war sealings stranded people; "Thornfell held the wall" | World Truth H16 | [APPROVED — FT-02b] |
-| Sealing at the Gatefall was mechanical (deadfalls on pins, ordered by horn call); no resonance at this site | Bible §2.1, TD-8 | [PROPOSAL — DIRECTOR] (narrows FT-02b for this site only) |
+| Sealing at the Gatefall was mechanical (deadfalls on pins, ordered by horn call); no resonance at this site | Bible §2.1, TD-8 | `[APPROVED — CDR 2026-11-03]` (narrows FT-02b for this site only) |
 | The closure roster; its unnamed cutter | Bible §2.1, TD-10 | [NEW] |
 | Hushfold as a clanless shelter line; Runa Weatherall | Part 3 proposal; bible §5.2, TD-4 | [NEW] |
 | Ingrith Scarrow and the Iron Winter | Bible §2.3, TD-1 | [NEW] `[SPLINTER]` |
 | The Ordinary Calls; the Third Horn | Bible §9.4 | [NEW] |
-| Human enemies yield | Bible TD-7; Lowmark D-13 | [PROPOSAL — DIRECTOR] |
+| Enemies are defeated at 0 HP; Ingrith's surrender is a scripted outcome on defeat (SX-3) | Director rulings CDR-1, §4 (supersede TD-7, Lowmark D-13) | BINDING (CDR-1) |
 | Agility triggers are optional with walkable fallbacks | Phase 1.3 §1 | [CANON]; approved, not yet implemented |
 
 ### Structure check against the bible §6 core verbs
@@ -115,7 +115,7 @@ After TF-M5: `TH_STANDING`; Thornfell master commission offers (§E.8); the Gate
 
 ## 1. The quest in one paragraph
 
-The early blizzard comes in the day after the Summit goes quiet, and Ressa Highcrag's **Gather** sounds from every tower on the ridge. At Three Calls Shelter she tells the player what Iven saw from the high path before the snow closed it: the last of the Iron Winter crews have taken the **Gatefall** gatehouse at the far end of Windscar Pass and are dropping the deadfall galleries they quietly re-propped this autumn, to seal the far gate for the whole winter. **Hushfold's winter column**, thirty-one people bringing the herds and the last wood down from the far shielings, and **Vessa Galt's patrol** are still beyond it. Above Three Calls the snow takes the world to white. Sight is useless, so the player climbs toward the wardens' horns: Gather means come, Fall means stop and shelter, and the echo off the cliff says how near the face is. Under the Gatefall the cut makes its own lee, and the player can see again: seven galleries above the gate, most of them grey-propped and spent since the war, three of them braced with fresh pale timber. A splinter hornman on the gatehouse roof calls the old sealing order, one gallery at a time; the player hears each call, matches it to the glyph on a gallery's marker stone, and reaches the live ones before their wedge crews can pull. A gust drives the player into the gatehouse's warden room, where the crew's three-night fire has cracked the plaster off the inner wall. Under the soot are dates, and beside each date, names: the people on the far side when the slab came down, and, beside some dates in the final year's long winter, a shorter line: *relief train turned back*. One of the names is **Weatherall**. The player takes a rubbing. Above, at the gate-slab winch, **Ingrith Scarrow** `[SPLINTER]`, the Quartermaster, has the slab half down and is counting. She fights, and yields. The player winds the slab back up and holds the winch while Hushfold comes through under the last loose gallery, and Runa Weatherall reads Hushfold's first tally book aloud as her people come in, the way every host reads a tally on first snow: *"Weatherall, came over in the thaw."* Two herders are still out. The player answers their Lost call, and brings them in, or leaves them to Vessa's patrol, which finds them at dawn. The next day the Assembly meets at Stonewake. There is no hearing. Hadrik Stonewake places people where they will stand, and asks the player where they will stand. The rubbing is read aloud once. The hall decides by where it stands, Ingrith goes to her clan's tribunal, and in every outcome Thornfell starts keeping a closure account: from now on, a closing names who is outside.
+The early blizzard comes in the day after the Summit goes quiet, and Ressa Highcrag's **Gather** sounds from every tower on the ridge. At Three Calls Shelter she tells the player what Iven saw from the high path before the snow closed it: the last of the Iron Winter crews have taken the **Gatefall** gatehouse at the far end of Windscar Pass and are dropping the deadfall galleries they quietly re-propped this autumn, to seal the far gate for the whole winter. **Hushfold's winter column**, thirty-one people bringing the herds and the last wood down from the far shielings, and **Vessa Galt's patrol** are still beyond it. Above Three Calls the snow takes the world to white. Sight is useless, so the player climbs toward the wardens' horns: Gather means come, Fall means stop and shelter, and the echo off the cliff says how near the face is. Under the Gatefall the cut makes its own lee, and the player can see again: seven galleries above the gate, most of them grey-propped and spent since the war, three of them braced with fresh pale timber. A splinter hornman on the gatehouse roof calls the old sealing order, one gallery at a time; the player hears each call, matches it to the glyph on a gallery's marker stone, and reaches the live ones before their wedge crews can pull. A gust drives the player into the gatehouse's warden room, where the crew's three-night fire has cracked the plaster off the inner wall. Under the soot are dates, and beside each date, names: the people on the far side when the slab came down, and, beside some dates in the final year's long winter, a shorter line: *relief train turned back*. One of the names is **Weatherall**. The player takes a rubbing. Above, at the gate-slab winch, **Ingrith Scarrow** `[SPLINTER]`, the Quartermaster, has the slab half down and is counting. She fights until she is beaten, and gives up. The player winds the slab back up and holds the winch while Hushfold comes through under the last loose gallery, and Runa Weatherall reads Hushfold's first tally book aloud as her people come in, the way every host reads a tally on first snow: *"Weatherall, came over in the thaw."* Two herders are still out. The player answers their Lost call, and brings them in, or leaves them to Vessa's patrol, which finds them at dawn. The next day the Assembly meets at Stonewake. There is no hearing. Hadrik Stonewake places people where they will stand, and asks the player where they will stand. The rubbing is read aloud once. The hall decides by where it stands, Ingrith goes to her clan's tribunal, and in every outcome Thornfell starts keeping a closure account: from now on, a closing names who is outside.
 
 **What the player should remember:** climbing blind toward a horn; the names coming out from under the soot; Runa reading her grandmother's name off a page while her people walk past her. **What the player should want next:** to take the closure account, and the standing it earned, out of Thornfell.
 
@@ -126,14 +126,14 @@ The early blizzard comes in the day after the Summit goes quiet, and Ressa Highc
 | **A. Storm the gatehouse first, then rescue the column.** | Rejected. It puts the boss before the climb and makes the column a cutscene. The brief's order (climb, galleries, roster, boss, hold) builds from sound to sight to names to people. |
 | **B. An evidence hearing in the Assembly**, with the rubbing laid as proof. | Rejected by the brief ("no evidence hearing"). Lowmark MQ10 already owns the table-of-proof structure. Thornfell decides by standing. |
 | **C. Horn-Echo surges at the Gatefall** (as the architecture summary once proposed). | Rejected by the bible (§2.4, TD-8, independent review): the Gatefall's dangers are ordinary. Gusts, loose stone and whiteout only. Resonance stays at Shatterfall and the Summit. |
-| **D. Whiteout climb by horn → gallery glyph puzzle with yielding crews → roster in a forced shelter → human boss who yields → three-segment winch and hold with the tally reading → optional straggler search with a guaranteed patrol fallback → dawn → Assembly by placement** (selected; the bible brief). | **Selected.** One night with one rhythm (blind, then seeing, then reading, then holding), then one morning of standing. |
+| **D. Whiteout climb by horn → gallery glyph puzzle with wedge crews (fight them or cut the line) → roster in a forced shelter → human boss with a scripted surrender on defeat → three-segment winch and hold with the tally reading → optional straggler search with a guaranteed patrol fallback → dawn → Assembly by placement** (selected; the bible brief). | **Selected.** One night with one rhythm (blind, then seeing, then reading, then holding), then one morning of standing. |
 
 ## 3. Canon grounding
 
 | Element | Source | Status |
 |---|---|---|
 | Windscar Pass; Passwatch; ridge horns; whiteout storms on the high passes | Dossier §V | [CANON] |
-| The Gatefall, its galleries, gatehouse and slab | Bible §2.1, TP09 | [NEW]; mechanism [PROPOSAL — DIRECTOR TD-8] |
+| The Gatefall, its galleries, gatehouse and slab | Bible §2.1, TP09 | [NEW]; mechanism (TD-8) `[APPROVED — CDR 2026-11-03]` |
 | Fresh pale props visible from below (TDS10) | Bible §7.4 | [NEW] |
 | Three Calls Shelter (guest ledge with a horn map) | Part 3; bible TP06 | [NEW, Part 3] |
 | Hushfold, the far shielings, the far hut | Bible TP04; §2.3 | [NEW] |
@@ -239,7 +239,7 @@ Above the shelter the screen goes to white (§8.1). Visibility drops to about th
 1. **Switchback Stair (C2) to W1.** Teaching leg. W1's young warden blows Gather on a slow cycle. The stair is rope-railed on the drop side: a player who walks into the rope hears "Rope. Wrong side." (`TSW-B1.2`) and cannot pass it. No fall is possible.
 2. **The Fluted Run (C3) to W2.** Gusts with whistle tells; twice, W2 blows **Fall** as the face sheds. The player must shelter and wait for **Rest**. A player who ignores Fall is knocked down by grit, gets up, and hears the wardens swear at them affectionately (`TSW-B1.6`).
 3. **The Fork (C4) to W3.** **The echo puzzle.** W3's Gather arrives here **twice**: first the direct call, louder and sharper; then, a beat later, its echo off the far face of the drovers' fork, softer and from the wrong side. The glyph shows both (the echo glyph dimmer). Walking toward the echo leads to the roped-off drovers' path (rope boundary; no fall; Iven's horn blows again and the player turns back). Blowing Answer at the inner face tells the player the face is still at their shoulder on the true track. With `TH_CALLS` the player already knows "the first one's the horn; the second one's the mountain" from Aud's TF-M1 lesson; Iven says it again from the post either way (`TSW-B1.9`).
-4. **W3, Iven's Post (C5).** Iven gives one short report (`TSW-D2`): direction, weather, timing, and that he heard the galleries calling "the old way" before the snow came. Below his post, **TSW-E1**: two ridge wolves and a howler are sheltering in the lee rocks from the same storm, and the player walks into them. Fought in near-white: the howler's howl is the telegraph (§7). They break off when hurt (wolves flee at 30%; they are animals, not humans).
+4. **W3, Iven's Post (C5).** Iven gives one short report (`TSW-D2`): direction, weather, timing, and that he heard the galleries calling "the old way" before the snow came. Below his post, **TSW-E1**: two ridge wolves and a howler are sheltering in the lee rocks from the same storm, and the player walks into them. Fought in near-white: the howler's howl is the telegraph (§7). They fight until defeated at 0 HP (CDR-1).
 5. **The Last Rise (C6) to W4.** Dorn's Gather is close, steady, and the white thins as the cut walls rise. The player walks out of the white onto the near apron.
 
 **No failure:** there is no timer on the climb. Wandering only means the next Gather comes again. If the player has not progressed toward the current post for 45 s, that post's warden blows Gather twice in a row and then the glyph stays pinned for 5 s (`TSW-B1.7`, assist). Death (wolves, a knockdown at low health) respawns the player at the last post reached.
@@ -271,8 +271,8 @@ Tags never use three shorts (Gather) or short-long-short (Fall), so no gallery c
 2. When a call sounds, its glyph appears at the screen edge pointing to the gatehouse roof (the source), not to the gallery. The player must **match the tag to a marker stone**. Inspecting a marker shows its glyph large. Grey props and an old heap below mean **spent**: nothing behind the props, nothing can fall. Pale props and a taut pull-line mean **live**.
 3. **The crews pull only in a lull.** A live gallery's crew hauls slack on the pull-line between gusts, so the stone falls true; the fluted wall's whistle stops them. Their haul is shown by the pull-line visibly tightening in stages. **The haul advances only while the player is inside the gallery zone** (fiction: the gust pattern; implementation: the stages are paced to the player). A crew never completes a pull before the player arrives.
 4. At each live gallery the player chooses:
-   - **Drive off the wedge crew** (fight, **TSW-E2/E3**; crew yield), or
-   - **Cut the pull-line** from the ledge below the pin-beam: reach the ledge (cut stair, or agility scramble), then a 3 s channelled cut, interrupted by damage, while the crew throws stones and shouts. Cutting the line ends the haul; the crew gives up and sits down (yields without a fight; `TSW-B3.8`). This is the quieter route and the faster one for a careful player.
+   - **Defeat the wedge crew** (fight, **TSW-E2/E3**; the crew fight to 0 HP), or
+   - **Cut the pull-line** from the ledge below the pin-beam: reach the ledge (cut stair, or agility scramble), then a 3 s channelled cut, interrupted by damage, while the crew throws stones and shouts. Cutting the line ends the haul; the crew's task is over, so they sit down on the ledge and stop (a puzzle outcome, not a health outcome: SX-N3; `TSW-B3.8`). This is the quieter route and the faster one for a careful player.
 5. **Wrong guesses** (walking to a spent gallery) cost only walking time. Dorn's bark tells the player once: "Grey. Nothing behind it. Let him call." (`TSW-D3.30`). Spent galleries' calls get no Answer, which is itself a clue the player can learn.
 6. **Order:** G1 and G2 (spent; teach the glyph match), **G3** (live), G4 (spent), **G5** (live), G6 (spent). The hornman repeats a live gallery's call until it is dealt with. After G6 he calls **G7**: and this time the answer comes from the gatehouse roof itself. **Ingrith has drawn G7's pins herself.** The Gate gallery groans and sheds its first stone onto the far apron. Dorn blows **Fall** from the near apron. The step completes.
 
@@ -308,9 +308,9 @@ Inside: the splinter's three-night camp. The fire is still banked high. On the w
 **Objective:** *Stop the Quartermaster at the winch.*
 Up the stair (H2) to the winch floor (H3). **Ingrith Scarrow** `[SPLINTER]` stands at the winch drum with a ridge-iron spear, the knocked-out pawl at her feet and her hornman at the parapet. The slab hangs half down in its slot. She is counting under her breath. She sees the player and finishes the count before she speaks (`TSW-D4`). She does not monologue: three short lines, one of them a number.
 
-Boss fight, **TSW-E4** (§7.1). She fights with a spear and with the gate: on her hornman's Close she lets the drum slip and the slab drops a notch, a telegraphed hazard along the slot. In phase 2 two crew come up the outer stair (three with `TH_STORES = leverage`). At about **20%** she **yields**: she plants the spear butt-down, sits on the drum frame and stops counting (`TSW-D5`).
+Boss fight, **TSW-E4** (§7.1). She fights with a spear and with the gate: on her hornman's Close she lets the drum slip and the slab drops a notch, a telegraphed hazard along the slot. In phase 2 two crew come up the outer stair (three with `TH_STORES = leverage`). She fights to **0 HP**. **When Ingrith is defeated, the quest plays her scripted surrender** (SX-3): she plants the spear butt-down and sits on the drum frame, still counting under her breath (`TSW-D5`).
 
-**The yield scene** (`TSW-D5`) is short and can be left at any line. She asks how many small ones are with the column. She says the sentence the bible gives her: *"They're clanless. They know the cold."* The player may set the roster against her (an option, never required): she has not read the wall. She asks one question about the turn-back lines and does not get an answer she can bear, so she goes back to counting. Nothing she says is evidence; it is a person, beaten, at a winch. Her `TH_HORN` line plays here. Two wardens come up the stair with Dorn and take her and the hornman down to the warden room (they stay held through the night; they are walked to Stonewake at dawn).
+**The surrender scene** (`TSW-D5`) is short and can be left at any line. She asks how many small ones are with the column. She says the sentence the bible gives her: *"They're clanless. They know the cold."* The player may set the roster against her (an option, never required): she has not read the wall. She asks one question about the turn-back lines and does not get an answer she can bear, so she goes back to counting. Nothing she says is evidence; it is a person, beaten, at a winch. Her `TH_HORN` line plays here. Two wardens come up the stair with Dorn and take her down to the warden room (she stays held through the night and is walked to Stonewake at dawn).
 
 **Verbs:** fight; listen.
 
@@ -361,7 +361,7 @@ If the player has brought in one and returns, Dorn offers both options again. **
 **Objective:** *Wait for the patrol.*
 A **keep-watch** interaction at the warden-room hearth (Lowmark convention: per-player presentation hour; cancellable; never world time). Hushfold's people are bedded in the warden room and the gatehouse passage. The roster wall is in firelight behind them. Two steps of watch, then grey light, and the storm breaks.
 
-**Vessa Galt's patrol** comes in through the gate at dawn, white with snow, with the stragglers the player did not bring (if any) (`TSW-D8`). Vessa looks at the wall for a long time. With `TPW_NAMES_ASKED` she says what she says (`TSW-D8.10`). Ressa arrives from below with more wardens. The slab is left **up and wedged, with wardens on it**: nobody seals anything until the Assembly sits. Ingrith and the hornman are walked down to Stonewake to be held. Ressa: "Assembly sits tomorrow. Bring the paper." (`TSW-D8.30`).
+**Vessa Galt's patrol** comes in through the gate at dawn, white with snow, with the stragglers the player did not bring (if any) (`TSW-D8`). Vessa looks at the wall for a long time. With `TPW_NAMES_ASKED` she says what she says (`TSW-D8.10`). Ressa arrives from below with more wardens. The slab is left **up and wedged, with wardens on it**: nobody seals anything until the Assembly sits. Ingrith is walked down to Stonewake to be held. Ressa: "Assembly sits tomorrow. Bring the paper." (`TSW-D8.30`).
 
 **Verbs:** wait, witness.
 
@@ -402,15 +402,16 @@ Tuned for **Advanced identity, Milestone 3 equipment** (bible TD-12). Exact leve
 
 | Id | Enemies (bible §10) | Placement | AI role | Telegraph | Purpose | Solo target |
 |---|---|---|---|---|---|---|
-| **TSW-E1** | 2 × ridge wolf runner, 1 × howler | Lee rocks below W3 (C5), in near-white (visibility ~3 m) | Runners circle at the edge of sight; howler hangs back and calls | **Howl:** the howler's rising howl (~1.5 s, positional; glyph-free but captioned "a howl, left") precedes a runner lunge from that side. **Lunge:** runner drops low with a snarl (~0.8 s). | A fight by ear; proves the sound rules work for danger too | 40–60 s; 65–85% HP remaining. Wolves flee at 30% (animal behaviour, not yield) |
+| **TSW-E1** | 2 × ridge wolf runner, 1 × howler | Lee rocks below W3 (C5), in near-white (visibility ~3 m) | Runners circle at the edge of sight; howler hangs back and calls | **Howl:** the howler's rising howl (~1.5 s, positional; glyph-free but captioned "a howl, left") precedes a runner lunge from that side. **Lunge:** runner drops low with a snarl (~0.8 s). | A fight by ear; proves the sound rules work for danger too | 40–60 s; 65–85% HP remaining. Wolves fight to 0 HP |
 | **TSW-E2** | G3 wedge crew: 2 × Iron Winter spear, 1 × hornman | G3 pull ledge | Spears hold the ledge stair; hornman stays by the line and buffs | **Spear lunge:** set feet, lower spear (~1.0 s), long straight thrust. **Hornman Gather:** raises horn (~1.2 s), three short; allies within 8 m attack faster for 8 s. Interrupt by hitting him during the raise. | Readable crew fight with a sound telegraph | 50–70 s; 60–80% HP. Skipped entirely if the line is cut |
 | **TSW-E3** | G5 wedge crew: as E2 (`reported`); unmanned (`seized`); 3 × spear + 1 × hornman with new spearheads (`leverage`) | G5 pull ledge | As E2 | As E2; with `leverage`, **new spearheads** add a short bleed to the lunge (visible bright iron) | `TH_STORES` made physical | 50–90 s by value; skipped if the line is cut |
 | **TSW-E4** | **Ingrith Scarrow** `[SPLINTER]` (boss), 1 × hornman; phase 2 adds 2 × spear (3 with `leverage`) | Winch floor (H3) | Boss spec §7.1 | §7.1 | Act III boss (bible §10: 1 Act III boss) | 5–7 minutes |
 | **TSW-E5** | Hazards only: gusts, G7 sheds | Winch floor, far apron | — | Whistle (~2.5 s); Fall call + grit circles (~2 s) | Labour under weather | Winding and holding ~3–4 minutes total |
 
 **Rules**
-- **Combat never reveals evidence.** The roster and Runa's tally are a wall and a book. Ingrith's lines after she yields are a person speaking, not proof; the closure account rests on the wall and the book.
-- **Defeated humans yield** (TD-7): they go down to one knee, drop their spears and sit where they are; the wardens bind them later (prop). Nobody dies. Wolves flee.
+- **Combat never reveals evidence.** The roster and Runa's tally are a wall and a book. Ingrith's lines after her scripted surrender are a person speaking, not proof; the closure account rests on the wall and the book.
+- **Defeat at 0 HP** (CDR-1; supersedes TD-7). Crews, hornmen and wolves fight until defeated and take the ordinary defeat presentation; no yield state, no bound props. Ingrith alone has a scripted outcome on defeat (SX-3). Crews who stop because their line was cut (SX-N3) are a puzzle outcome and never fought.
+- **Melee or ranged** (CDR-2): every fight accepts both; the roof and parapet hornmen can be interrupted by arrows. The winch floor gives no spot Ingrith cannot reach. Ranged is never required.
 - **No resonance at the Gatefall** (bible §2.4, TD-8). No echo-figures, no surges, no hum. The only dangers are wind, loose stone, white and people.
 - **Death:** respawn at the last checkpoint reached: Three Calls (C1) → each warden post W1–W4 → the near apron (G0) → the warden room (H1). Completed gallery steps stay completed. The rubbing persists. Winch segments persist. A beaten player is never sent back past a completed step.
 - **Co-op:** shared crews and wolves for partners on the same step; health scales per participant. Each partner's galleries, roster, winch and column are presented per player from their own step state (fallback: the host's state, all present credited). The rubbing is created per player (each partner takes their own).
@@ -447,19 +448,19 @@ Tuned for **Advanced identity, Milestone 3 equipment** (bible TD-12). Exact leve
 | Phase | Health | Pattern | Transition |
 |---|---|---|---|
 | **P1, the Count** | 100–60% | The Count, Short Measure, The Close every ~20 s. Gusts every ~25 s. | At 60% she steps back to the drum: "Gather." Her hornman blows Gather; two crew come up the outer stair (three with `leverage`). |
-| **P2, the Crew** | 60–35% | Crew spears press; hornman buffs (Gather) and calls The Close every ~15 s. Gate gallery sheds start. | When the crew have yielded (or at 35% if they are left), she drops her tally cords (a visible clatter) and stops speaking aloud. |
-| **P3, Silent** | 35–20% | She no longer counts aloud: **The Count** is now telegraphed only by her steps and a raised spear for each number (each still ~0.8 s, still three). The hornman calls The Close every ~12 s. The player has learned the rhythm; now they must read it with their eyes. | At ~20% she **yields** (below). |
+| **P2, the Crew** | 60–35% | Crew spears press; hornman buffs (Gather) and calls The Close every ~15 s. Gate gallery sheds start. | When the crew have been defeated (or at 35% if they are left), she drops her tally cords (a visible clatter) and stops speaking aloud. |
+| **P3, Silent** | 35–0% | She no longer counts aloud: **The Count** is now telegraphed only by her steps and a raised spear for each number (each still ~0.8 s, still three). The hornman calls The Close every ~12 s. The player has learned the rhythm; now they must read it with their eyes. | At 0 HP she is defeated and the quest plays her scripted surrender (SX-3, below). |
 
-#### 7.1.4 Tuning, yield, death, co-op
+#### 7.1.4 Tuning, scripted surrender, death, co-op
 
 | Item | Target |
 |---|---|
 | Solo duration | 5–7 minutes for an Advanced-identity player with cooked food. |
 | Solo end state | A player who moves on the count and keeps out of the slot ends at 30–60% HP. No single hit above 30% max HP except The Close in the slot (~35%). |
-| **Yield** | At ~20% health (the fight ends on reaching the threshold; she is not damaged further), she plants her spear butt-down, sits on the drum frame and stops counting. The hornman puts his horn down on the boards. Any crew still standing sit down. `TSW-D5` opens. No loot. Nothing evidentiary. |
-| Death | Respawn in the warden room (H1). The fight resets to the **top of the phase the player died in** (100 / 60 / 35%). Yielded crew stay yielded. |
+| **Scripted surrender (SX-3)** | On defeat at **0 HP** (no health threshold), the quest's defeat hook plays her surrender instead of the ordinary defeat presentation: she plants her spear butt-down and sits on the drum frame, still counting under her breath, and is spawned as a non-hostile NPC. The hornman and any crew still standing fight on to 0 HP; `TSW-D5` opens when the floor is clear. No loot from her. Nothing evidentiary. |
+| Death | Respawn in the warden room (H1). The fight resets to the **top of the phase the player died in** (100 / 60 / 35%). Defeated crew stay defeated. |
 | Logout | `S04` persists; the fight restarts at 100% on re-entry. |
-| Co-op | Shared boss for partners on `S04`. Health scales per participant. The Count targets one player at a time in rotation. Each partner sees their own yield scene (per player); fallback: shared scene, every partner given the options. |
+| Co-op | Shared boss for partners on `S04`. Health scales per participant. The Count targets one player at a time in rotation. Each partner sees their own surrender scene (per player); fallback: shared scene, every partner given the options. |
 | Splinter swap | If TD-1 is replaced, the boss's name, coat and lines swap; the mechanics (count, gate, gust) are built on "a quartermaster who knows the gate" and survive any replacement that is still an independent Thornfell faction. |
 
 ## 8. The discovery moments: presentation specs
@@ -540,10 +541,10 @@ The bible's strange moment is the roster: names under soot. TF-M5 has no phenome
 | Step | Objective | Completes on | Req. | Notes |
 |---|---|---|---|---|
 | `S00_gather` | Answer the Gather at Three Calls Shelter. | Enter C1 volume + `TSW-D1` end | Yes | Quest Active on entering Windscar Pass or Stonewake after TF-M4 Completed (server event `tsw.blizzard_start`, per player). Loaned horn granted here only if the player lacks the TF-M1 practice horn (fallback). |
-| `S01_whiteout` | Climb to the Gatefall by the wardens' horns. | Enter G0 (near apron) volume | Yes | Checkpoints at W1, W2, W3, W4. `TSW-D2` at W3 (Iven) is required (short; gates the wolves' zone and the Fork's echo lesson). TSW-E1 must be resolved (wolves flee) to leave W3's zone. Assist re-call after 45 s without progress. |
+| `S01_whiteout` | Climb to the Gatefall by the wardens' horns. | Enter G0 (near apron) volume | Yes | Checkpoints at W1, W2, W3, W4. `TSW-D2` at W3 (Iven) is required (short; gates the wolves' zone and the Fork's echo lesson). TSW-E1 must be resolved (wolves defeated) to leave W3's zone. Assist re-call after 45 s without progress. |
 | `S02_galleries` | Stop the gallery crews. | G3 and G5 each resolved (`fought` or `cut`), then G7 call and shed event | Yes | Hornman call sequence G1→G7; live calls repeat until resolved. With `TH_STORES = seized`, G5 is resolved by cutting only. Sets `TSW_G3`, `TSW_G5`. |
 | `S03_gatehouse` | Get up to the winch. / Shelter. / Read the wall. / Take a rubbing. | 3 × `wipe_panel` + 3 × `rub_panel` complete → `TSW_closure_rubbing` acquired | Yes | Forced shelter: the cut stays in a gust until the rubbing is acquired. Wipes and rubs persist individually. Sets `TSW_ROSTER_READ`. |
-| `S04_ingrith` | Stop the Quartermaster at the winch. | TSW-E4 reaches yield threshold + `TSW-D5` end | Yes | `[SPLINTER]`. Phase checkpoints. `TSW-D5` can be exited at any line (exit counts as end). |
+| `S04_ingrith` | Stop the Quartermaster at the winch. | TSW-E4: Ingrith defeated (SX-3 on-defeat hook) + `TSW-D5` end | Yes | `[SPLINTER]`. Phase checkpoints. `TSW-D5` can be exited at any line (exit counts as end). |
 | `S05_wind` | Wind the gate-slab up. | 3 × `wind_slab` segments complete | Yes | Completed segments persist. TSW-E5 hazards. |
 | `S06_hold` | Hold the winch while the column comes through. | Column passage complete **and** `TSW-D6` complete | Yes | Hold interaction; release pauses column. `TSW-D6` is the second-custodian beat. |
 | `S07_stragglers` | Answer the Lost call. | Both stragglers inside the gate **or** `TSW-D7.30` "leave it to the patrol" | Yes | Reply blown on reaching F1 (player Third Horn with `TH_THIRD_HORN`; otherwise Dorn's Answer). Sets `TSW_ODDNY`, `TSW_HALVARD`, then `TH_COLUMN`. |
@@ -597,8 +598,8 @@ Hadrik places people; the player chooses only their own place. The posture is th
 
 | Option | Immediate result | Cost | Later |
 |---|---|---|---|
-| **Drive off the crew** (`fought`) | Crew yield on the ledge; the gallery stays rigged and is later re-wedged by wardens. | A fight; health and time. | Yielded crew are walked down at dawn; one says a line at the Assembly door (`TSW-B9.8`). |
-| **Cut the pull-line** (`cut`) | The haul ends; the crew sit down without a fight. | The gallery can no longer be pulled from the ledge, so it stays live until wardens re-pin it; a short climb under stones thrown. | Ingrith: "Cut my lines. Rope's dear." (`TSW-D5.12`). Wardens grumble about re-rigging (`TSW-B9.9`). |
+| **Defeat the crew** (`fought`) | The crew are defeated on the ledge; the gallery stays rigged and is later re-wedged by wardens. | A fight; health and time. | The gallery is clear. Wardens re-wedge it at dawn. |
+| **Cut the pull-line** (`cut`) | The haul ends; the crew sit down without a fight (SX-N3). | The gallery can no longer be pulled from the ledge, so it stays live until wardens re-pin it; a short climb under stones thrown. | Ingrith: "Cut my lines. Rope's dear." (`TSW-D5.12`). Wardens grumble about re-rigging (`TSW-B9.9`). The crew who sat down come in with the wardens at dawn; one says a line at the Assembly door (`TSW-B9.8`). |
 
 **Choice B: the stragglers (`TH_COLUMN`)**
 
@@ -624,7 +625,7 @@ Hadrik places people; the player chooses only their own place. The posture is th
 | **watchful** | The far gate closes at deep snow, kept by the Wardens; storm closings at Ressa's word. Reopens at thaw at the Wardens' word. | **Kept by the Wardens** on slates at each gate; read to anyone who asks a warden. | Readiness is kept **under Assembly account**: the reserve stays in store, counted, under seal, and nobody adds to it without the Assembly. | Nobody is fully satisfied. Hushfold's people still have to ask. |
 | **sealed_with_terms** | The passes **stay shut until the thaw**, beginning now: the slab comes down this week, early and hard. | Kept, with the names of everyone known to be outside, and a **relief line** to them: a weekly rope-and-horn run from Passwatch to the far hut and the shielings, carrying food from the reserve. | Readiness kept in full; the reserve feeds the relief line first. | The far-side winterers are outside all winter. Hushfold's people who chose to winter at the shielings are named in the account and fed by rope, not let in. |
 
-**Every outcome:** Ingrith goes to her clan's tribunal. The closure account is adopted. The Iron Winter as a splinter is ended (its leader held, its crews walked down, its store under Assembly account). `TH_STANDING` is set.
+**Every outcome:** Ingrith goes to her clan's tribunal. The closure account is adopted. The Iron Winter as a splinter is ended (its leader held, its crews beaten and the pass clear, its store under Assembly account). `TH_STANDING` is set.
 
 ## 10. Rewards and unlocks
 
@@ -673,7 +674,7 @@ Documented dependencies for a later Systems Engineer. None is implemented here.
 | **Pull-line cut interaction** | Systems | 3 s channel, interrupt on damage; resolves the gallery. |
 | **Forced shelter** | Systems | Gust state on the cut that holds while `S03` is incomplete; ends on rubbing acquired. |
 | **Wipe and rub interactions** | Systems | Per-panel channels with persistence; rubbing creates `TSW_closure_rubbing`. |
-| **Boss: Ingrith** | Gameplay + animation + audio | Spear moveset with spoken count; drum-brake slab drop on the hornman's Close; gust and shed hazards; yield threshold at ~20%. |
+| **Boss: Ingrith** | Gameplay + animation + audio | Spear moveset with spoken count; drum-brake slab drop on the hornman's Close; gust and shed hazards; on-defeat quest hook at 0 HP plays the SX-3 surrender (no health threshold). |
 | **Channelled segments with persistence** (winch) | Systems | Lowmark MQ4 crank convention, three segments. |
 | **Hold interaction pacing a crowd** | Systems | Sustained hold; release pauses a scripted crowd path; crowd waits in a lee volume. |
 | **Scripted column crowd** | Systems + NPC | ~31 NPCs, goats and sledges on a path in tally order. Fallback: 10–12 visible walkers with goat and sledge props, the rest implied by Runa's count. |
@@ -695,17 +696,17 @@ Documented dependencies for a later Systems Engineer. None is implemented here.
 | **Who Thornfell shut out** (R06 sealing) | The late-war sealings left people on the far side; the gate-warden cut their names beside the dates; nobody read it. | "Thornfell held the wall." | The roster (required inspect); the rubbing; Hushfold's first tally book (Weatherall, came over in the thaw). | The sealing was pure heroism; Hushfold are deserters' families. | How many died outside; where the rest went (some reached the Mire: R14, not here). | **TF-M5** (owned here). |
 | **Why Thornfell went hungry** (quiet) | Relief trains that reached the far gate in the final year's long winter were turned back by Thornfell's own closing. | Emberholt starved Thornfell. | The turn-back lines, dated in the long winter; Ingrith's own date for her hunger. | The roster lies; the trains were Emberholt tricks. | Where the trains came from; who ordered them turned back. Never stated (FT-03 spirit: no invented routes). | Seed only. Never stated in Thornfell. |
 | **Who cut the roster** (TD-10) | An unnamed late-war gate-warden. | Nobody knows it exists. | Uneven hand; the last line ("snow too thick to count"). | An Assembly order; a clan record. | The cutter's name. | **Never** (TD-10). |
-| **What Ingrith's tribunal decides** | Open. | — | She is held; her clan will sit at thaw. | — | The verdict. | Not authored in Thornfell v1.5 (open decision 5). |
+| **What Ingrith's tribunal decides** | Open. | — | She is held; her clan will sit at thaw. | — | The verdict. | Not authored in Thornfell content (open decision 5). |
 | **The stranded who did not come back** | Some reached the Mire. | — | Names on the rubbing with no Hushfold match. | They all died. | Their fates. | R14 / CV-M3 chip (bible §8.2). |
 
 ## 14. Open decisions
 
-1. **TD-8** (Gatefall mechanism) is used as recommended: mechanical deadfalls, horn-ordered, no resonance. If the Director restores a resonance cause here, the galleries become the place it lives; the roster, the slab and the Assembly are unaffected.
+1. **TD-8** (Gatefall mechanism) `[APPROVED — CDR 2026-11-03]`: mechanical deadfalls ordered by horn calls, without resonance (rulings §2). FT-02b is narrowed at this one site only.
 2. **TD-5 / closure account** [PROPOSAL — DIRECTOR]: adopted in every outcome as the brief requires. If replaced, the three posture endings lose their "who keeps the account" line only.
-3. **Thaw presentation** [PROPOSAL — DIRECTOR]: `TH_SEASON` has only autumn / snow (bible §9.2). This package does **not** add a `thaw` value; it proposes a quest-local `TSW_THAW` presentation state set on the player's first re-entry to Thornfell after completing TF-M5 and leaving the region once. The Director may instead extend `TH_SEASON` with `thaw`; the §E.7 table works with either.
+3. **Thaw presentation** `[APPROVED — CDR 2026-11-03]`: `TH_SEASON` keeps two values, autumn / snow (bible §9.2). The thaw is the quest-local `TSW_THAW` presentation state set on the player's first re-entry to Thornfell after completing TF-M5 and leaving the region once (rulings §2).
 4. **The player's horn (resolved, independent review).** TF-M1 gives the Hornbearer's practice horn as a reward tool; TF-M5 relies on it. Ressa's loan (`TSW_HORN_LOANED`) remains only as a fallback for a player without it. The item pass decides both horns' item form.
-5. **Ingrith's tribunal verdict** is deliberately not authored. Recommendation: leave it unresolved in v1.5; epilogue shows her held and the tribunal "sitting at thaw".
-6. **Bersi and Eyvind** `[SPLINTER]`: their fates belong to TF-M2, TF-M4 and *The Notes We Keep*. TF-M5 does not mention them except that "the Iron Winter's crews" are walked down. Recommendation: one Assembly bark at most, none required.
+5. **Ingrith's tribunal verdict** is deliberately not authored. Recommendation: leave it unresolved in Thornfell content; epilogue shows her held and the tribunal "sitting at thaw".
+6. **Bersi and Eyvind** `[SPLINTER]`: their fates belong to TF-M2, TF-M4 and *The Notes We Keep*. TF-M5 does not mention them except that the Iron Winter is over and the pass is clear. Recommendation: one Assembly bark at most, none required.
 7. **Gallery calls** [NEW]: the Close-plus-tag sealing calls are new wartime calls. They are not refused calls (bible §9.4 lists only the Split, the Third Horn and Witness at the Gate). Ressa's line treats them as calls nobody needed to refuse because nobody thought they would be blown again. If the Director prefers them refused, add one line to `TSW-D1` and nothing else changes.
 8. **Architecture wording.** The architecture's TF-M5 row mentions "Horn-Echo surges"; the bible (review finding) removed them. This package follows the bible.
 
@@ -721,7 +722,7 @@ Documented dependencies for a later Systems Engineer. None is implemented here.
 | The roster risked being missed under time pressure. | A forced shelter holds the storm on the cut until the rubbing is taken; no clock runs during it; wipes and rubs persist. |
 | The roster risked identifying people by itself as "the dead". | The roster says who was outside, not who died. Maera, if she reads, reads names, not deaths. No line says anyone on it died. |
 | Runa's tally beat could be missed while fighting. | It plays during the hold, which has no enemies; the hold cannot finish until the reading has. |
-| Ingrith risked a villain speech or a contrition scene. | Three lines before the fight; a short exitable yield scene; one question about the turn-back lines; she goes back to counting. Nothing she says is proof. |
+| Ingrith risked a villain speech or a contrition scene. | Three lines before the fight; a short exitable surrender scene; one question about the turn-back lines; she goes back to counting. Nothing she says is proof. |
 | The hunger-winter contradiction risked being stated. | The roster dates the turn-backs in the final year's long winter; Ingrith dates her hunger to the same winter in her own words. No NPC links them; one interaction-log line at most. |
 | Stragglers risked being lost. | Patrol fallback at dawn; both always seen alive. `patrol_brought` costs only a posture point. |
 | The Assembly risked becoming a hearing. | No questions, no proof, no testimony: placement, one reading, movement, a repeated decision. |
@@ -735,6 +736,7 @@ Documented dependencies for a later Systems Engineer. None is implemented here.
 | Item budget. | One quest item; Thornfell total 4 of 4. |
 | Lowmark independence. | No Lowmark state required. One optional Elira line with `LM_CIVIC_STANDING`. The turn-back lines never say where relief came from. |
 | **Independent review (2026-11-03)**: 10 findings (2 medium, 8 low). | Horn: relies on TF-M1's practice horn; Ressa's loan is fallback only. `TDS10_SEEN`/`TME01_TALLIED` marked [NEW] placeholders. `TSW-D9.2x` made explicit. `TSW-B6` reference corrected to `TSW-D6.11`. Hadrik-totals consistency stated (§8.4; dialogue cast note). §E.6 relief sacks now exclude `seized`; §E.10 no longer contradicts sealed_with_terms. Roster near-collisions renamed (Sigrid→Astrid Weatherall, Asgeir Holt→Arvid Lunde, Ragna Holt→Ragna Lunde, Brekke→Tofte carters). `[SPLINTER]` tags on `TSW-D5.40`, `TSW-B10.2`. |
+| **Director rulings reconciliation (2026-11-03)**: CDR-1, CDR-2, CDR-3; Thornfell decisions §2. | Ingrith is SX-3: fights to 0 HP, the quest plays her surrender on defeat (the ~20% threshold is removed; phase checkpoints 100/60/35% kept; P3 now 35–0%). Her hornman and crew fight to 0 HP and are no longer taken into custody. TSW-E1 wolves fight to 0 HP (30% flee removed). Gallery crews: fought crews are defeated; the cut-the-line outcome stays (SX-N3) and those crews supply `TSW-B9.8`. "Walked down" epilogue wording replaced (the pass is clear). TD-8 deadfalls and `TSW_THAW` labelled approved. Melee-or-ranged rule added. Release wording reconciled. |
 
 ---
 
@@ -806,7 +808,7 @@ This section is the single reference for how TF-M5's outcomes change Thornfell a
 
 **With `reported` or `leverage`** (with `seized` they went down to the highsteads in TF-M2 and were eaten) the Lowmark relief sacks (the RELIEF — FENMERE stencils) are set apart in the grain gallery with their stencils facing out, untouched, under a chalk note: *"Not ours. Kept till asked."* Nothing says where they came from or how (FT-03; TD-11). This is a seed the Lowmark return arc may read; nothing here depends on it.
 
-## E.7 The thaw [PROPOSAL — DIRECTOR; open decision 3]
+## E.7 The thaw `[APPROVED — CDR 2026-11-03]` (open decision 3)
 
 When `TSW_THAW` is set (first re-entry to Thornfell after completing TF-M5 and leaving the region once), Thornfell shows the thaw: snow-cover props swap to meltwater and wet stone, the Narrows runs loud, goats are back on the ledges. One **thaw event** plays at the Gatefall the first time the player visits it after `TSW_THAW`:
 
@@ -843,7 +845,7 @@ No posture changes `TH_HORN` presentation. No plate is ever reinstalled in a hor
 
 ## E.10 What every ending shares
 
-Nobody outside is left unnamed: the gate stays open while anyone is still coming in, and when it shuts (deep snow, or now under terms) everyone known to be outside is on the account. The Iron Winter is over: its leader is held for her clan, its crews are walked down, its store is under Assembly account, its galleries are pinned dead. The roster is uncovered and read. Hushfold's tally book is the second custodian, and stays in Runa's hands. Every closing in Thornfell from now on names who is outside, and somebody keeps that account. The player has a place to stand in the hall and a rubbing in their pack. Nobody in Thornfell says where the turned-back relief came from, or what the long winter did to anyone on the other side of a pass.
+Nobody outside is left unnamed: the gate stays open while anyone is still coming in, and when it shuts (deep snow, or now under terms) everyone known to be outside is on the account. The Iron Winter is over: its leader is held for her clan, its crews are beaten and the pass is clear, its store is under Assembly account, its galleries are pinned dead. The roster is uncovered and read. Hushfold's tally book is the second custodian, and stays in Runa's hands. Every closing in Thornfell from now on names who is outside, and somebody keeps that account. The player has a place to stand in the hall and a rubbing in their pack. Nobody in Thornfell says where the turned-back relief came from, or what the long winter did to anyone on the other side of a pass.
 
 ---
 
@@ -851,12 +853,12 @@ Nobody outside is left unnamed: the gate stays open while anyone is still coming
 
 | Check | Result |
 |---|---|
-| Brief compliance (bible §6.1 TF-M5) | Offer, situation and beats 1–6 implemented in order: whiteout by horn; galleries with glyphs, grey/pale props, wedge crews or pull-lines; gatehouse roster with required inspect and rubbing (Weatherall; turn-back lines in the long winter); Ingrith boss yielding ~20%; three-segment winch and hold; Runa's tally (second custodian); stragglers by Lost call, Third Horn or Dorn, patrol at dawn; Assembly by placement, one reading, posture, tribunal, closure account, `TH_STANDING`. |
+| Brief compliance (bible §6.1 TF-M5) | Offer, situation and beats 1–6 implemented in order: whiteout by horn; galleries with glyphs, grey/pale props, wedge crews or pull-lines; gatehouse roster with required inspect and rubbing (Weatherall; turn-back lines in the long winter); Ingrith boss with a scripted surrender on defeat at 0 HP (SX-3); three-segment winch and hold; Runa's tally (second custodian); stragglers by Lost call, Third Horn or Dorn, patrol at dawn; Assembly by placement, one reading, posture, tribunal, closure account, `TH_STANDING`. |
 | No resonance at the Gatefall | No echo-figures, surges or hum. Ordinary gusts, loose stone, whiteout. |
 | Anchor limits | Hadrik: places and repeats; scars undated. Brynjar: not in the splinter; protective of children. Maera: authority over the dead respected; names read, not deaths assigned. Ressa: refuses calls only in her own practice; no named roster custody (she writes a new account, the old roster stays in the wall). Dorn: calls and replies; altered echoes never proof. Kaldren: stresses only. Iven: reports direction, weather, timing. |
 | Evidence rule | Roster and tally book carry the revelation. Combat reveals nothing. Ingrith's words are testimony with no proof weight. |
 | Three states | No fail anywhere. Every required proof on the critical path, persistent. Column always through; stragglers always safe. |
-| Region flags | Reads only §9.1 flags; sets `TH_COLUMN`, `TH_STAND`, `TH_ASSEMBLY_POSTURE`, `TH_STANDING`. No new `TH_` flag. Thaw uses a quest-local state pending decision. |
+| Region flags | Reads only §9.1 flags; sets `TH_COLUMN`, `TH_STAND`, `TH_ASSEMBLY_POSTURE`, `TH_STANDING`. No new `TH_` flag. Thaw uses the approved quest-local state `TSW_THAW`. |
 | Quest items | `TSW_closure_rubbing` only (Thornfell 4 of 4). |
 | Splinter tagging | Every beat and node naming Ingrith tagged `[SPLINTER]` here and in the dialogue file. |
 | Lowmark independence | No requirement; one optional line; the Lowmark sacks are kept "till asked" with no route stated. |

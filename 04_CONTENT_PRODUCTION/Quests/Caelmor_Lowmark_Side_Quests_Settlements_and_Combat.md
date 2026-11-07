@@ -50,10 +50,10 @@
 - **Steps** use `S00_…` ids scoped to the quest. **Completion events** are the True Line set: enter-volume, inspect, interaction-complete, item-given/carry-deposit, creature-defeated, dialogue-node-reached, plus *watch interaction* (advance the hour, as in MQ4).
 - **No quest can fail.** Losses are consequences (flags, props, lines), never a failed state. Death respawns at the quest's named safe point with step and flags intact. Logout restores the last persisted step; channels and carries are discarded and a dropped carry-state object returns to its source.
 - **Co-op:** independent instances; shared world creatures give step credit to every participant on that step; quest-state props are presented per player (True Line §12 fallback applies).
-- **Human enemies in settlements** (Smugglers family) are *downed* at 0 HP: they stay down and out of the fight, presented as beaten rather than killed. Joss Garrow yields. This matches MQ10, where Sallow yields `[ANTAGONIST]`. **[PROPOSAL — DIRECTOR]** presentation rule; no AI flees at low HP.
+- **Defeat (CDR-1, 2026-11-03).** Every enemy, including the human Smugglers family in settlements, fights until defeated at **0 HP** and takes the ordinary defeat presentation (falls, fades after the standard corpse time, ordinary loot). There is no downed state, no tied prop and no dialogue with a defeated enemy. No AI flees, yields or breaks off because of its health. The one scripted exception in this file is **Joss Garrow** (OL, register SX-1): he is defeated at 0 HP like any other enemy, and the quest then plays his scripted outcome (OL.4.1). MQ10's Sallow (SX-2) is owned by MQ10.
 - **Evidence rule:** every fact in these quests is carried by a record, an object, a place or a person. Drift, lagging water and a lantern that burns dry never identify anyone. Combat drops nothing that advances an investigation.
 - **Agility triggers** are used in NB, UL and OL. Each has a walkable fallback named in its place table.
-- **Skills:** Melee, Woodcutting, Hunting, Cooking only (no Ranged, Fletching or Mining). Exact levels belong to the Gameplay Designer.
+- **Skills:** Melee, Woodcutting, Hunting, Cooking. Every fight accepts **melee or ranged** (CDR-2): ranged is a first-class option, never required, and no fight here is built so that ranged trivialises it. "Melee" in the skill rows below names the combat, not a melee-only rule. No Fletching or Mining steps in these packages. Exact levels belong to the Gameplay Designer.
 
 ### 0.4 Distinctness check
 
@@ -65,7 +65,7 @@
 | UR | Clears scrub and a nest with their hands, drives raiders off a threshing floor; uncovers a buried gate | MQ5 (excavates a culvert); WC (tracks, does not clear) |
 | NT | Holds a lantern ring around a crowd for a night; walks people back from a bad boat | TL (investigation and a single boar); MQ10 (siege of a building) |
 | FW | Re-sets a boundary line, pulls people back across it, holds it against an apex predator | MQ11 (holds channel gates under Wraith pressure) |
-| OL | Tracks one man's patrol, fights him without killing him, brings him or his light home | MQ10 Sallow `[ANTAGONIST]` (crew boss in a building); MQ11 Muster (Wraith Lord) |
+| OL | Tracks one man's patrol, fights him until he is beaten (a scripted outcome, SX-1), brings him or his light home | MQ10 Sallow `[ANTAGONIST]` (crew boss in a building); MQ11 Muster (Wraith Lord) |
 
 ---
 
@@ -123,7 +123,7 @@ There is no line-of-sight detection. Challenges are fixed volumes that start a s
 
 **Beat 3 — The book (`S03_read_ledger`).** *Objective: Read the ledger.* Three inspect pages (all required): **the Lock line** (*"Lock work, G.S., paid in full, four nights running"*; with MQ3 done, *"The nights are the wrong nights in Ansel's book"* `[ANTAGONIST]`), **the purse** (*"Drawn on the Provisioner's purse"*, with pay chits pinned in at the back, each stamped with the Provision Board's seal and signed "received" in Rhosyn's hand `[ANTAGONIST]`), and **the passes** (*"Crew passes for the Crestbridge toll, twelve, in the names of licensed haulers"*). Rhosyn gives it up (`UL-D4.30`) or the player takes it (`UL-D4.40`); either way it becomes a carry-state object.
 
-**Beat 4 — Out (`S04_out`).** *Objective: Carry the ledger out of the cellar.* Rhosyn says the stair is counted; the river door isn't. Both exits work. The stair exit with the ledger in hand starts E2 unless the crew is already down; the river door exit has only E3 (and none if the player came in that way and the leeches are already dispersed). Rhosyn follows the player out by whichever exit they take: once the book is gone she can't be found sitting beside the empty desk.
+**Beat 4 — Out (`S04_out`).** *Objective: Carry the ledger out of the cellar.* Rhosyn says the stair is counted; the river door isn't. Both exits work. The stair exit with the ledger in hand starts E2 unless the crew is already defeated; the river door exit has only E3 (and none if the player came in that way and the leeches are already defeated). Rhosyn follows the player out by whichever exit they take: once the book is gone she can't be found sitting beside the empty desk.
 
 **Beat 5 — The dock steps (`S05_rhosyn`).** *Objective: Decide what happens to Rhosyn.* At the foot of the dock steps, in the dark, `UL-D5`. The choice (UL.8) must come before the deposit because one option changes the book.
 
@@ -139,7 +139,7 @@ There is no line-of-sight detection. Challenges are fixed volumes that start a s
 | **E2** | Smuggler pole-man + 2 cutters (after MQ6: pole-man + 1 cutter) | Cellar market | Aggressive if force was used, if the player attacks in the cellar, or if the ledger goes up the stair with the crew standing | As E1. Racks are cover: a pole sweep that hits a rack stops short. | Optional. 45–75 s. Fair for Milestone 1 dependable equipment. |
 | **E3** | 2 River Leeches, 1 River Skitter swarm | River tunnel water | Aggressive in the water volume only | Leech rears (~1.2 s) before latching; latch breaks on stepping onto the brick ledge or two hits. Skitters: ripple fan (~0.8 s). | Only if the grate is cranked outside the skiff window. Low threat by design. |
 
-Downed crew stay down until the player leaves the building. Nothing they carry advances the quest.
+Defeated crew do not respawn while the player is in the building. Nothing they drop advances the quest.
 
 ### UL.5 Steps and completion events
 
@@ -192,11 +192,11 @@ No option is wrong. None of them makes Rhosyn safe and keeps her work going and 
 
 | Situation | Handling |
 |---|---|
-| Death in the cellar | Respawn at Ottilie's yard. Downed crew stay down; step and flags kept; a carried ledger returns to Rhosyn's desk and `S03` re-completes on pickup (pages stay read). |
+| Death in the cellar | Respawn at Ottilie's yard. Defeated crew stay defeated (no respawn while the player is in the building); step and flags kept; a carried ledger returns to Rhosyn's desk and `S03` re-completes on pickup (pages stay read). |
 | Crate dropped | Returns to Ottilie's yard. |
 | No food, no coin, no will to fight | Errand and river-door routes need neither. |
 | Player fights everyone | Rhosyn still talks (`UL-D4` force variant). The choice is unchanged. |
-| Co-op | Each player needs their own entry flag; a partner's fight downs shared crew for both. Rhosyn's choice is per player; a partner who chose differently sees their own outcome (her nook empty or occupied, per state). |
+| Co-op | Each player needs their own entry flag; a partner's fight defeats shared crew for both. Rhosyn's choice is per player; a partner who chose differently sees their own outcome (her nook empty or occupied, per state). |
 
 ### UL.10 Integration needs
 
@@ -223,7 +223,7 @@ No option is wrong. None of them makes Rhosyn safe and keeps her work going and 
 
 ### UL.12 Dialogue
 
-**UL-B1 — Crew bark (taproom, quest available):** CREWMAN: *"Book says we're paid through the month. Book says. Ask her downstairs what the book says."* / [MQ6 Completed] CREWMAN: *"Half the crew's in keeper rope since the mill. Book still says we're owed."* → objective `S00_hook`.
+**UL-B1 — Crew bark (taproom, quest available):** CREWMAN: *"Book says we're paid through the month. Book says. Ask her downstairs what the book says."* / [MQ6 Completed] CREWMAN: *"Half the crew's gone since the mill. Book still says we're owed."* → objective `S00_hook`.
 
 ```
 UL-D1.01 OTTILIE: (holding a bowl to the window) "Not you. I'm talking to the bowl. It's got a seed in the glass."
@@ -265,7 +265,7 @@ UL-D3.30 CREWMAN: "Show it to the stair. Don't tell her where you got it. She'll
 ```
 
 ```
-UL-D4.00 [MQ6 Completed] RHOSYN: (packing inks into a crate) "Half of them are in keeper rope. I'm between lives. Be quick."   → UL-D4.01
+UL-D4.00 [MQ6 Completed] RHOSYN: (packing inks into a crate) "Half of them are gone since the mill. I'm between lives. Be quick."   → UL-D4.01
 UL-D4.01 [UL_ENTRY_FORCE] RHOSYN: (pen still moving) "That was loud. I'd have let you in for a smile."
 UL-D4.01 [UL_ENTRY_PASS]  RHOSYN: "That's Fitch's pass. I wrote Fitch's pass. You're not Fitch."
 UL-D4.01 [UL_ENTRY_RIVER] RHOSYN: (not turning) "Nobody uses the river door but me. Come in, then. Wipe your feet."
@@ -770,7 +770,7 @@ UR-D7.03 JORIC: (back at the net; to nobody in particular) "Mind the goblins don
 **Beat 2 — First watch (`S02_first_watch`).** *Objective: Keep watch at the fire.* Watch interaction advances the night. Three thieves try the carts in turn (E1). Each crouches at a cart and rummages for about 2 s (the intercept window), then runs for the reed edge with a bundle. Caught inside the ring: no loss. Reaching the reeds: `NT_LOSSES` +1, and the bundle goes to the bluff camp.
 **Optional — The bluff (`S02b_bluff`).** *Objective: Get the stolen bundles back.* Available from the second watch onward. Raid the bluff camp (E4) and carry each bundle (carry-state) back to its cart; each one returned is −1 to `NT_LOSSES`.
 **Beat 3 — Second watch (`S03_second_watch`).** *Objective: Keep watch at the fire.* Brack ties up at the dark landing and calls a price for a night crossing. The household with the cradle-basket starts walking toward him. The player can (a) catch them on the path and talk them back (`NT-D3`), or (b) go down to Brack (`NT-D4`), then talk the household back. At the landing the player can cut Brack's mooring (2 s; his two pole-men attack, E2; the skiff drifts off empty) or warn him off. The step completes when the household is back inside the ring.
-**Beat 4 — Third watch (`S04_third_watch`).** *Objective: Hold the ring until dawn.* A shout from the bluff, then wet sacks thrown from the dark put out all four lanterns at once (2 s telegraph: shouts and a rush of feet). E3 comes through the dark lanes in two waves. Teague and Dace each hold one lane (they cannot be downed; they slow the enemies at their lane), and the player relights the lanterns and fights. A lit lane is one enemies won't enter, so each relight closes a way in. Brack comes in the second wave.
+**Beat 4 — Third watch (`S04_third_watch`).** *Objective: Hold the ring until dawn.* A shout from the bluff, then wet sacks thrown from the dark put out all four lanterns at once (2 s telegraph: shouts and a rush of feet). E3 comes through the dark lanes in two waves. Teague and Dace each hold one lane (they cannot be defeated; they slow the enemies at their lane), and the player relights the lanterns and fights. A lit lane is one enemies won't enter, so each relight closes a way in. Brack comes in the second wave.
 **Beat 5 — Dawn (`S05_dawn`).** *Objective: Talk to Maelin at the landing.* Watch to dawn. The mist lifts; the boil is plain; Brack's skiff (cut loose or pushed off) turns over in it. `NT-D5`: Maelin's refusal, understood, and the choice of who crosses first.
 **Beat 6 — Crossing (`S06_crossing`).** *Objective: Cross with Maelin.* The player rides the first crossing (Maelin's crossing interaction). Arrival on the far bank: `NT-D6`. Quest Completed.
 
@@ -778,13 +778,13 @@ UR-D7.03 JORIC: (back at the net; to nobody in particular) "Mind the goblins don
 
 | Id | Enemies | Where | Role | Telegraph | Solo target |
 |---|---|---|---|---|---|
-| **E1** | 3 Smuggler cutters (thieves), one at a time | Cart ring → reed edge | Target a cart, not the player; once engaged, Aggressive and fight to downed | Rummage crouch at a cart (~2 s), then a sprint path to the reeds shown by trampled ground. In combat: shoulder drop, blade low (~0.9 s), two quick cuts. | Three catches possible for a player who watches the carts. Each fight 15–25 s. |
+| **E1** | 3 Smuggler cutters (thieves), one at a time | Cart ring → reed edge | Target a cart, not the player; once engaged, Aggressive and fight until defeated at 0 HP | Rummage crouch at a cart (~2 s), then a sprint path to the reeds shown by trampled ground. In combat: shoulder drop, blade low (~0.9 s), two quick cuts. | Three catches possible for a player who watches the carts. Each fight 15–25 s. |
 | **E2** | 2 Smuggler pole-men | Dark landing | Aggressive once the mooring is cut | Plant the pole and lean back (~1.2 s), then a sweep with 2 m knockback; the shingle spit has water on two sides (knockback into the shallows only slows the player). | Optional. 40–60 s. |
 | **E3a** | 2 cutters (dousers), 1 pole-man | Dark lanes | Dousers go for lit lanterns first; telegraph is a raised wet sack while running (~1.5 s) | As above | Required. |
 | **E3b** | 2 pole-men + **Brack** (named cutter, ~2× cutter health) | Dark lanes | Aggressive | Brack: laughs and steps back (~1.0 s), then a long lunge; once per fight he grabs a fallen lantern and throws it, leaving burning oil on the ground (3 m, 3 s; ring of fire shown before it lands, ~1.2 s). | Required. 60–90 s. Player at 40–70% HP on a first attempt; Teague and Dace slow the lanes so the player is never fighting more than three at once. |
 | **E4** | 2 cutters, 1 pole-man (lookout) | Bluff camp | Defensive around the tarp; do not pursue past the bluff edge | As above | Optional. 45–60 s. |
 
-Downed opportunists are tied by Teague's militia at dawn. Nothing they carry advances the quest except the bundles, which are world objects.
+Defeated opportunists take the ordinary defeat presentation (CDR-1). Nothing they drop advances the quest; the bundles are world objects.
 
 ### NT.5 Steps and completion events
 
@@ -793,7 +793,7 @@ Downed opportunists are tied by Teague's militia at dawn. Nothing they carry adv
 | `S00_hook` | Find out why the ferry has stopped. | `NT-D1` end node | Yes |
 | `S01_ring` | Light the lanterns and bring everyone into the ring. | 4 `light_lantern` interactions + 3 escort-arrival events in ring volume | Yes |
 | `S01b_feed` | (Optional) Feed the ring. | Cooked food given to a ring NPC | No |
-| `S02_first_watch` | Keep watch at the fire. | Watch interaction; then 3 thief events resolved (downed or escaped) | Yes |
+| `S02_first_watch` | Keep watch at the fire. | Watch interaction; then 3 thief events resolved (defeated or escaped) | Yes |
 | `S02b_bluff` | (Optional) Get the stolen bundles back. | Each bundle carry-deposited at its cart | No |
 | `S03_second_watch` | Keep watch at the fire. | Watch interaction; household escort-arrival in ring volume | Yes |
 | `S04_third_watch` | Hold the ring until dawn. | Watch interaction; E3b defeated | Yes |
@@ -825,7 +825,7 @@ Small payment from Teague's militia purse (he complains about it); a household's
 
 ### NT.9 Failure, recovery, co-op
 
-No fail. Death respawns at the ring fire; doused lanterns stay doused, downed enemies stay down, the current wave continues. If the player leaves the ring area during a watch, the watch pauses (no wave advances) until they return. Teague and Dace cannot be downed and never hold the ring alone for long enough to matter. Logout restores the last completed watch. In co-op, each player has their own crowd and their own losses; shared opportunists count for both players' current step. A partner's lanterns light for both players (shared world props) [integration check].
+No fail. Death respawns at the ring fire; doused lanterns stay doused, defeated enemies stay defeated, the current wave continues. If the player leaves the ring area during a watch, the watch pauses (no wave advances) until they return. Teague and Dace cannot be defeated and never hold the ring alone for long enough to matter. Logout restores the last completed watch. In co-op, each player has their own crowd and their own losses; shared opportunists count for both players' current step. A partner's lanterns light for both players (shared world props) [integration check].
 
 ### NT.10 Integration needs
 
@@ -845,7 +845,8 @@ No fail. Death respawns at the ring fire; doused lanterns stay doused, downed en
 |---|---|
 | Draft opened with "who fouled the chain?" | Cut. That made it an investigation. The chain fouled on the scour; nobody did it. |
 | Draft's dawn showed a drowned wreck under the line. | Too close to the True Line's drowned pier. Replaced with the boil, visible only in daylight. |
-| Thieves running away read as fleeing at low HP. | They run *before* combat with a bundle; once engaged they fight to downed. |
+| Thieves running away read as fleeing at low HP. | They run *before* combat with a bundle; once engaged they fight until defeated at 0 HP. |
+| Director rulings reconciliation (CDR-1, 2026-11-03): thieves were "downed" and tied by the militia at dawn. | Every opportunist is defeated at 0 HP with the ordinary defeat presentation; the militia tying beat is removed. Step `S02_first_watch` resolves on defeated or escaped. Teague and Dace stay damage-immune allies. |
 
 ### NT.12 Dialogue
 
@@ -969,7 +970,7 @@ NT-D6.30 MAELIN: "Go and sleep. River keep you."   {event: S06_crossing → ques
 
 | Id | Enemies | Where | Role | Telegraph | Solo target |
 |---|---|---|---|---|---|
-| **E1** | 2 Reed Stalker stalkers, 1 lurker | Group 3's skiff | Aggressive in the reeds; they target cutters first (cutters back off and cannot be downed) | Reeds part in a line (~1.2 s), leap; throat-swell (~1.0 s), tongue-lash pull 3 m toward water. Lurker: bubble ring (~1.5 s), surfacing grab. | Required. 45–60 s. |
+| **E1** | 2 Reed Stalker stalkers, 1 lurker | Group 3's skiff | Aggressive in the reeds; they target cutters first (cutters back off and cannot be defeated) | Reeds part in a line (~1.2 s), leap; throat-swell (~1.0 s), tongue-lash pull 3 m toward water. Lurker: bubble ring (~1.5 s), surfacing grab. | Required. 45–60 s. |
 | **E2** | Wave 1: 3 stalkers. Wave 2: 3 stalkers + 1 lurker | Withy line | Target withies, then the player | Withy grip + throat-swell (~1.5 s) before a pull | Required. 60–90 s per wave. |
 | **E3** | **Deep-Pool Serpent** (Stillwater Serpents elite) | The staging | Elite; spec below | — | Required. 3–4 minutes. |
 
@@ -988,7 +989,7 @@ NT-D6.30 MAELIN: "Go and sleep. River keep you."   {event: S06_crossing → ques
 | **Drag** (P3, below 33%) | It coils one stake: the white rag snaps taut and the stake creaks (**2.0 s**). For 4 s the mat tilts toward the pool; players on soft mat slide 1 m per tick toward the kerb (damage only on reaching it); players on any *other* stake are unaffected. The coiled stake is unusable until the drag ends. Cadence ~20 s. |
 | Phases | P1 100–66%: strike, tail sweep. P2 66–33%: + coil-slam. P3 below 33%: + drag, faster strike. No enrage timer. No adds. Never flees. |
 | Ally | Lessa stands at the landward edge and calls each tell once ("Line!", "Tail!", "Off the mat!", "Bubbles, left!", "Stake!"). She cannot be targeted. Her calls are a readability aid and can be muted with dialogue barks. |
-| Defeat | It sinks. The pool goes glass-flat. No harvest in v1 pending the item pass. |
+| Defeat | It sinks. The pool goes glass-flat. No harvest in Lowmark content pending the item pass. |
 | Reset | If no player is engaged for 30 s it returns to full and submerges. Withies and step progress are kept. |
 
 ### FW.5 Steps and completion events
@@ -1127,7 +1128,7 @@ FW-D5.20 LESSA: (to the reeds) "This one's all right." (to the player) "Go on. R
 
 **Evidence guard (binding).** Joss's state is shown and never explained. Nothing he says, carries or wrote names, counts or describes any dead person. His calls are the ordinary patrol calls every Watcher uses. His book holds places, times and tally strokes. Being near drift for years did this to a man, and that is all the quest says. Combat reveals nothing.
 
-**One paragraph.** Since MQ3 the player has seen one line repeat in Ansel's patrol book: *"Lantern on the far leg. Not ours."* Ansel knows whose it is. Joss Garrow walked the Whisperflow-to-fen leg with him for years. Joss wanted to know *why* the water went wrong when Ansel was content with where and when, and one winter he walked into the fen to find out and didn't come back. The Watchers wrote him "lost on patrol". His lantern still walks the far leg every second night. The player tracks Joss's patrol by his notches on the posts, his dropped thistle stubs and a reed shelter full of drying pages, then waits at his bend for the light. Joss treats the player as drift. The fight is a Watcher's whole craft turned the wrong way (lantern, rope, the count), and when he goes down to one knee he says "End of leg." Then the player brings him in, or carries his lantern home and leaves him to the patrol he won't stop walking.
+**One paragraph.** Since MQ3 the player has seen one line repeat in Ansel's patrol book: *"Lantern on the far leg. Not ours."* Ansel knows whose it is. Joss Garrow walked the Whisperflow-to-fen leg with him for years. Joss wanted to know *why* the water went wrong when Ansel was content with where and when, and one winter he walked into the fen to find out and didn't come back. The Watchers wrote him "lost on patrol". His lantern still walks the far leg every second night. The player tracks Joss's patrol by his notches on the posts, his dropped thistle stubs and a reed shelter full of drying pages, then waits at his bend for the light. Joss treats the player as drift. The fight is a Watcher's whole craft turned the wrong way (lantern, rope, the count), and when he is beaten he goes down to one knee and says "End of leg." Then the player brings him in, or carries his lantern home and leaves him to the patrol he won't stop walking.
 
 **Remember:** a lantern with a dry oil well that keeps burning. **Want next:** to know what the count Joss kept is counting (MQ11, the Muster's stroke-calls).
 
@@ -1151,7 +1152,7 @@ FW-D5.20 LESSA: (to the reeds) "This one's all right." (to the player) "Go on. R
 **Beat 1 — His notches (`S01_track`).** *Objective: Follow the far leg.* Inspect three fresh notched posts in order (each inspect points to the next). Optional: two thistle stubs (`S01b_stubs`; one extra line from Ansel later).
 **Beat 2 — The shelter (`S02_shelter`).** *Objective: Search the reed shelter.* Inspect the pages, the tally pages and the rope. The last page carries the Watchers' leg-closing call written out in full: *"Lantern in. Leg closed."* (`OL_CALL_KNOWN`).
 **Beat 3 — The bend at dusk (`S03_watch`).** *Objective: Wait at the willow bend for the lantern.* Watch interaction at Ansel's waypoint stone, advancing to nightfall. The light comes along the leg; a voice calls *"Lantern coming in! Wraithwatch."*, Ansel's call, in someone else's voice. Approaching within 15 m starts the fight (`OL-D3` bark).
-**Beat 4 — Old Lantern (`S04_joss`).** *Objective: Stop Joss Garrow.* Miniboss (E2, spec OL.4.1). At 0 HP he yields: down on one knee, lantern set on the ground, still burning.
+**Beat 4 — Old Lantern (`S04_joss`).** *Objective: Stop Joss Garrow.* Miniboss (E2, spec OL.4.1). Joss fights to 0 HP. When he is defeated, the quest plays his scripted outcome (exception SX-1, not a combat yield state): he goes down on one knee and sets the lantern on the ground, still burning, and the drift-hold on him breaks.
 **Beat 5 — End of leg (`S05_choice`).** *Objective: Decide how Joss comes home.* `OL-D5`. Lucid fragments. The choice.
 **Beat 6 — Home (`S06_home`).** *Objective: Return to the Lantern Post.* **Brought in:** Joss follows the player, but only once the player has spoken the closing call (`OL_CALL_KNOWN`, always learnable at C) and he puts out his own lantern. Escort along E; the drift pockets stay asleep with no lit lantern passing. **Lantern only:** the player carries the lantern (carry-state, lit; it won't go out). The two drift pockets on E wake as it passes (E3). Joss stays on the bend and walks on into the dark.
 **Beat 7 — The book (`S07_book`).** *Objective: Speak with Ansel.* `OL-D7`. Ansel writes the entry. Quest Completed; Old Lantern's bend → **quieted**.
@@ -1168,17 +1169,17 @@ FW-D5.20 LESSA: (to the reeds) "This one's all right." (to the player) "Go on. R
 
 | Field | Spec |
 |---|---|
-| Family | Listed under Water Wraiths as their elite (bible §10), but **Joss is a living man**. He is never "dispersed"; at 0 HP he yields. |
+| Family | Listed under Water Wraiths as their elite (bible §10), but **Joss is a living man**. He is never "dispersed". He is defeated at 0 HP like any enemy; the quest's defeat hook then plays his scripted outcome (SX-1). |
 | Read | A Watcher's coat gone green, beard to the chest, hands blue-grey with cold. A lantern on a hooked pole, burning steadily. A coil of blessed rope at his hip. He moves at a patrol walk, never a run. He speaks only patrol calls during the fight. |
 | Arena | The bend (D). **Post footings** (4, raised stone): the count's pulse and the rope's drag do not reach a player standing on one. **The ford:** heavy water, slows movement. **Deep side:** behind reeds; not reachable during the fight. |
 | Health target | Solo, Milestone 1 dependable to early Competent equipment: 3–4 minutes. Values belong to the Gameplay Designer. |
 | **Lantern sweep** (all phases) | He raises the lantern high; a cone of light settles on the ground in front of him (**1.5 s**). Cold sweep through the cone: moderate damage. **If the cone touches the ford**, a lantern-drift forms where the light lay, 3 s later (max 2 alive). Fight him on the bank to stop the drift spawning. Cadence ~9 s. |
 | **Rope cast** (all phases) | Bark *"Hold the line!"*; the rope uncoils and a pale line is drawn on the ground from him to the player (**1.5 s**). If the player is still on the line, the rope snares and drags them 3 m toward him. Break it by stepping onto a post footing or landing two hits (the True Line leech-latch rule). Cadence ~14 s. |
 | **Count the stroke** (P2–P3) | He plants the pole and counts aloud, *"One... two... three"*, one count per second (**3 s**, the count is the tell). On "three" a cold pulse rings out from the ford, radius 7 m: heavy damage unless the player is on a post footing. Cadence ~18 s. *(Foreshadows the Muster's stroke-calls; it carries no information.)* |
-| **Wade** (P3, below 25%) | Bark *"End of leg."*; he turns and walks toward the deep side across the ford. A ring marks a spot ahead of him on his path (**shown for the whole wade**). If the player stands in the ring, he stops, turns and fights on. If he reaches the reeds, he stands knee-deep at the edge and fights from there: sweeps always touch water, so drift keep forming until he is beaten. Never a fail; it only makes the end harder. Once per fight. |
+| **Wade** (P3, below 25%) | A phase move, not a retreat (CDR-1): he keeps fighting throughout. Bark *"End of leg."*; he turns and walks toward the deep side across the ford. A ring marks a spot ahead of him on his path (**shown for the whole wade**). If the player stands in the ring, he stops, turns and fights on. If he reaches the reeds, he stands knee-deep at the edge and fights from there: sweeps always touch water, so drift keep forming until he is beaten. Never a fail; it only makes the end harder. Once per fight. |
 | **Banner-thistle smoke** (player tool) | Once per phase the player can light Ansel's smoke at any post footing (2 s channel). For 10 s inside the cloud: lantern-drift take extra damage and Joss's sweep and rope are slower (+0.5 s on each tell). While he is in the cloud he speaks one lucid fragment (`OL-D4`). |
 | Phases | P1 100–60%: sweep, rope. P2 60–25%: + count. P3 below 25%: + wade, count cadence ~14 s. No enrage. Never flees. |
-| Yield | At 0 HP: down on one knee, lantern set down, still lit. Combat ends; `OL-D5` opens when the player approaches. |
+| Defeat (SX-1) | Defeated at 0 HP. Instead of the ordinary defeat presentation the quest plays the scripted outcome: down on one knee, lantern set down, still lit; the drift-hold on him breaks. Joss is presented as a non-hostile NPC for `OL-D5`, which opens when the player approaches. No health threshold ends the fight early. |
 | Reset | If the player leaves the bend or dies, Joss returns to his patrol walk at full health; drift spawned by him disperse. Step progress kept. |
 
 ### OL.5 Steps and completion events
@@ -1190,7 +1191,7 @@ FW-D5.20 LESSA: (to the reeds) "This one's all right." (to the player) "Go on. R
 | `S01b_stubs` | (Optional) Look at the burned stubs. | 2 inspect events | No |
 | `S02_shelter` | Search the reed shelter. | E1 defeated + inspect pages, tally pages, rope (sets `OL_CALL_KNOWN`) | Yes |
 | `S03_watch` | Wait at the willow bend for the lantern. | Watch interaction to nightfall; enter 15 m volume around Joss | Yes |
-| `S04_joss` | Stop Joss Garrow. | E2 yield event | Yes |
+| `S04_joss` | Stop Joss Garrow. | E2 defeated (quest defeat hook plays the SX-1 outcome) | Yes |
 | `S05_choice` | Decide how Joss comes home. | `OL-D5` choice resolved | Yes |
 | `S06_home` | Return to the Lantern Post. | Brought in: escort-arrival of Joss at the Post. Lantern only: carry-deposit of the lantern on the empty hook. | Yes |
 | `S07_book` | Speak with Ansel. | `OL-D7` end node | Yes (→ Completed; drift site quieted) |
@@ -1219,13 +1220,13 @@ Watcher standing in dialogue (Ansel and Watcher barks change; no reputation syst
 
 ### OL.9 Failure, recovery, co-op
 
-No fail. Death respawns at the Lantern Post with steps and flags kept; Joss resets to full and his patrol. On the bring-in escort, Joss waits if the player stops and cannot be harmed. Logout during the escort restarts `S06` with Joss back at the bend, already yielded. In co-op, Joss is a shared world creature for the fight; each player's choice is their own, and a partner who chose differently sees their own outcome at the Post (per-player prop: lantern hung or hook empty; fallback: both presented by barks).
+No fail. Death respawns at the Lantern Post with steps and flags kept; Joss resets to full and his patrol. On the bring-in escort, Joss waits if the player stops and cannot be harmed. Logout during the escort restarts `S06` with Joss back at the bend in his post-defeat state (non-hostile, kneeling). In co-op, Joss is a shared world creature for the fight; each player's choice is their own, and a partner who chose differently sees their own outcome at the Post (per-player prop: lantern hung or hook empty; fallback: both presented by barks).
 
 ### OL.10 Integration needs
 
 | Need | Minimum form | Fallback |
 |---|---|---|
-| Non-lethal yield for a boss | Defeat event → yield animation, no despawn | Joss "sits" on defeat, same event |
+| Scripted outcome on defeat (SX-1) | Quest on-defeat hook for this one creature: replace the ordinary defeat presentation with the kneel animation and present Joss as a non-hostile NPC | Joss "sits" on defeat via the same hook |
 | Ground telegraphs (cone, line, ring) | Decal telegraphs with fixed durations | Bark plus a simple circle |
 | Drift spawned from lit water | Spawn rule: cone overlapping ford volume | Fixed drift spawns at P2 start (2) |
 | Path-blocking ring during wade | Volume check stops NPC path | Wade removed; P3 just adds faster count |
@@ -1239,8 +1240,9 @@ No fail. Death respawns at the Lantern Post with steps and flags kept; Joss rese
 | Review finding | Revision |
 |---|---|
 | Draft's tally pages had "one for each of them". | Cut: implied counted dead. Tallies are unexplained strokes. |
-| Draft let the player kill Joss. | He yields; both endings bring him or his light home. |
+| Draft let the player kill Joss. | He is defeated at 0 HP and the quest plays a scripted outcome (SX-1); both endings bring him or his light home. |
 | Bring-in had no physical requirement. | The closing call is learned at the shelter and spoken to him. Always learnable, so there is no soft-lock. |
+| Director rulings reconciliation (CDR-1, 2026-11-03): Joss "yielded" at 0 HP as a combat state. | Rewritten as a quest-scripted outcome on defeat (register SX-1); the Wade is marked as a phase move that keeps fighting; step `S04_joss` completes on E2 defeated. Choice, flags and lines unchanged. |
 | Independent review pass: Act III kept the bend residual and hung a lantern regardless of choice. | Director ruling: completing OL quiets the bend permanently in all fen endings; contract and the lit/unlit lantern states made explicit in §0.2 (the old "unlit lantern" wording there was wrong). |
 
 ### OL.12 Dialogue
@@ -1257,7 +1259,7 @@ OL-D1.20 ANSEL: (hands over a thistle bundle) "Smoke. If he's what I think, it'l
       {event: S00_hook}
 ```
 
-**Inspect texts:** *Notched post:* "A waymark notch, cut fresh over an old one. Same height, same angle as the Post's." / *Thistle stub:* "Banner-thistle, lit and stamped out. Recent." / *Pages:* "'Far leg. Heavy at the willow. Lantern lit.' The same words on every page." / *Tally pages:* "Strokes in fives. Pages of them. Nothing else." / *Last page:* "Written out in full, pressed hard: 'Lantern in. Leg closed.'" / *Rope:* "Blessed rope, worn smooth as a handrail." / *Lantern (after yield):* "The oil well is dry. Has been for a long time. The flame doesn't care."
+**Inspect texts:** *Notched post:* "A waymark notch, cut fresh over an old one. Same height, same angle as the Post's." / *Thistle stub:* "Banner-thistle, lit and stamped out. Recent." / *Pages:* "'Far leg. Heavy at the willow. Lantern lit.' The same words on every page." / *Tally pages:* "Strokes in fives. Pages of them. Nothing else." / *Last page:* "Written out in full, pressed hard: 'Lantern in. Leg closed.'" / *Rope:* "Blessed rope, worn smooth as a handrail." / *Lantern (after the fight):* "The oil well is dry. Has been for a long time. The flame doesn't care."
 
 ```
 OL-D3 — Approach bark (starts E2)
@@ -1318,3 +1320,4 @@ OL-D7.06 ANSEL: "The willow bend's quiet tonight. First time I've ever written t
 | Duplicates | §0.4. NT has no investigation; NB and SB are distinct climbs. |
 | Known conflict | Reed Stalkers are "first seen MQ5" in bible §10, but NB (after MQ2) is their first appearance for most players. NB caps them at 2 at once with long telegraphs; FW now unlocks after MQ5. Flagged to the Encounters package and the bible owner. |
 | Independent review pass | Applied the independent side-content review and Director rulings 1, 2, 3, 4, 5 (see the entries in UL.11, NB.11, UR.11, FW.11 and OL.11). **UL:** the crew ledger is the MQ10 chip and shows who paid (the Provisioner's purse, Board-sealed pay chits `[ANTAGONIST]`); `UL_LEDGER_CUT` means torn pages; `UL_RHOSYN_GONE` is renamed **`UL_RHOSYN_FLED`**; post-MQ6 variants added; the offer window closes when MQ10 starts. **OL:** permanent quieting is now a contract in §0.2. **UR:** "Wenna Hale" is renamed **Tansy Marl**; E2 is now a goblin raiding party, not MQ3's den. **FW:** unlocks after MQ5, with a soft warning. **NB:** at most 2 stalkers at once and longer telegraphs, noted as the stalkers' first appearance. Flags with no reader in Act II or III are marked "(request)". **Rejected:** none of the review's findings for this file. Act III-side fixes (C8 re-key, the residual-pocket choice, the GL-E4b condition) belong to the main-act packages. |
+| Director rulings reconciliation (2026-11-03) | Applied CDR-1/2/3 (`Caelmor_Director_Rulings_Combat_Ranged_Release.md`). **§0.3:** the "downed at 0 HP" Smugglers rule is replaced by defeat at 0 HP with the ordinary defeat presentation; Joss Garrow is the file's one scripted exception (SX-1); every fight accepts melee or ranged, ranged never required; the "no Ranged" skill hedge is removed. **UL:** downed crew → defeated crew (beat 4, UL.4, UL.9). **NT:** "fight to downed" and the militia tying thieves at dawn removed; `S02_first_watch` resolves on defeated or escaped. **FW:** allied cutters "cannot be defeated"; serpent harvest wording is Lowmark content, not v1. **OL:** Joss's yield is now a quest-scripted outcome on defeat (OL.3, OL.4.1, OL.5, OL.9, OL.10); Wade marked as a phase move. Step ids, flags, choices and dialogue ids unchanged; no line removed. |

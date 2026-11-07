@@ -99,7 +99,7 @@ Tags: `[ANTAGONIST]` on any node naming Marrick or Sallow; `[D-7]` on Sedge node
 ### Sedge — reed-cutter (the Last Field-Mage, D-7) [NEW] `[D-7]`
 - **Want:** no one to need him. **Fear:** what force does to water.
 - **Knows:** heavy water, how force spreads it, how the Braids once worked. **Doesn't know:** the names of the dead; the grain scheme.
-- **Voice:** see §1.3. Given name never spoken in v1.
+- **Voice:** see §1.3. Given name never spoken in Lowmark content.
 - **Change in Act II:** from a man who cuts reeds at a field edge to a man who lets one person watch him work.
 
 ### Oriel — Riverwarden of the Listening Steps (D-8) [NEW] `[D-8]`
@@ -391,7 +391,7 @@ Combat barks (optional TF-E2): *"Loft! There's someone in the loft!"* / *"Down h
 ### TF-D4 — Morning, and the sheets (`S05_sheets`)
 
 ```
-TF-D4.01 [TF_FOUGHT_IN_LOFT] IMBER: (looking at the two men tied by the stones) "...I said sit up and see. I didn't say rearrange them."
+TF-D4.01 [TF_FOUGHT_IN_LOFT] IMBER: (looking at the scuffed boards by the stones) "...I said sit up and see. I didn't say fight on my floor."
 TF-D4.01 [else]              IMBER: "Well?"
   > "Two crew came in by the tail door. They used the hoist and took the long bar."   → TF-D4.10
 TF-D4.10 IMBER: (quiet for a long moment) "So the tools walk on legs."
@@ -513,7 +513,7 @@ TF-D8.05 KEEPER: (takes out the record book) "I'll enter it. Whose drawings do I
 TF-D8.10 KEEPER: (writing slowly) "'Drawn by Tovin Pell, mill runner, Drowsebank.'"
 TF-D8.11 TOVIN: (gone white) "...In the book?"
 TF-D8.12 KEEPER: "In the book. Means it's yours. Means people can ask you about it."  → TF-D8.20
-TF-D8.20 TOVIN: "People like them?" (looks at the bound crew) "...All right." (beat) "All right."
+TF-D8.20 TOVIN: "People like them?" (looks at the tail door) "...All right." (beat) "All right."
        {give tovin_floor_sheets → keeper} {set LM_TOVIN_CREDITED = named, LM_FLUSH_CALENDAR = true} {event: S09 complete}
 
 TF-D8.30 KEEPER: (writing) "'Sheets, Drowsebank. Source kept back.'"
@@ -1084,6 +1084,7 @@ BF-D7.05 SEDGE: "River keep you." (goes back toward the reeds; doesn't look back
 
 | Check | Result |
 |---|---|
+| Director rulings reconciliation (2026-11-03, CDR-1/3) | Crew fight to 0 HP; no tied or bound crew on screen. `TF-D4.01 [TF_FOUGHT_IN_LOFT]` and `TF-D8.20` stage directions rewritten (ids kept). "v1" release wording in Sedge's cast note changed. No line removed. |
 | Independent review pass | MQ6 crew lines now say the race was always the overflow run and is now the only one; tallies 12/42/72, board 82, optional `TF-D5.21` (fifth nights, Watcher's book); keeper backwater reading `TF-D8.03b`; brace-the-gate barks replace crank barks. MQ7: notice and Bryn cite the fifth-night calendar and tail-door reading; officer paces alone (no chain-holding); council in the pear rows; Bryn moves stake to stake; new `DK-D9` Marrick relief-cart scene `[ANTAGONIST]`. MQ5: `GL-D6.23` branches on `HW_DEN_CLEARED`; `GL-B8.1` seed bark `[ANTAGONIST]`. MQ8: `MN-D3.04` elk contrast; "Why?" cut from MN-D4. MQ9: Oriel's Whisperflow line goes via Sedge; wreck-scar lines `BF-D4.16–.17`; gate names `BF-D4.31b` (Reedmere Weir, the Long Sill, the Lantern Sluice) match MQ11. Antagonist tags: add `TF-D3.05`, `GL-B8.1`, `DK-D9.01–.04`. |
 | Every node the quest file references exists | GL-D1–D8 (incl. D5.40, D6.12), TF-D0–D9 (incl. D5.30, D7.20, D8.20), DK-D1–D8 (incl. D3.20, D7.20), MN-D1–D7 (incl. D3.10), BF-D1–D7 (incl. D3.40) |
 | ≤6 NPC lines before a choice or control | Checked for every node; BF-D5 is split by player options at .04 and .13 |
