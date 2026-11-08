@@ -593,7 +593,8 @@ MBL-D9.40 AGNA: (from the doorway) "Now eat the rest."   {set MR_STANDING; quest
 | MBL-B9.2 | DUNSTAN | (passes the player the bread; nods) | any |
 | MBL-B9.3 | ROWAN | "I don't climb. I want that known." | told |
 | MBL-B9.3a | ROWAN | "Saw the lanterns go round. Kept mine lit." | kept |
-| MBL-B9.4 | OSWIN `[CAUSEWAY]` | "Edris says I can walk the causeway first next spring." (beat) "She said 'maybe'." | *Lifting Day* Completed |
+| MBL-B9.4 | OSWIN `[CAUSEWAY]` | "Edris says I can walk the causeway first next spring." (beat) "She said 'maybe'." | *Lifting Day* Completed, `MLD_ORDER` ≠ first |
+| MBL-B9.4b | OSWIN `[CAUSEWAY]` | "Walked it first. Crews behind me. Nobody went in." | *Lifting Day* Completed, `MLD_ORDER` = first |
 | MBL-B9.4a | OSWIN `[CAUSEWAY]` | "Crew carried every lantern back down. Didn't drop one." | without *Lifting Day* |
 | MBL-B9.5 | CORRA | "My arms still hurt. Is that normal? Calwen says it's normal." | restored |
 | MBL-B9.6 | MABYN | "No miracles. Just a lot of people walking up a hill." | any |
