@@ -129,7 +129,7 @@
 | MNS-B0.1 | Raised-way volume | WOMAN (carrying a basket of reeds) | "Morning, traveller. Mind the soft plank. Everybody steps on it once." |
 | MNS-B0.2 | Raised-way volume | BANNERBEARER (swapping a grey junction banner for ochre, to a child) | "Ochre. Ferry way's closed. No, not forever. Ochre's not forever. Grey's not forever either." |
 | MNS-B0.3 | Depth post (MME10) | CHILD | "You jumped to the black! You're sour! Sit down!" |
-| MNS-B0.4 | Near the register room | MAN (to another, low) | "They're reading the Ferrow girl this morning." (beat) "She's a grown woman, Col. She's not a girl." |
+| MNS-B0.4 | Near the register room | MAN (to another, low) | "They're reading the Ferrow girl this morning." (beat) "She's a grown woman. She's not a girl." |
 
 ### MNS-D1: Ysolde on the raised way (S00_offer)
 
@@ -1002,7 +1002,7 @@ Three day-books, read from the oilcloth bundle. Only the last pages are legible;
 | Id | Trigger | Speaker | Line | Condition |
 |---|---|---|---|---|
 | MBR-B4.1 | Approaching the head | DUNSTAN (lifting a folded standard onto the sledge) | "Calwen asked for hands. I've got hands." | — |
-| MBR-B4.2 | Player passes within a few paces (event `causeway.shard_moss` plays; no option) / or stops to speak | DUNSTAN (squaring the stack; not looking down) | "My sister's coming to table Sunday. Nell. Linny." (beat) "Nell. I keep doing that." | `amended` |
+| MBR-B4.2 | Player passes within a few paces (event `causeway.shard_moss` plays; no option) / or stops to speak | DUNSTAN (squaring the stack; not looking down) | "My sister's coming to table at the week's end. Nell. Linny." (beat) "Nell. I keep doing that." | `amended` |
 | MBR-B4.2b | Same | DUNSTAN | "Nell says hello. I'm practising saying it. Nell. It's a good name. It's just not the one I had ready." | `qualified` |
 | MBR-B4.3 | Player stops after the moment, and speaks again | DUNSTAN | "What? Have I got peat on my face? I've always got peat on my face." | — |
 | MBR-B4.4 | Player looks back at the post after walking on | (The moss is fading back to grey. The ring of flat silt round the place where Dunstan stood is still smooth.) | — | — |
@@ -1079,7 +1079,7 @@ MBR-D7.07 MARA: (already on her knees at the platform's edge, the spade across h
 | MBR-B5.3 | Bearer's raise | CALWEN | "Arm up. Hit it." |
 | MBR-B5.4 | Colour defeated (first time) | MARA (spade going in) | "Down. Now. Pull." |
 | MBR-B5.5 | Pulse during the lift, Colour re-forms | CALWEN | "Up again. Your pulling's kept. Put it down again." |
-| MBR-B5.6 | Lift complete; standard down on the platform; fold begins | CORRA (already at the far corner of the cloth, holding it; nobody asked her) | "I've got this end. I've got it. Tell me when." |
+| MBR-B5.6 | Lift complete; standard down on the platform; fold begins {set `MBR_CORRA_CORNER`} | CORRA (already at the far corner of the cloth, holding it; nobody asked her) | "I've got this end. I've got it. Tell me when." |
 | MBR-B5.6b | Same, if Corra is absent (fallback) | CALWEN (taking the corner) | "My end. Your fold." |
 | MBR-B5.7 | Wrong fold on the big cloth | CALWEN | "That seam's torn through. Strong once. Not now. The other one." |
 | MBR-B5.8 | Pulse after the lift (one Wraith forms) | CORRA (not letting go of the corner) | "There's another! I'm not letting go. I'm not letting go." |

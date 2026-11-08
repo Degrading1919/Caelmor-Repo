@@ -197,19 +197,19 @@ Reached only in the boat with Rowan. The route is fixed (bible §11.1 ferry conv
 
 ## A6. Player-facing sequence
 
-### Beat 0 — Three Columns, One Day (`S00_offer`)
+### Beat 0: Three Columns, One Day (`S00_offer`)
 **Objective:** *Talk to Ysolde at the register table.*
 On the player's next entry to Sorrowmere after MR-M2, a Memorykeeper's runner finds them on the raised way (`MRC-B0.1`). At the register table **Ysolde Haverel** has the three day-books open (`MRC-D1`): from the player's pack if they still carry `MBR_unit_logs` ("May I?"), or from her own shelf. She reads the last line of each aloud: *ground will not take a step*; a word that stops in the middle; *men sat down*. "Three hands. Three columns. One day. Then nothing." She does not like nothing. She asked Sennic. Sennic says the Sunken Church "listened", and the mages "went out from there". "That's Sennic's story. I'm not saying it's so." The only person who knows the way to the Sunken Church is the ferryman at Blackwater Landing, Rowan Mirewake. "He'll say no. Go anyway." She writes in her reed book that the player was asked.
 Optional: the story shelf (R2): Sennic's stories in another Memorykeeper's hand, short and flat.
 **Verbs:** talk, listen.
 
-### Beat 1 — No (`S01_no`)
+### Beat 1: No (`S01_no`)
 **Objective:** *Ask Rowan Mirewake for a crossing.* Then: *Help at the landing.*
 At the landing, **Rowan** is at his bench with the harness across his knees (`MRC-D2`). The player asks to be taken to the Sunken Church. Rowan says no, dryly. The player asks again (any of the options that ask counts). He says no again, and gives the only reason he gives anyone: "The boat leaks." He does not explain the second no. He does not ask the player to leave either. If the player lingers (any further option), he points at the shed with his chin: "If you're staying, it leaks there." The objective changes to *Help at the landing*. The quest asks nothing faster of the player than that.
 A ferry household offers food before anyone asks a question (`MRC-B1.2`; bible §5.3 rule 6). Optional.
 **Verbs:** ask, be refused, stay.
 
-### Beat 2 — Help at the Landing (`S02_prepare`)
+### Beat 2: Help at the Landing (`S02_prepare`)
 **Objective:** *Help at the landing.* Sub-objectives appear as the player learns of them (`MRC-D3`): *Mend the boat.* *Mend the tow harness.* *Find moss for the bow lantern.* *Sit with Sennic.* Any order. Each mending task has a **crew alternative** that costs a day (keep watch until the next morning; the work is done when the player wakes). Rowan does not comment on which the player chooses.
 
 **1. Mend the boat** (hull).
@@ -239,7 +239,7 @@ A ferry household offers food before anyone asks a question (`MRC-B1.2`; bible �
 `S02` completes when the hull, harness and moss are done (by the player or by a crew) and the third sitting has ended. Rowan: "Boat's whole. Harness is whole. You've a light. And you've let an old man talk." (`MRC-D3.40`).
 **Verbs:** gather, cut, caulk, stitch, walk at night, fight, sit, listen, wait.
 
-### Beat 3 — The Knots (`S03_knots`)
+### Beat 3: The Knots (`S03_knots`)
 **Objective:** *Learn Rowan's knots.*
 In daylight only (morning or noon; at dusk or night Rowan says "Tomorrow." and the player can keep watch). At the landing stake (L3), Rowan ties knots in reed heads and teaches them (`MRC-D5`): **one knot**, this channel turns at dusk; **two knots**, it turns at first light; **a knot cut through**, never this season. Only he ties them, and they mark only his route. He also turns the stake rule the player already knows to his own use: "Pale's running. Ferries like it; they go with it. My cuts don't. It pours through them like a weir. Ochre's slack: the cuts go still, the shoals go dry. We pole the cuts and haul the shoals. Black, nobody." (This is how the bible's stake rule and its "Rowan ferries at Slack" fit together; see §A14.)
 Then two **practice runs** in the boat, Rowan poling, through the practice cuts (L5). At each cut mouth the player reads stake and knot and calls the channel through a dialogue choice (`MRC-D5.20`, `.30`):
@@ -249,7 +249,7 @@ Sets `MRC_KNOTS_READ`. After this, Rowan's knots are inspectable as world marker
 Rowan closes the lesson (`MRC-D5.40`): "The grey, then. Tomorrow's. Come at the end of the night and don't talk till I do."
 **Verbs:** read, call, be wrong, be corrected, learn.
 
-### Beat 4 — Asking (`S04_ask`, optional)
+### Beat 4: Asking (`S04_ask`, optional)
 **Objective (optional, shown once the first ask has happened):** *Ask Rowan why he won't cross at night.*
 Available from the end of `S01` until the crossing starts (and afterward; see §A9.3). The player can ask Rowan gently why he will not cross at night. **Each ask needs a separate visit**: the presentation hour must have turned since the last ask (keep watch, or leave and come back). Pushing options exist ("Just tell me.") and get a flat "No." that does not count and costs nothing (`MRC-D6.05`).
 - **First ask** (`MRC-D6.10`): "Can't see the knots." Dry. Nothing more.
@@ -258,18 +258,18 @@ Available from the end of `S01` until the crossing starts (and afterward; see §
 A player who never asks is not told why. Rowan notices, and says so once, at the roof (`MRC-D9.11`).
 **Verbs:** ask, wait, ask again, listen.
 
-### Beat 5 — The Grey (`S05_crossing`) `[MD-3]`
+### Beat 5: The Grey (`S05_crossing`) `[MD-3]`
 **Objective:** *Wait at the landing for the grey.* Then: *Cross with Rowan.*
 Requires `S02` and `S03` complete. The player keeps watch at Rowan's fire until morning (if they arrive in the morning, Rowan says "Late. It's still grey. Get in."). The **grey** is a quest-pinned per-player fog (§A8.1). Rowan is already in the boat with the bow lantern lit. He says one word: "Now." (`MRC-D7.01`). The crossing is an escorted ride on a fixed route (ferry convention). The player sits in the bow. Rowan stops at each junction and waits for the player's call.
 1. **Junction one** (C1). Call the cut (`MRC-D8.10`). Right: the two-knot cut at ochre. Wrong (the cut-through reed): Rowan says why and poles into a side channel; they wait for the turn (~20 s presentation; the fog moves, a heron lifts). Then on.
 2. **The shoal** (C2). The boat grounds. Rowan hands the player the harness: "Your turn to be a horse." The player wears the harness (carry-state; weapons sheathed) and **hauls** the boat along the bank path between tow posts: channelled, 3 segments of ~5 s, walking a few metres between each; segments persist. Rowan pushes from the stern. With `MRC_HARNESS_CREW`: one bark from Rowan ("Good stitching. Not yours. Still good."). Afloat again.
-3. **The Encampment cut** (C3). **MRC-E2.** Rowan poles through in three stretches. On each stretch, mud stands up on the banks and wades toward the boat. An Echo that reaches the gunwale grips it and the boat stops until that Echo is defeated. The player fights from the bow: ranged reaches them on the banks and in the water; melee reaches them at the gunwale; both finish the cut. The Echoes re-form on their banks while the grey lasts. Once the boat is out of the cut, they stand on the banks and do not follow. Rowan says nothing during the fight except "Bank." when one forms.
+3. **The Encampment cut** (C3). **MRC-E2.** Rowan poles through in three stretches. On each stretch, mud stands up on the banks and wades toward the boat. While an Echo is at the gunwale, Rowan holds the boat (the ride halts on enemy proximity, the ordinary escort rule the Act I cart uses) until it is defeated. The player fights from the bow: ranged reaches them on the banks and in the water; melee reaches them at the gunwale; both finish the cut. The Echoes re-form on their banks while the grey lasts. Once the boat is out of the cut, they stand on the banks and do not follow. Rowan says nothing during the fight except "Bank." when one forms.
 4. **Junction two** (C4). One cut ahead: stake at pale, two knots. One side channel: a leaning stake. Rowan stops. Call it (`MRC-D8.20`). The right call is **"Wait. Two knots. It turns now."** Calling "Go, it's running" or "Take the side channel" gets the reason from Rowan and the same wait. Either way they wait (~25 s); the water on the stake drops to ochre as the light comes up. Rowan, on a right call: "That's it. That's all it is." Sets `MRC_WRONG_CALLS` (count; barks only).
 5. **Stillgrave** (C5). **The strange moment** (§A8.2). Open still water. A bell rings across the water with no sound in it. The reeds along the far edge lie down outward in rings, one ring after another, and the fog shivers. There is nothing to hear. Rowan does not look round. He keeps poling. Sets `MRC_BELL_SEEN` (barks only).
 6. **The fog bank** (C6). The fog thickens, then the roof comes out of it.
 **Verbs:** wait, read, call, haul, fight, witness.
 
-### Beat 6 — The Roof (`S06_roof`)
+### Beat 6: The Roof (`S06_roof`)
 **Objective:** *Climb onto the chapel roof.*
 Rowan brings the boat in to the plank landing stage on the roof's lower slope. The roof lantern line runs along the ridge, half its lanterns dark. **Mabyn Coyle**, a Chapel-Tender with a pole lantern and peat-wax on her sleeves, comes down the ridge to meet them (`MRC-D9`). She knows Rowan; she does not know the player; she offers the player a hand up and a cup before asking anything. The line has been failing since spring: "Since the spate. Damp gets in the housings. And I can't keep it alone." Rowan hands up the moss bundle. He will not come onto the roof: "Not my place. It's hers." He tells the player when he will come back: "Morning slack. Not before." `[MD-3]` With `MRC_ASKED` < 3 he adds the once-line about not being asked (`MRC-D9.11`); with `MRC_ASKED` = 3 he says only "You know why." He poles away into the fog.
 Sets `MR_ROWAN_TRUST` = **told** (`MRC_ASKED` = 3) or **kept** (otherwise). The quest completes on `MRC-D9` end. MR-M4 becomes Active at once (Beat 0 of Part B is the same conversation continued).
@@ -282,13 +282,13 @@ Tuned for **Advanced** identity (MD-10). Earth-memory enemies follow bible §2.6
 | Id | Enemies (§10) | Placement | AI role | Telegraph | Purpose | Solo target |
 |---|---|---|---|---|---|---|
 | **MRC-E1** | 2 × Reedlurker (lurker), 1 × Reedlurker (snapper) | Stillgrave's near edge, the shallows between the stilt-stumps (S2), at night during the moss task | Lurkers wait submerged beside moss clusters and lunge at a player who gathers. The snapper hangs back in deeper water and spits. | **Lunge:** the reeds ripple outward from the lurker's spot (~1.2 s), then a lunge in a straight line (step aside). **Spit:** the snapper's head rises clear of the water and the reed-ripple stops (~1.0 s), then a lobbed spit that leaves a short slowing slick (standard slow). | A light night fight; reading ripples by moss-light; ranged answers the snapper, melee closes on it in knee-deep water | 60–90 s; 65–80% HP remaining |
-| **MRC-E2** | Earthen Echoes (echo), 2 per bank per stretch, 3 stretches | The Drowned Encampment cut (C3) during `S05` | Each Echo stands up out of the bank and **wades** toward the boat along a straight line. It repeats a motion (a man bracing a pole, a woman hauling a rope). At the gunwale it **grips** (the boat stops) and then **swings**. Struck: collapses into mud. Re-forms at its bank spot ~10 s later while the grey lasts and the boat is in its stretch. | **Forming:** the bank bulges and a column of mud rises (~1.5 s); Rowan: "Bank." **Wading:** slow (~6 s from bank to boat), readable at range. **Grip:** two mud hands on the gunwale, the boat rocks (no damage). **Swing:** the arm lifts, mud dripping (~1.2 s), then a slap (moderate damage, short knockback within the boat; never overboard). | Teach Echoes before MR-M5: slow, readable, collapse when struck, come back by place. Ranged clears waders early; melee clears grippers. Both finish the cut. | 2–3 min for the cut; ~55–70% HP remaining |
+| **MRC-E2** | Earthen Echoes (echo), 2 per bank per stretch, 3 stretches | The Drowned Encampment cut (C3) during `S05` | Each Echo stands up out of the bank and **wades** toward the boat along a straight line. It repeats a motion (a man bracing a pole, a woman hauling a rope). At the gunwale it lays two mud hands on the wood (presentation; the ride halts while any Echo is in reach of the boat) and **swings**. Struck: collapses into mud. Re-forms at its bank spot ~10 s later while the grey lasts and the boat is in its stretch. | **Forming:** the bank bulges and a column of mud rises (~1.5 s); Rowan: "Bank." **Wading:** slow (~6 s from bank to boat), readable at range. **At the gunwale:** two mud hands on the wood, the boat rocks (no damage; presentation only). **Swing:** the arm lifts, mud dripping (~1.2 s), then a slap (moderate damage, short knockback within the boat; never overboard). | Teach Echoes before MR-M5: slow, readable, collapse when struck, come back by place. Ranged clears waders early; melee clears those at the gunwale. Both finish the cut. | 2–3 min for the cut; ~55–70% HP remaining |
 
 **MD-7 swap:** none needed. No Hollowfoot appear in MRC.
 
 **Rules**
 - **Combat never reveals evidence.** Nothing in MRC is evidence; Sennic's stories are leads and nobody treats the Echoes as people. A ferry-household bark calls them "the drowned getting up" (belief); Rowan's only answer is "Mud." (`MCS-B9.10` in the dialogue file, post-quest at the landing; `MRC-B5.4` in the boat).
-- **The cut always ends.** Out-ranging Echoes never ends the fight on its own (they re-form); passing through the three stretches does. An Echo that grips stops the boat until it is defeated. A player who does nothing still finishes, slowly, because each stretch also advances on a timer while no Echo grips (~12 s of poling per stretch).
+- **The cut always ends.** Out-ranging Echoes never ends the fight on its own (they re-form); passing through the three stretches does. The boat holds while an Echo is at the gunwale and poles on (~12 s per stretch) whenever none is; an Echo re-forms ~10 s after defeat and wades ~6 s, so clearing the gunwale always buys the boat its stretch. The player must fight, by either style; nothing else is asked.
 - **No falls, no drowning.** Knockback stays inside the boat; deep water is non-walkable (bible §11.1). At the shoal and on the tow path the player walks only on authored ground.
 - **Death:** at Stillgrave's edge, respawn at Blackwater Landing (gathered moss kept). During the crossing, respawn aboard at the last passed junction (checkpoint); the grey stays pinned while `S05` is active; the Encampment cut restarts at its first stretch.
 - **Co-op:** shared enemies; all present are credited. The boat carries Rowan and the party (party size [GD]); if the party is larger than the boat, a ferry household's punt follows (presentation). Junction calls are made by whoever answers first; every partner hears Rowan's reason. `MR_ROWAN_TRUST` is per player: each partner's asks count only for them.
@@ -305,7 +305,7 @@ Tuned for **Advanced** identity (MD-10). Earth-memory enemies follow bible §2.6
 | Rule | Rowan's line, once, when the player first notices: "Grey isn't night. Night's when you can't see your own knots." (`MRC-D7.05`) |
 | If replaced | If the Director rules a true night crossing (MD-3 replaced), only nodes tagged `[MD-3]` change: the keep-watch target hour, the fog becomes dark with the bow lantern as the only light, and Rowan's lines `MRC-D6.30`, `MRC-D7.01–.05` and `MRC-D9.10` need new reasons. His canon refusal would then need the Director's reconciliation. |
 
-### A8.2 The soundless bell (Beat 5) — *the strange moment*
+### A8.2 The soundless bell (Beat 5): *the strange moment*
 
 | Time | Element | Spec |
 |---|---|---|
@@ -418,13 +418,13 @@ Documented dependencies for a later Systems Engineer. None is implemented here. 
 | **Channel states on Rowan's route** (N-1) | Systems | Per-crossing three-state table (Running / Slack / Sour) keyed to the presentation hour. **Fallback:** quest-pinned states only. MRC pins every junction for `S03` and `S05`, so MRC works on the fallback alone. |
 | **Rowan's knot props** | Art + Systems | One reed-clump prop with three states; inspect text gated by `MRC_KNOTS_READ`. Authored data, not simulation. |
 | **Boat ride with stops and calls** | Systems | Lowmark ferry convention (*Night Ferry*): an escorted ride on a fixed spline with authored stop points; at each stop a dialogue choice; a wrong choice plays an authored detour (practice: grounding; crossing: side-channel wait). |
-| **Ride pause on grip** | Gameplay | The ride advances along a stretch on a timer while no enemy has the "grip" state; an Echo in grip state pauses the spline until it is defeated. A small extension of the ride convention; justified because it is how a boat fight lets melee and ranged both finish the cut without a new movement mode. **Fallback:** the boat stops at each stretch start and moves on when that stretch's Echoes have each been defeated once. |
+| **Ride halts on enemy proximity** | Gameplay | The ordinary escort rule (as the MR-M1 cart: halts on enemy proximity): the ride spline pauses while any Echo is within reach of the boat and resumes when none is. No new enemy state. **Fallback:** the boat stops at each stretch start and moves on when that stretch's Echoes have each been defeated once. |
 | **Harness haul** | Systems | Carry-state harness (weapons sheathed) + three channelled `haul` segments along a tow-post path; the boat prop moves with segment completion. Reuses channel convention with kept progress. |
 | **Hour-turn gate** | Systems | A check that the presentation hour has changed since a stored value (`MRC_LAST_ASK_HOUR`, Sennic's sitting). Uses the existing keep-watch hour. |
 | **The grey** | VFX + audio | Quest-pinned per-player fog volume with four density settings along the route; the bell's ring ripple through the fog volume. |
 | **The soundless bell** | VFX + audio | Reed-flatten rings (three, expanding, ~1 s apart) on the far reed edge; full ambience duck to silence for ~6 s; no tone. |
 | **Night gathering** | Art | Lantern-moss clusters as gather nodes that glow and are highlighted only at night; by day, non-interactive moss. |
-| Creatures | Schema / Gameplay | Reedlurker (lurker, snapper); Earthen Echo (echo) with the "wade" and "grip" behaviours. |
+| Creatures | Schema / Gameplay | Reedlurker (lurker, snapper); Earthen Echo (echo) with a straight-line "wade" approach (ordinary pathing in shallow water). |
 | **Act I read-conditions** | Act I author / Schema | MR-M2 Completed; `MBR_unit_logs` possession check; `MR_NAME_RECORD`; `MR_CAUSEWAY`. |
 
 ## A13. Mystery ledger entries
@@ -457,7 +457,7 @@ Documented dependencies for a later Systems Engineer. None is implemented here. 
 | Rowan's story risked creating a second guide or a war relation. | The teacher is dead (she "never returned", canon); unnamed; no war relation; no other living guide is created. |
 | Sennic risked explaining. | Three stories, each a *where*: the bell side faces slack water; the altar is under the big window; the way in is from the top. He never says what the mages did or why the church sank. Ysolde frames his words as his story. |
 | The soundless bell risked a sound effect. | Silence is the effect; visual rings carry it for players without audio; subtitle "[Silence. The reeds lie down.]". |
-| The boat fight risked letting ranged trivialise it, or requiring it. | Echoes re-form while the grey lasts; the cut ends by passage. Grippers stop the boat, so melee always has work; waders can be shot early, so ranged has work. A player who does nothing still finishes, slowly. |
+| The boat fight risked letting ranged trivialise it, or requiring it. | Echoes re-form while the grey lasts; the cut ends by passage. Echoes at the gunwale hold the boat, so melee always has work; waders can be shot early, so ranged has work. (Independent review: the bespoke "grip" state and the contradictory "a player who does nothing still finishes" were replaced by the ordinary escort halt-on-proximity rule.) |
 | Combat as evidence. | The Echoes prove nothing; the only belief bark ("the drowned getting up") is answered with "Mud." |
 | Skill hooks. | Woodcutting (thwart) and Leatherworking (harness) at ~[GD: low], each with a crew alternative that costs a day (CDR-4 meaningful requirement without a gate). |
 | Length. | Four preparations, one lesson, one crossing: within 35–45 minutes with short sittings and one night walk. |
@@ -581,22 +581,22 @@ The nave is one space with three discrete water levels (environment variants, bi
 
 ## B6. Player-facing sequence
 
-### Beat 0 — Help Me With the Line (`S00_offer`)
+### Beat 0: Help Me With the Line (`S00_offer`)
 **Objective:** *Talk to Mabyn on the roof.*
 Continuous from `MRC-D9`. Mabyn (`MCS-D1`) has heard from the ferry households that someone was asking about the Sunken Church. She does not ask why yet. She asks for help: the line is half dark, she cannot keep it alone, and she has not been below the gallery since the spate. "Help me light it and I'll let you in. That's the trade. It's a fair one; I'm the one who has to live on the roof." With `MR_LANTERN_LINE`: one line about the Stillgrave ring (`MCS-D1.06`).
 **Verbs:** talk.
 
-### Beat 1 — The Roof Line (`S01_roofline`)
+### Beat 1: The Roof Line (`S01_roofline`)
 **Objective:** *Relight the roof lanterns.*
 Six posts along the ridge and down the lower slope (T1, T2). At each: open the housing, scrape out the rotted wick, set a moss wick from the bundle Rowan handed up, seal with peat-wax, light (one channelled interaction, ~3 s). Mabyn works the ridge posts alongside and teaches as she goes (`MCS-D2`): peat-wax, thick wick, covered housing, "and somebody awake". The two lowest posts stand in the shallows: **MCS-E1** (Reedlurkers). When all six are lit, Mabyn teaches the rule at the hatch: lit is held; in the dark, the Shades come; they are "only dark that's heavy", never people; they lean on your light until it goes out and push you back to the nearest lit post. "They don't hurt you. They take your time. Down there, time's the thing." She gives the player a **Tender's hand lantern** (carry-state, §B8.1).
 **Verbs:** clean, wick, light, fight, listen.
 
-### Beat 2 — The Gallery (`S02_gallery`)
+### Beat 2: The Gallery (`S02_gallery`)
 **Objective:** *Go down into the bell-loft.* Then: *Look down into the nave.*
 Through the hatch (T4) into the bell-loft (G1). The empty bell frame (optional inspect, `MCS-I2.01`). Two dark posts. The player lights the first; crossing to the second, the dark ground ahead thickens and the hand lantern's flame leans away: **the first Shade press** (scripted teach, §B8.1). If the lantern goes to ember the player is pushed back to the first post; Mabyn calls down the hatch (`MCS-B2.2`). With the second post lit, the loft is held. Down the ladder to the gallery (G3). Required inspects: **the nave water** with the glass under it (`MCS-I3.02`) and **the vestry door** under the surface (`MCS-I3.03`). Optional: the Tenders' marks on the rail. Mabyn comes down the ladder as far as the gallery post (G6), lights it, and stays there (`MCS-D3`): "This far I'll come. Below the gallery's yours."
 **Verbs:** descend, light, endure, look.
 
-### Beat 3 — Read the Building (`S03_drain`, first part) `[MD-4]`
+### Beat 3: Read the Building (`S03_drain`, first part) `[MD-4]`
 **Objective:** *Read the stake on the buttress.* Then: *Read the culvert stains.* Then: *Open the sluice boards in order.*
 Mabyn knows the chapel had drains; every Tender knows that; nobody has worked them in her life (`MCS-D4`). "The boards rotted shut. Water came in at the top and had nowhere to go." She knows two rules from her own teacher: **the boards work only at Slack**, and **"the chapel tells you where the water stood."** She does not know which board is first.
 - **The stake.** At the bell-loft window (G2), inspect the **buttress stake**: ochre (Slack) on arrival. With `MRC_SENNIC` = 3, a line: the bell side faces the slack water, as Sennic said (`MCS-I4.01`).
@@ -607,29 +607,29 @@ Mabyn knows the chapel had drains; every Tender knows that; nobody has worked th
   - **Board B** first. The nave drops to **stage 1** (§B8.2): the water falls with a long roar through the walls, the gallery shakes, and the upper aisle walk (N1) comes out of the water, silted and dark.
 **Verbs:** read, compare, wind, be wrong, reset.
 
-### Beat 4 — Stage One and the Wait (`S03_drain`, second part)
+### Beat 4: Stage One and the Wait (`S03_drain`, second part)
 **Objective:** *Light the aisle walk before the dark fills it.* Then: *Wait for Slack.*
 The aisle walk (N1) is dark ground. Shades fill it ~6 s after the player steps off the lit stair (§B8.1). The player lights P1–P4 in turn; each post's light reaches just short of the next. **MCS-E2:** Silt Crawlers, stirred by the falling water, burst out of the fresh silt and come at the light (two waves of two). Fight in a lit stretch or on the edge of one; fighting in the dark means Shade presses while you fight.
 When P1–P4 are lit, the buttress stake reads **pale** (Running): the first board let out the top of the water, which is most of it, and the side channel has risen. Mabyn: "Running till dusk now. Come and sit by a lit post." (`MCS-D5`). The player **keeps watch** at the gallery post with Mabyn until **dusk**. Mabyn talks (optional, `MCS-D5.10`–`.40`): how she came to the Tenders, what the line is for, a dry joke about Rowan. The stake turns ochre.
 **Verbs:** light, fight, wait, sit.
 
-### Beat 5 — Stage Two (`S03_drain`, third part)
+### Beat 5: Stage Two (`S03_drain`, third part)
 **Objective:** *Open the next sluice board.* Then: *Light the lower bays.*
 **Board C** at dusk Slack. The nave drops to **stage 2**: the lower bays (N2) and the vestry door. The player lights P5–P9 down the bays. **MCS-E3:** Reedlurkers in the pools left in the bay hollows (two lurkers and a snapper) and two more Crawlers. The vestry door is clear and opens (Beat 6 may be done now or after Beat 7's board; the crypt waits for it).
 **Verbs:** wind, light, fight.
 
-### Beat 6 — The Vestry (`S04_vestry`)
+### Beat 6: The Vestry (`S04_vestry`)
 **Objective:** *Search the vestry.*
-Available from stage 2. The vestry (V1, V2) is dark ground with no post: the player lights it with the hand lantern alone, and the Shades lean in at the door but the room is small. On the hook, the officer's dispatch case. **Required read in place:** the **regimental log** (`MCS-I6.02`; full text in the dialogue file). Its entries are headed by the weather, not by date, and they run the same weather as the three day-books from the causeway chest: rain, rain, rain, a hard frost, a thaw, fog, fog. It stops on the second fog, as they do. It is from a column those day-books do not cover; its unit mark has rotted off the case. It says, in a soldier's plain hand: the field post was moved into the chapel vestry; the chapel's people kept the roof lantern; neither column could go back over the channels and nobody could win the ground; the chapel's people asked that nobody fire on anyone walking out at first light without arms; at grey light they went out from the chapel in a line with lanterns and no arms, onto the field; then quiet, not a shot, not a shout, and the men sitting where they stood; at dusk, not many of the chapel's people came back past the post; they would not be helped; they went down under the big window and shut the stair. Last line: *"The lantern on the roof is lit."* Sets `MCS_VESTRY_READ`. The log stays on its hook.
+Available from stage 2. The vestry (V1, V2) is dark ground with no post: the player lights it with the hand lantern alone, and the Shades lean in at the door but the room is small. On the hook, the officer's dispatch case. **Required read in place:** the **regimental log** (`MCS-I6.02`; full text in the dialogue file). Its entries are headed by the weather, not by date, and they run the same weather as the three day-books from the causeway chest: rain, rain, rain, a hard frost, a thaw, fog, fog. It stops on the second fog, as they do. It is from a column those day-books do not cover; its unit mark has rotted off the case. It says, in a soldier's plain hand: the field post was moved into the chapel vestry; the chapel's people kept the roof lantern; nobody on the field could go back over the channels and nobody could win the ground; the chapel's people asked that nobody fire on anyone walking out at first light without arms; at grey light they went out from the chapel in a line with lanterns and no arms, onto the field; then quiet, not a shot, not a shout, and the men sitting where they stood; at dusk, not many of the chapel's people came back past the post; they would not be helped; they went down under the big window and shut the stair. Last line: *"The lantern on the roof is lit."* Sets `MCS_VESTRY_READ`. The log stays on its hook.
 Mabyn, from the gallery, asks what is in there. The player can tell her now (`MCS-D6`) or later on the roof.
 **Verbs:** search, read.
 
-### Beat 7 — Stage Three: the Glass (`S03_drain`, end) — *the strange moment*
+### Beat 7: Stage Three: the Glass (`S03_drain`, end): *the strange moment*
 **Objective:** *Open the last sluice board.* Then: *Light the nave floor.*
 **Board A** (the bell-loft windlass, nearest the hatch and last in order). The nave drops to **stage 3**. **The strange moment** (§B8.3): as the last water falls away from the great window, the stained glass is lit from behind, gold and blue, by nothing; then it is only glass with peat behind it. Mabyn, at the gallery rail, sees it too. She says nothing until the player looks up at her, then: "Seen: it lit. Thought: I don't know. That's all I've got." (`MCS-B4.3`). The player lights P10–P12 across the floor and the altar post P13. Sets `MCS_STAGE` = 3, `MCS_GLASS_SEEN`. `S03` completes.
 **Verbs:** wind, witness, light.
 
-### Beat 8 — The Crypt (`S05_crypt`)
+### Beat 8: The Crypt (`S05_crypt`)
 **Objective:** *Look beneath the altar.* Then: *Open the box.* Then: *Read the leaves.*
 Requires `S03` and `S04`. The altar stands under the great window (Sennic's lead). Lift the slab in the altar step by its ring (interaction ~2 s). Down the steps (K2). On the shelf, the lead-lined box (K3). **Prise the lead strip** (channelled, 3 segments of ~3 s; persist). Inside, wrapped in rotted cloth, four clay leaves. Take them (`MCS_warden_leaves`; Mabyn's oilcloth wraps them on the way out). **Read them** (document view, four leaves; text in the dialogue file):
 1. **The plan** (fired): from "the wardens of memory kept at this house". *"We will lay the calm across the field of standards at the turning of the light. The ground will take what we give it. If we cannot carry it, it will carry us."* They go without arms and without names; the marks are enough.
@@ -640,12 +640,12 @@ No leaf states or totals a number, and the marks cannot be counted (§B8.4). No 
 Together with the vestry log: **two custodians**. The Memorywardens went out at the turning of the light to stop the fighting on the field of standards; the field went quiet; few came back; their circle on Bannerline was not closed (R08).
 **Verbs:** lift, prise, read.
 
-### Beat 9 — Out by the Line (`S06_out`)
+### Beat 9: Out by the Line (`S06_out`)
 **Objective:** *Carry the leaves up to Mabyn.*
 Opening the sealed crypt lets its air out, and with all three culverts open, a **draught** pulls up through the nave toward the bell-loft hatch (§B8.5). The posts gutter, one after another, from the floor upward. Each post gutters **once**. The player carries the leaves up: floor → bays → aisle walk → gallery → loft → hatch, relighting guttered posts (~2 s each) or running between them. The Shades press hard in the gutters' dark (form after ~3 s, press every ~2 s). At ember the player is pushed back to the nearest lit post, which is never further back than the last post the player relit. **Mabyn holds the top post** at the hatch with her pole lantern, which does not gutter; she calls down the stair (`MCS-B6`). At the hatch she takes the player's wrist and pulls them up into the air. The draught dies. Below, the line she and the player relight is steady.
 **Verbs:** carry, relight, endure, climb.
 
-### Beat 10 — The Vigil and the Record (`S07_vigil`)
+### Beat 10: The Vigil and the Record (`S07_vigil`)
 **Objective:** *Sit the night with Mabyn.* Then: *Decide who keeps the record.*
 Night on the roof. Mabyn lights the last ridge lantern, makes peat-tea, and sits (`MCS-D9`). Food and tea before the question (§5.3 rule 6). If the player tells her the vestry log's last line (*"The lantern on the roof is lit."*), she is quiet for a long moment and then tells the Tenders' story of the seven-night lantern as craft and stubbornness: "They kept it lit for people who went out and didn't come back. That's what it was for. Not a miracle. People not sleeping." (seed for MLW; belief stays belief.) She asks what is in the leaves and the player tells her (or shows them).
 Then the question: who keeps the record (§B9.3). Mabyn: "You brought it up. The leaves were never ours; we only kept the roof. Say where it goes and I'll pray over it either way." The player chooses:
@@ -655,7 +655,7 @@ Then the question: who keeps the record (§B9.3). Mabyn: "You brought it up. The
 Sets `MR_WARDEN_RECORD`. The player keeps watch until first light `[MD-3]`.
 **Verbs:** sit, tell, decide, carry, keep watch.
 
-### Beat 11 — First Light and the Landing (`S08_landing`)
+### Beat 11: First Light and the Landing (`S08_landing`)
 **Objective:** *Cross back with Rowan.* Then: *Tell Ysolde what you found.*
 At first light Rowan's boat comes out of the grey (`MCS-D10`). He looks at the lit line along the ridge, then at Mabyn. "Line's lit." That is all he says about it. The ride back is short and quiet (no calls, no fight; knots inspectable). At Blackwater Landing, **Ysolde** is on the dock with bread in a cloth (`MCS-D11`). "Sit. Eat. Then tell it." The player tells her (dialogue recall): the vestry log (the weather run that stops on the same fog; the line of people going out; the men sitting down); the leaves (the plan, the stones, the rows, "the circle is not closed"). Ysolde sets them side by side: "The log is one hold. The leaves are another. Two holds. That's an account." Then, carefully, she makes one link herself: Griefwatch talks about something on Bannerline that gives orders and has since the war, and the leaves say the circle on Bannerline was never closed. "I've put those two side by side. That's my reading. It isn't a hold." She writes in her reed book (outcome lines, §B9.3). The quest completes when she blots the page.
 **Verbs:** cross, eat, tell, witness.
@@ -689,7 +689,7 @@ Tuned for **Advanced** identity (MD-10). Every enemy is defeated at 0 HP (CDR-1)
 | Element | Spec |
 |---|---|
 | **Lantern post** | A post with a covered housing. States: **dark** (cold housing), **lit** (steady green-gold moss light, radius ~6 m), **guttering** (`S06` only: flame shrinks and smokes, ~1.5 s, then dark). Light: one channelled interaction (~3 s) with the moss bundle and peat-wax in the pack; relight after guttering ~2 s. |
-| **Hand lantern** (carry-state, Mabyn's) | Three visible states on the prop itself: **bright** (radius ~3 m), **low**, **ember**. No meter, no bar. Refills to bright after ~2 s standing in a lit post's radius. A log line on each state change ("Your lantern dims." / "Your lantern is down to an ember."). |
+| **Hand lantern** (carry-state, Mabyn's) | Three visible looks on the prop itself: **bright** (radius ~3 m), **low**, **ember**. These are presentation of one dark-ground timer (presses 0–2), not a stored light stat: no meter, no bar, no fuel, and the timer simply resets on entering a lit post's radius (shown as the flame recovering over ~2 s). A log line on each state change ("Your lantern dims." / "Your lantern is down to an ember."). |
 | **Dark ground** | Any walkable ground outside every lit post's radius. After **~6 s** continuous in dark ground (`S06`: ~3 s), Shades form at the edge of the hand lantern's light. |
 | **Shades** | Not figures. Dark that thickens into shapes at the very edge of the light, heavier low down, never a face, never an outline of a person, never a unit or banner. They do not move toward the player; the dark closes. |
 | **Press** | **Tell:** the hand lantern's flame leans away from the thickest dark and the light shrinks (~2 s). **Press:** the lantern drops one state. Every **~4 s** while in dark ground (`S06`: ~2 s). |
@@ -714,7 +714,7 @@ Tuned for **Advanced** identity (MD-10). Every enemy is defeated at 0 HP (CDR-1)
 | Hint ladder | 0 wrong: none. 2 wrong: Mabyn repeats her teacher's words. 3 wrong: she says "Highest stain first." |
 | Each stage's fall | ~15 s: a long roar inside the walls; the gallery shakes (camera shake light); the water surface drops in a visible slide; silt and debris swirl; then the environment variant settles and the new ground drips. The player keeps control throughout. |
 
-### B8.3 The glass lit by nothing (Beat 7) — *the strange moment*
+### B8.3 The glass lit by nothing (Beat 7): *the strange moment*
 
 | Time | Element | Spec |
 |---|---|---|
@@ -793,7 +793,7 @@ The player decides; Mabyn agrees in every case. Every outcome keeps the knowledg
 |---|---|---|---|
 | **Sorrowmere** (`MR_WARDEN_RECORD = sorrowmere`): *"Ysolde's people should keep it, and read it out."* | The leaves leave the chapel in the player's pack and are given to Ysolde at the landing. She will read them on the raised way where anyone can hear, and she starts a new page in the Names Below register **for people held without names** (`MCS-D11.40`). | The chapel loses the thing it kept without knowing. Mabyn: "Bring them back to be read here sometimes. They were under our roof a long while." The leaves are in a busy room now, handled. | **MR-M5:** Ysolde's names roll carries a line read from the leaves (bible §9.1). **CV-M1:** the record is in Sorrowmere's register room. Post-story: a Memorykeeper reading from them on the raised way (bark). |
 | **Altar** (`= altar`): *"Put it back where they left it."* | The player and Mabyn go down the lit line to the crypt. The player lays the leaves in the box; Mabyn says a river hymn; the player takes a **reed-paper rubbing** of the last leaf; they close the slab. At the landing, Ysolde takes the rubbing and makes a reed copy of the last leaf for the register (`MCS-D11.42`). | Only the last leaf travels. The rest is under the altar, reached by Rowan's route at Slack and Mabyn's line. Ysolde: "Then I'll go out and read the rest myself. With Rowan. At Slack." | **MR-M5:** the roll's source line names the reed copy and the altar. **CV-M1:** the record is beneath the altar; Mabyn keeps the way lit. Post-story: the crypt can be visited; the box is there; the leaves can be read in place. |
-| **Tenders** (`= tenders`): *"The Tenders kept the light for them. Let the Tenders keep this."* | The leaves go into the Tenders' chest in Mabyn's roof loft, pegged. Mabyn will read them to anyone Rowan brings (`MCS-D9.42`). At the landing, Ysolde writes where the record is held (`MCS-D11.44`): "That's a hold too. A keeper and a place." | The record is only as reachable as Rowan's route. Mabyn is alone on the roof and says so. | **MR-M5:** the roll's source line names the Tenders' loft. **CV-M1:** the record is in the Tenders' keeping on the chapel roof. Post-story: Mabyn reads a leaf aloud on request at her loft. |
+| **Tenders** (`= tenders`): *"The Tenders kept the light for them. Let the Tenders keep this."* | The leaves go into the Tenders' chest in Mabyn's roof loft, pegged. Mabyn will read them to anyone Rowan brings (`MCS-D9.71`). At the landing, Ysolde writes where the record is held (`MCS-D11.44`): "That's a hold too. A keeper and a place." | The record is only as reachable as Rowan's route. Mabyn is alone on the roof and says so. | **MR-M5:** the roll's source line names the Tenders' loft. **CV-M1:** the record is in the Tenders' keeping on the chapel roof. Post-story: Mabyn reads a leaf aloud on request at her loft. |
 
 **All** outcomes: the vestry log stays on its hook, readable; the player has read both custodians; the chapel stays drained and lit for the player (post-quest state); Ysolde has heard the account and made her reading. Nobody is told the Memorywardens' names, the armies or the dead; none of the records contains them. None of the options is wrong.
 
@@ -831,7 +831,7 @@ The player decides; Mabyn agrees in every case. Every outcome keeps the knowledg
 |---|---|---|
 | **Staged water level** (N-3) | Systems + Art | Three discrete nave environment variants (stage 1, 2, 3) plus the flooded start, swapped by quest step (`MCS_STAGE`), per player with host fallback in co-op. This is already the fallback form; nothing more is needed. A ~15 s transition presentation (water slide, debris, shake) is VFX over the swap. |
 | **Light-gated hazard volumes** (N-2) | Systems | Spawn gating by a lantern post's lit state (radius ~6 m). Hazard volume in dark ground applies the press timer to the carried hand lantern and, at ember, a scripted push to the nearest lit post. **Fallback:** pre-authored lit/dark zones flipped at each stage, as §B8.1. |
-| **Hand lantern with three visible states** | Systems + Art | A carry-state prop with three light radii and a log line on change; refill in lit radius. Part of N-2, not a new UI. |
+| **Hand lantern looks** | Systems + Art | A carry-state prop whose light radius shows the dark-ground timer (three looks) with a log line on change; the timer resets in a lit radius. Part of N-2; no stored light value, no new UI. |
 | **Lantern post states** | Systems + Art | Dark / lit / guttering, with light and relight interactions; persisted per player. |
 | **Channel-state pin for the buttress stake** (N-1 fallback) | Systems | Quest-pinned stake state per presentation hour (§B8.2). |
 | **Windlass interaction with order check** | Systems | Channelled interaction on three windlasses; a sequence check (B → C → A); wrong order plays an authored reset; Running blocks the interaction. Standard interact sequence with harmless reset (bible §11.1). |
@@ -906,3 +906,4 @@ The player decides; Mabyn agrees in every case. Every outcome keeps the knowledg
 | Magic stays dormant | Nobody practises or recognises magic. Sennic says "mages" as his childhood story; Ysolde calls the Memorywardens "the old order. History." Mabyn: "Not a miracle. People not sleeping." |
 | Cross-region independence | No Lowmark or Thornfell state is read or required. |
 | Release wording | None. "Mire milestone" only. |
+| Independent review (2026-11-08, Acts I–II reviewer) | 8 defects fixed in place, none high. **Medium (CDR-4):** the boat fight's bespoke Echo "grip" state, and its contradictory claim that "a player who does nothing still finishes", replaced by the ordinary escort halt-on-enemy-proximity rule the Act I cart already uses (Beat 5, MRC-E2, rules, §A12, §A15, `MRC-B5.6`); the hand lantern's three states restated as presentation of one dark-ground timer with no stored light value or refill logic (§B8.1, §B12). **Low:** §B9.3 cited non-existent `MCS-D9.42` (now `MCS-D9.71`); Beat 6 said "neither column", implying two forces where the log says "the other lot, and the lot behind them" (reworded); duplicate conditional ids made unique (`MRC-D9.11b`, `MRC-B5.3b`, `MCS-D10.04b`/`.04c`); Rowan's "I was younger than you" presumed the player's age (origin-neutral rule; now "I was young"); beat headings used em-dashes (now colons, matching Act I). **Verified unchanged:** every other cited id exists; flags and step predicates match; R08 custody (leaf 3 runs off a broken edge, leaf 4 smeared, "not many"/"fewer" only; no names, armies or numerals; Rowan and the glass leave "Sinking Star" unexplained, no star motif); Rowan (night refusal, gentle repeated asks, only guide, unnamed teacher), Sennic (where, never why); MD-3/MD-4 tags and swap notes; the weather run matches Act I's three day-books exactly; MAP VERIFICATION REQUIRED on every place section; tables well-formed. |

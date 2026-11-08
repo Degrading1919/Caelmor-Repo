@@ -372,7 +372,7 @@ MRC-D6.22 ROWAN: "Don't be. Wasn't you."
 
 MRC-D6.30 (third) ROWAN: (puts the harness down) "All right."
 MRC-D6.31 ROWAN: "The one who taught me this water. She went out one night. Sick child, far channels. Somebody came to the landing in the dark and asked, and she went."
-MRC-D6.32 ROWAN: "I was younger than you. I said wait for the grey. She said children don't wait for the grey."
+MRC-D6.32 ROWAN: "I was young. I said wait for the grey. She said children don't wait for the grey."
 MRC-D6.33 ROWAN: "I found her boat in the morning. Side channel. Pole still in it. Her knots tied all along the way. Every one right."
 MRC-D6.34 ROWAN: "So she wasn't wrong about the water." (beat) "She just couldn't see it."
 MRC-D6.35 [MD-3] ROWAN: "So. The grey. Not the dark."   {set MRC_ASKED = 3}
@@ -427,10 +427,10 @@ MRC-D8.24 (the water slides down the stake to the ochre as the light comes up) R
 | MRC-B5.1 | The shoal; the boat grounds | ROWAN (handing over the harness) | "Your turn to be a horse." |
 | MRC-B5.2 | First haul segment | ROWAN | "Pull on the posts. Not on me." |
 | MRC-B5.3 | Haul complete | ROWAN {if `MRC_HARNESS_DONE`} | "Holding. You stitch like you mean it." |
-| MRC-B5.3 | Haul complete | ROWAN {if `MRC_HARNESS_CREW`} | "Good stitching. Not yours. Still good." |
+| MRC-B5.3b | Haul complete | ROWAN {if `MRC_HARNESS_CREW`} | "Good stitching. Not yours. Still good." |
 | MRC-B5.4 | After the cut, if the player speaks to him | ROWAN | "Mud. It stands up. It sits down. Keep your hands in the boat." |
 | MRC-B5.5 | An Echo forms on a bank (once per stretch) | ROWAN | "Bank." |
-| MRC-B5.6 | An Echo grips the gunwale | ROWAN | "Off the gunwale. I can't pole with company." |
+| MRC-B5.6 | An Echo reaches the gunwale (the boat holds) | ROWAN | "Off the gunwale. I can't pole with company." |
 | MRC-B5.7 | The distant shouting in the cut | ROWAN | "That's not anyone. Don't answer it." |
 | MRC-B5.8 | Player defeated in the boat, respawned aboard | ROWAN | "Sit up. We're still going." |
 | MRC-B5.9 | `MRC_WRONG_CALLS` ≥ 2 at the roof | ROWAN | "You'll learn. Faster than I did." |
@@ -454,7 +454,7 @@ MRC-D9.05 MABYN: "Line's been failing since spring. Since the spate. Damp gets i
 MRC-D9.06 ROWAN: (when the player looks back at him) "Not coming up. Not my place. It's hers."
 MRC-D9.10 [MD-3] {if MRC_ASKED = 3} ROWAN: "Morning slack. Not before." (beat) "You know why."
 MRC-D9.11 [MD-3] {if MRC_ASKED = 0} ROWAN: "Morning slack. Not before." (beat) "You never asked me about the night. I noticed. Thank you for that."
-MRC-D9.11 [MD-3] {if MRC_ASKED = 1 or 2} ROWAN: "Morning slack. Not before." (beat) "You asked, and you left it. I noticed. Thank you for that."
+MRC-D9.11b [MD-3] {if MRC_ASKED = 1 or 2} ROWAN: "Morning slack. Not before." (beat) "You asked, and you left it. I noticed. Thank you for that."
 MRC-D9.12 ROWAN: (he poles away into the fog without looking back)
 MRC-D9.13 MABYN: "He nearly smiled. Did you see? Don't tell him."
       {set MR_ROWAN_TRUST = told if MRC_ASKED = 3, else kept; event: MRC Completed; MCS Active → MCS-D1.01}
@@ -848,8 +848,8 @@ MCS-D10.01 ROWAN: (the boat out of the grey; he looks at the lit ridge a long ti
 MCS-D10.02 MABYN: "It is."
 MCS-D10.03 ROWAN: (to the player) "Get in."
 MCS-D10.04 {if MR_WARDEN_RECORD = sorrowmere} ROWAN: "Ysolde's on my dock. Since before light. Don't keep her."
-MCS-D10.04 {if MR_WARDEN_RECORD = altar} ROWAN: (seeing the rubbing) "Left it where it was." (beat) "Good."
-MCS-D10.04 {if MR_WARDEN_RECORD = tenders} ROWAN: "Hers to keep, then." (beat) "Good."
+MCS-D10.04b {if MR_WARDEN_RECORD = altar} ROWAN: (seeing the rubbing) "Left it where it was." (beat) "Good."
+MCS-D10.04c {if MR_WARDEN_RECORD = tenders} ROWAN: "Hers to keep, then." (beat) "Good."
 MCS-D10.05 MABYN: (from the ridge, as the boat pulls off) "Come back. Bring somebody. Bring bread."
 
 MCS-D10.10 (optional, during the ride: "Rowan. Why 'the Sinking Star'?") ROWAN: "Riverfolk say Church. I say Church."

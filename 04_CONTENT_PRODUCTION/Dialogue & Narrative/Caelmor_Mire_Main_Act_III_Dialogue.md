@@ -78,7 +78,7 @@
 - **Voice:** loud only once. Otherwise apologetic.
 
 ### Jory Wick, settled Hollowfoot man in Lysa's care [NEW]
-- **Who:** a man who wandered for years and has lived at the Fenward huts for some time. **Non-combatant, never targetable** (MD-7 dignity rule). No war history is given.
+- **Who:** a man who wandered for years and has lived at the Fenward huts for some time. He is the settled man who sorts reeds by length in MR-M1 (Act I `MNS-B6.2`–`.4`, unnamed there; he never spoke in Act I). **Non-combatant, never targetable** (MD-7 dignity rule). No war history is given.
 - **In MR-M5:** at Griefwatch, then at Lysa's shoulder at the ring with his hands over his ears through the count. Says very little.
 
 ### Thornfell Ridge Warden pair [role names] (`TH_STANDING` only)
@@ -133,7 +133,7 @@ MBL-D1.31 IDE: "Not yet means not yet. Not no."   → MBL-D1 options
 
 MBL-D1.40 IDE: "Echo files. Mud in lines, walking on the count. And drifters, the ones the count's woken." (beat) "I'll open it for people going up to finish something. Not for people going up to look."   → MBL-D1 options
 
-MBL-D1.50 [MR_WARDEN_RECORD = sorrowmere] YSOLDE: (lays a hand on the lead-lined box at her elbow) "I brought the leaves. They're going up with us."
+MBL-D1.50 [MR_WARDEN_RECORD = sorrowmere] YSOLDE: (lays a hand on the oilcloth bundle at her elbow) "I brought the leaves. They're going up with us."
 MBL-D1.50 [MR_WARDEN_RECORD = altar]     YSOLDE: (touches a reed slip in her sleeve) "The leaves are under the altar. I've the last line, copied. That's enough to read."
 MBL-D1.50 [MR_WARDEN_RECORD = tenders]   YSOLDE: "Mabyn's coming. She has the leaves by heart now; she's said them to everyone Rowan brought her."
 MBL-D1.51 YSOLDE: "The book's here. Let's find out who we can name."   {event: MBL-D1 end → S01 active}
@@ -314,7 +314,7 @@ MBL-D5.20 BANNERBEARER: "They've answered it. Every one." (beat) "We'll hold the
 
 ### Document D-1: `MBL_names_roll` (quest item) [NEW]
 
-Reed paper, several sheets tied with a reed. Ysolde's hand, very even. Inspect shows the header and the first lines; the full roll is read at the ring (`MBL-R`). No line states or implies a total.
+Reed paper, several sheets tied with a reed. Ysolde's hand, very even. Inspect shows the header and the first lines; the lines below are the ones read at the ring (`MBL-R`), and the later sheets are shown only as more of the same hand. No line states or implies a total, and the `R` ids are production ids, never shown to the player.
 
 > **NAMES BELOW. For reading at the circle on Bannerline.**
 > *From the field of standards and the ridge. Two holds, one name. The rest held, not yet known.*
@@ -339,10 +339,10 @@ Reed paper, several sheets tied with a reed. Ysolde's hand, very even. Inspect s
 
 ### Document D-2: Griefwatch's vigil book, the water-carriers' page [NEW]
 
-Read in place at the vigil-hall table. A bell-keeper's hand, cramped, one line per bell-night; no year written, only "the last summer".
+Read in place at the vigil-hall table. A bell-keeper's hand, cramped, one line per bell-night; no year written, only "the last wet" at the head of the page (the season of the Act I day-books and the Act II vestry log; the two fog nights below are the end of their weather run, unstated).
 
-> *Bell-night. Ridge loud all day. Rung up for the water-carriers going up at noon.*
-> *Bell-night. Ridge quiet. Very quiet. Nobody rung down.*
+> *Bell-night. Fog. Ridge loud all day. Rung up for the water-carriers going up at noon.*
+> *Bell-night. Fog. Ridge quiet. Very quiet. Nobody rung down.*
 > *Bell-night. Rung down for the water-carriers: Tasker. Coldridge, the bell-keeper's girl. And a boy.*
 > *Bell-night. Rung for nobody. Rang it anyway.*
 
@@ -369,9 +369,10 @@ Read in place at the vigil-hall table. A bell-keeper's hand, cramped, one line p
 | A laid standard | "Flat on the turf, folded or not. Still." | after |
 | The muster post | "Tall, iron-shod. A crossbar worn smooth by hands, at a height for calling from." | any |
 | The muster post (after `S05`) | "Mud round its foot, drying. The count still comes up through it, softer." | `S05`–`S06` |
-| A circle stone | "Waist high, lichened. A worn mark is cut into the top face." | any |
-| A circle stone | "Waist high. The worn mark on its top matches one of the marks on the leaves' stone list, pressed in clay beside it in Ysolde's box." | `MR_WARDEN_RECORD = sorrowmere` |
-| A circle stone | "Waist high. A worn mark on top. Mabyn could tell you which line of the list it is. She did, once." | `tenders` |
+| A circle stone | "Waist high, lichened. Old." | any |
+| One of the five listed stones (S3, S5, S7, S9, S11) | "Waist high. The post stone." / "The low stone by the palisade." / "The split stone." / "The stone that faces the field." / "The stone with the old cut in it." (Ysolde, if asked: "That's on the leaves. By its place. That's all the leaves say of it.") | `MR_WARDEN_RECORD = sorrowmere` or `altar` (her copy names them) |
+| One of the five listed stones | Same place-names. (Mabyn, if asked: "That one's on the list. I've said it often enough to know it.") | `tenders` |
+| Any other stone | "Waist high. Not on what's left of the list." | any value, after a listed stone is inspected |
 | The footing stone (gap) | "A flat stone set in the turf where a thirteenth should stand. Wet. The mud from the post has soaked into it." | `S05`–`S06` |
 | Iron soil | "Red ground. A tarnish serpent lies on it in the last warmth and does not move for you." | any |
 | The Banner That Sank Twice | "Stood by the road stone, on its old pole. Corra's hand on it." | restored |
@@ -423,7 +424,7 @@ MBL-D6.21 YSOLDE: (coming up the road head with a lantern) "The leaves said the 
 
 ```
 MBL-D7.01 YSOLDE: (takes the roll; unties the reed) "Thank you."
-MBL-D7.02 [MR_WARDEN_RECORD = sorrowmere] YSOLDE: "From the Names Below, and from the leaves the Wardens left." (opens the box; reads) "'The circle is not closed. We could not.'"
+MBL-D7.02 [MR_WARDEN_RECORD = sorrowmere] YSOLDE: "From the Names Below, and from the leaves the Wardens left." (unwraps the oilcloth; reads the last leaf) "'The circle is not closed. We could not.'"
 MBL-D7.02 [MR_WARDEN_RECORD = altar]     YSOLDE: "From the Names Below. The leaves stay where Mabyn put them. I've the last line." (reads the reed slip) "'The circle is not closed. We could not.'"
 MBL-D7.02 [MR_WARDEN_RECORD = tenders]   MABYN: (at S8 when she arrives, or at the road head if not yet) "I'll say it. I've said it often enough." (beat) "'The circle is not closed. We could not.'"
 MBL-D7.03 YSOLDE: "We can." (to the player) "Kneel at the gap. Hand on the stone. Step off when it says three's coming."
@@ -490,11 +491,13 @@ Each person walks up from the road head with a lantern, sets a hand on their sto
 | MBL-B7.5 | S8 | MABYN | "Tenders kept a lantern seven nights for people off this field. I'll keep one more." | always |
 | MBL-B7.6 | S9 | LYSA | "Making space. That's all this is." | always |
 | MBL-B7.6a | S9 (shoulder) | JORY | (hands over his ears) "It's counting." | always |
+| MBL-B7.6b | S9 (shoulder), after the count stops | JORY | (lowers his hands; nods to the player, the way he held out a reed at Fenward) | `MNS_FENWARD_VISITED` |
 | MBL-B7.7 | S10 | NELL | "I'm terrified. Agna says that's fine." / [amended] "I'm terrified. Dunstan says that's a family trait." | by `MR_NAME_RECORD` |
 | MBL-B7.7a | S10 (shoulder) | AGNA | "Wet ground. I'm here anyway. Write that." | qualified |
 | MBL-B7.8 | S11 | DUNSTAN | (hands Nell a heel of bread; says nothing; takes his stone) | amended |
 | MBL-B7.8a | S3 | DUNSTAN | (from across the ring, to nobody) "She's there. That's enough for tonight." | qualified |
 | MBL-B7.9 | S3/S11/S12 | CORRA | "I carried it all the way up. My arms are shaking. I'm fine." | `MR_BANNERS = restored` |
+| MBL-B7.9a | S3/S11/S12 | CORRA | (adds) "You gave me the corner, on the causeway. I've not forgotten." | `MR_BANNERS = restored`, `MBR_CORRA_CORNER` |
 | MBL-B7.10 | S12 | ROWAN | "Walked. Up a hill. At night." (beat) "Don't tell anyone." | `MR_ROWAN_TRUST = told` |
 | MBL-B7.10a | (from the gap, looking down) | (log) | "Far below, the landing lantern is lit." | `MR_ROWAN_TRUST = kept` |
 | MBL-B7.11 | household stone | GRIEFWATCH HOUSEHOLDER | "Thirty years we rang the bell for this ridge. Now we're stood on it." | any household stone |
@@ -507,7 +510,7 @@ Each person walks up from the road head with a lantern, sets a hand on their sto
 | Id | Trigger | Speaker | Line |
 |---|---|---|---|
 | MBL-B7.20 | Player releases the gap | (log) | "You step off. Up the road, the lanterns stop and wait." |
-| MBL-B7.21 | File passes through the gap | (log) | "Three. It walks through the gap and comes apart in the grass outside the ring." |
+| MBL-B7.21 | File passes through the gap | (log) | "Three. It walks through the gap and comes apart on the grass inside the ring." |
 | MBL-B7.22 | Player held through three | BRAN (from the palisade) | "Two." |
 | MBL-B7.23 | Segment 3, second file forms | IDE | "Two lanes now! Watch the left!" |
 | MBL-B7.24 | Player strikes a file down from the gap | (log) | "It comes apart in the lane. Four counts before it stands again." |
@@ -596,7 +599,7 @@ MBL-D9.40 AGNA: (from the doorway) "Now eat the rest."   {set MR_STANDING; quest
 | MBL-B9.6 | MABYN | "No miracles. Just a lot of people walking up a hill." | any |
 | MBL-B9.7 | MARA | (eating; to nobody) "Good stone." | quieted |
 | MBL-B9.7a | MARA | (eating) "Ide'll be cold. Somebody take her a bowl." | tended |
-| MBL-B9.8 | OLD SENNIC VALE | "First quiet night on that ridge since I was small. That's what I saw. I'll not say more." | any |
+| MBL-B9.8 | OLD SENNIC VALE | "They say it's quiet up there. I'll believe it when I've slept a night on it." | any |
 | MBL-B9.9 | YOUNG WARDEN (Thornfell) | "We'll stay for the soup. Then back to our own hills, walker. They'll want to hear it." | `TH_STANDING` |
 | MBL-B9.10 | LYSA | "Jory slept on the walk down. First time in a week." | any |
 | MBL-B9.11 | EDRIS | "The Mire knows when it's respected. That's not a fact. That's how I try to live." | any |
@@ -636,7 +639,7 @@ All per-player; keyed on the quest file §E tables.
 | MBL-B17.2 | Blackwater Landing | ROWAN | "Saw your lantern go round the ring. I kept mine." | kept |
 | MBL-B17.3 | Sunken Chapel roof | MABYN | "...and then it was finished, by people who came up the road. That's the end of the reading now." | `MR_WARDEN_RECORD = tenders` |
 | MBL-B17.4 | Sunken Chapel altar | MABYN | "One prayer for the circle. Short. They'd had enough long ones." | altar |
-| MBL-B17.5 | Sorrowmere reading stand | (inspect, the leaves' box) | "A reed slip in the box, Ysolde's hand: *Closed.*" / "*Kept.*" | sorrowmere, by `MR_BANNERLINE` |
+| MBL-B17.5 | Sorrowmere reading stand | (inspect, the leaves in their oilcloth) | "A reed slip tucked into the oilcloth, Ysolde's hand: *Closed.*" / "*Kept.*" | sorrowmere, by `MR_BANNERLINE` |
 
 ---
 

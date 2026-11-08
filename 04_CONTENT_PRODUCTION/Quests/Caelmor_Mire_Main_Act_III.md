@@ -8,7 +8,7 @@
 
 **Format:** this package mirrors `Caelmor_Thornfell_Main_Act_III.md` (capstone boss spec and ending matrix), which follows the Lowmark act-package format. Tags used in this file: `[CAUSEWAY]` on every node naming Oswin Garvey's causeway decision (bible §3.1); `[MD-7]` on every Hollowfoot encounter, so a Director ruling that retires Hollowfoot as enemies touches only tagged nodes (§14.1 swap note); `[MD-8]` on the post-story refight. MR-M5 does not depend on MD-3 or MD-4 beyond the bible's note that the night is present in MR-M5's vigil (MD-3 recommendation); no node here needs those tags.
 
-**Parallel authoring note.** MR-M1 to MR-M4 and the Mire side quests are being authored in parallel. This package reads only the region flags exactly as bible §9.1 defines them, plus completion of the side quests the bible itself names in §9.3 (*Lifting Day*). Where it relies on an Act I/II detail the bible does not fix (the exact form of the Warden leaves' stone list in MR-M4), it states a fallback and lists the dependency in §12. The Hayle mother's name (Aldith) and the banner's place over Griefwatch's vigil-hall door were checked against the Act I draft on 2026-11-08.
+**Parallel authoring note.** MR-M1 to MR-M4 and the Mire side quests are being authored in parallel. This package reads only the region flags exactly as bible §9.1 defines them, plus completion of the side quests the bible itself names in §9.3 (*Lifting Day*). The form of the Warden leaves' stone list is fixed by Act II §B8.4 (stones named by place only; tally marks only; nothing countable) and this act follows it. The Hayle mother's name (Aldith), the banner's place over Griefwatch's vigil-hall door, Lysa's settled man at Fenward and Corra's fold corner were checked against the Act I package, and the leaves' custody forms against Act II, on 2026-11-08.
 
 ---
 
@@ -16,7 +16,7 @@
 
 ### What Act III does
 
-Acts I and II gave the player three findings: Sorrowmere relaid a wartime causeway across the Field of Fallen Standards and woke the banners (MR-M1, MR-M2); the Memorywardens laid a calm-field over the last battle to stop it, and it killed most of them (MR-M4, R08); and their last leaf says *"The circle is not closed. We could not."* Act III turns that into **one night on Bannerline Ridge and one meal at Sorrowmere**. The player learns the General's count from the one man who has felt it for thirty years, climbs the closed road under it, retires the ridge's risen standards, defeats the General Who Wouldn't Fall for the night, and then holds the gap in the old circle while the people of the Mire come up the road and finish what the Memorywardens could not.
+Acts I and II gave the player three findings: Sorrowmere relaid a wartime causeway across the Field of Fallen Standards and woke the banners (MR-M1, MR-M2); the Memorywardens laid a calm-field over the last battle to stop it, and it killed most of them (MR-M4, R08); and their last leaf says *"The circle is not closed. We could not."* Act III turns that into **one night on Bannerline Ridge and one meal at Sorrowmere**. The player learns the General's count from the one man who has felt it for years, climbs the closed road under it, retires the ridge's risen standards, defeats the General Who Wouldn't Fall for the night, and then holds the gap in the old circle while the people of the Mire come up the road and finish what the Memorywardens could not.
 
 | Quest | Code | The player learns | By doing |
 |---|---|---|---|
@@ -49,6 +49,8 @@ MR-M5 never asks how an earlier flag was set; it reads only the §9.1 values. Ev
 | MDS07 *The great furrow* read (`MDS07_READ`, Batch 3 discovery flag) | `S02` | Bran's line changes: "You've seen it. Then you know." The furrow is the same world object in both packages. |
 | *The Bell Roster* (MBO) Completed | `S00`, `S01` | Ide's roster line; the vigil book's bell-keeper shift column is in the fixed hand the player helped agree. Flavour only. |
 | *A Table for the Wet* (MFT) Completed | `S01` optional pot | Lysa asks for "the one you made for the wet". Flavour only. |
+| `MNS_FENWARD_VISITED` (MR-M1 quest-local, Act I §A9.2) | Circle (`MBL-B7.6a`) | Jory Wick is the settled man the player met at the Fenward huts; with the flag he nods to the player when the count stops. Flavour only. |
+| `MBR_CORRA_CORNER` (MR-M2 quest-local, Act I §B9.2) | Circle (`MBL-B7.9`) | With `MR_BANNERS = restored`, Corra's arrival line thanks the player for the corner of the fold. Flavour only. |
 | `MNS` household detail: the Hayle mother's name, **Aldith Hayle** (MR-M1, from the Hayle book) | Names roll (`MBL-R1`) | Amended: read as "Aldith Hayle of Marshfall, mother of Dunstan and of Linnet. Held probable." Qualified: not read as a name. |
 
 ### Region flags this act sets
@@ -170,7 +172,7 @@ See the Act III header table. Additional local grounding:
 |---|---|
 | **W1. The closure gate** | A timber gate across the foot of the Bannerline road, hung between two old palisade stakes brought down from the ridge long ago. A slate on the post: *Road shut. Ask Ide.* Ide's Marshwardens stand here in oilcloth. With `TH_STANDING`, a Thornfell Ridge Warden pair warms their hands at the wardens' brazier (Griefwatch visitors [CANON]). |
 | **W2. The vigil hall** | A long low hall built on stone footings (the only stone floor in Griefwatch). A bell rope hangs through the roof to the vigil bell. A long table where Ysolde has spread the register's ridge pages beside Griefwatch's **vigil book**, kept by bell-keepers since the war, one line per bell-night. A cook-hearth with a great pot. With `MR_BANNERS = restored`, the **Banner That Sank Twice** hangs over the vigil-hall door with honours, "for whoever" (MR-M2), Corra Sallis under it. |
-| **W3. The fold** | A sheltered yard where Lysa Thornettle has brought people down off the outlying crofts for the night of the closure. **Jory Wick** [NEW], a settled Hollowfoot man in her care, sits on an upturned basket with his hands in his lap. Non-combatant, never targetable (MD-7 dignity rule). |
+| **W3. The fold** | A sheltered yard where Lysa Thornettle has brought people down off the outlying crofts for the night of the closure. **Jory Wick** [NEW], a settled Hollowfoot man in her care (the settled man who sorts reeds at the Fenward huts in MR-M1; Act I gives him no name), sits on an upturned basket with his hands in his lap. Non-combatant, never targetable (MD-7 dignity rule). |
 
 ### 5.2 Bran's watchpost and the furrow [MP17, CANON anchor location; MDS07]
 
@@ -196,7 +198,7 @@ See the Act III header table. Additional local grounding:
 | **C1. The palisade arc** | A curved line of old stakes along the crown's upper edge, iron-red at the foot. Standards of the last battle are lashed to the stakes, most of them **risen** (cloth moving with no wind). Three stand at the heads of the three lanes, lashed to iron-shod stakes; those are the ones the player retires (`S04`). The rest stand along the arc. |
 | **C2. The muster post** | At the centre of the arc: a tall timber post, iron-shod, with a crossbar worn smooth by hands. Commands were called from here. It is where the General coheres. Post-story, striking it at night starts the Night Count (§E.9). |
 | **C3. The three lanes** | Drill furrows, about three metres wide and twenty-five long (zone tune), running downhill from the palisade to the circle: **the Stake Lane** (from the leftmost stakes to the circle's left side), **the Post Lane** (from the muster post straight to the gap) and **the Ring Lane** (from the rightmost stakes to the circle's right side). Each lane is read in four segments by the files. |
-| **C4. The circle** | A ring of twelve low standing stones, waist high, about sixteen metres across, below the lanes. One gap faces the Post Lane: a flat **footing stone** where a thirteenth should stand. Each standing stone has a worn mark cut in its top face. The stones are numbered S1–S12 for production, S1 being the **road stone** (where the road reaches the ring, opposite the gap), S2–S6 up the left side to the gap, S7–S12 from the gap down the right side. |
+| **C4. The circle** | A ring of twelve low standing stones, waist high, about sixteen metres across, below the lanes. One gap faces the Post Lane: a flat **footing stone** where a thirteenth should stand. Five of the stones answer the place-names on the Warden leaves' stone list (Act II §B8.4): **the post stone** (S7, beside the gap where the Post Lane ends), **the low stone by the palisade** (S5), **the split stone** (S9), **the stone that faces the field** (S11) and **the stone with the old cut in it** (S3). The rest of the list is lost on the broken corner; nothing says how many the list held. The stones are numbered S1–S12 for production, S1 being the **road stone** (where the road reaches the ring, opposite the gap), S2–S6 up the left side to the gap, S7–S12 from the gap down the right side. |
 | **C5. Below the ring** | The road's head, where people arrive with lanterns. From the gap the player can see down over the Mire; with `MR_ROWAN_TRUST = kept`, Blackwater Landing's lantern is one point of light far below (presentation; **MAP VERIFICATION REQUIRED** for sightline, or replace with a light on the nearest channel). |
 
 ### 5.5 Sorrowmere [MP01]
@@ -214,7 +216,7 @@ The quest starts the next time the player enters Sorrowmere or Griefwatch after 
 
 At the closure gate (W1), Ide Larrow will not open the road but sends the player to the hall (`MBL-B0.4`). In the vigil hall (W2), Ide and Ysolde give the situation together (`MBL-D1`): the Echo files have been coming further down the road each night since the chapel record came out; two drifters walked into Griefwatch's crofts last night and had to be brought to Lysa; Bran came down at dawn and said, to Ide, "It's counting." Ysolde has the record's last line on her mind: the circle is not closed. Her reading (she says it is hers): finish the circle. She has come to read a roll at it. Ide: "I'll open the road for people going up to finish something. Not for people going up to look."
 
-- **Variants:** `MR_WARDEN_RECORD` (what Ysolde has with her: the leaves in their box, her reed copy of the last leaf, or Mabyn's word that she will come up and say it); `MR_BANNERS = restored` (Corra by the Banner That Sank Twice, asking to carry it up; Ide says not yet).
+- **Variants:** `MR_WARDEN_RECORD` (what Ysolde has with her: the leaves in Mabyn's oilcloth, her reed copy of the last leaf, or Mabyn's word that she will come up and say it); `MR_BANNERS = restored` (Corra by the Banner That Sank Twice, asking to carry it up; Ide says not yet).
 - **Verbs:** travel, listen.
 
 ### Beat 1: The Roll (`S01_roll`)
@@ -292,12 +294,12 @@ People come up the road with lanterns. Ide is already at the road stone (S1). Ys
 **The hold** (channelled, three segments, progress kept):
 
 - While the player holds, people step up to the stones one at a time, set a hand on their stone, and say one line (`MBL-B7`, §8.2). Nobody steps onto the ring while the gap is open and unheld: if the player lets go, arrivals pause at the head of the road and wait (presentation reason, and it means no arrival is ever missed).
-- The count goes on. A single Echo file re-forms in the **Post Lane** and comes down it toward the gap one segment per third beat. On the count it arrives (every fourth third-beat), the ripple at the gap brightens on beat two (~1.2 s tell): **step off the gap on two** (release; progress paused, kept), and the file passes through the open gap on three and collapses into mud outside the ring. **Step back on after three.** A player who holds through the third beat takes moderate damage (~15% max HP) and is knocked back off the stone; the rite's progress is never lost (bible: costs health, never the rite).
+- The count goes on. A single Echo file re-forms in the **Post Lane** and comes down it toward the gap one segment per third beat. On the count it arrives (every fourth third-beat), the ripple at the gap brightens on beat two (~1.2 s tell): **step off the gap on two** (release; progress paused, kept), and the file passes through the open gap on three and collapses into mud on the turf inside the ring. **Step back on after three.** A player who holds through the third beat takes moderate damage (~15% max HP) and is knocked back off the stone; the rite's progress is never lost (bible: costs health, never the rite).
 - The player may instead strike the file down before it reaches the gap (to 0 HP; it re-forms at the post on the next third beat, buying about four counts). Melee meets it in the lane; ranged can shoot it from the gap. Neither is required.
 - **Segment 3:** a second file forms in the Stake Lane and bends toward the gap, arriving two counts after the Post Lane file. The step-off rhythm doubles; the tell is the same.
 - **Ysolde reads the roll** from S7 during segments 2 and 3, one entry per arrival interval (`MBL-D7.10`–`.40`, Document D-1). Named entries are read as names. The rest are read as *"One we hold, not yet known."* With `MR_NAME_RECORD = amended`, Aldith Hayle is read as a name, and Dunstan, at the next stone, looks at Nell. With `qualified`, she is read as one we hold, and Dunstan, across the ring, looks at the ground.
 
-**Arrivals** (by flag; full placement in §8.2): segment 1, Edris, Calwen, Mara, Ysolde; segment 2, Mabyn, Lysa, Nell, and S11; segment 3, S3, S12, and last of all **Bran**, who has stood at the palisade watching the whole rite and walks down to S6, the stone beside the gap.
+**Arrivals** (by flag; full placement in §8.2): Ide (S1) and Ysolde (S7) are already at their stones; segment 1, Edris, Calwen, Mara; segment 2, Mabyn, Lysa, Nell, and S11; segment 3, S3, S12, and last of all **Bran**, who has stood at the palisade watching the whole rite and walks down to S6, the stone beside the gap.
 
 **The strange moment** (§8.3). When Bran sets his hand on the last stone, the count stops mid-beat: two soft beats, and the third never comes. Silence. Then, one after another round the ring, the ridge's standards along the palisade lean toward whoever stands nearest, and lie down without wind. The lantern flames do not move. Nobody says anything for a while. Edris: "Sit a minute. Everybody." (`MBL-D7.60`).
 
@@ -334,7 +336,7 @@ Tuned for **Advanced** (MD-10). Exact levels and numbers are Gameplay Designer c
 | **MBL-E4** | 2 × Echo file of 3, staggered one count apart, across three lanes | The Iron Bend (R3) | Lane movers; one file's head echo turns to strike at the nearest target in its segment on beat 3 | As E2; a turning echo pivots its shoulders on beat 2 | Two rhythms at once with allies holding the flank | 90–120 s; 65–85% HP. Allies (Marshwardens; Thornfell pair with `TH_STANDING`) fight beside the player and are never defeated |
 | **MBL-E5** | Per standard: 2 × Banner Wraith (1st); 2 × wraith + 1 × bearer (2nd, 3rd). With `MR_BANNERS = restored`: +2 wraiths at the 3rd | Palisade heads (C1) | Wraiths: slow, readable melee; bearer: buffs wraiths within 8 m (attack speed) while its standard is risen | **Wraith sweep:** cloth arm lifts (~1.0 s) then a wide arc. **Bearer plant:** grounds its pole on beat 3 (~1.2 s tell on beat 2), a short shock ring 3 m. Wraiths form on beat 3 near the freed pole | Retire under pressure | ~2–3 minutes for all three. Re-form while their standard is risen; once folded, the remainder fight to 0 HP and do not re-form |
 | **MBL-E6** | **The General Who Wouldn't Fall** (boss); Echo files per phase | The crown (C2–C4) | Boss spec §7.1 | §7.1 | Act III boss (bible §10: 1 Act III boss) | 6–8 minutes |
-| **MBL-E7** | 1 × Echo file of 3 (Post Lane), segment 3 adds 1 × file of 3 (Stake Lane) | The lanes and the gap during the rite (C3–C4) | Lane movers that pass through the gap and collapse outside the ring | Gap ripple brightens on beat 2 of an arrival count (~1.2 s) | Rhythm while holding still | Rite ~6–8 minutes of hold time in all. Files to 0 HP if struck; re-form at their lane head |
+| **MBL-E7** | 1 × Echo file of 3 (Post Lane), segment 3 adds 1 × file of 3 (Stake Lane) | The lanes and the gap during the rite (C3–C4) | Lane movers that pass through the gap and collapse inside the ring | Gap ripple brightens on beat 2 of an arrival count (~1.2 s) | Rhythm while holding still | Rite ~6–8 minutes of hold time in all. Files to 0 HP if struck; re-form at their lane head |
 
 **Rules**
 - **Combat never reveals evidence.** The roll is built from the register and the vigil book. The General names nobody. Hollowfoot carry nothing evidentiary. No defeated enemy speaks.
@@ -357,8 +359,8 @@ Tuned for **Advanced** (MD-10). Exact levels and numbers are Gameplay Designer c
 | Shape | The crown: the palisade arc above, the three lanes running downhill, the circle below. Play space ~30 × 35 m (zone tune). |
 | The muster post | The General's anchor. Phase 1 it stands here. |
 | The lanes | Stake, Post, Ring (C3). Each ~3 m wide, four segments. Files move only in lanes. Between lanes, turf strips ~4 m wide (safe from files). |
-| The circle | Below the lanes. The stones are solid cover from lane sweeps (the sweep stops at the ring). The gap is open. The General never enters the ring. |
-| Edges | The palisade above (solid); the slope below the ring falls away gently to the road head (walkable; leash at the road head). No fall is possible. |
+| The circle | Below the lanes; the lanes end at its stones. It is the arena's lower edge, not part of the arena: the General never enters the ring, and the ring is outside the encounter leash (below). A sweep ends at the lane's foot against the stones. |
+| Edges | The palisade above (solid); the ring below; the slope beyond falls away gently to the road head. No fall is possible. **Leash (standard):** the arena is the crown between the palisade and the ring's stones. If no player has been inside it for ~5 s (everyone in the ring or down the slope), the General returns to the post and its health returns to the top of the current phase, as on death. This removes the ring as a safe firing position without any new rule. |
 | Light | Night. Lanterns on the palisade stakes (the wardens lit them on arrival) and at the road stone. Every telegraph is a ground decal or a body pose readable in this light. |
 
 #### 7.1.2 The count
@@ -377,9 +379,9 @@ Tuned for **Advanced** (MD-10). Exact levels and numbers are Gameplay Designer c
 | **Files** | Files form at the lane heads on a third beat; their arms rise on beat 2 before each step | A file's front echo strikes its own segment on arrival: moderate damage, 1 s knockdown | Be out of the file's next segment by three; or defeat the file (all three echoes to 0 HP) |
 | **Hold** (shield; P1) | Mud plates across its front, clods spraying when struck | While any file holds a lane, damage to the General is heavily reduced (GD; suggested 80%) | Clear the files. With no file standing, the plates slough off for ~4 counts (~14 s) before files re-form on a third beat |
 | **Planted Standard** (all phases) | Beat 2: it lifts the pole high, a ring decal (~5 m) at its feet | Beat 3: drives the pole into the ground; heavy damage and knockback in the ring | Out of the ring on two |
-| **Close up** (P2) | Beat 1: mud ridges rise along the edges of the lane the targeted player stands in. Beat 2: it steps into that lane's head and lowers the pole along it | Beat 3: a sweep down the whole lane length (heavy damage, ~35% max HP), except within ~2 m of its flanks ("inside the turn") | Ranged: change lanes on two. Melee: step inside the turn, at its flank, on two. The ring stones stop the sweep |
+| **Close up** (P2) | Beat 1: mud ridges rise along the edges of the lane, or turf strip, the targeted player stands in. Beat 2: it steps into that lane's head and lowers the pole along it | Beat 3: a sweep down the whole lane length (heavy damage, ~35% max HP), except within ~2 m of its flanks ("inside the turn"). A turf strip is swept the same way when the target stands on one: strips are safe from files, not from the General | Ranged: change lane or strip on two. Melee: step inside the turn, at its flank, on two |
 | **Converge** (P2) | Files in the other lanes turn their heads toward the targeted lane on beat 2 | Beat 3: those files step diagonally toward the targeted lane's segment | Read which way they turn; the turf strips stay safe |
-| **No one leaves** (P3) | Banner rags thicken along the arena edge (visual only; no damage, no wall). The count quickens | Its Planted Standard and sweep leave mud patches (3 m) that apply a standard slow (30%, 3 s) to anyone standing in them; patches last two counts | Keep out of the patches; the count's rhythm is the same, only faster |
+| **No one leaves** (P3) | Banner rags thicken along the arena edge (visual only; no damage, no wall). The count quickens. To keep reaction time fair at 0.9 s per beat, in P3 the Planted Standard's ring decal appears on **beat 1** (as Close up's ridges already do), so every P3 attack is shown ~1.8 s before it lands | Its Planted Standard and sweep leave mud patches (3 m) that apply a standard slow (30%, 3 s) to anyone standing in them; patches last two counts | Keep out of the patches; the count's rhythm is the same, only faster |
 | **The order** | On each phase's third beats it speaks its order (captioned) | None (flavour and tell) | — |
 
 #### 7.1.4 Phases
@@ -423,7 +425,7 @@ Tuned for **Advanced** (MD-10). Exact levels and numbers are Gameplay Designer c
 | The third beat | A deep thud heard as much as felt, with a heavy ripple. A cup on Bran's offering stone jumps. |
 | Teaching cue | On the first three counts only, a faint caption under the hand: "one… two… THREE". Turned off after (unless the accessibility caption is enabled). |
 | On the road | The ripple decal crosses the road surface on each third beat. Lane edges carry old drill-furrow lips so lanes are visible without UI. |
-| What it means | The player learns the General's rhythm by touch from a man who has felt it for thirty years and never told anyone. |
+| What it means | The player learns the General's rhythm by touch from a man who has felt it for years and never told anyone. |
 
 ### 8.2 Who comes to the circle (Beat 6; bible §9.3 implemented)
 
@@ -438,7 +440,7 @@ The circle always completes. Twelve stones; named characters take stones as belo
 | **S5** | **Mara Fenholt** (always) | Segment 1 | |
 | **S6** (left of the gap) | **Bran Hollowstep** (always) | **Last** | Stands at the palisade the whole rite, watching. Walks down when every other stone is filled. |
 | **The gap** | **The player** | — | |
-| **S7** (right of the gap) | **Ysolde Haverel** (always) | Segment 1 | Reads the roll. |
+| **S7** (right of the gap) | **Ysolde Haverel** (always) | Before the hold (she takes the roll here) | Reads the roll. |
 | **S8** | **Mabyn Coyle** (always) | Segment 2 | |
 | **S9** | **Lysa Thornettle** (always) | Segment 2 | **Jory Wick** at her shoulder, hands over his ears through the count; he lowers them when it stops. |
 | **S10** | **Nell Ferrow** (always) | Segment 2 | Qualified: **Agna Ferrow** at her shoulder (lame on wet ground; Nell holds her arm). |
@@ -447,7 +449,7 @@ The circle always completes. Twelve stones; named characters take stones as belo
 
 **Lanterns:** `MR_LANTERN_LINE`: the Stillgrave family (MLL; role names from that package) comes up last-but-one and lights a lantern at every stone, then stands at the road stone; else Griefwatch households set the lanterns as each person arrives.
 
-**Count check (maximum):** 8 always-stones (Ide, Edris, Calwen, Mara, Bran, Ysolde, Mabyn, Lysa) + Nell + Dunstan + Rowan + Corra = 12. Everyone else (Agna, Oswin, Jory, Hewin, the Thornfell pair, the Stillgrave family, the Bannerbearers) stands at a shoulder or at the road stone. No configuration exceeds twelve stones; the minimum configuration (kept, retired, qualified or amended) fills two or three stones with Griefwatch households.
+**Count check (maximum):** 8 always-stones (Ide, Edris, Calwen, Mara, Bran, Ysolde, Mabyn, Lysa) + Nell + Dunstan + Rowan + Corra = 12. Everyone else (Agna, Oswin, Jory, Hewin, the Thornfell pair, the Stillgrave family, the Bannerbearers) stands at a shoulder or at the road stone. No configuration exceeds twelve stones; the minimum configuration (kept, retired, qualified or amended) fills two stones with Griefwatch households.
 
 ### 8.3 The strange moment (Beat 6)
 
@@ -508,7 +510,7 @@ From dusk at the end of `S02` until `S07` completes, the player's presentation h
 
 | Value | Who reads the last leaf at the ring, and from what | Roll source line (Ysolde) |
 |---|---|---|
-| **sorrowmere** | Ysolde, from the leaves themselves in their box (she brought them up). She reads the stone list's marks against the ring's stones first (inspect variant), then the last line: *"The circle is not closed. We could not."* | "From the Names Below, and from the leaves the Wardens left." |
+| **sorrowmere** | Ysolde, from the leaves themselves in Mabyn's oilcloth (she brought them up; the lead box stayed in the crypt, Act II). She can name the five listed stones by their places as the player inspects them (inspect variant; never a count), then reads the last line: *"The circle is not closed. We could not."* | "From the Names Below, and from the leaves the Wardens left." |
 | **altar** | Ysolde, from her reed copy of the last leaf. The stone list stays under the altar; she says so. | "From the Names Below. The leaves stay where Mabyn put them; I've the last line." |
 | **tenders** | Mabyn Coyle, from memory: she has read the leaves aloud to everyone Rowan brought to the roof since the chapel. | "From the Names Below. Mabyn has the leaves by heart; she'll say them." |
 
@@ -561,14 +563,14 @@ In every value the last line is spoken at the ring before the hold begins, and t
 
 ## 12. Integration needs
 
-Documented dependencies for a later Systems Engineer. None is implemented here. Most are standard systems used in a new arrangement; the three marked **new** need a small amount of runtime support and are justified.
+Documented dependencies for a later Systems Engineer. None is implemented here. **CDR-4 review (2026-11-08):** all three needs first drafted as new are ordinary systems in a new arrangement, and are listed as such. The count is one repeating encounter timer that broadcasts its tick; files are patrol-path enemies that advance one waypoint per tick-3 event with an ordinary telegraphed ground attack; the gap hold is the Lowmark kept-progress channel, where releasing simply pauses it, and the arrivals are scripted on the channel's active state. No bespoke runtime is required.
 
 | Need | Owner | Minimum viable form | Justification / fallback |
 |---|---|---|---|
-| **The count: an encounter pulse** (**new**, small) | Systems + audio | A per-encounter metronome that emits beat 1/2/3 events at a configurable interval (1.2 s, 0.9 s), which AI, decals, audio and captions subscribe to. Active per player from `S02` to `S06`. | Every telegraph in the act keys off it; it is an ordinary boss timer exposed to several listeners. Fallback: each encounter runs its own timer at the same interval, started together. |
-| **Lane movers** (**new**, small) | Systems + AI | Enemies that move one authored segment along a spline on each beat-3 event and strike their segment on arrival; spawn at the lane head on beat 3 after defeat (condition re-form). | Files are the core of the Mire's rhythm fight. Fallback: patrol paths with a fixed step timer and a hit volume per segment. |
+| **The count: an encounter timer** (standard) | Systems + audio | A per-encounter metronome that emits beat 1/2/3 events at a configurable interval (1.2 s, 0.9 s), which AI, decals, audio and captions subscribe to. Active per player from `S02` to `S06`. | Every telegraph in the act keys off it; it is an ordinary boss timer exposed to several listeners. Fallback: each encounter runs its own timer at the same interval, started together. |
+| **Lane movers** (standard) | Systems + AI | Patrol-path enemies with four waypoints per lane: advance one waypoint on each beat-3 event and use an ordinary telegraphed ground attack on their segment on arrival; respawn at the lane head on the next beat 3 after defeat (condition re-form, standard spawner). | Files are the core of the Mire's rhythm fight, built from patrol, spawner and telegraph systems that already exist. |
 | **Shield by condition** | Gameplay | Damage reduction on the boss while any tagged file is alive; mud-plate visual. | Standard boss add-shield. |
-| **Gap hold with step-off** (**new**, small) | Systems | The Lowmark channel convention with kept progress, three segments, plus: progress pauses (not resets) while the player is out of the hold volume; a scripted crowd's arrivals advance only while held. | The rite's mechanic. Fallback: three separate channel segments with arrivals scripted between them; files then arrive only between segments. |
+| **Gap hold with step-off** (standard) | Systems | The Lowmark kept-progress channel, three segments: releasing it (stepping off) keeps progress, as every kept-progress channel already does; the scripted arrivals advance only while the channel is active. | The rite's mechanic. Fallback: three separate channel segments with arrivals scripted between them; files then arrive only between segments. |
 | **Scripted arrivals and placement from flags** | Systems + NPC | Up to ~20 NPCs walk the road head to fixed stone or shoulder marks per §8.2, each triggering a bark on arrival. Per-player placement sets. | Same family as Thornfell's Assembly placement. Fallback: NPCs spawned at their marks with a fade, barks in order. |
 | **Strange-moment prop sequence** | Systems + animation | ~9–12 standard props along the palisade, each with a lean-and-lie animation toward a precomputed nearest stone, triggered in order; audio bed cut on the 12th arrival. | Presentation only. Fallback: standards lie down in order without the lean. |
 | **Asker beat** | Systems | During the boss's invulnerable transition: a non-hostile NPC runs a path; a talk prompt on him and an interposition volume both resolve the beat; timeout hands him to Ide. | Standard interact and volume. Fallback: bark-only beat; `MBL_ASKER = wardens` by default; the talk option moves to `S06` start. |
@@ -581,7 +583,7 @@ Documented dependencies for a later Systems Engineer. None is implemented here. 
 | **Epilogue state presentation** | Systems + art | Per-player props keyed on `MR_BANNERLINE`, `MR_BANNERS`, `MR_WARDEN_RECORD`, `MR_ROWAN_TRUST` (§E). | Lowmark per-player prop fallback. |
 | **Night Count entry** `[MD-8]` | Systems | Interact with the muster post at night (player hour) starts MBL-E6 as a repeatable encounter without story beats. | §E.9. |
 | Creatures | Schema / Gameplay | Earthen Echo file (and weak variant), Banner Wraith, wraith bearer, Hollowfoot wanderer and shouter `[MD-7]`, the General. From the Batch 4 enemies package. | — |
-| **Act I/II dependencies** | Act authors | (1) MR-M1: the mother is Aldith Hayle in the Hayle book (checked against the Act I draft, 2026-11-08). (2) MR-M2: the Banner That Sank Twice hangs over Griefwatch's vigil-hall door with Corra when `restored` (checked against the Act I draft). (3) MR-M4: the form of the stone list on the Warden leaves (assumed: office marks, one per stone, no names); `MBL-I` stone inspect variants follow it. | Fallbacks in text. |
+| **Act I/II dependencies** | Act authors | (1) MR-M1: the mother is Aldith Hayle in the Hayle book (checked against the Act I draft, 2026-11-08). (2) MR-M2: the Banner That Sank Twice hangs over Griefwatch's vigil-hall door with Corra when `restored` (checked against the Act I draft). (3) MR-M4: the stone list on the Warden leaves is fixed by Act II §B8.4 (five stones named by place, then a broken corner; no marks, names or count beside any stone); §5.4 C4 and the `MBL-I` stone inspects follow it. (4) Act I reads promised here: `MNS_FENWARD_VISITED` (Jory's nod) and `MBR_CORRA_CORNER` (Corra's line). The leaves travel in Mabyn's oilcloth, not the lead box (Act II §B6 Beat 8). | Fallbacks in text. |
 | **Batch 3 dependencies** | Side-quest authors | `MDS07_READ` name; the Stillgrave family's role names (MLL); *Lifting Day*, *A Table for the Wet*, *The Bell Roster* completion conditions; whether the `S02` furrow inspect sets `MDS07_READ`. | Fallback: role names; no flag set here. |
 
 ## 13. Mystery ledger entries
@@ -621,7 +623,7 @@ If the Director rules that Hollowfoot appear only as non-combatant survivors: **
 | Ranged risked trivialising the boss from the lane ends. | Lane sweep covers the whole lane length; files walk every lane; Planted Standard ring. Ranged moves lanes on two. |
 | The asker risked being hurt. | Non-combatant, never targetable; attacks never resolve on him; Ide pulls him back on timeout. |
 | Hollowfoot dignity (MD-7). | One optional group, avoidable, no named or known person among them; Lysa's settled man Jory Wick is a non-combatant at Griefwatch and the ring; no NPC treats a fight as a cure; swap note §14.1. |
-| The roll risked stating a count or a Memorywarden's name. | No number is read or totalled. The leaves' office marks are read as marks; those who went out are covered by "one we hold, not yet known". No army, unit or Warden is named. |
+| The roll risked stating a count or a Memorywarden's name. | No number is read or totalled. The leaves' tally marks are never counted and the stone list is cited by place only (Act II §B8.4); those who went out are covered by "held, not yet known". No army, unit or Warden is named. |
 | The roll risked reading a name on one hold. | The player performs the rule: Osric Peale's name is known and is not read as his. |
 | Bran's ledger limits. | He knows the count by feel and the unsafe ground; he never claims to have been at the last battle; no theatre or date. His stepping to the last stone is an action, not testimony. |
 | Edris's ledger limits. | She speaks for her own care and for sitting down; never for the dead or for what the land wants. |
@@ -702,7 +704,7 @@ Lysa: "He sleeps through now." (Jory, all outcomes.) The Fenward huts take two m
 | Element | Variants |
 |---|---|
 | Rowan | Told: "Walked up a hill at night. Don't tell anyone." Kept: "Saw your lantern go round the ring. I kept mine." |
-| The Warden leaves (`MR_WARDEN_RECORD`) | Sorrowmere: on the register room's reading stand, a reed slip in the last leaf's box: *Closed* / *Kept*. Altar: Mabyn says one prayer at the altar for the circle. Tenders: the roof-loft reading now ends with "and then it was finished, by people who came up the road." |
+| The Warden leaves (`MR_WARDEN_RECORD`) | Sorrowmere: on the register room's reading stand, a reed slip tucked into the leaves' oilcloth: *Closed* / *Kept*. Altar: Mabyn says one prayer at the altar for the circle. Tenders: the roof-loft reading now ends with "and then it was finished, by people who came up the road." |
 
 ## E.9 The Night Count `[MD-8]`
 
@@ -723,7 +725,7 @@ The General remains a canon major threat. After MR-M5, at night (player hour), t
 
 | Commission (functional name) | Giver | Where | Skill line | Variant |
 |---|---|---|---|---|
-| **Fowler's reed bow and quiver** | Hob Merrit | Marshfall | Fletching / Ranged / Woodcutting | *Reed Shafts* Completed: she remembers the heron that got away. |
+| **Fowler's reed bow and quiver** | Hob Merrit | Marshfall | Fletching / Ranged / Woodcutting | *Reed Shafts* Completed: he remembers the heron that got away. |
 | **Ferryman's pole** | Rowan Mirewake | Blackwater Landing | Woodcutting (root-knee) | Told: "I'll show you where the good root is." Kept: "There's root. Find it." |
 | **Marshwarden's oilcloth coat** | Ide Larrow with a Griefwatch leatherworker | Griefwatch | Leatherworking (imported leather; repair craft) | Tended: "For the vigil. It's cold on that stone." |
 
@@ -748,4 +750,5 @@ The circle on Bannerline is complete, closed or kept, and the count has stopped.
 | Quest items | `MBL_names_roll` only (Mire 4 of 4). |
 | Tags | `[CAUSEWAY]` on Oswin's nodes; `[MD-7]` on MBL-E3 and its barks; `[MD-8]` on the Night Count. |
 | Map | Relative only; MAP VERIFICATION REQUIRED in §5 and at two sightlines; no route to another region; no compass direction. |
-| Scope | No schema, JSON or C#; three small new runtime needs justified with fallbacks (§12). |
+| Scope | No schema, JSON or C#; no new runtime needs after the CDR-4 review (§12: timer, patrol-path files and a kept-progress channel are standard). |
+| Independent review, 2026-11-08 (Act III and cross-act) | Fixed: stone inspects and C4 now follow Act II §B8.4 (place-named stones, no marks; nothing countable); leaves carried in Mabyn's oilcloth, not the lead box; the vigil book dated "the last wet" with fog on its last loud and quiet nights, matching the weather run (Act I day-books, Act II vestry log), not "the last summer"; Act I's promised reads added (`MNS_FENWARD_VISITED`, `MBR_CORRA_CORNER`); ring interior closed as a safe firing spot by an ordinary leash; Close up reaches turf strips; P3 Planted Standard shown from beat 1 (~1.8 s); file collapse inside the ring (was "outside", which a gap crossing cannot reach); Ysolde placed before the hold; household minimum corrected to two; Bran's watch no longer dated ("for years", Part 4 ledger); Sennic's bark no longer implies the ridge was loud in his childhood (war ended ~30 years ago); Hob Merrit's pronoun matches Act I; three runtime needs reclassified as standard (CDR-4). Checked and consistent: flags (bible §9.1 has `MR_CLOTH`, `MR_LANTERN_LINE`, `MR_STRANGER_SEAT`; `MDS07_READ` and the side-quest completions remain Batch 3 dependencies), four quest items, Aldith Hayle, banner over the vigil-hall door, cast and roles, 0 HP and the General's quieting by rite, MD-7 tagging and swap note, the Night Count naming, new names (no repo collisions). |
