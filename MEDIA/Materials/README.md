@@ -238,6 +238,90 @@ Mix Color tint into an exported albedo texture; do not assume the Blender
 shader node mix survives standard glTF export. Normal and roughness maps
 remain independent, reusable channels.
 
+## Hewn Oak — shared structural timber working treatment
+
+**Creative Director decisions (2026-11-09):** Approve a single hand-painted
+grayscale **Hewn Oak** grain source for recolorable structural timber
+rather than authoring separate grain textures for each nominal wood
+species. The named tints below are **approved palette choices** for
+wood-like appearances; they are not botanical identifications, regional
+resource claims, or instructions to change structural geometry.
+
+### Approved structural timber tint palette
+
+Enter these HEX values in Blender's Multiply node input **B**. The
+Weathered Oak tone was observed in the Lowmark farmhouse Blender test;
+the other three values were expressly approved by the Creative Director
+as palette choices, without separate screenshot-based appearance tests.
+
+| Appearance name | HEX | Intended read |
+| --- | --- | --- |
+| Weathered Oak | `#A67B5B` | Medium warm brown; tested on exposed farmhouse framing |
+| Pale Ash / Pine | `#D5B78D` | Light golden-beige wood |
+| Dark Walnut | `#795340` | Deep brown wood |
+| Reddish Chestnut | `#A66B55` | Muted warm red-brown wood |
+
+These are palette names for visually distinct timber finishes, not proof
+of the modeled wood's species. Apply one tint per material instance;
+share the grayscale and normal images across instances. Board, shingle,
+bark, and other visibly different **construction patterns** may still
+need their own painted source.
+
+### Lowmark farmhouse Blender shader test
+
+The artist's working material was named `hewn_oak_test`. The initial
+test used the following Blender nodes and links:
+
+```text
+UV Map [UV0_Metric]
+    -> Mapping [Type: Point; Location (0,0,0); Rotation (0,0,0);
+                Scale (0.250,1.000,1.000)]
+       -> Image Texture [hewn_oak.png, sRGB]
+          -> Mix Color [Multiply, Factor 1.000;
+                        A: grayscale image, B: selected palette HEX]
+             -> Principled BSDF [Base Color]
+       -> Image Texture [hewn_oak_normal.png, Non-Color]
+          -> Normal Map [Tangent Space, UV Map UV0_Metric,
+                         Strength 1.000]
+             -> Principled BSDF [Normal]
+Principled BSDF [Metallic 0.000, Roughness 0.850]
+    -> Material Output [Surface]
+```
+
+Both Image Texture Vector inputs share the Mapping output. Height is
+used to **derive** the normal and is not additionally wired to Bump.
+The roughness is intentionally a **constant 0.850**, with no separate
+roughness image required for this working treatment. Preserve the
+grayscale Base Color source and control color via Multiply input B
+at Factor 1.000.
+
+**Grain and UV behavior:** The current generator's `UV0_Metric` aligns
+grain with the longest edge of each timber face, and the 0.250 U
+scale gave an acceptable working view across vertical posts, horizontal
+members, and diagonal braces. This is a **metric-mapped test**, not
+verified one-image-span-per-beam UV mapping; it does not supersede the
+catalog's 1 × 4 m material metadata. Slight rectangular UV discontinuities
+on some small-building vertical timbers were observed close-up and
+**accepted/deferred as low-priority cosmetic** at intended game-view
+distance. Do not spend generator development time fixing these without
+new player-distance evidence.
+
+**Normal generation:** The initial hand-painted 512 × 512 Height and
+Normal companions were derived by the tools in this directory with
+`--edge stretch`. Sol's example normal pass used
+`--size-m 4 1 --relief-m 0.006`; this covers horizontal U grain over
+4 m for that sample and is **not** the same orientation as the
+catalog's default `scale_m`. Keep source artwork and derived maps
+separate; do not silently rewrite the catalog or the approved painting.
+
+**Approval scope:** The grayscale timber appearance, tested Weathered
+Oak tint, shader wiring, and current UV tolerance passed Blender
+art-direction review. All four tint values are Creative Director
+approved. Production asset packaging and Unity/gameplay-lighting
+verification remain pending. This README does not include the local
+PNG or Blender project files, and no runtime or procedural generator
+behavior was changed.
+
 ## Build and verify
 
 Python batch tools use Pillow and NumPy. Existing production files are
