@@ -115,6 +115,78 @@ height range. Import both maps explicitly in the new revision.
 python MEDIA/Materials/derive_normal.py --id split_oak_shingle --height MEDIA/Materials/working/oak_height.png --output MEDIA/Materials/working/oak_normal.png --relief-m 0.025
 ```
 
+## Split Oak Shingle — recolorable roof working test
+
+**Creative Director decision (2026-11-09):** Four tint choices and the Blender
+node wiring below passed visual review on the Lowmark farmhouse preview.
+These are approved **working palette values and a reproducible shader test**,
+not a declaration that the roof, scene, asset export, or generator behavior
+is production-final. The local working scene was saved as
+`MEDIA/Materials/working/lowmark_house_blue_roof.blend`; its native bytes
+are not included merely by documenting it here.
+
+### Approved tint choices
+
+Use the following Blender color-picker HEX values for the tint input:
+
+| Display name | HEX | Visual intent |
+| --- | --- | --- |
+| Weathered Brown Oak | `#A67B5B` | Natural muted brown, legible wood grain |
+| Light Brown Oak | `#D2AD81` | Lighter sun-weathered brown |
+| Muted Red Oak | `#A65B53` | Restrained aged reddish-stained timber |
+| Weathered Slate Blue | `#718DA5` | Muted blue-gray stained wood |
+
+These are the four reviewed hues; they are **not** new lore, a mandatory
+regional distribution, or a runtime customization schema. The earlier
+`#765039` dark-brown trial was too dark at full-strength Multiply and is
+not one of the approved four choices.
+
+### Blender working shader contract
+
+For the **texture-dominant mapped roof field** tested on the Lowmark
+farmhouse, the node links and settings are:
+
+```text
+UV Map [UV2_Surface]
+    -> Mapping [Type: Point; Location: (0,0,0);
+                Rotation: (0,0,0); Scale: (0.400,0.500,1.000)]
+       -> Image Texture [split_oak_shingle.png, sRGB]
+          -> Mix Color [Blend: Multiply, Factor: 1.000,
+                        A: grayscale image, B: chosen palette HEX]
+             -> Principled BSDF [Base Color]
+       -> Image Texture [split_oak_shingle_roughness.png, Non-Color]
+          -> Principled BSDF [Roughness]
+       -> Image Texture [split_oak_shingle_normal.png, Non-Color]
+          -> Normal Map [Tangent Space, Strength: 1.000]
+             -> Principled BSDF [Normal]
+Principled BSDF [Metallic: 0.000] -> Material Output
+```
+
+All three Image Texture **Vector** inputs share the same Mapping output.
+Keep the grayscale detail and seam value structure in the Base Color image.
+In this test, changing **only** Mix Color input B selects a palette.
+Blend mode **Color** produced an overly light reddish-brown result;
+lowering Multiply Factor to 0.650 reintroduced too much grayscale.
+Use **Multiply at 1.000** and adjust input B to control lightness and hue.
+
+**UV and scale scope:** `UV2_Surface` is the generator's mapped roof-field
+UV layer. The tested `0.400, 0.500, 1.000` Mapping scale is specific to
+that preview and should not silently replace this catalog's `scale_m:
+[2, 1]` repeat specification. The standard material return helper
+continues to target `UV0_Metric` for compatible metric-UV meshes.
+Modeled shingles or perimeter detail have different UV/geometry needs
+and should not automatically receive the painted multi-course pattern.
+
+**Geometry and export status:** The texture-dominant preview showed
+acceptable painted detail without decorative shingle-variation meshes.
+The Creative Director chose to remove those decorative meshes from the
+working scene; this did **not** modify the architectural generator's
+persistent output. The working `.blend` is not an approved permanent
+fixture. Before Unity/glTF use, bake or otherwise resolve the Blender
+Mix Color tint into an exported albedo texture; do not assume the Blender
+shader node mix survives standard glTF export. Normal and roughness maps
+remain independent, reusable channels.
+
 ## Build and verify
 
 Python batch tools use Pillow and NumPy. Existing production files are
