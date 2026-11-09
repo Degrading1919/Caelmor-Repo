@@ -2,7 +2,7 @@
 
 **Status (2026-11-09):** review-state content. Gameplay Designer requirement set, **Batch 4** of the Mire production plan (bible §12). It brings every enemy family, variant, boss, miniboss, elite, fauna fight and hazard authored in the Mire narrative packages into one implementation reference. Everything here is **[NEW]** authored content and is not canon until the Creative Director promotes it (MD-16). Items marked **[PROPOSAL — DIRECTOR]** are consequential rules the content depends on; items marked **[PROPOSAL — Gameplay Designer]** are placements or values this file adds. Numbers are **framing targets** (fight length, HP remaining, telegraph duration), not balance values. Health, damage, armour and XP values belong to the tuning pass after a playable build exists. This file is **documented dependencies only**: no schema, JSON or C# is authored or implied (bible §11.12).
 
-**This file is canonical for cross-package combat values.** Where two Mire packages give different numbers or kits for the same creature, telegraph, status or rule, the value in §13 (shared canonical register C-1 to C-12 and resolutions I-1 to I-24) is the implementation value. The quest packages were **not edited** by this batch; the edits each package needs to match are listed in §13.3, to be made the next time each package's author edits it. Until then, implementation follows this file.
+**This file is canonical for cross-package combat values.** Where two Mire packages give different numbers or kits for the same creature, telegraph, status or rule, the value in §13 (shared canonical register C-1 to C-12 and resolutions I-1 to I-24) is the implementation value. The quest-package edits listed in §13.3 were **applied** in the Batch 4 encounter alignment review (2026-11-09), so the three acts and four side-quest files now carry these values; the bible rows in §13.3 are with the bible owner. Where any text still differs, implementation follows this file.
 
 **Director rulings (2026-11-03, binding):** `Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md`. **CDR-1:** every enemy is defeated at **0 HP**; no health-threshold yield, retreat, break-off, scatter or drive-off; scripted survival only for the named exceptions in its §4 register, and **the Mire has none** (bible §3 "SX proposal: none"). **CDR-2:** Ranged is a core combat skill; every fight accepts melee or ranged and none requires ranged. **CDR-3:** the Mire is an internal milestone of the complete game. **CDR-4:** standard RPG systems over bespoke simulation; this file lists only genuinely necessary new runtime needs (§9.4).
 
@@ -166,7 +166,7 @@ Each table lists the variant kit with canonical telegraphs. "Band notes" gives t
 
 **Band notes.** MNS-E1 is the first Mire fight (60–90 s, 60–80% HP) and teaches that fear draws them by showing the wave thin when Edris calms the reed-cutter. MWS-E1 repeats the lesson with Maddy. MLD-E1 is optional and trivial, with a calm option (§11.2). Swarm **fragile**, carapace **sturdy**.
 
-**Defeat / loot.** Defeated at 0 HP with the ordinary defeat presentation. A swarm that is never engaged and settles into its ditch (MLD calm option) is scenery leashed to its ground, not a health outcome. Loot: nothing, or ordinary vermin material per the economy pass. Nothing advances a quest.
+**Defeat / loot.** Defeated at 0 HP with the ordinary defeat presentation. On MLD's calm path the swarm is never engaged: it stays in its ditch under an ordinary leash and aggro-on-enter/attack, with no settle state (Names MLD.6). That is scenery, not a health outcome. Loot: nothing, or ordinary vermin material per the economy pass. Nothing advances a quest.
 
 ### 5.2 Bog Hounds (low; wildlife)
 
@@ -188,6 +188,8 @@ Each table lists the variant kit with canonical telegraphs. "Band notes" gives t
 **Ecology.** Amphibious ambushers in shallows, sumps and bay pools, telegraphing by reed-ripple (bible §10). Leashed to water: a player who steps back onto firm ground beyond reach ends the lurker's lunge range.
 
 **AI role.** Aggressive ambush. **Canonical kit (C-5; §13 I-1):** the **lurker** waits submerged and lunges from the water's edge; the **snapper** hangs back in deeper water and spits, and clamps if a player closes to melee on its bank. MBR-E4's swapped kit (lurker spits, snapper clamps only) is reconciled to this.
+
+**Reach (CDR-2, C-5).** "Deeper water" for a snapper always means **wadeable** water (knee-deep, standard slow) within a few metres of the bank or sump lip, never non-walkable deep water, so a melee player can always reach it. A lurker that takes damage from an attacker it cannot reach (beyond its 3 m lunge) for ~5 s submerges and resets to full at its spot (ordinary leash/evade), so firm ground beyond the lunge is not a safe firing position; ranged players fight at the edge, sidestepping lunges, and the snapper's spit covers the bank.
 
 | Variant | Behaviour | Telegraph | Counter | Bands |
 |---|---|---|---|---|
@@ -225,7 +227,7 @@ Each table lists the variant kit with canonical telegraphs. "Band notes" gives t
 | **Cutter** | Closes in pairs; uses stripping frames to flank; may cut a frame lashing | **Hook-slash:** reed-hook drawn back across the body (**1.0 s**†), then a wide slash in a 2.5 m arc (moderate). **Frame cut** (MCF-E2): slashes a lashing, the rope creaks (**1.5 s**†), and a bare pole swings down along a 2 m line (moderate; a line area effect) | Step back from the arc; step out of the pole's line | Competent (late)–Advanced |
 | **Poisoner** | Holds a platform, a far frame or the stack top; throws poisoned blades; two poisoners alternate (MCF-E3) | Dips the blade in the hip pot, green-black drip visible (**1.2 s**), then a thrown blade (light) that applies **standard poison** (damage over time, ~8 s; ordinary antidote cures) | Sidestep or break line of sight behind a frame; read both poisoners' dips in E3 | Competent (late)–Advanced |
 
-**Band notes.** MCF is the Cloth and Colour combat core (~55% combat). Frames are cover for both sides; ranged players clear the stack top, melee players climb the low bale step (walkable fallback: a bale ramp). Cutter **standard**, poisoner **standard**.
+**Band notes.** MCF is the Cloth and Colour combat core (~55% combat). Frames are cover for both sides; ranged players clear the stack top, melee players climb the low bale step (walkable fallback: a bale ramp). The Hide-mouth lookout platform (MCF-E1) has a walkable stair or ramp on the NavMesh, so melee reaches its poisoner without an agility trigger (MAP VERIFICATION REQUIRED). Cutter **standard**, poisoner **standard**.
 
 **Defeat / loot.** Defeated at 0 HP with the ordinary defeat presentation. Nothing a cutter drops advances the quest: the evidence is **Gethin's ledger**, read in place at the jetty, and the cloth itself (carry-state bales). Hob (crew track) stops at the Hide's edge and never fights.
 
@@ -401,7 +403,7 @@ Source: Settlements and Combat MNK.7.1 (working tree 2026-11-09, including the r
 | **Sweep** (below 30%) | Pole held level and drawn back (**1.6 s**) | Full-circle swing: knockdown inside 4 m; cadence ~10 s | Leave 4 m on the draw |
 | Arena | The reed island (N4): dry centre, shallow edges (slow), reed screen, two pole-frame uprights (cover against any surviving slinger) | — | — |
 | Defeat | At **0 HP** he falls; ordinary defeat presentation. Halsey from the bank: "That's the last of them." No dialogue after defeat; nothing he carries is evidence | — | — |
-| Reset | Leaving the island resets him and any living mudcutters (mounds re-lie); E1/E2 stay defeated. Respawn at Halsey's post | — | — |
+| Reset | Leaving the island resets him and any living mudcutters (mounds re-lie); E1/E2 stay defeated. He is leashed to the island: if no player has been on it for ~5 s he resets, so the banks across the water are not a firing position (same rule as the General's ring). Respawn at Halsey's post | — | — |
 | Target | 2.5–3.5 min with 2 mudcutters | — | — |
 
 ---
@@ -518,7 +520,7 @@ CDR-4 test: every row says whether the need is **standard** (already required by
 | `wraith.palisade_std1–3` | Palisade heads C1 (MP12) | Standard risen | On a third beat, near the freed pole | Fold of that standard | Quiet |
 | `echo.encampment_cut` | Drowned Encampment cut C3 (MP09), from the boat | The grey (pinned `[MD-3]`) and the boat in that stretch | **~10 s** after defeat (boat-pacing value, kept) | The boat leaves the stretch | Quest-local |
 | `echo.encampment_survey` | Drowned Encampment landward side (MP09) | Lenna's survey stakes standing (the disturbance) | **6 s** (C-3 default) | All six stakes pulled (`S04_stakes`) | Quiet; strange moment plays |
-| `echo.stillgrave_ring` | Stillgrave Hollow ring (MP11) | The Haddows' ring unfinished | **6 s**, at the water's edge | Pim's stake (`MLL-D4.30`): every Echo folds into mud at once | Quiet; the ring's light lies straight with `MR_LANTERN_LINE` |
+| `echo.stillgrave_ring` | Stillgrave Hollow ring (MP11) | The Haddows' ring unfinished | **6 s**, at the water's edge | Dob's stake (`MLL-D4.30`): every Echo folds into mud at once | Quiet; the ring's light lies straight with `MR_LANTERN_LINE` |
 | `echo.bannerline_count` | Bannerline road bends and crown (MP12, MP17) | The circle open (the ridge's count) | Next **third beat**, at the lane head | `S06_circle` completes | Ridge quiet; the Night Count is a separate, called encounter (MW-01) |
 
 ---
@@ -563,8 +565,8 @@ CDR-4 test: every row says whether the need is **standard** (already required by
 | MFH-E1 | `S05_hounds` ("Defeat the dogs at the racks") | Smoke racks H3, plank row, Blackwater Landing (MP06) | 2 runner, 1 gnawer | Competent | 45–60 s | STEP (hounds reset on death). Respawn: the Tolley bench | Work MFH.6 |
 | MWS-E1 | `S01_burdens` | Maddy's step P2, Marshfall row (MP02) | 2 swarm, 1 carapace (+1 swarm fear add after ~30 s while Maddy is frightened) | Competent (late) | 40–60 s | ONCE. Respawn: the row's head | Work MWS.5 |
 | MLL-E1 OPT | `S02_moss` | Far posts of Stillgrave's near edge (MP11) | 2 lurker, 1 snapper (1.5 s first-appearance ripple) | Competent | 30–45 s; 70–90% HP | ONCE; avoidable by gathering near | Names MLL.6 |
-| MLL-E2 | `S06_finish` | Stillgrave ring at the water's edge (MP11) | Echoes: W1 2; W2 3; W3 3 + 1 that walks to Pim | Competent | ~2.5–3.5 min; 50–70% HP | COND (`echo.stillgrave_ring`); completed speeches kept. Respawn: memorial gardens | Names MLL.6 |
-| MLD-E1 OPT | `S04_walk` (fight **or** calm the child) | Ditch below the centre turnout, Standards Causeway (MP08) | 2 swarm, leashed to the ditch; never reach the road | Advanced (trivial) | 20–35 s; 80–95% HP | STEP. Calm option: the swarm settles into the ditch unengaged (scenery, not a health outcome) | Names MLD.6 |
+| MLL-E2 | `S06_finish` | Stillgrave ring at the water's edge (MP11) | Echoes: W1 2; W2 3; W3 3 + 1 that walks to Dob's lantern | Competent | ~2.5–3.5 min; 50–70% HP | COND (`echo.stillgrave_ring`); completed speeches kept. Respawn: memorial gardens | Names MLL.6 |
+| MLD-E1 OPT | `S04_walk` (fight **or** calm the child) | Ditch below the centre turnout, Standards Causeway (MP08) | 2 swarm, leashed to the ditch; never reach the road | Advanced (trivial) | 20–35 s; 80–95% HP | STEP. Calm option: the swarm stays in the ditch, never engaged (ordinary leash; no settle state; scenery, not a health outcome) | Names MLD.6 |
 | MCF-E1 | `S03_mouth` | Lookout platform and reed screen, Reed Hide mouth (MP23) | 2 cutter, 1 poisoner | Competent (late)–Advanced | 40–60 s; 60–80% HP | ONCE; cleared stages kept. Respawn: Marshfall | Cloth MCF.6 |
 | MCF-E2 | `S04_frames` | Stripping frames, narrow bay (MP23) | 3 cutter, 1 poisoner; frame cut (MCF-H1) | Competent (late)–Advanced | 60–80 s; 50–70% HP | ONCE | Cloth MCF.6 |
 | MCF-E3 | `S05_stack` | The stack bay (MP23) | 2 cutter, 2 poisoner (alternating) | Competent (late)–Advanced | 70–100 s; 40–65% HP | ONCE | Cloth MCF.6 |
@@ -613,7 +615,7 @@ CDR-4 test: every row says whether the need is **standard** (already required by
 
 ### 13.1 Shared canonical register (canonical for implementation; packages defer to it)
 
-The Mire Batch 4 handoffs (this file, Zones, Integration) state these values in the same words. Where a quest package gives a different number or kit, the package value is superseded for implementation; the package text changes when its author next edits it (§13.3).
+The Mire Batch 4 handoffs (this file, Zones, Integration) state these values in the same words. Where a quest package gives a different number or kit, the package value is superseded for implementation; the package edits in §13.3 have been applied.
 
 | # | Topic | Canonical value |
 |---|---|---|
@@ -621,10 +623,10 @@ The Mire Batch 4 handoffs (this file, Zones, Integration) state these values in 
 | **C-2** | Hazards and water | No hazard can kill a player above **25% HP**. Deep or Sour water is non-walkable everywhere; no swimming, drowning or breath meter (MD-4). No push, pull or knockback can move a player into deep water, overboard, off the causeway into Sour water or off the ridge. |
 | **C-3** | Defeat and re-form | Every enemy is defeated at **0 HP** (CDR-1); no Mire SX. Earth-memory re-forms only by condition, in two layers: **in an active encounter**, on the site's trigger (Echo spot timer **6 s** default; MRC-E2 keeps **~10 s** as boat pacing; Wraiths on their standard's forming tell or the Colour's **~30 s pulse**; files and MBL Wraiths on the **next third beat**); **outside an encounter**, a site whose condition still holds repopulates at the **next dusk** (Wraiths) or the next time its condition is presented (Echoes). When the condition ends, nothing new forms and anything still standing fights on to 0 HP. |
 | **C-4** | Bearer | **Raise 2.0 s**; Wraiths within **8 m** attack faster for **10 s**; any hit during the raise cancels it. In MBL-E5 the bearer also has **Plant** on the count (3 m ring, decal from beat 1). |
-| **C-5** | Reedlurkers | **Lurker** lunges (reed-ripple **1.2 s**; **1.5 s** in MRS-E1, MLL-E1 and MBR-E4) and may grab (root 1.5 s, broken by attacking it). **Snapper** spits from deeper water (**1.0 s**; slowing slick) and clamps in melee (**1.0 s**, root 1.5 s). They do not re-form. |
+| **C-5** | Reedlurkers | **Lurker** lunges (reed-ripple **1.2 s**; **1.5 s** in MRS-E1, MLL-E1 and MBR-E4) and may grab (root 1.5 s, broken by attacking it). **Snapper** spits from deeper water (**1.0 s**; slowing slick) and clamps in melee (**1.0 s**, root 1.5 s). They do not re-form. A snapper holds wadeable water only; a lurker hit from beyond its reach for ~5 s submerges and resets (no safe firing spot; §5.3). |
 | **C-6** | Statuses | Standard slow (General patches 30%, 3 s; shallows while wading); root 1.5 s; knockdown 1 s (file) or per source; **standard poison/DoT** (~8 s, antidote) for poisoners and the Hart's spore cloud. **No bleed, no blind.** |
 | **C-7** | The count | **1.2 s per beat** (3.6 s per count); **0.9 s** in the General's P3. Every count attack lands on a third beat and is shown on beat 2 at the latest; in P3 **every** count attack (Planted Standard, file arrival, Close up ridges) is shown on **beat 1**. The count itself never damages. Carriers: positional audio, ground ripple decal, optional rumble, optional caption. |
-| **C-8** | Ranged (CDR-2) | Ranged is first-class in every fight and never required; every counter that names Ranged has a melee answer. No fight is trivialised by range: earth-memory re-forms by condition; the General's leash removes the ring; the Hart's charge closes any distance; frames and stumps serve both styles. Weapon, ammunition and XP values belong to the item and systems specialists. |
+| **C-8** | Ranged (CDR-2) | Ranged is first-class in every fight and never required; every counter that names Ranged has a melee answer. No fight is trivialised by range: earth-memory re-forms by condition; the General's leash removes the ring; the Mud-Boss's island leash removes the banks; Reedlurkers reset when hit from beyond reach; the Hart's charge closes any distance; frames and stumps serve both styles. Every raised or water-bound enemy (snapper, slinger hummock, poisoner platform or stack) is reachable on foot. Weapon, ammunition and XP values belong to the item and systems specialists. |
 | **C-9** | Earth-memory presentation | Wraiths, the Colour, Echoes and files: **blank target frame** (health bar, no name), no nameplate, face, side colours, unit mark or voice. The General: a **boss health bar with no name shown**; its captioned orders are its only words. Design names such as "the Risen Colour" never appear in UI or dialogue. |
 | **C-10** | Hollowfoot `[MD-7]` | Optional, avoidable, never evidence, never the only route, never a known person, never a boss, never a world enemy; ordinary human defeat at 0 HP under the recommendation; the survivor-beat alternative (§5.7) under the other ruling. Fenward and Griefwatch Hollowfoot are always non-combatants. |
 | **C-11** | Boss and miniboss framing | The General: Act III §7.1 is authoritative (phases 100/65/30%, 6–8 min, ~35% in-lane sweep as the one sanctioned exception). Minibosses 3–4.5 min (the Colour), 3–4 min (the Hart); elite 2.5–3.5 min (the Mud-Boss). |
@@ -653,13 +655,15 @@ The Mire Batch 4 handoffs (this file, Zones, Integration) state these values in 
 | **I-17** | **Boss phase thresholds and length**: bible §10.1 names the phases without thresholds; Act III sets 100/65/30% and 6–8 min, longer than the Thornfell/Lowmark universal Act III boss target (5–7 min). | Bible; Act III | **Act III is canonical (C-11).** The longer target fits the re-muster beat and the rite that follows; the tuning pass may shorten it. Bible §10.1 needs no edit. |
 | **I-18** | **Earth-memory target frames**: Act II says Echo frames show no name; Act I says the Colour is never named in UI; nothing states it for ordinary Wraiths, files or the General. | Act I; Act II; Act III | **C-9:** blank frames for all earth-memory; the General's boss bar shows no name (§14 Q4). |
 | **I-19** | **"Bright cloth" reaction** for Hollowfoot (dossier) could imply a gear-visibility system. | Act III open decision 5 | Flavour only (standard aggro and assist radius), as Act III recommends (C-10; CDR-4). No package edit. |
-| **I-20** | **MLD calm option** ("the swarm settles into the ditch; it does not disperse") could read as a non-health end to a fight. | Names MLD.6 | Consistent with CDR-1: the swarm is never engaged on the calm path, so it is scenery leashed to its ditch (CDR rulings §3.1.4). No edit; recorded so reviewers do not flag it. |
+| **I-20** | **MLD calm option**: the first draft's dialogue-driven "settle" read as a drive-off. | Names MLD.6 | Already fixed in the Batch 3 review (e98147e): ordinary ditch leash and aggro-on-enter/attack, no settle state; the calm dialogue is the step. On the calm path the swarm is never engaged, so it is scenery (CDR rulings §3.1.4). |
 | **I-21** | **General loot**: Act III allows "ordinary material drops only (economy pass)"; MD-11 says battlefield metal is evidence, not feedstock, and the General is made of old iron. | Act III; bible MD-11 | Ordinary **non-metal** material only; no battlefield iron. One clause in Act III §7.1.5 and §E.9. |
 | **I-22** | **Hazard clamp** is unstated in every Mire package; the only damaging hazard (MBL gap step-off ~15% max HP) and boss-adjacent patches could stack. | Act III | **C-2** (25% clamp) applies to every Mire hazard. Text only. |
 | **I-23** | **MCF frame cut** is a cutter-triggered prop hazard with a fallback in MCF.11 but no id. | Cloth | Id **MCF-H1** [NEW id]; tell 1.5 s (I-12); fallback kept. |
 | **I-24** | **MFH `S05` drive-off wording** ("Drive the dogs off the racks") contradicted CDR-1. | Work | **Already fixed** in the concurrent review (now "Defeat the dogs at the racks"); recorded here so the Zones and Integration handoffs use the new text. |
 
-### 13.3 Package edits needed (not made here; number and text changes only, no id, step or flag renames)
+### 13.3 Package edits (number and text changes only, no id, step or flag renames)
+
+**Status (2026-11-09):** every quest-package row below was **applied** in the Batch 4 encounter alignment review (each package's review log has the row). The **bible** row is with the bible owner (suggested text in that review's report).
 
 | Package | Edits |
 |---|---|
@@ -691,7 +695,7 @@ MD-3 and MD-4 are already with the Director through the bible; nothing in this f
 | Systems Engineer | §9.4 R-1 to R-14 (only R-12 to R-14 new; R-13 and R-14 with fallbacks); standard defeat at 0 HP with no exception hook; push/pull with edge clamp; conditional damage reduction; DoT; root; avoided list (no bleed, no blind) |
 | Animation / VFX / Audio | §3 grammar and canonical tells; ground-first tells readable at night and in fog; blank earth-memory presentation; the count's audio, decal, rumble and caption; the Shades' lean and the lantern's three looks |
 | Level design (Zones file) | Arenas: the crown with lanes, turf strips and leash volume; turnout platform; reed island with uprights; Rust Hollow H6 with five patches and stumps; Reed Hide stages; Chapel stages with lit-post radii; Stillgrave ring; the boat's cut stretches; deep-water hard edges everywhere |
-| Quest package authors | §13.3 number and text edits |
+| Quest package authors | §13.3 number and text edits (applied 2026-11-09; keep them on later edits) |
 | Bible owner | §13.3 bible rows (I-3, I-4, I-5, I-15) |
 
 ## 16. Review log
@@ -705,4 +709,5 @@ MD-3 and MD-4 are already with the Director through the bible; nothing in this f
 | Click-to-move | No counter needs a jump or timed input; every shortcut has a walkable fallback; every displacement is clamped to a safe side and away from deep water. |
 | Telegraph minimums | After §13 reconciliation, every tell meets 0.8 / 1.0 / 1.5 s (C-1). |
 | Scope | No schema, JSON or C#; no edits to other files; integration needs documented only. |
-| **Reconciliation needed** | The four side-quest files were under concurrent independent review while this file was written (working tree read 2026-11-09, including the MNK-E3, MRH patch and MFH `S05` fixes). **When those reviews land, re-check every side-quest row in §9.1 and §11.2 and I-1, I-2, I-8 to I-13, I-20, I-23 and I-24 against the committed text.** Main-act rows reflect the committed packages. |
+| Reconciliation | Re-checked 2026-11-09 against the side-quest files as committed in e98147e (unchanged since): §9.1 and §11.2 rows, I-1, I-2, I-8 to I-13, I-23 and I-24 hold; I-20 updated (the MLD settle state was removed in that review). |
+| Batch 4 encounter alignment review, 2026-11-09 | Independent review. **Fixed here (6):** Reedlurker reach rule added (snapper only in wadeable water; a lurker hit from beyond its lunge submerges and resets), closing an unreachable-snapper melee gap and a free ranged firing line (§5.3, C-5, C-8); Mud-Boss island leash so the banks are not a firing position (§7.4); MCF-E1 lookout platform reachable on foot (§5.5); MLD calm path restated as ordinary leash with no settle state, matching the e98147e fix (§5.1, §11.2, I-20); Stillgrave child renamed Pim → Dob per the Batch 3 rename (§10.2, §11.2); status lines updated now that §13.3 is applied. **Applied** every §13.3 quest-package row (Acts I–III, four side-quest files). Re-grep clean for yield, break off, flee, scatter, drive off, retreat, release, v1, bleed, blind and "the Muster" (remaining hits are rule statements, canon myth, place names such as the Dry Muster, or the muster post). |

@@ -104,7 +104,7 @@
 | Id | Trigger | Speaker | Line |
 |---|---|---|---|
 | MBL-B0.1 | Quest start in Griefwatch | (vigil bell) | Three strokes. A rest. Three strokes. (captioned: "The vigil bell. Closure.") |
-| MBL-B0.2 | Quest start in Sorrowmere, register room door | MEMORYKEEPER | "Ysolde took the ridge pages up to Griefwatch at first light. She asked for the witness." (beat) "Banners are ochre. You'll have seen." |
+| MBL-B0.2 | Quest start in Sorrowmere, register room door | MEMORYKEEPER | "Ysolde took the ridge pages up to Griefwatch. She asked for the witness." (beat) "Banners are ochre. You'll have seen." |
 | MBL-B0.3 | Sorrowmere raised ways, passing a Bannerbearer on a ladder | BANNERBEARER | "Ochre. Way's shut. Which way? Bannerline. Nobody's said why." |
 | MBL-B0.4 | Reaching the closure gate (W1) before `MBL-D1` | IDE | "Road's shut. Hall first, traveller. Ysolde's waiting and she doesn't wait well." |
 | MBL-B0.5 | Entering the vigil hall | MARSHWARDEN (by the door) | "Bran was in. Sat on that bench, said four words to Ide and went back up. Four. We counted." |
@@ -651,7 +651,7 @@ The offer opens a commission; it grants nothing (quest file §E.10).
 | Giver | Line | Variant |
 |---|---|---|
 | **Hob Merrit** (fowler's reed bow and quiver) | "Stood on a ridge all night and didn't shoot a single heron. Come and make a bow worth that kind of patience." | *Reed Shafts* Completed: "That heron's still out there. Laughing." |
-| **Rowan Mirewake** (ferryman's pole) | "A pole's a root that agreed to be straight. Find one that agrees." | told: "I'll show you where the good root is." / kept: "There's root. Find it." |
+| **Rowan Mirewake** (root-wood pole) | "A pole's a root that agreed to be straight. Find one that agrees." | told: "I'll show you where the good root is." / kept: "There's root. Find it." |
 | **Ide Larrow** (Marshwarden's oilcloth coat) | "Wardens' coat. Imported hide, our oilcloth, mended till it's ours. You've earned the mending." | tended: "For the vigil. It's cold on that stone." |
 
 ---
@@ -671,3 +671,4 @@ The offer opens a commission; it grants nothing (quest file §E.10).
 | Thornfell independence | Two optional ally lines and one table bark with `TH_STANDING`. No route or direction to Thornfell is stated ("back to our own hills"). |
 | Names | New names checked against the repository for collisions: Hewin Collard, Jory Wick, Hamon Tasker, Lettice Coldridge, Osric Peale, Bettony Larch, Gil Stannard, Cicely Ashlin, Garret Mossop, Annet Brigge (no existing use). |
 | Flags | Every flag set here (`MBL_ASKER`, `MR_BANNERLINE`, `MR_STANDING`) and every item effect (`MBL_names_roll` granted at `MBL-D2.40`, removed at `MBL-D9.10`) matches the quest file §9.2. |
+| Batch 4 encounter alignment review, 2026-11-09 | `MBL-B0.2` drops "at first light": Ysolde meets the boat at the landing that morning (`MCS-D11.01`), and the quest now starts only after the player leaves Blackwater Landing (quest file `S00_closure`). No other line changed. |

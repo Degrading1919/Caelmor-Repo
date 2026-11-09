@@ -146,7 +146,7 @@ See the Act III header table. Additional local grounding:
 | Suggested content id | `mire.main.05_bannerline` |
 | Arc position | Act III, regional capstone. Pays off **R08** as consequence; seeds CV-M2 (Sorrowback) and CV-M3 ("testimony that holds") |
 | Prerequisite | MR-M4 Completed |
-| Offer | Automatic: the next time the player enters Sorrowmere or Griefwatch after MR-M4 completes. In Sorrowmere the mood banners on the raised ways turn ochre (MME01) and a Memorykeeper at the register room says Ysolde has gone up to Griefwatch (`MBL-B0`). In Griefwatch the vigil bell rings the closure. Objective appears: *Go to Griefwatch's vigil hall.* |
+| Offer | Automatic: the next time the player enters Sorrowmere or Griefwatch after MR-M4 completes and they have left Blackwater Landing. In Sorrowmere the mood banners on the raised ways turn ochre (MME01) and a Memorykeeper at the register room says Ysolde has gone up to Griefwatch (`MBL-B0`). In Griefwatch the vigil bell rings the closure. Objective appears: *Go to Griefwatch's vigil hall.* |
 | Target length | 60–75 minutes (Griefwatch and Bran ~15; road and standards ~20; General ~7; rite ~10; choice and meal ~10) |
 | Combat share | ~35% |
 | Traversal on the count | ~15% |
@@ -212,7 +212,7 @@ See the Act III header table. Additional local grounding:
 
 ### Beat 0: The Closure (`S00_closure`)
 **Objective:** *Go to Griefwatch's vigil hall.*
-The quest starts the next time the player enters Sorrowmere or Griefwatch after MR-M4. In Sorrowmere, the street banners on the raised ways have turned ochre, the colour for a closed way (MME01); a Memorykeeper at the register room door says Ysolde took the ridge pages up to Griefwatch at first light and asked for the witness (`MBL-B0.2`). In Griefwatch, the vigil bell rings the closure: three strokes, a rest, three strokes (`MBL-B0.1`). Travel is ordinary.
+The quest starts the next time the player enters Sorrowmere or Griefwatch after MR-M4 is complete and they have left Blackwater Landing (so it never starts during Ysolde's scene at the landing). In Sorrowmere, the street banners on the raised ways have turned ochre, the colour for a closed way (MME01); a Memorykeeper at the register room door says Ysolde took the ridge pages up to Griefwatch and asked for the witness (`MBL-B0.2`). In Griefwatch, the vigil bell rings the closure: three strokes, a rest, three strokes (`MBL-B0.1`). Travel is ordinary.
 
 At the closure gate (W1), Ide Larrow will not open the road but sends the player to the hall (`MBL-B0.4`). In the vigil hall (W2), Ide and Ysolde give the situation together (`MBL-D1`): the Echo files have been coming further down the road each night since the chapel record came out; two drifters walked into Griefwatch's crofts last night and had to be brought to Lysa; Bran came down at dawn and said, to Ide, "It's counting." Ysolde has the record's last line on her mind: the circle is not closed. Her reading (she says it is hers): finish the circle. She has come to read a roll at it. Ide: "I'll open the road for people going up to finish something. Not for people going up to look."
 
@@ -265,7 +265,7 @@ At the palisade the standards stand risen, cloth moving with no wind. Three stan
 2. **Lift the pole** (channel, ~3 s, progress kept): free it from the iron socket and lay it flat.
 3. **Fold the cloth** in Calwen's fold (MR-M2): strongest seam, then the hem, then the hoist. A wrong fold just unfolds, no penalty. The player does it faster now: the fold is a three-step interact sequence with no channel between steps.
 
-As each pole comes free, its **Banner Wraiths** form round it on the count (`MBL-E5`): two wraiths at the first standard; two wraiths and a bearer at the second and third (a bearer buffs nearby wraiths while its standard stands; folding the standard removes the buff). Wraiths re-form while their standard is risen; once it is folded, the ones left fight to 0 HP and do not re-form.
+As each pole comes free, its **Banner Wraiths** form round it on the count (`MBL-E5`): two wraiths at the first standard; two wraiths and a bearer at the second and third (a bearer raises its standard-shape to speed up nearby wraiths; any hit during the raise stops it). Wraiths re-form while their standard is risen; once it is folded, the ones left fight to 0 HP and do not re-form.
 
 **With `MR_BANNERS = restored`:** after the first standard, Corra Sallis comes up the road with the **Banner That Sank Twice** and two Griefwatch Bannerbearers (`MBL-D5`). She stands it at the circle's road stone, and the ridge's standards answer it: every risen cloth along the arc turns toward it at once (presentation). The third standard brings **one more Wraith wave** (two wraiths) and the Bannerbearers hold the palisade's far end as **one more ally line** (allied NPCs, never defeated). Corra stays below at the circle with the banner.
 
@@ -334,7 +334,7 @@ Tuned for **Advanced** (MD-10). Exact levels and numbers are Gameplay Designer c
 | **MBL-E2** | 2 × Echo file of 3 (one per lane) | The Low Bend (R1) | Lane movers crossing the road | As E1. Files raise their arms on beat 2 (~1.2 s) | Cross on two; or strike a file down to open the lane for ~4 counts | 60–90 s; 75–90% HP remaining. Each echo to 0 HP; files re-form at their lane head on the next third beat |
 | **MBL-E3** `[MD-7]` | 2 × Hollowfoot wanderer, 1 × shouter | The Rag Bend hollow (R2), below the road | Wanderers drift in the hollow; aggro on entry or on combat within assist radius; shouter calls the others when struck | **Wanderer rush:** hunches, shoulders forward (~1.0 s) then a short charge. **Shouter:** throws head back (~1.2 s) then a shout that pulls the other two to him. Interrupt the shout by hitting him during the throw-back | Optional. Shows what the count is doing to people. Never required, never evidence | 40–60 s if engaged. Human: to 0 HP, ordinary defeat presentation, ordinary loot only. Avoidable entirely by keeping to the road |
 | **MBL-E4** | 2 × Echo file of 3, staggered one count apart, across three lanes | The Iron Bend (R3) | Lane movers; one file's head echo turns to strike at the nearest target in its segment on beat 3 | As E2; a turning echo pivots its shoulders on beat 2 | Two rhythms at once with allies holding the flank | 90–120 s; 65–85% HP. Allies (Marshwardens; Thornfell pair with `TH_STANDING`) fight beside the player and are never defeated |
-| **MBL-E5** | Per standard: 2 × Banner Wraith (1st); 2 × wraith + 1 × bearer (2nd, 3rd). With `MR_BANNERS = restored`: +2 wraiths at the 3rd | Palisade heads (C1) | Wraiths: slow, readable melee; bearer: buffs wraiths within 8 m (attack speed) while its standard is risen | **Wraith sweep:** cloth arm lifts (~1.0 s) then a wide arc. **Bearer plant:** grounds its pole on beat 3 (~1.2 s tell on beat 2), a short shock ring 3 m. Wraiths form on beat 3 near the freed pole | Retire under pressure | ~2–3 minutes for all three. Re-form while their standard is risen; once folded, the remainder fight to 0 HP and do not re-form |
+| **MBL-E5** | Per standard: 2 × Banner Wraith (1st); 2 × wraith + 1 × bearer (2nd, 3rd). With `MR_BANNERS = restored`: +2 wraiths at the 3rd | Palisade heads (C1) | Wraiths: slow, readable melee; bearer: **Raise** (lifts its standard-shape high and holds, ~2.0 s, cloth ripples; if not interrupted, wraiths within 8 m attack faster for 10 s; any hit during the raise cancels it) | **Wraith sweep:** cloth arm lifts (~1.0 s) then a wide arc. **Bearer plant:** grounds its pole on beat 3; the 3 m shock-ring decal shows from beat 1 (~2.4 s ahead), then the ring lands (moderate, small knockback outward). Wraiths form on beat 3 near the freed pole | Retire under pressure | ~2–3 minutes for all three. Re-form while their standard is risen; once folded, the remainder fight to 0 HP and do not re-form |
 | **MBL-E6** | **The General Who Wouldn't Fall** (boss); Echo files per phase | The crown (C2–C4) | Boss spec §7.1 | §7.1 | Act III boss (bible §10: 1 Act III boss) | 6–8 minutes |
 | **MBL-E7** | 1 × Echo file of 3 (Post Lane), segment 3 adds 1 × file of 3 (Stake Lane) | The lanes and the gap during the rite (C3–C4) | Lane movers that pass through the gap and collapse inside the ring | Gap ripple brightens on beat 2 of an arrival count (~1.2 s) | Rhythm while holding still | Rite ~6–8 minutes of hold time in all. Files to 0 HP if struck; re-form at their lane head |
 
@@ -370,18 +370,18 @@ Tuned for **Advanced** (MD-10). Exact levels and numbers are Gameplay Designer c
 | Beats | Beat 1: soft thud, a thin ripple ring from the muster post. Beat 2: soft thud, the same. Beat 3: a deep thud and a heavy ripple that runs down all three lanes. 1.2 s per beat (P1–P2); 0.9 s (P3). |
 | Carriers | Audio (positional from the post), ground-ripple decal, optional controller rumble, and an optional caption ("one… two… THREE") for players without audio. |
 | What happens on three | Files step one segment; the General issues its phase order (captioned); any boss attack telegraphed on beat 2 lands. |
-| The rule | **Move on two.** Every attack in this fight lands on a third beat and is shown on the second. |
+| The rule | **Move on two.** Every attack in this fight lands on a third beat and is shown on the second at the latest; in P3 every attack (files included) is shown on the first. |
 
 #### 7.1.3 Mechanics
 
 | Ability | Telegraph (readable, non-twitch) | Effect | Counter |
 |---|---|---|---|
-| **Files** | Files form at the lane heads on a third beat; their arms rise on beat 2 before each step | A file's front echo strikes its own segment on arrival: moderate damage, 1 s knockdown | Be out of the file's next segment by three; or defeat the file (all three echoes to 0 HP) |
+| **Files** | Files form at the lane heads on a third beat; their arms rise on beat 2 before each step (on beat 1 in P3) | A file's front echo strikes its own segment on arrival: moderate damage, 1 s knockdown | Be out of the file's next segment by three; or defeat the file (all three echoes to 0 HP) |
 | **Hold** (shield; P1) | Mud plates across its front, clods spraying when struck | While any file holds a lane, damage to the General is heavily reduced (GD; suggested 80%) | Clear the files. With no file standing, the plates slough off for ~4 counts (~14 s) before files re-form on a third beat |
 | **Planted Standard** (all phases) | Beat 2: it lifts the pole high, a ring decal (~5 m) at its feet | Beat 3: drives the pole into the ground; heavy damage and knockback in the ring | Out of the ring on two |
 | **Close up** (P2) | Beat 1: mud ridges rise along the edges of the lane, or turf strip, the targeted player stands in. Beat 2: it steps into that lane's head and lowers the pole along it | Beat 3: a sweep down the whole lane length (heavy damage, ~35% max HP), except within ~2 m of its flanks ("inside the turn"). A turf strip is swept the same way when the target stands on one: strips are safe from files, not from the General | Ranged: change lane or strip on two. Melee: step inside the turn, at its flank, on two |
 | **Converge** (P2) | Files in the other lanes turn their heads toward the targeted lane on beat 2 | Beat 3: those files step diagonally toward the targeted lane's segment | Read which way they turn; the turf strips stay safe |
-| **No one leaves** (P3) | Banner rags thicken along the arena edge (visual only; no damage, no wall). The count quickens. To keep reaction time fair at 0.9 s per beat, in P3 the Planted Standard's ring decal appears on **beat 1** (as Close up's ridges already do), so every P3 attack is shown ~1.8 s before it lands | Its Planted Standard and sweep leave mud patches (3 m) that apply a standard slow (30%, 3 s) to anyone standing in them; patches last two counts | Keep out of the patches; the count's rhythm is the same, only faster |
+| **No one leaves** (P3) | Banner rags thicken along the arena edge (visual only; no damage, no wall). The count quickens. To keep reaction time fair at 0.9 s per beat, in P3 the Planted Standard's ring decal appears and the file's arms rise on **beat 1** (as Close up's ridges already do), so every P3 attack is shown ~1.8 s before it lands | Its Planted Standard and sweep leave mud patches (3 m) that apply a standard slow (30%, 3 s) to anyone standing in them; patches last two counts | Keep out of the patches; the count's rhythm is the same, only faster |
 | **The order** | On each phase's third beats it speaks its order (captioned) | None (flavour and tell) | — |
 
 #### 7.1.4 Phases
@@ -402,7 +402,7 @@ Tuned for **Advanced** (MD-10). Exact levels and numbers are Gameplay Designer c
 | Death | Wake at Griefwatch (§11); return to the palisade checkpoint. The fight resets to the **top of the phase the player died in** (100 / 65 / 30%). |
 | Logout | `S05` persists; the fight restarts at 100% on re-entry. |
 | Co-op | Shared boss for partners on `S05`. Health scales per participant. Close up targets one player's lane at a time in rotation. The asker beat is resolved by whichever partner acts first (each partner's `MBL_ASKER` is set to that result; fallback: host). |
-| Never | It never speaks a name, a unit, a place or a date. It never answers a question (Hewin's included). No Memorykeeper or Tender calls it a ghost. It drops no loot that identifies anything; ordinary material drops only (economy pass). |
+| Never | It never speaks a name, a unit, a place or a date. It never answers a question (Hewin's included). No Memorykeeper or Tender calls it a ghost. It drops no loot that identifies anything; ordinary non-metal material only (economy pass); no battlefield iron (MD-11). Its health bar shows no name (the folk name stays in people's mouths, not on the frame). |
 | **Defeat (CDR-1)** | 0 HP. It disperses for the night. It would re-form at the next night while the circle stands open (condition), which is why the rite follows at once. After `S06`, the story General does not re-form; the Night Count (§E.9) is a separate, called encounter. |
 
 ### 7.2 Hazards
@@ -414,6 +414,8 @@ Tuned for **Advanced** (MD-10). Exact levels and numbers are Gameplay Designer c
 | **Gap step-off** | The gap, `S06` | Gap ripple brightens on beat 2 | ~15% max HP and knock-back if held through beat 3 | Never costs rite progress. |
 | **Iron soil** | The Iron Bend, the crown | Red ground | None. Tarnish serpents bask here (MDS06): ambient Hunting fauna that fight only if provoked | Not counted as an encounter. |
 | **Dark** | The road and crown at night | — | None. Lanterns at each held bend and on the palisade | No light-gated mechanics here (those are the Chapel's, MR-M4). |
+
+No hazard on the ridge can kill a player above 25% HP (Enemies file C-2); the gap step-off and the mud patches are clamped accordingly, and no knockback moves anyone down a slope.
 
 ## 8. The discovery moments: presentation specs
 
@@ -480,7 +482,7 @@ This is one of the Mire's deliberately unexplained moments (bible §7.5): the st
 
 | Step | Objective | Completes on | Req. | Notes |
 |---|---|---|---|---|
-| `S00_closure` | Go to Griefwatch's vigil hall. | Enter W2 volume + `MBL-D1` end | Yes | Quest Active on entering Sorrowmere or Griefwatch after MR-M4 Completed (per-player event `mbl.closure_start`). |
+| `S00_closure` | Go to Griefwatch's vigil hall. | Enter W2 volume + `MBL-D1` end | Yes | Quest Active on entering Sorrowmere or Griefwatch after MR-M4 Completed **and** after the player has left the Blackwater Landing area (per-player event `mbl.closure_start`; ordinary predicate: MR-M4 Completed + exit-landing-volume flag + zone entry). It cannot fire during `MCS-D11` or the landing scene. |
 | `S01_roll` | Help Ysolde check her names against the vigil book (0/3). | 3 × `show_match` accepted + `MBL-D2.40` end → `MBL_names_roll` granted | Yes | Wrong matches harmless. Checks persist individually. |
 | `S01b_pot` | (Optional) Bring the wardens a pot. | Cooked vigil pot or the cook's pot delivered to W1 | No | Sets `MBL_POT`. |
 | `S02_count` | Find Bran at his watchpost. / Learn the count. / Wait for dusk. | `MBL-D3` end + (3 clean counts **or** MBL-E1 defeated once) + furrow inspect + keep watch to dusk | Yes | Night pin begins at dusk. The furrow inspect also sets `MDS07_SEEN` and `MDS07_READ` so the discovery does not repeat after the story. |
@@ -559,7 +561,7 @@ In every value the last line is spoken at the ring before the hold begins, and t
 | Walking away | Quest stays Active at the persisted step. Resume hooks: Ysolde in the vigil hall (`S00–S01`): "The roll's on the table where you left it." Bran at the watchpost (`S02`): he puts his hand on the ground again and waits. Ide at the closure gate (`S03–S07`): "Road's still shut. You're still the one I'd open it for." Agna at the long table (`S08`): "Sit." |
 | The ridge and the world | The night pin, the count and the files are per-player quest-local state. Other players on the ridge see an ordinary closed road (if they have not reached MR-M5) or their own state. |
 | Fail state | None. |
-| Co-op | §7 rules. Each partner gives their own roll and holds their own gap stone presentation (the gap is per-player; fallback: one partner holds and every partner present is credited, each with their own roll item consumed at their own `S08`). Each partner chooses their own `MR_BANNERLINE`; fallback: the host's ridge props are shown, each partner's own value is stored and drives their epilogue. |
+| Co-op | §7 rules. Each partner gives their own roll and holds their own gap stone presentation (the gap is per-player; fallback: the host's gap stone, arrivals and crown props are shown (MI-CO-06, pending Director review); the host's hold drives the shared arrivals and every partner present is credited per segment, each with their own roll item consumed at their own `S08`). Each partner chooses their own `MR_BANNERLINE`; fallback: the host's ridge props are shown, each partner's own value is stored and drives their epilogue. |
 
 ## 12. Integration needs
 
@@ -584,7 +586,7 @@ Documented dependencies for a later Systems Engineer. None is implemented here. 
 | **Night Count entry** `[MD-8]` | Systems | Interact with the muster post at night (player hour) starts MBL-E6 as a repeatable encounter without story beats. | §E.9. |
 | Creatures | Schema / Gameplay | Earthen Echo file (and weak variant), Banner Wraith, wraith bearer, Hollowfoot wanderer and shouter `[MD-7]`, the General. From the Batch 4 enemies package. | — |
 | **Act I/II dependencies** | Act authors | (1) MR-M1: the mother is Aldith Hayle in the Hayle book (checked against the Act I draft, 2026-11-08). (2) MR-M2: the Banner That Sank Twice hangs over Griefwatch's vigil-hall door with Corra when `restored` (checked against the Act I draft). (3) MR-M4: the stone list on the Warden leaves is fixed by Act II §B8.4 (five stones named by place, then a broken corner; no marks, names or count beside any stone); §5.4 C4 and the `MBL-I` stone inspects follow it. (4) Act I reads promised here: `MNS_FENWARD_VISITED` (Jory's nod) and `MBR_CORRA_CORNER` (Corra's line). The leaves travel in Mabyn's oilcloth, not the lead box (Act II §B6 Beat 8). | Fallbacks in text. |
-| **Batch 3 dependencies** | Side-quest authors | `MDS07_READ` name; the Stillgrave family's role names (MLL); *Lifting Day*, *A Table for the Wet*, *The Bell Roster* completion conditions; whether the `S02` furrow inspect sets `MDS07_READ`. | Fallback: role names; no flag set here. |
+| **Batch 3 dependencies** | Side-quest authors | `MDS07_READ` name; the Stillgrave family's role names (MLL); *Lifting Day*, *A Table for the Wet*, *The Bell Roster* completion conditions. **Settled:** the `S02` furrow inspect sets `MDS07_SEEN` and `MDS07_READ` (§9.1, §9.2), so the discovery does not repeat. | Fallback: role names. |
 
 ## 13. Mystery ledger entries
 
@@ -716,7 +718,7 @@ The General remains a canon major threat. After MR-M5, at night (player hour), t
 | The fight | MBL-E6 without story beats: no asker, no rite. Same phases, telegraphs and count. Tuning may be raised for the refight (Gameplay Designer). |
 | Defeat | 0 HP; it collapses into the post's foot. The count stops on its own after defeat (the circle is complete). The ridge is quiet until the post is struck again. |
 | Ridge state | `MR_BANNERLINE` changes the props and lines around the fight (§E.1), not access to it. |
-| Rewards | Ordinary combat rewards; any unique drop belongs to the economy and item passes. Nothing evidentiary. |
+| Rewards | Ordinary combat rewards; any unique drop belongs to the economy and item passes and is non-metal (no battlefield iron, MD-11). Nothing evidentiary. |
 | Death | Respawn at Griefwatch; ordinary. |
 
 ## E.10 Mire master commissions
@@ -726,7 +728,7 @@ The General remains a canon major threat. After MR-M5, at night (player hour), t
 | Commission (functional name) | Giver | Where | Skill line | Variant |
 |---|---|---|---|---|
 | **Fowler's reed bow and quiver** | Hob Merrit | Marshfall | Fletching / Ranged / Woodcutting | *Reed Shafts* Completed: he remembers the heron that got away. |
-| **Ferryman's pole** | Rowan Mirewake | Blackwater Landing | Woodcutting (root-knee) | Told: "I'll show you where the good root is." Kept: "There's root. Find it." |
+| **Root-wood pole** | Rowan Mirewake | Blackwater Landing | Woodcutting (root-knee) | Told: "I'll show you where the good root is." Kept: "There's root. Find it." |
 | **Marshwarden's oilcloth coat** | Ide Larrow with a Griefwatch leatherworker | Griefwatch | Leatherworking (imported leather; repair craft) | Tended: "For the vigil. It's cold on that stone." |
 
 None depends on `MR_BANNERLINE` beyond one line. Every player who completes MR-M5 receives all three offers.
@@ -752,3 +754,4 @@ The circle on Bannerline is complete, closed or kept, and the count has stopped.
 | Map | Relative only; MAP VERIFICATION REQUIRED in §5 and at two sightlines; no route to another region; no compass direction. |
 | Scope | No schema, JSON or C#; no new runtime needs after the CDR-4 review (§12: timer, patrol-path files and a kept-progress channel are standard). |
 | Independent review, 2026-11-08 (Act III and cross-act) | Fixed: stone inspects and C4 now follow Act II §B8.4 (place-named stones, no marks; nothing countable); leaves carried in Mabyn's oilcloth, not the lead box; the vigil book dated "the last wet" with fog on its last loud and quiet nights, matching the weather run (Act I day-books, Act II vestry log), not "the last summer"; Act I's promised reads added (`MNS_FENWARD_VISITED`, `MBR_CORRA_CORNER`); ring interior closed as a safe firing spot by an ordinary leash; Close up reaches turf strips; P3 Planted Standard shown from beat 1 (~1.8 s); file collapse inside the ring (was "outside", which a gap crossing cannot reach); Ysolde placed before the hold; household minimum corrected to two; Bran's watch no longer dated ("for years", Part 4 ledger); Sennic's bark no longer implies the ridge was loud in his childhood (war ended ~30 years ago); Hob Merrit's pronoun matches Act I; three runtime needs reclassified as standard (CDR-4). Checked and consistent: flags (bible §9.1 has `MR_CLOTH`, `MR_LANTERN_LINE`, `MR_STRANGER_SEAT`; `MDS07_READ` and the side-quest completions remain Batch 3 dependencies), four quest items, Aldith Hayle, banner over the vigil-hall door, cast and roles, 0 HP and the General's quieting by rite, MD-7 tagging and swap note, the Night Count naming, new names (no repo collisions). |
+| Batch 4 encounter alignment review, 2026-11-09 | Aligned with `Enemies/Caelmor_Mire_Encounter_and_Enemy_Requirements.md` §13.3 (numbers and text only; no id, step or flag renamed): MBL-E5 bearer uses the interruptible Raise (2.0 s, 8 m, 10 s) in Beat 4 and §7, Plant ring decal from beat 1 (C-4, I-7); P3 file arms rise on beat 1 and §7.1.2's rule says so (C-7, I-12); §7.1.5 "Never" row and §E.9: non-metal drops only, no battlefield iron (I-21), boss bar with no name (C-9, I-18); §7.2 adds the 25% hazard clamp (C-2, I-22). §12 Batch 3 row no longer asks whether `S02` sets `MDS07_READ` (it does, §9). **`mbl.closure_start` gate:** MR-M4 completes at `S08_landing` on `MCS-D11` end at Blackwater Landing, so the zone-entry event could have fired while the landing scene was still playing (and the Memorykeeper's "at first light" contradicted Ysolde being at the landing that morning); activation now also requires leaving the landing area (ordinary predicate), stated in the card, Beat 0 and `S00_closure`; "at first light" dropped from Beat 0 and `MBL-B0.2`. |

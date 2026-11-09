@@ -949,31 +949,31 @@ MEP-D2.24 ANNIS: (very quiet) "I thought she was..." (beat) "Oh."
 
 ```
 MEP-D3 (the lot; S03–S05)
-MEP-D3.01 JEM: (splitting badly) "If Annis sent you, I'm fine. If Ysolde sent you, I'm still fine."
-MEP-D3.02 JEM: "Split went wrong. Lost a week of knees. Crew's paid by the board. I'm not going home with nothing."
-MEP-D3.03 JEM: "I came as far as the landing. Twice. Turned round." (beat) "Annis writes back asking when. I can't write 'nothing'."
+MEP-D3.01 LEW: (splitting badly) "If Annis sent you, I'm fine. If Ysolde sent you, I'm still fine."
+MEP-D3.02 LEW: "Split went wrong. Lost a week of knees. Crew's paid by the board. I'm not going home with nothing."
+MEP-D3.03 LEW: "I came as far as the landing. Twice. Turned round." (beat) "Annis writes back asking when. I can't write 'nothing'."
   > "Your niece sets a place for you every meal."  → MEP-D3.04
   > "Let's fill your board."                                  → MEP-D3.20
-MEP-D3.04 JEM: "Posy." (long pause) "Annis thinks I'm dead, doesn't she."  → MEP-D3.20
-MEP-D3.20 JEM: "Three knees and the board's square. Grain runs this way. Don't fight it."
+MEP-D3.04 LEW: "Posy." (long pause) "Annis thinks I'm dead, doesn't she."  → MEP-D3.20
+MEP-D3.20 LEW: "Three knees and the board's square. Grain runs this way. Don't fight it."
   > "I'll split them."                                        → MEP-D3.21
   > "Can the crew cover you?"                                 → MEP-D3.30
 MEP-D3.21 {Woodcutting; MEP_QUOTA = self}
 MEP-D3.30 FOREMAN: "We'll cover him a day. He's covered us." {keep watch; MEP_QUOTA = crew}
-MEP-D3.40 [quota done] JEM: "Square." [MEP_QUOTA = self] "You split straighter than me. Don't say so at home."
-MEP-D3.50 JEM: "How do I go in?"
+MEP-D3.40 [quota done] LEW: "Square." [MEP_QUOTA = self] "You split straighter than me. Don't say so at home."
+MEP-D3.50 LEW: "How do I go in?"
   > "Straight home. Next meal."                               → MEP-D3.51  {set MEP_HOME = table}
   > "Walk the raised way. Let them see you."                  → MEP-D3.52  {set MEP_HOME = way}
-MEP-D3.51 JEM: "Quiet. Good."
-MEP-D3.52 JEM: "In daylight. Like a fool." (beat) "All right."
+MEP-D3.51 LEW: "Quiet. Good."
+MEP-D3.52 LEW: "In daylight. Like a fool." (beat) "All right."
 ```
 
 ```
 MEP-D4 (Keel house; S05)
 MEP-D4.01 (wonder moment: the two knives)
-MEP-D4.02 POSY: "You taught me."  JEM: "I did."
+MEP-D4.02 POSY: "You taught me."  LEW: "I did."
 MEP-D4.03 ANNIS: (pulls the third stool out) "Sit. Eat. Then tell it."
-MEP-D4.04 JEM: "There's nothing to tell." (beat) "There's a split knee and a board."
+MEP-D4.04 LEW: "There's nothing to tell." (beat) "There's a split knee and a board."
 MEP-D4.05 ANNIS: "Then tell me that."
 ```
 
@@ -1092,7 +1092,7 @@ Tuned for Competent identity (MD-10, after MR-M1).
 
 | Id | Enemies (§10) | Placement | AI role | Telegraph | Purpose | Solo target |
 |---|---|---|---|---|---|---|
-| **MLL-E1** (optional) | 2 × Reedlurker (lurker), 1 × snapper | Far posts of the near edge, in the shallows | Ambush from water; leash to shallows. | **Reed-ripple:** a line of reeds bends toward the player (~1.2 s) before a lurker lunges 3 m from the water; step back from the edge. **Snapper spit:** head lifts out of the water, throat swells (~1.0 s), then a spit arc; sidestep. | Makes the edge a place; teaches the reed-ripple before MR-M2. Avoidable by gathering near. | 30–45 s; player at 70–90% HP. |
+| **MLL-E1** (optional) | 2 × Reedlurker (lurker), 1 × snapper | Far posts of the near edge, in the shallows | Ambush from water; leash to shallows. | **Reed-ripple:** a line of reeds bends toward the player (~1.5 s, the family's first-appearance length) before a lurker lunges 3 m from the water; step back from the edge. **Snapper spit:** head lifts out of the water, throat swells (~1.0 s), then a spit arc; sidestep. | Makes the edge a place; teaches the reed-ripple before MR-M2. Avoidable by gathering near. | 30–45 s; player at 70–90% HP. |
 | **MLL-E2** | Earthen Echo (echo): wave 1: 2; wave 2: 3; wave 3: 3 + 1 that walks to Dob's lantern specifically | Stand up out of the mud at the water's edge, one per 3–4 s within a wave; walk a straight line toward the kneeling Haddow's lantern | Slow, relentless walkers that repeat one motion (kneeling, lifting, reaching) as they come; they walk to the kneeling Haddow's lantern, never at a person. Re-form at the edge 6 s after defeat while the segment lasts. | **Stand-up:** a hump of mud rises and holds (~1.5 s) before the figure stands; a ranged shot during the hold is a free hit. **Swing:** the figure stops, both arms lift (~1.2 s), then a wide downward swing (2 m arc) that knocks out a lantern if one is in the arc; step out. | The family finishing their ring is the work; the fight is the frame. The player protects people and light, not a point. | ~2.5–3.5 min across three speeches; player ends at 50–70% HP. Melee holds the ring edge; ranged picks walkers off across the lit ground. |
 
 **Rules.** Echoes target lanterns, never people: an Echo that reaches the kneeling Haddow's stake swings at the lantern (the lit-gated bar pauses until it is relit). The Haddows and Prue are never targetable and never harmed. Echoes are defeated at 0 HP and collapse into mud; they re-form only while the ring is unfinished (bible §2.6). Nothing they leave advances the quest. A beaten player wakes at the memorial gardens with the ring's completed speeches kept.
@@ -1229,7 +1229,7 @@ MLL-D2.02 EBBA: "Six stakes. One each, and one each for the things we wanted sai
   > "What stood up?"                                         → MLL-D2.03
 MLL-D2.03 EBBA: "Seen: mud, where Bryony was kneeling. It stood up like a man getting off his knees. Thought: I've no thought. We went home."
 MLL-D2.04 BRYONY: "I'm not going near the water." (beat) "I'll set mine from up here."
-MLL-D2.05 PIM: "I'm going last."
+MLL-D2.05 DOB: "I'm going last."
 ```
 
 ```
@@ -1244,7 +1244,7 @@ MLL-D3.04 PRUE: "What I know is a lit line holds ground. So we light it and we f
 MLL-D4 (the ring; S06; one line per segment, spoken when that segment's bar fills)
 MLL-D4.10 EBBA: (sets her stake, lights it from the player's lantern) "For Corin, who carried my wood without being asked. That's mine."
 MLL-D4.20 BRYONY: (from the bank, then, partway through, walking down to set it properly) "For Corin. I'm cross with you. I'll stop. Not yet."
-MLL-D4.30 PIM: (last; it takes him two tries to get the stake in) "For my da. And for the reeds. He liked the reeds."
+MLL-D4.30 DOB: (last; it takes him two tries to get the stake in) "For my da. And for the reeds. He liked the reeds."
 ```
 
 ```
@@ -1262,7 +1262,7 @@ MLL-D5.20 PRUE: "Always lit. I'll put his name on a strip." EBBA: "It was out he
 MLL-D7 (close)
 MLL-D7.01 PRUE: "A family finished its ring. That's all a Tender's for, most days."   {set MR_LANTERN_LINE}
 MLL-D7.02 EBBA: "If anyone ever needs a ring lit, they can send for the Haddows. We know how now."
-MLL-D7.03 PIM: "And moss. I know the moss."
+MLL-D7.03 DOB: "And moss. I know the moss."
 MLL-D7.04 [MR-M4 Completed] PRUE: "Mabyn's been asking for help on the roof. Something about an old book. Go when you can."
       {event: S08 → quest Completed}
 ```
@@ -1592,7 +1592,7 @@ The first dry stretch comes: three days without rain in the long wet. Sorrowmere
 
 | Id | Enemies (§10) | Placement | AI role | Telegraph | Purpose | Solo target |
 |---|---|---|---|---|---|---|
-| **MLD-E1** (optional) | 2 × Griefbit Beetle swarm | The ditch below the centre turnout | Rise and mill toward the frightened child, stopping at the road edge; leashed to the ditch; aggro only if the player enters the ditch or attacks. | **Swarm surge:** the cloud thickens and clicks loudly (~1.2 s), then a 3 m dash; step aside. **Spread:** the cloud flattens on the ground (~1.0 s) before biting in a 2 m circle; leave it. | Shows that beetles follow fear, on a day without fear; the calm option is the better one. | 20–35 s; player at 80–95% HP. |
+| **MLD-E1** (optional) | 2 × Griefbit Beetle swarm | The ditch below the centre turnout | Rise and mill toward the frightened child, stopping at the road edge; leashed to the ditch; aggro only if the player enters the ditch or attacks. | **Swarm surge:** the cloud thickens and clicks loudly (~1.2 s), then a 3 m dash; step aside. **Spread:** the cloud flattens on the ground (~1.5 s) before biting in a 2 m circle; leave it. | Shows that beetles follow fear, on a day without fear; the calm option is the better one. | 20–35 s; player at 80–95% HP. |
 
 **Rules.** Beetles fight to 0 HP if fought (CDR-1). Calming the child is the step's objective; the swarm is never driven off or calmed by it and stays in the ditch, unengaged, like ambient flocks (rulings §3.1.4). Children and NPCs are never targetable; the swarm never reaches the road while the player is on it. **MD-7 swap note:** no Hollowfoot content.
 
@@ -1776,3 +1776,4 @@ MLD-D6.02 CORRA: "Next year I'm carrying a real one." (beat) "A sign. A real sig
 | MD-3 | Rowan crosses only by day/first light (MLW). |
 | Known cross-package request | None remaining (`MBL-B9.4`/`B9.4b` already gated by `MLD_ORDER` in Act III). |
 | **Independent review (2026-11-09)** | 14 findings fixed in place (0 high, 7 medium, 7 low). **Medium:** first-name collisions with existing NPCs renamed (Jem → Lew Keel, Pim → Dob Haddow, Tam → Corin Haddow; Ned Rudd → Wyn Rudd, in-batch duplicate of Ned Siskin); MLL war-washing at Stillgrave was Ebba's eyewitness fact with no canon support (now labelled Tender belief only, which also fixes Ebba's age); MLL ring count contradicted itself (six stakes / "three in" / twelve lights; now three set, three to close, six lights); MLL "dialogue pauses near enemies" replaced by a standard lantern-gated hold bar; MLW timed tending prompts replaced by four untimed keep-watch turns; MLD pace-matching escort replaced by a standard follow with run disabled, and the dialogue-driven swarm "settle" (a drive-off in effect) replaced by an ordinary ditch leash with calm dialogue as the step; Senna's age contradicted "though she was a girl". **Low:** §0.4 named nonexistent steps (`S08_close`, MLD `S08_table`); the Act III `MBL-B9.4` request is already met; Rootrest Tender line misattributed to Prue; MLW wind night labelled sixth (it is the fifth); night moss nodes noted as an existing presentation-hour variant; MLL fallback for night nodes. Checked and unchanged: flags exactly as Act III/bible §9.1 (`MR_STRANGER_SEAT`, `MR_LANTERN_LINE`, *Lifting Day* completion, `MR_ARRIVALS`); Haddow role names match `MRC-B2.6` and `MBL-B7.12`; no calendar dates or casualty figures; no Hollowfoot; Rowan never crosses at night. |
+| Batch 4 encounter alignment review, 2026-11-09 | Aligned with `Enemies/Caelmor_Mire_Encounter_and_Enemy_Requirements.md` §13.3 (numbers only; no id, step or flag renamed): MLL-E1 reed-ripple ~1.2 s → ~1.5 s, first-appearance length (C-5, I-2); MLD-E1 swarm spread ~1.0 s → ~1.5 s, area-effect minimum (C-1, I-12). Also fixed: speaker tags left over from the Batch 3 renames (`MEP-D3`/`MEP-D4` JEM → LEW, 11 lines; `MLL-D2.05`, `MLL-D4.30`, `MLL-D7.03` PIM → DOB); line text unchanged. |
