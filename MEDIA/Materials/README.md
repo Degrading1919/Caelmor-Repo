@@ -322,6 +322,103 @@ verification remain pending. This README does not include the local
 PNG or Blender project files, and no runtime or procedural generator
 behavior was changed.
 
+## Fine Floated Lime Plaster — Lowmark working treatment
+
+**Creative Director approval (2026-11-09):** The hand-painted Fine
+Floated Lime Plaster finish and warm limewash appearance are approved
+for the **Lowmark farmhouse wall infill** at the reviewed Blender
+building-level view. It is deliberately quiet and low-contrast, supporting
+the timber framing and shingle roof rather than competing with them.
+The wider household ensemble was reviewed in Blender; this is an
+art-direction acceptance, not a Unity export or in-game validation.
+
+### Approved tint choices
+
+The neutral grayscale artwork is recolored by a **Mix Color → Multiply**
+node at **Factor 1.000**. Blender color-picker values:
+
+| Appearance | HEX (RGB) | Status and intent |
+| --- | --- | --- |
+| Warm Limewash | `#FFF8D6` | **Preferred default** for Lowmark farmhouse; approved from the earlier building preview |
+| Weathered Limestone | `#EDE3D2` | Approved optional muted gray-beige variation; reviewed in a subsequent farmhouse preview |
+
+The Creative Director's initial Blender color input was
+`#FFF8D6FF`; `FF` is the fully opaque alpha component and the RGB
+value is `#FFF8D6`. The two names describe **finish appearance**, not
+new regional resources or literal plaster composition. These values
+apply to the neutral grayscale source, so the resulting shaded surface
+will be darker than a flat HEX swatch.
+
+### Working source and derived maps
+
+The artist's original painted image was retained at
+`MEDIA/Materials/working/fine_floated_lime_plaster.png`.
+It appeared grayscale but contained unequal RGB channels, so the
+strict grayscale-only map tools rejected it. An opaque grayscale
+conversion was made **without replacing the original**:
+
+```powershell
+cd "C:\Users\CK\Documents\Caelmor-Repo"
+$id = 'fine_floated_lime_plaster'
+$work = 'MEDIA/Materials/working'
+py -3 -c "from PIL import Image; Image.open(r'$work/$id.png').convert('L').save(r'$work/${id}_grayscale.png')"
+py -3 MEDIA/Materials/derive_height.py --id $id --input "$work/${id}_grayscale.png" --output "$work/${id}_height.png" --edge stretch --intensity 0.65 --smoothing 1
+py -3 MEDIA/Materials/derive_normal.py --id $id --height "$work/${id}_height.png" --output "$work/${id}_normal.png" --edge stretch --size-m 2 2 --relief-m 0.002
+```
+
+The Creative Director confirmed the Height and Normal commands completed
+successfully. Derived Height is an intermediate source for Normal; it
+is not independently connected to a Bump node. Generated map output
+paths are in the existing local `working` directory. The derive scripts
+protect existing output files from overwrites; move/rename older derived
+outputs before regeneration.
+
+### Reviewed Blender material setup
+
+```text
+UV Map [UV0_Metric]
+    -> Mapping [Type: Point; Scale (0.500,0.500,1.000)]
+       -> Image Texture [fine_floated_lime_plaster_grayscale.png, sRGB;
+                         Extension: Extend]
+          -> Mix Color [Multiply; Factor 1.000;
+                        A: grayscale image; B: selected HEX]
+             -> Principled BSDF [Base Color]
+       -> Image Texture [fine_floated_lime_plaster_normal.png, Non-Color;
+                         Extension: Extend]
+          -> Normal Map [Tangent Space; UV Map UV0_Metric;
+                         Strength 1.000]
+             -> Principled BSDF [Normal]
+Principled BSDF [Metallic 0.000; Roughness 0.900]
+    -> Material Output [Surface]
+```
+
+Both Image Texture Vector inputs share the Mapping output. A separate
+roughness texture is **not** required; the approved working material
+uses a constant Roughness of 0.900. The Normal is restrained through
+the derivation parameters above, with no additional mandatory strength
+reduction. The 0.500 X/Y mapping scale is the **reviewed working value**,
+not a universal plaster UV contract.
+
+**Scaling choice:** The Creative Director compared a 512 × 512 master,
+a 2× scaled view, and a 3-wide × 2-high tiled preview. The scaled view
+was preferred: tiling exposed a visible repetition grid. For the
+approved farmhouse presentation, use a single extended application
+rather than visible repetition. `Extend` clamps sampled UVs outside
+the image; it does **not** automatically fit the image to arbitrary
+geometry. Confirm the mapping when this material is assigned to
+different wall sizes, and do not silently change the catalog scale.
+
+**Handoff and scope:** The approved material was judged on a Lowmark
+household ensemble in Blender alongside warm structural timber and
+painted roof shingles. Minor apparent variation at the upper gable
+could be lighting or UV mapping; no corrective work was authorized
+without stronger evidence. Preserve the source, derived maps, and
+current material choices. Before standard glTF/Unity export, bake or
+otherwise resolve the Blender Multiply tint into an exported albedo
+texture; test export lighting and normals separately. Neither the
+native .blend nor local working PNG files are committed by documenting
+this decision; no architectural generator or runtime changes are made.
+
 ## Build and verify
 
 Python batch tools use Pillow and NumPy. Existing production files are
