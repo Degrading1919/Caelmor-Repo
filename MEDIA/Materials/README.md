@@ -115,6 +115,57 @@ height range. Import both maps explicitly in the new revision.
 python MEDIA/Materials/derive_normal.py --id split_oak_shingle --height MEDIA/Materials/working/oak_height.png --output MEDIA/Materials/working/oak_normal.png --relief-m 0.025
 ```
 
+## Derive Height and Normal from painted grayscale
+
+Run from the repository root with Python 3, Pillow and NumPy. Use an existing
+catalog ID and an opaque square PNG. Procreate RGB or RGBA exports work when
+their RGB channels are equal. Both commands preserve pixel dimensions and
+require fresh output paths in the existing `working` folder.
+
+```powershell
+$id = 'hewn_oak'
+$work = 'MEDIA/Materials/working'
+$paint = Join-Path $work "${id}.png"
+$height = Join-Path $work "${id}_height.png"
+$normal = Join-Path $work "${id}_normal.png"
+py -3 MEDIA/Materials/derive_height.py --id $id --input $paint --output $height --edge stretch --intensity 1 --smoothing 1
+if ($LASTEXITCODE -ne 0) { throw 'Height generation failed' }
+py -3 MEDIA/Materials/derive_normal.py --id $id --height $height --output $normal --edge stretch --size-m 4 1 --relief-m 0.006
+if ($LASTEXITCODE -ne 0) { throw 'Normal generation failed' }
+```
+
+- Choose `--edge repeat` in both commands for an already seamless tile.
+  This is the default and samples through the tile boundary.
+- Choose `--edge stretch` in both commands for a single application across
+  a surface. Height filtering reflects at the border and Normal uses one-sided
+  edge slopes. In Blender, use the same normalized UV mapping for the paint
+  and derived maps and set the texture extension to **Extend**.
+- Height attenuates broad painted washes, blends medium and fine grain bands
+  and limits strong strokes around mid-gray. Lower `--intensity` to reduce
+  relief (0 gives flat, 1 default, 2 maximum). Increase `--smoothing` to
+  soften small marks (0.25–4, default 1). Height uses stored paint values
+  as a guide and estimates relief from contrast. A painted shadow may still
+  need an explicit Height correction.
+- Normal uses the catalog's `scale_m` as its default U/V dimensions.
+  For stretched paint, supply the actual coverage in metres with
+  `--size-m U V`. The Hewn Oak example uses 4 m along horizontal U grain
+  and 1 m across V. `--relief-m` is the height represented by the full
+  black-to-white range. The generated image generally uses only part of it.
+
+Load Height and the tangent-space +Y Normal as **Non-Color** data. Route Normal
+through a Blender Normal Map node. Keep Base Color available for tinting.
+Both outputs are 8-bit PNGs and can be passed as explicit `--import-map height=…`
+and `--import-map normal=…` inputs to `return_paint.py` when the package dimensions
+match. Move earlier derived maps aside before generating replacements at the
+same paths.
+
+The local 512 × 512 Hewn Oak export was processed with the commands above.
+Height used values 87–170 of 255 (about 2.0 mm of range at the chosen scale).
+95% of decoded normals tilted less than 4.8° from flat. The longitudinal grain
+was visible in the technical maps. This check used image inspection and decoded
+normal measurements. Run the automated checks with
+`py -3 -m unittest discover -s MEDIA/Materials -p test_paint_maps.py -v`.
+
 ## Split Oak Shingle — recolorable roof working test
 
 **Creative Director decision (2026-11-09):** Four tint choices and the Blender
