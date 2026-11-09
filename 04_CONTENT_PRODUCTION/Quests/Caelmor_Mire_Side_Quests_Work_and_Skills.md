@@ -58,7 +58,7 @@ MHG  None. Weighing sacks against a tally board is an inspect-and-compare task (
 
 ### 0.3 Economy-pass dependencies (MD-11)
 
-Every material and recipe below is a **dependency**, not an item. The working name is what the quest text calls it until the economy pass derives a state.
+Every material and recipe below is a **dependency**, not an item. **EM-01 to EM-11 are this file's proposal labels for the economy pass, not catalog ids or item names**; the working name is what the quest text calls it until the economy pass derives a state. **Bows:** Hob's spare fowling bow (lent as a carry-state object in MRS, never an inventory reward) and the "proper reed bow" of his Act III commission are item-name proposals only; weapon catalog, stats and recipes stay with the economy and item passes (CDR-2; rulings §3.4).
 
 | Id | Working name in this file | Dossier or bible concept | Used by | Nearest approved state | What the economy pass must decide |
 |---|---|---|---|---|---|
@@ -453,7 +453,7 @@ MRS-D5.07 [Hob's spare bow lent] HOB: "Bow back on its peg, please. It's sentime
 
 1. **EM-01/EM-04:** whether reed is a shaft material and root-wood a head. The quest stands on ordinary arrows if not.
 2. **Skill requirement level** (Hunting ~[GD: low]): Gameplay Designer. Recommendation: a level reachable in Lowmark's or Thornfell's first hunting content, or about an hour of training.
-3. **Hob's pronoun:** Act I uses "he"; Act III §E.10's variant note says "she remembers the heron". This file uses **he**. Act III's note should read "he" (flagged to the Act III author; one word).
+3. **Hob's pronoun:** "he" throughout, matching Act I and Act III §E.10 (resolved; Act III now reads "he remembers the heron").
 
 ### MRS.16 Review log
 
@@ -814,7 +814,7 @@ Blackwater Landing sits below Sorrowmere (bible §4.2). The **home channel** is 
 
 **Beat 4 — Pins from the Bank (`S04_pins`).** *Objective: Cut two thole pins from root wood.* Keep watch until Slack (if not already). On the landing bank (H2), choose a root-knee: inspect shows which is sound (the dark, heavy one) and which are punky (`MFH-I4`). Woodcutting (required by the quest's start gate): **split** the sound root-knee (channelled, 3 segments of ~4 s). At the bench, **shave** two pins (interaction, ~3 s each) and **fit** each against Gwenna's last good pin as a gauge (interaction: too fat, "Won't go." and shave again; right, "Snug."). The authored first shave is always too fat; the second fits (teaches the gauge).
 
-**Beat 5 — The Racks (`S05_hounds`).** *Objective: Drive the dogs off the racks.* The step triggers when both pins are fitted (or at dusk if the player is on the row): a Bog Hound pack comes for the smoke racks. **MFH-E1.** Defeat them at 0 HP. Gwenna: "They're starving. So's everybody. Doesn't mean they get the eels."
+**Beat 5 — The Racks (`S05_hounds`).** *Objective: Defeat the dogs at the racks.* The step triggers when both pins are fitted (or at dusk if the player is on the row): a Bog Hound pack comes for the smoke racks. **MFH-E1.** Defeat them at 0 HP. Gwenna: "They're starving. So's everybody. Doesn't mean they get the eels."
 
 **Beat 6 — Across at Running (`S06_cross`).** *Objective: Row the punt across the home channel.* Keep watch until the home channel turns Running (the punt floats). Fit the pins in the punt (two interactions) and the harness on Cadan at the tow path (interaction). Board and take the oars. The crossing is the Lowmark ferry convention (an escorted ride on a fixed route) with the player **rowing**: three short stretches; at the start of each Gwenna calls a choice from the stakes and the water (`MFH-D4`): row on, ease, or hold for Cadan to take up the slack on the tow. A wrong call holds the punt in an eddy for a few seconds and Gwenna corrects (no failure). In the middle stretch, the strange moment (MFH.5).
 
@@ -849,7 +849,7 @@ Blackwater Landing sits below Sorrowmere (bible §4.2). The **home channel** is 
 | `S02_leather` | Find leather that will hold. | 2 sound hides chosen | Yes | Authored 2 sound / 3 cracked |
 | `S03_mend` | Mend the harness. | Cut, skive, 3 stitch segments, dress **or** crew stitch (cut, skive + keep watch) | Yes | `MFH_CREW_STITCH` |
 | `S04_pins` | Cut two thole pins from root wood. | Split channel + 2 shave + 2 fit | Yes | Bank walkable at Slack |
-| `S05_hounds` | Drive the dogs off the racks. | MFH-E1 defeated | Yes | — |
+| `S05_hounds` | Defeat the dogs at the racks. | MFH-E1 defeated | Yes | — |
 | `S06_cross` | Row the punt across the home channel. | Pins fitted + harness on Cadan + crossing route complete | Yes | Running pinned on keep watch; slack seam event |
 | `S07_land` | Land the load. | 2 carry-deposits + `MFH-D5` end | Yes | Sets `MFH_TOLLEY_BENCH`; quest Completed |
 
@@ -1061,6 +1061,7 @@ MFH-D5.04 GWENNA: (counts coins out of a purse) "That's for the mending. Bench i
 | Calwen keeps what nobody owns; Mara never digs deeper than the ground offers | Anchors II; ledger | [CANON] |
 | Dunstan Hayle; `MR_NAME_RECORD` | Bible §5.2, §9.1 | [NEW] |
 | Peat Row, Hedda Fallow, Maddy Brook, old Abe Crosse | This package | [NEW] |
+| The Peat Row marker's form (office-marked stone, the ring of roots, set before the war) | This package | [PROPOSAL — DIRECTOR] (dossier gives only "a buried Memorywarden marker") |
 
 ### MWS.3 The places [MAP VERIFICATION REQUIRED]
 
@@ -1169,7 +1170,7 @@ EM-09 root wood. Nothing else.
 
 | Mystery | Author truth | Public belief | Observable | Wrong reading | Withheld | Owner |
 |---|---|---|---|---|---|---|
-| The Peat Row marker | A Memorywarden marker of the old earth tradition (H05), set before the war; its purpose is not decided. | "Old stone. Leave it." | Office-mark style; roots turn aside; dry peat inside. | A grave; a curse; a Memorywarden buried there. | What it was for. | None in the Mire [PROPOSAL — DIRECTOR]. |
+| The Peat Row marker [PROPOSAL — DIRECTOR] | A Memorywarden marker of the old earth tradition (H05), set before the war; its purpose is not decided. | "Old stone. Leave it." | Office-mark style; roots turn aside; dry peat inside. | A grave; a curse; a Memorywarden buried there. | What it was for. | None in the Mire [PROPOSAL — DIRECTOR]. |
 
 ### MWS.14 Dialogue
 
@@ -1330,7 +1331,7 @@ MWS-D6.03 HEDDA: (hands over coins from the row's pot) "That's the row's. It's n
 | Element | Source | Status |
 |---|---|---|
 | The Hushed Granary (raised emergency store) | Part 3 Mire proposal; bible MP22 | [NEW, Part 3, adopted MD-5] |
-| Lantern debt (never hereditary); Silt hearing (no appeal rules stated) | Part 3 Mire proposal; bible MD-5 | [NEW, adopted] |
+| Lantern debt (never hereditary); Silt hearing (no appeal rules stated) | Part 3 Mire proposal; bible MD-5 | [NEW, adopted]; the custom as played here (owed by the one walked home, paid on asking) is [PROPOSAL — DIRECTOR] |
 | Rootrest herbalists; griefroot balms | Dossier §VII.4, §XI (griefroot resin "used in calming balms") | [CANON] (resource legacy) |
 | Ysolde; "two holds" | Bible §1.1, §5.2 | [NEW] |
 | Wystan Crale, Tilda Lowry, Briony Jessop | This package | [NEW] |
@@ -1400,7 +1401,7 @@ None. **Under the store** at Running is non-walkable (the hatch step pins Slack 
 
 ### MHG.8 Choices and consequences
 
-**Lantern debt (before the choice, every outcome).** Tilda: "Wystan. The night of the hard frost, three winters back, I walked you home from the jetty. You said if I ever asked." Wystan: "I said." Under lantern debt, the one who was walked home owes a lantern-walk when asked; it is the asker's own and is never inherited. Wystan owes Tilda, not her children; he pays by opening the store and walking a sack home by lantern. The Silt hearing is not overridden: a lantern debt is a person's own gift from a store they keep (MD-5: no hearing rules stated; this is a practice, not a ruling).
+**Lantern debt (before the choice, every outcome) [PROPOSAL — DIRECTOR].** Tilda: "Wystan. The night of the hard frost, three winters back, I walked you home from the jetty. You said if I ever asked." Wystan: "I said." Under lantern debt, the one who was walked home owes a lantern-walk when asked; it is the asker's own and is never inherited. Wystan owes Tilda, not her children; he pays by opening the store and walking a sack home by lantern. The Silt hearing is not overridden: a lantern debt is a person's own gift from a store they keep (MD-5: no hearing rules stated; this is a practice, not a ruling).
 
 | Option | Immediate | Cost | Later |
 |---|---|---|---|
@@ -1613,4 +1614,5 @@ No new runtime system beyond those in bible §11.1–11.2; the quest-start requi
 | Dating and R08 | No calendar dates (weather and bell-nights only). No war history, unit, number or casualty count anywhere. |
 | MD-7 | No Hollowfoot enemy; Jory Wick non-combatant `[MD-7]` in MFT; swap note per quest. |
 | New names checked for collisions | Gwenna and Cadan Tolley, Hedda Fallow, Abe Crosse, Maddy Brook, Wystan Crale, Tilda Lowry, Briony Jessop, Bettany Strand, Hal and Arno Pellow, Nessa: grepped against the repository (no matches outside this file). |
-| Deviations from the bible | (1) Quest-start skill requirements on MRS and MFH (bible §13 recommendation; §7.2 "crew alternative" kept for taught skills). (2) MFT names Jory Wick (Act III cast) at Fenward, consistent with Act III. (3) Hob's pronoun follows Act I ("he"); Act III §E.10's "she" flagged. |
+| Deviations from the bible | (1) Quest-start skill requirements on MRS and MFH (bible §13 recommendation; §7.2 "crew alternative" kept for taught skills). (2) MFT names Jory Wick (Act III cast) at Fenward, consistent with Act III. (3) Hob's pronoun is "he", matching Act I and Act III. |
+| Independent review (2026-11-09) | Fixed: MFH `S05` objective "Drive the dogs off the racks" (drive-off wording, CDR-1) now "Defeat the dogs at the racks" (beat and step table); EM-01 to EM-11 labelled as economy-pass proposal labels, not catalog ids, and Hob's lent bow and commission bow labelled item-name proposals (§0.3); lantern debt as played in MHG tagged [PROPOSAL — DIRECTOR] (MHG.2, MHG.8); the Peat Row marker's form tagged [PROPOSAL — DIRECTOR] (MWS.2, MWS.13); stale Hob-pronoun open item closed (Act III now reads "he"). Verified: every enemy to 0 HP; no step requires ranged (net/call path at every shot); Hunting and Woodcutting start gates are `[GD]` placeholders on the skill each quest builds on, with crew alternatives on taught-skill steps; three states, no fail paths; MFT completes at `S06_table` as Act III `MBL-D2b.21` reads; MD-7 notes; no calendar dates or casualty counts; new names grep clean. |

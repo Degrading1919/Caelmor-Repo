@@ -500,7 +500,7 @@ This is one of the Mire's deliberately unexplained moments (bible §7.5): the st
 | `MR_BANNERLINE` | quieted / tended | `S07` | `S07` closing; `S08` register line | Ridge state; Griefwatch lines; Night Count presentation; convergence (bible §9.1) |
 | `MR_STANDING` | bool | `S08` | — | Mire master commissions (§E.10); CV-M1 gate |
 
-No other flag is set. `MDS07_READ` is read only; whether the `S02` furrow inspect also sets it is the Batch 3 discovery package's call (§12).
+No other region flag is set. The `S02` furrow inspect sets `MDS07_SEEN` and `MDS07_READ` (see the step table) so the discovery does not repeat.
 
 ### 9.3 Night pin
 

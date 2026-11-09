@@ -30,7 +30,7 @@
 | **MBO Completed** (quest state) | — | MBO `S07_book` | **Act III** `MBL-D1.03` (Ide: "Bell went on time. Roster's fixed. One thing in Griefwatch is."); the vigil book cover inspect variant | Flavour only. Completion is set at the moment the player and Ide write the rule into the vigil book, so the book's "fixed hand" exists whenever Act III reads it. Any `MBO_RULE` value satisfies Act III. |
 | `MBO_RULE` | written / second / captain | MBO `S06_rule` | Griefwatch barks; vigil book inspect | Which substitute rule Griefwatch keeps. Act III does not need the value. |
 | `MBO_RANG` | bool (always true on completion) | MBO `S04_ring` | Bell-keeper barks | The player rang a bell-night. |
-| **`MDS07_READ`** | bool, persistent on the character | MDS07 reading (§6) | **Act III `S02`** (`MBL-D3.21`: "You've seen it. Then you know.") | Set when the furrow discovery's reading layer is completed. **Act III request:** the `S02` furrow inspect (`MBL-D3.20`) should also set `MDS07_SEEN` and `MDS07_READ` after its own line plays (§6, MDS07), so the post-story discovery does not repeat. |
+| **`MDS07_READ`** | bool, persistent on the character | MDS07 reading (§6) | **Act III `S02`** (`MBL-D3.21`: "You've seen it. Then you know.") | Set when the furrow discovery's reading layer is completed, or by Act III's `S02` furrow inspect (`MBL-D3.20`), which sets `MDS07_SEEN` and `MDS07_READ` so the post-story discovery does not repeat (§6, MDS07). |
 | `MDS##_SEEN` / `MDS##_READ` | bool | Each discovery | That discovery's later presentation; MDS07_READ as above | Bible §11.2 naming. |
 | `MME##_…` | per card | Each micro-event | The micro-event only, unless stated | — |
 | `MRW_TABLE` | spoke / quiet / elder | MRW `S05_table` | Rootrest barks | How the player met Corwin's account at the table. |
@@ -138,17 +138,17 @@ Griefwatch sits at the foot of Bannerline Ridge (Act III §5). The Dry Muster is
 - **The vigil book** (W2, open to this season): the keeper column has a line for every bell-night. On three nights, the line reads only *"No bell."* in Ide's hand. The book dates nights by weather: *"Hail."* *"First frost."* *"Fog, second night."* (`MBO-I2`). On the nights either side of each, the keeper's line is in **Elin's** hand or a neighbour's, not Tibb's.
 - **The doors** (W4, six lintel inspects): crossed strokes on four doors around each missed night; Tibb's lintel has a crossed stroke *for* Elin before each missed night and a plain stroke missing on the missed night itself.
 
-When all three are read, the player can lay it out to Ide (`MBO-D2`, show-evidence dialogue gated on the inspects): the neighbours took Elin's nights to free her for her father; Tibb took one of Elin's, and gave his own to the Brack household; the Bracks thought they had given theirs away too. On three nights the swap was counted twice. Nobody was at the rope, and everybody thought someone was.
+When all three are read, the player can lay it out to Ide (`MBO-D2`, show-evidence dialogue gated on the inspects): the neighbours took Elin's nights to free her for her father; Tibb took one of Elin's, and gave his own to the Wisby household; the Wisbys thought they had given theirs away too. On three nights the swap was counted twice. Nobody was at the rope, and everybody thought someone was.
 
 **Beat 2 — Tibb and Elin (`S02_people`).** *Objective: Talk to Tibb and to Elin.* `MBO-D3` (Tibb at his bench: he knew, said nothing, "because then they'd ask Elin why, and she'd have to say it in front of the hall") and `MBO-D4` (Elin at her father's bed: she did not ask anyone; they just started doing it). Required: both.
 
-**Beat 3 — Tonight Is Short (`S03_tonight`).** *Objective: Take tonight's bell.* Tonight is one of the unfixed nights: the board says Tibb, the doors say the Bracks, and the Bracks have the fever (a bark at their door). Ide: "Then the witness rings it." (Or "the traveller", by address rule.)
+**Beat 3 — Tonight Is Short (`S03_tonight`).** *Objective: Take tonight's bell.* Tonight is one of the unfixed nights: the board says Tibb, the doors say the Wisbys, and the Wisbys have the fever (a bark at their door). Ide: "Then the witness rings it." (Or "the traveller", by address rule.)
 
 **Beat 4 — The Rope (`S04_ring`).** *Objective: Ring the bell at each turn of the night.* Keep watch at Tibb's bench; at each of the night's three turns (dusk, the dead turn, before first light), climb the ladder and pull the rope (channelled, ~3 s; three pulls). A late pull is rung late with a bark from below ("Late's still a bell."). Between the first and second turn, the round (Beat 5). Sets `MBO_RANG` after the third. Strange moment on the second turn (MBO.8).
 
 **Beat 5 — The Muster Round (`S05_round`).** *Objective: Walk the muster round and light the posts.* After the dusk bell, take the keeper's dipper and lantern (carry-state) and walk the round across the Dry Muster: four lantern-moss posts at the corners. At each, wet the moss from the dipper (interaction ~2 s); it lights (lantern-moss rule: wet moss glows). A dark post with a dry foot is the sign it has not been kept (bible §1.1). At the far post, ring the hand bell (interaction). **MBO-E1:** Bog Hounds hunting along the drill furrows. Walking past the **gap** in the lines shows MDS04's surface (`MDS04_SEEN`); its reading is not required here.
 
-**Beat 6 — The Rule (`S06_rule`).** *Objective: Help the vigil hall write a substitute rule.* Morning, the vigil table: Ide, Tibb, Elin, a Brack, and the Ridge Warden. `MBO-D5`. MBO.11. Sets `MBO_RULE`.
+**Beat 6 — The Rule (`S06_rule`).** *Objective: Help the vigil hall write a substitute rule.* Morning, the vigil table: Ide, Tibb, Elin, a Wisby, and the Ridge Warden. `MBO-D5`. MBO.11. Sets `MBO_RULE`.
 
 **Beat 7 — The Book (`S07_book`).** *Objective: Write the rule in the vigil book.* Ide writes the rule in the keeper column's head, and the player writes last night's line (interaction: *"Bell rung. The witness."* / *"The traveller."*). From here the keeper column is in the fixed form (the "fixed hand" Act III reads). `MBO-D6`. **Quest Completed.**
 
@@ -242,7 +242,7 @@ Small payment from the vigil hall's box; the vigil bell as a world interaction (
 ### MBO.16 Open decisions
 
 1. The Ridge Warden is a role (no name), consistent with Act III's role-named pair. If the Director wants a named Thornfell visitor, only `MBO-D` speaker labels change.
-2. "Bell-nights" in the vigil book are dated by weather; the keeper column never carries a date. Act III's `S08` line ("Ysolde writes ... the date") is outside this file; flagged to the Act III author as a possible conflict with the brief's no-calendar rule.
+2. "Bell-nights" in the vigil book are dated by weather; the keeper column never carries a date. (Resolved: Act III's `S08` register line is now headed by the night's weather, no calendar date.)
 
 ### MBO.17 Internal review log
 
@@ -250,7 +250,7 @@ Small payment from the vigil hall's box; the vigil bell as a world interaction (
 |---|---|
 | Tibb as scapegoat | He is never punished; every outcome writes "roster wrong, not the keeper". |
 | Elin's dignity | She never asked for the swaps; her care is never made a confession. |
-| Ridge Warden | Never says where he came from or how; one line with `TH_STANDING`; Thornfell understatement. |
+| Ridge Warden | Never says where they came from or how; one line with `TH_STANDING`; Thornfell understatement. |
 | Act III read | Completion set at `S07` alongside the book's fixed keeper column. Any `MBO_RULE` satisfies `MBL-D1.03`. |
 | Evidence rule | Board, book and doors; the hounds carry nothing. |
 | MD-7 swap note | No Hollowfoot content. No change under either ruling. |
@@ -262,18 +262,18 @@ Small payment from the vigil hall's box; the vigil bell as a world interaction (
 | Character | Knows | Doesn't know | Voice |
 |---|---|---|---|
 | **Ide Larrow** [NEW, bible §5.2] | The bell, the board, the book; that the hall wants Tibb off. | About the swaps. | Clipped; counts people; a closure or a rule is a weight she carries. |
-| **Tibb Ormer** [NEW], old bell volunteer | The swaps; that he gave his night away. | That the Bracks gave theirs too. | Slow, mild, stubbornly loyal; "I'll not say it in front of the hall." |
+| **Tibb Ormer** [NEW], old bell volunteer | The swaps; that he gave his night away. | That the Wisbys gave theirs too. | Slow, mild, stubbornly loyal; "I'll not say it in front of the hall." |
 | **Elin Copse** [NEW], carer | That neighbours took her nights. | How they arranged it. | Tired, proud, embarrassed by kindness. |
 | **Aldous Copse** [NEW] | — | — | Bedridden; one line, dry. |
 | **Visiting Ridge Warden** (role) [CANON visits] | How Wardens keep a watch roster. | Mire households. | Thornfell understatement; calls the player "walker"; never says where they came from or how. |
-| **Brack household** (role) | That they gave their night away. | That Tibb gave his to them. | Coughing; fever. |
+| **Wisby household** (role) | That they gave their night away. | That Tibb gave his to them. | Coughing; fever. |
 
 #### Barks
 
 | Id | Speaker | Condition | Line |
 |---|---|---|---|
 | `MBO-B0` | MARSHWARDEN | Closure gate, MR-M2 done, first visit | "Ide wants somebody who isn't anybody's cousin. That's you, by the look." |
-| `MBO-B1` | BRACK (through the door, coughing) | Beat 3 | "We've the fever. We gave tonight away anyway. To Tibb. Didn't we?" |
+| `MBO-B1` | WISBY (through the door, coughing) | Beat 3 | "We've the fever. We gave tonight away anyway. To Tibb. Didn't we?" |
 | `MBO-B2` | TIBB (from below) | Late pull | "Late's still a bell." |
 | `MBO-B3` | TIBB | Post lit on the round (seen from the ladder) | "There's your corner. Three more." |
 | `MBO-B4` | CORRA SALLIS | `MR_BANNERS = restored`, vigil hall | "That's the Banner That Sank Twice. Over the door. For whoever." |
@@ -298,7 +298,7 @@ MBO-D1.07 IDE: "Because everyone in Griefwatch is somebody's neighbour, and neig
 
 ```
 MBO-D2.01 IDE: "Well?"
-  > [all three read] "The neighbours have been taking Elin Copse's nights. Tibb took one and gave his own to the Bracks. The Bracks thought they'd given theirs away too."   → MBO-D2.02
+  > [all three read] "The neighbours have been taking Elin Copse's nights. Tibb took one and gave his own to the Wisbys. The Wisbys thought they'd given theirs away too."   → MBO-D2.02
   > "I haven't finished."                                            → end
 MBO-D2.02 IDE: (looks at the board a long time) "Counted twice."
 MBO-D2.03 IDE: "So on those nights everybody thought somebody had the rope."
@@ -308,7 +308,7 @@ MBO-D2.05 IDE: "Talk to Tibb. And Elin. I'll not have it said I decided without 
 
 ```
 MBO-D3.01 TIBB: (on his bench) "You've been at the doors. I saw you."
-MBO-D3.02 TIBB: "I knew. Course I knew. I'd given my night to the Bracks so I could take Elin's."
+MBO-D3.02 TIBB: "I knew. Course I knew. I'd given my night to the Wisbys so I could take Elin's."
 MBO-D3.03 TIBB: "If I'd said, they'd have asked Elin why she needed it. She'd have had to say it in front of the hall." (beat) "I'll not have that."
   > "They want you off the rope."                                    → MBO-D3.04
   > "Do you want to stop?"                                           → MBO-D3.06
@@ -328,7 +328,7 @@ MBO-D4.04 ELIN: "Father."
 MBO-D4.05 ELIN: "No." (beat) "Yes. If it stops Tibb being blamed. Then yes."   → end
 MBO-D4.07 ELIN: "I know. That's what's hard."   → end
 
-MBO-D4b.01 IDE: (at the bench, after both) "Tonight's one of the wrong ones. Board says Tibb. The Bracks' door says Bracks. Bracks have the fever."
+MBO-D4b.01 IDE: (at the bench, after both) "Tonight's one of the wrong ones. Board says Tibb. The Wisbys' door says Wisbys. Wisbys have the fever."
 MBO-D4b.02 IDE: [witness] "Then the witness rings it." / [else] "Then the traveller rings it."
 MBO-D4b.03 IDE: "Three turns. Dusk, the dead turn, before first light. Round the muster after the first: light the corners, ring the far post."   {event: S03 complete}  → end
 ```
@@ -348,7 +348,7 @@ MBO-D5.10 ELIN: "Written." (beat) "All right. I can live with written."
 MBO-D5.11 WARDEN: "Good." (that is all)
       {set MBO_RULE = written}  → MBO-D5.40
 MBO-D5.20 TIBB: "I'll be second. I'm good at second."
-MBO-D5.21 IDE: "Everyone rings more." / BRACK (coughing): "Fine."
+MBO-D5.21 IDE: "Everyone rings more." / WISBY (coughing): "Fine."
       {set MBO_RULE = second}  → MBO-D5.40
 MBO-D5.30 IDE: "Then it's mine." (beat) "It's a weight. I'll carry it."
 MBO-D5.31 ELIN: "And I ask you. Out loud." / IDE: "And I say yes."
@@ -373,7 +373,7 @@ MBO-D6.05 IDE: (pays from the hall's box) "Bell went on time. Write that somewhe
 | `MBO-I1` | Roster board | "Reed strips pegged against bell-nights. Three of Tibb's strips have a black peg: missed." |
 | `MBO-I2` | Vigil book, this season | "One line a bell-night. 'Hail. No bell.' 'First frost. No bell.' 'Fog, second night. No bell.' Ide's hand. Either side, Elin's hand, or a neighbour's." |
 | `MBO-I3` | Lintel chalk (Tibb) | "A crossed stroke the night before each missed night. No stroke on the night itself." |
-| `MBO-I4` | Lintel chalk (Brack) | "Crossed strokes: a night given away. The same nights." |
+| `MBO-I4` | Lintel chalk (Wisby) | "Crossed strokes: a night given away. The same nights." |
 | `MBO-I5` | Lintel chalk (others) | "Crossed strokes, here and there, round Elin's nights." |
 | `MBO-I6` | Lantern-moss post (dark) | "Dry at the foot. Nobody's kept it tonight." / lit: "Wet. Glowing." |
 | `MBO-I7` | Vigil book (after) | "The keeper column's head carries a rule now, in Ide's hand. The lines below are in the fixed form." |
@@ -633,7 +633,7 @@ MRW-D5.03 CORWIN: (coins) "Emberholt coin spends the same. Take it."
 
 Nine Stakes is an old marked crossing at the edge of the Field of Fallen Standards: nine Reedsward depth stakes set in bog-oak sockets across a broad shallow, telling anyone on the bank whether it will take them. Since the causeway went down this spring, most traffic uses the causeway; the people who still cross at Nine Stakes are the ones who will not walk past the standards, and they are the ones being drowned. Mud-Clad Raiders have pulled the stakes and re-set them with the bands turned, so the crossing reads Slack when it is Sour, and they wait in the reeds for whoever wades out and goes in to the waist. Halsey Fenner, a Marshwarden, lost a ferry family's cart there last week and nobody in it came out of the water dry. The player reads the false stakes from the rise, clears the raider groups in their mud, fights the Mud-Boss on the reed island at the crossing's middle, and then does the real work: carries nine stakes back and sets each in its own socket by the wear ring on the bog-oak, with the right face to the bank. One socket is off the line, pointing down a side channel, worn as deep as the others. The ferry book at Halsey's post says why: in the war a stakeman moved one stake to send a fleeing group of households down the side channel where nobody could follow at Sour. The ninth stake goes back on the line; the side socket is marked. At dusk the moss caps on the stakes light one after another from the near bank to the far, as if someone were walking across with a lantern.
 
-**Remember:** nine lights crossing the water with nobody carrying them. **Want next:** to know who the stakeman was (the ferry book does not say).
+**Remember:** nine lights crossing the water with nobody carrying them. **Want next:** to know who Stakeman Varne was and what became of him (the ferry book gives only the name).
 
 ### MNK.2 Selection record
 
@@ -693,7 +693,7 @@ Nine Stakes lies at the Field's edge off the Standards Causeway (bible §4.2 rou
 
 **Beat 2 — The Reeds (`S02_clear`).** *Objective: Clear the raiders from the reed beds.* Keep watch to Slack (Halsey pins it on the first keep watch). Two raider groups (MNK-E1 near reeds, MNK-E2 far reeds). Either order.
 
-**Beat 3 — The Island (`S03_boss`).** *Objective: Take the reed island.* The Mud-Boss and two mudcutters on the island (MNK-E3; MNK.7.1). Stolen goods under hides (ordinary loot plus the ferry family's cart goods as a carry-state bundle for Halsey; nothing evidentiary).
+**Beat 3 — The Island (`S03_boss`).** *Objective: Take the reed island.* The Mud-Boss on the island, with two mudcutters lying as mounds at its edge (MNK-E3; MNK.7.1). Stolen goods under hides (ordinary loot plus the ferry family's cart goods as a carry-state bundle for Halsey; nothing evidentiary).
 
 **Beat 4 — Pull Them (`S04_pull`).** *Objective: Pull the false stakes.* Nine stakes, each one interaction (~2 s) to lift; carried to the island (carry-state, one at a time; or stacked on the island by lifting near it). The sockets are now bare.
 
@@ -711,7 +711,7 @@ Tuned for MR-M1's Competent identity, upper end (MD-10).
 |---|---|---|---|---|---|---|
 | **MNK-E1** | 2 × Mud-Clad Raider (mudcutter), 1 × Mud-Clad Raider (reed-slinger) | Near reed bed (N3 west) | Mudcutters lie as mud mounds and rise when the player wades within ~6 m; the slinger stays in the reeds | **Rise:** the mound's steam thickens and it shifts (~1.2 s). **Mudcutter cleave:** weapon dragged back through the mud (~0.9 s). **Sling:** the slinger's arm whirls twice (~1.4 s), then a clod that blinds briefly on hit (standard short blind) | Required. Teaches the breathing mound | 45–60 s |
 | **MNK-E2** | 1 × mudcutter, 2 × reed-slinger | Far reed bed (N3 east) | Slingers on two hummocks, crossfire; the mudcutter guards the reed path between | As E1 | Required. Ranged players can trade with slingers across the water; melee players use the reed path, which is screened from one slinger | 50–70 s |
-| **MNK-E3** | **Mud-Boss** + 2 × mudcutter | Reed island (N4) | Elite; spec below | See MNK.7.1 | Required | 2.5–3.5 minutes |
+| **MNK-E3** | **Mud-Boss** + 2 × mudcutter (lying as mounds at the island's edge) | Reed island (N4) | Elite; spec below. The mudcutters rise on the Boss's **Call** at 60%, or earlier if the player wades within ~6 m of a mound | See MNK.7.1 | Required | 2.5–3.5 minutes |
 
 #### MNK.7.1 Elite spec — the Mud-Boss
 
@@ -721,7 +721,7 @@ Tuned for MR-M1's Competent identity, upper end (MD-10).
 | Read | A big man in a coat of dried mud plates over oilcloth, a long hooked pole (a stake-puller) and a short blade. |
 | **Hook pull** (all phases) | He sets the pole's hook low and leans back (**1.3 s**); a straight pull that drags a player within 5 m toward him and into the shallows on the island's edge (slow on landing). |
 | **Mud plate** (all phases) | Below each third of health, he wades into the shallows and re-coats (**2.0 s**, kneeling, scooping mud onto his chest). A re-coat gives a damage-reduction plate on the front (readable: wet grey plates). Hitting him during the re-coat interrupts it. Ranged can interrupt from range; melee from close. |
-| **Call** (P2) | At 60% he shouts once (**1.0 s**) and both remaining mudcutters rise from the island's edge mounds (if E3's mudcutters are already defeated, nothing comes). |
+| **Call** (P2) | At 60% he shouts once (**1.0 s**) and any of E3's two mudcutters still lying as mounds rise from the island's edge (if both have already risen or been defeated, nothing comes). |
 | **Sweep** (P3, below 30%) | He swings the pole in a full circle (**1.6 s**, pole held level and drawn back) that knocks down anyone inside 4 m. Cadence ~10 s. |
 | Arena | The island: dry centre, shallow edges (slow), reed screen. Two pole-frame uprights for cover against slingers if any remain. |
 | End | At 0 HP he falls; ordinary defeat. Halsey, from the bank: "That's the last of them." (one sober line). |
@@ -974,7 +974,7 @@ Tuned for MR-M2's Competent identity, upper end (MD-10).
 |---|---|
 | Family | Tarnish Stalkers, elite (bible §10). An animal; fights to 0 HP (CDR-1); harvestable per economy. |
 | Read | A huge iron-grey stag, flanks streaked rust-red, antlers stained black at the base and rust at the tips, wide as a cart. Moves in jerks: it starts, stops, turns its head sharply. |
-| **The stop** (core pattern) | The Hart never charges from a standing start on bare ground. It always runs to the **nearest thick ironbloom patch** (deep rust or rust), **stops**, lowers its head to lick (**2.5 s**, completely still: the opening for heavy hits), then lifts its head and fixes on the nearest two-legged target. Patches thin from deep rust to orange after it has licked them twice (visible colour change), so the arena's stops move as the fight goes on. Players who read the patches are standing where it will stop. |
+| **The stop** (core pattern) | The Hart never charges from a standing start on bare ground. It always runs to the **nearest thick ironbloom patch** (deep rust or rust), **stops**, lowers its head to lick (**2.5 s**, completely still: the opening for heavy hits), then lifts its head and fixes on the nearest two-legged target. Patches thin from deep rust to orange after it has licked them twice (visible colour change), so the arena's stops move as the fight goes on. When no thick patch is left, the patch that thinned first darkens back to rust (~2 s colour swell, readable), so there is always exactly one next stop and the loop never stalls. Players who read the patches are standing where it will stop. |
 | **Charge** (all phases) | After a stop: head up, two forefoot stamps throwing red dust (**1.4 s**), then a straight charge across the bowl. Heavy damage and knockdown. Stepping behind a stump makes it hit the stump (2 s stagger: free hits). Cadence: after every stop. |
 | **Erratic run** (all phases) | Between stops it zigzags at speed; contact deals moderate damage. Its path is random; its destination is not (the nearest thick patch). |
 | **Antler rake** (P2, 70% and below) | At a stop, instead of licking, it rakes the patch with its antlers (**1.6 s**, head swinging low): a cloud of **ironbloom spores** fills the patch for 8 s. Standing in it: a standard damage-over-time (spores, dossier: "dangerous in high concentrations"). The cloud is rust-coloured and clearly bounded. |
@@ -1345,8 +1345,8 @@ Each discovery has a **surface** (what anyone sees), a **reading** (what a caref
 | Surface | From the edge of Bran's watchpost platform: a trench ploughed through the peat below the ridge, wide as a road, full of broken weapons and banner rags. No path leads down to it. |
 | Reading | **Inspect the furrow from the platform edge**, then **ask Bran** about it (dialogue). BRAN: "Something big walks there when there's fighting." (beat) "Not tonight's trouble." Inspect: *"A trench ploughed through the peat by something huge. Broken weapons and rags of banner in it. It goes out of sight both ways."* |
 | Withheld | **The Sorrowback.** Never named, never followed in the Mire arc (bible §2.4; CV-M2). Bran does not say what walks there. |
-| Availability | After MR-M2, whenever Bran is at his watchpost: any time before MR-M5 starts, and after MR-M5 completes. While MR-M5 is Active, Bran is at Griefwatch and MR-M5's own `S02` furrow inspect (`MBL-D3.20`) is the presentation. |
-| Flags | `MDS07_SEEN` on the platform-edge inspect. **`MDS07_READ`** (persistent bool) when Bran's line has played after the inspect. **Read by Act III** `S02` (`MBL-D3.21`: "You've seen it. Then you know."). **Request to Act III:** after `MBL-D3.20` plays (the player who never read it before), set `MDS07_SEEN` and `MDS07_READ`, so the post-story discovery shows Bran's post-story line ("Still there. Still not tonight's trouble.", Act III §E) instead of repeating the first reading. |
+| Availability | After MR-M2, whenever Bran is at his watchpost: any time before MR-M5 starts, and after MR-M5 completes. While MR-M5 is Active, Bran's lines belong to MR-M5, and its own `S02` furrow inspect (`MBL-D3.20`) is the presentation. |
+| Flags | `MDS07_SEEN` on the platform-edge inspect. **`MDS07_READ`** (persistent bool) when Bran's line has played after the inspect. **Read by Act III** `S02` (`MBL-D3.21`: "You've seen it. Then you know."). **Act III honours this:** its `S02` furrow inspect sets `MDS07_SEEN` and `MDS07_READ` (Act III steps table), so the post-story discovery shows Bran's post-story line ("Still there. Still not tonight's trouble.", Act III §E) instead of repeating the first reading. |
 | Links | MR-M5 `S02`; CV-M2 seed (bible §8.2). |
 
 ### MDS08 — The Last Root of Sorrow (MP16, Rootrest)
@@ -1406,7 +1406,7 @@ No runtime need beyond bible §11.1–11.2 and standard requirement checks.
 | Check | Result |
 |---|---|
 | Brief fit (bible §7.2–7.5) | MBO, MRW, MNK, MRH match their slate rows and contracts (MBO Bog Hounds on the Dry Muster and a roster-rule choice; MRW no combat, no fail; MNK Raiders and the Mud-Boss to 0 HP, no fail; MRH the Rust Hart to 0 HP, harvestable). MME01–MME10 and MDS01–MDS10 match §7.4/§7.5 entry for entry; MDS02, MDS05 (MME05) and MDS07's withheld layers kept. |
-| Mains' reads | **MBO Completed** at `S07_book` with the vigil book's keeper column in its fixed form (Act III `MBL-D1.03` and the vigil-book inspect). **`MDS07_READ`** set by MDS07's reading (persistent bool), listed in §0.2; request to Act III to set it after `MBL-D3.20`. *Lifting Day* and *A Table for the Wet* are not in this file (MLD: Names and Lanterns package; MFT: Work and Skills package, completion at `S06_table`). |
+| Mains' reads | **MBO Completed** at `S07_book` with the vigil book's keeper column in its fixed form (Act III `MBL-D1.03` and the vigil-book inspect). **`MDS07_READ`** set by MDS07's reading (persistent bool), listed in §0.2; Act III's `S02` furrow inspect also sets it. *Lifting Day* and *A Table for the Wet* are not in this file (MLD: Names and Lanterns package; MFT: Work and Skills package, completion at `S06_table`). |
 | CDR-1 | Every enemy to 0 HP; the Mud-Boss's call and the Hart's bellow are phase barks; no yield, flee or scatter; no SX; no defeated enemy speaks. |
 | CDR-2 | Melee and ranged both viable in every fight; MNK slingers, the Boss's re-coat and the Hart's charge are designed so neither style trivialises them; nothing requires ranged. |
 | CDR-3 | No release wording. |
@@ -1416,5 +1416,6 @@ No runtime need beyond bible §11.1–11.2 and standard requirement checks.
 | MD-7 | No Hollowfoot content anywhere in this file; every quest carries a "no change" swap note. |
 | `[CAUSEWAY]` | MNK hook and `MNK-B0` tagged. |
 | Quest items | 0. |
-| New names checked for collisions | Tibb Ormer, Elin and Aldous Copse, Corwin and Hessel Tey, Gilly Ruddle, Halsey Fenner, Annot Reeve, Varne (ferry book): grepped against the repository; no collisions outside this file. |
+| New names checked for collisions | Tibb Ormer, Elin and Aldous Copse, the Wisby household (renamed from Brack: Lowmark's Brack and Thornfell's Thyra Brack), Corwin and Hessel Tey, Gilly Ruddle, Halsey Fenner, Annot Reeve, Varne (ferry book): grepped against the repository; no collisions outside this file. |
 | Deviations from the bible | (1) MBO's Ridge Warden is a role (no name), matching Act III. (2) MDS07 is available before MR-M5 at Bran's watchpost (Bran is there by canon) and after; during MR-M5, Act III's own inspect presents it. (3) MRH's quest-start Hunting requirement (bible §13 recommendation). |
+| Independent review (2026-11-09) | Fixed: MBO "Brack" household renamed **Wisby** (collided with Lowmark's Brack and Thornfell's Thyra Brack); MNK "Want next" said the ferry book does not name the stakeman while the entry names Varne (now asks who Varne was); MNK-E3 mudcutters were both "on the island" and summoned by the Call (now mounds at the edge that rise on the Call or on approach); MRH arena had only two thick patches that thin after two licks each, so the stop loop could run dry (now the first-thinned patch darkens back to rust); MDS07 and §0.2 still requested Act III to set `MDS07_SEEN`/`MDS07_READ`, which Act III `S02` now does (worded as honoured); MDS07 said Bran is at Griefwatch during MR-M5 (Act III `S02` has him at his watchpost); MBO.16 stale Act III "date" item closed; Ridge Warden pronoun made "they". Verified: Mud-Boss, raiders, hounds, stalkers and the Rust Hart all to 0 HP with no flee; melee and ranged viable, none required; MBO completion at `S07_book` matches Act III `MBL-D1.03` and the vigil-book inspect; discoveries keep three layers and leave the Sinking Star, R08 counts, the fire-roads man (unresolved name) and Mirebone (provisional) unresolved; no calendar dates or casualty counts. |

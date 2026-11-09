@@ -18,7 +18,7 @@
 | **MCF** | Cloth for Sale | Cloth and Colour (2/2); Combat challenge | MBS Completed | Marshfall jetty; the Reed Hide | **track**, assault, recover | **Follow a trail of cut reed and fibre**, read a go-between's ledger, assault a drowned-trench camp by day, carry the cloth home or burn it | Around the stripped cloth stack the reeds lie flat in a ring, as if something heavy had sat there | **`MR_CLOTH`** (returned / burned) |
 | **MFW** | The Father at the Ford | Standalone; Memory/lore | MR-M3 Completed | The Wading Ford; Blackwater Landing | **watch**, read, ask | **Keep a dusk hide at a ford**, hear the names a figure calls, find them in an old ferry list and a family's naming board | The figure turns toward the player's hide, opens its mouth, and the name it calls is the player's own word for "here" | `MFW_TOLD` (told / kept) |
 | **MMR** | The Mud That Remembers | Standalone; Environmental | MR-M2 Completed | The Drowned Encampment (landward side) | **observe**, track, correct | **Read prints that loop**, follow fleeing does as a warning, clear Echoes woken by a scholar's survey, find the camp's ration board | After the strings come up, the prints fill with water one after another, in walking order, round the loop once more | `MMR_MAP` (corrected / annotated) |
-| **MSG** | The Singing Trench | Standalone; Environmental | MR-M1 Completed | The Singing Trench (Field edge) | **listen**, dig, prop | **Tune a trench in a storm**: open and close three vents between gusts to draw water off a failing revetment, then prop it | After the storm drops, the trench keeps humming for a few seconds into still air | none (quest-local `MSG_LISTENED`) |
+| **MSG** | The Singing Trench | Standalone; Environmental | MR-M1 Completed | The Singing Trench (Field edge) | **listen**, dig, prop | **Tune a trench in a storm**: open and close three vents, listening bay by bay, to draw water off a failing revetment, then prop it | After the storm drops, the trench keeps humming for a few seconds into still air | none (quest-local `MSG_LISTENED`) |
 
 **Length targets:** MBS 30–40 min; MCF 35–45; MFW 25–35; MMR 30–40; MSG 25–35.
 
@@ -92,13 +92,13 @@ Only MCF feeds a main quest: `MR_CLOTH = returned` puts the recovered cloth at C
 | MCF | Tracks, reads a ledger, assaults a camp in three stages, carries bundles under no pressure, burns or returns | MNK (raiders at a crossing; stakes); MR-M2 (Wraiths, standards) |
 | MFW | Sets a hide at dusk, listens, reads a list and a board | MLL (night work at water with a family; here stillness, alone) |
 | MMR | Tracks prints into loops, pulls survey stakes under Echo pressure, reads a ration board | MR-M3 (Echoes from a boat) |
-| MSG | Opens and closes vents by ear in gust windows, then props timber | MR-M4 (sluice order read from stains; here a combination read by sound, against a timer of gusts) |
+| MSG | Opens and closes vents by ear, holds them under Reedlurker pressure, then props timber | MR-M4 (sluice order read from stains; here a combination read by sound) |
 
 ### 0.8 Ids and names used
 
 Content ids (suggested): `mire.side.a_banner_with_no_side`, `mire.side.cloth_for_sale`, `mire.side.the_father_at_the_ford`, `mire.side.the_mud_that_remembers`, `mire.side.the_singing_trench`.
 
-New minor names [NEW] (checked for collisions on 2026-11-08): **Eskil Stenning** (Thornfell Ridge Warden visiting Griefwatch, MBS); **Tess Albery** (a visitor "from the lowlands", MBS); **Abner Lusk** (named only; a war-years ferryman, MFW); **Morwen Lusk** and **Nye Lusk** (his great-grandchildren, MFW); **Granny Lusk** (his daughter, role name, MFW); **Lenna Coote** (visiting Memorykeeper scholar from Griefwatch, MMR); **Ned Siskin** (reed cutter, MSG). Bible cast: Calwen Reed-Binder, Mara Fenholt, Corra Sallis, Ide Larrow, Gethin Scarth, Hob Merrit, Rowan Mirewake, Ysolde Haverel; Prue Calloway from the companion file.
+New minor names [NEW] (checked for collisions on 2026-11-08): **Eskil Stenning** (Thornfell Ridge Warden visiting Griefwatch, MBS); **Tess Albery** (a visitor "from the lowlands", MBS); **Abner Lusk** (named only; a war-years ferryman, MFW); **Morwen Lusk** and **Nye Lusk** (his children, born in the war's last years, MFW); **Granny Lusk** (his widow, role name, MFW); **Lenna Coote** (visiting Memorykeeper scholar from Griefwatch, MMR); **Ned Siskin** (reed cutter, MSG). Bible cast: Calwen Reed-Binder, Mara Fenholt, Corra Sallis, Ide Larrow, Gethin Scarth, Hob Merrit, Rowan Mirewake, Ysolde Haverel; Prue Calloway from the companion file.
 
 ---
 
@@ -170,7 +170,7 @@ Among the standards that came off the causeway, **Calwen Reed-Binder** has one h
 - **Calwen's store book** (`MBS-I2.01`): the day it came in (the morning after the Risen Colour), the site, "cloth sound, tabs rotten, two hands of mending". Never whose.
 - **Corra** (`MBS-D3`): Bannerbearers say a banner mended by the other side "belongs to both"; she adds it's a saying, not a rule. With `MBR_CORRA_CORNER`, she offers to take a corner again.
 
-**Beat 3 — The visitors (`S03_visitors`).** *Objective: Hear both visitors.* **Eskil** at Griefwatch (`MBS-D4`): the high-pass stitch; his company's grandfathers "held this ground"; with `TH_STANDING`, a line about Stonewake keeping honest accounts now, "so let me take an honest one home". **Tess** at Sorrowmere (`MBS-D5`): her grandmother "mended for the lowland companies"; the darns are what her grandmother taught her. Both are sincere. Neither has a second hold.
+**Beat 3 — The visitors (`S03_visitors`).** *Objective: Hear both visitors.* **Eskil** at Griefwatch (`MBS-D4`): the high-pass stitch; his company's grandfathers "held this ground"; with `TH_STANDING`, a line about the Assembly keeping honest accounts now, "so let me take an honest one home". **Tess** at Sorrowmere (`MBS-D5`): her grandmother "mended for the lowland companies"; the darns are what her grandmother taught her. Both are sincere. Neither has a second hold.
 
 **Beat 4 — The tabs (`S04_tabs`).** *Objective: Re-stitch the hoist tabs.* **Leatherworking ~[GD: low–mid]**: two tabs, each unpick (2 s) and re-stitch (4 s); segments persist. **Crew alternative:** Calwen overnight (`MBS_TABS = crew`).
 
@@ -192,7 +192,7 @@ None. **MD-7 swap note:** no Hollowfoot content.
 | 3–8 s | **Mud out** | Brown runs off. Then two colours come out of the weave: a rust-red from the ground cloth, a blue-grey from the darns. |
 | 8–14 s | **Meet** | The two threads of colour drift across the frame toward each other and run together into a single dull violet in the water. It sits in the frame and does not separate. |
 | After | **People** | Tess: "Oh." Eskil says nothing. Calwen: "Dye does that. Old dye." (beat) "I've washed a thousand. I don't remember it doing that." |
-| What it means | Dye chemistry, or not. It proves nothing about either side; nobody says it does. |
+| What it means | | Dye chemistry, or not. It proves nothing about either side; nobody says it does. |
 
 ### MBS.8 Steps and completion events
 
@@ -308,7 +308,7 @@ MBS-D3.02 [MBR_CORRA_CORNER] CORRA: "If it's folded, I'll take a corner. I alway
 MBS-D4 (Eskil, Griefwatch)
 MBS-D4.01 ESKIL: "That's our seam. Double running, cord at the hoist. My grandmother stitched it on everything, even sacks."
 MBS-D4.02 ESKIL: "Our grandfathers said companies held this ground. Nobody believes them at home. This would be something to show."
-MBS-D4.03 [TH_STANDING] ESKIL: "Stonewake keeps honest accounts now. Let me take an honest one home."
+MBS-D4.03 [TH_STANDING] ESKIL: "The Assembly keeps honest accounts now. Let me take an honest one home."
   > [lens done] "The mends are lowland. And one is a field-dressing stitch."   → MBS-D4.10
   > "I'll tell Calwen."                                                        → end
 MBS-D4.10 ESKIL: (a long look) "...Then somebody else had it after us." (beat) "Or before."
@@ -356,7 +356,7 @@ MBS-D6.42 CALWEN: "One more thing. Marshfall jetty. Someone's selling banner clo
 
 ### MCF.1 The quest in one paragraph
 
-At the **Marshfall jetty**, **Gethin Scarth** has a stall of "commemorative goods": strips of old banner cloth folded into little squares, tied with reed, sold to anyone who wants a piece of the Field. He is polite, evasive and plainly frightened of whoever supplies him. Calwen knows the cloth by its weave: it is coming off standards on the Field. The player reads **Gethin's ledger** at the stall (he lets them; he is relieved someone asked), which records lots by marks, never names. Then the player **tracks** the cloth to its source (Hunting): reed cut at shoulder height, threads snagged on stems, boots in silt, off the causeway to the **Reed Hide**, a Rootshadow cutters' camp in a drowned trench where risen standards are being stripped bare on frames. The cutters work by day because the risen walk at dusk; they strip the cloth so there is nothing left to rise. The player assaults the Hide in three stages and brings the cloth out: three bundles, carried. Then the choice: **return** it to Calwen to be washed and laid, or **burn** it on the jetty in front of Gethin so that no strip of it can ever be sold.
+At the **Marshfall jetty**, **Gethin Scarth** has a stall of "commemorative goods": strips of old banner cloth folded into little squares, tied with reed, sold to anyone who wants a piece of the Field. He is polite, evasive and plainly frightened of whoever supplies him. Calwen knows the cloth by its weave: it is coming off standards on the Field. The player reads **Gethin's ledger** at the stall (he lets them; he is relieved someone asked), which records lots by marks, never names. Then the player **tracks** the cloth to its source (Hunting): reed cut at shoulder height, threads snagged on stems, boots in silt, off the causeway to the **Reed Hide**, a Rootshadow cutters' camp in a drowned trench where risen standards are being stripped bare on frames. The cutters work by day because the risen walk at dusk; they say stripping a standard stops it rising, and they are wrong (the bare poles still lean). The player assaults the Hide in three stages and brings the cloth out: three bundles, carried. Then the choice: **return** it to Calwen to be washed and laid, or **burn** it on the jetty in front of Gethin so that no strip of it can ever be sold.
 
 **Remember:** reeds lying flat in a ring round a stack of stolen cloth. **Want next:** Bannerline, where Calwen will lay it at his stone if it came home.
 
@@ -395,7 +395,7 @@ At the **Marshfall jetty**, **Gethin Scarth** has a stall of "commemorative good
 | **Revelation role** | Self-contained. |
 | **Recurring evidence** | **Gethin's ledger** (read in place at the stall): marks for buyers and suppliers, no names, no route. |
 | **State compliance** | Inactive → Active on `MCF-D1` accept; Completed on `MCF-D6` end. No fail. Cleared stages persist. Resume hook: Calwen (`MCF-B1.03`) or Gethin's empty stall. |
-| **Combat compliance** | Rootshadow cutters (cutter, poisoner) fight to 0 HP with the ordinary defeat presentation. Gethin never fights and is never targetable. Melee or ranged in every stage; ranged is useful on poisoners, never required. No Wraiths: the Hide's standards are stripped bare. |
+| **Combat compliance** | Rootshadow cutters (cutter, poisoner) fight to 0 HP with the ordinary defeat presentation. Gethin never fights and is never targetable. Melee or ranged in every stage; ranged is useful on poisoners, never required. No Wraiths: the assault is by day and Wraiths walk only at dusk. |
 
 ### MCF.4 The places
 
@@ -419,7 +419,7 @@ At the **Marshfall jetty**, **Gethin Scarth** has a stall of "commemorative good
 
 **Beat 3 — The mouth (`S03_mouth`).** *Objective: Clear the Hide's lookout.* **MCF-E1**.
 
-**Beat 4 — The frames (`S04_frames`).** *Objective: Clear the stripping frames.* **MCF-E2**. After: inspect the bare standards (`MCF-I2.01`): no cloth, nothing to rise.
+**Beat 4 — The frames (`S04_frames`).** *Objective: Clear the stripping frames.* **MCF-E2**. After: inspect the bare standards (`MCF-I2.01`): no cloth, and the poles still lean.
 
 **Beat 5 — The stack (`S05_stack`).** *Objective: Take the cloth back.* **MCF-E3**. Then **the strange moment** (MCF.7). Lift three bales (carry-state; one at a time, slow walk while carrying).
 
@@ -427,7 +427,7 @@ At the **Marshfall jetty**, **Gethin Scarth** has a stall of "commemorative good
 
 **Beat 7 — Return or burn (`S07_cloth`).** *Objective: Decide what happens to the cloth.* At the jetty, Gethin and, sent for, Calwen (`MCF-D5`). Choice (`MR_CLOTH`):
 - **Returned:** Calwen takes the bales to the sanctuary to be washed and laid. "Every piece. Even the squares." Gethin hands over his stall stock without being asked.
-- **Burned:** the player burns the bales in the jetty brazier (interaction, 3 × 3 s). Calwen does not come; he sends word: "Burned is laid, too. Hotter." Gethin watches it go.
+- **Burned:** the player burns the bales in the jetty brazier (interaction, 3 × 3 s). Calwen says one line, "Burned is laid, too. Hotter.", and leaves before the fire is lit. Gethin tips his own stock in after the bales.
 
 Gethin closes his stall either way (`MCF-D6`). Quest Completed. Sets `MR_CLOTH`.
 
@@ -453,7 +453,7 @@ Tuned for Competent-to-Advanced identity (after MR-M2; MD-10).
 | 0–4 s | **The ring** | Around the cloth stack the reeds lie flat in a clean ring about four paces across, all pointing outward, as if something heavy had sat there and gone. The thatch on the stack is undisturbed. |
 | Inspect | Inner voice | *"Flattened outward, all round. Nothing walked here. Something sat."* |
 | After | | Hob (if present), from the bank: "Deer lie like that." (beat) "Deer don't lie on cloth." |
-| What it means | Never explained. It is not evidence and identifies nothing. |
+| What it means | | Never explained. It is not evidence and identifies nothing. |
 
 ### MCF.8 Steps and completion events
 
@@ -479,7 +479,7 @@ Tuned for Competent-to-Advanced identity (after MR-M2; MD-10).
 | Option | Immediate | Cost | Later |
 |---|---|---|---|
 | **Returned** — *"Calwen. Every piece, even the squares."* | Bales and stall stock go to the sanctuary; Calwen washes them over days and lays them in a new row. | Slow; the cloth exists, and a cutter could come back for it (they don't; bark). | MR-M5: Calwen lays a folded square at his stone (`MBL-B7.2a`). |
-| **Burned** — *"Burn it here. Nobody sells it again."* | Burned in the jetty brazier; Gethin's stock with it. | Calwen is not there; the cloth is not laid with the others. He sends word. | MR-M5: no cloth line. Calwen still stands at S4. |
+| **Burned** — *"Burn it here. Nobody sells it again."* | Burned in the jetty brazier; Gethin's stock with it. | Calwen leaves before it is lit; the cloth is not laid with the others. | MR-M5: no cloth line. Calwen still stands at S4. |
 
 ### MCF.10 Rewards, failure, co-op
 
@@ -517,7 +517,8 @@ Tuned for Competent-to-Advanced identity (after MR-M2; MD-10).
 |---|---|
 | First draft had cutters surrender at the stack. | Removed (CDR-1). |
 | The ledger listed buyers' places. | Marks only; no routes (MD-9). |
-| Night assault would add Wraiths outside contract. | Day assault; standards stripped, so nothing rises. |
+| Night assault would add Wraiths outside contract. | Day assault; Wraiths walk only at dusk. |
+| Independent review (2026-11-09): "strip it bare and the risen don't come" made the cutters' trade a working fix, against bible §2.3 (they worsen it). | The cutters believe it; the bare poles still lean; Hob calls it a story. |
 
 ### MCF.12 Dialogue
 
@@ -563,8 +564,8 @@ MCF-D2.02 HOB: "I'll take you to the edge. I'm a fowler. I don't go into trenche
 
 ```
 MCF-D3 (after E2; bare standards)
-MCF-D3.01 (inner voice, prompt line) "Three standards in frames, stripped to the pole. Nothing on them to rise."
-MCF-D3.02 [MCF_TRACK = hob, Hob at the edge, shouting] HOB: "That's why they work days. Strip it bare and the risen don't come. Clever. Filthy."
+MCF-D3.01 (inner voice, prompt line) "Three standards in frames, stripped to the pole. The poles still lean."
+MCF-D3.02 [MCF_TRACK = hob, Hob at the edge, shouting] HOB: "That's why they work days. The risen walk at dusk. They tell buyers a bare pole stays down." (beat) "Look at it leaning. Filthy story."
 ```
 
 ```
@@ -593,7 +594,7 @@ MCF-D6.02 [returned] CALWEN: "I'll wash them. It'll take the wet season." (beat)
 | MCF-I1.01 | A square | *"Old banner cloth, cut to a hand's width, folded and tied with reed. The weave matches the standards that came off the causeway."* |
 | MCF-I1.02 | Ledger: lots in | *"'Lot from the Hide. Twelve squares.' Beside each lot, a mark: a cut reed."* |
 | MCF-I1.03 | Ledger: lots out | *"Squares sold to marks: a fish, a circle with a bar, a three-pronged sign. No names. No places."* |
-| MCF-I2.01 | Bare standard | *"A standard pole in a timber frame, stripped to the wood. Knife marks where the cloth was cut from the hoist."* |
+| MCF-I2.01 | Bare standard | *"A standard pole in a timber frame, stripped to the wood. Knife marks where the cloth was cut from the hoist. It leans in its frame all the same."* |
 | MCF-I2.02 | The ring | *"Reeds flattened outward all round the stack. Nothing walked here. Something sat."* |
 
 ---
@@ -606,7 +607,7 @@ MCF-D6.02 [returned] CALWEN: "I'll wash them. It'll take the wet season." (beat)
 
 ### MFW.1 The quest in one paragraph
 
-Travellers at the **Wading Ford** see, at dusk, a man standing knee-deep in the water calling names. He never answers. Ferry households at **Blackwater Landing** have stories; **Morwen Lusk** thinks he might be her great-grandfather **Abner Lusk**, a war-years ferryman who, the family says, "kept asking after people"; her brother **Nye** thinks "might" is not a comfort and wants it left alone. Rowan will not take anyone to the ford at dusk ("I don't cross at night. Walk."). The player sets a **fowler's hide** on the ford's bank at dusk and watches: the figure stands, calls, turns, calls again. Some names carry: *"Wil..."*, *"the Coe girls..."*, *"Tamsin..."*. Then the records. In Rowan's boat shed is the landing's **war-years ferry list**: evacuees taken over the Blackwater, with a mark beside some names in one hand, *"asked after"*, and the hand signs *A.L.* Coe, Wil Fennick, Tamsin Rye: all marked. And in the Lusk house, the family's **naming board**: every Lusk child for three generations carved with the name they were "named for", and every one of them is a name from the list. Two holds that a ferryman kept asking. Neither says the figure is him. Morwen asks the player to tell Granny Lusk, Abner's daughter. Nye asks the player not to.
+Travellers at the **Wading Ford** see, at dusk, a man standing knee-deep in the water calling names. He never answers. Ferry households at **Blackwater Landing** have stories; **Morwen Lusk** thinks he might be her father **Abner Lusk**, a war-years ferryman, dead since she was small, who, the family says, "kept asking after people"; her brother **Nye** thinks "might" is not a comfort and wants it left alone. Rowan will not take anyone to the ford at dusk ("I don't cross at night. Walk."). The player sets a **fowler's hide** on the ford's bank at dusk and watches: the figure stands, calls, turns, calls again. Some names carry: *"Wil..."*, *"the Coe girls..."*, *"Elspet..."*. Then the records. In Rowan's boat shed is the landing's **war-years ferry list**: evacuees taken over the Blackwater, with a mark beside some names in one hand, *"asked after"*, and the hand signs *A.L.* Coe, Wil Fennick, Elspet Rye: all marked. And in the Lusk house, the family's **naming board**: every Lusk child born since the war carved with the name they were "named for", and every one of them is a name from the list. Two holds that a ferryman kept asking. Neither says the figure is him. Morwen asks the player to tell Granny Lusk, Abner's widow and their mother. Nye asks the player not to.
 
 **Remember:** the figure turning toward you and calling a word that might have been "here". **Want next:** nothing in particular; this one ends where it began.
 
@@ -665,7 +666,7 @@ Travellers at the **Wading Ford** see, at dusk, a man standing knee-deep in the 
 
 **Beat 3 — The list (`S03_list`).** *Objective: Read the landing's war-years ferry list.* Rowan lets the player read it in the shed (`MFW-D2`). Three required inspects: the list (`MFW-I1.01`), the marks (`MFW-I1.02`), the signature (`MFW-I1.03`). Match the names heard (dialogue recall).
 
-**Beat 4 — The board (`S04_board`).** *Objective: Look at the Lusks' naming board.* At the Lusk house, inspect the board (`MFW-I2.01`): every "named for" is from the list. Granny Lusk, by the fire, says only that her father "named us for people he was still asking after. He said that way somebody would keep asking." (`MFW-D3`).
+**Beat 4 — The board (`S04_board`).** *Objective: Look at the Lusks' naming board.* At the Lusk house, inspect the board (`MFW-I2.01`): every "named for" is from the list. Granny Lusk, by the fire, says only that Abner "named ours for people he was still asking after. He said that way somebody would keep asking." (`MFW-D3`).
 
 **Beat 5 — Tell or keep (`S05_choice`).** *Objective: Decide what to say to Granny Lusk.* `MFW-D4` (Morwen and Nye outside). Choice (`MFW_TOLD`): **told** (the player tells Granny Lusk what the list and the board say, and that the man at the ford calls those names, and that nobody can say who he is) or **kept** (the player writes it in the landing's ferry book for whoever looks, and tells Granny only that her father's list is still kept). Quest Completed (`MFW-D5`).
 
@@ -678,11 +679,11 @@ None. **MD-7 swap note:** no Hollowfoot content. `[MD-3]`: Rowan does not cross;
 | Time | Element | Spec |
 |---|---|---|
 | Dusk | **Stand** | A man's figure stands up out of the ford's middle, knee-deep, as if he had always been there. Mud-coloured; no face to read. Herons on the roost do not move (with the hide). |
-| 0–40 s | **Calls** | He calls toward the far bank in a voice like someone at the far end of a room. Fragments: *"Wil..."*, *"...the Coe girls..."*, *"Tamsin..."*. Captions only for these; the rest is unintelligible. |
+| 0–40 s | **Calls** | He calls toward the far bank in a voice like someone at the far end of a room. Fragments: *"Wil..."*, *"...the Coe girls..."*, *"Elspet..."*. Captions only for these; the rest is unintelligible. |
 | 40–46 s | **Turn** | He turns, slowly, toward the player's hide. He opens his mouth. What comes is one word that sounds like the player's own voice saying *"here"*. Captioned: *"...here."* |
 | 46–50 s | **Down** | He settles into the ford like water closing. The stake still shows ochre. |
 | Inspect | Inner voice | *"He called names. Then he turned and said 'here'. In your voice, or near it."* |
-| What it means | Never explained. It identifies no one; Abner Lusk is not named by the figure and never will be. |
+| What it means | | Never explained. It identifies no one; Abner Lusk is not named by the figure and never will be. |
 
 ### MFW.8 Steps and completion events
 
@@ -743,6 +744,7 @@ None. **MD-7 swap note:** no Hollowfoot content. `[MD-3]`: Rowan does not cross;
 |---|---|
 | The "here" in the player's voice risked implying the figure answers. | It is not an answer to anything asked; it is one word, captioned, unexplained. |
 | The list risked a count of evacuees lost. | It lists names taken over; "asked after" marks only; no tally of the lost. |
+| Independent review (2026-11-09): a ninety-year-old daughter and adult great-grandchildren of a man who ferried thirty years ago did not fit the Mire's thirty-year war distance; "Tamsin" collided with Lowmark and Thornfell NPCs. | Morwen and Nye are Abner's children; Granny Lusk is his widow; the board covers two generations. Tamsin Rye renamed **Elspet Rye**. |
 
 ### MFW.12 Dialogue
 
@@ -752,7 +754,7 @@ None. **MD-7 swap note:** no Hollowfoot content. `[MD-3]`: Rowan does not cross;
 |---|---|---|---|
 | **Morwen Lusk** [NEW] | Family stories. | Who the figure is. | Hopeful, practical. |
 | **Nye Lusk** [NEW] | That "may" hurts. | — | Short, protective. |
-| **Granny Lusk** [NEW] | Why she is named what she is. | — | Slow, clear, funny. |
+| **Granny Lusk** [NEW], Abner's widow | Why her children are named what they are. | — | Slow, clear, funny. |
 | **Rowan Mirewake** | The list's place in his shed. | — | One line at a time. |
 
 #### Barks
@@ -770,7 +772,7 @@ None. **MD-7 swap note:** no Hollowfoot content. `[MD-3]`: Rowan does not cross;
 ```
 MFW-D1 (landing; S00)
 MFW-D1.01 MORWEN: "Travellers come back from the Wading Ford white. A man in the water at dusk, calling names. Never answers."
-MFW-D1.02 MORWEN: "My great-grandfather ferried in the war. Abner. Family says he kept asking after people. I think..." (beat) "I think it might be him."
+MFW-D1.02 MORWEN: "My father ferried in the war. Abner. I was small when he went. Mam says he kept asking after people. I think..." (beat) "I think it might be him."
 MFW-D1.03 NYE: (from the doorway) "Might." (beat) "Leave it, Mor."
 MFW-D1.04 MORWEN: "Will you watch? Just watch. Tell me what he says."
   > "I'll watch."                                            → MFW-D1.10
@@ -789,8 +791,8 @@ MFW-D2.04 ROWAN: "Hm." (he puts the tube back himself)
 
 ```
 MFW-D3 (Lusk house; S04)
-MFW-D3.01 GRANNY LUSK: "That's our board. Every Lusk and who they're named for. I'm Tamsin. For a Tamsin Rye."
-MFW-D3.02 GRANNY LUSK: "My father named us for people he was still asking after. He said that way somebody would keep asking."
+MFW-D3.01 GRANNY LUSK: "That's our board. Every Lusk child since the war and who they're named for. Morwen's for a Morwen Coe. The little one's Elspet, for an Elspet Rye."
+MFW-D3.02 GRANNY LUSK: "Abner named ours for people he was still asking after. He said that way somebody would keep asking. We've kept on with theirs."
 MFW-D3.03 GRANNY LUSK: "Did he find them? I don't know. He never said found. He never said lost."
 ```
 
@@ -799,7 +801,7 @@ MFW-D4 (outside; S05)
 MFW-D4.01 MORWEN: "Well?"
 MFW-D4.02 (the player tells: the names at the ford; the list; the marks signed A.L.; the board)
 MFW-D4.03 [MFW_CALLED] (optional) "I called to him. He didn't answer. Then he said 'here'."
-MFW-D4.04 NYE: "That's a ghost story with our name on it." (beat) "Granny's ninety. Don't."
+MFW-D4.04 NYE: "That's a ghost story with our name on it." (beat) "Mam's old and she's tired. Don't."
 MFW-D4.05 MORWEN: "It's two records and a man in the water. Tell her. She'd want to know he's still asking."
   > "Tell her. All of it, and that nobody knows who he is."  → MFW-D4.10  {set MFW_TOLD = told}
   > "Write it in the ferry book. Tell her the list is kept."  → MFW-D4.20  {set MFW_TOLD = kept}
@@ -810,7 +812,7 @@ MFW-D4.20 NYE: "Thank you." MORWEN: (quiet) "It's written. That's something."
 ```
 MFW-D5 (close)
 MFW-D5.01 [told] GRANNY LUSK: "Still asking." (beat) "Good. Somebody should."
-MFW-D5.01 [kept] GRANNY LUSK: "Father's list is kept? Good. Somebody should keep it."
+MFW-D5.01 [kept] GRANNY LUSK: "Abner's list is kept? Good. Somebody should keep it."
       {event: S05 → quest Completed}
 ```
 
@@ -819,9 +821,9 @@ MFW-D5.01 [kept] GRANNY LUSK: "Father's list is kept? Good. Somebody should keep
 | Id | Object | Text |
 |---|---|---|
 | MFW-I1.01 | Ferry list | *"A long roll: names, households, 'over to the Rootrest side'. Many hands. No date, only weather: 'fog', 'rain', 'thaw'."* |
-| MFW-I1.02 | The marks | *"Beside some names, in one hand: 'asked after'. Wil Fennick. The Coe girls. Tamsin Rye. And more."* |
+| MFW-I1.02 | The marks | *"Beside some names, in one hand: 'asked after'. Wil Fennick. The Coe girls. Elspet Rye. And more."* |
 | MFW-I1.03 | Signature | *"At the foot of each marked stretch: 'A.L.'"* |
-| MFW-I2.01 | Naming board | *"Carved pairs. 'Tamsin, for Tamsin Rye.' 'Wil, for Wil Fennick.' 'Nye, for Nye Coe.' 'Morwen, for Morwen Coe.' Three generations. Every 'for' is a name from the list."* |
+| MFW-I2.01 | Naming board | *"Carved pairs. 'Elspet, for Elspet Rye.' 'Wil, for Wil Fennick.' 'Nye, for Nye Coe.' 'Morwen, for Morwen Coe.' Two generations, Abner's children and theirs. Every 'for' is a name from the list."* |
 
 ---
 
@@ -890,7 +892,7 @@ MFW-D5.01 [kept] GRANNY LUSK: "Father's list is kept? Good. Somebody should keep
 
 **Beat 3 — The cookhouse (`S03_board`).** *Objective: Search the sunk cookhouse.* Clear silt from the board (2 × 3 s channel). Read the **ration board** (`MMR-I2.01`).
 
-**Beat 4 — Pull the stakes (`S04_stakes`).** *Objective: Pull Lenna's survey stakes.* `MMR-D3` (Lenna, reluctant, then helping). Pull six stakes (1 s each) while **MMR-E3** stands along the remaining strings; each pulled stake removes its string's re-forming. When the last is pulled, the Echoes do not re-form. **The strange moment** (MMR.7).
+**Beat 4 — Pull the stakes (`S04_stakes`).** *Objective: Pull Lenna's survey stakes.* `MMR-D3` (Lenna, reluctant, then helping). Pull six stakes (1 s each, any order; pulled stakes persist) while **MMR-E3** stands along the strings. The condition is the quest step, not each stake: Echoes re-form while any stake stands, and when the last is pulled they collapse and do not re-form. **The strange moment** (MMR.7).
 
 **Beat 5 — Correct the map (`S05_map`).** *Objective: Help Lenna correct her map.* `MMR-D4`. Choice (`MMR_MAP`): **corrected** (she redraws the loop and writes "water carry; waiting; ration short" and strikes "Long Wade") or **annotated** (she keeps her arrows and writes beside them what the board says, "so people see how easy it was to be wrong"). Quest Completed (`MMR-D5`).
 
@@ -902,7 +904,7 @@ Tuned for Competent identity (after MR-M2).
 |---|---|---|---|---|---|---|
 | **MMR-E1** | 3 × Earthen Echo (echo) | Stand up along the strings | Walk the string lines, repeating a motion (carrying, lifting a pail) | **Does bolt** 4–6 s before any spawn (the region's warning). **Stand-up:** mud hump holds ~1.5 s. **Swing:** arms lift ~1.2 s, then a 2 m swing. | Teaches the does' warning. | 40–60 s; 70–85% HP. |
 | **MMR-E2** | 1 × Earthen Echo (file), 2 × echo | The loop path | The file walks the loop in a lane and strikes on its third step; echoes walk beside. | **File step:** the ground ripples on each step; on the third, a forward thrust (~1.0 s windup, 3 m line); step out of the lane. | Previews the file without the General's count. | 50–70 s; 60–80% HP. |
-| **MMR-E3** | 4 × echo (2 at a time) | Along remaining strings during `S04` | Re-form 6 s after defeat while their string's stake stands | As E1. | Pressure while the player pulls stakes; pulling is the win. | 60–90 s; 50–75% HP. |
+| **MMR-E3** | 4 × echo (2 at a time) | Along remaining strings during `S04` | Re-form 6 s after defeat while any survey stake stands (one condition for the encounter) | As E1. | Pressure while the player pulls stakes; pulling is the win. | 60–90 s; 50–75% HP. |
 
 **Rules.** Echoes fight to 0 HP, collapse into mud, and re-form only while the disturbance lasts (bible §2.6). Lenna stays at her tent and is never targetable. Nothing dropped advances the quest. **MD-7 swap note:** no Hollowfoot content.
 
@@ -957,7 +959,7 @@ Tuned for Competent identity (after MR-M2).
 | Need | Owner | Minimum viable form |
 |---|---|---|
 | Fauna flee trigger before spawns | Encounters / AI | Ambient does with a scripted flee 4–6 s before an encounter spawn. |
-| Spawn re-forming keyed to a prop (stake) | Systems | Lowmark drift-site state model: re-form while prop present. |
+| Re-forming by condition | Systems | **No new runtime:** Lowmark drift-site state model with one condition (`S04` active and stakes remaining), not per-prop re-forming (simplified in independent review 2026-11-09, CDR-4). |
 | Print-filling VFX | VFX | Sequential decal swap. **Fallback:** inspect text. |
 
 **Mystery ledger.**
@@ -1043,7 +1045,7 @@ MMR-D5.01 LENNA: "A season of work and the truest thing on it is a cook's board.
 
 ### MSG.1 The quest in one paragraph
 
-In storms, a drowned wartime trench at the Field's edge **hums**. **Ysolde** says airflow and mud compression; **Prue Calloway** says the earth is grieving. Both are partly right. **Ned Siskin**, a reed cutter, uses the trench as his shortcut to the cutting beds, and this season its timber **revetment** is bulging: one more storm and the wall will slump and bury the path. The player goes in during a storm (quest-pinned) and learns to listen: the trench has three plank-covered **vents** left from the war, and in each gust air runs through whichever are open. A bay with air running through it sings, and a singing bay draws water out of its mud; a silent bay is under pressure. The bay behind the bulge is silent. Between gusts, the player opens and closes vents until that bay sings, holds the arrangement for three gust windows while Reedlurkers come up out of the flooded sumps, then props the revetment with reclaimed timber (Woodcutting). After the storm drops, the trench keeps humming for a few seconds into still air.
+In storms, a drowned wartime trench at the Field's edge **hums**. **Ysolde** says airflow and mud compression; **Prue Calloway** says the earth is grieving. Both are partly right. **Ned Siskin**, a reed cutter, uses the trench as his shortcut to the cutting beds, and this season its timber **revetment** is bulging: one more storm and the wall will slump and bury the path. The player goes in during a storm (quest-pinned) and learns to listen: the trench has three plank-covered **vents** left from the war, and in the storm air runs through whichever are open. A bay with air running through it sings, and a singing bay draws water out of its mud; a silent bay is under pressure. The bay behind the bulge is silent. The player opens and closes vents until that bay sings, holds the arrangement through three rushes of Reedlurkers up out of the flooded sumps, then props the revetment with reclaimed timber (Woodcutting). After the storm drops, the trench keeps humming for a few seconds into still air.
 
 **Remember:** a sound that went on after its cause stopped. **Want next:** nothing; Ned's path is open.
 
@@ -1053,7 +1055,7 @@ In storms, a drowned wartime trench at the Field's edge **hums**. **Ysolde** say
 |---|---|
 | **A. The hum is proven to be grief.** | Rejected. Belief stays belief; the dossier keeps both readings. |
 | **B. An Echo fight in the trench.** | Rejected. Bible §7.2: Echo-free puzzle. Reedlurkers only (contract). |
-| **C. Listen → vents by gust → hold three windows → prop** (selected). | **Selected.** Listen, dig, prop. Distinct from MR-M4's sluice order (that reads stains for a sequence; this reads sound for a combination under a gust rhythm). |
+| **C. Listen → vents → hold through three waves → prop** (selected). | **Selected.** Listen, dig, prop. Distinct from MR-M4's sluice order (that reads stains for a sequence; this reads sound for a combination). |
 
 | Element | Source | Status |
 |---|---|---|
@@ -1097,11 +1099,11 @@ In storms, a drowned wartime trench at the Field's edge **hums**. **Ysolde** say
 
 **Beat 0 — The shortcut (`S00_offer`).** *Objective: Hear Ned out.* `MSG-D1`. With Ysolde and Prue's argument heard (`MSG-B1.01`), one extra line.
 
-**Beat 1 — Listen (`S01_listen`).** *Objective: Go into the trench in a storm and listen.* Keep watch to storm (pinned). In the trench, stand in each bay through one gust (gust tell: reeds above flatten and a rising whistle ~3 s before; air rushes). Inspect each bay's sound (`MSG-I1.01`–`.03`). Bay 2 is silent; its mud weeps.
+**Beat 1 — Listen (`S01_listen`).** *Objective: Go into the trench in a storm and listen.* Keep watch to storm (pinned). The storm is ambient presentation (wind, flattened reeds, a rising whistle in the shafts); nothing is timed to it. In the trench, *Listen* in each bay (an inspect that plays and describes that bay's current note, `MSG-I1.01`–`.03`). Bay 2 is silent; its mud weeps.
 
-**Beat 2 — The vents (`S02_vents`).** *Objective: Make the bulging bay sing.* Three vents, open/closed (interaction 2 s each; only between gusts: during a gust the planks are pinned by the draft). The rule, learned by listening: air runs between the two open vents nearest each other; every bay on that run sings. Vent A sits in bay 1, vent B in the traverse at the head of bay 2, vent C in bay 3. Starting state: A open, B closed, C open; the run goes A to C over the traverse tops, so bays 1 and 3 sing and bay 2 stays silent. Solution: **close A, open B, open C**: the run passes from B down through bay 2 to C, and bay 2 sings. Any other arrangement sings other bays; each gust plays its result. No penalty; try again next gust.
+**Beat 2 — The vents (`S02_vents`).** *Objective: Make the bulging bay sing.* Three vents, open/closed (interaction 2 s each, any time). The rule, learned by listening: air runs between the two open vents nearest each other (with all three open, the shortest run, A to B); every bay on that run sings. Vent A sits in bay 1, vent B in the traverse at the head of bay 2, vent C in bay 3. Starting state: A open, B closed, C open; the run goes A to C over the traverse tops, so bays 1 and 3 sing and bay 2 stays silent. Solution: **close A, open B, open C**: the run passes from B down through bay 2 to C, and bay 2 sings. Any other arrangement sings other bays; *Listen* in bay 2 to check. No penalty; change a plank and listen again.
 
-**Beat 3 — Hold (`S03_hold`).** *Objective: Keep the bay singing for three gusts.* Three gust windows with the right arrangement. **MSG-E1** rises from the sumps in the lulls (the drawn water stirs them). If a lurker's lunge knocks a vent plank shut (1.0 s tell: it climbs the shaft lip), the player re-opens it. Gusts counted persist.
+**Beat 3 — Hold (`S03_hold`).** *Objective: Keep the bay singing while the sumps stir.* With the right arrangement set, the drawn water stirs the sumps: **MSG-E1** comes in three waves, each starting a few seconds after the last is defeated. If a lurker knocks a vent plank shut (1.0 s tell: it climbs the shaft lip), the player re-opens it. A wave counts when it is defeated with bay 2 singing; counted waves persist.
 
 **Beat 4 — Prop (`S04_prop`).** *Objective: Prop the revetment.* **Woodcutting ~[GD: low–mid]**: cut three props from the timber pile (3 × 3 s), carry, set against the bulge (3 × 2 s). **Crew alternative:** Ned's props (`MSG-D2`).
 
@@ -1111,7 +1113,7 @@ In storms, a drowned wartime trench at the Field's edge **hums**. **Ysolde** say
 
 | Id | Enemies (§10) | Placement | AI role | Telegraph | Purpose | Solo target |
 |---|---|---|---|---|---|---|
-| **MSG-E1** | Lull 1: 2 × lurker; lull 2: 1 × lurker, 1 × snapper; lull 3: 2 × lurker, 1 × snapper | Flooded sumps, bays 1 and 3 | Lunge from water; snappers spit from the sump lip; lurkers may climb to a vent lip | **Reed-ripple** (~1.2 s) before a lunge; **snapper spit** (throat swells ~1.0 s); **vent climb** (claws on the lip, ~1.0 s) before knocking a plank shut | Pressure on the puzzle state; short fights in lulls between gusts | 25–40 s per lull; ends at 55–75% HP |
+| **MSG-E1** | Wave 1: 2 × lurker; wave 2: 1 × lurker, 1 × snapper; wave 3: 2 × lurker, 1 × snapper | Flooded sumps, bays 1 and 3 | Lunge from water; snappers spit from the sump lip; lurkers may climb to a vent lip | **Reed-ripple** (~1.2 s) before a lunge; **snapper spit** (throat swells ~1.0 s); **vent climb** (claws on the lip, ~1.0 s) before knocking a plank shut | Pressure on the puzzle state; three short fights | 25–40 s per wave; ends at 55–75% HP |
 
 **Rules.** Reedlurkers fight to 0 HP; they do not re-form. Ned waits at the mouth and is never a target. **MD-7 swap note:** no Hollowfoot content.
 
@@ -1123,16 +1125,16 @@ In storms, a drowned wartime trench at the Field's edge **hums**. **Ysolde** say
 | 0–5 s | **Hum** | The trench keeps humming, bay 2's note, steady, in still air. |
 | 5–6 s | **Stop** | It stops, cleanly, mid-note. |
 | After | | Ned: "Wind's gone." (beat) "It didn't know." Ysolde later: "Air in the shafts. Slow to settle." Prue: "Or not." Both are said; neither is chosen. |
-| What it means | Unexplained; plausibly air still moving in the shafts. |
+| What it means | | Unexplained; plausibly air still moving in the shafts. |
 
 ### MSG.8 Steps and completion events
 
 | Step | Objective | Completes on | Req. |
 |---|---|---|---|
 | `S00_offer` | Hear Ned out. | `MSG-D1` end with accept | Yes |
-| `S01_listen` | Go into the trench in a storm and listen. | 3 bay inspects during gusts | Yes |
-| `S02_vents` | Make the bulging bay sing. | Arrangement A closed, B open, C open during a gust | Yes |
-| `S03_hold` | Keep the bay singing for three gusts. | 3 gusts with the arrangement (persist) + lull encounters defeated | Yes |
+| `S01_listen` | Go into the trench in a storm and listen. | 3 bay *Listen* inspects | Yes |
+| `S02_vents` | Make the bulging bay sing. | Arrangement A closed, B open, C open + *Listen* in bay 2 | Yes |
+| `S03_hold` | Keep the bay singing while the sumps stir. | 3 MSG-E1 waves defeated with the arrangement held (persist) | Yes |
 | `S04_prop` | Prop the revetment. | 3 props cut + set **or** keep watch (Ned) + set | Yes |
 | `S05_after` | — | Strange moment + `MSG-D3` + `MSG-D4` end | Yes (→ Completed) |
 
@@ -1155,17 +1157,17 @@ No choice; no region flag.
 
 | Situation | Handling |
 |---|---|
-| Wrong arrangement | The gust plays the result; try next gust. |
-| Death | Respawn at the mouth; arrangement and gust count persist. |
+| Wrong arrangement | *Listen* tells which bays sing; change a plank and listen again. |
+| Death | Respawn at the mouth; arrangement and counted waves persist. |
 | Walking away | Stays Active; storm pin persists for this player until `S05`. |
 | Fail state | None. |
-| Co-op | Vents are shared within the instance (fallback: host); gust count shared. |
+| Co-op | Vents are shared within the instance (fallback: host); wave count shared. |
 
 ### MSG.11 Integration needs, ledger, open decisions, review
 
 | Need | Owner | Minimum viable form |
 |---|---|---|
-| Gust cycle with pre-tell | Systems / Audio | A timed per-player loop (~20 s) with a 3 s rising whistle tell. |
+| Storm ambience | Audio | Looping storm and shaft-whistle ambience under the pinned storm; **no gameplay timing** (the first draft's timed gust cycle and gust-gated interactions were removed in independent review 2026-11-09, CDR-4). |
 | Vent props with three states logic | Systems | Two-state props; a lookup of which bays sing per combination; audio per bay. **Fallback:** dialogue picks of arrangements. |
 | Pinned storm | Systems | Per-player presentation weather. |
 
@@ -1174,7 +1176,8 @@ No choice; no region flag.
 
 | Review finding | Revision |
 |---|---|
-| Puzzle risked repeating MR-M4's order puzzle. | Combination by sound under a gust rhythm; no order. |
+| Puzzle risked repeating MR-M4's order puzzle. | Combination by sound; no order. |
+| Independent review (2026-11-09): a timed gust cycle with interaction windows was a bespoke mechanic. | *Listen* inspects and ordinary waves; the storm is ambience only. |
 | Prue's belief risked being proven wrong. | Ysolde's account explains the hum, not the after-hum; Prue's "Or not" stands. |
 
 ### MSG.12 Dialogue
@@ -1227,9 +1230,9 @@ MSG-D4.03 YSOLDE: "Both, then. Written."   {set MSG_LISTENED; event: quest Compl
 
 | Id | Object | Text |
 |---|---|---|
-| MSG-I1.01 | Bay 1, in a gust | *"A low note, steady. The mud at the bay's foot is drier than the rest."* |
-| MSG-I1.02 | Bay 2, in a gust | *"Silent. The revetment bows outward. Water weeps between the planks."* |
-| MSG-I1.03 | Bay 3, in a gust | *"A higher note. The sump shivers."* |
+| MSG-I1.01 | Bay 1, listened (start state) | *"A low note, steady. The mud at the bay's foot is drier than the rest."* |
+| MSG-I1.02 | Bay 2, listened (start state) | *"Silent. The revetment bows outward. Water weeps between the planks."* |
+| MSG-I1.03 | Bay 3, listened (start state) | *"A higher note. The sump shivers."* |
 | MSG-I1.04 | A vent | *"A plank cover over a brick shaft to the surface. Air pulls at your hand when it's open."* |
 
 ---
@@ -1246,3 +1249,4 @@ MSG-D4.03 YSOLDE: "Both, then. Written."   {set MSG_LISTENED; event: quest Compl
 | CDR-1/2 | Every enemy to 0 HP; no yields or retreat; ranged first-class, never required. No SX. |
 | Deviation | MMR omits the dossier's Memorywarden shard element (owned by MR-M2). |
 | MD-7 / MD-3 | No Hollowfoot content; Rowan never crosses at night. |
+| **Independent review (2026-11-09)** | 7 findings fixed in place (0 high, 5 medium, 2 low). **Medium:** MCF said stripping cloth stops standards rising (a working fix, against bible §2.3 "they worsen it"; now the cutters' false belief, poles still lean); MCF burn branch had Calwen both absent and speaking (now he speaks and leaves); MFW generations did not fit the thirty-year war distance (ninety-year-old daughter, adult great-grandchildren; now Abner's widow and children) and "Tamsin" collided with Lowmark/Thornfell NPCs (now Elspet Rye); MSG's timed gust cycle with gust-gated interactions replaced by *Listen* inspects and three ordinary waves (storm is ambience only); MMR per-stake re-forming simplified to one step condition (drift-site model). **Low:** Eskil's "Stonewake keeps honest accounts" used a person's/quest's name as an institution (now "the Assembly"); MSG all-vents-open case defined. Checked and unchanged: `MR_CLOTH` returned / burned set at MCF `S07` as Act III `MBL-B7.2a` reads it; cutters to 0 HP, Gethin never fights, ledger read in place; MMR does not use the Memorywarden shard; no dates or casualty numbers; ranged first-class, never required; no Hollowfoot. |
