@@ -176,16 +176,16 @@ can be rectangular. Export paint in sRGB and keep covered texels opaque.
 ```powershell
 $work = 'MEDIA/Materials/working'
 $blender = 'C:/Program Files/Blender Foundation/Blender 5.0/blender.exe'
-py -3 MEDIA/Materials/derive_atlas.py --blender $blender --blend "$work/lowmark_stone_wall.blend" --object Plane --uv-map UVMap --albedo "$work/lowmark_stone_wall_color_v1.1.png" --allow-stacked --height "$work/lowmark_stone_wall_height.png" --normal "$work/lowmark_stone_wall_normal.png" --relief-m 0.002
+py -3 MEDIA/Materials/derive_atlas.py --blender $blender --blend "$work/lowmark_stone_wall.blend" --object Plane --uv-map UVMap --albedo "$work/lowmark_stone_wall_color_v1.1.png" --shared-uv --height "$work/lowmark_stone_wall_height.png" --normal "$work/lowmark_stone_wall_normal.png" --relief-m 0.002
 ```
 
-The Lowmark command is for use once its UVs pass validation. The current
-`lowmark_stone_wall.blend` has four charts with internal overlaps at 2048 × 2048.
-They begin at evaluated triangle indices 551, 704, 1301, and 2983. Repair those
-overlapping UV faces in a review copy, check the corresponding painted alignment,
-then rerun validation on the v1.1 atlas. The tool stopped before writing maps
-for this pair. The tested atlas SHA-256 was
+The Lowmark wall intentionally shares paint across its mirrored sides.
+The command generates one 2048 × 2048 map pair for both sides from the
+current Blender scene and v1.1 atlas. The tested atlas SHA-256 was
 `984b402d800b19baa2030ac3b6a7d472737356ffb79573cbceda5f80ffd05734`.
+Two runs produced byte-identical maps across 267 occupied regions. Decoded
+normal tilt was 1.59° at the 95th percentile and 14.75° at maximum across the
+atlas. Both input file hashes matched before and after generation.
 
 - For a pre-rasterized Blender-derived mask, use `--island-mask labels.png`
   instead of the Blender scene, object and UV arguments. Supply an opaque 8-bit
@@ -193,13 +193,16 @@ for this pair. The tested atlas SHA-256 was
   one integer per island. Intentional stacks share the same label. Set
   `--size-m U V` to the metres represented by the full atlas axes (default 1 × 1).
   Mask input supplies no per-triangle metric, shear, or overlap validation.
-- Blender input accepts one mesh and one atlas in the 0–1 UV square. Use
-  `--allow-stacked` when the mesh intentionally shares UV space. The tool
-  accepts complete matching texel footprints with compatible physical UV
-  metrics, including reflected islands. Blender applies the tangent-frame
-  handedness when it samples the shared +Y map. Internal overlaps, partial
-  stacks and conflicting metrics produce errors. Coverage is tested at texel
-  centres at the target resolution.
+- Blender input accepts one mesh and one atlas in the 0–1 UV square.
+  `--allow-stacked` checks complete matching texel footprints and compatible
+  physical UV metrics. Use `--shared-uv` for an atlas intentionally reused by
+  surfaces with partial overlaps or different triangulation. At each covered
+  texel, the first chart and triangle in stable mesh order supply the filter
+  label and physical metric. Every surface sharing the texel samples the same
+  maps. The reference metric can only approximate the relief on surfaces
+  with different UV scales. Shared mode caps normal tilt at 15° to limit
+  spikes on distorted triangles. Blender applies the tangent-frame handedness
+  when it samples the shared +Y map. Coverage is tested at texel centres.
 - `--intensity` controls inferred relief (0–2, default 1). `--smoothing`
   sets the filter scales (0.25–4, default 1). `--relief-m` gives the
   black-to-white Height span in metres. The default is 0.002. Use gentle

@@ -49,6 +49,29 @@ class AtlasRelief(unittest.TestCase):
         duplicate = [np.concatenate((a, a[:1])) for a in (uv, xyz, vertices)]
         with self.assertRaisesRegex(ValueError, 'triangle 0 overlaps itself'):
             rasterize(*duplicate, (32, 48), allow_stacked=True)
+        expected = rasterize(uv, xyz, vertices, (32, 48))
+        shared = rasterize(*duplicate, (32, 48), shared_uv=True)
+        for actual, original in zip(shared[:2], expected[:2]):
+            np.testing.assert_array_equal(actual, original)
+
+    def test_shared_uv_preserves_the_first_reference_on_partial_mirrors(self):
+        front = quad(0, .5)
+        back = quad(.25, .75, reverse=True, scale=2, vertex_start=4)
+        stack = [np.concatenate(pair) for pair in zip(front, back)]
+        labels, triangles, _ = rasterize(*stack, (32, 48), shared_uv=True)
+        self.assertTrue(np.all(labels[:, :24] == 1))
+        self.assertTrue(np.all(labels[:, 24:36] == 3))
+        self.assertTrue(np.all(labels[:, 36:] == 0))
+        self.assertTrue(np.all(triangles[:, :24] < 2))
+
+    def test_tilt_limit_keeps_distorted_shared_uv_texels_near_flat(self):
+        labels = np.ones((8, 8), dtype=np.uint8)
+        depth = np.broadcast_to(np.linspace(-.2, .2, 8), labels.shape)
+        _, normal = derive(np.zeros((*labels.shape, 3)), labels, np.zeros_like(labels),
+                           [[.001, 0, 1]], 1, intensity=0, depth=depth, max_tilt=15)
+        xyz = normal.astype(float) / 127.5 - 1
+        tilt = np.degrees(np.arctan2(np.linalg.norm(xyz[..., :2], axis=-1), xyz[..., 2]))
+        self.assertTrue(np.all((tilt > 14.7) & (tilt < 15.3)))
 
     def test_filter_and_derivative_are_isolated(self):
         labels = np.ones((48, 72), dtype=np.uint16)

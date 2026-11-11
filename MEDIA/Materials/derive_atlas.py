@@ -54,7 +54,7 @@ def _triangle_pixels(corners, shape):
     return rows + y0, cols + x0
 
 
-def rasterize(uv, xyz, vertices, shape, allow_stacked=False):
+def rasterize(uv, xyz, vertices, shape, allow_stacked=False, *, shared_uv=False):
     """Return island labels, triangle indices and local (U, shear, V) metrics."""
     if not np.isfinite(uv).all() or not np.isfinite(xyz).all() or np.any((uv < 0) | (uv > 1)):
         raise ValueError('Expected finite geometry and a single UV atlas inside 0–1')
@@ -85,12 +85,21 @@ def rasterize(uv, xyz, vertices, shape, allow_stacked=False):
         indices = np.repeat(group, [len(p[0]) for p in samples])
         if rows.size == 0:
             raise ValueError('An island covers no texel centres at this resolution')
-        duplicate_count = rows.size - np.unique(rows * shape[1] + cols).size
+        _, first = np.unique(rows * shape[1] + cols, return_index=True)
+        duplicate_count = rows.size - first.size
         if duplicate_count:
-            raise ValueError(f'UV island starting at triangle {group[0]} overlaps itself '
-                             f'at {duplicate_count} texel samples')
+            if not shared_uv:
+                raise ValueError(f'UV island starting at triangle {group[0]} overlaps itself '
+                                 f'at {duplicate_count} texel samples')
+            rows, cols, indices = rows[first], cols[first], indices[first]
         owners = labels[rows, cols]
-        if np.any(owners):
+        if shared_uv:
+            # The painted atlas is authoritative. An overlapping surface
+            # samples the existing texel, including its one reference metric.
+            # Keep separate chart labels for newly claimed texels.
+            empty = owners == 0
+            rows, cols, indices = rows[empty], cols[empty], indices[empty]
+        elif np.any(owners):
             owner = int(owners[0])
             exact_stack = owner in areas and np.all(owners == owner) and areas[owner] == rows.size
             if not allow_stacked or not exact_stack:
@@ -193,7 +202,7 @@ def pad_maps(labels, pixels, distance):
 
 
 def derive(rgb, labels, triangle_ids, metrics, relief_m, *, intensity=1, smoothing=1,
-           padding=4, edge_fade=3, depth=None, cracks=None, detail=None):
+           padding=4, edge_fade=3, depth=None, cracks=None, detail=None, max_tilt=None):
     if not 0 <= intensity <= 2 or not .25 <= smoothing <= 4:
         raise ValueError('Intensity must be 0–2 and smoothing must be 0.25–4')
     if not np.isfinite(relief_m) or relief_m <= 0 or not 0 <= padding <= 32 or not 0 <= edge_fade <= 32:
@@ -225,6 +234,11 @@ def derive(rgb, labels, triangle_ids, metrics, relief_m, *, intensity=1, smoothi
         sx = _slope(height, labels, 1)[occupied] * labels.shape[1] * relief_m / u
         # PNG rows descend while Blender V ascends.
         sy = (-_slope(height, labels, 0)[occupied] * labels.shape[0] * relief_m - shear * sx) / v
+        if max_tilt is not None:
+            limit = np.tan(np.deg2rad(max_tilt))
+            gain = limit / np.maximum(limit, np.hypot(sx, sy))
+            sx *= gain
+            sy *= gain
         normal = np.column_stack((-sx, -sy, np.ones_like(sx)))
         normal /= np.linalg.norm(normal, axis=1, keepdims=True)
     pixels = np.zeros((*labels.shape, 4), dtype=np.uint16)
@@ -256,7 +270,10 @@ def main():
     parser.add_argument('--object', help='Mesh object name in the Blender scene')
     parser.add_argument('--uv-map', help='Blender UV map name (defaults to active map)')
     parser.add_argument('--blender', default='blender', help='Blender executable')
-    parser.add_argument('--allow-stacked', action='store_true')
+    overlaps = parser.add_mutually_exclusive_group()
+    overlaps.add_argument('--allow-stacked', action='store_true', help='Validate exact stacks with matching metrics')
+    overlaps.add_argument('--shared-uv', action='store_true',
+                          help='Use one texel and reference metric for explicitly shared paint, including partial stacks')
     parser.add_argument('--size-m', nargs=2, type=float, metavar=('U', 'V'),
                         help='Physical coverage of the full mask (default 1 m by 1 m)')
     parser.add_argument('--height', type=Path, required=True, help='Fresh 16-bit Height PNG')
@@ -288,14 +305,14 @@ def main():
                                 '--', '--object', args.object, '--output', str(target)] +
                                (['--uv-map', args.uv_map] if args.uv_map else []), check=True)
                 with np.load(target) as geometry:
-                    labels, triangles, metrics = rasterize(geometry['uv'], geometry['xyz'],
-                                                          geometry['vertices'], shape, args.allow_stacked)
+                    labels, triangles, metrics = rasterize(geometry['uv'], geometry['xyz'], geometry['vertices'],
+                                                          shape, args.allow_stacked, shared_uv=args.shared_uv)
         else:
             labels = _png(args.island_mask, shape, scalar=True)
             u, v = args.size_m or (1., 1.)
             if not all(np.isfinite(m) and m > 0 for m in (u, v)):
                 raise ValueError('Mask dimensions in metres must be positive and finite')
-            if args.object or args.uv_map or args.allow_stacked:
+            if args.object or args.uv_map or args.allow_stacked or args.shared_uv:
                 raise ValueError('Object, UV map and stack validation require Blender input')
             triangles = np.zeros(shape, dtype=np.int32)
             metrics = np.array([[u, 0., v]])
@@ -312,7 +329,7 @@ def main():
         height, normal = derive(rgb, labels, triangles, metrics, args.relief_m, intensity=args.intensity,
                                 smoothing=args.smoothing, padding=args.padding, edge_fade=args.edge_fade,
                                 depth=scalar(args.depth, signed=True), cracks=scalar(args.cracks),
-                                detail=scalar(args.detail_mask))
+                                detail=scalar(args.detail_mask), max_tilt=15 if args.shared_uv else None)
         write_map(args.height, height)
         try:
             write_map(args.normal, normal)
