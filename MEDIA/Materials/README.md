@@ -166,6 +166,86 @@ was visible in the technical maps. This check used image inspection and decoded
 normal measurements. Run the automated checks with
 `py -3 -m unittest discover -s MEDIA/Materials -p test_paint_maps.py -v`.
 
+## Derive relief for a painted UV atlas
+
+Use `derive_atlas.py` with a saved Blender mesh and its original painted sRGB
+PNG. The tool uses the evaluated mesh, the named UV map, object scale, and the
+scene's metre scale. It preserves the atlas resolution and coordinates. Inputs
+can be rectangular. Export paint in sRGB and keep covered texels opaque.
+
+```powershell
+$work = 'MEDIA/Materials/working'
+$blender = 'C:/Program Files/Blender Foundation/Blender 5.0/blender.exe'
+py -3 MEDIA/Materials/derive_atlas.py --blender $blender --blend "$work/lowmark_stone_wall.blend" --object Plane --uv-map UVMap --albedo "$work/lowmark_stone_wall_color_v1.1.png" --allow-stacked --height "$work/lowmark_stone_wall_height.png" --normal "$work/lowmark_stone_wall_normal.png" --relief-m 0.002
+```
+
+The Lowmark command is for use once its UVs pass validation. The current
+`lowmark_stone_wall.blend` has four charts with internal overlaps at 2048 × 2048.
+They begin at evaluated triangle indices 551, 704, 1301, and 2983. Repair those
+overlapping UV faces in a review copy, check the corresponding painted alignment,
+then rerun validation on the v1.1 atlas. The tool stopped before writing maps
+for this pair. The tested atlas SHA-256 was
+`984b402d800b19baa2030ac3b6a7d472737356ffb79573cbceda5f80ffd05734`.
+
+- For a pre-rasterized Blender-derived mask, use `--island-mask labels.png`
+  instead of the Blender scene, object and UV arguments. Supply an opaque 8-bit
+  or 16-bit grayscale PNG of the same dimensions, with zero for empty texels and
+  one integer per island. Intentional stacks share the same label. Set
+  `--size-m U V` to the metres represented by the full atlas axes (default 1 × 1).
+  Mask input supplies no per-triangle metric, shear, or overlap validation.
+- Blender input accepts one mesh and one atlas in the 0–1 UV square. Use
+  `--allow-stacked` when the mesh intentionally shares UV space. The tool
+  accepts complete matching texel footprints with compatible physical UV
+  metrics, including reflected islands. Blender applies the tangent-frame
+  handedness when it samples the shared +Y map. Internal overlaps, partial
+  stacks and conflicting metrics produce errors. Coverage is tested at texel
+  centres at the target resolution.
+- `--intensity` controls inferred relief (0–2, default 1). `--smoothing`
+  sets the filter scales (0.25–4, default 1). `--relief-m` gives the
+  black-to-white Height span in metres. The default is 0.002. Use gentle
+  values for modeled stonework. The tool suppresses broad luminance variation,
+  limits fine and medium bands, and attenuates responses at strong local
+  chroma changes in CIE Lab. Painted lightness supplies a relief cue. Review
+  inferred depth around shadows and seams against the modeled asset.
+- `--edge-fade` (default 3 texels) fades inferred detail at island boundaries
+  and on narrow strips. Use an optional grayscale `--detail-mask` with black
+  over modeled joints or bevels and white over areas eligible for inferred
+  detail. `--intensity 0` keeps only explicit overrides. For larger bevels or
+  bevels joined to the same UV island, use the mask to control the affected area.
+- `--depth` adds signed scalar offsets. Midpoint code 128 in 8-bit or 32768
+  in 16-bit is neutral. `--cracks` subtracts up to 20% of the full Height
+  range at white. Both apply inside island coverage after the automatic
+  filter. Use overrides for authored cracks that fall inside the stone faces.
+- `--padding` extends full pixels into empty gutters (default 4 texels).
+  Filtering and derivatives sample only matching labels. Padding resolves
+  ties deterministically and never overwrites another island. Leave enough UV
+  gutter for the intended Blender texture sampling and mip levels. Atlases
+  with touching islands or very narrow gutters can still mix at sample time.
+
+Load the RGB Normal as **Non-Color** in Blender and route it through a
+tangent-space Normal Map node using the same UV map as the albedo. Keep the
+16-bit grayscale Height as linear data for editing and rebaking. Use the
+generated Normal alone for this material's additional shading relief. The
+existing square 8-bit Procreate return package workflow has its own Height
+and Normal commands above.
+
+The original synthetic fixture has four beveled stones with three painted
+front regions, a mirrored shared front, one narrow gutter, and 16 narrow
+bevel strips. Two executions generated identical Height and Normal PNGs at
+384 × 256. All 2,720 bevel texels encoded flat Height and neutral Normal.
+At 6 mm per full range, the generated Height span was about 1.43 mm and
+front Normal tilt was 0.32° at the 95th percentile and 8.67° maximum
+(neutral RGB quantization decodes to about 0.32°). In the Blender 5.0.1
+comparison, 6 pixels under high light and 1,513 under raking light changed
+by more than two levels in at least one RGB channel. The added response
+was most visible around the authored fine cracks under raking light.
+[Blender comparison](evidence/stone_atlas_relief.jpg)
+
+```powershell
+py -3 -m unittest discover -s MEDIA/Materials -p 'test_*.py' -v
+py -3 MEDIA/Materials/verify_atlas.py --blender $blender
+```
+
 ## Split Oak Shingle — recolorable roof working test
 
 **Creative Director decision (2026-11-09):** Four tint choices and the Blender
