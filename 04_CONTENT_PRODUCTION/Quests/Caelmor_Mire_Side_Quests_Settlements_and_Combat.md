@@ -33,7 +33,7 @@
 | **`MDS07_READ`** | bool, persistent on the character | MDS07 reading (§6) | **Act III `S02`** (`MBL-D3.21`: "You've seen it. Then you know.") | Set when the furrow discovery's reading layer is completed, or by Act III's `S02` furrow inspect (`MBL-D3.20`), which sets `MDS07_SEEN` and `MDS07_READ` so the post-story discovery does not repeat (§6, MDS07). |
 | `MDS##_SEEN` / `MDS##_READ` | bool | Each discovery | That discovery's later presentation; MDS07_READ as above | Bible §11.2 naming. |
 | `MME##_…` | per card | Each micro-event | The micro-event only, unless stated | — |
-| `MRW_TABLE` | spoke / quiet / elder | MRW `S05_table` | Rootrest barks | How the player met Corwin's account at the table. |
+| `MRW_TABLE` | spoke / quiet / elder | MRW `S05_table` | Rootrest barks | How the player met Godwin's account at the table. |
 | `MNK_NINTH` | bool (always true on completion) | MNK `S06_ninth` | Ferry household and Marshwarden barks; the ninth socket marker | The diversion socket is marked. |
 | `MRH_ANTLER` | rootrest / hunter | MRH `S06_antlers` | Rootrest bonecarver prop; Annot's bark | Where the antlers went. |
 | *(read)* `TH_STANDING` (Thornfell) | bool | Thornfell TF-M5 | MBO `MBO-D5.04` | One line from the visiting Ridge Warden. Never a gate. |
@@ -101,7 +101,7 @@ Griefwatch rings its vigil bell at each turn of the night, and has since the war
 |---|---|
 | Suggested content id | `mire.side.bell_roster` |
 | Type | Settlement, Griefwatch (bible §7.2) |
-| Unlock | MR-M2 Completed. Offered in the vigil hall by Ide Larrow (`MBO-D1`) after the bark `MBO-B0` at the closure gate on first entering Griefwatch. |
+| Unlock | MR-M2 Completed. Offered in the vigil hall by Ide Larrow (`MBO-D1`) after the bark `MBO-B0` at the closure gate on first entering Griefwatch. While MR-M5 is Active for a player, `MBO-B0` is suppressed for that player and fires on their next Griefwatch entry once MR-M5 is no longer Active (no new placements). |
 | Resume hook | Ide at the vigil table: `MBO-D1.00` "Roster's still wrong. Where were we?" |
 | Target length | 30–40 minutes |
 | Combat share | ~15% (Bog Hounds on the muster round) |
@@ -241,7 +241,7 @@ Small payment from the vigil hall's box; the vigil bell as a world interaction (
 
 ### MBO.16 Open decisions
 
-1. The Ridge Warden is a role (no name), consistent with Act III's role-named pair. If the Director wants a named Thornfell visitor, only `MBO-D` speaker labels change.
+1. The Ridge Warden is a role (no name), consistent with Act III's role-named pair. If the Director wants a named Thornfell visitor, only `MBO-D` speaker labels change. This Warden is not Eskil Stenning (MBS, Cloth and Memory): they are two different visitors to Griefwatch.
 2. "Bell-nights" in the vigil book are dated by weather; the keeper column never carries a date. (Resolved: Act III's `S08` register line is now headed by the night's weather, no calendar date.)
 
 ### MBO.17 Internal review log
@@ -384,7 +384,7 @@ MBO-D6.05 IDE: (pays from the hall's box) "Bell went on time. Write that somewhe
 
 ### MRW.1 The quest in one paragraph
 
-Corwin Tey left Rootrest as a young man to do wage work in Emberholt's yards, and came home this autumn because his grandmother Hessel can no longer bring in her own peat. He is strong, he works fast, and he is useful in a place that is short of hands, and Rootrest does not know what to do with him. The neighbours bring Hessel soup and do not look at him. The player helps him get Hessel's peat stack in from the cutting bank before the wet closes the plank way: barrowing turves while the neighbours watch from their doors, building a proper herringbone rick, and roofing Hessel's dry shed, where Corwin's Emberholt habit (tarred cloth) and Rootrest's (reed thatch) argue on the roof. The stack goes in. Then Hessel sets a table and asks the neighbours to it, and Corwin, asked straight out about the war, answers straight: in Emberholt they don't talk about the war, they talk about output, and he liked that, and the wage came every week on time. The table goes cold. Nothing the player says fixes it. One neighbour passes him the bread anyway.
+Godwin Tey left Rootrest as a young man to do wage work in Emberholt's yards, and came home this autumn because his grandmother Hessel can no longer bring in her own peat. He is strong, he works fast, and he is useful in a place that is short of hands, and Rootrest does not know what to do with him. The neighbours bring Hessel soup and do not look at him. The player helps him get Hessel's peat stack in from the cutting bank before the wet closes the plank way: barrowing turves while the neighbours watch from their doors, building a proper herringbone rick, and roofing Hessel's dry shed, where Godwin's Emberholt habit (tarred cloth) and Rootrest's (reed thatch) argue on the roof. The stack goes in. Then Hessel sets a table and asks the neighbours to it, and Godwin, asked straight out about the war, answers straight: in Emberholt they don't talk about the war, they talk about output, and he liked that, and the wage came every week on time. The table goes cold. Nothing the player says fixes it. One neighbour passes him the bread anyway.
 
 **Remember:** the bone chimes silent all evening in a moving wind, and ringing once as the bread goes across. **Want next:** nothing resolved; that is the point.
 
@@ -403,7 +403,7 @@ Corwin Tey left Rootrest as a young man to do wage work in Emberholt's yards, an
 | Rootrest: root-sheltered homes, herbalists, bonecarvers; soil feels "lighter" | Dossier §VII.4 | [CANON] |
 | Emberholt resented rationally (war escalation, peat and timber fears), never caricatured | Bible §5.3 rule 10 | Binding |
 | Returning worker, useful and suspect (braid 11 shape) | Part 4 relationship web; bible §7.2 | Proposal adopted |
-| Corwin and Hessel Tey, Gilly Ruddle, the bone chimes | This package | [NEW] |
+| Godwin and Hessel Tey, Gilly Ruddle, the bone chimes | This package | [NEW] |
 
 ### MRW.4 Quest summary card
 
@@ -416,7 +416,7 @@ Corwin Tey left Rootrest as a young man to do wage work in Emberholt's yards, an
 | Target length | 30–40 minutes |
 | Combat share | 0% |
 | Skills | None required (carry, stack and roof are interactions) |
-| Choice | How the player meets Corwin's account at the table (flavour flag `MRW_TABLE`) |
+| Choice | How the player meets Godwin's account at the table (flavour flag `MRW_TABLE`) |
 | **Anchor** | Rootrest households |
 | **World-truth row** | H23 (uneven recovery; who is owed welcome). |
 | **Revelation role** | Self-contained. |
@@ -437,19 +437,19 @@ Corwin Tey left Rootrest as a young man to do wage work in Emberholt's yards, an
 
 ### MRW.6 Player-facing sequence
 
-**Beat 0 — Hands (`S00_offer`).** *Objective: Hear out Hessel's neighbour.* `MRW-D1`. Gilly: Hessel's peat is still on the bank; the plank way goes under when the wet comes; Corwin is doing it alone because nobody will work beside him. "I'll not. I can't say why that's fair. I'll not anyway."
+**Beat 0 — Hands (`S00_offer`).** *Objective: Hear out Hessel's neighbour.* `MRW-D1`. Gilly: Hessel's peat is still on the bank; the plank way goes under when the wet comes; Godwin is doing it alone because nobody will work beside him. "I'll not. I can't say why that's fair. I'll not anyway."
 
-**Beat 1 — Beside Him (`S01_meet`).** *Objective: Talk to Corwin.* `MRW-D2`. Corwin is polite, quick and tired of being looked at.
+**Beat 1 — Beside Him (`S01_meet`).** *Objective: Talk to Godwin.* `MRW-D2`. Godwin is polite, quick and tired of being looked at.
 
-**Beat 2 — The Stack (`S02_haul`).** *Objective: Bring the turves in (0/4 loads).* Keep watch if the plank way's stake reads Sour (the low planks are under; Slack or Running both pass). Load a barrow at the bank (interaction), wheel it along the plank way (carry-state; slower), tip at the rick base. Four loads; Corwin does four alongside. On each run a neighbour line from a door (`MRW-B1`), one per house; they speak to the player, never to Corwin.
+**Beat 2 — The Stack (`S02_haul`).** *Objective: Bring the turves in (0/4 loads).* Load a barrow at the bank (interaction), wheel it along the plank way (carry-state; slower), tip at the rick base. Four loads; Godwin does four alongside. On each run a neighbour line from a door (`MRW-B1`), one per house; they speak to the player, never to Godwin.
 
-**Beat 3 — The Rick (`S03_rick`).** *Objective: Build the rick.* Herringbone stacking: lay turves in courses, each course angled against the last, with a ridge at the top to shed water. An interaction sequence on the rick (six courses; each course is one interaction choosing **left lean** or **right lean**; the correct answer alternates and the rick shows the pattern). A wrong lean shows the turves sliding (~1 s) and the course resets. Corwin shows the first two.
+**Beat 3 — The Rick (`S03_rick`).** *Objective: Build the rick.* Herringbone stacking: lay turves in courses, each course angled against the last, with a ridge at the top to shed water. An interaction sequence on the rick (six courses; each course is one interaction choosing **left lean** or **right lean**; the correct answer alternates and the rick shows the pattern). A wrong lean shows the turves sliding (~1 s) and the course resets. Godwin shows the first two.
 
-**Beat 4 — The Roof (`S04_roof`).** *Objective: Roof the dry shed.* Corwin wants to use tarred cloth (he brought a roll back from the yards); Hessel's neighbours say reed thatch, as Rootrest has always done. The player chooses which (`MRW-D3`): **tar cloth** (two interactions; quick; Gilly mutters "Emberholt pitch"), or **reed thatch** (four interactions with reed bundles from Gilly's own store, which she gives the player, not Corwin). Either roofs the shed. Flavour only; nothing changes later but one bark.
+**Beat 4 — The Roof (`S04_roof`).** *Objective: Roof the dry shed.* Godwin wants to use tarred cloth (he brought a roll back from the yards); Hessel's neighbours say reed thatch, as Rootrest has always done. The player chooses which (`MRW-D3`): **tar cloth** (two interactions; quick; Gilly mutters "Emberholt pitch"), or **reed thatch** (four interactions with reed bundles from Gilly's own store, which she gives the player, not Godwin). Either roofs the shed. Flavour only; nothing changes later but one bark.
 
-**Beat 5 — The Table (`S05_table`).** *Objective: Sit at Hessel's table.* Food first. Then Gilly asks Corwin about the war, straight out. He answers straight (`MRW-D4`). The table goes cold. The player may speak for his work, say nothing, or turn to Hessel. Sets `MRW_TABLE`. Then the bread (MRW.8).
+**Beat 5 — The Table (`S05_table`).** *Objective: Sit at Hessel's table.* Food first. Then Gilly asks Godwin about the war, straight out. He answers straight (`MRW-D4`). The table goes cold. The player may speak for his work, say nothing, or turn to Hessel. Sets `MRW_TABLE`. Then the bread (MRW.8).
 
-**Beat 6 — Out (`S06_close`).** *Objective: Leave Hessel's house.* `MRW-D5` at the door with Corwin. Quest Completed.
+**Beat 6 — Out (`S06_close`).** *Objective: Leave Hessel's house.* `MRW-D5` at the door with Godwin. Quest Completed.
 
 ### MRW.7 Encounters
 
@@ -460,17 +460,17 @@ None.
 | Time | Element | Spec |
 |---|---|---|
 | All evening | **Silent** | The bone chimes on the roots over Hessel's door hang still. The reeds beyond the door move in the wind, visibly, all evening. The chimes make no sound. (Ambient: wind in reeds, no chime.) |
-| The bread | **Across** | Gilly, after a long cold quiet, takes the loaf and passes it to Corwin without looking at him. |
+| The bread | **Across** | Gilly, after a long cold quiet, takes the loaf and passes it to Godwin without looking at him. |
 | At the hand-over | **Once** | The chimes ring once, a short dry clatter, then hang still again. |
 | After | Hessel | "Wind." (`MRW-D4.40`) |
-| Meaning | None stated. Proves nothing about Corwin, Gilly or anyone. |
+| Meaning | None stated. Proves nothing about Godwin, Gilly or anyone. |
 
 ### MRW.9 Steps and completion events
 
 | Step | Objective | Completes on | Req. |
 |---|---|---|---|
 | `S00_offer` | Hear out Hessel's neighbour. | `MRW-D1` accept | Yes |
-| `S01_meet` | Talk to Corwin. | `MRW-D2` end | Yes |
+| `S01_meet` | Talk to Godwin. | `MRW-D2` end | Yes |
 | `S02_haul` | Bring the turves in. | 4 barrow loads tipped | Yes |
 | `S03_rick` | Build the rick. | 6 courses correct | Yes |
 | `S04_roof` | Roof the dry shed. | Tar (2) or thatch (4) interactions | Yes (`MRW_ROOF` = tar / thatch) |
@@ -488,15 +488,15 @@ None.
 
 | Option | Immediate | Cost | Later |
 |---|---|---|---|
-| **Speak for his work** (`spoke`) — *"He brought the stack in. I saw it."* | Gilly: "I saw it too. That's not what I asked." | The player is now counted on his side, a little. | Corwin: "You didn't have to." |
-| **Say nothing** (`quiet`) | The silence goes on until Gilly breaks it with the bread. | None visible. | Corwin: "Thanks for not." |
+| **Speak for his work** (`spoke`) — *"He brought the stack in. I saw it."* | Gilly: "I saw it too. That's not what I asked." | The player is now counted on his side, a little. | Godwin: "You didn't have to." |
+| **Say nothing** (`quiet`) | The silence goes on until Gilly breaks it with the bread. | None visible. | Godwin: "Thanks for not." |
 | **Turn to Hessel** (`elder`) — *"Hessel, it's your table."* | Hessel: "He came back. I don't need it to be more than that." | Hessel has to say it in front of them. | Hessel's bark at her door afterwards. |
 
 In every outcome, Gilly passes the bread; nobody forgives anything; the stack is in.
 
 ### MRW.12 Rewards and unlocks
 
-Hessel's thanks and a pot of rootcraft balm (a consumable from the item pass, or none); small payment from Corwin's wage ("Emberholt coin spends the same."). No lump XP.
+Hessel's thanks and a pot of rootcraft balm (a consumable from the item pass, or none); small payment from Godwin's wage ("Emberholt coin spends the same."). No lump XP.
 
 ### MRW.13 Failure, recovery, persistence, co-op
 
@@ -506,7 +506,7 @@ Hessel's thanks and a pot of rootcraft balm (a consumable from the item pass, or
 | Wrong lean | Course resets. |
 | Walking away | Stays Active; resume at Gilly. |
 | Logout with a barrow | The load returns to the bank. |
-| Co-op | Per-player; NPC table placement follows the host. |
+| Co-op | Per-player. NPC table placement may follow the host only as a provisional presentation fallback (Integration MI-CO-06, pending Director review; conflicts in Integration §5.2 Q-18); it never decides another player's step or credit. |
 
 ### MRW.14 Integration needs
 
@@ -522,14 +522,14 @@ None.
 
 ### MRW.16 Open decisions
 
-1. Corwin's account is deliberately unflattering to the Mire's ears and fair to Emberholt (voice rule 10). The Emberholt bible owner should review `MRW-D4.10`–`.14` for consistency with that region's voice when it exists.
+1. Godwin's account is deliberately unflattering to the Mire's ears and fair to Emberholt (voice rule 10). The Emberholt bible owner should review `MRW-D4.10`–`.14` for consistency with that region's voice when it exists.
 
 ### MRW.17 Internal review log
 
 | Check | Result |
 |---|---|
 | No absolution | Nobody forgives; the bread is manners. |
-| Emberholt fairness | Corwin is neither villain nor apologist; Rootrest's resentment has reasons (peat and timber fears, war escalation) stated once by Gilly. |
+| Emberholt fairness | Godwin is neither villain nor apologist; Rootrest's resentment has reasons (peat and timber fears, war escalation) stated once by Gilly. |
 | No Remnant, no Glassed Hollow, no route | None present; "the yards" is all that is said. |
 | MD-7 swap note | No Hollowfoot content. No change under either ruling. |
 
@@ -539,7 +539,7 @@ None.
 
 | Character | Knows | Doesn't know | Voice |
 |---|---|---|---|
-| **Corwin Tey** [NEW] | Wage work in Emberholt's yards; peat; his grandmother. | What Rootrest wants from him. | Polite, quick, plain; tired of being looked at. |
+| **Godwin Tey** [NEW] | Wage work in Emberholt's yards; peat; his grandmother. | What Rootrest wants from him. | Polite, quick, plain; tired of being looked at. |
 | **Hessel Tey** [NEW], his grandmother | Her house; her grandson. | — | Old, flat, unbudgeable. |
 | **Gilly Ruddle** [NEW], neighbour | Her reasons. | Whether they are fair. | Honest about her own unfairness. |
 
@@ -551,12 +551,12 @@ None.
 | `MRW-B1.2` | NEIGHBOUR (door 2) | Load 2 | "He's quick. They teach them quick over there." |
 | `MRW-B1.3` | NEIGHBOUR (door 3) | Load 3 | "Plank's slippy by the stake. Mind." |
 | `MRW-B1.4` | GILLY | Load 4 | (watches; says nothing; goes in) |
-| `MRW-B2.1` | CORWIN | Rick, first course | "Lean them. Each row the other way. Rain runs off a herringbone." |
-| `MRW-B2.2` | CORWIN | Wrong lean | "Other way." |
+| `MRW-B2.1` | GODWIN | Rick, first course | "Lean them. Each row the other way. Rain runs off a herringbone." |
+| `MRW-B2.2` | GODWIN | Wrong lean | "Other way." |
 | `MRW-B3.1` | GILLY | `MRW_ROOF = tar`, later | "Emberholt pitch on a Rootrest shed. It doesn't leak. I hate that." |
 | `MRW-B3.2` | GILLY | `MRW_ROOF = thatch`, later | "My reed. On his gran's shed. Don't make anything of it." |
 | `MRW-B4.1` | HESSEL | Post-quest, `elder` | "I said it. I'll not say it twice." |
-| `MRW-B4.2` | CORWIN | Post-quest | "Stack's dry. Gran's warm. That's what I came for." |
+| `MRW-B4.2` | GODWIN | Post-quest | "Stack's dry. Gran's warm. That's what I came for." |
 
 #### Nodes
 
@@ -570,32 +570,32 @@ MRW-D1.03 GILLY: "I'll not. I can't tell you why that's fair. I'll not anyway."
 MRW-D1.04 GILLY: "Emberholt made the war hotter than it had to be. Now they want our peat and our timber and send our young ones home when they're done with them." (beat) "That's not his fault. I know it's not."   → MRW-D1 options
 MRW-D1.06 GILLY: "Then go on. We'll be watching. We're good at that."   {event: accept}  → end
 
-MRW-D2.01 CORWIN: (at the bank, barrow half full) "You're not from here. Good. Everyone from here's at their doors."
-MRW-D2.02 CORWIN: "Gran can't lift it now. I came back to lift it. That's all."
+MRW-D2.01 GODWIN: (at the bank, barrow half full) "You're not from here. Good. Everyone from here's at their doors."
+MRW-D2.02 GODWIN: "Gran can't lift it now. I came back to lift it. That's all."
   > "I'll take a barrow."                                            → MRW-D2.03
   > "Why did you go?"                                                → MRW-D2.05
-MRW-D2.03 CORWIN: "Four each. Mind the stake by the low plank."   {event: S01 complete}  → end
-MRW-D2.05 CORWIN: "Wage. Every week. Nobody here paid anyone anything when I was young. You worked for your neighbour and your neighbour worked for you." (beat) "I wanted to be paid."   → MRW-D2 options
+MRW-D2.03 GODWIN: "Four each. Mind the stake by the low plank."   {event: S01 complete}  → end
+MRW-D2.05 GODWIN: "Wage. Every week. Nobody here paid anyone anything when I was young. You worked for your neighbour and your neighbour worked for you." (beat) "I wanted to be paid."   → MRW-D2 options
 ```
 
 ```
-MRW-D3.01 CORWIN: (holding a roll of black cloth) "Tarred cloth. Two layers and it's dry for ten years."
+MRW-D3.01 GODWIN: (holding a roll of black cloth) "Tarred cloth. Two layers and it's dry for ten years."
 MRW-D3.02 GILLY: (from the yard wall) "Rootrest roofs with reed."
-MRW-D3.03 CORWIN: "Reed's three days and leaks in five years."
+MRW-D3.03 GODWIN: "Reed's three days and leaks in five years."
 MRW-D3.04 GILLY: "It's ours."
   > "Tar cloth. It's quick and it's dry."                            → MRW-D3.10
   > "Reed. Gilly, can we have your bundles?"                         → MRW-D3.20
-MRW-D3.10 CORWIN: "Thank you." / GILLY: "Emberholt pitch." (goes in)   {set MRW_ROOF = tar}  → end
+MRW-D3.10 GODWIN: "Thank you." / GILLY: "Emberholt pitch." (goes in)   {set MRW_ROOF = tar}  → end
 MRW-D3.20 GILLY: (a long look) "...They're by my door. You carry them. Not him."   {set MRW_ROOF = thatch}  → end
 ```
 
 ```
 MRW-D4.01 HESSEL: "Sit. Eat. Then talk, if you must."
-MRW-D4.02 (Food. Bowls passed. Nobody passes to Corwin; Hessel fills his.)
-MRW-D4.03 GILLY: (putting down her spoon) "Corwin. What do they say about the war, over there?"
-MRW-D4.10 CORWIN: "Nothing." (beat) "They don't talk about it. They talk about output. How many, how fast, by when."
-MRW-D4.11 CORWIN: "I liked that. Nobody looked at me like I was carrying something. I just carried things."
-MRW-D4.12 CORWIN: "And the wage came every week. On time. Every week."
+MRW-D4.02 (Food. Bowls passed. Nobody passes to Godwin; Hessel fills his.)
+MRW-D4.03 GILLY: (putting down her spoon) "Godwin. What do they say about the war, over there?"
+MRW-D4.10 GODWIN: "Nothing." (beat) "They don't talk about it. They talk about output. How many, how fast, by when."
+MRW-D4.11 GODWIN: "I liked that. Nobody looked at me like I was carrying something. I just carried things."
+MRW-D4.12 GODWIN: "And the wage came every week. On time. Every week."
 MRW-D4.13 (Nobody speaks. A neighbour sets down a cup very carefully.)
 MRW-D4.14 GILLY: "On time."
   > "He brought the stack in. I saw it."                             → MRW-D4.20
@@ -604,15 +604,15 @@ MRW-D4.14 GILLY: "On time."
 MRW-D4.20 GILLY: "I saw it too. That's not what I asked."   {set MRW_TABLE = spoke}  → MRW-D4.30
 MRW-D4.25 HESSEL: "He came back. I don't need it to be more than that." (beat) "I'm not asking you to either."   {set MRW_TABLE = elder}  → MRW-D4.30
 MRW-D4.30 [MRW_TABLE unset] {set MRW_TABLE = quiet}
-MRW-D4.31 (A long quiet. Then Gilly takes the loaf and passes it to Corwin without looking at him.)   {event: rootrest.bone_chimes (MRW.8)}
-MRW-D4.32 CORWIN: (takes it) "...Thank you."
+MRW-D4.31 (A long quiet. Then Gilly takes the loaf and passes it to Godwin without looking at him.)   {event: rootrest.bone_chimes (MRW.8)}
+MRW-D4.32 GODWIN: (takes it) "...Thank you."
 MRW-D4.40 HESSEL: (to the chimes, not to anyone) "Wind."   → end
 ```
 
 ```
-MRW-D5.01 CORWIN: (at the door) "Stack's in. Shed's dry. That was the job."
-MRW-D5.02 [spoke] CORWIN: "You didn't have to say that." / [quiet] CORWIN: "Thanks for not." / [elder] CORWIN: "She'd never have said it to me. Only to them."
-MRW-D5.03 CORWIN: (coins) "Emberholt coin spends the same. Take it."
+MRW-D5.01 GODWIN: (at the door) "Stack's in. Shed's dry. That was the job."
+MRW-D5.02 [spoke] GODWIN: "You didn't have to say that." / [quiet] GODWIN: "Thanks for not." / [elder] GODWIN: "She'd never have said it to me. Only to them."
+MRW-D5.03 GODWIN: (coins) "Emberholt coin spends the same. Take it."
       {event: MRW-D5 end → quest Completed}
 ```
 
@@ -633,7 +633,7 @@ MRW-D5.03 CORWIN: (coins) "Emberholt coin spends the same. Take it."
 
 Nine Stakes is an old marked crossing at the edge of the Field of Fallen Standards: nine Reedsward depth stakes set in bog-oak sockets across a broad shallow, telling anyone on the bank whether it will take them. Since the causeway went down this spring, most traffic uses the causeway; the people who still cross at Nine Stakes are the ones who will not walk past the standards, and they are the ones being drowned. Mud-Clad Raiders have pulled the stakes and re-set them with the bands turned, so the crossing reads Slack when it is Sour, and they wait in the reeds for whoever wades out and goes in to the waist. Halsey Fenner, a Marshwarden, lost a ferry family's cart there last week and nobody in it came out of the water dry. The player reads the false stakes from the rise, clears the raider groups in their mud, fights the Mud-Boss on the reed island at the crossing's middle, and then does the real work: carries nine stakes back and sets each in its own socket by the wear ring on the bog-oak, with the right face to the bank. One socket is off the line, pointing down a side channel, worn as deep as the others. The ferry book at Halsey's post says why: in the war a stakeman moved one stake to send a fleeing group of households down the side channel where nobody could follow at Sour. The ninth stake goes back on the line; the side socket is marked. At dusk the moss caps on the stakes light one after another from the near bank to the far, as if someone were walking across with a lantern.
 
-**Remember:** nine lights crossing the water with nobody carrying them. **Want next:** to know who Stakeman Varne was and what became of him (the ferry book gives only the name).
+**Remember:** nine lights crossing the water with nobody carrying them.
 
 ### MNK.2 Selection record
 
@@ -699,7 +699,7 @@ Nine Stakes lies at the Field's edge off the Standards Causeway (bible §4.2 rou
 
 **Beat 5 — Set Them True (`S05_set`).** *Objective: Set each stake in its own socket.* Each socket's bog-oak wall carries a **wear ring** where the water has stood for years at Slack, and a **notch** cut on the bank side. Each stake has a matching notch at its foot. The puzzle (no timer, harmless reset): inspect a socket (`MNK-I4`), pick up the stake whose foot matches (stakes are carved with one to nine small cuts beside the notch; the sockets' notches match by count), seat it with the notch toward the bank (interaction; a wrong stake or wrong face simply does not seat: "Won't go home."). The painted bands then sit level with the wear ring: ochre at the ring. Nine seated stakes read the true state. Halsey reads the near stake and the crossing together from the bank (`MNK-B3`).
 
-**Beat 6 — The Ninth Socket (`S06_ninth`).** *Objective: Find out about the socket off the line.* One stake (carved nine) fits the ninth socket on the line *and* the tenth socket at the side channel's mouth (N5): both are cut for it. Inspect the side socket (`MNK-I6`). Ask Halsey (`MNK-D3`); she reads the **ferry book** (N1): an old entry, undated except by weather, in a ferryman's hand: *"Fog two days, then the hard frost. Stakeman Varne moved the ninth to the side mouth at dusk. Households off the road went down the side channel at Sour. Nobody could follow. Stake put back at first light."* (`MNK-I7`). The ninth stake goes back on the line (interaction); Halsey paints a small ring on the side socket's top so it is not forgotten (`MNK_NINTH`).
+**Beat 6 — The Ninth Socket (`S06_ninth`).** *Objective: Find out about the socket off the line (lift the ninth stake and try it there).* One stake (carved nine) fits the ninth socket on the line *and* the tenth socket at the side channel's mouth (N5): both are cut for it. Lift the ninth stake and try it in the side socket (interaction; it seats). Inspect the side socket (`MNK-I6`). Ask Halsey (`MNK-D3`); she reads the **ferry book** (N1): an old entry, undated except by weather, in a ferryman's hand: *"Fog two days, then the hard frost. Stakeman Varne moved the ninth to the side mouth at dusk. Households off the road went down the side channel at Sour. Nobody could follow. Stake put back at first light."* (`MNK-I7`). The ninth stake goes back on the line (interaction); Halsey paints a small ring on the side socket's top so it is not forgotten (`MNK_NINTH`).
 
 **Beat 7 — The Lights (`S07_dusk`).** *Objective: Watch the crossing at dusk.* Halsey caps each stake with wet lantern moss, as Marshwardens do on a kept crossing. Keep watch to dusk at the post. The strange moment (MNK.8). `MNK-D4`. Quest Completed.
 
@@ -750,7 +750,7 @@ Tuned for MR-M1's Competent identity, upper end (MD-10).
 | `S03_boss` | Take the reed island. | MNK-E3 defeated | Yes |
 | `S04_pull` | Pull the false stakes. | 9 `pull_stake` | Yes |
 | `S05_set` | Set each stake in its own socket. | 9 `seat_stake` | Yes |
-| `S06_ninth` | Find out about the socket off the line. | Side socket inspect + `MNK-D3` (ferry book) + ninth reseated | Yes (sets `MNK_NINTH`) |
+| `S06_ninth` | Find out about the socket off the line (lift the ninth stake and try it there). | Ninth lifted and tried in the side socket + side socket inspect + `MNK-D3` (ferry book) + ninth reseated on the line | Yes (sets `MNK_NINTH`) |
 | `S07_dusk` | Watch the crossing at dusk. | Keep watch to dusk + light event + `MNK-D4` end | Yes (→ Completed) |
 
 ### MNK.10 Flags
@@ -775,7 +775,7 @@ Nine Stakes as a true, kept crossing (a route across the Field's edge, readable 
 | Wrong stake or face | "Won't go home." Lift and try another. |
 | Walking away | Stays Active; resume at Halsey. |
 | Death | Respawn at the post; progress kept. |
-| Co-op | Raiders and the Mud-Boss are shared; stakes are per-player props (host fallback); each player reads the ferry book. |
+| Co-op | Raiders and the Mud-Boss are shared; stakes are per-player props; each player's crossing and stake interactions follow their own state. Any shared stake presentation is a provisional presentation fallback (Integration MI-CO-06, pending Director review; conflicts in Integration §5.2 Q-18) and never gates another player's navigation or credit. Each player reads the ferry book. |
 
 ### MNK.14 Integration needs
 
@@ -884,7 +884,7 @@ MNK-D4.04 HALSEY: (pays from the post's box) "Cart family's goods back, crossing
 
 ### MRH.1 The quest in one paragraph
 
-The Rust Hollow is ironbloom ground at the edge of the Field: red soil, rust-coloured fungus, and old iron in the peat that nobody touches because battlefield metal is not salvage. A great tarnish stalker has made it its own, a stag twice the size of any in Marshfall's stories, with antlers stained iron-black, and it charges anything that walks on two legs. Annot Reeve, a Marshfall hunter, has lost a dog and nearly a nephew to it, and has worked out one thing: its path is mad, but its stops are not. It stops only on the thickest ironbloom, to lick the red soil. The player reads four stop sites by sign (scrape, licked-bare ground, antler rub, droppings red with iron) and by the ironbloom's colour (deep rust where it is thick, orange where thin), finds the one thick patch it has not yet stopped at this round, and is there first. The Rust Hart comes out of the fog, stops, licks, lifts its head, and charges. When it is down, the player finds an old arrowhead grown into the base of one antler, carried for longer than Annot has hunted.
+The Rust Hollow is ironbloom ground at the edge of the Field: red soil, rust-coloured fungus, and old iron in the peat that nobody touches because battlefield metal is not salvage. A great tarnish stalker has made it its own, a stag twice the size of any in Marshfall's stories, with antlers stained iron-black, and it charges anything that walks on two legs. Annot Reeve, a Marshfall hunter, has lost a dog and nearly a nephew to it, and has worked out one thing: its path is mad, but its stops are not. It stops only on the thickest ironbloom, to lick the red soil. The player reads four stop sites by sign (scrape, licked-bare ground, antler rub, droppings red with iron) and by the ironbloom's colour (deep rust where it is thick, orange where thin), finds the one thick patch it has not yet stopped at this round, and is there first. The Rust Hart comes out of the fog, stops, licks, lifts its head, and charges. When it is down, the player finds an old arrowhead grown into the skull at the base of one antler, carried for longer than Annot has hunted.
 
 **Remember:** a stag the colour of old iron standing quite still on a red patch, and then not. **Want next:** to read the Mire's ironbloom everywhere.
 
@@ -1023,7 +1023,7 @@ Tuned for MR-M2's Competent identity, upper end (MD-10).
 | **To Rootrest's bonecarvers** (`rootrest`) | Annot carries them to Rootrest; the bonecarvers make a memorial rail-piece from them. | Annot gets no trophy, and she wanted one more than she says. | A carved antler piece on the rail by the Last Root (MDS08 area). Mourners touch it. |
 | **To Annot's wall** (`hunter`) | They hang over her blind. | Rootrest's carvers lose the best antler anyone has seen. | Annot's bark; Marshfall children dare each other to touch them. |
 
-The arrowhead stays in the antler either way. Nobody pulls it out.
+The arrowhead stays in the skull plate the antlers are taken on, either way. Nobody pulls it out.
 
 ### MRH.12 Rewards and unlocks
 
@@ -1037,7 +1037,7 @@ The hide and meat per the economy pass (harvest); a share to Annot; small paymen
 | Chooses the wrong patch | Annot's bark; choose again. |
 | Death | Respawn at the blind; stop sites stay read; the Hart resets. |
 | Walking away | Stays Active; resume at Annot. |
-| Co-op | The Hart is a shared world creature; all present get credit; the choice is per player (prop host fallback). |
+| Co-op | The Hart is a shared world creature; a defeat credits each partner whose own active step consumes it (Lowmark §8.1); the choice is per player (prop host fallback: provisional presentation only, Integration MI-CO-06, pending Director review). |
 
 ### MRH.14 Integration needs
 
@@ -1054,7 +1054,7 @@ The hide and meat per the economy pass (harvest); a share to Annot; small paymen
 |---|---|
 | Author truth | Somebody shot this stag long ago with an iron-headed arrow, and it lived and carried the head. When and who is not decided. |
 | Public belief | "It's been shot at for twenty years and laughed." |
-| Observable | The arrowhead grown into the antler base. |
+| Observable | The arrowhead grown into the skull at the antler base. |
 | Wrong reading | A soldier's arrow from the war, so the Hart is as old as the war. (Nothing dates the head.) |
 | Withheld | When; who. |
 
@@ -1069,7 +1069,7 @@ The hide and meat per the economy pass (harvest); a share to Annot; small paymen
 |---|---|
 | CDR-1 | The Hart and its stalkers to 0 HP; no flee; the bellow calls adds, it does not leave. |
 | CDR-2 | Range never holds the charge off; melee has the lick window; both read the patches. |
-| Battlefield metal | Old iron in the arena is inspect-only. The arrowhead stays in the antler. |
+| Battlefield metal | Old iron in the arena is inspect-only. The arrowhead stays in the skull plate. |
 | Evidence | The arrowhead proves nothing; nothing dates it. |
 | MD-7 swap note | No Hollowfoot content. No change under either ruling. |
 
@@ -1395,7 +1395,7 @@ Each discovery has a **surface** (what anyone sees), a **reading** (what a caref
 | Interruptible re-coat buff | MNK Mud-Boss | Gameplay | Standard. |
 | Range inspect | MNK | Systems | Line-of-sight inspect. |
 | Scripted light sequences (answering lamps; moss caps; reflection) | MBO, MNK, MDS02 | VFX | Event-driven prop states. |
-| Per-player props | All | Systems | Host fallback. |
+| Per-player props | All | Systems | Host fallback as a provisional presentation fallback only (Integration MI-CO-06, pending Director review); never gates another player's navigation, interactions, credit or completion (Q-18). |
 | Quest-start skill requirement | MRH | Systems / Schema | Standard requirement check on accept. |
 | Persistent discovery booleans | MDS01–MDS10 | Schema | `MDS##_SEEN` / `MDS##_READ`; **`MDS07_READ` is read by Act III**. |
 
@@ -1416,7 +1416,9 @@ No runtime need beyond bible §11.1–11.2 and standard requirement checks.
 | MD-7 | No Hollowfoot content anywhere in this file; every quest carries a "no change" swap note. |
 | `[CAUSEWAY]` | MNK hook and `MNK-B0` tagged. |
 | Quest items | 0. |
-| New names checked for collisions | Tibb Ormer, Elin and Aldous Copse, the Wisby household (renamed from Brack: Lowmark's Brack and Thornfell's Thyra Brack), Corwin and Hessel Tey, Gilly Ruddle, Halsey Fenner, Annot Reeve, Varne (ferry book): grepped against the repository; no collisions outside this file. |
+| New names checked for collisions | Tibb Ormer, Elin and Aldous Copse, the Wisby household (renamed from Brack: Lowmark's Brack and Thornfell's Thyra Brack), Godwin and Hessel Tey, Gilly Ruddle, Halsey Fenner, Annot Reeve, Varne (ferry book): grepped against the repository; no collisions outside this file. |
 | Deviations from the bible | (1) MBO's Ridge Warden is a role (no name), matching Act III. (2) MDS07 is available before MR-M5 at Bran's watchpost (Bran is there by canon) and after; during MR-M5, Act III's own inspect presents it. (3) MRH's quest-start Hunting requirement (bible §13 recommendation). |
 | Independent review (2026-11-09) | Fixed: MBO "Brack" household renamed **Wisby** (collided with Lowmark's Brack and Thornfell's Thyra Brack); MNK "Want next" said the ferry book does not name the stakeman while the entry names Varne (now asks who Varne was); MNK-E3 mudcutters were both "on the island" and summoned by the Call (now mounds at the edge that rise on the Call or on approach); MRH arena had only two thick patches that thin after two licks each, so the stop loop could run dry (now the first-thinned patch darkens back to rust); MDS07 and §0.2 still requested Act III to set `MDS07_SEEN`/`MDS07_READ`, which Act III `S02` now does (worded as honoured); MDS07 said Bran is at Griefwatch during MR-M5 (Act III `S02` has him at his watchpost); MBO.16 stale Act III "date" item closed; Ridge Warden pronoun made "they". Verified: Mud-Boss, raiders, hounds, stalkers and the Rust Hart all to 0 HP with no flee; melee and ranged viable, none required; MBO completion at `S07_book` matches Act III `MBL-D1.03` and the vigil-book inspect; discoveries keep three layers and leave the Sinking Star, R08 counts, the fire-roads man (unresolved name) and Mirebone (provisional) unresolved; no calendar dates or casualty counts. |
 | Batch 4 encounter alignment review, 2026-11-09 | Aligned with `Enemies/Caelmor_Mire_Encounter_and_Enemy_Requirements.md` §13.3 (numbers and text only; no id, step or flag renamed): MBO-E1 runner dart ~0.8 s → ~0.9 s, gnawer ~1.0 s → ~1.2 s, no bleed (I-8, I-9); MNK-E1 cleave ~0.9 s → ~1.0 s, sling ~1.4 s → ~1.2 s, no blind (I-8, I-10); MNK.7.1 Hook pull 1.3 s → 1.5 s (I-11); MRH.7.1 Charge stamps 1.4 s → 1.5 s and MRH-E2 stalker stamp ~1.0 s → ~1.5 s (C-1, I-11). |
+| Playability audit fixes, 2026-11-13 | SS-07 (MBO bark suppressed while MR-M5 is Active), SS-08 (MRW plank-way keep-watch gate deleted; X14 is presentation), SS-13 (MBO Warden and Eskil are two people), SS-14 (S06 lifts the ninth first), SS-15 (Corwin Tey renamed Godwin Tey; collision-checked across Lowmark, Thornfell and Mire), SS-16 (arrowhead in the skull at the antler base), SS-17 (unanswered Varne hook deleted), CO-03 (MRH credit by own active step). Authored walkthrough only. |
+| Playability audit fixes review, 2026-11-13 | Independent review of the same-day fixes. This file had no file-level co-op qualifier: MRW.13, MNK.13, MRH.13 and the runtime "Per-player props" row now state host presentation as a provisional fallback (MI-CO-06) that never gates another player's navigation or credit; MNK stake interactions follow each player's own state. Authored walkthrough only; text only; no id, step, flag or geography changed; no Director recommendation promoted. |

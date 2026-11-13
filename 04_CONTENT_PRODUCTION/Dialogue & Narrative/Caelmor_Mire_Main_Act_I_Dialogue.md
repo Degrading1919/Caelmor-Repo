@@ -301,7 +301,9 @@ MNS-D3.42 EDRIS: "Ask them. Ask him. I've asked enough people things this week."
 | Lantern-moss post (night, lit) | "The moss glows a faint, cold green. Wet." | Night |
 | Lantern-moss post (night, dark) | "Dark. The moss is dry and pale. The foot of the post is dry too." | Night, old line |
 
-### MNS-D5: Mara at her marker (S03, the tape)
+### MNS-D5: Mara at her marker (S02 or S03, the tape)
+
+Available from `S02` (the marker is on the route out; quest file §A6 Beat 2 item 4). The `S03` predicate reads `MNS_HOLD_TAPE` whenever it was set.
 
 ```
 MNS-D5.01 MARA: (kneeling at the ring of stones; she doesn't get up) "Don't step in the ring."
@@ -1189,3 +1191,4 @@ MBR-D8.93 CALWEN: (to the player, as an afterthought) "Ysolde'll want to see you
 | Other regions | `CN_COMPLETE` and TF-M3 hooks (`MNS-D1.30`–`.36`) are optional, say "not found", and add nothing about either name. |
 | Minor names [NEW] | "Col" (`MNS-B0.4`) is an incidental name; removable. Dunstan's father is unnamed. |
 | Prose | Plain sentences; no em-dash chains in dialogue; humour kept to tables and work (Nell's jokes, Hob's herons, Calwen's "I'll fold you"). |
+| Playability audit fixes, 2026-11-13 | SM-15: `MNS-D5` is available from `S02` as well as `S03` (heading and one note; no line changed). Authored walkthrough only; nothing was played. |

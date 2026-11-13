@@ -19,7 +19,7 @@
 | **MEP** | The Empty Place | Names Below (3/3) | Settlement | MBA Completed | Sorrowmere (Keel house); Blackwater Landing; the root-timber lot past Rootrest | **read**, find, welcome | **Read a child's signs, find a living man in a ferry book, help him finish his work, bring him to the table** | Lew has been carving the same work sign Posy leaves on his plate | `MEP_HOME`; Names Below "away, not lost" column |
 | **MLL** | The Broken Lantern Light | Lanterns and Tenders (1/3) | Environmental | MR-M1 Completed | Stillgrave Hollow; Sorrowmere memorial gardens | **gather**, tend, finish | **Night gathering, a lantern mend, then holding a lit line** while a family finishes a mourning ring and Earthen Echoes come out of the grief at the edge | When the ring is closed, Stillgrave's water stops bending the lantern light and lets it lie straight | `MR_LANTERN_LINE` (true on completion); `MLL_PLACE` |
 | **MLW** | The Lantern That Would Not Go Out | Lanterns and Tenders (2/3) | Memory/lore | MLL **and** MR-M4 Completed | The Chapel roof and loft; Sorrowmere | **read**, craft, keep | **Read the Tenders' wax book, rebuild the seven-night lantern, keep it lit for one wet night** with trim-and-feed turns | The wax book's last night is signed "Kept." in a hand no Tender knows | `MLW_KEEPER` |
-| **MLD** | Lifting Day | Lanterns and Tenders (3/3) | Festival | MLW **and** MR-M2 Completed | The Standards Causeway; Sorrowmere long table | **carry**, cook, celebrate | **A festival you work**: cook for the table, settle who walks the repaired way first and last, lead the children's sign walk at ordinary pace | As the last walker steps off, every crew stake along the causeway shows Slack at once, which nobody has seen since spring | *Lifting Day* Completed; `MLD_ORDER` |
+| **MLD** | Lifting Day | Lanterns and Tenders (3/3) | Festival | MLL **and** MR-M2 Completed | The Standards Causeway; Sorrowmere long table | **carry**, cook, celebrate | **A festival you work**: cook for the table, settle who walks the repaired way first and last, lead the children's sign walk at ordinary pace | As the last walker steps off, every crew stake along the causeway shows Slack at once, which nobody has seen since spring | *Lifting Day* Completed; `MLD_ORDER` |
 
 **Length targets:** MSS 35–45 min; MBA 30–40; MEP 30–40; MLL 35–45; MLW 30–40; MLD 30–40. About 3.5–4 hours across the six.
 
@@ -52,10 +52,10 @@ MR-M1 The Name at Sorrowmere (MR_CHANNELS, MR_NAME_RECORD)
  │   MR-M3 Rowan's Crossing ───┘     (Thornfell variant lines: TWN_MIRE_HOOK, TWN Completed, TF-M5 Completed)
  │                                                             (Lowmark variant line: CN_COMPLETE)
  │
- └─► MLL The Broken Lantern Light ──┐
-                                    ├─► MLW The Lantern That Would Not Go Out ──┐
-     MR-M4 The Chapel ──────────────┘                                          ├─► MLD Lifting Day
-                                                    MR-M2 The Banners ─────────┘   (practically always met: MR-M4 needs MR-M2)
+ └─► MLL The Broken Lantern Light ──┬──────────────────────────────────────────┐
+                                    ├─► MLW The Lantern That Would Not Go Out  ├─► MLD Lifting Day
+     MR-M4 The Chapel ──────────────┘   (MLW_KEEPER: optional read in MLD)     │   (MLL and MR-M2; MLW not required)
+                                                    MR-M2 The Banners ─────────┘
 
 Feeds MR-M5 Bannerline (Act III input table):
    MR_STRANGER_SEAT (MSS)  · MR_LANTERN_LINE (MLL)  · Lifting Day Completed (MLD)
@@ -90,7 +90,7 @@ The two series do not gate each other. Neither gates a milestone. A player who n
 | `MBA_SPINE` | self / crew | MBA | Ysolde bark |
 | `MEP_HOME` | table / way | MEP | MLD (Lew walks with the returns) |
 | `MLL_PLACE` | ring / garden | MLL | MLW opener; MR-M5 (request, presentation only: none needed) |
-| `MLW_KEEPER` | roof / gardens / landing | MLW | MLD (where the lantern stands on the day); post-quest barks |
+| `MLW_KEEPER` | roof / gardens / landing | MLW | MLD, optional read only (where the lantern stands on the day, if MLW is Completed; MLD does not require MLW); post-quest barks |
 | `MLD_ORDER` | first / last / together | MLD | Sorrowmere barks; Act III `MBL-B9.4` (≠ first) / `MBL-B9.4b` (= first), already authored |
 
 **Region and quest flags read here:** `MR_CHANNELS`, `MR_NAME_RECORD`, `MR_CAUSEWAY`, `MR_BANNERS`, `MR_ROWAN_TRUST`, `MR_WARDEN_RECORD`, `MNS_HOOK_ASKED`, `MBR_PINS`, `MCS_TOLD_MABYN_LANTERN`, MR-M5 Completed (MLD variant), `TWN_MIRE_HOOK`, `TWN_COMPLETE`, `thornfell.main.05_stonewake` Completed, `CN_COMPLETE`.
@@ -121,7 +121,7 @@ Act III's input table (`Caelmor_Mire_Main_Act_III.md`, "Inputs read") is impleme
 - **Evidence rule.** Phenomena never identify a person, settle a claim or name the dead. Combat drops nothing that advances an investigation.
 - **MD-7.** No Hollowfoot appear in any of these six quests (bible MD-7: Hollowfoot appear only where the General's pulse drives them). Each package carries a one-line swap note anyway, as the brief asks.
 - **MD-3 / MD-4.** Rowan never crosses at night in any of these quests. MLW reaches the chapel roof by Rowan's Chapel route at Slack by day (`[MD-3]` noted where it matters). No quest here enters the nave; MD-4 is not touched.
-- **Co-op:** independent instances; shared world creatures give step credit to every participant on that step; quest-state props and NPC placement are per player (Lowmark per-player prop pattern; fallback: host state drives props, each player's own state drives dialogue).
+- **Co-op:** independent instances; shared world creatures give step credit to every participant on that step; quest-state props and NPC placement are per player (Lowmark per-player prop pattern; where a row says "fallback: host", that is a provisional presentation fallback only (Integration MI-CO-06, pending Director review) and never decides another player's walkable ground, interactions, credit or completion; each player's own state drives dialogue).
 - **Address** (bible §5.3 rule 8): people who saw the MR-M1 reading say "witness"; others say "traveller". After MSS, Rootrest's and Griefwatch's hearing keepers also say "witness".
 - **Map.** Relative placement only. **MAP VERIFICATION REQUIRED** wherever geometry matters. No route or direction to another region is stated; "the high passes" and "the lowlands" are used only as people's own words for where someone came from.
 
@@ -214,7 +214,7 @@ After the reading, Ysolde Haverel has three Silt hearings waiting and nobody to 
 
 **Beat 1 — The mooring (`S01_mooring`).** *Objective: Sit the hearing at the register room.* The player sits (interaction *Sit the seat*). `MSS-D2`: Wat Crake and Lowri Bask, Ysolde, a Chapel-Tender (Prue Calloway). Everyone touches the soil bowl before speaking (MME02); the bowl is not offered to the player. Wat: the post is his, it moved. Lowri: it's in front of her door now. The Tender asks for "what the water says". **Evidence task:** at the jetty, inspect the **old stub's bands** and the **channel stake** (with `MR_CHANNELS`, the inspect reads which band the stub was set at: ochre, the Slack line, where a mooring belongs) and read the **jetty book** (three entries; the post's setting, "set at the ochre, Crake's"). Return and *show* (recall in dialogue). The hearing rules (`MSS-D2.30`): the post is re-set at the ochre line on the new channel, which falls between both doors; both tie there, Crake first in the morning. The player says it back (`MSS-D2.40`). Inspect the seat (required): the Sorrowmere seat (`MSS-I1.01`).
 
-**Beat 2 — The spoon (`S02_spoon`).** *Objective: Sit the hearing at Griefwatch.* Travel. `MSS-D3` at the vigil hall: Abel Wren and Hanne Lister, a Griefwatch Memorykeeper, a Tender. Mara Fenholt brought the spoon up from the Bannerline road edge (she says where, and that she dug no deeper than the ground offered). It has a scratch-mark on the handle: a ring with a stroke. Both households say it is theirs. **Evidence task:** read both household books (inspects in two houses). The Wren book draws a ring with a stroke beside "Grandmother's spoons, six"; the Lister book draws the same mark beside "Spoons from the Wren wedding, given, two". Both books hold it: the spoon was a wedding gift between the houses. The hearing (`MSS-D3.30`): the spoon is both houses'; it hangs in the vigil hall on the spoon nail and goes to whichever house is feeding the bell-keeper that week. The player says it back. Inspect the seat (required, `MSS-I1.02`: spear-shaft splint).
+**Beat 2 — The spoon (`S02_spoon`).** *Objective: Sit the hearing at Griefwatch.* Travel. `MSS-D3` at the vigil hall: Abel Wren and Hanne Lister, a Griefwatch Memorykeeper, a Tender. Mara Fenholt brought the spoon up from the Bannerline road edge (she says where, and that she dug no deeper than the ground offered). It has a scratch-mark on the handle: a ring with a stroke. Both households say it is theirs. **Evidence task:** read both household books (inspects in two houses). The Wren book draws a ring with a stroke beside "Grandmother's spoons, six"; the Lister book draws the same mark beside "Spoons from the Wren wedding, given, two". Both books hold it: the spoon was a wedding gift between the houses. The hearing (`MSS-D3.30`): the spoon is both houses'; it hangs in the vigil hall on the spoon nail and goes to whichever house is feeding the bell-keeper that week. The player says it back. Inspect the seat (required, `MSS-I1.02`: spear-shaft splint). While MR-M5 is Active for a player, this vigil-hall hearing is held until MR-M5 `S03` is complete, then resumes (no new placements).
 
 **Beat 3 — The lantern debt (`S03_debt`).** *Objective: Sit the hearing at Rootrest.* Travel. `MSS-D4` in the Rootrest hall: Saffy Teal, Davy Hesk, Elric Daw (keeps the hall's table), a Tender, a Rootrest Memorykeeper. **The seat is not fit to sit** (rotted legs). Elric: "Sit on the peat block then. It's held worse." The hearing opens anyway (beat 4 happens before the ruling). **Evidence task:** at the Teal house, inspect the **debt tally** (notches under a lantern hook: one cut each year on the night of the rescue, by Saffy's mother; the last few cuts in a different, newer hand: Saffy's) and the **peat stack** (half cut). The point lands in the objects: the debt was kept as a night's light, and Saffy has started cutting notches herself.
 
@@ -812,7 +812,7 @@ At the Keel house in Sorrowmere, **Posy Keel**, eight, sets a second place at ev
 
 **Beat 1 — The signs (`S01_signs`).** *Objective: Look at what Posy leaves.* At the Keel house, `MEP-D2` (Annis, Posy). Three signs over three meals (keep watch twice, or arrive at different hours; the house has a meal at morning, noon and dusk): **a reed peg-knife** (a timber cutter's marking knife, `MEP-I1.01`), **a painted chip** (a ferry token, `MEP-I1.02`), **a twist of moss** (lantern moss, "so he can see", `MEP-I1.03`). Ask Posy (`MEP-D2.20`): "It's asking. You leave a sign so the place knows what to ask." Read Lew's last letter on the shelf (`MEP-I1.04`).
 
-**Beat 2 — The ferry book (`S02_ferry`).** *Objective: Search the landing's ferry book for Lew Keel.* At Blackwater Landing, page the book by weather runs (as in MBA, simpler: one spread per run). Two entries after his last letter: *"Keel, J. Across, Rootrest side."* and, a few runs later, *"Keel, J. Back over, Rootrest side. Didn't stop."* (`MEP-I2.01`–`.02`). He came within a landing of home and turned round.
+**Beat 2 — The ferry book (`S02_ferry`).** *Objective: Search the landing's ferry book for Lew Keel.* At Blackwater Landing, page the book by weather runs (as in MBA, simpler: one spread per run). Two entries after his last letter: *"Keel, L. Across, Rootrest side."* and, a few runs later, *"Keel, L. Back over, Rootrest side. Didn't stop."* (`MEP-I2.01`–`.02`). He came within a landing of home and turned round.
 
 **Beat 3 — The lot (`S03_lot`).** *Objective: Find Lew at the root-timber lot.* Travel. `MEP-D3` (Lew). The quota board (`MEP-I3.01`): his line short. The ruined root-knee (`MEP-I3.02`). Lew: a split went wrong, he lost a week's work, the crew's paid by quota, he wasn't going home with nothing. He didn't write because "Annis writes back asking when."
 
@@ -878,7 +878,7 @@ The outcome is the family's in both: Lew is home, Posy keeps setting the second 
 | Leaves Lew at the lot | He waits at the lot gate ("I'll go when you go"). Escort is a follow, not a protect; no threats on the route. |
 | Walking away | Stays Active; resume at Annis (`MEP-B1.03`) or Lew (`MEP-B2.03`). |
 | Fail state | None. |
-| Co-op | Shared escort (Lew follows the player who spoke to him; fallback: host). Signs and the column are per player (fallback: host). |
+| Co-op | Lew follows the player who spoke to him, on that player's own step (an escort follows its own quest owner; no host fallback). Signs and the column are per player (fallback: host). |
 
 ### MEP.11 Integration needs, ledger, open decisions, review
 
@@ -890,7 +890,7 @@ The outcome is the family's in both: Lew is home, Posy keeps setting the second 
 | Ferry book document | UI | Same paged view as MBA. |
 
 **Mystery ledger.** *Why Lew stopped writing:* shame at a short quota; "nothing" was a word he would not write. Self-contained; no withheld layer.
-**Open decisions.** MAP VERIFICATION REQUIRED for the timber lot. If the economy pass objects to root-knee volume, the quota can be "three loads carried" instead (Woodcutting becomes carry); only `S04` changes.
+**Open decisions.** MAP VERIFICATION REQUIRED for the timber lot. MAP VERIFICATION REQUIRED (2026-11-13 audit, SS-27): the ferry book's crossings "Rootrest side" from Blackwater Landing are not carried by any crossing in Zones §6.2; geography is not changed here. If the economy pass objects to root-knee volume, the quota can be "three loads carried" instead (Woodcutting becomes carry); only `S04` changes.
 
 | Review finding | Revision |
 |---|---|
@@ -999,8 +999,8 @@ MEP-D6.01 YSOLDE: "We spend so long writing who's lost, we forget to write who's
 | MEP-I1.02 | Painted chip | *"A ferry token: a wood chip painted ochre, the Slack colour."* |
 | MEP-I1.03 | Moss twist | *"Lantern moss, twisted into a knot. It glows faintly where it is damp."* |
 | MEP-I1.04 | Lew's last letter | *"'Lot's good. Knees are hard. Home before the long wet. Tell Posy to practise her knife.'"* |
-| MEP-I2.01 | Ferry book 1 | *"'Keel, J. Across, Rootrest side.'"* |
-| MEP-I2.02 | Ferry book 2 | *"A few runs later: 'Keel, J. Back over, Rootrest side. Didn't stop.'"* |
+| MEP-I2.01 | Ferry book 1 | *"'Keel, L. Across, Rootrest side.'"* |
+| MEP-I2.02 | Ferry book 2 | *"A few runs later: 'Keel, L. Back over, Rootrest side. Didn't stop.'"* |
 | MEP-I3.01 | Quota board | *"Crew names and notches. Lew's line is short by three."* |
 | MEP-I3.02 | Ruined root-knee | *"Split across the grain, into useless wedges. A week's drying gone."* |
 
@@ -1014,7 +1014,7 @@ MEP-D6.01 YSOLDE: "We spend so long writing who's lost, we forget to write who's
 
 ### MLL.1 The quest in one paragraph
 
-**Prue Calloway**, a Chapel-Tender at Sorrowmere's memorial gardens, has walked to **Stillgrave Hollow** three nights running to help a family with a burial rite, and three nights her lantern has gone out at the water's edge. The family is the **Haddow household** of Sorrowmere's lower ways: **Ebba**, the eldest; her daughter **Bryony**; Bryony's son **Dob**. Bryony's husband **Corin** drowned at Stillgrave's edge in this spring's spate, cutting reed. The family began a **mourning ring** of lantern stakes on the bank, one stake for each of them, and abandoned it halfway: the lanterns would not stay lit, and the last night something stood up out of the mud where Bryony was kneeling. Prue knows lantern moss and wax. She does not know why the Hollow swallows light. The player goes at night to gather moss at the Hollow's edge (it glows only in the dark), re-stitches the split leather hood of Prue's lantern so the wick stays dry, and asks why grief sits in this water: Ebba gives only what she has seen (stones worn hollow, a Hollow nobody fishes), and Prue gives the Tenders' saying that the dead were washed here at the war's end and the water keeps it, labelled as belief. Then the player holds the line: while each Haddow sets a stake and says what they are setting it for, the player keeps the ring lit as **Earthen Echoes** stand up out of the grief at the edge. They re-form until the ring is finished. When Dob sets the last stake, Stillgrave's water stops bending the light.
+**Prue Calloway**, a Chapel-Tender at Sorrowmere's memorial gardens, has walked to **Stillgrave Hollow** three nights running to help a family with a burial rite, and three nights her lantern has gone out at the water's edge. The family is the **Haddow household** of Sorrowmere's lower ways: **Ebba**, the eldest; her daughter **Bryony**; Bryony's son **Dob**. Bryony's husband **Corin** drowned at Stillgrave's edge in this spring's spate, cutting reed. The family began a **mourning ring** of lantern stakes on the bank, one stake for each of them, and abandoned it halfway: the lanterns would not stay lit, and the last night something stood up out of the mud where Bryony was kneeling. Prue knows lantern moss and wax. She does not know why the Hollow swallows light. The player goes at night to gather moss at the Hollow's edge (it glows only in the dark), re-stitches the split leather hood of Prue's lantern so the wick stays dry, and asks why grief sits in this water: Ebba gives only what she has seen (stones worn hollow, a Hollow nobody fishes), and Prue gives a local Tender saying she does not vouch for: that the dead were washed here at the war's end and the water keeps it. Nobody knows if it is so. Then the player holds the line: while each Haddow sets a stake and says what they are setting it for, the player keeps the ring lit as **Earthen Echoes** stand up out of the grief at the edge. They re-form until the ring is finished. When Dob sets the last stake, Stillgrave's water stops bending the light.
 
 **Remember:** lantern light lying straight on water that has always pushed it away. **Want next:** Mabyn's roof, and the lantern the Tenders say would not go out.
 
@@ -1064,7 +1064,7 @@ MEP-D6.01 YSOLDE: "We spend so long writing who's lost, we forget to write who's
 | **A. Memorial gardens** (Sorrowmere) | Offer; hood repair | Raised beds of white-flowered griefroot, small stones with marks, lantern posts. Prue's work shelf: wicks, a wax pot, a lantern with its leather hood split along the seam. |
 | **B. Stillgrave near edge** (MP11) | Moss (night) | Water too clear; the reed edge; posts with lantern moss on their feet, glowing faintly when damp. Lantern light bends away from the surface (canon; `MLL-I1.02`). Reedlurker ripples. |
 | **C. The Haddow ring** | Hold the line | A shelf of firm bank above the water. Three reed stakes in a half-circle with dead lanterns on them; three empty stake-holes that would close the ring. A trampled patch where someone knelt. A child's boot-print, filled with water. |
-| **D. The wash stones** | Why | Flat stones at the water's edge, worn hollow in the middle. Tenders say the dead were washed here at the war's end; nobody living says they saw it. No marks, no names. |
+| **D. The wash stones** | Why | Flat stones at the water's edge, worn hollow in the middle. Some Tenders say the dead were washed here at the war's end; it is uncertain local belief, and nobody living says they saw it. No marks, no names. |
 
 ### MLL.5 Player-facing sequence
 
@@ -1076,7 +1076,7 @@ MEP-D6.01 YSOLDE: "We spend so long writing who's lost, we forget to write who's
 
 **Beat 3 — The ring (`S03_ring`).** *Objective: Find the Haddows at the ring.* `MLL-D2`. Ebba, Bryony, Dob, Prue. Inspect the half ring (`MLL-I2.01`), the kneeling patch, the boot-print. Bryony does not want to come near the water.
 
-**Beat 4 — Why (`S04_why`).** *Objective: Ask why the Hollow holds grief.* `MLL-D3` at the wash stones: Ebba gives only what she has seen ("Seen: stones worn hollow, and nobody fishes here. Thought: the water keeps something. That's all I've got."); Prue gives the Tenders' saying that the dead were washed here at the war's end, labelled as belief. No count, no names. Inspect the wash stones (`MLL-I3.01`).
+**Beat 4 — Why (`S04_why`).** *Objective: Ask why the Hollow holds grief.* `MLL-D3` at the wash stones: Ebba gives only what she has seen ("Seen: stones worn hollow, and nobody fishes here. Thought: the water keeps something. That's all I've got."); Prue gives the Tenders' saying that the dead were washed here at the war's end, labelled as uncertain local belief ("I'm not saying it's so"). No count, no names. Inspect the wash stones (`MLL-I3.01`).
 
 **Beat 5 — Light it (`S05_light`).** *Objective: Wick and light the ring's lanterns.* Moss wicks in the three dead lanterns (3 × 2 s), wax from Prue, light. With the mended hood on Prue's lantern, flame from it lights the others; they hold.
 
@@ -1156,7 +1156,7 @@ Both set `MR_LANTERN_LINE = true`; the Haddows come to Bannerline in both (Act I
 | Death during `S06` | Respawn at the memorial gardens; completed speeches persist; the family waits at the ring. |
 | Walking away mid-ring | The family goes home; at the next night they are back at the ring, at the next speaker. |
 | Fail state | None. |
-| Co-op | Shared Echoes; credit to all. Each player's own ring progress drives speeches (fallback: host). The strange moment plays per player. |
+| Co-op | Shared Echoes; a defeat credits each player whose own active step consumes it (Lowmark §8.1). Each player's own ring progress drives speeches (fallback: host). The strange moment plays per player. |
 
 ### MLL.11 Integration needs, ledger, open decisions, review
 
@@ -1234,7 +1234,7 @@ MLL-D2.05 DOB: "I'm going last."
 
 ```
 MLL-D3 (wash stones; S04)
-MLL-D3.01 EBBA: "You want to know why it's heavy here." (she sits on a stone) "Seen: these stones, worn hollow by somebody's hands. Nobody fishes the Hollow. Nobody ever has, in my time."
+MLL-D3.01 EBBA: "You want to know why it's heavy here." (she sits on a stone) "Seen: these stones, worn hollow. Hands or water, I couldn't tell you. Nobody fishes the Hollow. Nobody ever has, in my time."
 MLL-D3.02 EBBA: "Thought: the water keeps something. That's all I've got."
 MLL-D3.03 PRUE: "Tenders say the dead were washed at these stones at the end of the war, and still water holds grief longest. That's what we say. I'm not saying it's so."
 MLL-D3.04 PRUE: "What I know is a lit line holds ground. So we light it and we finish it."
@@ -1341,7 +1341,7 @@ On the chapel roof, **Mabyn Coyle** has found the Tenders' old **wax book** in a
 
 **Beat 2 — Wax (`S02_wax`).** *Objective: Render peat-wax.* **Cooking ~[GD: low]**: at the loft stove, three stages (heat until it runs, skim the peat grit, pour into the mould) as the ordinary cooking interaction with a wax recipe. A failed stage spits (small burn, cosmetic) and is repeated. **Crew alternative:** Mabyn does it overnight; the player keeps watch (`MLW_WAX = crew`).
 
-**Beat 3 — Frame (`S03_frame`).** *Objective: Build the lantern housing.* Shape a root-knee frame (Woodcutting interaction, two 3 s channels) **or** take the frame Rowan cut at the landing (ride to the landing and back at Slack). Fit Prue's pattern hood (from MLL; the player knows the stitch), the moss wicks from the Haddows (delivered with Rowan: `MLW-B2.01`), and the wax. One assembly interaction.
+**Beat 3 — Frame (`S03_frame`).** *Objective: Build the lantern housing.* Shape a root-knee frame (Woodcutting interaction, two 3 s channels) **or** take the frame Rowan cut at the landing (ride to the landing and back at Slack). Fit Prue's pattern hood (from MLL), the moss wicks from the Haddows (delivered with Rowan: `MLW-B2.01`), and the wax. One assembly interaction.
 
 **Beat 4 — Keep it (`S04_vigil`).** *Objective: Keep the lantern lit until first light.* The night on the roof (pinned rain), as four **keep-watch** turns. At each turn the lantern shows one readable need, untimed: **smoke** (the flame low and smoking: *Trim*), **sink** (the wax pool below the wick: *Feed*), or **rain hissing on the reed hurdle** (*Shield*). The player picks the matching interaction (2 s channel), then keeps watch to the next turn. A wrong pick does no harm: the flame gutters and the player relights it (2 s) and tries again (the bible's interact-sequence-with-harmless-reset). Mabyn talks between turns (`MLW-D3`). Nothing fails. The fourth turn ends at first light.
 
@@ -1382,7 +1382,7 @@ None. **MD-7 swap note:** no Hollowfoot content. **MD-4:** the nave is not enter
 |---|---|---|
 | `MLW_WAX` = self / crew | `S02` | Mabyn bark |
 | `MLW_GUTTERED` (count, presentation) | `S04` | `MLW-D3.20` variant ("You lost it twice. I lose it most nights.") |
-| `MLW_KEEPER` = roof / gardens / landing | `MLW-D5` | MLD (where the lantern stands); barks |
+| `MLW_KEEPER` = roof / gardens / landing | `MLW-D5` | MLD, optional read (where the lantern stands, if MLW is Completed); barks |
 
 | Option | Immediate | Cost | Later |
 |---|---|---|---|
@@ -1548,7 +1548,7 @@ The first dry stretch comes: three days without rain in the long wet. Sorrowmere
 | Suggested content id | `mire.side.lifting_day` |
 | Series | *Lanterns and Tenders*, part 3 of 3 |
 | Type | Festival |
-| Unlock | MLW **and** MR-M2 Completed (`MR_CAUSEWAY = reset`). Offered by Corra on the raised way (`MLD-D1`). Playable before or after MR-M5. |
+| Unlock | MLL **and** MR-M2 Completed (`MR_CAUSEWAY = reset`). MLW is not required; `MLW_KEEPER` is an optional read. Offered by Corra on the raised way (`MLD-D1`). Playable before MR-M5 (from MR-M2 Completed, so a player can finish it before MR-M5 activates) or after MR-M5 Completed; Corra does not offer it while MR-M5 is Active. |
 | Length | 30–40 minutes |
 | Combat share | 0–5% (optional) |
 | Skills | **Cooking ~[GD: low]**: a pot of root-and-fowl stew for the long table (economy pass names). Crew alternative: the player carries pots for Agna Ferrow's kitchen (three carry-deposits); costs one presentation hour. Melee or Ranged (optional skirmish). |
@@ -1648,7 +1648,7 @@ All three complete *Lifting Day*; MR-M5 reads completion only. Act III already g
 | Death at the turnout | Respawn at Sorrowmere; the line waits at the turnout. |
 | Walking away | Stays Active; dry weather pin persists; resume with Corra (`MLD-B1.02`). |
 | Fail state | None. |
-| Co-op | One line follows the leading player (fallback: host). Each player's own `MLD_ORDER` drives their own walkers' order (fallback: host's). Beetles shared. |
+| Co-op | The children's line follows the player whose own MLD `S04` it is (an escort follows its own quest owner; no host fallback). Each player's own `MLD_ORDER` drives their own walkers' order (fallback: host's). Beetles shared. |
 
 ### MLD.11 Integration needs, ledger, open decisions, review
 
@@ -1660,7 +1660,7 @@ All three complete *Lifting Day*; MR-M5 reads completion only. Act III already g
 | Ditch-leashed swarm | Encounters | Ordinary leash and aggro-on-attack/enter; no settle state (the first draft's dialogue-driven "settle" read as a drive-off and was removed). |
 
 **Mystery ledger.** None.
-**Open decisions.** (1) Season: the dry stretch is a per-player pin; Act III's "the long wet continues" stands as world presentation.
+**Open decisions.** (1) Season: the dry stretch is a per-player pin; Act III's "the long wet continues" stands as world presentation. (2) Prerequisite (2026-11-13 audit, SS-02): option (a) is applied here (MLL and MR-M2; MLW dropped so MLD can be played before MR-M5). Alternative (b), for the Director: keep MLW as a prerequisite, state that MLD runs only after MR-M5 Completed, and delete Act III's MR-M5 read of MLD Completed (Oswin's placement).
 
 | Review finding | Revision |
 |---|---|
@@ -1777,3 +1777,5 @@ MLD-D6.02 CORRA: "Next year I'm carrying a real one." (beat) "A sign. A real sig
 | Known cross-package request | None remaining (`MBL-B9.4`/`B9.4b` already gated by `MLD_ORDER` in Act III). |
 | **Independent review (2026-11-09)** | 14 findings fixed in place (0 high, 7 medium, 7 low). **Medium:** first-name collisions with existing NPCs renamed (Jem → Lew Keel, Pim → Dob Haddow, Tam → Corin Haddow; Ned Rudd → Wyn Rudd, in-batch duplicate of Ned Siskin); MLL war-washing at Stillgrave was Ebba's eyewitness fact with no canon support (now labelled Tender belief only, which also fixes Ebba's age); MLL ring count contradicted itself (six stakes / "three in" / twelve lights; now three set, three to close, six lights); MLL "dialogue pauses near enemies" replaced by a standard lantern-gated hold bar; MLW timed tending prompts replaced by four untimed keep-watch turns; MLD pace-matching escort replaced by a standard follow with run disabled, and the dialogue-driven swarm "settle" (a drive-off in effect) replaced by an ordinary ditch leash with calm dialogue as the step; Senna's age contradicted "though she was a girl". **Low:** §0.4 named nonexistent steps (`S08_close`, MLD `S08_table`); the Act III `MBL-B9.4` request is already met; Rootrest Tender line misattributed to Prue; MLW wind night labelled sixth (it is the fifth); night moss nodes noted as an existing presentation-hour variant; MLL fallback for night nodes. Checked and unchanged: flags exactly as Act III/bible §9.1 (`MR_STRANGER_SEAT`, `MR_LANTERN_LINE`, *Lifting Day* completion, `MR_ARRIVALS`); Haddow role names match `MRC-B2.6` and `MBL-B7.12`; no calendar dates or casualty figures; no Hollowfoot; Rowan never crosses at night. |
 | Batch 4 encounter alignment review, 2026-11-09 | Aligned with `Enemies/Caelmor_Mire_Encounter_and_Enemy_Requirements.md` §13.3 (numbers only; no id, step or flag renamed): MLL-E1 reed-ripple ~1.2 s → ~1.5 s, first-appearance length (C-5, I-2); MLD-E1 swarm spread ~1.0 s → ~1.5 s, area-effect minimum (C-1, I-12). Also fixed: speaker tags left over from the Batch 3 renames (`MEP-D3`/`MEP-D4` JEM → LEW, 11 lines; `MLL-D2.05`, `MLL-D4.30`, `MLL-D7.03` PIM → DOB); line text unchanged. |
+| Playability audit fixes, 2026-11-13 | SS-02 option (a): MLD now needs MLL and MR-M2, `MLW_KEEPER` is an optional read, timing text fixed, option (b) kept in MLD's open decisions. SS-05 (Keel, L.), SS-07 (MSS Griefwatch hearing held during MR-M5 until `S03`), SS-11, SS-23 (war-washing hedged as uncertain local Tender belief; not removed, not canon), SS-27 (MAP VERIFICATION note only), CO-01, CO-14 (escorts follow their own quest owner). Authored walkthrough only. |
+| Playability audit fixes review, 2026-11-13 | Independent review of the same-day fixes. MLL.10 co-op "credit to all" restated as credit from each player's own active step (Lowmark §8.1). Authored walkthrough only; text only; no id, step, flag or geography changed; no Director recommendation promoted. |

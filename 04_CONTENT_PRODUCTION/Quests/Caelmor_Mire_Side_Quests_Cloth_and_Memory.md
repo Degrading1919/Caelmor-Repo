@@ -80,7 +80,7 @@ Only MCF feeds a main quest: `MR_CLOTH = returned` puts the recovered cloth at C
 - **Defeat (CDR-1):** every enemy to 0 HP. Earthen Echoes re-form only while their condition lasts. Rootshadow cutters are human and use the ordinary defeat presentation; Gethin Scarth never fights and is never targetable.
 - **MD-7:** no Hollowfoot appear in any of these five quests. Each package carries the swap note.
 - **MD-3:** Rowan does not cross at night; MFW's dusk watch is reached on foot.
-- **Co-op:** Lowmark per-player prop pattern; fallback host state.
+- **Co-op:** Lowmark per-player prop pattern. Where a row here says "fallback: host", that is a provisional presentation fallback only (Integration MI-CO-06, pending Director review): it never decides another player's walkable ground, interactions, credit or completion, which follow each player's own quest state (conflicts: Integration §5.2 Q-18).
 - **Skills (MD-11):** Leatherworking (MBS), Hunting (MCF, MFW, MMR), Woodcutting (MSG), Melee and Ranged (MCF, MMR, MSG). Levels are `[GD]` placeholders.
 - **Map:** relative placement only; **MAP VERIFICATION REQUIRED** wherever it matters. "The high passes" and "the lowlands" are people's words for where someone or something came from; no route, distance or direction is stated.
 
@@ -156,7 +156,7 @@ Among the standards that came off the causeway, **Calwen Reed-Binder** has one h
 |---|---|---|
 | **A. Calwen's sanctuary** (MP14) | Hook; lens; tabs; choice | Washing frames, fold table, retirement pool with its rows, the unsorted chest. The banner on the fold table under a reed weight: grey-brown, mud in the weave, two hoist tabs of leather gone to felt. A brass lens on a cord. |
 | **A2. The store book** | Testimony (record) | A ledger on Calwen's shelf: what came in, from where on the causeway, in what state. Never whose. |
-| **B. Griefwatch vigil hall** (MP03) | Eskil | Eskil Stenning at the long table with a Griefwatch Marshwarden. With `MR_BANNERS = restored`, the Banner That Sank Twice over the door; Eskil keeps looking at it. |
+| **B. Griefwatch vigil hall** (MP03) | Eskil | Eskil Stenning at the long table with a Griefwatch Marshwarden. With `MR_BANNERS = restored`, the Banner That Sank Twice over the door; Eskil keeps looking at it. While MR-M5 is Active for a player, this vigil-hall scene and Eskil's bark are held until MR-M5 `S03` is complete, then resume (no new placements). |
 | **C. Causeway, standard 2's site** (MP08) | Mara | The pale hole where this standard stood (Act I's middle standard). |
 
 ### MBS.5 Player-facing sequence
@@ -264,7 +264,7 @@ None. **MD-7 swap note:** no Hollowfoot content.
 | **Calwen Reed-Binder** [CANON] | How a cloth was made and mended. | Whose. Refuses to guess. | Patient, exact, gently immovable. |
 | **Mara Fenholt** [CANON] | Where it lay; the stitch on bones. | Whose. | Few words. |
 | **Corra Sallis** | Bannerbearer sayings. | — | Earnest. |
-| **Eskil Stenning** [NEW] | His company's stories. | Anything about this cloth. | Courteous, stubborn, homesick. |
+| **Eskil Stenning** [NEW] | His company's stories. | Anything about this cloth. | Courteous, stubborn, homesick. Not the role-named Ridge Warden of MBO (Settlements and Combat): they are two different visitors. |
 | **Tess Albery** [NEW] | Her grandmother's darning. | Anything about this cloth. | Warm, hurried, hopeful. |
 
 #### Barks
@@ -417,7 +417,7 @@ At the **Marshfall jetty**, **Gethin Scarth** has a stall of "commemorative good
 
 **Beat 2 — The trail (`S02_track`).** *Objective: Track the cloth to where it's cut.* **Hunting ~[GD: low–mid]**: three sign inspects with the tracking interaction (cut stems; snagged threads; boots onto the plank way). Each reveals the next stretch. **Crew alternative:** Hob Merrit (`MCF-D2`; keep watch one turn; `MCF_TRACK = hob`). The plank way is walkable at Slack (pinned for the step).
 
-**Beat 3 — The mouth (`S03_mouth`).** *Objective: Clear the Hide's lookout.* **MCF-E1**.
+**Beat 3 — The mouth (`S03_mouth`).** *Objective: Clear the Hide's lookout.* **MCF-E1**. The assault steps (`S03`–`S05`) are pinned to day (noon) for the player: arriving at dusk or night sets noon on entering the Hide mouth, because the cutters work days (`MCF-D3.02`).
 
 **Beat 4 — The frames (`S04_frames`).** *Objective: Clear the stripping frames.* **MCF-E2**. After: inspect the bare standards (`MCF-I2.01`): no cloth, and the poles still lean.
 
@@ -488,7 +488,7 @@ Tuned for Competent-to-Advanced identity (after MR-M2; MD-10).
 | **A cutter's reed-hook** | Equipment (economy pass) | Ordinary weapon drop table per the encounters package; not a quest reward [GD]. |
 | **Marshfall's thanks** | Currency | Small payment from the jetty households [GD]. |
 | Skill XP | Actions only [GD] | Hunting, Melee or Ranged. |
-| The Reed Hide | Access | A quiet place after; the bare poles remain. |
+| The Reed Hide | Access | A quiet place after. On MCF Completed the three bare poles are taken out of the frames and laid in the bay (standard state `laid`); nothing at the Hide leans or stirs afterwards. |
 
 | Situation | Handling |
 |---|---|
@@ -648,7 +648,7 @@ Travellers at the **Wading Ford** see, at dusk, a man standing knee-deep in the 
 
 ### MFW.4 The places
 
-**MAP VERIFICATION REQUIRED.** The Wading Ford lies in the Blackwater (bible §4.2), reached on foot along the peat edge from the landing.
+**MAP VERIFICATION REQUIRED.** The Wading Ford lies in the Blackwater (bible §4.2), reached on foot along the peat edge from the landing. The ferry list's "over to the Rootrest side" (`MFW-I1.01`) implies a ferry from the landing that the Zones crossing register (§6.2) does not show: MAP VERIFICATION REQUIRED (2026-11-13 audit, SS-27); geography unchanged.
 
 | Area | Purpose | Environmental storytelling |
 |---|---|---|
@@ -869,7 +869,7 @@ MFW-D5.01 [kept] GRANNY LUSK: "Abner's list is kept? Good. Somebody should keep 
 | **Revelation role** | Self-contained. |
 | **Recurring evidence** | **Ration board** (landward cookhouse; read in place). |
 | **State compliance** | Inactive → Active on `MMR-D1` accept; Completed on `MMR-D5` end. No fail. Resume hook: Lenna (`MMR-B2.02`). |
-| **Combat compliance** | Earthen Echoes (echo, file) to 0 HP; they **re-form while the camp is disturbed** (Lenna's stakes in the ground). Pulling the stakes ends the condition. Melee or ranged. |
+| **Combat compliance** | Earthen Echoes (echo, file) to 0 HP; MMR-E1 and MMR-E2 fight once and do not re-form; MMR-E3 **re-forms only while `S04` is active and stakes remain** (one condition, MMR.11). Pulling the last stake ends the condition. Melee or ranged. |
 
 ### MMR.4 The places
 
@@ -904,9 +904,9 @@ Tuned for Competent identity (after MR-M2).
 |---|---|---|---|---|---|---|
 | **MMR-E1** | 3 × Earthen Echo (echo) | Stand up along the strings | Walk the string lines, repeating a motion (carrying, lifting a pail) | **Does bolt** 4–6 s before any spawn (the region's warning). **Stand-up:** mud hump holds ~1.5 s. **Swing:** arms lift ~1.2 s, then a 2 m swing. | Teaches the does' warning. | 40–60 s; 70–85% HP. |
 | **MMR-E2** | 1 × Earthen Echo (file), 2 × echo | The loop path | The file walks the loop in a lane and strikes on its third step; echoes walk beside. | **File step:** the ground ripples on each step; on the third, a forward thrust (~1.0 s windup, 3 m line); step out of the lane. | Previews the file without the General's count. | 50–70 s; 60–80% HP. |
-| **MMR-E3** | 4 × echo (2 at a time) | Along remaining strings during `S04` | Re-form 6 s after defeat while any survey stake stands (one condition for the encounter) | As E1. | Pressure while the player pulls stakes; pulling is the win. | 60–90 s; 50–75% HP. |
+| **MMR-E3** | 4 × echo (2 at a time) | Along remaining strings during `S04` | Re-form 6 s after defeat while `S04` is active and stakes remain (one condition for the encounter; MMR-E1 and MMR-E2 never re-form) | As E1. | Pressure while the player pulls stakes; pulling is the win. | 60–90 s; 50–75% HP. |
 
-**Rules.** Echoes fight to 0 HP, collapse into mud, and re-form only while the disturbance lasts (bible §2.6). Lenna stays at her tent and is never targetable. Nothing dropped advances the quest. **MD-7 swap note:** no Hollowfoot content.
+**Rules.** Echoes fight to 0 HP, collapse into mud, and only MMR-E3 re-forms, while `S04` is active and stakes remain (bible §2.6; MMR.11). Lenna stays at her tent and is never targetable. Nothing dropped advances the quest. **MD-7 swap note:** no Hollowfoot content.
 
 ### MMR.7 The does and the loop (tell and strange moment)
 
@@ -1242,7 +1242,7 @@ MSG-D4.03 YSOLDE: "Both, then. Written."   {set MSG_LISTENED; event: quest Compl
 | Check | Result |
 |---|---|
 | Bible §7.1/§7.2 rows | MBS, MCF, MFW, MMR, MSG match code, type, unlock, place and core verb. |
-| §7.3 contracts | Six fields on every card as the bible lists them. MCF: cutters to 0 HP, Gethin never fights, ledger read in place. MFW: the figure is never hostile. MMR: Echoes re-form while the camp is disturbed. MSG: Reedlurkers only. |
+| §7.3 contracts | Six fields on every card as the bible lists them. MCF: cutters to 0 HP, Gethin never fights, ledger read in place. MFW: the figure is never hostile. MMR: only MMR-E3 re-forms, while `S04` is active and stakes remain (2026-11-13). MSG: Reedlurkers only. |
 | Flags for the mains | `MR_CLOTH` returned / burned, set by MCF `S07`, read by MR-M5 exactly as Act III's input table states. No other `MR_` flag set. |
 | Dating | No calendar dates; weather words only (ferry list). |
 | R08 | No sides, units or figures of dead; the ration board in words; Calwen never names a side. |
@@ -1251,3 +1251,5 @@ MSG-D4.03 YSOLDE: "Both, then. Written."   {set MSG_LISTENED; event: quest Compl
 | MD-7 / MD-3 | No Hollowfoot content; Rowan never crosses at night. |
 | **Independent review (2026-11-09)** | 7 findings fixed in place (0 high, 5 medium, 2 low). **Medium:** MCF said stripping cloth stops standards rising (a working fix, against bible §2.3 "they worsen it"; now the cutters' false belief, poles still lean); MCF burn branch had Calwen both absent and speaking (now he speaks and leaves); MFW generations did not fit the thirty-year war distance (ninety-year-old daughter, adult great-grandchildren; now Abner's widow and children) and "Tamsin" collided with Lowmark/Thornfell NPCs (now Elspet Rye); MSG's timed gust cycle with gust-gated interactions replaced by *Listen* inspects and three ordinary waves (storm is ambience only); MMR per-stake re-forming simplified to one step condition (drift-site model). **Low:** Eskil's "Stonewake keeps honest accounts" used a person's/quest's name as an institution (now "the Assembly"); MSG all-vents-open case defined. Checked and unchanged: `MR_CLOTH` returned / burned set at MCF `S07` as Act III `MBL-B7.2a` reads it; cutters to 0 HP, Gethin never fights, ledger read in place; MMR does not use the Memorywarden shard; no dates or casualty numbers; ranged first-class, never required; no Hollowfoot. |
 | Batch 4 encounter alignment review, 2026-11-09 | Aligned with `Enemies/Caelmor_Mire_Encounter_and_Enemy_Requirements.md` §13.3 (numbers and text only; no id, step or flag renamed): MCF cutter hook-slash ~0.9 s → ~1.0 s (C-1, I-10); MCF-E2 frame cut ~1.0 s → ~1.5 s and labelled hazard MCF-H1 (I-12, I-23). MSG-E1 and MMR rows already match C-5 and C-3. |
+| Playability audit fixes, 2026-11-13 | SS-01 (one MMR re-form condition), SS-07 (MBS hall scene held during MR-M5 until `S03`), SS-13 (Eskil and the MBO Warden are two people), SS-18 (MCF poles laid on completion; assault pinned to day), SS-27 (MAP VERIFICATION note only), CO-01 (co-op host fallback is provisional presentation only). Authored walkthrough only. |
+| Playability audit fixes review, 2026-11-13 | Independent review of the same-day fixes. Package review table: MMR contract line updated to the SS-01 single re-form condition. Authored walkthrough only; text only; no id, step, flag or geography changed; no Director recommendation promoted. |

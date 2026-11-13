@@ -22,11 +22,11 @@
 |---|---|
 | Click-to-move over a host NavMesh; Shift sprint; no jump | Every required route, objective, stake, post, standard, windlass and arena safe space is NavMesh-reachable by walking, or by boat where §3 says the boat is the route. |
 | Agility triggers approved, **not built** | Every agility trigger listed here has a **walkable fallback** that is the critical path until triggers exist. No required objective sits behind a trigger. |
-| No multi-level traversal or off-mesh links yet | Vertical spaces need multi-level NavMesh with stairs or ramps: the Chapel (roof, bell-loft ladder, gallery, aisle walk, bays, nave floor, crypt stair), the Hushed Granary ladder, Bran's watchpost platform, stilt-house steps, the archive loft ladder. Ladders are interaction-driven moves ("climb down") until off-mesh links exist. Flag each to Systems. |
+| No multi-level traversal or off-mesh links yet | Vertical spaces need multi-level NavMesh with stairs or ramps: the Chapel (roof, bell-loft ladder, gallery, aisle walk, bays, nave floor, crypt stair), the Hushed Granary ladder, Bran's watchpost platform (presentation only once the MBL `S02` furrow inspect has its ground-level pad, MP17), stilt-house steps, the archive loft ladder. Ladders are interaction-driven moves ("climb down") until off-mesh links exist. Flag each to Systems. |
 | Interaction needs reach and line of sight | Channel points used under attack (standard lift poles, chest lever, windlasses, lantern posts, the gap stone, survey stakes, sluice rods) need a standing pad of at least 2 m facing the object, on walkable ground at every water state in which the step can run. |
 | **Water** | **No swimming and no drowning anywhere** (bible §11.1). Deep water is non-walkable at every state; the player stops at its edge with a bark and no damage. Shallows are walkable and slowed (standard slow). No knockback, shove or push may end in deep water: every lane next to deep water has an edge blocker or pushes toward the walkable side (MC-6). **Reedlurker reach:** wherever a snapper is placed, the water it holds is wadeable (knee-deep) within a few metres of the bank or sump lip, never deep water, so melee can always reach it (Enemies §5.3, C-5). |
 | Edges | **No fall deaths.** Raised ways, stilt platforms, the watchpost, the Chapel gallery and the palisade crown each have rails, edge blockers or a gentle slope. |
-| Per-player state (bible §9) | Channel states, standard states, water stages, lantern posts, epilogue props and NPC placement are client presentation keyed to the local player's state. Co-op fallback: the host's props; each partner's own flags drive barks, dialogue and epilogue (see Integration MI-CO-06 for the one shard-level rule recommended). |
+| Per-player state (bible §9) | Channel states, standard states, water stages, lantern posts, epilogue props and NPC placement are client presentation keyed to the local player's state. Co-op: each partner's own quest state decides their walkable ground, interactions, credit and completion. Shared props may show one state only as a provisional presentation fallback (Integration MI-CO-06, pending Director review) that never gates navigation or credit; each partner's own flags drive barks, dialogue and epilogue. Navigation-affecting conflicts and Sol options: Integration §5.2 Q-18. |
 
 ### 0.2 The ground-and-water system (bible §1.1): level-design definitions
 
@@ -87,7 +87,7 @@ Each subzone has a **near band** and a **far band**, so early side quests can pl
 | **R1 The Raised Ways** | Sorrowmere raised way → register room → Ferrow house row → memorial gardens → Calwen's sanctuary at the edge → jetty → causeway head; a stair or ramp down to Blackwater Landing | MR-M1 | Plank walkways on piles; junction banners; moss posts every tenth pile | None required |
 | **R2 The Standards Causeway** | Causeway head (S4) → C1 first crossing → C2 roadside works → C3 Mara's marker (plank off) → C4 second crossing → C5 relaid section (old line beside new for ~40 paces) → turnout platform (field centre) → C6 far end → Edris's old station | MR-M1 (walk out, cart back), MR-M2, MLD | Straight log road over the bog; ditches either side; two stake-marked dips | Causeway ditch jump at standard 3 → slope steps (MR-M2) |
 | **R3 Marshfall Edge** | Causeway far end → Marshfall walkways (Hayle house, Rudd house, Peat Row, jetty) → Fowling Meres → Hushed Granary → Sodden Pyres; on to Rootrest and the Fenward on firmer ground | MR-M1 | Stilt houses, peat cuts, smoke sheds | Marshfall walkway gap → round the drying racks (~15 s); feeder-channel jump at the bend → plank at the mere end (MRS) |
-| **R4 The Peat Edge** | Blackwater Landing → Sennic's rise → peat path (L7) → Stillgrave near edge; separate peat-edge legs to the Wading Ford and the Drowned Encampment's landward side | MR-M3 | Laid peat and old planks along channel edges; moss posts mostly dark this season | None |
+| **R4 The Peat Edge** | Blackwater Landing → Sennic's rise → peat path (L7) → Stillgrave near edge; separate peat-edge legs to the Wading Ford and the Drowned Encampment's landward side | First used MR-M1 by side content (MLL, MDS02; MMR after MR-M2); main line MR-M3. Never gated | Laid peat and old planks along channel edges; moss posts mostly dark this season | None |
 | **R5 Rowan's Route (boat)** | Landing → C1 junction one → C2 the shoal (tow path) → C3 Drowned Encampment cut (three stretches) → C4 junction two → C5 Stillgrave open water (far side) → C6 fog bank and Chapel roof landing stage | MR-M3 `S05`; after MR-M3 the Chapel route at Slack | Fixed boat spline with authored stops (ferry convention). **The only route to the Chapel.** | None (the boat is the route) |
 | **R6 The Chapel Descent** | Roof landing stage (T2) → ridge (T1) → tower hatch (T4) → bell-loft (G1) → gallery (G3) → gallery post (G6) → aisle walk (N1, stage 1) → bays and vestry (N2, stage 2) → nave floor and altar (N3, stage 3) → crypt stair | MR-M4 | Indoors and vertical; lit by posts | Gallery gap G3–G5 (step across) → back round through the loft |
 | **R7 Griefwatch and the Bannerline Road** | Griefwatch main way → closure gate (W1) → Low Bend (R1) → Rag Bend (R2) → Iron Bend (R3) → palisade (C1) → crown (lanes, circle); separate shoulder path from Griefwatch's side of the gate to Bran's watchpost | MR-M5 (road); MBO, MSS (Griefwatch) | Climbing road on iron-red soil; lanes cross the road at R1 and R3 | Palisade fallen-stake scramble R1 → R3 (crosses one lane) → the road |
@@ -313,10 +313,10 @@ Format per POI: **function**, **placement**, **areas** (sub-space ids are the pa
 |---|---|
 | Function | Where the count is taught; where the furrow is seen. |
 | Placement | On a lower shoulder of the ridge above Griefwatch, **off the road**, reached by a path from Griefwatch's side of the closure gate that never passes through the gate (MT-14). |
-| Areas | **B1 watchpost** (broken timber tower, half its platform gone, lean-to; offerings stone); **B2 practice lane** (old drill furrow downhill; weak Echo file MBL-E1); **B3 the view** (platform edge over the great furrow, MDS07; no path down). |
+| Areas | **B1 watchpost** (broken timber tower, half its platform gone, lean-to; offerings stone); **B2 practice lane** (old drill furrow downhill; weak Echo file MBL-E1); **B3 the view** (platform edge over the great furrow, MDS07; no path down). The MBL `S02` furrow inspect is also offered from a ground-level pad at the watchpost's foot with the same view, so the platform is presentation only (MAP VERIFICATION REQUIRED for the pad's sightline). |
 | Quest uses | MR-M5 `S02` (count, furrow inspect, wait for dusk); MDS07 (after MR-M2, when Bran is there); Post §E.3. |
 | State by flag | Bran present except while MR-M5 is Active; new offering after MR-M5 (`quieted`). |
-| Required props | Multi-level platform with rail; practice lane decals; furrow visible but unreachable. |
+| Required props | Multi-level platform with rail (presentation); ground-level furrow inspect pad; practice lane decals; furrow visible but unreachable. |
 | Traversal and water | Dry. The furrow must not be reachable on foot from here. |
 | Map | Sightline from the platform edge to the furrow is required (MT-15). MAP VERIFICATION REQUIRED. |
 
@@ -490,7 +490,7 @@ Format per POI: **function**, **placement**, **areas** (sub-space ids are the pa
 
 ## 6. Zone-state table (per player)
 
-All states are **per-player presentation** (bible §9). Co-op fallback: the host's props; each player's own flags drive their own barks, dialogue and epilogue.
+All states are **per-player presentation** (bible §9). Co-op: shared props may show one state only as a provisional presentation fallback (Integration MI-CO-06, pending Director review); it never gates navigation or credit, and each player's own state and flags drive their own walkable ground, interactions, barks, dialogue and epilogue (conflicts and Sol options: Integration §5.2 Q-18).
 
 ### 6.1 Keyed by region flags (`MR_`)
 
@@ -515,8 +515,8 @@ All states are **per-player presentation** (bible §9). Co-op fallback: the host
 
 | Crossing | Place | Walkable when | Free-travel default (morning / noon / dusk / night) | Quest pins |
 |---|---|---|---|---|
-| X01 Causeway first crossing (C1) | MP08 | Slack | Slack / Slack / Running / Running | MR-M1 `S02` Running→Slack on keep watch; `S04` Sour as the cart passes; MLD Slack |
-| X02 Causeway second crossing (C4) | MP08 | Slack | Slack / Slack / Slack / Running | MR-M1 `S03` Slack; `S04` Sour behind the cart; MLD Slack |
+| X01 Causeway first crossing (C1) | MP08 | Slack | Slack / Slack / Slack / Running | MR-M1 `S02` Running→Slack on keep watch; `S04` Sour as the cart passes; MR-M2 `S03`–`S06` Slack; MLD Slack |
+| X02 Causeway second crossing (C4) | MP08 | Slack | Slack / Slack / Slack / Running | MR-M1 `S03` Slack; `S04` Sour behind the cart; MR-M2 `S03`–`S06` Slack; MLD Slack |
 | X03 Causeway far end (C6) | MP08 | Slack | Slack / Slack / Slack / Running | MR-M1 `S04` Sour behind the cart |
 | X04 Old ferry way | MP01–MP02 | Running (boats) | Sour at every hour this season | None. Never used as a route. |
 | X05 Rowan's route (C1, C4, buttress) | R5, MP13 | Rowan's Slack (cuts still, shoal hauled) | Slack / Slack / Running / Running; **Rowan ferries morning and noon only** `[MD-3]` | MR-M3 `S03`, `S05` (grey); MR-M4 buttress stake per Act II §B8.2 |
@@ -524,14 +524,16 @@ All states are **per-player presentation** (bible §9). Co-op fallback: the host
 | X07 Meres feeder channel | MP26 | Slack | Slack / Running / Slack / Running | MRS pins |
 | X08 Nine Stakes | MP21 | Slack (knee), Running (waist) | Slack / Running / Sour / Running | MNK pins |
 | X09 Granary under-store | MP22 | Slack | Running / Slack / Running / Running | MHG pins |
-| X10 Peat Row ditch | MP02 | Reach at Slack, wade at Running | Slack / Running / Slack / Running | MWS pins |
+| X10 Peat Row ditch | MP02 | Wade at Slack, reach at Running | Slack / Running / Slack / Running | MWS pins |
 | X11 Reed Hide plank way | MP23 | Slack | Running / Slack / Running / Running | MCF pins |
 | X12 Wading Ford | MP25 | Slack | Running / Running / Slack / Running | MFW pins Slack at dusk |
 | X13 Sorrowmere pool | MP01 | (view only) | Slack / Running / Running / Running | MDS01 reads at Slack |
 | X14 Rootrest plank way | MP04 | Always walkable (presentation stake) | — | — |
 | X15 Mirebone ford | MP10 | A few steps only | Ford line variant changes every turn | MDS10 |
 
-Rules: waiting is always available at a `watch_bench`; no crossing on a required route is non-walkable at every hour; the default never blocks travel for longer than one keep-watch turn. MLD's wonder moment (every crew stake Slack at once) works because the defaults differ.
+Rules: waiting is always available at a `watch_bench`; no crossing on a required route is non-walkable at every hour; the default never blocks travel for longer than one keep-watch turn. MLD's wonder moment (every crew stake Slack at once) works because the defaults differ. Quest pins are step-scoped: they release to this default at step end, and quest completion releases all. X01's default dusk state was changed from Running to Slack on 2026-11-13 so that the main artery meets the one-turn rule (data change in this [PROPOSAL — DIRECTOR] table only; no geography changed).
+
+**MAP VERIFICATION REQUIRED (2026-11-13 audit, SS-27).** MEP's ferry book (`MEP-I2.01`–`.02`) and MFW's ferry list (`MFW-I1.01`) record crossings from Blackwater Landing "to the Rootrest side"; no crossing in this register carries that route (X04 is Sour all season; X06 is the landing's home channel only). Recorded for the map owner; geography is not changed here.
 
 ### 6.3 The Chapel by stage (MP13) `[MD-4]`
 
@@ -584,7 +586,7 @@ Wrong-order boards reset harmlessly; a board at Running will not turn. Stage nev
 | Rule | Requirement |
 |---|---|
 | Presentation hour | Per player: morning, noon, dusk, night. Advanced by quest events and by keep watch. **Never world time.** No world clock, no calendar. |
-| Night pins | MR-M1 `S04` (dusk to night); MR-M5 `S02` dusk to `S07` (night). Logout resumes at the pinned hour. |
+| Night pins | MR-M1 `S04` (dusk to night); MR-M2 `S05` dusk (re-pinned on return) and `S06` night; MR-M5 `S02` dusk to `S07` (night); MCF `S03`–`S05` day (noon). Pins are step-scoped. Logout resumes at the pinned hour. |
 | Quest-local weather | The grey (MR-M3 `S05`, fog with four densities along R5) `[MD-3]`; rain on the Chapel roof (MLW); dry stretch (MLD); storm, ambience only (MSG). All per player; leaving the area pauses them. |
 | Season | **None.** The long wet continues throughout. The Mire has no season flag; its first dry stretch is MLD's quest-local weather only. |
 | Dusk spawns | Banner Wraiths walk at dusk at any **risen** standard a quest uses (MR-M1 `S04`, MR-M2 `S05`); lifting a risen standard wakes them at any hour. Outside quests, standards are presentation only. |
@@ -762,14 +764,14 @@ New places in §5 are sub-spaces or never-visited names. The Mire has no mine by
 | # | Topic | Canonical value |
 |---|---|---|
 | MC-1 | Channel states | Three states (Running, Slack, Sour) per crossing, keyed to the presentation hour. Quest pins override for the pinning player. Free-travel defaults per Zones §6.2 [PROPOSAL — DIRECTOR]. Rowan's Chapel route runs at Slack, **morning and noon only** `[MD-3]`. Waiting is always available. |
-| MC-2 | The count (Bannerline) | Two soft beats, then the third. **1.2 s per beat** (3.6 s per count); General phase 3 **0.9 s per beat**. Every count attack lands on a third beat and is shown on beat 2 at the latest; in phase 3 **every** count attack is shown on **beat 1**, and the bearer's Plant ring shows from beat 1 everywhere. The count itself never damages. Audio, ground ripple, optional rumble and optional caption carry each beat. (Enemies C-7) |
+| MC-2 | The count (Bannerline) | Two soft beats, then the third. **1.2 s per beat** (3.6 s per count); General phase 3 **0.9 s per beat**. Every count attack lands on a third beat and is shown on beat 2 at the latest; in phase 3 **every** count attack is shown on **beat 1**, and the bearer's Plant ring shows from beat 1 everywhere. The count itself never damages. Audio, ground ripple, optional rumble and optional caption carry each beat. Displacement count attacks shown on beat 2 (~1.2 s) sit below C-1's 1.5 s minimum: **C-1 pending GD** (Enemies §14). (Enemies C-7) |
 | MC-3 | Lantern posts and Shades | Lit post radius **~6 m**; hand lantern radius ~3 m. Shades form after **~6 s** in dark ground (draught **~3 s**); a press every **~4 s** (draught **~2 s**) after a ~2 s lean tell; at ember the next press pushes the player to the nearest lit post. **No damage.** Shades have no HP and are never targetable. |
-| MC-4 | Banner Wraith re-form | In an encounter, a defeated Wraith re-forms at its standard **~25 s** after defeat with a **~3 s** forming tell **while** the standard is risen or lifted-unfolded; folding ends it; live Wraiths fight on to 0 HP. The Risen Colour's standard pulses every **~30 s** (~3 s tell). Bannerline Wraiths re-form on the next third beat. Outside an encounter, a standard still risen repopulates at the **next dusk**. (Enemies C-3) |
-| MC-5 | Earthen Echo re-form | By condition only, never by health. Default spot timer **6 s** (MLL while the ring is unfinished; MMR while survey stakes stand); MR-M3 banks **~10 s** while the grey lasts and the boat is in the stretch (boat pacing); Bannerline files at the lane head on the next third beat while the circle is open. Echo swings have no knockback. (Enemies C-3, I-6) |
+| MC-4 | Banner Wraith re-form | In an encounter, a defeated Wraith re-forms at its standard **~25 s** after defeat with a **~3 s** forming tell **while** the standard is risen or lifted-unfolded; folding ends it; live Wraiths fight on to 0 HP. The Risen Colour's standard pulses every **~30 s** (~3 s tell). Bannerline Wraiths re-form on the next third beat. Outside an encounter, a standard still risen re-forms its Wraiths only when a quest next presents its condition; outside quests, standards are presentation only (§7; pending Gameplay Designer confirmation). (Enemies C-3) |
+| MC-5 | Earthen Echo re-form | By condition only, never by health. Default spot timer **6 s** (MLL while the ring is unfinished; MMR while `S04` is active and stakes remain); MR-M3 banks **~10 s** while the grey lasts and the boat is in the stretch (boat pacing); Bannerline files at the lane head on the next third beat while the circle is open. Echo swings have no knockback. (Enemies C-3, I-6) |
 | MC-6 | Water and edges | No swimming, no drowning, no fall deaths. Deep water is non-walkable with an edge stop. Shallows walkable and slowed. No knockback ends in deep water or off a raised edge. |
 | MC-7 | Defeat | Every enemy defeated at 0 HP (CDR-1); humans (Raiders, Rootshadow, Hollowfoot `[MD-7]`) take the ordinary defeat presentation. **No SX entry; the quest on-defeat hook is not used by the Mire.** |
 | MC-8 | Ranged | First-class in every fight, never required. No spot the enemy cannot reach: the General's leash excludes the ring (~5 s with nobody in the arena resets to the top of the phase). |
-| MC-9 | Hazard floor | No Mire hazard can defeat a player above **25% HP** (Enemies C-2, the Thornfell value); the gap step-off costs ~15% max HP, knocks back toward the gap stone and never costs rite progress. |
+| MC-9 | Hazard floor | No Mire hazard can defeat a player above **25% HP** (Enemies C-2, the Thornfell value; authored tuning requirement, pending Gameplay Designer review); the gap step-off costs ~15% max HP, knocks back toward the gap stone and never costs rite progress. |
 
 | # | Inconsistency | Packages | Recommendation |
 |---|---|---|---|
@@ -797,3 +799,4 @@ New places in §5 are sub-spaces or never-visited names. The Mire has no mine by
 | Scope | No schema, JSON, scene data or C#. |
 | **Reconciliation (2026-11-09)** | Re-checked against the side-quest review fixes (e98147e): MSG's timed gust cycle removed (MP19, §7); MLD's swarm is leashed scenery with no settle state and its escort is a standard group follow; MLL's hold is a standard hold bar. §14 MC-2, MC-4, MC-5 and MC-9 aligned to the Enemies file (C-3, C-7, C-2, I-6). **Still to re-check** if the Enemies file changes before commit. |
 | Batch 4 zones/integration review, 2026-11-09 | Independent review. **Fixed:** colour and finish wording removed from §2 ("grey-green") and MP08 ("grey timbers"); the Bran's-watchpost path is now stated as a requirement in §1, MP17 and MT-14 (never through the closure gate; MAP VERIFICATION REQUIRED); Q-3 restated per the packages (gate open before MR-M5 per MBO; bends and crown access left open, with a no-extra-gate recommendation and its alternative), §6.4 and Z-5 aligned; MP12 Rag Bend carries the MD-7 non-combat swap needs (sit spot, walk line); §0.2 records the MLL Echo slow as the same lit-radius effect (one need, MI-LT-01); §10 now states the terrain generator, Unity pipeline and material library accurately from their READMEs, with no request to change them. Z-1, Z-2, Z-3 and Z-6 are fixed in the bible. **Checked unchanged:** relative placement only; no interregional route or compass direction; no SX; MD-3/MD-4/MD-7/MD-8 tags; 28 POIs; crossing register X01–X15 against Act I, Act II and the side files. Coordinator additions applied the same day: Batch 3 rename Jem → Lew (§6.5; no Pim, Tam, Tamsin or Ned Rudd found here); Enemies reach rule (wadeable snapper water, §0.1), Mud-Boss island leash (MP21) and the MCF-E1 lookout stair (MP23). |
+| Playability audit fixes, 2026-11-13 | SM-01, SM-02 (X01 default data change; table stays [PROPOSAL — DIRECTOR]), SM-04 (C-1 pending GD), SM-08, SM-09, SM-14 (pending GD), SS-01, SS-04, SS-09, SS-27 (MAP VERIFICATION note only), CO-01, TD-16. Authored walkthrough only. No geography changed; every MAP VERIFICATION REQUIRED flag kept. |

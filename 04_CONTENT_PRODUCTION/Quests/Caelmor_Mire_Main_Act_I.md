@@ -68,7 +68,7 @@ No two quests share a set piece. Combat changes family across the act: Griefbit 
 | After | Unlocks |
 |---|---|
 | MR-M1 | *The Stranger's Seat* (MSS), *The Broken Lantern Light* (MLL), *Reed Shafts* (MRS), *A Table for the Wet* (MFT), *The Ferry Harness* (MFH), *The Singing Trench* (MSG), *Nine Stakes* (MNK); MR-M2 |
-| MR-M2 | *A Banner With No Side* (MBS), *Weight of the Soil* (MWS), *The Mud That Remembers* (MMR), *The Hushed Granary Key* (MHG), *The Bell Roster* (MBO), *The Rust Hart* (MRH); *Lifting Day* (MLD, also needs MLW); MR-M3 |
+| MR-M2 | *A Banner With No Side* (MBS), *Weight of the Soil* (MWS), *The Mud That Remembers* (MMR), *The Hushed Granary Key* (MHG), *The Bell Roster* (MBO), *The Rust Hart* (MRH); *Lifting Day* (MLD, also needs MLL); MR-M3 |
 
 ### Act I clocks and conventions (bible §9.2, §9.4, §11.1)
 
@@ -81,7 +81,7 @@ No two quests share a set piece. Combat changes family across the act: Griefbit 
 | **Earth-memory re-forming** (Lowmark drift-site model) | Wraiths are defeated at 0 HP and re-form at their standard while it stays risen. The condition, never their health, decides. |
 | **Channelled segments with persistence** | Lifting a pole (MR-M2), levering the chest (MR-M2), heaving a sunk wheel (MR-M1). Completed segments are kept. |
 | **Interact sequence with harmless reset** | Folding a banner by its seams (MR-M2). A wrong fold unfolds. |
-| **Per-player props with fallback** | Stake water lines, standard states, the causeway's roadside standards, the register page. Co-op fallback: the host's state. |
+| **Per-player props with fallback** | Stake water lines, standard states, the causeway's roadside standards, the register page. Co-op: each player's own state decides their walkable ground, interactions, step and credit; any shared state shown is a provisional presentation fallback (Integration MI-CO-06, pending Director review; conflicts in Integration §5.2 Q-18) and never decides another player's progression. |
 | **Agility triggers** | Optional shortcuts only (a walkway gap at Marshfall; a ditch jump on the causeway), each with a walkable fallback. |
 
 ---
@@ -260,7 +260,7 @@ The **escort**: the cart follows the player's lantern at walking pace and stops 
 1. **The stakes turn behind them.** As the cart passes each crossing, the stake behind it turns: the far end's shallows go **Sour** behind the cart (water rises over the black band; the stake leans), then the second crossing (C4) after the cart is across. The player sees the road close behind them and never ahead. Lysa: "That's the last slack tonight. We're on the right side of it." (`MNS-B8.3`). Nothing ever catches the cart: the turns are triggered by the cart passing, not by time.
 2. **The lit posts (C5).** At the relaid section, the new line and the old wartime line run side by side. The new line's posts glow with wet lantern moss; the old line's are dark. Lysa teaches it in two lines: "Moss lights when it's wet. Crews wet the posts on the line they walk. A dark post's got a dry foot: nobody's keeping it." Leading the cart down the **lit** line is the way. Leading it down the **dark** line: after ten paces the old logs are sunk and the cart's wheel goes in to the hub (a harmless stop). Dunstan and the player heave it out (channel, 2 segments, progress kept) and back up to the fork. Bark, Dunstan: "Lit ones. I knew that. I was letting you learn it." (`MNS-B8.6`).
 3. **The Wraith (C2, the crew's standard).** Back at the roadside works, the standard the crew stood up that morning is **risen**: clear of the mud, cloth moving with no wind. As the cart comes level, a **Banner Wraith** forms at its foot out of the peat (**MNS-E2**): a faint figure holding the shape of a tattered standard. It begins to walk its lane **across the road**, slowly, repeating the motion of carrying a standard forward. The cart stops by itself (Dunstan drops the shafts). Two ways through, both valid:
-   - **Fight:** engage it in its lane. It fights to 0 HP and collapses into mud at its standard. The standard stays risen; at the next dusk it will re-form (condition). `MNS_WRAITH` = fought.
+   - **Fight:** engage it in its lane. It fights to 0 HP and collapses into mud at its standard. The standard stays risen; it re-forms when a quest next presents its condition (outside quests the roadside standards are presentation only, Zones §7; rule pending GD). `MNS_WRAITH` = fought.
    - **Wait it out:** keep the cart back off its lane. The Wraith crosses the road and walks back to its standard on its repeating path, and does not engage anything outside its lane (ordinary aggro radius; it is not fleeing or disengaging, it is repeating a walk). After one full pass, the lane is clear long enough for the cart. `MNS_WRAITH` = waited.
    Nell, on the cart: "Does it want a name too? Tell it there's a queue." (`MNS-B8.9`). Nobody says what it is. Lysa: "Seen: something walked. Thought: walk faster."
 4. **The causeway head.** The first crossing (C1) is at its last Slack as the cart reaches it and goes Sour after. At the head, the reed-cutter's wife takes the broth crock and her husband (`MNS-B8.12`) and presses a coin on the player (small payment).
@@ -312,11 +312,11 @@ Tuned for **Competent identity** (MD-10). Exact levels are Gameplay Designer cal
 - **The dark line** (C5, `S04`): the cart's wheel sinks; a harmless stop and a two-segment heave.
 
 **Rules**
-- **Defeat at 0 HP** (CDR-1). Beetles and the Wraith fight until defeated. Beetles take the ordinary defeat presentation. The Wraith collapses into mud at its standard and re-forms at the next dusk while the standard is risen (place condition). Waiting out its pass is not a retreat: it is a repeating walk that never left its lane.
+- **Defeat at 0 HP** (CDR-1). Beetles and the Wraith fight until defeated. Beetles take the ordinary defeat presentation. The Wraith collapses into mud at its standard and re-forms when a quest next presents its condition while the standard is risen (place condition; outside quests the standard is presentation only, Zones §7; rule pending GD). Waiting out its pass is not a retreat: it is a repeating walk that never left its lane.
 - **Melee or ranged** (CDR-2): both fights accept either. Swarms are small targets that reward area melee and are fine to shoot; the Wraith is slow and readable for both. Ranged is never required.
 - **Combat never reveals evidence.** Every hold comes from a keeper (Mara, Edris, Dunstan, Lysa, Nell) or an object they keep. The Wraith and the beetles carry and reveal nothing. At the second reading the Wraith is explicitly refused as a hold.
 - **Death:** respawn at the Sorrowmere causeway head before `S02b`; at Edris's old station from `S02b` to the start of `S04`; during `S04`, at the last stake the cart passed, with the cart waiting there. Defeated beetles stay defeated. Holds, the tape and the broth persist. Channel states never advance on death.
-- **Co-op:** beetles and the Wraith shared. Each partner's holds, channel states, cart and choice are their own. Presentation follows each player's state (fallback: the host's stakes and cart; each partner still collects their own holds and makes their own choice).
+- **Co-op:** beetles and the Wraith shared; a defeat credits each partner whose own active step consumes it (Lowmark §8.1). Each partner's holds, channel states, cart and choice are their own. Presentation follows each player's state. The cart follows its own quest owner only (no host fallback for the escort). Any shared stake presentation is a provisional fallback (MI-CO-06, pending Director review) and never decides a partner's walkable crossings, holds, step or choice; overlapping causeway set pieces are recorded for Sol (Integration Q-18).
 
 ### A7.1 MD-7 swap note
 
@@ -394,7 +394,7 @@ MR-M1 has **no Hollowfoot encounter** under either ruling. The only Hollowfoot p
 | Small payment | Currency | The reed-cutter's wife's coin at the causeway head. Economy tuning [GD]. |
 | Skill XP | Action only [GD] | Melee or Ranged at defeat; Hunting and Cooking if done personally. No lump quest XP (bible §11.6). |
 | Side-quest unlocks | Story | MSS, MLL, MRS, MFT, MFH, MSG, MNK |
-| MR-M2 | Story | Offered by Calwen at his sanctuary the next morning (Corra brings word) |
+| MR-M2 | Story | Offered by Calwen at his sanctuary the next morning (Corra brings word). Journal lead on MR-M1 completion: *Calwen is asking for the witness.* |
 
 ## A11. Failure, recovery, persistence, co-op
 
@@ -411,7 +411,7 @@ MR-M1 has **no Hollowfoot encounter** under either ruling. The only Hollowfoot p
 | Logout | Restore to the persisted step: the register room (S00–S01), the causeway head (S02), the old station (S02b–S03 and the start of S04), the last stake passed (S04), the Ferrow house bench (S04b), the register room (S05). |
 | Walking away | Quest stays Active at its step. Resume hook: Ysolde at the register room ("The room's still waiting. So's the book."), or after `S02`, Edris at the old station ("Still here. Shutting a station takes longer than you'd think."). |
 | Fail state | None. |
-| Co-op | Shared beetles and Wraith. Per-player holds, stake states, cart and choice. Presentation follows each player's own state; fallback: the host's stakes and cart drive the props, each partner still collects their own holds, sees their own reading and makes their own choice. A partner who has completed MR-M1 sits on the bench in the register room at the other's second reading and is addressed as "witness" too. |
+| Co-op | Shared beetles and Wraith. Per-player holds, stake states, cart and choice. Presentation follows each player's own state. The cart follows its own quest owner only (no host fallback). Any shared stake presentation is provisional (MI-CO-06, pending Director review) and never decides a partner's walkable crossings, step or credit; each partner still collects their own holds, sees their own reading and makes their own choice. Overlapping causeway set pieces: Integration Q-18 (Sol). A partner who has completed MR-M1 sits on the bench in the register room at the other's second reading and is addressed as "witness" too. |
 
 ## A12. Integration needs
 
@@ -419,11 +419,11 @@ Documented dependencies for a later Systems Engineer. Nothing here is implemente
 
 | Need | Owner | Minimum viable form |
 |---|---|---|
-| **Quest-pinned channel states** (bible N-1 fallback form) | Systems | Each step sets the state of the crossings it uses (C1 Running→Slack on keep watch; C4 Slack; the far end, C4 and C1 to Sour when the cart passes). A state swaps the shallows' walkable segment and the stake's water-line prop. Per player. No per-crossing schedule is needed for Act I. |
+| **Quest-pinned channel states** (bible N-1 fallback form) | Systems | Each step sets the state of the crossings it uses (C1 Running→Slack on keep watch; C4 Slack; the far end, C4 and C1 to Sour when the cart passes). A state swaps the shallows' walkable segment and the stake's water-line prop. Per player. MBR pins C1 and C4 Slack from `S03` to `S06` (§B9.1). A pin holds only for the step or steps that name it and then releases to the Zones §6.2 default; quest completion releases all. No per-crossing schedule is needed for Act I. |
 | **Keep-watch interaction** | Systems | Lowmark convention: advance the per-player presentation hour one turn at a marked bench. Used at C1, the Hayle house, the Ferrow house, the register longhouse. |
 | **Escort-follow cart** | Systems / NPC | A handcart with NPCs that follows the player's position at walking pace along the causeway, stops when the player stops, cannot be harmed, and halts on enemy proximity. The "dark line" is a volume that triggers a stop-and-heave (2-segment channel). Standard escort pattern (as Lowmark *Night Ferry*, Thornfell TPW escort without calls). |
 | **Lantern-moss posts** | Art / world state | Post props with a lit (wet) and dark (dry) material, swapped by presentation hour (lit at dusk and night where the line is tended). No light-gating logic in Act I. |
-| **Lane-walking Wraith** | Gameplay / AI | An enemy that repeats a fixed path across the road and aggroes only within its lane (standard patrol plus aggro radius). Defeated at 0 HP; re-spawns at its standard at the next dusk while the standard prop is in its risen state (Lowmark drift-site state model). |
+| **Lane-walking Wraith** | Gameplay / AI | An enemy that repeats a fixed path across the road and aggroes only within its lane (standard patrol plus aggro radius). Defeated at 0 HP; re-forms at its standard when a quest next presents its condition while the standard prop is in its risen state (outside quests the roadside standards are presentation only, Zones §7; rule pending GD; Lowmark drift-site state model). |
 | **Fear-scaled spawn** (MNS-E1) | Gameplay | Wave 1 adds a third swarm if not cleared within ~40 s while the "frightened" NPC is in his frightened idle; a scripted ally action (Edris sits) swaps the NPC to calm idle before wave 2, which has a fixed smaller composition. Two authored waves; no new system. |
 | **Hold board** | Dialogue | Dialogue options gated by quest flags and by item possession (`MNS_name_tape`), with two counters (one per strip) local to the conversation. Use-item-on-NPC is an acceptable alternative for the tape. Standard. |
 | **Hunting from a hide; cooking at a hearth** | Skills / Gameplay | Existing Hunting and Cooking interactions. The fowl and the broth crock are carry-state quest objects until the economy pass defines fen fowl (MD-11). |
@@ -682,7 +682,7 @@ Tuned for **Competent identity** (MD-10). Exact levels are Gameplay Designer cal
 - **Combat never reveals evidence.** The shard comes from Mara's dig, the books from a chest levered out of the mud, the cause from Oswin's mouth. Nothing drops from a Wraith or a Reedlurker but ordinary loot.
 - **Non-combatants:** Calwen, Mara, Corra and Dunstan are never targetable and are never engaged by Wraiths. During fights Mara stands back on the road and Corra stays behind her; neither can be harmed.
 - **Death:** respawn at the causeway head (N6). Folded standards stay folded; pinned logs stay pinned; lift and lever segments are kept; defeated Reedlurkers stay defeated. A standard that was lifted but not folded keeps its Wraiths in place (they reset to full health on the player's return, as an ordinary leash reset). For MBR-E5: the step stays at dusk on return (re-pinned); lift and fold progress are kept.
-- **Co-op:** every fight shared. Each partner's standards, pins, folds, chest and logs are their own (per-player props; fallback: the host's standard states, with each partner completing their own lift, pin and fold interactions on the host's props). The Colour's pulse and re-forming follow the host's state; each partner's lift and fold progress is their own.
+- **Co-op:** every fight shared; a defeat credits each partner whose own active step consumes it (Lowmark §8.1). Each partner's standards, pins, folds, chest and logs are their own (per-player props). Provisional presentation fallback (MI-CO-06, pending Director review): one shared standard state may be shown, but each partner's lift, pin and fold interactions are checked against that partner's own standard state, and a prop further along or behind never blocks or advances a partner's step. Which state drives the shared Colour pulse and Wraith re-forming when partners' standard states differ is unresolved (Integration Q-18, Sol); each partner's lift and fold progress is their own.
 
 ### B7.1 MD-7 swap note
 
@@ -720,12 +720,12 @@ MR-M2 has **no Hollowfoot** in any role. Nothing changes under either MD-7 rulin
 
 | Step | Objective | Completes on | Req. | Notes |
 |---|---|---|---|---|
-| `S00_offer` | Speak to Calwen at the reed sanctuary. | `MBR-D1` end with accept | Yes | Offered on next Sorrowmere entry after MR-M1 Completed (Corra, `MBR-D1.01`). `MNS_WRAITH` variant |
+| `S00_offer` | Speak to Calwen at the reed sanctuary. | `MBR-D1` end with accept | Yes | Offered on next Sorrowmere entry after MR-M1 Completed (Corra, `MBR-D1.01`). Journal lead on MR-M1 completion (*Calwen is asking for the witness.*). `MNS_WRAITH` variant |
 | `S01_states` | Learn to read the standards. | Practice fold done + three state inspects at N1 + `MBR-D2` end | Yes | `MNS_STANDARDS_SEEN` variant. Corra follows from here (presentation) |
 | `S02_oswin` | Speak to the crew-lead at the causeway works. | `MBR-D3` end + six pins (self: 3 Woodcutting interactions; crew: keep watch one turn) | Yes | `[CAUSEWAY]`. Sets `MBR_PINS` |
-| `S03_standards` | Bring down the three risen standards. | Standards 1–3 each: lift (3 segments) + 2 pins + fold (3 correct) | Yes | Road order. MBR-E1/E2/E3 on each lift. Shard found at standard 2 lift segment 2 (`MBR_SHARD_FOUND`). Condition ends per standard on the third fold |
+| `S03_standards` | Bring down the three risen standards. | Standards 1–3 each: lift (3 segments) + 2 pins + fold (3 correct) | Yes | Road order. MBR-E1/E2/E3 on each lift. Shard found at standard 2 lift segment 2 (`MBR_SHARD_FOUND`). Condition ends per standard on the third fold. From `S03` start to `S06` end, C1 and C4 (Zones X01, X02) are pinned **Slack** for this player, so no dusk or night wait, respawn or logout restore in `S03`–`S06` leaves the player behind a Running crossing |
 | `S04_chest` | Raise what's under the third standard. | MBR-E4 all defeated + lever (3 segments) + chest opened | Yes | Grants **`MBR_unit_logs`**. Last-page read optional here (required in S04b at Ysolde's table) |
-| `S04b_records` | Take the books to Ysolde. | Shard carried past Dunstan (event `causeway.shard_moss`) + `MBR-D6` end (books read; shard shown) + shard left with Calwen | Yes | Sets `MBR_SHARD_MOMENT`, `MBR_LOGS_READ`. Shard is a carry-state object, not an item |
+| `S04b_records` | Take the books to Ysolde. | Shard carried past Dunstan (event `causeway.shard_moss`) + `MBR-D6` end (books read; shard shown) + shard left with Calwen | Yes | Sets `MBR_SHARD_MOMENT`, `MBR_LOGS_READ`. Shard is a carry-state object, not an item. Until `MBR_SHARD_MOMENT` is set, the journal shows the sub-objective *Carry the shard home by the causeway head*; Dunstan stays at the sledge and the event fires on the next approach |
 | `S05_colour` | Bring down the standard at the field's centre. | Keep watch to dusk (or arrive at dusk) + MBR-E5: lift (3 segments) + fold (3 correct) + all enemies on the platform defeated | Yes | Pulse ~30 s. Lift and fold progress kept |
 | `S06_choice` | Decide what happens to the field's standards. | Choice in `MBR-D8` + Calwen stores the shard (`MBR-D8.90`) | Yes | Sets **`MR_BANNERS`**, **`MR_CAUSEWAY = reset`**. Quest → **Completed** |
 
@@ -733,7 +733,7 @@ MR-M2 has **no Hollowfoot** in any role. Nothing changes under either MD-7 rulin
 
 | Flag | Set by | Read by (here) | Read by (later packages) |
 |---|---|---|---|
-| `MBR_PINS` = self / crew | `S02` (`MBR-D3.32` / `MBR-D3.36`) | `MBR-B2` | *Lifting Day* (Oswin: "You split pins for me once.") with `self` |
+| `MBR_PINS` = self / crew | `S02` (`MBR-D3.32` / `MBR-D3.36`) | `MBR-B2` | *Lifting Day* (pinned-post inspect `MLD-I1.02`) with `self` |
 | `MBR_SHARD_FOUND` | `S03` standard 2 | Shard inspect | — |
 | `MBR_SHARD_MOMENT` | `S04b` event | `MBR-D6.60`, `MBR-D6b.02` variants | MR-M4 (Mabyn, optional line about lantern moss and grief); none required |
 | `MBR_LOGS_READ` | `MBR-D6` | — | MR-M3 offer (Ysolde's question) |
@@ -762,7 +762,7 @@ MR-M2 has **no Hollowfoot** in any role. Nothing changes under either MD-7 rulin
 | The causeway, reset | World state | Roadside standards removed; crews walk it; dusk Wraiths on the causeway end (`MR_CAUSEWAY = reset`). The field away from the road keeps its ordinary standards and states. |
 | Small payment | Currency | Oswin's crew rate for "a day's lifting", paid by Oswin himself, awkwardly. Economy tuning [GD]. |
 | Skill XP | Action only [GD] | Melee or Ranged at defeat; Woodcutting if the pins were split personally. No lump quest XP. |
-| Side-quest unlocks | Story | MBS, MWS, MMR, MHG, MBO, MRH; MLD (with MLW) |
+| Side-quest unlocks | Story | MBS, MWS, MMR, MHG, MBO, MRH; MLD (with MLL) |
 | MR-M3 | Story | Ysolde reads the books again and wants to know what stopped three columns on one day. |
 
 ## B11. Failure, recovery, persistence, co-op
@@ -776,10 +776,10 @@ MR-M2 has **no Hollowfoot** in any role. Nothing changes under either MD-7 rulin
 | Player stands in the ditch | Slowed. Reedlurkers in the ditch only before `S04` is complete; afterwards the ditch is quiet. |
 | Player is beaten | Respawn at the causeway head; progress kept (§B7). |
 | Player arrives at the field's centre outside dusk | The objective reads *Keep watch until dusk*; the platform's bench offers it; the sanctuary's bench offers it too. |
-| Logout | Restore to the persisted step: the sanctuary (S00–S01), the works (S02), the causeway head with standards in their saved states (S03–S04), the register room (S04b, shard state kept: the player still carries it, or Calwen has it), the sanctuary at dusk (S05), the sanctuary at night (S06). |
+| Logout | Restore to the persisted step: the sanctuary (S00–S01), the works (S02), the causeway head with standards in their saved states (S03–S04), the causeway head (S04b until `MBR_SHARD_MOMENT` is set; Dunstan stays at the sledge and the event fires on the next approach), then the register room (S04b, shard state kept: the player still carries it, or Calwen has it), the sanctuary at dusk (S05), the sanctuary at night (S06). |
 | Walking away | Quest stays Active at its step. Resume hook: Calwen at the sanctuary ("They're still up. They're patient. I'm less so."), or during `S03`–`S04`, Mara at the works ("I'll be here. The ground's not going anywhere. It's the only thing that isn't."). |
 | Fail state | None. |
-| Co-op | Shared enemies and shared Colour pulse. Per-player standard states, pins, folds, chest, logs, shard carry and choice. Presentation follows each player's own state (fallback: the host's props; each partner still does their own lift, pin, fold, lever and choice). The shard moment plays for the carrying player only; a partner standing near sees the moss brighten and is given no option either. |
+| Co-op | Shared enemies and shared Colour pulse. Per-player standard states, pins, folds, chest, logs, shard carry and choice. Presentation follows each player's own state (provisional presentation fallback per MI-CO-06, pending Director review: a shared prop state may be shown but never decides a partner's interactions, step or credit; each partner still does their own lift, pin, fold, lever and choice against their own standard state; conflicts recorded in Integration Q-18 for Sol). The shard moment plays for the carrying player only; a partner standing near sees the moss brighten and is given no option either. |
 
 ## B12. Integration needs
 
@@ -795,7 +795,7 @@ Documented dependencies for a later Systems Engineer. Nothing here is implemente
 | **Loose-log section** | World state | A walkable segment with a slow modifier while unpinned; two pin interactions restore it. |
 | **Carry-state object** (the shard) | Systems | As Thornfell's grain sack, without the movement penalty: a held prop and a quest-state flag; not an inventory item; cannot be dropped by a hit. Fallback: Mara walks with the player carrying it in her basket lid and the moment triggers on the player's proximity to Dunstan with Mara beside them. |
 | **Scripted presentation event** (`causeway.shard_moss`) | Art / audio / VFX | §B8.1: one moss post's material brightens and fades; a silt-ring decal smooths round an NPC's feet. Per player. No UI. |
-| **Keep-watch interaction** | Systems | At the works (crew pins), at the sanctuary and at the platform (dusk). |
+| **Keep-watch interaction** | Systems | At the works (crew pins), at the sanctuary and at the platform (dusk). The C1/C4 Slack pin from `S03` to `S06` (§B9.1) keeps the dusk and night waits, the walk to the platform and the return to the sanctuary walkable. |
 | **Use-item-on-NPC or gated option** | Dialogue | Showing the logs and the shard to Ysolde. |
 | **Woodcutting interaction** | Skills | Splitting root-knees at a block; pins are a carry-state count, not items. |
 | **Agility trigger** | Systems | A ditch jump from the embankment slope back to the road at standard 3; walkable fallback up the slope steps. |
@@ -863,3 +863,5 @@ Documented dependencies for a later Systems Engineer. Nothing here is implemente
 | Terminology | No release wording. The Mire is called a milestone only in the status line. |
 | Independent review (2026-11-08, Acts I–II reviewer) | 9 defects fixed in place, none high. **Medium:** `MBR_CORRA_CORNER` was read (`MBR-D8.32`, MR-M5) but never set (now set on `MBR-B5.6`); Act I promised `MBR_unit_logs` would be "set beside the vestry log" in MR-M4, which Act II does not do (item, contract and flag rows now say the vestry inspect matches their weather run, possession not required); a throwaway bark named "Col", a Lowmark NPC's first name (Col Dunnock; name dropped). **Low:** §A1 said the beetles were "driven off" (CDR-1 wording; now defeated); Corra's safety was justified by a misreading of bible §2.4 (now rulings §3.1.6, non-combatants untargetable); the Risen Colour's lift could read as closing when the Colour re-forms (now stays open once opened); Dunstan's "Sunday" was a real-world weekday name (now "the week's end"); flag-table ranges cited non-existent `MNS-D10.88` / `MBR-D8.88` (now `.86` / `.87`). **Verified unchanged:** every cited dialogue id exists; flags set/read match between files; step predicates match beats; anchor limits (Edris, Calwen, Mara, Lysa); R08 (no unit, side, count; day numbers are march days, not casualties); CDR-1/2/4 (telegraphs in seconds, solo targets, `[GD]` skill placeholders with time-cost alternatives, no new runtime need); MD-7 swap notes; MAP VERIFICATION REQUIRED on every place table; no Lowmark/Thornfell name collision among the new cast; tables well-formed. |
 | Batch 4 encounter alignment review, 2026-11-09 | Aligned with `Enemies/Caelmor_Mire_Encounter_and_Enemy_Requirements.md` §13.3 (numbers and text only; no id, step or flag renamed): MBR-E4 kit now lurker lunge + grab, snapper spit + melee clamp (C-5, I-1), and its purpose cell no longer cites the bible's old "first seen"; MNS-E1 carapace charge-butt tell ~1.2 s → ~1.5 s with the knockback clamped to open ground (C-1, I-11); §B7 ranged note says snapper spit. |
+| Playability audit fixes, 2026-11-13 | SM-01, SM-03, SM-08 (pin release sentence), SM-14, SM-22, SS-02 (option a: MLD unlock now MLL and MR-M2), SS-10, CO-10, CO-14. Authored walkthrough only (no Unity build exists; nothing was played). Text only; no id, step, flag or geography changed. MBR now pins C1/C4 Slack from `S03` to `S06`; MI-CO-06 host presentation is stated as a provisional fallback pending Director review that never decides a partner's navigation, step or credit; the dusk re-form rule is marked pending GD. |
+| Playability audit fixes review, 2026-11-13 | Independent review of the same-day fixes. §A12 per-player props row: host fallback restated as provisional (MI-CO-06) that never decides another player's progression; §A12 lane-walking Wraith row aligned to the SM-14 re-form rule (pending GD). Authored walkthrough only; text only; no id, step, flag or geography changed; no Director recommendation promoted. |

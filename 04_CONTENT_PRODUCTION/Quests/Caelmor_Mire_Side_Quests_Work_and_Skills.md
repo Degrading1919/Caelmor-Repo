@@ -20,9 +20,9 @@ Exact items, recipes, yields, stats, levels and XP belong to the item, economy a
 
 | Code | Quest | Skills | Core verb (primary first) | Unlock (quest state) | Skill requirement (CDR-4) | Where (bible §4.2) | Length |
 |---|---|---|---|---|---|---|---|
-| **MRS** | Reed Shafts | Fletching, Ranged, Hunting | **cut**, fletch, shoot, pluck | MR-M1 Completed | **Hunting ~[GD: low]** to start. Fletching and Ranged are taught from any level. | Fowling Meres (MP26), Hob's hide; Marshfall (MP02) | 35–45 min |
+| **MRS** | Reed Shafts | Fletching, Ranged, Hunting | **cut**, fletch, shoot, pluck | MR-M1 Completed | **Hunting ~[GD: entry level, reachable in the Mire]** to start. Fletching and Ranged are taught from any level. | Fowling Meres (MP26), Hob's hide; Marshfall (MP02) | 35–45 min |
 | **MFT** | A Table for the Wet | Cooking (with entry Hunting) | **gather**, cook, serve | MR-M1 Completed | None (Cooking is taught). | Fenward Huts (MP05); Marshfall smoke sheds (MP02) | 30–40 min |
-| **MFH** | The Ferry Harness | Leatherworking, Woodcutting | **strip**, mend, fit | MR-M1 Completed | **Woodcutting ~[GD: low]** to start. Leatherworking is taught from any level. | Blackwater Landing (MP06) | 30–40 min |
+| **MFH** | The Ferry Harness | Leatherworking, Woodcutting | **strip**, mend, fit | MR-M1 Completed | **Woodcutting ~[GD: entry level, reachable in the Mire]** to start. Leatherworking is taught from any level. | Blackwater Landing (MP06) | 30–40 min |
 | **MWS** | Weight of the Soil | Woodcutting (light), Melee or Ranged | **repair**, clear, decide | MR-M2 Completed | None. | Marshfall walkways (MP02), Peat Row | 35–45 min |
 | **MHG** | The Hushed Granary Key | None required | **find**, weigh, decide | MR-M2 Completed | None. | The Hushed Granary (MP22), Sorrowmere register room (MP01), Rootrest (MP04) | 30–40 min |
 
@@ -108,7 +108,7 @@ None repeats a milestone verb (MR-M1 match records and walk a shifting route; MR
 - **Evidence rule** (bible §11.3). Nothing in these quests is evidence for a revelation. The heron, the wilting fern, the slack seam, the ring of roots and the lantern in the granary prove nothing and identify nobody. The Memorywarden marker in MWS is an object with office marks and no name; it identifies nobody.
 - **No failure.** Inactive / Active / Completed only. Death respawns at the quest's named safe point with step and flags intact. Logout restores the last persisted step; completed channel segments persist; a dropped carry-state object returns to its source. Walking away keeps the quest Active with the resume hook named in each package.
 - **Time.** No calendar dates anywhere. Days are presentation-hour turns; the past is dated by weather ("the night of the hard frost") or by bell-nights, never by a date or a year (FT-02).
-- **Co-op.** Independent instances; shared world creatures give credit to each participant on that step; quest-state props and NPC placement are per player (Lowmark per-player prop pattern; fallback: the host's state drives props, each player's own state drives dialogue).
+- **Co-op.** Independent instances; shared world creatures give credit to each participant on that step; quest-state props and NPC placement are per player (Lowmark per-player prop pattern; where a row says "host fallback", that is a provisional presentation fallback only (Integration MI-CO-06, pending Director review) and never decides another player's walkable ground, interactions, credit or completion; each player's own state drives dialogue).
 - **Address.** NPCs who saw MR-M1's readings say "witness" (bible §5.3 rule 8); everyone else says "traveller". The register and the seat are never explained.
 - **MD-7 (Hollowfoot).** No Hollowfoot enemy appears anywhere in this file. MFT includes Jory Wick (Act III cast), a settled Hollowfoot man in Lysa's care, as a **non-combatant, never targetable** NPC, tagged `[MD-7]`. Each package carries an MD-7 swap note.
 - **`[CAUSEWAY]`.** Any node naming Oswin Garvey's causeway decision is tagged (bible §3.1). In this file: MWS only (one Dunstan line).
@@ -144,7 +144,7 @@ All flags here are quest-local (`MRS_…`, `MFT_…`, `MFH_…`, `MWS_…`, `MHG
 | Content id (suggested) | `mire.side.reed_shafts` |
 | Type | Skill introduction (Fletching, Ranged, Hunting). Bible §7.2 row; MD-11 skills. |
 | Unlock | MR-M1 Completed. Offered at Hob's hide on the Fowling Meres edge (Act I place M3) when the player passes or comes for fowl (`MRS-B0`); dialogue `MRS-D1`. |
-| Skill requirement | **Hunting ~[GD: low]** to accept (CDR-4). Fletching and Ranged are taught from any level. |
+| Skill requirement | **Hunting ~[GD: entry level, reachable in the Mire]** to accept (CDR-4). Fletching and Ranged are taught from any level. |
 | Resume hook | Hob at the hide bench: `MRS-D1.00` "Still here. Still swearing at herons. Where were we?" pins the step. |
 | Skills | Fletching (required: cutting, roll-test, fletching), Ranged (taught; alternative path), Hunting (required at start; the dusk flight), Melee or Ranged (one Reedlurker) |
 | Combat share | ~10% (one Reedlurker at the retrieve) |
@@ -249,7 +249,7 @@ Tuned for MR-M1's Competent identity (MD-10).
 
 | Step | Objective | Completes on | Required | Notes |
 |---|---|---|---|---|
-| `S00_offer` | Talk to the fowler at the meres. | `MRS-D1` accept (Hunting ~[GD: low]) | Yes | Below the requirement: `MRS-D1.05`, offer re-available |
+| `S00_offer` | Talk to the fowler at the meres. | `MRS-D1` accept (Hunting ~[GD: entry level, reachable in the Mire]) | Yes | Below the requirement: `MRS-D1.05`, offer re-available |
 | `S01_stake` | Find out when the good reed can be cut. | Feeder stake inspected + keep watch to Slack | Yes | F3 shallows toggle walkable at Slack |
 | `S02_cut` | Cut twelve reeds from the good stand. | 12 `cut_reed` at the throat stand (S3) | Yes | Soft-stand reeds allowed, rejected later |
 | `S03_true` | Test and straighten the shafts. | All cut reeds rolled; wobblers warmed and re-rolled | Yes | Authored 8/3/1 mix for throat reeds |
@@ -331,8 +331,8 @@ MRS-D1.03 HOB: "Nine. I used to cut a hundred a season. Hands are slower. Eyes a
   > "Why not buy arrows?"                                            → MRS-D1.08
   > "What's wrong with herons?"                                      → MRS-D1.10
 MRS-D1.04 HOB: "Can you sit still? That's the whole trade. Cutting's the easy bit."
-  > [Hunting below ~[GD: low]] "I've never hunted anything."         → MRS-D1.05
-  > [Hunting ~[GD: low]] "I can sit still."                          → MRS-D1.06
+  > [Hunting below ~[GD: entry level, reachable in the Mire]] "I've never hunted anything."         → MRS-D1.05
+  > [Hunting ~[GD: entry level, reachable in the Mire]] "I can sit still."                          → MRS-D1.06
 MRS-D1.05 HOB: "Then go and hunt something first. Anything. Hares, fowl, a boar if you're daft. Come back when you know what waiting feels like. I'll still be here. I'm always here."   → end (offer stays open)
 MRS-D1.06 HOB: "Good. I'll teach you the Marshfall way. Reed shafts, wood blunts, heron feathers. No iron in it anywhere."
 MRS-D1.07 HOB: "First thing. The good reed's in the throat of that channel. Go and read the stake."   {event: accept → S01_stake}
@@ -452,7 +452,7 @@ MRS-D5.07 [Hob's spare bow lent] HOB: "Bow back on its peg, please. It's sentime
 ### MRS.15 Open decisions
 
 1. **EM-01/EM-04:** whether reed is a shaft material and root-wood a head. The quest stands on ordinary arrows if not.
-2. **Skill requirement level** (Hunting ~[GD: low]): Gameplay Designer. Recommendation: a level reachable in Lowmark's or Thornfell's first hunting content, or about an hour of training.
+2. **Skill requirement level** (Hunting ~[GD: entry level, reachable in the Mire]): Gameplay Designer. Recommendation: an entry level a fresh character can reach in the Mire itself (no other region is a prerequisite; bible §6, §11.12). Gameplay Designer to set the level or confirm an in-region training source.
 3. **Hob's pronoun:** "he" throughout, matching Act I and Act III §E.10 (resolved; Act III now reads "he remembers the heron").
 
 ### MRS.16 Review log
@@ -756,7 +756,7 @@ MFT-D7.21 LYSA: "The hearth's yours when you want it. Cook for whoever's here."
 | Content id (suggested) | `mire.side.ferry_harness` |
 | Type | Skill introduction (Leatherworking, Woodcutting). Bible §7.2 row. |
 | Unlock | MR-M1 Completed. Offered at Blackwater Landing (MP06) by Gwenna Tolley when the player first reaches the reed docks (`MFH-B0`, `MFH-D1`). |
-| Skill requirement | **Woodcutting ~[GD: low]** to accept (CDR-4). Leatherworking is taught from any level. |
+| Skill requirement | **Woodcutting ~[GD: entry level, reachable in the Mire]** to accept (CDR-4). Leatherworking is taught from any level. |
 | Resume hook | Gwenna on the Tolley punt: `MFH-D1.00` "Punt's still sat there. Where were we?" |
 | Skills | Woodcutting (required: root-knee pins), Leatherworking (taught: repair), Melee or Ranged (Bog Hounds) |
 | Combat share | ~15% (one Bog Hound pack at the smoke racks) |
@@ -844,7 +844,7 @@ Blackwater Landing sits below Sorrowmere (bible §4.2). The **home channel** is 
 
 | Step | Objective | Completes on | Required | Notes |
 |---|---|---|---|---|
-| `S00_offer` | Talk to the woman on the punt. | `MFH-D1` accept (Woodcutting ~[GD: low]) | Yes | Below requirement: `MFH-D1.06` |
+| `S00_offer` | Talk to the woman on the punt. | `MFH-D1` accept (Woodcutting ~[GD: entry level, reachable in the Mire]) | Yes | Below requirement: `MFH-D1.06` |
 | `S01_strip` | Strip the broken harness. | Cut free + carry + 2 strip + keep buckles | Yes | — |
 | `S02_leather` | Find leather that will hold. | 2 sound hides chosen | Yes | Authored 2 sound / 3 cracked |
 | `S03_mend` | Mend the harness. | Cut, skive, 3 stitch segments, dress **or** crew stitch (cut, skive + keep watch) | Yes | `MFH_CREW_STITCH` |
@@ -922,8 +922,8 @@ MFH-D1.03 GWENNA: "There's blankets and root and a crock for Fenward under that 
   > "What do you need?"                                              → MFH-D1.04
   > "Can't you ask Rowan?"                                           → MFH-D1.08
 MFH-D1.04 GWENNA: "A harness for Cadan, so he can haul. Two pins, so I can row. The leather's in my chest, the pins are in the bank, and my knees are in the mud."
-  > [Woodcutting below ~[GD: low]] "I've never split wood."          → MFH-D1.06
-  > [Woodcutting ~[GD: low]] "I'll do it."                           → MFH-D1.05
+  > [Woodcutting below ~[GD: entry level, reachable in the Mire]] "I've never split wood."          → MFH-D1.06
+  > [Woodcutting ~[GD: entry level, reachable in the Mire]] "I'll do it."                           → MFH-D1.05
 MFH-D1.05 GWENNA: "Good. Strip that harness first. Keep the buckles. Iron's dear."   {event: accept → S01_strip}  → end
 MFH-D1.06 GWENNA: "Root wood's twisty. It'll have your hand off if you've never held an axe. Go and split some honest logs somewhere. Anywhere. Come back with the feel of it." (beat) "Punt's not going anywhere. Neither am I."   → end (offer stays open)
 MFH-D1.08 GWENNA: "Rowan's got his own boat to worry about and his own reasons. I don't borrow a man's reasons."   → MFH-D1 options
@@ -1006,7 +1006,7 @@ MFH-D5.04 GWENNA: (counts coins out of a purse) "That's for the mending. Bench i
 ### MFH.15 Open decisions
 
 1. EM-08: imported leather state and repair recipes. Recommendation: the approved vegetable-tanned leather, no route stated (FT-03).
-2. Woodcutting requirement level (~[GD: low]): Gameplay Designer.
+2. Woodcutting requirement level (~[GD: entry level, reachable in the Mire]): Gameplay Designer.
 3. Bog Hounds' first appearance is here (bible §10). Telegraphs above are the long first-appearance lengths.
 
 ### MFH.16 Review log
@@ -1151,7 +1151,7 @@ Small payment from the row's pot (economy tuning); Peat Row's walkway as access;
 | No axe | Hedda's crew axe (lent, returned at `S07`). |
 | Walking away | Stays Active; resume at Hedda. |
 | Logout | Last step restored; carried turves return to the ditch edge. |
-| Co-op | Per-player row props (piles, walkway, marker state); beetles shared; each player makes their own choice (host fallback for the walkway prop). |
+| Co-op | Per-player row props (piles, walkway, marker state); beetles shared; each player makes their own choice. The walkway is route geometry: each player walks their own `MWS_MARKER` state; any shared walkway presentation is a provisional presentation fallback (Integration MI-CO-06, pending Director review; conflicts in Integration §5.2 Q-18) and never gates another player's navigation. |
 
 ### MWS.11 Integration needs
 
@@ -1318,7 +1318,7 @@ MWS-D6.03 HEDDA: (hands over coins from the row's pot) "That's the row's. It's n
 | **State compliance** | Inactive / Active / Completed; `MHG_KEY`; no fail; the family is fed in every outcome. |
 | **Combat compliance** | None. |
 
-**In one paragraph.** The Hushed Granary is the Mire's raised emergency store, opened once before every flood season by its keeper, Wystan Crale, who has held the key since he was young and whose hands now shake. This year the key is gone. Tilda Lowry's croft went under in the first rain of the wet and she has three children in a borrowed loft; the store's rule says nothing leaves before the Silt hearing, and the hearing sits after the rain. Some say theft; some say someone has been in through the old flood hatch; some say old Wystan has lost his wits. The player reads the silt apron round the ladder (only one set of prints, an old man's, coming and going), opens the flood hatch underneath at Slack (a new rope on the pin, a little grain spilled, and nothing missing when the sacks are weighed against the tally board), and follows a griefroot balm to Rootrest, where the herbalist says Wystan wears the key on a cord under his shirt. Wystan has not lost it. He hid it, because the three settlements mean to give it to a younger keeper before the wet and he is afraid of being "put by". Then the player sees his lantern moving inside the locked store at night. The key's custody is decided at the granary; in every outcome Tilda is fed that night, because Tilda once walked Wystan home through a dark night, and she asks for her lantern debt.
+**In one paragraph.** The Hushed Granary is the Mire's raised emergency store, opened once before every flood season by its keeper, Wystan Crale, who has held the key since he was young and whose hands now shake. This year the key is gone. Tilda Lowry's croft went under in the first rain of the wet and she has three children in a borrowed loft; the store's rule says nothing leaves before the Silt hearing, and the hearing sits after the rain. Some say theft; some say someone has been in through the old flood hatch; some say old Wystan has lost his wits. The player reads the silt apron round the ladder (only one set of prints, an old man's, coming and going), opens the flood hatch underneath at Slack (a new rope on the pin, a little grain spilled, and nothing missing when the sacks are weighed against the tally board), and follows a griefroot balm to Rootrest, where the herbalist says Wystan wears the key on a cord under his shirt. Wystan has not lost it. He hid it, because the three settlements mean to give it to a younger keeper before the wet and he is afraid of being "put by". Then the player sees his lantern moving inside the locked store at night. The key's custody is decided at the granary; in every outcome Tilda is fed that night, because Tilda once walked Wystan home through a dark night and Wystan chooses to acknowledge it.
 
 ### MHG.2 Selection record and canon grounding
 
@@ -1326,15 +1326,15 @@ MWS-D6.03 HEDDA: (hands over coins from the row's pot) "That's the row's. It's n
 |---|---|
 | A. A thief; catch him. | Rejected. The bible's pitch offers three readings; making it a crime flattens a care story. |
 | B. A Silt hearing scene. | Rejected. Talk-led resolution only in closing beats; the hearing sits after the rain anyway. |
-| **C. Test three readings with physical evidence (prints, hatch, weights) → a testimony at Rootrest → a lantern in a locked store → custody, with the family fed by lantern debt** | **Selected.** "Weigh" is literal; each theory is tested by something the player does; lantern debt does the urgent work without overriding the hearing. |
+| **C. Test three readings with physical evidence (prints, hatch, weights) → a testimony at Rootrest → a lantern in a locked store → custody, with the family fed by a lantern debt Wystan chooses to acknowledge** | **Selected.** "Weigh" is literal; each theory is tested by something the player does; lantern debt does the urgent work without overriding the hearing. |
 
 | Element | Source | Status |
 |---|---|---|
 | The Hushed Granary (raised emergency store) | Part 3 Mire proposal; bible MP22 | [NEW, Part 3, adopted MD-5] |
-| Lantern debt (never hereditary); Silt hearing (no appeal rules stated) | Part 3 Mire proposal; bible MD-5 | [NEW, adopted]; the custom as played here (owed by the one walked home, paid on asking) is [PROPOSAL — DIRECTOR] |
+| Lantern debt (never hereditary); Silt hearing (no appeal rules stated) | Part 3 Mire proposal; bible MD-5 | [NEW, adopted]; the custom as played here (the one walked home chooses to acknowledge the walk; never asked for, never a price, never inherited; matches `MSS-D6.30`) is [PROPOSAL — DIRECTOR] |
 | Rootrest herbalists; griefroot balms | Dossier §VII.4, §XI (griefroot resin "used in calming balms") | [CANON] (resource legacy) |
 | Ysolde; "two holds" | Bible §1.1, §5.2 | [NEW] |
-| Wystan Crale, Tilda Lowry, Briony Jessop | This package | [NEW] |
+| Wystan Crale, Tilda Lowry, Avis Jessop | This package | [NEW] |
 
 ### MHG.3 The places [MAP VERIFICATION REQUIRED]
 
@@ -1359,12 +1359,12 @@ MWS-D6.03 HEDDA: (hands over coins from the row's pot) "That's the row's. It's n
 
 **Beat 4 — Two Holds for a Key (`S04_roll`).** *Objective: Ask about the keeper.* Two sources, any order:
 
-- **Sorrowmere register room** (G4): Ysolde opens the **keepers' roll**: Wystan's name against the Hushed Granary since "the winter the ice took the ferry", and in a newer hand a pencilled line: *"To pass to Briony Jessop before the wet. Three settlements agree."* Ysolde: "That's a plan, not a record. It's in pencil for a reason."
+- **Sorrowmere register room** (G4): Ysolde opens the **keepers' roll**: Wystan's name against the Hushed Granary since "the winter the ice took the ferry", and in a newer hand a pencilled line: *"To pass to Avis Jessop before the wet. Three settlements agree."* Ysolde: "That's a plan, not a record. It's in pencil for a reason."
 - **Rootrest herbalist** (G5): Wystan comes every week for griefroot balm for his hands. "He wears a key on a cord under his shirt. I've seen it when I do his wrists. I didn't think it was my business." (`MHG-D3`)
 
-**Beat 5 — The Lantern in the Store (`S05_night`).** *Objective: Find Wystan.* At Wystan's hut (G6) by day he is not there; the chair faces the store. Keep watch to night. The strange moment (MHG.6): a lantern moves inside the locked store. Wait at the ladder: Wystan comes out through the hatch below, lantern in hand, and finds the player there. `MHG-D4`: he has the key. He hid it because they mean to give it to Briony before the wet and "put him by". He has been checking the sacks every night because he is afraid of being wrong.
+**Beat 5 — The Lantern in the Store (`S05_night`).** *Objective: Find Wystan.* At Wystan's hut (G6) by day he is not there; the chair faces the store. Keep watch to night. The strange moment (MHG.6): a lantern moves inside the locked store. Wait at the ladder: Wystan comes out through the hatch below, lantern in hand, and finds the player there. `MHG-D4`: he has the key. He hid it because they mean to give it to Avis before the wet and "put him by". He has been checking the sacks every night because he is afraid of being wrong.
 
-**Beat 6 — The Key (`S06_decide`).** *Objective: Decide who keeps the key.* At the ladder at morning: Wystan, Tilda, Briony Jessop (a young Reedsward woman), and Ysolde (who comes from Sorrowmere with the roll). `MHG-D5`. Before the custody choice, Tilda asks Wystan for her lantern debt (MHG.8); he pays it in every outcome.
+**Beat 6 — The Key (`S06_decide`).** *Objective: Decide who keeps the key.* At the ladder at morning: Wystan, Tilda, Avis Jessop (a young Reedsward woman), and Ysolde (who comes from Sorrowmere with the roll). `MHG-D5`. Before the custody choice, Wystan acknowledges the night Tilda walked him home (MHG.8); he does so in every outcome, unasked.
 
 **Beat 7 — Lantern Debt (`S07_debt`).** *Objective: Walk Tilda's sack home by lantern.* At dusk Wystan opens the store (with whoever now keeps the key, per the choice), weighs out one sack, chalks the tally, and walks it to Tilda's borrowed loft by lantern; the player carries the lantern (carry-state) and walks beside him (escort at his pace). `MHG-D6`. Quest Completed.
 
@@ -1401,12 +1401,12 @@ None. **Under the store** at Running is non-walkable (the hatch step pins Slack 
 
 ### MHG.8 Choices and consequences
 
-**Lantern debt (before the choice, every outcome) [PROPOSAL — DIRECTOR].** Tilda: "Wystan. The night of the hard frost, three winters back, I walked you home from the jetty. You said if I ever asked." Wystan: "I said." Under lantern debt, the one who was walked home owes a lantern-walk when asked; it is the asker's own and is never inherited. Wystan owes Tilda, not her children; he pays by opening the store and walking a sack home by lantern. The Silt hearing is not overridden: a lantern debt is a person's own gift from a store they keep (MD-5: no hearing rules stated; this is a practice, not a ruling).
+**Lantern debt (before the choice, every outcome) [PROPOSAL — DIRECTOR].** Wystan, to Tilda: "The night of the hard frost, three winters back, you walked me home from the jetty." Under lantern debt (bible MD-5; `MSS-D6.30`), a rescue is said and acknowledged, never owed, collected or inherited. Tilda does not call it in; Wystan chooses to acknowledge her walk by opening the store and walking a sack to her loft by lantern. The Silt hearing is not overridden: a lantern debt is a person's own gift from a store they keep (MD-5: no hearing rules stated; this is a practice, not a ruling).
 
 | Option | Immediate | Cost | Later |
 |---|---|---|---|
-| **Two on the cord** (`shared`) — *"Wystan keeps it. Briony keeps it with him. Two holds for a key."* | Wystan and Briony each wear a key (Ysolde has the smith-less Mire's answer: Wystan's key and the store's old spare, found in the roll's box). The store opens only with both present. | Slower: two people must agree to every opening. Wystan is not put by, but he is watched. | Briony at the ladder in the mornings, Wystan in his chair. They argue about chalk. |
-| **Pass it** (`passed`) — *"It's time, Wystan. Give it to Briony."* | Wystan takes the cord off and gives it to Briony at the ladder. Ysolde inks the pencilled line. | Wystan is put by. He says he is glad. His chair still faces the store. | Briony keeps the store well. Wystan visits every night "to see it's still there". |
+| **Two on the cord** (`shared`) — *"Wystan keeps it. Avis keeps it with him. Two holds for a key."* | Wystan and Avis each wear a key (Ysolde has the smith-less Mire's answer: Wystan's key and the store's old spare, found in the roll's box). The store opens only with both present. | Slower: two people must agree to every opening. Wystan is not put by, but he is watched. | Avis at the ladder in the mornings, Wystan in his chair. They argue about chalk. |
+| **Pass it** (`passed`) — *"It's time, Wystan. Give it to Avis."* | Wystan takes the cord off and gives it to Avis at the ladder. Ysolde inks the pencilled line. | Wystan is put by. He says he is glad. His chair still faces the store. | Avis keeps the store well. Wystan visits every night "to see it's still there". |
 | **The register keeps it** (`register`) — *"Hang it in the register room. Anyone may ask; Ysolde writes who did."* | The key goes on a peg in Sorrowmere's register room. Each opening is written. | The store is a long walk from its key. Marshfall grumbles. Wystan is relieved and hurt at once. | Peg prop in the register room; Ysolde's line in the roll for each opening. |
 
 No option is wrong. Tilda's family is fed in all three.
@@ -1451,7 +1451,7 @@ None (resolved in-quest).
 |---|---|---|---|
 | **Tilda Lowry** [NEW] | Her croft is under water; the rule. | Where the key is. | Practical, polite, at the end of her rope. |
 | **Wystan Crale** [NEW], granary keeper | The store, every sack, his own fear. | How to say he is afraid. | Stiff, proud, shaky hands; "put by" is his worst word. |
-| **Briony Jessop** [NEW], Reedsward woman named in pencil | That she was chosen; that Wystan hates it. | — | Kind, sure, slightly too quick. |
+| **Avis Jessop** [NEW], Reedsward woman named in pencil | That she was chosen; that Wystan hates it. | — | Kind, sure, slightly too quick. |
 | **Ysolde Haverel** [NEW, bible §5.2] | The roll. | — | "Two holds, one name." Will not round. |
 | **Rootrest herbalist** (role) | Wystan's hands and his cord. | — | Gentle, careful about what is her business. |
 
@@ -1473,7 +1473,7 @@ MHG-D1.07 TILDA: "Look at the store. I can't. I keep thinking about what's in it
 
 ```
 MHG-D2.01 YSOLDE: "The keepers' roll. Every store, every key, who held it." (opens it) "Wystan Crale. Hushed Granary. Since the winter the ice took the ferry."
-MHG-D2.02 YSOLDE: (a finger on the pencil) "And this. 'To pass to Briony Jessop before the wet. Three settlements agree.'"
+MHG-D2.02 YSOLDE: (a finger on the pencil) "And this. 'To pass to Avis Jessop before the wet. Three settlements agree.'"
 MHG-D2.03 YSOLDE: "That's a plan, not a record. It's in pencil for a reason."
   > "Does Wystan know?"                                              → MHG-D2.04
   > "Would you write that the key was lost?"                         → MHG-D2.06
@@ -1510,19 +1510,19 @@ MHG-D4.10 WYSTAN: "Morning. At the ladder. Bring whoever has to be brought."   {
 **The key** (`MHG-D5`)
 
 ```
-MHG-D5.01 TILDA: "Wystan." (beat) "The night of the hard frost, three winters back, I walked you home from the jetty. You said if I ever asked."
-MHG-D5.02 WYSTAN: "I said." (beat) "That's yours. Not the hearing's. I'll pay it tonight, whatever happens to this." (touches the cord)
-MHG-D5.03 YSOLDE: "Lantern debt's the asker's own. It doesn't pass to anyone. That's why it's allowed."
-MHG-D5.04 BRIONY: "I don't want it like this. Not taken off him."
+MHG-D5.01 WYSTAN: (to Tilda, before anyone else speaks) "The night of the hard frost, three winters back, you walked me home from the jetty."
+MHG-D5.02 WYSTAN: (beat) "That's mine to say. Not the hearing's. Your three eat tonight, whatever happens to this." (touches the cord)
+MHG-D5.03 YSOLDE: "A lantern debt is said, not owed. It doesn't pass to anyone. That's why it's allowed."
+MHG-D5.04 AVIS: "I don't want it like this. Not taken off him."
 MHG-D5.05 YSOLDE: (to the player) "You looked at everything. Say who keeps it."
-  > "Wystan keeps it. Briony keeps it with him. Two holds for a key."  → MHG-D5.10
-  > "It's time, Wystan. Give it to Briony."                            → MHG-D5.20
+  > "Wystan keeps it. Avis keeps it with him. Two holds for a key."  → MHG-D5.10
+  > "It's time, Wystan. Give it to Avis."                            → MHG-D5.20
   > "Hang it in the register room. Anyone may ask; Ysolde writes who did."   → MHG-D5.30
 MHG-D5.10 YSOLDE: "There's the old spare in the roll's box. Nobody's needed it." (holds it up)
-MHG-D5.11 WYSTAN: "She'll chalk wrong." / BRIONY: "Then you'll tell me." / WYSTAN: "...I will."
+MHG-D5.11 WYSTAN: "She'll chalk wrong." / AVIS: "Then you'll tell me." / WYSTAN: "...I will."
       {set MHG_KEY = shared}  → MHG-D5.40
 MHG-D5.20 WYSTAN: (a long moment; takes the cord off over his head) "Weigh the second row twice. It always looks light. It never is."
-MHG-D5.21 BRIONY: "Twice. I'll remember."
+MHG-D5.21 AVIS: "Twice. I'll remember."
 MHG-D5.22 YSOLDE: (inks over the pencil) "There. A record now."
       {set MHG_KEY = passed}  → MHG-D5.40
 MHG-D5.30 YSOLDE: "On a peg, by the door. Every opening written, every name."
@@ -1535,8 +1535,8 @@ MHG-D5.40 WYSTAN: "Dusk. I'll open for Tilda. Somebody bring a lantern. Mine's n
 **The walk** (`MHG-D6`, at Tilda's loft)
 
 ```
-MHG-D6.01 WYSTAN: (setting the sack down) "There. Owed and paid."
-MHG-D6.02 TILDA: "Paid." (to the children in the loft) "Say thank you to the keeper."
+MHG-D6.01 WYSTAN: (setting the sack down) "There. You walked me home once."
+MHG-D6.02 TILDA: "And now you me." (to the children in the loft) "Say thank you to the keeper."
 MHG-D6.03 CHILDREN: (overlapping) "Thank you, keeper."
 MHG-D6.04 [MHG_KEY = passed] WYSTAN: (very quietly) "Keeper." (beat) "Well. For tonight."
 MHG-D6.04 [else] WYSTAN: "Go to sleep, the lot of you."
@@ -1551,7 +1551,7 @@ MHG-D6.05 WYSTAN: (to the player) "You can put the lantern out. I know the way."
 | MHG-B0 | Register room, MR-M2 done | YSOLDE | "Tilda Lowry's at the Hushed Granary with a problem I can't write my way out of. You might be able to walk your way out of it." |
 | MHG-B1.01 | Apron inspected | log | "One set of prints. Short steps, one foot dragging. Over and over." |
 | MHG-B1.02 | All rows weighed | log | "Every row matches the tally." |
-| MHG-B2.01 | Post-quest, `shared` | BRIONY | "He made me weigh the second row twice. It wasn't light." / WYSTAN: "It never is." |
+| MHG-B2.01 | Post-quest, `shared` | AVIS | "He made me weigh the second row twice. It wasn't light." / WYSTAN: "It never is." |
 | MHG-B2.02 | Post-quest, `passed` | WYSTAN (in his chair) | "Still there. Good." |
 | MHG-B2.03 | Post-quest, `register` | YSOLDE | "Three askings this week. All written. All meant." |
 
@@ -1563,15 +1563,15 @@ MHG-D6.05 WYSTAN: (to the player) "You can put the lantern out. I know the way."
 | MHG-I2 | Door lock | "An old lock. No marks on it but a key's." |
 | MHG-I3 | Hatch pin rope | "New rope, knotted by someone whose fingers don't close properly." |
 | MHG-I4 | Tally board | "Three rows. A chalk weight for each. Checked off in the same shaky hand every night, back as far as the board goes." |
-| MHG-I5 | Keepers' roll | "Wystan Crale, Hushed Granary. Then, in pencil: 'To pass to Briony Jessop before the wet.'" |
+| MHG-I5 | Keepers' roll | "Wystan Crale, Hushed Granary. Then, in pencil: 'To pass to Avis Jessop before the wet.'" |
 | MHG-I6 | Register room key peg (`register`) | "A key on a peg. Beneath it a page: who asked, when (by bell and weather), and what for." |
 
 **MD-7 swap note.** No Hollowfoot content in MHG. No change under either ruling.
 
 ### MHG.15 Open decisions
 
-1. Lantern debt as written here (owed by the one walked home, paid on asking, never inherited) is a [NEW] reading of the Part 3 practice. Director may adjust; only `MHG-D5.01`–`.03` and `MHG-D6` change.
-2. The "old spare" key in the roll's box exists so `shared` needs no smith (MD-11). If the Director prefers one key, `shared` becomes "Wystan keeps it, Briony must be present", lines only.
+1. Lantern debt as written here (acknowledged by choice by the one walked home, never asked for, never a price, never inherited; aligned to `MSS-D6.30` in the 2026-11-13 audit) is a [NEW] reading of the Part 3 practice. Director may adjust; only `MHG-D5.01`–`.03` and `MHG-D6` change.
+2. The "old spare" key in the roll's box exists so `shared` needs no smith (MD-11). If the Director prefers one key, `shared` becomes "Wystan keeps it, Avis must be present", lines only.
 
 ### MHG.16 Review log
 
@@ -1613,7 +1613,9 @@ No new runtime system beyond those in bible §11.1–11.2; the quest-start requi
 | Quest items | 0. |
 | Dating and R08 | No calendar dates (weather and bell-nights only). No war history, unit, number or casualty count anywhere. |
 | MD-7 | No Hollowfoot enemy; Jory Wick non-combatant `[MD-7]` in MFT; swap note per quest. |
-| New names checked for collisions | Gwenna and Cadan Tolley, Hedda Fallow, Abe Crosse, Maddy Brook, Wystan Crale, Tilda Lowry, Briony Jessop, Bettany Strand, Hal and Arno Pellow, Nessa: grepped against the repository (no matches outside this file). |
+| New names checked for collisions | Gwenna and Cadan Tolley, Hedda Fallow, Abe Crosse, Maddy Brook, Wystan Crale, Tilda Lowry, Avis Jessop, Bettany Strand, Hal and Arno Pellow, Nessa: grepped against the repository (no matches outside this file). |
 | Deviations from the bible | (1) Quest-start skill requirements on MRS and MFH (bible §13 recommendation; §7.2 "crew alternative" kept for taught skills). (2) MFT names Jory Wick (Act III cast) at Fenward, consistent with Act III. (3) Hob's pronoun is "he", matching Act I and Act III. |
 | Independent review (2026-11-09) | Fixed: MFH `S05` objective "Drive the dogs off the racks" (drive-off wording, CDR-1) now "Defeat the dogs at the racks" (beat and step table); EM-01 to EM-11 labelled as economy-pass proposal labels, not catalog ids, and Hob's lent bow and commission bow labelled item-name proposals (§0.3); lantern debt as played in MHG tagged [PROPOSAL — DIRECTOR] (MHG.2, MHG.8); the Peat Row marker's form tagged [PROPOSAL — DIRECTOR] (MWS.2, MWS.13); stale Hob-pronoun open item closed (Act III now reads "he"). Verified: every enemy to 0 HP; no step requires ranged (net/call path at every shot); Hunting and Woodcutting start gates are `[GD]` placeholders on the skill each quest builds on, with crew alternatives on taught-skill steps; three states, no fail paths; MFT completes at `S06_table` as Act III `MBL-D2b.21` reads; MD-7 notes; no calendar dates or casualty counts; new names grep clean. |
 | Batch 4 encounter alignment review, 2026-11-09 | Aligned with `Enemies/Caelmor_Mire_Encounter_and_Enemy_Requirements.md` §13.3 (numbers and text only; no id, step or flag renamed): MRS-E1 reed-ripple ~1.2 s → ~1.5 s, first-appearance length (C-5, I-2); MFH-E1 gnawer bite no longer bleeds (C-6, I-8); MWS-E1 carapace butt ~1.2 s → ~1.5 s with the knockback clamped to open ground, same kit as MNS-E1 (C-1, I-11). |
+| Playability audit fixes, 2026-11-13 | SS-03 (lantern debt: Wystan chooses to acknowledge Tilda's walk; no call-in, never a price; still [PROPOSAL — DIRECTOR]), SS-06 (MRS and MFH gates now [GD: entry level, reachable in the Mire]), SS-15 (Briony Jessop renamed Avis Jessop; collision-checked across Lowmark, Thornfell and Mire), CO-01. Authored walkthrough only. |
+| Playability audit fixes review, 2026-11-13 | Independent review of the same-day fixes. SS-15 follow-up: "Merryn Jessop" near-collided with Lowmark's Merrin family (Zones Lowmark NPC rows) and Hob Merrit; renamed Avis Jessop (grepped: no other use in 04_CONTENT_PRODUCTION, LORE or 00_ADMIN). MWS.10 walkway host fallback restated: each player walks their own `MWS_MARKER` state; shared presentation provisional only. Authored walkthrough only; text only; no id, step, flag or geography changed; no Director recommendation promoted. |
