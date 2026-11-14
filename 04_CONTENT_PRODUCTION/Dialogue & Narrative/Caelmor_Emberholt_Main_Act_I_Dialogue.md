@@ -124,11 +124,11 @@
 
 #### Seredh Embercarver, memory-stone carver [CANON ANCHOR] `[ED-12]`
 - **Canon:** stoic, serious; slow to trust; carves maker-imprinted recollection that needs corroboration.
-- **Limits:** one account; no numbers; no refuge; decides what may be said.
+- **Limits:** one account; no numbers; no refuge; decides what may be said. The stone he brings is not said to be his own memory, so he gains no wartime role or age (Part 4 ledger).
 - **Voice:** very few words. Long silences. Never explains the stone beyond "it is one stone".
 
 #### Minor EH-M3 cast
-- **DEEPBRAND CROSSBOW**, **DEEPBRAND GUARD** (pre-fight only; nothing after), **RED DOOR HEALER**, **MOURNER** (Cooling House), **EMBERGUARD CLERK** (Marshal's office). The crew, by first name only, in Darven's line: **Haskel** (foreman), **Tobbe**, **Brin**, **Marit**, **Yeva**.
+- **DEEPBRAND CROSSBOW**, **DEEPBRAND GUARD** (pre-fight only; nothing after), **RED DOOR HEALER**, **MOURNER** (Cooling House), **EMBERGUARD CLERK** (Marshal's office). The crew, by first name only, in Darven's line: **Lorcan** (foreman), **Tobbe**, **Wendel**, **Marit**, **Yeva**.
 
 ---
 
@@ -749,6 +749,7 @@ EEH-D10.32 JESSA: (to the player; coin in a twist of blue cloth) "For the climb.
 EEH-D10.40 IDRA: (a long breath) "Then it goes somewhere nobody here can lose it."
 EEH-D10.41 IDRA: "Somebody's Tavi is in that room tomorrow. Just so you know I know."
 EEH-D10.42 JESSA: (to the player; coin in a twist of blue cloth) "For the climb. Tavi'll be in the courtyard at dusk if you want to lose."   {journal: Take the ledger to Yorven Khelt at Cinderwall.}
+EEH-D10.59 [resume; EH_CURRICULUM = evidence, ledger not yet handed over] YORVEN: (at the Cooling House) "Strongbox is open when you are."   → EEH-D10.60
 EEH-D10.60 [Cinderwall, Yorven's office] YORVEN: (opens his strongbox; doesn't open the ledger) "I don't read school books. I keep them."
 EEH-D10.61 YORVEN: (locks it) "When somebody asks properly, it's here. When somebody asks improperly, it's also here, and they can ask me."
 EEH-D10.62 YORVEN: "Warden's hand." (a nod)   {item removed; quest Completed}
@@ -796,7 +797,7 @@ EGH-D1.14 HESPER: "And Yorven says he knows ways under his ward that nobody else
   > "I'll bring him up."                              → EGH-D1.20 {quest Active}
   > "What do people say happened?"                    → EGH-D1.15
   > "Not now."                                        → EGH-D1.30
-EGH-D1.15 HESPER: "Forge collapse, if they mean the old place. 'Unstable', if they mean Darven. 'Bad luck', if they mean Haskel." (beat) "Haskel never had bad luck in his life. He had bad contracts."   → EGH-D1.14 options
+EGH-D1.15 HESPER: "Forge collapse, if they mean the old place. 'Unstable', if they mean Darven. 'Bad luck', if they mean Lorcan." (beat) "Lorcan never had bad luck in his life. He had bad contracts."   → EGH-D1.14 options
 EGH-D1.20 HESPER: "Red Door first. Then the gate. Kaevren signs, Darven walks." (sits back down) "I'll be here."   {journal: Find Darven Mott and collect the warrant.}
 EGH-D1.30 HESPER: "I've waited. I'll wait."   → END
 
@@ -813,11 +814,11 @@ EGH-D2.01 RED DOOR HEALER: "End cot. Don't startle him. He doesn't sleep, so you
 EGH-D2.02 DARVEN: (his left hand in a bowl of water; two fingers gone) "You're the warden's hand. Hesper sent word. Sit where I can see you."
 EGH-D2.03 DARVEN: "I'll tell you what I saw. Not what it means. I don't know what it means. Everybody else does."
   > "Tell me what you saw."    → EGH-D2.10
-EGH-D2.10 DARVEN: "Contract crew. Six. Haskel foreman. Tobbe, Brin, Marit, Yeva. Me."
+EGH-D2.10 DARVEN: "Contract crew. Six. Lorcan foreman. Tobbe, Wendel, Marit, Yeva. Me."
 EGH-D2.11 DARVEN: "Deepbrand paid for a cut from the old works toward the glass. Stop at the outer glass, they said. They wanted the veins round it."
 EGH-D2.12 DARVEN: "They didn't say why. You don't ask Deepbrand why."
 EGH-D2.13 DARVEN: "A week before, the walls were breathing. I said so. Every shift. Nobody else heard it." (beat) "I'm not asking you to hear it. I'm telling you I did."
-EGH-D2.14 DARVEN: "Haskel set a bleed valve on a pocket the week before. Far side, where it vents onto the glass. Red handle. He said if she goes, open it slow."
+EGH-D2.14 DARVEN: "Lorcan set a bleed valve on a pocket the week before. Far side, where it vents onto the glass. Red handle. He said if she goes, open it slow."
 EGH-D2.15 DARVEN: "She went. The pocket broke the wall at the camp. Then the fall came down behind me, between me and them. Then it was dark and hot and I was on the wrong side of it."
 EGH-D2.16 DARVEN: "There's a drain. Under the tool store, round the fall. I crawled. I came up at the store and walked out the mouth with my tag in my pocket."
 EGH-D2.17 DARVEN: "Next day Deepbrand was at the mouth. A plate went up. A clerk said 'unstable'. I thought he meant the rock. He meant me."
@@ -871,7 +872,8 @@ EGH-D3.13 KAEVREN: "Mott walks with you as far as he walks. Don't ask him furthe
 
 ```
 EGH-D4.01 DARVEN: (touches each of the five tags once) "You hang your tag going in. You take it coming out." (pats his coat) "Mine's in my pocket."
-EGH-D4.02 DARVEN: "Haskel. Tobbe. Brin. Marit. Yeva." (beat) "Nobody took theirs."
+EGH-D4.02 DARVEN: "Lorcan. Tobbe. Wendel. Marit. Yeva." (beat) "Nobody took theirs."
+EGH-D4.03 [after the tag board inspect, EGH-I2] DARVEN: (lifts the five tags off their pegs, one at a time, into his coat) "You take it coming out. They're coming out."
   {unbolt the seal plate: 2-segment channel}
 EGH-D4.10 DARVEN: (in the cut; points at the wall) "Cap glows near a vein. Pale cap, cool rock. Orange cap, live vein close: don't strike it, don't cut it, don't brace on it."
 EGH-D4.11 DARVEN: "Down here it's your lamp, too. Follow the pale. Keep the orange where you can see it."
@@ -895,7 +897,7 @@ EGH-D4.13 DARVEN: (after the player inspects a cap) "That's it. That's the whole
 
 | Object | Text | Condition |
 |---|---|---|
-| Tag board (EGH-I2) | "Six pegs. Five brass tags with names stamped in them: HASKEL. TOBBE. BRIN. MARIT. YEVA. The sixth peg is empty and worn bright." | Required |
+| Tag board (EGH-I2) | "Six pegs. Five brass tags with names stamped in them: LORCAN. TOBBE. WENDEL. MARIT. YEVA. The sixth peg is empty and worn bright." | Required |
 | Flarecap (EGH-I3) | "A soft cap of growth on the rock, glowing faintly. This one is pale cream, and the rock under it is cool. A stretch ahead glows bright orange, and the air there is close and hot." | Required; sets `EGH_FLARECAP` |
 | The fall (EGH-I4) | "Rock fused to dark glass. The right face is broken rock with pale cap in the cracks; a pick would bite there. The left face is smooth glass, and orange cap glows in its seams." | Read before cutting (Option A) |
 | Seal plate | "New iron, bolted into old rock. Deepbrand's mark stamped in the centre. The bolts are fresh; the old works round them are not." | — |
@@ -922,13 +924,13 @@ EGH-D5.21 [drain complete] DARVEN: (sitting on the lip, breathing) "Twice. Don't
 EGH-D6.01 DARVEN: (sits down by the cold fire ring; says nothing for a while)
 EGH-D6.02 DARVEN: (at last) "I pulled their coats up. On my way out. I didn't know what else."
 EGH-D6.03 [EGH_FALL = cut] DARVEN: "You came the short way. I used to wish there'd been a short way." / [EGH_FALL = drain] DARVEN: "Same drain. Same rooms. It was worse in the dark."
-EGH-D6.04 DARVEN: (names them, one at a time, looking at each shape) "Tobbe. Brin. Marit. Yeva."
-EGH-D6.05 DARVEN: (at the last) "That's Haskel. That's Hesper's."
+EGH-D6.04 DARVEN: (names them, one at a time, looking at each shape) "Tobbe. Wendel. Marit. Yeva."
+EGH-D6.05 DARVEN: (at the last) "That's Lorcan. That's Hesper's."
   {required, any order: lay the warrant cloth; take the tags; read the day-book; take the work order}
 EGH-D6.10 [warrant cloth laid] DARVEN: "That's the first thing anybody's signed for them that wasn't a contract."
-EGH-D6.11 [tags taken] DARVEN: "Hesper'll want Haskel's. The rest have people. I'll tell you who."
+EGH-D6.11 [tags taken] DARVEN: (takes the five tags out of his coat and puts them in the player's hand) "Hesper'll want Lorcan's. The rest have people. I'll tell you who."
 EGH-D6.12 [day-book read] DARVEN: (doesn't ask what it says) "He wrote everything. Drove us mad."
-EGH-D6.13 [work order taken] DARVEN: "That's Deepbrand's mark. The Marshal wanted that." (beat) "I never saw the paper. Haskel kept the paper."
+EGH-D6.13 [work order taken] DARVEN: "That's Deepbrand's mark. The Marshal wanted that." (beat) "I never saw the paper. Lorcan kept the paper."
 EGH-D6.20 DARVEN: (when all four are done; looking out at the glass) "That's the glass. I won't go on the glass. I didn't then."
 EGH-D6.21 DARVEN: "I'll stay with them. Somebody should. Read the beads out there, not your eyes."   {journal: Cross the Hollow.}
 EGH-D6.90 [resume, camp] DARVEN: "I'm still here. They're still there."
@@ -954,7 +956,7 @@ EGH-D6.90 [resume, camp] DARVEN: "I'm still here. They're still there."
 **The work order** (carried; `EGH_WORK_ORDER`):
 
 > **DEEPBRAND** *(the mark)*
-> *Works order. Contract crew, foreman H. Tolk.*
+> *Works order. Contract crew, foreman L. Tolk.*
 > *Bypass gallery from the old works toward the outer glass. Survey veins about. Stop at the glass.*
 > *Retrieve nothing.*
 > *Do not log with the Marshal's office.*
@@ -988,7 +990,7 @@ The Echo itself has no voice: a roar, flames, falling glass. Nobody in it speaks
 | The rim (EGH-I9) | "Iron rings set in the floor at intervals round the edge of the circle, each with a short chain. Where the glass is thin you can see them. Where it runs thick, you can't. You don't count them." | Required |
 | The flow (EGH-I10) | "The glass didn't fall in. It ran out, from the centre toward the walls, in waves that froze mid-run, and it climbed the walls. A roof that falls comes down. This went out from the middle. There's no anvil here. No hearth, no slag, no tools. Nothing a forge leaves." | Required |
 | The niche (EGH-I11) | "A shelf cut in the rim wall. On it, a rectangle of bare stone about the size of a folded sheet, unglazed where something lay and was lifted after the glass cooled. Along its front edge, a hard ridge where the glass ran up against whatever lay there and set." | Required |
-| The bleed valve | "A crew pipe driven into a vent on the far side, a red handle on it. Haskel's. It has never been opened." | Before `S06` valve |
+| The bleed valve | "A crew pipe driven into a vent on the far side, a red handle on it. Lorcan's. It has never been opened." | Before `S06` valve |
 | The bleed valve, after | "Open. The pipe hisses, then sighs. The cracks have gone dark." | After `EGH_POCKET_BLED` |
 
 When all four required inspects are read: `EGH_SITE_READ`. There is no summary line; the player reads it.
@@ -997,7 +999,7 @@ When all four required inspects are read: `EGH_SITE_READ`. There is no summary l
 
 | Id | Trigger | Speaker | Line |
 |---|---|---|---|
-| EGH-B6.1 | First pulse | (journal) | *The pocket on the far side pulses. Haskel's valve is on it.* |
+| EGH-B6.1 | First pulse | (journal) | *The pocket on the far side pulses. Lorcan's valve is on it.* |
 | EGH-B6.2 | Third valve segment | (none) | The pocket sighs. The cracks go dark. Nothing re-forms. |
 | EGH-B6.3 | Player tries the mouth route back after `S06` | YORVEN | "Doubled. I told you." |
 
@@ -1067,9 +1069,9 @@ Production rule: the number of glassed lines shown is fixed art and is **not** a
 
 > *After the night.*
 >
-> *Centre did not hold. Did not come out as entered. What came out of the centre went down and was not stopped. Entered in the night book as: the Titan.*
+> *Centre did not hold. Did not come out as entered. What came out of the centre went down and was not stopped.*
 >
-> *Volkhari held for the circle: not recoverable. Save one child unaccounted: the door.*
+> *Volkhari held for the circle. One child unaccounted: the door.*
 >
 > *Shift above (lower forge): not ours. Not entered.*
 >
@@ -1077,7 +1079,7 @@ Production rule: the number of glassed lines shown is fixed art and is **not** a
 >
 > *One elder taken in the purge after. Held below.*
 
-(Same hand as the roll. No signature, no count, no name.)
+(Same hand as the roll. No signature, no count, no name. Independent review, 2026-11-14: the sheet no longer says "Entered in the night book as: the Titan" or that those held were "not recoverable". The first named the Titan in a precursor record beside the roll's legible name, which is the R19 identification that CV-M4 owns. The second stated the fate of everyone held, which bible §2.2 withholds ("how many died in the Hollow"). The fuller wording is held as a Director question in the quest file, §C14.5.)
 
 ### EGH-D8: Marenya Silvertide at her desk (S07, provenance)
 
@@ -1094,14 +1096,15 @@ EGH-D8.11 MARENYA: "That is what I can tell you. The marks are mine. What the pa
 EGH-D8.20 MARENYA: "Not a hand I know. Not my predecessor's." (spectacles off) "I keep it as I found it. That's the only thing I'll swear the wrapper says."   → EGH-D8.02 options
 EGH-D8.40 MARENYA: "That column was struck before my time. I keep what's struck too."   → EGH-D8.02 options
 EGH-D8.50 MARENYA: "A warrant came. I read warrants."   → EGH-D8.02 options
-EGH-D8.30 [EGH_PROVENANCE] MARENYA: "Warrant goods leave under the holder's hand. They come back under it."
+EGH-D8.36 [EGH_PROVENANCE set; any of EGH_ROLL_READ, EGH_NICHE_MATCH, EGH_SHEET_READ, EGH_KEEP_SEEN not set] MARENYA: "Read it at the table first. Nothing leaves this room unread."   → EGH-D8.02 options
+EGH-D8.30 [EGH_PROVENANCE; EGH_ROLL_READ; EGH_NICHE_MATCH; EGH_SHEET_READ; EGH_KEEP_SEEN] MARENYA: "Warrant goods leave under the holder's hand. They come back under it."
 EGH-D8.31 MARENYA: (writes in the shelf book; turns it for the player to sign) "Signed out. Shelf-mark, date, bearer, the Marshal's warrant."
 EGH-D8.32 MARENYA: (hands over the oilcloth box) "Mind the glassed half. It's sharper than paper should be."   {item EGH_roll gained}
 EGH-D8.33 MARENYA: "The street door's at the top of the stair. The miner's been waiting at the bottom one. He's polite about it."   → EGH-D7.30
 EGH-D8.35 [EGH_PROVENANCE not set] MARENYA: "Before you sign anything, you'll know what you're signing for." → EGH-D8.10
 ```
 
-(`EGH-D8.30` is offered at any time; if `EGH_PROVENANCE` is not yet set, it routes through `EGH-D8.35` so the shelf book is always shown before the sign-out.)
+(`EGH-D8.30` is offered at any time; if `EGH_PROVENANCE` is not yet set, it routes through `EGH-D8.35` so the shelf book is always shown before the sign-out. If provenance is set but any of the four table readings is missing, it answers `EGH-D8.36`, so the player cannot leave the annex owing a reading that can only be done there.)
 
 ### EGH-D9: Seredh Embercarver in Maeryn's back room (S07, the stone) `[ED-12]`
 
@@ -1140,7 +1143,7 @@ EGH-D9.50 MAERYN: (at the curtain, as the player leaves) "Out through the shop. 
 >
 > *I have carved this once. I will not carve it again.*
 
-(No number. No name. No place after. The stone says *carrying* and nothing about who made them carry.)
+(No number. No name. No place after. The stone says *carrying* and nothing about who made them carry. The maker is never named, and nothing says the stone is Seredh's own memory: he keeps it and decides how it may be cited. No Volkhari anchor gains a wartime role or an age from it, per the Part 4 ledger.)
 
 ### EGH-D10: the Cooling House (S08_truth)
 
@@ -1185,7 +1188,7 @@ EGH-D10.64 (The Marshal's office, later. Kaevren unlocks the ledger box, sets a 
 EGH-D10.65 KAEVREN: (writes the first line while the player watches; the player doesn't see what it says) "Somebody has to start it."
 EGH-D10.66 KAEVREN: (closes it) "Warden's hand." (a nod)   → EGH-D10.80
 
-EGH-D10.80 (The crew are buried with dimmed flames. Hesper keeps Haskel's tag.)   {quest Completed; journal: Maeryn Vall has sent for you again.}
+EGH-D10.80 (The crew are buried with dimmed flames. Hesper keeps Lorcan's tag.)   {quest Completed; journal: Maeryn Vall has sent for you again.}
 ```
 
 ### EGH-B10: post-quest barks
@@ -1206,10 +1209,14 @@ EGH-D10.80 (The crew are buried with dimmed flames. Hesper keeps Haskel's tag.) 
 
 1. **Nobody speaks the initiate's name.** `[INITIATE]` appears in the roll document and the journal only. No node gives the player an option to say it; `EGH-D10.41` says "someone was placed at its centre".
 2. **No counts.** The rim inspect says "you don't count them"; the roll's glassed lines are fixed art, not a number; the second sheet and Seredh's stone give no number of Volkhari held, dead or living (D-C06).
-3. **No precursor name; no roster** (D-C03). The second sheet says "the Titan" (bible-permitted record usage) and nothing else of what came out of the centre.
+3. **No precursor name; no roster** (D-C03). The second sheet says only that what came out of the centre "went down and was not stopped"; it does not name the Titan (independent review, 2026-11-14; quest file §C14.5).
 4. **R10 not leaked.** "One elder taken in the purge after. Held below." is past tense; nothing says the elder lives. Kaevren repeats only "'Held below.'"
-5. **R09 owned here; R15, R16, R18, R19 are seeds only.** The second sheet's "shift above: not ours" (R15 seed), the struck visiting-witness column (R16), "what came out ... went down" (R18), the handprint (R19) are presented without explanation. Seredh answers the handprint with silence (`EGH-D9.40`).
+5. **R09 owned here; R15, R16, R18, R19 are seeds only.** The struck visiting-witness column (R16), "what came out ... went down" and the handprint (R19) are presented without explanation. The second sheet's "shift above: not ours" is not a ledger seed; it is the R09 detail that *The Half-Name Wall* (ENW) builds on. Seredh answers the handprint with silence (`EGH-D9.40`).
 6. **Darven is never evidence.** His breathing walls stay his; nothing in the circle confirms or denies them; `EGH-D10.48` is a man saying he was right, not a reveal.
 7. **Combat reveals nothing.** No enemy line carries evidence; the Revenant does not speak.
 8. **ED-12 respected.** Seredh's terms are fixed; `told` says only "a Volkhari stone agrees on the child at the door". Maeryn's back room is shown only as a room.
 9. **Voice checks.** Kaevren: few words. Marenya: marks, never meaning. Yorven: miner's plainness. No sympathetic speaker calls the child at the door anything but a child.
+
+| Review | Changes |
+|---|---|
+| Independent review, 2026-11-14 | Second sheet cut back: "Entered in the night book as: the Titan" and "not recoverable" removed (R19 belongs to CV-M4; bible §2.2 withholds the fate of those held); Director question in the quest file §C14.5. `EGH-D4.03` added (Darven lifts the five tags at the mouth) and `EGH-D6.11` now has him hand them over, replacing a second set of tags on a camp peg. `EGH-D8.36` added and `EGH-D8.30` gated on the four table readings. Seredh's stone: maker unnamed; no wartime role or age for Seredh (Part 4 ledger). `EEH-D10.59` resume line for the `evidence` hand-over. Review note 5 seed labels corrected ("shift above" is not an R15 seed; "went down" is an R19 shadow, not R18). Crew renamed: Haskel to Lorcan, Brin to Wendel (collision with Lowmark's Haskin and Bryn). No other line changed. |
