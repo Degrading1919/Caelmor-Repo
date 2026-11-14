@@ -25,7 +25,7 @@
 			"to_port": 6
 		},
 		{
-			"from": "warp",
+			"from": "custom_uv2",
 			"from_port": 0,
 			"to": "blend",
 			"to_port": 0
@@ -67,7 +67,7 @@
 			"to_port": 1
 		},
 		{
-			"from": "fill_to_gradient2",
+			"from": "directional_warp_5",
 			"from_port": 0,
 			"to": "blend_3",
 			"to_port": 0
@@ -85,10 +85,16 @@
 			"to_port": 0
 		},
 		{
-			"from": "blend_6",
+			"from": "blend_3",
 			"from_port": 0,
 			"to": "blend_4",
 			"to_port": 1
+		},
+		{
+			"from": "greyscale_12",
+			"from_port": 0,
+			"to": "blend_4",
+			"to_port": 2
 		},
 		{
 			"from": "directional_warp_3",
@@ -97,22 +103,22 @@
 			"to_port": 0
 		},
 		{
-			"from": "invert_3",
+			"from": "colorize_8",
+			"from_port": 0,
+			"to": "blend_5",
+			"to_port": 1
+		},
+		{
+			"from": "custom_uv2_2",
 			"from_port": 0,
 			"to": "blend_6",
 			"to_port": 0
 		},
 		{
-			"from": "blend_3",
+			"from": "blend_10",
 			"from_port": 0,
 			"to": "blend_6",
 			"to_port": 1
-		},
-		{
-			"from": "greyscale_5",
-			"from_port": 0,
-			"to": "blend_6",
-			"to_port": 2
 		},
 		{
 			"from": "colorize_6",
@@ -151,13 +157,19 @@
 			"to_port": 0
 		},
 		{
+			"from": "greyscale_10",
+			"from_port": 0,
+			"to": "colorize_10",
+			"to_port": 0
+		},
+		{
 			"from": "greyscale_6",
 			"from_port": 0,
 			"to": "colorize_2",
 			"to_port": 0
 		},
 		{
-			"from": "fill_to_random_grey2",
+			"from": "greyscale_8",
 			"from_port": 0,
 			"to": "colorize_3",
 			"to_port": 0
@@ -187,7 +199,19 @@
 			"to_port": 0
 		},
 		{
-			"from": "blend_5",
+			"from": "wavelet_noise2",
+			"from_port": 0,
+			"to": "colorize_8",
+			"to_port": 0
+		},
+		{
+			"from": "greyscale_11",
+			"from_port": 0,
+			"to": "colorize_9",
+			"to_port": 0
+		},
+		{
+			"from": "colorize_9",
 			"from_port": 0,
 			"to": "custom_uv2",
 			"to_port": 0
@@ -199,7 +223,7 @@
 			"to_port": 1
 		},
 		{
-			"from": "transform_2",
+			"from": "colorize_3",
 			"from_port": 0,
 			"to": "custom_uv2_2",
 			"to_port": 0
@@ -247,6 +271,36 @@
 			"to_port": 2
 		},
 		{
+			"from": "fill_to_gradient2",
+			"from_port": 0,
+			"to": "directional_warp_4",
+			"to_port": 0
+		},
+		{
+			"from": "fbm",
+			"from_port": 0,
+			"to": "directional_warp_4",
+			"to_port": 2
+		},
+		{
+			"from": "directional_warp_4",
+			"from_port": 0,
+			"to": "directional_warp_5",
+			"to_port": 0
+		},
+		{
+			"from": "fill_to_random_grey2",
+			"from_port": 0,
+			"to": "directional_warp_5",
+			"to_port": 2
+		},
+		{
+			"from": "greyscale_5",
+			"from_port": 0,
+			"to": "directional_warp_6",
+			"to_port": 2
+		},
+		{
 			"from": "bricks_uneven3_2",
 			"from_port": 1,
 			"to": "fill_to_gradient2",
@@ -265,15 +319,27 @@
 			"to_port": 0
 		},
 		{
-			"from": "blend_10",
+			"from": "blend_6",
 			"from_port": 0,
 			"to": "greyscale",
 			"to_port": 0
 		},
 		{
-			"from": "fill_to_gradient2",
+			"from": "directional_warp_5",
 			"from_port": 0,
 			"to": "greyscale_10",
+			"to_port": 0
+		},
+		{
+			"from": "blend_5",
+			"from_port": 0,
+			"to": "greyscale_11",
+			"to_port": 0
+		},
+		{
+			"from": "colorize_10",
+			"from_port": 0,
+			"to": "greyscale_12",
 			"to_port": 0
 		},
 		{
@@ -295,7 +361,7 @@
 			"to_port": 0
 		},
 		{
-			"from": "colorize_3",
+			"from": "blend_5",
 			"from_port": 0,
 			"to": "greyscale_5",
 			"to_port": 0
@@ -313,7 +379,7 @@
 			"to_port": 0
 		},
 		{
-			"from": "custom_uv2_2",
+			"from": "directional_warp_6",
 			"from_port": 0,
 			"to": "greyscale_8",
 			"to_port": 0
@@ -334,12 +400,6 @@
 			"from": "scratches2",
 			"from_port": 0,
 			"to": "invert_2",
-			"to_port": 0
-		},
-		{
-			"from": "custom_uv2_2",
-			"from_port": 0,
-			"to": "invert_3",
 			"to_port": 0
 		},
 		{
@@ -373,40 +433,10 @@
 			"to_port": 0
 		},
 		{
-			"from": "shape",
+			"from": "wavelet_noise2_2",
 			"from_port": 0,
-			"to": "transform_2",
+			"to": "directional_warp_6",
 			"to_port": 0
-		},
-		{
-			"from": "custom_uv2",
-			"from_port": 0,
-			"to": "warp",
-			"to_port": 0
-		},
-		{
-			"from": "greyscale_8",
-			"from_port": 0,
-			"to": "warp",
-			"to_port": 1
-		},
-		{
-			"from": "greyscale_5",
-			"from_port": 0,
-			"to": "warp",
-			"to_port": 2
-		},
-		{
-			"from": "wavelet_noise2",
-			"from_port": 0,
-			"to": "colorize_8",
-			"to_port": 0
-		},
-		{
-			"from": "colorize_8",
-			"from_port": 0,
-			"to": "blend_5",
-			"to_port": 1
 		}
 	],
 	"label": "Graph",
@@ -526,14 +556,14 @@
 		{
 			"name": "blend_6",
 			"node_position": {
-				"x": -800.0,
-				"y": 500.0
+				"x": -420.0,
+				"y": 590.0
 			},
 			"parameters": {
-				"amount": 0.32,
+				"amount": 0.065,
 				"blend_type": 2.0
 			},
-			"seed": -16684.0,
+			"seed": -3222.0,
 			"type": "blend"
 		},
 		{
@@ -633,6 +663,51 @@
 			"type": "colorize"
 		},
 		{
+			"name": "colorize_10",
+			"node_position": {
+				"x": -850.0,
+				"y": 550.0
+			},
+			"parameters": {
+				"gradient": {
+					"interpolation": 1,
+					"points": [
+						{
+							"a": 1.0,
+							"b": 0.0,
+							"g": 0.0,
+							"pos": 0.0,
+							"r": 0.0
+						},
+						{
+							"a": 1.0,
+							"b": 0.0,
+							"g": 0.0,
+							"pos": 0.35,
+							"r": 0.0
+						},
+						{
+							"a": 1.0,
+							"b": 1.0,
+							"g": 1.0,
+							"pos": 0.7,
+							"r": 1.0
+						},
+						{
+							"a": 1.0,
+							"b": 1.0,
+							"g": 1.0,
+							"pos": 1.0,
+							"r": 1.0
+						}
+					],
+					"type": "Gradient"
+				}
+			},
+			"seed": -22220.0,
+			"type": "colorize"
+		},
+		{
 			"name": "colorize_2",
 			"node_position": {
 				"x": -700.0,
@@ -680,8 +755,8 @@
 		{
 			"name": "colorize_3",
 			"node_position": {
-				"x": -2000.0,
-				"y": 750.0
+				"x": -1390.0,
+				"y": 990.0
 			},
 			"parameters": {
 				"gradient": {
@@ -689,37 +764,44 @@
 					"points": [
 						{
 							"a": 1.0,
-							"b": 0.0,
-							"g": 0.0,
+							"b": 1.0,
+							"g": 1.0,
 							"pos": 0.0,
-							"r": 0.0
-						},
-						{
-							"a": 1.0,
-							"b": 0.0,
-							"g": 0.0,
-							"pos": 0.8,
-							"r": 0.0
-						},
-						{
-							"a": 1.0,
-							"b": 1.0,
-							"g": 1.0,
-							"pos": 0.81,
 							"r": 1.0
 						},
 						{
 							"a": 1.0,
 							"b": 1.0,
 							"g": 1.0,
+							"pos": 0.19,
+							"r": 1.0
+						},
+						{
+							"a": 1.0,
+							"b": 0.839999973773956,
+							"g": 0.839999973773956,
+							"pos": 0.36,
+							"r": 0.839999973773956
+						},
+						{
+							"a": 1.0,
+							"b": 0.449999988079071,
+							"g": 0.449999988079071,
+							"pos": 0.51,
+							"r": 0.449999988079071
+						},
+						{
+							"a": 1.0,
+							"b": 0.449999988079071,
+							"g": 0.449999988079071,
 							"pos": 1.0,
-							"r": 1.0
+							"r": 0.449999988079071
 						}
 					],
 					"type": "Gradient"
 				}
 			},
-			"seed": -8386.0,
+			"seed": -63888.0,
 			"type": "colorize"
 		},
 		{
@@ -903,6 +985,145 @@
 			"type": "colorize"
 		},
 		{
+			"name": "colorize_8",
+			"node_position": {
+				"x": -1880.0,
+				"y": 1010.0
+			},
+			"parameters": {
+				"gradient": {
+					"interpolation": 1,
+					"points": [
+						{
+							"a": 1.0,
+							"b": 0.100000001490116,
+							"g": 0.100000001490116,
+							"pos": 0.0,
+							"r": 0.100000001490116
+						},
+						{
+							"a": 1.0,
+							"b": 0.189999997615814,
+							"g": 0.189999997615814,
+							"pos": 0.23,
+							"r": 0.189999997615814
+						},
+						{
+							"a": 1.0,
+							"b": 0.379999995231628,
+							"g": 0.379999995231628,
+							"pos": 0.4,
+							"r": 0.379999995231628
+						},
+						{
+							"a": 1.0,
+							"b": 0.589999973773956,
+							"g": 0.589999973773956,
+							"pos": 0.49,
+							"r": 0.589999973773956
+						},
+						{
+							"a": 1.0,
+							"b": 0.670000016689301,
+							"g": 0.670000016689301,
+							"pos": 0.64,
+							"r": 0.670000016689301
+						},
+						{
+							"a": 1.0,
+							"b": 0.740000009536743,
+							"g": 0.740000009536743,
+							"pos": 0.78,
+							"r": 0.740000009536743
+						},
+						{
+							"a": 1.0,
+							"b": 0.860000014305115,
+							"g": 0.860000014305115,
+							"pos": 1.0,
+							"r": 0.860000014305115
+						}
+					],
+					"type": "Gradient"
+				}
+			},
+			"seed": -34902.0,
+			"type": "colorize"
+		},
+		{
+			"name": "colorize_9",
+			"node_position": {
+				"x": -1300.0,
+				"y": 220.0
+			},
+			"parameters": {
+				"gradient": {
+					"interpolation": 1,
+					"points": [
+						{
+							"a": 1.0,
+							"b": 0.119999997317791,
+							"g": 0.119999997317791,
+							"pos": 0.0,
+							"r": 0.119999997317791
+						},
+						{
+							"a": 1.0,
+							"b": 0.219999998807907,
+							"g": 0.219999998807907,
+							"pos": 0.26,
+							"r": 0.219999998807907
+						},
+						{
+							"a": 1.0,
+							"b": 0.389999985694885,
+							"g": 0.389999985694885,
+							"pos": 0.33,
+							"r": 0.389999985694885
+						},
+						{
+							"a": 1.0,
+							"b": 0.430000007152557,
+							"g": 0.430000007152557,
+							"pos": 0.48,
+							"r": 0.430000007152557
+						},
+						{
+							"a": 1.0,
+							"b": 0.610000014305115,
+							"g": 0.610000014305115,
+							"pos": 0.55,
+							"r": 0.610000014305115
+						},
+						{
+							"a": 1.0,
+							"b": 0.649999976158142,
+							"g": 0.649999976158142,
+							"pos": 0.72,
+							"r": 0.649999976158142
+						},
+						{
+							"a": 1.0,
+							"b": 0.819999992847443,
+							"g": 0.819999992847443,
+							"pos": 0.8,
+							"r": 0.819999992847443
+						},
+						{
+							"a": 1.0,
+							"b": 0.920000016689301,
+							"g": 0.920000016689301,
+							"pos": 1.0,
+							"r": 0.920000016689301
+						}
+					],
+					"type": "Gradient"
+				}
+			},
+			"seed": -2488.0,
+			"type": "colorize"
+		},
+		{
 			"generic_size": 1,
 			"name": "custom_uv2",
 			"node_position": {
@@ -913,7 +1134,7 @@
 				"inputs": 0.0,
 				"mode": 1.0,
 				"rotate": 0.0,
-				"scale": 0.1,
+				"scale": 0.18,
 				"sx": 1.0,
 				"sy": 1.0,
 				"variations": false
@@ -925,19 +1146,19 @@
 			"generic_size": 1,
 			"name": "custom_uv2_2",
 			"node_position": {
-				"x": -1800.0,
-				"y": 500.0
+				"x": -1160.0,
+				"y": 970.0
 			},
 			"parameters": {
 				"inputs": 0.0,
 				"mode": 1.0,
 				"rotate": 0.0,
-				"scale": 0.18,
+				"scale": 0.1,
 				"sx": 1.0,
 				"sy": 1.0,
 				"variations": false
 			},
-			"seed": -53252.0,
+			"seed": -1982.0,
 			"type": "custom_uv2"
 		},
 		{
@@ -980,6 +1201,48 @@
 				"strength": 0.035
 			},
 			"seed": -53652.0,
+			"type": "directional_warp"
+		},
+		{
+			"generic_size": 1,
+			"name": "directional_warp_4",
+			"node_position": {
+				"x": -900.0,
+				"y": 250.0
+			},
+			"parameters": {
+				"angle": 0.0,
+				"strength": 0.012
+			},
+			"seed": -26626.0,
+			"type": "directional_warp"
+		},
+		{
+			"generic_size": 1,
+			"name": "directional_warp_5",
+			"node_position": {
+				"x": -700.0,
+				"y": 250.0
+			},
+			"parameters": {
+				"angle": 90.0,
+				"strength": 0.017
+			},
+			"seed": -6202.0,
+			"type": "directional_warp"
+		},
+		{
+			"generic_size": 1,
+			"name": "directional_warp_6",
+			"node_position": {
+				"x": -1810.0,
+				"y": 870.0
+			},
+			"parameters": {
+				"angle": 0.0,
+				"strength": 0.085
+			},
+			"seed": -2636.0,
 			"type": "directional_warp"
 		},
 		{
@@ -1101,6 +1364,30 @@
 			"type": "greyscale"
 		},
 		{
+			"name": "greyscale_11",
+			"node_position": {
+				"x": -1500.0,
+				"y": 220.0
+			},
+			"parameters": {
+				"mode": 0.0
+			},
+			"seed": -22912.0,
+			"type": "greyscale"
+		},
+		{
+			"name": "greyscale_12",
+			"node_position": {
+				"x": -650.0,
+				"y": 550.0
+			},
+			"parameters": {
+				"mode": 2.0
+			},
+			"seed": -1684.0,
+			"type": "greyscale"
+		},
+		{
 			"name": "greyscale_2",
 			"node_position": {
 				"x": -400.0,
@@ -1139,13 +1426,13 @@
 		{
 			"name": "greyscale_5",
 			"node_position": {
-				"x": -1800.0,
-				"y": 750.0
+				"x": -2040.0,
+				"y": 810.0
 			},
 			"parameters": {
 				"mode": 2.0
 			},
-			"seed": -54042.0,
+			"seed": -64558.0,
 			"type": "greyscale"
 		},
 		{
@@ -1175,13 +1462,13 @@
 		{
 			"name": "greyscale_8",
 			"node_position": {
-				"x": -1300.0,
-				"y": 500.0
+				"x": -1580.0,
+				"y": 900.0
 			},
 			"parameters": {
 				"mode": 2.0
 			},
-			"seed": -2208.0,
+			"seed": -4312.0,
 			"type": "greyscale"
 		},
 		{
@@ -1214,16 +1501,6 @@
 			},
 			"parameters": {},
 			"seed": -57098.0,
-			"type": "invert"
-		},
-		{
-			"name": "invert_3",
-			"node_position": {
-				"x": -1550.0,
-				"y": 550.0
-			},
-			"parameters": {},
-			"seed": -28568.0,
 			"type": "invert"
 		},
 		{
@@ -1294,175 +1571,10 @@
 					"type": "Gradient"
 				},
 				"mirror": true,
-				"repeat": 12.0
+				"repeat": 5.0
 			},
 			"seed": -29188.0,
 			"type": "radial_gradient"
-		},
-		{
-			"name": "scratches2",
-			"node_position": {
-				"x": -1300.0,
-				"y": 860.0
-			},
-			"parameters": {
-				"angle": 90.0,
-				"layers": 1.0,
-				"length": 0.17,
-				"randomness": 0.04,
-				"waviness": 0.08,
-				"width": 0.25
-			},
-			"seed": -2616.0,
-			"type": "scratches2"
-		},
-		{
-			"name": "shape",
-			"node_position": {
-				"x": -2200.0,
-				"y": 500.0
-			},
-			"parameters": {
-				"edge": 0.35,
-				"radius": 0.09,
-				"shape": 1.0,
-				"sides": 6.0
-			},
-			"seed": -29588.0,
-			"type": "shape"
-		},
-		{
-			"name": "transform",
-			"node_position": {
-				"x": -2000.0,
-				"y": 100.0
-			},
-			"parameters": {
-				"repeat": false,
-				"rotate": 0.0,
-				"scale_x": 1.0,
-				"scale_y": 8.0,
-				"translate_x": 0.46,
-				"translate_y": -0.1
-			},
-			"seed": -8780.0,
-			"type": "transform"
-		},
-		{
-			"name": "transform_2",
-			"node_position": {
-				"x": -2000.0,
-				"y": 500.0
-			},
-			"parameters": {
-				"repeat": false,
-				"rotate": 0.0,
-				"scale_x": 1.0,
-				"scale_y": 1.7,
-				"translate_x": 0.12,
-				"translate_y": -0.17
-			},
-			"seed": -9180.0,
-			"type": "transform"
-		},
-		{
-			"generic_size": 1,
-			"name": "warp",
-			"node_position": {
-				"x": -1000.0,
-				"y": 100.0
-			},
-			"parameters": {
-				"amount": 0.003,
-				"eps": 0.03,
-				"mode": 0.0
-			},
-			"seed": -37236.0,
-			"type": "warp"
-		},
-		{
-			"name": "wavelet_noise2",
-			"node_position": {
-				"x": -1400.0,
-				"y": 800.0
-			},
-			"parameters": {
-				"frequency": 1.0,
-				"iterations": 4.0,
-				"offset": 0.0,
-				"persistence": 0.6,
-				"scale_x": 28.0,
-				"scale_y": 1.0,
-				"type": 0.0
-			},
-			"seed": -12968.0,
-			"type": "wavelet_noise2"
-		},
-		{
-			"name": "colorize_8",
-			"node_position": {
-				"x": -1880.0,
-				"y": 1010.0
-			},
-			"parameters": {
-				"gradient": {
-					"interpolation": 1,
-					"points": [
-						{
-							"a": 1.0,
-							"b": 0.100000001490116,
-							"g": 0.100000001490116,
-							"pos": 0.0,
-							"r": 0.100000001490116
-						},
-						{
-							"a": 1.0,
-							"b": 0.189999997615814,
-							"g": 0.189999997615814,
-							"pos": 0.23,
-							"r": 0.189999997615814
-						},
-						{
-							"a": 1.0,
-							"b": 0.379999995231628,
-							"g": 0.379999995231628,
-							"pos": 0.4,
-							"r": 0.379999995231628
-						},
-						{
-							"a": 1.0,
-							"b": 0.589999973773956,
-							"g": 0.589999973773956,
-							"pos": 0.49,
-							"r": 0.589999973773956
-						},
-						{
-							"a": 1.0,
-							"b": 0.670000016689301,
-							"g": 0.670000016689301,
-							"pos": 0.64,
-							"r": 0.670000016689301
-						},
-						{
-							"a": 1.0,
-							"b": 0.740000009536743,
-							"g": 0.740000009536743,
-							"pos": 0.78,
-							"r": 0.740000009536743
-						},
-						{
-							"a": 1.0,
-							"b": 0.860000014305115,
-							"g": 0.860000014305115,
-							"pos": 1.0,
-							"r": 0.860000014305115
-						}
-					],
-					"type": "Gradient"
-				}
-			},
-			"seed": -34902.0,
-			"type": "colorize"
 		},
 		{
 			"name": "remote_1",
@@ -1471,22 +1583,21 @@
 				"y": -1000.0
 			},
 			"parameters": {
-				"edges": 0.24,
-				"grain": 0.32,
+				"cleavage": 0.32,
+				"damage": 0.24,
 				"growth": 0.32,
-				"knots": 0.32,
 				"lap": 0.37,
 				"normal": 0.22,
-				"roughness": 0.59,
+				"rough": 0.59,
 				"split": 0.28,
 				"tone": 0.35,
-				"weather": 0.56
+				"wear": 0.56
 			},
 			"seed": 18860.0,
 			"type": "remote",
 			"widgets": [
 				{
-					"label": "Riven grain",
+					"label": "Riven face relief",
 					"linked_widgets": [
 						{
 							"node": "blend",
@@ -1494,12 +1605,12 @@
 						}
 					],
 					"longdesc": "",
-					"name": "grain",
-					"shortdesc": "Riven grain",
+					"name": "cleavage",
+					"shortdesc": "Riven face relief",
 					"type": "linked_control"
 				},
 				{
-					"label": "Growth-ring influence",
+					"label": "Growth curvature",
 					"linked_widgets": [
 						{
 							"node": "blend_5",
@@ -1508,24 +1619,11 @@
 					],
 					"longdesc": "",
 					"name": "growth",
-					"shortdesc": "Growth-ring influence",
+					"shortdesc": "Growth curvature",
 					"type": "linked_control"
 				},
 				{
-					"label": "Knot relief",
-					"linked_widgets": [
-						{
-							"node": "blend_6",
-							"widget": "amount"
-						}
-					],
-					"longdesc": "",
-					"name": "knots",
-					"shortdesc": "Knot relief",
-					"type": "linked_control"
-				},
-				{
-					"label": "Split strength",
+					"label": "Exposed end checks",
 					"linked_widgets": [
 						{
 							"node": "blend_4",
@@ -1534,7 +1632,7 @@
 					],
 					"longdesc": "",
 					"name": "split",
-					"shortdesc": "Split strength",
+					"shortdesc": "Exposed end checks",
 					"type": "linked_control"
 				},
 				{
@@ -1546,12 +1644,12 @@
 						}
 					],
 					"longdesc": "",
-					"name": "edges",
+					"name": "damage",
 					"shortdesc": "Butt chips",
 					"type": "linked_control"
 				},
 				{
-					"label": "Board variation",
+					"label": "Board color variation",
 					"linked_widgets": [
 						{
 							"node": "blend_2",
@@ -1560,7 +1658,7 @@
 					],
 					"longdesc": "",
 					"name": "tone",
-					"shortdesc": "Board variation",
+					"shortdesc": "Board color variation",
 					"type": "linked_control"
 				},
 				{
@@ -1572,7 +1670,7 @@
 						}
 					],
 					"longdesc": "",
-					"name": "weather",
+					"name": "wear",
 					"shortdesc": "Pale exposed wood",
 					"type": "linked_control"
 				},
@@ -1585,7 +1683,7 @@
 						}
 					],
 					"longdesc": "",
-					"name": "roughness",
+					"name": "rough",
 					"shortdesc": "Relief-driven roughness",
 					"type": "linked_control"
 				},
@@ -1616,10 +1714,80 @@
 					"type": "linked_control"
 				}
 			]
+		},
+		{
+			"name": "scratches2",
+			"node_position": {
+				"x": -1300.0,
+				"y": 860.0
+			},
+			"parameters": {
+				"angle": 90.0,
+				"layers": 1.0,
+				"length": 0.24,
+				"randomness": 0.04,
+				"waviness": 0.08,
+				"width": 0.16
+			},
+			"seed": -2616.0,
+			"type": "scratches2"
+		},
+		{
+			"name": "transform",
+			"node_position": {
+				"x": -2000.0,
+				"y": 100.0
+			},
+			"parameters": {
+				"repeat": false,
+				"rotate": 0.0,
+				"scale_x": 1.0,
+				"scale_y": 8.0,
+				"translate_x": 0.46,
+				"translate_y": -0.1
+			},
+			"seed": -8780.0,
+			"type": "transform"
+		},
+		{
+			"name": "wavelet_noise2",
+			"node_position": {
+				"x": -1400.0,
+				"y": 800.0
+			},
+			"parameters": {
+				"frequency": 1.0,
+				"iterations": 4.0,
+				"offset": 0.0,
+				"persistence": 0.6,
+				"scale_x": 7.0,
+				"scale_y": 1.0,
+				"type": 0.0
+			},
+			"seed": -12968.0,
+			"type": "wavelet_noise2"
+		},
+		{
+			"name": "wavelet_noise2_2",
+			"node_position": {
+				"x": -2560.0,
+				"y": 750.0
+			},
+			"parameters": {
+				"frequency": 2.0,
+				"iterations": 3.0,
+				"offset": 0.37,
+				"persistence": 0.55,
+				"scale_x": 32.0,
+				"scale_y": 2.0,
+				"type": 0.0
+			},
+			"seed": -14098.0,
+			"type": "wavelet_noise2"
 		}
 	],
 	"parameters": {},
-	"project_thumbnail": "UklGRqwFAABXRUJQVlA4WAoAAAAQAAAALwAALwAAQUxQSJQCAAANoCNteyJJevXrV9HAMpNX7Q9UrMd4gGEea5ksZmYGi3n3AG12ZIzVFT0X4BmrrOXdqqiUUlooyNIJImICmFOsBzh//bn89tcvAK6K1C9SVmbLdb1uM1Y0ZXysX6yVaIx1aRmvObyDqe3OZd3edRt/+PQkGmqR5K945gZIFWIwJFLELu3cv/LMWWPifFry8D0QxFomGoxAjK2Dj374ZtIwjxtd9BN4dcwrksL6lzZvGzg/mxtu+gavDeo0msLNn+xZdX4WN7z2PXyHuo36S5fvP+L8NB1teo/QZoEuNIv7VzVMkvKibwgtFqqhubxnIHFC4id8mwWrv/STbYn/q38Y32Hhzt+8+U0NIOUV96BkqLz04VmJSHwa38jB+PWPPCtRymtuQMlSObhyUmx1GN/Iw/jOvk+tNzuwZGrZ+UPJFlI2kpY2rnEdVTZU9rqCHln3+nSRfITusfObmHwMl43XR7LuyLkVJh9Du0n2vzXbyWSTzGj8l3TIeRh/GV+WTDbJDOBYN0o2UY5Bv0fOfSius/lYCljbuBQlk2iP/YErf9hZ2Uwq+z2u4tN9nWSySA3/FVXUkysHg2YR9HO0JPLsI+uTySA1xq8QIerZD18KmkHQx9ASCObNzTd7tzDfKY4az/9N2vbJpUEXFNo/34lJE6IO9iw3gy4ktKo70JLJwa3eXzS9W4BvV9fhRkz37sj9y5d6NTWl0Pn5DtyQWb1b3fPJzXg1NaTQ0OJO3JDZvQ62bX5pPUFkjhidjh87io6YN0h688NHD7ZIFWIwJFLEWgmfv4wxJfNH9OwzK/t3LlkmGozAse+/BPWJWoPIyU9/2Hhdr3tZp81oODjWL/4AjSV1xyi2XCv6x8bSZBz5v6tKZgdWUDgg8gIAADAQAJ0BKjAAMAA+iTaXR6UjIiEx1m34oBEJQBXKsbpfzbG0QV7avnldMa3oKfdsvil51o5ZVhjS/Jt9Ub+n9ivYd/WAyiM9F0s12NPVwc15raM8CYt5/6Y1yZ3JnYOxbMUOzZlT6Rvy/q//yebIr97w1ukPwkJ3Ae4wl+lZzqVu/41cXKToFW+1wAD+/hXb+LSVuCZ39Z7Qokvvna4XBQ71YnX+Yv4ABYb63T5sVTxOhdR9arK9UwNCPF2JAI+4Hu0tW3s2O7GuFy6iwsymvnuKNuYLSqsDhoB0Ozm8ytDnKkdXzC7PvGHwiQFn2othF8D6fYTTpmW+nWFBQeMLKViD3FwAjhpg5yaI5IcMdJ/AzNvnrhR/e+C13FNtRzBWkZkjBDKkLtbwMOwW+x/wFGcNiwz1rsuof1jM+dBQUqUgfIkfL+XieUukW337FdKNz4zzKDujVpgb+hQxnaVy55a34zAhCHkXxtX56QJzIlxFieQ+GMuP1S/m55+LQdFPemBklvhd2FcCCdbmrHzO+UdQE4PchIbvd6C+4JnNIpBc6Q7a6VxXR0LmfoIRsKazHRnZhIjhotH/9Fw4s86EipBu55qByziTHEOcT/sXQNlHL20/HzL20RKdMIo0++EqCHLhVM7tIY8z/+65UqQDpSt74JfL/ZZSYHypgyI2lqUBuy5LSGTxad1B9F5vkhzjYVhoKRvfOWrF/+rglG+ar2thZESlzMs+iHKsz2l1llFFTcsFG3Rio7jTGo7ZnzzuUiZnNdy9q0rxLJQRyjw7ZrPKSrKKuVqSMWiCkXhyKU5zvv+0PYon4gubNTCGtl4Y9lROYn6zElhpkVSMmlVNrO7YT0o6e5P0aZ3108OyWYHDWqpCOvwB/dgwdPHNlJmJnCmex7h1c5OCOfydp7okNdu0oklf+120b8sAtjh22/CDZHBU/7GcJtdXopRs2IYs/6l+z9b2flKUj3ADvT3k7X7kaFJ8oiE3Q//UaJSfeRmZ8AA=",
+	"project_thumbnail": "UklGRrAFAABXRUJQVlA4WAoAAAAQAAAALwAALwAAQUxQSJQCAAANoCNteyJJevXrV9HAMpNX7Q9UrMd4gGEea5ksZmYGi3n3AG12ZIzVFT0X4BmrrOXdqqiUUlooyNIJImICmFOsBzh//bn89tcvAK6K1C9SVmbLdb1uM1Y0ZXysX6yVaIx1aRmvObyDqe3OZd3edRt/+PQkGmqR5K945gZIFWIwJFLELu3cv/LMWWPifFry8D0QxFomGoxAjK2Dj374ZtIwjxtd9BN4dcwrksL6lzZvGzg/mxtu+gavDeo0msLNn+xZdX4WN7z2PXyHuo36S5fvP+L8NB1teo/QZoEuNIv7VzVMkvKibwgtFqqhubxnIHFC4id8mwWrv/STbYn/q38Y32Hhzt+8+U0NIOUV96BkqLz04VmJSHwa38jB+PWPPCtRymtuQMlSObhyUmx1GN/Iw/jOvk+tNzuwZGrZ+UPJFlI2kpY2rnEdVTZU9rqCHln3+nSRfITusfObmHwMl43XR7LuyLkVJh9Du0n2vzXbyWSTzGj8l3TIeRh/GV+WTDbJDOBYN0o2UY5Bv0fOfSius/lYCljbuBQlk2iP/YErf9hZ2Uwq+z2u4tN9nWSySA3/FVXUkysHg2YR9HO0JPLsI+uTySA1xq8QIerZD18KmkHQx9ASCObNzTd7tzDfKY4az/9N2vbJpUEXFNo/34lJE6IO9iw3gy4ktKo70JLJwa3eXzS9W4BvV9fhRkz37sj9y5d6NTWl0Pn5DtyQWb1b3fPJzXg1NaTQ0OJO3JDZvQ62bX5pPUFkjhidjh87io6YN0h688NHD7ZIFWIwJFLEWgmfv4wxJfNH9OwzK/t3LlkmGozAse+/BPWJWoPIyU9/2Hhdr3tZp81oODjWL/4AjSV1xyi2XCv6x8bSZBz5v6tKZgdWUDgg9gIAABAQAJ0BKjAAMAA+kTqXR6WjIiEuOAzIsBIJQBXKqCrOrgOuBvtt7zxWmAfwDpuvV2n1LKkqOdr+c8G9NVNB8j31Rv+v2A9iAqVJ7iUtZs2D4UQQMP252KsMbtZOdfOpQrAoTZ8L5z9PtiRclZQ1cck8IbYWg5qmgI3tWO6jT7Z0BGmS9B0yIp7MAP792tQotPvQmqwr9ykrei7QqxNsl58QKUTU57HMEeJH+0/wMkY/adSJJgDmxEGnM4vfcR4y+NL7Nj88R3Nz+p1nZYeLlO1BOLEDAcK/wXEaNPlC7/J2PzxY5zs7ImG0EIFWlFw8s15RhCli8MxMGyjTi04FRIGf9HE3a3CYM7dQgNSCyAT3XFmyeYuWPXy46S9Huk0mTp9MsuvoRnX5EeSIJRuZSn5tX0XWAHQXJtNHVYXYEBn1+nAiVF38P2Vdg994j/o4bnPPnigUMqSfC+1rKYgAAxW5HkkSljgxaA9+OJJaQ71ihG1wFCw/Pb//gvjXlCx2RfALq/gN5x1d2yB/OKTBUK3g/sKE3ddgbT/RiO8NR1M015+p1+/ZwkXXyOzKho5je8IcUBarVHqKrPhdw7bf8stwaMohv5nxJZl/vhpvIkKXmx+9+/Zf+tv0fyzgCJQigoXO5w3DEC/Z//3XJhSZWlDJbs21p+3sw1ecz2mX2bl8lHyCKIAUfve0EgAgWcW9R6wjSJlZp4FF/+rf9jc0o4PdlGnAwgWzTCKtaOksd+JQYECxVrbYU4HLVIOUTx31Ux8ukkuMlMnU0gVoqtYTqK2XIIC3ybuwUE7KJKX/NqqAOmMYVkL2OPd1iCk7K6z1BkzywU5MV92hjr4ffYHYTz35UoYI88kIpTDBFDsETI9HPEcp/aszoo/wx+RkTAtIr4ISr5VTbYCC5xrKVyQqcTne6IsMbs1aXyhJQN8118Z64qnEFqmMEDO8ixO1eO7zTav9eHf7PMfPTUrp2hT6g8CW5vTdXMbL27Ke0Z4Aav1FrxVvaAAA",
 	"seed_int": 0,
 	"shortdesc": "",
 	"type": "graph"
