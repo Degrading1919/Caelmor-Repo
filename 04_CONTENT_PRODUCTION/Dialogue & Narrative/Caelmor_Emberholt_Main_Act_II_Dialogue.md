@@ -139,7 +139,7 @@ EAC-D2.02 DAHRIN: "You're the one from the circle." (he sits) "Sit. Please. I ta
 EAC-D2.03 (The shop bell rings beyond the curtain. The stove flame stands up tall; Dahrin's hands spread flat on his knees.)   {event: cinderweave.stove_flare}
 EAC-D2.04 MAERYN: (through the curtain, calm) "Bread man, Dahrin. Breathe."
 EAC-D2.05 (The flame comes down. Dahrin breathes out.) DAHRIN: "Bread man." (a short, unhappy laugh) "I know the bread man."
-EAC-D2.10 [EGH_SHEET_READ] DAHRIN: "You read a sheet in the Red-Lit. 'One elder taken in the purge after. Held below.'" (beat) "You read 'held below'. I was below."
+EAC-D2.10 [EGH_SHEET_READ] DAHRIN: "You read a sheet in the Red-Lit. 'One elder taken in the purge after. Held below.'" (beat) "You've read 'held below'. I was below."
 EAC-D2.12 [EH_HOLLOW_TRUTH = told] DAHRIN: "Somebody chalked the forge plaque. I went and looked at it at night. I put my hand on it. I don't know why."
 EAC-D2.13 [EH_HOLLOW_TRUTH = kept] DAHRIN: "The Marshal keeps a second ledger now. Maeryn hears things. I'd like to be a line in it one day." (beat) "Not yet."
   > "Tell me what happened to you."          → EAC-D2.20
@@ -281,7 +281,7 @@ EAC-D7.30 [warrens.emberlight] ASERA: (without looking up) "Don't look. He isn't
 | The sigil-stone, held (EAC-I4) | "Dark stone, a seam of emberglass. Here: *cold*." / "*cool*" / "*warm*". | Reads the nearest door |
 | Tier 1 dead end (EAC-I5) | "Conduit plates stacked to the roof, each stamped with a number. The stone in your hand is cold." | — |
 | Tier 2 jamb with flarecap (EAC-I6) | "Bright orange cap in the seam of the jamb. A live vein close behind this wall. The stone is warm here, and so is the wall." | — |
-| Tier 2 orange-cap dead end (EAC-I7) | "A fitter's store. Collar blanks hang on pegs in sizes. Some are small. The stone is cool." | — |
+| Tier 2 orange-cap dead end (EAC-I7) | "A fitter's store. Collar blanks hang on pegs in sizes. The stone is cool." | — |
 | Tier 3 true door (EAC-I8) | `EAC_SIGIL_TAUGHT`: "A ring closed across with a bar, cut and filled with dark glass. Where they keep. The stone is warm." | — |
 | The chamber door (EAC-I9) | "The same mark: a ring closed with a bar. The stone is warm, warmer than anywhere yet." | — |
 | The slate's marks (EAC-I11) | `EEH_LEDGER_READ`: "Rings, rings with a dot, filled rings. The same marks as the second column in the Molten Stair's ledger. Nothing on the slate says what they mean." | Optional |
@@ -442,8 +442,8 @@ EAC-D11.20 [EAC_PRESSED] DAHRIN: "You asked me twice what else I know. I said no
 EAC-D11.21 [not EAC_PRESSED] DAHRIN: "There's a thing I know that I haven't told anyone. You didn't ask. I noticed."
 EAC-D11.30 DAHRIN: (holds out his hand) "The stone. It's warm still. It'll go cold up here." (the player gives it back)   {item EAC_sigil_stone removed}
 EAC-D11.31 DAHRIN: (closes his fist round it; his hand isn't shaking) "Look at that."
-EAC-D11.35 MAERYN: (at the curtain; she has been there a while) "We're not gone, you know." (beat) "People say we went. We didn't go anywhere." (she lets the curtain fall behind her)   {optional, plays once if the player stays in the room ~5 s after EAC-D11.31; EAC_MAERYN_SAID} [ED-12]
-EAC-D11.36 MAERYN: (back at the counter, handing over a folded hood) "Lined. You'll be in ducts again. Everybody is." (beat) "If anyone asks, you were being fitted."   {reward: lined duct hood}
+EAC-D11.35 MAERYN: (at the curtain; she has been there a while) "We're not gone, you know." (beat) "Whatever people say." (she lets the curtain fall behind her)   {optional, plays once if the player stays in the room ~5 s after EAC-D11.31 before speaking to Dahrin again; EAC_MAERYN_SAID} [ED-12]
+EAC-D11.36 MAERYN: (at the counter as the player leaves through the shop after EAC-D11.40, handing over a folded hood) "Lined. You'll be in ducts again. Everybody is." (beat) "If anyone asks, you were being fitted."   {reward: lined duct hood}
 EAC-D11.40 DAHRIN: (to the stove, or to the player) "In. Hold. Three." (he breathes) "Go home, warden's hand. Wherever that is tonight."   {quest Completed; journal: The Ember-Priestess has asked for the warden's hand at the Covenant lamp-house.}
 ```
 
@@ -454,7 +454,7 @@ EAC-D11.40 DAHRIN: (to the stove, or to the player) "In. Hold. Three." (he breat
 | EAC-B9.1 | Maeryn's shop | MAERYN | "Your fitting's still open. It's always open." |
 | EAC-B9.2 `[D-E2]` | Maeryn's back room | DAHRIN | `freed`: "I don't count days now. I count bread men." / `aided`: "When you carry it up, tell me. I'd like to be standing." |
 | EAC-B9.3 `[D-E2]` | Maeryn's back room, ambient | ASERA | `freed`: (not present; a second hood and pair of gloves on the peg, gone the next day) / `aided`: (in the third chair, eyes shut, a hand flat on her chest; she does not speak) |
-| EAC-B9.4 | Cooling House | YORVEN | "Gate's locked again. Hasp held. Thank you for asking it." |
+| EAC-B9.4 | Cooling House | YORVEN | "Keep that key. It's the only one, so don't lose it." (beat) "Hasp held. Thank you for asking it." |
 | EAC-B9.5 | Shaft head, post-quest | (none) | (A water cask at the foot, full. A barricade past the mouth, Deepbrand's mark burned into it.) |
 
 ---
@@ -504,7 +504,7 @@ ESS-D2.12 [ESS_RUN_READ] SERALYND: (between cues) "What did you see?"
   > "Nothing yet."                                                → ESS-D2.14
 ESS-D2.13 SERALYND: "Together?" (she listens, then nods) "Together."   → ESS-D2.20
 ESS-D2.14 SERALYND: "Then watch the next one with me." → ESS-D2.20
-ESS-D2.20 SAELIA: (halfway through the second run; she drops her hands) "Stop. Stop." (the crowd stops, lamps half raised) "Too tidy."
+ESS-D2.20 [ESS_RUN_READ] SAELIA: (halfway through the next run after all three windows are read; runs repeat until then; she drops her hands) "Stop. Stop." (the crowd stops, lamps half raised) "Too tidy."
 ESS-D2.21 SAELIA: (to the player and Seralynd, coming down off her stand, low) "My cues are on four. Listen to them. They're breathing in on a five. There's no five on my sheet." (she holds the sheet out)   {inspect: the cue sheet (ESS-I2)}
 ESS-D2.22 SAELIA: "I wrote the cues. I didn't write that."   {ESS_TOO_TIDY}
   > "Where else could a beat come from?"         → ESS-D2.23
@@ -528,7 +528,7 @@ ESS-D2.24 SAELIA: (back up on her stand; loud, cheerful) "From the top! Lamps!" 
 
 ```
 ESS-D3.01 RALENNE: (at her lectern; scripts stacked under one hand; delighted) "You were in my crowd! Did it move you? It's meant to move you."
-ESS-D3.02 RALENNE: "And you're the one who made me read my own name on a coal order. I've read every word since. You'd be amazed what I sign."
+ESS-D3.02 [ALLOCATION] RALENNE: "And you're the one who made me read my own name on a coal order. I've read every word since. You'd be amazed what I sign."
 ESS-D3.03 [ALLOCATION] RALENNE: [EH_COLD_WARD = posted] "You put my aide's name on a Cooling House board. I read every order twice now." / [= settled] "Your Overseer countersigns my clerk's coal book every week. He is very slow about it."
 ESS-D3.04 RALENNE: "What can I do for you? Ask anything. I'll show anyone my script; it's the best thing I've ever been given."
   > "May I see the script?"                       → ESS-D3.05
@@ -562,8 +562,8 @@ ESS-D3.20 RALENNE: (tying the ribbon again) "Come on the night itself. Stand at 
 ```
 ESS-D4.01 KAEVREN: (at the map table; four folded papers squared in front of him) "Sit." (he finishes the line he's writing first)
 ESS-D4.02 KAEVREN: "I'm told my guards will be standing the High Kindling crowd in rings. I'm told it by a sergeant who thought I'd ordered it."
-ESS-D4.03 [EGH_ORDER_SHOWN] KAEVREN: "The gallery order you brought me carried a mark in the corner. It was the first one I could hold." (he lays it beside the four) "Here's the rest."   → ESS-D4.10
-ESS-D4.04 [EGH_WORK_ORDER and not EGH_ORDER_SHOWN] KAEVREN: "You carried a Deepbrand work order out of that gallery. Have you still got it?" (he reads it; he turns it over; he puts his thumb on the corner) "There. I wondered."   → ESS-D4.10
+ESS-D4.03 [EGH_ORDER_SHOWN] KAEVREN: (he lays the gallery order face down beside the four; on its back, small, a stamp) "The gallery order you brought me. Nobody turns them over. It was the first one I could hold." "Here's the rest."   → ESS-D4.10
+ESS-D4.04 [EGH_WORK_ORDER and not EGH_ORDER_SHOWN] KAEVREN: "You carried a Deepbrand work order out of that gallery. You read the front. Everyone reads the front." (he turns one of the four over) "If you ever see it again, look on the back. You'll find this."   → ESS-D4.10
 ESS-D4.05 [neither] KAEVREN: "Orders to my officers that never crossed my desk. I've been catching them for a season."   → ESS-D4.10
 ESS-D4.10 KAEVREN: (turns the four papers round) "Read them."   {inspect: the intercepts (ESS-I5); ESS_INTERCEPTS; carry-state: the intercepts}
 ESS-D4.11 KAEVREN: "The mark. Flame in a square. It's the duct-post stamp for the letter-room under Speaker's Hall. Everything that leaves that cellar by tube gets it."
@@ -729,7 +729,7 @@ A narrow slip of good Covenant paper, the kind the lamp-house uses for vigil not
 
 ### Document: Kaevren's intercepts (ESS-I5)
 
-Four orders on Emberguard form paper, each to a named office (never to a person by name), none bearing the Marshal's countersign. Each carries the same stamped routing mark in the lower corner: **a flame in a square**.
+Four orders on Emberguard form paper, each to a named office (never to a person by name), none bearing the Marshal's countersign. Each carries the same stamped routing mark on its back: **a flame in a square**.
 
 > *1. To the officer of the Embergate night watch. Patrols past the Cinderweave lanes to be thinned for the season. Not to be logged with the Marshal's office.*
 >
@@ -749,7 +749,7 @@ Sealed in soft red wax with the Speaker's flame seal; read in place and returned
 >
 > *I write with thanks. The Kindling will be the fullest in living memory. The terraces are ready and the city is ready to fill them.*
 >
-> *My vigils have been clear this season. On the long nights I have seen the city as one flame, every ember of it, and I have woken knowing what to say to it. I do not know a greater gift, and I thank whoever has the keeping of such things.*
+> *My vigils have been clear this season. On the long nights I have seen the city as one flame, every ember of it, and I have woken knowing what to say to it. I do not know a greater gift, and I thank the fire for it, as every Speaker has.*
 >
 > *The Marshal is restless. He is a good man and a careful one. I would not have him troubled.*
 >
@@ -769,8 +769,6 @@ A bundle of folded papers tied with a red ribbon, the oldest soft and brown at t
 > *Answered: "schools where the young can learn the safe crafts." They are yours to open. Open them in your name.*
 >
 > *Answered: "the terraces on the high holidays." Speak from the spire. The city will come.*
->
-> *Answered: "that the vigils be clear." They will be.*
 >
 > *Answered: "a Kindling the city will remember." It will be the fullest yet.*
 >
@@ -830,7 +828,7 @@ A ruled book on the record-room shelf, the Covenant's own, in several hands. Col
 > *K. less 22 · first room · a lamp-keeper woke and spoke of a door under ash. Not set.*
 > *K. less 18 · second room · S.A. (watching) saw a light where the wall is. Not set.*
 > *K. less 11 · third room · S.A. (watching) heard breathing that was not the sleeper's. Not set.*
-> *K. less 10 · second room · the Priestess woke weeping. Would not say why. Not set.*
+> *K. less 23 · second room · the Priestess woke weeping. Would not say why. Not set.*
 
 `{ESS_RECORD_READ}`. Production rules: *C. Vorr* is never spoken aloud by anyone. *S.A.* is Serix; he says so (`ESS-D8.24`). The steadying numbers are the Molten Stair's student numbers; **40 is not among them**. No row names the Seat, the deep works or anyone outside the city. The "not set" rows are never explained (`[ED-17]`); none is about the player.
 
@@ -866,7 +864,7 @@ ESS-D8.24 SERIX: "S.A. is me. Most of the nights are someone else's. Some are mi
 ESS-D8.26 SERIX: "The light ones don't. The full ones..." (beat) "Some of the full ones asked for vigils. Asking for a vigil isn't asking for a dream. I used to think that mattered."   → ESS-D8.30
 ESS-D8.30 [D-S1] SERIX: "He believes it." (quiet) "Every word I give him, he believes."
 ESS-D8.31 [D-S1] SERIX: "He thanks me for them without knowing it's me. He says good morning to me on the stair as if I were the one who'd had the good night."
-ESS-D8.32 [D-S1] SERIX: "He asks for the vigils. He asks for them clear. He doesn't ask what's in them." (beat) "I don't think he wants to."
+ESS-D8.32 [D-S1] SERIX: "He asks for the vigils, the way every Speaker has." (beat) "He thinks the fire answers him."
 ESS-D8.34 [ED-17] SERIX: (he turns the record to the back pages and puts one finger on his own column) "This is what I wanted someone to see." (beat) "Some nights I see things I didn't set. So do some of the people I sit with."
 ESS-D8.35 [ED-17] SERIX: "I don't know who sets those. I'm not saying it's anyone." (beat) "I'm saying it isn't me."
 ESS-D8.36 SERIX: (closes the record; puts it back on the shelf, exactly where it was) "There. Someone's seen it."   {ESS_SERIX_HEARD}
@@ -878,7 +876,7 @@ ESS-D8.45 [ESS_STUDENTS_SEEN] PLAYER (summary line, shown): "There's no forty."
 ESS-D8.46 SERIX: "No. Forty was on the list and then struck off. Somebody came and took the name back." (he doesn't know more, and says so with his face)   → ESS-D8.10 options or ESS-D8.36 options (whichever the player came from)
 ```
 
-`[D-S1]` swap: under "wholly mastermind", cut `ESS-D8.30`–`.32` and the "And the Speaker?" option; `ESS-D8.12` reads "The night after I sat with *her*." and points at block P. Under "wholly puppet", `ESS-D8.32` loses its last sentence.
+`[D-S1]` swap: under "wholly mastermind", cut `ESS-D8.30`–`.32` and the "And the Speaker?" option; `ESS-D8.12` reads "The night after I sat with *her*." and points at block P. Under "wholly puppet", `ESS-D8.30`–`.32` stand unchanged.
 
 ### ESS-D9: the second rehearsal (S05)
 
@@ -995,3 +993,9 @@ Production rule on `ESS-D11.34`: an evasion, not a lie (he says nothing about wh
 | **Names** | No NPC says "Remnant", "Fire Titan", Calynne's given name, the initiate's name or the Seat's identity. *C. Vorr* is written once in the record and never spoken. |
 | **Other regions** | Not mentioned. |
 | **CDR-6** | Every line that sets a flag is per player; partners hear shared ambient barks only. |
+
+## Part 6: Review log
+
+| Review | Findings and revisions |
+|---|---|
+| Independent review, 2026-11-14 | Checked against the quest file, the bible, the Revelation Ledger, the character file and the Part 4 ledger. **High:** `[D-S1]` the kept answer *"that the vigils be clear." They will be.* and the letter's "I thank whoever has the keeping of such things" showed the Speaker asking his patron for his dreams (canon: he believes them divine); the answer is cut, the letter thanks "the fire", `ESS-D8.32` reworded and the swap note after `ESS-D8` updated. **Medium:** `EAC-I7` "Some are small" cut (implied present child captives; Thalan is the sole current captive); `EAC-D11.35` trimmed to the canon hook ("We're not gone"), dropping "We didn't go anywhere"; `ESS-D4.03`/`.04` and `ESS-I5` put the routing stamp on the orders' backs, since the Act I work order's face shows none, and no longer ask for a carry-state object the player may not hold; `ESS-D2.20` now waits for `ESS_RUN_READ`; the "not set" Priestess row moved to *K. less 23*, a night the access book lists. **Low:** `EAC-D2.10` matches the line Act I promised; `EAC-D11.35`/`.36` timing defined; `EAC-B9.4` matches the walkable gate; `ESS-D3.02` tagged `[ALLOCATION]`. No new names; no renames. `[INITIATE]`, R15, R16 untouched; R18/R19 seeds only. |
