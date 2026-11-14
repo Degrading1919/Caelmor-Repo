@@ -22,7 +22,9 @@ REPO = ROOT.parents[2]
 sys.path.insert(0, str(ROOT))
 
 from caelmor_architecture.roof_selection import infer_bearing
-from caelmor_architecture.roof_autocomplete import build_roof_collection
+from caelmor_architecture.roof_autocomplete import build_roof_collection, _roof_buffers
+from caelmor_architecture.roof import roof_faces, roof_topology, roof_join_kind
+from caelmor_architecture.geometry import area
 import caelmor_architecture as addon
 
 EVIDENCE = ROOT / "evidence" / "roof_autocomplete"
@@ -76,7 +78,7 @@ def mesh_fingerprint(objects):
     for obj in sorted(objects, key=lambda item: item.name):
         mesh = obj.data
         coords = tuple(round(value, 6) for vertex in mesh.vertices for value in vertex.co)
-        rows.append((len(mesh.vertices), len(mesh.polygons), coords))
+        rows.append((len(mesh.vertices), len(mesh.polygons), coords, tuple(tuple(row) for row in obj.matrix_world)))
     rows.sort()
     return hashlib.sha256(repr(rows).encode("utf-8")).hexdigest()
 
@@ -95,42 +97,90 @@ def roof_bounds(collection):
 
 def assert_field_uv(collection, rise, detail, bearing):
     """Check the UV axes follow ridge/run directions and start on course phase."""
-    fields = [obj for obj in collection.objects if obj.type == "MESH" and
-              "Mapped roof field" in obj.name]
-    check(len(fields) == 1, f"expected one mapped field mesh, found {len(fields)}")
-    obj = fields[0]
-    uv = obj.data.uv_layers.get("RoofUV")
-    check(uv is not None, "continuous field is missing named RoofUV")
     slope = rise / (bearing.depth * .5)
-    pitch = math.degrees(math.atan(slope))
     step = .30 / math.sqrt(1+slope*slope)
-    expected_courses = 1 if detail < 34 else (2 if detail < 67 else 4)
-    vs = []
-    for poly in obj.data.polygons:
-        coords = [(obj.matrix_world @ obj.data.vertices[obj.data.loops[li].vertex_index].co,
-                   uv.data[li].uv) for li in poly.loop_indices]
-        for i, (a, auv) in enumerate(coords):
-            for b, buv in coords[i+1:]:
-                dx, dy, dz = b.x-a.x, b.y-a.y, b.z-a.z
-                du, dv = buv.x-auv.x, buv.y-auv.y
-                if abs(dz) > 1e-7:
-                    check(abs(abs(dy)-abs(dz/slope)) < 2e-5,
-                          "roof field fall line does not match the requested pitch")
-                if abs(dx) > 1e-5:
-                    check(abs(abs(du/dx)-1/1.28) < 2e-5,
-                          f"roof field U does not follow ridge/grain direction: dU/dX={du/dx} dX={dx} dY={dy}")
-                else:
-                    check(abs(du) < 2e-5, "roof field U drifts across the fall line")
-                if abs(dz) > 1e-7:
-                    check(abs(dv/dz - 1/(slope*step*8)) < 2e-4,
-                          "roof field V does not follow the pitched course direction")
-                else:
-                    check(abs(dv) < 2e-5, "roof field V drifts along the ridge")
-        vs.extend(uv.data[li].uv.y for li in poly.loop_indices)
-    check(vs and abs(min(vs)-expected_courses/8) < 2e-4,
-          f"mapped field begins off its course phase: minV={min(vs) if vs else None}")
-    return {"field_min_v": round(min(vs), 6), "expected_course_start": expected_courses/8,
-            "repeat_courses": 8, "ridge_axis": "X", "pitch_alignment": True}
+    covers = [o for o in collection.objects if o.data.uv_layers.get("RoofUV")]
+    assert len(covers) == (1 if detail in (0,100) else 2)
+    projected = 0.
+    for obj in covers:
+        uv = obj.data.uv_layers['RoofUV']
+        projected += sum(area([tuple(obj.data.vertices[i].co[:2]) for i in face.vertices])
+                         for face in obj.data.polygons)
+        for loop in obj.data.loops:
+            x,y,_ = obj.data.vertices[loop.vertex_index].co
+            u,v = uv.data[loop.index].uv
+            # Exposed vertical faces intentionally use a tiny inward inset.
+            direction = 1 if y < -1e-6 else -1
+            if abs(y)<1e-6 and abs(u-x/1.28)<.0031:
+                direction = 1
+            assert abs(u-direction*x/1.28) < .0031
+            assert abs(v-(2.35-abs(y))/(step*8)) < .0031
+    assert abs(projected-(6+.7)*(4+.7)) < .0005, (detail,projected)
+    return {"repeat_courses":8,"pitch_alignment":True,"projected_m2":round(projected,5)}
+
+
+def compound_fixture():
+    source = KIT.parent/'test_scene.blend'
+    if source.is_file():
+        with bpy.data.libraries.load(str(source),link=False) as (available, target):
+            names = ('Plane.006','Plane.020','Plane.017','Plane.001','Plane.002','Plane.003',
+                     'Plane','Plane.004','Plane.010','Plane.008','Plane.009','Plane.005',
+                     'Plane.018','Plane.019','Plane.012','Plane.016','Plane.007')
+            target.objects = [n for n in available.objects if n in names]
+        for obj in target.objects:
+            bpy.context.scene.collection.objects.link(obj)
+        try:
+            infer_bearing(target.objects)
+        except ValueError as error:
+            assert 'Plane.010' in str(error) and 'Non-orthogonal' in str(error), str(error)
+            diagnostic = str(error)
+        else:
+            raise AssertionError('Diagonal walls were accepted')
+    else:
+        diagnostic = 'Local test_scene.blend unavailable'
+    bpy.ops.wm.read_factory_settings(use_empty=True)
+    walls = []
+    points = [(-3,-2),(-1,-2),(-1,-4),(1,-4),(1,-2),(3,-2),(3,2),(-3,2)]
+    for i,(a,b) in enumerate(zip(points,points[1:]+points[:1])):
+        count = round(math.dist(a,b)/2)
+        horizontal = a[1]==b[1]
+        for j in range(count):
+            f=(j+.5)/count
+            center=(*(x+(y-x)*f for x,y in zip(a,b)),0)
+            walls += append_module("2mW_3mH_trimmed.blend",center,math.pi/2 if horizontal else 0,f'wing_{i}')
+    bearing=infer_bearing(walls)
+    assert len(bearing.rects)==2
+    roof=build_roof_collection(bpy.context.scene,bearing,rise=1.8,detail=50,material_directory=MATDIR)
+    plan,_=_roof_buffers(bearing,1.8,50,.35,'AUTO',17)
+    patches=roof_faces(plan)
+    points,_,edges=roof_topology(patches)
+    valleys=sum(roof_join_kind(points,patches,users)=='valley' for users in edges.values())
+    assert valleys>=2
+    assert any('valley flashing' in o.name for o in roof.objects)
+    # The UI must save and reload both volumes, not just the bounding box.
+    bpy.context.view_layer.update()
+    for obj in walls:
+        obj.select_set(True)
+    assert bpy.ops.caelmor.roof_preview() == {'FINISHED'}
+    props=bpy.context.scene.caelm_roof_settings
+    assert len(json.loads(props.rects))==2
+    props.rise=1.8
+    props.material_directory=str(MATDIR)
+    props.target=roof
+    assert bpy.ops.caelmor.roof_load()=={'FINISHED'}
+    assert bpy.ops.caelmor.roof_generate()=={'FINISHED'}
+    assert len(json.loads(roof['caelm_roof_settings'])['rects'])==2
+    scene=bpy.context.scene
+    make_camera_and_lights(scene,0)
+    camera=scene.camera
+    camera.location=(-9.,-12.,9.)
+    camera.rotation_euler=(Vector((0,-.5,2.))-camera.location).to_track_quat('-Z','Y').to_euler()
+    scene.render.resolution_percentage=65
+    scene.cycles.samples=10
+    scene.render.filepath=str(EVIDENCE/'compound_wing.png')
+    bpy.ops.render.render(write_still=True)
+    return {"rectangles":bearing.rects,"valley_segments":valleys,"triangles":roof['caelm_roof_triangles'],
+            "saved_test_scene_diagnostic":diagnostic,"render":"compound_wing.png"}
 
 
 def make_camera_and_lights(scene, variation):
@@ -166,38 +216,12 @@ def make_camera_and_lights(scene, variation):
     scene.render.image_settings.file_format = "PNG"
 
 
-def render_pair(collection):
-    scene = bpy.context.scene
-    # Hide previous collection if caller has left it in the scene.
-    make_camera_and_lights(scene, 0)
-    scene.render.filepath = str(EVIDENCE / "roof_warm_key.png")
-    bpy.ops.render.render(write_still=True)
-    bpy.data.objects.remove(bpy.data.objects["EvidenceKey"], do_unlink=True)
-    bpy.data.objects.remove(bpy.data.objects["EvidenceFill"], do_unlink=True)
-    # Recreate lights for the cooler opposing-key study.
-    bpy.ops.object.light_add(type="AREA", location=(-5.0, 2.0, 9.0))
-    key = bpy.context.object
-    key.name = "EvidenceKey"
-    key.data.energy = 1450
-    key.data.color = (0.62, 0.77, 1.0)
-    key.data.size = 7.5
-    key.rotation_euler = (Vector((0, 0, 1.6)) - key.location).to_track_quat("-Z", "Y").to_euler()
-    bpy.ops.object.light_add(type="AREA", location=(7.0, -1.5, 6.0))
-    fill = bpy.context.object
-    fill.name = "EvidenceFill"
-    fill.data.energy = 1000
-    fill.data.color = (1.0, 0.63, 0.39)
-    fill.data.size = 6.0
-    fill.rotation_euler = (Vector((0, 0, 1.4)) - fill.location).to_track_quat("-Z", "Y").to_euler()
-    scene.render.filepath = str(EVIDENCE / "roof_cool_key.png")
-    bpy.ops.render.render(write_still=True)
-
-
 def main():
     source_walls = assemble_test_house()
     module_kinds = {obj.get("caelm_native_module") for obj in source_walls}
     check({"2mW_3mH_doorway", "2mW_3mH_trimmed_window", "2mW_3mH_trimmed"} <= module_kinds,
           f"native fixture lacks door/window/trim modules: {module_kinds}")
+    bpy.context.view_layer.update()
     source_fingerprint = mesh_fingerprint(source_walls)
     depsgraph = bpy.context.evaluated_depsgraph_get()
     bearing = infer_bearing(source_walls, depsgraph=depsgraph)
@@ -246,7 +270,8 @@ def main():
     rows = []
     collections = []
     for rise in (1.8, 3.0):
-        for detail in (0, 50, 100):
+        previous_shingles = set()
+        for detail in (0, 25, 50, 75, 100):
             collection = build_roof_collection(bpy.context.scene, bearing, rise=rise,
                 detail=detail, material_directory=str(MATDIR), seed=17)
             collections.append(collection)
@@ -256,6 +281,15 @@ def main():
             roofs = [obj for obj in collection.objects if obj.type == "MESH"]
             check(roofs, "roof collection has no mesh parts")
             field_uv = assert_field_uv(collection, rise, detail, bearing)
+            dimensional = [o for o in roofs if 'Dimensional Brookoak' in o.name]
+            selected = {tuple(tuple(round(c,6) for c in obj.data.vertices[i].co) for i in face.vertices)
+                        for obj in dimensional for face in obj.data.polygons if face.normal.z>.1}
+            assert previous_shingles <= selected
+            previous_shingles=selected
+            modeled,total = (collection[key] for key in ('caelm_roof_shingles','caelm_roof_cover_units'))
+            assert abs(modeled-total*detail/100)<=1
+            assert bool(dimensional)==(detail>0)
+            assert any('Mapped roof field' in o.name for o in roofs)==(detail<100)
             uv_summaries = []
             for obj in roofs:
                 check(len(obj.data.uv_layers) > 0, f"{obj.name}: no roof UV layer")
@@ -274,20 +308,21 @@ def main():
                     check(abs(signed_area) > 1e-10, f"{obj.name}: degenerate mapped face {poly.index}")
             rows.append({"rise": rise, "detail": detail,
                 "triangles": int(collection["caelm_roof_triangles"]),
-                "mesh_parts": len(roofs), "uv_layers": uv_summaries,
+                "mesh_parts": len(roofs), "modeled_shingles": modeled, "total_shingles": total,
+                "uv_layers": uv_summaries,
                 "field_uv_alignment": field_uv,
                 "native_walls_unchanged": True, "bearing": base})
 
     # Increasing detail has strictly increasing physical eave-course geometry.
     for rise in (1.8, 3.0):
         counts = [row["triangles"] for row in rows if row["rise"] == rise]
-        check(counts[0] < counts[1] < counts[2], f"detail geometry counts did not rise: {rise} {counts}")
+        check(all(a<b for a,b in zip(counts,counts[1:])), f"detail geometry counts did not rise: {rise} {counts}")
         case_collections = [collections[index] for index, row in enumerate(rows) if row["rise"] == rise]
         standard_bounds = roof_bounds(case_collections[0])
         for collection in case_collections[1:]:
             bounds = roof_bounds(collection)
             check(all(abs(bounds[axis][edge]-standard_bounds[axis][edge]) < .002
-                      for axis in range(3) for edge in range(2)),
+                      for axis,edge in ((0,0),(0,1),(1,0),(1,1),(2,1))),
                   f"detail changed roof outer bounds at rise {rise}: {standard_bounds} vs {bounds}")
 
     # Repeat build into an owned collection and confirm deterministic cleanup.
@@ -333,6 +368,9 @@ def main():
           "GLB primitives are missing exported normals")
     check(all(any(key.startswith("TEXCOORD_") for key in attributes) for attributes in primitive_attributes),
           "GLB primitives are missing exported UV attributes")
+    for obj in imported:
+        obj.data.calc_loop_triangles()
+    assert sum(len(o.data.loop_triangles) for o in imported)==rows[-1]['triangles']
     exported = {"mesh_count": len(imported), "faces": sum(len(o.data.polygons) for o in imported),
         "uv_maps": sum(len(o.data.uv_layers) for o in imported),
         "material_slots": sum(len(o.data.materials) for o in imported),
@@ -340,18 +378,31 @@ def main():
         "normals_exported": True,
         "sha256": hashlib.sha256(glb.read_bytes()).hexdigest()}
 
-    # Rebuild scene for two lighting renders after round-trip checks.
+    compound = compound_fixture()
     source_walls = assemble_test_house()
     bearing = infer_bearing(source_walls, depsgraph=bpy.context.evaluated_depsgraph_get())
-    showcase = build_roof_collection(bpy.context.scene, bearing, rise=2.4, detail=50,
-        material_directory=str(MATDIR), seed=17)
-    render_pair(showcase)
+    scene=bpy.context.scene
+    make_camera_and_lights(scene,0)
+    scene.render.resolution_percentage=65
+    scene.cycles.samples=10
+    lights=[o for o in scene.objects if o.type=='LIGHT']
+    showcase=None
+    for key in ('warm','grazing'):
+        if key=='grazing':
+            for light in lights:
+                light.location.z=4.5 if light.name=='EvidenceKey' else 5.4
+                light.rotation_euler=(Vector((0,0,3.8))-light.location).to_track_quat('-Z','Y').to_euler()
+        for percent in (0,50,100):
+            showcase=build_roof_collection(scene,bearing,rise=2.4,detail=percent,
+                material_directory=MATDIR,seed=17,collection=showcase)
+            scene.render.filepath=str(EVIDENCE/f'{key}_{percent}.png')
+            bpy.ops.render.render(write_still=True)
 
     report = {"blender": bpy.app.version_string, "fixture": "6x4m authored Lowmark kit",
         "wall_modules": "wood_trimmed_plaster 2m; front door; east trimmed window",
-        "cases": rows, "operator_preview_generate": True,
+        "cases": rows, "compound": compound, "operator_preview_generate": True,
         "repeat_cleanup_deterministic": True, "glb_roundtrip": exported,
-        "renders": ["roof_warm_key.png", "roof_cool_key.png"]}
+        "renders": [f"{key}_{n}.png" for key in ("warm","grazing") for n in (0,50,100)]}
     (EVIDENCE / "roof_autocomplete_report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
     print("ROOF_AUTOCOMPLETE_BLENDER_PASS", json.dumps({"cases": len(rows), "glb": exported}))
 

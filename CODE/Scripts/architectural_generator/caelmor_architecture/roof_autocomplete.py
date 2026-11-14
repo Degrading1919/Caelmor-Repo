@@ -1,4 +1,5 @@
 """Blender authoring for a detached roof over a confirmed modular wall bearing."""
+from hashlib import sha256
 import json
 import math
 from pathlib import Path
@@ -9,76 +10,71 @@ from mathutils import Matrix, Vector
 
 from .blender_backend import _export_selection, _mesh_object, _remove_object
 from .construction import Resolver
-from .geometry import MeshBuffer, clip
-from .model import Plan, Settings
-from .roof import build_roof, shingle_step
+from .brookoak_courses import ALBEDO_SHA256, cover_buffers
+from .geometry import MeshBuffer
+from .model import Plan, Settings, rectangle_union_outline
+from .roof import _line_span, build_roof, roof_faces
 from .roof_selection import Bearing, infer_bearing
 
 
 PREVIEW = 'caelm_roof_bearing_preview'
 ROOF = 'caelm_autocomplete_roof'
-MATERIALS = {'BROOKOAK': ('Brookoak Shingles', 'Lowmark_Brookoak_RoofShingles', 8)}
-EXPOSURE = .30
-REPEAT_U = 1.28
+MATERIALS = {'BROOKOAK': ('Brookoak Shingles', 'Lowmark_Brookoak_RoofShingles')}
 
 
-def _mapped_field(buffer, plan, patches, cover, clearances):
-    for index, patch in enumerate(patches):
-        axis = 0 if abs(patch.plane[0]) > abs(patch.plane[1]) else 1
-        direction = 1 if patch.plane[axis] > 0 else -1
-        rect = plan.rects[patch.source]
-        eave = rect[axis] - plan.settings.overhang if direction > 0 else rect[axis+2]+plan.settings.overhang
-        start = plan.modeled_eave_courses * shingle_step(plan)
-        a, b = (direction, 0) if axis == 0 else (0, direction)
-        poly = clip(patch.poly, a, b, -direction*eave-start, bounded=True)
-        for a, b, c in clearances[index]:
-            poly = clip(poly, a, b, c, bounded=True)
-        if poly:
-            # Pick the U sign so U cross upslope V points to the outer face.
-            u_sign = direction if axis == 1 else -direction
-            uv = [(u_sign*p[1-axis]/REPEAT_U,
-                   direction*(p[axis]-eave)/(shingle_step(plan)*plan.repeat_courses))
-                  for p in poly]
-            buffer.mapped_face([(x,y,patch.height(x,y)+.031) for x,y in poly], uv)
-
-
-def _roof_buffers(bearing, rise, detail, overhang, ridge, seed, repeat_courses):
+def _roof_buffers(bearing, rise, detail, overhang, ridge, seed):
     values = (*bearing.center, bearing.width, bearing.depth, bearing.angle, rise, overhang)
     if not all(math.isfinite(v) for v in values) or not 1 <= min(bearing.width,bearing.depth) <= max(bearing.width,bearing.depth) <= 40:
         raise ValueError('Use a finite bearing rectangle with sides between 1 and 40 m')
     if not 0 <= detail <= 100 or not .15 <= overhang <= .8 or ridge not in ('AUTO','X','Y'):
         raise ValueError('Check detail, ridge axis and overhang (0.15–0.8 m)')
+    ridge_setting = ridge
     if ridge == 'AUTO':
         ridge = 'X' if bearing.width >= bearing.depth - .0001 else 'Y'
     x, y = bearing.width/2, bearing.depth/2
-    run = y if ridge == 'X' else x
-    pitch = math.degrees(math.atan2(rise,run))
-    if not 15 <= pitch <= 65:
-        raise ValueError(f'Roof rise gives a {pitch:.1f}° pitch. Use 15–65° for this span')
     overrides = {'by_role': {'roof_cover': {'representation': 'HYBRID'}}}
     settings = Settings(seed=seed, detail='HIGH', geometry_mode='EFFICIENT', roof_style='GABLE',
-                        overhang=overhang, pitch=pitch, construction_overrides=overrides)
-    plan = Plan(settings,[(-x,-y,x,y,ridge)])
+                        overhang=overhang, construction_overrides=overrides)
+    rects = list(bearing.rects) if bearing.rects else [(-x,-y,x,y,ridge)]
+    if bearing.rects and ridge_setting != 'AUTO' and ridge != rects[0][4]:
+        raise ValueError('Use the inferred ridge direction for a connected wing')
+    plan = Plan(settings,rects)
+    # Rise is specified for the main volume. The same pitch applies to the
+    # wing, whose ridge elevation follows from its own horizontal run.
+    main = rects[0]
+    run = (main[3]-main[1])/2 if main[4]=='X' else (main[2]-main[0])/2
+    pitch = math.degrees(math.atan2(rise,run))
+    if not 15 <= pitch <= 65:
+        raise ValueError(f'Roof rise gives a {pitch:.1f}° pitch. Use 15–65° for the main span')
+    plan.slope = rise/run
+    plan.settings.pitch = pitch
     plan.eave = .12  # Deck underside bears on the wall datum.
     plan.construction_resolver = Resolver(overrides, 'LOWMARK')
     plan.construction_zone = 'autocomplete'
-    plan.roof_course_exposure = EXPOSURE
-    plan.modeled_eave_courses = 1+int(detail >= 34)+2*int(detail >= 67)
-    slope_length = (run+overhang)*math.sqrt(1+plan.slope**2)
-    if slope_length < (plan.modeled_eave_courses+1)*EXPOSURE:
-        raise ValueError('This span is too short for the selected number of eave courses. Lower Geometry Detail.')
-    plan.repeat_courses = repeat_courses
-    plan.roof_field_builder = _mapped_field
+    plan.cover_percent = detail
+    plan.roof_cover_builder = cover_buffers
     buffers = build_roof(plan)
     infill = MeshBuffer('Gable infill', 'timber_light', 'roof')
-    for end in (-1, 1):
-        if ridge == 'X':
-            section = [(end*x,-y,0), (end*x,y,0), (end*x,0,rise)]
-            direction = (-end*.13,0,0)
-        else:
-            section = [(-x,end*y,0), (x,end*y,0), (0,end*y,rise)]
-            direction = (0,-end*.13,0)
-        infill.extrude(section, direction)
+    patches = roof_faces(plan)
+    for start,end in plan.edges:
+        axis = 0 if abs(start[0]-end[0])<1e-7 else 1
+        along = 1-axis
+        delta = end[along]-start[along]
+        direction = ((-.13*math.copysign(1,delta),0,0) if axis==0
+                     else (0,.13*math.copysign(1,delta),0))
+        lo,hi = sorted((start[along],end[along]))
+        for patch in patches:
+            span = _line_span(patch.poly,axis,start[axis])
+            if span is None:
+                continue
+            a,b = max(lo,span[0]),min(hi,span[1])
+            if b-a < 1e-7:
+                continue
+            pa,pb = list(start),list(start)
+            pa[along],pb[along] = a,b
+            za,zb = max(0,patch.height(*pa)-.12),max(0,patch.height(*pb)-.12)
+            if max(za,zb) > 1e-6:
+                infill.extrude([(*pa,0),(*pb,0),(*pb,zb),(*pa,za)],direction)
     return plan, buffers+[infill]
 
 
@@ -143,14 +139,16 @@ def build_roof_collection(scene,bearing,*,rise,detail,material_directory,seed=17
     if collection is not None and (not collection.get(ROOF) or collection not in list(scene.collection.children)):
         raise ValueError('Select a Roof AutoComplete collection linked to this scene')
     try:
-        _, stem, courses = MATERIALS[material]
+        _, stem = MATERIALS[material]
     except KeyError as error:
         raise ValueError('Unsupported roof material') from error
     directory = Path(bpy.path.abspath(str(material_directory))).resolve()
     paths = [directory / (stem+suffix) for suffix in ('_albedo.png','_normal.png','_rough.exr')]
     if not all(path.is_file() for path in paths):
         raise ValueError('Select the procedurally_generated folder containing the three Brookoak maps')
-    plan,buffers = _roof_buffers(bearing,rise,detail,overhang,ridge,seed,courses)
+    if sha256(paths[0].read_bytes()).hexdigest() != ALBEDO_SHA256:
+        raise ValueError("Brookoak albedo differs from the registered course layout. Select the approved export set.")
+    plan,buffers = _roof_buffers(bearing,rise,detail,overhang,ridge,seed)
     field = _field_material(paths)
     stage = []
     build_id = uuid.uuid4().hex
@@ -185,8 +183,10 @@ def build_roof_collection(scene,bearing,*,rise,detail,material_directory,seed=17
         raise
     collection[ROOF] = True
     collection['caelm_roof_triangles'] = triangles
+    collection['caelm_roof_shingles'] = plan.modeled_units
+    collection['caelm_roof_cover_units'] = plan.cover_units
     collection['caelm_roof_settings'] = json.dumps(dict(
-        center=list(bearing.center),width=bearing.width,depth=bearing.depth,angle=bearing.angle,
+        center=list(bearing.center),width=bearing.width,depth=bearing.depth,angle=bearing.angle,rects=list(bearing.rects),
         rise=rise,detail=detail,seed=seed,overhang=overhang,ridge=ridge,material=material,
         material_directory=str(directory)),sort_keys=True)
     return collection
@@ -200,7 +200,12 @@ def export_roof(collection, filepath):
 
 
 def _bearing(props):
-    return Bearing(tuple(props.center),props.width,props.depth,props.angle)
+    rects = json.loads(props.rects)
+    if rects:
+        sx = props.width/(max(r[2] for r in rects)-min(r[0] for r in rects))
+        sy = props.depth/(max(r[3] for r in rects)-min(r[1] for r in rects))
+        rects = [(a*sx,b*sy,c*sx,d*sy,axis) for a,b,c,d,axis in rects]
+    return Bearing(tuple(props.center),props.width,props.depth,props.angle,tuple(rects))
 
 
 def _target_changed(props, context):
@@ -216,12 +221,13 @@ def _preview(scene, props):
     rotation = Matrix.Rotation(bearing.angle,3,'Z')
     center = Vector(bearing.center)
     x,y = bearing.width/2,bearing.depth/2
-    vertices = [center + rotation @ Vector((a,b,.012)) for a,b in ((-x,-y),(x,-y),(x,y),(-x,y))]
+    outline = rectangle_union_outline(bearing.rects) if bearing.rects else ((-x,-y),(x,-y),(x,y),(-x,y))
+    vertices = [center + rotation @ Vector((a,b,.012)) for a,b in outline]
     for obj in list(scene.objects):
         if obj.get(PREVIEW):
             _remove_object(obj)
     mesh = bpy.data.meshes.new('Roof Bearing Outline')
-    mesh.from_pydata(vertices,[(0,1),(1,2),(2,3),(3,0)],[])
+    mesh.from_pydata(vertices,[(i,(i+1)%len(vertices)) for i in range(len(vertices))],[])
     obj = bpy.data.objects.new('Roof Bearing Outline',mesh)
     scene.collection.objects.link(obj)
     obj[PREVIEW] = True
@@ -235,11 +241,12 @@ class RoofSettings(bpy.types.PropertyGroup):
     width: bpy.props.FloatProperty(name='Width',min=1,max=40,default=6,unit='LENGTH',update=_bearing_changed)
     depth: bpy.props.FloatProperty(name='Depth',min=1,max=40,default=4,unit='LENGTH',update=_bearing_changed)
     angle: bpy.props.FloatProperty(name='Bearing Rotation',subtype='ANGLE',update=_bearing_changed)
+    rects: bpy.props.StringProperty(default='[]')
     ready: bpy.props.BoolProperty(default=False)
     rise: bpy.props.FloatProperty(name='Roof Height',description='Ridge rise above the wall bearing, excluding cover thickness',
                                   min=.1,max=30,default=2,unit='LENGTH')
     detail: bpy.props.IntProperty(name='Geometry Detail',subtype='PERCENTAGE',min=0,max=100,default=50,
-                                  description='0–33: one modeled eave course; 34–66: two; 67–100: up to four')
+                                  description='Percentage of shingles modeled across each roof slope')
     material: bpy.props.EnumProperty(name='Roof Material',items=[
         (key,record[0],'') for key,record in MATERIALS.items()])
     material_directory: bpy.props.StringProperty(name='PBR Map Folder',subtype='DIR_PATH',
@@ -266,6 +273,7 @@ class CAELMOR_OT_roof_preview(bpy.types.Operator):
             if self.infer:
                 b = infer_bearing(context.selected_objects,context.evaluated_depsgraph_get())
                 props.center,props.width,props.depth,props.angle = b.center,b.width,b.depth,b.angle
+                props.rects = json.dumps(b.rects)
                 props.target = None
             _preview(context.scene,props)
             props.ready = True
@@ -286,7 +294,9 @@ class CAELMOR_OT_roof_load(bpy.types.Operator):
         props = context.scene.caelm_roof_settings
         if not props.target:
             return {'CANCELLED'}
-        for key,value in json.loads(props.target['caelm_roof_settings']).items():
+        settings = json.loads(props.target['caelm_roof_settings'])
+        props.rects = json.dumps(settings.pop('rects', []))
+        for key,value in settings.items():
             setattr(props,key,value)
         _preview(context.scene,props)
         props.ready = True
@@ -364,10 +374,13 @@ class CAELMOR_PT_roof(bpy.types.Panel):
             correction = layout.operator('caelmor.roof_preview',text='Preview Manual Bearing')
             correction.infer = False
         if props.ready:
-            layout.label(text=f'Bearing {props.width:.2f} × {props.depth:.2f} m at Z {props.center.z:.2f} m')
+            shape = 'Main + wing' if props.rects != '[]' else 'Rectangle'
+            layout.label(text=f'{shape} {props.width:.2f} × {props.depth:.2f} m at Z {props.center.z:.2f} m')
             layout.operator('caelmor.roof_generate',icon='MOD_BUILD')
         if props.target:
             layout.label(text=f"{props.target.get('caelm_roof_triangles',0):,} generated triangles")
+            layout.label(text=f"{props.target.get('caelm_roof_shingles',0):,} / "
+                              f"{props.target.get('caelm_roof_cover_units',0):,} modeled shingles")
             layout.operator('caelmor.roof_export',icon='EXPORT')
 
 

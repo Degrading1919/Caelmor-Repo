@@ -6,8 +6,10 @@
     {
       "rise": 1.8,
       "detail": 0,
-      "triangles": 1413,
-      "mesh_parts": 11,
+      "triangles": 1096,
+      "mesh_parts": 7,
+      "modeled_shingles": 0,
+      "total_shingles": 568,
       "uv_layers": [
         [
           "Continuous roof deck.001",
@@ -20,29 +22,9 @@
           8
         ],
         [
-          "Concealed roof course bedding.001",
-          "UV0_Metric",
-          8
-        ],
-        [
           "Mapped roof field.001",
           "RoofUV",
           8
-        ],
-        [
-          "Split oak shingle courses.001",
-          "UV0_Metric",
-          473
-        ],
-        [
-          "Seasoned shingle cohorts.001",
-          "UV0_Metric",
-          84
-        ],
-        [
-          "Exposed shingle butts.001",
-          "UV0_Metric",
-          82
         ],
         [
           "Overlapping ridge caps.001",
@@ -62,15 +44,13 @@
         [
           "Gable infill.001",
           "UV0_Metric",
-          36
+          72
         ]
       ],
       "field_uv_alignment": {
-        "field_min_v": 0.125,
-        "expected_course_start": 0.125,
         "repeat_courses": 8,
-        "ridge_axis": "X",
-        "pitch_alignment": true
+        "pitch_alignment": true,
+        "projected_m2": 31.49001
       },
       "native_walls_unchanged": true,
       "bearing": {
@@ -86,9 +66,11 @@
     },
     {
       "rise": 1.8,
-      "detail": 50,
-      "triangles": 1695,
-      "mesh_parts": 11,
+      "detail": 25,
+      "triangles": 2222,
+      "mesh_parts": 8,
+      "modeled_shingles": 142,
+      "total_shingles": 568,
       "uv_layers": [
         [
           "Continuous roof deck.002",
@@ -101,29 +83,14 @@
           8
         ],
         [
-          "Concealed roof course bedding.002",
-          "UV0_Metric",
-          8
-        ],
-        [
           "Mapped roof field.002",
           "RoofUV",
-          8
+          524
         ],
         [
-          "Split oak shingle courses.002",
-          "UV0_Metric",
-          856
-        ],
-        [
-          "Seasoned shingle cohorts.002",
-          "UV0_Metric",
-          172
-        ],
-        [
-          "Exposed shingle butts.002",
-          "UV0_Metric",
-          169
+          "Dimensional Brookoak shingles.001",
+          "RoofUV",
+          1940
         ],
         [
           "Overlapping ridge caps.002",
@@ -143,15 +110,13 @@
         [
           "Gable infill.002",
           "UV0_Metric",
-          36
+          72
         ]
       ],
       "field_uv_alignment": {
-        "field_min_v": 0.25,
-        "expected_course_start": 0.25,
         "repeat_courses": 8,
-        "ridge_axis": "X",
-        "pitch_alignment": true
+        "pitch_alignment": true,
+        "projected_m2": 31.49001
       },
       "native_walls_unchanged": true,
       "bearing": {
@@ -167,9 +132,11 @@
     },
     {
       "rise": 1.8,
-      "detail": 100,
-      "triangles": 2318,
-      "mesh_parts": 11,
+      "detail": 50,
+      "triangles": 2960,
+      "mesh_parts": 8,
+      "modeled_shingles": 284,
+      "total_shingles": 568,
       "uv_layers": [
         [
           "Continuous roof deck.003",
@@ -182,29 +149,14 @@
           8
         ],
         [
-          "Concealed roof course bedding.003",
-          "UV0_Metric",
-          8
-        ],
-        [
           "Mapped roof field.003",
           "RoofUV",
-          8
+          640
         ],
         [
-          "Split oak shingle courses.003",
-          "UV0_Metric",
-          1748
-        ],
-        [
-          "Seasoned shingle cohorts.003",
-          "UV0_Metric",
-          390
-        ],
-        [
-          "Exposed shingle butts.003",
-          "UV0_Metric",
-          278
+          "Dimensional Brookoak shingles.002",
+          "RoofUV",
+          3368
         ],
         [
           "Overlapping ridge caps.003",
@@ -224,15 +176,13 @@
         [
           "Gable infill.003",
           "UV0_Metric",
-          36
+          72
         ]
       ],
       "field_uv_alignment": {
-        "field_min_v": 0.5,
-        "expected_course_start": 0.5,
         "repeat_courses": 8,
-        "ridge_axis": "X",
-        "pitch_alignment": true
+        "pitch_alignment": true,
+        "projected_m2": 31.49001
       },
       "native_walls_unchanged": true,
       "bearing": {
@@ -247,10 +197,12 @@
       }
     },
     {
-      "rise": 3.0,
-      "detail": 0,
-      "triangles": 1416,
-      "mesh_parts": 11,
+      "rise": 1.8,
+      "detail": 75,
+      "triangles": 3414,
+      "mesh_parts": 8,
+      "modeled_shingles": 426,
+      "total_shingles": 568,
       "uv_layers": [
         [
           "Continuous roof deck.004",
@@ -263,29 +215,14 @@
           8
         ],
         [
-          "Concealed roof course bedding.004",
-          "UV0_Metric",
-          8
-        ],
-        [
           "Mapped roof field.004",
           "RoofUV",
-          8
+          484
         ],
         [
-          "Split oak shingle courses.004",
-          "UV0_Metric",
-          478
-        ],
-        [
-          "Seasoned shingle cohorts.004",
-          "UV0_Metric",
-          84
-        ],
-        [
-          "Exposed shingle butts.004",
-          "UV0_Metric",
-          82
+          "Dimensional Brookoak shingles.003",
+          "RoofUV",
+          4388
         ],
         [
           "Overlapping ridge caps.004",
@@ -305,15 +242,13 @@
         [
           "Gable infill.004",
           "UV0_Metric",
-          36
+          72
         ]
       ],
       "field_uv_alignment": {
-        "field_min_v": 0.125,
-        "expected_course_start": 0.125,
         "repeat_courses": 8,
-        "ridge_axis": "X",
-        "pitch_alignment": true
+        "pitch_alignment": true,
+        "projected_m2": 31.49001
       },
       "native_walls_unchanged": true,
       "bearing": {
@@ -328,10 +263,12 @@
       }
     },
     {
-      "rise": 3.0,
-      "detail": 50,
-      "triangles": 1696,
-      "mesh_parts": 11,
+      "rise": 1.8,
+      "detail": 100,
+      "triangles": 3540,
+      "mesh_parts": 7,
+      "modeled_shingles": 568,
+      "total_shingles": 568,
       "uv_layers": [
         [
           "Continuous roof deck.005",
@@ -344,29 +281,9 @@
           8
         ],
         [
-          "Concealed roof course bedding.005",
-          "UV0_Metric",
-          8
-        ],
-        [
-          "Mapped roof field.005",
+          "Dimensional Brookoak shingles.004",
           "RoofUV",
-          8
-        ],
-        [
-          "Split oak shingle courses.005",
-          "UV0_Metric",
-          861
-        ],
-        [
-          "Seasoned shingle cohorts.005",
-          "UV0_Metric",
-          172
-        ],
-        [
-          "Exposed shingle butts.005",
-          "UV0_Metric",
-          165
+          4936
         ],
         [
           "Overlapping ridge caps.005",
@@ -386,15 +303,13 @@
         [
           "Gable infill.005",
           "UV0_Metric",
-          36
+          72
         ]
       ],
       "field_uv_alignment": {
-        "field_min_v": 0.25,
-        "expected_course_start": 0.25,
         "repeat_courses": 8,
-        "ridge_axis": "X",
-        "pitch_alignment": true
+        "pitch_alignment": true,
+        "projected_m2": 31.49001
       },
       "native_walls_unchanged": true,
       "bearing": {
@@ -410,9 +325,11 @@
     },
     {
       "rise": 3.0,
-      "detail": 100,
-      "triangles": 2309,
-      "mesh_parts": 11,
+      "detail": 0,
+      "triangles": 1096,
+      "mesh_parts": 7,
+      "modeled_shingles": 0,
+      "total_shingles": 776,
       "uv_layers": [
         [
           "Continuous roof deck.006",
@@ -425,29 +342,9 @@
           8
         ],
         [
-          "Concealed roof course bedding.006",
-          "UV0_Metric",
-          8
-        ],
-        [
-          "Mapped roof field.006",
+          "Mapped roof field.005",
           "RoofUV",
           8
-        ],
-        [
-          "Split oak shingle courses.006",
-          "UV0_Metric",
-          1741
-        ],
-        [
-          "Seasoned shingle cohorts.006",
-          "UV0_Metric",
-          382
-        ],
-        [
-          "Exposed shingle butts.006",
-          "UV0_Metric",
-          274
         ],
         [
           "Overlapping ridge caps.006",
@@ -467,15 +364,272 @@
         [
           "Gable infill.006",
           "UV0_Metric",
-          36
+          72
         ]
       ],
       "field_uv_alignment": {
-        "field_min_v": 0.5,
-        "expected_course_start": 0.5,
         "repeat_courses": 8,
-        "ridge_axis": "X",
-        "pitch_alignment": true
+        "pitch_alignment": true,
+        "projected_m2": 31.49001
+      },
+      "native_walls_unchanged": true,
+      "bearing": {
+        "center": [
+          0.0,
+          0.0,
+          2.99264
+        ],
+        "width": 6.0,
+        "depth": 4.0,
+        "angle": -0.0
+      }
+    },
+    {
+      "rise": 3.0,
+      "detail": 25,
+      "triangles": 2582,
+      "mesh_parts": 8,
+      "modeled_shingles": 194,
+      "total_shingles": 776,
+      "uv_layers": [
+        [
+          "Continuous roof deck.007",
+          "UV0_Metric",
+          384
+        ],
+        [
+          "Roof underlay.007",
+          "UV0_Metric",
+          8
+        ],
+        [
+          "Mapped roof field.006",
+          "RoofUV",
+          704
+        ],
+        [
+          "Dimensional Brookoak shingles.005",
+          "RoofUV",
+          2570
+        ],
+        [
+          "Overlapping ridge caps.007",
+          "UV0_Metric",
+          864
+        ],
+        [
+          "Roof edge fascia.007",
+          "UV0_Metric",
+          288
+        ],
+        [
+          "Supported roof rafters.007",
+          "UV0_Metric",
+          528
+        ],
+        [
+          "Gable infill.007",
+          "UV0_Metric",
+          72
+        ]
+      ],
+      "field_uv_alignment": {
+        "repeat_courses": 8,
+        "pitch_alignment": true,
+        "projected_m2": 31.49001
+      },
+      "native_walls_unchanged": true,
+      "bearing": {
+        "center": [
+          0.0,
+          0.0,
+          2.99264
+        ],
+        "width": 6.0,
+        "depth": 4.0,
+        "angle": -0.0
+      }
+    },
+    {
+      "rise": 3.0,
+      "detail": 50,
+      "triangles": 3578,
+      "mesh_parts": 8,
+      "modeled_shingles": 388,
+      "total_shingles": 776,
+      "uv_layers": [
+        [
+          "Continuous roof deck.008",
+          "UV0_Metric",
+          384
+        ],
+        [
+          "Roof underlay.008",
+          "UV0_Metric",
+          8
+        ],
+        [
+          "Mapped roof field.007",
+          "RoofUV",
+          876
+        ],
+        [
+          "Dimensional Brookoak shingles.006",
+          "RoofUV",
+          4488
+        ],
+        [
+          "Overlapping ridge caps.008",
+          "UV0_Metric",
+          864
+        ],
+        [
+          "Roof edge fascia.008",
+          "UV0_Metric",
+          288
+        ],
+        [
+          "Supported roof rafters.008",
+          "UV0_Metric",
+          528
+        ],
+        [
+          "Gable infill.008",
+          "UV0_Metric",
+          72
+        ]
+      ],
+      "field_uv_alignment": {
+        "repeat_courses": 8,
+        "pitch_alignment": true,
+        "projected_m2": 31.49001
+      },
+      "native_walls_unchanged": true,
+      "bearing": {
+        "center": [
+          0.0,
+          0.0,
+          2.99264
+        ],
+        "width": 6.0,
+        "depth": 4.0,
+        "angle": -0.0
+      }
+    },
+    {
+      "rise": 3.0,
+      "detail": 75,
+      "triangles": 4190,
+      "mesh_parts": 8,
+      "modeled_shingles": 582,
+      "total_shingles": 776,
+      "uv_layers": [
+        [
+          "Continuous roof deck.009",
+          "UV0_Metric",
+          384
+        ],
+        [
+          "Roof underlay.009",
+          "UV0_Metric",
+          8
+        ],
+        [
+          "Mapped roof field.008",
+          "RoofUV",
+          664
+        ],
+        [
+          "Dimensional Brookoak shingles.007",
+          "RoofUV",
+          5858
+        ],
+        [
+          "Overlapping ridge caps.009",
+          "UV0_Metric",
+          864
+        ],
+        [
+          "Roof edge fascia.009",
+          "UV0_Metric",
+          288
+        ],
+        [
+          "Supported roof rafters.009",
+          "UV0_Metric",
+          528
+        ],
+        [
+          "Gable infill.009",
+          "UV0_Metric",
+          72
+        ]
+      ],
+      "field_uv_alignment": {
+        "repeat_courses": 8,
+        "pitch_alignment": true,
+        "projected_m2": 31.49001
+      },
+      "native_walls_unchanged": true,
+      "bearing": {
+        "center": [
+          0.0,
+          0.0,
+          2.99264
+        ],
+        "width": 6.0,
+        "depth": 4.0,
+        "angle": -0.0
+      }
+    },
+    {
+      "rise": 3.0,
+      "detail": 100,
+      "triangles": 4348,
+      "mesh_parts": 7,
+      "modeled_shingles": 776,
+      "total_shingles": 776,
+      "uv_layers": [
+        [
+          "Continuous roof deck.010",
+          "UV0_Metric",
+          384
+        ],
+        [
+          "Roof underlay.010",
+          "UV0_Metric",
+          8
+        ],
+        [
+          "Dimensional Brookoak shingles.008",
+          "RoofUV",
+          6568
+        ],
+        [
+          "Overlapping ridge caps.010",
+          "UV0_Metric",
+          864
+        ],
+        [
+          "Roof edge fascia.010",
+          "UV0_Metric",
+          288
+        ],
+        [
+          "Supported roof rafters.010",
+          "UV0_Metric",
+          528
+        ],
+        [
+          "Gable infill.010",
+          "UV0_Metric",
+          72
+        ]
+      ],
+      "field_uv_alignment": {
+        "repeat_courses": 8,
+        "pitch_alignment": true,
+        "projected_m2": 31.49001
       },
       "native_walls_unchanged": true,
       "bearing": {
@@ -490,23 +644,49 @@
       }
     }
   ],
+  "compound": {
+    "rectangles": [
+      [
+        -2.9999999999999853,
+        -1.0000001092751776,
+        2.9999999999999853,
+        2.999999890724803,
+        "X"
+      ],
+      [
+        -0.9999997019767684,
+        -3.000000089406954,
+        1.0000002980232219,
+        0.9999998907248127,
+        "Y"
+      ]
+    ],
+    "valley_segments": 2,
+    "triangles": 5008,
+    "saved_test_scene_diagnostic": "Non-orthogonal wall cores: Plane.005 (45\u00b0), Plane.008 (45\u00b0), Plane.009 (45\u00b0), Plane.010 (45\u00b0). Deselect non-wall geometry; diagonal walls need a different roof workflow.",
+    "render": "compound_wing.png"
+  },
   "operator_preview_generate": true,
   "repeat_cleanup_deterministic": true,
   "glb_roundtrip": {
-    "mesh_count": 11,
-    "faces": 2309,
-    "uv_maps": 23,
-    "material_slots": 11,
+    "mesh_count": 7,
+    "faces": 4348,
+    "uv_maps": 15,
+    "material_slots": 7,
     "field_maps": [
       "baseColorTexture",
       "normalTexture",
       "metallicRoughnessTexture"
     ],
     "normals_exported": true,
-    "sha256": "a2734450bb52e0bbcd9a7ff278ffebba965ce8ac2d4baf407d4adb0b551d6a01"
+    "sha256": "f2d40b0b7b67879eae193e1484ebf1fb272a815fbf29ff94d57839db628d5b36"
   },
   "renders": [
-    "roof_warm_key.png",
-    "roof_cool_key.png"
+    "warm_0.png",
+    "warm_50.png",
+    "warm_100.png",
+    "grazing_0.png",
+    "grazing_50.png",
+    "grazing_100.png"
   ]
 }

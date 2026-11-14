@@ -112,7 +112,7 @@ approval.
 - Open a 3D View and find the **Caelmor** tab in the N-panel.
 - Rebuild the distributable with `py -3 package_addon.py` from this directory. The ZIP contains the add-on source, full GPL license, third-party notices, research reference, architecture references and household comparison brief.
 
-## Roof AutoComplete (0.17.0)
+## Roof AutoComplete
 
 Install or update the extension with the ZIP above. In Blender 5.0, open a
 scene where one Blender unit represents one metre and select the exterior
@@ -136,26 +136,32 @@ want to keep across regeneration into another collection. **Export Roof GLB**
 exports the generated parts of the target. The displayed count is the generated
 mesh triangle total before manual editing.
 
-| Geometry Detail | Modeled eave courses | Upper roof |
-| --- | ---: | --- |
-| 0–33% | 1 | Brookoak PBR field |
-| 34–66% | 2 | Brookoak PBR field |
-| 67–100% | 4 | Brookoak PBR field |
+Geometry Detail is the approximate share of shingle cells modeled on each
+slope. At 0%, one continuous textured field covers each slope. At 100%, the
+visible covering is all dimensional shingles. Intermediate values add
+boards across each slope in a seeded order that preserves prior choices.
+The panel shows modeled board and triangle counts. The percentage measures
+board count. Triangle count depends on clipping and shared edges.
 
-All tiers retain a deck, fascia, rafters, ridge caps and gable infill. Course
-exposure is 0.30 m measured up the slope. U runs along the eave with a 1.28 m
-repeat, and V covers eight courses per repeat. Modeled shingles and caps use
-solid tones sampled from the Brookoak albedo, with relief from the mesh.
-The transition follows a whole course boundary. Registering individual side
-joints exactly would require matching course data from Material Maker.
-The current Blender shader uses albedo, normal and roughness; displacement
-remains in the Material Maker authoring workflow.
+The deck, fascia, rafters, ridge caps and gable infill remain at every
+setting. Course exposure is 0.30 m up the slope. U runs along the eave with
+a 1.28 m repeat, and V covers eight courses per repeat. The tool uses
+measured side joints from the approved Brookoak albedo to map the same
+albedo, normal and roughness to flat and dimensional boards. A modeled
+board replaces its flat area and tapers into the field at the head.
+Fine painted joint wander can differ from the straight modeled edge.
+Point the tool at the approved export set. A different albedo requires a
+new course layout. The Material Maker source retains its existing controls.
 
-The selection tool fits one rectangular perimeter with a level top. Select
-the core when trim or apertures consist of separate meshes. Use the bearing
-preview to verify which geometry has been recognized. The preset accepts
-15–65° pitches. Short spans can require a lower tier to leave a mapped field
-above the modeled eave courses.
+The tool fits a level rectangle or a supported orthogonal outline formed by
+a main rectangle and one perpendicular wing. Select the wall cores and
+check the proposed outline before generating. The advanced bearing controls
+translate, rotate or proportionally resize the inferred layout. Compound
+roof height sets the main ridge rise and both volumes use the same pitch.
+The preset accepts 15–65° main pitches. A diagonal wall gets a diagnostic
+with object names and approximate angular offsets so it can be located in
+the scene. Existing saved rectangular roofs can be loaded and updated onto
+the new detail behavior.
 
 [Native fixture and evidence](evidence/roof_autocomplete/)
 

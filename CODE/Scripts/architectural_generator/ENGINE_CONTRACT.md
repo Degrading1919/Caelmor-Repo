@@ -193,8 +193,9 @@ timber. Iron roofs and fixtures continue on their existing paths.
 
 Roof AutoComplete is a separate authoring entry point within the extension.
 It supplies an explicit, metre-scale wall-bearing rectangle to the existing
-roof planner. The roof-only adapter opts into fixed course exposure, a
-complete modeled eave band and a slope-aligned field above it. Full building
+roof planner, with an optional supported perpendicular wing. Its cover
+adapter partitions a fixed Brookoak layout into slope-aligned flat and
+dimensional pieces using a seeded progressive order. Full building
 plans retain their original course placement and field defaults. Roof-only
 collections store their confirmed bearing and settings independently and use
 the selection-based GLB path without a building sidecar.
