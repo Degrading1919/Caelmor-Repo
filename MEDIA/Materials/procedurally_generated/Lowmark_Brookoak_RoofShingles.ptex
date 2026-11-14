@@ -1,0 +1,774 @@
+{
+	"connections": [
+		{
+			"from": "colorize",
+			"from_port": 0,
+			"to": "Material",
+			"to_port": 0
+		},
+		{
+			"from": "greyscale_4",
+			"from_port": 0,
+			"to": "Material",
+			"to_port": 2
+		},
+		{
+			"from": "normal_map2",
+			"from_port": 0,
+			"to": "Material",
+			"to_port": 4
+		},
+		{
+			"from": "greyscale_3",
+			"from_port": 0,
+			"to": "Material",
+			"to_port": 6
+		},
+		{
+			"from": "custom_uv2",
+			"from_port": 0,
+			"to": "blend",
+			"to_port": 0
+		},
+		{
+			"from": "directional_warp_2",
+			"from_port": 0,
+			"to": "blend",
+			"to_port": 1
+		},
+		{
+			"from": "fill_to_random_grey2",
+			"from_port": 0,
+			"to": "blend_2",
+			"to_port": 0
+		},
+		{
+			"from": "greyscale",
+			"from_port": 0,
+			"to": "blend_2",
+			"to_port": 1
+		},
+		{
+			"from": "fill_to_gradient2",
+			"from_port": 0,
+			"to": "blend_3",
+			"to_port": 0
+		},
+		{
+			"from": "blend",
+			"from_port": 0,
+			"to": "blend_3",
+			"to_port": 1
+		},
+		{
+			"from": "invert_2",
+			"from_port": 0,
+			"to": "blend_4",
+			"to_port": 0
+		},
+		{
+			"from": "blend_3",
+			"from_port": 0,
+			"to": "blend_4",
+			"to_port": 1
+		},
+		{
+			"from": "greyscale_2",
+			"from_port": 0,
+			"to": "colorize",
+			"to_port": 0
+		},
+		{
+			"from": "fbm",
+			"from_port": 0,
+			"to": "colorize_2",
+			"to_port": 0
+		},
+		{
+			"from": "wavelet_noise2",
+			"from_port": 0,
+			"to": "custom_uv2",
+			"to_port": 0
+		},
+		{
+			"from": "fill_to_uv2",
+			"from_port": 0,
+			"to": "custom_uv2",
+			"to_port": 1
+		},
+		{
+			"from": "bricks_uneven3_2",
+			"from_port": 0,
+			"to": "directional_warp",
+			"to_port": 0
+		},
+		{
+			"from": "fbm",
+			"from_port": 0,
+			"to": "directional_warp",
+			"to_port": 2
+		},
+		{
+			"from": "directional_warp",
+			"from_port": 0,
+			"to": "directional_warp_2",
+			"to_port": 0
+		},
+		{
+			"from": "fill_to_random_grey2",
+			"from_port": 0,
+			"to": "directional_warp_2",
+			"to_port": 2
+		},
+		{
+			"from": "bricks_uneven3_2",
+			"from_port": 1,
+			"to": "fill_to_gradient2",
+			"to_port": 0
+		},
+		{
+			"from": "bricks_uneven3_2",
+			"from_port": 1,
+			"to": "fill_to_random_grey2",
+			"to_port": 0
+		},
+		{
+			"from": "bricks_uneven3_2",
+			"from_port": 1,
+			"to": "fill_to_uv2",
+			"to_port": 0
+		},
+		{
+			"from": "blend_4",
+			"from_port": 0,
+			"to": "greyscale",
+			"to_port": 0
+		},
+		{
+			"from": "blend_2",
+			"from_port": 0,
+			"to": "greyscale_2",
+			"to_port": 0
+		},
+		{
+			"from": "invert",
+			"from_port": 0,
+			"to": "greyscale_3",
+			"to_port": 0
+		},
+		{
+			"from": "colorize_2",
+			"from_port": 0,
+			"to": "greyscale_4",
+			"to_port": 0
+		},
+		{
+			"from": "greyscale",
+			"from_port": 0,
+			"to": "invert",
+			"to_port": 0
+		},
+		{
+			"from": "scratches2",
+			"from_port": 0,
+			"to": "invert_2",
+			"to_port": 0
+		},
+		{
+			"from": "greyscale",
+			"from_port": 0,
+			"to": "normal_map2",
+			"to_port": 0
+		}
+	],
+	"label": "Graph",
+	"longdesc": "",
+	"name": "_Node_1062",
+	"node_position": {
+		"x": 0.0,
+		"y": 0.0
+	},
+	"nodes": [
+		{
+			"export_paths": {},
+			"name": "Material",
+			"node_position": {
+				"x": 0.0,
+				"y": 0.0
+			},
+			"parameters": {
+				"albedo_color": {
+					"a": 1.0,
+					"b": 1.0,
+					"g": 1.0,
+					"r": 1.0,
+					"type": "Color"
+				},
+				"ao": 1.0,
+				"depth_scale": 0.5,
+				"emission_energy": 1.0,
+				"flags_transparent": false,
+				"metallic": 0.0,
+				"normal": 1.0,
+				"roughness": 1.0,
+				"size": 10.0,
+				"sss": 1.0
+			},
+			"seed_int": 0,
+			"type": "material"
+		},
+		{
+			"name": "blend",
+			"node_position": {
+				"x": -600.0,
+				"y": 0.0
+			},
+			"parameters": {
+				"amount": 0.32,
+				"blend_type": 0.0
+			},
+			"seed": -61608.0,
+			"type": "blend"
+		},
+		{
+			"name": "blend_2",
+			"node_position": {
+				"x": -600.0,
+				"y": -300.0
+			},
+			"parameters": {
+				"amount": 0.35,
+				"blend_type": 0.0
+			},
+			"seed": 61836.0,
+			"type": "blend"
+		},
+		{
+			"name": "blend_3",
+			"node_position": {
+				"x": -480.0,
+				"y": 150.0
+			},
+			"parameters": {
+				"amount": 0.37,
+				"blend_type": 0.0
+			},
+			"seed": -23178.0,
+			"type": "blend"
+		},
+		{
+			"name": "blend_4",
+			"node_position": {
+				"x": -650.0,
+				"y": 320.0
+			},
+			"parameters": {
+				"amount": 0.28,
+				"blend_type": 2.0
+			},
+			"seed": -1526.0,
+			"type": "blend"
+		},
+		{
+			"name": "bricks_uneven3_2",
+			"node_position": {
+				"x": -1300.0,
+				"y": -700.0
+			},
+			"parameters": {
+				"bevel": 0.01,
+				"corner": 0.3,
+				"iterations": 12.0,
+				"min_size": 0.115,
+				"mortar": 0.005,
+				"round": 0.0,
+				"rows": 8.0
+			},
+			"seed": 3024.0,
+			"type": "bricks_uneven3_2"
+		},
+		{
+			"name": "colorize",
+			"node_position": {
+				"x": -300.0,
+				"y": -250.0
+			},
+			"parameters": {
+				"gradient": {
+					"interpolation": 1,
+					"points": [
+						{
+							"a": 1.0,
+							"b": 0.0900000035762787,
+							"g": 0.115000002086163,
+							"pos": 0.0,
+							"r": 0.140000000596046
+						},
+						{
+							"a": 1.0,
+							"b": 0.204999998211861,
+							"g": 0.264999985694885,
+							"pos": 0.32,
+							"r": 0.319999992847443
+						},
+						{
+							"a": 1.0,
+							"b": 0.300000011920929,
+							"g": 0.384999990463257,
+							"pos": 0.6,
+							"r": 0.46000000834465
+						},
+						{
+							"a": 1.0,
+							"b": 0.419999986886978,
+							"g": 0.509999990463257,
+							"pos": 0.85,
+							"r": 0.589999973773956
+						},
+						{
+							"a": 1.0,
+							"b": 0.519999980926514,
+							"g": 0.620000004768372,
+							"pos": 1.0,
+							"r": 0.689999997615814
+						}
+					],
+					"type": "Gradient"
+				}
+			},
+			"seed": 30890.0,
+			"type": "colorize"
+		},
+		{
+			"name": "colorize_2",
+			"node_position": {
+				"x": -700.0,
+				"y": 700.0
+			},
+			"parameters": {
+				"gradient": {
+					"interpolation": 1,
+					"points": [
+						{
+							"a": 1.0,
+							"b": 0.759999990463257,
+							"g": 0.759999990463257,
+							"pos": 0.0,
+							"r": 0.759999990463257
+						},
+						{
+							"a": 1.0,
+							"b": 0.930000007152557,
+							"g": 0.930000007152557,
+							"pos": 1.0,
+							"r": 0.930000007152557
+						}
+					],
+					"type": "Gradient"
+				}
+			},
+			"seed": -6784.0,
+			"type": "colorize"
+		},
+		{
+			"generic_size": 1,
+			"name": "custom_uv2",
+			"node_position": {
+				"x": -900.0,
+				"y": 800.0
+			},
+			"parameters": {
+				"inputs": 0.0,
+				"mode": 1.0,
+				"rotate": 0.0,
+				"scale": 0.1,
+				"sx": 1.0,
+				"sy": 1.0,
+				"variations": false
+			},
+			"seed": -27612.0,
+			"type": "custom_uv2"
+		},
+		{
+			"generic_size": 1,
+			"name": "directional_warp",
+			"node_position": {
+				"x": -800.0,
+				"y": 120.0
+			},
+			"parameters": {
+				"angle": 0.0,
+				"strength": 0.012
+			},
+			"seed": -16552.0,
+			"type": "directional_warp"
+		},
+		{
+			"generic_size": 1,
+			"name": "directional_warp_2",
+			"node_position": {
+				"x": -700.0,
+				"y": 300.0
+			},
+			"parameters": {
+				"angle": 90.0,
+				"strength": 0.017
+			},
+			"seed": -6640.0,
+			"type": "directional_warp"
+		},
+		{
+			"name": "fbm",
+			"node_position": {
+				"x": -1100.0,
+				"y": 500.0
+			},
+			"parameters": {
+				"folds": 0.0,
+				"iterations": 3.0,
+				"noise": 0.0,
+				"persistence": 0.5,
+				"scale_x": 12.0,
+				"scale_y": 8.0
+			},
+			"seed": -47304.0,
+			"type": "fbm"
+		},
+		{
+			"name": "fill_to_gradient2",
+			"node_position": {
+				"x": -950.0,
+				"y": -500.0
+			},
+			"parameters": {
+				"grad": {
+					"interpolation": 1,
+					"points": [
+						{
+							"a": 1.0,
+							"b": 0.0,
+							"g": 0.0,
+							"pos": 0.0,
+							"r": 0.0
+						},
+						{
+							"a": 1.0,
+							"b": 1.0,
+							"g": 1.0,
+							"pos": 1.0,
+							"r": 1.0
+						}
+					],
+					"type": "Gradient"
+				},
+				"layers": 1.0,
+				"mode": 0.0,
+				"r_offset": 0.0,
+				"r_rotate": 0.0,
+				"rotate": 90.0
+			},
+			"seed": 31994.0,
+			"type": "fill_to_gradient2"
+		},
+		{
+			"name": "fill_to_random_grey2",
+			"node_position": {
+				"x": -950.0,
+				"y": -300.0
+			},
+			"parameters": {
+				"edgecolor": 0.0
+			},
+			"seed": 31778.0,
+			"type": "fill_to_random_grey2"
+		},
+		{
+			"name": "fill_to_uv2",
+			"node_position": {
+				"x": -1300.0,
+				"y": -950.0
+			},
+			"parameters": {
+				"mode": 0.0
+			},
+			"seed": 2782.0,
+			"type": "fill_to_uv2"
+		},
+		{
+			"name": "greyscale",
+			"node_position": {
+				"x": -420.0,
+				"y": 0.0
+			},
+			"parameters": {
+				"mode": 0.0
+			},
+			"seed": -3804.0,
+			"type": "greyscale"
+		},
+		{
+			"name": "greyscale_2",
+			"node_position": {
+				"x": -400.0,
+				"y": -300.0
+			},
+			"parameters": {
+				"mode": 0.0
+			},
+			"seed": 41284.0,
+			"type": "greyscale"
+		},
+		{
+			"name": "greyscale_3",
+			"node_position": {
+				"x": -100.0,
+				"y": 400.0
+			},
+			"parameters": {
+				"mode": 2.0
+			},
+			"seed": -10636.0,
+			"type": "greyscale"
+		},
+		{
+			"name": "greyscale_4",
+			"node_position": {
+				"x": -450.0,
+				"y": 700.0
+			},
+			"parameters": {
+				"mode": 2.0
+			},
+			"seed": -46786.0,
+			"type": "greyscale"
+		},
+		{
+			"name": "invert",
+			"node_position": {
+				"x": -250.0,
+				"y": 400.0
+			},
+			"parameters": {},
+			"seed": -26070.0,
+			"type": "invert"
+		},
+		{
+			"name": "invert_2",
+			"node_position": {
+				"x": -1060.0,
+				"y": 850.0
+			},
+			"parameters": {},
+			"seed": -57098.0,
+			"type": "invert"
+		},
+		{
+			"name": "normal_map2",
+			"node_position": {
+				"x": -300.0,
+				"y": 200.0
+			},
+			"parameters": {
+				"buffer": 1.0,
+				"param2": 0.0,
+				"size": 10.0,
+				"strength": 0.4
+			},
+			"seed": -30876.0,
+			"type": "normal_map2"
+		},
+		{
+			"name": "remote_1",
+			"node_position": {
+				"x": -1650.0,
+				"y": -740.0
+			},
+			"parameters": {
+				"butt_offset": 0.017,
+				"color_variation": 0.35,
+				"grain": 0.32,
+				"joint_wander": 0.012,
+				"lap": 0.37,
+				"min_width": 0.115,
+				"rows": 8.0,
+				"splits": 0.28,
+				"weathering_x": 12.0,
+				"weathering_y": 8.0
+			},
+			"seed": 38702.0,
+			"type": "remote",
+			"widgets": [
+				{
+					"label": "Course count",
+					"linked_widgets": [
+						{
+							"node": "bricks_uneven3_2",
+							"widget": "rows"
+						}
+					],
+					"longdesc": "",
+					"name": "rows",
+					"shortdesc": "Course count",
+					"type": "linked_control"
+				},
+				{
+					"label": "Minimum shingle width",
+					"linked_widgets": [
+						{
+							"node": "bricks_uneven3_2",
+							"widget": "min_size"
+						}
+					],
+					"longdesc": "",
+					"name": "min_width",
+					"shortdesc": "Minimum shingle width",
+					"type": "linked_control"
+				},
+				{
+					"label": "Side edge irregularity",
+					"linked_widgets": [
+						{
+							"node": "directional_warp",
+							"widget": "strength"
+						}
+					],
+					"longdesc": "",
+					"name": "joint_wander",
+					"shortdesc": "Side edge irregularity",
+					"type": "linked_control"
+				},
+				{
+					"label": "Butt edge irregularity",
+					"linked_widgets": [
+						{
+							"node": "directional_warp_2",
+							"widget": "strength"
+						}
+					],
+					"longdesc": "",
+					"name": "butt_offset",
+					"shortdesc": "Butt edge irregularity",
+					"type": "linked_control"
+				},
+				{
+					"label": "Riven grain strength",
+					"linked_widgets": [
+						{
+							"node": "blend",
+							"widget": "amount"
+						}
+					],
+					"longdesc": "",
+					"name": "grain",
+					"shortdesc": "Riven grain strength",
+					"type": "linked_control"
+				},
+				{
+					"label": "Lap relief",
+					"linked_widgets": [
+						{
+							"node": "blend_3",
+							"widget": "amount"
+						}
+					],
+					"longdesc": "",
+					"name": "lap",
+					"shortdesc": "Lap relief",
+					"type": "linked_control"
+				},
+				{
+					"label": "Board color variation",
+					"linked_widgets": [
+						{
+							"node": "blend_2",
+							"widget": "amount"
+						}
+					],
+					"longdesc": "",
+					"name": "color_variation",
+					"shortdesc": "Board color variation",
+					"type": "linked_control"
+				},
+				{
+					"label": "Weathering scale across courses",
+					"linked_widgets": [
+						{
+							"node": "fbm",
+							"widget": "scale_x"
+						}
+					],
+					"longdesc": "",
+					"name": "weathering_x",
+					"shortdesc": "Weathering scale across courses",
+					"type": "linked_control"
+				},
+				{
+					"label": "Weathering scale down roof",
+					"linked_widgets": [
+						{
+							"node": "fbm",
+							"widget": "scale_y"
+						}
+					],
+					"longdesc": "",
+					"name": "weathering_y",
+					"shortdesc": "Weathering scale down roof",
+					"type": "linked_control"
+				},
+				{
+					"label": "Split strength",
+					"linked_widgets": [
+						{
+							"node": "blend_4",
+							"widget": "amount"
+						}
+					],
+					"longdesc": "",
+					"name": "splits",
+					"shortdesc": "Split strength",
+					"type": "linked_control"
+				}
+			]
+		},
+		{
+			"name": "scratches2",
+			"node_position": {
+				"x": -1300.0,
+				"y": 860.0
+			},
+			"parameters": {
+				"angle": 90.0,
+				"layers": 1.0,
+				"length": 0.17,
+				"randomness": 0.04,
+				"waviness": 0.08,
+				"width": 0.25
+			},
+			"seed": -2616.0,
+			"type": "scratches2"
+		},
+		{
+			"name": "wavelet_noise2",
+			"node_position": {
+				"x": -1400.0,
+				"y": 800.0
+			},
+			"parameters": {
+				"frequency": 1.0,
+				"iterations": 3.0,
+				"offset": 0.0,
+				"persistence": 0.6,
+				"scale_x": 16.0,
+				"scale_y": 1.0,
+				"type": 0.0
+			},
+			"seed": -12968.0,
+			"type": "wavelet_noise2"
+		}
+	],
+	"parameters": {},
+	"project_thumbnail": "UklGRlgFAABXRUJQVlA4WAoAAAAQAAAALwAALwAAQUxQSJQCAAANoCNteyJJevXrV9HAMpNX7Q9UrMd4gGEea5ksZmYGi3n3AG12ZIzVFT0X4BmrrOXdqqiUUlooyNIJImICmFOsBzh//bn89tcvAK6K1C9SVmbLdb1uM1Y0ZXysX6yVaIx1aRmvObyDqe3OZd3edRt/+PQkGmqR5K945gZIFWIwJFLELu3cv/LMWWPifFry8D0QxFomGoxAjK2Dj374ZtIwjxtd9BN4dcwrksL6lzZvGzg/mxtu+gavDeo0msLNn+xZdX4WN7z2PXyHuo36S5fvP+L8NB1teo/QZoEuNIv7VzVMkvKibwgtFqqhubxnIHFC4id8mwWrv/STbYn/q38Y32Hhzt+8+U0NIOUV96BkqLz04VmJSHwa38jB+PWPPCtRymtuQMlSObhyUmx1GN/Iw/jOvk+tNzuwZGrZ+UPJFlI2kpY2rnEdVTZU9rqCHln3+nSRfITusfObmHwMl43XR7LuyLkVJh9Du0n2vzXbyWSTzGj8l3TIeRh/GV+WTDbJDOBYN0o2UY5Bv0fOfSius/lYCljbuBQlk2iP/YErf9hZ2Uwq+z2u4tN9nWSySA3/FVXUkysHg2YR9HO0JPLsI+uTySA1xq8QIerZD18KmkHQx9ASCObNzTd7tzDfKY4az/9N2vbJpUEXFNo/34lJE6IO9iw3gy4ktKo70JLJwa3eXzS9W4BvV9fhRkz37sj9y5d6NTWl0Pn5DtyQWb1b3fPJzXg1NaTQ0OJO3JDZvQ62bX5pPUFkjhidjh87io6YN0h688NHD7ZIFWIwJFLEWgmfv4wxJfNH9OwzK/t3LlkmGozAse+/BPWJWoPIyU9/2Hhdr3tZp81oODjWL/4AjSV1xyi2XCv6x8bSZBz5v6tKZgdWUDggngIAANANAJ0BKjAAMAA+hTSUR6UjIiE8dAgAoBCJZQC4265/5rb/adZO1oNfQQJpXk/+qN/p+yvsX/qqkiM4owY56jn8QmpbZwaLmaDH8amngj/moBOfGSlPuU1eM6s2LPiUx5ATZNIAe31OSckBIkm/Cl7za/EJ7mTAAP7+bf85GDH7XdkUssVopN+dreXjk/D7puTI9+eJc8Mab1lP5HrvgvoWr1rVZuS6kOmbn3zonzu7buOeX3m5k+dSn0T0C0RXSYBPhbOzQ0FujZSPz8/5e2/1HkH/LbQQKtPX8IqjsqXuhvqhkBSKf6xQAikwnJdvHmTlC92sqdssgc2SuYvfZyL8JWlyCJbDWO1hLBb8j/R9bZVL2iN5wAxH9Y4ebf8N5rJmBLhXyyfki9JNDGyApMOrw9wPRi2X89etwW3XHbBF9NceJg5b76A8R7EoVPv4d+b0Xnwu0jZ8hJkfJdbqHIsLlQolzbxcRJomsUU1Xy/iQy3xjswiQATa9LCf2LShipC8mYsoe+pbHuAl+hJnWAfsj703SskpMl8LCgwbkZZ9HKF3AjjORXh/cpuVeV2DakRFPxCPv2f/9oYCu4si5V2mRdikys6o0p1RYL6JuxUqZkujvrtpkpe1Vdqc38NeILDrrPS///q4JRAbx8kfO2DopDMK1FOBKNcbUsWPe7/Cz03mfuYqHyd9aeAUQx26OpZ8YNQ0jMRl/5D1esRd1VD7wg5y2Q0AJLARhwW4S+vGqUFd8gu/04mePp+hMREmSi+8sGqISA2LIs+wQo2aHOxUiqdEi29Tp0UbgAYqFIBCLc7q7qse//NRzeoxuty6SiwqsYxBM7NdE8KR7X1awsoPzlaudyvkacg7TZO0A3tApBwZIAdOE1LCdUzwAAA=",
+	"seed_int": 0,
+	"shortdesc": "",
+	"type": "graph"
+}
