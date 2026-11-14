@@ -11,6 +11,7 @@ import sys
 
 import bpy
 from mathutils import Matrix, Vector
+from mathutils.geometry import delaunay_2d_cdt
 import numpy as np
 
 ROOT = Path(__file__).resolve().parent
@@ -22,6 +23,12 @@ ROCKS = np.array([
     [.230, .213, .177], [.176, .174, .151], [.301, .272, .220],
     [.206, .187, .157], [.275, .240, .203], [.142, .153, .144],
     [.220, .185, .149], [.267, .256, .229],
+])
+# Muted siltstones, ferruginous sandstones, and pale quartz-rich blocks.
+MASONRY_ROCKS = np.array([
+    [[.117,.119,.106], [.171,.170,.149], [.144,.150,.139]],
+    [[.228,.177,.127], [.197,.159,.119], [.258,.207,.154]],
+    [[.232,.215,.179], [.293,.257,.202], [.238,.230,.205]],
 ])
 
 
@@ -60,122 +67,212 @@ def clipped(poly, axis, limit):
     return np.asarray(result)
 
 
+def outline_distance(points, outline):
+    distance = np.full(points.shape[:-1],np.inf)
+    for a,b in zip(outline,np.roll(outline,-1,axis=0)):
+        edge = b-a
+        to_point = points-a
+        projection = np.clip((to_point@edge)/max(edge@edge,1e-10),0,1)
+        distance = np.minimum(distance,np.linalg.norm(to_point-projection[...,None]*edge,axis=-1))
+    return distance
+
+
+def face_mesh(outline):
+    # Constrain a uniform metric grid to the irregular perimeter. Independent
+    # triangles sample fissures consistently even across the largest stones.
+    spacing = .0037
+    low = np.floor(outline.min(axis=0)/spacing).astype(int)
+    high = np.ceil(outline.max(axis=0)/spacing).astype(int)
+    x,y = np.meshgrid(np.arange(low[0],high[0]),np.arange(low[1],high[1]))
+    grid = spacing*np.column_stack((x.ravel(),y.ravel()))
+    grid = grid[outline_distance(grid,outline)>.0015]
+    points = np.vstack((outline,grid))
+    border = [list(range(len(outline)))]
+    coords,_,faces,_,_,_ = delaunay_2d_cdt([Vector(p) for p in points],[],border,1,.00007,False)
+    face = np.asarray(faces,dtype=np.int32)
+    xy = np.asarray(coords,dtype=np.float32)
+    used,lookup = np.unique(face,return_inverse=True)
+    return xy[used],lookup.reshape(-1,3).astype(np.int32)
+
+
 def layout():
-    # Loose bed heights. Vary the rise and stagger, then fit individual
-    # stones with a periodic power diagram instead of continuous mortar rails.
-    beds = [
-        (.09, [.02, .21, .37, .54, .72, .91]),
-        (.24, [.12, .31, .49, .64, .82]),
-        (.40, [.01, .18, .36, .58, .75, .94]),
-        (.57, [.11, .26, .43, .62, .84]),
-        (.74, [.00, .20, .38, .55, .70, .92]),
-        (.90, [.09, .29, .46, .64, .83]),
-    ]
+    # Broken beds shared by adjacent courses. Each head joint is staggered,
+    # and its two ends can lean or step without changing the neighboring fit.
+    heads = (
+        (.025,.162,.342,.484,.625,.857),
+        (.096,.251,.411,.614,.788),
+        (.025,.193,.321,.467,.706,.842),
+        (.113,.285,.449,.676,.907),
+        (.004,.162,.346,.531,.721,.861),
+        (.099,.250,.428,.606,.794),
+    )
+    levels = (0.,.267,.605,.862,1.176,1.472,V)
+    ridge_u = U*np.array([0,.091,.206,.298,.393,.500,.613,.724,.842,.926])
     rng = np.random.default_rng(SEED)
-    positions = []
-    for y, xs in beds:
-        for x in xs:
-            positions.append(((x*U+rng.uniform(-.074,.074))%U,
-                              (y*V+rng.uniform(-.077,.077))%V))
-    centers = np.asarray(positions)
-    weights = rng.uniform(-.020,.031,len(centers))
-    scale = np.array([.77,1.])
-    period = np.array([U,V])
-    copies = [(centers+period*(i,j))*scale for i in (-1,0,1) for j in (-1,0,1)]
-    all_centers = np.concatenate(copies)
-    all_weights = np.tile(weights,9)
+    ridge_v = rng.uniform(-.052,.052,(len(heads),len(ridge_u)))
+    ridge_v[::2,1::3] *= .35
+    ridge_max = np.roll(ridge_v,-1,axis=1)
+    # A low shelf between adjacent rise points leaves broad bearing lengths.
+    bed_u = np.r_[np.column_stack((ridge_u,ridge_u+.50*np.diff(np.r_[ridge_u,U]))).ravel(),U]
+    ridges = np.column_stack((ridge_v,.86*ridge_v+.14*ridge_max)).reshape(len(heads),-1)
+    beds = np.column_stack((ridges,ridges[:,0]))
+    stages = np.array([0,.34,.71,1.])
+    # Each pair shares only the two junctions needed for a taller stone.
+    anchors = {(0,3): ((1,2), (.454,.618)), (3,2): ((4,3), (.498,.695))}
+    pin_sites = {2,5,10,14,18,23,28,31}
+    slab_pairs = {15,30}
+
+    def bed(course,x):
+        return levels[course]+np.interp(x,bed_u,beds[course%len(heads)],period=U)
+
+    def bearing(course,left,right):
+        knots = np.sort(np.concatenate((bed_u-U,bed_u,bed_u+U)))
+        between = knots[(knots>left+1e-6)&(knots<right-1e-6)]
+        x = np.r_[left,np.unique(between),right]
+        return np.column_stack((x,bed(course,x)))
+
+    joint_paths = []
+    for offsets in heads:
+        offsets = U*np.asarray(offsets)
+        lean = rng.uniform(-.069,.069,len(offsets))
+        jog = rng.uniform(-.025,.025,len(offsets))
+        paths = offsets[:,None]+lean[:,None]*(stages-.5)
+        paths[:,1:3] += jog[:,None]*np.array([.76,-.46])
+        joint_paths.append(paths)
+    for (row,col),((upper,upper_col),junctions) in anchors.items():
+        x = U*np.asarray(junctions)
+        joint_paths[row][col:col+2,-1] = x
+        joint_paths[upper][upper_col:upper_col+2,0] = x
+
+    cells = {}
+    for course,paths in enumerate(joint_paths):
+        loop = np.concatenate((paths,paths[:1]+U))
+        for col,(left,right) in enumerate(zip(loop,loop[1:])):
+            bottom = bearing(course,left[0],right[0])
+            top = bearing(course+1,left[-1],right[-1])
+
+            def side(x):
+                lower,upper = bed(course,x),bed(course+1,x)
+                return np.column_stack((x,lower+stages*(upper-lower)))[1:-1]
+
+            cells[course,col] = bottom,side(right),top,side(left)
+
     stones = []
-    for ident,(center,weight) in enumerate(zip(centers*scale,weights)):
-        poly = center + np.array([[-1,-1],[1,-1],[1,1],[-1,1]])*period
-        for other, w in zip(all_centers,all_weights):
-            delta = other-center
-            if np.dot(delta,delta) < 1e-10:
-                continue
-            cut = np.dot(delta,(other+center)*.5) + (weight-w)*.5
-            poly = clipped(poly,delta,cut)
-        if len(poly) < 3:
-            raise RuntimeError(f"Stone cell {ident} vanished")
-        poly = poly/scale
-        # A subset has a separate thin pinning stone against its shoulder.
-        if ident in (2, 5, 10, 14, 18, 23, 28, 31):
-            axis = np.array([rng.uniform(-.8,.8),rng.choice([-1.,1.])])
-            support = poly @ axis
-            mark = np.quantile(support,.72)
-            main = clipped(poly,axis,mark)
-            pin = clipped(poly,-axis,-mark)
-            if min(len(main),len(pin)) >= 3:
-                stones.append((main,"fieldstone"))
-                stones.append((pin,"pinning stone"))
-                continue
-        stones.append((poly,"fieldstone"))
+    covered = {upper for upper,_ in anchors.values()}
+    for block,(key,(bottom,right,top,left)) in enumerate(cells.items()):
+        if key in covered:
+            continue
+        if key in anchors:
+            upper, _ = anchors[key]
+            _,right_above,top_above,left_above = cells[upper]
+            right = np.vstack((right,top[-1],right_above))
+            left = np.vstack((left,top[0],left_above))
+            top = top_above
+        poly = np.vstack((bottom,right,top[::-1],left[::-1]))
+        if block in pin_sites:
+            # Only cut a short wedge from the bedding corner, leaving
+            # the long bearing surface supported by the course below.
+            nx = rng.uniform(.46,.92)*(-1 if block%2==0 else 1)
+            ny = rng.uniform(.78,1.30)*(-1 if block%3 else 1)
+            axis = np.array([nx,ny])
+            support = poly@axis
+            cut = support.max()-np.ptp(support)*rng.uniform(.24,.32)
+            stones.extend(((clipped(poly,axis,cut),"fieldstone"),
+                           (clipped(poly,-axis,-cut),"pinning stone")))
+        elif block in slab_pairs:
+            axis = np.array([rng.uniform(-.35,.35),1.])
+            cut = float(np.mean(poly@axis))
+            stones.extend(((clipped(poly,axis,cut),"fieldstone"),
+                           (clipped(poly,-axis,-cut),"fieldstone")))
+        else:
+            stones.append((poly,"fieldstone"))
     return stones
 
 
 def stone_mesh(poly, role, ident):
     rng = np.random.default_rng(SEED+1009*(ident+1))
-    center = poly.mean(axis=0)
-    footprint = poly-center
-    angles = np.linspace(0,2*np.pi,112,endpoint=False)
+    mineral_rng = np.random.default_rng(SEED+82+17*ident)
+    kind = int(mineral_rng.integers(len(MASONRY_ROCKS)))
+    # Choose a few real corner losses. A half-plane yields a strike face
+    # instead of a rounded radius reduction between samples.
+    center = (poly.max(axis=0)+poly.min(axis=0))*.5
+    if role=="pinning stone":
+        center = poly.mean(axis=0)
+    for _ in range(2):
+        angle = rng.uniform(0,2*np.pi)
+        axis = np.array((np.cos(angle),np.sin(angle)))
+        values = poly@axis
+        loss = rng.uniform(.007,.030) if role=="fieldstone" else rng.uniform(.003,.010)
+        poly = clipped(poly,axis,values.max()-loss)
+
+    angles = np.linspace(0,2*np.pi,224,endpoint=False)
     directions = np.column_stack((np.cos(angles),np.sin(angles)))
-    edges = np.roll(footprint,-1,axis=0)-footprint
-    normals = np.column_stack((edges[:,1],-edges[:,0]))
-    limits = np.einsum("ij,ij->i",normals,footprint)
-    denom = directions @ normals.T
-    ratios = np.divide(limits,denom,out=np.full_like(denom,np.inf),where=denom>1e-9)
-    radius = np.min(ratios,axis=1)
-    rolling = (np.roll(radius,4)+np.roll(radius,-4))*.5
-    radius = np.minimum(radius,radius*rng.uniform(.78,.94)+rolling*.15)
-    radius -= rng.uniform(.006,.014) + .004*np.sin(5*angles+rng.uniform(0,7))
-    radius += .004*np.sin(11*angles+rng.uniform(0,7))
-    radius = np.maximum(.012,radius)
-    busted = rng.uniform(0,2*np.pi)
-    radial_loss = np.maximum(np.cos(angles-busted),0)**20*rng.uniform(.004,.031)
-    radius = np.maximum(.010,radius-radial_loss)
+    start = poly-center
+    edges = np.roll(start,-1,axis=0)-start
+    # Use finite ray/edge intersections. The shared beds can jog inward.
+    across = directions[:,0,None]*edges[None,:,1]-directions[:,1,None]*edges[None,:,0]
+    numerator = start[:,0]*edges[:,1]-start[:,1]*edges[:,0]
+    with np.errstate(divide="ignore",invalid="ignore"):
+        ray = numerator/across
+        edge = (start[None,:,0]*directions[:,1,None]-start[None,:,1]*directions[:,0,None])/across
+    hits = (ray>0)&(edge>=-1e-9)&(edge<=1+1e-9)&np.isfinite(ray)
+    radius = np.min(np.where(hits,ray,np.inf),axis=1)
+    if not np.isfinite(radius).all():
+        raise RuntimeError(f"Stone {ident} has an invalid footprint")
+    profile = field(directions[:,0]*3.2,directions[:,1]*3.2,ident+43)
+    radius = np.maximum(.0025,radius*.985-.0032-.0035*profile)
     outline = directions*radius[:,None]
-    fractions = np.r_[np.linspace(.004,.85,32),[.89,.92,.945,.964,.983,1.]]
-    f = fractions[:,None]
-    xy = center+f[:,:,None]*outline[None,:,:]
-    x,y = (xy-center).transpose(2,0,1)
-    base = rng.uniform(.041,.076) if role=="fieldstone" else rng.uniform(.027,.044)
-    facet = base + rng.uniform(-.094,.094)*x + rng.uniform(-.11,.11)*y
-    for _ in range(5):
+    local,faces = face_mesh(outline)
+    x,y = local.T
+    base = rng.uniform(.048,.069) if role=="fieldstone" else rng.uniform(.036,.050)
+    span = np.maximum(np.abs(outline).max(axis=0),.04)
+    face_x,face_y = x/span[0],y/span[1]
+    facet = base + rng.uniform(-.011,.011)*face_x + rng.uniform(-.013,.013)*face_y
+    for _ in range(4):
         direction = rng.uniform(0,2*np.pi)
-        axis = np.cos(direction)*x + np.sin(direction)*y
-        limit = base + rng.uniform(.014,.035) - rng.uniform(.14,.29)*axis
+        axis = np.cos(direction)*face_x + np.sin(direction)*face_y
+        limit = base + rng.uniform(.007,.027) - rng.uniform(.012,.032)*axis
         facet = np.minimum(facet,limit)
-    fracture_axis = rng.uniform(-1.4,1.4)
+    fracture_axis = rng.uniform(-1.15,1.15)
     along = x*np.cos(fracture_axis)+y*np.sin(fracture_axis)
     cross = -x*np.sin(fracture_axis)+y*np.cos(fracture_axis)
-    run = field(along*12,cross*38,ident+11)
-    strata = smooth(.37,.53,run)-.60*smooth(.70,.87,run)
+    run = field(along*(8,12,13)[kind],cross*(40,23,21)[kind],ident+11)
+    strata = smooth(.42,.57,run)-.60*smooth(.67,.82,run)
     cleft = np.zeros_like(x)
-    if rng.random()<.65:
-        line = cross-rng.uniform(-.06,.062)-.13*along
-        crooked = (field(along*25,np.zeros_like(along),ident+5)-.5)*.014
-        cut_width = rng.uniform(.003,.009)
-        active = 1-smooth(.045,.14,np.abs(along-rng.uniform(-.07,.07)))
-        cleft = (1-smooth(.20,1,np.abs(line+crooked)/cut_width))*active
-        facet -= rng.uniform(.006,.019)*cleft
-    pitted = smooth(.63,.87,field(x*95,y*95,ident+19))
-    broken = field(x*34,y*31,ident+23)
-    bedding = rng.uniform(.0014,.0105)
-    facet += bedding*(strata-.35)+rng.uniform(.003,.009)*(broken-.50)-.0046*pitted
-    shoulder = smooth(rng.uniform(.67,.86),1,f)
-    bed = .006 + .004*field(x*34,y*32,ident+7)
-    z = facet*(1-shoulder) + bed*shoulder
-    z += np.sin(angles*7+ident)[None,:]*.004*shoulder*(1-shoulder)
-    z = np.clip(z,.003,.094)
-    hue = ROCKS[rng.integers(len(ROCKS))]*rng.uniform(.87,1.10)
-    vein = smooth(.47,.56,run)*(1-smooth(.57,.73,run))
-    hue_field = hue[None,None,:]*(.88+.21*broken+.115*vein-.16*pitted-.08*cleft)[:,:,None]
-    stain = smooth(.59,.81,field(x*8.8,y*12.7,ident+69))*(.25+.75*broken)
-    age_hue = np.array([.165,.154,.112])
-    hue_field = hue_field*(1-stain[:,:,None]*.38)+age_hue*stain[:,:,None]*.38
-    rough = np.clip(.72 + .098*pitted + .105*broken - .11*vein + .04*stain,.59,.96)
-    local = xy-center
-    points = np.dstack((xy,z))
-    sample = np.dstack((local+np.array([ident*2.31,ident*.51]),z))
-    return points,hue_field,rough,sample,center+outline
+    if rng.random()<.61:
+        line = cross-rng.uniform(-.060,.063)-.13*along
+        crooked = (field(along*26,np.zeros_like(along),ident+5)-.5)*.014
+        cut_width = rng.uniform(.0045,.009)
+        active = 1-smooth(.039,.15,np.abs(along-rng.uniform(-.06,.06)))
+        cleft = (1-smooth(.18,1,np.abs(line+crooked)/cut_width))*active
+        facet -= rng.uniform(.005,.015)*cleft
+    pitted = smooth(.62,.88,field(x*93,y*91,ident+19))
+    broken = field(x*33,y*34,ident+23)
+    bedding = rng.uniform(.0017,.0082)*(1.12,.69,.45)[kind]
+    facet += bedding*(strata-.35)+rng.uniform(.001,.006)*(broken-.50)-.0035*pitted
+    # Traced shoulders alternate between steep split faces and localized
+    # spalls. Their widths are in metres rather than a share of stone size.
+    shoulder_width = rng.uniform(.007,.016)+.016*field(x*18,y*18,ident+43)
+    distance = outline_distance(local,outline)
+    shoulder = np.interp(distance/shoulder_width,(0,.23,.77,1), (0,.16,.85,1))
+    back = .012+.003*field(x*34,y*32,ident+7)
+    z = facet*shoulder + back*(1-shoulder)
+    z = np.clip(z,.010,.094)
+    swatches = MASONRY_ROCKS[kind]
+    hue = swatches[mineral_rng.integers(len(swatches))]*mineral_rng.uniform(.89,1.11)
+    mineral = field(x*16.5,y*18.1,ident+67)
+    vein = (smooth(.52,.58,run)-smooth(.62,.70,run))*smooth(.40,.73,mineral)
+    hue_field = hue*(.84+.25*mineral+.30*vein-.15*pitted-.055*cleft)[:,None]
+    # Oxidation gathers in coherent patches and is strongest in sandstone.
+    stain = smooth(.54,.81,field(x*8.8,y*12.7,ident+69))*(.25+.75*broken)
+    stain *= (.21,.51,.27)[kind]
+    oxidized = np.array([.207,.154,.105])
+    hue_field += stain[:,None]*(oxidized-hue_field)
+    rough = np.clip((.69,.75,.72)[kind] + .098*pitted + .105*broken - .095*vein + .06*stain,.59,.96)
+    points = np.column_stack((center+local,z))
+    sample = np.column_stack((local+np.array([ident*2.31,ident*.51]),z))
+    return points,faces,hue_field,rough,sample,center+outline
+
 
 
 def mortar_signals(u,v):
@@ -185,8 +282,8 @@ def mortar_signals(u,v):
     wiped=field(u/U*31,v/V*89,162,(31,89))
     bumps = .85*(broad-.5)+.40*(sand-.5)+.18*(wiped-.5)
     daub = .57*broad+.26*wiped+.17*sand
-    hue = np.array([.256,.235,.203])*(.82+.31*daub)[...,None]
-    height = .008 + .0036*bumps
+    hue = np.array([.144,.132,.113])*(.85+.29*daub)[...,None]
+    height = .016 + .0032*bumps
     rough = np.clip(.86+.08*bumps,.71,.98)
     coord = np.stack(((U/(2*np.pi))*np.sin(su),(U/(2*np.pi))*np.cos(su),
                       (V/(2*np.pi))*np.sin(sv)),axis=-1)
@@ -198,24 +295,18 @@ def wall():
     layout_records = []
     offset = 0
 
-    def append(points, color, r, sample, weight, wrap=False):
+    def append(points, triangles, color, r, sample, weight):
         nonlocal offset
-        rows,cols = points.shape[:2]
-        vertices.append(points.reshape(-1,3).astype(np.float32))
-        pigment.append(np.column_stack((color.reshape(-1,3),np.ones(rows*cols))).astype(np.float32))
+        count = len(points)
+        vertices.append(points.astype(np.float32))
+        pigment.append(np.column_stack((color,np.ones(count))).astype(np.float32))
         rough.append(r.ravel().astype(np.float32))
-        coords.append(sample.reshape(-1,3).astype(np.float32))
-        w = (V/(2*np.pi))*np.cos(points[:,:,1]*(2*np.pi/V)) if weight else np.zeros((rows,cols))
-        sample_w.append(w.ravel().astype(np.float32))
-        mortar.append(np.full(rows*cols,weight,np.float32))
-        columns = cols if wrap else cols-1
-        start = np.arange((rows-1)*cols).reshape(rows-1,cols)[:,:columns]
-        nxt = np.roll(np.arange(cols),-1)[:columns]+(start//cols)*cols
-        face = np.stack((start,nxt,nxt+cols,start+cols),axis=-1)
-        if wrap:
-            face=face[:,:,::-1] # center-to-edge rings have the opposite winding
-        faces.append(face.reshape(-1,4).astype(np.int32)+offset)
-        offset += rows*cols
+        coords.append(sample.astype(np.float32))
+        w = (V/(2*np.pi))*np.cos(points[:,1]*(2*np.pi/V)) if weight else np.zeros(count)
+        sample_w.append(w.astype(np.float32))
+        mortar.append(np.full(count,weight,np.float32))
+        faces.append(triangles.astype(np.int32)+offset)
+        offset += count
 
     # Bed samples repeat at an exact integer grid interval. Mortar rises
     # selectively where a trowel has packed it against a stone's rim.
@@ -224,40 +315,41 @@ def wall():
     z,mortar_hue,mortar_rough,mortar_coord = mortar_signals(x,y)
     shoulder_field = np.zeros_like(z)
     for ident,(poly,role) in enumerate(layout()):
-        pos,hue,r,coord,outline = stone_mesh(poly,role,ident)
+        pos,triangles,hue,r,coord,outline = stone_mesh(poly,role,ident)
         center = poly.mean(axis=0)
-        layout_records.append((ident,role,*center,float(np.max(pos[:,:,2])),outline))
+        layout_records.append((ident,role,*center,float(np.max(pos[:,2])),outline[::2]))
         for ix in (-1,0,1):
             for iy in (-1,0,1):
                 displacement = (ix*U,iy*V,0)
                 current = pos+displacement
-                if (current[:,:,0].max() < -.052 or current[:,:,0].min() > U+.052
-                    or current[:,:,1].max() < -.052 or current[:,:,1].min() > V+.052):
+                if (current[:,0].max() < -.052 or current[:,0].min() > U+.052
+                    or current[:,1].max() < -.052 or current[:,1].min() > V+.052):
                     continue
-                append(current,hue,r,coord,0,True)
+                append(current,triangles,hue,r,coord,0)
                 rim = outline+(ix*U,iy*V)
                 mask = ((x>rim[:,0].min()-.039)&(x<rim[:,0].max()+.039)
                         &(y>rim[:,1].min()-.039)&(y<rim[:,1].max()+.039))
                 if mask.any():
                     patch=np.column_stack((x[mask],y[mask]))
-                    distance=np.full(len(patch),np.inf)
-                    for a,b in zip(rim,np.roll(rim,-1,axis=0)):
-                        vec=b-a
-                        projection=np.clip(((patch-a)@vec)/max(vec@vec,1e-10),0,1)
-                        distance=np.minimum(distance,np.linalg.norm(patch-a-projection[:,None]*vec,axis=1))
-                    lift=(1-smooth(.008,.037,distance))*(.004+.009*field(
+                    distance = outline_distance(patch,rim)
+                    lift=(1-smooth(.003,.020,distance))*(.001+.005*field(
                           (x[mask]-ix*U)*17,(y[mask]-iy*V)*21,ident+87))
                     shoulder_field[mask]=np.maximum(shoulder_field[mask],lift)
-    append(np.dstack((x,y,z+shoulder_field)),mortar_hue,mortar_rough,mortar_coord,1)
-    points, quads, rgb, matte, uvw, w, masks = map(np.concatenate,(vertices,faces,pigment,rough,coords,sample_w,mortar))
+    rows,cols = x.shape
+    grid = np.arange(rows*cols).reshape(rows,cols)
+    a,b,c,d = grid[:-1,:-1],grid[:-1,1:],grid[1:,1:],grid[1:,:-1]
+    triangles = np.stack((a,b,c,a,c,d),axis=-1).reshape(-1,3)
+    append(np.column_stack((x.ravel(),y.ravel(),(z+shoulder_field).ravel())),triangles,
+           mortar_hue.reshape(-1,3),mortar_rough.ravel(),mortar_coord.reshape(-1,3),1)
+    points, tris, rgb, matte, uvw, w, masks = map(np.concatenate,(vertices,faces,pigment,rough,coords,sample_w,mortar))
     mesh=bpy.data.meshes.new("Shaped stones with continuous mortar bedding")
     mesh.vertices.add(len(points))
     mesh.vertices.foreach_set("co",points.ravel())
-    mesh.loops.add(quads.size)
-    mesh.loops.foreach_set("vertex_index",quads.ravel())
-    mesh.polygons.add(len(quads))
-    mesh.polygons.foreach_set("loop_start",np.arange(0,quads.size,4,dtype=np.int32))
-    mesh.polygons.foreach_set("use_smooth",np.ones(len(quads),bool))
+    mesh.loops.add(tris.size)
+    mesh.loops.foreach_set("vertex_index",tris.ravel())
+    mesh.polygons.add(len(tris))
+    mesh.polygons.foreach_set("loop_start",np.arange(0,tris.size,3,dtype=np.int32))
+    mesh.polygons.foreach_set("use_smooth",np.ones(len(tris),bool))
     mesh.color_attributes.new(name="Stone Reflectance",type="FLOAT_COLOR",domain="POINT").data.foreach_set("color",rgb.ravel())
     for name, kind, attr, data in (("Surface Roughness","FLOAT","value",matte),
                                    ("Mineral Sample","FLOAT_VECTOR","vector",uvw),
@@ -596,6 +688,10 @@ def review(scene,obj,draft=False):
 
     capture("clay")
     if draft:
+        aim(camera,(U/2,V/2,3.6),(U/2,V/2,.03))
+        camera.data.ortho_scale=U
+        scene.render.resolution_y=900
+        capture("clay_wall")
         return
     aim(light,(3,-1,2.5),(0,0,0))
     capture("clay_reverse")
@@ -606,6 +702,10 @@ def review(scene,obj,draft=False):
     panel=tile_plane()
     attach_bake(panel)
     capture("flat")
+    aim(camera,(U/2,V/2,3.6),(U/2,V/2,.03))
+    camera.data.ortho_scale=U
+    scene.render.resolution_y=900
+    capture("straight_wall")
     panel.hide_render=True
 
     repeat=tile_plane(2*U,2*V,(2.,2.))
