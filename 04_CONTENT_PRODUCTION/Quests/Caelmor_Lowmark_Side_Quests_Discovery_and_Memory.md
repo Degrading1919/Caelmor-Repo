@@ -419,7 +419,7 @@ Optional request to the Act II package (not required): if `UC_COMPLETE`, MQ9's f
 | Player never finds the seat | Sedge sits on it (Beat 2 hint 3). The seat is the only furniture at the pool. |
 | Carry interrupted | Paddle returns to the hut; re-lever (3 s). |
 | Logout | Steps and latched props persist; float resets to the pool if S01 incomplete. |
-| Co-op | Unobserved is per player (§2.4). A partner on the lip does not stop your canal; in your basin you may see their reflection standing beside water that climbs past their feet. Each player seats their own paddle prop; fallback if per-player props are not ready: the paddle is seated world-wide by the first player and later players' S04 completes on inspecting the seated paddle. |
+| Co-op | Unobserved is per player (§2.4). A partner on the lip does not stop your canal; in your basin you may see their reflection standing beside water that climbs past their feet. Each player seats their own paddle prop; fallback if per-player props are not ready: the shared paddle resets (unseated) after the first player seats it, and each player seats it from their own S04; the shared prop is presentation only. |
 
 **Needs:** an observation volume with per-player accumulated-time tracking (server); state-driven channel presentation (rest / climbing); a planar reflection on one small basin or a pre-baked animated reflection keyed to state (fallback); carry state; agility step-ups with switchback fallback; per-player latched water-level prop and culvert traversal gate.
 
@@ -808,7 +808,7 @@ Reads `LM_FEN_ENDING`: after MQ11 the site stays quieted under every ending (the
 
 ### 4.11 Failure, recovery, co-op, integration
 
-Death during the defence: respawn at the hearth; the current wave restarts; dispersed waves stay dispersed. Logout during the night: on return, the night restarts from S02 (the wait). Logout in the drain: restart at the cellar grate. Co-op: shared world drift; each player's wave progress is credited from shared kills; the door creak plays for every player in the kitchen whose own step is S02; per-player valve state (fallback: first player's fix is world-wide; later players' S06 completes on inspecting the closed valve and making the same choice in dialogue, which sets their flags only).
+Death during the defence: respawn at the hearth; the current wave restarts; dispersed waves stay dispersed. Logout during the night: on return, the night restarts from S02 (the wait). Logout in the drain: restart at the cellar grate. Co-op: shared world drift; each player's wave progress is credited from shared kills; the door creak plays for every player in the kitchen whose own step is S02; per-player valve state (fallback: the shared valve resets (rusted open, wedge in the hinge) after the first player's fix, and each player clears the hinge and makes their own choice from their own S06, which sets their flags only; the shared prop is presentation only).
 
 **Needs:** night and dawn windows (§0.4); drift-site state with per-player quieting (bible §9.2); wave spawner bound to three outlet points, chosen per wave and announced by a creak sound keyed to the outlet; a `hold_lid` channel at each outlet that reduces that wave's count; a door that "holds" (damage target that cannot break, drives barks); stooping crawl animation or simply a low-ceiling walk; Smithing station-less channel (portable anvil-stone) or route the rehang through a crew-repair channel only if a field Smithing interaction is out of scope.
 
@@ -1026,7 +1026,7 @@ The suggested MQ11 lines are requests to the Act III package; Act III owns the f
 
 ### 5.11 Failure, recovery, co-op
 
-The boat can always be reached by fixing the boards; there is no way to lose it. Dropped carry: the boat returns to the pool lip. Death: respawn at the pool bench; boards stay as set. Logout: steps persist; carry returns to the lip. Co-op: each player's boat and boards are per player; drift shared. Fallback without per-player props: the boards are world props and stay set; later players' S03 completes on inspecting the set boards and E1 spawns once for them.
+The boat can always be reached by fixing the boards; there is no way to lose it. Dropped carry: the boat returns to the pool lip. Death: respawn at the pool bench; boards stay as set. Logout: steps persist; carry returns to the lip. Co-op: each player's boat and boards are per player; drift shared. Fallback without per-player props: the boards are shared world props that reset after the first player sets them, and each player sets them from their own S03 (E1 spawns for each); the shared state is presentation only.
 
 ### 5.12 Dialogue
 
@@ -1230,7 +1230,7 @@ The boom opens (Greyharrow dock trade and side-route boats resume: ambient). The
 
 ### 6.11 Failure, recovery, co-op
 
-No failure path. The pause at S02 is explicit in the tracker. If the player reaches MQ9 first, S02 passes on accept. Logout during the performance restarts it from verse one. Co-op: each player's performance is their own; partners present hear the crowd sing for whoever is on S05 (crowd audio is local to the performer; fallback: the performance is a world event that any partner's S05 completes on).
+No failure path. The pause at S02 is explicit in the tracker. If the player reaches MQ9 first, S02 passes on accept. Logout during the performance restarts it from verse one. Co-op: each player's performance is their own; partners present hear the crowd sing for whoever is on S05 (crowd audio is local to the performer; fallback: the performance is a world event that partners present can hear, but each player's S05 completes only on their own performance and their own verse choice).
 
 ### 6.12 Dialogue
 
@@ -1486,7 +1486,7 @@ FC-D4.03 HESTER: "River keep you. Come back at harvest and see if I was right to
 
 ### 7.12 Failure, recovery, co-op, integration
 
-Dropped carry: the case returns to where it lay. Death: respawn at the field gate. Logout: steps persist. Co-op: per-player case, raft and field props; shared vermin. Fallback without per-player props: the raft stays cleared world-wide after the first player; later players' S01 completes on entering the cleared field, and the case is a per-player interactable at the gate. **Needs:** carry state; a scheduled role NPC (road keeper) at the gate; field-state props; a ticking audio loop tied to time or weather.
+Dropped carry: the case returns to where it lay. Death: respawn at the field gate. Logout: steps persist. Co-op: per-player case, raft and field props; shared vermin. Fallback without per-player props: the raft is a shared prop that resets after the first player clears it, and each player clears it from their own S01; the case is a per-player interactable at the gate. **Needs:** carry state; a scheduled role NPC (road keeper) at the gate; field-state props; a ticking audio loop tied to time or weather.
 
 ### 7.13 Mystery ledger
 
@@ -1679,3 +1679,8 @@ No flag renames in this file. Renamed: Hobb farm/household → Dunnock (Rhoda Ho
 ## 12. Director rulings reconciliation (2026-11-03)
 
 Applied `Caelmor_Director_Rulings_Combat_Ranged_Release.md`. **CDR-1:** TB's goblins no longer scatter as a group; each is defeated at 0 HP and the hook-pole is dropped at the tree (TB beat 1, TB E1, TB review log). Drift encounters are unchanged (dispersal and re-forming are place rules). No human enemy, yield or testimony-from-a-defeated-enemy beat exists in this file. **CDR-2:** a §0.3 convention states that every fight accepts melee or ranged, ranged never required. **CDR-3:** "v1" release wording ("never explained in v1", "None in v1", "No v1 reader", the v1 quest-item budget) now reads as Lowmark content (12 places). Step ids, flags, choices and dialogue ids unchanged; no line removed.
+
+
+## 13. CDR-6 solo-completion sweep (2026-11-14)
+
+CDR-6 solo-completion sweep, 2026-11-14: WD §4.11 fallback now lets each later player make their own valve choice (was "the same choice"); VK §6.11 fallback no longer completes a partner's `S05` on another player's performance. No other violations found. Follow-up (coordinator consistency with Thornfell): SR §2.12 paddle, WD §4.11 valve, CN §5.11 boards and §7.12 raft fallbacks no longer complete a later player's step through the first player's work; the shared prop resets and each player does their own step (presentation only otherwise).

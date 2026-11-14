@@ -394,7 +394,7 @@ All three loads are **safe** in every outcome: whatever waits at Three Calls arr
 | Logout mid-escort | Restore to `S10`: the column is waiting at the far bridgehead (or the span's near end if the player had crossed); wolves reset. |
 | Walking away | Quest stays Active at its step. Resume hook: Vessa at the gate ("Still shut. Still waiting on you."); after S04, Aud at the anvil cart. The Close count resumes where it stood. |
 | Fail state | None. |
-| Co-op | Shared enemies. Per-player Close count, bridge stage, load choice and gate state. Presentation follows each player's own state. Fallback: the host's state drives the sky, bridge prop and gate; each partner's steps and flags are still their own (a partner already past `S11` sees the gate shut and passes through it as a warden opens the wicket). |
+| Co-op | Shared enemies. Per-player Close count, bridge stage, load choice and gate state. Presentation follows each player's own state. Fallback: the host's state drives the sky, bridge prop and gate as presentation only; each partner's steps and flags are still their own (a partner already past `S11` sees the gate shut and passes through it as a warden opens the wicket). No partner's escort or step waits on another player's bridge or gate state; a partner who leaves or is ahead never blocks the other, who finishes from their own step (CDR-6). |
 
 ## A12. Integration needs
 
@@ -886,6 +886,7 @@ Documented dependencies for a later Systems Engineer. Nothing here is implemente
 | Agility. | Ledge rail break and shaft crossbar each have walkable fallbacks. |
 | **Independent review (2026-11-03)**, TF-M2: 5 findings (2 medium, 3 low). | Calendar coordinated with Act II (weeks-to-Smoke and frost-count coexist; open decision 4). Hadrik-totals rule confirmed against TF-M5 (open decision 6). `TIW_FRAME_TOUCHED` no longer claimed as dating a Summit hum (a phenomenon dating nothing). `TIW_SACKS_INSPECTED`/`TIW_BERSI_TESTIMONY` later-read claims removed (TF-M5 reads `TH_STORES` only). Dialogue: three Bersi nodes tagged `[SPLINTER]`; three em-dash chains removed. |
 | **Director rulings reconciliation (2026-11-03)**, TF-M2: CDR-1, CDR-2. | Crews fight to 0 HP in every encounter; steps S04/S06/S08/S09 complete on defeat. The encounter-level surrender (first yield / ~60 s / loophole proximity) is removed: Bersi (SX-N1, non-combatant) gives up when the last TIW-E5 crewman is defeated, then testifies (T-3). Tied crews removed. Integration "Surrender rule" replaced by an on-defeat quest hook. Ranged accepted (divers, hornman). Two calendars labelled approved (open decision 4). |
+| **CDR-6 solo-completion sweep, 2026-11-14** | TPW §A11 co-op: host-state sky/bridge/gate fallback marked presentation only; no partner's escort or step waits on another's bridge or gate; a partner leaving or ahead never blocks. |
 
 ---
 

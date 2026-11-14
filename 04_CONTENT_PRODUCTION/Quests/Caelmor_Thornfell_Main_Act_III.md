@@ -414,7 +414,7 @@ Tuned for **Advanced identity, Milestone 3 equipment** (bible TD-12). Exact leve
 - **Melee or ranged** (CDR-2): every fight accepts both; the roof and parapet hornmen can be interrupted by arrows. The winch floor gives no spot Ingrith cannot reach. Ranged is never required.
 - **No resonance at the Gatefall** (bible §2.4, TD-8). No echo-figures, no surges, no hum. The only dangers are wind, loose stone, white and people.
 - **Death:** respawn at the last checkpoint reached: Three Calls (C1) → each warden post W1–W4 → the near apron (G0) → the warden room (H1). Completed gallery steps stay completed. The rubbing persists. Winch segments persist. A beaten player is never sent back past a completed step.
-- **Co-op:** shared crews and wolves for partners on the same step; health scales per participant. Each partner's galleries, roster, winch and column are presented per player from their own step state (fallback: the host's state, all present credited). The rubbing is created per player (each partner takes their own).
+- **Co-op:** shared crews and wolves for partners on the same step; health scales per participant. Each partner's galleries, roster, winch and column are presented per player from their own step state (fallback: the host's state as presentation only; a partner is credited only when their own active step uses it, and no partner's step waits on the host's state; CDR-6). The rubbing is created per player (each partner takes their own).
 
 ### 7.1 Boss spec: Ingrith Scarrow, the Quartermaster `[SPLINTER]`
 
@@ -737,6 +737,7 @@ Documented dependencies for a later Systems Engineer. None is implemented here.
 | Lowmark independence. | No Lowmark state required. One optional Elira line with `LM_CIVIC_STANDING`. The turn-back lines never say where relief came from. |
 | **Independent review (2026-11-03)**: 10 findings (2 medium, 8 low). | Horn: relies on TF-M1's practice horn; Ressa's loan is fallback only. `TDS10_SEEN`/`TME01_TALLIED` marked [NEW] placeholders. `TSW-D9.2x` made explicit. `TSW-B6` reference corrected to `TSW-D6.11`. Hadrik-totals consistency stated (§8.4; dialogue cast note). §E.6 relief sacks now exclude `seized`; §E.10 no longer contradicts sealed_with_terms. Roster near-collisions renamed (Sigrid→Astrid Weatherall, Asgeir Holt→Arvid Lunde, Ragna Holt→Ragna Lunde, Brekke→Tofte carters). `[SPLINTER]` tags on `TSW-D5.40`, `TSW-B10.2`. |
 | **Director rulings reconciliation (2026-11-03)**: CDR-1, CDR-2, CDR-3; Thornfell decisions §2. | Ingrith is SX-3: fights to 0 HP, the quest plays her surrender on defeat (the ~20% threshold is removed; phase checkpoints 100/60/35% kept; P3 now 35–0%). Her hornman and crew fight to 0 HP and are no longer taken into custody. TSW-E1 wolves fight to 0 HP (30% flee removed). Gallery crews: fought crews are defeated; the cut-the-line outcome stays (SX-N3) and those crews supply `TSW-B9.8`. "Walked down" epilogue wording replaced (the pass is clear). TD-8 deadfalls and `TSW_THAW` labelled approved. Melee-or-ranged rule added. Release wording reconciled. |
+| **CDR-6 solo-completion sweep, 2026-11-14** | TSW §7 co-op: host-state fallback marked presentation only; "all present credited" → own-active-step credit; no partner's step waits on the host's state. |
 
 ---
 

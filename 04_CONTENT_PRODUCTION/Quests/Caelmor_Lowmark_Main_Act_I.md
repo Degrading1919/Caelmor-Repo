@@ -363,7 +363,7 @@ The far bank is hungry and the Board's order says "delivered". Corvin has twelve
 | Rushed past the glimpse | Hesketh and Aldric stand where the glimpse leaves them. Marrick's lines are not required. |
 | Walking away | Stays Active; next granary-yard entry re-prompts at the current step (no abandon; see TL §12 resume hook). |
 | Fail state | None. |
-| Co-op | Independent instances. The glimpse plays per player from their own step. `SM_requisition` is granted to each participant. The choice is per player, so two partners may route the grain differently. Each sees their own carts (per-player props). Fallback: the carts are a bark-only result. |
+| Co-op | Independent instances. The glimpse plays per player from their own step. Each player picks up their own `SM_requisition` from their own `S07_chute` (per-player quest item); a partner's pickup never grants it to anyone else. The choice is per player, so two partners may route the grain differently. Each sees their own carts (per-player props). Fallback: the carts are a bark-only result. |
 
 ## A12. Integration needs
 
@@ -576,7 +576,7 @@ Quest → Completed. The patrol book stays readable at the Lantern Post and upda
 - Combat never reveals evidence. Every night and hour comes from a record (chalk, notches, tally, book) or testimony.
 - **Drift never flee** (Phase 1.3). They disperse and re-form. Re-formation is the mechanic, not fleeing.
 - **Death:** respawn at the nearest site anchor (orchard berm shrine, culvert field gate, Reedmere porch). Chops, lever, carried-pot position (pot returns to the last set-down point) and Orrin's position persist.
-- **Co-op:** shared world creatures. The orchard drain is per player: a partner who drained their own pool sees the pool drained, and a partner who hasn't sees it full and fights their own drift there (per-player site state presentation). Fallback if per-player site state is not ready: the first player to drain it drains it for the shard, and the other players' step completes on entering the drained-pool volume while their quest is at A-3/A-4. Each player walks out their own Orrin. Fallback: a shared Orrin, with credit to all.
+- **Co-op:** shared world creatures. The orchard drain is per player: a partner who drained their own pool sees the pool drained, and a partner who hasn't sees it full and fights their own drift there (per-player site state presentation). Fallback if per-player site state is not ready: the pool is a shared prop that refills (resets) after the first player drains it, and each player drains it and fights its drift from their own A-3/A-4 step; the shared state is presentation only and never completes another player's step. Each player walks out their own Orrin. Fallback: a shared Orrin, with credit to each partner whose own active step is the walk-out; a partner who leaves never blocks completion, and the remaining player walks Orrin out from their own step.
 
 ## B8. The discovery moment: the dry footprints
 
@@ -883,7 +883,7 @@ Tuned for **Milestone 1 dependable field equipment** (bible §6 level framing).
 - **Defeat (CDR-1):** every crewman, Rusk included, fights until defeated at 0 HP and takes the ordinary defeat presentation (falls, fades after the standard corpse time, ordinary loot). No yield, no tied props, no dialogue with a defeated crewman. No gore (Lowmark tone).
 - **Melee or ranged:** every encounter here accepts ranged; none requires it (CDR-2). Sallow on the far gallery is an unreachable actor, not a target.
 - **Death:** respawn at the Cut mouth (T3) once reached, otherwise at the weir. Completed assault groups stay defeated. Crank segments persist. Quest item persists.
-- **Co-op:** shared crew and drift. The flush and barge are presented per player from their own `S02` (fallback: shared event if both are on `S01` at the bench; partners on other steps see an empty night). Each partner closes their own Lock in presentation; fallback: shared Lock state, with all present credited.
+- **Co-op:** shared crew and drift. The flush and barge are presented per player from their own `S02` (fallback: shared event if both are on `S01` at the bench; partners on other steps see an empty night). Each partner closes their own Lock in presentation; fallback: shared Lock state, credited to each partner whose own active step uses it; a partner who leaves never blocks completion, and the remaining player finishes from their own step.
 
 ## C8. The discovery moments: presentation specs
 
@@ -1026,6 +1026,7 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 | Act item budget. | `NF_bill_of_lading` is item 2 of 2. The posts are carry-state flavour; the evidence is a flag and an impound. |
 | Agility triggers not yet built. | Each has a walkable fallback (footbridge, dike top). |
 | Director rulings reconciliation (2026-11-03, CDR-1/2/3). | Lookouts, yard crew, Rusk and crank waves fight to 0 HP with the ordinary defeat presentation; yield, tied props and the yield-presentation integration need removed. Rusk's post-fight testimony re-sourced: `S09_rusk` (id kept) is now an inspect of Rusk's slate (T-2, no name on it), and Maelin names Sallow at dawn (`NF-D9.05`, T-1), with the Lamb lead moved to her (`NF-D9.50`). Rusk's NF-D6.04/NF-D7/NF-D8 lines removed; smash/chain flag writes moved to the interaction completions. Ranged accepted in every encounter, never required. "v1" release wording changed to Lowmark-content wording. Quest structure, step ids and flags unchanged. |
+| CDR-6 solo-completion sweep, 2026-11-14. | MQ2 `SM_requisition` is picked up per player (was "granted to each participant"); MQ3 shared-Orrin fallback and MQ4 shared-Lock fallback credit only partners whose own active step uses it (were "credit to all" / "all present credited"), and a partner who leaves never blocks completion. Follow-up (coordinator consistency with Thornfell): MQ3 drain fallback no longer completes a later player's step on entering a pool another player drained; the pool resets and each player drains it from their own step. |
 | Independent review pass. | The slack gate is no longer a crew route: its silt bulges wet from behind, the first visible sign of the backwater; after MQ4 the crew uses only the mill race. The chained Lock is watched by keepers and its chain is never cut. The convoy stones are a required inspect with Maelin's line, so every player meets the Fourteenth Lot's blank stone. The bill reads sixty-eight measures. |
 
 ---

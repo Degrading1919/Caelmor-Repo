@@ -121,7 +121,7 @@ Act III's input table (`Caelmor_Mire_Main_Act_III.md`, "Inputs read") is impleme
 - **Evidence rule.** Phenomena never identify a person, settle a claim or name the dead. Combat drops nothing that advances an investigation.
 - **MD-7.** No Hollowfoot appear in any of these six quests (bible MD-7: Hollowfoot appear only where the General's pulse drives them). Each package carries a one-line swap note anyway, as the brief asks.
 - **MD-3 / MD-4.** Rowan never crosses at night in any of these quests. MLW reaches the chapel roof by Rowan's Chapel route at Slack by day (`[MD-3]` noted where it matters). No quest here enters the nave; MD-4 is not touched.
-- **Co-op:** independent instances; shared world creatures give step credit to every participant on that step; quest-state props and NPC placement are per player (Lowmark per-player prop pattern; where a row says "fallback: host", that is a provisional presentation fallback only (Integration MI-CO-06, pending Director review) and never decides another player's walkable ground, interactions, credit or completion; each player's own state drives dialogue).
+- **Co-op:** independent instances; shared world creatures give step credit to every participant on that step; quest-state props and NPC placement are per player (Lowmark per-player prop pattern; where a row says "fallback: host", that is a presentation fallback only (Integration MI-CO-06, CDR-6) and never decides another player's walkable ground, interactions, credit or completion; each player's own state drives dialogue).
 - **Address** (bible §5.3 rule 8): people who saw the MR-M1 reading say "witness"; others say "traveller". After MSS, Rootrest's and Griefwatch's hearing keepers also say "witness".
 - **Map.** Relative placement only. **MAP VERIFICATION REQUIRED** wherever geometry matters. No route or direction to another region is stated; "the high passes" and "the lowlands" are used only as people's own words for where someone came from.
 
@@ -619,7 +619,7 @@ Neither value says what happened to him. He "went on". No route, direction or de
 | No Leatherworking | Crew alternative. |
 | Walking away | Stays Active; the token stays with the player (carry-state) and returns to Senna on completion; if dropped, it returns to Senna and she hands it back on the next talk. |
 | Fail state | None. |
-| Co-op | Each player mends and searches their own instance of the book (fallback: shared spine progress). The wall strip shows each player's own value (fallback: host's). |
+| Co-op | Each player mends and searches their own instance of the book (fallback: shared spine progress, credited only to a player whose own active step consumes it; CDR-6). The wall strip shows each player's own value (fallback: host's). |
 
 ### MBA.11 Integration needs, ledger, open decisions, review
 
@@ -1779,3 +1779,4 @@ MLD-D6.02 CORRA: "Next year I'm carrying a real one." (beat) "A sign. A real sig
 | Batch 4 encounter alignment review, 2026-11-09 | Aligned with `Enemies/Caelmor_Mire_Encounter_and_Enemy_Requirements.md` §13.3 (numbers only; no id, step or flag renamed): MLL-E1 reed-ripple ~1.2 s → ~1.5 s, first-appearance length (C-5, I-2); MLD-E1 swarm spread ~1.0 s → ~1.5 s, area-effect minimum (C-1, I-12). Also fixed: speaker tags left over from the Batch 3 renames (`MEP-D3`/`MEP-D4` JEM → LEW, 11 lines; `MLL-D2.05`, `MLL-D4.30`, `MLL-D7.03` PIM → DOB); line text unchanged. |
 | Playability audit fixes, 2026-11-13 | SS-02 option (a): MLD now needs MLL and MR-M2, `MLW_KEEPER` is an optional read, timing text fixed, option (b) kept in MLD's open decisions. SS-05 (Keel, L.), SS-07 (MSS Griefwatch hearing held during MR-M5 until `S03`), SS-11, SS-23 (war-washing hedged as uncertain local Tender belief; not removed, not canon), SS-27 (MAP VERIFICATION note only), CO-01, CO-14 (escorts follow their own quest owner). Authored walkthrough only. |
 | Playability audit fixes review, 2026-11-13 | Independent review of the same-day fixes. MLL.10 co-op "credit to all" restated as credit from each player's own active step (Lowmark §8.1). Authored walkthrough only; text only; no id, step, flag or geography changed; no Director recommendation promoted. |
+| CDR-6 solo-completion sweep, 2026-11-14 | MBA.10 shared spine progress credited only to a player whose own active step consumes it (CDR-6). MI-CO-06 references restated as presentation fallback only under CDR-6. Text only; no id, step, flag, line or geography changed; Sol's co-op conflicts kept as presentation questions. |

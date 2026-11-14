@@ -631,7 +631,7 @@ No option is wrong. None both credits the crew and keeps the tower crew's peace 
 | Logout during the night | Completed segments persist; the night restarts at the current segment with the keep-watch hour restored. |
 | Player refuses all three de-escalation routes | Not possible to soft-lock: Ressa's ruling is always available. |
 | No Smithing | Crew alternative on every segment. |
-| Co-op | Independent instances. Shared bandits and wolves give credit to all on the step. Strikes, segments and interruptions are per player (fallback: shared, all present credited). The gate book and the shed's state are per-player props (fallback: barks only). |
+| Co-op | Independent instances. Shared bandits and wolves give credit to all on the step. Strikes, segments and interruptions are per player (fallback: shared, a partner credited only when their own active step uses it; CDR-6). The gate book and the shed's state are per-player props (fallback: barks only). |
 
 ### TAS.14 Integration needs
 
@@ -1253,7 +1253,7 @@ Small payment from Gerrit ("from what's left"). A Warden standing line. The **sc
 | Leaving mid-hold | Answered pairs stay answered; cut progress pauses while the player is away and resumes on return. |
 | Death | Respawn at the gorge path head; progress kept; the foreman, if not defeated, resets. |
 | Player never fights the cutters | The terrace drops after the third Answer (`dropped`). Nobody is hurt. |
-| Co-op | Shared brigands; each player's warning is per player (pairs and terrace presented per player; fallback: shared state, all present credited). Choice per player; ledge prop per player (fallback: host). |
+| Co-op | Shared brigands; each player's warning is per player (pairs and terrace presented per player; fallback: shared state, a partner credited only when their own active step uses it; CDR-6). Choice per player; ledge prop per player (fallback: host). |
 
 ### TSG.14 Integration needs
 
@@ -1635,3 +1635,4 @@ Each discovery has a **surface** (what anyone sees), a **reading** (what a caref
 | Deviations from the bible | (1) Discovery ids use `TDS##` per the bible's review log, not the file map's `TD##`. (2) TME04's cancelled walk is tied to a postwar rockfall closure ("the long closure, twelve winters back"), not a wartime sealing, so it cannot pre-empt TF-M5's R06 (sealing) payoff. (3) TAS adds braid 9's "two kinds of iron" as an undated visual only (TAS-OD1). |
 | **Independent review (2026-11-03)** | 6 findings (1 high, 3 medium, 2 low). High: TF-M5 could not resolve the discovery and tally flags; TDS10 now sets `TDS10_SEEN` (road view) and `TDS10_READ` (props inspected; the flag TF-M5 should read), and TME01's flag is renamed `TME01_TALLIED` to match Act III. Medium: TME05's moving frost in a null-point duplicated TWG; now a grit fall. Medium: TSG's frost lines on plates duplicated the same image; now beaded water that freezes. Medium: minor name Doran sat one letter from Dorn; renamed **Bjarke**. Low: TMM-D3 name-address now reads `TME01_TALLIED` or `TSM_PLAYER_TALLIED`; token unified to `{PLAYER}`. Low: Ranged mentions gated on S01. |
 | **Director rulings reconciliation (2026-11-03)** | Applied CDR-1/2/3 (`Caelmor_Director_Rulings_Combat_Ranged_Release.md`). CDR-1: shared rule now "every enemy defeated at 0 HP" (TD-7 superseded). TAS-E1 bandits fight to 0, `TAS-D4` cut (T-4). TGM: 10% lie-down removed; Greymantle dies at 0 HP; `S06_choice`/`TGM_OUTCOME` kept as how the old bear is left (`sleeping` = den sealed as his resting place, `ended` = left to the trappers); TGM-E1 crows no longer scatter. TSG: no 20% yield; foreman's order is a phase-change (second-wind) bark; `S04`/`S05` begin on his defeat; foreman testimony cut (T-4); epilogue and ledge-choice lines no longer depend on surviving brigands. CDR-2: Melee or Ranged in TAS, TGM, TSG. CDR-3: scope guard reworded. TMM, TME01–TME10 and TDS01–TDS10 needed no change. Historical rows above describe earlier states. |
+| **CDR-6 solo-completion sweep, 2026-11-14** | TAS.13 and TSG.13 "all present credited" → credit only when the partner's own active step uses it. |

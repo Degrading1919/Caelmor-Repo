@@ -287,7 +287,7 @@ Tuned for **Advanced identity (Milestone 3)** (TD-12). Echo-figures follow bible
 - **No fall deaths.** Gust and charge knockback push wallward. Rig failure is a time cost; NPCs never fall.
 - **Death:** respawn at the Gust Stair head (before the Jam), at the Broken Engine (after the Lip), or at the camp shelf (after the Hollow). Completed rig segments and set irons persist. Rescued pairs stay rescued. In TES-E4, swells endured persist; the stand re-forms at the start position.
 - **Storm windows** are per player (§A8.1). Leaving the gorge pauses the storm at its current window; returning resumes it.
-- **Co-op:** shared figures; each partner's storm window follows their own step (fallback: host's window). Sounding results are per player (each hears their own strike). Rig and lowering segments are shared; all present are credited. In TES-E4, either partner's breaks count.
+- **Co-op:** shared figures; each partner's storm window follows their own step (fallback: host's window). Sounding results are per player (each hears their own strike). Rig and lowering segments are shared; a partner is credited only when their own active step uses the segment (CDR-6). In TES-E4, either partner's breaks count.
 
 ## A8. The discovery and strange moments: presentation specs
 
@@ -420,7 +420,7 @@ The player **recommends**; Maera **decides**, and in every case she decides as r
 | Logout | Restore to the persisted step at the nearest respawn point; irons and segments kept. |
 | Walking away | Stays Active. Resume hook: Gerrit at the rim winch (`TES-D1.90`) before `S07`; Dorn at the Passwatch horn post (`TES-D6.90`) after `S07` if the player leaves before the rim. Maera waits at the reading stone indefinitely. |
 | Fail state | None. |
-| Co-op | §A7. The choice is per player: each partner recommends to Maera in their own state. Prop fallback: the first choice in the shard sets the visible cairn state (cut words / slate in niche / unchanged); other partners' choices are stored and reflected in dialogue and later reads only. |
+| Co-op | §A7. The choice is per player: each partner recommends to Maera in their own state. Prop fallback (presentation only): the first choice in the shard sets the visible cairn state (cut words / slate in niche / unchanged); other partners' choices are stored and reflected in dialogue and later reads only. |
 
 ## A12. Integration needs
 
@@ -704,7 +704,7 @@ Tuned for **Advanced identity (Milestone 3)** (TD-12).
 - **Combat never reveals evidence.** The trial record is found on the bench; Iven's list is his own log; Ingrith's name is Eyvind's testimony after he gives up.
 - **Defeat at 0 HP** (CDR-1; supersedes TD-7). Crew and crows take the ordinary defeat presentation; no yield state, no tied props.
 - **Death:** respawn at the Upper Landing (before `S07`) or in the Counting Room (after). Defeated crew stay defeated. Damped plates stay damped. Unbolt segments persist.
-- **Co-op:** shared crew and pulses. Each partner marks their own sketch; the **host's** map tier sets the shared start state (fallback). Plates are shared objects: any partner can listen, unbolt or carry; all present are credited. Kaldren answers whoever asks.
+- **Co-op:** shared crew and pulses. Each partner marks their own sketch; the **host's** map tier sets the shared start state (fallback). Plates are shared objects: any partner can listen, unbolt or carry; a partner is credited only when their own active step uses it (CDR-6). Kaldren answers whoever asks.
 
 ## B8. The discovery and strange moments: presentation specs
 
@@ -830,7 +830,7 @@ Quest item: `TSH_trial_record` (acquired `S10`; kept).
 | Leaving the Summit mid-quest | Stays Active at the persisted step. Before `S07`, the crew are still at their test (state persists). After `S08`, the plates keep ringing until the player returns (per-player presentation); the hum is audible from the Crown stair as a lure. |
 | Walking away | Resume hook: Iven at the stair foot (`TSH-D2.90`) or, before `S01`, the original offer location. |
 | Fail state | None. |
-| Co-op | §B7. Each partner makes their own `TH_HORN` choice; prop fallback: the first choice in the shard sets the visible alcove state; the other is stored and read later. |
+| Co-op | §B7. Each partner makes their own `TH_HORN` choice; prop fallback (presentation only): the first choice in the shard sets the visible alcove state; the other is stored and read later. |
 
 ## B12. Integration needs
 
@@ -887,6 +887,7 @@ Quest item: `TSH_trial_record` (acquired `S10`; kept).
 | Quest-item budget. | `TSH_trial_record` is Thornfell item 3 of 4. Iven's list and sketch stay with Iven. |
 | **Independent review (2026-11-03)**, TF-M4: 4 findings (1 medium, 3 low). | "The splinter's remnant" reworded (could read as the Remnant faction). Frost-count coordinated with Act I's ledger reckoning. `[SPLINTER]` tags added to `TSH-B3.5`, the `TSH-D9` Eyvind option, the `TSH-D12` Ingrith option and `TSH-D12.10`. |
 | **Director rulings reconciliation (2026-11-03)**, TF-M3/TF-M4: CDR-1, CDR-2, CDR-3. | TSH crews fight to 0 HP; yield and tied-prop lines removed (Upper Landing, great hall, Rules). Eyvind unchanged as SX-N2 (gives up after *Take the horn*). Echo-figures clarified as defeated at 0 HP and re-forming by place rule. Skills rows now melee or ranged. Frost-count labelled approved. Header release wording reconciled. |
+| **CDR-6 solo-completion sweep, 2026-11-14** | TES §A7 and TSH §B7 "all present are credited" → credit only when the partner's own active step uses it; TES §A11 and TSH §B11 first-choice prop fallbacks marked presentation only. |
 
 ---
 

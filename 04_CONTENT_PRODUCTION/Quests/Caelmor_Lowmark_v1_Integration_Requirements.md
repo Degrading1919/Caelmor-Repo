@@ -547,7 +547,7 @@ Each row: who uses it, the minimum viable implementation (MVI) and the fallback 
 | M08 | Follow / escort / walk-with NPC | HW Orrin, CR Hesketh, MN/BF Sedge, BW Tamsin, NT, FW, OL Joss, SV ×7, ME10 | Follow-the-player with wait-at-checkpoint; invulnerable; ignored by enemies | NPC waits at checkpoints only; NPC walks to destination on dialogue end |
 | M09 | Re-forming creature (drift disperse and re-form while site condition holds) | HW, NF, TF, DK, CN, WD, MN | On defeat: despawn, re-form timer, respawn at anchor while site state is `active` | Fixed extra wave |
 | M10 | Drift split (dispersal spawns two smaller drifts downstream, depth cap 2) | MN S07 | Spawn rule at a flagged site linked to downstream points | Two pre-placed smaller drifts appear on dispersal |
-| M11 | Drift-site state driving spawns | §3.9 | Character-scoped state store read by spawn rules | Shard-level state (first player to quiet a site quiets it for the shard) |
+| M11 | Drift-site state driving spawns | §3.9 | Character-scoped state store read by spawn rules | Shard-level state (the first player's quieting shows for the shard as presentation only; a player whose own step quiets the site still does it, and the site resets for them) |
 | M12 | Encounter pockets, waves, step-gated spawns | All combat | Step-entry spawn; wave spawner bound to a volume; despawn after step | — |
 | M13 | **Herding** (alert radius ~8 m, flight away from player; reset when calm) | MN S04 elk; DK elk charge | Reuse Hunting F4 alert-and-flight; quest-spawned instance | Partner's attack counts only for that partner |
 | M14 | Observation-volume puzzle (progress only while the player is *outside* a volume; time accumulates) | UC | Per-player accumulated time outside a volume → EV23; presentation state rest/climbing; level art must hide the channel from every point outside the volume (load-bearing ZN requirement) | Pre-baked reflection texture in the basin keyed to state |
@@ -581,11 +581,11 @@ Each row: who uses it, the minimum viable implementation (MVI) and the fallback 
 | M42 | Vendors with bounded intake; opportunity states (open / closed / closed-until) | BP, HS, WC, FK, DK | Economy pass | — |
 | M43 | Agility triggers | TL, NF, GL, NB, UL, OL, SB, UC, TB, BF | Phase 1.3 trigger boxes | Walkable route always authored |
 | M44 | Per-player persistent prop / terrain state | Almost all | §8.1 | Package fallbacks |
-| M45 | Per-player instanced NPC/creature (owner-visible) **[DIRECTOR]** | DK Bryn, HW Orrin, MN elk, SV evacuees, BF Sedge, WC sow, Muster visibility after S06 | Owner-visible entity flag in replication filter | Shared entity; credit to all; dialogue reads each player's own state |
+| M45 | Per-player instanced NPC/creature (owner-visible) **[DIRECTOR]** | DK Bryn, HW Orrin, MN elk, SV evacuees, BF Sedge, WC sow, Muster visibility after S06 | Owner-visible entity flag in replication filter | Shared entity; credit only to each partner whose own active step consumes it; dialogue reads each player's own state |
 | M46 | Unkillable ally NPCs | NT Teague/Dace, FW cutters, SV crew | Damage-immune flag | Allies stand as blockers |
 | M47 | NPC scripted walk-and-use under player camera | UR Joric, BF Oriel, MN/SV Sedge | Move to point, use animation, EV18 | Sound fade; NPC shown at end position |
 | M48 | Voice-volume decoy (player entered wrong place) | DK `DK_FOLLOWED_VOICE` | Enter-volume event | — |
-| M49 | Performance with player-paced pins (song waits for player) | VK S05 | Crowd vocal loop; 4 pin interactions; loop last line until pulled | World event any partner's S05 completes on |
+| M49 | Performance with player-paced pins (song waits for player) | VK S05 | Crowd vocal loop; 4 pin interactions; loop last line until pulled | World event partners can hear; each player's S05 completes only on their own performance |
 | M50 | Restorative waypoint (meal once per visit; respawn binding) | WD Hobb hearth, HW Lantern Post | Interaction + per-visit cooldown | Omit |
 
 **Bible §8 says "no new core system is introduced."** That holds for most rows. It does not hold cleanly for M23, M29-style set-piece controllers (M16, M17, M19, M20, M22, M36), M45 and the D-6-dependent M09/M11: see §11.
@@ -605,7 +605,7 @@ Each row: who uses it, the minimum viable implementation (MVI) and the fallback 
 | Per-player strange moments | Script events play for the owning player only, on their own trigger (TL discovery; SB ring; TB dream; SV fen hold). Partners see only world-level motion (bell swings). |
 | Set-piece timers | Set-piece state (TF band, DK hold, SV gate %, CR smoulder, NT watch) is per player. Shared creatures keep fighting; pauses apply to the owner's timer only. |
 | Shared boss, per-player checkpoint | A shared boss resets to the checkpoint of the **lowest-progress** participant still engaged; a player who completed the boss step no longer sees it (SV) only if M45 exists; otherwise it remains visible but gives them no credit. SE to confirm. |
-| Fallback (TL §12) | Where per-player presentation is not ready, each package names a shard-level fallback (first player's result shows for all; others' state lives in dialogue/barks). The fallback must still give each player their own flags. |
+| Fallback (TL §12) | Where per-player presentation is not ready, each package names a shard-level fallback (first player's result shows for all as presentation only; others' state lives in dialogue/barks). The fallback must still give each player their own flags, and each player still performs and completes their own step: a shared prop resets after the first player, and no step completes through another player's work (CDR-6). |
 | Known conflict | NT says "a partner's lanterns light for both players (shared world props)", against the per-player prop rule. §10 I-16. |
 
 ### 8.2 Persistence and logout/resume
@@ -725,3 +725,8 @@ The shortest dependency path to a playable Lowmark slice is **Act I in order (MQ
 ## Director rulings reconciliation (2026-11-03)
 
 Applied `Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md`. Removed every non-lethal defeat need (G20 threshold/downed/swap, EV07 `downed`/`yielded` outcomes, EV08 `creature.yielded`, the NPC hostile/neutral swap row, M18 non-lethal defeat, Rusk as a tied NPC, the I-05 and D-INT-4 open rulings) and replaced them with one need: a quest on-defeat hook for named creatures (SX-1 Joss, SX-2 Sallow) that plays a scripted outcome and spawns the NPC non-hostile (G20, EV08 `creature.scripted_defeat`, M18). `cr.sallow_yield` now fires on defeat. Added G20a (ranged accepted everywhere, never required; WC optional borrowed short bow). Release wording changed to milestone language (CDR-3). Pointer added to `Quests/Caelmor_Combat_Ranged_Release_Engineering_Handoff.md`. Ids, steps and flags unchanged.
+
+
+## CDR-6 solo-completion sweep (2026-11-14)
+
+CDR-6 solo-completion sweep, 2026-11-14: M45 fallback credits only partners whose own active step consumes the event (was "credit to all"); M49 fallback no longer completes a partner's VK `S05` on another player's performance. Per-player presentation (G16, M45) and the shared-boss checkpoint rule (§8.1) are co-op presentation only; none is a prerequisite of solo completion (CDR-6, §3.7.6). Follow-up (coordinator consistency with Thornfell): §8.1 fallback row and M11 now state that a shard-level result is presentation only; shared props reset and each player performs and completes their own step.

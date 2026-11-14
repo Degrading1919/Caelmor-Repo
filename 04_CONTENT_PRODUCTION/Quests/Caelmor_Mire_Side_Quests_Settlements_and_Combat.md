@@ -506,7 +506,7 @@ Hessel's thanks and a pot of rootcraft balm (a consumable from the item pass, or
 | Wrong lean | Course resets. |
 | Walking away | Stays Active; resume at Gilly. |
 | Logout with a barrow | The load returns to the bank. |
-| Co-op | Per-player. NPC table placement may follow the host only as a provisional presentation fallback (Integration MI-CO-06, pending Director review; conflicts in Integration §5.2 Q-18); it never decides another player's step or credit. |
+| Co-op | Per-player. NPC table placement may follow the host only as a presentation fallback (Integration MI-CO-06, CDR-6; conflicts in Integration §5.2 Q-18); it never decides another player's step or credit. |
 
 ### MRW.14 Integration needs
 
@@ -775,7 +775,7 @@ Nine Stakes as a true, kept crossing (a route across the Field's edge, readable 
 | Wrong stake or face | "Won't go home." Lift and try another. |
 | Walking away | Stays Active; resume at Halsey. |
 | Death | Respawn at the post; progress kept. |
-| Co-op | Raiders and the Mud-Boss are shared; stakes are per-player props; each player's crossing and stake interactions follow their own state. Any shared stake presentation is a provisional presentation fallback (Integration MI-CO-06, pending Director review; conflicts in Integration §5.2 Q-18) and never gates another player's navigation or credit. Each player reads the ferry book. |
+| Co-op | Raiders and the Mud-Boss are shared; stakes are per-player props; each player's crossing and stake interactions follow their own state. Any shared stake presentation is a presentation fallback only (Integration MI-CO-06, CDR-6; conflicts in Integration §5.2 Q-18) and never gates another player's navigation or credit. Each player reads the ferry book. |
 
 ### MNK.14 Integration needs
 
@@ -1037,7 +1037,7 @@ The hide and meat per the economy pass (harvest); a share to Annot; small paymen
 | Chooses the wrong patch | Annot's bark; choose again. |
 | Death | Respawn at the blind; stop sites stay read; the Hart resets. |
 | Walking away | Stays Active; resume at Annot. |
-| Co-op | The Hart is a shared world creature; a defeat credits each partner whose own active step consumes it (Lowmark §8.1); the choice is per player (prop host fallback: provisional presentation only, Integration MI-CO-06, pending Director review). |
+| Co-op | The Hart is a shared world creature; a defeat credits each partner whose own active step consumes it (Lowmark §8.1); the choice is per player (prop host fallback: presentation only, Integration MI-CO-06, CDR-6). |
 
 ### MRH.14 Integration needs
 
@@ -1395,7 +1395,7 @@ Each discovery has a **surface** (what anyone sees), a **reading** (what a caref
 | Interruptible re-coat buff | MNK Mud-Boss | Gameplay | Standard. |
 | Range inspect | MNK | Systems | Line-of-sight inspect. |
 | Scripted light sequences (answering lamps; moss caps; reflection) | MBO, MNK, MDS02 | VFX | Event-driven prop states. |
-| Per-player props | All | Systems | Host fallback as a provisional presentation fallback only (Integration MI-CO-06, pending Director review); never gates another player's navigation, interactions, credit or completion (Q-18). |
+| Per-player props | All | Systems | Host fallback as a presentation fallback only (Integration MI-CO-06, CDR-6); never gates another player's navigation, interactions, credit or completion (Q-18). |
 | Quest-start skill requirement | MRH | Systems / Schema | Standard requirement check on accept. |
 | Persistent discovery booleans | MDS01–MDS10 | Schema | `MDS##_SEEN` / `MDS##_READ`; **`MDS07_READ` is read by Act III**. |
 
@@ -1422,3 +1422,4 @@ No runtime need beyond bible §11.1–11.2 and standard requirement checks.
 | Batch 4 encounter alignment review, 2026-11-09 | Aligned with `Enemies/Caelmor_Mire_Encounter_and_Enemy_Requirements.md` §13.3 (numbers and text only; no id, step or flag renamed): MBO-E1 runner dart ~0.8 s → ~0.9 s, gnawer ~1.0 s → ~1.2 s, no bleed (I-8, I-9); MNK-E1 cleave ~0.9 s → ~1.0 s, sling ~1.4 s → ~1.2 s, no blind (I-8, I-10); MNK.7.1 Hook pull 1.3 s → 1.5 s (I-11); MRH.7.1 Charge stamps 1.4 s → 1.5 s and MRH-E2 stalker stamp ~1.0 s → ~1.5 s (C-1, I-11). |
 | Playability audit fixes, 2026-11-13 | SS-07 (MBO bark suppressed while MR-M5 is Active), SS-08 (MRW plank-way keep-watch gate deleted; X14 is presentation), SS-13 (MBO Warden and Eskil are two people), SS-14 (S06 lifts the ninth first), SS-15 (Corwin Tey renamed Godwin Tey; collision-checked across Lowmark, Thornfell and Mire), SS-16 (arrowhead in the skull at the antler base), SS-17 (unanswered Varne hook deleted), CO-03 (MRH credit by own active step). Authored walkthrough only. |
 | Playability audit fixes review, 2026-11-13 | Independent review of the same-day fixes. This file had no file-level co-op qualifier: MRW.13, MNK.13, MRH.13 and the runtime "Per-player props" row now state host presentation as a provisional fallback (MI-CO-06) that never gates another player's navigation or credit; MNK stake interactions follow each player's own state. Authored walkthrough only; text only; no id, step, flag or geography changed; no Director recommendation promoted. |
+| CDR-6 solo-completion sweep, 2026-11-14 | MI-CO-06 references (MRW.13, MNK.13, MRH.13, per-player props row) restated as presentation fallback only under CDR-6. Mud-Boss and Rust Hart checked solo-achievable as authored; no change. Text only; no id, step, flag, line or geography changed; Sol's co-op conflicts kept as presentation questions. |

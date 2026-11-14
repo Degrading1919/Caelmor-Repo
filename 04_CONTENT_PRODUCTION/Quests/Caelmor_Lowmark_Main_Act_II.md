@@ -1334,7 +1334,7 @@ No other combat. Nothing behind the falls is hostile. Drawing a weapon at the St
 | Death on the climb | Impossible on walkable routes; on the optional ford, respawn at area A |
 | Wrong gate order | Unlimited retries; Oriel resets |
 | Logout | Resume at the last completed step; inside the Steps, at the curtain ledge |
-| Co-op | §BF.7.5. Sedge walks with each player's instance (per-player NPC; fallback: Sedge waits at area A and at the curtain for whoever is furthest behind). |
+| Co-op | §BF.7.5. Sedge walks with each player's instance (per-player NPC; fallback: Sedge waits at area A and at the curtain for the furthest-behind player who is present and on this step; a partner who leaves, disconnects or is on another step is never waited for, and Sedge walks on with the remaining player). |
 
 ## BF.12 Mystery ledger, open decisions
 
@@ -1408,4 +1408,5 @@ Playtest questions (the real bar): *What did the water do that water doesn't do?
 | **Independent review pass** | Applied: one post-MQ4 water story (mill race for the crew, backwater for the fen, slack gate as its first sign); MQ6 chronology and fifth-night cadence; MQ7 forecast basis; Braid gate names and order matched to MQ11; Fourteenth Lot wreck scar; Marrick's Act II appearance; MQ6 brace and MQ7 escort replace two more channel holds; MQ5 den not refought; MQ8 optional ambush and elk line; MQ9 dawn wait removed; promise step id corrected. |
 | **Skills** | Taught here: Melee, Woodcutting, Hunting, Cooking, Smithing (optional path). No Ranged, Fletching or Mining teaching in Act II; every Act II encounter accepts ranged and none requires it (CDR-2). |
 | **Director rulings reconciliation (2026-11-03)** | CDR-1: MQ6 crews (TF-E2, TF-E3a) fight to 0 HP; tying/binding removed. CDR-2: ranged accepted throughout, never required; skill rows read "Melee or Ranged". CDR-3: "v1" release wording changed to Lowmark-content wording. No steps, flags, beats or line ids changed in this file. |
+| **CDR-6 solo-completion sweep, 2026-11-14** | MQ9 §BF.11 shared-Sedge fallback: Sedge no longer waits for an absent, disconnected or other-step partner; the remaining player is never blocked. No other Act II violations found. |
 | **Size discipline** | MQ7–9 packages are shorter than MQ5–6 by design; MQ8–9 are low-combat quests whose substance is in their presentation specs. |

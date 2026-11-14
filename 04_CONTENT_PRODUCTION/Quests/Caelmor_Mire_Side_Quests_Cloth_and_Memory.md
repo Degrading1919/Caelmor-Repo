@@ -80,7 +80,7 @@ Only MCF feeds a main quest: `MR_CLOTH = returned` puts the recovered cloth at C
 - **Defeat (CDR-1):** every enemy to 0 HP. Earthen Echoes re-form only while their condition lasts. Rootshadow cutters are human and use the ordinary defeat presentation; Gethin Scarth never fights and is never targetable.
 - **MD-7:** no Hollowfoot appear in any of these five quests. Each package carries the swap note.
 - **MD-3:** Rowan does not cross at night; MFW's dusk watch is reached on foot.
-- **Co-op:** Lowmark per-player prop pattern. Where a row here says "fallback: host", that is a provisional presentation fallback only (Integration MI-CO-06, pending Director review): it never decides another player's walkable ground, interactions, credit or completion, which follow each player's own quest state (conflicts: Integration §5.2 Q-18).
+- **Co-op:** Lowmark per-player prop pattern. Where a row here says "fallback: host", that is a presentation fallback only (Integration MI-CO-06, CDR-6): it never decides another player's walkable ground, interactions, credit or completion, which follow each player's own quest state (conflicts: Integration §5.2 Q-18).
 - **Skills (MD-11):** Leatherworking (MBS), Hunting (MCF, MFW, MMR), Woodcutting (MSG), Melee and Ranged (MCF, MMR, MSG). Levels are `[GD]` placeholders.
 - **Map:** relative placement only; **MAP VERIFICATION REQUIRED** wherever it matters. "The high passes" and "the lowlands" are people's words for where someone or something came from; no route, distance or direction is stated.
 
@@ -497,7 +497,7 @@ Tuned for Competent-to-Advanced identity (after MR-M2; MD-10).
 | Poisoned with no antidote | Poison runs out (~8 s); Hob carries a spare and offers one at the mouth. |
 | Walking away | Stays Active; Gethin's stall stays open until `S07`. |
 | Fail state | None. |
-| Co-op | Shared cutters (credit to all on the stage). Each player carries their own bales (fallback: shared count). Choice per player; the jetty brazier and Calwen's row are per player (fallback: host). |
+| Co-op | Shared cutters (a defeat credits each player whose own active step consumes it). Each player carries their own bales (fallback: a shared count, credited only to a player whose own `S06` consumes it; CDR-6). Choice per player; the jetty brazier and Calwen's row are per player (fallback: host). |
 
 ### MCF.11 Integration needs, ledger, open decisions, review
 
@@ -952,7 +952,7 @@ Tuned for Competent identity (after MR-M2).
 | No Hunting | Hob. |
 | Walking away | Stays Active; resume Lenna (`MMR-B2.02`). |
 | Fail state | None. |
-| Co-op | Shared Echoes; stakes pulled by any player count for all on `S04`; map choice per player. |
+| Co-op | Shared Echoes; stakes pulled by any player count for each player whose own active step is `S04` (CDR-6), and for no one else; map choice per player. |
 
 ### MMR.11 Integration needs, ledger, open decisions, review
 
@@ -1161,7 +1161,7 @@ No choice; no region flag.
 | Death | Respawn at the mouth; arrangement and counted waves persist. |
 | Walking away | Stays Active; storm pin persists for this player until `S05`. |
 | Fail state | None. |
-| Co-op | Vents are shared within the instance (fallback: host); wave count shared. |
+| Co-op | Vent arrangement and wave count are shared task progress, credited only to a player whose own active step (`S02`, `S03`) consumes them (CDR-6); otherwise a shared vent state is presentation only (fallback: host). |
 
 ### MSG.11 Integration needs, ledger, open decisions, review
 
@@ -1253,3 +1253,4 @@ MSG-D4.03 YSOLDE: "Both, then. Written."   {set MSG_LISTENED; event: quest Compl
 | Batch 4 encounter alignment review, 2026-11-09 | Aligned with `Enemies/Caelmor_Mire_Encounter_and_Enemy_Requirements.md` §13.3 (numbers and text only; no id, step or flag renamed): MCF cutter hook-slash ~0.9 s → ~1.0 s (C-1, I-10); MCF-E2 frame cut ~1.0 s → ~1.5 s and labelled hazard MCF-H1 (I-12, I-23). MSG-E1 and MMR rows already match C-5 and C-3. |
 | Playability audit fixes, 2026-11-13 | SS-01 (one MMR re-form condition), SS-07 (MBS hall scene held during MR-M5 until `S03`), SS-13 (Eskil and the MBO Warden are two people), SS-18 (MCF poles laid on completion; assault pinned to day), SS-27 (MAP VERIFICATION note only), CO-01 (co-op host fallback is provisional presentation only). Authored walkthrough only. |
 | Playability audit fixes review, 2026-11-13 | Independent review of the same-day fixes. Package review table: MMR contract line updated to the SS-01 single re-form condition. Authored walkthrough only; text only; no id, step, flag or geography changed; no Director recommendation promoted. |
+| CDR-6 solo-completion sweep, 2026-11-14 | MCF.10, MMR.10 and MSG.10 shared-task rows: credit only to a player whose own active step consumes it (CDR-6). MI-CO-06 references restated as presentation fallback only under CDR-6. Text only; no id, step, flag, line or geography changed; Sol's co-op conflicts kept as presentation questions. |

@@ -94,3 +94,14 @@ Collected by the reconciliation workers. **Not removed**: each has a fallback or
 | Thornfell | TST wind-drift arrows and tillering-board curve UI | Standard ranged hit roll; single craft action |
 | Thornfell | TSM wolf "snatch the carry"; TSL lightning hazard with 10% HP floor; TSL-E2 brace input; TWC colour-bearing carry state with sail push | Ordinary hazards and a carry item |
 | Thornfell | TSG cutter work bars that pause when engaged; terrace drop gated on three Answers; TBC chalk-board load planner | Simple progress interactions |
+
+## 8. Solo completion (CDR-6, 2026-11-14)
+
+The Creative Director ruled that every quest is fully completable by one player; co-op is optional assistance (rulings CDR-6, §3.7). For engineering this means:
+
+- **No multiplayer system is a prerequisite of quest completion.** Quest tracking, flags, choices and rewards are per player. A partner's progress, presence, disconnection or host role never decides another player's step.
+- **Shared credit** is ordinary: an encounter or task credits a partner only when their own active step consumes it.
+- **Shared-world presentation** (partners at different steps seeing different crossing states, water stages or props) stays documented as presentation questions for Sol (Mire Integration Q-18, Thornfell Q-06, Lowmark §8.1). These are not blockers for building the solo questline, and content will not add runtime needs only to support elaborate co-op mechanics.
+- **Bosses** are tuned for solo completion; any optional multiplayer scaling must not compromise it.
+
+The per-region solo-completion sweep (2026-11-14) is logged in the rulings file §7 and in each package's review log.

@@ -202,7 +202,7 @@ No option is wrong. The quest never tells the player which is right; the smallho
 | Player has no recovery tool | Field knife at `WC-D6`. |
 | Player no longer holds the lent bow at the report | `WC-D7.12` is skipped (item-held condition); nothing depends on it. |
 | Logout | Last step and flags restored; carries discarded. |
-| Co-op | Shared E1 creatures give credit to each participant. The sow is per-player presentation once any instance chooses; a partner who chose *Leave her* does not see their sow taken. If per-player creature presentation is unavailable, fallback: each instance's sow is a separate spawn in the same bed. |
+| Co-op | Shared E1 creatures give credit to each participant whose own active step consumes it. The sow is per-player presentation once any instance chooses; a partner who chose *Leave her* does not see their sow taken. If per-player creature presentation is unavailable, fallback: each instance's sow is a separate spawn in the same bed. |
 
 ### WC.10 Integration needs
 
@@ -411,7 +411,7 @@ A stretch of the Greyharrow side-branch bank downstream of the town docks.
 | Player has no cutting tool | The upper household lends a "bank axe" at `BW-D1`, kept at completion. Item pass defines it. |
 | Player has sold the leaner's wood before *Build* | Any ordinary wood of the required amount is accepted (ordinary wood is one state, D11). If the player has none, the option is shown but greyed with: "You'll need wood to give." They can cut the leaner's stump-side limbs (one more channel) for enough. No soft-lock. |
 | Logout | Last step restored; jam and leaner states persist once cut. |
-| Co-op | Each instance has its own jam, leaner and holder presentation. Fallback if per-player props are unavailable: the jam is pre-cleared for later instances and `S02_free_jam` becomes "Cut the last of the jam free" on a remaining limb. The holder choice is stored per player; the shared world shows the holder standing until the server supports per-player tree states. |
+| Co-op | Each instance has its own jam, leaner and holder presentation. Fallback if per-player props are unavailable: the shared jam resets after the first player frees it, and each player clears it from their own `S02_free_jam`; the shared prop is presentation only. The holder choice is stored per player; the shared world shows the holder standing until the server supports per-player tree states. |
 
 ### BW.9 Integration needs
 
@@ -1279,3 +1279,8 @@ Applied the independent side-content review and Director rulings 8, 9, 10 and 11
 ## Director rulings reconciliation (2026-11-03)
 
 Applied `Caelmor_Director_Rulings_Combat_Ranged_Release.md`. **CDR-2:** WC gains Lowmark's one optional bow beat (the eldest's short bow for the sow hunt: WC.1, WC.3 Beat 6, WC.5, WC.6, WC.8, WC.9, WC.10, nodes `WC-D6.11`–`.13` and `WC-D7.12`, WC.12 log). Bow and arrows are a loan; item names are proposals for the economy and item pass. A §0.1 note states that every fight accepts melee or ranged. **CDR-1:** no human enemy or yield exists in this file; FK's "downed birds" now read "taken birds" (Hunting recovery unchanged). **CDR-3:** the title drops "v1" (the bible's filename is unchanged) and HS's "None in v1" reads as Lowmark content. No step, flag or dialogue id removed.
+
+
+## CDR-6 solo-completion sweep (2026-11-14)
+
+CDR-6 solo-completion sweep, 2026-11-14: WC.9 shared-creature credit limited to participants whose own active step consumes it. No other violations found. Follow-up (coordinator consistency with Thornfell): BW.8 jam fallback no longer pre-clears the jam for later players; it resets and each player frees it from their own step.

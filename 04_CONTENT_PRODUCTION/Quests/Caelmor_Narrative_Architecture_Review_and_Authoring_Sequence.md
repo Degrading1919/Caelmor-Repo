@@ -221,6 +221,8 @@ Every future quest, however small, declares six things in its summary card. This
 | **Revelation role** | Does it plant, support, or own a revelation (R01–R20), or is it self-contained? | Plants R06 (a cairn with no body) |
 | **Recurring evidence** | Does any object, record, or person recur, and with which independent custodian? | None |
 | **State compliance** | How does it stay within Inactive/Active/Completed? | Choice recorded in `TH_…` outcome flag (Thornfell region flags use `TH_` because Lowmark MQ6 already uses `TF_` for quest-local flags); no fail path |
-| **Combat compliance** (CDR-1, CDR-2; added 2026-11-03) | Do its enemies fight to 0 HP, and can every fight be won with melee or ranged? Any scripted surrender/mercy is a named exception in the rulings register. | Wolves and brigands fight to 0 HP; no exception |
+| **Combat compliance** (CDR-1, CDR-2; added 2026-11-03; solo completion CDR-6, added 2026-11-14) | Do its enemies fight to 0 HP, and can every fight be won with melee or ranged? Any scripted surrender/mercy is a named exception in the rulings register. Can one player complete every step, boss and reward alone, with co-op only as optional assistance (rulings §3.7)? | Wolves and brigands fight to 0 HP; no exception |
 
 A quest that answers "self-contained" to the revelation field is welcome. Part 5's rule stands: Caelmor needs many stories that end where they begin.
+
+**CDR-6 note (2026-11-14):** the Creative Director ruled that every quest is fully completable by one player and co-op is optional assistance (rulings file CDR-6, §3.7). The solo test is folded into the Combat compliance field of the §7.1 contract above; existing summary cards are read as declaring it unless a sweep flags otherwise.

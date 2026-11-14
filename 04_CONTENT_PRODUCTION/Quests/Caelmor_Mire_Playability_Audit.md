@@ -1,6 +1,6 @@
 # Caelmor: Mire Playability Audit
 
-**Date:** 2026-11-13
+**Date:** 2026-11-13 (updated 2026-11-14 for CDR-6, solo completion; section 5.0 and the fix log)
 **Audience:** Collin (Creative Director), Sol (systems and Unity), Gameplay Designer (GD)
 **Package audited:** the Mire quest package at checkpoint `98f24f3`, read on `main` at `eb38636`. No file under `04_CONTENT_PRODUCTION/` changed between those two commits; the commits in between are texture-painting and material-atlas work under `MEDIA/Materials/`.
 
@@ -63,14 +63,14 @@ Severity: **High** (softlock, blocked progression, broken predicate, or a contra
 
 **Solo: logically playable after the fixes.** A fresh character can reach every main-line and side-quest completion and the post-story content without a softlock in the authored content. Every skill step on the main line has a time-cost crew alternative, so no Lowmark or Thornfell skill is required. Every step has a death respawn and a logout restore, and no quest can fail. The remaining solo risks are runtime capabilities that the content assumes and Unity does not yet demonstrate: above all, multi-level navigation for the Chapel (MR-M4), the keep-watch and presentation-hour system, runtime walkability changes, escort and boat movement, and mobile enemies. MR-M4 cannot be built until multi-level navigation exists, and it has no authored fallback because its progression is the floor descending.
 
-**Co-op: playable on paper only when partners are at the same step.** Before this audit, several package rules let the host's quest state decide a partner's navigation, interactions and credit. That wording has been removed: each player's own state now decides their own navigation, objectives, credit and completion in every file. What remains open is how a shared world presents state that differs between partners when that state is walkable ground or a gate (causeway crossings, Chapel water stages, standards, the crown and closure gate, walkways, presentation hour). Those are recorded with solution families for Sol and are not decided here.
+**Co-op: optional assistance under CDR-6 (2026-11-14); it never gates solo completion.** The solo walkthrough above is the completion standard for every Mire quest. CDR-6 also decided the two co-op Director items (D-13 shared-task credit, D-14 the asker beat and junction calls): a partner is credited only when their own active step consumes the work, and personal flags and decisions stay independent. With partners at the same step the packages are coherent; with partners at different steps the shared-world conflicts below remain presentation questions for Sol and can strand only the co-op presentation, never a player's ability to finish alone. Before this audit, several package rules let the host's quest state decide a partner's navigation, interactions and credit. That wording has been removed: each player's own state now decides their own navigation, objectives, credit and completion in every file. What remains open is how a shared world presents state that differs between partners when that state is walkable ground or a gate (causeway crossings, Chapel water stages, standards, the crown and closure gate, walkways, presentation hour). Those are recorded with solution families for Sol and are not decided here.
 
 ### Top eight issues, in priority order
 
 | # | Issue | Category | Status |
 |---|---|---|---|
 | 1 | **The Chapel (MR-M4) assumes multi-level navigation, ladders, stacked floors and runtime walkability swaps.** Current Unity has a flat navigation scene with no multi-level or off-mesh traversal. Every required MCS step depends on it, and no flattening workaround applies (SM-05, TD-01; section 4.1). | C | Open: Sol. Two content fallbacks added for push targeting and Mabyn's movement. |
-| 2 | **Shared environmental state in co-op.** Partners at different steps need different crossing states, water stages, standards, crown props and hours in one shared space. One player's state can strand or block the other (CO-07 to CO-11, CO-15). | C | Open: Sol (Q-18, families F1 to F5). Host authority removed from text. |
+| 2 | **Shared environmental state in co-op.** Partners at different steps need different crossing states, water stages, standards, crown props and hours in one shared space. One player's state can strand or block the other (CO-07 to CO-11, CO-15). | C | Downgraded by CDR-6 (2026-11-14): a presentation question for Sol (Q-18, families F1 to F5), not a prerequisite for solo completion; any family, including the lightest (F4 or F5), is acceptable. Host authority removed from text. |
 | 3 | **Host-driven credit and completion in co-op.** Partners were credited for boards, posts and the MR-M5 gap hold they did not perform, and MI-CO-06 let host state drive walkable state (CO-01, CO-03, CO-04, CO-06). | A, High | Fixed 2026-11-13. |
 | 4 | **Keep watch, the presentation hour and per-player walkability are not demonstrated in source.** Nearly every Mire step reads the hour or a crossing state (TD-09, TD-02, SM-24). | C | Open: Sol. |
 | 5 | **Escort, boat ride and mobile enemies are required on the main path and listed as remaining work in Unity** (SM-06, SM-07, TD-07, TD-08). | C | Open: Sol. One fallback added for the harness haul. |
@@ -248,11 +248,22 @@ Status against current source (`UNITY/README.md` and a grep of `UNITY/` and `COD
 
 ## 5. Co-op
 
+### 5.0 CDR-6: co-op is optional assistance (2026-11-14)
+
+Collin ruled CDR-6 on 2026-11-14 (`Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md`, §1 and §3.7). For the Mire this audit now reads as follows.
+
+- **The solo walkthrough stands as the completion standard.** Every Mire quest, main and side, was walked logically solo (section 1) and that walk is the test of completion. No co-op or shared-state solution is a prerequisite for finishing the solo questline.
+- **Co-op is evaluated only as optional assistance.** Sections 5.1 to 5.3 are kept as recorded. The conflicts K-01 to K-10 stay documented for Sol as shared-world presentation and networking questions; they can affect how partners at different steps see one world, not whether either can finish alone. Integration Q-18 and AT-13 were downgraded accordingly, and no new runtime requirement is created only to support elaborate co-op mechanics.
+- **Credit and personal state (D-13, D-14 resolved).** A partner receives shared encounter or task credit only when their own active step consumes it. MRC mending and gathering, MMR stakes, MBA spine, MCF count and MSG vents now say so; an MRC task a partner finished counts for the other as that task's crew path, and the "mended it yourself" pole and lines go only to the player who mended. Each partner's `MBL_ASKER` comes only from their own action (default `wardens`, as in solo), and MRC junction calls count only for the caller's own `MRC_WRONG_CALLS`.
+- **MI-CO-06 (D-08)** is a presentation fallback only, governed by CDR-6; every "pending Director review" qualifier on it in the packages now reads so.
+- **Leaving never blocks.** MI-CO-08 now states that a partner who leaves, disconnects or is ahead never blocks the other; the remaining player finishes alone from their own persisted step.
+- **Bosses checked solo.** The General (MBL-E6; solo 6 to 8 min, Act III §7.1.5), MCS-E3 (solo 2 to 3 min), the Mud-Boss (MNK-E3) and the Rust Hart (MRH-E1) are authored with solo targets and no group tuning; co-op only scales health up from the solo baseline (MI-CO-04). The gap hold in MR-M5 `S06` is held by the one player while NPCs fill the ring; no second holder is needed. The Night Count (MW-01, `[MD-8]`) may be tuned higher than the story fight but now states it stays solo-achievable.
+
 ### 5.1 Principle now written into the packages
 
 Each player's own quest state decides that player's own navigation, objectives, interaction availability, credit, choices and completion. A partner is credited for a defeat or action only when their own active step consumes it (Lowmark §8.1). Each partner's own flags drive their barks, dialogue and epilogue. An escort follows its own quest owner. No partner's keep watch or pin advances another partner's hour-gated step. A host leaving is treated as a logout for every partner, who then restores from their own persisted state by their own step's logout rule (Integration MI-CO-08).
 
-**Host-driven presentation is provisional.** MI-CO-06 now reads: where the runtime cannot show different props to partners, one shared visual state may be shown; it never decides another player's walkable ground, interaction availability, step, credit or choice. It is pending Director review (Integration D-6) and is not an approved universal co-op rule.
+**Host-driven presentation is provisional.** MI-CO-06 now reads: where the runtime cannot show different props to partners, one shared visual state may be shown; it never decides another player's walkable ground, interaction availability, step, credit or choice. It is pending Director review (Integration D-6) and is not an approved universal co-op rule. **Superseded 2026-11-14:** CDR-6 now governs it as a presentation fallback only (section 5.0).
 
 Some side-file and Enemies rows still say "(fallback: host)" for props (MRW.13 NPC table placement, MNK.13, MRH.13 prop, MWS.10, MCF, Enemies §7.2 Colour pulse). They were left as authored and now sit under the file-level provisional qualifier. The Enemies §7.2 Colour pulse row should be read with Act I §B7, which now lists the pulse source as an open Q-18 item.
 
@@ -289,9 +300,9 @@ Some side-file and Enemies rows still say "(fallback: host)" for props (MRW.13 N
 | **K-09** (SS-21) | Medium | **Weather and festival pins.** MLD festival banners and dry pin, MLW rain pin, MSG storm pin and the MR-M5 ochre pin differ by quest state. | F3, F2, or the provisional host presentation as long as it never gates anything | MLD is no longer offered while MR-M5 is Active (A-13), which removes the solo version of this clash. |
 | **K-10** (CO-18, CO-19) | High | **Disconnect, reconnect and host departure.** A partner who dies or reconnects during the shared boat ride respawns "aboard" a boat that has moved on. A partner reconnecting into a host world at another water stage or crown state may have a respawn anchor on ground that is not walkable in that variant. Where a non-host partner's flags, sub-progress and items persist after play in the host's session is undefined; current Unity persists a local checkpoint file and not multiplayer membership. | F1 or F4; or F5 (an out-of-step partner respawns at their own step anchor in their own state) | MI-CO-08: host departure is a logout for every partner. Persistence ownership is Sol's and untestable until a co-op build exists. |
 
-Two co-op items are Director decisions rather than Sol conflicts (CO-16 shared-task credit and CO-20 one partner's action setting another's choice flag); they are in section 6.
+Two co-op items are Director decisions rather than Sol conflicts (CO-16 shared-task credit and CO-20 one partner's action setting another's choice flag); they are in section 6 and were resolved by CDR-6 on 2026-11-14 (D-13, D-14).
 
-**Co-op verdict.** With partners at the same step, the packages are now coherent: shared enemies, individual credit, per-player choices and per-player epilogues. With partners at different steps, K-01 to K-05 and K-10 can strand or block a partner until Sol picks a family per set piece. MR-M4 and MR-M5 are the hardest cases.
+**Co-op verdict.** With partners at the same step, the packages are now coherent: shared enemies, individual credit, per-player choices and per-player epilogues. With partners at different steps, K-01 to K-05 and K-10 can strand or block a partner's co-op session until Sol picks a family per set piece. MR-M4 and MR-M5 are the hardest cases. **Under CDR-6 (section 5.0) these are presentation questions for co-op only: none prevents either player from finishing alone from their own step.**
 
 ---
 
@@ -308,13 +319,13 @@ Nothing in this section has been approved by this audit. "Recommendation" means 
 | D-05 (SM-29, SS-25) | **Bannerline road** before MR-M5 | Accessible, with story-specific interactions gated | The authored content already treats it this way (MBO W1, MSS spoon, MDS07 path, MDS06 after MR-M5). The main line is unaffected either way: pre-MR-M5 standards are presentation with no Wraiths. Zones Q-3 is still open. | Gate-shut alternative in Zones Q-3. MAP VERIFICATION flags kept. |
 | D-06 (SS-23) | **Stillgrave war-washing** | Retain only as explicitly uncertain local folklore | MLL-D3.03 already complied; MLL.1, Area D, Beat 4 and Ebba's `MLL-D3.01` leaned toward fact. They have been hedged to read as uncertain local Tender belief. It is not canon and was not removed. | The removal option already authored as an MLL open decision. |
 | D-07 (SS-24) | **Rutting stalker** (MW-03) | Omit unless it has a distinct gameplay purpose | No distinct purpose found: MW-06 already gives post-MRH stalkers, MRH-E2 uses the stalker kit, and the antler toss and dusk patch defence duplicate the Hart. MW-03 is marked "omission recommended, pending Director" and kept. | If omitted, the variant count in bible §10 and Enemies §4.1 becomes 17. |
-| D-08 (CO-01, CO-02) | **MI-CO-06** co-op presentation | Provisional fallback, not an approved rule | Rewritten as a provisional presentation fallback that never decides navigation, interaction, credit or completion (A-27). Navigation-affecting conflicts are for Sol (section 5). | Integration D-6 open; Q-08 records the superseded wording and how to revert. |
+| D-08 (CO-01, CO-02) | **MI-CO-06** co-op presentation | **Decided by CDR-6 (2026-11-14):** presentation fallback only, governed by CDR-6 | Rewritten as a provisional presentation fallback that never decides navigation, interaction, credit or completion (A-27). Navigation-affecting conflicts are for Sol (section 5). | Integration D-6 open; Q-08 records the superseded wording and how to revert. |
 | D-09 (SM-10) | **Route from Sorrowmere to Griefwatch and Rootrest** | None recorded | No package states it (Zones Q-1). Act III says "No channel crossing is required in MR-M5". If the map pass routes Griefwatch through the causeway, X01 and X02 apply to MR-M5's start and end. | Whatever route Q-1 selects must have no crossing that is non-walkable at morning, or MR-M5 `S00` and `S08` need a Slack pin like A-01. MAP VERIFICATION REQUIRED kept; no geography changed. |
 | D-10 (SM-19) | **`MRC-L-ROWAN` upgrade window** | None recorded | The window ("until MR-M5 becomes Active") is in practice a few minutes at the landing after MCS, with keep watches between asks, and nothing tells the player it exists. | Act II §A14.5 already offers both: cut `MRC-L-ROWAN` (flag final at MRC completion; the audit's preference, as a simplification) or extend the window. |
 | D-11 (SS-02) | **MLD timing** | None recorded | Option (a) applied as the minimal fix (A-13). Still uncovered: an MLD accepted before MR-M5 starts can be Active during the crisis; no text says which presentation wins (same pattern as the MBO/MSS/MBS rule in Act III §11). | **Option (b):** MLD only after MR-M5 Completed, and Act III's read of MLD Completed for Oswin's placement deleted. Recorded in MLD's open decisions. |
 | D-12 (SS-19) | **Thin side quests** (MHG, MFW, MBA, MSS, MBS) | None recorded | Five of twenty side quests are strings of talk, inspect and walk with no RuneScape-style verb. | Using existing verbs only: make an existing skill node on their route a required gather or craft step, or trim them and accept them as short lore quests. Director and GD choose. |
-| D-13 (CO-16) | **Shared-task credit** (MRC mending and gathering; MMR stakes; MBA spine; MCF count; MSG vents) | None recorded | A partner could receive the "mended it yourself" pole and lines for work they did not do, against Lowmark §8.1. | Bounded option: shared-task credit only for a partner whose own active step consumes it, with reward lines keyed to the player's own action. Shared crewing kept only if approved. |
-| D-14 (CO-20) | **Asker beat and junction calls in co-op** | None recorded | One partner's action sets another partner's `MBL_ASKER` ("fallback: host", Act III §7.1.5, Enemies §11.1) and junction calls go to whoever answers first. Presentation only, so Low. | Keep one shared beat, or make it per player (a partner who did not act gets the default `wardens`). |
+| D-13 (CO-16) | **Shared-task credit** (MRC mending and gathering; MMR stakes; MBA spine; MCF count; MSG vents) | **Resolved by CDR-6 (2026-11-14):** credit only when the partner's own active step consumes it; personal rewards and lines from the player's own action. Applied in Int MI-CO-03, II §A11, Clo, Nam. | A partner could receive the "mended it yourself" pole and lines for work they did not do, against Lowmark §8.1. | Bounded option: shared-task credit only for a partner whose own active step consumes it, with reward lines keyed to the player's own action. Shared crewing kept only if approved. |
+| D-14 (CO-20) | **Asker beat and junction calls in co-op** | **Resolved by CDR-6 (2026-11-14):** each partner's `MBL_ASKER` and `MRC_WRONG_CALLS` come only from their own action (default `wardens`). Applied in Int MI-CO-05, II §A7, III §7.1.5, Ene §7.1. | One partner's action sets another partner's `MBL_ASKER` ("fallback: host", Act III §7.1.5, Enemies §11.1) and junction calls go to whoever answers first. Presentation only, so Low. | Keep one shared beat, or make it per player (a partner who did not act gets the default `wardens`). |
 | D-15 (SS-26) | **MWS marker purpose** | None recorded | Still [PROPOSAL — DIRECTOR]. Not a playability blocker. MHG also remains [PROPOSAL — DIRECTOR]. | As authored. |
 
 ### Gameplay Designer items (primary entries in sections 2 and 3)
@@ -406,9 +417,21 @@ Files: **I, II, III** = Act I/II/III quest files; **I-dlg** = Act I dialogue; **
 | IDs | Owner |
 |---|---|
 | SM-07, SM-24, SS-20, SS-21, SS-22, CO-07, CO-08, CO-09, CO-11, CO-13, CO-15, CO-19, TD-01 to TD-04, TD-06 to TD-15, TD-17, TD-18, TD-20, TD-21 | Sol (sections 4 and 5) |
-| SM-10, SM-19, SS-19, SS-25, SS-26, CO-16, CO-20; SM-25 to SM-29 (status notes) | Director (section 6) |
+| SM-10, SM-19, SS-19, SS-25, SS-26; SM-25 to SM-29 (status notes) | Director (section 6) |
 | SM-20 | Gameplay Designer |
 | SM-30, SS-28, TD-22 | Untestable (section 7) |
+
+**CDR-6 solo-completion sweep, 2026-11-14**
+
+Collin's CDR-6 (solo completion; co-op optional) decided D-08, D-13 and D-14 and downgraded every co-op shared-state item to a presentation question for Sol. Text only; no id, step, flag, line or geography changed; Sol's conflicts K-01 to K-10 kept and reframed.
+
+| ID | Status | Files |
+|---|---|---|
+| CO-16 (D-13) | Applied: credit only from the partner's own active step; MRC personal pole and lines from the player's own work | Int, II, Clo, Nam |
+| CO-20 (D-14) | Applied: `MBL_ASKER` and junction calls per player from their own action | Int, II, III, Ene |
+| D-08 (MI-CO-06) | Presentation fallback only, governed by CDR-6; package qualifiers restated | Int, Bible, I, II, III, Clo, Nam, Set, Wrk, Zon, Ene |
+| Q-18, AT-13, MI-CO-04, MI-CO-08 | Q-18 a presentation question, not a solo prerequisite; AT-13 optional (co-op build only); bosses tuned solo first; leaving never blocks | Int |
+| Night Count, extra ferry punt | Night Count stays solo-achievable; the punt for a large party is optional co-op presentation | III, Ene, II |
 
 ## 10. Counts
 
@@ -419,8 +442,8 @@ Source findings: 101 ids across four passes (SM 30, SS 28, CO 21, TD 22). After 
 | A. Definite authored-content contradictions | 6 | 12 | 17 | 35 | 33 | 2 (A-04 GD; A-26 map owner) |
 | B. Likely gameplay or pacing problems | 0 | 5 | 6 | 11 | 8, plus B-06 partly | 3 (B-02 GD, B-06 GD numbers, B-11 zone pass) |
 | C. Technical dependencies for Sol (section 4) | 5 | 12 | 6 | 23 | Text or fallback on 6 (SM-05, SM-06, SM-08, SM-09, TD-05, TD-16) | All capabilities open for Sol |
-| C. Co-op shared-state conflicts for Sol (section 5, K-01 to K-10) | 7 | 3 | 0 | 10 | Host authority removed from text in all ten | All ten open for Sol |
-| D. Director-level decisions | 0 | 5 | 10 | 15 | — | 15, plus GD items and 3 carried-over Lowmark/Thornfell questions |
+| C. Co-op shared-state conflicts for Sol (section 5, K-01 to K-10) | 7 | 3 | 0 | 10 | Host authority removed from text in all ten | All ten open for Sol as presentation questions; none blocks solo completion (CDR-6) |
+| D. Director-level decisions | 0 | 5 | 10 | 15 | 3 decided by CDR-6 (D-08, D-13, D-14) | 12, plus GD items and 3 carried-over Lowmark/Thornfell questions |
 | E. Untestable until a playable build | — | — | — | 12 areas | — | 12 |
 
-High-severity items still open after this audit are all technical or co-op dependencies for Sol: the Chapel's multi-level navigation, per-player walkability, escort and ride, mobile enemies, keep watch and the presentation hour, and the seven High co-op conflicts. No High authored-content contradiction remains open.
+High-severity items still open after this audit are all technical or co-op dependencies for Sol: the Chapel's multi-level navigation, per-player walkability, escort and ride, mobile enemies, keep watch and the presentation hour, and the seven High co-op conflicts, which under CDR-6 affect co-op presentation only and do not block solo completion. No High authored-content contradiction remains open.

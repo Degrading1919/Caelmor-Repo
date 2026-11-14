@@ -110,7 +110,7 @@ None repeats a milestone verb (bible §6: repair-and-escort, track-and-delve, ro
 - **Evidence rule.** Nothing in these quests is evidence for a revelation. The moments of wonder and unease prove nothing and identify nobody. The unlisted grave in TSR is never named.
 - **No failure.** Inactive / Active / Completed only. Death respawns at the quest's named safe point with step and flags intact. Logout restores the last persisted step; completed channel segments persist; a dropped carry-state object returns to its source. Walking away keeps the quest Active with the resume hook named in each package.
 - **Season.** TSR, TST, TGY and TBC play in autumn or snow (snow presentation notes where they differ). TFS is always snow.
-- **Co-op.** Independent instances; shared world creatures give credit to each participant on that step; quest-state props and NPC placement are per player (Lowmark per-player prop pattern; fallback: the host's state drives props, each player's own state drives dialogue).
+- **Co-op.** Independent instances; shared world creatures give credit to each participant on that step; quest-state props and NPC placement are per player (Lowmark per-player prop pattern; fallback: the host's state drives props as presentation only, each player's own state drives dialogue, steps and completion; CDR-6).
 - **Lowmark independence.** Only TBC reads Lowmark state, for optional variant lines (TBC.8). No route between the regions is stated anywhere (FT-03; TD-11).
 
 ### 0.7 Flags other packages read
@@ -305,7 +305,7 @@ Tuned for TF-M1's Competent identity (TD-12).
 | Capstone dropped (logout, death) | Returns to the rubble pile. |
 | Walking away | Quest stays Active at its step; resume hook at the shrine niche (Dagny). |
 | Logout | Last step restored; sounded points, set wedges and the opened face persist. |
-| Co-op | Each player sounds their own points (per-player beat-dots). The sixth-hollow moment plays per player on their own sixth strike. The upper face is a per-player prop state; fallback if per-player props are unavailable: the face is pre-scored for later instances and `S05` begins at the wedges. Each player makes their own `TSR-D5` choice; the rota board prop follows the host. |
+| Co-op | Each player sounds their own points (per-player beat-dots). The sixth-hollow moment plays per player on their own sixth strike. The upper face is a per-player prop state; fallback if per-player props are unavailable: the shared face resets to unscored after the working player leaves it, so each later player does their own full `S05` (CDR-6; reset timing for Sol, Q-06). Each player makes their own `TSR-D5` choice; the rota board prop follows the host. |
 
 ### TSR.11 Integration needs
 
@@ -1037,7 +1037,7 @@ Neither is wrong. Bera does not say which she wanted.
 | Torn hide (light test ignored) | Bera patches it; continue. |
 | No horn | Bera's herding horn (carry-state; returned on completion). |
 | Walking away / logout | Quest stays Active; herd position per player persists at the last ledge reached; shed progress persists. |
-| Co-op | The herd is per-player presentation (each player drives their own instance of the herd). Fallback if unavailable: the herd is a shared actor; any player's correct call advances it and all present get credit; each player still chooses cull or drive in their own state, and the path presentation follows the host. The ram for the cull is a per-player spawn in the fallback. |
+| Co-op | The herd is per-player presentation (each player drives their own instance of the herd). Fallback if unavailable: the herd is a shared actor; any player's correct call advances it, and a partner is credited only when their own active step uses that advance (CDR-6); each player still chooses cull or drive in their own state, and the path presentation follows the host. The ram for the cull is a per-player spawn in the fallback. |
 
 ### TGY.11 Integration needs
 
@@ -1661,7 +1661,7 @@ No plan and no account option is wrong. Every load crosses.
 | Striking on a clack | Spark, hairline; reheat closes it. |
 | Walking away mid-plan | Quest stays Active at the step; the windows wait (they are per-player presentation, not world time). Resume hook at the forge. |
 | Logout | Restore last step; forged fittings and set seat persist; completed windows persist. |
-| Co-op | Bridge state per player (cracked or mended). Fallback: the host's state drives the bridge; each player chalks their own board in dialogue and their own `TBC_WAITS`; the visible board shows the host's plan. Bandits shared, credit to all present. |
+| Co-op | Bridge state per player (cracked or mended). Fallback: the host's state drives the bridge as presentation only (no player's crossing or step waits on another player's bridge state; CDR-6); each player chalks their own board in dialogue and their own `TBC_WAITS`; the visible board shows the host's plan. Bandits shared; a partner is credited only when their own active step uses the defeat (CDR-6). |
 
 ### TBC.11 Integration needs
 
@@ -1908,3 +1908,4 @@ TBC-D8.06 AUD: "Forge is here. Use it. Swear at it. It likes that."
 | **Independent review (2026-11-03)** | 6 findings (1 high, 3 medium, 2 low). High: TST granted the first Ranged weapon while S01 is open and release scope may not grow; TST.15's fallback is now the default (stave racked unstrung, the player calls lulls for Brita), and the bow, arrows and Ranged lesson are kept only as **[PROPOSAL — DIRECTOR]** gated on S01 (summary, beats, steps, rewards, integration, open questions). Medium: TSR's Asa Grell collided with TWN's Asa Brede; renamed **Dagny Grell**; a plot-list "Orm" collided with Orm Brede; renamed **Eyolf**. Medium: bowyer Hild Crane collided with "Hild, a weaver" on Act III's closure roster; renamed **Brita Crane** (`TST_HILD_BENCH` → `TST_BRITA_BENCH`). Medium: Bera's herding horn was a gift; now a carry-state loan only if the TF-M1 practice horn is not carried. Low: TFS verse confirmed as canonical; TTH now quotes it. Low: Ranged mentions gated on S01. |
 | **Batch 4 handoff review (2026-11-03)** | 1 finding (medium). TBC's cracked Narrows state ran from TF-M1 until TBC completed, contradicting the Batch 4 bridge model. Smallest edit: TBC.1 Unlock and TBC.11 now show the bridge cracked only while TBC is Active (scree path walkable regardless); TBC.15 open decision 4 marked resolved; TBC.16 row added. No other text changed. |
 | **Director rulings reconciliation (2026-11-03)** | Applied CDR-1/2/3 (`Caelmor_Director_Rulings_Combat_Ranged_Release.md`). CDR-1: shared rule now "every enemy defeated at 0 HP" (TD-7 superseded); TBC-E1 bandits fight to 0 HP, tied-post epilogue removed, TBC-B5.04 retriggered. CDR-2: S01 resolved; TST restored as Woodcutting → Fletching → Ranged (`S06_string` strings the first bow, new `S06b_fletch`, `S07_butts` shot by the player with lull-calling as alternative path, optional TST-E2 ridge crows); TGY cull accepts melee or ranged; all "if S01 allows" hedges removed. CDR-3: "v1.5 parity" and "ships/initial-release" wording replaced. Steps, flags and choices otherwise unchanged. Historical review rows above describe earlier states. |
+| **CDR-6 solo-completion sweep, 2026-11-14** | TSR.10 pre-scored face fallback → shared face resets so each player does their own full S05; TGY.10 "all present get credit" and TBC.10 "credit to all present" → own-active-step credit; TBC host bridge fallback marked presentation only. |
