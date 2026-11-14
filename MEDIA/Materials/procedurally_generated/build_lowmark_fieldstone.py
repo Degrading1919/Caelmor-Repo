@@ -494,6 +494,73 @@ def aim(obj,location,target):
     obj.rotation_euler=Matrix((right,up,back)).transposed().to_euler()
 
 
+def display_sphere(scene):
+    # Two repeats around the equator keep the front sample near wall scale.
+    radius=U/np.pi
+    bpy.ops.mesh.primitive_uv_sphere_add(segments=640,ring_count=384,radius=radius)
+    sphere=bpy.context.object
+    mesh=sphere.data
+    base=np.empty(len(mesh.vertices)*3,np.float32)
+    mesh.vertices.foreach_get("co",base)
+    base=base.reshape(-1,3)
+    radial=base/radius
+    loop_vertex=np.empty(len(mesh.loops),np.int32)
+    mesh.loops.foreach_get("vertex_index",loop_vertex)
+    uv=mesh.uv_layers.active
+    uv.name="UV0_Metric"
+    mapped=np.empty((len(mesh.loops),2),np.float32)
+    uv.data.foreach_get("uv",mapped.ravel())
+    mapped *= (2,U/V)
+    mapped += (.13,.19)
+    uv.data.foreach_set("uv",mapped.ravel())
+    coord=np.empty((len(mesh.vertices),2),np.float32)
+    coord[loop_vertex]=mapped
+    image=bpy.data.images.load(str(path("height")))
+    image.colorspace_settings.name="Non-Color"
+    height=pixels(image)[:,:,0]
+    h,w=height.shape
+    sample=coord*(w,h)-.5
+    cells=np.floor(sample).astype(int)
+    u,v=cells.T
+    fu,fv=(sample-cells).T
+    top=(1-fu)*height[v%h,u%w]+fu*height[v%h,(u+1)%w]
+    bottom=(1-fu)*height[(v+1)%h,u%w]+fu*height[(v+1)%h,(u+1)%w]
+    depth=(1-fv)*top+fv*bottom
+    # Fade geometry near the poles where longitude converges. Use radial
+    # shading normals so the tangent bake supplies slopes only once.
+    fade=1-smooth(.90,.999,np.abs(radial[:,2]))
+    displaced=(base+radial*((depth-.36)*RELIEF*fade)[:,None]).astype(np.float32)
+    mesh.vertices.foreach_set("co",displaced.ravel())
+    mesh.polygons.foreach_set("use_smooth",np.ones(len(mesh.polygons),bool))
+    mesh.update()
+    mesh.normals_split_custom_set_from_vertices(radial.tolist())
+    attach_bake(sphere)
+
+    world=scene.world=bpy.data.worlds.new("Neutral sphere studio")
+    world.use_nodes=True
+    background=world.node_tree.nodes["Background"]
+    background.inputs[0].default_value=(.56,.56,.56,1)
+    background.inputs[1].default_value=.47
+    bpy.ops.object.camera_add(location=(.22,-4.7,.33))
+    scene.camera=bpy.context.object
+    scene.camera.rotation_euler=(-scene.camera.location).to_track_quat("-Z","Y").to_euler()
+    scene.camera.data.lens=91
+    bpy.ops.object.light_add(type="AREA",location=(-2.8,-3.4,3.4))
+    key=bpy.context.object
+    key.rotation_euler=(-key.location).to_track_quat("-Z","Y").to_euler()
+    key.data.energy=760
+    key.data.shape="DISK"
+    key.data.size=2.7
+    scene.cycles.samples=48
+    scene.cycles.use_denoising=True
+    scene.render.resolution_x=scene.render.resolution_y=1400
+    scene.render.resolution_percentage=100
+    scene.render.image_settings.file_format="PNG"
+    scene.render.image_settings.color_mode="RGB"
+    scene.render.filepath=str(path("sphere"))
+    bpy.ops.render.render(write_still=True)
+
+
 def review(scene,obj,draft=False):
     world=scene.world=bpy.data.worlds.new("Neutral review environment")
     world.use_nodes=True
@@ -603,7 +670,9 @@ def layout_csv(layout_records):
 
 def main():
     parser=ArgumentParser()
-    parser.add_argument("--draft",action="store_true",help="Render neutral geometry only")
+    mode=parser.add_mutually_exclusive_group()
+    mode.add_argument("--draft",action="store_true",help="Render neutral geometry only")
+    mode.add_argument("--sphere-only",action="store_true",help="Render a display sphere from existing maps")
     parser.add_argument("--verify-repeat",action="store_true")
     parser.add_argument("--size",type=int,default=2048)
     args=parser.parse_args(sys.argv[sys.argv.index("--")+1:] if "--" in sys.argv else [])
@@ -613,6 +682,9 @@ def main():
     scene.cycles.samples=1
     scene.cycles.device="CPU"
     scene.view_settings.view_transform="AgX"
+    if args.sphere_only:
+        display_sphere(scene)
+        return
     obj,records=wall()
     source=surface("Fieldstone and lime mortar",True)
     obj.data.materials.append(source[0])
