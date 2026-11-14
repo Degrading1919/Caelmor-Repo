@@ -2,7 +2,7 @@
 bl_info = {
     "name": "Caelmor Architectural Generator",
     "author": "Caelmor",
-    "version": (0, 16, 0),
+    "version": (0, 17, 0),
     "blender": (4, 2, 0),
     "location": "View3D > Sidebar > Caelmor",
     "description": "Generate editable regional Caelmor buildings",
@@ -549,14 +549,18 @@ _CLASSES = ()
 def register():
     global _CLASSES
     b = _bpy()
-    _CLASSES = _make_classes(b)
+    from .roof_autocomplete import CLASSES, RoofSettings
+    _CLASSES = _make_classes(b) + CLASSES
     for cls in _CLASSES:
         b.utils.register_class(cls)
     b.types.Scene.caelmor_settings = b.props.PointerProperty(type=_CLASSES[0])
+    b.types.Scene.caelm_roof_settings = b.props.PointerProperty(type=RoofSettings)
 
 
 def unregister():
     b = _bpy()
+    if hasattr(b.types.Scene, 'caelm_roof_settings'):
+        del b.types.Scene.caelm_roof_settings
     if hasattr(b.types.Scene, "caelmor_settings"):
         del b.types.Scene.caelmor_settings
     for cls in reversed(_CLASSES):

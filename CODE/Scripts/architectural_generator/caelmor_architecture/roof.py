@@ -197,6 +197,9 @@ class Shingle:
 
 
 def shingle_step(plan):
+    gauge = getattr(plan, 'roof_course_exposure', None)
+    if gauge is not None:
+        return gauge/math.sqrt(1+plan.slope**2)
     cover_scale={'SHINGLE':1.,'SLATE':1.1,'CLAY':1.15,'REED':1.5}[plan.style.roof_cover]
     exposure={'HIGH':.30,'MEDIUM':.44,'LOW':.85}[plan.settings.detail]*cover_scale
     return exposure/math.sqrt(1+plan.slope**2)
@@ -204,6 +207,10 @@ def shingle_step(plan):
 
 def roof_courses(plan, source, direction, limit):
     step=shingle_step(plan)
+    if hasattr(plan, 'roof_course_exposure'):
+        for row in range(math.floor((limit+1e-7)/step)+1):
+            yield row, row*step, step
+        return
     rng=plan.rng(f'roof.courses.{source}.{direction}')
     row,t=-2,-2*step
     while t<=limit+1e-7:
@@ -496,13 +503,14 @@ def build_roof(plan):
         field.field_family=cover.lower()
         field.field_source=tiles['roof'].name
         field.field_peers=tuple(b.name for b in tiles.values())+('Concealed roof course bedding',)
-        _roof_field(field,plan,patches,cover,_valley_clearances(points,patches,edges))
+        field_builder = getattr(plan, 'roof_field_builder', _roof_field)
+        field_builder(field,plan,patches,cover,_valley_clearances(points,patches,edges))
         for (i,j),users in edges.items():
             kind=roof_join_kind(points,patches,users)
             if kind in ('edge','ridge','valley') and math.dist(points[i][:2],points[j][:2])>.01:
                 boundaries.append((points[i][:2],points[j][:2],kind))
     bedding=MeshBuffer('Concealed roof course bedding','roof_dark','roof',topology='SURFACE')
-    if efficient and not mapped:
+    if efficient and (not mapped or hasattr(plan, 'roof_course_exposure')):
         for patch in patches:
             bedding.face([(x,y,patch.height(x,y)+(.002 if cover=='IRON' else .029)) for x,y in patch.poly])
     metal=[]
@@ -510,7 +518,18 @@ def build_roof(plan):
         metal=list(_iron_cover(plan,patches,efficient))
     else:
         for shingle in shingle_layout(plan,patches,(points,faces,edges)):
-            if not mapped or _keep_exposed_cover(shingle,boundaries,mode):
+            course_count = getattr(plan, 'modeled_eave_courses', None)
+            if course_count is not None:
+                if not 0 <= shingle.row < course_count:
+                    continue
+                axis = shingle.axis
+                a,b = (shingle.direction,0) if axis==0 else (0,shingle.direction)
+                end = course_count*shingle_step(plan)
+                poly = clip(shingle.poly,-a,-b,shingle.direction*shingle.eave_coord+end,bounded=True)
+                if not poly or area(poly) <= .0002:
+                    continue
+                shingle = replace(shingle, poly=poly)
+            if course_count is not None or not mapped or _keep_exposed_cover(shingle,boundaries,mode):
                 _build_cover_piece(tiles[shingle.material],shingle,cover,efficient,detail=plan.settings.detail)
     ridge=MeshBuffer('Overlapping ridge caps','roof_dark','roof')
     if cover=='IRON':

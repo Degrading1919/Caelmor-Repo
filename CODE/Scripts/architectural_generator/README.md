@@ -112,6 +112,53 @@ approval.
 - Open a 3D View and find the **Caelmor** tab in the N-panel.
 - Rebuild the distributable with `py -3 package_addon.py` from this directory. The ZIP contains the add-on source, full GPL license, third-party notices, research reference, architecture references and household comparison brief.
 
+## Roof AutoComplete (0.17.0)
+
+Install or update the extension with the ZIP above. In Blender 5.0, open a
+scene where one Blender unit represents one metre and select the exterior
+wall modules in Object Mode. Include the structural wall core on each side.
+Open **N → Caelmor → Roof AutoComplete** and choose **Infer Wall Bearing**.
+The outline shows the wall centre lines and bearing elevation. To correct it,
+open **Advanced**, edit the bearing centre, width, depth or angle, then choose
+**Preview Manual Bearing**.
+
+Choose **Brookoak Shingles** and set **Roof Height** to the structural ridge
+rise above the bearing. Rise determines pitch for the selected span. Advanced
+controls set the ridge axis, overhang and seed. The PBR map folder defaults to
+the designated checkout's `MEDIA/Materials/procedurally_generated` directory.
+The material uses the Brookoak albedo PNG, normal PNG and roughness EXR.
+
+**Generate / Update Roof** confirms the displayed bearing and creates an
+editable roof collection. To revisit a roof, choose its collection in
+**Update Target** and load its saved settings. Updating replaces the tool's
+generated parts in that collection. Duplicate any manually edited parts you
+want to keep across regeneration into another collection. **Export Roof GLB**
+exports the generated parts of the target. The displayed count is the generated
+mesh triangle total before manual editing.
+
+| Geometry Detail | Modeled eave courses | Upper roof |
+| --- | ---: | --- |
+| 0–33% | 1 | Brookoak PBR field |
+| 34–66% | 2 | Brookoak PBR field |
+| 67–100% | 4 | Brookoak PBR field |
+
+All tiers retain a deck, fascia, rafters, ridge caps and gable infill. Course
+exposure is 0.30 m measured up the slope. U runs along the eave with a 1.28 m
+repeat, and V covers eight courses per repeat. Modeled shingles and caps use
+solid tones sampled from the Brookoak albedo, with relief from the mesh.
+The transition follows a whole course boundary. Registering individual side
+joints exactly would require matching course data from Material Maker.
+The current Blender shader uses albedo, normal and roughness; displacement
+remains in the Material Maker authoring workflow.
+
+The selection tool fits one rectangular perimeter with a level top. Select
+the core when trim or apertures consist of separate meshes. Use the bearing
+preview to verify which geometry has been recognized. The preset accepts
+15–65° pitches. Short spans can require a lower tier to leave a mapped field
+above the modeled eave courses.
+
+[Native fixture and evidence](evidence/roof_autocomplete/)
+
 ## Generate a building
 
 Choose a building type, region, compatible local context, household wealth, craftsmanship, age, maintenance, geometry mode, detail, and seed. New panel settings start with regional grammar enabled. **Generate New** builds the effective plan and records the requested settings and validation summary on the Caelmor Building collection.

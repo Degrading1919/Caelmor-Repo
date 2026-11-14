@@ -191,6 +191,14 @@ timber. Iron roofs and fixtures continue on their existing paths.
 
 ### Construction depth representation
 
+Roof AutoComplete is a separate authoring entry point within the extension.
+It supplies an explicit, metre-scale wall-bearing rectangle to the existing
+roof planner. The roof-only adapter opts into fixed course exposure, a
+complete modeled eave band and a slope-aligned field above it. Full building
+plans retain their original course placement and field defaults. Roof-only
+collections store their confirmed bearing and settings independently and use
+the selection-based GLB path without a building sidecar.
+
 The optional `representation` field is independent of treatment, stock,
 variant and finish. The supported values are `MODELED`, `HYBRID` and `TEXTURE`.
 Omission uses the historical modeled path. The latter two require Efficient
