@@ -503,7 +503,7 @@
       "metallicRoughnessTexture"
     ],
     "normals_exported": true,
-    "sha256": "e2c2cae39a60bc3247e0f35f9e9e65bbc45c6fe445652e0e1a41decdf9e3241a"
+    "sha256": "a2734450bb52e0bbcd9a7ff278ffebba965ce8ac2d4baf407d4adb0b551d6a01"
   },
   "renders": [
     "roof_warm_key.png",

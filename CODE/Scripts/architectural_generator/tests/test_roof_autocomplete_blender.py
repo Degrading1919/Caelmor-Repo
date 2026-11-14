@@ -1,7 +1,7 @@
 """Headless native-kit regression and evidence renders for roof autocomplete.
 
 Run from the repository root with Blender 5.x:
-  blender --background --disable-autoexec --python CODE/Scripts/architectural_generator/tests/test_roof_autocomplete_blender.py
+  blender --background --factory-startup --disable-autoexec --python-exit-code 1 --python CODE/Scripts/architectural_generator/tests/test_roof_autocomplete_blender.py
 
 This uses the authored Lowmark wood_trimmed_plaster wall modules. It keeps the
 door, window and original wall meshes in the scene while checking roof-only
@@ -10,7 +10,6 @@ generation, repeat cleanup, export, and lighting response.
 import hashlib
 import json
 import math
-import os
 import struct
 import sys
 from pathlib import Path
@@ -24,7 +23,6 @@ sys.path.insert(0, str(ROOT))
 
 from caelmor_architecture.roof_selection import infer_bearing
 from caelmor_architecture.roof_autocomplete import build_roof_collection
-from caelmor_architecture.roof import shingle_step
 import caelmor_architecture as addon
 
 EVIDENCE = ROOT / "evidence" / "roof_autocomplete"
@@ -105,10 +103,7 @@ def assert_field_uv(collection, rise, detail, bearing):
     check(uv is not None, "continuous field is missing named RoofUV")
     slope = rise / (bearing.depth * .5)
     pitch = math.degrees(math.atan(slope))
-    plan = type("UvPlan", (), {"settings": type("UvSettings", (),
-        {"detail": "HIGH", "age": 0, "roof_style": "GABLE"})(), "slope": slope,
-        "style": type("UvStyle", (), {"roof_cover": "SHINGLE"})()})()
-    step = shingle_step(plan)
+    step = .30 / math.sqrt(1+slope*slope)
     expected_courses = 1 if detail < 34 else (2 if detail < 67 else 4)
     vs = []
     for poly in obj.data.polygons:
