@@ -753,7 +753,7 @@ Tuned for **Expert identity** (ED-10). Cinder Wraiths are resonance distortions 
 | `ESS_ACCESS_READ` | `ESS-I7` | `ESS-I10` | EGT (the access book recurs) |
 | `ESS_BRAZIERS_OUT` | Third brazier doused | `S04` | — |
 | `ESS_DAMPER` = shot / climbed | `S04` | `ESS-D8.02` | — |
-| `ESS_RECORD_READ` | `ESS-I9` | `ESS-D8` options | EGT; CV-M3 (dream-influenced delegates; request) |
+| `ESS_RECORD_READ` | `ESS-I9` | `ESS-D8` options | EGT, EMS (`EMS-D4.20`); CV-M3 (dream-influenced delegates; request) |
 | `ESS_STUDENTS_SEEN` | `ESS-D8.44` (optional) | — | **CV-M4** (R18; request) |
 | `ESS_COPY` | Copy channel + Serix's signature (`ESS-D8.18`) | `S05`, `S06` | — |
 | `ESS_SERIX_HEARD` | `ESS-D8.36` | — | EGT (Serix recurs) |

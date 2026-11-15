@@ -89,7 +89,7 @@ No quest repeats a milestone's primary verb or strange moment (checked against E
 - **Skill steps** list their alternative in the beat; the alternative is still play and costs a turn, a share or skill XP, never the quest.
 - **Combat.** Every enemy is defeated at 0 HP with the ordinary defeat presentation (CDR-1); none yields, flees, scatters or breaks off; no SX. Every fight accepts melee or ranged and requires neither (CDR-2) and is solo-tuned (CDR-6). No defeated enemy speaks after a fight or carries evidence (rulings §3.2).
 - **Non-combatants.** Every named person in this file, every child, every Cinderwatch officer and every Slagside resident is never targetable.
-- **Evidence and revelations.** Nothing here is evidence for a revelation; the steam, the slag mirror, the lamp ripple, the bell and the warm marks prove nothing. The tally board's "old leaks" is mentioned once as weather and is not explained or reduced (EH-M6 owns it). No Remnant, Deepbrand or "below" presence: ECN's pit lot are plain pipe-strippers (bible §10; the dossier's "clandestine Remnant scavengers" label is not used), and EBL's bell is a warden's knot (the Part 3 deep-works reading is not used).
+- **Evidence and revelations.** Nothing here is evidence for a revelation; the steam, the slag mirror, the lamp ripple, the bell and the warm marks prove nothing. The tally board's "old leaks" is mentioned once as weather and is not explained or reduced (EH-M6 owns it). No Deepbrand or "below" presence. ECN's pit lot are shown only as pipe-strippers (bible §10) and are given no affiliation: the dossier calls the Dross scavengers "clandestine Remnant scavengers", and nothing here confirms or denies it (no line says what they are not). EBL's bell is a warden's knot (the Part 3 deep-works reading is not used).
 - **Reserved decisions.** No node depends on D-E2, D-S1, `[INITIATE]`, D-3, C07 or the "invaders" wording. Nodes naming the EH-M1 valve order, Sarne Ardane, Ralenne's scene or the EH-M1 choice wording are tagged **`[ALLOCATION]`** (bible §3.1). No Volkhari person appears (D-C06); no precursor name, roster or casualty count (D-C03).
 - **Time.** No calendar dates; the past is dated by events ("the cold-ward nights", "the winter the gate culvert froze", "the year the gate was rebuilt").
 - **No failure.** Inactive / Active / Completed only. Death respawns at the quest's named safe point with step, flags and kept progress intact; logout restores the last persisted step and returns a dropped carry-state object to its source; walking away keeps the quest Active with the resume hook named in each package; missed moments re-offer on the next keep watch.
@@ -576,7 +576,7 @@ All standard: slag pools as hazard volumes with a glow under a crust; a per-play
 
 ### ECN.12 Mystery ledger entry
 
-None (resolved in-quest). The pit lot are ordinary pipe-strippers; nothing marks them as anything else.
+None (resolved in-quest). The pit lot are shown only as pipe-strippers; this quest gives them no affiliation and neither uses nor contradicts the dossier's "clandestine Remnant scavengers" label.
 
 ### ECN.13 Dialogue
 
@@ -939,7 +939,7 @@ EFC-D4.21 HENNET: (a long look at the lane) "...Under Dunmor's eye." SORREL: (al
 
 ```
 EFC-D5.01 (The dimming, EFC.5.) HENNET: (ladle down; quiet) "Eaten? Good. Then the year."
-EFC-D5.02 HENNET: "Adda Corr, slag hand. Old Mother Mossa, who taught half this lane its letters. Little Bett, who didn't see the spring. Haldo Price, on the lanes, in the cold nights."
+EFC-D5.02 HENNET: "Adda Halloran, slag hand. Old Mother Mossa, who taught half this lane its letters. Little Bett, who didn't see the spring. Haldo Brune, on the lanes, in the cold nights."
 EFC-D5.03 HENNET: (beat) "That's Cinderwall's year."
 EFC-D5.20 [EH_HOLLOW_TRUTH is set] HESPER: (standing at the back) "Lorcan Tolk. Tobbe. Wendel. Marit. Yeva." (she sits)   {event: room lamps down one more notch, then back}
 EFC-D5.30 [EH_COLD_WARD = posted] [ALLOCATION] HENNET: "And one that isn't dead." (reads from the cut page) "Veska Dunmor, who said so in writing." VESKA: (from the door, very quietly) "Hennet." HENNET: "Year's done."
@@ -1013,7 +1013,7 @@ EFC-D6.21 HENNET: "Sit down, warden's hand. You're running hot."   {set EH_COMMO
 | **State compliance** | Inactive / Active / Completed. Keep or remove; no fail. The relief weight cannot be left at a red setting (refused); the stay has an overnight wait. |
 | **Combat compliance** | None. No enemy appears; the relief spur is a light heat zone with a niche. CDR-6: every step is one player's. |
 
-**In one paragraph.** Since the ward came back, Cinderwall's shift bell has been ringing by itself at night. The lane blames **Agathe Mund**, its bell-keeper; **Wim Ostrander**, a carter, went out at a false bell and was docked a day. The warden's hand sits up and hears it: a hiss under the grate, then the rope pulls down with nobody there. A second line spliced into the rope runs down to a **relief valve** on the ward branch, tied to its lever with a warden's hitch. Veska knows it: on the third cold-ward night her line hand tied the relief to the bell so a lift would wake the crew, and nobody untied it. Now the ward banks its hearths at night, the branch peaks, the relief lifts, and Cinderwall answers its own bell (the player heard it once already, the night of the surge). The player replaces the cracked bell stay from reclaimed crate-oak or waits for one, sets the relief weight to the notch the tell approves at the night peak, and decides with Agathe whether the bell keeps the main's line as a warning.
+**In one paragraph.** Since the ward came back, Cinderwall's shift bell has been ringing by itself at night. The lane blames **Agathe Mund**, its bell-keeper; **Wim Kettering**, a carter, went out at a false bell and was docked a day. The warden's hand sits up and hears it: a hiss under the grate, then the rope pulls down with nobody there. A second line spliced into the rope runs down to a **relief valve** on the ward branch, tied to its lever with a warden's hitch. Veska knows it: on the third cold-ward night her line hand tied the relief to the bell so a lift would wake the crew, and nobody untied it. Now the ward banks its hearths at night, the branch peaks, the relief lifts, and Cinderwall answers its own bell (the player heard it once already, the night of the surge). The player replaces the cracked bell stay from reclaimed crate-oak or waits for one, sets the relief weight to the notch the tell approves at the night peak, and decides with Agathe whether the bell keeps the main's line as a warning.
 
 ### EBL.2 Selection record and canon grounding
 
@@ -1027,7 +1027,7 @@ EFC-D6.21 HENNET: "Sit down, warden's hand. You're running hot."   {set EH_COMMO
 | The ward that answers its own bell; a worker unfairly blamed | Part 3 Emberholt proposal, story 4 (first outcome only) | [NEW, adopted by bible §7.2] |
 | Shift bells (EME06); the bell rings by itself after the surge | Bible §7.4; Act I `S06`, A14 item 6 | [NEW], consistent |
 | Tells; "You don't shut hot"; "Never touch a red" | Bible §1.1; Act I | [NEW], consistent |
-| Agathe Mund, Wim Ostrander, Bellwright's Lane, the relief spur | This package | [NEW] |
+| Agathe Mund, Wim Kettering, Bellwright's Lane, the relief spur | This package | [NEW] |
 
 ### EBL.3 The places [MAP VERIFICATION REQUIRED]
 
@@ -1042,7 +1042,7 @@ EFC-D6.21 HENNET: "Sit down, warden's hand. You're running hot."   {set EH_COMMO
 
 **Beat 0: Drunk (`S00_offer`).** *Objective: Talk to the bell-keeper.* `EBL-D1`. Agathe: she has rung Cinderwall's shifts since the gate was rebuilt; she does not drink; the bell rings itself at night and the lane chalks *DRUNK* on her post.
 
-**Beat 1: Night (`S01_listen`).** *Objective: Keep watch at the bell post at night.* Keep watch at the post bench to night (the step pins the night state). **The bell (EBL.5)** plays: a hiss under the grate, the rope pulls down, the bell swings. Then three short inspects (required): the **rope** (`EBL-I1`: a second line spliced in, running down through the grate), the **grate** (`EBL-I2`: warm air, a hiss before each ring), the **stay** (`EBL-I3`: cracked through). Two of three witnesses (optional for flavour, one required): **Wim Ostrander** at the forge gate (`EBL-D2`; his docking slate: *Ostrander: out early, gate blocked, a day*), the night baker (`EBL-B1.02`), or Hennet (`EBL-B1.03`).
+**Beat 1: Night (`S01_listen`).** *Objective: Keep watch at the bell post at night.* Keep watch at the post bench to night (the step pins the night state). **The bell (EBL.5)** plays: a hiss under the grate, the rope pulls down, the bell swings. Then three short inspects (required): the **rope** (`EBL-I1`: a second line spliced in, running down through the grate), the **grate** (`EBL-I2`: warm air, a hiss before each ring), the **stay** (`EBL-I3`: cracked through). Two of three witnesses (optional for flavour, one required): **Wim Kettering** at the forge gate (`EBL-D2`; his docking slate: *Kettering: out early, gate blocked, a day*), the night baker (`EBL-B1.02`), or Hennet (`EBL-B1.03`).
 
 **Beat 2: The Line (`S02_spur`).** *Objective: Follow the line down.* Through the grate's access hatch (or by the Undercroft stair). The spur is pinned **Working** (light periodic damage outside the niche; touch water). At its end, the **relief valve** (`EBL-I4`): the line is tied to its lever with a **warden's hitch**; the weight sits on the **inner notch**; the tell is amber now. Leave the knot as it is (cutting it now is refused: "Ask the warden whose hitch it is." `EBL-B2.2`).
 
@@ -1059,7 +1059,7 @@ EFC-D6.21 HENNET: "Sit down, warden's hand. You're running hot."   {set EH_COMMO
 |---|---|---|
 | Inner (as found) | Amber → **lifts**: hiss, the line jerks | Too light: it rings. |
 | Middle | **Amber, steady** | Right: holds at the night peak and still lifts on a real back-up. |
-| Outer | **Red, crazed** | Refused by Veska before the weight seats: "You've stopped her breathing. Back a notch." Never touch a red; nothing resets. |
+| Outer | **Red, crazed** | Refused before the weight seats (Veska's line if she is at the spur; otherwise the same line as a remembered bark, `EBL-B5.x`): "You've stopped her breathing. Back a notch." Never touch a red; nothing resets. |
 
 The step completes on the middle notch held through one peak (~10 s).
 
@@ -1095,13 +1095,13 @@ No encounters. **EBL-H1:** the relief spur is a Working zone (light periodic dam
 | Flag | Set by | Read by |
 |---|---|---|
 | `EBL_STAY` = self / crew | `S04` | `EBL-D5.04` |
-| `EBL_BELL` = kept / removed | `S06` | Bell post props (red-painted rope with `kept`); barks; EH-M6 (request only, EBL.11) |
+| `EBL_BELL` = kept / removed | `S06` | Bell post props (marked rope with `kept`); barks; EH-M6 (request only, EBL.11) |
 
 ### EBL.8 Choices and consequences
 
 | Option | Immediate | Cost | Later |
 |---|---|---|---|
-| **Keep it** (`kept`): *"Keep the line on. If the bell rings by itself, it's the main. Get the wardens."* | The line stays tied to the relief at its proper notch; Agathe paints the rope red where the line joins. The bell now rings by itself only on a real back-up. | A bell that can ring at night is a bell people sleep badly under; the lane grumbles. | Barks: Agathe "If it rings and I'm asleep, it's the main." Children dare each other to touch the red rope. |
+| **Keep it** (`kept`): *"Keep the line on. If the bell rings by itself, it's the main. Get the wardens."* | The line stays tied to the relief at its proper notch; Agathe marks the rope where the line joins. The bell now rings by itself only on a real back-up. | A bell that can ring at night is a bell people sleep badly under; the lane grumbles. | Barks: Agathe "If it rings and I'm asleep, it's the main." Children dare each other to touch the marked rope. |
 | **Give it back** (`removed`): *"Untie it. The bell's for shifts. The relief vents to the duct, like it should."* | Veska unties the hitch; the relief vents into the spur; the bell is Agathe's again. | If the branch backs up at night, nobody hears it until the hoods go cold. | Barks: Agathe rings the shifts "on the dot, thank you". Veska checks the spur on her rounds. |
 
 No option is wrong. Wim's day is restored and Agathe's post is wiped in both.
@@ -1127,7 +1127,7 @@ Agathe's thanks and a small payment from the lane's bell box ([GD]); Wim's thank
 | Night bell event | Audio / Systems | Per-player scripted hiss, rope pull and ring on keep watch to night during `S01`. |
 | Weighted lever with three notches | Systems | Interaction moves the weight; the valve tell plays an authored result per notch at the pinned peak; outer notch refused. |
 | Woodcutting on reclaimed crate-oak | Skills | Reclaimed-wood node (EHC-05) at the Commons store stack. |
-| Rope prop variants | Art | Red-painted rope with `EBL_BELL = kept`. |
+| Rope prop variants | Art | A marked rope with `EBL_BELL = kept` (Art chooses the marking). |
 | EH-M6 (request only) | Narrative | Optional Agathe bark in the EH-M6 frost if `EBL_BELL = kept`: "Rope's frozen to the post. My warning's no use if it can't swing." No change to EH-M6 steps; Act III already freezes the rope. |
 
 ### EBL.12 Mystery ledger entry
@@ -1141,7 +1141,7 @@ None (resolved). The bell after the EH-M1 surge is explained here: the opening s
 | Character | Knows | Doesn't know | Voice |
 |---|---|---|---|
 | **Agathe Mund** [NEW], Cinderwall bell-keeper | Every shift's hour; the lane's sleep. | Pipes. | Old, sharp, proud of being exact; hurt and hiding it. |
-| **Wim Ostrander** [NEW], carter | His cart, his docked day. | Why the bell rang. | Slow, fair, a little shy. |
+| **Wim Kettering** [NEW], carter | His cart, his docked day. | Why the bell rang. | Slow, fair, a little shy. |
 | **Veska Dunmor** | Her crew's hitch; the branch. | — | As Act I. Owns it in one line. |
 
 ```
@@ -1151,7 +1151,7 @@ EBL-D1.02 AGATHE: "Since the ward came back, it rings at night. By itself. And w
   > "I'll sit up and listen."                                        → EBL-D1.10
   > "Who else has it hurt?"                                          → EBL-D1.20
 EBL-D1.10 AGATHE: "Bench is there. Bring a coat. Bring two; it's still Cinderwall."   {event: accept → S01_listen} → end
-EBL-D1.20 AGATHE: "Wim Ostrander took his cart out at it and blocked the forge gate an hour early. They docked him a day. He's not even cross with me. That's worse."   → EBL-D1 options
+EBL-D1.20 AGATHE: "Wim Kettering took his cart out at it and blocked the forge gate an hour early. They docked him a day. He's not even cross with me. That's worse."   → EBL-D1 options
 EBL-D2.01 WIM: (at the forge gate, beside the docking slate) "Bell went, I went. That's what a bell's for." (beat) "Gate was shut. They docked me a day. It's on the slate."
 EBL-D2.02 WIM: "Don't blame Agathe. She was asleep on her stool. I saw her."   → end
 ```
@@ -1162,6 +1162,7 @@ EBL-D2.02 WIM: "Don't blame Agathe. She was asleep on her stool. I saw her."   �
 | EBL-B1.02 | Night baker, if asked | NIGHT BAKER | "Hiss, then the bell. Every night about the time I knock back the dough." |
 | EBL-B1.03 | Hennet, if asked | HENNET | "Rang the night you opened the junction, too. Didn't you hear it?" |
 | EBL-B2.2 | Cut the line before `S03` | (prompt) | "A warden's hitch. Ask the warden whose it is." |
+| EBL-B5.x | Weight pushed to the outer notch in `S05` with Veska elsewhere | VESKA (remembered, as at `EBL-D3.04`) | "You've stopped her breathing. Back a notch." |
 
 ```
 EBL-D3.01 VESKA: (the player describes the knot; she is already nodding) "Warden's hitch. Ours. Third cold night."
@@ -1173,7 +1174,7 @@ EBL-D5.02 VESKA: "Keep the line on and it'll only ring if she really backs up. O
 EBL-D5.04 [EBL_STAY = self] AGATHE: "And that stay's crate-oak. It'll outlast me. Don't say anything."
   > "Keep the line on. If the bell rings by itself, it's the main."  → EBL-D5.10 {EBL_BELL = kept}
   > "Untie it. The bell's for shifts."                               → EBL-D5.11 {EBL_BELL = removed}
-EBL-D5.10 AGATHE: (fetches a pot of red) "Then the rope's red where the line joins. If it rings and I'm asleep, it's the main. Get the wardens."   → EBL-D5.20
+EBL-D5.10 AGATHE: (fetches a pot of paint) "Then the rope's marked where the line joins. If it rings and I'm asleep, it's the main. Get the wardens."   → EBL-D5.20
 EBL-D5.11 VESKA: (unties the hitch on the next descent; up the grate) "Off." AGATHE: "Then it's mine. On the dot, thank you."   → EBL-D5.20
 EBL-D5.20 VESKA: (to the forge gate, chalking Wim's docking slate) "Bell was the main's. Not his." WIM: (to the player, shy) "A day's a day." AGATHE: (wiping DRUNK off the post herself) "And that's that."   {small payment; quest Completed}
 ```
@@ -1190,7 +1191,7 @@ EBL-D5.20 VESKA: (to the forge gate, chalking Wim's docking slate) "Bell was the
 |---|---|---|
 | AGATHE | "If it rings and I'm asleep, it's the main." | `EBL_BELL = kept` |
 | AGATHE | "Shifts on the dot. Thank you." | `EBL_BELL = removed` |
-| CHILD | "Touch the red rope. Go on. I dare you." | `EBL_BELL = kept` |
+| CHILD | "Touch the marked rope. Go on. I dare you." | `EBL_BELL = kept` |
 
 ### EBL.14 Open decisions
 
@@ -1399,7 +1400,7 @@ ESR-D6.20 LUDO: (pays) "From the Hall. And the yard forge is yours when you want
 ### ESR.14 Open decisions
 
 1. **Tessaly Varn (bible §5.2):** appears only with `TAS_ACCOUNT = named`. The Hall's roll does not name her crew in any case, so no Thornfell outcome leaks into the record. No cross-region repair claim is made (Part 4 ledger).
-2. **The X** is never resolved; it is not Volkhari, Remnant or anyone else by implication.
+2. **The X** is never resolved; nothing implies it was Volkhari, Remnant or anyone else, and nothing rules any of them out.
 
 ### ESR.15 Review log
 
@@ -1424,5 +1425,6 @@ Every need above is a standard system already used by the Emberholt act packages
 | Rulings | CDR-1: every enemy to 0 HP, no SX, no post-fight speech. CDR-2: melee or ranged everywhere, ranged required nowhere. CDR-3: no release wording. CDR-4: standard systems; one skill hook per quest with a time-cost alternative. CDR-6: every step solo; partner credit only from the partner's own step; choices per player. |
 | Flags | One writer each; `EH_COMMONS` set only by EFC. Every main-line flag read exists exactly as Act I/III define it (`EH_TELLS`, `EH_COLD_WARD`, `ECW_SHORTFALL_SEEN`, `ECW_SEAT_RING`, `EH_CURRICULUM`, `EH_HOLLOW_TRUTH`); Thornfell `TAS_ACCOUNT` read for `named` only. |
 | Revelations and reserved decisions | Nothing owned or seeded; the shortfall untouched. No `[D-E2]`, `[D-S1]` or `[INITIATE]` dependency; `[ALLOCATION]` on every EH-M1-cause line; D-C03 and D-C06 kept. No overlap with EST, ETB, EMS, ENW, EGT (the memorial plaque and the Half-Name Wall are not used). Quest items: 0. |
-| New names (grepped across `04_CONTENT_PRODUCTION`, `LORE`, `00_ADMIN`) | Dunya Kordel, Grisel Tamm, Ilsa Cleff, Sorrel Vamm, Agathe Mund, Wim Ostrander, Hallam Calder, Ludo Ferrant, the Gatestone Masons' Hall, Bellwright's Lane, Adda Corr, Old Mother Mossa, little Bett, Haldo Price, Old Gav: no other use. Rejected for collisions: Sefa, Tarrow, Ebbe, Orsa, Ruddle, Tibb (Mire), Wenn (Wenna), Lorcan (Act I), Orrin. |
+| New names (grepped across `04_CONTENT_PRODUCTION`, `LORE`, `00_ADMIN`) | Dunya Kordel, Grisel Tamm, Ilsa Cleff, Sorrel Vamm, Agathe Mund, Wim Kettering, Hallam Calder, Ludo Ferrant, the Gatestone Masons' Hall, Bellwright's Lane, Adda Halloran, Old Mother Mossa, little Bett, Haldo Brune, Old Gav: no other use. Rejected for collisions: Sefa, Tarrow, Ebbe, Orsa, Ruddle, Tibb (Mire), Wenn (Wenna), Lorcan (Act I), Orrin. |
 | Deviations from the bible | (1) ECN's ward court and court book realise "the complaint reaches Yorven's book". (2) EFC dates First Cooling as "the first night the Commons runs full after the year's mending". (3) EBL explains the EH-M1 surge bell (Act I A14 item 6). (4) EFC reads `EH_HOLLOW_TRUTH` for Hesper's optional names, a reader the bible §9.1 row does not list. (5) Rejected candidates are not listed in the selection records (size). |
+| Independent review, 2026-11-15 | Authored walkthrough against the brief, CDR-1 to CDR-6 (§3.7), the bible, dossier, Factions, Part 4 ledger and the reviewed Act I–III packages and dialogue (nothing was played; no build exists). **Flags:** `EH_TELLS`, `EH_COLD_WARD` (posted / settled), `ECW_SHORTFALL_SEEN`, `ECW_SEAT_RING` (self / crew), `EH_CURRICULUM`, `EH_HOLLOW_TRUTH` and Thornfell `TAS_ACCOUNT` (named / held / unwritten) exist as read; `EH_COMMONS` has one writer (EFC `S06`) and matches Act III `S01`, `EGA-D2.30`–`.32` and the store slate. Unlocks match Act I's unlock row (EWA, EBL, ESR after EH-M1). **Canon (Medium):** §0.5 and ECN.12 said the pit lot were "plain" / "ordinary" pipe-strippers under a "No Remnant presence" rule, which reads as denying the dossier's "clandestine Remnant scavengers"; reworded to give them no affiliation and neither use nor contradict the label. ESR open decision 2 reworded the same way for the X. **Rulings:** CDR-1 holds (ECN and EWA enemies to 0 HP; no post-fight speech; every named person, child, Watch officer and Slagside resident non-targetable); CDR-2 (slinger ledges reachable on foot); CDR-6 (partner credit only through the partner's own step). Combat reveals nothing; the cache is found by Ilsa's directions. **Playability (Low):** EBL's outer-notch refusal was voiced by Veska, who need not be at the spur at night; now a remembered bark (`EBL-B5.x`) when she is elsewhere. No softlock found; every skill hook has a time-cost alternative; every quest has physical steps. **Renames (near-duplicates):** Wim Ostrander → **Wim Kettering** (Ostry, Act I); Adda Corr → **Adda Halloran** (Corra, Mire; Corm Brask); Haldo Price → **Haldo Brune** (Odile Prace). **Art direction:** EBL's "red-painted rope" is now a marked rope (Art chooses the marking). D-C03, D-C06 kept; Hesper's names are Act I's crew, names only. No release wording. |

@@ -85,53 +85,17 @@ Unlocks match the act packages exactly: Act I "Unlocks across Act I" (EST after 
 | `ESS_SLIP_SEEN` | Act II §B9.2 | EGT `EGT-D1.12` | Glassmoth: "Slips? Somebody sells dreams on slips? Not me." (Act II promise, verbatim). |
 | `ESS_ACCESS_READ` | Act II §B9.2 | EGT `EGT-I5.01` | "The access book recurs" (Act II promise): "You have read this book before." |
 | `ESS_RECORD_READ` | Act II §B9.2 | EMS `EMS-D4.20` option; EGT `EGT-D8.27` / `.28` options | The rooms below recalled (inner line only); Serix asked about one night. |
-| `ESS_SERIX_HEARD` | Act II §B9.2 | EGT `EGT-D6` | "Serix recurs" (Act II promise). Always set by EH-M5. |
+| `ESS_SERIX_HEARD` | Act II §B9.2 | EGT `EGT-D8.01`–`.02` | "Serix recurs" (Act II promise). Always set by EH-M5. |
 | `EH_SPEAKER` = challenged / exposed `[D-S1]` reads only | Act II §B9.2 | EGT `EGT-B1.04` / `.05` (barks about the lamp-house mood) | Mood only; no line asserts what the Speaker knows. |
 | `MDS09_READ` (Mire) | `Caelmor_Mire_Side_Quests_Settlements_and_Combat.md` MDS09 ("Reserved for the Emberholt bible as a possible read") | ENW `ENW-D6.30` option `[ED-16]` | Optional, unconfirmed echo. Never a hold, never identity, no route. |
 
 No Lowmark or Thornfell flag is read. No `TH_*`, `MR_*`, `HS_*`, `UL_*` or `TAS_*` read.
 
-**Quest-local flags** (set here; readers listed; every flag has one writer):
-
-| Flag | Values | Set by | Read by |
-|---|---|---|---|
-| `EST_BAND` | self / brisa | EST `S02` | `EST-D6.04`; ESH (request, Brisa bark) |
-| `EST_CARD` | taken / refused | EST `S03` | `EST-D6.10`; EMS `EMS-D4.02` (Ondine) |
-| `EST_SHUTTERED` | bool | EST `S04` part | `EST-D5.40` |
-| `EST_KAELEN_NAMED` | bool | EST `EST-D6.30` | ETB `ETB-D5.03` (Asera, one line) |
-| `EST_BOOK` | traced / unrecorded | EST `S05` | Maeryn barks; ETB `ETB-B1.03` |
-| `ETB_CHIMES` | self / guild | ETB `S02` | `ETB-D3.02` |
-| `ETB_THIRD_GIVEN` | bool | ETB `ETB-D5.30` | `S05`, `S07` |
-| `ETB_LENS_SPREAD` | bool | ETB `ETB-I6.01` | `ETB-D6` options |
-| `ETB_TAUGHT` | court / courtyard | ETB `S06` | EME09 (request: Tavi plays the three-chime game in the courtyard with `courtyard`); Molten Stair barks |
-| `EMS_HEARD` | bool | EMS `S01` | `S01` predicate only |
-| `EMS_WOOL_KEPT` | bool (wet at every niche) | EMS `S02` | `EMS-D6.04` / `.05` |
-| `EMS_STONE_SPOKE` | bool (carried into red) | EMS `S02` | `EMS-D6.06` |
-| `EMS_SEAT` | cut / chiselled | EMS `S04` | `EMS-D6.08` |
-| `EMS_RECEIPT` | bool (carry-state stub kept) | EMS `EMS-D4.40` | `S07_mend`; `EMS-D6.21` |
-| `EMS_SILENCE` | bool | EMS `S04` event | None (deliberately) |
-| `ENW_TONGS` | dressed / soaked | ENW `S02` | `ENW-D4.10` |
-| `ENW_RUBBING` | bool | ENW `S02` | `S04` |
-| `ENW_LINE_READ` | bool | ENW `S03` | `S04`, `S05` |
-| `ENW_MATCH` | bool | ENW `S04` | `S05` |
-| `ENW_ECHO_TOLD` `[ED-16]` | bool | ENW `ENW-D6.30` | `ENW-D7.04`; nothing else |
-| `EGT_BATCH` | self / waited | EGT `S01` | `EGT-D7.03` |
-| `EGT_ACCOUNT_M` / `_D` / `_S` | bool each | EGT `S02` | `S03` |
-| `EGT_COMPARED` | bool | EGT `S03` | `S04` |
-| `EGT_BOOK_READ` | bool | EGT `S04` | `S05`, `S06` |
-| `EGT_MURMUR_HEARD` | bool | EGT `S04` event | None (deliberately) |
-| `EGT_SET_HEARD` | bool | EGT `S05` | `S06` |
-| `EGT_TONIC` | told / sold | EGT `S06` | Glassmoth's stall barks; the three customers' barks |
+**Quest-local flags** are listed with their writer and readers in each package's own flags table (EST.9, ETB.9, EMS.9, ENW.9, EGT.9); every one has a single writer in this file, and none is read outside it except `EST_BAND` (ESH, request), `ETB_TAUGHT` (EME09, request) and the quest-local reads between the Unburnt parts (`EST_ONDINE_MET`, `EST_CARD`, `EST_KAELEN_NAMED`, `EST_BOOK`). (Independent review, 2026-11-15: the duplicate table that stood here was cut; it had drifted from the package tables.)
 
 ### 0.5 How this file feeds EH-M6
 
-Act III's input row is implemented exactly:
-
-| Act III row | Value set here | What the player sees at the tally board |
-|---|---|---|
-| `EH_UNBURNT` (EMS), kept / strained / unset, read at `S08` attendance (§9.3 item 6) | `kept` when the stone is seated in the Cold Seam (in EMS or in its later mend); `strained` when the player gave it to the lamp-house and has not mended it; unset if EMS was never completed | Kept: Maeryn Vall catches the player's eye and nods; Seredh does not speak (`EGA-D11.60`). Strained or unset: no line. Nothing about either is said aloud (ED-12). |
-
-EH-M6 can be played before EMS; a later `kept` changes nothing already seen. The tally board reads the value at the moment `S08` plays.
+Act III reads one output of this file, `EH_UNBURNT`, at `S08` attendance (§9.3 item 6; `EGA-D11.60`). `kept` (the stone seated in the Cold Seam, in EMS or its later mend): Maeryn Vall catches the player's eye and nods; Seredh does not speak. `strained` (given to the lamp-house and not yet mended) or unset (EMS never completed): no line. Nothing about either is said aloud (ED-12). The tally board reads the value when `S08` plays; a later `kept` changes nothing already seen.
 
 ### 0.6 Shared rules for all five packages
 
@@ -165,7 +129,7 @@ Content ids (suggested; the Schema & Content Engineer owns naming): `emberholt.s
 
 Bible cast used (bible §5.1, §5.2): Maeryn Vall, Kaelen Veyr'un, Brisa Teglan, Idra Callow, Theryn Dalewright, Selice Morra, Asera of the Three Breaths, Seredh Embercarver, Imra Brask, Corm Brask (never met, never speaks), Glassmoth (Jatha "Glassmoth" Nirel [CANON], character file §32), Serix Arden. Act I minor: Benno (EEH student), Tavi Ostry (bark only). Role names: students, a pay clerk's apprentice, vigil-goers.
 
-New minor names [NEW] (each grepped across `04_CONTENT_PRODUCTION`, `LORE` and `00_ADMIN` on 2026-11-15; no whole-word hits and no near-duplicate in the same voice set): **Ondine Thursk** (Covenant lamp-keeper; the grey visitor of EEH, now named; EST, EMS, EGT); **Perrin Ardith** (forge pay-house clerk at the Emberforges; ENW); **Mattea Orsk** (gate-yard porter), **Dorrit Vane** (Selice Morra's apprentice), **Sabeth Tamber** (Cinderwall lamp-mender) (EGT customers). Rejected during the check: *Gessa* (Jessa Ostry), *Corl* (Corm Brask), *Callis* (Idra Callow), *Lume* (Initiate-Lumen title), *Wrenley* (Mire Abel Wren), *Ysane* (Mire Ysolde). New sub-sites [NEW]: Maeryn's yard and Seredh's workroom (a lean-to in it), Idra's lodging, the forge pay-house, Glassmoth's stall under the slag-lane arch. The primer *Grounding for the Young Hand* [NEW].
+New minor names [NEW] (each grepped across `04_CONTENT_PRODUCTION`, `LORE` and `00_ADMIN` on 2026-11-15; no whole-word hits and no near-duplicate in the same voice set): **Ondine Thursk** (Covenant lamp-keeper; the grey visitor of EEH, now named; EST, EMS, EGT); **Perrin Sedgwick** (forge pay-house clerk at the Emberforges; ENW); **Mattea Orsk** (gate-yard porter), **Dorrit Vane** (Selice Morra's apprentice), **Sabeth Tamber** (Cinderwall lamp-mender) (EGT customers). Rejected during the check: *Gessa* (Jessa Ostry), *Corl* (Corm Brask), *Callis* (Idra Callow), *Lume* (Initiate-Lumen title), *Wrenley* (Mire Abel Wren), *Ysane* (Mire Ysolde). New sub-sites [NEW]: Maeryn's yard and Seredh's workroom (a lean-to in it), Idra's lodging, the forge pay-house, Glassmoth's stall under the slag-lane arch. The primer *Grounding for the Young Hand* [NEW].
 
 ---
 
@@ -339,7 +303,7 @@ No new runtime system.
 
 **Open decisions.**
 1. **Kaelen's family name** `[ED-12]`. He says only "Kaelen". The journal records "Kaelen". The bible names him Kaelen Veyr'un; saying the family name aloud would tie him in the player's mind to the Unburnt Boy legend. Recommendation: keep it unsaid in Emberholt. If the Director wants it said, add one clause to `EST-D6.30`.
-2. **The grey visitor named.** EEH kept the visitor nameless. This package names her (Ondine Thursk) so EST, EMS and EGT share one sincere lamp-keeper. If the Director prefers a role only, replace the name with LAMP-KEEPER in all three; no line depends on it.
+2. **The grey visitor named.** EEH kept the visitor nameless. This package names her (Ondine Thursk) so EST, EMS and EGT share one sincere lamp-keeper. If the Director prefers a role only, replace the name with LAMP-KEEPER in all three; the only texts that carry the name are the card (`EST-I3.01`, "Ask for Ondine" → "Ask at the hall") and the receipt stub (EMS Beat 3, "O. Thursk" → a lamp-keeper's mark). Checked against Act I (independent review, 2026-11-15): EEH's grey visitor is unnamed, non-interactive and "seeded for EST" (Act I §B, visitor row: "who and why" withheld), so naming her here contradicts nothing; Act II's grey cloaks of the lamp-keepers match.
 3. **No Kaelith option.** A player who has done EH-M4 has seen emberlight above the chamber; there is deliberately **no** option to tell Kaelen about it (bible §5.1: he is never told where Kaelith is; the player does not know where either).
 
 | Review finding | Revision |
@@ -1154,7 +1118,7 @@ Rejected: finding Corm or a trail to him (ED-16: never met; "walked out; not fou
 | `told`: Hesper chalks *NOT A COLLAPSE* on the plaque; "ENW: Imra Brask reads the chalk" | Act I §C9.3 | [NEW, Act I] |
 | MDS09: *"A man come in burned, from the fire roads, he said. Would not give his name. Healed in the hands. Left before the thaw. Said thank you to the roots."* | `Caelmor_Mire_Side_Quests_Settlements_and_Combat.md` MDS09 | [NEW, Mire]; read only |
 | Half-Name Wall: damaged or incomplete memorial; one solved omission must not imply a single author for all omissions | Part 3 proposal (landmarks table) | [Part 3; NEW] |
-| The forge pay-house; Perrin Ardith; the "Fire" weeks | This package | [NEW] |
+| The forge pay-house; Perrin Sedgwick; the "Fire" weeks | This package | [NEW] |
 
 ### ENW.3 Summary card
 
@@ -1172,7 +1136,7 @@ Rejected: finding Corm or a trail to him (ED-16: never met; "walked out; not fou
 | **Anchor** (contract) | The Register of the Unreturned; Cinderwall households (Imra Brask). |
 | **World-truth row** (contract) | **H18** (the Hollow hidden as a forge collapse; civilians above the chamber), H23 (recovery: uncertain names). |
 | **Revelation role** (contract) | **Supports R09** (civilians above the chamber were counted lost; one walked out). Register case (bible §7.6). No new fact about the ritual. |
-| **Recurring evidence** (contract) | **The wall** (Imra's half-name; read in place) + **the lower-forge pay list** (the pay-house binding; Perrin Ardith's custody; read in place). Both in Emberholt. The tongs authenticate the mark (object). The Mire Rootrest book is an optional echo only (`MDS09_READ`), **never a custodian**. |
+| **Recurring evidence** (contract) | **The wall** (Imra's half-name; read in place) + **the lower-forge pay list** (the pay-house binding; Perrin Sedgwick's custody; read in place). Both in Emberholt. The tongs authenticate the mark (object). The Mire Rootrest book is an optional echo only (`MDS09_READ`), **never a custodian**. |
 | **State compliance** (contract) | Inactive → Active on `ENW-D1` accept; Completed on `ENW-D7` end. No fail: wrong pages show other weeks; the soak replaces the forge. Both wall wordings are honest. Resume hook: Imra at the wall (`ENW-B1.02`). |
 | **Combat compliance** (contract) | None. No encounter, no hazard. **CDR-6 solo test:** every step is one player's; nothing needs a second player; no reward depends on co-op. |
 
@@ -1184,7 +1148,7 @@ Rejected: finding Corm or a trail to him (ED-16: never met; "walked out; not fou
 | **B. The Half-Name Wall** (EP12) | The wall panel (`S01`, `S05`) | The yard wall's outer face beside the plaque. Panels of soot-dark stone with part-names in chalk and in scratches: *TEL—*, *ORRI M—*, *the boy from the bakehouse*, *MA— (red scarf)*. Some panels are clean, some black. A **wire brush** and a **water pail** at the wall's foot that mourners use. |
 | **C. Imra's house** [NEW sub-site of EP02] | The tongs (`S02`) | A terraced room in Cinderwall's slag lanes. A **tool-box** under the bed with a forge-hand's things in it, returned "when they walled the yard": tongs, a leather apron gone stiff, a tally of pay chits. |
 | **D. The Cooling House forge** (EP02 hub) | Dress the tongs (`S02`, Option A) | As Act I. |
-| **E. The forge pay-house** [NEW sub-site of EP25] | The binding (`S03`, `S04`) | A long room at the Emberforges where every forge's pay was drawn at a **window**. Bound pay lists on high shelves, by forge, each spine with a forge mark; a **shelf index** board; a rolling **ladder**; a reading table. **Perrin Ardith** at the window. |
+| **E. The forge pay-house** [NEW sub-site of EP25] | The binding (`S03`, `S04`) | A long room at the Emberforges where every forge's pay was drawn at a **window**. Bound pay lists on high shelves, by forge, each spine with a forge mark; a **shelf index** board; a rolling **ladder**; a reading table. **Perrin Sedgwick** at the window. |
 
 **MAP VERIFICATION REQUIRED** for Imra's house and the pay-house.
 
@@ -1201,7 +1165,7 @@ Exact wording lives in ENW.12; beats cite node ids.
 - **Option B (time-cost):** soak overnight in the quench trough (keep watch to morning), then **scrub** with trough sand (3-segment channel). `ENW_TONGS = soaked`.
 Take a **rubbing**: paper over the handle, charcoal across (one interaction; carry-state; `ENW-I2.03`). Sets `ENW_RUBBING`. The tongs go back to Imra. Completes on the rubbing.
 
-**Beat 3: The pay-house (`S03_payhouse`).** *Objective: Find the lower forge's last pay week.* At the Emberforges, **Perrin Ardith** at the pay window (`ENW-D3`): the pay-house keeps every forge's lists, and no binding leaves the room. The **shelf index** (`ENW-I3.01`) gives the shelf; roll the **ladder**, climb, carry the binding to the reading table. It is headed in the forge's own count, *Fire* weeks (numbered from each relighting after a cold stop), and was rebound out of order. Page spreads (three weeks each) and read the headings; the last week is found by its heading and the clerk's line *Forge closed. No further lists.* (`ENW-I3.04`). Wrong spreads hold ordinary weeks. On the right spread:
+**Beat 3: The pay-house (`S03_payhouse`).** *Objective: Find the lower forge's last pay week.* At the Emberforges, **Perrin Sedgwick** at the pay window (`ENW-D3`): the pay-house keeps every forge's lists, and no binding leaves the room. The **shelf index** (`ENW-I3.01`) gives the shelf; roll the **ladder**, climb, carry the binding to the reading table. It is headed in the forge's own count, *Fire* weeks (numbered from each relighting after a cold stop), and was rebound out of order. Page spreads (three weeks each) and read the headings; the last week is found by its heading and the clerk's line *Forge closed. No further lists.* (`ENW-I3.04`). Wrong spreads hold ordinary weeks. On the right spread:
 - **Before the night** (`ENW-I3.05`): *Brask, C.* and his mark, ordinary, among the week's names.
 - **After the night** (`ENW-I3.06`): every line of the last day struck through in a later, browner ink with *lost: collapse* written over it, except one: *Brask, C. Drawn. Paid at the window; hands bound.* His mark beside it is steadier than the clerk's hand above.
 Sets `ENW_LINE_READ`. Completes on the second read.
@@ -1309,7 +1273,7 @@ No new runtime system.
 | Speaker | Knows | Doesn't know | Voice |
 |---|---|---|---|
 | **Imra Brask** [NEW, bible] | Her mother's stories; the half-name; the tool-box. | What happened to him. | Practical, dry, stubborn; has cleaned the same panel for years and pretends it is a chore. |
-| **Perrin Ardith** [NEW] | Every forge's pay lists; how pay was drawn. | Why anyone overwrote anything. | Precise, fond of his bindings, unhurried; a little funny about it. |
+| **Perrin Sedgwick** [NEW] | Every forge's pay lists; how pay was drawn. | Why anyone overwrote anything. | Precise, fond of his bindings, unhurried; a little funny about it. |
 | **Corm Brask** | — | — | Never appears; never speaks. |
 
 #### Barks
@@ -1456,7 +1420,7 @@ Rejected: Glassmoth proving all three dreams induced (R12 is never a universal e
 | **World-truth row** (contract) | H21 (dreams and visions: some induced, some not). |
 | **Revelation role** (contract) | **Supports R12** (one more access pattern: two sleepers, one night, one room, one set motif). Never dismisses all Dreamers: Sabeth's dream is in no book. No `[D-S1]` content. |
 | **Recurring evidence** (contract) | **Customer accounts** (three living witnesses) + **the lamp-house access book** (public, chained; Covenant custody) + **the chamber record** read by its keeper Serix (Hearthveil custody; not copied). |
-| **State compliance** (contract) | Inactive → Active on `EGT-D1` accept; Completed on `EGT-D8` end. No fail: a scorched pot is re-done; a wrong comparison is corrected; the vigil hall is always open (Act II rest point). Both choice branches are the same length. Resume hook: Glassmoth's stall (`EGT-B1.02`). |
+| **State compliance** (contract) | Inactive → Active on `EGT-D1` accept; Completed on `EGT-D11` end. No fail: a scorched pot is re-done; a wrong comparison is corrected; the vigil hall is always open (Act II rest point). Both choice branches are the same length. Resume hook: Glassmoth's stall (`EGT-B1.02`). |
 | **Combat compliance** (contract) | None. No encounter, no hazard. Serix, Glassmoth, the customers and lamp-keepers are never targetable. **CDR-6 solo test:** every step is one player's; the three accounts, the book and the choice are per player; no reward depends on co-op. |
 
 ### EGT.4 The places
@@ -1487,7 +1451,7 @@ Each tells the dream and where they slept. Mattea (her mother's year-night) and 
 
 **Beat 4: The vigil book (`S04_book`).** *Objective: Read the access book for that night.* At the vigil hall, the chained **access book** (`EGT-I5.02`; with `ESS_ACCESS_READ`, `EGT-I5.01` first): that night, the **second room**, *Orsk, M., year-night* and *Vane, D., steadying*. Sabeth's name is on no night the player pages (`EGT-I5.03`). With `EST_ONDINE_MET`, Ondine at the lectern says it is a public book (`EGT-D7.03`). **The strange moment** (EGT.7). Sets `EGT_BOOK_READ`.
 
-**Beat 5: Serix (`S05_serix`).** *Objective: Ask Serix Arden about that night.* Serix comes up from the dormitory stair (`EGT-D8`) and remembers the warden's hand. He will not take the player below again and will not allow a copy. He goes down alone (keep watch, or wait at the lectern) and reads out only that night's entry: second room; light hand; set: *a stair, lit*; carried: *to the vigil roll*. Sabeth is not in it. With `ESS_RECORD_READ` the player may ask whose mark set it (`EGT-D8.27`: "Not mine," and nothing else) and whether his "not set" column has anything that night (`EGT-D8.28`: it does not). Sets `EGT_SET_HEARD` (`EGT-D8.30`).
+**Beat 5: Serix (`S05_serix`).** *Objective: Ask Serix Arden about that night.* Serix comes up from the dormitory stair (`EGT-D8`) and remembers the warden's hand. He will not take the player below again and will not allow a copy. He goes down alone (keep watch, or wait at the lectern) and reads out only that night's entry: second room; light hand; set: *a stair, lit*; carried: nothing written (as on Act II's light-hand rows). Sabeth is not in it. With `ESS_RECORD_READ` the player may ask whose mark set it (`EGT-D8.27`: "Not mine," and nothing else) and whether his "not set" column has anything that night (`EGT-D8.28`: it does not). Sets `EGT_SET_HEARD` (`EGT-D8.30`).
 
 **Beat 6: What they're given (`S06_choice`).** *Objective: Decide with Glassmoth what Mattea and Dorrit are given.* `EGT-D9`. They want sleep, or they want to know; Glassmoth cannot tell which. The choice (`EGT_TONIC`):
 - **Tell them.** Glassmoth will not sell to them this time. The player carries what the book and the record show to each (`EGT-D10.10`–`.25`). Mattea will keep her mother's year-night at home; Dorrit will ask his master not to send him. Neither is told what to do.
@@ -1570,13 +1534,13 @@ No new runtime system.
 
 | Mystery | Author truth | Public belief | Evidence | Wrong reading | Withheld | Reveal owner |
 |---|---|---|---|---|---|---|
-| **The stair dream** | Set in the second room for two vigil sleepers to bring them back to vigil (bible §2.3; R12). | "A lot of people are dreaming of stairs." | Two identical accounts; the access book; Serix's reading of the record. | Every dream in the city is set; or none is. | Who set it; what the vigil roll is for. | R12 (EH-M5; this is one more case). |
+| **The stair dream** | Set in the second room for two vigil sleepers (bible §2.3; R12); why is not shown here. | "A lot of people are dreaming of stairs." | Two identical accounts; the access book; Serix's reading of the record. | Every dream in the city is set; or none is. | Who set it; why. | R12 (EH-M5; this is one more case); any purpose is CV-M4's (R18). |
 | **Sabeth's stair** | Hers. | — | It is in no book. | It was set too; or it is prophecy. | Everything. | None. |
 | **The sleeper** | Unknown. | — | — | She proves the dream is everywhere. | Who she is. **Never explained.** | None. |
 
 **Open decisions.**
 1. **The setter's mark.** In the record the mark is *C. Vorr* (Act II); Serix says only "Not mine". Calynne Vorr appears only as a name in a record (bible §5.1). Recommendation: keep it unsaid here.
-2. **"Carried: to the vigil roll."** This shows a set motif bringing sleepers back to vigil (a practice). It does not say why. If the Director feels it pre-empts R18, change the carried column to *"carried: none noted"*; only `EGT-D8.24` changes.
+2. **"Carried" (independent review, 2026-11-15).** The draft had Serix read *carried: to the vigil roll* and add "That's what it's for. To bring them back." With Dorrit's *steadying* entry that stated a purpose for setting dreams in young sleepers, which pre-empts R18 (CV-M4). Cut to *nothing written*, matching Act II's light-hand rows. If the Director wants a purpose seeded, it belongs to CV-M4; only `EGT-D8.24` and `EGT-D9.02`–`.03` would change.
 
 | Review finding | Revision |
 |---|---|
@@ -1697,7 +1661,7 @@ EGT-D8.11 SERIX: "I'll read it. You'll hear it. That's what I'll do."
   {Serix goes below; keep watch at the lectern (or wait ~20 s); he returns}
 EGT-D8.20 SERIX: (quietly) "Second room. Two sleepers, the names in your book. Light hand."
 EGT-D8.22 SERIX: "Set: a stair, lit."
-EGT-D8.24 SERIX: "Carried: to the vigil roll." (beat) "They come back. That's what it's for. To bring them back."
+EGT-D8.24 SERIX: "Carried: nothing written. Light hands mostly aren't." (beat) "I read what's there. I don't read what isn't."
 EGT-D8.26 SERIX: "The mark isn't mine."
   > [ESS_RECORD_READ] "Whose is it?"                          → EGT-D8.27
   > [ESS_RECORD_READ] "Your 'not set' column. Anything that night?"   → EGT-D8.28
@@ -1712,8 +1676,8 @@ EGT-D8.30 SERIX: (goes back down) "Don't come a third time. I'd tell you."   {EG
 ```
 EGT-D9 (the stall; S06)
 EGT-D9.01 GLASSMOTH: (lays two bottles on the counter) "Well."
-EGT-D9.02 [EGT_BOOK_READ] (The player tells her: the second room, the two names, Serix's reading: set, light hand, carried to the vigil roll.)
-EGT-D9.03 GLASSMOTH: (a long breath) "To bring them back." (beat) "That's how it was when I kept rooms. That's why I left."
+EGT-D9.02 [EGT_BOOK_READ] (The player tells her: the second room, the two names, Serix's reading: set, light hand, a stair, lit.)
+EGT-D9.03 GLASSMOTH: (a long breath) "Set. Light hand." (beat) "That's how it was when I kept rooms. That's why I left."
 EGT-D9.04 GLASSMOTH: "They want sleep. They don't want a lecture. Or they want to know. I can't tell which. You heard them."
   > "Tell them. Let them choose."                    → EGT-D9.20
   > "Sell them the tonic. Let them sleep."          → EGT-D9.30
@@ -1754,7 +1718,7 @@ EGT-D11.06 GLASSMOTH: (pays the player) "Don't thank me."   {payment; event: S06
 | EGT-I1.02 | Glassmoth's charms | *"Emberglass drops on threads. They chime when the wind comes under the arch."* |
 | EGT-I1.03 | Her slate | *"A slate with marks for bottles sold. No names."* |
 | EGT-I5.01 | The access book (`ESS_ACCESS_READ`) | *"The vigil access book, on its chain. You have read this book before."* |
-| EGT-I5.02 | The access book, that night | *"The night Glassmoth named. First room: two names. Second room, in a lamp-keeper's hand: 'Orsk, M., year-night.' 'Vane, D., steadying.' Third room: a run of the same name you have seen before."* |
+| EGT-I5.02 | The access book, that night | *"The night Glassmoth named. First room: two names. Second room, in a lamp-keeper's hand: 'Orsk, M., year-night.' 'Vane, D., steadying.' Third room: no name that night."* |
 | EGT-I5.03 | The access book, Sabeth | *"You page back and forward through the season. 'Tamber' is nowhere."* |
 
 ---
@@ -1774,4 +1738,5 @@ EGT-D11.06 GLASSMOTH: (pays the player) "Don't thank me."   {payment; event: S06
 | **D-C03 / D-C06** | No precursor name or roster; no count of Volkhari held, living, dead or escaped; no refuge placed; Kaelith not seen, named or sought; no count of the lower forge's dead. |
 | **Voice** | Civic pride; craft, never magic; fire grammar; Volkhari restraint; children are students (bible §5.3). "Warden's hand" address only. |
 | **Names** | Five new minor names grepped (§0.8); six candidates rejected for near-collisions. |
-| **Size** | Under the 140 KB package limit. |
+| **Size** | See the independent review row below. |
+| **Independent review, 2026-11-15** | Authored walkthrough against the brief, CDR-1 to CDR-6 (§3.7), the bible, Arcs, Revelation Ledger, dossier, Factions, Part 4 ledger and the reviewed Act I–III packages and dialogue (nothing was played; no build exists). **Flags:** every main-line read re-checked by name and value in the act files (all present; `EH_UNBURNT` kept / strained / unset matches Act III §inputs and `EGA-D11.60`); `EH_UNBURNT` and `EH_HALF_NAME` have one writer each. Act II's `ESS_RECORD_READ` row lists EGT but not EMS as a reader (the EMS read is optional and harmless; Act II row to be extended at integration). Fixed two wrong reader ids (`ESS_SERIX_HEARD` is read at `EGT-D8`, not `EGT-D6`; EGT completes on `EGT-D11`, not `EGT-D8`). The duplicate quest-local flag table in §0.4 had drifted (wrong reader for `EGT_BATCH`; `EST_SLEEVES_SEEN`, `EST_ONDINE_MET`, `EST_COLD_BREATH` missing) and was replaced by a pointer to the package tables; §0.5 folded to one paragraph. **Ledger (R18, Medium):** Serix's *carried: to the vigil roll* with "That's what it's for. To bring them back" (and Glassmoth's echo), beside Dorrit's *steadying*, stated a purpose for setting dreams in young sleepers; cut to *nothing written* (`EGT-D8.24`, `EGT-D9.02`–`.03`, EGT.5 Beat 5, mystery ledger, open decision 2). The access book's third-room line ("a run of the same name you have seen before") pointed at the Speaker's nights `[D-S1]`; now "no name that night". R15, R16, R19: seed only (Kaelen's one canon line). D-C03, D-C06: no counts, no roster, no refuge. Kaelen's family name is never spoken (bible cast name only). ENW's Mire echo stays optional, sets only `ENW_ECHO_TOLD`, creates no Mire requirement and states no route. **Ondine Thursk:** consistent with Act I (EEH's visitor unnamed, non-interactive, "seeded for EST") and Act II (grey cloaks); kept and swappable; open decision EST.11 item 2 now names the two texts that carry her name. **Rename:** Perrin Ardith → **Perrin Sedgwick** (near-duplicate of Serix Arden and Sarne Ardane in the Emberholt cast). **Playability:** all unlocks reachable; every quest has a physical step and a skill hook with a time-cost alternative; no softlock found; three states only. **Size:** about 168 KB after trimming the duplicate table; it remains above the 140 KB package guide. Further cuts would remove content, not redundancy (Director call). |
