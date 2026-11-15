@@ -244,6 +244,35 @@ Two independent generations matched pixel-for-pixel across all ten maps. Reopene
 
 [Simon Tremblay Gauthier’s ground generator](https://simontremblay3d.artstation.com/projects/Rx6Ym) and [height-first production breakdown](https://80.lv/articles/dirt-generator-in-substance-designer) informed the soil relief and sequencing of mineral and organic layers. [John Diodati’s Forest Path](https://glieseboy.artstation.com/projects/ELOPAn) informed the loose, uneven shoulders. [Reviewed soil plate](https://cdnb.artstation.com/p/assets/images/images/010/018/333/large/simon-tremblay-gauthier-stg-ground-dirt-01.jpg) · [Reviewed path plate](https://cdna.artstation.com/p/assets/images/images/032/814/230/large/john-diodati-finalrendermain2.jpg?1607541819). The delivered maps, source and review fixtures are original Caelmor work. The reference plates remain third-party material.
 
+## Lowmark Sparse Vegetation Ground
+
+This candidate pairs the approved Packed Earth soil construction with an independent sparse layer. The bare foundation uses the original seed, compaction, moisture, gravel, erosion and 3.60 × 2.40 m repeat. The existing verge control is set to zero for this new bake, dropping the original traces of green and their relief. The approved Packed Earth, Worn Footpaths and Natural Grass & Wildflowers files are unchanged.
+
+The bake projects modeled, folded grass blades, irregular basal rosettes, creeping leaves, exposed root forks and occasional small blooms. Plants gather in curved, unequal pockets with exposed soil between them. Root placement avoids exposed stone faces, while leaves can grow over gravel. Damp olive growth and short dry blades use the approved vegetation library's habitat and height cues.
+
+- [Editable Blender scene and shader group](Lowmark_Sparse_Vegetation_Ground.blend) · [Deterministic Blender build source](build_lowmark_sparse_vegetation.py). Append the **Lowmark Ground | Sparse Vegetation** material or the **Lowmark | Soil + Sparse Growth** shader group. The companion **Bare Foundation** material uses the same graph with coverage at zero. The scene includes separate review cameras and a hidden collection of the modeled growth used for the bake.
+- **Bare soil** · [Albedo](Lowmark_Sparse_Vegetation_Ground_Soil_albedo.png) · [Tangent-space normal](Lowmark_Sparse_Vegetation_Ground_Soil_normal.exr) · [Roughness](Lowmark_Sparse_Vegetation_Ground_Soil_rough.exr) · [Height](Lowmark_Sparse_Vegetation_Ground_Soil_height.exr).
+- **Sparse growth** · [Albedo](Lowmark_Sparse_Vegetation_Ground_Growth_albedo.png) · [Tangent-space normal](Lowmark_Sparse_Vegetation_Ground_Growth_normal.exr) · [Packed growth data](Lowmark_Sparse_Vegetation_Ground_Growth_data.exr).
+- **Matched visual review** · Sphere [bare](Lowmark_Sparse_Vegetation_Ground_Sphere_Bare.png) / [sparse](Lowmark_Sparse_Vegetation_Ground_Sphere_Sparse.png) · Ground [bare](Lowmark_Sparse_Vegetation_Ground_Ground_Bare.png) / [sparse](Lowmark_Sparse_Vegetation_Ground_Ground_Sparse.png) · Detail [bare](Lowmark_Sparse_Vegetation_Ground_Detail_Bare.png) / [sparse](Lowmark_Sparse_Vegetation_Ground_Detail_Sparse.png) · [2×2 repeat](Lowmark_Sparse_Vegetation_Ground_Repeat_Sparse.png). The paired images use the same camera and lighting. They show baked materials and a displaced review mesh.
+
+### Texture and coverage contract
+
+All seven maps are 2160 × 1440. Albedo is sRGB. The EXRs are linear, with tangent normals in OpenGL +Y. Meshes using the Blender graph supply `UV0_Metric` in metres. With normalized UVs, one repeat is 3.60 × 2.40 m. Soil height decodes as `(height - 0.5) × 0.082 m`; growth data stores coverage in R, growth roughness in G and coverage-premultiplied height offset divided by 0.082 m in B. Both layers are dielectric.
+
+In Blender, **Coverage** multiplies **Painted Mask** and the optional mesh attribute. That product multiplies R to get the blend weight for albedo, roughness and decoded tangent normals. Decode and normalize the blended normal before applying it. The same control product is applied to B before adding to soil height. At zero coverage the resulting channels are the bare soil values. A separate non-color painted image can feed **Painted Mask** using independent, nonrepeating paint UVs. For the shared mask path, enable **Use cv_density** and use a mesh `FLOAT`/`POINT` attribute of the same name consumed by [Vegetation Scatter](../../../CODE/Scripts/vegetation_scatter/README.md#habitat-and-guide-inputs). A missing attribute reads as zero when the switch is enabled. With the switch off it contributes one.
+
+```powershell
+blender --background --factory-startup --python-exit-code 1 --python MEDIA/Materials/procedurally_generated/build_lowmark_sparse_vegetation.py -- --verify-repeat --optix
+```
+
+Blender 5.0.1 builds the maps, scene, and Cycles review renders. Omit `--optix` for CPU rendering. `--seed` (default `40581`) rebuilds the arrangement, `--cluster` (default `.88`) controls how tightly growth collects, and `--skip-render` updates just the material files and scene. The builder checks the saved maps, periodic sampling, zero-weight identity and monotonic mask response. `--verify-repeat` also rebuilds the vegetation and checks repeatability. Keep the maps beside the `.blend` for reopening.
+
+The delivered seed covers 9.68% of a tile by projected plant area and has five small flower heads per 8.64 m². The 2×2 render had no visible seam. Fixed clumps are recognizable at full-repeat scale. A Cycles check of the reopened file also confirmed a black mask and zero Coverage both produce zero growth weight. Constant paint at 30% and a `cv_density` point attribute at 60% produced the corresponding fractions of the full growth weight.
+
+The bake represents compressed, ground-hugging growth. Taller silhouettes, wind, and cast shadows from raised blades still belong to placed or scattered geometry. A later Blender tool can coordinate mask painting between the shader and scatter. Unity needs the same mask and blending contract, then in-engine checks for normal import, filtering, and coverage. Current verification is in Blender.
+
+Visual target was the Creative Director's supplied *Kingdom Come: Deliverance II* preproduction material image, SHA-256 `28799be3ef2f63fd721b9943e27c36a3d3ff10bd978ceaa31c5f0c69f938dfc8`. It informed ground cover, plant scale, and the placement of growth around stone. The reference image and third-party textures and meshes are absent from the deliverables. Caelmor's references for the underlying assets are the approved Packed Earth and Natural Grass & Wildflowers revisions above and below. Layering and height-first construction also drew on [Simon Tremblay Gauthier's workflow breakdown, May 2018](https://80.lv/articles/dirt-generator-in-substance-designer).
+
 ## Lowmark Natural Grass & Wildflowers
 
 The Creative Director approved the vegetation library at `df80efa`. The [Caelmor Vegetation Scatter extension](../../../CODE/Scripts/vegetation_scatter/README.md) links this accepted library for terrain authoring.
