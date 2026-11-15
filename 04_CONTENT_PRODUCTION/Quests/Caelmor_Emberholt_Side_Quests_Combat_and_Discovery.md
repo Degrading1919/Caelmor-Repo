@@ -599,7 +599,7 @@ EFD-D2.16 ELYNDRA: "They will say it was me. It was not. I only watch it." (beat
   > "What else do you see?"                                          → EFD-D2.17
   > (Say nothing.)                                                  → EFD-D2.18
 EFD-D2.17 ELYNDRA: "In the city, people dream the same dream. Some of it is theirs. Some of it is laid over them, like a hand over a mouth. I cannot always tell which." (beat) "When someone tells you what they saw in fire, do not take their word, or mine. Find where it is written down."   → EFD-D2.18
-EFD-D2.18 ELYNDRA: "I am here. I am nearly always here." (she goes back along the terrace; Ivett does not watch her go)   → EFD-D2.20
+EFD-D2.18 ELYNDRA: "If you need me, tell the keeper. I hear what is said at the bowl." (she goes back along the terrace; Ivett does not watch her go)   → EFD-D2.20
 EFD-D2.20 [after S02] IVETT: (still looking at the bowl) "It's done that four times this season. Never used to." (beat) "Under the bowl there's a trapdoor. I don't go down there much. Go down."   → EFD-D3.01
 ```
 

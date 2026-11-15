@@ -355,7 +355,7 @@ EAC-D8.36 THALAN: "People who write things down." (beat) "I won't give you their
 EAC-D8.60 ASERA: (to both of them, plainly) "We can cut you out, and Thennek takes you on." (beat) "You decide. They ask."
 EAC-D8.61 THALAN: (to the player) "I have wanted that every night for a long time." (beat) "Ask me."
   > "Come with us. Thennek is waiting."                                   → EAC-D8.62
-EAC-D8.62 THALAN: (a long silence; the glow rises and sinks once) "If the frame is empty, they will look for someone to fill it." (beat) "Let them look. Let them look a long time." (beat) "Yes. I will leave this place. Cut me out." (beat) "It won't quiet what burns under the floor. Don't let anyone up there tell you it did."   {EH_THALAN = freed}   → EAC-D9.01
+EAC-D8.62 THALAN: (a long silence; the glow rises and sinks once) "If the frame is empty, they will look for someone to fill it." (beat) "Let them look. Let them look a long time." (beat) "Yes. I will leave this place. Cut me out." (beat) "It won't quiet what burns under the floor. Don't let anyone up there tell you it did."   → EAC-D9.01
 (D-E2, ruled 2026-11-15: liberation is the only outcome. `EAC-D8.64` and `.66` are retired with the aided branch; there is no other ask.)
 ```
 
@@ -406,7 +406,7 @@ EAC-D11.30 DAHRIN: (holds out his hand) "The stone. It's warm still. It'll go co
 EAC-D11.31 DAHRIN: (closes his fist round it; his hand isn't shaking) "Look at that."
 EAC-D11.35 MAERYN: (at the curtain; she has been there a while) "We're not gone, you know." (beat) "Whatever people say." (she lets the curtain fall behind her)   {optional, plays once if the player stays in the room ~5 s after EAC-D11.31 before speaking to Dahrin again; EAC_MAERYN_SAID} [ED-12]
 EAC-D11.36 MAERYN: (at the counter as the player leaves through the shop after EAC-D11.40, handing over a folded hood) "Lined. You'll be in ducts again. Everybody is." (beat) "If anyone asks, you were being fitted."   {reward: lined duct hood}
-EAC-D11.40 DAHRIN: (to the stove, or to the player) "In. Hold. Three." (he breathes) "Go home, warden's hand. Wherever that is tonight."   {quest Completed; journal: The Ember-Priestess has asked for the warden's hand at the Covenant lamp-house.}
+EAC-D11.40 DAHRIN: (to the stove, or to the player) "In. Hold. Three." (he breathes) "Go home, warden's hand. Wherever that is tonight."   {quest Completed; EH_THALAN = freed; journal: The Ember-Priestess has asked for the warden's hand at the Covenant lamp-house.}
 ```
 
 ### EAC-B9: post-quest barks
@@ -943,7 +943,7 @@ Production rule on `ESS-D11.34`: an evasion, not a lie (he says nothing about wh
 
 ### ESS-D12: Elyndra at the vent shrine (optional; `S01`–`S05`) (D-EL, ruled 2026-11-15)
 
-At **EP20 Elyndra's Vent Shrine** on the Ridge (the EFD/EDS05 site; she is there as EFD-D2.18 has her: "I am here. I am nearly always here."). Once per player while ESS `S01`–`S05` are active. No step waits on it; nothing here is evidence. She never names the Remnant, the Seat, the Covenant's setters, the endgame or Perfect Flame.
+At **EP20 Elyndra's Vent Shrine** on the Ridge (the EFD/EDS05 site). She keeps to herself; the player asks at the bowl and she comes out to them, as EFD-D2.18 sets up ("If you need me, tell the keeper"). This works whether or not EFD was done.. Once per player while ESS `S01`–`S05` are active. No step waits on it; nothing here is evidence. She never names the Remnant, the Seat, the Covenant's setters, the endgame or Perfect Flame.
 
 ```
 ESS-D12.01 (The vent shrine. Ember-mist over the vent. Elyndra sits a little apart from the flame, the volcanic glass mask over her eyes. She does not turn her head.) ELYNDRA: "You've come about the Speaker's dreams." (beat) "Sit, if you want. I don't say much twice."
@@ -952,10 +952,10 @@ ESS-D12.01 (The vent shrine. Ember-mist over the vent. Elyndra sits a little apa
   > "Another time."                                 → END (no flag)
 ESS-D12.10 ELYNDRA: "Sometimes. A given dream comes too neatly. Same shape, same hour, as if someone folded it before it arrived." (beat) "Some of his come folded. Not all."
 ESS-D12.11 ELYNDRA: "And what is folded into them is what he wanted already. Whoever folds them knows what he wants. That is why he never asks where they come from."
-ESS-D12.12 ELYNDRA: "None of that is proof. I see. I don't keep books." (beat) "Someone in that city keeps a book of nights. And he writes letters in his own hand. Find what is written. Then you won't need me."   → ESS-D12.01 options, then ESS-D12.40
+ESS-D12.12 ELYNDRA: "None of that is proof. I see. I don't keep books." (beat) "Someone in that city keeps a book of nights. And he writes letters in his own hand. Find what is written. Then you won't need me."   → ESS-D12.30 if ESS_RECORD_READ, else ESS-D12.01 options; then ESS-D12.40
 ESS-D12.20 ELYNDRA: (a long pause) "I have seen him burning. Weeping while he burns." (beat) "I don't know what it means. I don't know if it is a thing that will happen, or a thing he is."
 ESS-D12.21 ELYNDRA: "I have read a burning wrong before. Carry it as a picture, not as a fact. Don't hand it to anyone as if it were one."   → ESS-D12.01 options, then ESS-D12.40
-ESS-D12.30 [ESS_RECORD_READ] ELYNDRA: "You've read their book already. Then you know more than I do. Trust it over me."
+ESS-D12.30 [ESS_RECORD_READ] ELYNDRA: "You've read their book already. Then you know more than I do. Trust it over me."   → ESS-D12.01 options, then ESS-D12.40
 ESS-D12.40 ELYNDRA: "On the terraces, breathe on your own count." (she turns back to the vent)   {ESS_ELYNDRA_HEARD}   → END
 ```
 
@@ -983,3 +983,5 @@ Production rule: she points (letters, "a book of nights") and warns; the player 
 |---|---|
 | Independent review, 2026-11-14 | Checked against the quest file, the bible, the Revelation Ledger, the character file and the Part 4 ledger. **High:** the kept answer *"that the vigils be clear." They will be.* and the letter's "I thank whoever has the keeping of such things" showed the Speaker asking his patron for his dreams (canon: he believes them divine); the answer is cut, the letter thanks "the fire", `ESS-D8.32` reworded and the swap note after `ESS-D8` updated. **Medium:** `EAC-I7` "Some are small" cut (implied present child captives; Thalan is the sole current captive); `EAC-D11.35` trimmed to the canon hook ("We're not gone"), dropping "We didn't go anywhere"; `ESS-D4.03`/`.04` and `ESS-I5` put the routing stamp on the orders' backs, since the Act I work order's face shows none, and no longer ask for a carry-state object the player may not hold; `ESS-D2.20` now waits for `ESS_RUN_READ`; the "not set" Priestess row moved to *K. less 23*, a night the access book lists. **Low:** `EAC-D2.10` matches the line Act I promised; `EAC-D11.35`/`.36` timing defined; `EAC-B9.4` matches the walkable gate; `ESS-D3.02` tagged `[ALLOCATION]`. No new names; no renames. `[INITIATE]`, R15, R16 untouched; R18/R19 seeds only. |
 | Emberholt character rulings, 2026-11-15 | **D-E2:** `EAC-D8.60`–`.62` rewritten as one ask with Thalan's voiced consent to leaving and his line that it will not quiet what burns below; `EAC-D8.64`, `.66`, all of `EAC-D10`, `EAC-B8`, `EAC-D11.12`–`.13` and the aided halves of `EAC-B9.2`/`.3` removed; Smithing and cool-cycle approaches (`EAC-D9.01`) kept. **D-S1:** Speaker cast note gains the ruling; `ESS-I6a` gains two sentences in his hand (orders sent round the Marshal under his office's mark; the terraces going quiet for him); `ESS-D8.33` added ("What I set, he wanted already"); swap notes after `ESS-I6a` and `ESS-D8` and the block P alternative row removed; tags replaced. **D-EL:** `ESS-D6.12` (Seralynd's pointer) and `ESS-D12` (optional consult at EP20) added. |
+| Independent review of character rulings, 2026-11-15 | `{EH_THALAN = freed}` moved from `EAC-D8.62` to the completion line `EAC-D11.40` (flag set once at EAC completion, per bible §9.1); `ESS-D12.30` was unreachable: now reached from `ESS-D12.12` when `ESS_RECORD_READ`, and routed back to the options. |
+| Director review pass, 2026-11-15 | ESS-D12 access note reworded to match the revised EFD-D2.18 (Elyndra is seldom seen; the player asks at the bowl), removing the clash with Ivett's "a handful of times in forty years" (EFD-D1.04). |
