@@ -27,7 +27,7 @@ The main line teaches the player to read heat in a city. These four quests take 
 
 All four are optional, solo-clearable, cannot fail and give no lump quest XP (skill XP from actions; bible §11.6). Inactive, Active or Completed only. **No quest items** (bible §9.4: the budget of five is spent by the milestones). Only **ECC** sets a region flag (`EH_RIVERGLASS`, bible §9.1). EAD and ECC wait on the EH-M3 cross-region gate (ED-7) through their main-line unlocks; EOP and EFD do not.
 
-**Skill requirements.** Only EOP gates its accept on a skill (Hunting, as the bible slate names it a Hunting skill quest). Every other hook sits inside a step and has a time-cost alternative that is still play. `[GD]` levels are placeholders for the Gameplay Designer.
+**Skill requirements.** Only EOP gates its accept on a skill (Hunting, as the bible slate names it a Hunting skill quest). Hunting is trainable inside Emberholt on the ordinary, harvestable Emberback Boars of the Ash Roads and the Ridge (rulings §3.1.4); `EOP-D1.30` points there. Every other hook sits inside a step and has a time-cost alternative that is still play. `[GD]` levels are placeholders for the Gameplay Designer.
 
 **Level framing (ED-10).** EOP and EFD sit at EH-M2's Advanced identity; EAD and ECC at Expert. Exact levels are Gameplay Designer calls.
 
@@ -120,7 +120,7 @@ No other region flag is read. No Thornfell or Mire flag is read. `EH_RIVERGLASS`
 |---|---|
 | Content id (suggested) | `emberholt.side.old_plate` |
 | Type | Skill quest (Hunting); side miniboss (bible §7.2, §10). |
-| Unlock | EH-M2 Completed. **Hunting ~[GD: low–mid]** checked on accept. Offered by Teodor Marsk at his pen gate in the Ridge Steadings (`EOP-D1`); a herder's bark at the Ridge working gate points the way (`EOP-B0.1`). Below the level, Teodor talks and asks the player back (`EOP-D1.30`); no other content is locked. |
+| Unlock | EH-M2 Completed. **Hunting ~[GD: low–mid]** checked on accept. Offered by Teodor Marsk at his pen gate in the Ridge Steadings (`EOP-D1`); a herder's bark at the Cinderwall working gate points the way (`EOP-B0.1`). Below the level, Teodor talks and asks the player back (`EOP-D1.30`); no other content is locked. |
 | Resume hook | Teodor at the pen gate or the blind: `EOP-D1.00` "She's still out there. So are you. Good." pins the step. |
 | Skills | Hunting (requirement, sign reads, harvest); Melee or Ranged |
 | Combat share | ~40% (boars at the Scars' edge; Old Plate) |
@@ -150,11 +150,11 @@ Selected shape: pen damage → three sign reads (Hunting) → boars at the edge 
 
 ### EOP.3 The places [MAP VERIFICATION REQUIRED]
 
-Outside the walls through the Ridge working gate on Cinderwall's side; the steadings and the Molten Scars lie along the Ash Roads (bible §4.2 route order). Relative order only.
+Outside the walls through the Cinderwall working gate (bible §4.2: a working gate on Cinderwall's side); the steadings and the Molten Scars lie along the Ash Roads (bible §4.2 route order). Relative order only.
 
 | Area | Purpose | Environmental storytelling |
 |---|---|---|
-| **R1. The Ridge working gate** | Bark (`EOP-B0.1`) | A plain iron gate in Cinderwall's outer wall; herders with goats on ropes; ash on the road. |
+| **R1. The Cinderwall working gate** | Bark (`EOP-B0.1`) | A plain iron gate in Cinderwall's outer wall; herders with goats on ropes; ash on the road. |
 | **P1. Teodor's steading** (EP05) | Offer; first sign; choice | Low stone pens against a warm slope; ridge goats; a smoke-house. One pen gate hangs off its post. A **keep-watch bench** under the eaves (respawn for `S00`, `S01`, `S06`). |
 | **P2. The burners' clamp** | Second sign | A charcoal clamp under a skin of turf **damping sods**, smoking. One side rooted open, sods torn and scattered. A stack of cut sods beside it. |
 | **P3. The Scars path** | Third sign | A spur off the Ash Road dropping toward the glass. Ash in the prints. |
@@ -304,7 +304,7 @@ Standard: quest-start skill check (Mire MRH pattern); Hunting sign inspects gate
 
 | Id | Speaker | Condition | Line |
 |---|---|---|---|
-| `EOP-B0.1` | HERDER | Ridge working gate; EH-M2 Completed; EOP Inactive | "If you're going up the road, Marsk's pens are broken. He won't set a trap. Ask him why. Go on." |
+| `EOP-B0.1` | HERDER | Cinderwall working gate; EH-M2 Completed; EOP Inactive | "If you're going up the road, Marsk's pens are broken. He won't set a trap. Ask him why. Go on." |
 | `EOP-B1.1` | CHARCOAL BURNER | At the clamp, `S01` | "Rooted it while it was smoking. Didn't care. That's an old one, that's got no fear left." |
 | `EOP-B2.1` | TEODOR | After EOP-E1 | (to a dead boar) "Sorry, lad." (to the player) "Up. The blind's this way." |
 | `EOP-B5.1` | TEODOR (from the blind) | A bead turns amber | "Near one's warm!" / "Middle!" / "Under the hang!" |
@@ -328,7 +328,7 @@ EOP-D1.03 TEODOR: "Read the post and tell me. If you can't read a post, you can'
 EOP-D1.05 TEODOR: "Read her sign. Pen, the burners' clamp, the path down to the Scars. Then come back and tell me what you saw. Not what you think."
   > [Hunting ≥ GD] "All right."                                      {event: accept → S01_sign}  → end
   > [Hunting < GD] "All right."                                      → EOP-D1.30
-EOP-D1.30 TEODOR: (looks at the player's hands, then their boots) "You'd walk past her prints and call them weather. Come back when you can read a print." (beat) "No offence. She'd take none either."   → end
+EOP-D1.30 TEODOR: (looks at the player's hands, then their boots) "You'd walk past her prints and call them weather. Boars come down the Ash Roads to the warm stones most dusks. Learn on them, then come back when you can read a print." (beat) "No offence. She'd take none either."   → end
 ```
 
 ```
@@ -453,7 +453,7 @@ Further out on the Ridge than the steadings, along the Ash Roads (bible §4.2). 
 
 ### EFD.4 Beats
 
-**Beat 0: The Note (`S00_offer`).** *Objective: Find the keeper at Elyndra's shrine.* From the Cooling House board or Hennet's bark, out through the Ridge working gate and along the Ash Road past the steadings. Ivett at the bowl (`EFD-D1`).
+**Beat 0: The Note (`S00_offer`).** *Objective: Find the keeper at Elyndra's shrine.* From the Cooling House board or Hennet's bark, out through the Cinderwall working gate and along the Ash Road past the steadings. Ivett at the bowl (`EFD-D1`).
 
 **Beat 1: Tending (`S01_tend`).** *Objective: Tend the flame with the keeper.* Ivett's morning round, in any order: **sweep** the ash off the bowl's lip (interaction ~2 s); carry fresh **ashvine** from the garland basket to the plinth (carry-state, one trip); **lift three offering stones** out of the bowl's mouth where pilgrims push them (interaction each, ~1 s; the flame leans away from the hand). Then **inspect the bowl** (`EFD-I2`): no wick, no oil, no coal; a hole in the bowl's base the width of a wrist; a warm draught on the back of the hand. Ivett (`EFD-D2`): it gutters and leaps; she is afraid it will go out in front of the pilgrims, or leap at a child.
 
@@ -636,7 +636,7 @@ EFD-D4.40 IVETT: (bread from a cloth; a few coins from the offering box) "Pilgri
 
 ### EFD.14 Open decisions
 
-1. **Elyndra in canon vs the bible [Director].** `LORE/Characters/Caelmor_Characters_Region4_Emberholt.txt` §37 makes Elyndra the Cinderseer a living seer at "an abandoned vent shrine"; the bible keeps her myth only (§5.1, EDS05). This package never shows, places, dates or kills her: Ivett has never seen her and pilgrims disagree, and this shrine is kept, not abandoned. A later appearance at another, abandoned shrine stays possible. EDS05's withheld layer is reworded accordingly (§6).
+1. **Elyndra in canon vs the bible [Director].** `LORE/Characters/Caelmor_Characters_Region4_Emberholt.txt` §37 makes Elyndra the Cinderseer a living seer at "an abandoned vent shrine"; the bible keeps her myth only (§5.1, EDS05). This package never shows, places, dates or kills her: Ivett has never seen her and pilgrims disagree, and this shrine is kept, not abandoned. Every line here reads both ways (a legend, or a living seer this shrine's keeper has never met), so either ruling needs no rewrite in this file. **Director question, not decided here:** is Elyndra myth only (bible §5.1, §7.5) or the canon living seer (character file §37)? EDS05's withheld layer is worded neutrally (§6).
 2. The flame-out "four times this season" is a keeper's count of an event, not a date.
 
 ### EFD.15 Review log
@@ -659,7 +659,7 @@ EFD-D4.40 IVETT: (bread from a cloth; a few coins from the offering box) "Pilgri
 |---|---|
 | Content id (suggested) | `emberholt.side.vein_touched_man` |
 | Type | Settlement / care (bible §7.2). |
-| Unlock | EH-M3 Completed. Offered by Sereth Vorn at his healing house in Cinderwall, inside the Ridge working gate (`EAD-D1`); the Red Door healer's bark sends the warden's hand there (`EAD-B0.1`). |
+| Unlock | EH-M3 Completed. Offered by Sereth Vorn at his healing house in Cinderwall, inside the Cinderwall working gate (`EAD-D1`); the Red Door healer's bark sends the warden's hand there (`EAD-B0.1`). |
 | Resume hook | Sereth at his door: `EAD-D1.00` "He's still out there, or he's on my cot. Which?" |
 | Skills | Leatherworking ~[GD: low] (hook; loan alternative); Melee or Ranged |
 | Combat share | ~15% (Slag Beetles in the tap cut) |
@@ -692,9 +692,9 @@ Selected shape: a care errand with a search (warm signs), a fight that is not ab
 
 | Area | Purpose | Environmental storytelling |
 |---|---|---|
-| **H1. Sereth's healing house** [NEW sub-site of EP02, inside the Ridge working gate] | Offer; wrap; the book | Two rooms. Cots under clean sheets; a quench trough; jars; a workbench with soaking tubs and rawhide. The **clinic book** on a shelf by the door. On the door, an **Emberguard notice** (from `S07`). Respawn for `S00`, `S01`, `S07`. |
+| **H1. Sereth's healing house** [NEW sub-site of EP02, inside the Cinderwall working gate] | Offer; wrap; the book | Two rooms. Cots under clean sheets; a quench trough; jars; a workbench with soaking tubs and rawhide. The **clinic book** on a shelf by the door. On the door, an **Emberguard notice** (from `S07`). Respawn for `S00`, `S01`, `S07`. |
 | **H2. The Red Door clinic** (Act I W4) | Loan alternative | As Act I. The healer is dressing a burn. |
-| **R1. The Ridge working gate** | Pass | As EOP R1. |
+| **R1. The Cinderwall working gate** | Pass | As EOP R1. |
 | **R2. The Ash Road** (EP09) | Myr's signs | Cracked road, burnt engravings in the kerbs (EDS01). Warm waymark stones. A culvert where flarecap grows. |
 | **T1. Dalia's camp** (EP19) | Dalia; respawn for `S02`–`S06` | Tents of ember-thread canvas, a handcart, a **quench barrel** (cooling niche; keep-watch). Tap-hands with blackened fingers. Lamps hooded. |
 | **T2. The tap cut** | EAD-E1; the feed gate | A trench cut down into the rock. **Flarecap** bright orange along both walls. Two **vents** in the walls. At its head, Dalia's **feed gate**: an iron slide across a channel, with a **bead** above it. |
@@ -702,7 +702,7 @@ Selected shape: a care errand with a search (warm signs), a fight that is not ab
 
 ### EAD.4 Beats
 
-**Beat 0: Sereth (`S00_offer`).** *Objective: Talk to the healer by the Ridge gate.* `EAD-D1`. Myr left before dawn; a tap-hand saw him on the Ash Road toward the tap. "Bring him back. Don't hurt him. Don't let anybody hurt him."
+**Beat 0: Sereth (`S00_offer`).** *Objective: Talk to the healer by the working gate.* `EAD-D1`. Myr left before dawn; a tap-hand saw him on the Ash Road toward the tap. "Bring him back. Don't hurt him. Don't let anybody hurt him."
 
 **Beat 1: His Way (`S01_wrap`).** *Objective: Learn Sereth's way and get a wet wrap.* Sereth teaches (`EAD-D2`): his heat first; cover him wet; count him down; never touch his arms. Then the wrap:
 - **Option A (skill): make one** (**Leatherworking ~[GD: low]**). At Sereth's bench: **soak** a rawhide in the tub (interaction ~3 s), **cut** a wrap (standard Leatherworking at the bench), **lace** its edges (interaction ~3 s). ECD-02. Sets `EAD_WRAP = self`.
@@ -753,7 +753,7 @@ Tuned for Expert identity (ED-10). Slag Beetles as Act I and Act III.
 
 | Step | Objective | Completes on | Required | Notes |
 |---|---|---|---|---|
-| `S00_offer` | Talk to the healer by the Ridge gate. | `EAD-D1` accept | Yes | `EAD-B0.1` at the Red Door points the way |
+| `S00_offer` | Talk to the healer by the working gate. | `EAD-D1` accept | Yes | `EAD-B0.1` at the Red Door points the way |
 | `S01_wrap` | Learn Sereth's way and get a wet wrap. | `EAD-D2` end + wrap made (Option A) **or** keep watch + loan given (Option B) | Yes | Sets `EAD_WRAP` |
 | `S02_road` | Follow Myr up the Ash Road. | `EAD-I2` + `EAD-I3` + `EAD-I4` + enter camp volume (T1) | Yes | Inspect order free; the road is linear |
 | `S03_tap` | Talk to Dalia Vret. | `EAD-D3` end | Yes | — |
@@ -926,6 +926,7 @@ EAD-D6.40 SERETH: (pays) "Coin. I'm paid in eggs; you're paid in coin. That's fa
 1. **EH-M6's fused worker** (Act III §14 item 14) stays a role. This package does not request that Myr be the worker: his case is a different kind (a vein at the Ridge, not a frost-night flare), and keeping EH-M6 independent of EAD needs no line. Recommend closing Act III item 14 as "not taken".
 2. **"For evaluation."** The canon phrase of Myr's history; it is the Emberguard's notice, not "below", and is not presented as the EH-M2 ledger's line. If the Director prefers distance from EH-M2's wording, the notice can say "for assessment"; nothing else changes.
 3. **Dalia's brother line** (`EAD-D3.06`) uses her canon history; it names Deepbrand only as the label on the accident and says nothing about what Deepbrand is.
+4. **Sereth / Seredh [Director].** Sereth Vorn (character file §35) and Seredh Embercarver (§45) are both canon and both speak in Emberholt (EAD here; EH-M3 and EMS for Seredh). Not renamed, since both are canon. Journal, subtitles and VO should always give the full name; a canon spelling change is the Director's call.
 
 ### EAD.15 Review log
 
@@ -1085,7 +1086,7 @@ Standard: a carry-state case with per-player states (sealed / pins out / read / 
 
 | Field | Entry |
 |---|---|
-| Author truth | [ED-15] The sheets are another region's river timetables, bought through intermediaries for the deep works' purposes, carried in through the gate to a front. CV-M2 owns this. |
+| Author truth | [ED-15] The sheets are river timetables from outside Emberholt, bought through intermediaries and carried in through the gate to a front. Who buys them and why is CV-M2's (R15); this package names no buyer, even here. |
 | Public belief | "Commission papers." |
 | Observable | A cold case; a river's hours with coded places; a recurring corner mark; an empty, prepaid room; a Commissioner who signs and does not ask. |
 | Wrong reading | Oren Falx is the buyer (his signature is commercial routine, not proof: Part 4 ledger). The sheets prove a plot against the river's people (nothing here says what they are for). |
@@ -1253,7 +1254,7 @@ Each micro-event follows the Mire card (format model): a place, a visible invita
 | Field | Spec |
 |---|---|
 | Trigger | Cinderwall lanes (W1 and the Cooling House lane), any time after first arrival. |
-| What the player sees | Cinderweave cloths on poles over the lanes in one colour, changed by a dye-worker on a ladder every few presentation days. **Grey** after a burial; **white** on a feast or festival night (canon: white is ceremonial); **orange** in a working week; **yellow** when the ward is calm; **red** when the ward is running hot (a quarrel, a cold night). |
+| What the player sees | Cinderweave cloths on poles over the lanes in one colour, changed by a dye-worker on a ladder every few presentation days. **Grey** after a burial; **white** on a feast or festival night (canon: white is ceremonial); **orange** in a working week; **yellow** when the ward is calm; **red** when the ward is running hot (canon: red is volatile; a quarrel, a bad night on the line). |
 | Interaction | Inspect a banner; or ask the dye-worker on the ladder. |
 | Lines | DYE-WORKER: "Grey's a burial. White's a feast. Orange is work." (beat) "Red's when we're all shouting. Nobody tells us. We hang it when we hear it." · [EH-M1 active, before `S06`] "Grey. Everything's grey this week." · [`EGA_FROST`] (Act III: stiff with ice; no line) |
 | States | Grey / white / orange / yellow / red on a small authored rotation; mains pin grey (EH-M1) and frost (EH-M6). |
@@ -1361,14 +1362,14 @@ Each micro-event follows the Mire card (format model): a place, a visible invita
 
 ## 6. Discoveries EDS01–EDS10 (three-layer framework)
 
-Each discovery has a **surface** (what anyone sees), a **reading** (what a careful player learns, and the interaction that earns it) and, where marked, a **withheld** layer that no Emberholt content resolves. Discoveries are optional, set no quest steps and give no rewards beyond understanding. **Flags:** `EDS##_SEEN` (surface seen: entering the authored view volume or first inspect) and `EDS##_READ` (the reading's interaction completed); both are **persistent booleans on the character**. Suggested ids `emberholt.discovery.<slug>`. Evidence rule: none identifies a person, proves a claim or names the dead; none states a count of the held or of any people (D-C06) or names the precursor (D-C03). Availability: the Ridge discoveries open with the Ridge working gate after EH-M1; city discoveries from first arrival unless stated. **MAP VERIFICATION REQUIRED** for every placement.
+Each discovery has a **surface** (what anyone sees), a **reading** (what a careful player learns, and the interaction that earns it) and, where marked, a **withheld** layer that no Emberholt content resolves. Discoveries are optional, set no quest steps and give no rewards beyond understanding. **Flags:** `EDS##_SEEN` (surface seen: entering the authored view volume or first inspect) and `EDS##_READ` (the reading's interaction completed); both are **persistent booleans on the character**. Suggested ids `emberholt.discovery.<slug>`. Evidence rule: none identifies a person, proves a claim or names the dead; none states a count of the held or of any people (D-C06) or names the precursor (D-C03). Availability: the Ridge discoveries open with the Cinderwall working gate after EH-M1; city discoveries from first arrival unless stated. **MAP VERIFICATION REQUIRED** for every placement.
 
 ### EDS01 — The Ash Roads (EP09)
 
 | Layer | Content |
 |---|---|
 | Surface | Cracked old streets running out from the walls onto the Ridge, lined with burnt engravings in the kerbstones [CANON]. (`EDS01_SEEN` entering the first kerb volume past the working gate.) |
-| Reading | **Kneel and rub the ash off a kerb engraving** (interaction ~3 s) at the marked stone where the road bends. Under the soot, a carved panel of flames and a band of symbols; across the symbols, straight chisel strokes, cut later and deliberately. Inspect: *"Flames, and under them a band of signs that aren't civic script. Someone chiselled across every sign, later, in straight strokes. The flames they left alone."* A herder, if asked: "Old marks. City had them cut off after the war. Nobody says why. Nobody asks." |
+| Reading | **Kneel and rub the ash off a kerb engraving** (interaction ~3 s) at the marked stone where the road bends. Under the soot, a carved panel of flames and a band of symbols; across the symbols, straight chisel strokes, cut later and deliberately. Inspect: *"Flames, and under them a band of signs that aren't civic script. Someone chiselled across every sign, later, in straight strokes. The flames they left alone."* A herder, if asked: "Old marks. Somebody cut them, long since. Nobody says who. Nobody asks." |
 | Withheld | **Who carved them and who scraped them.** Nobody here calls the signs Volkhari. (R09 seed: the canon reading is that they are Volkhari symbols erased by the city; this discovery shows the erasure and names nothing.) |
 | Flags | `EDS01_SEEN`; `EDS01_READ` on the rub. |
 | Links | R09 seed (Revelation Ledger). After EH-M3, a player may draw their own conclusion; no line confirms it. |
@@ -1409,7 +1410,7 @@ Each discovery has a **surface** (what anyone sees), a **reading** (what a caref
 |---|---|
 | Surface | Offerings heaped round a basalt bowl where a flame burns at a vent that never cools. (`EDS05_SEEN` on entering the terrace.) |
 | Reading | **Put a hand on the plinth's base stone** (interaction ~2 s): warm, in every season, warm all the way through. Then **turn an offering stone** (inspect): names and marks scratched on the undersides, some fresh, some worn almost smooth. Inspect: *"The stone is warm to its heart. The offerings are stones from every road, with names scratched on the side that faces the ground."* Ivett (after EFD), `fitted`: "Bead says amber. Pilgrims say she's listening. Both, most nights." / `bare`: "Warm, yes. I keep it clear now. They don't know that. That's fine." Before EFD, a pilgrim: "She carried the flame up here. Elyndra. In a pot." |
-| Withheld | **Who Elyndra is, and whether she still comes.** (Reworded from the bible's "whether Elyndra lived": canon's character file has her living; §EFD.14.) The vent is real; the story is belief. |
+| Withheld | **Who Elyndra was, or is.** (Worded to hold under either reading, the bible's myth only or the character file's living seer; Director question, EFD.14 item 1.) The vent is real; the story is belief. |
 | Flags | `EDS05_SEEN`; `EDS05_READ` on the stone turn. |
 | Links | EFD (the quest at the same place; this card is the standing world version, and EFD's lines take precedence while EFD is Active). |
 
@@ -1458,7 +1459,7 @@ Each discovery has a **surface** (what anyone sees), a **reading** (what a caref
 | Layer | Content |
 |---|---|
 | Surface | On the gate yards' notice wall among tariff lists and lost-cart notices: a printed seizure notice. *Contraband seized at this gate: Volkhari Ash. Possession is a crime.* (`EDS10_SEEN` on first inspect.) |
-| Reading | **Compare the notice's mark with the gate's own notices** (inspect two neighbouring notices, then this one). Every other notice on the wall carries the gate's lamp stamp and a gate clerk's name. This one carries neither: only a mark of a delving-pick crossed with a brand, and *for the deep works*. Inspect: *"The gate's notices are stamped with the gate's lamp. This one isn't. It's signed for the deep works, with a pick-and-brand mark."* With EH-M3 Completed: + *"The same mark was on the work order in the crew's camp."* A gate clerk: "That's not ours. They pin what they like. Nobody takes it down." |
+| Reading | **Compare the notice's mark with the gate's own notices** (inspect two neighbouring notices, then this one). Every other notice on the wall carries the gate's lamp stamp and a gate clerk's name. This one carries neither: only a stamped mark and *for the deep works*. Inspect: *"The gate's notices are stamped with the gate's lamp. This one isn't. It's signed for the deep works, under a stamped mark."* With EH-M3 Completed: + *"The same mark was on the work order in the crew's camp."* A gate clerk: "That's not ours. They pin what they like. Nobody takes it down." |
 | Withheld | **What Volkhari Ash is made from.** Nobody says. No quantity is stated. |
 | Flags | `EDS10_SEEN`; `EDS10_READ` on the comparison. Available after EH-M1. |
 | Links | R10 seed ("Volkhari Ash" contraband, Revelation Ledger). Volkhari Ash appears only as this word on this notice (ED-11). |
@@ -1507,5 +1508,6 @@ No runtime need beyond bible §11.1–11.2 and standard requirement checks. Both
 | Quest items | 0. |
 | Map | Relative placement only; MAP VERIFICATION REQUIRED throughout; nothing beyond the Ridge or past Embergate is placed. |
 | New names checked for collisions | **Ivett Quarle**, **Keld Dorrow**, **Ambry House** grepped across `04_CONTENT_PRODUCTION`, `LORE` and `00_ADMIN`: no hits outside this file. Teodor Marsk and Old Plate appear only in the bible. Ids `EOP-`, `EFD-`, `EAD-`, `ECC-` (dialogue, barks, inspects, encounters) and `ECD-01`–`ECD-04` are unused elsewhere. Rejected while naming: "Ilse" (near Ilyen, Ilverin), anything with "river" or "glass" in the front's name (would echo Lowmark's riverglass). |
-| Deviations from the bible | (1) **EME02:** the bible's "red on a forge feast" changed to **white** on a feast (canon Cinderweave code: white ceremonial, red volatile); red now means the ward is running hot. (2) **EDS05 withheld layer** reworded from "whether Elyndra lived" to "who Elyndra is, and whether she still comes", because the canon character file has Elyndra living (EFD.14 item 1). (3) **Sereth's healing house** is placed as a new sub-site of Cinderwall by the Ridge working gate, distinct from the Red Door clinic (whose healer stays a role). (4) **EAD sets no region flag** and asks nothing of EH-M6 (Act III §14 item 14 recommended closed). |
-| Open for the Director (consequential) | ED-15 (keep or cut ECC); Elyndra canon vs bible (EFD.14). |
+| Deviations from the bible | (1) **EME02:** the bible's "red on a forge feast" changed to **white** on a feast (canon Cinderweave code: white ceremonial, red volatile); red now means the ward is running hot. (2) **EDS05 withheld layer** worded neutrally ("who Elyndra was, or is") so it holds whether the Director keeps the bible's myth-only Elyndra or the character file's living seer (EFD.14 item 1; not decided here). (3) **Sereth's healing house** is placed as a new sub-site of Cinderwall by the Cinderwall working gate, distinct from the Red Door clinic (whose healer stays a role). (4) **EAD sets no region flag** and asks nothing of EH-M6 (Act III §14 item 14 recommended closed). |
+| Open for the Director (consequential) | ED-15 (keep or cut ECC); Elyndra canon vs bible (EFD.14); Sereth / Seredh canon name proximity (EAD.14 item 4). |
+| Independent review, 2026-11-15 | Read against CDR-1 to CDR-6 (§3.7), the bible, Acts I to III and dialogue, the sibling Work and Skills file, the Revelation Ledger, the dossier, the character file and the Part 4 ledger (nothing was played). Every cross-file flag read verified as named and set where claimed (`EEH_TAVI_LAUGHED` `EEH-D6.41`; `EGA_BOARD_BALANCED` `EGA-I28`; `EH_HOLLOW_TRUTH`; `EH_HALF_NAME` `ENW-D6.40`/`.50`; `UL_LEDGER_*` `UL-D4.31`/`.41`, flavour only); `EH_RIVERGLASS` one writer. Fixes: the gate to the Ridge renamed from "Ridge working gate" to the bible's "Cinderwall working gate" (consistent with the sibling files; NPCs may still say "the Ridge gate"); EOP's Hunting requirement now names where Hunting trains in Emberholt (§0.1, `EOP-D1.30`); EDS01's herder no longer answers the withheld "who scraped them"; EDS10 no longer invents a design for Deepbrand's mark; ECC.12's author truth no longer names a buyer (ED-15); EME02's red tied to canon "volatile" (white ceremonial, yellow calm, orange productive verified against dossier §VII.2); Elyndra text kept readable both ways and logged as a Director question, not decided. New names (Ivett Quarle, Keld Dorrow, Ambry House) re-grepped across `04_CONTENT_PRODUCTION`, `LORE`, `00_ADMIN`: no collision. No release wording; no interregional route. |
