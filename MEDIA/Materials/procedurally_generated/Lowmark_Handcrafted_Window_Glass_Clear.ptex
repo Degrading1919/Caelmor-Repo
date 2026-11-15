@@ -1,0 +1,182 @@
+{
+  "name": "Graph",
+  "type": "graph",
+  "label": "Lowmark Glass Maps | Clear",
+  "seed_int": 0,
+  "node_position": {
+    "x": 0,
+    "y": 0
+  },
+  "parameters": {},
+  "nodes": [
+    {
+      "name": "Wave normals",
+      "type": "image",
+      "seed_int": 0,
+      "node_position": {
+        "x": -630,
+        "y": 0
+      },
+      "parameters": {
+        "image": "%PROJECT_PATH%/Lowmark_Handcrafted_Window_Glass_normal.exr",
+        "fix_ar": false
+      }
+    },
+    {
+      "name": "Roughness",
+      "type": "image",
+      "seed_int": 0,
+      "node_position": {
+        "x": -630,
+        "y": 390
+      },
+      "parameters": {
+        "image": "%PROJECT_PATH%/Lowmark_Handcrafted_Window_Glass_Clear_rough.exr",
+        "fix_ar": false
+      }
+    },
+    {
+      "name": "Outward height",
+      "type": "image",
+      "seed_int": 0,
+      "node_position": {
+        "x": -630,
+        "y": 635
+      },
+      "parameters": {
+        "image": "%PROJECT_PATH%/Lowmark_Handcrafted_Window_Glass_height.exr",
+        "fix_ar": false
+      }
+    },
+    {
+      "name": "Components",
+      "type": "decompose",
+      "seed_int": 0,
+      "node_position": {
+        "x": -410,
+        "y": 0
+      },
+      "parameters": {}
+    },
+    {
+      "name": "Native X",
+      "type": "invert",
+      "seed_int": 0,
+      "node_position": {
+        "x": -230,
+        "y": -115
+      },
+      "parameters": {}
+    },
+    {
+      "name": "Native Z",
+      "type": "invert",
+      "seed_int": 0,
+      "node_position": {
+        "x": -230,
+        "y": 164
+      },
+      "parameters": {}
+    },
+    {
+      "name": "Native normal",
+      "type": "combine",
+      "seed_int": 0,
+      "node_position": {
+        "x": -45,
+        "y": 0
+      },
+      "parameters": {}
+    },
+    {
+      "name": "Depth",
+      "type": "invert",
+      "seed_int": 0,
+      "node_position": {
+        "x": -210,
+        "y": 590
+      },
+      "parameters": {}
+    },
+    {
+      "name": "Material",
+      "type": "material",
+      "seed_int": 0,
+      "node_position": {
+        "x": 200,
+        "y": 176
+      },
+      "parameters": {
+        "size": 10,
+        "metallic": 0.0,
+        "roughness": 1.0,
+        "normal": 1.0,
+        "depth_scale": 0.011111111111111112,
+        "ao": 1.0
+      },
+      "export_paths": {}
+    }
+  ],
+  "connections": [
+    {
+      "from": "Wave normals",
+      "from_port": 0,
+      "to": "Components",
+      "to_port": 0
+    },
+    {
+      "from": "Components",
+      "from_port": 0,
+      "to": "Native X",
+      "to_port": 0
+    },
+    {
+      "from": "Components",
+      "from_port": 2,
+      "to": "Native Z",
+      "to_port": 0
+    },
+    {
+      "from": "Native X",
+      "from_port": 0,
+      "to": "Native normal",
+      "to_port": 0
+    },
+    {
+      "from": "Components",
+      "from_port": 1,
+      "to": "Native normal",
+      "to_port": 1
+    },
+    {
+      "from": "Native Z",
+      "from_port": 0,
+      "to": "Native normal",
+      "to_port": 2
+    },
+    {
+      "from": "Native normal",
+      "from_port": 0,
+      "to": "Material",
+      "to_port": 4
+    },
+    {
+      "from": "Roughness",
+      "from_port": 0,
+      "to": "Material",
+      "to_port": 2
+    },
+    {
+      "from": "Outward height",
+      "from_port": 0,
+      "to": "Depth",
+      "to_port": 0
+    },
+    {
+      "from": "Depth",
+      "from_port": 0,
+      "to": "Material",
+      "to_port": 6
+    }
+  ]
+}
