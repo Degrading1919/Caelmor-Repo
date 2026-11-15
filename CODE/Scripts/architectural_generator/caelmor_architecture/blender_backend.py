@@ -1,5 +1,6 @@
 """Blender scene, UV, material, and export adapter for the pure geometry engine."""
 import json, math, os, uuid
+from dataclasses import replace
 import bpy
 from mathutils import Vector, Matrix
 from .engine import generate, validate, geometry_hash, TOOL_REVISION
@@ -20,6 +21,8 @@ def _settings_dict(settings):
         data = dict(settings)
     if data.get('construction_overrides') is None:
         data.pop('construction_overrides',None)
+    if not data.get('fit_blockout'):
+        data.pop('fit_blockout', None)
     return data
 
 
@@ -109,6 +112,14 @@ def _mesh_object(buffer, cache, build_id, plan=None):
     settings = getattr(plan, "settings", None)
     mesh.materials.append(get_material(material, cache, style=style, settings=settings))
     uv0 = _metric_uv(mesh, material)
+    construction = getattr(buffer, 'construction', None)
+    rotation = getattr(construction, 'uv_rotation', None)
+    if rotation:
+        order, signs = {'90': ((1, 0), (-1, 1)), '180': ((0, 1), (-1, -1)),
+                        '270': ((1, 0), (1, -1))}[rotation]
+        for loop in uv0.data:
+            uv = loop.uv
+            loop.uv = (uv[order[0]] * signs[0], uv[order[1]] * signs[1])
     _lightmap_uv(mesh)
     if buffer.field_family:
         field_uv=mesh.uv_layers.new(name='UV2_Surface')
@@ -141,9 +152,11 @@ def _mesh_object(buffer, cache, build_id, plan=None):
     obj["caelm_topology"] = topology if topology in ("SOLID", "SURFACE") else "SOLID"
     obj["caelm_structural_role"] = str(getattr(buffer, "structural_role", "framing"))
     obj["caelm_functional_role"] = str(getattr(buffer, "functional_role", ""))
-    construction = getattr(buffer, 'construction', None)
-    if construction is not None:
+    # Fitted windows and other unbound visual sections need the same refit
+    # conflict checks as library components when the artist protects them.
+    if construction is not None or getattr(settings, 'fit_blockout', False):
         obj['caelm_component_source_hash'] = geometry_hash((buffer,))
+    if construction is not None:
         for field in PROVENANCE:
             value = getattr(construction, field)
             if value is not None:
@@ -282,10 +295,21 @@ def _parent_to_anchor(obj, anchor):
     obj.matrix_parent_inverse = Matrix.Identity(4)
 
 
-def build(settings, collection=None, layers=None, origin=None):
+def build(settings, collection=None, layers=None, origin=None, *, placement=None):
     """Build off-scene, then swap generated objects in requested layers only."""
     if collection is not None and not collection.get(COLLECTION_TAG):
         raise ValueError("Selected collection is not a Caelmor generated building")
+    if placement is not None and (not settings.fit_blockout or layers is not None):
+        raise ValueError('Blockout placement requires a full fitted build')
+    if collection is not None and placement is None and (settings.fit_blockout or collection.get(SETTINGS_KEY)):
+        old = load_settings(collection)
+        dimensions = ('width', 'depth', 'floors', 'floor_height')
+        if old.get('fit_blockout', False) != settings.fit_blockout or (
+                settings.fit_blockout and any(not math.isclose(old[field], getattr(settings, field), abs_tol=2e-6)
+                                               for field in dimensions)):
+            raise ValueError('Load this building’s settings before regenerating. Use Refit to update its blockout dimensions.')
+        if settings.fit_blockout:
+            settings = replace(settings, **{field: old[field] for field in dimensions})
     plan, buffers = generate(settings, finish_names=bpy.data.materials.keys())
     validation = validate(plan, buffers)
     if isinstance(validation, dict) and not validation.get("valid", False):
@@ -352,12 +376,16 @@ def build(settings, collection=None, layers=None, origin=None):
         key = obj.get('caelm_buffer_id')
         candidate = candidates.get(obj.get('caelm_source_buffer_id', key))
         spec = getattr(candidate, 'construction', None)
-        physical_fields = (field for field in PROVENANCE if field not in ('finish','surface_family'))
+        physical_fields = (field for field in PROVENANCE if field not in ('finish','surface_family','uv_rotation'))
+        if obj.get('caelm_uv_rotation') != getattr(spec, 'uv_rotation', None):
+            raise ValueError(f'{key}: unprotect the edited component before changing its UV orientation')
         old_source = obj.get('caelm_component_source_hash')
         if (candidate is None or
                 any(obj.get('caelm_'+field)!=getattr(spec,field,None) for field in physical_fields) or
                 (old_source is not None and old_source!=geometry_hash((candidate,)))):
             conflicts.append(key or obj.name)
+    if placement is not None and conflicts:
+        raise ValueError(f'{conflicts[0]}: refitting would change a protected section; review it before refitting')
     build_id = uuid.uuid4().hex; stage = _new_collection("__CAELMOR_STAGE__" + build_id[:8])
     try:
         cache = {}
@@ -407,6 +435,11 @@ def build(settings, collection=None, layers=None, origin=None):
                 stage.objects.link(obj); obj.hide_set(True)
         if collection is None: collection = _new_collection("Caelmor Building")
         anchor = _ensure_anchor(collection, origin)
+        if placement is not None:
+            anchor.location, angle = placement
+            anchor.rotation_mode = 'XYZ'
+            anchor.rotation_euler = (0., 0., angle)
+            anchor.scale = (1., 1., 1.)
         old_generated = [obj for obj in collection.objects if obj.get(TAG) and not obj.get("caelm_protected")
                          and (scope is None or obj.get("caelm_layer") in scope)]
         staged = list(stage.objects)
@@ -563,6 +596,8 @@ def export_building(collection, filepath, *, construction_metadata=False):
                     entry[field] = value
     else:
         manifest['settings'].pop('construction_overrides', None)
+    # Proxy links and fit bookkeeping belong to the Blender authoring scene.
+    manifest['settings'].pop('fit_blockout', None)
     if collection.get('caelm_floor_contract'):
         manifest['floor_presentation'] = {
             'version': 1, 'building_id': collection['caelm_building_id'],

@@ -58,7 +58,20 @@ ASSEMBLIES.update({
     'roof_depth': ('roof_cover','Roof depth representation',REPRESENTATIONS),
     'wall_depth': ('wall_body','Masonry depth representation',REPRESENTATIONS),
 })
-FINISH_ROLES = ('wall_body', 'wall_infill', 'roof_cover')
+FINISH_ROLES = {
+    'wall_body': ('Masonry wall body', 'Structural wall stone and its bonded courses'),
+    'wall_infill': ('Frame enclosure', 'Boarding or render between the structural members'),
+    'roof_cover': ('Roof covering', 'Shingles, slate or tile for compatible roofs'),
+    'plinth': ('Foundation', 'Exposed foundation and plinth masonry'),
+    'frame_member': ('Structural supports', 'Worked structural timber such as posts and plates'),
+    'roof_support': ('Roof structure', 'Rafters and other resolved roof support timber'),
+    'roof_deck': ('Roof deck', 'Boards beneath the roof covering'),
+    'boarding': ('Boarding', 'Resolved wooden boarding such as gate leaves'),
+    'wall_surface': ('Wall surface', 'Separate render or limewash over a host wall'),
+    'opening_trim': ('Opening trim', 'Dressed jambs and other fitted opening trim'),
+    'arch_ring': ('Arch ring', 'Dressed or bonded stone forming the visible arch'),
+    'vault': ('Vault', 'Shaped masonry over a passage'),
+}
 
 
 def enum_items(options):
@@ -103,6 +116,28 @@ def authored_overrides(props, original):
     elif 'by_role' in output and original.get('by_role'):
         output.pop('by_role')
     return output
+
+
+def edit_finish(overrides, scope, key, material_name, rotation='AUTO'):
+    """Edit only finish inputs, keeping other per-component and assembly choices."""
+    output = deepcopy(overrides or {})
+    entries = output.setdefault(scope, {})
+    fields = entries.setdefault(key, {})
+    if material_name:
+        fields['finish'] = 'material:' + material_name
+    else:
+        fields.pop('finish', None)
+    if scope == 'by_component':
+        if material_name and rotation != 'AUTO':
+            fields['uv_rotation'] = rotation
+        else:
+            fields.pop('uv_rotation', None)
+    if not fields:
+        entries.pop(key)
+    if not entries:
+        output.pop(scope)
+    return output
+
 
 def timber_workmanship(settings):
     return {'FINE':.68,'STANDARD':1.,'ROUGH':1.20}[settings.craftsmanship]

@@ -18,6 +18,22 @@ The original manual Lowmark interface used orthogonal RECT/L/T/U plans, intersec
 
 Keep full-section roof clearance, bearing and aperture checks in force when extending the surviving path. For timber this includes the projected section, deck underside and supporting fascia plane. For roof cover retain valid overlap/headlap and valley/ridge clearance in each topology mode. The earlier revision-specific dimensions, material revisions and test tolerances are available in Git history.
 
+## Box-fitted authoring
+
+The Blender box adapter uses a retained source mesh to snapshot a Lowmark
+Cottage's wall width, depth, foundation datum, eave height and heading. The
+regional main hall still uses the same World mass and facade/roof builders.
+The artist places any detached ranges independently. Fitted dimensions and
+the source link are Blender authoring state. Export uses the existing format-1
+root transform, separate collision and floor hierarchy, without a source node.
+
+Component inputs reuse `construction_overrides.by_component`. The authoring
+panel can stage a structural-timber `variant` or a `finish` with optional
+`uv_rotation` of `90`, `180` or `270` on `UV0_Metric`. UV rotation requires a
+scene-material finish and leaves lightmap and procedural atlas coordinates
+alone. Existing raw mesh protection remains available. Refit and explicit
+finish/variant edits use the original construction validation and semantic IDs.
+
 ## Floor-separated presentation (additive v0.16)
 
 New Settings and Blender authoring default `floor_separation=True`. Loading a

@@ -143,12 +143,19 @@ def build_lowmark(ctx):
     elif context == "ASHENSTEAD":
         width *= .94
 
+    if s.fit_blockout:
+        # The proxy sets the occupied core. Keep the cottage's regional
+        # assemblies, but leave detached ranges and yards to the scene artist.
+        width, depth, floors = s.width, s.depth, s.floors
+
     core = _mass(
         ctx, "lowmark_main_hall", x=0, y=0, width=width, depth=depth,
         floors=floors, floor_height=floor_h, roof="GABLE", pitch=32,
         overhang=.42, openings=openings, entrance_edge=0,
         blocked_edges=(1,3) if category=='MILLER' else (1,), foundation="PLINTH",
     )
+    if s.fit_blockout:
+        return
 
     # A freestanding yard-side range keeps a weather gap from the main hall.
     # Its own floor and steps preserve direct work access without intersecting

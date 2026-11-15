@@ -24,7 +24,7 @@ COVERS = {'SHINGLE': ('wooden_shingles', 'split_wood'),
           'CLAY': ('slate_tile_roofing', 'fired_clay')}
 COVER_FROM_STOCK = {stock: cover for cover, (_, stock) in COVERS.items()}
 PROVENANCE = ('component_id', 'component_role', 'treatment', 'substrate', 'surface_family',
-              'finish', 'host_component', 'variant', 'representation')
+              'finish', 'host_component', 'variant', 'representation', 'uv_rotation')
 
 
 def _choice(component, field, value, allowed):
@@ -44,6 +44,7 @@ class Construction:
     host_component: str | None = None
     variant: str | None = None
     representation: str | None = None
+    uv_rotation: str | None = None
 
 
 @dataclass
@@ -73,6 +74,9 @@ class Resolver:
                 if not isinstance(key, str) or not key or not isinstance(fields, dict):
                     raise ValueError(f'{scope}: each component key needs an object of registered fields')
                 for field_name, value in fields.items():
+                    if field_name == 'uv_rotation' and scope == 'by_component':
+                        _choice(key, field_name, value, ('90', '180', '270'))
+                        continue
                     _choice(key, 'field', field_name, registered)
                     _choice(key, field_name, value, registered[field_name])
 
@@ -113,8 +117,12 @@ class Resolver:
         representation = fields.get('representation')
         if representation and role not in ('wall_body','roof_cover'):
             _choice(key,'representation',representation,())
+        finish = fields.get('finish', 'procedural')
+        uv_rotation = specific.get('uv_rotation')
+        if uv_rotation and not finish.startswith('material:'):
+            raise ValueError(f'{key}: metric UV rotation requires a scene material')
         result = Construction(key, role, treatment, substrate, surface,
-                              fields.get('finish', 'procedural'), host, variant, representation)
+                              finish, host, variant, representation, uv_rotation)
         self.components[key] = result
         return result
 

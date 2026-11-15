@@ -1,6 +1,6 @@
 # Caelmor Architectural Generator
 
-Version 0.16.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. It does not alter Caelmor runtime generation policy, game schemas, or regional canon. An isolated, opt-in Unity client floor-presentation adapter accompanies floor-aware exports; it is not wired into the playable scene.
+Version 0.18.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. An isolated, opt-in Unity client floor-presentation adapter accompanies floor-aware exports; it is not wired into the playable scene.
 
 New buildings have floor-separated visuals by default. Select a building, set
 **Simulated floor** (0 = ground, −1 = exterior), choose its **Construction volume**
@@ -111,6 +111,49 @@ approval.
 - Install `dist/caelmor_architecture.zip` using **Edit → Preferences → Get Extensions → Install from Disk**, then enable **Caelmor Architectural Generator**.
 - Open a 3D View and find the **Caelmor** tab in the N-panel.
 - Rebuild the distributable with `py -3 package_addon.py` from this directory. The ZIP contains the add-on source, full GPL license, third-party notices, research reference, architecture references and household comparison brief.
+
+## Artist-directed Lowmark Cottage
+
+1. In a metre-scale scene, place a plain cube and scale it into a rectangular
+   building proxy in Object Mode. Local **−Y** faces the entrance. The bottom
+   sets the foundation datum and the top sets the eaves, with the gabled roof
+   extending above and beyond the box. Use an upright, unmodified box with a
+   6–24 m width and 4–16 m depth. For one floor, use a 2.85–4.25 m box height.
+2. In **Caelmor Architecture → Building**, select **Lowmark / Cottage**. Set
+   the floor count under **Shape**, select the box, then choose **Generate from
+   Selected Box**. The existing Lowmark core fits the box exactly. The source
+   stays separate and editable. Set its viewport display to Wire and hide it
+   from renders as needed. Unfitted buildings keep the existing **Generate New**
+   workflow at the 3D cursor.
+3. Use **Construction** for role-wide assembly choices. Select a generated
+   timber component and use **Components → Stage Timber Profile** for a local
+   hewn or squared profile. In **Materials**, choose **Construction role** or
+   **Selected component**, choose a scene material and click **Stage Finish**.
+   Selected components can also store a 90°, 180° or 270° rotation of the
+   generated `UV0_Metric`. Click **Regenerate All** to commit the staged settings
+   to this building. **Clear Override** returns to the inherited choice on the
+   next rebuild. A semantic component can cover several meshes or floor sections.
+4. Start a later edit with **Load Selected Settings**. If you move, rotate or
+   resize the box, select the generated cottage and use **Shape → Refit from
+   Source Box**. Refit uses the building's last applied settings, so apply staged
+   edits first. An ordinary regeneration uses the last fitted dimensions.
+   Protected manual sections move with the anchor. A refit that changes their
+   generated source geometry reports the conflict before replacing any meshes.
+5. Use **Export → Export Building** for the existing visual GLB, separate
+   collision GLB and metadata. The source box is excluded. Substance-produced
+   Blender materials use the same picker as other loaded materials. Keep
+   material names stable across regeneration, and use exportable PBR image
+   inputs on Principled BSDF for Unity. Materials using custom procedural shader
+   graphs may need baking or conversion first. Rotation affects materials
+   that sample `UV0_Metric` or the active UVs. Existing manually replaced
+   material slots and protected meshes still take precedence.
+
+The fit workflow currently handles the Lowmark Cottage's single main volume.
+Use separate authored blockouts for other scene elements. Roof AutoComplete
+retains its existing entry point. The Geometry controls set authoring fidelity;
+material reuse, render submissions, compression and collision also affect
+runtime cost. See the [executed Unity benchmark](evidence/lowmark_settlement/PERFORMANCE.md)
+and the [Cottage authoring verification](evidence/blockout_authoring/README.md).
 
 ## Roof AutoComplete
 

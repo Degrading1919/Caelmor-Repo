@@ -41,10 +41,13 @@ class Settings:
     construction_overrides: dict | None = None
     # Saved pre-floor scenes explicitly migrate to False in the Blender loader.
     floor_separation: bool = True
+    fit_blockout: bool = False
 
     def check(self, validate_shape=True):
         if not isinstance(self.floor_separation, bool):
             raise ValueError('Floor separation must be boolean')
+        if not isinstance(self.fit_blockout, bool):
+            raise ValueError('Blockout fit must be boolean')
         for name in ('width','depth','wing_width','wing_depth','floor_height','pitch','overhang','window_density','maintenance','age'):
             if not math.isfinite(getattr(self,name)):
                 raise ValueError(f'{name} must be finite')
@@ -217,6 +220,9 @@ def style_for(settings):
 
 def resolve_settings(requested):
     """Return a validated effective grammar realization; manual dimensions are retained."""
+    if requested.fit_blockout and (requested.region != 'LOWMARK' or requested.function != 'COTTAGE'
+                                  or not requested.world_aware or requested.use_grammar):
+        raise ValueError('Blockout fit requires a Lowmark Cottage with World construction and manual dimensions')
     if requested.world_aware and not requested.use_grammar:
         # World builders consume envelope dimensions, not legacy U/L wing or
         # roof controls. Stale hidden controls cannot invalidate a valid input.
