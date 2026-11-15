@@ -65,6 +65,23 @@ TISSUE = (
     ((.102, .066, .024), (.271, .194, .080), .73), # dried corymb cutout
 )
 
+FILLER_ATLAS = (128, 512, 512, 9)
+FILLER = {
+    "Sprouts": Habitat("Tiny sprouts", .62, .92, 106),
+    "Stubble": Habitat("Short stubble", .48, .98, 140),
+    "Low_Weeds": Habitat("Creeping weeds", .72, .81, 38),
+    "Dry_Stems": Habitat("Thin dry stems", .23, .82, 32),
+    "Broken_Tuft": Habitat("Broken grass tufts", .41, .64, 76),
+}
+# One tile per stage and family. Height is the card's physical envelope.
+FILLER_SHAPES = (
+    (4, .060, .066, .14), (5, .083, .090, .16),
+    (8, .114, .060, .18), (10, .142, .075, .43),
+    (5, .112, .110, .10), (7, .142, .133, .15),
+    (3, .074, .144, .89), (5, .094, .182, .91),
+    (8, .161, .096, .42), (11, .190, .121, .55),
+)
+
 
 def line_distance(x, y, start, end):
     ax, ay = start
@@ -149,7 +166,82 @@ def atlas_maps():
     return images
 
 
-def write_maps(scene, maps):
+def filler_maps():
+    """Bake unlit tissue and continuous alpha from rooted blades and leaf outlines."""
+    cell, width, height, gutter = FILLER_ATLAS
+    texels = cell-2*gutter
+    axis = (np.arange(cell)+.5-gutter)/texels
+    x,y = np.meshgrid(axis,axis)
+    images = {key:np.ones((height,width,4),np.float32) for key in ("albedo","normal","roughness")}
+    images["albedo"][:,:,3] = 0
+    images["normal"][:,:,:2] = .5
+    for tile,(count,_,_,aging) in enumerate(FILLER_SHAPES):
+        rng = np.random.default_rng(98377+tile)
+        shape = np.full_like(x,-1.)
+        grain = profile(x,y,33,11,tile+39,periodic=False)-.5
+        color = np.empty((*x.shape,3),np.float64)
+        relief = np.zeros_like(x)
+        for i in range(count):
+            if tile in (4,5):
+                angle = .35 + i*2.4 + rng.uniform(-.25,.25)
+                along = (x-.5)*math.cos(angle)+(y-.49)*math.sin(angle)
+                across = (y-.49)*math.cos(angle)-(x-.5)*math.sin(angle)
+                length = rng.uniform(.21,.40)
+                cross_width = rng.uniform(.051,.090)
+                rib = across + .07*along**2
+                leaf = (.98-np.hypot((along-.52*length)/(.52*length),rib/cross_width))*cross_width
+                stem = .008-line_distance(x,y,(.5,.49),(.5+.50*length*math.cos(angle),.49+.50*length*math.sin(angle)))
+                outline = np.maximum(leaf+.002*np.sin(along*180),stem)
+                fiber = np.exp(-(rib/.020)**2)*.48+np.maximum(0,np.cos((along-np.abs(rib)*.65)*98))**12*.13
+                tissue = np.clip(along/length,0,1)
+            else:
+                root = .5 + rng.uniform(-.19,.19)*(1.2 if tile>=8 else .85)
+                top = rng.uniform(.37,.93) if i else .93
+                bend = rng.uniform(-.44,.44)*(1.35 if tile>=8 else .92)
+                bend = np.clip(root+bend,.055,.945)-root
+                t = np.clip((y-.014)/(top-.014),0,1)
+                center = root+bend*t**(1.1 if tile in (6,7) else 1.68)
+                stemlike = tile in (6,7)
+                half = rng.uniform(.0085,.0165) if stemlike else rng.uniform(.012,.033)
+                taper = (1-t**1.6)*.79+.18 if stemlike else (1-t)**.69*(.53+.47*ramp(.0,.20,t))
+                outline = np.minimum(half*taper-np.abs(x-center),np.minimum(y-.014,top-y))
+                if stemlike and i<3:
+                    for joint in (.53,.69,.81):
+                        anchor = (root+bend*joint**1.1,.014+(top-.014)*joint)
+                        side = rng.choice((-1,1))
+                        tip = (anchor[0]+side*rng.uniform(.031,.083),anchor[1]+rng.uniform(.062,.116))
+                        branch = .0065-line_distance(x,y,anchor,tip)
+                        outline = np.maximum(outline,branch)
+                fiber = np.exp(-((x-center)/max(.005,half*.55))**2)*.29
+                tissue = ramp(.04,.94,t)
+            dry = np.clip(aging+rng.uniform(-.22,.24),0,1)
+            fresh = np.array((.118,.173,.043))
+            straw = np.array((.285,.203,.091))
+            pigment = fresh+(straw-fresh)*dry
+            light = (.62+.63*tissue+.24*grain+.35*fiber)*rng.uniform(.81,1.23)
+            winning = outline>shape
+            if i==0:
+                color[:] = pigment*light[:,:,None]
+            else:
+                color[winning] = pigment*light[winning,None]
+            relief[winning] = fiber[winning]
+            shape = np.maximum(outline,shape)
+        alpha = np.clip(.48+shape*texels*1.2,0,1)
+        # A low contrast color field extends under transparent texels to avoid
+        # black outlines in filtered grass and the lowest mip levels.
+        dy, dx = np.gradient(relief*.08+grain*.08)
+        direction = np.dstack((-dx,-dy,np.ones_like(dx)))
+        normal = .5+.5*direction/np.linalg.norm(direction,axis=2,keepdims=True)
+        col,row = tile%4,tile//4
+        dest = np.s_[row*cell:(row+1)*cell,col*cell:(col+1)*cell]
+        images["albedo"][dest][:,:,:3] = color
+        images["albedo"][dest][:,:,3] = alpha
+        images["normal"][dest][:,:,:3] = normal
+        images["roughness"][dest][:,:,:3] = (.61+.21*aging+.085*grain)[:,:,None]
+    return images
+
+
+def write_maps(scene, maps, stem):
     settings = scene.render.image_settings
     settings.file_format = "PNG"
     settings.color_depth = "8"
@@ -159,20 +251,21 @@ def write_maps(scene, maps):
     for key, rgba in maps.items():
         color = key == "albedo"
         settings.color_mode = "RGBA" if color else "RGB"
-        img = bpy.data.images.new(f"Foliage {key}", ATLAS, ATLAS, alpha=True, float_buffer=True)
+        height,width = rgba.shape[:2]
+        img = bpy.data.images.new(f"Foliage {key}", width, height, alpha=True, float_buffer=True)
         img.colorspace_settings.name = "Linear Rec.709" if color else "Non-Color"
         if color:
             # Blender's float image buffers use premultiplied alpha by default.
             # A straight buffer keeps colored padding under transparent panicle pixels.
             img.alpha_mode = "STRAIGHT"
         img.pixels.foreach_set(rgba.ravel())
-        img.save_render(str(ROOT / f"{STEM}_{key}.png"), scene=scene)
+        img.save_render(str(ROOT / f"{stem}_{key}.png"), scene=scene)
         bpy.data.images.remove(img)
     settings.color_management = "FOLLOW_SCENE"
 
 
-def foliage_material():
-    mat = bpy.data.materials.new("Lowmark foliage atlas")
+def foliage_material(stem, name):
+    mat = bpy.data.materials.new(name)
     mat.use_nodes = True
     mat.use_backface_culling = False
     mat.surface_render_method = "DITHERED"
@@ -187,7 +280,7 @@ def foliage_material():
         node = nodes.new("ShaderNodeTexImage")
         node.label = key.title()
         node.location = (-620, 220 - 270 * i)
-        node.image = bpy.data.images.load(str(ROOT / f"{STEM}_{key}.png"))
+        node.image = bpy.data.images.load(str(ROOT / f"{stem}_{key}.png"))
         node.image.colorspace_settings.name = "sRGB" if key == "albedo" else "Non-Color"
         tex[key] = node
     mask = nodes.new("ShaderNodeMath")
@@ -211,8 +304,9 @@ def radial(angle):
 
 
 class Mesh:
-    def __init__(self, lod):
+    def __init__(self, lod, atlas=(CELL,ATLAS,ATLAS,GUTTER)):
         self.lod = lod
+        self.atlas = atlas
         self.vertices = []
         self.faces = []
         self.uvs = []
@@ -221,10 +315,11 @@ class Mesh:
         offset = len(self.vertices)
         self.vertices.extend(tuple(v) for v in points)
         self.faces.extend(tuple(i + offset for i in face) for face in faces)
-        col, row = tile % 4, tile // 4
-        extent = CELL - 2 * GUTTER
-        self.uvs.extend(((col * CELL + GUTTER + u * extent) / ATLAS,
-                         (row * CELL + GUTTER + v * extent) / ATLAS) for u, v in uv)
+        cell,width,height,gutter = self.atlas
+        col,row = tile%(width//cell),tile//(width//cell)
+        extent = cell-2*gutter
+        self.uvs.extend(((col*cell+gutter+u*extent)/width,(row*cell+gutter+v*extent)/height)
+                        for u,v in uv)
 
     def ribbon(self, root, heading, length, width, rise, reach, curl, twist, tile,
                *, broad=False, minimum=0., small=False):
@@ -501,6 +596,8 @@ def selfheal(mesh, rng, density, stage):
 
 
 def plant(family, variant, lod, opts):
+    if family in FILLER:
+        return filler_mesh(family,variant,lod,opts)
     kind = tuple(HABITATS).index(family)
     rng = np.random.default_rng(np.random.SeedSequence((opts.seed,kind,variant)))
     mesh = Mesh(lod)
@@ -516,19 +613,63 @@ def plant(family, variant, lod, opts):
     return mesh
 
 
-def library(scene, mat, opts):
+def filler_mesh(family, variant, lod, opts):
+    tile = 2*tuple(FILLER).index(family)+variant
+    rng = np.random.default_rng(np.random.SeedSequence((opts.seed,77231,tile)))
+    _, width, height, _ = FILLER_SHAPES[tile]
+    height *= opts.height
+    spread = rng.uniform(.90,1.08)
+    yaw = rng.uniform(-.30,.30)
+    mesh = Mesh(lod,FILLER_ATLAS)
+    quad = ((0,1,2,3),)
+    full_uv = ((0.,0.),(1.,0.),(1.,1.),(0.,1.))
+    if family == "Low_Weeds":
+        # The principal leaf mat is just above the soil with one raised edge.
+        a,b = radial(yaw)*width*.51,radial(yaw+math.pi/2)*height*.51
+        center = UP*.016*opts.height
+        tilt = UP*.018*opts.height
+        mesh.add((center-a-b-tilt,center+a-b,center+a+b+tilt,center-a+b),quad,full_uv,tile)
+        if lod <= 1:
+            mesh.add((center-a*.64-b*.81,center+a*.24-b*.72+tilt,
+                      center+a*.47+b*.24+tilt*1.35,center-a*.67+b*.44+tilt*.64),quad,full_uv,tile)
+        if lod == 0:
+            offset = a*.34-b*.28+UP*.004*opts.height
+            mesh.add((center-a*.54-b*.60+offset,center+a*.51-b*.59+tilt*.46+offset,
+                      center+a*.67+b*.43+tilt*.55+offset,center-a*.60+b*.42+offset),quad,full_uv,tile)
+        return mesh
+    root = Vector((0,0,-.006*opts.height))
+    slope = radial(yaw-.70)*height*(.34 if family == "Broken_Tuft" else .16)
+    for i in range(2 if lod<2 else 1):
+        side = radial(yaw+i*1.48)*width*spread*(.50 if i==0 else .44)
+        base = root+radial(yaw+.58)*width*.12*i
+        tip = base+UP*height*(1 if i==0 else .80)+slope
+        if lod == 0:
+            mid = base.lerp(tip,.52)-slope*.32
+            mesh.add((base-side,base+side,mid+side,mid-side,tip+side,tip-side),
+                     ((0,1,2,3),(3,2,4,5)),((0.,0.),(1.,0.),(1.,.52),(0.,.52),(1.,1.),(0.,1.)),tile)
+        else:
+            mesh.add((base-side,base+side,tip+side,tip-side),quad,full_uv,tile)
+    return mesh
+
+
+def library(scene, mat, filler_mat, opts):
     collection = bpy.data.collections.new("Lowmark Natural Grass and Wildflowers")
     scene.collection.children.link(collection)
+    fillers = bpy.data.collections.new("Low-cost verge filler")
+    collection.children.link(fillers)
     records, signature = {}, hashlib.sha256()
-    for family, habitat in HABITATS.items():
-        for i, stage in enumerate(("Young","Established","Late")):
+    for family, habitat in (HABITATS | FILLER).items():
+        is_filler = family in FILLER
+        stages = ("Light","Established") if is_filler else ("Young","Established","Late")
+        parent = fillers if is_filler else collection
+        for i, stage in enumerate(stages):
             group = bpy.data.collections.new(f"{family}_{stage}")
-            collection.children.link(group)
+            parent.children.link(group)
             variations = []
             for lod in range(3):
                 name = f"LM_{family}_{stage}_LOD{lod}"
                 source = plant(family,i,lod,opts)
-                obj = source.object(name,mat)
+                obj = source.object(name,filler_mat if is_filler else mat)
                 group.objects.link(obj)
                 mesh = obj.data
                 mesh.calc_loop_triangles()
@@ -555,7 +696,8 @@ def library(scene, mat, opts):
                             "height_m":float(points[:,2].max()),"footprint_m":[float(x) for x in extent[:2]],
                             "moisture_preference_01":habitat.moisture,"path_edge_affinity_01":habitat.verge,
                             "patch_density_per_m2":habitat.density,"source_seed":opts.seed,
-                            "authoring_moisture_01":opts.moisture,"authoring_blade_density":opts.density}
+                            "authoring_moisture_01":opts.moisture,"authoring_blade_density":opts.density,
+                            "placement_layer":"filler" if is_filler else "specimen"}
                 for key, value in metadata.items():
                     obj[key] = value
                 if lod == 0:
@@ -565,7 +707,8 @@ def library(scene, mat, opts):
                     obj.asset_data.tags.new("Vegetation")
                 variations.append(obj)
             budgets = [ob["triangles"] for ob in variations]
-            if not 0 < budgets[2] < budgets[1] < budgets[0] < 3800:
+            limit = 9 if is_filler else 3800
+            if not 0 < budgets[2] < budgets[1] < budgets[0] < limit:
                 raise RuntimeError(f"Invalid LOD budgets for {family} {stage}: {budgets}")
             records[family,i] = variations
             print(f"{family:17} {stage:11} {str(budgets):20} H {variations[0]['height_m']:.3f} m",flush=True)
@@ -582,7 +725,7 @@ def check_glb(path, records):
         document = json.loads(stream.read(length))
     nodes = {node["name"]:node for node in document["nodes"] if "mesh" in node}
     expected_names = {ob.name for variants in records.values() for ob in variants}
-    if set(nodes)!=expected_names or len(document["materials"])!=1:
+    if set(nodes)!=expected_names or len(document["materials"])!=2:
         raise RuntimeError("glTF mesh hierarchy or material count differs from source")
     for name, node in nodes.items():
         primitive, = document["meshes"][node["mesh"]]["primitives"]
@@ -591,12 +734,12 @@ def check_glb(path, records):
             raise RuntimeError(f"glTF mesh channels or triangle count differ for {name}")
         if "translation" in node or "scale" in node:
             raise RuntimeError(f"Unbaked pivot or scale in {name}")
-    mat, = document["materials"]
-    pbr = mat["pbrMetallicRoughness"]
-    if not (mat["alphaMode"]=="MASK" and abs(mat["alphaCutoff"]-.48)<.0001 and mat["doubleSided"]
-            and pbr["metallicFactor"]==0 and "baseColorTexture" in pbr
-            and "metallicRoughnessTexture" in pbr and "normalTexture" in mat):
-        raise RuntimeError("glTF vegetation channel bindings differ from source")
+    for mat in document["materials"]:
+        pbr = mat["pbrMetallicRoughness"]
+        if not (mat["alphaMode"]=="MASK" and abs(mat["alphaCutoff"]-.48)<.0001 and mat["doubleSided"]
+                and pbr["metallicFactor"]==0 and "baseColorTexture" in pbr
+                and "metallicRoughnessTexture" in pbr and "normalTexture" in mat):
+            raise RuntimeError("glTF vegetation channel bindings differ from source")
     print(f"Verified {len(nodes)} glTF meshes, metre pivots and two-sided alpha-cutout PBR",flush=True)
 
 
@@ -606,15 +749,15 @@ def check_atlas(maps, mat):
         image = node.image
         pixels = np.empty(len(image.pixels), np.float32)
         image.pixels.foreach_get(pixels)
-        pixels = pixels.reshape(ATLAS,ATLAS,4)
         expected = maps[key]
+        pixels = pixels.reshape(expected.shape)
         if key == "albedo":
             np.testing.assert_allclose(pixels[:,:,3],expected[:,:,3],atol=.006,rtol=0)
-            if np.min(pixels[2*CELL:3*CELL,:2*CELL,:3])<.005:
-                raise RuntimeError("Panicle atlas lost colored padding under transparent texels")
+            if np.min(pixels[expected[:,:,3] < .49,:3]) < .005:
+                raise RuntimeError("Foliage atlas lost colored padding under transparent texels")
         else:
             np.testing.assert_allclose(pixels[:,:,:3],expected[:,:,:3],atol=.006,rtol=0)
-    print("Reopened 1024 px atlas maps with verified opacity, filtered padding and linear data",flush=True)
+    print(f"Reopened {expected.shape[1]} px {mat.name} with verified opacity and linear data",flush=True)
 
 
 def setup_review(scene, opts):
@@ -679,20 +822,23 @@ def instance(collection, template, position, yaw, size):
     return ob
 
 
-def specimen_review(scene, records):
+def specimen_review(scene, records, *, filler=False):
     from build_lowmark_structural_timber import plain
     display = bpy.data.collections.new("Specimen and LOD comparison")
     scene.collection.children.link(display)
+    families = FILLER if filler else HABITATS
+    step_x, step_y = (.245,.28) if filler else (.56,.67)
     for row, lod in enumerate((0,1,2)):
-        for col, family in enumerate(HABITATS):
-            x,y = (col-3)*.56,(1-row)*.67
+        for col, family in enumerate(families):
+            x,y = (col-(len(families)-1)*.5)*step_x,(1-row)*step_y
             instance(display,records[family,1][lod],(x,y,0),.65+(col%3)*1.1,(1.,1.,1.))
     bpy.ops.mesh.primitive_plane_add(size=200,location=(0,0,-.016))
     table = bpy.context.object
     table.name = "Neutral specimen stage"
     table.data.materials.append(plain("Matte specimen stage",(.105,.103,.094),.94))
-    cam = camera(scene,"Matched LODs",(0,-3.6,4.4),(0,0,.13),width=4.18)
-    render(scene,cam,"specimens",(2000,1050))
+    focus = (0,0,.045 if filler else .13)
+    cam = camera(scene,"Matched LODs",(0,-3.6,4.4),focus,width=1.35 if filler else 4.18)
+    render(scene,cam,"filler_lods" if filler else "specimens",(1700,1000) if filler else (2000,1050))
     for ob in list(display.objects) + [table,cam]:
         bpy.data.objects.remove(ob,do_unlink=True)
     bpy.data.collections.remove(display)
@@ -733,6 +879,7 @@ def plant_demo(scene, fixture, soil, records, opts):
     scene.collection.children.link(group)
     rng = np.random.default_rng(np.random.SeedSequence((opts.seed,79239)))
     count_by_family = dict.fromkeys(HABITATS,0)
+    previous_triangles = refined_triangles = previous_count = 0
     signature = hashlib.sha256()
     for along, verge, radius_u, radius_v, density, mix in PLANTING:
         count = math.ceil(math.pi*radius_u*radius_v*density*opts.density)
@@ -758,7 +905,6 @@ def plant_demo(scene, fixture, soil, records, opts):
                                 * (1+opts.path_edge*margin[index]*HABITATS[k].verge)
                                 for k,w in zip(keys,weights)])
             family = keys[rng.choice(len(keys),p=weights/weights.sum())]
-            count_by_family[family] += 1
             stage = rng.choice(3,p=(.26,.57,.17))
             x,y = surf[j]
             # LOD placement is fixed to this one demonstration: the two review
@@ -767,12 +913,126 @@ def plant_demo(scene, fixture, soil, records, opts):
             size = rng.uniform(.69,1.22)
             stretch = size*rng.uniform(.79,1.16)
             yaw = rng.uniform(0,TAU)
-            template = records[family,stage][lod]
+            source = records[family,stage]
+            previous_triangles += source[lod]["triangles"]
+            previous_count += 1
+            if family not in (Y,V,R):
+                # Dense mixed grass already has a supporting silhouette from
+                # the ground tier. Retain close accents and lower the other LODs.
+                in_close_view = -7.32<y<-3.02 and 1.28<x<3.92
+                unprotected = pockets[index]<.49 and abs(v[index])>1.55
+                if unprotected and yaw<1.30 and not in_close_view:
+                    continue
+                if not in_close_view and (yaw < 3.90 or abs(v[index]) > 3.0):
+                    lod = min(lod+1,2)
+                elif family in (M,E) and in_close_view and yaw < .92:
+                    lod = min(lod+1,2)
+            template = source[lod]
+            refined_triangles += template["triangles"]
+            count_by_family[family] += 1
             instance(group,template,(x,y,height[j]),yaw,(size,size,stretch))
             signature.update(template.name.encode())
             signature.update(struct.pack("<6f",x,y,height[j],size,stretch,yaw))
     print(f"Fixed farmhouse layout {count_by_family} | {signature.hexdigest()}",flush=True)
-    return group
+    return group, (previous_count,previous_triangles), refined_triangles
+
+
+def filler_samples(fixture, soil, opts):
+    """Sample the fixed front yard from the same path UVs as the approved earth."""
+    centers, across, stations, _, bed = fixture
+    rng = np.random.default_rng(np.random.SeedSequence((opts.seed,61207)))
+    start,end = np.interp((-12.,-.095),centers[:,1],stations)
+    spacing = .058/math.sqrt(opts.density)
+    u,v = np.meshgrid(np.arange(start,end,spacing),np.arange(-6.1,6.1,spacing))
+    u = u.ravel()+rng.uniform(-spacing*.48,spacing*.48,u.size)
+    v = v.ravel()+rng.uniform(-spacing*.48,spacing*.48,v.size)
+    x,y = np.array([np.interp(u,stations,c)+v*np.interp(u,stations,n) for c,n in zip(centers.T,across.T)])
+    path,verge = soil.shoulder(u,v)
+    broad = profile(u/5.4,v/4.0,5,4,opts.seed+312,periodic=False)
+    pockets = profile(u/3.5,v/2.7,12,9,opts.seed+678,periodic=False)
+    breaks = profile(u/2.4,v/2.4,19,17,opts.seed+811,periodic=False)
+    drift = .50*broad+.33*pockets+.17*breaks
+    shelter = ramp(.29,.65,pockets*.62+broad*.38)
+    side = np.abs(v)
+    margin = ramp(.68,1.15,side)*(1-ramp(1.30,2.0+.65*broad,side))
+    undisturbed = ramp(.41,.69,drift)*ramp(1.17,1.90,side)
+    wall_strip = (1-ramp(.17,.66,-y))*ramp(1.03,1.55,side)*ramp(-.03,.30,x)*(1-ramp(7.84,8.33,x))
+    colony = ramp(.40,.62,.62*drift+.38*pockets)
+    chance = (.80*margin*shelter + 1.55*undisturbed*colony + 1.39*wall_strip*(.18+.82*shelter))
+    chance *= (.27+.85*ramp(.25,.65,breaks))
+    chance += opts.path_edge*.55*verge*ramp(.30,.72,pockets)
+    chance *= (1-ramp(4.55,6.03,side))*(1-ramp(.07,.52,path))
+    # The inset lets the cards extend into the broken shoulder without
+    # putting either their roots or tips into the center of the tread.
+    allowed = (side>.75) & (path<.43) & (y<-.095) & (y>-11.8)
+    take = np.flatnonzero(allowed & (rng.random(len(u))<chance))
+    wet = np.clip(opts.moisture+.70*(.62*pockets[take]+.38*broad[take]-.52)+.16*wall_strip[take],0,1)
+    feather = verge[take]+margin[take]*.55
+    dwarf = ramp(.11,.58,feather)
+    # Five foliage layers share the root distribution. Their proportions
+    # shift across moisture pockets and compacted shoulders.
+    weight = np.column_stack((.30+.43*dwarf,
+                              1.04+.66*dwarf+.54*colony[take],
+                              .10+.98*ramp(.51,.82,wet)*ramp(.25,.78,pockets[take]),
+                              .14+.88*(1-ramp(.30,.60,wet)),
+                              .40+.59*(1-dwarf)))
+    weight /= weight.sum(axis=1,keepdims=True)
+    kind = (np.cumsum(weight,axis=1)[:,:-1]<rng.random((len(take),1))).sum(axis=1)
+    stage = (rng.random(len(take)) < .29+.24*colony[take]+.32*wall_strip[take]).astype(int)
+    size = rng.uniform(.68,1.34,len(take))*(1-.31*dwarf+.13*colony[take])
+    height_scale = rng.uniform(.75,1.24,len(take))*size
+    yaw = rng.uniform(0,TAU,len(take))
+    z = bed(u[take],v[take])-.001
+    distance = np.hypot(x[take]-3.37,y[take]+7.01)
+    lod = np.where(distance<2.45,0,np.where(distance<5.1,1,2))
+    return np.column_stack((x[take],y[take],z,yaw,size,height_scale)), np.column_stack((kind,stage,lod))
+
+
+def batch_filler(scene, fixture, soil, records, opts):
+    transforms, choices = filler_samples(fixture,soil,opts)
+    if opts.verify_repeat:
+        check_transforms,check_choices = filler_samples(fixture,soil,opts)
+        np.testing.assert_array_equal(transforms,check_transforms)
+        np.testing.assert_array_equal(choices,check_choices)
+    group = bpy.data.collections.new("Farmhouse filler batches (2.5 m cells)")
+    scene.collection.children.link(group)
+    keys = tuple(FILLER)
+    models = {}
+    batches = {}
+    triangles = 0
+    for (x,y,z,yaw,size,height),(kind,stage,lod) in zip(transforms,choices):
+        template = records[keys[kind],stage][lod]
+        source = template.data
+        if source.name not in models:
+            xyz = np.array([tuple(v.co) for v in source.vertices])
+            uv = np.array([tuple(item.uv) for item in source.uv_layers.active.data],np.float32)
+            indices = [tuple(face.vertices) for face in source.polygons]
+            models[source.name] = (xyz,uv,indices)
+        xyz,uv,indices = models[source.name]
+        tile = (math.floor(x/2.5),math.floor(y/2.5))
+        vertices,uvs,faces = batches.setdefault(tile,([],[],[]))
+        offset = len(vertices)
+        sine,cosine = math.sin(yaw),math.cos(yaw)
+        local = xyz*np.array((size,size,height))
+        local[:,:2] = local[:,:2] @ np.array(((cosine,sine),(-sine,cosine)))
+        local += (x-tile[0]*2.5,y-tile[1]*2.5,z)
+        vertices.extend(local.tolist())
+        uvs.extend(uv.tolist())
+        faces.extend(tuple(offset+i for i in face) for face in indices)
+        triangles += template["triangles"]
+    for tile,(vertices,uvs,faces) in batches.items():
+        name = f"Verge filler {tile[0]:+d}, {tile[1]:+d}"
+        mesh = bpy.data.meshes.new(name)
+        mesh.from_pydata(vertices,[],faces)
+        mesh.update()
+        mesh.uv_layers.new(name="UV0").data.foreach_set("uv",np.asarray(uvs,np.float32).ravel())
+        mesh.materials.append(records[keys[0],0][0].data.materials[0])
+        ob = bpy.data.objects.new(name,mesh)
+        ob.location = (tile[0]*2.5,tile[1]*2.5,0)
+        group.objects.link(ob)
+    signature = hashlib.sha256(transforms.tobytes()+choices.tobytes()).hexdigest()
+    print(f"Filler {len(transforms)} placements, {len(batches)} batches, {triangles} triangles | {signature}",flush=True)
+    return len(transforms), triangles
 
 
 def farmhouse_review(scene, sun, records, opts):
@@ -803,7 +1063,15 @@ def farmhouse_review(scene, sun, records, opts):
     x = 3.79+.98*(1-np.cos(.28*np.maximum(-y-.38,0)))
     _, fixture = review_ground("Approved packed earth and worn approach",np.column_stack((x,y)),8.7,
                                ground_soil,material("Transition"),landing=True)
-    planting = plant_demo(scene,fixture,ground_soil,records,opts)
+    planting, baseline, specimens = plant_demo(scene,fixture,ground_soil,records,opts)
+    filler_count, filler_triangles = batch_filler(scene,fixture,ground_soil,records,opts)
+    scene["previous_vegetation_triangles"] = baseline[1]
+    scene["refined_vegetation_triangles"] = specimens+filler_triangles
+    scene["filler_placements"] = filler_count
+    scene["filler_triangles"] = filler_triangles
+    print(f"Matched layout budget: {baseline[0]} previous specimens and {baseline[1]} triangles; "
+          f"{len(planting.objects)} refined specimens and {filler_count} filler patches, "
+          f"{specimens+filler_triangles} total triangles",flush=True)
     sun.rotation_euler = (.53,-.49,-.37)
     approach = camera(scene,"Gameplay-distance approach",(7.65,-10.67,2.51),(4.20,-.95,1.01),lens=34)
     close = camera(scene,"Verge close-up",(3.37,-7.01,.86),(3.00,-4.89,.11),lens=40)
@@ -817,9 +1085,6 @@ def farmhouse_review(scene, sun, records, opts):
         bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/f"{STEM}_Farmhouse.blend"),compress=True,relative_remap=True)
     render(scene,approach,"farmhouse",(1700,1080))
     render(scene,close,"verge",(1700,1050))
-    planting.hide_render = True
-    render(scene,close,"verge_bare",(1700,1050))
-    planting.hide_render = False
 
 
 def main():
@@ -840,15 +1105,18 @@ def main():
     bpy.ops.wm.read_factory_settings(use_empty=True)
     scene = bpy.context.scene
     scene.unit_settings.system = "METRIC"
-    maps = atlas_maps()
-    if opts.verify_repeat:
-        for key, array in atlas_maps().items():
-            np.testing.assert_array_equal(maps[key],array,err_msg=key)
-    write_maps(scene,maps)
-    mat = foliage_material()
-    check_atlas(maps,mat)
-    del maps
-    collection, records = library(scene,mat,opts)
+    materials = []
+    for make,stem,label in ((atlas_maps,STEM,"Lowmark foliage atlas"),
+                            (filler_maps,STEM+"_filler","Lowmark low-cost verge atlas")):
+        maps = make()
+        if opts.verify_repeat:
+            for key,array in make().items():
+                np.testing.assert_array_equal(maps[key],array,err_msg=key)
+        write_maps(scene,maps,stem)
+        mat = foliage_material(stem,label)
+        check_atlas(maps,mat)
+        materials.append(mat)
+    collection, records = library(scene,*materials,opts)
     if not opts.draft:
         path = ROOT/f"{STEM}.blend"
         bpy.data.libraries.write(str(path),{collection},path_remap="RELATIVE_ALL",fake_user=True,compress=True)
@@ -858,11 +1126,13 @@ def main():
                                   export_hierarchy_full_collections=True,export_tangents=True)
         check_glb(path,records)
     if opts.verify_repeat:
-        print("Independent generation matched for all 63 source meshes and three atlases",flush=True)
+        print(f"Independent generation matched for all {3*len(records)} source meshes and six maps",flush=True)
     if not opts.assets_only:
         scene.collection.children.unlink(collection)
         sun = setup_review(scene,opts)
-        specimen_review(scene,records)
+        if not opts.draft:
+            specimen_review(scene,records)
+        specimen_review(scene,records,filler=True)
         farmhouse_review(scene,sun,records,opts)
 
 
