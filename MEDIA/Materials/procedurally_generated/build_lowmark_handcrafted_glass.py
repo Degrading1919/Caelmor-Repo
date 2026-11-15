@@ -24,6 +24,8 @@ FRONT_SPAN = .004
 IOR = 1.515
 ABSORPTION_COLOR = (.445,.794,.682)
 ABSORPTION_DENSITY = 30.
+CLEAR_WAVE = .40
+CLEAR_SHAPE = "Clear | subdued waviness"
 FINISHES = ("Clear","Lightly_Weathered","Obscured")
 LABELS = ("Clear","Lightly Weathered","Obscured")
 UP = Vector((0,0,1))
@@ -35,7 +37,7 @@ class DrawnGlass:
     def __init__(self,seed,wave):
         self.seed,self.wave = seed,wave
 
-    def shape(self,x,y):
+    def shape(self,x,y,*,clear=False):
         u,v = x/TILE,y/TILE
         seed = self.seed
         flow = u+.060*(profile(u,v,3,5,seed+1)-.5)
@@ -48,8 +50,9 @@ class DrawnGlass:
         bow += .000108*(wrinkle-.5)
         change = .00069*(ribbon-.5)+.00057*(pull-.5)+.000095*(wrinkle-.5)
         change += .00027*(profile(u,v,17,14,seed+12)-.5)
-        thickness = NOMINAL+self.wave*change
-        bow *= self.wave
+        wave = self.wave*CLEAR_WAVE if clear else self.wave
+        thickness = NOMINAL+wave*change
+        bow *= wave
         return bow+(thickness-NOMINAL)/2, bow-(thickness+NOMINAL)/2, thickness
 
     def roughness(self,x,y):
@@ -60,7 +63,7 @@ class DrawnGlass:
         tide = ramp(.49,.76,pooled)
         freckles = ramp(.67,.89,fine)*ramp(.37,.71,wash)
         clear = .014+.013*wash+.007*fine
-        weathered = clear+.033+.090*tide+.022*freckles
+        weathered = clear+.042+.105*tide+.025*freckles
         obscure = .268+.071*wash+.047*tide+.010*fine
         return dict(zip(FINISHES,(clear,weathered,obscure)))
 
@@ -69,24 +72,29 @@ def path(channel):
     return ROOT/f"{STEM}_{channel}.exr"
 
 
-def maps(field,size):
-    pitch = TILE/size
-    centers = (np.arange(size,dtype=float)+.5)*pitch
-    x,y = np.meshgrid(centers,centers)
-    front,_,thickness = field.shape(x,y)
+def shape_maps(field,x,y,pitch,*,clear):
+    front,_,thickness = field.shape(x,y,clear=clear)
     # Analytic surface samples at adjacent texel centers, including across wrap.
-    sy = (field.shape(x,y+pitch)[0]-field.shape(x,y-pitch)[0])/(2*pitch)
-    sx = (field.shape(x+pitch,y)[0]-field.shape(x-pitch,y)[0])/(2*pitch)
+    sy = (field.shape(x,y+pitch,clear=clear)[0]-field.shape(x,y-pitch,clear=clear)[0])/(2*pitch)
+    sx = (field.shape(x+pitch,y,clear=clear)[0]-field.shape(x-pitch,y,clear=clear)[0])/(2*pitch)
     n = np.stack((-sx,-sy,np.ones_like(sx)),axis=-1)
     n /= np.linalg.norm(n,axis=-1)[...,None]
     sigma = ABSORPTION_DENSITY*(1-np.asarray(ABSORPTION_COLOR))
     tint = np.exp(-thickness[...,None]*sigma)
-    out = {
+    return {
         "normal":.5+.5*n,
         "height":.5+front/FRONT_SPAN,
         "thickness":thickness/THICKNESS_RANGE,
         "transmission_color":tint,
     }
+
+
+def maps(field,size):
+    pitch = TILE/size
+    centers = (np.arange(size,dtype=float)+.5)*pitch
+    x,y = np.meshgrid(centers,centers)
+    out = shape_maps(field,x,y,pitch,clear=False)
+    out.update({f"Clear_{key}":val for key,val in shape_maps(field,x,y,pitch,clear=True).items()})
     out.update({f"{finish}_rough":val for finish,val in field.roughness(x,y).items()})
     return {k:(np.repeat(v[:,:,None],3,axis=2) if v.ndim==2 else v).astype(np.float32)
             for k,v in out.items()}
@@ -102,24 +110,29 @@ def inspect(field,data,size):
             internal = np.mean(np.abs(np.diff(val,axis=axis)),axis=cols)
             if seam>1.15*internal.max()+3e-4:
                 raise RuntimeError(f"{key} jumps at repeat axis {axis}")
-    h = (data["height"][:,:,0]-.5)*FRONT_SPAN
+    for prefix in ("","Clear_"):
+        inspect_shape(field,data,size,prefix)
+    rough = [data[f"{finish}_rough"].mean() for finish in FINISHES]
+    if not rough[0]<rough[1]<rough[2]:
+        raise RuntimeError("Finish order does not increase scatter")
+    print(f"Mean roughness {np.round(rough,3)} | channels and both seam axes passed",flush=True)
+
+
+def inspect_shape(field,data,size,prefix):
+    h = (data[prefix+"height"][:,:,0]-.5)*FRONT_SPAN
     gradients = [(np.roll(h,-1,axis)-np.roll(h,1,axis))/(2*TILE/size) for axis in (1,0)]
-    n = data["normal"]*2-1
+    n = data[prefix+"normal"]*2-1
     if np.max(np.abs(np.linalg.norm(n,axis=-1)-1))>.005:
         raise RuntimeError("Non-unit tangent normals")
     if field.wave:
         if min(np.corrcoef((-g).ravel(),n[:,:,i].ravel())[0,1] for i,g in enumerate(gradients))<.97:
             raise RuntimeError("Normal direction disagrees with the exported outward height")
-    t = data["thickness"][:,:,0]*THICKNESS_RANGE
+    t = data[prefix+"thickness"][:,:,0]*THICKNESS_RANGE
     if not (.0017<t.min() and t.max()<.0037):
         raise RuntimeError(f"Unphysical pane thickness {t.min():.5f}–{t.max():.5f} m")
     sigma = ABSORPTION_DENSITY*(1-np.asarray(ABSORPTION_COLOR))
-    np.testing.assert_allclose(data["transmission_color"],np.exp(-t[...,None]*sigma),atol=.001)
-    rough = [data[f"{finish}_rough"].mean() for finish in FINISHES]
-    if not rough[0]<rough[1]<rough[2]:
-        raise RuntimeError("Finish order does not increase scatter")
-    print(f"Thickness {1000*t.min():.3f}–{1000*t.max():.3f} mm | "
-          f"mean roughness {np.round(rough,3)} | channels and both seam axes passed",flush=True)
+    np.testing.assert_allclose(data[prefix+"transmission_color"],np.exp(-t[...,None]*sigma),atol=.001)
+    print(f"{prefix.rstrip('_') or 'Shared'} thickness {1000*t.min():.3f}–{1000*t.max():.3f} mm",flush=True)
 
 
 def save_maps(scene,data):
@@ -153,10 +166,11 @@ def reopen_maps(keys,field,size):
 def native_project(finish):
     # The standard Material Maker material is a map-review surface. Its opacity
     # input does not describe the transmission of a closed dielectric.
+    prefix = "Clear_" if finish=="Clear" else ""
     defs = (
-        ("Wave normals","image",-630,0,{"image":f"%PROJECT_PATH%/{path('normal').name}","fix_ar":False}),
+        ("Wave normals","image",-630,0,{"image":f"%PROJECT_PATH%/{path(prefix+'normal').name}","fix_ar":False}),
         ("Roughness","image",-630,390,{"image":f"%PROJECT_PATH%/{path(f'{finish}_rough').name}","fix_ar":False}),
-        ("Outward height","image",-630,635,{"image":f"%PROJECT_PATH%/{path('height').name}","fix_ar":False}),
+        ("Outward height","image",-630,635,{"image":f"%PROJECT_PATH%/{path(prefix+'height').name}","fix_ar":False}),
         ("Components","decompose",-410,0,{}),("Native X","invert",-230,-115,{}),
         ("Native Z","invert",-230,164,{}),("Native normal","combine",-45,0,{}),
         ("Depth","invert",-210,590,{}),
@@ -215,13 +229,17 @@ def optical_material(finish):
     return mat
 
 
-def pane(name,field,width,height,origin,u,normal,phase,mat,pitch):
+def pane(name,field,width,height,origin,u,normal,phase,mat,pitch,*,clear=False,review_shape=False):
     nx,ny = math.ceil(width/pitch)+1,math.ceil(height/pitch)+1
     x,y = np.meshgrid(np.linspace(0,width,nx),np.linspace(0,height,ny))
     uv = np.column_stack((x.ravel()+phase[0],y.ravel()+phase[1]))
-    front,rear,_ = field.shape(x+phase[0],y+phase[1])
     flat = np.asarray(origin)+x.ravel()[:,None]*np.asarray(u)+y.ravel()[:,None]*np.asarray(UP)
-    points = np.concatenate([flat+layer.ravel()[:,None]*np.asarray(normal) for layer in (front,rear)])
+
+    def sheet(clear):
+        front,rear,_ = field.shape(x+phase[0],y+phase[1],clear=clear)
+        return np.concatenate([flat+layer.ravel()[:,None]*np.asarray(normal) for layer in (front,rear)])
+
+    points = sheet(clear)
     leading = grid_faces(nx,ny)
     count = nx*ny
     trailing = leading[:,::-1]+count
@@ -235,6 +253,10 @@ def pane(name,field,width,height,origin,u,normal,phase,mat,pitch):
     layer = obj.data.uv_layers.new(name="UV0_Metric")
     layer.data.foreach_set("uv",uv[faces.ravel()%count].astype(np.float32).ravel())
     obj.data.polygons.foreach_set("use_smooth",np.r_[np.ones(2*len(leading),bool),np.zeros(len(sides),bool)])
+    if review_shape:
+        obj.shape_key_add(name="Shared formed sheet")
+        key = obj.shape_key_add(name=CLEAR_SHAPE)
+        key.data.foreach_set("co",sheet(True).astype(np.float32).ravel())
     return obj,points,faces
 
 
@@ -259,7 +281,7 @@ def write_library(field,materials):
         name = f"{LABELS[i]} sample pane (0.28 m × 0.34 m)"
         obj,points,faces = pane(name,field,.28,.34,Vector((i*.36,0,0)),
                                Vector((1,0,0)),Vector((0,-1,0)),
-                               (.071,.114),materials[finish],.0036)
+                               (.071,.114),materials[finish],.0036,clear=finish=="Clear")
         verify_shell(points,faces,Vector((0,-1,0)))
         chips.add(obj)
     bpy.data.libraries.write(str(ROOT/f"{STEM}.blend"),chips|set(materials.values()),
@@ -308,7 +330,8 @@ def fit_windows(scene,field,material,draft):
         cut = origin-lap_u*u-lap_v*UP
         phase = tuple(rng.uniform(0,TILE,2)-np.array([lap_u,lap_v]))
         obj,points,faces = pane(f"Window {index+1} | formed glass sheet",
-            field,width+2*lap_u,height+2*lap_v,cut,u,n,phase,material,.006 if draft else .0038)
+            field,width+2*lap_u,height+2*lap_v,cut,u,n,phase,material,.006 if draft else .0038,
+            review_shape=True)
         if not objects or center==target[0]:
             verify_shell(points,faces,n)
         objects.append(obj)
@@ -439,13 +462,13 @@ def review(scene,field,materials,draft):
         for obj in glass:
             obj.hide_render = finish=="Open"
             if finish!="Open":
-                obj.data.materials[0] = materials[finish]
+                set_glazing_finish(obj,materials,finish)
         scene.cycles.samples = (84 if draft else 216) if finish=="Obscured" else (28 if draft else 88)
         render(scene,finish.lower(),w,h)
     scene.cycles.samples = 28 if draft else 88
 
     for obj in glass:
-        obj.data.materials[0] = materials["Clear"]
+        set_glazing_finish(obj,materials,"Clear")
     x,y,z = center
     reflection.location = (x-2.35,-2.03,z+.30)
     reflection.data.energy = 123
@@ -456,11 +479,16 @@ def review(scene,field,materials,draft):
     render(scene,"grazing",w,h)
 
     for obj in glass:
-        obj.data.materials[0] = materials["Lightly_Weathered"]
+        set_glazing_finish(obj,materials,"Lightly_Weathered")
     camera.location = (x+5.9,-8.2,4.02)
     camera.data.lens = 45
     point(camera,(4.6,1.2,2.58))
     render(scene,"farmhouse",w,h)
+
+
+def set_glazing_finish(obj,materials,finish):
+    obj.data.materials[0] = materials[finish]
+    obj.data.shape_keys.key_blocks[CLEAR_SHAPE].value = float(finish=="Clear")
 
 
 def main():
@@ -506,10 +534,13 @@ def main():
             # Confirm the signed shape fields and finishes are periodic in metres.
             q = np.linspace(-.12,.53,107)
             x,y = np.meshgrid(q,q+.012)
-            for dx,dy in ((TILE,0),(0,-TILE),(TILE,TILE)):
-                for left,right in zip(field.shape(x,y),field.shape(x+dx,y+dy)):
-                    np.testing.assert_allclose(left,right,rtol=0,atol=1e-12)
-            print("Seven exports match independent regeneration pixel-for-pixel",flush=True)
+            for clear in (False,True):
+                for dx,dy in ((TILE,0),(0,-TILE),(TILE,TILE)):
+                    shape = field.shape(x,y,clear=clear)
+                    tiled = field.shape(x+dx,y+dy,clear=clear)
+                    for left,right in zip(shape,tiled):
+                        np.testing.assert_allclose(left,right,rtol=0,atol=1e-12)
+            print(f"{len(data)} exports match independent regeneration pixel-for-pixel",flush=True)
         save_maps(scene,data)
         reopened = reopen_maps(data.keys(),field,size)
         for key in data:

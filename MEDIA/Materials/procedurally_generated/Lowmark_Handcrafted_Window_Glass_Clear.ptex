@@ -18,7 +18,7 @@
         "y": 0
       },
       "parameters": {
-        "image": "%PROJECT_PATH%/Lowmark_Handcrafted_Window_Glass_normal.exr",
+        "image": "%PROJECT_PATH%/Lowmark_Handcrafted_Window_Glass_Clear_normal.exr",
         "fix_ar": false
       }
     },
@@ -44,7 +44,7 @@
         "y": 635
       },
       "parameters": {
-        "image": "%PROJECT_PATH%/Lowmark_Handcrafted_Window_Glass_height.exr",
+        "image": "%PROJECT_PATH%/Lowmark_Handcrafted_Window_Glass_Clear_height.exr",
         "fix_ar": false
       }
     },
