@@ -2,7 +2,7 @@
 
 **Status:** Authored production content for Creative Director milestone review (2026-11-14). This is the companion to `04_CONTENT_PRODUCTION/Quests/Caelmor_Emberholt_Main_Act_II.md`, which owns step ids, flags, encounters and mechanics. Characters marked **[CANON ANCHOR]** come from `LORE/Characters/Caelmor_Characters_Region4_Emberholt.txt` and obey the Emberholt rows of the Part 4 character ledger (`00_ADMIN/Reference/Caelmor_Part4_Character_Family_Continuity_Ledger.md`): nothing here gives them a new age, wartime service, kinship, travel or record custody beyond what the ledger allows. Characters marked **[NEW]** come from the Emberholt bible §5.2 or Act I, or are incidental role names; Act II adds **no new named character**. Nothing here is production JSON.
 
-**Reserved decisions.** **`[D-E2]`** (Thalan's fate) marks every node that depends on it: `EAC-D8.60`–`.66`, all of `EAC-D9` (freed) and `EAC-D10` (aided), the branch lines in `EAC-D11` and `EAC-B9`. **Both branches are authored; neither is canon.** **`[D-S1]`** (the Speaker) marks every node that asserts what he knows or intends: the outgoing letter and the kept answers, the chamber record's Speaker block, Kaevren's and Serix's readings of him, and every line he speaks in `S06`. Other tags: `[ALLOCATION]` (one Ralenne line, `ESS-D3.03`), `[ED-12]` (protected Volkhari testimony and self-disclosure), `[ED-17]` (Serix's unset visions).
+**Character rulings, 2026-11-15 (Architecture §5.0).** **D-E2:** Thalan is freed, with his own voiced consent to leaving (`EAC-D8.60`–`.62`, `EAC-D9`); the aid-in-place branch (`EAC-D10`, `EAC-B8`, aided lines in `EAC-D11` and `EAC-B9`) is removed; `EH_THALAN` has one value, `freed`. **D-S1:** the Speaker is an idealist and a manipulator, also dream-seeded: his letters and Serix's reading show sincere conviction, love of authority and knowing, self-serving compromise; the dreams do not absolve him; he lacks the endgame; the swap notes are removed. **D-EL:** Elyndra the Cinderseer can be consulted once, optionally, in EH-M5 (`ESS-D12`). Other tags: `[ALLOCATION]` (one Ralenne line, `ESS-D3.03`), `[ED-12]` (protected Volkhari testimony and self-disclosure), `[ED-17]` (Serix's unset visions).
 
 **Node format** (Lowmark/Thornfell/Mire/Emberholt Act I standard): `NODE SPEAKER: "Line." (stage note)`; conditions in brackets before the line; player options as `> [condition] "Option." → NEXT {effect}`. Ids follow bible §11.2: dialogue `<CODE>-D<n>.<nn>`, barks `<CODE>-B<n>.<nn>`, inspect texts `<CODE>-I<n>` in tables, documents in full.
 
@@ -19,7 +19,7 @@
 | **"Not here."** | [NEW] What Dahrin says instead of what he knows. | Dahrin, once. |
 | **"Awake enough to be uncomfortable."** | [Bible §6.1; R19 seed] | Thennek, once. Never repeated, never explained. |
 | **"That is mine."** | [NEW] Thalan's answer to what is taken from him (R10 withheld). | Thalan. Echoes Theryn's "That's mine." in EH-M2 by design. |
-| **"Ask me one."** | [NEW] Thalan's consent frame `[D-E2]`. | Thalan. |
+| **"Ask me."** | [NEW] Thalan's consent frame (D-E2, ruled 2026-11-15). | Thalan. |
 | **"Too tidy."** | [NEW] Saelia's word for a crowd that breathes on a beat she did not write. | Saelia; later, the player's allies. |
 | **"Every ember of Emberholt."** | [CANON] The Speaker's address to the city. | The Speaker. |
 | **"Answered:"** | [NEW] The head of every reply in the kept bundle. | Documents only. |
@@ -49,9 +49,9 @@
 - **Limits:** one R19 line ("awake enough to be uncomfortable"), never explained. Never fights. His own ways in and out are never shown. "You don't need to know where."
 - **Voice:** almost nothing. Single sentences. Looks at the stone, not at people.
 
-#### Thalan Veyr, captive elder [CANON ANCHOR] `[ED-12]`; his branch lines `[D-E2]`
+#### Thalan Veyr, captive elder [CANON ANCHOR] `[ED-12]`; freed (D-E2, ruled 2026-11-15)
 - **Canon:** sole known current captive; captured in the post-Hollow purges; imprisoned for decades; held in a frame of carved basalt and ember shards, horns collared, tail shackled; calm and dignified; soft-spoken with steel; holds to the Volkhari doctrine of restraint and distance; senses the fire below as suffering, not kinship.
-- **Limits (bible §5.1):** voiced consent in either branch; never killed, exploited or fought; may say that the fire below suffers; never explains the Titan, its bindings or the initiate; **never names anyone**; never says what is taken from him; gives no number.
+- **Limits (bible §5.1):** voices his own consent to leaving; his freedom does not quiet what burns below; never killed, exploited or fought; may say that the fire below suffers; never explains the Titan, its bindings or the initiate; **never names anyone**; never says what is taken from him; gives no number.
 - **Voice:** slow, exact, unhurried by pain. Short sentences with long silences between. Never self-pitying.
 
 #### Maeryn Vall, seamstress [CANON ANCHOR] `[ED-12]`
@@ -80,13 +80,14 @@
 - **Canon:** theatrical, sincere about morale; keeps "suggestions" believing them inspired; unaware of conditioning.
 - **Voice:** delighted, generous, quick to credit others.
 
-#### The Flameward Speaker [CANON ANCHOR] `[D-S1]`
+#### The Flameward Speaker [CANON ANCHOR] (D-S1, ruled 2026-11-15)
 - **Canon:** middle-aged man; warm, measured, paternal; loves being loved; avoids direct lies, prefers omissions and symbolic language; believes he guides a renaissance.
+- **Ruling:** idealist and manipulator. He sincerely believes in Emberholt's discipline, progress and strength, and he enjoys and pursues authority. He knowingly lets the machinery of the city be used (orders routed round the Marshal through his letter-room; not asking what the deep works are for) because it serves his rise. His vigil dreams are set to fit what he already wants; that does not absolve him. He does not know the endgame or Perfect Flame.
 - **Limits (Part 4 ledger; bible ED-5):** never fights, confesses or lies outright; lacks the Ashfall endgame; stays in office. Every line is checked: is it true as he believes it, or an omission? Nothing he says threatens.
 - **Voice:** "every ember of Emberholt"; "friend"; thanks people for things they did not mean to give.
 
 #### Kaevren Thalos, Grand Marshal [CANON ANCHOR]
-- **In Act II:** intercepts, a duct-post mark, a ledger box. Reads the letters only because the player brings them. "He asked." `[D-S1]` on his reading.
+- **In Act II:** intercepts, a duct-post mark, a ledger box. Reads the letters only because the player brings them. "He asked." (D-S1, ruled 2026-11-15) on his reading.
 
 #### The Cinder Rat [CANON ANCHOR]
 - **Canon:** skittish, amused by danger; metaphors and double meanings; lives in old conduits; trades what he hears; seeks one "sobbing ember".
@@ -351,80 +352,43 @@ EAC-D8.36 THALAN: "People who write things down." (beat) "I won't give you their
 ```
 
 ```
-EAC-D8.60 [D-E2] ASERA: (to both of them, plainly) "We can cut you out, and Thennek takes you on. Or we can break what the frame draws from you, and leave you as you choose." (beat) "You decide. They ask."
-EAC-D8.61 [D-E2] THALAN: (to the player) "I have wanted both of those every night for a long time." (beat) "Ask me one."
-  > [D-E2] "Come with us. Thennek is waiting."                                   → EAC-D8.62
-  > [D-E2] "Tell us what to break, and we'll leave you as you choose."            → EAC-D8.64
-  > [D-E2] "Which do you want?"                                                   → EAC-D8.66
-EAC-D8.62 [D-E2] THALAN: (a long silence; the glow rises and sinks once) "If the frame is empty, they will look for someone to fill it." (beat) "Let them look. Let them look a long time." (beat) "Yes. Cut me out."   {EH_THALAN = freed}   → EAC-D9.01
-EAC-D8.64 [D-E2] THALAN: "If the frame is empty, they will fill it." (beat) "Break what it draws. Leave me in it. Then take what you have seen up to where they write things."   {EH_THALAN = aided}   → EAC-D10.01
-EAC-D8.66 [D-E2] THALAN: "Both are true." (beat) "Ask me one."   → EAC-D8.61 options
+EAC-D8.60 ASERA: (to both of them, plainly) "We can cut you out, and Thennek takes you on." (beat) "You decide. They ask."
+EAC-D8.61 THALAN: (to the player) "I have wanted that every night for a long time." (beat) "Ask me."
+  > "Come with us. Thennek is waiting."                                   → EAC-D8.62
+EAC-D8.62 THALAN: (a long silence; the glow rises and sinks once) "If the frame is empty, they will look for someone to fill it." (beat) "Let them look. Let them look a long time." (beat) "Yes. I will leave this place. Cut me out." (beat) "It won't quiet what burns under the floor. Don't let anyone up there tell you it did."   {EH_THALAN = freed}   → EAC-D9.01
+(D-E2, ruled 2026-11-15: liberation is the only outcome. `EAC-D8.64` and `.66` are retired with the aided branch; there is no other ask.)
 ```
 
-### EAC-D9: freed `[D-E2]` (S06–S07)
+### EAC-D9: freed (D-E2, ruled 2026-11-15) (S06–S07)
 
 ```
-EAC-D9.01 [D-E2] ASERA: "The pins are riveted. The fitter's things are there." (a nod to the hearth) "Or the collars slacken in the cool. Twice would do it."
-  > [D-E2] (Forge a drift at the fitter's anvil.)              → EAC-D9.05 {Option A}
-  > [D-E2] (Ease the collars in the cool, by hand.)            → EAC-D9.07 {Option B}
-EAC-D9.05 [D-E2] THALAN: (watching the player at the hearth) "They kept it well. They keep everything well."
+EAC-D9.01 ASERA: "The pins are riveted. The fitter's things are there." (a nod to the hearth) "Or the collars slacken in the cool. Twice would do it."
+  > (Forge a drift at the fitter's anvil.)              → EAC-D9.05 {Option A}
+  > (Ease the collars in the cool, by hand.)            → EAC-D9.07 {Option B}
+EAC-D9.05 THALAN: (watching the player at the hearth) "They kept it well. They keep everything well."
       {heat, shape, quench: the drift; carry-state}
-EAC-D9.07 [D-E2] THALAN: "Wait for the cool. I've had practice. You'll learn the rhythm in one."
+EAC-D9.07 THALAN: "Wait for the cool. I've had practice. You'll learn the rhythm in one."
       {two cool-phase channels on the collars}
-EAC-D9.10 [D-E2] ASERA: (her hand flat on Thalan's chest, breathing with him while the player works) "In. Hold. Three."
-EAC-D9.11 [D-E2] (Option A: the drift goes through the first pin; the second; the last. Option B: the collars ease a finger's width in the first cool, and open in the second.)
-EAC-D9.20 [D-E2] (The collars open. Asera lifts the shackle key off its hook on the post and turns it. Thalan steps forward out of the frame on his own and stands, slowly, one hand on a basalt post. The frame glows once without him, and then gutters.)
-EAC-D9.21 [D-E2] THALAN: (looking at his own hand on the post) "Standing is different when you choose it."
-EAC-D9.22 [D-E2] [EAC_FRAME_WORK = self] THALAN: "Your hands are steady. Steadier than his were." / [= wait] THALAN: "You waited well. Most people can't."
-EAC-D9.23 [D-E2] (Out in the ring, the sectors go dark one by one.)
-EAC-D9.24 [D-E2] THALAN: "Walk slowly. I'll keep up if you walk slowly."   {journal: Go back up to Maeryn's.; escort-follow on}   → END
+EAC-D9.10 ASERA: (her hand flat on Thalan's chest, breathing with him while the player works) "In. Hold. Three."
+EAC-D9.11 (Option A: the drift goes through the first pin; the second; the last. Option B: the collars ease a finger's width in the first cool, and open in the second.)
+EAC-D9.20 (The collars open. Asera lifts the shackle key off its hook on the post and turns it. Thalan steps forward out of the frame on his own and stands, slowly, one hand on a basalt post. The frame glows once without him, and then gutters.)
+EAC-D9.21 THALAN: (looking at his own hand on the post) "Standing is different when you choose it."
+EAC-D9.22 [EAC_FRAME_WORK = self] THALAN: "Your hands are steady. Steadier than his were." / [= wait] THALAN: "You waited well. Most people can't."
+EAC-D9.23 (Out in the ring, the sectors go dark one by one.)
+EAC-D9.24 THALAN: "Walk slowly. I'll keep up if you walk slowly."   {journal: Go back up to Maeryn's.; escort-follow on}   → END
 ```
 
 | Id | Trigger | Speaker | Line |
 |---|---|---|---|
-| EAC-B7.1 `[D-E2]` | Freed: walking the dark ring | THALAN | "It was loud. I didn't know how loud until now." |
-| EAC-B7.2 `[D-E2]` | Freed: the sigil gallery | THALAN | (touching a door's mark as he passes) "Where they keep." |
-| EAC-B7.3 `[D-E2]` | Freed: a heat room | ASERA | (stopping with him) "Breathe when I breathe, elder." THALAN: "I taught a boy that." |
-| EAC-B7.4 `[D-E2]` | Freed: the plate run | THALAN | "I'll walk where you walk." |
+| EAC-B7.1 | Freed: walking the dark ring | THALAN | "It was loud. I didn't know how loud until now." |
+| EAC-B7.2 | Freed: the sigil gallery | THALAN | (touching a door's mark as he passes) "Where they keep." |
+| EAC-B7.3 | Freed: a heat room | ASERA | (stopping with him) "Breathe when I breathe, elder." THALAN: "I taught a boy that." |
+| EAC-B7.4 | Freed: the plate run | THALAN | "I'll walk where you walk." |
 
 ```
-EAC-D9.40 [D-E2] (The shaft foot. Thennek stands up out of the niche. He and Thalan look at each other for a long time. Neither speaks.)
-EAC-D9.41 [D-E2] THALAN: (to the player) "Tell the young one I walked."
-EAC-D9.42 [D-E2] THENNEK: (to the player) "You don't need to know where." (He takes Thalan by the forearm and into a side cut the player hasn't seen used. Their footsteps go on for a while after they're out of sight, and then don't.)   → (climb; EAC-D11)
-```
-
-### EAC-D10: aided `[D-E2]` (S06–S07)
-
-```
-EAC-D10.01 [D-E2] ASERA: "The draw comes out at the foot. There." (the coupling where the conduits leave the frame) "The fitter's things are there. Or it can be wedged in the cool. Twice would do it."
-  > [D-E2] (Forge a blanking plate at the fitter's anvil.)     → EAC-D10.05 {Option A}
-  > [D-E2] (Wedge the draw valve in the cool, by hand.)         → EAC-D10.07 {Option B}
-EAC-D10.05 [D-E2] THALAN: (watching the player at the hearth) "They kept it well. They keep everything well."
-      {heat, shape, quench: the blanking plate; carry-state}
-EAC-D10.07 [D-E2] THALAN: "Wait for the cool. I've had practice. You'll learn the rhythm in one."
-      {two cool-phase channels on the valve}
-EAC-D10.10 [D-E2] ASERA: (her hand flat on Thalan's chest, breathing with him while the player works) "In. Hold. Three."
-EAC-D10.11 [D-E2] (Option A: the plate seats in the coupling, one turn, two, three. Option B: the wedge goes in a finger in the first cool, and home in the second.)
-EAC-D10.20 [D-E2] (The glow fades from the shards outward and does not come back. The hum stops. Thalan, still collared, still in the frame, breathes out the whole of a breath without it catching.)
-EAC-D10.21 [D-E2] THALAN: "It is quiet." (beat) "I had forgotten quiet."
-EAC-D10.22 [D-E2] [EAC_FRAME_WORK = self] THALAN: "Your hands are steady. Steadier than his were." / [= wait] THALAN: "You waited well. Most people can't."
-EAC-D10.23 [D-E2] (Out in the ring, the sectors go dark one by one.)
-EAC-D10.24 [D-E2] THALAN: "They will mend it. Slower than you think. Slower is what I have." (beat) "Take an account up. Not to be sung. To be written where they write things. Will you?"
-  > [D-E2] "I'll carry it."                 → EAC-D10.26 {EAC_ACCOUNT_PROMISED}
-EAC-D10.26 [D-E2] THALAN: "Then go. Asera, go with them. Come back when you come back."   {journal: Go back up to Maeryn's.}   → END
-```
-
-| Id | Trigger | Speaker | Line |
-|---|---|---|---|
-| EAC-B8.1 `[D-E2]` | Aided: walking the dark ring | ASERA | "It's dark because of you. Remember that when it's lit again." |
-| EAC-B8.2 `[D-E2]` | Aided: the sigil gallery | ASERA | (touching a door's mark as she passes) "Where they keep." |
-| EAC-B8.3 `[D-E2]` | Aided: a heat room | ASERA | (stops; breathes three times, alone, for nobody; walks on) |
-| EAC-B8.4 `[D-E2]` | Aided: the plate run | ASERA | "Walk where I walk. I'm not in a hurry tonight." |
-
-```
-EAC-D10.40 [D-E2] (The shaft foot. Thennek stands up out of the niche and looks past them, down the tunnel, for someone who isn't there.)
-EAC-D10.41 [D-E2] ASERA: "He chose. He asked for an account."
-EAC-D10.42 [D-E2] THENNEK: (a long look at the player) "Then carry it." (He goes into a side cut the player hasn't seen used, alone.)   → (climb; EAC-D11)
+EAC-D9.40 (The shaft foot. Thennek stands up out of the niche. He and Thalan look at each other for a long time. Neither speaks.)
+EAC-D9.41 THALAN: (to the player) "Tell the young one I walked."
+EAC-D9.42 THENNEK: (to the player) "You don't need to know where." (He takes Thalan by the forearm and into a side cut the player hasn't seen used. Their footsteps go on for a while after they're out of sight, and then don't.)   → (climb; EAC-D11)
 ```
 
 ### EAC-D11: the back room (S07 end)
@@ -434,10 +398,8 @@ EAC-D11.01 (The top of the shaft. Asera stops at the miners' gate.) ASERA: "I'll
 EAC-D11.02 (Maeryn's back room. Dahrin is on the third chair by the stove. He stands when the player comes in. This time he knows what to do with standing: he waits.)
 EAC-D11.03 PLAYER (summary line, shown): "He was there. He's alive. I told him the young one lived. He said he knew which."
 EAC-D11.04 DAHRIN: (sits down hard; covers his face with both hands for a moment; takes them away) "He knew which."
-EAC-D11.10 [D-E2] [EH_THALAN = freed] PLAYER (shown): "He walked out. Thennek took him on. He said to tell you he walked."
-EAC-D11.11 [D-E2] [freed] DAHRIN: "He walked." (beat) "Don't tell me where. I'd only go." (a breath; counting) "Don't tell me where."
-EAC-D11.12 [D-E2] [EH_THALAN = aided] PLAYER (shown): "He chose to stay. The frame's stopped drawing on him. He asked me to carry an account up."
-EAC-D11.13 [D-E2] [aided] DAHRIN: "He stayed." (long silence) "Of course he stayed. He'd have stayed for me. He did, once, through a wall." (beat) "Then you carry it. I'll help you carry it, when it's time."
+EAC-D11.10 PLAYER (shown): "He walked out. Thennek took him on. He said to tell you he walked."
+EAC-D11.11 DAHRIN: "He walked." (beat) "Don't tell me where. I'd only go." (a breath; counting) "Don't tell me where."
 EAC-D11.20 [EAC_PRESSED] DAHRIN: "You asked me twice what else I know. I said not here." (beat) "It's still not here. It's not never."
 EAC-D11.21 [not EAC_PRESSED] DAHRIN: "There's a thing I know that I haven't told anyone. You didn't ask. I noticed."
 EAC-D11.30 DAHRIN: (holds out his hand) "The stone. It's warm still. It'll go cold up here." (the player gives it back)   {item EAC_sigil_stone removed}
@@ -452,8 +414,8 @@ EAC-D11.40 DAHRIN: (to the stove, or to the player) "In. Hold. Three." (he breat
 | Id | Trigger | Speaker | Line |
 |---|---|---|---|
 | EAC-B9.1 | Maeryn's shop | MAERYN | "Your fitting's still open. It's always open." |
-| EAC-B9.2 `[D-E2]` | Maeryn's back room | DAHRIN | `freed`: "I don't count days now. I count bread men." / `aided`: "When you carry it up, tell me. I'd like to be standing." |
-| EAC-B9.3 `[D-E2]` | Maeryn's back room, ambient | ASERA | `freed`: (not present; a second hood and pair of gloves on the peg, gone the next day) / `aided`: (in the third chair, eyes shut, a hand flat on her chest; she does not speak) |
+| EAC-B9.2 | Maeryn's back room | DAHRIN | "I don't count days now. I count bread men." |
+| EAC-B9.3 | Maeryn's back room, ambient | ASERA | (not present; a second hood and pair of gloves on the peg, gone the next day) |
 | EAC-B9.4 | Cooling House | YORVEN | "Keep that key. It's the only one, so don't lose it." (beat) "Hasp held. Thank you for asking it." |
 | EAC-B9.5 | Shaft head, post-quest | (none) | (A water cask at the foot, full. A barricade past the mouth, Deepbrand's mark burned into it.) |
 
@@ -495,7 +457,7 @@ ESS-D1.90 SERALYND: "The rehearsals run every dusk until the Kindling. I'll be a
 
 ```
 ESS-D2.01 (Dusk on the crowd floor. Three brazier rows, left, centre, right. Citizens on their chalked marks. Seralynd on hers. Saelia at the cue stand, chalk to the wrist. Ralenne at her lectern above. On the balcony, the Speaker in red and black.)
-ESS-D2.02 [D-S1] SPEAKER: (from the balcony; one hand lifted; a voice that carries without trying) "Every ember of Emberholt. Thank you for your evening. We are only practising tonight. Practise well, and the night itself will be easy."
+ESS-D2.02 SPEAKER: (from the balcony; one hand lifted; a voice that carries without trying) "Every ember of Emberholt. Thank you for your evening. We are only practising tonight. Practise well, and the night itself will be easy."
 ESS-D2.03 SERALYND: (beside the player, low) "He comes to every rehearsal. He says he likes to watch the city learn its part."
 ESS-D2.10 SAELIA: (calling the run) "Lamps. Two. Three. Four." (the crowd lifts its lamps on four)   {rehearsal run begins; three inspect windows open in turn on the left, centre and right rows (ESS-I1)}
 ESS-D2.11 SAELIA: "Lamps. Two. Three. Four." / "Turn. Two. Three. Four." / "Raise. Two. Three. Four."   {cue barks, looped through the run}
@@ -518,10 +480,10 @@ ESS-D2.24 SAELIA: (back up on her stand; loud, cheerful) "From the top! Lamps!" 
 
 | Id | Trigger | Speaker | Line |
 |---|---|---|---|
-| ESS-B1.1 `[D-S1]` | Any rehearsal, ambient | SPEAKER | (on his balcony; smiling down; he lifts his hand to a child on her father's shoulders, and she waves back) |
+| ESS-B1.1 | Any rehearsal, ambient | SPEAKER | (on his balcony; smiling down; he lifts his hand to a child on her father's shoulders, and she waves back) |
 | ESS-B1.2 | Between runs | CROWD | "My arms are going to fall off before the real night." |
 | ESS-B1.3 | Between runs | CROWD 2 | "It feels good, doesn't it, when it all goes at once? Like being bigger than yourself." |
-| ESS-B1.4 `[D-S1]` | Player speaks to the Speaker on the stair after a rehearsal (before `S06`) | SPEAKER | (pausing; a warm hand near, not on, the player's shoulder) "Thank you for coming, friend. Stand nearer the front tomorrow. It's warmer." (he goes on up; there is no option to stop him) |
+| ESS-B1.4 | Player speaks to the Speaker on the stair after a rehearsal (before `S06`) | SPEAKER | (pausing; a warm hand near, not on, the player's shoulder) "Thank you for coming, friend. Stand nearer the front tomorrow. It's warmer." (he goes on up; there is no option to stop him) |
 | ESS-B1.5 | Saelia, between runs | SAELIA | "Breathe when you like, everybody. It's not a test." (under her breath) "It's not supposed to be." |
 
 ### ESS-D3: Ralenne (S02_script)
@@ -577,9 +539,9 @@ ESS-D4.16 KAEVREN: "Paper. I don't guess about the Speaker. I've watched people 
 ```
 
 ```
-ESS-D4.40 [D-S1] (The Marshal's office. The player lays the ribboned bundle on the map table. Kaevren unties it and reads every answer, slowly, in order, the oldest first.)
-ESS-D4.41 [D-S1] KAEVREN: (squaring them again) "He asked. Every one of these, he asked."
-ESS-D4.42 [D-S1] [ESS_LETTER_READ] KAEVREN: "And the one you left in the case. What did he ask for this time?" (the player tells him) (beat) "'I don't ask what the deep works are for.'" (he says it flat, once) "No. He wouldn't."
+ESS-D4.40 (The Marshal's office. The player lays the ribboned bundle on the map table. Kaevren unties it and reads every answer, slowly, in order, the oldest first.)
+ESS-D4.41 KAEVREN: (squaring them again) "He asked. Every one of these, he asked."
+ESS-D4.42 [ESS_LETTER_READ] KAEVREN: "And the one you left in the case. What did he ask for this time?" (the player tells him) (beat) "'I don't ask what the deep works are for.'" (he says it flat, once) "No. He wouldn't."
 ESS-D4.43 KAEVREN: (ties the ribbon; holds the bundle out) "Carry it. If I hold it, it's the Marshal against the Speaker. If you hold it, it's evidence."
 ESS-D4.44 KAEVREN: "Informant's fee." (a small purse; he doesn't make a thing of it) "I'd sooner pay you than the Rat. He spends it on keys."   {informant's fee [GD]; step S03 complete; journal: The Ember-Priestess wants you to meet someone at the lamp-house.}   → END
 ```
@@ -614,7 +576,7 @@ ESS-D5.22 RAT: "Case on the wall. Brass lock. Don't knock the bell on the tube. 
 ```
 
 ```
-ESS-D5.30 [D-S1] (The letter-room, the case open. The player has read the sealed letter.) RAT: (holding a knife-blade in the lamp flame until it shines) "Give it here." (he warms the wax and presses the seal back, neat as new) "Soft wax. He likes soft wax. Takes a good impression."
+ESS-D5.30 (The letter-room, the case open. The player has read the sealed letter.) RAT: (holding a knife-blade in the lamp flame until it shines) "Give it here." (he warms the wax and presses the seal back, neat as new) "Soft wax. He likes soft wax. Takes a good impression."
 ESS-D5.31 RAT: (puts the letter back on top in the case) "Take the old ones. Leave the new one."
 ESS-D5.32 RAT: "If the new one doesn't go in the morning, somebody comes looking. If the old ones go, he can't tell anyone they're gone." (pleased with that) "Can he?"   {player takes the bundle: item ESS_letters}
 ESS-D5.33 RAT: (locking the case; the key back on his wire) "Back the way you came, or up through the yard. I'm staying. It's warm, and the post comes at dawn."   → END
@@ -641,6 +603,7 @@ ESS-D6.04 [S03 Active, walk-away, ESS_RAT_PAID] RAT: (at his grille) "Pipes are 
 ESS-D6.05 [S03 Active, walk-away, not ESS_RAT_PAID] RAT: (at his grille) "Price hasn't changed. Prices never do with me."
 ESS-D6.10 [ESS_BREATH_CARRIED] SAELIA: (asked about the fifth beat later) "Everyone does. That's what bothers me."
 ESS-D6.11 [ESS_BREATH_CARRIED] SERALYND: (asked the same) "I know."
+ESS-D6.12 [S01–S05 Active, walk-away, not ESS_ELYNDRA_HEARD] SERALYND: (asked who else might tell a given dream from her own) "There's a woman at the old vent shrine on the Ridge, past the Ash Roads. Pilgrims say she can tell a dream that was given from one that came on its own." (beat) "I've never gone. I'm a priestess. I'm supposed to know already."   {optional journal note: Elyndra, at the vent shrine on the Ridge} (D-EL, ruled 2026-11-15)
 ```
 
 ### ESS-D7: Serix (S04, the vigil hall)
@@ -741,7 +704,7 @@ Four orders on Emberguard form paper, each to a named office (never to a person 
 
 Production rule: no order names who issued it. Order 3 is the only one touching disappearances, and says nothing of where anyone went.
 
-### Document: the outgoing letter, *To the Seat* (ESS-I6a) `[D-S1]`
+### Document: the outgoing letter, *To the Seat* (ESS-I6a) (D-S1, ruled 2026-11-15)
 
 Sealed in soft red wax with the Speaker's flame seal; read in place and returned (`ESS-D5.30`). In the Speaker's own hand: large, warm, fluent, the hand on every public proclamation in the city.
 
@@ -751,16 +714,16 @@ Sealed in soft red wax with the Speaker's flame seal; read in place and returned
 >
 > *My vigils have been clear this season. On the long nights I have seen the city as one flame, every ember of it, and I have woken knowing what to say to it. I do not know a greater gift, and I thank the fire for it, as every Speaker has.*
 >
-> *The Marshal is restless. He is a good man and a careful one. I would not have him troubled.*
+> *The orders have gone down the tube as you wished, under my office's mark. The Marshal is restless. He is a good man and a careful one. I would not have him troubled.*
+>
+> *When the terraces fill and go quiet for me, I know I was right to ask.*
 >
 > *I do not ask what the deep works are for. I ask that the city not be frightened.*
 >
 > *In warmth,*
 > *the Speaker of the Flame*
 
-`[D-S1]` swap (wholly puppet): the hand becomes a secretary's fair copy, and a line is added at the foot in another hand, *Sealed by the Speaker*; the text is unchanged.
-
-### Document: the kept answers (`ESS_letters`) `[D-S1]`
+### Document: the kept answers (`ESS_letters`) (D-S1, ruled 2026-11-15)
 
 A bundle of folded papers tied with a red ribbon, the oldest soft and brown at the folds. Every one is in the same small, upright hand that is not the Speaker's. None is signed. None says where it came from. Each begins *Answered:* and quotes his ask back to him.
 
@@ -798,7 +761,7 @@ A heavy public book chained to the lectern. Every vigil night, in many hands: th
 
 A ruled book on the record-room shelf, the Covenant's own, in several hands. Columns: **Night · Room · Sleeper · Set · Hand · Carried · By**. Read in place; the player copies the marked pages (`ESS_COPY`).
 
-**Block S: the Speaker's pages** `[D-S1]` *(working layer; cut under "wholly mastermind", see block P)*
+**Block S: the Speaker's pages** (D-S1, ruled 2026-11-15)
 
 > | Night | Room | Sleeper | Set | Hand | Carried | By |
 > |---|---|---|---|---|---|---|
@@ -807,13 +770,12 @@ A ruled book on the record-room shelf, the Covenant's own, in several hands. Col
 > | *K. less 20* | *third* | *the Speaker* | *the Marshal tired; let him rest* | *full* | *to a letter* | *C. Vorr* |
 > | *K. less 12* | *third* | *the Speaker* | *one flame, one breath, one city (breath on the fifth)* | *full* | *to the Magistrix's script by slip, next day* | *S.A.* |
 
-**Block P: the Priestess's nights** *(alternative for D-S1 "wholly mastermind"; under the working layer only the first two rows below are present, as part of the guided-sleepers evidence)*
+**Block P: the Priestess's nights** *(part of the guided-sleepers evidence)*
 
 > | Night | Room | Sleeper | Set | Hand | Carried | By |
 > |---|---|---|---|---|---|---|
 > | *K. less 16* | *second* | *the Priestess* | *the terraces full at dusk* | *light* | *—* | *C. Vorr* |
 > | *K. less 9* | *second* | *the Priestess* | *the city breathing as one* | *light* | *—* | *S.A.* |
-> | *[alt only] K. less 13* | *second* | *the Priestess* | *one flame, one breath, one city (breath on the fifth)* | *light* | *to the Magistrix's script by slip, two days after* | *S.A.* |
 
 **Guided sleepers** (a list on its own page):
 
@@ -862,9 +824,10 @@ ESS-D8.24 SERIX: "S.A. is me. Most of the nights are someone else's. Some are mi
   > "And the Speaker?"                            → ESS-D8.30
   > "Do they know?"                               → ESS-D8.26
 ESS-D8.26 SERIX: "The light ones don't. The full ones..." (beat) "Some of the full ones asked for vigils. Asking for a vigil isn't asking for a dream. I used to think that mattered."   → ESS-D8.30
-ESS-D8.30 [D-S1] SERIX: "He believes it." (quiet) "Every word I give him, he believes."
-ESS-D8.31 [D-S1] SERIX: "He thanks me for them without knowing it's me. He says good morning to me on the stair as if I were the one who'd had the good night."
-ESS-D8.32 [D-S1] SERIX: "He asks for the vigils, the way every Speaker has." (beat) "He thinks the fire answers him."
+ESS-D8.30 SERIX: "He believes it." (quiet) "Every word I give him, he believes."
+ESS-D8.31 SERIX: "He thanks me for them without knowing it's me. He says good morning to me on the stair as if I were the one who'd had the good night."
+ESS-D8.32 SERIX: "He asks for the vigils, the way every Speaker has." (beat) "He thinks the fire answers him."
+ESS-D8.33 SERIX: (not kindly, for once) "Don't make him a lamb. What I set, he wanted already. I only made it sound like the fire."
 ESS-D8.34 [ED-17] SERIX: (he turns the record to the back pages and puts one finger on his own column) "This is what I wanted someone to see." (beat) "Some nights I see things I didn't set. So do some of the people I sit with."
 ESS-D8.35 [ED-17] SERIX: "I don't know who sets those. I'm not saying it's anyone." (beat) "I'm saying it isn't me."
 ESS-D8.36 SERIX: (closes the record; puts it back on the shelf, exactly where it was) "There. Someone's seen it."   {ESS_SERIX_HEARD}
@@ -876,7 +839,7 @@ ESS-D8.45 [ESS_STUDENTS_SEEN] PLAYER (summary line, shown): "There's no forty."
 ESS-D8.46 SERIX: "No. Forty was on the list and then struck off. Somebody came and took the name back." (he doesn't know more, and says so with his face)   → ESS-D8.10 options or ESS-D8.36 options (whichever the player came from)
 ```
 
-`[D-S1]` swap: under "wholly mastermind", cut `ESS-D8.30`–`.32` and the "And the Speaker?" option; `ESS-D8.12` reads "The night after I sat with *her*." and points at block P. Under "wholly puppet", `ESS-D8.30`–`.32` stand unchanged.
+(D-S1, ruled 2026-11-15: `ESS-D8.30`–`.33` stand; the former swap notes are removed.)
 
 ### ESS-D9: the second rehearsal (S05)
 
@@ -907,7 +870,7 @@ ESS-D10.10 SERALYND: "They're my dreams. But it's your copy." (beat) "I'll speak
 ESS-D10.11 KAEVREN: "Vael Trossen reads everything twice and seals what he reads. That's slow. It's also safe." (beat) "The Priestess on a terrace is quick. Nobody can unhear it."   → ESS-D10.06 options
 ```
 
-**Challenged** `[D-S1]` on the Speaker's lines.
+**Challenged** (D-S1, ruled 2026-11-15) on the Speaker's lines.
 
 ```
 ESS-D10.20 SERALYND: (takes the copy; folds it once, the list inside, and puts it in her robe) "I won't read the names. They're not mine to read. I'll say what's mine."
@@ -927,9 +890,9 @@ ESS-D10.37 SAELIA: (a long beat; then, steady) "Lamps. Two. Three. Four."
 ESS-D10.38 (The crowd lifts its lamps on four. On the fifth beat the breath comes ragged: some in, some out, some laughing. The brazier tells scatter, amber here, clear there. A child in the crowd breathes very loudly on purpose.)
 ESS-D10.39 SAELIA: (she puts the chalk down) "That's enough for tonight. Thank you, everyone. That's enough."
 ESS-D10.40 CROWD: (murmurs) "What did she mean, given?" / "The Priestess is tired." / "I breathed when I liked. It felt like being late."
-ESS-D10.44 [D-S1] SPEAKER: (from the balcony; warm; unhurried; both hands open) "Every ember of Emberholt. Our Priestess has kept long vigils for this city, longer than most of us could. Doubt is a kind of flame too. It shows us where we stand." (beat) "Let's all rest tonight. We'll try again tomorrow, together."
+ESS-D10.44 SPEAKER: (from the balcony; warm; unhurried; both hands open) "Every ember of Emberholt. Our Priestess has kept long vigils for this city, longer than most of us could. Doubt is a kind of flame too. It shows us where we stand." (beat) "Let's all rest tonight. We'll try again tomorrow, together."
 ESS-D10.45 (He smiles down at the crowd, and the crowd, most of it, smiles back. He goes in.)
-ESS-D10.46 [D-S1] SPEAKER: (on the stair, passing the player; he stops for exactly one breath) "You stood in my crowd. Thank you for coming, friend." (he goes on down)
+ESS-D10.46 SPEAKER: (on the stair, passing the player; he stops for exactly one breath) "You stood in my crowd. Thank you for coming, friend." (he goes on down)
 ESS-D10.47 SERALYND: (at the foot of the stair; her hands are shaking and her voice is not) "He didn't say I was wrong." (beat) "He didn't say anything."
 ESS-D10.48 KAEVREN: (in the crowd, plain cloak; holds out his hand for the bundle) "Ledger box. Under my seal. They'll still be there when somebody needs them."   {item ESS_letters removed; quest Completed; Seralynd keeps the record copy}   → END
 ```
@@ -953,17 +916,17 @@ ESS-D11.11 VAEL: "A sealed inquiry of the Council. The record, the letters and t
 ESS-D11.12 VAEL: "Not from me. A sealed inquiry is sealed. That is its strength and its cost."   → ESS-D11.11
 ESS-D11.20 (The opening of the inquiry, the next morning. The same room, more chairs. Councillors by office. Kaevren by the door. The Speaker comes in last, in red and black, and greets each of them by name and the player as "friend".)
 ESS-D11.21 VAEL: "Speaker. The record of the lamp-house names your vigils and what was set in them. These letters quote your asks. Will you answer?"
-ESS-D11.30 [D-S1] SPEAKER: (warmly; to the whole room) "I have kept vigil as every Speaker has. I have never asked the Covenant for a dream."
-ESS-D11.31 [D-S1] VAEL: "And the letters?"
-ESS-D11.32 [D-S1] SPEAKER: (he looks at the bundle a moment; something passes over his face and is put away) "A Speaker hears from many quarters, Magister."
-ESS-D11.33 [D-S1] VAEL: "Who is the Seat?"
-ESS-D11.34 [D-S1] SPEAKER: (a smile) "Every ember of Emberholt is my seat." (he thanks the room for its care of the city, and sits, and says nothing more)
+ESS-D11.30 SPEAKER: (warmly; to the whole room) "I have kept vigil as every Speaker has. I have never asked the Covenant for a dream."
+ESS-D11.31 VAEL: "And the letters?"
+ESS-D11.32 SPEAKER: (he looks at the bundle a moment; something passes over his face and is put away) "A Speaker hears from many quarters, Magister."
+ESS-D11.33 VAEL: "Who is the Seat?"
+ESS-D11.34 SPEAKER: (a smile) "Every ember of Emberholt is my seat." (he thanks the room for its care of the city, and sits, and says nothing more)
 ESS-D11.40 VAEL: (when the room is empty; he presses his ring into the wax on the bound papers) "Sealed. The Council knows. The terraces don't." (beat, to the player) "If you think that was the wrong door, you may be right. It is the one I keep."   {item ESS_letters removed; quest Completed; the record copy under Vael's seal}   → END
 ```
 
-Production rule on `ESS-D11.34`: an evasion, not a lie (he says nothing about who the Seat is). `[D-S1]`: under any ruling the Speaker's three lines stand.
+Production rule on `ESS-D11.34`: an evasion, not a lie (he says nothing about who the Seat is). (D-S1, ruled 2026-11-15: the Speaker's three lines stand.)
 
-### ESS-B9: post-quest barks (by `EH_SPEAKER`) `[D-S1]`
+### ESS-B9: post-quest barks (by `EH_SPEAKER`) (D-S1, ruled 2026-11-15)
 
 | Id | Trigger | Speaker | Line |
 |---|---|---|---|
@@ -974,15 +937,35 @@ Production rule on `ESS-D11.34`: an evasion, not a lie (he says nothing about wh
 | ESS-B9.5 | Vigil hall, inner door | SERIX | "I sleep upstairs now. With the lamps." |
 | ESS-B9.6 | Marshal's office | KAEVREN | `challenged`: "Ledger box is heavier. I like it heavy." / `exposed`: "Trossen reads slowly. I've stopped minding." |
 | ESS-B9.7 | Ralenne's lectern | RALENNE | "No more slips. I write my own lines now. They're worse." (cheerful) "They're mine." |
-| ESS-B9.8 `[D-S1]` | Speaker's balcony, any rehearsal | SPEAKER | (smiling down at his city; when he sees the player he lifts his hand to them, the same as to anyone) |
+| ESS-B9.8 | Speaker's balcony, any rehearsal | SPEAKER | (smiling down at his city; when he sees the player he lifts his hand to them, the same as to anyone) |
 
 ---
+
+### ESS-D12: Elyndra at the vent shrine (optional; `S01`–`S05`) (D-EL, ruled 2026-11-15)
+
+At **EP20 Elyndra's Vent Shrine** on the Ridge (the EFD/EDS05 site; she is there as EFD-D2.18 has her: "I am here. I am nearly always here."). Once per player while ESS `S01`–`S05` are active. No step waits on it; nothing here is evidence. She never names the Remnant, the Seat, the Covenant's setters, the endgame or Perfect Flame.
+
+```
+ESS-D12.01 (The vent shrine. Ember-mist over the vent. Elyndra sits a little apart from the flame, the volcanic glass mask over her eyes. She does not turn her head.) ELYNDRA: "You've come about the Speaker's dreams." (beat) "Sit, if you want. I don't say much twice."
+  > "Can you tell a given dream from a true one?"   → ESS-D12.10
+  > "What have you seen of him?"                   → ESS-D12.20
+  > "Another time."                                 → END (no flag)
+ESS-D12.10 ELYNDRA: "Sometimes. A given dream comes too neatly. Same shape, same hour, as if someone folded it before it arrived." (beat) "Some of his come folded. Not all."
+ESS-D12.11 ELYNDRA: "And what is folded into them is what he wanted already. Whoever folds them knows what he wants. That is why he never asks where they come from."
+ESS-D12.12 ELYNDRA: "None of that is proof. I see. I don't keep books." (beat) "Someone in that city keeps a book of nights. And he writes letters in his own hand. Find what is written. Then you won't need me."   → ESS-D12.01 options, then ESS-D12.40
+ESS-D12.20 ELYNDRA: (a long pause) "I have seen him burning. Weeping while he burns." (beat) "I don't know what it means. I don't know if it is a thing that will happen, or a thing he is."
+ESS-D12.21 ELYNDRA: "I have read a burning wrong before. Carry it as a picture, not as a fact. Don't hand it to anyone as if it were one."   → ESS-D12.01 options, then ESS-D12.40
+ESS-D12.30 [ESS_RECORD_READ] ELYNDRA: "You've read their book already. Then you know more than I do. Trust it over me."
+ESS-D12.40 ELYNDRA: "On the terraces, breathe on your own count." (she turns back to the vent)   {ESS_ELYNDRA_HEARD}   → END
+```
+
+Production rule: she points (letters, "a book of nights") and warns; the player finds and proves (R11, R12). `ESS-D12.21` is her stated fallibility. Her reading is never cited by Kaevren, Vael, Seralynd or the choice.
 
 ## Part 5: Act II dialogue review
 
 | Check | Result |
 |---|---|
-| **No reserved decision presented as canon** | `[D-E2]`: both Thalan branches are authored in full and tagged (`EAC-D8.60`–`.66`, `EAC-D9`, `EAC-D10`, branch lines in `EAC-D11`, `EAC-B8`, `EAC-B9`). `[D-S1]`: every assertion of the Speaker's knowledge or intent is tagged (`ESS-I6a`, the kept answers, `ESS-I9` block S/P, `ESS-D4.40`–`.42`, `ESS-D8.30`–`.32`, all his lines). Swap blocks given at `ESS-I6a`, after `ESS-D8`, and in the quest file §B14.1. |
+| **Rulings applied (2026-11-15)** | D-E2: one Thalan outcome, freed, with his voiced consent (`EAC-D8.62`); aided nodes removed; both approaches kept; nothing says his freedom ends the works or the suffering below. D-S1: both halves shown (`ESS-I6a` conviction, enjoyment of authority and the orders sent round the Marshal; `ESS-D8.30`–`.33` dream-seeded but not a lamb); no endgame; swap blocks removed. D-EL: `ESS-D12` optional; points, never proves. |
 | **R10 withheld** | Nobody says what the frame takes from Thalan. The slate shows marks and duration only. Thalan: "That is mine." |
 | **R11 / R12 limits** | The Speaker asked and accepted; he dreams what he is given; he is told he does not need to know the deep works. No endgame, no "Fire Titan", no name for the Seat. One induced case proven by record + access book + slip + letter. The "not set" column keeps Dreamers from being dismissed. |
 | **R18 / R19 seeds only** | The fifth beat and the crowd rings (R18) are never explained. Thennek's "awake enough" and the Rat's "Same place" (R19 shadows) are never explained. |
@@ -998,4 +981,5 @@ Production rule on `ESS-D11.34`: an evasion, not a lie (he says nothing about wh
 
 | Review | Findings and revisions |
 |---|---|
-| Independent review, 2026-11-14 | Checked against the quest file, the bible, the Revelation Ledger, the character file and the Part 4 ledger. **High:** `[D-S1]` the kept answer *"that the vigils be clear." They will be.* and the letter's "I thank whoever has the keeping of such things" showed the Speaker asking his patron for his dreams (canon: he believes them divine); the answer is cut, the letter thanks "the fire", `ESS-D8.32` reworded and the swap note after `ESS-D8` updated. **Medium:** `EAC-I7` "Some are small" cut (implied present child captives; Thalan is the sole current captive); `EAC-D11.35` trimmed to the canon hook ("We're not gone"), dropping "We didn't go anywhere"; `ESS-D4.03`/`.04` and `ESS-I5` put the routing stamp on the orders' backs, since the Act I work order's face shows none, and no longer ask for a carry-state object the player may not hold; `ESS-D2.20` now waits for `ESS_RUN_READ`; the "not set" Priestess row moved to *K. less 23*, a night the access book lists. **Low:** `EAC-D2.10` matches the line Act I promised; `EAC-D11.35`/`.36` timing defined; `EAC-B9.4` matches the walkable gate; `ESS-D3.02` tagged `[ALLOCATION]`. No new names; no renames. `[INITIATE]`, R15, R16 untouched; R18/R19 seeds only. |
+| Independent review, 2026-11-14 | Checked against the quest file, the bible, the Revelation Ledger, the character file and the Part 4 ledger. **High:** the kept answer *"that the vigils be clear." They will be.* and the letter's "I thank whoever has the keeping of such things" showed the Speaker asking his patron for his dreams (canon: he believes them divine); the answer is cut, the letter thanks "the fire", `ESS-D8.32` reworded and the swap note after `ESS-D8` updated. **Medium:** `EAC-I7` "Some are small" cut (implied present child captives; Thalan is the sole current captive); `EAC-D11.35` trimmed to the canon hook ("We're not gone"), dropping "We didn't go anywhere"; `ESS-D4.03`/`.04` and `ESS-I5` put the routing stamp on the orders' backs, since the Act I work order's face shows none, and no longer ask for a carry-state object the player may not hold; `ESS-D2.20` now waits for `ESS_RUN_READ`; the "not set" Priestess row moved to *K. less 23*, a night the access book lists. **Low:** `EAC-D2.10` matches the line Act I promised; `EAC-D11.35`/`.36` timing defined; `EAC-B9.4` matches the walkable gate; `ESS-D3.02` tagged `[ALLOCATION]`. No new names; no renames. `[INITIATE]`, R15, R16 untouched; R18/R19 seeds only. |
+| Emberholt character rulings, 2026-11-15 | **D-E2:** `EAC-D8.60`–`.62` rewritten as one ask with Thalan's voiced consent to leaving and his line that it will not quiet what burns below; `EAC-D8.64`, `.66`, all of `EAC-D10`, `EAC-B8`, `EAC-D11.12`–`.13` and the aided halves of `EAC-B9.2`/`.3` removed; Smithing and cool-cycle approaches (`EAC-D9.01`) kept. **D-S1:** Speaker cast note gains the ruling; `ESS-I6a` gains two sentences in his hand (orders sent round the Marshal under his office's mark; the terraces going quiet for him); `ESS-D8.33` added ("What I set, he wanted already"); swap notes after `ESS-I6a` and `ESS-D8` and the block P alternative row removed; tags replaced. **D-EL:** `ESS-D6.12` (Seralynd's pointer) and `ESS-D12` (optional consult at EP20) added. |

@@ -139,6 +139,12 @@ The Council does NOT restrict magic; they regulate it publicly while unknowingly
 ### **Secret Weakness**
 Several members unknowingly act under Hearthveil-induced dream influence.
 
+### **The Speaker** *(approved D-S1, 2026-11-15)*
+- An idealist and a manipulator: he genuinely believes in Emberholt’s discipline, progress and strength, and he enjoys and pursues personal authority.
+- He knowingly takes part in institutional manipulation and accepts harmful compromises for ambition.
+- The Remnant also influences him through planted dreams that exploit those convictions; this does not absolve him.
+- He is neither an innocent puppet nor an omniscient mastermind, and he does not understand the full endgame or Perfect Flame.
+
 ---
 
 ## 6. EMBERGUARD LEGIONS  
@@ -283,6 +289,7 @@ Observe the Remnant from afar without intervening unless forced.
 **Origin (Corrected):**  
 A **wartime precursor initiate** overwhelmed by embercraft emotional overload during the Glassed Hollow ritual.
 They lost themselves to fire resonance and became an uncontrollable, molten creature.
+The initiate is **Iven Calder** *(approved ED-3, 2026-11-15)*. The name is the only approved detail: the initiate’s childhood, recruitment, motives and personality, the precursor’s name and any other survivor identities remain unresolved (D-C03).
 
 ### **Why this correction matters**
 - Titan ≠ Volkhari, per your rules  
@@ -580,7 +587,7 @@ Rituals mimic Memorywarden rites, but are not active spellcraft.
 ## A. REMNANT ↔ EMBERHOLT (Corrected)
 - The Remnant **does not suppress magic** in Emberholt.  
 - They **promote public embercraft** as a means of mass militarization.  
-- The Flameward Speaker acts as both a public leader and a compliant Remnant instrument.  
+- The Flameward Speaker acts as both a public leader and a knowing Remnant ally: sincere in his belief in discipline and progress, ambitious for personal authority, and also shaped by planted dreams; neither puppet nor mastermind *(approved D-S1, 2026-11-15)*.
 - Remnant internal branches (Ashfall Authority, Deepbrand, Hearthveil Initiates, Red-Lit Scribes) shape Emberholt’s doctrines, dreams, and education.
 
 **Conflict:**  

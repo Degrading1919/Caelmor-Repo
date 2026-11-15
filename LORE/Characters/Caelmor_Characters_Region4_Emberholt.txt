@@ -35,6 +35,12 @@
 - Receives visions seeded by Hearthveil Initiates, sincerely believing them divine
 - Suspects something is wrong beneath the city, but fears what full knowledge would demand of him
 
+**Approved character ruling (D-S1, 2026-11-15):**
+- Idealist and manipulator: genuinely believes in Emberholt’s discipline, progress and strength, and enjoys and pursues personal authority
+- Knowingly takes part in institutional manipulation and accepts harmful compromises for ambition
+- The Remnant also influences him through planted dreams that exploit those convictions; this does not absolve him
+- Neither an innocent puppet nor an omniscient mastermind; does not understand the full endgame or Perfect Flame
+
 **Quest Hooks:**
 - Commissions the player to “quietly” investigate magical disturbances that are actually Remnant accidents
 - Later forced to choose between preserving the city’s image or confronting Ashfall directly
@@ -1187,6 +1193,8 @@
 **Quest Hooks:**  
 - Warns the player about manipulated visions and overconfident interpretations across Caelmor
 - Later unveils explicit hints of the Ashfall Authority’s existence  
+- Actively guides the player as a recurring presence: her visions give warnings, clues and directions about manipulated dreams, the Speaker and the Remnant, but never replace corroborated evidence or reveal a major answer without the player’s own investigation *(approved D-EL, 2026-11-15)*
+- Fallible: some of her readings are uncertain or partly wrong, and she says so *(approved D-EL, 2026-11-15)*
 
 ---
 
@@ -1617,4 +1625,4 @@ The following are individual anchors and reported relationships, not a complete 
 
 **Quest Hooks:**  
 - Central figure in any “Harrow of the Volkhari” style questline  
-- The player’s choices around him—freeing, easing his pain, or exploiting his power—carry immense moral and narrative weight  
+- *[Approved D-E2, 2026-11-15; supersedes the earlier free / ease / exploit options]* Freed by the player with his own explicit consent; liberation is his only fate in his questline, and the player’s part in freeing him carries the moral and narrative weight. He survives and can give testimony during the convergence. His liberation does not end the Remnant threat or the Fire Titan’s suffering.

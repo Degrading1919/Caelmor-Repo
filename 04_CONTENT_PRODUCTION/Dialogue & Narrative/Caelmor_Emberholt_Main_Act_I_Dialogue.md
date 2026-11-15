@@ -1,6 +1,6 @@
 # Emberholt Main Act I: Cast and Dialogue (Cold Ward, The Ember in Every Hand, The Hollow That Should Not Burn)
 
-**Status:** Authored production content for Creative Director milestone review (2026-11-14). This is the companion to `04_CONTENT_PRODUCTION/Quests/Caelmor_Emberholt_Main_Act_I.md`, which owns step ids, flags, encounters and mechanics. Characters marked **[CANON ANCHOR]** come from `LORE/Characters/Caelmor_Characters_Region4_Emberholt.txt` and obey the Emberholt rows of the Part 4 character ledger (`00_ADMIN/Reference/Caelmor_Part4_Character_Family_Continuity_Ledger.md`): nothing here gives them a new age, wartime service, kinship, travel or record custody beyond what the ledger allows. Characters marked **[NEW]** come from the Emberholt bible §5.2 or are incidental role names, and are not canon until promoted (ED-19: promote nothing). Nodes that name the valve order, Sarne Ardane, Ralenne's scene or the EH-M1 choice are tagged `[ALLOCATION]`; the EH-M2 offer lines `[ED-20]`; the EH-M3 gate and variants `[ED-7]`; the chamber roll's legible line `[INITIATE]` / `[ED-3]`; protected Volkhari testimony and Maeryn's heritage `[ED-12]`; the broadsheet `[ED-14]`. Nothing here is production JSON.
+**Status:** Authored production content for Creative Director milestone review (2026-11-14). This is the companion to `04_CONTENT_PRODUCTION/Quests/Caelmor_Emberholt_Main_Act_I.md`, which owns step ids, flags, encounters and mechanics. Characters marked **[CANON ANCHOR]** come from `LORE/Characters/Caelmor_Characters_Region4_Emberholt.txt` and obey the Emberholt rows of the Part 4 character ledger (`00_ADMIN/Reference/Caelmor_Part4_Character_Family_Continuity_Ledger.md`): nothing here gives them a new age, wartime service, kinship, travel or record custody beyond what the ledger allows. Characters marked **[NEW]** come from the Emberholt bible §5.2 or are incidental role names, and are not canon until promoted (ED-19: promote nothing). Nodes that name the valve order, Sarne Ardane, Ralenne's scene or the EH-M1 choice are tagged `[ALLOCATION]`; the EH-M2 offer lines `[ED-20]`; the EH-M3 gate and variants `[ED-7]`; the chamber roll's legible line, Iven Calder, (ED-3, ruled 2026-11-15); protected Volkhari testimony and Maeryn's heritage `[ED-12]`; the broadsheet `[ED-14]`. Nothing here is production JSON.
 
 **Node format** (Lowmark/Thornfell/Mire standard): `NODE SPEAKER: "Line." (stage note)`; conditions in brackets before the line; player options as `> [condition] "Option." → NEXT {effect}`. Ids follow bible §11.2: dialogue `<CODE>-D<n>.<nn>`, barks `<CODE>-B<n>.<nn>`, inspect texts `<CODE>-I<n>` in tables, documents in full.
 
@@ -1046,9 +1046,9 @@ EGH-D7.31 YORVEN: "Go on. I'll go and tell Hesper they're coming up."   {journal
 | Magnifier | "A good glass on an arm. Under it the glassed lines are still glass." | — |
 | Shelf spine | "A shelf-mark in red, old, and beside it a newer one in the same red." | — |
 
-### Documents: the roll and the second sheet (S07) `[ED-3]`
+### Documents: the roll and the second sheet (S07) (ED-3, ruled 2026-11-15)
 
-**The chamber roll** (read at the reading table; `EGH_ROLL_READ`; journal on read: *On the chamber roll, one line not glassed: [INITIATE], placed at the centre.*):
+**The chamber roll** (read at the reading table; `EGH_ROLL_READ`; journal on read: *On the chamber roll, one line not glassed: Iven Calder, placed at the centre.*):
 
 > *(A rectangle cut out of the top with a knife, long ago. The edges are brown.)*
 >
@@ -1057,7 +1057,7 @@ EGH-D7.31 YORVEN: "Go on. I'll go and tell Hesper they're coming up."   {journal
 > ~~▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓~~ *(a milky raised ridge; letters under it; unreadable)*
 > ~~▓▓▓▓▓▓▓▓▓▓▓▓~~
 > ~~▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓~~
-> **`[INITIATE]`**, *placed at the centre.* `[INITIATE]` `[ED-3]`
+> **Iven Calder**, *placed at the centre.* (ED-3, ruled 2026-11-15)
 > ~~▓▓▓▓▓▓▓▓▓▓▓▓▓▓~~
 > ~~▓▓▓▓▓▓▓▓▓▓▓~~
 >
@@ -1207,7 +1207,7 @@ EGH-D10.80 (The crew are buried with dimmed flames. Hesper keeps Lorcan's tag.) 
 
 ## Part 6: Review notes (dialogue)
 
-1. **Nobody speaks the initiate's name.** `[INITIATE]` appears in the roll document and the journal only. No node gives the player an option to say it; `EGH-D10.41` says "someone was placed at its centre".
+1. **Nobody speaks the initiate's name.** Iven Calder (ED-3, ruled 2026-11-15) appears in the roll document and the journal only; nobody in Emberholt explains it (R19 is CV-M4's). No node gives the player an option to say it; `EGH-D10.41` says "someone was placed at its centre".
 2. **No counts.** The rim inspect says "you don't count them"; the roll's glassed lines are fixed art, not a number; the second sheet and Seredh's stone give no number of Volkhari held, dead or living (D-C06).
 3. **No precursor name; no roster** (D-C03). The second sheet says only that what came out of the centre "went down and was not stopped"; it does not name the Titan (independent review, 2026-11-14; quest file §C14.5).
 4. **R10 not leaked.** "One elder taken in the purge after. Held below." is past tense; nothing says the elder lives. Kaevren repeats only "'Held below.'"
@@ -1220,3 +1220,4 @@ EGH-D10.80 (The crew are buried with dimmed flames. Hesper keeps Lorcan's tag.) 
 | Review | Changes |
 |---|---|
 | Independent review, 2026-11-14 | Second sheet cut back: "Entered in the night book as: the Titan" and "not recoverable" removed (R19 belongs to CV-M4; bible §2.2 withholds the fate of those held); Director question in the quest file §C14.5. `EGH-D4.03` added (Darven lifts the five tags at the mouth) and `EGH-D6.11` now has him hand them over, replacing a second set of tags on a camp peg. `EGH-D8.36` added and `EGH-D8.30` gated on the four table readings. Seredh's stone: maker unnamed; no wartime role or age for Seredh (Part 4 ledger). `EEH-D10.59` resume line for the `evidence` hand-over. Review note 5 seed labels corrected ("shift above" is not an R15 seed; "went down" is an R19 shadow, not R18). Crew renamed: Haskel to Lorcan, Brin to Wendel (collision with Lowmark's Haskin and Bryn). No other line changed. |
+| Emberholt character rulings, 2026-11-15 | ED-3: `[INITIATE]` replaced by **Iven Calder** in the S07 roll document, its journal text and voice check 1; still unspoken and unexplained in Emberholt. |

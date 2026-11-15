@@ -7,8 +7,8 @@
 **Companion file:** `04_CONTENT_PRODUCTION/Dialogue & Narrative/Caelmor_Emberholt_Main_Act_III_Dialogue.md`. It holds cast notes, every `EGA-` dialogue node and bark referenced here, the inspect texts, the full text of every document (Odile's runner note, the relief tags, the junction book, the collar plates, the valve-book repair entries, the tally board at morning, Thennek's slip `[D-E2]`, the Speaker's letter `[D-S1]`), the post-story barks and the master commission offer lines.
 
 **Reserved decisions in this package. Nothing here decides them.**
-- **`[D-E2]` Thalan's fate** (bible ED-4, §3.2). EH-M6 reads `EH_THALAN` in **one place only**, the tally board (bible §9.3 item 5), plus two post-story barks. `freed`: Thennek sends word, one line, on a slip Hennet carries (`EGA-D11.50`, document `EGA-I30`). `aided`: Asera comes to the board with "the account he asked for" (`EGA-D11.55`–`.58`), reading `EAC_ACCOUNT_PROMISED`. Both variants are one short beat of the same length at the same point, add no step, set no flag and change no completion. Everything else in EH-M6, including the junction book's frame-line entry (`EGA-I22`, written so it is true in both branches), is branch-neutral. A ruling for one fate deletes the other variant's nodes; nothing else changes (§14.1).
-- **`[D-S1]` the Speaker** (bible ED-5, §3.2). EH-M6 reads `EH_SPEAKER` and `ESS_LETTER_READ` in the Speaker's letter (`EGA-I32`), in one Council line (`EGA-D13.12`) and in post-story terrace barks. The letter follows the reviewed Act II working layer exactly: a man who took help for his rise and sincerely believes his vigil dreams are divine; he does not know what the deep works are for and nothing here shows he knew of the draw. He never fights, never confesses, never lies outright (he thanks, reframes and omits), and stays in office. Every dependent node is tagged; §14.2 gives the swap for a "wholly puppet" or "wholly mastermind" ruling.
+- **Thalan's fate (D-E2, ruled 2026-11-15): fixed liberation** (bible ED-4, §3.2; Architecture §5.0). `EH_THALAN` has one value, `freed`. EH-M6 reads it at the tally board (bible §9.3 item 5): Thennek sends word, one line, on a slip Hennet carries (`EGA-D11.50`, document `EGA-I30`); and in one post-story bark (`EGA-B9.12`, Dahrin). The aided reads (`EGA-D11.55`–`.58`, Asera's account, `EAC_ACCOUNT_PROMISED`, the aided half of `EGA-B9.12`) are removed. The beat adds no step, sets no flag and changes no completion. Thalan's freedom does not resolve the Remnant threat or the suffering below; the board shuts a draw and nothing more.
+- **The Speaker (D-S1, ruled 2026-11-15): idealist and manipulator, also dream-seeded** (bible ED-5, §3.2; Architecture §5.0). EH-M6 reads `EH_SPEAKER` and `ESS_LETTER_READ` in the Speaker's letter (`EGA-I32`), in one Council line (`EGA-D13.12`) and in post-story terrace barks. The letter is his sincere civic warmth and his appetite for the moment at once: he thanks, takes the night as his city's lesson to teach, and (with `exposed`) calls the help he took no shame. He does not know what the deep works are for and nothing here shows he knew of the draw; the dreams that feed his convictions do not excuse what he chose. He never fights, never confesses, never lies outright (he thanks, reframes and omits), and stays in office. The former swap notes (§14.2) are resolved and removed.
 - **Other tags.** `[ALLOCATION]` (ED-1): the bleed house's terraces tag (`EGA-I14`), the §9.3 item 2 attendance lines and two barks. `[ED-2]`: the Ember-Fused worker's flare in `S01` (a containment, never a fight). `[ED-12]`: Volkhari presence at the board (Maeryn and Seredh with `EH_UNBURNT = kept`; Asera `[D-E2]`), each deciding what they say. `[INITIATE]` and `[ED-3]` do not apply: EH-M6 never shows, speaks or refers to the initiate's name.
 
 ---
@@ -37,8 +37,8 @@ EH-M6 never asks how an earlier flag was set; it reads only values. Every value 
 | `EH_COLD_WARD` `[ALLOCATION]` | posted / settled | `S08` attendance (§9.3 item 2); one warming-house bark | Posted: the Cooling House regulars stand behind Veska at the board. Settled: Ralenne Kharveil's clerk brings the coal book. |
 | `EH_CURRICULUM` | guild / evidence | `S08` attendance (§9.3 item 3) | Guild: Idra Callow brings two teachers. Evidence: Yorven brings the assessment ledger from his strongbox and lays it on the board's ledge; it goes back to the strongbox after (CV-M4 custody unchanged). |
 | `EH_HOLLOW_TRUTH` | told / kept | `S07` one Veska line; `S08` attendance (§9.3 item 4); post-story memorial | Told: Hesper Tolk and Darven Mott stand together. Kept: Grand Marshal Kaevren Thalos comes with his second ledger. |
-| `EH_THALAN` `[D-E2]` | freed / aided | `S08` attendance (§9.3 item 5) only | Freed: Thennek's slip. Aided: Asera brings the account he asked for. |
-| `EH_SPEAKER` `[D-S1]` | challenged / exposed | The Speaker's letter; `EGA-D13.12`; post-story barks | One letter sentence and one Council line vary. |
+| `EH_THALAN` (D-E2, ruled 2026-11-15) | freed | `S08` attendance (§9.3 item 5); `EGA-B9.12` | Thennek's slip. |
+| `EH_SPEAKER` (D-S1, ruled 2026-11-15) | challenged / exposed | The Speaker's letter; `EGA-D13.12`; post-story barks | One letter sentence and one Council line vary. |
 | `EH_UNBURNT` (EMS) | kept / strained / unset | `S08` attendance (§9.3 item 6) | Kept: Maeryn Vall and Seredh Embercarver stand at the back. Strained or unset: no line. |
 | `EH_GUILDS` (EOM) | reformed / restored / unset | `S03` forges tag and Veska's bleed line; `S08` guild reading; §E.5 | Reformed: the forges hold a relief seat open for the wardens under Durnan's new rules. Restored: the forges take it and bill the ward. Unset: neutral. |
 | `EH_COMMONS` (EFC) | bool | `S01` | True: the Heat Commons rota has the warming house open and the cots laid before the player arrives; the blankets sub-objective is already done. False: the player carries blankets from the Commons store. |
@@ -50,10 +50,9 @@ EH-M6 never asks how an earlier flag was set; it reads only values. Every value 
 | `ECW_RAT_SEEN` (EH-M1) / `ESS_RAT_PAID` (EH-M5, always set) | `S02` grille (`EGA-D4.40`) | The Rat at a grille in the old conduits: "Still the same place." (the line Act II promised). Never explained. |
 | `EAC_PLATE_READ` (EH-M4, always set) | `EGA-D4.10` | Veska: "Plates? Down there? Then you know what red means under your feet." (the line Act II promised) |
 | `EAC_SLATE_READ` (EH-M4, always set) | Junction book read (`EGA-I22` inspect line) | "You've read this heading before." (the line Act II promised) |
-| `EAC_ACCOUNT_PROMISED` `[D-E2]` (EH-M4, aided only) | `EGA-D11.55` | Asera: "He asked for an account. You promised one." |
 | `EGH_KEEP_SEEN` (EH-M3, always set) | Junction book margin (`EGA-I23`, optional) | The margin hand is the hand of *Keep. Do not copy.* Nobody is named (D-C03). Sets `EGA_HAND_MATCHED`. |
 | `EEH_TAVI_STRUCK` (EH-M2) | `EGA-D11.30`/`.35` | Idra (guild) or the open ledger (evidence) mentions the struck line. |
-| `ESS_LETTER_READ` `[D-S1]` (EH-M5, always set) | The Speaker's letter inspect (`EGA-I33`) | The letter is in the same hand as *To the Seat*; the player's journal sets *"I ask that the city not be frightened"* beside *"The city will learn from this night."* Presentation only, never evidence. |
+| `ESS_LETTER_READ` (D-S1, ruled 2026-11-15) (EH-M5, always set) | The Speaker's letter inspect (`EGA-I33`) | The letter is in the same hand as *To the Seat*; the player's journal sets *"I ask that the city not be frightened"* beside *"The city will learn from this night."* Presentation only, never evidence. |
 | *Shift Supper* (ESP) Completed | `S01` Cooking hook | Hennet: "You know this one. Pails, lids, salt last." Flavour only. |
 
 ### Region flags this act sets
@@ -88,7 +87,7 @@ Act III invents no other `EH_` flag. Quest-local flags use `EGA_` (§9.2). Every
 | Yorven Khelt: District Overseer, a Council member; rose from miner; loyal to his district | Factions §5; character file | [CANON] |
 | Durnan Volkryst, Forge-Master of the Basalt Forge Guild; the guilds resent Remnant interference | Factions §8 | [CANON] |
 | The Civic Council: the Speaker, Magister Vael Trossen, Magistrix Ralenne Kharveil, Trade Commissioner Oren Falx, District Overseers; several members unknowingly act under induced dreams | Factions §5 | [CANON] |
-| The Speaker: warm, measured; prefers omission to lies; sincerely believes his seeded visions divine; lacks the Ashfall endgame | Character file; Part 4 ledger | [CANON]; `[D-S1]` working layer |
+| The Speaker: warm, measured; prefers omission to lies; sincerely believes his seeded visions divine; enjoys and pursues authority and knowingly accepted harmful help for it; lacks the Ashfall endgame | Character file; Part 4 ledger; Architecture §5.0 | [CANON]; (D-S1, ruled 2026-11-15) |
 | The heat main, fire wardens, tells, the valve house and tally board, Cooling Houses as warming houses, the Heat Commons | Bible §1.1, §2.1, ED-13 | [NEW, adopted from Part 3] |
 | The frost night; the three pressure stages; the bleed house and its three reliefs; the splice run; the junction book's text; the far doors barred before the frost; the Draw Sentinel's arena and phases in detail; the thaw lines; the board's balanced column; the reading scenes | This package (on bible §6.1, §10.1) | [NEW] |
 
@@ -273,7 +272,7 @@ On completion the stage comes down: U9 swaps **Surging → Working** (EI-PR-01; 
    - **Inspect** the collar (required, each; `EGA-I16`).
    - Veska **unbolts the number plate** (presentation, ~3 s) and hands it to the player (**carry-state: the collar plates**, 1 → 3; `EGA-I17`). "Odile will want these. They're her numbers."
    - **Shut the splice:** a 3-segment channel (~3 s each) at the branch valve. "Now you can shut it. She's not hot any more." (Working; the rule kept). The branch pipe's tell goes clear; the main's hum lifts a note.
-2. **The fitter's cabin (U10a).** A side door at the run's end (`EGA-I18`, `EGA-I19`). On the bench, the **junction book** in oilcloth (**`EGA_junction_book`**, quest item; `EGA-I21`). **Read it** (required; document `EGA-I22`). Its headings and lines, in fitters' square hands over years: valve-house numbers against *set as repair*; draws in fitters' measure (*quarter*, *half*, *full hold*) *for the proving rings*; a page headed ***Perfect Flame: draw holds.***; *Frame line: no draw. Fitter to attend.* (true in both `[D-E2]` branches); *Lower forge undercourse: do not draw. The old circle keeps this season.*; *Hard frost: the main will not carry the holds. Hold anyway. Next series after the Kindling.*; and last: *Doors to be barred from the deep side at first frost. Leave the junction to its keeper.* With `EAC_SLATE_READ` (always set): "You've read this heading before." Sets `EGA_BOOK_READ`.
+2. **The fitter's cabin (U10a).** A side door at the run's end (`EGA-I18`, `EGA-I19`). On the bench, the **junction book** in oilcloth (**`EGA_junction_book`**, quest item; `EGA-I21`). **Read it** (required; document `EGA-I22`). Its headings and lines, in fitters' square hands over years: valve-house numbers against *set as repair*; draws in fitters' measure (*quarter*, *half*, *full hold*) *for the proving rings*; a page headed ***Perfect Flame: draw holds.***; *Frame line: no draw. Fitter to attend.* (true with the frame empty, D-E2, ruled 2026-11-15); *Lower forge undercourse: do not draw. The old circle keeps this season.*; *Hard frost: the main will not carry the holds. Hold anyway. Next series after the Kindling.*; and last: *Doors to be barred from the deep side at first frost. Leave the junction to its keeper.* With `EAC_SLATE_READ` (always set): "You've read this heading before." Sets `EGA_BOOK_READ`.
    - *Optional, with `EGH_KEEP_SEEN` (always set):* a margin note on the draw-holds page, *Keep the draw. Do not log.*, is in a hand the player has seen: the slope, the ink, the way the K is made are those of *Keep. Do not copy.* on the Red-Lit wrapper (`EGA-I23`). Nothing says whose. Sets `EGA_HAND_MATCHED` (D-C03: limited continuity, never named).
    Veska reads over the player's shoulder and stops at *Hold anyway* (`EGA-D7.04`): "They knew the main wouldn't carry it. They knew what that meant up top. And they wrote 'anyway'."
 The step completes when three splices are shut, three plates are carried, and the book is taken and read.
@@ -309,7 +308,7 @@ Hennet hands the player a bowl in all three. Yorven: "Odile's sent another runne
 **Objective:** *Take the account to the valve house.*
 1. **The board** (V1). The public hall is full. Odile is chalking the hour (`EGA-D11.01`). With `ECW_SHORTFALL_SEEN` (always set): "You read this board once. Read it again." (`EGA-D11.02`). The player **inspects the tally board** (required; `EGA-I28`; §8.3): intake against draws, by vein and ward, chalked by the hour through the night; the column for whichever relief the player chose shows double for the hours before the draw was shut (`EH_HEAT_MAIN`); and at the foot of the last column, where *old leaks* has been chalked every hour since the main was rebuilt, the morning hour's figure is **nothing**. The board balances. Odile has not written *old leaks*. She has written the hour, and a line: *balanced.* Sets `EGA_BOARD_BALANCED`.
 2. **The numbers.** The player gives Odile the **collar plates** (carry-state removed). She takes the valve book (V2) and finds each number (`EGA-D11.10`–`.16`; document `EGA-I29`): each was entered over the years in a day clerk's hand as *repair, deep-works contract*, with the valve-house mark. "Mine. My book. My clerks' hands. Every one a repair." The junction book's numbers match the plates and the valve book. This is the account: three holds, one civic.
-3. **Who stands at the board** (bible §9.3; §9.5 here; `EGA-D11.20`–`.75`). Always: Veska, Odile, Yorven, Hennet. Then each flag adds its people and one beat, in this order, each a few seconds: `EH_COLD_WARD` `[ALLOCATION]`; `EH_CURRICULUM` (with `EEH_TAVI_STRUCK`); `EH_HOLLOW_TRUTH`; `EH_THALAN` `[D-E2]`; `EH_UNBURNT`; `TAS_ACCOUNT`. Nobody is required; a player with no side quests has Veska, Odile, Yorven, Hennet, and the people the four main-line flags bring.
+3. **Who stands at the board** (bible §9.3; §9.5 here; `EGA-D11.20`–`.75`). Always: Veska, Odile, Yorven, Hennet. Then each flag adds its people and one beat, in this order, each a few seconds: `EH_COLD_WARD` `[ALLOCATION]`; `EH_CURRICULUM` (with `EEH_TAVI_STRUCK`); `EH_HOLLOW_TRUTH`; `EH_THALAN` (`freed`); `EH_UNBURNT`; `TAS_ACCOUNT`. Nobody is required; a player with no side quests has Veska, Odile, Yorven, Hennet, and the people the four main-line flags bring.
 4. **The word.** Yorven, looking at the junction book on the counter (`EGA-D11.80`): "Whoever wrote that is what's left of something, and they're still down there behind a door." (beat) "A remnant. Call it what it is." Odile writes at the foot of the board, under *balanced*: *Draws: the deep works, below Cinderwall. Shut.* Neither line says what the remnant is left of or mentions the Hollow, so both are true under either `EH_HOLLOW_TRUTH` value and within Yorven's limits (bible §5.1). From here the word **Remnant** is in public speech (bible §1.2; post-quest barks).
 5. **The choice** (`EGA-D12`). The account (the junction book, the valve-book page, the plates in Odile's tray, the board) must go somewhere it will be kept. Two hands are offered, and Veska will not choose for the player (`EGA-D12.05`):
 
@@ -319,7 +318,7 @@ Hennet hands the player a bowl in all three. Yorven: "Odile's sent another runne
 | **The Council** (`EH_ACCOUNT = council`) | **Yorven**, as District Overseer and Council member, with Odile's copy. "I've a seat at that table. I've never used it for anything but Cinderwall. This is Cinderwall." | **H2, the Council chamber** (`EGA-D13.10`–`.30`): Magister **Vael Trossen** reads the account into the Council's book entry by entry before anyone speaks; councillors by office; the Speaker's chair empty ("the Speaker keeps vigil this morning"). The Council orders the valve house's board read aloud at noon each day for the season. |
 
 Both readings are short (~2 minutes), under the player camera, and end the same way: the junction book leaves the player's hands (**item removed**: Durnan's strongroom or Vael's seal).
-6. **The letter** `[D-S1]`. As the reading ends, a **runner** from Speaker's Hall finds the player and hands over a sealed letter (`EGA-D13.70`; document `EGA-I32`). The player **reads it** (required). In the Speaker's own hand, warm and short: thanks for "the night you kept", and *"The city will learn from this night."* One sentence varies by `EH_SPEAKER`. With `ESS_LETTER_READ` (always set), the inspect (`EGA-I33`) sets it beside *"I ask that the city not be frightened."* Nobody comments. Sets `EGA_LETTER_READ` and **`EH_STANDING`**. **Completes** on the letter closed (`EGA-D13.80`).
+6. **The letter** (D-S1, ruled 2026-11-15). As the reading ends, a **runner** from Speaker's Hall finds the player and hands over a sealed letter (`EGA-D13.70`; document `EGA-I32`). The player **reads it** (required). In the Speaker's own hand, warm and short: thanks for "the night you kept", and *"The city will learn from this night."* One sentence varies by `EH_SPEAKER`. With `ESS_LETTER_READ` (always set), the inspect (`EGA-I33`) sets it beside *"I ask that the city not be frightened."* Nobody comments. Sets `EGA_LETTER_READ` and **`EH_STANDING`**. **Completes** on the letter closed (`EGA-D13.80`).
 **Verbs:** read the board, hand over, match, listen, choose, read.
 
 **Epilogue (no step):** §E.
@@ -480,7 +479,7 @@ Tuned for **Expert identity** (ED-10). Exact levels and numbers are Gameplay Des
 | `EGA_THAW_SEEN` | `cinderwall.thaw_lines` | `S07` | — |
 | `EGA_BOARD_BALANCED` | `EGA-I28` | `S08`; EME10 balanced state | — |
 | `EH_ACCOUNT` = guilds / council | `S08` choice | `EGA-D13`; §E | **CV-M1** custody (bible §9.1) |
-| `EGA_LETTER_READ` `[D-S1]` | `EGA-I32` | `S08` | CV-M4 (request) |
+| `EGA_LETTER_READ` (D-S1, ruled 2026-11-15) | `EGA-I32` | `S08` | CV-M4 (request) |
 | `EH_STANDING` | `S08` completion | §E.10 | Master commissions; **CV-M1** gate |
 
 ### 9.3 The frost night (per player)
@@ -508,8 +507,8 @@ Neither is wrong. Each can be said out loud in the morning, and each is on the b
 | | `= evidence` | Yorven lays the assessment ledger on the board's ledge, open at the transfer page | `EGA-D11.35`; with `EEH_TAVI_STRUCK`, the open page shows the struck line (`EGA-I31`). The ledger returns to Yorven's strongbox after (CV-M4 custody). |
 | 4 | `EH_HOLLOW_TRUTH = told` | Hesper Tolk and Darven Mott, together | `EGA-D11.40`: Hesper: "Lower forge. That's where it goes down, isn't it." Darven: "Where the walls breathe." |
 | | `= kept` | Grand Marshal Kaevren Thalos with his second ledger | `EGA-D11.45`: he copies the board's last line into the ledger. "Second ledger. It's getting heavier." |
-| 5 `[D-E2]` | `EH_THALAN = freed` | Thennek sends word, one line | `EGA-D11.50`: Hennet gives the player a folded slip left at the warming house's back door at midnight (`EGA-I30`). No one else reads it. |
-| | `= aided` | Asera brings "the account he asked for" | `EGA-D11.55`–`.58`: Asera at the edge of the crowd. With `EAC_ACCOUNT_PROMISED`: "He asked for an account. You promised one." She decides what may be written: "Write that someone was held below on heat taken from this board. Don't write who." Odile chalks it under the deep-works line with no name and no number: *Someone was held below on this heat.* (D-C06; §14 item 13). |
+| 5 (D-E2, ruled 2026-11-15) | `EH_THALAN = freed` | Thennek sends word, one line | `EGA-D11.50`: Hennet gives the player a folded slip left at the warming house's back door at midnight (`EGA-I30`). No one else reads it. |
+
 | 6 `[ED-12]` | `EH_UNBURNT = kept` | Maeryn Vall and Seredh Embercarver at the back | `EGA-D11.60`: Maeryn catches the player's eye and nods; Seredh does not speak. Nothing is said about them. |
 | 7 | `TAS_ACCOUNT = named` (Thornfell) | Tessaly Varn with the masons | `EGA-D11.70`: "A gate book once named my crew. I like boards that say who did the work." |
 
@@ -594,12 +593,12 @@ Lines 2–7 play in this order, each a few seconds, and only those whose conditi
 | **"The old circle keeps this season."** | Something below the lower forge is not still (FT-05 direction; R19). | The Ash-Clad Giant legend. | One line in a fitters' book. | A forge saying; a seal schedule. | Everything. | CV-M4 (R19). |
 | **The far doors** | The deep works withdrew deeper before the frost. | — | Barred from the far side; the book's last line. | They fled the player. | What is past them. | Later content. |
 | **"Same place."** | Unexplained (bible §2.4). | — | The Rat at a grille. | — | Everything. | None in Emberholt (deliberately). |
-| **The Speaker's letter** `[D-S1]` | He thanks and takes the moment; he does not know what the deep works are for (working layer). | The Speaker is gracious. | The letter; its hand; the line set beside *To the Seat*. | He ordered the draw; or he knew nothing of anything. | What he suspects. | CV-M4 (the Kindling). |
+| **The Speaker's letter** (D-S1, ruled 2026-11-15) | He thanks and takes the moment for himself and his city; he believes in both; he does not know what the deep works are for. | The Speaker is gracious. | The letter; its hand; the line set beside *To the Seat*. | He ordered the draw; or he knew nothing of anything. | What he suspects. | CV-M4 (the Kindling). |
 
 ## 14. Open decisions
 
-1. **D-E2 (reserved; not decided here).** EH-M6 reads `EH_THALAN` only at the board (§9.5 item 5) and in two post-story barks (`EGA-B9.12`). **If the Director rules `freed` only:** delete `EGA-D11.55`–`.58`, the aided bark and the `EAC_ACCOUNT_PROMISED` read. **If `aided` only:** delete `EGA-D11.50`, document `EGA-I30` and the freed bark. **If a different fate:** replace only those nodes; the junction book's *Frame line: no draw. Fitter to attend.* is true in every branch in which the frame no longer works him, and should be re-read against any other ruling. Nothing else in EH-M6 changes.
-2. **D-S1 (reserved; not decided here).** Working layer as reviewed in Act II: the letter thanks, reframes and omits; it shows no knowledge of the draw. **If "wholly puppet":** the letter becomes a secretary's fair copy with *Sealed by the Speaker* at the foot in another hand; its text is unchanged. **If "wholly mastermind":** the text is unchanged (it is omission under any ruling); cut the `ESS_LETTER_READ` juxtaposition inspect (`EGA-I33`) if it reads as a hint of innocence. `EGA-D13.12` and the terrace barks are `[D-S1]`-safe under any ruling. He never fights, confesses, lies outright, or leaves office.
+1. **D-E2, ruled 2026-11-15: fixed liberation.** Applied: `EGA-D11.55`–`.58`, the aided half of `EGA-B9.12` and the `EAC_ACCOUNT_PROMISED` read are deleted; `EGA-D11.50`, document `EGA-I30` and Dahrin's half of `EGA-B9.12` stand untagged. The junction book's *Frame line: no draw. Fitter to attend.* is true with the frame empty. Nothing else in EH-M6 changes.
+2. **D-S1, ruled 2026-11-15: idealist and manipulator, also dream-seeded.** Applied: the letter stands in his own hand (no fair-copy swap); it thanks, reframes and omits, shows no knowledge of the draw, and shows a man who likes the city's eyes on him and calls the help he took no shame. The `ESS_LETTER_READ` juxtaposition inspect (`EGA-I33`) stays. He never fights, confesses, lies outright, or leaves office.
 3. **`[ALLOCATION]` (ED-1).** Tagged: the terraces relief's second tag (`EGA-I14`), §9.5 item 2 (`EGA-D11.21`/`.22`) and `EGA-B1.6`. If ED-1 changes, those lines follow the new present cause; the relief itself and the cold ward survive.
 4. **Why the pressure builds [NEW].** The bible says the main fails "while pressure builds below". This package explains it in play with ordinary warden rules: in a hard frost every intake is opened to full, the draw splices (sized for an ordinary winter) choke, and heat backs up in the wartime bore below the ward instead of rising. Veska's EH-M1 rule "You don't shut hot" is why the bleed comes before the splices. Text only.
 5. **The far doors barred before the frost [NEW].** Implements "the Remnant withdraws deeper; nobody retreats past the player" (bible §6.1) inside CDR-1: the withdrawal is a past event read from a book and a door, never an enemy leaving a fight.
@@ -609,18 +608,21 @@ Lines 2–7 play in this order, each a few seconds, and only those whose conditi
 9. **"Remnant" enters public speech (bible §1.2) [NEW].** As Yorven's plain word at the board (`EGA-D11.80`): "A remnant. Call it what it is." If the Director prefers the word to arrive differently (a Council clerk's entry, a guild notice), only that line and the post-quest barks change. *Independent review:* the line no longer refers to "that night under the lower forge" (outside Yorven's §5.1 limit; it would have published the Hollow in the `kept` branch and asserted precursor continuity in public, D-C03). Bible §1.2 says the word enters public speech "only after EH-M6"; the board is EH-M6's last public scene and Arcs §3.3 requires the Remnant's existence to enter the civic record here, so this is read as compliant. If the Director reads §1.2 strictly, the word moves to the post-quest barks and `EGA-D11.80` ends at "what's left of something".
 10. **The Council scene (Arcs §3.3: "a short Council scene afterward reads what was found").** Implemented as the `council` reading; the `guilds` reading is its mirror at the Basalt Forge Guild so both options have a scene. The Speaker's empty chair is a clerk's fact, not a comment.
 11. **The junction book's margin hand (optional) [NEW, D-C03].** Pays off Act I's `EGH_KEEP_SEEN` promise without naming anyone or counting anyone. Cut freely with `EGA_HAND_MATCHED`.
-12. **The frame-line entry.** Written so it is true under both `[D-E2]` branches (in `freed` the frame is empty; in `aided` its coupling is sealed), so the book needs no tag.
-13. **Asera's board line (`aided`) [NEW, ED-12].** Fulfils "Asera brings the account he asked for" (bible §9.3) as her consent to one chalked line that names and counts nobody (*Someone was held below on this heat.*). An earlier draft chalked *Held below on this heat: one.*; independent review removed the number: a count of the held is a Volkhari count (D-C06) and the fate and number of the held stay unresolved after the reviewed second sheet. If the Director prefers nothing chalked, she says the line and Odile does not write it.
+12. **The frame-line entry.** True with the frame empty (D-E2, ruled 2026-11-15); the book needs no tag.
+13. **Asera's board line (removed by D-E2, ruled 2026-11-15).** The aided-only beat (`EGA-D11.55`–`.58`) is gone with the aided branch; nothing is chalked about anyone held below, so no Volkhari count arises (D-C06).
 14. **The fused worker is a role, not Myr Adalrek** (EAD's anchor), so EH-M6 does not depend on *The Vein-Touched Man*. If EAD is Completed, a Batch 3 line may let Myr be the worker; no step changes.
 15. **No post-story refight [NEW decision].** The bible names no repeatable boss for Emberholt (unlike the Mire's MD-8). The Sentinel stays destroyed. The post-story activity is the warden's round and the master commissions (§E.9, §E.10). If the Director wants a repeatable construct fight, it belongs behind the barred doors in later content, not here.
 16. **`TAS_ACCOUNT` (Thornfell) read for one line only** (bible §9.3 item 7). Never required.
 17. **Level framing (ED-10).** Expert identity. Cooking `[GD: mid]` with the hatch as the time-cost alternative; Smithing `[GD: mid-high]` with the crew's hold as the time-cost alternative.
 
-### 14.1 D-E2 swap note
-Nodes tagged `[D-E2]`: `EGA-D11.50`, `EGA-D11.55`–`.58`, document `EGA-I30`, bark `EGA-B9.12`. The §9.5 row 5. Nothing else.
+### 14.1 D-E2 (resolved 2026-11-15)
+Swap note removed. The `freed` nodes (`EGA-D11.50`, document `EGA-I30`, Dahrin's `EGA-B9.12`, §9.5 row 5) are the only version.
 
-### 14.2 D-S1 swap note
-Nodes tagged `[D-S1]`: document `EGA-I32` and its inspect `EGA-I33`, `EGA-D13.12`, `EGA-D13.70`–`.80`, barks `EGA-B9.8`–`.9`. Nothing else.
+### 14.2 D-S1 (resolved 2026-11-15)
+Swap note removed. The letter (`EGA-I32`), its inspect (`EGA-I33`), `EGA-D13.12`, `EGA-D13.70`–`.80` and barks `EGA-B9.8`–`.9` are the only version.
+
+### 14.3 Elyndra's aftermath line (D-EL, ruled 2026-11-15)
+One optional bark, `EGA-B9.13`, at EP20 after `EH_STANDING` (§E.12): a vague, explicitly unsure warning that something "older than ember" stirs under the city. R19 seed only: no Titan, no name, no identification, no direction. Not required, not evidence.
 
 ## 15. Internal review log
 
@@ -634,7 +636,7 @@ Nodes tagged `[D-S1]`: document `EGA-I32` and its inspect `EGA-I33`, `EGA-D13.12
 | CDR-6. | Every step, the boss and every reward solo; per-player choices and props; partner credit only from their own active step; co-op collar-set mismatch logged for Sol as presentation. |
 | Revelation Ledger. | No R-id owned; R18 and R19 seeded only; R15 and R16 untouched; R09–R12 not re-told; no Titan identification in any paper; no precursor name; no roster; nobody counted. |
 | Quest items. | One (`EGA_junction_book`); Emberholt 5 of 5. |
-| Promised reads. | Act I: `ECW_SHORTFALL_SEEN` ("Read it again"), `EEH_TAVI_STRUCK`, `EGH_KEEP_SEEN`. Act II: `EAC_PLATE_READ`, `EAC_SLATE_READ`, `EAC_ACCOUNT_PROMISED`, `ESS_RAT_PAID`, `ESS_LETTER_READ`. All used with the wording the earlier packages promised. |
+| Promised reads. | Act I: `ECW_SHORTFALL_SEEN` ("Read it again"), `EEH_TAVI_STRUCK`, `EGH_KEEP_SEEN`. Act II: `EAC_PLATE_READ`, `EAC_SLATE_READ`, `ESS_RAT_PAID`, `ESS_LETTER_READ`. All used with the wording the earlier packages promised. |
 
 ---
 ---
@@ -667,13 +669,13 @@ This section is the single reference for how EH-M6's outcomes change Emberholt a
 
 All outcomes. The Undercroft stays walkable to the splice junction. The three splices stand shut with their clamps cut off (by the wardens, the next day) and stacked in the bleed house; the bleed house slate has a new line in the chalk of whichever relief was used. The **Sentinel** stands where it locked, cold and dark, a wardens' chalk mark on its chest: *DON'T* (inert prop; never re-forms; nothing drops). The **far doors** stay barred from the far side, with a warden's chain added on this side and Deepbrand's mark scraped off. The fitter's cabin is empty. EH-M6's pins are released at completion, so no pin remains: heat zones show the default state in the Zones §6.1 table (the EI-HT-01 schedule instead, where it is built).
 
-## E.4 The Ash Terraces [EP23] (by `EH_HEAT_MAIN` and `EH_SPEAKER` `[D-S1]`)
+## E.4 The Ash Terraces [EP23] (by `EH_HEAT_MAIN` and `EH_SPEAKER`) (D-S1, ruled 2026-11-15)
 
 | Element | Variants |
 |---|---|
 | The braziers | **terraces:** two brazier rows cracked by the night's heat, roped off, with a warden's tag. Otherwise unchanged. |
 | Rehearsals | Continue every dusk toward the High Kindling (CV-M4). `challenged`: the crowd breathes raggedly on its own count (Act II `ESS-B9`). `exposed`: as written, four beats. |
-| The Speaker | On his balcony at rehearsals. If the player is in the crowd, he lifts his hand to them as to anyone (`EGA-B9.8`, `[D-S1]`). |
+| The Speaker | On his balcony at rehearsals. If the player is in the crowd, he lifts his hand to them as to anyone (`EGA-B9.8`). |
 
 ## E.5 The Emberforges [EP25] (by `EH_HEAT_MAIN`, `EH_ACCOUNT`, `EH_GUILDS`)
 
@@ -687,11 +689,11 @@ All outcomes. The Undercroft stays walkable to the splice junction. The three sp
 
 `EH_HOLLOW_TRUTH = told`: the plaque's chalk *NOT A COLLAPSE* has been written over again by someone else, and under it in a warden's hand: *The board balances now.* (The junction book says the lower forge undercourse was not drawn, so nothing claims heat was taken here.) `kept`: the plaque is clean; Kaevren's second ledger now has a line with the valve-house mark beside it (inspect at his office). Nothing in either names anyone or counts anyone.
 
-## E.7 Maeryn's shop [EP03] `[D-E2]` on one line
+## E.7 Maeryn's shop [EP03] (D-E2, ruled 2026-11-15)
 
-All outcomes: Maeryn's fitting bark is unchanged (`EAC-B9.1`). `freed`: Dahrin asks once whether the board said anything about the deep works ("Shut. Good. Shut is a word I like."). `aided`: Asera, in the third chair, opens her eyes when the player comes in: "You wrote it. He'll know." (`EGA-B9.12`). Nothing locates anyone.
+Maeryn's fitting bark is unchanged (`EAC-B9.1`). Dahrin asks once whether the board said anything about the deep works ("Shut. Good. Shut is a word I like.") (`EGA-B9.12`). Nothing locates anyone.
 
-## E.8 Speaker's Hall [EP28] `[D-S1]`
+## E.8 Speaker's Hall [EP28] (D-S1, ruled 2026-11-15)
 
 The Speaker's letter stays in the player's journal (document view). The Speaker's Hall service yard and the Rat's duct are unchanged. The Council (with `council`) has the board read at noon; the Speaker is not seen to attend it. Nothing here shows what he knows.
 
@@ -724,6 +726,10 @@ Every player who completes EH-M6 receives all four offers; none depends on `EH_A
 
 The draw is shut and the board balances. The three splices are cut out of the main, their numbers struck through in Odile's book. The junction book is in hands that will keep it. The far doors are barred from both sides now. Cinderwall is warm, and somebody paid for the night: the ward, the terraces' good name, or the forges. The word *Remnant* is in Cinderwall's mouth, plainly meant. Nobody in Emberholt says what the proving rings were holding for, what "the old circle" keeps, who wrote in the margin, or what is past the far doors. The High Kindling is still coming.
 
+## E.12 The Ridge: Elyndra's Vent Shrine [EP20] (D-EL, ruled 2026-11-15)
+
+After `EH_STANDING`, a player who visits the shrine may hear Elyndra's one aftermath line (`EGA-B9.13`, once): something "older than ember" stirring under the city, offered as a feeling she cannot place and may have wrong. Nothing else at EP20 changes here; the site belongs to EFD/EDS05. MAP VERIFICATION REQUIRED as there.
+
 ---
 
 # Act III review log (cross-package)
@@ -736,7 +742,7 @@ The draw is shut and the board balances. The three splices are cut out of the ma
 | ED-2, ED-5, ED-8, ED-12 | The fused worker is a containment; the Speaker only writes; the boss is a construct and no named character is fought; Volkhari at the board decide what is said. |
 | FT-04, FT-05, D-C03, D-C06 | Perfect Flame as a heading only; no Titan staged, named or identified; no precursor name; no roster; the margin hand never named; no Volkhari counted or located. |
 | Revelation Ledger | Owns no R-id; seeds R18 and R19 only; R15 and R16 untouched; no reveal repeated. |
-| Reserved decisions | `[D-E2]` at one board beat and two barks; `[D-S1]` on the letter, one Council line and two barks; `[ALLOCATION]` on one tag, two attendance lines and one bark; swap notes §14.1–§14.2. |
+| Reserved decisions | D-E2 (ruled 2026-11-15): one `freed` board beat and one bark; aided reads removed. D-S1 (ruled 2026-11-15): letter, one Council line and two barks, untagged swap notes removed. D-EL (ruled 2026-11-15): one optional Elyndra line (`EGA-B9.13`). `[ALLOCATION]` on one tag, two attendance lines and one bark. ED-3: Iven Calder not shown or spoken. |
 | Region flags | Reads `EH_TELLS`, `EH_COLD_WARD`, `EH_CURRICULUM`, `EH_HOLLOW_TRUTH`, `EH_THALAN`, `EH_SPEAKER`, `EH_UNBURNT`, `EH_GUILDS`, `EH_COMMONS`, `TAS_ACCOUNT`; sets `EH_HEAT_MAIN`, `EH_ACCOUNT`, `EH_STANDING`. One writer each. |
 | Quest items | `EGA_junction_book` only; Emberholt 5 of 5. |
 | Map | Bible POIs only (EP02, EP15, EP26, EP01, EP28, EP25, EP23, EP11, EP03) and [NEW] sub-sites inside them; relative placement; MAP VERIFICATION REQUIRED on every place table and both sightlines; nothing past the far doors or beyond the city is placed. |
@@ -745,3 +751,4 @@ The draw is shut and the board balances. The three splices are cut out of the ma
 | Size | One quest and its epilogue; Acts I–II conventions referenced, not restated. |
 | Independent review, 2026-11-14 | Walkthrough of all four `EH_THALAN` × `EH_SPEAKER` combinations and both custody choices: every step reachable, every read flag has one earlier writer (Act I/II and bible §9.1; side-quest and Thornfell reads optional), three states only. **Fixed:** the bleed house was Surging during EGA-E3 and the hook (now drops to Working when the wheel turns; U9 swaps on hold); Stage A added to Surging zones; the vent-count position contradiction; Veska's crew "stays in U8" contradicted `S05`–`S06`; `S02` predicate made order-safe; the Sentinel's 65% floor now has an objective counter and a Veska call and is stated as an ordinary phase gate, and Lock-step has a solo recovery window (CDR-6); Asera's chalk line counted the held ("one", D-C06) and now names and counts nobody; Yorven's "Remnant" line no longer cites the lower-forge night (his limit; `kept` branch; D-C03) and Odile's chalk says "below Cinderwall"; the `told` plaque line no longer claims heat was drawn from the lower forge (contradicted the book); §9.2 reader cells corrected. **Checked, unchanged:** Ralenne Kharveil sits on the Council (Factions §5); R18/R19 seeds only, no Titan word in any paper, no precursor name or roster; ED-8; no release wording. |
 | Batch 4 encounter alignment review, 2026-11-15 | Applied Enemies file PE-8 (EGA-E2 beetle burst 1.5 s; EGA-E3 inherits). `EGA_FROST` is now set by the quest's activation: the Cinderwall entry auto-starts EH-M6 at `S00_frost` and accepting `EGA-D1` completes S00, so no flag is set while the quest is Inactive (Integration EQ-04; EDI-3 still lets the Director prefer an offer). Post-story heat (§E.3, §E.9, §12) uses the Zones §6.1 default table, since completion releases every pin (Zones EZ-6, Integration EQ-05); the warden's round's beetles and rats are world pockets EW-01 and EW-02. No id, step or line changed. |
+| Emberholt character rulings, 2026-11-15 | **D-E2:** `EH_THALAN` read as `freed` only; aided board beat (`EGA-D11.55`–`.58`), Asera's aided half of `EGA-B9.12`, `EAC_ACCOUNT_PROMISED` read and §9.5 aided row removed; §14 items 1, 12, 13 and §14.1 resolved; §E.7 reduced to Dahrin's line. **D-S1:** header, B3 canon row, letter step, mystery row and §14 item 2 now state both halves; §14.2 swap note removed; tags replaced. **D-EL:** one optional aftermath bark `EGA-B9.13` at EP20 (§14.3, §E.12): unsure "older than ember" R19 seed, no name or identification. |

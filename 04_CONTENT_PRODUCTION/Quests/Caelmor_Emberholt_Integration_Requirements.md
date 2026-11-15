@@ -8,7 +8,7 @@
 
 **Director rulings (binding):** `Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md`. CDR-1: every enemy is defeated at 0 HP. CDR-2: ranged is first-class and never required. CDR-3: Emberholt is an internal milestone of the complete game. CDR-4: standard RPG systems over bespoke simulation. CDR-6: every quest is completable solo; a partner is credited only when their own active step consumes the event; shared state is a presentation fallback only. The cross-region runtime consequences are collected in **`Quests/Caelmor_Combat_Ranged_Release_Engineering_Handoff.md`**. That handoff defines one small quest on-defeat hook (`creature.scripted_defeat`) for the named story exceptions SX-1 to SX-3. **Emberholt uses none of it.** The bible says "SX proposal: none"; no Emberholt step listens for a scripted defeat.
 
-**Open Director decisions the requirements depend on:** D-E2 (Thalan), D-S1 (the Speaker), `[INITIATE]` (reserved name string), `[ALLOCATION]` (EH-M1's cause, ED-1), ED-7 (EH-M3 gate), ED-15 (ECC), ED-20 (EH-M2 prerequisite), C14.2 (Red-Lit annex placement). Rows that change with a ruling carry the tag.
+**Director rulings applied (2026-11-15):** D-E2 (Thalan freed, the only outcome), D-S1 (the Speaker idealist and manipulator; `EH_SPEAKER` stays a player outcome), ED-3 (the initiate is Iven Calder; a fixed string), D-EL (Elyndra a living seer met in EFD and consulted in EH-M5; standard NPC dialogue, no new requirement). **Open Director decisions the requirements depend on:** `[ALLOCATION]` (EH-M1's cause, ED-1), ED-7 (EH-M3 gate), ED-15 (ECC), ED-20 (EH-M2 prerequisite), C14.2 (Red-Lit annex placement). Rows that change with a ruling carry the tag.
 
 **Sources read (current state, 2026-11-15):** the bible (`Quests/Caelmor_Emberholt_Narrative_Production_Bible.md`: §3, §4, §6, §7.4–7.5, §9.1–9.4, §10, §10.1, §11, §11.1, §11.2); `Caelmor_Emberholt_Main_Act_I.md` (EH-M1 to EH-M3: items, place tables, step tables, flag tables, respawn and logout rows, integration tables, §C12), `_Act_II.md` (EH-M4, EH-M5: the same), `_Act_III.md` (EH-M6: §4, §5, §6, §7, §9, §11, §12, §14, §E); the four side-quest files `Caelmor_Emberholt_Side_Quests_Unburnt_and_Names.md`, `_Commons_and_Wards.md`, `_Work_and_Skills.md`, `_Combat_and_Discovery.md` (flag tables, integration tables, file summaries); `Quests/Caelmor_Mire_Integration_Requirements.md` (format and shared ids); `Quests/Caelmor_Mire_Playability_Audit.md` (§1, §4); `UNITY/README.md` (what the playable build does today); the engineering handoff above.
 
@@ -86,8 +86,8 @@ Each requirement appears once. "Consumers" lists every quest and step that depen
 |---|---|---|---|---|---|---|
 | EI-DG-01 | Conditions on region, quest-local and cross-region flags | Standard | SCE | All | = LM | MUST |
 | EI-DG-02 | **Show evidence**: options gated by held items, carry-states and read flags | Standard | SCE | EEH, EGH, EAC, ESS, EGA, ECC, ENW | = TH | MUST |
-| EI-DG-03 | **Reserved strings** `[INITIATE]` (ED-3), `[D-E2]` and `[D-S1]` lines, `[ALLOCATION]` lines | Content keys that can be swapped or cut without code | SCE | EGH S07 (journal copy), EAC, ESS, EGA, ETB | EH only (data only) | MUST |
-| EI-DG-04 | **Journal documents** that persist after the quest | The `[INITIATE]` line copied at EGH S07; the Speaker's letter (§E.8) | UI | EGH, EGA | = MR | SHOULD |
+| EI-DG-03 | **Reserved strings** `[ALLOCATION]` lines (ED-3, D-E2 and D-S1 ruled 2026-11-15: the initiate's name is the fixed string Iven Calder, and the D-E2 / D-S1 swap lines are resolved, so they no longer need swappable keys) | Content keys that can be swapped or cut without code | SCE | EH-M1 and its readers (`[ALLOCATION]`) | EH only (data only) | MUST |
+| EI-DG-04 | **Journal documents** that persist after the quest | The chamber-roll line naming Iven Calder (ED-3, ruled 2026-11-15) copied at EGH S07, with no gloss on its significance; the Speaker's letter (§E.8) | UI | EGH, EGA | = MR | SHOULD |
 | EI-DG-05 | **Timed optional line on staying** | EAC `EAC-D11.35` plays if the player stays ~5 s | SE | EAC | ext LM | COULD. Fallback: a dialogue option |
 
 ### 2.4 Heat: the readable system (bible §9.2, §11.1)
@@ -144,7 +144,7 @@ Each requirement appears once. "Consumers" lists every quest and step that depen
 
 | Id | Requirement | Minimum viable form | Owner | Consumers | Shared? | Priority |
 |---|---|---|---|---|---|---|
-| EI-ES-01 | **Escort-follow**: NPC at walking pace, stops when the player stops, never targetable, hazard-immune; rejoins at the respawn point after death | Thalan (`freed` `[D-E2]`, R2 → shaft foot only; he never climbs the shaft); Myr (EAD, slow walk); Lenk (ESH, follow down the stair) | SE, NPC | EAC S07; EAD; ESH S04 | = MR MI-ES-01 | MUST. Escort is not yet demonstrated in Sol's build. Fallback: the NPC appears at each stop (presentation) |
+| EI-ES-01 | **Escort-follow**: NPC at walking pace, stops when the player stops, never targetable, hazard-immune; rejoins at the respawn point after death | Thalan (freed, the only outcome, D-E2 ruled 2026-11-15; R2 → shaft foot only; he never climbs the shaft); Myr (EAD, slow walk); Lenk (ESH, follow down the stair) | SE, NPC | EAC S07; EAD; ESH S04 | = MR MI-ES-01 | MUST. Escort is not yet demonstrated in Sol's build. Fallback: the NPC appears at each stop (presentation) |
 | EI-ES-02 | **Non-combatant NPCs going ahead to niches** | EGA crew (Veska, line hands) stop in niches, never targeted, never engaged; Thennek leads the descent; Asera at heat rooms | SE, NPC | EGA S02–S06; EAC S03 | ext MR | SHOULD. Fallback: they are placed at each niche as the player arrives |
 | EI-ES-03 | **NPC vertical movement** | Thennek down the shaft ladders, Asera up them, Lenk on the stair | SE, NPC | EAC; ESH | ext MR MI-AG-02 | SHOULD. Fallback: fade and reappear at the next landing or the foot |
 
@@ -153,9 +153,9 @@ Each requirement appears once. "Consumers" lists every quest and step that depen
 | Id | Item | Quest | Gained | Removed | Notes |
 |---|---|---|---|---|---|
 | EI-IT-01 | `EEH_ledger` | EH-M2 | `S05` (academy annex) | `S07`: to Idra (`guild`) or Yorven's strongbox (`evidence`) | Reappears in EH-M6 and CV-M4 from the strongbox (EQ-09) |
-| EI-IT-02 | `EGH_roll` | EH-M3 | `S07` (signed out at the Red-Lit annex) | `S08`: Kaevren returns it under seal | `[INITIATE]` line copied to the journal at `S07` |
+| EI-IT-02 | `EGH_roll` | EH-M3 | `S07` (signed out at the Red-Lit annex) | `S08`: Kaevren returns it under seal | The Iven Calder line (ED-3) copied to the journal at `S07` |
 | EI-IT-03 | `EAC_sigil_stone` | EH-M4 | `S01` (Dahrin) | `S07` (`EAC-D11.30`) | Read as a held item in `S04`–`S05` (EI-SG-01) |
-| EI-IT-04 | `ESS_letters` | EH-M5 | `S03` (letter-case) | `S06`: to Kaevren (`challenged`) or the sealed inquiry (`exposed`) `[D-S1]` | — |
+| EI-IT-04 | `ESS_letters` | EH-M5 | `S03` (letter-case) | `S06`: to Kaevren (`challenged`) or the sealed inquiry (`exposed`) (D-S1, ruled 2026-11-15) | — |
 | EI-IT-05 | `EGA_junction_book` | EH-M6 | `S04` (fitter's cabin; read there, required) | `S08`: to the guild strongroom (`guilds`) or the Council's book (`council`) | — |
 
 All five: not droppable, not sellable, removed by quest step (= MR MI-IT-01). Verified: five ids, the same spelling in the bible §9.4 and every act; no side quest uses a quest item. **MUST.**
@@ -260,8 +260,8 @@ Also from the Enemies file: the 5-hostile set-piece cap (C-12, EI-EN-09 below), 
 | `EH_COLD_WARD` `[ALLOCATION]` | posted / settled | EH-M1 S07 | EWA, EFC; EH-M6 tally board | Yes |
 | `EH_CURRICULUM` | guild / evidence | EH-M2 S07 | ETB; EFC; ESS L2 notice; EH-M6; CV-M4 | Yes |
 | `EH_HOLLOW_TRUTH` | told / kept | EH-M3 S08 | Memorial props; ENW; EFC; EDS09; EH-M6; CV-M1 | Yes |
-| `EH_THALAN` `[D-E2]` | freed / aided | EH-M4 S06 | ETB; EH-M6 board; §E.7; CV-M4 | Yes |
-| `EH_SPEAKER` `[D-S1]` | challenged / exposed | EH-M5 S06 | Terrace barks; EGT barks; EH-M6 letter; CV-M4 | Yes |
+| `EH_THALAN` (D-E2, ruled 2026-11-15) | freed (one value) | EH-M4 S06 | ETB; EH-M6 board; §E.7; CV-M4 (none branches) | Yes |
+| `EH_SPEAKER` (D-S1, ruled 2026-11-15) | challenged / exposed | EH-M5 S06 | Terrace barks; EGT barks; EH-M6 letter; CV-M4 | Yes |
 | `EH_HEAT_MAIN` | terraces / ward / forges | EH-M6 S03 (relief wheel) | EH-M6 S07, S08; §E; barks | Yes |
 | `EH_ACCOUNT` | guilds / council | EH-M6 S08 | §E.2, §E.5; CV-M1 | Yes |
 | `EH_STANDING` | bool | EH-M6 (completion) | Master commissions; §E.9; CV-M1 gate | Yes |
@@ -400,7 +400,9 @@ Stated in the same words in Zones §14. The Enemies file governs every combat va
 | EDI-3 | **EH-M6 auto-activation** (EQ-04) | EH-M6 now auto-starts on Cinderwall entry (Act III); Director may still prefer an offer. |
 | EDI-4 | **The EH-M4 shaft** (EQ-10, Zones ZQ-5) | If Sol cannot provide any ladder form in the milestone, including the per-flight climb interaction fallback: accept a steep spiral ramp in place of the ladders (same beats), or hold EH-M4. |
 
-Open rulings already tracked elsewhere and not repeated: D-E2, D-S1, `[INITIATE]`, ED-1, ED-7, ED-15, ED-20.
+Open rulings already tracked elsewhere and not repeated: ED-1, ED-7, ED-15, ED-20. (D-E2, D-S1 and ED-3 were ruled 2026-11-15 and are closed here.)
+
+**Simplification from the 2026-11-15 rulings (for Sol and the SCE; no change to ids).** `EH_THALAN` keeps its id but now has one value, `freed`, written at EAC completion; no reader branches on it, so it need not be stored as a two-valued enum (a bool, or a derived read of `emberholt.main.04` Completed, satisfies every reader). The `aided` content keys, the aid-in-place choice node and its variant props (Asera's chair in §E.7) are dropped. The `[INITIATE]` swappable key (EI-DG-03) is dropped for a fixed string. No test needs a second Thalan outcome.
 
 ---
 
@@ -438,7 +440,7 @@ These are written against the packages. None has been run. Each is a pass/fail s
 | EAT-15 | Co-op credit | Two partners at different steps: a defeat credits only a partner whose active step consumes it; one partner's keep watch, pin, frost night or stage does not change the other's step or hazard state (or the pair is gated per EQ-12 F4/F5). Runs only with a co-op build; not a solo prerequisite (CDR-6). |
 | EAT-16 | Sigil fallback | With EI-SG-01 not built, EH-M4 S04 completes using per-door inspects. |
 | EAT-17 | Respawn | Death in each main-quest step returns the player to the Zones §6.6 respawn point for that step (or the region fallback in EI-QS-06), outside any Surging zone. |
-| EAT-18 | Escort | With `freed` `[D-E2]`, Thalan follows from R2 to the shaft foot and leaves by the side cut; he never needs to climb. |
+| EAT-18 | Escort | With `freed` (the only outcome; D-E2, ruled 2026-11-15), Thalan follows from R2 to the shaft foot and leaves by the side cut; he never needs to climb. |
 | EAT-19 | Displacement | No push, pull or knock-back ends inside a slag pool, on a primed plate, across a level change or off an edge (EK-7). |
 | EAT-20 | Cap | No set piece ever has more than 5 hostiles standing at once, including re-forms and add-spawns (Enemies C-12). |
 
@@ -451,3 +453,4 @@ These are written against the packages. None has been run. Each is a pass/fail s
 | **Authoring (2026-11-15)** | Written against the bible, Acts I–III and the four side-quest files as reviewed on 2026-11-14 and 2026-11-15, with the Mire integration file as the format model and the Mire playability audit for lessons. Verified: the fourteen region flags and their single writers; the five quest items and their gain and removal steps; the fifteen named presentation events; every cross-region read; the bible's two runtime needs (EI-HT-01, EI-PR-01) and the two possible needs the acts flagged (EI-QS-08, EI-SG-01). No SX; no on-defeat hook. No package was edited. |
 | **Aligned with the Enemies file (2026-11-15)** | The Enemies file landed while this file was being finished and was read the same day. Changes here: §5.1 EK-1 to EK-11 restate Enemies C-2, C-3, C-4, C-6, C-7, C-10, C-12, C-13 and I-19, I-21, I-22 with a crosswalk (the hazard floor now uses C-2's wording; heat values from C-3; EK-11 added). §2.18 maps the Enemies runtime rows R-1 to R-14 to this register and adds EI-EN-09 (cap). EI-AG-02 and EQ-13 now count the raised enemy positions from Enemies §12 (Zones ML-34 to ML-36). EAT-04 rewritten; EAT-19 and EAT-20 added. **Still to watch:** Enemies Q1 (the unplaced Ashfall revenant) changes creature data only; the 15 package edits it lists (PE-1 to PE-15) change no flag, item, step or id used here. |
 | **Batch 4 zones/integration review, 2026-11-15** | Independent review against the bible, Acts I–III, the four side-quest files, CDR-1 to CDR-6 (§3.7), the engineering handoff and `UNITY/README.md` (read-only). **Verified:** fourteen `EH_*` flags, one writer each, against every package; five quest items with matching gain and removal steps; fifteen presentation events, all present in the packages and none missing; no SX and no on-defeat hook; every co-op row optional assistance, none a solo prerequisite. **Fixed:** §1.1 Flood Kitchen wording (loft stairs unfinished; crates have flat access markers); the MUST convention now states that a MUST with no named fallback is met by the standard shared capability; fallbacks added to EI-QS-04, EI-HT-02, EI-HT-07, EI-HT-08, EI-KW-01, EI-KW-02; EI-CA-03 kept as a request to Sol with a standard fallback (niche-touching pads) and two options (exclude ticks; pause the segment instead of cancelling); EI-AG-02 recounted (37 rows; 13 required; 7 raised positions) with the new Zones fallbacks for ML-09 and ML-17, EQ-10, EQ-11 and EDI-4 updated to match; EQ-12's meanwhile rule reworded as a recommendation for Sol; EAT-15 labelled co-op-build only; §7.2 headed "authored, not run". EQ-01 resolved (bible aligned to Act II). **From the encounter review, verified in the packages and applied:** EQ-03, EQ-04, EQ-05, EQ-09 resolved in package; EI-QS-04 and EDI-3 now state EH-M6's auto-start; EQ-13 notes Enemies §12 (stairs and ladders are reach only once Zones §5A builds them; EAC-E3 frame follows onto rim or gallery); §E.9 relies on world pockets EW-01 and EW-02. **Left for the Director:** EDI-1, EDI-2, EDI-3, EDI-4 stay questions. |
+| **Emberholt character rulings, 2026-11-15** | D-E2: `EH_THALAN` row one value (`freed`); EI-ES-01, EAT-18 de-tagged; simplification note under §6 (enum, `aided` keys, chair variant and swap keys dropped). D-S1: EI-IT-04 and the flag row de-tagged. ED-3: `[INITIATE]` → Iven Calder in EI-DG-03/04, EI-IT-02 (journal copy carries no gloss). D-EL: noted in the header; no new requirement. No EK/EAT row tested both Thalan outcomes. |

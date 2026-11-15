@@ -129,7 +129,7 @@ The precursor's name and exact transition into the formal Remnant remain unresol
 ### The Glassed Hollow catastrophe
 
 - The wartime precursor exploits Volkhari knowledge and captives in an attempt to amplify embercraft beyond safe limits.
-- A precursor initiate, not a Volkhari, becomes the **Fire Titan**.
+- A precursor initiate, **Iven Calder**, not a Volkhari, becomes the **Fire Titan**. *(name approved ED-3, 2026-11-15)*
 - Kaelith Veyr'un escapes and remains free.
 - Thalan Veyr is the sole known current captive.
 - Other Volkhari survivors exist, but their number and community form remain unresolved.

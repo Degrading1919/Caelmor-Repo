@@ -127,7 +127,7 @@ Emberholt weaponized and amplified fire practice during the Great War. The city'
 
 At the Glassed Hollow, an unnamed wartime precursor to the later formal Remnant exploited Volkhari knowledge and captives in an amplification ritual.
 
-- A precursor initiate, not a Volkhari, became the **Fire Titan**.
+- A precursor initiate, **Iven Calder**, not a Volkhari, became the **Fire Titan**. *(name approved ED-3, 2026-11-15)*
 - Kaelith Veyr'un escaped and remains free.
 - Thalan Veyr is the sole known current captive.
 - Other Volkhari survivors exist, but their exact number and community form remain unresolved.

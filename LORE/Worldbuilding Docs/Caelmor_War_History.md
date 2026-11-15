@@ -93,7 +93,7 @@ The wartime precursor used secrecy, coercion, and stolen knowledge to push fire 
 
 At the Glassed Hollow, the wartime precursor exploited Volkhari knowledge and captives in an amplification ritual.
 
-- A precursor initiate, not a Volkhari, became the **Fire Titan**.
+- A precursor initiate, **Iven Calder**, not a Volkhari, became the **Fire Titan**. *(name approved ED-3, 2026-11-15)*
 - Kaelith Veyr'un escaped and remains free.
 - Thalan Veyr is the sole known current captive.
 - Other Volkhari survivors exist, but their exact number and community form remain unresolved.

@@ -6,7 +6,7 @@
 
 **Companion file:** `04_CONTENT_PRODUCTION/Dialogue & Narrative/Caelmor_Emberholt_Main_Act_I_Dialogue.md`. It holds cast notes, every dialogue node referenced here (`ECW-`, `EEH-`, `EGH-` prefixes), barks, inspect texts and the full text of every document (the valve order, the cut protest page, the tally board, the assessment ledger, the crew's day-book, the Deepbrand work order, the chamber roll, the second sheet, the inspection register and Seredh's memory-stone account).
 
-**Decision tags used in this package.** `[ALLOCATION]` (ED-1; bible §3.1 swap layer): every node naming the ceremonies-office valve order, Sarne Ardane, Ralenne's scene or the EH-M1 choice wording. `[ED-20]`: the EH-M2 prerequisite and the "warden's hand" offer line. `[ED-7]`: the EH-M3 cross-region gate and its variant lines. `[ED-3]` / `[INITIATE]`: the chamber roll's one legible line; the name string is reserved for the Director and appears nowhere else. `[ED-12]`: protected Volkhari testimony (Maeryn's heritage, Seredh's stone). `[ED-2]`: the containment interaction used for Tavi's flare (a child, never a combatant). `[ED-14]`: the reversed broadsheet phrase. `[D-E2]` and `[D-S1]` do **not** apply to Act I: no Act I node depends on Thalan's fate or on what the Speaker knows. Act I never names Thalan and never shows him; the second sheet's "one elder taken in the purge after; held below" is past tense and says nothing about now (R10 belongs to EH-M4).
+**Decision tags used in this package.** `[ALLOCATION]` (ED-1; bible §3.1 swap layer): every node naming the ceremonies-office valve order, Sarne Ardane, Ralenne's scene or the EH-M1 choice wording. `[ED-20]`: the EH-M2 prerequisite and the "warden's hand" offer line. `[ED-7]`: the EH-M3 cross-region gate and its variant lines. (ED-3, ruled 2026-11-15): the chamber roll's one legible line names the initiate, **Iven Calder**; the name appears in the roll document and the journal entry only, is spoken nowhere in Emberholt, and its significance is not explained before CV-M4 (R19). `[ED-12]`: protected Volkhari testimony (Maeryn's heritage, Seredh's stone). `[ED-2]`: the containment interaction used for Tavi's flare (a child, never a combatant). `[ED-14]`: the reversed broadsheet phrase. D-E2 and D-S1 (both ruled 2026-11-15) do **not** apply to Act I: no Act I node depends on Thalan's fate or on what the Speaker knows. Act I never names Thalan and never shows him; the second sheet's "one elder taken in the purge after; held below" is past tense and says nothing about now (R10 belongs to EH-M4).
 
 ---
 
@@ -51,7 +51,7 @@ Act I invents no other `EH_` flag. Quest-local flags use `ECW_`, `EEH_` and `EGH
 | Item | Quest | Fate |
 |---|---|---|
 | `EEH_ledger` (the Molten Stair assessment ledger, one bound volume) | EH-M2 | Taken from the academy annex in `S05`. Removed at `S07`: with `guild`, given to Idra Callow for the teachers' guild; with `evidence`, locked in Yorven Khelt's strongbox at Cinderwall (in EH-M6 Yorven lays it on the tally board's ledge as a world prop, inspect only, and returns it to the strongbox; it is never granted again as an item; CV-M4 custody from there). Not droppable, not sellable. |
-| `EGH_roll` (the chamber roll and the second sheet in their wrapper, one bundle) | EH-M3 | Signed out under Kaevren's warrant from the Red-Lit annex in `S07` (Marenya Silvertide writes the signing-out in the shelf book). Removed at `S08`: Kaevren returns it to the annex shelf under his seal in both outcomes. The `[INITIATE]` line is copied into the player's journal at `S07` and stays there (ED-3). Not droppable, not sellable. |
+| `EGH_roll` (the chamber roll and the second sheet in their wrapper, one bundle) | EH-M3 | Signed out under Kaevren's warrant from the Red-Lit annex in `S07` (Marenya Silvertide writes the signing-out in the shelf book). Removed at `S08`: Kaevren returns it to the annex shelf under his seal in both outcomes. The Iven Calder line is copied into the player's journal at `S07` and stays there (ED-3, ruled 2026-11-15). Not droppable, not sellable. |
 
 **Act I total: 2 of 5.** Everything else is a carry-state object (the cut protest page, Ralenne's reopening order, the seat ring, the test lens, the crew's tags, the Deepbrand work order), an inspectable world object (tells, the valve book, the tally board, the slate, Maeryn's mending book, the circle, the inspection register), or knowledge carried in flags.
 
@@ -785,7 +785,7 @@ Tuned for **Advanced identity** (ED-10).
 ---
 ---
 
-# Part C: EH-M3 The Hollow That Should Not Burn (`EGH`) `[ED-7]` `[ED-3]`
+# Part C: EH-M3 The Hollow That Should Not Burn (`EGH`) `[ED-7]` (ED-3, ruled 2026-11-15)
 
 ## C1. The quest in one paragraph
 
@@ -818,7 +818,7 @@ Tuned for **Advanced identity** (ED-10).
 | Flarecap: glows bright orange near ember veins; miners use it to locate unstable pockets | Dossier §XIII | [CANON] |
 | Ashfall Revenants (resonance constructs from trauma); the Embermind Echo (hallucinations of past fires; a hazard) | Dossier §XII; bible §2.4, §10 | [CANON] |
 | The Unburnt Boy legend; children chalk him | Dossier §X, §XV.4 | [CANON] |
-| The chamber roll, the second sheet, "Keep. Do not copy.", the inspection register, the lost crew as a Deepbrand contract crew, the circle site's details | Bible §2.2, §2.3, ED-3, §6.1 | [PROPOSAL — DIRECTOR] ED-3; [NEW] detail |
+| The chamber roll, the second sheet, "Keep. Do not copy.", the inspection register, the lost crew as a Deepbrand contract crew, the circle site's details | Bible §2.2, §2.3, ED-3, §6.1 | ED-3 ruled 2026-11-15 (the name, Iven Calder); [NEW] detail |
 | Lorcan Tolk; the crew tags and tag board; the patrol tells on the glass; the niche ridge; the crew's bleed valve; the Red-Lit annex's lower stacks; signing out under a warrant | This package | [NEW] |
 
 ## C4. Quest summary card
@@ -837,10 +837,10 @@ Tuned for **Advanced identity** (ED-10).
 | Descent, traversal, reading the site, mining or the drain, archive, choice | ~50% |
 | Skills touched | Melee or Ranged (either; neither required); Mining ~[GD: mid] (optional; Darven's drain route is the time-cost alternative); heat gear from *Soot and Hide* recommended, never required |
 | Choices | Who hears the Hollow truth first (`EH_HOLLOW_TRUTH`); cut the fall or take the drain (`EGH_FALL`, flag only); compare with Shatterfall or the banners (optional variant line) |
-| Unlocks | `EH_HOLLOW_TRUTH`; the `[INITIATE]` journal line; Darven's Gallery to the crew camp as a revisitable site (under Kaevren's post); EAD, ENW; EMS (with ETB); EH-M4 |
+| Unlocks | `EH_HOLLOW_TRUTH`; the Iven Calder journal line; Darven's Gallery to the crew camp as a revisitable site (under Kaevren's post); EAD, ENW; EMS (with ETB); EH-M4 |
 | **Anchor** (contract) | Deepbrand's lost crew (Hesper, Darven, the Tolks); the Red-Lit archive (Marenya) |
 | **World-truth row** (contract) | **H18** (the Glassed Hollow ended Emberholt's war; FT-02d), H09 |
-| **Revelation role** (contract) | **Owns R09.** Seeds R16 (the inspection register's struck "visiting witness" column) and R19 (the roll's one legible line `[INITIATE]`; the warm handprint). Never states Thalan lives (R10 is EH-M4's). |
+| **Revelation role** (contract) | **Owns R09.** Seeds R16 (the inspection register's struck "visiting witness" column) and R19 (the roll's one legible line, Iven Calder, unexplained until CV-M4; the warm handprint). Never states Thalan lives (R10 is EH-M4's). |
 | **Recurring evidence** (contract) | Three independent custodians: the **circle site** (S06; read in place: frame, rim rings, outward flow, niche ridge), the **chamber roll and second sheet** (`EGH_roll`; Marenya's shelf-marks and the signing-out in her shelf book), and **Seredh's memory-stone** (one Volkhari account; protected testimony). Darven guides; his "breathing walls" are never evidence. The roll's one line recurs in CV-M4 (the binding). |
 | **State compliance** (contract) | Inactive / Active / Completed. The Mining hook has a slower route; the pocket valve's progress is kept; the Echo never harms. Choice recorded in `EH_HOLLOW_TRUTH`. Resume at the persisted step with a hook at the Cooling House (Hesper), the Red Door clinic (Darven), the crew camp (Darven) or the annex (Marenya). |
 | **Combat compliance** (contract) | Deepbrand Crews (human) and Ashfall Revenant glasswalkers defeated at 0 HP. The Hollow Revenant (elite) and its glasswalkers re-form on each pulse of the heat pocket while it pulses (place condition, never health); bleeding the pocket at the crew's own valve ends the condition, and any enemy still standing fights on to 0 HP. Melee or ranged; ranged viable everywhere and never required. Solo-tuned boss. No SX. No defeated enemy gives testimony. |
@@ -970,13 +970,13 @@ When all four are read, sets `EGH_SITE_READ`. There is no forge here: no anvil, 
 **Yorven** (`EGH-D7`, after the fight and the four inspects). Footsteps from the far side: **Yorven Khelt** comes out of the bypass tunnel mouth (H5) with a miner's lamp. "Deepbrand's doubled the mouth behind you. You're not going back that way." He looks at the circle a long time. "That's not a forge. I've worked forges." He has known this tunnel since he was a miner and never followed it to the end; it comes up under the Red-Lit Scribes' stacks ("Everything that burned in the lower forge went up to the Red-Lit after. Everybody knows that. Nobody says it."). He will take the player out that way. Variant (`EH_CURRICULUM` = evidence): "Your school book's in my strongbox. This'll want a box of its own." Darven, he says, will be brought up with the crew by Kaevren's detail; Yorven sent word.
 **Verbs:** fight, bleed, inspect, follow.
 
-### Beat 7: The Roll (`S07_roll`) `[INITIATE]` `[ED-3]` `[ED-12]`
+### Beat 7: The Roll (`S07_roll`) (ED-3, ruled 2026-11-15) `[ED-12]`
 **Objective:** *Read the record of the night.* (Sub-objectives; the roll and provenance in the annex first, then the stone.)
 The bypass tunnel comes up through an iron door into the **lower stacks** of the Red-Lit annex (A1). Yorven waits at the door: "I've never come up this far. I never wanted to know what was on the shelves."
 | Sub-objective | Where | What the player does | Sets |
 |---|---|---|---|
 | **The shelf** | A2 | One shelf's cage door stands open. Tucked in it, a **note** in a neat hand: *Shelf-marks are on the spine. The rest is yours to read.* (`EGH-I12`). A copy of Kaevren's warrant is pinned under it, stamped received. In a flat oilcloth box: the roll, the second sheet, and their **wrapper**. | — |
-| **The roll** | A3 | Read the **chamber roll** at the reading table (document; required). Its heading seal has been **cut away** with a knife, long ago. Under a line of script (*Admitted, the night of the circle*) every line is glassed into a milky ridge, unreadable, **except one**: `[INITIATE]`, *placed at the centre.* The lower half of the sheet is glassed, with a hard **ridge** along one edge. | `EGH_ROLL_READ` |
+| **The roll** | A3 | Read the **chamber roll** at the reading table (document; required). Its heading seal has been **cut away** with a knife, long ago. Under a line of script (*Admitted, the night of the circle*) every line is glassed into a milky ridge, unreadable, **except one**: *Iven Calder, placed at the centre.* The lower half of the sheet is glassed, with a hard **ridge** along one edge. | `EGH_ROLL_READ` |
 | **The match** | A3 | **Compare** the roll's ridge with what the player read at the niche (dialogue-gated inspect, requires `EGH_SITE_READ`): the ridge runs where a sheet would lie against the niche's lip, the unglazed rectangle is the size of the folded roll. The roll was in the niche when the glass ran. | `EGH_NICHE_MATCH` |
 | **The second sheet** | A3 | Read the **second sheet** (document; required), same hand, written after the night: what came out of the centre "went down and was not stopped"; "Volkhari held for the circle. One child unaccounted: the door"; "shift above (lower forge): not ours; not entered"; "the circle to have closed the war before the thaw: it has closed it"; "one elder taken in the purge after; held below". | `EGH_SHEET_READ` |
 | **The wrapper** | A3 | Inspect the **wrapper** (required): in a different hand and later ink, *Keep. Do not copy.* Nobody signed it. | `EGH_KEEP_SEEN` |
@@ -984,7 +984,7 @@ The bypass tunnel comes up through an iron door into the **lower stacks** of the
 | *The inspection register* (optional; R16 seed) | A2 | A bound **inspection register** on the same shelf (`EGH-I14`): *Inspection of works, lower forge and below.* A column headed **visiting witness** has a small mark in each row on the older pages, a different mark each time. For the last years before the war it is empty, and on the last page that has it, the heading is struck through with one line. Marenya, if asked: "That column was struck before my time. I keep what's struck too." | `EGH_INSPECTION_GAP_SEEN` |
 | **The stone** | Maeryn's back room (C5.5) | Leaving the annex by its street door (Yorven: "Maeryn Vall sent word to the Cooling House. Somebody wants to put a stone in your hand. I didn't ask who."), the player goes to **Maeryn's shop**; she takes them through the curtain without a word. **Seredh Embercarver** (`EGH-D9`) unwraps a basalt **memory-stone** and lets the player hold it (interaction): it carries one carved account in its maker's voice (document text in the dialogue file). The maker is never named and the stone is never said to be Seredh's own memory, so no Volkhari anchor gains a wartime role or age (Part 4 ledger). It agrees with the second sheet on **a child at the door**, and says the one at the centre "was theirs, not ours". Then his terms `[ED-12]`: "You may say a Volkhari stone agrees on the child at the door. Not whose stone. Not whose hands. Not where you heard it." | `EGH_STONE_HEARD` |
 
-On `EGH_ROLL_READ` the journal records the legible line as a **Journal entry** (`EGH_INITIATE_JOURNAL`): *On the chamber roll, one line not glassed: [INITIATE], placed at the centre.* The name string is reserved for the Director (ED-3) and is **spoken nowhere** in Emberholt; no NPC reads it aloud, and the player has no option to say it.
+On `EGH_ROLL_READ` the journal records the legible line as a **Journal entry** (`EGH_INITIATE_JOURNAL`): *On the chamber roll, one line not glassed: Iven Calder, placed at the centre.* The name is Iven Calder (ED-3, ruled 2026-11-15) and is **spoken nowhere** in Emberholt; no NPC reads it aloud, connects it to anything, or explains it, and the player has no option to say it. Its significance waits for CV-M4 (R19).
 The step completes when the roll, the match, the sheet, the wrapper, provenance and the stone are all set.
 **Verbs:** read, compare, sign out, hold, listen.
 
@@ -1059,7 +1059,7 @@ Tuned for **Expert identity** (ED-10). Exact levels are Gameplay Designer calls.
 | Element | Spec |
 |---|---|
 | **Object** | One sheet of heavy paper, folded once. Top: a rectangle cut out with a knife, edges old and brown. Below: a line of script. Then lines that the glass ran over, each a milky raised ridge, letters visible under them and unreadable. One line clear. The lower half glassed thick, with a hard ridge along its edge. |
-| **Reading** | Document view (dialogue file). The legible line shows the Director's reserved name string, in production `[INITIATE]`, and *placed at the centre*. |
+| **Reading** | Document view (dialogue file). The legible line shows the name **Iven Calder** (ED-3, ruled 2026-11-15) and *placed at the centre*. |
 | **The match** | At the reading table, with `EGH_SITE_READ`, a comparison option: the player lays the roll's ridge against the drawing they have in memory of the niche lip (presented as an inspect line, not a minigame): "The ridge runs straight along one edge and turns at the corner, like the lip of the niche. The glass ran up against this sheet where it lay." |
 | **Never** | No other line is legible under any light or magnifier. The heading cannot be recovered. Nobody reads the name aloud. |
 
@@ -1076,7 +1076,7 @@ Tuned for **Expert identity** (ED-10). Exact levels are Gameplay Designer calls.
 | `S04_crew_camp` | Find the crew. | Warrant cloth laid + tags taken + day-book read + work order taken + `EGH-D6.20` end | Yes | Sets `EGH_DAYBOOK_READ`, `EGH_WORK_ORDER`; carry-state tags and order |
 | `S05_hollow` | Cross the Hollow. | Enter the circle rim volume (H4) | Yes | Echo cycle on (`hollow.echo`). Handprint event (`hollow.handprint`) on passing H3 sets `EGH_HANDPRINT_SEEN`. EGH-E2 on the crossing |
 | `S06_circle` | Read the circle. | EGH-E3 all defeated + valve bled (3 segments) + four site inspects + `EGH-D7` end | Yes | Sets `EGH_POCKET_BLED`, **`EGH_SITE_READ`** (R09 site evidence) |
-| `S07_roll` | Read the record of the night. | `EGH_ROLL_READ` + `EGH_NICHE_MATCH` + `EGH_SHEET_READ` + `EGH_KEEP_SEEN` + `EGH_PROVENANCE` + `EGH_STONE_HEARD` | Yes | Item **`EGH_roll`** gained at `EGH-D8.32`; the sign-out (`EGH-D8.30`) needs `EGH_PROVENANCE` and the four table readings (`EGH-D8.36` otherwise). Journal line `[INITIATE]` on `EGH_ROLL_READ` (`EGH_INITIATE_JOURNAL`). `EGH_INSPECTION_GAP_SEEN` optional |
+| `S07_roll` | Read the record of the night. | `EGH_ROLL_READ` + `EGH_NICHE_MATCH` + `EGH_SHEET_READ` + `EGH_KEEP_SEEN` + `EGH_PROVENANCE` + `EGH_STONE_HEARD` | Yes | Item **`EGH_roll`** gained at `EGH-D8.32`; the sign-out (`EGH-D8.30`) needs `EGH_PROVENANCE` and the four table readings (`EGH-D8.36` otherwise). Journal line (Iven Calder) on `EGH_ROLL_READ` (`EGH_INITIATE_JOURNAL`). `EGH_INSPECTION_GAP_SEEN` optional |
 | `S08_truth` | Decide who hears it first. | Tags given + choice in `EGH-D10` + chalk event (`told`) or Kaevren's first line (`kept`) | Yes | Sets **`EH_HOLLOW_TRUTH`**. `EGH_ORDER_SHOWN` optional. Item `EGH_roll` removed (Kaevren returns it under seal). Quest → **Completed** |
 
 ### C9.2 Flags
@@ -1095,7 +1095,7 @@ Tuned for **Expert identity** (ED-10). Exact levels are Gameplay Designer calls.
 | `EGH_POCKET_BLED` | Valve channel complete | Post-quest circle state | — |
 | `EGH_SITE_READ` | Four site inspects | `EGH-I13` comparison option | R09 guaranteed path (with the roll) |
 | `EGH_ROLL_READ` | Roll document read | Journal | — |
-| `EGH_INITIATE_JOURNAL` | `EGH_ROLL_READ` | — | **CV-M4** (the binding needs the name) `[INITIATE]` |
+| `EGH_INITIATE_JOURNAL` | `EGH_ROLL_READ` | — | **CV-M4** (the binding needs the name) (ED-3, ruled 2026-11-15) |
 | `EGH_NICHE_MATCH` | `EGH-I13` | `S07` | — |
 | `EGH_SHEET_READ` | Second sheet read | `EGH-D10.40` | EH-M4 (Dahrin: "You've read 'held below'. I was below.") |
 | `EGH_KEEP_SEEN` | Wrapper inspect | `EGH-D8.20` option | EH-M6 (the junction book's annotation hand) |
@@ -1111,7 +1111,7 @@ Tuned for **Expert identity** (ED-10). Exact levels are Gameplay Designer calls.
 | **Told** (`EH_HOLLOW_TRUTH = told`) | The Cooling House hears it from the warden's hand; Hesper chalks *NOT A COLLAPSE* on the plaque; Cinderwall argues. The roll goes back to the annex under Kaevren's seal. | The city hears an account built on one roll, one site and one Volkhari stone the player cannot name; some say the warden's hand made it up (barks); Deepbrand knows who was below. Seredh's terms hold: nobody hears whose stone. | ENW: Imra Brask reads the chalk. EH-M6: Hesper Tolk and Darven stand together at the tally board. CV-M1: the Hollow truth is already in Cinderwall's mouth. |
 | **Kept** (`= kept`) | Hesper hears that her brother died in a pocket on a Deepbrand cut. Kaevren and Marenya hold the rest until the evidence is complete. Kaevren opens a second ledger. | Hesper buries her brother without knowing what he was cutting toward; the plaque stays clean; the ward goes on saying "forge collapse". | EH-M6: Kaevren comes to the tally board with his second ledger. CV-M1: the Hollow truth enters the record through Kaevren's custody. |
 
-**Neither is wrong.** Both bury the crew with dimmed flames, both return the roll to its shelf with a custodian's seal, both keep the `[INITIATE]` line in the player's journal, and both keep Seredh's stone unnamed.
+**Neither is wrong.** Both bury the crew with dimmed flames, both return the roll to its shelf with a custodian's seal, both keep the Iven Calder line in the player's journal, and both keep Seredh's stone unnamed.
 
 ## C10. Rewards and unlocks
 
@@ -1119,7 +1119,7 @@ Tuned for **Expert identity** (ED-10). Exact levels are Gameplay Designer calls.
 |---|---|---|
 | Flarecap reading | Knowledge | Orange cap means a live vein; follow the pale. No region flag (`EGH_FLARECAP` local). |
 | Darven's Gallery | Access | Revisitable to the crew camp and the outer glass under Kaevren's post; the circle is quiet. |
-| The `[INITIATE]` journal line | Knowledge | Kept for CV-M4 (ED-3). |
+| The Iven Calder journal line | Knowledge | Kept for CV-M4 (ED-3, ruled 2026-11-15). |
 | Skill XP | Action only [GD] | Melee or Ranged at defeat; Mining if done personally. No lump quest XP. |
 | Small payment | Currency | None from Hesper (she has nothing); Kaevren pays the warrant-holder's fee at `S08` (small). Economy tuning [GD]. |
 | Side-quest unlocks | Story | EAD, ENW; EMS (with ETB) |
@@ -1154,7 +1154,7 @@ Tuned for **Expert identity** (ED-10). Exact levels are Gameplay Designer calls.
 | **Quest-pinned heat states** | Systems | G4 by cap; G6 Working; H2 vents per tell; circle Surging until the valve is bled, then Working. |
 | **Channels with kept progress** | Systems | Seal plate (2), fall (3), valve (3). |
 | **Document views and comparison inspect** | UI / dialogue | The roll, the second sheet, the wrapper, the day-book, the work order, the register; the niche comparison as a flag-gated inspect line. |
-| **Journal entry with reserved string** | Quest data | The `[INITIATE]` line stored as a journal entry; the string is a reserved localisation key until the Director rules (ED-3). |
+| **Journal entry with the initiate's name** | Quest data | The Iven Calder line stored as a journal entry (ED-3, ruled 2026-11-15); a standard localised string. |
 | **Carry-state objects** | Systems | Warrant, tags, work order. |
 | **Memorial prop** | Art / world state | The EP11 plaque with a chalk overlay per player on `told`. |
 | **Barricade prop** | World state | Deepbrand barricade at the mouth during `S06`–`S07` (non-interactive). |
@@ -1178,7 +1178,7 @@ Tuned for **Expert identity** (ED-10). Exact levels are Gameplay Designer calls.
 
 ## C14. Open decisions
 
-1. **ED-3 `[INITIATE]`:** the name string is reserved; production uses the key. Every node that would show it (`EGH` roll document, journal entry) is tagged. Nobody speaks it.
+1. **ED-3, ruled 2026-11-15:** the initiate is **Iven Calder**. The name shows only in the `EGH` roll document and the journal entry. Nobody speaks it, and nothing in Emberholt explains it (R19 is CV-M4's).
 2. **The Red-Lit annex [NEW sub-site]:** the bible names "the Red-Lit annex" without a POI or placement. This package makes it a restricted annex reached from below by Yorven's old miners' bypass, with a lower stacks door, Marenya's desk and a shelf book. It is not a numbered POI; the zone package (Batch 4) may fold it into a district or give it a label. MAP VERIFICATION REQUIRED.
 3. **Marenya present and signing the roll out [NEW]:** the bible has the shelf left open with her note; this package also puts her at her desk to vouch for shelf-marks (custodian, never a truth source; Part 4 ledger) and to sign the box out under the warrant, which is what lets `EGH_roll` be a carried item and gives the record a chain of custody. If the Director prefers the roll read in place only, `EGH_roll` becomes a read-in-place record, the budget drops to 1 in Act I, and `S08` has the player describe it instead of carrying it; nothing else changes. Her reason for leaving the cage open is never given (canon: she is considering leaking select pieces).
 4. **Seredh in Maeryn's back room [NEW placement]:** the bible lists Seredh's memory-stone in `S07` without a place. Maeryn's back room is her canon safehouse and EH-M4's meeting place. Seredh's terms ("a Volkhari stone agrees... not whose") are the ED-12 consent, fixed rather than chosen; `EH_HOLLOW_TRUTH = told` respects them.
@@ -1221,8 +1221,8 @@ Tuned for **Expert identity** (ED-10). Exact levels are Gameplay Designer calls.
 | Canon anchors | Yorven: Cinderwall, old tunnels, surge suspicion; never knows the precursor's work or the draw. Ralenne: sincere, unaware, never a villain. Theryn: stewardship; knows "below" is Deepbrand; never asked; hides one child (unexplained); never exposed or targetable. Selice: the glass, not motives. Maeryn: heritage never forced. Darven: his crew and the cut only. Kaevren: warrant, intercept, ledger. Marenya: shelf-marks only. Seredh: one account, on his terms. The Cinder Rat: glimpsed. |
 | Evidence rule | Every finding comes from a living witness, a record or an object read in place: the slate, the valve book, the stub, the cut page, the clerk, Sarne; the lens and Selice, the ledger, Theryn; the tags, the day-book, the work order, the circle site, the roll with provenance, the sheet, the stone. The sob, the lanterns, the Echo and the handprint are phenomena and are never used as proof. No defeated enemy speaks or carries a document. |
 | Revelation limits | R09 owned and paid in EH-M3. R10 not leaked. R15 planted (broadsheet, unattributed). R16 seeded (register; optional). R18 seeded (lens, column, transfers). R19 seeded (sob, roll line, "went down and was not stopped", handprint); the Titan never met or described. R11, R12 untouched. |
-| Reserved decisions | `[INITIATE]` reserved and unspoken; D-E2 and D-S1 not touched; origin-neutral address; no "invaders", no compass direction; C07 untouched; D-C03 kept. |
-| Tagging | `[ALLOCATION]` on EH-M1 `S03`, `S04`, `S07` and their nodes; `[ED-20]` on EH-M2's offer; `[ED-7]` on EH-M3's gate and variants; `[ED-3]`/`[INITIATE]` on the roll and journal; `[ED-12]` on Maeryn's window and Seredh; `[ED-14]` on the broadsheet. |
+| Reserved decisions | Iven Calder (ED-3, ruled 2026-11-15) shown, unspoken and unexplained; D-E2 and D-S1 (ruled 2026-11-15) not touched; origin-neutral address; no "invaders", no compass direction; C07 untouched; D-C03 kept. |
+| Tagging | `[ALLOCATION]` on EH-M1 `S03`, `S04`, `S07` and their nodes; `[ED-20]` on EH-M2's offer; `[ED-7]` on EH-M3's gate and variants; ED-3 (ruled 2026-11-15) on the roll and journal; `[ED-12]` on Maeryn's window and Seredh; `[ED-14]` on the broadsheet. |
 | No fail, no soft-lock | Surging zones can be waited out; red cocks scald and refuse; containment cannot fail; the test re-runs; the fall has a drain; the Echo never blocks; valve and channel progress is kept; every choice completes. |
 | No cutscenes | The hood flare, the sob, the row of lanterns, the lanterns dimming, the grey visitor, the Echo, the handprint and the chalk play under the player camera. |
 | Solo / co-op (CDR-6) | Every step, boss and reward solo; partner credit only from a partner's own active step; personal choices and flags per player; shared presentation never gates progress. |
@@ -1236,3 +1236,4 @@ Tuned for **Expert identity** (ED-10). Exact levels are Gameplay Designer calls.
 | Runtime | No new runtime need except a possible compound OR prerequisite for EH-M3, with a derived-flag fallback (§C12). |
 | Independent review, 2026-11-14 | Authored walkthrough of EH-M1 to EH-M3 against the brief, CDR-1 to CDR-6, the Revelation Ledger, the bible and the Part 4 ledger (nothing was played; no build exists). **High:** the second sheet named the Titan in a precursor record beside the roll's legible name (R19's identification, owned by CV-M4) and said those held were "not recoverable" (a fate bible §2.2 withholds); both phrases cut, fuller wording held as a Director question (§C14.5). **Medium:** the crew's tags existed twice (mouth board and a camp peg); Darven now lifts them at the mouth (`EGH-D4.03`) and hands them over at the camp. The annex sign-out now waits for the four table readings (`EGH-D8.36`), the street door readmits the warrant-holder, and `S07` respawn is defined outside the annex, so no annex-only reading can be left owing. Seredh's stone was described as his own wartime memory, which would give a Volkhari anchor a war role the Part 4 ledger leaves unstated; its maker is now unnamed. **Low:** `EGH_PROVENANCE` and `EGH_STONE_HEARD` set-by ids aligned with the dialogue; EH-M2 `evidence` path given a Yorven resume hook and logout point; an Echo colour-grade line and a "materials" word removed (no art prescription); release-scope phrase removed from the status line. **Renames:** Haskel to Lorcan (near Lowmark's Haskin, Thornfell's Kol Hask); Brin to Wendel (homophone of Lowmark's Bryn). Checked and holding: EH-M3 gate (EH-M2 and TF-M3 or MR-M2, visible locked entry); R09 site evidence (`EGH_SITE_READ`, four required inspects) plus roll with provenance; every enemy to 0 HP, no SX, no non-combatant targetable; ranged viable, never required; solo-completable with per-player credit and choices; D-E2, D-S1, `[INITIATE]`, origins and C07 untouched; every listed bible deviation recorded in A14 or C14. Size not cut: no redundancy found whose removal would lower contradiction risk more than it risked dropping required content. |
 | Batch 4 encounter alignment review, 2026-11-15 | Applied Enemies file PE-1 to PE-5 (crawler Butt and beetle burst 1.5 s; "beaten" for "downed"; Deepbrand Hook and Shield bash 1.5 s, the bash pending GD G1) and PE-20 (EGH-E3 Call fills only up to the five-standing cap). Header: the stale `TH_STANDING` / `MR_STANDING` read removed (Integration EQ-03). `EEH_ledger`: the "reappears" wording replaced; EH-M6 shows it as a board prop and it is never re-granted, so the item budget stays at five (Integration EQ-09). PE-16 (the plain revenant on the crossing) not applied: Director Q1. No id, step, flag or line changed. |
+| Emberholt character rulings, 2026-11-15 | ED-3: `[INITIATE]` replaced by **Iven Calder** in the decision-tag note, Part C heading, source table, unlocks, revelation role, Beat 7, `EGH_INITIATE_JOURNAL` entry, document reading row, flag table, outcome note, knowledge table, runtime table, C14 item 1 and compliance rows; name stays spoken nowhere in Emberholt and unexplained until CV-M4 (R19). D-E2/D-S1 tag wording updated; Act I still depends on neither. No Elyndra or Speaker seeds in Act I. |

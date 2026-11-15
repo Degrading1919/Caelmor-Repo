@@ -52,7 +52,7 @@ The event:
 - The unnamed wartime precursor to the later Remnant exploited Volkhari knowledge and captives in an amplification experiment
 - The ritual spiraled out of control when emotional overload triggered an ember surge  
 - Heat flash-melted chamber walls into obsidian-like glass  
-- A precursor initiate, not a Volkhari, became the **Fire Titan**
+- A precursor initiate, **Iven Calder**, not a Volkhari, became the **Fire Titan** *(name approved ED-3, 2026-11-15)*
 - Kaelith Veyr’un, the **Unburnt Boy**, escaped and remains free
 - Thalan Veyr is the sole known current captive
 - Other Volkhari survivors exist, but their exact population and community form remain unresolved
@@ -519,6 +519,8 @@ His hidden beliefs:
 - “A disciplined army of embercrafters will reshape Caelmor.”  
 - “The world fears fire. Let it.”  
 
+*[Approved D-S1, 2026-11-15]* He is both idealist and manipulator. He genuinely believes in Emberholt’s discipline, progress and strength, and he enjoys and pursues personal authority. He knowingly takes part in institutional manipulation and accepts harmful compromises for ambition. The Remnant also influences him through planted dreams that exploit those convictions; this does not absolve him. He is neither an innocent puppet nor an omniscient mastermind, and he does not understand the full endgame or Perfect Flame.
+
 ### **3. Emberguard Schools**
 
 Train:
@@ -808,7 +810,7 @@ Quest elements:
 - Deciphering Remnant sigils  
 - Navigating heat-pressure traps  
 - Finding the imprisoned Volkhari  
-- Deciding whether to free, aid, or end their suffering  
+- Freeing Thalan Veyr with his own explicit consent; liberation is the only outcome *(approved D-E2, 2026-11-15)*. He survives to give testimony later; his freedom does not end the Remnant threat or the Fire Titan’s suffering.
 
 This quest is emotionally heavy, morally complex, and central to Emberholt’s hidden truth.
 
@@ -823,6 +825,7 @@ Quest elements:
 - Discover hidden Remnant correspondences  
 - Witness emotional manipulation in rallies  
 - Uncover his personal ambition
+- Consult Elyndra the Cinderseer, whose visions can warn and point but never prove *(approved D-EL, 2026-11-15)*
 - Decide whether to publicly challenge him
 
 ---

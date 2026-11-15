@@ -4,7 +4,7 @@
 
 **Director rulings (binding):** `Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md`. For places this means the following. Every enemy is defeated at 0 HP (CDR-1), so no arena needs tied-prisoner props, downed-state space or break-off lanes, and Emberholt has no SX entry. Ranged is first-class and never required (CDR-2): no arena offers the player a firing spot the enemy cannot reach, and no enemy firing spot may be unreachable by a melee player (§14 EZ-7). Emberholt is an internal milestone of the complete game (CDR-3). Ordinary RPG systems are preferred over simulation (CDR-4, ED-6): heat is ordinary hazard volumes with periodic damage, timed vents and safe niches; there is no heat or temperature meter, no stamina, no stealth or detection. Every quest completes solo (CDR-6); co-op presentation never decides another player's walkable ground, step or credit.
 
-**Open Director decisions the places depend on:** D-E2 (Thalan; both branches kept), D-S1 (the Speaker; both layers kept), `[INITIATE]` (reserved name), C14.2 (placement of the Red-Lit annex), ED-7 (EH-M3 gate), ED-15 (ECC). Places that change if a ruling changes are tagged `[D-E2]`, `[D-S1]` or `[C14.2]`.
+**Director rulings applied (2026-11-15):** D-E2 (Thalan freed, the only outcome; places carry the `freed` state only), D-S1 (the Speaker idealist and manipulator, also dream-seeded; no place changes), ED-3 (the initiate is Iven Calder; no place shows the name beyond the EH-M3 chamber roll), D-EL (Elyndra the Cinderseer a living seer met at EP20; no geography changed). **Open Director decisions the places depend on:** C14.2 (placement of the Red-Lit annex), ED-7 (EH-M3 gate), ED-15 (ECC). Places that change if a ruling changes are tagged `[C14.2]`.
 
 **Sources:** bible §4.1–4.2 (EP01–EP28, route order), §6, §7.4–7.5 (EME01–EME10, EDS01–EDS10), §9.1–9.4, §10, §10.1, §11, §11.1–11.2; Act I (EH-M1 ECW, EH-M2 EEH, EH-M3 EGH) place tables, step tables, respawn and logout rows and integration tables; Act II (EH-M4 EAC, EH-M5 ESS) the same; Act III (EH-M6 EGA) §5, §6, §7, §9, §11, §12 and §E; the place and integration tables of the four side-quest files (`Quests/Caelmor_Emberholt_Side_Quests_*.md`); `Zones/Caelmor_Mire_POI_and_Zone_Requirements.md` (format); `Quests/Caelmor_Mire_Playability_Audit.md` (§1, §4: lessons on multi-level dependencies, pins and co-op); Sol's tool documentation: `UNITY/README.md`, `UNITY/ARCHITECTURE_PIPELINE.md`, `CODE/Scripts/architectural_generator/README.md`, `REGIONAL_GRAMMAR.md`, `FUNCTIONAL_PROGRAMS.md`, `WORLD_ARCHITECTURAL_LANGUAGES.md`, `CODE/Scripts/terrain_generation/README.md`, `MEDIA/Materials/README.md`.
 
@@ -162,7 +162,7 @@ Each table states function, relative placement, sub-areas, quest uses, state by 
 | Placement | Between Cinderwall and the Emberhold District; the Molten Stair rises from it. |
 | Areas | C1 tannery; C2/C4 Maeryn's shop (EH-M4 respawn; keep-watch stool from S02); C5 back room (EH-M3 C5.5, EH-M4, ETB); Maeryn's yard C [NEW] with Seredh's lean-to (EST, EMS); C3 Selice's workshop (EH-M2, ETB, EGT); Sabeth's bench (EGT); Cinderweave courtyard (ETB, EME09). |
 | Quest uses | EH-M2, EH-M3, EH-M4 (start and end), EST, ETB, EMS, EGT, EWQ; Brisa's commission. |
-| State by flag | §E.7 by `EH_THALAN` `[D-E2]`; Asera in the third chair (aided). |
+| State by flag | §E.7 by `EH_THALAN = freed` (D-E2, ruled 2026-11-15): one line (Dahrin). The aided variant (Asera in the third chair) is removed. |
 | Required props | Stove, curtain, counter, tuning nails (ETB), keep-watch stool. |
 | Traversal | At grade. |
 | Map | MAP VERIFICATION REQUIRED. A short walk to Cinderwall's Cooling House (EH-M4 goes shop → Cooling House → Undercroft). |
@@ -278,7 +278,7 @@ Each table states function, relative placement, sub-areas, quest uses, state by 
 |---|---|
 | Function | The deep works below the bypass: Deepbrand's landing, the plate run, the sigil gallery. |
 | Placement | Reached from deeper junctions by the old mining shaft below Yorven's bypass (U6). |
-| Areas | **K1 shaft head** (winch frame, Thennek); **K2 shaft: ladders and three landings** (vents on the second landing ~10 s; flarecap); shaft foot niche (respawn S03–S04; the D-E2 hand-off scene); K3 Warrens' mouth (Deepbrand landing; **crossbow on a raised step reached by three stairs**); K4 plate run with K4a/K4b heat rooms pinned Surging until Asera's three breaths or a keep watch, then Working; **K5 sigil gallery: three stacked tiers with stairs between them**, three doors each, read with `EAC_sigil_stone`. |
+| Areas | **K1 shaft head** (winch frame, Thennek); **K2 shaft: ladders and three landings** (vents on the second landing ~10 s; flarecap); shaft foot niche (respawn S03–S04; Thalan's hand-off scene, freed, D-E2 ruled 2026-11-15); K3 Warrens' mouth (Deepbrand landing; **crossbow on a raised step reached by three stairs**); K4 plate run with K4a/K4b heat rooms pinned Surging until Asera's three breaths or a keep watch, then Working; **K5 sigil gallery: three stacked tiers with stairs between them**, three doors each, read with `EAC_sigil_stone`. |
 | Quest uses | EH-M4 S03–S07; EDS08 (map seed). |
 | State by flag | Post-quest: gate and shaft walkable to the mouth; barricade beyond. |
 | Traversal | **ML-09 shaft (required both ways); ML-10 crossbow step; ML-11 tiers.** |
@@ -314,7 +314,7 @@ Each table states function, relative placement, sub-areas, quest uses, state by 
 | Function | The proving ring and Thalan's frame. |
 | Placement | In the Warrens beyond the sigil gallery. |
 | Areas | **R1 proving ring**: sunken; eight sectors; **raised gallery with stair and crossbow**; edge niche respawn S05–S07. **R2 chamber**: frame (~40 s cycle), fitter's hearth and anvil (`EAC_FRAME_WORK`). **R3 vault above, seen and never reached**; emberlight moves along its rim (`warrens.emberlight`). |
-| Quest uses | EH-M4 S05–S07 `[D-E2]`. |
+| Quest uses | EH-M4 S05–S07 (Thalan freed; D-E2, ruled 2026-11-15). |
 | Traversal | ML-12 ring gallery; the ring's sunken floor is reached by ramps, never by a drop. R3 is a presentation volume only. |
 | Map | MAP VERIFICATION REQUIRED: R3 visible from R2 or R1. |
 
@@ -346,13 +346,14 @@ Each table states function, relative placement, sub-areas, quest uses, state by 
 | Quest uses | EAD. |
 | Traversal | T3 lip has an edge blocker. |
 
-### EP20 Elyndra's Vent Shrine [CANON myth] (Shrine)
+### EP20 Elyndra's Vent Shrine [CANON] (Shrine)
 
 | Row | Requirement |
 |---|---|
-| Function | Offerings at a vent that never cools. |
+| Function | Offerings at a vent that never cools. Where **Elyndra the Cinderseer** lives in near-isolation [CANON, character file §37; D-EL, ruled 2026-11-15]; the pilgrims' story of the flame stays belief. |
 | Areas | E1 shrine terrace; **E2 steps down to the lower terrace and the railed pit** (pinned Surging during the dusk vigil song); **E3 trapdoor to a cellar and a stooped crawl** (Working); E4 throat. |
-| Quest uses | EFD, EDS05. |
+| Quest uses | EFD (Elyndra's first meeting, at E1's far edge after the vigil, `EFD-D2.15`–`.18`), EDS05; EH-M5 (ESS) consult with Elyndra here (D-EL role item 2; the act file owns its staging). |
+| NPCs | Ivett Quarle (keeper); pilgrims; Elyndra, seldom present on E1 and non-targetable. Where she sleeps is not placed and adds no area (no geography change; MAP VERIFICATION REQUIRED). |
 | Traversal | ML-25 steps; ML-26 trapdoor. Flares hover no higher than ~2 m above the pit lip (Enemies I-19). |
 | Map | MAP VERIFICATION REQUIRED: from beyond the upper terrace's front edge there is **no line of sight into the pit**, so no attack point there goes unanswered (Enemies I-23). |
 
@@ -385,7 +386,7 @@ Each table states function, relative placement, sub-areas, quest uses, state by 
 | Function | Civic terraces where the High Kindling is rehearsed. |
 | Areas | T1 (EH-M1 order trail; EH-M5); T2 crowd floor (three brazier rows; **Speaker's balcony above, out of reach**); T3 service yard with the vent grille and the Rat's duct mouth. |
 | Quest uses | EH-M1, EH-M5 (dusk pins S01, S05), §E.4. |
-| State by flag | `EH_HEAT_MAIN = terraces` (two brazier rows roped off), `EH_SPEAKER` `[D-S1]` crowd breath. |
+| State by flag | `EH_HEAT_MAIN = terraces` (two brazier rows roped off), `EH_SPEAKER` crowd breath (D-S1, ruled 2026-11-15; player outcome unchanged). |
 | Traversal | Terraces are broad level platforms joined by ramps or wide NavMesh-sloped steps; ML-19 balcony is presentation only. |
 | Map | MAP VERIFICATION REQUIRED: visible from the W3 stair head for §E variant "terraces" (or omit, Act III). |
 
@@ -480,7 +481,7 @@ Each table states function, relative placement, sub-areas, quest uses, state by 
 | **ML-06** | EP07 H4 circle "sunk a step below" | EH-M3 S06 (Hollow Revenant) | A step change inside an arena | Required arena | Ramped lip all round; no push crosses it. |
 | **ML-07** | Bypass H5 → Red-Lit annex A1 ("comes up" into the lower stacks) `[C14.2]` | EH-M3 S06–S07 | The annex stacked above the bypass | **Required** | The bypass rises on a sloped floor to the lower stacks door at grade; the annex street door (S07) already gives a second way in and out. |
 | **ML-08** | EP15 U3 short way / long way | EH-M1 S01 | Two routes at one level | No | — |
-| **ML-09** | EP13 K1–K2 shaft, "ladders and three landings" | **EH-M4 S03 (down) and S07 (up)**; post-quest access | Repeated ladder descents and ascents; NPCs (Thennek first down, Asera up) also on the ladders | **Required, both ways** | **Content fallback for Sol (added in review, 2026-11-15; no geography or story change):** the head, the three landings and the foot are each authored as a small flat walkable floor, and each ladder is a standard "Climb down" / "Climb up" interaction whose completion places the player at the next floor's anchor. This uses only the placement-to-a-named-anchor that respawn already needs (EI-QS-06; the shaft foot is already a respawn anchor), so it adds no runtime need. The second-landing vent and flarecap stay on their landing floor. Other options for Sol: off-mesh ladder links; or a zone transition at the head and the foot (the landings become a short presentation). NPC ladder traversal is not demonstrated: Thennek and Asera fade and reappear at the next landing or at the foot (presentation). Thalan never climbs: in both `[D-E2]` branches he leaves by Thennek's side cut at the shaft foot. |
+| **ML-09** | EP13 K1–K2 shaft, "ladders and three landings" | **EH-M4 S03 (down) and S07 (up)**; post-quest access | Repeated ladder descents and ascents; NPCs (Thennek first down, Asera up) also on the ladders | **Required, both ways** | **Content fallback for Sol (added in review, 2026-11-15; no geography or story change):** the head, the three landings and the foot are each authored as a small flat walkable floor, and each ladder is a standard "Climb down" / "Climb up" interaction whose completion places the player at the next floor's anchor. This uses only the placement-to-a-named-anchor that respawn already needs (EI-QS-06; the shaft foot is already a respawn anchor), so it adds no runtime need. The second-landing vent and flarecap stay on their landing floor. Other options for Sol: off-mesh ladder links; or a zone transition at the head and the foot (the landings become a short presentation). NPC ladder traversal is not demonstrated: Thennek and Asera fade and reappear at the next landing or at the foot (presentation). Thalan never climbs: freed (D-E2, ruled 2026-11-15; the only outcome), he leaves by Thennek's side cut at the shaft foot. |
 | **ML-10** | EP13 K3 "crossbow on a raised step reached by three stairs" | EH-M4 S03 | A raised enemy position | Enemy position | Three-stair step becomes a ramp, or (no build needed) the crossbow stands at grade at the step's foot behind the landing brazier, which already gives cover both ways; telegraphs unchanged. A melee player must be able to reach it (§14 EZ-7). |
 | **ML-11** | EP13 K5 sigil gallery, three stacked tiers with stairs between | **EH-M4 S04** | Stacked tiers | **Required** | Flatten into three successive chambers in a line, each with three doors; the stone reading is unchanged. Thalan's `freed` escort (S07) then walks back through flat chambers. |
 | **ML-12** | EP16 R1 raised gallery with stair and crossbow | EH-M4 S05–S06 | A raised enemy position over a sunken ring | Enemy position | Gallery reached by a ramp, or the crossbow position at the ring rim at grade. The sunken ring is entered by ramps. |
@@ -576,8 +577,8 @@ A player may pass a stage without bleeding it; the zone stays Surging, and the r
 | `EH_HEAT_MAIN` | EP02 (§E.1), EP23 (§E.4), EP25 (§E.5), U8 slate | Props, boards, barks; the hood tell stays Working |
 | `EH_ACCOUNT` | EP26 (§E.2), EP28 H2, EP25 F2 | Board copy, readings |
 | `EH_HOLLOW_TRUTH` | EP11 plaque, EP01 Marshal's ledger (§E.6) | Chalk, ledger line |
-| `EH_THALAN` `[D-E2]` | EP03 (§E.7) | One line; Asera's chair |
-| `EH_SPEAKER` `[D-S1]` | EP23 crowd breath | Bark set |
+| `EH_THALAN` = freed (D-E2, ruled 2026-11-15; one value) | EP03 (§E.7) | One line (Dahrin); Asera's chair variant removed |
+| `EH_SPEAKER` (D-S1, ruled 2026-11-15) | EP23 crowd breath | Bark set |
 | `EH_GUILDS` | EP25 Durnan | Barks |
 | `EH_COMMONS` | EP02 W2 cots in EH-M6 | Props |
 | `EH_HALF_NAME` | EP12, EP11 | Chalk |
@@ -595,7 +596,7 @@ EH-M3 mouth barricade during S06–S07 and the gallery walkable to G7 after; EH-
 | EH-M1 | Cooling House W2; U1 stair niche for S01–S02 and S05–S06 | By step (Act I list) |
 | EH-M2 | M1 practice court | By step (Act I list) |
 | EH-M3 | W2 for S00, S01, S08; G1 for S02–S04; G7 for S05–S06; A1 for S07, then W2 | By step (Act I list) |
-| EH-M4 | Maeryn's shop C4; shaft foot niche S03–S04; ring edge niche S05–S07; with `freed`, Thalan rejoins at the respawn point | By step; a logout during the walk out resumes at the ring edge niche |
+| EH-M4 | Maeryn's shop C4; shaft foot niche S03–S04; ring edge niche S05–S07; Thalan (freed, the only outcome) rejoins at the respawn point | By step; a logout during the walk out resumes at the ring edge niche |
 | EH-M5 | By step (Act II list) | By step |
 | EH-M6 | **W2 warming house for every step** | To the checkpoint (U1, U5, U7 second niche, U8, U10 door niche) |
 | Side quests | Named safe points per package | Dropped carry-state returns to its source |
@@ -814,3 +815,4 @@ Hunting is staged in the Molten Scars and around the steadings (no separate hunt
 | **Authoring (2026-11-15)** | Written against the bible, Acts I–III and the four side-quest files as reviewed on 2026-11-14 and 2026-11-15, the Mire Zones file (format) and the Mire playability audit (lessons). Every EP id, area code, heat pin, respawn point and multi-level step was taken from the packages; no package was edited. Sol's tool status was taken from the tools' own documentation. No material, colour or finish is named. |
 | **Aligned with the Enemies file (2026-11-15)** | The Enemies file landed while this file was being finished and was read the same day. Changes here: §14 EK-1 to EK-11 now restate Enemies C-2, C-3, C-4, C-6, C-7, C-10, C-12, C-13 and I-19, I-21, I-22 with a crosswalk (C-2's wording replaces this file's earlier hazard-floor recommendation; heat values from C-3 added; EK-11 added for the 5-hostile cap). §5A gained ML-34 to ML-36 (raised enemy positions from Enemies §12). EP20 gained the flare hover height (I-19) and the front-edge sightline (I-23). §2 lists the world pockets EW-01 to EW-05; §8.2 gained two exclusions. **Still to watch:** Enemies Q1 (the unplaced Ashfall revenant): option (b) would add a conditioned pocket on the Hollow's outer glass (EP07). The Enemies file treats stairs and ladders as walkable reach (§12); Zones EZ-7 records that this holds only once Zones §5A is built. |
 | **Batch 4 zones/integration review, 2026-11-15** | Independent review against the bible, Acts I–III, the four side-quest files, CDR-1 to CDR-6 (§3.7), the engineering handoff and Sol's tool documentation (read-only; nothing in Sol's environment was changed). **Fixed:** the R-6 route and EP04 cited ML-04 for the cellar ladder (it is ML-03; ML-04 is the stair); §0.1 misdescribed the Flood Kitchen (the loft stairs are unfinished and the crates have flat access markers; nothing was "replaced"); §0.1 stated interaction ladders as fact (now a proposal, Sol's call); a blank line split the §5A table; the §5A summary miscounted (37 rows; 13 required rows that assume a ladder, stair or stacked space; 6 slope-only routes). **Fallbacks added for Sol (no geography or story change):** ML-09 shaft as flat landings joined by a per-flight climb interaction using the respawn-anchor placement; ML-17 damper pulled from the floor with the fire hook (same channel and time cost, `ESS_DAMPER = climbed`); a general at-grade fallback for every raised enemy position; ML-10 crossbow at the step's foot behind the brazier; the thaw lines played at grade at W3 (§8.1, EZ-5), so no roof is needed; channels in heat on niche-touching pads, with exclusion or pause-not-cancel as options for Sol (§0.1, §10.3 Q4). **Canonical labels:** new §4.0 lists canonical area keys, aliases and homonyms (EZ-9 resolved). EZ-1 resolved (bible aligned to Act II). **Verified unchanged:** relative placement and MAP VERIFICATION REQUIRED throughout; no interregional route; no material, texture or colour prescribed (colour words quote package tell and flarecap wording for readability); Sol's tools described as their READMEs state. **Left for the Director:** ZQ-1 to ZQ-5 (EDI-1, EDI-2, EDI-4) stay questions. **Encounter-review alignment (same day):** EZ-6 and EZ-7 marked applied (Act III post-story heat uses the §6.1 defaults; Enemies §12 counts stairs and ladders as reach only once §5A builds them; the EAC-E3 warden-frame follows onto the rim or gallery); EW-02 extended to U3 after EH-M6. **Needed outside this file:** Act III W3 row (thaw-lines roof fallback). |
+| **Emberholt character rulings, 2026-11-15** | D-E2: every `EH_THALAN` reader now carries `freed` only (EP03 §E.7 aided chair removed; EP13 hand-off, EP16, ML-09, flag table, respawn table de-tagged). D-S1: EP23 and the flag table de-tagged; outcome unchanged. ED-3: `[INITIATE]` header entry replaced by Iven Calder. D-EL: EP20 `[CANON myth]` → `[CANON]`; Function, Quest uses and a new NPCs row record Elyndra living there and met in EFD; no area, traversal or map change. |

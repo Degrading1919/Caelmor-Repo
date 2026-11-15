@@ -78,7 +78,7 @@ Ranged is viable in every fight here and required in none. Hunting carries EOP; 
 - **Telegraphs.** Any attack that displaces the player is shown at least ~1.5 s before it lands (Act III's authored C-1 requirement, pending Gameplay Designer review). All telegraph times are in seconds.
 - **Non-combatants.** Every named person in this file, every pilgrim, tap-hand, herder, clerk and carter is never targetable and never engaged. **Myr Adalrek is never an enemy** (ED-2): his flare is a hazard zone ended by containment.
 - **Evidence.** Combat never reveals evidence and no defeated enemy speaks (rulings §3.2). Facts come from people who are alive and willing (Teodor, Ivett, Sereth, Dalia, Myr, Haelric, the carter, the rope-store keeper), records (the gate manifest, the rent book, the clinic book, notices, a survey sheet) and objects read in place (sign, wallows, a throat, a case). Phenomena (the larks, the flame going out, the vein's pulse, the cold case) identify nobody and prove nothing.
-- **Reserved decisions.** No node depends on D-E2, D-S1, `[INITIATE]`, D-3, C07 or the "invaders" wording; nothing here mentions Thalan, the Speaker's knowledge or the initiate. No Volkhari person appears; no Volkhari number or community form is stated (D-C06, ED-12). No precursor name, roster or count (D-C03). The Fire Titan is never named; the Ash-Clad Giant is a legend in chalk (EDS04). ECC's nodes are tagged `[ED-15]`.
+- **Reserved decisions.** No node depends on D-E2 or D-S1 (both ruled 2026-11-15), the initiate's name (Iven Calder, ED-3, ruled 2026-11-15), D-3, C07 or the "invaders" wording; nothing here mentions Thalan, the Speaker's knowledge or the initiate. Elyndra the Cinderseer appears once, in EFD (D-EL, ruled 2026-11-15). No Volkhari person appears; no Volkhari number or community form is stated (D-C06, ED-12). No precursor name, roster or count (D-C03). The Fire Titan is never named; the Ash-Clad Giant is a legend in chalk (EDS04). ECC's nodes are tagged `[ED-15]`.
 - **Time.** No calendar dates; the past is dated by events ("the cold-ward nights", "the winter the pens froze", "since the gate was rebuilt").
 - **No failure.** Inactive / Active / Completed only. Death respawns at each quest's named safe point with step, flags and kept progress intact; logout restores the last persisted step and returns a dropped carry-state object to its source; walking away keeps the quest Active with the named resume hook; missed moments (a dusk, a vigil) re-offer on the next keep watch.
 - **Co-op (CDR-6).** Each player's own quest state decides their own heat zones, wallows, caps, throat, gate, wrap, case and choices. Shared enemies credit a partner only when the partner's own active step consumes the defeat. A partner who leaves or is ahead never blocks the other. Shared prop presentation is a fallback only (bible §9; MI-CO-06 pattern). No step needs two players, and nothing is faster only with two.
@@ -421,21 +421,21 @@ EOP-D5.40 TEODOR: (pays from a goat-leather purse) "For the pens. The burners pu
 | Unlocks | The shrine's water-jar niche as a keep-watch point; the dusk vigil as a repeatable world moment; EDS05's reading variant |
 | **Anchor** (§7.1) | Shrine keepers and pilgrims (Ivett Quarle) |
 | **World-truth row** | H01 (belief only: a shrine's faith and custom; nothing reliable is claimed) |
-| **Revelation role** | None. Elyndra stays unproven (bible §7.2). |
+| **Revelation role** | None owned. **Elyndra the Cinderseer** [CANON, character file §37] is met here for the first time (D-EL role item 1, ruled 2026-11-15): after the vigil she gives one clue (the flame is choking, not breathing) and one optional warning that seeds R11/R12 without proof (`EFD-D2.15`–`.18`). The pilgrims' story of the flame stays belief. |
 | **Recurring evidence** | None. |
 | **State compliance** | Inactive / Active / Completed. No fail path: the vigil re-offers at every dusk; the Mining hook has a keeper alternative; the bead choice is props and lines only. |
 | **Combat compliance** | Cinder Wraiths (EFD-E1) at the vigil surge, **optional**: defeated at 0 HP, collapse into ash and re-form at each exhale only while the vigil surge lasts (bible §2.7). The song's end is a place rule ending the condition: forms already fighting carry on to 0 HP; forms fighting nobody collapse at the grate with it (not a drive-off). Melee or ranged; every spot a player can attack from is inside the Wraiths' reach. Solo; partner credit only via the partner's own active step. Pilgrims and Ivett are never targetable and never engaged. No SX. |
 
-**In one paragraph.** Out on the Ridge, past the steadings, a flame stands in a basalt bowl at **Elyndra's Vent Shrine**. **Ivett Quarle** has kept it for most of her life and has never found its fuel: no wick, no oil, no coal. Pilgrims call it Elyndra's flame and tell the old story of the fire that burned through a storm. Lately it gutters and then leaps, and the pilgrims say Elyndra is angry. Ivett does not want it explained away; she wants it looked at. The player tends the flame with her, stays for the dusk vigil, when the pilgrims sing and the flame climbs with every verse and Cinder Wraiths rise out of the pit below the terrace, and at the last verse the flame goes out for three heartbeats and lights itself again from underneath. Through the keeper's crawl the player finds the vent that feeds it, half-choked with fallen scree and years of offering stones that pilgrims pushed into the bowl, and an iron ring someone set in the rock long ago so the draught would rise straight. The player clears the throat (or holds the lamp while Ivett bars it out), and then Ivett asks whether the shrine should have a warden's bead in its lip.
+**In one paragraph.** Out on the Ridge, past the steadings, a flame stands in a basalt bowl at **Elyndra's Vent Shrine**. **Ivett Quarle** has kept it for most of her life and has never found its fuel: no wick, no oil, no coal. Pilgrims call it Elyndra's flame and tell the old story of the fire that burned through a storm. Lately it gutters and then leaps, and the pilgrims say Elyndra is angry. Ivett does not want it explained away; she wants it looked at. The player tends the flame with her, stays for the dusk vigil, when the pilgrims sing and the flame climbs with every verse and Cinder Wraiths rise out of the pit below the terrace, and at the last verse the flame goes out for three heartbeats and lights itself again from underneath. **Elyndra the Cinderseer**, who lives at the shrine in near-isolation and is seldom seen, is at the terrace's far edge that night; she tells the warden's hand the flame is choking, not breathing, owns that one of her own readings of it was wrong, and leaves. Through the keeper's crawl the player finds the vent that feeds it, half-choked with fallen scree and years of offering stones that pilgrims pushed into the bowl, and an iron ring someone set in the rock long ago so the draught would rise straight. The player clears the throat (or holds the lamp while Ivett bars it out), and then Ivett asks whether the shrine should have a warden's bead in its lip.
 
 ### EFD.2 Selection record and canon grounding
 
-Selected shape: tend → observe the vigil → the flame goes out and returns → find the vent (Mining or keeper) → a choice between telling and keeping, carried by one bead. Rejected: proving Elyndra false (the bible keeps belief as belief); a boss in the pit (the bible gives Wraiths at a surge, optional).
+Selected shape: tend → observe the vigil → the flame goes out and returns → find the vent (Mining or keeper) → a choice between telling and keeping, carried by one bead. Rejected: proving the pilgrims' story false (belief stays belief); Elyndra explaining or finding the throat for the player (she points; the player finds it); a boss in the pit (the bible gives Wraiths at a surge, optional).
 
 | Element | Source | Status |
 |---|---|---|
 | *The Flame That Would Not Die*: a fire that burned through a storm; truth: a vein surged with nearby emotion | Dossier §XV.1 | [CANON] legend; told here by pilgrims as the shrine's story, attributed, never confirmed |
-| Elyndra's Vent Shrine; Elyndra myth only, no appearance, no proof | Bible EP20, §5.1, §7.2, EDS05 | [CANON myth]; see EFD.14 item 1 on the canon character file |
+| Elyndra's Vent Shrine; Elyndra the Cinderseer, a living, unaligned seer who lives at a vent shrine in near-isolation, calm, unnervingly direct, speaks rarely, volcanic glass mask, can sometimes tell Hearthveil-seeded patterns from unmanipulated fragments | Character file §37; bible EP20, EDS05 | [CANON]; she appears once (`EFD-D2.15`–`.18`) (D-EL, ruled 2026-11-15); the flame's story stays [CANON myth] belief |
 | Ashvine garlands; emberbloom | Dossier §XIII | [CANON] |
 | Heat follows the room; tells; vent breath; Cinder Wraiths | Bible §1.1, §2.4, §10 | [NEW] / [CANON] |
 | Ivett Quarle, the vigil song, the keeper's crawl, the iron throat ring | This package | [NEW] |
@@ -457,7 +457,7 @@ Further out on the Ridge than the steadings, along the Ash Roads (bible §4.2). 
 
 **Beat 1: Tending (`S01_tend`).** *Objective: Tend the flame with the keeper.* Ivett's morning round, in any order: **sweep** the ash off the bowl's lip (interaction ~2 s); carry fresh **ashvine** from the garland basket to the plinth (carry-state, one trip); **lift three offering stones** out of the bowl's mouth where pilgrims push them (interaction each, ~1 s; the flame leans away from the hand). Then **inspect the bowl** (`EFD-I2`): no wick, no oil, no coal; a hole in the bowl's base the width of a wrist; a warm draught on the back of the hand. Ivett (`EFD-D2`): it gutters and leaps; she is afraid it will go out in front of the pilgrims, or leap at a child.
 
-**Beat 2: The Vigil (`S02_vigil`).** *Objective: Stay for the dusk vigil.* Keep watch at the niche until dusk if needed. Pilgrims gather; Ivett leads a three-verse song. **Heat follows the room:** with each verse the flame climbs a hand higher and the pit's vent breathes harder; the pit is pinned **Surging** for the song (~3 minutes). Cinder Wraiths form at the pit grate on each exhale (**EFD-E1**, optional; the pilgrims sing on, unengaged, on the upper terrace). At the last verse the strange moment (EFD.5). The step completes when the song ends, whether or not the player fought.
+**Beat 2: The Vigil (`S02_vigil`).** *Objective: Stay for the dusk vigil.* Keep watch at the niche until dusk if needed. Pilgrims gather; Ivett leads a three-verse song. **Heat follows the room:** with each verse the flame climbs a hand higher and the pit's vent breathes harder; the pit is pinned **Surging** for the song (~3 minutes). Cinder Wraiths form at the pit grate on each exhale (**EFD-E1**, optional; the pilgrims sing on, unengaged, on the upper terrace). At the last verse the strange moment (EFD.5). The step completes when the song ends, whether or not the player fought. As the pilgrims breathe out, **Elyndra** speaks from the terrace's far edge (`EFD-D2.15`–`.18`): lines inside the existing post-vigil scene, not a new step; the guaranteed path gains three short lines and one optional branch (D-EL, ruled 2026-11-15). Then Ivett (`EFD-D2.20`).
 
 **Beat 3: The Throat (`S03_throat`).** *Objective: Find what feeds the flame.* Ivett gives the trapdoor (`EFD-D3`). Down the crawl (Working; touch water at the jar niche) to the throat. **Inspect the crust** (`EFD-I5`) and **the iron ring** (`EFD-I6`). Then:
 - **Option A (skill): break it out** (**Mining ~[GD: low]**). The crust is a quest-local Mining node (ECD-04): three strikes; each strike widens the neck and the cough becomes a breath. Sets `EFD_THROAT = self`.
@@ -476,7 +476,7 @@ On clearing, the throat breathes evenly; from above, through the crawl, the pilg
 | 4–5 s | **Thump** | A soft thump from under the plinth, felt in the feet. The flame comes back from below, low and blue, then forge-coloured, then its morning height. |
 | 5–8 s | **Breath** | The pilgrims breathe out together. One says "She breathed." The pit's vent breathes again, slowly. |
 | After | Ivett (`EFD-D2.20`) | "It's done that four times this season. Never used to." |
-| Meaning | Physical: a choked throat that stalls and re-fires. Belief: Elyndra breathed. Neither is denied. Nothing is proved about Elyndra. |
+| Meaning | Physical: a choked throat that stalls and re-fires. Belief: Elyndra breathed. Neither is denied. Nothing is proved about the story; Elyndra herself, watching, says it was not her (`EFD-D2.16`). |
 
 ### EFD.6 Encounters and hazards
 
@@ -513,7 +513,7 @@ Tuned for EH-M2's Advanced identity. Cinder Wraiths are resonance distortions (b
 | **Set the bead** (`fitted`): *"Set it in the lip. Anyone who's been to school can read a bead."* | Ivett sets the warden's bead in the bowl's lip. It shows amber at the vigil, clear at night. Everyone raised in Emberholt reads it; the vent is no longer a secret from anyone who looks. | A warden's bead in Elyndra's flame. Some pilgrims stop coming ("It's a pipe now."). Ivett: "She'd laugh, or she'd not." | Vigil barks: pilgrims check the bead before they sing. If the pit surges post-quest, the bead goes red and Ivett stops the song; the optional Wraith moment is rare. |
 | **Leave it bare** (`bare`): *"Keep the bead in your pocket. You know what's under it. That's enough."* | No bead. Ivett keeps the throat clear herself each season with her bar. The shrine says nothing; the keeper knows. | Surges come unannounced. At a post-quest vigil the pit sometimes surges and Wraiths form (a re-offered optional fight, EFD-E1 as written). | Vigil barks: pilgrims sing as they always have. Ivett nods to the warden's hand at the gate. |
 
-**Both:** the flame stands steady after `S03`, the pilgrims keep coming, nobody says Elyndra is or is not, and the dusk vigil runs as a world moment.
+**Both:** the flame stands steady after `S03`, the pilgrims keep coming, nobody proves the pilgrims' story true or false, and the dusk vigil runs as a world moment.
 
 ### EFD.9 Rewards
 
@@ -537,17 +537,17 @@ Tuned for EH-M2's Advanced identity. Cinder Wraiths are resonance distortions (b
 
 ### EFD.11 Integration needs
 
-Standard: a board-note inspect that starts a quest; tending interactions (sweep, carry, lift); a scripted vigil (NPC song, three verses, ~3 min) that pins the pit Surging and drives the flame height prop; a flame-out sequence (prop off for ~3 s, relight VFX, audio thump, per player); Wraith re-forming on the pit's exhale with a cap (Act I ECW-E3 pattern); a quest-local Mining node; a held lamp interaction during a keep watch; a bowl-lip bead prop by `EFD_TELL`; the vent's schedule switching after `S03` (EI-HT-01 fallback: quest-pinned). No new system.
+Standard: a board-note inspect that starts a quest; tending interactions (sweep, carry, lift); a scripted vigil (NPC song, three verses, ~3 min) that pins the pit Surging and drives the flame height prop; a flame-out sequence (prop off for ~3 s, relight VFX, audio thump, per player); Wraith re-forming on the pit's exhale with a cap (Act I ECW-E3 pattern); a quest-local Mining node; a held lamp interaction during a keep watch; a bowl-lip bead prop by `EFD_TELL`; the vent's schedule switching after `S03` (EI-HT-01 fallback: quest-pinned). Elyndra as a non-targetable NPC at the terrace's far edge for the post-vigil lines (spawned per player when `S02` completes; leaves after `EFD-D2.18`); her standing presence at EP20 for the EH-M5 consult is EH-M5's (D-EL role item 2). No new system.
 
 ### EFD.12 Mystery ledger entry
 
 | Field | Entry |
 |---|---|
-| Author truth | A vent feeds the flame; scree and offerings choked its throat; someone long ago set an iron ring so the draught would rise straight. Who set it is not decided. |
+| Author truth | A vent feeds the flame; scree and offerings choked its throat; someone long ago set an iron ring so the draught would rise straight. Who set it is not decided. Elyndra the Cinderseer [CANON §37] lives at the shrine in near-isolation; she did not light the flame and does not keep it, and her reading of it is fallible. |
 | Public belief | Elyndra's flame; it breathes; it came up from the fire that burned through a storm. |
-| Observable | No fuel; a warm draught; the flame-out at the last verse; the iron ring. |
-| Wrong reading | The vent proves there was never an Elyndra; or the flame-out proves there was. Neither follows. |
-| Withheld | Who Elyndra is; who set the ring. |
+| Observable | No fuel; a warm draught; the flame-out at the last verse; the iron ring; Elyndra at the terrace's edge after the vigil, and what she says. |
+| Wrong reading | The vent proves the pilgrims' story false; or the flame-out proves Elyndra keeps the flame alive; or a seer's word settles what the city dreams. None follows. |
+| Withheld | What Elyndra sees beyond her one warning; who set the ring. |
 
 ### EFD.13 Dialogue
 
@@ -555,7 +555,8 @@ Standard: a board-note inspect that starts a quest; tending interactions (sweep,
 
 | Character | Knows | Doesn't know | Voice |
 |---|---|---|---|
-| **Ivett Quarle** [NEW], keeper of Elyndra's Vent Shrine | The flame's habits; every pilgrim's name; the trapdoor. | What is under the bowl; who set the ring; whether Elyndra lived or lives. | Dry, devout without fuss. "I keep it. That's the job. Believing's the pilgrims' job." |
+| **Ivett Quarle** [NEW], keeper of Elyndra's Vent Shrine | The flame's habits; every pilgrim's name; the trapdoor. | What is under the bowl; who set the ring; what Elyndra sees; whether the pilgrims' story is true. | Dry, devout without fuss. "I keep it. That's the job. Believing's the pilgrims' job." |
+| **Elyndra the Cinderseer** [CANON, character file §37] | What her ember-visions show her: the flame failing; that some of what the city dreams this season is laid over the dreamers. | What chokes the throat (she sees, she does not dig); whose hand is in the dreams; whether her own reading is right. | Calm, unnervingly direct, speaks rarely and with heavy precision; gentle with the desperate. Volcanic glass mask [CANON]. Never explains herself. |
 | **Pilgrim** (role) | The story. | — | Hushed; one line each. |
 | **Hennet Ulm** [NEW, bible §5.2] (bark) | Ivett's note. | — | Feeds first. |
 
@@ -582,7 +583,7 @@ EFD-D1.02 IVETT: "I've kept this flame since I could hold a broom. I've never fe
 EFD-D1.03 IVETT: "This season it gutters, then it leaps. The pilgrims say she's angry." (beat) "I don't want it explained away. I want it looked at. Those are different."
   > "Whose flame is it?"                                            → EFD-D1.04
   > "Show me how you keep it."                                      → EFD-D1.06
-EFD-D1.04 IVETT: "Elyndra's, they say. I've never seen her. I've met people who say they have. They're all very sure and none of them agree."   → EFD-D1.06
+EFD-D1.04 IVETT: "Elyndra's, they say. She lives up here, keeps to herself. I've seen her a handful of times in forty years." (beat) "The pilgrims tell stories about her and the flame. They're all very sure and none of them agree."   → EFD-D1.06
 EFD-D1.06 IVETT: "Sweep the lip. Garland on the plinth. Take the stones out of its mouth; they push them in. Then look at it properly."   {event: S00 complete → S01_tend}  → end
 ```
 
@@ -593,6 +594,12 @@ EFD-D2.01 IVETT: "Well? What's it burning?"
 EFD-D2.02 IVETT: "I know about the hole. I've always known about the hole." (beat) "I never put my hand over it. That felt rude."
 EFD-D2.03 IVETT: "Stay for the vigil. Dusk. Watch what it does when they sing. Then you'll know what I'm afraid of."
 EFD-D2.10 IVETT: "There's a bench. There's water. There's bread if you're polite."   {event: S01 complete}  → end
+EFD-D2.15 [after S02, first time] ELYNDRA: (at the terrace's far edge, masked; the pilgrims make room for her without looking at her) "It did not breathe. It choked, and caught again. Something lies across its throat."
+EFD-D2.16 ELYNDRA: "They will say it was me. It was not. I only watch it." (beat) "I saw it go out and stay out. It came back. I was wrong, or I was early. Remember that I can be either."
+  > "What else do you see?"                                          → EFD-D2.17
+  > (Say nothing.)                                                  → EFD-D2.18
+EFD-D2.17 ELYNDRA: "In the city, people dream the same dream. Some of it is theirs. Some of it is laid over them, like a hand over a mouth. I cannot always tell which." (beat) "When someone tells you what they saw in fire, do not take their word, or mine. Find where it is written down."   → EFD-D2.18
+EFD-D2.18 ELYNDRA: "I am here. I am nearly always here." (she goes back along the terrace; Ivett does not watch her go)   → EFD-D2.20
 EFD-D2.20 [after S02] IVETT: (still looking at the bowl) "It's done that four times this season. Never used to." (beat) "Under the bowl there's a trapdoor. I don't go down there much. Go down."   → EFD-D3.01
 ```
 
@@ -607,7 +614,7 @@ EFD-D3.11 [Option B complete] IVETT: (leaning on the bar, breathing hard) "Forty
 EFD-D4.01 IVETT: (at the bowl; the flame stands still and straight) "Look at her. Like a candle in a church."
 EFD-D4.02 [EFD_THROAT = self] IVETT: "You broke it out. I heard you through the floor." / [= keeper] IVETT: "My back's going to say something about that tomorrow."
   > "There's a vent under the bowl. The offerings choked it. Someone set an iron ring in the rock, a long time ago."   → EFD-D4.03
-EFD-D4.03 IVETT: "A ring." (beat) "Somebody wanted it to burn straight." (she looks at the pilgrims' benches) "That could be her. That could be a smith. It could be both."
+EFD-D4.03 IVETT: "A ring." (beat) "Somebody wanted it to burn straight." (she looks at the pilgrims' benches) "That could be whoever lit it first. That could be a smith. It could be both."
 EFD-D4.04 IVETT: (takes a bead out of her apron: emberglass in a little iron cup) "A warden left this here years back. Said it'd tell me when the flame's going wrong. I never set it."
 EFD-D4.05 IVETT: "You read them. I don't, not well. Do I set it?"
   > "Set it in the lip. Anyone who's been to school can read a bead."   → EFD-D4.10
@@ -636,17 +643,18 @@ EFD-D4.40 IVETT: (bread from a cloth; a few coins from the offering box) "Pilgri
 
 ### EFD.14 Open decisions
 
-1. **Elyndra in canon vs the bible [Director].** `LORE/Characters/Caelmor_Characters_Region4_Emberholt.txt` §37 makes Elyndra the Cinderseer a living seer at "an abandoned vent shrine"; the bible keeps her myth only (§5.1, EDS05). This package never shows, places, dates or kills her: Ivett has never seen her and pilgrims disagree, and this shrine is kept, not abandoned. Every line here reads both ways (a legend, or a living seer this shrine's keeper has never met), so either ruling needs no rewrite in this file. **Director question, not decided here:** is Elyndra myth only (bible §5.1, §7.5) or the canon living seer (character file §37)? EDS05's withheld layer is worded neutrally (§6).
+1. **Elyndra: resolved (D-EL, ruled 2026-11-15).** The Director ruled Elyndra the Cinderseer the canon living seer of character file §37 and an active prophetic guide met in existing quests. EFD is her first meeting (role item 1): she lives at the shrine in near-isolation and is seldom seen (Ivett has seen her "a handful of times", `EFD-D1.04`); she appears once after the vigil (`EFD-D2.15`–`.18`) with one clue, one optional warning, and one reading she admits was wrong; the bead choice stays the player's and she takes no part in it. The pilgrims' story of the flame stays belief; the vent is real. "Abandoned" in §37 is read as unkept by the city (no warden, no tell on the pit); where she sleeps is not placed (MAP VERIFICATION REQUIRED). EDS05's withheld layer is now what she sees, not who she is (§6).
 2. The flame-out "four times this season" is a keeper's count of an event, not a date.
 
 ### EFD.15 Review log
 
 | Check | Result |
 |---|---|
-| Belief kept | Ivett's "That could be her. That could be a smith. It could be both." Nothing denies or proves Elyndra. |
+| Belief kept | Ivett's "That could be whoever lit it first. That could be a smith. It could be both." Nothing proves or disproves the pilgrims' story; Elyndra is real and says the flame is not hers to keep. |
 | Combat | Optional; Wraiths re-form only by the song's condition; standing engaged Wraiths fight on; no unreachable safe spot (the rail is in reach). |
 | Evidence | The ring and the throat are objects read in place; they prove nothing about anyone. |
 | Player spellcasting | None: the player sweeps, carries, breaks rock, holds a lamp. |
+| Elyndra (D-EL) | Emberholt character rulings, 2026-11-15: Elyndra met in person (`EFD-D2.15`–`.18`); Ivett's "never seen her" and the "whether she lived" framing corrected; her clue points to the throat the player still finds; her dream warning seeds R11/R12, proves nothing and names nobody; one reading admitted wrong. No step added; the choice remains the player's. |
 
 ---
 ---
@@ -1410,7 +1418,7 @@ Each discovery has a **surface** (what anyone sees), a **reading** (what a caref
 |---|---|
 | Surface | Offerings heaped round a basalt bowl where a flame burns at a vent that never cools. (`EDS05_SEEN` on entering the terrace.) |
 | Reading | **Put a hand on the plinth's base stone** (interaction ~2 s): warm, in every season, warm all the way through. Then **turn an offering stone** (inspect): names and marks scratched on the undersides, some fresh, some worn almost smooth. Inspect: *"The stone is warm to its heart. The offerings are stones from every road, with names scratched on the side that faces the ground."* Ivett (after EFD), `fitted`: "Bead says amber. Pilgrims say she's listening. Both, most nights." / `bare`: "Warm, yes. I keep it clear now. They don't know that. That's fine." Before EFD, a pilgrim: "She carried the flame up here. Elyndra. In a pot." |
-| Withheld | **Who Elyndra was, or is.** (Worded to hold under either reading, the bible's myth only or the character file's living seer; Director question, EFD.14 item 1.) The vent is real; the story is belief. |
+| Withheld | **What Elyndra sees.** She is real and lives at the shrine, seldom seen (D-EL, ruled 2026-11-15; EFD.14 item 1); what her ember-visions show her is hers to tell, and she tells little. The vent is real; the pilgrims' story of the flame is belief. |
 | Flags | `EDS05_SEEN`; `EDS05_READ` on the stone turn. |
 | Links | EFD (the quest at the same place; this card is the standing world version, and EFD's lines take precedence while EFD is Active). |
 
@@ -1500,7 +1508,7 @@ No runtime need beyond bible §11.1–11.2 and standard requirement checks. Both
 | CDR-4 | Standard systems only; one skill hook per quest with a time-cost alternative (EOP's requirement follows the bible's "Hunting skill quest"). |
 | CDR-6 | Every step, boss and reward solo; per-player props, choices and flags; partner credit only via the partner's own active step. |
 | Evidence | Records, objects and living people carry every fact; phenomena prove nothing; no evidence from combat or loot. |
-| Reserved decisions | No D-E2, D-S1, `[INITIATE]`, D-3, C07 or "invaders" dependency. No Volkhari person appears; no count of the held or of anyone (D-C06); no precursor name or roster (D-C03). ECC nodes tagged `[ED-15]`; EAD's containment `[ED-2]`. |
+| Reserved decisions | No D-E2, D-S1 or ED-3 (Iven Calder) dependency (all ruled 2026-11-15); no D-3, C07 or "invaders" dependency. Elyndra appears in EFD only (D-EL, ruled 2026-11-15). No Volkhari person appears; no count of the held or of anyone (D-C06); no precursor name or roster (D-C03). ECC nodes tagged `[ED-15]`; EAD's containment `[ED-2]`. |
 | Revelation Ledger | No R09–R12 content revealed here; EDS01, EDS09 seed R09; EDS08, EDS10 seed R10; EDS04 carries the legend only (R19); ECC seeds R15 and leaves it to CV-M2. Nothing explains the Titan, the bindings, Perfect Flame or the buyer. |
 | ED-15 (ECC) | Buyer unnamed; no Remnant, Ashfall, Durell or Shadeweaver word; river unnamed and places coded; no route, origin, carrier or transaction across regions; no Lowmark requirement (one flavour option, declined by Haelric); Oren Falx shown signing and smiling only (Part 4 ledger). |
 | ED-16 | EDS09 reads ENW's `EH_HALF_NAME` for one chalk line; no Mire flag is read; no route. |
@@ -1508,7 +1516,8 @@ No runtime need beyond bible §11.1–11.2 and standard requirement checks. Both
 | Quest items | 0. |
 | Map | Relative placement only; MAP VERIFICATION REQUIRED throughout; nothing beyond the Ridge or past Embergate is placed. |
 | New names checked for collisions | **Ivett Quarle**, **Keld Dorrow**, **Ambry House** grepped across `04_CONTENT_PRODUCTION`, `LORE` and `00_ADMIN`: no hits outside this file. Teodor Marsk and Old Plate appear only in the bible. Ids `EOP-`, `EFD-`, `EAD-`, `ECC-` (dialogue, barks, inspects, encounters) and `ECD-01`–`ECD-04` are unused elsewhere. Rejected while naming: "Ilse" (near Ilyen, Ilverin), anything with "river" or "glass" in the front's name (would echo Lowmark's riverglass). |
-| Deviations from the bible | (1) **EME02:** the bible's "red on a forge feast" changed to **white** on a feast (canon Cinderweave code: white ceremonial, red volatile); red now means the ward is running hot. (2) **EDS05 withheld layer** worded neutrally ("who Elyndra was, or is") so it holds whether the Director keeps the bible's myth-only Elyndra or the character file's living seer (EFD.14 item 1; not decided here). (3) **Sereth's healing house** is placed as a new sub-site of Cinderwall by the Cinderwall working gate, distinct from the Red Door clinic (whose healer stays a role). (4) **EAD sets no region flag** and asks nothing of EH-M6 (Act III §14 item 14 recommended closed). |
-| Open for the Director (consequential) | ED-15 (keep or cut ECC); Elyndra canon vs bible (EFD.14); Sereth / Seredh canon name proximity (EAD.14 item 4). |
+| Deviations from the bible | (1) **EME02:** the bible's "red on a forge feast" changed to **white** on a feast (canon Cinderweave code: white ceremonial, red volatile); red now means the ward is running hot. (2) **Elyndra** is the character file's living seer, met in EFD (D-EL, ruled 2026-11-15; supersedes the bible's earlier "myth only"); EDS05's withheld layer is what she sees, not who she is (EFD.14 item 1). (3) **Sereth's healing house** is placed as a new sub-site of Cinderwall by the Cinderwall working gate, distinct from the Red Door clinic (whose healer stays a role). (4) **EAD sets no region flag** and asks nothing of EH-M6 (Act III §14 item 14 recommended closed). |
+| Open for the Director (consequential) | ED-15 (keep or cut ECC); Sereth / Seredh canon name proximity (EAD.14 item 4). |
 | Independent review, 2026-11-15 | Read against CDR-1 to CDR-6 (§3.7), the bible, Acts I to III and dialogue, the sibling Work and Skills file, the Revelation Ledger, the dossier, the character file and the Part 4 ledger (nothing was played). Every cross-file flag read verified as named and set where claimed (`EEH_TAVI_LAUGHED` `EEH-D6.41`; `EGA_BOARD_BALANCED` `EGA-I28`; `EH_HOLLOW_TRUTH`; `EH_HALF_NAME` `ENW-D6.40`/`.50`; `UL_LEDGER_*` `UL-D4.31`/`.41`, flavour only); `EH_RIVERGLASS` one writer. Fixes: the gate to the Ridge renamed from "Ridge working gate" to the bible's "Cinderwall working gate" (consistent with the sibling files; NPCs may still say "the Ridge gate"); EOP's Hunting requirement now names where Hunting trains in Emberholt (§0.1, `EOP-D1.30`); EDS01's herder no longer answers the withheld "who scraped them"; EDS10 no longer invents a design for Deepbrand's mark; ECC.12's author truth no longer names a buyer (ED-15); EME02's red tied to canon "volatile" (white ceremonial, yellow calm, orange productive verified against dossier §VII.2); Elyndra text kept readable both ways and logged as a Director question, not decided. New names (Ivett Quarle, Keld Dorrow, Ambry House) re-grepped across `04_CONTENT_PRODUCTION`, `LORE`, `00_ADMIN`: no collision. No release wording; no interregional route. |
 | Batch 4 encounter alignment review, 2026-11-15 | Applied Enemies file PE-9 (EAD-E1 beetle burst 1.5 s) and PE-10 (Old Plate Spark-shake 1.5 s), and PE-19: the EFD-E1 rule and combat compliance now state the song's end as a place rule ending the condition (forms already fighting carry on to 0 HP; forms fighting nobody collapse at the grate with no XP, credit or loot), not a drive-off. No id, step, flag or line changed. |
+| Emberholt character rulings, 2026-11-15 | D-EL: Elyndra met in EFD after the vigil (`EFD-D2.15`–`.18`, three lines and one optional warning; no new step); EFD summary, canon grounding, beats, EFD.5/8/11/12, cast notes, `EFD-D1.04` and `EFD-D4.03` corrected from "myth only / never seen"; EFD.14 item 1 resolved; EDS05 withheld now "what she sees"; Elyndra removed from Open for the Director. D-E2, D-S1, ED-3: no node here depended on them; reserved-decisions note updated (Iven Calder named, not used). |
