@@ -1,0 +1,184 @@
+{
+  "bound_external_images": [
+    "Lowmark_Brookoak_RoofShingles_RivenBake_albedo.png",
+    "Lowmark_Brookoak_RoofShingles_RivenBake_normal.png",
+    "Lowmark_Brookoak_RoofShingles_RivenBake_rough.exr",
+    "Lowmark_Fieldstone_Masonry_albedo.png",
+    "Lowmark_Fieldstone_Masonry_normal.png",
+    "Lowmark_Fieldstone_Masonry_rough.exr",
+    "Lowmark_Forged_Iron_Hardware_Corroded_albedo.png",
+    "Lowmark_Forged_Iron_Hardware_Corroded_metallic.png",
+    "Lowmark_Forged_Iron_Hardware_Corroded_normal.png",
+    "Lowmark_Forged_Iron_Hardware_Corroded_rough.exr",
+    "Lowmark_Forged_Iron_Hardware_Maintained_albedo.png",
+    "Lowmark_Forged_Iron_Hardware_Maintained_metallic.png",
+    "Lowmark_Forged_Iron_Hardware_Maintained_normal.png",
+    "Lowmark_Forged_Iron_Hardware_Maintained_rough.exr",
+    "Lowmark_Forged_Iron_Hardware_Weathered_albedo.png",
+    "Lowmark_Forged_Iron_Hardware_Weathered_metallic.png",
+    "Lowmark_Forged_Iron_Hardware_Weathered_normal.png",
+    "Lowmark_Forged_Iron_Hardware_Weathered_rough.exr",
+    "Lowmark_Handcrafted_Window_Glass_Clear_rough.exr",
+    "Lowmark_Handcrafted_Window_Glass_Lightly_Weathered_rough.exr",
+    "Lowmark_Handcrafted_Window_Glass_Obscured_rough.exr",
+    "Lowmark_Lime_Plaster_Whitewash_Aged_albedo.png",
+    "Lowmark_Lime_Plaster_Whitewash_Aged_normal.png",
+    "Lowmark_Lime_Plaster_Whitewash_Aged_rough.exr",
+    "Lowmark_Lime_Plaster_Whitewash_Maintained_albedo.png",
+    "Lowmark_Lime_Plaster_Whitewash_Maintained_normal.png",
+    "Lowmark_Lime_Plaster_Whitewash_Maintained_rough.exr",
+    "Lowmark_Natural_Grass_Wildflowers_albedo.png",
+    "Lowmark_Natural_Grass_Wildflowers_filler_albedo.png",
+    "Lowmark_Natural_Grass_Wildflowers_filler_normal.png",
+    "Lowmark_Natural_Grass_Wildflowers_filler_roughness.png",
+    "Lowmark_Natural_Grass_Wildflowers_normal.png",
+    "Lowmark_Natural_Grass_Wildflowers_roughness.png",
+    "Lowmark_Packed_Earth_Worn_Footpaths_Packed_Earth_albedo.png",
+    "Lowmark_Packed_Earth_Worn_Footpaths_Packed_Earth_normal.exr",
+    "Lowmark_Packed_Earth_Worn_Footpaths_Packed_Earth_rough.exr",
+    "Lowmark_Packed_Earth_Worn_Footpaths_Worn_Footpath_albedo.png",
+    "Lowmark_Packed_Earth_Worn_Footpaths_Worn_Footpath_normal.exr",
+    "Lowmark_Packed_Earth_Worn_Footpaths_Worn_Footpath_rough.exr",
+    "Lowmark_Packed_Earth_Worn_Footpaths_path_blend.exr",
+    "Lowmark_Planked_Oak_Joinery_Wood_Heavily_Aged_albedo.png",
+    "Lowmark_Planked_Oak_Joinery_Wood_Heavily_Aged_normal.png",
+    "Lowmark_Planked_Oak_Joinery_Wood_Heavily_Aged_rough.exr",
+    "Lowmark_Planked_Oak_Joinery_Wood_Maintained_albedo.png",
+    "Lowmark_Planked_Oak_Joinery_Wood_Maintained_normal.png",
+    "Lowmark_Planked_Oak_Joinery_Wood_Maintained_rough.exr",
+    "Lowmark_Planked_Oak_Joinery_Wood_Weathered_albedo.png",
+    "Lowmark_Planked_Oak_Joinery_Wood_Weathered_normal.png",
+    "Lowmark_Planked_Oak_Joinery_Wood_Weathered_rough.exr",
+    "Lowmark_Structural_Timber_albedo.png",
+    "Lowmark_Structural_Timber_end_albedo.png",
+    "Lowmark_Structural_Timber_end_normal.png",
+    "Lowmark_Structural_Timber_end_rough.exr",
+    "Lowmark_Structural_Timber_normal.png",
+    "Lowmark_Structural_Timber_rough.exr"
+  ],
+  "buildings": {
+    "Cottage": {
+      "bindings": {
+        "Brookoak field": 2,
+        "Brookoak trim": 1,
+        "Fieldstone": 3,
+        "Forged Iron": 2,
+        "Handcrafted Glass": 5,
+        "Lime Plaster": 2,
+        "Planked Oak": 2,
+        "Stone Only": 2,
+        "Structural Timber": 7
+      },
+      "body_hash": "e8b5acc611653058c8747db7da6283f4eaf40a85927a811d96e6fc7f69ef2f1d",
+      "glass_finish": "Lightly Weathered",
+      "joinery_condition": "Heavily Aged",
+      "modeled_shingles": 920,
+      "roof_pitch": 49,
+      "seed": 64,
+      "shape": "RECT",
+      "wall_condition": "Aged"
+    },
+    "Farmhouse": {
+      "bindings": {
+        "Brookoak field": 2,
+        "Brookoak trim": 1,
+        "Fieldstone": 3,
+        "Forged Iron": 4,
+        "Handcrafted Glass": 15,
+        "Lime Plaster": 3,
+        "Planked Oak": 3,
+        "Stone Only": 2,
+        "Structural Timber": 12
+      },
+      "body_hash": "f558a4e513859f013e4b82d089baf07c8d00fdd9abbbf82cb7b0254317c201d0",
+      "glass_finish": "Clear",
+      "joinery_condition": "Weathered",
+      "modeled_shingles": 1661,
+      "roof_pitch": 40,
+      "seed": 39,
+      "shape": "L",
+      "wall_condition": "Maintained"
+    },
+    "Workshop": {
+      "bindings": {
+        "Brookoak field": 2,
+        "Brookoak trim": 1,
+        "Fieldstone": 1,
+        "Forged Iron": 1,
+        "Handcrafted Glass": 7,
+        "Lime Plaster": 2,
+        "Planked Oak": 2,
+        "Stone Only": 2,
+        "Structural Timber": 7
+      },
+      "body_hash": "69a68f9a296878383d8c11b8c11a5c0c54a06859bbfa82b299313c56524b3594",
+      "glass_finish": "Obscured",
+      "joinery_condition": "Maintained",
+      "modeled_shingles": 1044,
+      "roof_pitch": 34,
+      "seed": 92,
+      "shape": "RECT",
+      "wall_condition": "Aged"
+    }
+  },
+  "camera_framing": {
+    "Cottage": {
+      "lens_mm": 33.517940521240234,
+      "maximum_xy": [
+        0.9003837704658508,
+        0.8680113554000854
+      ],
+      "minimum_xy": [
+        0.1578054279088974,
+        0.028999995440244675
+      ]
+    },
+    "Farmhouse": {
+      "lens_mm": 32.287689208984375,
+      "maximum_xy": [
+        0.8799494504928589,
+        0.9438616633415222
+      ],
+      "minimum_xy": [
+        0.028999991714954376,
+        0.14045730233192444
+      ]
+    },
+    "Settlement": {
+      "lens_mm": 29.0,
+      "maximum_xy": [
+        0.9238587617874146,
+        0.7007217407226562
+      ],
+      "minimum_xy": [
+        0.14114953577518463,
+        0.3584698438644409
+      ]
+    },
+    "Workshop": {
+      "lens_mm": 36.012046813964844,
+      "maximum_xy": [
+        0.9710000157356262,
+        0.8161597847938538
+      ],
+      "minimum_xy": [
+        0.17988596856594086,
+        0.2651488184928894
+      ]
+    }
+  },
+  "scrub_boundary_instances": 48,
+  "vegetation": {
+    "batches": 420,
+    "instances": 217621,
+    "lod_counts": [
+      16187,
+      1,
+      201433
+    ],
+    "path_centers_occupied": 0,
+    "placement_sha256": "3905085a4794ae8c537be890f83fb394c4fc1c00bf572d9c7ade759ac7af0b62",
+    "triangles": 5599658
+  },
+  "visible_meshes": 872
+}
