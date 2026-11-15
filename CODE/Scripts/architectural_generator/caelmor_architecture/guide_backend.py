@@ -1,4 +1,4 @@
-"""Keep editable Blender faces separate from their generated wall assemblies."""
+"""Keep editable Blender guides separate from generated wall assemblies."""
 from dataclasses import dataclass
 import math
 import uuid
@@ -6,7 +6,7 @@ import uuid
 import bpy
 from mathutils import Matrix, Vector
 
-from .openings import Opening, wall_edges
+from .openings import Opening, PlasterLoss, TimberPost, wall_edges
 
 
 HOST = 'caelm_guide_host'
@@ -26,17 +26,24 @@ def anchor_of(collection):
     return next(obj for obj in collection.objects if obj.get('caelm_anchor'))
 
 
-def _vertices(source, anchor):
+def _vertices(source, anchor, kind):
     if (source.type != 'MESH' or source.library or source.get('caelm_generated') or source.modifiers
-            or source.mode != 'OBJECT' or len(source.data.polygons) != 1):
-        raise ValueError(f'{source.name}: choose an unmodified mesh with one face in Object Mode')
+            or source.mode != 'OBJECT'):
+        raise ValueError(f'{source.name}: select a local, unmodified mesh guide in Object Mode')
     if source.parent and source.parent != anchor:
         raise ValueError(f'{source.name}: the guide needs to be free-standing or attached to this building root')
-    polygon = source.data.polygons[0]
-    if len(polygon.vertices) != len(source.data.vertices):
-        raise ValueError(f'{source.name}: remove unused vertices from the guide')
+    if kind == 'TIMBER_POST':
+        if len(source.data.edges) != 1 or len(source.data.vertices) != 2:
+            raise ValueError(f'{source.name}: a timber post guide is one vertical mesh edge')
+        indices = source.data.edges[0].vertices
+    else:
+        if len(source.data.polygons) != 1:
+            raise ValueError(f'{source.name}: this guide needs exactly one face')
+        indices = source.data.polygons[0].vertices
+        if len(indices) != len(source.data.vertices):
+            raise ValueError(f'{source.name}: remove unused vertices from the guide')
     matrix = anchor.matrix_world.inverted() @ source.matrix_world
-    vertices = [matrix @ source.data.vertices[i].co for i in polygon.vertices]
+    vertices = [matrix @ source.data.vertices[i].co for i in indices]
     if not all(math.isfinite(value) for vertex in vertices for value in vertex):
         raise ValueError(f'{source.name}: invalid guide coordinates')
     return vertices
@@ -57,11 +64,11 @@ def propose(collection, source, settings, kind, leaf):
         raise ValueError('Choose a box-fitted Lowmark Cottage as the guide target')
     if source.get(HOST) and source.get(HOST) != collection:
         raise ValueError('Remove this guide from its original building before attaching it here')
-    points = _vertices(source, anchor_of(collection))
+    points = _vertices(source, anchor_of(collection), kind)
     hits = [side for side, edge in wall_edges(settings.width, settings.depth).items()
             if _project(points, edge) is not None]
     if len(hits) != 1:
-        raise ValueError(f'{source.name}: place the face upright and parallel to one wall, within 0.22 m of its exterior')
+        raise ValueError(f'{source.name}: place the guide on one wall plane, within 0.22 m of its exterior')
     previous = source.get(GUIDE) or {}
     identifier = previous.get('id')
     if not identifier or any(o != source and o.get(HOST) == collection and
@@ -72,9 +79,15 @@ def propose(collection, source, settings, kind, leaf):
 
 def _profile(source, binding, points):
     if points is None:
-        raise ValueError(f'{source.name}: guide left the {binding.side} wall; move it back or use Apply Guide to attach again')
+        raise ValueError(f'{source.name}: guide left the {binding.side} wall; move it back or use Apply Feature Guide to attach again')
     s0, s1 = min(s for s,z in points), max(s for s,z in points)
     z0, z1 = min(z for s,z in points), max(z for s,z in points)
+    if binding.kind == 'TIMBER_POST':
+        if s1-s0 > .02:
+            raise ValueError(f'{source.name}: the post guide must be vertical')
+        return TimberPost(binding.id, binding.side, round((s0+s1)*.5,5), round(z0,5), round(z1,5))
+    if binding.kind == 'PLASTER_LOSS':
+        return PlasterLoss(binding.id, binding.side, tuple((round(s,5),round(z,5)) for s,z in points))
     tol = .008
     turns = set()
     for i, (s,z) in enumerate(points):
@@ -127,7 +140,7 @@ def collect(collection, settings, old, edit=None):
         if (not edit or source != edit[0]) and source.parent != anchor:
             raise ValueError(f'{source.name}: restore its building-root parent or use Apply Guide to bind it again')
         current = old_edges[binding.side]
-        guides.append(_profile(source, binding, _project(_vertices(source, anchor), current)))
+        guides.append(_profile(source, binding, _project(_vertices(source, anchor, binding.kind), current)))
         start, _ = new_edges[binding.side]
         delta = Vector((start[0]-current[0][0], start[1]-current[0][1], 0))
         if delta.length > 1e-6:

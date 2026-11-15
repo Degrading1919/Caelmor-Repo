@@ -175,6 +175,7 @@ def _collider_object(name, vertices, faces, build_id, world_zone=None):
     mesh.from_pydata(vertices, [], faces); mesh.update(calc_edges=True)
     obj = bpy.data.objects.new(name, mesh)
     obj["caelm_collider"] = True; obj["caelm_generated"] = True
+    obj["caelm_collider_id"] = name
     obj["caelm_layer"] = "collider"; obj["caelm_semantic"] = "collider"
     obj["caelm_build_id"] = build_id
     obj["caelm_world_zone"] = str(world_zone or "")
@@ -311,11 +312,17 @@ def _guide_parts(schedule):
     parts = set()
     for guide in schedule:
         root = f"lowmark_main_hall/guide.{guide['id']}."
-        parts.add(root + 'frame')
-        if guide['kind'] == 'window':
-            parts.add(root + 'shutters')
-        elif guide['leaf']:
-            parts.add(root + 'leaf')
+        kind = guide['kind']
+        if kind == 'timber_post':
+            parts.add(root + 'member')
+        elif kind == 'plaster_loss':
+            parts.add(root + 'substrate')
+        else:
+            parts.add(root + 'frame')
+            if kind == 'window':
+                parts.add(root + 'shutters')
+            elif guide['leaf']:
+                parts.add(root + 'leaf')
     return parts
 
 
@@ -354,7 +361,7 @@ def build(settings, collection=None, layers=None, origin=None, *, placement=None
     previous = json.loads(collection.get(SCHEDULE, '[]')) if collection is not None else []
     guide_change = schedule != previous
     if guide_change and layers not in (None, 'ALL'):
-        raise ValueError('Opening guides changed. Regenerate Guides or All to rebuild walls, frame and collision together.')
+        raise ValueError('Wall guides changed. Regenerate Guides or All to rebuild affected construction and collision together.')
     retired = _guide_parts(previous) - _guide_parts(schedule)
     if collection is None and settings.construction_overrides:
         # A new building can reuse role presets, but it owns none of the panel
@@ -515,7 +522,8 @@ def build(settings, collection=None, layers=None, origin=None, *, placement=None
         # Staging coexists with the old scene, so Blender may temporarily suffix
         # object names. Restore canonical section names after replacement.
         for obj in staged:
-            if obj.get('caelm_buffer_id'): obj.name = obj['caelm_buffer_id']
+            key = obj.get('caelm_buffer_id') or obj.get('caelm_collider_id')
+            if key: obj.name = key
         for obj in staged: stage.objects.unlink(obj)
         _cleanup_stage(stage); stage = None
         if settings.floor_separation:

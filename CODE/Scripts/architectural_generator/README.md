@@ -1,6 +1,6 @@
 # Caelmor Architectural Generator
 
-Version 0.19.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. An isolated, opt-in Unity client floor-presentation adapter accompanies floor-aware exports; it is not wired into the playable scene.
+Version 0.20.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. An isolated, opt-in Unity client floor-presentation adapter accompanies floor-aware exports; it is not wired into the playable scene.
 
 New buildings have floor-separated visuals by default. Select a building, set
 **Simulated floor** (0 = ground, −1 = exterior), choose its **Construction volume**
@@ -155,9 +155,9 @@ material reuse, render submissions, compression and collision also affect
 runtime cost. See the [executed Unity benchmark](evidence/lowmark_settlement/PERFORMANCE.md)
 and the [Cottage authoring verification](evidence/blockout_authoring/README.md).
 
-## Opening Guides
+## Feature Guides
 
-1. Fit a **Lowmark Cottage** using the workflow above. In the **Opening
+1. Fit a **Lowmark Cottage** using the workflow above. In the **Feature
    Guides** panel the new cottage becomes the target. Use **Target Cottage**
    when working on another unbound face.
 2. Make one upright mesh face parallel to a wall in Object Mode, within 0.22 m
@@ -167,7 +167,7 @@ and the [Cottage authoring verification](evidence/blockout_authoring/README.md).
    default shallow head, or a convex face with a level threshold, vertical
    jambs and a symmetric elliptical head. Door heads need to clear the wall
    plate and neighboring openings. Out-of-range guides receive a diagnosis.
-3. Select the face and click **Apply Opening Guide**. It stays editable and
+3. Select the face and click **Apply Feature Guide**. It stays editable and
    appears as a wire guide parented to the building root. It is excluded from
    renders and the GLB. The generated assembly has stable component IDs for
    **Materials** and a separate collision representation. Clear **Closed Leaf**
@@ -175,7 +175,7 @@ and the [Cottage authoring verification](evidence/blockout_authoring/README.md).
    glazed window keeps static wall collision.
 4. Move the guide along its wall or edit its vertices. Select the guide or a
    generated part of the cottage and use **Regenerate Guides**. To move a guide
-   to a different wall, use **Apply Opening Guide** again. Use **Remove Guide**
+   to a different wall, use **Apply Feature Guide** again. Use **Remove Guide**
    to detach it and restore the wall, or delete the source and regenerate. It
    remembers its ID, host wall and options through save/reopen. Refit preserves
    distances measured from each host wall's start corner.
@@ -186,7 +186,24 @@ if they overlap the main entrance, another guide or a protected section that
 must be rebuilt. Protect hand-edited generated wall and frame sections before
 regenerating. The current workflow covers rectangular windows and straight or
 rounded ground-floor doors on the four walls of a fitted Lowmark Cottage.
-See the [editable examples and checks](evidence/opening_guides/README.md).
+See the [editable opening examples](evidence/opening_guides/README.md).
+
+**Timber Post** uses one vertical mesh edge from the plinth to the roof plate.
+Place it against a timber-framed wall. The tool sizes the post using the host
+frame and recalculates the bays, default post stations and braces around it.
+Leave room for existing openings, corner posts and other guided posts.
+
+**Plaster Loss** uses one irregular face on a rendered timber infill panel.
+Keep a single outline with a visible center and clear the framing, openings
+and adjacent loss. The tool cuts the render layer and exposes recessed earthen
+infill. Move, edit and remove either source using the same guide controls.
+See the [wall feature examples and tests](evidence/wall_feature_guides/README.md).
+
+In Unity, export and reimport to the same path and key for compatible guide
+edits. The importer reconciles stable guide parts and holds the generated and
+placement prefab identities. Removing a section with an authored reference
+or override reports the scene or asset that needs review. Changes to building
+identity, floor layout or core construction structure remain guarded.
 
 ## Roof AutoComplete
 

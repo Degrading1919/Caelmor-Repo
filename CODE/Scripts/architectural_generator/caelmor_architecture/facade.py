@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import math
 from .geometry import MeshBuffer, area, clip, inequalities, subtract_convex
+from .openings import Opening, PlasterLoss, TimberPost
 
 
 # Millimetres are intentionally avoided: all dimensions follow the engine's metre scale.
@@ -70,7 +71,7 @@ def _edge_frame(plan, edge_index, edge):
 
 def _openings_for_edge(plan, edge_index, edge):
     """Return deterministic, function-aware exterior openings in edge metres."""
-    guides = getattr(plan, 'guided_openings', {}).get(edge_index, ())
+    guides = [g for g in getattr(plan, 'guided_openings', {}).get(edge_index, ()) if isinstance(g, Opening)]
     blocked = edge_index in getattr(plan,'blocked_edges',())
     if (blocked and not guides) or edge_index in getattr(plan,'open_edges',()) or getattr(plan,'opening_style','')=='NONE':
         return []
@@ -460,9 +461,9 @@ def _gable_profile(plan, edge):
 
 
 def _skin_polygon(buffer, edge, polygon_sz, outward, thickness, efficient=False, slope=0., center=0.,
-                  field_grid=None):
+                  field_grid=None, min_area=.012):
     """Emit a clipped s/z face as a closed veneer or explicit SURFACE detail."""
-    if len(polygon_sz)<3 or abs(area(polygon_sz))<.012:
+    if len(polygon_sz)<3 or abs(area(polygon_sz))<min_area:
         return
     if area(polygon_sz)<0:
         polygon_sz=list(reversed(polygon_sz))
@@ -632,7 +633,7 @@ def _cladding_tiles(plan, edge_index, edge, openings, construction, buffer, fiel
 
 
 def _emit_clipped_skin_tile(plan,edge_index,edge,profile,openings,buffer,tile,efficient,
-                            outward=.022,thickness=.018,slope=0.,center=0.,field_grid=None):
+                            outward=.022,thickness=.018,slope=0.,center=0.,field_grid=None,finish_cuts=()):
     """Clip a tile to one roof-profile segment and all assembly exclusion boxes."""
     bounded=getattr(plan,'construction_resolver',None) is not None
     for (rs0,rh0),(rs1,rh1) in zip(profile,profile[1:]):
@@ -668,8 +669,11 @@ def _emit_clipped_skin_tile(plan,edge_index,edge,profile,openings,buffer,tile,ef
             fragments=next_fragments
             if not fragments:
                 break
+        for cutter in finish_cuts:
+            fragments = [part for fragment in fragments for part in subtract_convex(fragment, cutter, bounded=True)]
         for fragment in fragments:
-            _skin_polygon(buffer,edge,fragment,outward,thickness,efficient,slope,center,field_grid)
+            _skin_polygon(buffer,edge,fragment,outward,thickness,efficient,slope,center,field_grid,
+                          min_area=2e-6 if finish_cuts else .012)
 
 
 def frame_layout(plan, edge_index, edge):
@@ -720,6 +724,20 @@ def frame_layout(plan, edge_index, edge):
 
     minimum_post_spacing=.66  # small rounding allowance above the .65m contract
     posts = [s for s in (.10,length-.10) if legal_principal(s)]
+    authored_posts = {}
+    for guide in getattr(plan, 'guided_openings', {}).get(edge_index, ()):
+        if not isinstance(guide, TimberPost):
+            continue
+        label = f'{guide.side.title()} post {guide.id[:8]}'
+        if plan.style.frame_visibility <= .16 or plan.construction_resolver is None:
+            raise ValueError(f'{label}: choose a timber-framed wall with Construction Treatments enabled')
+        if abs(guide.bottom - _foundation(plan)) > .15 or abs(guide.top - structural_top) > .30:
+            raise ValueError(f'{label}: the edge must reach the foundation and roof plate')
+        station = round(guide.station,4)
+        if not .76 <= station <= length-.76 or not legal_principal(station) or any(abs(station-p)<minimum_post_spacing for p in posts):
+            raise ValueError(f'{label}: preserve corner posts and clear adjoining posts and openings')
+        authored_posts[station] = guide.id
+        posts.append(station)
     candidate = spacing
     while candidate < length-0.35:
         # Grid stations remain stable across storeys; skip any station in the
@@ -863,6 +881,7 @@ def frame_layout(plan, edge_index, edge):
             "access_clearances":access_clearances,
             "opening_assembly_bounds":[dict(o["assembly_bounds"]) for o in openings],
             "posts": posts, "principal_posts": posts, "jambs": jambs,
+            "authored_posts": authored_posts,
             "unsupported_spans": unsupported_spans,
             "plates": plates, "braces": braces,
             "gable_profile": profile,"gable":gable,
@@ -1167,10 +1186,11 @@ def _guided_feature(plan, a, b, n, o, masonry):
     return [p for p in parts.values() if p.faces]
 
 
-def _timber_frame(buffers, plan, edge_index, edge, openings, top):
+def _timber_frame(buffers, plan, edge_index, edge, openings, top, layout=None):
     a,b,tx,ty,n,length=_edge_frame(plan,edge_index,edge)
     timber=buffers["timber"]
-    layout = frame_layout(plan, edge_index, edge)
+    if layout is None:
+        layout = frame_layout(plan, edge_index, edge)
     detail=str(plan.settings.detail).upper()
     chamfer=.012 if detail=="HIGH" else (.008 if detail=="MEDIUM" else 0.0)
     if getattr(timber,'construction',None) and detail!='LOW':
@@ -1181,17 +1201,25 @@ def _timber_frame(buffers, plan, edge_index, edge, openings, top):
     spec=timber.construction
     if visibility > .16:
         for ss in layout["principal_posts"]:
-            if spec and spec.variant=='hewn_pegged' and detail!='LOW':
+            member = timber
+            guide_id = layout['authored_posts'].get(ss)
+            if guide_id:
+                from .construction import bind, component
+                key = f'guide.{guide_id}.member'
+                member = MeshBuffer(key, 'timber', 'structure')
+                bind(component(plan, key, 'frame_member', 'structural_timber'), member)
+                buffers[key] = member
+            if member.construction and member.construction.variant=='hewn_pegged' and detail!='LOW':
                 from .construction_geometry import hewn_member
                 from .construction_library import timber_workmanship
                 x,y=a[0]+tx*ss,a[1]+ty*ss
                 # Section axes follow the wall tangent and its normal,
                 # including every orthogonal wing face.
-                hewn_member(timber,(x,y,_foundation(plan)),(x,y,structural_top),post_width,.25,
+                hewn_member(member,(x,y,_foundation(plan)),(x,y,structural_top),post_width,.25,
                             timber_workmanship(plan.settings),plan.rng(f'frame.hewn.{edge_index}.{ss}'),
                             side=(tx,ty,0))
             else:
-                _post(timber,a,b,ss,_foundation(plan),structural_top,post_width,.25,chamfer)
+                _post(member,a,b,ss,_foundation(plan),structural_top,post_width,.25,chamfer)
     # Storey plates are continuous through ordinary bays and interrupted only
     # where a tall door removes the wall below that level.
     plate_schedule=(layout["plates"] if visibility>.16 and edge_index not in getattr(plan,'open_edges',()) else layout["plates"][-1:])
@@ -1610,6 +1638,53 @@ def _facade_components(plan, buffers, pier_mode, construction):
     return construction
 
 
+def _plaster_loss(plan, edge_index, edge, layout, coating, construction, buffers):
+    """Cut protective render and expose a recessed face of the surviving infill."""
+    from .construction import bind, component
+
+    cuts = []
+    occupied = []
+    for guide in getattr(plan, 'guided_openings', {}).get(edge_index, ()):
+        if not isinstance(guide, PlasterLoss):
+            continue
+        name = f'{guide.side.title()} plaster loss {guide.id[:8]}'
+        if construction != 'TIMBER_INFILL' or coating is None:
+            raise ValueError(f'{name}: requires lime or earthen render on timber-framed infill')
+        if not guide.outline or any(not math.isfinite(coord) for p in guide.outline for coord in p):
+            raise ValueError(f'{name}: use a finite wall-face outline')
+        stations, elevations = zip(*guide.outline)
+        a,b = min(stations),max(stations)
+        low,high = min(elevations),max(elevations)
+        base = _foundation(plan)
+        band = math.floor((low-base) / plan.settings.floor_height)
+        sole = base + band * plan.settings.floor_height
+        top = min(sole + plan.settings.floor_height, layout['roof_safety']['upper_plate'])
+        if band < 0 or low < sole+.115 or high > top-.13 or a < .24 or b > layout['length']-.24:
+            raise ValueError(f'{name}: keep the chip on one infill panel between its framing and plates')
+        if any(a-.12 < post < b+.12 for post in layout['principal_posts']):
+            raise ValueError(f'{name}: keep the chip away from principal posts')
+        bounds = dict(s0=a,s1=b,z0=low,z1=high)
+        if any(_segment_hits_opening(brace,bounds,brace['width']*.5+.025) for brace in layout['braces']):
+            raise ValueError(f'{name}: keep the chip clear of its bay brace')
+        opening_bounds = [o['assembly_bounds'] for o in layout['openings']]
+        if any(a < o['s1']+.04 and b > o['s0']-.04 and low < o['z1']+.04 and high > o['z0']-.04
+               for o in opening_bounds + occupied):
+            raise ValueError(f'{name}: clear opening surrounds and neighboring chips')
+        occupied.append(bounds)
+        try:
+            cuts.extend(inequalities(triangle) for triangle in guide.triangles())
+        except ValueError as exc:
+            raise ValueError(f'{name}: {exc}') from exc
+        key = f'guide.{guide.id}.substrate'
+        backing = MeshBuffer(key, 'earthen_daub', 'walls')
+        bind(component(plan,key,'wall_infill','plaster_limewash',host=coating.component_id),backing)
+        # The backing meets the opaque wall core. Its exposed face sits behind
+        # the render, while its perimeter runs into the cut coat's edge.
+        _skin_polygon(backing,edge,guide.outline,outward=-.003,thickness=.008)
+        buffers[key] = backing
+    return cuts
+
+
 def build_facades(plan):
     """Build exterior wall, frame, openings, plinth and restrained building details."""
     buffers = {}
@@ -1689,10 +1764,17 @@ def build_facades(plan):
             if o.get('guide_id') and o.get('arch') and body:
                 o['arch_skin_margin'] = .158
                 o['assembly_bounds']['z1'] = o['z1'] + .16
-        records.append((edge,openings))
+        layout = frame_layout(plan,i,edge)
+        cuts = _plaster_loss(plan,i,edge,layout,coating,construction,buffers)
+        records.append((edge,openings,layout))
         _add_foundation(buffers,plan,i,edge)
         is_open=i in getattr(plan,'open_edges',())
-        if not is_open:_wall_panels(buffers["walls"],a,b,n,length,openings,wall_top,fh,getattr(plan,'wall_thickness',WALL_THICKNESS))
+        if not is_open:
+            recess = .010 if cuts else 0.
+            inner_a = (a[0]-n[0]*recess,a[1]-n[1]*recess)
+            inner_b = (b[0]-n[0]*recess,b[1]-n[1]*recess)
+            _wall_panels(buffers["walls"],inner_a,inner_b,n,length,openings,wall_top,fh,
+                         getattr(plan,'wall_thickness',WALL_THICKNESS)-recess)
         if not is_open:
             thick_coat = coating and coating.component_role=='wall_surface' and coating.substrate!='limewash'
             if skin_buffer is not None and not thick_coat:
@@ -1705,7 +1787,7 @@ def build_facades(plan):
                 # Render ends against the plinth. A short worn margin exposes
                 # backing only at the bottom, outside the reserved apertures.
                 wear=plan.style.weather_exposure*(1-plan.settings.maintenance)
-                if wear>.12 and plan.settings.detail!='LOW' and length>1.:
+                if wear>.12 and plan.settings.detail!='LOW' and length>1. and not cuts:
                     width=min(.36,length*.15)
                     start=plan.rng(f'facade.render.splash.{i}').uniform(.18,length-width-.18)
                     left=[(0,fh),(start,fh),(start,top),(0,top)]
@@ -1719,11 +1801,10 @@ def build_facades(plan):
                     tiles=(tile,)
                 for panel in tiles:
                     _emit_clipped_skin_tile(plan,i,edge,profile,openings,render,panel,False,
-                                            outward=thickness*.74,thickness=thickness)
-        _timber_frame(buffers,plan,i,edge,openings,wall_top)
+                                            outward=thickness*.74,thickness=thickness,finish_cuts=cuts)
+        _timber_frame(buffers,plan,i,edge,openings,wall_top,layout)
         # Small exposed pegs indicate the principal post/plate joints. Pegs follow
         # the semantic frame schedule and sit flush to the outward face of timber.
-        layout=frame_layout(plan,i,edge)
         peg_positions=(layout["principal_posts"]
                        if float(getattr(style,"frame_visibility",1.0))>.16 else ())
         peg_levels=(layout["plates"][1:-1]
@@ -1764,11 +1845,11 @@ def build_facades(plan):
     # Keep semantic opening records next to the generated plan for independent
     # collision review. Records include complete casing/shutter bounds.
     plan.facade_records=[{"edge_index":i,"openings":[dict(o) for o in openings],
-                          "frame_layout":frame_layout(plan,i,edge)}
-                         for i,(edge,openings) in enumerate(records)]
+                          "frame_layout":layout}
+                         for i,(edge,openings,layout) in enumerate(records)]
     if str(plan.settings.function).upper()=="GATEHOUSE":
         passage=[]
-        for i,(_edge,openings) in enumerate(records):
+        for i,(_edge,openings,_layout) in enumerate(records):
             for o in openings:
                 if o.get("role") in ("passage_entry","passage_exit"):
                     a,b=plan.edges[i]
@@ -1795,7 +1876,7 @@ def build_facades(plan):
     if not getattr(plan,'suppress_chimney',False):_add_chimney(buffers,plan)
     if not getattr(plan,'suppress_function_details',False):
         _add_house_details(buffers,plan)
-        _add_function_details(buffers,plan,[openings for _,openings in records])
+        _add_function_details(buffers,plan,[openings for _,openings,_ in records])
 
     # Keep the output compact and omit empty semantic buffers.
     return [buffers[key] for key in buffers if buffers[key].faces]

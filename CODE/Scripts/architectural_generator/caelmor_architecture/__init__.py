@@ -2,7 +2,7 @@
 bl_info = {
     "name": "Caelmor Architectural Generator",
     "author": "Caelmor",
-    "version": (0, 19, 0),
+    "version": (0, 20, 0),
     "blender": (4, 2, 0),
     "location": "View3D > Sidebar > Caelmor",
     "description": "Generate editable regional Caelmor buildings",
@@ -246,10 +246,12 @@ def _make_classes(b):
         ])
         caelm_guide_target: b.props.PointerProperty(name='Target Cottage', type=b.types.Collection,
             poll=_fitted_collection, description='Choose the box-fitted cottage whose wall will receive the active face')
-        caelm_guide_kind: b.props.EnumProperty(name='Opening Type', items=[
+        caelm_guide_kind: b.props.EnumProperty(name='Feature Type', items=[
             ('DOOR', 'Door', 'Ground-floor rectangular door with jambs, head and a stepped approach'),
             ('WINDOW', 'Window', 'Rectangular opening with casing, drained sill, shutters and glazing'),
             ('ROUND_DOOR', 'Rounded Door', 'Arched wall cut shaped from a rectangle or a symmetric curved face'),
+            ('TIMBER_POST', 'Timber Post', 'Place a sole-to-plate structural post using one vertical mesh edge'),
+            ('PLASTER_LOSS', 'Plaster Loss', 'Use one irregular face to cut the finish and expose sound earthen infill'),
         ])
         caelm_guide_leaf: b.props.BoolProperty(name='Closed Leaf', default=True,
             description='Generate a closed planked leaf and keep this static passage closed in collision')
@@ -494,8 +496,8 @@ def _make_classes(b):
 
     class CAELMOR_OT_opening_guide(b.types.Operator):
         bl_idname = 'caelmor.opening_guide'
-        bl_label = 'Apply Opening Guide'
-        bl_description = 'Use a single planar face to rebuild the host opening, adjacent framing and collision'
+        bl_label = 'Apply Feature Guide'
+        bl_description = 'Apply a source face or edge and rebuild the affected construction assemblies'
         bl_options = {'REGISTER', 'UNDO'}
         action: b.props.EnumProperty(items=[
             ('APPLY', 'Apply', 'Attach the selected face or change its type'),
@@ -517,12 +519,12 @@ def _make_classes(b):
                     raise ValueError('The target cottage must be in the current scene')
                 settings = _settings_from_json(load_settings(collection))
                 if not settings.fit_blockout:
-                    raise ValueError('Opening guides require a box-fitted Lowmark Cottage')
+                    raise ValueError('Wall feature guides require a box-fitted Lowmark Cottage')
                 context.view_layer.update()
                 edit = None
                 if self.action == 'APPLY':
                     if source is None or not source.select_get():
-                        raise ValueError('Select the source face in Object Mode')
+                        raise ValueError('Select the source mesh guide in Object Mode')
                     edit = (source, propose(collection, source, settings, props.caelm_guide_kind, props.caelm_guide_leaf))
                 elif self.action == 'REMOVE':
                     if host is None:
@@ -551,7 +553,7 @@ def _make_classes(b):
                         obj.select_set(False)
                     source.select_set(True)
                     context.view_layer.objects.active = source
-                self.report({'INFO'}, 'Applied wall opening guides')
+                self.report({'INFO'}, 'Applied wall feature guides')
                 return {'FINISHED'}
             except Exception as exc:
                 return _report_error(self, exc)
@@ -730,7 +732,7 @@ def _make_classes(b):
                     if conflicts:
                         components.label(text=f'{len(conflicts)} protected sections need review', icon='ERROR')
 
-            if openings := section('Opening Guides', 'MESH_PLANE', collapsed=True):
+            if openings := section('Feature Guides', 'MESH_PLANE', collapsed=True):
                 active = context.view_layer.objects.active
                 binding = active.get('caelm_guide') if active else None
                 if binding:
@@ -738,7 +740,7 @@ def _make_classes(b):
                 else:
                     openings.prop(p, 'caelm_guide_target')
                 openings.prop(p, 'caelm_guide_kind')
-                if p.caelm_guide_kind != 'WINDOW':
+                if p.caelm_guide_kind in ('DOOR','ROUND_DOOR'):
                     openings.prop(p, 'caelm_guide_leaf')
                 openings.operator('caelmor.opening_guide', icon='MOD_BUILD').action = 'APPLY'
                 if collection:

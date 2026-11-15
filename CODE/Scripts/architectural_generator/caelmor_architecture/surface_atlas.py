@@ -21,7 +21,7 @@ ATLAS_REVISION=2
 UV_NAME='UV2_Surface'
 DETAIL_UV='UV3_Detail'
 FAMILY={'timber':'wood','timber_light':'wood','stone':'stone','stone_light':'stone',
-        'mortar':'stone','stone_sooted':'stone','plaster':'plaster','plaster_patch':'plaster',
+        'mortar':'stone','stone_sooted':'stone','plaster':'plaster','plaster_patch':'plaster','earthen_daub':'plaster',
         'roof':'roof','roof_dark':'roof','roof_patch':'roof','roof_worn':'roof',
         'iron':'iron','bellows_leather':'leather','charcoal':'charcoal'}
 PAD=2
@@ -49,6 +49,9 @@ def _charts(objects, density, course_edges=False):
     for obj,host in objects:
         mesh=obj.data; uv=mesh.uv_layers['UV0_Metric']; pieces=_components(mesh)
         cover_tiles=course_edges and obj['caelm_buffer_id'].endswith(TILE_BUFFERS)
+        continuous_finish = (obj['caelm_buffer_id'].endswith('.facade_render_skin') and
+                             any(getattr(guide, 'kind', None) == 'plaster_loss'
+                                 for guides in getattr(host, 'guided_openings', {}).values() for guide in guides))
         for poly in mesh.polygons:
             ids=list(poly.loop_indices)
             coords=np.array([tuple(uv.data[i].uv) for i in ids],dtype=float)
@@ -61,7 +64,7 @@ def _charts(objects, density, course_edges=False):
             w,h=[max(1,min(256,int(math.ceil(float(s)*density)))) for s in span]
             charts.append(dict(obj=obj,poly=poly.index,loops=ids,coords=coords,low=low,span=span,
                 transform=transform,normal=tuple(poly.normal),center=pieces[poly.index],
-                w=w,h=h,host=host,
+                w=w,h=h,host=host,continuous_finish=continuous_finish,
                 course=course_start(host,points,poly.normal,course_cache) if cover_tiles else None))
     return sorted(charts,key=lambda c:(-c['h'],-c['w'],c['obj']['caelm_buffer_id'],c['poly']))
 
@@ -255,6 +258,10 @@ def apply_surfaces(objects,plan,settings,context_objects=None,*,roof_finish="BAS
             c['phase']=tuple(DETAIL_PERIOD*_hash2(int(round(center[0]*97))+offset,
                        int(round(center[1]*101))+int(round(center[2]*149)),settings.seed+offset)
                        for offset in (701,811))
+            if c['continuous_finish']:
+                # Clipping fragments belong to one trowelled coat. Sampling
+                # separate stock colours would print their cut edges in PBR.
+                c['phase'] = (0.,0.)
             x,y=c['xy']
             for li,coord in zip(c['loops'],c['coords']):
                 unit=(coord-c['low'])/c['span']
@@ -277,7 +284,8 @@ def apply_surfaces(objects,plan,settings,context_objects=None,*,roof_finish="BAS
                 positions[start:end]=np.column_stack((u.ravel(),v.ravel(),np.ones(length)))@c['transform']
                 normals[start:end]=c['normal']
                 center=c['center'];stock=_hash2(int(round(center[0]*107)),int(round(center[1]*107))+int(round(center[2]*149)),settings.seed)
-                unit[start:end]=stock;uz[start:end]=center[2]
+                unit[start:end]=0. if c['continuous_finish'] else stock
+                uz[start:end]=center[2]
                 if hewn and c['obj'].name in hewn:
                     long_span,cross_span=c['span']
                     # Real narrow longitudinal faces on the hewn frame and

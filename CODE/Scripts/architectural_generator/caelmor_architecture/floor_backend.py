@@ -123,12 +123,18 @@ def hierarchy(collection, anchor, volumes):
     building_id = collection.get('caelm_building_id') or uuid.uuid4().hex
     collection['caelm_building_id'] = building_id
     anchor['caelm_building_id'] = building_id
-    existing = {o.get('caelm_floor_group'): o for o in collection.objects if o.get('caelm_floor_group')}
+    prior_groups = [o for o in collection.objects if o.get('caelm_floor_group')]
+    existing = {}
+    for obj in prior_groups:
+        key = obj['caelm_floor_group']
+        if key not in existing or (obj.children and not existing[key].children):
+            existing[key] = obj
     def group(key, parent, **properties):
         obj = existing.get(key)
         if obj is None:
             obj = bpy.data.objects.new('Caelmor '+key, None)
             collection.objects.link(obj)
+            existing[key] = obj
         obj['caelm_floor_group'] = key
         obj['caelm_building_id'] = building_id
         for name, value in properties.items(): obj['caelm_'+name] = value
@@ -145,7 +151,7 @@ def hierarchy(collection, anchor, volumes):
             obj.parent = node
             obj['caelm_building_id'] = building_id
     # Remove obsolete empty groups only; protected sections keep their parents.
-    for obj in reversed(list(existing.values())):
+    for obj in reversed(prior_groups):
         if not obj.children: bpy.data.objects.remove(obj, do_unlink=True)
     collection['caelm_floor_schedule'] = json.dumps(volumes, sort_keys=True)
     collection['caelm_floor_contract'] = floors.VERSION

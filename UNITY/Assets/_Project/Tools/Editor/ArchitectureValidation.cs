@@ -8,6 +8,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
@@ -64,6 +65,332 @@ namespace Caelmor.Unity.Editor
                 Check(AssetDatabase.AssetPathToGUID(record.placementPrefab) == record.placementGuid, "Placement prefab GUID persisted.");
             }
             Debug.Log("CAELMOR_ARCHITECTURE_PERSISTENCE_PASSED checks=" + checks);
+        }
+
+        /// <summary>End-to-end Editor regression against real Blender exports of one fitted Lowmark cottage.</summary>
+        public static void ValidateGuidedOpeningUpdates()
+        {
+            checks = 0;
+            CaelmorSceneOwnership.RequireCleanScenes();
+            const string root = "Assets/_Project/World/_ArchitectureGuidedValidation";
+            const string scenePath = root + "/PlacedCottage.unity";
+            const string key = "guided_cottage";
+            const string recordPath = root + "/Generated/" + key + "/ImportRecord.asset";
+            string exports = Path.GetFullPath(Environment.GetEnvironmentVariable("CAELMOR_GUIDED_UPDATE_DIR") ??
+                Path.Combine(ArchitectureImport.Repository, "CODE/Scripts/architectural_generator/dist/guided_update_check"));
+            string scratch = Path.GetFullPath(Path.Combine(Application.dataPath, "../Obj/ArchitectureGuidedValidation"));
+            const string fileName = "cottage.glb";
+            string source = Path.Combine(scratch, fileName);
+            string originalRoot = ArchitectureImport.Root;
+            var setup = EditorSceneManager.GetSceneManagerSetup();
+            var originalScenes = SceneHashes();
+            Check(exports.StartsWith(ArchitectureImport.Repository + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase),
+                "Guided validation exports must be inside the designated checkout.");
+            Check(!Directory.Exists(root) && !File.Exists(root + ".meta") && !Directory.Exists(scratch), "Guided validation scratch paths must be absent.");
+            foreach (string phase in new[] { "baseline", "added", "edited", "removed" })
+                Check(File.Exists(Path.Combine(exports, phase, fileName)), "Generate real Blender guided fixtures before invoking this validation.");
+            Directory.CreateDirectory(scratch);
+            Scene scene = default;
+            ArchitectureImport.Root = root;
+            void Stage(string phase)
+            {
+                foreach (string file in new[] { fileName, "cottage.collision.glb", "cottage.caelmor.json" })
+                    File.Copy(Path.Combine(exports, phase, file), Path.Combine(scratch, file), true);
+            }
+            const string authoredChild = "Artist cottage detail";
+            const string authoredPlacement = "Placed cottage";
+            const string wall = ".facade_walls::floor:lowmark_main_hall:0";
+            ArchitectureIdentity Wall(GameObject go) => go.GetComponentsInChildren<ArchitectureIdentity>(true).Single(i => i.bufferId.EndsWith(wall, StringComparison.Ordinal));
+            ArchitectureIdentity[] GuideVisuals(GameObject go) => go.GetComponentsInChildren<ArchitectureIdentity>(true)
+                .Where(i => i.bufferId.Contains(".guide.")).ToArray();
+            MeshCollider[] Approaches(GameObject go) => go.GetComponentsInChildren<MeshCollider>(true)
+                .Where(c => c.name.StartsWith("Collision | Collider Approach ", StringComparison.Ordinal)).ToArray();
+            Dictionary<string, string> LocalIds(GameObject prefab)
+            {
+                string Id(Object obj)
+                {
+                    Check(AssetDatabase.TryGetGUIDAndLocalFileIdentifier(obj, out string guid, out long identifier) && identifier != 0,
+                        "Use actual Unity GUID and fileID for " + obj.name + ".");
+                    return guid + ":" + identifier;
+                }
+                var result = new Dictionary<string, string>();
+                foreach (var transform in prefab.GetComponentsInChildren<Transform>(true))
+                {
+                    var obj = transform.gameObject;
+                    result.Add(obj.name + "/GameObject", Id(obj));
+                    foreach (var component in obj.GetComponents<Component>())
+                        result.Add(obj.name + "/" + component.GetType().Name, Id(component));
+                    var filter = obj.GetComponent<MeshFilter>();
+                    var collider = obj.GetComponent<MeshCollider>();
+                    var mesh = filter != null ? filter.sharedMesh : collider != null ? collider.sharedMesh : null;
+                    if (mesh != null) result.Add(obj.name + "/Mesh", Id(mesh));
+                }
+                return result;
+            }
+            bool IsSubset(Dictionary<string, string> before, Dictionary<string, string> after) =>
+                before.All(pair => after.TryGetValue(pair.Key, out string value) && value == pair.Value);
+            void RejectGuidedUpdate(string expected)
+            {
+                var original = AssetHashes();
+                string failure = null;
+                try { ArchitectureImport.Import(source, key); }
+                catch (InvalidOperationException e) { failure = e.Message; }
+                Check(failure != null && failure.Contains(expected), "Guided import must report " + expected + "; actual: " + failure);
+                Check(Equal(original, AssetHashes()), "An incompatible or referenced update changes no Unity files.");
+            }
+
+            try
+            {
+                Stage("baseline");
+                // Old Blender exports may add a numeric suffix to an unchanged collider's name.
+                // Later revisions export its canonical name; preserve the first real Unity prefab/mesh IDs either way.
+                string collisionSource = Path.Combine(scratch, "cottage.collision.glb");
+                var oldCollision = ArchitectureImport.Container.Read(collisionSource);
+                var oneWall = oldCollision.Json["nodes"].First(n => ((string)n["name"]).StartsWith("Collider Wall ", StringComparison.Ordinal));
+                oneWall["name"] = (string)oneWall["name"] + ".001";
+                ((JObject)oneWall["extras"]).Remove("caelm_collider_id");
+                File.WriteAllBytes(collisionSource, oldCollision.Write(oldCollision.Json));
+                var record = ArchitectureImport.Import(source, key);
+                string recordGuid = AssetDatabase.AssetPathToGUID(recordPath);
+                Check(!string.IsNullOrEmpty(recordGuid) && AssetDatabase.GetAssetPath(record) == recordPath, "Initial import persisted a native record under its stable key.");
+                var baseline = LocalIds(AssetDatabase.LoadAssetAtPath<GameObject>(record.generatedPrefab));
+                string materialPath = root + "/ArtistMaterial.mat";
+                var variantMaterial = new Material(Shader.Find("Standard")) { color = Color.magenta };
+                AssetDatabase.CreateAsset(variantMaterial, materialPath);
+                var placement = PrefabUtility.LoadPrefabContents(record.placementPrefab);
+                try
+                {
+                    var wallRenderer = Wall(placement).GetComponent<MeshRenderer>();
+                    wallRenderer.sharedMaterial = variantMaterial;
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(wallRenderer);
+                    PrefabUtility.SaveAsPrefabAsset(placement, record.placementPrefab);
+                }
+                finally { PrefabUtility.UnloadPrefabContents(placement); }
+
+                scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+                var placed = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath<GameObject>(record.placementPrefab), scene);
+                placed.name = authoredPlacement;
+                Vector3 position = new Vector3(12, 0, -13);
+                Quaternion rotation = Quaternion.Euler(0, 23, 0);
+                placed.transform.SetPositionAndRotation(position, rotation);
+                PrefabUtility.RecordPrefabInstancePropertyModifications(placed.transform);
+                var child = new GameObject(authoredChild);
+                child.transform.SetParent(placed.transform, false);
+                child.transform.localPosition = Vector3.one;
+                var constraint = child.AddComponent<ParentConstraint>();
+                constraint.AddSource(new ConstraintSource { sourceTransform = Wall(placed).transform, weight = 1 });
+                EditorSceneManager.SaveScene(scene, scenePath);
+                string sceneHash = ArchitectureImport.FileHash(scenePath);
+                string variantHash = ArchitectureImport.FileHash(record.placementPrefab);
+                string variantGuid = AssetDatabase.AssetPathToGUID(record.placementPrefab);
+                string buildingId = record.buildingId;
+                int baselineRenderers = record.rendererCount, baselineColliders = record.colliderCount;
+
+                void CheckPlacement()
+                {
+                    Check(placed.transform.position == position && Quaternion.Angle(placed.transform.rotation, rotation) < 0.01f
+                        && placed.transform.Find(authoredChild)?.localPosition == Vector3.one, "Placed cottage and its authored child retain their transforms.");
+                    Check(Wall(placed).GetComponent<MeshRenderer>().sharedMaterial == variantMaterial, "Authored variant material stays on the retained wall.");
+                    Check(placed.transform.Find(authoredChild).GetComponent<ParentConstraint>().GetSource(0).sourceTransform == Wall(placed).transform,
+                        "An authored scene reference still resolves to the retained wall Transform.");
+                    Check(ArchitectureImport.FileHash(scenePath) == sceneHash && ArchitectureImport.FileHash(record.placementPrefab) == variantHash &&
+                        AssetDatabase.AssetPathToGUID(record.placementPrefab) == variantGuid && record.placementGuid == variantGuid &&
+                        AssetDatabase.AssetPathToGUID(recordPath) == recordGuid &&
+                        record.buildingId == buildingId, "Authored scene bytes, variant bytes, record/variant GUIDs and source identity did not change.");
+                    ArchitectureImport.VerifyOwned(record);
+                }
+
+                void ReloadPlacement(string phase)
+                {
+                    Debug.Log("CAELMOR_ARCHITECTURE_GUIDED_LIVE " + phase + ": " + GuideVisuals(placed).Length + " guide sections, " + Approaches(placed).Length + " approach colliders");
+                    scene = EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
+                    placed = scene.GetRootGameObjects().Single(o => o.name == authoredPlacement);
+                    record = AssetDatabase.LoadAssetAtPath<ArchitectureImportRecord>(recordPath);
+                    Check(record != null, "The guided import record persisted after scene reload.");
+                }
+
+                bool RearWallHit(float x)
+                {
+                    var rear = placed.GetComponentsInChildren<MeshCollider>(true)
+                        .Where(c => c.name.StartsWith("Collision | Collider Wall ", StringComparison.Ordinal) && c.sharedMesh.bounds.size.x > c.sharedMesh.bounds.size.z)
+                        .OrderBy(c => c.sharedMesh.bounds.center.z).First();
+                    float z = rear.sharedMesh.bounds.center.z;
+                    var origin = rear.transform.TransformPoint(new Vector3(x, 1.4f, z + 1));
+                    var ray = new Ray(origin, rear.transform.TransformDirection(Vector3.back));
+                    Physics.SyncTransforms();
+                    return rear.Raycast(ray, out _, 2);
+                }
+
+                Check(RearWallHit(-1.8f), "The baseline rear wall blocks a ray through the future door.");
+
+                Stage("added");
+                record = ArchitectureImport.Import(source, key);
+                var added = LocalIds(AssetDatabase.LoadAssetAtPath<GameObject>(record.generatedPrefab));
+                Check(IsSubset(baseline, added), "Adding the door and window preserves all pre-existing Unity asset IDs.");
+                Check(GuideVisuals(placed).Length == 7 && Approaches(placed).Length == 1, "The open scene receives all new guide sections and the approach.");
+                ReloadPlacement("added");
+                Check(record.rendererCount == baselineRenderers + 7 && record.colliderCount == baselineColliders + 1,
+                    $"The updated ledger counts seven new visual sections and one new collider ({record.rendererCount}, {record.colliderCount}).");
+                var approaches = Approaches(placed);
+                Check(approaches.Length == 1 && approaches[0].GetComponent<Renderer>() == null && !approaches[0].convex,
+                    $"The reloaded cottage uses exactly one invisible, static approach collider ({approaches.Length}).");
+                Check(GuideVisuals(placed).Select(i => i.sourceBufferId.Split('.')[3]).Distinct().Count() == 2,
+                    "The reloaded cottage includes both independent opening guide assemblies.");
+                Check(!RearWallHit(approaches[0].sharedMesh.bounds.center.x), "The real rear wall collider has an open door aperture.");
+                Check(GuideVisuals(placed).All(i => i.volumeId == "lowmark_main_hall" && i.floorIndex >= 0 && i.visibility == "FLOOR" &&
+                    i.transform.parent.GetComponent<ArchitectureIdentity>().floorIndex == i.floorIndex),
+                    "New opening products retain their Blender floor bands and volume.");
+                CheckPlacement();
+
+                var addedSizes = GuideVisuals(placed).ToDictionary(i => i.bufferId, i => i.GetComponent<MeshFilter>().sharedMesh.bounds);
+                var addedApproachBounds = Approaches(placed).Single().sharedMesh.bounds;
+                Stage("edited");
+                record = ArchitectureImport.Import(source, key);
+                var edited = LocalIds(AssetDatabase.LoadAssetAtPath<GameObject>(record.generatedPrefab));
+                Check(Equal(added, edited), "Moving and resizing guides preserve every Unity prefab object/component and mesh GUID/fileID.");
+                ReloadPlacement("edited");
+                Check(GuideVisuals(placed).Any(i => i.sourceBufferId.EndsWith(".windows") && i.GetComponent<MeshFilter>().sharedMesh.bounds.size != addedSizes[i.bufferId].size) &&
+                    Approaches(placed).Single().sharedMesh.bounds.center != addedApproachBounds.center,
+                    "The window resize and the moved door approach reached native meshes in the already placed instance.");
+                float editedDoorCenter = Approaches(placed).Single().sharedMesh.bounds.center.x;
+                Check(!RearWallHit(editedDoorCenter), "The moved doorway still has a passable collider aperture.");
+                CheckPlacement();
+                Debug.Log("CAELMOR_ARCHITECTURE_GUIDED_ADD_EDIT_PASSED");
+
+                string sidecarPath = Path.ChangeExtension(source, ".caelmor.json");
+                var incompatible = JObject.Parse(File.ReadAllText(sidecarPath));
+                incompatible["floor_presentation"]["building_id"] = "00000000000000000000000000000001";
+                File.WriteAllText(sidecarPath, incompatible.ToString());
+                RejectGuidedUpdate("changed the source building ID");
+                Stage("edited");
+                incompatible = JObject.Parse(File.ReadAllText(sidecarPath));
+                incompatible["floor_presentation"]["volumes"][0]["boundaries"][0] = 2.93;
+                File.WriteAllText(sidecarPath, incompatible.ToString());
+                RejectGuidedUpdate("changed floor_presentation");
+                Stage("edited");
+                incompatible = JObject.Parse(File.ReadAllText(sidecarPath));
+                incompatible["settings"]["width"] = 9;
+                File.WriteAllText(sidecarPath, incompatible.ToString());
+                RejectGuidedUpdate("changed the exported generation settings");
+                Stage("edited");
+                var visual = ArchitectureImport.Container.Read(source);
+                var gltfNodes = (JArray)visual.Json["nodes"];
+                int relocated = gltfNodes.IndexOf(gltfNodes.Single(n => ((string)n["extras"]?["caelm_buffer_id"])?.EndsWith(wall, StringComparison.Ordinal) == true));
+                var originalParent = gltfNodes.Select(n => n["children"] as JArray).Single(a => a != null && a.Any(i => (int)i == relocated));
+                originalParent.Single(i => (int)i == relocated).Remove();
+                gltfNodes[(int)visual.Json["scenes"][0]["nodes"][0]]["children"].Last.AddAfterSelf(new JValue(relocated));
+                File.WriteAllBytes(source, visual.Write(visual.Json));
+                RejectGuidedUpdate("changed hierarchy or ownership");
+
+                var removedMeshPaths = GuideVisuals(placed).Select(i => AssetDatabase.GetAssetPath(i.GetComponent<MeshFilter>().sharedMesh))
+                    .Concat(Approaches(placed).Select(c => AssetDatabase.GetAssetPath(c.sharedMesh))).ToArray();
+                Stage("removed");
+                var guide = GuideVisuals(placed).First();
+                constraint = placed.transform.Find(authoredChild).GetComponent<ParentConstraint>();
+                constraint.SetSource(0, new ConstraintSource { sourceTransform = guide.transform, weight = 1 });
+                EditorSceneManager.MarkSceneDirty(scene);
+                RejectGuidedUpdate("a live object reference");
+                Check(scene.isDirty && constraint.GetSource(0).sourceTransform == guide.transform, "Rejected removal preserves the unsaved referenced opening.");
+                constraint.SetSource(0, new ConstraintSource { sourceTransform = Wall(placed).transform, weight = 1 });
+
+                byte[] artistVariant = File.ReadAllBytes(record.placementPrefab);
+                var authoredVariant = PrefabUtility.LoadPrefabContents(record.placementPrefab);
+                try
+                {
+                    var retiredRenderer = GuideVisuals(authoredVariant).First().GetComponent<MeshRenderer>();
+                    retiredRenderer.sharedMaterial = variantMaterial;
+                    PrefabUtility.RecordPrefabInstancePropertyModifications(retiredRenderer);
+                    PrefabUtility.SaveAsPrefabAsset(authoredVariant, record.placementPrefab);
+                }
+                finally { PrefabUtility.UnloadPrefabContents(authoredVariant); }
+                RejectGuidedUpdate("a saved reference or override to a removed guided section");
+                File.WriteAllBytes(record.placementPrefab, artistVariant);
+                AssetDatabase.ImportAsset(record.placementPrefab, ImportAssetOptions.ForceUpdate | ImportAssetOptions.ForceSynchronousImport);
+
+                const string referencingScenePath = root + "/RetiredMeshReference.unity";
+                Scene referencingScene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Additive);
+                var meshReference = new GameObject("Reference to retired mesh");
+                SceneManager.MoveGameObjectToScene(meshReference, referencingScene);
+                meshReference.AddComponent<MeshFilter>().sharedMesh = AssetDatabase.LoadAssetAtPath<Mesh>(removedMeshPaths[0]);
+                EditorSceneManager.SaveScene(referencingScene, referencingScenePath);
+                EditorSceneManager.CloseScene(referencingScene, true);
+                RejectGuidedUpdate("a reference to a removed guided mesh");
+                AssetDatabase.DeleteAsset(referencingScenePath);
+
+                string ownedPath = record.generatedPrefab;
+                byte[] ownedPrefab = File.ReadAllBytes(ownedPath);
+                File.AppendAllText(ownedPath, "\n# Conflicting generated edit\n");
+                RejectGuidedUpdate("Generated-content conflict");
+                File.WriteAllBytes(ownedPath, ownedPrefab);
+                string[] oldShared = record.ownedFiles.Select(f => f.path).Where(p => p.StartsWith(root + "/Shared/", StringComparison.Ordinal)).ToArray();
+
+                var unsaved = new GameObject("Unrelated unsaved cottage edit");
+                unsaved.transform.SetParent(placed.transform, false);
+                unsaved.transform.localPosition = new Vector3(1, 2, 3);
+                record = ArchitectureImport.Import(source, key);
+                Check(Equal(baseline, LocalIds(AssetDatabase.LoadAssetAtPath<GameObject>(record.generatedPrefab))), "Removal preserves all original IDs and retires only guide products.");
+                Check(GuideVisuals(placed).Length == 0 && Approaches(placed).Length == 0, "The open scene removes the retired guide products.");
+                Check(scene.isDirty && unsaved != null && unsaved.transform.localPosition == new Vector3(1, 2, 3),
+                    "Compatible removal preserves unrelated unsaved scene additions and dirty state.");
+                ReloadPlacement("removed");
+                Check(record.rendererCount == baselineRenderers && record.colliderCount == baselineColliders &&
+                    GuideVisuals(placed).Length == 0 && Approaches(placed).Length == 0 && removedMeshPaths.All(p => !File.Exists(p) && !File.Exists(p + ".meta") && record.ownedFiles.All(f => f.path != p && f.path != p + ".meta")),
+                    "All removed guide visual/approach products, local mesh assets and ledger entries are retired.");
+                Check(RearWallHit(editedDoorCenter), "The replacement rear wall collision fills the removed door aperture.");
+                Check(oldShared.All(p => File.Exists(p) && record.ownedFiles.Any(f => f.path == p)), "Retirement leaves previously shared textures, materials and ledger hashes available to authored overrides.");
+                CheckPlacement();
+                var unchanged = AssetHashes();
+                var repeat = ArchitectureImport.Import(source, key);
+                Check(AssetDatabase.GetAssetPath(repeat) == recordPath && AssetDatabase.AssetPathToGUID(recordPath) == recordGuid,
+                    "Identical repeated import returns the original persisted GUID.");
+                Check(Equal(unchanged, AssetHashes()), "Identical repeat import keeps guided files byte/content unchanged.");
+                Stage("added");
+                record = ArchitectureImport.Import(source, key);
+                Check(IsSubset(baseline, LocalIds(AssetDatabase.LoadAssetAtPath<GameObject>(record.generatedPrefab))) &&
+                    GuideVisuals(placed).Length == 7 && Approaches(placed).Length == 1, "Re-adding retired guides imports cleanly without replacing the placement.");
+                Stage("removed");
+                record = ArchitectureImport.Import(source, key);
+                Check(Equal(baseline, LocalIds(AssetDatabase.LoadAssetAtPath<GameObject>(record.generatedPrefab))), "Repeated retirement keeps the same initial object IDs.");
+                CheckPlacement();
+
+                var guideFree = ArchitectureImport.Container.Read(source);
+                guideFree.Json["asset"]["generator"] = ((string)guideFree.Json["asset"]["generator"] ?? "Blender") + " (guide-free refresh)";
+                File.WriteAllBytes(source, guideFree.Write(guideFree.Json));
+                record = ArchitectureImport.Import(source, key);
+                Check(Equal(baseline, LocalIds(AssetDatabase.LoadAssetAtPath<GameObject>(record.generatedPrefab))),
+                    "A later guide-free export preserves retained Unity IDs, including the legacy wall alias.");
+                CheckPlacement();
+
+                if (Directory.Exists(Path.Combine(exports, "features")))
+                {
+                    Stage("features");
+                    record = ArchitectureImport.Import(source, key);
+                    string[] newParts = GuideVisuals(placed).Select(i => i.sourceBufferId.Split('.').Last()).Distinct().OrderBy(p => p).ToArray();
+                    Check(newParts.SequenceEqual(new[] { "member", "substrate" }) && Approaches(placed).Length == 0 && record.colliderCount == baselineColliders,
+                        "The live fitted cottage receives timber and plaster guide renderers without adding collision.");
+                    Check(IsSubset(baseline, LocalIds(AssetDatabase.LoadAssetAtPath<GameObject>(record.generatedPrefab))),
+                        "Adding the two visual feature families preserves the original Unity file IDs.");
+                    ReloadPlacement("features");
+                    Check(GuideVisuals(placed).Select(i => i.sourceBufferId.Split('.').Last()).Distinct().OrderBy(p => p).SequenceEqual(newParts),
+                        "The timber and plaster features persist on the reopened placement.");
+                    CheckPlacement();
+                    Stage("removed");
+                    record = ArchitectureImport.Import(source, key);
+                    Check(GuideVisuals(placed).Length == 0 && Equal(baseline, LocalIds(AssetDatabase.LoadAssetAtPath<GameObject>(record.generatedPrefab))),
+                        "Removing the timber and plaster features preserves the initial prefab and mesh IDs.");
+                    CheckPlacement();
+                    Debug.Log("CAELMOR_ARCHITECTURE_GUIDED_FEATURES_PASSED");
+                }
+            }
+            finally
+            {
+                CaelmorSceneOwnership.RestoreSetup(setup);
+                AssetDatabase.DeleteAsset(root);
+                Directory.Delete(scratch, true);
+                ArchitectureImport.Root = originalRoot;
+            }
+            Check(Equal(originalScenes, SceneHashes()), "Guided validation leaves every existing world scene unchanged.");
+            Debug.Log("CAELMOR_ARCHITECTURE_GUIDED_VALIDATION_PASSED checks=" + checks);
         }
 
         public static void BuildValidationPlayer()

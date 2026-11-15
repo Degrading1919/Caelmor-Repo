@@ -4,6 +4,7 @@ import math
 PALETTE = {
     "stone": ((.31,.29,.25,1),.88,0), "stone_light": ((.48,.44,.37,1),.86,0),
     "plaster": ((.66,.59,.47,1),.92,0), "plaster_patch": ((.53,.47,.38,1),.94,0),
+    "earthen_daub": ((.29,.172,.084,1),.96,0),
     "timber": ((.18,.105,.055,1),.82,0), "timber_light": ((.31,.21,.12,1),.78,0),
     "roof": ((.105,.12,.115,1),.9,0), "roof_dark": ((.085,.098,.095,1),.94,0),
     "roof_worn": ((.117,.125,.116,1),.94,0), "roof_patch": ((.12,.125,.112,1),.94,0),
@@ -20,7 +21,7 @@ FAMILIES = {
     "timber": "wood", "timber_light": "wood",
     "roof": "roof", "roof_dark": "roof", "roof_worn": "roof", "roof_patch": "roof",
     "stone": "stone", "stone_light": "stone", "mortar": "stone",
-    "plaster": "plaster", "plaster_patch": "plaster",
+    "plaster": "plaster", "plaster_patch": "plaster", "earthen_daub": "plaster",
     "stone_sooted":"stone", "charcoal":"stone", "bellows_leather":"plaster",
 }
 

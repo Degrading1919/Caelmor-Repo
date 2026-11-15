@@ -34,7 +34,7 @@ scene-material finish and leaves lightmap and procedural atlas coordinates
 alone. Existing raw mesh protection remains available. Refit and explicit
 finish/variant edits use the original construction validation and semantic IDs.
 
-## Guided wall openings
+## Guided wall features
 
 Blender source faces retain a reference to their fitted Cottage, a persistent
 guide ID, the named wall side and feature options. The last applied schedule
@@ -48,12 +48,30 @@ the same aperture profile and supplies an approach collider. Closed leaves
 and windows retain static collision. The export remains format 1, with guide
 meta and objects kept in the authoring scene.
 
+The same wall station and saved source identity support an authored post from
+a vertical edge and finish loss from an irregular face. The post participates
+in the principal frame schedule before default grid posts and braces are
+resolved. Plaster loss subtracts from the finish and exposes recessed daub.
+The wall backing, framing and collision remain continuous across the loss.
+Construction Treatments supplies the physically separate render layer. This
+pilot targets rendered timber infill and preserves the existing opening path.
+
 An edit validates the full candidate and rejects conflicts before committing
 geometry. When the applied building settings are equivalent, guide-only
 rebuilds keep unchanged visual source buffers. Aggregated facade buffers
 which own a changed cut may rebuild across a full storey. Attach, refresh,
 remove and refit preserve unrelated attached guide inputs. The existing
 protect control guards hand-edited generated meshes.
+
+The Unity Editor uses the persistent format-1 building and section identities
+to admit compatible guide additions, edits and removals at one asset key. It
+checks retained prefab and mesh GUIDs and fileIDs before committing. Retired
+mesh files are removed only after checking for artist references and overrides.
+Shared materials and textures stay accounted for with the existing ownership
+ledger. Changed floor, core hierarchy or building identity continues to fail
+with a reconciliation diagnostic. Generated colliders carry an optional
+`caelm_collider_id` extra. The Unity importer recognizes legacy generated
+collision name suffixes when they resolve unambiguously.
 
 ## Floor-separated presentation (additive v0.16)
 

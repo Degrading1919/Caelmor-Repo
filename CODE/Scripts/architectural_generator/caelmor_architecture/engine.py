@@ -10,7 +10,7 @@ from .facade import build_facades
 from .roof import build_roof, roof_faces, roof_topology
 from .geometry import area, cross, sub, dot
 
-TOOL_REVISION='0.19.0'
+TOOL_REVISION='0.20.0'
 
 
 def generate(settings, *, finish_names=(), opening_guides=()):
@@ -18,7 +18,7 @@ def generate(settings, *, finish_names=(), opening_guides=()):
     resolver = (Resolver(settings.construction_overrides, settings.region, tuple(finish_names))
                 if settings.construction_overrides is not None else None)
     if opening_guides and not settings.fit_blockout:
-        raise ValueError('Opening guides require a box-fitted Lowmark Cottage')
+        raise ValueError('Wall feature guides require a box-fitted Lowmark Cottage')
     if settings.world_aware:
         from .world import generate as generate_world
         plan, buffers = generate_world(settings, resolver=resolver, opening_guides=opening_guides)

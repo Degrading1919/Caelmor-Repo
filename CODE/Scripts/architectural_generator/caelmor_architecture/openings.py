@@ -1,7 +1,9 @@
-"""Wall-relative authoring inputs for a fitted cottage's construction schedule."""
+"""Wall-relative feature inputs for a fitted cottage's construction schedule."""
 from dataclasses import asdict, dataclass
 import math
 import re
+
+from .geometry import area, inequalities
 
 
 SIDES = ('front', 'right', 'rear', 'left')
@@ -55,8 +57,51 @@ class Opening:
         return record
 
 
+@dataclass(frozen=True)
+class TimberPost:
+    id: str
+    side: str
+    station: float
+    bottom: float
+    top: float
+    kind: str = 'timber_post'
+
+
+@dataclass(frozen=True)
+class PlasterLoss:
+    id: str
+    side: str
+    outline: tuple
+    kind: str = 'plaster_loss'
+
+    def triangles(self):
+        """Use a single connected, authored outline with a visible chip profile."""
+        outline = self.outline
+        if not 4 <= len(outline) <= 24 or len(set(outline)) != len(outline):
+            raise ValueError('Plaster loss needs 4–24 distinct outline points')
+        if area(outline) < 0:
+            outline = tuple(reversed(outline))
+        center = tuple(sum(v[i] for v in outline)/len(outline) for i in range(2))
+        if area(outline) < .035 or any(a*center[0]+b*center[1]+c <= 1e-6 for a,b,c in inequalities(outline)):
+            raise ValueError('Use one connected plaster chip with a clear center and no folded or crossing edges')
+        # A fan supports irregular, inward-notched profiles with a common
+        # visible center. A winding greater than one would double-cut the skin.
+        rays = [(s-center[0], z-center[1]) for s,z in outline]
+        sweep = sum(math.atan2(a[0]*b[1]-a[1]*b[0], a[0]*b[0]+a[1]*b[1])
+                    for a,b in zip(rays, rays[1:]+rays[:1]))
+        if abs(sweep-math.tau) > 1e-5:
+            raise ValueError('Plaster outline must go around its center once')
+        return [(center,a,b) for a,b in zip(outline, outline[1:]+outline[:1])]
+
+
 def snapshot(guides):
-    return [asdict(guide) for guide in sorted(guides, key=lambda g: g.id)]
+    records = []
+    for guide in sorted(guides, key=lambda g: g.id):
+        record = asdict(guide)
+        if isinstance(guide, PlasterLoss):
+            record['outline'] = [list(point) for point in guide.outline]
+        records.append(record)
+    return records
 
 
 def guide_walls(guides):
@@ -64,7 +109,7 @@ def guide_walls(guides):
     ids = set()
     for guide in sorted(guides, key=lambda item: item.id):
         if not re.fullmatch(r'[a-f0-9]{32}', guide.id) or guide.id in ids or guide.side not in SIDES:
-            raise ValueError('Openings require unique guide identities and supported wall sides')
+            raise ValueError('Wall guides require unique identities and supported wall sides')
         ids.add(guide.id)
         walls.setdefault(SIDES.index(guide.side), []).append(guide)
     return walls
