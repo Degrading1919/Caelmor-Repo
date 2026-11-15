@@ -1,37 +1,36 @@
 {
-  "verified_on": "2026-11-07",
-  "baseline_main": "3ec4003",
+  "baseline_main": "d0e44fa",
   "source_fingerprints_checked": 9,
   "saved_composite_independent_review": {
-    "cells": 480625,
+    "cells": 166705,
     "outlets": 1,
     "minimum_receiver_drop_m": 1.0000000003174137e-05,
-    "sample_count_area_proxy_m2": 30760000
+    "sample_count_area_proxy_m2": 10669120
   },
   "saved_patch_reviews": [
     {
-      "owned_samples": 667233,
-      "exits": 1234,
+      "owned_samples": 246085,
+      "exits": 599,
       "minimum_drop_m": 1.2499999968440534e-06,
       "id": "crestbridge_mill",
-      "height_sha256": "9bf656d215b3d57c5b7d697d050fef406611ddd4dd8e546d3bcb7a75dde11a72",
-      "npz_bytes": 17612184
+      "height_sha256": "4444dcd3b314521251317b3921f43ae14ef66d8fae55ed4ea98a1ae24d955115",
+      "npz_bytes": 6871191
     },
     {
-      "owned_samples": 127305,
-      "exits": 273,
+      "owned_samples": 75429,
+      "exits": 384,
       "minimum_drop_m": 1.2499999968440534e-06,
       "id": "greyharrow",
-      "height_sha256": "c4fccf56d1312b2a87ef2f618614db34a1ae6a4a526e5bfcc05e9e999dd5174b",
-      "npz_bytes": 3569437
+      "height_sha256": "47932941443c230c2493a9cbe8fd42be10d9195ce2c5a8eaf848116c25e1e6ed",
+      "npz_bytes": 2176246
     },
     {
-      "owned_samples": 133209,
-      "exits": 282,
+      "owned_samples": 59045,
+      "exits": 157,
       "minimum_drop_m": 1.2499999968440534e-06,
       "id": "reedmere",
-      "height_sha256": "80f61b12ef420826653c441f6d90ffc7aff343fb8ee268d82218cbff3c32275e",
-      "npz_bytes": 3513609
+      "height_sha256": "1bd6e821c6dd9c25c6baf2348b3546fed4ef82df6e44b63cdbae681e69b2572d",
+      "npz_bytes": 1615807
     }
   ],
   "seams": "Every owned outer-border sample equals the parent edge in the same global coordinates; three disjoint owners; Crestbridge/Mill share one surface.",
@@ -40,97 +39,97 @@
     "crestbridge_centre": {
       "id": "crestbridge_centre",
       "xy_m": [
-        2640.350368,
-        1617.363227
+        1485.197081856,
+        995.3004472319999
       ],
       "source_type": "settlement",
       "source_id": "crestbridge",
-      "status": "Fixed approved-map symbol anchor",
-      "ground_m": 64.24917545645256
+      "status": "Working town centre; original map trace.",
+      "ground_m": 63.667132731405005
     },
     "bridge_crossing": {
       "id": "bridge_crossing",
       "xy_m": [
-        2581.210228,
-        1556.418001
+        1451.9307517462405,
+        957.7956933071843
       ],
       "source_type": "retained_route_natural_reach_intersection",
       "status": "Technical inspection crossing of retained road/river; not approved surveyed bridge centre; regional crest node shown separately and unchanged",
       "source_route_id": "landing_to_crestbridge",
       "source_reach_id": "fen_to_crestbridge",
-      "ground_m": 62.005124593419836
+      "ground_m": 62.07471298346564
     },
     "crest_hall": {
       "id": "crest_hall",
       "xy_m": [
-        3256.9927,
-        1830.026905
+        1516.729927008384,
+        1009.0762331842561
       ],
       "source_type": "landmark",
       "source_id": "crest_hall",
-      "status": "Fixed approved-map symbol anchor; direct riverbank/water-gate relationship currently fails",
-      "ground_m": 70.08423062059461
+      "status": "Provisional compact civic site; direct water-gate and stair still unbuilt.",
+      "ground_m": 64.03122269753034
     },
     "hill_depot": {
       "id": "hill_depot",
       "xy_m": [
-        3139.270072,
-        2216.17937
+        1642.861313869824,
+        1112.394618832896
       ],
       "source_type": "landmark",
       "source_id": "hill_depot",
-      "status": "Fixed approved-map area anchor; actual underground footprint/chute location unspecified",
-      "ground_m": 67.34679798990621
+      "status": "Provisional compact uphill outwork; below-toll chute unresolved.",
+      "ground_m": 67.45674534980584
     },
     "regional_crest_node": {
       "id": "regional_crest_node",
       "xy_m": [
-        2640.350368,
-        1544.609864
+        1485.197081856,
+        950.5291468799999
       ],
       "source_type": "hydrology_node",
       "source_id": "crest",
-      "status": "Fixed regional hydrology node, not surveyed bridge geometry; retained unchanged",
-      "ground_m": 61.90348111595603
+      "status": "Regional hydraulic node; separate from the technical road crossing.",
+      "ground_m": 61.944048971674384
     }
   },
   "reedmere_floor_tests": [
     {
       "xy_m": [
-        416.0,
-        2744.0
+        224.0,
+        1688.0
       ],
-      "normal_reference_m": 63.95193306633773,
-      "floor_m": 65.75193306633773,
+      "normal_reference_m": 63.94732025502588,
+      "floor_m": 65.74732025502588,
       "corner_support_range_m": [
-        1.1397503339669868,
-        1.1465594755731416
+        1.2662026232134451,
+        1.3085980124371162
       ],
       "status": "Conditional static stage/floor test; no pile bearing or connected safe route proven."
     },
     {
       "xy_m": [
-        512.0,
-        2744.0
+        248.0,
+        1712.0
       ],
-      "normal_reference_m": 63.9445692205798,
-      "floor_m": 65.7445692205798,
+      "normal_reference_m": 63.952104363771994,
+      "floor_m": 65.75210436377199,
       "corner_support_range_m": [
-        1.2813709507258864,
-        1.332349834357771
+        1.397472279914794,
+        1.4648629109083515
       ],
       "status": "Conditional static stage/floor test; no pile bearing or connected safe route proven."
     },
     {
       "xy_m": [
-        440.0,
-        2816.0
+        248.0,
+        1640.0
       ],
-      "normal_reference_m": 63.96332473695462,
-      "floor_m": 65.76332473695462,
+      "normal_reference_m": 63.928899274298765,
+      "floor_m": 65.72889927429877,
       "corner_support_range_m": [
-        1.1500615479832987,
-        1.1676596544770064
+        1.27834594018654,
+        1.3379978906650507
       ],
       "status": "Conditional static stage/floor test; no pile bearing or connected safe route proven."
     }

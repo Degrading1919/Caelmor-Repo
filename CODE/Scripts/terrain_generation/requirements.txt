@@ -9,3 +9,4 @@ packaging==26.3
 pyparsing==3.3.3
 python-dateutil==4.0.0
 tzdata==2026.6
+resvg-py==0.3.3

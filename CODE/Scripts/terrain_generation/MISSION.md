@@ -1,5 +1,6 @@
 We have approved Lowmark Vale's geographical composition using the attached topographical planning map and thematic regional map. The placement and spatial relationships of settlements, landmarks, rivers, engineering works, and regional features are approved. The illustrated elevations, contour intervals, gradients, and scale have **not** been validated.
 
+> Original mission and planning targets. The [current terrain](README.md) uses the Director-approved compact extent; measurements from the original frame are historical.
 Your mission is to develop and demonstrate a deterministic mathematical terrain-generation methodology capable of reproducing this approved composition as a physically coherent, believable 3D landscape.
 
 Inspect the current Caelmor repository, relevant canon, and existing tooling before selecting an approach.

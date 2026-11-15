@@ -1,71 +1,71 @@
 {
-  "payload_sha256": "eaf72006c1f4cb364bb3cdb73e59014fdfafed262450e1521da0fa6702f57199",
-  "payload_bytes": 7127375,
-  "composite_source_sha256": "ed3e95aec4371712d5de3d46f38965e25d9c22962ed89090a9cb0650dabe0290",
+  "payload_sha256": "7c03b660921a856cfd0ae4f3297ca4a89c6b854056e6ddae03b2ae95a4835222",
+  "payload_bytes": 2787035,
+  "composite_source_sha256": "2e28fdf509db2ad2a4eafddae1b455c86289f613a25724d7f23315b1998bcad9",
   "grids": [
     {
       "id": "regional",
       "shape": [
-        625,
-        769
+        385,
+        433
       ]
     },
     {
       "id": "crestbridge_mill",
       "shape": [
-        801,
-        833
+        445,
+        553
       ]
     },
     {
       "id": "greyharrow",
       "shape": [
-        369,
-        345
+        261,
+        289
       ]
     },
     {
       "id": "reedmere",
       "shape": [
-        361,
-        369
+        245,
+        241
       ]
     }
   ],
   "spawn_points": [
     {
       "name": "Crestbridge approach",
-      "east_m": 2483.714354,
-      "north_m": 1455.946341,
-      "ground_m": 67.25003669923552
+      "east_m": 1361.3945063293822,
+      "north_m": 851.1097905723133,
+      "ground_m": 65.34178555389596
     },
     {
       "name": "Greyharrow",
-      "east_m": 5480.0,
-      "north_m": 1250.0,
-      "ground_m": 64.52055591613261
+      "east_m": 3160.0,
+      "north_m": 750.0,
+      "ground_m": 63.809611136758036
     },
     {
       "name": "Reedmere",
-      "east_m": 410.0,
-      "north_m": 2726.0,
-      "ground_m": 64.59456007099091
+      "east_m": 228.0,
+      "north_m": 1672.0,
+      "ground_m": 64.46784298574357
     },
     {
       "name": "Drowsebank Mill",
-      "east_m": 3044.0,
-      "north_m": 1232.0,
-      "ground_m": 67.11508763296874
+      "east_m": 1726.0,
+      "north_m": 784.0,
+      "ground_m": 64.36595103922237
     }
   ],
   "bridge_approaches": [
     {
       "id": "bridge_scale_proxy",
       "terrain_end_heights_m": [
-        63.69844790797348,
-        63.551669818847714
+        63.685780299139324,
+        63.44717846755817
       ],
-      "deck_top_m": 66.115367,
+      "deck_top_m": 66.11514150039372,
       "status": "No ramps generated; measured step gaps remain explicit."
     }
   ],

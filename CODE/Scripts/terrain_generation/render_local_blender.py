@@ -243,19 +243,9 @@ def main():
             for dy in (-3,3):
                 base=ground((point[0]+dx,point[1]+dy))
                 cube("Conditional pile / geotechnics unresolved",(point[0]+dx,point[1]+dy),base,(.3,.3,max(.2,floor-.2-base)),proxy_mat)
-    cameras=list(controls["inspection"]["cameras"])
-    cameras.extend([
-        {"id":"greyharrow_local","position_xy_m":[5100,850],"eye_height_above_ground_m":230,
-         "target_xy_m":[5450,1250],"target_height_above_ground_m":2,"lens_mm":43},
-        {"id":"reedmere_local","position_xy_m":[850,2370],"eye_height_above_ground_m":150,
-         "target_xy_m":[440,2770],"target_height_above_ground_m":1,"lens_mm":43},
-        {"id":"reedmere_floor_detail","position_xy_m":[400,2700],"eye_height_above_ground_m":4,
-         "target_xy_m":[416,2744],"target_height_above_ground_m":1.4,"lens_mm":35},
-        {"id":"drowsebank_local","position_xy_m":[2770,1000],"eye_height_above_ground_m":170,
-         "target_xy_m":[3040,1250],"target_height_above_ground_m":2,"lens_mm":42}])
     bpy.context.view_layer.update()
     views=[]
-    for camera_spec in cameras:
+    for camera_spec in controls["inspection"]["cameras"]:
         camera_data=bpy.data.cameras.new(camera_spec["id"])
         camera=bpy.data.objects.new(camera_spec["id"],camera_data)
         scene.collection.objects.link(camera)
@@ -294,8 +284,9 @@ def main():
             view["render_seconds"]=time.perf_counter()-frame_start
         views.append(view)
     scene["purpose"]="Offline inspection only; true metre scale; neutral scale proxies; no authored world scene"
-    scene["parent_main"]="3ec4003"
+    scene["parent_main"]=controls["baseline_commit"]
     scene["vertical_scale"]=1.0
+    bpy.context.preferences.filepaths.save_version = 0
     bpy.ops.wm.save_as_mainfile(filepath=str((args.output/"local_inspection.blend").resolve()),compress=True)
     report={"blender":bpy.app.version_string,"blender_hash":bpy.app.build_hash.decode(),
             "render_engine":scene.render.engine,"samples":args.samples,"resolution":[1600,1000],

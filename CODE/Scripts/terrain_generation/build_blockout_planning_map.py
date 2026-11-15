@@ -8,12 +8,12 @@ and writes MEDIA/Maps/Lowmark_Blockout/Lowmark_Blockout_Planning_Map.svg/.png.
 
 Coordinates: SVG user unit = 1 metre. World point (x east, y north) is drawn at
 SVG (x, -y), so the world origin (south-west map corner) is SVG (0, 0) and the
-map frame occupies x 0..6144, y -4992..0. Nothing here creates canon or moves an
+map frame dimensions follow the regional controls. Nothing here creates canon or moves an
 anchor; every placement and status is taken from, or cited to, a repo source.
 
 Usage (from the checkout root):
   python CODE/Scripts/terrain_generation/build_blockout_planning_map.py [--png-scale 0.5]
-Requires numpy, matplotlib (contour extraction) and cairosvg (PNG export).
+Requires numpy, matplotlib (contour extraction) and resvg-py (PNG export).
 """
 from __future__ import annotations
 
@@ -33,14 +33,18 @@ TERRAIN = ROOT / "MEDIA/Maps/Lowmark_Terrain"
 OUT = ROOT / "MEDIA/Maps/Lowmark_Blockout"
 STEM = "Lowmark_Blockout_Planning_Map"
 
-W, H = 6144, 4992          # approved working extent (README "Method" 1)
-SECTOR, CELL = 384, 192    # Director-stated blockout grid (16 x 13 sectors, 32 x 26 cells)
-COLS = "ABCDEFGHIJKLMNOP"
+WORLD = json.loads(CONTROLS.read_text(encoding="utf-8"))["world"]
+W, H = WORLD["width_m"], WORLD["height_m"]
+SECTOR, CELL = 384, 192
+if W % SECTOR or H % SECTOR:
+    raise ValueError("Blockout dimensions must align to complete sectors.")
+COLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[:W // SECTOR]
+ROWS = H // SECTOR
 
 # Layout of the sheet around the map frame (SVG units = metres).
 ML, MT, MR = 520, 760, 260
 PANEL_W = 3500
-BOTTOM = 3100
+BOTTOM = 3500
 VB_X, VB_Y = -ML, -(H + MT)
 VB_W = ML + W + MR + PANEL_W + 160
 VB_H = MT + H + BOTTOM
@@ -182,15 +186,15 @@ E_LETTER_PX = (683, 456)
 SETTLEMENT_STATUS = {
     "brookhollow": ("ok", ["TC-19"]),
     "crestbridge": ("ok", ["TC-02", "TC-04", "TC-19"]),
-    "ashenstead": ("ok", ["TC-15"]),
-    "greyharrow": ("ok", ["TC-19"]),
+    "ashenstead": ("prov", ["TC-15"]),
+    "greyharrow": ("prov", ["TC-19"]),
     "reedmere": ("ok", ["TC-12"]),
-    "whisperflow_landing": ("block", ["TC-13"]),
+    "whisperflow_landing": ("prov", ["TC-13"]),
     "drowsebank_mill": ("prov", ["TC-06", "TC-07", "TC-08"]),
 }
 LANDMARK_STATUS = {
     "crest_hall": ("block", ["TC-01", "TC-05"], "Crest Hall"),
-    "hill_depot": ("ok", ["TC-03"], "Hill Depot (entrance / area marker)"),
+    "hill_depot": ("prov", ["TC-03"], "Hill Depot"),
     "whispering_door_farmhouse": ("ok", ["NC-1"], "Whispering Door Farmhouse"),
     "floodplain_orchards": ("ok", [], None),
     "brackenford_woods": ("ok", [], None),
@@ -203,46 +207,46 @@ LANDMARK_STATUS = {
 LABEL_OFFSETS = {
     "brookhollow": (70, 60, "start"), "crestbridge": (-60, 70, "end"), "ashenstead": (80, 40, "start"),
     "greyharrow": (-90, 80, "end"), "reedmere": (90, -110, "start"),
-    "whisperflow_landing": (0, -170, "middle"), "drowsebank_mill": (-70, 110, "end"),
-    "crest_hall": (80, 30, "start"), "hill_depot": (80, 20, "start"),
+    "whisperflow_landing": (0, -155, "middle"), "drowsebank_mill": (-65, -135, "end"),
+    "crest_hall": (115, 28, "start"), "hill_depot": (100, 30, "start"),
     "whispering_door_farmhouse": (80, -40, "start"), "mantle_shrine": (0, 90, "middle"),
     "circle_unburnt_reeds": (0, 95, "middle"), "veilwater_falls": (-60, 70, "end"),
 }
 
 CONFLICTS = [
-    # id, severity, short text, location (world m) or None
-    ("TC-01", "block", "Crest Hall 640 m from river: water-gate, Gate Landing, cistern, NB north stair cannot sit on water (MQ10 S05/S06).", (3257, 1830)),
-    ("TC-02", "prov", "Granary yard has no approved XY; toll-facing wall + Hall beside + Depot behind over-constrained.", (2830, 1720)),
-    ("TC-03", "prov", "Hill Depot 837 m from natural river; chute/ledge 'to the river below the toll' unsupported.", (3139, 2216)),
-    ("TC-04", "prov", "Bridge unbuilt; technical crossing only (not approved bridge centre); 2.56 m deck gap in Unity.", (2581, 1556)),
-    ("TC-05", "prov", "Hall -> Cut mouth 'short towpath walk' is ~843 m straight.", None),
-    ("TC-06", "prov", "Drowse spur: tail race returns to common node, no distinct spur to lower Cut.", (3184, 1153)),
-    ("TC-07", "prov", "Barges through mill race: 0.95 m head, 0.136 m min leat depth; passage unproven.", None),
-    ("TC-08", "prov", "Mill marker sits on the engineered channel; pond/race/yard not laid out. Do not block out on the marker.", (3010, 1231)),
-    ("TC-09", "block", "Cut mouth, mill tail and Bramblelock share node weir_up; MQ4 mouth->towpath->weir order unbuildable as one point.", (3537, 1035)),
-    ("TC-10", "prov", "Relief Cut straight ~1,868 m vs 60-90 s pacing beat.", (2600, 2420)),
-    ("TC-11", "prov", "Fen 'no way out' vs open natural outlet (fen_out).", (1979, 2350)),
-    ("TC-12", "prov", "Reedmere: 0 dry candidates; stilts, walks, staging and evacuation undesigned.", (437, 2737)),
-    ("TC-13", "block", "Whisperflow Landing anchor ~490-520 m from any traced water; TL landing beats need a water edge.", (3633, 459)),
-    ("TC-14", "prov", "Uphill Canal 2.43 km / +18.1 m line vs a twenty-step quest site; mechanism withheld.", (5152, 2600)),
-    ("TC-15", "prov", "Ashenstead ~128 m ground vs Cut water ~62 m; Rebirth Fields extent untraced (seepage premise).", (4743, 3487)),
-    ("TC-16", "prov", "Falls approach not walkable as traced; switchback/Listening Steps access to fit locally.", (1160, 3817)),
-    ("TC-17", "prov", "Mantle Shrine ~298 m from nearest traced channel; 'fen-edge channel' is a local detail.", (1867, 3794)),
-    ("TC-18", "prov", "Regional walk times (e.g. Landing-Crestbridge 13.5 min at 3 m/s) vs 'short walk' beats.", None),
-    ("TC-19", "prov", "Settlement scope: Greyharrow capacity < 50; Brookhollow needs upper span; Crestbridge outworks budget.", (5454, 1242)),
-    ("NC-1", "prov", "NEW: approved map puts the Whispering Door Farmhouse SW of the Landing road; POI 6.1/M01 wants it on the Heartlands-Ashenstead edge with a drain to the guide-line outfall (~4 km away). Not in TC register.", (2108, 269)),
-    ("W-ARM", "prov", "Western Whisperflow arm: terminal backwater vs continuous meander unresolved (lowmark_controls unresolved).", (2700, 640)),
+    # id, severity, short text and source anchor (where spatially defined)
+    ("TC-01", "block", "Compact Hall site; direct water gate, cistern and bridge north stair remain unbuilt.", "crest_hall"),
+    ("TC-02", "prov", "Granary and toll-facing yard have no approved placement.", None),
+    ("TC-03", "prov", "Depot remains uphill. Chute and below-toll slack-water exit need a local layout.", "hill_depot"),
+    ("TC-04", "prov", "Technical route crossing only. Bridge, stairs and transitions are unbuilt.", "bridge_crossing"),
+    ("TC-05", "prov", "Hall-to-mouth alignment is a straight-distance diagnostic; towpath still unbuilt.", None),
+    ("TC-06", "prov", "Tail race still meets the common outfall; separate wartime spur unresolved.", None),
+    ("TC-07", "prov", "Static mill head does not establish draft, pulses or reverse flow.", None),
+    ("TC-08", "prov", "Working yard offset from the race. Pond, wheel and gates remain unbuilt.", "drowsebank_mill"),
+    ("TC-09", "block", "Cut mouth, mill tail and Bramblelock share weir_up; no length for MQ4 chase between them.", "weir_up"),
+    ("TC-10", "prov", "The straight exceeds the 60–90 second quest beat. See route measurements.", "cut_corner"),
+    ("TC-11", "prov", "The natural fen outlet remains open in the static baseline.", "fen_out"),
+    ("TC-12", "prov", "Reedmere requires stilts; staging, causeways and evacuation remain unbuilt.", "reedmere"),
+    ("TC-13", "prov", "Provisional landing envelope reaches main-river bank; crossing and road-head view untested.", "whisperflow_landing"),
+    ("TC-14", "prov", "Regional uphill line is schematic; the quest's twenty-step site is unplaced.", "uphill_canal_foot"),
+    ("TC-15", "prov", "Rebirth Fields extent and seepage remain unresolved.", "ashenstead"),
+    ("TC-16", "prov", "Falls approach requires local switchbacks and Listening Steps.", "veilwater_falls"),
+    ("TC-17", "prov", "Local fen-edge channel at Mantle Shrine remains untraced.", "mantle_shrine"),
+    ("TC-18", "prov", "See updated route measurements for pacing and unbuilt crossings.", None),
+    ("TC-19", "prov", "Greyharrow upper capacity and civic outworks budget remain unresolved.", "greyharrow"),
+    ("NC-1", "prov", "Whispering Door map anchor and Rebirth Fields outfall relationship need review.", "whispering_door_farmhouse"),
+    ("W-ARM", "prov", "Western arm retained as terminal backwater profile pending topology ruling.", "western_arm_terminal"),
 ]
 TAG_POS = {  # tag offset from conflict location (world m), presentational only
-    "TC-01": (60, -120), "TC-02": (0, 0), "TC-03": (60, -110), "TC-04": (-260, 40), "TC-06": (40, -120),
-    "TC-08": (60, 60), "TC-09": (90, 110), "TC-10": (0, 0), "TC-11": (60, 40), "TC-12": (-200, -260),
+    "TC-01": (200, -72), "TC-02": (0, 0), "TC-03": (180, 170), "TC-04": (-370, -85), "TC-06": (40, -120),
+    "TC-08": (65, 170), "TC-09": (90, 110), "TC-10": (0, 0), "TC-11": (60, 40), "TC-12": (-200, -260),
     "TC-13": (-330, -40), "TC-14": (70, 0), "TC-15": (60, -150), "TC-16": (-320, -90), "TC-17": (-60, -200),
     "TC-19": (60, -210), "NC-1": (60, -140), "W-ARM": (-560, -60),
 }
 
 UNANCHORED = [
     ("P02", "Crestbridge granaries, tally room, undercroft, waiting wall", "Crestbridge (TC-02: no approved XY)"),
-    ("P02", "Crestbridge bridge, south toll, forge under first arch", "Technical crossing [2581, 1556] (TC-04)"),
+    ("P02", "Crestbridge bridge, south toll, forge under first arch", "Technical crossing shown above (TC-04)"),
     ("P18", "The Drowned Lamb (tavern) and cellar", "Brookhollow envelope (waterfront)"),
     ("P25", "Greyharrow silent bell tower", "Greyharrow envelope (overlooks side branch)"),
     ("P23", "Ashenstead Watergarden and Ember-Well", "Ashenstead envelope"),
@@ -273,7 +277,16 @@ def build(png_scale: float):
     nodes = {n["id"]: m(n["xy"]) for n in ctrl["hydrology"]["nodes"]}
     settlements = {s["id"]: s for s in ctrl["settlements"]}
     landmarks = {l["id"]: m(l["xy"]) for l in ctrl["landmark_anchors"]}
-    local_counts = {"crestbridge": 114, "greyharrow": 39, "drowsebank_mill": 5, "reedmere": 0}  # LOCAL_README table
+    metrics = json.loads((TERRAIN / "metrics.json").read_text(encoding="utf-8"))
+    local_metrics = json.loads((TERRAIN / "Local_Refinement/local_metrics.json").read_text(encoding="utf-8"))
+    regional_counts = {site["id"]: site for site in metrics["settlements"]}
+    local_counts = {key: value for patch in local_metrics["patches"] for key, value in patch["plot_summary"].items()}
+    local_verification = json.loads((TERRAIN / "Local_Refinement/local_verification.json").read_text(encoding="utf-8"))
+    crossing = local_verification["anchors"]["bridge_crossing"]["xy_m"]
+    conflict_positions = {**nodes, **landmarks, **{key: m(site["xy"]) for key, site in settlements.items()},
+                          "bridge_crossing": crossing}
+    if h.shape != (H // 8 + 1, W // 8 + 1) or (metrics["width_m"], metrics["height_m"]) != (W, H):
+        raise ValueError("Regenerate the regional terrain before building the planning sheet.")
 
     s = Svg()
     s.add('<?xml version="1.0" encoding="UTF-8"?>')
@@ -282,7 +295,7 @@ def build(png_scale: float):
           f'width="{VB_W}" height="{VB_H}" viewBox="{VB_X} {VB_Y} {VB_W} {VB_H}">')
     s.add("<title>Lowmark Vale blockout planning map (true scale, 1 SVG unit = 1 m)</title>")
     s.add('<desc>World origin = SVG (0,0) = south-west map corner; world (x east, y north) is drawn at SVG (x, -y). '
-          'Map frame 6144 x 4992 m. Grid: 384 m sectors (A-P x 01-13), 192 m cells (quadrants SW/SE/NW/NE). '
+          f'Map frame {W} x {H} m. Grid: 384 m sectors (A-{COLS[-1]} x 01-{ROWS:02}), 192 m quadrants. '
           'Generated by CODE/Scripts/terrain_generation/build_blockout_planning_map.py from lowmark_controls.json '
           'and MEDIA/Maps/Lowmark_Terrain. Not canon; see the companion note for status rules.</desc>')
     s.add('<defs>'
@@ -379,7 +392,7 @@ def build(png_scale: float):
         proposed = r["status"].startswith("Proposed")
         if proposed:
             s.add(f'<polyline id="route_{r["id"]}" points="{pts(line)}" fill="none" stroke="#6d6d6d" '
-                  f'stroke-width="10" stroke-dasharray="30 18" stroke-linecap="round"/>')
+                  f'stroke-width="{r["width_m"]}" stroke-dasharray="30 18" stroke-linecap="round"/>')
         elif r["route_type"] == "cart":
             s.add(f'<polyline id="route_{r["id"]}" points="{pts(line)}" fill="none" stroke="#ffffff" '
                   f'stroke-width="{r["width_m"] + 10}" stroke-linejoin="round" stroke-linecap="round"/>')
@@ -465,7 +478,7 @@ def build(png_scale: float):
     anchor(*nodes["mill_forebay"], "structure", "prov", "Drowsebank wheel drop (forebay->tailrace, 0.95 m head proposal)")
     anchor(*nodes["uphill_canal_foot"], "point", "prov", "Uphill Canal foot pool (TC-14)")
     anchor(*nodes["uphill_canal_cistern"], "point", "prov", "Uphill Canal cistern node at east frame edge (TC-14)")
-    anchor(2581.21, 1556.42, "structure", "prov", "Technical road/river crossing (TC-04); not approved bridge centre")
+    anchor(*crossing, "structure", "prov", "Technical road/river crossing (TC-04); not approved bridge centre")
     for sid, st in settlements.items():
         x, y = m(st["xy"])
         anchor(x, y, "settlement", SETTLEMENT_STATUS[sid][0], f'{st["name"]} anchor [{x:.0f}, {y:.0f}]')
@@ -478,17 +491,18 @@ def build(png_scale: float):
 
     # --- conflict tags -----------------------------------------------------
     s.layer("L10_conflicts", "10 Conflict / provisional tags (register ids)")
-    for cid, sev, _txt, loc in CONFLICTS:
-        if loc is None:
+    for cid, sev, _txt, location in CONFLICTS:
+        if location is None:
             continue
+        loc = conflict_positions[location]
         dx, dy = TAG_POS.get(cid, (60, 60))
         col = C_BLOCK if sev == "block" else C_PROV
-        x, y = loc[0] + dx, loc[1] + dy
+        x, y = loc[0] + dx * .55, loc[1] + dy * .55
         X, Y = P(x, y)
-        wbox = 34 * len(cid) + 40
-        s.add(f'<g id="tag_{cid}"><rect x="{fmt(X)}" y="{fmt(Y - 52)}" width="{wbox}" height="68" rx="12" '
+        wbox = 24 * len(cid) + 24
+        s.add(f'<g id="tag_{cid}"><rect x="{fmt(X)}" y="{fmt(Y - 38)}" width="{wbox}" height="48" rx="8" '
               f'fill="{col}"/>')
-        s.text(X + wbox / 2, Y, cid, size=50, anchor="middle", weight="bold", fill="#ffffff", halo=False)
+        s.text(X + wbox / 2, Y, cid, size=34, anchor="middle", weight="bold", fill="#ffffff", halo=False)
         s.add("</g>")
     s.end()
 
@@ -504,7 +518,7 @@ def build(png_scale: float):
 
     def lab(x, y, txt, size=70, anchor_="start", **kw):
         X, Y = P(x, y)
-        s.text(X, Y, txt, size=size, anchor=anchor_, **kw)
+        s.text(X, Y, txt, size=size * .66, anchor=anchor_, **kw)
 
     for sid, st in settlements.items():
         x, y = m(st["xy"])
@@ -521,7 +535,7 @@ def build(png_scale: float):
         col = {"ok": C_OK, "prov": C_PROV, "block": C_BLOCK}[status]
         lab(x + dx, y + dy, label, size=62, anchor_=a, fill=col, weight="bold")
     lab(hl[0] - 40, hl[1] + 70, "Hollow Lock", size=62, anchor_="end", weight="bold")
-    lab(3640, 880, "Bramblelock Weir", size=62, weight="bold")
+    lab(bw[0] + 48, bw[1] - 82, "Bramblelock Weir", size=62, weight="bold")
     # area / waterway names (italic). Positions from the approved planning map labels where noted.
     for (px, py), txt, size, col in [
         ((350, 318), "Stillwater Fen", 120, "#1e5f7f"),
@@ -541,7 +555,7 @@ def build(png_scale: float):
 
     # --- frame, ticks, north arrow, scale -----------------------------------
     s.layer("L12_frame", "12 Frame, coordinates, north arrow, scale bar")
-    s.add(f'<rect id="map_frame_6144x4992" x="0" y="{-H}" width="{W}" height="{H}" fill="none" stroke="#000" stroke-width="10"/>')
+    s.add(f'<rect id="map_frame_{W}x{H}" x="0" y="{-H}" width="{W}" height="{H}" fill="none" stroke="#000" stroke-width="10"/>')
     for x in range(0, W + 1, CELL):
         major = x % SECTOR == 0
         L = 60 if major else 30
@@ -562,18 +576,16 @@ def build(png_scale: float):
         cy = -(j * SECTOR + SECTOR / 2)
         s.text(-330, cy + 25, f"{j + 1:02d}", size=72, anchor="middle", weight="bold", halo=False)
         s.text(W + 160, cy + 25, f"{j + 1:02d}", size=72, anchor="middle", weight="bold", halo=False)
-    s.text(W / 2, 360, "Easting X (m) from south-west origin  ·  sector columns A–P", size=52, anchor="middle", halo=False)
+    s.text(W / 2, 360, f"Easting X (m) from south-west origin · sector columns A–{COLS[-1]}", size=52, anchor="middle", halo=False)
     s.add(f'<text x="-430" y="{-H / 2}" font-size="52" font-family="{FONT}" text-anchor="middle" '
-          f'transform="rotate(-90 -430 {-H / 2})">Northing Y (m) from south-west origin · sector rows 01–13</text>')
+          f'transform="rotate(-90 -430 {-H / 2})">Northing Y (m) from south-west origin · sector rows 01–{ROWS:02}</text>')
     s.add(f'<circle cx="0" cy="0" r="22" fill="{C_BLOCK}"/>')
     s.text(30, 230, "ORIGIN (0, 0)", size=44, weight="bold", fill=C_BLOCK, halo=False)
     # title strip above the map
-    s.text(0, -H - 470, "LOWMARK VALE — BLOCKOUT PLANNING MAP (TRUE SCALE)", size=150, weight="bold", halo=False)
-    s.text(0, -H - 330, "Production sheet for Blender blockout / PGS placement · 1 SVG unit = 1 m · extent 6,144 × 4,992 m "
-           "· 384 m sectors / 192 m cells · not concept art, not canon", size=62, halo=False)
-    s.text(0, -H - 240, "Sources: lowmark_controls.json (traces of the Director-approved planning map, 2026-11-06 mission) · "
-           "MEDIA/Maps/Lowmark_Terrain (height_engineered.npy, verification.json, candidate plots) · TC register · bible · POI file · repo head c3b0e02",
-           size=46, fill="#444", halo=False)
+    s.text(0, -H - 470, "LOWMARK VALE — BLOCKOUT PLANNING MAP (TRUE SCALE)", size=106, weight="bold", halo=False)
+    s.text(0, -H - 330, f"1 SVG unit = 1 m · {W:,} × {H:,} m · {len(COLS) * ROWS} sectors of 384 m · 192 m quadrants", size=62, halo=False)
+    s.text(0, -H - 240, "Sources: Lowmark terrain controls, regenerated regional and local surfaces, Director reference maps and conflict register",
+           size=38, fill="#444", halo=False)
     # north arrow (grid north = +Y)
     nx, ny = W - 330, -H + 380
     s.add(f'<g id="north_arrow"><path d="M{nx},{ny - 230} L{nx + 90},{ny + 90} L{nx},{ny + 30} L{nx - 90},{ny + 90} Z" '
@@ -602,7 +614,8 @@ def build(png_scale: float):
     s.layer("L13_legend", "13 Legend and declarations")
     px0 = W + MR + 120
     y = -H - 40
-    s.add(f'<rect x="{px0 - 60}" y="{-H - 120}" width="{PANEL_W}" height="{H + 120}" fill="#fafafa" stroke="#000" stroke-width="5"/>')
+    s.add(f'<g transform="translate({px0} {-H}) scale(.67) translate({-px0} {H})">')
+    s.add(f'<rect x="{px0 - 60}" y="{-H - 120}" width="{PANEL_W}" height="4790" fill="#fafafa" stroke="#000" stroke-width="5"/>')
 
     def ptxt(t, size=50, weight="normal", fill=C_OK, dy=None, x=None, italic=False):
         nonlocal y
@@ -611,21 +624,20 @@ def build(png_scale: float):
 
     ptxt("MAP DECLARATION", 70, "bold", dy=40)
     for t in [
-        "Extent: 6,144 m E–W × 4,992 m N–S (30.67 km²). Working extent of the",
-        "  terrain foundation; Sol: 'working compromise for review', not locked.",
+        f"Director-approved working extent: {W:,} m E–W × {H:,} m N–S ({W * H / 1e6:.6f} km²).",
         "Origin: south-west frame corner = (0, 0). X east, Y north, metres.",
         "  Blender: X east / Y north / Z up.  Unity: X east / Y up / Z north.",
         "  GLB terrain: X east / Y up / −Z north (terrain README).",
         "SVG: world (x, y) is drawn at (x, −y); import puts origin at (0, 0).",
-        "Grid: 384 m sectors, columns A–P (west→east), rows 01–13 (south→north).",
+        f"Grid: 384 m sectors, columns A–{COLS[-1]} west to east, rows 01–{ROWS:02} south to north.",
         "  Sector ID e.g. H05 = x 2688–3072, y 1536–1920.",
         "  192 m cells = sector quadrant: H05.SW / .SE / .NW / .NE.",
-        "  Cell index i = floor(x/192) 0–31, j = floor(y/192) 0–25.",
+        f"  Quadrant index i = floor(x/192) 0–{W//CELL-1}, j = floor(y/192) 0–{H//CELL-1}.",
         "Terrain: 8 m height_engineered.npy; contours 5 m (25 m index);",
         "  hillshade 2× exaggerated for reading only. Heights are technical",
         "  proposals, not surveyed or approved.",
-        "Positions: approximate traces of the approved planning map composition",
-        "  (≈ ±30–60 m). Never move an anchor to fit the grid.",
+        "Positions follow the approved composition. Amber anchors include",
+        "  provisional compact site adjustments. The grid indexes placement.",
     ]:
         ptxt(t, 44)
 
@@ -727,8 +739,7 @@ def build(png_scale: float):
 
     ptxt("BLENDER / PGS USE", 70, "bold", dy=110)
     for t in [
-        "1. Import the SVG (File > Import > SVG). Check the 'map_frame_6144x4992'",
-        "   rectangle and scale the import uniformly until it measures 6,144 m.",
+        f"1. Import the SVG. Use map_frame_{W}x{H} to check a width of {W:,} m.",
         "   The frame's lower-left corner is world (0, 0); keep it there.",
         f"2. Or use the PNG as a top-ortho reference: {1 / png_scale:g} m per pixel; map frame",
         f"   NW corner at pixel ({ML * png_scale:g}, {MT * png_scale:g}) from the image's top-left.",
@@ -738,6 +749,7 @@ def build(png_scale: float):
         "5. Record any new building position in world metres + sector ID.",
     ]:
         ptxt(t, 44)
+    s.add("</g>")
     s.end()
 
     # --- bottom panel: settlement table, conflicts, unanchored sites ---------
@@ -753,16 +765,14 @@ def build(png_scale: float):
     for cx_, t in zip(cols_x, heads):
         s.text(cx_, yy, t, size=42, weight="bold", halo=False)
     notes = {
-        "brookhollow": "Upper civic/residential ground vs floodable docks; needs upper span (400 m holds 61).",
-        "crestbridge": "Core only; Hall + Depot are outworks outside 600 m core (budget scope open, TC-19).",
-        "ashenstead": "Compact core; extensive fields outside. Rebirth Fields extent untraced (TC-15).",
-        "greyharrow": "Lower/middle range only; 50 not demonstrated. Bible scopes it as micro-settlement.",
-        "reedmere": "Stilts only: 0 dry plots, 55 conditional stilt candidates; no fill/drainage.",
-        "whisperflow_landing": "Working crossing, not a village (D-4/CR-4). Water edge unresolved (TC-13).",
-        "drowsebank_mill": "Lower end only; do not build on marker (channel). Pond/race not laid out.",
+        "brookhollow": "Waterfront flood zoning still required.",
+        "crestbridge": "Compact Hall and Depot positions are provisional (TC-01–05).",
+        "ashenstead": "Lower shoulder core; Rebirth Fields remain untraced.",
+        "greyharrow": "Side-branch settlement; upper count unproven.",
+        "reedmere": "Conditional stilt sites. Causeways and staging unbuilt.",
+        "whisperflow_landing": "Working crossing envelope reaches main river (TC-13).",
+        "drowsebank_mill": "Offset yard candidate; hydraulic and machinery layout open.",
     }
-    reg_counts = {"brookhollow": "145 / 134", "crestbridge": "97 / 91", "ashenstead": "78 / 78", "greyharrow": "23 / 18",
-                  "reedmere": "43 / 0", "whisperflow_landing": "19 / 19", "drowsebank_mill": "4 / 4"}
     for sid, st in settlements.items():
         yy += 62
         x, y_ = m(st["xy"])
@@ -770,20 +780,23 @@ def build(png_scale: float):
         col = {"ok": C_OK, "prov": C_PROV, "block": C_BLOCK}[status]
         b = st["buildings"]
         lc = local_counts.get(sid)
-        row = [f'{st["name"]} [{x:.0f}, {y_:.0f}]', f"{b[0]}–{b[1]} (est.)", reg_counts[sid],
-               ("55 stilt (0 dry)" if sid == "reedmere" else (f"{lc}" if lc is not None else "—")),
+        rg = regional_counts[sid]
+        local_display = (f'{lc["conditional_stilts"]} stilt (0 dry)' if sid == "reedmere"
+                         else f'{lc["normal_candidates"]} / {lc["scenario_floor_candidates"]}' if lc else "—")
+        row = [f'{st["name"]} [{x:.0f}, {y_:.0f}]', f"{b[0]}–{b[1]} (est.)", f'{rg["screened_roof_capacity"]} / {rg["flood_scenario_safe_capacity"]}',
+               local_display,
                f'{st["envelope_axes_m"][0]} × {st["envelope_axes_m"][1]}',
                {"ok": "anchor confirmed", "prov": "provisional", "block": "BLOCKED"}[status] + " " + ",".join(SETTLEMENT_STATUS[sid][1]),
                notes[sid]]
         for i, (cx_, t) in enumerate(zip(cols_x, row)):
             s.text(cx_, yy, t, size=38, halo=False, fill=col if i == 5 else C_OK)
     yy += 62
-    s.text(-400, yy, "Regional screen = normal-stage / outside +1.5 m scenario candidate count (terrain README); local = 2 m patch count (LOCAL_README). "
+    s.text(-400, yy, "Regional screen = normal-stage / outside +1.5 m scenario candidate count (terrain README); local = 2 m normal / scenario floor (LOCAL_README). "
            "Screens assume 120–160 m² mean roofs; they are capacity checks, not plot plans. Envelope axes are E–W × N–S full diameters.",
            size=36, fill="#444", halo=False)
     yy += 52
-    s.text(-400, yy, "Outworks: Crest Hall [3257, 1830] and Hill Depot [3139, 2216] sit 648 m / 779 m from Crestbridge's anchor and are not inside its envelope. "
-           "Whether Crestbridge's 60–100 roofs include them is unruled (TC-19).", size=36, fill="#444", halo=False)
+    s.text(-400, yy, "Hall and Depot use provisional compact positions. The civic budget and functional interfaces still require local design.",
+           size=36, fill="#444", halo=False)
 
     # conflicts
     yy += 110
@@ -801,10 +814,10 @@ def build(png_scale: float):
     # unanchored sites
     s.text(-400, yy, "NAMED SITES WITH NO APPROVED XY — not drawn as points; block out only inside the stated parent once D-5 / the TC row is ruled",
            size=56, weight="bold", halo=False)
-    third = (len(UNANCHORED) + 2) // 3
+    column_rows = (len(UNANCHORED) + 1) // 2
     for k, (pid, name, parent) in enumerate(UNANCHORED):
-        colx = [-400, 3000, 6400][k // third]
-        yrow = yy + 70 + (k % third) * 56
+        colx = [-400, 3050][k // column_rows]
+        yrow = yy + 70 + (k % column_rows) * 56
         s.text(colx, yrow, f"{pid}  {name} → {parent}", size=34, halo=False)
     s.end()
     s.add("</svg>")
@@ -812,10 +825,9 @@ def build(png_scale: float):
     OUT.mkdir(parents=True, exist_ok=True)
     svg_path = OUT / f"{STEM}.svg"
     svg_path.write_text("\n".join(s.parts), encoding="utf-8")
-    import cairosvg
+    from resvg_py import svg_to_bytes
     png_path = OUT / f"{STEM}.png"
-    cairosvg.svg2png(url=str(svg_path), write_to=str(png_path), output_width=int(VB_W * png_scale),
-                     output_height=int(VB_H * png_scale), background_color="white")
+    png_path.write_bytes(svg_to_bytes(svg_path=str(svg_path), zoom=png_scale, background="#ffffff"))
     frame_px = ((0 - VB_X) * png_scale, (-H - VB_Y) * png_scale)
     print(f"SVG {svg_path} ({svg_path.stat().st_size:,} bytes)")
     print(f"PNG {png_path} ({png_path.stat().st_size:,} bytes) {int(VB_W * png_scale)}x{int(VB_H * png_scale)} px, "

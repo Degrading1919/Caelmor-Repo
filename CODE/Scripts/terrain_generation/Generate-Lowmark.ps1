@@ -64,6 +64,8 @@ try {
                 & py -3 (Join-Path $PSScriptRoot 'verify_glb.py') --arrays (Join-Path $localOutput ($patch.id+'.npz')) --glb (Join-Path $localOutput ($patch.id+'.glb')) --report (Join-Path $localOutput ($patch.id+'_mesh_verification.json'))
                 if($LASTEXITCODE -ne 0){throw "Local mesh verification failed: $($patch.id)"}
             }
+            & py -3 -X utf8 (Join-Path $PSScriptRoot 'build_blockout_planning_map.py')
+            if($LASTEXITCODE -ne 0){throw 'True-scale blockout planning sheet failed'}
         }
     }
     Write-Output "Lowmark offline terrain ready: $output"

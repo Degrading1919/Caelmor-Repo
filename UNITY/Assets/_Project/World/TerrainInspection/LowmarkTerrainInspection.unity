@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &876473845
+--- !u!1 &102677666
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,8 +127,61 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 876473847}
-  - component: {fileID: 876473846}
+  - component: {fileID: 102677668}
+  - component: {fileID: 102677667}
+  m_Layer: 0
+  m_Name: Baked Lowmark terrain / inspection only
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &102677667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102677666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5803c61fc1171674b82aad921a94318f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Caelmor.Unity.Inspection.TerrainInspectionSurface
+  payload: {fileID: 4900000, guid: 7b7cd3eb8798bc3418cb67c3da36d794, type: 3}
+  groundMaterial: {fileID: 2100000, guid: 2f93f68f82fca594f8b7e648b5398251, type: 2}
+  roadMaterial: {fileID: 2100000, guid: c7996aac10db00943aaf7166814623bf, type: 2}
+  waterMaterial: {fileID: 2100000, guid: 2adf086b9d8209a4782b600b0b5804da, type: 2}
+  proxyMaterial: {fileID: 2100000, guid: 501bb71e687eb074e9943f6225d6c384, type: 2}
+  sourceHash: 2e28fdf509db2ad2a4eafddae1b455c86289f613a25724d7f23315b1998bcad9
+  meshCount: 0
+  terrainTriangles: 0
+  bridgeApproachGap: 0
+--- !u!4 &102677668
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102677666}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &864672770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 864672772}
+  - component: {fileID: 864672771}
   m_Layer: 0
   m_Name: Inspection daylight
   m_TagString: Untagged
@@ -136,13 +189,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!108 &876473846
+--- !u!108 &864672771
 Light:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 876473845}
+  m_GameObject: {fileID: 864672770}
   m_Enabled: 1
   serializedVersion: 13
   m_Type: 1
@@ -201,13 +254,13 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
---- !u!4 &876473847
+--- !u!4 &864672772
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 876473845}
+  m_GameObject: {fileID: 864672770}
   serializedVersion: 2
   m_LocalRotation: {x: 0.32619038, y: -0.28257105, z: 0.102847435, w: 0.89620084}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -216,7 +269,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1186822675
+--- !u!1 &1075066129
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,62 +277,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1186822677}
-  - component: {fileID: 1186822676}
-  m_Layer: 0
-  m_Name: Baked Lowmark terrain / inspection only
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1186822676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186822675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5803c61fc1171674b82aad921a94318f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Caelmor.Unity.Inspection.TerrainInspectionSurface
-  payload: {fileID: 4900000, guid: 7b7cd3eb8798bc3418cb67c3da36d794, type: 3}
-  groundMaterial: {fileID: 2100000, guid: 2f93f68f82fca594f8b7e648b5398251, type: 2}
-  roadMaterial: {fileID: 2100000, guid: c7996aac10db00943aaf7166814623bf, type: 2}
-  waterMaterial: {fileID: 2100000, guid: 2adf086b9d8209a4782b600b0b5804da, type: 2}
-  proxyMaterial: {fileID: 2100000, guid: 501bb71e687eb074e9943f6225d6c384, type: 2}
-  sourceHash: ed3e95aec4371712d5de3d46f38965e25d9c22962ed89090a9cb0650dabe0290
-  meshCount: 0
-  terrainTriangles: 0
-  bridgeApproachGap: 0
---- !u!4 &1186822677
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1186822675}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1703675599
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1703675602}
-  - component: {fileID: 1703675601}
-  - component: {fileID: 1703675600}
+  - component: {fileID: 1075066132}
+  - component: {fileID: 1075066131}
+  - component: {fileID: 1075066130}
   m_Layer: 0
   m_Name: Inspector / 3 metres per second
   m_TagString: Untagged
@@ -287,29 +287,29 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1703675600
+--- !u!114 &1075066130
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703675599}
+  m_GameObject: {fileID: 1075066129}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7956ec124eb53f4e93ff210bc88ed6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Caelmor.Unity.Inspection.TerrainInspectionWalker
-  surface: {fileID: 1186822676}
-  eye: {fileID: 1974514635}
+  surface: {fileID: 102677667}
+  eye: {fileID: 1260418309}
   walkSpeed: 3
   sprintSpeed: 5.5
---- !u!143 &1703675601
+--- !u!143 &1075066131
 CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703675599}
+  m_GameObject: {fileID: 1075066129}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -328,23 +328,23 @@ CharacterController:
   m_SkinWidth: 0.03
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.9, z: 0}
---- !u!4 &1703675602
+--- !u!4 &1075066132
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703675599}
+  m_GameObject: {fileID: 1075066129}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.37572938, z: 0, w: 0.92672944}
-  m_LocalPosition: {x: 2483.7144, y: 67.30004, z: 1455.9463}
+  m_LocalRotation: {x: 0, y: 0.34463263, z: 0, w: 0.93873763}
+  m_LocalPosition: {x: 1361.3945, y: 65.391785, z: 851.1098}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1974514637}
+  - {fileID: 1260418311}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1974514634
+--- !u!1 &1260418308
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -352,9 +352,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1974514637}
-  - component: {fileID: 1974514635}
-  - component: {fileID: 1974514636}
+  - component: {fileID: 1260418311}
+  - component: {fileID: 1260418309}
+  - component: {fileID: 1260418310}
   m_Layer: 0
   m_Name: Inspector camera
   m_TagString: MainCamera
@@ -362,13 +362,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!20 &1974514635
+--- !u!20 &1260418309
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1974514634}
+  m_GameObject: {fileID: 1260418308}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
@@ -413,33 +413,33 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &1974514636
+--- !u!81 &1260418310
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1974514634}
+  m_GameObject: {fileID: 1260418308}
   m_Enabled: 1
---- !u!4 &1974514637
+--- !u!4 &1260418311
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1974514634}
+  m_GameObject: {fileID: 1260418308}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1703675602}
+  m_Father: {fileID: 1075066132}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1186822677}
-  - {fileID: 1703675602}
-  - {fileID: 876473847}
+  - {fileID: 102677668}
+  - {fileID: 1075066132}
+  - {fileID: 864672772}

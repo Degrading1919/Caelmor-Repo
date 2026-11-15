@@ -1,13 +1,10 @@
 # Lowmark — Terrain / Narrative Conflict Register
 
-**Status:** A record for the Creative Director and Sol (Systems Engineer). It is not a ruling, a proposal for new geography, or a quest rewrite. Each row says where the provisional terrain and the authored narrative disagree, and lists the options neutrally. **No option is recommended.** Nothing here moves a landmark, invents a waterway or structure, or changes quest text, flags or steps.
+**Status:** Open conflicts after regenerating the Director-approved **3,456 × 3,072 m** frame. Technical offsets and measured improvements are provisional. The authored quest text, flags and steps govern the requirements below.
 
-**Authority, as the sources state it:**
-- The Director's November 6 mission approves the supplied maps' **horizontal composition and relationships**. Elevations, gradients, contours and scale are **not** validated (`CODE/Scripts/terrain_generation/MISSION.md`; `SOURCE_NOTES.md` opening).
-- All metre heights, water stages, depths, freeboards, capacity screens and access corridors in the terrain are **technical proposals** (`lowmark_controls.json` → `authority`).
-- The narrative packages mark every place as **MAP VERIFICATION REQUIRED** and nothing new is canon until the Director promotes it (POI file header; bible D-5, D-11). **Update 2026-11-15 (CR-3, CR-4):** D-11 promoted House Marrick, the Relief Cut and the Hollow Lock in existence and narrative role only, and D-12 (the backwater) is ruled as narrative; neither validates geography, dimensions or terrain relationships, so every TC row in this register stays open and unrecommended. The POI file (§7, lines 510–516 per `SOURCE_NOTES.md`) predates the approved maps. Sol's sources treat the new map as the higher placement authority and say mismatches must be surfaced, not solved by relocation (`SOURCE_NOTES.md`, Zones 510–516 row).
+**Authority.** The original maps establish composition. The compact mandate supersedes their prior metre interpretation. Road grades, heights, water stages, capacity and exact engineering remain technical proposals. CR-3 and CR-4 establish the relevant existence and narrative roles. D-5 remains open for final placement, and the ruled backwater premise still needs terrain and state implementation. See [terrain source notes](../../CODE/Scripts/terrain_generation/SOURCE_NOTES.md).
 
-**Terrain baseline read:** `main` with commits `3ec4003` (regional foundation), `24d179d` (local 2 m refinement and Unity walking inspector), `d9fbc37` (architecture pipeline and scene protection) and `f5b05d6` (100 material masters). Terrain sources: `CODE/Scripts/terrain_generation/` (README, LOCAL_README, LOCAL_REVIEW, SOURCE_NOTES, MISSION, LOCAL_MISSION, `lowmark_controls.json`, `local_controls.json`) and `MEDIA/Maps/Lowmark_Terrain/` (`verification.json`, `metrics.json`, `hydrology_and_routing.png`, `Local_Refinement/`).
+**Terrain baseline.** The source checkout was `d0e44fa`. Numbers below come from the regenerated [regional verification](../../MEDIA/Maps/Lowmark_Terrain/verification.json), [local metrics](../../MEDIA/Maps/Lowmark_Terrain/Local_Refinement/local_metrics.json), [local review](../../CODE/Scripts/terrain_generation/LOCAL_REVIEW.md) and [Unity inspection](../../MEDIA/Maps/Lowmark_Terrain/Local_Refinement/unity_validation.txt). Centreline distances are measured to traced water. Nominal bank distance subtracts the modeled half-width and does not survey a usable bank. Travel times use the inspector's 3 m/s sensitivity.
 
 **Narrative sources:** `Zones/Caelmor_Lowmark_POI_and_Zone_Requirements.md` (cited as **POI**), `Quests/Caelmor_Lowmark_v1_Narrative_Production_Bible.md` (**Bible**), `Quests/Caelmor_Lowmark_Main_Act_I.md`, `_Act_II.md`, `_Act_III.md`.
 
@@ -16,40 +13,38 @@
 - **Degrades:** the beat can run, but a stated spatial requirement, premise, sightline or pacing is lost or weakened.
 - **Cosmetic / scope:** the conflict affects presentation, budget or scope. No beat depends on it.
 
-**Measurement provenance.** Numbers marked **[Sol]** are quoted from Sol's documents or evidence files. Numbers marked **[liaison]** were computed for this register. They use the traced coordinates in `lowmark_controls.json` (normalized × 6,144 / 4,992 m) and the saved 8 m `height.npy`. They have not been verified by Sol and should be rechecked before anyone relies on them.
-
 ---
 
 ## 1. Register
 
-### TC-01 — Crest Hall is not on the river (water-gate, Gate Landing, Granary Passage cistern, bridge north stair) — **lead item**
+### TC-01 — Crest Hall water-gate, Gate Landing, cistern and bridge north stair remain unbuilt — **lead item**
 
 | Field | Record |
 |---|---|
 | Place | P02 Crestbridge and Crest Hall (Hall areas E, F, G); NB underside north stair (G) |
-| Terrain now | Crest Hall anchor is a fixed approved-map symbol at about [3257, 1830] m. It is **640.31 m from the nearest retained natural river**, 679.49 m from the regional `crest` river node, and 652.28 m from the town anchor. Ground at the Hall is about 70.0 m. Crossing stage and bed are 63.10 / 61.90 m **[Sol]** (`LOCAL_REVIEW.md` "Measured conflict"; `LOCAL_README.md` "What still requires a decision"). The Hall's nearest water of any kind is the Drowsebank mill leat, at about 616 m. The Hall is about as far from Drowsebank Mill's anchor (647.6 m) as from Crestbridge's (652.3 m) **[liaison; site screen in `verification.json` → `landmark_site_screen`]**. Sol states plainly that a better road cannot give the Hall a direct water-gate or put the bridge's north stair beside it. No canal, annex, tunnel or moved anchor has been added. |
+| Terrain now | The provisional Hall lies 34 m from Crestbridge centre, 83 m from the technical crossing and 66.5 m from the natural river centreline (48.5 m to nominal bank). Local Hall ground is about 64.03 m versus 63.1 m nearby reference stage. The compact layout reserves bank-side space, with no gate, basin, cistern or stair built. |
 | Narrative requires | Act III §10.3: "Crest Hall stands on the Crestbridge bank beside the granaries, its undercroft cut down to river level where a wartime water-gate lets barges unload straight beneath the hall." The water-gate must open onto the river **above** the Cut mouth so Sallow's skiff can reach it. Area F is a vaulted basin open to the river through an iron gate. Area G is a ~14 × 8 m Gate Landing with steps out of the water at each end. Area E's cistern is "fed from the river". POI P02 Map: the basin is wade-depth with end steps, and the NB north stair emerges close to the water-gate wall. POI §6.1: NB north stair near the Hall water-gate wall. POI §3 S1: Crestbridge underside → north stair near the water-gate, which is an optional MQ10 approach. §10.7 strange moment: water-gate audio carries through the Long Hall floor-grates. |
 | Affected | **MQ10** `S05_water_gate` (barge chase, `throw_mooring_line`, `drop_gate_lever`), `S05b_haul` / `CR_HAULED_CREWMAN`, `S06_sallow` (Sallow arrives "up the far steps from his skiff"; `cr.sallow_yield`), `S10_plan` → `cr.plan_agreed` audio duck. **Night Bridge** (NB) north-stair exit and `NB_UNDERSIDE_OPEN`. POI §6.2 water-contact row. |
 | Severity | **Blocks** (MQ10 S05/S06 need river water under the Hall; NB's exit adjacency fails). |
-| Options (neutral) | (a) Keep every regional anchor and leave the civic adjacency unresolved for now. This is Sol's current implemented stance (`LOCAL_REVIEW.md` option 1). (b) The Director approves an explicit local map revision bringing the Hall's functional footprint, granaries, north stair and Depot exit into one crossing compound. Any anchor adjustment, or reading the Hall symbol as a district label, would be approved and recorded first (Sol option 2). (c) Keep the remote buildings fixed and revise the authored connection requirements, which needs explicit quest/location changes and new scope (Sol option 3). Sol notes that a new ~640 m canal or invented annex is not a routine terrain fix. (d) The Director rules on a different reading of the map symbol or the quest text that is not listed here. Narrative owners would then revise affected beats under that ruling. |
+| Options (neutral) | (a) Fit an actual Hall, bank stair and water gate in a local civic layout. (b) Keep the compact approach and study how the undercroft and cistern can reach the bank without asserting new civil works. The Director retains the placement decision. |
 
 ### TC-02 — Granary yard position is unfixed and over-constrained
 
 | Field | Record |
 |---|---|
 | Place | P02 granary yard (A), tally room (B), undercroft (C), hill passage (D); waiting wall |
-| Terrain now | **No approved granary XY exists** in the sources. The granary box in the Blender scene is labelled a "conceptual yard-location example". It is excluded from grading and capacity (`LOCAL_REVIEW.md` "No approved granary XY"; `LOCAL_README.md` §Inspect). Hall → Depot is 403.70 m straight; the candidate access is 407.31 m **[Sol]**. |
+| Terrain now | The 28 × 14 m granary proxy remains illustrative only. Hall, bridge crossing and Depot are closer, but the yard, toll view, goods approach and underground passage have no approved placement. |
 | Narrative requires | POI P02: the waiting wall faces **both** the granary yard and the south toll on the bridge. POI §6.1: the granaries have the Depot behind them, the Hall beside them, and a Granary Passage linking undercrofts. Act I A5.1 C–D: a chalk line to HILL GATE and a stone-lined hill passage from the undercroft into the depot. Act III §10.3 E: a low passage from the Hall to Corvin's granary undercroft. |
 | Affected | **MQ2** (SM) `S00_arrive`, `S08_yard` (the live draw-signing glimpse), hill passage entry. **MQ10** `S04_records` / `S05` route through the Granary Passage, plus Beat 0 evening scene on the waiting wall. HS forge "under the first arch". `LM_GRAIN_ROUTE` props. |
 | Severity | **Degrades**; becomes **Blocks** if no single site can satisfy both "faces the south toll" and "Hall beside / Depot behind" at the current anchor spacing. |
 | Options (neutral) | (a) Leave the yard unplaced until TC-01 is ruled. Sol's review names this as "the next consequential ruling". (b) The Director fixes a granary XY on the approved map under whichever TC-01 option is chosen. (c) The Director relaxes one of the adjacency statements (toll-facing wall, Hall beside, Depot behind) as a narrative revision. |
 
-### TC-03 — Hill Depot chute and river ledge are far from the river
+### TC-03 — Hill Depot chute and below-toll river ledge remain unbuilt
 
 | Field | Record |
 |---|---|
 | Place | P07 Hill Depot, areas K (Chute Gallery) and L (chute lip and river ledge) |
-| Terrain now | Depot anchor is **836.62 m from the nearest retained natural water**. Gross ground-to-water head is 4.1357 m over that distance (mean fall 0.4943%). The closest water point is at the toll line, not a verified below-toll backwater **[Sol]** (`LOCAL_REVIEW.md` "Depot head/length diagnostic"). The Depot symbol is an area reference, not an approved gallery/chute footprint. **[liaison]** The nearest traced water of any kind to the Depot anchor is the Relief Cut straight, at about 303 m. This is recorded as a fact only, not as a suggested reading. |
+| Terrain now | The Depot is 164 m along the candidate Hall access, 226 m from the nearest natural centreline and 275 m from the below-toll mill intake. Local surface is 67.46 m; the intake stage is 62.9 m. This is a gross diagnostic. The actual start elevation, slack water exit and downhill continuity remain unknown. |
 | Narrative requires | Act I A5.2 K: a stone chute "drops through the hillside to the river", with a pulley gantry. L: a ledge "high above a slack backwater of the river", a mooring ring, and "a short walk down" to the bank and the hill road back to Crestbridge. POI P07 Map and §6.1: the chute drops to a slack river backwater **below Crestbridge's toll line**. POI §1: "Grain reaches Brookhollow from the Hill Depot chute by night skiff below the toll line." |
 | Affected | **MQ2** area L (optional view) and the post-boss ledge shortcut. R2 Towpath route (POI §3: "Hill Depot river ledge"). Bible/POI §1 smuggling logic. W-03 revisit. |
 | Severity | **Degrades** (L is optional in MQ2), but it undermines a stated §1 premise of the scheme. |
@@ -60,7 +55,7 @@
 | Field | Record |
 |---|---|
 | Place | P02 bridge (span, south toll, north end, underside piers 1–3, forge under the first arch) |
-| Terrain now | The retained road/river intersection is at [2581.21, 1556.42] m, about 60.31 m from the `crest` node. A neutral 72 × 8 m deck proxy has a 66.115 m deck top. It is "an unapproved scale/deck example" **[Sol]** (`LOCAL_REVIEW.md` "Inspection crossing correction"). In the Unity inspector the deck's measured approach gap is **2.56 m**, which exceeds the 0.3 m controller step, so the deck is not claimed walkable from the road (`LOCAL_README.md` "Walk in the isolated Unity inspector"). No bridge or ford is generated anywhere (`verification.json` → `routes[].crossings`). The architectural generator has no bridge type (§2 below). |
+| Terrain now | Retained route crossing is [1451.93, 957.80] m, distinct from the `crest` node. The 72 × 8 m deck proxy is at 66.115 m. Unity measures a 2.67 m maximum gap to its approaches with a 0.3 m controller step. No bridge, ford or stairs are built. |
 | Narrative requires | POI P02: dwarven-reinforced span; south toll with tally table; forge under the first arch with a quench trough fed by a river channel; underside with crew stair, three piers, a reed island at pier 2, an arch-2 soffit, and a north stair. POI §6.3: footsteps on the deck carry down under arch 2. |
 | Affected | NB (whole underside traversal), HS (forge), MQ2/MQ10 toll-facing waiting wall, R1 River Road. |
 | Severity | **Degrades** (production gap). Becomes **Blocks** for NB if the north-stair adjacency in TC-01 is not resolved. |
@@ -71,7 +66,7 @@
 | Field | Record |
 |---|---|
 | Place | Crest Hall → Relief Cut mouth (P10 T3) |
-| Terrain now | Hall anchor → `weir_up` node (where the Cut, the mill tail and the main river converge): about **843 m straight** **[liaison]**. The Hall is not on a bank (TC-01). Sol notes that Act III line 248 also wants a short towpath walk from the Hall's bank to the Cut mouth (`LOCAL_REVIEW.md` source table, Night Bridge row). |
+| Terrain now | Hall to the combined Cut-mouth node `weir_up` is 602 m straight, or a minimum of about 3m 21s at 3 m/s. A bank-connected towpath and the dusk beat have not been staged. |
 | Narrative requires | Act III Beat 10 `S11_dusk`: walk-with from the hall down the towpath, with dusk falling during the walk. "MAP VERIFICATION REQUIRED: the Cut mouth is a short towpath walk from Crest Hall's bank." |
 | Affected | **MQ10** `S11_dusk`, optional `drop_last_plank`, `CR-D11` (Ansel and Sedge at the mouth). |
 | Severity | **Degrades** (walk length and the "bank" premise; the beat still runs). |
@@ -82,7 +77,7 @@
 | Field | Record |
 |---|---|
 | Place | P11 Drowsebank Mill, area H (the Drowse spur); P10 lower Cut |
-| Terrain now | `drowsebank_tailrace` returns 557.66 m to the **common outfall node `weir_up`**. The Relief Cut downstream reach and the main river also meet there. The reach is marked "Provisional tail return; Drowse spur-to-lowerCut link pending local detail" (`lowmark_controls.json` reaches; `LOCAL_REVIEW.md` "Mill race and lower Cut"). Sol: "Current common-outfall graph does not establish that distinct spur." An upstream-of-wheel bypass would be new detail, not a source-supported replacement. |
+| Terrain now | The 317 m tailrace and the lower Cut still end at the same `weir_up` node. A distinct wartime spur into the lower Cut remains unbuilt. |
 | Narrative requires | Act II TF.4 H: "Downstream, the dressed channel joins a straight wartime spur toward the Relief Cut below Crestbridge." TF.16 item 1 recommends approving the Drowse spur. POI P11 Map and §6.1: tail race reaches the **lower Cut by a wartime spur**. POI P10 "Used by MQ6 (Drowse spur joins the lower Cut)". |
 | Affected | **MQ6** (TF) area D/H context, `TF_KEEPERS_READ_BACKWATER`; Bible §2.3 backwater; Act II §A2.2 "one water story after MQ4". |
 | Severity | **Degrades** (area H is "Context"; the premise of the crew route rests on it). |
@@ -93,29 +88,29 @@
 | Field | Record |
 |---|---|
 | Place | P11 race, race gate, tail race; Drowse spur |
-| Terrain now | Mill working head is 0.95 m (forebay 62.5 → tail 61.55 m). It "can drain; it does not establish barge passage" **[Sol]**. The corrected leat's minimum static depth is **0.136 m**, below the 0.2 m target. It is "not proven barge draft or discharge capacity" (`LOCAL_README.md` findings). The model is static, so no reverse flow up the spur is represented (`lowmark_controls.json` → `operating_state`). |
+| Terrain now | The local leat is wet with a 0.651 m minimum static centreline depth. Mill head is 0.95 m. The static model establishes neither the required draft and cross-section nor controlled pulses or reverse flow. |
 | Narrative requires | Bible §2.3: after MQ4 "Sallow's crew still runs barges ... only through Drowsebank's mill race and a wartime spur to the Cut". Act II §A2 author truth: crew pulses go only through the race via the spur. Act II TF.15: the tail-door lines are backwater "arriving up the Drowse spur". TF.4 C: a race gate between pond and race, with stop-plank grooves. |
 | Affected | **MQ6** TF.6 set piece (bracing the gate across three swells), the night scene (crew at tail door), `TF_MAX_BAND`, `LM_FLUSH_CALENDAR`. |
 | Severity | **Degrades** (hydraulic premise; the set piece is staged locally and can play). |
 | Options (neutral) | (a) Sol inspects a controlled passage or bypass with operating levels, width and draft before any works are approved (Sol's stated next step). No lock is silently added. (b) The Director clarifies whether "barges" through the race means laden barges or smaller craft. That is a narrative clarification, not assumed here. (c) Treat pulses and backwater as quest-state presentation outside the static terrain model, recorded as an explicit exception like the Uphill Canal's. |
 
-### TC-08 — Drowsebank mill site: marker sits on the channel; pond works not laid out
+### TC-08 — Drowsebank offset yard and unbuilt pond works
 
 | Field | Record |
 |---|---|
 | Place | P11 areas A (yard, pond bank), B (ground floor on the race wall), C (footbridge, far crank on pond bank), E (loft), G (far-bank spill weir) |
-| Terrain now | The fixed mill centre samples an engineered channel: natural ground about 67.27 m, open-bed about 60.91 m. A building placed on the marker would occupy the wheel/race corridor (`LOCAL_REVIEW.md`, Drowsebank paragraph). Capacity: 4 regional / 5 local candidates against a 4–10 roof target, with "machinery, pond/wheel, spur and ancillary programme ... not laid out" (`LOCAL_README.md` table). |
+| Terrain now | The provisional yard is on the northeast bank, 49 m from the leat centreline and at about 64.86 m elevation. Its 5 regional and 7 local candidates screen against the 4–10 target. Pond, wheel, apron, spill weir and footbridge remain undesigned. |
 | Narrative requires | POI P11; Act II TF.4: a broad still pond behind the mill, race gate with near and far cranks across a narrow footbridge, spill weir on the far bank, a pond-bank volume within 15 m of the water for the lag effect, and the loft gap view (POI §6.3). |
 | Affected | **MQ6** all beats; TF.8 lagging pond; mill micro-event; ME08 echo. |
 | Severity | **Degrades** (production layout outstanding; nothing contradicts in principle). |
-| Options (neutral) | (a) A local mill site design beside the retained waterworks, as Sol recommends. (b) The Director confirms the 4–10 budget or a lower scope for Drowsebank. |
+| Options (neutral) | (a) Use the offset yard as a provisional laydown area and design the working race interfaces beside it. (b) Revisit programme size after the pond and wheel clearances are measured. |
 
 ### TC-09 — Cut mouth, Bramblelock and the orchard towpath share one node
 
 | Field | Record |
 |---|---|
 | Place | P10 T2/T3, P08 Bramblelock Weir, P16 Floodplain Orchards, P15 Sluice Shelter |
-| Terrain now | `relief_cut_downstream`, `drowsebank_tailrace` and `mill_bypass_main_river` all end at node `weir_up`. Bramblelock's 1.2 m weir runs `weir_up` → `weir_down`. The Cut reach carries "Cut-mouth/weir spatial separation requires later local engineering detail; no anchor moved" (`lowmark_controls.json`). `unresolved` → `local_waterworks_detail` lists "Cutmouth/weir separation". **[liaison]** The orchard floodplain polygon lies beside the Cut's downstream reach (orchard anchor ~522 m from it), upstream of the shared node. The orchard drainage apron "follows the retained Cut-mouth/towpath works toward Bramblelock" (README "Method" §orchard). |
+| Terrain now | Lower Cut, tailrace and main river still share `weir_up`. The 36.7 m weir reach is a head transition; the Cut mouth and weir crest still lack an independent chase segment. The orchard anchor is 302 m from the Cut centreline. Orchard exposure is 45.8% for the connected +1.5 m scenario. |
 | Narrative requires | POI §1 chain: "Relief Cut mouth (Cut rejoins) → orchard floodplain (towpath under the dike) → Bramblelock Weir". The barge is poled upstream "over the weir crest, along the orchard towpath, over the Cut-mouth silt sill, up the Cut". POI P08: below the Cut mouth; the barge passes within ~6 m of the bench. P16 Map: floodplain below the Cut mouth along the towpath and Bramblelock. §6.1: Cut mouth near the orchard towpath, with Bramblelock downstream. Act I line 777: the barge passes Bramblelock on the pulse, and the mouth is reachable along the towpath from the weir. |
 | Affected | **MQ4** chase legs (R2), NF §C8.1 bench sightline, `S11` towpath in MQ10, MQ3/MQ7 orchard beats, MQ12 stop-planks at the mouth. |
 | Severity | **Degrades**; **Blocks** the MQ4 mouth → towpath → weir chase sequence if mouth and weir remain one point. |
@@ -126,18 +121,18 @@
 | Field | Record |
 |---|---|
 | Place | P10 T4 the straight (mouth fight → Hollow Lock) |
-| Terrain now | `relief_cut_straight` is about **1,868 m**, `relief_cut_elbow` about 450 m and `relief_cut_downstream` about 1,182 m **[liaison, polyline lengths]**. At the 3 m/s technical walk (a sensitivity input, not balance), the straight alone is about 10 minutes. Sol: "Long regional journeys cannot inherit old 60–90 second quest-transition assumptions" (README "Review before production lock"). |
+| Terrain now | The Cut straight is 1,052 m (about 5m 51s at 3 m/s), followed by the 274 m elbow and 708 m downstream reach. The straight alone exceeds the authored 60–90 second transition. |
 | Narrative requires | Act I line 817: "a short, quiet walk up the straight ... about 60–90 seconds". POI P10 Map: 60–90 s walk between the mouth fight and the Lock. |
 | Affected | **MQ4** pacing beat; MQ10/MQ12 plank crews. |
 | Severity | **Degrades** (pacing). |
-| Options (neutral) | (a) Accept the longer walk. (b) Start the pacing beat partway up the Cut (a staging change). (c) Revise the stated duration. (d) Revisit world scale; Sol calls the 6,144 × 4,992 m extent "a working compromise for review", not approved size. |
+| Options (neutral) | (a) Accept the longer traversal. (b) Begin the staged quiet beat on a shorter reach of the Cut. (c) Review its stated duration. Any quest staging or wording change is a separate decision. |
 
 ### TC-11 — Fen "no way out" versus the open natural outlet
 
 | Field | Record |
 |---|---|
 | Place | Stillwater Fen, Relief Cut, Hollow Lock, fen_to_crestbridge river |
-| Terrain now | The approved natural outlet from the fen toward Crestbridge stays open. "Closing a parallel cut cannot eliminate an independently open natural river" (`SOURCE_NOTES.md` "Unresolved quest-state outlet conflict"; `lowmark_controls.json` → `unresolved.sealed_fen_outlet`). The prototype neither dams the river nor treats the sealing as validated. |
+| Terrain now | The 1,237 m natural fen outlet toward Crestbridge remains open. The verification checks this connected exit; the modeled Cut closure cannot establish the authored trapped-fen state. |
 | Narrative requires | Act III Beat 10 `S11_dusk`: "The planks close the Cut-side culverts ... for the first time since MQ4 the fen has no way out at all." Act III Beat 9 roll: seal the Cut at both ends and plank the culverts. Bible §2.3: "the pressure has nowhere to go" → Hollowed Current (MQ11). |
 | Affected | **MQ10** S10/S11; **MQ11** premise (fen "holding its breath"); `LM_FEN_ENDING`; D-12 backwater ruling. |
 | Severity | **Degrades** (premise; the beats can play). |
@@ -148,29 +143,29 @@
 | Field | Record |
 |---|---|
 | Place | P06 Reedmere (stilt huts, plank walks, lantern store, staging F, kept path G, Causeway mouth); P30 gates |
-| Terrain now | Regional: 43 roofs at normal stage, **0** outside the +1.5 m scenario. Implied raised floors are roughly 1.13–1.43 m. Local 2 m: **0 dry candidates; 55 conditional stilt candidates**. "Raised floors, piles, connected walks and evacuation still require design." Three neutral 10 × 8 m floor/pile tests only; no ground filled (`LOCAL_README.md` table; `LOCAL_REVIEW.md` Reedmere row). Anchor is ~173 m from the traced western braid **[liaison]**. Smaller marsh channels are not traced (README fen paragraph). |
+| Terrain now | Reedmere is 99 m from the western braid centreline. The 8 m ground screen gives 25 normal / 0 scenario candidates; 2 m screening gives 33 conditional stilts and no dry candidates. Three neutral test floors remain. Walks, staging by a deep pool and evacuation need a separate design. |
 | Narrative requires | POI P06: stilt huts on plank walks; tally board by the steps; staging F with a reed-mat floor ~20 × 14 m, four staked discs, pool kerb and landward shallows strip **at a deep pool's edge**; withy line across a channel mouth; on the fen's **landward edge**; three Braid gates in a line toward the centre. Act III §11.3 A–D; Beat 2 `S02_evacuate`: cutters led back to the hub (up to 4 followers, NavMesh walkable). POI §0: every objective walkable; deep water non-navigable. |
 | Affected | **MQ3** escort walk; **FW** (staging, withies, kept path, `FW_BED_SHARED`); **MQ11** S00–S02 and gate line; MQ12 station. |
 | Severity | **Degrades** (no contradiction; the walk/pile system and deep-pool staging are undesigned). |
 | Options (neutral) | (a) A local Reedmere site programme fitting floors to local stage + scenario + clearance, with walks, staging kerb and evacuation access (Sol's next step), and no fen drainage or plateau fill. (b) The Director chooses which flood scenario Reedmere must be designed for. (c) The Director rules on architectural language for Reedmere's stilt huts (see §2, gap G-2). |
 
-### TC-13 — Whisperflow Landing's distance from water; western arm; far bank
+### TC-13 — Whisperflow working edge, western arm and far bank
 
 | Field | Record |
 |---|---|
 | Place | P04 Whisperflow Landing (marker bank E, reed walk F, old footing G, drowned pier H / P12, high landing J); Whisperflow Run bend |
-| Terrain now | Landing anchor at about [3633, 459] m is **~489 m from the western arm, ~500 m from the eastern hairpin and ~517 m from the weir-to-Whisperflow reach** **[liaison]**. This is visible in `hydrology_and_routing.png`, where the landing sits south of both waters. The western arm is "INTERPRETATION_UNRESOLVED: terminal backwater vs continuous main meander", 1,436.68 m long with standing stage 60.1 m (`lowmark_controls.json`; `LOCAL_REVIEW.md` row 1). Sol: "the illustration appears to end near the landing". |
+| Terrain now | The provisional centre is 39.7 m from the eastern hairpin centreline and 21.7 m from its nominal bank. The working envelope reaches the main-river bank. The western arm is 438 m from the new anchor, with an 822 m terminal-backwater trace. Actual road-head sightline, shallow approach, footing, drowned pier and far bank are unresolved. |
 | Narrative requires | POI P04: the landing must be a short walk down from the Brookhollow road; shallows, footing, drowned pier downstream, marker bank. POI §6.3: from the road head the **whole landing at once**, including the half-sunk skiff and the pale post. POI §6.2: wadeable river margin. Far-bank settlement open (POI §7 Q3; TL §14 item 4). MQ12 night crossing. |
 | Affected | **TL / MQ1** (all landing beats, `TL_EVIDENCE_PILINGS`), ME01, ME08, OL far-leg start, **MQ12** crossing and `RR_MARK`. |
-| Severity | **Blocks** the TL landing beats if the landing's working edge cannot meet water. This needs Sol's confirmation, since the anchor is a symbol centre and the envelope is 100–200 m. |
-| Options (neutral) | (a) Sol confirms which water the landing fronts and whether the settlement envelope reaches it, without moving the anchor. (b) The Director gives the map reading of the western arm (terminal backwater or continuous meander), which may decide which water the landing serves. (c) The Director answers POI §7 Q3 (far-bank settlement). (d) Narrative owners revise P04's water relationship. That is a narrative change. |
+| Severity | **Degrades in the provisional fit.** The former centre-to-bank distance block is addressed geometrically. Required working waterfront and sightline remain unverified. |
+| Options (neutral) | (a) Test the provisional main-bank fit with a road-head view and bank sections. (b) Review the western arm interpretation and far-bank requirements before placing crossings or a far-bank site. |
 
-### TC-14 — Uphill Canal: 2.4 km regional line vs a twenty-step quest space
+### TC-14 — Uphill Canal regional line and the twenty-step quest space
 
 | Field | Record |
 |---|---|
 | Place | P28 Uphill Canal (A hazel cut, B foot pool, C channel, D listening seat, E cistern, H Hazel Culvert) |
-| Terrain now | Envelope lifts water 61.9 → 80.0 m over 2,432.40 m (positive head 18.1 m), with energy source `UNKNOWN_AUTHORED_BRAID_MECHANISM` and no pump invented. Foot ground is about 68.76 m against a 60.7 m open-bed proposal. Cistern ground is about 77.81 m, below the proposed 80 m surface. "This is not yet a modest twenty-step site." The foot overflows downhill to the Cut elbow (`LOCAL_REVIEW.md` row; `lowmark_controls.json`). **[liaison]** The cistern node is at the east frame edge. The foot is ~1.53 km and the cistern ~1.46 km from the Ashenstead anchor. |
+| Terrain now | The anomalous lift trace is 1,417 m with +18.1 m of head. This regional line does not place the twenty-step quest site, head pool, occlusion volume or culvert. |
 | Narrative requires | POI P28: twenty-odd steps sunk a body-height; listening seat; head cistern; switchback; Hazel Culvert whose far mouth opens at the **Ashenstead Fields edge**, bypassing the orchard berms ("any useful lower path works"). The **load-bearing occlusion rule** (channel visible only from inside the observation volume). POI §6.1: near the orchards. Discovery 283, 304–311 (per `SOURCE_NOTES.md`). |
 | Affected | **UC** side quest; R3 shortcut; MQ12 optional inspect. |
 | Severity | **Degrades** (the quest space needs its own site; the occlusion rule cannot be checked until it exists). |
@@ -181,7 +176,7 @@
 | Field | Record |
 |---|---|
 | Place | P03 Ashenstead / Rebirth Fields (circle at low point, Joric's plot lower), P13 culvert, M06 |
-| Terrain now | **[liaison, not flagged by Sol]** The Ashenstead anchor sits on the northeast upland flank. `height.npy` gives about **128 m** at the anchor, falling to about 65.6 m at the Cut corner about 1.26 km away. Cut water there is about 62 m. The anchor's `reference_ground_m` in the controls is 85 m. The extent of the Rebirth Fields is not traced in the terrain. The regional screen finds zero +1.5 m exposure for Ashenstead (`metrics.json`). Part of Crestbridge–Ashenstead exceeds the cart-grade screen (5.8% of the route; README). |
+| Terrain now | Ashenstead's lower shoulder core sits around 88 m above datum. Cut corner stage is 62.1 m and 733 m straight away. The lower Rebirth Fields boundary and actual seepage route remain unknown. The core's +1.5 m screen does not establish field conditions. |
 | Narrative requires | POI §1 side relationships: "Ashenstead Fields sit on the Cut's landward side (Rebirth Fields flood by Cut backwater seepage, MQ5)". The Cut runs "past the western edge of Ashenstead Fields". P03 Map: circle at the field's **low point**, Joric's plot lower than the circle, drain toward the reeds and the Path. |
 | Affected | **MQ5** (GL) flooding beats and `LM_FIELD_FIX`, P13 culvert, UR, CN, MQ12. |
 | Severity | **Unknown until the field extent is traced.** Potentially **Blocks** MQ5's seepage premise if the fields lie well above Cut water. |
@@ -192,7 +187,7 @@
 | Field | Record |
 |---|---|
 | Place | P29 Veilwater Falls and the Listening Steps; Path of Unburnt Reeds |
-| Terrain now | The waterfall is an explicit 83.6 m drop. "The direct Falls approach intersects the steep fall site and is not a walkable finished path; local listening-step/switchback access must be fitted" (README). The Path route's unengineered maximum grade is 4.61 (460%) against a 0.22 budget, with 3.8% of the route over budget (`verification.json` → `routes.ashenstead_path_of_unburnt_reeds`). The regional terrain "may reserve a concealed recess; it does not author the enclave" (`SOURCE_NOTES.md`, lines 190–200 row). |
+| Terrain now | Veilwater retains the 83.6 m drop. The 2,148 m traced path has 4.4% of samples above its 22% grade screen, including the final steep Falls approach. No safe switchback, stepping stones, recess or listening approach has been designed. |
 | Narrative requires | POI P29: plunge pool with step-stones and a lower ford fallback; switchback falls path with listed walkable fallbacks; curtain ledge threshold; Steps; flow-table chamber walkable all round; falls **heard before seen**. |
 | Affected | **MQ9** (BF), VK count channel, MQ12, UC optional inspect. |
 | Severity | **Degrades** (local access design outstanding). |
@@ -203,7 +198,7 @@
 | Field | Record |
 |---|---|
 | Place | P24 Mantle Shrine (E Mantle channel, west shallows loop, G lower pools) |
-| Terrain now | Anchor ground is about 69.7 m with slope 5.76° (`verification.json` site screen). **[liaison]** It is ~298 m from the nearest traced channel (fen eastern braid). Smaller marsh channels "need local refinement" (README). |
+| Terrain now | Mantle Shrine terrain is about 65.67 m and its centre is 183 m from the nearest traced channel. The authored local fen-edge loop and pools have no traced site. |
 | Narrative requires | POI P24: on the Path, **above a fen-edge channel**; west shallows wadeable loop ≥ 8 m from the east bank; two lower pools. |
 | Affected | **MQ8** (MN), MQ9 start, ME09, MQ12. |
 | Severity | **Cosmetic / scope** (a minor channel is plausibly a local detail; it needs confirmation). |
@@ -214,22 +209,26 @@
 | Field | Record |
 |---|---|
 | Place | Region-wide |
-| Terrain now | At the 3 m/s technical walk **[Sol, `verification.json` → `routes`]**: Brookhollow–Landing 1,157 m / 6.4 min; Landing–Crestbridge 2,428 m / 13.5 min; Crestbridge–Ashenstead 3,157 m / 17.5 min; Ashenstead–Path 3,727 m / 20.7 min; Reedmere–Crestbridge 2,778 m / 15.4 min. East–west crossing is 34.1 min. Speeds are sensitivity inputs, not balance. All crossings are unbuilt (`unresolved.route_crossings`). |
+| Terrain now | At 3 m/s, Brookhollow–Landing is 430 m / 2.4 min; Landing–Crestbridge 1,711 m / 9.5 min; Crestbridge–Ashenstead 1,840 m / 10.2 min; Ashenstead–Falls 2,148 m / 11.9 min; Reedmere–Crestbridge 1,612 m / 9.0 min. Crossing the frame east to west is 19.2 min. These traces do not include crossing works or slope delays. |
 | Narrative requires | POI §6: "near" means a short walk with view or earshot. Walk-with beats (MQ10 S11, MQ3 escort, ME10 dusk walk P21 → M07 → P22). POI header: "no quest logic depends on distances". |
 | Affected | Pacing across TL, MQ3, MQ10, ME10, MQ11 evacuation; R1–R4 route plans. |
 | Severity | **Degrades** (pacing only, by the narrative's own rule). |
-| Options (neutral) | (a) Accept regional distances and retune pacing text. (b) Revisit world scale (Sol's 4.1 × 3.3 km trial compressed slopes and lost Ashenstead/Greyharrow capacity; the 8.2 × 6.7 km trial costs traversal). (c) Movement balance (walk/sprint speed) is a separate Director decision. |
+| Options (neutral) | (a) Stage timing-sensitive walks within shorter local legs. (b) Revisit authored timing when the crossing network is in place. Movement balance is a separate Director decision. |
 
 ### TC-19 — Settlement scope: Greyharrow, Brookhollow, Crestbridge outworks
 
 | Field | Record |
 |---|---|
 | Place | P05 Greyharrow, P01 Brookhollow, P02 Crestbridge |
-| Terrain now | **Greyharrow:** 23 regional (18 outside +1.5 m) / 39 local candidates against the mission's 28–50. 50 is not established. It sits correctly on the side branch (~67 m). **Brookhollow:** needs the larger end of its span; a 400 m screen holds only 61. **Crestbridge:** Hall and Depot lie outside the 600 m core and are classed as outworks; whether the budget includes them "requires Director clarification" (`unresolved.crestbridge_outworks_budget_scope`). |
+| Terrain now | Greyharrow is 70 m from its side-branch centreline. There are 18 regional / 29 normal local candidates (27 scenario floors), against 28–50 proposed. Brookhollow has 106 normal / 98 scenario regional capacity in the full envelope. Crestbridge's Hall and Depot now fit inside the core envelope in plan; the civic budget and final placement remain open. |
 | Narrative requires | Bible §4.2 P05: "Micro-settlement (proposal: dossier calls it a town; it is scoped small for Lowmark)". POI P05 still lists a fortified town, militia gallery, docks, boom and tower square. POI P01: low lanes below the high street; reed margin downstream; side relative to Whisperflow MAP VERIFICATION REQUIRED. |
 | Affected | SB, VK, BW, NT (Greyharrow); FK, BP, UL (Brookhollow). No beat depends on building counts. |
 | Severity | **Cosmetic / scope**. |
 | Options (neutral) | (a) The Director reconciles the mission's capacity targets with the bible's micro-settlement scoping for Greyharrow. (b) The Director confirms Brookhollow's span. (c) The Director rules whether Crestbridge's budget includes outworks (tied to TC-01). |
+
+### NC-1 — Whispering Door Farmhouse and field outfall
+
+The original farmhouse anchor stays on the southwest road, **2,457 m straight from the Ashenstead core**. The actual Rebirth Fields and outfall have no coordinates, so this distance does not measure a drain. The POI places the farmhouse at the Heartlands–Ashenstead edge and calls for a guide-line outfall relationship. Retain this as a spatial review item.
 
 ### Checked with no conflict found (for the record)
 

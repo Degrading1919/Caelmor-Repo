@@ -71,7 +71,7 @@ def main():
         floor_tests.append({"xy_m":point,"normal_reference_m":stage,"floor_m":top,
                             "corner_support_range_m":[top-max(at(q) for q in corners),top-min(at(q) for q in corners)],
                             "status":"Conditional static stage/floor test; no pile bearing or connected safe route proven."})
-    report={"verified_on":"2026-11-07","baseline_main":"3ec4003","source_fingerprints_checked":len(sources),
+    report={"baseline_main":local["baseline_commit"],"source_fingerprints_checked":len(sources),
             "saved_composite_independent_review":global_review,"saved_patch_reviews":reviews,
             "seams":"Every owned outer-border sample equals the parent edge in the same global coordinates; three disjoint owners; Crestbridge/Mill share one surface.",
             "surface_contract":"Explicit SWNE triangles at two metres; parent adaptive triangulation preserves coarse drainage before bounded edits.",

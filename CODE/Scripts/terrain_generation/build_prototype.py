@@ -20,15 +20,11 @@ from tests.test_hydrology_review import independent_d8, review_routing
 ROOT = Path(__file__).resolve().parents[3]
 
 
-def digest(path):
-    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
-
-
 def source_digest(path,mode):
     if mode=="utf8_lf":
         text=Path(path).read_text(encoding="utf-8-sig").replace("\r\n","\n").replace("\r","\n")
         return hashlib.sha256(text.encode("utf-8")).hexdigest()
-    return digest(path)
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
 def sample_grid(field, points, cell=8):
@@ -48,8 +44,10 @@ def crossing_points(route, watercourses):
                 v=b-a; u=d-c; denominator=cross(v,u)
                 if abs(denominator)<1e-9: continue
                 t=cross(c-a,u)/denominator; s=cross(c-a,v)/denominator
-                if 0<=t<=1 and 0<=s<=1:
-                    p=a+t*v
+                # Independently traced routes and reaches round normalized
+                # coordinates separately, including at shared endpoints.
+                if -1e-7<=t<=1+1e-7 and -1e-7<=s<=1+1e-7:
+                    p=a+np.clip(t,0,1)*v
                     if not any(np.linalg.norm(p-np.array(item["xy_m"]))<24 for item in results):
                         results.append({"reach":name,"xy_m":p.tolist(),"status":"Requires a reviewed crossing/structure; no bridge generated."})
     return results
@@ -92,6 +90,57 @@ def landmarks(controls,result):
              "slope_deg":float(sample_grid(slope,point[None,:])[0]),"nearest_settlement":nearest["id"],
              "distance_to_core_anchor_m":distance,"status":"Anchor/site screen, not built landmark or approved local foundation."})
     return output
+
+
+def spatial_review(controls, result):
+    """Measure retained quest relationships against the current terrain controls."""
+    scale = np.array([result.x[-1], result.y[-1]])
+    sites = {site["id"]: np.asarray(site["xy"])*scale
+             for site in controls["settlements"] + controls["landmark_anchors"]}
+    nodes = {node["id"]: node for node in controls["hydrology"]["nodes"]}
+    reaches = {reach["id"]: reach for reach in controls["hydrology"]["reaches"]}
+    courses = {key: np.asarray(reach["points"])*scale for key, reach in reaches.items()}
+    lengths = {key: float(np.linalg.norm(np.diff(points, axis=0), axis=1).sum())
+               for key, points in courses.items()}
+
+    def point(identity):
+        return sites[identity] if identity in sites else np.asarray(nodes[identity]["xy"])*scale
+
+    def nearest_water(identity, reach_ids):
+        xy = point(identity)
+        samples = [xy.reshape(1, 2)[:, axis] for axis in range(2)]
+        options = [(key, *terrain.project_polyline(courses[key], *samples)) for key in reach_ids]
+        key, distance, station = min(options, key=lambda item: item[1][0])
+        reach = reaches[key]
+        profile_at, profile_z = terrain.reach_profile(reach, nodes, lengths[key])
+        width = reach["half_width_m"]
+        return {"reach":key, "centreline_distance_m":float(distance[0]),
+                "nominal_bank_distance_m":max(0.0,float(distance[0])-width),
+                "nearest_reference_stage_m":float(np.interp(station,profile_at,profile_z)[0] + reach.get("water_depth_m",1.2)),
+                "anchor_ground_m":float(sample_grid(result.height_engineered,xy[None,:])[0])}
+
+    natural = [key for key, reach in reaches.items() if reach["kind"] == "natural"]
+    water_tests = {
+        "crest_hall_to_river":("crest_hall",natural),
+        "hill_depot_to_river":("hill_depot",natural),
+        "drowsebank_yard_to_race":("drowsebank_mill",["drowsebank_mill_leat","drowsebank_wheel_drop","drowsebank_tailrace"]),
+        "landing_to_main_river":("whisperflow_landing",["weir_to_whisperflow","whisperflow_eastern_hairpin","lowerbend_to_brookhollow"]),
+        "landing_to_western_arm":("whisperflow_landing",["western_whisperflow_arm"]),
+        "orchards_to_lower_cut":("floodplain_orchards",["relief_cut_downstream"]),
+        "reedmere_to_western_braid":("reedmere",["fen_western_braid"]),
+        "mantle_shrine_to_channel":("mantle_shrine",natural),
+        "greyharrow_to_branch":("greyharrow",["greyharrow_upper_branch","greyharrow_town_branch","greyharrow_lower_branch"]),
+    }
+    pairs = [
+        ("crestbridge","crest_hall"), ("crest_hall","hill_depot"), ("hill_depot","mill_intake"),
+        ("crest_hall","weir_up"), ("drowsebank_mill","weir_up"), ("weir_up","weir_down"),
+        ("weir_down","whisperflow_landing"), ("whisperflow_landing","brookhollow"),
+        ("ashenstead","cut_corner"), ("whispering_door_farmhouse","ashenstead"),
+    ]
+    return {"straight_distance_m":{f"{a}_to_{b}":float(np.linalg.norm(point(a)-point(b))) for a,b in pairs},
+            "anchor_water_tests":{key:nearest_water(*test) for key,test in water_tests.items()},
+            "traced_water_length_m":lengths,
+            "scope":"Anchor-to-centreline measurements and nominal width only. No surveyed shore, site access, or quest state is implied."}
 
 
 def watersheds(controls,result):
@@ -200,7 +249,8 @@ def main():
     for field in ("height","height_engineered","receiver","accumulation"):
         if not np.array_equal(getattr(r,field),getattr(repeat,field)):
             raise AssertionError("Determinism failure: "+field)
-    r.metrics["controls_sha256"]=digest(args.controls)
+    controls_hash=source_digest(args.controls,"utf8_lf")
+    r.metrics["controls_sha256"]=controls_hash
     basins=watersheds(c,r)
     terrain.export(r,output)
     np.save(output/"height_engineered.npy",r.height_engineered.astype("<f4"),allow_pickle=False)
@@ -215,11 +265,11 @@ def main():
     quantization={"height_png_step_m":float((high-low)/65535),
                   "flat_or_undeclared_terminals_after_16bit_quantization":int(np.sum(qrec==-2)),
                   "authority":"Float32 NPY and full-resolution GLB; 16-bit PNG/32m OBJ are authoring/display exports, not independent hydrological authorities."}
-    report={"verified_on":"2026-11-06","fixture_source_main":"d9fbc37b27d8bcbd80191fb2e6c68c5563ded3b6",
-            "python":platform.python_version(),"numpy":np.__version__,"controls_sha256":digest(args.controls),
+    report={"fixture_source_main":c["authority"]["baseline_commit"],
+            "python":platform.python_version(),"numpy":np.__version__,"controls_sha256":controls_hash,
             "natural_dem_independent_review":natural,"open_dem_independent_review":constructed,
             "saved_float32_open_dem_independent_review":saved,"determinism":"Exact same height/open-height/receiver/accumulation arrays on a second full generation",
-            "quantization":quantization,"watersheds":basins,"routes":traversal(c,r),"landmark_site_screen":landmarks(c,r),"capacity_sensitivity":planning_sensitivity(c,r),
+            "quantization":quantization,"watersheds":basins,"routes":traversal(c,r),"landmark_site_screen":landmarks(c,r),"spatial_review":spatial_review(c,r),"capacity_sensitivity":planning_sensitivity(c,r),
             "world_scale_study":scale_study(c),"resolution_study":resolution_study.study(c),
             "scope":"Offline authoring prototype only; no C#, runtime, buildings, NPCs, production settlement layout or architectural tool changes.",
             "seed_policy":"Current solver uses deterministic authored geometry and analytic refinement; seed is reserved provenance, no unconstrained stochastic noise.",

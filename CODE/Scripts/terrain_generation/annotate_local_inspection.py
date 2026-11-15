@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 TITLES={
-    "crestbridge_broad_elevated":"Crestbridge valley / fixed Hall and Depot anchors",
+    "crestbridge_broad_elevated":"Crestbridge valley / provisional Hall and Depot anchors",
     "crestbridge_ground_approach":"Approaching the retained Crestbridge crossing / eye level",
     "crestbridge_relationships":"Crestbridge civic relationships / true distances and elevations",
     "greyharrow_local":"Greyharrow / side-branch banks, candidate access and foundations",
@@ -38,6 +38,8 @@ def main():
     depot=anchors["hill_depot"]["xy_m"]
     crossing=anchors["bridge_crossing"]["xy_m"]
     separation=distance(crossing,hall)
+    bank_distance=next(line["distance_m"] for line in controls["inspection"]["failed_relationship_lines"]
+                       if line["id"] == "hall_to_nearest_natural_river")
     summaries=[]
     for view in report["views"]:
         raw=Path(view["raw_path"])
@@ -68,15 +70,15 @@ def main():
             draw.text((25,header+h+13+(index-1)*26),f"{index}. {label['text']}{suffix}",font=small,fill="#263b30")
         y=header+h+124
         if view["id"].startswith("crestbridge"):
-            notes=[f"Inspection crossing to Hall {separation:.1f} m | Hall to Depot {distance(hall,depot):.1f} m | Hall to natural river 640.3 m",
-                   "Civic waterfront relationship FAILS at the retained Hall anchor. No canal, annex or tunnel has been invented.",
+            notes=[f"Crossing to Hall {separation:.1f} m | Hall to Depot {distance(hall,depot):.1f} m | Hall to river centreline {bank_distance:.1f} m",
+                   "The water gate, cistern and stair alignment still require a local civic layout.",
                    "Bridge/boxes are unapproved scale proxies; brown access ribbons are grading tests. No architectural assets or final town layout."]
         elif view["id"].startswith("reedmere"):
             notes=["Three test floors: normal reference stage + 1.5 m scenario + 0.3 m clearance; ground remains unfilled.",
                    "Decks/piles illustrate a conditional elevation requirement; pile bearing, connected walkways and evacuation remain unresolved.",
                    "Blue is normal reference water, not a flood simulation. No generated hamlet or architectural assets."]
         elif view["id"]=="drowsebank_local":
-            notes=["The mill symbol falls in the race: no building mass is placed on the channel. Read bank space and route gaps directly.",
+            notes=["The provisional working yard is offset from the map symbol and race. Pond, wheel and access still need a local layout.",
                    "Working head 0.95 m; gravity drainage does not prove barge passage or the separate wartime spur.",
                    "Brown access ribbons and sparse foundation tests are provisional. No wheel, lock, mill building or navigation certification."]
         else:

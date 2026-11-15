@@ -1,5 +1,6 @@
 Continue development of Caelmor's Lowmark Vale terrain-generation system from the latest `main` commit (`3ec4003`).
 
+> Historical assignment for the former regional extent. The [current compact terrain and 2 m patches](LOCAL_README.md) supersede its coordinates and measurements.
 **Objective:** Advance the verified deterministic regional terrain prototype into geographically believable, locally refined terrain capable of supporting Caelmor's settlements, roads, waterways, and eventual architectural generation.
 
 You have already established the 6,144 × 4,992 m regional model, validated hydrology, deterministic generation, settlement capacity screens, and 3D terrain export. Preserve these accomplishments and build directly on the existing implementation.

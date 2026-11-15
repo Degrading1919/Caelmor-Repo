@@ -1,81 +1,80 @@
 {
-  "verified_on": "2026-11-06",
-  "fixture_source_main": "d9fbc37b27d8bcbd80191fb2e6c68c5563ded3b6",
+  "fixture_source_main": "d0e44fa",
   "python": "3.13.15",
   "numpy": "2.3.4",
-  "controls_sha256": "cdeeb94794cc7a505bac162da938b0ade5b86c88d1a971b51c088e13bcb76033",
+  "controls_sha256": "255bcd50a8d7beb7f1c0165bb7c049dcf29dc842e26889b963b852e677ab6620",
   "natural_dem_independent_review": {
-    "cells": 480625,
+    "cells": 166705,
     "outlets": 1,
-    "minimum_receiver_drop_m": 0.0002726919631967917,
-    "sample_count_area_proxy_m2": 30760000
+    "minimum_receiver_drop_m": 0.0004628437507889771,
+    "sample_count_area_proxy_m2": 10669120
   },
   "open_dem_independent_review": {
-    "cells": 480625,
+    "cells": 166705,
     "outlets": 1,
-    "minimum_receiver_drop_m": 0.00015197304728076233,
-    "sample_count_area_proxy_m2": 30760000
+    "minimum_receiver_drop_m": 0.0002638752671160205,
+    "sample_count_area_proxy_m2": 10669120
   },
   "saved_float32_open_dem_independent_review": {
-    "cells": 480625,
+    "cells": 166705,
     "outlets": 1,
-    "minimum_receiver_drop_m": 0.000152587890625,
-    "sample_count_area_proxy_m2": 30760000
+    "minimum_receiver_drop_m": 0.000263214111328125,
+    "sample_count_area_proxy_m2": 10669120
   },
   "determinism": "Exact same height/open-height/receiver/accumulation arrays on a second full generation",
   "quantization": {
-    "height_png_step_m": 0.002639635304402937,
-    "flat_or_undeclared_terminals_after_16bit_quantization": 14623,
+    "height_png_step_m": 0.0025662516474961768,
+    "flat_or_undeclared_terminals_after_16bit_quantization": 3245,
     "authority": "Float32 NPY and full-resolution GLB; 16-bit PNG/32m OBJ are authoring/display exports, not independent hydrological authorities."
   },
   "watersheds": {
-    "physical_total_area_m2": 30670848,
+    "physical_total_area_m2": 10616832,
     "boundary_weighting": "Interior64m\u00b2, edge32m\u00b2, corner16m\u00b2 on the nodal8mgrid",
     "subbasins": [
       {
         "id": "direct_lower_catchment",
-        "area_m2": 6900928.0
+        "area_m2": 3155520.0
       },
       {
         "id": "fen_out",
-        "area_m2": 12020272.0
+        "area_m2": 4835024.0
       },
       {
         "id": "crest",
-        "area_m2": 1157696.0
+        "area_m2": 380160.0
       },
       {
         "id": "grey_lower",
-        "area_m2": 5102672.0
+        "area_m2": 1553264.0
       },
       {
         "id": "weir_down",
-        "area_m2": 5489280.0
+        "area_m2": 692864.0
       }
     ],
     "gauges": [
       {
         "id": "fen_out",
-        "derived_cell": 224023,
-        "upstream_area_m2": 12020272.0,
+        "derived_cell": 76777,
+        "upstream_area_m2": 4835024.0,
         "within_authored_anchor_m": 40
       },
       {
         "id": "crest",
-        "derived_cell": 147212,
-        "upstream_area_m2": 13177968.0,
+        "derived_cell": 50416,
+        "upstream_area_m2": 5215184.0,
         "within_authored_anchor_m": 40
       },
       {
         "id": "grey_lower",
-        "derived_cell": 82990,
-        "upstream_area_m2": 5102672.0,
+        "derived_cell": 28541,
+        "upstream_area_m2": 1553264.0,
         "within_authored_anchor_m": 40
       },
       {
         "id": "weir_down",
-        "derived_cell": 94267,
-        "upstream_area_m2": 18667248.0,
+        "derived_cell": 32730,
+        "upstream_area_m2": 5908048.0,
         "within_authored_anchor_m": 40
       }
     ],
@@ -84,20 +83,20 @@
   "routes": [
     {
       "id": "brookhollow_to_landing",
-      "length_m": 1157.44826466569,
-      "walk_minutes_at_technical_3mps": 6.430268137031611,
-      "sprint_minutes_at_technical_5_5mps": 3.507418983835424,
-      "unengineered_ground_grade_max": 0.12443952846659509,
-      "unengineered_ground_grade_p95": 0.044759765188788304,
-      "grade_max_away_from_50m_water_crossings": 0.046802710467777515,
+      "length_m": 430.4252694645528,
+      "walk_minutes_at_technical_3mps": 2.3912514970252934,
+      "sprint_minutes_at_technical_5_5mps": 1.3043189983774328,
+      "unengineered_ground_grade_max": 0.1162719825297337,
+      "unengineered_ground_grade_p95": 0.02964828582637218,
+      "grade_max_away_from_50m_water_crossings": 0.015330546664695755,
       "declared_grade_budget": 0.1,
-      "fraction_above_grade_budget": 0.0034482758620689655,
+      "fraction_above_grade_budget": 0.009174311926605505,
       "crossings": [
         {
           "reach": "whisperflow_eastern_hairpin",
           "xy_m": [
-            4176.824389976065,
-            316.85570895910377
+            2350.0653760468663,
+            271.20660306511695
           ],
           "status": "Requires a reviewed crossing/structure; no bridge generated."
         }
@@ -106,20 +105,20 @@
     },
     {
       "id": "landing_to_crestbridge",
-      "length_m": 2428.0365747309384,
-      "walk_minutes_at_technical_3mps": 13.489092081838546,
-      "sprint_minutes_at_technical_5_5mps": 7.357686590093753,
-      "unengineered_ground_grade_max": 0.16921907737287134,
-      "unengineered_ground_grade_p95": 0.0345257415729327,
-      "grade_max_away_from_50m_water_crossings": 0.04404069318223982,
+      "length_m": 1711.1388727730632,
+      "walk_minutes_at_technical_3mps": 9.506327070961463,
+      "sprint_minutes_at_technical_5_5mps": 5.185269311433525,
+      "unengineered_ground_grade_max": 0.15691925152756997,
+      "unengineered_ground_grade_p95": 0.04138144775415954,
+      "grade_max_away_from_50m_water_crossings": 0.05901150165762388,
       "declared_grade_budget": 0.1,
-      "fraction_above_grade_budget": 0.0032733224222585926,
+      "fraction_above_grade_budget": 0.0069605568445475635,
       "crossings": [
         {
           "reach": "fen_to_crestbridge",
           "xy_m": [
-            2581.2102277830195,
-            1556.4180011337266
+            1451.9307517462405,
+            957.7956933071843
           ],
           "status": "Requires a reviewed crossing/structure; no bridge generated."
         }
@@ -128,20 +127,20 @@
     },
     {
       "id": "crestbridge_to_ashenstead",
-      "length_m": 3156.8316291895385,
-      "walk_minutes_at_technical_3mps": 17.537953495497437,
-      "sprint_minutes_at_technical_5_5mps": 9.56615645208951,
-      "unengineered_ground_grade_max": 0.5291820101462299,
-      "unengineered_ground_grade_p95": 0.10439049303461273,
-      "grade_max_away_from_50m_water_crossings": 0.11755927716627841,
+      "length_m": 1839.570523460819,
+      "walk_minutes_at_technical_3mps": 10.219836241448995,
+      "sprint_minutes_at_technical_5_5mps": 5.574456131699452,
+      "unengineered_ground_grade_max": 0.536931600304354,
+      "unengineered_ground_grade_p95": 0.06418608844892859,
+      "grade_max_away_from_50m_water_crossings": 0.06646966659256599,
       "declared_grade_budget": 0.1,
-      "fraction_above_grade_budget": 0.05808080808080808,
+      "fraction_above_grade_budget": 0.01293103448275862,
       "crossings": [
         {
           "reach": "relief_cut_straight",
           "xy_m": [
-            4027.1563591509,
-            2442.36960258455
+            2265.275452022381,
+            1502.9966785135691
           ],
           "status": "Requires a reviewed crossing/structure; no bridge generated."
         }
@@ -150,49 +149,49 @@
     },
     {
       "id": "ashenstead_path_of_unburnt_reeds",
-      "length_m": 3726.630804182164,
-      "walk_minutes_at_technical_3mps": 20.703504467678687,
-      "sprint_minutes_at_technical_5_5mps": 11.29282061873383,
-      "unengineered_ground_grade_max": 4.608207653309219,
-      "unengineered_ground_grade_p95": 0.15077125710441208,
-      "grade_max_away_from_50m_water_crossings": 4.608207653309219,
+      "length_m": 2148.3436721055004,
+      "walk_minutes_at_technical_3mps": 11.935242622808335,
+      "sprint_minutes_at_technical_5_5mps": 6.510132339713638,
+      "unengineered_ground_grade_max": 6.783326673632087,
+      "unengineered_ground_grade_p95": 0.209985049384215,
+      "grade_max_away_from_50m_water_crossings": 6.783326673632087,
       "declared_grade_budget": 0.22,
-      "fraction_above_grade_budget": 0.0384204909284952,
+      "fraction_above_grade_budget": 0.04411764705882353,
       "crossings": [],
       "note": "Unengineered ground profile; bridge decks, switchbacks, steps and grade slowdown are not built or simulated."
     },
     {
       "id": "reedmere_to_crestbridge",
-      "length_m": 2778.1570071069445,
-      "walk_minutes_at_technical_3mps": 15.43420559503858,
-      "sprint_minutes_at_technical_5_5mps": 8.418657597293771,
-      "unengineered_ground_grade_max": 0.20475240353512855,
-      "unengineered_ground_grade_p95": 0.0739181107813525,
-      "grade_max_away_from_50m_water_crossings": 0.1047476323989199,
+      "length_m": 1611.5034446423595,
+      "walk_minutes_at_technical_3mps": 8.952796914679775,
+      "sprint_minutes_at_technical_5_5mps": 4.8833437716435135,
+      "unengineered_ground_grade_max": 0.20463801442442242,
+      "unengineered_ground_grade_p95": 0.045311611295783795,
+      "grade_max_away_from_50m_water_crossings": 0.03432208227139156,
       "declared_grade_budget": 0.22,
       "fraction_above_grade_budget": 0.0,
       "crossings": [
         {
           "reach": "fen_to_crestbridge",
           "xy_m": [
-            1513.9864446096628,
-            2086.30798513394
+            851.6173750929354,
+            1283.8818370055012
           ],
           "status": "Requires a reviewed crossing/structure; no bridge generated."
         },
         {
           "reach": "fen_to_crestbridge",
           "xy_m": [
-            2214.9490173077043,
-            1640.8350548718727
+            1245.9088222355836,
+            1009.7446491519217
           ],
           "status": "Requires a reviewed crossing/structure; no bridge generated."
         },
         {
           "reach": "fen_to_crestbridge",
           "xy_m": [
-            2481.4479979865046,
-            1576.3368941715983
+            1395.814498867409,
+            970.0534733363681
           ],
           "status": "Requires a reviewed crossing/structure; no bridge generated."
         }
@@ -201,28 +200,28 @@
     },
     {
       "id": "crestbridge_to_greyharrow",
-      "length_m": 3052.049457130537,
-      "walk_minutes_at_technical_3mps": 16.95583031739187,
-      "sprint_minutes_at_technical_5_5mps": 9.248634718577385,
-      "unengineered_ground_grade_max": 0.17142009332448854,
-      "unengineered_ground_grade_p95": 0.05052010244223296,
-      "grade_max_away_from_50m_water_crossings": 0.0899359688785684,
+      "length_m": 1782.0434805192808,
+      "walk_minutes_at_technical_3mps": 9.900241558440449,
+      "sprint_minutes_at_technical_5_5mps": 5.400131759149335,
+      "unengineered_ground_grade_max": 0.24386003644042067,
+      "unengineered_ground_grade_p95": 0.05835246150112346,
+      "grade_max_away_from_50m_water_crossings": 0.09095013652183416,
       "declared_grade_budget": 0.1,
-      "fraction_above_grade_budget": 0.01174934725848564,
+      "fraction_above_grade_budget": 0.017817371937639197,
       "crossings": [
         {
           "reach": "relief_cut_downstream",
           "xy_m": [
-            3999.215261106936,
-            1660.7345577831895
+            2249.5585843726517,
+            1021.9904970973475
           ],
           "status": "Requires a reviewed crossing/structure; no bridge generated."
         },
         {
           "reach": "greyharrow_upper_branch",
           "xy_m": [
-            5408.281904513461,
-            1365.3960129703876
+            3053.50158993983,
+            847.1262490462403
           ],
           "status": "Requires a reviewed crossing/structure; no bridge generated."
         }
@@ -231,20 +230,20 @@
     },
     {
       "id": "brookhollow_to_greyharrow",
-      "length_m": 1378.7512638921307,
-      "walk_minutes_at_technical_3mps": 7.659729243845171,
-      "sprint_minutes_at_technical_5_5mps": 4.178034133006457,
-      "unengineered_ground_grade_max": 0.0993821607109925,
-      "unengineered_ground_grade_p95": 0.032667428218530796,
-      "grade_max_away_from_50m_water_crossings": 0.041858363607222476,
+      "length_m": 853.3646551916218,
+      "walk_minutes_at_technical_3mps": 4.740914751064565,
+      "sprint_minutes_at_technical_5_5mps": 2.585953500580672,
+      "unengineered_ground_grade_max": 0.1290191800886198,
+      "unengineered_ground_grade_p95": 0.02797441292330134,
+      "grade_max_away_from_50m_water_crossings": 0.03544876894731897,
       "declared_grade_budget": 0.1,
-      "fraction_above_grade_budget": 0.0,
+      "fraction_above_grade_budget": 0.004672897196261682,
       "crossings": [
         {
           "reach": "greyharrow_town_branch",
           "xy_m": [
-            5407.205839752381,
-            1174.9801395135855
+            3055.729925955614,
+            697.6143490466485
           ],
           "status": "Requires a reviewed crossing/structure; no bridge generated."
         }
@@ -253,28 +252,20 @@
     },
     {
       "id": "crestbridge_to_mill",
-      "length_m": 765.3261249033023,
-      "walk_minutes_at_technical_3mps": 4.251811805018346,
-      "sprint_minutes_at_technical_5_5mps": 2.3191700754645526,
-      "unengineered_ground_grade_max": 0.5445851212261698,
-      "unengineered_ground_grade_p95": 0.04163315667993265,
-      "grade_max_away_from_50m_water_crossings": 0.04122261240975069,
+      "length_m": 325.8802083415007,
+      "walk_minutes_at_technical_3mps": 1.8104456018972261,
+      "sprint_minutes_at_technical_5_5mps": 0.9875157828530324,
+      "unengineered_ground_grade_max": 0.15894956372903288,
+      "unengineered_ground_grade_p95": 0.06456671677323626,
+      "grade_max_away_from_50m_water_crossings": 0.0247186349263559,
       "declared_grade_budget": 0.1,
-      "fraction_above_grade_budget": 0.03608247422680412,
+      "fraction_above_grade_budget": 0.012048192771084338,
       "crossings": [
         {
           "reach": "fen_to_crestbridge",
           "xy_m": [
-            2640.3503677440003,
-            1544.60986368
-          ],
-          "status": "Requires a reviewed crossing/structure; no bridge generated."
-        },
-        {
-          "reach": "drowsebank_wheel_drop",
-          "xy_m": [
-            3010.335768576,
-            1231.210760832
+            1485.197080290432,
+            950.5291479828479
           ],
           "status": "Requires a reviewed crossing/structure; no bridge generated."
         }
@@ -283,12 +274,12 @@
     },
     {
       "id": "crestbridge_to_hall",
-      "length_m": 652.6196326818364,
-      "walk_minutes_at_technical_3mps": 3.625664626010202,
-      "sprint_minutes_at_technical_5_5mps": 1.9776352505510193,
-      "unengineered_ground_grade_max": 0.04303004852099744,
-      "unengineered_ground_grade_p95": 0.041206626884571024,
-      "grade_max_away_from_50m_water_crossings": 0.04303004852099744,
+      "length_m": 34.41064759244219,
+      "walk_minutes_at_technical_3mps": 0.1911702644024566,
+      "sprint_minutes_at_technical_5_5mps": 0.10427468967406724,
+      "unengineered_ground_grade_max": 0.017734008954378114,
+      "unengineered_ground_grade_p95": 0.016761696804903498,
+      "grade_max_away_from_50m_water_crossings": 0.017734008954378114,
       "declared_grade_budget": 0.1,
       "fraction_above_grade_budget": 0.0,
       "crossings": [],
@@ -296,12 +287,12 @@
     },
     {
       "id": "hall_to_depot",
-      "length_m": 407.31176715926154,
-      "walk_minutes_at_technical_3mps": 2.262843150884786,
-      "sprint_minutes_at_technical_5_5mps": 1.2342780823007926,
-      "unengineered_ground_grade_max": 0.020662238501062993,
-      "unengineered_ground_grade_p95": 0.020520359625028472,
-      "grade_max_away_from_50m_water_crossings": 0.020662238501062993,
+      "length_m": 164.44838769867818,
+      "walk_minutes_at_technical_3mps": 0.9136021538815454,
+      "sprint_minutes_at_technical_5_5mps": 0.49832844757175204,
+      "unengineered_ground_grade_max": 0.03280675627063696,
+      "unengineered_ground_grade_p95": 0.03199623927727448,
+      "grade_max_away_from_50m_water_crossings": 0.03280675627063696,
       "declared_grade_budget": 0.1,
       "fraction_above_grade_budget": 0.0,
       "crossings": [],
@@ -312,100 +303,215 @@
     {
       "id": "crest_hall",
       "xy_m": [
-        3256.992700416,
-        1830.026904576
+        1516.729927008384,
+        1009.0762331842561
       ],
-      "ground_m": 70.00890724327951,
-      "slope_deg": 0.2709668228733412,
-      "nearest_settlement": "drowsebank_mill",
-      "distance_to_core_anchor_m": 647.6267567304159,
+      "ground_m": 64.00242874325012,
+      "slope_deg": 1.344053481001736,
+      "nearest_settlement": "crestbridge",
+      "distance_to_core_anchor_m": 34.41064663743774,
       "status": "Anchor/site screen, not built landmark or approved local foundation."
     },
     {
       "id": "hill_depot",
       "xy_m": [
-        3139.27007232,
-        2216.179370496
+        1642.861313869824,
+        1112.394618832896
       ],
-      "ground_m": 67.23597354613234,
-      "slope_deg": 1.170184712752509,
+      "ground_m": 67.36855967519975,
+      "slope_deg": 0.6044908947969715,
       "nearest_settlement": "crestbridge",
-      "distance_to_core_anchor_m": 779.4239190726943,
+      "distance_to_core_anchor_m": 196.39005850452054,
       "status": "Anchor/site screen, not built landmark or approved local foundation."
     },
     {
       "id": "whispering_door_farmhouse",
       "xy_m": [
-        2107.795617792,
-        268.627801728
+        1185.635035008,
+        165.30941644799998
       ],
-      "ground_m": 69.44750476126502,
-      "slope_deg": 0.6208727409836821,
+      "ground_m": 69.04428995905639,
+      "slope_deg": 1.092662976391305,
       "nearest_settlement": "drowsebank_mill",
-      "distance_to_core_anchor_m": 1319.524413163553,
+      "distance_to_core_anchor_m": 837.3077540183051,
       "status": "Anchor/site screen, not built landmark or approved local foundation."
     },
     {
       "id": "floodplain_orchards",
       "xy_m": [
-        4445.4306570240005,
-        1387.910314752
+        2500.5547445760003,
+        854.098655232
       ],
-      "ground_m": 62.92024562637205,
+      "ground_m": 62.88532709709635,
       "slope_deg": 0.007161972401816659,
-      "nearest_settlement": "greyharrow",
-      "distance_to_core_anchor_m": 1019.4882656939415,
+      "nearest_settlement": "whisperflow_landing",
+      "distance_to_core_anchor_m": 558.4275353848708,
       "status": "Anchor/site screen, not built landmark or approved local foundation."
     },
     {
       "id": "brackenford_woods",
       "xy_m": [
-        5538.5693429759995,
-        2003.515692672
+        3115.4452554239997,
+        1232.932733952
       ],
-      "ground_m": 71.85409102793142,
-      "slope_deg": 0.37987941282441834,
+      "ground_m": 67.9387594376968,
+      "slope_deg": 0.11624982498372993,
       "nearest_settlement": "greyharrow",
-      "distance_to_core_anchor_m": 765.7430101239513,
+      "distance_to_core_anchor_m": 482.5235276720587,
       "status": "Anchor/site screen, not built landmark or approved local foundation."
     },
     {
       "id": "mantle_shrine",
       "xy_m": [
-        1866.744526848,
-        3794.3677125120003
+        1050.043796352,
+        2334.995515392
       ],
-      "ground_m": 69.72673307320987,
-      "slope_deg": 5.764559793474238,
+      "ground_m": 65.66837191962915,
+      "slope_deg": 3.8784040868295357,
       "nearest_settlement": "reedmere",
-      "distance_to_core_anchor_m": 1778.2617147780081,
+      "distance_to_core_anchor_m": 1034.521752045926,
       "status": "Anchor/site screen, not built landmark or approved local foundation."
     },
     {
       "id": "circle_unburnt_reeds",
       "xy_m": [
-        2830.948902912,
-        3721.6143494400003
+        1592.4087578879999,
+        2290.22421504
       ],
-      "ground_m": 79.6949754014168,
-      "slope_deg": 6.307833298692854,
+      "ground_m": 66.31805962172619,
+      "slope_deg": 2.0129580300694725,
       "nearest_settlement": "ashenstead",
-      "distance_to_core_anchor_m": 1925.987866583008,
+      "distance_to_core_anchor_m": 1133.3923457022984,
       "status": "Anchor/site screen, not built landmark or approved local foundation."
     },
     {
       "id": "veilwater_falls",
       "xy_m": [
-        1160.408758272,
-        3816.753363072
+        652.729926528,
+        2348.7713003520003
       ],
-      "ground_m": 105.58325466306705,
-      "slope_deg": 66.46765362582227,
+      "ground_m": 105.28883642131262,
+      "slope_deg": 74.26977953691089,
       "nearest_settlement": "reedmere",
-      "distance_to_core_anchor_m": 1299.8396638362678,
+      "distance_to_core_anchor_m": 779.2730651459515,
       "status": "Anchor/site screen, not built landmark or approved local foundation."
     }
   ],
+  "spatial_review": {
+    "straight_distance_m": {
+      "crestbridge_to_crest_hall": 34.41064663743774,
+      "crest_hall_to_hill_depot": 163.04544018350006,
+      "hill_depot_to_mill_intake": 275.05919743822875,
+      "crest_hall_to_weir_up": 601.7192553493129,
+      "drowsebank_mill_to_weir_up": 314.06519499283587,
+      "weir_up_to_weir_down": 36.67652831085226,
+      "weir_down_to_whisperflow_landing": 437.57699808155996,
+      "whisperflow_landing_to_brookhollow": 363.1063939063984,
+      "ashenstead_to_cut_corner": 733.1526997267409,
+      "whispering_door_farmhouse_to_ashenstead": 2457.4735378498035
+    },
+    "anchor_water_tests": {
+      "crest_hall_to_river": {
+        "reach": "fen_to_crestbridge",
+        "centreline_distance_m": 66.49873410917125,
+        "nominal_bank_distance_m": 48.49873410917125,
+        "nearest_reference_stage_m": 63.1,
+        "anchor_ground_m": 64.00242874325012
+      },
+      "hill_depot_to_river": {
+        "reach": "crestbridge_to_mill_intake",
+        "centreline_distance_m": 225.95090181144022,
+        "nominal_bank_distance_m": 207.95090181144022,
+        "nearest_reference_stage_m": 63.096078394286,
+        "anchor_ground_m": 67.36855967519975
+      },
+      "drowsebank_yard_to_race": {
+        "reach": "drowsebank_mill_leat",
+        "centreline_distance_m": 49.289168678375994,
+        "nominal_bank_distance_m": 45.289168678375994,
+        "nearest_reference_stage_m": 62.50042637741457,
+        "anchor_ground_m": 64.85508316960681
+      },
+      "landing_to_main_river": {
+        "reach": "whisperflow_eastern_hairpin",
+        "centreline_distance_m": 39.692542242913206,
+        "nominal_bank_distance_m": 21.692542242913206,
+        "nearest_reference_stage_m": 59.67192705643589,
+        "anchor_ground_m": 60.44736048283422
+      },
+      "landing_to_western_arm": {
+        "reach": "western_whisperflow_arm",
+        "centreline_distance_m": 437.57699808155996,
+        "nominal_bank_distance_m": 423.57699808155996,
+        "nearest_reference_stage_m": 60.1,
+        "anchor_ground_m": 60.44736048283422
+      },
+      "orchards_to_lower_cut": {
+        "reach": "relief_cut_downstream",
+        "centreline_distance_m": 301.80085193465146,
+        "nominal_bank_distance_m": 293.80085193465146,
+        "nearest_reference_stage_m": 61.58868914751341,
+        "anchor_ground_m": 62.88532709709635
+      },
+      "reedmere_to_western_braid": {
+        "reach": "fen_western_braid",
+        "centreline_distance_m": 98.69662597288205,
+        "nominal_bank_distance_m": 90.69662597288205,
+        "nearest_reference_stage_m": 63.94145641568745,
+        "anchor_ground_m": 64.37684957241551
+      },
+      "mantle_shrine_to_channel": {
+        "reach": "fen_eastern_braid",
+        "centreline_distance_m": 183.32527985724786,
+        "nominal_bank_distance_m": 175.32527985724786,
+        "nearest_reference_stage_m": 64.08374066514322,
+        "anchor_ground_m": 65.66837191962915
+      },
+      "greyharrow_to_branch": {
+        "reach": "greyharrow_town_branch",
+        "centreline_distance_m": 69.54175161432707,
+        "nominal_bank_distance_m": 61.54175161432707,
+        "nearest_reference_stage_m": 62.37923040661115,
+        "anchor_ground_m": 63.574794682135035
+      }
+    },
+    "traced_water_length_m": {
+      "upland_headwater": 756.8190854300443,
+      "veilwater_falls": 19.647084669025336,
+      "falls_outflow": 209.34500189724537,
+      "fen_main_upper": 313.7236609452083,
+      "fen_main_middle": 285.6701466454314,
+      "fen_main_lower": 215.46167746855244,
+      "fen_outflow": 425.1549047239159,
+      "fen_western_braid": 1594.4329040254624,
+      "fen_eastern_braid": 1370.3161541496947,
+      "fen_to_crestbridge": 1236.8586052633377,
+      "crestbridge_to_mill_intake": 109.75017574836274,
+      "mill_bypass_main_river": 778.2574599567254,
+      "bramblelock_weir_passage": 36.67652831085226,
+      "weir_to_whisperflow": 287.5309760343784,
+      "whisperflow_eastern_hairpin": 558.5780628394879,
+      "lowerbend_to_brookhollow": 324.74197308080386,
+      "western_whisperflow_arm": 822.2743232183168,
+      "fen_to_hollow_lock": 367.2960412857949,
+      "hollow_lock_chamber": 50.92055884724567,
+      "relief_cut_straight": 1051.5916046266475,
+      "relief_cut_elbow": 274.27976100995016,
+      "relief_cut_downstream": 708.3867988557729,
+      "uphill_foot_pool_overflow": 221.01754246645436,
+      "uphill_canal_lift": 1416.7214083174151,
+      "drowsebank_mill_leat": 211.45293071876006,
+      "drowsebank_wheel_drop": 20.663675904,
+      "drowsebank_tailrace": 316.956268575587,
+      "greyharrow_boundary_inflow": 203.18819246595092,
+      "greyharrow_upper_branch": 348.80759863843906,
+      "greyharrow_town_branch": 341.3076884615494,
+      "greyharrow_lower_branch": 451.4887623380981,
+      "brookhollow_to_grey_confluence": 296.5533745104049,
+      "confluence_to_region_exit": 341.0241957022711
+    },
+    "scope": "Anchor-to-centreline measurements and nominal width only. No surveyed shore, site access, or quest state is implied."
+  },
   "capacity_sensitivity": {
     "density_and_foundation_assumptions": [
       {
@@ -413,8 +519,8 @@
         "average_roof_footprint_m2": 120,
         "plot_coverage": 0.4,
         "maximum_site_slope_deg": 5,
-        "normal_stage_capacity": 44,
-        "plus_1_5m_scenario_capacity": 37,
+        "normal_stage_capacity": 31,
+        "plus_1_5m_scenario_capacity": 25,
         "status": "Sensitivity only: no building program, grading, anchor relocation or canon promotion."
       },
       {
@@ -422,8 +528,8 @@
         "average_roof_footprint_m2": 90,
         "plot_coverage": 0.4,
         "maximum_site_slope_deg": 5,
-        "normal_stage_capacity": 44,
-        "plus_1_5m_scenario_capacity": 37,
+        "normal_stage_capacity": 31,
+        "plus_1_5m_scenario_capacity": 25,
         "status": "Sensitivity only: no building program, grading, anchor relocation or canon promotion."
       },
       {
@@ -431,8 +537,8 @@
         "average_roof_footprint_m2": 90,
         "plot_coverage": 0.45,
         "maximum_site_slope_deg": 6,
-        "normal_stage_capacity": 44,
-        "plus_1_5m_scenario_capacity": 37,
+        "normal_stage_capacity": 31,
+        "plus_1_5m_scenario_capacity": 25,
         "status": "Sensitivity only: no building program, grading, anchor relocation or canon promotion."
       },
       {
@@ -440,8 +546,8 @@
         "average_roof_footprint_m2": 120,
         "plot_coverage": 0.4,
         "maximum_site_slope_deg": 5,
-        "normal_stage_capacity": 9,
-        "plus_1_5m_scenario_capacity": 9,
+        "normal_stage_capacity": 11,
+        "plus_1_5m_scenario_capacity": 11,
         "status": "Sensitivity only: no building program, grading, anchor relocation or canon promotion."
       },
       {
@@ -449,8 +555,8 @@
         "average_roof_footprint_m2": 90,
         "plot_coverage": 0.4,
         "maximum_site_slope_deg": 5,
-        "normal_stage_capacity": 9,
-        "plus_1_5m_scenario_capacity": 9,
+        "normal_stage_capacity": 11,
+        "plus_1_5m_scenario_capacity": 11,
         "status": "Sensitivity only: no building program, grading, anchor relocation or canon promotion."
       },
       {
@@ -458,16 +564,16 @@
         "average_roof_footprint_m2": 90,
         "plot_coverage": 0.45,
         "maximum_site_slope_deg": 6,
-        "normal_stage_capacity": 9,
-        "plus_1_5m_scenario_capacity": 9,
+        "normal_stage_capacity": 11,
+        "plus_1_5m_scenario_capacity": 11,
         "status": "Sensitivity only: no building program, grading, anchor relocation or canon promotion."
       }
     ],
     "reedmere_raised_floor_scenario": {
-      "normal_stage_candidate_centres": 43,
+      "normal_stage_candidate_centres": 25,
       "plus_1_5m_stage_and_0_3m_freeboard_required_raise_m": [
-        1.1336221647030413,
-        1.4298325627234192
+        1.1663190881549497,
+        1.427081825327292
       ],
       "status": "Conditional raised-floor envelope only. No piles, platforms, boardwalks or geotechnical design generated."
     }
@@ -475,88 +581,52 @@
   "world_scale_study": {
     "scenarios": [
       {
-        "width_m": 4096,
-        "height_m": 3328,
+        "width_m": 2304,
+        "height_m": 2048,
         "resolution_m": 4,
-        "area_km2": 13.631488,
-        "straight_width_walk_minutes": 22.755555555555556,
-        "straight_width_sprint_minutes": 12.412121212121212,
-        "status": "generated",
-        "height_sha256": "f3480e4e7b4d45776c7a43b4af87483619202c525625e17635e404352d026578",
-        "normal_capacities": {
-          "brookhollow": 162,
-          "crestbridge": 112,
-          "ashenstead": 0,
-          "greyharrow": 15,
-          "reedmere": 27,
-          "whisperflow_landing": 22,
-          "drowsebank_mill": 5
-        },
-        "scenario_capacities": {
-          "brookhollow": 149,
-          "crestbridge": 110,
-          "ashenstead": 0,
-          "greyharrow": 9,
-          "reedmere": 0,
-          "whisperflow_landing": 22,
-          "drowsebank_mill": 5
-        }
+        "area_km2": 4.718592,
+        "straight_width_walk_minutes": 12.8,
+        "straight_width_sprint_minutes": 6.9818181818181815,
+        "status": "rejected",
+        "reason": "Rasterized channel graph contains a cycle at 4m; this resolution cannot preserve the authored reach network. Affected downstream reaches: fen_outflow, fen_western_braid, fen_eastern_braid, fen_to_crestbridge, crestbridge_to_mill_intake, mill_bypass_main_river, bramblelock_weir_passage, weir_to_whisperflow, whisperflow_eastern_hairpin, lowerbend_to_brookhollow, greyharrow_lower_branch, brookhollow_to_grey_confluence, confluence_to_region_exit"
       },
       {
-        "width_m": 6144,
-        "height_m": 4992,
+        "width_m": 3456,
+        "height_m": 3072,
         "resolution_m": 8,
-        "area_km2": 30.670848,
-        "straight_width_walk_minutes": 34.13333333333333,
-        "straight_width_sprint_minutes": 18.618181818181817,
+        "area_km2": 10.616832,
+        "straight_width_walk_minutes": 19.2,
+        "straight_width_sprint_minutes": 10.472727272727273,
         "status": "generated",
-        "height_sha256": "f53f80923072e08fa9ed660136217334ad14bc389632c26bb18b079ed137a4e4",
+        "height_sha256": "4e7e318e718a1d9a7de186c3b39a15401a7e9dfa6f475dc7de8ff2f3b6378140",
         "normal_capacities": {
-          "brookhollow": 145,
-          "crestbridge": 97,
-          "ashenstead": 78,
-          "greyharrow": 23,
-          "reedmere": 43,
-          "whisperflow_landing": 19,
-          "drowsebank_mill": 4
-        },
-        "scenario_capacities": {
-          "brookhollow": 134,
-          "crestbridge": 91,
-          "ashenstead": 78,
+          "brookhollow": 106,
+          "crestbridge": 84,
+          "ashenstead": 45,
           "greyharrow": 18,
-          "reedmere": 0,
-          "whisperflow_landing": 19,
-          "drowsebank_mill": 4
-        }
-      },
-      {
-        "width_m": 8192,
-        "height_m": 6656,
-        "resolution_m": 8,
-        "area_km2": 54.525952,
-        "straight_width_walk_minutes": 45.51111111111111,
-        "straight_width_sprint_minutes": 24.824242424242424,
-        "status": "generated",
-        "height_sha256": "881103e72072e93b7371bed18b73dc92b5db854ed6ba05b0712be3c8bb6b6f45",
-        "normal_capacities": {
-          "brookhollow": 166,
-          "crestbridge": 99,
-          "ashenstead": 80,
-          "greyharrow": 33,
-          "reedmere": 43,
-          "whisperflow_landing": 20,
+          "reedmere": 25,
+          "whisperflow_landing": 12,
           "drowsebank_mill": 5
         },
         "scenario_capacities": {
-          "brookhollow": 163,
-          "crestbridge": 96,
-          "ashenstead": 80,
-          "greyharrow": 32,
+          "brookhollow": 98,
+          "crestbridge": 79,
+          "ashenstead": 45,
+          "greyharrow": 15,
           "reedmere": 0,
-          "whisperflow_landing": 20,
+          "whisperflow_landing": 6,
           "drowsebank_mill": 5
         }
+      },
+      {
+        "width_m": 4608,
+        "height_m": 4096,
+        "resolution_m": 8,
+        "area_km2": 18.874368,
+        "straight_width_walk_minutes": 25.6,
+        "straight_width_sprint_minutes": 13.963636363636363,
+        "status": "rejected",
+        "reason": "Rasterized channel graph contains a cycle at 8m; this resolution cannot preserve the authored reach network. Affected downstream reaches: fen_outflow, fen_western_braid, fen_eastern_braid, fen_to_crestbridge, crestbridge_to_mill_intake, mill_bypass_main_river, bramblelock_weir_passage, weir_to_whisperflow, whisperflow_eastern_hairpin, lowerbend_to_brookhollow, greyharrow_lower_branch, brookhollow_to_grey_confluence, confluence_to_region_exit"
       }
     ],
     "interpretation": "Scale comparison, not approved world dimensions. Normalized map anchors fixed; settlement spans and footprint assumptions remain in metres. Broad landform radii scale with extent; water/engineering widths remain physical. Different valid sampling is explicit."
@@ -566,38 +636,38 @@
       "resolution_m": 32,
       "status": "rejected",
       "reason": "Rasterized channel graph contains a cycle at 32m; this resolution cannot preserve the authored reach network. Affected downstream reaches: falls_outflow, fen_main_upper, fen_main_middle, fen_main_lower, fen_outflow, fen_western_braid, fen_eastern_braid, fen_to_crestbridge, crestbridge_to_mill_intake, mill_bypass_main_river, bramblelock_weir_passage, weir_to_whisperflow, whisperflow_eastern_hairpin, lowerbend_to_brookhollow, greyharrow_lower_branch, brookhollow_to_grey_confluence, confluence_to_region_exit",
-      "seconds_to_rejection": 0.05786370000032548
+      "seconds_to_rejection": 0.029806399979861453
     },
     {
       "resolution_m": 16,
       "status": "rejected",
-      "reason": "Rasterized channel graph contains a cycle at 16m; this resolution cannot preserve the authored reach network. Affected downstream reaches: falls_outflow, fen_main_upper, fen_main_middle, fen_main_lower, fen_outflow, fen_western_braid, fen_eastern_braid, fen_to_crestbridge, crestbridge_to_mill_intake, mill_bypass_main_river, bramblelock_weir_passage, weir_to_whisperflow, whisperflow_eastern_hairpin, lowerbend_to_brookhollow, greyharrow_lower_branch, brookhollow_to_grey_confluence, confluence_to_region_exit",
-      "seconds_to_rejection": 0.3102091999999175
+      "reason": "Rasterized channel graph contains a cycle at 16m; this resolution cannot preserve the authored reach network. Affected downstream reaches: fen_outflow, fen_western_braid, fen_eastern_braid, fen_to_crestbridge, crestbridge_to_mill_intake, mill_bypass_main_river, bramblelock_weir_passage, weir_to_whisperflow, whisperflow_eastern_hairpin, lowerbend_to_brookhollow, greyharrow_lower_branch, brookhollow_to_grey_confluence, confluence_to_region_exit",
+      "seconds_to_rejection": 0.0858291000186
     },
     {
       "resolution_m": 8,
       "status": "generated",
-      "cells": 480625,
-      "model_seconds": 12.493473600000016,
-      "height_sha256": "f53f80923072e08fa9ed660136217334ad14bc389632c26bb18b079ed137a4e4",
+      "cells": 166705,
+      "model_seconds": 4.1049556999932975,
+      "height_sha256": "4e7e318e718a1d9a7de186c3b39a15401a7e9dfa6f475dc7de8ff2f3b6378140",
       "unintended_sinks": 0,
       "all_cells_reach_outlet": true,
-      "conditioning_raise_max_m": 9.405254189244971,
+      "conditioning_raise_max_m": 7.342989348016232,
       "natural_sampled_uphill_segments": 0,
-      "fen_wet_fraction": 0.04839148781705159,
+      "fen_wet_fraction": 0.08481908757210278,
       "settlement_screened_capacity": {
-        "brookhollow": 145,
-        "crestbridge": 97,
-        "ashenstead": 78,
-        "greyharrow": 23,
-        "reedmere": 43,
-        "whisperflow_landing": 19,
-        "drowsebank_mill": 4
+        "brookhollow": 106,
+        "crestbridge": 84,
+        "ashenstead": 45,
+        "greyharrow": 18,
+        "reedmere": 25,
+        "whisperflow_landing": 12,
+        "drowsebank_mill": 5
       }
     }
   ],
   "scope": "Offline authoring prototype only; no C#, runtime, buildings, NPCs, production settlement layout or architectural tool changes.",
   "seed_policy": "Current solver uses deterministic authored geometry and analytic refinement; seed is reserved provenance, no unconstrained stochastic noise.",
   "performance_note": "Wall times are observations and intentionally excluded from deterministic geometry hashes.",
-  "pipeline_seconds_before_figures": 110.52606049999986
+  "pipeline_seconds_before_figures": 23.94094159998349
 }

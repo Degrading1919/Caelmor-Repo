@@ -3,50 +3,50 @@
     {
       "id": "crestbridge_broad_elevated",
       "file": "crestbridge_broad_elevated.png",
-      "raw_render_sha256": "877839d11cfa3b0c0c7b304445ed66b733922c472ae5e2e769530f553127c755",
-      "annotated_sha256": "a689192d728caa4dd436dfb278eda6975010cf07b279c59480774f816f941903",
+      "raw_render_sha256": "bbccc7d6cb1dc3806bba0be4c79771bbfbd3e55c14adbe3da45b203b1e49d226",
+      "annotated_sha256": "d59163cbeb02cf58da7c06129e372f88e363237596eab9f11e9b914d3a747724",
       "pixel_policy": "Raw render pixels preserved at original resolution; captions and projected numbered markers only."
     },
     {
       "id": "crestbridge_ground_approach",
       "file": "crestbridge_ground_approach.png",
-      "raw_render_sha256": "11d0fff760480787227a23396d0d2809519d99cf51eb6644ffa7c63a82832b01",
-      "annotated_sha256": "c1df967470506990d7c74d97dce8800e1dc5bb5dcd83be8eceeeac46fe4ba8bc",
+      "raw_render_sha256": "82e8b2e38e1583b0c2bc7d3a7dfd22986e2c2f8558b95bdebd614818368a241b",
+      "annotated_sha256": "4efc8ed7eb8d7438622a12d25e01d5a2f10c5f370153aa257360a41bd8571e12",
       "pixel_policy": "Raw render pixels preserved at original resolution; captions and projected numbered markers only."
     },
     {
       "id": "crestbridge_relationships",
       "file": "crestbridge_relationships.png",
-      "raw_render_sha256": "04c92e9f4f460920530e00260965ed4f2fbccc61d7f89af93cbc697dd6a42553",
-      "annotated_sha256": "5d6022dc6b2f229895e5152cc89de5b473cbbe7185a728007f893526e3fb4634",
+      "raw_render_sha256": "f7bece0d31e724cddcaaec461782a077e4d983b311fc5c702ff961b5fc18820e",
+      "annotated_sha256": "14f30324a16089003e04a054c87a464e57a9ed7782ada05d80184f1f0836f7e0",
       "pixel_policy": "Raw render pixels preserved at original resolution; captions and projected numbered markers only."
     },
     {
       "id": "greyharrow_local",
       "file": "greyharrow_local.png",
-      "raw_render_sha256": "f00188fb5a7ebe98b119eba013963bb7d66a7510ae75def002709dec401cd2b3",
-      "annotated_sha256": "c99a3e991562bc380b0e733e0489e05f4a023d92b497fa8a690bacf2a94016d7",
+      "raw_render_sha256": "857b6aedbc222d663a28eb6a83eed9678bf67a9721feda87ba73d08f214d3686",
+      "annotated_sha256": "cc5df4608b765e61815a63009e0b6c017ad7ee81b248769babae65ebc35950f6",
       "pixel_policy": "Raw render pixels preserved at original resolution; captions and projected numbered markers only."
     },
     {
       "id": "reedmere_local",
       "file": "reedmere_local.png",
-      "raw_render_sha256": "2e5787f39b8a1c69310b73968bcdead56fd127bf95da85b085f001cef365e3d2",
-      "annotated_sha256": "02f7bc57f784a56855451ea347516c44ddd8877f457b9a4287df713fca1592e4",
+      "raw_render_sha256": "bda3d686f81e8cb43a4d2ea5d769d9147d16e56d5a0fd70f741938323cfcb55f",
+      "annotated_sha256": "ded81116f13ed62bcc8e761b009a65e8fe052d682da171d11b24e3ba5b896c78",
       "pixel_policy": "Raw render pixels preserved at original resolution; captions and projected numbered markers only."
     },
     {
       "id": "reedmere_floor_detail",
       "file": "reedmere_floor_detail.png",
-      "raw_render_sha256": "48fd234bbdf3253fdecd4127c77f8ff75414f5f60277a5778fa9f6cd3d11b655",
-      "annotated_sha256": "087048ea1d54b5ef92c6d6b98ebacd75ef6bf41491ee2d73a84f186111e21938",
+      "raw_render_sha256": "3e08b84042c2a28603aa844bc49d769e48845d3dcc1cc77a19e203b6b9d3fd9e",
+      "annotated_sha256": "49c83704fbaca9b37080942fe8ecc7a4972995d420d8592af373412d860664d3",
       "pixel_policy": "Raw render pixels preserved at original resolution; captions and projected numbered markers only."
     },
     {
       "id": "drowsebank_local",
       "file": "drowsebank_local.png",
-      "raw_render_sha256": "b47c8caac086225038378a115611b3f3ef896c144ca515debb1b8b436e75f8a4",
-      "annotated_sha256": "15abf11c721936bea7b28a4c794e6ee166b720bc2d228b6e9b3475a64e4ee17a",
+      "raw_render_sha256": "3580482c59eaa005eb1ee5d2654c8788d7a9e55702a94890753c34e2fcf51700",
+      "annotated_sha256": "9fa8123f0bfebd03241fc1992b31ed28916821ae376ff35f186de40b10719b06",
       "pixel_policy": "Raw render pixels preserved at original resolution; captions and projected numbered markers only."
     }
   ],

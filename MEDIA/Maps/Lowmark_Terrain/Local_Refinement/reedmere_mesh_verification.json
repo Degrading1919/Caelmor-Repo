@@ -1,9 +1,9 @@
 {
-  "vertices": 133209,
-  "triangles": 264960,
-  "maximum_elevation_error_m": 3.8146575747077804e-06,
+  "vertices": 59045,
+  "triangles": 117120,
+  "maximum_elevation_error_m": 3.8146755940715593e-06,
   "axes": "GLB east X / elevation Y / minus north Z; Blender east X / north Y / elevation Z",
-  "glb_bytes": 6377788,
-  "sha256": "b95dc9ad87ac3ff5810ca4ea3fb977af3748703783d7e666564faf380e626dd7",
+  "glb_bytes": 2121044,
+  "sha256": "8f603b4a21cf9d295048182faa112448b461c1f031ba3002dcf473043ff5b6ed",
   "scope": "Every vertex checked; local meshes also verify all SWNE faces and upward winding. No Unity import is implied."
 }

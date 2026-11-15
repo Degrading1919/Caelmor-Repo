@@ -1,15 +1,15 @@
 {
   "purpose": "Offline deterministic terrain-authoring controls; not a production gameplay schema",
   "authority": {
-    "baseline_commit": "d9fbc37",
-    "approved": "Horizontal geographical composition and relationships in supplied planning/thematic maps",
-    "unvalidated": "Map elevations, contours, gradients and scale",
-    "technical_proposals": "All metre dimensions, heights, hydraulic depths, freeboards, thresholds and candidate-area assumptions below",
+    "baseline_commit": "d0e44fa",
+    "approved": "Director-approved 3456 x 3072 m extent and horizontal composition. Working offsets in the terrain controls are provisional placements.",
+    "unvalidated": "Illustrated elevations, contours, gradients and map scale",
+    "technical_proposals": "Heights, hydraulic depths, freeboards, feature dimensions and capacity assumptions. The regional frame is approved.",
     "population": "Settlement counts and NPC budgets are proposed planning targets, never instantiated"
   },
   "world": {
-    "width_m": 6144,
-    "height_m": 4992,
+    "width_m": 3456,
+    "height_m": 3072,
     "seed": 1919,
     "coordinate_system": "Local Cartesian east/north/up metres; origin at south-west map frame; not geodetic",
     "normalized_coordinates": "xy=[east/width,north/height]",
@@ -32,7 +32,7 @@
     "pixel_to_normalized": "xE=(px-6)/1096; yNorth=(898-py)/892",
     "north": "up",
     "right_panel": "Legend excluded",
-    "trace_status": "Approximate human interpretation of approved map geometry; raw pixels retained",
+    "trace_status": "Original map pixels retain source provenance. Working normalized positions may differ for compact terrain fit; compare working_trace_px when present.",
     "height_authority": "None; illustrated elevations/scale are not sampled"
   },
   "sources": [
@@ -50,87 +50,31 @@
     },
     {
       "path": "LORE/Regions/Caelmor_Region1_LowmarkVale.md",
-      "sha256": "206da19df7b3eb46560b5f4261b07e6101f74438f6e2ef5a82954c718f63493e",
-      "line_ranges": [
-        [
-          137,
-          151
-        ],
-        [
-          170,
-          200
-        ],
-        [
-          206,
-          255
-        ],
-        [
-          471,
-          471
-        ]
-      ],
+      "sha256": "847e425287b74f6a90534705b8ae1c19a7a50ffc0529a263bdcdefaae20b2ded",
       "authority": "Regional dossier; use current map approval for horizontal placement.",
-      "hash_mode": "utf8_lf"
+      "hash_mode": "utf8_lf",
+      "revision": "d0e44fa"
     },
     {
       "path": "04_CONTENT_PRODUCTION/Zones/Caelmor_Lowmark_POI_and_Zone_Requirements.md",
-      "sha256": "12dcfb7c511b0e75176679bd235cca776d69de59d38673d6ed5446cb2180eec4",
-      "line_ranges": [
-        [
-          29,
-          38
-        ],
-        [
-          155,
-          201
-        ],
-        [
-          331,
-          351
-        ],
-        [
-          436,
-          472
-        ],
-        [
-          510,
-          516
-        ]
-      ],
-      "authority": "Authored location requirements; older map questions are not authority to relocate approved anchors.",
-      "hash_mode": "utf8_lf"
+      "sha256": "660407d5ee7674e78c4391969f0cd9b11f5ef7f31b3048b1a556b7a05dc23359",
+      "authority": "Authored location requirements used to check provisional working offsets against established Lowmark relationships.",
+      "hash_mode": "utf8_lf",
+      "revision": "d0e44fa"
     },
     {
       "path": "04_CONTENT_PRODUCTION/Quests/Caelmor_Lowmark_Side_Quests_Discovery_and_Memory.md",
-      "sha256": "de55fc9f7302e2e5f26cb300ccaa3b1a09828f1028ac56a972cff76a3a871ad4",
-      "line_ranges": [
-        [
-          283,
-          283
-        ],
-        [
-          304,
-          311
-        ],
-        [
-          496,
-          500
-        ]
-      ],
+      "sha256": "9eaa4deb2cc34228ce2fc994575549bbf6eec2490590471d780f23c2c8a3e011",
       "authority": "Uphill Braid lift is existing authored proposal; no pump mechanism is invented.",
-      "hash_mode": "utf8_lf"
+      "hash_mode": "utf8_lf",
+      "revision": "d0e44fa"
     },
     {
       "path": "04_CONTENT_PRODUCTION/Quests/Caelmor_Lowmark_Main_Act_III.md",
-      "sha256": "76aed63290a161fd44483a9f24230d2cb31c1e62039484cb1d82e5c89e715e2d",
-      "line_ranges": [
-        [
-          239,
-          247
-        ]
-      ],
+      "sha256": "0797fa8b35f161968c6928bc418ea28f055435618f2c1fb7ba58d4f5fc0e06f3",
       "authority": "Cut closure is an authored quest state, not a reason to remove baseline natural outlet.",
-      "hash_mode": "utf8_lf"
+      "hash_mode": "utf8_lf",
+      "revision": "d0e44fa"
     }
   ],
   "hydrology": {
@@ -2634,7 +2578,7 @@
           "crest_hall",
           "hill_depot"
         ],
-        "external_infrastructure_status": "Separate outworks/infrastructure in third working-landscape area; fixed anchors outside600m built-up core. Working radius is an overlay screen, not a limit on remote outworks. Whether proposed town building/span budget includes these outworks requires Director clarification."
+        "external_infrastructure_status": "Provisional Hall and Depot centres now fall inside the civic envelope. The proposed town budget still needs a ruling on allocation to the civic and underground works."
       },
       "reference_ground_m": 68.5,
       "reference_ground_status": "Broad low-amplitude natural-ground preference, not flat settlement pad or surveyed height",
@@ -2650,14 +2594,14 @@
       "id": "ashenstead",
       "name": "Ashenstead",
       "xy": [
-        0.77189781,
-        0.698430493
+        0.783759124088,
+        0.681614349776
       ],
       "map_px": [
         852,
         275
       ],
-      "placement_status": "Approved-map trace; approximate symbol-centre interpretation",
+      "placement_status": "Provisional settlement core on the lower shoulder of the approved Ashenstead reclaimed fields. Rebirth Fields extent remains unresolved (TC-15).",
       "span_m": [
         220,
         420
@@ -2709,20 +2653,24 @@
         "floodable_waterfront_working_area": true,
         "extra_flood_scenario_m": 1.5,
         "grading_scope": "Local foundations/terraces only; no grading performed by prototype"
-      }
+      },
+      "working_trace_px": [
+        865,
+        290
+      ]
     },
     {
       "id": "greyharrow",
       "name": "Greyharrow",
       "xy": [
-        0.887773723,
-        0.248878924
+        0.906934306569,
+        0.244394618834
       ],
       "map_px": [
         979,
         676
       ],
-      "placement_status": "Approved-map trace; approximate symbol-centre interpretation",
+      "placement_status": "Provisional east-bank core within the approved side-branch setting. Crossing, tower and waterfront still require placement.",
       "span_m": [
         220,
         380
@@ -2774,7 +2722,11 @@
         "floodable_waterfront_working_area": true,
         "extra_flood_scenario_m": 1.5,
         "grading_scope": "Local foundations/terraces only; no grading performed by prototype"
-      }
+      },
+      "working_trace_px": [
+        1000,
+        680
+      ]
     },
     {
       "id": "reedmere",
@@ -2844,14 +2796,14 @@
       "id": "whisperflow_landing",
       "name": "Whisperflow Landing",
       "xy": [
-        0.591240876,
-        0.091928251
+        0.676094890511,
+        0.104260089686
       ],
       "map_px": [
         654,
         816
       ],
-      "placement_status": "Approved-map trace; approximate symbol-centre interpretation",
+      "placement_status": "Provisional west bank of the eastern Whisperflow bend. Envelope reaches water; crossing, road-head view and far bank remain unresolved (TC-13).",
       "span_m": [
         100,
         200
@@ -2903,20 +2855,24 @@
         "safer_service_pads": true,
         "maximum_local_grading_depth_m": 1.2,
         "grading_scope": "Footprints only; no grading performed by prototype"
-      }
+      },
+      "working_trace_px": [
+        747,
+        805
+      ]
     },
     {
       "id": "drowsebank_mill",
       "name": "Drowsebank Mill",
       "xy": [
-        0.489963504,
-        0.246636771
+        0.499087591241,
+        0.262331838565
       ],
       "map_px": [
         543,
         678
       ],
-      "placement_status": "Approved-map trace; approximate symbol-centre interpretation",
+      "placement_status": "Provisional uphill yard north-east of the existing race; the wheel, tail race and original planning symbol retain their relationship (TC-06 to TC-08).",
       "span_m": [
         70,
         160
@@ -2968,7 +2924,11 @@
         "safer_service_pads": true,
         "maximum_local_grading_depth_m": 1.2,
         "grading_scope": "Footprints only; no grading performed by prototype"
-      }
+      },
+      "working_trace_px": [
+        553,
+        664
+      ]
     }
   ],
   "landforms": [
@@ -2983,7 +2943,7 @@
         140
       ],
       "amplitude_m": 160,
-      "radius_m": 850,
+      "radius_m": 560,
       "status": "Technical relief proposal; no contour heights treated as surveyed"
     },
     {
@@ -2997,22 +2957,26 @@
         610
       ],
       "amplitude_m": 120,
-      "radius_m": 800,
+      "radius_m": 470,
       "status": "Technical relief proposal; no contour heights treated as surveyed"
     },
     {
       "id": "northeast_uplands",
       "xy": [
-        0.715328467,
-        0.917040359
+        0.756386861314,
+        0.939461883408
       ],
       "map_px": [
         790,
         80
       ],
-      "amplitude_m": 110,
-      "radius_m": 1000,
-      "status": "Technical relief proposal; no contour heights treated as surveyed"
+      "amplitude_m": 74,
+      "radius_m": 490,
+      "status": "Northeast upland shoulder pulled away from Ashenstead's usable field shelf.",
+      "working_trace_px": [
+        835,
+        60
+      ]
     },
     {
       "id": "technical_northwest_boundary_rim",
@@ -3025,8 +2989,8 @@
         6
       ],
       "amplitude_m": 25,
-      "radius_m": 350,
-      "status": "Technical smooth watershed-boundary elevation fit; no named geographic/canon feature; original155.7m corner was below retained headwater and required23.16m conditioning fill",
+      "radius_m": 230,
+      "status": "Compact northwest boundary rim stays inside the original conditioning budget.",
       "boundary_assumption": "Bounded single-outlet study closes the remaining map boundary; external drainage/true watershed divide remains unsurveyed. No approved anchor or conditioning budget changed."
     }
   ],
@@ -3035,20 +2999,24 @@
       "id": "brookhollow_to_landing",
       "points": [
         [
-          0.775547445,
-          0.066143498
+          0.775547445255,
+          0.066143497758
         ],
         [
-          0.710766423,
-          0.05941704
+          0.739051094891,
+          0.059417040359
         ],
         [
-          0.642335766,
-          0.06838565
+          0.710766423358,
+          0.059417040359
         ],
         [
-          0.591240876,
-          0.091928251
+          0.684306569343,
+          0.070627802691
+        ],
+        [
+          0.676094890511,
+          0.104260089686
         ]
       ],
       "map_points_px": [
@@ -3072,43 +3040,73 @@
       "width_m": 12,
       "route_type": "cart",
       "max_grade": 0.1,
-      "status": "Approximate approved-map route trace; crossings require explicit bridges/works, not generated traversable routes",
-      "crossings_policy": "Flag water intersections; no bridge, ford or runtime navigation invented"
+      "status": "Proposed compact approach tied to working anchors; original planning trace retained as provenance. Crossings and detailed alignment unbuilt.",
+      "crossings_policy": "Flag water intersections; no bridge, ford or runtime navigation invented",
+      "working_trace_px": [
+        [
+          856,
+          839
+        ],
+        [
+          816,
+          845
+        ],
+        [
+          785,
+          845
+        ],
+        [
+          756,
+          835
+        ],
+        [
+          747,
+          805
+        ]
+      ]
     },
     {
       "id": "landing_to_crestbridge",
       "points": [
         [
-          0.591240876,
-          0.091928251
+          0.676094890511,
+          0.104260089686
         ],
         [
-          0.531934307,
-          0.076233184
+          0.63503649635,
+          0.097533632287
         ],
         [
-          0.45620438,
-          0.094170404
+          0.591240875912,
+          0.091928251121
         ],
         [
-          0.397810219,
-          0.128923767
+          0.531934306569,
+          0.076233183857
         ],
         [
-          0.36770073,
-          0.174887892
+          0.456204379562,
+          0.094170403587
         ],
         [
-          0.368613139,
-          0.239910314
+          0.397810218978,
+          0.128923766816
         ],
         [
-          0.401459854,
-          0.288116592
+          0.367700729927,
+          0.174887892377
         ],
         [
-          0.429744526,
-          0.323991031
+          0.368613138686,
+          0.239910313901
+        ],
+        [
+          0.401459854015,
+          0.288116591928
+        ],
+        [
+          0.429744525547,
+          0.32399103139
         ]
       ],
       "map_points_px": [
@@ -3148,8 +3146,50 @@
       "width_m": 12,
       "route_type": "cart",
       "max_grade": 0.1,
-      "status": "Approximate approved-map route trace; crossings require explicit bridges/works, not generated traversable routes",
-      "crossings_policy": "Flag water intersections; no bridge, ford or runtime navigation invented"
+      "status": "Proposed compact approach tied to working anchors; original planning trace retained as provenance. Crossings and detailed alignment unbuilt.",
+      "crossings_policy": "Flag water intersections; no bridge, ford or runtime navigation invented",
+      "working_trace_px": [
+        [
+          747,
+          805
+        ],
+        [
+          702,
+          811
+        ],
+        [
+          654,
+          816
+        ],
+        [
+          589,
+          830
+        ],
+        [
+          506,
+          814
+        ],
+        [
+          442,
+          783
+        ],
+        [
+          409,
+          742
+        ],
+        [
+          410,
+          684
+        ],
+        [
+          446,
+          641
+        ],
+        [
+          477,
+          609
+        ]
+      ]
     },
     {
       "id": "crestbridge_to_ashenstead",
@@ -3187,8 +3227,8 @@
           0.65470852
         ],
         [
-          0.77189781,
-          0.698430493
+          0.783759124088,
+          0.681614349776
         ]
       ],
       "map_points_px": [
@@ -3232,15 +3272,15 @@
       "width_m": 12,
       "route_type": "cart",
       "max_grade": 0.1,
-      "status": "Approximate approved-map route trace; crossings require explicit bridges/works, not generated traversable routes",
+      "status": "Proposed compact approach tied to working anchors; original planning trace retained as provenance. Crossings and detailed alignment unbuilt.",
       "crossings_policy": "Flag water intersections; no bridge, ford or runtime navigation invented"
     },
     {
       "id": "ashenstead_path_of_unburnt_reeds",
       "points": [
         [
-          0.77189781,
-          0.698430493
+          0.783759124088,
+          0.681614349776
         ],
         [
           0.723540146,
@@ -3364,7 +3404,7 @@
       "width_m": 5,
       "route_type": "foot",
       "max_grade": 0.22,
-      "status": "Approximate approved-map route trace; crossings require explicit bridges/works, not generated traversable routes",
+      "status": "Proposed compact approach tied to working anchors; original planning trace retained as provenance. Crossings and detailed alignment unbuilt.",
       "crossings_policy": "Flag water intersections; no bridge, ford or runtime navigation invented"
     },
     {
@@ -3487,8 +3527,8 @@
           0.284753363
         ],
         [
-          0.887773723,
-          0.248878924
+          0.906934306569,
+          0.244394618834
         ]
       ],
       "map_points_px": [
@@ -3524,7 +3564,7 @@
       "width_m": 12,
       "route_type": "cart",
       "max_grade": 0.1,
-      "status": "Approximate approved-map route trace; crossings require explicit bridges/works, not generated traversable routes",
+      "status": "Proposed compact approach tied to working anchors; original planning trace retained as provenance. Crossings and detailed alignment unbuilt.",
       "crossings_policy": "Flag water intersections; no bridge, ford or runtime navigation invented"
     },
     {
@@ -3551,8 +3591,8 @@
           0.215246637
         ],
         [
-          0.887773723,
-          0.248878924
+          0.906934306569,
+          0.244394618834
         ]
       ],
       "map_points_px": [
@@ -3584,35 +3624,31 @@
       "width_m": 12,
       "route_type": "cart",
       "max_grade": 0.1,
-      "status": "Approximate approved-map route trace; crossings require explicit bridges/works, not generated traversable routes",
+      "status": "Proposed compact approach tied to working anchors; original planning trace retained as provenance. Crossings and detailed alignment unbuilt.",
       "crossings_policy": "Flag water intersections; no bridge, ford or runtime navigation invented"
     },
     {
       "id": "crestbridge_to_mill",
       "points": [
         [
-          0.429744526,
-          0.323991031
+          0.429744525547,
+          0.32399103139
         ],
         [
-          0.429744526,
-          0.30941704
+          0.429744525547,
+          0.309417040359
         ],
         [
-          0.453467153,
-          0.293721973
+          0.453467153285,
+          0.293721973094
         ],
         [
-          0.491788321,
-          0.281390135
+          0.477189781022,
+          0.281390134529
         ],
         [
-          0.509124088,
-          0.263452915
-        ],
-        [
-          0.489963504,
-          0.246636771
+          0.499087591241,
+          0.262331838565
         ]
       ],
       "map_points_px": [
@@ -3644,27 +3680,41 @@
       "width_m": 8,
       "route_type": "cart",
       "max_grade": 0.1,
-      "status": "Proposed local technical access corridor between fixed approved anchors; not a built road or newly approved major route",
-      "crossings_policy": "Flag water intersections and grades; no bridge, ford, grading or runtime navigation constructed"
+      "status": "Proposed technical access between working anchors. Crossings, approaches and detailed construction are unresolved.",
+      "crossings_policy": "Flag water intersections and grades; no bridge, ford, grading or runtime navigation constructed",
+      "working_trace_px": [
+        [
+          477,
+          609
+        ],
+        [
+          477,
+          622
+        ],
+        [
+          503,
+          636
+        ],
+        [
+          529,
+          647
+        ],
+        [
+          553,
+          664
+        ]
+      ]
     },
     {
       "id": "crestbridge_to_hall",
       "points": [
         [
-          0.429744526,
-          0.323991031
+          0.429744525547,
+          0.32399103139
         ],
         [
-          0.468065693,
-          0.340807175
-        ],
-        [
-          0.499087591,
-          0.355381166
-        ],
-        [
-          0.530109489,
-          0.366591928
+          0.438868613139,
+          0.328475336323
         ]
       ],
       "map_points_px": [
@@ -3688,27 +3738,33 @@
       "width_m": 8,
       "route_type": "cart",
       "max_grade": 0.1,
-      "status": "Proposed local technical access corridor between fixed approved anchors; not a built road or newly approved major route",
-      "crossings_policy": "Flag water intersections and grades; no bridge, ford, grading or runtime navigation constructed"
+      "status": "Proposed technical access between working anchors. Crossings, approaches and detailed construction are unresolved.",
+      "crossings_policy": "Flag water intersections and grades; no bridge, ford, grading or runtime navigation constructed",
+      "working_trace_px": [
+        [
+          477,
+          609
+        ],
+        [
+          487,
+          605
+        ]
+      ]
     },
     {
       "id": "hall_to_depot",
       "points": [
         [
-          0.530109489,
-          0.366591928
+          0.438868613139,
+          0.328475336323
         ],
         [
-          0.523722628,
-          0.391255605
+          0.457116788321,
+          0.340807174888
         ],
         [
-          0.513686131,
-          0.417040359
-        ],
-        [
-          0.510948905,
-          0.443946188
+          0.475364963504,
+          0.362107623318
         ]
       ],
       "map_points_px": [
@@ -3732,8 +3788,22 @@
       "width_m": 8,
       "route_type": "cart",
       "max_grade": 0.1,
-      "status": "Proposed local technical access corridor between fixed approved anchors; not a built road or newly approved major route",
-      "crossings_policy": "Flag water intersections and grades; no bridge, ford, grading or runtime navigation constructed"
+      "status": "Proposed technical access between working anchors. Crossings, approaches and detailed construction are unresolved.",
+      "crossings_policy": "Flag water intersections and grades; no bridge, ford, grading or runtime navigation constructed",
+      "working_trace_px": [
+        [
+          487,
+          605
+        ],
+        [
+          507,
+          594
+        ],
+        [
+          527,
+          575
+        ]
+      ]
     }
   ],
   "unresolved": [
@@ -3765,7 +3835,7 @@
     },
     {
       "id": "crestbridge_outworks_budget_scope",
-      "status": "Fixed Crest Hall and Hill Depot anchors lie outside Crestbridge600m core envelope; classified as separate infrastructure/outworks in third area. Director clarification required if proposed built-up span/building budget must include them; no anchors moved or building content invented."
+      "status": "Provisional Hall and Depot centres now sit inside the 600 m Crestbridge envelope. The civic budget and access programme still require design and Director review."
     }
   ],
   "wetlands": [
@@ -3897,26 +3967,34 @@
     {
       "id": "crest_hall",
       "xy": [
-        0.530109489,
-        0.366591928
+        0.438868613139,
+        0.328475336323
       ],
       "map_px": [
         587,
         571
       ],
-      "status": "Approximate approved-map symbol anchor; no generated settlement/building"
+      "status": "Provisional north-bank civic site. Closer to crossing; water gate, cistern and stair alignment remain unbuilt (TC-01).",
+      "working_trace_px": [
+        487,
+        605
+      ]
     },
     {
       "id": "hill_depot",
       "xy": [
-        0.510948905,
-        0.443946188
+        0.475364963504,
+        0.362107623318
       ],
       "map_px": [
         566,
         502
       ],
-      "status": "Approximate approved-map symbol anchor; no generated settlement/building"
+      "status": "Provisional civic outwork uphill and east of the Hall; keep the underground chute and below-toll exit unresolved (TC-03).",
+      "working_trace_px": [
+        527,
+        575
+      ]
     },
     {
       "id": "whispering_door_farmhouse",

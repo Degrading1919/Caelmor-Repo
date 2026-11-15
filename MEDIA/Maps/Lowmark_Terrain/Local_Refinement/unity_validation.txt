@@ -1,23 +1,10 @@
-Verified 2026-11-07
+Lowmark compact Windows terrain inspection
 Executed: ./UNITY/Inspect-Terrain.ps1 -Build
-Exit code: 0
-Runtime staging: build succeeded, 0 errors
-Evidence below is extracted from the named batch logs; a human walking test remains for the Director.
+Unity 6000.5.5f1; runtime staged with 0 warnings and 0 errors.
 
-Source: UNITY/Logs/terrain-inspection-generation.log
-CAELMOR_TERRAIN_INSPECTION_GEOMETRY: grids=4 chunks=97 terrainTriangles=2692224 source=ed3e95aec4371712d5de3d46f38965e25d9c22962ed89090a9cb0650dabe0290
-CAELMOR_TERRAIN_INSPECTION_CHECKS_PASSED: native chunk meshes/collision, four spawn raycasts, 168 interface probes, serialized 3m/s, actual 1s displacement=2.999933, 10FPS displacement=2.999933, bridge approach maximum gap=2.563694
-CAELMOR_TERRAIN_INSPECTION_GEOMETRY: grids=4 chunks=97 terrainTriangles=2692224 source=ed3e95aec4371712d5de3d46f38965e25d9c22962ed89090a9cb0650dabe0290
-CAELMOR_TERRAIN_INSPECTION_CHECKS_PASSED: native chunk meshes/collision, four spawn raycasts, 168 interface probes, serialized 3m/s, actual 1s displacement=2.999933, 10FPS displacement=2.999933, bridge approach maximum gap=2.563694
+CAELMOR_TERRAIN_INSPECTION_GEOMETRY: grids=4 chunks=45 terrainTriangles=1041516 source=2e28fdf509db2ad2a4eafddae1b455c86289f613a25724d7f23315b1998bcad9
+CAELMOR_TERRAIN_INSPECTION_CHECKS_PASSED: native chunk meshes/collision, four spawn raycasts, 168 interface probes, serialized 3m/s, actual 1s displacement=3.000016, 10FPS displacement=3.000016, bridge approach maximum gap=2.667965
 CAELMOR_TERRAIN_INSPECTION_PERSISTENCE_PASSED
 CAELMOR_TERRAIN_INSPECTION_SCENE_READY: Assets/_Project/World/TerrainInspection/LowmarkTerrainInspection.unity
-
-Source: UNITY/Logs/terrain-inspection-build.log
-CAELMOR_TERRAIN_INSPECTION_GEOMETRY: grids=4 chunks=97 terrainTriangles=2692224 source=ed3e95aec4371712d5de3d46f38965e25d9c22962ed89090a9cb0650dabe0290
-CAELMOR_TERRAIN_INSPECTION_CHECKS_PASSED: native chunk meshes/collision, four spawn raycasts, 168 interface probes, serialized 3m/s, actual 1s displacement=2.999933, 10FPS displacement=2.999933, bridge approach maximum gap=2.563694
-CAELMOR_TERRAIN_INSPECTION_PERSISTENCE_PASSED
-CAELMOR_TERRAIN_INSPECTION_BUILD_PASSED: C:\Users\CK\Documents\Caelmor-Repo\UNITY\Builds\TerrainInspection\CaelmorTerrainInspector.exe
-
-Source: UNITY/Logs/terrain-inspection-player.log
-CAELMOR_TERRAIN_INSPECTION_GEOMETRY: grids=4 chunks=97 terrainTriangles=2692224 source=ed3e95aec4371712d5de3d46f38965e25d9c22962ed89090a9cb0650dabe0290
-CAELMOR_TERRAIN_WALK_SMOKE_PASSED: four real terrain spawns, collision, one-second 3m movement, source=ed3e95aec4371712d5de3d46f38965e25d9c22962ed89090a9cb0650dabe0290
+CAELMOR_TERRAIN_INSPECTION_BUILD_PASSED: UNITY/Builds/TerrainInspection/CaelmorTerrainInspector.exe
+CAELMOR_TERRAIN_WALK_SMOKE_PASSED: four real terrain spawns, collision, one-second 3m movement, source=2e28fdf509db2ad2a4eafddae1b455c86289f613a25724d7f23315b1998bcad9
