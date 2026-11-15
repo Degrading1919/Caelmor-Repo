@@ -949,6 +949,7 @@ At **EP20 Elyndra's Vent Shrine** on the Ridge (the EFD/EDS05 site). She keeps t
 ESS-D12.01 (The vent shrine. Ember-mist over the vent. Elyndra sits a little apart from the flame, the volcanic glass mask over her eyes. She does not turn her head.) ELYNDRA: "You've come about the Speaker's dreams." (beat) "Sit, if you want. I don't say much twice."
   > "Can you tell a given dream from a true one?"   → ESS-D12.10
   > "What have you seen of him?"                   → ESS-D12.20
+  > [ESS-D12.10 or ESS-D12.20 heard] "(Leave her to the vent.)"   → ESS-D12.40
   > "Another time."                                 → END (no flag)
 ESS-D12.10 ELYNDRA: "Sometimes. A given dream comes too neatly. Same shape, same hour, as if someone folded it before it arrived." (beat) "Some of his come folded. Not all."
 ESS-D12.11 ELYNDRA: "And what is folded into them is what he wanted already. Whoever folds them knows what he wants. That is why he never asks where they come from."
@@ -985,3 +986,4 @@ Production rule: she points (letters, "a book of nights") and warns; the player 
 | Emberholt character rulings, 2026-11-15 | **D-E2:** `EAC-D8.60`–`.62` rewritten as one ask with Thalan's voiced consent to leaving and his line that it will not quiet what burns below; `EAC-D8.64`, `.66`, all of `EAC-D10`, `EAC-B8`, `EAC-D11.12`–`.13` and the aided halves of `EAC-B9.2`/`.3` removed; Smithing and cool-cycle approaches (`EAC-D9.01`) kept. **D-S1:** Speaker cast note gains the ruling; `ESS-I6a` gains two sentences in his hand (orders sent round the Marshal under his office's mark; the terraces going quiet for him); `ESS-D8.33` added ("What I set, he wanted already"); swap notes after `ESS-I6a` and `ESS-D8` and the block P alternative row removed; tags replaced. **D-EL:** `ESS-D6.12` (Seralynd's pointer) and `ESS-D12` (optional consult at EP20) added. |
 | Independent review of character rulings, 2026-11-15 | `{EH_THALAN = freed}` moved from `EAC-D8.62` to the completion line `EAC-D11.40` (flag set once at EAC completion, per bible §9.1); `ESS-D12.30` was unreachable: now reached from `ESS-D12.12` when `ESS_RECORD_READ`, and routed back to the options. |
 | Director review pass, 2026-11-15 | ESS-D12 access note reworded to match the revised EFD-D2.18 (Elyndra is seldom seen; the player asks at the bowl), removing the clash with Ivett's "a handful of times in forty years" (EFD-D1.04). |
+| Playability audit fixes, 2026-11-15 | EM-09 (explicit leave option to `ESS-D12.40`). |

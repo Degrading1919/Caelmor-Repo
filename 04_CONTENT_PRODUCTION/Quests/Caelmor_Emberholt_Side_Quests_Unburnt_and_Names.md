@@ -99,7 +99,7 @@ Act III reads one output of this file, `EH_UNBURNT`, at `S08` attendance (§9.3 
 
 ### 0.6 Shared rules for all five packages
 
-- **Quest items: none.** The Emberholt budget is full at five, all milestone items (Act III header: `EEH_ledger`, `EGH_roll`, `EAC_sigil_stone`, `ESS_letters`, `EGA_junction_book`). Carried things here (a knotted measuring string, a moulded band, quench cloths, a stock bar and three chime bars, a primer page copy, the memory-stone, a pair of tongs, a charcoal rubbing, a tray of tonic bottles) are **carry-state objects**: a held prop and a quest-state flag, not inventory, not droppable by a hit, returned to their source if the player logs out holding them. Records (the mending book, the primer, the syllabus card, the plaque, the wall, the pay-house binding, the vigil access book) are **read in place**. Reward tools are named functionally.
+- **Quest items: none.** The Emberholt budget is full at five, all milestone items (Act III header: `EEH_ledger`, `EGH_roll`, `EAC_sigil_stone`, `ESS_letters`, `EGA_junction_book`). Carried things here (a knotted measuring string, a moulded band, quench cloths, a stock bar and three chime bars, a primer page copy, the memory-stone, a pair of tongs, a charcoal rubbing, a tray of tonic bottles) are **carry-state objects**: a held prop and a quest-state flag, not inventory, not droppable by a hit, returned to their source if the player logs out holding them. **Carry-state classes (Integration EI-CA-04; playability audit ES-03):** small documents and tokens are possession flags that never limit movement or attack and are kept across death and logout; only bulky loads (walk, cannot attack) return to their source. Records (the mending book, the primer, the syllabus card, the plaque, the wall, the pay-house binding, the vigil access book) are **read in place**. Reward tools are named functionally.
 - **Dating.** No calendar date or year. Old entries are placed by the forge's own count ("Fire" weeks at the pay-house) or by event ("the week the lower forge fell"); present events by the presentation hour and "the next dusk".
 - **No counts of the held** (D-C06; bible §2.2 withheld list). No text here states or implies how many Volkhari live, were held, died or escaped. No Volkhari refuge is placed or described. Kaelith is not seen, named or sought in these five quests. No line says how many died in the Hollow, the purges or the lower forge.
 - **No precursor name, no roster** (D-C03). The lower forge's shift hands on the plaque and the pay list are civilians, never precursor members; their list is a memorial, not a roster of the precursor.
@@ -107,9 +107,10 @@ Act III reads one output of this file, `EH_UNBURNT`, at `S08` attendance (§9.3 
 - **Steps** use `S00_…` ids scoped to the quest. **Completion events** are the Lowmark/Thornfell/Emberholt set: enter-volume, inspect, interaction-complete (channel, with kept progress), carry-deposit, dialogue-node-reached, *watch* (keep watch: advance the per-player presentation hour), *show* (use a carry-state object on an NPC or prop).
 - **No quest can fail.** Inactive / Active / Completed only. Choices are outcome flags. Missed moments (a dusk visit, a fitting, a lesson) re-offer at the next presentation turn. Death respawns at the quest's named safe point with step and flags intact. Logout restores the last persisted step; channels in progress are discarded, completed segments persist; a carry-state object returns to its source and is handed back on the next talk. Walking away keeps the quest Active with the resume hook named in each package.
 - **Heat** (bible §1.1, §9.2; ED-6). Every heat state a step needs is **quest-pinned** (the EI-HT-01 fallback), so nothing waits on the per-zone schedule. Tells, vent breath and cooling niches work as taught in EH-M1. No meter.
+- **The EH-M6 frost (playability audit ES-01).** The EGA hour pin (`EGA_FROST`: dusk until EGA `S01`, night from `S02` to the `S06` keep watch) governs only EGA steps and the frost-variant areas (Cinderwall W1 to W4 and the upper Undercroft). A side step placed in those areas is held while `EGA_FROST` is set and resumes at `EGA_THAW_SEEN`, as EME01 and EME05 already do. Keep watch anywhere else advances this player's hour normally. Any other quest's hour pin applies only to keep watch inside that quest's own step volume (ES-06). EDI-3 (EH-M6 auto-activation) stays open.
 - **Skills** (bible ED-11). Each quest has one real skill hook with a light requirement written as a Gameplay Designer placeholder (`~[GD: low]`) and a **time-cost alternative that never blocks access**: Leatherworking (EST), Smithing (ETB, ENW), Mining (EMS), Cooking (EGT). Skill XP is "actions only [GD]"; no lump quest XP (bible §11 item 6).
 - **Containment, not combat** (ED-2 pattern). Kaelen's emberburst in EST is a hazard zone around a non-targetable person, ended by channelled containment parts. It cannot fail.
-- **Co-op (CDR-6).** Every step, choice and reward is completable solo; nothing here has a co-op-only part. Each player has their own instance of every quest NPC scene (phased), every prop that a step reads (the band, the window, the stove, the chimes, the stone, the seat, the wall panel, the tongs, the binding, the brazier), and every choice. A partner may help with a shared task (smother cloth, pump a bellows, brush a wall) and receives task credit **only when their own active step consumes it**. A partner never completes another player's step, takes a choice, sets a flag or receives a personal reward through another player's action. A partner leaving, disconnecting or being ahead never blocks anyone. Any shared visual state is a presentation fallback only (MI-CO-06 pattern) and never decides another player's walkable ground, interactions, credit or completion.
+- **Co-op (CDR-6).** Every step, choice and reward is completable solo; nothing here has a co-op-only part. Each player has their own instance of every quest NPC scene (phased), every prop that a step reads (the band, the window, the stove, the chimes, the stone, the seat, the wall panel, the tongs, the binding, the brazier), and every choice. A partner's actions count only toward their own step, in their own instance (Integration EI-CO-01; playability audit CO-05). A partner never completes another player's step, takes a choice, sets a flag or receives a personal reward through another player's action. A partner leaving, disconnecting or being ahead never blocks anyone. Any shared visual state is a presentation fallback only (MI-CO-06 pattern) and never decides another player's walkable ground, interactions, credit or completion.
 - **Address** (bible §5.3 rule 8). "Warden's hand" from everyone in these quests, since all five unlock after EH-M1. Origin-neutral (D-3). No one calls the player special, chosen or gifted.
 - **Map.** Relative placement only. **MAP VERIFICATION REQUIRED** wherever geometry, distance, heat or water matters. No route or direction to another region is stated. The Mire is named in ENW only as the place where the player read a book; nothing says how far, which way, or by what road.
 
@@ -172,7 +173,7 @@ Rejected: Kaelen leading the player to his sibling or a refuge (bible §5.1; D-C
 | Outputs | `EST_BOOK`; `EST_KAELEN_NAMED`; ETB (with EH-M4) |
 | **Anchor** (contract) | Volkhari individuals: Maeryn Vall and Kaelen. |
 | **World-truth row** (contract) | H03 (the Volkhari as a people living on, individually, under a public belief that they "abandoned the city"). |
-| **Revelation role** (contract) | None. One line carries the canon R19 shadow (Kaelen's dream of being called from below), unexplained and never evidence (bible §8.2). |
+| **Revelation role** (contract) | None. One line carries the canon R19 shadow (Kaelen's dream of being called from below), unexplained and never evidence. Not one of bible §8.2's listed R19 seeds. |
 | **Recurring evidence** (contract) | Maeryn's mending book (recurs from EEH; read in place at her counter). No new custodian; nothing here is proved. |
 | **State compliance** (contract) | Inactive → Active on `EST-D1` accept; Completed on `EST-D7` end. No step can fail: the flare containment cannot fail, the band has an overnight alternative, the fitting re-offers each dusk. `EST_BOOK` traced or unrecorded; both honest. Resume hook at Maeryn's counter (`EST-B1.02`). |
 | **Combat compliance** (contract) | None. No encounter. Kaelen's emberburst is a hazard zone around a non-targetable person, ended by channelled containment (ED-2 pattern); Ondine Thursk, Maeryn and Kaelen are never targetable. **CDR-6 solo test:** every part (unpick, mould, counter, four containment parts, the book) is done by one player in sequence; nothing needs a second player; no reward depends on co-op. |
@@ -280,7 +281,7 @@ Neither choice hurts Kaelen or helps Ondine. No later quest makes either the wro
 | Missing the fitting | The fitting re-offers each dusk. Ondine comes in each time until `S03` completes. |
 | Walking away | Stays Active. The string and the band (carry-state) return to Maeryn's table if the player logs out holding them; Maeryn hands them back. Resume: `EST-B1.02`. |
 | Fail state | None. |
-| Co-op (CDR-6) | Per §0.6. A partner in the back room may lay cloths and pull the damper; each part credits only a player whose own active `S04` consumes it. A partner leaving mid-flare leaves the other's parts as they were. |
+| Co-op (CDR-6) | Per §0.6. A partner leaving mid-flare leaves the other's parts as they were. |
 
 ### EST.11 Integration needs, ledger, open decisions, review
 
@@ -614,7 +615,7 @@ Neither choice exposes Theryn, changes the test lenses, or reveals anything abou
 | Death | Not possible on the path (no damage sources). If the player dies elsewhere, they resume at the persisted step. |
 | Walking away | Stays Active. The stock bar, slip and lens (carry-state) return to Idra or Selice if the player logs out holding them. Resume: `ETB-B1.02`. |
 | Fail state | None. |
-| Co-op (CDR-6) | Per §0.6. A partner may pump the bellows or hold the stock; forging credit only through their own active `S02`. Each lesson is paced for one player; a partner sounds chimes in their own instance only. |
+| Co-op (CDR-6) | Per §0.6. Each lesson is paced for one player; a partner sounds chimes in their own instance only. |
 
 ### ETB.11 Integration needs, ledger, open decisions, review
 
@@ -841,7 +842,7 @@ Exact wording lives in EMS.12; beats cite node ids.
 
 **Beat 0: Seredh (`S00_offer`).** *Objective: Go to Seredh's workroom in Maeryn's yard.* Maeryn's bark sends the player through the yard way. **Seredh**, at his cutting block (`EMS-D1`), wants a stone set where no heat rises, in the Cold Seam past the Ash Roads, which he does not walk in daylight. Accept: Active.
 
-**Beat 1: The stone (`S01_stone`).** *Objective: Hold the stone; wrap it.* `EMS-D2` (with `EGH_STONE_HEARD`, `EMS-D2.03`). **Hold it**: the account plays (`EMS-DOC1`; ~25 s; sound and a warm haze; no image identifies anyone). Seredh's terms (`EMS-D2.20`–`.21`): one stone, one hand; the player may say a Volkhari stone remembers marks scraped from the road, not whose stone or whose hands. Sets `EMS_HEARD`. **Wrap it**: soak wool in the bucket (one interaction), wrap (2-segment channel). Rule: wet the wool at every niche. The stone is **carry-state, two-handed**: no attacking, climbing, agility shortcuts or sprinting while held. It can be set down on any flat surface (stays, per player) and lifted again. Completes on `EMS-D2.30`.
+**Beat 1: The stone (`S01_stone`).** *Objective: Hold the stone; wrap it.* `EMS-D2` (with `EGH_STONE_HEARD`, `EMS-D2.03`). **Hold it**: the account plays (`EMS-DOC1`; ~25 s; sound and a warm haze; no image identifies anyone). Seredh's terms (`EMS-D2.20`–`.21`): one stone, one hand; the player may say a Volkhari stone remembers marks scraped from the road, not whose stone or whose hands. Sets `EMS_HEARD`. **Wrap it**: soak wool in the bucket (one interaction), wrap (2-segment channel). Rule: wet the wool at every niche. The stone is **carry-state, two-handed**: no attacking, climbing or agility shortcuts while held (sprint as the ordinary carry allows; Integration EI-CA-04). It can be set down on any flat surface (stays, per player) and lifted again. Completes on `EMS-D2.30`.
 
 **Beat 2: The road (`S02_road`).** *Objective: Carry the stone to the Cold Seam.* Out by Cinderwall's working gate along the Ash Roads. **MAP VERIFICATION REQUIRED** for the whole route.
 - **Niches** (three): *Wet the wool* (~2 s each). All three sets `EMS_WOOL_KEPT`; a skipped one costs a line from Seredh.
@@ -852,7 +853,7 @@ Completes on entering the Cold Seam volume with the stone held.
 
 **Beat 3: The collector (`S03_collector`).** *Objective: Set the stone in the Cold Seam.* `EMS-D4`. **Ondine Thursk** sits on the far mourner's bench with an unlit lamp, keeping a vigil of her own (`EMS-D4.01`; with `EST_CARD = taken`, `EMS-D4.02`). She knows an ember-carved stone by its wrapped shape and asks, kindly, to take it into the lamp-house's care: Deepbrand crews sign seizures of "anything Volkhari" at the gate (EDS10); the lamp-house keeps a custody shelf under the Covenant's seal for families who cannot. She believes it. With `ESS_RECORD_READ` the player has an inner line about the rooms below the lamp-house (`EMS-D4.20`); nothing says what she knows of them. The choice (`EMS-D4.30`):
 - **Set it in the Seam.** She turns her back and lights her lamp. → `S04`.
-- **Give it into her care.** She writes a **receipt** in her custody book and gives the player the stub (carry-state, kept): *Received into care: one carved stone, wool-wrapped, from the warden's hand. To be returned on asking. O. Thursk.* She carries the stone off in both hands. Sets `EH_UNBURNT = strained` (`EMS-D4.40`). `S04` is skipped and re-opens later as `S07_mend`. → `S05`.
+- **Give it into her care.** She writes a **receipt** in her custody book and gives the player the stub (the `EMS_RECEIPT` flag only; not a carry-state): *Received into care: one carved stone, wool-wrapped, from the warden's hand. To be returned on asking. O. Thursk.* She carries the stone off in both hands. Sets `EH_UNBURNT = strained` (`EMS-D4.40`). `S04` is skipped and re-opens later as `S07_mend`. → `S05`.
 - **Ask why** returns her account. There is no option to deceive or threaten her.
 
 **Beat 4: The seat (`S04_seat`).** *Objective: Seat the stone in the rock.* Below the ledge of mourners' stones, three faint chalk crosses (Seredh's, from some other day; `EMS-I4.01`).
@@ -952,7 +953,7 @@ Neither choice exposes Seredh, names him, or gives the Covenant anything but a s
 
 | Need | Owner | Minimum viable form |
 |---|---|---|
-| Two-handed carry-state (no attack, climb, agility, sprint) | Systems | The EH-M5 ewer carry rule ("no attacking while carrying"), extended to block climb and sprint. Reused. |
+| Two-handed carry-state (no attack, climb or agility) | Systems | The EH-M5 ewer carry rule ("no attacking while carrying"), extended to block climb (Integration EI-CA-04, bulky class). Reused. |
 | Set-down / pick-up of a carry-state prop, per player | Systems | Standard placeable carry-state. |
 | `ems.silence` audio state (3 s full ambient mute in one volume) | Audio | A mix snapshot on the Seam volume. |
 | Stone account playback (sound + view haze) | Audio/VFX | As EH-M3's stone (`EGH-D9.10`). Reused. |
@@ -1234,7 +1235,7 @@ Neither value says where he went or why he did not come home.
 | Death | No damage sources on the path. |
 | Walking away | Stays Active. The tongs and the rubbing (carry-state) return to Imra if the player logs out holding them; she hands back the rubbing on the next talk. Resume: `ENW-B1.02`. |
 | Fail state | None. |
-| Co-op (CDR-6) | Per §0.6. A partner may brush beside the player; channel credit only through their own active step. Wall and plaque wording show the viewer's own value. |
+| Co-op (CDR-6) | Per §0.6. Wall and plaque wording show the viewer's own value. |
 
 ### ENW.11 Integration needs, ledger, open decisions, review
 
@@ -1409,7 +1410,7 @@ Rejected: Glassmoth proving all three dreams induced (R12 is never a universal e
 | Suggested content id | `emberholt.side.glassmoths_tonic` |
 | Series | Standalone (Dreamers) |
 | Type | Memory/lore |
-| Unlock | `emberholt.main.05_the_speakers_smile` Completed. Glassmoth's bark `EGT-B1.01` as the player passes her arch; `EGT-D1` on talk. |
+| Unlock | `emberholt.main.05_the_speakers_smile` Completed. **Held under the §0.6 frost rule (playability audit ES-02):** the stall is in Cinderwall, so while `EGA_FROST` is set (EH-M6 `S00`–`S06`) it is shut and EGT is not offered; it opens at `EGA_THAW_SEEN`. Glassmoth's bark `EGT-B1.01` as the player passes her arch; `EGT-D1` on talk. |
 | Length | 30–40 minutes |
 | Combat share | 0% |
 | Skills | **Cooking ~[GD: low]**: reduce Glassmoth's syrup at her brazier, stirring and taking it off when the pot's tell shows amber. Time-cost alternative: keep watch while she does it (`EGT_BATCH = waited`). |
@@ -1438,7 +1439,7 @@ Exact wording lives in EGT.12; beats cite node ids.
 
 **Beat 0: Glassmoth (`S00_offer`).** *Objective: Speak to Glassmoth at her stall.* `EGT-D1`. Three customers came the same morning with the same dream from the same night. She is sure two were "put in"; she kept vigil rooms once; she knows nobody listens to the woman who sells the bottle. With `ESS_SLIP_SEEN`, `EGT-D1.12`. Accept: Active.
 
-**Beat 1: The batch (`S01_batch`).** *Objective: Help Glassmoth make up a batch before dusk.* **Option A (skill): Cooking ~[GD: low].** At the brazier: pour her base and mix (she will not name the mix), **stir** (3-segment channel, ~4 s each) while the brazier tell moves clear to amber, **take it off** on amber. If it goes red the syrup scorches: tip it out and start again; only time is lost. **Bottle.** `EGT_BATCH = self`. **Option B (time-cost):** keep watch on her upturned crate while she brews (`EGT-D2.10`). `EGT_BATCH = waited`. Completes on the bottling.
+**Beat 1: The batch (`S01_batch`).** *Objective: Help Glassmoth make up a batch.* **Option A (skill): Cooking ~[GD: low].** At the brazier: pour her base and mix (she will not name the mix), **stir** (3-segment channel, ~4 s each) while the brazier tell moves clear to amber, **take it off** on amber. If it goes red the syrup scorches: tip it out and start again; only time is lost. **Bottle.** `EGT_BATCH = self`. **Option B (time-cost):** keep watch on her upturned crate while she brews (`EGT-D2.10`). `EGT_BATCH = waited`. Completes on the bottling.
 
 **Beat 2: The three (`S02_customers`).** *Objective: Hear the three customers' dream.* Glassmoth says where to find them. Any order; each is a short job while they talk.
 - **Mattea Orsk**, gate-yard porter: carry two crates from the stack to the scales (`EGT-D3`). Sets `EGT_ACCOUNT_M`.
@@ -1475,7 +1476,7 @@ None. The brazier's red tell only scorches the syrup (no damage).
 | Step | Objective | Completes on | Req. |
 |---|---|---|---|
 | `S00_offer` | Speak to Glassmoth at her stall. | `EGT-D1` accept | Yes |
-| `S01_batch` | Help Glassmoth make up a batch before dusk. | (`stir` 3 segments + `take_off` at amber + `bottle` **or** keep watch one turn) | Yes |
+| `S01_batch` | Help Glassmoth make up a batch. | (`stir` 3 segments + `take_off` at amber + `bottle` **or** keep watch one turn) | Yes |
 | `S02_customers` | Hear the three customers' dream. | `EGT_ACCOUNT_M` **and** `_D` **and** `_S` | Yes |
 | `S03_compare` | Lay the three accounts side by side. | Correct compare **and** `EGT-D6.20` | Yes |
 | `S04_book` | Read the access book for that night. | `EGT-I5.02` **and** `EGT-I5.03` | Yes |
@@ -1517,7 +1518,7 @@ Neither choice reaches the Council, the Covenant or the Speaker. Nothing here ch
 | Death | No damage sources on the path. |
 | Walking away | Stays Active. Carried bottles (carry-state) return to the stall on logout. Resume: `EGT-B1.02`. |
 | Fail state | None. |
-| Co-op (CDR-6) | Per §0.6. The access book is a public prop read per player. A partner may carry crates or hold the blank; credit only through their own active `S02`. |
+| Co-op (CDR-6) | Per §0.6. The access book is a public prop read per player. |
 
 ### EGT.11 Integration needs, ledger, open decisions, review
 
@@ -1741,3 +1742,4 @@ EGT-D11.06 GLASSMOTH: (pays the player) "Don't thank me."   {payment; event: S06
 | **Independent review, 2026-11-15** | Authored walkthrough against the brief, CDR-1 to CDR-6 (§3.7), the bible, Arcs, Revelation Ledger, dossier, Factions, Part 4 ledger and the reviewed Act I–III packages and dialogue (nothing was played; no build exists). **Flags:** every main-line read re-checked by name and value in the act files (all present; `EH_UNBURNT` kept / strained / unset matches Act III §inputs and `EGA-D11.60`); `EH_UNBURNT` and `EH_HALF_NAME` have one writer each. Act II's `ESS_RECORD_READ` row lists EGT but not EMS as a reader (the EMS read is optional and harmless; Act II row to be extended at integration). Fixed two wrong reader ids (`ESS_SERIX_HEARD` is read at `EGT-D8`, not `EGT-D6`; EGT completes on `EGT-D11`, not `EGT-D8`). The duplicate quest-local flag table in §0.4 had drifted (wrong reader for `EGT_BATCH`; `EST_SLEEVES_SEEN`, `EST_ONDINE_MET`, `EST_COLD_BREATH` missing) and was replaced by a pointer to the package tables; §0.5 folded to one paragraph. **Ledger (R18, Medium):** Serix's *carried: to the vigil roll* with "That's what it's for. To bring them back" (and Glassmoth's echo), beside Dorrit's *steadying*, stated a purpose for setting dreams in young sleepers; cut to *nothing written* (`EGT-D8.24`, `EGT-D9.02`–`.03`, EGT.5 Beat 5, mystery ledger, open decision 2). The access book's third-room line ("a run of the same name you have seen before") pointed at the Speaker's nights `[D-S1]`; now "no name that night". R15, R16, R19: seed only (Kaelen's one canon line). D-C03, D-C06: no counts, no roster, no refuge. Kaelen's family name is never spoken (bible cast name only). ENW's Mire echo stays optional, sets only `ENW_ECHO_TOLD`, creates no Mire requirement and states no route. **Ondine Thursk:** consistent with Act I (EEH's visitor unnamed, non-interactive, "seeded for EST") and Act II (grey cloaks); kept and swappable; open decision EST.11 item 2 now names the two texts that carry her name. **Rename:** Perrin Ardith → **Perrin Sedgwick** (near-duplicate of Serix Arden and Sarne Ardane in the Emberholt cast). **Playability:** all unlocks reachable; every quest has a physical step and a skill hook with a time-cost alternative; no softlock found; three states only. **Size:** about 168 KB after trimming the duplicate table; it remains above the 140 KB package guide. Further cuts would remove content, not redundancy (Director call). |
 | **Emberholt character rulings, 2026-11-15** | D-E2: `EH_THALAN` read as `freed` only; `ETB-D5.11` (aided) cut; `[D-E2]` tags and the swap note (ETB open decision 2) resolved in the header, flow chart, §0 flag table, ETB card and beats, and the review row. D-S1: EGT's two `EH_SPEAKER` mood barks checked, unchanged (no claim of knowledge, no "only dream-fed"). ED-3: no `[INITIATE]` use here; header and review row name Iven Calder as not used. |
 | Independent review of character rulings, 2026-11-15 | Remaining live `[D-S1]` tags (§0 flag table, EGS revelation-role row, `EGT-B1.04`/`.05` triggers) replaced with "(D-S1, ruled 2026-11-15)". |
+| Playability audit fixes, 2026-11-15 | Playability audit fixes, 2026-11-15: ES-01, ES-02, ES-03, ES-13, CO-05, TD-10 (EMS stone sprint clause). |

@@ -23,7 +23,7 @@
 | **COULD** | Polish; the package's fallback is an acceptable complete state. |
 | **[DIRECTOR]** | A Director-level item. Collected in §6. |
 | **Shared?** | `= MR <id>`: the Mire handoff already needs it; build once. `= LM <id>`: Lowmark. `ext MR <id>`: the Mire capability plus an Emberholt extension. `EH only`: Emberholt needs it and earlier regions do not. |
-| **New?** | Two rows are the bible's **new runtime needs**: EI-HT-01 (heat-state schedule) and EI-PR-01 (staged pressure). Two more are **possible** new needs the packages flagged, each with a fallback that needs nothing new: EI-QS-08 (compound OR prerequisite) and EI-SG-01 (sigil-stone volume reading). Everything else is a standard system or an existing Lowmark, Thornfell or Mire capability. |
+| **New?** | Two rows are the bible's **new runtime needs**: EI-HT-01 (heat-state schedule) and EI-PR-01 (staged pressure). Two more are **possible** new needs the packages flagged, each with a fallback that needs nothing new: EI-QS-08 (compound OR prerequisite) and EI-SG-01 (sigil-stone volume reading). Everything else is a standard system or an existing Lowmark, Thornfell or Mire capability, **except** two needs the playability audit found not demonstrated in current source and lists as **new requirements**: the hazard re-arm extension behind EI-HT-03 and EI-HT-05 (TD-01) and mobile enemy pursuit (crosswalk R-15, TD-05). |
 | Requirement ids | `EI-<group>-<nn>` (Emberholt Integration), keeping the bible's own EI-HT-01 and EI-PR-01. They cannot collide with bible decisions `ED-n`, POIs `EP##`, micro-events `EME##`, discoveries `EDS##`, the Zones ids (`HZ-`, `ML-`, `ET-`, `EA-`, `EK-`, `EZ-`, `ZQ-`), the economy labels `EHC-`, or Mire `MI-` ids. Conflicts and questions are `EQ-nn`; Director items `EDI-n`; acceptance tests `EAT-nn`. |
 | Quest codes | Main: **ECW** EH-M1 · **EEH** EH-M2 · **EGH** EH-M3 · **EAC** EH-M4 · **ESS** EH-M5 · **EGA** EH-M6. Side: **EST ETB EMS ENW EGT** (Unburnt and Names) · **EWA ECN EFC EBL ESR** (Commons and Wards) · **ESK EOM EFS EWQ ESP ESH** (Work and Skills) · **EOP EFD EAD ECC** (Combat and Discovery) · micro-events **EME01–EME10** · discoveries **EDS01–EDS10**. |
 
@@ -60,16 +60,16 @@ Each requirement appears once. "Consumers" lists every quest and step that depen
 |---|---|---|---|---|---|---|
 | EI-QS-01 | **Ordered steps** with objective text key, sub-counters, completion predicate and kind (required / optional / parallel) | Lowmark step model unchanged | SCE, SE | All 26 quests | = MR MI-QS-01 | MUST, *no fallback* |
 | EI-QS-02 | **Three-state lifecycle only**; no fail, abandon or reset | Stage 15.2 / 27 as they stand | SE | All | = MR MI-QS-02 | MUST (already contracted) |
-| EI-QS-03 | **Resume hooks per step range** | Data: quest → (step range, resume NPC or volume, line key) | SCE | Every main quest names its hooks (EGA: Hennet or Yorven at the warming house, a line hand at the stair head); every side quest names one | = MR MI-QS-03 | MUST |
-| EI-QS-04 | **Data-declared activation triggers**, including zone-entry auto-offer | ECW auto-offered on entering the Cooling House volume; EEH offered on the next Cooling House entry after ECW; **EGA auto-started (Active at `S00_frost`) on the next Cinderwall entry after ESS Completed; the activation sets `EGA_FROST`** (EQ-04); journal leads for EAC and ESS | SE | ECW, EEH, EGA; side quest unlocks | = MR MI-QS-04 | MUST. Fallback: the giver offers on first talk (Hennet for ECW and EEH; Yorven at the Cooling House door for EGA, with `EGA_FROST` set on that activation) |
+| EI-QS-03 | **Resume hooks per step range** | Data: quest → (step range, resume NPC or volume, line key) | SCE | Every main quest names its hooks (EGA: Hennet or Yorven at the warming house, a line hand at the stair head); every side quest names one | = MR MI-QS-03 | MUST Recommended form (playability audit TD-13, CDR-4): resume hooks as dialogue lines conditioned on quest stage, so no prompt system is needed. |
+| EI-QS-04 | **Data-declared activation triggers**, including zone-entry auto-offer | ECW auto-offered on entering the Cooling House volume; EEH offered on the next Cooling House entry after ECW; **EGA auto-started (Active at `S00_frost`) on the next Cinderwall entry after ESS Completed; the activation sets `EGA_FROST`** (EQ-04); journal leads for EAC and ESS | SE | ECW, EEH, EGA; side quest unlocks | = MR MI-QS-04 | MUST. Fallback: the giver offers on first talk (Hennet for ECW and EEH; Yorven at the Cooling House door for EGA, with `EGA_FROST` set on that activation) Recommended form (TD-13): activation by flags through an entry action (the Lowmark pattern). |
 | EI-QS-05 | **Persisted sub-progress inside a step** | Per-cock and per-collar state; plates count (`EGA_PLATES` 0–3); collars count (`EGA_COLLARS` 0–4, kept across death: "every collar already shut stays shut"); braziers doused (L3); K5 doors read; splice state; channel segments | SE | ECW S06; EAC S04; ESS S04; EGA S02–S06; EWA; ESR | = MR MI-QS-05 | MUST |
-| EI-QS-06 | **Respawn anchors by step** | Data: quest step → respawn point (Zones §6.6). EGA always wakes at the warming house | SE, SCE | All main quests; side quests with combat | = MR MI-QS-06 | MUST. Today's build restores at one fixed point; fallback: the region's Cooling House for every step (walk-back cost only) |
+| EI-QS-06 | **Respawn anchors by step** | Data: quest step → respawn point (Zones §6.6). EGA always wakes at the warming house | SE, SCE | All main quests; side quests with combat | = MR MI-QS-06 | MUST. Respawn by step is **partly demonstrated**: current source has `RespawnRegion { target, x, z, radius, all, none }`, which places by flag condition, so the step anchors can be authored as respawn regions keyed to step flags (playability audit TD-11). Fallback: the region's Cooling House for every step (walk-back cost only); under that fallback Thalan waits at his last escort stop (EI-ES-01; EM-03) |
 | EI-QS-07 | **Logout restore to a step location, with pins re-applied** | Restore position by step (Act lists); re-apply heat pins, hour pins, `EGA_FROST`, `EGA_STAGE` | SE | All main quests; EMS (carry returns to source) | = MR MI-QS-07 | MUST. Today's build reloads at the road head without position; fallback: restore at the quest's resume hook location |
-| **EI-QS-08** | **Compound prerequisite** `[ED-7]`: EH-M3 needs EH-M2 Completed **and** (TF-M3 **or** MR-M2) Completed | Native OR in availability, **or** the fallback: a derived quest-local flag `EGH_GATE_OPEN` set by a world rule when TF-M3 or MR-M2 completes (and checked on entering Emberholt for players who completed one earlier), so the offer is a plain AND | SE, SCE | EGH offer | EH only | MUST. **Possible new need**; fallback needs nothing new |
+| **EI-QS-08** | **Compound prerequisite** `[ED-7]`: EH-M3 needs EH-M2 Completed **and** (TF-M3 **or** MR-M2) Completed | Native OR in availability, **or** the fallback: a derived quest-local flag `EGH_GATE_OPEN` set by a world rule when TF-M3 or MR-M2 completes (and checked on entering Emberholt for players who completed one earlier), so the offer is a plain AND | SE, SCE | EGH offer | EH only | MUST. **Possible new need**; fallback needs nothing new Recommended form (TD-13): gate the EGH offer action with `any` / `anyCount = 1` over the TF-M3 and MR-M2 completion flags, which `ActionDefinition` already supports; no derived flag or world rule (quest availability itself is `all` only). ED-7 itself stays open. |
 | EI-QS-09 | **Locked journal entry** naming both alternatives | Journal shows EGH as locked with the text of both alternatives (no hidden gate) | UI, SCE | EGH | ext LM | MUST |
 | EI-QS-10 | **Dialogue on a Completed quest writes a region flag** | EMS `S07_mend` (post-completion, `strained` only) sets `EH_UNBURNT = kept` through a dialogue node | SE, SCE | EMS | = LM (dialogue-sets-flag) | SHOULD. Fallback: the mend becomes a final optional step before completion |
-| EI-QS-11 | **Quest travel to checkpoints** | EGA line hand offers travel from the stair head to U1, U5, U7 second niche, U8, U10 door niche | SE | EGA | ext MR | COULD. Fallback: walking |
-| EI-QS-12 | **Repeatable post-story activity**, once per presentation day | The warden's round (Act III §E.9) | SE, SCE | §E.9 | = MR (repeatable) | COULD. Cut freely (Act III) |
+| EI-QS-11 | **Quest travel to checkpoints** | EGA line hand offers travel from the stair head to U1, U5, U7 second niche, U8, U10 door niche | SE | EGA | ext MR | COULD. Fallback: walking Scope recommendation (TD-13 with EM-07): keep only for EGA `S06` (travel to the U10 door niche for Draw Sentinel retries; proposed MUST for that step, Sol to confirm) and cut elsewhere. |
+| EI-QS-12 | **Repeatable post-story activity**, once per presentation day | The warden's round (Act III §E.9) | SE, SCE | §E.9 | = MR (repeatable) | COULD. Cut freely (Act III) TD-13: cut. |
 
 ### 2.2 Region flags and quest-local flags
 
@@ -78,7 +78,7 @@ Each requirement appears once. "Consumers" lists every quest and step that depen
 | EI-FL-01 | **Region flags `EH_*`**, character-scoped, one writer each (§3.1) | Enum and bool flags | SCE | §3.1 | = MR MI-FL-01 | MUST |
 | EI-FL-02 | **Quest-local flags survive completion** where another package reads them (§3.2) | Persisted per character | SE | §3.2 | = MR | MUST |
 | EI-FL-03 | **Cross-region reads** never gate except `[ED-7]` | Read-only flag access to Lowmark, Thornfell and Mire flags and quest states (§3.3) | SE | §3.3 | = MR | MUST for ED-7; SHOULD otherwise (flavour lines drop) |
-| EI-FL-04 | **Derived flag by world rule** | `EGH_GATE_OPEN` (EI-QS-08 fallback); its only writer is that rule | SE | EGH | EH only | MUST if EI-QS-08 has no native OR |
+| EI-FL-04 | **Derived flag by world rule** | `EGH_GATE_OPEN` (EI-QS-08 fallback); its only writer is that rule | SE | EGH | EH only | MUST if EI-QS-08 has no native OR Not needed under the EI-QS-08 `any`/`anyCount` form (TD-13). |
 
 ### 2.3 Dialogue conditions and effects
 
@@ -88,20 +88,20 @@ Each requirement appears once. "Consumers" lists every quest and step that depen
 | EI-DG-02 | **Show evidence**: options gated by held items, carry-states and read flags | Standard | SCE | EEH, EGH, EAC, ESS, EGA, ECC, ENW | = TH | MUST |
 | EI-DG-03 | **Reserved strings** `[ALLOCATION]` lines (ED-3, D-E2 and D-S1 ruled 2026-11-15: the initiate's name is the fixed string Iven Calder, and the D-E2 / D-S1 swap lines are resolved, so they no longer need swappable keys) | Content keys that can be swapped or cut without code | SCE | EH-M1 and its readers (`[ALLOCATION]`) | EH only (data only) | MUST |
 | EI-DG-04 | **Journal documents** that persist after the quest | The chamber-roll line naming Iven Calder (ED-3, ruled 2026-11-15) copied at EGH S07, with no gloss on its significance; the Speaker's letter (§E.8) | UI | EGH, EGA | = MR | SHOULD |
-| EI-DG-05 | **Timed optional line on staying** | EAC `EAC-D11.35` plays if the player stays ~5 s | SE | EAC | ext LM | COULD. Fallback: a dialogue option |
+| EI-DG-05 | **Timed optional line on staying** | EAC `EAC-D11.35` plays if the player stays ~5 s | SE | EAC | ext LM | COULD. Fallback: a dialogue option TD-13: use the fallback. |
 
 ### 2.4 Heat: the readable system (bible §9.2, §11.1)
 
 | Id | Requirement | Minimum viable form | Owner | Consumers | Shared? | Priority |
 |---|---|---|---|---|---|---|
-| **EI-HT-01** | **Heat-state schedule per zone** (bible §11.2): three states keyed to the presentation hour | Reuse the Mire's per-crossing state table (MI-CH-01) with Zones §6.1 as data | SE, ZN | Ambient zones; §E.3 post-story; §E.9 "the day's schedule" | ext MR MI-CH-01 | SHOULD. **New runtime need.** Fallback (bible): quest-pinned states only, **plus the Zones §6.1 default column as fixed data** for every unpinned zone (EQ-05) |
+| **EI-HT-01** | **Heat-state schedule per zone** (bible §11.2): three states keyed to the presentation hour | Reuse the Mire's per-crossing state table (MI-CH-01) with Zones §6.1 as data | SE, ZN | Ambient zones; §E.3 post-story; §E.9 "the day's schedule" | ext MR MI-CH-01 | SHOULD. **New runtime need.** Fallback (bible): quest-pinned states only, **plus the Zones §6.1 default column as fixed data** for every unpinned zone (EQ-05) TD-13: use the fallback. |
 | EI-HT-02 | **Quest pins per player**, step-scoped | Pin a zone's state for a step; release at step end; completion releases all; logout re-applies by step | SE | ECW, EEH, EGH, EAC, ESS, EGA, EWA, EFD, ESR, ESH, EMS, EAD, EFS (Zones §6.1) | = MR MI-CH-02 | MUST. Fallback: a per-quest environment variant per step (the EI-PR-01 form) |
-| EI-HT-03 | **Heat-zone hazard volumes** with periodic damage per state, and **cooling niches** as safe volumes | State swaps the volume's damage (Cool none, Working light, Surging heavy); values from the Enemies file | SE, ENC | Zones §6.1 | = LM (hazard volume) | MUST |
+| EI-HT-03 | **Heat-zone hazard volumes** with periodic damage per state, and **cooling niches** as safe volumes | State swaps the volume's damage (Cool none, Working light, Surging heavy); values from the Enemies file | SE, ENC | Zones §6.1 | **ext LM (new: re-arm)**. Not demonstrated: current hazards fire once, bound to a target, and never re-arm; no periodic area damage or safe niche volume (playability audit TD-01) | MUST. **NEW requirement**, not existing capability. Minimum for Sol: one extension so the existing hazard re-arms on a cooldown (periodic heat ticks); niches safe by sitting outside the radii. Sol owns the form |
 | EI-HT-04 | **Tells as state-driven props** with inspect text gated on `EH_TELLS` | A prop with three visual states bound to its zone | SE, ART | All | EH only (prop states) | MUST. Fallback: inspect text states the heat |
-| EI-HT-05 | **Vents**: timed hazards with a ~1.5 s ash-lift telegraph before each exhale | Telegraphed environmental damage on a cycle per zone state (EK-3) | SE, ENC | U2, U3, U5, U7, U8, K2, L4, G6, ESH, EAD | = LM (telegraphed environmental damage) | MUST |
-| EI-HT-06 | **Hazard volume attached to a non-targetable NPC** with radius steps | Tavi's flare (three radius steps; the test is morning-pinned); fused workers' flares ended by a containment channel (ED-2; never combat) | SE, NPC | EEH; EGA S01; ETB | EH only (standard volume parented to an NPC) | MUST |
-| EI-HT-07 | **Heat follows the room**: an authored state change on a step event | L3 sleep rooms when Serix enters; U8 when the relief turns; G4 by the flarecap | SE | ESS S04; EGA S03; EGH S03 | = MR MI-CH-02 (pin on event) | MUST. Fallback: the pin changes at the start of the next sub-step instead of on the event |
-| EI-HT-08 | **Echo overlay** in the Hollow crossing (~1.5 s warning, ~8 s, ~25 s cycle) | Timed presentation hazard per the Enemies file | SE, ENC | EGH S05 | = LM (drift-site model) | MUST. Fallback: the overlay is presentation only and the glass vents (EI-HT-05) carry the crossing's damage |
+| EI-HT-05 | **Vents**: timed hazards with a ~1.5 s ash-lift telegraph before each exhale | Telegraphed environmental damage on a cycle per zone state (EK-3) | SE, ENC | U2, U3, U5, U7, U8, K2, L4, G6, ESH, EAD | **ext LM (new: re-arm)**; same extension as EI-HT-03 (playability audit TD-01) | MUST. **NEW requirement**, not existing capability |
+| EI-HT-06 | **Hazard volume attached to a non-targetable NPC** with radius steps | Tavi's flare (three radius steps; the test is morning-pinned); fused workers' flares ended by a containment channel (ED-2; never combat) | SE, NPC | EEH; EGA S01; ETB | EH only (standard volume parented to an NPC) | MUST Recommended form (TD-13): three fixed-target hazards swapped by flag, merged into EI-HT-03 (every flaring NPC stands still). |
+| EI-HT-07 | **Heat follows the room**: an authored state change on a step event | L3 sleep rooms when Serix enters; U8 when the relief turns; G4 by the flarecap | SE | ESS S04; EGA S03; EGH S02 | = MR MI-CH-02 (pin on event) | MUST. Fallback: the pin changes at the start of the next sub-step instead of on the event |
+| EI-HT-08 | **Echo overlay** in the Hollow crossing (~1.5 s warning, ~8 s, ~25 s cycle) | Timed presentation hazard per the Enemies file | SE, ENC | EGH S05 | = LM (drift-site model) | MUST. Fallback: the overlay is presentation only and the glass vents (EI-HT-05) carry the crossing's damage TD-13: use the fallback (presentation only). |
 
 ### 2.5 Staged pressure (bible EI-PR-01)
 
@@ -114,17 +114,17 @@ Each requirement appears once. "Consumers" lists every quest and step that depen
 | Id | Requirement | Minimum viable form | Owner | Consumers | Shared? | Priority |
 |---|---|---|---|---|---|---|
 | EI-CA-01 | **Channels with kept progress** (segments persist after interruption) | Lowmark channel convention | SE | Cocks, collars, splices, seal plate, fall cut, copy, braziers, stone setting, damper | = MR MI-CA-01 | MUST |
-| EI-CA-02 | **Channel gated by a vent cycle**: segments run only between exhales | L4 damper latch (two cycles); U8 relief hold (two cycles or wedges) | SE | ESS S04 Option B; EGA S03 | EH only (channel availability by hazard phase) | MUST. Fallback: the channel runs any time and the vent simply damages |
+| EI-CA-02 | **Channel gated by a vent cycle**: segments run only between exhales | L4 damper latch (two cycles); U8 relief hold (two cycles or wedges) | SE | ESS S04 Option B; EGA S03 | EH only (channel availability by hazard phase) | MUST. Fallback: the channel runs any time and the vent simply damages Recommended form (TD-13): a fixed-duration channel. |
 | **EI-CA-03** | **Heat ticks do not interrupt channels** (request to Sol) | Today's build interrupts timed work on a hit. Options for Sol, either acceptable: periodic heat damage is excluded from interruption; or a heat tick pauses the current segment instead of cancelling it (progress kept, EI-CA-01). Enemy hits still interrupt | SE, ZN | U5, U8, U9, U10, L4, EWA, ESR, EGH G4 | EH only | MUST. Standard fallback, needing nothing new: every channel pad in a heat zone stands in or touching a niche volume, so no tick reaches it (Zones §0.1) |
-| EI-CA-04 | **Carry-states** with movement limits; logout returns the carry to its source | Ewer, blankets, supper pails, record copy, stage-cock handle, EMS stone (blocks climb, agility and sprint) | SE | ESS, EGA, EMS, others | = MR MI-CA-02 | MUST |
+| EI-CA-04 | **Carry-states** in two classes (playability audit ES-03, TD-10) | **Bulky** (crate, sod, cart, stone, blanket bundle, case, bucket, ewer, supper pails, sack, the EMS stone): the existing Lowmark carry; walk, cannot attack; set down and lifted freely; logout or death returns it to its source for re-collection; the EMS stone also blocks climb and agility shortcuts (sprint as the Lowmark carry allows). **Small** (documents and tokens: paper, record copy, order copy, cut page, receipt, stamped cock, wrap, string, rubbing, lens, stage-cock handle): a **possession flag**, not a carry; no movement or attack limit; kept across death and logout; dialogue gates on the flag (EI-DG-02). A **lent tool** (the EWQ crossbow) is neither: usable, returned at its named step | SE | ESS, EGA, EMS, others | = MR MI-CA-02 (bulky); flags (small) | MUST |
 
 ### 2.7 Keep watch, presentation hour and phasing
 
 | Id | Requirement | Minimum viable form | Owner | Consumers | Shared? | Priority |
 |---|---|---|---|---|---|---|
-| EI-KW-01 | **Keep watch** in a niche or on a bench advances the player's presentation hour and releases "until keep watch" pins | Reuse Lowmark keep watch | SE | ECW S01 (U3); EAC S03 (K4); EGA S06 (dawn); EMS; ETB | = MR MI-KW-01 | MUST. Note: not yet demonstrated in Sol's build (Mire audit TD-09). Fallback: keep watch is a timed channel at the niche or bench that releases the step's "until keep watch" pin |
-| EI-KW-02 | **Hour pins per player** | EEH morning test; ESS dusk S01, S05; EGA dusk → night → dawn → morning; EFD dusk; ETB dusk | SE | As listed | = MR | MUST. Fallback: the scene plays at any hour with its hour shown by dressing and barks |
-| EI-WV-01 | **Frost variant per player** | Environment variant of Cinderwall W1–W4 and the upper Undercroft keyed to `EGA_FROST`; ended by `cinderwall.thaw_lines` | SE, ART | EGA | ext MR MI-WL-01 | SHOULD. Fallback: barks and a few props only |
+| EI-KW-01 | **Keep watch** in a niche or on a bench advances the player's presentation hour and releases "until keep watch" pins | Reuse Lowmark keep watch | SE | ECW S01 (U3); ECW S05 Option B (Cooling House bench); EEH S02 Option B (Maeryn's stool) and S03 (morning); EAC S02 (dusk, for Asera); EAC S03 (K4); ESS S01, S05 (dusk) and S06 (anteroom overnight); EGA S06 (dawn); EMS; ETB | = MR MI-KW-01 | MUST. Note: not yet demonstrated in Sol's build (Mire audit TD-09). Fallback: keep watch is a timed channel at the niche or bench that releases the step's "until keep watch" pin |
+| EI-KW-02 | **Hour pins per player** | EEH morning test; ESS dusk S01, S05; EGA dusk → night → dawn → morning; EFD dusk; ETB dusk. **Scope (playability audit ES-01, ES-06):** an hour pin applies only to keep watch inside that quest's own step volume; elsewhere keep watch advances the hour normally. The EGA pin governs only EGA steps and the frost-variant areas (EI-WV-01); a side step placed there is held while `EGA_FROST` is set and resumes at `EGA_THAW_SEEN`. EDI-3 stays open | SE | As listed | = MR | MUST. Fallback: the scene plays at any hour with its hour shown by dressing and barks |
+| EI-WV-01 | **Frost variant per player** | Environment variant of Cinderwall W1–W4 and the upper Undercroft keyed to `EGA_FROST`; ended by `cinderwall.thaw_lines` | SE, ART | EGA | ext MR MI-WL-01 | SHOULD. Fallback: barks and a few props only TD-13: use the fallback. |
 
 ### 2.8 Per-player props, NPC placement and epilogue
 
@@ -132,27 +132,27 @@ Each requirement appears once. "Consumers" lists every quest and step that depen
 |---|---|---|---|---|---|---|
 | EI-PP-01 | **Props by flag** | Tally board (EME10 by `EGA_BOARD_BALANCED`), plaque chalk (`EH_HOLLOW_TRUTH`, `EH_HALF_NAME`), Half-Name Wall, braziers roped (`EH_HEAT_MAIN = terraces`), Sentinel inert prop, far-door chain, barricades | SE, ART | §E; EGH; EAC; ENW | = MR MI-PP-01 | MUST |
 | EI-PP-02 | **NPC placement by flag**: the tally-board crowd (bible §9.3) | Rule list → NPC set at V1 in EGA S08 | SE, NPC | EGA S08 | = MR MI-PP-03 | MUST. The scene always completes; missing NPCs only thin the crowd |
-| EI-PP-03 | **Barricades by quest state** | EGH mouth barricade S06–S07; EAC barricade beyond the mouth after | SE | EGH, EAC | = LM | MUST |
+| EI-PP-03 | **Turn-back volume by quest state** (playability audit CO-01) | EGH: no mouth barricade (deleted; the bypass and the annex street door serve `S07`, Zones ML-07). EAC: beyond the Warrens' mouth after completion, a turn-back bark volume checked against each player's own EAC state; a presentation prop may stand there but is never a movement blocker and never reads another player's state (EI-CO-06) | SE | EAC | = LM | MUST |
 
 ### 2.9 The sigil-stone
 
 | Id | Requirement | Minimum viable form | Owner | Consumers | Shared? | Priority |
 |---|---|---|---|---|---|---|
-| **EI-SG-01** | **Held item reads nearby door volumes** (cold / cool / warm) and its inspect text and seam glow change | Trigger volumes at each K5 door and the chamber door set a quest-local state the item reads | SE, ART | EAC S04–S05 | EH only | SHOULD. **Possible new need.** Fallback (Act II): a per-door inspect, "The stone in your hand is warm/cool/cold", needing nothing new |
+| **EI-SG-01** | **Held item reads nearby door volumes** (cold / cool / warm) and its inspect text and seam glow change | Trigger volumes at each K5 door and the chamber door set a quest-local state the item reads | SE, ART | EAC S04–S05 | EH only | SHOULD. **Possible new need.** Fallback (Act II): a per-door inspect, "The stone in your hand is warm/cool/cold", needing nothing new TD-13: use the fallback (per-door inspect). |
 
 ### 2.10 Escort, follow and NPC movement
 
 | Id | Requirement | Minimum viable form | Owner | Consumers | Shared? | Priority |
 |---|---|---|---|---|---|---|
-| EI-ES-01 | **Escort-follow**: NPC at walking pace, stops when the player stops, never targetable, hazard-immune; rejoins at the respawn point after death | Thalan (freed, the only outcome, D-E2 ruled 2026-11-15; R2 → shaft foot only; he never climbs the shaft); Myr (EAD, slow walk); Lenk (ESH, follow down the stair) | SE, NPC | EAC S07; EAD; ESH S04 | = MR MI-ES-01 | MUST. Escort is not yet demonstrated in Sol's build. Fallback: the NPC appears at each stop (presentation) |
-| EI-ES-02 | **Non-combatant NPCs going ahead to niches** | EGA crew (Veska, line hands) stop in niches, never targeted, never engaged; Thennek leads the descent; Asera at heat rooms | SE, NPC | EGA S02–S06; EAC S03 | ext MR | SHOULD. Fallback: they are placed at each niche as the player arrives |
+| EI-ES-01 | **Escort-follow**: NPC at walking pace, stops when the player stops, never targetable, hazard-immune; rejoins at the respawn point after death | Thalan (freed, the only outcome, D-E2 ruled 2026-11-15; R2 → shaft foot only; he never climbs the shaft); Myr (EAD, slow walk); Lenk (ESH, follow down the stair) | SE, NPC | EAC S07; EAD; ESH S04; EEH S03 (Tavi, short escort-follow to the cooling niche, a required containment part) | = MR MI-ES-01 | MUST. Escort is not yet demonstrated in Sol's build. Fallback: the NPC appears at each stop (presentation); written as a predicate, "player enters H1; Myr is placed there", and the same for Thalan at the shaft foot (playability audit TD-06). Tavi: the take-hand interaction places her in the niche (EM-04). After `EAC-D9.42` Thalan has gone: no rejoin. Under the EI-QS-06 fixed-recovery-point fallback, Thalan waits at the last escort stop (the ring edge niche or the gallery) and escort-follow resumes when the player returns there; he never rejoins above the shaft (EM-03) |
+| EI-ES-02 | **Non-combatant NPCs going ahead to niches** | EGA crew (Veska, line hands) stop in niches, never targeted, never engaged; Thennek leads the descent; Asera at heat rooms; Veska in the next niche (ECW S01); Darven walks to G1 and goes first through the drain crawl, waiting at each niche (EGH S02–S03); Yorven leads up the bypass (EGH S06–S07, Zones ML-07) | SE, NPC | EGA S02–S06; EAC S03; ECW S01; EGH S02–S03, S06–S07 | ext MR | SHOULD. Fallback: they are placed at each niche or stop as the player arrives, by step or flag only (playability audit EM-04, TD-07) |
 | EI-ES-03 | **NPC vertical movement** | Thennek down the shaft ladders, Asera up them, Lenk on the stair | SE, NPC | EAC; ESH | ext MR MI-AG-02 | SHOULD. Fallback: fade and reappear at the next landing or the foot |
 
 ### 2.11 Quest items (exactly five)
 
 | Id | Item | Quest | Gained | Removed | Notes |
 |---|---|---|---|---|---|
-| EI-IT-01 | `EEH_ledger` | EH-M2 | `S05` (academy annex) | `S07`: to Idra (`guild`) or Yorven's strongbox (`evidence`) | Reappears in EH-M6 and CV-M4 from the strongbox (EQ-09) |
+| EI-IT-01 | `EEH_ledger` | EH-M2 | `S05` (academy annex) | `S07`: to Idra (`guild`) or Yorven's strongbox (`evidence`) | Shown as a world prop in EH-M6 (inspect only; Yorven lays it on the board's ledge, Act III §9.5); in CV-M4 likewise a world prop only; never re-granted as an item (EQ-09) |
 | EI-IT-02 | `EGH_roll` | EH-M3 | `S07` (signed out at the Red-Lit annex) | `S08`: Kaevren returns it under seal | The Iven Calder line (ED-3) copied to the journal at `S07` |
 | EI-IT-03 | `EAC_sigil_stone` | EH-M4 | `S01` (Dahrin) | `S07` (`EAC-D11.30`) | Read as a held item in `S04`–`S05` (EI-SG-01) |
 | EI-IT-04 | `ESS_letters` | EH-M5 | `S03` (letter-case) | `S06`: to Kaevren (`challenged`) or the sealed inquiry (`exposed`) (D-S1, ruled 2026-11-15) | — |
@@ -187,7 +187,7 @@ All five: not droppable, not sellable, removed by quest step (= MR MI-IT-01). Ve
 | Id | Requirement | Minimum viable form | Owner | Consumers | Shared? | Priority |
 |---|---|---|---|---|---|---|
 | EI-AG-01 | Agility triggers with walkable fallbacks | Fallback is the critical path | SE | U2, G6, ESS duct, EWA, EFS | = MR | COULD |
-| **EI-AG-02** | **Multi-level navigation**: stairs, ladders, hatches, galleries, below-grade spaces | Per Zones §5A row, Sol's choice of multi-level NavMesh, an interaction-driven ladder, or a zone transition into a flat interior | SE | Zones §5A (37 rows, ML-01 to ML-36 plus ML-05b; 13 required rows that assume a ladder, stair or stacked space; 7 raised enemy positions) | ext MR MI-AG-02 | **MUST.** Every row now has a fallback. **ML-09** (EH-M4 shaft): flat landings joined by a per-flight climb interaction that places the player at the next landing's anchor, using only EI-QS-06 placement. **ML-17** (EH-M5 damper, melee-only path): the latch pulled from the floor at the ladder foot with the fire hook, same channel and time cost. Raised enemy positions: at grade at their foot with the package's cover |
+| **EI-AG-02** | **Multi-level navigation**: stairs, ladders, hatches, galleries, below-grade spaces | Per Zones §5A row, Sol's choice of multi-level NavMesh, an interaction-driven ladder, or a zone transition into a flat interior | SE | Zones §5A (38 rows, ML-01 to ML-37 plus ML-05b; 14 required rows that assume a ladder, stair or stacked space, ML-37 added from playability audit ES-05; 7 raised enemy positions) | ext MR MI-AG-02 | **MUST.** Every row now has a fallback. **ML-09** (EH-M4 shaft): flat landings joined by a per-flight climb interaction that places the player at the next landing's anchor, reusing EI-QS-06 placement through one small "place at anchor" action effect (current source places only on death; playability audit TD-04). **ML-17** (EH-M5 damper, melee-only path): the latch pulled from the floor at the ladder foot with the fire hook, same channel and time cost. Raised enemy positions: at grade at their foot with the package's cover |
 | EI-AG-03 | **Edge stops and push validation**: no push across a level change, into a slag pool, onto a primed plate, into a glass vent or a Surging zone away from a niche | Edge volumes with a bark; push target validation with edge tags on slag pools and plates (Enemies R-2) | SE, ZN | All arenas | = MR MI-AG-03 | MUST |
 
 ### 2.15 Skills and skill hooks
@@ -198,10 +198,11 @@ All five: not droppable, not sellable, removed by quest step (= MR MI-IT-01). Ve
 | EI-SK-02 | **Ranged as an optional hook with a time-cost alternative** | ESS damper (shoot ~12 paces, or climb); GD sets the level | GD | ESS S04 | MUST (CDR-2) |
 | EI-SK-03 | Mining, Leatherworking, Cooking, Fletching intros | Standard gathering and crafting | SE, IT | EFS, EST, ESH, EWQ, EGA S01 | SHOULD |
 | EI-SK-04 | **Quest-start skill requirements** where a side quest names one | Standard requirement check with a decline line | SE, SCE | Per side package | SHOULD. Fallback: the giver asks the player to come back |
+| EI-SK-05 | **Below-level rule for a dialogue-chosen skill route** (playability audit EM-06) | A skill-route option chosen in dialogue (`ECW-D7.03` "I'll make it"; `EAC-D9.01` "(Forge a drift…)") is shown only when the player meets the step's `[GD]` level; below it, the speaker gives the standard decline line (as EI-SK-04) and the time-cost option stays offered. Routes chosen by action (EEH S02, EGH S03, ESS S04, EGA S03) are unaffected. No new content | SE, SCE | ECW S05; EAC S06 | MUST |
 
 ### 2.18 Encounter runtime rows from the Enemies file (crosswalk)
 
-The Enemies file (§15) lists fourteen runtime rows and adds no new need. Each maps to a row here or is a standard combat capability owned there.
+The Enemies file (§15) lists fifteen runtime rows. Two rest on capabilities current source does not demonstrate (playability audit TD-01, TD-05): re-arming hazards (R-9, R-11) and mobile pursuit (R-15). Each maps to a row here or is a standard combat capability owned there.
 
 | Enemies row | Need | Here | Status |
 |---|---|---|---|
@@ -213,12 +214,13 @@ The Enemies file (§15) lists fourteen runtime rows and adds no new need. Each m
 | R-6 | Phase gate (Draw Sentinel 65% while a collar is open) | EI-EN-03 | Standard |
 | R-7 | Health-triggered encounter events | Enemies-owned | Standard |
 | R-8 | Interruptible wind-up | Enemies-owned | Standard |
-| R-9 | Heat hazard volumes, niches, timed vents | EI-HT-03, EI-HT-05 | Standard |
+| R-9 | Heat hazard volumes, niches, timed vents | EI-HT-03, EI-HT-05 | **NEW: ext LM (re-arm)** (TD-01) |
 | R-10 | Hazard clamp (25%, pending GD) | EI-HT-03, EK-6 | Standard |
-| R-11 | Step-triggered state hazards (plates) and sequenced line hazards | EI-HT-05 | Standard |
+| R-11 | Step-triggered state hazards (plates) and sequenced line hazards | EI-HT-05 | **NEW: ext LM (re-arm)** (TD-01) |
 | R-12 | Non-targetable people; containment hazard round an NPC | EI-HT-06, EI-EN-05 | Standard |
 | R-13 | Heat-state schedule | **EI-HT-01** | Bible new need; fallback in use |
 | R-14 | Staged pressure | **EI-PR-01** | Bible need; fallback form |
+| R-15 | Mobile pursuit | Enemies-owned | **Not demonstrated**; = LM / MR (build once) (TD-05). Fallback: anchored enemies whose range covers the arena with no rim spot outside it; charges as re-arming line hazards from the anchor |
 
 Also from the Enemies file: the 5-hostile set-piece cap (C-12, EI-EN-09 below), frame names by family (C-8), and its avoided list (no meter, stamina, stealth, cold damage, burn or blind status, falls, downed state or co-op-only mechanic), which this file adopts unchanged.
 
@@ -279,6 +281,8 @@ Fourteen flags, fourteen writers, no second writer found. No package writes an `
 |---|---|---|
 | `ECW_SHORTFALL_SEEN` | ECW S03 | EWA; EGA S08 |
 | `ECW_SEAT_RING` (self / crew) | ECW S05 | ESK; ESR |
+| `ECW_RAT_SEEN` | ECW exit event after completion (`ECW-B9.6`) | ESS (`ESS-D5.03`, the Cinder Rat) |
+| `ECW_SOB_HEARD` | ECW S02 | ESS S03 (the Rat's price; the Act II header and ESS `S03` read it) |
 | `EDS09_SEEN` | EDS09 inspect | ENW |
 | `EEH_MENDING_BOOK` | EEH | EST |
 | `EEH_CLASS_DONE` | EEH | ETB |
@@ -286,18 +290,25 @@ Fourteen flags, fourteen writers, no second writer found. No package writes an `
 | `EEH_MITTS` (self / maeryn) | EEH S02 | ESH |
 | `EEH_TAVI_LAUGHED` | EEH (`EEH-D6.41`) | EME09 |
 | `EEH_LEDGER_READ` | EEH S05 | ESS S04 (optional `ESS_STUDENTS_SEEN`) |
+| `EEH_TAVI_STRUCK` | EEH S06 | EGA (`EGA-D11.30`) |
 | `EGH_FLARECAP` | EGH S02 | EAC K2 bark; EFS |
-| `EGH_STONE_HEARD` | EGH S07 | EMS |
-| `EGH_SHEET_READ` | EGH S07 | ENW |
+| `EGH_STONE_HEARD` | EGH S07 | EMS; EAC (`EAC-D1`) |
+| `EGH_SHEET_READ` | EGH S07 | ENW; EAC (`EAC-D2.10`) |
+| `EGH_KEEP_SEEN` | EGH S07 | EGA (`EGA-I23`) |
+| `EGH_WORK_ORDER` | EGH S04 | ESS (`ESS-D4.03`) |
+| `EGH_ORDER_SHOWN` | EGH S08 (optional) | ESS (`ESS-D4.04`) |
+| `EGH_INITIATE_JOURNAL` | EGH (on `EGH_ROLL_READ`, S07) | **CV-M4** (the binding needs the name; R19) |
 | `EAC_BREATH` (asera / waited) | EAC S03 | ETB |
 | `EAC_MAERYN_SAID` | EAC S07 (optional) | EST; ETB |
 | `EAC_PLATE_READ` | EAC S03 | EGA (Veska's line) |
+| `EAC_SLATE_READ` | EAC S05 | EGA (`EGA-I22`) |
 | `ESS_SLIP_SEEN`, `ESS_ACCESS_READ`, `ESS_RECORD_READ`, `ESS_SERIX_HEARD` | ESS | EGT; EMS |
 | `ESS_RAT_PAID` | ESS S03 | EGA S02 (Rat's grille) |
+| `ESS_LETTER_READ` | ESS S03 | EGA (`EGA-I33`) |
 | `ESS_ELYNDRA_HEARD` (D-EL, ruled 2026-11-15) | ESS (`ESS-D12.40`, optional) | CV-M2/CV-M4 planning (request; flavour only, never a gate) |
 | `EGA_BOARD_BALANCED` | EGA S08 (`EGA-I28`) | EME10 balanced state |
 
-Deliberately read by none: `ECW_SOB_HEARD`, `EEH_LANTERNS_SEEN`, `EAC_EMBERLIGHT_SEEN`, `EST_COLD_BREATH`, `EMS_SILENCE`, `EGT_MURMUR_HEARD` (packages say so).
+Deliberately read by none: `EEH_LANTERNS_SEEN`, `EAC_EMBERLIGHT_SEEN`, `EST_COLD_BREATH`, `EMS_SILENCE`, `EGT_MURMUR_HEARD` (packages say so).
 
 **Quest-local flags by quest** (persist while Active; the packages list them in full): ECW_* (GALLERY, BROADSHEET_SEEN, SOB_HEARD, ORDER_READ, STUB_SEEN, PAGE_RECOVERED, SHORTFALL_SEEN, COUNTERSIGNED, SEAT_RING, RAT_SEEN); EEH_* (CLASS_DONE, MITTS, MENDING_BOOK, LANTERNS_SEEN, TAVI_LAUGHED, LENS_READ, LEDGER_READ, TAVI_STRUCK, THERYN_HEARD); EGH_* (nineteen, plus the derived `EGH_GATE_OPEN`); EAC_* (seventeen); ESS_* (eighteen, including `ESS_ELYNDRA_HEARD` (D-EL, optional, `ESS-D12.40`) and `ESS_DAMPER` shot / climbed); EGA_* (FROST, SUPPER, BLANKETS, FUSED_STEADIED, STAGE, RAT_GRILLE, BLEED_WORK, PLATES, BOOK_READ, HAND_MATCHED, DOORS_READ, COLLARS, DRAW_SHUT, THAW_SEEN, BOARD_BALANCED, LETTER_READ); side quests per their files.
 
@@ -380,7 +391,7 @@ Stated in the same words in Zones §14. The Enemies file governs every combat va
 | **EQ-03** | **Stale cross-region note.** Act I says `TH_STANDING` and `MR_STANDING` are "read only by side quests and EH-M6". No Emberholt package reads either; `MR_STANDING` appears only in the CV-M1 gate beside `EH_STANDING`. | Act I header; all packages | Harmless; Act I's sentence should drop both at its next edit. Resolved in package 2026-11-15 (Batch 4 encounter alignment review). |
 | **EQ-04** | **EH-M6 sets a flag before it is Active.** Act III sets `EGA_FROST` (the frost variant and the dusk pin) on Cinderwall entry while EH-M6 is Inactive, and S00 completes on accepting `EGA-D1`. A player who declines keeps a frost night with no Active quest. | Act III §6 trigger, §9 | Recommend: the entry trigger makes EH-M6 **Active** at `S00_frost` (as the Mire's MBL auto-start), so the pin belongs to an Active step. Question for Sol: can a quest auto-activate on zone entry (EI-QS-04)? Resolved in package 2026-11-15 (Batch 4 encounter alignment review). |
 | **EQ-05** | **Post-story heat with no schedule.** Act III §E.3 says heat runs on EI-HT-01 "or quest-pinned Working where the schedule is not built", and §E.9 uses "the day's schedule". After completion no pin exists (EK-9). | Act III §E.3, §E.9 | Use the Zones §6.1 default column as fixed data whenever EI-HT-01 is not built. Question for Sol (as Mire Q-03): is a fixed per-zone default table acceptable as data in the world-state system even if the schedule is never built? Resolved in package 2026-11-15 (Batch 4 encounter alignment review): Act III post-story heat uses the Zones §6.1 default table; §E.9 now relies on world pockets EW-01 and EW-02 (Enemies I-25), not a schedule. |
-| **EQ-06** | **Derived flag writer.** `EGH_GATE_OPEN` is written by a world rule, not a quest. | Act I §C12 | One writer (the rule). It must also be evaluated for a player who completed TF-M3 or MR-M2 before reaching Emberholt. |
+| **EQ-06** | **Derived flag writer.** `EGH_GATE_OPEN` is written by a world rule, not a quest. | Act I §C12 | One writer (the rule). It must also be evaluated for a player who completed TF-M3 or MR-M2 before reaching Emberholt. Not needed under the EI-QS-08 `any`/`anyCount` form (playability audit TD-13), which has no derived flag. |
 | **EQ-07** | **Post-completion write.** EMS `S07_mend` writes `EH_UNBURNT` (strained → kept) after EMS is Completed. Still one writer. If it happens after EH-M6, the tally board has already been seen. | Unburnt file | Acceptable: the board reads the flag at S08 only. EI-QS-10. |
 | **EQ-08** | **Channels interrupted by heat.** Today's build interrupts timed work on a hit; heat zones tick periodic damage on required channels. | `UNITY/README.md`; Acts I–III | EI-CA-03. Question for Sol: exclude hazard ticks from interruption, or require safe pads? |
 | **EQ-09** | **The ledger "reappears".** Act I says `EEH_ledger` reappears in EH-M6 and CV-M4 from Yorven's strongbox. It is removed at EEH S07. | Act I item table | Treat the reappearance as a world prop (inspect), never a re-granted item, so the budget stays at five. Confirm with the Act I author. Resolved in package 2026-11-15 (Batch 4 encounter alignment review). |
@@ -412,7 +423,7 @@ Open rulings already tracked elsewhere and not repeated: ED-1, ED-7, ED-15, ED-2
 ### 7.1 Build order inside the milestone (dependency order, not a schedule)
 
 1. EI-QS-01 to EI-QS-07, EI-FL-01 to EI-FL-03, EI-DG-01 to EI-DG-03, EI-IT-01 to EI-IT-05.
-2. Heat in its fallback form: EI-HT-02 pins, EI-HT-03 volumes and niches, EI-HT-04 tells, EI-HT-05 vents, the Zones §6.1 defaults as data, EI-CA-03.
+2. Heat in its fallback form: EI-HT-02 pins, EI-HT-03 volumes and niches, EI-HT-04 tells, EI-HT-05 vents, the Zones §6.1 defaults as data, EI-CA-03. EI-HT-03 and EI-HT-05 need the **new** hazard re-arm extension first (playability audit TD-01); it is not an existing capability.
 3. Vertical access per Zones §5A for the thirteen required rows (EI-AG-02), with ML-09 and ML-17 first.
 4. EI-PR-01 variant swap and EI-WV-01 frost; EI-EN-03 boss persistence.
 5. EI-QS-08 (or `EGH_GATE_OPEN`); EI-SG-01 (or per-door inspect).
@@ -456,3 +467,4 @@ These are written against the packages. None has been run. Each is a pass/fail s
 | **Batch 4 zones/integration review, 2026-11-15** | Independent review against the bible, Acts I–III, the four side-quest files, CDR-1 to CDR-6 (§3.7), the engineering handoff and `UNITY/README.md` (read-only). **Verified:** fourteen `EH_*` flags, one writer each, against every package; five quest items with matching gain and removal steps; fifteen presentation events, all present in the packages and none missing; no SX and no on-defeat hook; every co-op row optional assistance, none a solo prerequisite. **Fixed:** §1.1 Flood Kitchen wording (loft stairs unfinished; crates have flat access markers); the MUST convention now states that a MUST with no named fallback is met by the standard shared capability; fallbacks added to EI-QS-04, EI-HT-02, EI-HT-07, EI-HT-08, EI-KW-01, EI-KW-02; EI-CA-03 kept as a request to Sol with a standard fallback (niche-touching pads) and two options (exclude ticks; pause the segment instead of cancelling); EI-AG-02 recounted (37 rows; 13 required; 7 raised positions) with the new Zones fallbacks for ML-09 and ML-17, EQ-10, EQ-11 and EDI-4 updated to match; EQ-12's meanwhile rule reworded as a recommendation for Sol; EAT-15 labelled co-op-build only; §7.2 headed "authored, not run". EQ-01 resolved (bible aligned to Act II). **From the encounter review, verified in the packages and applied:** EQ-03, EQ-04, EQ-05, EQ-09 resolved in package; EI-QS-04 and EDI-3 now state EH-M6's auto-start; EQ-13 notes Enemies §12 (stairs and ladders are reach only once Zones §5A builds them; EAC-E3 frame follows onto rim or gallery); §E.9 relies on world pockets EW-01 and EW-02. **Left for the Director:** EDI-1, EDI-2, EDI-3, EDI-4 stay questions. |
 | **Emberholt character rulings, 2026-11-15** | D-E2: `EH_THALAN` row one value (`freed`); EI-ES-01, EAT-18 de-tagged; simplification note under §6 (enum, `aided` keys, chair variant and swap keys dropped). D-S1: EI-IT-04 and the flag row de-tagged. ED-3: `[INITIATE]` → Iven Calder in EI-DG-03/04, EI-IT-02 (journal copy carries no gloss). D-EL: noted in the header; no new requirement. No EK/EAT row tested both Thalan outcomes. |
 | Independent review of character rulings, 2026-11-15 | `EH_THALAN` writer corrected from "EH-M4 S06" to EAC completion (S07, `EAC-D11.40`), matching §6 and bible §9.1; `ESS_ELYNDRA_HEARD` registered in §3.2 and the ESS_* count (seventeen → eighteen). |
+| Playability audit fixes, 2026-11-15 | Playability audit fixes, 2026-11-15: EM-01, EM-03, EM-04, EM-05, EM-06 (EI-SK-05), EM-07 (part: EI-QS-11 scope), EM-10, EM-11, ES-01, ES-03, ES-05 (EI-AG-02 count), ES-06, CO-01, TD-01, TD-04, TD-05, TD-06, TD-07, TD-10, TD-11, TD-13. |

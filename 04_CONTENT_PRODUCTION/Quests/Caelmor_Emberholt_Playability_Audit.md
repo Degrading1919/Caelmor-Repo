@@ -346,7 +346,72 @@ Also untestable: every co-op behaviour (credit, reconnection, host departure, pa
 
 ## 9. Fix log
 
-No fixes applied yet; all findings open. Bounded fixes follow in a separate pass.
+Bounded fixes applied 2026-11-15 in two passes split by file ownership (Fixer 1: Acts I–III, their dialogue and the bible; Fixer 2: the four side-quest files, Enemies, Zones and Integration). A finding split across both owners appears in both tables. D and E items, and C items needing an architecture choice by Sol, were not applied and stay open. Each changed file carries a review-log row "Playability audit fixes, 2026-11-15".
+
+**Fixer 1 (main acts, dialogue, bible)**
+
+| ID | Status | Files | What changed or why skipped |
+|---|---|---|---|
+| EM-02 | applied | Act II | §A7 Death and §A11 Death/Logout: after `EAC-D9.42` respawn/logout at the shaft-foot niche (K2) with no Thalan; Thalan rejoins only before `.42`. |
+| EM-05 | partly | Act I | §A9.2 `ECW_SOB_HEARD` "None (deliberately)" corrected to EH-M5 `ESS-D5`. Integration §3.2 rows are Fixer 2's. |
+| EM-09 | applied | Act II Dialogue | `ESS-D12.01` gains `[ESS-D12.10 or ESS-D12.20 heard] "(Leave her to the vent.)" → ESS-D12.40`. |
+| ES-08 | applied | Bible | §8.1 R09/R12 seed cells drop *The Half-Name Wall* / *Glassmoth's Tonic*; "Deepens after payoff" note added under the table. |
+| ES-09 | applied | Bible | §6 Skill hooks and ED-11: "two side quests" -> "several side quests (ESK, EOM, ESR, ETB, ENW, ECC)". |
+| CO-04 | partly | Act III | §7.1.4 co-op row: "recorded as kept for each partner" sentence replaced; collar counts only for the shutter, `EGA_COLLARS` persists own shuts only. Enemies §6.1 is Fixer 2's. |
+| CO-09 | applied | Act I | §A11 co-op row: "warden's hand ... end table" sentence deleted. |
+| ES-01 | partly | Act III | §9.3: hour-pin scope rule added (EGA pin governs only EGA steps and frost-variant areas; side steps there held until `EGA_THAW_SEEN`; keep watch elsewhere advances; EDI-3 open). Side files §0.5 and Zones §7 are Fixer 2's. |
+| CO-03 | partly | Act I, Act II | `S06_surge`, `S06_circle`, `S04_sleep_rooms` "all defeated" made per player (own condition ended, no form engaged). Enemies I-20 note is Fixer 2's. |
+| CO-01 | partly | Act I, Act II | Act I: EGH `S06`-`S07` mouth barricade prop deleted (and its §C runtime row); Yorven bark kept as a bark volume on the player's own step. Act II: post-EAC barricade is a turn-back volume (`EAC-B9.5`) on each player's own EAC state, never a blocker for a partner; prop presentation only. Zones EP07/EP13 and Integration EI-PP-03 are Fixer 2's. |
+| TD-10 | partly | Act I | Conventions "Carry-state objects": documents and tokens are possession flags (kept across death/logout, no movement or attack limit; EI-CA-04 small class). Integration EI-CA-04 is Fixer 2's. |
+| ES-03 | skipped | — | Checked my files: Act III blankets and Act II ewer are bulky "walk, cannot attack", consistent with the proposed classes; the fix lives in EI-CA-04 (Fixer 2). |
+| ES-13 | skipped | — | Fix is in Unburnt (drop citation); adding the line to Bible §8.2 is the Director's option. |
+| EM-07 | skipped | — | Sol (EI-QS-11) / Director (respawn alternative). |
+| EM-08 | skipped | — | GD tuning; audit proposes no content change. |
+
+**Fixer 2 (side quests, Enemies, Zones, Integration)**
+
+| ID | Status | Files | What changed or why skipped |
+|---|---|---|---|
+| EM-01 | applied | Zones, Integration | HZ-09/EI-HT-07 -> S02 (G4 pin); HZ-10/ML-05b -> S03 (drain); verified against Act I S02_mouth/S03_fall table. |
+| EM-02 | applied (my part) | Zones | §6.6 EH-M4 row: after EAC-D9.42 respawn/logout at shaft-foot niche, no Thalan. Act II part is Fixer 1. |
+| EM-03 | applied | Integration | EI-ES-01 + EI-QS-06: under fixed-point fallback Thalan waits at last escort stop; no rejoin after D9.42. |
+| EM-04 | applied | Integration | Tavi (EEH S03) added to EI-ES-01 with take-hand fallback; Veska ECW S01, Darven EGH S02-S03, Yorven EGH S06-S07 added to EI-ES-02. |
+| EM-05 | applied (my part) | Integration | §3.2 rows added (ECW_RAT_SEEN, ECW_SOB_HEARD, EGH_WORK_ORDER/ORDER_SHOWN/KEEP_SEEN/INITIATE_JOURNAL, EAC_SLATE_READ, ESS_LETTER_READ, EEH_TAVI_STRUCK; EAC readers on SHEET/STONE); ECW_SOB_HEARD removed from "read by none". Act I §A9.2 note is Fixer 1. |
+| EM-06 | applied | Integration | New EI-SK-05 below-level rule (option shown only at level; decline line; time-cost stays). |
+| EM-07 | partly | Integration | EI-QS-11 scope note: keep for EGA S06 only, proposed MUST for Sol to confirm; priority not changed (Sol); respawn alternative is Director. |
+| EM-08 | skipped | - | GD tuning, no content change proposed. |
+| EM-09 | skipped | - | Act II dialogue, Fixer 1's file. |
+| EM-10 | applied | Integration | EI-IT-01 note: world prop in EH-M6 (inspect only), never re-granted. |
+| EM-11 | applied | Integration | EI-KW-01 consumers added. |
+| EM-12 | applied | Zones | §6.6 EH-M2 aligned to Act I §B7. |
+| ES-01 | applied (my part) | 4 side files, Zones §7, Integration EI-KW-02 | Shared frost rule: EGA pin scoped to EGA steps/frost areas; side steps there held to EGA_THAW_SEEN; EDI-3 open. Act III §9.3 is Fixer 1. |
+| ES-02 | applied | Unburnt | EGT held under frost rule (opens at EGA_THAW_SEEN; unlock predicate unchanged to match Act II); "before dusk" deleted from S01 (2 places). |
+| ES-03 | applied (my part) | Integration, 4 side files, Zones | EI-CA-04 bulky/small classes + lent tool; EWQ crossbow = lent tool; EMS stub = EMS_RECEIPT flag only; class note in each side file's rules. |
+| ES-04 | applied | Enemies | EW-03 Ash Roads pocket opens after EH-M1. |
+| ES-05 | applied | Zones, Integration | New ML-37 (EBL S04 post ladder) with standing-interaction fallback; §5A and EI-AG-02 counts updated (38 rows, 14 required). |
+| ES-06 | applied | Integration EI-KW-02, Zones §7, side-file rule | Hour pin applies only inside the quest's step volume. |
+| ES-07 | applied | Zones | §7 ECN N8 -> dusk. |
+| ES-10 | skipped | - | D. |
+| ES-11 | applied | Commons | EBL S06 no longer waits for morning (beat text + EBL-D5.01 stage note). |
+| ES-12 | applied | Commons | ESR S02: elder and glasswright at gate yard every hour while S02 Active. |
+| ES-13 | applied | Unburnt | EST.3 "(bible §8.2)" citation dropped. |
+| CO-01 | applied (my part) | Integration EI-PP-03, Zones EP07/EP13/§6.5, Enemies l.536 | EGH mouth barricade deleted; post-EAC barricade -> per-player turn-back bark volume. Act I/II parts Fixer 1. |
+| CO-02 | applied (rule only) | Enemies §6.1 | EGA-E4 spawns from each partner's own S06; family choice left to Sol. |
+| CO-03 | applied (my part) | Enemies §13, I-20 | Per-player "all defeated" reading noted as predicate question. Act I/II predicates Fixer 1. |
+| CO-04 | applied (my part) | Enemies §6.1 | "recorded as kept for each partner" sentence replaced; EGA_COLLARS acting player only. Act III part Fixer 1. |
+| CO-05 | applied | Unburnt | §0.6 shared-task credit sentence and EST/ETB/ENW/EGT credit sentences deleted. |
+| CO-09 | skipped | - | Act I, Fixer 1's file. |
+| TD-01 | applied | Integration, Enemies | EI-HT-03/05, R-9, R-11 relabelled "ext LM (new: re-arm)" as NEW requirement; header and build order step 2 note; form left to Sol. |
+| TD-02 | skipped | - | No change proposed (keep request as is). |
+| TD-03 | applied | Zones §5A | Recommended slope/flattened fallback note; Sol's choice stands. |
+| TD-04 | applied (text) | Zones ML-09/ML-17, Integration EI-AG-02 | "adds no runtime need" -> one small "place at anchor" action effect. Sol ask itself not decided. |
+| TD-05 | applied | Enemies §15, Integration crosswalk | New R-15 mobile pursuit, not demonstrated, with anchored fallback. |
+| TD-06 | applied | Integration EI-ES-01, Combat EAD S06 | Escort fallback predicate "player enters H1; Myr placed". |
+| TD-07 | applied | Integration EI-ES-02 | Placement by step or flag only. |
+| TD-10 | applied | Integration EI-CA-04, Unburnt, Zones | Documents/tokens as possession flags; EMS "blocks sprint" dropped. |
+| TD-11 | applied (respawn part) | Integration EI-QS-06 | Cites RespawnRegion; logout placement left to Sol. |
+| TD-13 | applied | Integration | Recommended simplified forms added to EI-QS-03/04/08/11/12, EI-FL-04, EI-DG-05, EI-HT-01/06/08, EI-CA-02, EI-WV-01, EI-SG-01, EQ-06; no priority labels changed; ED-7 stays open. |
+| TD-14 | skipped | - | E. |
 
 ---
 

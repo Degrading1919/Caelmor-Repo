@@ -86,13 +86,14 @@ No quest repeats a milestone's primary verb or strange moment (checked against E
 
 - **Address.** Cinderwall NPCs, Veska, Hennet, Yorven and Odile say "warden's hand" (bible §5.3 rule 8); Embergate strangers in ESR say "traveller" until they have heard. Origin-neutral (D-3).
 - **Tells and heat.** `EH_TELLS` is always true here (EH-M1 gates every quest). Each step pins the heat states it needs (bible §9.2; EI-HT-01 fallback). Waiting in a niche or at a keep-watch bench is always available.
+- **The EH-M6 frost (playability audit ES-01).** The EGA hour pin (`EGA_FROST`: dusk until EGA `S01`, night from `S02` to the `S06` keep watch) governs only EGA steps and the frost-variant areas (Cinderwall W1 to W4 and the upper Undercroft). A side step placed in those areas is held while `EGA_FROST` is set and resumes at `EGA_THAW_SEEN`, as EME01 and EME05 already do. Keep watch anywhere else advances this player's hour normally. Any other quest's hour pin applies only to keep watch inside that quest's own step volume (ES-06). EDI-3 (EH-M6 auto-activation) stays open.
 - **Skill steps** list their alternative in the beat; the alternative is still play and costs a turn, a share or skill XP, never the quest.
 - **Combat.** Every enemy is defeated at 0 HP with the ordinary defeat presentation (CDR-1); none yields, flees, scatters or breaks off; no SX. Every fight accepts melee or ranged and requires neither (CDR-2) and is solo-tuned (CDR-6). No defeated enemy speaks after a fight or carries evidence (rulings §3.2).
 - **Non-combatants.** Every named person in this file, every child, every Cinderwatch officer and every Slagside resident is never targetable.
 - **Evidence and revelations.** Nothing here is evidence for a revelation; the steam, the slag mirror, the lamp ripple, the bell and the warm marks prove nothing. The tally board's "old leaks" is mentioned once as weather and is not explained or reduced (EH-M6 owns it). No Deepbrand or "below" presence. ECN's pit lot are shown only as pipe-strippers (bible §10) and are given no affiliation: the dossier calls the Dross scavengers "clandestine Remnant scavengers", and nothing here confirms or denies it (no line says what they are not). EBL's bell is a warden's knot (the Part 3 deep-works reading is not used).
 - **Reserved decisions.** No node depends on D-E2, D-S1 or the initiate's name (Iven Calder, ED-3), all ruled 2026-11-15, or on D-3, C07 or the "invaders" wording. Nodes naming the EH-M1 valve order, Sarne Ardane, Ralenne's scene or the EH-M1 choice wording are tagged **`[ALLOCATION]`** (bible §3.1). No Volkhari person appears (D-C06); no precursor name, roster or casualty count (D-C03).
 - **Time.** No calendar dates; the past is dated by events ("the cold-ward nights", "the winter the gate culvert froze", "the year the gate was rebuilt").
-- **No failure.** Inactive / Active / Completed only. Death respawns at the quest's named safe point with step, flags and kept progress intact; logout restores the last persisted step and returns a dropped carry-state object to its source; walking away keeps the quest Active with the resume hook named in each package; missed moments re-offer on the next keep watch.
+- **No failure.** Inactive / Active / Completed only. Death respawns at the quest's named safe point with step, flags and kept progress intact; logout restores the last persisted step and returns a dropped carry-state object to its source; walking away keeps the quest Active with the resume hook named in each package; missed moments re-offer on the next keep watch. **Carry-state classes (Integration EI-CA-04; playability audit ES-03):** small documents and tokens are possession flags that never limit movement or attack and are kept across death and logout; only bulky loads (walk, cannot attack) return to their source.
 - **Co-op (CDR-6).** Each player's own quest state decides their own tells, valves, props, steps and choices. Shared enemies credit a partner only when the partner's own active step consumes the defeat. A partner who leaves or is ahead never blocks the other. Shared prop presentation is a fallback only (bible §9; MI-CO-06 pattern). No step needs two players.
 
 ### 0.6 Flags set and read
@@ -1063,7 +1064,7 @@ EFC-D6.21 HENNET: "Sit down, warden's hand. You're running hot."   {set EH_COMMO
 
 The step completes on the middle notch held through one peak (~10 s).
 
-**Beat 6: Keep or Give Back (`S06_decide`).** *Objective: Decide what the bell is for.* At the post at morning: Agathe, Veska, Wim, a few of the lane (`EBL-D5`). The choice (EBL.8) sets `EBL_BELL`. In both outcomes Veska writes on Wim's docking slate at the forge gate (*Bell was the main's. Not his.*) and the gatekeeper wipes the docking; Agathe rubs *DRUNK* off her post herself. Quest Completed.
+**Beat 6: Keep or Give Back (`S06_decide`).** *Objective: Decide what the bell is for.* At the post straight after `S05`, with no wait for morning (playability audit ES-11): Agathe, Veska, Wim, a few of the lane (`EBL-D5`). The choice (EBL.8) sets `EBL_BELL`. In both outcomes Veska writes on Wim's docking slate at the forge gate (*Bell was the main's. Not his.*) and the gatekeeper wipes the docking; Agathe rubs *DRUNK* off her post herself. Quest Completed.
 
 ### EBL.5 The bell (presentation spec: unease)
 
@@ -1169,7 +1170,7 @@ EBL-D3.01 VESKA: (the player describes the knot; she is already nodding) "Warden
 EBL-D3.02 VESKA: "Junction shut, the branch backing up behind it, nobody awake. We tied the relief to the bell so a lift would wake us." (beat) "Then the ward came back. Nobody untied it. I didn't."
 EBL-D3.03 VESKA: "Nights now, the ward banks its hearths and draws least. Branch peaks. Relief lifts. Bell rings." (beat) "That's your bell. That's your drunk."
 EBL-D3.04 VESKA: (chalks her slate) "Come on. I'll show you where the weight goes. You'll read it, not me."   → end
-EBL-D5.01 AGATHE: (at the post, morning) "Stay's in. Weight's right. Now what? Is it my bell or the pipe's?"
+EBL-D5.01 AGATHE: (at the post) "Stay's in. Weight's right. Now what? Is it my bell or the pipe's?"
 EBL-D5.02 VESKA: "Keep the line on and it'll only ring if she really backs up. Or untie it and she vents to the duct, like she should, and nobody hears."
 EBL-D5.04 [EBL_STAY = self] AGATHE: "And that stay's crate-oak. It'll outlast me. Don't say anything."
   > "Keep the line on. If the bell rings by itself, it's the main."  → EBL-D5.10 {EBL_BELL = kept}
@@ -1263,7 +1264,7 @@ EBL-D5.20 VESKA: (to the forge gate, chalking Wim's docking slate) "Bell was the
 
 **Beat 1: The Plate Read (`S01_plate`).** *Objective: Read the bridge's plate.* Inspect the plate (`ESR-I1`). Ludo Ferrant arrives (`ESR-D2`): the Hall rebuilt the bridge after the war and has its name on it "rightly"; he does not mind marks being read.
 
-**Beat 2: Seven Marks (`S02_marks`).** *Objective: Find the seven marks and who left them.* Any order. Each mark is an inspect; each needs its **match** (a witness line or a record inspect). The step completes when all seven are found and six matched (the X has no match by design).
+**Beat 2: Seven Marks (`S02_marks`).** *Objective: Find the seven marks and who left them.* Any order. Each mark is an inspect; each needs its **match** (a witness line or a record inspect). The step completes when all seven are found and six matched (the X has no match by design). The carters' elder (match 3) and the glasswright (match 4) both stand at the gate yard at every hour while `S02` is Active (playability audit ES-12).
 
 | # | Mark (where) | Layer it marks | Match |
 |---|---|---|---|
@@ -1431,3 +1432,4 @@ Every need above is a standard system already used by the Emberholt act packages
 | Batch 4 encounter alignment review, 2026-11-15 | Applied Enemies file PE-15: ECN-E1's Shove and ECN-H1 now say no knock-back ends inside a slag pool (Enemies C-2, authored tuning pending the Gameplay Designer). The ECN-E1 lean-to roof's ladder access depends on Zones ML-34 (ramp or at-grade slinger in a flat build). No id, step, flag or line changed. |
 | Emberholt character rulings, 2026-11-15 | Reserved-decision notes (§0, review summary) updated: D-E2, D-S1 and ED-3 ruled; `[INITIATE]` placeholder replaced by Iven Calder (not used in any node). No node, flag or line changed; no Thalan, Speaker-knowledge or Elyndra content here. |
 | Director review pass, 2026-11-15 | ESR bridgework elder Hallam Calder renamed **Hallam Drost** so no Emberholt NPC shares a surname with Iven Calder (ED-3); "Drost" grepped clean across 04_CONTENT_PRODUCTION, LORE and 00_ADMIN. |
+| Playability audit fixes, 2026-11-15 | Playability audit fixes, 2026-11-15: ES-01, ES-03, ES-11, ES-12. |
