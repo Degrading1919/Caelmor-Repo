@@ -371,6 +371,7 @@ LORE\Worldbuilding Docs/
     - Caelmor_War_History.md
 MEDIA\Concept Art/
 MEDIA\Maps/
+    - Lowmark_Blockout/Lowmark_Blockout_Planning_Map.svg, .png, .md (true-scale blockout sheet; generator CODE/Scripts/terrain_generation/build_blockout_planning_map.py)
 MEDIA\Materials/
     - Original material masters, reusable painting templates, package source, and Procreate handoff evidence
 MEDIA\Reference Images/
