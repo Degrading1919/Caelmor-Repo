@@ -26,6 +26,8 @@ The script uses Blender 5.0.1. Omit `--optix` for CPU Cycles. `--draft` writes w
 
 ## Verification and visual assessment
 
+The [Unity standalone performance assessment](PERFORMANCE.md) covers the imported buildings, roof variants, scatter and texture settings.
+
 The saved scene reopened in Blender 5.0.1 with its relative image paths resolved. All three native body validations pass. The roofs contain **3,625 modeled shingles** and the scene fits **27 closed panes**. The placement audit found **217,621 ground-cover instances** across 420 batches, including 192 yarrow and 565 selfheal instances. It found zero roots inside the three walk treads or the thirteen building, stair and boundary-wall clearance proxies. Scrub farther back uses the existing Lowmark leaf cutouts attached to scene-authored branch clusters.
 
 - **Bindings.** No visible mesh has a missing material slot or an unresolved texture path. The three Brookoak image hashes match the Riven Bake files. Ridge caps use the approved longitudinal wood surface. Concealed roof-course bedding retains the generator's solid Brookoak tone. Crossbars and door fittings are native modeled parts with the approved iron shader.

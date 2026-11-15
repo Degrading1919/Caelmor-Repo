@@ -14,3 +14,5 @@
 /Assets/_Project/Core/Plugins/*.pdb
 /Assets/_Project/Core/Plugins/*.dll.meta
 /Assets/_Project/Core/Plugins/*.pdb.meta
+/Assets/__LowmarkPerformance/
+/Assets/__LowmarkPerformance.meta

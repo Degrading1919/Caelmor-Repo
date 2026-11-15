@@ -19,7 +19,7 @@ namespace Caelmor.Unity.Editor
     /// <summary>Offline GLB adaptation around Unity's glTFast. Never opens or saves a world scene.</summary>
     public static class ArchitectureImport
     {
-        public const string Root = "Assets/_Project/World/Architecture";
+        public static string Root { get; internal set; } = "Assets/_Project/World/Architecture";
         public const string ImporterVersion = "CaelmorArchitectureImport/1";
         public static string Repository => Path.GetFullPath(Path.Combine(Application.dataPath, "../.."));
         static readonly HashSet<string> AllowedAlpha = new HashSet<string> { "OPAQUE", "MASK" };
@@ -109,6 +109,13 @@ namespace Caelmor.Unity.Editor
                 normalized["images"] = new JArray(texturePaths.Select(p => new JObject { ["uri"] = RelativeUri(directory, p) }));
                 for (int i = 0; i < texturePaths.Length; i++) normalized["textures"][i]["source"] = i;
                 foreach (var token in normalized["materials"]?.SelectTokens("$..texCoord").ToArray() ?? Array.Empty<JToken>()) token.Replace(new JValue(0));
+                // The saved adapter materials own texture transforms. Keep the
+                // transient glTFast materials within its UV0 import contract.
+                foreach (var property in normalized["materials"]?.SelectTokens("$..extensions").OfType<JObject>().ToArray() ?? Array.Empty<JObject>())
+                    property.Remove("KHR_texture_transform");
+                foreach (string list in new[] { "extensionsUsed", "extensionsRequired" })
+                    if (normalized[list] is JArray extensions)
+                        foreach (var extension in extensions.Where(t => (string)t == "KHR_texture_transform").ToArray()) extension.Remove();
                 transaction.Write(visualPath, visual.Write(normalized), true); owned.Add(visualPath);
                 transaction.Write(colliderPath, File.ReadAllBytes(collisionPath), true); owned.Add(colliderPath);
                 string metadataPath = directory + "/source.caelmor.json";
@@ -269,7 +276,8 @@ namespace Caelmor.Unity.Editor
         {
             var json = data.Json;
             Require((string)json["asset"]?["version"] == "2.0", "Only glTF 2.0 is supported.");
-            Require(json["extensionsUsed"] == null || !json["extensionsUsed"].Any(), "Resolve glTF extensions (including texture transforms) before this bounded architecture import.");
+            Require(json["extensionsUsed"] == null || json["extensionsUsed"].All(e => (string)e == "KHR_texture_transform"), "Resolve unsupported glTF extensions before this bounded architecture import.");
+            Require(json["extensionsRequired"] == null || json["extensionsRequired"].All(e => (string)e == "KHR_texture_transform"), "Resolve required glTF extensions before import.");
             Require(json["skins"] == null && json["animations"] == null, "Static architectural exports only.");
             Require(json["scenes"]?.Count() == 1 && json["scenes"][0]["nodes"]?.Count() == 1, "One building root in one exported scene is required.");
             string[] names = json["nodes"].Select(n => (string)n["name"]).ToArray();
@@ -286,6 +294,14 @@ namespace Caelmor.Unity.Editor
                 Require(material["occlusionTexture"] == null || (int?)material["occlusionTexture"]?["index"] == (int?)material["pbrMetallicRoughness"]?["metallicRoughnessTexture"]?["index"], "Separate occlusion texture requires explicit adapter support.");
                 Require(material["occlusionTexture"] == null || ((int?)material["occlusionTexture"]?["texCoord"] ?? 0) == ((int?)material["pbrMetallicRoughness"]?["metallicRoughnessTexture"]?["texCoord"] ?? 0), "Independent occlusion UV requires explicit adapter support.");
                 foreach (var uv in material.SelectTokens("$..texCoord")) Require((int)uv >= 0 && (int)uv <= 3, "PBR adapter supports original UV0 through UV3.");
+                foreach (var extension in material.SelectTokens("$..KHR_texture_transform"))
+                {
+                    Require(extension is JObject && ((JObject)extension).Properties().All(p => p.Name == "scale" || p.Name == "offset"),
+                        "Only positive scale and offset texture transforms are supported.");
+                    foreach (string key in new[] { "scale", "offset" })
+                        Require(extension[key] == null || (extension[key] is JArray pair && pair.Count == 2 &&
+                            pair.All(v => float.IsFinite((float)v) && (key != "scale" || (float)v > 0))), "Invalid texture transform.");
+                }
             }
         }
 
@@ -357,6 +373,17 @@ namespace Caelmor.Unity.Editor
                     if (texture == null) return;
                     material.SetTexture(prop, AssetDatabase.LoadAssetAtPath<Texture2D>(textures[(int)texture["index"]]));
                     material.SetFloat(uvProp, (int?)texture["texCoord"] ?? 0);
+                    var transform = texture["extensions"]?["KHR_texture_transform"];
+                    if (transform != null)
+                    {
+                        var scale = transform["scale"];
+                        var offset = transform["offset"];
+                        var repeat = scale == null ? Vector2.one : new Vector2((float)scale[0], (float)scale[1]);
+                        // glTF's top-origin UV offset to Unity's bottom-origin UV.
+                        var translation = offset == null ? Vector2.zero : new Vector2((float)offset[0], (float)offset[1]);
+                        material.SetTextureScale(prop, repeat);
+                        material.SetTextureOffset(prop, new Vector2(translation.x, 1 - repeat.y - translation.y));
+                    }
                 }
                 Bind(pbr?["baseColorTexture"], "_MainTex", "_BaseUv");
                 Bind(pbr?["metallicRoughnessTexture"], "_OrmTex", "_OrmUv");

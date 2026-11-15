@@ -1,0 +1,39 @@
+Standalone fixture verification
+Unity 6000.5.5f1 Windows Development players, D3D11, 1920 x 1080
+Ryzen 9 270, RTX 5070 Laptop GPU, driver 32.0.16.1742
+
+Baseline import and shared material assets
+CAELMOR_PERF_IMPORT farmhouse_86 triangles=85768 renderers=30 textures=18
+CAELMOR_PERF_IMPORT cottage_95 triangles=38264 renderers=21 textures=18
+CAELMOR_PERF_IMPORT workshop_82 triangles=43308 renderers=18 textures=18
+CAELMOR_PERF_SHARED 608589150138be54ae7f7ee5ce4809bfdd49c477b5ed9e92f88b308959ab6d35 | ea5cbd078d96a55954b6513c27713fa37b283bbf40e1146f7ed9c25929574a18 | 710b19882361fdc895f46a02cd50dc7e4945c009d716b67331a7e5c1a48ccf80 | 78975721d3a7bcdd2b62200881e46e41ecefcaf03148eafc5d1ab19fb1fee0f1 | dc783a10515715f4a93103e05865a9d8d96270609a3265cc54fd8608ba375006
+CAELMOR_PERF_IMPORT farmhouse_0 triangles=77428 renderers=29 textures=21
+CAELMOR_PERF_IMPORT cottage_0 triangles=34224 renderers=20 textures=21
+CAELMOR_PERF_IMPORT workshop_0 triangles=38080 renderers=17 textures=21
+CAELMOR_PERF_IMPORT farmhouse_50 triangles=83934 renderers=30 textures=21
+CAELMOR_PERF_IMPORT cottage_50 triangles=37380 renderers=21 textures=21
+CAELMOR_PERF_IMPORT workshop_50 triangles=42204 renderers=18 textures=21
+CAELMOR_PERF_IMPORT farmhouse_100 triangles=85918 renderers=29 textures=21
+CAELMOR_PERF_IMPORT cottage_100 triangles=38268 renderers=20 textures=21
+CAELMOR_PERF_IMPORT workshop_100 triangles=43448 renderers=17 textures=21
+CAELMOR_PERF_BUILT baseline
+
+baseline  1920 measured frames  CAELMOR_PERFORMANCE_COMPLETE
+Streaming enabled: False; streaming textures: 0; instancing supported: True
+optimized  384 measured frames  CAELMOR_PERFORMANCE_COMPLETE
+Streaming enabled: True; streaming textures: 33; instancing supported: True
+resident  384 measured frames  CAELMOR_PERFORMANCE_COMPLETE
+Streaming enabled: False; streaming textures: 33; instancing supported: True
+nomips  384 measured frames  CAELMOR_PERFORMANCE_COMPLETE
+Streaming enabled: False; streaming textures: 0; instancing supported: True
+
+CAELMOR_GAMEPLAY_CHECKS_PASSED: authority, click paths, obstacle avoidance, retarget, invalid/unreachable destinations, cancellation, normalized movement, walk/sprint, lifecycle, residency, reach, target, LOS, collision, committed events
+CAELMOR_GAMEPLAY_CHECKS_PASSED: authority, click paths, obstacle avoidance, retarget, invalid/unreachable destinations, cancellation, normalized movement, walk/sprint, lifecycle, residency, reach, target, LOS, collision, committed events
+CAELMOR_SCENE_OWNERSHIP_CHECKS_PASSED: configured scene selection, saved additive scenes/terrain/artist material/transform preservation, executed explicit owned regeneration and native fixture validation, dirty validation/generation/build refusal, modified fixture and unsaved material/GUID conflicts, unchanged tracked technical fixture
+CAELMOR_ARCHITECTURE_VALIDATION_PASSED checks=13101
+CAELMOR_ARCHITECTURE_PERSISTENCE_PASSED checks=13075
+CAELMOR_ARCHITECTURE_PLAYER_BUILT bytes=211667318 seconds=15.216
+CAELMOR_ARCHITECTURE_PLAYER_PASSED renderers=307 colliders=45 shared_instances=2
+Settlement full and merged capture SHA-256 8FA21913E07E6166CBD8C371BD91444C740B38509FAB3FF3E64FFC6759BE9A1A
+Materials full and merged capture SHA-256 591F5F4E15D79F1076A7CB56EDA6BCDB70C5E18F6B0C980AADE1FC1E5084F534
+Fresh Blender 5.0.1 export completed with 41 inputs. All 12 roof metadata rows and camera parameters matched the measured export.

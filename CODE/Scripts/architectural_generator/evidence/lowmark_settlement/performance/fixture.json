@@ -1,0 +1,253 @@
+{
+  "farmhouse_86.glb": {
+    "shingles": 1661,
+    "roof_triangles": 12136,
+    "source_detail": 86,
+    "approximated_specular_factors": {
+      "Lowmark Planked Oak | Wood Weathered": 0.7400000095367432
+    }
+  },
+  "farmhouse_0.glb": {
+    "shingles": 0,
+    "roof_triangles": 3796,
+    "source_detail": 86,
+    "approximated_specular_factors": {
+      "Lowmark Planked Oak | Wood Weathered": 0.7400000095367432
+    }
+  },
+  "farmhouse_50.glb": {
+    "shingles": 967,
+    "roof_triangles": 10302,
+    "source_detail": 86,
+    "approximated_specular_factors": {
+      "Lowmark Planked Oak | Wood Weathered": 0.7400000095367432
+    }
+  },
+  "farmhouse_100.glb": {
+    "shingles": 1932,
+    "roof_triangles": 12286,
+    "source_detail": 86,
+    "approximated_specular_factors": {
+      "Lowmark Planked Oak | Wood Weathered": 0.7400000095367432
+    }
+  },
+  "cottage_95.glb": {
+    "shingles": 920,
+    "roof_triangles": 5328,
+    "source_detail": 95,
+    "approximated_specular_factors": {
+      "Lowmark Planked Oak | Wood Heavily Aged": 0.7400000095367432
+    }
+  },
+  "cottage_0.glb": {
+    "shingles": 0,
+    "roof_triangles": 1288,
+    "source_detail": 95,
+    "approximated_specular_factors": {
+      "Lowmark Planked Oak | Wood Heavily Aged": 0.7400000095367432
+    }
+  },
+  "cottage_50.glb": {
+    "shingles": 484,
+    "roof_triangles": 4444,
+    "source_detail": 95,
+    "approximated_specular_factors": {
+      "Lowmark Planked Oak | Wood Heavily Aged": 0.7400000095367432
+    }
+  },
+  "cottage_100.glb": {
+    "shingles": 968,
+    "roof_triangles": 5332,
+    "source_detail": 95,
+    "approximated_specular_factors": {
+      "Lowmark Planked Oak | Wood Heavily Aged": 0.7400000095367432
+    }
+  },
+  "workshop_82.glb": {
+    "shingles": 1044,
+    "roof_triangles": 6924,
+    "source_detail": 82,
+    "approximated_specular_factors": {
+      "Lowmark Planked Oak | Wood Maintained": 0.7400000095367432
+    }
+  },
+  "workshop_0.glb": {
+    "shingles": 0,
+    "roof_triangles": 1696,
+    "source_detail": 82,
+    "approximated_specular_factors": {
+      "Lowmark Planked Oak | Wood Maintained": 0.7400000095367432
+    }
+  },
+  "workshop_50.glb": {
+    "shingles": 636,
+    "roof_triangles": 5820,
+    "source_detail": 82,
+    "approximated_specular_factors": {
+      "Lowmark Planked Oak | Wood Maintained": 0.7400000095367432
+    }
+  },
+  "workshop_100.glb": {
+    "shingles": 1272,
+    "roof_triangles": 7064,
+    "source_detail": 82,
+    "approximated_specular_factors": {
+      "Lowmark Planked Oak | Wood Maintained": 0.7400000095367432
+    }
+  },
+  "cameras": {
+    "Settlement": {
+      "position": [
+        8.0,
+        -35.400001525878906,
+        6.800000190734863
+      ],
+      "forward": [
+        -0.1783074140548706,
+        0.9792866110801697,
+        -0.09593942761421204
+      ],
+      "horizontal_fov": 63.6548905360393
+    },
+    "Farmhouse": {
+      "position": [
+        3.799999952316284,
+        -6.25,
+        4.900000095367432
+      ],
+      "forward": [
+        -0.30939215421676636,
+        0.9477168321609497,
+        -0.07816219329833984
+      ],
+      "horizontal_fov": 58.27828856481032
+    },
+    "Cottage": {
+      "position": [
+        -3.009999990463257,
+        -5.480000019073486,
+        3.5999999046325684
+      ],
+      "forward": [
+        -0.7533302903175354,
+        0.6481032371520996,
+        -0.11160451173782349
+      ],
+      "horizontal_fov": 56.473892604970935
+    },
+    "Workshop": {
+      "position": [
+        1.0,
+        -9.699999809265137,
+        3.799999952316284
+      ],
+      "forward": [
+        0.6644896268844604,
+        0.741617739200592,
+        -0.091960608959198
+      ],
+      "horizontal_fov": 53.11476800511823
+    },
+    "Materials": {
+      "position": [
+        -10.039999961853027,
+        -3.880000114440918,
+        2.0199999809265137
+      ],
+      "forward": [
+        -0.5019807815551758,
+        0.8550848364830017,
+        -0.1297895312309265
+      ],
+      "horizontal_fov": 42.74124403333753
+    }
+  },
+  "farmhouse": {
+    "glass_panes": 15,
+    "detail": 86
+  },
+  "cottage": {
+    "glass_panes": 5,
+    "detail": 95
+  },
+  "workshop": {
+    "glass_panes": 7,
+    "detail": 82
+  },
+  "glass_probe": {
+    "panes": 27,
+    "triangles": 682404,
+    "extensions": [],
+    "exported_materials": [
+      {
+        "doubleSided": true,
+        "name": "Lowmark Handcrafted Glass | Clear"
+      },
+      {
+        "doubleSided": true,
+        "name": "Lowmark Handcrafted Glass | Lightly Weathered"
+      },
+      {
+        "doubleSided": true,
+        "name": "Lowmark Handcrafted Glass | Obscured"
+      }
+    ]
+  },
+  "foliage": {
+    "instances": 217621,
+    "groups": 10254,
+    "specimens": 93,
+    "blender_triangles": 5599658,
+    "blender_lod_counts": [
+      16187,
+      1,
+      201433
+    ]
+  },
+  "base_commit": "fb83110",
+  "blender": "5.0.1",
+  "showcase_blend_sha256": "0d530e4d1716cac81e2e778e6e4d4ced1b092833b10953e89cfb7006204c51d5",
+  "bench_input_sha256": {
+    "cottage_0.caelmor.json": "bceec06c811c42aec4d51136379e76031025aff25e13c0d662cbf13ff23001ad",
+    "cottage_0.collision.glb": "c72ba20ec538fa3a91ef720414101e706c1ebd9659b77ce768fd51559a9ff4f4",
+    "cottage_0.glb": "3c6d1205579690dac35d448b094b84c36fc4b0a768ba057282b15ea75640cb05",
+    "cottage_100.caelmor.json": "dd79513959bc7a2d2d5a8aed46d6ba65552f5ad856aea5f62865fb68a49ccd07",
+    "cottage_100.collision.glb": "c72ba20ec538fa3a91ef720414101e706c1ebd9659b77ce768fd51559a9ff4f4",
+    "cottage_100.glb": "58e8d3f07bdb2963ab85f66df4b57e84d4378dc6160e7fb3d27b1e5902360408",
+    "cottage_50.caelmor.json": "1660faaba2a2f0b84079e57b1b7b6686d30598576578f9c0f3f376ef68f776ec",
+    "cottage_50.collision.glb": "c72ba20ec538fa3a91ef720414101e706c1ebd9659b77ce768fd51559a9ff4f4",
+    "cottage_50.glb": "54a13bce235ae6d4ee74b816eef25bd1436adc23a1c6ca395712a53e3d372bcc",
+    "cottage_95.caelmor.json": "0ab67ec6ae7bf6fbc0d074edc0a157bb74437dc64818c85027c61e80821fe045",
+    "cottage_95.collision.glb": "c72ba20ec538fa3a91ef720414101e706c1ebd9659b77ce768fd51559a9ff4f4",
+    "cottage_95.glb": "5afd725e69a667feef3940b191b898cd6f8f8d3a42af6ade7b93dcbf2b240773",
+    "export.json": "7cc1c5afccacdd6039f0e898e7175aee500c9a7ca450d4b6c8b7a1d19e2b4d28",
+    "farmhouse_0.caelmor.json": "8911413815d351151466fe92c70950ee65c944862d65fa05a80415aac5f1d145",
+    "farmhouse_0.collision.glb": "53ddf8fe93a3998fe82c1d67b26f8520765eba599f081d14be25484ed226ef45",
+    "farmhouse_0.glb": "67fc3c41f6f8de593c0a7d13c86c00e36514f6ddae38a3aaabfb766fde07824d",
+    "farmhouse_100.caelmor.json": "3b98dfeca518d27468161a6730a931b31b334069eccdd2f9f2e15abd0227588c",
+    "farmhouse_100.collision.glb": "53ddf8fe93a3998fe82c1d67b26f8520765eba599f081d14be25484ed226ef45",
+    "farmhouse_100.glb": "86ee952246d53ed7c3d290a9c8bbd55256df79f62c3cad94c32555adecb86549",
+    "farmhouse_50.caelmor.json": "41543734900c64c5f0501aa8fbede0ebc248fb372958d934515318925979d83b",
+    "farmhouse_50.collision.glb": "53ddf8fe93a3998fe82c1d67b26f8520765eba599f081d14be25484ed226ef45",
+    "farmhouse_50.glb": "31479673c86a23371c92d640512db50f5557bff4c6f4ab4964dcf8a474c1f72d",
+    "farmhouse_86.caelmor.json": "c88cf680e57bc67a373f20fa3b7f3e153148c071b8a19c7fcc2e38a6b74b2e82",
+    "farmhouse_86.collision.glb": "53ddf8fe93a3998fe82c1d67b26f8520765eba599f081d14be25484ed226ef45",
+    "farmhouse_86.glb": "c5ac5a5c3f5eb7df344140aba71bfc097c64f8761d0eaff676c6af056356a339",
+    "ground.glb": "d1aee397d83ca331316b99dd9f2a83f3a6d09838461a4444298d73968b448c1f",
+    "lod.json": "94b7c1cb80a9f99bd9fcb78eee30e0dd9bf61f47c4cd618432e6b2db8ccbae96",
+    "plants.glb": "ba1f8017bcf98ddc47a0ef4bb0a997eb0ea75846a91d4b489dc2f7ba5713eca7",
+    "scatter.bytes": "b3426b6f8a07c11e2f53ded865c7a593216f90867367578eb3b51b34dc4c8011",
+    "workshop_0.caelmor.json": "c4ff0c6cad9c3454ce200cc14867f0c491950dac9315d349223b299515646df4",
+    "workshop_0.collision.glb": "69b46ade069a3bf74c1cf5f17f5e7434bf949410dbc10653d427a129b658f6d9",
+    "workshop_0.glb": "fbdb8b4ce8dedab5458cfb0cbc82f9603a5257146c8542455e4294f819da8a50",
+    "workshop_100.caelmor.json": "8943245ed6fbe06d750ab80058dce1b51f55dacf05517fdf4a49517ffc801905",
+    "workshop_100.collision.glb": "69b46ade069a3bf74c1cf5f17f5e7434bf949410dbc10653d427a129b658f6d9",
+    "workshop_100.glb": "3293cd381a8abcfc73aca054c86aa199e55a5953146a8047171030bb30f2703a",
+    "workshop_50.caelmor.json": "de18c1a5fb01f99f470d9a037b4e9ff59ce786e94cf7a8397cc0112b27b1b4f3",
+    "workshop_50.collision.glb": "69b46ade069a3bf74c1cf5f17f5e7434bf949410dbc10653d427a129b658f6d9",
+    "workshop_50.glb": "c3f502861635f50a81ddcbfde8a1b576ea8d7c54fe0d0030ba8e2894bc041897",
+    "workshop_82.caelmor.json": "4ecb88bbc59b286490be9f42298cb361c94a5f2b171c8350c0aaa5ba3df99b54",
+    "workshop_82.collision.glb": "69b46ade069a3bf74c1cf5f17f5e7434bf949410dbc10653d427a129b658f6d9",
+    "workshop_82.glb": "f4fed596a4c8d5fc07334beab89d9a52d4ab4018aaf41483a740617c03f5c2f4"
+  }
+}
