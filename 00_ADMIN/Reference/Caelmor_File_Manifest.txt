@@ -372,6 +372,7 @@ LORE\Worldbuilding Docs/
 MEDIA\Concept Art/
 MEDIA\Maps/
     - Lowmark_Blockout/Lowmark_Blockout_Planning_Map.svg, .png, .md (true-scale blockout sheet; generator CODE/Scripts/terrain_generation/build_blockout_planning_map.py)
+    - Lowmark_Blockout/grids/A01.svg/.png through I08.svg/.png, grid_index.csv, README.md (72 true-scale 2D sector references from the master sheet; Blender placement via CODE/Scripts/terrain_generation/place_blockout_sector.py)
 MEDIA\Materials/
     - Original material masters, reusable painting templates, package source, and Procreate handoff evidence
 MEDIA\Reference Images/

@@ -1,0 +1,73 @@
+sector_id,column,row,x_min_m,y_min_m,x_max_m,y_max_m,width_m,height_m,center_x_m,center_y_m,planning_regions,settlement_envelopes,named_points,water_reaches,routes,overlays,conflict_tags
+A01,A,01,0,0,384,384,384,384,192.0,192.0,,,,,,,
+B01,B,01,384,0,768,384,384,384,576.0,192.0,,,,,,,
+C01,C,01,768,0,1152,384,384,384,960.0,192.0,,,,,,,
+D01,D,01,1152,0,1536,384,384,384,1344.0,192.0,G Whisperflow Heartlands,,Whispering Door Farmhouse,western whisperflow arm,landing to crestbridge,,NC-1 | W-ARM
+E01,E,01,1536,0,1920,384,384,384,1728.0,192.0,G Whisperflow Heartlands,,,western whisperflow arm,landing to crestbridge,,
+F01,F,01,1920,0,2304,384,384,384,2112.0,192.0,G Whisperflow Heartlands | H Brookhollow Trade Reach,Whisperflow Landing,,whisperflow eastern hairpin | lowerbend to brookhollow,brookhollow to landing | landing to crestbridge,,TC-13
+G01,G,01,2304,0,2688,384,384,384,2496.0,192.0,G Whisperflow Heartlands | H Brookhollow Trade Reach,Brookhollow | Whisperflow Landing,Unbuilt brookhollow to landing crossing (whisperflow eastern hairpin),whisperflow eastern hairpin | lowerbend to brookhollow | brookhollow to grey confluence,brookhollow to landing | landing to crestbridge | brookhollow to greyharrow,,
+H01,H,01,2688,0,3072,384,384,384,2880.0,192.0,H Brookhollow Trade Reach,Brookhollow,,lowerbend to brookhollow | greyharrow lower branch | brookhollow to grey confluence | confluence to region exit,brookhollow to landing | brookhollow to greyharrow,,
+I01,I,01,3072,0,3456,384,384,384,3264.0,192.0,,,,greyharrow lower branch | brookhollow to grey confluence | confluence to region exit,,,
+A02,A,02,0,384,384,768,384,384,192.0,576.0,,,,,,,
+B02,B,02,384,384,768,768,384,384,576.0,576.0,,,,,,,
+C02,C,02,768,384,1152,768,384,384,960.0,576.0,,,,,,,
+D02,D,02,1152,384,1536,768,384,384,1344.0,576.0,G Whisperflow Heartlands | K Drowsebank Mill Waterworks,,,crestbridge to mill intake | mill bypass main river | western whisperflow arm | drowsebank mill leat,landing to crestbridge,,
+E02,E,02,1536,384,1920,768,384,384,1728.0,576.0,G Whisperflow Heartlands | K Drowsebank Mill Waterworks | E Relief Cut Engineering Line,Drowsebank Mill,Drowsebank wheel drop,crestbridge to mill intake | mill bypass main river | bramblelock weir passage | weir to whisperflow | western whisperflow arm | relief cut downstream | drowsebank mill leat | drowsebank wheel drop | drowsebank tailrace,landing to crestbridge,,
+F02,F,02,1920,384,2304,768,384,384,2112.0,576.0,F Orchard and Weir Floodplain | G Whisperflow Heartlands | H Brookhollow Trade Reach | K Drowsebank Mill Waterworks | E Relief Cut Engineering Line,Whisperflow Landing,Bramblelock Weir / Relief Cut mouth,mill bypass main river | bramblelock weir passage | weir to whisperflow | whisperflow eastern hairpin | western whisperflow arm | relief cut downstream | drowsebank tailrace,,Floodplain Orchards | Orchard drainage apron,TC-09
+G02,G,02,2304,384,2688,768,384,384,2496.0,576.0,F Orchard and Weir Floodplain | G Whisperflow Heartlands | H Brookhollow Trade Reach,Brookhollow | Whisperflow Landing,,weir to whisperflow | whisperflow eastern hairpin,,Floodplain Orchards,
+H02,H,02,2688,384,3072,768,384,384,2880.0,576.0,F Orchard and Weir Floodplain | H Brookhollow Trade Reach | I Greyharrow Side Branch,Brookhollow | Greyharrow,Unbuilt brookhollow to greyharrow crossing (greyharrow town branch),greyharrow upper branch | greyharrow town branch | greyharrow lower branch,crestbridge to greyharrow | brookhollow to greyharrow,Floodplain Orchards,
+I02,I,02,3072,384,3456,768,384,384,3264.0,576.0,I Greyharrow Side Branch,Greyharrow,,greyharrow upper branch | greyharrow town branch | greyharrow lower branch,crestbridge to greyharrow | brookhollow to greyharrow,,TC-19
+A03,A,03,0,768,384,1152,384,384,192.0,960.0,,,,,,,
+B03,B,03,384,768,768,1152,384,384,576.0,960.0,,,,fen to crestbridge,,,
+C03,C,03,768,768,1152,1152,384,384,960.0,960.0,D Crestbridge Civic Corridor,,,fen to crestbridge,reedmere to crestbridge,,
+D03,D,03,1152,768,1536,1152,384,384,1344.0,960.0,D Crestbridge Civic Corridor | K Drowsebank Mill Waterworks,Crestbridge,Crest Hall | Unbuilt landing to crestbridge crossing (fen to crestbridge) | Unbuilt reedmere to crestbridge crossing (fen to crestbridge) | Unbuilt reedmere to crestbridge crossing (fen to crestbridge) | Unbuilt crestbridge to mill crossing (fen to crestbridge),fen to crestbridge | crestbridge to mill intake | mill bypass main river | drowsebank mill leat,landing to crestbridge | crestbridge to ashenstead | reedmere to crestbridge | crestbridge to greyharrow | crestbridge to mill | crestbridge to hall | hall to depot,,TC-04
+E03,E,03,1536,768,1920,1152,384,384,1728.0,960.0,D Crestbridge Civic Corridor | K Drowsebank Mill Waterworks | E Relief Cut Engineering Line,Crestbridge | Drowsebank Mill,Hill Depot | Drowsebank wheel drop,fen to crestbridge | crestbridge to mill intake | mill bypass main river | bramblelock weir passage | relief cut downstream | drowsebank mill leat | drowsebank wheel drop | drowsebank tailrace,crestbridge to ashenstead | crestbridge to greyharrow | crestbridge to mill | crestbridge to hall | hall to depot,,TC-01 | TC-08
+F03,F,03,1920,768,2304,1152,384,384,2112.0,960.0,D Crestbridge Civic Corridor | F Orchard and Weir Floodplain | K Drowsebank Mill Waterworks | E Relief Cut Engineering Line,,Unbuilt crestbridge to greyharrow crossing (relief cut downstream),mill bypass main river | bramblelock weir passage | relief cut elbow | relief cut downstream | uphill foot pool overflow | drowsebank tailrace,crestbridge to ashenstead | crestbridge to greyharrow,Floodplain Orchards,
+G03,G,03,2304,768,2688,1152,384,384,2496.0,960.0,F Orchard and Weir Floodplain | E Relief Cut Engineering Line,,,relief cut elbow | relief cut downstream | uphill foot pool overflow,crestbridge to greyharrow,Floodplain Orchards,
+H03,H,03,2688,768,3072,1152,384,384,2880.0,960.0,F Orchard and Weir Floodplain | I Greyharrow Side Branch | J Brackenford Woods / Canal Verge,Greyharrow,Unbuilt crestbridge to greyharrow crossing (greyharrow upper branch),greyharrow upper branch | greyharrow town branch,crestbridge to greyharrow | brookhollow to greyharrow,Floodplain Orchards,
+I03,I,03,3072,768,3456,1152,384,384,3264.0,960.0,I Greyharrow Side Branch | J Brackenford Woods / Canal Verge,Greyharrow,,greyharrow boundary inflow | greyharrow upper branch | greyharrow town branch,crestbridge to greyharrow | brookhollow to greyharrow,,
+A04,A,04,0,1152,384,1536,384,384,192.0,1344.0,B Stillwater Fen Complex,,,,reedmere to crestbridge,Stillwater Fen,TC-12
+B04,B,04,384,1152,768,1536,384,384,576.0,1344.0,B Stillwater Fen Complex,,,fen western braid | fen to crestbridge,reedmere to crestbridge,Stillwater Fen,
+C04,C,04,768,1152,1152,1536,384,384,960.0,1344.0,B Stillwater Fen Complex | D Crestbridge Civic Corridor | E Relief Cut Engineering Line,,Unbuilt reedmere to crestbridge crossing (fen to crestbridge),fen outflow | fen western braid | fen eastern braid | fen to crestbridge | fen to hollow lock | hollow lock chamber | relief cut straight,reedmere to crestbridge,Stillwater Fen,TC-11
+D04,D,04,1152,1152,1536,1536,384,384,1344.0,1344.0,B Stillwater Fen Complex | D Crestbridge Civic Corridor | E Relief Cut Engineering Line,Crestbridge,,fen outflow | fen western braid | fen eastern braid | fen to crestbridge | fen to hollow lock | hollow lock chamber | relief cut straight,reedmere to crestbridge,Stillwater Fen,TC-11
+E04,E,04,1536,1152,1920,1536,384,384,1728.0,1344.0,B Stillwater Fen Complex | D Crestbridge Civic Corridor | E Relief Cut Engineering Line,Crestbridge,,relief cut straight,,,TC-03
+F04,F,04,1920,1152,2304,1536,384,384,2112.0,1344.0,D Crestbridge Civic Corridor | E Relief Cut Engineering Line,,Unbuilt crestbridge to ashenstead crossing (relief cut straight),relief cut straight | relief cut elbow | relief cut downstream | uphill foot pool overflow,crestbridge to ashenstead,,TC-10
+G04,G,04,2304,1152,2688,1536,384,384,2496.0,1344.0,E Relief Cut Engineering Line,,Uphill Canal foot pool,relief cut straight | relief cut elbow | relief cut downstream | uphill foot pool overflow | uphill canal lift,crestbridge to ashenstead,,TC-10 | TC-14
+H04,H,04,2688,1152,3072,1536,384,384,2880.0,1344.0,J Brackenford Woods / Canal Verge,,,uphill canal lift,,,TC-14
+I04,I,04,3072,1152,3456,1536,384,384,3264.0,1344.0,J Brackenford Woods / Canal Verge,,,,,,
+A05,A,05,0,1536,384,1920,384,384,192.0,1728.0,B Stillwater Fen Complex,Reedmere,,fen western braid,reedmere to crestbridge,Stillwater Fen,TC-12
+B05,B,05,384,1536,768,1920,384,384,576.0,1728.0,B Stillwater Fen Complex,,,fen main upper | fen main middle | fen main lower | fen outflow | fen western braid | fen to hollow lock,reedmere to crestbridge,Stillwater Fen,
+C05,C,05,768,1536,1152,1920,384,384,960.0,1728.0,B Stillwater Fen Complex | E Relief Cut Engineering Line,,,fen main upper | fen main middle | fen main lower | fen outflow | fen western braid | fen eastern braid | fen to crestbridge | fen to hollow lock | hollow lock chamber | relief cut straight,,Stillwater Fen,
+D05,D,05,1152,1536,1536,1920,384,384,1344.0,1728.0,B Stillwater Fen Complex | E Relief Cut Engineering Line,,Hollow Lock,fen outflow | fen eastern braid | fen to crestbridge | fen to hollow lock | hollow lock chamber | relief cut straight,,Stillwater Fen,
+E05,E,05,1536,1536,1920,1920,384,384,1728.0,1728.0,B Stillwater Fen Complex | E Relief Cut Engineering Line,,,relief cut straight,,Stillwater Fen,
+F05,F,05,1920,1536,2304,1920,384,384,2112.0,1728.0,C Ashenstead Reclaimed Fields | E Relief Cut Engineering Line,,,relief cut straight | relief cut elbow,crestbridge to ashenstead,,TC-10
+G05,G,05,2304,1536,2688,1920,384,384,2496.0,1728.0,C Ashenstead Reclaimed Fields | E Relief Cut Engineering Line,,,relief cut straight | relief cut elbow,crestbridge to ashenstead,,TC-10
+H05,H,05,2688,1536,3072,1920,384,384,2880.0,1728.0,C Ashenstead Reclaimed Fields,,,uphill canal lift,,,
+I05,I,05,3072,1536,3456,1920,384,384,3264.0,1728.0,C Ashenstead Reclaimed Fields,,Uphill Canal cistern,uphill canal lift,,,
+A06,A,06,0,1920,384,2304,384,384,192.0,2112.0,A Veilwater Uplands / Headwaters | B Stillwater Fen Complex,,,fen western braid,,Stillwater Fen,
+B06,B,06,384,1920,768,2304,384,384,576.0,2112.0,A Veilwater Uplands / Headwaters | B Stillwater Fen Complex,,,veilwater falls | falls outflow | fen main upper | fen main middle | fen western braid | fen eastern braid,,Stillwater Fen,TC-16
+C06,C,06,768,1920,1152,2304,384,384,960.0,2112.0,A Veilwater Uplands / Headwaters | B Stillwater Fen Complex,,,falls outflow | fen main upper | fen main middle | fen main lower | fen western braid | fen eastern braid,ashenstead path of unburnt reeds,Stillwater Fen,TC-17
+D06,D,06,1152,1920,1536,2304,384,384,1344.0,2112.0,B Stillwater Fen Complex,,,fen eastern braid,ashenstead path of unburnt reeds,Stillwater Fen,TC-17
+E06,E,06,1536,1920,1920,2304,384,384,1728.0,2112.0,B Stillwater Fen Complex,,Circle of Unburnt Reeds,,ashenstead path of unburnt reeds,Stillwater Fen,
+F06,F,06,1920,1920,2304,2304,384,384,2112.0,2112.0,C Ashenstead Reclaimed Fields,,,,ashenstead path of unburnt reeds,,
+G06,G,06,2304,1920,2688,2304,384,384,2496.0,2112.0,C Ashenstead Reclaimed Fields,Ashenstead,,,crestbridge to ashenstead | ashenstead path of unburnt reeds,,
+H06,H,06,2688,1920,3072,2304,384,384,2880.0,2112.0,C Ashenstead Reclaimed Fields,Ashenstead,,,crestbridge to ashenstead | ashenstead path of unburnt reeds,,TC-15
+I06,I,06,3072,1920,3456,2304,384,384,3264.0,2112.0,C Ashenstead Reclaimed Fields,,,,,,
+A07,A,07,0,2304,384,2688,384,384,192.0,2496.0,A Veilwater Uplands / Headwaters,,,upland headwater,,,
+B07,B,07,384,2304,768,2688,384,384,576.0,2496.0,A Veilwater Uplands / Headwaters,,Veilwater Falls,upland headwater | veilwater falls | falls outflow,ashenstead path of unburnt reeds,,TC-16
+C07,C,07,768,2304,1152,2688,384,384,960.0,2496.0,A Veilwater Uplands / Headwaters,,Mantle Shrine,falls outflow,ashenstead path of unburnt reeds,,
+D07,D,07,1152,2304,1536,2688,384,384,1344.0,2496.0,,,,,ashenstead path of unburnt reeds,,
+E07,E,07,1536,2304,1920,2688,384,384,1728.0,2496.0,,,,,ashenstead path of unburnt reeds,,
+F07,F,07,1920,2304,2304,2688,384,384,2112.0,2496.0,C Ashenstead Reclaimed Fields,,,,,,
+G07,G,07,2304,2304,2688,2688,384,384,2496.0,2496.0,C Ashenstead Reclaimed Fields,,,,,,
+H07,H,07,2688,2304,3072,2688,384,384,2880.0,2496.0,C Ashenstead Reclaimed Fields,,,,,,
+I07,I,07,3072,2304,3456,2688,384,384,3264.0,2496.0,C Ashenstead Reclaimed Fields,,,,,,
+A08,A,08,0,2688,384,3072,384,384,192.0,2880.0,A Veilwater Uplands / Headwaters,,,upland headwater,,,
+B08,B,08,384,2688,768,3072,384,384,576.0,2880.0,A Veilwater Uplands / Headwaters,,,upland headwater,,,
+C08,C,08,768,2688,1152,3072,384,384,960.0,2880.0,A Veilwater Uplands / Headwaters,,,,,,
+D08,D,08,1152,2688,1536,3072,384,384,1344.0,2880.0,,,,,,,
+E08,E,08,1536,2688,1920,3072,384,384,1728.0,2880.0,,,,,,,
+F08,F,08,1920,2688,2304,3072,384,384,2112.0,2880.0,,,,,,,
+G08,G,08,2304,2688,2688,3072,384,384,2496.0,2880.0,,,,,,,
+H08,H,08,2688,2688,3072,3072,384,384,2880.0,2880.0,,,,,,,
+I08,I,08,3072,2688,3456,3072,384,384,3264.0,2880.0,,,,,,,

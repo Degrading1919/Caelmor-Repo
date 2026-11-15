@@ -4,7 +4,7 @@ Reads only existing project sources:
   - lowmark_controls.json            (approved-map anchors, waterways, routes, envelopes)
   - MEDIA/Maps/Lowmark_Terrain/*      (height_engineered.npy, verification.json,
                                        candidate_plots.json, Local_Refinement/candidate_plots.json)
-and writes MEDIA/Maps/Lowmark_Blockout/Lowmark_Blockout_Planning_Map.svg/.png.
+and writes the master sheet and its sector references under MEDIA/Maps/Lowmark_Blockout.
 
 Coordinates: SVG user unit = 1 metre. World point (x east, y north) is drawn at
 SVG (x, -y), so the world origin (south-west map corner) is SVG (0, 0) and the
@@ -12,7 +12,7 @@ map frame dimensions follow the regional controls. Nothing here creates canon or
 anchor; every placement and status is taken from, or cited to, a repo source.
 
 Usage (from the checkout root):
-  python CODE/Scripts/terrain_generation/build_blockout_planning_map.py [--png-scale 0.5]
+  python CODE/Scripts/terrain_generation/build_blockout_planning_map.py [--png-scale 0.5 | --sectors-only]
 Requires numpy, matplotlib (contour extraction) and resvg-py (PNG export).
 """
 from __future__ import annotations
@@ -26,6 +26,7 @@ from html import escape
 from pathlib import Path
 
 import numpy as np
+from blockout_sectors import export_sectors
 
 ROOT = Path(__file__).resolve().parents[3]
 CONTROLS = ROOT / "CODE/Scripts/terrain_generation/lowmark_controls.json"
@@ -266,7 +267,7 @@ UNANCHORED = [
 ]
 
 
-def build(png_scale: float):
+def build(png_scale: float, sectors_only: bool = False):
     ctrl = json.loads(CONTROLS.read_text(encoding="utf-8"))
     ver = json.loads((TERRAIN / "verification.json").read_text(encoding="utf-8"))
     cand = json.loads((TERRAIN / "candidate_plots.json").read_text(encoding="utf-8"))["sites"]
@@ -822,9 +823,16 @@ def build(png_scale: float):
     s.end()
     s.add("</svg>")
 
-    OUT.mkdir(parents=True, exist_ok=True)
+    sheet = "\n".join(s.parts)
     svg_path = OUT / f"{STEM}.svg"
-    svg_path.write_text("\n".join(s.parts), encoding="utf-8")
+    if sectors_only and svg_path.read_text(encoding="utf-8") != sheet:
+        raise ValueError("The master sheet differs from the current terrain. Run without --sectors-only to update both.")
+    export_sectors(sheet, ctrl, ver, REGIONS, LANDMARK_STATUS, OUT / "grids", SECTOR, CELL)
+    if sectors_only:
+        return
+
+    OUT.mkdir(parents=True, exist_ok=True)
+    svg_path.write_text(sheet, encoding="utf-8")
     from resvg_py import svg_to_bytes
     png_path = OUT / f"{STEM}.png"
     png_path.write_bytes(svg_to_bytes(svg_path=str(svg_path), zoom=png_scale, background="#ffffff"))
@@ -837,4 +845,6 @@ def build(png_scale: float):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--png-scale", type=float, default=0.5, help="PNG pixels per metre (default 0.5 = 2 m/px)")
-    build(ap.parse_args().png_scale)
+    ap.add_argument("--sectors-only", action="store_true", help="Write sectors from existing verified terrain without rewriting the master sheet")
+    args = ap.parse_args()
+    build(args.png_scale, args.sectors_only)
