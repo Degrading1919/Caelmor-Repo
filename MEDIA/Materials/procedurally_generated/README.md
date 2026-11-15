@@ -222,6 +222,8 @@ The refinement uses the same farmhouse window, camera and lighting as `9821886`.
 
 ## Lowmark Packed Earth & Worn Footpaths
 
+The Creative Director approved the ground materials at `4474247`. That revision is the accepted Packed Earth and Worn Footpaths library.
+
 Packed Earth retains cooler damp pockets, loose clods and visible angular gravel. Worn Footpath compresses the same soil and exposes a warmer sediment surface. Small, interrupted impressions and shallow runoff threads follow the travel direction. Mineral faces, their relief and the surrounding sediment contribute to the same normal, albedo and roughness fields. Low green growth and irregular feathered shoulders keep the transition from forming a hard outline.
 
 - [Reproducible Blender source](build_lowmark_packed_earth.py) uses Blender 5.0.1 with bundled NumPy. The default seed is 81379. The controls `--compaction`, `--gravel`, `--moisture`, `--traces`, `--erosion` and `--verge` build both materials and two masks from the same soil. Their defaults are 0.82, 0.91, 0.56, 0.60, 0.77 and 0.80. `--maps-only` regenerates the exports and library. `--render-only` uses the existing maps. `--optix` enables an available NVIDIA device for the review scenes.
@@ -241,3 +243,33 @@ Packed Earth retains cooler damp pockets, loose clods and visible angular gravel
 Two independent generations matched pixel-for-pixel across all ten maps. Reopened maps passed seam checks on both axes and signed normal-to-height checks. Both shoulder masks reach zero at the outer margins. Material Maker 1.7 re-exported both projects at 2048 × 2048. Compared with the resampled Blender maps, the largest sampled mean absolute channel error was 0.003 on a 0–1 scale. All three Blender library materials reopened with relative map paths and the metric UV controls.
 
 [Simon Tremblay Gauthier’s ground generator](https://simontremblay3d.artstation.com/projects/Rx6Ym) and [height-first production breakdown](https://80.lv/articles/dirt-generator-in-substance-designer) informed the soil relief and sequencing of mineral and organic layers. [John Diodati’s Forest Path](https://glieseboy.artstation.com/projects/ELOPAn) informed the loose, uneven shoulders. [Reviewed soil plate](https://cdnb.artstation.com/p/assets/images/images/010/018/333/large/simon-tremblay-gauthier-stg-ground-dirt-01.jpg) · [Reviewed path plate](https://cdna.artstation.com/p/assets/images/images/032/814/230/large/john-diodati-finalrendermain2.jpg?1607541819). The delivered maps, source and review fixtures are original Caelmor work. The reference plates remain third-party material.
+
+## Lowmark Natural Grass & Wildflowers
+
+The yard planting uses low turf near traffic, broken dry tufts on exposed shoulders, and taller mixed growth in less disturbed pockets. Ribwort-like rosettes take the open shoulders. Cream wayside flowers and muted purple selfheal appear in small groups among the grass. These ordinary rural plant forms are visual proposals for farmhouse dressing. The regional dossier provides the location and habitat context. [Lowmark Vale flora](../../../LORE/Regions/Caelmor_Region1_LowmarkVale.md#ix-flora--fauna)
+
+- [Blender library](Lowmark_Natural_Grass_Wildflowers.blend) and [self-contained glTF 2.0 export](Lowmark_Natural_Grass_Wildflowers.glb). Seven families, each with three growth stages and three LODs, make 21 specimens and 63 meshes. Assets share a ground pivot at the origin and use metres. Each specimen's LOD0 is marked as a Blender object asset. To place one LOD manually, append the named object or select its mesh under the corresponding stage in the GLB hierarchy. Pair the three matching LOD names when setting up an engine LOD group.
+- One 1024 × 1024 atlas material is shared across the library. [RGBA albedo and cutout](Lowmark_Natural_Grass_Wildflowers_albedo.png) is sRGB. [Tangent-space +Y normal](Lowmark_Natural_Grass_Wildflowers_normal.png) and [roughness](Lowmark_Natural_Grass_Wildflowers_roughness.png) are linear. The GLB uses two-sided alpha masking at 0.48, zero metallic, tangent data, and packed glTF roughness. Most silhouettes are formed by bent, tapered meshes. Distant panicle branches and clustered yarrow florets use small cutouts with color extending under the transparent edge for filtering.
+- [Deterministic Blender authoring source](build_lowmark_natural_grass.py). The defaults are seed `49163`, density `1`, height `1`, moisture `.56`, and path edge `.74`. Density controls shoot counts and the demo's planting density. Height multiplies the metre height. Moisture affects blade condition and the demo's habitat mix. Path edge weights the approved verge mask in the fixed demo. Blender object properties and GLB extras carry the family, stage, metres, triangle count, moisture preference, edge affinity, and suggested counts per square metre **inside a locally occupied patch**. They can be read by later tools or used during hand placement.
+
+  ```powershell
+  blender --background --factory-startup --python-exit-code 1 --python MEDIA/Materials/procedurally_generated/build_lowmark_natural_grass.py -- --verify-repeat
+  ```
+
+  Run with Blender 5.0.1. `--assets-only` builds the library, GLB and atlases. `--optix` uses an available NVIDIA device for the demo and comparison renders. Keep the delivered files at this path with the approved material maps to reopen the farmhouse scene.
+
+| Specimen family | Established LOD0 | LOD1 | LOD2 |
+| --- | ---: | ---: | ---: |
+| Short sward | 726 | 168 | 45 |
+| Mixed verge | 1,038 | 282 | 55 |
+| Dry roadside | 1,152 | 347 | 53 |
+| Meadow seed heads | 1,578 | 533 | 61 |
+| Ribbed rosettes | 242 | 144 | 37 |
+| Cream wayside flowers | 2,468 | 624 | 76 |
+| Violet selfheal | 1,458 | 534 | 228 |
+
+[Editable farmhouse demo](Lowmark_Natural_Grass_Wildflowers_Farmhouse.blend) · [Farmhouse approach from about 11 m](Lowmark_Natural_Grass_Wildflowers_farmhouse.jpg) · [Verge close-up](Lowmark_Natural_Grass_Wildflowers_verge.jpg) · [Same close-up with planting hidden](Lowmark_Natural_Grass_Wildflowers_verge_bare.jpg) · [Matched LOD study](Lowmark_Natural_Grass_Wildflowers_specimens.jpg). The LOD study shows the established specimens in table order from left to right and LOD0 to LOD2 from top to bottom. The farmhouse demo uses linked mesh data for 1,626 instances, arranged in fixed habitat patches with a clear walking strip. Only 60 instances across the test yard come from the two wildflower families. The ground uses the approved Packed Earth and Worn Footpath transition, including its verge mask.
+
+Independent generation reproduced all 63 mesh shapes, topology and UVs and the three atlas fields exactly. The default meshes measure about 7–46 cm above their pivots. The largest measured height change between LODs was 28.3 mm with default controls. The atlas PNGs reopened with their expected opacity and data channels. The GLB re-imported into Blender with all 63 meshes, triangle counts, UVs, and ground pivots, and the farmhouse scene reopened with its textures resolved. Unity runtime and GPU performance have not been measured.
+
+Maxim Fischer's Graswald breakdown informed the specimen and growth-stage organization. Florian Obchette's production breakdown informed the hand-built silhouette and shared atlas. Botanical references informed ribbed basal leaves, wayside yarrow's compound flower clusters and the selfheal habitat. All models, atlas maps and renders are original Caelmor work. [Fischer, April 2023](https://80.lv/articles/creating-3d-environments-with-graswald-s-tools-assets/) · [Obchette, April 2023](https://80.lv/articles/setting-up-rocks-and-vegetation-for-a-realistic-3d-environment) · [BSBI ribwort plantain](https://fermanagh.bsbi.org/plantago-lanceolata-l) · [BSBI yarrow](https://fermanagh.bsbi.org/achillea-millefolium-l/) · [BSBI lowland meadow survey summary](https://bsbi.org/wp-content/uploads/dlm_uploads/Lowland_Hay_Meadows_6510-1.pdf)
