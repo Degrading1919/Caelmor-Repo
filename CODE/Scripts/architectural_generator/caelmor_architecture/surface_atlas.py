@@ -149,22 +149,26 @@ def _detail_image(family,settings):
     return image
 
 
-def _apply_repeated_field(obj, host, settings):
-    import bpy
-    from .construction_relief import field_maps
-    family=obj['caelm_field_family']
-    key=obj['caelm_material']
-    base=_palette_entry(key,getattr(host,'style',None),settings)[0]
-    base=surface_base(key,obj['caelm_field_source'],settings,base)
+def _field_pattern(obj, host, settings):
     exposure=getattr(getattr(host,'style',None),'weather_exposure',.5)
     # Quantized broad weather deliberately reuses compatible image sets.
     weather=min(4,round(4*(.68*exposure*(1-settings.maintenance)+.32*settings.age/250)))/4
-    pattern=('construction-field-v2',family,settings.craftsmanship,weather)
+    return ('construction-field-v2',obj['caelm_field_family'],settings.craftsmanship,weather)
+
+
+def _apply_repeated_field(obj, host, settings):
+    import bpy
+    from .construction_relief import field_maps
+    pattern = _field_pattern(obj, host, settings)
+    _, family, craft, weather = pattern
+    key=obj['caelm_material']
+    base=_palette_entry(key,getattr(host,'style',None),settings)[0]
+    base=surface_base(key,obj['caelm_field_source'],settings,base)
     payload=(pattern,base)
     fingerprint=hashlib.sha256(json.dumps(payload).encode()).hexdigest()
     material=next((m for m in bpy.data.materials if m.get('caelm_surface_fingerprint')==fingerprint),None)
     if material is None:
-        albedo,normal,orm=field_maps(family,settings.craftsmanship,weather,base)
+        albedo,normal,orm=field_maps(family,craft,weather,base)
         label=f'Caelmor Field {family} {fingerprint[:12]}'
         shared=f'Caelmor Relief {family} {hashlib.sha256(json.dumps(pattern).encode()).hexdigest()[:12]}'
         normal_name=shared+' Normal'

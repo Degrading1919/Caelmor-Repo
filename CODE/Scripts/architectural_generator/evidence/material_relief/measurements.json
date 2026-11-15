@@ -1,0 +1,295 @@
+{
+  "blender": "5.0.1",
+  "cases": {
+    "roof": {
+      "settings": {
+        "seed": 91,
+        "function": "COTTAGE",
+        "footprint": "RECT",
+        "width": 8.0,
+        "depth": 5.8,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 1,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "LOWMARK",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": false,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": false,
+        "seed_massing": false,
+        "construction_overrides": {
+          "by_role": {
+            "roof_cover": {
+              "representation": "TEXTURE"
+            }
+          }
+        },
+        "floor_separation": true,
+        "fit_blockout": true
+      },
+      "cameras": {
+        "gameplay": {
+          "target": [
+            3.999999761581421,
+            2.7224998474121094,
+            2.497560501098633
+          ],
+          "direction": [
+            1.0,
+            -1.6,
+            1.55
+          ],
+          "scale": 13.454999506473541
+        },
+        "detail": {
+          "target": [
+            4.0,
+            1.2400000095367432,
+            3.927838087081909
+          ],
+          "direction": [
+            0.55,
+            -1.0,
+            0.62
+          ],
+          "scale": 4.3
+        }
+      },
+      "texture": {
+        "vertices": 6247,
+        "triangles": 9419,
+        "fields": {
+          "world_lowmark.lowmark_main_hall.Mapped roof field::covering": [
+            8,
+            4
+          ]
+        },
+        "displacement_checks": {},
+        "glb": {
+          "bytes": 3216592,
+          "triangles": 9419,
+          "vertex_records": 17513,
+          "renderers": 31,
+          "primitives": 31,
+          "materials": 13,
+          "textures": 36,
+          "images": 30
+        }
+      },
+      "relief_low": {
+        "vertices": 13701,
+        "triangles": 23815,
+        "fields": {
+          "world_lowmark.lowmark_main_hall.Mapped roof field::covering": [
+            7462,
+            14400
+          ]
+        },
+        "displacement_checks": {
+          "world_lowmark.lowmark_main_hall.Mapped roof field::covering": {
+            "lift_mm": 22.594235837459564,
+            "pinned_boundary_vertices": 520,
+            "max_uv_drift": 0.0,
+            "evaluated_position_sha256": "b3de61208d611cb136749eb66052fbdd3a437e7ea38887f3272cf620c0861a91"
+          }
+        }
+      },
+      "relief": {
+        "vertices": 35561,
+        "triangles": 67015,
+        "fields": {
+          "world_lowmark.lowmark_main_hall.Mapped roof field::covering": [
+            29322,
+            57600
+          ]
+        },
+        "displacement_checks": {
+          "world_lowmark.lowmark_main_hall.Mapped roof field::covering": {
+            "lift_mm": 22.88518287241459,
+            "pinned_boundary_vertices": 1040,
+            "max_uv_drift": 0.0,
+            "evaluated_position_sha256": "68618ec8c3c61d5251e00314553f062f6eb701158e8a96e290dc65e8a3c3b6ab"
+          }
+        },
+        "glb": {
+          "bytes": 5321228,
+          "triangles": 67015,
+          "vertex_records": 46827,
+          "renderers": 31,
+          "primitives": 31,
+          "materials": 13,
+          "textures": 36,
+          "images": 30
+        },
+        "external_image_check": {
+          "lift_mm": 34.15263444185257,
+          "pinned_boundary_vertices": 1040,
+          "max_uv_drift": 0.0,
+          "evaluated_position_sha256": "07290e56394175d69f7921d35e894129c56db503cea47969a160924319dd7abe"
+        },
+        "saved_reopen_verified": true,
+        "reimported_meshes": 31
+      },
+      "modeled": {
+        "vertices": 9178,
+        "triangles": 11416
+      },
+      "hybrid": {
+        "vertices": 6819,
+        "triangles": 9819
+      }
+    },
+    "masonry": {
+      "settings": {
+        "seed": 91,
+        "function": "GATEHOUSE",
+        "footprint": "L",
+        "width": 11.0,
+        "depth": 7.0,
+        "wing_width": 4.2,
+        "wing_depth": 4.5,
+        "floors": 2,
+        "floor_height": 2.65,
+        "pitch": 48.0,
+        "overhang": 0.45,
+        "detail": "MEDIUM",
+        "window_density": 1.0,
+        "region": "THORNFELL",
+        "context": "AUTO",
+        "wealth": "ESTABLISHED",
+        "craftsmanship": "STANDARD",
+        "maintenance": 0.7,
+        "age": 35.0,
+        "use_grammar": true,
+        "roof_style": "AUTO",
+        "geometry_mode": "EFFICIENT",
+        "world_aware": true,
+        "crafted_curves": true,
+        "seed_massing": true,
+        "construction_overrides": {
+          "by_role": {
+            "wall_body": {
+              "representation": "TEXTURE"
+            }
+          }
+        },
+        "floor_separation": true
+      },
+      "cameras": {
+        "gameplay": {
+          "target": [
+            8.18325138092041,
+            3.6999998092651367,
+            6.133632183074951
+          ],
+          "direction": [
+            1.0,
+            -1.6,
+            1.55
+          ],
+          "scale": 31.749753713607788
+        },
+        "detail": {
+          "target": [
+            13.100000381469727,
+            -2.559999942779541,
+            2.0
+          ],
+          "direction": [
+            0.5,
+            -1.0,
+            0.24
+          ],
+          "scale": 5.0
+        }
+      },
+      "texture": {
+        "vertices": 31093,
+        "triangles": 41151,
+        "fields": {
+          "world_thornfell.gatehouse_east_watchtower.facade_masonry_field::floor:gatehouse_east_watchtower:0": [
+            76,
+            38
+          ]
+        },
+        "displacement_checks": {},
+        "glb": {
+          "bytes": 12675020,
+          "triangles": 41151,
+          "vertex_records": 84139,
+          "renderers": 188,
+          "primitives": 188,
+          "materials": 11,
+          "textures": 30,
+          "images": 25
+        }
+      },
+      "relief_low": {
+        "vertices": 43500,
+        "triangles": 64997,
+        "fields": {
+          "world_thornfell.gatehouse_east_watchtower.facade_masonry_field::floor:gatehouse_east_watchtower:0": [
+            12483,
+            23884
+          ]
+        },
+        "displacement_checks": {
+          "world_thornfell.gatehouse_east_watchtower.facade_masonry_field::floor:gatehouse_east_watchtower:0": {
+            "lift_mm": 26.403427124023438,
+            "pinned_boundary_vertices": 1080,
+            "max_uv_drift": 0.0,
+            "evaluated_position_sha256": "b5d1fae163be644ef6163885280e0b1f3a429f60358f4c8fd3e35be623ac768d"
+          }
+        }
+      },
+      "relief": {
+        "vertices": 79956,
+        "triangles": 136829,
+        "fields": {
+          "world_thornfell.gatehouse_east_watchtower.facade_masonry_field::floor:gatehouse_east_watchtower:0": [
+            48939,
+            95716
+          ]
+        },
+        "displacement_checks": {
+          "world_thornfell.gatehouse_east_watchtower.facade_masonry_field::floor:gatehouse_east_watchtower:0": {
+            "lift_mm": 26.407241821289062,
+            "pinned_boundary_vertices": 2160,
+            "max_uv_drift": 3.5762786865234375e-07,
+            "evaluated_position_sha256": "a2dc42e19715dd9dee49ab12148ad444ff541037cace6430db7c4f79cc376f7f"
+          }
+        },
+        "glb": {
+          "bytes": 16233796,
+          "triangles": 136829,
+          "vertex_records": 133860,
+          "renderers": 188,
+          "primitives": 188,
+          "materials": 12,
+          "textures": 30,
+          "images": 25
+        },
+        "reimported_meshes": 188
+      },
+      "modeled": {
+        "vertices": 55698,
+        "triangles": 76972
+      },
+      "hybrid": {
+        "vertices": 40593,
+        "triangles": 54595
+      }
+    }
+  }
+}

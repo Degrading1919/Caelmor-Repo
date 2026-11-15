@@ -18,8 +18,8 @@ def _unit(ix, iy, salt):
     return value-np.floor(value)
 
 
-def field_maps(kind, craftsmanship, weather, base):
-    """Build repeatable original albedo, height-derived normals and packed ORM."""
+def field_maps(kind, craftsmanship, weather, base, *, include_height=False):
+    """Build the original PBR maps and optionally return the scalar height in metres."""
     coord=(np.arange(SIZE)+.5)*4/SIZE
     u,v=np.meshgrid(coord,coord)
     roof=kind in ROOFS
@@ -97,4 +97,5 @@ def field_maps(kind, craftsmanship, weather, base):
     orm[:,:,0]=1.-.36*relief
     orm[:,:,1]=np.clip(roughness+.10*relief+.04*weather+stock*.11,0.,1.)
     orm[:,:,2]=0.
-    return albedo,normals,orm.reshape(SIZE//2,2,SIZE//2,2,4).mean(axis=(1,3))
+    maps = albedo,normals,orm.reshape(SIZE//2,2,SIZE//2,2,4).mean(axis=(1,3))
+    return (*maps, height.astype(np.float32)) if include_height else maps
