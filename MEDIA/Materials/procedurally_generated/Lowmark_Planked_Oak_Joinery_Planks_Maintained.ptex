@@ -1,0 +1,205 @@
+{
+  "name": "Graph",
+  "type": "graph",
+  "label": "Lowmark Oak | Planks Maintained",
+  "seed_int": 0,
+  "node_position": {
+    "x": 0,
+    "y": 0
+  },
+  "parameters": {},
+  "nodes": [
+    {
+      "name": "albedo",
+      "type": "image",
+      "seed_int": 0,
+      "node_position": {
+        "x": -590,
+        "y": 0
+      },
+      "parameters": {
+        "image": "%PROJECT_PATH%/Lowmark_Planked_Oak_Joinery_Planks_Maintained_albedo.png",
+        "fix_ar": false,
+        "clamp": false
+      }
+    },
+    {
+      "name": "normal",
+      "type": "image",
+      "seed_int": 0,
+      "node_position": {
+        "x": -590,
+        "y": 225
+      },
+      "parameters": {
+        "image": "%PROJECT_PATH%/Lowmark_Planked_Oak_Joinery_Planks_Maintained_normal.png",
+        "fix_ar": false,
+        "clamp": false
+      }
+    },
+    {
+      "name": "rough",
+      "type": "image",
+      "seed_int": 0,
+      "node_position": {
+        "x": -590,
+        "y": 450
+      },
+      "parameters": {
+        "image": "%PROJECT_PATH%/Lowmark_Planked_Oak_Joinery_Planks_Maintained_rough.exr",
+        "fix_ar": false,
+        "clamp": false
+      }
+    },
+    {
+      "name": "height",
+      "type": "image",
+      "seed_int": 0,
+      "node_position": {
+        "x": -590,
+        "y": 675
+      },
+      "parameters": {
+        "image": "%PROJECT_PATH%/Lowmark_Planked_Oak_Joinery_Planks_Maintained_height.exr",
+        "fix_ar": false,
+        "clamp": false
+      }
+    },
+    {
+      "name": "normal_components",
+      "type": "decompose",
+      "seed_int": 0,
+      "node_position": {
+        "x": -375,
+        "y": 230
+      },
+      "parameters": {}
+    },
+    {
+      "name": "native_x",
+      "type": "invert",
+      "seed_int": 0,
+      "node_position": {
+        "x": -169,
+        "y": 173
+      },
+      "parameters": {}
+    },
+    {
+      "name": "native_z",
+      "type": "invert",
+      "seed_int": 0,
+      "node_position": {
+        "x": -169,
+        "y": 400
+      },
+      "parameters": {}
+    },
+    {
+      "name": "native_normal",
+      "type": "combine",
+      "seed_int": 0,
+      "node_position": {
+        "x": 36,
+        "y": 250
+      },
+      "parameters": {}
+    },
+    {
+      "name": "depth_from_height",
+      "type": "invert",
+      "seed_int": 0,
+      "node_position": {
+        "x": -169,
+        "y": 690
+      },
+      "parameters": {}
+    },
+    {
+      "name": "Material",
+      "type": "material",
+      "seed_int": 0,
+      "node_position": {
+        "x": 252,
+        "y": 215
+      },
+      "parameters": {
+        "size": 10,
+        "metallic": 0.0,
+        "roughness": 1.0,
+        "normal": 1.0,
+        "depth_scale": 0.004166666666666667,
+        "ao": 1.0
+      },
+      "export_paths": {}
+    }
+  ],
+  "connections": [
+    {
+      "from": "albedo",
+      "from_port": 0,
+      "to": "Material",
+      "to_port": 0
+    },
+    {
+      "from": "rough",
+      "from_port": 0,
+      "to": "Material",
+      "to_port": 2
+    },
+    {
+      "from": "normal",
+      "from_port": 0,
+      "to": "normal_components",
+      "to_port": 0
+    },
+    {
+      "from": "normal_components",
+      "from_port": 0,
+      "to": "native_x",
+      "to_port": 0
+    },
+    {
+      "from": "normal_components",
+      "from_port": 2,
+      "to": "native_z",
+      "to_port": 0
+    },
+    {
+      "from": "native_x",
+      "from_port": 0,
+      "to": "native_normal",
+      "to_port": 0
+    },
+    {
+      "from": "normal_components",
+      "from_port": 1,
+      "to": "native_normal",
+      "to_port": 1
+    },
+    {
+      "from": "native_z",
+      "from_port": 0,
+      "to": "native_normal",
+      "to_port": 2
+    },
+    {
+      "from": "native_normal",
+      "from_port": 0,
+      "to": "Material",
+      "to_port": 4
+    },
+    {
+      "from": "height",
+      "from_port": 0,
+      "to": "depth_from_height",
+      "to_port": 0
+    },
+    {
+      "from": "depth_from_height",
+      "from_port": 0,
+      "to": "Material",
+      "to_port": 6
+    }
+  ]
+}
