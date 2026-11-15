@@ -246,6 +246,8 @@ Two independent generations matched pixel-for-pixel across all ten maps. Reopene
 
 ## Lowmark Natural Grass & Wildflowers
 
+The Creative Director approved the vegetation library at `df80efa`. The [Caelmor Vegetation Scatter extension](../../../CODE/Scripts/vegetation_scatter/README.md) links this accepted library for terrain authoring.
+
 The yard planting keeps an open tread and uses three scales of vegetation. Stubble and tiny sprouts soften the path shoulder. Low weeds, broken grass and dry stems connect into irregular colonies at the foundation and in undisturbed soil. Taller grass and ribwort-like rosettes rise through these patches, with cream yarrow and muted violet selfheal as sparse accents. The regional dossier provides the location and habitat context for these farmhouse dressing proposals. [Lowmark Vale flora](../../../LORE/Regions/Caelmor_Region1_LowmarkVale.md#ix-flora--fauna)
 
 - [Blender library](Lowmark_Natural_Grass_Wildflowers.blend) and [self-contained glTF 2.0 export](Lowmark_Natural_Grass_Wildflowers.glb). The library has 21 modeled specimens plus 10 filler specimens, each with three LODs for a total of 93 meshes. Assets share a ground pivot at the origin and use metres. Each LOD0 is marked as a Blender object asset. To place one LOD manually, append the named object or select its mesh under the corresponding stage in the GLB hierarchy. Pair the three matching LOD names when setting up an engine LOD group. The Blender properties and GLB extras identify the `specimen` and `filler` placement layers.

@@ -1,0 +1,12 @@
+schema_version = "1.0.0"
+id = "caelmor_vegetation"
+version = "0.1.0"
+name = "Caelmor Vegetation Scatter"
+tagline = "Author layered terrain vegetation and clear path verges"
+maintainer = "Caelmor"
+type = "add-on"
+blender_version_min = "5.0.0"
+license = ["SPDX:GPL-3.0-or-later"]
+
+[permissions]
+files = "Link the approved vegetation library selected by the artist"
