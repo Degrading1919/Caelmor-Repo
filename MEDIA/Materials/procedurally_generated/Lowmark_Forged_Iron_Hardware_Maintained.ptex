@@ -1,0 +1,225 @@
+{
+  "type": "graph",
+  "name": "Graph",
+  "label": "Lowmark Forged Iron | Maintained",
+  "node_position": {
+    "x": 0,
+    "y": 0
+  },
+  "parameters": {},
+  "seed_int": 0,
+  "nodes": [
+    {
+      "name": "albedo",
+      "type": "image",
+      "seed_int": 0,
+      "node_position": {
+        "x": -570,
+        "y": 0
+      },
+      "parameters": {
+        "image": "%PROJECT_PATH%/Lowmark_Forged_Iron_Hardware_Maintained_albedo.png",
+        "fix_ar": false,
+        "clamp": false
+      }
+    },
+    {
+      "name": "normal",
+      "type": "image",
+      "seed_int": 0,
+      "node_position": {
+        "x": -570,
+        "y": 228
+      },
+      "parameters": {
+        "image": "%PROJECT_PATH%/Lowmark_Forged_Iron_Hardware_Maintained_normal.png",
+        "fix_ar": false,
+        "clamp": false
+      }
+    },
+    {
+      "name": "rough",
+      "type": "image",
+      "seed_int": 0,
+      "node_position": {
+        "x": -570,
+        "y": 456
+      },
+      "parameters": {
+        "image": "%PROJECT_PATH%/Lowmark_Forged_Iron_Hardware_Maintained_rough.exr",
+        "fix_ar": false,
+        "clamp": false
+      }
+    },
+    {
+      "name": "metallic",
+      "type": "image",
+      "seed_int": 0,
+      "node_position": {
+        "x": -570,
+        "y": 684
+      },
+      "parameters": {
+        "image": "%PROJECT_PATH%/Lowmark_Forged_Iron_Hardware_Maintained_metallic.png",
+        "fix_ar": false,
+        "clamp": false
+      }
+    },
+    {
+      "name": "height",
+      "type": "image",
+      "seed_int": 0,
+      "node_position": {
+        "x": -570,
+        "y": 912
+      },
+      "parameters": {
+        "image": "%PROJECT_PATH%/Lowmark_Forged_Iron_Hardware_Maintained_height.exr",
+        "fix_ar": false,
+        "clamp": false
+      }
+    },
+    {
+      "name": "normal_components",
+      "type": "decompose",
+      "seed_int": 0,
+      "node_position": {
+        "x": -340,
+        "y": 200
+      },
+      "parameters": {}
+    },
+    {
+      "name": "native_x",
+      "type": "invert",
+      "seed_int": 0,
+      "node_position": {
+        "x": -160,
+        "y": 155
+      },
+      "parameters": {}
+    },
+    {
+      "name": "native_z",
+      "type": "invert",
+      "seed_int": 0,
+      "node_position": {
+        "x": -160,
+        "y": 405
+      },
+      "parameters": {}
+    },
+    {
+      "name": "native_normal",
+      "type": "combine",
+      "seed_int": 0,
+      "node_position": {
+        "x": 15,
+        "y": 225
+      },
+      "parameters": {}
+    },
+    {
+      "name": "depth_from_height",
+      "type": "invert",
+      "seed_int": 0,
+      "node_position": {
+        "x": -200,
+        "y": 912
+      },
+      "parameters": {}
+    },
+    {
+      "name": "Material",
+      "type": "material",
+      "seed_int": 0,
+      "export_paths": {},
+      "node_position": {
+        "x": 250,
+        "y": 215
+      },
+      "parameters": {
+        "size": 10,
+        "metallic": 1.0,
+        "roughness": 1.0,
+        "normal": 1.0,
+        "depth_scale": 0.010416666666666666,
+        "ao": 1.0
+      }
+    }
+  ],
+  "connections": [
+    {
+      "from": "albedo",
+      "from_port": 0,
+      "to": "Material",
+      "to_port": 0
+    },
+    {
+      "from": "metallic",
+      "from_port": 0,
+      "to": "Material",
+      "to_port": 1
+    },
+    {
+      "from": "rough",
+      "from_port": 0,
+      "to": "Material",
+      "to_port": 2
+    },
+    {
+      "from": "normal",
+      "from_port": 0,
+      "to": "normal_components",
+      "to_port": 0
+    },
+    {
+      "from": "normal_components",
+      "from_port": 0,
+      "to": "native_x",
+      "to_port": 0
+    },
+    {
+      "from": "normal_components",
+      "from_port": 2,
+      "to": "native_z",
+      "to_port": 0
+    },
+    {
+      "from": "native_x",
+      "from_port": 0,
+      "to": "native_normal",
+      "to_port": 0
+    },
+    {
+      "from": "normal_components",
+      "from_port": 1,
+      "to": "native_normal",
+      "to_port": 1
+    },
+    {
+      "from": "native_z",
+      "from_port": 0,
+      "to": "native_normal",
+      "to_port": 2
+    },
+    {
+      "from": "native_normal",
+      "from_port": 0,
+      "to": "Material",
+      "to_port": 4
+    },
+    {
+      "from": "height",
+      "from_port": 0,
+      "to": "depth_from_height",
+      "to_port": 0
+    },
+    {
+      "from": "depth_from_height",
+      "from_port": 0,
+      "to": "Material",
+      "to_port": 6
+    }
+  ]
+}
