@@ -1,0 +1,201 @@
+{
+  "name": "Graph",
+  "type": "graph",
+  "label": "Lowmark Ground | Worn Footpath",
+  "seed_int": 0,
+  "node_position": {
+    "x": 0,
+    "y": 0
+  },
+  "parameters": {},
+  "nodes": [
+    {
+      "name": "albedo",
+      "type": "image",
+      "seed_int": 0,
+      "node_position": {
+        "x": -670,
+        "y": 0
+      },
+      "parameters": {
+        "image": "%PROJECT_PATH%/Lowmark_Packed_Earth_Worn_Footpaths_Worn_Footpath_albedo.png",
+        "fix_ar": false
+      }
+    },
+    {
+      "name": "rough",
+      "type": "image",
+      "seed_int": 0,
+      "node_position": {
+        "x": -670,
+        "y": 230
+      },
+      "parameters": {
+        "image": "%PROJECT_PATH%/Lowmark_Packed_Earth_Worn_Footpaths_Worn_Footpath_rough.exr",
+        "fix_ar": false
+      }
+    },
+    {
+      "name": "normal",
+      "type": "image",
+      "seed_int": 0,
+      "node_position": {
+        "x": -670,
+        "y": 460
+      },
+      "parameters": {
+        "image": "%PROJECT_PATH%/Lowmark_Packed_Earth_Worn_Footpaths_Worn_Footpath_normal.exr",
+        "fix_ar": false
+      }
+    },
+    {
+      "name": "height",
+      "type": "image",
+      "seed_int": 0,
+      "node_position": {
+        "x": -670,
+        "y": 690
+      },
+      "parameters": {
+        "image": "%PROJECT_PATH%/Lowmark_Packed_Earth_Worn_Footpaths_Worn_Footpath_height.exr",
+        "fix_ar": false
+      }
+    },
+    {
+      "name": "Channels",
+      "type": "decompose",
+      "seed_int": 0,
+      "node_position": {
+        "x": -440,
+        "y": 390
+      },
+      "parameters": {}
+    },
+    {
+      "name": "Native X",
+      "type": "invert",
+      "seed_int": 0,
+      "node_position": {
+        "x": -240,
+        "y": 325
+      },
+      "parameters": {}
+    },
+    {
+      "name": "Native Z",
+      "type": "invert",
+      "seed_int": 0,
+      "node_position": {
+        "x": -240,
+        "y": 560
+      },
+      "parameters": {}
+    },
+    {
+      "name": "Native normal",
+      "type": "combine",
+      "seed_int": 0,
+      "node_position": {
+        "x": -45,
+        "y": 400
+      },
+      "parameters": {}
+    },
+    {
+      "name": "Depth",
+      "type": "invert",
+      "seed_int": 0,
+      "node_position": {
+        "x": -250,
+        "y": 745
+      },
+      "parameters": {}
+    },
+    {
+      "name": "Material",
+      "type": "material",
+      "seed_int": 0,
+      "node_position": {
+        "x": 185,
+        "y": 220
+      },
+      "parameters": {
+        "size": 10,
+        "metallic": 0.0,
+        "roughness": 1.0,
+        "normal": 1.0,
+        "depth_scale": 0.02277777777777778,
+        "ao": 1.0
+      },
+      "export_paths": {}
+    }
+  ],
+  "connections": [
+    {
+      "from": "albedo",
+      "from_port": 0,
+      "to": "Material",
+      "to_port": 0
+    },
+    {
+      "from": "rough",
+      "from_port": 0,
+      "to": "Material",
+      "to_port": 2
+    },
+    {
+      "from": "height",
+      "from_port": 0,
+      "to": "Depth",
+      "to_port": 0
+    },
+    {
+      "from": "Depth",
+      "from_port": 0,
+      "to": "Material",
+      "to_port": 6
+    },
+    {
+      "from": "normal",
+      "from_port": 0,
+      "to": "Channels",
+      "to_port": 0
+    },
+    {
+      "from": "Channels",
+      "from_port": 0,
+      "to": "Native X",
+      "to_port": 0
+    },
+    {
+      "from": "Channels",
+      "from_port": 2,
+      "to": "Native Z",
+      "to_port": 0
+    },
+    {
+      "from": "Native X",
+      "from_port": 0,
+      "to": "Native normal",
+      "to_port": 0
+    },
+    {
+      "from": "Channels",
+      "from_port": 1,
+      "to": "Native normal",
+      "to_port": 1
+    },
+    {
+      "from": "Native Z",
+      "from_port": 0,
+      "to": "Native normal",
+      "to_port": 2
+    },
+    {
+      "from": "Native normal",
+      "from_port": 0,
+      "to": "Material",
+      "to_port": 4
+    }
+  ]
+}
