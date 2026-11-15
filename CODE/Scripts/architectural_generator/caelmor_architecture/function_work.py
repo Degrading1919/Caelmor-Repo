@@ -565,6 +565,10 @@ def build_market(ctx):
         w,d,floor_height=max(14.0,b.settings.width),max(9.0,b.settings.depth),3.8
     else:
         w,d,floor_height=max(11.0,b.settings.width),max(8.0,b.settings.depth),2.8
+    if b.settings.manual_shape:
+        w,d,floor_height = b.settings.width,b.settings.depth,b.settings.floor_height
+        if w < 8 or d < 5 or floor_height < 2.8:
+            raise ValueError('A market needs an 8 × 5 m hall and 2.8 m walls for stalls and public aisles.')
     region=_enum(b.region)
     bays=_wealth_capacity(b.settings)
     front_margin=.62

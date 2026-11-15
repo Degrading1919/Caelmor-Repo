@@ -10,7 +10,7 @@ from .facade import build_facades
 from .roof import build_roof, roof_faces, roof_topology
 from .geometry import area, cross, sub, dot
 
-TOOL_REVISION='0.21.0'
+TOOL_REVISION='0.22.0'
 
 
 def generate(settings, *, finish_names=(), opening_guides=()):

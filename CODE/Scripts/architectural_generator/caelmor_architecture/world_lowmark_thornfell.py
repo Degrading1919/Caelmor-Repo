@@ -6,6 +6,7 @@ in surface decoration, so LOW detail still retains the regional silhouette.
 """
 import math
 from .openings import guide_walls
+from .model import supports_wall_guides
 
 _DOMESTIC_FAMILIES = {"COTTAGE", "FARMHOUSE", "TOWNHOUSE", "MERCHANT_HOUSE"}
 
@@ -144,9 +145,8 @@ def build_lowmark(ctx):
     elif context == "ASHENSTEAD":
         width *= .94
 
-    if s.fit_blockout:
-        # The proxy sets the occupied core. Keep the cottage's regional
-        # assemblies, but leave detached ranges and yards to the scene artist.
+    if s.fit_blockout or s.manual_shape:
+        # The authored envelope sets the occupied core.
         width, depth, floors = s.width, s.depth, s.floors
 
     core = _mass(
@@ -154,9 +154,9 @@ def build_lowmark(ctx):
         floors=floors, floor_height=floor_h, roof="GABLE", pitch=32,
         overhang=.42, openings=openings, entrance_edge=0,
         blocked_edges=(1,3) if category=='MILLER' else (1,), foundation="PLINTH",
-        guided_openings=guide_walls(ctx.opening_guides) if s.fit_blockout else None,
+        guided_openings=guide_walls(ctx.opening_guides) if supports_wall_guides(s) else None,
     )
-    if s.fit_blockout:
+    if supports_wall_guides(s):
         return
 
     # A freestanding yard-side range keeps a weather gap from the main hall.
@@ -284,6 +284,8 @@ def _thornfell_buttresses(ctx, mass, s, count=2):
 
 def _stepped_stone_gables(ctx,mass):
     """Wind-protecting masonry gables with bearing courses and weather copings."""
+    if mass.plan.roof_mode != 'GABLE':
+        return
     x0,y0,x1,y1=mass.bounds
     count=max(8,round(mass.depth/.55)); step=mass.depth/count
     walls=ctx.buffer('stepped_wind_gables','stone','roof',mass)
@@ -336,6 +338,8 @@ def build_thornfell(ctx):
     if category == "COTTAGE" and wealth == "MODEST":
         floors = 1
     household_pitch = 42 if calm_coping else 52
+    if s.manual_shape:
+        width, depth, floors, floor_h = s.width, s.depth, s.floors, s.floor_height
     roof = _mass(
         ctx, "thornfell_stone_hall", x=0, y=0, width=width, depth=depth,
         floors=floors, floor_height=floor_h, roof="GABLE", pitch=household_pitch,

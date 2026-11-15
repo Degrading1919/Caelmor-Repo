@@ -289,9 +289,13 @@ class CAELMOR_OT_roof_load(bpy.types.Operator):
     bl_idname = 'caelmor.roof_load'
     bl_label = 'Load Saved Bearing and Settings'
     bl_options = {'REGISTER','UNDO'}
+    from_selection: bpy.props.BoolProperty(default=False,options={'HIDDEN'})
 
     def execute(self, context):
         props = context.scene.caelm_roof_settings
+        if self.from_selection:
+            active = context.view_layer.objects.active
+            props.target = next((c for c in active.users_collection if c.get(ROOF)),None) if active else None
         if not props.target:
             return {'CANCELLED'}
         settings = json.loads(props.target['caelm_roof_settings'])
@@ -348,41 +352,33 @@ class CAELMOR_OT_roof_export(bpy.types.Operator):
         return {'FINISHED'}
 
 
-class CAELMOR_PT_roof(bpy.types.Panel):
-    bl_label = 'Roof AutoComplete'
-    bl_idname = 'CAELMOR_PT_roof'
-    bl_space_type = 'VIEW_3D'
-    bl_region_type = 'UI'
-    bl_category = 'Caelmor'
-
-    @classmethod
-    def poll(cls, context):
-        return context.mode == 'OBJECT'
-
-    def draw(self, context):
-        layout = self.layout
-        props = context.scene.caelm_roof_settings
-        layout.operator('caelmor.roof_preview',icon='MESH_GRID')
-        layout.prop(props,'target')
-        if props.target:
-            layout.operator('caelmor.roof_load')
-        for name in ('material','rise','detail','advanced'):
+def draw_roof(layout,context,selected=None):
+    props = context.scene.caelm_roof_settings
+    if context.mode!='OBJECT':
+        layout.label(text='Switch to Object Mode to work on a roof.')
+        return
+    if selected and selected!=props.target:
+        layout.label(text=selected.name,icon='HOME')
+        layout.operator('caelmor.roof_load',text='Edit Selected Roof').from_selection = True
+        return
+    layout.operator('caelmor.roof_preview',text='Preview Wall Top',icon='MESH_GRID')
+    layout.prop(props,'target',text='Existing Roof')
+    if props.target:
+        layout.operator('caelmor.roof_load',text='Load Roof Settings')
+    for name in ('material','rise','detail','overhang','advanced'):
+        layout.prop(props,name)
+    if props.advanced:
+        for name in ('material_directory','ridge','seed','center','width','depth','angle'):
             layout.prop(props,name)
-        if props.advanced:
-            for name in ('material_directory','ridge','overhang','seed','center','width','depth','angle'):
-                layout.prop(props,name)
-            correction = layout.operator('caelmor.roof_preview',text='Preview Manual Bearing')
-            correction.infer = False
-        if props.ready:
-            shape = 'Main + wing' if props.rects != '[]' else 'Rectangle'
-            layout.label(text=f'{shape} {props.width:.2f} × {props.depth:.2f} m at Z {props.center.z:.2f} m')
-            layout.operator('caelmor.roof_generate',icon='MOD_BUILD')
-        if props.target:
-            layout.label(text=f"{props.target.get('caelm_roof_triangles',0):,} generated triangles")
-            layout.label(text=f"{props.target.get('caelm_roof_shingles',0):,} / "
-                              f"{props.target.get('caelm_roof_cover_units',0):,} modeled shingles")
-            layout.operator('caelmor.roof_export',icon='EXPORT')
+        correction = layout.operator('caelmor.roof_preview',text='Preview Manual Bearing')
+        correction.infer = False
+    if props.ready:
+        shape = 'Main + wing' if props.rects != '[]' else 'Rectangle'
+        layout.label(text=f'{shape} {props.width:.2f} × {props.depth:.2f} m')
+        layout.operator('caelmor.roof_generate',icon='MOD_BUILD')
+    if props.target:
+        layout.operator('caelmor.roof_export',icon='EXPORT')
 
 
 CLASSES = (RoofSettings,CAELMOR_OT_roof_preview,CAELMOR_OT_roof_load,
-           CAELMOR_OT_roof_generate,CAELMOR_OT_roof_export,CAELMOR_PT_roof)
+           CAELMOR_OT_roof_generate,CAELMOR_OT_roof_export)

@@ -1,6 +1,18 @@
 # Caelmor Architectural Generator
 
-Version 0.21.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. An isolated, opt-in Unity client floor-presentation adapter accompanies floor-aware exports; it is not wired into the playable scene.
+Version 0.22.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. An isolated, opt-in Unity client floor-presentation adapter accompanies floor-aware exports; it is not wired into the playable scene.
+
+## Start here
+
+Open **3D View → Sidebar → Caelmor** and choose **Create Building**. Pick the type and a starting style. **Recommended** sizes it for you, **Enter Dimensions** sets the main volume, and **Selected Box** fits the main envelope to an upright rectangular mesh you place and rotate in Object Mode. The box remains editable. Forge and gate passage layouts size their own working bays. Market halls and stables require room for their circulation and service bays.
+
+Select part of a building to edit it. **Shape** changes its dimensions, or refits the source box. **Roof** edits the selected volume. Gable, hip, pitch, and overhang choices keep the building's regional construction. **Assign Material** applies a scene material immediately when confirmed. Use the selected part, the corresponding construction group, or **Restore Default Material**. **Construction** exposes assembly choices relevant to the selection. **Condition** changes age, maintenance, and workmanship. Enable **Protect Mesh Edits** on an object before hand-modeling it.
+
+For a box-fitted Lowmark Cottage, select a guide face or edge and choose **Add Wall Feature**. An attached guide shows actions to change its type, update its shape or location, or remove it. Select a generated opening and use **Select Feature Guide** to return to its source.
+
+Use **Roof from Walls** in the same sidebar for standalone roofs on manually built walls. Preview the wall top, choose material and roof height, and generate. Select a previously generated standalone roof to edit its settings.
+
+**Advanced Tools** contains seeds, mesh fidelity, material height, floor preview, diagnostics, and export. Use **Load Building into Draft** before changing expert controls, then **Apply Draft**. The routine **Regenerate** action rebuilds the selected building from its saved choices. If a roof or dimension edit conflicts with an adjacent assembly or a protected part, the last valid building stays in place.
 
 New buildings have floor-separated visuals by default. Select a building, set
 **Simulated floor** (0 = ground, −1 = exterior), choose its **Construction volume**
@@ -119,27 +131,19 @@ approval.
    sets the foundation datum and the top sets the eaves, with the gabled roof
    extending above and beyond the box. Use an upright, unmodified box with a
    6–24 m width and 4–16 m depth. For one floor, use a 2.85–4.25 m box height.
-2. In **Caelmor Architecture → Building**, select **Lowmark / Cottage**. Set
-   the floor count under **Shape**, select the box, then choose **Generate from
-   Selected Box**. The existing Lowmark core fits the box exactly. The source
-   stays separate and editable. Set its viewport display to Wire and hide it
-   from renders as needed. Unfitted buildings keep the existing **Generate New**
-   workflow at the 3D cursor.
-3. Use **Construction** for role-wide assembly choices. Select a generated
-   timber component and use **Components → Stage Timber Profile** for a local
-   hewn or squared profile. In **Materials**, choose **Construction role** or
-   **Selected component**, choose a scene material and click **Stage Finish**.
-   Selected components can also store a 90°, 180° or 270° rotation of the
-   generated `UV0_Metric`. Click **Regenerate All** to commit the staged settings
-   to this building. **Clear Override** returns to the inherited choice on the
-   next rebuild. A semantic component can cover several meshes or floor sections.
-4. Start a later edit with **Load Selected Settings**. If you move, rotate or
-   resize the box, select the generated cottage and use **Shape → Refit from
-   Source Box**. Refit uses the building's last applied settings, so apply staged
-   edits first. An ordinary regeneration uses the last fitted dimensions.
+2. With the box selected, choose **Create Building** and select **Lowmark / Cottage**,
+   **Selected Box**, and the desired storey count. The Lowmark core fits the box
+   exactly. Set the separate source to Wire display and hide it from renders as needed.
+3. Use **Construction** to change the assembly or the selected timber profile.
+   **Assign Material** changes the part or matching group when you confirm it.
+   A selected construction component can also store a rotation of the generated
+   `UV0_Metric`. **Restore Default Material** removes the chosen assignment.
+   A component can cover several meshes or floor sections.
+4. If you move, rotate or resize the box, select the generated cottage and
+   use **Refit Box**. An ordinary regeneration uses the last fitted dimensions.
    Protected manual sections move with the anchor. A refit that changes their
    generated source geometry reports the conflict before replacing any meshes.
-5. Use **Export → Export Building** for the existing visual GLB, separate
+5. Use **Advanced Tools → Export Building** for the visual GLB, separate
    collision GLB and metadata. The source box is excluded. Substance-produced
    Blender materials use the same picker as other loaded materials. Keep
    material names stable across regeneration, and use exportable PBR image
@@ -167,15 +171,15 @@ and the [Cottage authoring verification](evidence/blockout_authoring/README.md).
    default shallow head, or a convex face with a level threshold, vertical
    jambs and a symmetric elliptical head. Door heads need to clear the wall
    plate and neighboring openings. Out-of-range guides receive a diagnosis.
-3. Select the face and click **Apply Feature Guide**. It stays editable and
+3. Select the face, choose **Add Wall Feature**, and confirm the type. It stays editable and
    appears as a wire guide parented to the building root. It is excluded from
    renders and the GLB. The generated assembly has stable component IDs for
-   **Materials** and a separate collision representation. Clear **Closed Leaf**
+   material assignment and a separate collision representation. Clear **Include Closed Door**
    to create an open passage and an approach collider. A closed leaf or a
    glazed window keeps static wall collision.
 4. Move the guide along its wall or edit its vertices. Select the guide or a
-   generated part of the cottage and use **Regenerate Guides**. To move a guide
-   to a different wall, use **Apply Feature Guide** again. Use **Remove Guide**
+   generated part of the cottage and use **Update Feature** or **Update Wall Features**. To move a guide
+   to a different wall, reapply it through **Change Feature Type**. Use **Remove**
    to detach it and restore the wall, or delete the source and regenerate. It
    remembers its ID, host wall and options through save/reopen. Refit preserves
    distances measured from each host wall's start corner.
@@ -210,24 +214,23 @@ identity, floor layout or core construction structure remain guarded.
 Install or update the extension with the ZIP above. In Blender 5.0, open a
 scene where one Blender unit represents one metre and select the exterior
 wall modules in Object Mode. Include the structural wall core on each side.
-Open **N → Caelmor → Roof AutoComplete** and choose **Infer Wall Bearing**.
+Open **N → Caelmor → Roof from Walls** and choose **Preview Wall Top**.
 The outline shows the wall centre lines and bearing elevation. To correct it,
 open **Advanced**, edit the bearing centre, width, depth or angle, then choose
 **Preview Manual Bearing**.
 
 Choose **Brookoak Shingles** and set **Roof Height** to the structural ridge
 rise above the bearing. Rise determines pitch for the selected span. Advanced
-controls set the ridge axis, overhang and seed. The PBR map folder defaults to
+controls set the ridge axis and seed. Set overhang with the other roof controls. The PBR map folder defaults to
 the designated checkout's `MEDIA/Materials/procedurally_generated` directory.
 The material uses the Brookoak albedo PNG, normal PNG and roughness EXR.
 
 **Generate / Update Roof** confirms the displayed bearing and creates an
 editable roof collection. To revisit a roof, choose its collection in
-**Update Target** and load its saved settings. Updating replaces the tool's
+**Existing Roof** or select the roof and choose **Edit Selected Roof**. Updating replaces the tool's
 generated parts in that collection. Duplicate any manually edited parts you
 want to keep across regeneration into another collection. **Export Roof GLB**
-exports the generated parts of the target. The displayed count is the generated
-mesh triangle total before manual editing.
+exports the generated parts of the target.
 
 Geometry Detail is the approximate share of shingle cells modeled on each
 slope. At 0%, one continuous textured field covers each slope. At 100%, the
@@ -260,7 +263,7 @@ the new detail behavior.
 
 ## Generate a building
 
-Choose a building type, region, compatible local context, household wealth, craftsmanship, age, maintenance, geometry mode, detail, and seed. New panel settings start with regional grammar enabled. **Generate New** builds the effective plan and records the requested settings and validation summary on the Caelmor Building collection.
+**Create Building** starts from a function, style, and sizing method. It stores the settings and validation summary on the resulting building collection. **Condition** and **Advanced Tools** expose further choices when needed.
 
 ### Regions and contexts
 
@@ -282,13 +285,9 @@ Each type has its own default plan proportions and exterior features such as sta
 
 ### Grammar and manual shape
 
-With **Use Regional Grammar** on, type, region, context, wealth, and craftsmanship resolve a constraint-checked footprint, dimensions, floor count and height, pitch, roof preference, foundation, construction, and cover. The manual width, depth, wing, footprint, floor, floor-height, and pitch values are not consumed in this mode; overhang remains an explicit user-controlled roof setting. **Apply Grammar to Shape Controls** copies the resolved dimensions into those controls; switch grammar off to edit the resulting shape manually.
+Recommended sizing uses building type, region, context, investment, and workmanship. **Shape** can set the main volume directly while secondary volumes retain their regional arrangement. **Roof** stores choices by volume. Choose **Recommended** in the roof dialog and clear its pitch and overhang overrides to return to that volume's suggested form.
 
-With **World Construction Language** on (the default for new Blender settings), region, function and household investment create multiple roofed volumes where appropriate. Lowmark pairs halls with working/storage/private-room ranges; Thornfell households use calm stone gables and sheltered courts while public/defensive functions can justify towers; the Mire combines raised timber halls with working decks and private links; Emberholt uses deep masonry, hearth flues, narrow domestic bodies, terraced courts, lower iron-roofed work ranges and civic/industrial ironwalks. These forms can change the footprint and number of volumes, so shape values are profile inputs rather than promises of exact final dimensions. Generated bounds and validation report the actual result. Regional construction chooses roof forms and eaves, so manual roof style and overhang are disabled in this mode.
-
-Turn **World Construction Language** off to use the single-plan regional generator. This retains the prior manual and grammar workflows for compatibility.
-
-With both World Construction Language and grammar off, manual dimensions and footprint are used directly. Roof style remains an independent control: **Regional / Type Default** selects the type's preference; Gable and Hip explicitly choose a roof. This keeps manual shaping available without silently applying archetype dimensions.
+The advanced single-plan option retains older manual and grammar workflows. Its **Shape** dialog also exposes the legacy footprint and wing dimensions.
 
 The supported footprints are RECT, L, T, and U. L wings may mirror, T wings may shift, and U wings may have unequal depths according to the seed. The guardrails require width 6–24 m, depth 4–16 m, 1–3 floors, and wing widths of at least 2.5 m. Non-rectangular wings must fit the main body, and U footprints retain at least 2 m of courtyard clearance.
 
@@ -369,7 +368,7 @@ edited surface before regenerating with another representation.
 
 ## Regeneration and export
 
-**Load Selected Settings** restores saved settings. **Regenerate Selected** replaces all generated layers or a selected roof, windows/doors, or details layer. Untagged objects are preserved. Use **Protect / Unprotect Selected** to retain an edited generated mesh through regeneration; protected meshes are included in exports.
+**Regenerate** uses the selected building's saved settings. Use **Advanced Tools** for scoped refreshes and export. **Protect Mesh Edits** retains the selected mesh through compatible regeneration and includes it in exports.
 
 Exports write GLB or glTF, a separate approximate collision GLB when proxies exist, and a `.caelmor.json` sidecar. The sidecar records settings, architecture mode, construction-zone bounds and validation counts, geometry hash, semantic layers, each object's world-zone, material and topology, structural role, roof-envelope/support-surface diagnostics, and protected state. World-aware collision proxies are generated for each construction zone and use its own foundation and eave heights; legacy proxies retain their prior layout. Collision proxies are approximate static wall and footprint shapes; they have not been tested for traversal or in Unity.
 
@@ -437,7 +436,7 @@ The add-on source is GPL-3.0-or-later; the complete license is included as `cael
 
 ## Material height relief
 
-For an authored finish, enable **Geometry → Material Height Relief**, then use **Materials → Scene Material** to assign it to Roof Covering, boarded Frame Enclosure, or exposed Masonry Wall Body. Stage the finish and use **Generate** or **Regenerate All**. A compatible height source is discovered from the material and applied as editable Blender modifiers. Select the generated field to see its height source or flat-fallback reason in Geometry.
+For an authored finish, enable **Material Height Relief** in the advanced draft, then **Apply Draft**. Use **Assign Material** on roof covering, boarded enclosure, or exposed masonry. A compatible height source is discovered from the material and applied as editable Blender modifiers. Select the generated field and open **Advanced Tools** to see its height source or flat-fallback reason.
 
 Use **Relief Subdivision** to change sampling density and **Relief Strength** to scale depth. Strength zero provides a flat mapped comparison. The material's **Height Image Override**, **Height Span (m)** and **Neutral Height** are optional persistent authoring controls. For Substance materials, enable or export the height channel from the same graph and preset as the visible channels. A matching sibling such as `stock_height.png` beside `stock_basecolor.png` resolves automatically. Non-Color, unit-range height data and shared UV mapping are required.
 

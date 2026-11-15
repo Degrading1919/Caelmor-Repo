@@ -45,8 +45,27 @@ class Settings:
     material_relief: bool = False
     relief_resolution: int = 0
     relief_strength: float = 1.0
+    manual_shape: bool = False
+    roof_overrides: dict | None = None
 
     def check(self, validate_shape=True):
+        if not isinstance(self.manual_shape, bool):
+            raise ValueError('Manual shape must be enabled or disabled')
+        if self.manual_shape and self.world_aware and self.function in ('SMITHY','GATEHOUSE'):
+            raise ValueError('This working or passage layout sizes its own bays. Its roof and materials can still be edited.')
+        if self.manual_shape and self.world_aware and self.function in ('STABLE','MARKET_HALL') and self.floors != 1:
+            raise ValueError('This open working hall has one floor.')
+        if self.roof_overrides is not None:
+            if not isinstance(self.roof_overrides, dict) or (not self.world_aware and self.roof_overrides.keys()-{'main'}):
+                raise ValueError('Roof edits must refer to a generated roof volume')
+            for zone, values in self.roof_overrides.items():
+                if (not isinstance(zone,str) or not isinstance(values,dict)
+                        or values.keys() - {'style','pitch','overhang'}
+                        or values.get('style','AUTO') not in ('AUTO','GABLE','HIP')):
+                    raise ValueError(f'{zone}: use Recommended, Gable or Hip')
+                for name, lower, upper in (('pitch',10.,60.),('overhang',.04,.8)):
+                    if name in values and (type(values[name]) not in (float,int) or not lower <= values[name] <= upper):
+                        raise ValueError(f'{zone}: {name} must be between {lower:g} and {upper:g}')
         if (not isinstance(self.material_relief, bool) or type(self.relief_resolution) is not int
                 or self.relief_resolution not in (0, 1, 2) or not 0 <= self.relief_strength <= 2):
             raise ValueError('Material relief requires sampling level 0–2 and strength multiplier 0–2')
@@ -226,10 +245,10 @@ def style_for(settings):
 
 def resolve_settings(requested):
     """Return a validated effective grammar realization; manual dimensions are retained."""
-    if requested.fit_blockout and (requested.region != 'LOWMARK' or requested.function != 'COTTAGE'
-                                  or not requested.world_aware or requested.use_grammar):
-        raise ValueError('Blockout fit requires a Lowmark Cottage with World construction and manual dimensions')
-    if requested.world_aware and not requested.use_grammar:
+    if requested.fit_blockout and (not requested.world_aware or requested.use_grammar and not requested.manual_shape
+                                  or not requested.manual_shape and not supports_wall_guides(requested)):
+        raise ValueError('Box fitting requires a regional building with fitted dimensions')
+    if requested.world_aware and (requested.manual_shape or not requested.use_grammar):
         # World builders consume envelope dimensions, not legacy U/L wing or
         # roof controls. Stale hidden controls cannot invalidate a valid input.
         requested.check(validate_shape=False)
@@ -241,11 +260,15 @@ def resolve_settings(requested):
     # Grammar replaces the footprint and dimensional controls, so validate
     # those constraints on the effective type plan below. Always validate the
     # active profile, seed, finite values, upkeep, roof control and detail inputs.
-    requested.check(validate_shape=not requested.use_grammar)
+    requested.check(validate_shape=not requested.use_grammar or requested.manual_shape)
+    if requested.manual_shape:
+        return _legacy_roof(replace(requested,context=_context(requested),
+                            roof_style=TYPE_SPECS[requested.function].roof_style if requested.roof_style=='AUTO'
+                            else requested.roof_style))
     if not requested.use_grammar:
-        return replace(requested, context=_context(requested),
+        return _legacy_roof(replace(requested, context=_context(requested),
                        roof_style=(TYPE_SPECS[requested.function].roof_style if requested.roof_style=='AUTO'
-                                   else requested.roof_style))
+                                   else requested.roof_style)))
     spec=TYPE_SPECS[requested.function]
     region=REGIONS[requested.region]
     context=_context(requested)
@@ -279,7 +302,20 @@ def resolve_settings(requested):
                       roof_style=(spec.roof_style if requested.roof_style=='AUTO' else requested.roof_style),
                       context=context)
     effective.check()
-    return effective
+    return _legacy_roof(effective)
+
+
+def supports_wall_guides(settings):
+    return settings.fit_blockout and (settings.region,settings.function)==('LOWMARK','COTTAGE')
+
+
+def _legacy_roof(settings):
+    edits = (settings.roof_overrides or {}).get('main',{})
+    if settings.world_aware or not edits:
+        return settings
+    style = edits.get('style','AUTO')
+    return replace(settings,roof_style=settings.roof_style if style=='AUTO' else style,
+                   pitch=edits.get('pitch',settings.pitch),overhang=edits.get('overhang',settings.overhang))
 
 
 def make_plan(settings):

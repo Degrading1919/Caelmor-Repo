@@ -27,6 +27,9 @@ def _settings_dict(settings):
     if not data.get('material_relief'):
         for key in ('material_relief','relief_resolution','relief_strength'):
             data.pop(key,None)
+    for key in ('manual_shape','roof_overrides'):
+        if not data.get(key):
+            data.pop(key,None)
     return data
 
 
@@ -351,7 +354,8 @@ def _without_removed_guide_overrides(settings, retired):
     return replace(settings, construction_overrides=overrides)
 
 
-def build(settings, collection=None, layers=None, origin=None, *, placement=None, guide_edit=None, guide_refresh=False):
+def build(settings, collection=None, layers=None, origin=None, *, placement=None, guide_edit=None,
+          guide_refresh=False, section_materials=None):
     """Build off-scene, then swap generated objects in requested layers only."""
     if collection is not None and not collection.get(COLLECTION_TAG):
         raise ValueError("Selected collection is not a Caelmor generated building")
@@ -388,8 +392,7 @@ def build(settings, collection=None, layers=None, origin=None, *, placement=None
     # Height settings and finishes act on visual fields. When their source
     # geometry and guide schedule are identical, keep the authored collider
     # objects and their export provenance through the same-key update.
-    retain_collision = (collection is not None and old.get('material_relief') and settings.material_relief
-                        and not guide_change and placement is None
+    retain_collision = (collection is not None and not guide_change and placement is None
                         and collection.get('caelm_source_geometry_hash') == validation['geometry_hash'])
     setting_data = _settings_dict(settings)
     scope = None
@@ -420,6 +423,11 @@ def build(settings, collection=None, layers=None, origin=None, *, placement=None
                          m.name == previous_object.get('caelm_surface_material')))
                 or m.get('caelm_user_override')) for m in slots):
             overrides[previous_object.get('caelm_buffer_id')]=slots
+    for identity, material in (section_materials or {}).items():
+        if material is None:
+            overrides.pop(identity,None)
+        else:
+            overrides[identity] = (material,)
     if collection and collection.get('caelm_floor_contract') and not settings.floor_separation and overrides:
         raise ValueError('Restore section-specific material slots before disabling floor separation, or keep the separated representation; artist overrides were left unchanged')
     candidates = {b.name:b for b in buffers}
@@ -578,6 +586,12 @@ def build(settings, collection=None, layers=None, origin=None, *, placement=None
         collection["caelm_architecture"] = validation.get("architecture", "WORLD" if settings.world_aware else "LEGACY")
         construction_zones = validation.get("construction_zones", [])
         collection["caelm_construction_zones"] = json.dumps(construction_zones, sort_keys=True)
+        collection['caelm_editable_volumes'] = json.dumps({
+            zone.key: dict(width=zone.width,depth=zone.depth,floors=zone.plan.settings.floors,
+                           floor_height=zone.plan.settings.floor_height,style=zone.plan.roof_mode,
+                           recommended_style=zone.plan.recommended_roof_mode,
+                           pitch=zone.plan.settings.pitch,overhang=zone.plan.settings.overhang)
+            for zone in getattr(plan,'world_zones',())})
         collection["caelm_source_validation"] = json.dumps({
             "valid": bool(validation.get("valid", False)),
             "source_objects": int(validation.get("objects", len(buffers))),

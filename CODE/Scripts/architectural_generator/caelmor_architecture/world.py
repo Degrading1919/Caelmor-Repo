@@ -131,6 +131,18 @@ class Context:
              construction=None,swept_eaves=0.,guided_openings=None):
         if any(m.key==key for m in self.masses):
             raise ValueError('Duplicate construction zone: '+key)
+        recommended_roof = roof
+        edit = (self.settings.roof_overrides or {}).get(key, {})
+        if edit.get('style','AUTO') != 'AUTO':
+            roof = edit['style']
+            if pitch is not None and pitch < 10.:
+                pitch = self.settings.pitch
+        if ('pitch' in edit and roof in ('BOW','TERRACE')) or ('overhang' in edit and roof=='TERRACE'):
+            raise ValueError('Choose a gable or hip to edit the pitch of a bow or terrace, or the overhang of a terrace.')
+        pitch = edit.get('pitch',pitch)
+        overhang = edit.get('overhang',overhang)
+        if roof != 'GABLE' and edit:
+            swept_eaves = 0.
         if not all(math.isfinite(v) for v in (x,y,width,depth)) or min(width,depth)<1.4:
             raise ValueError('Invalid construction volume dimensions')
         if roof not in ('GABLE','HIP','SHED','BOW','TERRACE'):
@@ -192,6 +204,7 @@ class Context:
         plan.entry_steps=steps
         plan.world_mass=True
         plan.roof_mode=roof
+        plan.recommended_roof_mode=recommended_roof
         plan.wall_thickness={'LOWMARK':.28,'THORNFELL':.50,'MIRE':.18,'EMBERHOLT':.70}[s.region]
         plan.glazing_recess=.22 if s.region in ('THORNFELL','EMBERHOLT') else 0.
         plan.door_thickness=.12 if s.region=='EMBERHOLT' else .065
@@ -456,6 +469,9 @@ def generate(settings, *, resolver=None, opening_guides=()):
         from .world_emberholt import build
         build(ctx)
     if not ctx.masses:raise ValueError('Architectural language created no occupied volume')
+    missing = set(effective.roof_overrides or {}) - {mass.key for mass in ctx.masses}
+    if missing:
+        raise ValueError(f'Edited roof {sorted(missing)[0]} is absent in this layout. Restore that volume or reset its roof edits.')
     _abutment_flashings(ctx)
     _working_apparatus(ctx)
     from .benchmark_finish import refine

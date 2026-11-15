@@ -2,7 +2,7 @@
 bl_info = {
     "name": "Caelmor Architectural Generator",
     "author": "Caelmor",
-    "version": (0, 21, 0),
+    "version": (0, 22, 0),
     "blender": (4, 2, 0),
     "location": "View3D > Sidebar > Caelmor",
     "description": "Generate editable regional Caelmor buildings",
@@ -85,6 +85,8 @@ def _settings_from_props(props):
         material_relief=props.caelm_material_relief,
         relief_resolution=props.caelm_relief_resolution,
         relief_strength=props.caelm_relief_strength,
+        manual_shape=props.caelm_manual_shape,
+        roof_overrides=json.loads(props.caelm_roof_overrides),
     )
 
 
@@ -119,6 +121,8 @@ def _set_props(props, settings):
     props.caelm_material_relief = settings.material_relief
     props.caelm_relief_resolution = settings.relief_resolution
     props.caelm_relief_strength = settings.relief_strength
+    props.caelm_manual_shape = settings.manual_shape
+    props.caelm_roof_overrides = json.dumps(settings.roof_overrides)
     props.caelm_construction = settings.construction_overrides is not None
     original = settings.construction_overrides or {}
     props.caelm_construction_overrides = json.dumps(original, sort_keys=True)
@@ -161,7 +165,10 @@ def _active_component(context):
 
 
 def _fitted_collection(_self, collection):
-    return bool(collection.get('caelm_build') and collection.get('caelm_blockout_source'))
+    if not collection.get('caelm_build') or not collection.get('caelm_blockout_source'):
+        return False
+    from .model import supports_wall_guides
+    return supports_wall_guides(_settings_from_json(json.loads(collection.get('caelm_settings','{}'))))
 
 
 class CAELMOR_PG_Settings(_bpy().types.PropertyGroup if False else object):
@@ -230,6 +237,15 @@ def _make_classes(b):
         caelm_construction_overrides: b.props.StringProperty(
             name="Saved Construction Overrides", default="{}", options={'HIDDEN'})
         caelm_fit_blockout: b.props.BoolProperty(options={'HIDDEN'})
+        caelm_show_advanced: b.props.BoolProperty(name='Advanced Tools',
+            description='Show seeds, generation controls, geometry detail, diagnostics and export options')
+        caelm_draft_target: b.props.PointerProperty(type=b.types.Collection,options={'HIDDEN'})
+        caelm_draft_snapshot: b.props.StringProperty(options={'HIDDEN'})
+        caelm_authoring_tool: b.props.EnumProperty(name='Tool',items=[
+            ('AUTO','Buildings','Create or edit a building. Select a standalone roof to edit it'),
+            ('ROOF','Roof from Walls','Create a standalone roof from an existing set of walls')])
+        caelm_manual_shape: b.props.BoolProperty(options={'HIDDEN'})
+        caelm_roof_overrides: b.props.StringProperty(default='null',options={'HIDDEN'})
         caelm_edit_finish: b.props.BoolProperty(name="Set a finish on this role", options={'HIDDEN'})
         caelm_finish_scope: b.props.EnumProperty(name="Apply To", items=[
             ('ROLE', 'Construction role', 'Use the finish across all components of that role'),
@@ -338,7 +354,7 @@ def _make_classes(b):
     class CAELMOR_OT_fit_blockout(b.types.Operator):
         bl_idname = 'caelmor.fit_blockout'
         bl_label = 'Generate from Selected Box'
-        bl_description = 'Fit a Lowmark Cottage to the selected box, using its top as eave height and local −Y as frontage'
+        bl_description = 'Fit the main volume to an upright box, with its top at the eaves and local −Y at the front'
         bl_options = {'REGISTER', 'UNDO'}
         refit: b.props.BoolProperty(default=False, options={'HIDDEN'})
 
@@ -361,7 +377,8 @@ def _make_classes(b):
                 collection, _ = build(fitted, collection=collection, placement=placement)
                 collection['caelm_blockout_source'] = source
                 _set_props(props, _settings_from_json(load_settings(collection)))
-                props.caelm_guide_target = collection
+                if _fitted_collection(None,collection):
+                    props.caelm_guide_target = collection
                 self.report({'INFO'}, f'{collection.name} fitted to {source.name}')
                 return {'FINISHED'}
             except Exception as exc:
@@ -446,9 +463,13 @@ def _make_classes(b):
         def execute(self, context):
             try:
                 from .blender_backend import load_settings
-                data = load_settings(_active_build(context))
+                collection = _active_build(context)
+                data = load_settings(collection)
                 settings = _settings_from_json(data)
-                _set_props(context.scene.caelmor_settings, settings)
+                props = context.scene.caelmor_settings
+                _set_props(props, settings)
+                props.caelm_draft_target = collection
+                props.caelm_draft_snapshot = collection['caelm_settings']
                 self.report({'INFO'}, "Loaded building settings")
                 return {'FINISHED'}
             except Exception as exc:
@@ -464,6 +485,7 @@ def _make_classes(b):
             ('WINDOWS', "Windows", "Replace windows and doors"),
             ('DETAILS', "Details", "Replace architectural details"),
         ], default='ALL')
+        require_draft: b.props.BoolProperty(default=False,options={'HIDDEN'})
 
         @classmethod
         def poll(cls, context):
@@ -472,10 +494,16 @@ def _make_classes(b):
         def execute(self, context):
             try:
                 from .blender_backend import build
-                settings = _settings_from_props(context.scene.caelmor_settings)
+                props = context.scene.caelmor_settings
+                settings = _settings_from_props(props)
                 collection = _active_build(context)
+                if self.require_draft and (props.caelm_draft_target!=collection
+                        or props.caelm_draft_snapshot!=collection.get('caelm_settings')):
+                    raise ValueError('Load this building into the advanced draft before applying it.')
                 _, metrics = build(settings, collection=collection,
                                    layers=None if self.scope == 'ALL' else self.scope)
+                if self.require_draft:
+                    props.caelm_draft_snapshot = collection['caelm_settings']
                 if settings.fit_blockout:
                     from .blender_backend import load_settings
                     props = context.scene.caelmor_settings
@@ -530,7 +558,8 @@ def _make_classes(b):
                 if not any(c == collection for c in context.scene.collection.children_recursive):
                     raise ValueError('The target cottage must be in the current scene')
                 settings = _settings_from_json(load_settings(collection))
-                if not settings.fit_blockout:
+                from .model import supports_wall_guides
+                if not supports_wall_guides(settings):
                     raise ValueError('Wall feature guides require a box-fitted Lowmark Cottage')
                 context.view_layer.update()
                 edit = None
@@ -632,183 +661,70 @@ def _make_classes(b):
         def draw(self, context):
             layout = self.layout
             p = context.scene.caelmor_settings
+            if context.mode!='OBJECT':
+                layout.label(text='Switch to Object Mode to apply building changes.')
+                return
+            from .authoring_ui import draw as draw_authoring
+            layout.operator_context = 'INVOKE_DEFAULT'
+            draw_authoring(layout,context)
+            layout.prop(p,'caelm_show_advanced')
+            if not p.caelm_show_advanced:
+                return
+            # Keep the technical draft and the former operator shortcuts
+            # available for established scenes and automation.
+            layout.separator()
+            layout.label(text='Technical Draft',icon='PREFERENCES')
             collection = _active_build(context)
-            source = collection.get('caelm_blockout_source') if collection else None
-
-            def section(name, icon, *, collapsed=False):
-                header, body = layout.panel('caelmor_' + name.lower(), default_closed=collapsed)
-                header.label(text=name, icon=icon)
-                return body
-
-            if building := section('Building', 'HOME'):
-                for key in ('function', 'region', 'context', 'seed', 'wealth'):
-                    building.prop(p, 'caelm_' + key)
-                building.operator('caelmor.generate', icon='ADD')
-                if collection:
-                    building.operator('caelmor.load_settings', icon='IMPORT')
-                    building.operator('caelmor.regenerate', text='Regenerate All', icon='FILE_REFRESH')
-
-            if shape := section('Shape', 'MESH_CUBE'):
-                if (p.caelm_region, p.caelm_function) == ('LOWMARK', 'COTTAGE'):
-                    shape.operator('caelmor.fit_blockout', icon='MESH_CUBE')
-                    shape.label(text='Box top = eaves · local −Y = frontage')
-                    if p.caelm_use_grammar and not p.caelm_fit_blockout:
-                        shape.prop(p, 'caelm_floors', text='Floors for Box Fit')
-                if source:
-                    shape.label(text=f'Source box: {source.name}')
-                    shape.operator('caelmor.fit_blockout', text='Refit from Source Box',
-                                   icon='FILE_REFRESH').refit = True
-                fitted = p.caelm_fit_blockout
-                modes = shape.column()
-                modes.enabled = not fitted
-                modes.prop(p, 'caelm_use_grammar')
-                modes.prop(p, 'caelm_world_aware')
-                modes.operator('caelmor.apply_grammar', icon='FILE_REFRESH')
-                if fitted:
-                    shape.label(text='Dimensions come from the source box')
-                dimensions = shape.column(align=True)
-                dimensions.enabled = not (p.caelm_use_grammar or fitted)
-                for key in ('width', 'depth', 'floors', 'floor_height'):
-                    dimensions.prop(p, 'caelm_' + key)
-                if not p.caelm_world_aware:
-                    dimensions.prop(p, 'caelm_footprint')
-                    if p.caelm_footprint != 'RECT':
-                        dimensions.prop(p, 'caelm_wing_width')
-                        dimensions.prop(p, 'caelm_wing_depth')
-                    dimensions.prop(p, 'caelm_pitch')
-                    shape.prop(p, 'caelm_roof_style')
-                    shape.prop(p, 'caelm_overhang')
-                else:
-                    shape.label(text='Regional construction chooses roof forms')
-                    shape.prop(p, 'caelm_crafted_curves')
-                    if (p.caelm_region, p.caelm_function) in (('LOWMARK', 'SMITHY'), ('THORNFELL', 'GATEHOUSE')):
-                        shape.prop(p, 'caelm_seed_massing')
-
-            if construction := section('Construction', 'MOD_BUILD', collapsed=True):
-                construction.prop(p, 'caelm_construction')
-                if p.caelm_construction:
-                    for name in ASSEMBLIES:
-                        if not name.endswith('_depth'):
-                            construction.prop(p, 'caelm_assembly_' + name)
-                    construction.prop(p, 'caelm_craftsmanship')
-
-            if materials := section('Materials', 'MATERIAL'):
-                if p.caelm_construction:
-                    materials.prop(p, 'caelm_finish_scope')
-                    if p.caelm_finish_scope == 'ROLE':
-                        materials.prop(p, 'caelm_finish_role')
-                        scope, key = 'by_role', p.caelm_finish_role
-                    else:
-                        scope, key = 'by_component', _active_component(context)
-                        materials.label(text=key or 'Select a generated component')
-                        materials.prop(p, 'caelm_finish_rotation')
-                    materials.prop(p, 'caelm_finish_material')
-                    if p.caelm_material_relief and p.caelm_finish_material:
-                        height = materials.box()
-                        height.prop(p.caelm_finish_material, 'caelm_height_image')
-                        height.prop(p.caelm_finish_material, 'caelm_height_span')
-                        height.prop(p.caelm_finish_material, 'caelm_height_neutral')
-                    saved = json.loads(p.caelm_construction_overrides or '{}')
-                    fields = saved.get(scope, {}).get(key, {})
-                    finish = fields.get('finish', '')
-                    if finish:
-                        turn = fields.get('uv_rotation')
-                        caption = finish.removeprefix('material:')
-                        materials.label(text=f'Panel choice: {caption}' + (f' · {turn}°' if turn else ''))
-                    row = materials.row(align=True)
-                    row.enabled = key is not None
-                    stage = row.row()
-                    stage.enabled = p.caelm_finish_material is not None
-                    stage.operator('caelmor.stage_finish', icon='CHECKMARK')
-                    clear = row.row()
-                    clear.enabled = bool(finish)
-                    clear.operator('caelmor.stage_finish', text='Clear Override').clear = True
-                    materials.label(text='Generate or Regenerate All to apply')
-                else:
-                    materials.label(text='Enable Construction Treatments for scene finishes')
-
-            if components := section('Components', 'OBJECT_DATA', collapsed=True):
-                components.prop(p, 'caelm_window_density')
-                if collection:
-                    active = context.view_layer.objects.active
-                    key = _active_component(context)
-                    if key and active.get('caelm_treatment') == 'structural_timber' and p.caelm_construction:
-                        saved = json.loads(p.caelm_construction_overrides or '{}')
-                        variant = saved.get('by_component', {}).get(key, {}).get('variant')
-                        components.label(text=f'Selected: {key}')
-                        if variant:
-                            components.label(text=f'Panel choice: {variant.replace("_", " ").capitalize()}')
-                        components.prop(p, 'caelm_component_joinery')
-                        components.operator('caelmor.stage_joinery')
-                    components.operator('caelmor.protect_selected', icon='LOCKED',
-                                        text='Protect / Unprotect Selected')
-                    row = components.row(align=True)
-                    for scope, label in [('ROOF', 'Roof'), ('WINDOWS', 'Openings'), ('DETAILS', 'Details')]:
-                        row.operator('caelmor.regenerate', text=label, icon='FILE_REFRESH').scope = scope
-                    conflicts = json.loads(collection.get('caelm_construction_conflicts', '[]'))
-                    if conflicts:
-                        components.label(text=f'{len(conflicts)} protected sections need review', icon='ERROR')
-
-            if openings := section('Feature Guides', 'MESH_PLANE', collapsed=True):
-                active = context.view_layer.objects.active
-                binding = active.get('caelm_guide') if active else None
-                if binding:
-                    openings.label(text=f"Attached to {binding['side']} wall · {binding['kind'].replace('_', ' ').title()}")
-                else:
-                    openings.prop(p, 'caelm_guide_target')
-                openings.prop(p, 'caelm_guide_kind')
-                if p.caelm_guide_kind in ('DOOR','ROUND_DOOR'):
-                    openings.prop(p, 'caelm_guide_leaf')
-                openings.operator('caelmor.opening_guide', icon='MOD_BUILD').action = 'APPLY'
-                if collection:
-                    openings.operator('caelmor.opening_guide', text='Regenerate Guides', icon='FILE_REFRESH').action = 'REFRESH'
-                if binding:
-                    openings.operator('caelmor.opening_guide', text='Remove Guide', icon='X').action = 'REMOVE'
-
-            if condition := section('Condition', 'TIME', collapsed=True):
-                condition.prop(p, 'caelm_age')
-                condition.prop(p, 'caelm_maintenance')
-
-            if geometry := section('Geometry', 'MESH_DATA', collapsed=True):
-                geometry.prop(p, 'caelm_geometry_mode')
-                geometry.prop(p, 'caelm_detail')
-                geometry.prop(p, 'caelm_material_relief')
-                if p.caelm_material_relief:
-                    geometry.prop(p, 'caelm_relief_resolution')
-                    geometry.prop(p, 'caelm_relief_strength')
-                    active = context.active_object
-                    if active and active.get('caelm_relief_status'):
-                        geometry.label(text=active['caelm_relief_status'])
-                if p.caelm_construction:
-                    depth = geometry.column()
-                    depth.enabled = p.caelm_geometry_mode == 'EFFICIENT'
-                    depth.prop(p, 'caelm_assembly_roof_depth')
-                    depth.prop(p, 'caelm_assembly_wall_depth')
-                geometry.prop(p, 'caelm_floor_separation')
-                if collection and collection.get('caelm_floor_contract'):
-                    box = geometry.box()
-                    box.label(text='Visual floor preview · collision unchanged')
-                    box.prop(p, 'caelm_preview_volume')
-                    box.prop(p, 'caelm_preview_floor')
-                    for host in json.loads(collection['caelm_floor_schedule']):
-                        box.label(text=f"{host['volume']}: floors 0–{host['count']-1}" if host['count']
-                                  else f"{host['volume']}: exterior access (always visible)")
-                    box.operator('caelmor.floor_preview')
-
-            if export := section('Export', 'EXPORT', collapsed=True):
-                export.operator('caelmor.export', icon='EXPORT')
-                if collection:
-                    from .blender_backend import collection_metrics
-                    metrics = collection_metrics(collection)
-                    export.label(text=f"{metrics['vertices']:,} verts · {metrics['objects']} objects")
-                    export.label(text=f"Bounds: {metrics['width']:.1f} × {metrics['depth']:.1f} × {metrics['height']:.1f} m")
-                    diagnostics = json.loads(collection.get('caelm_validation', '{}'))
-                    if diagnostics:
-                        status = 'Geometry checks passed' if diagnostics.get('valid') else 'Geometry issues found'
-                        export.label(text=f"{status} · {diagnostics.get('triangles', 0):,} triangles",
-                                     icon='CHECKMARK' if diagnostics.get('valid') else 'ERROR')
-                        for issue in diagnostics.get('errors', ())[:2]:
-                            export.label(text=str(issue)[:72], icon='DOT')
+            if collection:
+                row = layout.row(align=True)
+                row.operator('caelmor.load_settings',text='Load Building into Draft',icon='IMPORT')
+                loaded = p.caelm_draft_target==collection and p.caelm_draft_snapshot==collection.get('caelm_settings')
+                apply = row.row()
+                apply.enabled = loaded
+                apply.operator('caelmor.regenerate',text='Apply Draft',icon='FILE_REFRESH').require_draft = True
+            draft = layout.box()
+            draft.enabled = bool(collection and loaded)
+            draft.label(text='Expert generation settings')
+            for name in ('seed','context','wealth','detail','window_density','geometry_mode',
+                         'use_grammar','world_aware','crafted_curves','seed_massing','construction'):
+                draft.prop(p,'caelm_'+name)
+            if p.caelm_construction:
+                depth = draft.column()
+                depth.enabled = p.caelm_geometry_mode=='EFFICIENT'
+                depth.prop(p,'caelm_assembly_roof_depth')
+                depth.prop(p,'caelm_assembly_wall_depth')
+            draft.prop(p,'caelm_material_relief')
+            if p.caelm_material_relief:
+                draft.prop(p,'caelm_relief_resolution')
+                draft.prop(p,'caelm_relief_strength')
+                active = context.active_object
+                if active and active.get('caelm_relief_status'):
+                    draft.label(text=active['caelm_relief_status'])
+                draft.prop(p,'caelm_finish_material',text='Material Height Settings')
+                if p.caelm_finish_material:
+                    for name in ('image','span','neutral'):
+                        draft.prop(p.caelm_finish_material,'caelm_height_'+name)
+            draft.prop(p,'caelm_floor_separation')
+            if collection:
+                if collection.get('caelm_floor_contract'):
+                    preview = layout.box()
+                    preview.label(text='Preview Floors')
+                    preview.prop(p,'caelm_preview_volume')
+                    preview.prop(p,'caelm_preview_floor')
+                    preview.operator('caelmor.floor_preview')
+                refresh = layout.row(align=True)
+                refresh.enabled = loaded
+                for scope,label in (('ROOF','Roof'),('WINDOWS','Openings'),('DETAILS','Details')):
+                    op = refresh.operator('caelmor.regenerate',text=label,icon='FILE_REFRESH')
+                    op.scope = scope
+                    op.require_draft = True
+                layout.operator('caelmor.export',icon='EXPORT')
+                diagnostics = json.loads(collection.get('caelm_validation','{}'))
+                if diagnostics:
+                    icon = 'CHECKMARK' if diagnostics.get('valid') else 'ERROR'
+                    layout.label(text=f"{diagnostics.get('triangles',0):,} source triangles",icon=icon)
+                    for issue in diagnostics.get('errors',())[:2]:
+                        layout.label(text=str(issue)[:72],icon='DOT')
 
     return (CAELMOR_PG_Settings, CAELMOR_OT_apply_grammar, CAELMOR_OT_generate, CAELMOR_OT_load,
             CAELMOR_OT_regenerate, CAELMOR_OT_protect, CAELMOR_OT_floor_preview, CAELMOR_OT_export,
@@ -835,7 +751,8 @@ def register():
     global _CLASSES
     b = _bpy()
     from .roof_autocomplete import CLASSES, RoofSettings
-    _CLASSES = _make_classes(b) + CLASSES
+    from .authoring_ui import CLASSES as WORKFLOW_CLASSES
+    _CLASSES = _make_classes(b) + WORKFLOW_CLASSES + CLASSES
     for cls in _CLASSES:
         b.utils.register_class(cls)
     b.types.Scene.caelmor_settings = b.props.PointerProperty(type=_CLASSES[0])

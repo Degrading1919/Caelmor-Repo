@@ -28,6 +28,13 @@ def build_stable(ctx):
     capacity = _stable_capacity(b)
     stall_width, depth = 2.9, 6.2
     aisle_depth = 2.6
+    floor_height = 3.4
+    if b.settings.manual_shape:
+        stall_width = b.settings.width / (capacity + 1)
+        depth, floor_height = b.settings.depth, b.settings.floor_height
+        if stall_width < 2.75 or depth < 5.8 or floor_height < 3.1:
+            raise ValueError(f'{capacity} stalls and their service bay need at least '
+                             f'{2.75*(capacity+1):g} × 5.8 m and 3.1 m walls.')
     # Add one covered service bay for hay so all numbered stalls remain clear.
     width = (capacity + 1) * stall_width
     base = b.base
@@ -50,7 +57,7 @@ def build_stable(ctx):
                         's1': rear_center + .7, 'height': 2.25})
     shelter = b.mass(
         zone_key, x=0.0, y=0.0, width=width, depth=depth, floors=1,
-        floor_height=3.4,
+        floor_height=floor_height,
         function='STABLE', open_edges=[0, 2], open_access=open_access,
         openings='NONE', foundation='PIERS' if region == 'MIRE' else 'PLINTH',
     )

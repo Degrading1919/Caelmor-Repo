@@ -228,7 +228,8 @@ def apply_surfaces(objects,plan,settings,context_objects=None,*,roof_finish="BAS
         groups.setdefault((key,base,wall_stock),[]).append((obj,host))
     surface_settings={k:v for k,v in settings.__dict__.items()
                       if k not in ('construction_overrides', 'floor_separation',
-                                   'material_relief','relief_resolution','relief_strength')}
+                                   'material_relief','relief_resolution','relief_strength',
+                                   'manual_shape','roof_overrides')}
     for (key,base,wall_stock),members in sorted(groups.items()):
         painted_roof=(FAMILY[key]=='roof' and roof_finish!='BASELINE'
                       and settings.world_aware

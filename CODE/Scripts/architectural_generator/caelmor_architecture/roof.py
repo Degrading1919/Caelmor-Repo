@@ -456,7 +456,14 @@ def build_roof(plan):
     from dataclasses import replace
     from .construction import COVERS, COVER_FROM_STOCK, bind, component
     cover=plan.style.roof_cover
-    cover_spec=component(plan,'roof_cover','roof_cover',COVERS[cover][0],stock=COVERS[cover][1]) if cover in COVERS else None
+    resolver = getattr(plan,'construction_resolver',None)
+    explicit_cover = bool(resolver and any('treatment' in fields for fields in (
+        resolver.overrides.get('by_role',{}).get('roof_cover',{}),
+        resolver.overrides.get('by_component',{}).get(f'{plan.construction_zone}/roof_cover',{}))))
+    stock = COVERS.get(cover)
+    if stock is None and explicit_cover:
+        stock = COVERS['SHINGLE']
+    cover_spec = component(plan,'roof_cover','roof_cover',stock[0],stock=stock[1]) if stock else None
     if cover_spec is not None and COVER_FROM_STOCK[cover_spec.substrate]!=cover:
         cover=COVER_FROM_STOCK[cover_spec.substrate]
         palette=dict(plan.style.palette)

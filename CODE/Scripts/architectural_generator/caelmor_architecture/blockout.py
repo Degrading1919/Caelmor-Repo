@@ -9,8 +9,8 @@ from .model import resolve_settings, style_for
 
 
 def fit(settings, source):
-    if settings.region != 'LOWMARK' or settings.function != 'COTTAGE':
-        raise ValueError('Select Lowmark and Cottage to fit a blockout')
+    if settings.function in ('SMITHY','GATEHOUSE'):
+        raise ValueError('This forge or passage sets its own bay sizes. Create it with recommended dimensions.')
     if (source is None or source.type != 'MESH' or source.get('caelm_generated')
             or source.modifiers or source.mode != 'OBJECT'):
         raise ValueError('Select an unmodified box mesh in Object Mode')
@@ -43,9 +43,21 @@ def fit(settings, source):
             or abs(x.dot(y)) > 1e-5 or x.cross(y).z < 1 - 1e-6):
         raise ValueError('Use an upright box with Z rotation and no shear or reflection')
     width, depth, height = [extent[i] * scales[i] for i in range(3)]
+    if settings.function in ('STABLE','MARKET_HALL') and settings.floors!=1:
+        raise ValueError('This working hall requires a one-storey box')
     if not isinstance(settings.floors, int) or not 1 <= settings.floors <= 3:
         raise ValueError('Choose 1–3 floors before fitting the box')
-    floor_height = (height - style_for(settings).foundation_height) / settings.floors
+    lowmark_cottage = (settings.region,settings.function)==('LOWMARK','COTTAGE')
+    base = style_for(settings).foundation_height
+    if not lowmark_cottage:
+        # Use the actual primary floor datum, which regional construction can
+        # raise independently of the profile (e.g. a Mire stilt platform).
+        from .world import generate
+        neutral = replace(settings,world_aware=True,use_grammar=True,manual_shape=False,
+                          roof_overrides=None,fit_blockout=False,construction_overrides=None)
+        plan,_ = generate(neutral)
+        base = plan.world_zones[0].base
+    floor_height = (height-base) / settings.floors
     # A rotation can perturb matrix-column lengths at float precision. Retain
     # the saved dimensions when nothing changed at our 10 μm fit precision.
     dimensions = {field: round(value, 5) for field, value in
@@ -55,7 +67,7 @@ def fit(settings, source):
             old = getattr(settings, field)
             if math.isclose(old, value, abs_tol=1.1e-5):
                 dimensions[field] = old
-    fitted = replace(settings, **dimensions,
-                     footprint='RECT', world_aware=True, use_grammar=False, fit_blockout=True)
+    fitted = replace(settings, **dimensions, footprint='RECT', world_aware=True,
+                     use_grammar=False,fit_blockout=True,manual_shape=settings.manual_shape or not lowmark_cottage)
     resolve_settings(fitted)
     return fitted, (origin, math.atan2(x.y, x.x))

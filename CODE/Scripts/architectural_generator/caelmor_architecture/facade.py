@@ -1338,6 +1338,10 @@ def _add_chimney(buffers, plan):
            [(x-half,y+half),(x+half,y+half),(x+half,y+half+apron),(x-half,y+half+apron)],
            [(x-half,y-half),(x-half,y+half),(x-half-apron,y+half),(x-half-apron,y-half)],
            [(x+half,y-half),(x+half,y+half),(x+half+apron,y+half),(x+half+apron,y-half)]]
+    # A hip can cross a flashing band even when the stack centre sits on
+    # one slope. Give each adjoining plane its own closed planar apron.
+    from .roof import roof_faces
+    patches = roof_faces(plan)
     for band in bands:
         poly=[]
         for px,py in band:
@@ -1345,6 +1349,17 @@ def _add_chimney(buffers, plan):
             if not math.isfinite(ph):
                 ph=float(plan.roof_height(x,y))
             poly.append((px,py,ph+.062))
+        if abs(poly[0][2]+poly[2][2]-poly[1][2]-poly[3][2])>1e-6:
+            for patch in patches:
+                piece = band
+                for plane in inequalities(patch.poly):
+                    piece = clip(piece,*plane,bounded=True)
+                if piece:
+                    sx,sy,_ = patch.plane
+                    thickness = .035 / math.sqrt(sx*sx+sy*sy+1.)
+                    buffers['flashing'].extrude([(px,py,patch.height(px,py)+.062) for px,py in piece],
+                                                (-sx*thickness,-sy*thickness,thickness))
+            continue
         buffers["flashing"].extrude(poly,lift)
 
 

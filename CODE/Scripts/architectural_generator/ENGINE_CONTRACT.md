@@ -14,6 +14,8 @@ The designated `main` checkout is the development and delivery baseline. [PR #85
 
 ### Compatibility for older Blender scenes
 
+Version 0.22 stores an explicit main-envelope choice separately from the regional sizing mode. A fitted proxy supplies the main volume, with its actual regional foundation datum included in the storey-height calculation. Named roof overrides apply before facade, opening and weather geometry is built. Regional context, secondary volumes and assembly resolution remain available. Existing saved buildings without these inputs follow their previous sizing and roof paths. The authoring panel reads the selected collection's saved settings. It applies a validated edit before replacing generated geometry.
+
 The original manual Lowmark interface used orthogonal RECT/L/T/U plans, intersecting gables, exterior shells, roof and facade buffers, and named seed streams. These concepts survive in the current single-plan path. Normalize old snapshots to manual Lowmark, gable and `SOLID` where their corresponding fields are absent. Older snapshots omit `world_aware`, `crafted_curves` and `seed_massing` and keep those switches off. New Blender UI defaults and direct `Settings` defaults differ. Preserve that distinction. Exact historical geometry and material reproduction can require the original tool revision.
 
 Keep full-section roof clearance, bearing and aperture checks in force when extending the surviving path. For timber this includes the projected section, deck underside and supporting fascia plane. For roof cover retain valid overlap/headlap and valley/ridge clearance in each topology mode. The earlier revision-specific dimensions, material revisions and test tolerances are available in Git history.

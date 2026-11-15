@@ -25,6 +25,8 @@ def _base_height(settings):
 
 def _add_bow_ribs(ctx, mass, key, spacing=2.7):
     """Add restrained curved rafters just beneath the generated roof skin."""
+    if mass.plan.roof_mode != 'BOW':
+        return
     s = ctx.settings
     xmin, ymin, xmax, ymax = mass.bounds
     if str(getattr(s, "detail", "MEDIUM")).upper() == "LOW":
@@ -262,8 +264,8 @@ def build(ctx):
         width = depth * 1.42
     elif function in {"LONGHOUSE", "BARRACKS", "INN", "FARMHOUSE"}:
         width *= 1.05
-    width = max(5.0, width)
-    depth = max(4.0, depth)
+    width = s.width if s.manual_shape else max(5.0,width)
+    depth = s.depth if s.manual_shape else max(4.0,depth)
     mass = ctx.mass(
         "mire_longhouse", x=0.0, y=0.0, width=width, depth=depth,
         floors=max(1, int(s.floors)), floor_height=floor_height, base=base,

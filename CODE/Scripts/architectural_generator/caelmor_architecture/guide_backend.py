@@ -60,7 +60,8 @@ def _project(points, edge):
 
 
 def propose(collection, source, settings, kind, leaf):
-    if not settings.fit_blockout:
+    from .model import supports_wall_guides
+    if not supports_wall_guides(settings):
         raise ValueError('Choose a box-fitted Lowmark Cottage as the guide target')
     if source.get(HOST) and source.get(HOST) != collection:
         raise ValueError('Remove this guide from its original building before attaching it here')

@@ -428,6 +428,8 @@ def build(ctx):
     # ward's hall is broader. All primary footprints remain below 24m.
     width = min(19.0, width)
     depth = min(16.0, depth)
+    if s.manual_shape:
+        width, depth, floors, floor_h = s.width, s.depth, s.floors, s.floor_height
     tower_needed = (affluent or civic or defensive or industrial) and not household
     link_needed = tower_needed and function not in {"WATCHTOWER", "GATEHOUSE"}
     primary = _mass(

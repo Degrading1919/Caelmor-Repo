@@ -130,12 +130,10 @@ def compound_fixture():
         for obj in target.objects:
             bpy.context.scene.collection.objects.link(obj)
         try:
-            infer_bearing(target.objects)
+            bearing = infer_bearing(target.objects)
+            diagnostic = f'Local scene resolved to {bearing.width:.2f} × {bearing.depth:.2f} m'
         except ValueError as error:
-            assert 'Plane.010' in str(error) and 'Non-orthogonal' in str(error), str(error)
             diagnostic = str(error)
-        else:
-            raise AssertionError('Diagonal walls were accepted')
     else:
         diagnostic = 'Local test_scene.blend unavailable'
     bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -148,6 +146,19 @@ def compound_fixture():
             f=(j+.5)/count
             center=(*(x+(y-x)*f for x,y in zip(a,b)),0)
             walls += append_module("2mW_3mH_trimmed.blend",center,math.pi/2 if horizontal else 0,f'wing_{i}')
+    bpy.ops.mesh.primitive_cube_add(size=2.,location=(.4,-2.,1.5))
+    diagonal = bpy.context.object
+    diagonal.name = 'Diagonal test wall'
+    diagonal.scale = (1.,.12,1.5)
+    diagonal.rotation_euler.z = .23
+    bpy.context.view_layer.update()
+    try:
+        infer_bearing(walls+[diagonal])
+    except ValueError as error:
+        assert 'Non-orthogonal wall cores: Diagonal test wall' in str(error),str(error)
+    else:
+        raise AssertionError('Diagonal wall was accepted')
+    bpy.data.objects.remove(diagonal,do_unlink=True)
     bearing=infer_bearing(walls)
     assert len(bearing.rects)==2
     roof=build_roof_collection(bpy.context.scene,bearing,rise=1.8,detail=50,material_directory=MATDIR)
@@ -166,8 +177,11 @@ def compound_fixture():
     assert len(json.loads(props.rects))==2
     props.rise=1.8
     props.material_directory=str(MATDIR)
-    props.target=roof
-    assert bpy.ops.caelmor.roof_load()=={'FINISHED'}
+    active_roof = next(iter(roof.objects))
+    active_roof.select_set(True)
+    bpy.context.view_layer.objects.active = active_roof
+    assert bpy.ops.caelmor.roof_load(from_selection=True)=={'FINISHED'}
+    assert props.target==roof
     assert bpy.ops.caelmor.roof_generate()=={'FINISHED'}
     assert len(json.loads(roof['caelm_roof_settings'])['rects'])==2
     scene=bpy.context.scene
