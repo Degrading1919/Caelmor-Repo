@@ -49,7 +49,7 @@ These rules apply to every Lowmark NPC, not only this quest. They are drawn from
 
 ### 1.5 Addressing the player
 
-Who the player is remains undecided (quest package §14, item 2). Every line is written so that it works for any origin:
+Who the player is was ruled 2026-11-15 (CR-4, CR-21; quest package §14, item 2): an ordinary wanderer, origin-neutral, with no origin variant lines. Every line is written so that it works for any origin:
 - No name, gender, title, homeland, ancestry or prophecy. "You" is the default; "friend" and "traveler" are used sparingly and only by characters who would use them.
 - NPCs react to what the player has **done**, never to what the player **is**.
 - Player options are short, first person, and plain. No option is a joke at an NPC's expense.
@@ -276,7 +276,7 @@ W.31  WYNN: "I'll pay for the skiff." (pause) "When I'm paid."      → W.01 opt
 > To the keeper at Whisperflow.
 > Grain under emergency provision, for the households of the far bank.
 > The Whisperflow marker reads open. The load is to cross on arrival, without delay.
-> *[issuer's mark — placeholder pending the main-arc antagonist decision]*
+> *[issuer's mark — unrecognized by Hollis and unnamed in this quest; the antagonist decision is ruled (CR-1, bible D-1), and this quest still names no one]*
 > *[date: the day before the player arrives]*
 
 ---
@@ -589,3 +589,7 @@ Short lines for repeat visits, keyed to the quest's final flags.
 ## Director rulings reconciliation (2026-11-03)
 
 Checked against CDR-1/2/3 (`Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md`). No line needed changing: the quest's only fights are wildlife (geese, Silt Swimmers, River Leech, Furrow Boar), which already end at defeat, and the boar barks (`D8`) already trigger on "Boar defeated". No yield, mercy, ranged-hedge or release wording was present. No line ids changed.
+
+## Consolidated Director rulings, 2026-11-15
+
+Consolidated Director rulings, 2026-11-15: CR-4 and CR-21 (§1.5 player address ruled origin-neutral; no origin variants), CR-1 (the `dispatch_order` issuer placeholder no longer waits on the antagonist decision; the mark stays unnamed here). The five [NEW] NPCs, the sayings and the Marking Stone are not promoted (CR-3 promotes only House Marrick, the Relief Cut and the Hollow Lock). No node, step or flag id changed.

@@ -64,6 +64,8 @@ Lowmark supplied food and movement across several fronts. Grain allotments displ
 
 Lowmark's refusal to unleash destructive water practice spared some crossings and communities from one form of devastation. It did not keep Lowmark outside the war. Decisions about whose load moved first or which bank received repair became matters of survival and later grievance.
 
+*[Approved CR-2, CR-3, Director 2026-11-15]* To speed grain to the fronts, engineers working for the supply effort cut the **Relief Cut**, a wartime channel, and built the **Hollow Lock**, a sluice-house that released stored fen water in pulses so heavy barges could run fast. A flush released while a relief convoy was still in Stillwater Fen sank the Fourteenth Lot with its crews. The order was issued by the wartime supply command under a Fenmere compact; no named individual is held responsible. After the fighting stopped the Lock was chained and the Cut left to silt. Their exact placement, dimensions and engineering are not established (MAP VERIFICATION REQUIRED).
+
 ### Thornfell: passes, shelters, and forced resonance
 
 Thornfell's heights became barriers, shelters, and military approaches. Clans and wardens defended crossings, closed dangerous routes, repaired bridges, and sheltered displaced people under scarce conditions.

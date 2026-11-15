@@ -1,10 +1,10 @@
 # Lowmark Main Quests 5–9 — Act II: Old Duties, Incomplete Records, Restraint
 
-**Status:** Authored production content for Creative Director milestone review. This package implements Lowmark main-arc **movements 5–9** from `00_ADMIN/Reference/Caelmor_Part5_Lowmark_Main_Arc_Architecture.md`, following the binding slate in `Caelmor_Lowmark_v1_Narrative_Production_Bible.md` (§6 table, §6.1 briefs, §2.6 Sedge, §2.7 Oriel). Everything marked **[NEW]** is authored and is not canon until promoted. **[PROPOSAL — DIRECTOR]** marks a consequential story choice the content is built on. **[CANON]** marks material taken from Phase 1 or the reconciled `LORE/` files. No schema, production JSON or C# is created here.
+**Status:** Authored production content for Creative Director milestone review. This package implements Lowmark main-arc **movements 5–9** from `00_ADMIN/Reference/Caelmor_Part5_Lowmark_Main_Arc_Architecture.md`, following the binding slate in `Caelmor_Lowmark_v1_Narrative_Production_Bible.md` (§6 table, §6.1 briefs, §2.6 Sedge, §2.7 Oriel). Everything marked **[NEW]** is authored and is not canon until promoted. **[PROPOSAL — DIRECTOR]** marks a consequential story choice the content is built on; the choices used here (D-6, D-7, D-8, D-12) are ruled as recommended (CR-4, Director 2026-11-15), so the label now reads as ruled. House Marrick, the Relief Cut and the Hollow Lock are promoted to canon in existence and narrative role only (CR-3); placement stays MAP VERIFICATION REQUIRED. **[CANON]** marks material taken from Phase 1 or the reconciled `LORE/` files. No schema, production JSON or C# is created here.
 
 **Companion file:** `04_CONTENT_PRODUCTION/Dialogue & Narrative/Caelmor_Lowmark_Main_Act_II_Dialogue.md` (Act II cast notes, all dialogue nodes referenced below, barks, inspect texts). The True Line's voice rules (cast file Part 1) are binding.
 
-**Swap tags.** Nodes naming Marrick or Sallow are tagged `[ANTAGONIST]` (bible §3.1). Nodes that depend on Sedge being the Field-Mage are tagged `[D-7]`; nodes that depend on Oriel are tagged `[D-8]`, matching the side-quest packages' convention.
+**Swap tags.** Nodes naming Marrick or Sallow are tagged `[ANTAGONIST]` (bible §3.1). Nodes that depend on Sedge being the Field-Mage are tagged `[D-7]`; nodes that depend on Oriel are tagged `[D-8]`, matching the side-quest packages' convention. D-1, D-7 and D-8 are ruled (CR-1, CR-4, Director 2026-11-15); the tags stay as search tags.
 
 ---
 
@@ -24,7 +24,7 @@ Act I ends with the barges stopped and Stillwater's fog thicker than ever (MQ4).
 
 **Act II turn (movement 9):** the emergency can be stabilized only by combining ordinary repair, civic cooperation, memorial restraint and limited expert practice. Oriel's condition sends the player to Crest Hall for MQ10.
 
-### A2.2 The Act II through-line: the backwater [PROPOSAL — DIRECTOR]
+### A2.2 The Act II through-line: the backwater (Ruled 2026-11-15, CR-4, D-12)
 
 **Author truth.** Closing the Hollow Lock in MQ4 stopped the flushes. It did not empty the fen. **One water story after MQ4:** the crew's pulses go only through the Drowsebank mill race (via the wartime Drowse spur); everything else is the fen's own backwater. The slack gate at the Hollow Lock (MQ4, L6), silted and bulging wet from behind, is the first place the backwater shows; it is never a crew route. The pressure the flushes used to draw off now builds behind the Lock and finds the older ways the war engineers cut through when they dug the Cut: culverts, spurs and severed Braid channels. On the fen's own swell nights (the same fifth nights the war engineers flushed on) the fen pushes water back out through those ways in a slow surge. Crews call these **backwater nights** [NEW term; "backwater" is the bible's own word in the MQ5 brief]. The surges are getting stronger. The heavy water rides them, so drift turns up wherever they reach.
 
@@ -923,7 +923,7 @@ Ansel Corrie's patrol book has a new kind of entry: *quiet by morning, no repair
 |---|---|---|
 | The Field-Mage's Mantle: mists that cling around shrines, "said to be his cloak"; cloaked figure near wells near Ashenstead | Dossier §V.3, §XI | [CANON] rumor |
 | The Last Field-Mage alone keeps combat water practice; a restrained inheritor of Riverwarden teaching; refuses to make the player a weapon; knows why force spreads the problem | Dossier §I, §VII; Main Arc movement 8 | [CANON] / approved architecture |
-| Sedge as the Field-Mage; three tests; force splits drift; never confirms aloud | Bible §2.6, §6.1 | [PROPOSAL — DIRECTOR] D-7 |
+| Sedge as the Field-Mage; three tests; force splits drift; never confirms aloud | Bible §2.6, §6.1 | D-7 ruled 2026-11-15 (CR-4); [NEW], not promoted |
 | Bog-Touched Elk "skittish but dangerous when panicked; sometimes driven mad by Wraith presence" | Dossier §VIII | [CANON] |
 | Herding by alert radius | Hunting portfolio F4 traveling-grazer alert framework (one reusable alert-and-movement framework) | Proposal-stage economy design, reused |
 | Water practice breaks when forced; "Wraith Cleansing — the most dangerous rite" | Dossier §VII | [CANON] |
@@ -1097,7 +1097,7 @@ Sedge can barely stand. The player walks beside him (walk-with: he moves at a sl
 | Who quiets the ditches | Sedge (D-7). | The Field-Mage's Mantle; nobody; Watchers' luck. | Thumb-pressed moss, slanted cuts, bundles, the mantle mist, the quieting. | A spirit of the shrine. | This quest, by sight. Never by his word. |
 | Why force fails | Dispersal sends heavy water downstream into new pools. Quieting gathers it back down at a personal cost. | Watchers: "disperse it and move on." | The split; the inward rings; the sinking. | Kill enough of them and it ends. | This quest |
 
-**Open decisions:** (1) D-7 itself. Every Sedge node here is tagged `[D-7]`. (2) Whether herding should give Hunting XP (Gameplay Designer; F4 framework).
+**Open decisions:** (1) D-7: ruled 2026-11-15 (CR-4) as recommended; Sedge nodes keep the `[D-7]` search tag. (2) Whether herding should give Hunting XP (Gameplay Designer; F4 framework).
 
 ## MN.12 Internal review log
 
@@ -1128,7 +1128,7 @@ At dawn Sedge walks the player to the end of the Path of Unburnt Reeds and up th
 | Veilwater Falls; behind it the Riverwarden enclave; limestone, moss, reedwork, flowing channels; rituals of listening, not bending | Dossier §IV.6, §VI | [CANON] |
 | Riverwardens taught flood-timing and irrigation; prevented floods by tuning channels; withdrew as wars intensified and demands for power grew | Dossier §VI | [CANON] |
 | Withdrawal because rulers repeatedly tried to turn care for water into command over people | Main Arc author truth; bible §6.1 | Approved architecture |
-| Inner oasis and Warden's Hearth unseen in Lowmark content; Riverwardens do not return to rule | Bible §2.7; Main Arc movement 12 | [PROPOSAL — DIRECTOR] D-8 |
+| Inner oasis and Warden's Hearth unseen in Lowmark content; Riverwardens do not return to rule | Bible §2.7; Main Arc movement 12 | D-8 ruled 2026-11-15 (CR-4) |
 | Flood Calendar Stones; "Magic is not taken, it is heard" | Dossier §VI, §XI | [CANON]. The First Listener is **not** referenced (C07 open). |
 | Listening Steps, Oriel, the flow-table, the Braid gate rule | Bible §2.1, §2.7; this package | [NEW] |
 
@@ -1344,7 +1344,7 @@ No other combat. Nothing behind the falls is hostile. Drawing a weapon at the St
 | Why the Riverwardens withdrew | Rulers asked for floods on command. Withdrawal was an ethical survival choice. | Extinct; cowardly; hoarding. | Oriel's account. | They caused the crisis to be needed again. | This quest (in outline; no leaders, dates or Founder named) |
 | What lies past the reed screen | The inner oasis and Warden's Hearth. | Myth. | A closed passage. | — | Not in Lowmark content |
 
-**Open decisions:** (1) D-8 (Oriel). All Oriel nodes are tagged `[D-8]`. (2) **Riverwarden appearance.** This package describes Oriel by clothing, tools and manner only: grey work clothes, a reed apron, wet forearms. *Recommendation:* the Art Director sets the people's look; nothing here depends on it. (3) **The flow-table must match the final POI map.** It is the one asset where map geometry is narratively load-bearing.
+**Open decisions:** (1) D-8 (Oriel): ruled 2026-11-15 (CR-4) as recommended; Oriel nodes keep the `[D-8]` search tag. (2) **Riverwarden appearance.** This package describes Oriel by clothing, tools and manner only: grey work clothes, a reed apron, wet forearms. *Recommendation:* the Art Director sets the people's look; nothing here depends on it. (3) **The flow-table must match the final POI map.** It is the one asset where map geometry is narratively load-bearing.
 
 ## BF.13 Internal review log
 
@@ -1412,3 +1412,4 @@ Playtest questions (the real bar): *What did the water do that water doesn't do?
 | **Independent review of CDR-6 shared-credit sweep, 2026-11-15** | §A2 co-op bullet and §TF.13: MQ6 `S08_hold` plank, wedge and spill-board work done together now counts for every present partner on that step (the sweep had left the set-piece counter wholly per player). DK slips stay per player: each partner's Bryn is their own NPC and the shared fight already protects every Bryn, so no work is repeated. |
 | **CDR-6 solo-completion sweep, 2026-11-14** | MQ9 §BF.11 shared-Sedge fallback: Sedge no longer waits for an absent, disconnected or other-step partner; the remaining player is never blocked. No other Act II violations found. |
 | **Size discipline** | MQ7–9 packages are shorter than MQ5–6 by design; MQ8–9 are low-combat quests whose substance is in their presentation specs. |
+| **Consolidated Director rulings, 2026-11-15** | CR-4: D-6, D-7, D-8 and D-12 ruled as recommended (header, A2.2, MN and BF source tables and open decisions); `[D-7]`/`[D-8]` kept as search tags. CR-1, CR-3: header notes House Marrick, the Relief Cut and the Hollow Lock as promoted in existence and narrative role. No step, flag, node or item id changed; MAP VERIFICATION REQUIRED kept. |

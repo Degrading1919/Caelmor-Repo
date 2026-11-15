@@ -1,6 +1,6 @@
 # Lowmark Main Questline, Act I: Short Measure, Heavy Water, The Night Flush
 
-**Status:** Authored production content for Creative Director milestone review. This package implements Lowmark main quests 2–4 (bible §6, §6.1), which carry Act I from the end of *The True Line* to the Act I turn. It follows the format of `Caelmor_Lowmark_Quest_The_True_Line.md`. Everything marked **[NEW]** is authored and not canon until the Director promotes it. Everything marked **[PROPOSAL — DIRECTOR]** rests on an open bible §3 decision. **[CANON]** items come from Phase 1 or the reconciled `LORE/` files. No schema, production JSON or C# is created here.
+**Status:** Authored production content for Creative Director milestone review. This package implements Lowmark main quests 2–4 (bible §6, §6.1), which carry Act I from the end of *The True Line* to the Act I turn. It follows the format of `Caelmor_Lowmark_Quest_The_True_Line.md`. Everything marked **[NEW]** is authored and not canon until the Director promotes it. Everything marked **[PROPOSAL — DIRECTOR]** rested on an open bible §3 decision; those decisions are ruled as recommended (CR-1, CR-4, Director 2026-11-15), so the label now reads as ruled. House Marrick, Edda Marrick, Gideon Sallow, Bram Hesketh, the Relief Cut and the Hollow Lock are promoted to canon in existence and narrative role only (CR-3); their placement and engineering stay MAP VERIFICATION REQUIRED. **[CANON]** items come from Phase 1 or the reconciled `LORE/` files. No schema, production JSON or C# is created here.
 
 **Controlling document:** `04_CONTENT_PRODUCTION/Quests/Caelmor_Lowmark_v1_Narrative_Production_Bible.md`. Its §6 table and §6.1 briefs are binding and are implemented as written.
 
@@ -104,7 +104,7 @@ Crestbridge's grain factor, Corvin Tath, keeps two tallies, and both say the sam
 | Field Goblins: nest in old supply pits, broken farm tools, scrap armour | Lowmark dossier §VIII | [CANON] |
 | Crestbridge granaries, toll offices, Keepers' records | Lowmark dossier §III, §IV.4 | [CANON] |
 | Flood Calendar Stones | Lowmark dossier §XI | [CANON] hook |
-| The Hill Depot, the Provision Board, House Marrick, Hesketh, the Relief Cut, salvaged Marking Stones | Bible §2, §4.2 P07, §5.3 | [NEW] / [PROPOSAL — DIRECTOR] |
+| The Hill Depot, the Provision Board, House Marrick, Hesketh, the Relief Cut, salvaged Marking Stones | Bible §2, §4.2 P07, §5.3 | House Marrick, Hesketh, the Relief Cut: promoted (CR-1, CR-3, Director 2026-11-15; placement MAP VERIFICATION REQUIRED). The Hill Depot, the Provision Board, salvaged Marking Stones: [NEW]. |
 
 ## A4. Quest summary card
 
@@ -389,7 +389,7 @@ The far bank is hungry and the Board's order says "delivered". Corvin has twelve
 
 ## A14. Open decisions
 
-1. **D-1 antagonist.** Marrick's glimpse lines and the Board seal text on `SM_requisition` are the only antagonist-bearing content (tagged). Swap per bible §3.1.
+1. **D-1 antagonist.** Ruled 2026-11-15 (CR-1): House Marrick as authored. Marrick's glimpse lines and the Board seal text on `SM_requisition` are the only antagonist-bearing content (tagged; the tags stay as search tags).
 2. **Board composition.** "Five seats and one seal" is a [NEW] line that fixes the Board's seat count. *Recommendation: keep it. It explains why a seal accuses nobody.* Director may change the number.
 3. **Thanks-mark (chalk sheaf).** A [NEW] Lowmark custom used as an MQ12 prop. Removable.
 4. **Map:** depot position relative to the granaries and the river backwater (MAP VERIFICATION REQUIRED).
@@ -441,7 +441,7 @@ Wraithwatcher Ansel Corrie has three places on his patrol book he cannot cover p
 | Driftroot trees tangle in banks and dikes | Dossier §IX | [CANON] |
 | Flow-Menders, softmoss for wounds | Dossier §III, §IX | [CANON] |
 | Widow's Step and its unmatched scraps | Part 3 proposal | Proposal; used as [NEW] POI P22 |
-| Disperse vs. quiet | Bible §2.5 (D-6) | [PROPOSAL — DIRECTOR] |
+| Disperse vs. quiet | Bible §2.5 (D-6) | Ruled 2026-11-15 (CR-4); [NEW] |
 | Bryn Ruddock, Elspeth Quill, Reedmere, the Lantern Post, Mabry Gorse, Orrin and Wenna Tull, "lantern fills" | This package / bible §5.3 | [NEW] |
 
 ## B4. Quest summary card
@@ -681,7 +681,7 @@ HW's choices are **how** rather than **what**: the order of sites (changes who t
 
 ## B14. Open decisions
 
-1. **D-6** (disperse vs. quiet) is the foundation of HW-E1. If the Director rules "Wraiths can be destroyed", HW-E1 becomes an ordinary fight and the lever becomes a plain repair. Ansel's lines `HW-D3` and `HW-D4` change.
+1. **D-6** (disperse vs. quiet) is the foundation of HW-E1. Ruled 2026-11-15 (CR-4) as recommended; HW-E1, the lever and Ansel's lines `HW-D3` and `HW-D4` stand.
 2. **Lantern-fills** as Watcher hours [NEW]. *Recommendation: keep.* It fits "seasons not days" and gives Watchers their own time.
 3. **Dark-moon reckoning** for nights [NEW]. A world calendar is not required; the book's numbers are fiction, and MQ4's "wrong night" is whichever night the player keeps watch (§C12).
 
@@ -727,7 +727,7 @@ On the next fifth night the player sits on Bramblelock Weir, where everything of
 | Dwarven-engineered wartime water and bridge works | Dossier §II | [CANON] |
 | Agility triggers (no jump) | Phase 1.3 §1 | [CANON]; approved, not yet implemented |
 | Bramblelock Weir and its numbered convoy stones | Part 3 proposal; bible P08 | Proposal; [NEW] POI |
-| The Relief Cut, the Hollow Lock, Sallow, the pre-notched posts, the bill of lading | Bible §2, §3 (D-1, D-2) | [NEW] / [PROPOSAL — DIRECTOR] |
+| The Relief Cut, the Hollow Lock, Sallow, the pre-notched posts, the bill of lading | Bible §2, §3 (D-1, D-2) | The Relief Cut, the Hollow Lock, Sallow: promoted in existence and narrative role (CR-1, CR-3, Director 2026-11-15; placement and engineering MAP VERIFICATION REQUIRED). Posts and bill: [NEW]; D-2 ruled (CR-4). |
 
 ## C4. Quest summary card
 
@@ -906,8 +906,8 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 
 | Object | Spec |
 |---|---|
-| **The pre-notched posts** (D-2) [PROPOSAL — DIRECTOR] | A neat stack of new yellow posts, the same pale wood as the Whisperflow liar. Each has its notch already cut, **a hand high** of where a true notch would sit. The player can lift one (carry state) to hold it beside a crossing marker later; this is pure flavour. Inspect text in dialogue file. This **answers D-2 as a proposal**: Sallow's crew made and placed false posts to hide scheduled flushes. It does **not** say who stood at Whisperflow that night. |
-| **The chalk crossings board** (D-2) [PROPOSAL — DIRECTOR] | Chalk list: *Whisperflow — ✓. Greyharrow Reach — ✓. Drowsebank tail — .* With `LM_TL_EVIDENCE = riverfolk`, the inspect adds *"Maelin's second post."* |
+| **The pre-notched posts** (D-2, ruled 2026-11-15, CR-4) | A neat stack of new yellow posts, the same pale wood as the Whisperflow liar. Each has its notch already cut, **a hand high** of where a true notch would sit. The player can lift one (carry state) to hold it beside a crossing marker later; this is pure flavour. Inspect text in dialogue file. This carries D-2 as ruled (CR-4): Sallow's crew made and placed false posts to hide scheduled flushes. It does **not** say who stood at Whisperflow that night. |
+| **The chalk crossings board** (D-2, ruled 2026-11-15, CR-4) | Chalk list: *Whisperflow — ✓. Greyharrow Reach — ✓. Drowsebank tail — .* With `LM_TL_EVIDENCE = riverfolk`, the inspect adds *"Maelin's second post."* |
 | **The counterweight stone** | The gear's counterweight is a carved slab: a groove and a notch. It hangs dry in the dark. With `SM_STONE_SEEN`: *"Another one. Like the depot wall. They built the war out of these."* Without it: *"A carved stone, grooved to a notch. It's been used as a weight."* No presentation event: it is just *there*, which is worse. |
 
 ### C8.3 The dawn turn (Beat 11)
@@ -1007,8 +1007,8 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 
 ## C14. Open decisions
 
-1. **D-2** is answered here as a proposal (posts and chalk board). If the Director chooses otherwise, edit only the post-store inspect texts and `NF-D9.05`.
-2. **D-1** — Sallow's name appears in `NF-D5`, `NF-D6`, `NF-D9.05`–`.06` (tagged) and on nothing physical. The bill carries the Board seal (swap layer).
+1. **D-2** Ruled 2026-11-15 (CR-4): Sallow's crew moved the post; carried by the posts and chalk board as authored.
+2. **D-1** Ruled 2026-11-15 (CR-1). Sallow's name appears in `NF-D5`, `NF-D6`, `NF-D9.05`–`.06` (tagged) and on nothing physical. The bill carries the Board seal (swap layer).
 3. **Bill of lading buyer.** *Resolved 2026-11-02 (FT-03 approved):* the bill reads "for the account of the Whinstone Store". In Lowmark content it is only a name; nothing in Lowmark says where the Whinstone Store is. Thornfell's TF-M2 reveals it as a Thornfell store-house used by an independent Blood-Oath splinter. No route for the grain is stated anywhere (ruling: do not invent unverified trade routes).
 4. **Map and hydrology** of the Cut route (MAP VERIFICATION REQUIRED, §C5.3).
 
@@ -1029,6 +1029,7 @@ Extends *The True Line* §8 language (sound-duck, no music, reflection lag, no U
 | CDR-6 solo-completion sweep, 2026-11-14. | MQ2 `SM_requisition` is picked up per player (was "granted to each participant"); MQ3 shared-Orrin fallback and MQ4 shared-Lock fallback credit only partners whose own active step uses it (were "credit to all" / "all present credited"), and a partner who leaves never blocks completion. Follow-up (coordinator consistency with Thornfell): MQ3 drain fallback no longer completes a later player's step on entering a pool another player drained; the pool resets and each player drains it from their own step. |
 | CDR-6 shared-credit clarification (§3.7 item 2a), 2026-11-15 | MQ3 orchard drain and MQ4 crank: the drain and the `wind_crank` segments credit every present partner whose own active step consumes them, so nobody repeats them; the reset fallback now applies only to players the shared work did not credit. |
 | Independent review pass. | The slack gate is no longer a crew route: its silt bulges wet from behind, the first visible sign of the backwater; after MQ4 the crew uses only the mill race. The chained Lock is watched by keepers and its chain is never cut. The convoy stones are a required inspect with Maelin's line, so every player meets the Fourteenth Lot's blank stone. The bill reads sixty-eight measures. |
+| Consolidated Director rulings, 2026-11-15 | CR-1, CR-4: D-1, D-2 and D-6 ruled as recommended (header, A14, B14, C8.2, C14, source tables). CR-3: House Marrick, Hesketh, Sallow, the Relief Cut and the Hollow Lock marked promoted in existence and narrative role in the source tables; placement stays MAP VERIFICATION REQUIRED. No step, flag, node or item id changed. |
 
 ---
 

@@ -27,7 +27,7 @@ Conditions use flags from the quest file §0.2–0.5 and each quest's flag table
 
 ## Part 2 — Cast notes (Act III roles)
 
-### Edda Marrick — Provisioner, House Marrick [NEW] `[ANTAGONIST]`
+### Edda Marrick — Provisioner, House Marrick [NEW; House Marrick and Edda Marrick promoted, CR-1, CR-3] `[ANTAGONIST]`
 - **Act III function:** the face of the present wrong; answers every chip.
 - **Want:** her house remembered as the one that kept Lowmark fed. **Fear:** being remembered as a profiteer.
 - **Knows:** the whole scheme; that the fire was "arranged" (she never says by whom). **Doesn't know:** the Braids, the stones, the fen. She thinks drift is superstition.
@@ -36,14 +36,14 @@ Conditions use flags from the quest file §0.2–0.5 and each quest's flag table
 - **Arc in Act III:** she loses gracefully, and that is the sting. Her last act in the hall is to ask the clerk to record that she attended. In MQ12 she asks the player how they will tell it.
 - **Guardrail:** no cackling, threats or confession speech. She never says "I did it." She says what she thinks she did instead.
 
-### Gideon Sallow — river factor [NEW] `[ANTAGONIST]`
+### Gideon Sallow — river factor [NEW; promoted, CR-1, CR-3] `[ANTAGONIST]`
 - **Act III function:** miniboss; scripted surrender when defeated (SX-2, CDR-1); optional witness.
 - **Want:** paying, and dry feet. **Fear:** the fen.
 - **Knows:** the Lock, the posts, the flush schedule, the buyer's name on the bill. **Doesn't know:** who the buyer really is.
 - **Voice:** cheerful, quick, superstitious. Touches any chain before he does anything that matters. Jokes in a fight. Calls the player "friend" the way a man says it to a horse.
 - **Change:** when he learns what the flushes stirred, he is frightened in a way the keepers never managed.
 
-### Bram Hesketh — Keeper-Captain, Crestbridge [NEW]
+### Bram Hesketh — Keeper-Captain, Crestbridge [NEW; promoted, CR-1, CR-3]
 - **Act III function:** the frightened official; saves his own signed orders from the fire; the hall's judgment.
 - **Want:** no riots. **Fear:** that he signed something terrible. (He did.)
 - **Voice:** clipped, tired, proud of his keepers. Says "my keepers" often. When he admits fault he uses short, complete sentences, as if reading from a charge sheet.
@@ -77,13 +77,13 @@ Conditions use flags from the quest file §0.2–0.5 and each quest's flag table
 - **Voice:** quiet, practical. Speaks to the path, not to the player, when it matters. Never explains the closure; she explains the reopening ("People are out there").
 - **Guardrail:** no Mire kinship or travel implied.
 
-### Sedge — reed-cutter (the Last Field-Mage, D-7) [NEW, PROPOSAL — DIRECTOR]
+### Sedge — reed-cutter (the Last Field-Mage, D-7) [NEW; D-7 ruled 2026-11-15, CR-4]
 - **Act III function:** risk adviser in the hall (one line); the vigil's centre; spreads the pressure; refuses to choose; refuses to train.
 - **Voice:** few words, exact ones. Answers questions with questions about what the player saw. Never names what he does.
 - **`LM_SEDGE_TRUST`:** warm → a word of thanks he would never give anyone else; cool → the same facts, and nothing else.
 - **Guardrail:** never confirms he is the Field-Mage aloud. Never rules, never teaches.
 
-### Oriel — Riverwarden of the Listening Steps [NEW, PROPOSAL — DIRECTOR]
+### Oriel — Riverwarden of the Listening Steps [NEW; D-8 ruled 2026-11-15, CR-4]
 - **Act III function:** MQ12 only: quotes the player's promise; asks for their mark.
 - **Voice:** formal, unhurried; water as work, never as a spirit. Uses "the Vale" for Lowmark. Says no more than she must.
 
@@ -1049,3 +1049,4 @@ Spoken once, on first meeting with the flag set. Each opens the commission packa
 | Evidence rule | Rejected-object lines (CR-D8.R1–R3); CR-D10.40 mocks the silence, which is tied to the plan's "Aye", never to a record; Sedge's lines describe what the water did, never what it means. |
 | Address-neutral | No gendered or origin terms for the player. "Friend" (Wynn, Sallow) and "my dear" (Marrick) are character habits used for anyone. |
 | Flags match quest file | `CR_*`, `SV_*`, `RR_*`, `LM_PLAN_ROUTES/MEMORIAL`, `LM_FEN_ENDING`, `LM_CIVIC_STANDING`, `LM_HESKETH`, `LM_MARRICK_EXPOSED` cross-checked. |
+| Consolidated Director rulings, 2026-11-15 | CR-1, CR-3: Marrick, Sallow and Hesketh cast notes marked promoted in role and motivation. CR-4: Sedge (D-7) and Oriel (D-8) labels changed from proposal to ruled; both stay [NEW]. No line text or node id changed. |

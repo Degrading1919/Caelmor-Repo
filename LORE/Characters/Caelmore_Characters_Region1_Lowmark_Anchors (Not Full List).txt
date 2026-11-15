@@ -14,6 +14,7 @@ Aldric Fenmere governs Lowmark not as a lord who commands, but as a steward who 
 
 **Private Weight:**  
 - House Fenmere signed multiple wartime supply compacts  
+- *[Approved CR-2, Director 2026-11-15]* The Fourteenth Lot flush order was issued by the wartime supply command under one of these Fenmere compacts; no named individual is held responsible, and nothing ties the order to Aldric personally  
 - House records document river movements that fed armies on several sides; Aldric's own approvals belong to later postwar administration
 - Keeps ledgers older than the war — and refuses to destroy them  
 
@@ -26,6 +27,26 @@ Aldric Fenmere governs Lowmark not as a lord who commands, but as a steward who 
 - Trade permissions  
 - Tariff disputes  
 - Old supply records that do not align with official war narratives  
+
+---
+
+### **House Marrick: Edda Marrick, Gideon Sallow, and Bram Hesketh**
+*[Approved CR-1, CR-3, Director 2026-11-15. Existence, roles and motivations only, as authored in the Lowmark production bible §2.2 and §5.3.]*  
+
+**Provisioner Edda Marrick** (House Marrick; Crestbridge Provision Board)  
+- House Marrick is a lesser grain-holding family that claims it "kept Lowmark alive" during the war  
+- The Provision Board can declare a relief emergency and order grain released from the Fenmere granaries at the fixed relief price  
+- In the present crisis she uses that procedure to divert relief grain to an outside buyer while the books show it delivered  
+- Wants her house recognized as Lowmark's true steward; fears being remembered as a profiteer  
+
+**Gideon Sallow** (Marrick's river factor)  
+- Runs the crew that works the Hollow Lock  
+- Wants paying; fears the fen  
+
+**Keeper-Captain Bram Hesketh** (Crestbridge Keepers)  
+- Signed blanket emergency orders because the Board told him the far-bank villages would riot without grain  
+- Does not know about the Relief Cut; a frightened official, not a villain  
+- Wants no riots; fears he signed something terrible  
 
 ---
 

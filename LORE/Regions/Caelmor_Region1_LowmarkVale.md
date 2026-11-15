@@ -33,10 +33,11 @@ Key wartime roles:
 - **River routes** shipping food, water, and raw materials toward Thornfell and beyond  
 - **Mill and bridge fortification** by dwarven engineers to keep supply lines open  
 - **Emergency depots** carved into low hills, later becoming goblin- and bandit-haunts  
+- **The Relief Cut and the Hollow Lock** *[Approved CR-2, CR-3, Director 2026-11-15]* – engineers working for the supply effort cut a wartime channel, the **Relief Cut**, and built a sluice-house, the **Hollow Lock**, that held fen water back and released it in pulses ("flushes") so heavy grain barges could run fast to the fronts. Late in the war a flush was released while a grain convoy was still in Stillwater Fen, and the convoy, the **Fourteenth Lot**, sank with its crews. The order was issued by the wartime supply command under a Fenmere compact; no named individual is held responsible. After the fighting stopped the Lock was chained and the Cut left to silt. Their exact placement, dimensions, engineering and relationship to the terrain are not established: **MAP VERIFICATION REQUIRED**.  
 
 Scars left behind:
 
-- **Ashen Flats** – where invading forces torched fields to starve their enemies  
+- **Ashen Flats** – where invading regional forces torched fields to starve their enemies *(CR-20, Director 2026-11-15: the invaders were existing Caelmor regional forces, not a separate power; which region is not established)*  
 - **Furrowed Plains** – faint trench lines and earthworks still visible beneath crops  
 - **Collapsed ferry piers and burned barges** along secondary river branches  
 
@@ -57,6 +58,8 @@ The war left Lowmark with fractured noble claims:
 - The quiet primary political question: **which family truly should rule Lowmark now?**
 
 This internal tension sits under the more visible day-to-day concerns of harvests, tariffs, and banditry — and gives plenty of fuel for grounded political questlines.
+
+*[Approved CR-1, CR-3, Director 2026-11-15]* One of these families is **House Marrick**, a lesser grain-holding family with its own claim that it "kept Lowmark alive" during the war. **Provisioner Edda Marrick** sits on the Crestbridge **Provision Board**, which can declare a relief emergency and order grain released from the Fenmere granaries at the fixed relief price. In Lowmark's present crisis she uses that emergency procedure to draw relief grain and send most of it to an outside buyer while the Board's books show it as delivered; the shortages also make House Fenmere's stewardship look like it is failing, which strengthens Marrick's claim. Her river factor **Gideon Sallow** runs the crew that works the Hollow Lock. **Keeper-Captain Bram Hesketh** of Crestbridge signed blanket emergency orders because the Board told him the far-bank villages would riot without grain; he is a frightened official, not a villain. Only their existence, roles and motivations are established here; how the scheme is exposed belongs to quest content.
 
 
 ---

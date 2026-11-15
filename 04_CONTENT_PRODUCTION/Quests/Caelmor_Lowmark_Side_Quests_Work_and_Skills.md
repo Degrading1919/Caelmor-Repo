@@ -582,7 +582,7 @@ BW-D6.07 TAMSIN: "You held it nearly right, by the end."
 | Trigger | Server event on first completion of the Cooking interaction in `S03_cook`. |
 | Sequence | ~8 s. The geese on the river, audible all quest, stop at once. The shelter goes quiet a beat later. The flood water at the shelter's bottom step climbs one step-height, smoothly, with no wave and no wind (~3 s), holds, and stays. Talk resumes. |
 | Camera / UI | Player-controlled; no UI, no music. |
-| Meaning | None stated to the player. **Author truth is keyed to world state [PROPOSAL — DIRECTOR]:** before MQ4 is Completed, the step rises on a Hollow Lock flush pulse (bible §2.2), a human act; from MQ4 Completed on, the same rise is the **fen backwater** pushing back up the river (bible MQ5 brief; Act II §A2.2), which is pressure, not intent. The geese hear the river change first in both cases. Nan's lines never name a cause, so they stand unchanged. It identifies nobody and proves nothing. It plants the question MQ3–MQ5 answer. |
+| Meaning | None stated to the player. **Author truth is keyed to world state (backwater ruled 2026-11-15, CR-4, D-12):** before MQ4 is Completed, the step rises on a Hollow Lock flush pulse (bible §2.2), a human act; from MQ4 Completed on, the same rise is the **fen backwater** pushing back up the river (bible MQ5 brief; Act II §A2.2), which is pressure, not intent. The geese hear the river change first in both cases. Nan's lines never name a cause, so they stand unchanged. It identifies nobody and proves nothing. It plants the question MQ3–MQ5 answer. |
 | Bottom-step inspect | Before MQ4: *"A step higher than it was, all at once. No rain fell. The water came down the river from somewhere."* / MQ4 Completed: *"A step higher, slowly, from below. No rain fell. The river isn't coming down; something is pushing it back up."* |
 | Repeat | Once per player, in either world state. Afterward the step's waterline stays one step higher. |
 
@@ -1259,7 +1259,7 @@ HS-D6.06 BRIGID: "Forge is yours when it's free. Buy honest stock off my bench. 
 ## Open questions for the Director and other passes
 
 1. **Guard-capable setup (Milestone 1)**: *resolved.* Act I MQ2's optional keepers' drill teaches it; HS adds Brigid's guard repair and forging lesson (`HS-D6.07`). No sixth skill quest.
-2. **FK's hush**: *resolved.* Before MQ4 it is a flush pulse; after MQ4 it is the fen backwater ([PROPOSAL — DIRECTOR]). It plays in both states, with a state-keyed inspect (FK.4).
+2. **FK's hush**: *resolved.* Before MQ4 it is a flush pulse; after MQ4 it is the fen backwater (ruled 2026-11-15, CR-4, D-12). It plays in both states, with a state-keyed inspect (FK.4).
 3. **WC location tier**: *resolved.* WC unlocks after MQ2, and its margin is on the Heartlands–Ashenstead edge. MAP VERIFICATION REQUIRED still applies.
 4. **Hide flow for BP**: raw hide stays purchasable at the yard, so Hunting is never required. **Economy pass to confirm** this matches husbandry as the baseline hide supply.
 5. **Main line without BP/HS**: Kell and Brigid sell or refurbish basic Milestone 1 pieces, so MQ3–4 never assume a side quest. Economy pass to confirm.
@@ -1286,3 +1286,5 @@ Applied `Caelmor_Director_Rulings_Combat_Ranged_Release.md`. **CDR-2:** WC gains
 CDR-6 solo-completion sweep, 2026-11-14: WC.9 shared-creature credit limited to participants whose own active step consumes it. No other violations found. Follow-up (coordinator consistency with Thornfell): BW.8 jam fallback no longer pre-clears the jam for later players; it resets and each player frees it from their own step.
 
 CDR-6 shared-credit clarification (§3.7 item 2a), 2026-11-15: BW.8 jam and leaner cuts now credit every present partner whose own active step consumes them; the reset fallback applies only to players the cut did not credit. Holder choice stays per player.
+
+Consolidated Director rulings, 2026-11-15: CR-4 (D-12 backwater ruled; FK author-truth labels at FK meaning row and review item 2 changed from proposal to ruled). The Hollow Lock named in FK is promoted in existence and narrative role (CR-3); its placement stays MAP VERIFICATION REQUIRED. No step, flag or node id changed.

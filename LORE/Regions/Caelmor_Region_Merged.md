@@ -14,7 +14,7 @@ The region is governed through overlapping practical claims: noble and charter i
 
 ### Great War inheritance
 
-Lowmark fed and moved people across several fronts while refusing large-scale destructive water warcraft. Fields, mills, bridges, depots, ferries, and barges became military targets. Present disputes over charters, tolls, priority, and repair preserve the war through work and records rather than distant legend.
+Lowmark fed and moved people across several fronts while refusing large-scale destructive water warcraft. Fields, mills, bridges, depots, ferries, and barges became military targets. Present disputes over charters, tolls, priority, and repair preserve the war through work and records rather than distant legend. *[Approved CR-2, CR-3, Director 2026-11-15]* Among the wartime works are the **Relief Cut**, a supply channel, and the **Hollow Lock**, a sluice-house that released stored fen water in flushes; a flush ordered by the wartime supply command under a Fenmere compact, with no named individual responsible, sank the Fourteenth Lot convoy in Stillwater Fen. Placement and engineering: MAP VERIFICATION REQUIRED.
 
 ### Water practice and magic
 
@@ -36,7 +36,7 @@ Brookhollow, Crestbridge, Ashenstead, Greyharrow, Whisperflow Run, the Floodplai
 
 ### Present pressure
 
-Lowmark must keep food and movement reliable while deciding who pays for repair, whose record counts, and when restraint protects people or merely delays a claim. Its future stories begin with local obligations and can connect outward without making Lowmark a passive supply region.
+Lowmark must keep food and movement reliable while deciding who pays for repair, whose record counts, and when restraint protects people or merely delays a claim. Its future stories begin with local obligations and can connect outward without making Lowmark a passive supply region. *[Approved CR-1, CR-3, Director 2026-11-15]* In the present crisis **House Marrick**, a lesser grain-holding family, uses Provisioner Edda Marrick's Provision Board seat to divert relief grain, moved at night down the reopened Relief Cut by her factor Gideon Sallow's crew; Keeper-Captain Bram Hesketh signed the emergency orders as a frightened official, not a villain.
 
 ## II. Thornfell Marches
 

@@ -2,6 +2,8 @@
 
 **Status (updated after the independent review pass, 2026-11-02):** Authored production direction for Creative Director milestone review. This is the controlling document for every Lowmark v1 quest, NPC, dialogue, encounter, and discovery package. It turns the approved Part 5 architecture (D05) into a concrete, playable slate. Everything marked **[NEW]** is authored and not canon until the Director promotes it. Everything marked **[PROPOSAL — DIRECTOR]** is a consequential story choice that the content is built on but that Collin may replace; Section 3 lists exactly which content changes if he does.
 
+**Consolidated Director rulings, 2026-11-15 (binding; CR-1 to CR-5, CR-21):** D-1, D-2, D-3, D-4, D-6, D-7, D-8, D-9, D-11, D-12 and D-14 are ruled as recommended (CR-1, CR-3, CR-4, CR-21, Director 2026-11-15); D-13 was already resolved by CDR-1. A **[PROPOSAL — DIRECTOR]** label that rests on one of these decisions now reads as ruled. House Marrick (with Edda Marrick, Gideon Sallow and Bram Hesketh), the Relief Cut and the Hollow Lock are promoted to canon in existence and narrative role only (CR-3); their exact geography, dimensions and terrain relationships are not, and every **MAP VERIFICATION REQUIRED** flag and terrain conflict TC-01 to TC-19 stays open. Everything else marked [NEW] stays [NEW]. D-5 (map placement) and D-10 (Mining) stay open. Ruling text: `Quests/Caelmor_Narrative_Architecture_Review_and_Authoring_Sequence.md` §5.0.
+
 **Terminology (CDR-3, 2026-11-03):** "Lowmark v1" in this file's name, title and ids is a historical production label for **the first internal production milestone**. It is not a release. Caelmor has no partial public release; the first public beta contains the complete planned game. Binding rulings: `Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md`.
 
 **Builds on:** `04_CONTENT_PRODUCTION/Quests/Caelmor_Lowmark_Quest_The_True_Line.md` (main quest 1) and its cast/dialogue file. The True Line's structure, voice rules, evidence rule, and conventions are binding here.
@@ -26,29 +28,30 @@ The player comes down the Brookhollow road as an ordinary wanderer and is put to
 
 ---
 
-## 2. Author truth [PROPOSAL — DIRECTOR]
+## 2. Author truth (Ruled 2026-11-15: CR-1 to CR-4)
 
-This section is the private truth behind the arc. Players learn it gradually and never all at once from one source. It keeps the three causes D05 requires: **a current human decision**, **older damaged infrastructure**, and **bounded resonance shaped by living grief**.
+The decisions this section rests on (D-1, D-2, D-6, D-7, D-8, D-12) are approved as recommended (CR-1, CR-4, Director 2026-11-15). Only what CR-3 promotes is canon; every other [NEW] item here stays [NEW]. This section is the private truth behind the arc. Players learn it gradually and never all at once from one source. It keeps the three causes D05 requires: **a current human decision**, **older damaged infrastructure**, and **bounded resonance shaped by living grief**.
 
 ### 2.1 The old works
 
 - **The Riverwarden Braids [NEW].** Long before the war, the Riverwardens tuned Lowmark's floods by splitting pressure across many small, carved channels and weirs ("the Braids"), calibrated by carved **Marking Stones** at crossings (the Flood Calendar Stones of dossier §XI). Crossing crews have seated posts on those stones for generations without knowing why. This is why the water climbed the stone in The True Line: where a Braid still works, restoring its mark lets water "hold a line" (dossier §XV language).
-- **The Relief Cut and the Hollow Lock [NEW].** During the Great War, engineers working for the supply effort (dossier §II: dwarven engineers fortified mills and bridges) cut a straight channel from Stillwater Fen's deep pools to the river below Crestbridge, severing several Braids. A sluice-house, the **Hollow Lock**, held fen water back and released it in pulses so heavy grain barges could run fast to the fronts. After the armistice the Lock was chained and the Cut left to silt.
-- **The Fourteenth Lot [NEW].** Late in the war a flush was released while a grain convoy was still in the fen. The convoy sank in Stillwater with its crews. The loss was hushed up. Bramblelock Weir's numbered convoy stones are missing that lot's entry (Part 3 proposal), and Corvin Tath's burned ledger (canon) is one of the records that would have shown it. No Lowmark content states who gave the order. Corvin's ledger stays unrecoverable.
+- **The Relief Cut and the Hollow Lock [NEW; existence and narrative role promoted to canon, CR-3, Director 2026-11-15; placement and engineering MAP VERIFICATION REQUIRED].** During the Great War, engineers working for the supply effort (dossier §II: dwarven engineers fortified mills and bridges) cut a straight channel from Stillwater Fen's deep pools to the river below Crestbridge, severing several Braids. A sluice-house, the **Hollow Lock**, held fen water back and released it in pulses so heavy grain barges could run fast to the fronts. After the armistice the Lock was chained and the Cut left to silt.
+- **The Fourteenth Lot [NEW].** Late in the war a flush was released while a grain convoy was still in the fen. The convoy sank in Stillwater with its crews. The loss was hushed up. Bramblelock Weir's numbered convoy stones are missing that lot's entry (Part 3 proposal), and Corvin Tath's burned ledger (canon) is one of the records that would have shown it. **Ruled 2026-11-15 (CR-2):** the wartime supply command issued the order under a Fenmere compact; no named individual is responsible. No Lowmark v1 content states this: the reveal is owned by LR-M1 *The Second Custodian*, whose second custodian is an authentic wartime engineering record from Thornfell with no named author (CR-5). Corvin's ledger stays unrecoverable.
 
 ### 2.2 The present wrong
 
-- **House Marrick [NEW]** is a lesser grain-holding family with its own claim that it "kept Lowmark alive" during the war (dossier §II political tension). **Provisioner Edda Marrick** sits on the Crestbridge **Provision Board**, which can declare a relief emergency and order grain released from the Fenmere granaries at the fixed relief price.
+- **Ruled 2026-11-15 (CR-1, CR-3):** House Marrick, Edda Marrick, Gideon Sallow and Bram Hesketh keep their roles and motivations exactly as authored below, and their existence and roles are promoted to canon.
+- **House Marrick [NEW; promoted, CR-3]** is a lesser grain-holding family with its own claim that it "kept Lowmark alive" during the war (dossier §II political tension). **Provisioner Edda Marrick** sits on the Crestbridge **Provision Board**, which can declare a relief emergency and order grain released from the Fenmere granaries at the fixed relief price.
 - Marrick's scheme: delay deliveries until a far-bank shortage is real, declare an emergency, draw relief grain, send a little on by road (Wynn Tarrow's cart) and most of it down the reopened Relief Cut at night to an outside buyer who pays priority rates. The Board's books show it all as "delivered." The shortages and the spreading drift also make House Fenmere's stewardship look like it is failing, which strengthens Marrick's claim at the next stewardship hearing.
-- **Gideon Sallow [NEW]** is Marrick's river factor. He runs the Hollow Lock crew, recruited partly through the Brookhollow smugglers' cellar (canon black-market hook). His crew moved the Whisperflow post.
-- **Keeper-Captain Bram Hesketh [NEW]** is the frightened official. He signed blanket emergency orders because the Board told him the far-bank villages would riot without grain. He does not know about the Cut. He is the Main Arc's "frightened official", not a villain.
+- **Gideon Sallow [NEW; promoted, CR-3]** is Marrick's river factor. He runs the Hollow Lock crew, recruited partly through the Brookhollow smugglers' cellar (canon black-market hook). His crew moved the Whisperflow post.
+- **Keeper-Captain Bram Hesketh [NEW; promoted, CR-3]** is the frightened official. He signed blanket emergency orders because the Board told him the far-bank villages would riot without grain. He does not know about the Cut. He is the Main Arc's "frightened official", not a villain.
 
 ### 2.3 The resonance
 
 - **How every player learns of the Fourteenth Lot before the boss,** through main quests only and never from a manifestation: Bramblelock's numbered convoy stones with the missing lot (a required inspect in MQ4), the flow-table's wreck scar in MQ9, and convoy lore spoken at the start of MQ11.
 - Stillwater Fen holds the war's grief: wreckage, the Fourteenth Lot, decades of people mourning at its edge. Water there is "heavy" (Wraithwatcher jargon).
 - Each flush drags heavy water out of the deep pools and down the Cut and the river, so drift gathers in new places: orchard pools, mill ponds, ditches, bends. Manifestations are imprints, not souls. They repeat, they react to conditions, and they never identify anyone (evidence rule; C08).
-- **The backwater [PROPOSAL — DIRECTOR].** The flushes also emptied the fen's deep pools faster than the old works could refill them. Once MQ4 closes the Lock, the fen's pressure pushes back through the wartime works on its own: through the Lock's silted **slack gate** (the first visible sign, seen in MQ4), under the Rebirth Fields along the guide-line (MQ5), and into the orchard dikes (MQ7). Sallow's crew still runs barges after MQ4, but only through Drowsebank's mill race and a wartime spur to the Cut, which they had used for weeks as an overflow run (MQ6). In MQ10's plan the crews plank the Cut-side culverts, closing the backwater's last outlets.
+- **The backwater (Ruled 2026-11-15, CR-4, D-12).** The flushes also emptied the fen's deep pools faster than the old works could refill them. Once MQ4 closes the Lock, the fen's pressure pushes back through the wartime works on its own: through the Lock's silted **slack gate** (the first visible sign, seen in MQ4), under the Rebirth Fields along the guide-line (MQ5), and into the orchard dikes (MQ7). Sallow's crew still runs barges after MQ4, but only through Drowsebank's mill race and a wartime spur to the Cut, which they had used for weeks as an overflow run (MQ6). In MQ10's plan the crews plank the Cut-side culverts, closing the backwater's last outlets.
 - When the Hollow Lock and its culverts are finally sealed for good, the pressure has nowhere to go. The fen "holds its breath" until it releases on its own in the **Hollowed Current** (canon high-tier event). The grief around the sunken convoy has coalesced into a **Wraith Lord**, called **the Muster** by Watchers because of the lantern-lines and stroke-calls it repeats.
 
 ### 2.4 Who knows what
@@ -63,48 +66,48 @@ This section is the private truth behind the arc. Players learn it gradually and
 | The Last Field-Mage | What heavy water is, how force spreads it, how the Braids once worked. | Names of the dead; the grain scheme. |
 | The Riverwardens | How the Braids are gated; why they withdrew. | Present Lowmark politics. |
 
-### 2.5 What defeating a Wraith means [PROPOSAL — DIRECTOR]
+### 2.5 What defeating a Wraith means (Ruled 2026-11-15, CR-4, D-6)
 
-**Recommendation:** Combat **disperses** a manifestation. The water "lets go" and the drift sinks back. It re-forms while the conditions that made it remain (trapped water, disturbed flow, unattended grief). **Changing the conditions** (clearing a sluice, closing the Lock, tending a remembrance pool, reopening a Braid) **quiets** the site.
+**Ruled as recommended:** Combat **disperses** a manifestation. The water "lets go" and the drift sinks back. It re-forms while the conditions that made it remain (trapped water, disturbed flow, unattended grief). **Changing the conditions** (clearing a sluice, closing the Lock, tending a remembrance pool, reopening a Braid) **quiets** the site.
 
 Why: it fits dossier §XVI.1 ("some grief cannot just be killed — it must be faced"), keeps combat protective rather than evidentiary, and gives the systems a clean rule: every drift site has a state (**active → quieted**, or **tended** after Act III) that quests change and that drives encounter spawning. Players feel their work change the map.
 
-### 2.6 The Last Field-Mage [PROPOSAL — DIRECTOR]
+### 2.6 The Last Field-Mage (Ruled 2026-11-15, CR-4, D-7)
 
-**Recommendation:** The Field-Mage lives in plain sight as **Sedge**, an old reed-cutter who works the Path of Unburnt Reeds near Ashenstead. Players meet Sedge in Act II as an ordinary NPC (seeded in main quest 5 and two side quests) before learning who he is in main quest 8. "Sedge" is a working nickname; his given name is never spoken in Lowmark content. The dossier's rumor calls the mantle "his cloak," and this proposal follows it.
+**Ruled as recommended:** The Field-Mage lives in plain sight as **Sedge**, an old reed-cutter who works the Path of Unburnt Reeds near Ashenstead. Players meet Sedge in Act II as an ordinary NPC (seeded in main quest 5 and two side quests) before learning who he is in main quest 8. "Sedge" is a working nickname; his given name is never spoken in Lowmark content. The dossier's rumor calls the mantle "his cloak," and this proposal follows it.
 
 Characterization: precise, tired, kind in small ways and blunt in large ones. He has spent his life quieting water at night so nobody would have to know he exists. He refuses to train, refuses to fight Wraiths for anyone, and refuses to rule. He knows combat-scale water practice and shows the player once, in main quest 8, why force spreads heavy water instead of ending it.
 
-### 2.7 Riverwarden contact [PROPOSAL — DIRECTOR]
+### 2.7 Riverwarden contact (Ruled 2026-11-15, CR-4, D-8)
 
-**Recommendation:** Lowmark content reaches only the **Listening Steps**, the outer carved channels behind Veilwater Falls, and one Riverwarden, **Oriel** [NEW]. The inner oasis and Warden's Hearth stay unseen and unmarked (dossier §V.5, §VI). Oriel offers the Braid gate knowledge to Lowmark's workers on one condition: the Vale must agree in public to tend the Braids together, with no one house or office owning them. That condition is why main quest 10 is a public plan. The Riverwardens do not return to rule (Main Arc movement 12).
+**Ruled as recommended:** Lowmark content reaches only the **Listening Steps**, the outer carved channels behind Veilwater Falls, and one Riverwarden, **Oriel** [NEW]. The inner oasis and Warden's Hearth stay unseen and unmarked (dossier §V.5, §VI). Oriel offers the Braid gate knowledge to Lowmark's workers on one condition: the Vale must agree in public to tend the Braids together, with no one house or office owning them. That condition is why main quest 10 is a public plan. The Riverwardens do not return to rule (Main Arc movement 12).
 
 ---
 
 ## 3. Director decisions and how the content depends on them
 
-Each decision below is open. The content is built on the recommendation so it is playable now, and each choice is isolated so changing it touches only the listed places.
+Ruled 2026-11-15 (CR-1 to CR-4, CR-21): every decision below is ruled as recommended except D-5 (map placement) and D-10 (Mining), which stay open, and D-13 (resolved by CDR-1). The "content that changes" column is kept as a trace of where each decision lives.
 
 | # | Decision | Recommendation (what content assumes) | Content that changes if replaced |
 |---|---|---|---|
-| D-1 | **Main antagonist** | House Marrick and Provisioner Edda Marrick, with factor Gideon Sallow and frightened official Bram Hesketh (§2.2). | Only the **named-identity nodes** listed in §3.1. Mechanics, places, evidence chain and set pieces survive any replacement that is still "a present local interest using emergency procedure" (Main Arc movement 4). |
-| D-2 | **Who moved the Whisperflow post** | Sallow's Hollow Lock crew, on Marrick's scheme, to hide a scheduled flush. Revealed in main quest 4 by the stock of pre-notched posts at the Lock. | Main quest 4 Lock interior inspect text; main quest 10 evidence line. The True Line itself never names anyone (unchanged). |
-| D-3 | **Who the player is** | Ordinary wanderer on the Brookhollow road; origin-neutral, address-neutral dialogue everywhere. | One optional variant line at the True Line D1/D10 and main quest 12 farewell if origins are added. |
-| D-4 | **Is Whisperflow Landing the start?** | Yes. The True Line is the first thing a new character plays. **Director, 2026-11-15:** the Landing stays a small working barge-and-ferry crossing shown on its bad day (True Line §5, P04), not a village; the lived-in village feel belongs to Brookhollow, next on the road. No expansion of the opening. | Stage 14 onboarding placement only. Side-quest unlock gates use main-quest flags, not spawn location. |
-| D-5 | **Map placement** | The relative layout in §4. Every content package uses relative placement and marks **MAP VERIFICATION REQUIRED** where geometry matters. | Travel framing lines; no quest logic depends on distances. |
-| D-6 | **What defeating a Wraith means** | Disperse vs. quiet (§2.5). | The drift-site state model (§9), Ansel's lines in main quests 3 and 4, Sedge's demonstration in main quest 8, the Act III boss resolution. A "Wraiths can be destroyed" ruling would collapse the site-state model into ordinary spawns and remove the main quest 8 demonstration. |
-| D-7 | **Last Field-Mage characterization** | Sedge the reed-cutter (§2.6). | Main quests 5 (seed), 8, 9, 11, 12; side quests *The Twice-Burned Tree* and *The Uphill Canal* (Sedge cameos). |
-| D-8 | **Riverwarden contact in Lowmark** | Oriel at the Listening Steps only (§2.7). | Main quests 9, 10 (condition), 12. |
-| D-9 | **Subzone naming** | Map Phase 1.5's four subzone names onto dossier places (§4.1) rather than renaming either. | Zone file names and loading-screen text only. |
-| D-10 | **Mining in Lowmark** | No authored quest depends on Mining. The Minimum Coherent Material Set makes steel imported; Phase 1.5 still lists ore veins. This conflict belongs to the economy pass. | None in narrative. Flagged for the Gameplay Designer. |
-| D-12 | **The backwater** (§2.3) | Fen pressure pushes back through the old works after MQ4. | MQ5–7 flooding causes; MQ10 culvert planking. |
+| D-1 | **Main antagonist** | **Ruled 2026-11-15 (CR-1).** House Marrick and Provisioner Edda Marrick, with factor Gideon Sallow and frightened official Bram Hesketh (§2.2). | Only the **named-identity nodes** listed in §3.1. Mechanics, places, evidence chain and set pieces survive any replacement that is still "a present local interest using emergency procedure" (Main Arc movement 4). |
+| D-2 | **Who moved the Whisperflow post** | **Ruled 2026-11-15 (CR-4).** Sallow's Hollow Lock crew, on Marrick's scheme, to hide a scheduled flush. Revealed in main quest 4 by the stock of pre-notched posts at the Lock. | Main quest 4 Lock interior inspect text; main quest 10 evidence line. The True Line itself never names anyone (unchanged). |
+| D-3 | **Who the player is** | **Ruled 2026-11-15 (CR-4, CR-21).** Ordinary wanderer on the Brookhollow road; origin-neutral, address-neutral dialogue everywhere. The Founder roster and unresolved historical identities stay unanswered (C07). | None. The reserved origin-variant lines (True Line D1/D10, main quest 12 farewell) are retired: the player stays origin-neutral (CR-21). |
+| D-4 | **Is Whisperflow Landing the start?** | **Ruled 2026-11-15 (CR-4).** Yes. The True Line is the first thing a new character plays. **Director, 2026-11-15:** the Landing stays a small working barge-and-ferry crossing shown on its bad day (True Line §5, P04), not a village; the lived-in village feel belongs to Brookhollow, next on the road. No expansion of the opening. | Stage 14 onboarding placement only. Side-quest unlock gates use main-quest flags, not spawn location. |
+| D-5 | **Map placement** | **Open (map; not ruled by CR-4).** The relative layout in §4. Every content package uses relative placement and marks **MAP VERIFICATION REQUIRED** where geometry matters. | Travel framing lines; no quest logic depends on distances. |
+| D-6 | **What defeating a Wraith means** | **Ruled 2026-11-15 (CR-4).** Disperse vs. quiet (§2.5). | The drift-site state model (§9), Ansel's lines in main quests 3 and 4, Sedge's demonstration in main quest 8, the Act III boss resolution. A "Wraiths can be destroyed" ruling would collapse the site-state model into ordinary spawns and remove the main quest 8 demonstration. |
+| D-7 | **Last Field-Mage characterization** | **Ruled 2026-11-15 (CR-4).** Sedge the reed-cutter (§2.6). | Main quests 5 (seed), 8, 9, 11, 12; side quests *The Twice-Burned Tree* and *The Uphill Canal* (Sedge cameos). |
+| D-8 | **Riverwarden contact in Lowmark** | **Ruled 2026-11-15 (CR-4).** Oriel at the Listening Steps only (§2.7). | Main quests 9, 10 (condition), 12. |
+| D-9 | **Subzone naming** | **Ruled 2026-11-15 (CR-4).** Map Phase 1.5's four subzone names onto dossier places (§4.1) rather than renaming either. | Zone file names and loading-screen text only. |
+| D-10 | **Mining in Lowmark** | **Open (economy pass; not ruled by CR-4).** No authored quest depends on Mining. The Minimum Coherent Material Set makes steel imported; Phase 1.5 still lists ore veins. This conflict belongs to the economy pass. | None in narrative. Flagged for the Gameplay Designer. |
+| D-12 | **The backwater** (§2.3) | **Ruled 2026-11-15 (CR-4).** Fen pressure pushes back through the old works after MQ4. | MQ5–7 flooding causes; MQ10 culvert planking. |
 | D-13 | ~~Human enemies yield instead of dying~~ **RESOLVED — superseded by CDR-1 (2026-11-03)** | All enemies, human or not, are defeated at 0 HP with the ordinary defeat presentation; no yield threshold, no downed state. The only scripted exceptions are **SX-1 Joss Garrow** (*Old Lantern*: on defeat he sets the lantern down and can be brought in alive) and **SX-2 Gideon Sallow** (MQ10: on defeat he surrenders; `cr.sallow_yield` fires on defeat). See `Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md` §1, §3.1, §4. | Defeat lines in MQ4, MQ6, MQ10, *Under the Lamb*, *Night Ferry*; MQ4's naming of Sallow re-sourced to an ally (T-1). |
-| D-14 | **Maelin's night crossing in MQ12** | She crosses at night once, on a stretch now proven safe. This stretches her canon trait ("refuses night passage through specific stretches") without breaking it. | MQ12 final beat. |
-| D-11 | **Canon promotion** | Promote nothing yet. All new places, people, the Braids, the Relief Cut, the Fourteenth Lot and House Marrick stay [NEW] until reviewed. | None. |
+| D-14 | **Maelin's night crossing in MQ12** | **Ruled 2026-11-15 (CR-4).** She crosses at night once, on a stretch now proven safe. This stretches her canon trait ("refuses night passage through specific stretches") without breaking it. | MQ12 final beat. |
+| D-11 | **Canon promotion** | **Ruled 2026-11-15 (CR-3).** Promoted to canon, existence and narrative role only: House Marrick, with Edda Marrick, Gideon Sallow and Bram Hesketh in their authored roles and motivations (CR-1); the Relief Cut and the Hollow Lock as wartime flow works and their part in the Fourteenth Lot and the present scheme; the Fourteenth Lot order as issued by the wartime supply command under a Fenmere compact, with no named individual (CR-2). Not promoted: exact geography, engineering dimensions and terrain relationships (MAP VERIFICATION REQUIRED; TC-01 to TC-19 stay open). Every other [NEW] item (the Braids, the Marking Stones, Sedge, Oriel, the Listening Steps, the authored POIs and the rest) stays [NEW]; the Fourteenth Lot's loss was already canon (FT-02a). | LORE passages marked CR-3 in the Lowmark region file, the Lowmark anchors file, the Timeline, the War History, the Factions file and the merged region file. No content change. |
 
 ### 3.1 Antagonist swap layer
 
-If D-1 changes, edit only these: Marrick in main quests 2, 7, 10, 11, 12; Sallow in main quests 4, 6, 10, 11, 12 and side quest *Under the Lamb*; the Board-seal text on `SM_requisition`, `NF_bill_of_lading`, `CR_board_minute` and the *Under the Lamb* crew pay chits. Every package that mentions the antagonist does so in a node tagged `[ANTAGONIST]` so the swap can be found by search.
+D-1 is ruled (CR-1, Director 2026-11-15); this layer and the `[ANTAGONIST]` tags stay as search tags only. Had D-1 changed, these were the only edits: Marrick in main quests 2, 7, 10, 11, 12; Sallow in main quests 4, 6, 10, 11, 12 and side quest *Under the Lamb*; the Board-seal text on `SM_requisition`, `NF_bill_of_lading`, `CR_board_minute` and the *Under the Lamb* crew pay chits. Every package that mentions the antagonist does so in a node tagged `[ANTAGONIST]` so the swap can be found by search.
 
 ---
 
@@ -182,6 +185,8 @@ Anchors keep their canon limits (Part 4 ledger): no invented ages, service, kins
 Hollis Avery (keeper; MQ2 cameo, MQ10, MQ12), Wynn Tarrow (MQ2 lead, MQ12), Nan Ferrin (Flood Kitchen, Verse Kept Back, MQ12), Dace (Night Ferry), Ansel Corrie (MQ3, 4, 8, 11, 12; Old Lantern).
 
 ### 5.3 New in Lowmark [NEW]
+
+Edda Marrick, Gideon Sallow and Bram Hesketh (and House Marrick) are promoted to canon in their authored roles and motivations (CR-1, CR-3, Director 2026-11-15). Every other NPC in this table stays [NEW]; Sedge and Oriel are ruled as content (CR-4) but not promoted.
 
 | NPC | Role | Home | Appears in | Want / fear | Voice note |
 |---|---|---|---|---|---|
@@ -396,10 +401,10 @@ Bosses: 1 Act III boss (the Muster) and 2 minibosses (Gideon Sallow, Old Lantern
 5. **Rewards.** Access, knowledge, tools, small payments, standing. No lump quest XP. No new items beyond quest items unless the item pass defines them; reward tools are named functionally ("crew hatchet").
 6. **Quest-item budget.** Phase 1.5 allows 8–12 quest items for all of Lowmark (the first milestone). The True Line uses 3. Each act package may use at most 2 new quest items; side quests use carry-state objects or none.
 7. **Tone.** Grounded, mythic, dry humor, understatement. At least one moment of wonder or unease per quest. No exposition dumps. No cutscenes; the camera stays with the player.
-8. **Addressing the player.** Origin-neutral and address-neutral (D-3).
+8. **Addressing the player.** Origin-neutral and address-neutral (D-3; ruled CR-4, CR-21: no origin variants).
 9. **Antagonist tagging.** Any node naming Marrick or Sallow is tagged `[ANTAGONIST]` (§3.1).
 10. **Map.** Relative placement only; mark **MAP VERIFICATION REQUIRED**.
-11. **Status labels.** [CANON], [NEW], [PROPOSAL — DIRECTOR] as in the True Line.
+11. **Status labels.** [CANON], [NEW], [PROPOSAL — DIRECTOR] as in the True Line. Since 2026-11-15 a [PROPOSAL — DIRECTOR] label on a decision ruled by CR-1 to CR-4 reads as ruled; `[D-7]`, `[D-8]` and `[ANTAGONIST]` stay as search tags.
 
 ---
 
@@ -422,3 +427,7 @@ Bosses: 1 Act III boss (the Muster) and 2 minibosses (Gideon Sallow, Old Lantern
 ## Director rulings reconciliation (2026-11-03)
 
 Applied `Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md` (CDR-1 to CDR-3). D-13 marked resolved and superseded by CDR-1: all enemies are defeated at 0 HP; SX-1 Joss Garrow and SX-2 Gideon Sallow are the only Lowmark scripted exceptions, played by the quest on defeat. MQ4 brief: Sallow is named by Maelin at dawn (T-1), not by a defeated crewman. MQ10 brief: Sallow's surrender is a scripted outcome on defeat. §9.3 defeated-humans convention repointed to CDR-1. Skill coverage: ranged accepted in every encounter, never required; one optional bow beat in WC; Fletching not taught in Lowmark (CDR-2). Release wording changed to milestone language and a terminology note added at the top (CDR-3). No quest structure, step, flag or id changed.
+
+## Consolidated Director rulings, 2026-11-15
+
+Consolidated Director rulings, 2026-11-15: CR-1 (D-1 ruled; Marrick, Sallow, Hesketh as authored), CR-2 (§2.1 who gave the Fourteenth Lot order: wartime supply command under a Fenmere compact, no named individual; reveal stays with LR-M1), CR-3 (D-11 ruled; House Marrick, the Relief Cut and the Hollow Lock promoted in existence and narrative role; §2.1, §2.2, §5.3 status notes), CR-4 (D-2, D-3, D-4, D-6, D-7, D-8, D-9, D-12, D-14 ruled; §2 and §2.3, §2.5–§2.7 headings), CR-5 (LR-M1's second custodian is an unauthored wartime engineering record; noted in §2.1), CR-21 (D-3 origin-variant reservation retired). D-5 and D-10 stay open. No quest, step, flag, node or POI id changed; every MAP VERIFICATION REQUIRED flag and TC-01 to TC-19 stay open.

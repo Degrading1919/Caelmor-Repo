@@ -1,6 +1,6 @@
 # Emberholt Side Quests: Commons and Wards
 
-**Status (2026-11-15):** Authored production content for Creative Director milestone review (Emberholt bible §12, Batch 3). Five side quests from `Caelmor_Emberholt_Narrative_Production_Bible.md` §7.1 and §7.2: the **Heat Commons** questline, **EWA** *The Water That Did Not Arrive* (1/3), **ECN** *The Case That Never Reached the Court* (2/3) and **EFC** *First Cooling* (3/3); and two standalones, **EBL** *The Ward That Answers Its Own Bell* and **ESR** *The Seven Repairs*. Everything here is **[NEW]** unless marked **[CANON]** or **[APPROVED — id]**. Choices the content depends on that rest on an open bible §3 recommendation are marked **[PROPOSAL — DIRECTOR]**. Markdown only: no schema, production JSON or C#. Dialogue sits inline in each package (§x.13), as in `Caelmor_Mire_Side_Quests_Work_and_Skills.md`, in the node format `NODE SPEAKER: "Line." (stage note)`, `> [condition] "Option." → NEXT {effect}`, with node ids `<CODE>-D<n>.<nn>`, barks `<CODE>-B<n>.<nn>` and inspect texts `<CODE>-I<n>`. Voice follows bible §5.3.
+**Status (2026-11-15):** Authored production content for Creative Director milestone review (Emberholt bible §12, Batch 3). Five side quests from `Caelmor_Emberholt_Narrative_Production_Bible.md` §7.1 and §7.2: the **Heat Commons** questline, **EWA** *The Water That Did Not Arrive* (1/3), **ECN** *The Case That Never Reached the Court* (2/3) and **EFC** *First Cooling* (3/3); and two standalones, **EBL** *The Ward That Answers Its Own Bell* and **ESR** *The Seven Repairs*. Everything here is **[NEW]** unless marked **[CANON]** or **[APPROVED — id]**. Choices the content depends on that rested on an open bible §3 recommendation were marked **[PROPOSAL — DIRECTOR]**; every Emberholt bible §3 decision was ruled 2026-11-15 (CR-6 to CR-15, Director 2026-11-15), and remaining marks name the ruling. Markdown only: no schema, production JSON or C#. Dialogue sits inline in each package (§x.13), as in `Caelmor_Mire_Side_Quests_Work_and_Skills.md`, in the node format `NODE SPEAKER: "Line." (stage note)`, `> [condition] "Option." → NEXT {effect}`, with node ids `<CODE>-D<n>.<nn>`, barks `<CODE>-B<n>.<nn>` and inspect texts `<CODE>-I<n>`. Voice follows bible §5.3.
 
 **Binding rulings:** `Caelmor_Director_Rulings_Combat_Ranged_Release.md`: CDR-1 (every enemy defeated at 0 HP; no yield, retreat, break-off or scatter; Emberholt registers no SX exception), CDR-2 (ranged first-class in every fight, required in none), CDR-3 (Emberholt is an internal production milestone of the complete game), CDR-4 (standard RPG systems before bespoke simulation), CDR-6 (every step, encounter and reward completable solo; co-op is optional assistance; partner credit only when the partner's own active step consumes it; personal choices and flags independent).
 
@@ -86,12 +86,12 @@ No quest repeats a milestone's primary verb or strange moment (checked against E
 
 - **Address.** Cinderwall NPCs, Veska, Hennet, Yorven and Odile say "warden's hand" (bible §5.3 rule 8); Embergate strangers in ESR say "traveller" until they have heard. Origin-neutral (D-3).
 - **Tells and heat.** `EH_TELLS` is always true here (EH-M1 gates every quest). Each step pins the heat states it needs (bible §9.2; EI-HT-01 fallback). Waiting in a niche or at a keep-watch bench is always available.
-- **The EH-M6 frost (playability audit ES-01).** The EGA hour pin (`EGA_FROST`: dusk until EGA `S01`, night from `S02` to the `S06` keep watch) governs only EGA steps and the frost-variant areas (Cinderwall W1 to W4 and the upper Undercroft). A side step placed in those areas is held while `EGA_FROST` is set and resumes at `EGA_THAW_SEEN`, as EME01 and EME05 already do. Keep watch anywhere else advances this player's hour normally. Any other quest's hour pin applies only to keep watch inside that quest's own step volume (ES-06). EDI-3 (EH-M6 auto-activation) stays open.
+- **The EH-M6 frost (playability audit ES-01).** The EGA hour pin (`EGA_FROST`: dusk until EGA `S01`, night from `S02` to the `S06` keep watch) governs only EGA steps and the frost-variant areas (Cinderwall W1 to W4 and the upper Undercroft). A side step placed in those areas is held while `EGA_FROST` is set and resumes at `EGA_THAW_SEEN`, as EME01 and EME05 already do. `EGA_FROST` is set only when the player accepts EH-M6 from Odile Prace at the Gate Valve House (`EGA-D0.10`); before acceptance, or after a decline (`EGA-D0.90`), nothing is held (CR-13, Director 2026-11-15). Keep watch anywhere else advances this player's hour normally. Any other quest's hour pin applies only to keep watch inside that quest's own step volume (ES-06). EDI-3 ruled 2026-11-15 (CR-13, Director 2026-11-15): EH-M6 is offered and accepted, never auto-activated; the Cinderwall-entry auto-start is retired.
 - **Skill steps** list their alternative in the beat; the alternative is still play and costs a turn, a share or skill XP, never the quest.
 - **Combat.** Every enemy is defeated at 0 HP with the ordinary defeat presentation (CDR-1); none yields, flees, scatters or breaks off; no SX. Every fight accepts melee or ranged and requires neither (CDR-2) and is solo-tuned (CDR-6). No defeated enemy speaks after a fight or carries evidence (rulings §3.2).
 - **Non-combatants.** Every named person in this file, every child, every Cinderwatch officer and every Slagside resident is never targetable.
 - **Evidence and revelations.** Nothing here is evidence for a revelation; the steam, the slag mirror, the lamp ripple, the bell and the warm marks prove nothing. The tally board's "old leaks" is mentioned once as weather and is not explained or reduced (EH-M6 owns it). No Deepbrand or "below" presence. ECN's pit lot are shown only as pipe-strippers (bible §10) and are given no affiliation: the dossier calls the Dross scavengers "clandestine Remnant scavengers", and nothing here confirms or denies it (no line says what they are not). EBL's bell is a warden's knot (the Part 3 deep-works reading is not used).
-- **Reserved decisions.** No node depends on D-E2, D-S1 or the initiate's name (Iven Calder, ED-3), all ruled 2026-11-15, or on D-3, C07 or the "invaders" wording. Nodes naming the EH-M1 valve order, Sarne Ardane, Ralenne's scene or the EH-M1 choice wording are tagged **`[ALLOCATION]`** (bible §3.1). No Volkhari person appears (D-C06); no precursor name, roster or casualty count (D-C03).
+- **Reserved decisions.** No node depends on D-E2, D-S1 or the initiate's name (Iven Calder, ED-3), all ruled 2026-11-15, or on D-3, C07 or the "invaders" wording (ruled 2026-11-15: CR-20, wartime invading forces are existing Caelmor regional forces, no fifth power and no compass direction; CR-21, the player stays origin-neutral and C07 stays unanswered; Director 2026-11-15). Nodes naming the EH-M1 valve order, Sarne Ardane, Ralenne's scene or the EH-M1 choice wording are tagged **`[ALLOCATION]`** (bible §3.1). No Volkhari person appears (D-C06); no precursor name, roster or casualty count (D-C03).
 - **Time.** No calendar dates; the past is dated by events ("the cold-ward nights", "the winter the gate culvert froze", "the year the gate was rebuilt").
 - **No failure.** Inactive / Active / Completed only. Death respawns at the quest's named safe point with step, flags and kept progress intact; logout restores the last persisted step and returns a dropped carry-state object to its source; walking away keeps the quest Active with the resume hook named in each package; missed moments re-offer on the next keep watch. **Carry-state classes (Integration EI-CA-04; playability audit ES-03):** small documents and tokens are possession flags that never limit movement or attack and are kept across death and logout; only bulky loads (walk, cannot attack) return to their source.
 - **Co-op (CDR-6).** Each player's own quest state decides their own tells, valves, props, steps and choices. Shared enemies credit a partner only when the partner's own active step consumes the defeat. Shared work done together (a cock bled, a diverter turned, a notch held) credits every present partner whose own active step consumes it, so nobody repeats it (CDR-6 §3.7 item 2a); choices, readings and personal flags stay per player. A partner who leaves or is ahead never blocks the other. Shared prop presentation is a fallback only (bible §9; MI-CO-06 pattern). No step needs two players.
@@ -155,7 +155,7 @@ Selected shape: Cold cistern → trace the branch by tells → rat nest in the d
 
 | Element | Source | Status |
 |---|---|---|
-| Cooling Houses; the Heat Commons (shared wash, warmth and repair) | Part 3 Emberholt proposal; bible §1.2, ED-13 | [PROPOSAL — DIRECTOR] ED-13; [NEW] detail |
+| Cooling Houses; the Heat Commons (shared wash, warmth and repair) | Part 3 Emberholt proposal; bible §1.2, ED-13 | Ruled 2026-11-15 (CR-7, Director 2026-11-15) ED-13; [NEW] detail |
 | The Cooling House board's "rota for the wash cistern"; the Heat Commons store behind the wash-house | Act I dialogue (ECW-I2); Act III W4 | [NEW], consistent |
 | Tells, cooling niches, vent breath; "You don't shut hot"; "Never touch a red" | Bible §1.1; Act I | [NEW], consistent |
 | Veska's chalk slate at the junction | Act I `S02` | [NEW], recurs |
@@ -413,7 +413,7 @@ EWA-D6.40 DUNYA: (pays from a tin box) "From the Commons box. Don't argue, it's 
 
 ### EWA.14 Open decisions
 
-1. **`[ALLOCATION]` (ED-1):** `EWA-D1.10`/`.11` and `EWA-D7.10`/`.11` change if the EH-M1 cause changes. The reroute itself survives any cause that shut the junction.
+1. **`[ALLOCATION]` (ED-1): ruled 2026-11-15 (CR-6, Director 2026-11-15).** The politically motivated heat allocation stays and the incident is not caused by the Remnant, so `EWA-D1.10`/`.11` and `EWA-D7.10`/`.11` stand as written; the tag stays only as a locator.
 2. **Veska's second slate line [NEW]:** uses the bible's "Veska's slate (recurs from ECW)" as the recurring evidence. If the Director prefers the slate to carry only her protest, Dunya's own tag on the lashing (fully legible) carries the line; the quest is unchanged.
 3. **The missing handle** seeds ECN. If ECN changes, the crew key alone is enough.
 4. **Leatherworking `[GD: low]`:** Gameplay Designer to set; the crew path is one turn.
@@ -753,7 +753,7 @@ Selected shape: Gather from the lanes → cook the pot by the hearth tell (or th
 
 | Element | Source | Status |
 |---|---|---|
-| First Cooling: lowered household flames, repaired work shown in public, a meal before names; street meals, supervised flame weaving, a child's first safe ignition | Part 3 Emberholt proposal; bible §1.2, §7.1, ED-13 | [PROPOSAL — DIRECTOR] ED-13; [NEW] detail |
+| First Cooling: lowered household flames, repaired work shown in public, a meal before names; street meals, supervised flame weaving, a child's first safe ignition | Part 3 Emberholt proposal; bible §1.2, §7.1, ED-13 | Ruled 2026-11-15 (CR-7, Director 2026-11-15) ED-13; [NEW] detail |
 | Mourning rites where flames are dimmed instead of extinguished | Dossier §XVI | [CANON] |
 | The dimmed flame (EME03); warm stones (EME07) | Bible §7.4 | [NEW] |
 | Children light lanterns by touch; the Cinderweave Quarter hosts the largest festivals | Dossier §III, §VII.2 | [CANON] |
@@ -978,7 +978,7 @@ EFC-D6.21 HENNET: "Sit down, warden's hand. You're running hot."   {set EH_COMMO
 
 1. **First Cooling's custom (ED-13):** "the first night the Commons runs full after the year's mending" is this package's reading of the bible's "first night the heat is shared fairly". The Part 3 "unapproved verse" is **not used**; no verse is sung.
 2. **The year's names [NEW]:** four ordinary Cinderwall names with no war reference. Hesper's names reuse Act I's crew (Lorcan and four first names) and appear only if EH-M3 is Completed; they say nothing of where or why.
-3. **`[ALLOCATION]`:** `EFC-D4.10`/`.11` and `EFC-D5.30` change with ED-1.
+3. **`[ALLOCATION]`: ruled 2026-11-15 (ED-1, CR-6, Director 2026-11-15).** `EFC-D4.10`/`.11` and `EFC-D5.30` stand as written; the tag stays only as a locator.
 4. **Tavi as first light:** EH-M2 is a prerequisite, so Tavi is always present. If the Director prefers a Cinderwall child, any lane child takes the lines; Jessa's `EH_CURRICULUM` line is cut.
 
 ### EFC.15 Review log
@@ -1242,7 +1242,7 @@ EBL-D5.20 VESKA: (to the forge gate, chalking Wim's docking slate) "Bell was the
 
 | Element | Source | Status |
 |---|---|---|
-| The Bridge of Seven Repairs (EP27), inside Embergate | Part 3; bible §4.2, ED-13 | [PROPOSAL — DIRECTOR] ED-13; [NEW] detail |
+| The Bridge of Seven Repairs (EP27), inside Embergate | Part 3; bible §4.2, ED-13 | Ruled 2026-11-15 (CR-7, Director 2026-11-15) ED-13; [NEW] detail |
 | Embergate; lanterns lit by apprentice embercrafters | Dossier §VII.1 | [CANON] |
 | Emberforged artisans; emberglass; Cinderweave glasswrights | Dossier §V, §VII.2 | [CANON] |
 | Tessaly Varn, Emberforged stonemason; *Ash in the Snow*; `TAS_ACCOUNT` | Thornfell bible §5.2; Thornfell TAS | [NEW, Thornfell] |
@@ -1434,3 +1434,4 @@ Every need above is a standard system already used by the Emberholt act packages
 | Director review pass, 2026-11-15 | ESR bridgework elder Hallam Calder renamed **Hallam Drost** so no Emberholt NPC shares a surname with Iven Calder (ED-3); "Drost" grepped clean across 04_CONTENT_PRODUCTION, LORE and 00_ADMIN. **Resolved:** Hallam Drost rename accepted (Director, 2026-11-15). |
 | Playability audit fixes, 2026-11-15 | Playability audit fixes, 2026-11-15: ES-01, ES-03, ES-11, ES-12. |
 | CDR-6 shared-credit clarification (§3.7 item 2a), 2026-11-15 | §0 co-op bullet, EWA.10 (diverter lashing, bleed and turn done together credit every present partner on `S04`) and EBL.10 (notch held together credits every present partner on `S05`): no partner repeats identical shared work; choices, readings and flags stay per player. |
+| Consolidated Director rulings, 2026-11-15 | Consolidated Director rulings, 2026-11-15: CR-13 (§0 frost bullet: hold only after EH-M6 acceptance at `EGA-D0.10`; EDI-3 ruled); CR-6 (EWA open decision 1 and EFC open decision 3: `[ALLOCATION]` lines stand, tag kept as a locator); CR-7 (three ED-13 source rows ruled); CR-20, CR-21 (reserved-decision note); header status note. |

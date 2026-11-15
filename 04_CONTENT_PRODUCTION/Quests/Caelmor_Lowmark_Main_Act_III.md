@@ -1,6 +1,6 @@
 # Lowmark Main Questline — Act III (MQ10–MQ12)
 
-**Status:** Authored production content for Creative Director milestone review. This package implements Lowmark main-arc **movements 10, 11 and 12** (`00_ADMIN/Reference/Caelmor_Part5_Lowmark_Main_Arc_Architecture.md`) as main quests 10–12 of `Caelmor_Lowmark_v1_Narrative_Production_Bible.md` (§6, §6.1). Everything marked **[NEW]** is authored here and is not canon until the Director promotes it. **[PROPOSAL — DIRECTOR]** marks consequential choices the content is built on. **[CANON]** marks material taken from Phase 1 or the reconciled `LORE/` files. No schema, production JSON or C# is created here.
+**Status:** Authored production content for Creative Director milestone review. This package implements Lowmark main-arc **movements 10, 11 and 12** (`00_ADMIN/Reference/Caelmor_Part5_Lowmark_Main_Arc_Architecture.md`) as main quests 10–12 of `Caelmor_Lowmark_v1_Narrative_Production_Bible.md` (§6, §6.1). Everything marked **[NEW]** is authored here and is not canon until the Director promotes it. **[PROPOSAL — DIRECTOR]** marks consequential choices the content is built on; the choices used here (D-1, D-6, D-7, D-8, D-14) are ruled as recommended (CR-1, CR-4, Director 2026-11-15), so the label now reads as ruled. House Marrick, Edda Marrick, Gideon Sallow, Bram Hesketh, the Relief Cut and the Hollow Lock are promoted to canon in existence and narrative role only (CR-3); placement and engineering stay MAP VERIFICATION REQUIRED. **[CANON]** marks material taken from Phase 1 or the reconciled `LORE/` files. No schema, production JSON or C# is created here.
 
 **Companion file:** `04_CONTENT_PRODUCTION/Dialogue & Narrative/Caelmor_Lowmark_Main_Act_III_Dialogue.md` (Act III cast notes, every dialogue node, barks, MQ12 variant lines). The True Line voice rules (cast file Part 1) are binding on every line.
 
@@ -700,9 +700,9 @@ The voices are chosen for who would really argue each, and who would pay for it.
 
 | Mystery | Author truth | Public belief after MQ11 | Evidence | Wrong reading | Withheld | Reveal owner |
 |---|---|---|---|---|---|---|
-| What the Muster was | Coalesced grief over the Lot, stirred by the flushes. | "The convoy's dead stood up." | Lantern-lines, oar counts; the Lot's barge ribs. | The convoy's crews were in it; defeating it freed them. | Who was aboard. Who ordered the flush. | Never in Lowmark content. |
+| What the Muster was | Coalesced grief over the Lot, stirred by the flushes. | "The convoy's dead stood up." | Lantern-lines, oar counts; the Lot's barge ribs. | The convoy's crews were in it; defeating it freed them. | Who was aboard. Who ordered the flush. | Who was aboard: never in Lowmark content. Who ordered the flush: ruled 2026-11-15 (CR-2) as the wartime supply command under a Fenmere compact, no named individual; revealed only by LR-M1, not in Lowmark v1 content. |
 | Why every stone held at once | The Braids carried the pressure to every calibration stone together. | "The fen let go." / "The Field-Mage did it." | The constellation; Sedge exhausted. | Sedge did it alone; the player did. | The Riverwarden method. | Oriel (MQ12, briefly). |
-| The Fourteenth Lot | Sank in a wartime flush; hushed. | Known now to be "a lot that went down in the fen." | Guaranteed to every player before the boss by main-quest content only: MQ4's blank convoy stone (required inspect, Maelin), MQ9's carved wreck scar on the flow-table (required inspect), and Lessa's line as she pulls her stake (`SV-D3.02b`). Then the ribs in the heart pool. Never supernatural testimony. | Marrick's house did it. | Who gave the order. | Not in Lowmark content. |
+| The Fourteenth Lot | Sank in a wartime flush; hushed. | Known now to be "a lot that went down in the fen." | Guaranteed to every player before the boss by main-quest content only: MQ4's blank convoy stone (required inspect, Maelin), MQ9's carved wreck scar on the flow-table (required inspect), and Lessa's line as she pulls her stake (`SV-D3.02b`). Then the ribs in the heart pool. Never supernatural testimony. | Marrick's house did it. | Who gave the order. | Not in Lowmark v1 content; LR-M1 owns it (CR-2: the wartime supply command under a Fenmere compact, no named individual). |
 
 ## 11.15 Open decisions
 
@@ -792,9 +792,9 @@ At the flow-table, the miniature Vale has changed: the Cut is a dark dry line; t
 Unlocks when Beats 1–3 are done; if it isn't dusk, "Wait until dusk" at the high landing advances the hour. At the landing the crews have cut their tender-marks beside the stone's notch, as the plan said: a row of small marks. **The player's mark is among them.** Inspect: *"The crews' marks, cut fresh. And yours, the same depth, the same hand as theirs. Nobody here saw it cut."* Maelin: "Wasn't there this morning." Nobody explains it.
 The player walks the bank and **lights a lantern on each of the five marker posts** (5 interactions, 2 s each), with whoever `LM_PLAN_ROUTES` named: Maelin's hands (crews), Hollis (keepers) or both. A lantern line, made by people, where the Muster made one of cold water.
 
-### Beat 5 — The Night Crossing (`S05_crossing`) **[PROPOSAL — DIRECTOR]**
+### Beat 5 — The Night Crossing (`S05_crossing`) (Ruled 2026-11-15, CR-4, D-14)
 **Objective:** *Cross with Maelin.*
-*Canon flag:* the anchor says Maelin "refuses night passage through specific stretches". This beat ends that refusal **for Whisperflow only**; every other refused stretch stays refused. It is a change to anchor behaviour and needs the Director's sign-off.
+*Canon flag:* the anchor says Maelin "refuses night passage through specific stretches". This beat ends that refusal **for Whisperflow only**; every other refused stretch stays refused. It is a change to anchor behaviour, approved by the Director (CR-4, D-14, 2026-11-15).
 Maelin reads the post herself (inspect: "Water's under the notch. The crossing reads open."). She takes the bow lantern and the player boards (the Whisperflow crossing interaction from MQ1, in its night variant: the player stands free on deck, camera theirs). **The strange moment:** passing the stone, the water lies quiet at the notch: no wake against the stone, though the ferry's wash runs everywhere else, for as long as the stone is in view. Mid-river, Maelin speaks once (`RR-D6`). Lanterns on both banks.
 
 ### Beat 6 — The Far Bank (`S06_far_bank`)
@@ -837,7 +837,7 @@ The far-bank households are on the landing with lanterns (`LM_GRAIN_ROUTE`: esco
 | Reward | Type | Notes |
 |---|---|---|
 | The player's mark on the Whisperflow stone | Sign of trust | **Non-mechanical** (Main Arc movement 12). No stat, no ability, no item. |
-| Night crossing at Whisperflow **[PROPOSAL — DIRECTOR]** | Access | Maelin's crossing interaction is available at night from now on (only here; her other refused stretches stay refused). |
+| Night crossing at Whisperflow (ruled 2026-11-15, CR-4, D-14) | Access | Maelin's crossing interaction is available at night from now on (only here; her other refused stretches stay refused). |
 | `LM_CIVIC_STANDING` | Legitimacy | Step 1 of the commission acquisition model. |
 | Wynn's coin | Currency | Small, from her first wage ("Told you, when I'm paid."). |
 
@@ -875,7 +875,7 @@ None of the four depends on any other Act III choice. Every player who completes
 ## 12.11 Open decisions
 
 1. ~~`LM_ORIEL_PROMISE` value names.~~ Resolved: `RR-D4.02` is keyed to `aloud` / `many_hands` / `return` and quotes Act II's exact words.
-4. **Maelin's Whisperflow night refusal ends** **[PROPOSAL — DIRECTOR]**: all her other refused stretches stay refused. This changes anchor behaviour and is listed for the Director.
+4. **Maelin's Whisperflow night refusal ends.** Ruled 2026-11-15 (CR-4, D-14): approved as authored; all her other refused stretches stay refused.
 2. **Who cut the player's mark.** Deliberately unanswered. Compatible with Oriel, with the crews, with Sedge. *Recommendation: never answer it in Lowmark content.*
 3. **Far-bank settlement identity** (TL §14 item 4) affects only travel lines.
 
@@ -985,7 +985,7 @@ Sites quieted in Acts I–II stay quieted. "As left" means the state the player'
 
 ## E.4 What every ending shares
 
-Crossings reopen under accountable rules (crews' marks on stones, keepers' countersign). The far bank is owed and paid. The present wrong is answered in public. Stillwater is safer. Lowmark has a way to tend future water wounds: the roll in three books. Sedge stays a reed-cutter. Oriel stays behind the falls. The Fourteenth Lot stays at the bottom of the heart pool, and nobody in Lowmark content learns who gave the order. That is the complete local ending of Main Arc movement 12.
+Crossings reopen under accountable rules (crews' marks on stones, keepers' countersign). The far bank is owed and paid. The present wrong is answered in public. Stillwater is safer. Lowmark has a way to tend future water wounds: the roll in three books. Sedge stays a reed-cutter. Oriel stays behind the falls. The Fourteenth Lot stays at the bottom of the heart pool, and nobody in Lowmark v1 content learns who gave the order (ruled 2026-11-15, CR-2: the wartime supply command under a Fenmere compact, no named individual; LR-M1 owns the reveal). That is the complete local ending of Main Arc movement 12.
 
 ---
 
@@ -1006,3 +1006,4 @@ Crossings reopen under accountable rules (crews' marks on stones, keepers' count
 | Movement | No jump; Muster stones are walkable; no agility trigger required in Act III. |
 | CDR-6 shared-credit clarification (§3.7 item 2a), 2026-11-15 | MQ11 §11.12: a partner's crank channel at the same gate now advances every present partner on that gate step (was "speeds only their own instance's bar"). Evacuees, chips and the hearing stay per player. |
 | Size | Act III quest file is above the 60–80 KB target because MQ11 carries the only boss spec and the fen presentation; MQ12 and the matrix were kept tight. |
+| Consolidated Director rulings, 2026-11-15 | CR-4: D-14 Maelin's night crossing ruled (Beat 5, rewards, 12.11 item 4); header notes D-1, D-6, D-7, D-8 ruled. CR-2: who gave the Fourteenth Lot order recorded in 11.14 and E.4 as the wartime supply command under a Fenmere compact, no named individual, revealed only by LR-M1. CR-3: header notes House Marrick, Marrick, Sallow, Hesketh, the Relief Cut and the Hollow Lock as promoted. No step, flag, chip or node id changed. |

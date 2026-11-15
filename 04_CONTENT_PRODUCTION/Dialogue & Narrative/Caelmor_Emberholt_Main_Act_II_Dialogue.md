@@ -2,6 +2,8 @@
 
 **Status:** Authored production content for Creative Director milestone review (2026-11-14). This is the companion to `04_CONTENT_PRODUCTION/Quests/Caelmor_Emberholt_Main_Act_II.md`, which owns step ids, flags, encounters and mechanics. Characters marked **[CANON ANCHOR]** come from `LORE/Characters/Caelmor_Characters_Region4_Emberholt.txt` and obey the Emberholt rows of the Part 4 character ledger (`00_ADMIN/Reference/Caelmor_Part4_Character_Family_Continuity_Ledger.md`): nothing here gives them a new age, wartime service, kinship, travel or record custody beyond what the ledger allows. Characters marked **[NEW]** come from the Emberholt bible §5.2 or Act I, or are incidental role names; Act II adds **no new named character**. Nothing here is production JSON.
 
+**Consolidated Director rulings, 2026-11-15.** **CR-13:** EH-M5's completion lines (`ESS-D10.48`, `ESS-D11.40`) now give the EH-M6 journal lead to Odile Prace at the Gate Valve House, where EH-M6 is explicitly offered (Act III `EGA-D0`); nothing starts on Cinderwall entry. **CR-14:** the shaft ladders (`EAC-D2.27`, `EAC-D4.04`, `EAC-D5.08`) and the lamp-house ladder (`ESS-B5.3`, `.5`) keep their lines with a ladder or an interaction climb (Sol determines the form); only if the last-resort ramp is built does "ladder" in those lines become "ramp" (a text swap; no other change). **CR-19:** `EAC-D9.42` stays ("You don't need to know where."); for CV-M4 Thalan voluntarily meets the player at a safe Emberholt rendezvous, and no Volkhari settlement or community location is shown.
+
 **Character rulings, 2026-11-15 (Architecture §5.0).** **D-E2:** Thalan is freed, with his own voiced consent to leaving (`EAC-D8.60`–`.62`, `EAC-D9`); the aid-in-place branch (`EAC-D10`, `EAC-B8`, aided lines in `EAC-D11` and `EAC-B9`) is removed; `EH_THALAN` has one value, `freed`. **D-S1:** the Speaker is an idealist and a manipulator, also dream-seeded: his letters and Serix's reading show sincere conviction, love of authority and knowing, self-serving compromise; the dreams do not absolve him; he lacks the endgame; the swap notes are removed. **D-EL:** Elyndra the Cinderseer can be consulted once, optionally, in EH-M5 (`ESS-D12`). Other tags: `[ALLOCATION]` (one Ralenne line, `ESS-D3.03`), `[ED-12]` (protected Volkhari testimony and self-disclosure), `[ED-17]` (Serix's unset visions).
 
 **Node format** (Lowmark/Thornfell/Mire/Emberholt Act I standard): `NODE SPEAKER: "Line." (stage note)`; conditions in brackets before the line; player options as `> [condition] "Option." → NEXT {effect}`. Ids follow bible §11.2: dialogue `<CODE>-D<n>.<nn>`, barks `<CODE>-B<n>.<nn>`, inspect texts `<CODE>-I<n>` in tables, documents in full.
@@ -894,7 +896,7 @@ ESS-D10.44 SPEAKER: (from the balcony; warm; unhurried; both hands open) "Every 
 ESS-D10.45 (He smiles down at the crowd, and the crowd, most of it, smiles back. He goes in.)
 ESS-D10.46 SPEAKER: (on the stair, passing the player; he stops for exactly one breath) "You stood in my crowd. Thank you for coming, friend." (he goes on down)
 ESS-D10.47 SERALYND: (at the foot of the stair; her hands are shaking and her voice is not) "He didn't say I was wrong." (beat) "He didn't say anything."
-ESS-D10.48 KAEVREN: (in the crowd, plain cloak; holds out his hand for the bundle) "Ledger box. Under my seal. They'll still be there when somebody needs them."   {item ESS_letters removed; quest Completed; Seralynd keeps the record copy}   → END
+ESS-D10.48 KAEVREN: (in the crowd, plain cloak; holds out his hand for the bundle) "Ledger box. Under my seal. They'll still be there when somebody needs them."   {item ESS_letters removed; quest Completed; Seralynd keeps the record copy; journal: Odile Prace wants the warden's hand at the Gate Valve House. (EH-M6 lead; CR-13)}   → END
 ```
 
 ### ESS-D11: the sealed inquiry (S06 exposed, the Magister's chambers)
@@ -921,7 +923,7 @@ ESS-D11.31 VAEL: "And the letters?"
 ESS-D11.32 SPEAKER: (he looks at the bundle a moment; something passes over his face and is put away) "A Speaker hears from many quarters, Magister."
 ESS-D11.33 VAEL: "Who is the Seat?"
 ESS-D11.34 SPEAKER: (a smile) "Every ember of Emberholt is my seat." (he thanks the room for its care of the city, and sits, and says nothing more)
-ESS-D11.40 VAEL: (when the room is empty; he presses his ring into the wax on the bound papers) "Sealed. The Council knows. The terraces don't." (beat, to the player) "If you think that was the wrong door, you may be right. It is the one I keep."   {item ESS_letters removed; quest Completed; the record copy under Vael's seal}   → END
+ESS-D11.40 VAEL: (when the room is empty; he presses his ring into the wax on the bound papers) "Sealed. The Council knows. The terraces don't." (beat, to the player) "If you think that was the wrong door, you may be right. It is the one I keep."   {item ESS_letters removed; quest Completed; the record copy under Vael's seal; journal: Odile Prace wants the warden's hand at the Gate Valve House. (EH-M6 lead; CR-13)}   → END
 ```
 
 Production rule on `ESS-D11.34`: an evasion, not a lie (he says nothing about who the Seat is). (D-S1, ruled 2026-11-15: the Speaker's three lines stand.)
@@ -987,3 +989,4 @@ Production rule: she points (letters, "a book of nights") and warns; the player 
 | Independent review of character rulings, 2026-11-15 | `{EH_THALAN = freed}` moved from `EAC-D8.62` to the completion line `EAC-D11.40` (flag set once at EAC completion, per bible §9.1); `ESS-D12.30` was unreachable: now reached from `ESS-D12.12` when `ESS_RECORD_READ`, and routed back to the options. |
 | Director review pass, 2026-11-15 | ESS-D12 access note reworded to match the revised EFD-D2.18 (Elyndra is seldom seen; the player asks at the bowl), removing the clash with Ivett's "a handful of times in forty years" (EFD-D1.04). |
 | Playability audit fixes, 2026-11-15 | EM-09 (explicit leave option to `ESS-D12.40`). |
+| Consolidated Director rulings, 2026-11-15 | CR-13: EH-M6 journal lead added to `ESS-D10.48` and `ESS-D11.40` (Odile at the Gate Valve House). CR-14, CR-19: header notes; no line changed. No id changed. |

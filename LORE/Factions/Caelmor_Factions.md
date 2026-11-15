@@ -366,6 +366,19 @@ Simple farming practice is openly household- and neighbor-taught. Experienced co
 
 ---
 
+### C. HOUSE MARRICK  
+*[Approved CR-1, CR-3, Director 2026-11-15. Existence, roles and motivations only.]*  
+**Nature:** A lesser grain-holding family with its own claim that it "kept Lowmark alive" during the war  
+**Seat of influence:** Provisioner **Edda Marrick**'s seat on the Crestbridge Provision Board, which can declare a relief emergency and order grain released from the Fenmere granaries at the fixed relief price  
+
+### **Present role**
+- Draws relief grain under emergency procedure and sends most of it to an outside buyer while the Board's books show it as delivered  
+- Its river factor **Gideon Sallow** runs the crew that works the wartime Hollow Lock and moves grain at night down the reopened Relief Cut (placement MAP VERIFICATION REQUIRED)  
+- The shortages make House Fenmere's stewardship look like it is failing, strengthening Marrick's claim to be Lowmark's true steward  
+- **Keeper-Captain Bram Hesketh** of Crestbridge signed the blanket emergency orders on the Board's word; he is a frightened official, not a member of the scheme  
+
+---
+
 ## 16. THORNFELL FACTIONS (AIR REGION — CORRECTED)
 
 ### A. THE STONEBLOOD CLANS  

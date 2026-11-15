@@ -11,7 +11,7 @@ NODE  SPEAKER: "Line."                       (stage note)
   > [condition] "Player option."  → NEXT     {effect}
 ```
 
-Tags: `[ANTAGONIST]` on any node naming Marrick or Sallow; `[D-7]` on Sedge nodes; `[D-8]` on Oriel nodes. No conversation runs more than six NPC lines before a choice or the return of control.
+Tags: `[ANTAGONIST]` on any node naming Marrick or Sallow; `[D-7]` on Sedge nodes; `[D-8]` on Oriel nodes. D-1, D-7 and D-8 are ruled as recommended (CR-1, CR-4, Director 2026-11-15); the tags stay as search tags. Marrick and Sallow are promoted to canon in role and motivation (CR-3); Sedge and Oriel stay [NEW]. No conversation runs more than six NPC lines before a choice or the return of control.
 
 ---
 
@@ -1094,3 +1094,4 @@ BF-D7.05 SEDGE: "River keep you." (goes back toward the reeds; doesn't look back
 | Oriel: work, never spirit | Every line uses carry / scour / rest / weight / gate / season. No "feel", "remember" or "grieve". |
 | Antagonist tags | Sallow named only in TF-D3 and TF-D8, both tagged; Marrick in `DK-D9` (on stage), `TF-D3.05` ("the lady") and `GL-B8.1`, all tagged |
 | Flags consistent with the quest file | `LM_FIELD_FIX`, `LM_TOVIN_CREDITED`, `LM_FLUSH_CALENDAR`, `LM_BRYN_ROLL`, `LM_ORCHARD_LOSS` (set by hold, not dialogue), `LM_SEDGE_TRUST`, `LM_ORIEL_PROMISE`; local flags match §A2.8 and each package's flag table |
+| Consolidated Director rulings, 2026-11-15 | CR-1, CR-4: D-1, D-7 and D-8 ruled as recommended (tag note in the header); `[ANTAGONIST]`, `[D-7]`, `[D-8]` kept as search tags. CR-3: Marrick and Sallow promoted in role and motivation; Sedge and Oriel stay [NEW]. No line text or node id changed. |

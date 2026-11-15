@@ -2,6 +2,8 @@
 
 **Status:** Authored production content for Creative Director milestone review (2026-11-14). This is the companion to `04_CONTENT_PRODUCTION/Quests/Caelmor_Emberholt_Main_Act_III.md`, which owns step ids, flags, encounters, mechanics and the epilogue matrix. Characters marked **[CANON ANCHOR]** come from `LORE/Characters/Caelmor_Characters_Region4_Emberholt.txt` and obey the Emberholt rows of the Part 4 character ledger (`00_ADMIN/Reference/Caelmor_Part4_Character_Family_Continuity_Ledger.md`): nothing here gives them a new age, wartime service, kinship, travel or record custody beyond what the ledger allows. Characters marked **[NEW]** come from the Emberholt bible §5.2, from Acts I–II, or are incidental role names. Act III adds **no new named speaking character** (two regulars, Margit and Old Ketta, are only mentioned). Nothing here is production JSON.
 
+**Consolidated Director rulings, 2026-11-15.** **CR-13:** EH-M6 is explicitly offered by Odile Prace at the Gate Valve House (`EGA-D0`) and accepted at `EGA-D0.10`; the frost (`EGA_FROST`) and its dusk pin start only on acceptance; the Cinderwall-entry auto-start is retired and `EGA-D1` is the note handover. **CR-15:** the bore door at the U10 door niche (`EGA-D8.03`–`.04`, `EGA_BORE_DOOR`, inspect `EGA-I27`) shortens a Draw Sentinel retry; the wake point stays the warming house. **CR-19:** Thalan's CV-M4 testimony is given when he chooses to meet the player at a safe Emberholt rendezvous; nothing here places him.
+
 **Character rulings, 2026-11-15 (Architecture §5.0).** **D-E2:** Thalan was freed in EH-M4; `EGA-D11.50`, document `EGA-I30` and Dahrin's `EGA-B9.12` are the only version; the aided beat (`EGA-D11.55`–`.58`) and Asera's aided bark are removed. **D-S1:** the Speaker is an idealist and a manipulator, also dream-seeded; his letter (`EGA-I32`), its inspect (`EGA-I33`), `EGA-D13.12`, `EGA-D13.70`–`.80` and barks `EGA-B9.8`–`.9` stand; swap notes removed. **D-EL:** Elyndra's one optional aftermath line, `EGA-B9.13`. Other tags: `[ALLOCATION]` (`EGA-I14` second tag, `EGA-D11.21`/`.22`, `EGA-B1.6`), `[ED-2]` (the fused worker, `EGA-D3`), `[ED-12]` (Volkhari at the board).
 
 **Node format** (Lowmark/Thornfell/Mire/Emberholt Acts I–II standard): `NODE SPEAKER: "Line." (stage note)`; conditions in brackets before the line; player options as `> [condition] "Option." → NEXT {effect}`. Ids follow bible §11.2: dialogue `EGA-D<n>.<nn>`, barks `EGA-B<n>.<nn>`, inspect texts `EGA-I<n>` in tables, documents in full.
@@ -43,7 +45,7 @@
 - **Voice:** "Sit down; you're running hot." Tonight: "Sit down; you're running cold."
 
 #### Odile Prace, valve-house tallyman [NEW]
-- **In Act III:** sends the runner's note; finds every collar number in her book as a repair; writes *balanced*.
+- **In Act III:** offers EH-M6 at the tally board and gives the player her note for Veska (`EGA-D0`, CR-13); finds every collar number in her book as a repair; writes *balanced*.
 - **Voice:** counts aloud mid-sentence. Protective of the book; quietly furious that it was used.
 
 #### The line hands [NEW, role names]
@@ -87,6 +89,22 @@
 
 ## Part 3: EH-M6 Embergate Accounting (`EGA`)
 
+### EGA-D0: Odile at the tally board (the offer) (CR-13, Director 2026-11-15)
+
+Explicit offer; the quest is Inactive until `EGA-D0.10`. No frost, no hour pin and no side-step hold exist before acceptance. Available with EH-M5 Completed (journal lead: *Odile Prace wants the warden's hand at the Gate Valve House.*). The hall is ordinary and unfrosted.
+
+```
+EGA-D0.01 (The Gate Valve House, dusk. ODILE on the ladder at the tally board, chalk in hand, counting under her breath. The clerks' bench is empty.)
+EGA-D0.02 ODILE: (without turning round) "Warden's hand. Come and read this with me. I want somebody to tell me I'm wrong."
+EGA-D0.03 ODILE: "Intake at full since noon. Every vein open. Draws to the wards: near nothing. Cinderwall: nothing." (she taps the foot of one column) "And old leaks. More than the whole of Cinderwall."
+EGA-D0.04 ODILE: "It's going cold up there tonight. Hard. Dunmor will feel it first." (she comes down the ladder, writes on valve-house paper, folds it twice) "Take her this. Then go down with her, if she'll have you."
+  > "I'll take it to her."     → EGA-D0.10 {quest Active at S00_frost; EGA_FROST set (frost variant and dusk pin, per player); document EGA-I1 carried}
+  > "Not now."                 → EGA-D0.90
+EGA-D0.10 ODILE: "Cooling House. She'll be under the hood, glaring at it." (she goes back up the ladder)   {journal: Hard frost in Cinderwall. Take Odile's note to Veska Dunmor at the Cooling House.}   → END
+EGA-D0.90 ODILE: "It'll still be wrong tomorrow. It's been wrong for years."   → END   {quest stays Inactive; no frost}
+EGA-D0.91 [re-offer, EH-M6 Inactive] ODILE: (from the ladder) "Still wrong. Still need somebody to carry it."   → EGA-D0.04 options
+```
+
 ### EGA-B0: arrival barks (Cinderwall in frost)
 
 | Id | Trigger | Speaker | Line |
@@ -104,16 +122,16 @@ EGA-D1.02 YORVEN: "Blankets! Somebody find me blankets that aren't on somebody!"
 EGA-D1.03 VESKA: (under the hood, arms folded, looking up at the tell) "Look at that."   {player inspects the hood tell: EGA-I2}
 EGA-D1.04 VESKA: "Hot below. Cold above. She's not surging. She's backing up."
 EGA-D1.05 YORVEN: "Same as the first night you walked in here. Worse. Then it was an order. Tonight nobody's ordered anything."
-EGA-D1.06 (RUNNER comes in stamping frost off his boots, a folded note in his glove.) RUNNER: "From the gate. Odile Prace. She said give it to Dunmor and then to whoever Dunmor gives it to."   {document: EGA-I1}
-EGA-D1.07 VESKA: (reads it twice; hands it to the player) "Read the tell, not the talk. That tell says the heat's under our feet and can't get up."
+EGA-D1.06 (The player hands VESKA Odile's note, folded twice, a smear of chalk on the fold.)   {document: EGA-I1 handed over} (Formerly a runner's line; the note now comes with the player, who accepted at `EGA-D0.10`; CR-13, Director 2026-11-15.))
+EGA-D1.07 VESKA: (reads it twice; hands it back to the player) "Read the tell, not the talk. That tell says the heat's under our feet and can't get up."
 EGA-D1.08 VESKA: "Every vein open since noon and the ward gets nothing. It's gone somewhere. It's been going somewhere for years, and tonight there's not enough left over to hide it."
-  > "I'll go down with you."            → EGA-D1.10 {S00_frost complete; the quest has been Active since the Cinderwall entry}
+  > "I'll go down with you."            → EGA-D1.10 {S00_frost complete; the quest has been Active since accepting at EGA-D0.10}
   > "Gone where?"                       → EGA-D1.09
   > "Not now."                          → EGA-D1.90
 EGA-D1.09 VESKA: "Odile's 'old leaks'. Never balanced. Weather, she calls it." (beat) "Weather doesn't take more than the whole of Cinderwall in one afternoon."   → EGA-D1.08 options
 EGA-D1.10 VESKA: "Not yet. The room first. Then we go down."
 EGA-D1.11 HENNET: (pushing a bowl at the player) "Sit down; you're running cold. Then stand up; I need hands."   {journal: Get the warming house through the first hours.}   → S01
-EGA-D1.90 HENNET: "Then sit and eat. The frost'll wait for you; it's patient." → END   {re-offer: YORVEN at the door: "Still backing up. Still need you." → EGA-D1.08}
+EGA-D1.90 HENNET: "Then sit and eat. The frost'll wait for you; it's patient." → END   {resume (the quest is Active): YORVEN at the door: "Still backing up. Still need you." → EGA-D1.08}
 ```
 
 ### EGA-D2: Hennet and the supper (S01)
@@ -178,7 +196,7 @@ Production rule: no option, prop or bark makes the smelter-hand an enemy, a dang
 
 | Object | Text | Condition |
 |---|---|---|
-| Odile's note (EGA-I1) | Document below. | Given at `EGA-D1.06` |
+| Odile's note (EGA-I1) | Document below. | Given by Odile at `EGA-D0.04`/`.10`; handed to Veska at `EGA-D1.06` |
 | The hood tell (EGA-I2) | `EH_TELLS`: "Red, crazed. The line under this room is running hot. None of it is reaching the room." | Required (`EGA-D1.03`) |
 | The rota slate (EGA-I4) | `EH_COMMONS`: "*Warming house: opened, cots laid, H.U.* Under it, in other hands, a list of who's on which bench tonight." / otherwise: "*Blankets: store. Two armfuls a house.* Nobody has signed for tonight." | — |
 | The fused worker's bench | "A blanket with a scorched edge. A bowl. Nobody else sits on this bench." | After `S01` |
@@ -401,6 +419,8 @@ Production rules: no person is named, counted or described; no precursor name; t
 
 ```
 EGA-D8.01 VESKA: (at the door niche outside the grille; she does not go in) "That's not ours."   {player inspects the construct: EGA-I20}
+EGA-D8.03 [first arrival; not EGA_BORE_DOOR] VESKA: (her shoulder against the old iron door at the back of the niche) "War bore. Same one we came down. It runs on straight behind this." (beat) "Bolted on our side. Rusted in."   (CR-15, Director 2026-11-15)
+EGA-D8.04 LINE HAND 1: (working the bolts loose with a cock key; they give one at a time) "There. If we have to walk this twice, we walk it short."   {EGA_BORE_DOOR; the door stays open}
 EGA-D8.02 VESKA: "It's standing on our valve like it owns it." (beat) "Don't touch the valve till you've seen where it goes. Then we'll know what we're shutting."
       {player crosses the floor to the far doors; inspects: EGA-I24, EGA-I25; optional listen}
 EGA-D8.05 [listen] (Nothing. No footsteps, no voices. Only the hum of the joined line going down through the stone.)
@@ -418,6 +438,7 @@ EGA-D8.14 VESKA: "Whatever's past that door, it's not tonight's. Tonight's that 
 | Object | Text | Condition |
 |---|---|---|
 | The dormant construct (EGA-I20) | "Embersteel plates over dark seams. A valve-wheel set in its chest, coupled by a rod to the draw valve. It is standing still. It is waiting on something." | Before `S06` |
+| The bore door (EGA-I27) (CR-15, Director 2026-11-15) | From the bore (U7), before `EGA_BORE_DOOR`: "An old iron warden door in the bore wall. Bolted from the far side. Warm brick round the frame." / After: "Open. Chalk on the frame in a line hand's scrawl: *short way*." | — |
 | The far doors (EGA-I24) | "Iron doors where the four draw lines, joined into one, go through the wall. Warm to the hand. Barred from the far side: you can hear the bar seat when you push, and see a fresh scrape where it dropped." | Required; sets `EGA_DOORS_READ` |
 | The chalk (EGA-I25) | "Chalk on this side, wiped with a sleeve. One corner of a mark is left: part of a ring." | — |
 | The draw valve (EGA-I26) | `EH_TELLS`: "A great valve on a plinth where four channels meet. Red, crazed. A rod runs from its stem to the construct's chest." / after the fight: "Amber. Shut it." | Touch to begin `S06` |
@@ -595,7 +616,7 @@ A torn strip of ledger paper, folded twice, the outside marked with the player's
 
 > *He walks further each day. You do not need to know where. He heard about the frost. He asked me to tell you: good. T.*
 
-Production rule: no place, no route, no count, no word about anyone below (D-C06: where Thalan lives stays unplaced).
+Production rule: no place, no route, no count, no word about anyone below (D-C06: where Thalan lives stays unplaced). For CV-M4 he voluntarily meets the player at a safe Emberholt rendezvous to give testimony; no Volkhari settlement or community location is established or revealed (CR-19, Director 2026-11-15). The slip says nothing about it.
 
 ### EGA-D12: the choice (S08)
 
@@ -793,3 +814,4 @@ EGA-D15.09 VESKA: "She'll be here tomorrow. So will I."
 | Independent review, 2026-11-14 | `EGA-D11.58` chalk now *Someone was held below on this heat.* (the number removed, D-C06); `EGA-D11.80`/`.81` no longer cite the lower-forge night or place the draw under it (Yorven's limit, `kept` branch, D-C03); `EGA-B10.16` no longer claims heat was drawn at the lower forge; `EGA-D10.31` pronouns made consistent (he); "Old Dace" renamed Old Ketta (Lowmark collision); "Council grey", "amber wax" and "Thornfell dust" removed (no invented colours; no interregional implication); `EGA-B5.12` added (the boss's 65% floor called aloud); the bleed-house tell change on turning the wheel added; terraces shutters sightline marked MAP VERIFICATION REQUIRED. |
 | Batch 4 encounter alignment review, 2026-11-15 | `EGA-D1` accept event aligned with Act III: the Cinderwall entry makes EH-M6 Active and sets `EGA_FROST`; the accept option completes `S00_frost` (Integration EQ-04). No line text changed. |
 | Emberholt character rulings, 2026-11-15 | **D-E2:** aided beat `EGA-D11.55`–`.58` and Asera's aided half of `EGA-B9.12` removed (Zones EP03 matches); `EGA-D11.50`, `EGA-I30` and Dahrin's bark untagged as the only version. **D-S1:** Speaker cast note and letter writing rules state both halves; tags and swap pointers removed; letter text unchanged. **D-EL:** `EGA-B9.13` Elyndra's one unsure "older than ember" line at EP20, optional. |
+| Consolidated Director rulings, 2026-11-15 | CR-13: `EGA-D0.01`–`.91` added (Odile's explicit offer at the Gate Valve House; accept `EGA-D0.10` activates `S00_frost` and sets `EGA_FROST`); `EGA-D1.06` now the player's handover of the note (runner line retired), `EGA-D1.07`, `.08` effect and `.90` resume wording aligned; `EGA-I1` condition; Odile's cast note. CR-15: `EGA-D8.03`–`.04` and inspect `EGA-I27` (the bore door, `EGA_BORE_DOOR`). CR-19: `EGA-I30` production rule notes the safe Emberholt rendezvous for CV-M4. No id removed. |

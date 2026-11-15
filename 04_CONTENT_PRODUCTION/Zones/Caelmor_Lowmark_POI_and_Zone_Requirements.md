@@ -1,6 +1,6 @@
 # Lowmark v1 — POI and Zone Requirements
 
-**Status:** Gameplay Designer requirement set for level design (Master Assistant Protocol §4.4), Batch 4 of the Lowmark v1 production plan (bible §12; "Lowmark v1" is the label of the first internal production milestone, not a release, CDR-3). It turns every place authored in the Lowmark narrative packages into level-design requirements: subzones, routes, POI sub-spaces, interaction objects, quest-state props, NPC presence and relative placement. All places are **[NEW]** unless canon in the region dossier, and nothing here is canon until the Director promotes it. **[PROPOSAL — DIRECTOR]** marks consequential choices. **MAP VERIFICATION REQUIRED** marks every place where geometry matters (bible D-5); no quest logic depends on distances.
+**Status:** Gameplay Designer requirement set for level design (Master Assistant Protocol §4.4), Batch 4 of the Lowmark v1 production plan (bible §12; "Lowmark v1" is the label of the first internal production milestone, not a release, CDR-3). It turns every place authored in the Lowmark narrative packages into level-design requirements: subzones, routes, POI sub-spaces, interaction objects, quest-state props, NPC presence and relative placement. All places are **[NEW]** unless canon in the region dossier, and nothing here is canon until the Director promotes it. **Consolidated Director rulings, 2026-11-15:** the Relief Cut and the Hollow Lock are promoted in existence and narrative role only (CR-3); their placement, dimensions and terrain relationships are not, and every MAP VERIFICATION REQUIRED flag here stays. D-9 subzone naming is ruled (CR-4); D-5 (map) and D-10 (Mining) stay open. **[PROPOSAL — DIRECTOR]** marks consequential choices. **MAP VERIFICATION REQUIRED** marks every place where geometry matters (bible D-5); no quest logic depends on distances.
 
 **Sources:** bible §4 (POIs, subzones), §5 (cast), §6–§7, §9; The True Line §5; Act I §A5/§B5/§C5; Act II §GL.4/§GL.6/§TF.4/§DK.4/§MN.4/§BF.4/§BF.7; Act III §10.3/§11.3/§12.3/§E.1; the three side-quest files' place tables; Phase 1.5 §2–3, §10; Phase 1.3 §1, §6; `UNITY/README.md`.
 
@@ -41,7 +41,7 @@ The narrative fixes only four facts (bible §4.1): Whisperflow is downstream of 
 
 ---
 
-## 2. Subzones (bible §4.1, D-9)
+## 2. Subzones (bible §4.1, D-9; ruled 2026-11-15, CR-4)
 
 Each subzone has a **near band** (reachable early) and a **far band**. This resolves the tier mismatch between bible §4.1 and early side-quest gates (Enemies §12 I-15).
 
@@ -522,3 +522,5 @@ All **MAP VERIFICATION REQUIRED**. "Near" means a short walk with the other plac
 ## Director rulings reconciliation (2026-11-03)
 
 Applied `Quests/Caelmor_Director_Rulings_Combat_Ranged_Release.md`. The "humans downed or yield" review ruling is replaced by CDR-1 (defeat at 0 HP, no downed humans or tied props; SX-1/SX-2 need only an NPC standing spot after defeat). §0 gains ranged (CDR-2: no safe unreachable perches; never required) and defeat-presentation rows; §6.4 notes Sallow is untargetable across the MQ4 chamber. Release wording clarified (CDR-3). No POI, area, interaction or id changed.
+
+Consolidated Director rulings, 2026-11-15: CR-3 (header: Relief Cut and Hollow Lock promoted in existence and narrative role only; placement stays MAP VERIFICATION REQUIRED), CR-4 (D-9 ruled at §2). §1 hydrology and §7 map questions stay open. No POI or site id changed.

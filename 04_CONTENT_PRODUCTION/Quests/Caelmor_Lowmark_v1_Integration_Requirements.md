@@ -58,7 +58,7 @@ Owner key: **SE** Systems Engineer · **SCE** Schema & Content Engineer · **GD*
 | G11 | **Channelled interactions** (fixed duration, cancel on move/damage), **segmented channels** with kept segments | None | Channel timer on server; segment persistence | 30.6.B2; 33.5.B2 | SE | MUST |
 | G12 | **Carry state** (≈30 carry objects, §6.2) | None | Carry flag, deposit volumes, return-to-source rule | — (not on roadmap) | SE | MUST (fallback exists) |
 | G13 | **Encounter pockets** gated by quest step, waves, re-forming creatures | Combat runtime; no spawn rules | Step-gated spawns, wave spawner, re-form timers | 33.7.B/B2; 28.2 | SCE (data), SE (rules), GD | MUST |
-| G14 | **Drift-site state** per character (active / quieted / tended / closed) driving spawns | None | Site state store and spawn read | 31.4; 33.7.B2 | SE, SCE | MUST (depends on D-6 **[DIRECTOR]**) |
+| G14 | **Drift-site state** per character (active / quieted / tended / closed) driving spawns | None | Site state store and spawn read | 31.4; 33.7.B2 | SE, SCE | MUST (D-6 ruled 2026-11-15, CR-4) |
 | G15 | **Time windows / keep-watch** (dusk, night, dawn, pulse, named scripted windows) | No world clock | Per-player server-side quest clock | 28.1; 30.x | SE | MUST |
 | G16 | **Per-player presentation** of props, terrain decals, water planes, NPC positions keyed on the local player's state | Presentation interpolates host snapshots only | Per-viewer replication filter or client-side keyed presentation | 29.2; 33.1.B2 | SE | SHOULD (all packages carry fallbacks) |
 | G17 | **Per-player instanced NPCs and creatures** (DK Bryn, HW Orrin, MN elk, SV evacuees, Muster visibility) | None | Owner-visible entities | 29.2; 28.2 | SE | **[DIRECTOR]** (fallbacks exist) |
@@ -170,7 +170,7 @@ Owner key: **SE** Systems Engineer · **SCE** Schema & Content Engineer · **GD*
 | choice records | §3.8 | — |
 | respawn anchors by step | §8.3 | NF: Cut mouth in the Lock |
 | UI policy by step | objective text key, sub-counter template, `ui_suppressed` (strange moments) | NF S02 "none shown during it" |
-| Director variant tags | Nodes and props tagged for swap: `[ANTAGONIST]`, `[D-7]`, `[D-8]` | bible §3.1 |
+| Director variant tags | Nodes and props tagged `[ANTAGONIST]`, `[D-7]`, `[D-8]`; the decisions are ruled (CR-1, CR-4, 2026-11-15), so the tags are kept as search tags, not swap points | bible §3.1 |
 
 ### 3.2 Steps
 
@@ -321,7 +321,7 @@ The quest lifecycle is Inactive → Active → Completed (Stage 15.2). There is 
 | Gated options | Options visible only with an item or flag (`[player holds cooked food]`, `[SB_ROPE_ASKED]`, `OL_CALL_KNOWN`). |
 | Derived values | `LM_SEDGE_TRUST` is computed from two inputs at S08; `CR_TERMS` from chip weight; `LM_ORCHARD_LOSS` from a counter. Schema needs derived-flag rules or an explicit effect at the step. |
 
-### 3.9 Drift-site state (bible §9.2, D-6 **[DIRECTOR]**)
+### 3.9 Drift-site state (bible §9.2, D-6 ruled 2026-11-15, CR-4)
 
 | Requirement | Detail |
 |---|---|
@@ -397,7 +397,7 @@ The cast file's format (`NODE SPEAKER: "Line." (stage note)` / `> [condition] "P
 | Inspect text | One line per inspect target, conditional variants, replace-default after a later quest | TL marker reading; UC inspects replaced after MQ9; GL guide-line stones |
 | Knowledge-unlock inspects | A whole class of world objects becomes inspectable after a quest | TL crossing markers; MN Braid stones; WC crop damage; BW bank trees; FK flocks; BP bark; HS ring test; NB repair faces |
 | Notices | Readable world text (dock notice, keepers' notice) | TF S00, DK S00 |
-| Variant lines | Origin variant reserved (D-3: TL D1/D10, MQ12 farewell); flag variants everywhere | — |
+| Variant lines | Flag variants everywhere. No origin variants: the reservation (D-3: TL D1/D10, MQ12 farewell) is retired, the player stays origin-neutral (CR-4, CR-21) | — |
 
 ---
 
@@ -432,9 +432,9 @@ Counts are distinct authored placement sets or schedule entries (estimate from p
 | Nan Ferrin | NEW (TL) | TL, FK, VK, RR | 7 | Walk to dock edge (VK) |
 | Dace | NEW (TL) | TL, NT, RR | 4 | Invulnerable lane holder (NT) |
 | Ansel Corrie | NEW (TL) | TL, HW, NF, CR, SV, RR, OL, ME10 | 11 (+3 var) | Lectern patrol book |
-| Edda Marrick `[ANTAGONIST]` | NEW | SM, CR, RR | 6 (+3 var) | Glimpse actor |
-| Gideon Sallow `[ANTAGONIST]` | NEW | NF, CR, RR | 5 | Scripted escape path (NF); miniboss → defeated → scripted surrender (SX-2) → NPC |
-| Bram Hesketh | NEW | SM, CR, RR | 7 (+2 var) | Escort at sprint pace, ignored by crew (CR S04) |
+| Edda Marrick `[ANTAGONIST]` | NEW; promoted (CR-3) | SM, CR, RR | 6 (+3 var) | Glimpse actor |
+| Gideon Sallow `[ANTAGONIST]` | NEW; promoted (CR-3) | NF, CR, RR | 5 | Scripted escape path (NF); miniboss → defeated → scripted surrender (SX-2) → NPC |
+| Bram Hesketh | NEW; promoted (CR-3) | SM, CR, RR | 7 (+2 var) | Escort at sprint pace, ignored by crew (CR S04) |
 | Keeper-Lieutenant | NEW | CR, RR | 2 | Commission giver if `stood_down` |
 | Sedge `[D-7]` | NEW | GL, MN, BF, SV, RR, UC, TB, ME09 (implied) | 11 | Walk-with (MN, BF); quieting channel; sits on UC seat as a hint |
 | Oriel `[D-8]` | NEW | BF, RR, VK | 4 | Dawn/dusk schedule; operates flow-table gate |
@@ -656,7 +656,7 @@ The shortest dependency path to a playable Lowmark slice is **Act I in order (MQ
 | Milestone | Content | New contracts it forces (beyond M0) | Depends on |
 |---|---|---|---|
 | **M1 — Chain** | MQ2 *Short Measure*; FC *What the Flood Carried*; ME01, ME02, ME05, ME08 | Region flags (`LM_TL_EVIDENCE`, `LM_GRAIN_ROUTE`); quest-state predicates and unlocks; quest item with inspect; cross-quest flag reads after completion; resume hook; multi-level NavMesh (depot); traps (M29); elite reset; per-player cart props or fallback | 24.1–24.4, 31.1, 31.3, 31.5 subset, 33.1.B |
-| **M2 — The water** | MQ3 *Heavy Water*; ME10; optional FK if the Cooking station and Hunting hooks exist | Drift-site state + re-form (M09, M11; **needs D-6 ruling**); dusk window via keep-watch (M04); smoke ring (M06); follower with checkpoint (M08); parallel step groups; synthesis dialogue with counters | M1; 33.7; D-6 |
+| **M2 — The water** | MQ3 *Heavy Water*; ME10; optional FK if the Cooking station and Hunting hooks exist | Drift-site state + re-form (M09, M11; D-6 ruled 2026-11-15, CR-4); dusk window via keep-watch (M04); smoke ring (M06); follower with checkpoint (M08); parallel step groups; synthesis dialogue with counters | M1; 33.7; D-6 |
 | **M3 — Act I turn** | MQ4 *The Night Flush*; UL *Under the Lamb* or NT *Night Ferry* | Watch steps (EV14); zone-wide script event (`night_flush.surge`); pathed vessel (M26); trail clues (M27); segmented channel (M03); ordinary defeat (I-05 ruled, CDR-1); physical choice by interaction | M2 |
 | **M4 — Act II core** | MQ5, MQ6, MQ7 (+ UR, WD, CN) | Set-piece controllers M16, M17 (**D-INT-1**); ordered-slot puzzle (M15); carry facing check; wave checkpoints persisted; mimic barks; AI targeting props/NPCs (M31) | M3; D-INT-1 |
 | **M5 — Act II turn** | MQ8, MQ9 (+ UC, SB, VK) | Herding (M13); drift split (M10); walk-with (M08); flow-table (M22); observation volume (M14); per-player instanced creature or fallback (M45) | M4 |
@@ -711,14 +711,14 @@ The shortest dependency path to a playable Lowmark slice is **Act I in order (MQ
 | D-INT-2 | **Per-player instanced NPCs and creatures** (owner-visible entities) | Effectively a phasing capability in replication and spawning. | DK Bryn, HW Orrin, MN elk, SV evacuees and Muster visibility, BF Sedge, WC sow | Do not build for the Lowmark milestone. Use the authored shared-entity fallbacks; revisit after M3. |
 | D-INT-3 | **Dream presentation layer** (TB) | A bounded per-player world-dressing swap with aggro immunity; the package calls it "the most expensive presentation in this file". | TB only | Approve the 60 m-ring fallback for the Lowmark milestone. |
 | D-INT-4 | ~~Non-lethal defeat / yield mechanic~~ (I-05) | **Resolved 2026-11-03 by CDR-1.** | OL, CR | Done. Only need left: the quest on-defeat hook for named creatures (SX-1, SX-2) that plays a scripted outcome and spawns the NPC non-hostile (M18). See `Quests/Caelmor_Combat_Ranged_Release_Engineering_Handoff.md`. |
-| D-INT-5 | **D-6 drift-site state model** | Bible D-6 is open. Drift-site state, re-forming creatures, split (MN) and the MQ11 ending matrix all assume "disperse vs quiet". A "Wraiths can be destroyed" ruling removes M09–M11 and the MQ8 demonstration. | MQ3, 4, 6, 7, 8, 11; WD, CN, OL | Rule on D-6 before M2 starts. |
+| D-INT-5 | **D-6 drift-site state model** | **Ruled 2026-11-15 (CR-4):** "disperse vs quiet" approved as recommended. Drift-site state, re-forming creatures, split (MN) and the MQ11 ending matrix stand. | MQ3, 4, 6, 7, 8, 11; WD, CN, OL | Done. Implementation of M09–M11 still needs the technical items above; approval of the narrative model does not validate them. |
 | D-INT-6 | **Keep-watch as a per-player quest clock** | Determines whether Lowmark needs a world clock at all for its milestone. Content currently relies on a local clock. | 17 packages | Approve the per-player quest clock (I-11) and defer world time. |
 | D-INT-7 | **Quest-state model** (I-13) | **Ruled 2026-11-02.** The Director confirmed three states (Inactive, Active, Completed); no Failed or Abandoned. | All | Done. Stage 15.2, Stage 27 and `QuestRuntimeSystem.cs` reconciled; §3.7 rewritten. |
 | D-INT-8 | **C8 / Rhosyn canon** (I-04) | Resolved in the fix pass (crew ledger, `UL_LEDGER`); Director confirms the bible §6.1 wording change. | UL, MQ10, MQ12 | Confirm. |
 | D-INT-9 | **Name clashes** (I-15) | Renaming authored [NEW] households and characters. | MQ2, MQ12, WD, ME07, MQ3, UR | Approve renames before dialogue line keys are generated. |
 | D-INT-10 | **Vendor and opportunity states** (BP, HS, WC, FK) | Economy surface is reopened by the Director's re-entry directive and is not in narrative scope. | Side quests | Route to the economy pass; narrative needs only the open/closed flags. |
 
-**Open bible decisions that block data but not runtime:** D-1 (antagonist; swap layer is tagged), D-7 (Sedge; `[D-7]` tags), D-8 (Oriel; `[D-8]` tags), D-9 (subzone names), D-5 (map: every flow-table, observation-volume and zone placement is **MAP VERIFICATION REQUIRED**).
+**Bible decisions (updated 2026-11-15):** D-1, D-7, D-8 and D-9 are ruled as recommended (CR-1, CR-4); their tags stay as search tags. Still open and blocking data but not runtime: D-5 (map: every flow-table, observation-volume and zone placement is **MAP VERIFICATION REQUIRED**).
 
 ---
 
@@ -734,3 +734,5 @@ CDR-6 solo-completion sweep, 2026-11-14: M45 fallback credits only partners whos
 CDR-6 shared-credit clarification (§3.7 item 2a), 2026-11-15: §8.1 shared-credit row now covers shared tasks (repairs, hazards, deliveries) as well as defeats; §8.1 fallback row and M11 credit present partners whose own step consumes the shared work, resetting only for players it did not credit; M1/M2 test row M2.6 no longer says the shard fallback completes a step on entry, and adds a shared-drain test.
 
 Independent review of CDR-6 shared-credit sweep, 2026-11-15: §8.1 per-player outcomes row now says shared work feeding a set-piece counter (MQ6 planks and wedges, MQ11 crank channels) counts for every present partner on that step; counters stay stored per player; DK slips unchanged.
+
+Consolidated Director rulings, 2026-11-15: CR-4 (D-6 ruled: G14, §3.9, M2 row, D-INT-5; D-1, D-7, D-8, D-9 ruled in the open-bible-decisions line and variant-tag rows), CR-1 (antagonist tags kept as search tags), CR-21 (origin-variant reservation retired), CR-3 (§NPC table: Marrick, Sallow, Hesketh marked promoted). D-5 and every technical item stay open. No id changed.

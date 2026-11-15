@@ -1,6 +1,6 @@
 # Emberholt Main Act I: Cast and Dialogue (Cold Ward, The Ember in Every Hand, The Hollow That Should Not Burn)
 
-**Status:** Authored production content for Creative Director milestone review (2026-11-14). This is the companion to `04_CONTENT_PRODUCTION/Quests/Caelmor_Emberholt_Main_Act_I.md`, which owns step ids, flags, encounters and mechanics. Characters marked **[CANON ANCHOR]** come from `LORE/Characters/Caelmor_Characters_Region4_Emberholt.txt` and obey the Emberholt rows of the Part 4 character ledger (`00_ADMIN/Reference/Caelmor_Part4_Character_Family_Continuity_Ledger.md`): nothing here gives them a new age, wartime service, kinship, travel or record custody beyond what the ledger allows. Characters marked **[NEW]** come from the Emberholt bible §5.2 or are incidental role names, and are not canon until promoted (ED-19: promote nothing). Nodes that name the valve order, Sarne Ardane, Ralenne's scene or the EH-M1 choice are tagged `[ALLOCATION]`; the EH-M2 offer lines `[ED-20]`; the EH-M3 gate and variants `[ED-7]`; the chamber roll's legible line, Iven Calder, (ED-3, ruled 2026-11-15); protected Volkhari testimony and Maeryn's heritage `[ED-12]`; the broadsheet `[ED-14]`. Nothing here is production JSON.
+**Status:** Authored production content for Creative Director milestone review (2026-11-14). This is the companion to `04_CONTENT_PRODUCTION/Quests/Caelmor_Emberholt_Main_Act_I.md`, which owns step ids, flags, encounters and mechanics. Characters marked **[CANON ANCHOR]** come from `LORE/Characters/Caelmor_Characters_Region4_Emberholt.txt` and obey the Emberholt rows of the Part 4 character ledger (`00_ADMIN/Reference/Caelmor_Part4_Character_Family_Continuity_Ledger.md`): nothing here gives them a new age, wartime service, kinship, travel or record custody beyond what the ledger allows. Characters marked **[NEW]** come from the Emberholt bible §5.2 or are incidental role names, and are not canon until promoted (ED-19: promote nothing). Nodes that name the valve order, Sarne Ardane, Ralenne's scene or the EH-M1 choice are tagged `[ALLOCATION]`; the EH-M2 offer lines `[ED-20]` (ruled 2026-11-15, CR-10: EH-M2 requires EH-M1); the EH-M3 offer and its optional Thornfell/Mire variants `[ED-7]` (ruled 2026-11-15, CR-8: EH-M3 requires EH-M2 only; the variants never gate); the allocation cause is ruled (CR-6) and the broadsheet ED-14 approved (CR-7); the chamber roll's legible line, Iven Calder, (ED-3, ruled 2026-11-15); protected Volkhari testimony and Maeryn's heritage `[ED-12]`; the broadsheet `[ED-14]`. Nothing here is production JSON.
 
 **Node format** (Lowmark/Thornfell/Mire standard): `NODE SPEAKER: "Line." (stage note)`; conditions in brackets before the line; player options as `> [condition] "Option." → NEXT {effect}`. Ids follow bible §11.2: dialogue `<CODE>-D<n>.<nn>`, barks `<CODE>-B<n>.<nn>`, inspect texts `<CODE>-I<n>` in tables, documents in full.
 
@@ -771,7 +771,7 @@ EEH-D10.62 YORVEN: "Warden's hand." (a nod)   {item removed; quest Completed}
 
 ### EGH-D1: Hesper at the Cooling House (S00_offer) `[ED-7]`
 
-**Locked** (EH-M2 Completed; neither TF-M3 nor MR-M2 Completed). The journal entry is visible and locked: *Requires: The Ember in Every Hand; and either The Echo of Shatterfall (Thornfell) or The Banners That Refuse to Fall (the Mire).* Hesper talks. She does not ask.
+**Before the offer** (EH-M1 Completed; EH-M2 not yet Completed). No journal entry. Hesper talks. She does not ask. (The former locked state and its journal text, which waited on Thornfell or the Mire, are retired (CR-8, Director 2026-11-15).)
 
 ```
 EGH-D1.01 HESPER: (on her bench by the door, a folded paper on her knee) "Warden's hand. Sit if you're sitting. I'm not selling anything."
@@ -786,7 +786,7 @@ EGH-D1.06 HESPER: "He'll want somebody who isn't Deepbrand's and isn't his. That
 EGH-D1.07 HESPER: "Everybody is. Sorry doesn't dig."   → END
 ```
 
-**Unlocked** (EH-M2 Completed **and** TF-M3 or MR-M2 Completed).
+**Offer** (EH-M2 Completed; no other requirement (CR-8, Director 2026-11-15)).
 
 ```
 EGH-D1.10 HESPER: (stands when the player comes in) "Warden's hand. He answered."
@@ -834,7 +834,7 @@ EGH-D2.40 DARVEN: (frowns) "I don't know cairns."
 EGH-D2.41 DARVEN: "I know my crew's tags are still on the peg. That's what the board says, and the board's not a liar. It's just a board."   {EGH_COMPARED = shatterfall}   → EGH-D2.20
 EGH-D2.43 DARVEN: "The walls breathed."
 EGH-D2.44 DARVEN: "I'm not saying they meant anything by it. I'm saying they did it, and I'm saying I was there."   {EGH_COMPARED = banners}   → EGH-D2.20
-EGH-D2.45 (Only one of .40 or .43 is offered per visit; whichever the player picks, the other is withdrawn. Neither changes a step.)
+EGH-D2.45 (Only one of .40 or .43 is offered per visit; whichever the player picks, the other is withdrawn. Neither changes a step. Both are optional extras for a player who has completed TF-M3 or MR-M2; a player who has completed neither sees the ordinary options only (CR-8, Director 2026-11-15).)
 
 EGH-D2.90 [resume] DARVEN: "I'm still here. They're still there."   → END
 ```
@@ -1221,3 +1221,4 @@ EGH-D10.80 (The crew are buried with dimmed flames. Hesper keeps Lorcan's tag.) 
 |---|---|
 | Independent review, 2026-11-14 | Second sheet cut back: "Entered in the night book as: the Titan" and "not recoverable" removed (R19 belongs to CV-M4; bible §2.2 withholds the fate of those held); Director question in the quest file §C14.5. `EGH-D4.03` added (Darven lifts the five tags at the mouth) and `EGH-D6.11` now has him hand them over, replacing a second set of tags on a camp peg. `EGH-D8.36` added and `EGH-D8.30` gated on the four table readings. Seredh's stone: maker unnamed; no wartime role or age for Seredh (Part 4 ledger). `EEH-D10.59` resume line for the `evidence` hand-over. Review note 5 seed labels corrected ("shift above" is not an R15 seed; "went down" is an R19 shadow, not R18). Crew renamed: Haskel to Lorcan, Brin to Wendel (collision with Lowmark's Haskin and Bryn). No other line changed. |
 | Emberholt character rulings, 2026-11-15 | ED-3: `[INITIATE]` replaced by **Iven Calder** in the S07 roll document, its journal text and voice check 1; still unspoken and unexplained in Emberholt. |
+| Consolidated Director rulings, 2026-11-15 | CR-8: `EGH-D1` locked state and its Thornfell/Mire journal text retired; `EGH-D1.01`–`.07` kept as pre-offer talk (EH-M1 Completed, EH-M2 not yet); `EGH-D1.10` offered on EH-M2 Completed only; `EGH-D2.40`/`.43` stay optional variants. CR-6, CR-7, CR-10: status-line tags marked ruled. No id changed. |

@@ -5,7 +5,7 @@
 **Authority, as the sources state it:**
 - The Director's November 6 mission approves the supplied maps' **horizontal composition and relationships**. Elevations, gradients, contours and scale are **not** validated (`CODE/Scripts/terrain_generation/MISSION.md`; `SOURCE_NOTES.md` opening).
 - All metre heights, water stages, depths, freeboards, capacity screens and access corridors in the terrain are **technical proposals** (`lowmark_controls.json` → `authority`).
-- The narrative packages mark every place as **MAP VERIFICATION REQUIRED** and nothing new is canon until the Director promotes it (POI file header; bible D-5, D-11). The POI file (§7, lines 510–516 per `SOURCE_NOTES.md`) predates the approved maps. Sol's sources treat the new map as the higher placement authority and say mismatches must be surfaced, not solved by relocation (`SOURCE_NOTES.md`, Zones 510–516 row).
+- The narrative packages mark every place as **MAP VERIFICATION REQUIRED** and nothing new is canon until the Director promotes it (POI file header; bible D-5, D-11). **Update 2026-11-15 (CR-3, CR-4):** D-11 promoted House Marrick, the Relief Cut and the Hollow Lock in existence and narrative role only, and D-12 (the backwater) is ruled as narrative; neither validates geography, dimensions or terrain relationships, so every TC row in this register stays open and unrecommended. The POI file (§7, lines 510–516 per `SOURCE_NOTES.md`) predates the approved maps. Sol's sources treat the new map as the higher placement authority and say mismatches must be surfaced, not solved by relocation (`SOURCE_NOTES.md`, Zones 510–516 row).
 
 **Terrain baseline read:** `main` with commits `3ec4003` (regional foundation), `24d179d` (local 2 m refinement and Unity walking inspector), `d9fbc37` (architecture pipeline and scene protection) and `f5b05d6` (100 material masters). Terrain sources: `CODE/Scripts/terrain_generation/` (README, LOCAL_README, LOCAL_REVIEW, SOURCE_NOTES, MISSION, LOCAL_MISSION, `lowmark_controls.json`, `local_controls.json`) and `MEDIA/Maps/Lowmark_Terrain/` (`verification.json`, `metrics.json`, `hydrology_and_routing.png`, `Local_Refinement/`).
 
@@ -287,3 +287,5 @@ The mapping below is a set of **requests** for the Director and Sol to accept, c
 4. TC-15: the Rebirth Fields' extent and elevation relative to the Cut.
 5. TC-11: the fen outlet's quest-state interpretation.
 6. §2: the mill-wheel documentation discrepancy (for Sol); stilt language for Reedmere; whether the Mire chapel and walkway networks are hand-authored or tool requests.
+
+Consolidated Director rulings, 2026-11-15: CR-3 and CR-4 noted in the authority list (narrative approval of the Relief Cut, Hollow Lock and backwater does not resolve TC-01 to TC-19). No row, option or id changed.

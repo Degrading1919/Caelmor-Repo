@@ -1,6 +1,6 @@
 # Emberholt Main Questline, Act II: Ash-Stained Chains, The Speaker's Smile
 
-**Status:** Authored production content for Creative Director milestone review (2026-11-14). This package implements Emberholt main milestones EH-M4 and EH-M5 (bible §6, §6.1), which carry Act II from the Red-Lit roll's "held below" to the Act II turn on the Ash Terraces. It follows the Emberholt Act I package (`Caelmor_Emberholt_Main_Act_I.md`), itself the Mire, Thornfell and Lowmark act-package format. Everything marked **[NEW]** is authored and not canon until the Director promotes it (ED-19: promote nothing). Everything marked **[PROPOSAL — DIRECTOR]** rests on an open bible §3 decision. **[CANON]** items come from the Emberholt dossier, the Emberholt character file, Factions and the Part 4 ledger. **[APPROVED — id]** items rest on an architecture ruling (FT-02d, FT-04, D-C03, D-C06). No schema, production JSON or C# is created here. Emberholt is an internal production milestone of the complete game (CDR-3). Combat follows the Director rulings (`Caelmor_Director_Rulings_Combat_Ranged_Release.md`): every enemy is defeated at 0 HP (CDR-1), every fight accepts melee or ranged and none requires ranged (CDR-2), standard RPG systems are preferred to bespoke simulation (CDR-4), and every step, boss and reward is completable solo with co-op as optional assistance (CDR-6). Emberholt registers no scripted-survival exception (rulings §4; bible §3 "SX proposal: none").
+**Status:** Authored production content for Creative Director milestone review (2026-11-14). This package implements Emberholt main milestones EH-M4 and EH-M5 (bible §6, §6.1), which carry Act II from the Red-Lit roll's "held below" to the Act II turn on the Ash Terraces. It follows the Emberholt Act I package (`Caelmor_Emberholt_Main_Act_I.md`), itself the Mire, Thornfell and Lowmark act-package format. Everything marked **[NEW]** is authored and not canon until the Director promotes it (ED-19: promote nothing). Bible §3 decisions ED-1 to ED-20 and Integration EDI-1 to EDI-4 were ruled on 2026-11-15 (CR-6 to CR-15, Director 2026-11-15); items formerly marked [PROPOSAL — DIRECTOR] on an ED row now read **Ruled 2026-11-15** with the CR id (ED-19 still promotes nothing). Content marked [PROPOSAL — DIRECTOR] detail is new detail inside a ruled row. **[CANON]** items come from the Emberholt dossier, the Emberholt character file, Factions and the Part 4 ledger. **[APPROVED — id]** items rest on an architecture ruling (FT-02d, FT-04, D-C03, D-C06). No schema, production JSON or C# is created here. Emberholt is an internal production milestone of the complete game (CDR-3). Combat follows the Director rulings (`Caelmor_Director_Rulings_Combat_Ranged_Release.md`): every enemy is defeated at 0 HP (CDR-1), every fight accepts melee or ranged and none requires ranged (CDR-2), standard RPG systems are preferred to bespoke simulation (CDR-4), and every step, boss and reward is completable solo with co-op as optional assistance (CDR-6). Emberholt registers no scripted-survival exception (rulings §4; bible §3 "SX proposal: none").
 
 **Controlling document:** `04_CONTENT_PRODUCTION/Quests/Caelmor_Emberholt_Narrative_Production_Bible.md`. Its §6 table, §6.1 briefs and §6.2 contract rows for EH-M4 (`EAC`) and EH-M5 (`ESS`) are binding and are implemented as written; the codes are confirmed against bible §6. Where this package adds detail it is marked [NEW] and stays inside the bible's cast (§5), places (§4.2), flags (§9.1), encounter families (§10) and conventions (§11). Where it has to read a brief more narrowly, reorder a beat or add a sub-site, the reason is recorded in that quest's open decisions (§A14, §B14); the bible is not edited.
 
@@ -28,13 +28,13 @@ Act I ended with a glassed roll, a line nobody says aloud, and a sheet that said
 
 ### Dependencies on other regions
 
-**None.** Act II reads no Lowmark, Thornfell or Mire flag and asserts nothing about another region. Both quests are reachable by any player who completed EH-M3 (whose cross-region gate, ED-7, is the only one in Emberholt's main line).
+**None.** Act II reads no Lowmark, Thornfell or Mire flag and asserts nothing about another region. Both quests are reachable by any player who completed EH-M3. Emberholt's main line has no cross-region gate: EH-M3 needs EH-M2 only (ED-7; CR-8, Director 2026-11-15).
 
 ### Region flags (bible §9.1 only)
 
 | Flag | Act II role |
 |---|---|
-| `EH_THALAN` = freed (D-E2, ruled 2026-11-15) | **Set** once, at EH-M4 completion (`S07`, `EAC-D11.40`; one value). Nothing in EH-M4 branches on it. Read by EH-M6 tally board (§9.3 item 5); ETB (Asera's lines); CV-M4 testimony note (Thalan's testimony at the rest-binding). |
+| `EH_THALAN` = freed (D-E2, ruled 2026-11-15) | **Set** once, at EH-M4 completion (`S07`, `EAC-D11.40`; one value). Nothing in EH-M4 branches on it. Read by EH-M6 tally board (§9.3 item 5); ETB (Asera's lines); CV-M4 testimony note (Thalan's testimony at the rest-binding, given when he voluntarily meets the player at a safe Emberholt rendezvous (CR-19, Director 2026-11-15)). |
 | `EH_SPEAKER` = challenged / exposed (D-S1, ruled 2026-11-15) | **Set** by EH-M5 `S06`. Read by `ESS-B9` terrace barks; EH-M6 letter; CV-M4. |
 | `EH_TELLS` | Read: plate and brazier tells give their state on inspect (always set by this point). |
 | `EH_HOLLOW_TRUTH` = told / kept | Read by `EAC-D2.12`/`.13` (Dahrin's variant). |
@@ -66,7 +66,7 @@ No two quests in Emberholt share a set piece. Combat changes family across the a
 | After | Unlocks |
 |---|---|
 | EH-M4 | *The Commissioner's Cargo* (ECC); *Three Breaths* (ETB, also needs EST); EH-M5 |
-| EH-M5 | *Glassmoth's Tonic* (EGT); EH-M6 (auto-offered on next entry to Cinderwall, `EGA_FROST`) |
+| EH-M5 | *Glassmoth's Tonic* (EGT); EH-M6 (offered by Odile Prace at the Gate Valve House, `EGA-D0`; the frost, `EGA_FROST`, starts only on acceptance; CR-13, Director 2026-11-15) |
 
 ### Act II clocks and conventions (additions to Act I's table)
 
@@ -118,7 +118,7 @@ Act I's conventions table (presentation hour and keep watch, heat states pinned 
 | Emberdeep Sentinels: Remnant-engineered constructs of embersteel and ember veins that patrol sealed chambers | Dossier §XII; bible §10 | [CANON] |
 | Deepbrand oversees containment chambers in the Warrens, including Volkhari holding cells | Factions §2 | [CANON] |
 | Yorven Khelt knows older tunnels that bypass Ashfall security | Character file §24 | [CANON] |
-| Pressure plates as heat-pressure traps; Asera's steadying in heat rooms; Thennek to the mouth; the sigil gallery; Thalan's liberation, consented | Bible ED-4, ED-6, §6.1 | ED-4 (D-E2, ruled 2026-11-15); [PROPOSAL — DIRECTOR] ED-6 |
+| Pressure plates as heat-pressure traps; Asera's steadying in heat rooms; Thennek to the mouth; the sigil gallery; Thalan's liberation, consented | Bible ED-4, ED-6, §6.1 | ED-4 (D-E2, ruled 2026-11-15); Ruled 2026-11-15 (CR-7) ED-6 |
 | Dahrin's account of the voice through the wall; the taught sigil; Yorven's miners' gate; the proving-ring sectors and warden-frame draw; the fitter's anvil; the drift; Thalan's "ask me" (D-E2, ruled 2026-11-15); Dahrin's message to Thalan | This package | [NEW] |
 
 ## A4. Quest summary card
@@ -166,6 +166,8 @@ Act I's conventions table (presentation hour and keep watch, heat states pinned 
 ### A5.3 The old shaft and the Emberdeep Warrens [EP13, CANON]
 
 An abandoned mining shaft below Yorven's bypass drops to the Warrens. Dahrin came up it; the player goes down it. **MAP VERIFICATION REQUIRED** (depth, heat and every relative position below matter here): relative order from the gate: the shaft head → the shaft (ladders and landings) → the shaft foot → the Warrens' mouth → the plate run with two heat rooms → the sigil gallery (three tiers) → the ring gallery door.
+
+**Shaft traversal order (EDI-4, ruled 2026-11-15)** (CR-14, Director 2026-11-15)**:** ladders are preferred (K1–K2, down in `S03`, up in `S07`, Thennek and Asera on them too); an interaction-based traversal (a "Climb down" / "Climb up" per flight that places the player at the next landing, Zones ML-09 fallback) is an acceptable technical fallback; a steep ramp with the same beats is the last alternative, rather than holding EH-M4. Sol determines the implementation. The beats, landings, respawn point and lines do not change with the form.
 
 | Area | Purpose | Environmental storytelling |
 |---|---|---|
@@ -380,7 +382,7 @@ Tuned for **Expert identity** (ED-10). Exact levels are Gameplay Designer calls.
 | `EAC_SLATE_READ` | Slate read (`EAC-I10`) | `S05` | **EH-M6** (the junction book's *Perfect Flame: draw holds*: "You've read this heading before.") |
 | `EAC_MARKS_MATCHED` | `EAC-I11` (optional; needs `EEH_LEDGER_READ`) | — | **CV-M4** (R18; request) |
 | `EAC_MESSAGE_GIVEN` | `EAC-D8.20` | `EAC-D11.10` | — |
-| `EH_THALAN` = freed (D-E2, ruled 2026-11-15) | EAC completion (`S07`, `EAC-D11.40`) | — (one value; nothing in EAC branches on it) | EH-M6 tally board (§9.3 item 5); ETB (Asera's lines); CV-M4 (testimony note) |
+| `EH_THALAN` = freed (D-E2, ruled 2026-11-15) | EAC completion (`S07`, `EAC-D11.40`) | — (one value; nothing in EAC branches on it) | EH-M6 tally board (§9.3 item 5); ETB (Asera's lines); CV-M4 (testimony note: he voluntarily meets the player at a safe Emberholt rendezvous (CR-19, Director 2026-11-15)) |
 | `EAC_FRAME_WORK` = self / wait | `S06` frame work | `EAC-D9.22` | — |
 | `EAC_MAERYN_SAID` `[ED-12]` | `EAC-D11.35` (optional) | — | EST/ETB (Maeryn: "I told you once. I don't say it twice in a week.") |
 
@@ -390,7 +392,7 @@ One outcome; the player chooses only the approach (Smithing drift or two cool cy
 
 | Outcome | Immediate result | Cost | Later |
 |---|---|---|---|
-| **Freed** (`EH_THALAN = freed`) | Thalan, consenting, is cut out of the frame and walks out; Thennek takes him on at the shaft foot to a place the player is not told. The frame and the ring go dark. | The frame is empty and Deepbrand will look for someone to fill it (his words); Thalan's account goes with him, not up to the city; Asera carries nothing. | EH-M6: Thennek sends word, one line. ETB: Asera speaks of him as someone who walked. CV-M4: Thalan survives to give testimony at the rest-binding, reached through Thennek (where he lives stays unplaced, D-C06). His freedom does not end the works below or the suffering he hears. |
+| **Freed** (`EH_THALAN = freed`) | Thalan, consenting, is cut out of the frame and walks out; Thennek takes him on at the shaft foot to a place the player is not told. The frame and the ring go dark. | The frame is empty and Deepbrand will look for someone to fill it (his words); Thalan's account goes with him, not up to the city; Asera carries nothing. | EH-M6: Thennek sends word, one line. ETB: Asera speaks of him as someone who walked. CV-M4: Thalan survives and voluntarily meets the player at a safe Emberholt rendezvous to give testimony at the rest-binding (CR-19, Director 2026-11-15); no Volkhari settlement or community location is established or revealed, and where he lives stays unplaced (D-C06). His freedom does not end the works below or the suffering he hears. |
 
 **One outcome, two approaches.** Either approach is Thalan's consent to a question the player asked, stops the frame working him, darkens the ring, returns the stone, and keeps what he has been made to give withheld. There is no other option.
 
@@ -438,6 +440,7 @@ One outcome; the player chooses only the approach (Smithing drift or two cool cy
 | **The frame's slow cycle** | Art / Systems | A ~40 s presentation loop (glow, hum) with a cool-phase flag that Option B's channels read (channel runs only while the flag is set; pauses, progress kept). |
 | **Smithing at a hearth and anvil** | Skills | Existing heat, shape, quench; the drift is a carry-state quest objects until the item pass defines them (ED-11). |
 | **Escort-follow** | Systems | The EH-M2 escort-follow (Thalan, `S07`): walking pace; never targetable; hazard-immune. |
+| **The shaft (K1–K2)** | Systems / Level design | Ladders preferred; interaction-based traversal (per-flight climb placing the player at the next landing, Zones ML-09) the acceptable technical fallback; a steep ramp with the same beats last, rather than holding EH-M4 (EDI-4; CR-14, Director 2026-11-15). Sol determines the implementation. |
 | **Emberlight** (`warrens.emberlight`) | Art / VFX | A light that travels a fixed path along the vault rim (~4 s), per player, once. |
 | **Stove flare** (`cinderweave.stove_flare`) | Art | The back-room stove flame stands up and settles (~3 s) on the shop bell during `EAC-D2`. |
 | **Barricade turn-back** | World state | Turn-back volume and bark (`EAC-B9.5`) past the Warrens' mouth, checked against each player's own EAC Completed state; any barricade prop is presentation only, never a movement blocker. |
@@ -460,7 +463,7 @@ One outcome; the player chooses only the approach (Smithing drift or two cool cy
 
 ## A14. Open decisions
 
-1. **D-E2, ruled 2026-11-15: fixed liberation.** Applied: `EAC-D10`, `EAC-B8`, the aided column and paragraph, `EAC_ACCOUNT_PROMISED` and every aided read are deleted; `EAC-D8.60`–`.62` is now Asera's single line, Thalan's "Ask me", the player's one ask and Thalan's voiced consent to leaving (`EAC-D8.64` and `.66` retired). `S00`–`S05`, the common part of `S06`, R10, the stone, both approaches and the walk out are unchanged. No option to end his life or exploit him exists (contradiction 7). Thalan's destination stays unplaced (D-C06).
+1. **D-E2, ruled 2026-11-15: fixed liberation.** Applied: `EAC-D10`, `EAC-B8`, the aided column and paragraph, `EAC_ACCOUNT_PROMISED` and every aided read are deleted; `EAC-D8.60`–`.62` is now Asera's single line, Thalan's "Ask me", the player's one ask and Thalan's voiced consent to leaving (`EAC-D8.64` and `.66` retired). `S00`–`S05`, the common part of `S06`, R10, the stone, both approaches and the walk out are unchanged. No option to end his life or exploit him exists (contradiction 7). Thalan's destination stays unplaced (D-C06); for CV-M4 he voluntarily meets the player at a safe Emberholt rendezvous (CR-19, Director 2026-11-15).
 2. **Smithing hook (resolved by the D-E2 ruling).** The hook stays where the bible puts it, the collar pins of the freed path, with two cool cycles of hand work as the time-cost alternative. The aided branch's blanking-plate hook was removed with that branch.
 3. **Route in (`[ED-6]`).** The bible says the Warrens are reached from deeper junctions. This package uses Dahrin's escape shaft, which comes up below Yorven's EH-M3 bypass, opened with Yorven's key (a favour, not a disguise), and Thennek as guide. MAP VERIFICATION REQUIRED for the gate, the shaft and its depth. Thennek's own way in and out is never shown, so no refuge or route is located.
 4. **The sigil-stone as the fifth item** (bible §9.4). Taken here as an item. **Fallback** if the item budget drops to four: a carry-state object with the same states; nothing else changes.
@@ -781,7 +784,7 @@ Tuned for **Expert identity** (ED-10). Cinder Wraiths are resonance distortions 
 | Payment | Currency | Kaevren pays an informant's fee at `ESS-D4.44` (small). Economy tuning [GD]. |
 | Skill XP | Action only [GD] | Ranged if the latch is shot; Melee or Ranged at defeat. No lump quest XP. |
 | Side-quest unlocks | Story | EGT |
-| EH-M6 | Story | No journal lead. On the player's next entry to Cinderwall after completion, EH-M6 is auto-offered in a hard frost (`EGA_FROST`; bible §6.1). |
+| EH-M6 | Story | Journal lead on completion (`ESS-D10.48` / `ESS-D11.40`): *Odile Prace wants the warden's hand at the Gate Valve House.* Odile offers EH-M6 there (`EGA-D0`); the hard frost (`EGA_FROST`) starts only when the player accepts (CR-13, Director 2026-11-15). No auto-start on Cinderwall entry. |
 
 ## B11. Failure, recovery, persistence, co-op
 
@@ -809,7 +812,7 @@ Tuned for **Expert identity** (ED-10). Cinder Wraiths are resonance distortions 
 | **Brazier re-form with a cap** (ESS-E1) | Gameplay | The Act I re-form-with-cap model (ECW-E3) keyed to lit braziers (3/2/1/0). |
 | **Carry-state ewer** | Systems | Fill at a cistern; while carried, attack disabled; set down is one interaction; pour is a 2-segment channel at a brazier. |
 | **Shootable latch** | Gameplay | A prop that takes a ranged hit and plays its state change (the Thornfell TST bowyer's mark precedent). |
-| **Ladder with timed vent and a gated channel** | Systems | Ladder climb; a latch channel that runs only between the wall vent's exhales. |
+| **Ladder with timed vent and a gated channel** | Systems | Ladder climb; a latch channel that runs only between the wall vent's exhales. Traversal order (CR-14, Director 2026-11-15): ladder preferred; interaction-based climb (Zones ML-17) acceptable fallback; ramp-and-landing last. Sol determines the implementation. |
 | **Heat states** | Systems | Duct Working stretch; record room Surging until the damper is shut, then Working. Quest-pinned. |
 | **Letter-case** | Systems | Locked container opened by a carry-state key; one read-and-return document; one take (quest item). |
 | **Document views** | UI | Cue sheet, script, slip, intercepts, outgoing letter, kept answers, access book, chamber record, record copy. |
@@ -897,3 +900,4 @@ Tuned for **Expert identity** (ED-10). Cinder Wraiths are resonance distortions 
 | Playability audit fixes, 2026-11-15 | EM-02, CO-01 (post-EAC barricade as per-player turn-back volume), CO-03 (`S04_sleep_rooms` part). |
 | CDR-6 shared-credit clarification (§3.7 item 2a), 2026-11-15 | ESS `S04_sleep_rooms` predicate, ESS co-op note, §B11 and compliance row: braziers doused, the damper shut and the shared fight credit every present partner whose active step consumes them; no partner repeats identical shared work; a partner on another step is not held and not credited. Choices, readings, the letter-case and record copy stay per player. |
 | Director decision, 2026-11-15 | §B5.6: EP20 noted as officially abandoned, independently tended by Ivett Quarle, occasional pilgrims, Elyndra in relative isolation (Director, 2026-11-15). ESS-D12 framing needed no change. |
+| Consolidated Director rulings, 2026-11-15 | CR-14: shaft traversal order (ladders, then interaction traversal, then ramp; Sol implements) in §A5.3 and §A12, and the EH-M5 L4 ladder row in §B12. CR-13: EH-M6 now offered by Odile at the Gate Valve House with the frost on acceptance only (Act II unlocks, §B10). CR-19: Thalan's CV-M4 testimony given when he voluntarily meets the player at a safe Emberholt rendezvous; no Volkhari settlement or community location (flags table, §A9.2 row, §A9.3 row, §A14.1). CR-8: dependency note (no cross-region gate). CR-7: ED-6 marked ruled; status line updated. No id changed. |

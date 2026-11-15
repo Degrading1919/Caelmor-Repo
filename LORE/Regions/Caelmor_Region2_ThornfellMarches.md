@@ -24,11 +24,11 @@ For the Marchers, the wind is simply an old companion. Only the Echochamber ston
 
 ## II. ROLE IN THE GREAT WAR
 
-Thornfell was Caelmor’s raised shield during the Great War. Its elevation and position made it the eastern barrier against invading forces, fire-craft devastation, and siege lines.
+Thornfell was Caelmor’s raised shield during the Great War. Its elevation and position made it a barrier against invading forces from rival Caelmor regions, fire-craft devastation, and siege lines. (CR-20: the invading forces were existing Caelmor regional forces, not an outside power; no compass direction is asserted until geography is verified.)
 
 ### Strategic Functions
 
-- **Controlled the high passes** linking eastern approaches to Caelmor  
+- **Controlled the high passes** linking the Marches to the approaches from other regions (CR-20)  
 - **Hosted key watchtowers and ridge-forts** monitoring troop movements  
 - **Provided hardened troops and scouts** adept at cliff-side warfare  
 - **Sheltered refugees and caravans** behind natural fortifications  

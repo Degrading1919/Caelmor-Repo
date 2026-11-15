@@ -27,7 +27,7 @@ If Thornfell was Caelmor’s shield, the Mire was its wound. It bore the brunt o
 ### Strategic Role
 
 - Served as the **central battlefield** during the longest campaigns  
-- Buffered Lowmark and Thornfell from eastern incursions  
+- Buffered Lowmark and Thornfell from incursions by rival Caelmor regional forces (CR-20: not an outside power; no compass direction until geography is verified)  
 - Provided marshland ambush routes and hidden channels  
 - Hosted **major military encampments** that later sank into the soil  
 

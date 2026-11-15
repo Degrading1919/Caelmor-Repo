@@ -13,7 +13,7 @@
 | **"Short measure."** | [NEW] Crestbridge porters' phrase for a load that arrives light. | Corvin, porters. Gives MQ2 its title. |
 | **Lantern-fills** | [NEW] Watcher hours: how many times the patrol lantern has been refilled since dusk. "Second fill." | Ansel, Watchers, and anyone who has walked with them (Mabry, Wenna). |
 | **Dark-moon nights** | [NEW] Watcher dating: nights counted from the dark moon. "Nineteenth night." | Ansel's book only. Everyone else talks in seasons. |
-| **"Drift gets back up."** | [NEW] Watcher saying for disperse vs. quiet (D-6). | Ansel, Lessa (in her own words). |
+| **"Drift gets back up."** | [NEW] Watcher saying for disperse vs. quiet (D-6, ruled 2026-11-15, CR-4). | Ansel, Lessa (in her own words). |
 | **"That path's done."** | [CANON behaviour] Lessa's refusal. She never gives a reason. | Lessa. |
 | **"Paper floats. It doesn't swim."** | [NEW, TL] | Maelin in NF. |
 
@@ -38,18 +38,18 @@
 - **Knows:** Fenmere's old supply compacts name a wartime channel called the Relief Cut, closed after the armistice. The Board is pressing his stewardship. **Doesn't know:** that the Cut is open, or who sealed the slip.
 - **Voice:** complete, courteous sentences with the conclusion last. Calls the player "you" and Corvin "Master Tath". Uses "necessary" when he means "I'm sorry".
 
-### Keeper-Captain Bram Hesketh [NEW]
+### Keeper-Captain Bram Hesketh [NEW; promoted to canon in role and motivation, CR-1, CR-3]
 - **Role:** commands the Crestbridge Keepers.
 - **Want:** no riots. **Fear:** that he signed something terrible.
 - **Knows:** he signs blanket emergency draws because the Board says the far bank will riot without grain. **Doesn't know:** the Cut, the chute, any of it.
 - **Voice:** clipped and tired. Speaks of his keepers by number and with pride: "Twelve on the bridge. Good ones." He never finishes a sentence about the Board.
 
-### Edda Marrick, Provisioner, House Marrick, Provision Board [NEW] `[ANTAGONIST]`
+### Edda Marrick, Provisioner, House Marrick, Provision Board [NEW; House Marrick and Edda Marrick promoted, CR-1, CR-3] `[ANTAGONIST]`
 - **In Act I:** glimpsed only, thanking Hesketh in the granary yard (MQ2).
 - **Want:** her house recognized as Lowmark's true steward. **Fear:** being remembered as a profiteer.
 - **Voice:** warm, reasonable and generous with other people's time. She speaks of "the households" and never names anyone. She never raises her voice. She is pleasant to the player and does not stop walking.
 
-### Gideon Sallow, Marrick's river factor [NEW] `[ANTAGONIST]`
+### Gideon Sallow, Marrick's river factor [NEW; promoted, CR-1, CR-3] `[ANTAGONIST]`
 - **In Act I:** seen across the Hollow Lock's chamber (MQ4); escapes by skiff. Not fought until MQ10.
 - **Want:** to be paid. **Fear:** the fen.
 - **Voice:** cheerful and quick. Talks to his crew like a man running a fair stall. He touches the lock-chain before every flush and says "Fen's listening." It is the only time he isn't smiling.
@@ -204,7 +204,7 @@ Goblins speak in a few loud words of trade speech. They are comic and dangerous,
 > PROVISION BOARD: EMERGENCY DRAW
 > Lower at the hill chute: eighty measures.
 > Under the Board's order of emergency relief.
-> *[Board seal: a wheatsheaf in a ring; placeholder pending D-1]*
+> *[Board seal: a wheatsheaf in a ring; D-1 ruled 2026-11-15, CR-1]*
 > *(No signature. No name.)*
 
 ### SM-B7: porters arrive (S07b)
@@ -682,7 +682,7 @@ NF-D5.04 RUSK: "Gently, he says."
 > BILL OF LADING
 > Relief grain, sixty-eight measures, by the Cut. Consigned to the bearer at the lower reach for the account of the Whinstone Store.
 > Priority rate, paid in advance.
-> *[Provision Board seal: the wheatsheaf in a ring; placeholder pending D-1]*
+> *[Provision Board seal: the wheatsheaf in a ring; D-1 ruled 2026-11-15, CR-1]*
 > Received for the Lock: *G.S.*
 
 (The initials are the only antagonist-bearing text on the bill. `[ANTAGONIST]`. Swap per bible §3.1.)
@@ -750,7 +750,7 @@ NF-D9.42 MAELIN: "Come down. Keepers will want your word, and you'll want breakf
       {Bramblelock pool → quieted; event: NF-D9 end → quest Completed; Act I complete}
 ```
 
-NF-D9.41 is the act's last line. It is an observation, and it is the bible's Act I turn (disperse-vs-quiet, D-6): the player hears it and connects it themselves. If D-6 is replaced, cut NF-D9.41 and let NF-D9.40 stand alone.
+NF-D9.41 is the act's last line. It is an observation, and it is the bible's Act I turn (disperse-vs-quiet, D-6): the player hears it and connects it themselves. D-6 is ruled as recommended (CR-4, Director 2026-11-15), so NF-D9.41 stands.
 
 ### NF barks: post-quest
 
@@ -776,5 +776,6 @@ NF-D9.41 is the act's last line. It is an observation, and it is the bible's Act
 | Flags | Every flag set here (`SM_LEAD_WYNN`, `SM_LEAD_STENCIL`, `SM_LEAD_CUT_NAMED`, `SM_STONE_SEEN`, `SM_HEAPS_COUNTED`, `SM_CORVIN_TRUST`, `LM_GRAIN_ROUTE`, `HW_NIGHTS_*`, `HW_DRIFT_TAUGHT`, `HW_LEAD_TALLY`, `HW_LEAD_SCRAP`, `HW_BRYN_MOSS`, `HW_FEN_FIRST`, `NF_LEAD_CONVOY`, `NF_POSTS_SEEN`, `NF_LEAD_LAMB`, `LM_LOCK_STATE`) matches the quest file's tables. |
 | Address-neutral | No name, gender, title or origin for the player. "Friend" is used only by Wynn and Sallow. |
 | Night numbers | Book, chalk, notches and Orrin's night all use 4/9/14/19, and the Whisperflow entry is the 14th. Next: the 24th. |
+| Consolidated Director rulings, 2026-11-15 | CR-1, CR-3: Hesketh, Marrick and Sallow cast-note headings marked promoted in role and motivation; Board-seal placeholders no longer pending D-1. CR-4: D-6 notes ruled; NF-D9.41 stands. No line text or node id changed. |
 | Director rulings reconciliation (2026-11-03, CDR-1) | Crew fight to 0 HP; no post-fight dialogue with defeated crew. Removed: NF-B4.3, NF-D6.04, NF-D7.01–.40, NF-D8.01/.03 (ids left as "removed: CDR-1"). NF-B4.4 and NF-B6.4 retriggered to fight start. NF-D7 is now Rusk's slate inspect (S09). Maelin names Sallow at dawn (NF-D9.05–.06, new) and gives the Lamb lead (NF-D9.50, new; sets `NF_LEAD_LAMB`). NF-D8.02/.04 keep their flag writes as unvoiced events. |
 | Independent review pass | Grain: heap line and bill now say sixty-eight (slip keeps "eighty", the order). Slack-gate inspect rewritten as the first sign of the backwater (no crew spade marks). Convoy stones are a required inspect with Maelin's bark `NF-B0.1` (Fourteenth Lot delivery 1 of 3). Ansel's "Fourteenth. Watchers don't like that number." makes the 14th-night echo deliberate. Added `SM-L-DRILL` (optional keepers' drill; guard or step-aside; points to Corliss's forge or the quartermaster; no item stats). New flag `SM_DRILL_DONE`. |
