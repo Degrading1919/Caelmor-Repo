@@ -35,7 +35,7 @@ This is how Act II proves "stopping the barges does not stop the drift" (bible �
 - **MQ9:** the flow-table shows why. The Cut ties the fen to everything; only sealing it and spreading the pressure through the Braids ends it (MQ11).
 - **MQ10:** the seal plan also closes the Cut-side culverts the backwater has been using, so in MQ11 the fen has no way out at all and "holds its breath".
 
-The backwater is physical and patterned. It is pressure, not intent. It never "targets" anyone. If the Director replaces it, MQ5's flooding cause, the tail-door lines in MQ6 and MQ7's lead-in change. Nothing else depends on it.
+The backwater is physical and patterned. It is pressure, not intent. It never "targets" anyone. D-12 is ruled as recommended (CR-4, Director 2026-11-15); had it been replaced, MQ5's flooding cause, the tail-door lines in MQ6 and MQ7's lead-in would have changed. Nothing else depends on it.
 
 ### A2.3 Order and unlocks
 
@@ -1413,3 +1413,4 @@ Playtest questions (the real bar): *What did the water do that water doesn't do?
 | **CDR-6 solo-completion sweep, 2026-11-14** | MQ9 §BF.11 shared-Sedge fallback: Sedge no longer waits for an absent, disconnected or other-step partner; the remaining player is never blocked. No other Act II violations found. |
 | **Size discipline** | MQ7–9 packages are shorter than MQ5–6 by design; MQ8–9 are low-combat quests whose substance is in their presentation specs. |
 | **Consolidated Director rulings, 2026-11-15** | CR-4: D-6, D-7, D-8 and D-12 ruled as recommended (header, A2.2, MN and BF source tables and open decisions); `[D-7]`/`[D-8]` kept as search tags. CR-1, CR-3: header notes House Marrick, the Relief Cut and the Hollow Lock as promoted in existence and narrative role. No step, flag, node or item id changed; MAP VERIFICATION REQUIRED kept. |
+| **Independent consistency review of CR rulings, 2026-11-15** | A2.2: the stale "If the Director replaces it" sentence now records D-12 as ruled (CR-4) and keeps the dependency trace in the past conditional. No id changed. |
