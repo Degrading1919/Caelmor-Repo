@@ -152,7 +152,7 @@ Act III's canon table above applies. Additional EH-M6 points:
 | Suggested content id | `emberholt.main.06_embergate_accounting` |
 | Arc position | Act III capstone (Arcs §3.3, EH-M6: "Find where the city's fire is really going, and decide who it serves") |
 | Prerequisite | EH-M5 Completed. Tuned for Expert identity (ED-10). |
-| Offer | **Automatic** on the player's next entry to Cinderwall after EH-M5 Completed (bible §6.1): the hard frost (`EGA_FROST`, per player). Journal: *Hard frost in Cinderwall. The Cooling House is a warming house tonight.* Yorven and Veska in the warming house (`EGA-D1`). |
+| Offer | **Automatic** on the player's next entry to Cinderwall after EH-M5 Completed (bible §6.1): the entry makes EH-M6 **Active** at `S00_frost` (an auto-start, like EFD's board note), and that activation sets the hard frost (`EGA_FROST`, per player). Journal: *Hard frost in Cinderwall. The Cooling House is a warming house tonight.* Yorven and Veska in the warming house (`EGA-D1`). |
 | Solo / co-op | Solo-clearable. Co-op partners share the descent fights, the bleed-house fight and the Draw Sentinel; the warming-house tasks, containment, stage cocks, relief choice and hook, splices, plates, book, doors, draw valve, morning scene, board scene and custodian choice are per player. |
 | Target length | 60–75 minutes first time, including the tally board (bible §6) |
 | Combat share | ~25% |
@@ -180,7 +180,7 @@ As Act I §A5.1, in the **frost variant** (per player, pinned by `EGA_FROST` unt
 |---|---|---|
 | **W1. The arrival lane** | Offer trigger; frost barks (`EGA-B0`). | People in two coats again. A child blowing on a doorway lantern instead of lighting it. Somebody has chalked an arrow and *COOLING HOUSE IS WARM* on a door. |
 | **W2. The Cooling House, a warming house tonight** | Offer (`S00`); supper, blankets, the fused worker (`S01`); the morning scene (`S07`). Respawn point for the whole quest. | Benches pushed together; cots along the walls (laid already with `EH_COMMONS`); every bowl in use. The **hood tell** over the cook-hearth reads **red** though the room is cold: the main below is backing up (§8.1). Hennet's **hearth** and three **shift-supper pails** on hooks. The **hatch** to the yard. At the end bench, a **fused smelter-hand** in a blanket with ember-veined forearms, shivering. The yard **forge** and **keep-watch bench** as Act I. |
-| **W3. The Undercroft stair head** | Descent start; the line hand's checkpoint offer; the thaw lines at dawn (`S07`). | As Act I, the plaque frosted over. At dawn the stair head looks out over the ward's lanes and roofs (sightline: **MAP VERIFICATION REQUIRED**; the thaw lines must be visible from one standing point here, or the event moves to the Cooling House roof). |
+| **W3. The Undercroft stair head** | Descent start; the line hand's checkpoint offer; the thaw lines at dawn (`S07`). | As Act I, the plaque frosted over. At dawn the stair head looks out over the ward's lanes and roofs (sightline: **MAP VERIFICATION REQUIRED**; the thaw lines must be visible from one standing point here, or the event plays at grade at the W3 stair head, framed down the nearest lanes; the roofs are a bonus, never required). |
 | **W4. The Heat Commons store** | Blankets (`S01`, unless `EH_COMMONS`). | A shared store behind the wash-house: shelves of folded blankets, a rota slate. |
 
 ### 5.2 The Cinderwall Undercroft [EP15] (return): stages A and B
@@ -218,11 +218,11 @@ As Act I §A5.3 (V1 public hall and tally board, V2 book room, V3 clerks' bench)
 ## 6. Player-facing sequence
 
 ### Beat 0: The Frost (`S00_frost`)
-**Trigger:** the player enters Cinderwall (any route) with EH-M5 Completed and EH-M6 Inactive. Sets `EGA_FROST`: Cinderwall and the Undercroft switch to the frost variant for this player and the presentation hour is pinned at **dusk** (§9.3). Journal: *Hard frost in Cinderwall. The Cooling House is a warming house tonight.*
+**Trigger:** the player enters Cinderwall (any route) with EH-M5 Completed and EH-M6 Inactive. The quest becomes **Active** at `S00_frost`, and the activation sets `EGA_FROST`: Cinderwall and the Undercroft switch to the frost variant for this player and the presentation hour is pinned at **dusk** (§9.3). Journal: *Hard frost in Cinderwall. The Cooling House is a warming house tonight.*
 **Objective:** *Go to the Cooling House.*
 On the lane, frost barks (`EGA-B0`). In the warming house, **Hennet** is ladling, **Yorven** is shouting for blankets, and **Veska** stands under the hood with her arms folded (`EGA-D1`). The hood tell reads **red** over a room where people can see their breath (§8.1). Veska: "Hot below. Cold above. She's not surging. She's backing up." Yorven: "Same as the first night you walked in here. Worse. Then it was an order. Tonight nobody's ordered anything." A valve-house runner comes in stamping frost off his boots with **Odile's note** (document `EGA-I1`): *Intake at full, every vein open since noon. Draws to the wards: near nothing. Old leaks: more than the whole of Cinderwall. It has gone somewhere. O.P.* Veska reads it twice and hands it to the player. "Read the tell, not the talk. That tell says the heat's under our feet and can't get up."
-- **Accept** ("I'll go down with you."): the quest becomes **Active**. Veska: "Not yet. The room first. Then we go down."
-- **Not now:** Hennet: "Then sit and eat. The frost'll wait for you; it's patient." The frost stays for this player (§9.3); re-offered by Yorven (`EGA-D1.90`).
+- **Accept** ("I'll go down with you."): `S00_frost` completes. Veska: "Not yet. The room first. Then we go down."
+- **Not now:** Hennet: "Then sit and eat. The frost'll wait for you; it's patient." `S00_frost` stays Active and the frost stays for this player (§9.3); re-offered by Yorven (`EGA-D1.90`).
 **Verbs:** read, listen, accept.
 
 ### Beat 1: The Warming House (`S01_warming`) `[ED-2]` on the flare
@@ -330,7 +330,7 @@ Tuned for **Expert identity** (ED-10). Exact levels and numbers are Gameplay Des
 | Id | Enemies (bible §10) | Placement | AI role | Telegraph | Purpose | Solo target |
 |---|---|---|---|---|---|---|
 | **EGA-E1** | 3 × Dross Scavenger **scavenger**, 1 × **slinger** | Stage A: the junction door (U4) and the end of the duct run, on frosted grates | Scavengers hold the door with pry-bars; the slinger stands on the sack by the junction door and throws | **Scavenger, Bar:** lifts the pry-bar overhead (~1.0 s), then an overhead strike. **Scavenger, Shove:** shoulder dips, feet set (~1.5 s), then a shove and one-step knock-back (onto a grate if one is there: watch the ash). **Slinger, Whirl:** sling whirls with a glowing slag pellet in the cup (~1.4 s), then a shot that leaves a burning patch ~4 s. **Slinger, Reload:** ~2.5 s visible reload (the window to close). | The first fight of the night; scavengers make the main worse, not better | 60–90 s; 60–80% HP |
-| **EGA-E2** | 2 × Slag Beetle **crawler**, 2 × **sprayer** | Stage B: the old conduits (U7), on and between fast vents | Crawlers guard the vents; sprayers sit on vent lips and spit | **Crawler, Butt:** lowers its head, plates glowing (~1.5 s), then a short charge-butt with one-step knock-back. **Sprayer, Spit:** rears, abdomen swelling red (~1.0 s), then a slag gob that leaves a burning patch ~4 s. **Burst:** on defeat, ~0.5 s glow, then sparks in a 1-pace ring (light damage). **Vents:** ash lift ~1.5 s before each exhale (~8 s cycle). | Heat as terrain at its fastest: fight between exhales, use the niches | 60–90 s; 60–80% HP |
+| **EGA-E2** | 2 × Slag Beetle **crawler**, 2 × **sprayer** | Stage B: the old conduits (U7), on and between fast vents | Crawlers guard the vents; sprayers sit on vent lips and spit | **Crawler, Butt:** lowers its head, plates glowing (~1.5 s), then a short charge-butt with one-step knock-back. **Sprayer, Spit:** rears, abdomen swelling red (~1.0 s), then a slag gob that leaves a burning patch ~4 s. **Burst:** on defeat, ~1.5 s glow, then sparks in a 1-pace ring (light damage). **Vents:** ash lift ~1.5 s before each exhale (~8 s cycle). | Heat as terrain at its fastest: fight between exhales, use the niches | 60–90 s; 60–80% HP |
 | **EGA-E3** | Wave 1: 2 × crawler, 1 × sprayer. Wave 2 (~20 s later): 1 × crawler, 1 × sprayer | The bleed house (U8), out of the floor vents when the relief opens | As EGA-E2 | As EGA-E2 | The relief's roar drives the beetles up; the same fight in all three choices | 70–100 s; 55–75% HP |
 | **EGA-E4** | **The Draw Sentinel** (Emberdeep Sentinel elite; the Act III boss) | The splice junction (U10) | Boss spec §7.1 | §7.1 | Act III boss (bible §10: 1 Act III boss; §10.1 brief) | 6–8 minutes |
 
@@ -449,7 +449,7 @@ Tuned for **Expert identity** (ED-10). Exact levels and numbers are Gameplay Des
 
 | Step | Objective | Completes on | Req. | Notes |
 |---|---|---|---|---|
-| `S00_frost` | Go to the Cooling House. | `EGA-D1` end with accept | Yes | Auto-offered on entering Cinderwall with EH-M5 Completed; sets `EGA_FROST` (frost variant and dusk pin, per player). Re-offer `EGA-D1.90` |
+| `S00_frost` | Go to the Cooling House. | `EGA-D1` end with accept | Yes | Auto-started (Active) on entering Cinderwall with EH-M5 Completed; the activation sets `EGA_FROST` (frost variant and dusk pin, per player). Re-offer `EGA-D1.90` |
 | `S01_warming` | Get the warming house through the first hours. | `EGA_SUPPER` + `EGA_BLANKETS` + `EGA_FUSED_STEADIED` + `EGA-D3.30` end | Yes | Cooking hook or the hatch (one turn). `EGA_BLANKETS` set at start with `EH_COMMONS`. Containment `[ED-2]` |
 | `S02_descent` | Follow the main down. | EGA-E1 defeated + stage cock A bled + EGA-E2 defeated + stage cock B bled + player in U8 (entering it, or already inside when the last cock is bled) | Yes | `EGA_STAGE` = A / B / C (EI-PR-01 swaps). `EGA_RAT_GRILLE` flavour (`ESS_RAT_PAID`) |
 | `S03_bleed` | Choose where the pressure goes. | Relief opened (sets **`EH_HEAT_MAIN`**) + EGA-E3 defeated + relief held (wedges driven or two cycles) | Yes | `EGA_BLEED_WORK` = wedges / held. Stage C swaps Surging → Working |
@@ -463,7 +463,7 @@ Tuned for **Expert identity** (ED-10). Exact levels and numbers are Gameplay Des
 
 | Flag | Set by | Read by (here) | Read by (later packages) |
 |---|---|---|---|
-| `EGA_FROST` | Offer trigger | Frost variant, dusk pin, offer | — |
+| `EGA_FROST` | Quest activation (`S00_frost`) | Frost variant, dusk pin | — |
 | `EGA_SUPPER` = cooked / served | `S01` | `EGA-B1.7` (a regular) | — |
 | `EGA_BLANKETS` | `S01` (or `EH_COMMONS`) | `S01` | — |
 | `EGA_FUSED_STEADIED` `[ED-2]` | `EGA-D3.24` | `S01`; `EGA-D10.31` | — |
@@ -563,7 +563,7 @@ Lines 2–7 play in this order, each a few seconds, and only those whose conditi
 | **Staged pressure in the main** (bible **EI-PR-01**) | Systems | Per-player environment-variant swaps of zone states (U5, U7, U8–U9, U10) on quest events (stage cock bled, relief held, collars, draw shut). Reuses the Mire's MI-WL-01 variant swap; **this is the bible's listed fallback form**. |
 | **Frost night** | World state / Art | A per-player zone variant for Cinderwall and the upper Undercroft (frost decals, breath VFX, stiff banners) with a quest-pinned presentation hour (§9.3). Same mechanism as EI-PR-01; no weather system. |
 | **Thaw lines** (`cinderwall.thaw_lines`) | Art / World state | A dawn variant of the frost decal set with wet lines along the main's path and frost-white gaps over the draw branches, swapped on the event and faded to the ordinary ward over the next presentation hour. Per player. |
-| **Heat states pinned per step** | Systems | EI-HT-01 fallback form (quest-pinned), as Acts I–II. |
+| **Heat states pinned per step** | Systems | EI-HT-01 fallback form (quest-pinned), as Acts I–II. Completion releases every pin; after it, zones show the Zones §6.1 default table. |
 | **Containment interaction** `[ED-2]` | Systems | The EH-M2 pattern: a hazard volume around a non-targetable NPC, a damper interaction that drops it one band, a 3-segment channel with an NPC count. |
 | **Cooking at a hearth; the hatch** | Skills / Systems | Standard cooking interactions; the hatch is a held interaction that advances the presentation hour one turn on completion. |
 | **Carry-state bundles, handle, plates, wedges** | Systems | Standard carry-state (Acts I–II). |
@@ -626,7 +626,7 @@ Nodes tagged `[D-S1]`: document `EGA-I32` and its inspect `EGA-I33`, `EGA-D13.12
 
 | Finding | Revision |
 |---|---|
-| Bible §6.1 brief, beat by beat. | `S00` auto-offer with `EGA_FROST`; `S01` warming houses, Cooking hook or Hennet's kitchen, an Ember-Fused flare as containment; `S02` three pressure stages with Veska's crew, scavengers and beetles; `S03` terraces / ward / forges with Smithing wedges or a two-cycle hold; `S04` collars with valve-house numbers and Deepbrand marks, the junction book with its three bible phrases; `S05` far doors sealed from the other side; `S06` the Draw Sentinel at the splice junction, waking at the warming house with shut collars kept; `S07` the thaw lines; `S08` the board balances, guilds / council, §9.3 attendance, `EH_STANDING`, the Speaker's letter. |
+| Bible §6.1 brief, beat by beat. | `S00` auto-start with `EGA_FROST`; `S01` warming houses, Cooking hook or Hennet's kitchen, an Ember-Fused flare as containment; `S02` three pressure stages with Veska's crew, scavengers and beetles; `S03` terraces / ward / forges with Smithing wedges or a two-cycle hold; `S04` collars with valve-house numbers and Deepbrand marks, the junction book with its three bible phrases; `S05` far doors sealed from the other side; `S06` the Draw Sentinel at the splice junction, waking at the warming house with shut collars kept; `S07` the thaw lines; `S08` the board balances, guilds / council, §9.3 attendance, `EH_STANDING`, the Speaker's letter. |
 | Boss brief §10.1. | Arena (four collars, central draw valve, two niches, one vent); P1 Draw shield from open collars, shut by channel; P2 Seal on a vent-told cycle; P3 Vent in told lines; 0 HP seize and cool; failure as written; never speaks, named or yields evidence; book found before the fight. |
 | CDR-1. | Every enemy to 0 HP; no SX; the withdrawal is past; the Sentinel never retreats or re-forms. |
 | CDR-2. | Ranged viable in every fight; required in none; no boss position it cannot reach (collars by hand, closing niches, Vent Cone, Spill, full-length lines). |
@@ -665,7 +665,7 @@ This section is the single reference for how EH-M6's outcomes change Emberholt a
 
 ## E.3 The Undercroft and the splice junction [EP15]
 
-All outcomes. The Undercroft stays walkable to the splice junction. The three splices stand shut with their clamps cut off (by the wardens, the next day) and stacked in the bleed house; the bleed house slate has a new line in the chalk of whichever relief was used. The **Sentinel** stands where it locked, cold and dark, a wardens' chalk mark on its chest: *DON'T* (inert prop; never re-forms; nothing drops). The **far doors** stay barred from the far side, with a warden's chain added on this side and Deepbrand's mark scraped off. The fitter's cabin is empty. Heat zones run on their ordinary schedule (EI-HT-01, or quest-pinned Working where the schedule is not built).
+All outcomes. The Undercroft stays walkable to the splice junction. The three splices stand shut with their clamps cut off (by the wardens, the next day) and stacked in the bleed house; the bleed house slate has a new line in the chalk of whichever relief was used. The **Sentinel** stands where it locked, cold and dark, a wardens' chalk mark on its chest: *DON'T* (inert prop; never re-forms; nothing drops). The **far doors** stay barred from the far side, with a warden's chain added on this side and Deepbrand's mark scraped off. The fitter's cabin is empty. EH-M6's pins are released at completion, so no pin remains: heat zones show the default state in the Zones §6.1 table (the EI-HT-01 schedule instead, where it is built).
 
 ## E.4 The Ash Terraces [EP23] (by `EH_HEAT_MAIN` and `EH_SPEAKER` `[D-S1]`)
 
@@ -702,7 +702,7 @@ An optional, repeatable activity that uses Emberholt's readable system after the
 | Element | Spec |
 |---|---|
 | Offer | Veska at the Undercroft stair head, once per presentation day after `EH_STANDING`: "Walk the line with me? Same as the first night. Less shouting." (`EGA-D15`) |
-| What the player does | Walk the Undercroft line from the stair niche to the bleed house with Veska; read three tells she names (inspect windows); bleed one junction that is Working on the day's schedule (the Act I bleed channel); touch water at each niche. Occasionally (the day's schedule) a vent gallery has Slag Beetles or a duct has Cinder Rats (ordinary encounters to 0 HP, solo). |
+| What the player does | Walk the Undercroft line from the stair niche to the bleed house with Veska; read three tells she names (inspect windows); bleed one junction that is Working in the Zones §6.1 default table, or on the EI-HT-01 schedule where it is built (the Act I bleed channel); touch water at each niche. Occasionally a duct has Cinder Rats (world pocket EW-01) or the vent gallery has Slag Beetles (EW-02 at U3) (Enemies §11; ordinary encounters to 0 HP, solo). |
 | Variants | `EH_HEAT_MAIN`: the bleed house's slate gets a new line each round; Veska comments on the night's relief once. |
 | Rewards | Ordinary combat and skill XP from actions; a small warden's wage from Yorven's box ([GD]). No unique item. Nothing evidentiary. |
 | Cut freely | If the Director prefers no repeatable activity, the round is removed and nothing else changes. |
@@ -744,3 +744,4 @@ The draw is shut and the board balances. The three splices are cut out of the ma
 | Runtime | No new needs beyond EI-PR-01 in its bible fallback form. |
 | Size | One quest and its epilogue; Acts I–II conventions referenced, not restated. |
 | Independent review, 2026-11-14 | Walkthrough of all four `EH_THALAN` × `EH_SPEAKER` combinations and both custody choices: every step reachable, every read flag has one earlier writer (Act I/II and bible §9.1; side-quest and Thornfell reads optional), three states only. **Fixed:** the bleed house was Surging during EGA-E3 and the hook (now drops to Working when the wheel turns; U9 swaps on hold); Stage A added to Surging zones; the vent-count position contradiction; Veska's crew "stays in U8" contradicted `S05`–`S06`; `S02` predicate made order-safe; the Sentinel's 65% floor now has an objective counter and a Veska call and is stated as an ordinary phase gate, and Lock-step has a solo recovery window (CDR-6); Asera's chalk line counted the held ("one", D-C06) and now names and counts nobody; Yorven's "Remnant" line no longer cites the lower-forge night (his limit; `kept` branch; D-C03) and Odile's chalk says "below Cinderwall"; the `told` plaque line no longer claims heat was drawn from the lower forge (contradicted the book); §9.2 reader cells corrected. **Checked, unchanged:** Ralenne Kharveil sits on the Council (Factions §5); R18/R19 seeds only, no Titan word in any paper, no precursor name or roster; ED-8; no release wording. |
+| Batch 4 encounter alignment review, 2026-11-15 | Applied Enemies file PE-8 (EGA-E2 beetle burst 1.5 s; EGA-E3 inherits). `EGA_FROST` is now set by the quest's activation: the Cinderwall entry auto-starts EH-M6 at `S00_frost` and accepting `EGA-D1` completes S00, so no flag is set while the quest is Inactive (Integration EQ-04; EDI-3 still lets the Director prefer an offer). Post-story heat (§E.3, §E.9, §12) uses the Zones §6.1 default table, since completion releases every pin (Zones EZ-6, Integration EQ-05); the warden's round's beetles and rats are world pockets EW-01 and EW-02. No id, step or line changed. |

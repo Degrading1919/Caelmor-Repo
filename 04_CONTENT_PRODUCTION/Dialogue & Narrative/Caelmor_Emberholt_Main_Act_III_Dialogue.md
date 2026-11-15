@@ -107,7 +107,7 @@ EGA-D1.05 YORVEN: "Same as the first night you walked in here. Worse. Then it wa
 EGA-D1.06 (RUNNER comes in stamping frost off his boots, a folded note in his glove.) RUNNER: "From the gate. Odile Prace. She said give it to Dunmor and then to whoever Dunmor gives it to."   {document: EGA-I1}
 EGA-D1.07 VESKA: (reads it twice; hands it to the player) "Read the tell, not the talk. That tell says the heat's under our feet and can't get up."
 EGA-D1.08 VESKA: "Every vein open since noon and the ward gets nothing. It's gone somewhere. It's been going somewhere for years, and tonight there's not enough left over to hide it."
-  > "I'll go down with you."            → EGA-D1.10 {quest Active}
+  > "I'll go down with you."            → EGA-D1.10 {S00_frost complete; the quest has been Active since the Cinderwall entry}
   > "Gone where?"                       → EGA-D1.09
   > "Not now."                          → EGA-D1.90
 EGA-D1.09 VESKA: "Odile's 'old leaks'. Never balanced. Weather, she calls it." (beat) "Weather doesn't take more than the whole of Cinderwall in one afternoon."   → EGA-D1.08 options
@@ -795,3 +795,4 @@ EGA-D15.09 VESKA: "She'll be here tomorrow. So will I."
 | Reserved decisions | Every `[D-E2]` and `[D-S1]` node tagged and listed in the header; swap notes in quest §14.1–§14.2. |
 | Plain-language pass | Long sentences split; no line explains the thaw lines; the letter checked line by line against the never-lies rule. |
 | Independent review, 2026-11-14 | `EGA-D11.58` chalk now *Someone was held below on this heat.* (the number removed, D-C06); `EGA-D11.80`/`.81` no longer cite the lower-forge night or place the draw under it (Yorven's limit, `kept` branch, D-C03); `EGA-B10.16` no longer claims heat was drawn at the lower forge; `EGA-D10.31` pronouns made consistent (he); "Old Dace" renamed Old Ketta (Lowmark collision); "Council grey", "amber wax" and "Thornfell dust" removed (no invented colours; no interregional implication); `EGA-B5.12` added (the boss's 65% floor called aloud); the bleed-house tell change on turning the wheel added; terraces shutters sightline marked MAP VERIFICATION REQUIRED. |
+| Batch 4 encounter alignment review, 2026-11-15 | `EGA-D1` accept event aligned with Act III: the Cinderwall entry makes EH-M6 Active and sets `EGA_FROST`; the accept option completes `S00_frost` (Integration EQ-04). No line text changed. |
