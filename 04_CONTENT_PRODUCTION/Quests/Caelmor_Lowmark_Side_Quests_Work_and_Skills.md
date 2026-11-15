@@ -411,7 +411,7 @@ A stretch of the Greyharrow side-branch bank downstream of the town docks.
 | Player has no cutting tool | The upper household lends a "bank axe" at `BW-D1`, kept at completion. Item pass defines it. |
 | Player has sold the leaner's wood before *Build* | Any ordinary wood of the required amount is accepted (ordinary wood is one state, D11). If the player has none, the option is shown but greyed with: "You'll need wood to give." They can cut the leaner's stump-side limbs (one more channel) for enough. No soft-lock. |
 | Logout | Last step restored; jam and leaner states persist once cut. |
-| Co-op | Each instance has its own jam, leaner and holder presentation. Fallback if per-player props are unavailable: the shared jam resets after the first player frees it, and each player clears it from their own `S02_free_jam`; the shared prop is presentation only. The holder choice is stored per player; the shared world shows the holder standing until the server supports per-player tree states. |
+| Co-op | Freeing the jam and felling the leaner are shared work: a `cut_jam`, `notch` or `back_cut` partners do together credits every present partner whose own active step consumes it (`S02_free_jam`, `S04_leaner`), and nobody cuts it twice (CDR-6 §3.7 item 2a); wood and bark follow the ordinary gather rule. Each instance has its own jam, leaner and holder presentation; a partner not on that step cuts it from their own step when they reach it. Fallback if per-player props are unavailable: the shared jam resets after it is freed, for any player it did not credit, and each such player clears it from their own `S02_free_jam`; the shared prop is presentation only. The holder choice is stored per player; the shared world shows the holder standing until the server supports per-player tree states. |
 
 ### BW.9 Integration needs
 
@@ -1284,3 +1284,5 @@ Applied `Caelmor_Director_Rulings_Combat_Ranged_Release.md`. **CDR-2:** WC gains
 ## CDR-6 solo-completion sweep (2026-11-14)
 
 CDR-6 solo-completion sweep, 2026-11-14: WC.9 shared-creature credit limited to participants whose own active step consumes it. No other violations found. Follow-up (coordinator consistency with Thornfell): BW.8 jam fallback no longer pre-clears the jam for later players; it resets and each player frees it from their own step.
+
+CDR-6 shared-credit clarification (§3.7 item 2a), 2026-11-15: BW.8 jam and leaner cuts now credit every present partner whose own active step consumes them; the reset fallback applies only to players the cut did not credit. Holder choice stays per player.

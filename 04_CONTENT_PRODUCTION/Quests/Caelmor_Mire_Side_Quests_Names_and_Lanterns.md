@@ -619,7 +619,7 @@ Neither value says what happened to him. He "went on". No route, direction or de
 | No Leatherworking | Crew alternative. |
 | Walking away | Stays Active; the token stays with the player (carry-state) and returns to Senna on completion; if dropped, it returns to Senna and she hands it back on the next talk. |
 | Fail state | None. |
-| Co-op | Each player mends and searches their own instance of the book (fallback: shared spine progress, credited only to a player whose own active step consumes it; CDR-6). The wall strip shows each player's own value (fallback: host's). |
+| Co-op | Spine mending and the search are shared progress when partners work the book together, credited to every present partner whose own active step consumes them, so nobody repeats them (CDR-6 §3.7 item 2a); a partner not on that step mends and searches their own when they reach it. The wall strip shows each player's own value (fallback: host's). |
 
 ### MBA.11 Integration needs, ledger, open decisions, review
 
@@ -1780,3 +1780,4 @@ MLD-D6.02 CORRA: "Next year I'm carrying a real one." (beat) "A sign. A real sig
 | Playability audit fixes, 2026-11-13 | SS-02 option (a): MLD now needs MLL and MR-M2, `MLW_KEEPER` is an optional read, timing text fixed, option (b) kept in MLD's open decisions. SS-05 (Keel, L.), SS-07 (MSS Griefwatch hearing held during MR-M5 until `S03`), SS-11, SS-23 (war-washing hedged as uncertain local Tender belief; not removed, not canon), SS-27 (MAP VERIFICATION note only), CO-01, CO-14 (escorts follow their own quest owner). Authored walkthrough only. |
 | Playability audit fixes review, 2026-11-13 | Independent review of the same-day fixes. MLL.10 co-op "credit to all" restated as credit from each player's own active step (Lowmark §8.1). Authored walkthrough only; text only; no id, step, flag or geography changed; no Director recommendation promoted. |
 | CDR-6 solo-completion sweep, 2026-11-14 | MBA.10 shared spine progress credited only to a player whose own active step consumes it (CDR-6). MI-CO-06 references restated as presentation fallback only under CDR-6. Text only; no id, step, flag, line or geography changed; Sol's co-op conflicts kept as presentation questions. |
+| CDR-6 shared-credit clarification (§3.7 item 2a), 2026-11-15 | MBA.10: spine mending and the search done together credit every present partner whose active step consumes them (was: each player mends their own instance, shared progress only as fallback). Wall-strip value and choices stay per player. |

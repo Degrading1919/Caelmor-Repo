@@ -1151,7 +1151,7 @@ Small payment from the row's pot (economy tuning); Peat Row's walkway as access;
 | No axe | Hedda's crew axe (lent, returned at `S07`). |
 | Walking away | Stays Active; resume at Hedda. |
 | Logout | Last step restored; carried turves return to the ditch edge. |
-| Co-op | Per-player row props (piles, walkway, marker state); beetles shared; each player makes their own choice. The walkway is route geometry: each player walks their own `MWS_MARKER` state; any shared walkway presentation is a presentation fallback only (Integration MI-CO-06, CDR-6; conflicts in Integration §5.2 Q-18) and never gates another player's navigation. |
+| Co-op | Per-player row props (piles, walkway, marker state); beetles shared; burdens, piles driven, roots cut and planks lifted together credit every present partner whose own active step consumes them, so nobody repeats them (CDR-6 §3.7 item 2a); each player makes their own choice. The walkway is route geometry: each player walks their own `MWS_MARKER` state; any shared walkway presentation is a presentation fallback only (Integration MI-CO-06, CDR-6; conflicts in Integration §5.2 Q-18) and never gates another player's navigation. |
 
 ### MWS.11 Integration needs
 
@@ -1620,3 +1620,4 @@ No new runtime system beyond those in bible §11.1–11.2; the quest-start requi
 | Playability audit fixes, 2026-11-13 | SS-03 (lantern debt: Wystan chooses to acknowledge Tilda's walk; no call-in, never a price; still [PROPOSAL — DIRECTOR]), SS-06 (MRS and MFH gates now [GD: entry level, reachable in the Mire]), SS-15 (Briony Jessop renamed Avis Jessop; collision-checked across Lowmark, Thornfell and Mire), CO-01. Authored walkthrough only. |
 | Playability audit fixes review, 2026-11-13 | Independent review of the same-day fixes. SS-15 follow-up: "Merryn Jessop" near-collided with Lowmark's Merrin family (Zones Lowmark NPC rows) and Hob Merrit; renamed Avis Jessop (grepped: no other use in 04_CONTENT_PRODUCTION, LORE or 00_ADMIN). MWS.10 walkway host fallback restated: each player walks their own `MWS_MARKER` state; shared presentation provisional only. Authored walkthrough only; text only; no id, step, flag or geography changed; no Director recommendation promoted. |
 | CDR-6 solo-completion sweep, 2026-11-14 | MI-CO-06 references restated as presentation fallback only under CDR-6. No co-op dependency found. Text only; no id, step, flag, line or geography changed; Sol's co-op conflicts kept as presentation questions. |
+| CDR-6 shared-credit clarification (§3.7 item 2a), 2026-11-15 | MWS.10: burdens, piles, root cuts and planks done together credit every present partner whose active step consumes them; the marker choice stays per player. Skill and crafting performances in MRS, MFT, MFH and the rest unchanged. |

@@ -497,7 +497,7 @@ Tuned for Competent-to-Advanced identity (after MR-M2; MD-10).
 | Poisoned with no antidote | Poison runs out (~8 s); Hob carries a spare and offers one at the mouth. |
 | Walking away | Stays Active; Gethin's stall stays open until `S07`. |
 | Fail state | None. |
-| Co-op | Shared cutters (a defeat credits each player whose own active step consumes it). Each player carries their own bales (fallback: a shared count, credited only to a player whose own `S06` consumes it; CDR-6). Choice per player; the jetty brazier and Calwen's row are per player (fallback: host). |
+| Co-op | Shared cutters (a defeat credits each player whose own active step consumes it). Bales are a shared count: every bale carried by a present partner is credited to each partner whose own `S06` consumes it, so nobody repeats the carry (CDR-6 §3.7 item 2a); a partner not on `S06` is not credited. Choice per player; the jetty brazier and Calwen's row are per player (fallback: host). |
 
 ### MCF.11 Integration needs, ledger, open decisions, review
 
@@ -1254,3 +1254,4 @@ MSG-D4.03 YSOLDE: "Both, then. Written."   {set MSG_LISTENED; event: quest Compl
 | Playability audit fixes, 2026-11-13 | SS-01 (one MMR re-form condition), SS-07 (MBS hall scene held during MR-M5 until `S03`), SS-13 (Eskil and the MBO Warden are two people), SS-18 (MCF poles laid on completion; assault pinned to day), SS-27 (MAP VERIFICATION note only), CO-01 (co-op host fallback is provisional presentation only). Authored walkthrough only. |
 | Playability audit fixes review, 2026-11-13 | Independent review of the same-day fixes. Package review table: MMR contract line updated to the SS-01 single re-form condition. Authored walkthrough only; text only; no id, step, flag or geography changed; no Director recommendation promoted. |
 | CDR-6 solo-completion sweep, 2026-11-14 | MCF.10, MMR.10 and MSG.10 shared-task rows: credit only to a player whose own active step consumes it (CDR-6). MI-CO-06 references restated as presentation fallback only under CDR-6. Text only; no id, step, flag, line or geography changed; Sol's co-op conflicts kept as presentation questions. |
+| CDR-6 shared-credit clarification (§3.7 item 2a), 2026-11-15 | MCF.10: bales carried together are a shared count credited to every present partner whose own `S06` consumes them (was: each player carries their own, shared count only as fallback). Choices stay per player. |

@@ -350,10 +350,10 @@ Each table states function, relative placement, sub-areas, quest uses, state by 
 
 | Row | Requirement |
 |---|---|
-| Function | Offerings at a vent that never cools. Where **Elyndra the Cinderseer** lives in near-isolation [CANON, character file §37; D-EL, ruled 2026-11-15]; the pilgrims' story of the flame stays belief. |
+| Function | Offerings at a vent that never cools. Where **Elyndra the Cinderseer** lives in near-isolation [CANON, character file §37; D-EL, ruled 2026-11-15]; the pilgrims' story of the flame stays belief. Officially abandoned: no city office, warden post, upkeep or tell; independently tended by Ivett Quarle; pilgrims visit occasionally (Director, 2026-11-15). |
 | Areas | E1 shrine terrace; **E2 steps down to the lower terrace and the railed pit** (pinned Surging during the dusk vigil song); **E3 trapdoor to a cellar and a stooped crawl** (Working); E4 throat. |
 | Quest uses | EFD (Elyndra's first meeting, at E1's far edge after the vigil, `EFD-D2.15`–`.18`), EDS05; EH-M5 (ESS) consult with Elyndra here (D-EL role item 2; the act file owns its staging); EH-M6 (EGA) one optional aftermath bark here after `EH_STANDING` (`EGA-B9.13`, Act III §E.12). |
-| NPCs | Ivett Quarle (keeper); pilgrims; Elyndra, seldom present on E1 and non-targetable. Where she sleeps is not placed and adds no area (no geography change; MAP VERIFICATION REQUIRED). |
+| NPCs | Ivett Quarle (independent keeper, no city post (Director, 2026-11-15)); a few pilgrims, occasionally; Elyndra, seldom present on E1 and non-targetable. Where she sleeps is not placed and adds no area (no geography change; MAP VERIFICATION REQUIRED). |
 | Traversal | ML-25 steps; ML-26 trapdoor. Flares hover no higher than ~2 m above the pit lip (Enemies I-19). |
 | Map | MAP VERIFICATION REQUIRED: from beyond the upper terrace's front edge there is **no line of sight into the pit**, so no attack point there goes unanswered (Enemies I-23). |
 
@@ -819,3 +819,4 @@ Hunting is staged in the Molten Scars and around the steadings (no separate hunt
 | **Emberholt character rulings, 2026-11-15** | D-E2: every `EH_THALAN` reader now carries `freed` only (EP03 §E.7 aided chair removed; EP13 hand-off, EP16, ML-09, flag table, respawn table de-tagged). D-S1: EP23 and the flag table de-tagged; outcome unchanged. ED-3: `[INITIATE]` header entry replaced by Iven Calder. D-EL: EP20 `[CANON myth]` → `[CANON]`; Function, Quest uses and a new NPCs row record Elyndra living there and met in EFD; no area, traversal or map change. |
 | Independent review of character rulings, 2026-11-15 | EP20 Quest uses: Elyndra's EH-M6 aftermath bark (`EGA-B9.13`, Act III §E.12) added; it was staged at EP20 but missing from the row. |
 | Playability audit fixes, 2026-11-15 | Playability audit fixes, 2026-11-15: EM-01, EM-02 (respawn table), EM-12, ES-01, ES-03 (EMS carry note), ES-05 (ML-37 added), ES-06, ES-07, CO-01, TD-03, TD-04. |
+| Director decision, 2026-11-15 | EP20 Function and NPCs rows: Elyndra's shrine officially abandoned (no city post or upkeep), independently tended by Ivett Quarle, occasional pilgrims (Director, 2026-11-15). No area or geography change. |

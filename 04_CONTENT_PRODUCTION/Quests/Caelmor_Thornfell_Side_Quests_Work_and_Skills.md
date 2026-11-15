@@ -305,7 +305,7 @@ Tuned for TF-M1's Competent identity (TD-12).
 | Capstone dropped (logout, death) | Returns to the rubble pile. |
 | Walking away | Quest stays Active at its step; resume hook at the shrine niche (Dagny). |
 | Logout | Last step restored; sounded points, set wedges and the opened face persist. |
-| Co-op | Each player sounds their own points (per-player beat-dots). The sixth-hollow moment plays per player on their own sixth strike. The upper face is a per-player prop state; fallback if per-player props are unavailable: the shared face resets to unscored after the working player leaves it, so each later player does their own full `S05` (CDR-6; reset timing for Sol, Q-06). Each player makes their own `TSR-D5` choice; the rota board prop follows the host. |
+| Co-op | Each player sounds their own points (per-player beat-dots). The sixth-hollow moment plays per player on their own sixth strike. Opening the face is shared work: score, wedges, lever and picks (or the crew path) worked together credit every present partner whose own active step is `S05`, and nobody opens it twice (CDR-6 §3.7 item 2a). The upper face is a per-player prop state; fallback if per-player props are unavailable: the shared face resets to unscored after the credited players leave it, so each player it did not credit does their own full `S05` (CDR-6; reset timing for Sol, Q-06). Each player makes their own `TSR-D5` choice; the rota board prop follows the host. |
 
 ### TSR.11 Integration needs
 
@@ -1037,7 +1037,7 @@ Neither is wrong. Bera does not say which she wanted.
 | Torn hide (light test ignored) | Bera patches it; continue. |
 | No horn | Bera's herding horn (carry-state; returned on completion). |
 | Walking away / logout | Quest stays Active; herd position per player persists at the last ledge reached; shed progress persists. |
-| Co-op | The herd is per-player presentation (each player drives their own instance of the herd). Fallback if unavailable: the herd is a shared actor; any player's correct call advances it, and a partner is credited only when their own active step uses that advance (CDR-6); each player still chooses cull or drive in their own state, and the path presentation follows the host. The ram for the cull is a per-player spawn in the fallback. |
+| Co-op | The herd is per-player presentation. Partners present on `S04b_drive` drive it together: a correct call by either counts for every present partner whose own active step is `S04b_drive`, so nobody drives it twice (CDR-6 §3.7 item 2a); a partner not on that step drives their own when they reach it. Fallback if unavailable: the herd is a shared actor; any player's correct call advances it, and a partner is credited only when their own active step uses that advance (CDR-6); each player still chooses cull or drive in their own state, and the path presentation follows the host. The ram for the cull is a per-player spawn in the fallback. |
 
 ### TGY.11 Integration needs
 
@@ -1661,7 +1661,7 @@ No plan and no account option is wrong. Every load crosses.
 | Striking on a clack | Spark, hairline; reheat closes it. |
 | Walking away mid-plan | Quest stays Active at the step; the windows wait (they are per-player presentation, not world time). Resume hook at the forge. |
 | Logout | Restore last step; forged fittings and set seat persist; completed windows persist. |
-| Co-op | Bridge state per player (cracked or mended). Fallback: the host's state drives the bridge as presentation only (no player's crossing or step waits on another player's bridge state; CDR-6); each player chalks their own board in dialogue and their own `TBC_WAITS`; the visible board shows the host's plan. Bandits shared; a partner is credited only when their own active step uses the defeat (CDR-6). |
+| Co-op | Bridge state per player (cracked or mended). Setting the fittings (`S03_set`) is shared work: bolts, shackles and heaves partners do together credit every present partner whose own active step is `S03_set`, and nobody sets them twice (CDR-6 §3.7 item 2a); fittings each player forges are their own. Fallback: the host's state drives the bridge as presentation only (no player's crossing or step waits on another player's bridge state; CDR-6); each player chalks their own board in dialogue and their own `TBC_WAITS`; the visible board shows the host's plan. Bandits shared; a partner is credited only when their own active step uses the defeat (CDR-6). |
 
 ### TBC.11 Integration needs
 
@@ -1909,3 +1909,4 @@ TBC-D8.06 AUD: "Forge is here. Use it. Swear at it. It likes that."
 | **Batch 4 handoff review (2026-11-03)** | 1 finding (medium). TBC's cracked Narrows state ran from TF-M1 until TBC completed, contradicting the Batch 4 bridge model. Smallest edit: TBC.1 Unlock and TBC.11 now show the bridge cracked only while TBC is Active (scree path walkable regardless); TBC.15 open decision 4 marked resolved; TBC.16 row added. No other text changed. |
 | **Director rulings reconciliation (2026-11-03)** | Applied CDR-1/2/3 (`Caelmor_Director_Rulings_Combat_Ranged_Release.md`). CDR-1: shared rule now "every enemy defeated at 0 HP" (TD-7 superseded); TBC-E1 bandits fight to 0 HP, tied-post epilogue removed, TBC-B5.04 retriggered. CDR-2: S01 resolved; TST restored as Woodcutting → Fletching → Ranged (`S06_string` strings the first bow, new `S06b_fletch`, `S07_butts` shot by the player with lull-calling as alternative path, optional TST-E2 ridge crows); TGY cull accepts melee or ranged; all "if S01 allows" hedges removed. CDR-3: "v1.5 parity" and "ships/initial-release" wording replaced. Steps, flags and choices otherwise unchanged. Historical review rows above describe earlier states. |
 | **CDR-6 solo-completion sweep, 2026-11-14** | TSR.10 pre-scored face fallback → shared face resets so each player does their own full S05; TGY.10 "all present get credit" and TBC.10 "credit to all present" → own-active-step credit; TBC host bridge fallback marked presentation only. |
+| **CDR-6 shared-credit clarification (§3.7 item 2a), 2026-11-15** | TSR.10 face opening, TGY.10 herd drive and TBC.10 fitting-setting credit every present partner whose own active step consumes them; the TSR reset applies only to players the work did not credit. Sounding, stems, bows, crossing plans and choices stay per player |

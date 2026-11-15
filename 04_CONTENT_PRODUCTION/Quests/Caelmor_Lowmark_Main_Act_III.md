@@ -683,7 +683,7 @@ The voices are chosen for who would really argue each, and who would pay for it.
 | Forgets Oriel's order | Gate-boards are chalked; only the next gate's winch is interactable. |
 | Logout | Last persisted step; evacuees delivered stay delivered; gate progress persists per gate. |
 | Fail state | None. |
-| Co-op | Each partner evacuates their own seven (their own instances' followers); drift and gate enemies are shared on matching steps; gate progress is per player (a partner's crank speeds only their own instance's bar; fallback: per-player progress, shared enemies). |
+| Co-op | Each partner evacuates their own seven (their own instances' followers); drift and gate enemies are shared on matching steps; gate progress is tracked per player, and a crank channel partners work at the same gate adds to the bar of every present partner whose own active step is that gate, so partners open it together and nobody cranks it twice (CDR-6 §3.7 item 2a); a partner at a different gate or step is not advanced by it (fallback: per-player progress, shared enemies, with the same crediting). |
 
 ## 11.13 Integration needs
 
@@ -1004,4 +1004,5 @@ Crossings reopen under accountable rules (crews' marks on stones, keepers' count
 | Player address | Origin- and address-neutral; they/them in prose; the mark choice is three plain cuts. |
 | No spellcasting, cutscenes, rep, lump XP | Smoke-pot is a Watcher tool; Sedge's work is shown, never granted; camera free throughout; no reputation; XP from actions. |
 | Movement | No jump; Muster stones are walkable; no agility trigger required in Act III. |
+| CDR-6 shared-credit clarification (§3.7 item 2a), 2026-11-15 | MQ11 §11.12: a partner's crank channel at the same gate now advances every present partner on that gate step (was "speeds only their own instance's bar"). Evacuees, chips and the hearing stay per player. |
 | Size | Act III quest file is above the 60–80 KB target because MQ11 carries the only boss spec and the fen presentation; MQ12 and the matrix were kept tight. |

@@ -367,7 +367,7 @@ No option is wrong. Each touches a value: Annelise's belief that remembrance sho
 | Logout mid-fix | Carried stone/turf returns to its source; completed sections stay complete |
 | Missed the dusk glisten | Morning traces remain inspectable; nothing missed is required |
 | Stone set wrong way up | Annelise's correction line; turn and re-set |
-| Co-op | Each player's fix is their own. Field presentation is per player (fallback: show the dike state to everyone, carry the others in dialogue; §A2-INT) |
+| Co-op | Each player chooses their own fix (`LM_FIELD_FIX`). Shared work counts for every present partner whose own active step consumes it: the `S04_dig` clearing, and the `S07_fix_*` work of a fix both partners chose, credit each of them, and nobody digs or builds it twice (CDR-6 §3.7 item 2a); a partner on a different fix branch does their own branch's work. Field presentation is per player (fallback: show the dike state to everyone, carry the others in dialogue; §A2-INT) |
 
 ## GL.13 Integration needs (beyond §A2-INT)
 
@@ -660,7 +660,7 @@ Neither option is wrong. One honors Tovin publicly at his expense. The other pro
 | Logout during the hold | On return the pulse window restarts from phase 1 with full crew; repairs and sheets kept |
 | Logout mid-puzzle | Sheets return to inventory; bays clear; nothing lost |
 | Player sells or drops the sheets | Not droppable or sellable |
-| Co-op | Each player has their own gate state and puzzle bays (per-player interaction state on shared props; fallback: puzzle bays are per-player UI over the same floor). Shared crew and drift give credit to all on the step. |
+| Co-op | Repairing the race gate (`S03_repair`) is shared work: repair interactions partners do together credit every present partner whose own active step is `S03_repair`, and nobody repairs the gate twice (CDR-6 §3.7 item 2a). Gate state is presented per player from their own step; a partner not on that step repairs it when they reach it. Each player lays their own sheets in their own puzzle bays (per-player interaction state on shared props; fallback: puzzle bays are per-player UI over the same floor). Shared crew and drift give credit to all on the step. |
 
 ## TF.14 Integration needs
 
@@ -1408,5 +1408,6 @@ Playtest questions (the real bar): *What did the water do that water doesn't do?
 | **Independent review pass** | Applied: one post-MQ4 water story (mill race for the crew, backwater for the fen, slack gate as its first sign); MQ6 chronology and fifth-night cadence; MQ7 forecast basis; Braid gate names and order matched to MQ11; Fourteenth Lot wreck scar; Marrick's Act II appearance; MQ6 brace and MQ7 escort replace two more channel holds; MQ5 den not refought; MQ8 optional ambush and elk line; MQ9 dawn wait removed; promise step id corrected. |
 | **Skills** | Taught here: Melee, Woodcutting, Hunting, Cooking, Smithing (optional path). No Ranged, Fletching or Mining teaching in Act II; every Act II encounter accepts ranged and none requires it (CDR-2). |
 | **Director rulings reconciliation (2026-11-03)** | CDR-1: MQ6 crews (TF-E2, TF-E3a) fight to 0 HP; tying/binding removed. CDR-2: ranged accepted throughout, never required; skill rows read "Melee or Ranged". CDR-3: "v1" release wording changed to Lowmark-content wording. No steps, flags, beats or line ids changed in this file. |
+| **CDR-6 shared-credit clarification (§3.7 item 2a), 2026-11-15** | MQ5 §GL.12: the `S04_dig` and the work of a fix both partners chose credit every present partner on that step; fix choice stays per player. MQ6 §TF.13: the `S03_repair` race-gate repair credits every present partner on that step; sheet puzzle stays per player. |
 | **CDR-6 solo-completion sweep, 2026-11-14** | MQ9 §BF.11 shared-Sedge fallback: Sedge no longer waits for an absent, disconnected or other-step partner; the remaining player is never blocked. No other Act II violations found. |
 | **Size discipline** | MQ7–9 packages are shorter than MQ5–6 by design; MQ8–9 are low-combat quests whose substance is in their presentation specs. |

@@ -1181,6 +1181,7 @@
 - Once a pilgrim from the Mire aligned with Misttide traditions  
 - Developed ember-visions after dwelling near Emberholt’s vents for years  
 - Lives in near-isolation at an abandoned vent shrine  
+- The abandoned shrine is independently tended by a keeper and visited occasionally by pilgrims *(Director, 2026-11-15)*  
 
 **Abilities:**  
 - Sees visions that do not follow Hearthveil patterns  

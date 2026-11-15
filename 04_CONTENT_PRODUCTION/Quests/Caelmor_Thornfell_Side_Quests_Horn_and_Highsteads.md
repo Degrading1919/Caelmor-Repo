@@ -1293,7 +1293,7 @@ Tova Rask, eleven, has a slate of half-finished letters and has not been to less
 | Board won't validate | The board highlights the run that breaks a constraint (no brake pair, no morning child run, load overlap). No limit on tries. |
 | Walking away | Stays Active; resume with Ketil (`TNR-B1.03`). |
 | Fail state | None. |
-| Co-op | Shared crows; each player seats their own pin segments (fallback: shared progress). Each player pegs their own board and choice; Nettlehook's board prop follows each player's own `TNR_ROTA` (fallback: host's). |
+| Co-op | Shared crows. Clearing the housing and seating the pin are shared work: `pull_nest`, `chip_ice` and `seat_pin` segments partners work together count for every present partner whose own active step consumes them (`S02`, `S04`), and nobody seats the pin twice (CDR-6 §3.7 item 2a); each player makes their own pin or watches the crew (`S03`) (fallback: shared progress, credited the same way). Each player pegs their own board and choice; Nettlehook's board prop follows each player's own `TNR_ROTA` (fallback: host's). |
 
 ### TNR.11 Integration needs, ledger, open decisions, review
 
@@ -1552,7 +1552,7 @@ At first heavy snow every highstead reads its **winter tally** aloud: beds, food
 | Death | Respawn at Hushfold hearth; hauled loads and deposited meat persist. |
 | Walking away | Stays Active; resume with Runa (`TSM-B1.03`). |
 | Fail state | None. |
-| Co-op | Each player hauls and hunts for their own state (shared wolves). The reading is per player; Runa's page shows each player's own `TSM_CLAIM` (fallback: the host's on the prop, own choice in dialogue). Name address is per player. |
+| Co-op | Shared wolves. Hauls and the meat share are shared tasks: a load or share deposited with a partner present on the same step counts for every present partner whose own active step consumes it (`S03`–`S05`), so nobody hauls the same wood twice (CDR-6 §3.7 item 2a); a partner not on that step hauls and hunts for their own state. The reading is per player; Runa's page shows each player's own `TSM_CLAIM` (fallback: the host's on the prop, own choice in dialogue). Name address is per player. |
 
 ### TSM.11 Integration needs, ledger, open decisions, review
 
@@ -1961,3 +1961,4 @@ TRR-D6.04 [else] AUD: "Assembly'll be Assembly. We'll stand where we stand."
 | Distinct verbs | compare / climb-decode / retune-perform / repair-ride-rota / haul-hunt / inspect-carry-celebrate. |
 | **Independent review (2026-11-03)** | 8 findings (1 high, 4 medium, 3 low). High: TTH's rhyme differed from TFS's canonical verse; TTH-I3 now quotes TFS.14 word for word, the changing-last-word variant cut. Medium: name collisions with the main acts: Three Calls host Signy Brack (Act II rear guard Signy Rook) renamed **Thyra Brack**; Hallvor (Act II cairn name Hallvard Brenn) renamed **Leiv**. Medium: TNK's pruned ending duplicated TRR's single chord; now the posts answer Rest one by one, farthest first. Medium: Eyvind's custody said "clan tribunal"; aligned to Act II (held by the Ridge Wardens pending the Assembly). Medium: TTH lent a practice horn as if TF-M1 gave none; TF-M1's horn is now relied on, loan is carry-state fallback only. Low: two Eyvind-naming nodes untagged (TWG-D6.03, TNK-B2.02); tagged `[SPLINTER]`. Low: name-address readers now accept `TSM_PLAYER_TALLIED` or `TME01_TALLIED`; token unified to `{PLAYER}`. Low: Ranged mentions gated on S01 (superseded 2026-11-03, see next row). |
 | **Director rulings reconciliation (2026-11-03)** | Applied `Caelmor_Director_Rulings_Combat_Ranged_Release.md`. CDR-1: shared rule §0.6 "Human enemies yield" replaced by defeat at 0 HP; TTH-E1, TSM-E1 wolves and TNR-E1 crows no longer disperse at low health (steps complete on *defeated*); TWG-E1 bandits no longer yield or are tied; lookout talk `TWG-D2` cut (T-4, ids kept as removed); TWG Beat 4, step table and speaker row updated. No scripted exceptions in this file. CDR-2: six "Ranged if S01 allows" hedges and the §0.6 skills line now read Melee or Ranged (first-class, never required). CDR-3: header release-scope wording replaced with milestone wording. Step ids, flags, beats and choices unchanged. |
+| **CDR-6 shared-credit clarification (§3.7 item 2a), 2026-11-15** | TNR.10 housing and pin segments and TSM.10 hauls and meat share credit every present partner whose own active step consumes them. Pins made, calls, knots and choices stay per player. |
