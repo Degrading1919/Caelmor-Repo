@@ -629,7 +629,7 @@ These are the only two, and both reuse Mire integration patterns. No new system.
 | Batch | Content | Files | Status (2026-11-14) |
 |---|---|---|---|
 | 1 | This bible | `Quests/Caelmor_Emberholt_Narrative_Production_Bible.md` | Draft; independently reviewed 2026-11-14 (§13); awaiting Director review |
-| 2 | Milestone packages and dialogue | `Quests/Caelmor_Emberholt_Main_Act_I.md` (EH-M1–M3), `_Act_II.md` (EH-M4–M5), `_Act_III.md` (EH-M6) and matching dialogue files | Not started |
+| 2 | Milestone packages and dialogue | `Quests/Caelmor_Emberholt_Main_Act_I.md` (EH-M1–M3), `_Act_II.md` (EH-M4–M5), `_Act_III.md` (EH-M6) and matching dialogue files | Acts I–III and dialogue authored and independently reviewed 2026-11-14; in review, awaiting Director (D-E2, D-S1, [INITIATE], ED items) |
 | 3 | Side quests, micro-events, discoveries | `Quests/Caelmor_Emberholt_Side_Quests_Unburnt_and_Names.md` (EST, ETB, EMS, ENW, EGT); `…_Side_Quests_Commons_and_Wards.md` (EWA, ECN, EFC, EBL, ESR); `…_Side_Quests_Work_and_Skills.md` (ESK, EOM, EFS, EWQ, ESP, ESH); `…_Side_Quests_Combat_and_Discovery.md` (EOP, EFD, EAD, ECC, EME01–EME10, EDS01–EDS10) | Not started |
 | 4 | Encounters, POIs, integration | Enemies, Zones and Integration packages | Not started |
 | 5 | Independent review and fix pass | Revisions in place | Not started |

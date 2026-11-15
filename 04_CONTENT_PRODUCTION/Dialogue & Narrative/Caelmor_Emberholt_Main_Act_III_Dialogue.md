@@ -1,6 +1,6 @@
 # Emberholt Main Act III: Cast and Dialogue (Embergate Accounting)
 
-**Status:** Authored production content for Creative Director milestone review (2026-11-14). This is the companion to `04_CONTENT_PRODUCTION/Quests/Caelmor_Emberholt_Main_Act_III.md`, which owns step ids, flags, encounters, mechanics and the epilogue matrix. Characters marked **[CANON ANCHOR]** come from `LORE/Characters/Caelmor_Characters_Region4_Emberholt.txt` and obey the Emberholt rows of the Part 4 character ledger (`00_ADMIN/Reference/Caelmor_Part4_Character_Family_Continuity_Ledger.md`): nothing here gives them a new age, wartime service, kinship, travel or record custody beyond what the ledger allows. Characters marked **[NEW]** come from the Emberholt bible §5.2, from Acts I–II, or are incidental role names. Act III adds **no new named character**. Nothing here is production JSON.
+**Status:** Authored production content for Creative Director milestone review (2026-11-14). This is the companion to `04_CONTENT_PRODUCTION/Quests/Caelmor_Emberholt_Main_Act_III.md`, which owns step ids, flags, encounters, mechanics and the epilogue matrix. Characters marked **[CANON ANCHOR]** come from `LORE/Characters/Caelmor_Characters_Region4_Emberholt.txt` and obey the Emberholt rows of the Part 4 character ledger (`00_ADMIN/Reference/Caelmor_Part4_Character_Family_Continuity_Ledger.md`): nothing here gives them a new age, wartime service, kinship, travel or record custody beyond what the ledger allows. Characters marked **[NEW]** come from the Emberholt bible §5.2, from Acts I–II, or are incidental role names. Act III adds **no new named speaking character** (two regulars, Margit and Old Ketta, are only mentioned). Nothing here is production JSON.
 
 **Reserved decisions.** **`[D-E2]`** (Thalan's fate) marks `EGA-D11.50`, `EGA-D11.55`–`.58`, document `EGA-I30` and bark `EGA-B9.12`. **Both branches are authored; neither is canon.** **`[D-S1]`** (the Speaker) marks the letter (`EGA-I32`), its inspect (`EGA-I33`), `EGA-D13.12`, `EGA-D13.70`–`.80` and barks `EGA-B9.8`–`.9`. Other tags: `[ALLOCATION]` (`EGA-I14` second tag, `EGA-D11.21`/`.22`, `EGA-B1.6`), `[ED-2]` (the fused worker, `EGA-D3`), `[ED-12]` (Volkhari at the board).
 
@@ -133,7 +133,7 @@ EGA-D2.31 [not EH_COMMONS] YORVEN: "Blankets. Commons store, behind the wash-hou
 EGA-D2.32 [not EH_COMMONS; second armful delivered] YORVEN: "That's cots for the old ones. Good."   {EGA_BLANKETS}
 ```
 
-Production note: "Kiln Stair" and "Margit" are incidental: a lane and a regular never met. Cut either if they collide with later naming.
+Production note: "Kiln Stair", "Margit" and "Old Ketta" are incidental: a lane and two regulars never met. Cut any of them if they collide with later naming. ("Old Dace" was renamed in independent review: Dace is a Lowmark character.)
 
 ### EGA-B1: the warming house (S01)
 
@@ -145,7 +145,7 @@ Production note: "Kiln Stair" and "Margit" are incidental: a lane and a regular 
 | EGA-B1.4 | Quarrel, hood tell brightens | REGULAR 3 | (pointing up) "Look at the hood. Look what you're doing to it." |
 | EGA-B1.5 | After the containment | HENNET | (bangs the ladle on the pot once; the room goes quiet) "Heat follows the room. So does cold. Eat." |
 | EGA-B1.6 `[ALLOCATION]` | Warming house, after the quarrel | REGULAR | `posted`: "Veska's page is still on our board from last time. Nobody's blaming her tonight." / `settled`: "Coal came from the Magistrix last week. Didn't come this week. Frost's early." |
-| EGA-B1.7 | Warming house, `EGA_SUPPER = cooked` | REGULAR | "Pails went up Kiln Stair. Old Dace says the salt's right." |
+| EGA-B1.7 | Warming house, `EGA_SUPPER = cooked` | REGULAR | "Pails went up Kiln Stair. Old Ketta says the salt's right." |
 
 ### EGA-D3: the fused smelter-hand (S01) `[ED-2]`
 
@@ -290,7 +290,7 @@ EGA-D5.33 VESKA: "The board says where it went. It doesn't say if you were right
 EGA-D5.40 (Confirm: "Send the night's heat up Cinderwall's risers?") VESKA: "Our heat, our hoods. Turn her."
 EGA-D5.42 (Confirm: "Send the night's heat to the Ash Terraces?") VESKA: "Nobody sleeps on a terrace. Turn her."
 EGA-D5.44 (Confirm: "Send the night's heat to the great forges?") VESKA: "The hearths can hold it. Turn her."
-      {the wheel turns; the line roars; the other two wheels lock; EGA-E3: beetles out of the floor vents}
+      {the wheel turns; the line roars; the other two wheels lock; the bleed house drops to Working (amber); EGA-E3: beetles out of the floor vents}
 EGA-D5.50 VESKA: (after EGA-E3; at the wheel, which is trying to close) "She wants to shut. Pressure's pushing her shut. Something has to hold her open."
 EGA-D5.51 VESKA: "Those wedges in the crate are cracked. Forge new ones, or we hold her by hand for two breaths of that vent and she'll seat herself."
   > "I'll forge wedges." (Smithing ~[GD: mid-high])   → EGA-D5.52
@@ -299,7 +299,7 @@ EGA-D5.52 VESKA: "Three. Thick end, short taper. Quench them hard."   {field for
 EGA-D5.53 VESKA: (as the last wedge goes in) "That's held. She'll stay."   {EGA_BLEED_WORK = wedges}
 EGA-D5.55 VESKA: (to the line hands) "Shoulders." (to the player) "Call the out-breath. We push on the out."   {held interaction per vent cycle ×2}
 EGA-D5.56 VESKA: (after two cycles, panting) "She's seated. Don't let go yet." (beat) "Now let go."   {EGA_BLEED_WORK = held}
-EGA-D5.60 VESKA: (the room's tells dropping to amber) "That's somewhere else now. Let's go and see what's been taking it."
+EGA-D5.60 VESKA: (the tells in the run beyond dropping to amber) "That's somewhere else now. Let's go and see what's been taking it."
 EGA-D5.62 [EGA_BLEED_WORK = wedges] LINE HAND 1: "Good wedges. I'll keep one." / [held] LINE HAND 2: (rubbing his shoulder) "I'll feel that tomorrow. Worth it."   → S04
 ```
 
@@ -440,6 +440,7 @@ Veska speaks from the door niche outside the grille; she is never in the arena.
 | EGA-B5.9 | P3, Spill at a far player | VESKA | "It throws at whoever's furthest. Don't stand still that far out." |
 | EGA-B5.10 | 0 HP | VESKA | (a long breath) "It's stopped." (beat) "It's not getting up. Go on. The valve." |
 | EGA-B5.11 | Player beaten (heard on waking at the warming house) | HENNET | "Line hand brought you up. Sit. Eat. Then go back down. It's still there, and so are the collars you shut." |
+| EGA-B5.12 | P1, the Sentinel held at its floor with a collar open | VESKA | "It's not taking it. Not while it's drinking. Shut the collars." |
 
 ### EGA-D9: the draw shut, and the ward through the night (S06)
 
@@ -482,7 +483,7 @@ EGA-D10.11 [ward] A REGULAR: (fanning herself with a bowl) "We were warm by the 
 EGA-D10.12 [ward] HENNET: (waking with a start) "I wasn't asleep. I was resting my eyes on the stew."
 EGA-D10.13 [ward] YORVEN: "Two hoods. The ward pays. I'll find it." (beat) "I'd rather pay for hoods than for coffins."
 
-EGA-D10.15 [EH_HEAT_MAIN = terraces] (Cold air going out of the room at last. People still wrapped, but talking. The window shutters open to the terraces, high above the city.)
+EGA-D10.15 [EH_HEAT_MAIN = terraces] (Cold air going out of the room at last. People still wrapped, but talking. The window shutters open to the terraces, high above the city: sightline MAP VERIFICATION REQUIRED; if there is none, the regulars talk about the glow at the door.)
 EGA-D10.16 [terraces] A REGULAR: "Pretty, from here. Lit up like the Kindling. We watched it and ate stew."
 EGA-D10.17 [terraces] ANOTHER REGULAR: "Middle of the night it came up through the floor. I cried. Don't tell Hennet."
 EGA-D10.18 [terraces] HENNET: "I heard."
@@ -495,7 +496,7 @@ EGA-D10.23 [forges] FORGE HAND: "Half our crucibles cracked. Worth it." (he look
 EGA-D10.24 [forges] YORVEN: "The guild'll send me a bill. I'll frame it."
 
 EGA-D10.30 HENNET: (to the player, all scenes) "Bowl. Sit. You're running cold." (beat) "I know. Wrong way round. Last night it wasn't."
-EGA-D10.31 [EGA_FUSED_STEADIED] (At the end bench, the smelter-hand from last night is asleep under two blankets. Her forearms are dark. She is snoring.)
+EGA-D10.31 [EGA_FUSED_STEADIED] (At the end bench, the smelter-hand from last night is asleep under two blankets. His forearms are dark. He is snoring.)
 EGA-D10.32 YORVEN: (he puts a purse by the bowl) "Ward's box. Don't count it in front of me."   {payment; quest §10}
 EGA-D10.40 YORVEN: (a runner at the door, out of breath; Yorven reads the note and holds it up) "Odile's sent another runner. She wants you at the board, and she's never wanted anybody at the board."   → S08
 ```
@@ -545,7 +546,7 @@ EGA-D11.20a VESKA: (looking up at the board a long time) "Balanced." (beat) "Say
 EGA-D11.20b ODILE: "Balanced."
 
 EGA-D11.21 [EH_COLD_WARD = posted] [ALLOCATION] (The Cooling House regulars stand behind Veska, coats still on.) A REGULAR: "We read it on our board once. We'll read it on this one."
-EGA-D11.22 [EH_COLD_WARD = settled] [ALLOCATION] (A clerk in Council grey, the coal book under his arm.) RALENNE'S CLERK: "The Magistrix's compliments. The coal book, as agreed. She says she would like to read the board herself one morning."
+EGA-D11.22 [EH_COLD_WARD = settled] [ALLOCATION] (A Council clerk, the coal book under his arm.) RALENNE'S CLERK: "The Magistrix's compliments. The coal book, as agreed. She says she would like to read the board herself one morning."
 
 EGA-D11.30 [EH_CURRICULUM = guild] (Idra Callow with two teachers, chalk on their sleeves.) IDRA: "We came to see a board that adds up. We teach that."
 EGA-D11.31 [EH_CURRICULUM = guild, EEH_TAVI_STRUCK] IDRA: "Tavi's line is still struck out. The new test spreads the flame. She passed it laughing."
@@ -565,20 +566,20 @@ EGA-D11.50 [D-E2] [EH_THALAN = freed] HENNET: (at the player's elbow, quietly; a
 EGA-D11.55 [D-E2] [EH_THALAN = aided] (Asera at the edge of the crowd, hood up, not looking at the board. She looks at the player.)
 EGA-D11.56 [D-E2] [aided, EAC_ACCOUNT_PROMISED] ASERA: "He asked for an account. You promised one."
 EGA-D11.57 [D-E2] [aided] ASERA: (to Odile, low; Odile comes down two rungs to hear) "Write that someone was held below on heat taken from this board. Don't write who."
-EGA-D11.58 [D-E2] [aided] (Odile chalks it under the deep-works line, small, in her own hand: *Held below on this heat: one.* Asera reads it, nods once, and is gone into the crowd.)
+EGA-D11.58 [D-E2] [aided] (Odile chalks it under the deep-works line, small, in her own hand, with no name and no number: *Someone was held below on this heat.* Asera reads it, nods once, and is gone into the crowd.)
 ```
 
 ```
 EGA-D11.60 [EH_UNBURNT = kept] [ED-12] (At the back of the hall, Maeryn Vall and Seredh Embercarver. Maeryn catches the player's eye and nods. Seredh does not speak. Nobody near them says anything about them.)
-EGA-D11.70 [TAS_ACCOUNT = named] (Tessaly Varn among a knot of masons in Thornfell dust.) TESSALY: "A gate book once named my crew. I like boards that say who did the work."
+EGA-D11.70 [TAS_ACCOUNT = named] (Tessaly Varn among a knot of masons.) TESSALY: "A gate book once named my crew. I like boards that say who did the work."
 EGA-D11.75 (The hall goes quiet the way a room does when everyone is reading the same thing.)
 ```
 
 The word:
 
 ```
-EGA-D11.80 YORVEN: (looking at the junction book on the counter, its burnt mark) "Whatever's left down there of whoever did that night under the lower forge." (beat) "It's a remnant. Call it what it is."
-EGA-D11.81 (Odile climbs the ladder and writes at the foot of the board, under *balanced*: *Draws: the deep works, below the old lower forge. Shut.*)
+EGA-D11.80 YORVEN: (looking at the junction book on the counter, its burnt mark) "Whoever wrote that is what's left of something, and they're still down there behind a door." (beat) "A remnant. Call it what it is."
+EGA-D11.81 (Odile climbs the ladder and writes at the foot of the board, under *balanced*: *Draws: the deep works, below Cinderwall. Shut.*)
 EGA-D11.82 VESKA: "Shut." (beat) "Good word. Two good words this morning."
 ```
 
@@ -660,7 +661,7 @@ EGA-D13.80 [D-S1] (The player closes the letter.)   {EH_STANDING; quest Complete
 
 ### Document: the Speaker's letter (EGA-I32) `[D-S1]`
 
-Heavy paper, folded once, the Speaker's seal in amber wax. In his own hand: the same hand as *To the Seat* (EH-M5). Warm, short. Nobody in the scene comments on it.
+Heavy paper, folded once, the Speaker's seal. In his own hand: the same hand as *To the Seat* (EH-M5). Warm, short. Nobody in the scene comments on it.
 
 > *To the warden's hand who went down on the frost night,*
 >
@@ -723,7 +724,7 @@ Writing rules (binding under any `[D-S1]` ruling): he thanks, reframes and omits
 | EGA-B10.13 | Emberforges (E.5) | `EH_ACCOUNT = council` | DURNAN | "The Council has our numbers. We'd rather have had them first." |
 | EGA-B10.14 | Emberforges (E.5) | `EH_GUILDS = reformed` | DURNAN | "My new rules held a seat for the wardens. First time a rule of mine's been used for anything but shouting." |
 | EGA-B10.15 | Emberforges (E.5) | `EH_GUILDS = restored` | DURNAN | "We billed the ward for the forge night. I've torn the bill up. Don't tell my masters." |
-| EGA-B10.16 | Old lower forge (E.6) | `EH_HOLLOW_TRUTH = told`, inspecting the plaque | (inspect) | "*NOT A COLLAPSE*, written over again in another hand. Under it, in a warden's: *heat taken from here: shut.*" |
+| EGA-B10.16 | Old lower forge (E.6) | `EH_HOLLOW_TRUTH = told`, inspecting the plaque | (inspect) | "*NOT A COLLAPSE*, written over again in another hand. Under it, in a warden's: *The board balances now.*" |
 | EGA-B10.17 | Marshal's office (E.6) | `EH_HOLLOW_TRUTH = kept`, inspecting the second ledger | (inspect) | "A new line, in the Marshal's hand, with the valve-house mark beside it. It says what the board says, and nothing else." |
 
 ### EGA-D14: Emberholt master commission offers (quest §E.10)
@@ -793,3 +794,4 @@ EGA-D15.09 VESKA: "She'll be here tomorrow. So will I."
 | Canon anchors (Part 4 ledger) | Yorven's Council seat used as District Overseer only; Durnan, Vael, Ralenne and Kaevren speak within their offices; no new ages, kin, service or custody beyond the item's quest-defined removal. |
 | Reserved decisions | Every `[D-E2]` and `[D-S1]` node tagged and listed in the header; swap notes in quest §14.1–§14.2. |
 | Plain-language pass | Long sentences split; no line explains the thaw lines; the letter checked line by line against the never-lies rule. |
+| Independent review, 2026-11-14 | `EGA-D11.58` chalk now *Someone was held below on this heat.* (the number removed, D-C06); `EGA-D11.80`/`.81` no longer cite the lower-forge night or place the draw under it (Yorven's limit, `kept` branch, D-C03); `EGA-B10.16` no longer claims heat was drawn at the lower forge; `EGA-D10.31` pronouns made consistent (he); "Old Dace" renamed Old Ketta (Lowmark collision); "Council grey", "amber wax" and "Thornfell dust" removed (no invented colours; no interregional implication); `EGA-B5.12` added (the boss's 65% floor called aloud); the bleed-house tell change on turning the wheel added; terraces shutters sightline marked MAP VERIFICATION REQUIRED. |
