@@ -168,6 +168,14 @@ The settings shape is an optional `construction_overrides` object with optional 
 
 Resolve treatment and stock together against role, host and geometry constraints, then apply preparation, condition and finish. Use stable component IDs and named seed streams so a paint or patina change cannot reroll the assembly or layout. Keep `use_grammar`, manual dimensions, `world_aware`, roof style, `crafted_curves`, `seed_massing`, detail and `SOLID`/`EFFICIENT` behavior on the paths that already support them. In World mode, preserve the zone's control of roof form and eaves.
 
+### Material-driven exterior relief
+
+The Blender-only **Material Height Relief** option routes an explicitly assigned scene finish on supported roof coverings, board enclosure and exposed masonry to a mapped visual field. The field is distinct from the construction envelope, opening cuts, structure and collision. Its source UV follows the roof course and slope or the wall tangent and elevation in metres. With no compatible height, the field remains flat and keeps the assigned shader. This path does not emit the older modeled surface units or the old construction relief atlas for that field. Reed and iron keep their specialized construction.
+
+The material resolver accepts a scalar Non-Color image from a compatible object-space Displacement node, a uniquely named Height image node, a matching companion file or an explicit material image reference. Material-local parameters can provide the vertical span and neutral datum. Supported UV transforms are reproduced for sampling. Faces are resampled in planar, UV-continuous charts and displaced along their normals. The exterior cuts, chart borders and adjoining construction are pinned. A mixed-material section or unresolved graph reports an actionable flat result. The setting, resolution and strength live in the Blender snapshot. Protected sections keep their existing edits and modifiers.
+
+The visual GLB contains evaluated triangles under the same section identities. The Unity importer can replace mesh content and a compatible single material slot while keeping the established placement, references, floor metadata and collision. Enabling the mapped-field mode on an existing modeled building can change its section layout and is an explicit authoring migration.
+
 ### Regional defaults and review fixtures
 
 These are mappings of working art direction against the four dossiers. They do not establish material supply, trade or new regional canon.

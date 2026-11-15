@@ -1,0 +1,134 @@
+{
+  "scene_sha256": "911c3d83e5f3ca3a3633619bfa0f3fe2dd7a78407c72926abc082ef0db0f5154",
+  "blender": "5.0.1",
+  "cases": {
+    "flat": {
+      "fields": {},
+      "glb": {
+        "bytes": 12621592,
+        "triangles": 8464,
+        "vertex_records": 15616,
+        "renderers": 27,
+        "primitives": 27,
+        "materials": 10,
+        "textures": 27,
+        "images": 24
+      },
+      "collision_sha256": "8f6724b918fc1c674ae066883f5c7f36a58bec9e49a8224ff8bebbcb37ef6a85"
+    },
+    "relief": {
+      "fields": {
+        "world_lowmark.lowmark_main_hall.facade_board_skin::floor:lowmark_main_hall:0": {
+          "material": "worn_wood_planks",
+          "resolution": [
+            1024,
+            1024
+          ],
+          "height_hash": "98e4ecc66fb627acbc311f0115a9332bca4759b39b0e8e055d8f848f63c91ca6",
+          "max_lift_mm": 2.7715712785720825,
+          "boundary_vertices": 2038,
+          "max_uv_error": 7.152557373046875e-07,
+          "uv_repeat_per_metre": 0.46,
+          "mesh_hash": "d6c9aedcd6258242447e62adeaeb2737493b0d275a1164cfe9cdb66626350170"
+        },
+        "world_lowmark.lowmark_main_hall.facade_board_skin::floor:lowmark_main_hall:1": {
+          "material": "worn_wood_planks",
+          "resolution": [
+            1024,
+            1024
+          ],
+          "height_hash": "98e4ecc66fb627acbc311f0115a9332bca4759b39b0e8e055d8f848f63c91ca6",
+          "max_lift_mm": 2.5677531957626343,
+          "boundary_vertices": 580,
+          "max_uv_error": 4.76837158203125e-07,
+          "uv_repeat_per_metre": 0.46,
+          "mesh_hash": "8f93c776b44ad10d12d042d9bc10dd1feb51d54ca1e853c42dbca0689dc0fa66"
+        },
+        "world_lowmark.lowmark_main_hall.Mapped roof field::covering": {
+          "material": "medieval_wood_shingle_roof",
+          "resolution": [
+            1024,
+            1024
+          ],
+          "height_hash": "f03adc516c3d024db248d501d0aa6aea9e4773ecabd64ced1fdc6c15eff9c6a1",
+          "max_lift_mm": 15.304512344300747,
+          "boundary_vertices": 1040,
+          "max_uv_error": 0.0,
+          "uv_repeat_per_metre": 1.0,
+          "mesh_hash": "f814bbb5df675c2ba1190ea229e638a3647e3dff5c46b39134f2005dfbd14300"
+        }
+      },
+      "glb": {
+        "bytes": 17685924,
+        "triangles": 130838,
+        "vertex_records": 79288,
+        "renderers": 27,
+        "primitives": 27,
+        "materials": 10,
+        "textures": 27,
+        "images": 24
+      },
+      "collision_sha256": "8f6724b918fc1c674ae066883f5c7f36a58bec9e49a8224ff8bebbcb37ef6a85"
+    },
+    "remapped": {
+      "fields": {
+        "world_lowmark.lowmark_main_hall.facade_board_skin::floor:lowmark_main_hall:0": {
+          "material": "aged_birch_wood",
+          "resolution": [
+            1024,
+            1024
+          ],
+          "height_hash": "8ff640a28148c580a880921cea1d7dd4a29859e6ee6e461271c0b4d61da472b1",
+          "max_lift_mm": 3.6268234252929688,
+          "boundary_vertices": 2038,
+          "max_uv_error": 9.5367431640625e-07,
+          "uv_repeat_per_metre": 1.0,
+          "mesh_hash": "9a6a8fecd86900bf3677f5e4af8e0e5a5dd6e33f2786936cbe28a902c0e7103d"
+        },
+        "world_lowmark.lowmark_main_hall.facade_board_skin::floor:lowmark_main_hall:1": {
+          "material": "aged_birch_wood",
+          "resolution": [
+            1024,
+            1024
+          ],
+          "height_hash": "8ff640a28148c580a880921cea1d7dd4a29859e6ee6e461271c0b4d61da472b1",
+          "max_lift_mm": 3.626428544521332,
+          "boundary_vertices": 580,
+          "max_uv_error": 4.76837158203125e-07,
+          "uv_repeat_per_metre": 1.0,
+          "mesh_hash": "3995b74d6a92772427ade5cebdc0503d8ccb818e67f1f652d6dd266cd5445cbd"
+        },
+        "world_lowmark.lowmark_main_hall.Mapped roof field::covering": {
+          "material": "medieval_wood_shingle_roof",
+          "resolution": [
+            1024,
+            1024
+          ],
+          "height_hash": "f03adc516c3d024db248d501d0aa6aea9e4773ecabd64ced1fdc6c15eff9c6a1",
+          "max_lift_mm": 15.304512344300747,
+          "boundary_vertices": 1040,
+          "max_uv_error": 0.0,
+          "uv_repeat_per_metre": 1.0,
+          "mesh_hash": "f814bbb5df675c2ba1190ea229e638a3647e3dff5c46b39134f2005dfbd14300"
+        }
+      },
+      "glb": {
+        "bytes": 18137448,
+        "triangles": 130838,
+        "vertex_records": 79288,
+        "renderers": 27,
+        "primitives": 27,
+        "materials": 10,
+        "textures": 27,
+        "images": 24
+      },
+      "collision_sha256": "8f6724b918fc1c674ae066883f5c7f36a58bec9e49a8224ff8bebbcb37ef6a85"
+    }
+  },
+  "save_reopen_regenerate_and_reimport": true,
+  "max_replay_delta_metres": {
+    "world_lowmark.lowmark_main_hall.facade_board_skin::floor:lowmark_main_hall:0": 4.76837158203125e-07,
+    "world_lowmark.lowmark_main_hall.facade_board_skin::floor:lowmark_main_hall:1": 6.817281246185303e-07,
+    "world_lowmark.lowmark_main_hall.Mapped roof field::covering": 0.0
+  }
+}

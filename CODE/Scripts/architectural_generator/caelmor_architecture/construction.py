@@ -143,6 +143,12 @@ def component(plan, slot, role, treatment, **constraints):
     return spec
 
 
+def uses_material_field(plan, spec):
+    """Artist-mapped exterior finish with the construction envelope retained."""
+    return bool(plan.settings.material_relief and spec and spec.finish
+                and spec.finish.startswith('material:'))
+
+
 def bind(spec, *buffers):
     for buffer in buffers:
         buffer.construction = spec

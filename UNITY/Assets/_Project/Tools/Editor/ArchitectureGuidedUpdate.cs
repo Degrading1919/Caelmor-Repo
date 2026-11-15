@@ -48,9 +48,9 @@ namespace Caelmor.Unity.Editor
             return source != null && GuidePart.Match(source) is Match { Success: true } match ? match.Groups[1].Value : null;
         }
 
-        static GuidedUpdate PlanGuidedUpdate(ArchitectureImportRecord previous, Container visual, Container collision, JObject sidecar, string directory)
+        static PrefabUpdate PlanGuidedUpdate(ArchitectureImportRecord previous, Container priorVisual, Container visual, Container collision,
+            JObject sidecar, string directory)
         {
-            var priorVisual = Container.Read(directory + "/visual.glb");
             // Once a placement has been reconciled, its saved names remain authoritative even after the last guide is removed.
             if (previous.compatibilitySignature?.StartsWith(GuidedSignatureTag, StringComparison.Ordinal) != true &&
                 !priorVisual.Json["nodes"].Concat(visual.Json["nodes"]).Any(n => GuideId(n["extras"]) != null)) return null;
@@ -67,11 +67,10 @@ namespace Caelmor.Unity.Editor
             foreach (string field in new[] { "architecture", "functional_program", "floor_presentation", "units", "up_axis" })
                 Require(JToken.DeepEquals(priorSidecar[field], sidecar[field]), "Guided update changed " + field + "." + Reconcile);
             Require(JToken.DeepEquals(Without(priorSidecar["anchor"], "name"), Without(sidecar["anchor"], "name")), "Guided update moved or changed the building anchor." + Reconcile);
-            JArray ZoneLayout(JToken values) => new JArray(values.Select(z => Without(z, "triangles", "vertices")));
             Require(JToken.DeepEquals(ZoneLayout(priorSidecar["construction_zones"]), ZoneLayout(sidecar["construction_zones"])),
                 "Guided update changed the construction-zone layout." + Reconcile);
-            var before = new GuidedShape(priorVisual.Json, priorCollision.Json, priorSidecar, building);
-            var after = new GuidedShape(visual.Json, collision.Json, sidecar, building);
+            var before = new PrefabSourceShape(priorVisual.Json, priorCollision.Json, priorSidecar, building, true);
+            var after = new PrefabSourceShape(visual.Json, collision.Json, sidecar, building, true);
             var retiredComponents = before.Visual.Values.Where(s => s.Guide != null).Select(s => s.Guide)
                 .Except(after.Visual.Values.Select(s => s.Guide)).SelectMany(id => new[] { "frame", "leaf", "shutters" }
                     .Select(part => "lowmark_main_hall/guide." + id + "." + part)).ToHashSet();
@@ -82,75 +81,106 @@ namespace Caelmor.Unity.Editor
                 if (!components.Properties().Any()) overrides.Remove("by_component");
             }
             Require(JToken.DeepEquals(priorSettings, sidecar["settings"]), "Guided update changed the exported generation settings." + Reconcile);
-            CompareSections(before.Visual, after.Visual);
-            CompareSections(before.Collision, after.Collision);
-            return new GuidedUpdate(previous, directory, before, after);
+            return ReconcilePrefab(previous, directory, before, after, true);
+        }
+
+        static PrefabUpdate PlanFixedTopologyUpdate(ArchitectureImportRecord previous, Container priorVisual, Container visual,
+            Container collision, JObject sidecar, string directory, string collisionHash)
+        {
+            // The original signature included glTF array indexes. The owned copies still contain
+            // everything needed to compare the actual sections without changing old records.
+            Require(previous.collisionHash == collisionHash, "Fixed-topology update changed the collision export." + Reconcile);
+            var priorSidecar = JObject.Parse(File.ReadAllText(directory + "/source.caelmor.json"));
+            foreach (string field in new[] { "architecture", "settings", "functional_program", "floor_presentation", "units", "up_axis", "anchor" })
+                Require(JToken.DeepEquals(priorSidecar[field], sidecar[field]), "Fixed-topology update changed " + field + "." + Reconcile);
+            Require(JToken.DeepEquals(ZoneLayout(priorSidecar["construction_zones"]), ZoneLayout(sidecar["construction_zones"])),
+                "Fixed-topology update changed the construction-zone layout." + Reconcile);
+            var before = new PrefabSourceShape(priorVisual.Json, collision.Json, priorSidecar, previous.buildingId, false);
+            var after = new PrefabSourceShape(visual.Json, collision.Json, sidecar, previous.buildingId, false);
+            return ReconcilePrefab(previous, directory, before, after, false);
         }
 
         static JObject Without(JToken token, params string[] keys) =>
             token is JObject obj ? new JObject(obj.Properties().Where(p => !keys.Contains(p.Name)).Select(p => p.DeepClone())) : null;
 
-        sealed class GuidedSection
+        static JArray ZoneLayout(JToken token) =>
+            token is JArray zones ? new JArray(zones.Select(z => Without(z, "triangles", "vertices"))) : null;
+
+        sealed class ExportSection
         {
             public string Key, Name, Parent, Guide;
             public JToken Contract;
             public bool HasMesh;
         }
 
-        sealed class GuidedShape
+        sealed class PrefabSourceShape
         {
-            public readonly Dictionary<string, GuidedSection> Visual, Collision;
+            public readonly Dictionary<string, ExportSection> Visual, Collision;
 
-            public GuidedShape(JObject visual, JObject collision, JObject sidecar, string building)
+            public PrefabSourceShape(JObject visual, JObject collision, JObject sidecar, string building, bool guided)
             {
                 var objects = ((JArray)sidecar["objects"]).ToDictionary(o => Text(o, "name"));
-                Visual = Read(visual, objects, building);
-                Collision = Read(collision, null, building);
+                Visual = Read(visual, objects, building, guided);
+                Collision = Read(collision, null, building, guided);
                 var guides = Visual.Values.Where(s => s.Guide != null).Select(s => s.Guide).ToHashSet();
                 Require(Collision.Values.All(s => s.Guide == null || guides.Contains(s.Guide)), "An approach collider does not match an exported opening guide." + Reconcile);
                 Require(Visual.Values.Count(s => s.HasMesh) == objects.Count && Collision.Values.Count(s => s.HasMesh) == (int)sidecar["collision"]["object_count"],
-                    "Guided update GLBs and sidecar section counts disagree." + Reconcile);
+                    "The GLBs and sidecar section counts disagree." + Reconcile);
             }
 
-            static Dictionary<string, GuidedSection> Read(JObject glb, Dictionary<string, JToken> objects, string building)
+            static Dictionary<string, ExportSection> Read(JObject glb, Dictionary<string, JToken> objects, string building, bool guided)
             {
                 bool visual = objects != null;
                 var nodes = (JArray)glb["nodes"];
                 int root = (int)glb["scenes"][0]["nodes"][0];
-                string Key(JToken n) => visual ? VisualKey(n["extras"], Text(n, "name")) :
-                    (n == nodes[root] ? "anchor" : CollisionKey(Text(n, "name"), n["extras"]));
+                string Key(JToken n)
+                {
+                    string name = Text(n, "name");
+                    if (!guided) return name;
+                    return visual ? VisualKey(n["extras"], name) : n == nodes[root] ? "anchor" : CollisionKey(name, n["extras"]);
+                }
                 var parents = new Dictionary<int, string>();
                 foreach (var node in nodes)
                     foreach (int child in node["children"] ?? new JArray())
                     {
-                        Require(child >= 0 && child < nodes.Count && !parents.ContainsKey(child), "Guided GLB hierarchy is ambiguous." + Reconcile);
+                        Require(child >= 0 && child < nodes.Count && !parents.ContainsKey(child), "The GLB hierarchy is ambiguous." + Reconcile);
                         parents.Add(child, Key(node));
                     }
-                Require(Key(nodes[root]) == "anchor" && Text(nodes[root]["extras"], "caelm_building_id") == building &&
-                    parents.Count == nodes.Count - 1 && !parents.ContainsKey(root),
-                    "Guided GLB does not have one authored building root." + Reconcile);
-                var sections = new Dictionary<string, GuidedSection>();
+                Require(parents.Count == nodes.Count - 1 && !parents.ContainsKey(root), "The GLB does not have one building root." + Reconcile);
+                Require(!guided || Key(nodes[root]) == "anchor" && Text(nodes[root]["extras"], "caelm_building_id") == building,
+                    "Guided GLB does not have its declared authored building root." + Reconcile);
+                var sections = new Dictionary<string, ExportSection>();
                 for (int i = 0; i < nodes.Count; i++)
                 {
                     var node = nodes[i];
                     var extras = node["extras"];
                     string name = Text(node, "name"), key = Key(node);
                     bool hasMesh = node["mesh"] != null;
-                    string guide = visual ? GuideId(extras) :
+                    string guide = null;
+                    if (guided) guide = visual ? GuideId(extras) :
                         key.StartsWith("Collider Approach ", StringComparison.Ordinal) && CollisionName.IsMatch(key) ? key.Substring("Collider Approach ".Length) : null;
-                    Require(!sections.ContainsKey(key), "Guided update cannot match duplicate stable section " + key + "." + Reconcile);
-                    Require(!visual || !hasMesh || key.StartsWith("section:", StringComparison.Ordinal) && objects.ContainsKey(name),
-                        "Guided update needs stable visual buffer metadata for " + name + "." + Reconcile);
-                    Require(!visual || Text(extras, "caelm_building_id") == building, "Visual section " + key + " belongs to a different building." + Reconcile);
-                    Require(!visual || !(Text(extras, "caelm_source_buffer_id") ?? name).StartsWith(GuidedPrefix, StringComparison.Ordinal) || guide != null,
+                    Require(!sections.ContainsKey(key), "Update cannot match duplicate stable section " + key + "." + Reconcile);
+                    Require(!visual || !hasMesh || objects.ContainsKey(name) && (!guided || key.StartsWith("section:", StringComparison.Ordinal)),
+                        "Update needs consistent visual buffer metadata for " + name + "." + Reconcile);
+                    Require(!guided || !visual || Text(extras, "caelm_building_id") == building, "Visual section " + key + " belongs to a different building." + Reconcile);
+                    Require(!guided || !visual || !(Text(extras, "caelm_source_buffer_id") ?? name).StartsWith(GuidedPrefix, StringComparison.Ordinal) || guide != null,
                         "Guided section " + key + " has no stable guide ID." + Reconcile);
+                    var metadata = Without(extras, "caelm_floor_min", "caelm_floor_max", "caelm_collider_id",
+                        "caelm_build_id", "caelm_component_source_hash", "caelm_surface_material", "caelm_surface_fingerprint");
+                    if (!guided && metadata != null)
+                    {
+                        // Relief status is Blender UI text, and an assigned material may change within its existing slot.
+                        metadata.Remove("caelm_relief_status");
+                        if (Text(metadata, "caelm_finish")?.StartsWith("material:", StringComparison.Ordinal) == true)
+                            metadata.Remove("caelm_finish");
+                    }
                     var contract = new JObject
                     {
-                        ["metadata"] = Without(extras, "caelm_floor_min", "caelm_floor_max", "caelm_collider_id",
-                            "caelm_build_id", "caelm_component_source_hash", "caelm_surface_material", "caelm_surface_fingerprint"),
+                        ["metadata"] = metadata,
+                        ["children"] = guided ? null : new JArray((node["children"] ?? new JArray()).Select(child => Key(nodes[(int)child]))),
                         ["transform"] = guide != null && visual ? null : new JObject(new[] { "translation", "rotation", "scale", "matrix" }
                             .Where(k => node[k] != null).Select(k => new JProperty(k, node[k]))),
-                        ["slots"] = hasMesh ? MeshSlots(glb, node, visual) : null
+                        ["slots"] = hasMesh ? MeshSlots(glb, node, visual, guided) : null
                     };
                     if (visual && hasMesh)
                     {
@@ -168,14 +198,23 @@ namespace Caelmor.Unity.Editor
                                 "Guided section " + key + " is outside the supported host or is protected in Blender." + Reconcile);
                         }
                     }
-                    sections.Add(key, new GuidedSection { Key = key, Name = name, HasMesh = hasMesh, Parent = parents.GetValueOrDefault(i), Guide = guide, Contract = contract });
+                    sections.Add(key, new ExportSection { Key = key, Name = name, HasMesh = hasMesh, Parent = parents.GetValueOrDefault(i), Guide = guide, Contract = contract });
                 }
                 return sections;
             }
 
-            static JArray MeshSlots(JObject glb, JToken node, bool visual)
+            static JArray MeshSlots(JObject glb, JToken node, bool visual, bool guided)
             {
                 var primitives = (JArray)glb["meshes"][(int)node["mesh"]]["primitives"];
+                string MaterialName(JToken primitive) => primitive["material"] == null
+                    ? null : Text(glb["materials"][(int)primitive["material"]], "name");
+                bool namedSlots = visual && primitives.Count > 1;
+                if (namedSlots && !guided)
+                {
+                    var labels = primitives.Select(MaterialName).ToArray();
+                    Require(labels.All(l => !string.IsNullOrWhiteSpace(l)) && labels.Distinct().Count() == labels.Length,
+                        "Fixed-topology update cannot match ambiguous material slots of " + Text(node, "name") + "." + Reconcile);
+                }
                 return new JArray(primitives.Select(p => new JObject
                 {
                     ["attributes"] = new JObject(((JObject)p["attributes"]).Properties().Select(a =>
@@ -183,13 +222,20 @@ namespace Caelmor.Unity.Editor
                         JToken accessor = glb["accessors"][(int)a.Value];
                         return new JProperty(a.Name, new JArray(accessor["type"], accessor["componentType"], (bool?)accessor["normalized"] ?? false));
                     })),
-                    // Blender exports one generated palette slot per section. Numeric material/texture indices and baked maps are allowed to change.
-                    ["material"] = visual && primitives.Count > 1 && p["material"] != null ? Text(glb["materials"][(int)p["material"]], "name") : null
+                    // A single slot takes its identity from the section. Multiple slots need named identities in order.
+                    ["material"] = namedSlots ? MaterialName(p) : null
                 }));
             }
         }
 
-        static void CompareSections(Dictionary<string, GuidedSection> before, Dictionary<string, GuidedSection> after)
+        static PrefabUpdate ReconcilePrefab(ArchitectureImportRecord previous, string directory, PrefabSourceShape before, PrefabSourceShape after, bool guided)
+        {
+            CompareSections(before.Visual, after.Visual);
+            CompareSections(before.Collision, after.Collision);
+            return new PrefabUpdate(previous, directory, before, after, guided);
+        }
+
+        static void CompareSections(Dictionary<string, ExportSection> before, Dictionary<string, ExportSection> after)
         {
             foreach (string key in before.Keys.Union(after.Keys))
             {
@@ -198,13 +244,13 @@ namespace Caelmor.Unity.Editor
                 if (old == null || updated == null)
                 {
                     var section = old ?? updated;
-                    Require(section.HasMesh && section.Guide != null, "Guided update added, removed, or renamed a section outside the guides: " + key + "." + Reconcile);
+                    Require(section.HasMesh && section.Guide != null, "Update added, removed, or renamed a section outside the guides: " + key + "." + Reconcile);
                     continue;
                 }
                 Require(old.Parent == updated.Parent && old.Guide == updated.Guide && old.HasMesh == updated.HasMesh,
-                    "Guided update changed hierarchy or ownership of " + key + "." + Reconcile);
+                    "Update changed hierarchy or ownership of " + key + "." + Reconcile);
                 Require(JToken.DeepEquals(old.Contract, updated.Contract),
-                    "Guided update changed the section/material slot contract of " + key + "." + Reconcile);
+                    "Update changed the section/material slot contract of " + key + "." + Reconcile);
             }
         }
 
@@ -344,22 +390,24 @@ namespace Caelmor.Unity.Editor
             }
         }
 
-        sealed class GuidedUpdate
+        sealed class PrefabUpdate
         {
             readonly ArchitectureImportRecord previous;
             readonly string directory;
-            readonly Dictionary<string, GuidedSection> visualByName, collisionByName;
+            readonly Dictionary<string, ExportSection> visualByName, collisionByName;
             readonly Dictionary<string, GameObject> oldPrefab;
             readonly Dictionary<string, string> meshPaths = new Dictionary<string, string>();
             readonly Dictionary<string, string[]> stableIds = new Dictionary<string, string[]>();
             readonly string[] retiredMeshPaths;
+            public bool UsesGuideIdentities { get; }
             public IEnumerable<string> PreviousSharedPaths => previous.ownedFiles.Select(f => f.path)
                 .Where(p => !p.EndsWith(".meta", StringComparison.Ordinal) && !p.StartsWith(directory + "/", StringComparison.Ordinal));
 
-            public GuidedUpdate(ArchitectureImportRecord previous, string directory, GuidedShape before, GuidedShape after)
+            public PrefabUpdate(ArchitectureImportRecord previous, string directory, PrefabSourceShape before, PrefabSourceShape after, bool guided)
             {
                 this.previous = previous;
                 this.directory = directory;
+                UsesGuideIdentities = guided;
                 var old = AssetDatabase.LoadAssetAtPath<GameObject>(previous.generatedPrefab);
                 Require(old != null, "The generated prefab is missing. Recover it before reimport.");
                 oldPrefab = PrefabSections(old);
@@ -380,10 +428,10 @@ namespace Caelmor.Unity.Editor
                 VerifyAuthorReferences(previous, retired, retiredMeshPaths, directory);
             }
 
-            static IEnumerable<string> PrefabKeys(GuidedShape shape) => new[] { "prefab", "visual", "collision" }
+            static IEnumerable<string> PrefabKeys(PrefabSourceShape shape) => new[] { "prefab", "visual", "collision" }
                 .Concat(shape.Visual.Keys.Select(k => "visual:" + k)).Concat(shape.Collision.Keys.Select(k => "collision:" + k));
 
-            static Dictionary<string, GameObject> PrefabSections(GameObject root)
+            Dictionary<string, GameObject> PrefabSections(GameObject root)
             {
                 Require(root.transform.childCount == 2, "Expected the generated visual and collision branches." + Reconcile);
                 var collision = root.transform.Cast<Transform>().SingleOrDefault(t => t.name == CollisionPrefix + "Collision (generated)");
@@ -396,12 +444,14 @@ namespace Caelmor.Unity.Editor
                     result.Add(key, obj);
                 }
                 foreach (var id in visual.GetComponentsInChildren<ArchitectureIdentity>(true))
-                    Add("visual:" + VisualKey(JObject.Parse(id.sourceMetadata), id.name), id.gameObject);
+                    Add("visual:" + (UsesGuideIdentities ? VisualKey(JObject.Parse(id.sourceMetadata), id.name) : id.name), id.gameObject);
                 Require(collision.childCount == 1, "Generated collision root no longer matches the source hierarchy." + Reconcile);
                 foreach (var t in collision.GetComponentsInChildren<Transform>(true).Where(t => t != collision))
                 {
                     Require(t.name.StartsWith(CollisionPrefix, StringComparison.Ordinal), "Owned collision name cannot be matched: " + t.name + "." + Reconcile);
-                    Add(t == collision.GetChild(0) ? "collision:anchor" : "collision:" + CollisionKey(t.name.Substring(CollisionPrefix.Length)), t.gameObject);
+                    string name = t.name.Substring(CollisionPrefix.Length);
+                    string key = UsesGuideIdentities ? t == collision.GetChild(0) ? "anchor" : CollisionKey(name) : name;
+                    Add("collision:" + key, t.gameObject);
                 }
                 return result;
             }
@@ -419,7 +469,7 @@ namespace Caelmor.Unity.Editor
                     previous.ownedFiles.Any(f => f.path == path) && previous.ownedFiles.Any(f => f.path == path + ".meta"),
                     "Expected an owned, per-building prepared mesh at " + path + "." + Reconcile);
 
-            void PlanMesh(string branch, GuidedSection section)
+            void PlanMesh(string branch, ExportSection section)
             {
                 string logicalId = branch + section.Key;
                 string path;

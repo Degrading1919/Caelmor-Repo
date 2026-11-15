@@ -1,6 +1,6 @@
 # Caelmor Architectural Generator
 
-Version 0.20.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. An isolated, opt-in Unity client floor-presentation adapter accompanies floor-aware exports; it is not wired into the playable scene.
+Version 0.21.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. An isolated, opt-in Unity client floor-presentation adapter accompanies floor-aware exports; it is not wired into the playable scene.
 
 New buildings have floor-separated visuals by default. Select a building, set
 **Simulated floor** (0 = ground, −1 = exterior), choose its **Construction volume**
@@ -434,3 +434,11 @@ World construction derives mass placement and roof shapes from the region; unuse
 ## License and original assets
 
 The add-on source is GPL-3.0-or-later; the complete license is included as `caelmor_architecture/LICENSE`. Redistributing or modifying the add-on source requires following the GPL terms and preserving the applicable notices. Procedural material maps and generated geometry are original project assets created by this tool; no downloaded textures, prefab library, or third-party mesh assets are included. Generated GLB/glTF files and manifests are output artifacts and do not contain the add-on source code.
+
+## Material height relief
+
+For an authored finish, enable **Geometry → Material Height Relief**, then use **Materials → Scene Material** to assign it to Roof Covering, boarded Frame Enclosure, or exposed Masonry Wall Body. Stage the finish and use **Generate** or **Regenerate All**. A compatible height source is discovered from the material and applied as editable Blender modifiers. Select the generated field to see its height source or flat-fallback reason in Geometry.
+
+Use **Relief Subdivision** to change sampling density and **Relief Strength** to scale depth. Strength zero provides a flat mapped comparison. The material's **Height Image Override**, **Height Span (m)** and **Neutral Height** are optional persistent authoring controls. For Substance materials, enable or export the height channel from the same graph and preset as the visible channels. A matching sibling such as `stock_height.png` beside `stock_basecolor.png` resolves automatically. Non-Color, unit-range height data and shared UV mapping are required.
+
+[Actual Substance material validation](evidence/assigned_relief/README.md)

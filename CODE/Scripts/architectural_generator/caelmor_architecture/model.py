@@ -42,8 +42,14 @@ class Settings:
     # Saved pre-floor scenes explicitly migrate to False in the Blender loader.
     floor_separation: bool = True
     fit_blockout: bool = False
+    material_relief: bool = False
+    relief_resolution: int = 0
+    relief_strength: float = 1.0
 
     def check(self, validate_shape=True):
+        if (not isinstance(self.material_relief, bool) or type(self.relief_resolution) is not int
+                or self.relief_resolution not in (0, 1, 2) or not 0 <= self.relief_strength <= 2):
+            raise ValueError('Material relief requires sampling level 0–2 and strength multiplier 0–2')
         if not isinstance(self.floor_separation, bool):
             raise ValueError('Floor separation must be boolean')
         if not isinstance(self.fit_blockout, bool):

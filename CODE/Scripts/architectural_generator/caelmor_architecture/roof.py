@@ -404,7 +404,7 @@ def _iron_cover(plan,patches,efficient):
     return panels,folds
 
 
-def _roof_field(buffer, plan, patches, cover, clearances):
+def _roof_field(buffer, plan, patches, cover, clearances, *, metric=False):
     # Follow the same across-slope and upslope axes and course gauge as the
     # constructed units. The coordinates stay continuous across sweep patches.
     scale={'SHINGLE':1.,'SLATE':1.1,'CLAY':1.15}[cover]
@@ -424,8 +424,13 @@ def _roof_field(buffer, plan, patches, cover, clearances):
         eave=rect[axis]-plan.settings.overhang if direction>0 else rect[axis+2]+plan.settings.overhang
         u0=rect[across]-plan.settings.overhang
         phase=plan.rng(f'roof.mapped.phase.{patch.source}.{direction}').randrange(4)
-        uv=[((p[across]-u0)/width/4+phase/4,
-             (direction*(p[axis]-eave)/course)/4) for p in poly]
+        if metric:
+            rise = math.hypot(1., patch.plane[axis])
+            uv = [((p[across]-u0)*direction*(1 if across==0 else -1),
+                   direction*(p[axis]-eave)*rise) for p in poly]
+        else:
+            uv=[((p[across]-u0)/width/4+phase/4,
+                 (direction*(p[axis]-eave)/course)/4) for p in poly]
         buffer.mapped_face([(x,y,patch.height(x,y)+offset) for x,y in poly],uv)
 
 
@@ -488,19 +493,21 @@ def build_roof(plan):
     if efficient:
         for buffer in tiles.values(): buffer.topology='SURFACE'
     mode=cover_spec.representation if cover_spec else None
-    mapped=mode in ('HYBRID','TEXTURE')
+    from .construction import uses_material_field
+    artist_field=cover in ('SHINGLE','SLATE','CLAY') and uses_material_field(plan,cover_spec)
+    mapped=artist_field or mode in ('HYBRID','TEXTURE')
     field=MeshBuffer('Mapped roof field','roof','roof',topology='SURFACE')
     boundaries=[]
     custom_cover=None
     if mapped:
         bind(cover_spec,field)
-        field.field_family=cover.lower()
+        field.field_family='artist' if artist_field else cover.lower()
         field.field_source=tiles['roof'].name
         field.field_peers=tuple(b.name for b in tiles.values())+('Concealed roof course bedding',)
         if hasattr(plan, 'roof_cover_builder'):
             custom_cover = plan.roof_cover_builder(plan, patches, (points, faces, edges), cover_spec)
         else:
-            _roof_field(field,plan,patches,cover,_valley_clearances(points,patches,edges))
+            _roof_field(field,plan,patches,cover,_valley_clearances(points,patches,edges),metric=artist_field)
         for (i,j),users in edges.items():
             kind=roof_join_kind(points,patches,users)
             if kind in ('edge','ridge','valley') and math.dist(points[i][:2],points[j][:2])>.01:
@@ -512,7 +519,7 @@ def build_roof(plan):
     metal=[]
     if cover=='IRON':
         metal=list(_iron_cover(plan,patches,efficient))
-    elif custom_cover is None:
+    elif custom_cover is None and not artist_field:
         for shingle in shingle_layout(plan,patches,(points,faces,edges)):
             if not mapped or _keep_exposed_cover(shingle,boundaries,mode):
                 _build_cover_piece(tiles[shingle.material],shingle,cover,efficient,detail=plan.settings.detail)

@@ -510,9 +510,11 @@ def _cladding_tiles(plan, edge_index, edge, openings, construction, buffer, fiel
                 {'LOW':.54,'MEDIUM':.38,'HIGH':.30})[detail]
         phase=plan.rng(f'facade.mapped.phase.{edge_index}').randrange(4)/4
         wall=[(0,bottom),(length,bottom),(length,roof_max),(0,roof_max)]
+        artist = field.field_family=='artist'
+        grid = (1.,1.,bottom,0.) if artist else (width*4,height*4,bottom,phase)
         _emit_clipped_skin_tile(plan,edge_index,edge,profile,openings,field,wall,False,
-                                outward=.015,field_grid=(width*4,height*4,bottom,phase))
-        if mode=='TEXTURE':
+                                outward=.038 if artist else .015,field_grid=grid)
+        if artist or mode=='TEXTURE':
             return
     # Low-detail faces remain broad and let the material normal carry fine grain.
     if construction=="RUBBLE":
@@ -1729,17 +1731,23 @@ def build_facades(plan):
     render = buffers.get('render_skin')
     coating = getattr(render, 'construction', None)
     body=getattr(plan,'masonry_body',None)
+    from .construction import uses_material_field
+    assembly = body or getattr(buffers.get('board_skin'), 'construction', None)
+    artist_field = ((construction=='BOARD' or construction in ('RUBBLE','ASHLAR') and not coating)
+                    and uses_material_field(plan,assembly))
     field=None
-    if body and body.representation in ('HYBRID','TEXTURE'):
-        if coating is not None:
+    if artist_field or body and body.representation in ('HYBRID','TEXTURE'):
+        if body and coating is not None:
             raise ValueError(f'{body.component_id}: mapped masonry requires an exposed stone body')
-        add('masonry_field', buffers['masonry_skin'].material, 'walls')
-        field=buffers['masonry_field']
+        name = 'board_skin' if construction=='BOARD' else 'masonry_field'
+        if name != 'board_skin':
+            add(name, buffers['masonry_skin'].material, 'walls')
+        field=buffers[name]
         field.topology='SURFACE'
-        field.field_family=('dressed' if body.treatment=='dressed_stone' else
+        field.field_family=('artist' if artist_field else 'dressed' if body.treatment=='dressed_stone' else
                             'level' if body.variant=='level_course' else 'rubble')
-        field.field_source=buffers['masonry_skin'].name
-        field.construction=body
+        field.field_source=buffers['board_skin' if name=='board_skin' else 'masonry_skin'].name
+        field.construction=assembly
     if coating and coating.component_role=='wall_surface' and coating.substrate=='limewash':
         # Zero-relief coat: the same faces carry the coating provenance and
         # plaster surface, while the wall component retains its physical stock.

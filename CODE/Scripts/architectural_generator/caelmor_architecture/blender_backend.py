@@ -24,6 +24,9 @@ def _settings_dict(settings):
         data.pop('construction_overrides',None)
     if not data.get('fit_blockout'):
         data.pop('fit_blockout', None)
+    if not data.get('material_relief'):
+        for key in ('material_relief','relief_resolution','relief_strength'):
+            data.pop(key,None)
     return data
 
 
@@ -128,6 +131,14 @@ def _mesh_object(buffer, cache, build_id, plan=None):
             raise ValueError(f'{buffer.name}: mapped surface has incomplete UVs')
         for item, uv in zip(field_uv.data,buffer.field_uv):
             item.uv=uv
+        if buffer.field_family=='artist':
+            from .material_relief import HEIGHT_UV
+            sampling = mesh.uv_layers.new(name=HEIGHT_UV, do_init=False)
+            metric = mesh.uv_layers['UV0_Metric']
+            angles = {None:(0,1,1,1),'90':(1,0,-1,1),'180':(0,1,-1,-1),'270':(1,0,1,-1)}
+            a,b,sa,sb = angles[rotation]
+            for i, uv in enumerate(buffer.field_uv):
+                metric.data[i].uv = sampling.data[i].uv = (uv[a]*sa,uv[b]*sb)
     # COLOR_0 carries deterministic environmental weathering into glTF/GLB.
     # Corner colors let adjacent faces retain their own exposure without changing geometry.
     tint_layer = mesh.color_attributes.new(name="CaelmorTint", type='FLOAT_COLOR', domain='CORNER')
@@ -374,6 +385,12 @@ def build(settings, collection=None, layers=None, origin=None, *, placement=None
     if isinstance(validation, dict) and not validation.get("valid", False):
         details = validation.get('errors') or ['geometry check failed']
         raise ValueError(f"Geometry validation failed: {details[0]}. The existing building was left unchanged")
+    # Height settings and finishes act on visual fields. When their source
+    # geometry and guide schedule are identical, keep the authored collider
+    # objects and their export provenance through the same-key update.
+    retain_collision = (collection is not None and old.get('material_relief') and settings.material_relief
+                        and not guide_change and placement is None
+                        and collection.get('caelm_source_geometry_hash') == validation['geometry_hash'])
     setting_data = _settings_dict(settings)
     scope = None
     if isinstance(layers, str) and layers.upper() != "ALL":
@@ -423,8 +440,10 @@ def build(settings, collection=None, layers=None, origin=None, *, placement=None
                 if o.get('caelm_field_source')}
     new_fields={b.field_source:b for b in buffers if b.field_source}
     changed_fields={key for key in old_fields.keys() | new_fields.keys()
-                    if (getattr(getattr(new_fields.get(key),'construction',None),'representation',None)
-                        != (old_fields[key].get('caelm_representation') if key in old_fields else None))}
+                    if ((new_fields[key].field_family,new_fields[key].construction.representation)
+                        if key in new_fields else None) !=
+                    ((old_fields[key].get('caelm_field_family'),old_fields[key].get('caelm_representation'))
+                        if key in old_fields else None)}
     if changed_fields:
         affected=set(changed_fields)
         for source in changed_fields:
@@ -501,7 +520,13 @@ def build(settings, collection=None, layers=None, origin=None, *, placement=None
                 elif key in overrides:
                     obj.data.materials.clear()
                     for material in overrides[key]: obj.data.materials.append(material)
-        if scope is None:
+        if settings.material_relief:
+            from .material_relief import apply as apply_material_relief
+            validated_images = set()
+            for obj in stage.objects:
+                if obj.get('caelm_field_family')=='artist':
+                    obj['caelm_relief_status'] = apply_material_relief(obj,settings,validated_images)
+        if scope is None and not retain_collision:
             for obj in _colliders(plan, build_id, buffers):
                 stage.objects.link(obj); obj.hide_set(True)
         if collection is None: collection = _new_collection("Caelmor Building")
@@ -512,6 +537,7 @@ def build(settings, collection=None, layers=None, origin=None, *, placement=None
             anchor.rotation_euler = (0., 0., angle)
             anchor.scale = (1., 1., 1.)
         old_generated = [obj for obj in collection.objects if obj.get(TAG) and not obj.get("caelm_protected")
+                         and not (retain_collision and obj.get('caelm_collider'))
                          and obj.get('caelm_source_buffer_id', obj.get('caelm_buffer_id')) not in keep_ids
                          and (scope is None or obj.get("caelm_layer") in scope)]
         staged = list(stage.objects)
@@ -675,6 +701,8 @@ def export_building(collection, filepath, *, construction_metadata=False):
         manifest['settings'].pop('construction_overrides', None)
     # Proxy links and fit bookkeeping belong to the Blender authoring scene.
     manifest['settings'].pop('fit_blockout', None)
+    for key in ('material_relief','relief_resolution','relief_strength'):
+        manifest['settings'].pop(key,None)
     if collection.get('caelm_floor_contract'):
         manifest['floor_presentation'] = {
             'version': 1, 'building_id': collection['caelm_building_id'],

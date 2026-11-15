@@ -2,7 +2,7 @@
 bl_info = {
     "name": "Caelmor Architectural Generator",
     "author": "Caelmor",
-    "version": (0, 20, 0),
+    "version": (0, 21, 0),
     "blender": (4, 2, 0),
     "location": "View3D > Sidebar > Caelmor",
     "description": "Generate editable regional Caelmor buildings",
@@ -82,6 +82,9 @@ def _settings_from_props(props):
         seed_massing=props.caelm_seed_massing,
         construction_overrides=overrides,
         fit_blockout=props.caelm_fit_blockout,
+        material_relief=props.caelm_material_relief,
+        relief_resolution=props.caelm_relief_resolution,
+        relief_strength=props.caelm_relief_strength,
     )
 
 
@@ -113,6 +116,9 @@ def _set_props(props, settings):
     props.caelm_crafted_curves = settings.crafted_curves
     props.caelm_seed_massing = settings.seed_massing
     props.caelm_fit_blockout = settings.fit_blockout
+    props.caelm_material_relief = settings.material_relief
+    props.caelm_relief_resolution = settings.relief_resolution
+    props.caelm_relief_strength = settings.relief_strength
     props.caelm_construction = settings.construction_overrides is not None
     original = settings.construction_overrides or {}
     props.caelm_construction_overrides = json.dumps(original, sort_keys=True)
@@ -261,6 +267,12 @@ def _make_classes(b):
         caelm_geometry_mode: b.props.EnumProperty(name="Geometry", items=[
             ('SOLID', "Solid", "Closed solids with full roof construction"),
             ('EFFICIENT', "Efficient", "Reduced hidden roof geometry")], default='SOLID')
+        caelm_material_relief: b.props.BoolProperty(name='Material Height Relief', default=False,
+            description='Use the chosen material height on mapped roof coverings and exposed wall fields. Missing height leaves a flat mapped surface')
+        caelm_relief_resolution: b.props.IntProperty(name='Relief Subdivision', default=0, min=0, max=2,
+            description='Simple subdivisions of the mapped surface, independent of relief strength')
+        caelm_relief_strength: b.props.FloatProperty(name='Relief Strength', default=1., min=0., max=2.,
+            description='Scale material relief depth. Zero shows the flat mapped surface. Regenerate to update')
         caelm_footprint: b.props.EnumProperty(name="Footprint", items=[
             ('RECT', "Rectangular", "Single rectangle"), ('L', "L", "Two joined wings"),
             ('T', "T", "Three joined wings"), ('U', "U", "Three sides around a court"),
@@ -691,6 +703,11 @@ def _make_classes(b):
                         materials.label(text=key or 'Select a generated component')
                         materials.prop(p, 'caelm_finish_rotation')
                     materials.prop(p, 'caelm_finish_material')
+                    if p.caelm_material_relief and p.caelm_finish_material:
+                        height = materials.box()
+                        height.prop(p.caelm_finish_material, 'caelm_height_image')
+                        height.prop(p.caelm_finish_material, 'caelm_height_span')
+                        height.prop(p.caelm_finish_material, 'caelm_height_neutral')
                     saved = json.loads(p.caelm_construction_overrides or '{}')
                     fields = saved.get(scope, {}).get(key, {})
                     finish = fields.get('finish', '')
@@ -755,6 +772,13 @@ def _make_classes(b):
             if geometry := section('Geometry', 'MESH_DATA', collapsed=True):
                 geometry.prop(p, 'caelm_geometry_mode')
                 geometry.prop(p, 'caelm_detail')
+                geometry.prop(p, 'caelm_material_relief')
+                if p.caelm_material_relief:
+                    geometry.prop(p, 'caelm_relief_resolution')
+                    geometry.prop(p, 'caelm_relief_strength')
+                    active = context.active_object
+                    if active and active.get('caelm_relief_status'):
+                        geometry.label(text=active['caelm_relief_status'])
                 if p.caelm_construction:
                     depth = geometry.column()
                     depth.enabled = p.caelm_geometry_mode == 'EFFICIENT'
@@ -816,10 +840,19 @@ def register():
         b.utils.register_class(cls)
     b.types.Scene.caelmor_settings = b.props.PointerProperty(type=_CLASSES[0])
     b.types.Scene.caelm_roof_settings = b.props.PointerProperty(type=RoofSettings)
+    b.types.Material.caelm_height_image = b.props.PointerProperty(name='Height Image Override', type=b.types.Image,
+        description='Optional scalar Non-Color image. Automatic reads a supported displacement node, a Height image node, or a matching companion file')
+    b.types.Material.caelm_height_span = b.props.FloatProperty(name='Height Span (m)', default=.025,
+        min=.0001, max=1., description='Metres per unit of image height, before the building strength multiplier and clearance limit. An untouched value inherits a linked Displacement scale')
+    b.types.Material.caelm_height_neutral = b.props.FloatProperty(name='Neutral Height', default=.5,
+        min=0., max=1., description='Image value at the original surface plane. An untouched value inherits a linked Displacement midlevel')
 
 
 def unregister():
     b = _bpy()
+    for name in ('caelm_height_image','caelm_height_span','caelm_height_neutral'):
+        if hasattr(b.types.Material,name):
+            delattr(b.types.Material,name)
     if hasattr(b.types.Scene, 'caelm_roof_settings'):
         del b.types.Scene.caelm_roof_settings
     if hasattr(b.types.Scene, "caelmor_settings"):

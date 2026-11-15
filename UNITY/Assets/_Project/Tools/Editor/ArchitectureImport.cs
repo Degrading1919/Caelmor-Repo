@@ -76,7 +76,7 @@ namespace Caelmor.Unity.Editor
             string bindingSignature = bindings == null ? "none" : Hash(Encoding.UTF8.GetBytes(JsonUtility.ToJson(bindings)));
             string sourceHash = Hash(File.ReadAllBytes(source)), colliderHash = Hash(File.ReadAllBytes(collisionPath)), sidecarHash = Hash(File.ReadAllBytes(sidecarPath));
             var previous = AssetDatabase.LoadAssetAtPath<ArchitectureImportRecord>(recordPath);
-            GuidedUpdate guidedUpdate = null;
+            PrefabUpdate prefabUpdate = null;
             foreach (string guid in AssetDatabase.FindAssets("t:ArchitectureImportRecord", new[] { Root }))
                 VerifyOwned(AssetDatabase.LoadAssetAtPath<ArchitectureImportRecord>(AssetDatabase.GUIDToAssetPath(guid)));
             if (previous != null)
@@ -91,13 +91,14 @@ namespace Caelmor.Unity.Editor
                     Require(File.Exists(placementPath), "Placement prefab is missing; recover it from Git rather than overwriting authored content.");
                     return previous;
                 }
-                guidedUpdate = PlanGuidedUpdate(previous, visual, collision, sidecar, directory);
-                Require(guidedUpdate != null || previous.compatibilitySignature == signature,
-                    "Source identities/hierarchy/section contract changed outside a supported guided update. Keep the existing placement and reconcile explicitly, or import using a new key.");
+                var priorVisual = Container.Read(directory + "/visual.glb");
+                prefabUpdate = PlanGuidedUpdate(previous, priorVisual, visual, collision, sidecar, directory);
+                if (prefabUpdate == null && previous.compatibilitySignature != signature)
+                    prefabUpdate = PlanFixedTopologyUpdate(previous, priorVisual, visual, collision, sidecar, directory, colliderHash);
             }
             else Require(!Directory.Exists(directory) && !File.Exists(placementPath), "Unowned content already occupies the requested key.");
 
-            ValidateBindings(bindings, sourceObjects, guidedUpdate);
+            ValidateBindings(bindings, sourceObjects, prefabUpdate);
             var owned = new HashSet<string>(StringComparer.Ordinal);
             var transaction = new FileTransaction();
             Scene preview = default;
@@ -172,7 +173,7 @@ namespace Caelmor.Unity.Editor
                     var primitives = (JArray)meshSpec["primitives"];
                     Require(primitives.Count == renderer.sharedMaterials.Length, "Submesh/material assignment mismatch.");
                     var mats = primitives.Select(p => sourceMaterials[(int)p["material"]]).ToArray();
-                    string bindingName = guidedUpdate?.VisualBindingName(name) ?? name;
+                    string bindingName = prefabUpdate?.VisualBindingName(name) ?? name;
                     var explicitBinding = bindings?.bindings.SingleOrDefault(b => b.bufferId == bindingName);
                     if (explicitBinding != null) mats = Enumerable.Repeat(BuildLibraryMaterial(explicitBinding.materialId, transaction, owned), mats.Length).ToArray();
                     renderer.sharedMaterials = mats;
@@ -180,7 +181,7 @@ namespace Caelmor.Unity.Editor
                     int[] normalChannels = primitives.Select(p => explicitBinding != null ? 0 : (int?)visual.Json["materials"][(int)p["material"]]?["normalTexture"]?["texCoord"] ?? 0).Distinct().ToArray();
                     Require(normalChannels.Length == 1, "A mesh with normals on differing UV sets needs an explicit split in Blender.");
                     string legacyMeshPath = directory + "/Meshes/" + Hash(Encoding.UTF8.GetBytes(name)).Substring(0, 20) + ".asset";
-                    meshFilter.sharedMesh = SaveMesh(meshFilter.sharedMesh, guidedUpdate?.MeshPath(name, false) ?? legacyMeshPath, normalChannels[0], transaction, owned);
+                    meshFilter.sharedMesh = SaveMesh(meshFilter.sharedMesh, prefabUpdate?.MeshPath(name, false) ?? legacyMeshPath, normalChannels[0], transaction, owned);
                 }
                 var colliders = (GameObject)PrefabUtility.InstantiatePrefab(collisionAsset, preview);
                 PrefabUtility.UnpackPrefabInstance(colliders, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
@@ -194,19 +195,19 @@ namespace Caelmor.Unity.Editor
                 {
                     var mc = mf.gameObject.AddComponent<MeshCollider>();
                     string legacyMeshPath = directory + "/Meshes/collision_" + Hash(Encoding.UTF8.GetBytes(mf.name)).Substring(0, 20) + ".asset";
-                    mc.sharedMesh = SaveMesh(mf.sharedMesh, guidedUpdate?.MeshPath(mf.name.Substring(CollisionPrefix.Length), true) ?? legacyMeshPath, -1, transaction, owned);
+                    mc.sharedMesh = SaveMesh(mf.sharedMesh, prefabUpdate?.MeshPath(mf.name.Substring(CollisionPrefix.Length), true) ?? legacyMeshPath, -1, transaction, owned);
                     mc.convex = false;
                     Object.DestroyImmediate(mf.GetComponent<MeshRenderer>());
                     Object.DestroyImmediate(mf);
                 }
                 Require(colliders.GetComponentsInChildren<MeshCollider>(true).Length == (int)sidecar["collision"]["object_count"], "Collision count differs from export metadata.");
-                guidedUpdate?.ReusePrefabNames(generated, imported, colliders, nodes);
+                prefabUpdate?.ReusePrefabNames(generated, imported, colliders, nodes);
                 transaction.Track(prefabPath);
                 PrefabUtility.SaveAsPrefabAsset(generated, prefabPath);
                 owned.Add(prefabPath);
                 var saved = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
                 Require(saved != null, "Generated prefab failed to save.");
-                guidedUpdate?.VerifySavedPrefab(saved);
+                prefabUpdate?.VerifySavedPrefab(saved);
                 if (!File.Exists(placementPath))
                 {
                     transaction.Track(placementPath);
@@ -217,7 +218,7 @@ namespace Caelmor.Unity.Editor
                 var record = previous ?? ScriptableObject.CreateInstance<ArchitectureImportRecord>();
                 record.sourcePath = Relative(source); record.sourceHash = sourceHash; record.collisionHash = colliderHash; record.sidecarHash = sidecarHash;
                 record.importerVersion = ImporterVersion;
-                record.compatibilitySignature = guidedUpdate != null ? GuidedSignatureTag + signature : signature;
+                record.compatibilitySignature = prefabUpdate?.UsesGuideIdentities == true ? GuidedSignatureTag + signature : signature;
                 record.bindingsSignature = bindingSignature; record.buildingId = buildingId;
                 record.generatedPrefab = prefabPath; record.placementPrefab = placementPath;
                 record.placementGuid = AssetDatabase.AssetPathToGUID(placementPath);
@@ -229,12 +230,12 @@ namespace Caelmor.Unity.Editor
                 var materials = renderers.SelectMany(r => r.sharedMaterials).Distinct().ToArray();
                 record.materialCount = materials.Length; record.textureCount = materials.SelectMany(m => m.GetTexturePropertyNames().Select(m.GetTexture)).Where(t => t != null).Distinct().Count();
                 record.vertices = meshes.Sum(m => (long)m.vertexCount); record.triangles = meshes.Sum(m => (long)m.triangles.Length / 3);
-                record.unresolvedLibraryMappings = string.Join("\n", sourceObjects.Where(o => bindings == null || !bindings.bindings.Any(b => b.bufferId == (guidedUpdate?.VisualBindingName((string)o["name"]) ?? (string)o["name"]))).Select(o => (string)o["name"] + " => generator " + (string)o["material"]));
-                if (guidedUpdate != null)
+                record.unresolvedLibraryMappings = string.Join("\n", sourceObjects.Where(o => bindings == null || !bindings.bindings.Any(b => b.bufferId == (prefabUpdate?.VisualBindingName((string)o["name"]) ?? (string)o["name"]))).Select(o => (string)o["name"] + " => generator " + (string)o["material"]));
+                if (prefabUpdate != null)
                 {
-                    guidedUpdate.RetireMeshes(transaction);
+                    prefabUpdate.RetireMeshes(transaction);
                     // An artist override or another building can still use superseded shared resources.
-                    foreach (string path in guidedUpdate.PreviousSharedPaths) owned.Add(path);
+                    foreach (string path in prefabUpdate.PreviousSharedPaths) owned.Add(path);
                 }
                 foreach (string path in owned)
                     if (AssetDatabase.LoadMainAssetAtPath(path) is Object asset && EditorUtility.IsDirty(asset)) AssetDatabase.SaveAssetIfDirty(asset);
@@ -265,13 +266,13 @@ namespace Caelmor.Unity.Editor
             }
         }
 
-        static void ValidateBindings(ArchitectureMaterialBindings bindings, JArray objects, GuidedUpdate guidedUpdate)
+        static void ValidateBindings(ArchitectureMaterialBindings bindings, JArray objects, PrefabUpdate prefabUpdate)
         {
             if (bindings == null) return;
             Require(bindings.bindings != null && bindings.bindings.Select(b => b.bufferId).Distinct().Count() == bindings.bindings.Length, "Duplicate explicit bindings.");
             foreach (var binding in bindings.bindings)
             {
-                Require(binding.metricUv0Verified && objects.Any(o => (guidedUpdate?.VisualBindingName((string)o["name"]) ?? (string)o["name"]) == binding.bufferId),
+                Require(binding.metricUv0Verified && objects.Any(o => (prefabUpdate?.VisualBindingName((string)o["name"]) ?? (string)o["name"]) == binding.bufferId),
                     "Explicit material binding " + binding.bufferId + " no longer identifies a retained section with verified metric UV0. Reconcile the binding before reimport.");
                 Require(!string.IsNullOrWhiteSpace(binding.materialId) && binding.materialId.All(c => char.IsLetterOrDigit(c) || c == '_'), "Invalid library ID.");
                 Require(File.Exists(Root + "/Materials/" + binding.materialId + "/material.json"), "Stage the exact baseline material first: " + binding.materialId);
