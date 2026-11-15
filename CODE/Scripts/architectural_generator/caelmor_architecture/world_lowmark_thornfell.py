@@ -5,6 +5,7 @@ The construction language lives in the roofed masses and their load paths, not
 in surface decoration, so LOW detail still retains the regional silhouette.
 """
 import math
+from .openings import guide_walls
 
 _DOMESTIC_FAMILIES = {"COTTAGE", "FARMHOUSE", "TOWNHOUSE", "MERCHANT_HOUSE"}
 
@@ -153,6 +154,7 @@ def build_lowmark(ctx):
         floors=floors, floor_height=floor_h, roof="GABLE", pitch=32,
         overhang=.42, openings=openings, entrance_edge=0,
         blocked_edges=(1,3) if category=='MILLER' else (1,), foundation="PLINTH",
+        guided_openings=guide_walls(ctx.opening_guides) if s.fit_blockout else None,
     )
     if s.fit_blockout:
         return

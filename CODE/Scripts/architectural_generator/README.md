@@ -1,6 +1,6 @@
 # Caelmor Architectural Generator
 
-Version 0.18.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. An isolated, opt-in Unity client floor-presentation adapter accompanies floor-aware exports; it is not wired into the playable scene.
+Version 0.19.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. An isolated, opt-in Unity client floor-presentation adapter accompanies floor-aware exports; it is not wired into the playable scene.
 
 New buildings have floor-separated visuals by default. Select a building, set
 **Simulated floor** (0 = ground, −1 = exterior), choose its **Construction volume**
@@ -154,6 +154,39 @@ retains its existing entry point. The Geometry controls set authoring fidelity;
 material reuse, render submissions, compression and collision also affect
 runtime cost. See the [executed Unity benchmark](evidence/lowmark_settlement/PERFORMANCE.md)
 and the [Cottage authoring verification](evidence/blockout_authoring/README.md).
+
+## Opening Guides
+
+1. Fit a **Lowmark Cottage** using the workflow above. In the **Opening
+   Guides** panel the new cottage becomes the target. Use **Target Cottage**
+   when working on another unbound face.
+2. Make one upright mesh face parallel to a wall in Object Mode, within 0.22 m
+   of the exterior wall plane. For a door, put its bottom at the top of the
+   plinth (0.45 m above the bottom of the cottage box). Use a rectangle for
+   **Door** or **Window**. **Rounded Door** accepts that same rectangle with a
+   default shallow head, or a convex face with a level threshold, vertical
+   jambs and a symmetric elliptical head. Door heads need to clear the wall
+   plate and neighboring openings. Out-of-range guides receive a diagnosis.
+3. Select the face and click **Apply Opening Guide**. It stays editable and
+   appears as a wire guide parented to the building root. It is excluded from
+   renders and the GLB. The generated assembly has stable component IDs for
+   **Materials** and a separate collision representation. Clear **Closed Leaf**
+   to create an open passage and an approach collider. A closed leaf or a
+   glazed window keeps static wall collision.
+4. Move the guide along its wall or edit its vertices. Select the guide or a
+   generated part of the cottage and use **Regenerate Guides**. To move a guide
+   to a different wall, use **Apply Opening Guide** again. Use **Remove Guide**
+   to detach it and restore the wall, or delete the source and regenerate. It
+   remembers its ID, host wall and options through save/reopen. Refit preserves
+   distances measured from each host wall's start corner.
+
+Guided edits retain unchanged visual objects, including their direct material
+slot edits. Guides can replace intersecting **automatic windows**. They fail
+if they overlap the main entrance, another guide or a protected section that
+must be rebuilt. Protect hand-edited generated wall and frame sections before
+regenerating. The current workflow covers rectangular windows and straight or
+rounded ground-floor doors on the four walls of a fitted Lowmark Cottage.
+See the [editable examples and checks](evidence/opening_guides/README.md).
 
 ## Roof AutoComplete
 

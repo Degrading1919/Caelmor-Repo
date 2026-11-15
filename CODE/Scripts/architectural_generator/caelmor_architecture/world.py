@@ -128,7 +128,7 @@ class Context:
              entrance_edge=0,blocked_edges=(),steps=True,foundation='PLINTH',access_edges=(),
              function=None,gallery_edges=(),open_edges=(),open_access=(),wall_infill_roof_clearance=None,
              roof_axis='X',shed_reverse=False,passage_arch=None,aperture_schedule=None,frame_visibility=None,
-             construction=None,swept_eaves=0.):
+             construction=None,swept_eaves=0.,guided_openings=None):
         if any(m.key==key for m in self.masses):
             raise ValueError('Duplicate construction zone: '+key)
         if not all(math.isfinite(v) for v in (x,y,width,depth)) or min(width,depth)<1.4:
@@ -187,6 +187,7 @@ class Context:
         plan.shed_reverse=shed_reverse
         plan.passage_arch=passage_arch
         plan.aperture_schedule=aperture_schedule
+        plan.guided_openings=guided_openings or {}
         plan.blocked_edges=set(blocked_edges)
         plan.entry_steps=steps
         plan.world_mass=True
@@ -435,9 +436,10 @@ def _working_apparatus(ctx):
             buf.cylinder((x-ty*.04,y+tx*.04,z-.17),(x+ty*.04,y-tx*.04,z-.17),.15,10)
 
 
-def generate(settings, *, resolver=None):
+def generate(settings, *, resolver=None, opening_guides=()):
     effective=resolve_settings(settings)
     ctx=Context(effective,resolver)
+    ctx.opening_guides=opening_guides
     from .functional import build as build_function
     if build_function(ctx):
         pass

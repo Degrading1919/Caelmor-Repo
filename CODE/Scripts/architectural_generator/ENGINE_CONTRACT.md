@@ -34,6 +34,27 @@ scene-material finish and leaves lightmap and procedural atlas coordinates
 alone. Existing raw mesh protection remains available. Refit and explicit
 finish/variant edits use the original construction validation and semantic IDs.
 
+## Guided wall openings
+
+Blender source faces retain a reference to their fitted Cottage, a persistent
+guide ID, the named wall side and feature options. The last applied schedule
+records metre-based wall stations, elevations and rounded-head rise. Face
+topology and Blender object names are independent of generated component IDs.
+The pure engine reads optional opening inputs and merges them with the regular
+facade schedule before resolving supports, wall cuts and finishes. The
+current host is the single Lowmark main hall. Timber and masonry use different
+head assemblies. A fitted doorway's open state cuts the collision wall using
+the same aperture profile and supplies an approach collider. Closed leaves
+and windows retain static collision. The export remains format 1, with guide
+meta and objects kept in the authoring scene.
+
+An edit validates the full candidate and rejects conflicts before committing
+geometry. When the applied building settings are equivalent, guide-only
+rebuilds keep unchanged visual source buffers. Aggregated facade buffers
+which own a changed cut may rebuild across a full storey. Attach, refresh,
+remove and refit preserve unrelated attached guide inputs. The existing
+protect control guards hand-edited generated meshes.
+
 ## Floor-separated presentation (additive v0.16)
 
 New Settings and Blender authoring default `floor_separation=True`. Loading a

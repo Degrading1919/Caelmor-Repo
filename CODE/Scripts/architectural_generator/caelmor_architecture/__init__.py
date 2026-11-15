@@ -2,7 +2,7 @@
 bl_info = {
     "name": "Caelmor Architectural Generator",
     "author": "Caelmor",
-    "version": (0, 18, 0),
+    "version": (0, 19, 0),
     "blender": (4, 2, 0),
     "location": "View3D > Sidebar > Caelmor",
     "description": "Generate editable regional Caelmor buildings",
@@ -127,6 +127,9 @@ def _set_props(props, settings):
 def _active_build(context):
     obj = context.view_layer.objects.active
     if obj:
+        guide_host = obj.get('caelm_guide_host')
+        if guide_host is not None and guide_host.get('caelm_build'):
+            return guide_host
         for collection in obj.users_collection:
             if collection.get("caelm_build"):
                 return collection
@@ -149,6 +152,10 @@ def _active_component(context):
     if obj and obj.get('caelm_generated') and not obj.get('caelm_collider') and _active_build(context):
         return obj.get('caelm_component_id')
     return None
+
+
+def _fitted_collection(_self, collection):
+    return bool(collection.get('caelm_build') and collection.get('caelm_blockout_source'))
 
 
 class CAELMOR_PG_Settings(_bpy().types.PropertyGroup if False else object):
@@ -237,6 +244,15 @@ def _make_classes(b):
             ('hewn_pegged', 'Hewn and pegged', 'Use worked timber and pegged intersections'),
             ('squared_housed', 'Squared and housed', 'Use straighter members with housed bearing shoulders'),
         ])
+        caelm_guide_target: b.props.PointerProperty(name='Target Cottage', type=b.types.Collection,
+            poll=_fitted_collection, description='Choose the box-fitted cottage whose wall will receive the active face')
+        caelm_guide_kind: b.props.EnumProperty(name='Opening Type', items=[
+            ('DOOR', 'Door', 'Ground-floor rectangular door with jambs, head and a stepped approach'),
+            ('WINDOW', 'Window', 'Rectangular opening with casing, drained sill, shutters and glazing'),
+            ('ROUND_DOOR', 'Rounded Door', 'Arched wall cut shaped from a rectangle or a symmetric curved face'),
+        ])
+        caelm_guide_leaf: b.props.BoolProperty(name='Closed Leaf', default=True,
+            description='Generate a closed planked leaf and keep this static passage closed in collision')
         caelm_roof_style: b.props.EnumProperty(name="Roof Style", items=[
             ('AUTO', "Regional / Type Default", "Select a suitable roof by type and region"),
             ('GABLE', "Gable", "Gabled roof"), ('HIP', "Hip", "Hipped roof")], default='AUTO')
@@ -295,11 +311,11 @@ def _make_classes(b):
 
         def execute(self, context):
             try:
-                from .blender_backend import build
+                from .blender_backend import build, load_settings
                 props = context.scene.caelmor_settings
                 settings = replace(_settings_from_props(props), fit_blockout=False)
                 collection, metrics = build(settings, origin=context.scene.cursor.location.copy())
-                props.caelm_fit_blockout = False
+                _set_props(props, _settings_from_json(load_settings(collection)))
                 self.report({'INFO'}, f"Generated {collection.name}: {metrics.get('vertices', 0):,} vertices")
                 return {'FINISHED'}
             except Exception as exc:
@@ -330,7 +346,8 @@ def _make_classes(b):
                 fitted, placement = fit(settings, source)
                 collection, _ = build(fitted, collection=collection, placement=placement)
                 collection['caelm_blockout_source'] = source
-                _set_props(props, fitted)
+                _set_props(props, _settings_from_json(load_settings(collection)))
+                props.caelm_guide_target = collection
                 self.report({'INFO'}, f'{collection.name} fitted to {source.name}')
                 return {'FINISHED'}
             except Exception as exc:
@@ -445,6 +462,13 @@ def _make_classes(b):
                 collection = _active_build(context)
                 _, metrics = build(settings, collection=collection,
                                    layers=None if self.scope == 'ALL' else self.scope)
+                if settings.fit_blockout:
+                    from .blender_backend import load_settings
+                    props = context.scene.caelmor_settings
+                    saved = load_settings(collection).get('construction_overrides')
+                    if saved != settings.construction_overrides:
+                        props.caelm_construction_overrides = json.dumps(saved or {}, sort_keys=True)
+                        props.caelm_edit_finish = False
                 self.report({'INFO'}, f"Regenerated {self.scope.lower()}: {metrics.get('vertices', 0):,} vertices")
                 return {'FINISHED'}
             except Exception as exc:
@@ -467,6 +491,70 @@ def _make_classes(b):
             state = "protected from" if obj["caelm_protected"] else "available to"
             self.report({'INFO'}, f"{obj.name} is now {state} regeneration")
             return {'FINISHED'}
+
+    class CAELMOR_OT_opening_guide(b.types.Operator):
+        bl_idname = 'caelmor.opening_guide'
+        bl_label = 'Apply Opening Guide'
+        bl_description = 'Use a single planar face to rebuild the host opening, adjacent framing and collision'
+        bl_options = {'REGISTER', 'UNDO'}
+        action: b.props.EnumProperty(items=[
+            ('APPLY', 'Apply', 'Attach the selected face or change its type'),
+            ('REFRESH', 'Refresh', 'Use the current positions and outlines of this building’s guides'),
+            ('REMOVE', 'Remove', 'Detach the selected guide and restore the generated wall'),
+        ])
+
+        def execute(self, context):
+            try:
+                from .blender_backend import build, load_settings
+                from .guide_backend import HOST, apply_binding, propose
+                props = context.scene.caelmor_settings
+                source = context.view_layer.objects.active
+                host = source.get(HOST) if source else None
+                collection = host or (_active_build(context) if self.action == 'REFRESH' else props.caelm_guide_target)
+                if not collection or not collection.get('caelm_build'):
+                    raise ValueError('Choose the fitted cottage in Target Cottage or select one of its attached guides')
+                if not any(c == collection for c in context.scene.collection.children_recursive):
+                    raise ValueError('The target cottage must be in the current scene')
+                settings = _settings_from_json(load_settings(collection))
+                if not settings.fit_blockout:
+                    raise ValueError('Opening guides require a box-fitted Lowmark Cottage')
+                context.view_layer.update()
+                edit = None
+                if self.action == 'APPLY':
+                    if source is None or not source.select_get():
+                        raise ValueError('Select the source face in Object Mode')
+                    edit = (source, propose(collection, source, settings, props.caelm_guide_kind, props.caelm_guide_leaf))
+                elif self.action == 'REMOVE':
+                    if host is None:
+                        raise ValueError('Select an attached guide to remove it')
+                    edit = (source, None)
+                build(settings, collection=collection, guide_edit=edit, guide_refresh=True)
+                if edit:
+                    apply_binding(collection, *edit)
+                # Guide operations use the target's applied settings. Retire
+                # only inputs for removed assemblies without discarding the
+                # artist's other staged changes in the panel.
+                prior = (settings.construction_overrides or {}).get('by_component', {})
+                saved = (load_settings(collection).get('construction_overrides') or {}).get('by_component', {})
+                retired = prior.keys() - saved.keys()
+                if retired:
+                    draft = json.loads(props.caelm_construction_overrides or '{}')
+                    if 'by_component' in draft:
+                        for key in retired:
+                            draft['by_component'].pop(key, None)
+                        if not draft['by_component']:
+                            draft.pop('by_component')
+                        props.caelm_construction_overrides = json.dumps(draft, sort_keys=True)
+                props.caelm_guide_target = collection
+                if source and (edit or host) and source.visible_get():
+                    for obj in context.selected_objects:
+                        obj.select_set(False)
+                    source.select_set(True)
+                    context.view_layer.objects.active = source
+                self.report({'INFO'}, 'Applied wall opening guides')
+                return {'FINISHED'}
+            except Exception as exc:
+                return _report_error(self, exc)
 
     class CAELMOR_OT_floor_preview(b.types.Operator):
         bl_idname = 'caelmor.floor_preview'
@@ -642,6 +730,22 @@ def _make_classes(b):
                     if conflicts:
                         components.label(text=f'{len(conflicts)} protected sections need review', icon='ERROR')
 
+            if openings := section('Opening Guides', 'MESH_PLANE', collapsed=True):
+                active = context.view_layer.objects.active
+                binding = active.get('caelm_guide') if active else None
+                if binding:
+                    openings.label(text=f"Attached to {binding['side']} wall · {binding['kind'].replace('_', ' ').title()}")
+                else:
+                    openings.prop(p, 'caelm_guide_target')
+                openings.prop(p, 'caelm_guide_kind')
+                if p.caelm_guide_kind != 'WINDOW':
+                    openings.prop(p, 'caelm_guide_leaf')
+                openings.operator('caelmor.opening_guide', icon='MOD_BUILD').action = 'APPLY'
+                if collection:
+                    openings.operator('caelmor.opening_guide', text='Regenerate Guides', icon='FILE_REFRESH').action = 'REFRESH'
+                if binding:
+                    openings.operator('caelmor.opening_guide', text='Remove Guide', icon='X').action = 'REMOVE'
+
             if condition := section('Condition', 'TIME', collapsed=True):
                 condition.prop(p, 'caelm_age')
                 condition.prop(p, 'caelm_maintenance')
@@ -682,7 +786,7 @@ def _make_classes(b):
 
     return (CAELMOR_PG_Settings, CAELMOR_OT_apply_grammar, CAELMOR_OT_generate, CAELMOR_OT_load,
             CAELMOR_OT_regenerate, CAELMOR_OT_protect, CAELMOR_OT_floor_preview, CAELMOR_OT_export,
-            CAELMOR_OT_fit_blockout, CAELMOR_OT_stage_finish, CAELMOR_OT_stage_joinery, CAELMOR_PT_main)
+            CAELMOR_OT_fit_blockout, CAELMOR_OT_stage_finish, CAELMOR_OT_stage_joinery, CAELMOR_OT_opening_guide, CAELMOR_PT_main)
 
 
 def _settings_from_json(data):

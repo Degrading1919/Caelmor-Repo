@@ -6,6 +6,7 @@ from mathutils import Vector, Matrix
 from .engine import generate, validate, geometry_hash, TOOL_REVISION
 from .materials import get_material
 from .construction import PROVENANCE
+from .openings import snapshot
 
 TAG = "caelm_generated"
 COLLECTION_TAG = "caelm_build"
@@ -181,7 +182,7 @@ def _collider_object(name, vertices, faces, build_id, world_zone=None):
     return obj
 
 
-def _colliders(plan, build_id):
+def _colliders(plan, build_id, buffers=()):
     """Make simple, closed collision proxies per outer wall and footprint wing."""
     out = []
     half = .09
@@ -191,16 +192,18 @@ def _colliders(plan, build_id):
         # collision proxy attached to its actual zone bounds and base height.
         for zone_index, mass in enumerate(zones, 1):
             for index, edge in enumerate(mass.plan.edges, 1):
-                if getattr(plan,'functional_program',None):
+                record=mass.plan.facade_records[index-1]
+                traversable=[o for o in record['openings'] if o.get('guide_id') and o['kind']=='door' and not o['leaf']]
+                if getattr(plan,'functional_program',None) or traversable:
                     if index-1 in getattr(mass.plan,'open_edges',()):continue
                     from .geometry import MeshBuffer
                     from .facade import _wall_panels
                     a,b=edge;length=math.dist(a,b)
                     if length<1e-5:continue
                     normal=((b[1]-a[1])/length,-(b[0]-a[0])/length)
-                    record=mass.plan.facade_records[index-1]
                     wall=MeshBuffer('functional_collision_wall','stone')
-                    _wall_panels(wall,a,b,normal,length,record['openings'],mass.eave,mass.base,.18)
+                    cuts=record['openings'] if getattr(plan,'functional_program',None) else traversable
+                    _wall_panels(wall,a,b,normal,length,cuts,mass.eave,mass.base,.18)
                     if wall.faces:
                         out.append(_collider_object(f"Collider Wall {zone_index:02d}-{index:02d}",
                                    wall.vertices,wall.faces,build_id,mass.key))
@@ -225,6 +228,15 @@ def _colliders(plan, build_id):
                 faces = [(0,3,2,1),(4,5,6,7),(0,1,5,4),(1,2,6,5),(2,3,7,6),(3,0,4,7)]
                 out.append(_collider_object(
                     f"Collider Floor {zone_index:02d}-{index:02d}", verts, faces, build_id, mass.key))
+        approaches = {f'.guide.{o["guide_id"]}.steps': o['guide_id'] for mass in zones
+                      for record in mass.plan.facade_records for o in record['openings']
+                      if o.get('guide_id') and o['kind']=='door' and not o['leaf']}
+        if approaches:
+            for buffer in buffers:
+                for suffix, identifier in approaches.items():
+                    if buffer.name.endswith(suffix):
+                        out.append(_collider_object(f'Collider Approach {identifier}', buffer.vertices,
+                                                    buffer.faces, build_id, buffer.world_zone))
     else:
         # Preserve legacy collider geometry and names for snapshots and manual mode.
         eave = plan.eave
@@ -295,14 +307,40 @@ def _parent_to_anchor(obj, anchor):
     obj.matrix_parent_inverse = Matrix.Identity(4)
 
 
-def build(settings, collection=None, layers=None, origin=None, *, placement=None):
+def _guide_parts(schedule):
+    parts = set()
+    for guide in schedule:
+        root = f"lowmark_main_hall/guide.{guide['id']}."
+        parts.add(root + 'frame')
+        if guide['kind'] == 'window':
+            parts.add(root + 'shutters')
+        elif guide['leaf']:
+            parts.add(root + 'leaf')
+    return parts
+
+
+def _without_removed_guide_overrides(settings, retired):
+    if not retired or not settings.construction_overrides:
+        return settings
+    overrides = settings.construction_overrides.copy()
+    components = overrides.get('by_component', {})
+    if retired.intersection(components):
+        remaining = {key: value for key, value in components.items() if key not in retired}
+        if remaining:
+            overrides['by_component'] = remaining
+        else:
+            overrides.pop('by_component', None)
+    return replace(settings, construction_overrides=overrides)
+
+
+def build(settings, collection=None, layers=None, origin=None, *, placement=None, guide_edit=None, guide_refresh=False):
     """Build off-scene, then swap generated objects in requested layers only."""
     if collection is not None and not collection.get(COLLECTION_TAG):
         raise ValueError("Selected collection is not a Caelmor generated building")
     if placement is not None and (not settings.fit_blockout or layers is not None):
         raise ValueError('Blockout placement requires a full fitted build')
-    if collection is not None and placement is None and (settings.fit_blockout or collection.get(SETTINGS_KEY)):
-        old = load_settings(collection)
+    old = load_settings(collection) if collection is not None and (settings.fit_blockout or collection.get(SETTINGS_KEY)) else {}
+    if old and placement is None:
         dimensions = ('width', 'depth', 'floors', 'floor_height')
         if old.get('fit_blockout', False) != settings.fit_blockout or (
                 settings.fit_blockout and any(not math.isclose(old[field], getattr(settings, field), abs_tol=2e-6)
@@ -310,10 +348,25 @@ def build(settings, collection=None, layers=None, origin=None, *, placement=None
             raise ValueError('Load this building’s settings before regenerating. Use Refit to update its blockout dimensions.')
         if settings.fit_blockout:
             settings = replace(settings, **{field: old[field] for field in dimensions})
-    plan, buffers = generate(settings, finish_names=bpy.data.materials.keys())
+    from .guide_backend import SCHEDULE, collect
+    guides, guide_shifts = collect(collection, settings, old, guide_edit)
+    schedule = snapshot(guides)
+    previous = json.loads(collection.get(SCHEDULE, '[]')) if collection is not None else []
+    guide_change = schedule != previous
+    if guide_change and layers not in (None, 'ALL'):
+        raise ValueError('Opening guides changed. Regenerate Guides or All to rebuild walls, frame and collision together.')
+    retired = _guide_parts(previous) - _guide_parts(schedule)
+    if collection is None and settings.construction_overrides:
+        # A new building can reuse role presets, but it owns none of the panel
+        # draft's attached guides from the artist's previous building.
+        retired.update(key for key in settings.construction_overrides.get('by_component', {})
+                       if key.startswith('lowmark_main_hall/guide.'))
+    settings = _without_removed_guide_overrides(settings, retired)
+    plan, buffers = generate(settings, finish_names=bpy.data.materials.keys(), opening_guides=guides)
     validation = validate(plan, buffers)
     if isinstance(validation, dict) and not validation.get("valid", False):
-        raise ValueError("Geometry validation failed; existing building was left unchanged")
+        details = validation.get('errors') or ['geometry check failed']
+        raise ValueError(f"Geometry validation failed: {details[0]}. The existing building was left unchanged")
     setting_data = _settings_dict(settings)
     scope = None
     if isinstance(layers, str) and layers.upper() != "ALL":
@@ -333,19 +386,30 @@ def build(settings, collection=None, layers=None, origin=None, *, placement=None
     # datablocks. Generated objects still receive new condition maps when their
     # inputs change; an author's replacement material remains their decision.
     overrides={}
-    for old in (collection.objects if collection else ()):
-        if not old.get(TAG) or old.type!='MESH' or old.get('caelm_collider'):continue
-        slots=tuple(old.data.materials)
+    for previous_object in (collection.objects if collection else ()):
+        if not previous_object.get(TAG) or previous_object.type!='MESH' or previous_object.get('caelm_collider'):continue
+        slots=tuple(previous_object.data.materials)
         if slots and any(m is not None and (
-                old.get('caelm_surface_material') and m.name!=old['caelm_surface_material']
+                previous_object.get('caelm_surface_material') and m.name!=previous_object['caelm_surface_material']
                 or (not m.get('caelm_material') and
-                    not (old.get('caelm_finish','').startswith('material:') and
-                         m.name == old.get('caelm_surface_material')))
+                    not (previous_object.get('caelm_finish','').startswith('material:') and
+                         m.name == previous_object.get('caelm_surface_material')))
                 or m.get('caelm_user_override')) for m in slots):
-            overrides[old.get('caelm_buffer_id')]=slots
+            overrides[previous_object.get('caelm_buffer_id')]=slots
     if collection and collection.get('caelm_floor_contract') and not settings.floor_separation and overrides:
         raise ValueError('Restore section-specific material slots before disabling floor separation, or keep the separated representation; artist overrides were left unchanged')
     candidates = {b.name:b for b in buffers}
+    keep_ids = set()
+    if old and placement is None and (guide_change or guide_edit or guide_refresh):
+        from .model import Settings
+        before = _without_removed_guide_overrides(Settings(**_normalize_settings_data(old)), retired)
+        if _settings_dict(before) == setting_data:
+            for obj in collection.objects:
+                source = obj.get('caelm_source_buffer_id', obj.get('caelm_buffer_id'))
+                candidate = candidates.get(source)
+                if (candidate is not None and source not in keep_ids
+                        and obj.get('caelm_component_source_hash') == geometry_hash((candidate,))):
+                    keep_ids.add(source)
     # Crossing representations changes ownership of part of the weather skin.
     # Preserve protected edited skins by rejecting a conflicting transaction.
     old_fields={o.get('caelm_field_source'):o for o in (collection.objects if collection else ())
@@ -384,13 +448,13 @@ def build(settings, collection=None, layers=None, origin=None, *, placement=None
                 any(obj.get('caelm_'+field)!=getattr(spec,field,None) for field in physical_fields) or
                 (old_source is not None and old_source!=geometry_hash((candidate,)))):
             conflicts.append(key or obj.name)
-    if placement is not None and conflicts:
-        raise ValueError(f'{conflicts[0]}: refitting would change a protected section; review it before refitting')
+    if (placement is not None or guide_change) and conflicts:
+        raise ValueError(f'{conflicts[0]}: this change would rebuild a protected section. Review it before applying.')
     build_id = uuid.uuid4().hex; stage = _new_collection("__CAELMOR_STAGE__" + build_id[:8])
     try:
         cache = {}
         for buffer in buffers:
-            if buffer.name not in protected_ids and (scope is None or _layer_for(buffer) in scope):
+            if buffer.name not in protected_ids and buffer.name not in keep_ids and (scope is None or _layer_for(buffer) in scope):
                 # Finish/wear uses the actual host volume's roof, apertures and
                 # hearths. A world building may contain multiple eave heights.
                 mesh_plan=plan
@@ -431,7 +495,7 @@ def build(settings, collection=None, layers=None, origin=None, *, placement=None
                     obj.data.materials.clear()
                     for material in overrides[key]: obj.data.materials.append(material)
         if scope is None:
-            for obj in _colliders(plan, build_id):
+            for obj in _colliders(plan, build_id, buffers):
                 stage.objects.link(obj); obj.hide_set(True)
         if collection is None: collection = _new_collection("Caelmor Building")
         anchor = _ensure_anchor(collection, origin)
@@ -441,6 +505,7 @@ def build(settings, collection=None, layers=None, origin=None, *, placement=None
             anchor.rotation_euler = (0., 0., angle)
             anchor.scale = (1., 1., 1.)
         old_generated = [obj for obj in collection.objects if obj.get(TAG) and not obj.get("caelm_protected")
+                         and obj.get('caelm_source_buffer_id', obj.get('caelm_buffer_id')) not in keep_ids
                          and (scope is None or obj.get("caelm_layer") in scope)]
         staged = list(stage.objects)
         for obj in staged:
@@ -468,6 +533,10 @@ def build(settings, collection=None, layers=None, origin=None, *, placement=None
                 if key in collection: del collection[key]
         collection[COLLECTION_TAG] = True
         collection[SETTINGS_KEY] = json.dumps(setting_data, sort_keys=True)
+        if schedule or SCHEDULE in collection:
+            collection[SCHEDULE] = json.dumps(schedule, sort_keys=True)
+        for source, delta in guide_shifts:
+            source.location += delta
         collection['caelm_construction_conflicts'] = json.dumps(sorted(conflicts))
         collection['caelm_surface_diagnostics']=json.dumps(surface_report,sort_keys=True)
         collection["caelm_geometry_hash"] = validation["geometry_hash"]
