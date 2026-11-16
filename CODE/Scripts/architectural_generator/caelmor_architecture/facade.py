@@ -244,6 +244,37 @@ def _openings_for_edge(plan, edge_index, edge):
                 o['z1']=min(o['z0']+1.48,plan.eave-.6)
     # Clamp records to the wall and reject degenerate windows for narrow wings.
     opening_guides = [guide.record(plan, length) for guide in guides]
+    if s.production_geometry:
+        from collections import Counter
+        slots = Counter()
+        for o in openings:
+            kind = o['kind']
+            level = max(0, int((o['z0']+.04-fh)//s.floor_height))
+            slot = edge_index, kind, level
+            slots[slot] += 1
+            o['assembly_id'] = f'opening.{edge_index}.{kind}.{level}.{slots[slot]}'
+            movable = (kind in ('door','window') and not o.get('role') and not o.get('arch')
+                       and fn in ('COTTAGE','FARMHOUSE','LONGHOUSE'))
+            if movable:
+                key = f"{plan.construction_zone}/{o['assembly_id']}"
+                o['placement_key'] = key
+                offset = plan.opening_placements.get(key)
+                if offset is not None:
+                    ds, dz = offset
+                    o['edited'] = True
+                    o['guide_name'] = f"{kind.title()} {slots[slot]} on wall {edge_index+1}"
+                    if not all(map(math.isfinite,(ds,dz))):
+                        raise ValueError(f"{o['guide_name']}: enter a finite opening position")
+                    for field in ('s0','s1'):
+                        o[field] += ds
+                    if kind == 'window':
+                        floor = fh+level*s.floor_height
+                        if not floor+.30 <= o['z0']+dz or o['z1']+dz >= floor+s.floor_height-.12:
+                            raise ValueError(f"{o['guide_name']}: keep the window on its original floor and clear of the plates")
+                        for field in ('z0','z1'):
+                            o[field] += dz
+                    if o['s0'] < .65 or o['s1'] > length-.65:
+                        raise ValueError(f"{o['guide_name']}: leave at least 0.65 m of wall at each corner")
     clean = []
     for o in openings + opening_guides:
         o["s0"] = max(0.32, o["s0"])
@@ -258,14 +289,15 @@ def _openings_for_edge(plan, edge_index, edge):
                            fh+float(s.floor_height)-.27,upper_plate-.25)
         else:
             head_limit=min(plan.eave-(.46+.145*float(plan.slope)),upper_plate-.12)
-        if o.get('guide_id') and o['z1'] > head_limit + 1e-6:
+        if (o.get('guide_id') or o.get('edited') and o['kind']=='window') and o['z1'] > head_limit + 1e-6:
             raise ValueError(f"{o['guide_name']}: lower the head below {head_limit:.2f} m to clear the roof and wall plate")
         o["z1"] = min(o["z1"], head_limit)
         if o["kind"] == "window":
             # Casing, sill, lintel, and both open shutters are all represented in
             # this conservative exterior footprint. Structural schedules use it.
             shutter = min(.18, (o["s1"]-o["s0"])*.21)
-            o["assembly_bounds"] = {"s0":o["s0"]-shutter*.92, "s1":o["s1"]+shutter*.92,
+            trim_reach = max(.145,shutter*.92) if s.production_geometry else shutter*.92
+            o["assembly_bounds"] = {"s0":o["s0"]-trim_reach, "s1":o["s1"]+trim_reach,
                                      "z0":o["z0"]-.10, "z1":o["z1"]+.09}
             o["assembly_members"]=["casing","sill","lintel","shutters","glass"]
         elif o["kind"] == "vent":
@@ -301,12 +333,15 @@ def _openings_for_edge(plan, edge_index, edge):
         bounds=o["assembly_bounds"]
         def overlaps(q):
             other=q["assembly_bounds"]
-            tolerance = -.10 if o.get('guide_id') or q.get('guide_id') else .08
+            tolerance = -.10 if any(p.get('guide_id') or p.get('edited') for p in (o,q)) else .08
             return not (bounds["s1"] <= other["s0"]+tolerance or bounds["s0"] >= other["s1"]-tolerance or
                         bounds["z1"] <= other["z0"]+tolerance or bounds["z0"] >= other["z1"]-tolerance)
-        if any(overlaps(q) for q in out):
+        if conflict := next((q for q in out if overlaps(q)), None):
+            changed = next((p for p in (o,conflict) if p.get('edited')), None)
             if o.get('guide_id'):
-                raise ValueError(f"{o['guide_name']}: overlaps another guide or the building entrance; leave 0.10 m between their assemblies")
+                changed = o
+            if changed:
+                raise ValueError(f"{changed['guide_name']}: overlaps another opening; leave 0.10 m between their assemblies")
             continue
         out.append(o)
     return out
@@ -911,6 +946,8 @@ def _add_foundation(buffers, plan, edge_index, edge):
         _beam_edge(core,a,b,0,length,fh-.025,.12,.30)
         return
     _wall_solid(core,a,b,n,0,length,0.0,fh,thickness=getattr(plan,'wall_thickness',WALL_THICKNESS))
+    if plan.settings.production_geometry:
+        return
     # Shallow, staggered cut-stone courses on the outside face; the core closes gaps.
     rng = plan.rng(f"facade.masonry.edge.{edge_index}")
     spec = getattr(stone,'construction',None)
@@ -980,8 +1017,25 @@ def _corner_quoin(buf, point, size=0.25):
     buf.box((point[0],point[1],0.245),(size,size,0.40))
 
 
+def _part_buffer(source, name):
+    return MeshBuffer(name, source.material, source.layer, construction=source.construction,
+                      runtime_buffer=source.name)
+
+
+def _assembly_record(plan, edge_index, opening, part):
+    a,b,tx,ty,n,_length = _edge_frame(plan, edge_index, plan.edges[edge_index])
+    station = (opening['s0']+opening['s1'])*.5
+    return dict(id=opening.get('placement_key') or
+                f"{plan.construction_zone}/{opening.get('assembly_id') or 'guide.'+opening['guide_id']}",
+                guide=opening.get('guide_id'), movable='placement_key' in opening,
+                kind=opening['kind'], part=part, tangent=(tx,ty), normal=n,
+                center=(a[0]+tx*station,a[1]+ty*station,(opening['z0']+opening['z1'])*.5),
+                width=opening['s1']-opening['s0'], height=opening['z1']-opening['z0'])
+
+
 def _opening_frame(buffers, a,b,n,o, function, foundation_height=FOUNDATION_HEIGHT,
-                   generate_steps=True, glazing_recess=0., door_thickness=WALL_THICKNESS, trim=None):
+                   generate_steps=True, glazing_recess=0., door_thickness=WALL_THICKNESS, trim=None,
+                   flat_finishes=False):
     tx,ty = _unit(a,b)[0]
     windows, doors, timbers = buffers["windows"],buffers["doors"],buffers["timber"]
     if trim is not None:
@@ -1011,7 +1065,9 @@ def _opening_frame(buffers, a,b,n,o, function, foundation_height=FOUNDATION_HEIG
         # Door leaf as an oriented closed prism.
         poly = _xy_wall(a,b,n,s0+0.035,s1-0.035,inset=-0.018,thickness=door_thickness)
         count=max(3,int((s1-s0)/0.19))
-        if getattr(doors,'construction',None):
+        if flat_finishes:
+            doors.prism(poly,z0+.05,z1-.035)
+        elif getattr(doors,'construction',None):
             start=s0+.035
             width=(s1-s0-.07)/count
             for j in range(count):
@@ -1066,14 +1122,27 @@ def _opening_frame(buffers, a,b,n,o, function, foundation_height=FOUNDATION_HEIG
         frame.extrude(sill, (tx*run, ty*run, 0.))
     else:
         _beam_edge(frame,a,b,s0-0.09,s1+0.09,z0-0.025,0.15,0.24)
-    # Glass is recessed within the real aperture, split into panes by a lead cross.
-    inner0,inner1=s0+0.095,s1-0.095
-    innerz0,innerz1=z0+0.10,z1-0.10
-    if inner1>inner0 and innerz1>innerz0:
-        windows.prism(_xy_opening_slab(a,b,n,inner0,inner1,.065-glazing_recess,.018),innerz0,innerz1)
-        mid=(inner0+inner1)/2
-        _beam_edge(buffers["iron"],a,b,mid-0.012,mid+0.012, (innerz0+innerz1)/2,innerz1-innerz0,0.025,normal=n,normal_offset=.075-glazing_recess)
-        _beam_edge(buffers["iron"],a,b,inner0,inner1,(innerz0+innerz1)/2,0.025,0.025,normal=n,normal_offset=.075-glazing_recess)
+    # Four rails define the clear rectangle and the common seating depth.
+    # Every pane beds a few millimetres into the opaque rails and divisions.
+    sash = buffers.get('sash', frame)
+    sash_width = min(.068, (s1-s0)*.15, (z1-z0)*.15)
+    left, right = s0+sash_width, s1-sash_width
+    bottom, head = z0+sash_width, z1-sash_width
+    depth = .048-glazing_recess
+    def seat(buf, lo, hi, low, high, front, thickness):
+        buf.prism(_xy_opening_slab(a,b,n,lo,hi,front,thickness),low,high)
+    for lo,hi,low,high in ((s0,left,z0,z1), (right,s1,z0,z1),
+                           (left,right,z0,bottom), (left,right,head,z1)):
+        seat(sash,lo,hi,low,high,depth+.025,.080)
+    middle, waist = (left+right)*.5, (bottom+head)*.5
+    bar, bite = .012, .004
+    iron = buffers['iron']
+    seat(iron,middle-bar,middle+bar,bottom-bite,head+bite,depth+.010,.038)
+    for lo,hi in ((left-bite,middle-bar), (middle+bar,right+bite)):
+        seat(iron,lo,hi,waist-bar,waist+bar,depth+.010,.038)
+    for lo,hi in ((left-bite,middle-bar+bite), (middle+bar-bite,right+bite)):
+        for low,high in ((bottom-bite,waist-bar+bite), (waist+bar-bite,head+bite)):
+            seat(windows,lo,hi,low,high,depth,.016)
     # Hinged exterior shutters: one or two narrow timber leaves, fixed open against jambs.
     leaf=min(0.18,(s1-s0)*0.21)
     for side in (-1,1):
@@ -1118,12 +1187,7 @@ def _guided_feature(plan, a, b, n, o, masonry):
         _opening_frame(parts, a, b, n, o, plan.settings.function,
                        glazing_recess=.08 if masonry else 0.)
         if not masonry:
-            base = plan.foundation_height
-            height = plan.settings.floor_height
-            bottom = base + math.floor((o['z0']-base)/height)*height
-            # Short jamb studs take the window head down to their storey plate.
-            for station in (o['s0']-.096, o['s1']+.096):
-                _post(frame,a,b,station,bottom,o['z1']+.023,.086,.238,.008)
+            _window_jamb_support(plan,frame,a,b,o)
         return [p for p in parts.values() if p.faces]
 
     s0,s1,z0,z1 = (o[k] for k in ('s0','s1','z0','z1'))
@@ -1176,16 +1240,27 @@ def _guided_feature(plan, a, b, n, o, masonry):
         bind(component(plan,prefix+'.leaf','boarding','wooden_boarding'), doors)
         leaf = (arch_polygon(o,outer=-.027) if arch else
                 [(s0+.027,z0+.027),(s1-.027,z0+.027),(s1-.027,z1-.027),(s0+.027,z1-.027)])
-        count = math.ceil((s1-s0)/.19)
-        for i in range(count):
-            lo = s0+.027+(s1-s0-.054)*i/count
-            hi = s0+.027+(s1-s0-.054)*(i+1)/count
-            extrude(doors, clip(clip(leaf,1,0,-lo-.002),-1,0,hi-.002), .015, .065)
+        if plan.settings.production_geometry:
+            extrude(doors,leaf,.015,.065)
+        else:
+            count = math.ceil((s1-s0)/.19)
+            for i in range(count):
+                lo = s0+.027+(s1-s0-.054)*i/count
+                hi = s0+.027+(s1-s0-.054)*(i+1)/count
+                extrude(doors, clip(clip(leaf,1,0,-lo-.002),-1,0,hi-.002), .015, .065)
         for z in (z0+.34, head_base-.19):
             _beam_edge(doors,a,b,s0+.055,s1-.055,z,.09,.035,normal=n,normal_offset=-.059)
             _beam_edge(iron,a,b,s0+.014,s0+.36,z,.045,.027,normal=n,normal_offset=.033)
         _beam_edge(iron,a,b,s1-.21,s1-.085,z0+.96,.047,.047,normal=n,normal_offset=.049)
     return [p for p in parts.values() if p.faces]
+
+
+def _window_jamb_support(plan, frame, a, b, opening):
+    base = plan.foundation_height
+    height = plan.settings.floor_height
+    bottom = base + math.floor((opening['z0']-base)/height)*height
+    for station in (opening['s0']-.096,opening['s1']+.096):
+        _post(frame,a,b,station,bottom,opening['z1']+.023,.086,.238,.008)
 
 
 def _timber_frame(buffers, plan, edge_index, edge, openings, top, layout=None):
@@ -1201,9 +1276,23 @@ def _timber_frame(buffers, plan, edge_index, edge, openings, top, layout=None):
     structural_top=layout["roof_safety"]["structural_top"]
     visibility=float(getattr(getattr(plan,"style",None),"frame_visibility",1.0))
     spec=timber.construction
+    def timber_part(role, slot):
+        if not plan.settings.production_geometry:
+            return timber
+        key = f'frame.{edge_index}.{role}.{slot}'
+        part = _part_buffer(timber,key)
+        buffers[key] = part
+        return part
+
+    def station_key(station):
+        if abs(station-.10)<.0001:
+            return 'start'
+        if abs(station-(length-.10))<.0001:
+            return 'end'
+        return str(round(station*10000))
+
     if visibility > .16:
         for ss in layout["principal_posts"]:
-            member = timber
             guide_id = layout['authored_posts'].get(ss)
             if guide_id:
                 from .construction import bind, component
@@ -1211,6 +1300,8 @@ def _timber_frame(buffers, plan, edge_index, edge, openings, top, layout=None):
                 member = MeshBuffer(key, 'timber', 'structure')
                 bind(component(plan, key, 'frame_member', 'structural_timber'), member)
                 buffers[key] = member
+            else:
+                member = timber_part('post',station_key(ss))
             if member.construction and member.construction.variant=='hewn_pegged' and detail!='LOW':
                 from .construction_geometry import hewn_member
                 from .construction_library import timber_workmanship
@@ -1230,17 +1321,21 @@ def _timber_frame(buffers, plan, edge_index, edge, openings, top, layout=None):
         gaps=[(o["s0"]-.04,o["s1"]+.04) for o in openings
               if o["kind"]=="door" and z<o["z1"]+.05]
         cursor=0.0
-        for g0,g1 in sorted(gaps):
+        for index,(g0,g1) in enumerate(sorted(gaps)):
             if g0>cursor:
-                _beam_edge(timber,a,b,cursor,g0,z,thick,.25,chamfer=chamfer)
+                _beam_edge(timber_part('plate',f'{plate_index}.{index}'),
+                           a,b,cursor,g0,z,thick,.25,chamfer=chamfer)
             cursor=max(cursor,g1)
         if cursor<length:
-            _beam_edge(timber,a,b,cursor,length,z,thick,.25,chamfer=chamfer)
+            _beam_edge(timber_part('plate',f'{plate_index}.{len(gaps)}'),
+                       a,b,cursor,length,z,thick,.25,chamfer=chamfer)
 
     for brace in layout["braces"] if visibility > .16 else ():
         p0=(a[0]+tx*brace["s0"],a[1]+ty*brace["s0"],brace["z0"])
         p1=(a[0]+tx*brace["s1"],a[1]+ty*brace["s1"],brace["z1"])
-        _frame_beam(timber,p0,p1,.14,brace["width"],chamfer)
+        brace_key = '.'.join(str(round(v*10000)) for v in
+                             (brace['s0'],brace['z0'],brace['s1'],brace['z1']))
+        _frame_beam(timber_part('brace',brace_key),p0,p1,.14,brace["width"],chamfer)
         if brace.get("support")=="knee" and (not spec or spec.variant!='squared_housed'):
             for ss,zz in ((brace["s0"],brace["z0"]),(brace["s1"],brace["z1"])):
                 for tangent_offset in (-.035,.035):
@@ -1251,18 +1346,18 @@ def _timber_frame(buffers, plan, edge_index, edge, openings, top, layout=None):
 
     # The semantic gable schedule follows every rake segment in the actual roof
     # profile, including a simple two-slope triangle represented by one peak.
-    for rake in layout["gable"]["rakes"] if visibility > .16 else ():
-        _frame_beam(timber,
+    for index, rake in enumerate(layout["gable"]["rakes"] if visibility > .16 else ()):
+        _frame_beam(timber_part('rake',index),
             (a[0]+tx*rake["s0"],a[1]+ty*rake["s0"],rake["z0"]),
             (a[0]+tx*rake["s1"],a[1]+ty*rake["s1"],rake["z1"]),
             rake["width"],.21,chamfer)
     kingpost=layout["gable"]["kingpost"]
     if kingpost and visibility > .16:
-        _post(timber,a,b,kingpost["s"],kingpost["z0"],kingpost["z1"],
+        _post(timber_part('kingpost',0),a,b,kingpost["s"],kingpost["z0"],kingpost["z1"],
               kingpost["width"],.19,chamfer)
     collar=layout["gable"]["collar"]
     if collar and visibility > .16:
-        _beam_edge(timber,a,b,collar["s0"],collar["s1"],collar["z"],
+        _beam_edge(timber_part('collar',0),a,b,collar["s0"],collar["s1"],collar["z"],
                    collar["width"],.19,chamfer=chamfer)
 
 
@@ -1301,7 +1396,7 @@ def _add_chimney(buffers, plan):
     course=.34
     row=1
     z=bottom+course
-    while z<ztop-.12:
+    while not s.production_geometry and z<ztop-.12:
         for cx,cy,sx,sy in (
                 (x,y-size/2-.008,size,.014), (x,y+size/2+.008,size,.014),
                 (x-size/2-.008,y,.014,size), (x+size/2+.008,y,.014,size)):
@@ -1743,6 +1838,7 @@ def build_facades(plan):
         add("render_skin","plaster","walls")
         add("cut_opening_trim","stone_light","structure")
     construction = _facade_components(plan, buffers, pier_mode, construction)
+    flat = plan.settings.production_geometry
     render = buffers.get('render_skin')
     coating = getattr(render, 'construction', None)
     body=getattr(plan,'masonry_body',None)
@@ -1751,7 +1847,7 @@ def build_facades(plan):
     artist_field = ((construction=='BOARD' or construction in ('RUBBLE','ASHLAR') and not coating)
                     and uses_material_field(plan,assembly))
     field=None
-    if artist_field or body and body.representation in ('HYBRID','TEXTURE'):
+    if not flat and (artist_field or body and body.representation in ('HYBRID','TEXTURE')):
         if body and coating is not None:
             raise ValueError(f'{body.component_id}: mapped masonry requires an exposed stone body')
         name = 'board_skin' if construction=='BOARD' else 'masonry_field'
@@ -1767,7 +1863,10 @@ def build_facades(plan):
         # Zero-relief coat: the same faces carry the coating provenance and
         # plaster surface, while the wall component retains its physical stock.
         from .construction import bind
-        bind(coating, buffers['masonry_skin'])
+        surface = buffers['walls'] if flat else buffers['masonry_skin']
+        bind(coating, surface)
+        if flat:
+            surface.material='plaster'
 
     if pier_mode:
         # A continuous closed timber deck sits at the plan foundation datum and
@@ -1800,7 +1899,7 @@ def build_facades(plan):
                          getattr(plan,'wall_thickness',WALL_THICKNESS)-recess)
         if not is_open:
             thick_coat = coating and coating.component_role=='wall_surface' and coating.substrate!='limewash'
-            if skin_buffer is not None and not thick_coat:
+            if not flat and skin_buffer is not None and not thick_coat:
                 _cladding_tiles(plan,i,edge,openings,construction,skin_buffer,field)
             if thick_coat or (coating and construction=='TIMBER_INFILL'):
                 profile = _gable_profile(plan,edge)
@@ -1810,7 +1909,7 @@ def build_facades(plan):
                 # Render ends against the plinth. A short worn margin exposes
                 # backing only at the bottom, outside the reserved apertures.
                 wear=plan.style.weather_exposure*(1-plan.settings.maintenance)
-                if wear>.12 and plan.settings.detail!='LOW' and length>1. and not cuts:
+                if not flat and wear>.12 and plan.settings.detail!='LOW' and length>1. and not cuts:
                     width=min(.36,length*.15)
                     start=plan.rng(f'facade.render.splash.{i}').uniform(.18,length-width-.18)
                     left=[(0,fh),(start,fh),(start,top),(0,top)]
@@ -1852,18 +1951,36 @@ def build_facades(plan):
         for o in openings:
             if o.get('guide_id'):
                 for part in _guided_feature(plan, a, b, n, o, construction in ('RUBBLE', 'ASHLAR')):
+                    if plan.settings.production_geometry and o['kind'] in ('door','window'):
+                        part.assembly = _assembly_record(plan, i, o, part.name.rsplit('.',1)[-1])
                     buffers[part.name] = part
                 continue
             trim = buffers.get('cut_opening_trim')
-            _opening_frame(buffers,a,b,n,o,str(plan.settings.function).upper(),_foundation(plan),
+            trim = trim if getattr(trim,'construction',None) else None
+            targets = buffers
+            if o.get('assembly_id'):
+                sources = {key: buffers[key] for key in ('steps','shutters','windows','doors','timber','iron')}
+                sources['timber'] = trim or sources['timber']
+                if o['kind']=='window':
+                    sources['sash'] = sources['timber']
+                targets = {}
+                for key, source in sources.items():
+                    part = _part_buffer(source, o['assembly_id']+'.'+key)
+                    part.assembly = _assembly_record(plan, i, o, key)
+                    targets[key] = part
+                trim = None
+            _opening_frame(targets,a,b,n,o,str(plan.settings.function).upper(),_foundation(plan),
                            getattr(plan,'entry_steps',True),getattr(plan,'glazing_recess',0.),
-                           getattr(plan,'door_thickness',WALL_THICKNESS),
-                           trim if getattr(trim,'construction',None) else None)
+                           getattr(plan,'door_thickness',WALL_THICKNESS),trim,flat_finishes=flat)
+            if targets is not buffers:
+                if o['kind']=='window' and construction=='TIMBER_INFILL' and targets['windows'].faces:
+                    _window_jamb_support(plan,targets['timber'],a,b,o)
+                buffers.update((part.name,part) for part in targets.values() if part.faces)
         # Foundation joints are represented by very shallow mortar reveals between courses.
         # Thin segmented seams remain on the exterior face and never cut the solid core.
         tx,ty=_unit(a,b)[0]
-        for z in (0.245,):
-            _beam_edge(buffers["mortar"],a,b,0.0,length,z,0.012,0.012)
+        if not flat:
+            _beam_edge(buffers["mortar"],a,b,0.0,length,.245,0.012,0.012)
         if not is_open:_gable_infill(buffers["walls"],plan,edge)
     # Keep semantic opening records next to the generated plan for independent
     # collision review. Records include complete casing/shutter bounds.

@@ -245,8 +245,8 @@ class RoofSettings(bpy.types.PropertyGroup):
     ready: bpy.props.BoolProperty(default=False)
     rise: bpy.props.FloatProperty(name='Roof Height',description='Ridge rise above the wall bearing, excluding cover thickness',
                                   min=.1,max=30,default=2,unit='LENGTH')
-    detail: bpy.props.IntProperty(name='Geometry Detail',subtype='PERCENTAGE',min=0,max=100,default=50,
-                                  description='Percentage of shingles modeled across each roof slope')
+    detail: bpy.props.IntProperty(name='Experimental Modeled Shingles',subtype='PERCENTAGE',min=0,max=100,default=0,
+                                  description='Zero uses a flat mapped covering. Positive values explicitly add legacy shingle geometry')
     material: bpy.props.EnumProperty(name='Roof Material',items=[
         (key,record[0],'') for key,record in MATERIALS.items()])
     material_directory: bpy.props.StringProperty(name='PBR Map Folder',subtype='DIR_PATH',
@@ -275,6 +275,7 @@ class CAELMOR_OT_roof_preview(bpy.types.Operator):
                 props.center,props.width,props.depth,props.angle = b.center,b.width,b.depth,b.angle
                 props.rects = json.dumps(b.rects)
                 props.target = None
+                props.detail = 0
             _preview(context.scene,props)
             props.ready = True
         except ValueError as error:
@@ -365,13 +366,15 @@ def draw_roof(layout,context,selected=None):
     layout.prop(props,'target',text='Existing Roof')
     if props.target:
         layout.operator('caelmor.roof_load',text='Load Roof Settings')
-    for name in ('material','rise','detail','overhang','advanced'):
+    for name in ('material','rise','overhang','advanced'):
         layout.prop(props,name)
     if props.advanced:
-        for name in ('material_directory','ridge','seed','center','width','depth','angle'):
+        for name in ('detail','material_directory','ridge','seed','center','width','depth','angle'):
             layout.prop(props,name)
         correction = layout.operator('caelmor.roof_preview',text='Preview Manual Bearing')
         correction.infer = False
+    elif props.detail:
+        layout.label(text='Saved experimental modeled shingles are enabled.',icon='INFO')
     if props.ready:
         shape = 'Main + wing' if props.rects != '[]' else 'Rectangle'
         layout.label(text=f'{shape} {props.width:.2f} × {props.depth:.2f} m')

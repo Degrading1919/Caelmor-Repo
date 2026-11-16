@@ -324,7 +324,7 @@ def build(ctx):
         tie_y=owner.bounds[1]+1.25 if diverse else -.55
         wall=b.fixture('gatehouse.curtain_return.'+side,'stone',owner,'boundary')
         spec=ctx.component(wall,owner,'curtain_return','wall_body','stone_masonry',mapped=False)
-        if spec is None:
+        if spec is None or b.settings.production_geometry:
             _curtain_return(wall,xa,xb,tie_y,base)
         else:
             from .curtain_masonry import dressed_curtain_return

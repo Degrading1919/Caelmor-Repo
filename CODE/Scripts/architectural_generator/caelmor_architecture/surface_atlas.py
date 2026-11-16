@@ -215,6 +215,11 @@ def apply_surfaces(objects,plan,settings,context_objects=None,*,roof_finish="BAS
     reports=[]
     for obj in objects:
         if obj.type!='MESH' or obj.get('caelm_collider'):continue
+        # Independently regenerated pieces need stable, shared mapped slots.
+        # Baking them into transient per-building atlases would give retained
+        # and rebuilt pieces different materials on the same export renderer.
+        if obj.get('caelm_runtime_buffer'):
+            continue
         key=obj.get('caelm_material','timber')
         if key not in FAMILY or obj.get('caelm_finish','').startswith('material:'):continue
         host=hosts.get(obj.get('caelm_world_zone'),plan)
@@ -229,7 +234,7 @@ def apply_surfaces(objects,plan,settings,context_objects=None,*,roof_finish="BAS
     surface_settings={k:v for k,v in settings.__dict__.items()
                       if k not in ('construction_overrides', 'floor_separation',
                                    'material_relief','relief_resolution','relief_strength',
-                                   'manual_shape','roof_overrides')}
+                                   'manual_shape','roof_overrides','production_geometry')}
     for (key,base,wall_stock),members in sorted(groups.items()):
         painted_roof=(FAMILY[key]=='roof' and roof_finish!='BASELINE'
                       and settings.world_aware

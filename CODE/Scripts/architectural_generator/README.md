@@ -1,6 +1,6 @@
 # Caelmor Architectural Generator
 
-Version 0.22.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. An isolated, opt-in Unity client floor-presentation adapter accompanies floor-aware exports; it is not wired into the playable scene.
+Version 0.23.0 is an offline Blender add-on for editable, metre-scale buildings. It combines twenty building types, regional working grammars, an optional world-aware construction language, manual orthogonal massing, procedural facades and roofs, original material maps, and semantic export metadata. An isolated, opt-in Unity client floor-presentation adapter accompanies floor-aware exports; it is not wired into the playable scene.
 
 ## Start here
 
@@ -10,7 +10,11 @@ Select part of a building to edit it. **Shape** changes its dimensions, or refit
 
 For a box-fitted Lowmark Cottage, select a guide face or edge and choose **Add Wall Feature**. An attached guide shows actions to change its type, update its shape or location, or remove it. Select a generated opening and use **Select Feature Guide** to return to its source.
 
-Use **Roof from Walls** in the same sidebar for standalone roofs on manually built walls. Preview the wall top, choose material and roof height, and generate. Select a previously generated standalone roof to edit its settings.
+To place an existing Cottage opening, select any of its parts in Object Mode and choose **Move Opening**. Move the outline with **G**, then click **Apply Opening Position**. **Cancel** restores the previous selection. Windows can move along their wall and within their storey. Doors retain their threshold height. Placement updates the wall cut, support, and all parts of the opening together. **Select Opening Parts** selects only the chosen assembly. Posts, plates, braces and rafters can be selected separately. Use **Protect Mesh Edits** for compatible hand changes to generated framing.
+
+New buildings use flat, metre-mapped PBR finishes. Roof decking, caps, fascia, structural framing, wall thickness, trim, and openings retain physical geometry. Assign a scene material directly to a part or construction group. Existing buildings keep their saved representation, including legacy surface detail. To opt into the new authoring workflow for a legacy asset, create a new building alongside it and deliberately reconcile any existing Unity placement and customizations.
+
+Use **Roof from Walls** in the same sidebar for standalone roofs on manually built walls. Preview the wall top, choose material and roof height, and generate. New roofs start with the flat mapped covering. To reproduce the previous geometric shingle experiment, use **Advanced → Experimental Modeled Shingles**. Select a previously generated standalone roof to reload its saved settings.
 
 **Advanced Tools** contains seeds, mesh fidelity, material height, floor preview, diagnostics, and export. Use **Load Building into Draft** before changing expert controls, then **Apply Draft**. The routine **Regenerate** action rebuilds the selected building from its saved choices. If a roof or dimension edit conflicts with an adjacent assembly or a protected part, the last valid building stays in place.
 

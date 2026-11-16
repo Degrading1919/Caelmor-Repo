@@ -36,6 +36,8 @@ def export(collection, output, revision):
 def main(output):
     scene, *_ = setup_scene()
     props = scene.caelmor_settings
+    production = 'CAELMOR_GUIDED_PRODUCTION' in os.environ
+    props.caelm_production_geometry = production
     collection, _ = cottage(props, (5., -2., 1.675))
     baseline = export(collection, output, 'baseline')
     door = face(collection, 'Update test door', 'rear', [(1.25,.45),(2.35,.45),(2.35,2.59),(1.25,2.59)])
@@ -56,6 +58,9 @@ def main(output):
     assert bpy.ops.caelmor.opening_guide(action='REFRESH') == {'FINISHED'}
     assert door[GUIDE]['id'] == door_id and window[GUIDE]['id'] == window_id
     assert json.loads(collection[SCHEDULE]) != first_schedule
+    if production:
+        from test_selectable_openings_blender import position
+        position(collection,'lowmark_main_hall/opening.2.window.0.2',.25)
     edited = export(collection, output, 'edited')
     for source in (door, window):
         select(source)

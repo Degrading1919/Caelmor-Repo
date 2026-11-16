@@ -10,6 +10,7 @@ generation, repeat cleanup, export, and lighting response.
 import hashlib
 import json
 import math
+import os
 import struct
 import sys
 from pathlib import Path
@@ -27,7 +28,7 @@ from caelmor_architecture.roof import roof_faces, roof_topology, roof_join_kind
 from caelmor_architecture.geometry import area
 import caelmor_architecture as addon
 
-EVIDENCE = ROOT / "evidence" / "roof_autocomplete"
+EVIDENCE = Path(os.environ.get('CAELMOR_ROOF_TEST_OUTPUT', ROOT/'dist'/'roof_autocomplete_check'))
 EVIDENCE.mkdir(parents=True, exist_ok=True)
 KIT = REPO / "MEDIA" / "Materials" / "working" / "lowmark" / "Building_Assets" / "wood_trimmed_plaster"
 MATDIR = REPO / "MEDIA" / "Materials" / "procedurally_generated"
@@ -271,6 +272,7 @@ def main():
     for obj in source_walls:
         obj.select_set(True)
     bpy.context.view_layer.objects.active = source_walls[0]
+    props.detail = 75
     check(bpy.ops.caelmor.roof_preview(infer=True) == {"FINISHED"},
           "roof preview operator failed on selected native wall kit")
     check(props.ready and abs(props.width-6.0) < .03 and abs(props.depth-4.0) < .03,
@@ -280,6 +282,8 @@ def main():
     operator_collection = props.target
     check(operator_collection and operator_collection.get("caelm_roof_triangles", 0) > 0,
           "roof operator did not create a tagged collection")
+    check(props.detail == 0 and operator_collection.get('caelm_roof_shingles') == 0,
+          'new roofs should use the flat mapped covering, even after an experiment')
 
     rows = []
     collections = []

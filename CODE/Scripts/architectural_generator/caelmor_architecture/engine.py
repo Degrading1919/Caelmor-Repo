@@ -10,10 +10,10 @@ from .facade import build_facades
 from .roof import build_roof, roof_faces, roof_topology
 from .geometry import area, cross, sub, dot
 
-TOOL_REVISION='0.22.0'
+TOOL_REVISION='0.23.0'
 
 
-def generate(settings, *, finish_names=(), opening_guides=()):
+def generate(settings, *, finish_names=(), opening_guides=(), opening_placements=None):
     from .construction import Resolver
     resolver = (Resolver(settings.construction_overrides, settings.region, tuple(finish_names))
                 if settings.construction_overrides is not None else None)
@@ -21,12 +21,20 @@ def generate(settings, *, finish_names=(), opening_guides=()):
         raise ValueError('Wall feature guides require a box-fitted Lowmark Cottage')
     if settings.world_aware:
         from .world import generate as generate_world
-        plan, buffers = generate_world(settings, resolver=resolver, opening_guides=opening_guides)
+        plan, buffers = generate_world(settings, resolver=resolver, opening_guides=opening_guides,
+                                       opening_placements=opening_placements)
     else:
         plan = make_plan(settings)
         plan.construction_zone = 'main'
         plan.construction_resolver = resolver
+        plan.opening_placements = opening_placements or {}
         buffers = build_facades(plan) + build_roof(plan)
+    if opening_placements:
+        placed = {o['placement_key'] for host in ([m.plan for m in plan.world_zones]
+                                                  if settings.world_aware else [plan])
+                  for record in host.facade_records for o in record['openings'] if 'placement_key' in o}
+        if missing := opening_placements.keys() - placed:
+            raise ValueError(f'{min(missing)}: the edited opening no longer exists in this layout')
     if resolver is not None:
         resolver.finish()
         plan.construction_components = dict(resolver.components)

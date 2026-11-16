@@ -1,5 +1,6 @@
 """Blender scene, UV, material, and export adapter for the pure geometry engine."""
 import json, math, os, uuid
+from contextlib import contextmanager
 from dataclasses import replace
 import bpy
 from mathutils import Vector, Matrix
@@ -13,6 +14,7 @@ COLLECTION_TAG = "caelm_build"
 SETTINGS_KEY = "caelm_settings"
 LAYER_ORDER = ("foundation", "walls", "structure", "windows", "doors", "details", "roof")
 SCOPE_LAYERS = {"ROOF": {"roof"}, "WINDOWS": {"windows", "doors"}, "DETAILS": {"details"}}
+OPENING_PLACEMENTS = 'caelm_opening_placements'
 
 
 def _settings_dict(settings):
@@ -27,7 +29,7 @@ def _settings_dict(settings):
     if not data.get('material_relief'):
         for key in ('material_relief','relief_resolution','relief_strength'):
             data.pop(key,None)
-    for key in ('manual_shape','roof_overrides'):
+    for key in ('manual_shape','roof_overrides','production_geometry'):
         if not data.get(key):
             data.pop(key,None)
     return data
@@ -119,6 +121,11 @@ def _mesh_object(buffer, cache, build_id, plan=None):
     settings = getattr(plan, "settings", None)
     mesh.materials.append(get_material(material, cache, style=style, settings=settings))
     uv0 = _metric_uv(mesh, material)
+    if buffer.metric_uv:
+        if len(buffer.metric_uv) != len(mesh.loops):
+            raise ValueError(f'{buffer.name}: incomplete metric UVs')
+        for loop, uv in zip(uv0.data, buffer.metric_uv):
+            loop.uv = uv
     construction = getattr(buffer, 'construction', None)
     rotation = getattr(construction, 'uv_rotation', None)
     if rotation:
@@ -156,6 +163,12 @@ def _mesh_object(buffer, cache, build_id, plan=None):
     obj = bpy.data.objects.new(buffer.name, mesh)
     obj[TAG] = True; obj["caelm_layer"] = _layer_for(buffer)
     obj["caelm_buffer_id"] = buffer.name
+    if buffer.runtime_buffer:
+        obj['caelm_runtime_buffer'] = buffer.runtime_buffer
+        obj['caelm_surface_material'] = mesh.materials[0].name
+    if buffer.assembly:
+        obj['caelm_opening_part'] = json.dumps(buffer.assembly)
+        obj.lock_location = obj.lock_rotation = obj.lock_scale = (True,True,True)
     if buffer.field_family:
         obj['caelm_field_family']=buffer.field_family
         obj['caelm_field_source']=buffer.field_source
@@ -169,7 +182,7 @@ def _mesh_object(buffer, cache, build_id, plan=None):
     obj["caelm_functional_role"] = str(getattr(buffer, "functional_role", ""))
     # Fitted windows and other unbound visual sections need the same refit
     # conflict checks as library components when the artist protects them.
-    if construction is not None or getattr(settings, 'fit_blockout', False):
+    if construction is not None or getattr(settings, 'fit_blockout', False) or buffer.assembly:
         obj['caelm_component_source_hash'] = geometry_hash((buffer,))
     if construction is not None:
         for field in PROVENANCE:
@@ -355,13 +368,15 @@ def _without_removed_guide_overrides(settings, retired):
 
 
 def build(settings, collection=None, layers=None, origin=None, *, placement=None, guide_edit=None,
-          guide_refresh=False, section_materials=None):
+          guide_refresh=False, section_materials=None, opening_edit=None, preserve_openings=False):
     """Build off-scene, then swap generated objects in requested layers only."""
     if collection is not None and not collection.get(COLLECTION_TAG):
         raise ValueError("Selected collection is not a Caelmor generated building")
     if placement is not None and (not settings.fit_blockout or layers is not None):
         raise ValueError('Blockout placement requires a full fitted build')
     old = load_settings(collection) if collection is not None and (settings.fit_blockout or collection.get(SETTINGS_KEY)) else {}
+    if old and old.get('production_geometry',False) != settings.production_geometry:
+        raise ValueError('This building already has an authored representation. Create a new building to change the production geometry workflow.')
     if old and placement is None:
         dimensions = ('width', 'depth', 'floors', 'floor_height')
         if old.get('fit_blockout', False) != settings.fit_blockout or (
@@ -374,7 +389,12 @@ def build(settings, collection=None, layers=None, origin=None, *, placement=None
     guides, guide_shifts = collect(collection, settings, old, guide_edit)
     schedule = snapshot(guides)
     previous = json.loads(collection.get(SCHEDULE, '[]')) if collection is not None else []
-    guide_change = schedule != previous
+    placements = json.loads(collection.get(OPENING_PLACEMENTS,'{}')) if collection is not None else {}
+    if opening_edit:
+        key, delta = opening_edit
+        old_offset = placements.get(key,(0.,0.))
+        placements[key] = [round(a+b,5) for a,b in zip(old_offset,delta)]
+    guide_change = schedule != previous or opening_edit is not None
     if guide_change and layers not in (None, 'ALL'):
         raise ValueError('Wall guides changed. Regenerate Guides or All to rebuild affected construction and collision together.')
     retired = _guide_parts(previous) - _guide_parts(schedule)
@@ -384,7 +404,14 @@ def build(settings, collection=None, layers=None, origin=None, *, placement=None
         retired.update(key for key in settings.construction_overrides.get('by_component', {})
                        if key.startswith('lowmark_main_hall/guide.'))
     settings = _without_removed_guide_overrides(settings, retired)
-    plan, buffers = generate(settings, finish_names=bpy.data.materials.keys(), opening_guides=guides)
+    plan, buffers = generate(settings, finish_names=bpy.data.materials.keys(), opening_guides=guides,
+                             opening_placements=placements)
+    if opening_edit or preserve_openings:
+        before = {info['id'] for obj in collection.objects if obj.get('caelm_opening_part')
+                  if not (info := json.loads(obj['caelm_opening_part']))['guide']}
+        after = {b.assembly['id'] for b in buffers if b.assembly and not b.assembly['guide']}
+        if before-after:
+            raise ValueError('This position would remove a neighboring opening. Leave more room between the assemblies.')
     validation = validate(plan, buffers)
     if isinstance(validation, dict) and not validation.get("valid", False):
         details = validation.get('errors') or ['geometry check failed']
@@ -448,7 +475,7 @@ def build(settings, collection=None, layers=None, origin=None, *, placement=None
                 if o.get('caelm_field_source')}
     new_fields={b.field_source:b for b in buffers if b.field_source}
     changed_fields={key for key in old_fields.keys() | new_fields.keys()
-                    if ((new_fields[key].field_family,new_fields[key].construction.representation)
+                    if ((new_fields[key].field_family,getattr(new_fields[key].construction,'representation',None))
                         if key in new_fields else None) !=
                     ((old_fields[key].get('caelm_field_family'),old_fields[key].get('caelm_representation'))
                         if key in old_fields else None)}
@@ -577,6 +604,8 @@ def build(settings, collection=None, layers=None, origin=None, *, placement=None
         collection[SETTINGS_KEY] = json.dumps(setting_data, sort_keys=True)
         if schedule or SCHEDULE in collection:
             collection[SCHEDULE] = json.dumps(schedule, sort_keys=True)
+        if placements:
+            collection[OPENING_PLACEMENTS] = json.dumps(placements, sort_keys=True)
         for source, delta in guide_shifts:
             source.location += delta
         collection['caelm_construction_conflicts'] = json.dumps(sorted(conflicts))
@@ -665,13 +694,107 @@ def _export_selection(filepath, objects, anchor, export_format):
         except ReferenceError: view_layer.objects.active = None
 
 
+@contextmanager
+def _runtime_visuals(collection, objects):
+    """Export ordinary assemblies under their compatible floor renderer keys."""
+    groups = {}
+    unmerged = []
+    for obj in objects:
+        source = obj.get('caelm_runtime_buffer')
+        if not source:
+            unmerged.append(obj)
+            continue
+        identity = obj['caelm_buffer_id']
+        authoring = obj.get('caelm_source_buffer_id',identity)
+        groups.setdefault((source,identity[len(authoring):]),[]).append(obj)
+    for obj in list(unmerged):
+        if obj.get('caelm_collider') or 'caelm_buffer_id' not in obj:
+            continue
+        source = obj.get('caelm_source_buffer_id',obj['caelm_buffer_id'])
+        key = source,obj['caelm_buffer_id'][len(source):]
+        if key in groups:
+            groups[key].insert(0,obj)
+            unmerged.remove(obj)
+    view = bpy.context.view_layer
+    selected, active = list(bpy.context.selected_objects), view.objects.active
+    staged, renamed, stripped = [], [], []
+    try:
+        for (source,suffix), members in sorted(groups.items()):
+            members.sort(key=lambda item: (bool(item.get('caelm_runtime_buffer')),item['caelm_buffer_id']))
+            copies = []
+            for member in members:
+                duplicate = member.copy()
+                duplicate.data = bpy.data.meshes.new_from_object(
+                    member.evaluated_get(bpy.context.evaluated_depsgraph_get()),
+                    preserve_all_data_layers=True,depsgraph=bpy.context.evaluated_depsgraph_get())
+                duplicate.modifiers.clear()
+                collection.objects.link(duplicate)
+                duplicate.hide_set(False)
+                duplicate.hide_select = False
+                copies.append(duplicate)
+                staged.append(duplicate)
+            merged = copies[0]
+            unused = [o.data for o in copies[1:]]
+            if unused:
+                with bpy.context.temp_override(active_object=merged,object=merged,
+                                               selected_objects=copies,selected_editable_objects=copies):
+                    if 'FINISHED' not in bpy.ops.object.join():
+                        raise ValueError(f'Unable to assemble the export renderer for {source}')
+                for mesh in unused:
+                    if mesh.users==0:
+                        bpy.data.meshes.remove(mesh)
+                # Independently authored sections have independent lightmap charts.
+                _lightmap_uv(merged.data,merged.data.uv_layers.get('UV1_Lightmap'))
+            identity = source+suffix
+            if existing := bpy.data.objects.get(identity):
+                renamed.append((existing,existing.name))
+                existing.name = '__CAELMOR_EXPORT_NAME__'
+            merged.name = identity
+            merged['caelm_buffer_id'] = identity
+            if 'caelm_source_buffer_id' in merged:
+                merged['caelm_source_buffer_id'] = source
+                merged['caelm_floor_min'] = min(o['caelm_floor_min'] for o in members)
+                merged['caelm_floor_max'] = max(o['caelm_floor_max'] for o in members)
+            if any(o.get('caelm_protected') for o in members):
+                merged['caelm_protected'] = True
+            unmerged.append(merged)
+        for obj in unmerged:
+            for key in ('caelm_runtime_buffer','caelm_opening_part'):
+                if key in obj:
+                    stripped.append((obj,key,obj[key]))
+                    del obj[key]
+        yield unmerged
+    finally:
+        for obj,key,value in stripped:
+            obj[key] = value
+        for obj in staged:
+            try:
+                _remove_object(obj)
+            except ReferenceError:
+                continue
+        for obj,name in renamed:
+            obj.name = name
+        for obj in list(bpy.context.selected_objects):
+            obj.select_set(False)
+        for obj in selected:
+            obj.select_set(True)
+        view.objects.active = active
+
+
 def export_building(collection, filepath, *, construction_metadata=False):
     """Export the generated collection to glTF/GLB plus a semantic JSON sidecar."""
     if not collection or not collection.get(COLLECTION_TAG): raise ValueError("No Caelmor generated building is selected")
     objects = [o for o in collection.objects if o.get(TAG) and not o.get("caelm_collider")]
     if not objects: raise ValueError("Building collection contains no generated geometry")
+    if bpy.context.mode!='OBJECT':
+        raise ValueError('Switch to Object Mode before exporting a building')
     anchor = next((obj for obj in collection.objects if obj.get("caelm_anchor")), None)
     if anchor is None: raise ValueError("Building root anchor is missing")
+    with _runtime_visuals(collection,objects) as visuals:
+        return _write_building(collection,filepath,construction_metadata,visuals,anchor)
+
+
+def _write_building(collection, filepath, construction_metadata, objects, anchor):
     fmt = 'GLB' if os.path.splitext(filepath)[1].lower() == '.glb' else 'GLTF_SEPARATE'
     _export_selection(filepath, objects, anchor, fmt)
     colliders = [o for o in collection.objects if o.get("caelm_collider")]
@@ -715,6 +838,7 @@ def export_building(collection, filepath, *, construction_metadata=False):
         manifest['settings'].pop('construction_overrides', None)
     # Proxy links and fit bookkeeping belong to the Blender authoring scene.
     manifest['settings'].pop('fit_blockout', None)
+    manifest['settings'].pop('production_geometry',None)
     for key in ('material_relief','relief_resolution','relief_strength'):
         manifest['settings'].pop(key,None)
     if collection.get('caelm_floor_contract'):

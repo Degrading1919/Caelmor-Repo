@@ -97,6 +97,7 @@ class Context:
     def __init__(self,settings, resolver=None):
         self.settings=settings
         self.construction_resolver=resolver
+        self.opening_placements={}
         self.masses=[]; self.buffers=[]; self.decks=[]
 
     def rng(self,label):
@@ -110,6 +111,8 @@ class Context:
             prefix=f'world_{self.settings.region.lower()}.{zone.key}.'
             buffer.field_source=prefix+buffer.field_source
             buffer.field_peers=tuple(prefix+peer for peer in buffer.field_peers)
+        if buffer.runtime_buffer and isinstance(zone,Mass):
+            buffer.runtime_buffer=f'world_{self.settings.region.lower()}.{zone.key}.{buffer.runtime_buffer}'
         if any(b.name==buffer.name for b in self.buffers):
             raise ValueError('Duplicate semantic buffer identity: '+buffer.name)
         buffer.world_zone=zone.key if isinstance(zone,Mass) else zone
@@ -227,6 +230,7 @@ class Context:
         if roof in ('BOW','SHED','TERRACE'):
             plan.custom_roof_sources=_profile_sources(plan,roof)
         plan.construction_zone=key
+        plan.opening_placements=self.opening_placements
         plan.construction_resolver=self.construction_resolver
         buffers=build_facades(plan)+(_terrace_roof(plan) if roof=='TERRACE' else build_roof(plan))
         mass=Mass(key,plan,buffers)
@@ -234,12 +238,13 @@ class Context:
         for buffer in buffers:
             # Stone jambs and lintels belong to load-bearing stone walls. Iron
             # doors/straps belong to the industrial tradition, not wooden shutters.
-            if self.settings.region in ('THORNFELL','EMBERHOLT') and buffer.name=='facade_timber':
+            canonical = buffer.runtime_buffer or buffer.name
+            if self.settings.region in ('THORNFELL','EMBERHOLT') and canonical=='facade_timber':
                 buffer.material='stone_light'
             if self.settings.region=='EMBERHOLT':
                 if buffer.material.startswith('timber'): buffer.material='iron'
-                if buffer.name=='facade_shutters': continue
-            elif self.settings.region=='THORNFELL' and buffer.name=='facade_shutters':
+                if canonical=='facade_shutters': continue
+            elif self.settings.region=='THORNFELL' and canonical=='facade_shutters':
                 continue
             self._tag(buffer,key+'.'+buffer.name,mass)
         return mass
@@ -258,8 +263,9 @@ class Context:
         polygon=list(polygon_xy)
         if area(polygon)<0: polygon.reverse()
         deck=self.buffer(key,material,'foundation',zone)
-        if (material == 'timber' and zone is not None and
-                self.component(deck, zone, key, 'boarding', 'wooden_boarding')):
+        spec = (self.component(deck, zone, key, 'boarding', 'wooden_boarding')
+                if material=='timber' and zone is not None else None)
+        if spec and not self.settings.production_geometry:
             from .construction_geometry import board_strips
             board_strips(deck, polygon, 0, lambda x,y: z, thickness)
         else:
@@ -449,10 +455,11 @@ def _working_apparatus(ctx):
             buf.cylinder((x-ty*.04,y+tx*.04,z-.17),(x+ty*.04,y-tx*.04,z-.17),.15,10)
 
 
-def generate(settings, *, resolver=None, opening_guides=()):
+def generate(settings, *, resolver=None, opening_guides=(), opening_placements=None):
     effective=resolve_settings(settings)
     ctx=Context(effective,resolver)
     ctx.opening_guides=opening_guides
+    ctx.opening_placements=opening_placements or {}
     from .functional import build as build_function
     if build_function(ctx):
         pass

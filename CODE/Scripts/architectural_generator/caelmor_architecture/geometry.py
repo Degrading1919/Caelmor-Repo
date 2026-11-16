@@ -109,6 +109,9 @@ class MeshBuffer:
     field_uv: list = field(default_factory=list)
     field_source: str | None = None
     field_peers: tuple = ()
+    runtime_buffer: str | None = None
+    assembly: dict | None = None
+    metric_uv: list = field(default_factory=list)
 
     def indexed(self, vertices, faces):
         offset = len(self.vertices)

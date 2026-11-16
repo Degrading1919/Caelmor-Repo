@@ -47,8 +47,14 @@ class Settings:
     relief_strength: float = 1.0
     manual_shape: bool = False
     roof_overrides: dict | None = None
+    # Existing saved scenes stay on their authored representation.
+    production_geometry: bool = False
 
     def check(self, validate_shape=True):
+        if not isinstance(self.production_geometry, bool):
+            raise ValueError('Production geometry must be enabled or disabled')
+        if self.production_geometry and self.material_relief:
+            raise ValueError('Material height relief requires the experimental geometry workflow')
         if not isinstance(self.manual_shape, bool):
             raise ValueError('Manual shape must be enabled or disabled')
         if self.manual_shape and self.world_aware and self.function in ('SMITHY','GATEHOUSE'):

@@ -138,7 +138,8 @@ def component(plan, slot, role, treatment, **constraints):
     if resolver is None:
         return None
     spec = resolver.resolve(f'{plan.construction_zone}/{slot}', role, treatment, **constraints)
-    if spec.representation in ('HYBRID','TEXTURE') and plan.settings.geometry_mode!='EFFICIENT':
+    if (not plan.settings.production_geometry and spec.representation in ('HYBRID','TEXTURE')
+            and plan.settings.geometry_mode!='EFFICIENT'):
         raise ValueError(f'{spec.component_id}: {spec.representation} representation requires Efficient geometry')
     return spec
 

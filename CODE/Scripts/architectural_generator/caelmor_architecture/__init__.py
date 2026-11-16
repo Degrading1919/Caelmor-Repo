@@ -2,7 +2,7 @@
 bl_info = {
     "name": "Caelmor Architectural Generator",
     "author": "Caelmor",
-    "version": (0, 22, 0),
+    "version": (0, 23, 0),
     "blender": (4, 2, 0),
     "location": "View3D > Sidebar > Caelmor",
     "description": "Generate editable regional Caelmor buildings",
@@ -87,6 +87,7 @@ def _settings_from_props(props):
         relief_strength=props.caelm_relief_strength,
         manual_shape=props.caelm_manual_shape,
         roof_overrides=json.loads(props.caelm_roof_overrides),
+        production_geometry=props.caelm_production_geometry,
     )
 
 
@@ -119,6 +120,7 @@ def _set_props(props, settings):
     props.caelm_seed_massing = settings.seed_massing
     props.caelm_fit_blockout = settings.fit_blockout
     props.caelm_material_relief = settings.material_relief
+    props.caelm_production_geometry = settings.production_geometry
     props.caelm_relief_resolution = settings.relief_resolution
     props.caelm_relief_strength = settings.relief_strength
     props.caelm_manual_shape = settings.manual_shape
@@ -285,6 +287,7 @@ def _make_classes(b):
             ('EFFICIENT', "Efficient", "Reduced hidden roof geometry")], default='SOLID')
         caelm_material_relief: b.props.BoolProperty(name='Material Height Relief', default=False,
             description='Use the chosen material height on mapped roof coverings and exposed wall fields. Missing height leaves a flat mapped surface')
+        caelm_production_geometry: b.props.BoolProperty(default=False,options={'HIDDEN'})
         caelm_relief_resolution: b.props.IntProperty(name='Relief Subdivision', default=0, min=0, max=2,
             description='Simple subdivisions of the mapped surface, independent of relief strength')
         caelm_relief_strength: b.props.FloatProperty(name='Relief Strength', default=1., min=0., max=2.,
@@ -688,13 +691,14 @@ def _make_classes(b):
             for name in ('seed','context','wealth','detail','window_density','geometry_mode',
                          'use_grammar','world_aware','crafted_curves','seed_massing','construction'):
                 draft.prop(p,'caelm_'+name)
-            if p.caelm_construction:
+            if p.caelm_construction and not p.caelm_production_geometry:
                 depth = draft.column()
                 depth.enabled = p.caelm_geometry_mode=='EFFICIENT'
                 depth.prop(p,'caelm_assembly_roof_depth')
                 depth.prop(p,'caelm_assembly_wall_depth')
-            draft.prop(p,'caelm_material_relief')
-            if p.caelm_material_relief:
+            if not p.caelm_production_geometry:
+                draft.prop(p,'caelm_material_relief')
+            if p.caelm_material_relief and not p.caelm_production_geometry:
                 draft.prop(p,'caelm_relief_resolution')
                 draft.prop(p,'caelm_relief_strength')
                 active = context.active_object

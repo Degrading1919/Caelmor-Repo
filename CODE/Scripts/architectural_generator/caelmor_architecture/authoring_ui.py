@@ -122,7 +122,7 @@ class CAELMOR_OT_create_building(bpy.types.Operator):
         try:
             settings = Settings(function=self.function,region=self.region,use_grammar=True,world_aware=True,
                                 construction_overrides={},geometry_mode='EFFICIENT',detail='MEDIUM',
-                                crafted_curves=True,seed_massing=True)
+                                crafted_curves=True,seed_massing=True,production_geometry=True)
             if self.method=='BOX':
                 from .blockout import fit
                 source = context.view_layer.objects.active
@@ -308,7 +308,8 @@ class CAELMOR_OT_edit_building(bpy.types.Operator):
             layout.prop(self,'clear_material')
             if not self.clear_material:
                 layout.prop_search(self,'material',bpy.data,'materials')
-                if obj and obj.get('caelm_component_id') and not self.match_group:
+                if (obj and obj.get('caelm_component_id') and not obj.get('caelm_runtime_buffer')
+                        and not self.match_group):
                     layout.prop(self,'orient')
         elif self.action=='CONDITION':
             for name in ('age','maintenance','craftsmanship'):
@@ -401,7 +402,7 @@ def _material_edit(operator,collection,settings,obj):
     component = obj.get('caelm_component_id') if obj else None
     if obj and not role_edit and (obj.get('caelm_protected') or len(obj.data.materials)!=1):
         raise ValueError('Unlock this part to rebuild it. For multiple slots, edit the individual Blender material slots.')
-    if not role_edit and not component:
+    if not role_edit and (not component or obj.get('caelm_runtime_buffer')):
         return settings,{obj['caelm_buffer_id']:material}
     if role_edit and obj and obj.get('caelm_component_role') not in FINISH_ROLES:
         parts = [part for part in collection.objects if part.type=='MESH' and not part.get('caelm_protected')
@@ -475,6 +476,13 @@ def _volume_label(zone):
 
 
 def _part_label(obj):
+    if opening := _opening_info(obj):
+        identifier = opening['id'].rsplit('/',1)[-1].split('.')
+        label = ('Guided '+opening['kind'].title() if opening['guide'] else
+                 f"{opening['kind'].title()} {int(identifier[-1]):02d} · Wall {int(identifier[1])+1}")
+        part = {'timber':'Frame and Trim','windows':'Glass','iron':'Ironwork',
+                'doors':'Leaf','steps':'Threshold and Steps'}.get(opening['part'],opening['part'].title())
+        return f'{label} · {part}'
     group = FINISH_ROLES.get(obj.get('caelm_component_role'))
     if group:
         return group[0]
@@ -515,6 +523,17 @@ def draw(layout,context):
     layout.label(text=f"{TYPE_SPECS[saved['function']].label} · {dict((k,v) for k,v,_ in _REGION_ITEMS).get(saved.get('region'),'Lowmark Vale')}")
     if obj:
         layout.label(text=_part_label(obj),icon='MESH_DATA')
+    opening = _opening_info(obj)
+    if opening:
+        row = layout.row(align=True)
+        row.operator('caelmor.move_opening',text='Select Opening Parts',icon='GROUP').action = 'SELECT'
+        if opening['movable'] or opening['guide']:
+            row.operator('caelmor.move_opening',text='Move Opening',icon='TRANSFORM_MOVE').action = 'BEGIN'
+    if active and active.get('caelm_opening_handle'):
+        layout.label(text='Move the outline along the wall with G, then apply.')
+        row = layout.row(align=True)
+        row.operator('caelmor.move_opening',text='Apply Opening Position').action = 'APPLY'
+        row.operator('caelmor.move_opening',text='Cancel',icon='X').action = 'CANCEL'
     row = layout.row(align=True)
     if not saved.get('world_aware') or saved['function'] not in _MANUAL:
         _task(row,'SHAPE','Refit Box' if saved.get('fit_blockout') else 'Shape','MESH_CUBE')
@@ -613,5 +632,98 @@ class CAELMOR_OT_select_feature_guide(bpy.types.Operator):
         return {'FINISHED'}
 
 
+def _opening_info(obj):
+    return json.loads(obj['caelm_opening_part']) if obj and 'caelm_opening_part' in obj else None
+
+
+def _opening_parts(collection, identity):
+    return [obj for obj in collection.objects
+            if (info := _opening_info(obj)) and info['id']==identity]
+
+
+class CAELMOR_OT_move_opening(bpy.types.Operator):
+    bl_idname = 'caelmor.move_opening'
+    bl_label = 'Position Opening'
+    bl_description = 'Place the opening and rebuild its wall cut, bearing, casing, glazing or door together'
+    bl_options = {'REGISTER','UNDO'}
+
+    action: EnumProperty(items=[('SELECT','Select Parts','Select this opening only'),
+                                ('BEGIN','Move','Show its editable placement outline'),
+                                ('APPLY','Apply','Rebuild around the proposed position'),
+                                ('CANCEL','Cancel','Keep the last applied position')])
+
+    def execute(self,context):
+        from .blender_backend import _remove_object
+        from .guide_backend import anchor_of
+        from mathutils import Vector
+        collection = _selection(context)
+        active = context.view_layer.objects.active
+        if not collection or context.mode!='OBJECT':
+            return _report_error(self,ValueError('Select a generated opening in Object Mode.'))
+        try:
+            if self.action in ('SELECT','BEGIN'):
+                info = _opening_info(active)
+                if not info:
+                    raise ValueError('Select a generated opening part.')
+                if self.action=='SELECT':
+                    _select(context,active)
+                    for part in _opening_parts(collection,info['id']):
+                        if part.visible_get():
+                            part.select_set(True)
+                    return {'FINISHED'}
+                if not (info['movable'] or info['guide']):
+                    raise ValueError('This opening is fixed by its building’s functional layout.')
+                for obj in list(collection.objects):
+                    if obj.get('caelm_opening_handle'):
+                        _remove_object(obj)
+                handle = bpy.data.objects.new('Place '+info['kind'].title(),None)
+                collection.objects.link(handle)
+                handle.parent = anchor_of(collection)
+                handle.location = info['center']
+                handle['caelm_opening_handle'] = json.dumps(info)
+                handle.empty_display_type = 'CUBE'
+                handle.empty_display_size = .5
+                handle.show_in_front = True
+                wall_x = abs(info['tangent'][0])>.5
+                w = info['width']
+                handle.scale = (w if wall_x else .035,.035 if wall_x else w,info['height'])
+                handle.lock_rotation = handle.lock_scale = (True,True,True)
+                handle.lock_location = (not wall_x,wall_x,info['kind']=='door')
+                _select(context,handle)
+                return {'FINISHED'}
+            if not active.get('caelm_opening_handle'):
+                raise ValueError('Select the opening placement outline.')
+            info = json.loads(active['caelm_opening_handle'])
+            parts = _opening_parts(collection,info['id'])
+            if self.action=='APPLY':
+                current = _opening_info(parts[0]) if parts else None
+                if not current or current['center']!=info['center'] or current['width']!=info['width'] or current['height']!=info['height']:
+                    raise ValueError('This opening changed. Cancel and start from its latest position.')
+                delta = active.location-Vector(info['center'])
+                tx, ty = info['tangent']
+                station = tx*delta.x+ty*delta.y
+                height = delta.z if info['kind']=='window' else 0.
+                settings = _settings_from_json(load_settings(collection))
+                if info['guide']:
+                    source = _source_guide(context,collection,parts[0])
+                    if not source:
+                        raise ValueError('The opening’s guide source is missing.')
+                    previous = source.location.copy()
+                    source.location += Vector((tx*station,ty*station,height))
+                    try:
+                        build(settings,collection,guide_refresh=True,preserve_openings=True)
+                    except Exception:
+                        source.location = previous
+                        raise
+                else:
+                    build(settings,collection,opening_edit=(info['id'],(station,height)))
+            _remove_object(active)
+            parts = _opening_parts(collection,info['id'])
+            _select(context,next((o for o in parts if _opening_info(o)['part']==info['part']),None))
+            return {'FINISHED'}
+        except (ValueError,RuntimeError) as error:
+            return _report_error(self,error)
+
+
 CLASSES = (CAELMOR_OT_create_building,CAELMOR_OT_edit_building,CAELMOR_OT_edit_feature,
-           CAELMOR_OT_select_feature_guide)
+           CAELMOR_OT_select_feature_guide,CAELMOR_OT_move_opening)
